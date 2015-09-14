@@ -1,12 +1,11 @@
-Welcome to WazuhDocs's!
+Integrating OSSEC-ELK Stack (Elasticsearch, Logstash, Kibana)
 =======================
 
 .. topic:: After Installing
 
-   This RPMs and DEBs has been created and tested by the Wazuh team for the distribution indicated below.  Please contact
-   us if you have any problems installing Ossec from our servers.
+   Testing.
 
-RPMs and DEBs:
+Installing Logstash:
 ^^^^^^^^^^^^^^
 
 .. toctree::

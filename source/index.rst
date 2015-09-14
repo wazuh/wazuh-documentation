@@ -6,7 +6,7 @@ Welcome to WazuhDocs's!
    This RPMs and DEBs has been created and tested by the Wazuh team for the distribution indicated below.  Please contact
    us if you have any problems installing Ossec from our servers.
 
-RPMs and DEBs:
+Index:
 ^^^^^^^^^^^^^^
 
 .. toctree::
