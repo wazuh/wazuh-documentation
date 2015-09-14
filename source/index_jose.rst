@@ -1,5 +1,5 @@
-Welcome to WazuhDocs's!
-=======================
+RPMs and DEBs Installation
+==========================
 
 .. topic:: After Installing
 
@@ -12,5 +12,7 @@ RPMs and DEBs:
 .. toctree::
    :maxdepth: 2
 
-   index_pedro
-   index_jose
+   centos
+   fedora
+   ubuntu
+   debian

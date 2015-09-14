@@ -12,5 +12,7 @@ RPMs and DEBs:
 .. toctree::
    :maxdepth: 2
 
-   index_pedro
-   index_jose
+   centos
+   fedora
+   ubuntu
+   debian
