@@ -5,13 +5,9 @@ Integrating OSSEC-ELK Stack (Elasticsearch, Logstash, Kibana)
 
    Testing.
 
-Installing Logstash:
+Installing Logstash
 ^^^^^^^^^^^^^^
 
 .. toctree::
    :maxdepth: 2
 
-   centos
-   fedora
-   ubuntu
-   debian
