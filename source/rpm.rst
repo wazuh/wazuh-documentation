@@ -2,7 +2,7 @@ Install OSSEC using RPM packages
 ================================
 
 Adding yum repository
-+++++++++++++++++++++
+---------------------
 
 To add Wazuh yum repository, create a file named /etc/yum.repos.d/wazuh.repo::
 
