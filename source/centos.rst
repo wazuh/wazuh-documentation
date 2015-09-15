@@ -28,7 +28,7 @@ To add Wazuh yum repository, create a file named /etc/yum.repos.d/wazuh.repo and
 
 
 CentOS 7 i386
---------------
+-------------
 
 To add Wazuh yum repository, create a file named /etc/yum.repos.d/wazuh.repo and paste one of the configurations below::
 
@@ -51,5 +51,3 @@ To add Wazuh yum repository, create a file named /etc/yum.repos.d/wazuh.repo and
    gpgkey = http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
    enabled = 1
 
-OR
-you can download this :download:`script <./scripts/repo-el7-x86_64.sh>` and execute for create the repo.

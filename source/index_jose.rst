@@ -6,13 +6,18 @@ RPMs and DEBs Installation
    This RPMs and DEBs has been created and tested by the Wazuh team for the distribution indicated below.  Please contact
    us if you have any problems installing Ossec from our servers.
 
-RPMs and DEBs:
-^^^^^^^^^^^^^^
+OSSEC installation guide:
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. toctree::
    :maxdepth: 2
 
-   centos
-   fedora
-   ubuntu
-   debian
+   rpm
+   deb
+   windows
+   aix
+   source
+ --  centos
+ --  fedora
+ --  ubuntu
+ --  debian

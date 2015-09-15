@@ -1,5 +1,5 @@
-RPMs for Fedoran
-================
+RPMs for Fedora
+===============
 
 Fedora 21 i386
 --------------
