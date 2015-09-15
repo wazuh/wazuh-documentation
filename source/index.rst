@@ -1,10 +1,11 @@
 Welcome to WazuhDocs's!
 =======================
 
-.. topic:: After Installing
+.. topic:: OSSEC Wazuh
+Welcome to Wazuh-OSSEC installation and deploy guide.
+Here you will find how to deploy an entire architecture from OSSEC repositories to Kibana Dashboards. If you has any questions don't hesitate to contact us at contact@wazuh.com.
+Remember, we are building this guide right now, if you find any errors we appreciate your feedback. 
 
-   This RPMs and DEBs has been created and tested by the Wazuh team for the distribution indicated below.  Please contact
-   us if you have any problems installing Ossec from our servers.
 
 Index:
 ^^^^^^^^^^^^^^
@@ -12,5 +13,5 @@ Index:
 .. toctree::
    :maxdepth: 2
 
-   index_pedro
+   integrating_ossec_elk
    index_jose
