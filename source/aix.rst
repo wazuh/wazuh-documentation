@@ -1,5 +1,5 @@
-DEBs for Debian
-===============
+Install OSSEC in AIX
+====================
 
 Debian Jessie i386
 ------------------

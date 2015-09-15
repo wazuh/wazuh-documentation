@@ -1,2 +1,2 @@
-Source
-======
+Install OSSEC from Sources
+==========================

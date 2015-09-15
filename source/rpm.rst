@@ -45,8 +45,7 @@ Installing OSSEC agent
 
 To install with **yum** do the following::
 
-   yum install ossec-hids
-
+   yum install ossec-hids-agent
 
 Installing Wazuh GPG key
 ------------------------
@@ -61,3 +60,4 @@ the GPG key typing **y** after the next question::
     Desde      : http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
    Está de acuerdo [s/N]: s
 
+.. note:: If you don't install the Wazuh GPG key yum can't install the RPMs for security reasons.

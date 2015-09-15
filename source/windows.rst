@@ -1,5 +1,5 @@
-DEBs for Ubuntu
-===============
+Install OSSEC-Agent in Windows
+==============================
 
 Ubuntu Precise i386
 -------------------
