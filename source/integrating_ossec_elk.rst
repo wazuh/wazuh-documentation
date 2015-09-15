@@ -9,17 +9,13 @@ Welcome to OSSEC-ELK Stack integration guide by Wazuh, throught some simple step
 
    Wazuh development team has release OSSEC-Wazuh 0.1 extended version, we tweak some OSSEC essential funcionalty to full-integrate PCI and CIS security compliance with OSSEC and review them throught Kibana dashboards.
 
-NOTE
-
-To include this funcionality in your OSSEC manager please install our OSSEC version and ruleset at: OSSEC-Wazuh Github. Install guide here: OSSEC-Wazuh install guide.
+.. note:: To include this funcionality in your OSSEC manager please install our OSSEC version and ruleset at: OSSEC-Wazuh Github. Install guide here: OSSEC-Wazuh install guide.
 
 .. topic:: OSSEC JSON Extension
 
    Wazuh development team has release OSSEC-Wazuh 0.1 extended version, we have improve OSSEC JSON output logs includings new fields (timestamp, location, groups array, security compliance, rootcheck alerts)
 
-NOTE
-
-To include this funcionality in your OSSEC manager please install our OSSEC version and ruleset at: OSSEC-Wazuh Github. Install guide here: OSSEC-Wazuh install guide.
+.. note:: To include this funcionality in your OSSEC manager please install our OSSEC version and ruleset at: OSSEC-Wazuh Github. Install guide here: OSSEC-Wazuh install guide.
 
 Logstash
 ^^^^^^^^^^^^^^^^^^^
