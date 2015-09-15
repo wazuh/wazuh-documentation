@@ -9,7 +9,7 @@ To add Wazuh yum repository, create a file named /etc/yum.repos.d/wazuh.repo::
     cd /etc/yum.repos.d
     vi wazuh.repo
 
-.. note:: This is respository are available for arch i386 and x86_64
+.. note:: Those respositores are available for arch i386 and x86_64
 
 **For RHEL / CentOS**::
 
