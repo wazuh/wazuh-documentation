@@ -40,7 +40,7 @@ To install with **yum** do the following::
    yum install ossec-hids
 
 If it is the first installation from Wazuh repository you need to import
-the GPG key tipping **y** after the next question::
+the GPG key typing **y** after the next question::
 
    Obteniendo clave desde http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
    Importando llave GPG 0x3B3631FB:
