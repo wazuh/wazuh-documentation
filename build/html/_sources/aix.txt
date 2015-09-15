@@ -1,3 +1,0 @@
-Install OSSEC in AIX
-====================
-
