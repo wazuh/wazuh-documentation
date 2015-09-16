@@ -1,5 +1,5 @@
-Install OSSEC from Sources
-==========================
+Installing OSSEC from Sources
+=============================
 
 Download and integrity verification
 -----------------------------------
