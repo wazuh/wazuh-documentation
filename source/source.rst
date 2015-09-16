@@ -74,6 +74,11 @@ Execute the installation script::
 
    bash ossec-hids-2.8.2/install.sh
 
+The next step is make the `Manager installation`_ or `Agent installation`_
+
+Manager installation
+^^^^^^^^^^^^^^^^^^^^
+
 The installation make you several questions
 
 -Ask for the installation lenguage::
@@ -213,3 +218,8 @@ files on your system::
    More information can be found at http://www.ossec.net
 
    ---  Press ENTER to finish (maybe more information below). ---
+
+Agent installation
+^^^^^^^^^^^^^^^^^^
+
+test
