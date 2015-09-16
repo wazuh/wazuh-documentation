@@ -62,7 +62,7 @@ Expected output::
 
    a0f403270f388fbc6a0a4fd46791b1371f5597ec  ossec-hids-2.8.2.tar.gz
 
-.. note:: Both need to be the same or something it't grong
+.. alert:: Both need to be the same or something it't grong
 
 Extract the code to your server::
 
