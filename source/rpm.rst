@@ -20,7 +20,7 @@ To add Wazuh yum repository, create a file named /etc/yum.repos.d/wazuh.repo::
    gpgkey = http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
    enabled = 1
 
-**For Fedora 21, 22**::
+**For Fedora 21, 22, 23**::
 
 
    [wazuh]
@@ -39,6 +39,9 @@ To install with **yum** do the following::
 
    yum install ossec-hids
 
+In **Fedora 23** install with **dnf** do the following::
+
+   dnf install ossec-hids
 
 Installing OSSEC agent
 ----------------------
@@ -46,6 +49,10 @@ Installing OSSEC agent
 To install with **yum** do the following::
 
    yum install ossec-hids-agent
+
+In **Fedora 23** install with **dnf** do the following::
+
+   dnf install ossec-hids-agent
 
 Installing Wazuh GPG key
 ------------------------
