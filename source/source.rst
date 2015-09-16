@@ -180,7 +180,7 @@ files on your system::
 
           - Do you want to add more IPs to the white list? (y/n)? [n]:          
 
-.. note:: If you select yes for Active response you are adding Intrusion Prevention capability, this is a good thing but keep in mind it is a good idea to white list your own IP's as you don't want active response to trigger against your IP and auto block your access. This could happen if you failed multiple ssh logins, or if you were to run a vulnerability scan against your IP - as ossec would detect this as an attack. So your IP would get blocked, and then you would be unable to ssh to your server for example to manage it
+.. note:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connexion.
 
 -To activate the remote syslog::
 
