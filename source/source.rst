@@ -137,14 +137,14 @@ The installation make you several questions
 
        - Running syscheck (integrity check daemon).
 
-This is for file integrity checking, alerts you to changes to
+-This is for file integrity checking, alerts you to changes to
 files on your system::
 
     3.3- Do you want to run the rootkit detection engine? (y/n) [y]: 
 
        - Running rootcheck (rootkit detection).
 
-This checks for rootkits on a regular basis::
+-This checks for rootkits on a regular basis::
 
     3.4- Active response allows you to execute a specific 
           command based on the events received. For example,
@@ -175,8 +175,9 @@ This checks for rootkits on a regular basis::
 
           - Do you want to add more IPs to the white list? (y/n)? [n]:          
 
-If you select yes for Active response you are adding Intrusion Prevention capability, this is a good thing but keep in mind it is a good idea to white list your own IP's as you don't want active response to trigger against your IP and auto block your access. This could happen if you failed multiple ssh logins, or if you were to run a vulnerability scan against your IP - as ossec would detect this as an attack. So your IP would get blocked, and then you would be unable to ssh to your server for example to manage it::
+.. note:: If you select yes for Active response you are adding Intrusion Prevention capability, this is a good thing but keep in mind it is a good idea to white list your own IP's as you don't want active response to trigger against your IP and auto block your access. This could happen if you failed multiple ssh logins, or if you were to run a vulnerability scan against your IP - as ossec would detect this as an attack. So your IP would get blocked, and then you would be unable to ssh to your server for example to manage it
 
+-To activate the remote syslog::
 
     3.5- Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: 
 
