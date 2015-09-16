@@ -50,7 +50,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'WazuhDocs'
-copyright = u'2015, Jose Luis Ruiz Ruiz'
+copyright = u'2015, WAZUH, Inc.'
 author = u'Jose Luis Ruiz Ruiz'
 
 # The version info for the project you're documenting, acts as replacement for
