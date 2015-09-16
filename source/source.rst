@@ -1,33 +1,10 @@
 Install OSSEC from Sources
 ==========================
 
-Ubuntu & Debian
----------------
+Download and verification
+-------------------------
 
-On Ubuntu and Debian you will need the **build-essential** package in order to compile and install OSSEC::
-
-   apt-get install build-essential
-
-now can continue with the installation in the section `Common installation for all distributions`_
-
-RedHat Centos & Fedora
-----------------------
-
-On RedHat, Centos or Fedora you need the **Development Tools** package in order to compile and install OSSEC::
-
-   yum groupinstall "Development Tools"
-
-or in Fedora 23::
-
-   dnf groupinstall "Development tools"
-
-now can continue with the installation in the section `Common installation for all distributions`_
-
-Common installation for all distributions
------------------------------------------
-
-
-Download the sources from ossec.net::  
+Download the sources from ossec.net::
 
    wget -U ossec http://www.ossec.net/files/ossec-hids-2.8.2.tar.gz
 
@@ -37,7 +14,7 @@ To download the checksum file, type::
 
 Now, let's examine the checksum file with the **cat** command, like so::
 
-   cat ossec-hids-2.8.2-checksum.txt 
+   cat ossec-hids-2.8.2-checksum.txt
 
 Expected output::
 
@@ -63,6 +40,31 @@ Expected output::
    a0f403270f388fbc6a0a4fd46791b1371f5597ec  ossec-hids-2.8.2.tar.gz
 
 .. warning:: Both cheksum need to be the same or something goes wrong
+
+Ubuntu & Debian
+---------------
+
+On Ubuntu and Debian you will need the **build-essential** package in order to compile and install OSSEC::
+
+   apt-get install build-essential
+
+now can continue with the installation in the section `Common installation for all distributions`_
+
+RedHat Centos & Fedora
+----------------------
+
+On RedHat, Centos or Fedora you need the **Development Tools** package in order to compile and install OSSEC::
+
+   yum groupinstall "Development Tools"
+
+or in Fedora 23::
+
+   dnf groupinstall "Development tools"
+
+now can continue with the installation in the section `Common installation for all distributions`_
+
+Common installation for all distributions
+-----------------------------------------
 
 Extract the code to your server::
 
@@ -126,11 +128,59 @@ The installation make you several questions
 
    3- Configuring the OSSEC HIDS.
 
-     3.1- Do you want e-mail notification? (y/n) [y]: 
+    3.1- Do you want e-mail notification? (y/n) [y]: 
+       - What's your e-mail address? sammy@example.com
+       - We found your SMTP server as: mail.example.com.
+       - Do you want to use it? (y/n) [y]:
+     
+    3.2- Do you want to run the integrity check daemon? (y/n) [y]:
 
-If you reply yes to this question the system make you other two questions::
+       - Running syscheck (integrity check daemon).
+
+This is for file integrity checking, alerts you to changes to
+files on your system::
+
+    3.3- Do you want to run the rootkit detection engine? (y/n) [y]: 
+
+       - Running rootcheck (rootkit detection).
+
+This checks for rootkits on a regular basis::
+
+    3.4- Active response allows you to execute a specific 
+          command based on the events received. For example,
+          you can block an IP address or disable access for
+          a specific user.  
+          More information at:
+          http://www.ossec.net/en/manual.html#active-response
+       
+           - Do you want to enable active response? (y/n) [y]: 
+
+            - Active response enabled.
+   
+            - By default, we can enable the host-deny and the 
+              firewall-drop responses. The first one will add
+              a host to the /etc/hosts.deny and the second one
+              will block the host on iptables (if linux) or on
+              ipfilter (if Solaris, FreeBSD or NetBSD).
+            - They can be used to stop SSHD brute force scans, 
+              portscans and some other forms of attacks. You can 
+              also add them to block on snort events, for example.
+
+          - Do you want to enable the firewall-drop response? (y/n) [y]: 
+
+             - firewall-drop enabled (local) for levels >= 6
+
+          - Default white list for the active response:
+             - 192.168.209.2
+
+          - Do you want to add more IPs to the white list? (y/n)? [n]:          
+
+If you select yes for Active response you are adding Intrusion Prevention capability, this is a good thing but keep in mind it is a good idea to white list your own IP's as you don't want active response to trigger against your IP and auto block your access. This could happen if you failed multiple ssh logins, or if you were to run a vulnerability scan against your IP - as ossec would detect this as an attack. So your IP would get blocked, and then you would be unable to ssh to your server for example to manage it::
 
 
+    3.5- Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: 
 
-RedHat Centos & Fedora
-----------------------
+   5- Installing the system
+      - Running the Makefile
+
+
