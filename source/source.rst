@@ -132,20 +132,22 @@ The installation make you several questions
        - What's your e-mail address? sammy@example.com
        - We found your SMTP server as: mail.example.com.
        - Do you want to use it? (y/n) [y]:
-     
+
+-This is for file integrity checking, alerts you to changes to
+files on your system::
+ 
     3.2- Do you want to run the integrity check daemon? (y/n) [y]:
 
        - Running syscheck (integrity check daemon).
 
--This is for file integrity checking, alerts you to changes to
-files on your system::
+-This checks for rootkits on a regular basis::
 
     3.3- Do you want to run the rootkit detection engine? (y/n) [y]: 
 
        - Running rootcheck (rootkit detection).
 
--This checks for rootkits on a regular basis::
-
+-The next is for enable the Active response::
+    
     3.4- Active response allows you to execute a specific 
           command based on the events received. For example,
           you can block an IP address or disable access for
@@ -181,7 +183,33 @@ files on your system::
 
     3.5- Do you want to enable remote syslog (port 514 udp)? (y/n) [y]: 
 
+-After this questions start the compilation::
+
    5- Installing the system
       - Running the Makefile
 
+-After compiling is complete you will be presented with final instructions::
 
+   - System is Debian (Ubuntu or derivative).
+   - Init script modified to start OSSEC HIDS during boot.
+
+   - Configuration finished properly.
+
+   - To start OSSEC HIDS:
+               /var/ossec/bin/ossec-control start
+
+   - To stop OSSEC HIDS:
+               /var/ossec/bin/ossec-control stop
+
+   - The configuration can be viewed or modified at /var/ossec/etc/ossec.conf
+
+
+   Thanks for using the OSSEC HIDS.
+   If you have any question, suggestion or if you find any bug,
+   contact us at contact@ossec.net or using our public maillist at
+   ossec-list@ossec.net
+   ( http://www.ossec.net/main/support/ ).
+
+   More information can be found at http://www.ossec.net
+
+   ---  Press ENTER to finish (maybe more information below). ---
