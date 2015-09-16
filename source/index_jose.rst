@@ -6,6 +6,6 @@ OSSEC installation guide
 
    rpm
    deb
+   source
    windows
    aix
-   source
