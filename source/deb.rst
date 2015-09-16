@@ -14,7 +14,7 @@ Add the repository for Debian (available distributions are Sid, Jessie and Wheez
 
 Type the next command::
 
-   echo 'deb http://ossec.wazuh.com/repos/apt/debian wheezy main' >> /etc/apt/wazuh.list
+   echo 'deb http://ossec.wazuh.com/repos/apt/debian wheezy main' >> /etc/apt/sources.list.d/wazuh.list
 
 .. note:: This is respository are available for arch i386 and x86_64
 
@@ -23,7 +23,7 @@ Add the repository for Ubuntu (available distributions are Precise, Trusty and U
 
 Type the next command::
 
-   echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu precise main' >> /etc/apt/wazuh.list
+   echo 'deb http://ossec.wazuh.com/repos/apt/ubuntu precise main' >> /etc/apt/sources.list.d/wazuh.list
 
 .. note:: This is respository are available for arch i386 and x86_64
 
