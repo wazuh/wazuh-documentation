@@ -220,6 +220,11 @@ files on your system::
 Agent installation
 ^^^^^^^^^^^^^^^^^^
 
+
+The installation make you several questions
+
+-Ask for the installation lenguage::
+
   ** Para instalação em português, escolha [br].
   ** 要使用中文进行安装, 请选择 [cn].
   ** Fur eine deutsche Installation wohlen Sie [de].
@@ -238,48 +243,43 @@ Agent installation
   (en/br/cn/de/el/es/fr/hu/it/jp/nl/pl/ru/sr/tr) [en]: 
   which: no host in (/sbin:/bin:/usr/sbin:/usr/bin)
 
+-The first question is what king of installation, select **agent**::
 
- OSSEC HIDS v2.8 Installation Script - http://www.ossec.net
- 
- You are about to start the installation process of the OSSEC HIDS.
- You must have a C compiler pre-installed in your system.
- If you have any questions or comments, please send an e-mail
- to dcid@ossec.net (or daniel.cid@gmail.com).
- 
-  - System: Linux localhost.localdomain 3.10.0-229.11.1.el7.x86_64
-  - User: root
-  - Host: localhost.localdomain
+  1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
 
+    - Agent(client) installation chosen.
 
-  -- Press ENTER to continue or Ctrl-C to abort. --
+-Installation folder::
 
+  2- Setting up the installation environment.
 
-1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
-
-  - Agent(client) installation chosen.
-
-2- Setting up the installation environment.
-
- - Choose where to install the OSSEC HIDS [/var/ossec]: 
+   - Choose where to install the OSSEC HIDS [/var/ossec]: 
 
     - Installation will be made at  /var/ossec .
 
-3- Configuring the OSSEC HIDS.
+-Add the IP Adress or hostname from the manager::
 
-  3.1- What's the IP Address or hostname of the OSSEC HIDS server?: localhot 
+  3- Configuring the OSSEC HIDS.
 
-   - Adding Hostname localhot
+    3.1- What's the IP Address or hostname of the OSSEC HIDS server?: xxx.xxx.xxx.xxx 
+
+   - Adding Hostname xxx.xxx.xxx.xxx
+
+-This is for file integrity checking, alerts you to changes to files on your system::
 
   3.2- Do you want to run the integrity check daemon? (y/n) [y]: 
 
    - Running syscheck (integrity check daemon).
 
+-This checks for rootkits on a regular basis::
+
   3.3- Do you want to run the rootkit detection engine? (y/n) [y]: 
 
    - Running rootcheck (rootkit detection).
 
-  3.4 - Do you want to enable active response? (y/n) [y]: 
+-The next is for enable the Active response::
 
+  3.4 - Do you want to enable active response? (y/n) [y]: 
 
   3.5- Setting the configuration to analyze the following logs:
     -- /var/log/messages

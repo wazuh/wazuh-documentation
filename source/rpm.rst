@@ -1,5 +1,5 @@
-Install OSSEC using RPM packages
-================================
+Installing from RPM packages
+============================
 
 Adding yum repository
 ---------------------

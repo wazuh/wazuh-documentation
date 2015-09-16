@@ -1,5 +1,5 @@
-Install OSSEC using DEBs packages
-=================================
+Installing from DEB packages
+============================
 
 Installing the apt-get repository key
 -------------------------------------

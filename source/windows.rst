@@ -1,3 +1,3 @@
-Install OSSEC-Agent in Windows
-==============================
+Installing Windows agent
+========================
 

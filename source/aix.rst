@@ -1,3 +1,3 @@
-Install OSSEC in AIX
+Installing AIX agent
 ====================
 
