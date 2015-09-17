@@ -9,3 +9,4 @@ OSSEC installation guide
    source
    windows
    aix
+   basicconfiguration

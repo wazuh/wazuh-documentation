@@ -6,8 +6,8 @@ Adding yum repository
 
 To add Wazuh yum repository, create a file named /etc/yum.repos.d/wazuh.repo::
 
-    cd /etc/yum.repos.d
-    vi wazuh.repo
+   $ cd /etc/yum.repos.d
+   $ vi wazuh.repo
 
 .. note:: Those respositores are available for arch i386 and x86_64
 
@@ -37,22 +37,22 @@ Installing OSSEC
 
 To install with **yum** do the following::
 
-   yum install ossec-hids
+   $ yum install ossec-hids
 
 In **Fedora 23** install with **dnf** do the following::
 
-   dnf install ossec-hids
+   $ dnf install ossec-hids
 
 Installing OSSEC agent
 ----------------------
 
 To install with **yum** do the following::
 
-   yum install ossec-hids-agent
+   $ yum install ossec-hids-agent
 
 In **Fedora 23** install with **dnf** do the following::
 
-   dnf install ossec-hids-agent
+   $ dnf install ossec-hids-agent
 
 Installing Wazuh GPG key
 ------------------------
