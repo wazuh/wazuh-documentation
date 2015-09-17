@@ -101,7 +101,7 @@ For the ID, you may accept the default by pressing **ENTER**::
 
    Confirm adding it?(y/n): 
 
-After that, you'll be returned to the main menu. Now you have to extract the agent's key, which will be echoed to the screen. (It will be different from the one in the example below.) Make sure you copy it, because you'll have to enter it for the agent::
+After that, you'll be returned to the main menu. Now you have to extract the agent's key, which will be echoed to the screen. (It will be different from the one in the example below.)::
 
    ****************************************
    * OSSEC HIDS v2.8 Agent manager.       *
@@ -122,6 +122,8 @@ After that, you'll be returned to the main menu. Now you have to extract the age
    MDAxIFRlc3RBZ2V0biAxMTEuMTExLjExMS4xMTEgY2MxZjA1Y2UxNWQyNzEyNjdlMmE3MTRlODI0MTA1YTgxNTM5ZDliN2U2ZDQ5MWYxYzBkOTU4MjRmNjU3ZmI2Zg==
 
    ** Press ENTER to return to the main menu.
+
+.. note:: Make sure you copy it, because you'll have to enter it for the agent.
 
 Import The Key From Server to Agent
 -----------------------------------
