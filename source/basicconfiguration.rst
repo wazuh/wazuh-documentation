@@ -2,7 +2,7 @@ Basic Configuration
 ===================
 
 If you made your installation from Sources or DEBs you can continue with the `Agent configuration`_ 
-but if you make your install from RPMs repository need to make changes in the `Manager configuration`_
+but if you made your install from RPMs repository you will need to make changes in the `Manager configuration`_
 
 Manager configuration
 ---------------------
@@ -10,7 +10,7 @@ Manager configuration
 If you made the Manager installation from RPMs need to add the mail configuration, for this
 follow the next steps
 
-To access and modify OSSEC's files and directories, you need to switch to the root user.::
+To access and modify OSSEC's files and directories, you need to switch to the root user::
 
    $ sudo su
    $ cd /var/ossec/etc
@@ -19,7 +19,7 @@ We make a backup from **ossec.conf**::
 
    $ cp ossec.conf ossec.conf.backup
 
-Then open the original with your favorite text editor.::
+Then open the original with your favorite text editor::
 
    $ vi ossec.conf
 
@@ -33,17 +33,17 @@ The mail settings are at the top of the file and need to change **email_to** , *
        <email_from>ossecm@ossec.xxx.com.</email_from>
      </global>
 
-After that only need restart Ossec server::
+After that, only need restart Ossec server::
 
    $ service ossec-hids restart
 
 Agent configuration
 -------------------
 
-If you made the Manager installation from RPMs need to add the mail configuration, for this
+If you made the Agentr installation from RPMs need to add the Manager IP Address to the configuration, for this
 follow the next steps
 
-To access and modify OSSEC's files and directories, you need to switch to the root user.::
+To access and modify OSSEC's files and directories, you need to switch to the root user::
 
    $ sudo su
    $ cd /var/ossec/etc
@@ -52,7 +52,7 @@ We make a backup from **ossec.conf**::
 
    $ cp ossec.conf ossec.conf.backup
 
-Then open the original with your favorite text editor.::
+Then open the original with your favorite text editor::
 
    $ vi ossec.conf
 
@@ -71,9 +71,9 @@ On the OSSEC server, start the process of adding the agent.
 
 Excecute **manage_agent**::
 
-   /var/ossec/bin/manage_agents
+   $ /var/ossec/bin/manage_agents
 
-You will then be presented the options shown below. Choose **a** to add an agent.::
+You will then be presented the options shown below. Choose **a** to add an agent::
 
    ****************************************
    * OSSEC HIDS v2.8 Agent manager.     *
@@ -104,7 +104,7 @@ For the ID, you may accept the default by pressing **ENTER**::
 After that, you'll be returned to the main menu. Now you have to extract the agent's key, which will be echoed to the screen. (It will be different from the one in the example below.) Make sure you copy it, because you'll have to enter it for the agent::
 
    ****************************************
-   * OSSEC HIDS v2.8 Agent manager.     *
+   * OSSEC HIDS v2.8 Agent manager.       *
    * The following options are available: *
    ****************************************
       (A)dd an agent (A).
@@ -133,7 +133,7 @@ This section has to be completed on the agent, and it involves importing (copyin
 You'll be presented with these options::
 
    ****************************************
-   * OSSEC HIDS v2.8 Agent manager.     *
+   * OSSEC HIDS v2.8 Agent manager.       *
    * The following options are available: *
    ****************************************
       (I)mport key from the server (I).
