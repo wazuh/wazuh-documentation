@@ -59,25 +59,36 @@ Kibana is a friendly WEB interface to explore all elasticsearch indexes, Kibana 
 To multi-node and high availability architectures we will use some extra tools like Logstash-Forwarder or Redis Server.
 
 
-Installaing
+Installing
 -------------------------
 Requisites
 ^^^^^^^^^^^^^^^^^^^
-SSH acces to at least one server and sudo privilegies.
+* SSH access to at least one server and sudo privilegies.
 
-1. Logstash
+1. OSSEC-Wazuh Manager
+^^^^^^^^^^^^^^^^^^^
+Collect and transport data.
+
+1.2 Agents
+""""""""""""""""""
+Collect and transport data.
+
+
+2. Logstash
 ^^^^^^^^^^^^^^^^^^^
 Collect and transport data.
 Logstash will be on charge of taking our OSSEC alerts files, process and send them to Elasticsearch server.
 
 
-1.1 Logstash-Forwarder
+2.1 Logstash-Forwarder
 """"""""""""""""""
+Collect and transport data.
 
-Elasticsearch
+
+3. Elasticsearch
 ^^^^^^^^^^^^^^^^^^^
 
-Kibana
+4. Kibana
 ^^^^^^^^^^^^^^^^^^^
 
 .. toctree::
