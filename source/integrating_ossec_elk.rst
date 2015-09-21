@@ -11,15 +11,15 @@ These are some features we are talking about:
 
 * **OSSEC-Wazuh Ruleset**
 Weekly OSSEC Ruleset updates
-* **OOSSEC PCI DSS 3.0 & CIS Requirements**O
+* **OOSSEC PCI DSS 3.0 & CIS Requirements**
 Detailed groups and Benchmarks (ex: 1.4 Debian Linux Benchmark, 11.4 PCI...)
-* **OOSSEC JSON Custom Output**O
+* **OOSSEC JSON Custom Output**
 Groups array, timestamps, Agents name, locations, file integrity..
-* **Logstash input/filter/output plugins**O
+* **Logstash input/filter/output plugins**
 GeoIP, names format, elasticsearch template, elasticsearch ossec cluster.
-* **OElasticsearch**O
+* **OElasticsearch**
 Custom index mapping template to fit OSSEC alert fields. 
-* **OKibana 4**O
+* **OKibana 4**
 OSSEC Alerts, PCI Complianace, CIS Compliance, Agents management, Agents Info Dashboards.
 Hiding non useful fields, display short summary of PCI Requirements on mouseover on PCI Alerts.
 
