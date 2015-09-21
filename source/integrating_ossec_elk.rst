@@ -54,9 +54,10 @@ Search & Analyze Data in Real Time. Distributed, scalable, and highly available.
 
 Kibana is a friendly WEB interface to explore all elasticsearch indexes, Kibana support custom dashboard creations, in our case Security Compliance dashboards and OSSEC high risk security alerts.
 
-** Scaling to large deployments**
+**Scaling to large deployments**
 
 To multi-node and high availability architectures we will use some extra tools like Logstash-Forwarder or Redis Server.
+
 
 Installaing
 -------------------------
@@ -64,16 +65,14 @@ Requisites
 ^^^^^^^^^^^^^^^^^^^
 SSH acces to at least one server and sudo privilegies.
 
-Logstash
+1. Logstash
 ^^^^^^^^^^^^^^^^^^^
 Collect and transport data.
 Logstash will be on charge of taking our OSSEC alerts files, process and send them to Elasticsearch server.
 
-1. Install Logstash from official source
 
-
-Logstash-Forwarder
-^^^^^^^^^^^^^^^^^^^
+1.1 Logstash-Forwarder
+""""""""""""""""""
 
 Elasticsearch
 ^^^^^^^^^^^^^^^^^^^
