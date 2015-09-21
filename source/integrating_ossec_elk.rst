@@ -10,18 +10,18 @@ The full guide is based on OSSEC Wazuh version, we contribute with OSSEC communi
 These are some features we are talking about:
 
 * **OSSEC-Wazuh Ruleset**
-  Weekly OSSEC Ruleset updates
+   Weekly OSSEC Ruleset updates
 * **OSSEC PCI DSS 3.0 & CIS Requirements**
-  Detailed groups and Benchmarks (ex: 1.4 Debian Linux Benchmark, 11.4 PCI...)
+   Detailed groups and Benchmarks (ex: 1.4 Debian Linux Benchmark, 11.4 PCI...)
 * **OSSEC JSON Custom Output**
-  Groups array, timestamps, Agents name, locations, file integrity..
+   Groups array, timestamps, Agents name, locations, file integrity..
 * **Logstash input/filter/output plugins**
-  GeoIP, names format, elasticsearch template, elasticsearch ossec cluster.
+   GeoIP, names format, elasticsearch template, elasticsearch ossec cluster.
 * **Elasticsearch**
-  Custom index mapping template to fit OSSEC alert fields. 
+   Custom index mapping template to fit OSSEC alert fields. 
 * **Kibana 4**
-  OSSEC Alerts, PCI Complianace, CIS Compliance, Agents management, Agents Info Dashboards.
-  Hiding non useful fields, display short summary of PCI Requirements on mouseover on PCI Alerts.
+   OSSEC Alerts, PCI Complianace, CIS Compliance, Agents management, Agents Info Dashboards.
+   Hiding non useful fields, display short summary of PCI Requirements on mouseover on PCI Alerts.
 
 .. note:: This functionalty requires OSSEC-Wazuh version and OSSEC-Wazuh Ruleset, keep reading this guide to install it.
 
