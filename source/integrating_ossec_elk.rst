@@ -25,6 +25,14 @@ These are some features we are talking about:
 
 .. note:: This functionalty requires OSSEC-Wazuh version and OSSEC-Wazuh Ruleset, keep reading this guide to install it.
 
+Architecture explanation
+^^^^^^^^^^^^^^^^^^^
+The whole architecture is based on log analysis, collect, index and display alerts. To acomplish this we are going to use the following tools:
+
+OSSEC-HIDS
+"""""""""""""""""""""""""
+It will 
+
 Logstash
 ^^^^^^^^^^^^^^^^^^^
 Collect and transport data.
