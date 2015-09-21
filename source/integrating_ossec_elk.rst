@@ -65,7 +65,7 @@ Requisites
 ^^^^^^^^^^^^^^^^^^^
 * SSH access to at least one server and sudo privilegies.
 
-1. OSSEC-Wazuh Manager
+1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
 Collect and transport data.
 
