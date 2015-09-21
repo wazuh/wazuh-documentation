@@ -23,6 +23,9 @@ These are some features we are talking about:
    OSSEC Alerts, PCI Complianace, CIS Compliance, Agents management, Agents Info Dashboards.
    Hiding non useful fields, display short summary of PCI Requirements on mouseover on PCI Alerts.
 
+If you have any questions or issues while reading this guide don't hesitate to contact us at: info@wazuh.com
+
+
 .. note:: This functionalty requires OSSEC-Wazuh version and OSSEC-Wazuh Ruleset, keep reading this guide to install it.
 
 
@@ -65,14 +68,44 @@ Requisites
 ^^^^^^^^^^^^^^^^^^^
 * SSH access to at least one server and sudo privilegies.
 
+Considerations
+^^^^^^^^^^^^^^^^^^^
+**Single/multiple host configurations**
+The entire guide is orientated to single-node configuration but you still can build this architecture up on differentes servers, it is recommended to split ELK Server from OSSEC Manager server, for example, four differentes hosts: 
+
+* Host 1: OSSEC Manager+Logstash Forwarder
+* Host 2: Logstash server + Elasticsearch + Kibana
+* Host 3: Elasticsearch node 2
+* Host 3: Elasticsearch node 3
+
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
-Collect and transport data.
+First of all, download the whole OSSEC-Wazuh repository from Github which includes OSSEC HIDS latest version, Wazuh enhace capabilites and ELK Stack configuration files.
+
+Create a folder on your prefered home directory and download the repository like this:
+
+Go home folder, create tmp folder, clone the repository.::
+
+   $ cd ~
+   $ mkdir ossec_tmp && cd ossec_tmp
+   $ git clone https://github.com/wazuh/ossec-wazuh.git
+   $ cd ossec-wazuh
+
+Now we have the OSSEC source code on our machine, let's compile it. We need development and packages tools like g++, gcc etc... if it is needed, install them.
+
+Finally compile and install OSSEC Manager by entering.::
+
+   $ ./install
+
+Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: <http://documentation.wazuh.com/en/latest/source.html#manager-installation> .
+Remember we ARE NOT installing official OSSEC relealse, you need to compile and install Wazuh version.
+
+You can let all prompt steps by ** default ** by pressing ENTER at every question OSSEC installation ask you, by now, we don't need a specific OSSEC config installation.
+
 
 1.2 Agents
 """"""""""""""""""
-Collect and transport data.
-
+This section is covered on: `here <http://documentation.wazuh.com/en/latest/source.html#agent-installation>`_
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
@@ -91,6 +124,10 @@ Collect and transport data.
 4. Kibana
 ^^^^^^^^^^^^^^^^^^^
 
+Troubleshooting
+-------------------------
 .. toctree::
    :maxdepth: 2
+
+
 
