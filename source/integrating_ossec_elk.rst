@@ -6,6 +6,7 @@ Introduction
 Welcome to OSSEC-ELK Stack integration guide by Wazuh, throught some simple steps you will set up an entire ELK Stack architecture to monitor, collect, process, index and display your OSSEC Alerts.
 The full guide is based on OSSEC Wazuh version, we contribute with OSSEC community by developing extended funcionality.
 These are some features we are talking about:
+
 * **OSSEC-Wazuh Ruleset: Weekly OSSEC Ruleset updates**
 * OSSEC PCI DSS 3.0 & CIS Requirements: Detailed groups and Benchmarks (ex: 1.4 Debian Linux Benchmark, 11.4 PCI...)
 * OSSEC JSON Alerts Custom Output: Groups array, timestamps, Agents name, locations, file integrity..
