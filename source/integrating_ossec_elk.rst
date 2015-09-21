@@ -29,9 +29,10 @@ Architecture explanation
 ^^^^^^^^^^^^^^^^^^^
 The whole architecture is based on log analysis, collect, index and display alerts. To acomplish this we are going to use the following tools:
 
-OSSEC-HIDS
-"""""""""""""""""""""""""
-It will 
+**OSSEC-HIDS**
+`OSSEC Official Website <http://www.ossec.net//>`_ |br| test
+
+
 
 Logstash
 ^^^^^^^^^^^^^^^^^^^
