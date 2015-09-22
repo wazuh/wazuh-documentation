@@ -64,23 +64,35 @@ To multi-node and high availability architectures we will use some extra tools l
 
 Installing
 -------------------------
-Requisites
+Requirements
 ^^^^^^^^^^^^^^^^^^^
 * SSH access to at least one server and sudo privilegies.
+* Java 8 `(Example Ubuntu install guide) <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
 
 Considerations
 ^^^^^^^^^^^^^^^^^^^
 **Single/multiple host configurations**
+
 The entire guide is orientated to single-node configuration but you still can build this architecture up on differentes servers, it is recommended to split ELK Server from OSSEC Manager server, for example, four differentes hosts: 
 
 * Host 1: OSSEC Manager+Logstash Forwarder
 * Host 2: Logstash server + Elasticsearch + Kibana
-* Host 3: Elasticsearch node 2
-* Host 3: Elasticsearch node 3
+* Host 3: Node 2
+* Host 3: Node 3
+
+We will give you differents configuration files depends on the architecture you choose.
+
+Remember
+
+* Single-host: All the tools on same machine
+* Multi-host: Tools split-up on differents machines.
 
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
-First of all, download the whole OSSEC-Wazuh repository from Github which includes OSSEC HIDS latest version, Wazuh enhace capabilites and ELK Stack configuration files.
+First of all, download the whole OSSEC-Wazuh repository from Github which includes OSSEC HIDS latest version (2.8.2 base), Wazuh enhace capabilites and ELK Stack configuration files.
+
+1.1 Installation
+""""""""""""""""""
 
 Create a folder on your prefered home directory and download the repository like this:
 
@@ -95,25 +107,93 @@ Now we have the OSSEC source code on our machine, let's compile it. We need deve
 
 Finally compile and install OSSEC Manager by entering.::
 
-   $ ./install
+   $ sudo ./install
 
-Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: <http://documentation.wazuh.com/en/latest/source.html#manager-installation> .
+Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: `Manager installation <http://documentation.wazuh.com/en/latest/source.html#manager-installation> `_ .
 Remember we ARE NOT installing official OSSEC relealse, you need to compile and install Wazuh version.
 
-You can let all prompt steps by ** default ** by pressing ENTER at every question OSSEC installation ask you, by now, we don't need a specific OSSEC config installation.
+You can let all prompt steps by **default** by pressing ENTER at every question OSSEC installation ask you, by now, we don't need a specific OSSEC config installation.
 
 
-1.2 Agents
+1.2 Configuration
 """"""""""""""""""
-This section is covered on: `here <http://documentation.wazuh.com/en/latest/source.html#agent-installation>`_
+We need just one tweak at OSSEC configuration files, enable JSON output. 
+
+Open OSSEC conf file .::
+
+   $ sudo vi /var/ossec/etc/ossec.conf
+
+Add inside **<global></global>** tags the json output setting .::
+
+   <jsonout_output>yes</jsonout_output>
+
+That's all! Now restart your OSSEC Manager .::
+
+   sudo /var/ossec/bin/ossec-control start
+
+Check if alerts.json file exits and is working .::
+
+   sudo cat /var/ossec/logs/alerts/alerts.json
+
+
+1.3 Agents
+""""""""""""""""""
+This section is covered `here <http://documentation.wazuh.com/en/latest/source.html#agent-installation>`_
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
-Collect and transport data.
-Logstash will be on charge of taking our OSSEC alerts files, process and send them to Elasticsearch server.
+.. note:: At this poing you will need Java 8 installed on your system, please proceed to install it before install any of next tools.
+
+We proceed to install Logstash Server, in this case we are installing it on the **same* machine we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
+
+2.1 Installation
+""""""""""""""""""
+**Logstash 1.5 version**
+
+We recommend to install Logstash from official repositories, inside next link you will find YUM and DEB packages.
+
+`Elastic.co: Install Logstash from repositories <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_
+
+For instance, to install DEB packages for example to an Ubuntu SO:
+
+Download and install the Public Signing Key: .::
+
+   wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
+
+Add the repository definition to your /etc/apt/sources.list file: .::
+
+   echo "deb http://packages.elasticsearch.org/logstash/1.5/debian stable main" | sudo tee -a /etc/apt/sources.list
+
+Run sudo apt-get update and the repository is ready for use. You can install it with: .::
+
+   sudo apt-get update && sudo apt-get install logstash
+   
+
+2.1 Configuration
+""""""""""""""""""
+
+** Configuration files ** 
+
+Once Logstash be installed copy Wazuh **SINGLE-HOST, NO Logstash Forwarder** Logstash file to Logstash configuration files: .::
+
+  sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
+
+Or copy Wazuh Logstash ** MULTI-HOST ** file to Logstash configuration files: .::
+
+  sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
+
+** GeoIP DB ** 
+
+Download GeoLiteCity from Maxmind website, unzip and move to Logstash folder: .::
+
+  sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
+  sudo sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
+
+** Logstash user ** 
+In 
 
 
-2.1 Logstash-Forwarder
+2.2 Logstash-Forwarder
 """"""""""""""""""
 Collect and transport data.
 
