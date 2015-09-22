@@ -96,7 +96,7 @@ First of all, download the whole OSSEC-Wazuh repository from Github which includ
 
 Create a folder on your prefered home directory and download the repository like this:
 
-Go home folder, create tmp folder, clone the repository.::
+Go home folder, create tmp folder, clone the repository ::
 
    $ cd ~
    $ mkdir ossec_tmp && cd ossec_tmp
@@ -105,7 +105,7 @@ Go home folder, create tmp folder, clone the repository.::
 
 Now we have the OSSEC source code on our machine, let's compile it. We need development and packages tools like g++, gcc etc... if it is needed, install them.
 
-Finally compile and install OSSEC Manager by entering.::
+Finally compile and install OSSEC Manager by entering ::
 
    $ sudo ./install
 
@@ -121,19 +121,19 @@ You can let all prompt steps by **default** by pressing ENTER at every question 
 """"""""""""""""""
 We need just one tweak at OSSEC configuration files, enable JSON output. 
 
-Open OSSEC conf file .::
+Open OSSEC conf file ::
 
    $ sudo vi /var/ossec/etc/ossec.conf
 
-Add inside **<global></global>** tags the json output setting .::
+Add inside **<global></global>** tags the json output setting ::
 
    <jsonout_output>yes</jsonout_output>
 
-That's all! Now restart your OSSEC Manager .::
+That's all! Now restart your OSSEC Manager ::
 
    sudo /var/ossec/bin/ossec-control start
 
-Check if alerts.json file exits and is working .::
+Check if alerts.json file exits and is working ::
 
    sudo cat /var/ossec/logs/alerts/alerts.json
 
@@ -158,15 +158,15 @@ We recommend to install Logstash from official repositories, inside next link yo
 
 For instance, to install DEB packages for example to an Ubuntu SO:
 
-Download and install the Public Signing Key: .::
+Download and install the Public Signing Key: ::
 
    wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
 
-Add the repository definition to your /etc/apt/sources.list file: .::
+Add the repository definition to your /etc/apt/sources.list file: ::
 
    echo "deb http://packages.elasticsearch.org/logstash/1.5/debian stable main" | sudo tee -a /etc/apt/sources.list
 
-Run sudo apt-get update and the repository is ready for use. You can install it with: .::
+Run sudo apt-get update and the repository is ready for use. You can install it with: ::
 
    sudo apt-get update && sudo apt-get install logstash
    
@@ -176,11 +176,11 @@ Run sudo apt-get update and the repository is ready for use. You can install it 
 
 **Configuration files**
 
-Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash configuration files: .::
+Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash configuration files: ::
 
   sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
-Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files .::
+Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files ::
 
   sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
