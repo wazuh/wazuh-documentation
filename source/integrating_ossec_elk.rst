@@ -202,7 +202,12 @@ Open users groups file ::
 
 Search for "ossec" and add logstash at the end of that line, just like this ::
 
-  ossec:x:1001:logstash
+  landscape:x:109:
+  admin:x:110:
+  ubuntu:x:1000:
+  **ossec:x:1001:logstash**
+  scanner:x:111:
+  colord:x:112:
 
 
 2.2 Logstash-Forwarder
