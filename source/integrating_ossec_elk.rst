@@ -110,7 +110,8 @@ Finally compile and install OSSEC Manager by entering ::
    $ sudo ./install
 
 Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: 
-`Manager installation <http://documentation.wazuh.com/en/latest/source.html#manager-installation/> `_ .
+
+`Manager installation  <http://documentation.wazuh.com/en/latest/source.html#manager-installation/>`_
 
 Remember we ARE NOT installing official OSSEC relealse, you need to compile and install Wazuh version.
 
@@ -131,11 +132,11 @@ Add inside **<global></global>** tags the json output setting ::
 
 That's all! Now restart your OSSEC Manager ::
 
-   sudo /var/ossec/bin/ossec-control start
+   $ sudo /var/ossec/bin/ossec-control start
 
 Check if alerts.json file exits and is working ::
 
-   sudo cat /var/ossec/logs/alerts/alerts.json
+   $ sudo cat /var/ossec/logs/alerts/alerts.json
 
 
 1.3 Agents
@@ -160,15 +161,15 @@ For instance, to install DEB packages for example to an Ubuntu SO:
 
 Download and install the Public Signing Key: ::
 
-   wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
+   $ wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
 
 Add the repository definition to your /etc/apt/sources.list file: ::
 
-   echo "deb http://packages.elasticsearch.org/logstash/1.5/debian stable main" | sudo tee -a /etc/apt/sources.list
+   $ echo "deb http://packages.elasticsearch.org/logstash/1.5/debian stable main" | sudo tee -a /etc/apt/sources.list
 
 Run sudo apt-get update and the repository is ready for use. You can install it with: ::
 
-   sudo apt-get update && sudo apt-get install logstash
+   $ sudo apt-get update && sudo apt-get install logstash
    
 
 2.1 Configuration
@@ -178,22 +179,30 @@ Run sudo apt-get update and the repository is ready for use. You can install it 
 
 Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash configuration files: ::
 
-  sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
+  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
 Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files ::
 
-  sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
+  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
 **GeoIP DB** 
 
 Download GeoLiteCity from Maxmind website, unzip and move to Logstash folder ::
 
-  sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
-  sudo sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
+  $ sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
+  $ sudo sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
 
 **Logstash user** 
 
-In 
+In case you are installing single-host architecture, Logstash will need to read from OSSEC alerts file, we need to grants permission to do that.
+
+Open users groups file ::
+
+  $ vi /etc/group
+
+Search for "ossec" and add logstash at the end of that line, just like this ::
+
+  ossec:x:1001:logstash
 
 
 2.2 Logstash-Forwarder
