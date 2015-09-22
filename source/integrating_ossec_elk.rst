@@ -180,13 +180,13 @@ Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash 
 
   sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
-Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files: .::
+Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files .::
 
   sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
 **GeoIP DB** 
 
-Download GeoLiteCity from Maxmind website, unzip and move to Logstash folder: .::
+Download GeoLiteCity from Maxmind website, unzip and move to Logstash folder ::
 
   sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
   sudo sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
