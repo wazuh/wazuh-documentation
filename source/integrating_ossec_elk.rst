@@ -109,7 +109,9 @@ Finally compile and install OSSEC Manager by entering.::
 
    $ sudo ./install
 
-Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: `Manager installation <http://documentation.wazuh.com/en/latest/source.html#manager-installation> `_ .
+Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: 
+`Manager installation <http://documentation.wazuh.com/en/latest/source.html#manager-installation/> `_ .
+
 Remember we ARE NOT installing official OSSEC relealse, you need to compile and install Wazuh version.
 
 You can let all prompt steps by **default** by pressing ENTER at every question OSSEC installation ask you, by now, we don't need a specific OSSEC config installation.
@@ -144,7 +146,7 @@ This section is covered `here <http://documentation.wazuh.com/en/latest/source.h
 ^^^^^^^^^^^^^^^^^^^
 .. note:: At this poing you will need Java 8 installed on your system, please proceed to install it before install any of next tools.
 
-We proceed to install Logstash Server, in this case we are installing it on the **same* machine we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
+We proceed to install Logstash Server, in this case we are installing it on the **same** machine we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
 
 2.1 Installation
 """"""""""""""""""
@@ -172,24 +174,25 @@ Run sudo apt-get update and the repository is ready for use. You can install it 
 2.1 Configuration
 """"""""""""""""""
 
-** Configuration files ** 
+**Configuration files**
 
-Once Logstash be installed copy Wazuh **SINGLE-HOST, NO Logstash Forwarder** Logstash file to Logstash configuration files: .::
+Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash configuration files: .::
 
   sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
-Or copy Wazuh Logstash ** MULTI-HOST ** file to Logstash configuration files: .::
+Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files: .::
 
   sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
-** GeoIP DB ** 
+**GeoIP DB** 
 
 Download GeoLiteCity from Maxmind website, unzip and move to Logstash folder: .::
 
   sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
   sudo sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
 
-** Logstash user ** 
+**Logstash user** 
+
 In 
 
 
