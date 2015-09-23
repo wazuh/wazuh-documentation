@@ -145,7 +145,7 @@ This section is covered `here <http://documentation.wazuh.com/en/latest/source.h
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
-.. note:: At this poing you will need Java 8 installed on your system, please proceed to install it before install any of next tools.
+.. note:: At this poing you will need Java 8 installed on your system, please proceed to install it before install any of next tools. `Install Java 8 <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
 
 We proceed to install Logstash Server, in this case we are installing it on the **same** machine we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
 
@@ -198,7 +198,7 @@ In case you are installing single-host architecture, Logstash will need to read 
 
 Open users groups file ::
 
-  $ vi /etc/group
+  $ sudo vi /etc/group
 
 Search for "ossec" and add logstash at the end of that line, just like this ::
 
@@ -206,10 +206,16 @@ Search for "ossec" and add logstash at the end of that line, just like this ::
   ossec:x:1001:logstash
   scanner:x:111:
 
+**Restart Logstash** 
+  
+Finally restart Logstash service to apply last changes ::
+
+ $ sudo service logstash restart
+
 
 2.2 Logstash-Forwarder
 """"""""""""""""""
-Collect and transport data.
+.. note:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to secction `3. Elasticsearch <#elasticsearch>`_
 
 
 3. Elasticsearch
