@@ -53,7 +53,13 @@ After that we have installed all software necessary for make the Ossec Agent Com
 Under Ubuntu & Debian
 ---------------------
 
-a
+For compile the agent under Ubuntu need to install the next packages::
+
+   $ apt-get install gcc-mingw-w64
+   $ apt-get install nsis
+   $ apt-get install make
+
+After that we have installed all software necessary for make the Ossec Agent Compilation follow the steps at the `Common compilation`_.
 
 Common compilation
 ------------------
