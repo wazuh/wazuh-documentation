@@ -212,16 +212,54 @@ Finally restart Logstash service to apply last changes ::
 
  $ sudo service logstash restart
 
-
-2.2 Logstash-Forwarder
-""""""""""""""""""
-.. note:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to secction `3. Elasticsearch <#elasticsearch>`_
-
-
-3. Elasticsearch
+3. Logstash-Forwarder
 ^^^^^^^^^^^^^^^^^^^
 
-4. Kibana
+.. note:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to secction `3. Elasticsearch <#id3>`_
+
+
+3.1 Generate SSL Certificates on Logstash-Server
+""""""""""""""""""
+Since we are going to use Logstash Forwarder to ship logs from our Servers to our Logstash Server, we need to create an SSL certificate and key pair. The certificate is used by the Logstash Forwarder to verify the identity of Logstash Server.
+
+In your **Logstash Server** (we just installed it!) generate the SSL Certificates like this:
+
+Search and copy your OpenSSL configuration file, in this case we can find it on /etc/ssl/openssl.cnf ::
+
+ $ sudo cd /etc/pki/tls/
+ $ sudo cp /etc/ssl/openssl.cnf .
+
+Edit openssl.cnf file ::
+
+ $ sudo vi /etc/pki/tls/openssl.cnf
+
+Find the [ v3_ca ] section in the file, and add this line under it (substituting in the Logstash Server's private IP address) ::
+
+ $ subjectAltName = IP: logstash_server_private_ip
+
+Save and exit.
+
+Now generate the SSL certificate and private key in the appropriate locations (/etc/pki/tls/), with the following commands ::
+
+ $ cd /etc/pki/tls
+ $ sudo openssl req -config /etc/pki/tls/openssl.cnf -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout private/logstash-forwarder.key -out certs/logstash-forwarder.crt
+
+3.2 Copy SSL Certificate
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+3.2 Installing
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+3.2 Configuring
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+4. Elasticsearch
+^^^^^^^^^^^^^^^^^^^
+
+5. Kibana
 ^^^^^^^^^^^^^^^^^^^
 
 Troubleshooting
