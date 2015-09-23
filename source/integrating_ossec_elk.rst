@@ -227,7 +227,7 @@ Finally restart Logstash service to apply last changes ::
 3. Logstash-Forwarder
 ^^^^^^^^^^^^^^^^^^^
 
-.. warning:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to secction `3. Elasticsearch <#id3>`_
+.. warning:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to section `5. Elasticsearch <#id4>`_
 
 
 3.1 Generate SSL Certificates on Logstash-Server
