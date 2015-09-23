@@ -274,6 +274,7 @@ In this case we are adding DEB repositories and installing by apt-get, proceed t
  $ sudo apt-get update && sudo apt-get install logstash-forwarder
 
 Now copy the Logstash server's SSL certificate into the appropriate location (/etc/pki/tls/certs)::
+
  $ sudo cp /tmp/logstash-forwarder.crt /etc/pki/tls/certs/
 
 
@@ -314,8 +315,9 @@ Finally set LogstashForwarder to fetch **OSSEC ALERTS FILE**, modify following l
      "fields": { "type": "ossec-alerts" }
  }
 
- Restart and we are finish to configure Logstash Forwarder ::
- 
+
+Restart and we are finish to configure Logstash Forwarder ::
+
   $ sudo service logstash-forwarder restart
 
 4. Elasticsearch
