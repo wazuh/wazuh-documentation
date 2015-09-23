@@ -45,6 +45,12 @@ OSSEC is an Open Source Host-based Intrusion Detection System that performs log 
 
 Logstash is a data pipeline that helps you process logs and other event data from a variety of systems. Logstash will read and process send our OSSEC JSON Files to Elasticsearch Cluster.
 
+**Logstash-Forwarder**
+
+`Logstash-Forwarder Official Website <https://www.elastic.co/products/logstash/>`_
+
+Logstash-Forwarder is a shipment tool to ship logs from our Servers to our Logstash Server, in our case we will send logs from OSSEC Manager host to ELK Stack host.
+
 **Elasticsearch**
 
 `Elasticsearch Official Website <https://www.elastic.co/products/elasticsearch/>`_
@@ -222,7 +228,7 @@ Finally restart Logstash service to apply last changes ::
 """"""""""""""""""
 Since we are going to use Logstash Forwarder to ship logs from our Servers to our Logstash Server, we need to create an SSL certificate and key pair. The certificate is used by the Logstash Forwarder to verify the identity of Logstash Server.
 
-In your **Logstash Server** (we just installed it!) generate the SSL Certificates like this:
+On your **Logstash Server** (we just installed it!) generate the SSL Certificates like this:
 
 Search and copy your OpenSSL configuration file, in this case we can find it on /etc/ssl/openssl.cnf ::
 
@@ -244,17 +250,73 @@ Now generate the SSL certificate and private key in the appropriate locations (/
  $ cd /etc/pki/tls
  $ sudo openssl req -config /etc/pki/tls/openssl.cnf -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout private/logstash-forwarder.key -out certs/logstash-forwarder.crt
 
+Finally we have our Logstash certificate and key saved on /etc/pki/tls/certs and /etc/pki/tls/private respectively, we will use them soon.
+
 3.2 Copy SSL Certificate
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+On **Logstash Server**, copy the SSL certificate to Client Server(Logstash-Forwarder) (substitute the client server's IP address, and your own login)::
+
+ scp /etc/pki/tls/certs/logstash-forwarder.crt user@server_private_IP:/tmp
 
 
 3.2 Installing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
+You can visit Elasticsearch official website and download DEB or RPM packages directly from there. 
+
+`Logstash Forwarder DEB & RPM packages <https://www.elastic.co/downloads/logstash>`_
+
+In this case we are adding DEB repositories and installing by apt-get, proceed to add Logstash-Forwarder repositories, update and install::
+
+ $ wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
+ $ sudo echo "deb http://packages.elasticsearch.org/logstashforwarder/debian stable main" | sudo tee -a /etc/apt/sources.list
+ $ sudo apt-get update && sudo apt-get install logstash-forwarder
+
+Now copy the Logstash server's SSL certificate into the appropriate location (/etc/pki/tls/certs)::
+ $ sudo cp /tmp/logstash-forwarder.crt /etc/pki/tls/certs/
+
 
 3.2 Configuring
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
+Open Logstash Forwarder configuration file, we need to modify some settings to add our certificate recently generated and the Logstash Server IP::
+
+ $ sudo vi /etc/logstash-forwarder.conf
+
+Under the network section, add the following lines into the file, substituting in your Logstash Server IP address for localhost:5043 and uncomment the line ::
+
+ # A list of downstream servers listening for our messages.
+ # logstash-forwarder will pick one at random and only switch if
+ # the selected one appears to be dead or unresponsive
+ "servers": [ "your_logstash_server_ip:5000" ],
+
+Above thoose lines you will fined the CA configuration, edit with our CA path and uncomment the line ::
+
+ # The path to your trusted ssl CA file. This is used
+ # to authenticate your downstream server.
+ "ssl ca": "/etc/pki/tls/certs/logstash-forwarder.crt",
+
+Uncomment timeout option line for performance reasons ::
+
+ # logstash-forwarder will assume the connection or server is bad and
+ # will connect to a server chosen at random from the servers list.
+ "timeout": 15
+
+Finally set LogstashForwarder to fetch **OSSEC ALERTS FILE**, modify following lines like this ::
+
+ # The list of files configurations
+ "files": [
+  {
+     "paths": [
+       "/var/ossec/logs/alerts/alerts.json"
+      ],
+     "fields": { "type": "ossec-alerts" }
+ }
+
+ Restart and we are finish to configure Logstash Forwarder ::
+ 
+  $ sudo service logstash-forwarder restart
 
 4. Elasticsearch
 ^^^^^^^^^^^^^^^^^^^
