@@ -84,9 +84,19 @@ You will see the following in the screen::
    ...
 
    Output: "ossec-win32-agent.exe"
-   Install: 7 pages (448 bytes), 3 sections (3144 bytes), 379 instructions (10612 bytes), 247 strings (42580 bytes), 1 language table (346 bytes).
-   Uninstall: 5 pages (320 bytes),
-   1 section (1048 bytes), 301 instructions (8428 bytes), 166 strings (2646 bytes), 1 language table (290 bytes).
-   Datablock optimizer saved 8371 bytes (~0.7%)
+   Install: 7 pages (448 bytes), 3 sections (3144 bytes), 586 instructions (16408 bytes), 287 strings (31800 bytes), 1 language table (346 bytes).
+   Uninstall: 5 pages (320 bytes), 
+   1 section (1048 bytes), 347 instructions (9716 bytes), 181 strings (3323 bytes), 1 language table (290 bytes).
+   Datablock optimizer saved 100205 bytes (~7.9%).
+
+   Using zlib compression.
+
+   EXE header size:               57856 / 56320 bytes
+   Install code:                  14081 / 52522 bytes
+   Install data:                1073649 / 3854506 bytes
+   Uninstall code+data:           21037 / 21453 bytes
+   CRC (0xAB53A27C):                  4 / 4 bytes
+
+   Total size:                  1166627 / 3984805 bytes (29.2%)
 
 You have **ossec-win32-agent.exe** in the same folder ready for be used.
