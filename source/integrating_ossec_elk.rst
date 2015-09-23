@@ -183,13 +183,19 @@ Run sudo apt-get update and the repository is ready for use. You can install it 
 
 **Configuration files**
 
-Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash configuration files: ::
+Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash configuration files ::
 
   $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
 Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files ::
 
   $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
+
+In this case don't forget to edit 01-ossec.conf file to replace your Elasicsearch destination IP ::
+
+  elasticsearch {
+           host => "your_elasticsearch_server_ip"
+
 
 **GeoIP DB** 
 
@@ -221,7 +227,7 @@ Finally restart Logstash service to apply last changes ::
 3. Logstash-Forwarder
 ^^^^^^^^^^^^^^^^^^^
 
-.. note:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to secction `3. Elasticsearch <#id3>`_
+.. warning:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to secction `3. Elasticsearch <#id3>`_
 
 
 3.1 Generate SSL Certificates on Logstash-Server
@@ -322,6 +328,20 @@ Restart and we are finish to configure Logstash Forwarder ::
 
 4. Elasticsearch
 ^^^^^^^^^^^^^^^^^^^
+4.1 Introduction
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+4.2 Installing
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+4.3 Basic configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+4.4 Extra configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+4.5 Wazuh custom templates
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 5. Kibana
 ^^^^^^^^^^^^^^^^^^^
