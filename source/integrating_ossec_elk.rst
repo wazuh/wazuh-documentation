@@ -225,13 +225,13 @@ Finally restart Logstash service to apply last changes ::
  $ sudo service logstash restart
 
 3. Logstash-Forwarder
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 .. warning:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to secction `3. Elasticsearch <#id3>`_
 
 
 3.1 Generate SSL Certificates on Logstash-Server
-""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""
 Since we are going to use Logstash Forwarder to ship logs from our Servers to our Logstash Server, we need to create an SSL certificate and key pair. The certificate is used by the Logstash Forwarder to verify the identity of Logstash Server.
 
 On your **Logstash Server** (we just installed it!) generate the SSL Certificates like this:
