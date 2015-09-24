@@ -339,7 +339,10 @@ We recommend to install Elasticsearch from official repositories, inside next li
 `Elastic.co: Install Elasticsearch from repositories <https://www.elastic.co/guide/en/elasticsearch/reference/1.7/setup-repositories.html>`_
 
 The followings steps are oriented to build a single-node Elasticsearch cluster but remember, Elasticsearch works better with a minium of three nodes splits in differents machines, this way Elastic can balance loads and split shards and replicas.
-Big inconvenient with single-node configuration is no replicas will be created this means in case of takeover or failure of one or more shards there will not be replicas to patch this broken shards. Why we can't have replicas on the same machine? The essence of replicas is to split them between nodes, if we only have one node then we can't have replicas, this is why we will set replicas number to 0, otherwise the Cluster will never has GREEN health status.
+
+Big inconvenient with single-node configuration is no replicas will be created this means in case of takeover or failure of one or more shards there will not be replicas to patch this broken shards. 
+
+Why we can't have replicas on the same machine? The essence of replicas is to split them between nodes, if we only have one node then we can't have replicas, this is why we will set replicas number to 0, otherwise the Cluster will never has GREEN health status.
 
 Another consideration is be aware of the amount RAM usage that Elasticsearch supposes. Frecuently Elasticsearch is meant to have 50% of total machine RAM but in single-node configuration we will consider the RAM usage of Logstash, OSSEC, Kibana etc... thats why we not recommend in a single-node configuration set Elasticsearch RAM to the half of total RAM.
 
@@ -378,6 +381,7 @@ Open Elasticsearch configuration file::
  $ sudo vi /etc/elasticsearch/elasticsearch.yml
 
 Set up Cluster Name and Node Name, remember that these settings ** HAS TO **  match with Logstash configuration file :: 
+
  cluster.name: ossec
  node.name: ossec_node1
 
@@ -439,9 +443,11 @@ Open Elasticsearch configuration file ::
 
  $ sudo vi /etc/elasticsearch/elasticsearch.yml
 
-Modify mklockall setting ::  
+
+Modify mklockall setting, set it to true ::  
 
   bootstrap.mlockall: true
+
 
 **Save and exit elasticsearch.yml file** 
 
@@ -450,11 +456,13 @@ Open and edit limits.conf file ::
 
  $ sudo vi /etc/security/limits.conf
 
+
 Add this line at end of file:: 
       
   elasticsearch   -       memlock         unlimited
 
- **Save and exit limits.conf file** 
+
+**Save and exit limits.conf file** 
  
 Open and edit Elasticsearch init file ::
 
@@ -468,7 +476,9 @@ Find MAX_LOCKED_MEMORY and set it to unlimited ::
 
  MAX_LOCKED_MEMORY=unlimited
 
- **Save and exit /etc/default/elasticsearch file** 
+
+**Save and exit /etc/default/elasticsearch file** 
+
 
 Restart Elasticsearch ::
 
