@@ -554,9 +554,9 @@ untarit tar xvf kibana-*.tar.gz
 """"""""""""""""""""""
 
 - vi /opt/kibana/config/kibana.yml
-  - # The host to bind the server to.
-    host: "127.0.0.1" // 
-  - # The Elasticsearch instance to use for all your queries.
+- # The host to bind the server to.
+host: "127.0.0.1" // 
+- # The Elasticsearch instance to use for all your queries.
 elasticsearch_url: "http://127.0.0.1:9200" // URL of elasticsearch hosts, we need to set here the same IP we previously set on elasticsearch bind_host config
 
 
@@ -565,11 +565,11 @@ elasticsearch_url: "http://127.0.0.1:9200" // URL of elasticsearch hosts, we nee
 """"""""""""""""""""""
 
 - Accesos to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern:
-    Kibana will ask you to "Configure an index pattern", then do the following: 
-      Check "Use event times to create index names"
-      Index pattern interval: Daily
-      Index name or pattern: [ossec-]YYYY.MM.DD
-  ** NOTE!: Kibana will find elasticsearch index with pattern "ossec-yyyy.mm.dd" you need to generate alerts from ossec BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on pourpuse several times.
+Kibana will ask you to "Configure an index pattern", then do the following: 
+Check "Use event times to create index names"
+Index pattern interval: Daily
+Index name or pattern: [ossec-]YYYY.MM.DD
+** NOTE!: Kibana will find elasticsearch index with pattern "ossec-yyyy.mm.dd" you need to generate alerts from ossec BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on pourpuse several times.
 
 5.4 Wazuh extensions
 """"""""""""""""""""""
