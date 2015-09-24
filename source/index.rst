@@ -1,9 +1,9 @@
-Welcome to WazuhDocs's!
+OSSEC HIDS Installation guide!
 =======================
 
-.. topic:: OSSEC Wazuh
+.. topic:: OSSEC HIDS - Wazuh
 
-   Welcome to Wazuh-OSSEC installation and deploy guide.
+   Welcome to OSSEC installation and deploy guide.
 
    Here you will find how to deploy an entire architecture from OSSEC repositories to Kibana Dashboards. 
 
