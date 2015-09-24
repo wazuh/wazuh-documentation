@@ -328,23 +328,264 @@ Restart and we are finish to configure Logstash Forwarder ::
 
 4. Elasticsearch
 ^^^^^^^^^^^^^^^^^^^
+
 4.1 Introduction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+**Elasticsearch 1.7 version**
+
+We recommend to install Elasticsearch from official repositories, inside next link you will find YUM and DEB packages.
+
+`Elastic.co: Install Elasticsearch from repositories <https://www.elastic.co/guide/en/elasticsearch/reference/1.7/setup-repositories.html>`_
+
+The followings steps are oriented to build a single-node Elasticsearch cluster but remember, Elasticsearch works better with a minium of three nodes splits in differents machines, this way Elastic can balance loads and split shards and replicas.
+Big inconvenient with single-node configuration is no replicas will be created this means in case of takeover or failure of one or more shards there will not be replicas to patch this broken shards. Why we can't have replicas on the same machine? The essence of replicas is to split them between nodes, if we only have one node then we can't have replicas, this is why we will set replicas number to 0, otherwise the Cluster will never has GREEN health status.
+
+Another consideration is be aware of the amount RAM usage that Elasticsearch supposes. Frecuently Elasticsearch is meant to have 50% of total machine RAM but in single-node configuration we will consider the RAM usage of Logstash, OSSEC, Kibana etc... thats why we not recommend in a single-node configuration set Elasticsearch RAM to the half of total RAM.
+
+
+
 
 4.2 Installing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
+Install DEB packages for example to an Ubuntu SO:
+
+Download and install the Public Signing Key: ::
+
+   $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+Add the repository definition to your /etc/apt/sources.list file ::
+
+   $ echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-1.7.list
+
+Run sudo apt-get update and the repository is ready for use. You can install it with ::
+
+   $ sudo apt-get update && sudo apt-get install elasticsearch
+
+Install as service::
+
+  $ sudo update-rc.d elasticsearch defaults 95 10
+
+
 4.3 Basic configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-4.4 Extra configuration
+We are not going to explain all the Elasticsearch configuration options, you can find them at officcial docs. We explain basic configuration and some tweaks to improve performance.
+
+Open Elasticsearch configuration file::
+
+ $ sudo vi /etc/elasticsearch/elasticsearch.yml
+
+Set up Cluster Name and Node Name, remember that these settings ** HAS TO **  match with Logstash configuration file :: 
+ cluster.name: ossec
+ node.name: ossec_node1
+
+Set up network configuration options
+
+Elasticsearch IP Address server, in single-node case should be localhost, 127.0.0.1 or 0.0.0.0 ::
+
+ network.bind_host: 127.0.0.1
+
+Elasticsearch publish IP Address, how the network will discover our Elasticsearch server ::
+
+ network.publish_host: 127.0.0.1
+
+publish_host and bind_host variables, this variable set both of them at same time same value ::
+
+ network.host: 127.0.0.1
+
+Elasticsearch uses by default port 9200 for the API queries and ports 9300 to 9400 to network nodes discovering.
+
+HTTP Elasticsearch API PORT, default 9200::
+
+ http.port: 9200
+
+Improve network load and prevent non-desired nodes to join our clusters :: 
+
+ discovery.zen.ping.multicast.enabled: false
+ discovery.zen.ping.timeout: 15s
+
+Single-node shards/replicas configuration ::
+
+  index.number_of_shards: 1
+  index.number_of_replicas: 0
+
+Multinode shards/replicas configuration ::
+
+  index.number_of_shards: 4 
+  index.number_of_replicas: 1
+
+Multinode: We set before multicast ping to false so we need to manually specify the nodes connections ::
+
+  discovery.zen.ping.unicast.hosts: ["host1", "host2:port"] 
+ 
+
+**Save and exit elasticsearch.yml file** 
+
+Start Elasticsearch ::
+
+  $ sudo /etc/init.d/elasticsearch start
+
+
+4.4 Extra performance configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-4.5 Wazuh custom templates
+Some tweats to optimize Elasticsearch general performance throught RAM configurations.
+
+Basically we will try to lock Elasticsearch RAM minium and maximum amount, this way we can avoid the swapping, Elasticsearch **feels** so bad about swapping, everytime Elasticsearch needs to swap query and fecth queries multiply per ten their load time.
+
+Open Elasticsearch configuration file ::
+
+ $ sudo vi /etc/elasticsearch/elasticsearch.yml
+
+Modify mklockall setting ::  
+
+  bootstrap.mlockall: true
+
+**Save and exit elasticsearch.yml file** 
+
+
+Open and edit limits.conf file ::
+
+ $ sudo vi /etc/security/limits.conf
+
+Add this line at end of file:: 
+      
+  elasticsearch   -       memlock         unlimited
+
+ **Save and exit limits.conf file** 
+ 
+Open and edit Elasticsearch init file ::
+
+ $ sudo vi /etc/default/elasticsearch
+
+Find ES_HEAP_SIZE and set it to 50% of your total RAM, remember, if you are running single-node architecture, set it to 40% ::
+
+ES_HEAP_SIZE=1g
+
+Find MAX_LOCKED_MEMORY and set it to unlimited ::
+
+ MAX_LOCKED_MEMORY=unlimited
+
+ **Save and exit /etc/default/elasticsearch file** 
+
+Restart Elasticsearch ::
+
+  $ sudo /etc/init.d/elasticsearch start
+
+4.5 Cluster health
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
+
+We will run some tests to see if Elasticsearch is working properly.
+
+Elasticsearch is running ::
+
+  $ curl -XGET localhost:9200
+
+Expected result ::
+
+  {
+    "status" : 200,
+    "name" : "ossec_node1",
+    "cluster_name" : "ossec",
+    "version" : {
+      "number" : "1.7.2",
+      "build_hash" : "e43676b1385b8125d647f593f7202acbd816e8ec",
+      "build_timestamp" : "2015-09-14T09:49:53Z",
+      "build_snapshot" : false,
+      "lucene_version" : "4.10.4"
+    },
+    "tagline" : "You Know, for Search"
+  }
+
+Elasticsearch Cluster is in a good health ::
+
+  $ curl -XGET 'http://localhost:9200/_cluster/health?pretty=true'
+
+Expected result ::
+
+  {
+    "cluster_name" : "ossec",
+    "status" : "green",
+    "timed_out" : false,
+    "number_of_nodes" : 2,
+    "number_of_data_nodes" : 1,
+    "active_primary_shards" : 0,
+    "active_shards" : 0,
+    "relocating_shards" : 0,
+    "initializing_shards" : 0,
+    "unassigned_shards" : 0,
+    "delayed_unassigned_shards" : 0,
+    "number_of_pending_tasks" : 0,
+    "number_of_in_flight_fetch" : 0
+  }
+  
+
+4.6 Wazuh custom templates
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+ curl -XPUT "http://localhost:9200/_template/ossec/" -d "@/home/snaow/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json"
+      Should return: {"acknowledged":true}
 
 5. Kibana
 ^^^^^^^^^^^^^^^^^^^
+
+**Kibana 4.1.2 version**
+
+`Kibana official website <https://www.elastic.co/downloads/kibana>`_
+
+Time to display all the results on one....
+
+5.1 Installing
+""""""""""""""""""""""
+
+   $ cd ~
+   $ mkdir ossec_tmp && cd ossec_tmp
+   $ wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
+ untarit tar xvf kibana-*.tar.gz
+  - sudo mkdir -p /opt/kibana
+  - sudo cp -R kibana-4*/* /opt/kibana/
+  - Installing as a service:
+    -  cp /home/snaow/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
+
+
+5.2 Settings
+""""""""""""""""""""""
+
+- vi /opt/kibana/config/kibana.yml
+  - # The host to bind the server to.
+    host: "127.0.0.1" // 
+  - # The Elasticsearch instance to use for all your queries.
+elasticsearch_url: "http://127.0.0.1:9200" // URL of elasticsearch hosts, we need to set here the same IP we previously set on elasticsearch bind_host config
+
+
+
+5.3 Configuring
+""""""""""""""""""""""
+
+- Accesos to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern:
+    Kibana will ask you to "Configure an index pattern", then do the following: 
+      Check "Use event times to create index names"
+      Index pattern interval: Daily
+      Index name or pattern: [ossec-]YYYY.MM.DD
+  ** NOTE!: Kibana will find elasticsearch index with pattern "ossec-yyyy.mm.dd" you need to generate alerts from ossec BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on pourpuse several times.
+
+5.4 Wazuh extensions
+""""""""""""""""""""""
+
+cp /home/snaow/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
+
+Run kibana service: sudo service kibana4 start
+To tst: Accesos to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern:
+
+  - Install wazuh custom dashboards, visualization and searches for OSSEC and PCI/CIS Compliance
+    Go to Kibana, press at top bar on Settings, then Objects, then press the button Import and select wazuh-ossec custom pci/cis compliance dashboards, the file is in /tmpfolder/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
+
+
+Overall
+-------------------------
+
 
 Troubleshooting
 -------------------------
