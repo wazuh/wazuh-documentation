@@ -462,7 +462,7 @@ Open and edit Elasticsearch init file ::
 
 Find ES_HEAP_SIZE and set it to 50% of your total RAM, remember, if you are running single-node architecture, set it to 40% ::
 
-ES_HEAP_SIZE=1g
+ ES_HEAP_SIZE=1g
 
 Find MAX_LOCKED_MEMORY and set it to unlimited ::
 
@@ -540,14 +540,14 @@ Time to display all the results on one....
 5.1 Installing
 """"""""""""""""""""""
 
-   $ cd ~
-   $ mkdir ossec_tmp && cd ossec_tmp
-   $ wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
- untarit tar xvf kibana-*.tar.gz
-  - sudo mkdir -p /opt/kibana
-  - sudo cp -R kibana-4*/* /opt/kibana/
-  - Installing as a service:
-    -  cp /home/snaow/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
+$ cd ~
+$ mkdir ossec_tmp && cd ossec_tmp
+$ wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
+untarit tar xvf kibana-*.tar.gz
+- sudo mkdir -p /opt/kibana
+- sudo cp -R kibana-4*/* /opt/kibana/
+- Installing as a service:
+-  cp /home/snaow/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
 
 
 5.2 Settings
