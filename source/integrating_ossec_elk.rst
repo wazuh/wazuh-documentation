@@ -3,13 +3,15 @@ Integrating OSSEC-ELK Stack
 
 Introduction
 --------------------
-Welcome to OSSEC-ELK Stack integration guide by Wazuh, throught some simple steps you will set up an entire ELK Stack architecture to monitor, collect, process, index and display your OSSEC Alerts.
+Welcome to OSSEC-ELK Stack integration guide, throught some simple steps you will set up an entire ELK Stack architecture to monitor, collect, process, index and display your OSSEC Alerts.
+
+`OSSEC Official Website <http://www.ossec.net/>`_
 
 The full guide is based on OSSEC Wazuh version, we contribute with OSSEC community by developing extended funcionality.
 
 These are some features we are talking about:
 
-* **OSSEC-Wazuh Ruleset**
+* **OSSEC Ruleset**
    Weekly OSSEC Ruleset updates
 * **OSSEC PCI DSS 3.0 & CIS Requirements**
    Detailed groups and Benchmarks (ex: 1.4 Debian Linux Benchmark, 11.4 PCI...)
@@ -61,11 +63,7 @@ Search & Analyze Data in Real Time. Distributed, scalable, and highly available.
 
 `Kibana Official Website <https://www.elastic.co/products/kibana/>`_
 
-Kibana is a friendly WEB interface to explore all elasticsearch indexes, Kibana support custom dashboard creations, in our case Security Compliance dashboards and OSSEC high risk security alerts.
-
-**Scaling to large deployments**
-
-To multi-node and high availability architectures we will use some extra tools like Logstash-Forwarder or Redis Server.
+Kibana is a friendly WEB interface to explore all elasticsearch indexes, Kibana support custom dashboard creation, in our case Security Compliance dashboards and OSSEC high risk security alerts.
 
 
 Installing
@@ -79,35 +77,37 @@ Considerations
 ^^^^^^^^^^^^^^^^^^^
 **Single/multiple host configurations**
 
-The entire guide is orientated to single-node configuration but you still can build this architecture up on differentes servers, it is recommended to split ELK Server from OSSEC Manager server, for example, four differentes hosts: 
+The entire guide is orientated to single-node configuration but you still can build this architecture on differents servers, it is recommended to split ELK Server from OSSEC Manager server.
 
-* Host 1: OSSEC Manager+Logstash Forwarder
-* Host 2: Logstash server + Elasticsearch + Kibana
-* Host 3: Node 2
-* Host 3: Node 3
+For example, four differents hosts: 
 
-We will give you differents configuration files depends on the architecture you choose.
+* *Host 1:* OSSEC Manager+Logstash Forwarder
+* *Host 2:* Logstash server + Elasticsearch + Kibana
+* *Host 3:* Node 2
+* *Host 3:* Node 3
+
+We will give you differents configuration files depending on the architecture you need.
 
 Remember
 
-* Single-host: All the tools on same machine
-* Multi-host: Tools split-up on differents machines.
+* *Single-host:* All the tools on **same** machine
+* *Multi-host:* Tools split-up on **differents** machines.
 
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
-First of all, download the whole OSSEC-Wazuh repository from Github which includes OSSEC HIDS latest version (2.8.2 base), Wazuh enhace capabilites and ELK Stack configuration files.
+First of all, download the whole OSSEC-Wazuh repository from Github which includes OSSEC HIDS latest version (2.8.2 base), Wazuh enhaced capabilites and ELK Stack configuration files.
 
 1.1 Installation
 """"""""""""""""""
 
-Create a folder on your prefered home directory and download the repository like this:
+Create a folder on your prefered home directory and download the repository.
 
-Go home folder, create tmp folder, clone the repository ::
+Go home folder, create temporal folder, clone the repository ::
 
-   $ cd ~
+   ``$ cd ~
    $ mkdir ossec_tmp && cd ossec_tmp
    $ git clone https://github.com/wazuh/ossec-wazuh.git
-   $ cd ossec-wazuh
+   $ cd ossec-wazuh``
 
 Now we have the OSSEC source code on our machine, let's compile it. We need development and packages tools like g++, gcc etc... if it is needed, install them.
 
