@@ -113,7 +113,7 @@ Go home folder, create temporal folder, clone the repository ::
 
 Now we have the OSSEC source code on our machine, let's compile it. We need development and packages tools like g++, gcc etc... if it is needed, install them.
 
-Finally compile and install OSSEC Manager by entering ::
+Finally compile and install **OSSEC Manager** ::
 
    $ sudo ./install
 
@@ -193,9 +193,9 @@ Update the repository and install **Logstash** ::
 
 Logstash configuration is based on three differents plugins: *input*, *filter* and *output*.
 
-We have prepared thoose three plugins configurations to fit OSSEC/ELK Stack installation (and security compliance extensions), those files are avaiable on the public repository and at the website.
+We have prepared those three plugins configurations to fit OSSEC/ELK Stack installation (and security compliance extensions), those files are avaiable on the public repository and at the website.
 
-Depend on your architecture Logstash need to be configured to work gathering files from **same machine** (local, single-host) or waiting log shipments from ** external network machines ** (Logstash-Forwarder, multi-host) at 5000 UDP port, in this last case the configurations includes SSL Certificaties to authentify and encrypt the messages exchanged.
+Depend on your architecture Logstash need to be configured to work gathering files from **same machine** (local, single-host) or waiting log shipments from **external network machines** (Logstash-Forwarder, multi-host) at 5000 UDP port, in this last case the configurations includes SSL Certificaties to authentify and encrypt the messages exchanged.
 
 Here is a example what we are talking about.
 
@@ -236,6 +236,8 @@ In both cases edit *01-ossec.conf* or *01-ossec-singlehost.conf* file if you nee
   elasticsearch {
            host => "your_elasticsearch_server_ip"
 
+
+And remember to open **5000 UDP PORT** if you are going to deploy multi-host architecture.
 
 **GeoIP DB** 
 
@@ -339,14 +341,14 @@ Open Logstash Forwarder configuration file, we need to modify some settings to a
 
  $ sudo vi /etc/logstash-forwarder.conf
 
-Under the network section, add the following lines into the file, substituting in your Logstash Server IP address for localhost:5043 and uncomment the line ::
+At network section, modify *servers* array, add your **Logstash Server IP address** and uncomment the line ::
 
  # A list of downstream servers listening for our messages.
  # logstash-forwarder will pick one at random and only switch if
  # the selected one appears to be dead or unresponsive
  "servers": [ "your_logstash_server_ip:5000" ],
 
-Above thoose lines you will fined the CA configuration, edit with our CA path and uncomment the line ::
+Below those lines you will fined the CA configuration, edit with our CA path and uncomment the line ::
 
  # The path to your trusted ssl CA file. This is used
  # to authenticate your downstream server.
@@ -358,7 +360,7 @@ Uncomment timeout option line for performance reasons ::
  # will connect to a server chosen at random from the servers list.
  "timeout": 15
 
-Finally set LogstashForwarder to fetch **OSSEC ALERTS FILE**, modify following lines like this ::
+Finally set LogstashForwarder to fetch **OSSEC ALERTS FILE**, modify list of files and fields to look like this ::
 
  # The list of files configurations
  "files": [
@@ -383,17 +385,17 @@ Restart and we are finish to configure Logstash Forwarder ::
 
 **Elasticsearch 1.7 version**
 
-We recommend to install Elasticsearch from official repositories, inside next link you will find YUM and DEB packages.
+We recommend to install **Elasticsearch** from official repositories, inside next link you will find YUM and DEB packages.
 
 `Elastic.co: Install Elasticsearch from repositories <https://www.elastic.co/guide/en/elasticsearch/reference/1.7/setup-repositories.html>`_
 
-The followings steps are oriented to build a single-node Elasticsearch cluster but remember, Elasticsearch works better with a minium of three nodes splits in differents machines, this way Elastic can balance loads and split shards and replicas.
+The followings steps are oriented to build a *single-node* Elasticsearch cluster but remember, Elasticsearch works much better with a minimum of three nodes splited in differents machines, this way Elastic can balance loads and locate shards and replicas.
 
-Big inconvenient with single-node configuration is no replicas will be created this means in case of takeover or failure of one or more shards there will not be replicas to patch this broken shards. 
+Big inconvenient with single-node configuration is **no replicas will be created**, this means in case of a takeover or failure of one or more shards there will not be replicas to patch this broken shards. 
 
-Why we can't have replicas on the same machine? The essence of replicas is to split them between nodes, if we only have one node then we can't have replicas, this is why we will set replicas number to 0, otherwise the Cluster will never has GREEN health status.
+Why we can't have replicas on the same machine? The essence of replicas is to spread themself between nodes, if we only have one node then we can't have replicas, this is why we will set replicas number to 0, otherwise the Cluster will never has **GREEN** health status.
 
-Another consideration is be aware of the amount RAM usage that Elasticsearch supposes. Frecuently Elasticsearch is meant to have 50% of total machine RAM but in single-node configuration we will consider the RAM usage of Logstash, OSSEC, Kibana etc... thats why we not recommend in a single-node configuration set Elasticsearch RAM to the half of total RAM.
+Another consideration is be aware of the amount **RAM usage** that Elasticsearch supposes. Frecuently Elasticsearch is meant to have 50% of total machine RAM but in *single-node* configuration we will consider the RAM usage of Logstash, OSSEC, Kibana etc... that's why we not recommend in a single-node configuration set Elasticsearch RAM to the half of total RAM.
 
 
 
@@ -403,7 +405,7 @@ Another consideration is be aware of the amount RAM usage that Elasticsearch sup
 
 Install DEB packages for example to an Ubuntu SO:
 
-Download and install the Public Signing Key: ::
+Download and install the Public Signing Key ::
 
    $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 
@@ -415,7 +417,7 @@ Run sudo apt-get update and the repository is ready for use. You can install it 
 
    $ sudo apt-get update && sudo apt-get install elasticsearch
 
-Install as service::
+Install as service ::
 
   $ sudo update-rc.d elasticsearch defaults 95 10
 
@@ -423,53 +425,53 @@ Install as service::
 4.3 Basic configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-We are not going to explain all the Elasticsearch configuration options, you can find them at officcial docs. We explain basic configuration and some tweaks to improve performance.
+We are not going to explain all the Elasticsearch configuration options, you can find them at officcial docs. We will explain basic configuration and some tweaks to improve performance.
 
-Open Elasticsearch configuration file::
+Open Elasticsearch configuration file ::
 
  $ sudo vi /etc/elasticsearch/elasticsearch.yml
 
-Set up Cluster Name and Node Name, remember that these settings ** HAS TO **  match with Logstash configuration file :: 
+Set up **Cluster Name** and **Node Name**, remember that these settings ** HAS TO **  match with Logstash configuration file (in case you wan't to change cluster name remember to change it on Logstash output plugin) :: 
 
  cluster.name: ossec
  node.name: ossec_node1
 
 Set up network configuration options
 
-Elasticsearch IP Address server, in single-node case should be localhost, 127.0.0.1 or 0.0.0.0 ::
+Elasticsearch **IP server address**, in *single-node* case should be localhost, 127.0.0.1 or 0.0.0.0 ::
 
  network.bind_host: 127.0.0.1
 
-Elasticsearch publish IP Address, how the network will discover our Elasticsearch server ::
+Elasticsearch **publish IP Address**, how the network will discover our Elasticsearch server ::
 
  network.publish_host: 127.0.0.1
 
-publish_host and bind_host variables, this variable set both of them at same time same value ::
+*publish_host* and *bind_host* variables, this variable set both of them at same time same value ::
 
  network.host: 127.0.0.1
 
-Elasticsearch uses by default port 9200 for the API queries and ports 9300 to 9400 to network nodes discovering.
+Elasticsearch uses by default **port 9200** for the API queries and ports **9300 to 9400** to network nodes discovering. Remember to open the ports in your router/firewall settings.
 
 HTTP Elasticsearch API PORT, default 9200::
 
  http.port: 9200
 
-Improve network load and prevent non-desired nodes to join our clusters :: 
+*Improve network* load and prevent non-desired nodes to join our clusters :: 
 
  discovery.zen.ping.multicast.enabled: false
  discovery.zen.ping.timeout: 15s
 
-Single-node shards/replicas configuration ::
+**Single-node** shards/replicas configuration ::
 
   index.number_of_shards: 1
   index.number_of_replicas: 0
 
-Multinode shards/replicas configuration ::
+**Multinode** shards/replicas configuration ::
 
   index.number_of_shards: 4 
   index.number_of_replicas: 1
 
-Multinode: We set before multicast ping to false so we need to manually specify the nodes connections ::
+**Multinode**: We set before multicast ping to false so we need to manually specify the nodes connections ::
 
   discovery.zen.ping.unicast.hosts: ["host1", "host2:port"] 
  
@@ -484,16 +486,16 @@ Start Elasticsearch ::
 4.4 Extra performance configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Some tweats to optimize Elasticsearch general performance throught RAM configurations.
+Some tweats to *optimize* Elasticsearch general performance throught RAM configurations.
 
-Basically we will try to lock Elasticsearch RAM minium and maximum amount, this way we can avoid the swapping, Elasticsearch **feels** so bad about swapping, everytime Elasticsearch needs to swap query and fecth queries multiply per ten their load time.
+Basically we will try to lock Elasticsearch RAM minium and maximum amount, this way we can avoid the swapping, Elasticsearch feels so bad about swapping, everytime Elasticsearch needs to swap query and fecth queries **multiply per ten their load time**.
 
 Open Elasticsearch configuration file ::
 
  $ sudo vi /etc/elasticsearch/elasticsearch.yml
 
 
-Modify mklockall setting, set it to true ::  
+Modify **mklockall** setting, set it to true ::  
 
   bootstrap.mlockall: true
 
@@ -501,12 +503,12 @@ Modify mklockall setting, set it to true ::
 **Save and exit elasticsearch.yml file** 
 
 
-Open and edit limits.conf file ::
+Open and edit **limits.conf** file ::
 
  $ sudo vi /etc/security/limits.conf
 
 
-Add this line at end of file:: 
+Add this line at bottom of the file :: 
       
   elasticsearch   -       memlock         unlimited
 
@@ -517,11 +519,11 @@ Open and edit Elasticsearch init file ::
 
  $ sudo vi /etc/default/elasticsearch
 
-Find ES_HEAP_SIZE and set it to 50% of your total RAM, remember, if you are running single-node architecture, set it to 40% ::
+Find **ES_HEAP_SIZE** and set it to *50%* of your total RAM, remember, if you are running single-node architecture, set it to *40%* ::
 
  ES_HEAP_SIZE=1g
 
-Find MAX_LOCKED_MEMORY and set it to unlimited ::
+Find **MAX_LOCKED_MEMORY** and set it to unlimited ::
 
  MAX_LOCKED_MEMORY=unlimited
 
@@ -533,12 +535,13 @@ Restart Elasticsearch ::
 
   $ sudo /etc/init.d/elasticsearch start
 
+
 4.5 Cluster health
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-We will run some tests to see if Elasticsearch is working properly.
+We will run some tests to see if Elasticsearch is *working properly*.
 
-Elasticsearch is running ::
+Elasticsearch is **running** ::
 
   $ curl -XGET localhost:9200
 
@@ -558,7 +561,7 @@ Expected result ::
     "tagline" : "You Know, for Search"
   }
 
-Elasticsearch Cluster is in a good health ::
+Elasticsearch Cluster is in a **good health** ::
 
   $ curl -XGET 'http://localhost:9200/_cluster/health?pretty=true'
 
@@ -584,11 +587,11 @@ Expected result ::
 4.6 Custom template
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-It's time to integrated OSSEC Wazuh custom mapping. It is consist in a Elasticsearch template which has already mapped all the posible OSSEC fields, this mapping is adjusted to fit the special Wazuh OSSEC JSON Output and Logstash filters and it is prepared to display friendly fields name on Kibana.
+It's time to integrate OSSEC Wazuh custom mapping. It is consist in a Elasticsearch template which has already mapped all the posible OSSEC fields, the mapping is adjusted to fit the special Wazuh OSSEC JSON Output and Logstash filters and it is prepared to display friendly fields name on Kibana.
 
-This template allow us the posterior creation of Kibana dashboards.
+This template allow us the posterior creation of **Kibana dashboards**.
 
-Add the template by a CURL request to Elastic API ::
+Add the template by a *CURL* request to Elastic API ::
 
  $ curl -XPUT "http://localhost:9200/_template/ossec/" -d "@~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json"
       
@@ -608,33 +611,33 @@ To make sure it is added you can check for actual template load on Elastic ::
 
 `Kibana official website <https://www.elastic.co/downloads/kibana>`_
 
-The final step! Finally we will able to see the whole architecture results in a web display ! I can tell you it is worth it all the previous steps when you see the Kibana interface working at real time.
+**The final step!** Finally we will able to see the whole architecture results in a web display ! I can tell you it is worth it all the previous steps when you see the Kibana interface working at real time.
 
-Remember Kibana it is only a web display for Elasticsearch, Kibana won't let you add or update Elastic documents, it is only for viewing and analyting porpuses.
+Remember Kibana it is only a web display for Elasticsearch, Kibana *won't let you add or update Elastic documents*, it is only for viewing and analyting porpuses.
 
-Okey, Let's do this!
+Okay, Let's do this!
 
 5.1 Installing
 """"""""""""""""""""""
 
-Kibana is the only tool doesn't have proper repositories, that's mean we can only get and install it by downloading the tar compressed files and after that install some scripts to turn Kibana into a proper Linux service.
+Kibana is the only tool *doesn't have proper repositories*, that's mean we can only get and install it by downloading the tar compressed files and after that install some scripts to turn Kibana into a proper Linux service.
 
-Go to your ossec tmp folder and download Kibana there :: 
+Go to your OSSEC tmp folder and **download** Kibana there :: 
 
  $ sudo cd ~/ossec_tmp
  $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
 
-Untar the file and copy the files to a more proper directory ::
+**Untar** the file and copy the files to a more proper directory ::
 
  $ sudo tar xvf kibana-*.tar.gz
  $ sudo mkdir -p /opt/kibana
  $ sudo cp -R kibana-4*/* /opt/kibana/
 
-To run Kibana as a service we will use a script created apparently by bsmith, thanks you. You can copy it from extensions kibana ossec wazuh folder :: 
+To run **Kibana as a service** we will use a script created apparently by *bsmith*, thanks you. Copy it from extensions kibana ossec wazuh folder :: 
 
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
 
-Then you should give it execution permissions and add to update rc.d configuration (Debian Linux) ::
+Then you should give it *execution permissions* and add to update rc.d configuration (Debian Linux) ::
 
  $ sudo chmod +x /etc/init.d/kibana4
  $ sudo update-rc.d kibana4 defaults 96 9
@@ -644,7 +647,7 @@ Then you should give it execution permissions and add to update rc.d configurati
 
 Time to set up our Kibana configuration.
 
-Open kibana.yml configuration file and make some changes ::
+Open *kibana.yml* configuration file and make some changes ::
 
  $ sudo vi /opt/kibana/config/kibana.yml
 
@@ -681,7 +684,7 @@ Now we need to create a Kibana index, Kibana will do it automatically but we nee
 5.4 Extensions
 """"""""""""""""""""""
 
-Wazuh extensions consist in two differents files:
+Wazuh extensions consist in **two** differents files:
 
 * index.js: Kibana AngularJS Index
 
@@ -691,7 +694,7 @@ We tune up this index to hide non-useful fields, view only mode and PCI Requirem
 
 Custom dashboards for OSSEC Alerts, GeoIP Maps, File integrity, PCI Requirements & CIS Benchmarks.
 
-So, proceed to copy index.js to Kibana folder ::
+So, proceed to copy *index.js* to Kibana folder ::
 
  $ sudo cp cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
 
@@ -701,7 +704,7 @@ Now you can import the custom dashboards, access to Kibana WEB on your browser a
 - Click on Objects
 - Then click the button **Import** and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
 
-That's all! Refresh Kibana page and load the recently and fresh imported Dashboards.
+That's all! Refresh Kibana page and load the recently and fresh **imported Dashboards**.
 
 .. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
 
