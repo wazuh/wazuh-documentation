@@ -532,7 +532,7 @@ Expected result ::
   }
   
 
-4.6 Wazuh custom templates
+4.6 Custom template
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 It's time to integrated OSSEC Wazuh custom mapping. It is consist in a Elasticsearch template which has already mapped all the posible OSSEC fields, this mapping is adjusted to fit the special Wazuh OSSEC JSON Output and Logstash filters and it is prepared to display friendly fields name on Kibana.
@@ -627,7 +627,7 @@ Now we need to create a Kibana index, Kibana will do it automatically but we nee
 
 .. note:: Kibana will search Elasticsearch index name pattern "ossec-yyyy.mm.dd" you need to generate alerts from OSSEC BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on purpose several times.
 
-5.4 Wazuh extensions
+5.4 Extensions
 """"""""""""""""""""""
 
 Wazuh extensions consist in two differents files:
@@ -655,12 +655,17 @@ That's all! Refresh Kibana page and load the recently and fresh imported Dashboa
 .. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
 
 
-Overall
+Conclusions
 -------------------------
+
 
 
 Troubleshooting
 -------------------------
+
+
+
+
 .. toctree::
    :maxdepth: 2
 
