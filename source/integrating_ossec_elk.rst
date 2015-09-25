@@ -231,7 +231,7 @@ Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files ::
 
   $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
-In both cases edit *01-ossec.conf* or *01-ossec-singlehost.conf * file if you need your Elasicsearch Serrver IP ::
+In both cases edit *01-ossec.conf* or *01-ossec-singlehost.conf* file if you need your Elasicsearch Serrver IP ::
 
   elasticsearch {
            host => "your_elasticsearch_server_ip"
@@ -301,7 +301,7 @@ Finally we have our Logstash certificate and *key saved* on /etc/pki/tls/certs a
 2.3 Copy SSL Certificate
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-On **Logstash Server**, copy the SSL Certificate we **just created* to Logstash-Forwarder machine (substitute the client server's IP address, and your own login)::
+On **Logstash Server**, copy the SSL Certificate we **just created** to Logstash-Forwarder machine (substitute the client server's IP address, and your own login)::
 
  scp /etc/pki/tls/certs/logstash-forwarder.crt user@server_private_IP:/tmp
 
@@ -669,12 +669,12 @@ Now we need to create a Kibana index, Kibana will do it automatically but we nee
 
 - Access to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern
 - Kibana will ask you to "Configure an index pattern", then do the following: 
- - Check "Use event times to create index names"
- - Index pattern interval: Daily
- - Index name or pattern: **[ossec-]YYYY.MM.DD**
- - On **Time-field name** list select **@timestamp** option
- - Click on Create button
- - Go to Discover tap on top bar buttons.
+- Check "Use event times to create index names"
+- Index pattern interval: Daily
+- Index name or pattern: **[ossec-]YYYY.MM.DD**
+- On **Time-field name** list select **@timestamp** option
+- Click on Create button
+- Go to Discover tap on top bar buttons.
 
 .. note:: Kibana will search Elasticsearch index name pattern "ossec-yyyy.mm.dd" you need to generate alerts from OSSEC BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on purpose several times.
 
