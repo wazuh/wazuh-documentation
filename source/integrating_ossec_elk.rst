@@ -581,7 +581,7 @@ Untar the file and copy the files to a more proper directory ::
  $ sudo mkdir -p /opt/kibana
  $ sudo cp -R kibana-4*/* /opt/kibana/
 
-To run Kibana as a service we will use a script created apparently by bsmith@the408.com, thanks you. You can copy it from extensions kibana ossec wazuh folder :: 
+To run Kibana as a service we will use a script created apparently by bsmith, thanks you. You can copy it from extensions kibana ossec wazuh folder :: 
 
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
 
@@ -604,7 +604,7 @@ Change host ip address if you need it, normally you won't change this ::
  # The host to bind the server to.
  host: "127.0.0.1"
 
-Change Elasticsearch URL, this has to be identital to the URL we set on Elasticsearch configuration options on "network.bind_host" or "network.host"
+Change Elasticsearch URL, this has to be identital to the URL we set on Elasticsearch configuration options on "network.bind_host" or "network.host" ::
 
  # The Elasticsearch instance to use for all your queries.
  elasticsearch_url: "http://127.0.0.1:9200"
@@ -620,9 +620,9 @@ Now we need to create a Kibana index, Kibana will do it automatically but we nee
 
 - Access to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern
 - Kibana will ask you to "Configure an index pattern", then do the following: 
- * Check "Use event times to create index names"
- * Index pattern interval: Daily
- * Index name or pattern: **[ossec-]YYYY.MM.DD**
+ -  Check "Use event times to create index names"
+ -  Index pattern interval: Daily
+ -  Index name or pattern: **[ossec-]YYYY.MM.DD**
 
 
 .. note:: Kibana will search Elasticsearch index name pattern "ossec-yyyy.mm.dd" you need to generate alerts from OSSEC BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on purpose several times.
@@ -636,7 +636,7 @@ Wazuh extensions consist in two differents files:
 
 We tune up this index to hide non-useful fields, view only mode and PCI Requirements tooltip descriptions.
 
-* kibana-ossecwazuh-dashboards.json: 
+* kibana-ossecwazuh-dashboards.json
 
 Custom dashboards for OSSEC Alerts, GeoIP Maps, File integrity, PCI Requirements & CIS Benchmarks.
 
