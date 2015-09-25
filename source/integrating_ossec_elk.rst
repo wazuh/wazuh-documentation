@@ -81,10 +81,12 @@ The entire guide is orientated to single-node configuration but you still can bu
 
 For example, four differents hosts: 
 
-* *Host 1:* OSSEC Manager+Logstash Forwarder
-* *Host 2:* Logstash server + Elasticsearch + Kibana
+* *Host 1:* OSSEC Manager + Logstash Forwarder
+* *Host 2:* Logstash Server + Elasticsearch + Kibana
 * *Host 3:* Node 2
 * *Host 3:* Node 3
+
+So, *OSSEC Manager* (Host 1) will gather the *Agents* alerts and *Logstash Forwarder* (Host 1) will ship them to *Logstash Server* (Host 2).
 
 We will give you differents configuration files depending on the architecture you need.
 
@@ -95,7 +97,7 @@ Remember
 
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
-First of all, download the whole OSSEC-Wazuh repository from Github which includes OSSEC HIDS latest version (2.8.2 base), Wazuh enhaced capabilites and ELK Stack configuration files.
+First of all, download the whole OSSEC-Wazuh repository from Github which includes **OSSEC HIDS** latest version (2.8.2 base), Wazuh enhaced capabilites and ELK Stack configuration files.
 
 1.1 Installation
 """"""""""""""""""
@@ -104,10 +106,10 @@ Create a folder on your prefered home directory and download the repository.
 
 Go home folder, create temporal folder, clone the repository ::
 
-   ``$ cd ~
+   $ cd ~
    $ mkdir ossec_tmp && cd ossec_tmp
    $ git clone https://github.com/wazuh/ossec-wazuh.git
-   $ cd ossec-wazuh``
+   $ cd ossec-wazuh
 
 Now we have the OSSEC source code on our machine, let's compile it. We need development and packages tools like g++, gcc etc... if it is needed, install them.
 
@@ -119,7 +121,7 @@ Follow the installation steps OSSEC prompts at console, they are identical to OS
 
 `Manager installation  <http://documentation.wazuh.com/en/latest/source.html#manager-installation/>`_
 
-Remember we ARE NOT installing official OSSEC relealse, you need to compile and install Wazuh version.
+Remember we **ARE NOT** installing official OSSEC release, you need to compile and install Wazuh version.
 
 You can let all prompt steps by **default** by pressing ENTER at every question OSSEC installation ask you, by now, we don't need a specific OSSEC config installation.
 
@@ -132,7 +134,7 @@ Open OSSEC conf file ::
 
    $ sudo vi /var/ossec/etc/ossec.conf
 
-Add inside **<global></global>** tags the json output setting ::
+Add inside **<global></global>** tags the JSON output setting ::
 
    <jsonout_output>yes</jsonout_output>
 
@@ -140,20 +142,26 @@ That's all! Now restart your OSSEC Manager ::
 
    $ sudo /var/ossec/bin/ossec-control start
 
-Check if alerts.json file exits and is working ::
+Check if *alerts.json* file exits and is working ::
 
    $ sudo cat /var/ossec/logs/alerts/alerts.json
 
 
 1.3 Agents
 """"""""""""""""""
-This section is covered `here <http://documentation.wazuh.com/en/latest/source.html#agent-installation>`_
+
+Agent deployment is fully explained in this other docs, check there how to install, deploy and connect OSSEC Agents:
+
+`OSSEC Agents <http://documentation.wazuh.com/en/latest/source.html#agent-installation>`_
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
-.. note:: At this poing you will need Java 8 installed on your system, please proceed to install it before install any of next tools. `Install Java 8 <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
+.. note:: At this poing you will need Java 8 installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
 
-We proceed to install Logstash Server, in this case we are installing it on the **same** machine we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
+We proceed to install *Logstash Server*, in this case we are installing it on the **same** machine (single-host) we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
+
+In case you go for multi-host architecture, it is recommended to install Logstash in **different** machine than OSSEC Manager, for example, install it on the Elasticsearch machine (Explained in detail below).
+
 
 2.1 Installation
 """"""""""""""""""
@@ -163,17 +171,17 @@ We recommend to install Logstash from official repositories, inside next link yo
 
 `Elastic.co: Install Logstash from repositories <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_
 
-For instance, to install DEB packages for example to an Ubuntu SO:
+In this case we are deploying in Debian Linux distro, to install DEB packages proceed like following lines.
 
-Download and install the Public Signing Key: ::
+Download and install the Public Signing Key ::
 
    $ wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
 
-Add the repository definition to your /etc/apt/sources.list file: ::
+Add the repository definition to your */etc/apt/sources.list* file ::
 
    $ echo "deb http://packages.elasticsearch.org/logstash/1.5/debian stable main" | sudo tee -a /etc/apt/sources.list
 
-Run sudo apt-get update and the repository is ready for use. You can install it with: ::
+Update the repository and install **Logstash** ::
 
    $ sudo apt-get update && sudo apt-get install logstash
    
@@ -183,6 +191,38 @@ Run sudo apt-get update and the repository is ready for use. You can install it 
 
 **Configuration files**
 
+Logstash configuration is based on three differents plugins: *input*, *filter* and *output*.
+
+We have prepared thoose three plugins configurations to fit OSSEC/ELK Stack installation (and security compliance extensions), those files are avaiable on the public repository and at the website.
+
+Depend on your architecture Logstash need to be configured to work gathering files from **same machine** (local, single-host) or waiting log shipments from ** external network machines ** (Logstash-Forwarder, multi-host) at 5000 UDP port, in this last case the configurations includes SSL Certificaties to authentify and encrypt the messages exchanged.
+
+Here is a example what we are talking about.
+
+Single-host input plugin example ::
+
+  input {
+    file {
+      type => "ossec-alerts"
+      path => "/var/ossec/logs/alerts/alerts.json"
+      codec => "json"
+    }
+  }
+
+
+Multi-host input plugin example ::
+
+  input {
+    lumberjack {
+      port => 5000
+      type => "lumberjack"
+      ssl_certificate => "/etc/pki/tls/certs/logstash-forwarder.crt"
+      ssl_key => "/etc/pki/tls/private/logstash-forwarder.key"
+      codec => json
+     }
+  }
+
+
 Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash configuration files ::
 
   $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
@@ -191,7 +231,7 @@ Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files ::
 
   $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
-In this case don't forget to edit 01-ossec.conf file to replace your Elasicsearch destination IP ::
+In both cases edit *01-ossec.conf* or *01-ossec-singlehost.conf * file if you need your Elasicsearch Serrver IP ::
 
   elasticsearch {
            host => "your_elasticsearch_server_ip"
@@ -199,7 +239,7 @@ In this case don't forget to edit 01-ossec.conf file to replace your Elasicsearc
 
 **GeoIP DB** 
 
-Download GeoLiteCity from Maxmind website, unzip and move to Logstash folder ::
+Download GeoLiteCity from Maxmind website, unzip and move it to Logstash folder ::
 
   $ sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
   $ sudo sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
@@ -212,7 +252,7 @@ Open users groups file ::
 
   $ sudo vi /etc/group
 
-Search for "ossec" and add logstash at the end of that line, just like this ::
+Search for "*ossec*" and add **logstash** at the end of that line, just like this ::
 
   ubuntu:x:1000:
   ossec:x:1001:logstash
@@ -224,56 +264,62 @@ Finally restart Logstash service to apply last changes ::
 
  $ sudo service logstash restart
 
-3. Logstash-Forwarder
-^^^^^^^^^^^^^^^^^^^^^
-
-.. warning:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to section `5. Elasticsearch <#id4>`_
-
-
-3.1 Generate SSL Certificates on Logstash-Server
+2.2 Generate SSL Certificates on Logstash-Server
 """"""""""""""""""""""""""""""""""""""""""""""""
-Since we are going to use Logstash Forwarder to ship logs from our Servers to our Logstash Server, we need to create an SSL certificate and key pair. The certificate is used by the Logstash Forwarder to verify the identity of Logstash Server.
 
-On your **Logstash Server** (we just installed it!) generate the SSL Certificates like this:
+.. warning:: SSL Certificates it is only needed for **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder so you don't need to generate SSL Certificates, please refer directly to section `4. Elasticsearch <#id4>`_
 
-Search and copy your OpenSSL configuration file, in this case we can find it on /etc/ssl/openssl.cnf ::
+Since we are going to use Logstash Forwarder to ship logs from our hosts to our Logstash Server, we need to create an SSL certificate and key pair. The certificate is used by the Logstash Forwarder to verify the identity of Logstash Server and encrypt communications.
+
+The certificates are created on Logstash Server (we just installed it two steps before) and copied to Logstash-Fowarder machine.
+
+On your **Logstash Server** machine generate the SSL Certificates.
+
+Search and copy your OpenSSL configuration file, in this case we can find it on **/etc/ssl/openssl.cnf**, maybe in your Linux distribution the openssl.cnf is in different folder ::
 
  $ sudo cd /etc/pki/tls/
  $ sudo cp /etc/ssl/openssl.cnf .
 
-Edit openssl.cnf file ::
+Edit **openssl.cnf** file ::
 
  $ sudo vi /etc/pki/tls/openssl.cnf
 
-Find the [ v3_ca ] section in the file, and add this line under it (substituting in the Logstash Server's private IP address) ::
+Find the **[ v3_ca ]** section in the file, and *add* the following line below it, replace *logstash_server_private_ip* with your Logstash Server IP ::
 
- $ subjectAltName = IP: logstash_server_private_ip
+ [ v3_ca ]
+ subjectAltName = IP: logstash_server_private_ip
 
 Save and exit.
 
-Now generate the SSL certificate and private key in the appropriate locations (/etc/pki/tls/), with the following commands ::
+Now generate the **SSL certificate** and private key in the appropriate locations /etc/pki/tls/ ::
 
  $ cd /etc/pki/tls
  $ sudo openssl req -config /etc/pki/tls/openssl.cnf -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout private/logstash-forwarder.key -out certs/logstash-forwarder.crt
 
-Finally we have our Logstash certificate and key saved on /etc/pki/tls/certs and /etc/pki/tls/private respectively, we will use them soon.
+Finally we have our Logstash certificate and *key saved* on /etc/pki/tls/certs and /etc/pki/tls/private respectively, we will use them soon.
 
-3.2 Copy SSL Certificate
+2.3 Copy SSL Certificate
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-On **Logstash Server**, copy the SSL certificate to Client Server(Logstash-Forwarder) (substitute the client server's IP address, and your own login)::
+On **Logstash Server**, copy the SSL Certificate we **just created* to Logstash-Forwarder machine (substitute the client server's IP address, and your own login)::
 
  scp /etc/pki/tls/certs/logstash-forwarder.crt user@server_private_IP:/tmp
 
+Now we have on our Logstash-Forwarder machine the certificate on /tmp folder, next step is to install and configure Logstash Forwarder.
 
-3.2 Installing
+3. Logstash-Forwarder
+^^^^^^^^^^^^^^^^^^^^^
+
+.. warning:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to section `4. Elasticsearch <#id4>`_
+
+3.1 Installing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 You can visit Elasticsearch official website and download DEB or RPM packages directly from there. 
 
 `Logstash Forwarder DEB & RPM packages <https://www.elastic.co/downloads/logstash>`_
 
-In this case we are adding DEB repositories and installing by apt-get, proceed to add Logstash-Forwarder repositories, update and install::
+In this case we are using DEB repositories and installing by apt-get, proceed to add Logstash-Forwarder repositories, update and install::
 
  $ wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
  $ sudo echo "deb http://packages.elasticsearch.org/logstashforwarder/debian stable main" | sudo tee -a /etc/apt/sources.list
@@ -282,6 +328,8 @@ In this case we are adding DEB repositories and installing by apt-get, proceed t
 Now copy the Logstash server's SSL certificate into the appropriate location (/etc/pki/tls/certs)::
 
  $ sudo cp /tmp/logstash-forwarder.crt /etc/pki/tls/certs/
+
+Remember, this certificate is the same we created on 2.3 section.
 
 
 3.2 Configuring
@@ -325,6 +373,7 @@ Finally set LogstashForwarder to fetch **OSSEC ALERTS FILE**, modify following l
 Restart and we are finish to configure Logstash Forwarder ::
 
   $ sudo service logstash-forwarder restart
+
 
 4. Elasticsearch
 ^^^^^^^^^^^^^^^^^^^
