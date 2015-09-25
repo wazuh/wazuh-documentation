@@ -535,8 +535,22 @@ Expected result ::
 4.6 Wazuh custom templates
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
- curl -XPUT "http://localhost:9200/_template/ossec/" -d "@/home/snaow/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json"
-      Should return: {"acknowledged":true}
+It's time to integrated OSSEC Wazuh custom mapping. It is consist in a Elasticsearch template which has already mapped all the posible OSSEC fields, this mapping is adjusted to fit the special Wazuh OSSEC JSON Output and Logstash filters and it is prepared to display friendly fields name on Kibana.
+
+This template allow us the posterior creation of Kibana dashboards.
+
+Add the template by a CURL request to Elastic API ::
+
+ $ curl -XPUT "http://localhost:9200/_template/ossec/" -d "@~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json"
+      
+If everyhing was okey, the API response should be ::
+
+ {"acknowledged":true}
+
+To make sure it is added you can check for actual template load on Elastic ::
+
+ $ curl -XGET http://localhost:9200/_template/ossec?pretty
+
 
 5. Kibana
 ^^^^^^^^^^^^^^^^^^^
@@ -545,52 +559,100 @@ Expected result ::
 
 `Kibana official website <https://www.elastic.co/downloads/kibana>`_
 
-Time to display all the results on one....
+The final step! Finally we will able to see the whole architecture results in a web display ! I can tell you it is worth it all the previous steps when you see the Kibana interface working at real time.
+
+Remember Kibana it is only a web display for Elasticsearch, Kibana won't let you add or update Elastic documents, it is only for viewing and analyting porpuses.
+
+Okey, Let's do this!
 
 5.1 Installing
 """"""""""""""""""""""
 
-$ cd ~
-$ mkdir ossec_tmp && cd ossec_tmp
-$ wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
-untarit tar xvf kibana-*.tar.gz
-- sudo mkdir -p /opt/kibana
-- sudo cp -R kibana-4*/* /opt/kibana/
-- Installing as a service:
--  cp /home/snaow/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
+Kibana is the only tool doesn't have proper repositories, that's mean we can only get and install it by downloading the tar compressed files and after that install some scripts to turn Kibana into a proper Linux service.
 
+Go to your ossec tmp folder and download Kibana there :: 
+
+ $ sudo cd ~/ossec_tmp
+ $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
+
+Untar the file and copy the files to a more proper directory ::
+
+ $ sudo tar xvf kibana-*.tar.gz
+ $ sudo mkdir -p /opt/kibana
+ $ sudo cp -R kibana-4*/* /opt/kibana/
+
+To run Kibana as a service we will use a script created apparently by bsmith@the408.com, thanks you. You can copy it from extensions kibana ossec wazuh folder :: 
+
+ $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
+
+Then you should give it execution permissions and add to update rc.d configuration (Debian Linux) ::
+
+ $ sudo chmod +x /etc/init.d/kibana4
+ $ sudo update-rc.d kibana4 defaults 96 9
 
 5.2 Settings
 """"""""""""""""""""""
 
-- vi /opt/kibana/config/kibana.yml
-- # The host to bind the server to.
-host: "127.0.0.1" // 
-- # The Elasticsearch instance to use for all your queries.
-elasticsearch_url: "http://127.0.0.1:9200" // URL of elasticsearch hosts, we need to set here the same IP we previously set on elasticsearch bind_host config
+Time to set up our Kibana configuration.
 
+Open kibana.yml configuration file and make some changes ::
 
+ $ sudo vi /opt/kibana/config/kibana.yml
+
+Change host ip address if you need it, normally you won't change this ::
+
+ # The host to bind the server to.
+ host: "127.0.0.1"
+
+Change Elasticsearch URL, this has to be identital to the URL we set on Elasticsearch configuration options on "network.bind_host" or "network.host"
+
+ # The Elasticsearch instance to use for all your queries.
+ elasticsearch_url: "http://127.0.0.1:9200"
+
+Start Kibana :: 
+
+ $ sudo service kibana4 start
 
 5.3 Configuring
 """"""""""""""""""""""
 
-- Accesos to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern:
-Kibana will ask you to "Configure an index pattern", then do the following: 
-Check "Use event times to create index names"
-Index pattern interval: Daily
-Index name or pattern: [ossec-]YYYY.MM.DD
-** NOTE!: Kibana will find elasticsearch index with pattern "ossec-yyyy.mm.dd" you need to generate alerts from ossec BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on pourpuse several times.
+Now we need to create a Kibana index, Kibana will do it automatically but we need to set up some fields on the first Kibana inicialization.
+
+- Access to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern
+- Kibana will ask you to "Configure an index pattern", then do the following: 
+ * Check "Use event times to create index names"
+ * Index pattern interval: Daily
+ * Index name or pattern: **[ossec-]YYYY.MM.DD**
+
+
+.. note:: Kibana will search Elasticsearch index name pattern "ossec-yyyy.mm.dd" you need to generate alerts from OSSEC BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on purpose several times.
 
 5.4 Wazuh extensions
 """"""""""""""""""""""
 
-cp /home/snaow/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
+Wazuh extensions consist in two differents files:
 
-Run kibana service: sudo service kibana4 start
-To tst: Accesos to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern:
+* index.js: Kibana AngularJS Index
 
-  - Install wazuh custom dashboards, visualization and searches for OSSEC and PCI/CIS Compliance
-    Go to Kibana, press at top bar on Settings, then Objects, then press the button Import and select wazuh-ossec custom pci/cis compliance dashboards, the file is in /tmpfolder/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
+We tune up this index to hide non-useful fields, view only mode and PCI Requirements tooltip descriptions.
+
+* kibana-ossecwazuh-dashboards.json: 
+
+Custom dashboards for OSSEC Alerts, GeoIP Maps, File integrity, PCI Requirements & CIS Benchmarks.
+
+So, proceed to copy index.js to Kibana folder ::
+
+ $ sudo cp cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
+
+Now you can import the custom dashboards, access to Kibana WEB on your browser and navigate to Objects:
+
+- Click at top bar on Settings
+- Click on Objects
+- Then click the button **Import** and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
+
+That's all! Refresh Kibana page and load the recently and fresh imported Dashboards.
+
+.. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
 
 
 Overall
