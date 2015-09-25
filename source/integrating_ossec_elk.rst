@@ -3,11 +3,11 @@ Integrating OSSEC-ELK Stack
 
 Introduction
 --------------------
-Welcome to OSSEC-ELK Stack integration guide, throught some simple steps you will set up an entire ELK Stack architecture to monitor, collect, process, index and display your OSSEC Alerts.
+Welcome to OSSEC-ELK Stack integration guide, thought some simple steps you will set up an entire ELK Stack architecture to monitor, collect, process, index and display your OSSEC Alerts.
 
 `OSSEC Official Website <http://www.ossec.net/>`_
 
-The full guide is based on OSSEC Wazuh version, we contribute with OSSEC community by developing extended funcionality.
+The full guide is based on OSSEC Wazuh version, we contribute with OSSEC community by developing extended functionality .
 
 These are some features we are talking about:
 
@@ -28,12 +28,12 @@ These are some features we are talking about:
 If you have any questions or issues while reading this guide don't hesitate to contact us at: info@wazuh.com
 
 
-.. note:: This functionalty requires OSSEC-Wazuh version and OSSEC-Wazuh Ruleset, keep reading this guide to install it.
+.. note:: This functionality requires OSSEC-Wazuh version and OSSEC-Wazuh Ruleset, keep reading this guide to install it.
 
 
 Architecture explanation
 -------------------------
-The whole architecture is based on log analysis, collect, index and display alerts. To acomplish this we are going to use the following tools:
+The whole architecture is based on log analysis, collect, index and display alerts. To accomplish this we are going to use the following tools:
 
 **OSSEC-HIDS**
 
@@ -57,7 +57,7 @@ Logstash-Forwarder is a shipment tool to ship logs from our Servers to our Logst
 
 `Elasticsearch Official Website <https://www.elastic.co/products/elasticsearch/>`_
 
-Search & Analyze Data in Real Time. Distributed, scalable, and highly available. Real-time search and analytics capabilities. Elasticsearch will index and sotre all our OSSEC alerts, this way we will be able to search and explore thousands of alerts in few clicks.
+Search & Analyze Data in Real Time. Distributed, scalable, and highly available. Real-time search and analytics capabilities. Elasticsearch will index and store all our OSSEC alerts, this way we will be able to search and explore thousands of alerts in few clicks.
 
 **Kibana**
 
@@ -77,9 +77,9 @@ Considerations
 ^^^^^^^^^^^^^^^^^^^
 **Single/multiple host configurations**
 
-The entire guide is orientated to single-node configuration but you still can build this architecture on differents servers, it is recommended to split ELK Server from OSSEC Manager server.
+The entire guide is orientated to single-node configuration but you still can build this architecture on different servers, it is recommended to split ELK Server from OSSEC Manager server.
 
-For example, four differents hosts: 
+For example, four different hosts: 
 
 * *Host 1:* OSSEC Manager + Logstash Forwarder
 * *Host 2:* Logstash Server + Elasticsearch + Kibana
@@ -88,21 +88,21 @@ For example, four differents hosts:
 
 So, *OSSEC Manager* (Host 1) will gather the *Agents* alerts and *Logstash Forwarder* (Host 1) will ship them to *Logstash Server* (Host 2).
 
-We will give you differents configuration files depending on the architecture you need.
+We will give you different configuration files depending on the architecture you need.
 
 Remember
 
 * *Single-host:* All the tools on **same** machine
-* *Multi-host:* Tools split-up on **differents** machines.
+* *Multi-host:* Tools split-up on **different** machines.
 
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
-First of all, download the whole OSSEC-Wazuh repository from Github which includes **OSSEC HIDS** latest version (2.8.2 base), Wazuh enhaced capabilites and ELK Stack configuration files.
+First of all, download the whole OSSEC-Wazuh repository from Github which includes **OSSEC HIDS** latest version (2.8.2 base), Wazuh enhanced capabilities and ELK Stack configuration files.
 
 1.1 Installation
 """"""""""""""""""
 
-Create a folder on your prefered home directory and download the repository.
+Create a folder on your preferred home directory and download the repository.
 
 Go home folder, create temporal folder, clone the repository ::
 
@@ -156,7 +156,7 @@ Agent deployment is fully explained in this other docs, check there how to insta
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
-.. note:: At this poing you will need Java 8 installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
+.. note:: At this point you will need Java 8 installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
 
 We proceed to install *Logstash Server*, in this case we are installing it on the **same** machine (single-host) we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
 
@@ -191,9 +191,9 @@ Update the repository and install **Logstash** ::
 
 **Configuration files**
 
-Logstash configuration is based on three differents plugins: *input*, *filter* and *output*.
+Logstash configuration is based on three different plugins: *input*, *filter* and *output*.
 
-We have prepared those three plugins configurations to fit OSSEC/ELK Stack installation (and security compliance extensions), those files are avaiable on the public repository and at the website.
+We have prepared those three plugins configurations to fit OSSEC/ELK Stack installation (and security compliance extensions), those files are available on the public repository and at the website.
 
 Depend on your architecture Logstash need to be configured to work gathering files from **same machine** (local, single-host) or waiting log shipments from **external network machines** (Logstash-Forwarder, multi-host) at 5000 UDP port, in this last case the configurations includes SSL Certificaties to authentify and encrypt the messages exchanged.
 
@@ -312,7 +312,7 @@ Now we have on our Logstash-Forwarder machine the certificate on /tmp folder, ne
 3. Logstash-Forwarder
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. warning:: Logstash-Forwarder configuration it is only neccesary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to section `4. Elasticsearch <#id4>`_
+.. warning:: Logstash-Forwarder configuration it is only necessary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to section `4. Elasticsearch <#id4>`_
 
 3.1 Installing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -389,11 +389,11 @@ We recommend to install **Elasticsearch** from official repositories, inside nex
 
 `Elastic.co: Install Elasticsearch from repositories <https://www.elastic.co/guide/en/elasticsearch/reference/1.7/setup-repositories.html>`_
 
-The followings steps are oriented to build a *single-node* Elasticsearch cluster but remember, Elasticsearch works much better with a minimum of three nodes splited in differents machines, this way Elastic can balance loads and locate shards and replicas.
+The followings steps are oriented to build a *single-node* Elasticsearch cluster but remember, Elasticsearch works much better with a minimum of three nodes splitted in different machines, this way Elastic can balance loads and locate shards and replicas.
 
 Big inconvenient with single-node configuration is **no replicas will be created**, this means in case of a takeover or failure of one or more shards there will not be replicas to patch this broken shards. 
 
-Why we can't have replicas on the same machine? The essence of replicas is to spread themself between nodes, if we only have one node then we can't have replicas, this is why we will set replicas number to 0, otherwise the Cluster will never has **GREEN** health status.
+Why we can't have replicas on the same machine? The essence of replicas is to spread themselves between nodes, if we only have one node then we can't have replicas, this is why we will set replicas number to 0, otherwise the Cluster will never has **GREEN** health status.
 
 Another consideration is be aware of the amount **RAM usage** that Elasticsearch supposes. Frecuently Elasticsearch is meant to have 50% of total machine RAM but in *single-node* configuration we will consider the RAM usage of Logstash, OSSEC, Kibana etc... that's why we not recommend in a single-node configuration set Elasticsearch RAM to the half of total RAM.
 
@@ -425,7 +425,7 @@ Install as service ::
 4.3 Basic configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-We are not going to explain all the Elasticsearch configuration options, you can find them at officcial docs. We will explain basic configuration and some tweaks to improve performance.
+We are not going to explain all the Elasticsearch configuration options, you can find them at official docs. We will explain basic configuration and some tweaks to improve performance.
 
 Open Elasticsearch configuration file ::
 
@@ -486,9 +486,9 @@ Start Elasticsearch ::
 4.4 Extra performance configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Some tweats to *optimize* Elasticsearch general performance throught RAM configurations.
+Some tweats to *optimize* Elasticsearch general performance thought RAM configurations.
 
-Basically we will try to lock Elasticsearch RAM minium and maximum amount, this way we can avoid the swapping, Elasticsearch feels so bad about swapping, everytime Elasticsearch needs to swap query and fecth queries **multiply per ten their load time**.
+Basically we will try to lock Elasticsearch RAM minimum and maximum amount, this way we can avoid the swapping, Elasticsearch feels so bad about swapping, every time Elasticsearch needs to swap query and fetch queries **multiply per ten their load time**.
 
 Open Elasticsearch configuration file ::
 
@@ -595,7 +595,7 @@ Add the template by a *CURL* request to Elastic API ::
 
  $ curl -XPUT "http://localhost:9200/_template/ossec/" -d "@~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json"
       
-If everyhing was okey, the API response should be ::
+If everything was okey, the API response should be ::
 
  {"acknowledged":true}
 
@@ -613,7 +613,7 @@ To make sure it is added you can check for actual template load on Elastic ::
 
 **The final step!** Finally we will able to see the whole architecture results in a web display ! I can tell you it is worth it all the previous steps when you see the Kibana interface working at real time.
 
-Remember Kibana it is only a web display for Elasticsearch, Kibana *won't let you add or update Elastic documents*, it is only for viewing and analyting porpuses.
+Remember Kibana it is only a web display for Elasticsearch, Kibana *won't let you add or update Elastic documents*, it is only for viewing and analyzing purposes.
 
 Okay, Let's do this!
 
@@ -668,7 +668,7 @@ Start Kibana ::
 5.3 Configuring
 """"""""""""""""""""""
 
-Now we need to create a Kibana index, Kibana will do it automatically but we need to set up some fields on the first Kibana inicialization.
+Now we need to create a Kibana index, Kibana will do it automatically but we need to set up some fields on the first Kibana initialization.
 
 - Access to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern
 - Kibana will ask you to "Configure an index pattern", then do the following: 
@@ -684,7 +684,7 @@ Now we need to create a Kibana index, Kibana will do it automatically but we nee
 5.4 Extensions
 """"""""""""""""""""""
 
-Wazuh extensions consist in **two** differents files:
+Wazuh extensions consist in **two** different files:
 
 * index.js: Kibana AngularJS Index
 
