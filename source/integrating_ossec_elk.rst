@@ -620,10 +620,12 @@ Now we need to create a Kibana index, Kibana will do it automatically but we nee
 
 - Access to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern
 - Kibana will ask you to "Configure an index pattern", then do the following: 
- -  Check "Use event times to create index names"
- -  Index pattern interval: Daily
- -  Index name or pattern: **[ossec-]YYYY.MM.DD**
-
+ - Check "Use event times to create index names"
+ - Index pattern interval: Daily
+ - Index name or pattern: **[ossec-]YYYY.MM.DD**
+ - On **Time-field name** list select **@timestamp** option
+ - Click on Create button
+ - Go to Discover tap on top bar buttons.
 
 .. note:: Kibana will search Elasticsearch index name pattern "ossec-yyyy.mm.dd" you need to generate alerts from OSSEC BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on purpose several times.
 
