@@ -3,32 +3,24 @@ Integrating OSSEC-ELK Stack
 
 Introduction
 --------------------
-Welcome to OSSEC-ELK Stack integration guide, thought some simple steps you will set up an entire ELK Stack architecture to monitor, collect, process, index and display your OSSEC Alerts.
+This document will guide you through the installation and configuration of ELK Stack for proper integration with OSSEC HIDS.
 
-`OSSEC Official Website <http://www.ossec.net/>`_
+This integration makes use, among other things, of expanded logging features that have been implemented in our OSSEC Github fork, and Kibana hardcoded modifications for the creation of PCI DSS compliance dashboards. See below a more detailed list of the components and modifications involved in this integration:
 
-The full guide is based on OSSEC Wazuh version, we contribute with OSSEC community by developing extended functionality .
-
-These are some features we are talking about:
-
-* **OSSEC Ruleset**
-   Weekly OSSEC Ruleset updates
-* **OSSEC PCI DSS 3.0 & CIS Requirements**
-   Detailed groups and Benchmarks (ex: 1.4 Debian Linux Benchmark, 11.4 PCI...)
-* **OSSEC JSON Custom Output**
-   Groups array, timestamps, Agents name, locations, file integrity..
-* **Logstash input/filter/output plugins**
-   GeoIP, names format, elasticsearch template, elasticsearch ossec cluster.
-* **Elasticsearch**
-   Custom index mapping template to fit OSSEC alert fields. 
+* **OSSEC rule set**
+   Customized OSSEC rule set, with compliance mapping for PCI DSS 3.0 controls and CIS requirements. 
+   We will keep this rule set updated, by adding or modifying rules and decoders, in our Github repository.
+* **OSSEC expanded JSON output**
+   Several fields have been modified/added. E.g. groups array, timestamps, agent names, locations, file integrity.
+* **OSSEC RESTful API**
+   Used to get configuration and agents related information from OSSEC installation. 
+* **Logstash and Elasticsearch**
+   Logstash configuration includes GeoIP and a customized elasticsearch template for OSSEC.
 * **Kibana 4**
-   OSSEC Alerts, PCI Complianace, CIS Compliance, Agents management, Agents Info Dashboards.
-   Hiding non useful fields, display short summary of PCI Requirements on mouseover on PCI Alerts.
+   Includes OSSEC Alerts, PCI Complianace, CIS Compliance, Agents management, Agents Info dashboards.
+   It also hides non useful fields and displays a short summary of PCI Requirements on mouseover on PCI Alerts.
 
-If you have any questions or issues while reading this guide don't hesitate to contact us at: info@wazuh.com
-
-
-.. note:: This functionality requires OSSEC-Wazuh version and OSSEC-Wazuh Ruleset, keep reading this guide to install it.
+.. note:: If you detect any error in this documentation please report it as a Github issue. We also appreciate contributions to make it better and more accurate.
 
 
 Architecture explanation
