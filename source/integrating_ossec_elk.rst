@@ -20,7 +20,7 @@ This integration makes use, among other things, of expanded logging features tha
    Includes OSSEC Alerts, PCI Complianace, CIS Compliance, Agents management, Agents Info dashboards.
    It also hides non useful fields and displays a short summary of PCI Requirements on mouseover on PCI Alerts.
 
-.. note:: If you detect any error in this documentation please report it as a Github issue. We also appreciate contributions to make it better and more accurate.
+.. note:: If you detect any error in this documentation please report it as an issue in our Github repository. We also appreciate contributions to make it better and more accurate.
 
 
 Architecture explanation
