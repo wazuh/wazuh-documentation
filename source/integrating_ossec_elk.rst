@@ -154,7 +154,7 @@ Agent deployment is fully explained in this other docs, check there how to insta
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
-.. note:: At this point you will need Java 8 installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
+.. note:: At this point you will need Java 8 JRE update 20 or later installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
 
 We proceed to install *Logstash Server*, in this case we are installing it on the **same** machine (single-host) we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
 
@@ -236,6 +236,12 @@ In both cases edit *01-ossec.conf* or *01-ossec-singlehost.conf* file if you nee
 
 
 And remember to open **5000 UDP PORT** if you are going to deploy multi-host architecture.
+
+**Elasticsearch template** 
+
+Copy Elasticsearch custom mapping from extensions folder to to Logstash folder ::
+
+  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json  /etc/logstash/
 
 **GeoIP DB** 
 
@@ -506,8 +512,9 @@ Open and edit **limits.conf** file ::
  $ sudo vi /etc/security/limits.conf
 
 
-Add this line at bottom of the file :: 
-      
+Add this lines at bottom of the file :: 
+
+  elasticsearch - nofile 65535    
   elasticsearch   -       memlock         unlimited
 
 
@@ -517,6 +524,10 @@ Open and edit Elasticsearch init file ::
 
  $ sudo vi /etc/default/elasticsearch
 
+ Or in CentOS 7 ::
+
+ $ sudo vi /etc/sysconfig/elasticsearch
+
 Find **ES_HEAP_SIZE** and set it to *50%* of your total RAM, remember, if you are running single-node architecture, set it to *40%* ::
 
  ES_HEAP_SIZE=1g
@@ -525,7 +536,15 @@ Find **MAX_LOCKED_MEMORY** and set it to unlimited ::
 
  MAX_LOCKED_MEMORY=unlimited
 
+Find **MAX_OPEN_FILES** and set it to 65535 ::
 
+ MAX_OPEN_FILES=65535
+
+In case of Centos 7 open and edit */usr/lib/systemd/system/elasticsearch.service* and uncomment the line ::
+
+ LimitMEMLOCK=infinity
+
+ 
 **Save and exit /etc/default/elasticsearch file** 
 
 
