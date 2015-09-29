@@ -103,11 +103,17 @@ Go home folder, create temporal folder, clone the repository ::
    $ git clone https://github.com/wazuh/ossec-wazuh.git
    $ cd ossec-wazuh
 
-Now we have the OSSEC source code on our machine, let's compile it. We need development and packages tools like g++, gcc etc... if it is needed, install them.
+Now we have the OSSEC source code on our machine, let's compile it. 
+We need development and packages tools like g++, gcc etc... if it is needed, install them this ::
+
+ For CentOS: $ sudo yum install make gcc
+ For Debian Linux: $ sudo apt-get install build-essential
+
+.. note:: In CentOS case add ossec user before being installation: *$sudo useradd ossec*
 
 Finally compile and install **OSSEC Manager** ::
 
-   $ sudo ./install
+   $ sudo ./install.sh
 
 Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: 
 
