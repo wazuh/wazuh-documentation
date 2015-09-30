@@ -735,6 +735,17 @@ Troubleshooting
 -------------------------
 
 
+Appendix
+-------------------------
+
+Some extra guides to help you out with some configurations or installations relationed with OSSEC/ELK Stack.
+
+A. Install Java 8
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+B. Securing Kibana
+^^^^^^^^^^^^^^^^^^^
+SSL, Nginx, Reverse proxy, Certificates.
 
 
 .. toctree::
