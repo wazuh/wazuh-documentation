@@ -783,7 +783,7 @@ Custom dashboards for OSSEC Alerts, GeoIP Maps, File integrity, PCI Requirements
 
 So, proceed to copy *index.js* to Kibana folder ::
 
- $ sudo cp cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
+ $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
 
 Now you can import the custom dashboards, access to Kibana WEB on your browser and navigate to Objects:
 
