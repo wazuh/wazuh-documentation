@@ -106,20 +106,17 @@ Go home folder, create temporal folder, clone the repository ::
 Now we have the OSSEC source code on our machine, let's compile it. 
 We need development and packages tools like g++, gcc etc... if it is needed, install them this ::
 
- For CentOS: $ sudo yum install make gcc
+ For CentOS: $ sudo yum groupinstall 'Development Tools'
  For Debian Linux: $ sudo apt-get install build-essential
 
-.. note:: In CentOS case add ossec user before being installation: *$sudo useradd ossec*
+.. note:: **CentOS** requires add an OSSEC user BEFORE the installation : **$ sudo useradd ossec**
 
 Finally compile and install **OSSEC Manager** ::
 
    $ sudo ./install.sh
 
-Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: 
+Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: `Manager installation  <http://documentation.wazuh.com/en/latest/source.html#manager-installation/>`_
 
-`Manager installation  <http://documentation.wazuh.com/en/latest/source.html#manager-installation/>`_
-
-Remember we **ARE NOT** installing official OSSEC release, you need to compile and install Wazuh version.
 
 You can let all prompt steps by **default** by pressing ENTER at every question OSSEC installation ask you, by now, we don't need a specific OSSEC config installation.
 
@@ -136,11 +133,11 @@ Add inside **<global></global>** tags the JSON output setting ::
 
    <jsonout_output>yes</jsonout_output>
 
-That's all! Now restart your OSSEC Manager ::
+That's all! Now start your OSSEC Manager ::
 
    $ sudo /var/ossec/bin/ossec-control start
 
-Check if *alerts.json* file exits and is working ::
+How to know if everything was okay? Check if *alerts.json* file exits and contains alerts ::
 
    $ sudo cat /var/ossec/logs/alerts/alerts.json
 
@@ -148,17 +145,17 @@ Check if *alerts.json* file exits and is working ::
 1.3 Agents
 """"""""""""""""""
 
-Agent deployment is fully explained in this other docs, check there how to install, deploy and connect OSSEC Agents:
+Agent deployment is fully explained in agent install documentation, check out there how to install, deploy and connect OSSEC Agents: `OSSEC Agents <http://documentation.wazuh.com/en/latest/source.html#agent-installation>`_
 
-`OSSEC Agents <http://documentation.wazuh.com/en/latest/source.html#agent-installation>`_
+For the completation of this guide we don't need to add agents by now.
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
-.. note:: At this point you will need Java 8 JRE update 20 or later installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
+.. note:: At this point you will need Java 8 JRE update 20 or later installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <#a-install-java-8>`_
 
-We proceed to install *Logstash Server*, in this case we are installing it on the **same** machine (single-host) we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
+We proceed to install *Logstash Server*, in this case we are installing it on the **same** machine (single-host) where we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
 
-In case you go for multi-host architecture, it is recommended to install Logstash in **different** machine than OSSEC Manager, for example, install it on the Elasticsearch machine (Explained in detail below).
+In case you go for multi-host architecture, it is recommended to install Logstash in **different** machine than OSSEC Manager, for example, install it on the Elasticsearch machine (explained in detail below).
 
 
 2.1 Installation
@@ -169,7 +166,7 @@ We recommend to install Logstash from official repositories, inside next link yo
 
 `Elastic.co: Install Logstash from repositories <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_
 
-In this case we are deploying in Debian Linux distro, to install DEB packages proceed like following lines.
+For **Debian Linux** distribution, install DEB packages proceed like following lines.
 
 Download and install the Public Signing Key ::
 
@@ -182,7 +179,27 @@ Add the repository definition to your */etc/apt/sources.list* file ::
 Update the repository and install **Logstash** ::
 
    $ sudo apt-get update && sudo apt-get install logstash
+
    
+For **CentOS** distribution, install YUM packages proceed like following lines.
+
+Download and install the Public Signing Key ::
+
+   $ sudo rpm --import https://packages.elasticsearch.org/GPG-KEY-elasticsearch
+
+Add the following in your */etc/yum.repos.d/* directory in a file with a *.repo* suffix, for example *logstash.repo* ::
+
+ [logstash-1.5]
+ name=Logstash repository for 1.5.x packages
+ baseurl=http://packages.elasticsearch.org/logstash/1.5/centos
+ gpgcheck=1
+ gpgkey=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+ enabled=1
+
+And your repository is ready for use. You can install it with ::
+
+   $ sudo yum install logstash
+
 
 2.1 Configuration
 """"""""""""""""""
@@ -229,7 +246,7 @@ Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files ::
 
   $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
-In both cases edit *01-ossec.conf* or *01-ossec-singlehost.conf* file if you need your Elasicsearch Serrver IP ::
+In both cases edit *01-ossec.conf* or *01-ossec-singlehost.conf* file and set your Elasticsearch Server IP (Single-host case the IP should be 127.0.0.1) ::
 
   elasticsearch {
            host => "your_elasticsearch_server_ip"
@@ -325,13 +342,33 @@ You can visit Elasticsearch official website and download DEB or RPM packages di
 
 `Logstash Forwarder DEB & RPM packages <https://www.elastic.co/downloads/logstash>`_
 
-In this case we are using DEB repositories and installing by apt-get, proceed to add Logstash-Forwarder repositories, update and install::
+**Debian Linux** DEB repositories and installing by apt-get, proceed to add Logstash-Forwarder repositories, update and install::
 
  $ wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
  $ sudo echo "deb http://packages.elasticsearch.org/logstashforwarder/debian stable main" | sudo tee -a /etc/apt/sources.list
  $ sudo apt-get update && sudo apt-get install logstash-forwarder
 
-Now copy the Logstash server's SSL certificate into the appropriate location (/etc/pki/tls/certs)::
+
+**CentOS** distribution, install YUM packages proceed like following lines.
+
+Download and install the Public Signing Key ::
+
+ $ sudo rpm --import https://packages.elasticsearch.org/GPG-KEY-elasticsearch
+
+Create a file in your */etc/yum.repos.d/* directory in a file with a *.repo* suffix, for example *logstash-forwarder.repo* ::
+
+ $ sudo vi /etc/yum.repos.d/logstash-forwarder.repo
+
+Add the following lines ::
+
+ [logstash-forwarder]
+ name=logstash-forwarder repository
+ baseurl=http://packages.elasticsearch.org/logstashforwarder/centos
+ gpgcheck=1
+ gpgkey=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+ enabled=1
+
+Now copy the Logstash server's SSL certificate into the appropriate location (/etc/pki/tls/certs) ::
 
  $ sudo cp /tmp/logstash-forwarder.crt /etc/pki/tls/certs/
 
@@ -407,23 +444,53 @@ Another consideration is be aware of the amount **RAM usage** that Elasticsearch
 4.2 Installing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Install DEB packages for example to an Ubuntu SO:
+For **Debian Linux** distribution, install DEB packages proceed like following lines.
 
 Download and install the Public Signing Key ::
 
    $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 
-Add the repository definition to your /etc/apt/sources.list file ::
+Add the repository definition to your */etc/apt/sources.list* file ::
 
    $ echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-1.7.list
 
-Run sudo apt-get update and the repository is ready for use. You can install it with ::
+Update the repository and install **Logstash** ::
 
    $ sudo apt-get update && sudo apt-get install elasticsearch
 
 Install as service ::
 
   $ sudo update-rc.d elasticsearch defaults 95 10
+   
+
+For **CentOS** distribution, install YUM packages proceed like following lines.
+
+Download and install the Public Signing Key ::
+
+   $ sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+Add the following in your */etc/yum.repos.d/* directory in a file with a *.repo* suffix, for example *elasticsearch.repo* ::
+
+ [elasticsearch-1.7]
+ name=Elasticsearch repository for 1.7.x packages
+ baseurl=http://packages.elastic.co/elasticsearch/1.7/centos
+ gpgcheck=1
+ gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
+ enabled=1
+
+And your repository is ready for use. You can install it with ::
+
+   $ sudo yum install elasticsearch
+
+Configure Elasticsearch to automatically start during bootup. If your distribution is using SysV init, then you will need to run ::
+
+ $ sudo chkconfig --add elasticsearch
+
+ Otherwise if your distribution is using systemd ::
+ 
+ $ sudo /bin/systemctl daemon-reload
+ $ sudo /bin/systemctl enable elasticsearch.service
+
 
 
 4.3 Basic configuration
