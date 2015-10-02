@@ -486,8 +486,9 @@ Configure Elasticsearch to automatically start during bootup. If your distributi
 
  $ sudo chkconfig --add elasticsearch
 
- Otherwise if your distribution is using systemd ::
  
+Otherwise if your distribution is using systemd ::
+
  $ sudo /bin/systemctl daemon-reload
  $ sudo /bin/systemctl enable elasticsearch.service
 
@@ -587,11 +588,13 @@ Add this lines at bottom of the file ::
 
 **Save and exit limits.conf file** 
  
-Open and edit Elasticsearch init file ::
+Open and edit Elasticsearch init file
+
+Debian Linux  ::
 
  $ sudo vi /etc/default/elasticsearch
 
- Or in CentOS 7 ::
+CentOS ::
 
  $ sudo vi /etc/sysconfig/elasticsearch
 
@@ -607,7 +610,7 @@ Find **MAX_OPEN_FILES** and set it to 65535 ::
 
  MAX_OPEN_FILES=65535
 
-In case of Centos 7 open and edit */usr/lib/systemd/system/elasticsearch.service* and uncomment the line ::
+In case of Centos open and edit */usr/lib/systemd/system/elasticsearch.service* and uncomment the line ::
 
  LimitMEMLOCK=infinity
 
@@ -706,7 +709,7 @@ Okay, Let's do this!
 
 Kibana is the only tool *doesn't have proper repositories*, that's mean we can only get and install it by downloading the tar compressed files and after that install some scripts to turn Kibana into a proper Linux service.
 
-Go to your OSSEC tmp folder and **download** Kibana there :: 
+Go to your OSSEC tmp folder(we created it at the very beginning) and **download** Kibana there :: 
 
  $ sudo cd ~/ossec_tmp
  $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
