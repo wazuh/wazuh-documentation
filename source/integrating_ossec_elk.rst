@@ -188,7 +188,7 @@ Logstash configuration is based on three different plugins: *input*, *filter* an
 
 We have prepared those three plugins configurations to fit OSSEC/ELK Stack installation (and security compliance extensions), those files are available on the public repository and at the website.
 
-Depend on your architecture Logstash need to be configured to work gathering files from **same machine** (local, single-host) or waiting log shipments from **external network machines** (Logstash-Forwarder, multi-host) at 5000 UDP port, in this last case the configurations includes SSL Certificaties to authentify and encrypt the messages exchanged.
+Depend on your architecture Logstash need to be configured to work gathering files from **same machine** (local, single-host) or listening log shipments from **external network machines** (Logstash-Forwarder, multi-host) at 5000 UDP port (Remember to open **5000 UDP** port if you are following multi-host architecture), in this last case the configurations includes SSL Certificaties to authentify and encrypt the messages exchanged.
 
 Once Logstash is installed, copy Wazuh Logstash file to Logstash configuration files folder
 
@@ -206,8 +206,6 @@ Edit *01-ossec.conf* or *01-ossec-singlehost.conf* file and set your Elasticsear
 
  host => "your_elasticsearch_server_ip"
 
-
-Remember to open **5000 UDP** port if you are following multi-host architecture.
 
 **Elasticsearch template** 
 
