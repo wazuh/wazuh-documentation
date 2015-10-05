@@ -5,11 +5,11 @@ Introduction
 --------------------
 This document will guide you through the installation and configuration of ELK Stack for proper integration with OSSEC HIDS.
 
-This integration makes use, among other things, of expanded logging features that have been implemented in our OSSEC Github fork, and Kibana hardcoded modifications for the creation of PCI DSS compliance dashboards. See below a more detailed list of the components and modifications involved in this integration:
+This integration makes use of expanded logging features that have been implemented in our OSSEC Github fork, our OSSEC rule set, our OSSEC RESTful API, custom Logstash/Elaskticsearch configurations and Kibana hardcoded modifications. See below a more detailed list of the components and modifications involved in this integration:
 
 * **OSSEC rule set**
-   Customized OSSEC rule set, with compliance mapping for PCI DSS 3.0 controls and CIS requirements. 
-   We will keep this rule set updated, by adding or modifying rules and decoders, in our Github repository.
+   Includes new rules and compliance mapping for PCI DSS 3.0 controls and CIS requirements. 
+   It will be updated periodically, in our Github repository, with new rules and decoders.
 * **OSSEC expanded JSON output**
    Several fields have been modified/added. E.g. groups array, timestamps, agent names, locations, file integrity.
 * **OSSEC RESTful API**
@@ -23,69 +23,43 @@ This integration makes use, among other things, of expanded logging features tha
 .. note:: If you detect any error in this documentation please report it as an issue in our Github repository. We also appreciate contributions to make it better and more accurate.
 
 
-Architecture explanation
--------------------------
-The whole architecture is based on log analysis, collect, index and display alerts. To accomplish this we are going to use the following tools:
+Architecture 
+-------------
+As mentioned in the introduction, this integration involves several components, that are used to process, index and store OSSEC alerts.
 
-**OSSEC-HIDS**
+* *`OSSEC HIDS <http://www.ossec.net/>`_* Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally in the box running the OSSEC manager.
 
-`OSSEC Official Website <http://www.ossec.net/>`_
+* *`Logstash <https://www.elastic.co/products/logstash/>`_*
 
-OSSEC is an Open Source Host-based Intrusion Detection System that performs log analysis, file integrity checking, policy monitoring, rootkit detection, real-time alerting and active response.
+Logstash is a data pipeline used process logs and other event data from a variety of systems. Logstash will read and process OSSEC JSON files, adding IP Geolocation information and modeling data before sending it to the Elasticsearch Cluster.
 
-**Logstash**
+* *`Logstash-Forwarder <https://www.elastic.co/products/logstash/>`_*
 
-`Logstash Official Website <https://www.elastic.co/products/logstash/>`_
+Logstash-Forwarder is a shipment tool used to send logs from our OSSEC manager server to our Logstash server, where we will also be running our instance of Elasticsearch.
 
-Logstash is a data pipeline that helps you process logs and other event data from a variety of systems. Logstash will read and process send our OSSEC JSON Files to Elasticsearch Cluster.
+* *`Elasticsearch <https://www.elastic.co/products/elasticsearch/>`_*
 
-**Logstash-Forwarder**
+Search engine used to index and store our OSSEC alerts. It can be deployed as a cluster, with multiple nodes, for better performance and data replication. 
 
-`Logstash-Forwarder Official Website <https://www.elastic.co/products/logstash/>`_
+* *`Kibana <https://www.elastic.co/products/kibana/>`_*
 
-Logstash-Forwarder is a shipment tool to ship logs from our Servers to our Logstash Server, in our case we will send logs from OSSEC Manager host to ELK Stack host.
+Kibana is a WEB framework used to explore all elasticsearch indexes. We will use it to analyze OSSEC alerts and to create custom dashboards for different use cases, including compliance regulations like PCI DSS or benchmarks like CIS.
 
-**Elasticsearch**
-
-`Elasticsearch Official Website <https://www.elastic.co/products/elasticsearch/>`_
-
-Search & Analyze Data in Real Time. Distributed, scalable, and highly available. Real-time search and analytics capabilities. Elasticsearch will index and store all our OSSEC alerts, this way we will be able to search and explore thousands of alerts in few clicks.
-
-**Kibana**
-
-`Kibana Official Website <https://www.elastic.co/products/kibana/>`_
-
-Kibana is a friendly WEB interface to explore all elasticsearch indexes, Kibana support custom dashboard creation, in our case Security Compliance dashboards and OSSEC high risk security alerts.
-
-
-Installing
--------------------------
-Requirements
-^^^^^^^^^^^^^^^^^^^
-* SSH access to at least one server and sudo privilegies.
-* Java 8 `(Example Ubuntu install guide) <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
-
-Considerations
-^^^^^^^^^^^^^^^^^^^
-**Single/multiple host configurations**
-
-The entire guide is orientated to single-node configuration but you still can build this architecture on different servers, it is recommended to split ELK Server from OSSEC Manager server.
-
-For example, four different hosts: 
+Installation
+------------
+The above mentioned components can be deployed in a single host or across multiple systems. This last configuration is useful for load balancing, high availability or data replication. For example, this is how our deployment would look like if we decided to use four different hosts:
 
 * *Host 1:* OSSEC Manager + Logstash Forwarder
-* *Host 2:* Logstash Server + Elasticsearch + Kibana
-* *Host 3:* Node 2
-* *Host 3:* Node 3
+* *Host 2:* Logstash Server + Elasticsearch Node 1 + Kibana
+* *Host 3:* Elasticsearch Node 2
+* *Host 3:* Elasticsearch Node 3
 
-So, *OSSEC Manager* (Host 1) will gather the *Agents* alerts and *Logstash Forwarder* (Host 1) will ship them to *Logstash Server* (Host 2).
+This document describes the steps to deploy the entire system in a single host, so we don't need to have multiple servers. In any case you could still build this architecture on different servers. Notes for distributed configurations are included in the documentation. 
 
-We will give you different configuration files depending on the architecture you need.
-
-Remember
-
-* *Single-host:* All the tools on **same** machine
-* *Multi-host:* Tools split-up on **different** machines.
+Server requirements
+^^^^^^^^^^^^^^^^^^^
+* RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation. Although it would still work, according to their documentation less than 8GB RAM is counterproductive. In our case, for a single-node deployment, the same server will be sharing resources for OSSEC and ELK Stack, so we recommend to at least meet this 8GB memory requirement. 
+* Java 8 `(Example Ubuntu install guide) <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
 
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
