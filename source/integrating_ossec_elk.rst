@@ -65,6 +65,8 @@ Server requirements
 ^^^^^^^^^^^^^^^^^^^
 First of all, download the whole OSSEC-Wazuh repository from Github which includes **OSSEC HIDS** latest version (2.8.2 base), Wazuh enhanced capabilities and ELK Stack configuration files.
 
+Remember we **ARE NOT** installing official OSSEC release, you need to compile and install Wazuh version.
+
 1.1 Installation
 """"""""""""""""""
 
