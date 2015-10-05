@@ -190,20 +190,23 @@ We have prepared those three plugins configurations to fit OSSEC/ELK Stack insta
 
 Depend on your architecture Logstash need to be configured to work gathering files from **same machine** (local, single-host) or waiting log shipments from **external network machines** (Logstash-Forwarder, multi-host) at 5000 UDP port, in this last case the configurations includes SSL Certificaties to authentify and encrypt the messages exchanged.
 
-Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash configuration files ::
+Once Logstash be installed copy Wazuh Logstash file to Logstash configuration files 
+
+**Single-host configuration ** ::
 
   $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
-Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files ::
+**Multi-host configuration ** ::
 
   $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
-In both cases edit *01-ossec.conf* or *01-ossec-singlehost.conf* file and set your Elasticsearch Server IP (Single-host case the IP should be 127.0.0.1) ::
+
+Edit *01-ossec.conf* or *01-ossec-singlehost.conf* file and set your Elasticsearch Server IP ::
 
  host => "your_elasticsearch_server_ip"
 
 
-And remember to open **5000 UDP PORT** if you are going to deploy multi-host architecture.
+Remember to open **5000 UDP** port if you are following multi-host architecture.
 
 **Elasticsearch template** 
 
@@ -220,7 +223,7 @@ Download GeoLiteCity from Maxmind website, unzip and move it to Logstash folder 
 
 **Logstash user** 
 
-In case you are installing single-host architecture, Logstash will need to read from OSSEC alerts file, we need to grants permission to do that.
+In single-host architecture, Logstash user requires to read from OSSEC alerts file, we need to grants permission to do that.
 
 Open users groups file ::
 
@@ -228,9 +231,7 @@ Open users groups file ::
 
 Search for "*ossec*" and add **logstash** at the end of that line, just like this ::
 
-  ubuntu:x:1000:
   ossec:x:1001:logstash
-  scanner:x:111:
 
 **Restart Logstash** 
   
@@ -363,6 +364,17 @@ Finally set LogstashForwarder to fetch **OSSEC ALERTS FILE**, modify list of fil
      "fields": { "type": "ossec-alerts" }
  }
 
+**Logstash-Forwarder user** 
+
+Logstash-forwarder user requires to read from OSSEC alerts file, we need to grants permission to do that.
+
+Open users groups file ::
+
+  $ sudo vi /etc/group
+
+Search for "*ossec*" and add **logstash-forwarder** at the end of that line, just like this ::
+
+  ossec:x:1001:logstash-forwarder
 
 Restart and we are finish to configure Logstash Forwarder ::
 
