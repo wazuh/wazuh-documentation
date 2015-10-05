@@ -27,21 +27,23 @@ Architecture
 -------------
 As mentioned in the introduction, this integration involves several components, that are used to process, index and store OSSEC alerts.
 
-* *`OSSEC HIDS <http://www.ossec.net/>`_* Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally in the box running the OSSEC manager.
+* `OSSEC HIDS <http://www.ossec.net/>`_
 
-* *`Logstash <https://www.elastic.co/products/logstash/>`_*
+Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally in the box running the OSSEC manager.
+
+* `Logstash <https://www.elastic.co/products/logstash/>`_
 
 Logstash is a data pipeline used process logs and other event data from a variety of systems. Logstash will read and process OSSEC JSON files, adding IP Geolocation information and modeling data before sending it to the Elasticsearch Cluster.
 
-* *`Logstash-Forwarder <https://www.elastic.co/products/logstash/>`_*
+* `Logstash-Forwarder <https://www.elastic.co/products/logstash/>`_
 
 Logstash-Forwarder is a shipment tool used to send logs from our OSSEC manager server to our Logstash server, where we will also be running our instance of Elasticsearch.
 
-* *`Elasticsearch <https://www.elastic.co/products/elasticsearch/>`_*
+* `Elasticsearch <https://www.elastic.co/products/elasticsearch/>`_
 
 Search engine used to index and store our OSSEC alerts. It can be deployed as a cluster, with multiple nodes, for better performance and data replication. 
 
-* *`Kibana <https://www.elastic.co/products/kibana/>`_*
+* `Kibana <https://www.elastic.co/products/kibana/>`_
 
 Kibana is a WEB framework used to explore all elasticsearch indexes. We will use it to analyze OSSEC alerts and to create custom dashboards for different use cases, including compliance regulations like PCI DSS or benchmarks like CIS.
 
