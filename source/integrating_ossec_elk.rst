@@ -758,28 +758,6 @@ That's all! Refresh Kibana page and load the recently and fresh **imported Dashb
 .. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
 
 
-Conclusions
--------------------------
-
-
-
-Troubleshooting
--------------------------
-
-
-Appendix
--------------------------
-
-Some extra guides to help you out with some configurations or installations relationed with OSSEC/ELK Stack.
-
-A. Install Java 8
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-B. Securing Kibana
-^^^^^^^^^^^^^^^^^^^
-SSL, Nginx, Reverse proxy, Certificates.
-
-
 .. toctree::
    :maxdepth: 2
 
