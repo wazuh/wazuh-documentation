@@ -190,32 +190,6 @@ We have prepared those three plugins configurations to fit OSSEC/ELK Stack insta
 
 Depend on your architecture Logstash need to be configured to work gathering files from **same machine** (local, single-host) or waiting log shipments from **external network machines** (Logstash-Forwarder, multi-host) at 5000 UDP port, in this last case the configurations includes SSL Certificaties to authentify and encrypt the messages exchanged.
 
-Here is a example what we are talking about.
-
-Single-host input plugin example ::
-
-  input {
-    file {
-      type => "ossec-alerts"
-      path => "/var/ossec/logs/alerts/alerts.json"
-      codec => "json"
-    }
-  }
-
-
-Multi-host input plugin example ::
-
-  input {
-    lumberjack {
-      port => 5000
-      type => "lumberjack"
-      ssl_certificate => "/etc/pki/tls/certs/logstash-forwarder.crt"
-      ssl_key => "/etc/pki/tls/private/logstash-forwarder.key"
-      codec => json
-     }
-  }
-
-
 Once Logstash be installed copy Wazuh **SINGLE-HOST** Logstash file to Logstash configuration files ::
 
   $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
@@ -226,8 +200,7 @@ Or copy Wazuh Logstash **MULTI-HOST** file to Logstash configuration files ::
 
 In both cases edit *01-ossec.conf* or *01-ossec-singlehost.conf* file and set your Elasticsearch Server IP (Single-host case the IP should be 127.0.0.1) ::
 
-  elasticsearch {
-           host => "your_elasticsearch_server_ip"
+ host => "your_elasticsearch_server_ip"
 
 
 And remember to open **5000 UDP PORT** if you are going to deploy multi-host architecture.
