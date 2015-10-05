@@ -192,13 +192,13 @@ Depend on your architecture Logstash need to be configured to work gathering fil
 
 Once Logstash be installed copy Wazuh Logstash file to Logstash configuration files 
 
-**Single-host configuration ** ::
+**Single-host configuration** ::
 
-  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
+ $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
-**Multi-host configuration ** ::
+**Multi-host configuration** ::
 
-  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
+ $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
 
 Edit *01-ossec.conf* or *01-ossec-singlehost.conf* file and set your Elasticsearch Server IP ::
