@@ -1,6 +1,16 @@
 Deploy Ossec with Puppet
 ========================
 
+Prerequisites
+-------------
+
+Before we get started with installing Puppet, ensure that you have the following prerequisites:
+
+**Private Network DNS**: Forward and reverse DNS must be configured, and every server must have a unique hostname. If you do not have DNS confegured, you must use your hosts file for name resolution. We will assume that you will use your private network for communication within your infrastructure.
+
+**Firewall Open Ports**: The Puppet master must be reachable on port 8140.
+
+
 Install Puppet
 --------------
 
@@ -43,6 +53,19 @@ To upgrade to the latest version of Puppet, you can run::
    $ sudo apt-get update
    $ sudo puppet resource package puppetmaster ensure=latest
 
+Update /etc/puppet/puppet.conf and add the dns_alt_names line to the section [main], replacing puppet.example.com with your own FQDN:
+
+   [main]
+   dns_alt_names = puppet,puppet.example.com
+
+.. note:: Also remove the line **templatedir=$confdir/templates**, which has been deprecated.
+
+Start the puppet master::
+
+   $ sudo service puppetmaster start
+
+For different operating system can follow the instrucctions at http://docs.puppetlabs.com/guides/install_puppet/pre_install.html
+
 
 For **Centos** and **RedHat** version:
 **************************************
@@ -66,6 +89,19 @@ This will install Puppet and an init script (/etc/init.d/puppetmaster) for runni
 To upgrade to the latest version of Puppet, you can run::
 
    $ sudo puppet resource package puppet-server ensure=latest
+
+Update /etc/puppet/puppet.conf and add the dns_alt_names line to the section [main], replacing puppet.example.com with your own FQDN:
+
+   [main]
+   dns_alt_names = puppet,puppet.example.com
+
+.. note:: Also remove the line **templatedir=$confdir/templates**, which has been deprecated.
+
+Start the puppet master::
+
+   $ sudo service puppetmaster start
+
+For different operating system can follow the instrucctions at http://docs.puppetlabs.com/guides/install_puppet/pre_install.html
 
 Install PuppetDB
 ----------------
@@ -143,11 +179,83 @@ Once all steps are complete, restart your puppetmaster and run **puppet agent --
 
 Now PuppetDB is working.
 
-Configure Puppet Agents
------------------------
+Install and configure Puppet Agents
+-----------------------------------
+
+First you need to add the respository descrive in the `Install Puppet`_ section
+
+For **Debian** and **Ubuntu** version:
+**************************************
+
+Install Puppet on Agent Nodes::
+
+   $ sudo apt-get install puppet
+
+Upgrading::
+
+   $ sudo apt-get update
+   $ sudo puppet resource package puppet ensure=latest
+
+Add the server value to the [main] section of the node’s puppet.conf file, replacing puppet.example.com with your Puppet master’s FQDN::
+
+   [main]
+   server = puppet.example.com
+
+Restart the Puppet service::
+
+   $ sudo service puppet restart
+
+For **Centos** and **RedHat** version:
+**************************************
+
+Install Puppet on Agent Nodes::
+
+   $ sudo yum install puppet
+
+Upgrading::
+
+   $ sudo puppet resource package puppet ensure=latest
+
+Add the server value to the [main] section of the node’s puppet.conf file, replacing puppet.example.com with your Puppet master’s FQDN::
+
+   [main]
+   server = puppet.example.com
+
+Restart the Puppet service::
+
+   systemctl start puppet
+
+Generate and Sign Certificates
+******************************
+
+Run the puppet agent to generate a certificate for the puppet master to sign::
+
+   $ sudo puppet agent -t
+
+Log into to your **Puppet master** and list the certifications that need approval::
+
+   $ sudo puppet cert list 
+
+It should output a list with your node’s hostname.
+
+Approve the certificate, replacing **hostname.example.com** with your node’s name::
+
+   $ sudo puppet cert sign hostname.example.com
+
+Back on the puppet node, run the puppet agent again::
+
+   $ sudo puppet agent -t
+
+And now the catalog need to be finished.
+
+.. warning:: Remember the Private Network DNS is a requisite for the correct certificate sign.
 
 Install Ossec module
 --------------------
 
+
+
 Deploy Ossec
 ------------
+
+
