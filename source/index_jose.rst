@@ -10,3 +10,4 @@ OSSEC installation guide
    windows
    aix
    basicconfiguration
+   puppet
