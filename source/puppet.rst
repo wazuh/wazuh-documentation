@@ -267,11 +267,8 @@ To install Ossec module is very easy, only need to download from **Puppet Forge*
      ├── puppetlabs-stdlib (v4.9.0)
      └── stahnma-epel (v1.1.1)
 
-With Wazuh Ossec module need to install some de
-
 Deploy Ossec
 ------------
-
 
 This module installs and configures OSSEC-HIDS client and server.
 
@@ -282,7 +279,7 @@ The server is configured by installing the `ossec::server` class, and using opti
  * `ossec:: email_alert`   : to receive to other email adress specific group of rules information
  * `ossec::addlog`         : to define additional log files to monitor
 
-**USAGE**
+**Usage in your manifests**
 
 Server::
 
