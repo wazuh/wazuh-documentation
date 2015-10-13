@@ -3,49 +3,38 @@ Integrating OSSEC-ELK Stack
 
 Introduction
 --------------------
-This document will guide you through the installation and configuration of ELK Stack for proper integration with OSSEC HIDS.
+This document will guide you through the installation and configuration of ELK Stack and OSSEC HIDS for their integration.
 
-This integration makes use of expanded logging features that have been implemented in our OSSEC Github fork, our OSSEC rule set, our OSSEC RESTful API, custom Logstash/Elaskticsearch configurations and Kibana hardcoded modifications. See below a more detailed list of the components and modifications involved in this integration:
+We will make use of expanded logging features that have been implemented in our OSSEC Github fork, our OSSEC rule set, our OSSEC RESTful API, custom Logstash/Elaskticsearch configurations and Kibana hardcoded modifications. See below a more detailed description of the mentioned components:
 
 * **OSSEC rule set**
-   Includes new rules and compliance mapping for PCI DSS 3.0 controls and CIS requirements. 
-   It will be updated periodically, in our Github repository, with new rules and decoders.
+   Includes new rules and decoders. In addition, compliance information has been included mapping rules with PCI DSS controls and CIS benchmark requirements. This rule set is updated periodically in our Github repository.
 * **OSSEC expanded JSON output**
-   Several fields have been modified/added. E.g. groups array, timestamps, agent names, locations, file integrity.
+   Several fields have been added to the alerts output for better integration with Elasticsearch, for example to include compliance controls information. As well, JSON output has been implemented for raw events (archives), and as an output option for ossec binaries (e.g agent_control).
 * **OSSEC RESTful API**
-   Used to get configuration and agents related information from OSSEC installation. 
+   Provides an interface to interact with OSSEC from anything that can send an HTTP request. Will be used to monitor agent status and configuration and, in some cases, to manage your OSSEC installation.
 * **Logstash and Elasticsearch**
-   Logstash configuration includes GeoIP and a customized elasticsearch template for OSSEC.
+   Logstash wil be used to add GeoIP information to OSSEC alerts, and to define how fields are going to be indexed, using a custom Elasticsearch template.
 * **Kibana 4**
-   Includes OSSEC Alerts, PCI Complianace, CIS Compliance, Agents management, Agents Info dashboards.
-   It also hides non useful fields and displays a short summary of PCI Requirements on mouseover on PCI Alerts.
+   Includes OSSEC Alerts, PCI DSS Complianace, CIS Compliance, Agents management, Agents Info dashboards.
+   It also hides non useful fields and displays a short description of compliance requirements on mouseover.
 
 .. note:: If you detect any error in this documentation please report it as an issue in our Github repository. We also appreciate contributions to make it better and more accurate.
 
 
 Architecture 
 -------------
-As mentioned in the introduction, this integration involves several components, that are used to process, index and store OSSEC alerts.
+Just in case you are not familiar with the components and tools involved in this integration, here is a brief description of each one of them:
 
-* `OSSEC HIDS <http://www.ossec.net/>`_
+* `OSSEC HIDS <http://www.ossec.net/>`_: Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally in the box running the OSSEC manager.
 
-Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally in the box running the OSSEC manager.
+* `Logstash <https://www.elastic.co/products/logstash/>`_: Is a data pipeline used process logs and other event data from a variety of systems. Logstash will read and process OSSEC JSON files, adding IP Geolocation information and modeling data before sending it to the Elasticsearch Cluster.
 
-* `Logstash <https://www.elastic.co/products/logstash/>`_
+* `Logstash-Forwarder <https://www.elastic.co/products/logstash/>`_: Is a shipment tool used to send logs from our OSSEC manager server to our Logstash server, where we will also be running our instance of Elasticsearch.
 
-Logstash is a data pipeline used process logs and other event data from a variety of systems. Logstash will read and process OSSEC JSON files, adding IP Geolocation information and modeling data before sending it to the Elasticsearch Cluster.
+* `Elasticsearch <https://www.elastic.co/products/elasticsearch/>`_: Is the search engine used to index and store our OSSEC alerts. It can be deployed as a cluster, with multiple nodes, for better performance and data replication. 
 
-* `Logstash-Forwarder <https://www.elastic.co/products/logstash/>`_
-
-Logstash-Forwarder is a shipment tool used to send logs from our OSSEC manager server to our Logstash server, where we will also be running our instance of Elasticsearch.
-
-* `Elasticsearch <https://www.elastic.co/products/elasticsearch/>`_
-
-Search engine used to index and store our OSSEC alerts. It can be deployed as a cluster, with multiple nodes, for better performance and data replication. 
-
-* `Kibana <https://www.elastic.co/products/kibana/>`_
-
-Kibana is a WEB framework used to explore all elasticsearch indexes. We will use it to analyze OSSEC alerts and to create custom dashboards for different use cases, including compliance regulations like PCI DSS or benchmarks like CIS.
+* `Kibana <https://www.elastic.co/products/kibana/>`_: Kibana is a WEB framework used to explore all elasticsearch indexes. We will use it to analyze OSSEC alerts and to create custom dashboards for different use cases, including compliance regulations like PCI DSS or benchmarks like CIS.
 
 Installation
 ------------
