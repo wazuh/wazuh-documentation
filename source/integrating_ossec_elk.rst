@@ -51,6 +51,7 @@ Server requirements
 ^^^^^^^^^^^^^^^^^^^
 * RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation. Although it would still work, according to their documentation less than 8GB RAM is counterproductive. In our case, for a single-node deployment, the same server will be sharing resources for OSSEC and ELK Stack, so we recommend to at least meet this 8GB memory requirement. 
 * Java 8 `(Example Ubuntu install guide) <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
+* Java 8 `(Example CentOS & RHEL install guide) <http://tecadmin.net/install-java-8-on-centos-rhel-and-fedora/>`_
 
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
