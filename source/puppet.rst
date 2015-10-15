@@ -360,9 +360,10 @@ Ossec Agent::
 Reference
 ---------
 
-### SERVER
+Server
+******
 
-#### class ossec::server
+**class ossec::server**
  * `$mailserver_ip` smtp mail server,
  * `$ossec_emailfrom` (default: `ossec@${domain}`) email origin sent by ossec,
  * `$ossec_emailto` who will receive it,
@@ -373,7 +374,7 @@ Reference
  * `$ossec_emailnotification` (default: yes) Whether to send email notifications
 
 
-#### function ossec::email_alert
+**function ossec::email_alert**
  * `$alert_email` email to send to
  * `$alert_group` (default: `false`) array of name of rules group
 
@@ -381,27 +382,29 @@ Caution: no email will be send below the global `$ossec_email_alert_level`
 
 About active-response mechanism, check the documentation (and extends the function maybe :-) ): http://www.ossec.net/main/manual/manual-active-responses
 
-#### function ossec::command
+**function ossec::command**
  * `$command_name` human readable name for `ossec::activeresponse` usage
  * `$command_executable` name of the executable. Ossec comes preloaded with `disable-account.sh`, `host-deny.sh`, `ipfw.sh`, `pf.sh`, `route-null.sh`, `firewall-drop.sh`, `ipfw_mac.sh`, `ossec-tweeter.sh`, `restart-ossec.sh`
  * `$command_expect` (default: `srcip`)
  * `$timeout_allowed` (default: `true`)
 
-#### function ossec::activeresponse
+**function ossec::activeresponse**
  * `$command_name`,
  * `$ar_location` (default: `local`) it can be "local","server","defined-agent","all"
  * `$ar_level` (default: 7) between 0 and 16
  * `$ar_rules_id` (default: `[]`) list of rules id
  * `$ar_timeout` (default: 300) usually active reponse blocks for a certain amount of time.
 
-#### function ossec::addlog
+**function ossec::addlog**
  * `$log_name`,
  * `$logfile` /path/to/log/file
  * `$logtype` (default: syslog) The ossec log_format of the file.  Valid values can be found in the [documentation](https://ossec-docs.readthedocs.org/en/latest/syntax/head_ossec_config.localfile.html#location).
 
 
 
-### CLIENT
+Client
+******
+
  * `$ossec_server_ip` IP of the server
  * `$ossec_active_response` (default: true) allows active response on this host
  * `$ossec_emailnotification` (default: yes) Whether to send email notifications
