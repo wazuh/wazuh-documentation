@@ -680,6 +680,33 @@ Then you should give it *execution permissions* and add to update rc.d configura
  $ sudo chmod +x /etc/init.d/kibana4
  $ sudo update-rc.d kibana4 defaults 96 9
 
+To run **Kibana as a service** in CentOS create the Kibana systemd init file using vi::
+
+ $ sudo vi /etc/systemd/system/kibana4.service
+
+Now paste in this Kibana init file:::
+
+ [Service]
+ ExecStart=/opt/kibana/bin/kibana
+ Restart=always
+ StandardOutput=syslog
+ StandardError=syslog
+ SyslogIdentifier=kibana4
+ User=root
+ Group=root
+ Environment=NODE_ENV=production
+
+ [Install]
+ WantedBy=multi-user.target
+
+Save and exit.
+
+Now start the Kibana service, and enable it::
+
+ $ sudo systemctl start kibana4
+ $ sudo systemctl enable kibana4
+
+
 5.2 Settings
 """"""""""""""""""""""
 
