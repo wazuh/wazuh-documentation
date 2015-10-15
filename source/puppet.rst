@@ -313,6 +313,50 @@ Client::
    }
 
 
+Examples
+--------
+
+Here a few examples for use in your file.pp
+
+Ossec server::
+
+   node "server.yourhost.com" {
+
+   class { 'ossec::server':
+     mailserver_ip => 'smtp.gmail.com',
+     ossec_emailto => 'jose@wazuh.com',
+   }
+
+   ossec::command { 'firewallblock':
+     command_name       => 'firewall-drop',
+     command_executable => 'firewall-drop.sh',
+     command_expect     => 'srcip'
+   }
+
+   ossec::activeresponse { 'blockWebattack':
+     command_name => 'firewall-drop',
+     ar_level     => 9,
+     ar_rules_id  => [31153,31151]
+   }
+
+   ossec::addlog { 'monitorLogFile':
+     logfile => '/var/log/secure',
+     logtype => 'syslog'
+   }
+   }
+
+Ossec Agent::
+
+   node "client.yourhost.com" {
+
+   class { "ossec::client":
+     ossec_server_ip => "192.168.209.166"
+   }
+
+   }   
+
+
+
 Reference
 ---------
 
