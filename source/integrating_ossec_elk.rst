@@ -775,7 +775,133 @@ That's all! Refresh Kibana page and load the recently and fresh **imported Dashb
 .. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
 
 
-.. toctree::
+Install Java 8
+--------------------
+
+Ubuntu
+^^^^^^^^^^^^^^^^^^^
+First you need to add *webupd8team* JAVA repository in your system, then proceed to install Java 8 via apt-get install ::
+
+ $ sudo add-apt-repository ppa:webupd8team/java
+ $ sudo apt-get update
+ $ sudo apt-get install oracle-java8-installer
+
+
+CentOS & RHEL
+^^^^^^^^^^^^^^^^^^^
+Change to your home directory and download the Oracle Java 8 JDK RPM with these commands ::
+
+ $ cd ~
+ $ wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm"
+
+Install the RPM with this yum command ::
+
+ $ sudo yum localinstall jdk-8u60-linux-x64.RPM
+
+Delete the archive file that you downloaded earlier ::
+
+ $ rm ~/jdk-8u60-linux-x64.rpm 
+
+Set your JAVA_HOME environment variable in a bash shell ::
+
+ $ export JAVA_HOME=/usr/java/jdk1.8.0_60/jre 
+
+
+Protecting Kibana 4
+--------------------
+
+We are using Nginx web server to build a secure proxy to secure our Kibana Web Interface, we will establish an secure connection with SSL Certificates and HTTP Authentication.
+
+Install Nginx
+^^^^^^^^^^^^^^^^^^^
+
+**Ubuntu Debian**
+
+Update and install Nginx ::
+
+ $ sudo apt-get update
+ $ sudo apt-get install nginx apache2-utils
+
+Nginx as service ::
+
+ $ sudo update-rc.d nginx defaults
+
+
+**Centos7**
+
+Install and start Nginx :: 
+
+ $ sudo yum install epel-release
+ $ sudo yum install nginx httpd-tools
+ $ sudo systemctl start nginx
+
+Configure Nginx
+^^^^^^^^^^^^^^^^^^^
+
+Add a configuration file on *conf.d* Nginx folder :: 
+
+  $ sudo vi /etc/nginx/conf.d/kibana.conf
+
+Paste the following configuration :: 
+
+ server {
+        listen      [::]:80;
+        return 301 https://$host$request_uri;
+ }
+
+ server {
+        listen                *:443;
+        ssl on;
+        ssl_certificate /etc/pki/tls/certs/kibana-access.crt;
+        ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+        server_name           "Server Name";
+        access_log            /var/log/nginx/kibana.access.log;
+        error_log  /var/log/nginx/kibana.error.log;
+
+        location / {
+                auth_basic "Restricted";
+                auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+                proxy_pass http://127.0.0.1:5601;
+        }
+ }
+
+
+ This configuration set up Nginx to listen on 443 and 80, but this last will redirect every connection to 443 port (HTTPS).
+
+**Generate certificates**
+
+ We specify Nginx to read SSL certificates from */etc/pk/tls/certs* so now create them :: 
+
+ $ cd ~
+ $ sudo openssl genrsa -des3 -out server.key 1024
+
+Enter the password you choose and continue :: 
+
+ $ sudo openssl req -new -key server.key -out server.csr
+
+Enter again the password, fill the certificate information (the data you fill up won't affect the final result) and continue :: 
+
+ $ sudo cp server.key server.key.org
+ $ sudo openssl rsa -in server.key.org -out kibana-access.key
+ $ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out kibana-access.crt
+ $ sudo cp kibana-access.crt /etc/pki/tls/certs/
+ $ sudo mkdir /etc/pki/tls/private/
+ $ sudo cp kibana-access.key /etc/pki/tls/private/
+
+
+**Generate password**
+
+Replace *kibabaadmin* with your own username :: 
+
+ $ sudo htpasswd -c /etc/nginx/conf.d/kibana.htpasswd kibanaadmin
+
+**Restart Nginx**
+
+Restart Nginx service :: 
+
+ $ sudo service nginx restart
+
+.. toctree:: 
    :maxdepth: 2
 
 
