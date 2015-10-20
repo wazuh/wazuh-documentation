@@ -35,7 +35,7 @@ To add Wazuh yum repository, create a file named /etc/yum.repos.d/wazuh.repo::
 Installing OSSEC
 ----------------
 
-To install using **yum** do the following::
+To install using **yum** do the following:: 
 
    $ yum install ossec-hids
 
