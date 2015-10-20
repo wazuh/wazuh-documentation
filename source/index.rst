@@ -17,6 +17,8 @@ Index:
 .. toctree::
    :maxdepth: 2
 
+   installing_ossec_wazuh
    integrating_ossec_elk
+   installing_ossec_api
    index_jose
    readme

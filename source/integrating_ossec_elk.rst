@@ -51,70 +51,20 @@ Server requirements
 ^^^^^^^^^^^^^^^^^^^
 * RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation. Although it would still work, according to their documentation less than 8GB RAM is counterproductive. In our case, for a single-node deployment, the same server will be sharing resources for OSSEC and ELK Stack, so we recommend to at least meet this 8GB memory requirement. 
 * Java 8 `(Install guide on bottom) <#id14>`_
+* `OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
+
 First of all, download the whole OSSEC-Wazuh repository from Github which includes **OSSEC HIDS** latest version (2.8.2 base), Wazuh enhanced capabilities and ELK Stack configuration files.
 
-Remember we **ARE NOT** installing official OSSEC release, you need to compile and install Wazuh version.
+Please complete Wazuh installation guide first, then you can go into this tutorial.
 
-1.1 Installation
-""""""""""""""""""
+* `Instal OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
-Create a folder on your preferred home directory and download the repository.
+.. note:: Remember we **ARE NOT** installing official OSSEC release, you need to compile and install Wazuh version.
 
-Go home folder, create temporal folder, clone the repository ::
-
-   $ cd ~
-   $ mkdir ossec_tmp && cd ossec_tmp
-   $ git clone https://github.com/wazuh/ossec-wazuh.git
-   $ cd ossec-wazuh
-
-Now we have the OSSEC source code on our machine, let's compile it. 
-We need development and packages tools like g++, gcc etc... if it is needed, install them this ::
-
- For CentOS: $ sudo yum groupinstall 'Development Tools'
- For Debian Linux: $ sudo apt-get install build-essential
-
-.. note:: **CentOS** requires add an OSSEC user BEFORE the installation : **$ sudo useradd ossec**
-
-Finally compile and install **OSSEC Manager** ::
-
-   $ sudo ./install.sh
-
-Follow the installation steps OSSEC prompts at console, they are identical to OSSEC official version, you can read a detailed explanation here: `Manager installation  <http://documentation.wazuh.com/en/latest/source.html#manager-installation/>`_
-
-
-You can let all prompt steps by **default** by pressing ENTER at every question OSSEC installation ask you, by now, we don't need a specific OSSEC config installation.
-
-
-1.2 Configuration
-""""""""""""""""""
-We need just one tweak at OSSEC configuration files, enable JSON output. 
-
-Open OSSEC conf file ::
-
-   $ sudo vi /var/ossec/etc/ossec.conf
-
-Add inside **<global></global>** tags the JSON output setting ::
-
-   <jsonout_output>yes</jsonout_output>
-
-That's all! Now start your OSSEC Manager ::
-
-   $ sudo /var/ossec/bin/ossec-control start
-
-How to know if everything was okay? Check if *alerts.json* file exits and contains alerts ::
-
-   $ sudo cat /var/ossec/logs/alerts/alerts.json
-
-
-1.3 Agents
-""""""""""""""""""
-
-Agent deployment is fully explained in agent install documentation, check out there how to install, deploy and connect OSSEC Agents: `OSSEC Agents <http://documentation.wazuh.com/en/latest/source.html#agent-installation>`_
-
-For the completation of this guide we don't need to add agents by now.
+Once OSSEC Wazuh installation has completed, move forward to Logstash installation.
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
@@ -178,7 +128,7 @@ Logstash configuration is based on three different plugins: *input*, *filter* an
 We have prepared those three plugins configurations to fit OSSEC/ELK Stack installation (and security compliance extensions), those files are available on the public repository and at the website.
 
 Depend on your architecture Logstash need to be configured to work gathering files from **same machine** (local, single-host) or listening log shipments from **external network machines** (Logstash-Forwarder, multi-host) at 5000 UDP port (Remember to open **5000 UDP** port if you are following multi-host architecture), in this last case the configurations includes SSL Certificaties to authentify and encrypt the messages exchanged.
-
+ 
 Once Logstash is installed, copy Wazuh Logstash file to Logstash configuration files folder
 
 **Single-host configuration** ::
@@ -903,6 +853,12 @@ Restart Nginx service ::
 
 That's all! Try to access to Kibana Web and the HTTP authentication will prompt asking for the password you just created. Now we got a Kibana instance HTTPS and password protected secured.
 
+What next?
+-----------
+
+Once you have OSSEC Wazuh installed you can move forward and try out the API RESTful, check it on:
+
+* `API RESTful Installation Guide <http://documentation.wazuh.com/en/latest/installing_ossec_api.html>`_
 
 .. toctree:: 
    :maxdepth: 2
