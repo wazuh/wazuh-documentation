@@ -50,8 +50,7 @@ This document describes the steps to deploy the entire system in a single host, 
 Server requirements
 ^^^^^^^^^^^^^^^^^^^
 * RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation. Although it would still work, according to their documentation less than 8GB RAM is counterproductive. In our case, for a single-node deployment, the same server will be sharing resources for OSSEC and ELK Stack, so we recommend to at least meet this 8GB memory requirement. 
-* Java 8 `(Example Ubuntu install guide) <http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/>`_
-* Java 8 `(Example CentOS & RHEL install guide) <http://tecadmin.net/install-java-8-on-centos-rhel-and-fedora/>`_
+* Java 8 `(Install guide on bottom) <#id14>`_
 
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
@@ -119,7 +118,7 @@ For the completation of this guide we don't need to add agents by now.
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
-.. note:: At this point you will need Java 8 JRE update 20 or later installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <#a-install-java-8>`_
+.. note:: At this point you will need Java 8 JRE update 20 or later installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <#id4>`_
 
 We proceed to install *Logstash Server*, in this case we are installing it on the **same** machine (single-host) where we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
 
@@ -890,7 +889,7 @@ Enter again the password, fill the certificate information (the data you fill up
 
 That's all, now we have our certificates finished and our connection will be encrypted, let's move on generate password for HTTP authentication.
 
-**Generate users and passwords **
+**Generate users and passwords**
 
 Replace **kibabaadmin** with your own username :: 
 
@@ -903,7 +902,7 @@ Restart Nginx service ::
  $ sudo service nginx restart
 
 That's all! Try to access to Kibana Web and the HTTP authentication will prompt asking for the password you just created. Now we got a Kibana instance HTTPS and password protected secured.
- 
+
 
 .. toctree:: 
    :maxdepth: 2
