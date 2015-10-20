@@ -31,9 +31,12 @@ For example, to enable the repository for Ubuntu 12.04 Precise Pangolin::
    sudo dpkg -i puppetlabs-release-precise.deb
    sudo apt-get update
 
-To enable the repository for Ubuntu 14.04 Trusty Tahr::
+To enable the repository for U
+The newest versions of Puppet can be installed from the apt.puppetlabs.com package repository.
 
-   wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+To enable the repository:
+
+Download the “puppetlabs-release” package f   wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb	
    sudo dpkg -i puppetlabs-release-trusty.deb
    sudo apt-get update
 
