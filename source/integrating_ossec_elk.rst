@@ -60,7 +60,7 @@ First of all, download the whole OSSEC-Wazuh repository from Github which includ
 
 Please complete Wazuh installation guide first, then you can go into this tutorial.
 
-* `Instal OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
+* `Install OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
 .. note:: Remember we **ARE NOT** installing official OSSEC release, you need to compile and install Wazuh version.
 
