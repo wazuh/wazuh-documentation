@@ -6,19 +6,14 @@ Introduction
 
 This document will guide you through the installation and configuration of OSSEC HIDS forked by Wazuh.
 
-We will make use of expanded logging features that have been implemented in our OSSEC Github fork, our OSSEC rule set, our OSSEC RESTful API, custom Logstash/Elaskticsearch configurations and Kibana hardcoded modifications. See below a more detailed description of the mentioned components:
+We will make use of expanded logging features that have been implemented in our OSSEC Github fork, our OSSEC rule set and  expanded JSON output. See below a more detailed description of the mentioned components:
 
 * **OSSEC rule set**
    Includes new rules and decoders. In addition, compliance information has been included mapping rules with PCI DSS controls and CIS benchmark requirements. This rule set is updated periodically in our Github repository.
 * **OSSEC expanded JSON output**
    Additional fields have been included in the alerts output, for better integration with Elasticsearch, for example to add compliance controls information. As well, JSON output has been implemented for raw events (archives), and as an output option for ossec binaries (e.g. agent_control).
-* **OSSEC RESTful API**
-   Provides an interface to interact with OSSEC from anything that can send an HTTP request. Will be used to monitor agent status and configuration and, in some cases, to manage your OSSEC installation.
-* **Logstash and Elasticsearch**
-   Logstash wil be used to add GeoIP information to OSSEC alerts, and to define how fields are going to be indexed, using a custom Elasticsearch template.
-* **Kibana 4**
-   Includes OSSEC Alerts, PCI DSS Compliance, CIS Benchmark, Agents management, Agents Info dashboards.
-   It also hides non useful fields and displays a short description of compliance requirements on mouseover.
+
+Moreover this fork includes extensions and config files to easily integrate `ELK Stack <http://documentation.wazuh.com/en/latest/integrating_ossec_elk.html/>`_.
 
 .. note:: If you detect any error in this documentation please report it as an issue in our Github repository. We also appreciate contributions to make it better and more accurate.
 
