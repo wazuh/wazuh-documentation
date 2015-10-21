@@ -13,7 +13,7 @@ We will make use of expanded logging features that have been implemented in our 
 * **OSSEC expanded JSON output**
    Additional fields have been included in the alerts output, for better integration with Elasticsearch, for example to add compliance controls information. As well, JSON output has been implemented for raw events (archives), and as an output option for ossec binaries (e.g. agent_control).
 
-Moreover this fork includes extensions and config files to easily integrate `ELK Stack <http://documentation.wazuh.com/en/latest/integrating_ossec_elk.html/>`_.
+Moreover this fork includes extensions and config files to easily integrate `ELK Stack <http://documentation.wazuh.com/en/latest/integrating_ossec_elk.html>`_.
 
 .. note:: If you detect any error in this documentation please report it as an issue in our Github repository. We also appreciate contributions to make it better and more accurate.
 
