@@ -36,19 +36,40 @@ For example in some binaries we could use "-j" argument to display the results i
 
 Moreover, we add two new folders on */var/ossec/* default folder, **dev** and **api**
 
-Capabilities
+Requests
 --------------------
 
 Summary of current API capabilities.
 
-- Agents list
-- Agent info and status
-- Agent restart
-- Agent add
-- Agent extract key
-- Agents syscheck/rootcheck restart
-- Agent syscheck restart
-- Agent rootcheck restart
+
+Agents list :: 
+
+ /agents
+
+Agent info and status :: 
+
+ /agents/:agent_id
+
+Agent restart :: 
+
+ /agents/:agent_id/restart
+
+Agent add :: 
+
+ /agents/add/:agent_name
+
+Agent extract key :: 
+
+ /agents/:agent_id/key
+
+Agents syscheck/rootcheck on all agents :: 
+
+ /agents/sysrootcheck/restart
+
+Agent syscheck/rootcheck restart on one agent :: 
+
+ /agents/:agent_id/sysrootcheck/restart
+
 
 
 Security
