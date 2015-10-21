@@ -109,7 +109,8 @@ Install OpenSSL ::
 
  $ sudo apt-get install openssl
 
-Create a Server Certificate:: 
+Create a Server Certificate :: 
+
  $ cd /var/ossec/api	
  $ sudo openssl genrsa -des3 -out server.key 1024
  $ sudo req -new -key server.key -out server.csr
@@ -146,7 +147,7 @@ Time to start the API, we are going to start it on background and redirect the s
 .. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /user/bin/, if the API does not start, check it please.
 
 
-Testing
+Sample outputs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 That's all! Now you can access the API via browser o via *curl* commands at terminal. 
 
@@ -158,6 +159,88 @@ Or in the command line try some requests ::
  
  $ curl -XGET  -u username -k https://your.ip:55000/agents
  $ curl -XGET  -u username -k https://your.ip:55000/agents/000
+
+Some sample outputs.
+
+Agents list ::
+
+ [
+  {
+    "ID": "000",
+    "Name": "vpc-ossec-manager (server)",
+    "IP": "127.0.0.1",
+    "Status": "Active/Local"
+  },
+  {
+    "ID": "001",
+    "Name": "vpc-agent-debian",
+    "IP": "10.0.0.121",
+    "Status": "Active"
+  },
+  {
+    "ID": "005",
+    "Name": "vpc-agent-centos-public",
+    "IP": "10.0.0.125",
+    "Status": "Active"
+  },
+  {
+    "ID": "004",
+    "Name": "vpc-agent-windows",
+    "IP": "10.0.0.124",
+    "Status": "Active"
+  },
+  {
+    "ID": "006",
+    "Name": "vpc-agent-ubuntu-public",
+    "IP": "10.0.0.126",
+    "Status": "Active"
+  }
+ ]
+
+Agent info ::
+
+ {
+  "response": {
+    "id": "001",
+    "name": "vpc-agent-debian",
+    "ip": "10.0.0.121",
+    "status": "Active",
+    "operating_system": "Linux vpc-agent-debian 3.2.0-4-amd64 #1 SMP Debian 3.2.68-1+deb7u2 x86_64",
+    "client_version": "OSSEC HIDS v2.8 / 4fb9c2ba06bbb72185e8ba7c19b9ea29",
+    "last_keepalive": "Wed Oct 21 16:29:47 2015",
+    "syscheck_last_started": "Unknown",
+    "syscheck_last_ended": "Unknown",
+    "rootcheck_last_started": "Wed Oct 21 16:31:02 2015",
+    "rootcheck_last_ended": "Wed Oct 21 16:16:02 2015"
+  },
+  "error": 0
+ }
+
+Agent restarted ::
+
+ {
+  "response": {
+    "id": "001",
+    "name": "vpc-agent-debian",
+    "ip": "10.0.0.121",
+    "message": "Restarting agent"
+  },
+  "error": 0,
+  "description": ""
+ }
+
+Agent syscheck/rootcheck restared ::
+
+ {
+  "response": {
+    "id": "001",
+    "name": "vpc-agent-debian",
+    "ip": "10.0.0.121",
+    "message": "Restarting agent"
+  },
+  "error": 0,
+  "description": ""
+ }
 
 
 
