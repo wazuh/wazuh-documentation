@@ -62,7 +62,7 @@ Please complete Wazuh installation guide first, then you can go into this tutori
 
 * `Install OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
-.. note:: Remember we **ARE NOT** installing official OSSEC release, you need to compile and install Wazuh version.
+.. note:: Remember we are installing OSSEC HIDS forked by Wazuh.
 
 Once OSSEC Wazuh installation has completed, move forward to Logstash installation.
 

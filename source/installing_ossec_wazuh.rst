@@ -21,7 +21,7 @@ Moreover this fork includes extensions and config files to easily integrate `ELK
 Installation
 --------------------
 
-.. note:: Remember we **ARE NOT** installing official OSSEC release, you need to compile and install Wazuh version.
+.. note:: Remember we are installing OSSEC HIDS forked by Wazuh.
 
 
 Create a folder on your preferred home directory and download the repository.
