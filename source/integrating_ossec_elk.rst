@@ -709,9 +709,12 @@ We tune up this index to hide non-useful fields, view only mode and PCI Requirem
 
 Custom dashboards for OSSEC Alerts, GeoIP Maps, File integrity, PCI Requirements & CIS Benchmarks.
 
-So, proceed to copy *index.js* to Kibana folder ::
+So, proceed to copy the necessary files to Kibana folder ::
 
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
+ $ sudo mkdir /opt/kibana/src/public/components/compliance
+ $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/compliance.json /opt/kibana/src/public/components/compliance/
+
 
 Now you can import the custom dashboards, access to Kibana WEB on your browser and navigate to Objects:
 
