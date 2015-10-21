@@ -20,5 +20,5 @@ Index:
    installing_ossec_wazuh
    integrating_ossec_elk
    installing_ossec_api
-   index_jose
+   installation_guide
    readme
