@@ -99,7 +99,7 @@ Update repositories and install *nodejs* package ::
 
 
 Generating certificates
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 At *api* folder you can found some certificates we already created for you, if you don't want to generate new certificates it is not neccesary to do it, you can move forward to next section of this guide.
 
