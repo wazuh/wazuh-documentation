@@ -774,10 +774,6 @@ Update repositories and install Nginx and apache2-utils (for htpassword) ::
  $ sudo apt-get update
  $ sudo apt-get install nginx apache2-utils
 
-Nginx as service ::
-
- $ sudo update-rc.d nginx defaults
-
 
 **YUM**
 
@@ -840,8 +836,9 @@ Enter again the password, fill the certificate information (the data you fill up
  $ sudo cp server.key server.key.org
  $ sudo openssl rsa -in server.key.org -out kibana-access.key
  $ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out kibana-access.crt
+ $ sudo mkdir -p /etc/pki/tls/certs
  $ sudo cp kibana-access.crt /etc/pki/tls/certs/
- $ sudo mkdir /etc/pki/tls/private/
+ $ sudo mkdir -p /etc/pki/tls/private/
  $ sudo cp kibana-access.key /etc/pki/tls/private/
 
 That's all, now we have our certificates finished and our connection will be encrypted, let's move on generate password for HTTP authentication.
