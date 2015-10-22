@@ -790,9 +790,13 @@ Install and start Nginx ::
 Configure Nginx
 ^^^^^^^^^^^^^^^^^^^
 
-Add a configuration file on **conf.d** Nginx folder :: 
+Add a configuration file on **conf.d** Nginx folder(CentOS) :: 
 
   $ sudo vi /etc/nginx/conf.d/kibana.conf
+
+Add a configuration file on **conf.d** Nginx folder(Ubuntu) :: 
+
+  $ sudo /etc/nginx/sites-available/default
 
 Paste the following configuration :: 
 
