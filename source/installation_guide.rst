@@ -11,3 +11,4 @@ OSSEC installation guide
    aix
    basicconfiguration
    puppet
+   docker
