@@ -100,7 +100,7 @@ For Debian Strech::
 Install the Docker package
 --------------------------
 
-**In CentOS / Fedora::**
+**In CentOS / Fedora**::
 
    $ sudo yum install docker-engine
 
@@ -112,7 +112,7 @@ To ensure Docker starts when you boot your system, do the following::
 
    $ chkconfig docker on
 
-**In Ubuntu / Debian::**
+**In Ubuntu / Debian**::
 
    $ sudo apt-get update && apt-get install docker-engine
 
