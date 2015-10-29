@@ -21,4 +21,5 @@ Index:
    integrating_ossec_elk
    installing_ossec_api
    installation_guide
+   wazuh_rule_set
    readme
