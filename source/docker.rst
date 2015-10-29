@@ -91,7 +91,7 @@ For Debian Jessie::
    # Debian Jessie
    deb https://apt.dockerproject.org/repo debian-jessie main
 
-For Debian Strech
+For Debian Strech::
 
    # Debian Stretch/Sid
    deb https://apt.dockerproject.org/repo debian-stretch main
@@ -100,7 +100,7 @@ For Debian Strech
 Install the Docker package
 --------------------------
 
-For install in CentOS / Fedora::
+**In CentOS / Fedora::**
 
    $ sudo yum install docker-engine
 
@@ -108,7 +108,11 @@ To start the daemon::
 
    $ sudo service docker start
 
-For install in Ubuntu / Debian::
+To ensure Docker starts when you boot your system, do the following::
+
+   $ chkconfig docker on
+
+**In Ubuntu / Debian::**
 
    $ sudo apt-get update && apt-get install docker-engine
 
@@ -116,4 +120,14 @@ To start the dameon::
  
    $ sudo service docker start
 
+To ensure Docker starts when you boot your system, do the following::
+
+   $ sudo systemctl enable docker
+
+.. note:: For 14.10 and below the above installation method automatically configures upstart to start the docker daemon on boot
+
+Install Docker in different plataforms
+--------------------------------------
+
+For install Docker in different plataform you can review the official guide `here <https://docs.docker.com/installation/>`_
 
