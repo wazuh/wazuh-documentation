@@ -131,3 +131,40 @@ Install Docker in different plataforms
 
 For install Docker in different plataform you can review the official guide `here <https://docs.docker.com/installation/>`_
 
+Run the Ossec-elk Container
+---------------------------
+
+To run the osec-elk container is very easy, only need to type this command::
+
+   $ docker run -d -p 1514:1514/udp -p 514:514/udp -p 5601:5601 -v /somepath/ossec_mnt:/var/ossec/data --name ossec wazuh/ossec-elkstack
+
+The following directories are externalized under /var/ossec/data to allow the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue. In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
+
+
+Configuring
+-----------
+
+Now we need to create a Kibana index, Kibana will do it automatically but we need to set up some fields on the first Kibana initialization.
+
+- Access to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern
+- Kibana will ask you to "Configure an index pattern", then do the following:
+- Check "Use event times to create index names"
+- Index pattern interval: Daily
+- Index name or pattern: **[ossec-]YYYY.MM.DD**
+- On **Time-field name** list select **@timestamp** option
+- Click on Create button
+- Go to Discover tap on top bar buttons.
+
+.. note:: Kibana will search Elasticsearch index name pattern "ossec-yyyy.mm.dd" you need to generate alerts from OSSEC BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on purpose several times.
+
+Now you can import the custom dashboards, access to Kibana WEB on your browser and navigate to Objects:
+
+- Click at top bar on Settings
+- Click on Objects
+- Then click the button **Import** and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
+
+That's all! Refresh Kibana page and load the recently and fresh **imported Dashboards**.
+
+.. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
+
+
