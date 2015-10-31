@@ -141,6 +141,46 @@ To run the osec-elk container is very easy, only need to type this command::
 The following directories are externalized under /var/ossec/data to allow the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue. In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
 
 
+Available Configuration Parameters
+**********************************
+
+* __AUTO_ENROLLMENT_ENABLED__: Specifies whether or not to enable auto-enrollment via ossec-authd. Defaults to `true`;
+* __AUTHD_OPTIONS__: Options to passed ossec-authd, other than -p and -g. Defaults to empty;
+* __SYSLOG_FORWADING_ENABLED__: Specify whether syslog forwarding is enabled or not. Defaults to `false`.
+* __SYSLOG_FORWARDING_SERVER_IP__: The IP for the syslog server to send messagse to, required for syslog fowarding. No default.
+* __SYSLOG_FORWARDING_SERVER_PORT__: The destination port for syslog messages. Default is `514`.
+* __SYSLOG_FORWARDING_FORMAT__: The syslog message format to use. Default is `default`.
+
+.. note:: All SYSLOG configuration variables are only applicable to the first time setup. Once the container's data volume has been initialized, all the configuration options for OSSEC can be changed.
+
+ossec-execd is not enabled
+**************************
+
+Since this is a docker container, ossec-execd really isn't a great idea anyway. Having a log server, such as graylog, react based on log entries is the recommended approach.
+
+
+
+Add agents
+**********
+
+For add agent use the next command::
+
+   $ docker exec -it ossec /var/ossec/bin/manage_agents
+
+Or can use auto enrollment tipping the next comman in the machine with the agent::
+
+   $ /var/ossec/bin/agent-auth -m ossec -p 1515 -A example-agent
+   INFO: Connected to ossec:1515
+   INFO: Using agent name as: melancia
+   INFO: Send request to manager. Waiting for reply.
+   INFO: Received response with agent key
+   INFO: Valid key created. Finished.
+   INFO: Connection closed.
+
+.. note:: Don't forget to do a `docker exec -it ossec /var/ossec/bin/ossec-control restart` after you'd added your first agent. 
+
+
+
 Configuring and access
 ----------------------
 
