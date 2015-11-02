@@ -106,6 +106,8 @@ Download and install the Public Signing Key ::
 
 Add the following in your */etc/yum.repos.d/* directory in a file with a *.repo* suffix, for example *logstash.repo* ::
 
+   $ sudo vi /etc/yum.repos.d/logstash.repo
+
  [logstash-1.5]
  name=Logstash repository for 1.5.x packages
  baseurl=http://packages.elasticsearch.org/logstash/1.5/centos
@@ -165,11 +167,7 @@ In single-host architecture, Logstash user requires to read from OSSEC alerts fi
 
 Open users groups file ::
 
-  $ sudo vi /etc/group
-
-Search for "*ossec*" and add **logstash** at the end of that line, just like this ::
-
-  ossec:x:1001:logstash
+  $ sudo usermod -a -G ossec logstash
 
 **Restart Logstash** 
   
@@ -372,6 +370,8 @@ Download and install the Public Signing Key ::
 
 Add the following in your */etc/yum.repos.d/* directory in a file with a *.repo* suffix, for example *elasticsearch.repo* ::
 
+   $ sudo vi /etc/yum.repos.d/elasticsearch.repo
+
  [elasticsearch-1.7]
  name=Elasticsearch repository for 1.7.x packages
  baseurl=http://packages.elastic.co/elasticsearch/1.7/centos
@@ -413,15 +413,15 @@ Set up network configuration options
 
 Elasticsearch **IP server address**, in *single-node* case should be localhost, 127.0.0.1 or 0.0.0.0 ::
 
- network.bind_host: 127.0.0.1
+ network.bind_host: 0.0.0.0
 
 Elasticsearch **publish IP Address**, how the network will discover our Elasticsearch server ::
 
- network.publish_host: 127.0.0.1
+ network.publish_host: localip
 
 *publish_host* and *bind_host* variables, this variable set both of them at same time same value ::
 
- network.host: 127.0.0.1
+ network.host: localip
 
 Elasticsearch uses by default **port 9200** for the API queries and ports **9300 to 9400** to network nodes discovering. Remember to open the ports in your router/firewall settings.
 
@@ -581,7 +581,7 @@ This template allow us the posterior creation of **Kibana dashboards**.
 
 Add the template by a *CURL* request to Elastic API ::
 
- $ curl -XPUT "http://localhost:9200/_template/ossec/" -d "@~/ossec_tmp/ossec-hids/extensions/elasticsearch/elastic-ossec-template.json"
+ $ cd ~/ossec_tmp/ossec-hids/extensions/elasticsearch/ && curl -XPUT "http://localhost:9200/_template/ossec/" -d "@elastic-ossec-template.json"
       
 If everything was okey, the API response should be ::
 
@@ -748,7 +748,7 @@ Change to your home directory and download the **Oracle Java 8 JDK RPM** with th
 
 Install the RPM with this yum command ::
 
- $ sudo yum localinstall jdk-8u60-linux-x64.RPM
+ $ sudo yum localinstall jdk-8u60-linux-x64.rpm
 
 Delete the archive file that you downloaded earlier ::
 
