@@ -50,7 +50,7 @@ This document describes the steps to deploy the entire system in a single host, 
 Server requirements
 ^^^^^^^^^^^^^^^^^^^
 * RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation. Although it would still work, according to their documentation less than 8GB RAM is counterproductive. In our case, for a single-node deployment, the same server will be sharing resources for OSSEC and ELK Stack, so we recommend to at least meet this 8GB memory requirement. 
-* Java 8 `(Install guide on bottom) <#id14>`_
+* Java 8 `Installing Java 8`_
 * `OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
 1. OSSEC
@@ -68,7 +68,7 @@ Once OSSEC Wazuh installation has completed, move forward to Logstash installati
 
 2. Logstash
 ^^^^^^^^^^^^^^^^^^^
-.. note:: At this point you will need Java 8 JRE update 20 or later installed on your system, please proceed to install it before continue with the guide. `Install Java 8 <#id4>`_
+.. note:: At this point you will need Java 8 JRE update 20 or later installed on your system, please proceed to install it before continue with the guide. `Installing Java 8`_
 
 We proceed to install *Logstash Server*, in this case we are installing it on the **same** machine (single-host) where we previously installed OSSEC Manager, that's why some configuration settings will refer local OSSEC files.
 
@@ -133,11 +133,11 @@ Once Logstash is installed, copy Wazuh Logstash file to Logstash configuration f
 
 **Single-host configuration** ::
 
- $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
+ $ sudo cp ~/ossec_tmp/ossec-hids/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
 **Multi-host configuration** ::
 
- $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
+ $ sudo cp ~/ossec_tmp/ossec-hids/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
 **Set Elasticsearch IP**
 
@@ -150,7 +150,7 @@ Edit *01-ossec.conf* or *01-ossec-singlehost.conf* file and set your Elasticsear
 
 Copy Elasticsearch custom mapping from extensions folder to to Logstash folder ::
 
-  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json  /etc/logstash/
+  $ sudo cp ~/ossec_tmp/ossec-hids/extensions/elasticsearch/elastic-ossec-template.json  /etc/logstash/
 
 **GeoIP DB** 
 
@@ -180,7 +180,7 @@ Finally restart Logstash service to apply last changes ::
 2.2 Generate SSL Certificates on Logstash-Server
 """"""""""""""""""""""""""""""""""""""""""""""""
 
-.. warning:: SSL Certificates it is only needed for **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder so you don't need to generate SSL Certificates, please refer directly to section `4. Elasticsearch <#id4>`_
+.. warning:: SSL Certificates it is only needed for **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder so you don't need to generate SSL Certificates, please refer directly to section `4. Elasticsearch`_
 
 Since we are going to use Logstash Forwarder to ship logs from our hosts to our Logstash Server, we need to create an SSL certificate and key pair. The certificate is used by the Logstash Forwarder to verify the identity of Logstash Server and encrypt communications.
 
@@ -223,7 +223,7 @@ Now we have on our Logstash-Forwarder machine the certificate on /tmp folder, ne
 3. Logstash-Forwarder
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. warning:: Logstash-Forwarder configuration it is only necessary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to section `4. Elasticsearch <#id4>`_
+.. warning:: Logstash-Forwarder configuration it is only necessary to **multi-host** architecture, if you are installing all tools on one machine, you don't need to install Logstash-Forwarder, please refer directly to section `4. Elasticsearch`_
 
 3.1 Installing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -581,7 +581,7 @@ This template allow us the posterior creation of **Kibana dashboards**.
 
 Add the template by a *CURL* request to Elastic API ::
 
- $ curl -XPUT "http://localhost:9200/_template/ossec/" -d "@~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json"
+ $ curl -XPUT "http://localhost:9200/_template/ossec/" -d "@~/ossec_tmp/ossec-hids/extensions/elasticsearch/elastic-ossec-template.json"
       
 If everything was okey, the API response should be ::
 
@@ -623,7 +623,7 @@ Go to your OSSEC tmp folder(we created it at the very beginning) and **download*
 
 To run **Kibana as a service** we will use a script created apparently by *bsmith*, thanks you. Copy it from extensions kibana ossec wazuh folder :: 
 
- $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
+ $ sudo cp ~/ossec_tmp/ossec-hids/extensions/kibana/kibana4 /etc/init.d/
 
 Then you should give it *execution permissions* and add to update rc.d configuration (Debian Linux) ::
 
@@ -711,16 +711,16 @@ Custom dashboards for OSSEC Alerts, GeoIP Maps, File integrity, PCI Requirements
 
 So, proceed to copy the necessary files to Kibana folder ::
 
- $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
+ $ sudo cp ~/ossec_tmp/ossec-hids/extensions/kibana/index.js /opt/kibana/src/public
  $ sudo mkdir /opt/kibana/src/public/components/compliance
- $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/compliance.json /opt/kibana/src/public/components/compliance/
+ $ sudo cp ~/ossec_tmp/ossec-hids/extensions/kibana/compliance.json /opt/kibana/src/public/components/compliance/
 
 
 Now you can import the custom dashboards, access to Kibana WEB on your browser and navigate to Objects:
 
 - Click at top bar on Settings
 - Click on Objects
-- Then click the button **Import** and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
+- Then click the button **Import** and select the file ~/ossec_tmp/ossec-hids/extensions/kibana/kibana-ossecwazuh-dashboards.json
 
 That's all! Refresh Kibana page and load the recently and fresh **imported Dashboards**.
 
