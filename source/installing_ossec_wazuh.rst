@@ -23,6 +23,10 @@ Installation
 
 .. note:: Remember we are installing OSSEC HIDS forked by Wazuh.
 
+We need development and packages tools like g++, gcc, git etc... if it is needed, install them this ::
+
+ For CentOS: $ sudo yum groupinstall 'Development Tools'
+ For Debian Linux: $ sudo apt-get install build-essential git
 
 Create a folder on your preferred home directory and download the repository.
 
@@ -30,16 +34,10 @@ Go home folder, create temporal folder, clone the repository ::
 
    $ cd ~
    $ mkdir ossec_tmp && cd ossec_tmp
-   $ git clone https://github.com/wazuh/ossec-wazuh.git
-   $ cd ossec-wazuh
+   $ git clone https://github.com/wazuh/ossec-hids.git
+   $ cd ossec-hids
 
 Now we have the OSSEC source code on our machine, let's compile it. 
-We need development and packages tools like g++, gcc etc... if it is needed, install them this ::
-
- For CentOS: $ sudo yum groupinstall 'Development Tools'
- For Debian Linux: $ sudo apt-get install build-essential
-
-.. note:: **CentOS** requires add an OSSEC user BEFORE the installation : **$ sudo useradd ossec**
 
 Finally compile and install **OSSEC Manager** ::
 
