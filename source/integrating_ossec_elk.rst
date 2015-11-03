@@ -53,6 +53,37 @@ Server requirements
 * Java 8 `Installing Java 8`_
 * `OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
+Installing Java 8
+--------------------
+
+APT
+^^^^^^^^^^^^^^^^^^^
+First you need to add *webupd8team* JAVA repository in your system, then proceed to install Java 8 via apt-get install ::
+
+ $ sudo add-apt-repository ppa:webupd8team/java
+ $ sudo apt-get update
+ $ sudo apt-get install oracle-java8-installer
+
+
+YUM
+^^^^^^^^^^^^^^^^^^^
+Change to your home directory and download the **Oracle Java 8 JDK RPM** with these commands ::
+
+ $ cd ~
+ $ wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm"
+
+Install the RPM with this yum command ::
+
+ $ sudo yum localinstall jdk-8u60-linux-x64.rpm
+
+Delete the archive file that you downloaded earlier ::
+
+ $ rm ~/jdk-8u60-linux-x64.rpm 
+
+Set your **JAVA_HOME** environment variable in a bash shell ::
+
+ $ export JAVA_HOME=/usr/java/jdk1.8.0_60/jre 
+
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
 
@@ -306,11 +337,7 @@ Logstash-forwarder user requires to read from OSSEC alerts file, we need to gran
 
 Open users groups file ::
 
-  $ sudo vi /etc/group
-
-Search for "*ossec*" and add **logstash-forwarder** at the end of that line, just like this ::
-
-  ossec:x:1001:logstash-forwarder
+  $ sudo usermod -a -G ossec logstash-forwarder
 
 Restart and we are finish to configure Logstash Forwarder ::
 
@@ -417,11 +444,11 @@ Elasticsearch **IP server address**, in *single-node* case should be localhost, 
 
 Elasticsearch **publish IP Address**, how the network will discover our Elasticsearch server ::
 
- network.publish_host: localip
+ network.publish_host: publicip
 
 *publish_host* and *bind_host* variables, this variable set both of them at same time same value ::
 
- network.host: localip
+ network.host: publicip
 
 Elasticsearch uses by default **port 9200** for the API queries and ports **9300 to 9400** to network nodes discovering. Remember to open the ports in your router/firewall settings.
 
@@ -725,38 +752,6 @@ Now you can import the custom dashboards, access to Kibana WEB on your browser a
 That's all! Refresh Kibana page and load the recently and fresh **imported Dashboards**.
 
 .. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
-
-
-Installing Java 8
---------------------
-
-APT
-^^^^^^^^^^^^^^^^^^^
-First you need to add *webupd8team* JAVA repository in your system, then proceed to install Java 8 via apt-get install ::
-
- $ sudo add-apt-repository ppa:webupd8team/java
- $ sudo apt-get update
- $ sudo apt-get install oracle-java8-installer
-
-
-YUM
-^^^^^^^^^^^^^^^^^^^
-Change to your home directory and download the **Oracle Java 8 JDK RPM** with these commands ::
-
- $ cd ~
- $ wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm"
-
-Install the RPM with this yum command ::
-
- $ sudo yum localinstall jdk-8u60-linux-x64.rpm
-
-Delete the archive file that you downloaded earlier ::
-
- $ rm ~/jdk-8u60-linux-x64.rpm 
-
-Set your **JAVA_HOME** environment variable in a bash shell ::
-
- $ export JAVA_HOME=/usr/java/jdk1.8.0_60/jre 
 
 
 Protecting Kibana 4
