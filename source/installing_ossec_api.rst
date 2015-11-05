@@ -6,7 +6,7 @@ Introduction
 
 OSSEC RESTful API is a service to control OSSEC Manager using REST requests. Through RESTful petitions we will able to interact with OSSEC controls like agents control, rootcheck and syscheck controls or rules control.
 
-Nowdays it is basic to have an API which allows the software an easy communication with other software, we build this API aiming to turns OSSEC into a modern and technologic HIDS solution able to receive and send JSON petitions.
+Check the `sample outputs  <#sample-outputs>`_ at the end of this documentation.
 
 Goal
 --------------------
@@ -84,7 +84,7 @@ Installing
 API Folders
 ^^^^^^^^^^^^^^^^^^^
 
-To get the API working we need OSSEC HIDS forked by Wazuh, download and install it, you can follow the installation guide at `OSSEC Wazuh installation  <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html/>`_
+To get the API working we need OSSEC HIDS forked by Wazuh, download and install it, you can follow the installation guide at `OSSEC Wazuh installation  <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
 Just in case you forgot it, mount dev folder to OSSEC location :: 
 
