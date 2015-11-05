@@ -538,7 +538,7 @@ Find **MAX_OPEN_FILES** and set it to 65535 ::
 
  MAX_OPEN_FILES=65535
 
-In case of Centos open and edit */usr/lib/systemd/system/elasticsearch.service* and uncomment the line ::
+In case of CentOS open and edit */usr/lib/systemd/system/elasticsearch.service* and uncomment the line ::
 
  LimitMEMLOCK=infinity
 
@@ -815,7 +815,7 @@ Paste the following configuration ::
  }
 
 
-Now open the Nginx configuration file in your favorite editor. We will use vi::
+In CentOS need some more changes::
 
    $ sudo vi /etc/nginx/nginx.conf
 
@@ -892,7 +892,6 @@ Change SELINUX to permissive::
 Afterwards we must reboot the system::
 
   $ sudo reboot
-
 
 
 
