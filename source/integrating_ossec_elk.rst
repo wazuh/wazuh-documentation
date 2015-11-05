@@ -510,8 +510,8 @@ Open and edit **limits.conf** file ::
 
 Add this lines at bottom of the file :: 
 
-  elasticsearch - nofile 65535    
-  elasticsearch   -       memlock         unlimited
+  elasticsearch - nofile  65535    
+  elasticsearch - memlock unlimited
 
 
 **Save and exit limits.conf file** 
@@ -792,7 +792,7 @@ Add a configuration file on **conf.d** Nginx folder(Ubuntu) ::
 Paste the following configuration :: 
 
  server {
-        listen      [::]:80;
+        listen      *:80;
         return 301 https://$host$request_uri;
  }
 
