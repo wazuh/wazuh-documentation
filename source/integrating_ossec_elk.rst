@@ -815,6 +815,18 @@ Paste the following configuration ::
  }
 
 
+Now open the Nginx configuration file in your favorite editor. We will use vi::
+
+   $ sudo vi /etc/nginx/nginx.conf
+
+Find the default server block (starts with server {), the last configuration block in the file, and delete it. When you are done, the last two lines in the file should look like this::
+
+    include /etc/nginx/conf.d/*.conf;
+    }
+
+Save and exit.
+
+
 This configuration set up Nginx to listen on 443 and 80, but this last will redirect every connection to 443 port (HTTPS).
 
 **Generate certificates**
@@ -853,6 +865,36 @@ Restart Nginx service ::
  $ sudo service nginx restart
 
 That's all! Try to access to Kibana Web and the HTTP authentication will prompt asking for the password you just created. Now we got a Kibana instance HTTPS and password protected secured.
+
+
+.. warning:: If in CentOS have logs similar than this ** *6 connect() to 127.0.0.1:5601 failed (13: Permission denied) while connecting to upstream, client: ** follow follow the next setp
+
+Disable SELinux CentOS
+-----------------------
+
+SELinux is a security extension of CentOS that should provide extended security. SELinux was causing the problem you can change to permissive follow the next steps::
+
+   $ sudo vi /etc/selinux/config
+
+Change SELINUX to permissive::
+
+   # This file controls the state of SELinux on the system.
+   # SELINUX= can take one of these three values:
+   #     enforcing - SELinux security policy is enforced.
+   #     permissive - SELinux prints warnings instead of enforcing.
+   #     disabled - No SELinux policy is loaded.
+   SELINUX=**permissive**
+   # SELINUXTYPE= can take one of these two values:
+   #     targeted - Targeted processes are protected,
+   #     mls - Multi Level Security protection.
+   SELINUXTYPE=targeted
+
+Afterwards we must reboot the system::
+
+  $ sudo reboot
+
+
+
 
 What next?
 -----------
