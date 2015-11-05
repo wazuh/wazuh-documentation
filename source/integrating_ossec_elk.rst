@@ -792,12 +792,14 @@ Add a configuration file on **conf.d** Nginx folder(Ubuntu) ::
 Paste the following configuration :: 
 
  server {
-        listen      *:80;
+        listen 80 default_server;                       #Listen on IPv4
+        listen [::]:80;                                 #Listen on IPv6
         return 301 https://$host$request_uri;
  }
 
  server {
         listen                *:443;
+         listen            [::]:443;
         ssl on;
         ssl_certificate /etc/pki/tls/certs/kibana-access.crt;
         ssl_certificate_key /etc/pki/tls/private/kibana-access.key;

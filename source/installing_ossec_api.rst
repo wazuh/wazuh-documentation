@@ -93,7 +93,7 @@ Just in case you forgot it, mount dev folder to OSSEC location ::
 
 And copy the API folder to OSSEC folder ::
 
- $ sudo cp -rf ~/ossec_tmp/ossec-wazuh/extensions/api  /var/ossec/
+ $ sudo cp -rf ~/ossec_tmp/ossec-hids/extensions/api  /var/ossec/
 
 Install NodeJS
 ^^^^^^^^^^^^^^^^^^^
@@ -134,7 +134,7 @@ Create a Server Certificate ::
 
  $ cd /var/ossec/api	
  $ sudo openssl genrsa -des3 -out server.key 1024
- $ sudo req -new -key server.key -out server.csr
+ $ sudo openssl req -new -key server.key -out server.csr
 
 The password must be inserted everytime you run the server, if you don't want to enter the password everytime, remove it ::
 
@@ -156,7 +156,7 @@ Adding password
 By default you can enter the API by entering user *foo* and password *bar*, but you can of course generate your own password like this ::
 
  $ cd /var/ossec/api
- $ sudo htpasswd -c htpasswd username
+ $ sudo htpasswd -c htpasswd **username**
 
 Running API in background
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -165,7 +165,7 @@ Time to start the API, we are going to start it on background and redirect the s
 
  $ /bin/node /var/ossec/api/server.js &>/var/ossec/api/api.log &
 
-.. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /user/bin/, if the API does not start, check it please.
+.. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /usr/bin/, if the API does not start, check it please.
 
 
 Sample outputs
