@@ -190,7 +190,7 @@ Copy Elasticsearch custom mapping from extensions folder to to Logstash folder :
 Download GeoLiteCity from Maxmind website, unzip and move it to Logstash folder ::
 
   $ sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
-  $ sudo sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
+  $ sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
 
 **Logstash user** 
 
