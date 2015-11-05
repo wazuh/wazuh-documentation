@@ -29,7 +29,7 @@ Choose the rule you would like to install and follow the instructions given in t
 
 **Rules from OSSEC folder:** :: 
 
-   Copy decoder.xml to /var/ossec/etc/
+   Copy /ossec-rules/rules-decoders/decoder.xml to /var/ossec/etc/
    Copy all files "*_rules.xml" to /var/ossec/rules/, except local_rules.xml
 
 **Rules from other folders:** :: 
@@ -38,10 +38,10 @@ Choose the rule you would like to install and follow the instructions given in t
    Copy software_rules.xml to /var/ossec/rules/
    Add <include>software_rules.xml</include> to /var/ossec/etc/ossec.conf in section "rules"
 
-If you prefer, you can execute the above steps automatically by running the script included in each folder: **autoinstall_rules.sh**
+If you prefer, you can execute the above steps automatically by running the script included in the main folder: **install_rules.sh**
 
-- Set execute permission for this script: *chmod +x autoinstall_rules.sh*
-- Run the script as root: *sudo ./autoinstall_rules.sh*
+- Set execute permission for this script: *chmod +x install_rules.sh*
+- Run the script as root: *sudo ./install_rules.sh*
 - Some rules can not be completely installed automatically and require further manual steps because they depend on the installation.
 
 Installing rootchecks
