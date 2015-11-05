@@ -6,7 +6,7 @@ Introduction
 
 OSSEC RESTful API is a service to control OSSEC Manager using REST requests. Through RESTful petitions we will able to interact with OSSEC controls like agents control, rootcheck and syscheck controls or rules control.
 
-Check the `sample outputs  <#sample-outputs>`_ at the end of this documentation.
+Check the `Sample outputs`_ at the end of this documentation.
 
 Goal
 --------------------
