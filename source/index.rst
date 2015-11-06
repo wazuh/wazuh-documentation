@@ -21,4 +21,6 @@ Index:
    ossec
    ossec_rule_set
    basicconfiguration
+   docker
+   puppet
    readme

@@ -1,5 +1,8 @@
-Ossec with Docker
-=================
+Deploying OSSEC in a Docker container
+=====================================
+
+How install Docker
+------------------
 
 Prerequisites
 -------------
@@ -40,6 +43,7 @@ For Fedora 21::
    gpgcheck=1
    gpgkey=https://yum.dockerproject.org/gpg
 
+
 For Fedora 22::
 
    [dockerrepo]
@@ -48,7 +52,6 @@ For Fedora 22::
    enabled=1
    gpgcheck=1
    gpgkey=https://yum.dockerproject.org/gpg
-
 
 Adding apt-get repository
 -------------------------
@@ -96,7 +99,6 @@ For Debian Strech::
    # Debian Stretch/Sid
    deb https://apt.dockerproject.org/repo debian-stretch main
 
-
 Install the Docker package
 --------------------------
 
@@ -116,8 +118,8 @@ To ensure Docker starts when you boot your system, do the following::
 
    $ sudo apt-get update && apt-get install docker-engine
 
-To start the dameon:: 
- 
+To start the dameon::
+
    $ sudo service docker start
 
 To ensure Docker starts when you boot your system, do the following::
@@ -130,6 +132,7 @@ Install Docker in different plataforms
 --------------------------------------
 
 For install Docker in different plataform you can review the official guide `here <https://docs.docker.com/installation/>`_
+
 
 Run the Ossec-elk Container
 ---------------------------
@@ -206,5 +209,8 @@ Now you can import the custom dashboards, access to Kibana WEB on your browser a
 That's all! Refresh Kibana page and load the recently and fresh **imported Dashboards**.
 
 .. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
+
+Run the Ossec-elk Container
+---------------------------
 
 
