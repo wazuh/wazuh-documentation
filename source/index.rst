@@ -1,7 +1,7 @@
-OSSEC HIDS Installation guide!
-=======================
+OSSEC Installation guide!
+=========================
 
-.. topic:: OSSEC HIDS - Wazuh
+.. topic:: OSSEC HIDS
 
    Welcome to OSSEC installation and deploy guide.
 
