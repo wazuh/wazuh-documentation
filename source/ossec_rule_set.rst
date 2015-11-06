@@ -59,11 +59,19 @@ Rootchecks follow the same folder structure as rules. In folder */ossec-rules/ro
 Choose the rootcheck you would like to install and follow these instructions: 
 :: 
 
-   Copy all files to /var/ossec/etc/shared/
-   Add to /var/ossec/etc/ossec.conf in section "rootcheck" the path to each file inside the proper label:
-   - rootkit_files: For rootkit files database
-   - rootkit_trojans: For rootkit trojans database
-   - system_audit: For policy monitoring files
+   Copy the TXT file to /var/ossec/etc/shared/
+   Add to /var/ossec/etc/ossec.conf in section "rootcheck" the path to the TXT file inside the proper label. Examples:
+   - <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
+   - <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+
+   - <system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
+   - <system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
+   - <system_audit>/var/ossec/etc/shared/cis_rhel_linux_rcl.txt</system_audit>
+   - <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
+
+   - <windows_malware>/var/ossec/etc/shared/win_malware_rcl.txt</windows_malware>
+   - <windows_audit>/var/ossec/etc/shared/win_audit_rcl.txt</windows_audit>
+   - <windows_apps>/var/ossec/etc/shared/win_applications_rcl.txt</windows_apps>
 
 Contribute to the rule set
 ----------------------------
