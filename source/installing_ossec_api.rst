@@ -218,8 +218,8 @@ Agents list ::
 			ip: "any",
 			status: "Never connected"
 		}
-	]
-}
+	] 
+ }
 
 
 Agent info ::
