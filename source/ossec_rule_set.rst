@@ -10,6 +10,9 @@ In our repository you will find:
 
 * **OSSEC rules/rootchecks updates**
    We update out-of-the-box rules provided by OSSEC to fix bugs, create new rules and add further functionality. For example, each rule has been tagged with its related PCI control in order to classify each alert according to PCI-DSS compliance.
+   
+   Here you will find a complete description of the rules availables: http://www.wazuh.com/resources/OSSEC_Ruleset.pdf
+  
 * **New rules/rootchecks**
    Although we update the set of rules and rootchecks provided by OSSEC, this set is still limited. For this reason, we collect rules published by the community that do not come by default with OSSEC, test them and make sure they work well. Additionally we create new rootchecks and rules. Some examples of new rules are NetScaler and Puppet.
 
@@ -67,6 +70,8 @@ Contribute to the rule set
 If you have created new rules, decoders or rootchecks and you would like to include them in our repository, please contact us by email: info@wazuh.com
 
 Also do not hesitate to request new rules or rootchecks that you would like to see running in OSSEC.
+
+In our repository you will find that most of the rules contain one or more groups called pci_dss_X. This is the PCI requirements related to the rule. We have produced a document that can help you tag each rule with its corresponding PCI requirement: http://www.wazuh.com/resources/PCI_Tagging.pdf
 
 What's next?
 ------------
