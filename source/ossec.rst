@@ -12,4 +12,10 @@ Check out OSSEC features and how it works for more information about how OSSEC c
 .. toctree::
    :maxdepth: 3
 
-   installation_guide
+   rpm
+   deb
+   source
+   windows
+   aix
+   puppet
+   docker
