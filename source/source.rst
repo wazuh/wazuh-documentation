@@ -79,7 +79,7 @@ Execute the installation script::
 The next step is make the `Manager installation`_ or `Agent installation`_
 
 Manager installation
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 The installation make you several questions
 
@@ -222,7 +222,7 @@ files on your system::
    ---  Press ENTER to finish (maybe more information below). ---
 
 Agent installation
-^^^^^^^^^^^^^^^^^^
+------------------
 
 
 The installation make you several questions
