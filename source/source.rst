@@ -1,4 +1,4 @@
-Installing from Sources
+Building from Sources
 =======================
 
 Download and integrity verification
@@ -39,8 +39,12 @@ Expected output::
 
 .. warning:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connexion.
 
+
+Setting up a build environment
+------------------------------
+
 Ubuntu & Debian
----------------
+***************
 
 On Ubuntu and Debian you will need the **build-essential** package in order to compile and install OSSEC::
 
@@ -49,7 +53,7 @@ On Ubuntu and Debian you will need the **build-essential** package in order to c
 now can continue with the installation in the section `Common installation for all distributions`_
 
 RedHat CentOS & Fedora
-----------------------
+**********************
 
 On RedHat, CentOS or Fedora you need the **Development Tools** package in order to compile and install OSSEC::
 

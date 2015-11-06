@@ -37,8 +37,8 @@ Type the next command for update the repository::
    $ apt-get update
 
 
-Installing OSSEC
-----------------
+Installing OSSEC manager
+------------------------
 
 To install with **apt-get** do the following::
 

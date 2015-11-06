@@ -36,9 +36,11 @@ The newest versions of Puppet can be installed from the apt.puppetlabs.com packa
 
 To enable the repository:
 
-Download the “puppetlabs-release” package f   wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb	
-   sudo dpkg -i puppetlabs-release-trusty.deb
-   sudo apt-get update
+Download the “puppetlabs-release” package::
+
+   $ sudo wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb	
+   $ sudo dpkg -i puppetlabs-release-trusty.deb
+   $ sudo apt-get update
 
 
 On your puppet master node, run one of the following::

@@ -32,8 +32,8 @@ To add Wazuh yum repository, create a file named /etc/yum.repos.d/wazuh.repo::
 
 .. warning:: Fedora 23 is an Alpha version. Those packages may not work properly.
 
-Installing OSSEC
-----------------
+Installing OSSEC manager
+------------------------
 
 To install using **yum** do the following:: 
 
@@ -60,11 +60,12 @@ Installing Wazuh GPG key
 If it is the first installation from Wazuh repository you need to import
 the GPG key typing **y** after the next question::
 
-   Obteniendo clave desde http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
-   Importando llave GPG 0x3B3631FB:
-    Usuarioid  : "Jose Luis Ruiz <jose@wazuh.com>"
-    Huella       : 9a5a 6e31 fb39 a5f6 21d8 de8b 3f9f d7b9 3b36 31fb
-    Desde      : http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
-   Está de acuerdo [s/N]: s
+   Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+   Importing GPG key 0xF4A80EB5:
+    Userid     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
+    Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
+    Package    : centos-release-7-1.1503.el7.centos.2.8.x86_64 (@anaconda)
+    From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+   Is this ok [y/N]: 
 
 .. note:: If you don't install the Wazuh GPG key yum can't install the RPMs for security reasons.

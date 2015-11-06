@@ -22,4 +22,5 @@ Index:
    installing_ossec_api
    installation_guide
    ossec_rule_set
+   basicconfiguration
    readme
