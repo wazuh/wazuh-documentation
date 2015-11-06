@@ -1,13 +1,13 @@
-OSSEC HIDS Installation guide!
-==============================
+OSSEC HIDS Installation guide Latest Stable Release (2.8.3)!
+============================================================
 
-.. topic:: OSSEC HIDS
+.. topic:: OSSEC HIDS Latest Stable Release (2.8.3)
 
-OSSEC is an Open Source Host-based Intrusion Detection System that performs log analysis, file integrity checking, policy monitoring, rootkit detection, real-time alerting and active response.
+           OSSEC is an Open Source Host-based Intrusion Detection System that performs log analysis, file integrity checking, policy monitoring, rootkit detection, real-time alerting and active response.
 
-It runs on most operating systems, including Linux, MacOS, Solaris, HP-UX, AIX and Windows.
+           It runs on most operating systems, including Linux, MacOS, Solaris, HP-UX, AIX and Windows.
 
-Check out OSSEC features and how it works for more information about how OSSEC can help you solve your host-based security problems.
+           Check out OSSEC features and how it works for more information about how OSSEC can help you solve your host-based security problems.
 
 .. toctree::
    :maxdepth: 3

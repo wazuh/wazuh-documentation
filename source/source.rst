@@ -6,36 +6,26 @@ Download and integrity verification
 
 Download the sources from ossec.net::
 
-   $ wget -U ossec http://www.ossec.net/files/ossec-hids-2.8.2.tar.gz
+   $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz
 
 To download the checksum file, type::
 
-   $ wget -U ossec http://www.ossec.net/files/ossec-hids-2.8.2-checksum.txt
+   $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz.sha256
 
 Now, let's examine the checksum file with the **cat** command, like so::
 
-   $ cat ossec-hids-2.8.2-checksum.txt
+   $ cat ossec-hids-2.8.3.tar.gz.sha256
 
-   MD5(ossec-hids-2.8.2.tar.gz)= 3036d5babc96216135759338466e1f79
-   SHA1(ossec-hids-2.8.2.tar.gz)= a0f403270f388fbc6a0a4fd46791b1371f5597ec
+   SHA256 (ossec-hids-2.8.3.tar.gz) = 917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd
 
-To generate the MD5sum of the tarball, type::
+To generate the SHA256 of the tarball, type::
 
-   $ md5sum ossec-hids-2.8.2.tar.gz
-
-Expected output::
-
-   3036d5babc96216135759338466e1f79  ossec-hids-2.8.2.tar.gz
-
-Compare the generated MD5 checksum with the one in the checksum file. They should match.
-
-Do the same for the SHA1 checksum by typing::
-
-   $ sha1sum ossec-hids-2.8.2.tar.gz
+   $ sha256sum ossec-hids-2.8.3.tar.gz
 
 Expected output::
 
-   a0f403270f388fbc6a0a4fd46791b1371f5597ec  ossec-hids-2.8.2.tar.gz
+   917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd  ossec-hids-2.8.3.tar.gz
+
 
 .. warning:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connexion.
 
@@ -70,11 +60,11 @@ Common installation for all distributions
 
 Extract the code to your server::
 
-   $ tar xvfz ossec-hids-2.8.2.tar.gz
+   $ tar xvfz ossec-hids-2.8.3.tar.gz
 
 Execute the installation script::
 
-   $ bash ossec-hids-2.8.2/install.sh
+   $ bash ossec-hids-2.8.3/install.sh
 
 The next step is make the `Manager installation`_ or `Agent installation`_
 

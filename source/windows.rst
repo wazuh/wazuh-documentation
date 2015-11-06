@@ -1,11 +1,31 @@
 Compiling Windows agent
 =======================
 
-The last version avaliable for Ossec Windows Agent is **2.8.1**, the compilation for version 2.8.2 does not work properly.
+This manual is bassed in ossec-hids 2.8.3 version, you can download in the from this sources::
 
-This manual is bassed in ossec-hids 2.8.1 version, you can download in the from this sources::
+   $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz
 
-   $ wget https://github.com/ossec/ossec-hids/archive/2.8.1.zip
+To download the checksum file, type::
+
+   $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz.sha256
+
+Now, let's examine the checksum file with the **cat** command, like so::
+
+   $ cat ossec-hids-2.8.3.tar.gz.sha256
+
+   SHA256 (ossec-hids-2.8.3.tar.gz) = 917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd
+
+To generate the SHA256 of the tarball, type::
+
+   $ sha256sum ossec-hids-2.8.3.tar.gz
+
+Expected output::
+
+   917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd  ossec-hids-2.8.3.tar.gz
+
+
+.. warning:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connexion.
+
 
 Under CentOS
 ------------
