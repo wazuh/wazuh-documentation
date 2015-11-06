@@ -16,57 +16,52 @@ The goal is pretty simple, stop using the command line to manage OSSEC. What if 
 We are currently working on it and with the open source community we will create a magnific OSSEC API.
 
 
-Dependencies
+Requirements
 --------------------
 
 OSSEC API is currently working under a NodeJS server (v0.10.x) with Express module (4.0.x) and the following dependencies:
 
 - Body parser
 - FS
-- HTTP
 - HTTPS
 - HTTP-AUTH
+- Moment
 
+Moreover, you need OSSEC HIDS forked by Wazuh, download and install it, you can follow the installation guide at `OSSEC Wazuh installation  <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
-OSSEC tweaks
---------------------
+Finally to access the API externally you will need to open the port 55000 TCP
 
-We have changed some internal OSSEC functionalities, we want to adapt OSSEC binaries to output JSON output so there are few new features and scripts.
-For example in some binaries we could use "-j" argument to display the results in JSON format (./agent_control -l -j).
-
-Moreover, we add two new folders on */var/ossec/* default folder, **dev** and **api**
 
 Requests
 --------------------
 
-Summary of current API capabilities.
+There are some current API capabilities, we are currently working on extend them and improve the API versatility.
 
-
-Agents list :: 
+List :: 
 
  /agents
 
-Agent info and status :: 
+Info and status :: 
 
  /agents/:agent_id
 
-Agent restart :: 
+Restart :: 
 
  /agents/:agent_id/restart
 
-Agent add :: 
+Add :: 
 
  /agents/add/:agent_name
 
-Agent extract key :: 
+Extract key :: 
 
  /agents/:agent_id/key
 
-Agents syscheck/rootcheck on all agents :: 
+Syscheck/rootcheck on all agents :: 
 
  /agents/sysrootcheck/restart
 
-Agent syscheck/rootcheck restart on one agent :: 
+Syscheck/rootcheck restart on one agent :: 
 
  /agents/:agent_id/sysrootcheck/restart
 
@@ -81,10 +76,12 @@ The API will operate on port 55000 TCP, NodeJS will be protected with HTTP Authe
 Installing
 --------------------
 
-API Folders
+Install API
 ^^^^^^^^^^^^^^^^^^^
 
-To get the API working we need OSSEC HIDS forked by Wazuh, download and install it, you can follow the installation guide at `OSSEC Wazuh installation  <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
+.. warning:: To get the API working we need OSSEC HIDS forked by Wazuh, download and install it, you can follow the installation guide at `OSSEC Wazuh installation  <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
+
+Now we can continue installing OSSEC API, you will find the folders we need at Wazuh repository at *ossec-hids/extensions/api*.
 
 Just in case you forgot it, mount dev folder to OSSEC location :: 
 
@@ -153,7 +150,7 @@ Remove temp files ::
 Adding password
 ^^^^^^^^^^^^^^^^^^^^^^
 
-By default you can enter the API by entering user *foo* and password *bar*, but you can of course generate your own password like this ::
+By default you can access by entering user *foo* and password *bar*, if you prefer you can of course generate your own password like this ::
 
  $ cd /var/ossec/api
  $ sudo htpasswd -c htpasswd **username**
@@ -181,42 +178,49 @@ Or in the command line try some requests ::
  $ curl -XGET  -u username -k https://your.ip:55000/agents
  $ curl -XGET  -u username -k https://your.ip:55000/agents/000
 
+.. note:: Rembember to use **HTTPS** URL when accesing
+
+
 Some sample outputs.
 
 Agents list ::
 
- [
-  {
-    "ID": "000",
-    "Name": "vpc-ossec-manager (server)",
-    "IP": "127.0.0.1",
-    "Status": "Active/Local"
-  },
-  {
-    "ID": "001",
-    "Name": "vpc-agent-debian",
-    "IP": "10.0.0.121",
-    "Status": "Active"
-  },
-  {
-    "ID": "005",
-    "Name": "vpc-agent-centos-public",
-    "IP": "10.0.0.125",
-    "Status": "Active"
-  },
-  {
-    "ID": "004",
-    "Name": "vpc-agent-windows",
-    "IP": "10.0.0.124",
-    "Status": "Active"
-  },
-  {
-    "ID": "006",
-    "Name": "vpc-agent-ubuntu-public",
-    "IP": "10.0.0.126",
-    "Status": "Active"
-  }
- ]
+ {
+	error: 0,
+	response: [
+		{
+			id: "000",
+			name: "vpc-ossec-manager (server)",
+			ip: "127.0.0.1",
+			status: "Active/Local"
+		},
+		{
+			id: "005",
+			name: "vpc-agent-centos-public",
+			ip: "10.0.0.12",
+			status: "Disconnected"
+		},
+		{
+			id: "004",
+			name: "vpc-agent-windows",
+			ip: "10.0.0.13",
+			status: "Active"
+		},
+		{
+			id: "006",
+			name: "vpc-agent-ubuntu-public",
+			ip: "10.0.0.14",
+			status: "Active"
+		},
+		{
+			id: "014",
+			name: "ossec-agent-centos5",
+			ip: "any",
+			status: "Never connected"
+		}
+	]
+}
+
 
 Agent info ::
 
@@ -271,3 +275,4 @@ What next?
 Once you have OSSEC Wazuh installed you can move forward and try out ELK integration, check it on:
 
 * `ELK Integration Guide <http://documentation.wazuh.com/en/latest/integrating_ossec_elk.html>`_
+* `OSSEC Ruleset <http://documentation.wazuh.com/en/latest/ossec_rule_set.html>`_ 
