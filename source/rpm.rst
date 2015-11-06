@@ -60,12 +60,15 @@ Installing Wazuh GPG key
 If it is the first installation from Wazuh repository you need to import
 the GPG key typing **y** after the next question::
 
-   Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-   Importing GPG key 0xF4A80EB5:
-    Userid     : "CentOS-7 Key (CentOS 7 Official Signing Key) <security@centos.org>"
-    Fingerprint: 6341 ab27 53d7 8a78 a7c2 7bb1 24c6 a8a7 f4a8 0eb5
-    Package    : centos-release-7-1.1503.el7.centos.2.8.x86_64 (@anaconda)
-    From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
+   Downloading packages:
+   warning: /var/cache/yum/x86_64/7/wazuh/packages/ossec-hids-2.8.3-1.el7.x86_64.rpm: Header V4 RSA/SHA1 Signature, key ID 3b3631fb: NOKEY
+   Public key for ossec-hids-2.8.3-1.el7.x86_64.rpm is not installed
+   ossec-hids-2.8.3-1.el7.x86_64.rpm                                                                                            | 702 kB  00:00:00     
+   Retrieving key from http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
+   Importing GPG key 0x3B3631FB:
+    Userid     : "Jose Luis Ruiz <jose@wazuh.com>"
+    Fingerprint: 9a5a 6e31 fb39 a5f6 21d8 de8b 3f9f d7b9 3b36 31fb
+    From       : http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
    Is this ok [y/N]: 
 
 .. note:: If you don't install the Wazuh GPG key yum can't install the RPMs for security reasons.
