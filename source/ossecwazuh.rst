@@ -12,7 +12,7 @@ OSSEC Wazuh Installation guide!
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    installing_ossec_wazuh
    integrating_ossec_elk

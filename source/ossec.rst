@@ -10,6 +10,6 @@ It runs on most operating systems, including Linux, MacOS, Solaris, HP-UX, AIX a
 Check out OSSEC features and how it works for more information about how OSSEC can help you solve your host-based security problems.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    installation_guide
