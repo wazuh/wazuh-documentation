@@ -53,37 +53,6 @@ Server requirements
 * Java 8 `Installing Java 8`_
 * `OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
-Installing Java 8
---------------------
-
-APT
-^^^^^^^^^^^^^^^^^^^
-First you need to add *webupd8team* JAVA repository in your system, then proceed to install Java 8 via apt-get install ::
-
- $ sudo add-apt-repository ppa:webupd8team/java
- $ sudo apt-get update
- $ sudo apt-get install oracle-java8-installer
-
-
-YUM
-^^^^^^^^^^^^^^^^^^^
-Change to your home directory and download the **Oracle Java 8 JDK RPM** with these commands ::
-
- $ cd ~
- $ wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm"
-
-Install the RPM with this yum command ::
-
- $ sudo yum localinstall jdk-8u60-linux-x64.rpm
-
-Delete the archive file that you downloaded earlier ::
-
- $ rm ~/jdk-8u60-linux-x64.rpm 
-
-Set your **JAVA_HOME** environment variable in a bash shell ::
-
- $ export JAVA_HOME=/usr/java/jdk1.8.0_60/jre 
-
 1. OSSEC
 ^^^^^^^^^^^^^^^^^^^
 
@@ -754,6 +723,40 @@ That's all! Refresh Kibana page and load the recently and fresh **imported Dashb
 .. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
 
 
+
+Installing Java 8
+--------------------
+
+APT
+^^^^^^^^^^^^^^^^^^^
+First you need to add *webupd8team* JAVA repository in your system, then proceed to install Java 8 via apt-get install ::
+
+ $ sudo add-apt-repository ppa:webupd8team/java
+ $ sudo apt-get update
+ $ sudo apt-get install oracle-java8-installer
+
+
+YUM
+^^^^^^^^^^^^^^^^^^^
+Change to your home directory and download the **Oracle Java 8 JDK RPM** with these commands ::
+
+ $ cd ~
+ $ wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u60-b27/jdk-8u60-linux-x64.rpm"
+
+Install the RPM with this yum command ::
+
+ $ sudo yum localinstall jdk-8u60-linux-x64.rpm
+
+Delete the archive file that you downloaded earlier ::
+
+ $ rm ~/jdk-8u60-linux-x64.rpm
+
+Set your **JAVA_HOME** environment variable in a bash shell ::
+
+ $ export JAVA_HOME=/usr/java/jdk1.8.0_60/jre
+
+
+
 Protecting Kibana 4
 --------------------
 
@@ -867,10 +870,14 @@ Restart Nginx service ::
 That's all! Try to access to Kibana Web and the HTTP authentication will prompt asking for the password you just created. Now we got a Kibana instance HTTPS and password protected secured.
 
 
+
+Troubleshooting
+--------------------
+Disable SELinux CentOS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 .. warning:: If in CentOS have logs similar than this ** *6 connect() to 127.0.0.1:5601 failed (13: Permission denied) while connecting to upstream, client: ** follow follow the next setp
 
-Disable SELinux CentOS
------------------------
 
 SELinux is a security extension of CentOS that should provide extended security. SELinux was causing the problem you can change to permissive follow the next steps::
 
