@@ -49,8 +49,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'OSSEC-Wazuh Guide'
-copyright = u'2015, WAZUH, Inc.'
+project = u'OSSEC Wazuh documentation'
+copyright = u'2015, Wazuh, Inc.'
 author = u'Wazuh, Inc.'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -225,7 +225,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'WazuhDocs.tex', u'OSSEC Wazuh Documentation',
+  (master_doc, 'WazuhDocs.tex', u'OSSEC Wazuh documentation',
    u'Wazuh, Inc.', 'manual'),
 ]
 
@@ -255,7 +255,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'wazuhdocs', u'OSSEC Wazuh Documentation',
+    (master_doc, 'wazuhdocs', u'OSSEC Wazuh documentation',
      [author], 1)
 ]
 
@@ -269,8 +269,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'WazuhDocs', u'OSSEC Wazuh Documentation',
-   author, 'OSSECWazuh', 'One line description of project.',
+  (master_doc, 'WazuhDocs', u'OSSEC Wazuh documentation',
+   author, 'OSSECWazuh', 'OSSEC Wazuh documentation',
    'Miscellaneous'),
 ]
 

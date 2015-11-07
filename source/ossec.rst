@@ -1,3 +1,5 @@
+.. _ossec_installers:
+
 OSSEC HIDS Installation guide Latest Stable Release (2.8.3)!
 ============================================================
 

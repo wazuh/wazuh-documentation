@@ -1,3 +1,5 @@
+.. _ossec_puppet:
+
 Deploy Ossec with Puppet
 ========================
 

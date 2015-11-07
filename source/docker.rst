@@ -1,3 +1,5 @@
+.. _ossec_docker:
+
 Deploying OSSEC in a Docker container
 =====================================
 
