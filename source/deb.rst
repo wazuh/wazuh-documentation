@@ -12,20 +12,45 @@ the GPG key::
 Add the repository for Debian (available distributions are Sid, Jessie and Wheezy)
 ----------------------------------------------------------------------------------
 
-Type the next command::
+Type the next command
+
+For Sid::
 
    $echo -e "# OSSEC See http://www.ossec.net/?page_id=19
+    deb http://ossec.wazuh.com/repos/apt/debian sid main" >> /etc/apt/sources.list.d/ossec.list
+
+For Jessie::
+
+   $echo -e "# OSSEC See http://www.ossec.net/?page_id=19    
+    deb http://ossec.wazuh.com/repos/apt/debian jessie main" >> /etc/apt/sources.list.d/ossec.list
+
+For Wheezy::
+
+   $echo -e "# OSSEC See http://www.ossec.net/?page_id=19    
     deb http://ossec.wazuh.com/repos/apt/debian wheezy main" >> /etc/apt/sources.list.d/ossec.list
+
 
 .. note:: This is respository are available for arch i386 and x86_64
 
 Add the repository for Ubuntu (available distributions are Precise, Trusty and Utopic)
 --------------------------------------------------------------------------------------
 
-Type the next command::
+Type the next command
+
+For Precise::
 
    $ echo -e "# OSSEC See http://www.ossec.net/?page_id=19
     deb http://ossec.wazuh.com/repos/apt/ubuntu precise main" >> /etc/apt/sources.list.d/ossec.list
+
+For Trusty::
+
+   $ echo -e "# OSSEC See http://www.ossec.net/?page_id=19
+    deb http://ossec.wazuh.com/repos/apt/ubuntu trusty main" >> /etc/apt/sources.list.d/ossec.list
+
+For Utopic::
+
+   $ echo -e "# OSSEC See http://www.ossec.net/?page_id=19
+    deb http://ossec.wazuh.com/repos/apt/ubuntu utopic main" >> /etc/apt/sources.list.d/ossec.list
 
 .. note:: This is respository are available for arch i386 and x86_64
 
