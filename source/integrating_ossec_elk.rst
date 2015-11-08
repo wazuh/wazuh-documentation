@@ -13,9 +13,17 @@ Please complete OSSEC Wazuh installation guide first, after that you can move fo
 
 * `Install OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 
+We made some improvements to integrate ELK Stack with OSSEC:
+
+* **Logstash and Elasticsearch**
+   Logstash wil be used to add GeoIP information to OSSEC alerts, and to define how fields are going to be indexed, using a custom Elasticsearch template.
+* **Kibana 4**
+   Includes OSSEC Alerts, PCI DSS Compliance, CIS Benchmark, Agents management, Agents Info dashboards.
+   It also hides non useful fields and displays a short description of compliance requirements on mouseover.
+
 .. note:: If you detect any error in this documentation please report it as an issue in our Github repository. We also appreciate contributions to make it better and more accurate.
 
-
+ 
 Components 
 -------------
 Just in case you are not familiar with the components and tools involved in this integration, here is a brief description of each one of them:
@@ -38,25 +46,13 @@ See below how cool your Kibana dashboard will look when you finish this guide.
 
 .. image:: http://wazuh.com/screenshots/OSSEC_dashboard_1.png
    :height: 200px
-   :width: 350px
+   :width: 295px
    :align: left
    :target: http://wazuh.com/screenshots/OSSEC_dashboard_1.png
 
-.. image:: http://wazuh.com/screenshots/OSSEC_discover.png
-   :height: 200px
-   :width: 350px
-   :align: left
-   :target:  http://wazuh.com/screenshots/OSSEC_discover.png
-
-.. image:: http://wazuh.com/screenshots/OSSEC_dashborad_2.png
-   :height: 200px
-   :width: 350px
-   :align: left
-   :target:  http://wazuh.com/screenshots/OSSEC_dashborad_2.png
-
 .. image:: http://wazuh.com/screenshots/OSSEC_pci1.png
    :height: 200px
-   :width: 350px
+   :width: 289px
    :align: left
    :target:  http://wazuh.com/screenshots/OSSEC_pci1.png
 
@@ -64,7 +60,7 @@ See below how cool your Kibana dashboard will look when you finish this guide.
 Installation
 ------------
 
-Server requirements
+Architecture
 ^^^^^^^^^^^^^^^^^^^
 The above mentioned components can be deployed in a single host or across multiple systems. This last configuration is useful for load balancing, high availability or data replication. For example, this is how our deployment would look like if we decided to use four different hosts:
 
@@ -84,13 +80,9 @@ Server requirements
 1. OSSEC Wazuh
 ^^^^^^^^^^^^^^^^^^^
 
-First of all, download the whole OSSEC-Wazuh repository from Github, this fork includes enhanced capabilities and ELK Stack configuration files.
-
-Please complete OSSEC Wazuh installation guide first, after that you can move forward into this tutorial.
+Download and install the whole OSSEC-Wazuh repository from Github, this fork includes enhanced capabilities and ELK Stack configuration files, please complete OSSEC Wazuh installation guide first, after that you can move forward into this tutorial.
 
 * `Install OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
-
-.. note:: Remember we are installing OSSEC HIDS forked by Wazuh.
 
 Once OSSEC Wazuh installation has completed, move forward to next step.
 

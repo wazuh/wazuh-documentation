@@ -6,9 +6,20 @@ OSSEC RESTful API
 Introduction
 --------------------
 
-OSSEC RESTful API is a service to control OSSEC Manager using REST requests. Through RESTful petitions we will able to interact with OSSEC controls like agents control, rootcheck and syscheck controls or rules control.
+OSSEC RESTful API is a service to control OSSEC Manager using REST requests. RESTful petitions will allow you to execute OSSEC commands like agents management (add, restart, info, key export) or rootcheck and syscheck information (restart, check last scan...)
 
-Check the `Sample outputs`_ at the end of this documentation.
+OSSEC Wazuh API RESTful Capatibilites
+
+* Agent full list
+* Agent status, rootcheck and syscheck info.
+* Restart agent
+* Add agent
+* Get agent key
+* SSL Certificates
+* HTTPS Secure
+* Authentication capabilites
+
+Check the `Sample outputs`_ at the end of this documentation and take a look for JSON output examples.
 
 Goal
 --------------------
