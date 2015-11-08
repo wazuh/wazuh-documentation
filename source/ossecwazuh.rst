@@ -1,4 +1,4 @@
-OSSEC Wazuh Installation guide!
+OSSEC Wazuh
 ===============================
 
 .. topic:: OSSEC HIDS - Wazuh
@@ -15,5 +15,5 @@ OSSEC Wazuh Installation guide!
    :maxdepth: 3
 
    installing_ossec_wazuh
-   integrating_ossec_elk
+   integrating_ossec_elk 
    installing_ossec_api
