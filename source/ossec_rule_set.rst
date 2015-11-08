@@ -1,93 +1,95 @@
 .. _ossec_rule_set:
 
 OSSEC Rule Set
-=============================================================
+==============
 
 Introduction
---------------------
+------------
 
-This is the documentation for the rule set mantained by Wazuh. OSSEC provides a set of rules for commonly-used services, and rootchecks for rootkits detection and policy monitoring. Wazuh keeps these rules and rootchecks up to date and create new ones to enhance the alert capability of OSSEC. Here you will find a guide to install the rule set or update it with the latest rules.
+This documentation explains how to install, update, and contribute to OSSEC HIDS rule set mantained by Wazuh. These rules are used by the system to detect attacks, intrusions, software misuse, configuration problems, application errors, malware, rootkits, system anomalies or security policy violations. OSSEC provides an out-of-the box set of rules that we update by modifying them or including new ones, in order to increase OSSEC detection capabilities.
 
-In our repository you will find:
+In the rule set repository you will find:
 
-* **OSSEC rules/rootchecks updates**
-   We update out-of-the-box rules provided by OSSEC to fix bugs, create new rules and add further functionality. For example, each rule has been tagged with its related PCI control in order to classify each alert according to PCI-DSS compliance.
+* **OSSEC rule/rootcheck updates**
+   We update and maintain out-of-the-box rules provided by OSSEC, both to eliminate false positives or to increase their accurancy. In addition, we map those with PCI-DSS compliance controls, making it easy to identify when an alert is related to a compliance requirement.
   
 * **New rules/rootchecks**
-   Although we update the set of rules and rootchecks provided by OSSEC, this set is still limited. For this reason, we collect rules published by the community that do not come by default with OSSEC, test them and make sure they work well. Additionally we create new rootchecks and rules. Some examples of new rules are NetScaler and Puppet.
+   OSSEC out-of the box number of rules and decoders is limited. For this reason, we centralize, test and maintain decoders and rules submitted by Open Source contributors. As well, we create new rules and rootchecks periodically that are added to this repository so they can be used by the users community. Some examples of new rules are NetScaler and Puppet.
 
 
-Resources:
+Resources
+^^^^^^^^^
 
 * Visit our repository to view the rules in detail at `Github OSSEC Ruleset <https://github.com/wazuh/ossec-rules>`_
 * Find a complete description of the available rules: `OSSEC Ruleset Summary <http://www.wazuh.com/resources/OSSEC_Ruleset.pdf>`_
 
+Rule examples
+^^^^^^^^^^^^^
 
-Installing rules
---------------------
+Log analysis rule for Netscaler with PCI DSS compliance mapping:
+::
 
-Install or update rules in OSSEC is very easy. First of all, in folder */ossec-rules/rules-decoders/* you will find two types of folders:
+    <rule id="80102" level="10" frequency="6">
+        <if_matched_sid>80101</if_matched_sid>
+        <same_source_ip />
+        <description>Netscaler: Multiple AAA failed to login the user</description>
+        <group>authentication_failures,netscaler-aaa,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_11.4,</group>
+    </rule> 
 
-* **OSSEC**
-   This folder contains the rules provided by OSSEC and updated by Wazuh.
-* **Other folders**
-   Each folder represents new rules and decoders for software/services (NetScaler, Puppet, etc) created or collected by Wazuh. Remember that these rules are not included in OSSEC by default.
+Rootcheck rule for SSH Server with mapping to CIS security benchmark and PCI DSS compliance:
+::
 
-Choose the rule you would like to install and follow the instructions given in the file *instructions.md*. This file usually contains the following instructions:
+   [CIS - Debian Linux - 2.3 - SSH Configuration - Empty passwords permitted {CIS: 2.3 Debian Linux} {PCI_DSS: 4.1}] [any] [http://www.ossec.net/wiki/index.php/CIS_DebianLinux]
+   f:/etc/ssh/sshd_config -> !r:^# && r:^PermitEmptyPasswords\.+yes;
 
-**Rules from OSSEC folder:** :: 
+Installing log analysis rules
+-----------------------------
 
-   Copy /ossec-rules/rules-decoders/decoder.xml to /var/ossec/etc/
-   Copy all files "*_rules.xml" to /var/ossec/rules/, except local_rules.xml
+Manual installation
+^^^^^^^^^^^^^^^^^^^
 
-**Rules from other folders:** :: 
+Installing or updating rules in OSSEC manually is very easy. In our `Github repository <https://github.com/wazuh/ossec-rules>`_ you will find two types of rules under ``ossec-rules/rules-decoders/`` directory:
 
-   Append software_decoders.xml to /var/ossec/etc/decoder.xml
-   Copy software_rules.xml to /var/ossec/rules/
-   Add <include>software_rules.xml</include> to /var/ossec/etc/ossec.conf in section "rules"
+* **Updated OSSEC out-of-the-box rules:** Can be found under ``ossec-rules/rules-decoders/ossec`` directory and you can manually install them following these steps: ::
 
-If you prefer, you can execute the above steps **automatically** by running the script included in the main folder: **install_rules.sh**
+     - Copy ossec-rules/rules-decoders/decoder.xml to /var/ossec/etc/
+     - Copy all files *_rules.xml to /var/ossec/rules/, except for local_rules.xml
+     - Restart your OSSEC manager
 
-- Set execute permission for this script: *chmod +x install_rules.sh*
-- Run the script as root: *sudo ./install_rules.sh*
-- Some rules can not be completely installed automatically and require further manual steps because they depend on the installation.
+* **New log analysis rules:** Are located in ``ossec-rules/rules-decoders/software`` (being software the name of your log messages source) and can be installed manually following these steps: ::
 
-This script will install the ruleset automatically.
+     - Append software_decoders.xml to /var/ossec/etc/decoder.xml
+     - Copy software_rules.xml to /var/ossec/rules/
+     - Add <include>software_rules.xml</include> to /var/ossec/etc/ossec.conf in section "<rules>"
+     - If there are additional instructions to install these rules and decoders, you will find them in an instructions.md file in the same directory.
+     - Restart your OSSEC manager
 
-Updating rules
---------------------
+Using the installation script
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you already have an OSSEC installation and you want to update your current ruleset, you can clone our repo and run **install_rules.sh** with *update* argument.
+You can use the installation script, located in ``ossec-rules/rules-decoders/install.sh``, to automatically install and update your log analysis rules. To run the script, go to your OSSEC manager and follow the follwing steps.
 
-Cloning the repo ::
+Cloning the repository: ::
 
    $ cd ~
    $ mkdir ossec_rules_tmp && cd ossec_rules_tmp
    $ git clone https://github.com/wazuh/ossec-rules.git
-   $ cd ossec_rules_tmp
+   $ cd ossec_rules
 
-Now navigate into rules folder and run the script ::
+Running the script: ::
 
    $ cd rules-decoders
    $ sudo chmod +x install_rules.sh
    $ sudo ./install_rules.sh update
 
-We are currently creating an automatic updating service, meantime you can install or the rules using this bash script.
+.. note:: We are in the process of creating an online service to distribute the rules in an even more automatic way, meantime you can still use the bash script mentioned above.
 
 Installing rootchecks
-----------------------
-Rootchecks follow the same folder structure as rules. In folder */ossec-rules/rootcheck/* you will find: 
+---------------------
+Rootchecks can be found in ``ossec-rules/rootcheck/`` directory. There you will find both updated out-of-the-box OSSEC rootchecks, and newly created ones. 
 
-* **OSSEC**
-   This folder contains the rootchecks provided by OSSEC and updated by Wazuh.
-* **Other folders**
-   Each folder represents new rootchecks created or collected by Wazuh. Remember that these rootchecks are not included in OSSEC by default.
+To install a rootcheck file, just go to your OSSEC manager and copy the ``.txt`` file to ``/var/ossec/etc/shared/``. Then modify ``/var/ossec/etc/ossec.conf`` by adding the path to the ``.txt`` file to the ``<rootcheck>`` section. Examples: :: 
 
-Choose the rootcheck you would like to install and follow these instructions: 
-:: 
-
-   Copy the TXT file to /var/ossec/etc/shared/
-   Add to /var/ossec/etc/ossec.conf in section "rootcheck" the path to the TXT file inside the proper label. Examples:
    - <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
    - <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
 
@@ -101,12 +103,12 @@ Choose the rootcheck you would like to install and follow these instructions:
    - <windows_apps>/var/ossec/etc/shared/win_applications_rcl.txt</windows_apps>
 
 Contribute to the rule set
-----------------------------
-If you have created new rules, decoders or rootchecks and you would like to include them in our repository, please contact us by email: info@wazuh.com
+--------------------------
+If you have created new rules, decoders or rootchecks and you would like to contribute to our repository, please fork our `Github repository <https://github.com/wazuh/ossec-rules>`_ and submit a pull request.
 
-Also do not hesitate to request new rules or rootchecks that you would like to see running in OSSEC.
+If you are not familiar with Github, you can also share them through our `users mailing list <https://groups.google.com/d/forum/wazuh>`_, to which you can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``. As well do not hesitate to request new rules or rootchecks that you would like to see running in OSSEC.
 
-In our repository you will find that most of the rules contain one or more groups called pci_dss_X. This is the PCI requirements related to the rule. We have produced a document that can help you tag each rule with its corresponding PCI requirement: http://www.wazuh.com/resources/PCI_Tagging.pdf
+.. note:: In our repository you will find that most of the rules contain one or more groups called pci_dss_X. This is the PCI DSS control related to the rule. We have produced a document that can help you tag each rule with its corresponding PCI requirement: http://www.wazuh.com/resources/PCI_Tagging.pdf
 
 What's next?
 ------------
