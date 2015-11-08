@@ -219,7 +219,7 @@ To run the osec-elk container is very easy, only need to type this command::
 
    $ docker run --name ossec-server -d -p 1514:1514/udp -p 1515:1515\
   -e SYSLOG_FORWADING_ENABLED=true -e SYSLOG_FORWARDING_SERVER_IP=X.X.X.X\
-  -v /somepath/ossec_mnt:/var/ossec/data xetusoss/ossec-server
+  -v /somepath/ossec_mnt:/var/ossec/data wazuh/docker-ossec
 
 The following directories are externalized under /var/ossec/data to allow the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue. In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
 
