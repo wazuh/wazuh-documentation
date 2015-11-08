@@ -32,7 +32,7 @@ For Wheezy::
 
 .. note:: This is respository are available for arch i386 and x86_64
 
-Add the repository for Ubuntu (available distributions are Precise, Trusty and Utopic)
+Add the repository for Ubuntu (available distributions are Precise, Trusty, Utopic, Vivid, Wily)
 --------------------------------------------------------------------------------------
 
 Type the next command
@@ -51,6 +51,17 @@ For Utopic::
 
    $ echo -e "# OSSEC See http://www.ossec.net/?page_id=19
     deb http://ossec.wazuh.com/repos/apt/ubuntu utopic main" >> /etc/apt/sources.list.d/ossec.list
+
+For Vivid::
+
+   $ echo -e "# OSSEC See http://www.ossec.net/?page_id=19
+    deb http://ossec.wazuh.com/repos/apt/ubuntu vivid main" >> /etc/apt/sources.list.d/ossec.list
+
+For Wily::
+
+   $ echo -e "# OSSEC See http://www.ossec.net/?page_id=19
+    deb http://ossec.wazuh.com/repos/apt/ubuntu wily main" >> /etc/apt/sources.list.d/ossec.list
+
 
 .. note:: This is respository are available for arch i386 and x86_64
 
