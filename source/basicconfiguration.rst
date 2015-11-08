@@ -1,4 +1,4 @@
-OSSEC Configuration
+OSSEC Basic Configuration
 =======================
 
 If you made your installation from Sources or DEBs you can continue with the `Agent configuration`_ 

@@ -19,5 +19,3 @@ OSSEC HIDS 2.8.3
    source
    windows
    aix
-   puppet
-   docker

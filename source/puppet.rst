@@ -1,6 +1,6 @@
 .. _ossec_puppet:
 
-OSSEC with Puppet
+Deploying OSSEC with Puppet
 ========================
 
 Prerequisites
