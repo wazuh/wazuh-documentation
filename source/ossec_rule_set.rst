@@ -16,9 +16,12 @@ In our repository you will find:
 * **New rules/rootchecks**
    Although we update the set of rules and rootchecks provided by OSSEC, this set is still limited. For this reason, we collect rules published by the community that do not come by default with OSSEC, test them and make sure they work well. Additionally we create new rootchecks and rules. Some examples of new rules are NetScaler and Puppet.
 
-You can find this rule set in our repository: https://github.com/wazuh/ossec-rules.git
 
-Here you will find a complete description of the rules availables: http://www.wazuh.com/resources/OSSEC_Ruleset.pdf
+Resources:
+
+* Visit our repository to view the rules in detail at `Github OSSEC Ruleset <https://github.com/wazuh/ossec-rules>`_
+* Find a complete description of the available rules: `OSSEC Ruleset Summary <http://www.wazuh.com/resources/OSSEC_Ruleset.pdf>`_
+
 
 Installing rules
 --------------------
@@ -30,7 +33,7 @@ Install or update rules in OSSEC is very easy. First of all, in folder */ossec-r
 * **Other folders**
    Each folder represents new rules and decoders for software/services (NetScaler, Puppet, etc) created or collected by Wazuh. Remember that these rules are not included in OSSEC by default.
 
-Choose the rule you would like to install and follow the instructions given in the file *instructions.md*. This file usually looks like the below instructions:
+Choose the rule you would like to install and follow the instructions given in the file *instructions.md*. This file usually contains the following instructions:
 
 **Rules from OSSEC folder:** :: 
 
@@ -43,11 +46,33 @@ Choose the rule you would like to install and follow the instructions given in t
    Copy software_rules.xml to /var/ossec/rules/
    Add <include>software_rules.xml</include> to /var/ossec/etc/ossec.conf in section "rules"
 
-If you prefer, you can execute the above steps automatically by running the script included in the main folder: **install_rules.sh**
+If you prefer, you can execute the above steps **automatically** by running the script included in the main folder: **install_rules.sh**
 
 - Set execute permission for this script: *chmod +x install_rules.sh*
 - Run the script as root: *sudo ./install_rules.sh*
 - Some rules can not be completely installed automatically and require further manual steps because they depend on the installation.
+
+This script will install the ruleset automatically.
+
+Updating rules
+--------------------
+
+If you already have an OSSEC installation and you want to update your current ruleset, you can clone our repo and run **install_rules.sh** with *update* argument.
+
+Cloning the repo ::
+
+   $ cd ~
+   $ mkdir ossec_rules_tmp && cd ossec_rules_tmp
+   $ git clone https://github.com/wazuh/ossec-rules.git
+   $ cd ossec_rules_tmp
+
+Now navigate into rules folder and run the script ::
+
+   $ cd rules-decoders
+   $ sudo chmod +x install_rules.sh
+   $ sudo ./install_rules.sh update
+
+We are currently creating an automatic updating service, meantime you can install or the rules using this bash script.
 
 Installing rootchecks
 ----------------------
