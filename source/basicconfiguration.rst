@@ -1,5 +1,5 @@
 OSSEC Basic Configuration
-=======================
+===============================
 
 If you made your installation from Sources or DEBs you can continue with the `Agent configuration`_ 
 but if you made your install from RPMs repository you will need to make changes in the `Manager configuration`_
