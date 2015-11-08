@@ -9,7 +9,7 @@ OSSEC Wazuh
 
    We are currently working on improve OSSEC capabilites, helping out the community to understand and configure an entire OSSEC ELK Stack integration. We've made some changes to OSSEC source code this way it can provide PCI DSS 3.1 or CIS requirements.
 
-   OSSEC Wazuh v1.0 changes
+   OSSEC Wazuh v1.0 features
 
 	* Improved JSON capabilities
 	* Improved security compliance integration
@@ -19,9 +19,10 @@ OSSEC Wazuh
 	* Updated ruleset
 	* Binaries JSON output
 
-	OSSEC Wazuh API RESTful
+   OSSEC Wazuh API RESTful features
 
 	* Agent full list
+	* Restart agent
 	* Agent status, rootcheck and syscheck info.
 	* Add agent
 	* Get agent key
