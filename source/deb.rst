@@ -1,4 +1,4 @@
-Installing from DEB packages
+DEB packages
 ============================
 
 Installing the apt-get repository key

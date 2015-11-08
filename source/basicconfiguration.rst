@@ -1,11 +1,11 @@
-Basic Configuration
-===================
+OSSEC Configuration
+=======================
 
 If you made your installation from Sources or DEBs you can continue with the `Agent configuration`_ 
 but if you made your install from RPMs repository you will need to make changes in the `Manager configuration`_
 
 Manager configuration
----------------------
+-------------------------
 
 If you made the Manager installation from RPMs need to add the mail configuration, for this
 follow the next steps

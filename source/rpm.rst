@@ -1,4 +1,4 @@
-Installing from RPM packages
+RPM packages
 ============================
 
 Adding yum repository
