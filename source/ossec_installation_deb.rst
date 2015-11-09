@@ -31,6 +31,11 @@ For Wheezy::
    $echo -e "# OSSEC See http://www.ossec.net/?page_id=19    
     deb http://ossec.wazuh.com/repos/apt/debian wheezy main" >> /etc/apt/sources.list.d/ossec.list
 
+For Stretch::
+
+   $echo -e "# OSSEC See http://www.ossec.net/?page_id=19
+    deb http://ossec.wazuh.com/repos/apt/debian stretch main" >> /etc/apt/sources.list.d/ossec.list
+
 
 .. note:: This is respository are available for arch i386 and x86_64
 
