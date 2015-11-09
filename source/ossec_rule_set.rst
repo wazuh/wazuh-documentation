@@ -23,8 +23,8 @@ Resources
 * Visit our repository to view the rules in detail at `Github OSSEC Ruleset <https://github.com/wazuh/ossec-rules>`_
 * Find a complete description of the available rules: `OSSEC Ruleset Summary <http://www.wazuh.com/resources/OSSEC_Ruleset.pdf>`_
 
-Rule examples
-^^^^^^^^^^^^^
+Rule and Rootcheck example
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Log analysis rule for Netscaler with PCI DSS compliance mapping:
 ::
