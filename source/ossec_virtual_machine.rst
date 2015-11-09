@@ -1,3 +1,5 @@
+.. _ossec_virtual_machine:
+
 OSSEC Virtual Appliance 2.8.2
 =============================
 

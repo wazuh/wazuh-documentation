@@ -6,9 +6,9 @@ Table of contents
 
    about
    ossec_wazuh
-   ossec
+   ossec_installation
+   ossec_configuration
    ossec_rule_set
-   basicconfiguration
-   docker
-   puppet   
-   readme
+   ossec_docker
+   ossec_puppet
+   ossec_virtual_machine

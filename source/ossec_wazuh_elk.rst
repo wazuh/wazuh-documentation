@@ -1,4 +1,4 @@
-.. _ossec_elk:
+.. _ossec_wazuh_elk:
 
 Integrating OSSEC-ELK Stack
 =============================================================

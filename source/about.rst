@@ -7,11 +7,11 @@ Wazuh team is currently supporting OSSEC enterprise users, and decided to develo
 
 + OSSEC HIDS :ref:`Rule set <ossec_rule_set>`: Includes compliance mapping with PCI DSS v3.1, and additional decoders and rules. Users can contribute to this rule set by submitting pull requests to our `Github repository <https://github.com/wazuh/ossec-rules>`_. Our team will continue to maintain and update it periodically.
 
-- OSSEC manager with extended JSON logging capabilities, for easy :ref:`integration with ELK Stack <ossec_elk>` and third party log management tools. This new manager includes compliance support and modifications in OSSEC binaries needed by the :ref:`OSSEC RESTful API <ossec_api>`.
+- OSSEC manager with extended JSON logging capabilities, for easy :ref:`integration with ELK Stack <ossec_wazuh_elk>` and third party log management tools. This new manager includes compliance support and modifications in OSSEC binaries needed by the :ref:`OSSEC RESTful API <ossec_wazuh_api>`.
    
-+ :ref:`OSSEC RESTful API <ossec_api>`: Used to monitor and control your OSSEC installation, providing an interface to interact with the manager from anything that can send an HTTP request.
++ :ref:`OSSEC RESTful API <ossec_wazuh_api>`: Used to monitor and control your OSSEC installation, providing an interface to interact with the manager from anything that can send an HTTP request.
    
-- :ref:`Pre-compiled installation packages <ossec_installers>`, both for OSSEC agent and manager: Include repositories for RedHat, CentOS, Fedora, Debian, Ubuntu and Windows.
+- :ref:`Pre-compiled installation packages <ossec_installation>`, both for OSSEC agent and manager: Include repositories for RedHat, CentOS, Fedora, Debian, Ubuntu and Windows.
    
 + :ref:`Puppet scripts <ossec_puppet>` for automatic OSSEC deployment and configuration.
    

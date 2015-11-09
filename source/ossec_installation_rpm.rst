@@ -1,3 +1,5 @@
+.. _ossec_installation_rpm:
+
 Installing RPM packages
 ============================
 

@@ -1,3 +1,5 @@
+.. _ossec_configuration:
+
 OSSEC Basic Configuration
 ===============================
 

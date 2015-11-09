@@ -1,3 +1,5 @@
+.. _ossec_installation_deb:
+
 Installing DEB packages
 ============================
 
@@ -33,7 +35,7 @@ For Wheezy::
 .. note:: This is respository are available for arch i386 and x86_64
 
 Add the repository for Ubuntu (available distributions are Precise, Trusty, Utopic, Vivid, Wily)
---------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------
 
 Type the next command
 

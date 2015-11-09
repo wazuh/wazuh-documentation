@@ -1,3 +1,5 @@
+.. _ossec_installation_source:
+
 Building from Sources
 =======================
 

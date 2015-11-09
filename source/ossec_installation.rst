@@ -1,4 +1,4 @@
-.. _ossec_installers:
+.. _ossec_installation:
 
 OSSEC HIDS 2.8.3
 ============================================================
@@ -14,8 +14,7 @@ OSSEC HIDS 2.8.3
 .. toctree::
    :maxdepth: 3
 
-   rpm
-   deb
-   source
-   windows
-   aix
+   ossec_installation_deb
+   ossec_installation_rpm
+   ossec_installation_source
+   ossec_installation_win

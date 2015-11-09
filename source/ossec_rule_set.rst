@@ -115,8 +115,5 @@ What's next?
 
 Once you have your rule set up to date we encourage you to move forward and try out ELK integration or the API RESTful, check them on:
 
-* `ELK Integration Guide <http://documentation.wazuh.com/en/latest/integrating_ossec_elk.html>`_
-* `API RESTful Installation Guide <http://documentation.wazuh.com/en/latest/installing_ossec_api.html>`_
-
-.. toctree:: 
-   :maxdepth: 2
+* :ref:`ELK Integration Guide <ossec_wazuh_elk>`
+* :ref:`API RESTful Installation Guide <ossec_wazuh_api>`
