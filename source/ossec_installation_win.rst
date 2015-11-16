@@ -1,7 +1,7 @@
 .. _ossec_installation_win:
 
-Compiling Windows agent
-=======================
+Windows agent
+=============
 
 This manual is bassed in ossec-hids 2.8.3 version, you can download in the from this sources::
 

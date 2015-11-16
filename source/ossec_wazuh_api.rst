@@ -8,7 +8,7 @@ Introduction
 
 OSSEC RESTful API is a service to control OSSEC Manager using REST requests. It will allow you to execute OSSEC commands for agents remote management (add, restart, info, key export) or to extract rootcheck and syscheck information (restart, check last scan...). The goal is to provide an interface to manage your OSSEC deployment remotely (e.g. through a web browser), or to integrate OSSEC with external systems.
 
-OSSEC Wazuh API RESTful capatibilites
+OSSEC Wazuh API RESTful capatibilites:
 
 * Agents list
 * Agent status, rootcheck and syscheck info.
@@ -80,12 +80,12 @@ And copy the API folder to OSSEC folder: ::
 NodeJS
 ^^^^^^
 
-On CentOS, install *epel-release* and *nodejs* packages: ::
+On CentOS, install ``epel-release`` and ``nodejs`` packages: ::
  
  $ sudo yum install epel-release
  $ sudo yum install nodejs
 
-On Debian, update your repositories and install *nodejs* package: ::
+On Debian, update your repositories and install ``nodejs`` package: ::
 
  $ sudo apt-get update
  $ sudo apt-get install nodejs
@@ -121,7 +121,7 @@ HTTP Authentication
 By default you can access by entering user "foo" and password "bar". We recommend you to change this credentials. This can be done very easily running: ::
 
  $ cd /var/ossec/api
- $ sudo htpasswd -c htpasswd **username**
+ $ sudo htpasswd -c htpasswd username
 
 Running API on the background
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
