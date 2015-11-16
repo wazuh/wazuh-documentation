@@ -1,86 +1,33 @@
 .. _ossec_wazuh_elk:
 
-Integrating OSSEC-ELK Stack
-=============================================================
+Integrating OSSEC with ELK Stack
+================================
 
-Introduction
---------------------
-This document will guide you through the installation and configuration of ELK Stack and OSSEC HIDS for their integration.
+This document will guide you through the installation and configuration of ELK Stack for the integration with OSSEC Wazuh. This is a fork of OSSEC HIDS with expanded logging capabilities and additional features.
 
-We will make use of expanded logging features that have been implemented in our OSSEC Github fork, our OSSEC rule set, our OSSEC RESTful API, custom Logstash/Elaskticsearch configurations and Kibana hardcoded modifications.
+Architecture and requirements
+-----------------------------
 
-Please complete OSSEC Wazuh installation guide first, after that you can move forward into this tutorial.
-
-* `Install OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
-
-We made some improvements to integrate ELK Stack with OSSEC:
-
-* **Logstash and Elasticsearch**
-   Logstash wil be used to add GeoIP information to OSSEC alerts, and to define how fields are going to be indexed, using a custom Elasticsearch template.
-* **Kibana 4**
-   Includes OSSEC Alerts, PCI DSS Compliance, CIS Benchmark, Agents management, Agents Info dashboards.
-   It also hides non useful fields and displays a short description of compliance requirements on mouseover.
-
-.. note:: If you detect any error in this documentation please report it as an issue in our Github repository. We also appreciate contributions to make it better and more accurate.
-
- 
-Components 
--------------
-Just in case you are not familiar with the components and tools involved in this integration, here is a brief description of each one of them:
-
-* `OSSEC HIDS <http://www.ossec.net/>`_: Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally in the box running the OSSEC manager.
-
-* `Logstash <https://www.elastic.co/products/logstash/>`_: Is a data pipeline used process logs and other event data from a variety of systems. Logstash will read and process OSSEC JSON files, adding IP Geolocation information and modeling data before sending it to the Elasticsearch Cluster.
-
-* `Logstash-Forwarder <https://www.elastic.co/products/logstash/>`_: Is a shipment tool used to send logs from our OSSEC manager server to our Logstash server, where we will also be running our instance of Elasticsearch.
-
-* `Elasticsearch <https://www.elastic.co/products/elasticsearch/>`_: Is the search engine used to index and store our OSSEC alerts. It can be deployed as a cluster, with multiple nodes, for better performance and data replication. 
-
-* `Kibana <https://www.elastic.co/products/kibana/>`_: Kibana is a WEB framework used to explore all elasticsearch indexes. We will use it to analyze OSSEC alerts and to create custom dashboards for different use cases, including compliance regulations like PCI DSS or benchmarks like CIS.
-
-
-Screenshots 
--------------
-
-See below how cool your Kibana dashboard will look when you finish this guide.
-
-.. image:: http://wazuh.com/screenshots/OSSEC_dashboard_1.png
-   :height: 200px
-   :width: 295px
-   :align: left
-   :target: http://wazuh.com/screenshots/OSSEC_dashboard_1.png
-
-.. image:: http://wazuh.com/screenshots/OSSEC_pci1.png
-   :height: 200px
-   :width: 289px
-   :align: left
-   :target:  http://wazuh.com/screenshots/OSSEC_pci1.png
-
-
-Installation
-------------
-
-Architecture
-^^^^^^^^^^^^^^^^^^^
-The above mentioned components can be deployed in a single host or across multiple systems. This last configuration is useful for load balancing, high availability or data replication. For example, this is how our deployment would look like if we decided to use four different hosts:
+The components for OSSEC and ELK Stack integration can be deployed in a single host or across multiple systems. This last type of deployment is useful for load balancing, high availability and data replication. For example, this is how our deployment would look like if we decided to use four different hosts:
 
 * *Host 1:* OSSEC Manager + Logstash Forwarder
 * *Host 2:* Logstash Server + Elasticsearch Node 1 + Kibana
 * *Host 3:* Elasticsearch Node 2
 * *Host 3:* Elasticsearch Node 3
 
-If you don't want to deploy in several machines still you can use a **single-host** configuration running all tools in the same machine, this document describes both ways to deploy OSSEC ELK Stack.
+In most cases distributed deployments are not necessary and a single host can be used as a single-node ELK cluster, along with Logstash and your OSSEC manager. This guide describes both options, distributed and single-host, to deploy OSSEC with ELK Stack.
 
 Server requirements
 ^^^^^^^^^^^^^^^^^^^
+
 * RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation. Although it would still work, according to their documentation less than 8GB RAM is counterproductive. In our case, for a single-node deployment, the same server will be sharing resources for OSSEC and ELK Stack, so we recommend to at least meet this 8GB memory requirement. 
 * Java 8 `Installing Java 8`_
-* `OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
+* :ref: `OSSEC Wazuh <ossec_wazuh_installation>`
 
-1. OSSEC Wazuh
-^^^^^^^^^^^^^^^^^^^
+1. OSSEC Wazuh Installation
+---------------------------
 
-Download and install the whole OSSEC-Wazuh repository from Github, this fork includes enhanced capabilities and ELK Stack configuration files, please complete OSSEC Wazuh installation guide first, after that you can move forward into this tutorial.
+Download and install OSSEC-Wazuh repository from `Github <https://github.com/wazuh/ossec-wazuh>`_, this fork includes enhanced capabilities and ELK Stack configuration files. Complete OSSEC Wazuh installation guide and then move forward to next stps.
 
 * `Install OSSEC Wazuh <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
 

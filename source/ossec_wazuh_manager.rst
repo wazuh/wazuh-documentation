@@ -1,18 +1,18 @@
-.. _ossec_wazuh_installation:
+.. _ossec_wazuh_manager:
 
-Installing OSSEC Wazuh
-======================
+OSSEC Wazuh fork
+================
 
-In this section we will guide you through the installation our `OSSEC HIDS forked version <https://github.com/wazuh/ossec-wazuh>`_. You can learn more about it, and how it can be integrated with ELK Stack and our restful API at the :ref:`introduction <ossec_wazuh>` of OSSEC Wazuh documentation.
+In this section we will guide you through the installation our `OSSEC HIDS forked version <https://github.com/wazuh/ossec-wazuh>`_. You can learn more about it, and how it can be integrated with ELK Stack and our restful API at :ref:`OSSEC Wazuh documentation <ossec_wazuh>`.
 
 In order to start with this installation, first we need to set up the compillation environment by installing development tools and compilers. In Linux this can easily be done using your distribution packages manager:
 
- For RPM based distributions: :: 
+For RPM based distributions: :: 
 
    $ sudo yum groupinstall 'Development Tools'
    $ sudo yum install git
  
- For Debian based distributions: ::
+For Debian based distributions: ::
 
    $ sudo apt-get install build-essential git
 
@@ -31,11 +31,11 @@ Configuration
 
 In order to enable alerts JSON output we will change our OSSEC manager configuration file ``/var/ossec/etc/ossec.conf`` and add the following line in between ``<global>`` and ``</global>`` tags. ::
 
-   <jsonout_output>yes</jsonout_output>
+  <jsonout_output>yes</jsonout_output>
 
 That's all! Now start your OSSEC Manager ::
 
-   $ sudo /var/ossec/bin/ossec-control start
+  $ sudo /var/ossec/bin/ossec-control start
 
 Here are some useful commands to know that everything is working as expected. You should expect a similar output in your system. ::
 
@@ -71,6 +71,9 @@ Next steps
 
 Once you have OSSEC Wazuh installed you can move forward and try out ELK integration, the API RESTful or the custom security compliance Ruleset, check them on:
 
-* :ref:`ELK Integration Guide <ossec_wazuh_elk>`
-* :ref:`API RESTful Installation Guide <ossec_wazuh_api>`
-* :ref:`Ruleset <ossec_rule_set>`
+* :ref:`Java 8 JRE<ossec_wazuh_java>`
+* :ref:`Logstash <ossec_wazuh_logstash>`
+* :ref:`Elasticsearch <ossec_wazuh_elasticsearch>`
+* :ref:`Kibana <ossec_wazuh_kibana>`
+* :ref:`OSSEC RESTful API <ossec_wazuh_api>`
+* :ref:`OSSEC rule set <ossec_rule_set>`

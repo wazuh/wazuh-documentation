@@ -80,9 +80,9 @@ Running the script: ::
 
    $ cd rules-decoders
    $ sudo chmod +x install_rules.sh
-   $ sudo ./install_rules.sh update
+   $ sudo ./install_rules.sh
 
-.. note:: We are in the process of creating an online service to distribute the rules in an even more automatic way, meantime you can still use the bash script mentioned above.
+.. note:: We are in the process of creating an online service to distribute the rules in an even more automatic way, meantime you can still use the bash script mentioned above. You can also use ``install_rules.sh update`` just to update the rules included in your ``etc/ossec.conf`` file.
 
 Installing rootchecks
 ---------------------
