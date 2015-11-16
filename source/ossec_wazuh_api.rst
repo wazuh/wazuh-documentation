@@ -1,38 +1,64 @@
 .. _ossec_wazuh_api:
 
 OSSEC RESTful API 
-=============================================================
+=================
 
 Introduction
---------------------
+------------
 
-OSSEC RESTful API is a service to control OSSEC Manager using REST requests. RESTful petitions will allow you to execute OSSEC commands like agents management (add, restart, info, key export) or rootcheck and syscheck information (restart, check last scan...)
+OSSEC RESTful API is a service to control OSSEC Manager using REST requests. It will allow you to execute OSSEC commands for agents remote management (add, restart, info, key export) or to extract rootcheck and syscheck information (restart, check last scan...). The goal is to provide an interface to manage your OSSEC deployment remotely (e.g. through a web browser), or to integrate OSSEC with external systems.
 
-OSSEC Wazuh API RESTful Capatibilites
+OSSEC Wazuh API RESTful capatibilites
 
-* Agent full list
+* Agents list
 * Agent status, rootcheck and syscheck info.
 * Restart agent
 * Add agent
 * Get agent key
 * SSL Certificates
 * HTTPS Secure
-* Authentication capabilites
+* User authentication
 
-Check the `Sample outputs`_ at the end of this documentation and take a look for JSON output examples.
+RESTful Requests
+----------------
 
-Goal
---------------------
+There are some current API capabilities, we are currently working on extend them and improve the API versatility.
 
-The goal is pretty simple, stop using the command line to manage OSSEC. What if you could manage OSSEC just with some URL's in your browser? What if OSSEC could have different privilegies levels depending of what command is executed? What if you could deploy thousand of OSSEC agents just calling a POST request?
+List your existing agents: :: 
 
-We are currently working on it and with the open source community we will create a magnific OSSEC API.
+ /agents
+
+Get agent information: :: 
+
+ /agents/:agent_id
+
+Restart an agent: :: 
+
+ /agents/:agent_id/restart
+
+Add a new agent: :: 
+
+ /agents/add/:agent_name
+
+Extract an agent key: :: 
+
+ /agents/:agent_id/key
+
+Restart syscheck/rootcheck on all agents :: 
+
+ /agents/sysrootcheck/restart
+
+Restart syscheck/rootcheck restart on one agent :: 
+
+ /agents/:agent_id/sysrootcheck/restart
 
 
-Requirements
---------------------
+Installation
+------------
 
-OSSEC API is currently working under a NodeJS server (v0.10.x) with Express module (4.0.x) and the following dependencies:
+OSSEC RESTful API requires you to have previously installed our OSSEC fork as your manager. You can download and install it following :ref:`these instructions <ossec_wazuh_manager>`. 
+
+As well, OSSEC API works under a NodeJS server (v0.10.x) with Express module (4.0.x), and has the following dependencies:
 
 - Body parser
 - FS
@@ -40,163 +66,87 @@ OSSEC API is currently working under a NodeJS server (v0.10.x) with Express modu
 - HTTP-AUTH
 - Moment
 
-Moreover, you need OSSEC HIDS forked by Wazuh, download and install it, you can follow the installation guide at `OSSEC Wazuh installation  <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
+The service will operate on port 55000/tcp by default, and NodeJS service will be protected with HTTP Authentication and encrypted by HTTPS SSL Certificate.
 
-Finally to access the API externally you will need to open the port 55000 TCP
-
-
-Requests
---------------------
-
-There are some current API capabilities, we are currently working on extend them and improve the API versatility.
-
-List :: 
-
- /agents
-
-Info and status :: 
-
- /agents/:agent_id
-
-Restart :: 
-
- /agents/:agent_id/restart
-
-Add :: 
-
- /agents/add/:agent_name
-
-Extract key :: 
-
- /agents/:agent_id/key
-
-Syscheck/rootcheck on all agents :: 
-
- /agents/sysrootcheck/restart
-
-Syscheck/rootcheck restart on one agent :: 
-
- /agents/:agent_id/sysrootcheck/restart
-
-
-
-Security
---------------------
-
-The API will operate on port 55000 TCP, NodeJS will be protected with HTTP Authentication and encrypted by HTTPS SSL Certificate.
-
-
-Installing
---------------------
-
-Install API
-^^^^^^^^^^^^^^^^^^^
-
-.. warning:: To get the API working we need OSSEC HIDS forked by Wazuh, download and install it, you can follow the installation guide at `OSSEC Wazuh installation  <http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html>`_
-
-Now we can continue installing OSSEC API, you will find the folders we need at Wazuh repository at *ossec-hids/extensions/api*.
-
-Just in case you forgot it, mount dev folder to OSSEC location :: 
+Remember (as indicated when installing OSSEC Wazuh fork), that OSSE RESTful API requires you to mount your system ``/dev`` directory on your OSSEC location: :: 
 
  $ sudo mkdir /var/ossec/dev/
  $ sudo mount -o bind /dev /var/ossec/dev/
 
-And copy the API folder to OSSEC folder ::
+And copy the API folder to OSSEC folder: ::
 
- $ sudo cp -rf ~/ossec_tmp/ossec-hids/extensions/api  /var/ossec/
+ $ sudo cp -rf ~/ossec_tmp/ossec-wazuh/extensions/api  /var/ossec/
 
-Install NodeJS
-^^^^^^^^^^^^^^^^^^^
+NodeJS
+^^^^^^
 
-Choose **yum** por CentOS distributions or **apt** for Debian Linux/Ubuntu distributions.
-
-**YUM**
-
-Install *epel-release* and install *nodejs* package :: 
+On CentOS, install *epel-release* and *nodejs* packages: ::
  
  $ sudo yum install epel-release
  $ sudo yum install nodejs
 
-
-**APT**
-
-Update repositories and install *nodejs* package :: 
+On Debian, update your repositories and install *nodejs* package: ::
 
  $ sudo apt-get update
  $ sudo apt-get install nodejs
 
+.. note:: Remember to open 55000 port TCP in your firewall, as it is used by the API service.
 
-.. note:: Remember to open 55000 port TCP in your firewall.
+SSL Certificate
+^^^^^^^^^^^^^^^
 
-
-Generating certificates
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-At *api* folder you can found some certificates we already created for you, if you don't want to generate new certificates it is not neccesary to do it, you can move forward to next section of this guide.
-
-In the other way, maybe you are interested on generate your own certificates with your company or personal data, you can do it as follows.
-
-Install OpenSSL :: 
-
- $ sudo apt-get install openssl
-
-Create a Server Certificate :: 
+At ``/var/ossec/api`` directory you can found some certificates we already created for you. But, if you want to create your own ones, you can do it following these steps (they require you to have openssl installed): ::
 
  $ cd /var/ossec/api	
  $ sudo openssl genrsa -des3 -out server.key 1024
  $ sudo openssl req -new -key server.key -out server.csr
 
-The password must be inserted everytime you run the server, if you don't want to enter the password everytime, remove it ::
+The password must be inserted everytime you run the server, if you don't want to enter the password everytime, you can remove it running these commands: ::
 
  $ sudo cp server.key server.key.org
  $ sudo openssl rsa -in server.key.org -out server.key
 
-Generate your self-signed certificate ::
+Now Generate your self-signed certificate: ::
 
  $ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-Remove temp files ::
+And remove temporary files: ::
 
  $ sudo rm server.csr
  $ sudo rm server.key.org
 
-Adding password
-^^^^^^^^^^^^^^^^^^^^^^
+HTTP Authentication
+^^^^^^^^^^^^^^^^^^^
 
-By default you can access by entering user *foo* and password *bar*, if you prefer you can of course generate your own password like this ::
+By default you can access by entering user "foo" and password "bar". We recommend you to change this credentials. This can be done very easily running: ::
 
  $ cd /var/ossec/api
  $ sudo htpasswd -c htpasswd **username**
 
-Running API in background
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Running API on the background
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Time to start the API, we are going to start it on background and redirect the standard output to a log file called *api.log* ::
+Time to start the API, we are going to start it on background and redirect the standard output to a log file called ``api.log``: ::
 
  $ /bin/node /var/ossec/api/server.js &>/var/ossec/api/api.log &
 
 .. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /usr/bin/, if the API does not start, check it please.
 
+API sample use cases
+--------------------
 
-Sample outputs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-That's all! Now you can access the API via browser o via *curl* commands at terminal. 
-
-For example go to your browser and navitage to your server ip, not forget to enter the username and password created previously ::
+At this point you should be able to access the API through a web browser or through the command line (using curl). For example, go to your browser and navitage to your server IP addreess (via HTTPS, port 55000). Do not forget to enter your username and password created: ::
 
  https://server.ip:55000
 
-Or in the command line try some requests ::
+Or in the command line try some requests: ::
  
  $ curl -XGET  -u username -k https://your.ip:55000/agents
  $ curl -XGET  -u username -k https://your.ip:55000/agents/000
 
-.. note:: Rembember to use **HTTPS** URL when accesing
+See below some sample outputs.
 
-
-Some sample outputs.
-
-Agents list ::
+Agents list: ::
 
  {
 	error: 0,
@@ -235,7 +185,7 @@ Agents list ::
  }
 
 
-Agent info ::
+Agent info: ::
 
  {
   "response": {
@@ -254,7 +204,7 @@ Agent info ::
   "error": 0
  }
 
-Agent restarted ::
+Agent restarted: ::
 
  {
   "response": {
@@ -267,7 +217,7 @@ Agent restarted ::
   "description": ""
  }
 
-Agent syscheck/rootcheck restared ::
+Agent syscheck/rootcheck restared: ::
 
  {
   "response": {
@@ -281,11 +231,9 @@ Agent syscheck/rootcheck restared ::
  }
 
 
+Next steps
+----------
 
-What next?
------------
+Once you have your OSSEC RESTful API running, we recommend you to check our OSSEC rule set:
 
-Once you have OSSEC Wazuh installed you can move forward and try out ELK integration, check it on:
-
-* `ELK Integration Guide <http://documentation.wazuh.com/en/latest/integrating_ossec_elk.html>`_
-* `OSSEC Ruleset <http://documentation.wazuh.com/en/latest/ossec_rule_set.html>`_ 
+* `OSSEC rule set <http://documentation.wazuh.com/en/latest/ossec_rule_set.html>`_ 
