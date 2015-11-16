@@ -1,7 +1,7 @@
 .. _ossec_installation_source:
 
-Building from Sources
-=======================
+Installation from sources
+=========================
 
 Download and integrity verification
 -----------------------------------

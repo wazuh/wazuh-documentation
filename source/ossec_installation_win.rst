@@ -3,106 +3,94 @@
 Windows agent
 =============
 
-This manual is bassed in ossec-hids 2.8.3 version, you can download in the from this sources::
+Agent pre-compiled installer
+----------------------------
+
+You can find a pre-compiled version of OSSEC agent for Windows, both for 32 and 64 bits architectures, at `our repository <http://ossec.wazuh.com/windows/>`.
+
+Current version is 2.8.3 and these are the MD5 and SHA1 checksums:
+
+* md5sum: 633d898d51eb49050c735abd278e08c8
+* sha1sum: 4ebcb31e4eccd509ae34148dd7b1b78d75b58f53
+
+Compiling from sources
+----------------------
+
+This section describes how to download and compile your OSSEC HIDS Windows agent (version 2.8.3). You can use either a CentOS or a Debian system as a compilation environment.
+
+Source code download
+^^^^^^^^^^^^^^^^^^^^
+
+Download the source code and checksum files: ::
 
    $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz
-
-To download the checksum file, type::
-
    $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz.sha256
 
-Now, let's examine the checksum file with the **cat** command, like so::
-
-   $ cat ossec-hids-2.8.3.tar.gz.sha256
-
-   SHA256 (ossec-hids-2.8.3.tar.gz) = 917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd
-
-To generate the SHA256 of the tarball, type::
+Generate SHA256 checksum and compare with downloaded one: ::
 
    $ sha256sum ossec-hids-2.8.3.tar.gz
+   $ cat ossec-hids-2.8.3.tar.gz.sha256
 
-Expected output::
+The expected hash checksum, in both cases is: ::
 
-   917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd  ossec-hids-2.8.3.tar.gz
+917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd
 
+.. note:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connexion.
 
-.. warning:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connexion.
+Build environment on CentOS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
-Under CentOS
-------------
-
-First, you need to install MinGW and nsis (to build the installer). 
-For MinGW install epel repository:: 
+First, you need to install MinGW and Nsis (to build the installer). Lets start installing EPEL repository: ::
 
    $ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
    $ rpm -i epel-release-latest-7.noarch.rpm
 
-After that, we install MinGW gcc and other libraries for the nsis compilation::
+After that, we install MinGW gcc and other libraries for the Nsis compilation: ::
 
-   $ yum install gcc-c++ gcc scons mingw32-gcc zlib-devel
+   $ yum install gcc-c++ gcc scons mingw32-gcc mingw64-gcc zlib-devel
 
-For the nsis installation we need to download two packages::
+Now, to install Nsis, follow these steps: ::
 
-   $ wget http://sourceforge.net/projects/nsis/files/NSIS%203%20Pre-release/3.0b2/nsis-3.0b2-src.tar.bz2/download
-   $ wget http://sourceforge.net/projects/nsis/files/NSIS%203%20Pre-release/3.0b2/nsis-3.0b2.zip/download
-
-After downloading the two packages, I created a directory named 'nsis' in /usr/local.   You can create this diretcory wherever you want, as long as the users who will need it have permissions to access it.  Move the two packages you have just downloaded into the directory 'nsis' that you just have created.  The commands to do this are below::
-
+   $ wget http://downloads.sourceforge.net/project/nsis/NSIS%203%20Pre-release/3.0b2/nsis-3.0b2-src.tar.bz2
+   $ wget http://downloads.sourceforge.net/project/nsis/NSIS%203%20Pre-release/3.0b2/nsis-3.0b2.zip
    $ mkdir /usr/local/nsis
-   $ mv nsis-3.0b2-src.tar.bz2 /usr/local/nsis
-   $ mv nsis-3.0b2.zip /usr/local/nsis
-
-After moving the files into /usr/local/nsis , extract the two packages.  The commands I used are below::
-
+   $ mv nsis-3.0b2-src.tar.bz2 nsis-3.0b2.zip /usr/local/nsis
+   $ cd /usr/local/nsis
    $ tar -jxvf nsis-3.0b2-src.tar.bz2 
    $ unzip nsis-3.0b2.zip
 
-The nsis-3.0b2 directory contains a pre-compiled package of the software for Windows. Inside the nsis-3.0b2-src directory will be an INSTALL file.
-The program you will be building is called 'makensis'.  This is what will actually build the Installer Package on a Linux box.
-Inside the nsis-3.0b2-src directory isssue the following command:: 
+Then we need to build ``makensis``, which will actually build the OSSEC Installer Package for Windows: ::
 
-   $ scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all NSIS_CONFIG_CONST_DATA=no PREFIX=/path/to/your/extracted/zip/directory install-compiler
+   $ cd /usr/local/nsis/nsis-3.0b2-src/
+   $ scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all NSIS_CONFIG_CONST_DATA=no PREFIX=/usr/local/nsis/nsis-3.0b2 install-compiler
    $ mkdir /usr/local/nsis/nsis-3.0b2/share
    $ cd /usr/local/nsis/nsis-3.0b2/share
    $ ln -s /usr/local/nsis/nsis-3.0b2 nsis
    $ cp ../bin/makensis /bin
 
-After that we have installed all software necessary for make the Ossec Agent Compilation follow the steps at the `Common compilation`_.
+Build environment on Debian
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
-
-Under Ubuntu & Debian
----------------------
-
-For compile the agent under Ubuntu need to install the next packages::
+To compile OSSEC agent on a Debian system install these packages: ::
 
    $ apt-get install gcc-mingw-w64
    $ apt-get install nsis
    $ apt-get install make
 
-After that we have installed all software necessary for make the Ossec Agent Compilation follow the steps at the `Common compilation`_.
+Compiling agent
+---------------
 
-Common compilation
-------------------
+Extract ossec-hids and run ``gen-win.sh`` and ``make.sh`` scripts: ::
 
-First unpack ossec-hids::
-
-   $ unzip 2.8.1.zip
-   $ cd cd ossec-hids-2.8.1/src/win32
+   $ tar -xvzf ossec-hids-2.8.3.tar.gz
+   $ cd ossec-hids-2.8.3/src/win32
    $ ./gen-win.sh
-
-Now, you will have the win-pkg directory under src. Just go there and run make.sh. Your Windows agent package should be created in a few minutes::
-
    $ cd ../win-pkg
    $ sh ./make.sh
 
-You will see the following in the screen::
+You should expect the following output: ::
 
    Making windows agent
-   rootcheck/win-common.c: In function "__os_winreg_querykey":
-   rootcheck/win-common.c:279: warning: pointer targets in passing argument 7 of "RegEnumValueA" differ in signedness
-   win-registry.c: In function "os_winreg_querykey":
    ...
 
    Output: "ossec-win32-agent.exe"
@@ -121,4 +109,4 @@ You will see the following in the screen::
 
    Total size:                  1166627 / 3984805 bytes (29.2%)
 
-You have **ossec-win32-agent.exe** in the same folder ready for be used.
+Now you should have the OSSEC agent installer for Windows, ``ossec-win32-agent.exe``, ready to be used.

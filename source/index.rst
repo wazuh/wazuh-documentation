@@ -11,4 +11,3 @@ Table of contents
    ossec_rule_set
    ossec_docker
    ossec_puppet
-   ossec_virtual_machine
