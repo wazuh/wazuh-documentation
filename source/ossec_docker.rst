@@ -1,7 +1,7 @@
 .. _ossec_docker:
 
-Installing OSSEC with Docker
-=====================================
+OSSEC Docker container
+======================
 
 How install Docker
 ------------------

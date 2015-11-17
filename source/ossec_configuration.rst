@@ -1,81 +1,18 @@
 .. _ossec_configuration:
 
-OSSEC Basic Configuration
-===============================
+OSSEC basic configuration
+=========================
 
-If you made your installation from Sources or DEBs you can continue with the `Agent configuration`_ 
-but if you made your install from RPMs repository you will need to make changes in the `Manager configuration`_
+In this documentation you will find the instructions to add a new agent, and to configure it to report to your OSSEC manager. For detailed information on OSSEC HIDS configuration options, please go to the `project documentation <http://ossec.github.io/docs/>`_, or the `reference manual <http://ossec.github.io/docs/manual/index.html>`_.
 
-Manager configuration
--------------------------
+Add a new agent
+---------------
 
-If you made the Manager installation from RPMs need to add the mail configuration, for this
-follow the next steps
-
-To access and modify OSSEC's files and directories, you need to switch to the root user::
-
-   $ sudo su
-   $ cd /var/ossec/etc
-
-We make a backup from **ossec.conf**::
-
-   $ cp ossec.conf ossec.conf.backup
-
-Then open the original with your favorite text editor::
-
-   $ vi ossec.conf
-
-The mail settings are at the top of the file and need to change **email_to** , **smtp_server** and **email_from** for your own configuration::
-
-   <ossec_config>
-     <global>
-       <email_notification>yes</email_notification>
-       <email_to>jose@xxx.com</email_to>
-       <smtp_server>smtp.xxx.com.</smtp_server>
-       <email_from>ossecm@ossec.xxx.com.</email_from>
-     </global>
-
-After that, only need restart Ossec server::
-
-   $ service ossec-hids restart
-
-Agent configuration
--------------------
-
-If you made the Agentr installation from RPMs need to add the Manager IP Address to the configuration, for this
-follow the next steps
-
-To access and modify OSSEC's files and directories, you need to switch to the root user::
-
-   $ sudo su
-   $ cd /var/ossec/etc
-
-We make a backup from **ossec.conf**::
-
-   $ cp ossec.conf ossec.conf.backup
-
-Then open the original with your favorite text editor::
-
-   $ vi ossec.conf
-
-You need to add the Manager IP to the agent configuration in **server-ip**::
-
-   <ossec_config>
-     <client>
-       <server-ip>XXX.XXX.XXX</server-ip>
-     </client>
-
-
-Add Agent to Server
--------------------
-
-On the OSSEC server, start the process of adding the agent.
-
-Excecute **manage_agent**::
+On your OSSEC manager, run  ``/var/ossec/bin/manage_agents``: ::
 
    $ /var/ossec/bin/manage_agents
 
-You will then be presented the options shown below. Choose **a** to add an agent::
+You will then be presented the options shown below. Choose "A" to add an agent": ::
 
    ****************************************
    * OSSEC HIDS v2.8 Agent manager.     *
@@ -86,24 +23,25 @@ You will then be presented the options shown below. Choose **a** to add an agent
       (L)ist already added agents (L).
       (R)emove an agent (R).
       (Q)uit.
-   Choose your action: A,E,L,R or Q: a
+   Choose your action: A,E,L,R or Q: A
 
-You need to type a name for the agent, a IP Address and an ID
-For the ID, you may accept the default by pressing **ENTER**::
+You need to type a name for the agent, an IP address and an ID: ::
 
    - Adding a new agent (use '\q' to return to the main menu).
      Please provide the following:
-      * A name for the new agent: TestAgent
-      * The IP Address of the new agent: 111.111.111.111
+      * A name for the new agent: agent-name
+      * The IP Address of the new agent: 10.0.0.1
       * An ID for the new agent[001]:
    Agent information:
       ID:001
-      Name:TestAgetn
-      IP Address:111.111.111.111
+      Name:agent-name
+      IP Address:10.0.0.1
 
-   Confirm adding it?(y/n): 
+   Confirm adding it?(y/n): y
 
-After that, you'll be returned to the main menu. Now you have to extract the agent's key, which will be echoed to the screen. (It will be different from the one in the example below.)::
+.. note:: The agent IP address should always match the one the agent will be connected from. If unsure you can use ``any``. As well you could inspect your network traffic with ``tcpdump``, to see IP headers of incoming packets.
+
+Now you have to extract the agent's key, which will be displayed on the screen. See below an example: ::
 
    ****************************************
    * OSSEC HIDS v2.8 Agent manager.       *
@@ -117,7 +55,7 @@ After that, you'll be returned to the main menu. Now you have to extract the age
    Choose your action: A,E,L,R or Q:e
    
    Available agents: 
-   ID: 001, Name: TestAgetn, IP: 111.111.111.111
+   ID: 001, Name: agent-name, IP: 10.0.0.1
    Provide the ID of the agent to extract the key (or '\q' to quit): 001
 
    Agent key information for '001' is: 
@@ -125,16 +63,21 @@ After that, you'll be returned to the main menu. Now you have to extract the age
 
    ** Press ENTER to return to the main menu.
 
-.. note:: Make sure you copy it, because you'll have to enter it for the agent.
+Now copy the key (the whole line ending in ``==``), because you'll have to import it at the agent.
 
-Import The Key From Server to Agent
------------------------------------
+Agent configuration on Linux
+----------------------------
 
-This section has to be completed on the agent, and it involves importing (copying) the agent's key extracted on the server and pasting it on the agent's terminal. To start, execute by root the next command::
+Your agent needs to have the IP address of your manager, in order to know where to send the data. Please check your agent configuration file, which is located at ``/var/ossec/etc/ossec.conf``, and set the ``server-ip`` to the right value: ::
+
+   <ossec_config>
+     <client>
+       <server-ip>XXX.XXX.XXX.XXX</server-ip>
+     </client>
+
+Now you can run ``manage_agents`` (remember we are on your agent system, not on the manager), and paste the previously copied key: ::
 
    $ /var/ossec/bin/manage_agents
-
-You'll be presented with these options::
 
    ****************************************
    * OSSEC HIDS v2.8 Agent manager.       *
@@ -142,9 +85,7 @@ You'll be presented with these options::
    ****************************************
       (I)mport key from the server (I).
       (Q)uit.
-   Choose your action: I or Q: i
-
-After typing the correct option, follow the directions to copy and paste the key generated from the server::
+   Choose your action: I or Q: I
 
    * Provide the Key generated by the server.
    * The best approach is to cut and paste it.
@@ -154,10 +95,11 @@ After typing the correct option, follow the directions to copy and paste the key
 
    Agent information:
       ID:001
-      Name:TestAgetn
-      IP Address:111.111.111.111
+      Name:agent-name
+      IP Address:10.0.0.1
 
    Confirm adding it?(y/n): y
 
-Now your Ossec Agent is finished and working properly.
+Now your agent have been properly added. You can restart it running: ::
 
+   $ /var/ossec/bin/ossec-control restart
