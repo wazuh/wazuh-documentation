@@ -31,7 +31,7 @@ Generate SHA256 checksum and compare with downloaded one: ::
    $ sha256sum ossec-hids-2.8.3.tar.gz
    $ cat ossec-hids-2.8.3.tar.gz.sha256
 
-The expected hash checksum, in both cases is: ::
+The expected hash checksum, in both cases, is: ::
 
 917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd
 
