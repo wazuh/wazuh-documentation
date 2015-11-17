@@ -13,7 +13,7 @@ To check your current kernel version, open a terminal and use uname -r to displa
    $ uname -r
    3.10.0-229.el7.x86_64
 
-.. note:: This Docker containers are based on "xetus-oss" dockerfiles, which can be found at `https://github.com/xetus-oss/docker-ossec-server <https://github.com/xetus-oss/docker-ossec-server>`_. We created our own fork, which we test and maintain. Thank you Terence Kent for your contribution to the community.
+.. note:: These Docker containers are based on "xetus-oss" dockerfiles, which can be found at `https://github.com/xetus-oss/docker-ossec-server <https://github.com/xetus-oss/docker-ossec-server>`_. We created our own fork, which we test and maintain. Thank you Terence Kent for your contribution to the community.
 
 Docker installation on CentOS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -68,15 +68,10 @@ To ensure Docker starts when you boot your system, do the following: ::
 
 .. note:: For 14.10 and below the above installation method automatically configures Upstart to start the Docker daemon on boot
 
-Install Docker on other plataforms
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To install Docker on different plataform you can find more information at the official guide `here <https://docs.docker.com/installation/>`_.
-
 Ossec-Elk Container
 -------------------
 
-This Docker container source files can be found in our `Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and a single-node Elasticsearch cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <ossec_wazuh>`.
+This Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and a single-node Elasticsearch cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <ossec_wazuh>`.
 
 To install ossec-elk container run this command: ::
 
@@ -86,12 +81,12 @@ The ``/var/ossec/data`` directory allows the container to be replaced without co
 
 Other available configuration parameters are: 
 
-* __AUTO_ENROLLMENT_ENABLED__: Specifies whether or not to enable auto-enrollment via ossec-authd. Defaults to `true`;
-* __AUTHD_OPTIONS__: Options to passed ossec-authd, other than -p and -g. Defaults to empty;
-* __SYSLOG_FORWADING_ENABLED__: Specify whether syslog forwarding is enabled or not. Defaults to `false`.
-* __SYSLOG_FORWARDING_SERVER_IP__: The IP for the syslog server to send messagse to, required for syslog fowarding. No default.
-* __SYSLOG_FORWARDING_SERVER_PORT__: The destination port for syslog messages. Default is `514`.
-* __SYSLOG_FORWARDING_FORMAT__: The syslog message format to use. Default is `default`.
+- AUTO_ENROLLMENT_ENABLED: Specifies whether or not to enable auto-enrollment via ossec-authd. Defaults to ``true``.
+- AUTHD_OPTIONS: Options to passed ``ossec-authd``, other than ``-p`` and ``-g``. No default.
+- SYSLOG_FORWADING_ENABLED: Specifies whether Syslog forwarding is enabled or not. Defaults to ``false``.
+- SYSLOG_FORWARDING_SERVER_IP: The IP address for the Syslog server. No default.
+- SYSLOG_FORWARDING_SERVER_PORT: The destination port for Syslog messages. Default is ``514``.
+- SYSLOG_FORWARDING_FORMAT: The Syslog message format to use. Default is ``default``.
 
 .. note:: All SYSLOG configuration variables are only applicable to the first time setup. Once the container's data volume has been initialized, all the configuration options for OSSEC can be changed.
 
@@ -135,7 +130,7 @@ Refresh Kibana page and you should be able to load your imported Dashboards.
 OSSEC HIDS  Container
 ---------------------
 
-This Docker container source files can be found in our `Github repository <https://github.com/wazuh/docker-ossec>`_. To install it run this command: ::
+This Docker container source files can be found in our `ossec-server Github repository <https://github.com/wazuh/docker-ossec>`_. To install it run this command: ::
 
    $ docker run --name ossec-server -d -p 1514:1514/udp -p 1515:1515\
   -e SYSLOG_FORWADING_ENABLED=true -e SYSLOG_FORWARDING_SERVER_IP=X.X.X.X\
@@ -145,16 +140,16 @@ The ``/var/ossec/data`` directory allows the container to be replaced without co
 
 Other available configuration parameters are:
 
-* __AUTO_ENROLLMENT_ENABLED__: Specifies whether or not to enable auto-enrollment via ossec-authd. Defaults to `true`;
-* __AUTHD_OPTIONS__: Options to passed ossec-authd, other than -p and -g. Defaults to empty;
-* __SMTP_ENABLED__: Whether or not to enable SMTP notifications. Defaults to `true` if ALERTS_TO_EMAIL is specified, otherwise `false`
-* __SMTP_RELAY_HOST__: The relay host for SMTP messages, required for SMTP notifications. This host must support non-authenticated SMTP ([see this thread](https://ossec.uservoice.com/forums/18254-general/suggestions/803659-allow-full-confirguration-of-smtp-service-in-ossec)). No default.
-* __ALERTS_FROM_EMAIL__: The email address the alerts should come from. Defaults to `ossec@$HOSTNAME`.
-* __ALERTS_TO_EMAIL__: The destination email address for SMTP notifications, required for SMTP notifications. No default.
-* __SYSLOG_FORWADING_ENABLED__: Specify whether syslog forwarding is enabled or not. Defaults to `false`.
-* __SYSLOG_FORWARDING_SERVER_IP__: The IP for the syslog server to send messagse to, required for syslog fowarding. No default.
-* __SYSLOG_FORWARDING_SERVER_PORT__: The destination port for syslog messages. Default is `514`.
-* __SYSLOG_FORWARDING_FORMAT__: The syslog message format to use. Default is `default`.
+- AUTO_ENROLLMENT_ENABLED: Specifies whether or not to enable auto-enrollment via ossec-authd. Defaults to ``true``.
+- AUTHD_OPTIONS: Options to passed ``ossec-authd``, other than ``-p`` and ``-g``. No default.
+- SYSLOG_FORWADING_ENABLED: Specifies whether Syslog forwarding is enabled or not. Defaults to ``false``.
+- SYSLOG_FORWARDING_SERVER_IP: The IP address for the Syslog server. No default.
+- SYSLOG_FORWARDING_SERVER_PORT: The destination port for Syslog messages. Default is ``514``.
+- SYSLOG_FORWARDING_FORMAT: The Syslog message format to use. Default is ``default``.
+- SMTP_ENABLED: Whether or not to enable SMTP notifications. Defaults to ``true`` if ALERTS_TO_EMAIL is specified, otherwise defaults to ``false``.
+- SMTP_RELAY_HOST: The relay host for SMTP messages, required for SMTP notifications. This host must support non-authenticated SMTP. No default.
+- ALERTS_FROM_EMAIL: The email address the alerts should come from. Defaults to ``ossec@$HOSTNAME``.
+- ALERTS_TO_EMAIL: The destination email address for SMTP notifications, required for SMTP notifications. No default.
 
 .. note:: All SMTP and SYSLOG configuration variables are only applicable to the first time setup. Once the container's data volume has been initialized, all the configuration options for OSSEC can be changed.
 
