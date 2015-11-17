@@ -3,29 +3,22 @@
 OSSEC Docker container
 ======================
 
-How install Docker
-------------------
+Docker installation
+-------------------
 
-Prerequisites
--------------
-
-Docker requires a 64-bit installation regardless of your CentOS/Debina/Ubuntu version. Also, your kernel must be 3.10 at minimum.
+Docker requires a 64-bit installation regardless of your CentOS or Debian version. Also, your kernel must be 3.10 at minimum.
 
 To check your current kernel version, open a terminal and use uname -r to display your kernel version::
 
    $ uname -r
    3.10.0-229.el7.x86_64
 
-Adding yum repository
----------------------
+.. note:: This Docker containers are based on "xetus-oss" dockerfiles, which can be found at `https://github.com/xetus-oss/docker-ossec-server <https://github.com/xetus-oss/docker-ossec-server>`_. We created our own fork, which we test and maintain. Thank you Terence Kent for your contribution to the community.
 
-To add docker yum repository, create a file named /etc/yum.repos.d/docker.repo::
+Docker installation on CentOS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   $ cd /etc/yum.repos.d
-   $ vi docker.repo
-
-
-**For CentOS**::
+To add Docker yum repository, create a file named ``/etc/yum.repos.d/docker.repo`` with the following content: ::
 
    [dockerrepo]
    name=Docker Repository
@@ -34,120 +27,64 @@ To add docker yum repository, create a file named /etc/yum.repos.d/docker.repo::
    gpgcheck=1
    gpgkey=https://yum.dockerproject.org/gpg
 
-**For Fedora**
+Now install the RPM package and start the service: ::
 
-For Fedora 21::
+   $ sudo yum install docker-engine
+   $ sudo service docker start 
+   $ chkconfig docker on     
 
-   [dockerrepo]
-   name=Docker Repository
-   baseurl=https://yum.dockerproject.org/repo/main/fedora/21
-   enabled=1
-   gpgcheck=1
-   gpgkey=https://yum.dockerproject.org/gpg
+Docker installation on Debian
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
-For Fedora 22::
-
-   [dockerrepo]
-   name=Docker Repository
-   baseurl=https://yum.dockerproject.org/repo/main/fedora/22
-   enabled=1
-   gpgcheck=1
-   gpgkey=https://yum.dockerproject.org/gpg
-
-Adding apt-get repository
--------------------------
-
-Add the new gpg key::
+Add the new repository GPG key: ::
 
   $ apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 
-To add docker apt-get repository, create a file named /etc/apt/sources.list.d/docker.list::
+Then, to add Docker apt-get repository, create a file named ``/etc/apt/sources.list.d/docker.list`` with the following content depending on your Debian distribution.
 
-   $ cd /etc/apt/sources.list.d/
-   $ vi docker.list
-
-**For Ubuntu**
-
-For Ubuntu Vivid::
-
-   # Ubuntu Vivid
-   deb https://apt.dockerproject.org/repo ubuntu-vivid main
-
-For Ubuntu Trusty::
-
-   # Ubuntu Trusty
-   deb https://apt.dockerproject.org/repo ubuntu-trusty main
-
-For Ubuntu Wily::
-
-   # Ubuntu Wily
-   deb https://apt.dockerproject.org/repo ubuntu-wily main
-
-**For Debian**
-
-For Debian Wheezy::
+For Debian Wheezy: ::
 
    # Debian Wheezy
    deb https://apt.dockerproject.org/repo debian-wheezy main
 
-For Debian Jessie::
+For Debian Jessie: ::
 
    # Debian Jessie
    deb https://apt.dockerproject.org/repo debian-jessie main
 
-For Debian Strech::
+For Debian Strech: ::
 
    # Debian Stretch/Sid
    deb https://apt.dockerproject.org/repo debian-stretch main
 
-Install the Docker package
---------------------------
-
-**In CentOS / Fedora**::
-
-   $ sudo yum install docker-engine
-
-To start the daemon::
-
-   $ sudo service docker start
-
-To ensure Docker starts when you boot your system, do the following::
-
-   $ chkconfig docker on
-
-**In Ubuntu / Debian**::
+Now we can install the Debian package and start the service: ::
 
    $ sudo apt-get update && apt-get install docker-engine
-
-To start the dameon::
-
    $ sudo service docker start
 
-To ensure Docker starts when you boot your system, do the following::
+To ensure Docker starts when you boot your system, do the following: ::
 
    $ sudo systemctl enable docker
 
-.. note:: For 14.10 and below the above installation method automatically configures upstart to start the docker daemon on boot
+.. note:: For 14.10 and below the above installation method automatically configures Upstart to start the Docker daemon on boot
 
-Install Docker in different plataforms
---------------------------------------
+Install Docker on other plataforms
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For install Docker in different plataform you can review the official guide `here <https://docs.docker.com/installation/>`_
+To install Docker on different plataform you can find more information at the official guide `here <https://docs.docker.com/installation/>`_.
 
+Ossec-Elk Container
+-------------------
 
-Run the Ossec-elk Container
----------------------------
+This Docker container source files can be found in our `Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and a single-node Elasticsearch cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <ossec_wazuh>`.
 
-To run the osec-elk container is very easy, only need to type this command::
+To install ossec-elk container run this command: ::
 
-   $ docker run -d -p 1514:1514/udp -p 514:514/udp -p 5601:5601 -v /somepath/ossec_mnt:/var/ossec/data --name ossec wazuh/ossec-elkstack
+   $ docker run -d -p 1514:1514/udp -p 1515:1515 -p 514:514/udp -p 5601:5601 -v /somepath/ossec_mnt:/var/ossec/data --name ossec wazuh/ossec-elkstack
 
-The following directories are externalized under /var/ossec/data to allow the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue. In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
+The ``/var/ossec/data`` directory allows the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue. In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
 
-
-Available Configuration Parameters
-**********************************
+Other available configuration parameters are: 
 
 * __AUTO_ENROLLMENT_ENABLED__: Specifies whether or not to enable auto-enrollment via ossec-authd. Defaults to `true`;
 * __AUTHD_OPTIONS__: Options to passed ossec-authd, other than -p and -g. Defaults to empty;
@@ -158,78 +95,55 @@ Available Configuration Parameters
 
 .. note:: All SYSLOG configuration variables are only applicable to the first time setup. Once the container's data volume has been initialized, all the configuration options for OSSEC can be changed.
 
-ossec-execd is not enabled
-**************************
-
-Since this is a docker container, ossec-execd really isn't a great idea anyway. Having a log server, such as graylog, react based on log entries is the recommended approach.
-
-
-
-Add agents
-**********
-
-For add agent use the next command::
+To add an agent use the next command: ::
 
    $ docker exec -it ossec /var/ossec/bin/manage_agents
 
-Or can use auto enrollment tipping the next comman in the machine with the agent::
+.. note:: You can also use agents auto enrollment with ossec-authd
 
-   $ /var/ossec/bin/agent-auth -m ossec -p 1515 -A example-agent
-   INFO: Connected to ossec:1515
-   INFO: Using agent name as: melancia
-   INFO: Send request to manager. Waiting for reply.
-   INFO: Received response with agent key
-   INFO: Valid key created. Finished.
-   INFO: Connection closed.
+Then restart your OSSEC manager: ::
 
-.. note:: Don't forget to do a `docker exec -it ossec /var/ossec/bin/ossec-control restart` after you'd added your first agent. 
+   $ docker exec -it ossec /var/ossec/bin/ossec-control restart
 
-
-
-Configuring and access to Kibana4
----------------------------------
+Access to Kibana4
+^^^^^^^^^^^^^^^^^
 
 Now we need to create a Kibana index, Kibana will do it automatically but we need to set up some fields on the first Kibana initialization.
 
-- Access to kibana url in the browser, http://localhost:5601 or http://yourlocalip:5601, and set up a new index pattern
-- Kibana will ask you to "Configure an index pattern", then do the following:
-- Check "Use event times to create index names"
-- Index pattern interval: Daily
-- Index name or pattern: **[ossec-]YYYY.MM.DD**
-- On **Time-field name** list select **@timestamp** option
-- Click on Create button
-- Go to Discover tap on top bar buttons.
+- Access to kibana url at ``http://your_docker_server_ip:5601`` and set up a new index pattern.
+- Kibana will ask you to "Configure an index pattern".
+- Check "Use event times to create index names".
+- Index pattern interval: Daily.
+- Index name or pattern: ``[ossec-]YYYY.MM.DD``
+- On ``Time-field name`` list select ``@timestamp`` option.
+- Click on "Create" button.
+- Go to "Discover" tap on top bar buttons.
 
-.. note:: Kibana will search Elasticsearch index name pattern "ossec-yyyy.mm.dd" you need to generate alerts from OSSEC BEFORE try to set up an index pattern on kibana, otherwise Kibana won't find any index on elasticsearch. For example you can try a sudo -s and miss the password on purpose several times.
 
-Now you can import the custom dashboards, access to Kibana WEB on your browser and navigate to Objects:
+.. note:: Kibana will search Elasticsearch index name pattern ``ossec-yyyy.mm.dd``. You need to have at least an OSSEC alert before you set up the index pattern on Kibana. Otherwise it won't find any index on Elasticsearch. If you want to generate one, for example you could try a ``sudo -s`` and miss the password on purpose several times.
 
-- Click at top bar on Settings
-- Click on Objects
-- Then click the button **Import** and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
+Now you can import the custom dashboards. Access Kibana web interface on your browser and navigate to "Objects": ::
 
-That's all! Refresh Kibana page and load the recently and fresh **imported Dashboards**.
+- Click at top bar on "Settings".
+- Click on "Objects".
+- Then click the button "Import" and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
 
-.. note:: Some Dashboard visualizations required time and some special alerts to works, please be patient and don't worry if some visualizations not works properly in few days since first import.
+Refresh Kibana page and you should be able to load your imported Dashboards.
 
-Run the Ossec HIDS  Container
------------------------------
+.. note:: Some Dashboard visualizations require time and specific alerts to work. Please don't worry if some visualizations do not display data immidiately after the import.
 
-To run the osec-elk container is very easy, only need to type this command::
+OSSEC HIDS  Container
+---------------------
+
+This Docker container source files can be found in our `Github repository <https://github.com/wazuh/docker-ossec>`_. To install it run this command: ::
 
    $ docker run --name ossec-server -d -p 1514:1514/udp -p 1515:1515\
   -e SYSLOG_FORWADING_ENABLED=true -e SYSLOG_FORWARDING_SERVER_IP=X.X.X.X\
   -v /somepath/ossec_mnt:/var/ossec/data wazuh/docker-ossec
 
-The following directories are externalized under /var/ossec/data to allow the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue. In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
+The ``/var/ossec/data`` directory allows the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue. In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
 
-
-Once the system starts up, you can execute the standard ossec commands using docker. For example, to list active agents::
-
-   $ docker exec -ti ossec-server /var/ossec/bin/list_agents -a
-
-Available Configuration Parameters
-**********************************
+Other available configuration parameters are:
 
 * __AUTO_ENROLLMENT_ENABLED__: Specifies whether or not to enable auto-enrollment via ossec-authd. Defaults to `true`;
 * __AUTHD_OPTIONS__: Options to passed ossec-authd, other than -p and -g. Defaults to empty;
@@ -242,12 +156,8 @@ Available Configuration Parameters
 * __SYSLOG_FORWARDING_SERVER_PORT__: The destination port for syslog messages. Default is `514`.
 * __SYSLOG_FORWARDING_FORMAT__: The syslog message format to use. Default is `default`.
 
-**Please note**: All the SMTP and SYSLOG configuration variables are only applicable to the first time setup. Once the container's data volume has been initialized, all the configuration options for OSSEC can be changed.
+.. note:: All SMTP and SYSLOG configuration variables are only applicable to the first time setup. Once the container's data volume has been initialized, all the configuration options for OSSEC can be changed.
 
-## Known Issues / Warnings
+Once the system starts up, you can execute the standard OSSEC commands using docker. For example, to list active agents: ::
 
-##### A default localhost agent is added
-
-On first launch, the ossec server will not start up properly and bind to port 1514, unless at least one agent to be present in the client.keys file. To avoid that issue, a local agent is setup by default. See [this bug](https://groups.google.com/forum/#!topic/ossec-list/qeC_h3EZCxQ) with OSSEC.
-
-Based in xetusoss code https://github.com/xetus-oss/docker-ossec-server
+   $ docker exec -ti ossec-server /var/ossec/bin/list_agents -a

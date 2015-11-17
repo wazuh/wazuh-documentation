@@ -73,7 +73,7 @@ To create OSSEC alerts index, access your Kibana interface at http://your_server
 - Index name or pattern: [ossec-]YYYY.MM.DD
 - On "Time-field name" list select @timestamp option.
 - Click on "Create" button.
-- Go to Discover tap on top bar buttons.
+- Go to "Discover" tap on top bar buttons.
 
 .. note:: Kibana will search Elasticsearch index name pattern ``ossec-yyyy.mm.dd``. You need to have at least an OSSEC alert before you set up the index pattern on Kibana. Otherwise it won't find any index on Elasticsearch. If you want to generate one, for example you could try a ``sudo -s`` and miss the password on purpose several times.
 

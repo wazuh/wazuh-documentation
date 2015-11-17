@@ -47,7 +47,7 @@ First, you need to install MinGW and Nsis (to build the installer). Lets start i
 
 After that, we install MinGW gcc and other libraries for the Nsis compilation: ::
 
-   $ yum install gcc-c++ gcc scons mingw32-gcc mingw64-gcc zlib-devel
+   $ yum install gcc-c++ gcc scons mingw32-gcc mingw64-gcc zlib-devel bzip2 unzip
 
 Now, to install Nsis, follow these steps: ::
 
