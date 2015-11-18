@@ -121,7 +121,7 @@ Select what do want to install, rules, rootchecks or both ::
 Choose the rules to **install** from an interactive menu or from a configuration file ::
 
   no arguments  Choose rules and rootchecks to install from a menu
-  -f, --file  Use a configuration file to select rules and rootchecks to install (explained below)
+  -f, --file  Use a configuration file to select rules and rootchecks to install
 
 Or **update** the exiting ruleset ::
 
