@@ -64,25 +64,6 @@ Installing or updating rules in OSSEC manually is very easy. In our `Github repo
      - If there are additional instructions to install these rules and decoders, you will find them in an instructions.md file in the same directory.
      - Restart your OSSEC manager
 
-Using the installation script
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-You can use the installation script, located in ``ossec-rules/rules-decoders/install.sh``, to automatically install and update your log analysis rules. To run the script, go to your OSSEC manager and follow the follwing steps.
-
-Cloning the repository: ::
-
-   $ cd ~
-   $ mkdir ossec_rules_tmp && cd ossec_rules_tmp
-   $ git clone https://github.com/wazuh/ossec-rules.git
-   $ cd ossec_rules
-
-Running the script: ::
-
-   $ cd rules-decoders
-   $ sudo chmod +x install_rules.sh
-   $ sudo ./install_rules.sh
-
-.. note:: We are in the process of creating an online service to distribute the rules in an even more automatic way, meantime you can still use the bash script mentioned above. You can also use ``install_rules.sh update`` just to update the rules included in your ``etc/ossec.conf`` file.
 
 Installing rootchecks
 ---------------------
@@ -102,6 +83,63 @@ To install a rootcheck file, just go to your OSSEC manager and copy the ``.txt``
    - <windows_audit>/var/ossec/etc/shared/win_audit_rcl.txt</windows_audit>
    - <windows_apps>/var/ossec/etc/shared/win_applications_rcl.txt</windows_apps>
 
+Installation script
+---------------------
+
+The script will help you to install and update OSSEC rules easily, you won't need to manually change OSSEC internal files, some features:
+
+* Check current installation
+* Install new rules and rootchecks
+* Decoders management
+* Automatic ossec.conf configuration
+* Update ruleset from Wazuh server
+* Silent mode
+
+The script is located in Wazuh/ossec-rules repository. To run the script, go to your OSSEC manager and do the following steps.
+
+Cloning the repository: ::
+
+   $ cd ~
+   $ mkdir ossec_rules_tmp && cd ossec_rules_tmp
+   $ git clone https://github.com/wazuh/ossec-rules.git
+   $ cd ossec_rules
+
+Running the script: ::
+
+   $ sudo chmod +x ossec_ruleset.py
+   $ sudo ./ossec_ruleset.py
+
+Arguments explanation
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Select what do want to install, rules, rootchecks or both ::
+
+  -r, --rules
+  -c, --rootchecks
+  -a, --all
+
+Choose the rules to **install** from an interactive menu or from a configuration file ::
+
+  no arguments  Choose rules and rootchecks to install from a menu
+  -f, --file  Use a configuration file to select rules and rootchecks to install (explained below)
+
+Or **update** the exiting ruleset ::
+
+  -u, --update  Update existing ruleset
+
+
+Configure weekly updates
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Run your script weekly and keep your OSSEC ruleset installation updated, add a **crontab** job to run the script periodically.
+
+Run ``sudo crontab -e``, at the end of the file add the following command ::
+ 
+  @weekly root /full/path/to/ossec-rules/ossec_ruleset.py
+
+That's all!
+
+
 Contribute to the rule set
 --------------------------
 If you have created new rules, decoders or rootchecks and you would like to contribute to our repository, please fork our `Github repository <https://github.com/wazuh/ossec-rules>`_ and submit a pull request.
@@ -115,5 +153,5 @@ What's next?
 
 Once you have your rule set up to date we encourage you to move forward and try out ELK integration or the API RESTful, check them on:
 
-* :ref:`ELK Integration Guide <ossec_wazuh_elk>`
+* :ref:`ELK Integration Guide <ossec_wazuh>`
 * :ref:`API RESTful Installation Guide <ossec_wazuh_api>`
