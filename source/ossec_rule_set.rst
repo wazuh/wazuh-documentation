@@ -133,7 +133,7 @@ Configure weekly updates
 
 Run your script weekly and keep your OSSEC ruleset installation updated, add a **crontab** job to run the script periodically.
 
-Run ``sudo crontab -e``, at the end of the file add the following command ::
+Run ``sudo crontab -e`` and add at the end of the file the following command ::
  
   @weekly root /full/path/to/ossec-rules/ossec_ruleset.py
 
