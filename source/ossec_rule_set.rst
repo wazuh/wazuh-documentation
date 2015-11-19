@@ -42,8 +42,8 @@ Rootcheck rule for SSH Server with mapping to CIS security benchmark and PCI DSS
    [CIS - Debian Linux - 2.3 - SSH Configuration - Empty passwords permitted {CIS: 2.3 Debian Linux} {PCI_DSS: 4.1}] [any] [http://www.ossec.net/wiki/index.php/CIS_DebianLinux]
    f:/etc/ssh/sshd_config -> !r:^# && r:^PermitEmptyPasswords\.+yes;
 
-Manual installing
--------------------
+Manual installation
+---------------------
 
 **Rules**
 
@@ -77,8 +77,8 @@ To install a rootcheck file, go to your **OSSEC manager** and copy the ``.txt`` 
    - <windows_apps>/var/ossec/etc/shared/win_applications_rcl.txt</windows_apps>
 
 
-Automatic installing
------------------------
+Automatic installation
+-------------------------
 
 We have created a script will help you to install and update OSSEC ruleset easily, you won't need to manually change OSSEC internal files.
 Two main functionalities are included: Install and Update, in one way you will be able to select new rules to incorporate into your OSSEC scope, in other way yo will able to update your existing ruleset.
