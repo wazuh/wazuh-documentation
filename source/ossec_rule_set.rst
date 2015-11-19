@@ -42,13 +42,12 @@ Rootcheck rule for SSH Server with mapping to CIS security benchmark and PCI DSS
    [CIS - Debian Linux - 2.3 - SSH Configuration - Empty passwords permitted {CIS: 2.3 Debian Linux} {PCI_DSS: 4.1}] [any] [http://www.ossec.net/wiki/index.php/CIS_DebianLinux]
    f:/etc/ssh/sshd_config -> !r:^# && r:^PermitEmptyPasswords\.+yes;
 
-Installing log analysis rules
------------------------------
+Manual installing
+-------------------
 
-Manual installation
-^^^^^^^^^^^^^^^^^^^
+**Rules**
 
-Installing or updating rules in OSSEC manually is very easy. In our `Github repository <https://github.com/wazuh/ossec-rules>`_ you will find two types of rules under ``ossec-rules/rules-decoders/`` directory:
+In our `Github repository <https://github.com/wazuh/ossec-rules>`_ you will find two kind of rules under ``ossec-rules/rules-decoders/`` directory:
 
 * **Updated OSSEC out-of-the-box rules:** Can be found under ``ossec-rules/rules-decoders/ossec`` directory and you can manually install them following these steps: ::
 
@@ -65,44 +64,43 @@ Installing or updating rules in OSSEC manually is very easy. In our `Github repo
      - Restart your OSSEC manager
 
 
-Installing rootchecks
----------------------
+**Rootchecks**
+
 Rootchecks can be found in ``ossec-rules/rootcheck/`` directory. There you will find both updated out-of-the-box OSSEC rootchecks, and newly created ones. 
 
-To install a rootcheck file, just go to your OSSEC manager and copy the ``.txt`` file to ``/var/ossec/etc/shared/``. Then modify ``/var/ossec/etc/ossec.conf`` by adding the path to the ``.txt`` file to the ``<rootcheck>`` section. Examples: :: 
+To install a rootcheck file, go to your **OSSEC manager** and copy the ``.txt`` file to ``/var/ossec/etc/shared/``. Then modify ``/var/ossec/etc/ossec.conf`` by adding the path to the ``.txt`` file into the ``<rootcheck>`` section. Examples: :: 
 
    - <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-   - <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
-
-   - <system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
-   - <system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
-   - <system_audit>/var/ossec/etc/shared/cis_rhel_linux_rcl.txt</system_audit>
    - <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
-
    - <windows_malware>/var/ossec/etc/shared/win_malware_rcl.txt</windows_malware>
    - <windows_audit>/var/ossec/etc/shared/win_audit_rcl.txt</windows_audit>
    - <windows_apps>/var/ossec/etc/shared/win_applications_rcl.txt</windows_apps>
 
-Installation script
----------------------
 
-The script will help you to install and update OSSEC rules easily, you won't need to manually change OSSEC internal files, some features:
+Automatic installing
+-----------------------
 
-* Check current installation
+We have created a script will help you to install and update OSSEC ruleset easily, you won't need to manually change OSSEC internal files.
+Two main functionalities are included: Install and Update, in one way you will be able to select new rules to incorporate into your OSSEC scope, in other way yo will able to update your existing ruleset.
+
+Some features:
+
+* Check current OSSEC installation
 * Install new rules and rootchecks
 * Decoders management
 * Automatic ossec.conf configuration
-* Update ruleset from Wazuh server
+* Fetch ruleset updates from Wazuh server
 * Silent mode
+* Backups system
 
-The script is located in Wazuh/ossec-rules repository. To run the script, go to your OSSEC manager and do the following steps.
+Let's begin, the script is located in ```wazuh/ossec-rules/ossec_ruleset.py``` repository, run it by going to your OSSEC manager machine and do the following steps.
 
 Cloning the repository: ::
 
    $ cd ~
    $ mkdir ossec_rules_tmp && cd ossec_rules_tmp
    $ git clone https://github.com/wazuh/ossec-rules.git
-   $ cd ossec_rules
+   $ cd ossec-rules
 
 Running the script: ::
 
@@ -112,32 +110,49 @@ Running the script: ::
 Arguments explanation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Select what do want to install, rules, rootchecks or both ::
+Select what do want to install/update: rules, rootchecks or both ::
 
   -r, --rules
   -c, --rootchecks
   -a, --all
 
-Choose the rules to **install** from an interactive menu or from a configuration file ::
+Choose the rules to **install/update** from an interactive menu or reading a configuration file ::
 
   no arguments  Choose rules and rootchecks to install from a menu
   -f, --file  Use a configuration file to select rules and rootchecks to install
 
 Or **update** the exiting ruleset ::
 
-  -u, --update  Update existing ruleset
+  -u, --update
+
+
+Usage examples
+^^^^^^^^^^^^^^^^^^^
+
+**Install new rules/rootchecks from interactive menu**
+
+``./ossec_ruleset.py --all``
+
+**Update existing ruleset**
+
+``./ossec_ruleset.py --all --update``
+
+**Update only existing rootchecks**
+
+``./ossec_ruleset.py --c --update``
 
 
 Configure weekly updates
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run your script weekly and keep your OSSEC ruleset installation updated, add a **crontab** job to run the script periodically.
+Run your script weekly and keep your OSSEC ruleset installation updated, add a **crontab** job into your system.
 
-Run ``sudo crontab -e`` and add at the end of the file the following command ::
+Run ``sudo crontab -e`` and at the end of the file add the following line ::
  
-  @weekly root /full/path/to/ossec-rules/ossec_ruleset.py
+  @weekly root /full/path/to/ossec-rules/ossec_ruleset.py -a -u -s
 
-That's all!
+
+That's all! 
 
 
 Contribute to the rule set
