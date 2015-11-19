@@ -81,7 +81,12 @@ Automatic installation
 -------------------------
 
 We have created a script will help you to install and update OSSEC ruleset easily, you won't need to manually change OSSEC internal files.
-Two main functionalities are included: Install and Update, in one way you will be able to select new rules to incorporate into your OSSEC scope, in other way yo will able to update your existing ruleset.
+
+
+Two main functionalities are included:
+
+* **Install**: Select new rules to incorporate into your OSSEC scope.
+* **Update**: Fecth directly from Wazuh server the last ruleset version.
 
 Some features:
 
