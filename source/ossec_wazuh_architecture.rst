@@ -27,7 +27,7 @@ Architecture
 
 The components for OSSEC and ELK Stack integration can be deployed all in a single host, or distributed across multiple systems. This last type of deployment is useful for load balancing, high availability and data replication. 
 
-In most cases Elasticesearch will only be indexing OSSEC alerts, as opposed to every event processed by the system (also possible using archives.json output). This approach reduces considerably the performance and storage requirements, making it perfectly possible to deploy all the components in a single server. In this case, the same system would run the OSSEC manager, the Logstash server and a single-node ELK cluster with Kibana user interface on top of it. 
+In most cases Elasticesearch will only be indexing OSSEC alerts, as opposed to every event processed by the system (also possible using archives.json output). This approach reduces considerably the performance and storage requirements, making it perfectly possible to deploy all the components in a single server. In this case, the same system would run the OSSEC manager, the Logstash server and an Elasticsearch single-node cluster with Kibana user interface on top of it. 
 
 In an effort to cover all possible scenarios, this guide describes both options to deploy OSSEC with ELK Stack (distributed and single-host).
 

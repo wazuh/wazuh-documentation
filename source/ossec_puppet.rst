@@ -3,145 +3,87 @@
 OSSEC deployment with Puppet
 ============================
 
-Prerequisites
--------------
+Puppet master installation
+--------------------------
 
-Before we get started with installing Puppet, ensure that you have the following prerequisites:
+Before we get started with Puppet, check the following network requirements:
 
-**Private Network DNS**: Forward and reverse DNS must be configured, and every server must have a unique hostname. If you do not have DNS confegured, you must use your hosts file for name resolution. We will assume that you will use your private network for communication within your infrastructure.
+- Private network DNS: Forward and reverse DNS must be configured, and every server must have a unique hostname. If you do not have DNS configured, you must use your hosts file for name resolution. We will assume that you will use your private network for communication within your infrastructure.
 
-**Firewall Open Ports**: The Puppet master must be reachable on port 8140.
++ Firewall open ports: The Puppet master must be reachable on port 8140.
 
+Installation on CentOS
+^^^^^^^^^^^^^^^^^^^^^^
 
-Install Puppet
---------------
+Install your Yum repository, and puppet-server package, for your Enterprise Linux distribution. For example, for EL7: ::
 
-For **Debian** and **Ubuntu** version:
-**************************************
+   $ sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+   $ sudo yum install puppet-server
 
-The newest versions of Puppet can be installed from the apt.puppetlabs.com package repository.
+Now upgrade to the latest Puppet version:
 
-To enable the repository:
+   $ sudo puppet resource package puppet-server ensure=latest
 
-Download the “puppetlabs-release” package for your OS version.
+Installation on Debian
+^^^^^^^^^^^^^^^^^^^^^^
 
-You can see a full list of these packages on the front page of https://apt.puppetlabs.com/. 
+To install your Puppet master on Debian/Ubuntu systems, we need first to add our distribution repository. This can be done, downloading and installing a package named ``puppetlabs-release-distribution.deb`` where "distribution" needs to be substituted by your distribution codename (e.g. wheezy, jessie, trusty, utopic). See below the commands to install Puppet master package for a "jessie" distribution: :: 
 
-For example, to enable the repository for Ubuntu 12.04 Precise Pangolin::
-
-   wget https://apt.puppetlabs.com/puppetlabs-release-precise.deb
-   sudo dpkg -i puppetlabs-release-precise.deb
-   sudo apt-get update
-
-To enable the repository for U
-The newest versions of Puppet can be installed from the apt.puppetlabs.com package repository.
-
-To enable the repository:
-
-Download the “puppetlabs-release” package::
-
-   $ sudo wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb	
-   $ sudo dpkg -i puppetlabs-release-trusty.deb
+   $ wget https://apt.puppetlabs.com/puppetlabs-release-jessie.deb
+   $ sudo dpkg -i puppetlabs-release-jessie.deb
    $ sudo apt-get update
-
-
-On your puppet master node, run one of the following::
-
    $ sudo apt-get install puppetmaster-passenger
-
-We recommend this one, as it will save you a step in the post-install tasks. It will install Puppet and its prerequisites, and automatically configure a production-capacity web server::
-
    $ sudo apt-get install puppetmaster
 
-This will install Puppet, its prerequisites, and an init script (/etc/init.d/puppetmaster) for running a test-quality puppet master server.
-
-To upgrade to the latest version of Puppet, you can run::
+This will install Puppet, its prerequisites, and an init script at ``/etc/init.d/puppetmaster``. As well, to upgrade to the latest version of Puppet, you can run: ::
 
    $ sudo apt-get update
    $ sudo puppet resource package puppetmaster ensure=latest
 
-Update /etc/puppet/puppet.conf and add the dns_alt_names line to the section [main], replacing puppet.example.com with your own FQDN:
+Configuration
+^^^^^^^^^^^^^
+
+Configure ``/etc/puppet/puppet.conf`` adding the ``dns_alt_names`` line to the ``[main]`` section, and replacing ``puppet.example.com`` with your own FQDN: ::
 
    [main]
    dns_alt_names = puppet,puppet.example.com
 
-.. note:: Also remove the line **templatedir=$confdir/templates**, which has been deprecated.
+.. note:: If found in the configuration file, remove the line ``templatedir=$confdir/templates``, which has been deprecated.
 
-Start the puppet master::
-
-   $ sudo service puppetmaster start
-
-For different operating system can follow the instrucctions at http://docs.puppetlabs.com/guides/install_puppet/pre_install.html
-
-
-For **Centos** and **RedHat** version:
-**************************************
-
-The newest versions of Puppet can be installed from the yum.puppetlabs.com package repository.
-
-Enterprise Linux 7::
-
-   $ sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-
-Enterprise Linux 6::
-
-  $ $ sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm
-
-On your puppet master node(s), run::
-
-   $ sudo yum install puppet-server
-
-This will install Puppet and an init script (/etc/init.d/puppetmaster) for running a test-quality puppet master server.
-
-To upgrade to the latest version of Puppet, you can run::
-
-   $ sudo puppet resource package puppet-server ensure=latest
-
-Update /etc/puppet/puppet.conf and add the dns_alt_names line to the section [main], replacing puppet.example.com with your own FQDN:
-
-   [main]
-   dns_alt_names = puppet,puppet.example.com
-
-.. note:: Also remove the line **templatedir=$confdir/templates**, which has been deprecated.
-
-Start the puppet master::
+Then, restart your Puppet master to apply changes: ::
 
    $ sudo service puppetmaster start
 
-For different operating system can follow the instrucctions at http://docs.puppetlabs.com/guides/install_puppet/pre_install.html
+PuppetDB installation
+---------------------
 
-Install PuppetDB
-----------------
+After configuring your Puppet master to run on Apache with Passenger, the next step is to add Puppet DB so that you can take advantage of exported resources, as well as have a central storage place for Puppet facts and catalogs.
 
-After configuring my puppetmaster to run on Passenger on Apache, the next step was to add Puppet DB so that I could take advantage of exported resources, as well as have a central store of facts/catalogs that i could query.
+Installation on CentOS
+^^^^^^^^^^^^^^^^^^^^^^
+::
 
-Whilst you can use the embedded HSQLDB database, I opted for the scale-out offered by a backend PostgreSQL database (which is recommended by Puppet Labs for deployments of more than 100 nodes). MySQL is not supported, as it doesn’t support recursive queries.
+   $ yum install postgresql-server puppetdb puppetdb-terminus
 
-To install in Ubuntu & Debian
-*****************************
+Installation on Debian
+^^^^^^^^^^^^^^^^^^^^^^
 ::
 
    $ sudo apt-get update
    $ apt-get install postgresql puppetdb puppetdb-terminus
 
-To install in Centos & RedHat
-*****************************
-::
+Configuration
+^^^^^^^^^^^^^
 
-   $ yum install postgresql-server puppetdb puppetdb-terminus
-
-Common configuration
-********************
-
-Next, I created a PostgreSQL user and database::
+Create a PostgreSQL user and database: ::
 
    # su - postgres
    $ createuser -DRSP puppetdb
    $ createdb -O puppetdb puppetdb
 
-The user is created so that it cannot create databases (-D), or roles (-R) and doesn’t have superuser privileges (-S) – it’ll prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
+The user is created so that it cannot create databases (-D), or roles (-R) and doesn’t have superuser privileges (-S). It’ll prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
 
-Access to the database can then be tested::
+Test database access: ::
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb: 
@@ -150,7 +92,7 @@ Access to the database can then be tested::
  
    puppetdb=> \q
 
-Configure /etc/puppetdb/conf.d/database.ini as appropriate::
+Configure ``/etc/puppetdb/conf.d/database.ini``: ::
 
    [database]
    classname = org.postgresql.Driver
@@ -160,13 +102,13 @@ Configure /etc/puppetdb/conf.d/database.ini as appropriate::
    password = yourpassword
    log-slow-statements = 10
 
-Create /etc/puppet/puppetdb.conf::
+Create ``/etc/puppet/puppetdb.conf``: ::
 
    [main]
    server = puppet.wazuh.com
    port = 8081
 
-Create /etc/puppet/routes.yaml::
+Create ``/etc/puppet/routes.yaml``: ::
 
    ---
    master:
@@ -174,93 +116,79 @@ Create /etc/puppet/routes.yaml::
        terminus: puppetdb
        cache: yaml
 
-Finally, update /etc/puppet/puppet.conf::
+Finally, update ``/etc/puppet/puppet.conf``: ::
 
    [master]
     storeconfigs = true
     storeconfigs_backend = puppetdb
 
-Once all steps are complete, restart your puppetmaster and run **puppet agent --test** from once of your nodes (or wait for your scheduled runs)::
+Once all steps are complete, restart your Puppet master and run ``puppet agent --test``: ::
 
-   # puppet agent --test
+   $ puppet agent --test
 
 Now PuppetDB is working.
 
-Install and configure Puppet Agents
------------------------------------
+Puppet agents installation
+--------------------------
 
-First you need to add the respository descrive in the `Install Puppet`_ section
+In this section we assume you have already installed APT and Yum Puppet repositories.
 
-For **Debian** and **Ubuntu** version:
-**************************************
+Installation on CentOS
+^^^^^^^^^^^^^^^^^^^^^^
+::
 
-Install Puppet on Agent Nodes::
+   $ sudo yum install puppet
+   $ sudo puppet resource package puppet ensure=latest
+
+Installation on Debian
+^^^^^^^^^^^^^^^^^^^^^^
+::
 
    $ sudo apt-get install puppet
-
-Upgrading::
-
    $ sudo apt-get update
    $ sudo puppet resource package puppet ensure=latest
 
-Add the server value to the [main] section of the node’s puppet.conf file, replacing puppet.example.com with your Puppet master’s FQDN::
+Configuration
+^^^^^^^^^^^^^
+
+Add the server value to the ``[main]`` section of the node’s ``/etc/puppet/puppet.conf`` file, replacing ``puppet.example.com`` with your Puppet master’s FQDN::
 
    [main]
    server = puppet.example.com
 
 Restart the Puppet service::
 
-   $ sudo service puppet restart
+   $ service puppet restart
 
-For **Centos** and **RedHat** version:
-**************************************
+Puppet certificates
+-------------------
 
-Install Puppet on Agent Nodes::
-
-   $ sudo yum install puppet
-
-Upgrading::
-
-   $ sudo puppet resource package puppet ensure=latest
-
-Add the server value to the [main] section of the node’s puppet.conf file, replacing puppet.example.com with your Puppet master’s FQDN::
-
-   [main]
-   server = puppet.example.com
-
-Restart the Puppet service::
-
-   systemctl start puppet
-
-Generate and Sign Certificates
-******************************
-
-Run the puppet agent to generate a certificate for the puppet master to sign::
+Run Puppet agent to generate a certificate for the Puppet master to sign: ::
 
    $ sudo puppet agent -t
 
-Log into to your **Puppet master** and list the certifications that need approval::
+Log into to your Puppet master, and list the certifications that need approval: ::
 
    $ sudo puppet cert list 
 
 It should output a list with your node’s hostname.
 
-Approve the certificate, replacing **hostname.example.com** with your node’s name::
+Approve the certificate, replacing ``hostname.example.com`` with your agent node’s name: ::
 
    $ sudo puppet cert sign hostname.example.com
 
-Back on the puppet node, run the puppet agent again::
+Back on the Puppet agent node, run the puppet agent again: ::
 
    $ sudo puppet agent -t
 
-And now the catalog need to be finished.
+.. note:: Remember the Private Network DNS is a requisite for the correct certificate sign.
 
-.. warning:: Remember the Private Network DNS is a requisite for the correct certificate sign.
+OSSEC Puppet module
+-------------------
 
-Install Ossec module
---------------------
+.. note:: This Puppet module has been authored by Nicolas Zin, and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaing it. Thank you to the authors for the contribution.
 
-To install Ossec module is very easy, only need to download from **Puppet Forge** with the correspondent dependences::
+Download and install OSSEC module from Puppet Forge: ::
 
    $ sudo puppet module install wazuh-ossec
    Notice: Preparing to install into /etc/puppet/modules ...
@@ -274,21 +202,18 @@ To install Ossec module is very easy, only need to download from **Puppet Forge*
      ├── puppetlabs-stdlib (v4.9.0)
      └── stahnma-epel (v1.1.1)
 
-Deploy Ossec
-------------
+This module installs and configures OSSEC HIDS agent and manager.
 
-This module installs and configures OSSEC-HIDS client and server.
+The manager is configured by installing the ``ossec::server`` class, and using optionally:
 
-The server is configured by installing the `ossec::server` class, and using optionally
+ - ``ossec::command``: to define active/response command (like ``firewall-drop.sh``).
+ - ``ossec::activeresponse``: to link rules to active/response commands.
+ - ``ossec::addlog``: to define additional log files to monitor.
 
- * `ossec::command`        : to define active/response command (like `firewall-drop.sh`)
- * `ossec::activeresponse` : to link rules to active/response command
- * `ossec:: email_alert`   : to receive to other email adress specific group of rules information
- * `ossec::addlog`         : to define additional log files to monitor
+Usage
+^^^^^
 
-**Usage in your manifests**
-
-Server::
+OSSEC manager: ::
 
    class { 'ossec::server':
      mailserver_ip => 'mailserver.mycompany.com',
@@ -313,19 +238,19 @@ Server::
    }
 
 
-Client::
+OSSEC agent: ::
 
    class { "ossec::client":
      ossec_server_ip => "10.10.130.66"
    }
 
 
-Examples
---------
+Example
+^^^^^^^
 
-Here a few examples for use in your file.pp
+Here is an example of a manifest ``ossec.pp``: 
 
-Ossec server::
+OSSEC manager: ::
 
    node "server.yourhost.com" {
 
@@ -352,7 +277,7 @@ Ossec server::
    }
    }
 
-Ossec Agent::
+OSSEC agent: ::
 
    node "client.yourhost.com" {
 
@@ -362,58 +287,52 @@ Ossec Agent::
 
    }   
 
-
-
 Reference
----------
+^^^^^^^^^
 
-Server
-******
+OSSEC manager class
+"""""""""""""""""""
 
-**class ossec::server**
- * `$mailserver_ip` smtp mail server,
- * `$ossec_emailfrom` (default: `ossec@${domain}`) email origin sent by ossec,
- * `$ossec_emailto` who will receive it,
- * `$ossec_active_response` (default: `true`) if active response should be configure on the server (beware to configure it on clients also),
- * `$ossec_global_host_information_level` (default: 8) Alerting level for the events generated by the host change monitor (from 0 to 16)
- * `$ossec_global_stat_level` (default: 8) Alerting level for the events generated by the statistical analysis (from 0 to 16)
- * `$ossec_email_alert_level` (default: 7) It correspond to a threshold (from 0 to 156 to sort alert send by email. Some alerts circumvent this threshold (when they have alert_email option),
- * `$ossec_emailnotification` (default: yes) Whether to send email notifications
-
-
-**function ossec::email_alert**
- * `$alert_email` email to send to
- * `$alert_group` (default: `false`) array of name of rules group
-
-Caution: no email will be send below the global `$ossec_email_alert_level`
-
-About active-response mechanism, check the documentation (and extends the function maybe :-) ): http://www.ossec.net/main/manual/manual-active-responses
-
-**function ossec::command**
- * `$command_name` human readable name for `ossec::activeresponse` usage
- * `$command_executable` name of the executable. Ossec comes preloaded with `disable-account.sh`, `host-deny.sh`, `ipfw.sh`, `pf.sh`, `route-null.sh`, `firewall-drop.sh`, `ipfw_mac.sh`, `ossec-tweeter.sh`, `restart-ossec.sh`
- * `$command_expect` (default: `srcip`)
- * `$timeout_allowed` (default: `true`)
-
-**function ossec::activeresponse**
- * `$command_name`,
- * `$ar_location` (default: `local`) it can be "local","server","defined-agent","all"
- * `$ar_level` (default: 7) between 0 and 16
- * `$ar_rules_id` (default: `[]`) list of rules id
- * `$ar_timeout` (default: 300) usually active reponse blocks for a certain amount of time.
-
-**function ossec::addlog**
- * `$log_name`,
- * `$logfile` /path/to/log/file
- * `$logtype` (default: syslog) The ossec log_format of the file.  Valid values can be found in the [documentation](https://ossec-docs.readthedocs.org/en/latest/syntax/head_ossec_config.localfile.html#location).
+class ossec::server
+ - ``$mailserver_ip``: SMTP mail server.
+ - ``$ossec_emailfrom`` (default: ``ossec@${domain}``: Email "from".
+ - ``$ossec_emailto``: Email "to".
+ - ``$ossec_active_response`` (default: ``true``): Enable/disable active-response (both on manager and agent).
+ - ``$ossec_global_host_information_level`` (default: 8): Alerting level for the events generated by the host change monitor (from 0 to 16).
+ - ``$ossec_global_stat_level`` (default: 8): Alerting level for the events generated by the statistical analysis (from 0 to 16).
+ - ``$ossec_email_alert_level`` (default: 7): It correspond to a threshold (from 0 to 156 to sort alert send by email. Some alerts circumvent this threshold (when they have ``alert_email`` option).
+ - ``$ossec_emailnotification`` (default: yes): Whether to send email notifications.
 
 
+function ossec::email_alert
+ - ``$alert_email``: Email to send to.
+ - ``$alert_group``: (default: ``false``): Array of name of rules group.
 
-Client
-******
+.. note:: No email will be send below the global ``$ossec_email_alert_level``.
 
- * `$ossec_server_ip` IP of the server
- * `$ossec_active_response` (default: true) allows active response on this host
- * `$ossec_emailnotification` (default: yes) Whether to send email notifications
- * `$selinux` (default: false) Whether to install an SELinux policy to allow rotation of OSSEC logs
+function ossec::command
+ - ``$command_name``: Human readable name for ``ossec::activeresponse`` usage.
+ - ``$command_executable``: Name of the executable. OSSEC comes preloaded with ``disable-account.sh``, ``host-deny.sh``, ``ipfw.sh``, ``pf.sh``, ``route-null.sh``, ``firewall-drop.sh``, ``ipfw_mac.sh``, ``ossec-tweeter.sh``, ``restart-ossec.sh``.
+ - ``$command_expect`` (default: ``srcip``).
+ - ``$timeout_allowed`` (default: ``true``).
+
+function ossec::activeresponse
+ - ``$command_name``.
+ - ``$ar_location`` (default: ``local``): It can be set to ``local``,``server``,``defined-agent``,``all``.
+ - ``$ar_level`` (default: 7): Can take values between 0 and 16.
+ - ``$ar_rules_id`` (default: ``[]``): List of rules ID.
+ - ``$ar_timeout`` (default: 300): Usually active reponse blocks for a certain amount of time.
+
+function ossec::addlog
+ - ``$log_name``.
+ - ``$logfile`` /path/to/log/file.
+ - ``$logtype`` (default: syslog): The OSSEC ``log_format`` of the file. 
+
+OSSEC agent class
+"""""""""""""""""
+
+ - ``$ossec_server_ip``: IP of the server.
+ - ``$ossec_active_response`` (default: ``true``): Allows active response on this host.
+ - ``$ossec_emailnotification`` (default: ``yes``): Whether to send email notifications or not.
+ - ``$selinux`` (default: ``false``): Whether to install a SELinux policy to allow rotation of OSSEC logs.
 

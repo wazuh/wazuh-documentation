@@ -7,7 +7,7 @@ In this guide we will describe how to install Elasticsearch, version 1.7, as a s
 
 .. topic:: Single-host vs distributed deployments
 
-		As a reminder, for a single-host OSSEC integration with ELK Stack, we run all components in the same server, which also behaves as a single-node Elasticsearch cluster. On the other hand, for distributed deployments, we recommend to run Elasticsearch engine and the OSSEC manager in different systems. Please go to :ref:`components and architecture documentation <ossec_wazuh_architecture>` for more information.
+		As a reminder, for a single-host OSSEC integration with ELK Stack, we run all components in the same server, which also behaves as an Elasticsearch single-node cluster. On the other hand, for distributed deployments, we recommend to run Elasticsearch engine and the OSSEC manager in different systems. Please go to :ref:`components and architecture documentation <ossec_wazuh_architecture>` for more information.
 
 Elasticsearch installation on Debian
 ------------------------------------
