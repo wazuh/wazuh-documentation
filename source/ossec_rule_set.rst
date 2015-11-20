@@ -11,10 +11,10 @@ This documentation explains how to install, update, and contribute to OSSEC HIDS
 In the rule set repository you will find:
 
 * **OSSEC rule/rootcheck updates**
-   We update and maintain out-of-the-box rules provided by OSSEC, both to eliminate false positives or to increase their accurancy. In addition, we map those with PCI-DSS compliance controls, making it easy to identify when an alert is related to a compliance requirement.
+   We update and maintain out-of-the-box rules provided by OSSEC, both to eliminate false positives or to increase their accuracy. In addition, we map those with PCI-DSS compliance controls, making it easy to identify when an alert is related to a compliance requirement.
   
 * **New rules/rootchecks**
-   OSSEC out-of the box number of rules and decoders is limited. For this reason, we centralize, test and maintain decoders and rules submitted by Open Source contributors. As well, we create new rules and rootchecks periodically that are added to this repository so they can be used by the users community. Some examples of new rules are NetScaler and Puppet.
+   OSSEC out-of-the-box number of rules and decoders is limited. For this reason, we centralize, test and maintain decoders and rules submitted by Open Source contributors. As well, we create new rules and rootchecks periodically that are added to this repository so they can be used by the users community. Some examples are the new rules for Netscaler and Puppet.
 
 
 Resources
@@ -47,15 +47,15 @@ Manual installation
 
 **Rules**
 
-In our `Github repository <https://github.com/wazuh/ossec-rules>`_ you will find two kind of rules under ``ossec-rules/rules-decoders/`` directory:
+In the `Github repository <https://github.com/wazuh/ossec-rules>`_ you will find two different kind of rules under ``ossec-rules/rules-decoders/`` directory:
 
-* **Updated OSSEC out-of-the-box rules:** Can be found under ``ossec-rules/rules-decoders/ossec`` directory and you can manually install them following these steps: ::
+* **Updated OSSEC out-of-the-box rules:** found under ``ossec-rules/rules-decoders/ossec`` directory and you can manually install them following these steps: ::
 
      - Copy ossec-rules/rules-decoders/decoder.xml to /var/ossec/etc/
      - Copy all files *_rules.xml to /var/ossec/rules/, except for local_rules.xml
      - Restart your OSSEC manager
 
-* **New log analysis rules:** Are located in ``ossec-rules/rules-decoders/software`` (being software the name of your log messages source) and can be installed manually following these steps: ::
+* **New log analysis rules:** located in ``ossec-rules/rules-decoders/software`` (being software the name of your log messages source) and can be installed manually following these steps: ::
 
      - Append software_decoders.xml to /var/ossec/etc/decoder.xml
      - Copy software_rules.xml to /var/ossec/rules/
@@ -66,7 +66,7 @@ In our `Github repository <https://github.com/wazuh/ossec-rules>`_ you will find
 
 **Rootchecks**
 
-Rootchecks can be found in ``ossec-rules/rootcheck/`` directory. There you will find both updated out-of-the-box OSSEC rootchecks, and newly created ones. 
+Rootchecks can be found under ``ossec-rules/rootcheck/`` directory. There you will find both updated out-of-the-box OSSEC rootchecks, and new ones. 
 
 To install a rootcheck file, go to your **OSSEC manager** and copy the ``.txt`` file to ``/var/ossec/etc/shared/``. Then modify ``/var/ossec/etc/ossec.conf`` by adding the path to the ``.txt`` file into the ``<rootcheck>`` section. Examples: :: 
 
@@ -80,15 +80,15 @@ To install a rootcheck file, go to your **OSSEC manager** and copy the ``.txt`` 
 Automatic installation
 -------------------------
 
-We have created a script will help you to install and update OSSEC ruleset easily, you won't need to manually change OSSEC internal files.
+Run this new script to install and update OSSEC ruleset easily with no need to manually change OSSEC internal files.
 
 
 Two main functionalities are included:
 
-* **Install**: Select new rules to incorporate into your OSSEC scope.
-* **Update**: Fecth directly from Wazuh server the last ruleset version.
+* **Install**: Select new rules to incorporate them into your OSSEC installation.
+* **Update**: Fetch directly from Wazuh server the latest ruleset version.
 
-Some features:
+Some of the main features are:
 
 * Check current OSSEC installation
 * Install new rules and rootchecks
@@ -98,7 +98,7 @@ Some features:
 * Silent mode
 * Backups system
 
-Let's begin, the script is located in ```wazuh/ossec-rules/ossec_ruleset.py``` repository, run it by going to your OSSEC manager machine and do the following steps.
+Let's begin. This script is located in ```wazuh/ossec-rules/ossec_ruleset.py``` repository, to run it go to your OSSEC manager machine and do the following steps.
 
 Cloning the repository: ::
 
@@ -115,7 +115,7 @@ Running the script: ::
 Arguments explanation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Select what do want to install/update: rules, rootchecks or both ::
+Select what you want to install/update: rules, rootchecks or both ::
 
   -r, --rules
   -c, --rootchecks
@@ -126,7 +126,7 @@ Choose the rules to **install/update** from an interactive menu or reading a con
   no arguments  Choose rules and rootchecks to install from a menu
   -f, --file  Use a configuration file to select rules and rootchecks to install
 
-Or **update** the exiting ruleset ::
+Or **update** the exiting rule set ::
 
   -u, --update
 
@@ -138,7 +138,7 @@ Usage examples
 
 ``./ossec_ruleset.py --all``
 
-**Update existing ruleset**
+**Update existing rule set**
 
 ``./ossec_ruleset.py --all --update``
 
@@ -150,7 +150,7 @@ Usage examples
 Configure weekly updates
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run your script weekly and keep your OSSEC ruleset installation updated, add a **crontab** job into your system.
+Run your script weekly and keep your OSSEC rule set installation up to date by just adding a **crontab** job into your system.
 
 Run ``sudo crontab -e`` and at the end of the file add the following line ::
  
