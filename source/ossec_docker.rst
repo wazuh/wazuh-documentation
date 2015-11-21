@@ -68,7 +68,7 @@ To ensure Docker starts when you boot your system, do the following: ::
 
 .. note:: For 14.10 and below the above installation method automatically configures Upstart to start the Docker daemon on boot
 
-Ossec-Elk Container
+OSSEC-ELK Container
 -------------------
 
 This Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <ossec_wazuh>`.
