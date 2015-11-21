@@ -5,9 +5,11 @@ Table of contents
    :maxdepth: 2
 
    about
-   ossec_wazuh
    ossec_installation
    ossec_configuration
-   ossec_rule_set
+   ossec_wazuh
+   ossec_elk
+   ossec_api
+   ossec_ruleset
    ossec_docker
    ossec_puppet

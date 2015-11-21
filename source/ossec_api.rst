@@ -1,12 +1,12 @@
-.. _ossec_wazuh_api:
+.. _ossec_api:
 
-OSSEC RESTful API 
-=================
+OSSEC Wazuh RESTful API 
+=======================
 
 Introduction
 ------------
 
-OSSEC RESTful API is a service to control OSSEC Manager using REST requests. It will allow you to execute OSSEC commands for agents remote management (add, restart, info, key export) or to extract rootcheck and syscheck information (restart, check last scan...). The goal is to provide an interface to manage your OSSEC deployment remotely (e.g. through a web browser), or to integrate OSSEC with external systems.
+OSSEC Wazuh RESTful API is a service to control OSSEC Wazuh manager using REST requests. It will allow you to execute OSSEC commands for agents remote management (add, restart, info, key export) or to extract rootcheck and syscheck information (restart, check last scan...). The goal is to provide an interface to manage your OSSEC deployment remotely (e.g. through a web browser), or to integrate OSSEC with external systems.
 
 OSSEC Wazuh API RESTful capatibilites:
 
@@ -56,7 +56,7 @@ Restart syscheck/rootcheck restart on one agent ::
 Installation
 ------------
 
-OSSEC RESTful API requires you to have previously installed our OSSEC fork as your manager. You can download and install it following :ref:`these instructions <ossec_wazuh_manager>`. 
+OSSEC Wazuh RESTful API requires you to have previously installed our OSSEC fork as your manager. You can download and install it following :ref:`these instructions <ossec_wazuh>`. 
 
 As well, OSSEC API works under a NodeJS server (v0.10.x) with Express module (4.0.x), and has the following dependencies:
 
@@ -234,6 +234,6 @@ Agent syscheck/rootcheck restared: ::
 Next steps
 ----------
 
-Once you have your OSSEC RESTful API running, we recommend you to check our OSSEC rule set:
+Once you have your OSSEC RESTful API running, we recommend you to check our OSSEC Wazuh ruleset:
 
-* `OSSEC rule set <http://documentation.wazuh.com/en/latest/ossec_rule_set.html>`_ 
+* `OSSEC Wazuh Ruleset installation guide <http://documentation.wazuh.com/en/latest/ossec_rule_set.html>`_ 

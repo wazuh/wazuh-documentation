@@ -1,4 +1,4 @@
-.. _ossec_wazuh_java:
+.. _ossec_elk_java:
 
 Java 8 JRE
 ==========
@@ -34,8 +34,8 @@ Next steps
 
 Once you have Java 8 JRE installed you can move forward and install Logstash, Elasticsearch and Kibana:
 
-* :ref:`Logstash <ossec_wazuh_logstash>`
-* :ref:`Elasticsearch <ossec_wazuh_elasticsearch>`
-* :ref:`Kibana <ossec_wazuh_kibana>`
-* :ref:`OSSEC RESTful API <ossec_wazuh_api>`
-* :ref:`OSSEC Rrule set <ossec_rule_set>`
+* :ref:`Logstash <ossec_elk_logstash>`
+* :ref:`Elasticsearch <ossec_elk_elasticsearch>`
+* :ref:`Kibana <ossec_elk_kibana>`
+* :ref:`OSSEC Wazuh RESTful API <ossec_api>`
+* :ref:`OSSEC Wazuh Ruleset <ossec_ruleset>`

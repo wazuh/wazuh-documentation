@@ -1,4 +1,4 @@
-.. _ossec_wazuh_kibana:
+.. _ossec_elk_kibana:
 
 Kibana
 ======
@@ -10,7 +10,7 @@ On the other hand, the documentation includes extra steps to secure your Kibana 
 Kibana installation
 -------------------
 
-Assuming you have followed previous steps of :ref:`our guide <ossec_wazuh>`, and that you are using a single-host type of deployment. You can install Kibana following running these commands: ::
+Assuming you have followed previous steps of :ref:`our guide <ossec_elk>`, and that you are using a single-host type of deployment. You can install Kibana following running these commands: ::
 
  $ sudo cd ~/ossec_tmp
  $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
@@ -195,7 +195,7 @@ Try to access to Kibana web interface via HTTPS. It will ask for the username an
 Next steps
 ----------
 
-Now you have finished your ELK cluster installation and we recommend you to go to your OSSEC Wazuh manager and install OSSEC RESTful API and OSSEC rule set modules:
+Now you have finished your ELK cluster installation and we recommend you to go to your OSSEC Wazuh manager and install OSSEC Wazuh RESTful API and OSSEC Wazuh Ruleset modules:
 
-* :ref:`OSSEC RESTful API <ossec_wazuh_api>`
-* :ref:`OSSEC rule set <ossec_rule_set>`
+* :ref:`OSSEC Wazuh RESTful API <ossec_api>`
+* :ref:`OSSEC Wazuh Ruleset <ossec_ruleset>`

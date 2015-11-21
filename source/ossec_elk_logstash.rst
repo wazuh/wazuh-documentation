@@ -1,4 +1,4 @@
-.. _ossec_wazuh_logstash:
+.. _ossec_elk_logstash:
 
 Logstash
 ========
@@ -7,7 +7,7 @@ When integrating OSSEC HIDS with ELK Stack, we use Logstash to model OSSEC alert
 
 For single-host type of deployments we directly install the ``Logstash server`` in the same system where OSSEC manager and Elasticsearch are running. This type of installations do not require ``Logstash forwarder`` component. This one is only necessary when deploying the OSSEC manager in a different server from the one where ``Logstash server`` and ``Elasticsearch`` are running.
 
-.. Note:: Remember Java 8 JRE is required by Logstash server. You can see instructions to install it at :ref:`our documentation <ossec_wazuh_java>`.
+.. Note:: Remember Java 8 JRE is required by Logstash server. You can see instructions to install it at :ref:`our documentation <ossec_elk_java>`.
 
 .. topic:: Distributed architectures
 
@@ -219,7 +219,7 @@ Next steps
 
 Once you have Logstash installed and configured you can move forward with Elasticsearch and Kibana:
 
-* :ref:`Elasticsearch <ossec_wazuh_elasticsearch>`
-* :ref:`Kibana <ossec_wazuh_kibana>`
-* :ref:`OSSEC RESTful API <ossec_wazuh_api>`
-* :ref:`OSSEC rule set <ossec_rule_set>`
+* :ref:`Elasticsearch <ossec_elk_elasticsearch>`
+* :ref:`Kibana <ossec_elk_kibana>`
+* :ref:`OSSEC Wazuh RESTful API <ossec_api>`
+* :ref:`OSSEC Wazuh Ruleset <ossec_ruleset>`

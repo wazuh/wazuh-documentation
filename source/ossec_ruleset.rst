@@ -1,16 +1,16 @@
-.. _ossec_rule_set:
+.. _ossec_ruleset:
 
-OSSEC Rule Set
-==============
+OSSEC Wazuh Ruleset
+===================
 
 Introduction
 ------------
 
-This documentation explains how to install, update, and contribute to OSSEC HIDS rule set mantained by Wazuh. These rules are used by the system to detect attacks, intrusions, software misuse, configuration problems, application errors, malware, rootkits, system anomalies or security policy violations. OSSEC provides an out-of-the box set of rules that we update by modifying them or including new ones, in order to increase OSSEC detection capabilities.
+This documentation explains how to install, update, and contribute to OSSEC HIDS ruleset mantained by Wazuh. These rules are used by the system to detect attacks, intrusions, software misuse, configuration problems, application errors, malware, rootkits, system anomalies or security policy violations. OSSEC provides an out-of-the box set of rules that we update by modifying them or including new ones, in order to increase OSSEC detection capabilities.
 
-In the rule set repository you will find:
+In the ruleset repository you will find:
 
-* **OSSEC rule/rootcheck updates**
+* **OSSEC rule/rootcheck updates and compliance mapping**
    We update and maintain out-of-the-box rules provided by OSSEC, both to eliminate false positives or to increase their accurancy. In addition, we map those with PCI-DSS compliance controls, making it easy to identify when an alert is related to a compliance requirement.
   
 * **New rules/rootchecks**
@@ -20,8 +20,8 @@ In the rule set repository you will find:
 Resources
 ^^^^^^^^^
 
-* Visit our repository to view the rules in detail at `Github OSSEC Ruleset <https://github.com/wazuh/ossec-rules>`_
-* Find a complete description of the available rules: `OSSEC Ruleset Summary <http://www.wazuh.com/resources/OSSEC_Ruleset.pdf>`_
+* Visit our repository to view the rules in detail at `Github OSSEC Wazuh Ruleset <https://github.com/wazuh/ossec-rules>`_
+* Find a complete description of the available rules: `OSSEC Wazuh Ruleset Summary <http://www.wazuh.com/resources/OSSEC_Ruleset.pdf>`_
 
 Rule and Rootcheck example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -80,7 +80,7 @@ To install a rootcheck file, go to your **OSSEC manager** and copy the ``.txt`` 
 Automatic installation
 -------------------------
 
-We have created a script will help you to install and update OSSEC ruleset easily, you won't need to manually change OSSEC internal files.
+We have created a script will help you to install and update OSSEC Wazuh Ruleset easily, you won't need to manually change OSSEC internal files.
 
 
 Two main functionalities are included:
@@ -150,7 +150,7 @@ Usage examples
 Configure weekly updates
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run your script weekly and keep your OSSEC ruleset installation updated, add a **crontab** job into your system.
+Run your script weekly and keep your OSSEC Wazuh Ruleset installation updated, add a **crontab** job into your system.
 
 Run ``sudo crontab -e`` and at the end of the file add the following line ::
  
@@ -160,18 +160,18 @@ Run ``sudo crontab -e`` and at the end of the file add the following line ::
 That's all! 
 
 
-Contribute to the rule set
---------------------------
+Contribute to the ruleset
+-------------------------
 If you have created new rules, decoders or rootchecks and you would like to contribute to our repository, please fork our `Github repository <https://github.com/wazuh/ossec-rules>`_ and submit a pull request.
 
 If you are not familiar with Github, you can also share them through our `users mailing list <https://groups.google.com/d/forum/wazuh>`_, to which you can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``. As well do not hesitate to request new rules or rootchecks that you would like to see running in OSSEC.
 
 .. note:: In our repository you will find that most of the rules contain one or more groups called pci_dss_X. This is the PCI DSS control related to the rule. We have produced a document that can help you tag each rule with its corresponding PCI requirement: http://www.wazuh.com/resources/PCI_Tagging.pdf
 
-What's next?
-------------
+Next steps
+----------
 
-Once you have your rule set up to date we encourage you to move forward and try out ELK integration or the API RESTful, check them on:
+Once you have your ruleset up to date we encourage you to move forward and try out ELK integration or the API RESTful, check them on:
 
-* :ref:`ELK Integration Guide <ossec_wazuh>`
-* :ref:`API RESTful Installation Guide <ossec_wazuh_api>`
+* :ref:`ELK Stack integration guide <ossec_elk>`
+* :ref:`OSSEC Wazuh RESTful API installation Guide <ossec_api>`
