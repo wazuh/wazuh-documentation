@@ -3,7 +3,7 @@
 OSSEC Wazuh fork
 ================
 
-In this section we will guide you through the installation of our `OSSEC HIDS forked version <https://github.com/wazuh/ossec-wazuh>`_. It provides compliance support, extended logging and management features. These capabilities are required for the integration with :ref:`ELK Stack <ossec_elk>` and :ref:`OSSEC Wazuh RESTful API <ossec_api>`.
+In this section we will guide you through the installation of our `OSSEC HIDS forked version <https://github.com/wazuh/ossec-wazuh>`_. It provides compliance support, extended logging, and additional management features. These capabilities are required for the integration with :ref:`ELK Stack <ossec_elk>` and :ref:`OSSEC Wazuh RESTful API <ossec_api>`.
 
 In order to start with the installation, first we need to set up the compilation environment by installing development tools and compilers. In Linux this can easily be done using your distribution packages manager:
 
