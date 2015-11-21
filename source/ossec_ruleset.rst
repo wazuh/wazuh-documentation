@@ -62,7 +62,7 @@ These rules can be found under ``ossec-rules/rules-decoders/ossec`` directory, a
 New log analysis rules
 """"""""""""""""""""""
 
-Located in ``ossec-rules/rules-decoders/software`` (being software the name of your log messages source) and can be installed manually following next steps.
+These rules are located at ``ossec-rules/rules-decoders/software`` (being software the name of your log messages source) and can be installed manually following next steps.
 
 Configure decoders path adding the next lines after tag ``<rules>`` at ``/var/ossec/etc/ossec.conf``: ::
 
