@@ -3,9 +3,9 @@
 OSSEC Wazuh fork
 ================
 
-In this section we will guide you through the installation our `OSSEC HIDS forked version <https://github.com/wazuh/ossec-wazuh>`_. It provides compliance support, extended logging and management features. These capabilities are required for the integration with :ref:`ELK Stack <ossec_elk>` and :ref:`OSSEC Wazuh RESTful API <ossec_api>`.
+In this section we will guide you through the installation of our `OSSEC HIDS forked version <https://github.com/wazuh/ossec-wazuh>`_. It provides compliance support, extended logging and management features. These capabilities are required for the integration with :ref:`ELK Stack <ossec_elk>` and :ref:`OSSEC Wazuh RESTful API <ossec_api>`.
 
-In order to start with the installation, first we need to set up the compillation environment by installing development tools and compilers. In Linux this can easily be done using your distribution packages manager:
+In order to start with the installation, first we need to set up the compilation environment by installing development tools and compilers. In Linux this can easily be done using your distribution packages manager:
 
 For RPM based distributions: :: 
 
@@ -24,20 +24,20 @@ Now we are ready to clone our Github repository and compile the source code, to 
    $ cd ossec-wazuh
    $ sudo ./install.sh
 
-Follow the installation steps OSSEC choosing ``server`` when asked about the installation type. You can let all other default answers by pressing ENTER at every question that ``install.sh`` script asks you. 
+Choose ``server`` when being asked about the installation type and answer the rest of questions as desired.
 
 Configuration
 -------------
 
-In order to enable alerts JSON output we will change our OSSEC manager configuration file ``/var/ossec/etc/ossec.conf`` and add the following line in between ``<global>`` and ``</global>`` tags. ::
+In order to enable alerts JSON output we need to change our OSSEC manager configuration file ``/var/ossec/etc/ossec.conf`` and add the following line in between ``<global>`` and ``</global>`` tags. ::
 
   <jsonout_output>yes</jsonout_output>
 
-That's all! Now start your OSSEC Manager ::
+Now start your OSSEC Manager ::
 
   $ sudo /var/ossec/bin/ossec-control start
 
-Here are some useful commands to know that everything is working as expected. You should expect a similar output in your system. ::
+Here are some useful commands to check that everything is working as expected. You should get  a similar output in your system. ::
 
   $ ps aux | grep ossec
   root     31362  0.0  0.1  27992   824 ?        S    23:01   0:00 /var/ossec/bin/ossec-execd
@@ -55,7 +55,7 @@ Here are some useful commands to know that everything is working as expected. Yo
   {"rule":{"level":3,"comment":"Ossec server started.","sidid":502,"groups":["ossec","pci_dss"],"PCI_DSS":["10.6.1"]},"full_log":"ossec: Ossec started.","hostname":"vpc-agent-debian","timestamp":"2015 Nov 08 23:01:28","location":"ossec-monitord"}
 
 
-This last step is necessary if you are planning to use OSSEC RESTful API. ::
+A last step is necessary if you are planning to use OSSEC RESTful API. ::
 
  $ sudo mkdir /var/ossec/dev/
  $ sudo mount -o bind /dev /var/ossec/dev/ 

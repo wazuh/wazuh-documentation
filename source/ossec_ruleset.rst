@@ -55,9 +55,17 @@ In the `Github repository <https://github.com/wazuh/ossec-rules>`_ you will find
      - Copy all files *_rules.xml to /var/ossec/rules/, except for local_rules.xml
      - Restart your OSSEC manager
 
-* **New log analysis rules:** located in ``ossec-rules/rules-decoders/software`` (being software the name of your log messages source) and can be installed manually following these steps: ::
+* **New log analysis rules:** located in ``ossec-rules/rules-decoders/software`` (being software the name of your log messages source) and can be installed manually following these steps.
 
-     - Append software_decoders.xml to /var/ossec/etc/decoder.xml
+Configure decoders path adding the next lines after tag ``<rules>`` at ``/var/ossec/etc/ossec.conf`` ::
+
+ <decoder>etc/decoder.xml</decoder>
+ <decoder>etc/local_decoder.xml</decoder>
+ <decoder_dir>etc/wazuh_decoders</decoder_dir>
+
+Copy new rule files into ossec directories and add the new rule to ``ossec.conf`` configuration file ::
+
+     - Copy new_rule_decoders.xml to /var/ossec/etc/wazuh_decoders/
      - Copy software_rules.xml to /var/ossec/rules/
      - Add <include>software_rules.xml</include> to /var/ossec/etc/ossec.conf in section "<rules>"
      - If there are additional instructions to install these rules and decoders, you will find them in an instructions.md file in the same directory.
