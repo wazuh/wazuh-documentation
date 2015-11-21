@@ -231,8 +231,8 @@ Agent syscheck/rootcheck restared: ::
  }
 
 
-Next steps
-----------
+What's next
+-----------
 
 Once you have your OSSEC RESTful API running, we recommend you to check our OSSEC Wazuh ruleset:
 

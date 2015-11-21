@@ -192,8 +192,8 @@ Try to access to Kibana web interface via HTTPS. It will ask for the username an
 
 .. Note:: If you are running SELinux in enforcing mode, you might need to do some additional configuration in order to allow connections to 127.0.0.1:5601.
 
-Next steps
-----------
+What's next
+-----------
 
 Now you have finished your ELK cluster installation and we recommend you to go to your OSSEC Wazuh manager and install OSSEC Wazuh RESTful API and OSSEC Wazuh Ruleset modules:
 

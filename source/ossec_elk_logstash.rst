@@ -214,8 +214,8 @@ Finally restart Logstash server to apply changes: ::
 
  $ sudo service logstash restart
 
-Next steps
-----------
+What's next
+-----------
 
 Once you have Logstash installed and configured you can move forward with Elasticsearch and Kibana:
 

@@ -29,8 +29,8 @@ At last, to set JAVA_HOME environment variable for all users, we need to add thi
 
  export JAVA_HOME=/usr/java/jdk1.8.0_60/jre
 
-Next steps
-----------
+What's next
+-----------
 
 Once you have Java 8 JRE installed you can move forward and install Logstash, Elasticsearch and Kibana:
 

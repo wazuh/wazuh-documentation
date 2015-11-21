@@ -66,8 +66,8 @@ Agents installation
 
 Agent deployment is fully explained in our :ref:`OSSEC installation guide <ossec_installation>`. There you will find instructions to install pre-compiled binaries for different operating systems, as well as instructions to install them compiling the source code. 
 
-Next steps
-----------
+What's next
+-----------
 
 Once you have OSSEC Wazuh installed you can move forward and try out ELK integration, the API RESTful or the custom security compliance Ruleset, check them on:
 

@@ -165,8 +165,8 @@ To make sure it has actually been added successfully, you can check the template
 
  $ curl -XGET http://localhost:9200/_template/ossec?pretty
 
-Next steps
-----------
+What's next
+-----------
 
 Once you have Elasticsearch installed and configured you can move forward with Kibana:
 
