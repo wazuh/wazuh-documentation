@@ -53,7 +53,7 @@ In the `Github repository <https://github.com/wazuh/ossec-rules>`_ you will find
 Updated out-of-the-box rules
 """"""""""""""""""""""""""""
 
-Found under ``ossec-rules/rules-decoders/ossec`` directory and you can manually install them following these steps: ::
+These rules can be found under ``ossec-rules/rules-decoders/ossec`` directory, and you can manually install them following these steps: ::
 
      - Copy ``ossec-rules/rules-decoders/decoder.xml`` to ``/var/ossec/etc/``.
      - Copy all files ``*_rules.xml`` to ``/var/ossec/rules/``, except for ``local_rules.xml``.
