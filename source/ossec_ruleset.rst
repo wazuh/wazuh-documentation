@@ -96,9 +96,9 @@ Examples: ::
 Automatic installation
 ----------------------
 
-Run this new script to install and update OSSEC Wazuh Ruleset easily with no need to manually change OSSEC internal files.
+Run ``ossec_ruleset.py`` script to install and update OSSEC Wazuh Ruleset with no need to manually change OSSEC internal files.
 
-Two main functionalities are included:
+Two main functionalities are included in the script:
 
 * **Install**: Allows you to select new rules, to incorporate them into your OSSEC installation.
 * **Update**: Fetchs updated and new rules directly from Wazuh server.
@@ -149,7 +149,7 @@ Update only existing rootchecks: ::
 Configure weekly updates
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Run your script weekly and keep your OSSEC Wazuh Ruleset installation up to date by adding a crontab job to your system.
+Run ``ossec_ruleset.py`` weekly and keep your OSSEC Wazuh Ruleset installation up to date by adding a crontab job to your system.
 
 Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
  
