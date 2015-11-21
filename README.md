@@ -1,20 +1,23 @@
-# OSSEC-Wazuh Sphinx documentation sources
 
-Sphinx RST documentation sources, if you want to colaborate and help us don't hesitate to make a pull requet.
+# OSSEC Wazuh documentation
 
-The compiled version of this sources is avaible on [OSSEC HIDS Wazuh documentation](http://documentation.wazuh.com)
+Here you will find instructions to install and deploy OSSEC HIDS with Wazuh Open Source modules. Please note that this documentation is not intended to substitute OSSEC HIDS [documentation](<http://ossec.github.io/docs/>), or the [reference manual](<http://ossec.github.io/docs/manual/index.html>), which is currently maintained by the project [team members](<http://ossec.github.io/about.html#ossec-team>) and external contributors.
 
-Please note that this documentation is not intended to substitute [OSSEC HIDS documentation](http://ossec.github.io/docs/), or the [reference manual](http://ossec.github.io/docs/manual/index.html).
+Wazuh team is currently supporting OSSEC enterprise users, and decided to develop and publish additional modules as a way to contribute back to the Open Source community. Find below the 
 
-## Current sections
+## Documentation contents
 
-OSSEC Wazuh documentation currently has the following sections:
+* [OSSEC installation guide](http://documentation.wazuh.com/en/latest/ossec_installation.html)
+* [OSSEC basic configuration](http://documentation.wazuh.com/en/latest/ossec_configuration.html)
+* [OSSEC Wazuh fork](http://documentation.wazuh.com/en/latest/ossec_wazuh.html)
+* [OSSEC integration with ELK Stack](http://documentation.wazuh.com/en/latest/ossec_elk.html)
+* [OSSEC Wazuh RESTful API](http://documentation.wazuh.com/en/latest/ossec_api.html)
+* [OSSEC Wazuh Ruleset](http://documentation.wazuh.com/en/latest/ossec_ruleset.html)
+* [OSSEC Docker container](http://documentation.wazuh.com/en/latest/ossec_docker.html)
+* [OSSEC deployment with Puppet](http://documentation.wazuh.com/en/latest/ossec_puppet.html)
 
-* [OSSEC Wazuh](http://documentation.wazuh.com/en/latest/installing_ossec_wazuh.html)
-* [OSSEC ELK Stack](http://documentation.wazuh.com/en/latest/integrating_ossec_elk.html)
-* [OSSEC RESTful API](http://documentation.wazuh.com/en/latest/installing_ossec_api.html)
-* [OSSEC HIDS 2.8.3](http://documentation.wazuh.com/en/latest/ossec.html)
-* [OSSEC with Puppet](http://documentation.wazuh.com/en/latest/puppet.html)
-* [OSSEC with Docker](http://documentation.wazuh.com/en/latest/docker.html)
-* [OSSEC Ruleset](http://documentation.wazuh.com/en/latest/ossec_rule_set.html)
+## Contributions
 
+If you want to contribute to this documentation (built using Sphinx) or our projects please head over to our [Github repositories](<https://github.com/wazuh>) and submit pull requests. 
+
+You can also join our [users mailing list](<https://groups.google.com/d/forum/wazuh>), by sending an email to `wazuh+subscribe@googlegroups.com`, to ask questions and participate in discussions.
