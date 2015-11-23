@@ -199,7 +199,7 @@ Now edit your ``/etc/logstash/conf.d/01-ossec.conf`` or ``/etc/logstash/conf.d/0
 
 Then copy Elasticsearch custom mapping from extensions folder to to Logstash folder: ::
 
- $ sudo cp ~/ossec_tmp/ossec-hids/extensions/elasticsearch/elastic-ossec-template.json  /etc/logstash/
+ $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json  /etc/logstash/
 
 And download and install GeoLiteCity from Maxmind website. This will add geolocation support for public IP addresses: ::
 

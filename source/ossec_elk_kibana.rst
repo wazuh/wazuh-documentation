@@ -23,7 +23,7 @@ Kibana service for SystemVinit
 
 When using SystemVinit as your service manager (usually on Debian distributions), you can set up Kibana service following these steps: ::
 
- $ sudo cp ~/ossec_tmp/ossec-hids/extensions/kibana/kibana4 /etc/init.d/
+ $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
  $ sudo chmod +x /etc/init.d/kibana4
  $ sudo update-rc.d kibana4 defaults 96 9
 
