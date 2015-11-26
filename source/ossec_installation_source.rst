@@ -39,6 +39,8 @@ Or if you use DNF package manager (Fedora 23), run this command: ::
 
    $ dnf groupinstall "Development tools"
 
+.. note:: On OS X you are required to install Xcode command line tools, which include GCC compiler.
+
 Compiling OSSEC
 ---------------
 
