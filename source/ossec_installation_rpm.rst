@@ -8,6 +8,16 @@ Yum repository
 
 To add Wazuh yum repository, depending on your Linux distribution, create a file named ``/etc/yum.repos.d/wazuh.repo`` with the following content:
 
+For Amazon Linux AMI: ::
+
+
+   [wazuh]
+   name = WAZUH OSSEC Repository - www.wazuh.com
+   baseurl = http://ossec.wazuh.com/el/7/x86_64
+   gpgcheck = 1
+   gpgkey = http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
+   enabled = 1
+
 For RHEL and CentOS (versions EL5, EL6 or EL7): ::
 
    [wazuh]
