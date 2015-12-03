@@ -58,11 +58,7 @@ Once the installation is completed, we can now configure some basic settings mod
  cluster.name: ossec
  node.name: ossec_node1
 
- network.bind_host: 0.0.0.0
-
- network.public_host: elasticsearch_server_ip
-
- network.host: elasticsearch_server_ip
+ network.host: elasticsearch_server_ip or 0.0.0.0 if single-node architecture.
 
  host.port: 9200
 
@@ -106,7 +102,7 @@ Now we are done with Elasticsearch configuration and tuning, and we can restart 
 Cluster health
 --------------
 
-To be sure our single-node cluster is working properly, lets first check if Elasticsearch is running: ::
+To be sure our single-node cluster is working properly, wait a couple of minutes and check if Elasticsearch is running: ::
 
   $ curl -XGET localhost:9200
 

@@ -12,11 +12,9 @@ Kibana installation
 
 Assuming you have followed previous steps of :ref:`our guide <ossec_elk>`, and that you are using a single-host type of deployment. You can install Kibana following running these commands: ::
 
- $ sudo cd ~/ossec_tmp
+ $ cd ~/ossec_tmp
  $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
- $ sudo tar xvf kibana-*.tar.gz
- $ sudo mkdir -p /opt/kibana
- $ sudo cp -R kibana-4*/* /opt/kibana/
+ $ sudo tar xvf kibana-*.tar.gz && sudo mkdir -p /opt/kibana && sudo cp -R kibana-4*/* /opt/kibana/
 
 Kibana service for SystemVinit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -51,7 +49,7 @@ Kibana configuration
 Open ``/opt/kibana/config/kibana.yml`` configuration file and set up the following variables: ::
 
  # The host to bind the server to.
- host: "127.0.0.1"
+ host: "0.0.0.0"
 
  # The Elasticsearch instance to use for all your queries.
  elasticsearch_url: "http://127.0.0.1:9200"
