@@ -55,28 +55,38 @@ Updated out-of-the-box rules
 
 These rules can be found under ``ossec-rules/rules-decoders/ossec`` directory, and you can manually install them following these steps: ::
 
-     - Copy ``ossec-rules/rules-decoders/decoder.xml`` to ``/var/ossec/etc/``.
-     - Copy all files ``*_rules.xml`` to ``/var/ossec/rules/``, except for ``local_rules.xml``.
+     - Copy "ossec-rules/rules-decoders/ossec/decoders/*_decoders.xml" to "/var/ossec/etc/ossec_decoders/".
+     - Copy all files "ossec-rules/rules-decoders/ossec/rules/*rules*.xml" to "/var/ossec/rules/", except for "local_rules.xml".
      - Restart your OSSEC manager.
+
+If you do not use the OSSEC Wazuh fork, copy, after the above steps, the decoders ``ossec/decoders/compatibility/*_decoders.xml`` to ``/var/ossec/etc/ossec_decoders/``.
 
 New log analysis rules
 """"""""""""""""""""""
 
 These rules are located at ``ossec-rules/rules-decoders/software`` (being software the name of your log messages source) and can be installed manually following next steps.
 
-Configure decoders path adding the next lines after tag ``<rules>`` at ``/var/ossec/etc/ossec.conf``: ::
 
- <decoder>etc/decoder.xml</decoder>
- <decoder>etc/local_decoder.xml</decoder>
- <decoder_dir>etc/wazuh_decoders</decoder_dir>
 
 Copy new rule files into OSSEC directories and add the new rules file to ``ossec.conf`` configuration file: ::
 
- - Copy ``new_rule_decoders.xml`` to ``/var/ossec/etc/wazuh_decoders/``.
- - Copy ``software_rules.xml`` to ``/var/ossec/rules/``
- - Add ``<include>software_rules.xml</include>`` to ``/var/ossec/etc/ossec.conf`` in section ``<rules>``.
+ - Copy "software_decoders.xml" to "/var/ossec/etc/wazuh_decoders/".
+ - Copy "software_rules.xml" to "/var/ossec/rules/"
+ - Add "<include>software_rules.xml</include>" to "/var/ossec/etc/ossec.conf" before the tag "</rules>".
  - If there are additional instructions to install these rules and decoders, you will find them in an instructions.md file in the same directory.
  - Restart your OSSEC manager
+
+
+Decoder paths
+""""""""""""""""""""""""
+Configure decoder paths adding the next lines after tag ``<rules>`` at ``/var/ossec/etc/ossec.conf``: ::
+
+ <decoder_dir>etc/ossec_decoders</decoder_dir>
+ <decoder>etc/local_decoder.xml</decoder>
+ <decoder_dir>etc/wazuh_decoders</decoder_dir>
+
+If you do not use the OSSEC Wazuh fork, you must move the file ``decoder.xml`` to the directory ``etc/ossec_decoders``.
+Also, if you do not use ``local_decoder.xml``, remove that line in ossec.conf. Remember that ``local_decoder.xml`` can not be empty.
 
 Rootcheck rules
 ^^^^^^^^^^^^^^^
@@ -144,7 +154,12 @@ Update existing rule set: ::
 
 Update only existing rootchecks: ::
 
-  ./ossec_ruleset.py --c --update
+  ./ossec_ruleset.py --rootchecks --update
+
+Restore a backup: ::
+
+  ./ossec_ruleset.py --backups list
+
 
 Configure weekly updates
 ^^^^^^^^^^^^^^^^^^^^^^^^
