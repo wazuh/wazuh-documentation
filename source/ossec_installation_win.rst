@@ -80,7 +80,7 @@ To compile OSSEC agent on a Debian system install these packages: ::
 Compiling agent
 ---------------
 
-Extract ossec-hids and run ``gen-win.sh`` and ``make.sh`` scripts: ::
+Extract ossec-hids and run ``gen_win.sh`` and ``make.sh`` scripts: ::
 
    $ tar -xvzf ossec-hids-2.8.3.tar.gz
    $ cd ossec-hids-2.8.3/src/win32
