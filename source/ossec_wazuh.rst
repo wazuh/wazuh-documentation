@@ -29,11 +29,7 @@ Choose ``server`` when being asked about the installation type and answer the re
 Configuration
 -------------
 
-In order to enable alerts JSON output we need to change our OSSEC manager configuration file ``/var/ossec/etc/ossec.conf`` and add the following line in between ``<global>`` and ``</global>`` tags. ::
-
-  <jsonout_output>yes</jsonout_output>
-
-Now start your OSSEC Manager ::
+Start your OSSEC Manager ::
 
   $ sudo /var/ossec/bin/ossec-control start
 
