@@ -60,7 +60,7 @@ Once the installation is completed, we can now configure some basic settings mod
 
  network.host: elasticsearch_server_ip or 0.0.0.0 if single-node architecture.
 
- host.port: 9200
+ http.port: 9200
 
  discovery.zen.ping.multicast.enabled: false
  discovery.zen.ping.timeout: 15s
