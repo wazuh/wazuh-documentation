@@ -18,7 +18,16 @@ For Amazon Linux AMI: ::
    gpgkey = http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC
    enabled = 1
 
-For RHEL and CentOS (versions EL5, EL6 or EL7): ::
+For RHEL and CentOS (version EL5): ::
+
+   [wazuh]
+   name = WAZUH OSSEC Repository - www.wazuh.com
+   baseurl = http://ossec.wazuh.com/el/$releasever/$basearch
+   gpgcheck = 1
+   gpgkey = http://ossec.wazuh.com/key/RPM-GPG-KEY-OSSEC-RHEL5
+   enabled = 1
+
+For RHEL and CentOS (versions EL6 or EL7): ::
 
    [wazuh]
    name = WAZUH OSSEC Repository - www.wazuh.com
