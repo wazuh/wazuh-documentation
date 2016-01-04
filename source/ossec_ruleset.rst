@@ -170,6 +170,24 @@ Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
  
   @weekly root /full/path/to/ossec-rules/ossec_ruleset.py -a -u -s
 
+Wazuh rules
+-----------
+
+Amazon
+^^^^^^
+
+Auditd
+^^^^^^
+
+Netscaler
+^^^^^^^^^
+
+Puppet
+^^^^^^
+
+Serv-U
+^^^^^^
+
 Contribute to the ruleset
 -------------------------
 If you have created new rules, decoders or rootchecks and you would like to contribute to our repository, please fork our `Github repository <https://github.com/wazuh/ossec-rules>`_ and submit a pull request.
