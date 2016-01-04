@@ -175,6 +175,57 @@ Wazuh rules
 
 Amazon
 ^^^^^^
+Before install the Wazuh Amazon rules need to do a few steps, by default amazon don't log the activites in any place,for do that we need to do a couple things
+
+1. Tur on CloudTrail.
+2. Create a user with at least read premission over S3.
+3. Install AWS Cli in your Ossec Manager instance.
+4. Configure the previous user credentials  with AWS Cli in your Ossec Manager.
+5. Run a python script for download the JSON data in gzipped files logs and convert in to a flat file.
+6. Install Wazuh Amazon rules.
+
+
+1.- Tur on CloudTrail
+"""""""""""""""""""""
+
+This section shows you how to create a trail for your AWS account. You can create trails by using the AWS CloudTrail console or the AWS Command Line Interface (AWS CLI). Both methods follow the same steps:
+
+Turn on ``CloudTrail``. By default, when you create a trail in one region in the CloudTrail console, the trail will apply to all regions.
+
+Create a new Amazon S3 bucket for storing your log files, or specify an existing bucket where you want the log files delivered. By default, log files from all AWS regions in your account will be delivered to the bucket you specify.
+
+S3 bucket name is commun for all amazon users, dont be worried if have this error ``Bucket already exists. Select a different bucket name.`` even if you dont have any bucket before.
+
+At this moment all your actions in Amazon AWS will be logged, you can search manually inside ``CloudTrail/API activity history`` also every 7 min, one file .json will be saved in your bucket.
+
+2. Create a user with at least read premission over S3
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Sign in to the ``AWS Management Console`` and open the IAM console at https://console.aws.amazon.com/iam/.
+In the navigation panel, choose ``Users`` and then choose ``Create New Users``.
+Type the user names for the users to create. You can create up to five users at one time
+
+.. note:: User names can use only a combination of alphanumeric characters and these characters: plus (+), equal (=), comma (,), period (.), at (@), and hyphen (-). Names must be unique within an account. For more information about limitations on IAM entities
+
+The users require access to the API, AWS CLI then they must have access keys. To generate access key for new users at this time, select ``Generate an access key`` for each user.
+
+Choose Create.
+
+(Optional) To view the users' access keys (access key IDs and secret access keys), choose ``Show User Security Credentials``. To save the access keys, choose ``Download Credentials`` and then save the file to a safe location on your computer.
+
+.. warning:: This is your only opportunity to view or download the secret access keys, and you must provide this information to your users before they can use the AWS API. If you don't download and save them now, you will need to create new access keys for the users later. Save the user's new access key ID and secret access key in a safe and secure place. You will not have access to the secret access keys again after this step.
+
+Give the user(s) permission to manage security policies, press ``Attach Policy`` and select at least ``AmazonS3ReadOnlyAccess`` policy 
+
+3. Install AWS Cli in your Ossec Manager instance
+"""""""""""""""""""""""""""""""""""""""""""""""""
+4. Configure the previous user credentials  with AWS Cli in your Ossec Manager
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+5. Run a python script for download the JSON data in gzipped files logs and convert in to a flat file
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+6. Install Wazuh Amazon rules
+"""""""""""""""""""""""""""""
+
+
 
 Auditd
 ^^^^^^
