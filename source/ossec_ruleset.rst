@@ -217,6 +217,101 @@ Choose Create.
 Give the user(s) permission to manage security policies, press ``Attach Policy`` and select at least ``AmazonS3ReadOnlyAccess`` policy 
 
 
+3. Install AWS Cli in your Ossec Manager
+""""""""""""""""""""""""""""""""""""""""
+
+For download and process the Amazon AWS logs that already are archived in S3 Bucket we need to install AWS Cli in your sistem and configure it for use with AWS
+
+The AWS CLI comes pre-installed on the ``Amazon Linux AMI``. Run ``sudo yum update`` after connecting to the instance to get the latest version of the package available via yum. If you need a more recent version of the AWS CLI than what is available in the Amazon updates repository, uninstall the package (sudo yum remove aws-cli) and then install using pip.
+
+Prerequisites for AWS CLI Using Pip
+
+* Windows, Linux, OS X, or Unix
+* Python 2 version 2.6.5+ or Python 3 version 3.3+
+* Pip
+
+If you don't have Python installed, install version 2.7 or 3.4 using one of the following methods:
+
+Check to see if Python is already installed: ::
+
+  $ python --version
+
+If Python 2.7 or later is not installed, install it with your distribution's package manager. The command and package name varies:
+
+* On Debian derivatives such as Ubuntu, use APT: ::
+
+  $ sudo apt-get install python2.7
+
+* On Red Hat and derivatives, use yum: ::
+
+  $ sudo yum install python27
+
+Open a command prompt or shell and run the following command to verify that Python installed correctly: ::
+
+  $ python --version
+  Python 2.7.9
+
+To install pip on Linux
+
+* Download the installation script from pypa.io: ::
+  
+  $ curl -O https://bootstrap.pypa.io/get-pip.py
+
+* Run the script with Python: ::
+  
+  $ sudo python get-pip.py
+
+With Python and pip installed, use pip to install the AWS CLI: ::
+
+  $ sudo pip install awscli
+
+.. note:: If you installed a new version of Python alongside an older version that came with your distribution, or update pip to the latest version, you may get an error like the following when trying to invoke pip with sudo and the result is ``command not found`` to work around this issue, use ``which pip`` to locate the executable, and then invoke it directly by using an absolute path when installing the AWS CLI:
+
+  ``$ which pip`` 
+
+  ``/usr/local/bin/pip``
+
+  ``$ sudo /usr/local/bin/pip install awscli``
+
+To upgrade an existing AWS CLI installation, use the ``--upgrade`` option: ::
+
+  $ sudo pip install --upgrade awscli
+
+
+4. Configure user credentials  with AWS Cli
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For example, the following command includes user input, replaceable text, and output: ::
+
+  $ sudo aws configure
+  AWS Access Key ID [None]: ``AKIAIOSFODNN7EXAMPLE``
+  AWS Secret Access Key [None]: ``wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY``
+  Default region name [None]: ENTER
+  Default output format [None]: ENTER
+
+To use this example, type ``aws configure`` at the command line and press ``Enter``. ``aws configure`` is the command. This command is interactive, so the AWS CLI outputs lines of texts, prompting you to enter additional information. Enter each of your access keys in turn and press ``Enter``. Then, a region name is not necessary, press Enter, and press Enter a final time to skip the output format setting. The final Enter command is shown as replaceable text because there is no user input for that line. Otherwise, it would be implied.
+
+5. Run a python script for download the JSON data
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For donwload the JSON file from S3 Bucket and convert a flat file to be used under Ossec we use a python script original from Xavier Martens @xme with a minor modifications.
+
+The commando for use this script is: ::
+
+  $ ./getawslog.py -b ``s3bucketname`` -d -j -D -l ``/var/log/amazon/amazon.log``
+
+Where ``s3bucketname`` is the bucket name created when CloudTrail was activated and ``/var/log/amazon/amazon.log`` the path for after convert the JSON file export the logs.
+
+CloudTrail delivers log files to your S3 bucket approximately every 5 minutes. CloudTrail does not deliver log files if no API calls are made on your account so you can run the script every 5 min or more adding a crontab job to your system.
+
+Run ``vi /etc/crontab`` and, at the end of the file, add the following line ::
+
+  */5 *   * * *   root    python path_to_script/getawslog.py -b s3bucketname -d -j -D -l /var/log/amazon/amazon.log
+
+
+.. note:: This script download and delete the files from your S3 Bucket, but the you can review the last 7 days logs throught CloudTrail.
+
+
 Auditd
 ^^^^^^
 
