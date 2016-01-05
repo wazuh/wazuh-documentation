@@ -309,7 +309,7 @@ Run ``vi /etc/crontab`` and, at the end of the file, add the following line ::
   */5 *   * * *   root    python path_to_script/getawslog.py -b s3bucketname -d -j -D -l /var/log/amazon/amazon.log
 
 
-.. note:: This script download and delete the files from your S3 Bucket, but the you can review the last 7 days logs throught CloudTrail.
+.. note:: This script download and delete the files from your S3 Bucket, but the you can review the last 7 days logs through CloudTrail.
 
 
 Auditd
