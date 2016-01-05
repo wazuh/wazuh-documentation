@@ -294,7 +294,7 @@ To use this example, type ``aws configure`` at the command line and press ``Ente
 5. Run a python script for download the JSON data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For donwload the JSON file from S3 Bucket and convert a flat file to be used under Ossec we use a python script original from Xavier Martens @xme with a minor modifications.
+For download the JSON file from S3 Bucket and convert a flat file to be used under Ossec we use a python script original from Xavier Martens @xme with a minor modifications.
 
 The commando for use this script is: ::
 
