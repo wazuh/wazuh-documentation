@@ -194,7 +194,7 @@ Turn on ``CloudTrail``. By default, when you create a trail in one region in the
 
 Create a new Amazon S3 bucket for storing your log files, or specify an existing bucket where you want the log files delivered. By default, log files from all AWS regions in your account will be delivered to the bucket you specify.
 
-S3 bucket name is comun for all amazon users, dont be worried if have this error ``Bucket already exists. Select a different bucket name.`` even if you dont have any bucket before.
+S3 bucket name is common for all amazon users, dont be worried if have this error ``Bucket already exists. Select a different bucket name.`` even if you dont have any bucket before.
 
 At this moment all your actions in Amazon AWS will be logged, you can search manually inside ``CloudTrail/API activity history`` also every 7 min, one file .json will be saved in your bucket.
 
