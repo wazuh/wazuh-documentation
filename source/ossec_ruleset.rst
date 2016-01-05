@@ -304,6 +304,18 @@ Where ``s3bucketname`` is the bucket name created when CloudTrail was activated 
 
 CloudTrail delivers log files to your S3 bucket approximately every 5 minutes. CloudTrail does not deliver log files if no API calls are made on your account so you can run the script every 5 min or more adding a crontab job to your system.
 
+.. note:: If after execute the first time ``getawslog.py`` the result is:
+
+  ``Traceback (most recent call last):``
+
+  ``File "/root/script/getawslog.py", line 16, in <module>``
+
+    ``import boto``
+
+  ``ImportError: No module named boto``
+
+  To work around this issue install the module named boto, use this command ``$ sudo pip install boto``
+
 Run ``vi /etc/crontab`` and, at the end of the file, add the following line ::
 
   */5 *   * * *   root    python path_to_script/getawslog.py -b s3bucketname -d -j -D -l /var/log/amazon/amazon.log
