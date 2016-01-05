@@ -276,7 +276,7 @@ To upgrade an existing AWS CLI installation, use the ``--upgrade`` option: ::
 
 
 4. Configure user credentials  with AWS Cli
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""""""""""""""
 
 To configure the user credentials type: ::
 
@@ -292,7 +292,7 @@ The result should be something like this: ::
   Default output format [None]: ENTER
 
 5. Run a python script for download the JSON data
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+"""""""""""""""""""""""""""""""""""""""""""""""""
 
 To download the JSON file from S3 Bucket and convert it into a flat file to be used with Ossec, we use a python script written by Xavier Martens @xme with  minor modifications done by Wazuh.
 
