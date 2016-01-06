@@ -178,7 +178,7 @@ Amazon
 Before installing our Amazon rules, you need to follow the steps below in order to enable logging through AWS API and download the JSON data files. A detailed description of each of the steps will be find further below. 
 
 1. Turn on CloudTrail.
-2. Create a user with at least read permission over S3.
+2. Create a user with permission over S3.
 3. Install AWS Cli in your Ossec Manager.
 4. Configure the previous user credentials  with AWS Cli in your Ossec Manager.
 5. Run a python script to download JSON data in gzipped files logs and convert it into a flat file.
@@ -197,8 +197,8 @@ S3 bucket name is common for all amazon users, don't worry if you get this error
 
 From now on all your actions in Amazon AWS console will be logged. You can search logs manually inside ``CloudTrail/API activity history``. Also, notice that every 7 min a .json file will be stored in your bucket.
 
-2. Create a user with at least read permission over S3
-""""""""""""""""""""""""""""""""""""""""""""""""""""""
+2. Create a user with permission over S3
+""""""""""""""""""""""""""""""""""""""""
 Sign in to the ``AWS Management Console`` and open the IAM console at https://console.aws.amazon.com/iam/.
 In the navigation panel, choose ``Users`` and then choose ``Create New Users``.
 Type the user names for the users you would like to create. You can create up to five users at one time.
@@ -211,7 +211,7 @@ The users require access to the API. For this they must have access keys. To gen
 
 .. warning:: This is your only opportunity to view or download the secret access keys, and you must provide this information to your users before they can use the AWS Console. If you don't download and save them now, you will need to create new access keys for the users later. Save the new user's access key ID and secret access key in a safe and secure place. You will not have access to the secret access keys again after this step.
 
-Give the user(s) permission to manage security policies, press ``Attach Policy`` and select at least ``AmazonS3ReadOnlyAccess`` policy. 
+Give the user(s) permission to manage security policies, press ``Attach Policy`` and select ``AmazonS3FullAccess`` policy. 
 
 
 3. Install AWS Cli in your Ossec Manager
