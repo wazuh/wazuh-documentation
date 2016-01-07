@@ -6,7 +6,7 @@ Components and architecture
 Components 
 ----------
 
-See below a brief descriptioon of the components and tools involved in the integration of our :ref:`OSSEC Wazuh fork <ossec_wazuh>` with ELK Stack, for long term data storage, alerts indexing, management and visualization.
+See below a brief description of the components and tools involved in the integration of our :ref:`OSSEC Wazuh fork <ossec_wazuh>` with ELK Stack, for long term data storage, alerts indexing, management and visualization.
 
 + `OSSEC HIDS forked by Wazuh <http://github.com/wazuh/ossec-wazuh/>`_: Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally in the box running the OSSEC manager.
 
