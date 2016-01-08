@@ -1,5 +1,7 @@
 .. _ossec_ruleset:
 
+.. _ossec_ruleset:
+
 OSSEC Wazuh Ruleset Guide
 =========================
 
