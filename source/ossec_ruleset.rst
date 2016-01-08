@@ -371,5 +371,6 @@ What's next
 
 Once you have your ruleset up to date we encourage you to move forward and try out ELK integration or the API RESTful, check them on:
 
+
 * :ref:`ELK Stack integration guide <ossec_elk>`
 * :ref:`OSSEC Wazuh RESTful API installation Guide <ossec_api>`
