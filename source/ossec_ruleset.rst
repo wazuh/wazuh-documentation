@@ -172,7 +172,7 @@ Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
 
 Wazuh rules
 -----------
-All Wazuh rules can be automatically installed by running ``wazuh/ossec-rules/ossec_ruleset.py -r``, but for some of these rules it is necessary to perform manual steps. The following describes the new rules developed by Wazuh and, if necessary, the manual steps to be performed.
+All Wazuh rules can be automatically installed by running ``wazuh/ossec-rules/ossec_ruleset.py -r``, but for some of these rules it is necessary to perform manual steps. This section describes the new rules developed by Wazuh and, if necessary, the manual steps to be performed.
 
 Netscaler
 ^^^^^^^^^
@@ -180,7 +180,7 @@ NetScaler is a network appliance (or hardware device) manufactured by Citrix, wh
 
 Puppet
 ^^^^^^
-Puppet is an open-source configuration management utility. After installing Puppet rules (automatically or manually) you need to perform the next manual step. This is due to some rules need to read the output of a command.
+Puppet is an open-source configuration management utility. After installing Puppet rules (`automatically <http://wazuh-documentation.readthedocs.org/en/latest/ossec_ruleset.html#automatic-installation>`_ or `manually <http://wazuh-documentation.readthedocs.org/en/latest/ossec_ruleset.html#manual-installation>`_) you need to perform the next manual step. This is due to some rules need to read the output of a command.
 
 Copy the code below to ``/var/ossec/etc/shared/agent.conf`` in your **OSSEC Manager** to allow OSSEC execute this command and read its output: :: 
 
