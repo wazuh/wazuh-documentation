@@ -172,6 +172,34 @@ Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
 
 Wazuh rules
 -----------
+All Wazuh rules can be automatically installed by running ``wazuh/ossec-rules/ossec_ruleset.py -r``, but for some of these rules it is necessary to perform manual steps. The following describes the new rules developed by Wazuh and, if necessary, the manual steps to be performed.
+
+Netscaler
+^^^^^^^^^
+NetScaler is a network appliance (or hardware device) manufactured by Citrix, which primary role is to provide Level 4 Load Balancing. It also supports Firewall, proxy and VPN functions.
+
+Puppet
+^^^^^^
+Puppet is an open-source configuration management utility. After installing Puppet rules (automatically or manually) you need to perform the next manual step. This is due to some rules need to read the output of a command.
+
+Copy the code below to ``/var/ossec/etc/shared/agent.conf`` in your **OSSEC Manager** to allow OSSEC execute this command and read its output: :: 
+
+   <agent_config>
+       <localfile>
+           <log_format>full_command</log_format>
+           <command>timestamp_puppet=`cat /var/lib/puppet/state/last_run_summary.yaml | grep last_run | cut -d: -f 2 | tr -d '[[:space:]]'`;timestamp_current_date=$(date +"%s");diff_min=$((($timestamp_current_date-$timestamp_puppet)/60));if [ "$diff_min" -le "30" ];then echo "Puppet: OK. It runs in the last 30 minutes";else puppet_date=`date -d @"$timestamp_puppet"`;echo "Puppet: KO. Last run: $puppet_date";fi</command>
+           <frequency>2100</frequency>
+       </localfile>
+   </agent_config>
+   
+Also you must configure in **every agent** the logcollector option to accept remote commands from the manager. To do this, add the following lines to ``/var/ossec/etc/internal_options.conf``: :: 
+
+   # Logcollector - If it should accept remote commands from the manager
+   logcollector.remote_commands=1
+
+Serv-U
+^^^^^^
+FTP Server software (FTP, FTPS, SFTP, Web & mobile) for secure file transfer and file sharing on Windows & Linux.
 
 Amazon
 ^^^^^^
@@ -294,11 +322,11 @@ The result should be something like this: ::
 5. Run a python script for download the JSON data
 """""""""""""""""""""""""""""""""""""""""""""""""
 
-To download the JSON file from S3 Bucket and convert it into a flat file to be used with Ossec, we use a python script written by Xavier Martens @xme with  minor modifications done by Wazuh.
+To download the JSON file from S3 Bucket and convert it into a flat file to be used with Ossec, we use a python script written by Xavier Martens @xme with  minor modifications done by Wazuh. The script is located in our repository at ``wazuh/ossec-rules/tools/amazon/getawslog.py``.
 
 The command to use this script is: ::
 
-  $ ./getawslog.py -b ``s3bucketname`` -d -j -D -l ``/var/log/amazon/amazon.log``
+  $ ./getawslog.py -b s3bucketname -d -j -D -l /var/log/amazon/amazon.log
 
 Where ``s3bucketname`` is the name of the bucket created when CloudTrail was activated and ``/var/log/amazon/amazon.log`` is the path where the log is stored after being converted by the script.
 
