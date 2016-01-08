@@ -353,6 +353,11 @@ Run ``vi /etc/crontab`` and, at the end of the file, add the following line ::
 
 .. note:: This script downloads and deletes the files from your S3 Bucket, but you can always review the last 7 days logs through CloudTrail.
 
+6. Install Wazuh Amazon rules.
+""""""""""""""""""""""""""""""
+
+To install Wazuh Amazon rules follow either the `Automatic installation`_ section or `Manual installation`_ section in this guide.
+
 Contribute to the ruleset
 -------------------------
 If you have created new rules, decoders or rootchecks and you would like to contribute to our repository, please fork our `Github repository <https://github.com/wazuh/ossec-rules>`_ and submit a pull request.
