@@ -117,8 +117,7 @@ The installation script is located in our repository at ``wazuh/ossec-rules/osse
 
 Cloning the repository: ::
 
-   $ cd ~
-   $ mkdir ossec_rules_tmp && cd ossec_rules_tmp
+   $ cd /var/ossec
    $ git clone https://github.com/wazuh/ossec-rules.git
    $ cd ossec-rules
 
@@ -168,7 +167,7 @@ Run ``ossec_ruleset.py`` weekly and keep your OSSEC Wazuh Ruleset installation u
 
 Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
  
-  @weekly root /full/path/to/ossec-rules/ossec_ruleset.py -a -u -s
+  @weekly root cd /var/ossec/ossec-rules/ && ./ossec_ruleset.py -a -u -s
 
 Wazuh rules
 -----------
