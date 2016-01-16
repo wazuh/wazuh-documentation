@@ -43,7 +43,7 @@ In an effort to cover all possible scenarios, this guide describes both options 
 Requirements
 ------------
 
-+ Operating System: This document includes a detailed description of the steps you need to follow to install the components both in Debian (latest stable is version 8) and CentOS (latest estable is version 7) Linux distribtuions. 
++ Operating System: This document includes a detailed description of the steps you need to follow to install the components both in Debian (latest stable is version 8) and CentOS (latest stable is version 7) Linux distribtuions. 
 
 - RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation and, according to their documentation, less than 8GB RAM is counterproductive. For single-host deployments, considering that Elasticsearch will share resources with OSSEC, Logstash and Kibana, we recommend to provision your server with at least 16GB RAM (more if possible). Less than 16GB RAM would only work for small OSSEC deployments.
 
