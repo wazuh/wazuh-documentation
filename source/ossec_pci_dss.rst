@@ -8,9 +8,7 @@ Introduction
 
 The **Payment Card Industry Data Security Standard (PCI DSS)** is a proprietary information security standard for organizations that handle branded credit cards from the major card schemes including *Visa*, *MasterCard*, *American Express*, *Discover*, and *JCB*. The standard was created to increase controls around cardholder data to reduce credit card fraud. Validation of compliance is performed annually, either by an external *Qualified Security Assessor (QSA)* that creates a *Report on Compliance (ROC)* for organizations handling large volumes of transactions, or by *Self-Assessment Questionnaire (SAQ)* for companies handling smaller volumes.
 
-`Here <http://wazuh.com/resources/OSSEC_PCI_DSS_Guide.pdf>`_ you will find a **document** that describes what requirements of **PCI DSS 3.1** can be met with OSSEC and how each OSSEC component can help to meet them.
-
-This section of the documentation shows a detailed example of how each OSSEC component (analysis logs, rootcheck, syscheck, active response) can help to meet PCI DSS requirements. Also it will show how the combination OSSEC + ELK is very useful for PCI DSS.
+The following sections describe how each OSSEC component (analysis logs, rootcheck, syscheck, active response) and the combination OSSEC + ELK can help to meet **PCI DSS 3.1** requirements. In this `document <http://wazuh.com/resources/OSSEC_PCI_DSS_Guide.pdf>`_ each requeriment is analyzed to indicate how OSSEC could help to meet it.
 
 Analysis Logs
 --------------
@@ -123,21 +121,21 @@ Rootkit and trojans detection is performed using two files: *rootkit_files.txt* 
 These are the option availables for `rootcheck component <http://ossec-docs.readthedocs.org/en/latest/syntax/head_ossec_config.rootcheck.html>`_:
 
 + rootkit_files: Contains the Unix-based application level rootkit signatures.
-+ 
+
 + rootkit_trojans: Contains the Unix-based application level Trojan signatures.
-+ 
+
 + check_files: Enable or disable the checking of rootkits. Default yes.
-+ 
+
 + check_trojans: Enable or disable the checking of trojans. Default yes.
-+ 
+
 + check_dev: Check for files in the /dev filesystem. Default yes.
-+ 
+
 + check_sys: Scan the whole system for additional issues. Default yes. 
-+ 
+
 + check_pids: Check processes. Default yes.
-+ 
+
 + check_ports: Check all ports. Default yes.
-+ 
+
 + check_if: Check interfaces. Default yes.
 
 Rootcheck helps to meet the requeriment 11.4 related with intrusions, trojans and malware in general:
@@ -166,9 +164,9 @@ ELK
 The following requirements can be met with a combination of OSSEC + ELK:
 
 + *10.5 Secure audit trails so they cannot be altered.*
-+ 
+
 + *10.6.1 Review the following at least daily: All security events, Logs of all critical system components, etc.*
-+ 
+
 + *10.7 Retain audit trail history for at least one year, with a minimum of three months immediately available for analysis*
 
 What's next
