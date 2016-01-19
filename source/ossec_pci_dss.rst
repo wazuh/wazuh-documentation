@@ -14,11 +14,11 @@ This section of the documentation shows a detailed example of how each OSSEC com
 
 Analysis Logs
 --------------
-
 Take a look at the following requirements:
-    *10.2.4 Invalid logical access attempts*
 
-    *10.2.5 Use of and changes to identification and authentication mechanisms—including but not limited to creation of new accounts and elevation of privileges—and all changes, additions, or deletions to accounts with root or administrative privileges*
++ *10.2.4 Invalid logical access attempts*
+
++ *10.2.5 Use of and changes to identification and authentication mechanisms—including but not limited to creation of new accounts and elevation of privileges—and all changes, additions, or deletions to accounts with root or administrative privileges*
 
 In order to meet these requirements we need to log invalid logical access attempts, multiple invalid login attempts (maybe it is a brute force attack), identification and authentication mechanisms, elevation privileges, changes in accounts, etc. Most of these events are already controlled by existing rules in OSSEC. We have added a **mapping** between each rule and its corresponding PCI requirement. On this way, it is easier to analyze and visualize PCI alerts. The syntax is **pci_dss_** followed by the number of the requirement, in the above example would be: pci_dss_10.2.4 and pci_dss_10.2.5.
 
@@ -70,9 +70,9 @@ Rootcheck
 ----------
 OSSEC rootcheck process performs:
 
-    Rootkit detection on Linux, Unix, and BSD systems.
++ Rootkit detection on Linux, Unix, and BSD systems.
 
-    Policy monitoring/enforcement: It is the process of verifying that all systems conform to a set of pre-defined policies surrounding configuration settings and approved application usage.
++ Policy monitoring/enforcement: It is the process of verifying that all systems conform to a set of pre-defined policies surrounding configuration settings and approved application usage.
 
 Both features can help to meet PCI DSS requirements.
 
@@ -80,11 +80,7 @@ Policy Monitoring
 ^^^^^^^^^^^^^^^^^^
 There are requirements to verify that system are meeting some hardening standards. An example would be:
 
-*2.2 Develop configuration standards for all system components. Assure that these standards address all known security vulnerabilities and are consistent with industry-accepted system hardening standards. Sources of industry-accepted system hardening standards may include, but are not limited to:
-Center for Internet Security (CIS)
-International Organization for Standardization (ISO)
-SysAdmin Audit Network Security (SANS)
-Institute National Institute of Standards Technology (NIST).*
+*2.2 Develop configuration standards for all system components. Assure that these standards address all known security vulnerabilities and are consistent with industry-accepted system hardening standards. Sources of industry-accepted system hardening standards may include, but are not limited to: Center for Internet Security (CIS), International Organization for Standardization (ISO), SysAdmin Audit Network Security (SANS), Institute National Institute of Standards Technology (NIST).*
 
 OSSEC includes out-of-the-box CIS baselines for Debian and Redhat and other baselines could be created for other system. Just add the corresponding rootcheck file:
 
@@ -126,23 +122,23 @@ Rootkit and trojans detection is performed using two files: *rootkit_files.txt* 
     
 These are the option availables for `rootcheck component <http://ossec-docs.readthedocs.org/en/latest/syntax/head_ossec_config.rootcheck.html>`_:
 
-    rootkit_files: Contains the Unix-based application level rootkit signatures.
-
-    rootkit_trojans: Contains the Unix-based application level Trojan signatures.
-
-    check_files: Enable or disable the checking of rootkits. Default yes.
-
-    check_trojans: Enable or disable the checking of trojans. Default yes.
-
-    check_dev: Check for files in the /dev filesystem. Default yes.
-
-    check_sys: Scan the whole system for additional issues. Default yes. 
-
-    check_pids: Check processes. Default yes.
-
-    check_ports: Check all ports. Default yes.
-
-    check_if: Check interfaces. Default yes.
++ rootkit_files: Contains the Unix-based application level rootkit signatures.
++ 
++ rootkit_trojans: Contains the Unix-based application level Trojan signatures.
++ 
++ check_files: Enable or disable the checking of rootkits. Default yes.
++ 
++ check_trojans: Enable or disable the checking of trojans. Default yes.
++ 
++ check_dev: Check for files in the /dev filesystem. Default yes.
++ 
++ check_sys: Scan the whole system for additional issues. Default yes. 
++ 
++ check_pids: Check processes. Default yes.
++ 
++ check_ports: Check all ports. Default yes.
++ 
++ check_if: Check interfaces. Default yes.
 
 Rootcheck helps to meet the requeriment 11.4 related with intrusions, trojans and malware in general:
 
@@ -169,11 +165,11 @@ ELK
 
 The following requirements can be met with a combination of OSSEC + ELK:
 
-    *10.5 Secure audit trails so they cannot be altered.*
-
-    *10.6.1 Review the following at least daily: All security events, Logs of all critical system components, etc.*
-
-    *10.7 Retain audit trail history for at least one year, with a minimum of three months immediately available for analysis*
++ *10.5 Secure audit trails so they cannot be altered.*
++ 
++ *10.6.1 Review the following at least daily: All security events, Logs of all critical system components, etc.*
++ 
++ *10.7 Retain audit trail history for at least one year, with a minimum of three months immediately available for analysis*
 
 What's next
 ------------
