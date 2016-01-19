@@ -14,6 +14,7 @@ This section of the documentation shows a detailed example of how each OSSEC com
 
 Analysis Logs
 --------------
+
 Take a look at the following requirements:
     *10.2.4 Invalid logical access attempts*
 
@@ -77,7 +78,7 @@ Both features can help to meet PCI DSS requirements.
 
 Policy Monitoring
 ^^^^^^^^^^^^^^^^^^
-There are requirements to verify that system are meeting some hardening standard. An example would be:
+There are requirements to verify that system are meeting some hardening standards. An example would be:
 
 *2.2 Develop configuration standards for all system components. Assure that these standards address all known security vulnerabilities and are consistent with industry-accepted system hardening standards. Sources of industry-accepted system hardening standards may include, but are not limited to:
 Center for Internet Security (CIS)
@@ -122,7 +123,9 @@ Rootkit and trojans detection is performed using two files: *rootkit_files.txt* 
         <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
     </rootcheck>
 
+    
 These are the option availables for `rootcheck component <http://ossec-docs.readthedocs.org/en/latest/syntax/head_ossec_config.rootcheck.html>`_:
+
     rootkit_files: Contains the Unix-based application level rootkit signatures.
 
     rootkit_trojans: Contains the Unix-based application level Trojan signatures.
