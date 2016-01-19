@@ -17,19 +17,19 @@ To add your Debian repository, depending on your distribution, run these command
 
 For Wheezy: ::
 
-   $echo -e "deb http://ossec.wazuh.com/repos/apt/debian wheezy main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb http://ossec.wazuh.com/repos/apt/debian wheezy main" >> /etc/apt/sources.list.d/ossec.list
 
 For Jessie: ::
 
-   $echo -e "deb http://ossec.wazuh.com/repos/apt/debian jessie main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb http://ossec.wazuh.com/repos/apt/debian jessie main" >> /etc/apt/sources.list.d/ossec.list
 
 For Stretch: ::
 
-   $echo -e "deb http://ossec.wazuh.com/repos/apt/debian stretch main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb http://ossec.wazuh.com/repos/apt/debian stretch main" >> /etc/apt/sources.list.d/ossec.list
 
 For Sid: ::
 
-   $echo -e "deb http://ossec.wazuh.com/repos/apt/debian sid main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb http://ossec.wazuh.com/repos/apt/debian sid main" >> /etc/apt/sources.list.d/ossec.list
 
 Ubuntu repositories
 -------------------
