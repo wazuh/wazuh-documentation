@@ -337,7 +337,7 @@ OSSEC agent class
  - ``$ossec_emailnotification`` (default: ``yes``): Whether to send email notifications or not.
  - ``$selinux`` (default: ``false``): Whether to install a SELinux policy to allow rotation of OSSEC logs.
  - ``$manage_repo`` (default: ``true``): Install Ossec through Wazuh repositories.
- - ``$ossec_scanpaths`` (default: empty): Agents can be Linux or Windows for this reason don't have ``ossec_scanpaths`` by default.
+ - ``$ossec_scanpaths`` (default: ``[]``): Agents can be Linux or Windows for this reason don't have ``ossec_scanpaths`` by default.
 
 ossec_scanpaths configuration
 """""""""""""""""""""""""""""
