@@ -333,6 +333,7 @@ OSSEC agent class
 """""""""""""""""
 
  - ``$ossec_server_ip``: IP of the server.
+ - ``$ossec_server_hostname``: Hostname of the server.
  - ``$ossec_active_response`` (default: ``true``): Allows active response on this host.
  - ``$ossec_emailnotification`` (default: ``yes``): Whether to send email notifications or not.
  - ``$selinux`` (default: ``false``): Whether to install a SELinux policy to allow rotation of OSSEC logs.
