@@ -6,7 +6,7 @@ Windows agent
 Agent pre-compiled installer
 ----------------------------
 
-You can find a pre-compiled version of OSSEC agent for Windows, both for 32 and 64 bits architectures, at `our repository <http://ossec.wazuh.com/windows/>`.
+You can find a pre-compiled version of the OSSEC agent for Windows, both for 32 and 64 bits architectures, at `our repository <http://ossec.wazuh.com/windows/>`.
 
 Current version is 2.8.3 and these are the MD5 and SHA1 checksums:
 
@@ -40,7 +40,7 @@ The expected hash checksum, in both cases, is: ::
 Build environment on CentOS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-First, you need to install MinGW and Nsis (to build the installer). Lets start installing EPEL repository: ::
+First, you need to install MinGW and Nsis (to build the installer). Let's start installing the EPEL repository: ::
 
    $ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
    $ rpm -i epel-release-latest-7.noarch.rpm
@@ -71,14 +71,14 @@ Then we need to build ``makensis``, which will actually build the OSSEC Installe
 Build environment on Debian
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To compile OSSEC agent on a Debian system install these packages: ::
+To compile the OSSEC agent on a Debian system install these packages: ::
 
    $ apt-get install gcc-mingw-w64
    $ apt-get install nsis
    $ apt-get install make
 
-Compiling agent
----------------
+Compiling the agent
+-------------------
 
 Extract ossec-hids and run ``gen_win.sh`` and ``make.sh`` scripts: ::
 

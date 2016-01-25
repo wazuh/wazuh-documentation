@@ -5,12 +5,12 @@ Kibana
 
 This is your last step in the process of setting up your ELK cluster. In this section you will find the instructions to install Kibana, version 4.1.2, and to configure it to provide a centralized OSSEC alerts dashboard. In addition you will find dashboards for CIS security benchmark and PCI DSS compliance regulation. 
 
-On the other hand, the documentation includes extra steps to secure your Kibana interface with username and password, using Nginx web server.
+Furthermore, the documentation also includes extra steps to secure your Kibana interface with username and password, using Nginx web server.
 
 Kibana installation
 -------------------
 
-Assuming you have followed previous steps of :ref:`our guide <ossec_elk>`, and that you are using a single-host type of deployment. You can install Kibana following running these commands: ::
+Assuming you have followed the previous steps of :ref:`our guide <ossec_elk>`, and that you are using a single-host type of deployment. You can now install Kibana following running these commands: ::
 
  $ cd ~/ossec_tmp
  $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
@@ -46,7 +46,7 @@ On the other hand, if your system uses Systemd to manage the services (usually o
 Kibana configuration
 --------------------
 
-Open ``/opt/kibana/config/kibana.yml`` configuration file and set up the following variables: ::
+Open the ``/opt/kibana/config/kibana.yml`` configuration file and set up the following variables: ::
 
  # The host to bind the server to.
  host: "0.0.0.0"
@@ -54,7 +54,7 @@ Open ``/opt/kibana/config/kibana.yml`` configuration file and set up the followi
  # The Elasticsearch instance to use for all your queries.
  elasticsearch_url: "http://127.0.0.1:9200"
 
-.. note:: Please be sure that the IP address we use in ``elasticsearch_url`` variable needs to match the one we used for ``network.bind_host`` and ``network.host`` when we configured Elasticsearch component.
+.. note:: Please note that the IP address we use in ``elasticsearch_url`` variable needs to match the one we used for ``network.bind_host`` and ``network.host`` when we configured the Elasticsearch component.
 
 Now we can start Kibana: :: 
 
@@ -83,7 +83,7 @@ OSSEC Wazuh extensions for Kibana are:
 - index.js: Kibana AngularJS index that is used to hide non-useful alert fields, build a read-only mode, and add descriptions for PCI DSS requirements.
 - kibana-ossecwazuh-dashboards.json: Custom dashboards for OSSEC alerts, geoIP maps, file integrity, PCI DSS controls and CIS benchmark.
 
-To install the extensions we need to copy the necessary files to Kibana folder: ::
+To install the extensions we need to copy the necessary files to the Kibana folder: ::
 
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
  $ sudo mkdir /opt/kibana/src/public/components/compliance
@@ -95,14 +95,14 @@ Now you can import the custom dashboards. Access Kibana web interface on your br
 - Click on "Objects".
 - Then click the button "Import" and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
 
-Refresh Kibana page and you should be able to load your imported Dashboards.
+Refresh the Kibana page and you should be able to load your imported Dashboards.
 
 .. note:: Some Dashboard visualizations require time and specific alerts to work. Please don't worry if some visualizations do not display data immidiately after the import.
 
 Nginx secure proxy
 ------------------
 
-We are going to use Nginx web server to build a secure proxy to our Kibana web interface, we will establish a secure connection with SSL Certificates and HTTP Authentication.
+We are going to use the Nginx web server to build a secure proxy to our Kibana web interface, we will establish a secure connection with SSL Certificates and HTTP Authentication.
 
 To install Nginx on Debian systems, update your repositories and install Nginx and apache2-utils (for htpassword): ::
 
@@ -155,7 +155,7 @@ On CentOS we also need to edit ``/etc/nginx/nginx.conf``, including the followin
 SSL Certificate
 ^^^^^^^^^^^^^^^
 
-Now we can create the SSL certificate to encrypt our connection via HTTPS. This can be done following next steps: :: 
+Now we can create the SSL certificate to encrypt our connection via HTTPS. This can be done by following the next steps: :: 
 
  $ cd ~
  $ sudo openssl genrsa -des3 -out server.key 1024
@@ -181,11 +181,11 @@ To generate your .htpasswd file, run this command, replacing ``kibabaadmin`` wit
 
  $ sudo htpasswd -c /etc/nginx/conf.d/kibana.htpasswd kibanaadmin
 
-Now restart Nginx service: :: 
+Now restart the Nginx service: :: 
 
  $ sudo service nginx restart
 
-Try to access to Kibana web interface via HTTPS. It will ask for the username and password you just created. 
+Try to access the Kibana web interface via HTTPS. It will ask for the username and password you just created. 
 
 
 .. Note:: If you are running SELinux in enforcing mode, you might need to do some additional configuration in order to allow connections to 127.0.0.1:5601.

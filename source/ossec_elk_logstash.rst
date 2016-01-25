@@ -5,7 +5,7 @@ Logstash
 
 When integrating OSSEC HIDS with ELK Stack, we use Logstash to model OSSEC alerts output using an Elasticsearch template that will let the indexer know how to process each alert field.
 
-For single-host type of deployments we directly install the ``Logstash server`` in the same system where OSSEC manager and Elasticsearch are running. This type of installations do not require ``Logstash forwarder`` component. This one is only necessary when deploying the OSSEC manager in a different server from the one where ``Logstash server`` and ``Elasticsearch`` are running.
+For single-host type of deployments we directly install the ``Logstash server`` on the same system where the OSSEC manager and Elasticsearch are running. This type of installations do not require the ``Logstash forwarder`` component. This one is only necessary when deploying the OSSEC manager on a different server from the one where ``Logstash server`` and ``Elasticsearch`` are running.
 
 .. Note:: Remember Java 8 JRE is required by Logstash server. You can see instructions to install it at :ref:`our documentation <ossec_elk_java>`.
 
@@ -58,11 +58,11 @@ And finally we install the RPM package with yum: ::
 Logstash forwarder
 ^^^^^^^^^^^^^^^^^^
 
-Only for distributed architectures you need to install ``Logstash forwarder``, on the system where you run your OSSEC manager. Lets start importing the necessary GPGP key: ::
+Only for distributed architectures you need to install ``Logstash forwarder``, on the system where you run your OSSEC manager. Lets start importing the necessary GPG key: ::
 
  $ sudo rpm --import https://packages.elasticsearch.org/GPG-KEY-elasticsearch
 
-Then we create a yum repository at ``/etc/yum.repos.d/logstash-forwarder.repo`` with the following content: ::
+Then we create a yum repository in ``/etc/yum.repos.d/logstash-forwarder.repo`` with the following content: ::
 
  [logstash-forwarder]
  name=logstash-forwarder repository
@@ -79,7 +79,7 @@ And now we install the RPM package with yum: ::
 Logstash forwarder configuration
 --------------------------------
 
-.. note:: This step is only necessary when deploying the OSSEC manager and Elasticsearch in different systems. If you are using a single host deployment, with OSSEC manager and ELK Stack in the same box, you can skip this section.
+.. note:: This step is only necessary when deploying the OSSEC manager and Elasticsearch on different systems. If you are using a single host deployment, with OSSEC manager and ELK Stack on the same box, you can skip this section.
 
 Since we are going to use Logstash forwarder to ship logs from our hosts to our Logstash server, we need to create an SSL certificate and key pair. The certificate is used by the Logstash forwarder to verify the identity of Logstash server and encrypt communications. 
 
@@ -127,7 +127,7 @@ Then log into your Logstash forwarder system, via SSH, and move the certificate 
 Logstash forwarder settings
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Now on your Logstash forwarder system (same one where you run the OSSEC manager), open the configuration file ``/etc/logstash-forwarder.conf`` and, at the network section, modify ``servers`` array adding your Logstash server IP address (substitute ``logstash_server_ip`` by the real value). As well don't forget to uncomment the line ::
+Now on your Logstash forwarder system (same one where you run the OSSEC manager), open the configuration file ``/etc/logstash-forwarder.conf`` and, at the network section, modify the ``servers`` array adding your Logstash server IP address (substitute ``logstash_server_ip`` with the real value). As well don't forget to uncomment the line ::
 
  # A list of downstream servers listening for our messages.
  # logstash-forwarder will pick one at random and only switch if
@@ -165,11 +165,11 @@ Finally set Logstash forwarder to read OSSEC alerts file, modify list of files c
      "fields": { "type": "ossec-alerts" }
  }
 
-At this point, save and exit Logstash forwarder configuration file. Lets now give it permissions to read the alerts file, by adding ``logstash-forwarder`` user to the ``ossec`` group: ::
+At this point, save and exit the Logstash forwarder configuration file. Let's now give it permissions to read the alerts file, by adding ``logstash-forwarder`` user to the ``ossec`` group: ::
 
  $ sudo usermod -a -G ossec logstash-forwarder
 
-We are now done with the configuration, and just need to restart Logstash Forwarder to apply changes: ::
+We are now done with the configuration, and just need to restart the Logstash Forwarder to apply changes: ::
 
  $ sudo service logstash-forwarder restart
 
@@ -178,39 +178,39 @@ Logstash server configuration
 
 Logstash configuration is based on three different plugins: *input*, *filter* and *output*. You can find the plugins already preconfigured, to integrate OSSEC with ELK Stack, in our `public github repository <http://github.com/wazuh/ossec-wazuh/>`_.
 
-Depending on your architecture, single-host or distributed, we will configure Logstash server to read OSSEC alerts directly from OSSEC log file, or to read incoming data (sent by Logstash forwarder) from port 5000/udp (remember to open your firewall to accept this traffic). 
+Depending on your architecture, single-host or distributed, we will configure Logstash server to read OSSEC alerts directly from OSSEC log file, or to read the incoming data (sent by Logstash forwarder) from port 5000/udp (remember to open your firewall to accept this traffic). 
 
-For single-host deployments (everything running in the same box), just copy the configuration file to the right directory: ::
+For single-host deployments (everything running on the same box), just copy the configuration file to the right directory: ::
 
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
-On the other hand, for distributed architectures, you need to clone our github repository on your Logstash server machine, and then copy the configuration file: ::
+However, for distributed architectures, you need to clone our github repository on your Logstash server machine, and then copy the configuration file: ::
 
  $ cd ~
  $ mkdir ossec_tmp && cd ossec_tmp
  $ git clone https://github.com/wazuh/ossec-wazuh.git
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
-Now edit your ``/etc/logstash/conf.d/01-ossec.conf`` or ``/etc/logstash/conf.d/01-ossec-singlehost.conf`` file and set your Elasticsearch Server IP (substituting elasticsearch_server_ip by the real value): ::
+Now edit your ``/etc/logstash/conf.d/01-ossec.conf`` or ``/etc/logstash/conf.d/01-ossec-singlehost.conf`` file and set your Elasticsearch Server IP (substituting elasticsearch_server_ip with the real value): ::
 
  host => "elasticsearch_server_ip"
 
-.. note:: Remember that, for both single-host and distributed deployments, we recommend to run Logstash server and Elasticsearch in the same server. This means that *elasticsearch_server_ip* would match your *logstash_server_ip*.
+.. note:: Remember that, for both single-host and distributed deployments, we recommend to run Logstash server and Elasticsearch on the same server. This means that *elasticsearch_server_ip* would match your *logstash_server_ip*.
 
-Then copy Elasticsearch custom mapping from extensions folder to to Logstash folder: ::
+Then copy the Elasticsearch custom mapping from the extensions folder to the Logstash folder: ::
 
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json  /etc/logstash/
 
-And download and install GeoLiteCity from Maxmind website. This will add geolocation support for public IP addresses: ::
+And now download and install GeoLiteCity from the Maxmind website. This will add geolocation support for public IP addresses: ::
 
  $ sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
  $ sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
 
-In single-host deployments, you also need to grant *logstash* user access to OSSEC alerts file: ::
+In single-host deployments, you also need to grant the *logstash* user access to OSSEC alerts file: ::
 
  $ sudo usermod -a -G ossec logstash
   
-Finally restart Logstash server to apply changes: ::
+Finally restart the Logstash server to apply changes: ::
 
  $ sudo service logstash restart
 

@@ -8,9 +8,9 @@ Introduction
 
 OSSEC Wazuh RESTful API is a service to control OSSEC Wazuh manager using REST requests. It will allow you to execute OSSEC commands for agents remote management (add, restart, info, key export) or to extract rootcheck and syscheck information (restart, check last scan...). The goal is to provide an interface to manage your OSSEC deployment remotely (e.g. through a web browser), or to integrate OSSEC with external systems.
 
-OSSEC Wazuh API RESTful capatibilites:
+OSSEC Wazuh API RESTful capabilities:
 
-* Agents list
+* Agents overview
 * Agent status, rootcheck and syscheck info.
 * Restart agent
 * Add agent
@@ -22,7 +22,7 @@ OSSEC Wazuh API RESTful capatibilites:
 RESTful Requests
 ----------------
 
-There are some current API capabilities, we are currently working on extend them and improve the API versatility.
+There are some current API capabilities, we are currently working on extending them and constantly improving the API versatility.
 
 List your existing agents: :: 
 
@@ -66,9 +66,9 @@ As well, OSSEC API works under a NodeJS server (v0.10.x) with Express module (4.
 - HTTP-AUTH
 - Moment
 
-The service will operate on port 55000/tcp by default, and NodeJS service will be protected with HTTP Authentication and encrypted by HTTPS SSL Certificate.
+The service will operate on port 55000/tcp by default, and NodeJS service will be protected with HTTP Authentication and encrypted by a HTTPS SSL Certificate.
 
-Remember (as indicated when installing OSSEC Wazuh fork), that OSSE RESTful API requires you to mount your system ``/dev`` directory on your OSSEC location: :: 
+Remember (as indicated when installing OSSEC Wazuh fork), that OSSEC RESTful API requires you to mount your system ``/dev`` directory on your OSSEC location: :: 
 
  $ sudo mkdir /var/ossec/dev/
  $ sudo mount -o bind /dev /var/ossec/dev/
@@ -95,18 +95,18 @@ On Debian, update your repositories and install ``nodejs`` package: ::
 SSL Certificate
 ^^^^^^^^^^^^^^^
 
-At ``/var/ossec/api`` directory you can found some certificates we already created for you. But, if you want to create your own ones, you can do it following these steps (they require you to have openssl installed): ::
+At ``/var/ossec/api`` directory you can find some certificates we already created for you. But, if you want to create your own certificates, you can do it by following these steps (they require you to have openssl installed): ::
 
  $ cd /var/ossec/api	
  $ sudo openssl genrsa -des3 -out server.key 1024
  $ sudo openssl req -new -key server.key -out server.csr
 
-The password must be inserted everytime you run the server, if you don't want to enter the password everytime, you can remove it running these commands: ::
+The password must be entered everytime you run the server, if you don't want to enter the password everytime, you can remove it by running these commands: ::
 
  $ sudo cp server.key server.key.org
  $ sudo openssl rsa -in server.key.org -out server.key
 
-Now Generate your self-signed certificate: ::
+Now generate your self-signed certificate: ::
 
  $ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
@@ -118,7 +118,7 @@ And remove temporary files: ::
 HTTP Authentication
 ^^^^^^^^^^^^^^^^^^^
 
-By default you can access by entering user "foo" and password "bar". We recommend you to change this credentials. This can be done very easily running: ::
+By default you can access by entering user "foo" and password "bar". We recommend you to change these credentials. This can be done very easily by running: ::
 
  $ cd /var/ossec/api
  $ sudo htpasswd -c htpasswd username
@@ -135,7 +135,7 @@ Time to start the API, we are going to start it on background and redirect the s
 API sample use cases
 --------------------
 
-At this point you should be able to access the API through a web browser or through the command line (using curl). For example, go to your browser and navitage to your server IP addreess (via HTTPS, port 55000). Do not forget to enter your username and password created: ::
+At this point you should be able to access the API through a web browser or through the command line (using curl). For example, go to your browser and navigate to your server IP addreess (via HTTPS, port 55000). Do not forget to enter your username and password, you just created: ::
 
  https://server.ip:55000
 

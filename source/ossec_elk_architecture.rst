@@ -8,9 +8,9 @@ Components
 
 See below a brief description of the components and tools involved in the integration of our :ref:`OSSEC Wazuh fork <ossec_wazuh>` with ELK Stack, for long term data storage, alerts indexing, management and visualization.
 
-+ `OSSEC HIDS forked by Wazuh <http://github.com/wazuh/ossec-wazuh/>`_: Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally in the box running the OSSEC manager.
++ `OSSEC HIDS forked by Wazuh <http://github.com/wazuh/ossec-wazuh/>`_: Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally on the box running the OSSEC manager.
 
-- `Logstash <https://www.elastic.co/products/logstash/>`_: Is a data pipeline used process logs and other event data from a variety of systems. Logstash will read and process OSSEC JSON files, adding IP Geolocation information and modeling data before sending it to the Elasticsearch Cluster.
+- `Logstash <https://www.elastic.co/products/logstash/>`_: Is a data pipeline used for processing logs and other event data from a variety of systems. Logstash will read and process OSSEC JSON files, adding IP Geolocation information and modeling data before sending it to the Elasticsearch Cluster.
 
 + `Elasticsearch <https://www.elastic.co/products/elasticsearch/>`_: Is the search engine used to index and store our OSSEC alerts. It can be deployed as a cluster, with multiple nodes, for better performance and data replication. 
 
@@ -43,13 +43,13 @@ In an effort to cover all possible scenarios, this guide describes both options 
 Requirements
 ------------
 
-+ Operating System: This document includes a detailed description of the steps you need to follow to install the components both in Debian (latest stable is version 8) and CentOS (latest stable is version 7) Linux distribtuions. 
++ Operating System: This document includes a detailed description of the steps you need to follow to install the components both in Debian (latest stable is version 8) and CentOS (latest stable is version 7) Linux distributions. 
 
 - RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation and, according to their documentation, less than 8GB RAM is counterproductive. For single-host deployments, considering that Elasticsearch will share resources with OSSEC, Logstash and Kibana, we recommend to provision your server with at least 16GB RAM (more if possible). Less than 16GB RAM would only work for small OSSEC deployments.
 
-+ `OSSEC Wazuh fork <http://github.com/wazuh/ossec-wazuh/>`_: It is required for the integration with ELK Stack. You can install it following the instructions in :ref:`our documentation <ossec_wazuh>`
++ `OSSEC Wazuh fork <http://github.com/wazuh/ossec-wazuh/>`_: It is required for the integration with ELK Stack. You can install it by following the instructions in :ref:`our documentation <ossec_wazuh>`
 
-- :ref:`Java 8 JRE<ossec_elk_java>`: Java 8 is required both by Logstash server and by Elasticsearch. In this guide we have also included a description of how to install it.
+- :ref:`Java 8 JRE<ossec_elk_java>`: Java 8 is required both by Logstash server and by Elasticsearch. In this guide we have also included a description on how to install it.
 
 OSSEC alerts dashboard 
 ----------------------
@@ -63,7 +63,7 @@ Kibana offers interactive visualization capabilities, that we have used to put t
 PCI DSS compliance dashboard
 ----------------------------
 
-OSSEC HIDS can be used to become compliant with PCI DSS, specially because of the intrusion detection, file integrity monitoring and policy enforcement capabilities. This dashboard will make use of OSSEC rules mapping with the compliance controls, showing useful information to identify which systems are not fully compliant with the regulation.
+OSSEC HIDS can be used to become compliant with PCI DSS, especially due to the intrusion detection, file integrity monitoring and policy enforcement capabilities. This dashboard will make use of OSSEC rules mapping with the compliance controls, showing useful information to identify which systems are not fully compliant with the regulation.
 
 .. image:: images/ossec_dashboard_pci.png
    :align: center

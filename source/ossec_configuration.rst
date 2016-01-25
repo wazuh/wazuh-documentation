@@ -63,7 +63,7 @@ Now you have to extract the agent's key, which will be displayed on the screen. 
 
    ** Press ENTER to return to the main menu.
 
-Now copy the key (the whole line ending in ``==``), because you'll have to import it at the agent.
+Now copy the key (the whole line ending in ``==``), because you'll have to import it on the agent.
 
 Agent configuration on Linux
 ----------------------------
@@ -100,6 +100,6 @@ Now you can run ``manage_agents`` (remember we are on your agent system, not on 
 
    Confirm adding it?(y/n): y
 
-Now your agent have been properly added. You can restart it running: ::
+Now your agent has been properly added. You can restart it running: ::
 
    $ /var/ossec/bin/ossec-control restart

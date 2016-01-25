@@ -6,7 +6,7 @@ RPM packages
 Yum repository
 --------------
 
-To add Wazuh yum repository, depending on your Linux distribution, create a file named ``/etc/yum.repos.d/wazuh.repo`` with the following content:
+To add the Wazuh yum repository, depending on your Linux distribution, create a file named ``/etc/yum.repos.d/wazuh.repo`` with the following content:
 
 For Amazon Linux AMI: ::
 
@@ -59,11 +59,11 @@ On Fedora 23, to install the OSSEC manager with DNF packages manager, run the fo
 OSSEC agent installation
 ------------------------
 
-To install the OSSEC agent using Yum packages manger, run the following command: ::
+To install the OSSEC agent using the Yum packages manger, run the following command: ::
 
    $ yum install ossec-hids-agent
 
-On Fedora 23, to install the OSSEC agent with DNF packages manager, run the following command: ::
+On Fedora 23, to install the OSSEC agent with the DNF packages manager, run the following command: ::
 
    $ dnf install ossec-hids-agent
 
