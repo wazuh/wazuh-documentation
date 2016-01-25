@@ -8,7 +8,7 @@ Docker installation
 
 Docker requires a 64-bit installation regardless of your CentOS or Debian version. Also, your kernel must be 3.10 at minimum.
 
-To check your current kernel version, open a terminal and use uname -r to display your kernel version::
+To check your current kernel version, open a terminal and use ``uname -r to`` display your kernel version::
 
    $ uname -r
    3.10.0-229.el7.x86_64
@@ -18,7 +18,7 @@ To check your current kernel version, open a terminal and use uname -r to displa
 Docker installation on CentOS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To add Docker yum repository, create a file named ``/etc/yum.repos.d/docker.repo`` with the following content: ::
+To add the Docker yum repository, create a file named ``/etc/yum.repos.d/docker.repo`` with the following content: ::
 
    [dockerrepo]
    name=Docker Repository
@@ -71,13 +71,13 @@ To ensure Docker starts when you boot your system, do the following: ::
 OSSEC-ELK Container
 -------------------
 
-This Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <ossec_wazuh>`.
+These Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <ossec_wazuh>`.
 
-To install ossec-elk container run this command: ::
+To install the ossec-elk container run this command: ::
 
    $ docker run -d -p 1514:1514/udp -p 1515:1515 -p 514:514/udp -p 5601:5601 -v /somepath/ossec_mnt:/var/ossec/data --name ossec wazuh/ossec-elk
 
-The ``/var/ossec/data`` directory allows the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue. In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
+The ``/var/ossec/data`` directory allows the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue (all OSSEC files). In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
 
 Other available configuration parameters are: 
 
@@ -105,7 +105,7 @@ Access to Kibana4
 
 Now we need to create a Kibana index, Kibana will do it automatically but we need to set up some fields on the first Kibana initialization.
 
-- Access to kibana url at ``http://your_docker_server_ip:5601`` and set up a new index pattern.
+- Access the kibana url at ``http://your_docker_server_ip:5601`` and set up a new index pattern.
 - Kibana will ask you to "Configure an index pattern".
 - Check "Use event times to create index names".
 - Index pattern interval: Daily.
@@ -123,14 +123,14 @@ Now you can import the custom dashboards. Access Kibana web interface on your br
 - Click on "Objects".
 - Then click the button "Import" and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
 
-Refresh Kibana page and you should be able to load your imported Dashboards.
+Refresh the Kibana page and you should be able to load your imported Dashboards.
 
 .. note:: Some Dashboard visualizations require time and specific alerts to work. Please don't worry if some visualizations do not display data immidiately after the import.
 
 OSSEC HIDS  Container
 ---------------------
 
-This Docker container source files can be found in our `ossec-server Github repository <https://github.com/wazuh/docker-ossec>`_. To install it run this command: ::
+These Docker container source files can be found in our `ossec-server Github repository <https://github.com/wazuh/docker-ossec>`_. To install it run this command: ::
 
    $ docker run --name ossec-server -d -p 1514:1514/udp -p 1515:1515\
   -e SYSLOG_FORWADING_ENABLED=true -e SYSLOG_FORWARDING_SERVER_IP=X.X.X.X\
@@ -151,7 +151,7 @@ Other available configuration parameters are:
 - ALERTS_FROM_EMAIL: The email address the alerts should come from. Defaults to ``ossec@$HOSTNAME``.
 - ALERTS_TO_EMAIL: The destination email address for SMTP notifications, required for SMTP notifications. No default.
 
-.. note:: All SMTP and SYSLOG configuration variables are only applicable to the first time setup. Once the container's data volume has been initialized, all the configuration options for OSSEC can be changed.
+.. note:: All SMTP and SYSLOG configuration variables are only applicable for the first time setup. Once the container's data volume has been initialized, all the configuration options for OSSEC can be changed.
 
 Once the system starts up, you can execute the standard OSSEC commands using docker. For example, to list active agents: ::
 

@@ -20,22 +20,22 @@ The expected hash checksum, in both cases, is: ::
 
    917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd
 
-.. note:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connexion.
+.. note:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connection.
 
 Build environment
 -----------------
 
 Now we need to prepare our build environment, so we can compile the downloaded OSSEC source code. 
 
-On Debian based distributions install ``build-essential`` package: ::
+On Debian based distributions install the ``build-essential`` package: ::
 
    $ apt-get install build-essential
 
-On RPM based distributions install ``Development tools`` package: ::
+On RPM based distributions install the ``Development tools`` package: ::
 
    $ yum groupinstall "Development Tools"
 
-Or if you use DNF package manager (Fedora 23), run this command: ::
+Or if you use the DNF package manager (Fedora 23), run this command: ::
 
    $ dnf groupinstall "Development tools"
 
@@ -49,7 +49,7 @@ Extract the source code and run the installation script: ::
    $ tar xvfz ossec-hids-2.8.3.tar.gz
    $ bash ossec-hids-2.8.3/install.sh
 
-Now follow the script will pop up multiple questions, which may vary depending on your installation type:
+Now the following script will pop up multiple questions, which may vary depending on your installation type:
 
 Choose language: ::
 
@@ -93,7 +93,7 @@ Here you have a brief summary for all these options: ::
     - If you choose 'hybrid', you get the 'local' installation 
       plus the 'agent' installation. 
 
-Choose installation folder: ::
+Choose the installation folder: ::
 
    2- Setting up the installation environment.
 
@@ -108,19 +108,19 @@ Enable or disable mail notifications: ::
        - We found your SMTP server as: mail.example.com.
        - Do you want to use it? (y/n) [y]:
 
-Enable or didsable file integrity monitoring daemon: ::
+Enable or disable the file integrity monitoring daemon: ::
  
     3.2- Do you want to run the integrity check daemon? (y/n) [y]:
 
        - Running syscheck (integrity check daemon).
 
-Enable or disable rootkits and malware detection daemon: ::
+Enable or disable the rootkits and malware detection daemon: ::
 
     3.3- Do you want to run the rootkit detection engine? (y/n) [y]: 
 
        - Running rootcheck (rootkit detection).
 
-Enable or disable active response module: ::
+Enable or disable the active response module: ::
     
     3.4- Active response allows you to execute a specific 
           command based on the events received. For example,

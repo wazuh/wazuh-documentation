@@ -3,12 +3,12 @@
 Java 8 JRE
 ==========
 
-Java 8 JRE is required by Logstash server and by Elasticsearch engine to be able to run. That is why we need to install it both for single-host deployments or distributed ones (only in those systems running Logstash server or Elasticsearch).
+Java 8 JRE is required by Logstash server and by the Elasticsearch engine to be able to run. That is why we need to install it both for single-host deployments or distributed ones (only in those systems running Logstash server or Elasticsearch).
 
 Java 8 JRE for Debian
 ---------------------
 
-To install Java 8 JRE on Debian based distributions we just need to add ``webupd8team`` JAVA repository to our sources and then proceed to install Java 8 via apt-get install: ::
+To install Java 8 JRE on Debian based distributions we just need to add the ``webupd8team`` JAVA repository to our sources and then proceed to install Java 8 via apt-get install: ::
 
  $ sudo add-apt-repository ppa:webupd8team/java
  $ sudo apt-get update
@@ -25,7 +25,7 @@ To install Java 8 JRE on CentOS, download and run the ``Oracle Java 8 JDK RPM``,
  $ rm ~/jdk-8u60-linux-x64.rpm
  $ export JAVA_HOME=/usr/java/jdk1.8.0_60/jre
 
-At last, to set JAVA_HOME environment variable for all users, we need to add this line at the end of our ``/etc/profile`` file: ::
+At last, to set the JAVA_HOME environment variable for all users, we need to add this line at the end of our ``/etc/profile`` file: ::
 
  export JAVA_HOME=/usr/java/jdk1.8.0_60/jre
 

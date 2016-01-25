@@ -55,7 +55,7 @@ For Wily::
 Update the repository
 ---------------------
 
-Type the next command for update the repository::
+Type the next command to update the repository::
 
    $ apt-get update
 
@@ -63,7 +63,7 @@ Type the next command for update the repository::
 OSSEC manager installation
 --------------------------
 
-To install OSSEC manager debian package, from our repository, run this command: ::
+To install the OSSEC manager debian package, from our repository, run this command: ::
 
    $ apt-get install ossec-hids
 
@@ -71,6 +71,6 @@ To install OSSEC manager debian package, from our repository, run this command: 
 OSSEC agent installation
 ------------------------
 
-To install OSSEC agent debian package, from our repository, run this command: ::
+To install the OSSEC agent debian package, from our repository, run this command: ::
 
    $ apt-get install ossec-hids-agent
