@@ -115,16 +115,15 @@ Two main functionalities are included in the script:
 
 The installation script is located in our repository at ``wazuh/ossec-rules/ossec_ruleset.py``. To download and run it, go to your OSSEC manager and follow next steps.
 
-Cloning the repository: ::
+Getting the script: ::
 
-   $ cd /var/ossec
-   $ git clone https://github.com/wazuh/ossec-rules.git
-   $ cd ossec-rules
+   $ sudo mkdir /var/ossec/updater/ruleset && cd /var/ossec/updater/ruleset
+   $ sudo wget https://raw.githubusercontent.com/wazuh/ossec-rules/master/ossec_ruleset.py
 
 Running the script: ::
 
    $ sudo chmod +x ossec_ruleset.py
-   $ sudo ./ossec_ruleset.py
+   $ sudo ./ossec_ruleset.py --help
 
 At this point you can select what you want to install/update: rules, rootchecks or both: ::
 
@@ -167,7 +166,7 @@ Run ``ossec_ruleset.py`` weekly and keep your OSSEC Wazuh Ruleset installation u
 
 Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
  
-  @weekly root cd /var/ossec/ossec-rules/ && ./ossec_ruleset.py -a -u -s
+  @weekly root cd /var/ossec/updater/ruleset && ./ossec_ruleset.py -a -u -s
 
 Wazuh rules
 -----------
