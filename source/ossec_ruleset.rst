@@ -117,7 +117,7 @@ The installation script is located in our repository at ``wazuh/ossec-rules/osse
 
 Getting the script: ::
 
-   $ sudo mkdir /var/ossec/updater/ruleset && cd /var/ossec/updater/ruleset
+   $ sudo mkdir -p /var/ossec/updater/ruleset && cd /var/ossec/updater/ruleset
    $ sudo wget https://raw.githubusercontent.com/wazuh/ossec-rules/master/ossec_ruleset.py
 
 Running the script: ::
