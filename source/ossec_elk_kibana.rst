@@ -3,7 +3,7 @@
 Kibana
 ======
 
-This is your last step in the process of setting up your ELK cluster. In this section you will find the instructions to install Kibana, version 4.1.2, and to configure it to provide a centralized OSSEC alerts dashboard. In addition you will find dashboards for CIS security benchmark and PCI DSS compliance regulation. 
+This is your last step in the process of setting up your ELK cluster. In this section you will find the instructions to install Kibana, version 4.3, and to configure it to provide a centralized OSSEC alerts dashboard. In addition you will find dashboards for CIS security benchmark and PCI DSS compliance regulation. 
 
 Furthermore, the documentation also includes extra steps to secure your Kibana interface with username and password, using Nginx web server.
 
@@ -13,9 +13,11 @@ Kibana installation
 Assuming you have followed the previous steps of :ref:`our guide <ossec_elk>`, and that you are using a single-host type of deployment. You can now install Kibana following running these commands: ::
 
  $ cd ~/ossec_tmp
- $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.1.2-linux-x64.tar.gz 
+ $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz
  $ sudo tar xvf kibana-*.tar.gz && sudo mkdir -p /opt/kibana && sudo cp -R kibana-4*/* /opt/kibana/
 
+If you need the 32 bit version use the download link: https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x86.tar.gz
+ 
 Kibana service for SystemVinit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -46,13 +48,17 @@ On the other hand, if your system uses Systemd to manage the services (usually o
 Kibana configuration
 --------------------
 
-Open the ``/opt/kibana/config/kibana.yml`` configuration file and set up the following variables: ::
+Kibana is bound by default to ``0.0.0.0`` address (listening on all addresses), it uses by default ``5601`` port and try to connect to Elasticsearch using the URL ``http://localhost:9200``.
+If you need to change any of this settings, open the ``/opt/kibana/config/kibana.yml`` configuration file and set up the following variables: ::
+
+ # Kibana is served by a back end server. This controls which port to use.
+ server.port: 80
 
  # The host to bind the server to.
- host: "0.0.0.0"
-
+ server.host: "0.0.0.0"
+    
  # The Elasticsearch instance to use for all your queries.
- elasticsearch_url: "http://127.0.0.1:9200"
+ elasticsearch.url: "http://127.0.0.1:9200"
 
 .. note:: Please note that the IP address we use in ``elasticsearch_url`` variable needs to match the one we used for ``network.bind_host`` and ``network.host`` when we configured the Elasticsearch component.
 
@@ -66,34 +72,25 @@ OSSEC alerts index
 To create OSSEC alerts index, access your Kibana interface at http://your_server_ip:5601, and set it up following these steps: ::
 
 - Kibana will ask you to "Configure an index pattern".
-- Check "Use event times to create index names".
-- Index pattern interval: Daily.
-- Index name or pattern: [ossec-]YYYY.MM.DD
+- Check "Index contains time-based events".
+- Index name or pattern: ossec-*
 - On "Time-field name" list select @timestamp option.
 - Click on "Create" button.
+- You will see the new index field list (using the template we have created in Elasticsearch section) with about 70 OSSEC fields.
 - Go to "Discover" tap on top bar buttons.
 
 .. note:: Kibana will search Elasticsearch index name pattern ``ossec-yyyy.mm.dd``. You need to have at least an OSSEC alert before you set up the index pattern on Kibana. Otherwise it won't find any index on Elasticsearch. If you want to generate one, for example you could try a ``sudo -s`` and miss the password on purpose several times.
 
-OSSEC extensions
+OSSEC Dashboards
 ^^^^^^^^^^^^^^^^
 
-OSSEC Wazuh extensions for Kibana are: 
+Custom dashboards for OSSEC alerts, GeoIP maps, file integrity, alert evolution, PCI DSS controls and CIS benchmark.
 
-- index.js: Kibana AngularJS index that is used to hide non-useful alert fields, build a read-only mode, and add descriptions for PCI DSS requirements.
-- kibana-ossecwazuh-dashboards.json: Custom dashboards for OSSEC alerts, geoIP maps, file integrity, PCI DSS controls and CIS benchmark.
-
-To install the extensions we need to copy the necessary files to the Kibana folder: ::
-
- $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/index.js /opt/kibana/src/public
- $ sudo mkdir /opt/kibana/src/public/components/compliance
- $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/compliance.json /opt/kibana/src/public/components/compliance/
-
-Now you can import the custom dashboards. Access Kibana web interface on your browser and navigate to "Objects": ::
+Import the custom dashboards. Access Kibana web interface on your browser and navigate to "Objects": ::
 
 - Click at top bar on "Settings".
 - Click on "Objects".
-- Then click the button "Import" and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
+- Then click the button "Import" and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json (You can download the Dashboards directly from the repository `here<https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/kibana/kibana-ossecwazuh-dashboards.json>`)
 
 Refresh the Kibana page and you should be able to load your imported Dashboards.
 
@@ -133,7 +130,7 @@ Copy and paste the following configuration: ::
 
  server {
         listen                *:443;
-         listen            [::]:443;
+        listen            [::]:443;
         ssl on;
         ssl_certificate /etc/pki/tls/certs/kibana-access.crt;
         ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
