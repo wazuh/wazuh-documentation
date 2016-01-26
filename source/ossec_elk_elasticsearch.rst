@@ -19,7 +19,7 @@ To install the Elasticsearch version 2.x Debian package, using official reposito
  $ sudo apt-get update && sudo apt-get install elasticsearch
  $ sudo update-rc.d elasticsearch defaults 95 10
 
-If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html>`
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html>`_.
 
 Elasticsearch installation on CentOS
 ------------------------------------
@@ -52,7 +52,7 @@ Finally configure Elasticsearch to automatically start during bootup:
    $ sudo /bin/systemctl daemon-reload
    $ sudo /bin/systemctl enable elasticsearch.service
 
-If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html>`
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html>`_.
    
 Configuration and tuning
 ------------------------
@@ -67,6 +67,7 @@ Elasticsearch server by default is bound to loopback address *127.0.0.1* , remem
  network.host: elasticsearch_server_ip or 0.0.0.0 if single-node architecture.
 
 Shards default number is 5 and Replicas default number is 1, if you are deploying a single-node Elastic cluster, in order to have a Green status you have to set to 1/0 shards and replicas ::
+
  index.number_of_shards: 1
  index.number_of_replicas: 0
 

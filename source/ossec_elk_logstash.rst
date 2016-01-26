@@ -26,7 +26,7 @@ To install ``Logstash server`` version 2.1 on Debian based distributions run the
  $ echo "deb http://packages.elasticsearch.org/logstash/2.1/debian stable main" | sudo tee -a /etc/apt/sources.list
  $ sudo apt-get update && sudo apt-get install logstash
 
-If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_.
  
 Logstash forwarder
 ^^^^^^^^^^^^^^^^^^
@@ -56,6 +56,8 @@ Then we need to create ``/etc/yum.repos.d/logstash.repo`` file with the followin
 And finally we install the RPM package with yum: ::
 
  $ sudo yum install logstash
+ 
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_.
 
 Logstash forwarder
 ^^^^^^^^^^^^^^^^^^
@@ -106,7 +108,7 @@ Now generate the SSL certificate and private key, and copy it to your Logstash f
 
 Then log into your Logstash forwarder system, via SSH, and move the certificate to the right directory: ::
    
- $ sudo cp /tmp/logstash-forwarder.crt /opt/logstash-forwarder
+ $ sudo cp /tmp/logstash-forwarder.crt /opt/logstash-forwarder/
 
 SSL Certificate on CentOS
 """""""""""""""""""""""""

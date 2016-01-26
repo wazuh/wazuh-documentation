@@ -69,14 +69,12 @@ Now we can start Kibana: ::
 OSSEC alerts index
 ^^^^^^^^^^^^^^^^^^
 
-To create OSSEC alerts index, access your Kibana interface at http://your_server_ip:5601, and set it up following these steps: ::
+To create OSSEC alerts index, access your Kibana interface at http://your_server_ip:5601, Kibana will ask you to "Configure an index pattern", set it up following these steps: ::
 
-- Kibana will ask you to "Configure an index pattern".
 - Check "Index contains time-based events".
-- Index name or pattern: ossec-*
+- Insert Index name or pattern: ossec-*
 - On "Time-field name" list select @timestamp option.
 - Click on "Create" button.
-- You will see the new index field list (using the template we have created in Elasticsearch section) with about 70 OSSEC fields.
 - Go to "Discover" tap on top bar buttons.
 
 .. note:: Kibana will search Elasticsearch index name pattern ``ossec-yyyy.mm.dd``. You need to have at least an OSSEC alert before you set up the index pattern on Kibana. Otherwise it won't find any index on Elasticsearch. If you want to generate one, for example you could try a ``sudo -s`` and miss the password on purpose several times.
@@ -90,7 +88,9 @@ Import the custom dashboards. Access Kibana web interface on your browser and na
 
 - Click at top bar on "Settings".
 - Click on "Objects".
-- Then click the button "Import" and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json (You can download the Dashboards directly from the repository `here<https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/kibana/kibana-ossecwazuh-dashboards.json>`)
+- Then click the button "Import"
+- Select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
+- Optional: You can download the Dashboards JSON File directly from the repository `here<https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/kibana/kibana-ossecwazuh-dashboards.json>`_.
 
 Refresh the Kibana page and you should be able to load your imported Dashboards.
 
