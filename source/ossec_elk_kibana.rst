@@ -60,7 +60,7 @@ If you need to change any of this settings, open the ``/opt/kibana/config/kibana
  # The Elasticsearch instance to use for all your queries.
  elasticsearch.url: "http://127.0.0.1:9200"
 
-.. note:: Please note that the IP address we use in ``elasticsearch_url`` variable needs to match the one we used for ``network.bind_host`` and ``network.host`` when we configured the Elasticsearch component.
+.. note:: Please note that the IP address we use in ``elasticsearch.url`` variable needs to match the one we used for ``network.bind_host`` and ``network.host`` when we configured the Elasticsearch component.
 
 Now we can start Kibana: :: 
 
