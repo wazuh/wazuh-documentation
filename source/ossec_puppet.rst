@@ -303,6 +303,7 @@ class ossec::server
  - ``$ossec_email_alert_level`` (default: 7): It correspond to a threshold (from 0 to 156 to sort alert send by email. Some alerts circumvent this threshold (when they have ``alert_email`` option).
  - ``$ossec_emailnotification`` (default: yes): Whether to send email notifications.
  - ``$manage_repo`` (default: ``true``): Install Ossec through Wazuh repositories.
+ - ``manage_epel_repo`` (default: ``true``): Install epel repo and inotify-tools
  - ``$manage_paths`` (default: ``[ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'yes', 'realtime' => 'yes'} ]``): Follow the instructions bellow.
 
 function ossec::email_alert
@@ -338,6 +339,7 @@ OSSEC agent class
  - ``$ossec_emailnotification`` (default: ``yes``): Whether to send email notifications or not.
  - ``$selinux`` (default: ``false``): Whether to install a SELinux policy to allow rotation of OSSEC logs.
  - ``$manage_repo`` (default: ``true``): Install Ossec through Wazuh repositories.
+ - ``manage_epel_repo`` (default: ``true``): Install epel repo and inotify-tools
  - ``$ossec_scanpaths`` (default: ``[]``): Agents can be Linux or Windows for this reason don't have ``ossec_scanpaths`` by default.
 
 ossec_scanpaths configuration
