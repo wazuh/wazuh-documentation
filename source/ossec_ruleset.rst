@@ -117,14 +117,16 @@ The installation script is located in our repository at ``wazuh/ossec-rules/osse
 
 Getting the script: ::
 
-   $ sudo mkdir -p /var/ossec/updater/ruleset
+   $ sudo mkdir -p /var/ossec/updater/ruleset \
+         /var/ossec/updater/ruleset/rules-decoders \
+         /var/ossec/updater/ruleset/rootcheck
    $ sudo wget https://raw.githubusercontent.com/wazuh/ossec-rules/master/ossec_ruleset.py \
-     -O /var/ossec/updater/ruleset/ossec_ruleset.py
+         -O /var/ossec/updater/ruleset/ossec_ruleset.py
 
 Running the script: ::
 
-   $ sudo chmod +x ossec_ruleset.py
-   $ sudo ./ossec_ruleset.py --help
+   $ sudo chmod +x /var/ossec/updater/ruleset/ossec_ruleset.py
+   $ sudo /var/ossec/updater/ruleset/ossec_ruleset.py --help
 
 At this point you can select what you want to install/update: rules, rootchecks or both: ::
 
