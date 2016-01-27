@@ -120,6 +120,15 @@ HTTP Authentication
 
 By default you can access by entering user "foo" and password "bar". We recommend you to change these credentials. This can be done very easily by running: ::
 
+At first please make sure that you have ``htpasswd`` tool installed.
+
+On Debian, update your repositories and install ``apache2-utils`` package: ::
+
+ $ sudo apt-get update
+ $ sudo apt-get install apache2-utils
+
+Then 
+
  $ cd /var/ossec/api
  $ sudo htpasswd -c htpasswd username
 
