@@ -117,7 +117,7 @@ The installation script is located in our repository at ``wazuh/ossec-rules/osse
 
 Getting the script: ::
 
-   $ sudo mkdir -p /var/ossec/updater/ruleset && cd /var/ossec/updater/ruleset
+   $ sudo mkdir -p /var/ossec/update/ruleset && cd /var/ossec/update/ruleset
    $ sudo wget https://raw.githubusercontent.com/wazuh/ossec-rules/master/ossec_ruleset.py
 
 Running the script: ::
@@ -166,7 +166,7 @@ Run ``ossec_ruleset.py`` weekly and keep your OSSEC Wazuh Ruleset installation u
 
 Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
  
-  @weekly root cd /var/ossec/updater/ruleset && ./ossec_ruleset.py -a -u -s
+  @weekly root cd /var/ossec/update/ruleset && ./ossec_ruleset.py -a -u -s
 
 Wazuh rules
 -----------
