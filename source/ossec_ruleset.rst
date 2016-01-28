@@ -125,7 +125,7 @@ Getting the script: ::
 Running the script: ::
 
    # sudo chmod +x /var/ossec/update/ruleset/ossec_ruleset.py
-   $ sudo ./var/ossec/update/ruleset/ossec_ruleset.py --help
+   $ sudo /var/ossec/update/ruleset/ossec_ruleset.py --help
 
 At this point you can select what you want to install/update: rules, rootchecks or both: ::
 
