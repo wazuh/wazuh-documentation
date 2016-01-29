@@ -45,6 +45,15 @@ On the other hand, if your system uses Systemd to manage the services (usually o
  [Install]
  WantedBy=multi-user.target
 
+Kibana on low memory systems
+------------------------------
+New Kibana 4.3 based on Node (V8) uses a lazy and greedy garbage collector. With its default limit of about 1.5 GB. In low ram memory systems (below 2GB) Kibana could use too much memory which is dangerous. Kibana developers included one fix (`link <https://github.com/elastic/kibana/commit/626bf264595ef4f28c5609524fb29bf717c9b1c4l>`_.) but some weeks ago they decided remove this patch(`link <https://github.com/elastic/kibana/commit/d4ac69af2a58d2ee538b9e9e1af1295282694754>`_.).
+If your host total RAM is below 2GB, from Wazuh we recommend to limit NodeJS max ram space, to do it open the file ``/opt/kibana/bin/kibana`` and add the following line ::
+
+NODE_OPTIONS="${NODE_OPTIONS:=--max-old-space-size=250}"
+
+Change 250 value acording to your needs.
+
 Kibana configuration
 --------------------
 
@@ -75,6 +84,7 @@ To create OSSEC alerts index, access your Kibana interface at http://your_server
 - Insert Index name or pattern: ossec-*
 - On "Time-field name" list select @timestamp option.
 - Click on "Create" button.
+- You should see the fields list with about ~72 fields.
 - Go to "Discover" tap on top bar buttons.
 
 .. note:: Kibana will search Elasticsearch index name pattern ``ossec-yyyy.mm.dd``. You need to have at least an OSSEC alert before you set up the index pattern on Kibana. Otherwise it won't find any index on Elasticsearch. If you want to generate one, for example you could try a ``sudo -s`` and miss the password on purpose several times.

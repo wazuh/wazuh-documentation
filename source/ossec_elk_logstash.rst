@@ -108,7 +108,7 @@ Now generate the SSL certificate and private key, and copy it to your Logstash f
 
 Then log into your Logstash forwarder system, via SSH, and move the certificate to the right directory: ::
    
- $ sudo cp /tmp/logstash-forwarder.crt /opt/logstash-forwarder/
+ $ sudo mv /tmp/logstash-forwarder.crt /opt/logstash-forwarder/
 
 SSL Certificate on CentOS
 """""""""""""""""""""""""
@@ -126,7 +126,7 @@ Now generate the SSL certificate and private key, and copy it to your Logstash f
 
 Then log into your Logstash forwarder system, via SSH, and move the certificate to the right directory: ::
  
- $ sudo cp /tmp/logstash-forwarder.crt /opt/logstash-forwarder
+ $ sudo mv /tmp/logstash-forwarder.crt /opt/logstash-forwarder
 
 Logstash forwarder settings
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -203,9 +203,7 @@ In single-host deployments, you also need to grant the *logstash* user access to
 
  $ sudo usermod -a -G ossec logstash
   
-Finally restart the Logstash server to apply changes: ::
-
- $ sudo service logstash restart
+We are not going to start Logstash service yet, we need to wait until we import Wazuh template into Elasticsearch (see next guide)
 
 What's next
 -----------

@@ -166,6 +166,12 @@ If everything was okay, the API response should be: ::
 To make sure it has actually been added successfully, you can check the template using the Elasticsearch API: ::
 
  $ curl -XGET http://localhost:9200/_template/ossec?pretty
+ 
+Start Logstash-Server
+---------------------
+Now that we have insert our custom Elasticsearch template containing about 72 OSSEC fields, we can start Logstash server ::
+
+ $ sudo service logstash start
 
 What's next
 -----------
