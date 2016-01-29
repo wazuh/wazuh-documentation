@@ -6,9 +6,15 @@ OSSEC PCI DSS
 Introduction
 ------------
 
-The **Payment Card Industry Data Security Standard (PCI DSS)** is a proprietary information security standard for organizations that handle branded credit cards from the major card schemes including *Visa*, *MasterCard*, *American Express*, *Discover*, and *JCB*. The standard was created to increase controls around cardholder data to reduce credit card fraud. Validation of compliance is performed annually, either by an external *Qualified Security Assessor (QSA)* that creates a *Report on Compliance (ROC)* for organizations handling large volumes of transactions, or by *Self-Assessment Questionnaire (SAQ)* for companies handling smaller volumes.
+The **Payment Card Industry Data Security Standard (PCI DSS)** is a proprietary information security standard for organizations that handle branded credit cards from the major card schemes including *Visa*, *MasterCard*, *American Express*, *Discover*, and *JCB*. The standard was created to increase controls around cardholder data to reduce credit card fraud.
 
-The following sections describe how each OSSEC component (analysis logs, rootcheck, syscheck, active response) and the combination OSSEC + ELK can help to meet **PCI DSS 3.1** requirements. In this `document <http://wazuh.com/resources/OSSEC_PCI_DSS_Guide.pdf>`_ each requeriment is analyzed to indicate how OSSEC could help to meet it.
+To understand how OSSEC helps to meet the PCI, it has been analyzed:
+
++ Each control, explaining how OSSEC helps to meet it. You can find it in this `guide <http://wazuh.com/resources/OSSEC_PCI_DSS_Guide.pdf>`_
+
++ Each OSSEC component (analysis logs, rootcheck, syscheck, active response) and the combination OSSEC + ELK.
+
+The following sections describe how each OSSEC component can help to meet **PCI DSS 3.1** requirements.
 
 Analysis Logs
 --------------
@@ -64,6 +70,34 @@ Examples of rules tagged with PCI requirements 10.2.4 and 10.2.5:
     </rule>
     
 
+**Use cases**
+
+We try to open the file *cardholder_data.txt*. We do not have permission, so we run *sudo* to elevate privileges.
+
+.. image:: images/pci/analisys_logs_1.png
+    :align: center
+    :width: 100%
+
+Every action with *sudo* generates an alert in OSSEC. You can see the alerts in both files *alerts.log* and *alerts.json*. With tagging the rules, we can see the PCI DSS requirements related with the alert.
+
+.. image:: images/pci/analisys_logs_2.png
+    :align: center
+    :width: 100%
+
+Kibana displays information in an organized way, allowing filtering by fields. We have developed some specific panels to display the PCI DSS alerts.
+
+.. image:: images/pci/analisys_logs_3.png
+    :align: center
+    :width: 100%
+
+.. image:: images/pci/analisys_logs_4.png
+    :align: center
+    :width: 100%
+
+.. image:: images/pci/analisys_logs_5.png
+    :align: center
+    :width: 100%
+
 Rootcheck
 ----------
 OSSEC rootcheck process performs:
@@ -75,7 +109,7 @@ OSSEC rootcheck process performs:
 Both features can help to meet PCI DSS requirements.
 
 Policy Monitoring
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^
 There are requirements to verify that system are meeting some hardening standards. An example would be:
 
 *2.2 Develop configuration standards for all system components. Assure that these standards address all known security vulnerabilities and are consistent with industry-accepted system hardening standards. Sources of industry-accepted system hardening standards may include, but are not limited to: Center for Internet Security (CIS), International Organization for Standardization (ISO), SysAdmin Audit Network Security (SANS), Institute National Institute of Standards Technology (NIST).*
@@ -105,6 +139,30 @@ Develop a rootcheck to check the security parameters of a software like SSH is e
     f:/etc/ssh/sshd_config -> !r:^# && r:PermitRootLogin\.+yes;
 
 If you are using *OSSEC Wazuh fork*, you can tag each rootcheck using this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. All rootchecks already have the tag with its corresponding PCI requirement.
+
+**Use cases**
+
+In order to check the security parameters of SSH (and meet the requirement 2.2.4), we have developed the rootchecks *system_audit_ssh*. When OSSEC run the rootcheck scan, it is able to detect some errors in the SSH configuration.
+
+.. image:: images/pci/policy_monitoring_1.png
+    :align: center
+    :width: 100%
+
+Kibana shows the full information about the alert.
+
+.. image:: images/pci/policy_monitoring_2.png
+    :align: center
+    :width: 100%
+
+.. image:: images/pci/policy_monitoring_3.png
+    :align: center
+    :width: 100%
+
+.. image:: images/pci/policy_monitoring_4.png
+    :align: center
+    :width: 100%
+
+
 
 Rootkit Detection
 ^^^^^^^^^^^^^^^^^^
@@ -144,6 +202,26 @@ Rootcheck helps to meet the requeriment 11.4 related with intrusions, trojans an
 Keep all intrusion-detection and prevention engines, baselines, and signatures up to date.
 Intrusion detection and/or intrusion prevention techniques (such as IDS/IPS) compare the traffic coming into the network with known “signatures” and/or behaviors of thousands of compromise types (hacker tools, Trojans, and other malware), and send alerts and/or stop the attempt as it happens.*
 
+**Use cases**
+
+OSSEC performs several tests to detect rootkits, one of them is to check the hidden files in /dev. The */dev* directory should only contain device-specific files such as the primary IDE hard disk (/dev/hda), the kernel random number generators (/dev/random and /dev/urandom), etc. Any additional files, outside of the expected device-specific files, should be inspected because many rootkits use /dev as a storage partition to hide files. In the following example we have created the file .hid which is detected by OSSEC and generates the corresponding alert.
+
+::
+
+    [root@manager /]# ls -a /dev | grep '^\.'
+    .
+    ..
+    .hid
+    [root@manager /]# tail -n 25 /var/ossec/logs/alerts/alerts.log
+    Rule: 502 (level 3) -> 'Ossec server started.'
+    ossec: Ossec started.
+
+    ** Alert 1454086362.26393: mail  - ossec,rootcheck
+    2016 Jan 29 16:52:42 manager->rootcheck
+    Rule: 510 (level 7) -> 'Host-based anomaly detection event (rootcheck).'
+    File '/dev/.hid' present on /dev. Possible hidden file.
+
+    
 
 File Integrity Monitoring
 --------------------------
@@ -152,6 +230,41 @@ File integrity Monitoring (syscheck) is performed by comparing the cryptographic
 `Syscheck <http://ossec-docs.readthedocs.org/en/latest/manual/syscheck/index.html>`_  can be used to meet the requirement 11.5:
 
 *11.5 Deploy a change-detection mechanism (for example, file-integrity monitoring tools) to alert personnel to unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and configure the software to perform critical file comparisons at least weekly.*
+
+**Use cases**
+
+In this example, we have configured OSSEC to detect changes in the file */home/credit_cards*.
+
+::
+
+    <syscheck>
+        <directories check_all="yes">/home/credit_cards</directories>
+    </syscheck>
+
+So, when we modify the file, OSSEC generates an alert.
+
+.. image:: images/pci/fim_1.png
+    :align: center
+    :width: 100%
+
+As you can see, syscheck alerts are tagged with the requirement 11.5.
+
+.. image:: images/pci/fim_2.png
+    :align: center
+    :width: 100%
+
+.. image:: images/pci/fim_3.png
+    :align: center
+    :width: 100%
+
+.. image:: images/pci/fim_4.png
+    :align: center
+    :width: 100%
+
+.. image:: images/pci/fim_5.png
+    :align: center
+    :width: 100%
+
 
 Active response
 ----------------
