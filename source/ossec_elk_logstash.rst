@@ -160,6 +160,7 @@ Finally set Logstash forwarder to read OSSEC alerts file, modify list of files c
       ],
      "fields": { "type": "ossec-alerts" }
  }
+]
 
 At this point, save and exit the Logstash forwarder configuration file. Let's now give it permissions to read the alerts file, by adding ``logstash-forwarder`` user to the ``ossec`` group: ::
 
