@@ -50,7 +50,7 @@ Kibana on low memory systems
 New Kibana 4.3 based on Node (V8) uses a lazy and greedy garbage collector. With its default limit of about 1.5 GB. In low ram memory systems (below 2GB) Kibana could use too much memory which is dangerous. Kibana developers included one fix (`link <https://github.com/elastic/kibana/commit/626bf264595ef4f28c5609524fb29bf717c9b1c4l>`_.) but some weeks ago they decided remove this patch(`link <https://github.com/elastic/kibana/commit/d4ac69af2a58d2ee538b9e9e1af1295282694754>`_.).
 If your host total RAM is below 2GB, from Wazuh we recommend to limit NodeJS max ram space, to do it open the file ``/opt/kibana/bin/kibana`` and add the following line ::
 
-NODE_OPTIONS="${NODE_OPTIONS:=--max-old-space-size=250}"
+  NODE_OPTIONS="${NODE_OPTIONS:=--max-old-space-size=250}"
 
 Change 250 value acording to your needs.
 

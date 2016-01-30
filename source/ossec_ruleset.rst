@@ -310,7 +310,7 @@ To configure the user credentials type: ::
 
   $ sudo aws configure
 
-This command is interactive, prompting you to enter additional information. Enter each of your access keys in turns and press ``Enter``. Region name is not necessary, press Enter, and press Enter once again to skip the output format setting. The latest Enter command is shown as replaceable text because there is no user input for that line. ::
+This command is interactive, prompting you to enter additional information. Enter each of your access keys in turns and press ``Enter``. Region name is not necessary, press Enter, and press Enter once again to skip the output format setting. The latest Enter command is shown as replaceable text because there is no user input for that line.
 
 The result should be something like this: ::
 

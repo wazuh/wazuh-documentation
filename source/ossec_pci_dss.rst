@@ -109,7 +109,7 @@ OSSEC rootcheck process performs:
 Both features can help to meet PCI DSS requirements.
 
 Policy Monitoring
-^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 There are requirements to verify that system are meeting some hardening standards. An example would be:
 
 *2.2 Develop configuration standards for all system components. Assure that these standards address all known security vulnerabilities and are consistent with industry-accepted system hardening standards. Sources of industry-accepted system hardening standards may include, but are not limited to: Center for Internet Security (CIS), International Organization for Standardization (ISO), SysAdmin Audit Network Security (SANS), Institute National Institute of Standards Technology (NIST).*

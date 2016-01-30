@@ -90,7 +90,7 @@ Since we are going to use Logstash forwarder to ship logs from our hosts to our 
 SSL Certificate
 ^^^^^^^^^^^^^^^
 
-The SSL certificate needs to be created on your Logstash sever, and then copied to your Logstash forwarder machine. See below how to create this certificate when you run your Logstash server on a Debian or a CentOS Linux distribution.
+The SSL certificate needs to be created on your ``Logstash Sever``, and then copied to your Logstash forwarder machine. See below how to create this certificate when you run your Logstash server on a Debian or a CentOS Linux distribution.
 
 SSL Certificate on Debian
 """""""""""""""""""""""""
@@ -160,7 +160,7 @@ Finally set Logstash forwarder to read OSSEC alerts file, modify list of files c
       ],
      "fields": { "type": "ossec-alerts" }
  }
-]
+ ]
 
 At this point, save and exit the Logstash forwarder configuration file. Let's now give it permissions to read the alerts file, by adding ``logstash-forwarder`` user to the ``ossec`` group: ::
 
@@ -177,7 +177,7 @@ Logstash configuration is based on three different plugins: *input*, *filter* an
 
 Depending on your architecture, single-host or distributed, we will configure Logstash server to read OSSEC alerts directly from OSSEC log file, or to read the incoming data (sent by Logstash forwarder) from port 5000/udp (remember to open your firewall to accept this traffic). 
 
-For single-host deployments (everything running on the same box), just copy the configuration file ``01-ossec-singlehost.conf`` to the right directory: ::
+For ``single-host deployments`` (everything running on the same box), just copy the configuration file ``01-ossec-singlehost.conf`` to the right directory: ::
 
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
@@ -204,7 +204,7 @@ In single-host deployments, you also need to grant the *logstash* user access to
 
  $ sudo usermod -a -G ossec logstash
   
-We are not going to start Logstash service yet, we need to wait until we import Wazuh template into Elasticsearch (see next guide)
+.. note:: We are not going to start Logstash service yet, we need to wait until we import Wazuh template into Elasticsearch (see next guide)
 
 What's next
 -----------

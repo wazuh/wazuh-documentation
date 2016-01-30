@@ -118,7 +118,7 @@ And remove temporary files: ::
 HTTP Authentication
 ^^^^^^^^^^^^^^^^^^^
 
-By default you can access by entering user "foo" and password "bar". We recommend you to change these credentials. This can be done very easily by running: ::
+By default you can access by entering user "foo" and password "bar". We recommend you to change these credentials. This can be done very easily by running:
 
 At first please make sure that you have ``htpasswd`` tool installed.
 
