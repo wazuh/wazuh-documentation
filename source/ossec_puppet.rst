@@ -305,6 +305,7 @@ class ossec::server
  - ``$manage_repo`` (default: ``true``): Install Ossec through Wazuh repositories.
  - ``manage_epel_repo`` (default: ``true``): Install epel repo and inotify-tools
  - ``$manage_paths`` (default: ``[ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'yes', 'realtime' => 'yes'} ]``): Follow the instructions bellow.
+ - ``$ossec_white_list``: Allow white listing of IP addresses.
 
 function ossec::email_alert
  - ``$alert_email``: Email to send to.
