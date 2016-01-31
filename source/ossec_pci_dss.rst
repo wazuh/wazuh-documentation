@@ -74,27 +74,23 @@ Use cases
 
 As an example, in this scenario, we try to open the file *cardholder_data.txt*. Since our current user doesn't have read access to the file, we run *sudo* to elevate privileges.
 
-.. image:: images/pci/analisys_logs_1.png
+.. image:: images/pci/log_analysis_1.png
     :align: center
     :width: 100%
 
 Using *sudo* log analysis decoder and rules, OSSEC will generate an alert for this particular action. Since we have JSON output enabled, we can see the alert in both files *alerts.log* and *alerts.json*. Using the rule tags we can also see which PCI DSS requirements are specifically related to this alert.
 
-.. image:: images/pci/analisys_logs_2.png
+.. image:: images/pci/log_analysis_2.png
     :align: center
     :width: 100%
 
 Kibana displays information in an organized way, allowing filtering by different type of alert fields, including compliance controls. We have also developed some specific dashboards to display the PCI DSS related alerts.
 
-.. image:: images/pci/analisys_logs_3.png
+.. image:: images/pci/log_analysis_3.png
     :align: center
     :width: 100%
 
-.. image:: images/pci/analisys_logs_4.png
-    :align: center
-    :width: 100%
-
-.. image:: images/pci/analisys_logs_5.png
+.. image:: images/pci/log_analysis_4.png
     :align: center
     :width: 100%
 
@@ -149,10 +145,6 @@ Kibana shows the full information about the alert.
     :width: 100%
 
 .. image:: images/pci/policy_monitoring_3.png
-    :align: center
-    :width: 100%
-
-.. image:: images/pci/policy_monitoring_4.png
     :align: center
     :width: 100%
 
