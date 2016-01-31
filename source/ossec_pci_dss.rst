@@ -90,7 +90,11 @@ Kibana displays information in an organized way, allowing filtering by different
     :align: center
     :width: 100%
 
+<<<<<<< HEAD
 .. image:: images/pci/log_analysis_4.png
+=======
+.. image:: images/pci/analisys_logs_4.png
+>>>>>>> af8d367b25a251a2f8f5d21d6b007a8ecc2c352e
     :align: center
     :width: 100%
 
