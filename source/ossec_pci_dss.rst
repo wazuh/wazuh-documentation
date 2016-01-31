@@ -244,10 +244,6 @@ As you can see, syscheck alerts are tagged with the requirement 11.5.
     :align: center
     :width: 100%
 
-.. image:: images/pci/fim_5.png
-    :align: center
-    :width: 100%
-
 
 Active response
 ---------------
