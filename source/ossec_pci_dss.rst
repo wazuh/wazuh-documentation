@@ -94,10 +94,6 @@ Kibana displays information in an organized way, allowing filtering by different
     :align: center
     :width: 100%
 
-.. image:: images/pci/analisys_logs_5.png
-    :align: center
-    :width: 100%
-
 Rootcheck - Policy monitoring
 -----------------------------
 
