@@ -18,7 +18,7 @@ Installation on CentOS
 Install your Yum repository, and puppet-server package, for your Enterprise Linux distribution. For example, for EL7: ::
 
    $ sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-   $ sudo yum install puppet-server
+   $ sudo yum install puppetserver
 
 Now upgrade to the latest Puppet version:
 
@@ -31,6 +31,7 @@ To install your Puppet master on Debian/Ubuntu systems, we need first to add our
 
    $ wget https://apt.puppetlabs.com/puppetlabs-release-jessie.deb
    $ sudo dpkg -i puppetlabs-release-jessie.deb
+   $ sudo sh -c 'echo "deb http://apt.puppetlabs.com// trusty main" >> /etc/apt/sources.list.d/puppet.list'
    $ sudo apt-get update
    $ sudo apt-get install puppetmaster-passenger
    $ sudo apt-get install puppetmaster
