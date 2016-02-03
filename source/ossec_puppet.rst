@@ -307,6 +307,7 @@ class ossec::server
  - ``manage_epel_repo`` (default: ``true``): Install epel repo and inotify-tools
  - ``$manage_paths`` (default: ``[ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'yes', 'realtime' => 'yes'} ]``): Follow the instructions bellow.
  - ``$ossec_white_list``: Allow white listing of IP addresses.
+ - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
 
 function ossec::email_alert
  - ``$alert_email``: Email to send to.
@@ -343,6 +344,7 @@ OSSEC agent class
  - ``$manage_repo`` (default: ``true``): Install Ossec through Wazuh repositories.
  - ``manage_epel_repo`` (default: ``true``): Install epel repo and inotify-tools
  - ``$ossec_scanpaths`` (default: ``[]``): Agents can be Linux or Windows for this reason don't have ``ossec_scanpaths`` by default.
+ - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
 
 ossec_scanpaths configuration
 """""""""""""""""""""""""""""
