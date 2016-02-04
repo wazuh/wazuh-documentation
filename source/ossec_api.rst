@@ -127,7 +127,7 @@ On Debian, update your repositories and install ``apache2-utils`` package: ::
  $ sudo apt-get update
  $ sudo apt-get install apache2-utils
 
-Then 
+Then: :: 
 
  $ cd /var/ossec/api
  $ sudo htpasswd -c htpasswd username
@@ -137,7 +137,7 @@ Running API on the background
 
 Time to start the API, we are going to start it on background and redirect the standard output to a log file called ``api.log``: ::
 
- $ /bin/node /var/ossec/api/server.js &>/var/ossec/api/api.log &
+ $ /bin/node /var/ossec/api/server.js > /var/ossec/api/api.log &
 
 .. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /usr/bin/, if the API does not start, check it please.
 
