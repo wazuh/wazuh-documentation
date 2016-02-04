@@ -68,12 +68,7 @@ As well, OSSEC API works under a NodeJS server (v0.10.x) with Express module (4.
 
 The service will operate on port 55000/tcp by default, and NodeJS service will be protected with HTTP Authentication and encrypted by a HTTPS SSL Certificate.
 
-Remember (as indicated when installing OSSEC Wazuh fork), that OSSEC RESTful API requires you to mount your system ``/dev`` directory on your OSSEC location: :: 
-
- $ sudo mkdir /var/ossec/dev/
- $ sudo mount -o bind /dev /var/ossec/dev/
-
-And copy the API folder to OSSEC folder: ::
+Copy the API folder to OSSEC folder: ::
 
  $ sudo cp -rf ~/ossec_tmp/ossec-wazuh/extensions/api  /var/ossec/
 
