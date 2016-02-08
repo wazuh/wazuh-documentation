@@ -259,3 +259,37 @@ The Kibana pannels will show:
 .. image:: images/aws/aws-ec2-9.png
     :align: center
     :width: 100%
+
+VPC Use cases
+-------------
+
+If one VPC is created will apply the rule ``rule id 81000``::
+
+    <rule id="81000" level="2">
+        <if_sid>80300</if_sid>
+        <action>CreateVpc</action>
+        <description>Amazon-vpc: Vpc Created</description>
+        <group>amazon,pci_dss_10.6.1,</group>
+    </rule>
+
+The Kibana pannels will show:
+
+.. image:: images/aws/aws-vpc-1.png
+    :align: center
+    :width: 100%
+
+If the user don't has permission will apply the ``rule id 81001``::
+
+    <rule id="81001" level="5">
+        <if_sid>81000</if_sid>
+        <match>"errorCode":"Client.UnauthorizedOperation"</match>
+        <description>Amazon-Vpc: Vpc Created Unauthorized Operation</description>
+        <group>amazon,pci_dss_10.6.1,</group>
+    </rule>
+
+
+The Kibana pannels will show:
+
+.. image:: images/aws/aws-vpc-2.png
+    :align: center
+    :width: 100%
