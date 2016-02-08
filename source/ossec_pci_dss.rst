@@ -8,7 +8,7 @@ Introduction
 
 The **Payment Card Industry Data Security Standard (PCI DSS)** is a proprietary information security standard for organizations that handle branded credit cards from the major card schemes including *Visa*, *MasterCard*, *American Express*, *Discover*, and *JCB*. The standard was created to increase controls around cardholder data to reduce credit card fraud.
 
-OSSEC helps to implement PCI DSS by performing log analysis, file integrity checking, policy monitoring, intrusion detection, real-time alerting and active response. This `guide <http://wazuh.com/resources/OSSEC_PCI_DSS_Guide.pdf>`_ explains how these capabilities help with each of the standard requirements.
+OSSEC helps to implement PCI DSS by performing log analysis, file integrity checking, policy monitoring, intrusion detection, real-time alerting and active response. This guide (`pdf <http://ossec.wazuh.com/ruleset/PCI_Guide.pdf>`_, `excel <http://ossec.wazuh.com/ruleset/PCI_Guide.xlsx>`_) explains how these capabilities help with each of the standard requirements.
 
 In the following section we will elaborate some specific use cases that are use as an example on how to use OSSEC main capabilities to meet the standard requirements.
 
