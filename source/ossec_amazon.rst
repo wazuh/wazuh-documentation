@@ -164,10 +164,16 @@ To install Wazuh Amazon rules follow either the `Automatic installation <http://
 Use Cases
 =========
 
+Our Rules focuses on providing the desired visibility within the Amazon AWS platform, the next section we will show you some Use cases in the differenet Amazon AWS aplications.
+
+Indicar que estas reglas solo afectan al trabajo con AWS API, cada instancia en Amazon EC2 tendrá que tener su Agente de Ossec corriendo como cualquier otro sistema para ser monitorizados por Ossec. 
+
 Iam Use cases
 -------------
 
-A simple business use case for ``Ruleset IAM`` can help you understand basic ways you might implement the service to control the AWS access your users have with Ossec.
+AWS Identity and Access Management (IAM) enables you to securely control access to AWS services and resources for your users. Using IAM, you can create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources.
+
+Few examples about how works Wazuh Ruleset in Amazon IAM
 
 Create user account
 +++++++++++++++++++
@@ -263,7 +269,11 @@ The Kibana pannels will show:
 EC2 Use cases
 -------------
 
-The next a few examples about how works Wazuh Ruleset
+Amazon Elastic Compute Cloud (Amazon EC2) is a web service that provides resizable compute capacity in the cloud. It is designed to make web-scale cloud computing easier for developers.
+
+Amazon EC2's is simple web service interface allows you to obtain and configure capacity with minimal friction. It provides you with complete control of your computing resources and lets you run on Amazon's proven computing environment. Amazon EC2 reduces the time required to obtain and boot new server instances to minutes, allowing you to quickly scale capacity, both up and down, as your computing requirements change. Amazon EC2 changes the economics of computing by allowing you to pay only for capacity that you actually use. Amazon EC2 provides developers the tools to build failure resilient applications and isolate themselves from common failure scenarios.
+
+Few examples about how works Wazuh Ruleset in Amazon EC2's
 
 Run a new instance in EC2
 +++++++++++++++++++++++++
@@ -423,6 +433,11 @@ The Kibana pannels will show:
 
 VPC Use cases
 -------------
+
+Amazon Virtual Private Cloud (Amazon VPC) lets you provision a logically isolated section of the Amazon Web Services (AWS) Cloud where you can launch AWS resources in a virtual network that you define. You have complete control over your virtual networking environment, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways.
+
+Create VPC
+++++++++++
 
 If one VPC is created will apply the rule ``rule id 81000``::
 
