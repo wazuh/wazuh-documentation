@@ -441,6 +441,16 @@ The Kibana pannels will show:
     :align: center
     :width: 100%
 
+The Kibana Dashboards will show:
+
+.. image:: images/aws/aws-ec2-pannels-1.png
+    :align: center
+    :width: 50%
+
+.. image:: images/aws/aws-ec2-pannels-2.png
+    :align: center
+    :width: 100%
+
 VPC Use cases
 -------------
 
