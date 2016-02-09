@@ -266,6 +266,16 @@ The Kibana pannels will show:
     :align: center
     :width: 100%
 
+The Kibana Dashboards will show:
+
+.. image:: images/aws/aws-iam-pannels-1.png
+    :align: center
+    :width: 25%
+
+.. image:: images/aws/aws-iam-pannels-2.png
+    :align: center
+    :width: 50%
+
 EC2 Use cases
 -------------
 
