@@ -192,7 +192,7 @@ For start we can create a user account, after that will apply the ``rule id 8086
 |      <group>amazon,pci_dss_10.2.5,</group>                           |
 |  </rule>                                                             |
 +----------------------------------------------------------------------+
-|    **Kibana alert**                                                  |
+|    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
 |.. image:: images/aws/aws-login-1.png                                 |
 |    :align: center                                                    |
@@ -216,7 +216,7 @@ If the user don't has permission to create new users will apply the ``rule id 80
 |      <group>amazon,pci_dss_10.2.4,pci_dss_10.2.5,</group>            |
 |  </rule>                                                             |
 +----------------------------------------------------------------------+
-|    **Kibana alert**                                                  |
+|    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
 |.. image:: images/aws/aws-login-2.png                                 |
 |    :align: center                                                    |
@@ -240,7 +240,7 @@ As example in this scenario one user try to login in the system but has a error 
 |      <group>amazon,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group> |
 |  </rule>                                                                        |
 +---------------------------------------------------------------------------------+
-|    **Kibana alert**                                                             |
+|    **Kibana will show this alert**                                              |
 +---------------------------------------------------------------------------------+
 |.. image:: images/aws/aws-login-3.png                                            |
 |    :align: center                                                               |
@@ -263,7 +263,7 @@ If we have more than 4 incorrect access in less than **360** second apply the ``
 |      <group>amazon,authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,</group>|
 |  </rule>                                                                                      |
 +-----------------------------------------------------------------------------------------------+
-|    **Kibana alert**                                                                           |
+|    **Kibana will show this alert**                                                            |
 +-----------------------------------------------------------------------------------------------+
 |.. image:: images/aws/aws-login-4.png                                                          |
 |    :align: center                                                                             |
@@ -287,7 +287,7 @@ After a login success apply the ``rule id 80801``:
 |      <group>amazon,authentication_success,pci_dss_10.2.5,</group>    |
 |  </rule>                                                             |
 +----------------------------------------------------------------------+
-|    **Kibana pannel**                                                 |
+|    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
 |.. image:: images/aws/aws-login-5.png                                 |
 |    :align: center                                                    |
@@ -331,7 +331,7 @@ When one user run a new instance will apply the ``rule id 80301``:
 |      <group>amazon,pci_dss_10.6.1,</group>                           |
 |  </rule>                                                             |
 +----------------------------------------------------------------------+
-|    **Kibana pannel**                                                 |
+|    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
 |.. image:: images/aws/aws-ec2-1.png                                   |
 |    :align: center                                                    |
@@ -352,7 +352,7 @@ If one user **without permissions** to run instances try to run one will apply t
 |      <group>amazon,pci_dss_10.6.1,</group>                           |
 |  </rule>                                                             |
 +----------------------------------------------------------------------+
-|    **Kibana pannel**                                                 |
+|    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
 |.. image:: images/aws/aws-ec2-2.png                                   |
 |    :align: center                                                    |
@@ -376,7 +376,7 @@ When one instance in EC2 is Started, will apply the ``rule id 80305``:
 |      <group>amazon,pci_dss_10.6.1,</group>                           |
 |  </rule>                                                             |
 +----------------------------------------------------------------------+
-|    **Kibana pannel**                                                 |
+|    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
 |.. image:: images/aws/aws-ec2-3.png                                   |
 |    :align: center                                                    |
@@ -397,7 +397,7 @@ If one user **without permissions** to Start instances try to run one will apply
 |      <group>amazon,pci_dss_10.6.1,</group>                             |
 |  </rule>                                                               |
 +------------------------------------------------------------------------+
-|    **Kibana pannel**                                                   |
+|    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
 |.. image:: images/aws/aws-ec2-4.png                                     |
 |    :align: center                                                      |
@@ -421,7 +421,7 @@ When one instance in EC2 is Stoped, will apply the ``rule id 80308``:
 |      <group>amazon,pci_dss_10.6.1,</group>                             |
 |  </rule>                                                               |
 +------------------------------------------------------------------------+
-|    **Kibana pannel**                                                   |
+|    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
 |.. image:: images/aws/aws-ec2-5.png                                     |
 |    :align: center                                                      |
@@ -443,7 +443,7 @@ If one user **without permissions** for Start instances try to run one will appl
 |      <group>amazon,pci_dss_10.6.1,</group>                             |
 |  </rule>                                                               |
 +------------------------------------------------------------------------+
-|    **Kibana pannel**                                                   |
+|    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
 |.. image:: images/aws/aws-ec2-6.png                                     |
 |    :align: center                                                      |
@@ -468,7 +468,7 @@ If a security gruop is created will apply the ``rule id 80404``:
 |      <group>amazon,pci_dss_10.6.1,</group>                             |
 |  </rule>                                                               |
 +------------------------------------------------------------------------+
-|    **Kibana pannel**                                                   |
+|    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
 |.. image:: images/aws/aws-ec2-7.png                                     |
 |    :align: center                                                      |
@@ -492,7 +492,7 @@ If one Elastic IP's is allocated will apply the rule ``rule id 80411``:
 |      <group>amazon,</group>                                            |
 |  </rule>                                                               |
 +------------------------------------------------------------------------+
-|    **Kibana pannel**                                                   |
+|    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
 |.. image:: images/aws/aws-ec2-8.png                                     |
 |    :align: center                                                      |
@@ -516,7 +516,7 @@ If one Elastic IP's is associated will apply the rule ``rule id 80446``:
 |      <group>amazon,pci_dss_10.6.1,</group>                             |
 |  </rule>                                                               |
 +------------------------------------------------------------------------+
-|    **Kibana pannel**                                                   |
+|    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
 |.. image:: images/aws/aws-ec2-9.png                                     |
 |    :align: center                                                      |
@@ -555,7 +555,7 @@ If one VPC is created will apply the rule ``rule id 81000``:
 |      <group>amazon,pci_dss_10.6.1,</group>                             |
 |  </rule>                                                               |
 +------------------------------------------------------------------------+
-|    **Kibana pannel**                                                   |
+|    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
 |.. image:: images/aws/aws-vpc-1.png                                     |
 |    :align: center                                                      |
@@ -576,7 +576,7 @@ If the user don't has permission will apply the ``rule id 81001``:
 |      <group>amazon,pci_dss_10.6.1,</group>                                    |
 |  </rule>                                                                      |
 +-------------------------------------------------------------------------------+
-|    **Kibana pannel**                                                          |
+|    **Kibana will show this alert**                                            |
 +-------------------------------------------------------------------------------+
 |.. image:: images/aws/aws-vpc-2.png                                            |
 |    :align: center                                                             |
