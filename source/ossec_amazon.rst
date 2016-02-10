@@ -180,8 +180,6 @@ Use Cases
 
 Our Rules focuses on providing the desired visibility within the Amazon AWS platform, the next section we will show you some Use cases in the differenet Amazon AWS aplications.
 
-Indicar que estas reglas solo afectan al trabajo con AWS API, cada instancia en Amazon EC2 tendrá que tener su Agente de Ossec corriendo como cualquier otro sistema para ser monitorizados por Ossec. 
-
 Iam Use cases
 -------------
 
