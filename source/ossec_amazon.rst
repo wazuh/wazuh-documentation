@@ -2,6 +2,20 @@
 
 OSSEC Amazon
 ************
+
+CloudTrail provides increased visibility into AWS user activity that occurs within an AWS account and allows you to track changes that were made to AWS resources. CloudTrail makes it easier for customers to demonstrate compliance with internal policies or regulatory standards.
+
+With CloudTrail, you can get a history of AWS API calls for your account, including API calls made via the AWS Management Console, AWS SDKs, command line tools, and higher-level AWS services
+
+.. image:: images/aws/aws-diagram.png
+    :align: center
+    :width: 100%
+
+1. AWS CloudTrail is a web service that records AWS API calls for your account and delivers log files to you.
+2. CloudTrail uses Amazon S3 for log file storage and delivery, so log files are stored durably and inexpensively.
+3. The script ``getawslog.py`` will download the logs files from ``Amazon S3`` in JSON format and convert it into a flat file to be used with Ossec.
+
+
 Ruleset Installation
 ====================
 
