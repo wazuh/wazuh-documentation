@@ -14,4 +14,3 @@ Table of contents
    ossec_docker
    ossec_puppet
    ossec_pci_dss
-   ossec_amazon
