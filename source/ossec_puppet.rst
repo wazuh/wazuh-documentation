@@ -341,6 +341,8 @@ OSSEC agent class
  - ``$ossec_active_response`` (default: ``true``): Allows active response on this host.
  - ``$ossec_emailnotification`` (default: ``yes``): Whether to send email notifications or not.
  - ``$selinux`` (default: ``false``): Whether to install a SELinux policy to allow rotation of OSSEC logs.
+ - ``agent_name`` (default: ``$::hostname``)
+ - ``agent_ip_address`` (default: ``$::ipaddress``)
  - ``$manage_repo`` (default: ``true``): Install Ossec through Wazuh repositories.
  - ``manage_epel_repo`` (default: ``true``): Install epel repo and inotify-tools
  - ``$ossec_scanpaths`` (default: ``[]``): Agents can be Linux or Windows for this reason don't have ``ossec_scanpaths`` by default.
