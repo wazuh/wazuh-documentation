@@ -106,59 +106,60 @@ Examples: ::
 Automatic installation
 ----------------------
 
-Run ``ossec_ruleset.py`` script to install and update OSSEC Wazuh Ruleset with no need to manually change OSSEC internal files.
-
-Two main functionalities are included in the script:
-
-* **Install**: Allows you to select new rules, to incorporate them into your OSSEC installation.
-* **Update**: Fetchs updated and new rules directly from Wazuh server.
-
-The installation script is located in our repository at ``wazuh/ossec-rules/ossec_ruleset.py``. To download and run it, go to your OSSEC manager and follow next steps.
+Run ``ossec_ruleset.py`` script to update OSSEC Wazuh Ruleset with no need to manually change OSSEC internal files.
 
 Getting the script: ::
 
-   $ cd ~ && mkdir ruleset_tmp && cd ruleset_tmp
-   $ git clone https://github.com/wazuh/ossec-rules.git && cd ossec-rules
-   $ sudo mkdir -p /var/ossec/update/ruleset
-   $ sudo cp -r * /var/ossec/update/ruleset/
+   $ sudo mkdir -p /var/ossec/update/ruleset && cd /var/ossec/update/ruleset
+   $ sudo wget https://raw.githubusercontent.com/wazuh/ossec-rules/master/ossec_ruleset.py
 
 Running the script: ::
 
-   # sudo chmod +x /var/ossec/update/ruleset/ossec_ruleset.py
+   $ sudo chmod +x /var/ossec/update/ruleset/ossec_ruleset.py
    $ sudo /var/ossec/update/ruleset/ossec_ruleset.py --help
-
-At this point you can select what you want to install/update: rules, rootchecks or both: ::
-
-  -r, --rules
-  -c, --rootchecks
-  -a, --all
-
-As well, if you want to run the script in silent-mode (non interactive), you can use: ::
-
-  -f, --file  Use a configuration file to select rules and rootchecks to install
-
-Or, if you simply want to update the exiting ruleset: ::
-
-  -u, --update
 
 Usage examples
 ^^^^^^^^^^^^^^
 
-Install new rules/rootchecks from interactive menu: ::
+Update decoders/rules/rootchecks: ::
 
-  ./ossec_ruleset.py --all
+  ./ossec_ruleset.py
 
-Update existing rule set: ::
+Update and prompt menu to activate new Rules & Rootchecks: ::
 
-  ./ossec_ruleset.py --all --update
-
-Update only existing rootchecks: ::
-
-  ./ossec_ruleset.py --rootchecks --update
+  ./ossec_ruleset.py -a
 
 Restore a backup: ::
 
   ./ossec_ruleset.py --backups list
+  
+All script options: ::
+
+  Select ruleset:
+    -r, --rules     Update rules
+    -c, --rootchecks        Update rootchecks
+    *If not -r or -c indicated, rules and rootchecks will be updated.
+
+  Activate:
+    -a, --activate  Prompt a interactive menu for selection of rules and rootchecks to activate.
+    -A, --activate-file     Use a configuration file to select rules and rootchecks to activate.
+    *If not -a or -A indicated, NEW rules and rootchecks will NOT activated.
+
+  Restart:
+    -s, --restart   Restart OSSEC when required.
+    -S, --no-restart        Do not restart OSSEC when required.
+
+  Backups:
+    -b, --backups   Restore backups. Use 'list' to show the backups list available.
+
+  Additional Params:
+    -f, --force-update      Force to update all rules and rootchecks. By default, only it is updated the new/changed rules/rootchecks.
+
+  Configuration file syntax using option -A:
+    # Commented line
+    rules:rule_name
+    rootchecks:rootcheck_name
+
 
 
 Configure weekly updates
@@ -168,7 +169,7 @@ Run ``ossec_ruleset.py`` weekly and keep your OSSEC Wazuh Ruleset installation u
 
 Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
  
-  @weekly root cd /var/ossec/update/ruleset && ./ossec_ruleset.py -a -u -s
+  @weekly root cd /var/ossec/update/ruleset && ./ossec_ruleset.py -s
 
 Wazuh rules
 -----------
