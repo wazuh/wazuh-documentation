@@ -1,19 +1,14 @@
-.. _ossec_installation:
+OSSEC Installation
+==================
 
-OSSEC installation guide
-========================
+Two different installation options: **OSSEC 2.8.3** and **OSSEC Wazuh Fork**.
 
-.. topic:: OSSEC HIDS Latest Stable Release (2.8.3)
+**OSSEC 2.8.3** is the latest stable version from http://ossec.github.io. Wazuh provides the repositories needed in the OSSEC 2.8.3 installation guide. Please note that in this case the OSSEC manager wouldn't have the additional features for its use with `ELK Stack <http://documentation.wazuh.com/en/latest/ossec_elk.html>`_ and the `OSSEC Wazuh RESTFUL API <http://documentation.wazuh.com/en/latest/ossec_api.html>`_.
 
-           OSSEC is an Open Source Host-based Intrusion Detection System that performs log analysis, file integrity checking, policy monitoring, rootkit detection, real-time alerting and active response. It runs on most operating systems, including Linux, MacOS, Solaris, HP-UX, AIX and Windows.
-
-           You can find more information at OSSEC HIDS `project documentation <http://ossec.github.io/docs/>`_, or the `reference manual <http://ossec.github.io/docs/manual/index.html>`_.
-
+**OSSEC Wazuh Fork** has been developed with additional features for the OSSEC manager, such as extended JSON logging capabilities, that allow the integration of `OSSEC with ELK Stack <http://documentation.wazuh.com/en/latest/ossec_elk.html>`_ (Elasticsearch, Logstash and Kibana) and other log management tools. Also this installation is ready for the use of the `OSSEC Wazuh RESTFUL API <http://documentation.wazuh.com/en/latest/ossec_api.html>`_.
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 2
 
-   ossec_installation_deb
-   ossec_installation_rpm
-   ossec_installation_win
-   ossec_installation_source
+   ossec_installation_2.8.3
+   ossec_wazuh
