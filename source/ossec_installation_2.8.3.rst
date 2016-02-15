@@ -1,4 +1,4 @@
-. _ossec_installation_2.8.3:
+.. _ossec_installation_2.8.3:
 
 OSSEC installation guide
 ========================

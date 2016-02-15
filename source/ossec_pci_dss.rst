@@ -253,7 +253,7 @@ Although `active response <http://ossec-docs.readthedocs.org/en/latest/manual/ar
 ELK
 ---
 
-`OSSEC Wazuh integration with ELK Stack <http://wazuh-documentation.readthedocs.org/en/latest/ossec_elk.html>`_ comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmark. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
+`OSSEC Wazuh integration with ELK Stack <http://documentation.wazuh.com/en/latest/ossec_elk.html>`_ comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmark. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
 
 The following requirements can be met with a combination of OSSEC + ELK Stack:
 

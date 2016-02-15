@@ -240,4 +240,4 @@ What's next
 
 Once you have your OSSEC RESTful API running, we recommend you to check our OSSEC Wazuh ruleset:
 
-* `OSSEC Wazuh Ruleset installation guide <http://wazuh-documentation.readthedocs.org/en/latest/ossec_ruleset.html>`_ 
+* `OSSEC Wazuh Ruleset installation guide <http://documentation.wazuh.com/en/latest/ossec_ruleset.html>`_ 
