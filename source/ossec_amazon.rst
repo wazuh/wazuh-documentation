@@ -351,7 +351,7 @@ When a user run a new instance in EC2, an AWS event is generated. As per the dia
 |    :width: 100%                                                      |
 +----------------------------------------------------------------------+
 
-When a user **without permissions** to run instances try to run one, the log message will match the ``rule id 80303``and an alert will be generated as seen below:
+When a user **without permissions**, tries to run an instance, then the log message will match the ``rule id 80303`` and an alert will be generated as seen below:
 
 +----------------------------------------------------------------------+
 |**Definition of rule 80303**                                          |
