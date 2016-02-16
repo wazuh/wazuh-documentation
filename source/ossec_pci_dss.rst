@@ -1,7 +1,7 @@
 .. _ossec_pci_dss:
 
-OSSEC PCI DSS
-=============
+OSSEC for PCI DSS
+=================
 
 Introduction
 ------------
@@ -264,7 +264,7 @@ The following requirements can be met with a combination of OSSEC + ELK Stack:
 + *10.7 Retain audit trail history for at least one year, with a minimum of three months immediately available for analysis*
 
 What's next
-------------
+-----------
 
 Once you know how OSSEC can help with PCI DSS, we encourage you to move forward and try out ELK integration or the OSSEC Wazuh ruleset, check them on:
 
