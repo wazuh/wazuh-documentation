@@ -17,8 +17,8 @@ Here's a list of most important files:
 4. the key is located in /etc/logstash/logstash-forwarder.key (if you're running an older version the location could be /etc/pki/tls/private/logstash-forwarder.key)
 5. backup the elasticsearch template for logstash. /etc/logstash/elastic-ossec-template.json
 
-Update Logstash
-===============
+Updating Logstash
+^^^^^^^^^^^^^^^^^
 
 The following steps describe how to update the Logstash server:
 
@@ -31,7 +31,7 @@ The following steps describe how to update the Logstash server:
 7. Start the Logstash service & verify that the logstash process is running and check the logstash log /var/log/logstash/logstash.log
 
 Updating Elastisearch
-=====================
+^^^^^^^^^^^^^^^^^^^^^
 
 The following steps seem a bit tricky at first, please pay attention to the backup steps, especially when backing up the Elasticsearch Index.
 
@@ -56,8 +56,8 @@ if all of those commands return without any error, everything went well!
 9. Start the Elasticsearch service & verify if the elasticsearch process is running and check the elasticsearch log /var/log/elasticsearch/ (run systemctl daemon-reload if necessary!)
 
 
-Update Kibana
-=============
+Updating Kibana
+^^^^^^^^^^^^^^^
 
 Almost there... the final steps just quickly describe how you upgrade Kibana to the latest version. Basically you just download it, extract the tarball, start the Kibana service and make sure that you do a *fresh* import of the Kibana dashboards.
 

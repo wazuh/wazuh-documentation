@@ -15,3 +15,4 @@ OSSEC integration with ELK Stack
    ossec_elk_logstash
    ossec_elk_elasticsearch
    ossec_elk_kibana
+   ossec_elk_upgrade

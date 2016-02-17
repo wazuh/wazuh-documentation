@@ -17,3 +17,4 @@ OSSEC installation guide
    ossec_installation_rpm
    ossec_installation_win
    ossec_installation_source
+   ossec_installation_upgrade
