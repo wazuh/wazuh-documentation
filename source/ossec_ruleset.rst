@@ -135,22 +135,22 @@ As well, if you want to run the script in silent-mode (non interactive), you can
 
   -f, --file  Use a configuration file to select rules and rootchecks to install
 
-Or, if you simply want to update the exiting ruleset: ::
+Or, if you simply want to update the existing ruleset: ::
 
   -u, --update
 
 Usage examples
 ^^^^^^^^^^^^^^
 
-Install new rules/rootchecks from interactive menu: ::
+Install new rules/rootchecks from the interactive menu: ::
 
   ./ossec_ruleset.py --all
 
-Update existing rule set: ::
+Update the existing rule set: ::
 
   ./ossec_ruleset.py --all --update
 
-Update only existing rootchecks: ::
+Update only the existing rootchecks: ::
 
   ./ossec_ruleset.py --rootchecks --update
 
