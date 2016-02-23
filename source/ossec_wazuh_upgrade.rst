@@ -3,7 +3,7 @@
 Upgrading OSSEC Wazuh fork to a new version
 ===========================================
 
-Here's a quick overview on how to upgrade the manager. The OSSEC agent (client) is simply just the binary that you install through your package manager (apt-get or yum). The OSSEC manager is installed through source, a little bit trickier but if you follow the below steps you should be on the safe side ;-)
+Here's a quick overview on how to upgrade the manager. The OSSEC agent (client) is simply just the binary that you install through your package manager (apt-get or yum). The OSSEC manager is installed through source, a little bit trickier but if you follow the below steps you should be on the safe side.
 
 In case you need to upgrade the OSSEC manager to a new version (e.g bugfixes, or new features) you need to download the latest stable release from github and simply just run the install script. Make sure to backup both your current OSSEC installation (just in case!) including the OSSEC API.
 Here's a list of most important files:
@@ -45,19 +45,31 @@ Here's a list of most important files:
   $ sudo /var/ossec/bin/ossec-control start
 
 8. Make sure that the API process isn't running anymore, the process is "/bin/node /var/ossec/api/server.js". If it's running, stop/kill it.
+
+::
+
+  root@vpc-ossec-manager:~# ps axu | grep node
+  root     10328  0.0  2.4 704800 24980 ?        Sl   Feb03   0:00 /usr/bin/node /var/ossec/api/server.js
+  root     14426  0.0  0.0  10464   936 pts/0    S+   12:02   0:00 grep --color=auto node
+  root@vpc-ossec-manager:~# kill -9 10328
+
 9. Copy the content of github repository that you cloned ossec-wazuh/extensions/api into /var/ossec
 
 ::
 
   $ sudo cp -rf ~/ossec_tmp/ossec-wazuh/extensions/api  /var/ossec/
 
-10. Replace the current htpasswd file with the one you backed-up earlier. The cloned github version only contains this string::
+10. Replace the current htpasswd file with the one you backed-up earlier. The cloned github version only contains this string:
 
-	"foo:$apr1$QJ8XkGFE$yEK2seDYoTIG.c6r03jjT/"
+::
+
+  "foo:$apr1$QJ8XkGFE$yEK2seDYoTIG.c6r03jjT/"
    
-11. Start the API process once again, by running::
+11. Start the API process once again, by running:
 
-	$ /bin/node /var/ossec/api/server.js > /var/ossec/api/api.log & in the background
+::
+
+  $ /bin/node /var/ossec/api/server.js > /var/ossec/api/api.log & in the background
 
 12. Verify if the API is working correctly by running this:
 
@@ -77,7 +89,6 @@ or in a terminal:
 What's next
 -----------
 
-Now you have finished your ELK cluster installation and we recommend you to go to your OSSEC Wazuh manager and install OSSEC Wazuh RESTful API and OSSEC Wazuh Ruleset modules:
+Now you have finished your OSSEC Wazuh fort upgrade and we recommend you to go to OSSEC integration with ELK Stack and upgrade ELK Stack:
 
-* :ref:`OSSEC Wazuh RESTful API <ossec_api>`
-* :ref:`OSSEC Wazuh Ruleset <ossec_ruleset>`
+* :ref:`OSSEC integration with ELK Stack upgrade <ossec_elk_upgrade>`

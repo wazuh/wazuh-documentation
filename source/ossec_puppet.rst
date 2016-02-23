@@ -308,6 +308,11 @@ class ossec::server
  - ``$manage_paths`` (default: ``[ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'yes', 'realtime' => 'yes'} ]``): Follow the instructions bellow.
  - ``$ossec_white_list``: Allow white listing of IP addresses.
  - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
+ - ``use_mysql``: (default: ``false``). Set to ``true`` to enable database integration for alerts and other outputs.
+ - ``mysql_hostname``: MySQL hostname.
+ - ``mysql_name``: MySQL Database name.
+ - ``mysql_password``: MySQL password.
+ - ``mysql_username``: MySQL username.
 
 function ossec::email_alert
  - ``$alert_email``: Email to send to.
