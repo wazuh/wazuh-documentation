@@ -14,3 +14,4 @@ Two different installation options: **OSSEC HIDS** and **Wazuh HIDS**. Please re
 
    ossec_installation
    wazuh_installation
+   first_steps

@@ -6,7 +6,6 @@ Table of contents
 
    about
    installation
-   ossec_configuration
    ossec_elk
    ossec_api
    ossec_ruleset

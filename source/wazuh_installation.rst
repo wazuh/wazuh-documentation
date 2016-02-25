@@ -51,12 +51,3 @@ A last step is necessary if you are planning to use OSSEC RESTful API. ::
 
  $ sudo mkdir /var/ossec/dev/
  $ sudo mount -o bind /dev /var/ossec/dev/ 
-
-What's next
------------
-
-Once you have OSSEC Wazuh installed you can move forward and try out ELK integration, the API RESTful or the custom security compliance Ruleset, check them on:
-
-* :ref:`OSSEC integration with ELK Stack <ossec_elk>`
-* :ref:`OSSEC Wazuh RESTful API <ossec_api>`
-* :ref:`OSSEC Wazuh Ruleset <ossec_ruleset>`
