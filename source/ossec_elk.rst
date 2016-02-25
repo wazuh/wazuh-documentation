@@ -1,11 +1,11 @@
 .. _ossec_elk:
 
-OSSEC integration with ELK Stack
-================================
+Integration with ELK Stack
+==========================
 
 .. topic:: Documentation structure
 
-   This document will guide you through the installation, configuration and integration of ELK Stack and OSSEC HIDS. We will make use of expanded logging features that have been implemented in our OSSEC Wazuh fork, along with custom Logstash/Elasticsearch configurations, our OSSEC Wazuh Ruleset, our OSSEC Wazuh RESTful API and Kibana with hardcoded modifications.
+   This document will guide you through the installation, configuration and integration of ELK Stack and Wazuh HIDS (our `OSSEC fork <http://github.com/wazuh/ossec-wazuh>`_). We will make use of expanded logging features that have been implemented for the manager, along with custom Logstash/Elasticsearch configurations, our OSSEC Wazuh Ruleset, our Wazuh RESTful API and Kibana with hardcoded modifications.
 
 .. toctree::
    :maxdepth: 2
