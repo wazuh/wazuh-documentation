@@ -55,6 +55,38 @@ On Debian, update your repositories and install ``nodejs`` package: ::
 
 .. note:: Remember to open 55000 port TCP in your firewall, as it is used by the API service.
 
+Python packages
+------------------
+The API uses Python to perform some tasks. Install in your system:
+
+- Python 2.6+
+- Package *xmljson*: ``pip install xmljson``
+
+Configuration
+----------------
+
+You can configure some parameters using the file ``api/conf.js``:
+
+- Port: **55000** by default.
+
+
+- Security
+
+ - https: Use HTTP protocol over TLS/SSL. Default value: **yes**.
+ - basic_auth: Use basic authentication. Default value: **yes**.
+ - AccessControlAllowOrigin: Set header **Access-Control-Allow-Origin**. Default value: *****.
+ - AccessControlAllowHeaders: Set header **Access-Control-Allow-Headers**. Default value: **kbn-version**.
+
+- Paths:
+
+ - ossec_path: */var/ossec* by default.
+
+- Logs
+
+ - logs: Log level (disabled, info, warning, error, debug). Each level includes the previous level. Default value: **info**.
+ - logs_tag: Tag to use in logs. Default value: **WazuhAPI**.
+
+
 SSL Certificate
 ----------------
 
