@@ -127,7 +127,7 @@ Here is a good examples of rootcheck rules developed to check the configuration 
     [SSH Configuration - Root login allowed {PCI_DSS: 2.2.4}] [any]
     f:/etc/ssh/sshd_config -> !r:^# && r:PermitRootLogin\.+yes;
 
-In our :ref:`OSSEC Wazuh fork <ossec_wazuh>`, your rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. Meaning that all rootchecks already have the PCI DSS requirement tag.
+In our :ref:`OSSEC Wazuh fork <wazuh_installation>`, your rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. Meaning that all rootchecks already have the PCI DSS requirement tag.
 
 Use cases
 ^^^^^^^^^

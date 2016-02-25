@@ -23,7 +23,7 @@ OSSEC Wazuh API RESTful capabilities:
 Installation
 ======================
 
-OSSEC Wazuh RESTful API requires you to have previously installed our OSSEC fork as your manager. You can download and install it following :ref:`these instructions <ossec_wazuh>`. 
+OSSEC Wazuh RESTful API requires you to have previously installed our OSSEC fork as your manager. You can download and install it following :ref:`these instructions <wazuh_installation>`. 
 
 As well, OSSEC API works under a NodeJS server (v0.10.x) with Express module (4.0.x), and has the following dependencies:
 

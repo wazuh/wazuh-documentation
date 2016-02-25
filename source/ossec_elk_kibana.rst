@@ -16,7 +16,7 @@ Assuming you have followed the previous steps of :ref:`our guide <ossec_elk>`, a
  $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz
  $ sudo tar xvf kibana-*.tar.gz && sudo mkdir -p /opt/kibana && sudo cp -R kibana-4*/* /opt/kibana/
 
-If you need the 32 bit version use the download link: https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x86.tar.gz
+If you need the 32 bit version use the download link: ``https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x86.tar.gz``
  
 Kibana service for SystemVinit
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -47,7 +47,7 @@ On the other hand, if your system uses Systemd to manage the services (usually o
 
 Kibana on low memory systems
 ------------------------------
-New Kibana 4.3 based on Node (V8) uses a lazy and greedy garbage collector. With its default limit of about 1.5 GB. In low ram memory systems (below 2GB) Kibana could use too much memory which is dangerous. Kibana developers included one fix (`link <https://github.com/elastic/kibana/commit/626bf264595ef4f28c5609524fb29bf717c9b1c4l>`_.) but some weeks ago they decided remove this patch(`link <https://github.com/elastic/kibana/commit/d4ac69af2a58d2ee538b9e9e1af1295282694754>`_.).
+New Kibana 4.3 based on Node (V8) uses a lazy and greedy garbage collector. With its default limit of about 1.5 GB. In low ram memory systems (below 2GB) Kibana could not run properly. Kibana developers included one `fix <https://github.com/elastic/kibana/commit/626bf264595ef4f28c5609524fb29bf717c9b1c4l>`_, but later decided remove this `patch <https://github.com/elastic/kibana/commit/d4ac69af2a58d2ee538b9e9e1af1295282694754>`_.
 If your host total RAM is below 2GB, from Wazuh we recommend to limit NodeJS max ram space, to do it open the file ``/opt/kibana/bin/kibana`` and add the following line ::
 
   NODE_OPTIONS="${NODE_OPTIONS:=--max-old-space-size=250}"

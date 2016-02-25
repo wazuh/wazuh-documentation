@@ -6,7 +6,7 @@ Components and architecture
 Components 
 ----------
 
-See below a brief description of the components and tools involved in the integration of our :ref:`OSSEC Wazuh fork <ossec_wazuh>` with ELK Stack, for long term data storage, alerts indexing, management and visualization.
+See below a brief description of the components and tools involved in the integration of our :ref:`OSSEC Wazuh fork <wazuh_installation>` with ELK Stack, for long term data storage, alerts indexing, management and visualization.
 
 + `OSSEC HIDS forked by Wazuh <http://github.com/wazuh/ossec-wazuh/>`_: Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally on the box running the OSSEC manager.
 
@@ -47,7 +47,7 @@ Requirements
 
 - RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation and, according to their documentation, less than 8GB RAM is counterproductive. For single-host deployments, considering that Elasticsearch will share resources with OSSEC, Logstash and Kibana, we recommend to provision your server with at least 16GB RAM (more if possible). Less than 16GB RAM would only work for small OSSEC deployments.
 
-+ `OSSEC Wazuh fork <http://github.com/wazuh/ossec-wazuh/>`_: It is required for the integration with ELK Stack. You can install it by following the instructions in :ref:`our documentation <ossec_wazuh>`
++ `OSSEC Wazuh fork <http://github.com/wazuh/ossec-wazuh/>`_: It is required for the integration with ELK Stack. You can install it by following the instructions in :ref:`our documentation <wazuh_installation>`
 
 - :ref:`Java 8 JRE<ossec_elk_java>`: Java 8 is required both by Logstash server and by Elasticsearch. In this guide we have also included a description on how to install it.
 

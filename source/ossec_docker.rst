@@ -71,7 +71,7 @@ To ensure Docker starts when you boot your system, do the following: ::
 OSSEC-ELK Container
 -------------------
 
-These Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <ossec_wazuh>`.
+These Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <wazuh_installation>`.
 
 To install the ossec-elk container run this command: ::
 

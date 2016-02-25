@@ -5,7 +5,7 @@ Table of contents
    :maxdepth: 2
 
    about
-   ossec_installation
+   installation
    ossec_configuration
    ossec_elk
    ossec_api
