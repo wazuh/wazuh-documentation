@@ -56,7 +56,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'OSSEC Wazuh documentation'
-copyright = u'2015, Wazuh, Inc.'
+copyright = u'2016, Wazuh, Inc.'
 author = u'Wazuh, Inc.'
 
 # The version info for the project you're documenting, acts as replacement for
