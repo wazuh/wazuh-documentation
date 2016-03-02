@@ -75,9 +75,9 @@ The next step edit ``pg_hba.conf`` and modify the METHOD to ``md5`` in the next 
 ::
 
   # IPv4 local connections:
-  host    all             all             127.0.0.1/32            ``md5``
+  host    all             all             127.0.0.1/32            md5
   # IPv6 local connections:
-  host    all             all             ::1/128                 ``md5``
+  host    all             all             ::1/128                 md5
 
 Installation on Debian
 ^^^^^^^^^^^^^^^^^^^^^^
