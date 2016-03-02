@@ -20,31 +20,30 @@ Install your Yum repository, and puppet-server package, for your Enterprise Linu
    $ sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
    $ sudo yum install puppetserver
 
-Now upgrade to the latest Puppet version:
-
-   $ sudo puppet resource package puppet-server ensure=latest
 
 Installation on Debian
 ^^^^^^^^^^^^^^^^^^^^^^
 
 To install your Puppet master on Debian/Ubuntu systems, we need first to add our distribution repository. This can be done, downloading and installing a package named ``puppetlabs-release-distribution.deb`` where "distribution" needs to be substituted by your distribution codename (e.g. wheezy, jessie, trusty, utopic). See below the commands to install Puppet master package for a "jessie" distribution: :: 
 
-   $ wget https://apt.puppetlabs.com/puppetlabs-release-jessie.deb
-   $ sudo dpkg -i puppetlabs-release-jessie.deb
-   $ sudo sh -c 'echo "deb http://apt.puppetlabs.com// trusty main" >> /etc/apt/sources.list.d/puppet.list'
-   $ sudo apt-get update
-   $ sudo apt-get install puppetmaster-passenger
-   $ sudo apt-get install puppetmaster
+   $ wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
+   $ sudo dpkg -i puppetlabs-release-pc1-trusty.deb
+   $ sudo apt-get update && apt-get install puppetserver
 
-This will install Puppet, its prerequisites, and an init script at ``/etc/init.d/puppetmaster``. As well, to upgrade to the latest version of Puppet, you can run: ::
+Memory Allocation
+^^^^^^^^^^^^^^^^^
 
-   $ sudo apt-get update
-   $ sudo puppet resource package puppetmaster ensure=latest
+By default, Puppet Server will be configured to use 2GB of RAM. However, if you want to experiment with Puppet Server on a VM, you can safely allocate as little as 512MB of memory. To change the Puppet Server memory allocation, you can edit the init config file.
+
+  * ``/etc/sysconfig/puppetserver`` -- RHEL
+  * ``/etc/default/puppetserver`` -- Debian
+
+Replace 2g with the amount of memory you want to allocate to Puppet Server. For example, to allocate 1GB of memory, use ``JAVA_ARGS="-Xms1g -Xmx1g"``; for 512MB, use ``JAVA_ARGS="-Xms512m -Xmx512m"``.
 
 Configuration
 ^^^^^^^^^^^^^
 
-Configure ``/etc/puppet/puppet.conf`` adding the ``dns_alt_names`` line to the ``[main]`` section, and replacing ``puppet.example.com`` with your own FQDN: ::
+Configure ``/etc/puppetlabs/puppet/puppet.conf`` adding the ``dns_alt_names`` line to the ``[main]`` section, and replacing ``puppet.example.com`` with your own FQDN: ::
 
    [main]
    dns_alt_names = puppet,puppet.example.com
@@ -53,7 +52,7 @@ Configure ``/etc/puppet/puppet.conf`` adding the ``dns_alt_names`` line to the `
 
 Then, restart your Puppet master to apply changes: ::
 
-   $ sudo service puppetmaster start
+   $ sudo service puppeserver start
 
 PuppetDB installation
 ---------------------
@@ -64,17 +63,45 @@ Installation on CentOS
 ^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-   $ yum install postgresql-server puppetdb puppetdb-terminus
+   $ sudo rpm -Uvh http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+   $ yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql-contrib
+   $ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
+   $ systemctl start postgresql-9.4
+   $ systemctl enable postgresql-9.4
+
+The next step edit ``pg_hba.conf`` and modify the METHOD to ``md5`` in the next two lines
+/var/lib/pgsql/9.4/data/pg_hba.conf
+
+::
+
+  # IPv4 local connections:
+  host    all             all             127.0.0.1/32            ``md5``
+  # IPv6 local connections:
+  host    all             all             ::1/128                 ``md5``
 
 Installation on Debian
 ^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-   $ sudo apt-get update
-   $ apt-get install postgresql puppetdb puppetdb-terminus
+  $ sudo echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
+  $ sudo apt-get update
+  $ apt-get install  postgresql-9.4 postgresql-contrib-9.4
 
 Configuration
 ^^^^^^^^^^^^^
+
+The next step edit ``pg_hba.conf`` and modify the METHOD to ``md5`` in the next two lines
+
+::
+
+  /var/lib/pgsql/9.4/data/pg_hba.conf -- CentOS
+
+::
+
+  # IPv4 local connections:
+  host    all             all             127.0.0.1/32            ``md5``
+  # IPv6 local connections:
+  host    all             all             ::1/128                 ``md5``
 
 Create a PostgreSQL user and database: ::
 
@@ -93,7 +120,7 @@ Test database access: ::
  
    puppetdb=> \q
 
-Configure ``/etc/puppetdb/conf.d/database.ini``: ::
+Configure ``/etc/puppetlabs/puppetdb/conf.d/database.ini``: ::
 
    [database]
    classname = org.postgresql.Driver
@@ -103,13 +130,12 @@ Configure ``/etc/puppetdb/conf.d/database.ini``: ::
    password = yourpassword
    log-slow-statements = 10
 
-Create ``/etc/puppet/puppetdb.conf``: ::
+Create ``/etc/puppetlabs/puppet/puppetdb.conf``: ::
 
    [main]
-   server = puppet.wazuh.com
-   port = 8081
+   server_urls = https://puppetdb.example.com:8081
 
-Create ``/etc/puppet/routes.yaml``: ::
+Create ``/etc/puppetlabs/puppet/routes.yaml``: ::
 
    ---
    master:
@@ -117,7 +143,7 @@ Create ``/etc/puppet/routes.yaml``: ::
        terminus: puppetdb
        cache: yaml
 
-Finally, update ``/etc/puppet/puppet.conf``: ::
+Finally, update ``/etc/puppetlabs/puppet/puppet.conf``: ::
 
    [master]
     storeconfigs = true
