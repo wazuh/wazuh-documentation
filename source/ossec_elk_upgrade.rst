@@ -83,8 +83,8 @@ The following steps describe how to update the Logstash server:
 
 7. Start the Logstash service & verify that the logstash process is running and check the logstash log /var/log/logstash/logstash.log
 
-Updating Elastisearch
-^^^^^^^^^^^^^^^^^^^^^
+Updating Elasticsearch
+^^^^^^^^^^^^^^^^^^^^^^
 
 The following steps seem a bit tricky at first, please pay attention to the backup steps, especially when backing up the Elasticsearch Index.
 
