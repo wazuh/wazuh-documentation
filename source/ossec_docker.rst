@@ -15,58 +15,20 @@ To check your current kernel version, open a terminal and use ``uname -r to`` di
 
 .. note:: These Docker containers are based on "xetus-oss" dockerfiles, which can be found at `https://github.com/xetus-oss/docker-ossec-server <https://github.com/xetus-oss/docker-ossec-server>`_. We created our own fork, which we test and maintain. Thank you Terence Kent for your contribution to the community.
 
-Docker installation on CentOS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Docker installation on Debian/CentOS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To add the Docker yum repository, create a file named ``/etc/yum.repos.d/docker.repo`` with the following content: ::
+Run the Docker installation script. ::
 
-   [dockerrepo]
-   name=Docker Repository
-   baseurl=https://yum.dockerproject.org/repo/main/centos/7
-   enabled=1
-   gpgcheck=1
-   gpgkey=https://yum.dockerproject.org/gpg
+   $ curl -sSL https://get.docker.com/ | sh
 
-Now install the RPM package and start the service: ::
+If you would like to use Docker as a non-root user, you should now consider
+adding your user to the "docker" group with something like: ::
 
-   $ sudo yum install docker-engine
-   $ sudo service docker start 
-   $ chkconfig docker on     
+  $ sudo usermod -aG docker your-user
 
-Docker installation on Debian
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. note:: Remember that you will have to log out and back in for this to take effect!
 
-Add the new repository GPG key: ::
-
-  $ apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-
-Then, to add Docker apt-get repository, create a file named ``/etc/apt/sources.list.d/docker.list`` with the following content depending on your Debian distribution.
-
-For Debian Wheezy: ::
-
-   # Debian Wheezy
-   deb https://apt.dockerproject.org/repo debian-wheezy main
-
-For Debian Jessie: ::
-
-   # Debian Jessie
-   deb https://apt.dockerproject.org/repo debian-jessie main
-
-For Debian Strech: ::
-
-   # Debian Stretch/Sid
-   deb https://apt.dockerproject.org/repo debian-stretch main
-
-Now we can install the Debian package and start the service: ::
-
-   $ sudo apt-get update && apt-get install docker-engine
-   $ sudo service docker start
-
-To ensure Docker starts when you boot your system, do the following: ::
-
-   $ sudo systemctl enable docker
-
-.. note:: For 14.10 and below the above installation method automatically configures Upstart to start the Docker daemon on boot
 
 OSSEC-ELK Container
 -------------------
