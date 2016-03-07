@@ -342,6 +342,10 @@ class ossec::server
  - ``mysql_password``: MySQL password.
  - ``mysql_username``: MySQL username.
  - ``ossec_extra_rules_config``: To use it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file. You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the ossec::server class.
+ - ``ossec_email_maxperhour``: (default: ``12``): Global Configuration with a larger maximum emails per hour
+ - ``ossec_email_idsname``: (default: ``undef``) 
+
+
 
 Consequently, if you add or remove any of the Wazuh rules later on, you'll need to ensure to add/remove the appropriate bits in the "$ossec_extra_rules_config" array parameter as well.
 
