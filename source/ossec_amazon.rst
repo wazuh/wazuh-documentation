@@ -34,7 +34,7 @@ Turn on CloudTrail
 
 Create a trail for your AWS account. Trails can be created using the AWS CloudTrail console or the AWS Command Line Interface (AWS CLI). Both methods follow the same steps. In this case we will be focusing on the first one:
 
-* Turn on ``CloudTrail``. Note that, by default, when creating a trail in one region in the CloudTrail console, this one will apply to all regions.
+* Turn on ``CloudTrail``. Note that, by default, when creating a trail in one region in the CloudTrail console, this one will apply to all regions. **Warning**: Please do not enable `Enable log file validation` parameter, it's not supported by provided python script.
 
 * Create a new Amazon S3 bucket or specify an existing bucket to store all your log files. By default, log files from all AWS regions in your account will be stored in the bucket selected.
 
