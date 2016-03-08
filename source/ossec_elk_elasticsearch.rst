@@ -3,7 +3,7 @@
 Elasticsearch
 =============
 
-In this guide we will describe how to install Elasticsearch, version 1.7, as a single-node cluster (with no shard replicas). This is usally enough to process OSSEC alerts data. For very large deployments we recommend to actually use a multi-node cluster, which provides load balancing and data replication. 
+In this guide we will describe how to install Elasticsearch, as a single-node cluster (with no shard replicas). This is usally enough to process OSSEC alerts data. For very large deployments we recommend to actually use a multi-node cluster, which provides load balancing and data replication. 
 
 .. topic:: Single-host vs distributed deployments
 

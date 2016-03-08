@@ -46,8 +46,3 @@ Here are some useful commands to check that everything is working as expected. Y
   
   $ cat /var/ossec/logs/alerts/alerts.json 
   {"rule":{"level":3,"comment":"Ossec server started.","sidid":502,"groups":["ossec","pci_dss"],"PCI_DSS":["10.6.1"]},"full_log":"ossec: Ossec started.","hostname":"vpc-agent-debian","timestamp":"2015 Nov 08 23:01:28","location":"ossec-monitord"}
-
-A last step is necessary if you are planning to use OSSEC RESTful API. ::
-
- $ sudo mkdir /var/ossec/dev/
- $ sudo mount -o bind /dev /var/ossec/dev/ 
