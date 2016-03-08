@@ -55,7 +55,32 @@ The users require access to the API. For this, they must have access keys. To ge
 
 .. warning:: This is your only opportunity to view or download the secret access keys, and you must provide this information to your users before they can use the AWS Console. If you don't download and save them now, you will need to create new access keys for the users later. You will not have access to the secret access keys again after this step.
 
-Give the user(s) permission to manage security policies, press ``Attach Policy`` and select ``AmazonS3FullAccess`` policy. 
+Give the user(s) access to this specific S3 bucket (based on http://blogs.aws.amazon.com/security/post/Tx3VRSWZ6B3SHAV/Writing-IAM-Policies-How-to-grant-access-to-an-Amazon-S3-bucket)
+
+Go to ``Permissions`` tab, ``Inline Policies`` section and hit ``Create User Policy`` button. Select ``Custom Policy`` option and push the ``Select`` button.
+
+In the next page enter some ``Policy Name`` e.g. ossec-cloudtrail-s3-access and for ``Policy Document`` use the example provided bellow:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["s3:ListBucket"],
+      "Resource": ["arn:aws:s3:::YOURBUCKETNAME"]
+    },
+    {
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": ["arn:aws:s3:::YOURBUCKETNAME/*"]
+    }
+  ]
+}
+```
 
 Install AWS Cli in your Ossec Agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
