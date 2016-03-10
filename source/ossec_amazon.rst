@@ -34,7 +34,9 @@ Turn on CloudTrail
 
 Create a trail for your AWS account. Trails can be created using the AWS CloudTrail console or the AWS Command Line Interface (AWS CLI). Both methods follow the same steps. In this case we will be focusing on the first one:
 
-* Turn on ``CloudTrail``. Note that, by default, when creating a trail in one region in the CloudTrail console, this one will apply to all regions. **Warning**: Please do not enable `Enable log file validation` parameter, it's not supported by provided python script.
+* Turn on ``CloudTrail``. Note that, by default, when creating a trail in one region in the CloudTrail console, this one will apply to all regions. 
+
+.. warning:: Please do not enable `Enable log file validation` parameter, it's not supported by provided python script.
 
 * Create a new Amazon S3 bucket or specify an existing bucket to store all your log files. By default, log files from all AWS regions in your account will be stored in the bucket selected.
 
@@ -61,26 +63,26 @@ Go to ``Permissions`` tab, ``Inline Policies`` section and hit ``Create User Pol
 
 In the next page enter some ``Policy Name`` e.g. ossec-cloudtrail-s3-access and for ``Policy Document`` use the example provided bellow:
 
-```
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Action": ["s3:ListBucket"],
-      "Resource": ["arn:aws:s3:::YOURBUCKETNAME"]
-    },
-    {
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObject",
-        "s3:DeleteObject"
-      ],
-      "Resource": ["arn:aws:s3:::YOURBUCKETNAME/*"]
-    }
-  ]
-}
-```
+::
+
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": ["s3:ListBucket"],
+        "Resource": ["arn:aws:s3:::YOURBUCKETNAME"]
+      },
+      {
+        "Effect": "Allow",
+        "Action": [
+          "s3:GetObject",
+          "s3:DeleteObject"
+        ],
+        "Resource": ["arn:aws:s3:::YOURBUCKETNAME/*"]
+      }
+    ]
+  }
 
 Install AWS Cli in your Ossec Agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -146,7 +148,7 @@ Configure user credentials  with AWS Cli
 
 To configure the user credentials write the following in your terminal: ::
 
-  $ sudo aws configure
+  $ aws configure
 
 This command is interactive, prompting you to enter additional information. Introduce each of your access keys in turns and press ``Enter``. Region name and output format are not necessary, press Enter to skip them.
 
@@ -164,9 +166,9 @@ We use a python script to download JSON files from S3 Bucket and convert them in
 
 Run the following command to use this script: ::
 
-  $ ./getawslog.py -b s3bucketname -d -j -D -l /var/log/amazon/amazon.log
+  $ ./getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log
 
-Where ``s3bucketname`` is the name of the bucket created when CloudTrail was activated (see the first step in this section: "Turn on CloudTrail") and ``/var/log/amazon/amazon.log`` is the path where the log flat file is stored once has been converted by the script.
+Where ``s3bucketname`` is the name of the bucket created when CloudTrail was activated (see the first step in this section: "Turn on CloudTrail") and ``/path-with-write-permission/amazon.log`` is the path where the log flat file is stored once has been converted by the script.
 
 .. note:: In case you don't want to use an existing folder, create it manually before running the script.
 
@@ -184,9 +186,9 @@ CloudTrail delivers log files to your S3 bucket approximately every 7 minutes. R
 
   To work around this issue install the module named boto, use this command ``$ sudo pip install boto``
 
-Run ``vi /etc/crontab`` and, at the end of the file, add the following line ::
+Run ``crontab -e`` and, at the end of the file, add the following line ::
 
-  */5 *   * * *   root    python path_to_script/getawslog.py -b s3bucketname -d -j -D -l /var/log/amazon/amazon.log
+  */5 *   * * * python path_to_script/getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log
 
 
 .. note:: This script downloads and deletes the files from your S3 Bucket. However, you can always review the log messages generated during the last 7 days through CloudTrail.
