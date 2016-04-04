@@ -21,7 +21,7 @@ Here we will use OSSEC log analysis collection and analysis capabilities to meet
 
 + *10.2.5 Use of and changes to identification and authentication mechanisms—including but not limited to creation of new accounts and elevation of privileges—and all changes, additions, or deletions to accounts with root or administrative privileges*
 
-These contronls require us to log invalid logical access attempts, multiple invalid login attempts (possible brute force attacks), elevation privileges, changes in accounts, etc. To achieve this, we have added PCI DSS tags to OSSEC log analysis rules, mapping them to the corresponding requirement. This way, it will be easy to analyze and visualize our PCI DSS related alerts.
+These controls require us to log invalid logical access attempts, multiple invalid login attempts (possible brute force attacks), elevation privileges, changes in accounts, etc. To achieve this, we have added PCI DSS tags to OSSEC log analysis rules, mapping them to the corresponding requirement. This way, it will be easy to analyze and visualize our PCI DSS related alerts.
 
 The syntax used for rule tagging is **pci_dss_** followed by the number of the requirement. In this case those would be: pci_dss_10.2.4 and pci_dss_10.2.5.
 
