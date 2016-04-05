@@ -7,6 +7,7 @@ Table of contents
    about
    installation
    ossec_elk
+   ossec_reference
    ossec_api
    ossec_ruleset
    ossec_docker
