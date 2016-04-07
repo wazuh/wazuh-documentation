@@ -154,6 +154,8 @@ All script options: ::
 
   Additional Params:
     -f, --force-update      Force to update all rules and rootchecks. By default, only it is updated the new/changed rules/rootchecks.
+    -d, --directory           Use the ruleset specified at 'directory'. Directory structure should be the same that ossec-rules repository.
+
 
   Configuration file syntax using option -A:
     # Commented line
