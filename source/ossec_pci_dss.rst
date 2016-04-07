@@ -113,7 +113,7 @@ OSSEC includes out-of-the-box CIS baselines for Debian and Redhat and other base
         <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
     </rootcheck>
 
-Other PCI DSS requierments will ask us to check that applications (speciallly network services) are configured in a secure way. One example is the following control:
+Other PCI DSS requirements will ask us to check that applications (specially network services) are configured in a secure way. One example is the following control:
 
 *2.2.4 Configure system security parameters to prevent misuse.*
 
