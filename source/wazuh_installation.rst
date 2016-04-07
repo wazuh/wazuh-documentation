@@ -1,6 +1,6 @@
 .. _wazuh_installation:
 
-Wazuh HIDS 
+Wazuh HIDS
 ==========
 
 Wazuh team has developed an OSSEC fork, implementing new features to improve OSSEC manager capabilities. These modifications do not affect OSSEC agents. Meaning that, if you are looking to install an agent, you just need to run a standard OSSEC installation and do not need to follow next steps. Documentation to perform an standard OSSEC installation can be found :ref:`here <ossec_installation>`.
@@ -9,14 +9,21 @@ Now, if you are installing an OSSEC manager, we strongly recommend you to use ou
 
 To start with this installation, first we need to set up the compilation environment by installing development tools and compilers. In Linux this can easily be done using your distribution packages manager:
 
-For RPM based distributions: :: 
+For RPM based distributions: ::
 
-   $ sudo yum groupinstall 'Development Tools'
-   $ sudo yum install git
- 
+   $ sudo yum install make gcc git
+
+If you want to use Auth, also install: ::
+
+   $ sudo yum install openssl-devel
+
 For Debian based distributions: ::
 
-   $ sudo apt-get install build-essential git
+   $ sudo apt-get install gcc make git
+
+If you want to use Auth, also install: ::
+
+   $ sudo apt-get install libssl-dev
 
 Now we are ready to clone our Github repository and compile the source code, to install OSSEC: ::
 
@@ -39,10 +46,10 @@ Here are some useful commands to check that everything is working as expected. Y
   root     31382  0.0  0.1  19800   808 ?        S    23:01   0:00 /var/ossec/bin/ossec-syscheckd
   ossec    31385  0.0  0.1  28140   832 ?        S    23:01   0:00 /var/ossec/bin/ossec-monitord
   root     31407  0.0  0.1   7832   876 pts/0    S+   23:02   0:00 grep ossec
-  
-  $ lsof /var/ossec/logs/alerts/alerts.json 
+
+  $ lsof /var/ossec/logs/alerts/alerts.json
   COMMAND     PID  USER   FD   TYPE DEVICE SIZE/OFF   NODE NAME
   ossec-ana 31366 ossec   10w   REG  202,0      245 274582 /var/ossec/logs/alerts/alerts.json
-  
-  $ cat /var/ossec/logs/alerts/alerts.json 
+
+  $ cat /var/ossec/logs/alerts/alerts.json
   {"rule":{"level":3,"comment":"Ossec server started.","sidid":502,"groups":["ossec","pci_dss"],"PCI_DSS":["10.6.1"]},"full_log":"ossec: Ossec started.","hostname":"vpc-agent-debian","timestamp":"2015 Nov 08 23:01:28","location":"ossec-monitord"}
