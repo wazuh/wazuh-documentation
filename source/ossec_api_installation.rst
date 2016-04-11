@@ -64,7 +64,11 @@ You can configure some parameters using the file ``api/config.js``:
  - https: Use HTTP protocol over TLS/SSL. Default value: **yes**.
  - basic_auth: Use basic authentication. Default value: **yes**.
  - AccessControlAllowOrigin: Set header **Access-Control-Allow-Origin**. Default value: *****.
- - AccessControlAllowHeaders: Set header **Access-Control-Allow-Headers**. Default value: **kbn-version**.
+ - AccessControlAllowHeaders: Set header **Access-Control-Allow-Headers**. Default value: *****.
+
+- Network
+
+ - BehindProxyServer: it indicates if the API is behind a proxy. Default value: **no**.
 
 - Paths:
 
@@ -128,17 +132,13 @@ Time to start the API, we are going to start it on background and redirect the s
 Running API as service
 ----------------------------------
 
-You can set up Wazuh API service following these steps: ::
+In order to run the API as a service on your operating system, we provide a script that automatically detects if you are using *SysVinit* or *Systemd* and install the service: ::
 
- $ sudo install -m 755 -o root -g root /var/ossec/api/scripts/wazuh-api /etc/init.d/
- $ sudo systemctl enable wazuh-api
- $ sudo systemctl daemon-reload
- $ sudo systemctl restart wazuh-api
+ $ sudo /var/ossec/api/scripts/install_daemon.sh
 
 Then, check out if the API is running:
 
-  * SysVinit systems: service wazuh-api status
   * Systemd systems: systemctl status wazuh-api
+  * SysVinit systems: service wazuh-api status
 
-
-.. note:: *scripts/wazuh-api* is a **SysVinit** script compatible with **Systemd**.
+The available options are: start, stop, status and restart.
