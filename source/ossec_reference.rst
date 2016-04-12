@@ -8,8 +8,7 @@ This section is intended to extend the official `OSSEC manual <http://ossec-docs
 .. toctree::
    :maxdepth: 2
 
-   manual_manage_agents
+   manage_agents
    manual_authd
    manual_integrator
-   manual_tcp
    manual_reuse_id

@@ -1,16 +1,15 @@
 .. _manual_authd:
 
-ossec-auth with password
+OSSEC Auth
 ===========================
 
 .. versionadded:: v1.1
 
-The ``ossec-authd`` will automatically add an agent to the manager and provide a
-new key to the agent. ``agent-auth`` is the client application used by agents to 
-connect with ossec-authd.
+``ossec-authd`` is an automatic agents registration tool, it will automatically add an agent to the **manager** and provide a new key to the **agent**. 
 
-Wazuh HIDS provides **password-based authentication** for agents. The server
-looks for a defined password at file ``/var/ossec/etc/authd.pass``. If a
+
+Now, ``ossec-authd`` tool is password protected, increasing security in the agent registration process.
+OSSEC Manager looks for a defined password at file ``/var/ossec/etc/authd.pass``. If a
 password isn't found, a random one is generated and shown on the console.
 
 **Duplicated IPs** are not longer allowed. So if there's an attempt to add two
@@ -24,15 +23,6 @@ Configuration
 
 On server-side
 ^^^^^^^^^^^^^^
-
-``ossec-authd -[Vhdtin] [-f sec] [-g group] [-D dir] [-p port] [-v path] [-x path] [-k path]``
-
-.. seealso::
-    For a complete description of every option, please read `OSSEC documentation: ossec-authd`_.
-
-    .. _`OSSEC documentation: ossec-authd`: http://ossec-docs.readthedocs.org/en/latest/programs/ossec-authd.html
-
-
 New options:
 
 -i              Register agent with client's IP instead of *any*.
@@ -46,16 +36,13 @@ specified time, that agent will be deleted automatically and the new agent will
 be added. To force insertion always (regardless of the time of the last agent 
 connection), use ``-f 0``.
 
+.. seealso::
+    For a complete description of every option, please read `OSSEC documentation: ossec-authd`_.
+
+    .. _`OSSEC documentation: ossec-authd`: http://ossec-docs.readthedocs.org/en/latest/programs/ossec-authd.html
+
 On client-side
 ^^^^^^^^^^^^^^
-
-``agent-auth -[Vhdt] [-g group] [-D dir] [-m IP address] [-p port] [-A name] [-v path] [-x path] [-k path] [-P pass]``
-
-.. seealso::
-    For a complete description of every option, please read `OSSEC documentation: agent-auth`_.
-
-    .. _`OSSEC documentation: agent-auth`: http://ossec-docs.readthedocs.org/en/latest/programs/agent-auth.html
-
 
 New options:
 
@@ -64,6 +51,12 @@ New options:
 
 If a password is not provided at file neither on console, the client will
 connect with the server without password (insecure mode).
+
+.. seealso::
+    For a complete description of every option, please read `OSSEC documentation: agent-auth`_.
+
+    .. _`OSSEC documentation: agent-auth`: http://ossec-docs.readthedocs.org/en/latest/programs/agent-auth.html
+
 
 Data backup
 -----------

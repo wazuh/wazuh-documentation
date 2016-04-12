@@ -1,6 +1,6 @@
 .. _manual_integrator:
 
-Integrator for Slack and PagerDuty
+Integrator
 ==================================
 
 .. versionadded:: v1.1
@@ -14,26 +14,27 @@ Enabling Integrator
 Integrator is not enabled by default, but it can be enabled with the following
 command: ::
 
-    ossec-control enable integrator
-    ossec-control start
+    $ /var/ossec/bin/ossec-control enable integrator
+    $ /var/ossec/bin/ossec-control restart
 
 Configuration
 -------------
 
-Integrations are configured at file ``etc/ossec.conf``, that is located inside
-your OSSEC installation directory. The **syntax** is the following: ::
+Integrations are configured at file ``etc/ossec.conf``, which is located inside
+your OSSEC installation directory. Add inside *<ossec_config></ossec_config>* tags your integration like this:
+ ::
 
     <integration>
-      <name> </name>
-      <hook_url> </hook_url>
-      <api_key> </api_key>
+         <name> </name>
+         <hook_url> </hook_url>
+         <api_key> </api_key>
 	  
       <!-- Optional filters -->
 	  
-      <rule_id> </rule_id>
-      <level> </level>
-      <group> </group>
-      <event_location> </event_location>
+         <rule_id> </rule_id>
+         <level> </level>
+         <group> </group>
+         <event_location> </event_location>
     </integration>
 
 Basic configuration
@@ -96,11 +97,11 @@ Filter by rule ID.
 <group>
 """""""
 
-Filter rules by category. `OS_Regex`_.
+Filter rules by category. `OS_Regex Syntax`_.
 
 <event_location>
 """"""""""""""""
 
-Filter rules by location where they were originated. `OS_Regex`_
+Filter rules by location where they were originated. `OS_Regex Syntax`_
 
-.. _`OS_Regex`: http://ossec-docs.readthedocs.org/en/latest/syntax/regex.html
+.. _`OS_Regex Syntax`: http://ossec-docs.readthedocs.org/en/latest/syntax/regex.html
