@@ -4,6 +4,9 @@
 Installation
 ============
 
+Installation
+------------
+
 Reporting and Management for Wazuh requires you to have previously installed Splunk Enterprise (Version 6.1.1 and above).
 
 Copy the "wazuh/" folder to Splunk Apps folder: ::
@@ -27,7 +30,8 @@ The first time a user access the application the following steps are required:
 - The user will be asked for a user/password pair, and a name for the pair. The pair is used for check the OSSEC agents' status and the Wazuh Restful API management. Type a user and password valid for the API on all the OSSEC managers, and name it Splunk.
 - In the menu, go to ``Searches & Reports -> Utility``. Execute ``Initialize OSSEC Server Lookup Table`` and ``Rebuild OSSEC Server Lookup Table``.
 
-The credentials pair Splunk is required, because the application will look for it when tries to check the agents' status. It’s possible to add more credentials pairs in ``Apps->Manage Apps->Reporting and Management for Wazuh->Set up``. Credentials are stored in a secure way, using Splunk Storage Passwords.
+The credentials pair Splunk is required, because the application will look for it when tries to check the agents' status. 
+To add more credentials pairs go to ``Apps->Manage Apps`` and click ``Set up`` in Reporting and Management for Wazuh row. Credentials are stored in a secure way, using Splunk Storage Passwords.
 
 Adding new managers
 -------------------
@@ -36,7 +40,7 @@ By default, Reporting and Management for Wazuh will read the local file ``/var/o
 
 - When asked for a source type, select ``ossec_json``.
 - When asked for a host method, chose IP or DNS (with Custom the ``ossec_agent_control`` input, which provides information about the agents status, won’t work).
-- If the ``alerts.json`` file comes from Splunk Universal Forwarder, open ``/opt/splunk/etc/system/local/inputs.conf`` in Splunk Universal Forwarder machine and set host value equals to the IP of the Splunk Universal Forwarder machine. Alternatively, create a DNS entry in the Splunk machine pointing the name of Splunk Universal Forwarder machine to the machine's IP.
+- If the ``alerts.json`` file comes from Splunk Universal Forwarder, open ``/opt/splunk/etc/system/local/inputs.conf`` in Splunk Universal Forwarder machine and set host value equals to his IP. Alternatively, create a DNS entry in the Splunk machine pointing the name of Splunk Universal Forwarder machine to his IP.
 
 Upgrading from "Reporting and Management for OSSEC"
 ---------------------------------------------------

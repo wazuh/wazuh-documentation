@@ -1,6 +1,6 @@
 .. _ossec_splunk:
 
-Reporting and Management for Wazuh 
+Splunk for Wazuh 
 ==================================
 
 .. topic:: Introduction
@@ -10,12 +10,12 @@ Reporting and Management for Wazuh
     The integration between OSSEC Wazuh HIDS and Splunk for Wazuh is reached thanks to the JSON loggin capabilities and the OSSEC Wazuh RESTful API.
 
     Reporting and Management for Wazuh capabilities:
-
+    
     * Search and visualize data about OSSEC Wazuh HIDS alerts.
-    * Search and visualize the agents' status
+    * Search and visualize the agents' status.
     * Perform actions over the managers or the agents through OSSEC Wazuh RESTful API.
     * Based on Reporting and Management for OSSEC.
-    * Brand new dashboards: Wazuh Overview, Wazuh PCI Compliance and Wazuh File Integrity
+    * Brand new dashboards: Wazuh Overview, Wazuh PCI Compliance and Wazuh File Integrity.
     
 .. image:: images/splunk/ossec-splunk-example.png
    :align: center
