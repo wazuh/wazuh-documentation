@@ -15,6 +15,7 @@ Wazuh team is currently supporting OSSEC enterprise users, and decided to develo
 * [OSSEC Wazuh Ruleset](http://documentation.wazuh.com/en/latest/ossec_ruleset.html)
 * [OSSEC Docker container](http://documentation.wazuh.com/en/latest/ossec_docker.html)
 * [OSSEC deployment with Puppet](http://documentation.wazuh.com/en/latest/ossec_puppet.html)
+* [OSSEC Wazuh app for Splunk](http://documentation.wazuh.com/en/latest/ossec_splunk.html)
 
 ## Contributions
 
