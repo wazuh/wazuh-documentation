@@ -4,7 +4,7 @@ Installation
 ======================
 
 Pre-requisites
-======================
+----------------
 
 In order to install and run the API, you will need some packages, in the following steps we will guide you to install them.
 
