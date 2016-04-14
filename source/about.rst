@@ -19,6 +19,5 @@ Wazuh team is currently supporting OSSEC enterprise users, and decided to develo
    
 - :ref:`Docker containers <ossec_docker>` to virtualize and run your OSSEC manager and an all-in-one integration with ELK Stack.
 
-+ :ref:`Splunk for Wazuh app <ossec_splunk>` to manage and visualize Wazuh OSSEC data through Splunk.  
 
 .. note:: If you want to contribute to this documentation or our projects please head over to our `Github repositories <https://github.com/wazuh>`_. You can also join our `users mailing list <https://groups.google.com/d/forum/wazuh>`_, by sending an email to ``wazuh+subscribe@googlegroups.com``, to ask questions and participate in discussions.  
