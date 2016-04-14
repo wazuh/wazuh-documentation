@@ -8,7 +8,7 @@ Docker installation
 
 Docker requires a 64-bit installation regardless of your CentOS or Debian version. Also, your kernel must be 3.10 at minimum.
 
-To check your current kernel version, open a terminal and use ``uname -r to`` display your kernel version::
+To check your current kernel version, open a terminal and use ``uname -r`` to display your kernel version::
 
    $ uname -r
    3.10.0-229.el7.x86_64
