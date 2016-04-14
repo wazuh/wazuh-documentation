@@ -1,25 +1,21 @@
 .. _ossec_api_installation:
 
-
 Installation
 ======================
 
+Pre-requisites
+======================
+
+In order to install and run the API, you will need some packages, in the following steps we will guide you to install them.
+
+- Wazuh HIDS
+- NodeJS server (v0.10.x) with Express module (4.0.x)
+- Python 2.6 or superior
+
+
 OSSEC Wazuh RESTful API requires you to have previously installed our OSSEC fork as your manager. You can download and install it following :ref:`these instructions <wazuh_installation>`. 
 
-As well, OSSEC API works under a NodeJS server (v0.10.x) with Express module (4.0.x), and has the following dependencies:
-
-- Body parser
-- FS
-- HTTPS
-- HTTP-AUTH
-- Moment
-
-The service will operate on port 55000/tcp by default, and NodeJS service will be protected with HTTP Authentication and encrypted by HTTPS.
-
-Copy the API folder to OSSEC folder: ::
-
- $ cd ~ && git clone https://github.com/wazuh/wazuh-API.git
- $ sudo mkdir -p /var/ossec/api && sudo cp -r wazuh-API/* /var/ossec/api
+The API will operate on port 55000/tcp by default, and NodeJS service will be protected with HTTP Authentication and encrypted by HTTPS.
 
 NodeJS
 ------------
@@ -36,54 +32,89 @@ On Debian, update your repositories and install ``nodejs`` package: ::
  $ sudo apt-get install nodejs
  $ sudo apt-get install npm
  
-Once you have installed NodeJS and NPM, you must install the modules used by Wazuh Api: ::
- 
- $ sudo -s
- $ cd /var/ossec/api
- $ npm install
-
-.. note:: Remember to open 55000 port TCP in your firewall, as it is used by the API service.
 
 Python packages
 ------------------
 The API uses Python to perform some tasks. Install in your system:
 
 - Python 2.6+
-- Package *xmljson*: ``pip install xmljson``
+- Package *xmljson*: Install it running ``pip install xmljson``
 
+RESTful API
+--------------------
+
+Proceed to download the API and copy API folder to OSSEC folder: ::
+
+ $ cd ~
+ $ wget https://github.com/wazuh/wazuh-API/archive/v1.2.tar.gz -O wazuh-API-1.2.tar.gz
+ $ tar -xvf wazuh-API-*.tar.gz
+ $ sudo mkdir -p /var/ossec/api && sudo cp -r wazuh-API-*/* /var/ossec/api
+ 
+Once you have installed NodeJS, NPM and the API, you must install the NodeJS modules: ::
+ 
+ $ sudo -s
+ $ cd /var/ossec/api
+ $ npm install
+ 
 Configuration
 ----------------
 
-You can configure some parameters using the file ``api/config.js``:
+You can configure some parameters using the file ``api/config.js`` ::
 
-- Port: **55000** by default.
+    // Port
+    // TCP Port used by the API.
+    config.port = "55000";
 
+    // Security
+    // Use HTTP protocol over TLS/SSL
+    config.https = "yes";
+    
+    // Use HTTP authentication
+    config.basic_auth = "yes";
+    
+    // In case the API run behind a proxy server, turn to "yes" this feature.
+    config.BehindProxyServer = "no";
+    
+    // Cross-origin resource sharing
+    config.cors = "yes";
 
-- Security
+    // Paths
+    config.ossec_path = "/var/ossec";
+    config.log_path = "/var/ossec/logs/api.log";
+    config.api_path = __dirname;
 
- - https: Use HTTP protocol over TLS/SSL. Default value: **yes**.
- - basic_auth: Use basic authentication. Default value: **yes**.
- - AccessControlAllowOrigin: Set header **Access-Control-Allow-Origin**. Default value: *****.
- - AccessControlAllowHeaders: Set header **Access-Control-Allow-Headers**. Default value: *****.
+    // Logs
+    // Values for API log: disabled, info, warning, error, debug (each level includes the previous level).
+    config.logs = "info";    
+    config.logs_tag = "WazuhAPI"; 
 
-- Network
+Basic Authentication
+--------------------------
 
- - BehindProxyServer: it indicates if the API is behind a proxy. Default value: **no**.
+By default you can access by entering user "foo" and password "bar". We recommend you to generate new credentials. This can be done very easily, doing the following steps:
 
-- Paths:
+At first please make sure that you have ``htpasswd`` tool installed.
 
- - ossec_path: */var/ossec* by default.
+On Debian, update your repositories and install ``apache2-utils`` package: ::
 
-- Logs
+ $ sudo apt-get update
+ $ sudo apt-get install apache2-utils
+ 
+On Centos, install the package running ::
+ 
+ $ sudo yum install httpd-tools
 
- - logs: Log level (disabled, info, warning, error, debug). Each level includes the previous level. Default value: **info**.
- - logs_tag: Tag to use in logs. Default value: **WazuhAPI**.
+Then, run htpasswd with your desired username: :: 
 
-
+ $ cd /var/ossec/api/ssl
+ $ sudo htpasswd -c htpasswd username
+ 
 SSL Certificate
 ----------------
 
-At ``/var/ossec/api`` directory you can find some certificates we already created for you. But, if you want to create your own certificates, you can do it by following these steps (they require you to have openssl installed): ::
+At this point, you will create certificates to use the API, in case you prefer to use the out-of-the-box certificates, skip this section.
+
+Follow the next steps to generate them (Openssl package is required): ::
 
  $ cd /var/ossec/api/ssl
  $ sudo openssl genrsa -des3 -out server.key 1024
@@ -103,22 +134,6 @@ And remove temporary files: ::
  $ sudo rm server.csr
  $ sudo rm server.key.org
 
-Basic Authentication
---------------------------
-
-By default you can access by entering user "foo" and password "bar". We recommend you to generate new credentials. This can be done very easily, doing the following steps:
-
-At first please make sure that you have ``htpasswd`` tool installed.
-
-On Debian, update your repositories and install ``apache2-utils`` package: ::
-
- $ sudo apt-get update
- $ sudo apt-get install apache2-utils
-
-Then, run htpasswd with your desired username: :: 
-
- $ cd /var/ossec/api/ssl
- $ sudo htpasswd -c htpasswd username
 
 Running API on the background
 ----------------------------------
