@@ -75,8 +75,38 @@ If you like use Reporting to keep track of what happens during every chef-client
   $ sudo chef-server-ctl reconfigure
   $ sudo opscode-reporting-ctl reconfigure
 
+Create the administrator account and an organization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+From your Chef server, run the following command to create the administrator account. Replace ADMIN_USER_NAME, ADMIN_FIRST_NAME, ADMIN_LAST_NAME, ADMIN_EMAIL, and ADMIN_PASSWORD with your values. ::
+
+  $ sudo chef-server-ctl user-create ADMIN_USER_NAME ADMIN_FIRST_NAME ADMIN_LAST_NAME ADMIN_EMAIL ADMIN_PASSWORD --filename ADMIN_USER_NAME.pem
+
+For example: ::
+
+  $ sudo chef-server-ctl user-create jlruizmlg Jose Luis Ruiz jose@example.com p4ssw0rd --filename jlruizmlg.pem
+
+The command generates an RSA private key (.pem file) that enables you enables you to run knife commands against the Chef server as an authenticated user. You'll copy this file to your workstation in the next step. For now, verify that this private key was written to the current directory on your Chef server.
+
+.. note:: You always create the initial user account directly from the Chef server on the command line. Later, you can add additional users from the command line or through the management console.
+
+
+
 Workstation configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 
+Create the organization
 
+From your Chef server, run the following command to create the organization. Replace ORG_SHORT_NAME, ORG_LONG_NAME, and ADMIN_USER_NAME with your values. ::
+
+  $ sudo chef-server-ctl org-create ORG_SHORT_NAME "ORG_LONG_NAME" --association_user ADMIN_USER_NAME
+
+For example: ::
+  
+  $ sudo chef-server-ctl org-create wazuh "Wazuh, Inc." --association_user jlruizmlg
+
+.. note:: You can ignore the RSA private key that chef-server-ctl org-create writes to the console. In prior versions of chef-client, you would use this private key during the bootstrap process to enable a node to authenticate itself for the first time with the Chef server. Newer versions of chef-client use your client key to perform the initial authentication.
+
+Node configuration
+^^^^^^^^^^^^^^^^^^^
