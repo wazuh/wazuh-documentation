@@ -90,23 +90,60 @@ The command generates an RSA private key (.pem file) that enables you enables yo
 
 .. note:: You always create the initial user account directly from the Chef server on the command line. Later, you can add additional users from the command line or through the management console.
 
-
-
 Workstation configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-
 Create the organization
 
-From your Chef server, run the following command to create the organization. Replace ORG_SHORT_NAME, ORG_LONG_NAME, and ADMIN_USER_NAME with your values. ::
+From your ```Chef server```, run the following command to create the organization. Replace ORG_SHORT_NAME, ORG_LONG_NAME, and ADMIN_USER_NAME with your values. ::
 
   $ sudo chef-server-ctl org-create ORG_SHORT_NAME "ORG_LONG_NAME" --association_user ADMIN_USER_NAME
 
 For example: ::
-  
+
   $ sudo chef-server-ctl org-create wazuh "Wazuh, Inc." --association_user jlruizmlg
 
 .. note:: You can ignore the RSA private key that chef-server-ctl org-create writes to the console. In prior versions of chef-client, you would use this private key during the bootstrap process to enable a node to authenticate itself for the first time with the Chef server. Newer versions of chef-client use your client key to perform the initial authentication.
 
+In your ```Workstation``` to install donwload and install Chef client run the next command::
+
+  $ curl -L https://www.chef.io/chef/install.sh | sudo bash
+
+and then enter the local password when prompted.
+
+In your workstation you can create the folder ```chef-repo/.chef``` and ```chef-repo/cookbooks``` with the next command: ::
+
+  $ cd ~
+  $ mkdir -p chef-repo/.chef
+  $ mkdir -p chef-repo/cookbooks
+
+After that move the admin user pem file in our case ```jlruizmlg.pem``` than we created in the last step to ```chef-repo/.chef``` folder in the Workstation from your Chef folder.
+
+The last thing to do is create a file named ```knife.rb``` in the folder ```chef-repo/.chef``` with the next code:
+
+::
+
+  current_dir = File.dirname(__FILE__)
+  log_level                :info
+  log_location             STDOUT
+  node_name                "workstation"
+  client_key               "#{current_dir}/jlruiz.pem"
+  validation_client_name   "wazuh-validator"
+  validation_key           "#{current_dir}/wazuh-validator.pem"
+  chef_server_url          "https://chef.wazuh.com/organizations/wazuh"
+  cookbook_path            ["#{current_dir}/../cookbooks"]
+
+Where ```client_key``` is your ```adminuser.pem```
+
+.. note:: Since Chef version 12 the validator.pem is deprecated and not necessary, if you are doing this installation with a previous version probably you will need.
+
+The last last step is validate your connection to the Chef server. One way to do that is to run the ```knife ssl check``` command. ::
+
+  $ knife ssl check
+     Connecting to host api.wazuh.com:443
+     Successfully verified certificates from `api.wazuh.com'
+
 Node configuration
 ^^^^^^^^^^^^^^^^^^^
+
+The next step is to configure a new node and run the cookbook on it. In Learn the Chef basics, you ran chef-client in local mode to configure the node directly. Now you'll use knife to trigger chef-client to run on your node, remotely from your workstation.
