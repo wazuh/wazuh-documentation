@@ -6,7 +6,7 @@ Special Search Commands Reference
 Reference List
 --------------
 
-* `Wazuh Dashboards`_
+* `Special Search Commands`_
     * `Initialize OSSEC Server Lookup Table`_
     * `Rebuild OSSEC Server Lookup Table`_
     * `Track Expected Hosts`_   
