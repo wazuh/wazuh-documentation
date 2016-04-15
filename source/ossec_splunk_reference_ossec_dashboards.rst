@@ -21,9 +21,14 @@ Agent Coverage
    :align: center
    :width: 80%
 
-* **Use case**:
-* **Description**:
-* **Anotations**:
+* **Use case**: To have an overview of the agents coverage.
+* **Description**: A dashboard with the following elements:
+    * Total agents.
+    * Active agents.
+    * Percent coverage.
+    * Age of last agent checkin.
+    * Missing and inactive agents.
+* **Anotations**: The percent will change if an agent is inactive during seven days or more.
 
 Agent Status
 ++++++++++++
@@ -32,9 +37,11 @@ Agent Status
    :align: center
    :width: 80%
 
-* **Use case**:
-* **Description**:
-* **Anotations**:
+* **Use case**: To have an overview of the agents status.
+* **Description**: A dashboard with agent status:
+    * Overview.
+    * By agent.
+    * Over time.
 
 Event Search
 ++++++++++++
@@ -43,6 +50,10 @@ Event Search
    :align: center
    :width: 80%
 
-* **Use case**:
-* **Description**:
-* **Anotations**:
+* **Use case**: Events search easily.
+* **Description**: A form where it's possible to perform an event search, filtering with the following fields:
+    * Manager.
+    * Rule group.
+    * Agent.
+    * Rule severity.
+    * Time.

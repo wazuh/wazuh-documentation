@@ -22,17 +22,17 @@ Wazuh Overview
    :align: center
    :width: 80%
 
-* **Use case**: To have an overview of the agents and managers status, perform frequent actions and detect inusual alerts peak.
+* **Use case**: To have an overview of the agents and managers status, perform frequent actions and detect inusual alerts peaks.
 * **Description**: A dashboard with the following elements:
-    * A panel with the agents' status for a manager.
-    * A panel where for each agent it's possible to perform the following operations: Get info, get key, reset syscheck and remove.
-    * A panel where for each agent it's possible to know the files that are being monitored, and the number of changes for each file.
-    * A panel for adding new agents.
-    * A panel for restarting syscheck on all the agents.
-    * A panel with the manager status.
-    * A panel with the rules loaded in the manager.
-    * A chart displaying the alerts count by time.
-* **Anotations**: To add a new agent or restart syscheck, be sure the corresponding security check is enabled.
+    * The agents' status for a manager.
+    * Given an agent perform the following operations: Get info, get key, reset syscheck and remove.
+    * Given an agent know the files that are being monitored, and the number of changes for each file.
+    * Adding new agents.
+    * Restarting syscheck on all the agents.
+    * Manager status.
+    * Rules loaded in the manager.
+    * Chart displaying the alerts count by time.
+* **Anotations**: To add a new agent or restart syscheck, be sure the corresponding checkbox is enabled.
 
 Wazuh PCI Compliance
 ++++++++++++++++++++
@@ -43,11 +43,11 @@ Wazuh PCI Compliance
 
 * **Use case**: To know the PCI compliance requirements for managers and agents.
 * **Description**: A dashboard with the following elements:
-    * A chart displaying the percent of each requirement.
-    * A panel with the requirements for each agent.
-    * A chart displaying the OSSEC alert groups.
-    * A chart displaying the requirements by time.
-    * A char displaying the OSSEC alert signatures by time.
+    * The percent of each requirement.
+    * Requirements for each agent.
+    * OSSEC alert groups.
+    * Chart displaying the requirements by time.
+    * Chart displaying the OSSEC alert signatures by time.
 
 Wazuh File Integrity
 ++++++++++++++++++++
@@ -58,10 +58,10 @@ Wazuh File Integrity
 
 * **Use case**: To know the last file integrity check reports.
 * **Description**: A dashboard with the following elements:
-    * A chart displaying the count of changes over time. It's possible to filter the chart by agent name, registry key name, file name or type of change (File or registry).
-    * A chart displaying the files that have changed.
-    * A panel with the ordered count of changes for files or registry keys.
-    * A panel with the last file changes. It displays the file name, date of change, old checksum and the new checksum.
+    * Count of changes over time. It's possible to filter the chart by agent name, registry key name, file name or type of change (File or registry).
+    * Chart displaying the files that have changed.
+    * Ordered count of changes for files or registry keys.
+    * Last file changes (Displaying the file name, date of change, old checksum and the new checksum).
 
 Wazuh Dashboard
 +++++++++++++++
@@ -70,5 +70,10 @@ Wazuh Dashboard
    :align: center
    :width: 80%
 
-* **Use case**:
-* **Description**:
+* **Use case**: To have an overview of frequent metrics.
+* **Description**: A dashboard with the following top rankings:
+    * Rule signatures over time.
+    * Rule signatures.
+    * Rule level.
+    * Reporting hosts.
+    * Users.
