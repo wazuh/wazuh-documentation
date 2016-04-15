@@ -12,5 +12,6 @@ Table of contents
    ossec_ruleset
    ossec_docker
    ossec_puppet
+   ossec_chef
    ossec_pci_dss
    ossec_splunk
