@@ -9,7 +9,7 @@ Pre-requisites
 
 Reporting and Management for Wazuh requires you to have previously installed:
 - Splunk Enterprise (Version 6.1.1 and above).
-- OSSEC Wazuh HIDS
+- OSSEC Wazuh HIDS.
 - OSSEC Wazuh RESTful API (Version 1.2 and above).
 
 Automatic installation
