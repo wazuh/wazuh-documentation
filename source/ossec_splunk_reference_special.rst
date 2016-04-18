@@ -33,7 +33,7 @@ Track Expected Hosts
 ++++++++++++++++++++
 
 * **Use case**: To populate the CSV file where expected agents are listed.
-* **Description**: Populates the CSV file where expected agents are listed, looking for managers in the events.
+* **Description**: Populates the CSV file where expected agents are listed, looking for agents in the events.
 * **Anotations**: This command is registered as a cron task. However, it's possible to execute it manually.
 
 Track Last Checkin

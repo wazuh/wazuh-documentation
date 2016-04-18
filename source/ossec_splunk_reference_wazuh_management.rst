@@ -61,9 +61,7 @@ Rootcheck
     * Get database.
     * Get last scan date.
     * Start scan.
-    * Start scan in all agents.
     * Clear database.
-    * Clear database in all agents.
 * **Anotations**: For more information see `OSSEC Wazuh RESTful API Reference -> Rootcheck <http://documentation.wazuh.com/en/latest/ossec_api_reference.html#rootcheck>`_.
 
 Syscheck
@@ -79,7 +77,5 @@ Syscheck
     * Get changes in a file.
     * Get last scan date.
     * Start scan.
-    * Start scan in all agents.
     * Clear database.
-    * Clear database in all agents.
 * **Anotations**: For more information see `OSSEC Wazuh RESTful API Reference -> Syscheck <http://documentation.wazuh.com/en/latest/ossec_api_reference.html#syscheck>`_.
