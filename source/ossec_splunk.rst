@@ -1,6 +1,6 @@
 .. _ossec_splunk:
 
-Splunk for Wazuh 
+Splunk App for Wazuh 
 ==================================
 
 .. topic:: Introduction
