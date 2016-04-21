@@ -1,6 +1,6 @@
 .. _manual_authd:
 
-OSSEC Auth
+OSSEC Authd
 ===========================
 
 .. versionadded:: v1.1
