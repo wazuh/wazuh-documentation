@@ -170,7 +170,7 @@ CloudTrail delivers log files to your S3 bucket approximately every 7 minutes. R
 
 Run ``crontab -e`` and, at the end of the file, add the following line ::
 
-  */5 *   * * * python path_to_script/getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log
+  */5 *   * * * /usr/bin/flock -n /tmp/cron.lock -c python path_to_script/getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log
 
 
 .. note:: This script downloads and deletes the files from your S3 Bucket. However, you can always review the log messages generated during the last 7 days through CloudTrail.
