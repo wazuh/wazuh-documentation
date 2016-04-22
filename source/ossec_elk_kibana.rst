@@ -7,43 +7,61 @@ This is your last step in the process of setting up your ELK cluster. In this se
 
 Furthermore, the documentation also includes extra steps to secure your Kibana interface with username and password, using Nginx web server.
 
-Kibana installation
--------------------
+Kibana installation on Debian
+------------------------------------
 
-Assuming you have followed the previous steps of :ref:`our guide <ossec_elk>`, and that you are using a single-host type of deployment. You can now install Kibana following running these commands: ::
+To install the Kibana version 4.5 Debian package, using official repositories run the following commands: ::
 
- $ cd ~/ossec_tmp
- $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz
- $ sudo tar xvf kibana-*.tar.gz && sudo mkdir -p /opt/kibana && sudo cp -R kibana-4*/* /opt/kibana/
+ $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+ $ echo "deb http://packages.elastic.co/kibana/4.5/debian stable main" | sudo tee -a /etc/apt/sources.list
+ $ sudo apt-get update && sudo apt-get install kibana
 
-If you need the 32 bit version use the download link: ``https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x86.tar.gz``
+Configure Kibana to automatically start during bootup. If your distribution is using the System V version of init, run the following command: ::
+
+ $ sudo update-rc.d kibana defaults 95 10   
+
+If your distribution is using systemd, run the following commands instead: ::
+
+ $ sudo /bin/systemctl daemon-reload
+ $ sudo /bin/systemctl enable kibana.service
+
+
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html>`_.
+
+
+Kibana installation on CentOS
+------------------------------------
+
+To install Kibana version 4.5 RPM package. Lets start importing the repository GPG key: ::
+
+ $ sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+Then we create ``/etc/yum.repos.d/kibana.repo`` file with the following content: ::
+
+ [kibana-4.5]
+ name=Kibana repository for 4.5.x packages
+ baseurl=http://packages.elastic.co/kibana/4.5/centos
+ gpgcheck=1
+ gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
+ enabled=1
+
+And we can now install the RPM package with yum: ::
+
+ $ sudo yum install kibana
+
+Finally configure Kibana to automatically start during bootup:
+
+- If your distribution is using SysV init, then you will need to run: ::
+
+   $ sudo chkconfig --add kibana
  
-Kibana service for SystemVinit
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- If your distribution is using Systemd: ::
 
-When using SystemVinit as your service manager (usually on Debian distributions), you can set up Kibana service following these steps: ::
+   $ sudo /bin/systemctl daemon-reload
+   $ sudo /bin/systemctl enable kibana.service
 
- $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
- $ sudo chmod +x /etc/init.d/kibana4
- $ sudo update-rc.d kibana4 defaults 96 9
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/kibana/current/setup.html>`_.
 
-Kibana service for Systemd
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-On the other hand, if your system uses Systemd to manage the services (usually on CentOS distributions), you can set up Kibana service by creating a Systemd unit file at ``/etc/systemd/system/kibana4.service`` with the following contents: ::
-
- [Service]
- ExecStart=/opt/kibana/bin/kibana
- Restart=always
- StandardOutput=syslog
- StandardError=syslog
- SyslogIdentifier=kibana4
- User=root
- Group=root
- Environment=NODE_ENV=production
-
- [Install]
- WantedBy=multi-user.target
 
 Kibana on low memory systems
 ------------------------------
