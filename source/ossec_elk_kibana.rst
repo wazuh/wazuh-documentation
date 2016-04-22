@@ -91,7 +91,7 @@ If you need to change any of this settings, open the ``/opt/kibana/config/kibana
 
 Now we can start Kibana: :: 
 
- $ sudo service kibana4 start
+ $ sudo service kibana start
 
 OSSEC alerts index
 ^^^^^^^^^^^^^^^^^^
