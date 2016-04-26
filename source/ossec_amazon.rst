@@ -84,14 +84,12 @@ In the next page enter some ``Policy Name`` e.g. ossec-cloudtrail-s3-access and 
     ]
   }
 
-Install AWS Cli in your Ossec Agent
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Install Python Boto in your Ossec Agent
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To download and process the Amazon AWS logs that already are archived in S3 Bucket we need to install AWS Cli in the OSSEC agent and configure it to enable the connection with AWS S3.
+To download and process the Amazon AWS logs that already are archived in S3 Bucket we need to install Python Boto in the OSSEC agent and configure it to enable the connection with AWS S3.
 
-The AWS CLI comes pre-installed on the ``Amazon Linux AMI``. After connecting to the instance, run ``$ sudo yum update``  to get the latest version of the package available. If you need a more recent version of the AWS CLI than the available in the Amazon updates repository, uninstall the package ``$ sudo yum remove aws-cli`` and then install new version using pip as follows:
-
-Prerequisites for AWS CLI installation using Pip
+Prerequisites for Python Boto installation using Pip
 
 * Windows, Linux, OS X, or Unix
 * Python 2 version 2.7+ or Python 3 version 3.3+
@@ -126,26 +124,13 @@ To install pip on Linux
 
   $ sudo python get-pip.py
 
-Now that Python and pip are installed, use pip to install the AWS CLI: ::
+Now that Python and pip are installed, use pip to install boto: ::
 
-  $ sudo pip install awscli
   $ sudo pip install boto
 
-.. note:: If you installed a new version of Python alongside an older version that came with your distribution, or update pip to the latest version, you may get the following error when trying to invoke pip with sudo: ``command not found``. We can work around this issue by using ``which pip`` to locate the executable, and then invoke it directly by using an absolute path when installing the AWS CLI:
 
-  ``$ which pip``
-
-  ``/usr/local/bin/pip``
-
-  ``$ sudo /usr/local/bin/pip install awscli``
-
-To upgrade an existing AWS CLI installation, use the ``--upgrade`` option: ::
-
-  $ sudo pip install --upgrade awscli
-
-
-Configure user credentials  with AWS Cli
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configure user credentials with Python Boto
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To configure the user credentials you need to create a file called ``/etc/boto.cfg`` looking like: ::
 
