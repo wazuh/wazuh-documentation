@@ -24,7 +24,7 @@ Prior to the installation of the OSSEC rules for Amazon AWS, follow the steps be
 
 1. Turn on CloudTrail.
 2. Create a user with permission to access S3.
-3. Install AWS Cli in your Ossec Agent.
+3. Install Python Boto in your Ossec Agent.
 4. Configure the previous user credentials with AWS Cli in your Ossec Agent.
 5. Run the script getawslog.py to download the log JSON files and convert them into flat files.
 6. Install Wazuh Amazon rules.
