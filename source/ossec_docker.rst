@@ -8,74 +8,33 @@ Docker installation
 
 Docker requires a 64-bit installation regardless of your CentOS or Debian version. Also, your kernel must be 3.10 at minimum.
 
-To check your current kernel version, open a terminal and use ``uname -r to`` display your kernel version::
+To check your current kernel version, open a terminal and use ``uname -r`` to display your kernel version::
 
    $ uname -r
    3.10.0-229.el7.x86_64
 
 .. note:: These Docker containers are based on "xetus-oss" dockerfiles, which can be found at `https://github.com/xetus-oss/docker-ossec-server <https://github.com/xetus-oss/docker-ossec-server>`_. We created our own fork, which we test and maintain. Thank you Terence Kent for your contribution to the community.
 
-Docker installation on CentOS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Run the Docker installation script. ::
 
-To add the Docker yum repository, create a file named ``/etc/yum.repos.d/docker.repo`` with the following content: ::
+   $ curl -sSL https://get.docker.com/ | sh
 
-   [dockerrepo]
-   name=Docker Repository
-   baseurl=https://yum.dockerproject.org/repo/main/centos/7
-   enabled=1
-   gpgcheck=1
-   gpgkey=https://yum.dockerproject.org/gpg
+If you would like to use Docker as a non-root user, you should now consider
+adding your user to the "docker" group with something like: ::
 
-Now install the RPM package and start the service: ::
+  $ sudo usermod -aG docker your-user
 
-   $ sudo yum install docker-engine
-   $ sudo service docker start 
-   $ chkconfig docker on     
+.. note:: Remember that you will have to log out and back in for this to take effect!
 
-Docker installation on Debian
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Add the new repository GPG key: ::
-
-  $ apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-
-Then, to add Docker apt-get repository, create a file named ``/etc/apt/sources.list.d/docker.list`` with the following content depending on your Debian distribution.
-
-For Debian Wheezy: ::
-
-   # Debian Wheezy
-   deb https://apt.dockerproject.org/repo debian-wheezy main
-
-For Debian Jessie: ::
-
-   # Debian Jessie
-   deb https://apt.dockerproject.org/repo debian-jessie main
-
-For Debian Strech: ::
-
-   # Debian Stretch/Sid
-   deb https://apt.dockerproject.org/repo debian-stretch main
-
-Now we can install the Debian package and start the service: ::
-
-   $ sudo apt-get update && apt-get install docker-engine
-   $ sudo service docker start
-
-To ensure Docker starts when you boot your system, do the following: ::
-
-   $ sudo systemctl enable docker
-
-.. note:: For 14.10 and below the above installation method automatically configures Upstart to start the Docker daemon on boot
 
 OSSEC-ELK Container
 -------------------
 
-These Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <ossec_wazuh>`.
+These Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <wazuh_installation>`.
 
 To install the ossec-elk container run this command: ::
 
-   $ docker run -d -p 1514:1514/udp -p 1515:1515 -p 514:514/udp -p 5601:5601 -v /somepath/ossec_mnt:/var/ossec/data --name ossec wazuh/ossec-elk
+   $ docker run -d -p 55000:55000 -p 1514:1514/udp -p 1515:1515 -p 514:514/udp -p 5601:5601 -v /somepath/ossec_mnt:/var/ossec/data --name ossec wazuh/ossec-elk
 
 The ``/var/ossec/data`` directory allows the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue (all OSSEC files). In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
 
@@ -133,7 +92,7 @@ OSSEC HIDS  Container
 These Docker container source files can be found in our `ossec-server Github repository <https://github.com/wazuh/docker-ossec>`_. To install it run this command: ::
 
    $ docker run --name ossec-server -d -p 1514:1514/udp -p 1515:1515\
-  -e SYSLOG_FORWADING_ENABLED=true -e SYSLOG_FORWARDING_SERVER_IP=X.X.X.X\
+  -e SYSLOG_FORWARDING_ENABLED=true -e SYSLOG_FORWARDING_SERVER_IP=X.X.X.X\
   -v /somepath/ossec_mnt:/var/ossec/data wazuh/docker-ossec
 
 The ``/var/ossec/data`` directory allows the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue. In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.

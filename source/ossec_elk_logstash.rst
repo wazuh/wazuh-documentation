@@ -20,12 +20,14 @@ For single-host type of deployments we directly install the ``Logstash server`` 
 Logstash installation on Debian
 -------------------------------
 
-To install ``Logstash server`` on Debian based distributions run the following commands on your system: ::
+To install ``Logstash server`` version 2.1 on Debian based distributions run the following commands on your system: ::
 
  $ wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
- $ echo "deb http://packages.elasticsearch.org/logstash/1.5/debian stable main" | sudo tee -a /etc/apt/sources.list
+ $ echo "deb http://packages.elasticsearch.org/logstash/2.1/debian stable main" | sudo tee -a /etc/apt/sources.list
  $ sudo apt-get update && sudo apt-get install logstash
 
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_.
+ 
 Logstash forwarder
 ^^^^^^^^^^^^^^^^^^
 
@@ -38,22 +40,24 @@ Only for distributed architectures you need to install ``Logstash forwarder``, o
 Logstash installation on CentOS
 -------------------------------
 
-To install ``Logstash server`` version 1.5 RPM package. Lets start importing the repository GPG key: ::
+To install ``Logstash server`` version 2.1 RPM package. Lets start importing the repository GPG key: ::
 
  $ sudo rpm --import https://packages.elasticsearch.org/GPG-KEY-elasticsearch
 
 Then we need to create ``/etc/yum.repos.d/logstash.repo`` file with the following content: ::
 
- [logstash-1.5]
- name=Logstash repository for 1.5.x packages
- baseurl=http://packages.elasticsearch.org/logstash/1.5/centos
+ [logstash-2.1]
+ name=Logstash repository for 2.1.x packages
+ baseurl=http://packages.elastic.co/logstash/2.1/centos
  gpgcheck=1
- gpgkey=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+ gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
  enabled=1
 
 And finally we install the RPM package with yum: ::
 
  $ sudo yum install logstash
+ 
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_.
 
 Logstash forwarder
 ^^^^^^^^^^^^^^^^^^
@@ -86,7 +90,7 @@ Since we are going to use Logstash forwarder to ship logs from our hosts to our 
 SSL Certificate
 ^^^^^^^^^^^^^^^
 
-The SSL certificate needs to be created on your Logstash sever, and then copied to your Logstash forwarder machine. See below how to create this certificate when you run your Logstash server on a Debian or a CentOS Linux distribution.
+The SSL certificate needs to be created on your ``Logstash Sever``, and then copied to your Logstash forwarder machine. See below how to create this certificate when you run your Logstash server on a Debian or a CentOS Linux distribution.
 
 SSL Certificate on Debian
 """""""""""""""""""""""""
@@ -99,12 +103,12 @@ To create the SSL certificate on a Debian system, open ``/etc/ssl/openssl.cnf`` 
 Now generate the SSL certificate and private key, and copy it to your Logstash forwarder system via scp (substituting ``user`` and ``logstash_forwarder_ip`` by their real values): ::
 
  $ cd /etc/ssl/
- $ sudo openssl req -config /etc/ssl/openssl.cnf -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout private/logstash-forwarder.key -out certs/logstash-forwarder.crt
- $ scp /etc/ssl/certs/logstash-forwarder.crt user@logstash_forwarder_ip:/tmp
+ $ sudo openssl req -config /etc/ssl/openssl.cnf -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout /etc/logstash/logstash-forwarder.key -out /etc/logstash/logstash-forwarder.crt
+ $ scp /etc/logstash/logstash-forwarder.crt user@logstash_forwarder_ip:/tmp
 
 Then log into your Logstash forwarder system, via SSH, and move the certificate to the right directory: ::
- 
- $ sudo cp /tmp/logstash-forwarder.crt /etc/ssl/certs/
+   
+ $ sudo mv /tmp/logstash-forwarder.crt /opt/logstash-forwarder/
 
 SSL Certificate on CentOS
 """""""""""""""""""""""""
@@ -117,12 +121,12 @@ To create the SSL certificate on a CentOS system, open ``/etc/pki/tls/openssl.cn
 Now generate the SSL certificate and private key, and copy it to your Logstash forwarder system via scp (substituting ``user`` and ``logstash_forwarder_ip`` by their real values): ::
 
  $ cd /etc/pki/tls/
- $ sudo openssl req -config /etc/pki/tls/openssl.cnf -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout private/logstash-forwarder.key -out certs/logstash-forwarder.crt
- $ scp /etc/pki/tls/certs/logstash-forwarder.crt user@logstash_forwarder_ip:/tmp
+ $ sudo openssl req -config /etc/pki/tls/openssl.cnf -x509 -days 3650 -batch -nodes -newkey rsa:2048 -keyout /etc/logstash/logstash-forwarder.key -out /etc/logstash/logstash-forwarder.crt
+ $ scp /etc/logstash/logstash-forwarder.crt user@logstash_forwarder_ip:/tmp
 
 Then log into your Logstash forwarder system, via SSH, and move the certificate to the right directory: ::
  
- $ sudo cp /tmp/logstash-forwarder.crt /etc/pki/tls/certs/
+ $ sudo mv /tmp/logstash-forwarder.crt /opt/logstash-forwarder
 
 Logstash forwarder settings
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -134,19 +138,11 @@ Now on your Logstash forwarder system (same one where you run the OSSEC manager)
  # the selected one appears to be dead or unresponsive
  "servers": [ "logstash_server_ip:5000" ],
 
-Below those lines you will find the CA configuration settings. We use ``ssl ca`` variable to specify the path to our Logstash forwarder SSL certificate. Below are the values of this line depending on your distribution.
-
-For CentOS: :: 
+Below those lines you will find the CA configuration settings. We use ``ssl ca`` variable to specify the path to our Logstash forwarder SSL certificate ::
 
  # The path to your trusted ssl CA file. This is used
  # to authenticate your downstream server.
- "ssl ca": "/etc/pki/tls/certs/logstash-forwarder.crt",
-
-For Debian: ::
-
- # The path to your trusted ssl CA file. This is used
- # to authenticate your downstream server.
- "ssl ca": "/etc/ssl/certs/logstash-forwarder.crt",
+ "ssl ca": "/opt/logstash-forwarder/logstash-forwarder.crt",
 
 Once that is done, in the same file, uncomment timeout option line to increase connection reliability: ::
 
@@ -164,6 +160,7 @@ Finally set Logstash forwarder to read OSSEC alerts file, modify list of files c
       ],
      "fields": { "type": "ossec-alerts" }
  }
+ ]
 
 At this point, save and exit the Logstash forwarder configuration file. Let's now give it permissions to read the alerts file, by adding ``logstash-forwarder`` user to the ``ossec`` group: ::
 
@@ -180,24 +177,21 @@ Logstash configuration is based on three different plugins: *input*, *filter* an
 
 Depending on your architecture, single-host or distributed, we will configure Logstash server to read OSSEC alerts directly from OSSEC log file, or to read the incoming data (sent by Logstash forwarder) from port 5000/udp (remember to open your firewall to accept this traffic). 
 
-For single-host deployments (everything running on the same box), just copy the configuration file to the right directory: ::
+For ``single-host deployments`` (everything running on the same box), just copy the configuration file ``01-ossec-singlehost.conf`` to the right directory: ::
 
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec-singlehost.conf /etc/logstash/conf.d/
 
-However, for distributed architectures, you need to clone our github repository on your Logstash server machine, and then copy the configuration file: ::
+Instead, for distributed architectures, you need to copy the configuration file ``01-ossec.conf`` ::
 
- $ cd ~
- $ mkdir ossec_tmp && cd ossec_tmp
- $ git clone https://github.com/wazuh/ossec-wazuh.git
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/logstash/01-ossec.conf  /etc/logstash/conf.d/
 
-Now edit your ``/etc/logstash/conf.d/01-ossec.conf`` or ``/etc/logstash/conf.d/01-ossec-singlehost.conf`` file and set your Elasticsearch Server IP (substituting elasticsearch_server_ip with the real value): ::
+Logstash server by default is bound to loopback address *127.0.0.1* , if your Elasticsearch server is in a different host, remember to modify ``01-ossec.conf`` or ``01-ossec-singlehost.conf`` to set up your Elastic IP ::
 
- host => "elasticsearch_server_ip"
+ hosts => ["elasticsearch_server_ip:9200"]
 
 .. note:: Remember that, for both single-host and distributed deployments, we recommend to run Logstash server and Elasticsearch on the same server. This means that *elasticsearch_server_ip* would match your *logstash_server_ip*.
 
-Then copy the Elasticsearch custom mapping from the extensions folder to the Logstash folder: ::
+Copy the Elasticsearch custom mapping from the extensions folder to the Logstash folder: ::
 
  $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/elastic-ossec-template.json  /etc/logstash/
 
@@ -210,9 +204,7 @@ In single-host deployments, you also need to grant the *logstash* user access to
 
  $ sudo usermod -a -G ossec logstash
   
-Finally restart the Logstash server to apply changes: ::
-
- $ sudo service logstash restart
+.. note:: We are not going to start Logstash service yet, we need to wait until we import Wazuh template into Elasticsearch (see next guide)
 
 What's next
 -----------

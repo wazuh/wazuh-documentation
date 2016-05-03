@@ -1,9 +1,9 @@
-.. _ossec_configuration:
+.. _first_steps:
 
-OSSEC basic configuration
-=========================
+First steps
+===========
 
-In this documentation you will find the instructions to add a new agent, and to configure it to report to your OSSEC manager. For detailed information on OSSEC HIDS configuration options, please go to the `project documentation <http://ossec.github.io/docs/>`_, or the `reference manual <http://ossec.github.io/docs/manual/index.html>`_.
+In this documentation you will find the instructions to add a new agent, and to configure it to report to your OSSEC/Wazuh manager. For more information on OSSEC HIDS configuration options, please go to the `project documentation <http://ossec.github.io/docs/>`_, or the `reference manual <http://ossec.github.io/docs/manual/index.html>`_.
 
 Add a new agent
 ---------------

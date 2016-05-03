@@ -3,7 +3,7 @@
 Elasticsearch
 =============
 
-In this guide we will describe how to install Elasticsearch, version 1.7, as a single-node cluster (with no shard replicas). This is usally enough to process OSSEC alerts data. For very large deployments we recommend to actually use a multi-node cluster, which provides load balancing and data replication. 
+In this guide we will describe how to install Elasticsearch, as a single-node cluster (with no shard replicas). This is usally enough to process OSSEC alerts data. For very large deployments we recommend to actually use a multi-node cluster, which provides load balancing and data replication. 
 
 .. topic:: Single-host vs distributed deployments
 
@@ -12,25 +12,27 @@ In this guide we will describe how to install Elasticsearch, version 1.7, as a s
 Elasticsearch installation on Debian
 ------------------------------------
 
-To install the Elasticsearch version 1.7 Debian package, using official repositories run the following commands: ::
+To install the Elasticsearch version 2.x Debian package, using official repositories run the following commands: ::
 
  $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
- $ echo "deb http://packages.elastic.co/elasticsearch/1.7/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-1.7.list
+ $ echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
  $ sudo apt-get update && sudo apt-get install elasticsearch
  $ sudo update-rc.d elasticsearch defaults 95 10
+
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html>`_.
 
 Elasticsearch installation on CentOS
 ------------------------------------
 
-To install Elasticsearch version 1.7 RPM package. Lets start importing the repository GPG key: ::
+To install Elasticsearch version 2.x RPM package. Lets start importing the repository GPG key: ::
 
  $ sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
 Then we create ``/etc/yum.repos.d/elasticsearch.repo`` file with the following content: ::
 
- [elasticsearch-1.7]
- name=Elasticsearch repository for 1.7.x packages
- baseurl=http://packages.elastic.co/elasticsearch/1.7/centos
+ [elasticsearch-2.x]
+ name=Elasticsearch repository for 2.x packages
+ baseurl=http://packages.elastic.co/elasticsearch/2.x/centos
  gpgcheck=1
  gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
  enabled=1
@@ -50,27 +52,30 @@ Finally configure Elasticsearch to automatically start during bootup:
    $ sudo /bin/systemctl daemon-reload
    $ sudo /bin/systemctl enable elasticsearch.service
 
+If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html>`_.
+   
 Configuration and tuning
 ------------------------
 
-Once the installation is completed, we can now configure some basic settings modifiying in ``/etc/elasticsearch/elasticsearch.yml``. Open this file and look for the following variables, uncommenting the lines and assigning them the right values (substitute ``elasticsearch_server_ip`` by your server IP address): ::
+Once the installation is completed, we can now configure some basic settings modifiying in ``/etc/elasticsearch/elasticsearch.yml``. Open this file and look for the following variables, uncommenting the lines and assigning them the right values: ::
 
  cluster.name: ossec
  node.name: ossec_node1
+ 
+Elasticsearch server by default is bound to loopback address *127.0.0.1* , remember to modify it if it is necessary ::
 
  network.host: elasticsearch_server_ip or 0.0.0.0 if single-node architecture.
 
- http.port: 9200
-
- discovery.zen.ping.multicast.enabled: false
- discovery.zen.ping.timeout: 15s
+Shards default number is 5 and Replicas default number is 1, if you are deploying a single-node Elastic cluster, in order to have a Green status you have to set to 1/0 shards and replicas ::
 
  index.number_of_shards: 1
  index.number_of_replicas: 0
 
+Elasticsearch perform poorly with memory swaps, in order to disable memory swappping and lock some memory to Elastic, set true the *mlockall* option and follow the next steps ::
+
  bootstrap.mlockall: true
 
-Now, in order to increase the Elasticsearch engine performance, we add the following lines at the end of ``/etc/security/limits.conf`` file: ::
+Add the following lines at the end of ``/etc/security/limits.conf`` file: ::
 
  elasticsearch - nofile  65535    
  elasticsearch - memlock unlimited
@@ -88,7 +93,7 @@ If your server uses Systemd, edit ``/usr/lib/systemd/system/elasticsearch.servic
 
  LimitMEMLOCK=infinity
 
-Now we are done with Elasticsearch configuration and tuning, and we can restart the service to apply changes: ::
+Now we are done with Elasticsearch configuration and tuning, and **we must start the service** to apply changes and Elastic will be up and running: ::
 
  $ sudo /etc/init.d/elasticsearch start
 
@@ -108,19 +113,18 @@ To be sure our single-node cluster is working properly, wait a couple of minutes
 
 Expected result: ::
 
-  {
-    "status" : 200,
-    "name" : "ossec_node1",
-    "cluster_name" : "ossec",
-    "version" : {
-      "number" : "1.7.2",
-      "build_hash" : "e43676b1385b8125d647f593f7202acbd816e8ec",
-      "build_timestamp" : "2015-09-14T09:49:53Z",
-      "build_snapshot" : false,
-      "lucene_version" : "4.10.4"
-    },
-    "tagline" : "You Know, for Search"
-  }
+ {
+   "name": "node1",
+   "cluster_name": "ossec",
+   "version": {
+     "number": "2.1.1",
+     "build_hash": "40e2c53a6b6c2972b3d13846e450e66f4375bd71",
+     "build_timestamp": "2015-12-15T13:05:55Z",
+     "build_snapshot": false,
+     "lucene_version": "5.3.1"
+   },
+   "tagline": "You Know, for Search"
+ }
 
 Elasticsearch cluster health status: ::
 
@@ -128,26 +132,28 @@ Elasticsearch cluster health status: ::
 
 Expected result: ::
 
-  {
-    "cluster_name" : "ossec",
-    "status" : "green",
-    "timed_out" : false,
-    "number_of_nodes" : 2,
-    "number_of_data_nodes" : 1,
-    "active_primary_shards" : 0,
-    "active_shards" : 0,
-    "relocating_shards" : 0,
-    "initializing_shards" : 0,
-    "unassigned_shards" : 0,
-    "delayed_unassigned_shards" : 0,
-    "number_of_pending_tasks" : 0,
-    "number_of_in_flight_fetch" : 0
-  }
+ {
+   "cluster_name": "ossec",
+   "status": "green",
+   "timed_out": false,
+   "number_of_nodes": 2,
+   "number_of_data_nodes": 2,
+   "active_primary_shards": 281,
+   "active_shards": 562,
+   "relocating_shards": 0,
+   "initializing_shards": 0,
+   "unassigned_shards": 0,
+   "delayed_unassigned_shards": 0,
+   "number_of_pending_tasks": 0,
+   "number_of_in_flight_fetch": 0,
+   "task_max_waiting_in_queue_millis": 0,
+   "active_shards_percent_as_number": 100
+ }
 
 OSSEC alerts template
 ---------------------
 
-It's time to integrate the OSSEC Wazuh custom mapping. It's an Elasticsearch template that has already pre-mapped all possible OSSEC alert fields, as they are generated by :ref:`OSSEC Wazuh fork <ossec_wazuh>` JSON Output. This way the indexer will automatically know how to process the data, which will be displayed with user-friendly names on your Kibana interface.
+It's time to integrate the OSSEC Wazuh custom mapping. It's an Elasticsearch template that has already pre-mapped all possible OSSEC alert fields, as they are generated by :ref:`OSSEC Wazuh fork <wazuh_installation>` JSON Output. This way the indexer will automatically know how to process the data, which will be displayed with user-friendly names on your Kibana interface.
 
 Add the template by a *CURL* request to the Elastic API: ::
 
@@ -160,6 +166,12 @@ If everything was okay, the API response should be: ::
 To make sure it has actually been added successfully, you can check the template using the Elasticsearch API: ::
 
  $ curl -XGET http://localhost:9200/_template/ossec?pretty
+ 
+Start Logstash-Server
+---------------------
+Now that we have insert our custom Elasticsearch template containing about 72 OSSEC fields, we can start Logstash server ::
+
+ $ sudo service logstash start
 
 What's next
 -----------

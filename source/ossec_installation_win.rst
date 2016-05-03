@@ -33,7 +33,7 @@ Generate SHA256 checksum and compare with downloaded one: ::
 
 The expected hash checksum, in both cases, is: ::
 
-917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd
+  917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd
 
 .. note:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connexion.
 
