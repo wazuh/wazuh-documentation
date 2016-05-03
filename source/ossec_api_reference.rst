@@ -1297,7 +1297,7 @@ Clear Database
 
 DELETE /syscheck
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Clears the rootcheck database for all agents.
+Clears the syscheck database for all agents.
 
 **Parameters:**
 
@@ -1324,7 +1324,7 @@ Clears the rootcheck database for all agents.
 
 DELETE /syscheck/:agent_id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Clears the rootcheck database for an agent.
+Clears the syscheck database for an agent.
 
 **Parameters:**
 
