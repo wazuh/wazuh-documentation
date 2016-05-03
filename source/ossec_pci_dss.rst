@@ -72,7 +72,7 @@ See below examples of OSSEC rules tagged for PCI requirements 10.2.4 and 10.2.5:
 Use cases
 ^^^^^^^^^
 
-As an example, in this scenario, we try to open the file *cardholder_data.txt*. Since our current user doesn't have read access to the file, we run *sudo* to elevate privileges.
+In this scenario, we try to open the file *cardholder_data.txt*. Since our current user doesn't have read access to the file, we run *sudo* to elevate privileges.
 
 .. image:: images/pci/log_analysis_1.png
     :align: center
