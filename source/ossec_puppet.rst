@@ -52,7 +52,7 @@ Configure ``/etc/puppetlabs/puppet/puppet.conf`` adding the ``dns_alt_names`` li
 
 Then, restart your Puppet master to apply changes: ::
 
-   $ sudo service puppeserver start
+   $ sudo service puppetserver start
 
 PuppetDB installation
 ---------------------
