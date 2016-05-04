@@ -64,20 +64,10 @@ Installation on CentOS
 ::
 
    $ sudo rpm -Uvh http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm
-   $ yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql-contrib
+   $ yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
    $ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
    $ systemctl start postgresql-9.4
    $ systemctl enable postgresql-9.4
-
-The next step edit ``pg_hba.conf`` and modify the METHOD to ``md5`` in the next two lines
-/var/lib/pgsql/9.4/data/pg_hba.conf
-
-::
-
-  # IPv4 local connections:
-  host    all             all             127.0.0.1/32            md5
-  # IPv6 local connections:
-  host    all             all             ::1/128                 md5
 
 Installation on Debian
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -113,13 +103,14 @@ Create a PostgreSQL user and database: ::
 
 The user is created so that it cannot create databases (-D), or roles (-R) and doesn’t have superuser privileges (-S). It’ll prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
 
-Test database access: ::
+Test database access and create extension pg_trgm: ::
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb: 
    psql (8.4.13)
    Type "help" for help.
- 
+   
+   puppetdb=> CREATE EXTENSION pg_trgm;
    puppetdb=> \q
 
 Configure ``/etc/puppetlabs/puppetdb/conf.d/database.ini``: ::
@@ -245,8 +236,8 @@ Usage
 OSSEC manager: ::
 
    class { 'ossec::server':
-     mailserver_ip => 'mailserver.mycompany.com',
-     ossec_emailto => 'user@mycompany.com',
+     mailserver_ip => 'localhost',
+     ossec_emailto => ['user@mycompany.com']
    }
 
    ossec::command { 'firewallblock':
@@ -258,7 +249,8 @@ OSSEC manager: ::
    ossec::activeresponse { 'blockWebattack':
       command_name => 'firewall-drop',
       ar_level     => 9,
-      ar_rules_id  => [31153,31151]
+      ar_rules_id  => [31153,31151],
+      ar_repeated_offenders => '30,60,120'
    }
 
    ossec::addlog { 'monitorLogFile':
@@ -285,7 +277,7 @@ OSSEC manager: ::
 
    class { 'ossec::server':
      mailserver_ip => 'smtp.gmail.com',
-     ossec_emailto => 'jose@wazuh.com',
+     ossec_emailto => ['jose@wazuh.com']
    }
 
    ossec::command { 'firewallblock':
@@ -297,7 +289,8 @@ OSSEC manager: ::
    ossec::activeresponse { 'blockWebattack':
      command_name => 'firewall-drop',
      ar_level     => 9,
-     ar_rules_id  => [31153,31151]
+     ar_rules_id  => [31153,31151],
+     ar_repeated_offenders => '30,60,120'
    }
 
    ossec::addlog { 'monitorLogFile':
@@ -367,7 +360,7 @@ function ossec::activeresponse
  - ``$ar_level`` (default: 7): Can take values between 0 and 16.
  - ``$ar_rules_id`` (default: ``[]``): List of rules ID.
  - ``$ar_timeout`` (default: 300): Usually active reponse blocks for a certain amount of time.
-
+ - ``$ar_repeated_offenders`` (default: empty): A comma separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries.
 function ossec::addlog
  - ``$log_name``.
  - ``$logfile`` /path/to/log/file.
