@@ -246,7 +246,7 @@ OSSEC manager: ::
 
    class { 'ossec::server':
      mailserver_ip => 'mailserver.mycompany.com',
-     ossec_emailto => 'user@mycompany.com',
+     ossec_emailto => ['user@mycompany.com']
    }
 
    ossec::command { 'firewallblock':
