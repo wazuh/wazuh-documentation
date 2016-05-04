@@ -87,7 +87,7 @@ Installation on Debian
   $ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
     sudo apt-key add -
   $ sudo apt-get update
-  $ apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
+  $ apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql94-contrib.x86_64
 
 Configuration
 ^^^^^^^^^^^^^
