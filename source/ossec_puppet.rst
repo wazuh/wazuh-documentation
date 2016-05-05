@@ -237,7 +237,12 @@ OSSEC manager: ::
 
    class { 'ossec::server':
      mailserver_ip => 'localhost',
-     ossec_emailto => ['user@mycompany.com']
+     ossec_emailto => ['user@mycompany.com'],
+     use_mysql => true,
+     mysql_hostname => '127.0.0.1',
+     mysql_name => 'ossec',
+     mysql_password => 'yourpassword',
+     mysql_username  => 'ossec',
    }
 
    ossec::command { 'firewallblock':
@@ -258,7 +263,18 @@ OSSEC manager: ::
      logtype => 'syslog'
    }
 
+  class { '::mysql::server':
+    root_password           => 'yourpassword',
+    remove_default_accounts => true,
+  }
 
+  mysql::db { 'ossec':
+    user     => 'ossec',
+    password => 'yourpassword',
+    host     => 'localhost',
+    grant    => ['ALL'],
+    sql      => '/var/ossec/contrib/sqlschema/mysql.schema'
+  }
 OSSEC agent: ::
 
    class { "ossec::client":
