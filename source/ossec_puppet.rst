@@ -52,7 +52,7 @@ Configure ``/etc/puppetlabs/puppet/puppet.conf`` adding the ``dns_alt_names`` li
 
 Then, restart your Puppet master to apply changes: ::
 
-   $ sudo service puppetserver start
+   $ sudo service puppeserver start
 
 PuppetDB installation
 ---------------------
@@ -64,20 +64,10 @@ Installation on CentOS
 ::
 
    $ sudo rpm -Uvh http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm
-   $ yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql-contrib
+   $ yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
    $ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
    $ systemctl start postgresql-9.4
    $ systemctl enable postgresql-9.4
-
-The next step edit ``pg_hba.conf`` and modify the METHOD to ``md5`` in the next two lines
-/var/lib/pgsql/9.4/data/pg_hba.conf
-
-::
-
-  # IPv4 local connections:
-  host    all             all             127.0.0.1/32            md5
-  # IPv6 local connections:
-  host    all             all             ::1/128                 md5
 
 Installation on Debian
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -87,7 +77,7 @@ Installation on Debian
   $ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
     sudo apt-key add -
   $ sudo apt-get update
-  $ apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql94-contrib.x86_64
+  $ apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
 
 Configuration
 ^^^^^^^^^^^^^
@@ -113,13 +103,14 @@ Create a PostgreSQL user and database: ::
 
 The user is created so that it cannot create databases (-D), or roles (-R) and doesn’t have superuser privileges (-S). It’ll prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
 
-Test database access: ::
+Test database access and create extension pg_trgm: ::
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb: 
    psql (8.4.13)
    Type "help" for help.
- 
+   
+   puppetdb=> CREATE EXTENSION pg_trgm;
    puppetdb=> \q
 
 Configure ``/etc/puppetlabs/puppetdb/conf.d/database.ini``: ::
@@ -239,72 +230,55 @@ The manager is configured by installing the ``ossec::server`` class, and using o
  - ``ossec::activeresponse``: to link rules to active/response commands.
  - ``ossec::addlog``: to define additional log files to monitor.
 
-Usage
-^^^^^
-
-OSSEC manager: ::
-
-   class { 'ossec::server':
-     mailserver_ip => 'mailserver.mycompany.com',
-     ossec_emailto => ['user@mycompany.com']
-   }
-
-   ossec::command { 'firewallblock':
-     command_name       => 'firewall-drop',
-     command_executable => 'firewall-drop.sh',
-     command_expect     => 'srcip'
-   }
-
-   ossec::activeresponse { 'blockWebattack':
-      command_name => 'firewall-drop',
-      ar_level     => 9,
-      ar_rules_id  => [31153,31151]
-   }
-
-   ossec::addlog { 'monitorLogFile':
-     logfile => '/var/log/secure',
-     logtype => 'syslog'
-   }
-
-
-OSSEC agent: ::
-
-   class { "ossec::client":
-     ossec_server_ip => "10.10.130.66"
-   }
-
-
 Example
-^^^^^^^
-
-Here is an example of a manifest ``ossec.pp``: 
+^^^^^^
+Here is an example of a manifest ``ossec.pp``:
 
 OSSEC manager: ::
 
-   node "server.yourhost.com" {
 
-   class { 'ossec::server':
-     mailserver_ip => 'smtp.gmail.com',
-     ossec_emailto => 'jose@wazuh.com',
-   }
+  node "server.yourhost.com" {
+     class { 'ossec::server':
+       mailserver_ip => 'localhost',
+       ossec_emailto => ['user@mycompany.com'],
+       use_mysql => true,
+       mysql_hostname => '127.0.0.1',
+       mysql_name => 'ossec',
+       mysql_password => 'yourpassword',
+       mysql_username  => 'ossec',
+     }
 
-   ossec::command { 'firewallblock':
-     command_name       => 'firewall-drop',
-     command_executable => 'firewall-drop.sh',
-     command_expect     => 'srcip'
-   }
+     ossec::command { 'firewallblock':
+       command_name       => 'firewall-drop',
+       command_executable => 'firewall-drop.sh',
+       command_expect     => 'srcip'
+     }
 
-   ossec::activeresponse { 'blockWebattack':
-     command_name => 'firewall-drop',
-     ar_level     => 9,
-     ar_rules_id  => [31153,31151]
-   }
+     ossec::activeresponse { 'blockWebattack':
+        command_name => 'firewall-drop',
+        ar_level     => 9,
+        ar_rules_id  => [31153,31151],
+        ar_repeated_offenders => '30,60,120'
+     }
 
-   ossec::addlog { 'monitorLogFile':
-     logfile => '/var/log/secure',
-     logtype => 'syslog'
-   }
-   }
+     ossec::addlog { 'monitorLogFile':
+       logfile => '/var/log/secure',
+       logtype => 'syslog'
+     }
+
+    class { '::mysql::server':
+      root_password           => 'yourpassword',
+      remove_default_accounts => true,
+    }
+
+    mysql::db { 'ossec':
+      user     => 'ossec',
+      password => 'yourpassword',
+      host     => 'localhost',
+      grant    => ['ALL'],
+      sql      => '/var/ossec/contrib/sqlschema/mysql.schema'
+    }
+  }
 
 OSSEC agent: ::
 
@@ -337,6 +311,7 @@ class ossec::server
  - ``$ossec_white_list``: Allow white listing of IP addresses.
  - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
  - ``use_mysql``: (default: ``false``). Set to ``true`` to enable database integration for alerts and other outputs.
+ - ``mariadb``: (default: ``false``). Set to ``true`` to enable to use mariadb instead of mysql.
  - ``mysql_hostname``: MySQL hostname.
  - ``mysql_name``: MySQL Database name.
  - ``mysql_password``: MySQL password.
@@ -367,7 +342,7 @@ function ossec::activeresponse
  - ``$ar_level`` (default: 7): Can take values between 0 and 16.
  - ``$ar_rules_id`` (default: ``[]``): List of rules ID.
  - ``$ar_timeout`` (default: 300): Usually active reponse blocks for a certain amount of time.
-
+ - ``$ar_repeated_offenders`` (default: empty): A comma separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries.
 function ossec::addlog
  - ``$log_name``.
  - ``$logfile`` /path/to/log/file.
