@@ -330,6 +330,7 @@ class ossec::server
  - ``$ossec_white_list``: Allow white listing of IP addresses.
  - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
  - ``use_mysql``: (default: ``false``). Set to ``true`` to enable database integration for alerts and other outputs.
+ - ``mariadb``: (default: ``false``). Set to ``true`` to enable to use mariadb instead of mysql.
  - ``mysql_hostname``: MySQL hostname.
  - ``mysql_name``: MySQL Database name.
  - ``mysql_password``: MySQL password.
