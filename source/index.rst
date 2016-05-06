@@ -15,4 +15,4 @@ Table of contents
    ossec_chef
    ossec_pci_dss
    ossec_splunk
-   wazuh_virustotal
+   wazuh_modules

@@ -1,7 +1,9 @@
-.. _wazuh_virustotal:
+.. _wazuh_modules_virustotal:
 
-Wazuh VirusTotal
+VirusTotal
 ==========================
+
+(adapt to wodles...)
 
 Introduction
 --------------
