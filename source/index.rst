@@ -12,4 +12,5 @@ Table of contents
    ossec_ruleset
    ossec_docker
    ossec_puppet
+   ossec_amazon
    ossec_pci_dss
