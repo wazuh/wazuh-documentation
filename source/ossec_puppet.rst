@@ -310,6 +310,7 @@ class ossec::server
  - ``$manage_paths`` (default: ``[ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'yes', 'realtime' => 'yes'} ]``): Follow the instructions bellow.
  - ``$ossec_white_list``: Allow white listing of IP addresses.
  - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
+ - ``ossec_auto_ignore``: (default: ``yes``): Specifies if syscheck will ignore files that change too often (after the third change)
  - ``use_mysql``: (default: ``false``). Set to ``true`` to enable database integration for alerts and other outputs.
  - ``mariadb``: (default: ``false``). Set to ``true`` to enable to use mariadb instead of mysql.
  - ``mysql_hostname``: MySQL hostname.
