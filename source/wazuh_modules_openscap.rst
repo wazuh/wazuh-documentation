@@ -79,12 +79,10 @@ These are the available tags:
 ``skip-result``             Do not read results with the specified result value. Values: pass, fail, notchecked, notapplicable.
 ``skip-severity``           Do not read results with the specified severity value. Values: low, medium, high.
 ``eval``                    Define an evaluation.
-``eval:name``                    Name for the evaluation. Optional.
 ``eval:policy``                    Use the specified policy (DataStream or XCCDF).
 ``eval:timeout``            Timeout for the evaluation (in seconds). It overwrites generic timeout.
 ``eval->xccdf-id``               xccdf id. Default path: /var/ossec/wodles/oscap/policies
 ``eval->datastream-id``               datastream id. Default path: /var/ossec/wodles/oscap/policies
-``eval->oval``               oval file. Default path: /var/ossec/wodles/oscap/policies
 ``eval->cpe``               cpe file. Default path: /var/ossec/wodles/oscap/policies
 ``eval->profile``           Select profile.
 ``eval->skip-result``       skip-result for the scan. It overwrites generic skip-result.
@@ -168,7 +166,7 @@ In this example, we skip the results with low severity, but in case of the Cento
         
     </wodle>
  
-CPE and Variable files 
+CPE dictionary
 ++++++++++++++++++++++++++++++++++++++++++++
 
 If necessary, you can specify CPE and variable files. ::
@@ -181,7 +179,6 @@ If necessary, you can specify CPE and variable files. ::
 
         <eval policy="ssg-centos7-ds.xml" timeout="300">
             <cpe>file.xml</cpe>
-            <variable>file.xml</variable>
             <profile>xccdf_org.ssgproject.content_profile_standard</profile>
             <profile>xccdf_org.ssgproject.content_profile_pci-dss</profile>
             <skip-result>notchecked,notapplicable,pass</skip-result>
