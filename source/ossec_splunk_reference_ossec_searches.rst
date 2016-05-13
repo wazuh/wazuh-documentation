@@ -21,7 +21,7 @@ Reference List
 
 
 OSSEC Searches and Reports
--------------------------
+--------------------------
 
 Malware Alert
 +++++++++++++++++++

@@ -31,13 +31,13 @@ Clone the repository: ::
 
  $ cd ~
  $ git clone http://github.com/wazuh/wazuh-virustotal
- 
+
 Copy the following files into ``/var/ossec/modules/virustotal`` folder in your machine: ::
 
  $ sudo mkdir -p /var/ossec/modules/virustotal
  $ sudo cp -pr wazuh-virustotal/wazuh_modules_virustotal.py /var/ossec/modules/virustotal
  $ sudo cp -pr wazuh-virustotal/config.py /var/ossec/modules/virustotal
- 
+
 Copy rules/decoders into the right OSSEC folder: ::
 
  $ sudo cp wazuh-virustotal/decoders_rules/virustotal_rules.xml /var/ossec/rules/
@@ -63,7 +63,7 @@ Configuration
 --------------
 You will need to configure some parameters into configuration file config.py.
 
-Replace your API KEY:  :: 
+Replace your API KEY:  ::
 
  personal_API_Key = "your_key"
 
@@ -87,20 +87,19 @@ Run the module in background: ::
 Alerts
 --------------
 
-By default it is included a certain range of rules and decoders, we encourage you to develop your own rules and decoders and configure the existing ones according to your needs. ::
+By default it is included a certain range of rules and decoders, we encourage you to develop your own rules and decoders and configure the existing ones according to your needs.
 
 Some pre-built rules:
 
 =======  =====  =========================================================
   ID     Level  Description
 =======  =====  =========================================================
-113423   0      VirusTotal module has finished to scan Syscheck databases 
-113431   4      Very low risk file 
-113433   6      Medium risk file 
+113423   0      VirusTotal module has finished to scan Syscheck databases
+113431   4      Very low risk file
+113433   6      Medium risk file
 113400   7      High risk file
 113435   11     High risk file - EXE
 =======  =====  =========================================================
-             
 
 What's next
 -----------

@@ -26,7 +26,7 @@ If your distribution is using systemd, run the following commands instead: ::
  $ sudo /bin/systemctl enable kibana.service
 
 
-If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html>`_.
+If you have any doubt, visit the `official installation guide`_.
 
 
 Kibana installation on CentOS
@@ -60,7 +60,7 @@ Finally configure Kibana to automatically start during bootup:
    $ sudo /bin/systemctl daemon-reload
    $ sudo /bin/systemctl enable kibana.service
 
-If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/kibana/current/setup.html>`_.
+If you have any doubt, visit the `official installation guide`_.
 
 
 Kibana on low memory systems
@@ -222,3 +222,5 @@ Now you have finished your ELK cluster installation and we recommend you to go t
 
 * :ref:`OSSEC Wazuh RESTful API <ossec_api>`
 * :ref:`OSSEC Wazuh Ruleset <ossec_ruleset>`
+
+.. _`official installation guide`: https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html

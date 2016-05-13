@@ -31,4 +31,4 @@ backed up.
 
 .. seealso::
     - :ref:`manual_authd`
-    - :ref:`manual_manage_agents`
+    - :ref:`manage_agents`

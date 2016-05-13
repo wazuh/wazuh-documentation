@@ -1,4 +1,4 @@
-.. manage_agents:
+.. _manage_agents:
 
 Manage agents
 ====================================

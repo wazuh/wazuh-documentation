@@ -22,7 +22,7 @@ Configuration
 
 Integrations are configured at file ``etc/ossec.conf``, which is located inside
 your OSSEC installation directory. Add inside *<ossec_config></ossec_config>* tags your integration like this:
- ::
+::
 
     <integration>
          <name> </name>

@@ -24,7 +24,7 @@ Install your Yum repository, and puppet-server package, for your Enterprise Linu
 Installation on Debian
 ^^^^^^^^^^^^^^^^^^^^^^
 
-To install your Puppet master on Debian/Ubuntu systems, we need first to add our distribution repository. This can be done, downloading and installing a package named ``puppetlabs-release-distribution.deb`` where "distribution" needs to be substituted by your distribution codename (e.g. wheezy, jessie, trusty, utopic). See below the commands to install Puppet master package for a "jessie" distribution: :: 
+To install your Puppet master on Debian/Ubuntu systems, we need first to add our distribution repository. This can be done, downloading and installing a package named ``puppetlabs-release-distribution.deb`` where "distribution" needs to be substituted by your distribution codename (e.g. wheezy, jessie, trusty, utopic). See below the commands to install Puppet master package for a "jessie" distribution: ::
 
    $ wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
    $ sudo dpkg -i puppetlabs-release-pc1-trusty.deb
@@ -106,10 +106,10 @@ The user is created so that it cannot create databases (-D), or roles (-R) and d
 Test database access and create extension pg_trgm: ::
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
-   Password for user puppetdb: 
+   Password for user puppetdb:
    psql (8.4.13)
    Type "help" for help.
-   
+
    puppetdb=> CREATE EXTENSION pg_trgm;
    puppetdb=> \q
 
@@ -189,7 +189,7 @@ Run Puppet agent to generate a certificate for the Puppet master to sign: ::
 
 Log into to your Puppet master, and list the certifications that need approval: ::
 
-   $ sudo puppet cert list 
+   $ sudo puppet cert list
 
 It should output a list with your node’s hostname.
 
@@ -275,6 +275,7 @@ OSSEC manager: ::
     grant    => ['ALL'],
     sql      => '/var/ossec/contrib/sqlschema/mysql.schema'
   }
+
 OSSEC agent: ::
 
    class { "ossec::client":
@@ -285,7 +286,7 @@ OSSEC agent: ::
 Example
 ^^^^^^^
 
-Here is an example of a manifest ``ossec.pp``: 
+Here is an example of a manifest ``ossec.pp``:
 
 OSSEC manager: ::
 
@@ -323,7 +324,7 @@ OSSEC agent: ::
      ossec_server_ip => "192.168.209.166"
    }
 
-   }   
+   }
 
 Reference
 ^^^^^^^^^
@@ -353,7 +354,7 @@ class ossec::server
  - ``mysql_username``: MySQL username.
  - ``ossec_extra_rules_config``: To use it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file. You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the ossec::server class.
  - ``ossec_email_maxperhour``: (default: ``12``): Global Configuration with a larger maximum emails per hour
- - ``ossec_email_idsname``: (default: ``undef``) 
+ - ``ossec_email_idsname``: (default: ``undef``)
 
 
 
@@ -381,7 +382,7 @@ function ossec::activeresponse
 function ossec::addlog
  - ``$log_name``.
  - ``$logfile`` /path/to/log/file.
- - ``$logtype`` (default: syslog): The OSSEC ``log_format`` of the file. 
+ - ``$logtype`` (default: syslog): The OSSEC ``log_format`` of the file.
 
 OSSEC agent class
 """""""""""""""""
