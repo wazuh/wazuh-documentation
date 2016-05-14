@@ -66,7 +66,7 @@ The following steps describe how to update the Logstash server:
 
   $ cd ~
   $ mkdir ossec_tmp && cd ossec_tmp
-  $ git clone https://github.com/wazuh/ossec-wazuh.git
+  $ git clone -b stable https://github.com/wazuh/ossec-wazuh.git
 
 4. Copy the new 01-ossec.conf (Logstash Config File) into /etc/logstash/conf.d/ from the cloned git repository.
 

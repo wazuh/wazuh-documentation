@@ -22,7 +22,7 @@ Here's a list of most important files:
 
   $ cd ~
   $ mkdir ossec_tmp && cd ossec_tmp
-  $ git clone https://github.com/wazuh/ossec-wazuh.git
+  $ git clone -b stable https://github.com/wazuh/ossec-wazuh.git
   $ cd ossec-wazuh
   $ sudo ./install.sh
 
