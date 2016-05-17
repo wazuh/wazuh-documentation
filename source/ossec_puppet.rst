@@ -356,6 +356,7 @@ OSSEC agent class
  - ``$ossec_server_hostname``: Hostname of the server.
  - ``$ossec_active_response`` (default: ``true``): Allows active response on this host.
  - ``$ossec_emailnotification`` (default: ``yes``): Whether to send email notifications or not.
+ - ``$ossec_prefilter`` : (default: ``false``) Command to run to prevent prelinking from creating false positives. ``This option can potentially impact performance negatively. The configured command will be run for each and every file checked.``
  - ``$selinux`` (default: ``false``): Whether to install a SELinux policy to allow rotation of OSSEC logs.
  - ``agent_name`` (default: ``$::hostname``)
  - ``agent_ip_address`` (default: ``$::ipaddress``)
@@ -363,7 +364,8 @@ OSSEC agent class
  - ``manage_epel_repo`` (default: ``true``): Install epel repo and inotify-tools
  - ``$ossec_scanpaths`` (default: ``[]``): Agents can be Linux or Windows for this reason don't have ``ossec_scanpaths`` by default.
  - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
-
+ - ``ar_repeated_offenders``: (default: empty) A comma separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries.
+ 
 ossec_scanpaths configuration
 """""""""""""""""""""""""""""
 
