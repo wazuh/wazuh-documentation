@@ -7,44 +7,72 @@ OpenScap
 Introduction
 --------------
 
-The **OpenSCAP wodle** is an integration of *OpenScap* in *Wazuh HIDS* that gives the ability to perform configuration and vulnerability scans of an agent. Mainly it allows:
+The **OpenSCAP wodle** is an integration of `OpenScap <https://www.open-scap.org/>`_ in *Wazuh HIDS* that gives the ability to perform configuration and vulnerability scans of an agent. Mainly it allows:
 
  - **Security compliance**: It is a state where computer systems are in line with a specific *security policy* or a *security benchmark*. These policies define security requirements which all systems used by the institution must meet.
 
  - **Vulnerability assessment**: It is a process that identifies and classifies vulnerabilities on a system.
 
+ - **Specialized assessment**: It is a process that performs a specific set of checks. For example, a policy to detect suspicious file names and suspicious location of files.
 
-Brief introduction to OpenSCAP
------------------------------------------
+
+Brief introduction to SCAP
++++++++++++++++++++++++++++++++++++
 
 The `Security Content Automation Protocol (SCAP) <https://scap.nist.gov/>`_ is a specification for expressing and manipulating security data in standardized ways. SCAP uses several individual specifications in concert to automate continuous monitoring, vulnerability management, and security policy compliance evaluation reporting.
 
 Process of security compliance evaluation:
-++++++++++++++++++++++++++++++++++++++++++++
- - **SCAP scanner**: it is an application that reads SCAP security policy and checks whether or not the system is compliant with it. It goes through all rules defined in the policy one by one and reports whether each rule is fulfilled. If all checks pass, the system is compliant with the security policy. OpenSCAP offers many tools to scan your systems. We use NIST-certified OpenSCAP Scanner: **oscap**.
+
+ - **SCAP scanner**: It is is an application that reads a SCAP policy and checks whether or not the system is compliant with it. There are many `tools <https://nvd.nist.gov/scapproducts.cfm>` to scan your systems. This wodle is an integration with the NIST-certified scanner: **OpenSCAP**.
+
  - **Security policies (SCAP content)**: They determine how a system must be set up and what to check for. These policies contain machine-readable descriptions of the rules which your system will be required to follow.
 
   - **Profiles**: Each security policy can contain multiple profiles, which provide sets of rules and values implemented according to a specific security baseline. You can think of a profile as a particular subset of rules within the policy; the profile determines which rules defined in the policy are selected (checked) and what values are used during the evaluation.
 
- - **Evaluation (scan)**: The process usually takes a few minutes, depending on the number of selected rules.
-
-
-OpenSCAP integration with Wazuh HIDS
-++++++++++++++++++++++++++++++++++++++++++++
-The next sections will describe how to configure your environment in order to be able to run the wodle OpenSCAP.
+ - **Evaluation (scan)**: It is the process to evaluate a policy with a SCAP scanner. The process usually takes a few minutes, depending on the number of selected rules.
 
 
 Wodle Requirements
 ------------------------------
 
-Each agent must meet the following requirements:
+This wodle is executed in the agent so each one must meet the following requirements:
 
- - OSSEC Wazuh HIDS.
- - oscap.
- - Python 2.6+.
- - Scap Policies.
+OSSEC Wazuh HIDS
++++++++++++++++++++++
+Wodles are part of *OSSEC Wazuh fork*, so install it following these `instructions <ToDo_Link>`_.
 
-**ToDo**
+OpenScap
++++++++++++++++++++++
+In order to perform SCAP evaluations we need the scanner. As we mentioned above, we use OpenSCAP. You can install it on RedHat or CentOS versions 6 and 7 with this command: ::
+
+  yum install openscap-scanner
+
+Python 2.6+
++++++++++++++++++++++
+Python is a core part of this wodle. Currently all Linux distribution comes with python, so it should not be an inconvenient.
+
+
+SCAP Policies
+------------------------------
+
+Usually a policy consists of different files:
+
+ - OVAL (Open Vulnerability and Assessment Language): It is declarative language for making logical assertions about the state of system.
+ - XCCDF (Extensible Configuration Checklist Description Format): It is used to describe the security checklists. The language contains no commands to perform the scan and it is mostly descriptive. **Other component documents (OVAL) may be referred from the XCCDF**.
+ - CPE (Common Platform Enumeration): It serves to identify IT platforms and systems using unequivocally defined names.
+ - DataStream (files names end with -ds.xml): It is a format that packs other SCAP components into a single file.
+
+The wodle admits XCCDF or DataStream policies. Remember that if you use a XCCDF policy that references to an OVAL file, you must place the OVAL file on the same path that the XCCDF file. We strongly recommend using DataStream files because they are easier to use. Here you will find more information about `SCAP components <https://www.open-scap.org/features/scap-components/>`_.
+
+Available policies:
+ - `SCAP Security Guide (SSG) <https://www.open-scap.org/security-policies/scap-security-guide/>`_: An open source project creating and providing SCAP security policies for various platforms:
+  - RedHat and CentOS 6 and 7.
+ - `RedHat Security Data <http://www.redhat.com/security/data/metrics/>`_: The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6 and 7. This enable users to perform a vulnerability scan and diagnose whether system is vulnerable or not.
+  - RedHat 6 and 7.
+
+**ToDo**:
+ - By default with the wodle
+ - Explain profiles
 
 
 Configuration
@@ -192,23 +220,6 @@ You can select a specific IDs of the datastrem file:  ::
 
     </wodle>
 
-
-Policies
----------
-
-Policies are defined by 2 types of files:
-
- - Data Stream (files names end with -ds.xml): it is a format that packs other SCAP components into a single file ...
- - XCCDF: It is used to describe the security checklists. ...
-
-  - OVAL: It is used to describe security vulnerabilities or desired configuration of systems. OVAL definitions define a secure state of some objects in a computer ....
-
-Also, ... :
-
- - CPE
- - Variable
-
-Link to policies...
 
 
 Use cases
