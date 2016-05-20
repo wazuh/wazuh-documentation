@@ -14,5 +14,6 @@ Table of contents
    ossec_puppet
    ossec_chef
    ossec_pci_dss
+   wazuh_kibana
    ossec_splunk
    wazuh_modules
