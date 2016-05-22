@@ -23,7 +23,7 @@ The `Security Content Automation Protocol (SCAP) <https://scap.nist.gov/>`_ is a
 
 Process of security compliance evaluation:
 
- - **SCAP scanner**: It is is an application that reads a SCAP policy and checks whether or not the system is compliant with it. There are many `tools <https://nvd.nist.gov/scapproducts.cfm>`_ to scan your systems. This wodle is an integration with the NIST-certified scanner: **OpenSCAP**.
+ - **SCAP scanner**: It is an application that reads a SCAP policy and checks whether or not the system is compliant with it. There are many `tools <https://nvd.nist.gov/scapproducts.cfm>`_ to scan your systems. This wodle is an integration with the NIST-certified scanner: **OpenSCAP**.
 
  - **Security policies (SCAP content)**: They determine how a system must be set up and what to check for. These policies contain machine-readable descriptions of the rules which your system will be required to follow.
 
@@ -49,7 +49,7 @@ In order to perform SCAP evaluations we need the scanner. As we mentioned above,
 
 Python 2.6+
 +++++++++++++++++++++
-Python is a core part of this wodle. Currently all Linux distribution comes with python, so it should not be an inconvenient.
+Python is a core part of this wodle. Currently all Linux distributions come with python, so it should not be an inconvenient.
 
 
 SCAP Policies
@@ -57,7 +57,7 @@ SCAP Policies
 
 Usually a policy consists of different files:
 
- - **OVAL (Open Vulnerability and Assessment Language)**: It is declarative language for making logical assertions about the state of system.
+ - **OVAL (Open Vulnerability and Assessment Language)**: It is a declarative language for making logical assertions about the state of system.
  - **XCCDF (Extensible Configuration Checklist Description Format)**: It is used to describe the security checklists. The language contains no commands to perform the scan and it is mostly descriptive. **Other component documents (OVAL) may be referred from the XCCDF**.
  - **CPE (Common Platform Enumeration)**: It serves to identify IT platforms and systems using unequivocally defined names.
  - **DataStream** (files names end with **-ds.xml**): It is a format that packs other SCAP components into a single file.
@@ -70,7 +70,7 @@ Available policies:
 
   - RedHat and CentOS 6 and 7.
 
- - `RedHat Security Data <http://www.redhat.com/security/data/metrics/>`_: The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6 and 7. This enable users to perform a vulnerability scan and diagnose whether system is vulnerable or not.
+ - `RedHat Security Data <http://www.redhat.com/security/data/metrics/>`_: The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6 and 7. This enables users to perform a vulnerability scan and diagnose whether their system is vulnerable or not.
 
   - RedHat 6 and 7.
 
@@ -81,9 +81,9 @@ You will find a wide variety of profiles in each policy, some of them are:
  - **United States Government Configuration Baseline (usgcb)**: profile for USGCB.
  - **Red Hat Corporate Profile for Certified Cloud Providers (rht-ccp)**: SCAP profile for Red Hat Certified Cloud Providers.
  - **PCI-DSS v3 Control Baseline (pci-dss)**: profile for PCI-DSS v3.
- - **Standard System Security Profile (standard)**: This profile contains rules to ensure standard security base of a system.
+ - **Standard System Security Profile (standard)**: This profile contains rules to ensure a standard security base of a system.
 
-The policies are located at ``/var/ossec/wodles/oscap/policies``.
+The policies are located in ``/var/ossec/wodles/oscap/policies``.
 
 Configuration
 -------------
@@ -182,7 +182,7 @@ We can evaluate only a specific profile of a policy: ::
 Skips
 ++++++++++++++++++++++++++++++++++++++++++++
 
-In this example, we skip the results with *low* severity and with *notchecked*, *notapplicable*, *notselected* status, but in case of the CentOS 7 policy we want to skip the results with *low* and *medium* severity. However, for Centos 6 policy we do not want to skip any result. Finally, for CentOS 5 policy, we skip the results with *low* severity but also we want skip the result with *pass* status.
+In this example, we skip the results with *low* severity and with *notchecked*, *notapplicable*, *notselected* status, but in case of the CentOS 7 policy we want to skip the results with *low* and *medium* severity. However, for the Centos 6 policy we do not want to skip any result. Finally, for the CentOS 5 policy, we skip the results with *low* severity but we also want to skip the result with *pass* status.
 
 ::
 
@@ -242,9 +242,9 @@ Frequently Asked Questions (FAQ)
 
 Is there a noticeable performance impact when OpenSCAP wodle is enabled on an agent?
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-The OpenSCAP wodle is designed to be very efficient, however the perfomance will depend on how fast is oscap (the scanner). Depending on the chosen policy, oscap can consume many resources. We recommend to test you policies in a test agent before to deploy it in production.
+The OpenSCAP wodle is designed to be very efficient, however the perfomance will depend on how fast oscap is (the scanner). Depending on the chosen policy, oscap can consume many resources. We recommend to test your policies in a test agent before deploying it in production.
 
-Evaluations are executed in parallel?
+Are evaluations executed in parallel?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 No, each evaluation is executed sequentially. That means when an evaluation is finished, the next is executed. Also, each profile of an evaluation is executed sequentially.
 
@@ -256,13 +256,13 @@ The interval is the space of time between OpenSCAP executions. There are 2 scena
 
  - Execution time more than interval: In this case, the log "interval overtaken" at /var/ossec/log/ossec.log will be generated and when the execution is finished, it will start again immediately.
 
-are the policies evaluated when OSSEC starts?
+Are the policies evaluated when OSSEC starts?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Yes, by default policies are evaluated when the wodle starts. Unless, you set <scan-on-start> to 'no'. In this case, the next evaluation will be executed after the interval specified. The wodle state is saved when OSSEC is stopped.
 
 Where are the policies?
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Each agent must have its policies at ``/var/ossec/wodles/oscap/policies``.
+Each agent must have its policies in ``/var/ossec/wodles/oscap/policies``.
 
 
 Use cases
@@ -274,7 +274,7 @@ This section describes how to evaluate the Payment Card Industry Data Security S
 
 **Step 1: Configure agents**
 
-Each agent must be properly identified in order to know what policy and profile execute.
+Each agent must be properly identified in order to know which policy and profile execute.
 
 Agent ``ossec.conf``:
 
@@ -287,7 +287,7 @@ Agent ``ossec.conf``:
 
 **Step 2: Configure manager**
 
-We want to execute PCI-DSS profile of SSG RH7 policy only in Red Hat 7 servers.
+We want to execute the PCI-DSS profile of SSG RH7 policy only in Red Hat 7 servers.
 
 Manager ``shared/agent.conf``:
 
@@ -312,7 +312,7 @@ To apply the new configuration restart the manager and agents:
   $ /var/ossec/bin/ossec-control restart
   $ /var/ossec/bin/agent_control -R -a
 
-If you prefer, you can restart a specified agent with option ``-u <id>``.
+If you prefer, you can restart a specific agent with option ``-u <id>``.
 
 
 **Step 4: See alerts**
@@ -358,11 +358,11 @@ Finally, you can explore all results with OpenSCAP dashboards for Kibana.
 
 Auditing Security Vulnerabilities of Red Hat Products
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6 and 7. This enable users to perform a vulnerability scan and diagnose whether system is vulnerable or not.
+The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6 and 7. This enables users to perform a vulnerability scan and diagnose whether a system is vulnerable or not.
 
 **Step 1: Configure agents**
 
-Each agent must be properly identified in order to know what policy and profile execute.
+Each agent must be properly identified in order to know which policy and profile execute.
 
 Agent ``ossec.conf``:
 
@@ -398,7 +398,7 @@ To apply the new configuration restart the manager and agents:
   $ /var/ossec/bin/ossec-control restart
   $ /var/ossec/bin/agent_control -R -a
 
-If you prefer, you can restart a specified agent with option ``-u <id>``.
+If you prefer, you can restart a specific agent with option ``-u <id>``.
 
 
 **Step 4: See alerts**
