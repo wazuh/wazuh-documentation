@@ -118,7 +118,8 @@ Import the custom dashboards. Access Kibana web interface on your browser and na
 - Click on "Objects".
 - Then click the button "Import"
 - Select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
-- Optional: You can download the Dashboards JSON File directly from the repository `here<https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/kibana/kibana-ossecwazuh-dashboards.json>`_.
+
+Optionally you can download the Dashboards JSON File directly from the repository `here <https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/kibana/kibana-ossecwazuh-dashboards.json>`_.
 
 Refresh the Kibana page and you should be able to load your imported Dashboards.
 
