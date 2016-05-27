@@ -20,7 +20,7 @@ command: ::
 Configuration
 -------------
 
-Integrations are configured at file ``etc/ossec.conf``, which is located inside
+Integrations are configured in the file ``etc/ossec.conf``, which is located inside
 your OSSEC installation directory. Add inside *<ossec_config></ossec_config>* tags your integration like this:
  ::
 
@@ -28,9 +28,9 @@ your OSSEC installation directory. Add inside *<ossec_config></ossec_config>* ta
          <name> </name>
          <hook_url> </hook_url>
          <api_key> </api_key>
-	  
+
       <!-- Optional filters -->
-	  
+
          <rule_id> </rule_id>
          <level> </level>
          <group> </group>
@@ -51,13 +51,13 @@ Name of the service. Allowed values:
 <hook_url>
 """"""""""
 
-The URL provided by Slack when the integration was enabled. **Mandatory for 
+The URL provided by Slack when the integration was enabled. **Mandatory for
 Slack.**
 
 <api_key>
 """""""""
 
-Key got from the PagerDuty API. **Mandatory for PagerDuty.**
+The key that you retrieved from the PagerDuty API. **Mandatory for PagerDuty.**
 
 .. note:: You must restart OSSEC after changing the configuration.
 

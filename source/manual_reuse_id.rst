@@ -5,13 +5,13 @@ Agent ID reusage
 
 .. versionadded:: v1.0.4
 
-When OSSEC adds a new agent, assigns an unique ID for it and creates a shared
+When OSSEC adds a new agent, assigns a unique ID for it and creates a shared
 key which will be used to encrypt messages between agent and server. All this
-information is stored on the file ``etc/client.keys``.
+information is stored in the file ``etc/client.keys``.
 
-Information about agents' id and keys are not removed by default when removing 
-agents, instead of it OSSEC "comments" the corresponding line in the file. This 
-behavior can potentially make the ``client.keys`` grow if agents are re-added 
+Information about the agent's id and keys are not removed by default when removing
+agents, instead OSSEC "comments" the corresponding line in the file. This
+behavior can potentially make the ``client.keys`` grow if agents are re-added
 frequently with forcing.
 
 In order to solve this issue, there is an optional feature: **id reusage**, that
