@@ -24,7 +24,7 @@ Install your Yum repository, and puppet-server package, for your Enterprise Linu
 Installation on Debian
 ^^^^^^^^^^^^^^^^^^^^^^
 
-To install your Puppet master on Debian/Ubuntu systems, we need first to add our distribution repository. This can be done, downloading and installing a package named ``puppetlabs-release-distribution.deb`` where "distribution" needs to be substituted by your distribution codename (e.g. wheezy, jessie, trusty, utopic). See below the commands to install Puppet master package for a "jessie" distribution: :: 
+To install your Puppet master on Debian/Ubuntu systems, we first need to add our distribution repository. This can be done, downloading and installing a package named ``puppetlabs-release-distribution.deb`` where "distribution" needs to be substituted by your distribution codename (e.g. wheezy, jessie, trusty, utopic). See below the commands to install the Puppet master package for a "jessie" distribution: ::
 
    $ wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
    $ sudo dpkg -i puppetlabs-release-pc1-trusty.deb
@@ -82,7 +82,7 @@ Installation on Debian
 Configuration
 ^^^^^^^^^^^^^
 
-The next step edit ``pg_hba.conf`` and modify the METHOD to ``md5`` in the next two lines
+The next step is to edit ``pg_hba.conf`` and modify the METHOD to ``md5`` in the next two lines
 
 ::
 
@@ -103,13 +103,13 @@ Create a PostgreSQL user and database: ::
 
 The user is created so that it cannot create databases (-D), or roles (-R) and doesn’t have superuser privileges (-S). It’ll prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
 
-Test database access and create extension pg_trgm: ::
+Test the database access and create the extension pg_trgm: ::
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
-   Password for user puppetdb: 
+   Password for user puppetdb:
    psql (8.4.13)
    Type "help" for help.
-   
+
    puppetdb=> CREATE EXTENSION pg_trgm;
    puppetdb=> \q
 
@@ -142,7 +142,7 @@ Finally, update ``/etc/puppetlabs/puppet/puppet.conf``: ::
     storeconfigs = true
     storeconfigs_backend = puppetdb
 
-Once all steps are complete, restart your Puppet master and run ``puppet agent --test``: ::
+Once all steps are completed, restart your Puppet master and run ``puppet agent --test``: ::
 
    $ puppet agent --test
 
@@ -187,9 +187,9 @@ Run Puppet agent to generate a certificate for the Puppet master to sign: ::
 
    $ sudo puppet agent -t
 
-Log into to your Puppet master, and list the certifications that need approval: ::
+Log into to your Puppet master, and list the certificates that need approval: ::
 
-   $ sudo puppet cert list 
+   $ sudo puppet cert list
 
 It should output a list with your node’s hostname.
 
@@ -206,7 +206,7 @@ Back on the Puppet agent node, run the puppet agent again: ::
 OSSEC Puppet module
 -------------------
 
-.. note:: This Puppet module has been authored by Nicolas Zin, and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaing it. Thank you to the authors for the contribution.
+.. note:: This Puppet module has been authored by Nicolas Zin, and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for the contribution.
 
 Download and install OSSEC module from Puppet Forge: ::
 
@@ -288,7 +288,7 @@ OSSEC agent: ::
      ossec_server_ip => "192.168.209.166"
    }
 
-   }   
+   }
 
 Reference
 ^^^^^^^^^
@@ -320,7 +320,7 @@ class ossec::server
  - ``mysql_username``: MySQL username.
  - ``ossec_extra_rules_config``: To use it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file. You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the ossec::server class.
  - ``ossec_email_maxperhour``: (default: ``12``): Global Configuration with a larger maximum emails per hour
- - ``ossec_email_idsname``: (default: ``undef``) 
+ - ``ossec_email_idsname``: (default: ``undef``)
 
 
 
@@ -348,7 +348,7 @@ function ossec::activeresponse
 function ossec::addlog
  - ``$log_name``.
  - ``$logfile`` /path/to/log/file.
- - ``$logtype`` (default: syslog): The OSSEC ``log_format`` of the file. 
+ - ``$logtype`` (default: syslog): The OSSEC ``log_format`` of the file.
 
 OSSEC agent class
 """""""""""""""""
@@ -366,11 +366,11 @@ OSSEC agent class
  - ``$ossec_scanpaths`` (default: ``[]``): Agents can be Linux or Windows for this reason don't have ``ossec_scanpaths`` by default.
  - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
  - ``ar_repeated_offenders``: (default: empty) A comma separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries.
- 
+
 ossec_scanpaths configuration
 """""""""""""""""""""""""""""
 
-Leaving this unconfigured will result on OSSEC using the module defaults. By default, it will monitor /etc, /usr/bin, /usr/sbin, /bin and /sbin on Ossec Server, with real time monitoring disabled and report_changes enabled.
+Leaving this unconfigured will result in OSSEC using the module defaults. By default, it will monitor /etc, /usr/bin, /usr/sbin, /bin and /sbin on Ossec Server, with real time monitoring disabled and report_changes enabled.
 
 To overwrite the defaults or add in new paths to scan, you can use hiera to overwrite the defaults.
 
@@ -394,4 +394,3 @@ ossec::server::ossec_scanpaths:
     realtime: 'yes'
 
 **Note: Configuring the ossec_scanpaths variable will overwrite the defaults. i.e. if you want to add a new directory to monitor, you must also add the above default paths to be monitored.**
-
