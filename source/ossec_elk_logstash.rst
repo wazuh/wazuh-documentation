@@ -23,7 +23,7 @@ Logstash installation on Debian
 To install ``Logstash server`` version 2.1 on Debian based distributions run the following commands on your system: ::
 
  $ wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
- $ echo "deb http://packages.elasticsearch.org/logstash/2.1/debian stable main" | sudo tee -a /etc/apt/sources.list
+ $ echo "deb https://packages.elasticsearch.org/logstash/2.1/debian stable main" | sudo tee -a /etc/apt/sources.list
  $ sudo apt-get update && sudo apt-get install logstash
 
 If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_.
@@ -34,7 +34,7 @@ Logstash forwarder
 Only for distributed architectures you need to install ``Logstash forwarder``, on the system where you run your OSSEC manager, running the following commands: ::
 
  $ wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
- $ sudo echo "deb http://packages.elasticsearch.org/logstashforwarder/debian stable main" | sudo tee -a /etc/apt/sources.list
+ $ sudo echo "deb https://packages.elasticsearch.org/logstashforwarder/debian stable main" | sudo tee -a /etc/apt/sources.list
  $ sudo apt-get update && sudo apt-get install logstash-forwarder
 
 Logstash installation on CentOS
@@ -48,9 +48,9 @@ Then we need to create ``/etc/yum.repos.d/logstash.repo`` file with the followin
 
  [logstash-2.1]
  name=Logstash repository for 2.1.x packages
- baseurl=http://packages.elastic.co/logstash/2.1/centos
+ baseurl=https://packages.elastic.co/logstash/2.1/centos
  gpgcheck=1
- gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
+ gpgkey=https://packages.elastic.co/GPG-KEY-elasticsearch
  enabled=1
 
 And finally we install the RPM package with yum: ::
@@ -70,9 +70,9 @@ Then we create a yum repository in ``/etc/yum.repos.d/logstash-forwarder.repo`` 
 
  [logstash-forwarder]
  name=logstash-forwarder repository
- baseurl=http://packages.elasticsearch.org/logstashforwarder/centos
+ baseurl=https://packages.elasticsearch.org/logstashforwarder/centos
  gpgcheck=1
- gpgkey=http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+ gpgkey=https://packages.elasticsearch.org/GPG-KEY-elasticsearch
  enabled=1
 
 And now we install the RPM package with yum: ::
