@@ -15,7 +15,7 @@ Elasticsearch installation on Debian
 To install the Elasticsearch version 2.x Debian package, using official repositories run the following commands: ::
 
  $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
- $ echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
+ $ echo "deb https://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
  $ sudo apt-get update && sudo apt-get install elasticsearch
  $ sudo update-rc.d elasticsearch defaults 95 10
 
@@ -32,9 +32,9 @@ Then we create ``/etc/yum.repos.d/elasticsearch.repo`` file with the following c
 
  [elasticsearch-2.x]
  name=Elasticsearch repository for 2.x packages
- baseurl=http://packages.elastic.co/elasticsearch/2.x/centos
+ baseurl=https://packages.elastic.co/elasticsearch/2.x/centos
  gpgcheck=1
- gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
+ gpgkey=https://packages.elastic.co/GPG-KEY-elasticsearch
  enabled=1
 
 And we can now install the RPM package with yum: ::
