@@ -111,7 +111,7 @@ Run ``ossec_ruleset.py`` script to update OSSEC Wazuh Ruleset with no need to ma
 Getting the script: ::
 
    $ sudo mkdir -p /var/ossec/update/ruleset && cd /var/ossec/update/ruleset
-   $ sudo wget https://raw.githubusercontent.com/wazuh/ossec-rules/master/ossec_ruleset.py
+   $ sudo wget https://raw.githubusercontent.com/wazuh/ossec-rules/stable/ossec_ruleset.py
 
 Running the script: ::
 
