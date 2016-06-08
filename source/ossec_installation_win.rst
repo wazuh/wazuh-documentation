@@ -6,7 +6,7 @@ Windows agent
 Agent pre-compiled installer
 ----------------------------
 
-You can find a pre-compiled version of the OSSEC agent for Windows, both for 32 and 64 bits architectures, at `our repository <http://ossec.wazuh.com/windows/>`.
+You can find a pre-compiled version of the OSSEC agent for Windows, both for 32 and 64 bits architectures, at `our repository <http://ossec.wazuh.com/windows/>`_.
 
 Current version is 2.8.3 and these are the MD5 and SHA1 checksums:
 
