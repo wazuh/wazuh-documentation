@@ -40,15 +40,15 @@ If prompted to confirm overwrite, answer yes.
 Configuration
 -------------
 
-If Splunk is not installed in default location or the username is not admin, open ``SPLUNK_DIR/etc/apps/wazuh/bin/ossec_agent_status.py`` and change the values of ``wazuh_dir`` and/or ``wazuh_user``.
+If Splunk is not installed in the default location or the username is not admin, open ``SPLUNK_DIR/etc/apps/wazuh/bin/ossec_agent_status.py`` and change the values of ``wazuh_dir`` and/or ``wazuh_user``.
 
-The first time a user access the application the following steps are required:
+The first time a user accesses the application the following steps are required:
 
-- The user will be asked for a user/password pair, and a name for the pair. The pair is used for Wazuh Restful API. Type a user and password valid for the API on all the OSSEC managers, and name it Splunk.
+- The user will be asked for a user/password pair, and a name for the pair. The pair is used for the Wazuh Restful API. Enter a valid user and password for the API on all the OSSEC managers, and name it Splunk.
 - In the menu, go to ``Searches & Reports -> Utility``. Execute ``Initialize OSSEC Server Lookup Table`` and ``Rebuild OSSEC Server Lookup Table``.
 
-The credentials pair Splunk is required, because the application will look for it when tries to check the agents' status. 
-To add more credentials pairs go to ``Apps->Manage Apps`` and click ``Set up`` in Reporting and Management for Wazuh row. Credentials are stored in a secure way, using Splunk Storage Passwords.
+The credentials pair in Splunk is required, because the application will look for it when it tries to check the agents' status. 
+To add more credentials pairs go to ``Apps->Manage Apps`` and click ``Set up`` in the Reporting and Management for Wazuh row. The credentials are stored in a secure way, using Splunk Storage Passwords.
 
 Adding new managers
 -------------------
@@ -56,13 +56,13 @@ Adding new managers
 By default, Reporting and Management for Wazuh will read the local file ``/var/ossec/logs/alerts/alerts.json`` as data input. In order to add new managers, you need to provide Splunk access to the ``alerts.json`` file in ``Settings->Data Inputs`` menu, or configure a Splunk Universal Forwarder. 
 
 - When asked for a source type, select ``ossec_json``.
-- When asked for a host method, chose IP or DNS.
-- If the ``alerts.json`` file comes from Splunk Universal Forwarder, open ``/opt/splunk/etc/system/local/inputs.conf`` in Splunk Universal Forwarder machine and set host value equals to his IP. Alternatively, create a DNS entry in the Splunk machine pointing the name of Splunk Universal Forwarder machine to his IP.
+- When asked for a host method, choose IP or DNS.
+- If the ``alerts.json`` file comes from Splunk Universal Forwarder, open ``/opt/splunk/etc/system/local/inputs.conf`` on the Splunk Universal Forwarder machine and set the host value to equal to its IP. Alternatively, create a DNS entry in the Splunk machine pointing the name of the Splunk Universal Forwarder machine to its IP.
 
 Upgrading from "Reporting and Management for OSSEC"
 ---------------------------------------------------
 
-This application is based on Reporting and Management for OSSEC. However, this application introduces a number of changes. The recommended procedure is to remove the old app before installing. Installing over top of Reporting and Managerment for OSSEC won’t work.
+This application is based on Reporting and Management for OSSEC. However, this application introduces a number of changes. The recommended procedure is to remove the old app before installing. Installing on top of Reporting and Managerment for OSSEC won’t work.
 
 
  
