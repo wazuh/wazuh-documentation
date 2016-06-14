@@ -7,9 +7,9 @@ OpenScap
 Introduction
 --------------
 
-The **OpenSCAP wodle** is an integration of `OpenScap <https://www.open-scap.org/>`_ in *Wazuh HIDS* that gives the ability to perform configuration and vulnerability scans of an agent. Mainly it allows:
+The **OpenSCAP wodle** is an integration of `OpenScap <https://www.open-scap.org/>`_ in *Wazuh HIDS* that provides the ability to perform configuration and vulnerability scans of an agent. Mainly it allows:
 
- - **Security compliance**: It is a state where computer systems are in line with a specific *security policy* or a *security benchmark*. These policies define security requirements which all systems used by the institution must meet.
+ - **Security compliance**: It is a state where computer systems are in line with a specific *security policy* or a *security benchmark*. These policies define security requirements which all systems of an organization must comply with.
 
  - **Vulnerability assessment**: It is a process that identifies and classifies vulnerabilities on a system.
 
@@ -19,7 +19,7 @@ The **OpenSCAP wodle** is an integration of `OpenScap <https://www.open-scap.org
 Brief introduction to SCAP
 +++++++++++++++++++++++++++++++++++
 
-The `Security Content Automation Protocol (SCAP) <https://scap.nist.gov/>`_ is a specification for expressing and manipulating security data in standardized ways. SCAP uses several individual specifications in concert to automate continuous monitoring, vulnerability management, and security policy compliance evaluation reporting.
+The `Security Content Automation Protocol (SCAP) <https://scap.nist.gov/>`_ is a specification for expressing and manipulating security data in standardized ways. SCAP uses several individual specifications in concert, in order to automate continuous monitoring, vulnerability management, and security policy compliance evaluation reporting.
 
 Process of security compliance evaluation:
 
@@ -35,7 +35,7 @@ Process of security compliance evaluation:
 Wodle Requirements
 ------------------------------
 
-This wodle is executed in the agent so each one must meet the following requirements:
+This wodle is executed on the agent, so each one must meet the following requirements:
 
 OSSEC Wazuh HIDS
 +++++++++++++++++++++
@@ -49,7 +49,7 @@ In order to perform SCAP evaluations we need the scanner. As we mentioned above,
 
 Python 2.6+
 +++++++++++++++++++++
-Python is a core part of this wodle. Currently all Linux distributions come with python, so it should not be an inconvenient.
+Python is a core part of this wodle. Currently all Linux distributions come with python, so it should not be an inconvenience.
 
 
 SCAP Policies
@@ -57,12 +57,12 @@ SCAP Policies
 
 Usually a policy consists of different files:
 
- - **OVAL (Open Vulnerability and Assessment Language)**: It is a declarative language for making logical assertions about the state of system.
- - **XCCDF (Extensible Configuration Checklist Description Format)**: It is used to describe the security checklists. The language contains no commands to perform the scan and it is mostly descriptive. **Other component documents (OVAL) may be referred from the XCCDF**.
+ - **OVAL (Open Vulnerability and Assessment Language)**: It is a declarative language for making logical assertions on the state of system.
+ - **XCCDF (Extensible Configuration Checklist Description Format)**: It is used to describe the security checklists. The language does not contain any commands to perform the scan and it is mostly descriptive. **Other component documents (OVAL) may be referred from the XCCDF**.
  - **CPE (Common Platform Enumeration)**: It serves to identify IT platforms and systems using unequivocally defined names.
  - **DataStream** (files names end with **-ds.xml**): It is a format that packs other SCAP components into a single file.
 
-The wodle admits XCCDF or DataStream policies. Remember that if you use a XCCDF policy that references to an OVAL file, you must place the OVAL file on the same path that the XCCDF file. We strongly recommend using DataStream files because they are easier to use. Here you will find more information about `SCAP components <https://www.open-scap.org/features/scap-components/>`_.
+The wodle parses the XCCDF or DataStream policies. Remember that if you use a XCCDF policy that references to an OVAL file, the OVAL file must be in the same directory as the XCCDF file. We strongly recommend using DataStream files because they are easier to use. Here you will find more information about `SCAP components <https://www.open-scap.org/features/scap-components/>`_.
 
 Available policies:
 
@@ -166,7 +166,7 @@ It is possible to overwrite the timeout for a specific evaluation: ::
 
 Profiles
 ++++++++++++++++++++++++++++++++++++++++++++
-We can evaluate only a specific profile of a policy: ::
+We can evaluate only specific profiles of a policy: ::
 
     <wodle name="open-scap">
 
@@ -209,7 +209,7 @@ In this example, we skip the results with *low* severity and with *notchecked*, 
 CPE dictionary
 ++++++++++++++++++++++++++++++++++++++++++++
 
-If necessary, you can specify the CPE file. ::
+If necessary, you can also specify the CPE file. ::
 
     <wodle name="open-scap">
 
@@ -223,7 +223,7 @@ If necessary, you can specify the CPE file. ::
 
 IDs
 ++++++++++++++++++++++++++++++++++++++++++++
-You can select a specific IDs of the datastream file:  ::
+You can select a specific ID of the datastream file:  ::
 
     <wodle name="open-scap">
 
@@ -274,7 +274,7 @@ This section describes how to evaluate the Payment Card Industry Data Security S
 
 **Step 1: Configure agents**
 
-Each agent must be properly identified in order to know which policy and profile execute.
+Each agent must be properly identified in order to know which policy and profile to execute.
 
 Agent ``ossec.conf``:
 
@@ -287,7 +287,7 @@ Agent ``ossec.conf``:
 
 **Step 2: Configure manager**
 
-We want to execute the PCI-DSS profile of SSG RH7 policy only in Red Hat 7 servers.
+We want to execute the PCI-DSS profile of SSG RH7 policy only on Red Hat 7 servers.
 
 Manager ``shared/agent.conf``:
 
@@ -350,7 +350,7 @@ Note that each field is removed to facilitate searches.
 
 **Step 5: Dashbaords**
 
-Finally, you can explore all results with OpenSCAP dashboards for Kibana.
+Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
 
 .. image:: images/wodles-oscap/e1-dashboards.png
     :align: center
@@ -375,7 +375,7 @@ Agent ``ossec.conf``:
 
 **Step 2: Configure manager**
 
-We want to execute the RedHat secutiy policy only in Red Hat 7 servers.
+We want to execute the RedHat secutiy policy only on Red Hat 7 servers.
 
 Manager ``shared/agent.conf``:
 
@@ -438,7 +438,7 @@ Note that each field is removed to facilitate searches.
 
 **Step 5: Dashbaords**
 
-Finally, you can explore all results with OpenSCAP dashboards for Kibana.
+Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
 
 .. image:: images/wodles-oscap/e2-dashboards.png
     :align: center

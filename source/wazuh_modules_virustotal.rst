@@ -8,9 +8,9 @@ VirusTotal
 Introduction
 --------------
 
-VirusTotal module for Wazuh consists in a Python script that integrates OSSEC with Virustotal, the main goal is to consult all hashes obtained by Syscheck daemon against the Virustotal global database, a free service that analyzes files from malwares.
+The VirusTotal module for Wazuh consists of a Python script that integrates OSSEC with Virustotal. The main goal is to collect all hashes obtained by Syscheck daemon and check them against the Virustotal global database, a free service that analyzes files from malwares.
 
-Check if any new or changed file was infected with Malware or Virus in order to avoid unexpected system downtime, technical difficulties, or other interruptions.
+It checks if any new or changed file was infected with a malware or a virus in order to avoid unexpected system downtimes, technical difficulties, or other interruptions.
 
 Requisites
 --------------
@@ -19,9 +19,9 @@ You need to get an API key to use the VirusTotal Public API 2.0. To do so, just 
 
 .. note:: Virustotal Public Key is limited to at most 4 requests per minute.
 
-You also need to have installed manager `Wazuh HIDS. <https://github.com/wazuh/ossec-wazuh>`_
+You also need to have installed the manager `Wazuh HIDS. <https://github.com/wazuh/ossec-wazuh>`_
 
-And finally you need at least up Python 2.7 in order to execute VirusTotal module.
+And finally you need at least up Python 2.7 in order to execute the VirusTotal module.
 
 
 Install
@@ -32,7 +32,7 @@ Clone the repository: ::
  $ cd ~
  $ git clone http://github.com/wazuh/wazuh-virustotal
 
-Copy the following files into ``/var/ossec/modules/virustotal`` folder in your machine: ::
+Copy the following files into ``/var/ossec/modules/virustotal`` folder on your machine: ::
 
  $ sudo mkdir -p /var/ossec/modules/virustotal
  $ sudo cp -pr wazuh-virustotal/wazuh_modules_virustotal.py /var/ossec/modules/virustotal
@@ -43,11 +43,11 @@ Copy rules/decoders into the right OSSEC folder: ::
  $ sudo cp wazuh-virustotal/decoders_rules/virustotal_rules.xml /var/ossec/rules/
  $ sudo cp wazuh-virustotal/decoders_rules/virustotal_decoders.xml /var/ossec/etc/wazuh_decoders/
 
-Update your ossec.conf file in ``/var/ossec/etc/ossec.conf``, include new rules file inside <rules></rules> section : ::
+Update your ossec.conf file in ``/var/ossec/etc/ossec.conf``, include new the rules file within the <rules></rules> section : ::
 
   <include>virustotal_rules.xml</include>
 
-And add Virustotal log file as localfile to monitor: ::
+And add the Virustotal log file as localfile to monitor: ::
 
 
   <localfile>
@@ -55,13 +55,13 @@ And add Virustotal log file as localfile to monitor: ::
     <location>/var/ossec/modules/virustotal/virustotal_log</location>
   </localfile>
 
-Restart OSSEC Manager to apply changes ::
+Restart your OSSEC Manager to apply changes ::
 
  $ sudo /var/ossec/bin/ossec-control restart
 
 Configuration
 --------------
-You will need to configure some parameters into configuration file config.py.
+You will need to configure some parameters in the configuration file config.py.
 
 Replace your API KEY:  ::
 
@@ -87,7 +87,7 @@ Run the module in background: ::
 Alerts
 --------------
 
-By default it is included a certain range of rules and decoders, we encourage you to develop your own rules and decoders and configure the existing ones according to your needs.
+By default a certain range of rules and decoders is already included, we encourage you to develop your own rules and decoders and configure the existing ones according to your needs.
 
 Some pre-built rules:
 
@@ -104,7 +104,7 @@ Some pre-built rules:
 What's next
 -----------
 
-Once you have VirusTotal module installed, we encourage you to move forward and try out other modules, check them on:
+Once you have the VirusTotal module installed, we encourage you to move forward and try out other modules, check them on:
 
 
 * :ref:`ELK Stack integration guide <ossec_elk>`

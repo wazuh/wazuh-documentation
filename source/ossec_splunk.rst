@@ -5,13 +5,13 @@ Splunk App for Wazuh
 
 .. topic:: Introduction
 
-    Reporting and Management for Wazuh, also known as Splunk for Wazuh, is a Splunk app which provides full integration with OSSEC Wazuh HIDS.
+    Reporting and Management for Wazuh, also known as Splunk for Wazuh, is a Splunk app which provides a full integration with OSSEC Wazuh HIDS.
     
-    The integration between OSSEC Wazuh HIDS and Splunk for Wazuh is reached thanks to the JSON loggin capabilities and the OSSEC Wazuh RESTful API.
+    The integration between OSSEC Wazuh HIDS and Splunk for Wazuh is accomplished by using the JSON logging capabilities to work with the OSSEC Wazuh RESTful API.
 
     Reporting and Management for Wazuh capabilities:
     
-    * Search and visualize data about OSSEC Wazuh HIDS alerts.
+    * Search and visualize data in OSSEC Wazuh HIDS alerts.
     * Search and visualize the agents' status.
     * Perform actions over the managers or the agents through OSSEC Wazuh RESTful API.
     * Based on Reporting and Management for OSSEC.
