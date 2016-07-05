@@ -347,6 +347,7 @@ function ossec::activeresponse
  - ``$ar_repeated_offenders`` (default: empty): A comma separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries.
 function ossec::addlog
  - ``$log_name``.
+ - ``$agent_log``: (default: ``false``)
  - ``$logfile`` /path/to/log/file.
  - ``$logtype`` (default: syslog): The OSSEC ``log_format`` of the file.
 
@@ -367,6 +368,12 @@ OSSEC agent class
  - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
  - ``ar_repeated_offenders``: (default: empty) A comma separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries.
 
+function ossec::addlog
+ - ``$log_name``.
+ - ``$agent_log`` (default: ``false``)
+ - ``$logfile`` /path/to/log/file.
+ - ``$logtype`` (default: syslog): The OSSEC ``log_format`` of the file.
+ 
 ossec_scanpaths configuration
 """""""""""""""""""""""""""""
 
