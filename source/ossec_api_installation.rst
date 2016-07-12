@@ -13,25 +13,24 @@ In order to install and run the API, you will need some packages, in the followi
 - Python 2.6 or superior
 
 
-OSSEC Wazuh RESTful API requires you to have previously installed our OSSEC fork as your manager. You can download and install it following :ref:`these instructions <wazuh_installation>`. 
+OSSEC Wazuh RESTful API requires you to have previously installed our OSSEC fork as your manager. You can download and install it following :ref:`these instructions <wazuh_installation>`.
 
 The API will operate on port 55000/tcp by default, and NodeJS service will be protected with HTTP Authentication and encrypted by HTTPS.
 
 NodeJS
 ------------
 
-On CentOS, install ``epel-release`` and ``nodejs`` packages: ::
- 
- $ sudo yum install epel-release
- $ sudo yum install nodejs
- $ sudo yum install npm
+We recommend to follow the `official guide <https://nodejs.org/en/download/package-manager/>`_.
 
-On Debian, update your repositories and install ``nodejs`` package: ::
+On CentOS: ::
 
- $ sudo apt-get update
- $ sudo apt-get install nodejs
- $ sudo apt-get install npm
- 
+ $ curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+ $ yum -y install nodejs
+
+On Debian: ::
+
+ $ curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
+ $ sudo apt-get install -y nodejs
 
 Python packages
 ------------------
@@ -49,13 +48,13 @@ Proceed to download the API and copy API folder to OSSEC folder: ::
  $ wget https://github.com/wazuh/wazuh-API/archive/v1.2.tar.gz -O wazuh-API-1.2.tar.gz
  $ tar -xvf wazuh-API-*.tar.gz
  $ sudo mkdir -p /var/ossec/api && sudo cp -r wazuh-API-*/* /var/ossec/api
- 
+
 Once you have installed NodeJS, NPM and the API, you must install the NodeJS modules: ::
- 
+
  $ sudo -s
  $ cd /var/ossec/api
  $ npm install
- 
+
 Configuration
 ----------------
 
@@ -68,13 +67,13 @@ You can configure some parameters using the file ``api/config.js`` ::
     // Security
     // Use HTTP protocol over TLS/SSL
     config.https = "yes";
-    
+
     // Use HTTP authentication
     config.basic_auth = "yes";
-    
+
     // In case the API run behind a proxy server, turn to "yes" this feature.
     config.BehindProxyServer = "no";
-    
+
     // Cross-origin resource sharing
     config.cors = "yes";
 
@@ -85,8 +84,8 @@ You can configure some parameters using the file ``api/config.js`` ::
 
     // Logs
     // Values for API log: disabled, info, warning, error, debug (each level includes the previous level).
-    config.logs = "info";    
-    config.logs_tag = "WazuhAPI"; 
+    config.logs = "info";
+    config.logs_tag = "WazuhAPI";
 
 Basic Authentication
 --------------------------
@@ -99,16 +98,16 @@ On Debian, update your repositories and install ``apache2-utils`` package: ::
 
  $ sudo apt-get update
  $ sudo apt-get install apache2-utils
- 
+
 On Centos, install the package running ::
- 
+
  $ sudo yum install httpd-tools
 
-Then, run htpasswd with your desired username: :: 
+Then, run htpasswd with your desired username: ::
 
  $ cd /var/ossec/api/ssl
  $ sudo htpasswd -c htpasswd username
- 
+
 SSL Certificate
 ----------------
 

@@ -9,13 +9,13 @@ Before starting to use the API, you must keep in mind:
 * All responses are in *JSON format* with the following structure:
 
   * error: 0 if everything was fine and an error code otherwise.
-  * data: data requested or empty if error is different to 0.
-  * message: error description or empty if error is equal to 0
-  
+  * data: data requested. Only if error is equal to 0.
+  * message: error description. Only if error is different to 0
+
   * Examples:
 
-    * Response without errors: ``{ "error": "0", "data": "...", "message": "" }``
-    * Response with errors: ``{ "error": "NOT 0", "data": "", "message": "..." }``
+    * Response without errors: ``{ "error": "0", "data": "Welcome to Wazuh HIDS API" }``
+    * Response with errors: ``{ "error": "603", "message": "The requested URL was not found on this server" }``
 
 * All responses have a HTTP Status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 

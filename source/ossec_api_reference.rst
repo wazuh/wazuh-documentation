@@ -1,12 +1,14 @@
-.. _ossec_api_reference:
+.. _ossec_api_test:
 
 Reference
 ======================
 This API reference is organized by resources:
 
 * `Agents`_
+* `Decoders`_
 * `Manager`_
 * `Rootcheck`_
+* `Rules`_
 * `Syscheck`_
 
 Also, it is provided an `Request List`_ with all available requests.
@@ -15,1299 +17,2829 @@ Also, it is provided an `Request List`_ with all available requests.
 Request List
 ---------------------------------
 
-* `Agents`_
-    * `DELETE /agents/:agent_id`_
-    * `GET /agents`_
-    * `GET /agents/:agent_id`_
-    * `GET /agents/:agent_id/key`_
-    * `POST /agents`_
-    * `PUT /agents/:agent_id/restart`_
-    * `PUT /agents/:agent_name`_
+`Agents`_
+	* DELETE /agents/:agent_id  (`Delete an agent`_)
+	* GET /agents  (`Get all agents`_)
+	* GET /agents/:agent_id  (`Get an agent`_)
+	* GET /agents/:agent_id/key  (`Get agent key`_)
+	* POST /agents/:agent_id  (`Add agent`_)
+	* PUT /agents/:agent_id  (`Restart an agent`_)
+	* PUT /agents/:agent_name  (`Add agent (quick method)`_)
+	* PUT /agents/restart  (`Restart all agents`_)
 
-* `Manager`_
-    * `GET /manager/configuration`_
-    * `GET /manager/configuration/test`_
-    * `GET /manager/stats`_
-    * `GET /manager/stats/hourly`_
-    * `GET /manager/stats/weekly`_
-    * `GET /manager/status`_
-    * `PUT /manager/restart`_
-    * `PUT /manager/start`_
-    * `PUT /manager/stop`_
+`Decoders`_
+	* GET /decoders  (`Get all decoders`_)
+	* GET /decoders/:decoder_name  (`Get decoders by name`_)
+	* GET /decoders/files  (`Get all decoders files.`_)
+	* GET /decoders/parents  (`Get all parent decoders`_)
 
-* `Rootcheck`_
-    * `DELETE /rootcheck`_
-    * `DELETE /rootcheck/:agent_id`_
-    * `GET /rootcheck/:agent_id`_
-    * `GET /rootcheck/:agent_id/last_scan`_
-    * `PUT /rootcheck`_
-    * `PUT /rootcheck/:agent_id`_
+`Manager`_
+	* GET /manager/configuration  (`Get manager configuration`_)
+	* GET /manager/info  (`Get manager information`_)
+	* GET /manager/logs  (`Get ossec.log`_)
+	* GET /manager/logs/summary  (`Get summary of ossec.log`_)
+	* GET /manager/stats  (`Get manager stats`_)
+	* GET /manager/stats/hourly  (`Get manager stats by hour`_)
+	* GET /manager/stats/weekly  (`Get manager stats by week`_)
+	* GET /manager/status  (`Get manager status`_)
+	* GET /manager/update-ruleset/backups  (`Get ruleset backups`_)
+	* PUT /manager/configuration/test  (`Test manager configuration`_)
+	* PUT /manager/restart  (`Restart manager`_)
+	* PUT /manager/start  (`Start manager`_)
+	* PUT /manager/stop  (`Stop manager`_)
+	* PUT /manager/update-ruleset  (`Update ruleset`_)
+	* PUT /manager/update-ruleset/backups/:id  (`Restore rulset backup`_)
 
-* `Syscheck`_
-    * `DELETE /syscheck`_
-    * `DELETE /syscheck/:agent_id`_
-    * `GET /syscheck/:agent_id/files/changed`_
-    * `GET /syscheck/:agent_id/last_scan`_
-    * `PUT /syscheck`_
-    * `PUT /syscheck/:agent_id`_
+`Rootcheck`_
+	* DELETE /rootcheck  (`Clear rootcheck database`_)
+	* DELETE /rootcheck/:agent_id  (`Clear rootcheck database of an agent`_)
+	* GET /rootcheck/:agent_id  (`Get rootcheck database`_)
+	* GET /rootcheck/:agent_id/last_scan  (`Get last rootcheck scan`_)
+	* PUT /rootcheck  (`Run rootcheck scan in all agents`_)
+	* PUT /rootcheck/:agent_id  (`Run rootcheck scan in an agent`_)
 
+`Rules`_
+	* GET /rules  (`Get all rules`_)
+	* GET /rules  (`Get rules by id`_)
+	* GET /rules/files  (`Get files of rules`_)
+	* GET /rules/groups  (`Get rule groups`_)
+	* GET /rules/pci  (`Get rule pci requirements`_)
+
+`Syscheck`_
+	* DELETE /syscheck  (`Clear syscheck database`_)
+	* DELETE /syscheck/:agent_id  (`Clear syscheck database of an agent`_)
+	* GET /syscheck/:agent_id/files  (`Get syscheck files`_)
+	* GET /syscheck/:agent_id/last_scan  (`Get last syscheck scan`_)
+	* PUT /syscheck  (`Run syscheck scan in all agents`_)
+	* PUT /syscheck/:agent_id  (`Run syscheck scan in an agent`_)
 
 Agents
 ---------------------------------
-
-List
+Add
 +++++++++++++++++++++++++
 
-GET /agents
+Add agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns a list with the available agents.
+Add a new agent.
 
-**Parameters:**
+**Request**:
 
-* N/A
+``POST`` ::
 
-**Query:**
+	/agents/:agent_id
 
-* status: Status of the agents to return. Possible values: Active, Disconnected or Never connected.
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``name``           | String        | Agent name.                                                                                                                                                                                            |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ip                 | String        | If you do not include this param, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.                              |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - IP                                                                                                                                                                                                   |
+|                    |               | - IP/NET                                                                                                                                                                                               |
+|                    |               | - ANY                                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/agents?status=never+connected
+	curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": [
-        {
-          "id": "001",
-          "name": "Host1",
-          "ip": "any",
-          "status": "Never connected"
-        },
-        {
-          "id": "002",
-          "name": "Host2",
-          "ip": "10.0.0.4",
-          "status": "Never connected"
-        }
-      ],
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": "001"
+	}
+	
 
-------------
+Add agent (quick method)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Adds a new agent with name :agent_name. This agent will use ANY as IP.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/:agent_name
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_name``     | String        | Agent name.                                                                                                                                                                                            |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/myNewAgent?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "002"
+	}
+	
+
+
+Delete
++++++++++++++++++++++++++
+
+Delete an agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removes an agent. Internally use manage_agents with option -r <id>. You must restart OSSEC after removing an agent.
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents/:agent_id
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/002?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Agent removed"
+	}
+	
+
 
 Info
 +++++++++++++++++++++++++
 
-GET /agents/:agent_id
+Get all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a list with the available agents.
+
+**Request**:
+
+``GET`` ::
+
+	/agents
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| status             | string        | Filters by agent status.                                                                                                                                                                               |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - active                                                                                                                                                                                               |
+|                    |               | - never connected                                                                                                                                                                                      |
+|                    |               | - disconnected                                                                                                                                                                                         |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents?pretty&offset=0&limit=5&sort=-ip,name"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2,
+	      "items": [
+	         {
+	            "status": "Active",
+	            "ip": "127.0.0.1",
+	            "id": "000",
+	            "name": "LinMV"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.9",
+	            "id": "001",
+	            "name": "NewHost"
+	         }
+	      ]
+	   }
+	}
+	
+
+Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the information of an agent.
 
-**Parameters:**
+**Request**:
 
-* agent_id
+``GET`` ::
 
-**Query:**
+	/agents/:agent_id
 
-* N/A
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/agents/000
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/000?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": {
-        "id": "000",
-        "name": "LinMV",
-        "ip": "127.0.0.1",
-        "status": "Active",
-        "os": "Linux LinMV 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt11-1 (2015-05-24) x86_64",
-        "version": "OSSEC HIDS v2.8",
-        "lastKeepAlive": "Not available",
-        "syscheckTime": "Tue Feb 23 10:57:30 2016",
-        "syscheckEndTime": "Tue Feb 23 11:02:46 2016",
-        "rootcheckTime": "Tue Feb 23 11:03:06 2016",
-        "rootcheckEndTime": "Tue Feb 23 10:33:32 2016"
-      },
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "status": "Active",
+	      "ip": "127.0.0.1",
+	      "syscheckEndTime": "Unknown",
+	      "id": "000",
+	      "name": "LinMV",
+	      "rootcheckEndTime": "Unknown",
+	      "version": "OSSEC HIDS v2.8",
+	      "syscheckTime": "Tue Jul 12 17:38:08 2016",
+	      "lastKeepAlive": "Not available",
+	      "os": "Linux LinMV 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt11-1 (2015-05-24) x86_64",
+	      "rootcheckTime": "Unknown"
+	   }
+	}
+	
 
-------------
 
-key
+Key
 +++++++++++++++++++++++++
 
-GET /agents/:agent_id/key
+Get agent key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the key for an agent.
+Returns the key of an agent.
 
-**Parameters:**
+**Request**:
 
-* agent_id
+``GET`` ::
 
-**Query:**
+	/agents/:agent_id/key
 
-* N/A
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/agents/001/key
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/key?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": "MDAxIEhvc3QxIGFueSBkMDZlYjRkNTk4MzU2YjAwYWQzNzcxZTdiMDJiMmRiZDhkM2ZhNjA3ZGU0NGU4YTQyZGVkYTJjMGY0NTQ1NWYz",
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": "MDAxIE5ld0hvc3QgMTAuMC4wLjkgZjJhN2U2ZTdlNzRiYjQxYzc3OGY0Njg2ODczNzViOTNmNDU4ZWYwNGM4ZjQzMmJkYTc1MjdlYTg4N2E3Yzg0Yw=="
+	}
+	
 
-------------
 
 Restart
 +++++++++++++++++++++++++
 
-PUT /agents/:agent_id/restart
+Restart all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Restarts all agents.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/restart
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/restart?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Restarting all agents"
+	}
+	
+
+Restart an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Restarts the agent.
 
-**Parameters:**
+**Request**:
 
-* agent_id
+``PUT`` ::
 
-**Query:**
+	/agents/:agent_id
 
-* N/A
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    PUT https://IP:55000/agents/001/restart
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/000/restart?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": "Restarting agent",
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": "Restarting agent"
+	}
+	
 
-------------
 
-Add
+
+Decoders
+---------------------------------
+Info
 +++++++++++++++++++++++++
 
-
-PUT /agents/:agent_name
+Get all decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Add a new agent with name *:agent_name*. This agent will use *ANY* as IP.
+Returns all decoders included in ossec.conf.
 
-**Parameters:**
+**Request**:
 
-* agent_name
+``GET`` ::
 
-**Query:**
+	/decoders
 
-* N/A
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| file               | String        | Filters by filename.                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    PUT https://IP:55000/agents/Host_005
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders?pretty&offset=0&limit=2&sort=+file,position"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": 0,
-      "data": {
-        "id": "002",
-        "message": "Agent added"
-      },
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 322,
+	      "items": [
+	         {
+	            "position": 0,
+	            "details": {
+	               "regex": "/bin/(\\S+) (\\S+) - (\\S+) (\\d+.\\d+) (\\d+)",
+	               "order": "action, status, srcip, id, extra_data",
+	               "prematch": "^\\w\\w\\w \\w+\\s+\\d+ \\d\\d:\\d\\d:\\d\\d \\w+ \\d+ /\\S+/active-response"
+	            },
+	            "full_path": "/var/ossec/etc/ossec_decoders/active-response_decoders.xml",
+	            "file": "active-response_decoders.xml",
+	            "name": "ar_log"
+	         },
+	         {
+	            "position": 0,
+	            "details": {
+	               "regex": [
+	                  " R:(\\w)  \\w:\\S+ S:(\\d+.\\d+.\\d+.\\d+) ",
+	                  "D:(\\d+.\\d+.\\d+.\\d+) P:(\\S+) SP:(\\d+) DP:(\\d+) "
+	               ],
+	               "program_name": "^ipsec_logd",
+	               "type": "firewall",
+	               "order": "action,srcip,dstip,protocol,srcport,dstport"
+	            },
+	            "full_path": "/var/ossec/etc/ossec_decoders/aix-ipsec_decoders.xml",
+	            "file": "aix-ipsec_decoders.xml",
+	            "name": "aix-ipsec"
+	         }
+	      ]
+	   }
+	}
+	
 
-
-POST /agents
+Get all decoders files.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Add a new agent.
+Returns all decoders files included in ossec.conf.
 
-**Parameters:**
+**Request**:
 
-- name: Agent name
-- ip: (optional)
-    - IP (10.0.0.5)
-    - IP/MASK (10.0.0.1/24)
-    - ANY
-    - If you do not include this param, the API will get the **IP automatically**. If you are behind a proxy, you must set the option *config.BehindProxyServer* to *yes* at *config.js*.
+``GET`` ::
 
+	/decoders/files
 
+**Parameters**:
 
-**Query:**
-
-* N/A
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    POST https://IP:55000/agents
-    Body:
-        name: HostWindows
-        ip: 10.10.10.6
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/files?pretty&offset=0&limit=10&sort=-"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": 0,
-      "data": {
-        "id": "003",
-        "message": "Agent added"
-      },
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 71,
+	      "items": [
+	         "/var/ossec/etc/wazuh_decoders/serv-u_decoders.xml",
+	         "/var/ossec/etc/wazuh_decoders/redis_decoders.xml",
+	         "/var/ossec/etc/wazuh_decoders/puppet_decoders.xml",
+	         "/var/ossec/etc/wazuh_decoders/ossec_ruleset_decoders.xml",
+	         "/var/ossec/etc/wazuh_decoders/oscap_decoders.xml",
+	         "/var/ossec/etc/wazuh_decoders/netscaler_decoders.xml",
+	         "/var/ossec/etc/wazuh_decoders/amazon_decoders.xml",
+	         "/var/ossec/etc/ossec_decoders/zeus_decoders.xml",
+	         "/var/ossec/etc/ossec_decoders/wordpress_decoders.xml",
+	         "/var/ossec/etc/ossec_decoders/windows_decoders.xml"
+	      ]
+	   }
+	}
+	
 
-------------
-
-Remove
-+++++++++++++++++++++++++
-
-DELETE /agents/:agent_id
+Get all parent decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Removes an agent.
+Returns all parent decoders included in ossec.conf
 
-Internally use *manage_agents* with option *-r <id>*.
-You must **restart** OSSEC after removing an agent.
+**Request**:
 
-**Parameters:**
+``GET`` ::
 
-* agent_id
+	/decoders/parents
 
-**Query:**
+**Parameters**:
 
-* N/A
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    DELETE https://IP:55000/agents/005
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/parents?pretty&offset=0&limit=2&sort=-file"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": "Agent removed",
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 100,
+	      "items": [
+	         {
+	            "position": 0,
+	            "details": {
+	               "regex": " host=(\\S+), ",
+	               "order": "srcip",
+	               "prematch": "^[\\d\\d/\\w\\w\\w/\\d\\d\\d\\d:\\d\\d:\\d\\d:\\d\\d \\S+] "
+	            },
+	            "full_path": "/var/ossec/etc/ossec_decoders/zeus_decoders.xml",
+	            "file": "zeus_decoders.xml",
+	            "name": "zeus"
+	         },
+	         {
+	            "position": 0,
+	            "details": {
+	               "regex": "^(\\d+.\\d+.\\d+.\\d+) ",
+	               "program_name": "^WPsyslog",
+	               "order": "srcip",
+	               "prematch": "^["
+	            },
+	            "full_path": "/var/ossec/etc/ossec_decoders/wordpress_decoders.xml",
+	            "file": "wordpress_decoders.xml",
+	            "name": "wordpress"
+	         }
+	      ]
+	   }
+	}
+	
 
-------------
+Get decoders by name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the decoders with the specified name.
+
+**Request**:
+
+``GET`` ::
+
+	/decoders/:decoder_name
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``decoder_name``   | String        | Decoder name.                                                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/apache-errorlog?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 3,
+	      "items": [
+	         {
+	            "position": 0,
+	            "details": {
+	               "program_name": "^httpd"
+	            },
+	            "full_path": "/var/ossec/etc/ossec_decoders/apache_decoders.xml",
+	            "file": "apache_decoders.xml",
+	            "name": "apache-errorlog"
+	         },
+	         {
+	            "position": 1,
+	            "details": {
+	               "prematch": "^[warn] |^[notice] |^[error] "
+	            },
+	            "full_path": "/var/ossec/etc/ossec_decoders/apache_decoders.xml",
+	            "file": "apache_decoders.xml",
+	            "name": "apache-errorlog"
+	         },
+	         {
+	            "position": 2,
+	            "details": {
+	               "prematch": "^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S+:warn] |^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S+:notice] |^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S*:error] |^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S+:info] "
+	            },
+	            "full_path": "/var/ossec/etc/ossec_decoders/apache_decoders.xml",
+	            "file": "apache_decoders.xml",
+	            "name": "apache-errorlog"
+	         }
+	      ]
+	   }
+	}
+	
+
+
 
 Manager
 ---------------------------------
-
-Start
+Actions
 +++++++++++++++++++++++++
 
-
-PUT /manager/start
-~~~~~~~~~~~~~~~~~~~~
-Starts the OSSEC Manager processes.
-
-**Parameters:**
-
-* N/A
-
-**Query:**
-
-* N/A
-
-**Example Request:**
-::
-
-    PUT https://IP:55000/manager/start
-
-**Example Response:**
-
-::
-
-    {
-      "error": "0",
-      "data": [
-        {
-          "daemon": "ossec-maild",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-execd",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-analysisd",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-logcollector",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-remoted",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-syscheckd",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-monitord",
-          "status": "running"
-        }
-      ],
-      "message": ""
-    }
-
-------------
-
-Stop
-+++++++++++++++++++++++++
-
-PUT /manager/stop
-~~~~~~~~~~~~~~~~~~~~
-Stops the OSSEC Manager processes.
-
-**Parameters:**
-
-* N/A
-
-**Query:**
-
-* N/A
-
-**Example Request:**
-::
-
-    PUT https://IP:55000/manager/stop
-
-**Example Response:**
-
-::
-
-    {
-      "error": "0",
-      "data": [
-        {
-          "daemon": "ossec-monitord",
-          "status": "killed"
-        },
-        {
-          "daemon": "ossec-logcollector",
-          "status": "killed"
-        },
-        {
-          "daemon": "ossec-remoted",
-          "status": "killed"
-        },
-        {
-          "daemon": "ossec-syscheckd",
-          "status": "killed"
-        },
-        {
-          "daemon": "ossec-analysisd",
-          "status": "killed"
-        },
-        {
-          "daemon": "ossec-maild",
-          "status": "stopped"
-        },
-        {
-          "daemon": "ossec-execd",
-          "status": "killed"
-        }
-      ],
-      "message": ""
-    }
-
-------------
-
-Restart
-+++++++++++++++++++++++++
-
-PUT /manager/restart
+Restart manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Restarts the OSSEC Manager processes.
 
-**Parameters:**
+**Request**:
 
-* N/A
+``PUT`` ::
 
-**Query:**
-
-* N/A
+	/manager/restart
 
 **Example Request:**
 ::
 
-    PUT https://IP:55000/manager/restart
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": [
-        {
-          "daemon": "ossec-maild",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-execd",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-analysisd",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-logcollector",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-remoted",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-syscheckd",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-monitord",
-          "status": "running"
-        }
-      ],
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": [
+	      {
+	         "status": "running",
+	         "daemon": "wazuh-moduled"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-maild"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-execd"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-analysisd"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-logcollector"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-remoted"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-syscheckd"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-monitord"
+	      }
+	   ]
+	}
+	
 
-------------
-
-Status
-+++++++++++++++++++++++++
-
-GET /manager/status
+Start manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the OSSEC Manager processes that are running.
+Starts the OSSEC Manager processes.
 
-**Parameters:**
+**Request**:
 
-* N/A
+``PUT`` ::
 
-**Query:**
-
-* N/A
+	/manager/start
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/manager/status
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/start?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": [
-        {
-          "daemon": "ossec-monitord",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-logcollector",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-remoted",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-syscheckd",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-analysisd",
-          "status": "running"
-        },
-        {
-          "daemon": "ossec-maild",
-          "status": "stopped"
-        },
-        {
-          "daemon": "ossec-execd",
-          "status": "running"
-        }
-      ],
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": [
+	      {
+	         "status": "running",
+	         "daemon": "wazuh-moduled"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-maild"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-execd"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-analysisd"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-logcollector"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-remoted"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-syscheckd"
+	      },
+	      {
+	         "status": "running",
+	         "daemon": "ossec-monitord"
+	      }
+	   ]
+	}
+	
 
-------------
+Stop manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Stops the OSSEC Manager processes.
+
+**Request**:
+
+``PUT`` ::
+
+	/manager/stop
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/stop?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": [
+	      {
+	         "status": "killed",
+	         "daemon": "ossec-monitord"
+	      },
+	      {
+	         "status": "killed",
+	         "daemon": "ossec-logcollector"
+	      },
+	      {
+	         "status": "killed",
+	         "daemon": "ossec-remoted"
+	      },
+	      {
+	         "status": "killed",
+	         "daemon": "ossec-syscheckd"
+	      },
+	      {
+	         "status": "killed",
+	         "daemon": "ossec-analysisd"
+	      },
+	      {
+	         "status": "stopped",
+	         "daemon": "ossec-maild"
+	      },
+	      {
+	         "status": "killed",
+	         "daemon": "ossec-execd"
+	      },
+	      {
+	         "status": "stopped",
+	         "daemon": "wazuh-moduled"
+	      }
+	   ]
+	}
+	
+
 
 Configuration
 +++++++++++++++++++++++++
 
-GET /manager/configuration
+Get manager configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns *ossec.conf* in JSON format.
+Returns ossec.conf in JSON format.
 
-**Parameters:**
+**Request**:
 
-* N/A
+``GET`` ::
 
-**Query:**
+	/manager/configuration
 
-* Section: Indicates the ossec.conf section: global, rules, syscheck, rootcheck, remote, alerts, command, active-response, localfile.
-* Field: Indicates section child, e.g, fields for rule section are: include, decoder_dir, etc.
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| section            | String        | Indicates the ossec.conf section: global, rules, syscheck, rootcheck, remote, alerts, command, active-response, localfile.                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| field              | String        | Indicates a section child, e.g, fields for rule section are: include, decoder_dir, etc.                                                                                                                |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/manager/configuration?section=rules&field=include
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/configuration?section=global&pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": [
-        {
-          "$t": "rules_config.xml"
-        },
-        {
-          "$t": "pam_rules.xml"
-        },
-        {
-          "$t": "..._rules.xml"
-        }
-      ],
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "email_notification": "no",
+	      "white_list": [
+	         "127.0.0.1",
+	         "^localhost.localdomain$",
+	         "10.0.0.2"
+	      ],
+	      "jsonout_output": "yes",
+	      "logall": "yes"
+	   }
+	}
+	
 
-GET /manager/configuration/test
+Test manager configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Test OSSEC Manager configuration.
+Checks OSSEC Manager configuration.
 
-**Parameters:**
+**Request**:
 
-* N/A
+``PUT`` ::
 
-**Query:**
-
-* N/A
+	/manager/configuration/test
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/manager/configuration/test
-    * The second line of ossec.conf have been changed from <global> to <globaaaal>.
-    
-**Example Response:**
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/configuration/test?pretty"
 
+**Example Response:**
 ::
 
-    {
-      "error": 82,
-      "data": "",
-      "message": "[\"2016/02/23 12:30:57 ossec-testrule(1226): ERROR: Error reading XML file '/var/ossec/etc/ossec.conf': XMLERR: Element 'globaaaal' not closed. (line 6).\", \"2016/02/23 12:30:57 ossec-testrule(1202): ERROR: Configuration error at '/var/ossec/etc/ossec.conf'. Exiting.\"]"
-    }
+	{
+	   "error": 0,
+	   "data": "OK"
+	}
+	
 
-------------
+
+Logs
++++++++++++++++++++++++++
+
+Get ossec.log
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the 3 last months of ossec.log.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/logs
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| type_log           | string        | Filters by type of log.                                                                                                                                                                                |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - all                                                                                                                                                                                                  |
+|                    |               | - error                                                                                                                                                                                                |
+|                    |               | - info                                                                                                                                                                                                 |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| category           | string        | Filters by category of log.                                                                                                                                                                            |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs?offset=0&limit=10&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 8296,
+	      "items": [
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/serv-u_decoders.xml.",
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/redis_decoders.xml.",
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/puppet_decoders.xml.",
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/ossec_ruleset_decoders.xml.",
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/oscap_decoders.xml.",
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/netscaler_decoders.xml.",
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/amazon_decoders.xml.",
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/zeus_decoders.xml.",
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/wordpress_decoders.xml.",
+	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/windows_decoders.xml."
+	      ]
+	   }
+	}
+	
+
+Get summary of ossec.log
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the 3 last months of ossec.log.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/logs/summary
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs/summary?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "ossec-testrule": {
+	         "info": 3688,
+	         "all": 3688,
+	         "error": 0
+	      },
+	      "wazuh-moduled": {
+	         "info": 38,
+	         "all": 38,
+	         "error": 0
+	      },
+	      "agent_control": {
+	         "info": 0,
+	         "all": 68,
+	         "error": 68
+	      },
+	      "ossec-rootcheck": {
+	         "info": 43,
+	         "all": 43,
+	         "error": 0
+	      },
+	      "ossec-monitord": {
+	         "info": 50,
+	         "all": 50,
+	         "error": 0
+	      },
+	      "ossec-logcollector": {
+	         "info": 125,
+	         "all": 136,
+	         "error": 11
+	      },
+	      "ossec-execd": {
+	         "info": 77,
+	         "all": 77,
+	         "error": 0
+	      },
+	      "ossec-remoted": {
+	         "info": 181,
+	         "all": 260,
+	         "error": 79
+	      },
+	      "ossec-syscheckd": {
+	         "info": 197,
+	         "all": 197,
+	         "error": 0
+	      },
+	      "ossec-analysisd": {
+	         "info": 3689,
+	         "all": 3701,
+	         "error": 12
+	      },
+	      "ossec-maild": {
+	         "info": 38,
+	         "all": 38,
+	         "error": 0
+	      }
+	   }
+	}
+	
+
+
+Retrieve_information
++++++++++++++++++++++++++
+
+Get manager information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns basic information about Manager.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/info
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/info?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "path": "/var/ossec",
+	      "installation_date": "Mon Jul 11 07:48:34 UTC 2016",
+	      "version": "v1.2-alpha1",
+	      "type": "server"
+	   }
+	}
+	
+
+Get manager status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the Manager processes that are running.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/status
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/status?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": [
+	      {
+	         "status": "stopped",
+	         "daemon": "ossec-monitord"
+	      },
+	      {
+	         "status": "stopped",
+	         "daemon": "ossec-logcollector"
+	      },
+	      {
+	         "status": "stopped",
+	         "daemon": "ossec-remoted"
+	      },
+	      {
+	         "status": "stopped",
+	         "daemon": "ossec-syscheckd"
+	      },
+	      {
+	         "status": "stopped",
+	         "daemon": "ossec-analysisd"
+	      },
+	      {
+	         "status": "stopped",
+	         "daemon": "ossec-maild"
+	      },
+	      {
+	         "status": "stopped",
+	         "daemon": "ossec-execd"
+	      },
+	      {
+	         "status": "stopped",
+	         "daemon": "wazuh-moduled"
+	      }
+	   ]
+	}
+	
+
+
+Ruleset
++++++++++++++++++++++++++
+
+Get ruleset backups
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the ruleset backup list created by ossec_ruleset.py.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/update-ruleset/backups
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/update-ruleset/backups?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": [
+	      "20160712_005",
+	      "20160712_004",
+	      "20160712_003",
+	      "20160711_002",
+	      "20160711_001"
+	   ]
+	}
+	
+
+Restore rulset backup
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Restores a ruleset backup.
+
+**Request**:
+
+``PUT`` ::
+
+	/manager/update-ruleset/backups/:id
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``id``             | string        | Backup id.                                                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/update-ruleset/backups/20160711_002?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "msg": "Backup successfully",
+	      "need_restart": "yes",
+	      "restart_status": "success",
+	      "manual_steps": "no",
+	      "restarted": "yes"
+	   }
+	}
+	
+
+Update ruleset
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Update OSSEC ruleset. If the update change a file in use, OSSEC will be restarted.
+
+**Request**:
+
+``PUT`` ::
+
+	/manager/update-ruleset
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| type               | string        | Selects ruleset to install.                                                                                                                                                                            |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - both                                                                                                                                                                                                 |
+|                    |               | - rules                                                                                                                                                                                                |
+|                    |               | - rootchecks                                                                                                                                                                                           |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| force              | string        | Overwrites all ruleset. OSSEC will be restarted.                                                                                                                                                       |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - yes                                                                                                                                                                                                  |
+|                    |               | - no                                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/update-ruleset?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "msg": "Ruleset(1.09) updated successfully",
+	      "need_restart": "yes",
+	      "restart_status": "success",
+	      "manual_steps": "no",
+	      "restarted": "yes"
+	   }
+	}
+	
+
 
 Stats
 +++++++++++++++++++++++++
 
-GET /manager/stats
+Get manager stats
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns OSSEC statistical information of current date.
 
-**Parameters:**
+**Request**:
 
-* N/A
+``GET`` ::
 
-**Query:**
+	/manager/stats
 
-* date: Select date for getting the statistical information. Format: YYYYMMDD
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| date               | String        | Selects the date for getting the statistical information. Format: YYYYMMDD                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/manager/stats?date=20160223
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": [
-        {
-          "hour": 10,
-          "firewall": 0,
-          "alerts": [
-            {
-              "times": 2,
-              "sigid": 600,
-              "level": 0
-            },
-            {
-              "times": 2,
-              "sigid": 1002,
-              "level": 2
-            },
-            {
-              "times": 8,
-              "sigid": 530,
-              "level": 0
-            },
-            {
-              "times": 1,
-              "sigid": 535,
-              "level": 1
-            },
-            {
-              "times": 1,
-              "sigid": 502,
-              "level": 3
-            },
-            {
-              "times": 1,
-              "sigid": 515,
-              "level": 0
-            }
-          ],
-          "totalAlerts": 15,
-          "syscheck": 1126,
-          "events": 1144
-        },
-        {
-          "hour": 11,
-          "firewall": 0,
-          "alerts": [
-            {
-              "...": "..."
-            }
-          ],
-          "totalAlerts": 432,
-          "syscheck": 1146,
-          "events": 1607
-        }
-      ],
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": [
+	      {
+	         "hour": 7,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 8,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 8,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 8,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 30303,
+	               "level": 0
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 1002,
+	               "level": 2
+	            },
+	            {
+	               "times": 23,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 533,
+	               "level": 7
+	            },
+	            {
+	               "times": 3,
+	               "sigid": 535,
+	               "level": 1
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 502,
+	               "level": 3
+	            },
+	            {
+	               "times": 4,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 3,
+	               "sigid": 516,
+	               "level": 3
+	            },
+	            {
+	               "times": 1590,
+	               "sigid": 550,
+	               "level": 7
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 551,
+	               "level": 7
+	            }
+	         ],
+	         "totalAlerts": 1654,
+	         "syscheck": 11022,
+	         "events": 11100
+	      },
+	      {
+	         "hour": 8,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 8,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5521,
+	               "level": 0
+	            },
+	            {
+	               "times": 8,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5522,
+	               "level": 0
+	            },
+	            {
+	               "times": 8,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 8,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 79,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 533,
+	               "level": 7
+	            },
+	            {
+	               "times": 10,
+	               "sigid": 535,
+	               "level": 1
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 551,
+	               "level": 7
+	            }
+	         ],
+	         "totalAlerts": 127,
+	         "syscheck": 11023,
+	         "events": 11180
+	      },
+	      {
+	         "hour": 9,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 27,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5521,
+	               "level": 0
+	            },
+	            {
+	               "times": 27,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5522,
+	               "level": 0
+	            },
+	            {
+	               "times": 27,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 27,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 80,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 10,
+	               "sigid": 535,
+	               "level": 1
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 70,
+	               "sigid": 551,
+	               "level": 7
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 552,
+	               "level": 7
+	            }
+	         ],
+	         "totalAlerts": 273,
+	         "syscheck": 11023,
+	         "events": 11254
+	      },
+	      {
+	         "hour": 10,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 33,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 35,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 33,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 33,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 50,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 3,
+	               "sigid": 533,
+	               "level": 7
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 535,
+	               "level": 1
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 502,
+	               "level": 3
+	            },
+	            {
+	               "times": 4,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 3,
+	               "sigid": 516,
+	               "level": 3
+	            },
+	            {
+	               "times": 9,
+	               "sigid": 550,
+	               "level": 7
+	            },
+	            {
+	               "times": 5,
+	               "sigid": 551,
+	               "level": 7
+	            }
+	         ],
+	         "totalAlerts": 210,
+	         "syscheck": 11031,
+	         "events": 11242
+	      },
+	      {
+	         "hour": 11,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 29,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5521,
+	               "level": 0
+	            },
+	            {
+	               "times": 30,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5522,
+	               "level": 0
+	            },
+	            {
+	               "times": 29,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 29,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 88,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 533,
+	               "level": 7
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 535,
+	               "level": 1
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 550,
+	               "level": 7
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 551,
+	               "level": 7
+	            },
+	            {
+	               "times": 72,
+	               "sigid": 552,
+	               "level": 7
+	            }
+	         ],
+	         "totalAlerts": 285,
+	         "syscheck": 11102,
+	         "events": 11342
+	      },
+	      {
+	         "hour": 12,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 24,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5521,
+	               "level": 0
+	            },
+	            {
+	               "times": 24,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5522,
+	               "level": 0
+	            },
+	            {
+	               "times": 24,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 24,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 90,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 550,
+	               "level": 7
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 551,
+	               "level": 7
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 552,
+	               "level": 7
+	            }
+	         ],
+	         "totalAlerts": 195,
+	         "syscheck": 11040,
+	         "events": 11258
+	      },
+	      {
+	         "hour": 13,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 9,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5521,
+	               "level": 0
+	            },
+	            {
+	               "times": 9,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5522,
+	               "level": 0
+	            },
+	            {
+	               "times": 9,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 9,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 90,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 3,
+	               "sigid": 550,
+	               "level": 7
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 551,
+	               "level": 7
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 552,
+	               "level": 7
+	            }
+	         ],
+	         "totalAlerts": 135,
+	         "syscheck": 11040,
+	         "events": 11199
+	      }
+	   ]
+	}
+	
 
-GET /manager/stats/hourly
+Get manager stats by hour
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns OSSEC statistical information per hour. Each item in *averages* field represents the average of alerts per hour.
+Returns OSSEC statistical information per hour. Each item in averages field represents the average of alerts per hour.
 
-**Parameters:**
+**Request**:
 
-* N/A
+``GET`` ::
 
-**Query:**
-
-* N/A
+	/manager/stats/hourly
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/manager/stats/hourly
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/hourly?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-    "error":"0",
-    "response":{
-      "averages":[
-        974,
-        1291,
-        886,
-        784,
-        1013,
-        843,
-        880,
-        872,
-        805,
-        681,
-        1094,
-        868,
-        609,
-        659,
-        1455,
-        1382,
-        1465,
-        2092,
-        1475,
-        1879,
-        1548,
-        1854,
-        1849,
-        1020
-      ],
-      "interactions":20
-    },
-    "message":null
-    }
-    
-GET /manager/stats/weekly
+	{
+	   "error": 0,
+	   "data": {
+	      "averages": [
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0,
+	         0
+	      ],
+	      "interactions": 0
+	   }
+	}
+	
+
+Get manager stats by week
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns OSSEC statistical information per week. Each item in *hours* field represents the average of alerts per hour and week day.
+Returns OSSEC statistical information per week. Each item in <em>hours</em> field represents the average of alerts per hour and week day.
 
-**Parameters:**
+**Request**:
 
-* N/A
+``GET`` ::
 
-**Query:**
-
-* N/A
+	/manager/stats/weekly
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/manager/stats/weekly
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/weekly?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": {
-        "Mon":{
-          "hours":[
-            948,
-            838,
-            711,
-            1091,
-            589,
-            574,
-            888,
-            665,
-            522,
-            428,
-            593,
-            638,
-            446,
-            757,
-            401,
-            443,
-            1439,
-            1114,
-            648,
-            1047,
-            629,
-            483,
-            2641,
-            649
-          ],
-        "interactions":0
-        },
-        "...": {
-          ...
-        },
-        "Sun":{
-          "hours":[
-            1066,
-            1684,
-            901,
-            652,
-            1078,
-            1236,
-            1052,
-            920,
-            803,
-            686,
-            391,
-            800,
-            736,
-            558,
-            418,
-            703,
-            591,
-            2122,
-            578,
-            1608,
-            631,
-            732,
-            895,
-            623
-          ],
-          "interactions":0
-        },
-      },
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "Wed": {
+	         "hours": [
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0
+	         ],
+	         "interactions": 0
+	      },
+	      "Sun": {
+	         "hours": [
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0
+	         ],
+	         "interactions": 0
+	      },
+	      "Fri": {
+	         "hours": [
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0
+	         ],
+	         "interactions": 0
+	      },
+	      "Tue": {
+	         "hours": [
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0
+	         ],
+	         "interactions": 0
+	      },
+	      "Mon": {
+	         "hours": [
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0
+	         ],
+	         "interactions": 0
+	      },
+	      "Thu": {
+	         "hours": [
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0
+	         ],
+	         "interactions": 0
+	      },
+	      "Sat": {
+	         "hours": [
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0,
+	            0
+	         ],
+	         "interactions": 0
+	      }
+	   }
+	}
+	
 
-------------
+
 
 Rootcheck
 ---------------------------------
-
-Database
+Clear
 +++++++++++++++++++++++++
 
-GET /rootcheck/:agent_id
+Clear rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the rootcheck database of an agent.
+Clears the rootcheck database for all agents.
 
-**Parameters:**
+**Request**:
 
-* agent_id
+``DELETE`` ::
 
-**Query:**
-
-* N/A
+	/rootcheck
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/rootcheck/000
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": [
-        {
-          "status": "outstanding",
-          "readDay": "2016 Feb 23 12:52:58",
-          "oldDay": "2016 Feb 22 19:41:05",
-          "event": "(null)System Audit: CIS - Testing against the CIS Debian Linux Benchmark v1.0. File: /etc/debian_version. Reference: http://www.ossec.net/wiki/index.php/CIS_DebianLinux ."
-        },
-        {
-          "status": "outstanding",
-          "readDay": "2016 Feb 23 12:52:58",
-          "oldDay": "2016 Feb 22 19:41:05",
-          "event": "(null)System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /tmp is not on its own partition {CIS: 1.4 Debian Linux}. File: /etc/fstab. Reference: http://www.ossec.net/wiki/index.php/CIS_DebianLinux ."
-        },
-        {
-          "status": "outstanding",
-          "readDay": "2016 Feb 23 12:52:58",
-          "oldDay": "2016 Feb 22 19:41:05",
-          "event": "(null)System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /opt is not on its own partition {CIS: 1.4 Debian Linux}. File: /opt. Reference: http://www.ossec.net/wiki/index.php/CIS_DebianLinux ."
-        },
-        {
-          "status": "outstanding",
-          "readDay": "2016 Feb 23 12:52:58",
-          "oldDay": "2016 Feb 22 19:41:05",
-          "event": "(null)System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /var is not on its own partition {CIS: 1.4 Debian Linux}. File: /etc/fstab. Reference: http://www.ossec.net/wiki/index.php/CIS_DebianLinux ."
-        },
-        {
-          "status": "outstanding",
-          "readDay": "2016 Feb 23 12:52:58",
-          "oldDay": "2016 Feb 22 19:41:05",
-          "event": "(null)System Audit: CIS - Debian Linux - 4.13 - Disable standard boot services - Web server Enabled {CIS: 4.13 Debian Linux} {PCI_DSS: 2.2.2}. File: /etc/init.d/apache2. Reference: http://www.ossec.net/wiki/index.php/CIS_DebianLinux ."
-        }
-      ],
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": "Policy and auditing database updated"
+	}
+	
 
-------------
+Clear rootcheck database of an agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Clears the rootcheck database for an agent.
 
-Last scan
+**Request**:
+
+``DELETE`` ::
+
+	/rootcheck/:agent_id
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck/000?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Policy and auditing database updated"
+	}
+	
+
+
+Database
 +++++++++++++++++++++++++
 
-GET /rootcheck/:agent_id/last_scan
+Get last rootcheck scan
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Return the timestamp of the last rootcheck scan.
 
-**Parameters:**
+**Request**:
 
-* agent_id
+``GET`` ::
 
-**Query:**
+	/rootcheck/:agent_id/last_scan
 
-* N/A
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/rootcheck/000/last_scan
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/last_scan?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": {
-        "rootcheckTime": "Tue Feb 23 15:54:13 2016",
-        "rootcheckEndTime": "Tue Feb 23 15:58:52 2016"
-      },
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "rootcheckEndTime": "Unknown",
+	      "rootcheckTime": "Unknown"
+	   }
+	}
+	
 
-------------
+Get rootcheck database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the rootcheck database of an agent.
+
+**Request**:
+
+``GET`` ::
+
+	/rootcheck/:agent_id
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000?offset=0&limit=2&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 0,
+	      "items": []
+	   }
+	}
+	
+
 
 Run
 +++++++++++++++++++++++++
 
-PUT /rootcheck
+Run rootcheck scan in all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck/rootcheck on all agents.
+Runs syscheck/rootcheck on all agents. This request has the same behavior that <code>PUT /syscheck</code>_. Due to OSSEC launches both processes at once.
 
-This request has the same behavior that `PUT /syscheck`_. Due to OSSEC launches both processes at once.
+**Request**:
 
-**Parameters:**
+``PUT`` ::
 
-* N/A
-
-**Query:**
-
-* N/A
+	/rootcheck
 
 **Example Request:**
 ::
 
-    PUT https://IP:55000/rootcheck
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/rootcheck?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": "Restarting Syscheck/Rootcheck on all agents",
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": "Restarting Syscheck/Rootcheck on all agents"
+	}
+	
 
-PUT /rootcheck/:agent_id
+Run rootcheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck/rootcheck  on an agent.
+Runs syscheck/rootcheck on an agent. This request has the same behavior that <code>PUT /syscheck/:agent_id</code>_. Due to OSSEC launches both processes at once.
 
-This request has the same behavior that `PUT /syscheck/:agent_id`_. Due to OSSEC launches both processes at once.
+**Request**:
 
-**Parameters:**
+``PUT`` ::
 
-* agent_id
+	/rootcheck/:agent_id
 
-**Query:**
+**Parameters**:
 
-* N/A
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    PUT https://IP:55000/rootcheck/001
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/rootcheck/000?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": "Restarting Syscheck/Rootcheck on agent",
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": "Restarting Syscheck/Rootcheck locally"
+	}
+	
 
-------------
 
-Clear Database
+
+Rules
+---------------------------------
+Info
 +++++++++++++++++++++++++
 
-DELETE /rootcheck
+Get all rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Clears the rootcheck database for all agents.
+Returns all rules.
 
-**Parameters:**
+**Request**:
 
-* N/A
+``GET`` ::
 
-**Query:**
+	/rules
 
-* N/A
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| status             | String        | Filters files by status.                                                                                                                                                                               |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - enabled                                                                                                                                                                                              |
+|                    |               | - disabled                                                                                                                                                                                             |
+|                    |               | - all                                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| group              | String        | Filters file by group.                                                                                                                                                                                 |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| level              | Range         | Filters file by level. level=2 or level=2-5.                                                                                                                                                           |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| file               | String        | Filters by file name.                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| pci                | String        | Filters by pci requirement.                                                                                                                                                                            |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    DELETE https://IP:55000/rootcheck
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules?offset=0&limit=2&pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": "Policy and auditing database updated",
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 1542,
+	      "items": [
+	         {
+	            "status": "enabled",
+	            "pci": [],
+	            "description": "Generic template for all syslog rules.",
+	            "file": "rules_config.xml",
+	            "level": 0,
+	            "groups": [
+	               "syslog"
+	            ],
+	            "id": 1,
+	            "details": {
+	               "category": "syslog",
+	               "noalert": "1"
+	            }
+	         },
+	         {
+	            "status": "enabled",
+	            "pci": [],
+	            "description": "Generic template for all firewall rules.",
+	            "file": "rules_config.xml",
+	            "level": 0,
+	            "groups": [
+	               "firewall"
+	            ],
+	            "id": 2,
+	            "details": {
+	               "category": "firewall",
+	               "noalert": "1"
+	            }
+	         }
+	      ]
+	   }
+	}
+	
 
-DELETE /rootcheck/:agent_id
+Get files of rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Clears the rootcheck database for an agent.
+Returns the files of all rules.
 
-**Parameters:**
+**Request**:
 
-* agent_id
+``GET`` ::
 
-**Query:**
+	/rules/files
 
-* N/A
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| status             | String        | Filters files by status.                                                                                                                                                                               |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - enabled                                                                                                                                                                                              |
+|                    |               | - disabled                                                                                                                                                                                             |
+|                    |               | - all                                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    DELETE https://IP:55000/rootcheck/001
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/files?offset=0&limit=10&pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": "Policy and auditing database updated",
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 78,
+	      "items": [
+	         {
+	            "status": "disabled",
+	            "name": "amazon-ec2_rules.xml"
+	         },
+	         {
+	            "status": "disabled",
+	            "name": "amazon-iam_rules.xml"
+	         },
+	         {
+	            "status": "disabled",
+	            "name": "amazon_rules.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "name": "apache_rules.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "name": "apparmor_rules.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "name": "arpwatch_rules.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "name": "asterisk_rules.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "name": "attack_rules.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "name": "auditd_rules.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "name": "cimserver_rules.xml"
+	         }
+	      ]
+	   }
+	}
+	
 
-------------
+Get rule groups
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the groups of all rules.
+
+**Request**:
+
+``GET`` ::
+
+	/rules/groups
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/groups?offset=0&limit=10&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 86,
+	      "items": [
+	         "access_control",
+	         "access_denied",
+	         "account_changed",
+	         "active_response",
+	         "adduser",
+	         "agentless",
+	         "arpwatch",
+	         "asterisk",
+	         "attacks",
+	         "authentication_failed"
+	      ]
+	   }
+	}
+	
+
+Get rule pci requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the PCI requirements of all rules.
+
+**Request**:
+
+``GET`` ::
+
+	/rules/pci
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/pci?offset=0&limit=10&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 22,
+	      "items": [
+	         "1.1.1",
+	         "1.3.4",
+	         "1.4",
+	         "10.1",
+	         "10.2.2",
+	         "10.2.4",
+	         "10.2.5",
+	         "10.2.6",
+	         "10.2.7",
+	         "10.4"
+	      ]
+	   }
+	}
+	
+
+Get rules by id
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the rules with the specified id.
+
+**Request**:
+
+``GET`` ::
+
+	/rules
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``id``             | Number        | rule.                                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/1002?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 1,
+	      "items": [
+	         {
+	            "status": "enabled",
+	            "pci": [],
+	            "description": "Unknown problem somewhere in the system.",
+	            "file": "syslog_rules.xml",
+	            "level": 2,
+	            "groups": [
+	               "syslog",
+	               "errors"
+	            ],
+	            "id": 1002,
+	            "details": {
+	               "options": "alert_by_email",
+	               "match": "$BAD_WORDS"
+	            }
+	         }
+	      ]
+	   }
+	}
+	
+
+
 
 Syscheck
 ---------------------------------
+Clear
++++++++++++++++++++++++++
+
+Clear syscheck database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Clears the syscheck database for all agents.
+
+**Request**:
+
+``DELETE`` ::
+
+	/syscheck
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/syscheck?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Integrity check database updated"
+	}
+	
+
+Clear syscheck database of an agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Clears the syscheck database for an agent.
+
+**Request**:
+
+``DELETE`` ::
+
+	/syscheck/:agent_id
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/syscheck/000?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Integrity check database updated"
+	}
+	
+
 
 Database
 +++++++++++++++++++++++++
 
-GET /syscheck/:agent_id/files/changed
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns changed files for an agent. If a filename is specified, returns the changes in that files.
-
-**Parameters:**
-
-* agent_id
-
-**Query:**
-
-* filename
-
-**Example Request:**
-::
-
-    GET https://IP:55000/syscheck/000/files/changed?filename=/home/test/passwords.txt
-
-**Example Response:**
-
-::
-
-    {
-      "error": "0",
-      "data": [
-        {
-          "date": "2016 Feb 23 15:42:46",
-          "file": "/home/test/passwords.txt",
-          "changes": 0,
-          "attrs": {
-            "event": "added",
-            "size": "2",
-            "mode": 33188,
-            "perm": "rw-r--r--",
-            "uid": "0",
-            "gid": "0",
-            "md5": "60b725f10c9c85c70d97880dfe8191b3",
-            "sha1": "3f786850e387550fdab836ed7e6dc881de23001b"
-          }
-        },
-        {
-          "date": "2016 Feb 23 15:53:41",
-          "file": "/home/test/passwords.txt",
-          "changes": 0,
-          "attrs": {
-            "event": "modified",
-            "size": "53",
-            "mode": 33279,
-            "perm": "rwxrwxrwx",
-            "uid": "0",
-            "gid": "0",
-            "md5": "0a8bc357686b61e32ca87a6a07c0abef",
-            "sha1": "756e229be4c2ef11d4e4aea69e4483432f6d0988"
-          }
-        }
-      ],
-      "message": ""
-    }
-
-------------
-
-Last scan
-+++++++++++++++++++++++++
-
-GET /syscheck/:agent_id/last_scan
+Get last syscheck scan
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Return the timestamp of the last syscheck scan.
 
-**Parameters:**
+**Request**:
 
-* agent_id
+``GET`` ::
 
-**Query:**
+	/syscheck/:agent_id/last_scan
 
-* N/A
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    GET https://IP:55000/syscheck/001/last_scan
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscheck/000/last_scan?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": {
-        "syscheckTime": "Tue Feb 23 15:37:42 2016",
-        "syscheckEndTime": "Tue Feb 23 15:42:58 2016"
-      },
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": {
+	      "syscheckTime": "Unknown",
+	      "syscheckEndTime": "Unknown"
+	   }
+	}
+	
 
-------------
+Get syscheck files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the syscheck files of an agent.
+
+**Request**:
+
+``GET`` ::
+
+	/syscheck/:agent_id/files
+
+**Parameters**:
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| event              | String        | Filters files by event.                                                                                                                                                                                |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - added                                                                                                                                                                                                |
+|                    |               | - readded                                                                                                                                                                                              |
+|                    |               | - modified                                                                                                                                                                                             |
+|                    |               | - deleted                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| file               | String        | Filters file by filename.                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| filetype           | String        | Selects type of file.                                                                                                                                                                                  |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - file                                                                                                                                                                                                 |
+|                    |               | - registry                                                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| summary            | String        | Returns a summary where each item has: date, event and file.                                                                                                                                           |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscheck/000/files?offset=0&limit=2&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 0,
+	      "items": []
+	   }
+	}
+	
+
 
 Run
 +++++++++++++++++++++++++
 
-PUT /syscheck
+Run syscheck scan in all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck/rootcheck on all agents.
+Runs syscheck/rootcheck on all agents. This request has the same behavior that <code>PUT /rootcheck</code>_. Due to OSSEC launches both processes at once.
 
-This request has the same behavior that `PUT /rootcheck`_. Due to OSSEC launches both processes at once.
+**Request**:
 
-**Parameters:**
+``PUT`` ::
 
-* N/A
-
-**Query:**
-
-* N/A
+	/syscheck
 
 **Example Request:**
 ::
 
-    PUT https://IP:55000/syscheck
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/syscheck?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": "Restarting Syscheck/Rootcheck on all agents",
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": "Restarting Syscheck/Rootcheck on all agents"
+	}
+	
 
-PUT /syscheck/:agent_id
+Run syscheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck/rootcheck on an agent.
+Runs syscheck/rootcheck on an agent. This request has the same behavior that <code>PUT /rootcheck/:agent_id</code>_. Due to OSSEC launches both processes at once.
 
-This request has the same behavior that `PUT /rootcheck/:agent_id`_. Due to OSSEC launches both processes at once.
+**Request**:
 
-**Parameters:**
+``PUT`` ::
 
-* agent_id
+	/syscheck/:agent_id
 
-**Query:**
+**Parameters**:
 
-* N/A
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-    PUT https://IP:55000/syscheck/001
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/syscheck/000?pretty"
 
 **Example Response:**
-
 ::
 
-    {
-      "error": "0",
-      "data": "Restarting Syscheck/Rootcheck on agent",
-      "message": ""
-    }
+	{
+	   "error": 0,
+	   "data": "Restarting Syscheck/Rootcheck locally"
+	}
+	
 
-------------
 
-Clear Database
-+++++++++++++++++++++++++
-
-DELETE /syscheck
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Clears the rootcheck database for all agents.
-
-**Parameters:**
-
-* N/A
-
-**Query:**
-
-* N/A
-
-**Example Request:**
-::
-
-    DELETE https://IP:55000/syscheck
-
-**Example Response:**
-
-::
-
-    {
-      "error": "0",
-      "data": "Integrity check database updated",
-      "message": ""
-    }
-
-DELETE /syscheck/:agent_id
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Clears the rootcheck database for an agent.
-
-**Parameters:**
-
-* agent_id
-
-**Query:**
-
-* N/A
-
-**Example Request:**
-::
-
-    DELETE https://IP:55000/syscheck/001
-
-**Example Response:**
-
-::
-
-    {
-      "error": "0",
-      "data": "Integrity check database updated",
-      "message": ""
-    }
 
