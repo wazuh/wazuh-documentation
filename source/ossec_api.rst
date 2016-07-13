@@ -1,6 +1,6 @@
 .. _ossec_api:
 
-OSSEC Wazuh RESTful API 
+OSSEC Wazuh RESTful API
 ==========================
 
 .. topic:: Introduction
@@ -25,6 +25,6 @@ OSSEC Wazuh RESTful API
        :maxdepth: 2
 
        ossec_api_installation
+       ossec_api_configuration
        ossec_api_getting_started
        ossec_api_reference
-       ossec_api_examples

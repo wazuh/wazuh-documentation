@@ -283,15 +283,15 @@ Returns the information of an agent.
 	   "data": {
 	      "status": "Active",
 	      "ip": "127.0.0.1",
-	      "syscheckEndTime": "Unknown",
+	      "syscheckEndTime": "Wed Jul 13 18:44:36 2016",
 	      "id": "000",
 	      "name": "LinMV",
-	      "rootcheckEndTime": "Unknown",
+	      "rootcheckEndTime": "Wed Jul 13 15:17:26 2016",
 	      "version": "OSSEC HIDS v2.8",
-	      "syscheckTime": "Tue Jul 12 17:38:08 2016",
+	      "syscheckTime": "Wed Jul 13 18:44:11 2016",
 	      "lastKeepAlive": "Not available",
 	      "os": "Linux LinMV 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt11-1 (2015-05-24) x86_64",
-	      "rootcheckTime": "Unknown"
+	      "rootcheckTime": "Wed Jul 13 18:44:36 2016"
 	   }
 	}
 	
@@ -328,7 +328,7 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDAxIE5ld0hvc3QgMTAuMC4wLjkgZjJhN2U2ZTdlNzRiYjQxYzc3OGY0Njg2ODczNzViOTNmNDU4ZWYwNGM4ZjQzMmJkYTc1MjdlYTg4N2E3Yzg0Yw=="
+	   "data": "MDAxIE5ld0hvc3QgMTAuMC4wLjkgZWY1ZWM0MGY5YmE5MGY0ZjY5ZWRkMWU1YjY1ZTkxYzQxZjM3ZmMyZmQ1NWFiNTExN2RmODE2ZWZhZDU5MGY4Ng=="
 	}
 	
 
@@ -955,18 +955,18 @@ Returns the 3 last months of ossec.log.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 8296,
+	      "totalItems": 5577,
 	      "items": [
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/serv-u_decoders.xml.",
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/redis_decoders.xml.",
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/puppet_decoders.xml.",
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/ossec_ruleset_decoders.xml.",
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/oscap_decoders.xml.",
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/netscaler_decoders.xml.",
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/amazon_decoders.xml.",
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/zeus_decoders.xml.",
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/wordpress_decoders.xml.",
-	         "2016/07/12 17:39:48 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/windows_decoders.xml."
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/serv-u_decoders.xml.",
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/redis_decoders.xml.",
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/puppet_decoders.xml.",
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/ossec_ruleset_decoders.xml.",
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/oscap_decoders.xml.",
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/netscaler_decoders.xml.",
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/amazon_decoders.xml.",
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/zeus_decoders.xml.",
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/wordpress_decoders.xml.",
+	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/windows_decoders.xml."
 	      ]
 	   }
 	}
@@ -994,58 +994,53 @@ Returns the 3 last months of ossec.log.
 	   "error": 0,
 	   "data": {
 	      "ossec-testrule": {
-	         "info": 3688,
-	         "all": 3688,
+	         "info": 1702,
+	         "all": 1702,
 	         "error": 0
 	      },
 	      "wazuh-moduled": {
-	         "info": 38,
-	         "all": 38,
+	         "info": 22,
+	         "all": 22,
 	         "error": 0
 	      },
-	      "agent_control": {
-	         "info": 0,
-	         "all": 68,
-	         "error": 68
-	      },
 	      "ossec-rootcheck": {
-	         "info": 43,
-	         "all": 43,
+	         "info": 48,
+	         "all": 48,
 	         "error": 0
 	      },
 	      "ossec-monitord": {
-	         "info": 50,
-	         "all": 50,
+	         "info": 40,
+	         "all": 40,
 	         "error": 0
 	      },
 	      "ossec-logcollector": {
-	         "info": 125,
-	         "all": 136,
-	         "error": 11
+	         "info": 182,
+	         "all": 200,
+	         "error": 18
 	      },
 	      "ossec-execd": {
-	         "info": 77,
-	         "all": 77,
+	         "info": 60,
+	         "all": 60,
 	         "error": 0
 	      },
 	      "ossec-remoted": {
-	         "info": 181,
-	         "all": 260,
-	         "error": 79
+	         "info": 140,
+	         "all": 162,
+	         "error": 22
 	      },
 	      "ossec-syscheckd": {
-	         "info": 197,
-	         "all": 197,
+	         "info": 206,
+	         "all": 206,
 	         "error": 0
 	      },
 	      "ossec-analysisd": {
-	         "info": 3689,
-	         "all": 3701,
-	         "error": 12
+	         "info": 3110,
+	         "all": 3115,
+	         "error": 5
 	      },
 	      "ossec-maild": {
-	         "info": 38,
-	         "all": 38,
+	         "info": 22,
+	         "all": 22,
 	         "error": 0
 	      }
 	   }
@@ -1078,7 +1073,7 @@ Returns basic information about Manager.
 	   "error": 0,
 	   "data": {
 	      "path": "/var/ossec",
-	      "installation_date": "Mon Jul 11 07:48:34 UTC 2016",
+	      "installation_date": "Wed Jul 13 07:59:11 UTC 2016",
 	      "version": "v1.2-alpha1",
 	      "type": "server"
 	   }
@@ -1167,11 +1162,9 @@ Returns the ruleset backup list created by ossec_ruleset.py.
 	{
 	   "error": 0,
 	   "data": [
-	      "20160712_005",
-	      "20160712_004",
-	      "20160712_003",
-	      "20160711_002",
-	      "20160711_001"
+	      "20160713_003",
+	      "20160713_002",
+	      "20160713_001"
 	   ]
 	}
 	
@@ -1203,14 +1196,8 @@ Restores a ruleset backup.
 ::
 
 	{
-	   "error": 0,
-	   "data": {
-	      "msg": "Backup successfully",
-	      "need_restart": "yes",
-	      "restart_status": "success",
-	      "manual_steps": "no",
-	      "restarted": "yes"
-	   }
+	   "error": 2,
+	   "message": "Error: No backups with name '20160711_002'."
 	}
 	
 
@@ -1256,11 +1243,10 @@ Update OSSEC ruleset. If the update change a file in use, OSSEC will be restarte
 	{
 	   "error": 0,
 	   "data": {
-	      "msg": "Ruleset(1.09) updated successfully",
-	      "need_restart": "yes",
-	      "restart_status": "success",
+	      "msg": "Your ruleset is up to date.",
+	      "need_restart": "no",
 	      "manual_steps": "no",
-	      "restarted": "yes"
+	      "restarted": "no"
 	   }
 	}
 	
@@ -1303,42 +1289,91 @@ Returns OSSEC statistical information of current date.
 	         "firewall": 0,
 	         "alerts": [
 	            {
-	               "times": 8,
+	               "times": 2,
 	               "sigid": 5501,
 	               "level": 3
 	            },
 	            {
-	               "times": 8,
+	               "times": 1,
+	               "sigid": 10100,
+	               "level": 4
+	            },
+	            {
+	               "times": 2,
 	               "sigid": 5734,
 	               "level": 0
 	            },
 	            {
-	               "times": 8,
+	               "times": 1,
 	               "sigid": 5715,
 	               "level": 3
 	            },
 	            {
-	               "times": 2,
-	               "sigid": 30303,
-	               "level": 0
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 1002,
-	               "level": 2
-	            },
-	            {
-	               "times": 23,
+	               "times": 9,
 	               "sigid": 530,
 	               "level": 0
 	            },
 	            {
 	               "times": 1,
+	               "sigid": 502,
+	               "level": 3
+	            }
+	         ],
+	         "totalAlerts": 16,
+	         "syscheck": 0,
+	         "events": 16
+	      },
+	      {
+	         "hour": 8,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 25,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5521,
+	               "level": 0
+	            },
+	            {
+	               "times": 23,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5522,
+	               "level": 0
+	            },
+	            {
+	               "times": 25,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 25,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 11,
+	               "sigid": 1002,
+	               "level": 2
+	            },
+	            {
+	               "times": 77,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 3,
 	               "sigid": 533,
 	               "level": 7
 	            },
 	            {
-	               "times": 3,
+	               "times": 10,
 	               "sigid": 535,
 	               "level": 1
 	            },
@@ -1356,28 +1391,18 @@ Returns OSSEC statistical information of current date.
 	               "times": 3,
 	               "sigid": 516,
 	               "level": 3
-	            },
-	            {
-	               "times": 1590,
-	               "sigid": 550,
-	               "level": 7
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 551,
-	               "level": 7
 	            }
 	         ],
-	         "totalAlerts": 1654,
-	         "syscheck": 11022,
-	         "events": 11100
+	         "totalAlerts": 209,
+	         "syscheck": 10083,
+	         "events": 10343
 	      },
 	      {
-	         "hour": 8,
+	         "hour": 9,
 	         "firewall": 0,
 	         "alerts": [
 	            {
-	               "times": 8,
+	               "times": 2,
 	               "sigid": 5501,
 	               "level": 3
 	            },
@@ -1387,7 +1412,7 @@ Returns OSSEC statistical information of current date.
 	               "level": 0
 	            },
 	            {
-	               "times": 8,
+	               "times": 2,
 	               "sigid": 5502,
 	               "level": 3
 	            },
@@ -1397,12 +1422,12 @@ Returns OSSEC statistical information of current date.
 	               "level": 0
 	            },
 	            {
-	               "times": 8,
+	               "times": 2,
 	               "sigid": 5734,
 	               "level": 0
 	            },
 	            {
-	               "times": 8,
+	               "times": 2,
 	               "sigid": 5715,
 	               "level": 3
 	            },
@@ -1427,112 +1452,43 @@ Returns OSSEC statistical information of current date.
 	               "level": 0
 	            },
 	            {
-	               "times": 1,
-	               "sigid": 551,
+	               "times": 12,
+	               "sigid": 550,
 	               "level": 7
 	            }
 	         ],
-	         "totalAlerts": 127,
-	         "syscheck": 11023,
-	         "events": 11180
-	      },
-	      {
-	         "hour": 9,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 27,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5521,
-	               "level": 0
-	            },
-	            {
-	               "times": 27,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5522,
-	               "level": 0
-	            },
-	            {
-	               "times": 27,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 27,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 80,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 10,
-	               "sigid": 535,
-	               "level": 1
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 70,
-	               "sigid": 551,
-	               "level": 7
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 552,
-	               "level": 7
-	            }
-	         ],
-	         "totalAlerts": 273,
-	         "syscheck": 11023,
-	         "events": 11254
+	         "totalAlerts": 114,
+	         "syscheck": 10106,
+	         "events": 10237
 	      },
 	      {
 	         "hour": 10,
 	         "firewall": 0,
 	         "alerts": [
 	            {
-	               "times": 33,
+	               "times": 1,
 	               "sigid": 5501,
 	               "level": 3
 	            },
 	            {
-	               "times": 35,
+	               "times": 1,
 	               "sigid": 5502,
 	               "level": 3
 	            },
 	            {
-	               "times": 33,
+	               "times": 1,
 	               "sigid": 5734,
 	               "level": 0
 	            },
 	            {
-	               "times": 33,
+	               "times": 1,
 	               "sigid": 5715,
 	               "level": 3
 	            },
 	            {
-	               "times": 50,
+	               "times": 8,
 	               "sigid": 530,
 	               "level": 0
-	            },
-	            {
-	               "times": 3,
-	               "sigid": 533,
-	               "level": 7
 	            },
 	            {
 	               "times": 1,
@@ -1555,26 +1511,26 @@ Returns OSSEC statistical information of current date.
 	               "level": 3
 	            },
 	            {
-	               "times": 9,
+	               "times": 1,
 	               "sigid": 550,
 	               "level": 7
 	            },
 	            {
-	               "times": 5,
+	               "times": 9,
 	               "sigid": 551,
 	               "level": 7
 	            }
 	         ],
-	         "totalAlerts": 210,
-	         "syscheck": 11031,
-	         "events": 11242
+	         "totalAlerts": 31,
+	         "syscheck": 10123,
+	         "events": 10146
 	      },
 	      {
 	         "hour": 11,
 	         "firewall": 0,
 	         "alerts": [
 	            {
-	               "times": 29,
+	               "times": 2,
 	               "sigid": 5501,
 	               "level": 3
 	            },
@@ -1584,27 +1540,22 @@ Returns OSSEC statistical information of current date.
 	               "level": 0
 	            },
 	            {
-	               "times": 30,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
 	               "times": 1,
 	               "sigid": 5522,
 	               "level": 0
 	            },
 	            {
-	               "times": 29,
+	               "times": 2,
 	               "sigid": 5734,
 	               "level": 0
 	            },
 	            {
-	               "times": 29,
+	               "times": 2,
 	               "sigid": 5715,
 	               "level": 3
 	            },
 	            {
-	               "times": 88,
+	               "times": 79,
 	               "sigid": 530,
 	               "level": 0
 	            },
@@ -1614,7 +1565,7 @@ Returns OSSEC statistical information of current date.
 	               "level": 7
 	            },
 	            {
-	               "times": 1,
+	               "times": 10,
 	               "sigid": 535,
 	               "level": 1
 	            },
@@ -1624,41 +1575,26 @@ Returns OSSEC statistical information of current date.
 	               "level": 0
 	            },
 	            {
-	               "times": 1,
-	               "sigid": 550,
-	               "level": 7
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 551,
-	               "level": 7
-	            },
-	            {
-	               "times": 72,
+	               "times": 8,
 	               "sigid": 552,
 	               "level": 7
 	            }
 	         ],
-	         "totalAlerts": 285,
-	         "syscheck": 11102,
-	         "events": 11342
+	         "totalAlerts": 108,
+	         "syscheck": 10129,
+	         "events": 10258
 	      },
 	      {
 	         "hour": 12,
 	         "firewall": 0,
 	         "alerts": [
 	            {
-	               "times": 24,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
 	               "times": 1,
 	               "sigid": 5521,
 	               "level": 0
 	            },
 	            {
-	               "times": 24,
+	               "times": 1,
 	               "sigid": 5502,
 	               "level": 3
 	            },
@@ -1668,108 +1604,253 @@ Returns OSSEC statistical information of current date.
 	               "level": 0
 	            },
 	            {
-	               "times": 24,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 24,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 90,
+	               "times": 80,
 	               "sigid": 530,
 	               "level": 0
 	            },
 	            {
-	               "times": 2,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 550,
-	               "level": 7
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 551,
-	               "level": 7
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 552,
-	               "level": 7
+	               "times": 10,
+	               "sigid": 535,
+	               "level": 1
 	            }
 	         ],
-	         "totalAlerts": 195,
-	         "syscheck": 11040,
-	         "events": 11258
+	         "totalAlerts": 93,
+	         "syscheck": 0,
+	         "events": 121
 	      },
 	      {
 	         "hour": 13,
 	         "firewall": 0,
+	         "alerts": [],
+	         "totalAlerts": 0,
+	         "syscheck": 0,
+	         "events": 0
+	      },
+	      {
+	         "hour": 14,
+	         "firewall": 0,
 	         "alerts": [
 	            {
-	               "times": 9,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5521,
-	               "level": 0
-	            },
-	            {
-	               "times": 9,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5522,
-	               "level": 0
-	            },
-	            {
-	               "times": 9,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 9,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 90,
+	               "times": 16,
 	               "sigid": 530,
 	               "level": 0
 	            },
 	            {
 	               "times": 2,
+	               "sigid": 535,
+	               "level": 1
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 502,
+	               "level": 3
+	            },
+	            {
+	               "times": 4,
 	               "sigid": 515,
 	               "level": 0
 	            },
 	            {
 	               "times": 3,
+	               "sigid": 516,
+	               "level": 3
+	            }
+	         ],
+	         "totalAlerts": 26,
+	         "syscheck": 10131,
+	         "events": 10161
+	      },
+	      {
+	         "hour": 15,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 4,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5521,
+	               "level": 0
+	            },
+	            {
+	               "times": 4,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5522,
+	               "level": 0
+	            },
+	            {
+	               "times": 4,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 4,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 64,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 8,
+	               "sigid": 535,
+	               "level": 1
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 502,
+	               "level": 3
+	            },
+	            {
+	               "times": 6,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 3,
+	               "sigid": 516,
+	               "level": 3
+	            }
+	         ],
+	         "totalAlerts": 100,
+	         "syscheck": 20263,
+	         "events": 20385
+	      },
+	      {
+	         "hour": 16,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 14,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5521,
+	               "level": 0
+	            },
+	            {
+	               "times": 14,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5522,
+	               "level": 0
+	            },
+	            {
+	               "times": 14,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 14,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 79,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 533,
+	               "level": 7
+	            },
+	            {
+	               "times": 10,
+	               "sigid": 535,
+	               "level": 1
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 17,
+	               "sigid": 550,
+	               "level": 7
+	            }
+	         ],
+	         "totalAlerts": 167,
+	         "syscheck": 10132,
+	         "events": 10311
+	      },
+	      {
+	         "hour": 17,
+	         "firewall": 0,
+	         "alerts": [
+	            {
+	               "times": 1,
+	               "sigid": 5501,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5521,
+	               "level": 0
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5502,
+	               "level": 3
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5522,
+	               "level": 0
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5734,
+	               "level": 0
+	            },
+	            {
+	               "times": 1,
+	               "sigid": 5715,
+	               "level": 3
+	            },
+	            {
+	               "times": 80,
+	               "sigid": 530,
+	               "level": 0
+	            },
+	            {
+	               "times": 10,
+	               "sigid": 535,
+	               "level": 1
+	            },
+	            {
+	               "times": 2,
+	               "sigid": 515,
+	               "level": 0
+	            },
+	            {
+	               "times": 1340,
 	               "sigid": 550,
 	               "level": 7
 	            },
 	            {
-	               "times": 1,
+	               "times": 17,
 	               "sigid": 551,
-	               "level": 7
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 552,
 	               "level": 7
 	            }
 	         ],
-	         "totalAlerts": 135,
-	         "syscheck": 11040,
-	         "events": 11199
+	         "totalAlerts": 1455,
+	         "syscheck": 10121,
+	         "events": 10248
 	      }
 	   ]
 	}
@@ -2230,8 +2311,8 @@ Runs syscheck/rootcheck on all agents. This request has the same behavior that <
 ::
 
 	{
-	   "error": 0,
-	   "data": "Restarting Syscheck/Rootcheck on all agents"
+	   "error": 41,
+	   "message": "Unable to connect to remoted"
 	}
 	
 
@@ -2325,7 +2406,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1542,
+	      "totalItems": 1543,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -2408,15 +2489,15 @@ Returns the files of all rules.
 	      "totalItems": 78,
 	      "items": [
 	         {
-	            "status": "disabled",
+	            "status": "enabled",
 	            "name": "amazon-ec2_rules.xml"
 	         },
 	         {
-	            "status": "disabled",
+	            "status": "enabled",
 	            "name": "amazon-iam_rules.xml"
 	         },
 	         {
-	            "status": "disabled",
+	            "status": "enabled",
 	            "name": "amazon_rules.xml"
 	         },
 	         {
@@ -2761,7 +2842,18 @@ Returns the syscheck files of an agent.
 |                    |               | - file                                                                                                                                                                                                 |
 |                    |               | - registry                                                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| summary            | String        | Returns a summary where each item has: date, event and file.                                                                                                                                           |
+| summary            | String        | Returns a summary where each item has: scanDate, modificationDate, event and file.                                                                                                                     |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - yes                                                                                                                                                                                                  |
+|                    |               | - no                                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| md5                | String        | Returns the files with the specified md5 hash.                                                                                                                                                         |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sha1               | String        | Returns the files with the specified sha1 hash.                                                                                                                                                        |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| hash               | String        | Returns the files with the specified hash (md5 or sha1).                                                                                                                                               |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2804,8 +2896,8 @@ Runs syscheck/rootcheck on all agents. This request has the same behavior that <
 ::
 
 	{
-	   "error": 0,
-	   "data": "Restarting Syscheck/Rootcheck on all agents"
+	   "error": 41,
+	   "message": "Unable to connect to remoted"
 	}
 	
 
