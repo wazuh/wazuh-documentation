@@ -3,13 +3,13 @@
 Installation
 ======================
 
-In this guide, we'll get the Wazuh RESTful API installed along with our OSSEC Manager.
+In this guide, we will get the Wazuh RESTful API installed along with our OSSEC Manager.
 
 
 Pre-requisites
 ------------------------
 
-Before you begin with this guide, you need:
+The API will be installed in the **same server that OSSEC Manager**. So, before you begin with this guide, you need:
 
  - A non-root user account with sudo privileges.
  - Wazuh HIDS Manager installed, :ref:`see installation <wazuh_installation>`.
@@ -18,13 +18,13 @@ Before you begin with this guide, you need:
 Required packages
 ------------------------
 
-In order to run the API, you will need some packages, in the following steps we will guide you to install them.
+Let's install the required packages in our OSSEC Manager server. In the following steps we will guide you to install them.
 
 NodeJS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 NodeJS is a JavaScript platform for general-purpose programming that allows to build network applications with a great performance. It is shipped with several core modules out of the box, among them, we use *HTTP/HTTPS module* to create the API service.
 
-Most of distributions contain a version of NodeJS in its default repositories but we prefer to use the repositories maintained by NodeSource because they have more recent versions. Follow the `official guide <https://nodejs.org/en/download/package-manager/>`_ to install it.
+Most of distributions contain a version of NodeJS in its default repositories but we prefer to use the repositories maintained by *NodeSource* because they have more recent versions. Follow the `official guide <https://nodejs.org/en/download/package-manager/>`_ to install it.
 
 Usually, it is enough with the next commands:
 

@@ -23,6 +23,7 @@ In order to check if everything is working as expected, you can use cURL to do a
 
 Explanation:
 
+ * ``curl``: Command-line tool for transferring data using various protocols as HTTP and HTTPS.
  * ``-u foo:bar``: User and password.
  * ``-k``: Allow connections to SSL sites with self signed certs.
  * ``https://127.0.0.1:55000``: API URL.
@@ -33,21 +34,33 @@ Basic concepts
 
 These are the basic concepts about requests and responses:
 
-* The *base URL* for each request is: *https://IP:55000/*
+* The *base URL* for each request is: ``https://IP:55000/``
 * All responses are in *JSON format* with the following structure:
 
-  * error: 0 if everything was fine and an error code otherwise.
-  * data: data requested. Only if error is equal to 0.
-  * message: error description. Only if error is different to 0
+    +---------+-------------------------------------------------------+
+    | Field   | Description                                           |
+    +=========+=======================================================+
+    | error   | 0 if everything was fine and an error code otherwise. |
+    +---------+-------------------------------------------------------+
+    | data    | data requested. Only if error is equal to 0.          |
+    +---------+-------------------------------------------------------+
+    | message | error description. Only if error is different to 0.   |
+    +---------+-------------------------------------------------------+
 
-  * Examples:
+ * Example response without errors:
 
-    * Response without errors: ``{ "error": "0", "data": "Welcome to Wazuh HIDS API" }``
-    * Response with errors: ``{ "error": "603", "message": "The requested URL was not found on this server" }``
+  * ``{ "error": "0", "data": "Welcome to Wazuh HIDS API" }``
 
-* Responses with collections (array of data) will return till a maximum of 500 elements. You should use the offset and limit param to iterate across the collection.
+ * Example response with errors:
+
+  * ``{ "error": "603", "message": "The requested URL was not found on this server" }``
+
+* Responses with collections (array of data) will return till a maximum of 500 elements. You should use the *offset* and *limit* params to iterate through the collection.
 * All responses have a HTTP Status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
+* All requests accept the param *pretty* to convert the JSON response to a string formatted.
 
+
+.. _use_cases:
 
 Use cases
 ---------------------------------
@@ -83,7 +96,7 @@ cURL is a command-line tool for transferring data using various protocols. It ca
 **POST**
 ::
 
-    $ curl -u foo:bar -k -X POST -d 'name=NewHost&ip=10.0.0.8' https://127.0.0.1:55000/agents
+    $ curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents"
 
 ``{"error":0,"data":{"id":"004","message":"Agent added"},"message":""}``
 

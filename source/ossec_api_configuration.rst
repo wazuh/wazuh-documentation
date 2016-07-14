@@ -84,23 +84,16 @@ And remove temporary files: ::
  $ sudo rm server.key.org
 
 
-Running API on the background
+Running API
 ----------------------------------------
 
-In order to run the API on background execute the following command: ::
 
-
- $ /bin/node /var/ossec/api/app.js &
-
-API logs will be saved at ``/var/ossec/logs/api.log``.
-
-.. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /usr/bin/, if the API does not start, check it please.
-
+There are two ways to run the API: as service or on background.
 
 .. _api-service-label:
 
-Running API as service
-----------------------------------------
+Service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We **recommend** to run the API as a service. In order to install the service excecute the following script: ::
 
@@ -112,3 +105,14 @@ Then, check out if the API is running:
   * SysVinit systems: service wazuh-api status
 
 The available options are: start, stop, status and restart.
+
+Background
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In order to run the API on background execute the following command: ::
+
+ $ /bin/node /var/ossec/api/app.js &
+
+API logs will be saved at ``/var/ossec/logs/api.log``.
+
+.. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /usr/bin/, if the API does not start, check it please.
