@@ -168,12 +168,16 @@ Chef applies attributes from all attribute files regardless of which recipes wer
 
 `ossec.conf` makes little use of XML attributes so you can generally construct nested hashes in the usual fashion. Where an attribute is required, you can do it like this:
 
+::
+
     default['ossec']['conf']['all']['syscheck']['directories'] = [
       { '@check_all' => true, 'content!' => '/bin,/sbin' },
       '/etc,/usr/bin,/usr/sbin'
     ]
 
 This produces:
+
+::
 
     <syscheck>
       <directories check_all="yes">/bin,/sbin</directories>
@@ -185,6 +189,8 @@ The default values are based on those given in the OSSEC manual. They do not inc
 ###agent.conf
 
 OSSEC servers can also distribute configuration to agents through the centrally managed XM file called `agent.conf`. Since Chef is better at distributing configuration than OSSEC is, the cookbook leaves this file blank by default. Should you want to populate it, it is done in a similar manner to the above. Since this file is only used on servers, you can define the attributes directly under `node['ossec']['agent_conf']`. Unlike conventional XML files, `agent.conf` has multiple root nodes so `node['ossec']['agent_conf']` must be treated as an array like so.
+
+::
 
     default['ossec']['agent_conf'] = [
       {
@@ -200,6 +206,8 @@ OSSEC servers can also distribute configuration to agents through the centrally 
     ]
 
 This produces:
+
+::
 
     <agent_config>
       <syscheck>
@@ -246,6 +254,8 @@ Sets up a system to be an OSSEC server. This recipe will search for all nodes th
 
 To manage additional agents on the server that don't run chef, or for agentless OSSEC configuration (for example, routers), add a new node for them and create the `node['ossec']['agentless']` attribute as true. For example if we have a router named gw01.example.com with the IP `192.168.100.1`:
 
+::
+
     % knife node create gw01.example.com
     {
       "name": "gw01.example.com",
@@ -281,7 +291,9 @@ The cookbook can be used to install OSSEC in one of the three types:
 * API - use the wazuh_ossec::wazuh-api recipe
 
 For the OSSEC server, create a role, `wazuh_ossec_server`. Add attributes per above as needed to customize the installation.
-```
+
+::
+
   {
     "name": "wazuh_ossec_server",
     "description": "",
@@ -300,11 +312,11 @@ For the OSSEC server, create a role, `wazuh_ossec_server`. Add attributes per ab
 
     }
   }
-```
 
 For OSSEC agents, create a role, `wazuh_ossec_agent`.
 
-```
+::
+
   {
     "name": "wazuh_ossec_agent",
     "description": "",
@@ -325,10 +337,9 @@ For OSSEC agents, create a role, `wazuh_ossec_agent`.
 
     }
   }
-```
 
 Customization
-----
+-------------
 
 The main configuration file is maintained by Chef as a template, `ossec.conf.erb`. It should just work on most installations, but can be customized for the local environment. Notably, the rules, ignores and commands may be modified.
 
