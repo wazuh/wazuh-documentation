@@ -1,4 +1,4 @@
-.. _ossec_api_test:
+.. _ossec_api_reference:
 
 Reference
 ======================
@@ -13,6 +13,8 @@ This API reference is organized by resources:
 
 Also, it is provided an `Request List`_ with all available requests.
 
+
+.. _request_list:
 
 Request List
 ---------------------------------
@@ -116,7 +118,7 @@ Add a new agent.
 	   "error": 0,
 	   "data": "001"
 	}
-	
+
 
 Add agent (quick method)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,7 +150,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": "002"
 	}
-	
+
 
 
 Delete
@@ -184,7 +186,7 @@ Removes an agent. Internally use manage_agents with option -r <id>. You must res
 	   "error": 0,
 	   "data": "Agent removed"
 	}
-	
+
 
 
 Info
@@ -250,7 +252,7 @@ Returns a list with the available agents.
 	      ]
 	   }
 	}
-	
+
 
 Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -294,7 +296,7 @@ Returns the information of an agent.
 	      "rootcheckTime": "Wed Jul 13 18:44:36 2016"
 	   }
 	}
-	
+
 
 
 Key
@@ -330,7 +332,7 @@ Returns the key of an agent.
 	   "error": 0,
 	   "data": "MDAxIE5ld0hvc3QgMTAuMC4wLjkgZWY1ZWM0MGY5YmE5MGY0ZjY5ZWRkMWU1YjY1ZTkxYzQxZjM3ZmMyZmQ1NWFiNTExN2RmODE2ZWZhZDU5MGY4Ng=="
 	}
-	
+
 
 
 Restart
@@ -358,7 +360,7 @@ Restarts all agents.
 	   "error": 0,
 	   "data": "Restarting all agents"
 	}
-	
+
 
 Restart an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -390,7 +392,7 @@ Restarts the agent.
 	   "error": 0,
 	   "data": "Restarting agent"
 	}
-	
+
 
 
 
@@ -467,7 +469,7 @@ Returns all decoders included in ossec.conf.
 	      ]
 	   }
 	}
-	
+
 
 Get all decoders files.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -519,7 +521,7 @@ Returns all decoders files included in ossec.conf.
 	      ]
 	   }
 	}
-	
+
 
 Get all parent decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -584,7 +586,7 @@ Returns all parent decoders included in ossec.conf
 	      ]
 	   }
 	}
-	
+
 
 Get decoders by name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -655,7 +657,7 @@ Returns the decoders with the specified name.
 	      ]
 	   }
 	}
-	
+
 
 
 
@@ -719,7 +721,7 @@ Restarts the OSSEC Manager processes.
 	      }
 	   ]
 	}
-	
+
 
 Start manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -776,7 +778,7 @@ Starts the OSSEC Manager processes.
 	      }
 	   ]
 	}
-	
+
 
 Stop manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -833,7 +835,7 @@ Stops the OSSEC Manager processes.
 	      }
 	   ]
 	}
-	
+
 
 
 Configuration
@@ -880,7 +882,7 @@ Returns ossec.conf in JSON format.
 	      "logall": "yes"
 	   }
 	}
-	
+
 
 Test manager configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -904,7 +906,7 @@ Checks OSSEC Manager configuration.
 	   "error": 0,
 	   "data": "OK"
 	}
-	
+
 
 
 Logs
@@ -970,7 +972,7 @@ Returns the 3 last months of ossec.log.
 	      ]
 	   }
 	}
-	
+
 
 Get summary of ossec.log
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1045,7 +1047,7 @@ Returns the 3 last months of ossec.log.
 	      }
 	   }
 	}
-	
+
 
 
 Retrieve_information
@@ -1078,7 +1080,7 @@ Returns basic information about Manager.
 	      "type": "server"
 	   }
 	}
-	
+
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1135,7 +1137,7 @@ Returns the Manager processes that are running.
 	      }
 	   ]
 	}
-	
+
 
 
 Ruleset
@@ -1167,7 +1169,7 @@ Returns the ruleset backup list created by ossec_ruleset.py.
 	      "20160713_001"
 	   ]
 	}
-	
+
 
 Restore rulset backup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1199,7 +1201,7 @@ Restores a ruleset backup.
 	   "error": 2,
 	   "message": "Error: No backups with name '20160711_002'."
 	}
-	
+
 
 Update ruleset
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1249,7 +1251,7 @@ Update OSSEC ruleset. If the update change a file in use, OSSEC will be restarte
 	      "restarted": "no"
 	   }
 	}
-	
+
 
 
 Stats
@@ -1854,7 +1856,7 @@ Returns OSSEC statistical information of current date.
 	      }
 	   ]
 	}
-	
+
 
 Get manager stats by hour
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1906,7 +1908,7 @@ Returns OSSEC statistical information per hour. Each item in averages field repr
 	      "interactions": 0
 	   }
 	}
-	
+
 
 Get manager stats by week
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2141,7 +2143,7 @@ Returns OSSEC statistical information per week. Each item in <em>hours</em> fiel
 	      }
 	   }
 	}
-	
+
 
 
 
@@ -2172,7 +2174,7 @@ Clears the rootcheck database for all agents.
 	   "error": 0,
 	   "data": "Policy and auditing database updated"
 	}
-	
+
 
 Clear rootcheck database of an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2204,7 +2206,7 @@ Clears the rootcheck database for an agent.
 	   "error": 0,
 	   "data": "Policy and auditing database updated"
 	}
-	
+
 
 
 Database
@@ -2243,7 +2245,7 @@ Return the timestamp of the last rootcheck scan.
 	      "rootcheckTime": "Unknown"
 	   }
 	}
-	
+
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2286,7 +2288,7 @@ Returns the rootcheck database of an agent.
 	      "items": []
 	   }
 	}
-	
+
 
 
 Run
@@ -2314,7 +2316,7 @@ Runs syscheck/rootcheck on all agents. This request has the same behavior that <
 	   "error": 41,
 	   "message": "Unable to connect to remoted"
 	}
-	
+
 
 Run rootcheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2346,7 +2348,7 @@ Runs syscheck/rootcheck on an agent. This request has the same behavior that <co
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-	
+
 
 
 
@@ -2441,7 +2443,7 @@ Returns all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get files of rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2531,7 +2533,7 @@ Returns the files of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rule groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2583,7 +2585,7 @@ Returns the groups of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2635,7 +2637,7 @@ Returns the PCI requirements of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rules by id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2695,7 +2697,7 @@ Returns the rules with the specified id.
 	      ]
 	   }
 	}
-	
+
 
 
 
@@ -2726,7 +2728,7 @@ Clears the syscheck database for all agents.
 	   "error": 0,
 	   "data": "Integrity check database updated"
 	}
-	
+
 
 Clear syscheck database of an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2758,7 +2760,7 @@ Clears the syscheck database for an agent.
 	   "error": 0,
 	   "data": "Integrity check database updated"
 	}
-	
+
 
 
 Database
@@ -2797,7 +2799,7 @@ Return the timestamp of the last syscheck scan.
 	      "syscheckEndTime": "Unknown"
 	   }
 	}
-	
+
 
 Get syscheck files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2871,7 +2873,7 @@ Returns the syscheck files of an agent.
 	      "items": []
 	   }
 	}
-	
+
 
 
 Run
@@ -2899,7 +2901,7 @@ Runs syscheck/rootcheck on all agents. This request has the same behavior that <
 	   "error": 41,
 	   "message": "Unable to connect to remoted"
 	}
-	
+
 
 Run syscheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2931,7 +2933,3 @@ Runs syscheck/rootcheck on an agent. This request has the same behavior that <co
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-	
-
-
-
