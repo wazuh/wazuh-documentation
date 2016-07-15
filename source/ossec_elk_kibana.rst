@@ -3,47 +3,59 @@
 Kibana
 ======
 
-This is your last step in the process of setting up your ELK cluster. In this section you will find the instructions to install Kibana, version 4.3, and to configure it to provide a centralized OSSEC alerts dashboard. In addition you will find dashboards for CIS security benchmark and PCI DSS compliance regulation. 
+This is your last step in the process of setting up your ELK cluster. In this section you will find the instructions to install Kibana, version 4.3, and to configure it to provide a centralized OSSEC alerts dashboard. In addition you will find dashboards for CIS security benchmark and PCI DSS compliance regulation.
 
 Furthermore, the documentation also includes extra steps to secure your Kibana interface with username and password, using Nginx web server.
 
-Kibana installation
--------------------
+Kibana installation on Debian
+------------------------------------
 
-Assuming you have followed the previous steps of :ref:`our guide <ossec_elk>`, and that you are using a single-host type of deployment. You can now install Kibana following running these commands: ::
+To install the Kibana version 4.5 Debian package, using official repositories run the following commands: ::
 
- $ cd ~/ossec_tmp
- $ sudo wget https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz
- $ sudo tar xvf kibana-*.tar.gz && sudo mkdir -p /opt/kibana && sudo cp -R kibana-4*/* /opt/kibana/
+ $ wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+ $ echo "deb http://packages.elastic.co/kibana/4.5/debian stable main" | sudo tee -a /etc/apt/sources.list
+ $ sudo apt-get update && sudo apt-get install kibana
 
-If you need the 32 bit version use the download link: ``https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x86.tar.gz``
- 
-Kibana service for SystemVinit
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configure Kibana to automatically start during bootup. If your distribution is using the System V version of init, run the following command: ::
 
-When using SystemVinit as your service manager (usually on Debian distributions), you can set up Kibana service following these steps: ::
+ $ sudo update-rc.d kibana defaults 95 10
 
- $ sudo cp ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana4 /etc/init.d/
- $ sudo chmod +x /etc/init.d/kibana4
- $ sudo update-rc.d kibana4 defaults 96 9
+If your distribution is using systemd, run the following commands instead: ::
 
-Kibana service for Systemd
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+ $ sudo /bin/systemctl daemon-reload
+ $ sudo /bin/systemctl enable kibana.service
 
-On the other hand, if your system uses Systemd to manage the services (usually on CentOS distributions), you can set up Kibana service by creating a Systemd unit file at ``/etc/systemd/system/kibana4.service`` with the following contents: ::
 
- [Service]
- ExecStart=/opt/kibana/bin/kibana
- Restart=always
- StandardOutput=syslog
- StandardError=syslog
- SyslogIdentifier=kibana4
- User=root
- Group=root
- Environment=NODE_ENV=production
+Kibana installation on CentOS
+------------------------------------
 
- [Install]
- WantedBy=multi-user.target
+To install Kibana version 4.5 RPM package. Lets start importing the repository GPG key: ::
+
+ $ sudo rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+Then we create ``/etc/yum.repos.d/kibana.repo`` file with the following content: ::
+
+ [kibana-4.5]
+ name=Kibana repository for 4.5.x packages
+ baseurl=http://packages.elastic.co/kibana/4.5/centos
+ gpgcheck=1
+ gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
+ enabled=1
+
+And we can now install the RPM package with yum: ::
+
+ $ sudo yum install kibana
+
+Finally configure Kibana to automatically start during bootup:
+
+- If your distribution is using SysV init, then you will need to run: ::
+
+   $ sudo chkconfig --add kibana
+
+- If your distribution is using Systemd: ::
+
+   $ sudo /bin/systemctl daemon-reload
+   $ sudo /bin/systemctl enable kibana.service
 
 Kibana on low memory systems
 ------------------------------
@@ -65,15 +77,15 @@ If you need to change any of this settings, open the ``/opt/kibana/config/kibana
 
  # The host to bind the server to.
  server.host: "0.0.0.0"
-    
+
  # The Elasticsearch instance to use for all your queries.
  elasticsearch.url: "http://127.0.0.1:9200"
 
 .. note:: Please note that the IP address we use in ``elasticsearch.url`` variable needs to match the one we used for ``network.bind_host`` and ``network.host`` when we configured the Elasticsearch component.
 
-Now we can start Kibana: :: 
+Now we can start Kibana: ::
 
- $ sudo service kibana4 start
+ $ sudo service kibana start
 
 OSSEC alerts index
 ^^^^^^^^^^^^^^^^^^
@@ -125,12 +137,12 @@ To install Nginx on CentOS systems, run the following commands: ::
 Nginx configuration
 ^^^^^^^^^^^^^^^^^^^
 
-Create and edit Kibana configuration file for Nginx: :: 
+Create and edit Kibana configuration file for Nginx: ::
 
 - On CentOS: /etc/nginx/conf.d/kibana.conf
 - On Debian: /etc/nginx/sites-available/default
 
-Copy and paste the following configuration: :: 
+Copy and paste the following configuration: ::
 
  server {
         listen 80 default_server;                       #Listen on IPv4
@@ -162,16 +174,16 @@ On CentOS we also need to edit ``/etc/nginx/nginx.conf``, including the followin
 SSL Certificate
 ^^^^^^^^^^^^^^^
 
-Now we can create the SSL certificate to encrypt our connection via HTTPS. This can be done by following the next steps: :: 
+Now we can create the SSL certificate to encrypt our connection via HTTPS. This can be done by following the next steps: ::
 
  $ cd ~
  $ sudo openssl genrsa -des3 -out server.key 1024
 
-Enter a password for the certificate and continue: :: 
+Enter a password for the certificate and continue: ::
 
  $ sudo openssl req -new -key server.key -out server.csr
 
-Enter the password again, fill the certificate information, and continue: :: 
+Enter the password again, fill the certificate information, and continue: ::
 
  $ sudo cp server.key server.key.org
  $ sudo openssl rsa -in server.key.org -out kibana-access.key
@@ -184,15 +196,15 @@ Enter the password again, fill the certificate information, and continue: ::
 Password authentication
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-To generate your .htpasswd file, run this command, replacing ``kibabaadmin`` with your own username :: 
+To generate your .htpasswd file, run this command, replacing ``kibabaadmin`` with your own username ::
 
  $ sudo htpasswd -c /etc/nginx/conf.d/kibana.htpasswd kibanaadmin
 
-Now restart the Nginx service: :: 
+Now restart the Nginx service: ::
 
  $ sudo service nginx restart
 
-Try to access the Kibana web interface via HTTPS. It will ask for the username and password you just created. 
+Try to access the Kibana web interface via HTTPS. It will ask for the username and password you just created.
 
 
 .. Note:: If you are running SELinux in enforcing mode, you might need to do some additional configuration in order to allow connections to 127.0.0.1:5601.

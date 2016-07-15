@@ -38,7 +38,7 @@ To install the ossec-elk container run this command: ::
 
 The ``/var/ossec/data`` directory allows the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue (all OSSEC files). In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
 
-Other available configuration parameters are: 
+Other available configuration parameters are:
 
 - AUTO_ENROLLMENT_ENABLED: Specifies whether or not to enable auto-enrollment via ossec-authd. Defaults to ``true``.
 - AUTHD_OPTIONS: Options to passed ``ossec-authd``, other than ``-p`` and ``-g``. No default.
@@ -59,30 +59,10 @@ Then restart your OSSEC manager: ::
 
    $ docker exec -it ossec /var/ossec/bin/ossec-control restart
 
-Access to Kibana4
-^^^^^^^^^^^^^^^^^
+Access to Kibana4.5
+^^^^^^^^^^^^^^^^^^^
 
-Now we need to create a Kibana index, Kibana will do it automatically but we need to set up some fields on the first Kibana initialization.
-
-- Access the kibana url at ``http://your_docker_server_ip:5601`` and set up a new index pattern.
-- Kibana will ask you to "Configure an index pattern".
-- Check "Use event times to create index names".
-- Index pattern interval: Daily.
-- Index name or pattern: ``[ossec-]YYYY.MM.DD``
-- On ``Time-field name`` list select ``@timestamp`` option.
-- Click on "Create" button.
-- Go to "Discover" tap on top bar buttons.
-
-
-.. note:: Kibana will search Elasticsearch index name pattern ``ossec-yyyy.mm.dd``. You need to have at least an OSSEC alert before you set up the index pattern on Kibana. Otherwise it won't find any index on Elasticsearch. If you want to generate one, for example you could try a ``sudo -s`` and miss the password on purpose several times.
-
-Now you can import the custom dashboards. Access Kibana web interface on your browser and navigate to "Objects": ::
-
-- Click at top bar on "Settings".
-- Click on "Objects".
-- Then click the button "Import" and select the file ~/ossec_tmp/ossec-wazuh/extensions/kibana/kibana-ossecwazuh-dashboards.json
-
-Refresh the Kibana page and you should be able to load your imported Dashboards.
+If you have an error the first time you log in kibana: move to a different menu and return to discover and it should be working properly.
 
 .. note:: Some Dashboard visualizations require time and specific alerts to work. Please don't worry if some visualizations do not display data immidiately after the import.
 
