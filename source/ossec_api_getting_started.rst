@@ -327,7 +327,7 @@ Of course, we can work with agents. Let's take a look to the **active** agents:
       }
     }
 
-Add an agent is know easy than ever. Just send a request with the agent name and its IP.
+Add an agent is now easy than ever. Just send a request with the agent name and its IP.
 
 ``curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"``
 
@@ -370,14 +370,14 @@ cURL is a command-line tool for transferring data using various protocols. It ca
 
     $ curl -u foo:bar -k https://127.0.0.1:55000
 
-``{"error":"0","data":"OSSEC-API","message":"wazuh.com"}``
+``{"error":"0","data": "Welcome to Wazuh HIDS API"}``
 
 **PUT**
 ::
 
     $ curl -u foo:bar -k -X PUT https://127.0.0.1:55000/agents/new_agent
 
-``{"error":0,"data":{"id":"004","message":"Agent added"},"message":""}``
+``{"error":0,"data":"004"}``
 
 
 
@@ -386,14 +386,14 @@ cURL is a command-line tool for transferring data using various protocols. It ca
 
     $ curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000//agents"
 
-``{"error":0,"data":{"id":"004","message":"Agent added"},"message":""}``
+``{"error":0,"data":"004"}``
 
 **DELETE**
 ::
 
     $ curl -u foo:bar -k -X DELETE https://127.0.0.1:55000/rootcheck/001
 
-``{"error":"0","data":"Policy and auditing database updated","message":""}``
+``{"error":"0","data":"Policy and auditing database updated"}``
 
 .. _python-label:
 
@@ -427,7 +427,6 @@ Output:
 
     {
         "error": "0",
-        "message": "",
         "data": {
             "id": "000",
             "ip": "127.0.0.1",
@@ -495,8 +494,8 @@ Output:
 
 ::
 
-    error data                                                                                 message
-    ----- --------                                                                           -------
+    error data
+    ----- --------                                                                           
     0     @{syscheckTime=Wed Feb 24 09:55:04 2016; syscheckEndTime=Wed Feb 24 10:00:42 2016}
 
 

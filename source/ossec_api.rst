@@ -7,6 +7,8 @@ Wazuh API is an open source RESTful API to interact with OSSEC from your own app
 
 Our goal is to completely manage OSSEC remotely. Perform everyday actions like adding an agent, restart OSSEC, or look for syscheck files are now simplest using Wazuh API.
 
+If you want to get some idea of what you can do with this tool, just visit the :ref:`Use Cases <use_cases>`.
+
 Wazuh API capabilities:
 
 * Agents management
@@ -18,7 +20,6 @@ Wazuh API capabilities:
 * HTTPS and User authentication
 * Error Handling
 
-If you want to get some idea of what you can do with this tool, just visit the :ref:`Use Cases <use_cases>`.
 
 .. topic:: Documentation sections
 

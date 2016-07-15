@@ -40,7 +40,7 @@ Red Hat, CentOS and Fedora: ::
 
 Python
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The API needs **Python** 2.6 or newer to perform some tasks.
+The API needs **Python 2.6** or newer to perform some tasks.
 
 Also, you need to install the python package *xmljson*: ::
 
@@ -60,7 +60,7 @@ Red Hat, CentOS and Fedora: ::
 RESTful API
 --------------------
 
-Our server is ready to install the API. Execute the next command to download the API and copy it to */var/ossec/api*: ::
+Our server is ready to install the API. Execute the next commands to download the API and copy it to */var/ossec/api*: ::
 
  $ cd ~
  $ wget https://github.com/wazuh/wazuh-API/archive/v1.2.tar.gz -O wazuh-API-1.2.tar.gz

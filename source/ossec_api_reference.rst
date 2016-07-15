@@ -13,7 +13,6 @@ This API reference is organized by resources:
 
 Also, it is provided an `Request List`_ with all available requests.
 
-
 .. _request_list:
 
 Request List
@@ -24,6 +23,7 @@ Request List
 	* GET /agents  (`Get all agents`_)
 	* GET /agents/:agent_id  (`Get an agent`_)
 	* GET /agents/:agent_id/key  (`Get agent key`_)
+	* GET /agents/summary  (`Get agents summary`_)
 	* POST /agents/:agent_id  (`Add agent`_)
 	* PUT /agents/:agent_id  (`Restart an agent`_)
 	* PUT /agents/:agent_name  (`Add agent (quick method)`_)
@@ -76,9 +76,9 @@ Request List
 	* PUT /syscheck/:agent_id  (`Run syscheck scan in an agent`_)
 
 Agents
----------------------------------
+----------------------------------------
 Add
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Add agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -90,7 +90,7 @@ Add a new agent.
 
 	/agents/:agent_id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -118,7 +118,7 @@ Add a new agent.
 	   "error": 0,
 	   "data": "001"
 	}
-
+	
 
 Add agent (quick method)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -130,7 +130,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 
 	/agents/:agent_name
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -150,11 +150,11 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": "002"
 	}
-
+	
 
 
 Delete
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Delete an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -166,7 +166,7 @@ Removes an agent. Internally use manage_agents with option -r <id>. You must res
 
 	/agents/:agent_id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -186,11 +186,40 @@ Removes an agent. Internally use manage_agents with option -r <id>. You must res
 	   "error": 0,
 	   "data": "Agent removed"
 	}
-
+	
 
 
 Info
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
+
+Get agents summary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a summary of the available agents.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/summary
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/summary?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "active": 1,
+	      "total": 2,
+	      "disconnected": 0,
+	      "neverConnected": 1
+	   }
+	}
+	
 
 Get all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -202,7 +231,7 @@ Returns a list with the available agents.
 
 	/agents
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -252,7 +281,7 @@ Returns a list with the available agents.
 	      ]
 	   }
 	}
-
+	
 
 Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -264,7 +293,7 @@ Returns the information of an agent.
 
 	/agents/:agent_id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -285,22 +314,22 @@ Returns the information of an agent.
 	   "data": {
 	      "status": "Active",
 	      "ip": "127.0.0.1",
-	      "syscheckEndTime": "Wed Jul 13 18:44:36 2016",
+	      "syscheckEndTime": "Fri Jul 15 11:06:12 2016",
 	      "id": "000",
 	      "name": "LinMV",
-	      "rootcheckEndTime": "Wed Jul 13 15:17:26 2016",
+	      "rootcheckEndTime": "Fri Jul 15 11:05:40 2016",
 	      "version": "OSSEC HIDS v2.8",
-	      "syscheckTime": "Wed Jul 13 18:44:11 2016",
+	      "syscheckTime": "Fri Jul 15 11:05:40 2016",
 	      "lastKeepAlive": "Not available",
 	      "os": "Linux LinMV 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt11-1 (2015-05-24) x86_64",
-	      "rootcheckTime": "Wed Jul 13 18:44:36 2016"
+	      "rootcheckTime": "Fri Jul 15 11:05:34 2016"
 	   }
 	}
-
+	
 
 
 Key
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Get agent key
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -312,7 +341,7 @@ Returns the key of an agent.
 
 	/agents/:agent_id/key
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -330,13 +359,13 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDAxIE5ld0hvc3QgMTAuMC4wLjkgZWY1ZWM0MGY5YmE5MGY0ZjY5ZWRkMWU1YjY1ZTkxYzQxZjM3ZmMyZmQ1NWFiNTExN2RmODE2ZWZhZDU5MGY4Ng=="
+	   "data": "MDAxIE5ld0hvc3QgMTAuMC4wLjkgN2ZlYmUxOWVjNzkyZjMzNTM3NTYzNzVkMTUyMTk0YTUxYzZkZjlmNDU2ZmFiNDc4N2NhYTRkYTY0ZWIyZTIyZQ=="
 	}
-
+	
 
 
 Restart
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Restart all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -357,10 +386,9 @@ Restarts all agents.
 ::
 
 	{
-	   "error": 0,
-	   "data": "Restarting all agents"
+	    "data": "Restarting all agents", 
+	    "error": 0
 	}
-
 
 Restart an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -372,7 +400,7 @@ Restarts the agent.
 
 	/agents/:agent_id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -389,17 +417,16 @@ Restarts the agent.
 ::
 
 	{
-	   "error": 0,
-	   "data": "Restarting agent"
+	    "data": "Restarting agent", 
+	    "error": 0
 	}
 
 
 
-
 Decoders
----------------------------------
+----------------------------------------
 Info
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Get all decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -411,7 +438,7 @@ Returns all decoders included in ossec.conf.
 
 	/decoders
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -438,7 +465,7 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 322,
+	      "totalItems": 325,
 	      "items": [
 	         {
 	            "position": 0,
@@ -469,7 +496,7 @@ Returns all decoders included in ossec.conf.
 	      ]
 	   }
 	}
-
+	
 
 Get all decoders files.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -481,7 +508,7 @@ Returns all decoders files included in ossec.conf.
 
 	/decoders/files
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -506,7 +533,7 @@ Returns all decoders files included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 71,
+	      "totalItems": 72,
 	      "items": [
 	         "/var/ossec/etc/wazuh_decoders/serv-u_decoders.xml",
 	         "/var/ossec/etc/wazuh_decoders/redis_decoders.xml",
@@ -514,14 +541,14 @@ Returns all decoders files included in ossec.conf.
 	         "/var/ossec/etc/wazuh_decoders/ossec_ruleset_decoders.xml",
 	         "/var/ossec/etc/wazuh_decoders/oscap_decoders.xml",
 	         "/var/ossec/etc/wazuh_decoders/netscaler_decoders.xml",
+	         "/var/ossec/etc/wazuh_decoders/forti_decoders.xml",
 	         "/var/ossec/etc/wazuh_decoders/amazon_decoders.xml",
 	         "/var/ossec/etc/ossec_decoders/zeus_decoders.xml",
-	         "/var/ossec/etc/ossec_decoders/wordpress_decoders.xml",
-	         "/var/ossec/etc/ossec_decoders/windows_decoders.xml"
+	         "/var/ossec/etc/ossec_decoders/wordpress_decoders.xml"
 	      ]
 	   }
 	}
-
+	
 
 Get all parent decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -533,7 +560,7 @@ Returns all parent decoders included in ossec.conf
 
 	/decoders/parents
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -558,7 +585,7 @@ Returns all parent decoders included in ossec.conf
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 100,
+	      "totalItems": 101,
 	      "items": [
 	         {
 	            "position": 0,
@@ -586,7 +613,7 @@ Returns all parent decoders included in ossec.conf
 	      ]
 	   }
 	}
-
+	
 
 Get decoders by name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -598,7 +625,7 @@ Returns the decoders with the specified name.
 
 	/decoders/:decoder_name
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -657,14 +684,14 @@ Returns the decoders with the specified name.
 	      ]
 	   }
 	}
-
+	
 
 
 
 Manager
----------------------------------
+----------------------------------------
 Actions
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Restart manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -721,7 +748,7 @@ Restarts the OSSEC Manager processes.
 	      }
 	   ]
 	}
-
+	
 
 Start manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -778,7 +805,7 @@ Starts the OSSEC Manager processes.
 	      }
 	   ]
 	}
-
+	
 
 Stop manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -835,11 +862,11 @@ Stops the OSSEC Manager processes.
 	      }
 	   ]
 	}
-
+	
 
 
 Configuration
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Get manager configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -851,7 +878,7 @@ Returns ossec.conf in JSON format.
 
 	/manager/configuration
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -882,7 +909,7 @@ Returns ossec.conf in JSON format.
 	      "logall": "yes"
 	   }
 	}
-
+	
 
 Test manager configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -906,152 +933,11 @@ Checks OSSEC Manager configuration.
 	   "error": 0,
 	   "data": "OK"
 	}
+	
 
 
-
-Logs
-+++++++++++++++++++++++++
-
-Get ossec.log
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the 3 last months of ossec.log.
-
-**Request**:
-
-``GET`` ::
-
-	/manager/logs
-
-**Parameters**:
-
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| type_log           | string        | Filters by type of log.                                                                                                                                                                                |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - all                                                                                                                                                                                                  |
-|                    |               | - error                                                                                                                                                                                                |
-|                    |               | - info                                                                                                                                                                                                 |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| category           | string        | Filters by category of log.                                                                                                                                                                            |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs?offset=0&limit=10&pretty"
-
-**Example Response:**
-::
-
-	{
-	   "error": 0,
-	   "data": {
-	      "totalItems": 5577,
-	      "items": [
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/serv-u_decoders.xml.",
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/redis_decoders.xml.",
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/puppet_decoders.xml.",
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/ossec_ruleset_decoders.xml.",
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/oscap_decoders.xml.",
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/netscaler_decoders.xml.",
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/wazuh_decoders/amazon_decoders.xml.",
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/zeus_decoders.xml.",
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/wordpress_decoders.xml.",
-	         "2016/07/13 18:44:52 ossec-testrule: INFO: Reading decoder file etc/ossec_decoders/windows_decoders.xml."
-	      ]
-	   }
-	}
-
-
-Get summary of ossec.log
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the 3 last months of ossec.log.
-
-**Request**:
-
-``GET`` ::
-
-	/manager/logs/summary
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs/summary?pretty"
-
-**Example Response:**
-::
-
-	{
-	   "error": 0,
-	   "data": {
-	      "ossec-testrule": {
-	         "info": 1702,
-	         "all": 1702,
-	         "error": 0
-	      },
-	      "wazuh-moduled": {
-	         "info": 22,
-	         "all": 22,
-	         "error": 0
-	      },
-	      "ossec-rootcheck": {
-	         "info": 48,
-	         "all": 48,
-	         "error": 0
-	      },
-	      "ossec-monitord": {
-	         "info": 40,
-	         "all": 40,
-	         "error": 0
-	      },
-	      "ossec-logcollector": {
-	         "info": 182,
-	         "all": 200,
-	         "error": 18
-	      },
-	      "ossec-execd": {
-	         "info": 60,
-	         "all": 60,
-	         "error": 0
-	      },
-	      "ossec-remoted": {
-	         "info": 140,
-	         "all": 162,
-	         "error": 22
-	      },
-	      "ossec-syscheckd": {
-	         "info": 206,
-	         "all": 206,
-	         "error": 0
-	      },
-	      "ossec-analysisd": {
-	         "info": 3110,
-	         "all": 3115,
-	         "error": 5
-	      },
-	      "ossec-maild": {
-	         "info": 22,
-	         "all": 22,
-	         "error": 0
-	      }
-	   }
-	}
-
-
-
-Retrieve_information
-+++++++++++++++++++++++++
+Info
+++++++++++++++++++++++++++++++++++++++++
 
 Get manager information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1080,7 +966,7 @@ Returns basic information about Manager.
 	      "type": "server"
 	   }
 	}
-
+	
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1137,11 +1023,151 @@ Returns the Manager processes that are running.
 	      }
 	   ]
 	}
+	
 
+
+Logs
+++++++++++++++++++++++++++++++++++++++++
+
+Get ossec.log
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the 3 last months of ossec.log.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/logs
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| type_log           | string        | Filters by type of log.                                                                                                                                                                                |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - all                                                                                                                                                                                                  |
+|                    |               | - error                                                                                                                                                                                                |
+|                    |               | - info                                                                                                                                                                                                 |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| category           | string        | Filters by category of log.                                                                                                                                                                            |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs?offset=0&limit=5&pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "totalItems": 16480, 
+	        "items": [
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Syscheck scan frequency: 3600 seconds", 
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck scan (forwarding database).", 
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck database (pre-scan).", 
+	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Started (pid: 2832).", 
+	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Monitoring output of command(360): df -P"
+	        ]
+	    }, 
+	    "error": 0
+	}
+
+Get summary of ossec.log
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a summary about the 3 last months of ossec.log.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/logs/summary
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs/summary?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "ossec-testrule": {
+	         "info": 7662,
+	         "all": 7662,
+	         "error": 0
+	      },
+	      "wazuh-moduled": {
+	         "info": 84,
+	         "all": 84,
+	         "error": 0
+	      },
+	      "agent_control": {
+	         "info": 0,
+	         "all": 84,
+	         "error": 84
+	      },
+	      "ossec-rootcheck": {
+	         "info": 116,
+	         "all": 116,
+	         "error": 0
+	      },
+	      "ossec-monitord": {
+	         "info": 124,
+	         "all": 124,
+	         "error": 0
+	      },
+	      "ossec-logcollector": {
+	         "info": 396,
+	         "all": 433,
+	         "error": 37
+	      },
+	      "ossec-execd": {
+	         "info": 189,
+	         "all": 190,
+	         "error": 1
+	      },
+	      "ossec-remoted": {
+	         "info": 665,
+	         "all": 737,
+	         "error": 72
+	      },
+	      "ossec-syscheckd": {
+	         "info": 475,
+	         "all": 475,
+	         "error": 0
+	      },
+	      "ossec-analysisd": {
+	         "info": 9676,
+	         "all": 10031,
+	         "error": 355
+	      },
+	      "ossec-maild": {
+	         "info": 84,
+	         "all": 84,
+	         "error": 0
+	      }
+	   }
+	}
+	
 
 
 Ruleset
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Get ruleset backups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1162,14 +1188,15 @@ Returns the ruleset backup list created by ossec_ruleset.py.
 ::
 
 	{
-	   "error": 0,
-	   "data": [
-	      "20160713_003",
-	      "20160713_002",
-	      "20160713_001"
-	   ]
+	    "data": [
+	        "20160713_005", 
+	        "20160713_004", 
+	        "20160713_003", 
+	        "20160713_002", 
+	        "20160713_001"
+	    ], 
+	    "error": 0
 	}
-
 
 Restore rulset backup
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1181,7 +1208,7 @@ Restores a ruleset backup.
 
 	/manager/update-ruleset/backups/:id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -1198,10 +1225,15 @@ Restores a ruleset backup.
 ::
 
 	{
-	   "error": 2,
-	   "message": "Error: No backups with name '20160711_002'."
+	    "data": {
+	        "msg": "Backup successfully", 
+	        "restart_status": "success", 
+	        "need_restart": "yes", 
+	        "manual_steps": "no", 
+	        "restarted": "yes"
+	    }, 
+	    "error": 0
 	}
-
 
 Update ruleset
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1213,7 +1245,7 @@ Update OSSEC ruleset. If the update change a file in use, OSSEC will be restarte
 
 	/manager/update-ruleset
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -1243,19 +1275,19 @@ Update OSSEC ruleset. If the update change a file in use, OSSEC will be restarte
 ::
 
 	{
-	   "error": 0,
-	   "data": {
-	      "msg": "Your ruleset is up to date.",
-	      "need_restart": "no",
-	      "manual_steps": "no",
-	      "restarted": "no"
-	   }
+	    "data": {
+	        "msg": "Ruleset(1.09) updated successfully", 
+	        "restart_status": "success", 
+	        "need_restart": "yes", 
+	        "manual_steps": "no", 
+	        "restarted": "yes"
+	    }, 
+	    "error": 0
 	}
 
 
-
 Stats
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Get manager stats
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1267,7 +1299,7 @@ Returns OSSEC statistical information of current date.
 
 	/manager/stats
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -1284,579 +1316,35 @@ Returns OSSEC statistical information of current date.
 ::
 
 	{
-	   "error": 0,
-	   "data": [
-	      {
-	         "hour": 7,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 2,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 10100,
-	               "level": 4
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 9,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 502,
-	               "level": 3
-	            }
-	         ],
-	         "totalAlerts": 16,
-	         "syscheck": 0,
-	         "events": 16
-	      },
-	      {
-	         "hour": 8,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 25,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5521,
-	               "level": 0
-	            },
-	            {
-	               "times": 23,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5522,
-	               "level": 0
-	            },
-	            {
-	               "times": 25,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 25,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 11,
-	               "sigid": 1002,
-	               "level": 2
-	            },
-	            {
-	               "times": 77,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 3,
-	               "sigid": 533,
-	               "level": 7
-	            },
-	            {
-	               "times": 10,
-	               "sigid": 535,
-	               "level": 1
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 502,
-	               "level": 3
-	            },
-	            {
-	               "times": 4,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 3,
-	               "sigid": 516,
-	               "level": 3
-	            }
-	         ],
-	         "totalAlerts": 209,
-	         "syscheck": 10083,
-	         "events": 10343
-	      },
-	      {
-	         "hour": 9,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 2,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5521,
-	               "level": 0
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5522,
-	               "level": 0
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 79,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 533,
-	               "level": 7
-	            },
-	            {
-	               "times": 10,
-	               "sigid": 535,
-	               "level": 1
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 12,
-	               "sigid": 550,
-	               "level": 7
-	            }
-	         ],
-	         "totalAlerts": 114,
-	         "syscheck": 10106,
-	         "events": 10237
-	      },
-	      {
-	         "hour": 10,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 1,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 8,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 535,
-	               "level": 1
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 502,
-	               "level": 3
-	            },
-	            {
-	               "times": 4,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 3,
-	               "sigid": 516,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 550,
-	               "level": 7
-	            },
-	            {
-	               "times": 9,
-	               "sigid": 551,
-	               "level": 7
-	            }
-	         ],
-	         "totalAlerts": 31,
-	         "syscheck": 10123,
-	         "events": 10146
-	      },
-	      {
-	         "hour": 11,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 2,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5521,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5522,
-	               "level": 0
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 79,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 533,
-	               "level": 7
-	            },
-	            {
-	               "times": 10,
-	               "sigid": 535,
-	               "level": 1
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 8,
-	               "sigid": 552,
-	               "level": 7
-	            }
-	         ],
-	         "totalAlerts": 108,
-	         "syscheck": 10129,
-	         "events": 10258
-	      },
-	      {
-	         "hour": 12,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 1,
-	               "sigid": 5521,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5522,
-	               "level": 0
-	            },
-	            {
-	               "times": 80,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 10,
-	               "sigid": 535,
-	               "level": 1
-	            }
-	         ],
-	         "totalAlerts": 93,
-	         "syscheck": 0,
-	         "events": 121
-	      },
-	      {
-	         "hour": 13,
-	         "firewall": 0,
-	         "alerts": [],
-	         "totalAlerts": 0,
-	         "syscheck": 0,
-	         "events": 0
-	      },
-	      {
-	         "hour": 14,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 16,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 535,
-	               "level": 1
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 502,
-	               "level": 3
-	            },
-	            {
-	               "times": 4,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 3,
-	               "sigid": 516,
-	               "level": 3
-	            }
-	         ],
-	         "totalAlerts": 26,
-	         "syscheck": 10131,
-	         "events": 10161
-	      },
-	      {
-	         "hour": 15,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 4,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5521,
-	               "level": 0
-	            },
-	            {
-	               "times": 4,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5522,
-	               "level": 0
-	            },
-	            {
-	               "times": 4,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 4,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 64,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 8,
-	               "sigid": 535,
-	               "level": 1
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 502,
-	               "level": 3
-	            },
-	            {
-	               "times": 6,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 3,
-	               "sigid": 516,
-	               "level": 3
-	            }
-	         ],
-	         "totalAlerts": 100,
-	         "syscheck": 20263,
-	         "events": 20385
-	      },
-	      {
-	         "hour": 16,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 14,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5521,
-	               "level": 0
-	            },
-	            {
-	               "times": 14,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5522,
-	               "level": 0
-	            },
-	            {
-	               "times": 14,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 14,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 79,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 533,
-	               "level": 7
-	            },
-	            {
-	               "times": 10,
-	               "sigid": 535,
-	               "level": 1
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 17,
-	               "sigid": 550,
-	               "level": 7
-	            }
-	         ],
-	         "totalAlerts": 167,
-	         "syscheck": 10132,
-	         "events": 10311
-	      },
-	      {
-	         "hour": 17,
-	         "firewall": 0,
-	         "alerts": [
-	            {
-	               "times": 1,
-	               "sigid": 5501,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5521,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5502,
-	               "level": 3
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5522,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5734,
-	               "level": 0
-	            },
-	            {
-	               "times": 1,
-	               "sigid": 5715,
-	               "level": 3
-	            },
-	            {
-	               "times": 80,
-	               "sigid": 530,
-	               "level": 0
-	            },
-	            {
-	               "times": 10,
-	               "sigid": 535,
-	               "level": 1
-	            },
-	            {
-	               "times": 2,
-	               "sigid": 515,
-	               "level": 0
-	            },
-	            {
-	               "times": 1340,
-	               "sigid": 550,
-	               "level": 7
-	            },
-	            {
-	               "times": 17,
-	               "sigid": 551,
-	               "level": 7
-	            }
-	         ],
-	         "totalAlerts": 1455,
-	         "syscheck": 10121,
-	         "events": 10248
-	      }
-	   ]
+	    "data": [
+	        {
+	            "hour": 5, 
+	            "firewall": 0, 
+	            "alerts": [
+	                {
+	                    "level": 3, 
+	                    "sigid": 5715, 
+	                    "times": 4
+	                }, 
+	                {
+	                    "level": 2, 
+	                    "sigid": 1002, 
+	                    "times": 2
+	                }, 
+	                {
+	                    "...": "..."
+	                }
+	            ], 
+	            "totalAlerts": 107, 
+	            "syscheck": 1257, 
+	            "events": 1483
+	        }, 
+	        {
+	            "...": "..."
+	        }
+	    ], 
+	    "error": 0
 	}
-
 
 Get manager stats by hour
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1877,42 +1365,24 @@ Returns OSSEC statistical information per hour. Each item in averages field repr
 ::
 
 	{
-	   "error": 0,
-	   "data": {
-	      "averages": [
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0,
-	         0
-	      ],
-	      "interactions": 0
-	   }
+	    "data": {
+	        "averages": [
+	            100, 
+	            357, 
+	            242, 
+	            500, 
+	            422, 
+	            "...", 
+	            123
+	        ], 
+	        "interactions": 0
+	    }, 
+	    "error": 0
 	}
-
 
 Get manager stats by week
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns OSSEC statistical information per week. Each item in <em>hours</em> field represents the average of alerts per hour and week day.
+Returns OSSEC statistical information per week. Each item in hours field represents the average of alerts per hour and week day.
 
 **Request**:
 
@@ -1929,228 +1399,73 @@ Returns OSSEC statistical information per week. Each item in <em>hours</em> fiel
 ::
 
 	{
-	   "error": 0,
-	   "data": {
-	      "Wed": {
-	         "hours": [
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0
-	         ],
-	         "interactions": 0
-	      },
-	      "Sun": {
-	         "hours": [
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0
-	         ],
-	         "interactions": 0
-	      },
-	      "Fri": {
-	         "hours": [
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0
-	         ],
-	         "interactions": 0
-	      },
-	      "Tue": {
-	         "hours": [
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0
-	         ],
-	         "interactions": 0
-	      },
-	      "Mon": {
-	         "hours": [
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0
-	         ],
-	         "interactions": 0
-	      },
-	      "Thu": {
-	         "hours": [
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0
-	         ],
-	         "interactions": 0
-	      },
-	      "Sat": {
-	         "hours": [
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0,
-	            0
-	         ],
-	         "interactions": 0
-	      }
-	   }
+	    "data": {
+	        "Wed": {
+	            "hours": [
+	                223, 
+	                "...", 
+	                456
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Sun": {
+	            "hours": [
+	                332, 
+	                "...", 
+	                313
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Thu": {
+	            "hours": [
+	                888, 
+	                "...", 
+	                123
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Tue": {
+	            "hours": [
+	                536, 
+	                "...", 
+	                345
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Mon": {
+	            "hours": [
+	                444, 
+	                "...", 
+	                556
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Fri": {
+	            "hours": [
+	                131, 
+	                "...", 
+	                432
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Sat": {
+	            "hours": [
+	                134, 
+	                "...", 
+	                995
+	            ], 
+	            "interactions": 0
+	        }
+	    }, 
+	    "error": 0
 	}
 
 
 
-
 Rootcheck
----------------------------------
+----------------------------------------
 Clear
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Clear rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2171,10 +1486,9 @@ Clears the rootcheck database for all agents.
 ::
 
 	{
-	   "error": 0,
-	   "data": "Policy and auditing database updated"
+	    "data": "Policy and auditing database updated", 
+	    "error": 0
 	}
-
 
 Clear rootcheck database of an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2186,7 +1500,7 @@ Clears the rootcheck database for an agent.
 
 	/rootcheck/:agent_id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2203,14 +1517,13 @@ Clears the rootcheck database for an agent.
 ::
 
 	{
-	   "error": 0,
-	   "data": "Policy and auditing database updated"
+	    "data": "Policy and auditing database updated", 
+	    "error": 0
 	}
 
 
-
-Database
-+++++++++++++++++++++++++
+Info
+++++++++++++++++++++++++++++++++++++++++
 
 Get last rootcheck scan
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2222,7 +1535,7 @@ Return the timestamp of the last rootcheck scan.
 
 	/rootcheck/:agent_id/last_scan
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2241,11 +1554,11 @@ Return the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "rootcheckEndTime": "Unknown",
-	      "rootcheckTime": "Unknown"
+	      "rootcheckEndTime": "Fri Jul 15 11:05:40 2016",
+	      "rootcheckTime": "Fri Jul 15 11:05:34 2016"
 	   }
 	}
-
+	
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2257,7 +1570,7 @@ Returns the rootcheck database of an agent.
 
 	/rootcheck/:agent_id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2284,19 +1597,32 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 0,
-	      "items": []
+	      "totalItems": 3,
+	      "items": [
+	         {
+	            "status": "outstanding",
+	            "oldDay": "2016-07-15 09:38:21",
+	            "readDay": "2016-07-15 09:38:21",
+	            "event": "System Audit: SSH Hardening - 1: Port 22 {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config"
+	         },
+	         {
+	            "status": "outstanding",
+	            "oldDay": "2016-07-15 09:38:21",
+	            "readDay": "2016-07-15 09:38:21",
+	            "event": "System Audit: SSH Hardening - 5: Password Authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config"
+	         }
+	      ]
 	   }
 	}
-
+	
 
 
 Run
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Run rootcheck scan in all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck/rootcheck on all agents. This request has the same behavior that <code>PUT /syscheck</code>_. Due to OSSEC launches both processes at once.
+Runs syscheck and rootcheck on all agent, due to OSSEC launches both processes at once.
 
 **Request**:
 
@@ -2313,14 +1639,13 @@ Runs syscheck/rootcheck on all agents. This request has the same behavior that <
 ::
 
 	{
-	   "error": 41,
-	   "message": "Unable to connect to remoted"
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
+	    "error": 0
 	}
-
 
 Run rootcheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck/rootcheck on an agent. This request has the same behavior that <code>PUT /syscheck/:agent_id</code>_. Due to OSSEC launches both processes at once.
+Runs syscheck and rootcheck on an agent, due to OSSEC launches both processes at once.
 
 **Request**:
 
@@ -2328,7 +1653,7 @@ Runs syscheck/rootcheck on an agent. This request has the same behavior that <co
 
 	/rootcheck/:agent_id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2348,14 +1673,14 @@ Runs syscheck/rootcheck on an agent. This request has the same behavior that <co
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-
+	
 
 
 
 Rules
----------------------------------
+----------------------------------------
 Info
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Get all rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2367,7 +1692,7 @@ Returns all rules.
 
 	/rules
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2380,7 +1705,7 @@ Returns all rules.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| status             | String        | Filters files by status.                                                                                                                                                                               |
+| status             | String        | Filters the rules by status.                                                                                                                                                                           |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -2388,13 +1713,13 @@ Returns all rules.
 |                    |               | - disabled                                                                                                                                                                                             |
 |                    |               | - all                                                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| group              | String        | Filters file by group.                                                                                                                                                                                 |
+| group              | String        | Filters the rules by group.                                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| level              | Range         | Filters file by level. level=2 or level=2-5.                                                                                                                                                           |
+| level              | Range         | Filters the rules by level. level=2 or level=2-5.                                                                                                                                                      |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| file               | String        | Filters by file name.                                                                                                                                                                                  |
+| file               | String        | Filters the rules by file name.                                                                                                                                                                        |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| pci                | String        | Filters by pci requirement.                                                                                                                                                                            |
+| pci                | String        | Filters the rules by pci requirement.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2408,7 +1733,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1543,
+	      "totalItems": 1542,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -2443,7 +1768,7 @@ Returns all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get files of rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2455,7 +1780,7 @@ Returns the files of all rules.
 
 	/rules/files
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2491,15 +1816,15 @@ Returns the files of all rules.
 	      "totalItems": 78,
 	      "items": [
 	         {
-	            "status": "enabled",
+	            "status": "disabled",
 	            "name": "amazon-ec2_rules.xml"
 	         },
 	         {
-	            "status": "enabled",
+	            "status": "disabled",
 	            "name": "amazon-iam_rules.xml"
 	         },
 	         {
-	            "status": "enabled",
+	            "status": "disabled",
 	            "name": "amazon_rules.xml"
 	         },
 	         {
@@ -2533,7 +1858,7 @@ Returns the files of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rule groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2545,7 +1870,7 @@ Returns the groups of all rules.
 
 	/rules/groups
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2585,7 +1910,7 @@ Returns the groups of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2597,7 +1922,7 @@ Returns the PCI requirements of all rules.
 
 	/rules/pci
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2637,7 +1962,7 @@ Returns the PCI requirements of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rules by id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2649,7 +1974,7 @@ Returns the rules with the specified id.
 
 	/rules
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2697,14 +2022,14 @@ Returns the rules with the specified id.
 	      ]
 	   }
 	}
-
+	
 
 
 
 Syscheck
----------------------------------
+----------------------------------------
 Clear
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Clear syscheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2725,10 +2050,9 @@ Clears the syscheck database for all agents.
 ::
 
 	{
-	   "error": 0,
-	   "data": "Integrity check database updated"
+	    "data": "Integrity check database updated", 
+	    "error": 0
 	}
-
 
 Clear syscheck database of an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2740,7 +2064,7 @@ Clears the syscheck database for an agent.
 
 	/syscheck/:agent_id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2757,14 +2081,13 @@ Clears the syscheck database for an agent.
 ::
 
 	{
-	   "error": 0,
-	   "data": "Integrity check database updated"
+	    "data": "Integrity check database updated", 
+	    "error": 0
 	}
 
 
-
-Database
-+++++++++++++++++++++++++
+Info
+++++++++++++++++++++++++++++++++++++++++
 
 Get last syscheck scan
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2776,7 +2099,7 @@ Return the timestamp of the last syscheck scan.
 
 	/syscheck/:agent_id/last_scan
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2795,11 +2118,11 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "syscheckTime": "Unknown",
-	      "syscheckEndTime": "Unknown"
+	      "syscheckTime": "Fri Jul 15 11:12:27 2016",
+	      "syscheckEndTime": "Fri Jul 15 11:06:12 2016"
 	   }
 	}
-
+	
 
 Get syscheck files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2811,7 +2134,7 @@ Returns the syscheck files of an agent.
 
 	/syscheck/:agent_id/files
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2844,7 +2167,7 @@ Returns the syscheck files of an agent.
 |                    |               | - file                                                                                                                                                                                                 |
 |                    |               | - registry                                                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| summary            | String        | Returns a summary where each item has: scanDate, modificationDate, event and file.                                                                                                                     |
+| summary            | String        | Returns a summary grouping by filename.                                                                                                                                                                |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -2869,19 +2192,52 @@ Returns the syscheck files of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 0,
-	      "items": []
+	      "totalItems": 10567,
+	      "items": [
+	         {
+	            "uid": 0,
+	            "scanDate": "2016-07-15 11:12:33",
+	            "user": "root",
+	            "file": "/home/repos/wazuh-API/controllers/rules.js",
+	            "modificationDate": "2016-07-15 11:08:25",
+	            "octalMode": "100644",
+	            "inode": 396645,
+	            "event": "modified",
+	            "size": 9641,
+	            "sha1": "7e11548d7bfdf36ac2331438fd61951efe1fd5b5",
+	            "group": "root",
+	            "gid": 0,
+	            "permissions": "-rw-r--r--",
+	            "md5": "b38f6c763b56852281faaa4ba29998b9"
+	         },
+	         {
+	            "uid": 0,
+	            "scanDate": "2016-07-15 11:12:33",
+	            "user": "root",
+	            "file": "/home/repos/wazuh-API/doc/build/html/index.html",
+	            "modificationDate": "2016-07-15 11:06:37",
+	            "octalMode": "100644",
+	            "inode": 397611,
+	            "event": "modified",
+	            "size": 26632,
+	            "sha1": "55f57f6bcca1f71526402670a29cdc5e1b1d96ab",
+	            "group": "root",
+	            "gid": 0,
+	            "permissions": "-rw-r--r--",
+	            "md5": "63928b01c22644831024dc8d0f536cf1"
+	         }
+	      ]
 	   }
 	}
-
+	
 
 
 Run
-+++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 Run syscheck scan in all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck/rootcheck on all agents. This request has the same behavior that <code>PUT /rootcheck</code>_. Due to OSSEC launches both processes at once.
+Runs syscheck and rootcheck on all agent, due to OSSEC launches both processes at once.
 
 **Request**:
 
@@ -2898,14 +2254,13 @@ Runs syscheck/rootcheck on all agents. This request has the same behavior that <
 ::
 
 	{
-	   "error": 41,
-	   "message": "Unable to connect to remoted"
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
+	    "error": 0
 	}
-
 
 Run syscheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck/rootcheck on an agent. This request has the same behavior that <code>PUT /rootcheck/:agent_id</code>_. Due to OSSEC launches both processes at once.
+Runs syscheck and rootcheck on an agent, due to OSSEC launches both processes at once.
 
 **Request**:
 
@@ -2913,7 +2268,7 @@ Runs syscheck/rootcheck on an agent. This request has the same behavior that <co
 
 	/syscheck/:agent_id
 
-**Parameters**:
+**Parameters:**
 
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
@@ -2933,3 +2288,7 @@ Runs syscheck/rootcheck on an agent. This request has the same behavior that <co
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
+	
+
+
+
