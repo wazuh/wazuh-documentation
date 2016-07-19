@@ -1,6 +1,6 @@
 .. _ossec_amazon:
 
-OSSEC for Amazon AWS
+Amazon AWS
 ====================
 
 This section provides instructions to integrate OSSEC with Amazon AWS. It also explains different use cases as examples on how the rules, developed by Wazuh, can be used to alert on specific events. In `our github repository <http://github.com/wazuh/ossec-rules/>`_ there are rules for IAM, EC2 and VPC services.

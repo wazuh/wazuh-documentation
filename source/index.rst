@@ -29,18 +29,15 @@ Wazuh team is currently supporting OSSEC enterprise users, and decided to develo
    :maxdepth: 2
 
    about
-   installation
-   ossec_wazuh_upgrade
-   ossec_elk
-   ossec_elk_upgrade
-   ossec_reference
+   wazuh_installation
    ossec_api
-   ossec_ruleset
-   ossec_docker
-   ossec_amazon
-   ossec_puppet
-   ossec_chef
+   ossec_elk
+   management_monitoring
    ossec_pci_dss
-   wazuh_kibana
-   ossec_splunk
-   wazuh_modules
+   ossec_amazon
+   wazuh_modules_openscap
+   wazuh_modules_virustotal
+   deployment
+
+   ossec_reference
+   ossec_ruleset

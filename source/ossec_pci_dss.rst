@@ -1,6 +1,6 @@
 .. _ossec_pci_dss:
 
-OSSEC for PCI DSS
+PCI DSS
 =================
 
 Introduction
@@ -36,7 +36,7 @@ See below examples of OSSEC rules tagged for PCI requirements 10.2.4 and 10.2.5:
         <description>Attempt to access forbidden file or directory.</description>
         <group>access_denied,pci_dss_6.5.8,pci_dss_10.2.4,</group>
     </rule>
-    
+
     <!-- syslog-sudo: elevation of privileges -->
     <rule id="5401" level="5">
         <if_sid>5400</if_sid>
@@ -44,14 +44,14 @@ See below examples of OSSEC rules tagged for PCI requirements 10.2.4 and 10.2.5:
         <description>Failed attempt to run sudo</description>
         <group>pci_dss_10.2.4,pci_dss_10.2.5,</group>
     </rule>
-    
+
     <rule id="5402" level="3">
         <if_sid>5400</if_sid>
         <regex> ; USER=root ; COMMAND=| ; USER=root ; TSID=\S+ ; COMMAND=</regex>
         <description>Successful sudo to ROOT executed</description>
         <group>pci_dss_10.2.5,pci_dss_10.2.2,</group>
     </rule>
-    
+
     <!-- ssh: identification and authentication mechanisms -->
     <rule id="5712" level="10" frequency="6" timeframe="120" ignore="60">
         <if_matched_sid>5710</if_matched_sid>
@@ -60,14 +60,14 @@ See below examples of OSSEC rules tagged for PCI requirements 10.2.4 and 10.2.5:
         <same_source_ip />
         <group>authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,</group>
     </rule>
-    
+
     <rule id="5720" level="10" frequency="6">
         <if_matched_sid>5716</if_matched_sid>
         <same_source_ip />
         <description>Multiple SSHD authentication failures.</description>
         <group>authentication_failures,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_11.4,</group>
     </rule>
-    
+
 
 Use cases
 ^^^^^^^^^
@@ -159,7 +159,7 @@ Rootkit and trojan detection is performed using two files: *rootkit_files.txt* a
         <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
         <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
     </rootcheck>
-    
+
 As well these are the option availables for `rootcheck component <http://ossec-docs.readthedocs.org/en/latest/syntax/head_ossec_config.rootcheck.html>`_:
 
 + rootkit_files: Contains the Unix-based application level rootkit signatures.
@@ -172,7 +172,7 @@ As well these are the option availables for `rootcheck component <http://ossec-d
 
 + check_dev: Check for suspicious files in the /dev filesystem. Default yes.
 
-+ check_sys: Scan the whole system for anomalies detection. Default yes. 
++ check_sys: Scan the whole system for anomalies detection. Default yes.
 
 + check_pids: Check processes. Default yes.
 

@@ -1,6 +1,6 @@
 .. _ossec_chef:
 
-OSSEC deployment with Chef
+Chef
 ==========================
 
 Chef environment elements

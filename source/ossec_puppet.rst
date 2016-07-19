@@ -1,6 +1,6 @@
 .. _ossec_puppet:
 
-OSSEC deployment with Puppet
+Puppet
 ============================
 
 Puppet master installation
@@ -426,4 +426,3 @@ ossec::server::ossec_scanpaths:
     realtime: 'yes'
 
 **Note: Configuring the ossec_scanpaths variable will overwrite the defaults. i.e. if you want to add a new directory to monitor, you must also add the above default paths to be monitored.**
-

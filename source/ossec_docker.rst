@@ -1,6 +1,6 @@
 .. _ossec_docker:
 
-OSSEC Docker container
+Docker
 ======================
 
 Docker installation
@@ -38,7 +38,7 @@ To install the ossec-elk container run this command: ::
 
 The ``/var/ossec/data`` directory allows the container to be replaced without configuration or data loss: logs, etc, stats,rules, and queue (all OSSEC files). In addition to those directories, the bin/.process_list file is symlinked to process_list in the data volume.
 
-Other available configuration parameters are: 
+Other available configuration parameters are:
 
 - AUTO_ENROLLMENT_ENABLED: Specifies whether or not to enable auto-enrollment via ossec-authd. Defaults to ``true``.
 - AUTHD_OPTIONS: Options to passed ``ossec-authd``, other than ``-p`` and ``-g``. No default.

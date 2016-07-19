@@ -1,16 +1,16 @@
 .. _wazuh_kibana:
 
-Wazuh plugin for Kibana 
+Kibana plugin
 =======================
 
 .. topic:: Introduction
 
     Wazuh plugin for Kibana provides the next step in the integration with the ELK stack: A brand new graphical interface for easy and complete management of OSSEC Wazuh HIDS.
-    
+
     It was designed with the intention of providing the best usability, as this plugin provides a graphical interface where it's possible to perform everyday actions, like restarting an agent or reading a manager configuration file.
-    
+
     Wazuh plugin for Kibana capabilities:
-    
+
     * Agents management.
     * Manager control.
     * Explore manager configuration.

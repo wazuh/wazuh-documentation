@@ -1,6 +1,6 @@
 .. _ossec_wazuh_upgrade:
 
-Upgrading OSSEC Wazuh fork to a new version
+Upgrading
 ===========================================
 
 Here's a quick overview on how to upgrade the manager. The OSSEC agent (client) is simply just the binary that you install through your package manager (apt-get or yum). The OSSEC manager is installed through source, a little bit trickier but if you follow the below steps you should be on the safe side.
@@ -64,7 +64,7 @@ Here's a list of most important files:
 ::
 
   "foo:$apr1$QJ8XkGFE$yEK2seDYoTIG.c6r03jjT/"
-   
+
 11. Start the API process once again, by running:
 
 ::
@@ -77,13 +77,13 @@ Here's a list of most important files:
 
   https://server.ip:55000
 
-or in a terminal: 
+or in a terminal:
 
 ::
 
   $ curl -XGET -u username -k https://your.ip:55000/agents (replace 'username' with an existing user)
 
-.. note:: Last but not least it also wouldn't hurt to update the latest OS packages by running ``yum update`` or ``apt-get update && apt-get upgrade``. 
+.. note:: Last but not least it also wouldn't hurt to update the latest OS packages by running ``yum update`` or ``apt-get update && apt-get upgrade``.
 
 
 What's next

@@ -1,6 +1,6 @@
 .. _ossec_elk:
 
-Integration with ELK Stack
+Elastic Stack
 ==========================
 
 .. topic:: Documentation structure
@@ -15,3 +15,4 @@ Integration with ELK Stack
    ossec_elk_logstash
    ossec_elk_elasticsearch
    ossec_elk_kibana
+   ossec_elk_upgrade
