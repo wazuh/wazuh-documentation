@@ -1,4 +1,9 @@
 
+a {
+  color: #1a80b6;
+  cursor: pointer;
+}
+
 #header{
 	width: 100%;
 }
@@ -184,4 +189,34 @@ ul.current li.toctree-l3 {
 }
 .wy-nav-content-wrap {
   margin-left: 368px;
+}
+.toctree-wrapper.compound {
+  display: none;
+}
+
+.codeblock, pre.literal-block, .rst-content .literal-block, .rst-content pre.literal-block, div[class^="highlight"] {
+  background: #f5f5f5 none repeat scroll 0 0;
+  border: 1px solid #ccc;
+  margin: 1px 0 24px;
+  overflow-x: auto;
+  padding: 0;
+}
+
+.rst-content tt, .rst-content tt, .rst-content code {
+  color: #000;
+  padding: 0px 5px;
+}
+
+
+
+
+ul li.toctree-l1 > .reference.internal::before {
+  content: "";
+  font-family: "FontAwesome";
+  margin: 0 5px 0 13px;
+  float: right;
+}
+
+.btn {
+  box-shadow: none;
 }
