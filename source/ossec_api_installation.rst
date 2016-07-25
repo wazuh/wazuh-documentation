@@ -53,7 +53,7 @@ Debian and Ubuntu based Linux distributions: ::
 Red Hat, CentOS and Fedora: ::
 
  $ sudo yum install python-pip
- 
+
 
 RESTful API
 --------------------
@@ -150,25 +150,35 @@ And remove temporary files: ::
  $ sudo rm server.key.org
 
 
-Running API on the background
-----------------------------------
+Running API
+----------------------------------------
 
-Time to start the API, we are going to start it on background and redirect the standard output to a log file called ``api.log``: ::
 
- $ /bin/node /var/ossec/api/app.js > /var/ossec/logs/api.log &
+There are two ways to run the API: as service or on background.
 
-.. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /usr/bin/, if the API does not start, check it please.
+.. _api-service-label:
 
-Running API as service
-----------------------------------
+Service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In order to run the API as a service on your operating system, we provide a script that automatically detects if you are using *SysVinit* or *Systemd* and install the service: ::
+We **recommend** to run the API as a service. In order to install the service excecute the following script: ::
 
- $ sudo /var/ossec/api/scripts/install_daemon.sh
+$ sudo /var/ossec/api/scripts/install_daemon.sh
 
 Then, check out if the API is running:
 
-  * Systemd systems: systemctl status wazuh-api
-  * SysVinit systems: service wazuh-api status
+* Systemd systems: systemctl status wazuh-api
+* SysVinit systems: service wazuh-api status
 
 The available options are: start, stop, status and restart.
+
+Background
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In order to run the API on background execute the following command: ::
+
+$ /bin/node /var/ossec/api/app.js &
+
+API logs will be saved at ``/var/ossec/logs/api.log``.
+
+.. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /usr/bin/, if the API does not start, check it please.
