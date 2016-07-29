@@ -61,7 +61,7 @@ RESTful API
 Proceed to download the API and copy API folder to OSSEC folder: ::
 
  $ cd ~
- $ wget https://github.com/wazuh/wazuh-API/archive/v1.2.tar.gz -O wazuh-API-1.2.tar.gz
+ $ wget https://github.com/wazuh/wazuh-API/archive/v1.2.1.tar.gz -O wazuh-API-1.2.1.tar.gz
  $ tar -xvf wazuh-API-*.tar.gz
  $ sudo mkdir -p /var/ossec/api && sudo cp -r wazuh-API-*/* /var/ossec/api
 
