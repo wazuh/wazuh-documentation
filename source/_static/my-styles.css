@@ -172,6 +172,11 @@ ul.current li.toctree-l3 {
 .wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a:hover {
   background: #d6d6d6 none repeat scroll 0 0;
 }
+
+.wy-menu-vertical li.toctree-l3.current li.toctree-l4>a {
+  background: #f1f1f1 none repeat scroll 0 0;
+  color: #000;
+}
 .wy-menu-vertical li.on a, .wy-menu-vertical .toctree-l3.current > a {
   color: #000;
 }
@@ -206,8 +211,6 @@ ul.current li.toctree-l3 {
   color: #000;
   padding: 0px 5px;
 }
-
-
 
 
 ul li.toctree-l1 > .reference.internal::before {

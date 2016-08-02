@@ -116,7 +116,7 @@
               {%- set nav_version = current_version %}
             {% endif %}
             {% if nav_version %}
-              <div class="version">
+              <div class="version" style="display: none">
                 {{ nav_version }}
               </div>
             {% endif %}
@@ -129,7 +129,7 @@
 
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           {% block menu %}
-            {% set toctree = toctree(maxdepth=3, collapse=theme_collapse_navigation, includehidden=True) %}
+            {% set toctree = toctree(maxdepth=4, collapse=theme_collapse_navigation, includehidden=True) %}
             {% if toctree %}
                 {{ toctree }}
             {% else %}

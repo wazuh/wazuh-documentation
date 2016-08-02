@@ -1,4 +1,4 @@
-.. _deployment:
+.. _reference:
 
-Deployment
+Reference
 ==========================
