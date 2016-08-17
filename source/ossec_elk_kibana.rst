@@ -160,7 +160,7 @@ Copy and paste the following configuration: ::
         access_log            /var/log/nginx/kibana.access.log;
         error_log  /var/log/nginx/kibana.error.log;
 
-        location / {
+        location ~ (/|/app/kibana|/bundles/|/kibana4|/status|/plugins) { {
                 auth_basic "Restricted";
                 auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
                 proxy_pass http://127.0.0.1:5601;
