@@ -9,7 +9,7 @@ Source code download
 Download the source code and checksum files: ::
 
    $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz
-   $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz.sha256
+   $ wget https://raw.githubusercontent.com/ossec/ossec-docs/master/docs/whatsnew/checksums/2.8.3/ossec-hids-2.8.3.tar.gz.sha256
 
 Generate SHA256 checksum and compare with downloaded one: ::
 
