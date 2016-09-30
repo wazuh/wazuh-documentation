@@ -10,7 +10,7 @@ The **Payment Card Industry Data Security Standard (PCI DSS)** is a proprietary 
 
 OSSEC helps to implement PCI DSS by performing log analysis, file integrity checking, policy monitoring, intrusion detection, real-time alerting and active response. This guide (`pdf <http://ossec.wazuh.com/ruleset/PCI_Guide.pdf>`_, `excel <http://ossec.wazuh.com/ruleset/PCI_Guide.xlsx>`_) explains how these capabilities help with each of the standard requirements.
 
-In the following section we will elaborate some specific use cases that are use as an example on how to use OSSEC main capabilities to meet the standard requirements.
+In the following section we will elaborate on some specific use cases. They explain how to use OSSEC capabilities to meet the standard requirements.
 
 Log analysis
 ------------
@@ -97,7 +97,7 @@ Kibana displays information in an organized way, allowing filtering by different
 Rootcheck - Policy monitoring
 -----------------------------
 
-OSSEC rootcheck module can be used to enforce and monitor your security policy. This is the process of verifying that all systems conform to a set of pre-defined rules surrounding configuration settings and approved application usage.
+The OSSEC rootcheck module can be used to enforce and monitor your security policy. This is the process of verifying that all systems conform to a set of pre-defined rules surrounding configuration settings and approved application usage.
 
 There are several PCI DSS requirements to verify that systems are properly hardened. An example would be:
 
@@ -113,11 +113,11 @@ OSSEC includes out-of-the-box CIS baselines for Debian and Redhat and other base
         <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
     </rootcheck>
 
-Other PCI DSS requirements will ask us to check that applications (specially network services) are configured in a secure way. One example is the following control:
+Other PCI DSS requirements will ask us to check that applications (especially network services) are configured in a secure way. One example is the following control:
 
 *2.2.4 Configure system security parameters to prevent misuse.*
 
-Here is a good examples of rootcheck rules developed to check the configuration of SSH services:
+The following are good examples of rootcheck rules developed to check the configuration of SSH services:
 
 ::
 
@@ -127,12 +127,12 @@ Here is a good examples of rootcheck rules developed to check the configuration 
     [SSH Configuration - Root login allowed {PCI_DSS: 2.2.4}] [any]
     f:/etc/ssh/sshd_config -> !r:^# && r:PermitRootLogin\.+yes;
 
-In our :ref:`OSSEC Wazuh fork <wazuh_installation>`, your rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. Meaning that all rootchecks already have the PCI DSS requirement tag.
+In our :ref:`OSSEC Wazuh fork <wazuh_installation>`, the rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. Meaning that all rootchecks already have the PCI DSS requirement tag.
 
 Use cases
 ^^^^^^^^^
 
-In order to check the security parameters of SSH (and meet the requirement 2.2.4), we have developed the rootchecks *system_audit_ssh*. In our example, when OSSEC run the rootcheck scan, it is able to detect some errors in the SSH configuration.
+In order to check the security parameters of SSH (and meet the requirement 2.2.4), we have developed the rootchecks *system_audit_ssh*. In our example, when OSSEC runs the rootcheck scan, it is able to detect some errors in the SSH configuration.
 
 .. image:: images/pci/policy_monitoring_1.png
     :align: center
@@ -151,7 +151,7 @@ Kibana shows the full information about the alert.
 Rootcheck - Rootkits detection
 ------------------------------
 
-Rootkit and trojan detection is performed using two files: *rootkit_files.txt* and *rootkit_trojans.txt*. Also some tests are performed to detect kernel-level rootkits. You can use this capabilities adding the files to *ossec.conf*:
+Rootkit and trojan detection is performed using two files: *rootkit_files.txt* and *rootkit_trojans.txt*. There are also some tests are performed to detect kernel-level rootkits. You can use these capabilities by adding the files to *ossec.conf*:
 
 ::
 
@@ -160,7 +160,7 @@ Rootkit and trojan detection is performed using two files: *rootkit_files.txt* a
         <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
     </rootcheck>
     
-As well these are the option availables for `rootcheck component <http://ossec-docs.readthedocs.org/en/latest/syntax/head_ossec_config.rootcheck.html>`_:
+These are the options available for the `rootcheck component <http://ossec-docs.readthedocs.org/en/latest/syntax/head_ossec_config.rootcheck.html>`_:
 
 + rootkit_files: Contains the Unix-based application level rootkit signatures.
 
@@ -180,7 +180,7 @@ As well these are the option availables for `rootcheck component <http://ossec-d
 
 + check_if: Check interfaces. Default yes.
 
-Rootcheck helps to meet PCI DSS requeriment 11.4 related with intrusions, trojans and malware in general:
+Rootcheck helps to meet PCI DSS requirement 11.4 related to intrusions, trojans and malware in general:
 
 *11.4 Use intrusion-detection and/or intrusion-prevention techniques to detect and/or prevent intrusions into the network. Keep all intrusion-detection and prevention engines, baselines, and signatures up to date. Intrusion detection and/or intrusion prevention techniques (such as IDS/IPS) compare the traffic coming into the network with known “signatures” and/or behaviors of thousands of compromise types (hacker tools, Trojans, and other malware), and send alerts and/or stop the attempt as it happens.*
 
@@ -207,9 +207,9 @@ OSSEC performs several tests to detect rootkits, one of them is to check the hid
 File Integrity Monitoring
 --------------------------
 
-File integrity Monitoring (syscheck) is performed by comparing the cryptographic checksum of a known good file against the checksum of the file after it has been modified. The OSSEC agent scans the system at an interval you specify, and it sends the checksums of the monitored files and registry keys (Windows systems) to the OSSEC server. The server stores the checksums and looks for modifications by comparing the newly received checksums against the historical checksum values of that file or registry key. An alert is sent if anything changes.
+File integrity Monitoring (syscheck) is performed by comparing the cryptographic checksum of a known good file against the checksum of the file after it has been modified. The OSSEC agent scans the system at an interval you specify, and it sends the checksums of the monitored files and registry keys (for Windows systems) to the OSSEC server. The server stores the checksums and looks for modifications by comparing the newly received checksums against the historical checksum values of that file or registry key. An alert is sent if anything changes.
 
-`Syscheck <http://ossec-docs.readthedocs.org/en/latest/manual/syscheck/index.html>`_  can be used to meet the PCI DSS requirement 11.5:
+`Syscheck <http://ossec-docs.readthedocs.org/en/latest/manual/syscheck/index.html>`_  can be used to meet PCI DSS requirement 11.5:
 
 *11.5 Deploy a change-detection mechanism (for example, file-integrity monitoring tools) to alert personnel to unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and configure the software to perform critical file comparisons at least weekly.*
 
@@ -248,12 +248,12 @@ As you can see, syscheck alerts are tagged with the requirement 11.5.
 Active response
 ---------------
 
-Although `active response <http://ossec-docs.readthedocs.org/en/latest/manual/ar/index.html>`_ is not explicitely discussed in PCI DSS, it is important to mention that an automated remediation to security violations and threats is a powerful tool that reduce the risk. Active response allows a scripted action to be performed whenever a rules matched in your OSSEC ruleset. Remedial action could be firewall block/drop, traffic shaping or throttling, account lockout, etc.
+Although `active response <http://ossec-docs.readthedocs.org/en/latest/manual/ar/index.html>`_ is not explicitly discussed in PCI DSS, it is important to mention that an automated remediation to security violations and threats is a powerful tool that reduces the risk. Active response allows a scripted action to be performed whenever a rule matchs in your OSSEC ruleset. Remedial action could be firewall block/drop, traffic shaping or throttling, account lockout, etc.
 
 ELK
 ---
 
-`OSSEC Wazuh integration with ELK Stack <http://documentation.wazuh.com/en/latest/ossec_elk.html>`_ comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmark. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
+`OSSEC Wazuh integration with ELK Stack <http://documentation.wazuh.com/en/latest/ossec_elk.html>`_ comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmarking. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
 
 The following requirements can be met with a combination of OSSEC + ELK Stack:
 
@@ -266,7 +266,7 @@ The following requirements can be met with a combination of OSSEC + ELK Stack:
 What's next
 -----------
 
-Once you know how OSSEC can help with PCI DSS, we encourage you to move forward and try out ELK integration or the OSSEC Wazuh ruleset, check them on:
+Once you know how OSSEC can help with PCI DSS, we encourage you to move forward and try out ELK integration or the OSSEC Wazuh ruleset, check them out at:
 
 * :ref:`ELK Stack integration guide <ossec_elk>`
 * :ref:`OSSEC Wazuh Ruleset <ossec_ruleset>`
