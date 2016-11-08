@@ -1,6 +1,6 @@
-.. _index:
+.. _reference_manual:
 
-Welcome to Wazuh
+Reference Manual
 ================
 
 Wazuh helps to get security visibility into your infrastructure, by monitoring hosts at a system and application level. The solution, based on multi-platform and lightweight agents, provides the following capabilities:
@@ -16,13 +16,3 @@ Wazuh helps to get security visibility into your infrastructure, by monitoring h
 This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic, making them work together as a single solution, and simplifying their configuration and management. 
 
 Wazuh also provides a centralized Web User Interface (fully integrated in Elastic), an updated log analysis ruleset, and a RESTful API that allows user to monitor deployment status and configuration.
-
-.. toctree::
-   :maxdepth: 3
-
-   getting_started
-   installation
-   learn_examples
-   reference_manual
-   pci_dss
-   amazon_aws
