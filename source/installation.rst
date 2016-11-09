@@ -32,7 +32,7 @@ OSSEC Manager
 					
 				::
 				
-					yum install wazuh-manager
+					yum install wazuh-manager && yum install wazuh-api
 				
 			Debian / Ubuntu
 			
@@ -46,7 +46,7 @@ OSSEC Manager
 					
 				::
 				
-					sudo apt-get update && sudo apt-get install wazuh-manager
+					sudo apt-get update && sudo apt-get install wazuh-manager && sudo apt-get install wazuh-api
 
 	Filebeat
 	^^^^^^^^^^^^^^^^^^
