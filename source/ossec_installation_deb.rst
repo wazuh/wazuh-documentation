@@ -55,6 +55,10 @@ For Wily::
 For Xenial::
 
    $ echo -e "deb http://ossec.wazuh.com/repos/apt/ubuntu xenial main" >> /etc/apt/sources.list.d/ossec.list
+   
+For Yakkety::
+
+   $ echo -e "deb http://ossec.wazuh.com/repos/apt/ubuntu yakkety main" >> /etc/apt/sources.list.d/ossec.list
 
 Update the repository
 ---------------------
