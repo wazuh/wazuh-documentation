@@ -286,24 +286,28 @@ Access your Kibana interface at http://YOUR_ELASTIC_SERVER_IP:5601, Kibana will 
 
 Download to your desktop file: https://github.com/wazuh/ossec-wazuh/blob/master/extensions/kibana/kibana5-ossecwazuh-dashboards.json
 
+::
+	curl -o kibana5-ossecwazuh-dashboards.json https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/kibana/kibana5-ossecwazuh-dashboards.json
 
 Access Kibana interface, click on "Management" on left menu, then "Saved objects", click on "Import" button and load the file just downloaded.
 
 **Install Wazuh App**
 		
-Run on Elastic Stack host:
+Run on your Elastic Stack server:
 
 ::
-
 	/usr/share/kibana/bin/kibana-plugin install http://wazuh.com/resources/wazuh-app.zip
 
-It will took a while, once it finished, restart Kibana service.
+It will take a while, once it finished, restart Kibana service.
+
+::
+	/etc/init.d/kibana restart
 
 **Configure Wazuh App**
 
-Access Kibana interface via browser, left menu click on Wazuh icon / Wazuh link, first screen will ask you to fill API configuration, "Wazuh API: Managers list", click on "Add new manager".
+Access Kibana interface via browser. On the left menu, click on Wazuh icon. Then you will be asked to fill API configuration, "Wazuh API: Managers list", click on "Add new manager".
 
-- API URL: Your API IP Address, usually OSSEC Manager IP Address.
+- API URL: Your API IP adress, usually Wazuh manager IP Address.
 - API USER: Default: "foo"
 - API PASSWORD: Default: "bar"
 - API PORT: Default "55000"
