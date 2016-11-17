@@ -3,16 +3,22 @@
 Installation guide
 ==================
 
+This installation guide describes the installation and configuration of Wazuh in two servers:
 
-Wazuh Manager and API
----------------------
+- Manager: Runs the manager, API and filebeat.
+- Elastic: Runs the elasticsearch engine, logstash server and Kibana (including Wazuh APP).
 
-Wazuh manager (v1.2) integrates the OSSEC server, the agent, and OpenSCAP module.
+Installing Wazuh manager
+------------------------
 
-Wazuh API is used to monitor deployment status and configuration, as well as for integration with other components (e.g. WUI).
+- Wazuh manager (v1.2) integrates the OSSEC server, the agent, and OpenSCAP module.
+- Wazuh API is used to monitor deployment status and configuration, as well as for integration with other components (e.g. WUI).
+- Filebeat is used to forward alerts data to the Elastic server, where it is indexed and stored.
 
-CENTOS 7.x
-^^^^^^^^^^
+Installing manager and API components
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**On CENTOS 7.X**
 
 Requires EPEL because Wazuh API depends on nodejs, npm and python-pip packages.
 
@@ -42,8 +48,7 @@ Create /etc/yum.repos.d/wazuh.repo with the following content:
 
 	yum install wazuh-manager && yum install wazuh-api
 
-RHEL
-^^^^
+**On RHEL 7.X**
 
 Requires EPEL because Wazuh API depends on nodejs, npm and python-pip packages.
 
@@ -73,8 +78,8 @@ Create /etc/yum.repos.d/wazuh.repo with the following content:
 
         yum install wazuh-manager && yum install wazuh-api
 
-Debian / Ubuntu
-^^^^^^^^^^^^^^^
+** On Debian / Ubuntu**
+
 ::
 
 	wget -qO - https://s3-us-west-1.amazonaws.com/packages.wazuh.com/key/RPM-GPG-KEY-WAZUH | sudo apt-key add -
@@ -87,8 +92,7 @@ Debian / Ubuntu
 
 	sudo apt-get update && sudo apt-get install wazuh-manager && sudo apt-get install wazuh-api
 
-Test and configure API 
-^^^^^^^^^^^^^^^^^^^^^^
+**Test and configure API**
 
 To test connectivity to the API from outside the box go to
 
@@ -100,16 +104,16 @@ Default username/password is foo/bar.
 
 Optionally, you can configure the API to use HTTPS (by creating a self-signed certificate), and to change the username and password running /var/ossec/api/scripts/configure_api.sh
 
-Filebeat
-^^^^^^^^
+Installing Filebeat
+^^^^^^^^^^^^^^^^^^^
 
-1. Install Filebeat
+**Install Filebeat**
 
 https://www.elastic.co/guide/en/beats/libbeat/5.0/setup-repositories.html
 
-2. Configure Filebeat
+**Configure Filebeat**
 
-Empty file /etc/filebeat/filebeat.yml, fill it with:
+Empty file /etc/filebeat/filebeat.yml, and fill it with:
 
 ::
 
@@ -126,17 +130,26 @@ Empty file /etc/filebeat/filebeat.yml, fill it with:
 	output:
 	 logstash:
 	   # The Logstash hosts
-	   hosts: ["your_elastic_host:5000"]
+	   hosts: ["YOUR_ELASTIC_SERVER_IP:5000"]
 
 
-3. Start Filebeat, start Wazuh.
+Start Wazuh manager and Filebeat
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Elastic Stack
----------------------------------
-Logstash Server
-^^^^^^^^^^^^^^^^^^
+::
 
-1. Install Logstash Server
+	/etc/init.d/wazuh-manager start
+	/etc/init.d/filebeat start
+
+Installing Elastic Stack server
+-------------------------------
+
+Elastic Stack server will usually run in a different server. It runs the Logstash server, Elasticsearch engine and Kibana.
+
+Logstash server
+^^^^^^^^^^^^^^^
+
+**Install Logstash server**
 
 https://www.elastic.co/guide/en/logstash/5.0/installing-logstash.html
 
