@@ -12,8 +12,8 @@ Wazuh
 
 Install Wazuh 1.2 from repositories
 
-CentOS / RHEL
-^^^^^^^^^^^^^^^
+CENTOS
+^^^^^^
 
 Requirements:
 Repositories EPEL: http://www.tecmint.com/how-to-enable-epel-repository-for-rhel-centos-6-5/
@@ -26,8 +26,8 @@ vi /etc/yum.repos.d/wazuh.repo
 	gpgcheck=1
 	gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
 	enabled=1
-	name=RHEL-$releasever - Wazuh
-	baseurl=https://packages.wazuh.com/yumtest/rhel/$releasever/$basearch
+	name=CENTOS-$releasever - Wazuh
+	baseurl=https://packages.wazuh.com/yumtest/el/$releasever/$basearch
 	protect=1
 
 ::
@@ -37,6 +37,32 @@ vi /etc/yum.repos.d/wazuh.repo
 ::
 
 	yum install wazuh-manager && yum install wazuh-api
+
+RHEL
+^^^^
+
+Requirements:
+Repositories EPEL: http://www.tecmint.com/how-to-enable-epel-repository-for-rhel-centos-6-5/
+
+vi /etc/yum.repos.d/wazuh.repo
+
+::
+
+        [wazuh_repo]
+        gpgcheck=1
+        gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
+        enabled=1
+        name=RHEL-$releasever - Wazuh
+        baseurl=https://packages.wazuh.com/yumtest/rhel/$releasever/$basearch
+        protect=1
+
+::
+
+        rpm --import https://s3-us-west-1.amazonaws.com/packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
+
+::
+
+        yum install wazuh-manager && yum install wazuh-api
 
 Debian / Ubuntu
 ^^^^^^^^^^^^^^^
