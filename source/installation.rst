@@ -87,13 +87,21 @@ Debian / Ubuntu
 
 	sudo apt-get update && sudo apt-get install wazuh-manager && sudo apt-get install wazuh-api
 
-Configure API (optional)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Test and configure API 
+^^^^^^^^^^^^^^^^^^^^^^
 
-Run /var/ossec/api/scripts/configure_api.sh
-		
+To test connectivity to the API from outside the box go to
+
+::
+
+	http://YOUR_MANAGER_IP:55000
+	
+Default username/password is foo/bar.
+
+Optionally, you can configure the API to use HTTPS (by creating a self-signed certificate), and to change the username and password running /var/ossec/api/scripts/configure_api.sh
+
 Filebeat
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^
 
 1. Install Filebeat
 
