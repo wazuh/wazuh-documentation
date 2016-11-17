@@ -5,10 +5,10 @@ Installation guide
 
 
 OSSEC Manager
----------------------------------
+-------------
 
 	Wazuh
-	^^^^^^^^^^^^^^^^^^
+	^^^^^
 	
 		Install Wazuh 1.2 from sources master branch
 		
@@ -174,7 +174,7 @@ Elastic Stack
 
 		2. Configure index pattern
 		
-			Access your Kibana interface at http://your_server_ip:5601, Kibana will ask you to “Configure an index pattern”, set it up following these steps:
+			Access your Kibana interface at http://your_server_ip:5601, Kibana will ask you to â€œConfigure an index patternâ€, set it up following these steps:
 			
 			::
 			
