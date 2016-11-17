@@ -138,8 +138,8 @@ Start Wazuh manager and Filebeat
 
 ::
 
-	/etc/init.d/wazuh-manager start
-	/etc/init.d/filebeat start
+	systemctl start wazuh-manager
+	systemctl start filebeat
 
 Installing Elastic Stack server
 -------------------------------
@@ -213,9 +213,9 @@ Elasticsearch
 
 **Install Elasticsearch**
 
-https://www.elastic.co/guide/en/elasticsearch/reference/5.0/deb.html deb 
+Debian packages: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/deb.html 
 
-https://www.elastic.co/guide/en/elasticsearch/reference/5.0/rpm.html rpm
+RPM packages: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/rpm.html
 
 **Configure Elasticsearch**
 
@@ -231,7 +231,7 @@ vi /etc/elasticsearch/elasticsearch.yml
 
 ::
 
-	/etc/init.d/elasticsearch start
+	systemctl start elasticsearch
 
 **Load mappings/templates**
 
@@ -243,7 +243,7 @@ vi /etc/elasticsearch/elasticsearch.yml
 
 ::
 
-	nohup /usr/share/logstash/bin/logstash --path.settings=/etc/logstash/ -f /etc/logstash/conf.d/01-wazuh.conf 2>&1 &
+	systemctl start logstash.service
 
 Kibana
 ^^^^^^
@@ -267,7 +267,7 @@ Open /etc/kibana/kibana.yml, modify:
 Restart Kibana:
 
 ::
-	/etc/init.d/kibana restart
+	systemctl restart kibana
 
 **Configure index pattern**
 
@@ -305,7 +305,9 @@ It will take a while, once it finished, restart Kibana service.
 
 **Configure Wazuh App**
 
-Access Kibana interface via browser. On the left menu, click on Wazuh icon. Then you will be asked to fill API configuration, "Wazuh API: Managers list", click on "Add new manager".
+Access Kibana interface via browser. On the left menu, click on Wazuh icon (refresh browser if you can't find it).
+
+Once in Wazuh interface, you will be asked to fill API configuration, "Wazuh API: Managers list", click on "Add new manager".
 
 - API URL: Your API IP adress, usually Wazuh manager IP Address.
 - API USER: Default: "foo"
