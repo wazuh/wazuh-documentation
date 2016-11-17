@@ -257,15 +257,21 @@ https://www.elastic.co/guide/en/kibana/current/rpm.html
 **Publish IP address to access remotely**
 
 Open /etc/kibana/kibana.yml, modify:
+
 ::
 	# Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
 	# The default is 'localhost', which usually means remote machines will not be able to connect.
 	# To allow connections from remote users, set this parameter to a non-loopback address.
 	server.host: "0.0.0.0"
 
+Restart Kibana:
+
+::
+	/etc/init.d/kibana restart
+
 **Configure index pattern**
 
-Access your Kibana interface at http://your_server_ip:5601, Kibana will ask you to “Configure an index pattern”, set it up following these steps:
+Access your Kibana interface at http://YOUR_ELASTIC_SERVER_IP:5601, Kibana will ask you to “Configure an index pattern”, set it up following these steps:
 
 ::
 
