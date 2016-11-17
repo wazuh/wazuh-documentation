@@ -1,7 +1,7 @@
 .. _installation:
 
-Installation guide
-==================
+Installation guide (beta version)
+=================================
 
 This installation guide describes the installation and configuration of Wazuh in two servers:
 
