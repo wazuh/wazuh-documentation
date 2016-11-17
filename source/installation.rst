@@ -78,7 +78,7 @@ Create /etc/yum.repos.d/wazuh.repo with the following content:
 
         yum install wazuh-manager && yum install wazuh-api
 
-** On Debian / Ubuntu**
+**On Debian / Ubuntu**
 
 ::
 
@@ -153,7 +153,7 @@ Logstash server
 
 https://www.elastic.co/guide/en/logstash/5.0/installing-logstash.html
 
-2. Configure Logstash Server
+**Configure Logstash Server**
 
 Create a file on /etc/logstash/conf.d/01-wazuh.conf with content:
 
@@ -202,21 +202,22 @@ Create a file on /etc/logstash/conf.d/01-wazuh.conf with content:
 		}
 	}
 
-3. Copy needed files (mappings/templates) to Logstash folder
+**Copy templates to Logstash folder**
 
 ::
 
 	curl -o /etc/logstash/elastic5-ossec-template.json https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/elasticsearch/elastic5-ossec-template.json
 
 Elasticsearch
-^^^^^^^^^^^^^^^^^^
-1. Install Elasticsearch
+^^^^^^^^^^^^^
+
+**Install Elasticsearch**
 
 https://www.elastic.co/guide/en/elasticsearch/reference/5.0/deb.html deb 
 
 https://www.elastic.co/guide/en/elasticsearch/reference/5.0/rpm.html rpm
 
-2. Modify Elasticsearch configuration, set up network options to listen to 9200 and cluster name (optional)
+**Configure Elasticsearch**
 
 vi /etc/elasticsearch/elasticsearch.yml
 
@@ -226,25 +227,34 @@ vi /etc/elasticsearch/elasticsearch.yml
 	node.name: node-1
 	network.host: 0.0.0.0
 				
-3. Start Elasticsearch
+**Start Elasticsearch**
 
-4. Load mappings/templates
+::
+
+	/etc/init.d/elasticsearch start
+
+**Load mappings/templates**
 
 ::
 
 	curl -XPUT -v -H "Expect:"  "http://localhost:9200/_template/ossec" -d@/etc/logstash/elastic5-ossec-template.json
 
-5. Start Logstash Server
+**Start Logstash Server**
+
+::
+
+	nohup /usr/share/logstash/bin/logstash --path.settings=/etc/logstash/ -f /etc/logstash/conf.d/01-wazuh.conf 2>&1 &
 
 Kibana
-^^^^^^^^^^^^^^^^^^
-1. Install Kibana
+^^^^^^
+
+**Install Kibana**
 
 https://www.elastic.co/guide/en/kibana/current/deb.html
 
 https://www.elastic.co/guide/en/kibana/current/rpm.html
 
-2. Publish IP address to access remotely
+**Publish IP address to access remotely**
 
 Open /etc/kibana/kibana.yml, modify:
 ::
@@ -253,7 +263,7 @@ Open /etc/kibana/kibana.yml, modify:
 	# To allow connections from remote users, set this parameter to a non-loopback address.
 	server.host: "0.0.0.0"
 
-2. Configure index pattern
+**Configure index pattern**
 
 Access your Kibana interface at http://your_server_ip:5601, Kibana will ask you to “Configure an index pattern”, set it up following these steps:
 
@@ -266,14 +276,14 @@ Access your Kibana interface at http://your_server_ip:5601, Kibana will ask you 
 	- You should see the fields list with about ~100 fields.
 	- Go to "Discover" tab
 
-3. Import dashboards
+**Import dashboards**
 
 Download to your desktop file: https://github.com/wazuh/ossec-wazuh/blob/master/extensions/kibana/kibana5-ossecwazuh-dashboards.json
 
 
 Access Kibana interface, click on "Management" on left menu, then "Saved objects", click on "Import" button and load the file just downloaded.
 
-4. Install Wazuh App
+**Install Wazuh App**
 		
 Run on Elastic Stack host:
 
@@ -283,7 +293,7 @@ Run on Elastic Stack host:
 
 It will took a while, once it finished, restart Kibana service.
 
-5. Configure Wazuh App
+**Configure Wazuh App**
 
 Access Kibana interface via browser, left menu click on Wazuh icon / Wazuh link, first screen will ask you to fill API configuration, "Wazuh API: Managers list", click on "Add new manager".
 
