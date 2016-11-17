@@ -4,21 +4,25 @@ Installation guide
 ==================
 
 
-OSSEC Manager
--------------
+Wazuh Manager and API
+---------------------
 
-Wazuh
-^^^^^
+Wazuh manager (v1.2) integrates the OSSEC server, the agent, and OpenSCAP module.
 
-Install Wazuh 1.2 from repositories
+Wazuh API is used to monitor deployment status and configuration, as well as for integration with other components (e.g. WUI).
 
-CENTOS
-^^^^^^
+CENTOS 7.x
+^^^^^^^^^^
 
-Requirements:
-Repositories EPEL: http://www.tecmint.com/how-to-enable-epel-repository-for-rhel-centos-6-5/
+Requires EPEL because Wazuh API depends on nodejs, npm and python-pip packages.
 
-vi /etc/yum.repos.d/wazuh.repo
+Installation of EPEL repository: 
+
+::
+
+	yum -y install epel-release
+
+Create /etc/yum.repos.d/wazuh.repo with the following content:
 
 ::
 
@@ -41,10 +45,15 @@ vi /etc/yum.repos.d/wazuh.repo
 RHEL
 ^^^^
 
-Requirements:
-Repositories EPEL: http://www.tecmint.com/how-to-enable-epel-repository-for-rhel-centos-6-5/
+Requires EPEL because Wazuh API depends on nodejs, npm and python-pip packages.
 
-vi /etc/yum.repos.d/wazuh.repo
+Installation of EPEL repository: 
+
+::
+
+	yum -y install epel-release
+
+Create /etc/yum.repos.d/wazuh.repo with the following content:
 
 ::
 
