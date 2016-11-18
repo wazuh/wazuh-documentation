@@ -8,6 +8,8 @@ This installation guide describes the installation and configuration of Wazuh in
 - Manager: Runs the manager, API and filebeat.
 - Elastic: Runs the elasticsearch engine, logstash server and Kibana (including Wazuh APP).
 
+Note: Before installing the components please configure your NTP to sync time.
+
 Installing Wazuh manager
 ------------------------
 
