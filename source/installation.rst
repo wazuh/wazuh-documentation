@@ -261,6 +261,7 @@ https://www.elastic.co/guide/en/kibana/current/rpm.html
 Open /etc/kibana/kibana.yml, modify:
 
 ::
+
 	# Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
 	# The default is 'localhost', which usually means remote machines will not be able to connect.
 	# To allow connections from remote users, set this parameter to a non-loopback address.
@@ -269,6 +270,7 @@ Open /etc/kibana/kibana.yml, modify:
 Restart Kibana:
 
 ::
+
 	systemctl restart kibana
 
 **Configure index pattern**
