@@ -102,7 +102,7 @@ To test connectivity to the API from outside the box go to
 	
 Default username/password is foo/bar.
 
-Optionally, you can configure the API to use HTTPS (by creating a self-signed certificate), and to change the username and password running /var/ossec/api/scripts/configure_api.sh
+TODO (don't run this optional step if you are installing our beta!!!, Wazuh app giving an error): Optionally, you can configure the API to use HTTPS (by creating a self-signed certificate), and to change the username and password running /var/ossec/api/scripts/configure_api.sh
 
 Installing Filebeat
 ^^^^^^^^^^^^^^^^^^^
