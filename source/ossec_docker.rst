@@ -30,7 +30,7 @@ adding your user to the "docker" group with something like: ::
 OSSEC-ELK Container
 -------------------
 
-These Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/docker-ossec-wazuh>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <wazuh_installation>`.
+These Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/wazuh-docker>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <wazuh_installation>`.
 
 To install the ossec-elk container run this command: ::
 
@@ -69,7 +69,7 @@ If you have an error the first time you log in kibana: move to a different menu 
 OSSEC HIDS  Container
 ---------------------
 
-These Docker container source files can be found in our `ossec-server Github repository <https://github.com/wazuh/docker-ossec>`_. To install it run this command: ::
+These Docker container source files can be found in our `ossec-server Github repository <https://github.com/wazuh/wazuh-docker>`_. To install it run this command: ::
 
    $ docker run --name ossec-server -d -p 1514:1514/udp -p 1515:1515\
   -e SYSLOG_FORWARDING_ENABLED=true -e SYSLOG_FORWARDING_SERVER_IP=X.X.X.X\

@@ -16,13 +16,13 @@ Here's a list of most important files:
   $ sudo /var/ossec/bin/ossec-control stop
 
 3. Backup everything that is in /var/ossec/api -- especially the htpasswd as it includes the credentials to authenticate.
-4. Clone the latest stable version of the Manager from https://github.com/wazuh/ossec-wazuh into the home directory
+4. Clone the latest stable version of the Manager from https://github.com/wazuh/wazuh into the home directory
 
 ::
 
   $ cd ~
   $ mkdir ossec_tmp && cd ossec_tmp
-  $ git clone -b stable https://github.com/wazuh/ossec-wazuh.git
+  $ git clone -b stable https://github.com/wazuh/wazuh.git
   $ cd ossec-wazuh
   $ sudo ./install.sh
 
@@ -64,7 +64,7 @@ Here's a list of most important files:
 ::
 
   "foo:$apr1$QJ8XkGFE$yEK2seDYoTIG.c6r03jjT/"
-   
+
 11. Start the API process once again, by running:
 
 ::
@@ -77,13 +77,13 @@ Here's a list of most important files:
 
   https://server.ip:55000
 
-or in a terminal: 
+or in a terminal:
 
 ::
 
   $ curl -XGET -u username -k https://your.ip:55000/agents (replace 'username' with an existing user)
 
-.. note:: Last but not least it also wouldn't hurt to update the latest OS packages by running ``yum update`` or ``apt-get update && apt-get upgrade``. 
+.. note:: Last but not least it also wouldn't hurt to update the latest OS packages by running ``yum update`` or ``apt-get update && apt-get upgrade``.
 
 
 What's next

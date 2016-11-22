@@ -3,16 +3,16 @@
 Components and architecture
 ===========================
 
-Components 
+Components
 ----------
 
 See below a brief description of the components and tools involved in the integration of our :ref:`OSSEC Wazuh fork <wazuh_installation>` with ELK Stack, for long term data storage, alerts indexing, management and visualization.
 
-+ `Wazuh HIDS <http://github.com/wazuh/ossec-wazuh/>`_: Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally on the box running as the OSSEC manager.
++ `Wazuh HIDS <http://github.com/wazuh/wazuh/>`_: Performs log analysis, file integrity checking, policy monitoring, rootkits/malware detection and real-time alerting. The alerts are written in an extended JSON format, and stored locally on the box running as the OSSEC manager.
 
 - `Logstash <https://www.elastic.co/products/logstash/>`_: Is a data pipeline used for processing logs and other event data from a variety of systems. Logstash will read and process OSSEC JSON files, adding IP Geolocation information and modeling data before sending it to the Elasticsearch Cluster.
 
-+ `Elasticsearch <https://www.elastic.co/products/elasticsearch/>`_: Is the search engine used to index and store our OSSEC alerts. It can be deployed as a cluster, with multiple nodes, for better performance and data replication. 
++ `Elasticsearch <https://www.elastic.co/products/elasticsearch/>`_: Is the search engine used to index and store our OSSEC alerts. It can be deployed as a cluster, with multiple nodes, for better performance and data replication.
 
 - `Kibana <https://www.elastic.co/products/kibana/>`_: Kibana is a WEB framework used to explore all elasticsearch indexes. We will use it to analyze OSSEC alerts and to create custom dashboards for different use cases, including compliance regulations like PCI DSS or benchmarks like CIS.
 
@@ -25,9 +25,9 @@ These components are meant to communicate with each other, so the original data 
 Architecture
 ------------
 
-The components for OSSEC and ELK Stack integration can be deployed all in a single host, or distributed across multiple systems. This last type of deployment is useful for load balancing, high availability and data replication. 
+The components for OSSEC and ELK Stack integration can be deployed all in a single host, or distributed across multiple systems. This last type of deployment is useful for load balancing, high availability and data replication.
 
-In most cases Elasticesearch will only be indexing OSSEC alerts, as opposed to every event processed by the system (also possible using archives.json output). This approach reduces considerably the performance and storage requirements, making it perfectly possible to deploy all the components in a single server. In this case, the same system would run the OSSEC manager, the Logstash server and an Elasticsearch single-node cluster with Kibana user interface on top of it. 
+In most cases Elasticesearch will only be indexing OSSEC alerts, as opposed to every event processed by the system (also possible using archives.json output). This approach reduces considerably the performance and storage requirements, making it perfectly possible to deploy all the components in a single server. In this case, the same system would run the OSSEC manager, the Logstash server and an Elasticsearch single-node cluster with Kibana user interface on top of it.
 
 In an effort to cover all possible scenarios, this guide describes both options to deploy OSSEC with ELK Stack (distributed and single-host).
 
@@ -43,15 +43,15 @@ In an effort to cover all possible scenarios, this guide describes both options 
 Requirements
 ------------
 
-+ Operating System: This document includes a detailed description of the steps you need to follow to install the components both in Debian (latest stable is version 8) and CentOS (latest stable is version 7) Linux distributions. 
++ Operating System: This document includes a detailed description of the steps you need to follow to install the components both in Debian (latest stable is version 8) and CentOS (latest stable is version 7) Linux distributions.
 
 - RAM memory: Elasticsearch tends to utilize a high amount of memory for data sorting and aggregation and, according to their documentation, less than 8GB RAM is counterproductive. For single-host deployments, considering that Elasticsearch will share resources with OSSEC, Logstash and Kibana, we recommend to provision your server with at least 16GB RAM (more if possible). Less than 16GB RAM would only work for small OSSEC deployments.
 
-+ `OSSEC Wazuh fork <http://github.com/wazuh/ossec-wazuh/>`_: It is required for the integration with ELK Stack. You can install it by following the instructions in :ref:`our documentation <wazuh_installation>`
++ `OSSEC Wazuh fork <http://github.com/wazuh/wazuh/>`_: It is required for the integration with ELK Stack. You can install it by following the instructions in :ref:`our documentation <wazuh_installation>`
 
 - :ref:`Java 8 JRE<ossec_elk_java>`: Java 8 is required both by Logstash server and by Elasticsearch. In this guide we have also included a description on how to install it.
 
-OSSEC alerts dashboard 
+OSSEC alerts dashboard
 ----------------------
 
 Kibana offers interactive visualization capabilities, that we have used to put together an OSSEC alerts dashboard with visualization of alerts geolocation and timeline. In addition you will be able to see the alerts level evolution, and charts showing you aggregated information for easy analysis. Filters can also be applied, as all alert fields are also indexed by the search engine. See below an screenshot of this dashboard.

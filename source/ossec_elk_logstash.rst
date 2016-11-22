@@ -27,7 +27,7 @@ To install ``Logstash server`` version 2.1 on Debian based distributions run the
  $ sudo apt-get update && sudo apt-get install logstash
 
 If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_.
- 
+
 Logstash forwarder
 ^^^^^^^^^^^^^^^^^^
 
@@ -56,7 +56,7 @@ Then we need to create ``/etc/yum.repos.d/logstash.repo`` file with the followin
 And finally we install the RPM package with yum: ::
 
  $ sudo yum install logstash
- 
+
 If you have any doubt, visit the `official installation guide <https://www.elastic.co/guide/en/logstash/current/package-repositories.html>`_.
 
 Logstash forwarder
@@ -85,7 +85,7 @@ Logstash forwarder configuration
 
 .. note:: This step is only necessary when deploying the OSSEC manager and Elasticsearch on different systems. If you are using a single host deployment, with OSSEC manager and ELK Stack on the same box, you can skip this section.
 
-Since we are going to use Logstash forwarder to ship logs from our hosts to our Logstash server, we need to create an SSL certificate and key pair. The certificate is used by the Logstash forwarder to verify the identity of Logstash server and encrypt communications. 
+Since we are going to use Logstash forwarder to ship logs from our hosts to our Logstash server, we need to create an SSL certificate and key pair. The certificate is used by the Logstash forwarder to verify the identity of Logstash server and encrypt communications.
 
 SSL Certificate
 ^^^^^^^^^^^^^^^
@@ -107,7 +107,7 @@ Now generate the SSL certificate and private key, and copy it to your Logstash f
  $ scp /etc/logstash/logstash-forwarder.crt user@logstash_forwarder_ip:/tmp
 
 Then log into your Logstash forwarder system, via SSH, and move the certificate to the right directory: ::
-   
+
  $ sudo mv /tmp/logstash-forwarder.crt /opt/logstash-forwarder/
 
 SSL Certificate on CentOS
@@ -125,7 +125,7 @@ Now generate the SSL certificate and private key, and copy it to your Logstash f
  $ scp /etc/logstash/logstash-forwarder.crt user@logstash_forwarder_ip:/tmp
 
 Then log into your Logstash forwarder system, via SSH, and move the certificate to the right directory: ::
- 
+
  $ sudo mv /tmp/logstash-forwarder.crt /opt/logstash-forwarder
 
 Logstash forwarder settings
@@ -173,9 +173,9 @@ We are now done with the configuration, and just need to restart the Logstash Fo
 Logstash server configuration
 -----------------------------
 
-Logstash configuration is based on three different plugins: *input*, *filter* and *output*. You can find the plugins already preconfigured, to integrate OSSEC with ELK Stack, in our `public github repository <http://github.com/wazuh/ossec-wazuh/>`_.
+Logstash configuration is based on three different plugins: *input*, *filter* and *output*. You can find the plugins already preconfigured, to integrate OSSEC with ELK Stack, in our `public github repository <http://github.com/wazuh/wazuh/>`_.
 
-Depending on your architecture, single-host or distributed, we will configure Logstash server to read OSSEC alerts directly from OSSEC log file, or to read the incoming data (sent by Logstash forwarder) from port 5000/udp (remember to open your firewall to accept this traffic). 
+Depending on your architecture, single-host or distributed, we will configure Logstash server to read OSSEC alerts directly from OSSEC log file, or to read the incoming data (sent by Logstash forwarder) from port 5000/udp (remember to open your firewall to accept this traffic).
 
 For ``single-host deployments`` (everything running on the same box), just copy the configuration file ``01-ossec-singlehost.conf`` to the right directory: ::
 
@@ -203,7 +203,7 @@ And now download and install GeoLiteCity from the Maxmind website. This will add
 In single-host deployments, you also need to grant the *logstash* user access to OSSEC alerts file: ::
 
  $ sudo usermod -a -G ossec logstash
-  
+
 .. note:: We are not going to start Logstash service yet, we need to wait until we import Wazuh template into Elasticsearch (see next guide)
 
 What's next

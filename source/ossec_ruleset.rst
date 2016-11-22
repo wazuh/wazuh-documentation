@@ -12,7 +12,7 @@ In the ruleset repository you will find:
 
 * **OSSEC out-of-the-box rule/rootcheck updates and compliance mapping**
    We update and maintain out-of-the-box rules provided by OSSEC, both to eliminate false positives or to increase their accuracy. In addition, we map those with PCI-DSS compliance controls, making it easy to identify when an alert is related to a compliance requirement.
-  
+
 * **New rules/rootchecks**
    OSSEC default number of rules and decoders is limited. For this reason, we centralize, test and maintain decoders and rules submitted by Open Source contributors. As well, we create new rules and rootchecks periodically that are added to this repository so they can be used by the users community. Some examples are the new rules for Netscaler and Puppet.
 
@@ -20,7 +20,7 @@ In the ruleset repository you will find:
 Resources
 ^^^^^^^^^
 
-* Visit our repository to view the rules in detail at `Github OSSEC Wazuh Ruleset <https://github.com/wazuh/ossec-rules>`_
+* Visit our repository to view the rules in detail at `Github OSSEC Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_
 * Find a complete description of the available rules: `OSSEC Wazuh Ruleset Summary <http://www.wazuh.com/resources/OSSEC_Ruleset.pdf>`_
 
 Rule and Rootcheck example
@@ -34,7 +34,7 @@ Log analysis rule for Netscaler with PCI DSS compliance mapping:
         <same_source_ip />
         <description>Netscaler: Multiple AAA failed to login the user</description>
         <group>authentication_failures,netscaler-aaa,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_11.4,</group>
-    </rule> 
+    </rule>
 
 Rootcheck rule for SSH Server with mapping to CIS security benchmark and PCI DSS compliance:
 ::
@@ -48,7 +48,7 @@ Manual installation
 Log analysis rules
 ^^^^^^^^^^^^^^^^^^
 
-In the `Github repository <https://github.com/wazuh/ossec-rules>`_ you will find two different kind of rules under ``ossec-rules/rules-decoders/`` directory:
+In the `Github repository <https://github.com/wazuh/wazuh-ruleset>`_ you will find two different kind of rules under ``ossec-rules/rules-decoders/`` directory:
 
 Updated out-of-the-box rules
 """"""""""""""""""""""""""""
@@ -91,11 +91,11 @@ Also, if you do not use ``local_decoder.xml``, remove that line in ossec.conf. R
 Rootcheck rules
 ^^^^^^^^^^^^^^^
 
-Rootchecks can be found in ``ossec-rules/rootcheck/`` directory. There you will see both updated out-of-the-box OSSEC rootchecks, and new ones. 
+Rootchecks can be found in ``ossec-rules/rootcheck/`` directory. There you will see both updated out-of-the-box OSSEC rootchecks, and new ones.
 
-To install a rootcheck file, go to your OSSEC manager and copy the ``.txt`` file to ``/var/ossec/etc/shared/``. Then modify ``/var/ossec/etc/ossec.conf`` by adding the path to the ``.txt`` file into the ``<rootcheck>`` section. 
+To install a rootcheck file, go to your OSSEC manager and copy the ``.txt`` file to ``/var/ossec/etc/shared/``. Then modify ``/var/ossec/etc/ossec.conf`` by adding the path to the ``.txt`` file into the ``<rootcheck>`` section.
 
-Examples: :: 
+Examples: ::
 
    - <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
    - <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
@@ -132,7 +132,7 @@ Update and prompt menu to activate new Rules & Rootchecks: ::
 Restore a backup: ::
 
   ./ossec_ruleset.py --backups list
-  
+
 All script options: ::
 
   Select ruleset:
@@ -170,7 +170,7 @@ Configure weekly updates
 Run ``ossec_ruleset.py`` weekly and keep your OSSEC Wazuh Ruleset installation up to date by adding a crontab job to your system.
 
 Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
- 
+
   @weekly root cd /var/ossec/update/ruleset && ./ossec_ruleset.py -s
 
 Wazuh rules
@@ -185,7 +185,7 @@ Puppet
 ^^^^^^
 Puppet is an open-source configuration management utility. After installing Puppet rules (`automatically <http://documentation.wazuh.com/en/latest/ossec_ruleset.html#automatic-installation>`_ or `manually <http://documentation.wazuh.com/en/latest/ossec_ruleset.html#manual-installation>`_) you need to perform the next manual step. This is due to some rules need to read the output of a command.
 
-Copy the code below to ``/var/ossec/etc/shared/agent.conf`` in your **OSSEC Manager** to allow OSSEC execute this command and read its output: :: 
+Copy the code below to ``/var/ossec/etc/shared/agent.conf`` in your **OSSEC Manager** to allow OSSEC execute this command and read its output: ::
 
    <agent_config>
        <localfile>
@@ -194,8 +194,8 @@ Copy the code below to ``/var/ossec/etc/shared/agent.conf`` in your **OSSEC Mana
            <frequency>2100</frequency>
        </localfile>
    </agent_config>
-   
-Also you must configure in **every agent** the logcollector option to accept remote commands from the manager. To do this, add the following lines to ``/var/ossec/etc/internal_options.conf``: :: 
+
+Also you must configure in **every agent** the logcollector option to accept remote commands from the manager. To do this, add the following lines to ``/var/ossec/etc/internal_options.conf``: ::
 
    # Logcollector - If it should accept remote commands from the manager
    logcollector.remote_commands=1
@@ -206,7 +206,7 @@ FTP Server software (FTP, FTPS, SFTP, Web & mobile) for secure file transfer and
 
 Amazon
 ^^^^^^
-Before installing our Amazon rules, you need to follow the steps below in order to enable logging through AWS API and download the JSON data files. A detailed description of each of the steps will be find further below. 
+Before installing our Amazon rules, you need to follow the steps below in order to enable logging through AWS API and download the JSON data files. A detailed description of each of the steps will be find further below.
 
 1. Turn on CloudTrail.
 2. Create a user with permission over S3.
@@ -234,7 +234,7 @@ Sign in to the ``AWS Management Console`` and open the IAM console at https://co
 In the navigation panel, choose ``Users`` and then choose ``Create New Users``.
 Type the user names for the users you would like to create. You can create up to five users at one time.
 
-.. note:: User names can only use a combination of alphanumeric characters and these characters: plus (+), equal (=), comma (,), period (.), at (@), and hyphen (-). Names must be unique within an account. 
+.. note:: User names can only use a combination of alphanumeric characters and these characters: plus (+), equal (=), comma (,), period (.), at (@), and hyphen (-). Names must be unique within an account.
 
 The users require access to the API. For this they must have access keys. To generate access key for new users, select ``Generate an access key`` for each user and ``Choose Create``.
 
@@ -242,7 +242,7 @@ The users require access to the API. For this they must have access keys. To gen
 
 .. warning:: This is your only opportunity to view or download the secret access keys, and you must provide this information to your users before they can use the AWS Console. If you don't download and save them now, you will need to create new access keys for the users later. Save the new user's access key ID and secret access key in a safe and secure place. You will not have access to the secret access keys again after this step.
 
-Give the user(s) permission to manage security policies, press ``Attach Policy`` and select ``AmazonS3FullAccess`` policy. 
+Give the user(s) permission to manage security policies, press ``Attach Policy`` and select ``AmazonS3FullAccess`` policy.
 
 
 3. Install AWS Cli in your Ossec Manager
@@ -282,11 +282,11 @@ Open a command prompt or shell and run the following command to verify that Pyth
 To install pip on Linux
 
 * Download the installation script from pypa.io: ::
-  
+
   $ curl -O https://bootstrap.pypa.io/get-pip.py
 
 * Run the script with Python: ::
-  
+
   $ sudo python get-pip.py
 
 Now than we have Python and pip installed, use pip to install the AWS CLI: ::
@@ -295,7 +295,7 @@ Now than we have Python and pip installed, use pip to install the AWS CLI: ::
 
 .. note:: If you installed a new version of Python alongside an older version that came with your distribution, or update pip to the latest version, you may get the following error when trying to invoke pip with sudo: ``command not found``. We can work around this issue by using ``which pip`` to locate the executable, and then invoke it directly by using an absolute path when installing the AWS CLI:
 
-  ``$ which pip`` 
+  ``$ which pip``
 
   ``/usr/local/bin/pip``
 
@@ -363,7 +363,7 @@ To install Wazuh Amazon rules follow either the `Automatic installation`_ sectio
 
 Contribute to the ruleset
 -------------------------
-If you have created new rules, decoders or rootchecks and you would like to contribute to our repository, please fork our `Github repository <https://github.com/wazuh/ossec-rules>`_ and submit a pull request.
+If you have created new rules, decoders or rootchecks and you would like to contribute to our repository, please fork our `Github repository <https://github.com/wazuh/wazuh-ruleset>`_ and submit a pull request.
 
 If you are not familiar with Github, you can also share them through our `users mailing list <https://groups.google.com/d/forum/wazuh>`_, to which you can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``. As well do not hesitate to request new rules or rootchecks that you would like to see running in OSSEC and our team will do our best to make it happen.
 

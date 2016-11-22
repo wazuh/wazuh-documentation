@@ -15,7 +15,7 @@ Here's a list of most important files:
 2. **Most importantly**: backup the certificate and the key, this PATH files are referenced in the line 5 and 6 from the file /etc/logstash/conf.d/01-ossec.conf.
 
 ::
-      
+
   "ssl_certificate => "/etc/logstash/logstash-forwarder.crt"
   "ssl_key => "/etc/logstash/logstash-forwarder.key"
 
@@ -32,12 +32,12 @@ The following steps describe how to update the Logstash server:
 1. Update the Yum Repo with the latest logstash version. Current version recommended by WAZUH is Logstash 2.1
 
 **On Debian**, delete the previous version from the repository to the **/etc/apt/sources.list** and add the new version::
-   
+
   $ sed '/logstash/d' /etc/apt/sources.list
   $ wget -qO - https://packages.elasticsearch.org/GPG-KEY-elasticsearch | sudo apt-key add -
   $ echo "deb http://packages.elasticsearch.org/logstash/2.1/debian stable main" | sudo tee -a /etc/apt/sources.list
 
-**On CentOS**, delete the previous version from the repository ``/etc/yum.repos.d/logstash.repo`` :: 
+**On CentOS**, delete the previous version from the repository ``/etc/yum.repos.d/logstash.repo`` ::
 
   $ rm /etc/yum.repos.d/logstash.repo
   $ sudo tee /etc/yum.repos.d/logstash.repo <<-'EOF'
@@ -46,7 +46,7 @@ The following steps describe how to update the Logstash server:
     baseurl=http://packages.elastic.co/logstash/2.1/centos
     gpgcheck=1
     gpgkey=http://packages.elastic.co/GPG-KEY-elasticsearch
-    enabled=1 
+    enabled=1
    EOF
   $
 
@@ -60,13 +60,13 @@ The following steps describe how to update the Logstash server:
 
   $ sudo yum makecache && yum upgrade
 
-3. Clone the latest stable version of the WAZUH ossec repository from https://github.com/wazuh/ossec-wazuh into the home directory.
+3. Clone the latest stable version of the WAZUH ossec repository from https://github.com/wazuh/wazuh into the home directory.
 
 ::
 
   $ cd ~
   $ mkdir ossec_tmp && cd ossec_tmp
-  $ git clone -b stable https://github.com/wazuh/ossec-wazuh.git
+  $ git clone -b stable https://github.com/wazuh/wazuh.git
 
 4. Copy the new 01-ossec.conf (Logstash Config File) into /etc/logstash/conf.d/ from the cloned git repository.
 
@@ -175,7 +175,7 @@ Expected result::
 
 It's time to integrate the OSSEC Wazuh custom mapping::
 
-  $ cd ~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/ && curl -XPUT "http://localhost:9200/_template/ossec/" -d "@elastic-ossec-template.json" 
+  $ cd ~/ossec_tmp/ossec-wazuh/extensions/elasticsearch/ && curl -XPUT "http://localhost:9200/_template/ossec/" -d "@elastic-ossec-template.json"
   $ curl -XGET http://localhost:9200/_template/ossec?pretty
 
 If everything was okay, the API response should be::
@@ -204,11 +204,11 @@ latest recommended version by WAZUH is Kibana 4.3.1 ::
 
 ::
 
-  $ /opt/kibana/config/kibana.yml 
+  $ /opt/kibana/config/kibana.yml
 
 Copy the same configuration from you old kibana.yml to this new kibana.yml.
 
-4. Start the Kibana service & verify if the process is running. Check the Kibana Log. 
+4. Start the Kibana service & verify if the process is running. Check the Kibana Log.
 
 ::
 
@@ -228,10 +228,10 @@ Copy the same configuration from you old kibana.yml to this new kibana.yml.
 .. note:: Kibana will search Elasticsearch index name pattern ``ossec-yyyy.mm.dd``. You need to have at least an OSSEC alert before you set up the index pattern on Kibana. Otherwise it won't find any index on Elasticsearch. If you want to generate one, for example you could try a ``sudo -s`` and miss the password on purpose several times.
 
 6. Download the kibana-ossecwazuh-dashboards.json to your workstation and import it through the Kibana Web-Interface
-7. Verify that the Elasticsearch Indices is working correctly! 
+7. Verify that the Elasticsearch Indices is working correctly!
 
 
-.. note:: Last but not least it also wouldn't hurt to update the latest OS packages by running "yum update" or "apt-get update && apt-get upgrade". 
+.. note:: Last but not least it also wouldn't hurt to update the latest OS packages by running "yum update" or "apt-get update && apt-get upgrade".
 
 
 What's next
