@@ -29,7 +29,7 @@ Now we are ready to clone our Github repository and compile the source code, to 
 
    $ cd ~
    $ mkdir ossec_tmp && cd ossec_tmp
-   $ git clone -b stable https://github.com/wazuh/wazuh.git
+   $ git clone -b stable https://github.com/wazuh/wazuh.git ossec-wazuh
    $ cd ossec-wazuh
    $ sudo ./install.sh
 
