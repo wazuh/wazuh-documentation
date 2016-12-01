@@ -213,7 +213,7 @@ RPM packages: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/rpm.ht
 
 **Configure Elasticsearch**
 
-vi /etc/elasticsearch/elasticsearch.yml
+Set the following values in /etc/elasticsearch/elasticsearch.yml (you can uncomment them):
 
 ::
 
@@ -226,6 +226,12 @@ vi /etc/elasticsearch/elasticsearch.yml
 ::
 
 	systemctl start elasticsearch
+
+Test that Elasticsearch is running and reachable running:
+
+::
+
+	curl -XGET YOUR_ELASTIC_SERVER_IP:9200
 
 **Load mappings/templates**
 
