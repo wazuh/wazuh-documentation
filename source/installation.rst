@@ -13,7 +13,7 @@ Note: Before installing the components please configure your NTP to sync time.
 Installing Wazuh manager
 ------------------------
 
-- Wazuh manager (v1.2) integrates the OSSEC server, the agent, and OpenSCAP module.
+- Wazuh manager (v1.2 beta) integrates the OSSEC server, the agent, and OpenSCAP module.
 - Wazuh API is used to monitor deployment status and configuration, as well as for integration with other components (e.g. WUI).
 - Filebeat is used to forward alerts data to the Elastic server, where it is indexed and stored.
 
