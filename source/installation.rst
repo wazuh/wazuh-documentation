@@ -10,8 +10,8 @@ This installation guide describes the installation and configuration of Wazuh in
 
 Note: Before installing the components please configure your NTP to sync time.
 
-Installing Wazuh manager
-------------------------
+Installing Wazuh manager (includign API and filebeat)
+-----------------------------------------------------
 
 - Wazuh manager (v1.2 beta) integrates the OSSEC server, the agent, and OpenSCAP module.
 - Wazuh API is used to monitor deployment status and configuration, as well as for integration with other components (e.g. WUI).
