@@ -5,13 +5,191 @@ Installation guide (beta version)
 
 This installation guide describes the installation and configuration of Wazuh in two servers:
 
-- Manager: Runs the manager, API and filebeat.
-- Elastic: Runs the elasticsearch engine, logstash server and Kibana (including Wazuh APP).
+- Elastic Stack server: Runs the elasticsearch engine, logstash server and Kibana (including Wazuh APP).
+- Wazuh server: Runs the manager, API and filebeat.
 
 Note: Before installing the components please configure your NTP to sync time.
 
-Installing Wazuh manager (including API and filebeat)
------------------------------------------------------
+Installing Elastic Stack server
+-------------------------------
+
+These are the steps to install Elastic Stack server (the other server, Wazuh manager, which will usually run in a different machine): 
+
+Logstash server
+^^^^^^^^^^^^^^^
+
+**Install Logstash server**
+
+https://www.elastic.co/guide/en/logstash/5.0/installing-logstash.html
+
+**Configure Logstash Server**
+
+Create a file on /etc/logstash/conf.d/01-wazuh.conf with content:
+
+::
+
+	input {
+		beats {
+			port => 5000
+			codec => "json_lines"
+		 }
+	}
+
+	filter {
+		geoip {
+			source => "srcip"
+			target => "GeoLocation"
+		}
+		if [SyscheckFile][path] {
+			mutate {
+				add_field => {"file" => "%{[SyscheckFile][path]}"}
+			}
+		}
+		grok {
+			match=> {
+				"file" => ["^/.+/(?<audit_file>(.+)$)|^[A-Z]:.+\\(?<audit_file>(.+)$)|^[A-Z]:\\.+/(?<audit_file>(.+)$)"]
+			}
+		}
+		mutate {
+			rename => [ "hostname", "AgentName" ]
+			rename => [ "agentip", "AgentIP" ]
+			rename => [ "[rule][comment]", "[rule][description]" ]
+			rename => [ "[rule][level]", "[rule][AlertLevel]" ]
+			remove_field => [ "timestamp", "beat", "fields", "input_type", "tags", "count" ]
+		}
+	}
+
+	output {
+		#stdout { codec => rubydebug }
+		elasticsearch {
+			 hosts => ["localhost:9200"]
+			 index => "ossec-%{+YYYY.MM.dd}"
+			 document_type => "ossec"
+			 template => "/etc/logstash/elastic5-ossec-template.json"
+			 template_name => "ossec"
+			 template_overwrite => true
+		}
+	}
+
+**Copy templates to Logstash folder**
+
+::
+
+	curl -o /etc/logstash/elastic5-ossec-template.json https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/elasticsearch/elastic5-ossec-template.json
+
+Elasticsearch
+^^^^^^^^^^^^^
+
+**Install Elasticsearch**
+
+Debian packages: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/deb.html 
+
+RPM packages: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/rpm.html
+
+**Configure Elasticsearch**
+
+Set the following values in /etc/elasticsearch/elasticsearch.yml (you can uncomment them):
+
+::
+
+	cluster.name: wazuh
+	node.name: node-1
+	network.host: 0.0.0.0
+				
+**Start Elasticsearch**
+
+::
+
+	systemctl start elasticsearch
+
+Test that Elasticsearch is running and reachable running:
+
+::
+
+	curl -XGET YOUR_ELASTIC_SERVER_IP:9200
+
+**Load mappings/templates**
+
+::
+
+	curl -XPUT -v -H "Expect:"  "http://localhost:9200/_template/ossec" -d@/etc/logstash/elastic5-ossec-template.json
+
+**Start Logstash Server**
+
+::
+
+	systemctl start logstash.service
+
+Kibana
+^^^^^^
+
+**Install Kibana**
+
+https://www.elastic.co/guide/en/kibana/current/deb.html
+
+https://www.elastic.co/guide/en/kibana/current/rpm.html
+
+**Publish IP address to access remotely**
+
+Open /etc/kibana/kibana.yml, modify server.host value (uncommenting the line):
+
+::
+
+	# Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
+	# The default is 'localhost', which usually means remote machines will not be able to connect.
+	# To allow connections from remote users, set this parameter to a non-loopback address.
+	server.host: "0.0.0.0"
+
+Restart Kibana:
+
+::
+
+	systemctl restart kibana
+
+**Configure index pattern**
+
+Access your Kibana interface at http://YOUR_ELASTIC_SERVER_IP:5601, Kibana will ask you to “Configure an index pattern”, set it up following these steps:
+
+::
+
+	- Check "Index contains time-based events".
+	- Insert Index name or pattern: ossec-*
+	- On "Time-field name" list select @timestamp option.
+	- Click on "Create" button.
+	- You should see the fields list with about ~100 fields.
+	- Go to "Discover" tab
+
+**Import dashboards**
+
+Download to your desktop file: https://github.com/wazuh/ossec-wazuh/blob/master/extensions/kibana/kibana5-ossecwazuh-dashboards.json
+
+::
+
+	curl -o kibana5-ossecwazuh-dashboards.json https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/kibana/kibana5-ossecwazuh-dashboards.json
+
+Access Kibana interface, click on "Management" on left menu, then "Saved objects", click on "Import" button and load the file just downloaded.
+
+**Install Wazuh App**
+		
+Run on your Elastic Stack server (it can take a few seconds, maybe a minute or two):
+
+::
+
+	/usr/share/kibana/bin/kibana-plugin install http://wazuh.com/resources/wazuh-app.zip
+
+It will take a while, once it finished, restart Kibana service.
+
+::
+
+	/etc/init.d/kibana restart
+
+
+
+
+Installing Wazuh server (typically on a different machine)
+----------------------------------------------------------
+
+Wazuh server includes the follwing components:
 
 - Wazuh manager (v1.2 beta) integrates the OSSEC server, the agent, and OpenSCAP module.
 - Wazuh API is used to monitor deployment status and configuration, as well as for integration with other components (e.g. WUI).
@@ -135,182 +313,10 @@ Start Wazuh manager and Filebeat
 	systemctl start wazuh-manager
 	systemctl start filebeat
 
-Installing Elastic Stack server
--------------------------------
+Configure Wazuh App
+-------------------
 
-Elastic Stack server will usually run in a different server. It runs the Logstash server, Elasticsearch engine and Kibana.
-
-Logstash server
-^^^^^^^^^^^^^^^
-
-**Install Logstash server**
-
-https://www.elastic.co/guide/en/logstash/5.0/installing-logstash.html
-
-**Configure Logstash Server**
-
-Create a file on /etc/logstash/conf.d/01-wazuh.conf with content:
-
-::
-
-	input {
-		beats {
-			port => 5000
-			codec => "json_lines"
-		 }
-	}
-
-	filter {
-		geoip {
-			source => "srcip"
-			target => "GeoLocation"
-		}
-		if [SyscheckFile][path] {
-			mutate {
-				add_field => {"file" => "%{[SyscheckFile][path]}"}
-			}
-		}
-		grok {
-			match=> {
-				"file" => ["^/.+/(?<audit_file>(.+)$)|^[A-Z]:.+\\(?<audit_file>(.+)$)|^[A-Z]:\\.+/(?<audit_file>(.+)$)"]
-			}
-		}
-		mutate {
-			rename => [ "hostname", "AgentName" ]
-			rename => [ "agentip", "AgentIP" ]
-			rename => [ "[rule][comment]", "[rule][description]" ]
-			rename => [ "[rule][level]", "[rule][AlertLevel]" ]
-			remove_field => [ "timestamp", "beat", "fields", "input_type", "tags", "count" ]
-		}
-	}
-
-	output {
-		#stdout { codec => rubydebug }
-		elasticsearch {
-			 hosts => ["localhost:9200"]
-			 index => "ossec-%{+YYYY.MM.dd}"
-			 document_type => "ossec"
-			 template => "/etc/logstash/elastic5-ossec-template.json"
-			 template_name => "ossec"
-			 template_overwrite => true
-		}
-	}
-
-**Copy templates to Logstash folder**
-
-::
-
-	curl -o /etc/logstash/elastic5-ossec-template.json https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/elasticsearch/elastic5-ossec-template.json
-
-Elasticsearch
-^^^^^^^^^^^^^
-
-**Install Elasticsearch**
-
-Debian packages: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/deb.html 
-
-RPM packages: https://www.elastic.co/guide/en/elasticsearch/reference/5.0/rpm.html
-
-**Configure Elasticsearch**
-
-Set the following values in /etc/elasticsearch/elasticsearch.yml (you can uncomment them):
-
-::
-
-	cluster.name: wazuh
-	node.name: node-1
-	network.host: 0.0.0.0
-				
-**Start Elasticsearch**
-
-::
-
-	systemctl start elasticsearch
-
-Test that Elasticsearch is running and reachable running:
-
-::
-
-	curl -XGET YOUR_ELASTIC_SERVER_IP:9200
-
-**Load mappings/templates**
-
-::
-
-	curl -XPUT -v -H "Expect:"  "http://localhost:9200/_template/ossec" -d@/etc/logstash/elastic5-ossec-template.json
-
-**Start Logstash Server**
-
-::
-
-	systemctl start logstash.service
-
-Kibana
-^^^^^^
-
-**Install Kibana**
-
-https://www.elastic.co/guide/en/kibana/current/deb.html
-
-https://www.elastic.co/guide/en/kibana/current/rpm.html
-
-**Publish IP address to access remotely**
-
-Open /etc/kibana/kibana.yml, modify:
-
-::
-
-	# Specifies the address to which the Kibana server will bind. IP addresses and host names are both valid values.
-	# The default is 'localhost', which usually means remote machines will not be able to connect.
-	# To allow connections from remote users, set this parameter to a non-loopback address.
-	server.host: "0.0.0.0"
-
-Restart Kibana:
-
-::
-
-	systemctl restart kibana
-
-**Configure index pattern**
-
-Access your Kibana interface at http://YOUR_ELASTIC_SERVER_IP:5601, Kibana will ask you to “Configure an index pattern”, set it up following these steps:
-
-::
-
-	- Check "Index contains time-based events".
-	- Insert Index name or pattern: ossec-*
-	- On "Time-field name" list select @timestamp option.
-	- Click on "Create" button.
-	- You should see the fields list with about ~100 fields.
-	- Go to "Discover" tab
-
-**Import dashboards**
-
-Download to your desktop file: https://github.com/wazuh/ossec-wazuh/blob/master/extensions/kibana/kibana5-ossecwazuh-dashboards.json
-
-::
-
-	curl -o kibana5-ossecwazuh-dashboards.json https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/kibana/kibana5-ossecwazuh-dashboards.json
-
-Access Kibana interface, click on "Management" on left menu, then "Saved objects", click on "Import" button and load the file just downloaded.
-
-**Install Wazuh App**
-		
-Run on your Elastic Stack server:
-
-::
-
-	/usr/share/kibana/bin/kibana-plugin install http://wazuh.com/resources/wazuh-app.zip
-
-It will take a while, once it finished, restart Kibana service.
-
-::
-
-	/etc/init.d/kibana restart
-
-**Configure Wazuh App**
-
-Access Kibana interface via browser. On the left menu, click on Wazuh icon (refresh browser if you can't find it).
+Access Kibana interface via browser (http://YOUR_ELASTIC_SERVER_IP:5601). On the left menu, click on Wazuh icon (refresh browser if you can't find it).
 
 Once in Wazuh interface, you will be asked to fill API configuration, "Wazuh API: Managers list", click on "Add new manager".
 
