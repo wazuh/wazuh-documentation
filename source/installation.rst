@@ -44,10 +44,6 @@ Create /etc/yum.repos.d/wazuh.repo with the following content:
 
 ::
 
-	rpm --import https://s3-us-west-1.amazonaws.com/packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
-
-::
-
 	yum install wazuh-manager && yum install wazuh-api
 
 **On RHEL 7.X**
@@ -71,10 +67,6 @@ Create /etc/yum.repos.d/wazuh.repo with the following content:
         name=RHEL-$releasever - Wazuh
         baseurl=https://packages.wazuh.com/yumtest/rhel/$releasever/$basearch
         protect=1
-
-::
-
-        rpm --import https://s3-us-west-1.amazonaws.com/packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
 
 ::
 
