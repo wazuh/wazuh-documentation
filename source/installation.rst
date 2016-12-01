@@ -107,7 +107,7 @@ https://www.elastic.co/guide/en/beats/libbeat/5.0/setup-repositories.html
 
 **Configure Filebeat**
 
-Empty file /etc/filebeat/filebeat.yml, and fill it with:
+Empty file /etc/filebeat/filebeat.yml, and fill it with the following content (don't forget to specify the ELASTIC server IP address):
 
 ::
 
