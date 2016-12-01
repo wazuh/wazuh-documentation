@@ -13,7 +13,7 @@ Note: Before installing the components please configure your NTP to sync time.
 Installing Elastic Stack server
 -------------------------------
 
-These are the steps to install Elastic Stack server (the other server, Wazuh manager, which will usually run in a different machine): 
+These are the steps to install Elastic Stack server, and configure it to work with Wazuh. The other server, Wazuh manager, which will usually run in a different machine. 
 
 Logstash server
 ^^^^^^^^^^^^^^^
@@ -182,9 +182,6 @@ It will take a while, once it finished, restart Kibana service.
 ::
 
 	/etc/init.d/kibana restart
-
-
-
 
 Installing Wazuh server (typically on a different machine)
 ----------------------------------------------------------
