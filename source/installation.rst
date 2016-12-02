@@ -181,7 +181,7 @@ It will take a while, once it finished, restart Kibana service.
 
 ::
 
-	/etc/init.d/kibana restart
+	systemctl restart kibana
 
 Installing Wazuh server (typically on a different machine)
 ----------------------------------------------------------
@@ -271,7 +271,7 @@ To test connectivity to the API from outside the box go to
 	
 Default username/password is foo/bar.
 
-TODO (don't run this optional step if you are installing our beta!!!, Wazuh app giving an error): Optionally, you can configure the API to use HTTPS (by creating a self-signed certificate), and to change the username and password running /var/ossec/api/scripts/configure_api.sh
+Optionally, you can configure the API to use HTTPS (by creating a self-signed certificate), and to change the username and password running /var/ossec/api/scripts/configure_api.sh
 
 Installing Filebeat
 ^^^^^^^^^^^^^^^^^^^
@@ -313,11 +313,13 @@ Start Wazuh manager and Filebeat
 Configure Wazuh App
 -------------------
 
-Access Kibana interface via browser (http://YOUR_ELASTIC_SERVER_IP:5601). On the left menu, click on Wazuh icon (refresh browser if you can't find it).
+Access Kibana interface via browser (http://YOUR_ELASTIC_SERVER_IP:5601). On the left menu, click on Wazuh icon.
+
+Note: If you don't find the Wazuh app icon, please refresh your browser and double check that Kibana has restarted successfully by stopping it manually.
 
 Once in Wazuh interface, you will be asked to fill API configuration, "Wazuh API: Managers list", click on "Add new manager".
 
-- API URL: Your API IP adress, usually Wazuh manager IP Address.
+- API URL: Your API IP adress, usually Wazuh server IP Address.
 - API USER: Default: "foo"
 - API PASSWORD: Default: "bar"
 - API PORT: Default "55000"
