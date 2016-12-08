@@ -320,9 +320,14 @@ class ossec::server
  - ``mysql_name``: MySQL Database name.
  - ``mysql_password``: MySQL password.
  - ``mysql_username``: MySQL username.
+ - ``syslog_output``: (default: ``false``).
+ - ``syslog_output_server``: (default: ``undef``).
+ - ``syslog_output_format``: (default: ``undef``).
  - ``ossec_extra_rules_config``: To use it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file. You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the ossec::server class.
  - ``ossec_email_maxperhour``: (default: ``12``): Global Configuration with a larger maximum emails per hour
  - ``ossec_email_idsname``: (default: ``undef``)
+ - ``server_package_version``: (default: ``installed``) Modified client.pp and server.pp to accept package versions as parameter.
+ - ``ossec_service_provider``: (default: ``$::ossec::params::ossec_service_provider``) Set service provider to Redhat on Redhat systems.
 
 
 
@@ -369,6 +374,11 @@ OSSEC agent class
  - ``$ossec_scanpaths`` (default: ``[]``): Agents can be Linux or Windows for this reason don't have ``ossec_scanpaths`` by default.
  - ``$manage_client_keys``: (default: ``true``): Manage client keys option.
  - ``ar_repeated_offenders``: (default: empty) A comma separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries.
+ - ``/local_decoder_template``: (default: $::ossec::params::service_has_status) Allow configurable service_has_status, default to params.
+ - ``agent_package_version``: (default: ``installed``) Modified client.pp and server.pp to accept package versions as parameter.
+ - ``agent_package_name``: (default: ``$::ossec::params::agent_package``) Override package for client installation.
+ - ``agent_service_name``: (default: ``$::ossec::params::agent_service``) Override service for client installation.
+ - ``ossec_service_provider``: (default: ``$::ossec::params::ossec_service_provider``) Set service provider to Redhat on Redhat systems.
 
 function ossec::addlog
  - ``$log_name``.
