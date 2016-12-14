@@ -75,7 +75,7 @@ Create a file on /etc/logstash/conf.d/01-wazuh.conf with content:
 
 ::
 	
-	curl -o /etc/logstash/elastic5-ossec-template.json https://raw.githubusercontent.com/wazuh/wazuh/new_layout/extensions/elasticsearch/elastic5-ossec-template.json
+	curl -o /etc/logstash/elastic5-ossec-template.json https://raw.githubusercontent.com/wazuh/wazuh/new_layout/extensions/elasticsearch/wazuh-elastic5-template.json
 
 Elasticsearch
 ^^^^^^^^^^^^^
