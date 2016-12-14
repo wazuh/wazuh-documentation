@@ -8,7 +8,7 @@ Apt-get repository key
 
 If it is the first installation from Wazuh repository you need to import the GPG key: ::
 
-   $ apt-key adv --fetch-keys http://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key
+   $ wget -qO - https://ossec.wazuh.com/repos/apt/conf/ossec-key.gpg.key | sudo apt-key add -
 
 Debian repositories
 -------------------
@@ -17,19 +17,19 @@ To add your Debian repository, depending on your distribution, run these command
 
 For Wheezy: ::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/debian wheezy main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/debian wheezy main" >> /etc/apt/sources.list.d/ossec.list
 
 For Jessie: ::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/debian jessie main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/debian jessie main" >> /etc/apt/sources.list.d/ossec.list
 
 For Stretch: ::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/debian stretch main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/debian stretch main" >> /etc/apt/sources.list.d/ossec.list
 
 For Sid: ::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/debian sid main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/debian sid main" >> /etc/apt/sources.list.d/ossec.list
 
 Ubuntu repositories
 -------------------
@@ -38,27 +38,27 @@ To add your Ubuntu repository, depending on your distribution, run these command
 
 For Precise::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/ubuntu precise main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/ubuntu precise main" >> /etc/apt/sources.list.d/ossec.list
 
 For Trusty::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/ubuntu trusty main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/ubuntu trusty main" >> /etc/apt/sources.list.d/ossec.list
 
 For Vivid::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/ubuntu vivid main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/ubuntu vivid main" >> /etc/apt/sources.list.d/ossec.list
 
 For Wily::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/ubuntu wily main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/ubuntu wily main" >> /etc/apt/sources.list.d/ossec.list
 
 For Xenial::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/ubuntu xenial main" >> /etc/apt/sources.list.d/ossec.list
-   
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/ubuntu xenial main" >> /etc/apt/sources.list.d/ossec.list
+
 For Yakkety::
 
-   $ echo -e "deb http://ossec.wazuh.com/repos/apt/ubuntu yakkety main" >> /etc/apt/sources.list.d/ossec.list
+   $ echo -e "deb https://ossec.wazuh.com/repos/apt/ubuntu yakkety main" >> /etc/apt/sources.list.d/ossec.list
 
 Update the repository
 ---------------------
