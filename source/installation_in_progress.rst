@@ -134,25 +134,25 @@ Wazuh Manager and API
 
 	a) For RHEL or CentOS::
 
-		cat > /etc/yum.repos.d/wazuh.repo << EOF
+		cat > /etc/yum.repos.d/wazuh.repo << \\EOF
 		[wazuh_repo]
 		gpgcheck=1
 		gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
 		enabled=1
-		name=RHEL-\\$releasever - Wazuh
-		baseurl=https://packages.wazuh.com/yum/el/\\$releasever/\\$basearch
+		name=RHEL-$releasever - Wazuh
+		baseurl=https://packages.wazuh.com/yum/el/$releasever/$basearch
 		protect=1
 		EOF
 
 	b) For Fedora::
 
-		cat > /etc/yum.repos.d/wazuh.repo << EOF
+		cat > /etc/yum.repos.d/wazuh.repo << \\EOF
 		[wazuh_repo]
 		gpgcheck=1
 		gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
-		name=Fedora-\\$releasever - Wazuh
+		name=Fedora-$releasever - Wazuh
 		enabled=1
-		baseurl=https://packages.wazuh.com/yum/fc/\\$releasever/\\$basearch
+		baseurl=https://packages.wazuh.com/yum/fc/$releasever/$basearch
 		protect=1
 		EOF
 
@@ -500,25 +500,25 @@ Installation on CentOS
 
 	a) For RHEL or CentOS::
 
-		cat > /etc/yum.repos.d/wazuh.repo << EOF
+		cat > /etc/yum.repos.d/wazuh.repo << \\EOF
 		[wazuh_repo]
 		gpgcheck=1
 		gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
 		enabled=1
-		name=RHEL-\\$releasever - Wazuh
-		baseurl=https://packages.wazuh.com/yum/el/\\$releasever/\\$basearch
+		name=RHEL-$releasever - Wazuh
+		baseurl=https://packages.wazuh.com/yum/el/$releasever/$basearch
 		protect=1
 		EOF
 
 	b) For Fedora::
 
-		cat > /etc/yum.repos.d/wazuh.repo << EOF
+		cat > /etc/yum.repos.d/wazuh.repo << \\EOF
 		[wazuh_repo]
 		gpgcheck=1
 		gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
-		name=Fedora-\\$releasever - Wazuh
+		name=Fedora-$releasever - Wazuh
 		enabled=1
-		baseurl=https://packages.wazuh.com/yum/fc/\\$releasever/\\$basearch
+		baseurl=https://packages.wazuh.com/yum/fc/$releasever/$basearch
 		protect=1
 		EOF
 
