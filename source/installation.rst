@@ -29,53 +29,36 @@ Create a file on /etc/logstash/conf.d/01-wazuh.conf with content:
 ::
 
 	input {
-		beats {
-			port => 5000
-			codec => "json_lines"
-		 }
+	    beats {
+		port => 5000
+		codec => "json_lines"
+	    }
 	}
-
 	filter {
-		geoip {
-			source => "srcip"
-			target => "GeoLocation"
-		}
-		if [SyscheckFile][path] {
-			mutate {
-				add_field => {"file" => "%{[SyscheckFile][path]}"}
-			}
-		}
-		grok {
-			match=> {
-				"file" => ["^/.+/(?<audit_file>(.+)$)|^[A-Z]:.+\\(?<audit_file>(.+)$)|^[A-Z]:\\.+/(?<audit_file>(.+)$)"]
-			}
-		}
-		mutate {
-			rename => [ "hostname", "AgentName" ]
-			rename => [ "agentip", "AgentIP" ]
-			rename => [ "[rule][comment]", "[rule][description]" ]
-			rename => [ "[rule][level]", "[rule][AlertLevel]" ]
-			remove_field => [ "timestamp", "beat", "fields", "input_type", "tags", "count" ]
-		}
+	    geoip {
+		source => "srcip"
+		target => "GeoLocation"
+	    }
+	    mutate {
+		remove_field => [ "timestamp", "beat", "fields", "input_type", "tags", "count" ]
+	    }
 	}
-
 	output {
-		#stdout { codec => rubydebug }
-		elasticsearch {
-			 hosts => ["localhost:9200"]
-			 index => "ossec-%{+YYYY.MM.dd}"
-			 document_type => "ossec"
-			 template => "/etc/logstash/elastic5-ossec-template.json"
-			 template_name => "ossec"
-			 template_overwrite => true
-		}
+	    elasticsearch {
+		hosts => ["localhost:9200"]
+		index => "wazuh-alerts-%{+YYYY.MM.dd}"
+		document_type => "wazuh"
+		template => "/etc/logstash/wazuh-elastic5-template.json"
+		template_name => "wazuh"
+		template_overwrite => true
+	    }
 	}
 
 **Copy templates to Logstash folder**
 
 ::
 	
-	curl -o /etc/logstash/elastic5-ossec-template.json https://raw.githubusercontent.com/wazuh/wazuh/new_layout/extensions/elasticsearch/wazuh-elastic5-template.json
+	curl -o /etc/logstash/elastic5-ossec-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic5-template.json
 
 Elasticsearch
 ^^^^^^^^^^^^^
@@ -108,11 +91,6 @@ Test that Elasticsearch is running and reachable running:
 
 	curl -XGET YOUR_ELASTIC_SERVER_IP:9200
 
-**Load mappings/templates**
-
-::
-
-	curl -XPUT -v -H "Expect:"  "http://localhost:9200/_template/ossec" -d@/etc/logstash/elastic5-ossec-template.json
 
 **Start Logstash Server**
 
@@ -146,28 +124,6 @@ Restart Kibana:
 
 	systemctl restart kibana
 
-**Configure index pattern**
-
-Access your Kibana interface at http://YOUR_ELASTIC_SERVER_IP:5601, Kibana will ask you to “Configure an index pattern”, set it up following these steps:
-
-::
-
-	- Check "Index contains time-based events".
-	- Insert Index name or pattern: ossec-*
-	- On "Time-field name" list select @timestamp option.
-	- Click on "Create" button.
-	- You should see the fields list with about ~100 fields.
-	- Go to "Discover" tab
-
-**Import dashboards**
-
-Download to your desktop file: https://github.com/wazuh/ossec-wazuh/blob/master/extensions/kibana/kibana5-ossecwazuh-dashboards.json
-
-::
-
-	curl -o kibana5-ossecwazuh-dashboards.json https://raw.githubusercontent.com/wazuh/ossec-wazuh/master/extensions/kibana/kibana5-ossecwazuh-dashboards.json
-
-Access Kibana interface, click on "Management" on left menu, then "Saved objects", click on "Import" button and load the file just downloaded.
 
 **Install Wazuh App**
 		
