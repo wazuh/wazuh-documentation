@@ -46,10 +46,12 @@ These are the steps to install Elastic Stack server, and configure it to work wi
 
 	installation/elastic_server_debian
 	installation/elastic_server_centos
+	installation/elastic_ssl
 	installation/connect_wazuh_app
 
 - :ref:`elastic_server_debian`.
 - :ref:`elastic_server_centos`.
+- :ref:`elastic_ssl`.
 - :ref:`connect_wazuh_app`.
 
 Installing and connecting Wazuh agents

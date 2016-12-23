@@ -52,8 +52,11 @@ Logstash
 		chkconfig --add logstash
 		service logstash start
 
+.. warning::
+	The default installation of Logstash doesn't encrypt the communication. It's strongly recommended to configure Logstash to use SSL encryption. Please read :ref:`elastic_ssl`.
+
 .. note::
-	You can get more info at the `Logstash Installation Documentation <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html#package-repositories>`_.
+	You can get more detailed information at the `Official Logstash Installation Documentation <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html#package-repositories>`_.
 
 Elasticsearch
 -------------
@@ -76,7 +79,7 @@ Elasticsearch
 		service elasticsearch start
 
 .. note::
-	You can get more info at the `Elasticsearch Installation Documentation <https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html>`_.
+	You can get more detailed information at the `Official Elasticsearch Installation Documentation <https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html>`_.
 
 Kibana
 ------
@@ -107,4 +110,4 @@ Kibana
 		service kibana start
 
 .. note::
-	You can get more info at the `Kibana Installation Documentation <https://www.elastic.co/guide/en/kibana/current/install.html>`_.
+	You can get more detailed information at the `Official Kibana Installation Documentation <https://www.elastic.co/guide/en/kibana/current/install.html>`_.

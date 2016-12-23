@@ -94,5 +94,8 @@ Filebeat
 		update-rc.d filebeat defaults 95 10
 		service filebeat start
 
+.. warning::
+	The default installation of Filebeat doesn't encrypt the communication. It's strongly recommended to configure Filebeat to verify the Logstash server through SSL. Please read :ref:`elastic_ssl`.
+
 .. note::
 	You can get more info at the `Filebeat Installation Documentation <https://www.elastic.co/guide/en/beats/libbeat/current/setup-repositories.html>`_.
