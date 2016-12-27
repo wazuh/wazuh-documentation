@@ -1,4 +1,4 @@
-.. wazuh_ruleset:
+.. _wazuh_ruleset:
 
 Wazuh Ruleset
 =============
@@ -48,51 +48,25 @@ Rootcheck rule for SSH Server with mapping to CIS security benchmark and PCI DSS
 Directory layout
 ------------------
 
+The ruleset folder structure is divided in two parts following the next schema:
+::
 
-New log analysis rules
-""""""""""""""""""""""
+   /var/ossec/
+           ├─ etc/
+           │   ├─ decoders
+           │   └─ rules
+           └─ ruleset/
+                   ├─ decoders
+                   └─ rules
 
-These rules are located at ``ossec-rules/rules-decoders/software`` (being software the name of your log messages source) and can be installed manually following next steps.
-
-
-
-Copy new rule files into OSSEC directories and add the new rules file to ``ossec.conf`` configuration file: ::
-
- - Copy "software_decoders.xml" to "/var/ossec/etc/wazuh_decoders/".
- - Copy "software_rules.xml" to "/var/ossec/rules/"
- - Add "<include>software_rules.xml</include>" to "/var/ossec/etc/ossec.conf" before the tag "</rules>".
- - If there are additional instructions to install these rules and decoders, you will find them in an instructions.md file in the same directory.
- - Restart your OSSEC manager
-
-
-Decoder paths
-""""""""""""""""""""""""
-Configure decoder paths adding the next lines after tag ``<ruleset>`` at ``/var/ossec/etc/ossec.conf``: ::
-
- <decoder_dir>ruleset/decoders</decoder_dir>
- <decoder_dir>etc/decoders</decoder_dir>
- <decoder>etc/decoders/local_decoder.xml</decoder>
-
-If you do not use the OSSEC Wazuh fork, you must move the file ``decoder.xml`` to the directory ``etc/ossec_decoders``.
-Also, if you do not use ``local_decoder.xml``, remove that line in ossec.conf. Remember that ``local_decoder.xml`` can not be empty.
-
-Rootcheck rules
+Folders
 ^^^^^^^^^^^^^^^
+Inside the ``etc/`` folder we will find the ``local_decoder.xml`` and ``local_rules.xml`` files inside their corresponding folders.
+Use these folders to keep you personal decoders and rules.
 
-Rootchecks can be found in ``ossec-rules/rootcheck/`` directory. There you will see both updated out-of-the-box OSSEC rootchecks, and new ones.
+Inside the ``ruleset/`` folder we will find all the common rules and decoders files. This folder will be overwritten or modified in the Wazuh update process, so please do not use this folder for personal files and use the ``etc/`` folder instead.
 
-To install a rootcheck file, go to your OSSEC manager and copy the ``.txt`` file to ``/var/ossec/etc/shared/``. Then modify ``/var/ossec/etc/ossec.conf`` by adding the path to the ``.txt`` file into the ``<rootcheck>`` section.
-
-Examples: ::
-
-   - <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-   - <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
-   - <windows_malware>/var/ossec/etc/shared/win_malware_rcl.txt</windows_malware>
-   - <windows_audit>/var/ossec/etc/shared/win_audit_rcl.txt</windows_audit>
-   - <windows_apps>/var/ossec/etc/shared/win_applications_rcl.txt</windows_apps>
-
-
-
+You will be able to include or exclude decoders and rules, and also add new folders.
 
 
 Update ruleset
@@ -106,13 +80,13 @@ Usage examples
 
 Update Decoders, Rules and Rootchecks: ::
 
-   $ /var/ossec/update/ruleset/update_ruleset.py
+   $ /var/ossec/bin/update_ruleset.py
 
 All script options: ::
 
   Restart:
-    -s, --restart       Restart OSSEC when required.
-    -S, --no-restart    Do not restart OSSEC when required.
+    -r, --restart       Restart OSSEC when required.
+    -R, --no-restart    Do not restart OSSEC when required.
 
   Backups:
     -b, --backups       Restore last backup.
@@ -120,10 +94,9 @@ All script options: ::
   Additional Params:
     -f, --force-update  Force to update the ruleset. By default, only it is updated the new/changed decoders/rules/rootchecks.
     -o, --ossec-path    Set OSSEC path. Default: '/var/ossec'
-    -p, --path          Update ruleset from path (instead of download it).
+    -s, --source        Select ruleset source path (instead of download it).
     -j, --json          JSON output. It should be used with '-s' or '-S' argument.
     -d, --debug         Debug mode.
-
 
 
 Configure weekly updates
@@ -133,7 +106,7 @@ Run ``update_ruleset.py`` weekly and keep your Wazuh Ruleset installation up to 
 
 Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
 
-  @weekly root cd /var/ossec/update/ruleset && ./update_ruleset.py -s
+  @weekly root cd /var/ossec/bin && ./update_ruleset.py -r
 
 
 
