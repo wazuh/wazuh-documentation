@@ -32,3 +32,4 @@ Wazuh also provides a centralized Web User Interface (fully integrated in Elasti
    wazuh_ruleset
    wazuh_api
    wazuh_modules
+   audit
