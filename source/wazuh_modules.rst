@@ -15,4 +15,4 @@ Wazuh Modules
     .. toctree::
        :maxdepth: 2
 
-       wazuh_modules_openscap
+       modules/openscap/openscap
