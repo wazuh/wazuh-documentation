@@ -45,6 +45,9 @@ Rootcheck rule for SSH Server with mapping to CIS security benchmark and PCI DSS
    f:/etc/ssh/sshd_config -> !r:^# && r:^PermitEmptyPasswords\.+yes;
 
 
+Directory layout
+------------------
+
 
 New log analysis rules
 """"""""""""""""""""""
@@ -88,8 +91,6 @@ Examples: ::
    - <windows_audit>/var/ossec/etc/shared/win_audit_rcl.txt</windows_audit>
    - <windows_apps>/var/ossec/etc/shared/win_applications_rcl.txt</windows_apps>
 
-Directory layout
-------------------
 
 
 

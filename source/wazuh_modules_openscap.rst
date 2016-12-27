@@ -318,7 +318,7 @@ Note that each field is removed to facilitate searches.
     :align: center
     :width: 100%
 
-**Step 5: Dashbaords**
+**Step 5: Dashboards**
 
 Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
 
