@@ -111,3 +111,8 @@ Kibana
 
 .. note::
 	You can get more detailed information at the `Official Kibana Installation Documentation <https://www.elastic.co/guide/en/kibana/current/install.html>`_.
+
+Next steps
+----------
+
+When you finish installing the Elastic server it's important to configure SSL: :ref:`elastic_ssl`.

@@ -33,8 +33,8 @@ These services will typically be installed on a machine other than the Elastic s
 	installation/wazuh_server_debian
 	installation/wazuh_server_centos
 
-- :ref:`wazuh_server_debian`.
-- :ref:`wazuh_server_centos`.
+- :ref:`Install on Debian / Ubuntu <wazuh_server_debian>`.
+- :ref:`Install on RedHat / CentOS <wazuh_server_centos>`.
 
 Installing Elastic Stack server
 -------------------------------
@@ -49,9 +49,9 @@ These are the steps to install Elastic Stack server, and configure it to work wi
 	installation/elastic_ssl
 	installation/connect_wazuh_app
 
-- :ref:`elastic_server_debian`.
-- :ref:`elastic_server_centos`.
-- :ref:`elastic_ssl`.
+- :ref:`Install on Debian / Ubuntu <elastic_server_debian>`.
+- :ref:`Install on RedHat / CentOS <elastic_server_centos>`.
+- :ref:`Set up SSL for Elastic <elastic_ssl>`.
 - :ref:`connect_wazuh_app`.
 
 Installing and connecting Wazuh agents
@@ -64,6 +64,6 @@ Installing and connecting Wazuh agents
 	installation/wazuh_agent_centos
 	installation/wazuh_agent_connect
 
-- :ref:`wazuh_agent_debian`.
-- :ref:`wazuh_agent_centos`.
+- :ref:`Install on Debian / Ubuntu <wazuh_agent_debian>`.
+- :ref:`Install on Debian / Ubuntu <wazuh_agent_centos>`.
 - :ref:`wazuh_agent_connect`.

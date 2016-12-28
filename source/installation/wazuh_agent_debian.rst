@@ -53,3 +53,8 @@ Install Wazuh agent on Debian
 
 	apt-get update
 	apt-get install wazuh-agent
+
+Next steps
+----------
+
+At this point the Wazuh agent is installed and configured. Now we should :ref:`connect it to the manager <wazuh_agent_connect>`.

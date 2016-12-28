@@ -38,3 +38,8 @@ Install Wazuh agent on CentOS
 	<ossec_config>
 	  <client>
 	    <server-ip>1.2.3.4</server_ip>
+
+Next steps
+----------
+
+At this point the Wazuh agent is installed and configured. Now we should :ref:`connect it to the manager <wazuh_agent_connect>`.

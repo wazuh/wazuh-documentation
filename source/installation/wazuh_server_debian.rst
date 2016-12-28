@@ -99,3 +99,8 @@ Filebeat
 
 .. note::
 	You can get more info at the `Filebeat Installation Documentation <https://www.elastic.co/guide/en/beats/libbeat/current/setup-repositories.html>`_.
+
+Next steps
+----------
+
+Once you've installed the Wazuh manager and Filebeat, you may want to :ref:`Install an Elastic server <elastic_server_debian>`.

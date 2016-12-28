@@ -98,3 +98,8 @@ Now we will configure Filebeat to verify the Logstash server's certificate.
 
 .. note::
 	You can get more info at `Securing communication with Logstash <https://www.elastic.co/guide/en/beats/filebeat/current/configuring-ssl-logstash.html>`_ guide from Elastic.
+
+Next steps
+----------
+
+At this point Wazuh manager and Elastic server are properly configured. It's the time to :ref:`add a manager to the Kibana app <connect_wazuh_app>`.
