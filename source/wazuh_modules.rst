@@ -1,4 +1,4 @@
-.. wazuh_modules:
+.. _wazuh_modules:
 
 Wazuh Modules
 ==================================
@@ -7,12 +7,14 @@ Wazuh Modules
 
     What is a ``wodle``?
 
-    A ``wodle`` is a play on words of "wazuh" and "module". We have created an entire new daemon, called ``wazuh-moduled``, which will be in charge of lots of different Wazuh modules. The Wodles tool makes it possible to build new modules outside of OSSEC code.
+    A ``wodle`` is a play on words of "wazuh" and "module". We have created an entire new daemon, called ``wazuh-modulesd``, which will be in charge of lots of different Wazuh modules. The Wodles tool makes it possible to build new modules outside of OSSEC core.
     So far we have created and implemented the following wodles:
 
-.. topic:: Documentation sections
+.. toctree::
+   :maxdepth: 2
 
-    .. toctree::
-       :maxdepth: 2
+   modules/openscap/openscap
+   modules/database
 
-       modules/openscap/openscap
+- :ref:`OpenSCAP Integration <openscap_module>`.
+- :ref:`Database Synchronization Module <database_module>`.
