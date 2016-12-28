@@ -99,14 +99,35 @@ a {
   width: auto;
 }
 
-
-.wy-nav-side {
-  background: #fff none repeat scroll 0 0;
+.wy-body-for-nav {
+    height: 100%;
 }
 
+.wy-body-for-nav {
+    background-color: #edf0f2;
+    background-image: none;
+}
+
+.wy-nav-side, .wy-nav-content, .wy-grid-for-nav, .wy-nav-content-wrap {
+    background: #fff none repeat scroll 0 0;
+
+}
+
+.wy-grid-for-nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: static;
+    height: initial;
+    min-height: 100%;
+}
+
+.wy-nav-content-wrap {
+  margin-left: 324px;
+}
 
 .wy-nav-content {
   max-width: 97%;
+  margin: 0 auto;
 }
 
 .wy-menu-vertical a:hover {
@@ -180,21 +201,27 @@ ul.current li.toctree-l3 {
 .wy-menu-vertical li.on a, .wy-menu-vertical .toctree-l3.current > a {
   color: #000;
 }
+
 .wy-nav-side {
   width: 332px;
+  position: static;
+  float: left;
+  padding-bottom: 2em;
 }
+
 .wy-side-scroll {
-  width: 345px;
+  width: 100%;
+  overflow: hidden;
 }
+
 .wy-side-nav-search {
   width: 330px;
 }
+
 .wy-menu-vertical {
   width: 347px;
 }
-.wy-nav-content-wrap {
-  margin-left: 368px;
-}
+
 .toctree-wrapper.compound {
   display: none;
 }
