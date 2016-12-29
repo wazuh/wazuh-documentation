@@ -1,4 +1,4 @@
-.. _wazuh_api_reference:
+.. _ossec_api_reference:
 
 Reference
 ======================
@@ -24,7 +24,7 @@ Request List
 	* GET /agents/:agent_id  (`Get an agent`_)
 	* GET /agents/:agent_id/key  (`Get agent key`_)
 	* GET /agents/summary  (`Get agents summary`_)
-	* POST /agents/:agent_id  (`Add agent`_)
+	* POST /agents  (`Add agent`_)
 	* PUT /agents/:agent_id/restart  (`Restart an agent`_)
 	* PUT /agents/:agent_name  (`Add agent (quick method)`_)
 	* PUT /agents/restart  (`Restart all agents`_)
@@ -57,7 +57,7 @@ Request List
 
 `Rules`_
 	* GET /rules  (`Get all rules`_)
-	* GET /rules  (`Get rules by id`_)
+	* GET /rules/:rule_id  (`Get rules by id`_)
 	* GET /rules/files  (`Get files of rules`_)
 	* GET /rules/groups  (`Get rule groups`_)
 	* GET /rules/pci  (`Get rule pci requirements`_)
@@ -83,7 +83,7 @@ Add a new agent.
 
 ``POST`` ::
 
-	/agents/:agent_id
+	/agents
 
 **Parameters:**
 
@@ -113,7 +113,7 @@ Add a new agent.
 	   "error": 0,
 	   "data": "001"
 	}
-
+	
 
 Add agent (quick method)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -145,7 +145,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": "002"
 	}
-
+	
 
 
 Delete
@@ -181,7 +181,7 @@ Removes an agent. You must restart OSSEC after removing an agent.
 	   "error": 0,
 	   "data": "Agent removed"
 	}
-
+	
 
 
 Info
@@ -214,7 +214,7 @@ Returns a summary of the available agents.
 	      "Disconnected": 0
 	   }
 	}
-
+	
 
 Get all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -271,12 +271,12 @@ Returns a list with the available agents.
 	            "status": "Active",
 	            "ip": "127.0.0.1",
 	            "id": "000",
-	            "name": "ip-10-0-0-20"
+	            "name": "ip-10-0-0-220"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -308,16 +308,16 @@ Returns the information of an agent.
 	   "error": 0,
 	   "data": {
 	      "status": "Active",
-	      "name": "ip-10-0-0-20",
+	      "name": "ip-10-0-0-220",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2016-09-22 16:15:12",
-	      "version": "OSSEC Wazuh v1.2",
+	      "dateAdd": "2016-12-29 10:02:00",
+	      "version": "Wazuh v1.2",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
-	      "os": "Linux ip-10-0-0-20 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt20-1+deb8u3 (2016-01-17) x86_64",
+	      "os": "Linux ip-10-0-0-220 3.16.0-4-amd64 #1 SMP Debian 3.16.36-1+deb8u1 (2016-09-03) x86_64",
 	      "id": "000"
 	   }
 	}
-
+	
 
 
 Key
@@ -351,9 +351,9 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDAxIE5ld0hvc3QgMTAuMC4wLjkgMGZhOTBlMGMyNmJkZWM4ODJiNWY4NWUzNmY4ZTI4ODNkMWU3NTZlMzYxYTRiYWZhMGY1ZmU0YjgwMDBjMTI2MQ=="
+	   "data": "MDAxIE5ld0hvc3QgMTAuMC4wLjkgZDkzYTNiMmI4ZjBlNTRjMGMxZjRmMTcyNjJjM2E4MTNhNTM2YjRiNGU5MzdiNTYzMmVhYWE3ZDNkYmZmYTRiZA=="
 	}
-
+	
 
 
 Restart
@@ -378,7 +378,7 @@ Restarts all agents.
 ::
 
 	{
-	    "data": "Restarting all agents",
+	    "data": "Restarting all agents", 
 	    "error": 0
 	}
 
@@ -409,7 +409,7 @@ Restarts the agent.
 ::
 
 	{
-	    "data": "Restarting agent",
+	    "data": "Restarting agent", 
 	    "error": 0
 	}
 
@@ -445,6 +445,16 @@ Returns all decoders included in ossec.conf.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | file               | String        | Filters by filename.                                                                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| path               | String        | Filters by path.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| status             | String        | Filters the decoders by status.                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - enabled                                                                                                                                                                                              |
+|                    |               | - disabled                                                                                                                                                                                             |
+|                    |               | - all                                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -457,38 +467,34 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 356,
+	      "totalItems": 421,
 	      "items": [
 	         {
-	            "position": 0,
+	            "status": "enabled",
+	            "name": "ar_log",
 	            "details": {
-	               "regex": "/bin/(\\S+) (\\S+) - (\\S+) (\\d+.\\d+) (\\d+)",
-	               "order": "action, status, srcip, id, extra_data",
-	               "prematch": "^\\w\\w\\w \\w+\\s+\\d+ \\d\\d:\\d\\d:\\d\\d \\w+ \\d+ /\\S+/active-response"
+	               "prematch": "^\\w\\w\\w \\w+\\s+\\d+ \\d\\d:\\d\\d:\\d\\d \\w+ \\d+ /\\S+/active-response/bin/|^\\w\\w\\w \\d\\d/\\d\\d/\\d\\d\\d\\d \\.+\"active-response/bin/"
 	            },
-	            "full_path": "/var/ossec/etc/decoders/active-response_decoders.xml",
-	            "file": "active-response_decoders.xml",
-	            "name": "ar_log"
+	            "file": "0010-active-response_decoders.xml",
+	            "position": 0,
+	            "path": "/var/ossec/ruleset/decoders"
 	         },
 	         {
-	            "position": 0,
+	            "status": "enabled",
+	            "name": "ar_log_fields",
 	            "details": {
-	               "regex": [
-	                  " R:(\\w)  \\w:\\S+ S:(\\d+.\\d+.\\d+.\\d+) ",
-	                  "D:(\\d+.\\d+.\\d+.\\d+) P:(\\S+) SP:(\\d+) DP:(\\d+) "
-	               ],
-	               "program_name": "^ipsec_logd",
-	               "type": "firewall",
-	               "order": "action,srcip,dstip,protocol,srcport,dstport"
+	               "regex": "^(\\S+) (\\S+) - (\\S+) (\\.+) |^(\\S+)\" (\\S+) \"-\" \"(\\S+)\" \"(\\.+) ",
+	               "order": "script, type, srcip, id",
+	               "parent": "ar_log"
 	            },
-	            "full_path": "/var/ossec/etc/decoders/aix-ipsec_decoders.xml",
-	            "file": "aix-ipsec_decoders.xml",
-	            "name": "aix-ipsec"
+	            "file": "0010-active-response_decoders.xml",
+	            "position": 1,
+	            "path": "/var/ossec/ruleset/decoders"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get all decoders files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -513,11 +519,25 @@ Returns all decoders files included in ossec.conf.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| status             | String        | Filters the decoders by status.                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - enabled                                                                                                                                                                                              |
+|                    |               | - disabled                                                                                                                                                                                             |
+|                    |               | - all                                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| file               | String        | Filters by filename.                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| path               | String        | Filters by path.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| download           | String        | Downloads the file                                                                                                                                                                                     |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/files?pretty&offset=0&limit=10&sort=-"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/files?pretty&offset=0&limit=10&sort=-path"
 
 **Example Response:**
 ::
@@ -527,20 +547,60 @@ Returns all decoders files included in ossec.conf.
 	   "data": {
 	      "totalItems": 78,
 	      "items": [
-	         "/var/ossec/etc/local_decoder.xml",
-	         "/var/ossec/etc/decoders/zeus_decoders.xml",
-	         "/var/ossec/etc/decoders/wordpress_decoders.xml",
-	         "/var/ossec/etc/decoders/windows_decoders.xml",
-	         "/var/ossec/etc/decoders/web-accesslog_decoders.xml",
-	         "/var/ossec/etc/decoders/vsftpd_decoders.xml",
-	         "/var/ossec/etc/decoders/vpopmail_decoders.xml",
-	         "/var/ossec/etc/decoders/vmware_decoders.xml",
-	         "/var/ossec/etc/decoders/vm-pop3_decoders.xml",
-	         "/var/ossec/etc/decoders/unix_chkpwd_decoders.xml"
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0260-rsa-auth-manager_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0330-symantec_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0080-courier_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0270-samba_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0020-amazon_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0355-vm-pop3_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0160-netscaler_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0280-serv-u_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0010-active-response_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0025-apache_decoders.xml"
+	         }
 	      ]
 	   }
 	}
-
+	
 
 Get all parent decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -577,35 +637,34 @@ Returns all parent decoders included in ossec.conf
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 110,
+	      "totalItems": 116,
 	      "items": [
 	         {
+	            "status": "enabled",
+	            "name": "local_decoder_example",
+	            "details": {
+	               "program_name": "local_decoder_example"
+	            },
+	            "file": "local_decoder.xml",
 	            "position": 0,
+	            "path": "/var/ossec/etc/decoders"
+	         },
+	         {
+	            "status": "enabled",
+	            "name": "zeus",
 	            "details": {
 	               "regex": " host=(\\S+), ",
 	               "order": "srcip",
 	               "prematch": "^[\\d\\d/\\w\\w\\w/\\d\\d\\d\\d:\\d\\d:\\d\\d:\\d\\d \\S+] "
 	            },
-	            "full_path": "/var/ossec/etc/decoders/zeus_decoders.xml",
-	            "file": "zeus_decoders.xml",
-	            "name": "zeus"
-	         },
-	         {
+	            "file": "0390-zeus_decoders.xml",
 	            "position": 0,
-	            "details": {
-	               "regex": "^(\\d+.\\d+.\\d+.\\d+) ",
-	               "program_name": "^WPsyslog",
-	               "order": "srcip",
-	               "prematch": "^["
-	            },
-	            "full_path": "/var/ossec/etc/decoders/wordpress_decoders.xml",
-	            "file": "wordpress_decoders.xml",
-	            "name": "wordpress"
+	            "path": "/var/ossec/ruleset/decoders"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get decoders by name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -647,36 +706,39 @@ Returns the decoders with the specified name.
 	      "totalItems": 3,
 	      "items": [
 	         {
-	            "position": 0,
+	            "status": "enabled",
+	            "name": "apache-errorlog",
 	            "details": {
 	               "program_name": "^httpd"
 	            },
-	            "full_path": "/var/ossec/etc/decoders/apache_decoders.xml",
-	            "file": "apache_decoders.xml",
-	            "name": "apache-errorlog"
+	            "file": "0025-apache_decoders.xml",
+	            "position": 0,
+	            "path": "/var/ossec/ruleset/decoders"
 	         },
 	         {
-	            "position": 1,
+	            "status": "enabled",
+	            "name": "apache-errorlog",
 	            "details": {
 	               "prematch": "^[warn] |^[notice] |^[error] "
 	            },
-	            "full_path": "/var/ossec/etc/decoders/apache_decoders.xml",
-	            "file": "apache_decoders.xml",
-	            "name": "apache-errorlog"
+	            "file": "0025-apache_decoders.xml",
+	            "position": 1,
+	            "path": "/var/ossec/ruleset/decoders"
 	         },
 	         {
-	            "position": 2,
+	            "status": "enabled",
+	            "name": "apache-errorlog",
 	            "details": {
 	               "prematch": "^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S+:warn] |^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S+:notice] |^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S*:error] |^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S+:info] "
 	            },
-	            "full_path": "/var/ossec/etc/decoders/apache_decoders.xml",
-	            "file": "apache_decoders.xml",
-	            "name": "apache-errorlog"
+	            "file": "0025-apache_decoders.xml",
+	            "position": 2,
+	            "path": "/var/ossec/ruleset/decoders"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 
 
@@ -717,15 +779,22 @@ Returns ossec.conf in JSON format.
 	   "error": 0,
 	   "data": {
 	      "email_notification": "no",
+	      "alerts_log": "yes",
+	      "jsonout_output": "yes",
+	      "smtp_server": "smtp.example.wazuh.com",
+	      "email_to": "recipient@example.wazuh.com",
+	      "logall": "no",
+	      "email_maxperhour": 12,
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
 	         "10.0.0.2"
 	      ],
-	      "jsonout_output": "yes"
+	      "email_from": "ossecm@example.wazuh.com",
+	      "logall_json": "no"
 	   }
 	}
-
+	
 
 
 Info
@@ -753,14 +822,15 @@ Returns basic information about Manager.
 	   "error": 0,
 	   "data": {
 	      "openssl_support": "yes",
-	      "installation_date": "Thu Sep 22 16:14:51 UTC 2016",
+	      "ruleset_version": "v1.10",
+	      "installation_date": "Thu Dec 29 10:01:34 UTC 2016",
 	      "version": "v1.2",
 	      "max_agents": "2048",
 	      "path": "/var/ossec",
 	      "type": "server"
 	   }
 	}
-
+	
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -794,7 +864,7 @@ Returns the Manager processes that are running.
 	      "ossec-maild": "stopped"
 	   }
 	}
-
+	
 
 
 Logs
@@ -844,15 +914,15 @@ Returns the 3 last months of ossec.log.
 
 	{
 	    "data": {
-	        "totalItems": 16480,
+	        "totalItems": 16480, 
 	        "items": [
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Syscheck scan frequency: 3600 seconds",
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck scan (forwarding database).",
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck database (pre-scan).",
-	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Started (pid: 2832).",
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Syscheck scan frequency: 3600 seconds", 
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck scan (forwarding database).", 
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck database (pre-scan).", 
+	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Started (pid: 2832).", 
 	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Monitoring output of command(360): df -P"
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -877,59 +947,69 @@ Returns a summary about the 3 last months of ossec.log.
 	{
 	   "error": 0,
 	   "data": {
-	      "ossec-testrule": {
-	         "info": 858,
-	         "all": 858,
+	      "wazuh-modulesd": {
+	         "info": 6,
+	         "all": 6,
 	         "error": 0
 	      },
-	      "wazuh-moduled": {
-	         "info": 11,
-	         "all": 11,
+	      "ossec-testrule": {
+	         "info": 474,
+	         "all": 474,
+	         "error": 0
+	      },
+	      "wazuh-modulesd:oscap": {
+	         "info": 20,
+	         "all": 20,
 	         "error": 0
 	      },
 	      "ossec-rootcheck": {
-	         "info": 43,
-	         "all": 43,
+	         "info": 10,
+	         "all": 10,
 	         "error": 0
 	      },
 	      "ossec-monitord": {
-	         "info": 38,
-	         "all": 40,
-	         "error": 2
-	      },
-	      "ossec-logcollector": {
-	         "info": 131,
-	         "all": 153,
-	         "error": 22
-	      },
-	      "ossec-execd": {
-	         "info": 31,
-	         "all": 31,
+	         "info": 11,
+	         "all": 11,
 	         "error": 0
 	      },
+	      "ossec-logcollector": {
+	         "info": 77,
+	         "all": 83,
+	         "error": 6
+	      },
+	      "ossec-execd": {
+	         "info": 16,
+	         "all": 17,
+	         "error": 1
+	      },
 	      "ossec-remoted": {
-	         "info": 82,
-	         "all": 99,
-	         "error": 17
+	         "info": 39,
+	         "all": 45,
+	         "error": 6
 	      },
 	      "ossec-syscheckd": {
-	         "info": 134,
-	         "all": 134,
+	         "info": 140,
+	         "all": 140,
 	         "error": 0
 	      },
 	      "ossec-analysisd": {
-	         "info": 1905,
-	         "all": 1905,
+	         "info": 1067,
+	         "all": 1067,
 	         "error": 0
 	      },
 	      "ossec-maild": {
-	         "info": 11,
-	         "all": 11,
+	         "info": 6,
+	         "all": 6,
+	         "error": 0
+	      },
+	      "wazuh-modulesd:database": {
+	         "info": 8,
+	         "all": 8,
 	         "error": 0
 	      }
 	   }
 	}
-
+	
 
 
 Stats
@@ -964,31 +1044,31 @@ Returns OSSEC statistical information of current date.
 	{
 	    "data": [
 	        {
-	            "hour": 5,
-	            "firewall": 0,
+	            "hour": 5, 
+	            "firewall": 0, 
 	            "alerts": [
 	                {
-	                    "level": 3,
-	                    "sigid": 5715,
+	                    "level": 3, 
+	                    "sigid": 5715, 
 	                    "times": 4
-	                },
+	                }, 
 	                {
-	                    "level": 2,
-	                    "sigid": 1002,
+	                    "level": 2, 
+	                    "sigid": 1002, 
 	                    "times": 2
-	                },
+	                }, 
 	                {
 	                    "...": "..."
 	                }
-	            ],
-	            "totalAlerts": 107,
-	            "syscheck": 1257,
+	            ], 
+	            "totalAlerts": 107, 
+	            "syscheck": 1257, 
 	            "events": 1483
-	        },
+	        }, 
 	        {
 	            "...": "..."
 	        }
-	    ],
+	    ], 
 	    "error": 0
 	}
 
@@ -1013,16 +1093,16 @@ Returns OSSEC statistical information per hour. Each item in averages field repr
 	{
 	    "data": {
 	        "averages": [
-	            100,
-	            357,
-	            242,
-	            500,
-	            422,
-	            "...",
+	            100, 
+	            357, 
+	            242, 
+	            500, 
+	            422, 
+	            "...", 
 	            123
-	        ],
+	        ], 
 	        "interactions": 0
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -1048,61 +1128,61 @@ Returns OSSEC statistical information per week. Each item in hours field represe
 	    "data": {
 	        "Wed": {
 	            "hours": [
-	                223,
-	                "...",
+	                223, 
+	                "...", 
 	                456
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Sun": {
 	            "hours": [
-	                332,
-	                "...",
+	                332, 
+	                "...", 
 	                313
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Thu": {
 	            "hours": [
-	                888,
-	                "...",
+	                888, 
+	                "...", 
 	                123
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Tue": {
 	            "hours": [
-	                536,
-	                "...",
+	                536, 
+	                "...", 
 	                345
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Mon": {
 	            "hours": [
-	                444,
-	                "...",
+	                444, 
+	                "...", 
 	                556
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Fri": {
 	            "hours": [
-	                131,
-	                "...",
+	                131, 
+	                "...", 
 	                432
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Sat": {
 	            "hours": [
-	                134,
-	                "...",
+	                134, 
+	                "...", 
 	                995
-	            ],
+	            ], 
 	            "interactions": 0
 	        }
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -1132,7 +1212,7 @@ Clears the rootcheck database for all agents.
 ::
 
 	{
-	    "data": "Rootcheck database deleted",
+	    "data": "Rootcheck database deleted", 
 	    "error": 0
 	}
 
@@ -1163,7 +1243,7 @@ Clears the rootcheck database for an agent.
 ::
 
 	{
-	    "data": "Rootcheck database deleted",
+	    "data": "Rootcheck database deleted", 
 	    "error": 0
 	}
 
@@ -1200,11 +1280,11 @@ Return the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "rootcheckEndTime": "2016-09-23 16:08:10",
-	      "rootcheckTime": "2016-09-23 16:02:58"
+	      "rootcheckEndTime": "2016-12-29 10:41:43",
+	      "rootcheckTime": "2016-12-29 10:36:53"
 	   }
 	}
-
+	
 
 Get rootcheck CIS requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1248,7 +1328,7 @@ Returns the CIS requirements of all rootchecks of the agent.
 	      ]
 	   }
 	}
-
+	
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1291,24 +1371,26 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 12,
+	      "totalItems": 9,
 	      "items": [
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2016-09-23 16:03:00",
-	            "readDay": "2016-09-23 17:06:05",
-	            "event": "File '/usr/local/lib/python3.4/dist-packages/xmljson-0.1.6-py3.4.egg/EGG-INFO/PKG-INFO' is owned by root and has written permissions to anyone."
+	            "oldDay": "2016-12-29 10:36:54",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2016-12-29 10:36:54",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /opt is not on its own partition {CIS: 1.4 Debian Linux}. File: /opt. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
 	         },
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2016-09-23 16:03:00",
-	            "readDay": "2016-09-23 17:06:05",
-	            "event": "File '/usr/local/lib/python3.4/dist-packages/xmljson-0.1.6-py3.4.egg/EGG-INFO/SOURCES.txt' is owned by root and has written permissions to anyone."
+	            "oldDay": "2016-12-29 10:36:54",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2016-12-29 10:36:54",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /tmp is not on its own partition {CIS: 1.4 Debian Linux}. File: /etc/fstab. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get rootcheck pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1345,13 +1427,14 @@ Returns the PCI requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1,
+	      "totalItems": 2,
 	      "items": [
-	         "2.2.2"
+	         "2.2.2",
+	         "2.2.4"
 	      ]
 	   }
 	}
-
+	
 
 
 Run
@@ -1376,7 +1459,7 @@ Runs syscheck and rootcheck on all agent, due to OSSEC launches both processes a
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents",
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
 	    "error": 0
 	}
 
@@ -1410,7 +1493,7 @@ Runs syscheck and rootcheck on an agent, due to OSSEC launches both processes at
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-
+	
 
 
 
@@ -1454,6 +1537,8 @@ Returns all rules.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | level              | Range         | Filters the rules by level. level=2 or level=2-5.                                                                                                                                                      |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| path               | String        | Filters the rules by path.                                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | file               | String        | Filters the rules by file name.                                                                                                                                                                        |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | pci                | String        | Filters the rules by pci requirement.                                                                                                                                                                  |
@@ -1470,14 +1555,15 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1621,
+	      "totalItems": 1617,
 	      "items": [
 	         {
 	            "status": "enabled",
 	            "pci": [],
 	            "description": "Generic template for all syslog rules.",
-	            "file": "rules_config.xml",
+	            "file": "0010-rules_config.xml",
 	            "level": 0,
+	            "path": "/var/ossec/ruleset/rules",
 	            "groups": [
 	               "syslog"
 	            ],
@@ -1491,8 +1577,9 @@ Returns all rules.
 	            "status": "enabled",
 	            "pci": [],
 	            "description": "Generic template for all firewall rules.",
-	            "file": "rules_config.xml",
+	            "file": "0010-rules_config.xml",
 	            "level": 0,
+	            "path": "/var/ossec/ruleset/rules",
 	            "groups": [
 	               "firewall"
 	            ],
@@ -1505,7 +1592,7 @@ Returns all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get files of rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1538,6 +1625,12 @@ Returns the files of all rules.
 |                    |               | - disabled                                                                                                                                                                                             |
 |                    |               | - all                                                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| path               | String        | Filters the rules by path.                                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| file               | String        | Filters the rules by filefile.                                                                                                                                                                         |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| download           | String        | Downloads the file                                                                                                                                                                                     |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1554,48 +1647,58 @@ Returns the files of all rules.
 	      "items": [
 	         {
 	            "status": "enabled",
-	            "name": "amazon-ec2_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0010-rules_config.xml"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "amazon-iam_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0015-ossec_rules.xml"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "amazon_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0020-syslog_rules.xml"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "apache_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0025-sendmail_rules.xml"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "apparmor_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0030-postfix_rules.xml"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "arpwatch_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0035-spamd_rules.xml"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "asterisk_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0040-imapd_rules.xml"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "attack_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0045-mailscanner_rules.xml"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "auditd_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0050-ms-exchange_rules.xml"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "cimserver_rules.xml"
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0055-courier_rules.xml"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get rule groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1632,9 +1735,8 @@ Returns the groups of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 188,
+	      "totalItems": 200,
 	      "items": [
-	         "Amazon-vpc",
 	         "access_control",
 	         "access_denied",
 	         "accesslog",
@@ -1643,11 +1745,12 @@ Returns the groups of all rules.
 	         "adduser",
 	         "agent",
 	         "agentless",
-	         "amazon"
+	         "amazon",
+	         "amazon-ec2"
 	      ]
 	   }
 	}
-
+	
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1699,7 +1802,7 @@ Returns the PCI requirements of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rules by id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1709,7 +1812,7 @@ Returns the rules with the specified id.
 
 ``GET`` ::
 
-	/rules
+	/rules/:rule_id
 
 **Parameters:**
 
@@ -1744,8 +1847,9 @@ Returns the rules with the specified id.
 	            "status": "enabled",
 	            "pci": [],
 	            "description": "Unknown problem somewhere in the system.",
-	            "file": "syslog_rules.xml",
+	            "file": "0020-syslog_rules.xml",
 	            "level": 2,
+	            "path": "/var/ossec/ruleset/rules",
 	            "groups": [
 	               "syslog",
 	               "errors"
@@ -1759,7 +1863,7 @@ Returns the rules with the specified id.
 	      ]
 	   }
 	}
-
+	
 
 
 
@@ -1787,7 +1891,7 @@ Clears the syscheck database for all agents.
 ::
 
 	{
-	    "data": "Syscheck database deleted",
+	    "data": "Syscheck database deleted", 
 	    "error": 0
 	}
 
@@ -1818,7 +1922,7 @@ Clears the syscheck database for an agent.
 ::
 
 	{
-	    "data": "Syscheck database deleted",
+	    "data": "Syscheck database deleted", 
 	    "error": 0
 	}
 
@@ -1855,11 +1959,11 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "syscheckTime": "2016-09-23 16:02:48",
-	      "syscheckEndTime": "2016-09-23 16:02:58"
+	      "syscheckTime": "2016-12-29 10:29:51",
+	      "syscheckEndTime": "2016-12-29 10:36:33"
 	   }
 	}
-
+	
 
 Get syscheck files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1929,44 +2033,44 @@ Returns the syscheck files of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 129,
+	      "totalItems": 2914,
 	      "items": [
 	         {
-	            "sha1": "d960e2fb6c2ff88f48825164ce1aba104b7740fd",
+	            "sha1": "aace4dea6649327e1e711d4a8a88d9ba4f22201d",
 	            "group": "root",
 	            "uid": 0,
-	            "scanDate": "2016-09-23 16:02:54",
+	            "scanDate": "2016-12-29 10:46:03",
 	            "gid": 0,
 	            "user": "root",
-	            "file": "/usr/sbin/a2disconf",
-	            "modificationDate": "2016-07-20 06:48:42",
+	            "file": "!1483008362 /usr/bin/apidoc",
+	            "modificationDate": "2016-12-29 10:41:18",
 	            "octalMode": "120777",
 	            "permissions": "lrwxrwxrwx",
-	            "md5": "f5dacb6a9a342760e710fac300bbe0e5",
-	            "inode": 42785,
+	            "md5": "7f5c640ce36d798a7e56801d384cb0e7",
+	            "inode": 25923,
 	            "event": "added",
-	            "size": 7
+	            "size": 37
 	         },
 	         {
-	            "sha1": "a47104d4d0ff17d69e41d7ea23c2a298b5c9a3b8",
+	            "sha1": "b27ebe55858f31979b645a4244b55e6efadb4dae",
 	            "group": "root",
 	            "uid": 0,
-	            "scanDate": "2016-09-23 16:02:54",
+	            "scanDate": "2016-12-29 10:36:21",
 	            "gid": 0,
 	            "user": "root",
-	            "file": "/usr/sbin/arp",
-	            "modificationDate": "2014-11-08 18:09:08",
-	            "octalMode": "100755",
-	            "permissions": "-rwxr-xr-x",
-	            "md5": "51656b623bff69c1b4d9fcb29f64a33e",
-	            "inode": 7775,
+	            "file": "!1483007781 /boot/grub/grubenv",
+	            "modificationDate": "2016-09-19 15:09:44",
+	            "octalMode": "100644",
+	            "permissions": "-rw-r--r--",
+	            "md5": "2c738a08c10c18453dc86e83e4ad1e6f",
+	            "inode": 271264,
 	            "event": "added",
-	            "size": 55688
+	            "size": 1024
 	         }
 	      ]
 	   }
 	}
-
+	
 
 
 Run
@@ -1991,7 +2095,7 @@ Runs syscheck and rootcheck on all agent, due to OSSEC launches both processes a
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents",
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
 	    "error": 0
 	}
 
@@ -2025,3 +2129,7 @@ Runs syscheck and rootcheck on an agent, due to OSSEC launches both processes at
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
+	
+
+
+
