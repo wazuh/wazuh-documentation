@@ -1,7 +1,7 @@
 .. _installation_in_progress:
 
-Installation guide [in progress]
-===================================
+Installation guide
+==================
 
 This installation guide describes the installation and configuration of Wazuh in two servers:
 
@@ -30,8 +30,8 @@ These services will typically be installed on a machine other than the Elastic s
 .. toctree::
 	:maxdepth: 2
 
-	installation/wazuh_server_debian
-	installation/wazuh_server_centos
+	wazuh_server_debian
+	wazuh_server_centos
 
 - :ref:`Install on Debian / Ubuntu <wazuh_server_debian>`.
 - :ref:`Install on RedHat / CentOS <wazuh_server_centos>`.
@@ -44,10 +44,10 @@ These are the steps to install Elastic Stack server, and configure it to work wi
 .. toctree::
 	:maxdepth: 2
 
-	installation/elastic_server_debian
-	installation/elastic_server_centos
-	installation/elastic_ssl
-	installation/connect_wazuh_app
+	elastic_server_debian
+	elastic_server_centos
+	elastic_ssl
+	connect_wazuh_app
 
 - :ref:`Install on Debian / Ubuntu <elastic_server_debian>`.
 - :ref:`Install on RedHat / CentOS <elastic_server_centos>`.
@@ -60,9 +60,9 @@ Installing and connecting Wazuh agents
 .. toctree::
 	:maxdepth: 2
 
-	installation/wazuh_agent_debian
-	installation/wazuh_agent_centos
-	installation/wazuh_agent_connect
+	wazuh_agent_debian
+	wazuh_agent_centos
+	wazuh_agent_connect
 
 - :ref:`Install on Debian / Ubuntu <wazuh_agent_debian>`.
 - :ref:`Install on Debian / Ubuntu <wazuh_agent_centos>`.
