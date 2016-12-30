@@ -13,7 +13,7 @@ Wazuh Manager and API
 		cat > /etc/yum.repos.d/wazuh.repo << \\EOF
 		[wazuh_repo]
 		gpgcheck=1
-		gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
+		gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
 		enabled=1
 		name=RHEL-$releasever - Wazuh
 		baseurl=https://packages.wazuh.com/yum/el/$releasever/$basearch
@@ -25,7 +25,7 @@ Wazuh Manager and API
 		cat > /etc/yum.repos.d/wazuh.repo << \\EOF
 		[wazuh_repo]
 		gpgcheck=1
-		gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-WAZUH
+		gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
 		name=Fedora-$releasever - Wazuh
 		enabled=1
 		baseurl=https://packages.wazuh.com/yum/fc/$releasever/$basearch
