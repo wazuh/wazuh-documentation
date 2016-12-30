@@ -25,7 +25,7 @@ Wazuh also provides a centralized Web User Interface (fully integrated in Elasti
    upgrading/index
    learn_examples/index
    reference_manual
-   pci_dss
+   pci-dss/index
    wazuh_amazon
    wazuh_docker
    wazuh_puppet
