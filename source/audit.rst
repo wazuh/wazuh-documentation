@@ -1,4 +1,4 @@
-.. wazuh_modules:
+.. audit_integration:
 
 Audit integration guide
 ==================================

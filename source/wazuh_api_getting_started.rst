@@ -60,7 +60,7 @@ These are the basic concepts about requests and responses:
 * All requests accept the param *pretty* to convert the JSON response to a string formatted.
 
 
-.. _use_cases:
+.. _wazuh_api_use_cases:
 
 Use cases
 ---------------------------------
@@ -358,7 +358,7 @@ We hope you have seen the API potential with these real-life examples. Do not fo
 Using the API with cURL, Python and Powershell
 ---------------------------------------------------
 
-.. _curl-label:
+.. _api_curl_label:
 
 CURL
 ^^^^^^^^^^^^^^^^^^
@@ -395,7 +395,7 @@ cURL is a command-line tool for transferring data using various protocols. It ca
 
 ``{"error":"0","data":"Policy and auditing database updated"}``
 
-.. _python-label:
+.. _api_python-label:
 
 Python
 ^^^^^^^^^^^^^^^^^^
@@ -445,7 +445,7 @@ Output:
 
 Full example in ``wazuh-API/examples/api-client.py``.
 
-.. _powershell-label:
+.. _api_powershell_label:
 
 Powershell
 ^^^^^^^^^^^^^^^^^^

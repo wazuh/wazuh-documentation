@@ -13,8 +13,8 @@ Wazuh Modules
 .. toctree::
    :maxdepth: 2
 
-   modules/openscap/openscap
-   modules/database
+   openscap/index
+   database
 
 - :ref:`OpenSCAP Integration <openscap_module>`.
 - :ref:`Database Synchronization Module <database_module>`.

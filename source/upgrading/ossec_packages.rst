@@ -9,7 +9,7 @@ This section describes how to upgrade from OSSEC to Wazuh in case that OSSEC was
 Debian and Ubuntu based Linux distributions
 ---------------------------------------------------
 
-Follow the normal procedure to :ref:`install Wazuh <installation_in_progress>` and it will be automatically updated.
+Follow the normal procedure to :ref:`install Wazuh <installation>` and it will be automatically updated.
 
 .. warning::
     The configuration file **/var/ossec/etc/ossec.conf will be overwritten**. The *old* configuration file from the current installation is saved as *ossec.conf.deborig*. You should compare the new file with the old one.
@@ -46,7 +46,7 @@ Step 2: Remove your current installation. ::
     $ yum remove wazuh-hids
     $ rm -rf /var/ossec
 
-Step 3: :ref:`Install Wazuh <installation_in_progress>`.
+Step 3: :ref:`Install Wazuh <installation>`.
 
 Step 4: Restore configuration.
 
@@ -104,7 +104,7 @@ Step 2: Remove your current installation. ::
     $ yum remove ossec-hids-agent.x86_64
     $ rm -rf /var/ossec
 
-Step 3: :ref:`Install Wazuh <installation_in_progress>`.
+Step 3: :ref:`Install Wazuh <installation>`.
 
 Step 4: Restore configuration.
 

@@ -1,4 +1,4 @@
-.. _installation_in_progress:
+.. _installation:
 
 Installation guide
 ==================
@@ -35,6 +35,8 @@ These services will typically be installed on a machine other than the Elastic s
 
 - :ref:`Install on Debian / Ubuntu <wazuh_server_debian>`.
 - :ref:`Install on RedHat / CentOS <wazuh_server_centos>`.
+
+.. _installation_elastic:
 
 Installing Elastic Stack server
 -------------------------------

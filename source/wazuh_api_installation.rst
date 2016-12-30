@@ -12,7 +12,7 @@ Pre-requisites
 The API will be installed in the **same server that OSSEC Manager**. So, before you begin with this guide, you need:
 
  - A non-root user account with sudo privileges.
- - Wazuh HIDS Manager installed, :ref:`see installation <wazuh_installation>`.
+ - Wazuh HIDS Manager installed, :ref:`see installation <installation>`.
 
 
 Required packages

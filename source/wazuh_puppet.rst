@@ -231,7 +231,7 @@ The manager is configured by installing the ``ossec::server`` class, and using o
  - ``ossec::addlog``: to define additional log files to monitor.
 
 Example
-^^^^^^
+^^^^^^^
 Here is an example of a manifest ``ossec.pp``:
 
 OSSEC manager: ::

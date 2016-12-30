@@ -3,7 +3,7 @@
 Examples
 ------------
 
-.. _curl-label:
+.. _api_examples_curl_label:
 
 CURL
 +++++++++++++++++++++++++
@@ -40,7 +40,7 @@ cURL is a command-line tool for transferring data using various protocols. It ca
 
 ``{"error":"0","data":"Policy and auditing database updated","message":""}``
 
-.. _python-label:
+.. _api_examples_python_label:
 
 Python
 +++++++++++++++++++++++++
@@ -91,7 +91,7 @@ Output:
 
 Full example in ``wazuh-API/examples/api-client.py``.
 
-.. _powershell-label:
+.. _api_examples_powershell_label:
 
 Powershell
 +++++++++++++++++++++++++

@@ -127,7 +127,7 @@ The following are good examples of rootcheck rules developed to check the config
     [SSH Configuration - Root login allowed {PCI_DSS: 2.2.4}] [any]
     f:/etc/ssh/sshd_config -> !r:^# && r:PermitRootLogin\.+yes;
 
-In our :ref:`OSSEC Wazuh fork <wazuh_installation>`, the rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. Meaning that all rootchecks already have the PCI DSS requirement tag.
+In our :ref:`OSSEC Wazuh fork <installation>`, the rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. Meaning that all rootchecks already have the PCI DSS requirement tag.
 
 Use cases
 ^^^^^^^^^
@@ -253,7 +253,7 @@ Although `active response <http://ossec-docs.readthedocs.org/en/latest/manual/ar
 ELK
 ---
 
-`OSSEC Wazuh integration with ELK Stack <http://documentation.wazuh.com/en/latest/ossec_elk.html>`_ comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmarking. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
+:ref:`OSSEC Wazuh integration with ELK Stack <installation_elastic>` comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmarking. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
 
 The following requirements can be met with a combination of OSSEC + ELK Stack:
 
@@ -268,5 +268,5 @@ What's next
 
 Once you know how OSSEC can help with PCI DSS, we encourage you to move forward and try out ELK integration or the OSSEC Wazuh ruleset, check them out at:
 
-* :ref:`ELK Stack integration guide <ossec_elk>`
-* :ref:`OSSEC Wazuh Ruleset <ossec_ruleset>`
+* :ref:`ELK Stack integration guide <installation_elastic>`
+* :ref:`OSSEC Wazuh Ruleset <wazuh_ruleset>`

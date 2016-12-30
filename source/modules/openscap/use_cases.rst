@@ -1,4 +1,4 @@
-.. _use_cases:
+.. _openscap_use_cases:
 
 Use cases
 =============

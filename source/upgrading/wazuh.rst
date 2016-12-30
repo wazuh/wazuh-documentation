@@ -5,7 +5,7 @@ Upgrading from Wazuh
 
 This section describes the steps required to upgrade an existing Wazuh installation.
 
-Until *Wazuh v1.2* there was not Wazuh packages, so your current version was installed from source code using the script *install.sh* . Follow the normal procedure to :ref:`install Wazuh <installation_in_progress>` and it will be automatically updated.
+Until *Wazuh v1.2* there was not Wazuh packages, so your current version was installed from source code using the script *install.sh* . Follow the normal procedure to :ref:`install Wazuh <installation>` and it will be automatically updated.
 
 .. warning::
     The configuration file **/var/ossec/etc/ossec.conf will be overwritten**. The *old* configuration file from the current installation is saved as *ossec.conf.rpmorig* or *ossec.conf.deborig*. You should compare the new file with the old one.
