@@ -240,4 +240,4 @@ Once you have your ruleset up to date we encourage you to move forward and try o
 
 
 * :ref:`ELK Stack integration guide <installation_elastic>`
-* :ref:`Wazuh RESTful API installation Guide <wazuh_api>`
+* :ref:`Wazuh RESTful API installation Guide <api>`

@@ -1,4 +1,4 @@
-.. _wazuh_api_configuration:
+.. _api_configuration:
 
 Configuration
 ======================

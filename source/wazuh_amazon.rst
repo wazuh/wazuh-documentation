@@ -604,4 +604,4 @@ Once you have your rules for Amazon AWS up to date we encourage you to move forw
 
 
 * :ref:`ELK Stack integration guide <installation_elastic>`
-* :ref:`OSSEC Wazuh RESTful API installation Guide <wazuh_api>`
+* :ref:`OSSEC Wazuh RESTful API installation Guide <api>`

@@ -1,4 +1,4 @@
-.. _wazuh_api_installation:
+.. _api_installation:
 
 Installation
 ======================

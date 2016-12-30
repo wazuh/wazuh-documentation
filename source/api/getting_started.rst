@@ -1,4 +1,4 @@
-.. _wazuh_api_getting_started:
+.. _api_getting_started:
 
 Getting started
 ======================
@@ -65,7 +65,7 @@ These are the basic concepts about requests and responses:
 Use cases
 ---------------------------------
 
-This section will introduce you to use cases for the API, with the goal you can see its potential. You can find information about all the used requests in the :ref:`reference <ossec_api_reference>`.
+This section will introduce you to use cases for the API, with the goal you can see its potential. You can find information about all the used requests in the :ref:`reference <api_reference>`.
 
 Exploring the ruleset
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -352,7 +352,7 @@ Do you need the agent key?. Just get it with:
 
 Conclusion
 ^^^^^^^^^^^^^^^^^^
-We hope you have seen the API potential with these real-life examples. Do not forget to visit the :ref:`reference <ossec_api_reference>` to discover all the available requests. Here you find a :ref:`summary <request_list>`.
+We hope you have seen the API potential with these real-life examples. Do not forget to visit the :ref:`reference <api_reference>` to discover all the available requests. Here you find a :ref:`summary <request_list>`.
 
 
 Using the API with cURL, Python and Powershell

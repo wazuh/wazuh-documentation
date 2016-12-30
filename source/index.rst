@@ -30,6 +30,6 @@ Wazuh also provides a centralized Web User Interface (fully integrated in Elasti
    wazuh_docker
    wazuh_puppet
    wazuh_ruleset
-   wazuh_api
+   api/index
    modules/index
    audit

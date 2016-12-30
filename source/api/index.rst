@@ -1,4 +1,4 @@
-.. _wazuh_api:
+.. _api:
 
 Wazuh RESTful API
 ==========================
@@ -21,13 +21,17 @@ Wazuh API capabilities:
 * Error Handling
 
 
-.. topic:: Documentation sections
+.. rubric:: Documentation sections
 
-    .. toctree::
-       :maxdepth: 2
+- :ref:`api_installation`
+- :ref:`api_configuration`
+- :ref:`api_getting_started`
+- :ref:`api_reference`
+- :ref:`api_examples`
 
-       wazuh_api_installation
-       wazuh_api_configuration
-       wazuh_api_getting_started
-       wazuh_api_reference
-       wazuh_api_examples
+.. toctree::
+    installation
+    configuration
+    getting_started
+    reference
+    examples

@@ -1,4 +1,4 @@
-.. _wazuh_api_examples:
+.. _api_examples:
 
 Examples
 ------------
