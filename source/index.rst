@@ -23,7 +23,7 @@ Wazuh also provides a centralized Web User Interface (fully integrated in Elasti
    getting_started
    installation/index
    upgrading/index
-   learn_examples
+   learn_examples/index
    reference_manual
    pci_dss
    wazuh_amazon
