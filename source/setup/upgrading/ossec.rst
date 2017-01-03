@@ -1,9 +1,9 @@
-.. _upgrading:
+.. _upgrading_ossec:
 
-Upgrading
-===================================
+Upgrading from OSSEC
+===================================================
 
-This guide details how to perform the two types of upgrades: from OSSEC and from Wazuh.
+This section explains how to upgrade an existing OSSEC installation to Wazuh. You must follow the appropriate section depending on the type of your OSSEC installation: from sources or packages.
 
 To determine if an upgrade is supported for your installation, please consult this table:
 
@@ -12,14 +12,14 @@ To determine if an upgrade is supported for your installation, please consult th
 +==============+===================+===============+=======================================================================+
 | OSSEC 2.8.3+ | Sources           | Wazuh 1.2     | :ref:`Automatic <upgrading_ossec_sources>`                            |
 +--------------+-------------------+---------------+-----------------------------------------------------------------------+
-| OSSEC 2.8.3+ | Packages          | Wazuh 1.2     | :ref:`Automatic (Debian), Manual (CentOS) <upgrading_ossec_packages>` |
-+--------------+-------------------+---------------+-----------------------------------------------------------------------+
-| Wazuh 1.0+   | Sources           | Wazuh 1.2     | :ref:`Automatic <upgrading_wazuh>`                                    |
+| OSSEC 2.8.3+ | Packages          | Wazuh 1.2     | :ref:`Manual <upgrading_ossec_packages>`                              |
 +--------------+-------------------+---------------+-----------------------------------------------------------------------+
 
 
-.. toctree::
-   :maxdepth: 3
+.. topic:: Contents
 
-   ossec
-   wazuh
+    .. toctree::
+       :maxdepth: 2
+
+       ossec_packages
+       ossec_sources
