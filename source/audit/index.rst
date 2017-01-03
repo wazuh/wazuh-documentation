@@ -9,12 +9,12 @@ Audit integration guide
 
     ToDo
 
-.. topic:: Documentation sections
+.. topic:: Contents
 
     .. toctree::
        :maxdepth: 2
 
-       audit/basic_concepts
-       audit/configuration
-       audit/use_cases
-       audit/pci_dss
+       basic_concepts
+       configuration
+       use_cases
+       pci_dss
