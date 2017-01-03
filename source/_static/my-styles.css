@@ -1,248 +1,104 @@
-
-a {
-  color: #1a80b6;
-  cursor: pointer;
-}
-
-#header{
-	width: 100%;
-}
-.header-social{
-	text-align: right;
-	float: right;
-	width: 100%;
-}
-.header-social > ul {
-	width: 100%;
-	list-style-type: none;
-	margin: 0px;
-	padding: 0px;
-	font-size: 12px;
-	font-weight: 400;
-	ont-style: normal;
-	color: rgb(116, 116, 116);
-	line-height: 44px;
-}
-.header-social li {
-
-	float: right ;
-	display: block;
-	padding-right: 20px
-}
-.header-menu {
-	width: 100%;
-	height: 111px;
-}
-
-.header-menu > .logo {
-	position: relative;
-	clear: both;
-	float: left;
-}
-.normal_logo {
-	width: 100px;
-	height: 50px;
-}
-
-.header-menu > ul {
-	width: 100%;
-	list-style-type: none;
-	margin: 0px;
-	padding: 0px;
-	font-weight: 400;
-	font-style: normal;
-	line-height: 44px;
-	color: rgb(51, 51, 51);
-	font-size: 13px;
-	font-family: 'Open Sans&quot;,Arial';
-}
-
-.header-menu li {
-	float: right;
-	display: block;
-	line-height: 16px;
-	height: 70px;
-	padding-right: 10px;
-}
-.header-menu a {
-	height: 68px;
-	line-height: 45px;
-	box-sizing: content-box;
-	color: rgb(102, 102, 102);
-}
-.fa {
-  -moz-osx-font-smoothing: grayscale;
-  display: inline-block;
-  font-family: FontAwesome;
-  font-feature-settings: normal;
-  font-kerning: auto;
-  font-language-override: normal;
-  font-size: inherit;
-  font-size-adjust: none;
-  font-stretch: normal;
-  font-style: normal;
-  font-synthesis: weight style;
-  font-variant: normal;
-  font-weight: normal;
-  line-height: 1;
-  text-rendering: auto;
-}
-.fa-twitter::before {
-  content: "";
-}
-
-.header-social i._mi {
-  font-size: 1.2em;
-  height: auto;
-  line-height: 1;
-  margin-top: -0.265em;
-  width: auto;
-}
+/* Body and layout background *************************************************/
 
 .wy-body-for-nav {
-    height: 100%;
-}
-
-.wy-body-for-nav {
-    background-color: #edf0f2;
-    background-image: none;
-}
-
-.wy-nav-side, .wy-nav-content, .wy-grid-for-nav, .wy-nav-content-wrap {
-    background: #fff none repeat scroll 0 0;
-
+    background: #edf0f2;
 }
 
 .wy-grid-for-nav {
-    max-width: 1400px;
-    margin: 0 auto;
-    position: static;
-    height: initial;
-    min-height: 100%;
-}
-
-.wy-nav-content-wrap {
-  margin-left: 324px;
-}
-
-.wy-nav-content {
-  max-width: 97%;
-  margin: 0 auto;
-}
-
-.wy-menu-vertical a:hover {
-  background-color: #f0f0f0;
-}
-
-.wy-menu-vertical a {
-  color: rgba(0, 0, 0, 0.7);
-  line-height: 30px;
-}
-
-ul.current li.toctree-l1 > .reference.internal::before {
-  content: "";
-  font-family: "FontAwesome";
-  margin: 0 5px 0 13px;
-  float: right;
-}
-
-.wy-menu-vertical li.on a, .wy-menu-vertical li.current > a {
-  background: #1a80b6 none repeat scroll 0 0;
-  border: medium none;
-  color: #fff;
-}
-.wy-menu-vertical li span.toctree-expand::before, .wy-menu-vertical li.on a span.toctree-expand::before, .wy-menu-vertical li.current > a span.toctree-expand::before {
-  display: none;
-}
-.wy-menu-vertical li.current a {
-  border: medium none;
-}
-
-h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
-  font-family: "Lato","ff-tisa-web-pro","Georgia",Arial,sans-serif;
-  font-weight: normal;
-  margin-top: 0;
-}
-
-ul.current li.toctree-l2 {
-  border-left: 4px solid #1a80b6;
-}
-ul.current li.toctree-l3 {
-  border-left: 4px solid #d6d6d6;
-}
-.wy-menu-vertical li.on a:hover, .wy-menu-vertical li.current > a:hover {
-  background: #1a80b6 none repeat scroll 0 0;
-}
-
-.wy-menu-vertical a:active {
-  color: rgba(0, 0, 0, 0.7);
-  cursor: pointer;
-}
-.wy-menu-vertical li.current ul {
-  display: block;
-  background-color: #f1f1f1;
-}
-.wy-menu-vertical li.toctree-l2.current > a {
-  background: #f1f1f1 none repeat scroll 0 0;
-  color: #000;
-}
-
-.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a {
-  background: #f1f1f1 none repeat scroll 0 0;
-}
-.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a:hover {
-  background: #d6d6d6 none repeat scroll 0 0;
-}
-
-.wy-menu-vertical li.toctree-l3.current li.toctree-l4>a {
-  background: #f1f1f1 none repeat scroll 0 0;
-  color: #000;
-}
-.wy-menu-vertical li.on a, .wy-menu-vertical .toctree-l3.current > a {
-  color: #000;
+    background: #fcfcfc;
 }
 
 .wy-nav-side {
-  width: 332px;
-  position: static;
-  float: left;
-  padding-bottom: 2em;
+    background: inherit;
 }
 
-.wy-side-scroll {
-  width: 100%;
-  overflow: hidden;
+/* Font family ****************************************************************/
+
+h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.wy-side-nav-search {
-  width: 330px;
+/* Side menu color and background *********************************************/
+
+.wy-menu-vertical a {
+    color: gray;
 }
 
-.wy-menu-vertical {
-  width: 347px;
+.wy-menu-vertical li.current {
+    background: #edf0f2;
 }
 
-.codeblock, pre.literal-block, .rst-content .literal-block, .rst-content pre.literal-block, div[class^="highlight"] {
-  background: #f5f5f5 none repeat scroll 0 0;
-  border: 1px solid #ccc;
-  margin: 1px 0 24px;
-  overflow-x: auto;
-  padding: 0;
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a,
+.wy-menu-vertical li.toctree-l3.current li.toctree-l4 > a {
+    background: inherit;
 }
 
-.rst-content tt, .rst-content tt, .rst-content code {
-  color: #000;
-  padding: 0px 5px;
+.wy-menu-vertical li.toctree-l1.current > a {
+    background: #2980B9;
+    color: #fcfcfc;
 }
 
+.wy-menu-vertical li.toctree-l1.current > ul {
+    border-left: solid thick #2980B9;
+}
 
-ul li.toctree-l1 > .reference.internal::before {
+.wy-menu-vertical li.toctree-l1.current > a:hover {
+    background: #2980B9;
+}
+
+.wy-menu-vertical li.current > a {
+    border-right: solid 1px #c9c9c9;
+    border-top: none;
+    border-bottom: none;
+}
+
+.wy-menu-vertical li.toctree-l1 > a:hover {
+    background: #c9c9c9;
+}
+
+.wy-menu-vertical li.toctree-l2.current > ul {
+    border-left: solid thick #c9c9c9;
+}
+
+/* Side menu sizes ************************************************************/
+
+.wy-menu-vertical a {
+    line-height: 24px;
+}
+
+/* Link arrow for TOC entries *************************************************/
+
+.wy-menu-vertical li.toctree-l1 > .reference.internal::before {
   content: "";
   font-family: "FontAwesome";
-  margin: 0 5px 0 13px;
   float: right;
 }
 
-.btn {
-  box-shadow: none;
+/* Center body ****************************************************************/
+
+.wy-grid-for-nav {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: static;
+}
+
+.wy-nav-side {
+    position: static;
+    float: left;
+}
+
+@media screen and (max-width: 768px) {
+    .wy-nav-side {
+        position: fixed;
+    }
+
+    .wy-nav-side.shift {
+        position: static;
+    }
+}
+
+/* Hide version ***************************************************************/
+
+.version {
+    display: none;
 }
