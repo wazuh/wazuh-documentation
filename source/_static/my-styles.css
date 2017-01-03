@@ -25,7 +25,7 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 }
 
 .wy-menu-vertical li.current {
-    background: #edf0f2;
+    background: #fcfcfc;
 }
 
 .wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a,
@@ -46,8 +46,8 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     background: #2980B9;
 }
 
-.wy-menu-vertical li.current > a {
-    border-right: solid 1px #c9c9c9;
+.wy-menu-vertical li.current a {
+    border-right: none;
     border-top: none;
     border-bottom: none;
 }
