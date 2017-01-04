@@ -21,17 +21,13 @@ Wazuh API capabilities:
 * Error Handling
 
 
-.. rubric:: Documentation sections
+.. topic:: Contents
 
-- :ref:`api_installation`
-- :ref:`api_configuration`
-- :ref:`api_getting_started`
-- :ref:`api_reference`
-- :ref:`api_examples`
+    .. toctree::
+       :maxdepth: 2
 
-.. toctree::
-    installation
-    configuration
-    getting_started
-    reference
-    examples
+       installation
+       configuration
+       getting_started
+       reference
+       examples
