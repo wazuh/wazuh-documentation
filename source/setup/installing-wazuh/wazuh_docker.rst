@@ -3,6 +3,13 @@
 Wazuh Docker container
 ======================
 
+Introduction
+-----------------------
+
+.. image:: ../../images/installation/ins_option3.png
+    :align: center
+    :width: 100%
+
 Docker installation
 -------------------
 

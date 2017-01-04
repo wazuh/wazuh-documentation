@@ -1,6 +1,6 @@
 .. _wazuh_agent_connect:
 
-Connect Wazuh agent to manager
+Register agents manually
 ==============================
 
 .. note::

@@ -1,7 +1,7 @@
 .. _example_authd:
 
-Use Authd to register agents
-============================
+Use Authd to register agents automatically
+=============================================
 
 Get a SSL certificate
 ---------------------

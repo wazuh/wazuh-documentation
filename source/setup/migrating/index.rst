@@ -1,6 +1,6 @@
 .. _upgrading_ossec:
 
-Upgrading from OSSEC
+Migrating from OSSEC
 ===================================================
 
 This section explains how to upgrade an existing OSSEC installation to Wazuh. You must follow the appropriate section depending on the type of your OSSEC installation: from sources or packages.

@@ -6,6 +6,8 @@ Setup Wazuh
 .. toctree::
     :maxdepth: 2
 
-    installation/index
-    upgrading/wazuh
-    upgrading/ossec
+    installing-wazuh/index
+    migrating/index
+    installing-agents/index
+    connecting-agents/index
+    upgrading/index
