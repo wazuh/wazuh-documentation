@@ -21,4 +21,17 @@ To determine if an upgrade is supported for your installation, please consult th
 .. note::
     A backup of your previous ruleset will be saved at */var/ossec/etc/backup_ruleset*. You need to review it in case you have created new rules/decoders in other file than *local_rules.xml* or *local_decoder.xml*.
 
-Follow the normal procedure to :ref:`install Wazuh <installation>` and it will be automatically updated.
+
+Following the guide to install Wazuh, your current installation will be automatically update:
+
+ - :ref:`Install Wazuh server on CentOS <wazuh_server_centos>`
+ - :ref:`Install Wazuh server on Debian <wazuh_server_debian>`
+ - :ref:`Install Wazuh agent on Debian <wazuh_agent_debian>`
+ - :ref:`Install Wazuh agent on CentOS <wazuh_agent_centos>`
+
+Once Wazuh Manager and Agents are updated, it is necessary to update Elastic configuration.
+
+ToDo:
+
+ - Logstash forwarder vs Filebeat
+ - wazuh-elastic2-template.json vs wazuh-elastic5-template.json
