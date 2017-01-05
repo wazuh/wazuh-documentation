@@ -38,6 +38,7 @@ import sphinx_rtd_theme
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
+    'sphinxcontrib.images',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
