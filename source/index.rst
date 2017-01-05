@@ -58,7 +58,7 @@ Available documentation
    learn_examples/index
    reference_manual
    pci-dss/index
-   wazuh_amazon
+   amazon/index
    ruleset/index
    api/index
    modules/index
