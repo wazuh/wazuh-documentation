@@ -62,22 +62,36 @@ Use cases
 
 In this scenario, we try to open the file *cardholder_data.txt*. Since our current user doesn't have read access to the file, we run *sudo* to elevate privileges.
 
-.. image:: ../images/pci/log_analysis_1.png
+.. thumbnail:: ../images/pci/log_analysis_1.png
+    :title: Sudo command on agent
     :align: center
-    :width: 100%
+    :width: 75%
+    :group: use_cases
 
 Using *sudo* log analysis decoder and rules, OSSEC will generate an alert for this particular action. Since we have JSON output enabled, we can see the alert in both files *alerts.log* and *alerts.json*. Using the rule tags we can also see which PCI DSS requirements are specifically related to this alert.
 
-.. image:: ../images/pci/log_analysis_2.png
+.. thumbnail:: ../images/pci/log_analysis_2.png
+    :title: Alert on Wazuh Manager
     :align: center
     :width: 100%
+    :group: use_cases
+
+.. thumbnail:: ../images/pci/log_analysis_3.png
+    :title: JSON alert output
+    :align: center
+    :width: 100%
+    :group: use_cases
 
 Kibana displays information in an organized way, allowing filtering by different type of alert fields, including compliance controls. We have also developed some specific dashboards to display the PCI DSS related alerts.
 
-.. image:: ../images/pci/log_analysis_3.png
+.. thumbnail:: ../images/pci/log_analysis_4.png
+    :title: Alert visualization on Kibana discover
     :align: center
     :width: 100%
+    :group: use_cases
 
-.. image:: ../images/pci/log_analysis_4.png
+.. thumbnail:: ../images/pci/log_analysis_5.png
+    :title: Wazuh PCI DSS dashboard for Kibana
     :align: center
     :width: 100%
+    :group: use_cases
