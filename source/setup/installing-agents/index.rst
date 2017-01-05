@@ -3,7 +3,11 @@
 Installing agents
 ======================================================
 
-Text
+This installation guide describes how to deploy Wazuh agents in production hosts.
+
+.. image:: ../../images/installation/ins_agents.png
+    :align: center
+    :width: 100%
 
 Manual deployment
 --------------------------
