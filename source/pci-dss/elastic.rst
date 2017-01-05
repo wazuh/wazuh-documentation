@@ -3,9 +3,9 @@
 Elastic Stack
 =============
 
-:ref:`OSSEC Wazuh integration with Elastic Stack <installation_elastic>` comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmarking. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
+:ref:`Wazuh integration with Elastic Stack <installation_elastic>` comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmarking. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
 
-The following requirements can be met with a combination of OSSEC + ELK Stack:
+The following requirements can be met with a combination of Wazuh + Elastic Stack:
 
 + *10.5 Secure audit trails so they cannot be altered.*
 

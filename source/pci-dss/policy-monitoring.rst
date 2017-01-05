@@ -9,7 +9,7 @@ There are several PCI DSS requirements to verify that systems are properly harde
 
 *2.2 Develop configuration standards for all system components. Assure that these standards address all known security vulnerabilities and are consistent with industry-accepted system hardening standards. Sources of industry-accepted system hardening standards may include, but are not limited to: Center for Internet Security (CIS), International Organization for Standardization (ISO), SysAdmin Audit Network Security (SANS), Institute National Institute of Standards Technology (NIST).*
 
-OSSEC includes out-of-the-box CIS baselines for Debian and Redhat and other baselines could be created for other systems or applications, just by adding the corresponding rootcheck file:
+Wazuh includes out-of-the-box CIS baselines for Debian and Redhat and other baselines could be created for other systems or applications, just by adding the corresponding rootcheck file:
 
 ::
 

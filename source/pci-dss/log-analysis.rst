@@ -3,13 +3,13 @@
 Log analysis
 ============
 
-Here we will use OSSEC log analysis collection and analysis capabilities to meet the following PCI DSS controls:
+Here we will use Wazuh log analysis collection and analysis capabilities to meet the following PCI DSS controls:
 
-+ *10.2.4 Invalid logical access attempts*
++ *10.2.4*: Invalid logical access attempts.
 
-+ *10.2.5 Use of and changes to identification and authentication mechanisms—including but not limited to creation of new accounts and escalation of privileges—and all changes, additions, or deletions to accounts with root or administrative privileges*
++ *10.2.5*: Use of and changes to identification and authentication mechanisms —including but not limited to creation of new accounts and escalation of privileges— and all changes, additions, or deletions to accounts with root or administrative privileges.
 
-These controls require us to log invalid logical access attempts, multiple invalid login attempts (possible brute force attacks), escalation privileges, changes in accounts, etc. To achieve this, we have added PCI DSS tags to OSSEC log analysis rules, mapping them to the corresponding requirement. This way, it will be easy to analyze and visualize our PCI DSS related alerts.
+These controls require us to log invalid logical access attempts, multiple invalid login attempts (possible brute force attacks), escalation privileges, changes in accounts, etc. In order to achieve this, we have added PCI DSS tags to OSSEC log analysis rules, mapping them to the corresponding requirement. This way, it will be easy to analyze and visualize our PCI DSS related alerts.
 
 The syntax used for rule tagging is **pci_dss_** followed by the number of the requirement. In this case those would be: pci_dss_10.2.4 and pci_dss_10.2.5.
 

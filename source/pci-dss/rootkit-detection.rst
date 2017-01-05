@@ -39,7 +39,7 @@ Rootcheck helps to meet PCI DSS requirement 11.4 related to intrusions, trojans 
 Use cases
 ---------
 
-OSSEC performs several tests to detect rootkits, one of them is to check the hidden files in /dev. The */dev* directory should only contain device-specific files such as the primary IDE hard disk (/dev/hda), the kernel random number generators (/dev/random and /dev/urandom), etc. Any additional files, outside of the expected device-specific files, should be inspected because many rootkits use /dev as a storage partition to hide files. In the following example we have created the file .hid which is detected by OSSEC and generates the corresponding alert.
+Wazuh performs several tests to detect rootkits, one of them is to check the hidden files in /dev. The */dev* directory should only contain device-specific files such as the primary IDE hard disk (/dev/hda), the kernel random number generators (/dev/random and /dev/urandom), etc. Any additional files, outside of the expected device-specific files, should be inspected because many rootkits use /dev as a storage partition to hide files. In the following example we have created the file .hid which is detected by OSSEC and generates the corresponding alert.
 
 ::
 
