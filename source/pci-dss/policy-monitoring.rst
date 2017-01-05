@@ -40,16 +40,22 @@ Use cases
 
 In order to check the security parameters of SSH (and meet the requirement 2.2.4), we have developed the rootchecks *system_audit_ssh*. In our example, when OSSEC runs the rootcheck scan, it is able to detect some errors in the SSH configuration.
 
-.. image:: ../images/pci/policy_monitoring_1.png
+.. thumbnail:: ../images/pci/policy_monitoring_1.png
+    :title: Alert and logs about SSH misconfiguration
     :align: center
     :width: 100%
+    :group: use_cases
 
 Kibana shows the full information about the alert.
 
-.. image:: ../images/pci/policy_monitoring_2.png
+.. thumbnail:: ../images/pci/policy_monitoring_2.png
+    :title: Alert visualization on Kibana Discover
     :align: center
     :width: 100%
+    :group: use_cases
 
-.. image:: ../images/pci/policy_monitoring_3.png
+.. thumbnail:: ../images/pci/policy_monitoring_3.png
+    :title: Wazuh PCI DSS dashboard showing PCI DSS 2. alerts
     :align: center
     :width: 100%
+    :group: use_cases
