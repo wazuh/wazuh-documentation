@@ -23,3 +23,4 @@ To determine if an upgrade is supported for your installation, please consult th
 
        ossec_packages
        ossec_sources
+       migrating_ossec_elastic
