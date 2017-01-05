@@ -7,7 +7,7 @@ Install Wazuh agent on CentOS
 
 	a) For RHEL or CentOS::
 
-		cat > /etc/yum.repos.d/wazuh.repo << \\EOF
+		cat > /etc/yum.repos.d/wazuh.repo <<\EOF
 		[wazuh_repo]
 		gpgcheck=1
 		gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
@@ -19,7 +19,7 @@ Install Wazuh agent on CentOS
 
 	b) For Fedora::
 
-		cat > /etc/yum.repos.d/wazuh.repo << \\EOF
+		cat > /etc/yum.repos.d/wazuh.repo <<\EOF
 		[wazuh_repo]
 		gpgcheck=1
 		gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
