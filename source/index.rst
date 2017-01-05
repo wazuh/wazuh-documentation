@@ -3,16 +3,16 @@
 Welcome to Wazuh
 ================
 
-.. |LOG_ANALYSIS_ICON| image:: images/icons/Log_analysis_12x12.png 
-.. |FILE_INTEGRITY_ICON| image:: images/icons/File_integrity_12x12.png 
-.. |INTRUSION_ANOMALIES_ICON| image:: images/icons/Intrusion_anomalies_12x12.png 
-.. |POLICY_MONITORING_ICON| image:: images/icons/Policy_monitoring_12x12.png 
+.. |LOG_ANALYSIS_ICON| image:: images/icons/Log_analysis_12x12.png
+.. |FILE_INTEGRITY_ICON| image:: images/icons/File_integrity_12x12.png
+.. |INTRUSION_ANOMALIES_ICON| image:: images/icons/Intrusion_anomalies_12x12.png
+.. |POLICY_MONITORING_ICON| image:: images/icons/Policy_monitoring_12x12.png
 
 Wazuh helps to get security visibility into your infrastructure, by monitoring hosts at a system and application level. The solution, based on multi-platform and lightweight agents, provides the following capabilities:
 
  | |LOG_ANALYSIS_ICON| **Log management and analysis**
  | Wazuh agents read operating system logs and events, forwarding them to a central manager for analysis and storage. The purpose of this process is the identification of application or system errors, misconfigurations, intrusion attempts, policy violations or security issues.
- |  
+ |
  | |FILE_INTEGRITY_ICON| **File integrity monitoring**
  | Wazuh monitors the file system, identifying changes in permissions, attributes, contents or ownership.
  |
@@ -59,7 +59,7 @@ Available documentation
    reference_manual
    pci-dss/index
    wazuh_amazon
-   wazuh_ruleset
+   ruleset/index
    api/index
    modules/index
    audit/index

@@ -34,4 +34,4 @@ What's next
 Once you know how OSSEC can help with PCI DSS, we encourage you to move forward and try out Elastic integration or the OSSEC Wazuh ruleset, check them out at:
 
 * :ref:`Elastic Stack integration guide <installation_elastic>`
-* :ref:`OSSEC Wazuh Ruleset <wazuh_ruleset>`
+* :ref:`OSSEC Wazuh Ruleset <ruleset>`
