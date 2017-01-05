@@ -1,4 +1,4 @@
-.. _wazuh_agent_connect:
+.. _register_agent_authd:
 
 Register agents manually
 ==============================

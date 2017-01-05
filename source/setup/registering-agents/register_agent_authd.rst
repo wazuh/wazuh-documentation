@@ -1,10 +1,29 @@
-.. _example_authd:
+.. _register_agent_manual:
 
-Use Authd to register agents automatically
+Register agents automatically with authd
 =============================================
 
+Choose the method that best meets your needs:
+
++--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Method                                           | Description                                                                                                                 |
++==================================================+=============================================================================================================================+
+| Simple method                                    | The easiest method. There are no host verification.                                                                         |
++--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Use a password to authorize agents               | Allows agents to authenticate by a shared password. This method is easy but does not perform host validation.               |
++--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Verify manager via SSL                           | The manager's certificate is signed by a CA that agents use to validate the server. It may include host checking.           |
++-----------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Verify agents via SSL | Host validation          | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
++                       +--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|                       | No host validation       | The manager validates the agent by CA but not the host address. This method allows to use a shared agent certificate.       |
++-----------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+
+Simple method
+---------------
+
 Get a SSL certificate
----------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 The first step is to get a SSL key and certificate. This is required in order to make Authd to work.
 
@@ -19,8 +38,8 @@ The first step is to get a SSL key and certificate. This is required in order to
     # (Server)
     openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /var/ossec/etc/sslmanager.key -out /var/ossec/etc/sslmanager.cert
 
-Simple way
-----------
+Register the agent
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Start the authd server::
 
@@ -47,7 +66,7 @@ On the other hand, **duplicated IPs are not allowed**. So an agent won't be adde
 
 The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be erased). In this case, 0 means to delete anyway.
 
-Protecting agent authorization
+Secure methods
 ------------------------------
 
 Launching the Authd daemon with default options would allow any agent to connect to a manager. The following options provides some mechanisms to authorize connections. We will introduce the following methods:
@@ -67,8 +86,8 @@ Launching the Authd daemon with default options would allow any agent to connect
 .. note::
     These methods can be mixed.
 
-Protect authd via password
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Use a password to authorize agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Manager can be protected from unauthorized connections by using a password. We can choose one by ourself or let Authd to generate a key randomly.
 
@@ -113,7 +132,7 @@ First we are going to create a certificate of authority (CA) that we will use to
 .. warning::
     The file ``rootCA.key`` that we have just created is the **private key** of the certificate of authority. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
 
-Use SSL to verify the manager
+Verify manager via SSL
 """""""""""""""""""""""""""""
 
 1. Issue and sign a certificate for the Authd server, entering the hostname (or the IP address) that agents will use to connect to the server. For example, if the server's IP is 192.168.1.2::
@@ -133,7 +152,7 @@ Use SSL to verify the manager
     cp rootCA.pem /var/ossec/etc
     agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
 
-Use SSL to verify the client (no host validation)
+Verify agents via SSL (no host validation)
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 In this example we are going to create a certificate for agents without specifying their hostname, so that certificate can be used by many agents. This is useful to verify that agents have a certificate signed by our CA, no matter where are they connecting from.
@@ -155,7 +174,7 @@ In this example we are going to create a certificate for agents without specifyi
     cp sslagent.cert sslagent.key /var/ossec/etc
     agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
-Use SSL to verify the client (host validation)
+Verify agents via SSL (host validation)
 """"""""""""""""""""""""""""""""""""""""""""""
 
 This is an alternative method to the last section. In this case we will attach the agent's certificate to the visible agent address respect of the manager.

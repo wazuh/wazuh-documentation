@@ -9,5 +9,5 @@ Setup Wazuh
     installing-wazuh/index
     migrating/index
     installing-agents/index
-    connecting-agents/index
+    registering-agents/index
     upgrading/index

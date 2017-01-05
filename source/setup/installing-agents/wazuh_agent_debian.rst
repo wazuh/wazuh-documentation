@@ -57,4 +57,4 @@ Install Wazuh agent on Debian
 Next steps
 ----------
 
-At this point the Wazuh agent is installed and configured. Now we should :ref:`connect it to the manager <wazuh_agent_connect>`.
+At this point the Wazuh agent is installed and configured. Now we should :ref:`connect it to the manager <connecting_agents>`.
