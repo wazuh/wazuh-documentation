@@ -26,6 +26,9 @@ This installation guide describes the installation and configuration of Wazuh in
 .. note::
 	Before installing the components please configure your NTP to sync time.
 
+
+.. _installing_wazuh_server:
+
 Installing Wazuh server
 -----------------------
 
@@ -57,5 +60,18 @@ These are the steps to install Elastic Stack server, and configure it to work wi
 
 	elastic_server_debian
 	elastic_server_centos
+
+Configuring Elastic Stack server
+------------------------------------
+
+Finally, we configure the Elastic server and Wazuh App.
+
+.. image:: ../../../images/installation/ins_option1a.png
+    :align: center
+    :width: 100%
+
+.. toctree::
+	:maxdepth: 1
+
 	elastic_ssl
 	connect_wazuh_app

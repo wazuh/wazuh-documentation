@@ -1,7 +1,4 @@
-.. wazuh_docker:
-
-Wazuh Docker container
-======================
+.. _wazuh_docker:
 
 Introduction
 -----------------------
@@ -34,7 +31,7 @@ adding your user to the "docker" group with something like: ::
 .. note:: Remember that you will have to log out and back in for this to take effect!
 
 
-Wazuh-ELK Container
+Wazuh Container
 -------------------
 
 These Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/wazuh-docker>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <installation>`.
