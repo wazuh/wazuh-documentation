@@ -8,20 +8,21 @@
     background: #fcfcfc;
 }
 
-.wy-nav-side {
-    background: inherit;
-}
-
 /* Font family ****************************************************************/
 
 h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
 }
 
 /* Side menu color and background *********************************************/
 
 .wy-menu-vertical a {
     color: gray;
+}
+
+.wy-nav-side {
+    background: inherit;
 }
 
 .wy-menu-vertical li.current {
@@ -66,14 +67,6 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     line-height: 24px;
 }
 
-/* Link arrow for TOC entries *************************************************/
-
-.wy-menu-vertical li.toctree-l1 > .reference.internal::before {
-  content: "";
-  font-family: "FontAwesome";
-  float: right;
-}
-
 /* Center body ****************************************************************/
 
 .wy-grid-for-nav {
@@ -101,4 +94,10 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 
 .version {
     display: none;
+}
+
+/* Spaces between lines at blocks *********************************************/
+
+.line-block {
+    line-height: 24px;
 }
