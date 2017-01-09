@@ -17,48 +17,24 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 
 /* Side menu color and background *********************************************/
 
-.wy-menu-vertical a {
-    color: gray;
-}
-
+/* Global (L1) background */
 .wy-nav-side {
-    background: inherit;
+    background: #f0f0f0;
 }
 
-.wy-menu-vertical li.current {
-    background: #fcfcfc;
+/* L1 hovered */
+.wy-menu-vertical a:hover {
+    background: #e3e3e3;
 }
 
-.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a,
-.wy-menu-vertical li.toctree-l3.current li.toctree-l4 > a {
-    background: inherit;
+/* L1 text */
+.wy-menu-vertical a {
+    color: #404040;
 }
 
-.wy-menu-vertical li.toctree-l1.current > a {
-    background: #2980B9;
-    color: #fcfcfc;
-}
-
-.wy-menu-vertical li.toctree-l1.current > ul {
-    border-left: solid thick #2980B9;
-}
-
-.wy-menu-vertical li.toctree-l1.current > a:hover {
-    background: #2980B9;
-}
-
+/* Submenu text */
 .wy-menu-vertical li.current a {
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
-}
-
-.wy-menu-vertical li.toctree-l1 > a:hover {
-    background: #c9c9c9;
-}
-
-.wy-menu-vertical li.toctree-l2.current > ul {
-    border-left: solid thick #c9c9c9;
+    color: #404040;
 }
 
 /* Side menu sizes ************************************************************/
