@@ -66,7 +66,6 @@ In this scenario, we try to open the file *cardholder_data.txt*. Since our curre
     :title: Sudo command on agent
     :align: center
     :width: 75%
-    :group: use_cases
 
 Using *sudo* log analysis decoder and rules, OSSEC will generate an alert for this particular action. Since we have JSON output enabled, we can see the alert in both files *alerts.log* and *alerts.json*. Using the rule tags we can also see which PCI DSS requirements are specifically related to this alert.
 
@@ -74,13 +73,11 @@ Using *sudo* log analysis decoder and rules, OSSEC will generate an alert for th
     :title: Alert on Wazuh Manager
     :align: center
     :width: 100%
-    :group: use_cases
 
 .. thumbnail:: ../images/pci/log_analysis_3.png
     :title: JSON alert output
     :align: center
     :width: 100%
-    :group: use_cases
 
 Kibana displays information in an organized way, allowing filtering by different type of alert fields, including compliance controls. We have also developed some specific dashboards to display the PCI DSS related alerts.
 
@@ -88,10 +85,8 @@ Kibana displays information in an organized way, allowing filtering by different
     :title: Alert visualization on Kibana discover
     :align: center
     :width: 100%
-    :group: use_cases
 
 .. thumbnail:: ../images/pci/log_analysis_5.png
     :title: Wazuh PCI DSS dashboard for Kibana
     :align: center
     :width: 100%
-    :group: use_cases

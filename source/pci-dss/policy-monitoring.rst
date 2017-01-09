@@ -44,7 +44,6 @@ In order to check the security parameters of SSH (and meet the requirement 2.2.4
     :title: Alert and logs about SSH misconfiguration
     :align: center
     :width: 100%
-    :group: use_cases
 
 Kibana shows the full information about the alert.
 
@@ -52,10 +51,8 @@ Kibana shows the full information about the alert.
     :title: Alert visualization on Kibana Discover
     :align: center
     :width: 100%
-    :group: use_cases
 
 .. thumbnail:: ../images/pci/policy_monitoring_3.png
     :title: Wazuh PCI DSS dashboard showing PCI DSS 2. alerts
     :align: center
     :width: 100%
-    :group: use_cases
