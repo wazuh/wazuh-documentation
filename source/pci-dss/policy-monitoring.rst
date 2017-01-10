@@ -77,31 +77,35 @@ In order to check the security parameters of SSH (and meet the requirement 2.2.4
 .. code-block:: json
 
     {
-        "decoder": {
-            "fts": 4096,
-            "name": "rootcheck"
-        },
-        "full_log": "System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 9 .",
-        "hostname": "manager",
-        "location": "rootcheck",
-        "rule": {
-            "pci_dss": [
-                "2.2.4"
-            ],
-            "comment": "System Audit event.",
-            "firedtimes": 7,
-            "groups": [
-                "ossec",
-                "rootcheck"
-            ],
-            "level": 3,
-            "sidid": 516
-        },
-        "timestamp": "2016 Jan 29 13:08:36"
+      "rule": {
+        "level": 3,
+        "description": "System Audit event.",
+        "id": 516,
+        "firedtimes": 7,
+        "groups": [
+          "ossec",
+          "rootcheck"
+        ],
+        "pci_dss": [
+          "2.2.4"
+        ]
+      },
+      "agent": {
+          "id": "000",
+          "name": "manager"
+      },
+      "manager": {
+        "name": "manager"
+      },
+      "full_log": "System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .",
+      "title": "SSH Hardening - 9: Wrong Maximum number of authentication attempts",
+      "file": "/etc/ssh/sshd_config",
+      "decoder": {
+        "name": "rootcheck"
+      },
+      "timestamp": "2016 Jan 29 13:08:36",
+      "location": "rootcheck"
     }
-
-
-
 
 Kibana shows the full information about the alert.
 
