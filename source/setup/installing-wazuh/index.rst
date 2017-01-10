@@ -8,21 +8,22 @@ There are several ways to install Wazuh, in order to determine what option is th
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Type                                                                   | Description                                                 |
 +========================================================================+=============================================================+
-| :ref:`Packages <installation_main>`                                    | deb and rpm packages                                        |
+| :ref:`Packages <installation_main>`                                    | Install Wazuh using deb and rpm packages.                   |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Configuration Management Tools <automatic_deployment>`           | Tools to help with large deployments: Puppet, Ansible, Chef |
+| :ref:`Sources <sources_installation>`                                  | Install Wazuh from source code.                             |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Docker <wazuh_docker>`                                           | Running Wazuh as docker container                           |
+| :ref:`Configuration Management Tools <automatic_deployment>`           | Deploy Wazuh with tools like Puppet, Ansible or Chef.       |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-| Virtual Machines                                                       | Running Wazuh using an OVA file in virtual machines         |
+| :ref:`Docker <wazuh_docker>`                                           | Running Wazuh as docker container.                          |
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| :ref:`Virtual Machine <virtual_machines>`                              | Running Wazuh using an OVA file in virtual machines.        |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 
-This guide decribes how to install Wazuh using packages.
 
 .. topic:: Contents
 
     .. toctree::
-       :maxdepth: 1
+       :maxdepth: 2
 
        installation_via_packages
-       
+       installation-alternatives/index

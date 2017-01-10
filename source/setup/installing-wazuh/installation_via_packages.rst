@@ -1,14 +1,14 @@
 .. _installation_main:
 
-Introduction
----------------------------------------
+Installation via packages
+======================================
 
 This installation guide describes the installation and configuration of Wazuh in two servers:
 
 - Elastic Stack server: Runs the Elasticsearch engine, Logstash server and Kibana (including the Wazuh App).
 - Wazuh server: Runs the Wazuh Manager, API and Filebeat.
 
-In case you want to install everything in the same server (single-host arquitecture), :ref:`review this section <singlehost_configuration>` before continuing.
+In case you want to install everything in the same server (single-host arquitecture), :ref:`review this section <singlehost_installation>` before continuing.
 
 .. warning::
 	Some of the following command require to be run with **root privileges**. You may become *root* by executing one of the following command at the begining of the session::
@@ -73,7 +73,7 @@ These are the steps to install Elastic Stack server, and configure it to work wi
     elastic_server_rpm
 
 
-Encrypting communications between Wazuh server and Elastic Stack server
+Encrypting communications between Wazuh and Elastic servers
 -------------------------------------------------------------------------
 
 By default, the communications between Wazuh server (Filebeat) and Elastic Stack server (Logstash) are not encrypted. It’s strongly recommended to configure Logstash to use SSL encryption. Please follow the next guide to setting up SSL for Filebeat and Logstash.

@@ -1,4 +1,4 @@
-.. _singlehost_configuration:
+.. _singlehost_installation:
 
 Single-host arquitecture installation
 ==============================================
