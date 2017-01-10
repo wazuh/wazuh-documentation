@@ -3,7 +3,9 @@
 Installing agents
 ======================================================
 
-This installation guide describes how to install Wazuh agents in production hosts.
+This installation guide describes how to install a Wazuh agent in a server.
+
+.. _installing_wazuh_agent:
 
 Manual deployment
 --------------------------
@@ -17,4 +19,4 @@ Manual deployment
 Automatic deployment
 --------------------------
 
-Check out :ref:`automatic deployment <automatic_deployment>`.
+Check out :ref:`Configuration Management Tools <automatic_deployment>` section to know the available tools to help with automatic deployments.

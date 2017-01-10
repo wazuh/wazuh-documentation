@@ -3,7 +3,7 @@
 Migrating from OSSEC
 ===================================================
 
-This section explains how to upgrade an existing OSSEC installation to Wazuh. You must follow the appropriate section depending on the type of your OSSEC installation: from sources or packages.
+This section explains how to migrate from an existing OSSEC installation to Wazuh. You must follow the appropriate section depending on the type of your OSSEC installation: from sources or packages.
 
 To determine if an upgrade is supported for your installation, please consult this table:
 

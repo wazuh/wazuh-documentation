@@ -1,17 +1,10 @@
 .. _upgrading_ossec_elastic:
 
-Migrating to Elastic
+Installing Elastic stack
 ===================================================
 
-ToDo: Why Elatic? Single node vs recommend installation?
+At this point you should have your OSSEC Manager and agents migrated to Wazuh.
 
-Installing Elastic Stack server
--------------------------------
+Install Elastic stack server following this guide:
 
- - :ref:`Install Elastic server on Debian <elastic_server_deb>`
- - :ref:`Install Elastic server on CentOS <elastic_server_rpm>`
-
-Configuring Elastic Stack server
-------------------------------------
-
- - :ref:`Setting up SSL for Filebeat and Logstash <elastic_ssl>`
+    - :ref:`Install Elastic stack server <installation_elastic>`
