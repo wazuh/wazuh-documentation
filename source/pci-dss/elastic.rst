@@ -7,8 +7,7 @@ Elastic Stack
 
 The following requirements can be met with a combination of Wazuh + Elastic Stack:
 
-+ *10.5 Secure audit trails so they cannot be altered.*
-
-+ *10.6.1 Review the following at least daily: All security events, Logs of all critical system components, etc.*
-
-+ *10.7 Retain audit trail history for at least one year, with a minimum of three months immediately available for analysis*
+| **10.5**: Secure audit trails so they cannot be altered.
+| **10.6.1**: Review the following at least daily: All security events, Logs of all critical system components, etc.
+| **10.7**: Retain audit trail history for at least one year, with a minimum of three months immediately available for analysis.
+|
