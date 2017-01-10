@@ -12,18 +12,18 @@ There are several ways to install Wazuh, in order to determine what option is th
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | :ref:`Sources <sources_installation>`                                  | Install Wazuh from source code.                             |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Configuration Management Tools <automatic_deployment>`           | Deploy Wazuh with tools like Puppet, Ansible or Chef.       |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
 | :ref:`Docker <wazuh_docker>`                                           | Running Wazuh as docker container.                          |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | :ref:`Virtual Machine <virtual_machines>`                              | Running Wazuh using an OVA file in virtual machines.        |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-
+| :ref:`Configuration Management Tools <automatic_deployment>`           | Deploy Wazuh with tools like Puppet, Ansible or Chef.       |
++------------------------------------------------------------------------+-------------------------------------------------------------+
 
 .. topic:: Contents
 
     .. toctree::
        :maxdepth: 2
 
-       installation_via_packages
+       packages-installation/index
        installation-alternatives/index
+       optional-configuration/index
