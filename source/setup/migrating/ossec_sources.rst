@@ -13,5 +13,5 @@ This section describes how to upgrade from OSSEC to Wazuh in case that OSSEC was
 
 Following the proper installation guide, your OSSEC installation will be automatically upgraded to Wazuh:
 
- - :ref:`Install Wazuh server on CentOS <wazuh_server_centos>`
- - :ref:`Install Wazuh server on Debian <wazuh_server_debian>`
+ - :ref:`Install Wazuh server on CentOS <wazuh_server_rpm>`
+ - :ref:`Install Wazuh server on Debian <wazuh_server_deb>`

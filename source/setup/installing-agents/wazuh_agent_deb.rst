@@ -1,7 +1,9 @@
-.. _wazuh_agent_debian:
+.. _wazuh_agent_deb:
 
-Install Wazuh agent on Debian
+Install Wazuh agent (deb)
 =============================
+
+The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 1. Install the GPG key::
 

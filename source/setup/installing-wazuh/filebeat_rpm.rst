@@ -1,55 +1,9 @@
-.. _wazuh_server_centos:
+.. _filebeat_rpm:
 
-Install Wazuh manager on CentOS
+Install Filebeat (rpm)
 ===============================
 
-Wazuh Manager and API
----------------------
-
-1. First we'll install the Wazuh repository. Run the following command depending on your operating system:
-
-    a) For CentOS::
-
-        cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-        [wazuh_repo]
-        gpgcheck=1
-        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-        enabled=1
-        name=CentOS-$releasever - Wazuh
-        baseurl=https://packages.wazuh.com/yum/el/$releasever/$basearch
-        protect=1
-        EOF
-
-    b) For RHEL::
-
-        cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-        [wazuh_repo]
-        gpgcheck=1
-        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-        enabled=1
-        name=RHEL-$releasever - Wazuh
-        baseurl=https://packages.wazuh.com/yum/rhel/$releasever/$basearch
-        protect=1
-        EOF
-
-    c) For Fedora::
-
-        cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-        [wazuh_repo]
-        gpgcheck=1
-        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-        name=Fedora-$releasever - Wazuh
-        enabled=1
-        baseurl=https://packages.wazuh.com/yum/fc/$releasever/$basearch
-        protect=1
-        EOF
-
-2. Install the Wazuh packages::
-
-	yum install wazuh-manager wazuh-api
-
-Filebeat
---------
+The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
 
 1. Install the GPG keys from Elastic and the Elastic repository::
 
@@ -102,4 +56,4 @@ Filebeat
 Next steps
 ----------
 
-Once you've installed the Wazuh manager and Filebeat, you may want to :ref:`Install an Elastic server <elastic_server_centos>`.
+Once you've installed the Wazuh manager and Filebeat, you may want to :ref:`Install an Elastic server <elastic_server_rpm>`.

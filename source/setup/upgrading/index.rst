@@ -24,10 +24,10 @@ To determine if an upgrade is supported for your installation, please consult th
 
 Following the guide to install Wazuh, your current installation will be automatically update:
 
- - :ref:`Install Wazuh server on CentOS <wazuh_server_centos>`
- - :ref:`Install Wazuh server on Debian <wazuh_server_debian>`
- - :ref:`Install Wazuh agent on Debian <wazuh_agent_debian>`
- - :ref:`Install Wazuh agent on CentOS <wazuh_agent_centos>`
+ - :ref:`Install Wazuh server (rpm) <wazuh_server_rpm>`
+ - :ref:`Install Wazuh server (deb) <wazuh_server_deb>`
+ - :ref:`Install Wazuh agent (deb) <wazuh_agent_deb>`
+ - :ref:`Install Wazuh agent (rpm) <wazuh_agent_rpm>`
 
 Once Wazuh Manager and Agents are updated, it is necessary to update Elastic configuration.
 

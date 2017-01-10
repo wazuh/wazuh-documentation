@@ -53,8 +53,8 @@ Step 3: Install Wazuh.
 
 Follow the proper guide in order to install Wazuh server:
 
- - :ref:`Install Wazuh server on CentOS <wazuh_server_centos>`
- - :ref:`Install Wazuh server on Debian <wazuh_server_debian>`
+ - :ref:`Install Wazuh server on CentOS <wazuh_server_rpm>`
+ - :ref:`Install Wazuh server on Debian <wazuh_server_deb>`
 
 
 Step 4: Restore configuration.
@@ -145,8 +145,8 @@ Step 3: Install Wazuh.
 
 Follow the proper guide in order to install Wazuh agent:
 
- - :ref:`Install Wazuh agent on Debian <wazuh_agent_debian>`
- - :ref:`Install Wazuh agent on CentOS <wazuh_agent_centos>`
+ - :ref:`Install Wazuh agent on Debian <wazuh_agent_deb>`
+ - :ref:`Install Wazuh agent on CentOS <wazuh_agent_rpm>`
 
 
 Step 4: Restore configuration.

@@ -3,24 +3,18 @@
 Installing agents
 ======================================================
 
-This installation guide describes how to deploy Wazuh agents in production hosts.
-
-.. image:: ../../images/installation/ins_agents.png
-    :align: center
-    :width: 100%
+This installation guide describes how to install Wazuh agents in production hosts.
 
 Manual deployment
 --------------------------
 .. toctree::
     :maxdepth: 1
 
-    wazuh_agent_debian
-    wazuh_agent_centos
+    wazuh_agent_deb
+    wazuh_agent_rpm
 
 
 Automatic deployment
 --------------------------
-.. toctree::
-    :maxdepth: 1
 
-    wazuh_puppet
+Check out :ref:`automatic deployment <automatic_deployment>`.

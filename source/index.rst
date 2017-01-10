@@ -58,6 +58,8 @@ Available documentation
    setup/index
    learn_examples/index
    reference_manual
+   docker/index
+   configuration_management_tools/index
    pci-dss/index
    amazon/index
    ruleset/index

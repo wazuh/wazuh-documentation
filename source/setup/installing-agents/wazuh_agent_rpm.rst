@@ -1,7 +1,9 @@
-.. _wazuh_agent_centos:
+.. _wazuh_agent_rpm:
 
-Install Wazuh agent on CentOS
+Install Wazuh agent (rpm)
 =============================
+
+The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
 
 1. First we'll install the Wazuh repository. Run the following command depending on your operating system:
 
