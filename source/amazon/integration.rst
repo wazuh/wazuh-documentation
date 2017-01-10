@@ -7,17 +7,16 @@ Prior to the installation of the OSSEC rules for Amazon Web Services, follow the
 
 1. Turn on CloudTrail.
 2. Create a user with permission to access S3.
-3. Install Python Boto in your Ossec Agent.
-4. Configure the previous user credentials with AWS Cli in your Ossec Agent.
+3. Install Python Boto in your Wazuh Agent.
+4. Configure the previous user credentials with AWS Cli in your Wazuh Agent.
 5. Run the script getawslog.py to download the log JSON files and convert them into flat files.
-6. Install Wazuh Amazon rules.
 
 Turn on CloudTrail
 ^^^^^^^^^^^^^^^^^^
 
 Create a trail for your AWS account. Trails can be created using the AWS CloudTrail console or the AWS Command Line Interface (AWS CLI). Both methods follow the same steps. In this case we will be focusing on the first one:
 
-* Turn on ``CloudTrail``. Note that, by default, when creating a trail in one region in the CloudTrail console, this one will apply to all regions.
+* Turn on CloudTrail. Note that, by default, when creating a trail in one region in the CloudTrail console, this one will apply to all regions.
 
 .. warning:: Please do not enable `Enable log file validation` parameter, it's not supported by provided python script.
 
@@ -68,10 +67,10 @@ In the next page enter some ``Policy Name`` e.g. ossec-cloudtrail-s3-access and 
     ]
   }
 
-Install Python Boto in your Ossec Agent
+Install Python Boto in your Wazuh Agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To download and process the Amazon AWS logs that already are archived in S3 Bucket we need to install Python Boto in the OSSEC agent and configure it to enable the connection with AWS S3.
+To download and process the Amazon AWS logs that already are archived in S3 Bucket we need to install Python Boto in the Wazuh agent and configure it to enable the connection with AWS S3.
 
 Prerequisites for Python Boto installation using Pip
 
@@ -125,7 +124,7 @@ To configure the user credentials you need to create a file called ``/etc/boto.c
 Run the python script to download the JSON data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We use a python script to download JSON files from S3 Bucket and convert them into flat files that can be used with Ossec. This script was written by Xavier Martens @xme and contains minor modifications done by Wazuh. It is located in our repository at ``wazuh/ossec-rules/tools/amazon/getawslog.py``.
+We use a python script to download JSON files from S3 Bucket and convert them into flat files that can be used with Wazuh. This script was written by Xavier Martens @xme and contains minor modifications done by Wazuh. It is located in our `repository <https://github.com/wazuh>`_ at ``wazuh/wazuh-ruleset/tools/amazon/getawslog.py``.
 
 Run the following command to use this script: ::
 
@@ -143,8 +142,3 @@ Run ``crontab -e`` and, at the end of the file, add the following line ::
 
 
 .. note:: This script downloads and deletes the files from your S3 Bucket. However, you can always review the log messages generated during the last 7 days through CloudTrail.
-
-Install Wazuh Amazon rules
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To install Wazuh Amazon rules follow either the `Automatic installation <http://documentation.wazuh.com/en/latest/ossec_ruleset.html#automatic-installation>`_ section or `Manual installation <http://documentation.wazuh.com/en/latest/ossec_ruleset.html#manual-installation>`_ section in this guide.

@@ -24,7 +24,7 @@ If one VPC is created the ``rule id 81000`` will apply and an alert will be gene
 +------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
-|.. image:: ../../images/aws/aws-vpc-1.png                               |
+|.. thumbnail:: ../../images/aws/aws-vpc-1.png                           |
 |    :align: center                                                      |
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
@@ -45,7 +45,7 @@ If the user doesn't have permissions the ``rule id 81001`` will apply:
 +-------------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                            |
 +-------------------------------------------------------------------------------+
-|.. image:: ../../images/aws/aws-vpc-2.png                                      |
+|.. thumbnail:: ../../images/aws/aws-vpc-2.png                                  |
 |    :align: center                                                             |
 |    :width: 100%                                                               |
 +-------------------------------------------------------------------------------+
