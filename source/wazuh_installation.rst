@@ -19,7 +19,7 @@ If you want to use Auth, also install: ::
 
 For Debian based distributions: ::
 
-   $ sudo apt-get install gcc make git
+   $ sudo apt-get install gcc make git libc6-dev
 
 If you want to use Auth, also install: ::
 
