@@ -12,30 +12,34 @@ File integrity Monitoring (syscheck) is performed by comparing the cryptographic
 Use cases
 ---------
 
-In this example, we have configured OSSEC to detect changes in the file */home/credit_cards*.
+In this example, we have configured OSSEC to detect changes in the file */root/credit_cards*.
 
 ::
 
     <syscheck>
-        <directories check_all="yes">/home/credit_cards</directories>
+        <directories check_all="yes" report_changes="yes">/root/credit_cards</directories>
     </syscheck>
 
 So, when we modify the file, OSSEC generates an alert.
 
-.. image:: ../images/pci/fim_1.png
+.. thumbnail:: ../images/pci/fim_1.png
+    :title: Modifying a monitored file
     :align: center
-    :width: 100%
+    :width: 75%
 
 As you can see, syscheck alerts are tagged with the requirement 11.5.
 
-.. image:: ../images/pci/fim_2.png
+.. thumbnail:: ../images/pci/fim_2.png
+    :title: Alert on Wazuh Manager
+    :align: center
+    :width: 75%
+
+.. thumbnail:: ../images/pci/fim_3.png
+    :title: Alert visualization at Kibana Discover
     :align: center
     :width: 100%
 
-.. image:: ../images/pci/fim_3.png
-    :align: center
-    :width: 100%
-
-.. image:: ../images/pci/fim_4.png
+.. thumbnail:: ../images/pci/fim_4.png
+    :title: Filtering alerts by PCI DSS and file path
     :align: center
     :width: 100%
