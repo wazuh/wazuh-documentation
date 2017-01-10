@@ -15,7 +15,7 @@ The syntax used for rule tagging is **pci_dss_** followed by the number of the r
 
 See below examples of OSSEC rules tagged for PCI requirements 10.2.4 and 10.2.5:
 
-::
+.. code-block:: xml
 
     <!--apache: access attempt -->
     <rule id="30105" level="5">
@@ -62,31 +62,85 @@ Use cases
 
 In this scenario, we try to open the file ``cardholder_data.txt``. Since our current user doesn't have read access to the file, we run  ``sudo`` to elevate privileges.
 
-.. thumbnail:: ../images/pci/log_analysis_1.png
-    :title: Sudo command on agent
-    :align: center
-    :width: 75%
+.. code-block:: console
 
-Using *sudo* log analysis decoder and rules, OSSEC will generate an alert for this particular action. Since we have JSON output enabled, we can see the alert in both files ``alerts.log`` and ``alerts.json``. Using the rule tags we can also see which PCI DSS requirements are specifically related to this alert.
+    [agent@centos ~]$ ls -l
+    total 0
+    drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 centos
+    drwxr-x---  2 root  root  33 Jan  5 18:32 credit_cards
+    drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 user_data
+    [agent@centos ~]$ sudo cat credit_cards/cardholder_data.txt
+    Number: 0000-0000-0000-0000
+    Holder: Mr. John Smith
 
-.. thumbnail:: ../images/pci/log_analysis_2.png
-    :title: Alert on Wazuh Manager
-    :align: center
-    :width: 100%
+Using ``sudo`` log analysis decoder and rules, OSSEC will generate an alert for this particular action. Since we have JSON output enabled, we can see the alert in both files ``alerts.log`` and ``alerts.json``. Using the rule tags we can also see which PCI DSS requirements are specifically related to this alert.
 
-.. thumbnail:: ../images/pci/log_analysis_3.png
-    :title: JSON alert output
-    :align: center
-    :width: 100%
+.. code-block:: console
+
+    root@ubuntu:~# tail -n10 /var/ossec/logs/alerts/alerts.log
+
+    ** Alert 1483621881.263207: - syslog,sudo,pci_dss_10.2.5,pci_dss_10.2.2,
+    2017 Jan 05 14:11:21 (CentOS) 192.168.56.4->/var/log/secure
+    Rule: 5402 (level 3) -> 'Successful sudo to ROOT executed'
+    User: root
+    Jan  5 14:11:12 centos sudo:   agent : TTY=pts/0 ; PWD=/ ; USER=root ; COMMAND=/bin/cat /root/credit_cards/cardholder_data.txt
+    tty: pts/0
+    pwd: /
+    command: /bin/cat
+
+.. code-block:: console
+
+    root@ubuntu:~# tail -n1 /var/ossec/logs/alerts/alerts.json | jq
+
+.. code-block:: json
+
+    {
+      "rule": {
+        "level": 3,
+        "description": "Successful sudo to ROOT executed",
+        "id": 5402,
+        "firedtimes": 1,
+        "groups": [
+          "syslog",
+          "sudo"
+        ],
+        "pci_dss": [
+          "10.2.5",
+          "10.2.2"
+        ]
+      },
+      "agent": {
+        "id": "031",
+        "name": "CentOS",
+        "ip": "192.168.56.4"
+      },
+      "manager": {
+        "name": "ubuntu"
+      },
+      "srcuser": "agent",
+      "dstuser": "root",
+      "full_log": "Jan  5 14:11:12 centos sudo:   agent : TTY=pts/0 ; PWD=/ ; USER=root ; COMMAND=/bin/cat /root/credit_cards/cardholder_data.txt",
+      "program_name": "sudo",
+      "tty": "pts/0",
+      "pwd": "/",
+      "command": "/bin/cat",
+      "decoder": {
+        "fts": 1792,
+        "parent": "sudo",
+        "name": "sudo"
+      },
+      "timestamp": "2017 Jan 05 14:11:21",
+      "location": "/var/log/secure"
+    }
 
 Kibana displays information in an organized way, allowing filtering by different type of alert fields, including compliance controls. We have also developed some specific dashboards to display the PCI DSS related alerts.
 
-.. thumbnail:: ../images/pci/log_analysis_4.png
+.. thumbnail:: ../images/pci/log_analysis_1.png
     :title: Alert visualization at Kibana discover
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/pci/log_analysis_5.png
+.. thumbnail:: ../images/pci/log_analysis_2.png
     :title: Wazuh PCI DSS dashboard for Kibana
     :align: center
     :width: 100%
