@@ -84,7 +84,7 @@ Extract ossec-hids and run ``gen_win.sh`` and ``make.sh`` scripts: ::
 
    $ tar -xvzf ossec-hids-2.8.3.tar.gz
    $ cd ossec-hids-2.8.3/src/win32
-   $ ./gen-win.sh
+   $ ./gen_win.sh
    $ cd ../win-pkg
    $ sh ./make.sh
 
