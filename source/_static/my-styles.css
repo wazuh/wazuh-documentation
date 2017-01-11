@@ -27,6 +27,16 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     background: #d6d6d6;
 }
 
+/* L2 background */
+.wy-menu-vertical li.current {
+    background: #d6d6d6;
+}
+
+/* L2 hovered */
+.wy-menu-vertical li.current a:hover {
+    background: #c9c9c9;
+}
+
 /* L1 text */
 .wy-menu-vertical a {
     color: #404040;
