@@ -1,6 +1,6 @@
 .. _api:
 
-Wazuh RESTful API
+RESTful API
 ==========================
 
 Wazuh API is an open source RESTful API to interact with OSSEC from your own application or with a simple web browser or tools like cURL.

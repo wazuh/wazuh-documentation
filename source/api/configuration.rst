@@ -3,32 +3,51 @@
 Configuration
 ======================
 
-The API will run on port 55000/tcp by default and protected with authentication. Below, we explain how to configure these options and how to run the API.
+The API will run on port 55000/tcp by default and protected with authentication. Below, we explain how to configure and run the API.
+
+Run the script ``/var/ossec/api/scripts/configure_api.sh`` in order to configure the basic settings.
+
+Running API
+----------------------------------------
+
+Use the API service in order to start, stop, restart or check the status.
+
+**Systemd systems**
+::
+
+    systemctl start wazuh-api
+
+**SysVinit systems**
+::
+
+    service wazuh-api start
+
+The available options are: start, stop, status and restart.
+
+
+API logs will be saved at ``/var/ossec/logs/api.log``.
+
+
+Manual configuration
+-------------------------
 
 Configuration file
----------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can configure some parameters using the file ``/var/ossec/api/configuration/config.js``: ::
 
     // Path
     config.ossec_path = "/var/ossec";
+    // The host to bind the API to.
+    config.host = "0.0.0.0";
     // TCP Port used by the API.
     config.port = "55000";
     // Use HTTP protocol over TLS/SSL. Values: yes, no.
-    config.https = "no";
+    config.https = "yes";
     // Use HTTP authentication. Values: yes, no.
     config.basic_auth = "yes";
     //In case the API run behind a proxy server, turn to "yes" this feature. Values: yes, no.
     config.BehindProxyServer = "no";
-
-Automatic configuration
--------------------------
-
-Run the script ``/var/ossec/api/scripts/configure_api.sh`` in order to configure the basic settings.
-
-
-Manual configuration
--------------------------
 
 Basic Authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -43,7 +62,7 @@ Then, run htpasswd with your desired username: ::
 SSL Certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-At this point, you will create certificates to use the API, in case you prefer to use the out-of-the-box certificates, skip this section.
+At this point, you will create certificates to use the API.
 
 Follow the next steps to generate them (Openssl package is required): ::
 
@@ -64,37 +83,3 @@ And remove temporary files: ::
 
  $ sudo rm server.csr
  $ sudo rm server.key.org
-
-
-Running API
-----------------------------------------
-
-
-There are two ways to run the API: as service or on background.
-
-.. _api-service-label:
-
-Service
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-We **recommend** to run the API as a service. In order to install the service excecute the following script: ::
-
- $ sudo /var/ossec/api/scripts/install_daemon.sh
-
-Then, check out if the API is running:
-
-  * Systemd systems: systemctl status wazuh-api
-  * SysVinit systems: service wazuh-api status
-
-The available options are: start, stop, status and restart.
-
-Background
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-In order to run the API on background execute the following command: ::
-
- $ /bin/node /var/ossec/api/app.js &
-
-API logs will be saved at ``/var/ossec/logs/api.log``.
-
-.. note:: Sometimes NodeJS binary is called "nodejs" or it is located on /usr/bin/, if the API does not start, check it please.

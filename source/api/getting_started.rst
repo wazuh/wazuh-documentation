@@ -7,9 +7,18 @@ This guide provides all the basic information you need to start using the API.
 
 Starting and Stopping API
 ---------------------------------
-If it is configured to run as :ref:`service <api-service-label>`, the API is started at boot time. To start, stop, or manipulate it on a running system, use systemctl: ::
+The API is started at boot time. To start, stop, or manipulate it on a running system, use:
 
- systemctl start/status/stop/restart wazuh-api
+**Systemd systems**
+::
+
+    systemctl start/status/stop/restart wazuh-api
+
+**SysVinit systems**
+::
+
+    service wazuh-api start/status/stop/restart
+
 
 Hello world!
 ---------------------------------
