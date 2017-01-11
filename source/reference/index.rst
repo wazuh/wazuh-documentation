@@ -13,6 +13,13 @@ Wazuh helps to get security visibility into your infrastructure, by monitoring h
 
 - Policy and compliance monitoring: Wazuh monitors configuration files to ensure they are compliant with your security policies, standards or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, not patched, or not properly configured.
 
-This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic, making them work together as a single solution, and simplifying their configuration and management. 
+This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic, making them work together as a single solution, and simplifying their configuration and management.
 
 Wazuh also provides a centralized Web User Interface (fully integrated in Elastic), an updated log analysis ruleset, and a RESTful API that allows user to monitor deployment status and configuration.
+
+.. topic:: Contents
+
+    .. toctree::
+       :maxdepth: 2
+
+       modules/index

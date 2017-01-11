@@ -15,6 +15,3 @@ Wazuh Modules
 
    openscap/index
    database
-
-- :ref:`OpenSCAP Integration <openscap_module>`.
-- :ref:`Database Synchronization Module <database_module>`.

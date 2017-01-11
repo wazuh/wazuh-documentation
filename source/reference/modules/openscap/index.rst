@@ -1,7 +1,7 @@
-.. _reference:
+.. _openscap_reference:
 
 
-Reference
+OpenSCAP
 ========================
 
 Use *ossec.conf* (manager or agent) or *agent.conf* to configure the wodle.

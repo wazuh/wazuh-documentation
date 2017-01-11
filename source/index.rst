@@ -57,14 +57,14 @@ Available documentation
    getting_started
    setup/index
    learn_examples/index
-   reference_manual
+   reference/index
    docker/index
    configuration_management_tools/index
    pci-dss/index
    amazon/index
    ruleset/index
    api/index
-   modules/index
+   openscap/index
    audit/index
 
 .. note:: If you want to contribute to this documentation or our project please head over to our `Github repositories <https://github.com/wazuh>`_. You can also join our `users mailing list <https://groups.google.com/d/forum/wazuh>`_, by sending an email to ``wazuh+subscribe@googlegroups.com``, to ask questions and participate in discussions.

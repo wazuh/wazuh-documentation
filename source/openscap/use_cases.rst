@@ -75,11 +75,11 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 Note that each field is removed to facilitate searches.
 
-.. image:: ../../images/wodles-oscap/e1-alert1.png
+.. image:: ../images/wodles-oscap/e1-alert1.png
     :align: center
     :width: 100%
 
-.. image:: ../../images/wodles-oscap/e1-alert2.png
+.. image:: ../images/wodles-oscap/e1-alert2.png
     :align: center
     :width: 100%
 
@@ -87,7 +87,7 @@ Note that each field is removed to facilitate searches.
 
 Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
 
-.. image:: ../../images/wodles-oscap/e1-dashboards.png
+.. image:: ../images/wodles-oscap/e1-dashboards.png
     :align: center
     :width: 100%
 
@@ -164,11 +164,11 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 Note that each field is removed to facilitate searches.
 
-.. image:: ../../images/wodles-oscap/e2-alert1.png
+.. image:: ../images/wodles-oscap/e2-alert1.png
     :align: center
     :width: 100%
 
-.. image:: ../../images/wodles-oscap/e2-alert2.png
+.. image:: ../images/wodles-oscap/e2-alert2.png
     :align: center
     :width: 100%
 
@@ -176,6 +176,6 @@ Note that each field is removed to facilitate searches.
 
 Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
 
-.. image:: ../../images/wodles-oscap/e2-dashboards.png
+.. image:: ../images/wodles-oscap/e2-dashboards.png
     :align: center
     :width: 100%
