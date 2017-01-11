@@ -14,6 +14,7 @@ Manual deployment
 
     wazuh_agent_deb
     wazuh_agent_rpm
+    wazuh_agent_source
 
 
 Automatic deployment
