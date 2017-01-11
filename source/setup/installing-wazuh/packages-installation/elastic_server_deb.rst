@@ -85,7 +85,7 @@ Kibana
 
 2. Install the Wazuh App plugin for Kibana::
 
-	/usr/share/kibana/bin/kibana-plugin install http://wazuh.com/resources/wazuh-app.zip
+	/usr/share/kibana/bin/kibana-plugin install https://wazuh.com/resources/wazuh-app.zip
 
 3. **Optional.** Kibana will listen only the loopback interface (localhost) by defualt. To set up Kibana to listen all interfaces, edit the file ``/etc/kibana/kibana.yml``. Uncomment the setting ``server.host`` and change the value to::
 
