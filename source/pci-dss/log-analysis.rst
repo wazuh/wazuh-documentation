@@ -73,7 +73,7 @@ In this scenario, we try to open the file ``cardholder_data.txt``. Since our cur
     Number: 0000-0000-0000-0000
     Holder: Mr. John Smith
 
-Using ``sudo`` log analysis decoder and rules, OSSEC will generate an alert for this particular action. Since we have JSON output enabled, we can see the alert in both files ``alerts.log`` and ``alerts.json``. Using the rule tags we can also see which PCI DSS requirements are specifically related to this alert.
+Using ``sudo`` log analysis decoder and rules, OSSEC will generate an alert for this particular action and print it on ``alerts.log``. Using the rule tags we can see which PCI DSS requirements are specifically related to this alert.
 
 .. code-block:: console
 
@@ -87,6 +87,8 @@ Using ``sudo`` log analysis decoder and rules, OSSEC will generate an alert for 
     tty: pts/0
     pwd: /
     command: /bin/cat
+
+Since we have JSON output enabled, we can also see the alert at ``alerts.json``:
 
 .. code-block:: console
 

@@ -3,7 +3,7 @@
 Policy monitoring
 =================
 
-The OSSEC rootcheck module can be used to enforce and monitor your security policy. This is the process of verifying that all systems conform to a set of pre-defined rules surrounding configuration settings and approved application usage.
+The OSSEC Rootcheck module can be used to enforce and monitor your security policy. This is the process of verifying that all systems conform to a set of pre-defined rules surrounding configuration settings and approved application usage.
 
 There are several PCI DSS requirements to verify that systems are properly hardened. An example would be:
 
@@ -26,7 +26,7 @@ Other PCI DSS requirements will ask us to check that applications (especially ne
 | **2.2.4**: Configure system security parameters to prevent misuse.
 |
 
-The following are good examples of rootcheck rules developed to check the configuration of SSH services:
+The following are good examples of Rootcheck rules developed to check the configuration of SSH services:
 
 ::
 
@@ -36,12 +36,12 @@ The following are good examples of rootcheck rules developed to check the config
     [SSH Configuration - Root login allowed {PCI_DSS: 2.2.4}] [any]
     f:/etc/ssh/sshd_config -> !r:^# && r:PermitRootLogin\.+yes;
 
-In our :ref:`OSSEC Wazuh fork <installation>`, the rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. Meaning that all rootchecks already have the PCI DSS requirement tag.
+In our :ref:`OSSEC Wazuh fork <installation>`, the Rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. Meaning that all rootchecks already have the PCI DSS requirement tag.
 
 Use cases
 ---------
 
-In order to check the security parameters of SSH (and meet the requirement 2.2.4), we have developed the rootchecks ``system_audit_ssh``. In our example, when OSSEC runs the rootcheck scan, it is able to detect some errors in the SSH configuration.
+In order to check the security parameters of SSH (and meet the requirement 2.2.4), we have developed the rootchecks ``system_audit_ssh``. In our example, when OSSEC runs the Rootcheck scan, it is able to detect some errors in the SSH configuration.
 
 .. code-block:: console
 
@@ -56,6 +56,8 @@ In order to check the security parameters of SSH (and meet the requirement 2.2.4
         <system_audit>/var/ossec/etc/shared/ssh/system_audit_ssh.txt<system_audit>
     </rootcheck>
 
+If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engine, whether it becomes alert or not:
+
 .. code-block:: console
 
     [root@manager ossec]# tail -f logs/archives/archives.log
@@ -69,6 +71,8 @@ In order to check the security parameters of SSH (and meet the requirement 2.2.4
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 7: Rhost or shost used for authentication {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 7 .
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 8: Wrong Grace Time {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 8 .
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 9 .
+
+In this case, all the logs above are alerts, so we will see an instance of the last alert in JSON:
 
 .. code-block:: console
 
@@ -107,7 +111,7 @@ In order to check the security parameters of SSH (and meet the requirement 2.2.4
       "location": "rootcheck"
     }
 
-Kibana shows the full information about the alert.
+Kibana shows the full information about the alert:
 
 .. thumbnail:: ../images/pci/policy_monitoring_1.png
     :title: Alert visualization on Kibana Discover
