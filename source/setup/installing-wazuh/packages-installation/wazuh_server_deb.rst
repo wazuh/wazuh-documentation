@@ -5,11 +5,15 @@ Install Wazuh manager (deb)
 
 The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
-1. Install the GPG key::
+1. In order to perform this procedure properly, packages ``curl`` and ``apt-transport-https`` must be installed into your system. If they are not, install them::
+
+	apt-get install curl apt-transport-https
+
+2. Install the GPG key::
 
 	curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-2. Add the Wazuh repository depending on your operating system:
+3. Add the Wazuh repository depending on your operating system:
 
 	- Debian 7 "Wheezy"::
 
@@ -51,7 +55,7 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 		echo "deb https://packages.wazuh.com/apt yakkety main" | tee /etc/apt/sources.list.d/wazuh.list
 
-3. Update the package information and install the Wazuh packages::
+4. Update the package information and install the Wazuh packages::
 
 	apt-get update
 	apt-get install wazuh-manager wazuh-api
