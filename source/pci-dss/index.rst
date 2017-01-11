@@ -1,6 +1,6 @@
 .. _pci_dss:
 
-Guide for PCI DSS
+PCI DSS
 =================
 
 .. rubric:: Introduction

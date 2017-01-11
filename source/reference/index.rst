@@ -1,6 +1,6 @@
 .. _reference_manual:
 
-Reference Manual
+Reference
 ================
 
 Wazuh helps to get security visibility into your infrastructure, by monitoring hosts at a system and application level. The solution, based on multi-platform and lightweight agents, provides the following capabilities:

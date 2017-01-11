@@ -1,6 +1,6 @@
 .. audit_integration:
 
-Audit integration guide
+Audit integration
 ==================================
 
 .. topic:: Introduction
