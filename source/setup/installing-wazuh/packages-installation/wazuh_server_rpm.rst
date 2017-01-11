@@ -43,9 +43,17 @@ The rpm package is suitable for installation on Red Hat, Centos and other RPM-ba
         protect=1
         EOF
 
-2. Install the Wazuh packages::
+2. Install the Wazuh Manager::
 
-	yum install wazuh-manager wazuh-api
+	yum install wazuh-manager
+
+3. NodeJS >= 4.6.1 is required in order to run the API. If you do not have installed NodeJS or your version is older than 4.6.1, we recommend to add the official repositories::
+
+	curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+
+4. Finally, install the Wazuh API. It will update NodeJS if it is required::
+
+	yum install wazuh-api
 
 Next steps
 ----------

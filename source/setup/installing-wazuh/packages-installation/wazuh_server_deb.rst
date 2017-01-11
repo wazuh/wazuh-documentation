@@ -55,10 +55,19 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 		echo "deb https://packages.wazuh.com/apt yakkety main" | tee /etc/apt/sources.list.d/wazuh.list
 
-4. Update the package information and install the Wazuh packages::
+
+4. Update the package information and install the Wazuh Manager::
 
 	apt-get update
-	apt-get install wazuh-manager wazuh-api
+	apt-get install wazuh-manager
+
+5. NodeJS >= 4.6.1 is required in order to run the API. If you do not have installed NodeJS or your version is older than 4.6.1, we recommend to add the official repositories::
+
+	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
+6. Finally, install the Wazuh API. It will update NodeJS if it is required::
+
+	apt-get install wazuh-api
 
 Next steps
 ----------
