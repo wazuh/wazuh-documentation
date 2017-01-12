@@ -87,3 +87,22 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 .line-block {
     line-height: 24px;
 }
+
+/* Version selector ***********************************************************/
+
+.menu-version {
+    width: 100%;
+    bottom: 0;
+    margin-top: 16px;
+    border-top: solid 1px #c9c9c9;
+    padding-top: 16px;
+    text-align: right;
+}
+
+#select-version {
+    background: inherit;
+    min-width: 120px;
+    margin-right: 16px;
+    border: none;
+    color: #404040;
+}
