@@ -1,2 +1,10 @@
 {% extends "!layout.html" %}
+{% set script_files = script_files + ["_static/my-script.js"] %}
 {% set css_files = css_files + ["_static/my-styles.css"] %}
+{% block menu %}
+{{ super() }}
+<div class="menu-version">
+  <select id="select-version">
+  </select>
+</div>
+{% endblock %}
