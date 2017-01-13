@@ -1,7 +1,7 @@
 .. _audit_pci_dss:
 
 
-Audit and PCI DSS
+Audit
 ================================================
 
 ToDo

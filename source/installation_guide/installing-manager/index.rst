@@ -16,7 +16,7 @@ There are several ways to install the Manager, in order to determine what option
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | :ref:`Virtual Machine <virtual_machines>`                              | Running Wazuh using an OVA file in virtual machines.        |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Puppet <wazuh_puppet>`                                           | Deploy Wazuh with automatically with Puppet.                |
+| :ref:`Puppet <wazuh_puppet>`                                           | Deploying Wazuh automatically with Puppet.                  |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 
 .. topic:: Contents
