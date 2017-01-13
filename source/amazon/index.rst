@@ -1,7 +1,7 @@
 .. _amazon:
 
-AWS integration
-=================
+Using Wazuh for AWS
+==========================================
 
 This section provides instructions to integrate Wazuh with Amazon Web Services (AWS). It also explains different use cases as examples on how the rules, developed by Wazuh, can be used to alert on specific events. In `our github repository <http://github.com/wazuh/wazuh-ruleset/>`_ there are rules for IAM, EC2 and VPC services.
 

@@ -1,7 +1,7 @@
 .. _pci_dss:
 
-PCI DSS
-=================
+Using Wazuh for PCI DSS
+========================
 
 .. rubric:: Introduction
 
@@ -24,6 +24,7 @@ In the following section we will elaborate on some specific use cases. They expl
     file-integrity-monitoring
     active-response
     elastic
+    audit_pci
 
 What's next
 -----------

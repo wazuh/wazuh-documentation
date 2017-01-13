@@ -1,8 +1,5 @@
 .. _openscap_use_cases:
 
-Use cases
-=============
-
 How to Evaluate PCI-DSS on RHEL7
 -------------------------------------------------------------------------
 This section describes how to evaluate the Payment Card Industry Data Security Standard (PCI-DSS) on Red Hat Enterprise Linux 7.

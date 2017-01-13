@@ -23,3 +23,6 @@ Wazuh also provides a centralized Web User Interface (fully integrated in Elasti
        :maxdepth: 2
 
        modules/index
+       ruleset/index
+       api/index
+       audit/index

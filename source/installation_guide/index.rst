@@ -10,5 +10,4 @@ Installation guide
     installing-agents/index
     registering-agents/index
     deploying_with_puppet/index
-    migrating/index
     upgrading/index

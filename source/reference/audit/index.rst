@@ -1,6 +1,6 @@
 .. audit_integration:
 
-Audit integration
+Audit
 ==================================
 
 .. topic:: Introduction
@@ -16,5 +16,3 @@ Audit integration
 
        basic_concepts
        configuration
-       use_cases
-       pci_dss
