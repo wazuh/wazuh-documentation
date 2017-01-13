@@ -3,10 +3,10 @@
 Examples
 ------------
 
-.. _api_examples_curl_label:
+.. _api_curl_label:
 
 CURL
-+++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^
 
 cURL is a command-line tool for transferring data using various protocols. It can be used to interact with this API. It is pre-installed on many Linux and Mac systems. Some examples:
 
@@ -15,35 +15,35 @@ cURL is a command-line tool for transferring data using various protocols. It ca
 
     $ curl -u foo:bar -k https://127.0.0.1:55000
 
-``{"error":"0","data":"OSSEC-API","message":"wazuh.com"}``
+``{"error":"0","data": "Welcome to Wazuh HIDS API"}``
 
 **PUT**
 ::
 
     $ curl -u foo:bar -k -X PUT https://127.0.0.1:55000/agents/new_agent
 
-``{"error":0,"data":{"id":"004","message":"Agent added"},"message":""}``
+``{"error":0,"data":"004"}``
 
 
 
 **POST**
 ::
 
-    $ curl -u foo:bar -k -X POST -d 'name=NewHost&ip=10.0.0.8' https://127.0.0.1:55000/agents
+    $ curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000//agents"
 
-``{"error":0,"data":{"id":"004","message":"Agent added"},"message":""}``
+``{"error":0,"data":"004"}``
 
 **DELETE**
 ::
 
     $ curl -u foo:bar -k -X DELETE https://127.0.0.1:55000/rootcheck/001
 
-``{"error":"0","data":"Policy and auditing database updated","message":""}``
+``{"error":"0","data":"Policy and auditing database updated"}``
 
-.. _api_examples_python_label:
+.. _api_python-label:
 
 Python
-+++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^
 
 It is very easy interact with the API using Python:
 
@@ -72,7 +72,6 @@ Output:
 
     {
         "error": "0",
-        "message": "",
         "data": {
             "id": "000",
             "ip": "127.0.0.1",
@@ -91,10 +90,10 @@ Output:
 
 Full example in ``wazuh-API/examples/api-client.py``.
 
-.. _api_examples_powershell_label:
+.. _api_powershell_label:
 
 Powershell
-+++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^
 
 The **Invoke-RestMethod** cmdlet sends requests to the API and handle the response easily. This cmdlet is introduced in Windows PowerShell 3.0.
 
@@ -140,17 +139,9 @@ Output:
 
 ::
 
-    error data                                                                                 message
-    ----- --------                                                                           -------
+    error data
+    ----- --------
     0     @{syscheckTime=Wed Feb 24 09:55:04 2016; syscheckEndTime=Wed Feb 24 10:00:42 2016}
 
 
 Full example in ``wazuh-API/examples/api-client.ps1``.
-
-
-What's next
-+++++++++++++++++++++++++
-
-Once you have your OSSEC RESTful API running, we recommend you to check our OSSEC Wazuh ruleset:
-
-* `OSSEC Wazuh Ruleset installation guide <http://documentation.wazuh.com/en/latest/ossec_ruleset.html>`_

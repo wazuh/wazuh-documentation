@@ -3,36 +3,16 @@
 Configuration
 ======================
 
-The API will run on port 55000/tcp by default and protected with authentication. Below, we explain how to configure and run the API.
+The API will run on port 55000/tcp by default and protected with authentication. Below, we explain how to configure the API.
+
+
+Configuration script
+-------------------------
 
 Run the script ``/var/ossec/api/scripts/configure_api.sh`` in order to configure the basic settings.
 
-Running API
-----------------------------------------
-
-Use the API service in order to start, stop, restart or check the status.
-
-**Systemd systems**
-::
-
-    systemctl start wazuh-api
-
-**SysVinit systems**
-::
-
-    service wazuh-api start
-
-The available options are: start, stop, status and restart.
-
-
-API logs will be saved at ``/var/ossec/logs/api.log``.
-
-
-Manual configuration
--------------------------
-
 Configuration file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 You can configure some parameters using the file ``/var/ossec/api/configuration/config.js``: ::
 
@@ -50,7 +30,7 @@ You can configure some parameters using the file ``/var/ossec/api/configuration/
     config.BehindProxyServer = "no";
 
 Basic Authentication
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 By default you can access by typing user "foo" and password "bar". We recommend you to generate new credentials. This can be done very easily, doing the following steps:
 
@@ -60,7 +40,7 @@ Then, run htpasswd with your desired username: ::
  $ sudo node htpasswd -c user myUserName
 
 SSL Certificate
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------
 
 At this point, you will create certificates to use the API.
 
