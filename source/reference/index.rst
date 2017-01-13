@@ -22,6 +22,8 @@ Wazuh also provides a centralized Web User Interface (fully integrated in Elasti
     .. toctree::
        :maxdepth: 2
 
+       ossec_conf/index
+       internal_options/index
        modules/index
        ruleset/index
        api/index
