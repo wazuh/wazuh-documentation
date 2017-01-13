@@ -20,4 +20,4 @@ Manual deployment
 Automatic deployment
 --------------------------
 
-Check out :ref:`Configuration Management Tools <automatic_deployment>` section to know the available tools to help with automatic deployments.
+Check out :ref:`Deploying with puppet <wazuh_puppet>` section to know the available tools to help with automatic deployments.

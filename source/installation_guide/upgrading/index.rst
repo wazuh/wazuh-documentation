@@ -63,7 +63,7 @@ These are the steps to update Elastic Stack server, and configure it to work wit
 .. toctree::
     :maxdepth: 1
 
-    ../installing-wazuh/packages-installation/elastic_server_deb
+    ../installing-manager/packages-installation/elastic_server_deb
 
 
 **Red Hat, CentOS and other RPM-based systems**
@@ -71,4 +71,4 @@ These are the steps to update Elastic Stack server, and configure it to work wit
 .. toctree::
     :maxdepth: 1
 
-    ../installing-wazuh/packages-installation/elastic_server_rpm
+    ../installing-manager/packages-installation/elastic_server_rpm

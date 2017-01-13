@@ -1,9 +1,9 @@
 .. _installation:
 
-Installing Wazuh
-==================
+Installing manager
+===================
 
-There are several ways to install Wazuh, in order to determine what option is the the more appropiate, please consult this table:
+There are several ways to install the Manager, in order to determine what option is the the more appropiate, please consult this table:
 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Type                                                                   | Description                                                 |
@@ -16,7 +16,7 @@ There are several ways to install Wazuh, in order to determine what option is th
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | :ref:`Virtual Machine <virtual_machines>`                              | Running Wazuh using an OVA file in virtual machines.        |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Configuration Management Tools <automatic_deployment>`           | Deploy Wazuh with tools like Puppet, Ansible or Chef.       |
+| :ref:`Puppet <wazuh_puppet>`                                           | Deploy Wazuh with automatically with Puppet.                |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 
 .. topic:: Contents
@@ -25,5 +25,5 @@ There are several ways to install Wazuh, in order to determine what option is th
        :maxdepth: 2
 
        packages-installation/index
-       installation-alternatives/index
-       optional-configuration/index
+       other-methods/index
+       optional-configurations/index

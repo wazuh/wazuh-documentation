@@ -1,11 +1,20 @@
-.. _optional_configuration:
+.. _optional_configurations:
 
-Optional configuration
+Optional configurations
 ===============================
 
 This section advises on best practices related to get a Wazuh environment efficient, stable and secure.
 
-Encrypting communications between Wazuh and Elastic servers
+Single-host architecture
+-------------------------------------------------------------------------
+
+.. toctree::
+    :maxdepth: 1
+
+    singlehost_configuration
+
+
+Servers communication encryption
 -------------------------------------------------------------------------
 
 By default, the communications between Wazuh server (Filebeat) and Elastic Stack server (Logstash) are not encrypted. It’s strongly recommended to configure Logstash to use SSL encryption. Please follow the next guide to setting up SSL for Filebeat and Logstash.

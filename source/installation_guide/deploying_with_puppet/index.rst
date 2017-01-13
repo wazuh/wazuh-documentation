@@ -1,6 +1,6 @@
 .. _wazuh_puppet:
 
-Puppet
+Deploying with puppet
 ============================
 
 ToDo

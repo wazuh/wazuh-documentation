@@ -1,6 +1,6 @@
 .. _sources_installation:
 
-Installing Wazuh from source code
+Installing from sources
 ===================================================
 
 This guide replaces only the part of *Install Wazuh manager (deb/rpm)* of :ref:`Installation via packages <installation_main>`.

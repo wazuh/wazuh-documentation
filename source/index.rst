@@ -55,15 +55,13 @@ Available documentation
    :maxdepth: 1
 
    getting_started/index
-   setup/index
+   installation_guide/index
    learn_examples/index
    reference/index
    pci-dss/index
    ruleset/index
    api/index
    openscap/index
-   configuration_management_tools/index
-   docker/index
    amazon/index
    audit/index
 

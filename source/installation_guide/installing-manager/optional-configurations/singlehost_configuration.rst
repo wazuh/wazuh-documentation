@@ -3,10 +3,7 @@
 Single-host arquitecture installation
 ==============================================
 
-In order to install all components of Wazuh in the same server, performs all the steps described in the :ref:`main guide <installation_main>` **except**:
-
- - Install Filebeat: It is no necessary due to we do not need send the alerts to another server.
- - Encrypting communications between Wazuh server and Elastic Stack server: It is no necessary due to the same reasons than the previous one.
+In order to install all components of Wazuh in the same server, performs all the steps described in the :ref:`main guide <installation_main>` **except** the section corresponding to install *Filebeat* (it is no necessary due to we do not need send the alerts to another server).
 
 After performing the installation steps, we configure Logstash to read Wazuh alerts:
 

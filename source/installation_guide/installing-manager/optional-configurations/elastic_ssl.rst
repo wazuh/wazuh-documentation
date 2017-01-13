@@ -3,7 +3,7 @@
 Setting up SSL for Filebeat and Logstash
 ========================================
 
-In this section we're going to use SSL to make the connection through Logstash server verification by Filebeat client.
+In this section we're going to use SSL to make the connection through Logstash server verification by Filebeat client. This configuration applies only for distributed architectures.
 
 Get a SSL certificate
 ---------------------

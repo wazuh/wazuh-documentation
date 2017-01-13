@@ -1,6 +1,6 @@
-.. _installation_alternatives:
+.. _installation_methods:
 
-Installation alternatives
+Other installation methods
 ===========================
 
 This guide describes the alternative installation methods, for those with special installation needs such as running Wazuh as a virtual machine or a single host architectures for the Wazuh environment.
@@ -10,4 +10,4 @@ This guide describes the alternative installation methods, for those with specia
 
     sources_installation
     virtual_machines
-    singlehost_installation
+    docker/index
