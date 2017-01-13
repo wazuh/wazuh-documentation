@@ -3,6 +3,10 @@
 Wazuh Container
 ===============================
 
+ToDo: Image1: Elatic Stack, Image2: Wazuh Manager + api.
+
+ToDo: docker pull ...
+
 These Docker container source files can be found in our `ossec-wazuh Github repository <https://github.com/wazuh/wazuh-docker>`_. It includes both an OSSEC manager and an Elasticsearch single-node cluster, with Logstash and Kibana. You can find more information on how these components work together in :ref:`our documentation <installation>`.
 
 To install the ossec-elk container run this command: ::

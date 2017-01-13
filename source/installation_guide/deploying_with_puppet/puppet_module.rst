@@ -1,15 +1,12 @@
-.. _deploy_wazuh_with_puppet:
-
-Deploying Wazuh with Puppet
-==============================
+.. _puppet_module:
 
 Wazuh Puppet module
--------------------
+==============================
 
 ToDo
 
-OSSEC Puppet module
--------------------
+OSSEC Puppet module (tmp)
+---------------------------
 
 .. note:: This Puppet module has been authored by Nicolas Zin, and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for the contribution.
 

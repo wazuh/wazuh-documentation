@@ -12,4 +12,3 @@ Wazuh is also available as a Docker image.
 
        docker_installation
        wazuh_container
-       ossec_container
