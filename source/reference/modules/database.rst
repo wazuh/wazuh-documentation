@@ -8,7 +8,7 @@ Introduction
 
 The Wazuh core uses list-based databases to store information related to agent keys and FIM / Rootcheck event data. Such information is highly optimized to be handled by the core.
 
-In order to provide well-structured data that could be accesed by the user or the Wazuh API, new **SQLite-based databases** have been introduced on the Wazuh manager. The Database Synchronization Module is an **user-transparent component** that collects information from the core:
+In order to provide well-structured data that could be accessed by the user or the Wazuh API, new **SQLite-based databases** have been introduced on the Wazuh manager. The Database Synchronization Module is an **user-transparent component** that collects information from the core:
 
 - Agent's name, address, encryption key, last connection time, operating system, agent version and shared configuration hash.
 - FIM data: creation, modification and deletion of regular files and Windows registry entries.
