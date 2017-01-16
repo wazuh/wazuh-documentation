@@ -3,12 +3,17 @@
 Installation via packages
 ======================================
 
-This installation guide describes the installation and configuration of Wazuh in two servers:
+This guide describes the installation of Wazuh using packages. We will setup a distributed architecture based on two servers:
 
-- Elastic Stack server: Runs the Elasticsearch engine, Logstash server and Kibana (including the Wazuh App).
-- Wazuh server: Runs the Wazuh Manager, API and Filebeat.
+ - **Elastic Stack server**: Runs the Elasticsearch engine, Logstash server and Kibana (including the Wazuh App).
+ - **Wazuh server**: Runs the Wazuh Manager, API, Filebeat and OpenSCAP scanner.
 
-In case you want to install everything in the same server (single-host arquitecture), :ref:`review this section <singlehost_installation>` before continuing.
+.. thumbnail:: ../../../images/installation/installing_wazuh.png
+    :title: Alert visualization at Kibana discover
+    :align: center
+    :width: 100%
+
+Review :ref:`Single-host architecture installation <singlehost_installation>` in case you need a *single-host architecture* (Wazuh Manager in the same server).
 
 .. warning::
 	Some of the following command require to be run with **root privileges**. You may become *root* by executing one of the following command at the begining of the session::
@@ -27,10 +32,10 @@ In case you want to install everything in the same server (single-host arquitect
 
 .. _installing_wazuh_server:
 
-Installing Wazuh server
------------------------
+Installing Wazuh Manager
+------------------------
 
-These services will typically be installed on a machine other than the Elastic server.
+Follow the next guides to install and configure Wazuh Manager in the first server:
 
 **Debian, Ubuntu, and other Debian-based systems**
 
@@ -55,7 +60,7 @@ These services will typically be installed on a machine other than the Elastic s
 Installing Elastic Stack server
 -------------------------------
 
-These are the steps to install Elastic Stack server, and configure it to work with Wazuh. The other server, Wazuh manager, which will usually run in a different machine.
+Follow the proper guide to install and configure Elastic Stack in the second server:
 
 **Debian, Ubuntu, and other Debian-based systems**
 

@@ -1,11 +1,18 @@
 .. _singlehost_installation:
 
-Single-host arquitecture installation
+Single-host architecture installation
 ==============================================
 
-In order to install all components of Wazuh in the same server, performs all the steps described in the :ref:`main guide <installation_main>` **except** the section corresponding to install *Filebeat* (it is no necessary due to we do not need send the alerts to another server).
+Usally, Wazuh is installed using a distributed architecture but in case you need it, you can install Wazuh in a single-host architecture. That means you will setup the Wazuh Manager in the same server:
 
-After performing the installation steps, we configure Logstash to read Wazuh alerts:
+.. thumbnail:: ../../../images/installation/installing_wazuh_singlehost.png
+    :title: Alert visualization at Kibana discover
+    :align: center
+    :width: 100%
+
+In order to install Wazuh Manager in the same server, you must follow all the stepts decribed in the guide :ref:`Installation via packages <installation_main>`, **except the section corresponding to install Filebeat**.
+
+After performing the previous steps, we configure Logstash to read Wazuh alerts:
 
 1. Edit file ``/etc/logstash/conf.d/01-wazuh.conf``, comment the lines related to SSL at ``input/beats`` and uncomment the lines related to Local Wazuh Manager in ``input/file``. The file should remain such this::
 
