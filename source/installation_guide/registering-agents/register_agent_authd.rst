@@ -44,12 +44,12 @@ Register the agent
 1. Start the authd server::
 
     # (Server)
-    /var/ossec/authd
+    /var/ossec/bin/ossec-authd
 
 2. Run the auth client. You must enter the Authd server's IP address. For example, if such address is 192.168.1.2::
 
     # (Client)
-    /var/ossec/agent-auth -m 192.168.1.2
+    /var/ossec/bin/agent-auth -m 192.168.1.2
 
 Some hints
 ^^^^^^^^^^
@@ -57,12 +57,12 @@ Some hints
 By default, Authd adds agents with dynamic IP (like using "any" on ``manage_agents``). If you want to add agents with static address, use ``-i`` at server-side::
 
     # (Server)
-    /var/ossec/authd -i
+    /var/ossec/bin/ossec-authd -i
 
 On the other hand, **duplicated IPs are not allowed**. So an agent won't be added if there is already another agent registered with the same IP. Authd can be asked to **force a registration** if it finds an older agent with the same IP by deleting the former first, using the option ``-f``::
 
     # (Server)
-    /var/ossec/authd -i -f 0
+    /var/ossec/bin/ossec-authd -i -f 0
 
 The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be erased). In this case, 0 means to delete anyway.
 
@@ -95,14 +95,14 @@ Manager can be protected from unauthorized connections by using a password. We c
 
     # (Server)
     echo "TopSecret" > /var/ossec/etc/authd.pass
-    /var/ossec/authd -P
+    /var/ossec/bin/ossec-authd -P
 
       Accepting connections. Using password specified on file: /var/ossec/etc/authd.pass
 
 2. If such file doesn't exist, Authd will create a password by itself::
 
     # (Server)
-    /var/ossec/authd -P
+    /var/ossec/bin/ossec-authd -P
 
       Accepting connections. Random password chosen for agent authentication: abcd1234
 
@@ -112,12 +112,12 @@ On the client-side, the key can be entered into the file with the same name or a
 
     # (Client)
     echo "abcd1234" > /var/ossec/etc/authd.pass
-    /var/ossec/agent-auth -m 192.168.1.2
+    /var/ossec/bin/agent-auth -m 192.168.1.2
 
 2. Entering the password in the command line::
 
     # (Client)
-    /var/ossec/agent-auth -m 192.168.1.2 -P "abcd1234"
+    /var/ossec/bin/agent-auth -m 192.168.1.2 -P "abcd1234"
 
 Use SSL to verify hosts
 ^^^^^^^^^^^^^^^^^^^^^^^
