@@ -9,7 +9,7 @@ This guide describes the installation of Wazuh using packages. We will setup a d
  - **Wazuh server**: Runs the Wazuh Manager, API, Filebeat and OpenSCAP scanner.
 
 .. thumbnail:: ../../../images/installation/installing_wazuh.png
-    :title: Alert visualization at Kibana discover
+    :title: Installing Wazuh Manager
     :align: center
     :width: 100%
 
