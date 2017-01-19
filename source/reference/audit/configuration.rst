@@ -59,7 +59,7 @@ Red Hat, CentOS and Fedora: ::
 
 Debian and Ubuntu based Linux distributions: ::
 
-    $ apt-get install audit
+    $ apt-get install auditd
 
 Editing ossec.conf
 ++++++++++++++++++++++++++++++++++++++++++++++++
