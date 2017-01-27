@@ -1,4 +1,4 @@
-.. _installation_guide:
+.. _packages_list:
 
 Installation guide
 ========================
@@ -16,3 +16,4 @@ This document will guide you through the installation process, from downloading 
         registering-agents/index
         deploying_with_puppet/index
         upgrading/index
+      	packages_list/index
