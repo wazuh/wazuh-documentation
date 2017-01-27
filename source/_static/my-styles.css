@@ -106,3 +106,10 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     border: none;
     color: #404040;
 }
+
+/* Color of code inside admonition sections ***********************************/
+
+.admonition .highlight {
+    border: none;
+    background: inherit;
+}
