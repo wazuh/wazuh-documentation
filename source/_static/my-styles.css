@@ -6,6 +6,7 @@
 
 .wy-grid-for-nav {
     background: #fcfcfc;
+    box-shadow: 0 0 4px #c9c9c9;
 }
 
 /* Font family ****************************************************************/
@@ -20,6 +21,13 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 /* Global (L1) background */
 .wy-nav-side {
     background: #e3e3e3;
+    box-shadow: 0 0 4px #bdbdbd;
+    border-radius: 2px;
+}
+
+.wy-side-nav-search {
+    box-shadow: 0 0 4px #404040;
+    border-radius: 2px;
 }
 
 /* L1 border (separator) */
@@ -115,6 +123,13 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 .admonition .highlight {
     border: none;
     background: inherit;
+}
+
+/* Admonition sections shadow *************************************************/
+
+.admonition, .admonition-title {
+    border-radius: 2px;
+    box-shadow: 0 0 4px #bdbdbd;
 }
 
 /* Home page topics ***********************************************************/
