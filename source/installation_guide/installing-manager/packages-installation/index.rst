@@ -5,8 +5,8 @@ Installation via packages
 
 This guide describes the installation of Wazuh using packages. We will setup a distributed architecture based on two servers:
 
- - **Elastic Stack server**: Runs the Elasticsearch engine, Logstash server and Kibana (including the Wazuh App).
  - **Wazuh server**: Runs the Wazuh Manager, API, Filebeat and OpenSCAP scanner.
+ - **Elastic Stack server**: Runs the Elasticsearch engine, Logstash server and Kibana (including the Wazuh App).
 
 .. thumbnail:: ../../../images/installation/installing_wazuh.png
     :title: Installing Wazuh Manager

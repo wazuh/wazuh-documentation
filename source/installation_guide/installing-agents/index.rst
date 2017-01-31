@@ -3,21 +3,22 @@
 Installing agents
 ======================================================
 
-This installation guide describes how to install a Wazuh agent in a server.
+There are several ways to install a Wazuh agent, in order to determine what option is the the more appropiate, please consult this table:
 
-.. _installing_wazuh_agent:
++------------------------------------------+--------------------------------------------------+
+| Type                                     | Description                                      |
++==========================================+==================================================+
+| :ref:`Packages <installing_wazuh_agent>` | Install Wazuh agents using deb and rpm packages. |
++------------------------------------------+--------------------------------------------------+
+| :ref:`Sources <wazuh_agent_source>`      | Install Wazuh agents from source code.           |
++------------------------------------------+--------------------------------------------------+
+| :ref:`Puppet <wazuh_puppet>`             | Deploying Wazuh automatically with Puppet.       |
++------------------------------------------+--------------------------------------------------+
 
-Manual deployment
---------------------------
-.. toctree::
-    :maxdepth: 1
+.. topic:: Contents
 
-    wazuh_agent_deb
-    wazuh_agent_rpm
-    wazuh_agent_source
+    .. toctree::
+        :maxdepth: 2
 
-
-Automatic deployment
---------------------------
-
-Check out :ref:`Deploying with puppet <wazuh_puppet>` section to know the available tools to help with automatic deployments.
+        packages-installation/index
+        other-methods/index

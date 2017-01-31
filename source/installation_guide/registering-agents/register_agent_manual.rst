@@ -11,7 +11,7 @@ Register agents manually
 	$ /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v1.2 Agent manager.            *
+	* Wazuh v2.0 Agent manager.            *
 	* The following options are available: *
 	****************************************
 	   (A)dd an agent (A).
@@ -58,7 +58,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	$ /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v1.2 Agent manager.            *
+	* Wazuh v2.0 Agent manager.            *
 	* The following options are available: *
 	****************************************
 	   (I)mport key from the server (I).

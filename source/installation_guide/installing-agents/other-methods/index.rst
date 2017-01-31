@@ -1,7 +1,10 @@
 .. _wazuh_agent_source:
 
-Install Wazuh agent from source code
-=======================================
+Other installation methods
+===========================
+
+Installing from sources
+-------------------------------------
 
 1. Download and extract the latest version::
 
