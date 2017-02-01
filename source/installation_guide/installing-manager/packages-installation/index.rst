@@ -30,49 +30,40 @@ Review :ref:`Single-host architecture installation <singlehost_installation>` in
 	Before installing the components please configure your **NTP** to sync time.
 
 
-.. _installing_wazuh_server:
+Follow the next guides to install and configure Wazuh Manager:
 
-Installing Wazuh Manager
-------------------------
+Debian-based systems
+-------------------------------------------------
 
-Follow the next guides to install and configure Wazuh Manager on the first server:
+.. topic:: Wazuh server
 
-**Debian, Ubuntu, and other Debian-based systems**
+    .. toctree::
+        :maxdepth: 1
 
-.. toctree::
-    :maxdepth: 1
+        wazuh_server_deb
+        filebeat_deb
 
-    wazuh_server_deb
-    filebeat_deb
+.. topic:: Elastic stack server
 
+    .. toctree::
+        :maxdepth: 1
 
-**Red Hat, CentOS and other RPM-based systems**
+        elastic_server_deb
 
-.. toctree::
-    :maxdepth: 1
+RPM-based systems
+-------------------------------------------------
 
-    wazuh_server_rpm
-    filebeat_rpm
+.. topic:: Wazuh server
 
+    .. toctree::
+        :maxdepth: 1
 
-.. _installation_elastic:
+        wazuh_server_rpm
+        filebeat_rpm
 
-Installing Elastic Stack server
--------------------------------
+.. topic:: Elastic stack server
 
-Follow the proper guide to install and configure Elastic Stack on the second server:
+    .. toctree::
+        :maxdepth: 1
 
-**Debian, Ubuntu, and other Debian-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    elastic_server_deb
-
-
-**Red Hat, CentOS and other RPM-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    elastic_server_rpm
+        elastic_server_rpm

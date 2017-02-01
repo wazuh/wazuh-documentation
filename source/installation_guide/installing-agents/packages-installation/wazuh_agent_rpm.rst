@@ -5,7 +5,7 @@ Install Wazuh agent (rpm)
 
 The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
 
-1. First we'll install the Wazuh repository. Run the following command depending on your operating system:
+**1.** First we'll install the Wazuh repository. Run the following command depending on your operating system:
 
     a) For CentOS::
 
@@ -43,11 +43,11 @@ The rpm package is suitable for installation on Red Hat, Centos and other RPM-ba
         protect=1
         EOF
 
-2. Install the Wazuh packages::
+**2.** Install the Wazuh packages::
 
 	yum install wazuh-agent
 
-3. Edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* for the manager's IP address. For example::
+**3.** Edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* for the manager's IP address. For example::
 
 	<ossec_config>
 	  <client>
