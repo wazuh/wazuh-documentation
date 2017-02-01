@@ -14,4 +14,4 @@ In this section, we'll add the Wazuh manager to the Wazuh App on Kibana.
 Next steps
 ----------
 
-Once the Elastic server and Wazuh manager are installed and connected, you can install and connect Wazuh agents. We hace both instruction pages to do it for :ref:`Debian/Ubuntu <wazuh_agent_deb>` and :ref:`RedHat/CentOS <wazuh_agent_rpm>`.
+Once the Elastic server and Wazuh manager are installed and connected, you can install and connect Wazuh agents. How to do it: :ref:`Debian/Ubuntu <wazuh_agent_deb>` , :ref:`RedHat/CentOS <wazuh_agent_rpm>`.

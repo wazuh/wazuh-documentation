@@ -48,7 +48,7 @@ Logstash
 		service logstash start
 
 .. warning::
-	The default installation of Logstash doesn't encrypt the communication. It's strongly recommended to configure Logstash to use SSL encryption. Please read :ref:`elastic_ssl`.
+	The default Logstash installation doesn't encrypt the communication. It's strongly recommended to configure Logstash to use SSL encryption. Please read :ref:`elastic_ssl`.
 
 .. note::
 	You can get more detailed information at the `Official Logstash Installation Documentation <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html#package-repositories>`_.
@@ -105,7 +105,7 @@ Kibana
 		service kibana start
 
 .. note::
-	You can get more detailed information at the `Official Kibana Installation Documentation <https://www.elastic.co/guide/en/kibana/current/install.html>`_.
+	You can get more detailed information about the installation at the `Official Kibana Installation Documentation <https://www.elastic.co/guide/en/kibana/current/install.html>`_.
 
 Connecting the Wazuh App with the API
 ---------------------------------------------

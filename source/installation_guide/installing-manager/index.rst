@@ -3,7 +3,7 @@
 Installing manager
 ===================
 
-There are several ways to install the Manager, in order to determine what option is the the more appropiate, please consult this table:
+There are several ways to install the Manager, in order to determine which option is the most appropiate, please consult this table:
 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Type                                                                   | Description                                                 |

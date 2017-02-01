@@ -13,7 +13,7 @@ This guide describes the installation of Wazuh using packages. We will setup a d
     :align: center
     :width: 100%
 
-Review :ref:`Single-host architecture installation <singlehost_installation>` in case you need a *single-host architecture* (Wazuh Manager in the same server).
+Review :ref:`Single-host architecture installation <singlehost_installation>` in case you need a *single-host architecture* (Wazuh Manager and Elastic stack on the same server).
 
 .. warning::
 	Some of the following command require to be run with **root privileges**. You may become *root* by executing one of the following command at the begining of the session::
@@ -27,7 +27,7 @@ Review :ref:`Single-host architecture installation <singlehost_installation>` in
 		$ ps -p 1
 
 .. note::
-	Before installing the components please configure your NTP to sync time.
+	Before installing the components please configure your **NTP** to sync time.
 
 
 .. _installing_wazuh_server:
@@ -35,7 +35,7 @@ Review :ref:`Single-host architecture installation <singlehost_installation>` in
 Installing Wazuh Manager
 ------------------------
 
-Follow the next guides to install and configure Wazuh Manager in the first server:
+Follow the next guides to install and configure Wazuh Manager on the first server:
 
 **Debian, Ubuntu, and other Debian-based systems**
 
@@ -60,7 +60,7 @@ Follow the next guides to install and configure Wazuh Manager in the first serve
 Installing Elastic Stack server
 -------------------------------
 
-Follow the proper guide to install and configure Elastic Stack in the second server:
+Follow the proper guide to install and configure Elastic Stack on the second server:
 
 **Debian, Ubuntu, and other Debian-based systems**
 
