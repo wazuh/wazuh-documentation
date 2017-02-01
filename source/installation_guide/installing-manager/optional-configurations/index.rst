@@ -3,7 +3,7 @@
 Optional configurations
 ===============================
 
-This section advises on best practices related to get a Wazuh environment efficient, stable and secure.
+This section advises on best practices related to get an efficient, stable and secure Wazuh environment.
 
 .. topic:: Single-host architecture
 
@@ -37,4 +37,4 @@ Securing API
      - Change default user/password.
      - Enable HTTPS.
 
-    You can change these options :ref:`manually <api_configuration>` or run the script ``/var/ossec/api/scripts/configure_api.sh`` in order to configure the basic settings.
+    You can change these options :ref:`manually <api_configuration>` or running the script ``/var/ossec/api/scripts/configure_api.sh`` in order to configure the basic settings.
