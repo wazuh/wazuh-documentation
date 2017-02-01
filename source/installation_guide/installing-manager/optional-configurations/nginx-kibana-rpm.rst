@@ -38,7 +38,7 @@ NGINX SSL proxy for Kibana (rpm)
         cp <ssl_pem> /etc/pki/tls/certs/kibana-access.pem
         cp <ssl_key> /etc/pki/tls/private/kibana-access.key
 
-    b. Instead, to create a **self-signed certificate**. Remember to set the *Common Name* field to your server name. For instance, if your server is *example.com*::
+    b. Otherwise, create a **self-signed certificate**. Remember to set the *Common Name* field to your server name. For instance, if your server is *example.com*::
 
         mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
         openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem -subj "/CN=example.com"
@@ -97,7 +97,7 @@ Enable authentication by htpasswd (optional)
 
 .. note::
 
-    The file contents should remain like this::
+    The file content should remain like this::
 
         server {
             listen 80;
@@ -125,7 +125,7 @@ Enable authentication by htpasswd (optional)
             }
         }
 
-3. Generate the *.htpasswd* file. Replace ``<user>`` for your chosen user name::
+3. Generate the *.htpasswd* file. Replace ``<user>`` for your chosen username::
 
     htpasswd -c /etc/nginx/conf.d/kibana.htpasswd <user>
 
@@ -139,7 +139,7 @@ Enable authentication by htpasswd (optional)
 
         service nginx restart
 
-Now try to access the Kibana web interface via HTTPS. It will ask for the user name and password that you just created.
+Now try to access the Kibana web interface via HTTPS. It will ask for the username and password that you just created.
 
 .. note::
 

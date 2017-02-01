@@ -21,4 +21,4 @@ adding your user to the "docker" group with something like: ::
 
   $ sudo usermod -aG docker your-user
 
-.. note:: Remember that you will have to log out and back in for this to take effect!
+.. note:: Remember that you will have to log out and log in for this to take effect!

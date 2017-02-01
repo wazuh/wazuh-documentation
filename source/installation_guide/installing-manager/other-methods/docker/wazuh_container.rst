@@ -32,7 +32,7 @@ To add an agent use the next command: ::
 
 .. note:: You can also use agents auto enrollment with ossec-authd
 
-Then restart your OSSEC manager: ::
+Then restart your Wazuh manager: ::
 
    $ docker exec -it ossec /var/ossec/bin/ossec-control restart
 
@@ -41,4 +41,4 @@ Access to Kibana4.5
 
 If you have an error the first time you log in kibana: move to a different menu and return to discover and it should be working properly.
 
-.. note:: Some Dashboard visualizations require time and specific alerts to work. Please don't worry if some visualizations do not display data immidiately after the import.
+.. note:: Some Dashboard visualizations require time and specific alerts to work. Please don't worry if some visualizations do not display data immediately after the import.
