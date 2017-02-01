@@ -22,7 +22,8 @@ This guide describes the installation of Wazuh agents using packages.
 
 Follow the next guides to install and configure Wazuh agent in your server:
 
-**Debian, Ubuntu, and other Debian-based systems**
+Debian-based systems
+-------------------------------------------------
 
 .. toctree::
     :maxdepth: 1
@@ -30,7 +31,8 @@ Follow the next guides to install and configure Wazuh agent in your server:
     wazuh_agent_deb
 
 
-**Red Hat, CentOS and other RPM-based systems**
+RPM-based systems
+-------------------------------------------------
 
 .. toctree::
     :maxdepth: 1

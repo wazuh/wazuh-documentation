@@ -1,11 +1,9 @@
 .. _wazuh_server_rpm:
 
-Install Wazuh manager (rpm)
-===============================
+Install Wazuh manager and API (rpm)
+====================================
 
-The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
-
-1. First we'll install the Wazuh repository. Run the following command depending on your operating system:
+**1.** First we'll install the Wazuh repository. Run the following command depending on your operating system:
 
     a) For CentOS::
 
@@ -43,15 +41,15 @@ The rpm package is suitable for installation on Red Hat, Centos and other RPM-ba
         protect=1
         EOF
 
-2. Install the Wazuh Manager::
+**2.** Install the Wazuh Manager::
 
 	yum install wazuh-manager
 
-3. NodeJS >= 4.6.1 is required in order to run the API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend to add the official repositories::
+**3.** NodeJS >= 4.6.1 is required in order to run the API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend to add the official repositories::
 
 	curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
-4. Finally, install the Wazuh API. It will update NodeJS if it is required::
+**4.** Finally, install the Wazuh API. It will update NodeJS if it is required::
 
 	yum install wazuh-api
 

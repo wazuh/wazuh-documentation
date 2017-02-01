@@ -25,14 +25,40 @@ Step 1: Update Manager
 
 Following the next guide, your current installation will be automatically update:
 
- - :ref:`Installing Wazuh server <installing_wazuh_server>`
+**Debian, Ubuntu, and other Debian-based systems**
+
+.. toctree::
+    :maxdepth: 1
+
+    ../installing-manager/packages-installation/wazuh_server_deb
+
+
+**Red Hat, CentOS and other RPM-based systems**
+
+.. toctree::
+    :maxdepth: 1
+
+    ../installing-manager/packages-installation/wazuh_server_rpm
 
 Step 2: Update Agents
 ----------------------------------------------------------
 
 Following the next guide, your current installation will be automatically update:
 
-  - :ref:`Installing Wazuh agent <installing_wazuh_agent>`
+**Debian, Ubuntu, and other Debian-based systems**
+
+.. toctree::
+    :maxdepth: 1
+
+    ../installing-agents/packages-installation/wazuh_agent_deb
+
+
+**Red Hat, CentOS and other RPM-based systems**
+
+.. toctree::
+    :maxdepth: 1
+
+    ../installing-agents/packages-installation/wazuh_agent_rpm
 
 Step 3: Change from Logstash forwarder to Filebeat
 ----------------------------------------------------------

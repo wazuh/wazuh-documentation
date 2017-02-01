@@ -3,7 +3,8 @@
 Deploying with puppet
 ============================
 
-ToDo
+.. warning::
+	Draft document.
 
 .. topic:: Contents
 

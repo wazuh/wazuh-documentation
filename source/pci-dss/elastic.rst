@@ -3,7 +3,7 @@
 Elastic Stack
 =============
 
-:ref:`Wazuh integration with Elastic Stack <installation_elastic>` comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmarking. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
+Wazuh integration with Elastic Stack comes with out-of-the-box dashboards for PCI DSS compliance and CIS benchmarking. You can do forensic and historical analysis of the alerts and store your data for several years, in a reliable and scalable platform.
 
 The following requirements can be met with a combination of Wazuh + Elastic Stack:
 
