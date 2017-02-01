@@ -3,7 +3,7 @@
 Setting up SSL for Filebeat and Logstash
 ========================================
 
-In this section we're going to use SSL to make the connection through Logstash server verification by Filebeat client. This configuration applies only for distributed architectures.
+By default, the communications between Wazuh server (Filebeat) and Elastic Stack server (Logstash) are not encrypted. It’s strongly recommended to configure Logstash to use SSL encryption. Please follow the next guide to setting up SSL for Filebeat and Logstash. This configuration applies only for distributed architectures.
 
 Get a SSL certificate
 ---------------------
