@@ -36,7 +36,7 @@ Wazuh Manager
     cd wazuh-*
     ./install.sh
 
-4. The script will ask about what kind of installation you want to install. Type **server** in order to install Wazuh Manager::
+4. The script will ask about what kind of installation you want. Type **server** in order to install Wazuh Manager::
 
     1- What kind of installation do you want (server, agent, local, hybrid or help)? server
 

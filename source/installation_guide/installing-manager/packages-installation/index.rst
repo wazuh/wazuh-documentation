@@ -16,7 +16,7 @@ This guide describes the installation of Wazuh using packages. We will setup a d
 Review :ref:`Single-host architecture installation <singlehost_installation>` in case you need a *single-host architecture* (Wazuh Manager and Elastic stack on the same server).
 
 .. warning::
-	Some of the following command require to be run with **root privileges**. You may become *root* by executing one of the following command at the begining of the session::
+	Some of the following command require to be run with **root privileges**. You may become *root* by executing one of the following command at the beginning of the session::
 
 		$ su
 		$ sudo -s

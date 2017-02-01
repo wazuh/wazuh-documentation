@@ -6,7 +6,7 @@ Installation via packages
 This guide describes the installation of Wazuh agents using packages.
 
 .. warning::
-	Some of the following command require to be run with **root privileges**. You may become *root* by executing one of the following command at the begining of the session::
+	Some of the following command require to be run with **root privileges**. You may become *root* by executing one of the following command at the beginning of the session::
 
 		$ su
 		$ sudo -s
@@ -17,7 +17,7 @@ This guide describes the installation of Wazuh agents using packages.
 		$ ps -p 1
 
 .. note::
-	Before installing the components please configure your NTP to sync time.
+	Before install the components please configure your NTP to sync time.
 
 
 Follow the next guides to install and configure Wazuh agent in your server:

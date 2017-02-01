@@ -15,7 +15,7 @@ Installing from sources
     cd wazuh-*
     ./install.sh
 
-3. The script will ask about what kind of installation you want to install. Type **agent** in order to install a Wazuh agent::
+3. The script will ask about what kind of installation you want. Type **agent** in order to install a Wazuh agent::
 
     1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
 
