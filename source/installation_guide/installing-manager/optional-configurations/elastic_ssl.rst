@@ -20,7 +20,7 @@ First, we need a SSL certificate and a key. We'll explain how to generate a self
 
 		cp /etc/pki/tls/openssl.cnf custom_openssl.cnf
 
-2. Edit the custom configuration file, ``custom_openssl.conf``.
+2. Edit the custom configuration file, ``custom_openssl.cnf``.
 
 	Find the section ``[ v3_ca ]`` and add a line such this, setting your Elastic server's IP address::
 
