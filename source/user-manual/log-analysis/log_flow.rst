@@ -7,7 +7,7 @@ Wazuh can log everything that is received by remote syslog and store it permanen
 
 This diagram is a basic ilustration of the log flow, It will help you to understand how it works.
 
-.. image:: ../images/manual/log_analysis/log_flow.png
+.. image:: ../../images/manual/log_analysis/log_flow.png
     :align: center
     :width: 100%
 
