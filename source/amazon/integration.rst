@@ -27,7 +27,7 @@ Create a trail for your AWS account. Trails can be created using the AWS CloudTr
 From now on, all the events in your Amazon AWS account will be logged. You can search log messages manually inside ``CloudTrail/API activity history``. Note that every 7 min a JSON file containing new log messages will be stored in your bucket.
 
 Create an user with permission to access S3
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sign in to the ``AWS Management Console`` and open the IAM console at https://console.aws.amazon.com/iam/.
 In the navigation panel, choose ``Users`` and then choose ``Create New Users``.
