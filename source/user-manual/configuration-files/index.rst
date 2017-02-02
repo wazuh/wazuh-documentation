@@ -12,3 +12,4 @@ Configuration files
        internal-options.rst
        centralized-agent-configuration.rst
        ruleset-xml-syntax.rst
+       database

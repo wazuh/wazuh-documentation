@@ -3,6 +3,9 @@
 Database Synchronization Module
 ===============================
 
+.. warning::
+	Move to internal options.
+
 Introduction
 ------------
 

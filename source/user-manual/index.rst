@@ -20,10 +20,13 @@ Wazuh also provides a centralized Web User Interface (fully integrated in Elasti
 .. topic:: Contents
 
     .. toctree::
-       :maxdepth: 2
+        :maxdepth: 1
 
-       configuration-files/index
-       modules/index
-       ruleset/index
-       api/index
-       audit/index
+        configuration-files/index
+        log-analysis/index
+        file-integrity/index
+        anomalies-detection/index
+        policy-monitoring/index
+        system-calls-monitoring/index
+        ruleset/index
+        api/index

@@ -20,4 +20,5 @@ The **OpenSCAP wodle** is an integration of `OpenScap <https://www.open-scap.org
        introduction
        requirements
        reference
+       use_cases
        faq
