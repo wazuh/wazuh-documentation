@@ -8,7 +8,7 @@ Amazon Virtual Private Cloud (Amazon VPC) lets you provision a logically isolate
 Create VPC
 ++++++++++
 
-If one VPC is created the ``rule id 81000`` will apply and an alert will be generated as shown below:
+If one VPC is created, the ``rule id 81000`` will apply and an alert will be generated as shown below:
 
 +------------------------------------------------------------------------+
 |**Definition of rule 81000**                                            |
@@ -29,7 +29,7 @@ If one VPC is created the ``rule id 81000`` will apply and an alert will be gene
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
 
-If the user doesn't have permissions the ``rule id 81001`` will apply:
+If the user doesn't have permissions, the ``rule id 81001`` will apply:
 
 +-------------------------------------------------------------------------------+
 |**Definition of rule 81001**                                                   |

@@ -26,14 +26,14 @@ Create a trail for your AWS account. Trails can be created using the AWS CloudTr
 
 From now on, all the events in your Amazon AWS account will be logged. You can search log messages manually inside ``CloudTrail/API activity history``. Note that every 7 min a JSON file containing new log messages will be stored in your bucket.
 
-Create a user with permission to access S3
+Create an user with permission to access S3
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sign in to the ``AWS Management Console`` and open the IAM console at https://console.aws.amazon.com/iam/.
 In the navigation panel, choose ``Users`` and then choose ``Create New Users``.
-Type the user names for the users you would like to create.
+Type the usernames for the users you would like to create.
 
-.. note:: User names can only use a combination of alphanumeric characters and these characters: plus (+), equal (=), comma (,), period (.), at (@), and hyphen (-). Names must be unique within an account.
+.. note:: Usernames can only use a combination of alphanumeric characters and these characters: plus (+), equal (=), comma (,), period (.), at (@), and hyphen (-). Names must be unique within an account.
 
 The users require access to the API. For this, they must have access keys. To generate access key for new users, select ``Generate an access key`` for each user and ``Choose Create``.
 
@@ -124,7 +124,7 @@ To configure the user credentials you need to create a file called ``/etc/boto.c
 Run the python script to download the JSON data
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We use a python script to download JSON files from S3 Bucket and convert them into flat files that can be used with Wazuh. This script was written by Xavier Martens @xme and contains minor modifications done by Wazuh. It is located in our `repository <https://github.com/wazuh>`_ at ``wazuh/wazuh-ruleset/tools/amazon/getawslog.py``.
+We use a python script to download JSON files from S3 Bucket and convert them into flat files that can be used with Wazuh. This script was written by Xavier Martens `@xme <https://blog.rootshell.be>` and contains minor modifications done by Wazuh. It is located in our `repository <https://github.com/wazuh>`_ at ``wazuh/wazuh-ruleset/tools/amazon/getawslog.py``.
 
 Run the following command to use this script: ::
 
