@@ -17,7 +17,7 @@ This guide describes the installation of Wazuh agents using packages.
 		$ ps -p 1
 
 .. note::
-	Before install the components please configure your NTP to sync time.
+	Before installing the components please configure your NTP to sync time.
 
 
 Follow the next guides to install and configure Wazuh agent in your server:

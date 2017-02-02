@@ -10,7 +10,7 @@ OSSEC Puppet module (tmp)
 
 .. note:: This Puppet module has been authored by Nicolas Zin, and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for the contribution.
 
-Download and install OSSEC module from Puppet Forge: ::
+Download and install Wazuh module from Puppet Forge: ::
 
    $ sudo puppet module install wazuh-ossec
    Notice: Preparing to install into /etc/puppet/modules ...
@@ -24,7 +24,7 @@ Download and install OSSEC module from Puppet Forge: ::
      ├── puppetlabs-stdlib (v4.9.0)
      └── stahnma-epel (v1.1.1)
 
-This module installs and configures OSSEC HIDS agent and manager.
+This module installs and configures Wazuh agent and manager.
 
 The manager is configured by installing the ``ossec::server`` class, and using optionally:
 
@@ -36,7 +36,7 @@ Example
 ^^^^^^^
 Here is an example of a manifest ``ossec.pp``:
 
-OSSEC manager: ::
+Wazuh manager: ::
 
 
   node "server.yourhost.com" {
@@ -82,7 +82,7 @@ OSSEC manager: ::
     }
   }
 
-OSSEC agent: ::
+Wazuh agent: ::
 
    node "client.yourhost.com" {
 
@@ -95,7 +95,7 @@ OSSEC agent: ::
 Reference
 ^^^^^^^^^
 
-OSSEC manager class
+Wazuh manager class
 """""""""""""""""""
 
 class ossec::server
@@ -155,7 +155,7 @@ function ossec::addlog
  - ``$logfile`` /path/to/log/file.
  - ``$logtype`` (default: syslog): The OSSEC ``log_format`` of the file.
 
-OSSEC agent class
+Wazuh agent class
 """""""""""""""""
 
  - ``$ossec_server_ip``: IP of the server.
@@ -181,11 +181,11 @@ function ossec::addlog
 ossec_scanpaths configuration
 """""""""""""""""""""""""""""
 
-Leaving this unconfigured will result in OSSEC using the module defaults. By default, it will monitor /etc, /usr/bin, /usr/sbin, /bin and /sbin on Ossec Server, with real time monitoring disabled and report_changes enabled.
+Leaving this unconfigured will result in Wazuh using the module defaults. By default, it will monitor /etc, /usr/bin, /usr/sbin, /bin and /sbin on Wazuh Server, with real time monitoring disabled and report_changes enabled.
 
 To overwrite the defaults or add in new paths to scan, you can use hiera to overwrite the defaults.
 
-To tell OSSEC to enable real time monitoring of the default paths:
+To tell Wazuh to enable real time monitoring of the default paths:
 
 ossec::server::ossec_scanpaths:
   - path: /etc
