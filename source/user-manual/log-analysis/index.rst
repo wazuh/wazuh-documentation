@@ -3,7 +3,8 @@
 Log analysis
 ================
 
-.. topic:: Introduction
+Introduction
+----------------
 
 Wazuh agents read operating system logs and events, forwarding them to a central manager for analysis and storage. The purpose of this process is the identification of application or system errors, misconfigurations, intrusion attempts, policy violations or security issues.
 
@@ -21,8 +22,8 @@ Log analysis engine takes a log message and:
 .. topic:: Contents
 
     .. toctree::
-       :maxdepth: 2
+        :maxdepth: 2
 
-          log_flow
-          log_retention
-          references
+        log_flow
+        log_retention
+        references
