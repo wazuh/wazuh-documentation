@@ -1,6 +1,6 @@
-.. _reference_manual:
+.. _user_manual:
 
-Reference
+User manual
 ================
 
 Wazuh helps to get security visibility into your infrastructure, by monitoring hosts at a system and application level. The solution, based on multi-platform and lightweight agents, provides the following capabilities:
@@ -22,8 +22,7 @@ Wazuh also provides a centralized Web User Interface (fully integrated in Elasti
     .. toctree::
        :maxdepth: 2
 
-       ossec_conf/index
-       internal_options/index
+       configuration-files/index
        modules/index
        ruleset/index
        api/index

@@ -56,7 +56,7 @@ Available documentation
    installation_guide/index
    migrating/index
    learn_examples/index
-   reference/index
+   user-manual/index
    pci-dss/index
    amazon/index
 
