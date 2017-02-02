@@ -3,8 +3,7 @@
 Components
 ==========
 
-Wazuh is born as an OSSEC HIDS fork that, based on the integration with Elastic Stack and OpenSCAP, evolves into a more comprehensive solut
-ion. Below is a brief description of these tools and what they do:
+Wazuh is born as an OSSEC HIDS fork that, based on the integration with Elastic Stack and OpenSCAP, evolves into a more comprehensive solution. Below is a brief description of these tools and what they do:
 
 .. image:: ../images/ossec_openscap_elastic.png
    :align: center
