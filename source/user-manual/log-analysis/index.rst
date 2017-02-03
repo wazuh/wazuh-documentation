@@ -35,4 +35,4 @@ The memory and CPU usage of the agent is insignificant because it only forwards 
 
         log_flow
         log_retention
-        references
+        log_references

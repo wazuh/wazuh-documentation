@@ -1,4 +1,4 @@
-.. _references:
+.. _log_references:
 
 References
 ===============================
