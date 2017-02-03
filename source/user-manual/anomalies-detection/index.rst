@@ -5,7 +5,7 @@ Intrusions and anomalies detection
 
 .. warning::
 	Draft document.
-    
+
 Introduction
 -----------------------------------
 
@@ -40,7 +40,7 @@ Scan network interfaces
     Scan all network interfaces on the system with *promiscuous mode* enabled. If the interface is in *promiscuous mode*, the output of the *ifconfig* command will show that. If not, we might have a malware installed.
 
 Rootkit checks
-    Rootcheck perform several checks using its own database of rootkits signatures: *rootkit_files.txt* and *rootkit_trojans.txt*. Unfortunately, the signatures are out of date.
+    Rootcheck perform several checks using its own database of rootkits signatures: *rootkit_files.txt*, *rootkit_trojans.txt* and *win_malware_rcl.txt*. Unfortunately, the signatures are out of date.
 
 HOWTOs
 -----------------------------------
