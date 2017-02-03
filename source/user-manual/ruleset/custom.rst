@@ -3,7 +3,7 @@
 Custom rules and decoders
 ===========================
 
-It is possible to modify the default rules and decoders from Wazuh-Ruleset and also add new ones in order to increase OSSEC detection capabilities.
+It is possible to modify the default rules and decoders from Wazuh-Ruleset and also add new ones in order to increase Wazuh detection capabilities.
 
 Adding new decoders and rules
 -------------------------------
