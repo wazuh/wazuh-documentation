@@ -3,27 +3,25 @@
 Architecture
 ============
 
-This section describes how each Wazuh component is placed. Also, it is detailed the movement of data from one component to the oher and how the data is stored.
+When monitoring a network, the Wazuh architecture consists in multiple agents running on the monitoring hosts and reporting to a central manager. This central manager is also sending data, resulting from the analysis done by decoders and rules, to an Elastic Stack cluster.
 
+Elasticsearch clusters are a collection of nodes (systems) that communicate with each other to read and write to an index. Small Wazuh deployments (<50 agents), can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored systems or large volume of data is planned to be indexed and stored.
 
+The integration between a Wazuh manager and an Elasticsearch cluster is done by configuring Filebeat to read alerts and archived events, forwarding the data to the Logstash server, which resides on the Elasticsearch cluster. Filebeat can be configured to use TLS encryption when talking to Logstash.
 
-Distributed architecture
------------------------------
+See below how components are distributed when the Wazuh manager and the Elastic Stack cluster run in different hosts:
 
 .. thumbnail:: ../images/installation/installing_wazuh.png
-    :title: Installing Wazuh Manager
+    :title: Distributed architecture 
     :align: center
     :width: 100%
 
-Single-host architecture
------------------------------
+For even smaller deployments both, the Wazuh manager and the Elastic Stack single-node cluster, can run in the same host:
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
-    :title: Installing Wazuh Manager - Single-host
+    :title: Single-host architecture
     :align: center
     :width: 100%
-
-
 
 Data flow
 -----------------------------
