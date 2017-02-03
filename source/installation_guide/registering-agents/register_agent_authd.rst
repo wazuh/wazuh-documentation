@@ -127,7 +127,7 @@ Create a Certificate of Authority
 
 First we are going to create a certificate of authority (CA) that we will use to sign the certificates for the manager and agents. Hosts will receive a copy of this certificate in order to verify the remote certificate::
 
-    openssl req -x509 -new -nodes -newkey rsa:2048 -keyout rootCA.key -key rootCA.key -out rootCA.pem -batch
+    openssl req -x509 -new -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.pem -batch
 
 .. warning::
     The file ``rootCA.key`` that we have just created is the **private key** of the certificate of authority. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
