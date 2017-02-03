@@ -5,7 +5,8 @@ Getting started
 
 Wazuh is an Open Source project for security visibility, compliance and infrastructure monitoring. It is born as an OSSEC HIDS fork that, based on the integration with Elastic Stack and OpenSCAP, evolves into a more comprehensive solution. Below is a brief description of these tools and what they do:
 
-.. image:: ../images/ossec_openscap_elastic_1024x445.png
+.. thumbnail:: ../images/ossec_openscap_elastic_1024x445.png
+   :title: OSSEC, OpenSCAP and Elastic Stack
    :align: center
    :width: 100%
 

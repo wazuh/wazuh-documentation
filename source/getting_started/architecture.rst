@@ -24,7 +24,13 @@ For even smaller deployments both, the Wazuh manager and the Elastic Stack singl
     :width: 100%
 
 Data flow
------------------------------
+---------
+
+.. thumbnail:: ../images/data_flow_2048x794.png
+    :title: Data flow
+    :align: center
+    :width: 100%
+
 
 Agent-manager communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

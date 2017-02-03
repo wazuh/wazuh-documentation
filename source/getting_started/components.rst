@@ -18,7 +18,8 @@ Different agent tasks or processes are used to monitor the system in different w
 
 The diagram below represents the internal tasks and processes that take place at an agent level:
 
-.. image:: ../images/agent_1024x1016.png
+.. thumbnail:: ../images/agent_1024x1016.png
+   :title: Agent components
    :align: center
    :width: 80%
 
@@ -39,7 +40,8 @@ Wazuh manager
 
 The manager component is the system that analyzes the data received from the agents, triggering alerts when an event matches a rule (e.g. intrusion detected, file changed, configuration not compliant with policy, possible rootkit...).
 
-.. image:: ../images/manager_1024x872.png
+.. thumbnail:: ../images/manager_1024x872.png
+   :title: Manager components
    :align: center
    :width: 80%
 
