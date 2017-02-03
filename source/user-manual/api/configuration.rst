@@ -32,7 +32,9 @@ You can configure some parameters using the file ``/var/ossec/api/configuration/
 Basic Authentication
 -------------------------
 
-By default you can access by typing user "foo" and password "bar". We recommend you to generate new credentials. This can be done very easily, doing the following steps:
+By default you can access by typing user "foo" and password "bar". We recommend you to generate new credentials. This can be done very easily, with the following steps:
+
+TODO: Steps?
 
 Then, run htpasswd with your desired username: ::
 

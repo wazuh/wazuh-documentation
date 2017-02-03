@@ -45,7 +45,7 @@ cURL is a command-line tool for transferring data using various protocols. It ca
 Python
 ^^^^^^^^^^^^^^^^^^
 
-It is very easy interact with the API using Python:
+It is very easy to interact with the API using Python:
 
 Code:
 ::
