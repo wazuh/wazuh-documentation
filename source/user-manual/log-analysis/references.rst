@@ -7,6 +7,9 @@ Here we have showed some basic information to understand how Log Analysis works 
 
 If you want more information about the exactly configuration options go to:
 
-`Log Analysis <http://ossec.github.io/docs/manual/monitoring/index.html>`
+TODO: Add links to configuration-files section
 
-TODO -> Add reference to the configuration-files section
+- **localfile**
+- **remote**
+- **global**
+    - logall
