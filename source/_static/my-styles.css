@@ -164,3 +164,25 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 .admonition div[class^='highlight'] {
     margin-bottom: 0;
 }
+
+/* Code style on headings and menu ********************************************/
+
+h2 code.docutils.literal,
+dt code.docutils.literal {
+    color: inherit;
+    background: inherit;
+    border: initial;
+    padding: 0;
+    font-size: inherit;
+}
+
+a code.docutils.literal {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+h2 {
+    /*border-bottom: solid 1px #6ab0de;*/
+    border-bottom: solid 1px #c9c9c9;
+    padding-bottom: 4px;
+}
