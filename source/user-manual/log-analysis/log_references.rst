@@ -7,9 +7,7 @@ Here we have showed some basic information to understand how Log Analysis works 
 
 If you want more information about the exactly configuration options go to:
 
-TODO: Add links to configuration-files section
-
-- **localfile**
-- **remote**
-- **global**
+- `localfile <../configuration-files/ossec-conf/localfile.html>`_
+- `remote <../configuration-files/ossec-conf/remote.html>`_
+- `global <../configuration-files/ossec-conf/global.html>`_
     - logall

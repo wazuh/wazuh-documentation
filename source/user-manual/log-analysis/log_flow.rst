@@ -22,7 +22,7 @@ Inside the manager, three phases can be distinguished:
 - **Alert**: once the rule is matched, the manager will create an alert.
 
 .. note::
-    More information about `Wazuh Ruleset <ruleset>`
+    More information about `Wazuh Ruleset <../ruleset/index.html>`_
 
 Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
