@@ -63,7 +63,7 @@ Installation on CentOS
 ^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-   $ sudo rpm -Uvh http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+   $ sudo rpm -Uvh https://download.postgresql.org/pub/repos/yum/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-3.noarch.rpm
    $ yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
    $ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
    $ systemctl start postgresql-9.4
