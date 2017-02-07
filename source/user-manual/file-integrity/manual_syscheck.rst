@@ -13,7 +13,13 @@ How it works
 2. Wazuh manager stores the checksums and looks for modifications by comparing the new checksums against the old checksums of that file or registry key.
 3. In case of an anomaly, an alert is generated.
 
-The user can configure the frequency, handle the false positives by configuration or rules. It's possible to check the modifications on real-time.
+
+With the `settings options <syscheck_settings.html>`_, the user can configure:
+
+- **Frequency**: By default configured to run every 6 hours, but entirely configurable by the user.
+- **Handle the false positives**: It's posible to handle this false positives using son configuration options like ignore or with the creation of rules that controls those files that are excluded.
+- **Real-time monitoring**: Wazuh supports realtime monitoring on servers running Windows or Linux. It's important to remark that the real time option is only configurable for directories, no single files.
+- **Report-changes**: It's also posible to report the changes in the content of a text file (only for Linux hosts).
 
 Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

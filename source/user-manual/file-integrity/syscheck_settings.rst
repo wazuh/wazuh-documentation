@@ -1,6 +1,6 @@
-.. _syscheck_references:
+.. _syscheck_settings:
 
-Reference
+Settings
 ==========================
 Here we have showed some basic information to understand how file integrity monitoring works on Wazuh.
 

@@ -3,6 +3,11 @@
 HOWTOs
 ==========================
 
+1. `Ignore false positives`_
+2. `Realtime monitoring`_
+3. `Report changes`_
+
+
 ``Ignore false positives``
 -------------------------------------------
 In order to avoid false positives, syscheck can be configured to ignore certains files that we don't want to monitor with ``ignore`` tag. For example, pdf files:

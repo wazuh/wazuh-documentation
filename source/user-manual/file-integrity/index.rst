@@ -17,5 +17,5 @@ The component responsible for this task is called **syscheck**. This component, 
 
         manual_syscheck
         how_to_fim
-        syscheck_references
+        syscheck_settings
         faqs_fim
