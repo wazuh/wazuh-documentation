@@ -4,12 +4,11 @@ Reference
 ==========================
 Here we have showed some basic information to understand how file integrity monitoring works on Wazuh.
 
-If you want more information about the exactly configuration options go to:
+If you want more information about the exactly configuration options go to `Syscheck <../configuration-files/ossec-conf/syscheck.html>`_
 
-TODO: Add links to configuration-files section
 For example:
 
-- **frequency**
-- **directories**
-- **ignore**
-- **alert_new_files**
+- `frequency <../configuration-files/ossec-conf/syscheck.html#frequency>`_
+- `directories <../configuration-files/ossec-conf/syscheck.html#directories>`_
+- `ignore <../configuration-files/ossec-conf/syscheck.html#ignore>`_
+- `alert_new_files <../configuration-files/ossec-conf/syscheck.html#alert-new-files>`_

@@ -3,6 +3,12 @@
 How it works
 ===============================
 
+Wazuh can read logs messages from:
+
+- Internal logs
+- Windows event log
+- Receive them by remote syslog.
+
 This diagram is a basic ilustration of the log flow, It will help you to understand how it works.
 
 .. image:: ../../images/manual/log_analysis/log_flow.png
@@ -23,6 +29,16 @@ Inside the manager, three phases can be distinguished:
 
 .. note::
     More information about `Wazuh Ruleset <../ruleset/index.html>`_
+
+Log Retention Time
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+By default, Wazuh will generate alerts on events that are important. Most of the events that came from the log messages are just informational and they will not be stored.
+
+The log retention time is configurable by the user. This means that the individual entity, being a corporation or financial institution, needs to define its own log retention policy due to their legal and regulatory needs.
+
+To store all the alerts, you need to enable the ``<log_all>`` option. The logs indefinitely until they are deleted manually. Wazuh uses log-rotation and stores the archived logs in ``/var/ossec/logs/archives/`` and creates an individual directory for each year and month.
+
 
 Example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -15,14 +15,6 @@ Log analysis engine takes a log message and:
 - Categorize it by matching specific rules
 - Generate an alert for the log message.
 
-The memory and CPU usage of the agent is insignificant because it only forwards events to the manager, however on the master CPU and memory consumption can increase quickly depending on the events per second (EPS) that the master has to analyse.
-
-Wazuh can read logs messages from:
-
-- Internal logs
-- Windows event log
-- Receive them by remote syslog.
-
 
 .. topic:: Contents
 
@@ -30,6 +22,6 @@ Wazuh can read logs messages from:
         :maxdepth: 2
 
         log_flow
-        log_retention
-        log_references
         how_to_log
+        faqs_log
+        log_references
