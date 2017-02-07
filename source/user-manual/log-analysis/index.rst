@@ -19,7 +19,7 @@ Log analysis engine takes a log message and:
 .. topic:: Contents
 
     .. toctree::
-        :maxdepth: 2
+        :maxdepth: 1
 
         log_flow
         how_to_log

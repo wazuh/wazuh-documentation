@@ -13,8 +13,9 @@ The component responsible for this task is called **syscheck**. This component, 
 .. topic:: Contents
 
     .. toctree::
-        :maxdepth: 2
+        :maxdepth: 1
 
         manual_syscheck
         how_to_fim
         syscheck_references
+        faqs_fim

@@ -1,6 +1,6 @@
 .. _manual_syscheck:
 
-Syscheck
+How it works
 ==========================
 
 Syscheck is essential for the intrusion detection.
