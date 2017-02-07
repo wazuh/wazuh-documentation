@@ -3,9 +3,13 @@
 Internal options
 ===================
 
-Advanced configuration features are located within the */var/ossec/etc/internal_options.conf* file.
+The main configuration is located in *ossec.conf*. Although, some internal configuration features are located in */var/ossec/etc/internal_options.conf* file.
 
-It will be overwritten during an upgrade, you must use */var/ossec/etc/local_internal_options.conf* in case you want modify any feature.
+.. warning::
+    Any error in this file may cause your installation to not start or to malfunction.
+
+.. warning::
+    This file will be overwritten during an upgrade, you must use */var/ossec/etc/local_internal_options.conf* in case you want to modify any feature.
 
 .. topic:: Sections
 

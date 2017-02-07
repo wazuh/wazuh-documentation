@@ -4,6 +4,22 @@
 Wazuh_database
 ==============
 
+Introduction
+------------
+
+The Wazuh core uses list-based databases to store information related to agent keys and FIM / Rootcheck event data. Such information is highly optimized to be handled by the core.
+
+In order to provide well-structured data that could be accessed by the user or the Wazuh API, new **SQLite-based databases** have been introduced on the Wazuh manager. The Database Synchronization Module is an **user-transparent component** that collects information from the core:
+
+- Agent's name, address, encryption key, last connection time, operating system, agent version and shared configuration hash.
+- FIM data: creation, modification and deletion of regular files and Windows registry entries.
+- Rootcheck detected defects: issue message, first detection date and last alert time.
+- Static core settings such maximum permitted agents or SSL enabling for Authd.
+
+.. note::
+    The Wazuh Database Synchronization Module starts automatically on server and local profiles, it doesn't need to be configured. Nevertheless you can do some optional settings.
+
+The module uses *inotify* from Linux to monitor changes on every file in real-time. Databases will be updated as soon as possible when a change is detected. **If inotify is not supported** (for example, on operating systems other than Linux) every file will be scanned continuosly looking for changes, with a default delay of one minute between scans.
 
 +----------------------------------+---------------+----------------------------------------------+
 | Options                          | Default value | Allowed values                               |
@@ -18,6 +34,19 @@ Wazuh_database
 +----------------------------------+---------------+----------------------------------------------+
 | `wazuh_database.sleep`_          | 60            | Any integer from 0 to 86400 (seconds)        |
 +----------------------------------+---------------+----------------------------------------------+
+
+
+How to disable the module
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you want to disable the Wazuh Database Synchronization Module, just set the sync directives to 0 at ``etc/local_internal_options.conf``::
+
+    wazuh_database.sync_agents=0
+    wazuh_database.sync_syscheck=0
+    wazuh_database.sync_rootcheck=0
+
+Then save that file and **restart Wazuh**. Next times that Wazuh starts the Database Synchronization Module won't be loaded.
+
 
 ``wazuh_database.sync_agents``
 ------------------------------
