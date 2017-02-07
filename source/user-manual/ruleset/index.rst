@@ -13,4 +13,5 @@ This documentation explains how to install, update, and contribute to Wazuh Rule
        getting_started
        update
        custom
+       dynamic-fields
        contribute
