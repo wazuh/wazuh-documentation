@@ -9,7 +9,7 @@ Configuration files
        :maxdepth: 1
 
        ossec-conf/index
-       internal-options.rst
+       internal-options/index
        centralized-agent-configuration.rst
        ruleset-xml-syntax.rst
        database
