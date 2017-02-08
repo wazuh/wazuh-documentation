@@ -3,8 +3,11 @@
 HOWTOs
 ==========================
 
-Monitor running processes
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. `Monitor running processes`_
+2. `Disk space utilization`_
+
+``Monitor running processes``
+---------------------------------
 Imagine you want to monitor the running proccess and alert if an important one is not running.
 
 Example with notepad.exe:
@@ -44,8 +47,8 @@ Frequency defines how often the command will be run (in seconds).
 
 First rule will create an alert "Important procces not running", unless the output matches `notepad.exe` (on second rule).
 
-Disk space utilization
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+``Disk space utilization``
+---------------------------------
 You can use the Log Analysis capability in order to be alerted if any partition reached 100%
 
 1. Configure the command to be monitored

@@ -1,13 +1,16 @@
-.. _log_flow:
+.. _manual_log:
 
 How it works
 ===============================
 
-Wazuh can read logs messages from:
+Log analysis engine takes a log message and:
 
-- Internal logs
-- Windows event log
-- Receive them by remote syslog.
+1. Extract important fields
+2. Identify & evaluate the content
+3. Categorize it by matching specific rules
+4. Generate an alert for the log message.
+
+The memory and CPU usage of the agent is insignificant because it only forwards events to the manager, however on the master CPU and memory consumption can increase quickly depending on the events per second (EPS) that the master has to analyze.
 
 This diagram is a basic ilustration of the log flow, It will help you to understand how it works.
 
@@ -21,7 +24,7 @@ Wazuh Agent
 
 Wazuh Manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Inside the manager, three phases can be distinguished:
+The Manager monitorize everything in real time. Inside the manager, three phases can be distinguished:
 
 - **Decode**: that extracts known fields from the log message, identifies key information (SRC IP, username...).
 - **Analyze**: next step is to check if any of the rules that are internally stored, matches.
