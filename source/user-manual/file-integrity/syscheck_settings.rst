@@ -4,6 +4,7 @@ Settings
 ==========================
 Here we have showed some basic information to understand how file integrity monitoring works on Wazuh.
 
+To configure the options for syscheck go to `ossec.conf <../configuration-files/ossec-conf/index.html>`_
 If you want more information about the exactly configuration options go to `Syscheck <../configuration-files/ossec-conf/syscheck.html>`_
 
 For example:
