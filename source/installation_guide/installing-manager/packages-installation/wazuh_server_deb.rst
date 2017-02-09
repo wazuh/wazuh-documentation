@@ -3,6 +3,11 @@
 Install Wazuh manager and API (deb)
 ====================================
 
+Adding Wazuh repositories
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Add the Wazuh repositories to your system. Also, it is possible to download the :ref:`required package <packages>`.
+
 **1.** In order to perform this procedure properly, packages ``curl`` and ``apt-transport-https`` must be installed into your system. If they are not, install them::
 
 	apt-get install curl apt-transport-https
@@ -53,19 +58,45 @@ Install Wazuh manager and API (deb)
 
     echo "deb https://packages.wazuh.com/apt yakkety main" | tee /etc/apt/sources.list.d/wazuh.list
 
-
-**4.** Update the package information and install the Wazuh Manager::
+**4.** Update the package information::
 
 	apt-get update
+
+Installing manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Install the Wazuh manager::
+
 	apt-get install wazuh-manager
 
-**5.** NodeJS >= 4.6.1 is required in order to run the API. If you do not have installed NodeJS or your version is older than 4.6.1, we recommend to add the official repositories::
+
+Installing API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**1.** NodeJS >= 4.6.1 is required in order to run the API. If you do not have installed NodeJS or your version is older than 4.6.1, we recommend to add the official repositories::
 
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
-**6.** Finally, install the Wazuh API. It will update NodeJS if it is required::
+**2.** Install the Wazuh API. It will update NodeJS if it is required::
 
 	apt-get install wazuh-api
+
+**3.** Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in the most of Linux distributions.
+
+It is possible to set the path of Python in the API configuration at */var/ossec/api/configuration/config.js*::
+
+    config.python = [
+        // Default installation
+        {
+            bin: "python",
+            lib: ""
+        },
+        // Package 'python27' for CentOS 6
+        {
+            bin: "/opt/rh/python27/root/usr/bin/python",
+            lib: "/opt/rh/python27/root/usr/lib64"
+        }
+    ];
 
 Next steps
 ----------
