@@ -1,6 +1,12 @@
-.. _openscap_use_cases:
+.. _how_to_oscap:
 
-How to Evaluate PCI-DSS on RHEL7
+HOWTOs
+==========================
+
+1. `Evaluate PCI-DSS on RHEL7`_
+2. `Auditing Security Vulnerabilities of Red Hat Products`_
+
+``Evaluate PCI-DSS on RHEL7``
 -------------------------------------------------------------------------
 This section describes how to evaluate the Payment Card Industry Data Security Standard (PCI-DSS) on Red Hat Enterprise Linux 7.
 
@@ -89,7 +95,7 @@ Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
     :width: 100%
 
 
-Auditing Security Vulnerabilities of Red Hat Products
+``Auditing Security Vulnerabilities of Red Hat Products``
 -------------------------------------------------------------------------
 The Red Hat Security Response Team provides OVAL definitions for all vulnerabilities (identified by CVE name) that affect Red Hat Enterprise Linux 3, 4, 5, 6 and 7. This enables users to perform a vulnerability scan and diagnose whether a system is vulnerable or not.
 

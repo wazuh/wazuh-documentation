@@ -15,10 +15,10 @@ The **OpenSCAP wodle** is an integration of `OpenScap <https://www.open-scap.org
 .. topic:: Documentation sections
 
     .. toctree::
-       :maxdepth: 2
+       :maxdepth: 1
 
        introduction
        requirements
-       reference
-       use_cases
-       faq
+       how_to_oscap
+       oscap_settings
+       faqs_oscap
