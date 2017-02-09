@@ -47,7 +47,7 @@ Wazuh Manager
 Wazuh API
 ---------------------------------------------------
 
-1. It is required NodeJS >= 4.6.1 in order to run the API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend to add the official repositories because they have more recent versions. Also, it is required the *pip* package.
+1. It is required NodeJS >= 4.6.1 in order to run the API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend to add the official repositories because they have more recent versions.
 
 **Debian, Ubuntu, and other Debian-based systems**
 ::
@@ -55,15 +55,11 @@ Wazuh API
     curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
     apt-get install -y nodejs
 
-    apt-get install -y python-pip
-
 **Red Hat, CentOS and other RPM-based systems**
 ::
 
     curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
     yum -y install nodejs
-
-    yum install -y python-pip
 
 .. note::
 	`Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
