@@ -19,19 +19,104 @@ This diagram is a basic ilustration of the log flow, It will help you to underst
     :width: 100%
 
 Wazuh Agent
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- **Collector** recopile all the logs from the server. The logs monitored logs are user defined.
+
+  - **Collector** recopile all the logs from the server. The logs monitored logs are user defined.
 
 Wazuh Manager
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The Manager monitorize everything in real time. Inside the manager, three phases can be distinguished:
 
-- **Decode**: that extracts known fields from the log message, identifies key information (SRC IP, username...).
-- **Analyze**: next step is to check if any of the rules that are internally stored, matches.
-- **Alert**: once the rule is matched, the manager will create an alert.
+  The Manager monitorize everything in real time. Inside the manager, three phases can be distinguished:
+
+  - **Decode**: that extracts known fields from the log message, identifies key information (SRC IP, username...).
+  - **Analyze**: next step is to check if any of the rules that are internally stored, matches.
+  - **Alert**: once the rule is matched, the manager will create an alert.
 
 .. note::
     More information about `Wazuh Ruleset <../ruleset/index.html>`_
+
+Messages source
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wazuh can read logs messages from:
+
+Log files
+---------
+
+.. image:: ../../images/manual/log_analysis/logfile.png
+  :align: center
+  :width: 50%
+
+Wazuh can be configured to monitor specific files on the servers. This servers can be running windos or Linux.
+
+Configuration Example:
+
+Linux:
+::
+
+  <agent_config os="Linux">
+    <localfile>
+        <location>/var/log/example.log</location>
+        <log_format>syslog</log_format>
+    </localfile>
+  </agent_config>
+
+Windows:
+::
+
+  <agent_config os="Windows">
+    <localfile>
+        <location>C:\myapp\example.log</location>
+        <log_format>syslog</log_format>
+    </localfile>
+  </agent_config>
+
+
+Windows event log
+-----------------
+
+Wazuh can also be configured to monitor the Event Log from windows, or Event Channel for Vista or newer versions:
+
+.. image:: ../../images/manual/log_analysis/eventlog.png
+  :align: center
+  :width: 50%
+
+Configuration Example:
+
+Eventlog:
+::
+
+  <localfile>
+    <location>Security</location>
+    <log_format>eventlog</log_format>
+  </localfile>
+
+Eventchannel:
+::
+
+  <localfile>
+    <location>Microsoft-Windows-PrintService/Operational</location>
+    <log_format>eventchannel</log_format>
+  </localfile>
+
+Remote syslog
+-------------
+
+For other devices like firewalls, you can configure Wazuh to receive log events through Syslog.
+
+.. image:: ../../images/manual/log_analysis/syslog.png
+  :align: center
+  :width: 50%
+
+Configuration example:
+::
+
+  <ossec_config>
+    <remote>
+      <connection>syslog</connection>
+      <allowed-ips>192.168.2.0/24</allowed-ips>
+    </remote>
+  <ossec_config>
+
+``<connection>syslog</connection>`` indicate that we allow syslog messages from the device to the server, and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` to define the network.
 
 Log Retention Time
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
