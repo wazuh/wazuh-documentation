@@ -5,14 +5,13 @@ How it works
 
 Syscheck is essential for the intrusion detection.
 
-
-How it works
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. image:: ../../images/manual/fim/fim.png
+  :align: center
+  :width: 80%
 
 1. Wazuh agent scans the system (the frequency is configurable) and sends the checksums of the monitored files to the Wazuh manager.
 2. Wazuh manager stores the checksums and looks for modifications by comparing the new checksums against the old checksums of that file or registry key.
 3. In case of an anomaly, an alert is generated.
-
 
 With the `settings options <syscheck_settings.html>`_, the user can configure:
 
