@@ -10,8 +10,6 @@ To check your current kernel version, open a terminal and use ``uname -r`` to di
    $ uname -r
    3.10.0-229.el7.x86_64
 
-.. note:: These Docker containers are based on "xetus-oss" dockerfiles, which can be found at `https://github.com/xetus-oss/docker-ossec-server <https://github.com/xetus-oss/docker-ossec-server>`_. We created our own fork, which we test and maintain. Thank you Terence Kent for your contribution to the community.
-
 Run the Docker installation script. ::
 
    $ curl -sSL https://get.docker.com/ | sh
