@@ -11,7 +11,7 @@ FAQs
 
 ``How often does rootcheck run?``
 -------------------------------------------------
-Rootcheck frequency is configurable by the user with `frequency option <../configuration-files/ossec-conf/rootcheck.html#frequency>`_. By default is configured to run every 2 hours.
+Rootcheck frequency is configurable by the user with :ref:`frequency <reference_ossec_rootcheck_frequency>`. By default is configured to run every 2 hours.
 
 ``How does rootcheck know the rootkit files to look for?``
 ------------------------------------------------------------

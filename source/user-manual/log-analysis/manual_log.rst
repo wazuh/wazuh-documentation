@@ -31,7 +31,7 @@ Wazuh Manager
   - **Alert**: once the rule is matched, the manager will create an alert.
 
 .. note::
-    More information about `Wazuh Ruleset <../ruleset/index.html>`_
+    More information about :ref:`Wazuh Ruleset <ruleset>`
 
 Messages source
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

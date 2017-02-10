@@ -7,6 +7,7 @@ HOWTOs
 2. `Realtime monitoring`_
 3. `Report changes`_
 
+.. _how_to_fim_ignore:
 
 ``Ignore false positives``
 -------------------------------------------
@@ -27,6 +28,8 @@ Realtime monitoring is configured with the ``realtime`` option. This option only
 	<syscheck>
 		<directories check_all="yes" realtime="yes">c:/tmp</directories>
 	</syscheck>
+
+.. _how_to_fim_report_changes:
 
 ``Report changes``
 -------------------------------------------

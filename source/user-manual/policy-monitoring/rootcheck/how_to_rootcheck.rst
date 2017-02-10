@@ -5,6 +5,8 @@ HOWTOs
 
 1. `Root access by SSH`_
 
+.. _how_to_rootcheck_ssh:
+
 ``Root access by SSH``
 ------------------------------------
 

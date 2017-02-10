@@ -13,7 +13,7 @@ Syscheck is essential for the intrusion detection.
 2. Wazuh manager stores the checksums and looks for modifications by comparing the new checksums against the old checksums of that file or registry key.
 3. In case of an anomaly, an alert is generated.
 
-With the `settings options <syscheck_settings.html>`_, the user can configure:
+With the :ref:`settings options <syscheck_settings>`, the user can configure:
 
 - **Frequency**: By default configured to run every 6 hours, but entirely configurable by the user.
 - **Handle the false positives**: It's posible to handle this false positives using son configuration options like ignore or with the creation of rules that controls those files that are excluded.

@@ -41,6 +41,8 @@ Configuration related to file integrity monitoring.
 | `skip_nfs`_         | yes, no                                      |
 +---------------------+----------------------------------------------+
 
+.. _reference_ossec_syscheck_directories:
+
 ``directories``
 ---------------
 
@@ -114,7 +116,7 @@ This should be set on the system you wish tomonitor (or in the agent.conf if app
 
       Allowed value: string
 
-
+.. _reference_ossec_syscheck_ignore:
 
 ``ignore``
 ----------
@@ -138,6 +140,7 @@ List of files or directories to be ignored (one entry per element). The files an
 
     Allowed value: sregex
 
+.. _reference_ossec_syscheck_frequency:
 
 ``frequency``
 -------------
@@ -207,6 +210,7 @@ Specifies if syscheck will ignore files that change too often (after the third c
 
      It valid on: server and local
 
+.. _reference_ossec_syscheck_alert_new_files:
 
 ``alert_new_files``
 -------------------

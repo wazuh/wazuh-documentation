@@ -87,6 +87,8 @@ systems_audit
 
   Path to a directory
 
+.. _reference_ossec_rootcheck_rootkit_files:
+
 ``rootkit_files``
 -----------------
 
@@ -102,6 +104,8 @@ This option can be used to change the location of the rootkit files database
 .. topic:: Allowed values
 
   A file with the rootkit files signatures
+
+.. _reference_ossec_rootcheck_rootkit_trojans:
 
 ``rootkit_trojans``
 -------------------
@@ -120,6 +124,8 @@ This option can be used to change the location of the rootkit trojans database
 
 ``windows_audit``
 -----------------
+
+.. _reference_ossec_rootcheck_audit:
 
 ``system_audit``
 ----------------
@@ -144,6 +150,8 @@ Tells rootcheck to scan the whole system (may lead to some false positives).
 .. topic:: Allowed values
 
   The options are: yes or no
+
+.. _reference_ossec_rootcheck_frequency:
 
 ``frequency``
 -------------

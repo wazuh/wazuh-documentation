@@ -6,7 +6,7 @@ How it works
 This section describes the checks performed by Wazuh to find the anomalies caused by an intruder or a malware.
 
 File integrity monitoring
-    Malware replaces files, directories and command, so performing file integrity check in the main directories allow to detect these actions. More info `File Integrity Monitoring Section <../file-integrity/index.html>`_
+    Malware replaces files, directories and command, so performing file integrity check in the main directories allow to detect these actions. More info :ref:`File Integrity Monitoring Section <manual_file_integrity>`
 
 Check running processes
     A malicious process can prevent from being visible in the system's list of processes (trojan version of *ps* command). Rootcheck inspects all process IDs (PID) looking for discrepancies with different system calls (getsid, getpgid).

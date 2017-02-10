@@ -5,11 +5,11 @@ Settings
 
 Here we have showed some basic information to understand how intrusions and anomalies detection works on Wazuh.
 
-To configure the options for syscheck and rootcheck go to `ossec.conf <../configuration-files/ossec-conf/index.html>`_
-If you want more information about the exactly configuration options go to `Syscheck section <../configuration-files/ossec-conf/syscheck.html>`_ and `Rootcheck section <../configuration-files/ossec-conf/rootcheck.html>`_
+To configure the options for syscheck and rootcheck go to :ref:`ossec.conf <reference_ossec_conf>`
+If you want more information about the exactly configuration options go to :ref:`Syscheck section <reference_ossec_syscheck>` and :ref:`Rootcheck section <reference_ossec_rootcheck>`
 
 For example:
 
-- `frequency <../configuration-files/ossec-conf/rootcheck.html#frequency>`_
-- `rootkit-files <../configuration-files/ossec-conf/rootcheck.html#rootkit-files>`_
-- `rootkit-trojans <../configuration-files/ossec-conf/rootcheck.html#rootkit-trojans>`_
+- :ref:`frequency <reference_ossec_rootcheck_frequency>`
+- :ref:`rootkit_files <reference_ossec_rootcheck_rootkit_files>`
+- :ref:`rootkit_trojans <reference_ossec_rootcheck_rootkit_trojans>`

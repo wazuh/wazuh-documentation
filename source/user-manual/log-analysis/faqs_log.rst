@@ -27,7 +27,7 @@ The log retention time is configurable by the user. This means that the individu
 ``How this help me with the compliance regulations?``
 ---------------------------------------------------------
 
-Log Analysis is a requirement for : `PCI DSS Compliance <../../pci-dss/log-analysis.html>`_,  HIPAA Compliance, FISMA Compliance and SOX Compliance.
+Log Analysis is a requirement for : :ref:`PCI DSS Compliance <pci_dss_log_analysis>`,  HIPAA Compliance, FISMA Compliance and SOX Compliance.
 
 ``Which is the CPU usage on the servers?``
 ---------------------------------------------------------
