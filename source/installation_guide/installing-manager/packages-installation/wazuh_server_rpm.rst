@@ -6,7 +6,7 @@ Install Wazuh manager and API (rpm)
 Adding Wazuh repositories
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the Wazuh repositories to your system. Also, it is possible to download the :ref:`required package <packages>`.
+First thing we need to do is to add the Wazuh repositories to your system. Also, if you prefer download the package directly, it is possible to download the :ref:`required package <packages>`.
 
 **1.** Run the following command depending on your operating system:
 
@@ -48,9 +48,19 @@ Add the Wazuh repositories to your system. Also, it is possible to download the 
 
 Installing manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Install the Wazuh manager::
+On your terminal, install the Wazuh manager::
 
 	yum install wazuh-manager
+
+Once the process is completed, you can check the state with
+
+	a) For Systemd::
+
+			systemctl status wazuh-manager
+
+	b) For SysV Init::
+
+			service wazuh-manager status
 
 Installing API
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -59,9 +69,23 @@ Installing API
 
 	curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
+And then, install nodejs::
+
+  	yum install nodejs
+
 **2.** Install the Wazuh API. It will update NodeJS if it is required::
 
 	yum install wazuh-api
+
+Once the process is completed, you can check the state with
+
+  	a) For Systemd::
+
+  			systemctl start wazuh-api
+
+  	b) For SysV Init::
+
+  			service wazuh-api status
 
 **3.** Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in the most of Linux distributions.
 
@@ -104,6 +128,9 @@ For CentOS 6 and Redhat 6, you can install the package *python27*, that installs
                 enabled=1
 
         yum install python27
+
+.. note::
+	If you want more info about the Wazuh API go to :ref:`API section <api>`
 
 Next steps
 ----------

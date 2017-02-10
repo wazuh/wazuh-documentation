@@ -3,6 +3,8 @@
 Install Elastic server (rpm)
 ================================
 
+We are setting a distributed architecture. Follow this guide in your **ELK Stack server**
+
 The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
 
 Preparation
@@ -31,6 +33,8 @@ Preparation
 
 Logstash
 --------
+
+Logstash is a tool to collect logs, parse them, and store them for later use. More info `Logstash <https://www.elastic.co/products/logstash>`_
 
 1. Install the Logstash package::
 
@@ -63,6 +67,8 @@ Logstash
 Elasticsearch
 -------------
 
+Elasticsearch is a highly scalable full-text search and analytics engine. More info `Elastic <https://www.elastic.co/products/elasticsearch>`_
+
 1. Install the Elasticsearch package::
 
 	yum install elasticsearch
@@ -85,6 +91,8 @@ Elasticsearch
 
 Kibana
 ------
+
+Kibana is a flexible and intuitive visualization dashboard (browser front-end). More info `Kibana <https://www.elastic.co/products/kibana>`_
 
 1. Install the Kibana package::
 

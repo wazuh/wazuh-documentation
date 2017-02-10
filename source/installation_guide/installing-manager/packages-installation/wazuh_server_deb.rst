@@ -6,7 +6,7 @@ Install Wazuh manager and API (deb)
 Adding Wazuh repositories
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Add the Wazuh repositories to your system. Also, it is possible to download the :ref:`required package <packages>`.
+First thing we need to do is to add the Wazuh repositories to your system. Also, if you prefer download the package directly, it is possible to download it from :ref:`required package <packages>`.
 
 **1.** In order to perform this procedure properly, packages ``curl`` and ``apt-transport-https`` must be installed into your system. If they are not, install them::
 
@@ -17,6 +17,9 @@ Add the Wazuh repositories to your system. Also, it is possible to download the 
 	curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
 **3.** Add the Wazuh repository depending on your operating system:
+
+.. note::
+	To check your version, you can use: ``lsb_release -a``, ``cat /etc/issue`` or ``uname -a``
 
 - Debian 7 "Wheezy"::
 
@@ -65,9 +68,19 @@ Add the Wazuh repositories to your system. Also, it is possible to download the 
 Installing manager
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Install the Wazuh manager::
+On your terminal, install the Wazuh manager::
 
 	apt-get install wazuh-manager
+
+Once the process is completed, you can check the state with
+
+	a) For Systemd::
+
+			systemctl status wazuh-manager
+
+	b) For SysV Init::
+
+			service wazuh-manager status
 
 
 Installing API
@@ -77,9 +90,23 @@ Installing API
 
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
+And then, install nodejs::
+
+	apt-get install nodejs
+
 **2.** Install the Wazuh API. It will update NodeJS if it is required::
 
 	apt-get install wazuh-api
+
+Once the process is completed, you can check the state with
+
+	a) For Systemd::
+
+			systemctl start wazuh-api
+
+	b) For SysV Init::
+
+			service wazuh-api status
 
 **3.** Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in the most of Linux distributions.
 
@@ -97,6 +124,9 @@ It is possible to set the path of Python in the API configuration at */var/ossec
             lib: "/opt/rh/python27/root/usr/lib64"
         }
     ];
+
+.. note::
+	If you want more info about the Wazuh API go to :ref:`API section <api>`
 
 Next steps
 ----------

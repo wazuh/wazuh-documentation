@@ -3,6 +3,8 @@
 Install Filebeat (deb)
 ===============================
 
+Filebeat is the tool that will read the alerts and archived events, forwarding the data to the Logstash server (on the ELK cluster).
+
 The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 1. Install the GPG keys from Elastic and the Elastic repository::
@@ -16,7 +18,7 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 	apt-get install filebeat
 
-3. Download the settings template for Filebeat from the Wazuh repository::
+3. Download the settings template for Filebeat from the Wazuh repository, this template will let Elasticsearch know which field should be analyzed in which way::
 
 	curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/filebeat/filebeat.yml
 

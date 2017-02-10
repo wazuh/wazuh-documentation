@@ -3,7 +3,7 @@
 Installing manager
 ===================
 
-There are several ways to install the Manager, in order to determine which option is the most appropiate, please consult this table:
+There are several ways to install the Manager, in order to determine which option is the most appropiate for you, please consult this table:
 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Type                                                                   | Description                                                 |
@@ -18,6 +18,9 @@ There are several ways to install the Manager, in order to determine which optio
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | :ref:`Puppet <wazuh_puppet>`                                           | Deploying Wazuh automatically with Puppet.                  |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
+
+.. warning::
+  Wazuh manager require a server running on Linux or another unix-like system.
 
 .. topic:: Contents
 

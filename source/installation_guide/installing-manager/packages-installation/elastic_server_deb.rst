@@ -3,6 +3,8 @@
 Install Elastic server (deb)
 ================================
 
+We are setting a distributed architecture. Follow this guide in your **ELK Stack server**
+
 The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 Preparation
@@ -23,6 +25,8 @@ Preparation
 
 Logstash
 --------
+
+Logstash is a tool to collect logs, parse them, and store them for later use. More info `Logstash <https://www.elastic.co/products/logstash>`_
 
 1. Install the Logstash package::
 
@@ -56,6 +60,8 @@ Logstash
 Elasticsearch
 -------------
 
+Elasticsearch is a highly scalable full-text search and analytics engine. More info `Elastic <https://www.elastic.co/products/elasticsearch>`_
+
 1. Install the Elasticsearch package::
 
 	apt-get install elasticsearch
@@ -78,6 +84,7 @@ Elasticsearch
 
 Kibana
 ------
+Kibana is a flexible and intuitive visualization dashboard (browser front-end). More info `Kibana <https://www.elastic.co/products/kibana>`_
 
 1. Install the Kibana package::
 

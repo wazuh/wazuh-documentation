@@ -3,6 +3,8 @@
 Install Filebeat (rpm)
 ===============================
 
+Filebeat is the tool that will read the alerts and archived events, forwarding the data to the Logstash server (on the ELK cluster).
+
 The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
 
 1. Install the GPG keys from Elastic and the Elastic repository::

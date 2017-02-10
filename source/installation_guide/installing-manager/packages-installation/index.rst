@@ -27,7 +27,7 @@ Review :ref:`Single-host architecture installation <singlehost_installation>` in
 		$ ps -p 1
 
 .. note::
-	Before installing the components please configure your **NTP** to sync time.
+	Before installing the components please configure your **NTP** to sync time. **NTP** is a TCP/IP protocol for synchronising time over a network. Basically a client requests the current time from a server, and uses it to set its own clock. More info `deb <https://help.ubuntu.com/lts/serverguide/NTP.html>`_ , `rpm <http://www.tecmint.com/install-ntp-server-in-centos/>`_
 
 
 Follow the next guides to install and configure Wazuh Manager:

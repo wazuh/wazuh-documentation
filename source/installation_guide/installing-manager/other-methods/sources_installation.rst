@@ -10,21 +10,21 @@ Wazuh Manager
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution packages manager:
 
-  a) For RPM based distributions:
+  a) For RPM based distributions::
 
-    sudo yum install make gcc git
+      sudo yum install make gcc git
 
-  If you want to use Auth, also install:
+  If you want to use Auth, also install::
 
-    sudo yum instal openssl-devel
+      sudo yum instal openssl-devel
 
-  b) For Debian based distributions:
+  b) For Debian based distributions::
 
-    sudo apt-get install gcc make git libc6-dev
+      sudo apt-get install gcc make git libc6-dev
 
-  If you want to use Auth, also install:
+  If you want to use Auth, also install::
 
-    sudo apt-get install libssl-dev
+      sudo apt-get install libssl-dev
 
 
 2. Download and extract the latest version::
