@@ -11,4 +11,4 @@ Configuration files
        ossec-conf/index
        internal-options/index
        centralized-agent-configuration.rst
-       ruleset-xml-syntax.rst
+       ruleset-xml-syntax/index.rst
