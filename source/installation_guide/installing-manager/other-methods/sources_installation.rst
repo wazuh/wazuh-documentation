@@ -84,7 +84,27 @@ Wazuh API
         }
     ];
 
-In case you are running CentOS 6, you can install the package *python27*, that installs Python 2.7 at */opt/rh/python27*::
+For CentOS 6 and Redhat 6, you can install the package *python27*, that installs Python 2.7 at */opt/rh/python27*:
 
-    yum install -y centos-release-SCL
-    yum install -y python27
+    a) For CentOS 6::
+
+        yum install -y centos-release-SCL
+        yum install -y python27
+
+    b) For RHEL 6::
+        
+        yum install scl-utils
+
+        # Choose option:
+            # Enable RHSCL (option 1)
+            yum-config-manager --enable rhel-server-rhscl-6-rpms
+
+            # Enable RHSCL manually (option 2)
+            nano /etc/yum.repos.d/redhat-rhui.repo
+            # In section [rhui-REGION-rhel-server-rhscl], change enabled from 0 to 1
+                [rhui-REGION-rhel-server-rhscl]
+                name=Red Hat Enterprise Linux Server 6 RHSCL (RPMs)
+                # ...
+                enabled=1
+
+        yum install python27
