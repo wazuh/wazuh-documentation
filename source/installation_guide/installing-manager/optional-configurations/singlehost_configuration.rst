@@ -10,7 +10,10 @@ Usally, Wazuh is installed using a distributed architecture but in case you need
     :align: center
     :width: 100%
 
-In order to install Wazuh Manager in the same server, you must follow all the steps decribed in the guide :ref:`Installation via packages <installation_main>`, **except the section corresponding to install Filebeat**.
+In order to install Wazuh Manager in the same server, you must follow all the steps decribed in the guide :ref:`Installation via packages <installation_main>`
+
+.. Warning::
+  You don't need to install Filebeat
 
 After performing the previous steps, we configure Logstash to read Wazuh alerts:
 
