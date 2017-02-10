@@ -4,42 +4,11 @@
 Settings
 ========================
 
-Use *ossec.conf* (manager or agent) or *agent.conf* to configure the wodle.
 
-First, specify the wodle name: ::
+To configure the options for OpenSCAP go to :ref:`ossec.conf <reference_ossec_conf>`
+If you want more information about the exactly configuration options go to :ref:`OpenSCAP section <wodle_openscap>`.
 
-    <wodle name="open-scap">
-    ...
-    </wodle>
-
-Now, use the proper tags to define the OpenSCAP evaluations: ::
-
-    <wodle name="open-scap">
-
-        <content type="xccdf" path="ssg-centos7-ds.xml">
-            <profile>xccdf_org.ssgproject.content_profile_pci-dss</profile>
-        </content>
-
-    </wodle>
-
-These are the available tags:
-
-==========================  ==============
- Tag                         Description
-==========================  ==============
-``timeout``                  Timeout for each evaluation (in seconds). Default value: 1800 seconds (30 minutes).
-``interval``                 Space of time between OpenSCAP executions (in seconds). It can contain a prefix character: s (seconds), m (minutes), h (hours), d (days). Default value: 1d (one day).
-``scan-on-start``            Run evaluation when on service start without waiting for interval. Values: yes, no. Default: yes.
-``content``                  Define an evaluation.
-``content:type``             Select content type: xccdf or oval.
-``content:path``             Use the specified policy file (DataStream, XCCDF or OVAL).
-``content->timeout``         Timeout for the evaluation (in seconds). It overwrites the generic timeout.
-``content->xccdf-id``        XCCDF id.
-``content->oval-id``         OVAL id.
-``content->datastream-id``   Datastream id.
-``content->cpe``             CPE dictionary file. Default path: /var/ossec/wodles/oscap/policies
-``content->profile``         Select profile.
-==========================  ==============
+Below, some configuration examples.
 
 
 Basic configuration

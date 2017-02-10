@@ -36,6 +36,8 @@ The *ossec.conf* configuration file is located at */var/ossec/etc/ossec.conf*.
 +---------------------------------------------------------------+------------------------+
 | `Syslog output <syslog-output.html>`_                         | server, local          |
 +---------------------------------------------------------------+------------------------+
+| :ref:`Wodle OpenSCAP <wodle_openscap>`                        | server, local, agent   |
++---------------------------------------------------------------+------------------------+
 
 All previous sections must be configured within the <ossec_config> tag.
 
@@ -72,3 +74,4 @@ XML excerpt to show location for *alerts* section:
        rules
        syscheck
        syslog-output
+       wodle-openscap
