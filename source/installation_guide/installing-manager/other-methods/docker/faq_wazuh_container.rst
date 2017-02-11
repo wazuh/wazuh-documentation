@@ -69,6 +69,29 @@ The default configuration is::
   URL: http://wazuh
   Port: 55000
 
+If you like to change the default API configuration, you need to modify the file ``user`` in the path ``/var/ossec/api/configuration/auth/user``, you can generate other password with any ``htpasswd`` generator.
+
+How can I store Wazuh data?
+-------------------------------------------------------------------
+
+The data stored in Wazuh will be persisted after container reboot but not after container removal.
+
+In order to persist Wazuh data even after removing the Wazuh container, you'll have to mount a volume on your Docker host. Update the Wazuh container declaration to::
+
+   elasticsearch:
+     image: wazuh/wazuh:latest
+     hostname: wazuh-manager
+     ports:
+       - "1514:1514"
+       - "1515:1515"
+       - "514:514"
+       - "55000:55000"
+     networks:
+       - docker_elk
+     volumes:
+       - /path/to/storage:/var/ossec/data
+
+  This will store Wazuh data inside `/path/to/storage`.
 
 How can I store Elasticsearch data?
 -------------------------------------------------------------------

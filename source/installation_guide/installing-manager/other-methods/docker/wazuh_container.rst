@@ -53,7 +53,9 @@ By default, the stack exposes the following ports:
     - 1515: Wazuh TCP.
     - 514 : Wazuh UDP.
     - 55000: Wazuh API.
+    - 5000: Logstash TCP input.
+    - 9200: Elasticsearch HTTP.
+    - 9300: Elasticsearch TCP transport
     - 5601: Kibana
-
 
 .. note:: Configuration is not dynamically reloaded, you will need to restart the stack after any change in the configuration of a component.
