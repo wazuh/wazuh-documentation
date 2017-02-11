@@ -8,9 +8,9 @@ Puppet master installation
 
 Before we get started with Puppet, check the following network requirements:
 
-- Private network DNS: Forward and reverse DNS must be configured, and every server must have a unique hostname. If you do not have DNS configured, you must use your hosts file for name resolution. We will assume that you will use your private network for communication within your infrastructure.
+- **Private network DNS**: Forward and reverse DNS must be configured, and every server must have a unique hostname. If you do not have DNS configured, you must use your hosts file for name resolution. We will assume that you will use your private network for communication within your infrastructure.
 
-+ Firewall open ports: The Puppet master must be reachable on port 8140.
++ **Firewall open ports**: The Puppet master must be reachable on port 8140.
 
 Installation on CentOS
 ^^^^^^^^^^^^^^^^^^^^^^

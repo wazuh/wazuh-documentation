@@ -63,6 +63,8 @@ Following the next guide, your current installation will be automatically update
 Step 3: Change from Logstash forwarder to Filebeat
 ----------------------------------------------------------
 
+.. warning::
+	Draft section.
 *ToDo*
 
  - Remove Logstash
@@ -71,6 +73,8 @@ Step 3: Change from Logstash forwarder to Filebeat
 Step 4: Update Elastic configuration
 ----------------------------------------------------------
 
+.. warning::
+	Draft section.
 *ToDo*
 
 Keep Elastic 2

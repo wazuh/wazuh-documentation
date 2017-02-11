@@ -92,7 +92,7 @@ For CentOS 6 and Redhat 6, you can install the package *python27*, that installs
         yum install -y python27
 
     b) For RHEL 6::
-        
+
         yum install scl-utils
 
         # Choose option:

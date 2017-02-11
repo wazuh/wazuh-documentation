@@ -15,6 +15,9 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 **3.** Add the Wazuh repository depending on your operating system:
 
+.. note::
+	To check your version, you can use: ``lsb_release -a``, ``cat /etc/issue`` or ``uname -a``
+
 - Debian 7 "Wheezy"::
 
     echo "deb https://packages.wazuh.com/apt wheezy main" | tee /etc/apt/sources.list.d/wazuh.list
@@ -59,6 +62,16 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 	apt-get update
 	apt-get install wazuh-agent
+
+Once the process is completed, you can check the state with
+
+		a) For Systemd::
+
+				systemctl status wazuh-agent
+
+		b) For SysV Init::
+
+				service wazuh-agent status
 
 Next steps
 ----------

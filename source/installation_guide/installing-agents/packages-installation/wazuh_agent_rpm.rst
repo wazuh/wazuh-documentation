@@ -47,6 +47,16 @@ The rpm package is suitable for installation on Red Hat, Centos and other RPM-ba
 
 	yum install wazuh-agent
 
+Once the process is completed, you can check the state with
+
+	a) For Systemd::
+
+			systemctl status wazuh-agent
+
+	b) For SysV Init::
+
+			service wazuh-agent status
+
 **3.** Edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* for the manager's IP address. For example::
 
 	<ossec_config>

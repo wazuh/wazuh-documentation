@@ -5,22 +5,22 @@ Register agents automatically with authd
 
 Choose the method that best meets your needs:
 
-+--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Method                                           | Description                                                                                                                 |
-+==================================================+=============================================================================================================================+
-| Simple method                                    | The easiest method. There are no host verification.                                                                         |
-+--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Use a password to authorize agents               | Allows agents to authenticate by a shared password. This method is easy but does not perform host validation.               |
-+--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Verify manager via SSL                           | The manager's certificate is signed by a CA that agents use to validate the server. It may include host checking.           |
-+-----------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Verify agents via SSL | Host validation          | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
-+                       +--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|                       | No host validation       | The manager validates the agent by CA but not the host address. This method allows to use a shared agent certificate.       |
-+-----------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Method                                             | Description                                                                                                                 |
++====================================================+=============================================================================================================================+
+| `Simple method`_                                   | The easiest method. There are no host verification.                                                                         |
++----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| `Use a password to authorize agents`_              | Allows agents to authenticate by a shared password. This method is easy but does not perform host validation.               |
++----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| `Verify manager via SSL`_                          | The manager's certificate is signed by a CA that agents use to validate the server. It may include host checking.           |
++-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| `Verify agents via SSL`_| Host validation          | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
++                         +--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|                         | No host validation       | The manager validates the agent by CA but not the host address. This method allows to use a shared agent certificate.       |
++-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
-Simple method
----------------
+``Simple method``
+-----------------
 
 Get a SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -71,23 +71,23 @@ Secure methods
 
 Launching the Authd daemon with default options would allow any agent to connect to a manager. The following options provides some mechanisms to authorize connections. We will introduce the following methods:
 
-+--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Method                                           | Description                                                                                                                 |
-+==================================================+=============================================================================================================================+
-| Use a password to authorize agents               | Allows agents to authenticate by a shared password. This method is easy but does not perform host validation.               |
-+--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Verify manager via SSL                           | The manager's certificate is signed by a CA that agents use to validate the server. It may include host checking.           |
-+-----------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Verify agents via SSL | Host validation          | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
-+                       +--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|                       | No host validation       | The manager validates the agent by CA but not the host address. This method allows to use a shared agent certificate.       |
-+-----------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Method                                             | Description                                                                                                                 |
++====================================================+=============================================================================================================================+
+| `Use a password to authorize agents`_              | Allows agents to authenticate by a shared password. This method is easy but does not perform host validation.               |
++----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| `Verify manager via SSL`_                          | The manager's certificate is signed by a CA that agents use to validate the server. It may include host checking.           |
++-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| `Verify agents via SSL`_| Host validation          | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
++                         +--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|                         | No host validation       | The manager validates the agent by CA but not the host address. This method allows to use a shared agent certificate.       |
++-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 .. note::
     These methods can be mixed.
 
-Use a password to authorize agents
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``Use a password to authorize agents``
+--------------------------------------
 
 Manager can be protected from unauthorized connections by using a password. We can choose one by ourself or let Authd to generate a key randomly.
 
@@ -132,8 +132,8 @@ First we are going to create a certificate of authority (CA) that we will use to
 .. warning::
     The file ``rootCA.key`` that we have just created is the **private key** of the certificate of authority. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
 
-Verify manager via SSL
-"""""""""""""""""""""""""""""
+``Verify manager via SSL``
+-----------------------------------------------
 
 1. Issue and sign a certificate for the Authd server, entering the hostname (or the IP address) that agents will use to connect to the server. For example, if the server's IP is 192.168.1.2::
 
@@ -152,46 +152,48 @@ Verify manager via SSL
     cp rootCA.pem /var/ossec/etc
     agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
 
-Verify agents via SSL (no host validation)
-"""""""""""""""""""""""""""""""""""""""""""""""""
+``Verify agents via SSL``
+--------------------------
 
-In this example we are going to create a certificate for agents without specifying their hostname, so that certificate can be used by many agents. This is useful to verify that agents have a certificate signed by our CA, no matter where are they connecting from.
 
-1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field::
+**Verify agents via SSL (no host validation)**
 
-    openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
-    openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+  In this example we are going to create a certificate for agents without specifying their hostname, so that certificate can be used by many agents. This is useful to verify that agents have a certificate signed by our CA, no matter where are they connecting from.
 
-2. Copy the CA (but no the key) to the manager's ``etc`` folder (if it was not already there) and start ``ossec-authd``::
+  1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field::
 
-    # (Server)
-    cp rootCA.pem /var/ossec/etc
-    ossec-authd -v /var/ossec/etc/rootCA.pem
+      openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
+      openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-3. Copy the new created certificate and key to the agent's ``etc`` folder and run ``agent-auth``. For example, if the server's IP is 192.168.1.2::
+  2. Copy the CA (but no the key) to the manager's ``etc`` folder (if it was not already there) and start ``ossec-authd``::
 
-    # (Client)
-    cp sslagent.cert sslagent.key /var/ossec/etc
-    agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+      # (Server)
+      cp rootCA.pem /var/ossec/etc
+      ossec-authd -v /var/ossec/etc/rootCA.pem
 
-Verify agents via SSL (host validation)
-""""""""""""""""""""""""""""""""""""""""""""""
+  3. Copy the new created certificate and key to the agent's ``etc`` folder and run ``agent-auth``. For example, if the server's IP is 192.168.1.2::
 
-This is an alternative method to the last section. In this case we will attach the agent's certificate to the visible agent address respect of the manager.
+      # (Client)
+      cp sslagent.cert sslagent.key /var/ossec/etc
+      agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
-1. Issue and sign a certificatte for the agent. Now will do enter it's hostname or IP address into the *common name* field. For example, if the agent's IP is 192.168.1.3::
+**Verify agents via SSL (host validation)**
 
-    openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=192.168.1.3'
-    openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+  This is an alternative method to the last section. In this case we will attach the agent's certificate to the visible agent address respect of the manager.
 
-2. Copy the CA (but no the key) to the manager's ``etc`` folder (if it was not already there) and start ``ossec-authd``. Note that we use the ``-s`` option in order to enable agent host veritication::
+  1. Issue and sign a certificatte for the agent. Now will do enter it's hostname or IP address into the *common name* field. For example, if the agent's IP is 192.168.1.3::
 
-    # (Server)
-    cp rootCA.pem /var/ossec/etc
-    ossec-authd -v /var/ossec/etc/rootCA.pem -s
+      openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=192.168.1.3'
+      openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-3. Copy the new created certificate and key to the agent's ``etc`` folder and run ``agent-auth``. For example, if the server's IP is 192.168.1.2::
+  2. Copy the CA (but no the key) to the manager's ``etc`` folder (if it was not already there) and start ``ossec-authd``. Note that we use the ``-s`` option in order to enable agent host veritication::
 
-    # (Client)
-    cp sslagent.cert sslagent.key /var/ossec/etc
-    agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+      # (Server)
+      cp rootCA.pem /var/ossec/etc
+      ossec-authd -v /var/ossec/etc/rootCA.pem -s
+
+  3. Copy the new created certificate and key to the agent's ``etc`` folder and run ``agent-auth``. For example, if the server's IP is 192.168.1.2::
+
+      # (Client)
+      cp sslagent.cert sslagent.key /var/ossec/etc
+      agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
