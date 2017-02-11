@@ -65,6 +65,7 @@ Step 3: Change from Logstash forwarder to Filebeat
 
 .. warning::
 	Draft section.
+
 *ToDo*
 
  - Remove Logstash
@@ -75,6 +76,7 @@ Step 4: Update Elastic configuration
 
 .. warning::
 	Draft section.
+	
 *ToDo*
 
 Keep Elastic 2
