@@ -32,25 +32,10 @@ You can configure some parameters using the file ``/var/ossec/api/configuration/
 Basic Authentication
 -------------------------
 
-By default you can access by typing user "foo" and password "bar". We recommend you to generate new credentials. This can be done very easily, with the following steps:
+By default you can access by typing user "foo" and password "bar". We recommend you to generate new credentials. This can be done very easily, with the following steps::
 
-At first please make sure that you have ``htpasswd`` tool installed.
-
-On Debian, update your repositories and install apache2-utils package:
-::
-
-  $ sudo apt-get update
-  $ sudo apt-get install apache2-utils
-
-On Centos, install the package running
-::
-
-  $ sudo yum install httpd-tools
-
-Then, run htpasswd with your desired username: ::
-
- $ cd /var/ossec/api/configuration/auth
- $ sudo node htpasswd -c user myUserName
+    $ cd /var/ossec/api/configuration/auth
+    $ sudo node htpasswd -c user myUserName
 
 SSL Certificate
 -------------------------
