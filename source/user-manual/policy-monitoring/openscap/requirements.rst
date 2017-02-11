@@ -9,7 +9,7 @@ This wodle is executed on the agent, so each one must meet the following require
 
 Wazuh HIDS
 --------------
-Wodles are part of *OSSEC Wazuh fork*, so install it following these `instructions <ToDo_Link>`_.
+Wodles are part of *OSSEC Wazuh fork*, so install it following these :ref:`Installation guide <installation>`.
 
 
 OpenScap
