@@ -1,6 +1,6 @@
 .. _faqs_intrusions:
 
-FAQs
+FAQ
 ===================================
 
 1. `How often does rootcheck run?`_

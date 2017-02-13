@@ -1,6 +1,6 @@
 .. _faqs_rootcheck:
 
-FAQs
+FAQ
 =================================
 
 1. `Can I specify my own audit file for policy monitoring?`_
