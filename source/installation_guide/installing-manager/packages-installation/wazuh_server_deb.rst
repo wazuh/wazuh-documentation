@@ -125,9 +125,6 @@ It is possible to set the path of Python in the API configuration at */var/ossec
         }
     ];
 
-.. note::
-	If you want more info about the Wazuh API go to :ref:`API section <api>`
-
 Next steps
 ----------
 
