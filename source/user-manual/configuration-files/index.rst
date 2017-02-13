@@ -3,6 +3,9 @@
 Configuration files
 =====================
 
+This section will show you all the different configuration files Wazuh has, and all the setting you can configure. This manual includes the commands and diferent options you can use.
+
+
 .. topic:: Contents
 
     .. toctree::

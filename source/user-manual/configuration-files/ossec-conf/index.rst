@@ -3,7 +3,23 @@
 Main configuration
 ===================
 
-The *ossec.conf* configuration file is located at */var/ossec/etc/ossec.conf*.
+Introducction
+^^^^^^^^^^^^^^^
+``ossec.conf`` is the main configuration file to all the capabilities. It is located at ``/var/ossec/etc/ossec.conf``. It's a good a idea to backup your info before configure ossec.conf, because the file could become corrupt if improperly modified. It's essential for Wazuh to function properly.
+
+ossec.conf
+^^^^^^^^^^^
+XML excerpt to show location for *alerts* section:
+
+.. code-block:: xml
+
+    <ossec_config>
+        <alerts>
+            <!--
+            alerts options here
+            -->
+        </alerts>
+    </ossec_config>
 
 +---------------------------------------------------------------+------------------------+
 | Sections                                                      | Supported installations|
@@ -39,20 +55,7 @@ The *ossec.conf* configuration file is located at */var/ossec/etc/ossec.conf*.
 | :ref:`Wodle OpenSCAP <wodle_openscap>`                        | server, local, agent   |
 +---------------------------------------------------------------+------------------------+
 
-All previous sections must be configured within the <ossec_config> tag.
-
-XML excerpt to show location for *alerts* section:
-
-.. code-block:: xml
-
-    <ossec_config>
-        <alerts>
-            <!--
-            alerts options here
-            -->
-        </alerts>
-    </ossec_config>
-
+All previous sections must be configured within the ``<ossec_config>`` tag.
 
 .. topic:: Sections
 
