@@ -5,7 +5,7 @@ Welcome to Wazuh
 
 Wazuh helps to get security visibility into your infrastructure, by monitoring hosts at a system and application level. The solution, based on multi-platform and lightweight agents, provides the following capabilities:
 
-.. topic:: Log management and analysis TEST
+.. topic:: Log management and analysis
 
     Wazuh agents read operating system logs and events, forwarding them to a central manager for analysis and storage. The purpose of this process is the identification of application or system errors, misconfigurations, intrusion attempts, policy violations or security issues.
 
