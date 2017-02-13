@@ -3,7 +3,7 @@
 Install Elastic server (rpm)
 ================================
 
-We are setting a distributed architecture. Follow this guide in your **ELK Stack server**
+We are setting a distributed architecture. Follow this guide in your **ELK Stack server**.
 
 The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
 
@@ -59,10 +59,7 @@ Logstash is a tool to collect logs, parse them, and store them for later use. Mo
 		service logstash start
 
 .. warning::
-	The default Logstash installation doesn't encrypt the communication. It's strongly recommended to configure Logstash to use SSL encryption. Please read :ref:`elastic_ssl`.
-
-.. note::
-	You can get more detailed information at the `Official Logstash Installation Documentation <https://www.elastic.co/guide/en/logstash/current/installing-logstash.html#package-repositories>`_.
+    By default, the communications between Wazuh server (Filebeat) and Elastic Stack (Logstash) are not encrypted. It’s strongly recommended to configure Filebeat and Logstash to use SSL encryption. Please read :ref:`elastic_ssl`.
 
 Elasticsearch
 -------------
@@ -85,9 +82,6 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 
 		chkconfig --add elasticsearch
 		service elasticsearch start
-
-.. note::
-	You can get more detailed information at the `Official Elasticsearch Installation Documentation <https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html>`_.
 
 Kibana
 ------
@@ -119,8 +113,6 @@ Kibana is a flexible and intuitive visualization dashboard (browser front-end). 
 		chkconfig --add kibana
 		service kibana start
 
-.. note::
-	You can get more detailed information at the `Official Kibana Installation Documentation <https://www.elastic.co/guide/en/kibana/current/install.html>`_.
 
 Connecting the Wazuh App with the API
 ---------------------------------------------
@@ -131,8 +123,3 @@ Follow the next guide in order to connect the Wazuh App with the API:
 	:maxdepth: 1
 
 	connect_wazuh_app
-
-Next steps
-----------
-
-When you finish installing the Elastic server it's important to configure SSL: :ref:`elastic_ssl`.

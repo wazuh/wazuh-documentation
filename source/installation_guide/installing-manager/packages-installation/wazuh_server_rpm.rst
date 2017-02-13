@@ -81,7 +81,7 @@ Once the process is completed, you can check the state with
 
   	a) For Systemd::
 
-  			systemctl start wazuh-api
+  			systemctl status wazuh-api
 
   	b) For SysV Init::
 
@@ -112,27 +112,17 @@ For CentOS 6 and Redhat 6, you can install the package *python27*, that installs
         yum install -y python27
 
     b) For RHEL 6::
-        
-        yum install scl-utils
-
-        # Choose option:
-            # Enable RHSCL (option 1)
-            yum-config-manager --enable rhel-server-rhscl-6-rpms
-
-            # Enable RHSCL manually (option 2)
-            nano /etc/yum.repos.d/redhat-rhui.repo
-            # In section [rhui-REGION-rhel-server-rhscl], change enabled from 0 to 1
-                [rhui-REGION-rhel-server-rhscl]
-                name=Red Hat Enterprise Linux Server 6 RHSCL (RPMs)
-                # ...
-                enabled=1
 
         yum install python27
 
-.. note::
-	If you want more info about the Wazuh API go to :ref:`API section <api>`
+        # You may need enable the repository:
+        #   yum-config-manager --enable REPOSITORY_NAME
+
+        #   Examples:
+        #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
+        #   yum-config-manager --enable rhel-server-rhscl-6-rpms
 
 Next steps
 ----------
 
-Once you've installed the Wazuh manager, you may want to :ref:`Install Filebeat <filebeat_rpm>`.
+Once you've installed the Wazuh manager, you need to :ref:`install Filebeat <filebeat_rpm>`.
