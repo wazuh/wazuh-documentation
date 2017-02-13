@@ -102,7 +102,7 @@ Once the process is completed, you can check the state with
 
 	a) For Systemd::
 
-			systemctl start wazuh-api
+			systemctl status wazuh-api
 
 	b) For SysV Init::
 
@@ -125,10 +125,7 @@ It is possible to set the path of Python in the API configuration at */var/ossec
         }
     ];
 
-.. note::
-	If you want more info about the Wazuh API go to :ref:`API section <api>`
-
 Next steps
 ----------
 
-Once you've installed the Wazuh manager, you may want to :ref:`Install Filebeat <filebeat_deb>`.
+Once you've installed the Wazuh manager, you need to :ref:`install Filebeat <filebeat_deb>`.

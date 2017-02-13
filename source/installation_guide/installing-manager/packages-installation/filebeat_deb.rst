@@ -22,11 +22,15 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 	curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/filebeat/filebeat.yml
 
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and and replace *YOUR_ELASTIC_SERVER_IP* for the IP address or the hostname of the Elastic server. For example::
+4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace *ELASTIC_SERVER_IP* for the IP address or the hostname of the Elastic Stack server. For example::
 
 	output:
 	  logstash:
-	    hosts: ["1.2.3.4:5000"]
+	    hosts: ["ELASTIC_SERVER_IP:5000"]
+
+.. warning::
+    In case you are setting up a single-host architecture (Wazuh Manager and Elastic stack on the same server, use **localhost** as *ELASTIC_SERVER_IP*.
+
 
 5. Enable and start the Filebeat service:
 
@@ -41,13 +45,7 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 		update-rc.d filebeat defaults 95 10
 		service filebeat start
 
-.. warning::
-	The default installation of Filebeat doesn't encrypt the communication. It's strongly recommended to configure Filebeat to verify the Logstash server through SSL. Please read :ref:`elastic_ssl`.
-
-.. note::
-	You can get more info at the `Filebeat Installation Documentation <https://www.elastic.co/guide/en/beats/libbeat/current/setup-repositories.html>`_.
-
 Next steps
 ----------
 
-Once you've installed the Wazuh manager and Filebeat, you may want to :ref:`Install an Elastic server <elastic_server_deb>`.
+Once you've installed the Wazuh manager and Filebeat, you need to :ref:`install Elastic Stack <elastic_server_deb>`.
