@@ -81,7 +81,7 @@ Once the process is completed, you can check the state with
 
   	a) For Systemd::
 
-  			systemctl start wazuh-api
+  			systemctl status wazuh-api
 
   	b) For SysV Init::
 
@@ -112,7 +112,7 @@ For CentOS 6 and Redhat 6, you can install the package *python27*, that installs
         yum install -y python27
 
     b) For RHEL 6::
-        
+
         yum install scl-utils
 
         # Choose option:
@@ -135,4 +135,4 @@ For CentOS 6 and Redhat 6, you can install the package *python27*, that installs
 Next steps
 ----------
 
-Once you've installed the Wazuh manager, you may want to :ref:`Install Filebeat <filebeat_rpm>`.
+Once you've installed the Wazuh manager, you need to :ref:`install Filebeat <filebeat_rpm>`.

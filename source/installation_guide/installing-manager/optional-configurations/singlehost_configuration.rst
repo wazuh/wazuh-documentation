@@ -10,12 +10,7 @@ Usally, Wazuh is installed using a distributed architecture but in case you need
     :align: center
     :width: 100%
 
-In order to install Wazuh Manager in the same server, you must follow all the steps decribed in the guide :ref:`Installation via packages <installation_main>`
-
-.. Warning::
-  You don't need to install Filebeat
-
-After performing the previous steps, we configure Logstash to read Wazuh alerts:
+In order to install Wazuh Manager in the same server, you must follow all the steps decribed in the guide :ref:`Installation via packages <installation_main>`. In this way, you will have Filebeat sending the events to Logstash. In a single-host architecture, Filebeat is not necessary due to Logstash can read the *alerts.json* directly. So, just in case you want to avoid using Filebeat, configure Logstash to read Wazuh alerts:
 
 1. Edit file ``/etc/logstash/conf.d/01-wazuh.conf``, comment the lines related to SSL at ``input/beats`` and uncomment the lines related to Local Wazuh Manager in ``input/file``. The file should remain such this::
 
