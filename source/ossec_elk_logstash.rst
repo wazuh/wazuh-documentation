@@ -197,7 +197,7 @@ Copy the Elasticsearch custom mapping from the extensions folder to the Logstash
 
 And now download and install GeoLiteCity from the Maxmind website. This will add geolocation support for public IP addresses: ::
 
- $ sudo curl -O "http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
+ $ sudo curl -O "https://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz"
  $ sudo gzip -d GeoLiteCity.dat.gz && sudo mv GeoLiteCity.dat /etc/logstash/
 
 In single-host deployments, you also need to grant the *logstash* user access to OSSEC alerts file: ::
