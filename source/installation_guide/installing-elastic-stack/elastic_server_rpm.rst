@@ -1,27 +1,33 @@
-.. _elastic_server_deb:
+.. _elastic_server_rpm:
 
-Install Elastic server (deb)
+Install Elastic Stack (rpm)
 ================================
 
-We are setting a distributed architecture. Follow this guide in your **ELK Stack server**.
-
-The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
+The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
 
 Preparation
 -----------
 
 1. Oracle Java JRE is necessary for Logstash and Elasticsearch::
 
-	add-apt-repository ppa:webupd8team/java
-	apt-get update
-	apt-get install oracle-java8-installer
+	curl -Lo jdk-8-linux-x64.rpm --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm
+	yum install jdk-8-linux-x64.rpm
+	rm jdk-8-linux-x64.rpm
 
 2. We will also install the Elastic repository and the GPG keys from it::
 
-	curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-	apt-get install apt-transport-https
-	echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-5.x.list
-	apt-get update
+	rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+	cat > /etc/yum.repos.d/elastic.repo << EOF
+	[elastic-5.x]
+	name=Elastic repository for 5.x packages
+	baseurl=https://artifacts.elastic.co/packages/5.x/yum
+	gpgcheck=1
+	gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+	enabled=1
+	autorefresh=1
+	type=rpm-md
+	EOF
 
 Logstash
 --------
@@ -30,7 +36,7 @@ Logstash is a tool to collect logs, parse them, and store them for later use. Mo
 
 1. Install the Logstash package::
 
-	apt-get install logstash
+	yum install logstash
 
 2. Download the configuration template for Logstash::
 
@@ -38,7 +44,6 @@ Logstash is a tool to collect logs, parse them, and store them for later use. Mo
 	curl -so /etc/logstash/wazuh-elastic5-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic5-template.json
 
 3. Enable and start the Logstash service:
-
 
 	a) For Systemd::
 
@@ -48,7 +53,7 @@ Logstash is a tool to collect logs, parse them, and store them for later use. Mo
 
 	b) For SysV Init::
 
-		update-rc.d logstash defaults 95 10
+		chkconfig --add logstash
 		service logstash start
 
 .. warning::
@@ -61,7 +66,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 
 1. Install the Elasticsearch package::
 
-	apt-get install elasticsearch
+	yum install elasticsearch
 
 2. Enable and start the Elasticsearch service:
 
@@ -73,16 +78,17 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 
 	b) For SysV Init::
 
-		update-rc.d elasticsearch defaults 95 10
+		chkconfig --add elasticsearch
 		service elasticsearch start
 
 Kibana
 ------
+
 Kibana is a flexible and intuitive visualization dashboard (browser front-end). More info `Kibana <https://www.elastic.co/products/kibana>`_
 
 1. Install the Kibana package::
 
-	apt-get install kibana
+	yum install kibana
 
 2. Install the Wazuh App plugin for Kibana::
 
@@ -102,8 +108,9 @@ Kibana is a flexible and intuitive visualization dashboard (browser front-end). 
 
 	b) For SysV Init::
 
-		update-rc.d kibana defaults 95 10
+		chkconfig --add kibana
 		service kibana start
+
 
 Connecting the Wazuh App with the API
 ---------------------------------------------

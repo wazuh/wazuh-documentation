@@ -55,4 +55,4 @@ The rpm package is suitable for installation on Red Hat, Centos and other RPM-ba
 Next steps
 ----------
 
-Once you've installed the Wazuh manager and Filebeat, you need to :ref:`install Elastic Stack <elastic_server_rpm>`.
+Once you have installed the manager and Filebeat, you need to :ref:`install Elastic Stack <elastic_server_rpm>`.

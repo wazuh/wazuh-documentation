@@ -20,13 +20,12 @@ There are several ways to install the Manager, in order to determine which optio
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 
 .. warning::
-  Wazuh manager require a server running on Linux or another unix-like system.
+    The manager requires Linux or another Unix-like system.
 
 .. topic:: Contents
 
     .. toctree::
-       :maxdepth: 2
+       :maxdepth: 3
 
        packages-installation/index
        other-methods/index
-       optional-configurations/index

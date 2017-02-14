@@ -1,12 +1,9 @@
 .. _virtual_machines:
 
-Virtual Machines
+Virtual Machine
 ==============================================
 
 We provide a pre-built virtual machine image (OVA) that you can import in most of the virtualization systems.
-
-WAZUH Virtual Appliance
-----------------------------------------------
 
 The virtual machine image can be found at https://packages.wazuh.com/vm
 

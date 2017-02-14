@@ -48,4 +48,4 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 Next steps
 ----------
 
-Once you've installed the Wazuh manager and Filebeat, you need to :ref:`install Elastic Stack <elastic_server_deb>`.
+Once you have installed the manager and Filebeat, you need to :ref:`install Elastic Stack <elastic_server_deb>`.

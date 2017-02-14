@@ -1,6 +1,6 @@
 .. _wazuh_server_rpm:
 
-Install Wazuh manager and API (rpm)
+Install manager and API (rpm)
 ====================================
 
 Adding Wazuh repositories
@@ -125,4 +125,4 @@ For CentOS 6 and Redhat 6, you can install the package *python27*, that installs
 Next steps
 ----------
 
-Once you've installed the Wazuh manager, you need to :ref:`install Filebeat <filebeat_rpm>`.
+Once you have installed the manager, you need to :ref:`install Filebeat <filebeat_rpm>`.
