@@ -3,49 +3,24 @@
 How it works
 ===============================
 
-Log analysis engine takes a log message and:
-
-1. Extract important fields
-2. Identify & evaluate the content
-3. Categorize it by matching specific rules
-4. Generate an alert for the log message.
-
-The memory and CPU usage of the agent is insignificant because it only forwards events to the manager, however on the master CPU and memory consumption can increase quickly depending on the events per second (EPS) that the master has to analyze.
-
 This diagram is a basic ilustration of the log flow, It will help you to understand how it works.
 
 .. image:: ../../images/manual/log_analysis/log_flow.png
     :align: center
     :width: 100%
 
-Wazuh Agent
-
-  - **Collector** recopile all the logs from the server. The logs monitored logs are user defined.
-
-Wazuh Manager
-
-  The Manager monitorize everything in real time. Inside the manager, three phases can be distinguished:
-
-  - **Decode**: that extracts known fields from the log message, identifies key information (SRC IP, username...).
-  - **Analyze**: next step is to check if any of the rules that are internally stored, matches.
-  - **Alert**: once the rule is matched, the manager will create an alert.
-
-.. note::
-    More information about :ref:`Wazuh Ruleset <ruleset>`
-
-Messages source
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh can read logs messages from:
+1. Collector
+-------------
+The log messages source can be:
 
 Log files
----------
+^^^^^^^^^
 
 .. image:: ../../images/manual/log_analysis/logfile.png
   :align: center
   :width: 50%
 
-Wazuh can be configured to monitor specific files on the servers. This servers can be running windos or Linux.
+Log Analysis engine can be configured to monitor specific files on the servers. This servers can be running windows or Linux.
 
 Configuration Example:
 
@@ -71,9 +46,9 @@ Windows:
 
 
 Windows event log
------------------
+^^^^^^^^^^^^^^^^^^
 
-Wazuh can also be configured to monitor the Event Log from windows, or Event Channel for Vista or newer versions:
+The component can also be configured to monitor the Event Log from windows, or Event Channel for Vista or newer versions:
 
 .. image:: ../../images/manual/log_analysis/eventlog.png
   :align: center
@@ -98,9 +73,9 @@ Eventchannel:
   </localfile>
 
 Remote syslog
--------------
+^^^^^^^^^^^^^^
 
-For other devices like firewalls, you can configure Wazuh to receive log events through Syslog.
+For other devices like firewalls, you can configure Log Analysis component to receive log events through Syslog.
 
 .. image:: ../../images/manual/log_analysis/syslog.png
   :align: center
@@ -118,35 +93,64 @@ Configuration example:
 
 ``<connection>syslog</connection>`` indicate that we allow syslog messages from the device to the server, and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` to define the network.
 
+Log Example::
+
+  2016-03-15T15:22:10.078830+01:00 tron su:pam_unix(su-l:auth):authentication failure;logname=tm uid=500 euid=0 tty=pts/0 ruser=tm rhost= user=root
+  1265939281.764 1 172.16.167.228 TCP_DENIED /403 734 POST http://lbcore1.metacafe.com/test/SystemInfoManager.php - NONE/- text/html
+  [Sun Mar 06 08:52:16 2016] [error] [client 187.172.181.57] Invalid URI in request GET: index.php HTTP/1.0
+
+2. Decode
+----------
+
+Decode Phase extracts known fields from the log message and identifies/evaluate the content. Example of log and extracted info
+::
+
+  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for leia from 192.168.1.133 port 49765 ssh2
+
+Extracted information:
+  - *program name*: sshd
+  - *dstuser*: leia
+  - *srcip*: 192.168.1.133
+
+3. Analyze
+----------
+
+ Next step is to check if any of the rules that are internally stored, matches.
+
+ For the previouse example, rule 5715 is matched::
+
+  <rule id="5715" level="3">
+    <if_sid>5700</if_sid>
+    <match>^Accepted|authenticated.$</match>
+    <description>sshd: authentication success.</description>
+    <group>authentication_success,pci_dss_10.2.5,</group>
+  </rule>
+
+.. note::
+  More information about :ref:`Wazuh Ruleset <ruleset>`
+
+4. Alert
+----------
+
+Once the rule is matched, the manager will create an alert.
+
+Example
+::
+
+  ** Alert 1487103546.21448: - syslog,sshd,authentication_success,pci_dss_10.2.5,
+  2017 Feb 14 12:19:06 localhost->/var/log/secure
+  Rule: 5715 (level 3) -> 'sshd: authentication success.'
+  Src IP: 192.168.1.133
+  User: leia
+  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for leia from 192.168.1.133 port 49765 ssh2
+
+
+
 Log Retention Time
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==================
 
 By default, Wazuh will generate alerts on events that are important. Most of the events that came from the log messages are just informational and they will not be stored.
 
 The log retention time is configurable by the user. This means that the individual entity, being a corporation or financial institution, needs to define its own log retention policy due to their legal and regulatory needs.
 
 To store all the alerts, you need to enable the ``<log_all>`` option. The logs indefinitely until they are deleted manually. Wazuh uses log-rotation and stores the archived logs in ``/var/ossec/logs/archives/`` and creates an individual directory for each year and month.
-
-
-Example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Example of the alerts generated on a bruteforce attack:
-::
-
-  [root@manager logs]# tail -f /var/ossec/alerts/alerts.log
-  ** Alert 1459515987.48334: - syslog,sshd,invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1, 2016 Apr 01 13:06:27 manager->/var/log/secure
-  Rule: 5710 (level 5) -> 'Attempt to login using a non-existent user'
-  Src IP: 212.186.126.139
-  Apr 1 13:06:27 manager sshd[513]: Invalid user admin from 212.186.126.139
-  ** Alert 1459515991.48672: - syslog,sshd,invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1, 2016 Apr 01 13:06:31 manager->/var/log/secure
-  Rule: 5710 (level 5) -> 'Attempt to login using a non-existent user'
-  Src IP: 212.186.126.139
-  Apr 1 13:06:30 manager sshd[515]: Invalid user admin from 212.186.126.139
-  ** Alert 1459516007.50362: - syslog,sshd,invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1, 2016 Apr 01 13:06:47 manager->/var/log/secure
-  Rule: 5710 (level 5) -> 'Attempt to login using a non-existent user'
-  Src IP: 212.186.126.139
-  Apr 1 13:06:47 manager sshd[535]: Invalid user admin from 212.186.126.139
-  ** Alert 1459516011.50700: mail - syslog,sshd,authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,
-  2016 Apr 01 13:06:51 manager->/ var/log/secure
-  Rule: 5712 (level 10) -> 'SSHD brute force trying to get access to the system.'
-  Src IP: 212.186.126.139
