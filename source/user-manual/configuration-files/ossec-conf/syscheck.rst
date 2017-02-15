@@ -75,9 +75,6 @@ This should be set on the system you wish tomonitor (or in the agent.conf if app
 
       Allowed value: yes
 
-      .. note ::
-        This option is only available on Unix-like systems.
-
     check_all
       All the following check_* options are used together.
 
