@@ -43,3 +43,24 @@ Alerts related to policy monitoring:
 - 512: Windows Audit
 - 514: Windows Application
 - 516: Unix Audit
+
+We can manage the policy and compliance monitoring database from the server side. Those will be shared with the agents.
+
+Example of a policy rule created::
+
+  # PermitRootLogin no allowed
+  # PermitRootLogin indicate if the user root can log in by ssh.
+  $sshd_file=/etc/ssh/sshd_config;
+
+  [SSH Configuration - 1: Root can log in] [any] [1]
+  f:$sshd_file -> !r:^# && r:PermitRootLogin\.+yes;
+  f:$sshd_file -> r:^#\s*PermitRootLogin;
+
+Alert example::
+
+  ** Alert 1487185712.51190: - ossec,rootcheck,
+  2017 Feb 15 11:08:32 localhost->rootcheck
+  Rule: 516 (level 3) -> 'System Audit event.'
+  System Audit: CIS - RHEL7 - 6.2.9 - SSH Configuration - Empty passwords permitted {CIS: 6.2.9 RHEL7} {PCI_DSS: 4.1}. File: /etc/ssh/sshd_config. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf .
+  title: CIS - RHEL7 - 6.2.9 - SSH Configuration - Empty passwords permitted
+  file: /etc/ssh/sshd_config
