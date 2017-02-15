@@ -14,6 +14,8 @@ Rules Syntax
 +---------------------+-----------------------------------------------------------------+
 | `category`_         | Any category categories                                         |
 +---------------------+-----------------------------------------------------------------+
+| `field`_            | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_   |
++---------------------+-----------------------------------------------------------------+
 | `srcip`_            | Any srcip                                                       |
 +---------------------+-----------------------------------------------------------------+
 | `dstip`_            | Any dstip                                                       |
@@ -178,6 +180,25 @@ The decoded category to match: ids, syslog, firewall, web-log, squid or windows.
 .. topic:: Allowed values
 
   Any category
+
+``field``
+-------------
+
+Any regex to be compared to a field extracted by the decoder.
+
+.. topic:: Default value
+
+	n/a
+
+.. topic:: Allowed values
+
+    n/a
+
+.. topic:: Attributes
+
+    name
+      Specifies the name of the field extracted by the decoder.
+
 
 ``srcip``
 ---------
