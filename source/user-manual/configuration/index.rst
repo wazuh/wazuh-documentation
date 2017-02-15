@@ -1,6 +1,6 @@
 .. _reference_files:
 
-Configuration files
+Configuration
 =====================
 
 This section will show you all the different configuration files Wazuh has, and all the setting you can configure. This manual includes the different options you can use to configure Wazuh as you want.

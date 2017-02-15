@@ -15,7 +15,7 @@ User manual
     .. toctree::
         :maxdepth: 1
 
-        configuration-files/index
+        configuration/index
         log-analysis/index
         file-integrity/index
         anomalies-detection/index
