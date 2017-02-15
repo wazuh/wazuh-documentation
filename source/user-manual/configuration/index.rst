@@ -14,4 +14,3 @@ This section will show you all the different configuration files Wazuh has, and 
        ossec-conf/index
        internal-options/index
        centralized-agent-configuration.rst
-       ruleset-xml-syntax/index.rst
