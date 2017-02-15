@@ -1,9 +1,9 @@
 .. _installation:
 
-Installing manager
-===================
+Installing Wazuh server
+=================================
 
-There are several ways to install the Manager, in order to determine which option is the most appropiate for you, please consult this table:
+There are several ways to install the Wazuh server, in order to determine which option is the most appropiate for you, please consult this table:
 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Type                                                                   | Description                                                 |

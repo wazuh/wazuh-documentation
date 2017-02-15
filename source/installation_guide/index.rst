@@ -7,7 +7,7 @@ This document will guide you through the installation process, from downloading 
 
 We will setup a distributed architecture based on two servers:
 
- - **Wazuh server**: Runs the Wazuh Manager, API and Filebeat.
+ - **Wazuh server**: Runs the Wazuh manager, API and Filebeat.
  - **Elastic Stack**: Runs the Elasticsearch engine, Logstash server and Kibana (including the Wazuh App).
 
 .. thumbnail:: ../images/installation/installing_wazuh.png
