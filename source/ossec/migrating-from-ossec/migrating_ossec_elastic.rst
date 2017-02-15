@@ -12,7 +12,7 @@ Install Elastic stack server following this guide:
 .. toctree::
     :maxdepth: 1
 
-    ../installation_guide/installing-elastic-stack/elastic_server_deb
+    ../../installation_guide/installing-elastic-stack/elastic_server_deb
 
 
 **Red Hat, CentOS and other RPM-based systems**
@@ -20,4 +20,4 @@ Install Elastic stack server following this guide:
 .. toctree::
     :maxdepth: 1
 
-    ../installation_guide/installing-elastic-stack/elastic_server_rpm
+    ../../installation_guide/installing-elastic-stack/elastic_server_rpm

@@ -54,7 +54,7 @@ Available documentation
 
    getting_started/index
    installation_guide/index
-   migrating/index
+   ossec/index
    learn_examples/index
    user-manual/index
    pci-dss/index
