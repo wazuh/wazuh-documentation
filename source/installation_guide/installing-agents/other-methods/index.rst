@@ -1,24 +1,20 @@
-.. _wazuh_agent_source:
+.. _wazuh_agent_other:
 
 Other installation methods
 ===========================
 
-Installing from sources
--------------------------------------
++-------------------------------------------------+--------------------------------------------------+
+| Type                                            | Description                                      |
++=================================================+==================================================+
+| :ref:`Linux Agent <wazuh_agent_other_linux>`    | Install Linux Wazuh agents from source code.     |
++-------------------------------------------------+--------------------------------------------------+
+| :ref:`Windows Agent <wazuh_agent_other_windows>`| Install Windows Wazuh agents from source         |
++-------------------------------------------------+--------------------------------------------------+
 
-1. Download and extract the latest version::
+.. topic:: Contents
 
-    curl -Ls https://github.com/wazuh/wazuh/archive/v1.1.1.tar.gz | tar zx
+    .. toctree::
+        :maxdepth: 2
 
-2. Run the *install.sh* script. It will guide you through the installation and compile the source::
-
-    cd wazuh-*
-    ./install.sh
-
-3. The script will ask about what kind of installation you want. Type **agent** in order to install a Wazuh agent::
-
-    1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
-
-4. Start the services using this command::
-
-    /var/ossec/bin/ossec-control start
+        linux_agent
+        win_agent

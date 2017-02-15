@@ -10,7 +10,7 @@ There are several ways to install a Wazuh agent, in order to determine which opt
 +=================================================+==================================================+
 | :ref:`Packages <installing_wazuh_agent>`        | Install Wazuh agents using deb and rpm packages. |
 +-------------------------------------------------+--------------------------------------------------+
-| :ref:`Sources <wazuh_agent_source>`             | Install Wazuh agents from source code.           |
+| :ref:`Sources <wazuh_agent_other>`              | Install Wazuh agents from source code.           |
 +-------------------------------------------------+--------------------------------------------------+
 | :ref:`Windows installer <wazuh_agent_windows>`  | Install Wazuh agents on Windows.                 |
 +-------------------------------------------------+--------------------------------------------------+
