@@ -1,6 +1,6 @@
 .. _wazuh_server_deb:
 
-Install Wazuh manager and API (deb)
+Install manager and API (deb)
 ====================================
 
 Adding Wazuh repositories
@@ -128,4 +128,4 @@ It is possible to set the path of Python in the API configuration at */var/ossec
 Next steps
 ----------
 
-Once you've installed the Wazuh manager, you need to :ref:`install Filebeat <filebeat_deb>`.
+Once you have installed the manager, you need to :ref:`install Filebeat <filebeat_deb>`.

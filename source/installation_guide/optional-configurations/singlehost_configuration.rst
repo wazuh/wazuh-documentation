@@ -5,7 +5,7 @@ Single-host architecture installation
 
 Usally, Wazuh is installed using a distributed architecture but in case you need it, you can install Wazuh in a single-host architecture. That means you will setup the Wazuh Manager and the Elastic Stack on the same server:
 
-.. thumbnail:: ../../../images/installation/installing_wazuh_singlehost.png
+.. thumbnail:: ../../images/installation/installing_wazuh_singlehost.png
     :title: Installing Wazuh Manager - Single-host
     :align: center
     :width: 100%

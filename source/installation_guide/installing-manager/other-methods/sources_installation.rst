@@ -3,9 +3,9 @@
 Installing from sources
 ===================================================
 
-This guide replaces only the section "*Install Wazuh manager (deb/rpm)*" on :ref:`Installation via packages <installation_main>`.
+This guide decribes how to install the manager and API from source code.
 
-Wazuh Manager
+Manager
 ---------------------------------------------------
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution packages manager:
@@ -44,7 +44,7 @@ Wazuh Manager
 
     /var/ossec/bin/ossec-control start
 
-Wazuh API
+API
 ---------------------------------------------------
 
 1. It is required NodeJS >= 4.6.1 in order to run the API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend to add the official repositories because they have more recent versions.
@@ -93,18 +93,11 @@ For CentOS 6 and Redhat 6, you can install the package *python27*, that installs
 
     b) For RHEL 6::
 
-        yum install scl-utils
-
-        # Choose option:
-            # Enable RHSCL (option 1)
-            yum-config-manager --enable rhel-server-rhscl-6-rpms
-
-            # Enable RHSCL manually (option 2)
-            nano /etc/yum.repos.d/redhat-rhui.repo
-            # In section [rhui-REGION-rhel-server-rhscl], change enabled from 0 to 1
-                [rhui-REGION-rhel-server-rhscl]
-                name=Red Hat Enterprise Linux Server 6 RHSCL (RPMs)
-                # ...
-                enabled=1
-
         yum install python27
+
+        # You may need enable the repository:
+        #   yum-config-manager --enable REPOSITORY_NAME
+
+        #   Examples:
+        #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
+        #   yum-config-manager --enable rhel-server-rhscl-6-rpms
