@@ -15,11 +15,15 @@ User manual
     .. toctree::
         :maxdepth: 1
 
-        configuration-files/index
+        configuration/index
+        registering-agents/index
         log-analysis/index
         file-integrity/index
         anomalies-detection/index
         policy-monitoring/index
+        automatic-remediation/index
         system-calls-monitoring/index
+        agentless-monitoring/index
+        forwarding-alerts/index
         ruleset/index
         api/index

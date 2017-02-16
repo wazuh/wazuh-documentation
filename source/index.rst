@@ -57,8 +57,10 @@ Available documentation
    :maxdepth: 1
 
    getting_started/index
+   ossec/index
    installation_guide/index
-   migrating/index
+   deploying_with_puppet/index
+   docker/index
    learn_examples/index
    user-manual/index
    pci-dss/index

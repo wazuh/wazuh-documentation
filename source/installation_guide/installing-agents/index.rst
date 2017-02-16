@@ -8,15 +8,16 @@ There are several ways to install a Wazuh agent, in order to determine which opt
 +-------------------------------------------------+--------------------------------------------------+
 | Type                                            | Description                                      |
 +=================================================+==================================================+
-| :ref:`Packages <installing_wazuh_agent>`        | Install Wazuh agents using deb and rpm packages. |
+| :ref:`Rpm packages <wazuh_agent_rpm>`           | Install Wazuh agents using rpm packages.         |
 +-------------------------------------------------+--------------------------------------------------+
-| :ref:`Sources <wazuh_agent_source>`             | Install Wazuh agents from source code.           |
+| :ref:`Deb packages <wazuh_agent_deb>`           | Install Wazuh agents using deb packages.         |
 +-------------------------------------------------+--------------------------------------------------+
 | :ref:`Windows installer <wazuh_agent_windows>`  | Install Wazuh agents on Windows.                 |
 +-------------------------------------------------+--------------------------------------------------+
-| :ref:`Puppet <wazuh_puppet>`                    | Deploying Wazuh automatically with Puppet.       |
+| :ref:`Sources <wazuh_agent_other>`              | Install Wazuh agents from source code.           |
 +-------------------------------------------------+--------------------------------------------------+
 
+Once we have our agents installed, it is necessary to connect them with the manager. Check out the :ref:`registration process <connecting_agents>`.
 
 .. topic:: Contents
 
@@ -25,4 +26,4 @@ There are several ways to install a Wazuh agent, in order to determine which opt
 
         packages-installation/index
         windows/index
-        other-methods/index
+        sources/index

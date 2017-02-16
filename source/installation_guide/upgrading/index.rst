@@ -30,7 +30,7 @@ Following the next guide, your current installation will be automatically update
 .. toctree::
     :maxdepth: 1
 
-    ../installing-manager/packages-installation/wazuh_server_deb
+    ../installing-wazuh-server/packages-installation/wazuh_server_deb
 
 
 **Red Hat, CentOS and other RPM-based systems**
@@ -38,7 +38,7 @@ Following the next guide, your current installation will be automatically update
 .. toctree::
     :maxdepth: 1
 
-    ../installing-manager/packages-installation/wazuh_server_rpm
+    ../installing-wazuh-server/packages-installation/wazuh_server_rpm
 
 Step 2: Update Agents
 ----------------------------------------------------------
@@ -69,7 +69,7 @@ Step 3: Change from Logstash forwarder to Filebeat
 *ToDo*
 
  - Remove Logstash
- - Install Filebeat: :ref:`(deb) <filebeat_deb>`, :ref:`(rpm) <filebeat_rpm>`.
+ - Install Filebeat: filebeat_deb, filebeat_rpm.
 
 Step 4: Update Elastic configuration
 ----------------------------------------------------------

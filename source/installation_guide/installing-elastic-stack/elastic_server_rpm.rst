@@ -1,7 +1,7 @@
 .. _elastic_server_rpm:
 
-Install Elastic Stack (rpm)
-================================
+Install Elastic Stack with RPM packages
+==========================================
 
 The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
 

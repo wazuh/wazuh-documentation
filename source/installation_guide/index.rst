@@ -26,11 +26,10 @@ We will setup a distributed architecture based on two servers:
     .. toctree::
         :maxdepth: 2
 
-        installing-manager/index
+        installing-wazuh-server/index
         installing-elastic-stack/index
         installing-agents/index
-        registering-agents/index
-        deploying_with_puppet/index
         optional-configurations/index
         upgrading/index
+        virtual_machines
       	packages_list/index
