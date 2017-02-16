@@ -20,6 +20,7 @@ User manual
         file-integrity/index
         anomalies-detection/index
         policy-monitoring/index
+        automatic-remediation/index
         system-calls-monitoring/index
         agentless-monitoring/index
         forwarding-alerts/index
