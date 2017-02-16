@@ -18,7 +18,7 @@ Following the proper installation guide, your OSSEC installation will be automat
 .. toctree::
     :maxdepth: 1
 
-    ../../installation_guide/installing-manager/packages-installation/wazuh_server_deb
+    ../../installation_guide/installing-wazuh-server/packages-installation/wazuh_server_deb
     ../../installation_guide/installing-agents/packages-installation/wazuh_agent_deb
 
 
@@ -27,5 +27,5 @@ Following the proper installation guide, your OSSEC installation will be automat
 .. toctree::
     :maxdepth: 1
 
-    ../../installation_guide/installing-manager/packages-installation/wazuh_server_rpm
+    ../../installation_guide/installing-wazuh-server/packages-installation/wazuh_server_rpm
     ../../installation_guide/installing-agents/packages-installation/wazuh_agent_rpm

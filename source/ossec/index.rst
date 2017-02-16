@@ -3,6 +3,11 @@
 OSSEC
 ===================================================
 
+
+.. warning::
+	Draft document.
+
+
 Wazuh is born as an OSSEC HIDS fork.
 
 OSSEC agents are compatible with Wazuh Manager.

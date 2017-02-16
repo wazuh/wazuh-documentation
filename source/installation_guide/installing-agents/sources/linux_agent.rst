@@ -1,6 +1,6 @@
 .. _wazuh_agent_other_linux:
 
-Linux Server
+Linux agent
 ===========================
 
 1. Download and extract the latest version::

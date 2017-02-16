@@ -50,7 +50,7 @@ Follow the next guide in order to install Wazuh server:
 .. toctree::
     :maxdepth: 1
 
-    ../../installation_guide/installing-manager/packages-installation/wazuh_server_deb
+    ../../installation_guide/installing-wazuh-server/packages-installation/wazuh_server_deb
 
 
 **Red Hat, CentOS and other RPM-based systems**
@@ -58,7 +58,7 @@ Follow the next guide in order to install Wazuh server:
 .. toctree::
     :maxdepth: 1
 
-    ../../installation_guide/installing-manager/packages-installation/wazuh_server_rpm
+    ../../installation_guide/installing-wazuh-server/packages-installation/wazuh_server_rpm
 
 
 Step 4: Restore configuration.

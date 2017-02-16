@@ -101,3 +101,8 @@ For CentOS 6 and Redhat 6, you can install the package *python27*, that installs
         #   Examples:
         #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
         #   yum-config-manager --enable rhel-server-rhscl-6-rpms
+
+Filebeat
+---------------------------------------------------
+
+Check out `Filebeat documentation <https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-installation.html>`_.

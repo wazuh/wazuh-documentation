@@ -8,16 +8,13 @@ There are several ways to install the Wazuh server, in order to determine which 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Type                                                                   | Description                                                 |
 +========================================================================+=============================================================+
-| :ref:`Packages <installation_main>`                                    | Install Wazuh using deb and rpm packages.                   |
+| :ref:`Rpm packages <wazuh_server_rpm>`                                 | Install Wazuh using rpm packages.                           |
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| :ref:`Deb packages <wazuh_server_deb>`                                 | Install Wazuh using deb packages.                           |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | :ref:`Sources <sources_installation>`                                  | Install Wazuh from source code.                             |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Docker <wazuh_docker>`                                           | Running Wazuh as docker container.                          |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Virtual Machine <virtual_machines>`                              | Running Wazuh using an OVA file in virtual machines.        |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Puppet <wazuh_puppet>`                                           | Deploying Wazuh automatically with Puppet.                  |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
+
 
 .. warning::
     The manager requires Linux or another Unix-like system.
@@ -25,7 +22,7 @@ There are several ways to install the Wazuh server, in order to determine which 
 .. topic:: Contents
 
     .. toctree::
-       :maxdepth: 3
+       :maxdepth: 2
 
        packages-installation/index
-       other-methods/index
+       sources_installation

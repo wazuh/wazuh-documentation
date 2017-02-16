@@ -1,7 +1,7 @@
 .. _wazuh_agent_rpm:
 
-Install Wazuh agent (rpm)
-=============================
+Install Wazuh agent with Debian packages
+==========================================
 
 The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
 

@@ -1,6 +1,6 @@
 .. _wazuh_docker:
 
-Docker containers
+Docker
 ===============================
 
 Wazuh is also available as a set of Docker images:

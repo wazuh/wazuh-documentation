@@ -1,7 +1,7 @@
 .. _elastic_server_deb:
 
-Install Elastic Stack (deb)
-================================
+Install Elastic Stack with Debian packages
+===========================================
 
 The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
