@@ -38,6 +38,8 @@ XML excerpt to show location for *alerts* section:
 +---------------------------------------------------------------+------------------------+
 | `Global  <global.html>`_                                      | server, local          |
 +---------------------------------------------------------------+------------------------+
+| `Integration  <integration.html>`_                            | server, local          |
++---------------------------------------------------------------+------------------------+
 | `Local file <localfile.html>`_                                | server, local          |
 +---------------------------------------------------------------+------------------------+
 | `Remote <remote.html>`_                                       | server                 |
@@ -70,6 +72,7 @@ All previous sections must be configured within the ``<ossec_config>`` tag.
        database-output
        email_alerts
        global
+       integration
        localfile
        remote
        reports
