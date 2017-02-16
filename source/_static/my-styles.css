@@ -159,6 +159,10 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     content: "";
 }
 
+#welcome-to-wazuh .topic:nth-of-type(5) .topic-title:before {
+    content: "";
+}
+
 /* Code-block vertical marging inside admonition ******************************/
 .admonition p,
 .admonition div[class^='highlight'] {

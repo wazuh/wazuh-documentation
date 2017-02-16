@@ -3,27 +3,31 @@
 Welcome to Wazuh
 ================
 
-Wazuh helps to get security visibility into your infrastructure, by monitoring hosts at a system and application level. The solution, based on multi-platform and lightweight agents, provides the following capabilities:
+Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level. This solution, based on lightweight multi-platform agents, provides the following capabilities:
 
 .. topic:: Log management and analysis
 
-    Wazuh agents read operating system logs and events, forwarding them to a central manager for analysis and storage. The purpose of this process is the identification of application or system errors, misconfigurations, intrusion attempts, policy violations or security issues.
+    Wazuh agents read operating system and application logs, and securely forward them to a central manager for rule-based analysis and storage. The Wazuh rules help bring to your attention application or system errors, misconfigurations, attempted and/or successful malicious activities, policy violations and a variety of other security and operational issues.
 
 .. topic:: File integrity monitoring
 
-    Wazuh monitors the file system, identifying changes in permissions, attributes, contents or ownership.
+    Wazuh monitors the file system, identifying changes in content, permissions, ownership, and attributes of files that you need to keep an eye on.
 
-.. topic:: Intrusions and anomalies detection
+.. topic:: Intrusion and anomaly detection
 
-    Agents do scan the system looking for malware, rootkits or anomalies. They can detect hidden files, processes or open ports, as well as inconsistencies in system call responses.
+    Agents scan the system looking for malware, rootkits or suspicious anomalies. They can detect hidden files, cloaked processes or unregistered network listeners, as well as inconsistencies in system call responses.
 
 .. topic:: Policy and compliance monitoring
 
-    Wazuh monitors configuration files to ensure they are compliant with your security policies, standards or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, not patched, or not properly configured.
+    Wazuh monitors configuration files to ensure they are compliant with your security policies, standards or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, unpatched, or insecurely configured.
 
-This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic Stack, making them work together as a single solution, and simplifying their configuration and management.
+.. topic:: Wazuh web application
 
-Wazuh also provides a centralized Web User Interface (fully integrated as a Kibana app), an updated log analysis ruleset, and a RESTful API that allows user to monitor deployment status and configuration.
+    Wazuh includes a rich web application (fully integrated as a Kibana app), for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
+
+This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic Stack, making them work together as a unified solution, and simplifying their configuration and management.
+
+Wazuh also provides an updated log analysis ruleset, and a RESTful API that allows you to monitor the status and configuration of all Wazuh agents.
 
 Sample screenshots
 ------------------
