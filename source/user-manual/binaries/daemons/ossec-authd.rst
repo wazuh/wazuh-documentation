@@ -4,9 +4,8 @@
 ossec-authd
 ===========
 
-The ossec-authd daemon will automatically add an agent to an OSSEC manager and provide the key to the agent.
-The agent-auth application is the client application used with ossec-authd.
-ossec-authd will create an agent with an ip address of any instead of using its actual IP.
+The ossec-authd daemon will automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.
+``ossec-authd`` will create an agent with an ip address of any instead of using its actual IP.
 
 .. warning::
 
@@ -45,11 +44,11 @@ ossec-authd will create an agent with an ip address of any instead of using its 
 ``-D``
 ------
 
-Chroot to <dir>.
+Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D <dir>
+  -D ``<dir>``
 
 
 
@@ -58,7 +57,7 @@ Chroot to <dir>.
 ``-d``
 ------
 
-Execute ossec-agentlessd in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Execute ``ossec-agentlessd`` in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
 
 
 ``-g``
@@ -68,7 +67,7 @@ Run as group.
 
 .. topic:: Arguments
 
-  -g <group>
+  -g ``<group>``
 
 ``-h``
 ------
@@ -87,7 +86,7 @@ Full path to the server key.
 
 .. topic:: Arguments
 
-  -k <path>
+  -k ``<path>``
 
 
 ``-p``
@@ -97,7 +96,7 @@ Listen on port.
 
 .. topic:: Arguments
 
-  -p <port>
+  -p ``<port>``
 
 .. topic:: Default
 
@@ -126,7 +125,7 @@ Full path to the CA certificate used to verify the clients.
 
 .. topic:: Arguments
 
-  -v <path>
+  -v ``<path>``
 
 
 
@@ -137,4 +136,4 @@ Full path to the server certificate.
 
 .. topic:: Arguments
 
-  -x <path>
+  -x ``<path>``

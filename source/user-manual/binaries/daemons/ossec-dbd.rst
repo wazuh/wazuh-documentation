@@ -4,7 +4,7 @@
 ossec-dbd
 =============
 
-The ossec-dbd daemon inserts the alert logs into a database, either postgresql or mysql.
+The ``ossec-dbd`` daemon inserts the alert logs into a database, either postgresql or mysql.
 
 +-------------------------+---------------------------------+
 | Options                 | Descriptions                    |
@@ -31,15 +31,15 @@ The ossec-dbd daemon inserts the alert logs into a database, either postgresql o
 ``-c``
 ------
 
-Run ossec-dbd using <config> as the configuration file.
+Run ``ossec-dbd`` using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 .. topic:: Default
 
-  /var/ossec/etc/ossec.conf
+  ``/var/ossec/etc/ossec.conf``
 
 
 .. _dbd-directory:
@@ -47,15 +47,15 @@ Run ossec-dbd using <config> as the configuration file.
 ``-D``
 ------
 
-Chroot to <dir>.
+Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D <dir>
+  -D ``<dir>``
 
 .. topic:: Default
 
-  /var/ossec
+  ``/var/ossec``
 
 
 
@@ -95,11 +95,11 @@ Test configuration.
 ``-u``
 ------
 
-Run ossec-dbd as <user>.
+Run ossec-dbd as ``<user>``.
 
 .. topic:: Arguments
 
-  -u <user>
+  -u ``<user>``
 
 .. topic:: Default
 

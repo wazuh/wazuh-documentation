@@ -26,25 +26,25 @@ ossec-syscheckd is started by ossec-control.
 ``-c``
 ------
 
-Run ossec-syscheckd using <config> as the configuration file.
+Run ``ossec-syscheckd`` using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 .. topic:: Default
 
-  /var/ossec/etc/ossec.conf
+  ``/var/ossec/etc/ossec.conf``
 
 ``-d``
 ------
 
-Execute ossec-syscheckd in debug mode. This can be used more than once to increase the verbosity of the debug messages.
+Execute ``ossec-syscheckd`` in debug mode. This can be used more than once to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ossec-syscheckd in the foreground.
+Run ``ossec-syscheckd`` in the foreground.
 
 ``-h``
 ------

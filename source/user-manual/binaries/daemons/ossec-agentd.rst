@@ -4,8 +4,7 @@
 ossec-agentd
 ============
 
-It is the client side daemon that communicates with the server.
-It runs as ossec and is chrooted to /var/ossec by default.
+It is the client side daemon that communicates with the server. It runs as ``ossec`` and is chrooted to ``/var/ossec`` by default.
 
 
 +-------------------------------+---------------------------------+
@@ -36,11 +35,11 @@ It runs as ossec and is chrooted to /var/ossec by default.
 ``-c``
 ------
 
-Run ossec-agentd using <config> as the configuration file.
+Run ossec-agentd using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 .. topic:: Default
 
@@ -51,15 +50,15 @@ Run ossec-agentd using <config> as the configuration file.
 ``-D``
 ------
 
-Chroot to <dir>.
+Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D <dir>
+  -D ``<dir>``
 
 .. topic:: Default
 
-  /var/ossec
+  ``/var/ossec``
 
 .. _agentd-debug:
 
@@ -80,7 +79,7 @@ Run ossec-agentd as <group>.
 
 .. topic:: Arguments
 
-  -g <group>
+  -g ``<group>``
 
 ``-h``
 ------
@@ -96,11 +95,11 @@ Test configuration.
 ``-u``
 ------
 
-Run ossec-agentd as <user>.
+Run ossec-agentd as ``<user>``.
 
 .. topic:: Arguments
 
-  -u <user>
+  -u ``<user>``
 
 .. topic:: Default
 

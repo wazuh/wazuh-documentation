@@ -4,7 +4,7 @@
 rootcheck_control
 =================
 
-The rootcheck_control tool allows you to manage the policy monitoring and system auditing database that is stored on the server (manager) side.
+The ``rootcheck_control`` tool allows you to manage the policy monitoring and system auditing database that is stored on the server (manager) side.
 
 You can list anomalies detected by the rootcheck functionality, categorized into resolved and outstanding issues.
 
@@ -58,7 +58,7 @@ Updates the database for the <id> agent or all of them.
 
 .. topic:: Arguments
 
-  -u <id>
+  -u ``<id>``
 
   -u all
 
@@ -69,7 +69,7 @@ Prints database for the agent.
 
 .. topic:: Arguments
 
-  -i <agent_id>
+  -i ``<agent_id>``
 
 
 ``-r``

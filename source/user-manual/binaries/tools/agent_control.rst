@@ -4,8 +4,7 @@
 agent_control
 =============
 
-The agent_control tool allows you to query and get information from any agent you have configured
-on your server and it also allows you to restart (run now) the syscheck/rootcheck scan on any agent.
+The ``agent_control`` tool allows you to query and get information from any agent you have configured on your server and it also allows you to restart (run now) the syscheck/rootcheck scan on any agent.
 
 Enabling active response will be necessary to start scans remotely and possibly other functions.
 
@@ -20,7 +19,7 @@ Enabling active response will be necessary to start scans remotely and possibly 
 +--------------------------+------------------------------------------------+
 | `-i`_                    | Extracts information from an agent             |
 +--------------------------+------------------------------------------------+
-| `-R <#control-restart>`__| Restarts the OSSEC processes on the agent      |
+| `-R <#control-restart>`__| Restarts the Wazuh processes on the agent      |
 +--------------------------+------------------------------------------------+
 | `-r <#control-check>`__  | Run the integrity/rootcheck checking on agents |
 +--------------------------+------------------------------------------------+
@@ -53,7 +52,7 @@ Extracts information from an agent.
 
 .. topic:: Arguments
 
-  -i <agent_id>
+  -i ``<agent_id>``
 
 
 .. _control-restart:
@@ -65,7 +64,7 @@ Restarts the OSSEC processes on the agent.
 
 .. topic:: Arguments
 
-  -R <agent_id>
+  -R ``<agent_id>``
 
 .. note::
    Requires active response to be enabled.
@@ -94,4 +93,4 @@ Utilizes all agents.
 
 .. topic:: Arguments
 
-  -u <agent_id>
+  -u ``<agent_id>``

@@ -6,31 +6,31 @@ Daemons
 +---------------------------------------------------+-----------------------------------------------------------------+
 | Daemons                                           | Descriptions                                                    |
 +===================================================+=================================================================+
-| `ossec-agentd <ossec-agentd.html>`_               | The client side daemon that communicates with the server        |
+| :ref:`ossec-agentd <ossec-agentd>`                | The client side daemon that communicates with the server        |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-agentlessd <ossec-agentlessd.html>`_       | Run integrity checking on systems without an agent installed    |
+| :ref:`ossec-agentlessd <ossec-agentlessd>`        | Run integrity checking on systems without an agent installed    |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-analysisd <ossec-analysisd.html>`_         | Recveives the log messages and compares them to the rules       |
+| :ref:`ossec-analysisd <ossec-analysisd>`          | Recveives the log messages and compares them to the rules       |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-authd <ossec-authd.html>`_                 | Adds agents to an OSSEC manager                                 |
+| :ref:`ossec-authd <ossec-authd>`                  | Adds agents to an OSSEC manager                                 |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-csyslogd <ossec-csyslogd.html>`_           | Forwards the OSSEC alerts via syslog                            |
+| :ref:`ossec-csyslogd <ossec-csyslogd>`            | Forwards the OSSEC alerts via syslog                            |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-dbd <ossec-dbd.html>`_                     | Inserts the alert logs into a database                          |
+| :ref:`ossec-dbd <ossec-dbd>`                      | Inserts the alert logs into a database                          |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-exced <ossec-execd.html>`_                 | Executes active responses                                       |
+| :ref:`ossec-exced <ossec-execd>`                  | Executes active responses                                       |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-logcollector <ossec-logcollector.html>`_   | Monitors configured files and commands for new log messages     |
+| :ref:`ossec-logcollector <ossec-logcollector>`    | Monitors configured files and commands for new log messages     |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-maild <ossec-maild.html>`_                 | Sends OSSEC alerts via email                                    |
+| :ref:`ossec-maild <ossec-maild>`                  | Sends OSSEC alerts via email                                    |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-monitord <ossec-monitord.html>`_           | Monitors agent connectivity and compress log files              |
+| :ref:`ossec-monitord <ossec-monitord>`            | Monitors agent connectivity and compress log files              |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-remoted <ossec-remoted.html>`_             | It communicates with the agents                                 |
+| :ref:`ossec-remoted <ossec-remoted>`              | It communicates with the agents                                 |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-reportd <ossec-reportd.html>`_             | Creates reports from OSSEC alerts                               |
+| :ref:`ossec-reportd <ossec-reportd>`              | Creates reports from OSSEC alerts                               |
 +---------------------------------------------------+-----------------------------------------------------------------+
-| `ossec-syscheckd <ossec-syscheckd.html>`_         | Checks configured files for security changes                    |
+| :ref:`ossec-syscheckd <ossec-syscheckd>`          | Checks configured files for security changes                    |
 +---------------------------------------------------+-----------------------------------------------------------------+
 
 

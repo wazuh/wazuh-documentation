@@ -4,7 +4,7 @@
 ossec-logtest
 =============
 
-ossec-logtest is the single most useful tool when working with ossec.  This tool allows oneself
+``ossec-logtest`` is the single most useful tool when working with ossec.  This tool allows oneself
 to test and verify log files in the exact same way that ossec-anaylistd does.
 
 Something ossec-logtest can help with:
@@ -44,11 +44,11 @@ Analyze of input lines as if they are live events.
 ``-c``
 ------
 
-<config> is the path and filename to load.
+``<config>`` is the path and filename to load.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 .. topic:: Default
 
@@ -59,12 +59,12 @@ Analyze of input lines as if they are live events.
 ``-D``
 ------
 
-This is the path that ossec-logtest will chroot to before it completes loading all rules,
+This is the path that ``ossec-logtest`` will chroot to before it completes loading all rules,
 decoders, and lists and processing standard input.
 
 .. topic:: Arguments
 
-  -D <dir>
+  -D ``<dir>``
 
 
 .. _logtest-debug:
@@ -95,7 +95,7 @@ the last line tested matches the arguments passed.
 
 .. topic:: Arguments
 
-  -U <rule-id:alert-level:decoder-name>
+  -U ``<rule-id:alert-level:decoder-name>``
 
 .. note::
 

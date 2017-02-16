@@ -4,8 +4,8 @@
 ossec-remoted
 =============
 
-ossec-remoted is the server side daemon that communicates with the agents.
-It can listen to port 1514/udp (for OSSEC communications) and/or 514 (for syslog).
+``ossec-remoted`` is the server side daemon that communicates with the agents.
+It can listen to port 1514/udp (for Wazuh communications) and/or 514 (for syslog).
 It runs as ossecr and is chrooted to ``/var/ossec`` by default.
 
 
@@ -36,15 +36,15 @@ It runs as ossecr and is chrooted to ``/var/ossec`` by default.
 ``-c``
 ------
 
-Run ossec-remoted using <config> as the configuration file.
+Run ``ossec-remoted`` using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 .. topic:: Default
 
-  /var/ossec/etc/ossec.conf
+  ``/var/ossec/etc/ossec.conf``
 
 
 .. _remoted-directory:
@@ -52,15 +52,15 @@ Run ossec-remoted using <config> as the configuration file.
 ``-D``
 ------
 
-Chroot to <dir>.
+Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D <dir>
+  -D ``<dir>``
 
 .. topic:: Default
 
-  /var/ossec
+  ``/var/ossec``
 
 
 .. _remoted-debug:
@@ -68,7 +68,7 @@ Chroot to <dir>.
 ``-d``
 ------
 
-Execute ossec-remoted in debug mode. This can be used more than once to increase the verbosity of the debug messages.
+Execute ``ossec-remoted`` in debug mode. This can be used more than once to increase the verbosity of the debug messages.
 
 
 ``-f``
@@ -79,11 +79,11 @@ Run ossec-remoted in the foreground.
 ``-g``
 ------
 
-Run ``ossec-remoted`` as <group>.
+Run ``ossec-remoted`` as ``<group>``.
 
 .. topic:: Arguments
 
-  -g <group>
+  -g ``<group>``
 
 
 ``-h``
@@ -101,11 +101,11 @@ Test configuration.
 ``-u``
 ------
 
-Run ossec-remoted as <user>.
+Run ``ossec-remoted`` as ``<user>``.
 
 .. topic:: Arguments
 
-  -u <user>
+  -u ``<user>``
 
 .. topic:: Default
 

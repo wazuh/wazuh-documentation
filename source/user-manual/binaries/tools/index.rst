@@ -6,33 +6,33 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+
 | Tools                                             | Descriptions                                                               |
 +===================================================+============================================================================+
-| `ossec-control <ossec-control.html>`_             | Manage the status of OSSEC processes                                       |
+| :ref:`ossec-control <ossec-control>`              | Manage the status of Wazuh processes                                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `agent-auth <agent-auth.html>`_                   | Add agents to an OSSEC manager                                             |
+| :ref:`agent-auth <agent-auth>`                    | Add agents to an Wazuh manager                                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `agent_control <agent_control.html>`_             | Allows you to query and get information from any agent                     |
+| :ref:`agent_control <agent_control>`              | Allows you to query and get information from any agent                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `manage_agents <manage_agents.html>`_             | Provides an interface to handle authentication keys for  agents            |
+| :ref:`manage_agents <manage_agents>`              | Provides an interface to handle authentication keys for  agents            |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `ossec-logtest <ossec-logtest.html>`_             | Allows to test and verify log files                                        |
+| :ref:`ossec-logtest <ossec-logtest>`              | Allows to test and verify log files                                        |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `ossec-makelists <ossec-makelists.html>`_         | Compile cdb databases                                                      |
+| :ref:`ossec-makelists <ossec-makelists>`          | Compile cdb databases                                                      |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `rootcheck_control <rootcheck_control.html>`_     | Allows you to manage the policy monitoring and system auditing database    |
+| :ref:`rootcheck_control <rootcheck_control>`      | Allows you to manage the policy monitoring and system auditing database    |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `syscheck_control <syscheck_control.html>`_       | Provides an interface for managing the integrity checking database         |
+| :ref:`syscheck_control <syscheck_control>`        | Provides an interface for managing the integrity checking database         |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `syscheck_update <syscheck_update.html>`_         | Updates the integrity check database                                       |
+| :ref:`syscheck_update <syscheck_update>`          | Updates the integrity check database                                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `clear_stats <clear_stats.html>`_                 | Clears the events stats                                                    |
+| :ref:`clear_stats <clear_stats>`                  | Clears the events stats                                                    |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `list_agents <list_agents.html>`_                 | Lists available agents                                                     |
+| :ref:`list_agents <list_agents>`                  | Lists available agents                                                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `ossec-regex <ossec-regex.html>`_                 | Validates a regex expression                                               |
+| :ref:`ossec-regex <ossec-regex>`                  | Validates a regex expression                                               |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `util.sh <util.sh.html>`_                         | Adds a file to be monitored by ossec-logcollector                          |
+| :ref:`util.sh <util.sh>`                          | Adds a file to be monitored by ossec-logcollector                          |
 +---------------------------------------------------+----------------------------------------------------------------------------+
-| `verify-agent-conf <verify-agent-conf.html>`_     | Verifies the OSSEC agent.conf configuration                                |
+| :ref:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh ``agent.conf`` configuration                            |
 +---------------------------------------------------+----------------------------------------------------------------------------+
 
 .. topic:: Contents

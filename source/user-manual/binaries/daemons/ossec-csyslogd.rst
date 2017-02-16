@@ -4,7 +4,7 @@
 ossec-csyslogd
 ==============
 
-ossec-csyslogd is a daemon that forwards the OSSEC alerts via syslog.
+``ossec-csyslogd`` is a daemon that forwards the Wazuh alerts via syslog.
 
 +------------------------------+---------------------------------+
 | Options                      | Descriptions                    |
@@ -32,15 +32,15 @@ ossec-csyslogd is a daemon that forwards the OSSEC alerts via syslog.
 ``-c``
 ------
 
-Run ossec-csyslogd using <config> as the configuration file.
+Run ossec-csyslogd using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 .. topic:: Default
 
-  /var/ossec/etc/ossec.conf
+  ``/var/ossec/etc/ossec.conf``
 
 
 
@@ -49,15 +49,15 @@ Run ossec-csyslogd using <config> as the configuration file.
 ``-D``
 ------
 
-Chroot to <dir>.
+Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D <dir>
+  -D ``<dir>``
 
 .. topic:: Default
 
-  /var/ossec
+  ``/var/ossec``
 
 
 .. _csyslogd-debug:
@@ -70,7 +70,7 @@ Execute ossec-csyslogd in debug mode. This option can be used multiple times to 
 ``-f``
 ------
 
-Run ossec-csyslogd in the foreground.
+Run ``ossec-csyslogd`` in the foreground.
 
 ``-g``
 ------
@@ -79,7 +79,7 @@ Run ossec-csyslogd as <group>.
 
 .. topic:: Arguments
 
-  -g <group>
+  -g ``<group>``
 
 
 ``-h``
@@ -96,11 +96,11 @@ Test configuration.
 ``-u``
 ------
 
-Run ossec-csyslogd as <user>.
+Run ``ossec-csyslogd`` as ``<user>``.
 
 .. topic:: Arguments
 
-  -u <user>
+  -u ``<user>``
 
 .. topic:: Default
 

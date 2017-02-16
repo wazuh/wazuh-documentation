@@ -36,11 +36,11 @@ Agentless monitoring allows you to run integrity checking on systems without an 
 ``-c``
 ------
 
-Read the configuration from file <config>.
+Read the configuration from file ``<config>``.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 
 .. _agentlessd-directory:
@@ -48,11 +48,11 @@ Read the configuration from file <config>.
 ``-D``
 ------
 
-Chroot to <dir>.
+Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D <dir>
+  -D ``<dir>``
 
 
 .. _agentlessd-debug:
@@ -75,7 +75,7 @@ Run as group.
 
 .. topic:: Arguments
 
-  -g <group>
+  -g ``<group>``
 
 
 

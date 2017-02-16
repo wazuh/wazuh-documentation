@@ -4,7 +4,7 @@
 ossec-monitord
 ==============
 
-The ossec-monitord daemon monitors agent connectivity and compress daily log files.
+The ``ossec-monitord`` daemon monitors agent connectivity and compress daily log files.
 
 
 +-------------------------------+---------------------------------+
@@ -33,52 +33,52 @@ The ossec-monitord daemon monitors agent connectivity and compress daily log fil
 ``-c``
 ------
 
-Run ossec-monitord using <config> as the configuration file.
+Run ``ossec-monitord`` using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 .. topic:: Default
 
-  /var/ossec/etc/ossec.conf
+  ``/var/ossec/etc/ossec.conf``
 
 .. _monitord-directory:
 
 ``-D``
 ------
 
-Chroot to <dir>.
+Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D <dir>
+  -D ``<dir>``
 
 .. topic:: Default
 
-  /var/ossec
+  ``/var/ossec``
 
 .. _monitord-debug:
 
 ``-d``
 ------
 
-Execute ossec-monitord in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Execute ``ossec-monitord`` in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ossec-monitord in the foreground.
+Run ``ossec-monitord`` in the foreground.
 
 
 ``-g``
 ------
 
-Run ossec-monitord as <group>.
+Run ``ossec-monitord`` as ``<group>``.
 
 .. topic:: Arguments
 
-  -g <group>
+  -g ``<group>``
 
 ``-h``
 ------
@@ -94,11 +94,11 @@ Test configuration.
 ``-u``
 ------
 
-Run ossec-monitord as <user>.
+Run ossec-monitord as ``<user>``.
 
 .. topic:: Arguments
 
-  -u <user>
+  -u ``<user>``
 
 .. topic:: Default
 

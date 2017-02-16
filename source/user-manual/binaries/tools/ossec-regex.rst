@@ -4,7 +4,7 @@
 ossec-regex
 ===========
 
-ossec-regex is a simple program that will validate a regex expression.
+``ossec-regex`` is a simple program that will validate a regex expression.
 
 The pattern should be enclosed in single quotes to help prevent any strange interactions with the shell.
 

@@ -4,7 +4,7 @@
 agent-auth
 =============
 
-The agent-auth program is the client application used with :ref:`ossec-authd` to automatically add agents to an OSSEC manager.
+The agent-auth program is the client application used with :ref:`ossec-authd` to automatically add agents to an Wazuh manager.
 
 .. warning::
 
@@ -17,7 +17,7 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 +==========================+======================================+
 | `-A`_                    | Agent name to be used                |
 +--------------------------+--------------------------------------+
-| `-D <#auth-directory>`__ | Directory where OSSEC is installed   |
+| `-D <#auth-directory>`__ | Directory where Wazuh is installed   |
 +--------------------------+--------------------------------------+
 | `-d <#auth-debug>`__     | Run in debug mode                    |
 +--------------------------+--------------------------------------+
@@ -46,7 +46,7 @@ Agent name to be used.
 
 .. topic:: Arguments
 
-  -A <agent_name>
+  -A ``<agent_name>``
 
 .. topic:: Default
 
@@ -61,7 +61,7 @@ Directory where OSSEC is installed.
 
 .. topic:: Default
 
-  /var/ossec
+  ``/var/ossec``
 
 .. _auth-debug:
 
@@ -73,11 +73,11 @@ Execute agent-auth in debug mode. This option can be used multiple times to incr
 ``-g``
 ------
 
-Run as <group>.
+Run as ``<group>``.
 
 .. topic:: Arguments
 
-  -g <group>
+  -g ``<group>``
 
 ``-h``
 ------
@@ -91,7 +91,7 @@ Full path to the agent key.
 
 .. topic:: Arguments
 
-  -k <path>
+  -k ``<path>``
 
 ``-m``
 ------
@@ -100,7 +100,7 @@ IP address of the manager.
 
 .. topic:: Arguments
 
-  -m <manager_ip>
+  -m ``<manager_ip>``
 
 
 ``-p``
@@ -110,7 +110,7 @@ Port ossec-authd is running on.
 
 .. topic:: Arguments
 
-  -p <port>
+  -p ``<port>``
 
 .. topic:: Default
 
@@ -132,7 +132,7 @@ Full path to the CA certificate used to verify the server.
 
 .. topic:: Arguments
 
-  -v <path>
+  -v ``<path>``
 
 ``-x``
 ------
@@ -141,4 +141,4 @@ Full path to the agent certificate.
 
 .. topic:: Arguments
 
-  -x <path>
+  -x ``<path>``

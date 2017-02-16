@@ -4,63 +4,63 @@
 ossec-control
 =============
 
-It is a script to start, stop, configure, or check on the status of OSSEC processes.
+It is a script to start, stop, configure, or check on the status of Wazuh processes.
 ossc-control can enable or disable client-syslog, database logging, agentless configurations, and debug mode.
 
 +------------+---------------------------------------------+
 | Options    | Descriptions                                |
 +============+=============================================+
-| `start`_   | Start the OSSEC processes                   |
+| `start`_   | Start the Wazuh processes                   |
 +------------+---------------------------------------------+
-| `stop`_    | Stop the OSSEC processes                    |
+| `stop`_    | Stop the Wazuh processes                    |
 +------------+---------------------------------------------+
-| `restart`_ | Restart the OSSEC processes                 |
+| `restart`_ | Restart the Wazuh processes                 |
 +------------+---------------------------------------------+
-| `reload`_  | Restart all OSSEC processes                 |
+| `reload`_  | Restart all Wazuh processes                 |
 +------------+---------------------------------------------+
-| `status`_  | Determine which OSSEC processes are running |
+| `status`_  | Determine which Wazuh processes are running |
 +------------+---------------------------------------------+
-| `enable`_  | Enable OSSEC functionality                  |
+| `enable`_  | Enable Wazuh functionality                  |
 +------------+---------------------------------------------+
-| `disable`_ | Disable OSSEC functionality                 |
+| `disable`_ | Disable Wazuh functionality                 |
 +------------+---------------------------------------------+
 
 ``start``
 ---------
 
-Start the OSSEC processes.
+Start the Wazuh processes.
 
 
 ``stop``
 --------
 
-Stop the OSSEC processes.
+Stop the Wazuh processes.
 
 ``restart``
 -----------
 
-Restart the OSSEC processes.
+Restart the Wazuh processes.
 
 
 ``reload``
 ----------
 
-Restart all OSSEC processes except ossec-execd. This allows an agent to reload without losing active response status.
+Restart all Wazuh processes except ossec-execd. This allows an agent to reload without losing active response status.
 
 .. note::
 
-   This is only available on an OSSEC agent.
+   This is only available on an Wazuh agent.
 
 ``status``
 ----------
 
-Determine which OSSEC processes are running.
+Determine which Wazuh processes are running.
 
 
 ``enable``
 ----------
 
-Enable OSSEC functionality.
+Enable Wazuh functionality.
 
 .. topic:: Allowed options
 

@@ -4,8 +4,8 @@
 ossec-makelists
 ===============
 
-The ossec-makelists utility to compile cdb databases.
-ossec-makelists will scan ossec.conf for database files, check the mtime, and recompile all out of date databases.
+The ``ossec-makelists`` utility to compile cdb databases.
+``ossec-makelists`` will scan :ref:`ossec.conf <reference_ossec_conf>` for database files, check the mtime, and recompile all out of date databases.
 
 
 
@@ -33,21 +33,21 @@ ossec-makelists will scan ossec.conf for database files, check the mtime, and re
 ``-c``
 ------
 
-Run with configuration file of <config>.
+Run with configuration file of ``<config>``.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 .. topic:: Default
 
-  /var/ossec/etc/ossec.conf
+  ``/var/ossec/etc/ossec.conf``
 
 
 ``-d``
 ------
 
-Execute ossec-makelists in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Execute ``ossec-makelists`` in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
 
 ``-F``
 ------
@@ -57,11 +57,11 @@ Force the rebuild of all configured databases.
 ``-g``
 ------
 
-Run as <group>.
+Run as ``<group>``.
 
 .. topic:: Arguments
 
-  -g <group>
+  -g ``<group>``
 
 
 ``-h``
@@ -77,11 +77,11 @@ Test the configuration.
 ``-u``
 ------
 
-Run as <user>.
+Run as ``<user>``.
 
 .. topic:: Arguments
 
-  -u <user>
+  -u ``<user>``
 
 
 ``-V``

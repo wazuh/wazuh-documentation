@@ -4,7 +4,7 @@
 syscheck_control
 ================
 
-syscheck_control provides an interface for managing and viewing the integrity checking database.
+``syscheck_control`` provides an interface for managing and viewing the integrity checking database.
 
 +--------------------------+---------------------------------------------------+
 | Options                  | Descriptions                                      |
@@ -52,7 +52,7 @@ Updates the database for the <id> agent or all of them.
 
 .. topic:: Arguments
 
-  -u <id>
+  -u ``<id>``
 
   -u all
 
@@ -63,7 +63,7 @@ Prints database for the agent.
 
 .. topic:: Arguments
 
-  -i <agent_id>
+  -i ``<agent_id>``
 
 ``-r``
 ------
@@ -86,7 +86,7 @@ Used with -i. Prints information about a modified file.
 
 .. topic:: Arguments
 
-  -f <file>
+  -f ``<file>``
 
 
 ``-z``

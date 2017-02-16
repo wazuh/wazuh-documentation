@@ -4,8 +4,8 @@
 ossec-maild
 =============
 
-The ossec-maild daemon sends OSSEC alerts via email.
-ossec-maild is started by ossec-control.
+The ``ossec-maild`` daemon sends Wazuh alerts via email.
+``ossec-maild`` is started by :ref:`ossec-control`.
 
 +-------------------------------+---------------------------------+
 | Options                       | Descriptions                    |
@@ -32,30 +32,30 @@ ossec-maild is started by ossec-control.
 ``-c``
 ------
 
-Run ossec-maild using <config> as the configuration file.
+Run ``ossec-maild`` using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c <config>
+  -c ``<config>``
 
 .. topic:: Default
 
-  /var/ossec/etc/ossec.conf
+  ``/var/ossec/etc/ossec.conf``
 
 .. _maild-directory:
 
 ``-D``
 ------
 
-Chroot to <dir>.
+Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D <dir>
+  -D ``<dir>``
 
 .. topic:: Default
 
-  /var/ossec
+  ``/var/ossec``
 
 
 .. _maild-debug:
@@ -63,22 +63,22 @@ Chroot to <dir>.
 ``-d``
 ------
 
-Execute ossec-maild in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Execute ``ossec-maild`` in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ossec-maild in the foreground.
+Run ``ossec-maild`` in the foreground.
 
 
 ``-g``
 ------
 
-Run ossec-maild as <group>.
+Run ``ossec-maild`` as ``<group>``.
 
 .. topic:: Arguments
 
-  -g <group>
+  -g ``<group>``
 
 ``-h``
 ------
@@ -93,11 +93,11 @@ Test configuration.
 ``-u``
 ------
 
-Run ossec-maild as <user>.
+Run ``ossec-maild`` as ``<user>``.
 
 .. topic:: Arguments
 
-  -u <user>
+  -u ``<user>``
 
 .. topic:: Default
 
