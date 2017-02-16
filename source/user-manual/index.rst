@@ -21,5 +21,6 @@ User manual
         anomalies-detection/index
         policy-monitoring/index
         system-calls-monitoring/index
+        agentless-monitoring/index
         ruleset/index
         api/index
