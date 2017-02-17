@@ -32,7 +32,7 @@ Run ossec-execd using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c ``<config>``
+  ``-c <config>``
 
 .. topic:: Default
 
@@ -55,7 +55,7 @@ Run as group.
 
 .. topic:: Arguments
 
-  -g ``<group>``
+  ``-g <group>``
 
 ``-h``
 ------

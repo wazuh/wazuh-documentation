@@ -40,7 +40,7 @@ Chroot to <dir>.
 
 .. topic:: Arguments
 
-  -D <dir>
+  ``-D <dir>``
 
 
 .. _reportd-debug:
@@ -58,7 +58,7 @@ Filter the results.
 
 .. topic:: Arguments
 
-  -f <filter> <value>
+  ``-f <filter> <value>``
 
 .. topic:: Allowed filters
 
@@ -78,7 +78,7 @@ Create a description for the report.
 
 .. topic:: Arguments
 
-  -n <string>
+  ``-n <string>``
 
 ``-r``
 ------
@@ -87,7 +87,7 @@ Show related entries.
 
 .. topic:: Arguments
 
-   -r <filter> <value>
+   ``-r <filter> <value>``
 
 
 ``-s``

@@ -58,9 +58,9 @@ Updates the database for the <id> agent or all of them.
 
 .. topic:: Arguments
 
-  -u ``<id>``
+  ``-u <id>``
 
-  -u all
+  ``-u all``
 
 ``-i``
 ------
@@ -69,7 +69,7 @@ Prints database for the agent.
 
 .. topic:: Arguments
 
-  -i ``<agent_id>``
+  ``-i <agent_id>``
 
 
 ``-r``

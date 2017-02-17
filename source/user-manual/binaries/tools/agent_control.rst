@@ -52,7 +52,7 @@ Extracts information from an agent.
 
 .. topic:: Arguments
 
-  -i ``<agent_id>``
+  ``-i <agent_id>``
 
 
 .. _control-restart:
@@ -64,7 +64,7 @@ Restarts the OSSEC processes on the agent.
 
 .. topic:: Arguments
 
-  -R ``<agent_id>``
+  ``-R <agent_id>``
 
 .. note::
    Requires active response to be enabled.
@@ -93,4 +93,4 @@ Utilizes all agents.
 
 .. topic:: Arguments
 
-  -u ``<agent_id>``
+  ``-u <agent_id>``

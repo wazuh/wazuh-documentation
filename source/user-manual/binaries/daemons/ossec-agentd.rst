@@ -54,7 +54,7 @@ Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D ``<dir>``
+  ``-D <dir>``
 
 .. topic:: Default
 
@@ -79,7 +79,7 @@ Run ossec-agentd as <group>.
 
 .. topic:: Arguments
 
-  -g ``<group>``
+  ``-g <group>``
 
 ``-h``
 ------
@@ -99,7 +99,7 @@ Run ossec-agentd as ``<user>``.
 
 .. topic:: Arguments
 
-  -u ``<user>``
+  ``-u <user>``
 
 .. topic:: Default
 

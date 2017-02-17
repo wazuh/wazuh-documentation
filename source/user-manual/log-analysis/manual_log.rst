@@ -134,7 +134,7 @@ Example
 
 
 Log Retention Time
-==================
+-------------------
 
 By default, Wazuh will generate alerts on events that are important. Most of the events that came from the log messages are just informational and they will not be stored.
 

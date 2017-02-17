@@ -30,7 +30,7 @@ Run ``ossec-syscheckd`` using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c ``<config>``
+  ``-c <config>``
 
 .. topic:: Default
 

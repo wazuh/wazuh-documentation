@@ -36,7 +36,7 @@ Configuration file ossec-analysisd should use.
 
 .. topic:: Arguments
 
-  -c ``<config>``
+  ``-c <config>``
 
 .. _analysisd-directory:
 
@@ -47,7 +47,7 @@ Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D ``<dir>``
+  ``-D <dir>``
 
 
 .. _analysisd-debug:
@@ -69,7 +69,7 @@ Run as group.
 
 .. topic:: Arguments
 
-  -g ``<group>``
+  ``-g <group>``
 
 
 ``-h``

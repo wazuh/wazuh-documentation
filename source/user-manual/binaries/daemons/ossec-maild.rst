@@ -36,7 +36,7 @@ Run ``ossec-maild`` using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c ``<config>``
+  ``-c <config>``
 
 .. topic:: Default
 
@@ -51,7 +51,7 @@ Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D ``<dir>``
+  ``-D <dir>``
 
 .. topic:: Default
 
@@ -78,7 +78,7 @@ Run ``ossec-maild`` as ``<group>``.
 
 .. topic:: Arguments
 
-  -g ``<group>``
+  ``-g <group>``
 
 ``-h``
 ------
@@ -97,7 +97,7 @@ Run ``ossec-maild`` as ``<user>``.
 
 .. topic:: Arguments
 
-  -u ``<user>``
+  ``-u <user>``
 
 .. topic:: Default
 

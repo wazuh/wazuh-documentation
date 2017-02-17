@@ -37,7 +37,7 @@ Run with configuration file of ``<config>``.
 
 .. topic:: Arguments
 
-  -c ``<config>``
+  ``-c <config>``
 
 .. topic:: Default
 
@@ -61,7 +61,7 @@ Run as ``<group>``.
 
 .. topic:: Arguments
 
-  -g ``<group>``
+  ``-g <group>``
 
 
 ``-h``
@@ -81,7 +81,7 @@ Run as ``<user>``.
 
 .. topic:: Arguments
 
-  -u ``<user>``
+  ``-u <user>``
 
 
 ``-V``

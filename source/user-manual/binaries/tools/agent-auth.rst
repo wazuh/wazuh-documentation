@@ -29,13 +29,15 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 +--------------------------+--------------------------------------+
 | `-m`_                    | IP address of the manager            |
 +--------------------------+--------------------------------------+
-| `-p`_                    | Port where is running on             |
+| :ref:`-p <auth-port>`    | Port where is running on             |
 +--------------------------+--------------------------------------+
 | `-V <#auth-version>`__   | Version and license information      |
 +--------------------------+--------------------------------------+
 | `-v <#auth-ca>`__        | Full path to the CA certificate used |
 +--------------------------+--------------------------------------+
 | `-x`_                    | Full path to the agent certificate   |
++--------------------------+--------------------------------------+
+| :ref:`-P <auth-pass>`    | Use the specified password           |
 +--------------------------+--------------------------------------+
 
 
@@ -46,7 +48,7 @@ Agent name to be used.
 
 .. topic:: Arguments
 
-  -A ``<agent_name>``
+  ``-A <agent_name>``
 
 .. topic:: Default
 
@@ -77,7 +79,7 @@ Run as ``<group>``.
 
 .. topic:: Arguments
 
-  -g ``<group>``
+  ``-g <group>``
 
 ``-h``
 ------
@@ -91,7 +93,7 @@ Full path to the agent key.
 
 .. topic:: Arguments
 
-  -k ``<path>``
+  ``-k <path>``
 
 ``-m``
 ------
@@ -100,8 +102,9 @@ IP address of the manager.
 
 .. topic:: Arguments
 
-  -m ``<manager_ip>``
+  ``-m <manager_ip>``
 
+.. _auth-port:
 
 ``-p``
 ------
@@ -110,7 +113,7 @@ Port ossec-authd is running on.
 
 .. topic:: Arguments
 
-  -p ``<port>``
+  ``-p <port>``
 
 .. topic:: Default
 
@@ -132,7 +135,7 @@ Full path to the CA certificate used to verify the server.
 
 .. topic:: Arguments
 
-  -v ``<path>``
+  ``-v <path>``
 
 ``-x``
 ------
@@ -141,4 +144,18 @@ Full path to the agent certificate.
 
 .. topic:: Arguments
 
-  -x ``<path>``
+  ``-x <path>``
+
+.. _auth-pass:
+
+``-P``
+------
+
+Use the specified password instead of searching for it at ``authd.pass``.
+
+If a password is not provided in the file nor on the console, the client will
+connect with the server without a password (insecure mode).
+
+.. topic:: Arguments
+
+  ``-P <password>``

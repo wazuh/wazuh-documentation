@@ -48,7 +48,7 @@ Analyze of input lines as if they are live events.
 
 .. topic:: Arguments
 
-  -c ``<config>``
+  ``-c <config>``
 
 .. topic:: Default
 
@@ -64,7 +64,7 @@ decoders, and lists and processing standard input.
 
 .. topic:: Arguments
 
-  -D ``<dir>``
+  ``-D <dir>``
 
 
 .. _logtest-debug:
@@ -95,7 +95,7 @@ the last line tested matches the arguments passed.
 
 .. topic:: Arguments
 
-  -U ``<rule-id:alert-level:decoder-name>``
+  ``-U <rule-id:alert-level:decoder-name>``
 
 .. note::
 

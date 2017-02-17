@@ -52,9 +52,9 @@ Updates the database for the <id> agent or all of them.
 
 .. topic:: Arguments
 
-  -u ``<id>``
+  ``-u <id>``
 
-  -u all
+  ``-u all``
 
 ``-i``
 ------
@@ -63,7 +63,7 @@ Prints database for the agent.
 
 .. topic:: Arguments
 
-  -i ``<agent_id>``
+  ``-i <agent_id>``
 
 ``-r``
 ------
@@ -72,7 +72,7 @@ List modified registry entries for the agent.
 
 .. topic:: Arguments
 
-  -r -i
+  ``-r -i``
 
 .. topic:: Supported installations
 
@@ -86,7 +86,7 @@ Used with -i. Prints information about a modified file.
 
 .. topic:: Arguments
 
-  -f ``<file>``
+  ``-f <file>``
 
 
 ``-z``

@@ -40,6 +40,6 @@ Updates the database for the ``<agent_id>`` agent or the local database.
 
 .. topic:: Arguments
 
-  -u ``<agent_id>``
+  ``-u <agent_id>``
 
-  -u ``local``
+  ``-u local``

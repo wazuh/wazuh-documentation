@@ -13,31 +13,35 @@ The ossec-authd daemon will automatically add an agent to a Wazuh manager and pr
     this daemon only be run when a new agent is being added.
 
 
-+---------------------------+--------------------------------------+
-| Options                   | Descriptions                         |
-+===========================+======================================+
-| `-D <#authd-directory>`__ | Chroot to a directory                |
-+---------------------------+--------------------------------------+
-| `-d <#authd-debug>`__     | Run in debug mode                    |
-+---------------------------+--------------------------------------+
-| `-g`_                     | Run as a group                       |
-+---------------------------+--------------------------------------+
-| `-h`_                     | Display the help message             |
-+---------------------------+--------------------------------------+
-| `-i`_                     | Add agents using an IP               |
-+---------------------------+--------------------------------------+
-| `-k`_                     | Full path to the server key          |
-+---------------------------+--------------------------------------+
-| `-p`_                     | Listen on port                       |
-+---------------------------+--------------------------------------+
-| `-t`_                     | Test the configuration               |
-+---------------------------+--------------------------------------+
-| `-V <#authd-version>`__   | Version and license information      |
-+---------------------------+--------------------------------------+
-| `-v <#authd-ca>`__        | Full path to the CA certificate used |
-+---------------------------+--------------------------------------+
-| `-x`_                     | Full path to the server certificate  |
-+---------------------------+--------------------------------------+
++----------------------------+-------------------------------------------------------------------------------+
+| Options                    | Descriptions                                                                  |
++============================+===============================================================================+
+| :ref:`-D <authd-directory>`| Chroot to a directory                                                         |
++----------------------------+-------------------------------------------------------------------------------+
+| :ref:`-d <authd-debug>`    | Run in debug mode                                                             |
++----------------------------+-------------------------------------------------------------------------------+
+| `-g`_                      | Run as a group                                                                |
++----------------------------+-------------------------------------------------------------------------------+
+| `-h`_                      | Display the help message                                                      |
++----------------------------+-------------------------------------------------------------------------------+
+| `-i`_                      | Register agent with client's IP instead of *any*.                             |
++----------------------------+-------------------------------------------------------------------------------+
+| `-k`_                      | Full path to the server key                                                   |
++----------------------------+-------------------------------------------------------------------------------+
+| :ref:`-p <#authd-port>`    | Listen on port                                                                |
++----------------------------+-------------------------------------------------------------------------------+
+| `-t`_                      | Test the configuration                                                        |
++----------------------------+-------------------------------------------------------------------------------+
+| :ref:`-V <authd-version>`  | Version and license information                                               |
++----------------------------+-------------------------------------------------------------------------------+
+| :ref:`-v <authd-ca>`       | Full path to the CA certificate used                                          |
++----------------------------+-------------------------------------------------------------------------------+
+| `-x`_                      | Full path to the server certificate                                           |
++----------------------------+-------------------------------------------------------------------------------+
+| `-f`_                      | Remove old agents with the same IP if they were not connected since <seconds>.|
++----------------------------+-------------------------------------------------------------------------------+
+| :ref:`-P <authd-password>` | Enable shared password authentication.                                        |
++----------------------------+-------------------------------------------------------------------------------+
 
 .. _authd-directory:
 
@@ -48,7 +52,7 @@ Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D ``<dir>``
+  ``-D <dir>``
 
 
 
@@ -67,7 +71,7 @@ Run as group.
 
 .. topic:: Arguments
 
-  -g ``<group>``
+  ``-g <group>``
 
 ``-h``
 ------
@@ -86,8 +90,9 @@ Full path to the server key.
 
 .. topic:: Arguments
 
-  -k ``<path>``
+  ``-k <path>``
 
+.. _authd-port:
 
 ``-p``
 ------
@@ -96,7 +101,7 @@ Listen on port.
 
 .. topic:: Arguments
 
-  -p ``<port>``
+  ``-p <port>``
 
 .. topic:: Default
 
@@ -110,7 +115,7 @@ Test the configuration.
 
 .. _authd-version:
 
-``-V``
+-V
 ------
 
 Display OSSEC Version and license information.
@@ -118,14 +123,14 @@ Display OSSEC Version and license information.
 
 .. _authd-ca:
 
-``-v``
+-v
 ------
 
 Full path to the CA certificate used to verify the clients.
 
 .. topic:: Arguments
 
-  -v ``<path>``
+  ``-v <path>``
 
 
 
@@ -136,4 +141,26 @@ Full path to the server certificate.
 
 .. topic:: Arguments
 
-  -x ``<path>``
+  ``-x <path>``
+
+``-f``
+------
+
+Remove old agents with the same IP if they were not connected since ``<seconds>``. It has only sense along with option ``-i``.
+
+Option ``-f`` forces the insertion on IP collision, this means that if OSSEC
+finds another agent with the same IP, but it has not connected since a
+specified time, that agent will be deleted automatically and the new agent will
+be added. To force insertion always (regardless of the time of the last agent
+connection), use ``-f 0``.
+
+.. topic:: Arguments
+
+  ``-f <seconds>``
+
+.. _authd-password:
+
+``-P``
+------
+
+Enable shared password authentication.

@@ -40,7 +40,7 @@ Read the configuration from file ``<config>``.
 
 .. topic:: Arguments
 
-  -c ``<config>``
+  ``-c <config>``
 
 
 .. _agentlessd-directory:
@@ -52,7 +52,7 @@ Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D ``<dir>``
+  ``-D <dir>``
 
 
 .. _agentlessd-debug:
@@ -75,7 +75,7 @@ Run as group.
 
 .. topic:: Arguments
 
-  -g ``<group>``
+  ``-g <group>``
 
 
 

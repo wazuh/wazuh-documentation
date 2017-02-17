@@ -35,7 +35,7 @@ Run ``ossec-dbd`` using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c ``<config>``
+  ``-c <config>``
 
 .. topic:: Default
 
@@ -51,7 +51,7 @@ Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D ``<dir>``
+  ``-D <dir>``
 
 .. topic:: Default
 
@@ -78,7 +78,7 @@ Run ossec-dbd as <group>.
 
 .. topic:: Arguments
 
-  -g <group>
+  ``-g <group>``
 
 
 ``-h``
@@ -99,7 +99,7 @@ Run ossec-dbd as ``<user>``.
 
 .. topic:: Arguments
 
-  -u ``<user>``
+  ``-u <user>``
 
 .. topic:: Default
 

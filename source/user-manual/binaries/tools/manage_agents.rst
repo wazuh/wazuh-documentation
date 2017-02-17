@@ -30,6 +30,8 @@ authenticated) communication between the Wazuh server and its affiliated agent i
 +---------+---------------------------------------+
 | `-f`_   | Generate clients in bluck from a file |
 +---------+---------------------------------------+
+| `-d`_   | Force the agent registration          |
++---------+---------------------------------------+
 
 ``-V``
 ------
@@ -54,7 +56,7 @@ Extracts key for an agent.
 
 .. topic:: Arguments
 
-  -e ``<agent_id>``
+  ``-e <agent_id>``
 
 .. topic:: Supported installations
 
@@ -68,7 +70,7 @@ Remove an agent.
 
 .. topic:: Arguments
 
-  -r ``<agent_id>``
+  ``-r <agent_id>``
 
 .. topic:: Supported installations
 
@@ -83,7 +85,7 @@ Import authentication key.
 
 .. topic:: Arguments
 
-  -i ``<key>``
+  ``-i <key>``
 
 .. topic:: Supported installations
 
@@ -97,8 +99,17 @@ This file should be located within /var/ossec, and referenced by its path relati
 
 .. topic:: Arguments
 
-  -f  ``<file>``
+  ``-f  <file>``
 
 .. topic:: Supported installations
 
   Server
+
+``-d``
+------
+
+We have created a way to force the agent registration, option ``[-d <seconds>]`` will remove the old agent if it is disconnected since *<seconds>* value. Using ``0`` value will replace the agent in any case.
+
+.. topic:: Arguments
+
+  ``-d  <seconds>``

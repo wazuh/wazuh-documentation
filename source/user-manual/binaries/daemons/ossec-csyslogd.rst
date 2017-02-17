@@ -36,7 +36,7 @@ Run ossec-csyslogd using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
-  -c ``<config>``
+  ``-c <config>``
 
 .. topic:: Default
 
@@ -53,7 +53,7 @@ Chroot to ``<dir>``.
 
 .. topic:: Arguments
 
-  -D ``<dir>``
+  ``-D <dir>``
 
 .. topic:: Default
 
@@ -79,7 +79,7 @@ Run ossec-csyslogd as <group>.
 
 .. topic:: Arguments
 
-  -g ``<group>``
+  ``-g <group>``
 
 
 ``-h``
@@ -100,7 +100,7 @@ Run ``ossec-csyslogd`` as ``<user>``.
 
 .. topic:: Arguments
 
-  -u ``<user>``
+  ``-u <user>``
 
 .. topic:: Default
 
