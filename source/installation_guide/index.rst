@@ -3,9 +3,9 @@
 Installation guide
 ========================
 
-This document will guide you through the installation process, from downloading Wazuh to registering agents. Before installing, it would be well advised to view the :ref:`Getting started <getting_started>` section. See the :ref:`User manual <user_manual>` for configuration overview. For interactive help, our `users mailing list <https://groups.google.com/d/forum/wazuh>`_ is available, you can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.
+This document will guide you through the installation process, from downloading Wazuh to registering agents. Before installing, you would be well advised to view the :ref:`Getting started <getting_started>` section. See the :ref:`User manual <user_manual>` for configuration overview. For interactive help, our `email support forum <https://groups.google.com/d/forum/wazuh>`_ is availablei.  You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.
 
-We will setup a distributed architecture based on two servers:
+We will set up a distributed architecture based on two servers:
 
  - **Wazuh server**: Runs the Wazuh manager, API and Filebeat.
  - **Elastic Stack**: Runs the Elasticsearch engine, Logstash server and Kibana (including the Wazuh App).

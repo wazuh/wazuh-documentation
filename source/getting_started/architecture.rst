@@ -3,20 +3,20 @@
 Architecture
 ============
 
-When monitoring a network, the Wazuh architecture consists in multiple agents running on the monitoring hosts and reporting to a central manager. This central manager is also sending data, resulting from the analysis done by decoders and rules, to an Elastic Stack cluster.
+The Wazuh architecture consists of agents running on monitored hosts that report to a central manager. In addition, agentless devices such as firewalls, switches, routers, access points, etc..., actively submit syslog data to the central manager and/or are probed by the manager for configuration changes.  The central manager decodes and analyzes the incoming information and passes the results along to an Elasticsearch cluster for indexing and storage.
 
-Elasticsearch clusters are a collection of nodes (systems) that communicate with each other to read and write to an index. Small Wazuh deployments (<50 agents), can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored systems or large volume of data is planned to be indexed and stored.
+An Elasticsearch cluster is a collection of one or more nodes (servers) that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments (<50 agents), can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored systems, when a large volume of data is planned on, and/or when high availability is required.
 
-The integration between a Wazuh manager and an Elasticsearch cluster is done by configuring Filebeat to read alerts and archived events, forwarding the data to the Logstash server, which resides on the Elasticsearch cluster. Filebeat can be configured to use TLS encryption when talking to Logstash.
+When the Wazuh manager and the Elasticsearch cluster are on different servers, Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch server(s) using TLS encryption.
 
-See below how components are distributed when the Wazuh manager and the Elastic Stack cluster run in different hosts:
+See below how components are distributed when the Wazuh manager and the Elasticsearch cluster run on different hosts.  Note that with multi-node clusters there will be multiple Elastic Stack servers to which Filebeat is capable of forwarding data:
 
 .. thumbnail:: ../images/installation/installing_wazuh.png
     :title: Distributed architecture 
     :align: center
     :width: 100%
 
-For even smaller deployments both, the Wazuh manager and the Elastic Stack single-node cluster, can run in the same host:
+In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elasticsearch cluster, can all be deployed on a single server.  In this scenario, Logstash can read the Wazuh alerts and/or archived events directly from the local file system and feed them into the local Elasticsearch instance.
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Single-host architecture
@@ -35,45 +35,48 @@ Data flow
 Agent-manager communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh agents use OSSEC messages protocol to communicate with the Wazuh manager (port 1514/UDP), in order to send collected information. Once OSSEC manager receives data messages, those are processed through the analysis engine, meaning that some of those messages generate alerts. Alerts and raw log messages are stored into different files:
+Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh manager over port 1514 (UDP or TCP). The Wazuh manager then decodes and rule-checks the received events with the analysis engine.  Events that trip a rule are augmented with alert data such as rule id and rule name.  Events can be spooled to one or both of the following files, depending on whether or not tripped a rule:
 
- - The file */var/ossec/logs/archives/archives.json* contains the raw logs.
- - The file */var/ossec/logs/alerts/alerts.json* contains the alerts.
+ - The file */var/ossec/logs/archives/archives.json* contains all events whether they tripped a rule or not.
+ - The file */var/ossec/logs/alerts/alerts.json* contains only events that tripped a rule.
 
-OSSEC protocol encrypts messages using Blowfish with a 192 bits encryption key with 16-round implementation.
+Note that if you use both of these files, alerts will be duplicated across both files.  Also note that both files receive fully decoded events data.
+
+The OSSEC message protocol encrypts messages using Blowfish with 192 bit encryption and the full 16-round implementation that at this time has no publicly known cryptographic weaknesses.
 
 
 Manager-elastic communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh manager uses Filebeat to ship alerts and events data to Logstash (5000/TCP). The communication is done via SSL. For a single-host arquitecture, Logstash is able to read the alerts directly from the Manager without use Filebeat.
+In larger deployments, the Wazuh manager uses Filebeat to ship alert and event data to Logstash (5000/TCP) on the Elastic Stack server, using TLS encryption.  For a single-host architecture, Logstash is able to read the events/alerts directly from the local filesystem without using Filebeat.
 
-Internally Logstash formats the data and send it to Elasticsearch (port 9200/TCP). Once the data is indexed into Elasticsearch, Kibana (port 5601/TCP) is used to visualice the information.
+Logstash formats the incoming data, and optionally enriches it with GeoIP information, before sending it along to Elasticsearch (port 9200/TCP). Once the data is indexed into Elasticsearch, Kibana (port 5601/TCP) is used to mine and visualize the information.
 
-Wazuh App runs inside Kibana and execute queries against the RESTful API (Manager - port 55000/TCP) in order to get information related to the configuration and status of the manager and agents. These queries are run over SSL for encryption, and with username/password authentication.
+The Wazuh App runs inside Kibana and execute queries against the RESTful API (port 55000/TCP on the Manager) in order to display information related to the configuration and status of the manager and agents, as well as to initiate agent restarts when desired. This communication is encrypted with TLS and authenticated with username and password.
 
 
-Data storage
+Archival Data storage
 -----------------------------
 
-Alerts and events (raw logs) data is stored both at the Wazuh manager and Elastic Stack levels, meaning that the manager keeps a copy of the logs sent to the Elastic Stack cluster.
-This data is compressed and signed using MD5 and SHA1 checksums. Files are rotated on daily basis, following this structure:
+Alerts and non-alert events are together stored in files on the Wazuh manager in addition to being sent to Elasticsearch.  These files can be written in JSON format (.json) and/or in plain text format (.log - no decoded fields but more compact).  These files are daily compressed and signed using MD5 and SHA1 checksums. The directory and filename structure is as follows:
 
 .. code-block:: console
 
     root@vpc-ossec-manager:/var/ossec/logs/archives/2017/Jan# ls -l
     total 176
-    -rw-r----- 1 ossec ossec 350 Jan  2 00:00 ossec-archive-01.json.sum
-    -rw-r----- 1 ossec ossec 346 Jan  2 00:00 ossec-archive-01.log.sum
-    -rw-r----- 1 ossec ossec 350 Jan  3 00:01 ossec-archive-02.json.sum
-    -rw-r----- 1 ossec ossec 346 Jan  3 00:01 ossec-archive-02.log.sum
-    -rw-r----- 1 ossec ossec 350 Jan  4 00:00 ossec-archive-03.json.sum
-    -rw-r----- 1 ossec ossec 346 Jan  4 00:00 ossec-archive-03.log.sum
-    -rw-r----- 1 ossec ossec 350 Jan  5 00:01 ossec-archive-04.json.sum
-    -rw-r----- 1 ossec ossec 346 Jan  5 00:01 ossec-archive-04.log.sum
+    -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
+    -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum
+    -rw-r----- 1 ossec ossec 176221 Jan  2 00:00 ossec-archive-01.log.gz
+    -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-01.log.sum
+    -rw-r----- 1 ossec ossec 224320 Jan  2 00:00 ossec-archive-02.json.gz
+    -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-02.json.sum
+    -rw-r----- 1 ossec ossec 151642 Jan  2 00:00 ossec-archive-02.log.gz
+    -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-02.log.sum
+    -rw-r----- 1 ossec ossec 315251 Jan  2 00:00 ossec-archive-03.json.gz
+    -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-03.json.sum
+    -rw-r----- 1 ossec ossec 156296 Jan  2 00:00 ossec-archive-03.log.gz
+    -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-03.log.sum
 
-Depending on the storage capacity, rotation of data and backup is recommended, running *cron* tasks to keep only a certain period of time locally stored on the manager (e.g. last year or last three months).
+Rotation and backups of archive files is recommended, according to the storage capacity of the Wazuh Manager server.  Using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the Manager (e.g., last year or last three months).
 
-On the other hand, once an instance of an event data is processed by Elasticsearch it is stored in the form of an Apache Lucene inverted index, which can be composed by multiple segments split in different files. String data is encoded using UTF-8.
-
-In order to access indexed data Kibana uses Elasticsearch REST queries. It is recommended to periodically create Elasticsearch snapshots, to backup data. A *cron* task can also be used in this case to move it to a final data storage server, and sign files using MD5 and SHA1 algorithms.
+On the other hand, you may choose to dispense with storing archive files at all, and simply rely on Elasticsearch for archive storage, especially if you are already running periodic Elasticsearch snapshot backups and/or a multi-node Elasticsearch cluster with shard replicas for high availability.  You could even use a *cron* job to move snapshotted indexes to a final data storage server and sign them using MD5 and SHA1 algorithms.
