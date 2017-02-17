@@ -15,6 +15,8 @@ Once we have our agents installed, it is necessary to connect them with the mana
 |               | :ref:`API <register_agent_api>`              | Register an agent by scripting (bash, python, powershell) and API. |
 +---------------+----------------------------------------------+--------------------------------------------------------------------+
 
+Also, check the section: :ref:`Reuse id's <manual_reuse_id>`
+
 .. topic:: Contents
 
     .. toctree::
@@ -23,3 +25,6 @@ Once we have our agents installed, it is necessary to connect them with the mana
         register_agent_manual
         register_agent_authd
         register_agent_api
+        manual_reuse_id
+        manual_data_backup
+        manual_forcing

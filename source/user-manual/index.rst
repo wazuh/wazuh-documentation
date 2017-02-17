@@ -25,5 +25,6 @@ User manual
         system-calls-monitoring/index
         agentless-monitoring/index
         forwarding-alerts/index
+        binaries/index
         ruleset/index
         api/index

@@ -89,6 +89,9 @@ Launching the Authd daemon with default options would allow any agent to connect
 ``Use a password to authorize agents``
 --------------------------------------
 
+.. note::
+  Reference :ref:`ossec-authd`
+
 Manager can be protected from unauthorized connections by using a password. We can choose one by ourself or let Authd to generate a key randomly.
 
 1. To choose a password manually, we have to write it onto the file ``etc/authd.pass``. For example, if the key would be "TopSecret"::
