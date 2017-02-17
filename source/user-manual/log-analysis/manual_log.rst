@@ -15,11 +15,6 @@ The log messages source can be:
 
 Log files
 ^^^^^^^^^
-
-.. image:: ../../images/manual/log_analysis/logfile.png
-  :align: center
-  :width: 50%
-
 Log Analysis engine can be configured to monitor specific files on the servers. This servers can be running windows or Linux.
 
 Configuration Example:
@@ -50,10 +45,6 @@ Windows event log
 
 The component can also be configured to monitor the Event Log from windows, or Event Channel for Vista or newer versions:
 
-.. image:: ../../images/manual/log_analysis/eventlog.png
-  :align: center
-  :width: 50%
-
 Configuration Example:
 
 Eventlog:
@@ -76,10 +67,6 @@ Remote syslog
 ^^^^^^^^^^^^^^
 
 For other devices like firewalls, you can configure Log Analysis component to receive log events through Syslog.
-
-.. image:: ../../images/manual/log_analysis/syslog.png
-  :align: center
-  :width: 50%
 
 Configuration example:
 ::
