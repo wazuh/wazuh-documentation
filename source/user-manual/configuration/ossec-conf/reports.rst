@@ -36,8 +36,6 @@ Options to configure reports about the generated alerts.
 +----------------+---------------------------------------------------------+
 
 
-
-
 ``group``
 ---------
 
