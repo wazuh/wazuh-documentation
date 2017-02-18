@@ -1,6 +1,6 @@
 .. _wazuh_agent_deb:
 
-Install Wazuh agent with RPM packages
+Install Wazuh agent with Deb packages
 ======================================
 
 The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.

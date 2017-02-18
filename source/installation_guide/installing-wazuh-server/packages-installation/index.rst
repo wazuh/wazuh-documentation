@@ -3,7 +3,7 @@
 Installation via packages
 ======================================
 
-This guide describes the installation of Wazuh server using packages.
+For Debian/Ubuntu and CentOS/RHEL/Fedora platforms, installing Wazuh server components is a matter of little more than adding the appropriate repositories and installing the relevant packages from them.
 
 .. topic:: Contents
 

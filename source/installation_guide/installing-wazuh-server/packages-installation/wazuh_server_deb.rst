@@ -1,12 +1,12 @@
 .. _wazuh_server_deb:
 
-Install Wazuh server with Debian packages
+Install Wazuh server with Deb packages
 ===========================================
 
 Adding Wazuh repositories
 -------------------------------------------
 
-First thing we need to do is to add the Wazuh repositories to your system. Also, if you prefer download the package directly, it is possible to download it from :ref:`required package <packages>`.
+The first thing you need to do is to add the Wazuh repository to your Wazuh server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
 
 **1.** In order to perform this procedure properly, packages ``curl`` and ``apt-transport-https`` must be installed into your system. If they are not, install them::
 
@@ -84,14 +84,14 @@ Once the process is completed, you can check the state with
 			service wazuh-manager status
 
 
-Installing API
+Installing Wazuh API
 -------------------------------------------
 
-**1.** NodeJS >= 4.6.1 is required in order to run the API. If you do not have installed NodeJS or your version is older than 4.6.1, we recommend to add the official repositories::
+**1.** NodeJS >= 4.6.1 is required in order to run the API. If you do not have installed NodeJS or your version is older than 4.6.1, we recommend you add the official repository like this::
 
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
-And then, install nodejs::
+and then, install nodejs::
 
 	apt-get install nodejs
 
@@ -99,7 +99,7 @@ And then, install nodejs::
 
 	apt-get install wazuh-api
 
-Once the process is completed, you can check the state with
+**3.** Once the process is completed, you can check the state with
 
 	a) For Systemd::
 
@@ -109,9 +109,9 @@ Once the process is completed, you can check the state with
 
 			service wazuh-api status
 
-**3.** Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in the most of Linux distributions.
+**4.** Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in most Linux distributions.
 
-It is possible to set the path of Python in the API configuration at */var/ossec/api/configuration/config.js*::
+It is possible to set a custom Python path for the API to use in */var/ossec/api/configuration/config.js*, in case the stock version of Python in your distro is too old::
 
     config.python = [
         // Default installation
@@ -129,11 +129,11 @@ It is possible to set the path of Python in the API configuration at */var/ossec
 Installing Filebeat
 -------------------------------------------
 
-Filebeat is the tool that will read the alerts and archived events, forwarding the data to the Logstash server (on the ELK cluster).
+Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack server(s).  In a single-server configuration, you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
-1. Install the GPG keys from Elastic and the Elastic repository::
+1. Install the GPG keys from Elastic, and the Elastic repository::
 
 	curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 	apt-get install apt-transport-https
@@ -144,19 +144,15 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 	apt-get install filebeat
 
-3. Download the settings template for Filebeat from the Wazuh repository, this template will let Elasticsearch know which field should be analyzed in which way::
+3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash::
 
 	curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/filebeat/filebeat.yml
 
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace *ELASTIC_SERVER_IP* for the IP address or the hostname of the Elastic Stack server. For example::
+4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace *ELASTIC_SERVER_IP* with the IP address or the hostname of the Elastic Stack server. For example::
 
 	output:
 	  logstash:
 	    hosts: ["ELASTIC_SERVER_IP:5000"]
-
-.. warning::
-    In case you are setting up a single-host architecture (Wazuh Manager and Elastic stack on the same server, use **localhost** as *ELASTIC_SERVER_IP*.
-
 
 5. Enable and start the Filebeat service:
 
@@ -174,4 +170,4 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 Next steps
 ----------
 
-Once you have installed the manager and Filebeat, you need to :ref:`install Elastic Stack <elastic_server_deb>`.
+Once you have installed the manager, API, and -- if needed -- Filebeat as well, you are ready to :ref:`install Elastic Stack <elastic_server_deb>`.
