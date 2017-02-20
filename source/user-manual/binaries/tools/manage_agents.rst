@@ -16,38 +16,31 @@ authenticated) communication between the Wazuh server and its affiliated agent i
 +---------+---------------------------------------+
 | Options | Descriptions                          |
 +=========+=======================================+
-| `-V`_   | Display Wazuh version                 |
-+---------+---------------------------------------+
-| `-h`_   | Display the help message              |
-+---------+---------------------------------------+
-| `-l`_   | List available agents                 |
+| `-d`_   | Force the agent registration          |
 +---------+---------------------------------------+
 | `-e`_   | Extracts key for an agent             |
 +---------+---------------------------------------+
-| `-r`_   | Remove an agent                       |
+| `-f`_   | Generate clients in bluck from a file |
++---------+---------------------------------------+
+| `-h`_   | Display the help message              |
 +---------+---------------------------------------+
 | `-i`_   | Import authentication key             |
 +---------+---------------------------------------+
-| `-f`_   | Generate clients in bluck from a file |
+| `-l`_   | List available agents                 |
 +---------+---------------------------------------+
-| `-d`_   | Force the agent registration          |
+| `-r`_   | Remove an agent                       |
++---------+---------------------------------------+
+| `-V`_   | Display Wazuh version                 |
 +---------+---------------------------------------+
 
-``-V``
+``-d``
 ------
 
-Display Wazuh Version.
+We have created a way to force the agent registration, option ``[-d <seconds>]`` will remove the old agent if it is disconnected since *<seconds>* value. Using ``0`` value will replace the agent in any case.
 
-``-h``
-------
+.. topic:: Arguments
 
-Display the help message.
-
-``-l``
-------
-
-List available agents.
-
+  ``-d  <seconds>``
 
 ``-e``
 ------
@@ -61,35 +54,6 @@ Extracts key for an agent.
 .. topic:: Supported installations
 
   Server
-
-
-``-r``
-------
-
-Remove an agent.
-
-.. topic:: Arguments
-
-  ``-r <agent_id>``
-
-.. topic:: Supported installations
-
-  Server
-
-
-
-``-i``
-------
-
-Import authentication key.
-
-.. topic:: Arguments
-
-  ``-i <key>``
-
-.. topic:: Supported installations
-
-  Agent
 
 ``-f``
 ------
@@ -105,11 +69,43 @@ This file should be located within /var/ossec, and referenced by its path relati
 
   Server
 
-``-d``
+``-h``
 ------
 
-We have created a way to force the agent registration, option ``[-d <seconds>]`` will remove the old agent if it is disconnected since *<seconds>* value. Using ``0`` value will replace the agent in any case.
+Display the help message.
+
+``-i``
+------
+
+Import authentication key.
 
 .. topic:: Arguments
 
-  ``-d  <seconds>``
+  ``-i <key>``
+
+.. topic:: Supported installations
+
+  Agent
+
+``-l``
+------
+
+List available agents.
+
+``-r``
+------
+
+Remove an agent.
+
+.. topic:: Arguments
+
+  ``-r <agent_id>``
+
+.. topic:: Supported installations
+
+  Server
+
+``-V``
+------
+
+Display Wazuh Version.

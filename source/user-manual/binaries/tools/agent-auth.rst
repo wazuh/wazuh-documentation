@@ -29,6 +29,8 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 +--------------------------+--------------------------------------+
 | `-m`_                    | IP address of the manager            |
 +--------------------------+--------------------------------------+
+| :ref:`-P <auth-pass>`    | Use the specified password           |
++--------------------------+--------------------------------------+
 | :ref:`-p <auth-port>`    | Port where is running on             |
 +--------------------------+--------------------------------------+
 | `-V <#auth-version>`__   | Version and license information      |
@@ -36,8 +38,6 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 | `-v <#auth-ca>`__        | Full path to the CA certificate used |
 +--------------------------+--------------------------------------+
 | `-x`_                    | Full path to the agent certificate   |
-+--------------------------+--------------------------------------+
-| :ref:`-P <auth-pass>`    | Use the specified password           |
 +--------------------------+--------------------------------------+
 
 
@@ -106,6 +106,18 @@ IP address of the manager.
 
 .. _auth-port:
 
+``-P``
+------
+
+Use the specified password instead of searching for it at ``authd.pass``.
+
+If a password is not provided in the file nor on the console, the client will
+connect with the server without a password (insecure mode).
+
+.. topic:: Arguments
+
+  ``-P <password>``
+
 ``-p``
 ------
 
@@ -147,15 +159,3 @@ Full path to the agent certificate.
   ``-x <path>``
 
 .. _auth-pass:
-
-``-P``
-------
-
-Use the specified password instead of searching for it at ``authd.pass``.
-
-If a password is not provided in the file nor on the console, the client will
-connect with the server without a password (insecure mode).
-
-.. topic:: Arguments
-
-  ``-P <password>``

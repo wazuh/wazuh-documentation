@@ -1,6 +1,6 @@
 .. _manual_email_report:
 
-Email Report
+Email report
 ============
 
 It is possible to configure Wazuh to send the alerts through emails also.

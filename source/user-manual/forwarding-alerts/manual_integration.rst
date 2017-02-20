@@ -1,6 +1,6 @@
 .. _manual_integration:
 
-Integrator
+Integration with external APIs
 ==================================
 
 Integrator is a new daemon that allows to connect Wazuh to external APIs and
