@@ -21,6 +21,7 @@ User manual
         file-integrity/index
         anomalies-detection/index
         policy-monitoring/index
+        process-monitoring/index
         automatic-remediation/index
         system-calls-monitoring/index
         agentless-monitoring/index
