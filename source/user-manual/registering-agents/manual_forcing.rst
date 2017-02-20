@@ -2,7 +2,7 @@
 
 
 Forcing insertion
-------------------
+=================
 
 In case you want to overwrite an existing agent you can use the ``-d`` option. :ref:`Reference <manage_agents>`
 
@@ -15,7 +15,7 @@ Adding new agent called **MyNewAgent**, in case the IP **10.0.0.100** already ex
  /var/ossec/bin/manage_agents -a "10.0.0.100" -n "MyNewAgent" -d 3600
 
 Data backup
------------
+^^^^^^^^^^^
 
 Before OSSEC removes an agent by forcing, it will backup the data of the old
 agent in ``/backup/agents``, in a new folder with the agent's name and IP, and
