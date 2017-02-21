@@ -6,97 +6,52 @@ Windows agent
 Compiling from sources
 ----------------------
 
-This section describes how to download and compile your OSSEC HIDS Windows agent (version 2.8.3). You can use either a CentOS or a Debian system as a compilation environment.
+This section describes how to download and compile the Wazuh HIDS Windows agent. The following procedure has been tested to work with Ubuntu 16.04 as the compilation environment, and may work fine with other Debian/Ubuntu versions as well.  
 
-Source code download
-^^^^^^^^^^^^^^^^^^^^
+Set up Ubuntu build environment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Download the source code and checksum files: ::
-
-   $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz
-   $ wget https://bintray.com/artifact/download/ossec/ossec-hids/ossec-hids-2.8.3.tar.gz.sha256
-
-Generate SHA256 checksum and compare with downloaded one: ::
-
-   $ sha256sum ossec-hids-2.8.3.tar.gz
-   $ cat ossec-hids-2.8.3.tar.gz.sha256
-
-The expected hash checksum, in both cases, is: ::
-
-  917989e23330d18b0d900e8722392cdbe4f17364a547508742c0fd005a1df7dd
-
-.. note:: Both checksums need to match, meaning that data has not been corrupted through the download process. If that is not the case, please try it again through a reliable connexion.
-
-Build environment on CentOS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-First, you need to install MinGW and Nsis (to build the installer). Let's start installing the EPEL repository: ::
-
-   $ wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-   $ rpm -i epel-release-latest-7.noarch.rpm
-
-After that, we install MinGW gcc and other libraries for the Nsis compilation: ::
-
-   $ yum install gcc-c++ gcc scons mingw32-gcc mingw64-gcc zlib-devel bzip2 unzip
-
-Now, to install Nsis, follow these steps: ::
-
-   $ wget http://downloads.sourceforge.net/project/nsis/NSIS%203%20Pre-release/3.0b2/nsis-3.0b2-src.tar.bz2
-   $ wget http://downloads.sourceforge.net/project/nsis/NSIS%203%20Pre-release/3.0b2/nsis-3.0b2.zip
-   $ mkdir /usr/local/nsis
-   $ mv nsis-3.0b2-src.tar.bz2 nsis-3.0b2.zip /usr/local/nsis
-   $ cd /usr/local/nsis
-   $ tar -jxvf nsis-3.0b2-src.tar.bz2
-   $ unzip nsis-3.0b2.zip
-
-Then we need to build ``makensis``, which will actually build the OSSEC Installer Package for Windows: ::
-
-   $ cd /usr/local/nsis/nsis-3.0b2-src/
-   $ scons SKIPSTUBS=all SKIPPLUGINS=all SKIPUTILS=all SKIPMISC=all NSIS_CONFIG_CONST_DATA=no PREFIX=/usr/local/nsis/nsis-3.0b2 install-compiler
-   $ mkdir /usr/local/nsis/nsis-3.0b2/share
-   $ cd /usr/local/nsis/nsis-3.0b2/share
-   $ ln -s /usr/local/nsis/nsis-3.0b2 nsis
-   $ cp ../bin/makensis /bin
-
-Build environment on Debian
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To compile the OSSEC agent on a Debian system install these packages: ::
+To compile the Windows Wazuh agent installer on Ubuntu, install these prerequisite packages: ::
 
    $ apt-get install gcc-mingw-w64
    $ apt-get install nsis
    $ apt-get install make
 
+Source code download
+^^^^^^^^^^^^^^^^^^^^
+
+Download the Wazuh source code and unzip it: ::
+
+   $ wget -O wazuh-master.zip https://github.com/wazuh/wazuh/archive/master.zip
+   $ unzip wazuh-master.zip
+
 Compiling the agent
 -------------------
 
-Extract ossec-hids and run ``gen_win.sh`` and ``make.sh`` scripts: ::
+Run the make command: ::
 
-   $ tar -xvzf ossec-hids-2.8.3.tar.gz
-   $ cd ossec-hids-2.8.3/src/win32
-   $ ./gen_win.sh
-   $ cd ../win-pkg
-   $ sh ./make.sh
+   $ make TARGET=winagent
 
-You should expect the following output: ::
+You should expect the following output near the end of the compile process: ::
 
-   Making windows agent
    ...
-
-   Output: "ossec-win32-agent.exe"
-   Install: 7 pages (448 bytes), 3 sections (3144 bytes), 586 instructions (16408 bytes), 287 strings (31800 bytes), 1 language table (346 bytes).
+   Output: "wazuh-win32-agent.exe"
+   Install: 7 pages (448 bytes), 3 sections (3144 bytes), 774 instructions (21672 bytes), 322 strings (32417 bytes), 1 language table (346 bytes).
    Uninstall: 5 pages (320 bytes),
-   1 section (1048 bytes), 347 instructions (9716 bytes), 181 strings (3323 bytes), 1 language table (290 bytes).
-   Datablock optimizer saved 100205 bytes (~7.9%).
+   1 section (1048 bytes), 351 instructions (9828 bytes), 186 strings (3380 bytes), 1 language table (290 bytes).
+   Datablock optimizer saved 99975 bytes (~6.7%).
 
    Using zlib compression.
 
-   EXE header size:               57856 / 56320 bytes
-   Install code:                  14081 / 52522 bytes
-   Install data:                1073649 / 3854506 bytes
-   Uninstall code+data:           21037 / 21453 bytes
-   CRC (0xAB53A27C):                  4 / 4 bytes
+   EXE header size:               77312 / 75264 bytes
+   Install code:                  14910 / 58403 bytes
+   Install data:                1290055 / 3762640 bytes
+   Uninstall code+data:           20917 / 21333 bytes
+   CRC (0x44FA2346):                  4 / 4 bytes
 
-   Total size:                  1166627 / 3984805 bytes (29.2%)
+   Total size:                  1403198 / 3917644 bytes (35.8%)
+   ...
+   Done building winagent
 
-Now you should have the OSSEC agent installer for Windows, ``ossec-win32-agent.exe``, ready to be used.
+
+Now you should have a Wazuh agent installer for Windows here: ``./win32/wazuh-win32-agent.exe``, ready to be used.

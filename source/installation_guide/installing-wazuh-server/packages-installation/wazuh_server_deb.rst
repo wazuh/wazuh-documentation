@@ -19,7 +19,7 @@ The first thing you need to do is to add the Wazuh repository to your Wazuh serv
 **3.** Add the Wazuh repository depending on your operating system:
 
 .. note::
-	To check your version, you can use: ``lsb_release -a``, ``cat /etc/issue`` or ``uname -a``
+	To check your version, you can use: ``lsb_release -a``
 
 - Debian 7 "Wheezy"::
 
@@ -29,11 +29,11 @@ The first thing you need to do is to add the Wazuh repository to your Wazuh serv
 
     echo "deb https://packages.wazuh.com/apt jessie main" | tee /etc/apt/sources.list.d/wazuh.list
 
-- Debian "stretch" (testing)::
+- Debian "stretch"::
 
     echo "deb https://packages.wazuh.com/apt stretch main" | tee /etc/apt/sources.list.d/wazuh.list
 
-- Debian "sid" (unstable)::
+- Debian "sid"::
 
     echo "deb https://packages.wazuh.com/apt sid main" | tee /etc/apt/sources.list.d/wazuh.list
 

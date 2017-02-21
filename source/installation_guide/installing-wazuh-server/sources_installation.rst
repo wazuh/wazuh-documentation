@@ -10,15 +10,15 @@ Manager
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
-  a) For RPM based distributions::
+  a) For RPM-based distributions::
 
       sudo yum install make gcc git
 
   If you want to use Auth, also install::
 
-      sudo yum instal openssl-devel
+      sudo yum install openssl-devel
 
-  b) For Debian based distributions::
+  b) For Debian-based distributions::
 
       sudo apt-get install gcc make git libc6-dev
 
@@ -84,7 +84,7 @@ API
         }
     ];
 
-For CentOS 6 and Redhat 6, you can install the package *python27*.  It installs Python 2.7 at */opt/rh/python27* in parallel to the older Python version included in the distro:
+For CentOS 6 and Red Hat 6, you can install the package *python27*.  It installs Python 2.7 at */opt/rh/python27* in parallel to the older Python version included in the distro:
 
     a) For CentOS 6::
 
