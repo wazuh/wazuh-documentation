@@ -1,6 +1,6 @@
-.. _manual_anomalie_detection:
+.. _manual_anomaly_detection:
 
-Intrusion and anomalie detection
+Intrusion and anomaly detection
 ===================================
 
 .. warning::

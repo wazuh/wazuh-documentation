@@ -75,8 +75,6 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
 3. Edit the file ``/etc/nginx/conf.d/default.conf`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
 
-::
-
 4. Start NGINX:
 
     a. For Systemd::
