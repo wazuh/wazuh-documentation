@@ -3,18 +3,18 @@
 Install Elastic Stack with RPM packages
 ==========================================
 
-The rpm package is suitable for installation on Red Hat, Centos and other RPM-based systems.
+The rpm packages are suitable for installation on Red Hat, CentOS and other RPM-based systems.
 
 Preparation
 -----------
 
-1. Oracle Java JRE is necessary for Logstash and Elasticsearch::
+1. Oracle Java JRE is required by Logstash and Elasticsearch::
 
 	curl -Lo jdk-8-linux-x64.rpm --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u111-b14/jdk-8u111-linux-x64.rpm
 	yum install jdk-8-linux-x64.rpm
 	rm jdk-8-linux-x64.rpm
 
-2. We will also install the Elastic repository and the GPG keys from it::
+2. We will also install the Elastic repository and its GPG key::
 
 	rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
@@ -32,18 +32,26 @@ Preparation
 Logstash
 --------
 
-Logstash is a tool to collect logs, parse them, and store them for later use. More info `Logstash <https://www.elastic.co/products/logstash>`_
+Logstash is the tool that will collect logs, parse them, and then pass them along to Elasticsearch for indexing and storage. Learn more about `Logstash <https://www.elastic.co/products/logstash>`_
 
 1. Install the Logstash package::
 
 	yum install logstash
 
-2. Download the configuration template for Logstash::
+2. Download the Wazuh config and template files for Logstash::
 
 	curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
 	curl -so /etc/logstash/wazuh-elastic5-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic5-template.json
 
-3. Enable and start the Logstash service:
+3. If you are using a single-server architecture, then edit /etc/logstash/conf.d/01-wazuh.conf, commenting out the entire input section titled "Remote Wazuh Manager - Filebeat input" and uncommenting the entire input section titled "Local Wazuh Manager - JSON file input".  This will set up Logstash to read the Wazuh alerts.json file directly from the local filesystem rather than expecting Filebeat on a separate server to forward the information in that file to Logstash.
+
+..
+
+4. If you are running Wazuh server and the Elastic Stack server on separate systems (distributed architecture), then it is important to configure encryption between Filebeat and Logstash.  To do so, please see :ref:`elastic_ssl`.
+
+..
+
+5. Enable and start the Logstash service:
 
 	a) For Systemd::
 
@@ -56,13 +64,10 @@ Logstash is a tool to collect logs, parse them, and store them for later use. Mo
 		chkconfig --add logstash
 		service logstash start
 
-.. warning::
-    By default, the communications between Wazuh server (Filebeat) and Elastic Stack (Logstash) are not encrypted. It’s strongly recommended to configure Filebeat and Logstash to use SSL encryption. Please read :ref:`elastic_ssl`.
-
 Elasticsearch
 -------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. More info `Elastic <https://www.elastic.co/products/elasticsearch>`_
+Elasticsearch is a highly scalable full-text search and analytics engine. More info at `Elastic <https://www.elastic.co/products/elasticsearch>`_.
 
 1. Install the Elasticsearch package::
 
@@ -84,7 +89,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 Kibana
 ------
 
-Kibana is a flexible and intuitive visualization dashboard (browser front-end). More info `Kibana <https://www.elastic.co/products/kibana>`_
+Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. More info at `Kibana <https://www.elastic.co/products/kibana>`_.
 
 1. Install the Kibana package::
 
@@ -94,7 +99,7 @@ Kibana is a flexible and intuitive visualization dashboard (browser front-end). 
 
 	/usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
-3. **Optional.** Kibana will listen only the loopback interface (localhost) by default. To set up Kibana to listen all interfaces, edit the file ``/etc/kibana/kibana.yml``. Uncomment the setting ``server.host`` and change the value to::
+3. **Optional.** Kibana will listen only on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml``. Uncomment the setting ``server.host`` and change the value to::
 
 	server.host: "0.0.0.0"
 

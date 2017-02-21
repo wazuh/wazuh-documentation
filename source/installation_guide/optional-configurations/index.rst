@@ -3,7 +3,7 @@
 Optional configurations
 ===============================
 
-This section advises on best practices related to get an efficient, stable and secure Wazuh environment.
+This section advises on best practices related to setting up an efficient, stable and secure Wazuh environment.
 
 .. topic:: Contents
 

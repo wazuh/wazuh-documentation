@@ -3,9 +3,12 @@
 Connect the Wazuh App with the API
 ==================================
 
-In this section, we'll add the Wazuh manager to the Wazuh App on Kibana.
+In this section, we'll register the Wazuh App in Kibana to communicate with the Wazuh API.
 
-1. Open a web browser and go to the Elastic server address, port 5601 (by default).
+1. Open a web browser and go to the Elastic server's IP address on port 5601 (default Kibana port).
+
+..
+
 2. Go through the menu to the Wazuh App.
 
 .. image:: ../../images/installation/wazuhapp/kibana_app.png
@@ -18,13 +21,18 @@ In this section, we'll add the Wazuh manager to the Wazuh App on Kibana.
     :align: center
     :width: 100%
 
-4. Fill in the blanks with the address and the credentials of the API. The default values appear weak in the placeholders.
+4. Before filling out the fields, go to the command prompt as root and set a non-default username and password to protect your Wazuh API.  Replace newname and newpassword with credentials of your choosing::
+
+	cd /var/ossec/api/configuration/auth
+	./htpasswd -bc /var/ossec/api/configuration/auth/user newname newpassword
+
+5. Fill in the new name and new password that you just defined.  Also, put in "http://*MANAGERIP*" for URL, where *MANAGERIP* is the real IP address of the Wazuh Manager, and "55000" for Port.
 
 .. image:: ../../images/installation/wazuhapp/fields_api.png
     :align: center
     :width: 100%
 
-5. Click on *Save*.
+6. Click on *Save*.
 
 .. image:: ../../images/installation/wazuhapp/app_running.png
     :align: center

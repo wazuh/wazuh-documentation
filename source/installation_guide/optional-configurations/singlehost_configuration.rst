@@ -3,31 +3,12 @@
 Single-host architecture installation
 ==============================================
 
-Usally, Wazuh is installed using a distributed architecture but in case you need it, you can install Wazuh in a single-host architecture. That means you will setup the Wazuh Manager and the Elastic Stack on the same server:
+Usally, Wazuh is installed using a distributed architecture but you can optionally install the Wazuh Manager and Elastic Stack on the same server:
 
 .. thumbnail:: ../../images/installation/installing_wazuh_singlehost.png
     :title: Installing Wazuh Manager - Single-host
     :align: center
     :width: 100%
 
-In order to install Wazuh Manager in the same server, you must follow all the steps decribed in the guide :ref:`Installation via packages <installation_main>`. In this way, you will have Filebeat sending the events to Logstash. In a single-host architecture, Filebeat is not necessary due to Logstash can read the *alerts.json* directly. So, just in case you want to avoid using Filebeat, configure Logstash to read Wazuh alerts:
+To do this, follow the guide :ref:`Installation via packages <installation_main>`, taking note of the special instructions about single-server deployments.  This will result in completely bypassing Filebeat, and instead just having Logstash locally read the *alerts.json* or *archives.json* file.
 
-1. Edit file ``/etc/logstash/conf.d/01-wazuh.conf``, comment the lines related to SSL at ``input/beats`` and uncomment the lines related to Local Wazuh Manager in ``input/file``. The file should remain such this::
-
-    input {
-       file {
-           type => "wazuh-alerts"
-           path => "/var/ossec/logs/alerts/alerts.json"
-           codec => "json"
-       }
-    }
-
-2. Restart Logstash. The command depends on the OS init system:
-
-	a. For Systemd::
-
-		systemctl restart logstash.service
-
-	b. For legacy SysV Init::
-
-		service logstash restart

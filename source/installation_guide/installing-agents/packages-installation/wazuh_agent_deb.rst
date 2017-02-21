@@ -1,22 +1,22 @@
 .. _wazuh_agent_deb:
 
-Install Wazuh agent with RPM packages
+Install Wazuh agent with Deb packages
 ======================================
 
 The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
-**1.** In order to perform this procedure properly, packages ``curl`` and ``apt-transport-https`` must be installed into your system. If they are not, install them::
+**1.** In order to perform this procedure properly, packages ``curl`` and ``apt-transport-https`` must be present on your system. If they are not, install them::
 
 	apt-get install curl apt-transport-https
 
-**2.** Install the GPG key::
+**2.** Install the Wazuh repository GPG key::
 
 	curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-**3.** Add the Wazuh repository depending on your operating system:
+**3.** Add the Wazuh repository that corresponds to your operating system:
 
 .. note::
-	To check your version, you can use: ``lsb_release -a``, ``cat /etc/issue`` or ``uname -a``
+	To check your version, you can use: ``lsb_release -a``
 
 - Debian 7 "Wheezy"::
 
@@ -26,11 +26,11 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
     echo "deb https://packages.wazuh.com/apt jessie main" | tee /etc/apt/sources.list.d/wazuh.list
 
-- Debian "stretch" (testing)::
+- Debian "stretch"::
 
     echo "deb https://packages.wazuh.com/apt stretch main" | tee /etc/apt/sources.list.d/wazuh.list
 
-- Debian "sid" (unstable)::
+- Debian "sid"::
 
     echo "deb https://packages.wazuh.com/apt sid main" | tee /etc/apt/sources.list.d/wazuh.list
 
@@ -63,7 +63,7 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 	apt-get update
 	apt-get install wazuh-agent
 
-Once the process is completed, you can check the state with
+Once the process is complete, you can check the state with
 
 		a) For Systemd::
 

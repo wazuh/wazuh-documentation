@@ -3,37 +3,46 @@
 Virtual Machine
 ==============================================
 
-We provide a pre-built virtual machine image (OVA) that you can import in most of the virtualization systems.
+We provide a pre-built virtual machine image (OVA) that you can import into most virtualization systems.
 
-The virtual machine image can be found at https://packages.wazuh.com/vm
-
-1. This virtual appliance contains the following facilities:
+1. This virtual appliance contains the following components:
 
     - CentOS 7
     - Wazuh 1.1.1
-    - ESTful API 1.2.1
+    - RESTful API 1.2.1
     - Elasticsearch 2
     - Logstash 2.1
     - Kibana 4.5
 
-2. The virtual appliance is provided as an OVA which you can import into most of the virtual systems.  We recommend using VirtualBox which can import the OVA image directly. We used VirtualBox to create this appliance and the OVA.
+2. The virtual appliance is provided as an OVA which you can import into most virtualization systems.  We recommend using VirtualBox which can import the OVA image directly. We used VirtualBox to create this appliance and the OVA.
 
 .. note::
-   The VM can only be run on 64 bit systems.
+   This VM can be run only on 64-bit systems.
 
-3. To open the appliance, unzip the package with gunzip then open the wazuh-virtual-appliance.ova in VirtualBox / VMWare.
+3. Download wazuh-virtual-appliance.ova from https://packages.wazuh.com/vm
 
-4. The password and/or user if needed for all the accounts on this system including root, user, Kibana interface and Wazuh API is "**wazuhelk**".
+::
 
-5. Although you don't have to change any ELK configuration settings, if you want to explore, the Elasticsearch system is installed in ``/usr/share/elasticsearch`` and the main configuration files are ``/etc/elasticsearch/elasticsearch.yml`` and ``/etc/sysconfig/elasticsearch``. Similarly, Logstash is installed in ``/usr/share/logstash``.
+4. Import wazuh-virtual-appliance.ova with your virtualization manager.
 
-7. **Wazuh** and the **ELK** (Elasticsearch-Logstash-Kibana) stack are all configured to work out of the box.  There are copies of Wazuh agent for Linux and Windows that you can push out to systems that you want to monitor More info: `How to install Wazuh agents <installation_agents>`_.
+::
+
+5. In this virtual appliance, the default username and default password are both "**wazuhelk**".  Where other usernames are used, like "root", use the specific username with a password of "**wazuhelk**".  With these credentials you should be able to login as Linux users "root" and "user", access the Kibana interface, and use the Wazuh API.
+
+:: 
+
+6. Although you don't need to change any Elastic Stack configuration settings, feel free to explore.  The Elasticsearch system is installed in ``/usr/share/elasticsearch`` and the main configuration files are ``/etc/elasticsearch/elasticsearch.yml`` and ``/etc/sysconfig/elasticsearch``. Similarly, Logstash is installed in ``/usr/share/logstash`` and its config directory is ``/etc/logstash/conf.d/``.
+
+::
+
+7. **Wazuh Manager** and the **Elastic Stack** stack are configured to work out of the box.  To install the Wazuh agents and connect them to your virtual appliance, see: `How to install Wazuh agents <installation_agents>`_.  Note that this virtual appliance is using a single-server architecture.
 
 .. warning::
-  Before installing a Wazuh agent, make sure you change the VM network interface from NAT - the factory default - to bridged so that you will get an IP address from you network's DHCP server or set a static IP in the VM by configuring the network files on the CentOS system as you would any other Redhat derived Linux system.
+  Before installing any Wazuh agents, change the VM's network interface type from NAT - the factory default - to bridged so that it will be reachable to your network.  By default, the VM will try to get an IP address from your network's DHCP server.  Alternatively, you can set a static IP for the VM by configuring the network files on the CentOS system as you would any other Red Hat derived Linux system.
 
-8. You can start and stop wazuh-manager, elasticsearch, logstash with the 'service' command. Examples ::
+8. You can start and stop wazuh-manager, elasticsearch, logstash, and kibana with the 'systemctl' command. Examples ::
 
-    service wazuh-manager start
-    service elasticsearch start
-    service logstash start
+    systemctl restart wazuh-manager
+    systemctl stop elasticsearch
+    systemctl start logstash
+    systemctl status kibana
