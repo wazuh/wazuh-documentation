@@ -1,4 +1,4 @@
-.. _how_to_process:
+.. _how_to_command:
 
 HOWTOs
 =================================

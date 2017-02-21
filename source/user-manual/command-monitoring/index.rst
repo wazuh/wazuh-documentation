@@ -1,6 +1,6 @@
 .. _manual_process_monitoring:
 
-Process monitoring
+Command monitoring
 =================================
 
 .. warning::
@@ -12,5 +12,5 @@ Process monitoring
         :maxdepth: 1
 
         manual_monitoring
-        how_to_process
-        faq_process
+        how_to_command
+        faq_command
