@@ -3,24 +3,24 @@
 FAQ
 ===============================
 
-How can I tune Kibana configuration?
+How can I tune the Kibana configuration?
 -------------------------------------------------------------------
 
 The Kibana default configuration is stored in ``kibana/config/kibana.yml``.
 
-How can I tune Logstash configuration?
+How can I tune the Logstash configuration?
 -------------------------------------------------------------------
 
 The logstash configuration is stored in ``logstash/config/logstash.conf``.
 
-The folder ``logstash/config`` is mapped onto the container ``/etc/logstash/conf.d`` so you can create more than one file in that folder if you'd like to. However, you must be aware that config files will be read from the directory in alphabetical order.
+The ``logstash/config`` folder is mapped onto the ``/etc/logstash/conf.d`` container so that you can create more than one file in that folder if you'd like to. However, you must be aware that config files will be read from that directory in alphabetical order.
 
 How can I specify the amount of memory used by Logstash?
 -------------------------------------------------------------------
 
-The Logstash container use the *LS_HEAP_SIZE* environment variable to determine how much memory should be associated to the JVM heap memory (defaults to 500m).
+The Logstash container uses the *LS_HEAP_SIZE* environment variable to determine how much memory should be allocated as JVM heap memory (defaults to 2048m).
 
-If you want to override the default configuration, add the *LS_HEAP_SIZE* environment variable to the container in the ``docker-compose.yml``::
+If you want to override the default configuration, edit the *LS_HEAP_SIZE* environment variable defined in the logstash section of ``docker-compose.yml``::
 
 
   logstash:
@@ -37,15 +37,14 @@ If you want to override the default configuration, add the *LS_HEAP_SIZE* enviro
     environment:
       - LS_HEAP_SIZE=2048m
 
-How can I tune Elasticsearch configuration?
+How can I tune the Elasticsearch configuration?
 -------------------------------------------------------------------
 
-The Elasticsearch container is using the shipped configuration and it is not exposed by default.
+The Elasticsearch container uses the default configuration and it is not exposed by default.
 
-If you want to override the default configuration, create a file ``elasticsearch/config/elasticsearch.yml`` and add your configuration in it.
+If you want to override the default configuration, create a file ``elasticsearch/config/elasticsearch.yml`` and put your custom version of the configuration in it.
 
-Then, you'll need to map your configuration file inside the container in the ``docker-compose.yml``. Update the elasticsearch container declaration to::
-
+Then map your configuration file inside the container in the ``docker-compose.yml``. Update the elasticsearch container declaration to::
 
   elasticsearch:
    image: wazuh/wazuh-elasticsearch:latest
@@ -57,10 +56,10 @@ Then, you'll need to map your configuration file inside the container in the ``d
    networks:
      - docker_elk
 
-How can I configure Wazuhapp plugin?
+How can I configure the Wazuh App?
 -------------------------------------------------------------------
 
-Select Wazuh APP in the left menu and then add the parameters
+In Kibana, select the Wazuh item in the left menu and then click "ADD NEW API".  
 
 The default configuration is::
 
@@ -69,14 +68,14 @@ The default configuration is::
   URL: http://wazuh
   Port: 55000
 
-If you like to change the default API configuration, you need to modify the file ``user`` in the path ``/var/ossec/api/configuration/auth/user``, you can generate other password with any ``htpasswd`` generator.
+If you wish to change the default API configuration, you need to modify the ``user`` file in ``/var/ossec/api/configuration/auth/user/``, using the standard ``htpasswd`` tool.
 
 How can I store Wazuh data?
 -------------------------------------------------------------------
 
-The data stored in Wazuh will be persisted after container reboot but not after container removal.
+The data stored in Wazuh will persist after container reboots but not after container removal.
 
-In order to persist Wazuh data even after removing the Wazuh container, you'll have to mount a volume on your Docker host. Update the Wazuh container declaration to::
+In order to preserve Wazuh data even after removing the Wazuh container, you'll have to mount a volume on your Docker host. Update the Wazuh container declaration to look like this::
 
    elasticsearch:
      image: wazuh/wazuh:latest
@@ -91,14 +90,14 @@ In order to persist Wazuh data even after removing the Wazuh container, you'll h
      volumes:
        - /path/to/storage:/var/ossec/data
 
-  This will store Wazuh data inside `/path/to/storage`.
+  This will store Wazuh data inside `/path/to/storage` in the Docker host's local file system.
 
 How can I store Elasticsearch data?
 -------------------------------------------------------------------
 
-The data stored in Elasticsearch will be persisted after container reboot but not after container removal.
+The data stored in Elasticsearch will persist after container reboots but not after container removal.
 
-In order to persist Elasticsearch data even after removing the Elasticsearch container, you'll have to mount a volume on your Docker host. Update the elasticsearch container declaration to::
+In order to preserve Elasticsearch data even after removing the Elasticsearch container, you'll have to mount a volume on your Docker host. Update the elasticsearch container declaration to look like this::
 
   elasticsearch:
     image: wazuh/wazuh-elasticsearch:latest
@@ -115,4 +114,4 @@ In order to persist Elasticsearch data even after removing the Elasticsearch con
       - /path/to/storage:/usr/share/elasticsearch/data
 
 
-This will store elasticsearch data inside ``/path/to/storage``.
+This will store elasticsearch data inside ``/path/to/storage`` in the Docker host's local file system.

@@ -3,10 +3,10 @@
 Install manager via Puppet
 ==============================
 
-The manager is configured by installing the ``ossec::server`` class, and using optionally:
+The manager is configured by installing the ``ossec::server`` class, and optionally using:
 
- - ``ossec::command``: to define active/response command (like ``firewall-drop.sh``).
- - ``ossec::activeresponse``: to link rules to active/response commands.
+ - ``ossec::command``: to define active response command (like ``firewall-drop.sh``).
+ - ``ossec::activeresponse``: to link rules to active response commands.
  - ``ossec::addlog``: to define additional log files to monitor.
 
 
