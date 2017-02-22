@@ -13,14 +13,12 @@ You need to increase ``max_map_count`` on your Docker host::
 
   $ sudo sysctl -w vm.max_map_count=262144
 
-To set this value permanently, update the vm.max_map_count setting in /etc/sysctl.conf. To verify after rebooting, run sysctl vm.max_map_count.
+To set this value permanently, update the vm.max_map_count setting in /etc/sysctl.conf. To verify after rebooting, run "sysctl vm.max_map_count".
 
 SELinux
 ^^^^^^^^^^
 
-On distributions which have SELinux enabled out-of-the-box you will need to either re-context the files or set SELinux into Permissive mode in order for docker-elk to start properly.
-For example on Red Hat and CentOS, the following will apply the proper context::
-
+On distributions which have SELinux enabled out-of-the-box, you will need to either re-context the files or put SELinux into Permissive mode for docker-elk to start properly. For example, on Red Hat and CentOS the following command will apply the proper context::
 
   .-root@centos ~
   -$ chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
@@ -28,13 +26,13 @@ For example on Red Hat and CentOS, the following will apply the proper context::
 Usage
 -------------------------------
 
-Clone *wazuh-docker* repository::
+Clone the *wazuh-docker* repository::
 
     git clone https://github.com/wazuh/wazuh-docker
     cd wazuh-docker
 
 
-Start the ELK stack using *docker-compose*:
+Start Wazuh and Elastic Stack using *docker-compose*:
 
     a) Foreground::
 
@@ -45,7 +43,7 @@ Start the ELK stack using *docker-compose*:
 
         $ docker-compose up -d
 
-And then access Kibana UI by hitting `http://localhost:5601 <http://localhost:5601>`_ with a web browser.
+Then access the Kibana UI by hitting `http://localhost:5601 <http://localhost:5601>`_ with a web browser.
 
 By default, the stack exposes the following ports:
 
@@ -58,4 +56,4 @@ By default, the stack exposes the following ports:
     - 9300: Elasticsearch TCP transport
     - 5601: Kibana
 
-.. note:: Configuration is not dynamically reloaded, you will need to restart the stack after any change in the configuration of a component.
+.. note:: Configuration is not dynamically reloaded, so you will need to restart the stack after any change in the configuration of a component.

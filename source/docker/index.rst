@@ -18,7 +18,7 @@ It is based on the official images:
 * `Elasticsearch <https://registry.hub.docker.com/_/elasticsearch/>`_
 * `Kibana <https://registry.hub.docker.com/_/kibana/>`_
 
-These Docker containers are based on "deviantony" dockerfiles which can be found at `https://github.com/deviantony/docker-elk <https://github.com/deviantony/docker-elk>`_, and "xetus-oss" dockerfiles, which can be found at `https://github.com/xetus-oss/docker-ossec-server <https://github.com/xetus-oss/docker-ossec-server>`_. We created our own fork, which we test and maintain. Thank you Anthony Lapenna for your contribution to the community.
+These Docker containers are based on "deviantony" dockerfiles which can be found at `https://github.com/deviantony/docker-elk <https://github.com/deviantony/docker-elk>`_, and "xetus-oss" dockerfiles, which can be found at `https://github.com/xetus-oss/docker-ossec-server <https://github.com/xetus-oss/docker-ossec-server>`_. We created our own fork, which we test and maintain. Thank you, Anthony Lapenna, for your contribution to the community.
 
 .. topic:: Contents
 

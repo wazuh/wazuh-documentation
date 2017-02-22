@@ -5,7 +5,7 @@ Installing Docker engine and Docker compose
 
 Docker engine
 ----------------------------------------------
-Docker requires a 64-bit installation and the kernel must be 3.10 at minimum.
+Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
 To check your current kernel version, open a terminal and use ``uname -r`` to display your kernel version::
 
@@ -20,12 +20,12 @@ If you would like to use Docker as a non-root user, you should now consider addi
 
   $ sudo usermod -aG docker your-user
 
-.. note:: Remember that you will have to log out and log in for this to take effect.
+.. note:: Remember that you will have to log out and log back in for this to take effect.
 
 Docker compose
 ----------------------------------------------
 
-Docker compose 1.6 or newer is required. Follow the next instruction to install it::
+Docker compose 1.6 or newer is required. Install it like this::
 
     $ curl -L "https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     $ chmod +x /usr/local/bin/docker-compose

@@ -3,17 +3,17 @@
 Installing Puppet agent
 ============================
 
-In this section we assume you have already installed APT and Yum Puppet repositories.
+In this section we assume you have already installed the apt or yum Puppet repository on your agent system in the same way that you did on your Puppet Server.
 
-Installation on CentOS
-^^^^^^^^^^^^^^^^^^^^^^
+Installation on CentOS/RHEL/Fedora
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
    $ sudo yum install puppet
    $ sudo puppet resource package puppet ensure=latest
 
-Installation on Debian
-^^^^^^^^^^^^^^^^^^^^^^
+Installation on Debian/Ubuntu
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
    $ sudo apt-get install puppet
@@ -23,7 +23,7 @@ Installation on Debian
 Configuration
 ^^^^^^^^^^^^^
 
-Add the server value to the ``[main]`` section of the node’s ``/etc/puppet/puppet.conf`` file, replacing ``puppet.example.com`` with your Puppet master’s FQDN::
+Add the server value to the ``[main]`` section of the node’s ``/etc/puppet/puppet.conf`` file, replacing ``puppet.example.com`` with your Puppet Server’s FQDN::
 
    [main]
    server = puppet.example.com
@@ -35,11 +35,11 @@ Restart the Puppet service::
 Puppet certificates
 -------------------
 
-Run Puppet agent to generate a certificate for the Puppet master to sign: ::
+Run Puppet agent to generate a certificate for the Puppet Server to sign: ::
 
    $ sudo puppet agent -t
 
-Log into to your Puppet master, and list the certificates that need approval: ::
+Log into to your Puppet Server, and list the certificates that need approval: ::
 
    $ sudo puppet cert list
 
@@ -53,4 +53,4 @@ Back on the Puppet agent node, run the puppet agent again: ::
 
    $ sudo puppet agent -t
 
-.. note:: Remember the Private Network DNS is a requisite for the correct certificate sign.
+.. note:: Remember that private network DNS is a prerequisite for successful certificate signing.
