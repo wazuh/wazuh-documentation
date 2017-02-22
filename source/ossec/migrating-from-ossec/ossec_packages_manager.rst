@@ -45,20 +45,8 @@ Step 3: Install Wazuh.
 
 Follow the next guide in order to install Wazuh server:
 
-**Debian, Ubuntu, and other Debian-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../../installation_guide/installing-wazuh-server/packages-installation/wazuh_server_deb
-
-
-**Red Hat, CentOS and other RPM-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../../installation_guide/installing-wazuh-server/packages-installation/wazuh_server_rpm
+- :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
+- :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
 
 
 Step 4: Restore configuration.
