@@ -13,17 +13,13 @@ Manager
   a) For RPM-based distributions::
 
       sudo yum install make gcc git
-
-  If you want to use Auth, also install::
-
+      # If you want to use Auth, also install:
       sudo yum install openssl-devel
 
   b) For Debian-based distributions::
 
       sudo apt-get install gcc make git libc6-dev
-
-  If you want to use Auth, also install::
-
+      # If you want to use Auth, also install:
       sudo apt-get install libssl-dev
 
 
