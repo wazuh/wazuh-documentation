@@ -604,6 +604,8 @@ Additional rule options
   no_log
     Do not log this alert.
 
+.. _rules_check_diff:
+
 ``check_diff``
 --------------
 
