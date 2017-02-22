@@ -1,6 +1,6 @@
-.. _how_to_fim:
+.. _fim-examples:
 
-HOWTOs
+Examples
 ==========================
 
 1. `Ignore false positives`_

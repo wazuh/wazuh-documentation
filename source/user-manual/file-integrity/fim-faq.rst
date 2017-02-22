@@ -1,6 +1,6 @@
-.. _faqs_fim:
+.. _fim-faq:
 
-FAQ
+FAQ 
 ===============================
 
 1. `How often does syscheck run?`_
