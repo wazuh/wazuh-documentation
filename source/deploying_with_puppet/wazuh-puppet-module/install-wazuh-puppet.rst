@@ -5,7 +5,7 @@ Install Wazuh module
 
 .. note:: This Puppet module has been authored by Nicolas Zin, and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for the contribution.
 
-Download and install Wazuh module from Puppet Forge: ::
+Download and install the Wazuh module from Puppet Forge: ::
 
    $ sudo puppet module install wazuh-ossec
    Notice: Preparing to install into /etc/puppet/modules ...

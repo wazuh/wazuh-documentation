@@ -3,19 +3,19 @@
 Installing Puppet master
 ============================
 
-Installation on CentOS
---------------------------
+Installation on CentOS/RHEL/Fedora
+------------------------------------
 
-Install your Yum repository, and puppet-server package, for your Enterprise Linux distribution. For example, for EL7: ::
+Install the Puppet yum repository and then the "puppet-server" package. See https://yum.puppetlabs.com to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, for CentOS 7 or RHEL 7, do the following::
 
    $ sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-   $ sudo yum install puppetserver
+   $ sudo yum install puppet-server
 
 
-Installation on Debian
---------------------------
+Installation on Debian/Ubuntu
+------------------------------
 
-To install your Puppet master on Debian/Ubuntu systems, we first need to add our distribution repository. This can be done, downloading and installing a package named ``puppetlabs-release-distribution.deb`` where "distribution" needs to be substituted by your distribution codename (e.g. wheezy, jessie, trusty, utopic). See below the commands to install the Puppet master package for a "jessie" distribution: ::
+Install the Puppet apt repository, and then the "puppetserver" package.  See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution.  For example, with the Trusty release of Ubuntu, you would do the following::
 
    $ wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
    $ sudo dpkg -i puppetlabs-release-pc1-trusty.deb
@@ -24,34 +24,33 @@ To install your Puppet master on Debian/Ubuntu systems, we first need to add our
 Memory Allocation
 --------------------------
 
-By default, Puppet Server will be configured to use 2GB of RAM. However, if you want to experiment with Puppet Server on a VM, you can safely allocate as little as 512MB of memory. To change the Puppet Server memory allocation, you can edit the init config file.
+By default, Puppet Server will be configured to use 2GB of RAM. However, if you want to experiment with Puppet Server on a VM, you can safely allocate as little as 512MB of memory. To change Puppet Server memory allocation, you can edit the following init config file.
 
-  * ``/etc/sysconfig/puppetserver`` -- RHEL
-  * ``/etc/default/puppetserver`` -- Debian
+  * ``/etc/sysconfig/puppetserver`` -- CentOS/RHEL/Fedora
+  * ``/etc/default/puppetserver`` -- Debian/Ubuntu
 
 Replace 2g with the amount of memory you want to allocate to Puppet Server. For example, to allocate 1GB of memory, use ``JAVA_ARGS="-Xms1g -Xmx1g"``; for 512MB, use ``JAVA_ARGS="-Xms512m -Xmx512m"``.
 
 Configuration
 --------------------------
 
-Configure ``/etc/puppetlabs/puppet/puppet.conf`` adding the ``dns_alt_names`` line to the ``[main]`` section, and replacing ``puppet.example.com`` with your own FQDN: ::
+Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section, and replacing ``puppet.example.com`` with your own FQDN: ::
 
-   [main]
    dns_alt_names = puppet,puppet.example.com
 
-.. note:: If found in the configuration file, remove the line ``templatedir=$confdir/templates``, which has been deprecated.
+.. note:: If you find ``templatedir=$confdir/templates`` in the config file, delete that line.  It has been deprecated.
 
-Then, restart your Puppet master to apply changes: ::
+Then, restart your Puppet Server to apply changes: ::
 
    $ sudo service puppetserver start
 
 PuppetDB installation
 ---------------------
 
-After configuring your Puppet master to run on Apache with Passenger, the next step is to add Puppet DB so that you can take advantage of exported resources, as well as have a central storage place for Puppet facts and catalogs.
+After configuring Puppet Server to run on Apache with Passenger, the next step is to add PuppetDB so that you can take advantage of exported resources, as well as have a central storage location for Puppet facts and catalogs.
 
-Installation on CentOS
-^^^^^^^^^^^^^^^^^^^^^^
+Installation on CentOS/RHEL 7 (Adjust if your version is different.)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
    $ sudo rpm -Uvh http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm
@@ -60,8 +59,8 @@ Installation on CentOS
    $ systemctl start postgresql-9.4
    $ systemctl enable postgresql-9.4
 
-Installation on Debian
-^^^^^^^^^^^^^^^^^^^^^^
+Installation on Ubuntu 14.04 (Adjust if your version is different.)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
   $ sudo echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
@@ -73,18 +72,14 @@ Installation on Debian
 Configuration
 ^^^^^^^^^^^^^
 
-The next step is to edit ``pg_hba.conf`` and modify the METHOD to ``md5`` in the next two lines
-
-::
-
-  /var/lib/pgsql/9.4/data/pg_hba.conf -- CentOS
+For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/9.4/data/pg_hba.conf`` and modify the METHOD to be ``md5`` in these two lines:
 
 ::
 
   # IPv4 local connections:
-  host    all             all             127.0.0.1/32            ``md5``
+  host    all             all             127.0.0.1/32            md5
   # IPv6 local connections:
-  host    all             all             ::1/128                 ``md5``
+  host    all             all             ::1/128                 md5
 
 Create a PostgreSQL user and database: ::
 
@@ -92,9 +87,9 @@ Create a PostgreSQL user and database: ::
    $ createuser -DRSP puppetdb
    $ createdb -O puppetdb puppetdb
 
-The user is created so that it cannot create databases (-D), or roles (-R) and doesn’t have superuser privileges (-S). It’ll prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
+The user is created with no permission to create databases (-D), or roles (-R) and does not have superuser privileges (-S). It will prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
 
-Test the database access and create the extension pg_trgm: ::
+Test database access and create the extension pg_trgm: ::
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb:
@@ -133,7 +128,7 @@ Finally, update ``/etc/puppetlabs/puppet/puppet.conf``: ::
     storeconfigs = true
     storeconfigs_backend = puppetdb
 
-Once all steps are completed, restart your Puppet master and run ``puppet agent --test``: ::
+Once these steps are completed, restart your Puppet Server and run ``puppet agent --test``: ::
 
    $ puppet agent --test
 
