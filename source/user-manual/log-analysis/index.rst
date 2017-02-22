@@ -8,13 +8,166 @@ The purpose of this process is the identification of application or system error
 
 The memory and CPU usage of the agent is insignificant because it only forwards events to the manager, however on the master CPU and memory consumption can increase quickly depending on the events per second (EPS) that the master has to analyze.
 
+Log analysis is configured in :ref:`ossec.conf <reference_ossec_conf>`, mainly in the following sections: :ref:`localfile <reference_ossec_localfile>`, :ref:`remote <reference_ossec_remote>` and :ref:`global <reference_ossec_global>`. Also, it is possible to configure it in :ref:`agent.conf <reference_agent_conf>`.
+
 
 .. topic:: Contents
 
     .. toctree::
         :maxdepth: 1
 
-        manual_log
-        how_to_log
-        faqs_log
-        log_settings
+        log-analysis-examples
+        log-analysis-FAQ
+
+How it works
+-------------------------------------
+
+The below figure ilustrates the event flow:
+
+.. image:: ../../images/manual/log_analysis/log-analysis-flow.png
+    :align: center
+    :width: 100%
+
+1. Log collection
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The log messages source can be:
+
+Log files
+~~~~~~~~~~~~~~~~~~~~~~~
+Log Analysis engine can be configured to monitor specific files on the servers. This servers can be running windows or Linux.
+
+Configuration Example:
+
+Linux:
+::
+
+  <agent_config os="Linux">
+    <localfile>
+        <location>/var/log/example.log</location>
+        <log_format>syslog</log_format>
+    </localfile>
+  </agent_config>
+
+Windows:
+::
+
+  <agent_config os="Windows">
+    <localfile>
+        <location>C:\myapp\example.log</location>
+        <log_format>syslog</log_format>
+    </localfile>
+  </agent_config>
+
+
+Windows event log
+~~~~~~~~~~~~~~~~~~~~~~~
+
+The component can also be configured to monitor the Event Log from windows, or Event Channel for Vista or newer versions:
+
+Configuration Example:
+
+Eventlog:
+::
+
+  <localfile>
+    <location>Security</location>
+    <log_format>eventlog</log_format>
+  </localfile>
+
+Eventchannel:
+::
+
+  <localfile>
+    <location>Microsoft-Windows-PrintService/Operational</location>
+    <log_format>eventchannel</log_format>
+  </localfile>
+
+Remote syslog
+~~~~~~~~~~~~~~~~~~~~~~~
+
+For other devices like firewalls, you can configure Log Analysis component to receive log events through Syslog.
+
+Configuration example:
+::
+
+  <ossec_config>
+    <remote>
+      <connection>syslog</connection>
+      <allowed-ips>192.168.2.0/24</allowed-ips>
+    </remote>
+  <ossec_config>
+
+``<connection>syslog</connection>`` indicate that we allow syslog messages from the device to the server, and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` to define the network.
+
+Log Example::
+
+  2016-03-15T15:22:10.078830+01:00 tron su:pam_unix(su-l:auth):authentication failure;logname=tm uid=500 euid=0 tty=pts/0 ruser=tm rhost= user=root
+  1265939281.764 1 172.16.167.228 TCP_DENIED /403 734 POST http://lbcore1.metacafe.com/test/SystemInfoManager.php - NONE/- text/html
+  [Sun Mar 06 08:52:16 2016] [error] [client 187.172.181.57] Invalid URI in request GET: index.php HTTP/1.0
+
+2. Analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Pre-decoding
+~~~~~~~~~~~~~~~~~~~~~~~
+
+In this phase it is extracted only static information from well-known fields.
+
+::
+
+  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for leia from 192.168.1.133 port 49765 ssh2
+
+Extracted information:
+  - *hostname*: 'localhost'
+  - *program_name*: 'sshd'
+
+Decoding
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Decode Phase extracts known fields from the log message and identifies/evaluate the content. Example of log and extracted info
+::
+
+  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for leia from 192.168.1.133 port 49765 ssh2
+
+Extracted information:
+  - *program name*: sshd
+  - *dstuser*: leia
+  - *srcip*: 192.168.1.133
+
+Rules matching
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Next step is to check if any of the rules matches.
+
+For the previouse example, rule 5715 is matched::
+
+  <rule id="5715" level="3">
+    <if_sid>5700</if_sid>
+    <match>^Accepted|authenticated.$</match>
+    <description>sshd: authentication success.</description>
+    <group>authentication_success,pci_dss_10.2.5,</group>
+  </rule>
+
+.. note::
+  More information about :ref:`Wazuh Ruleset <ruleset>`
+
+3. Alert
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once the rule is matched, the manager will create an alert::
+
+  ** Alert 1487103546.21448: - syslog,sshd,authentication_success,pci_dss_10.2.5,
+  2017 Feb 14 12:19:06 localhost->/var/log/secure
+  Rule: 5715 (level 3) -> 'sshd: authentication success.'
+  Src IP: 192.168.1.133
+  User: leia
+  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for leia from 192.168.1.133 port 49765 ssh2
+
+It will be stored at */var/ossec/logs/alerts/alerts.json/.log*.
+
+By default, it will generate alerts on events that are important or security relevant. To store all the alerts, you need to enable the ``<log_all>`` option.
+
+Alerts will be stored at */var/ossec/logs/alerts/alerts.(json|log)* and events at */var/ossec/logs/archives/archives.(json|log)*. Both are stored indefinitely until they are deleted manually. It uses log-rotation and creates an individual directory for each year and month.
+
+The log retention time is configurable by the user. This means that the individual entity, being a corporation or financial institution, needs to define its own log retention policy due to their legal and regulatory needs.

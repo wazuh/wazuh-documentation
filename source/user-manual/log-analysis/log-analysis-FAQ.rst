@@ -1,4 +1,4 @@
-.. _faqs_log:
+.. _log-analysis-FAQ:
 
 FAQ
 ===============================
@@ -60,4 +60,4 @@ You can configure the rules to ignore certain events. More info: :ref:`Custom ru
 
 ``Can I check if an application is running on a server?``
 ----------------------------------------------------------
-Yes, It's possible to monitor the running applications. :ref:`Example <how_to_log>`
+Yes, It's possible to monitor the running applications. :ref:`Example <log-analysis-examples>`
