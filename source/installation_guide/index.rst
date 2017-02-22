@@ -1,4 +1,4 @@
-.. _packages_list:
+.. _installation_guide:
 
 Installation guide
 ========================

@@ -45,8 +45,8 @@ Step 3: Install Wazuh.
 
 Follow the next guide in order to install Wazuh agent:
 
-- :ref:`Install Wazuh agent with RPM packages <installing_wazuh_agent>`
-- :ref:`Install Wazuh agent with Deb packages <installing_wazuh_agent>`
+- :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`
+- :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`
 
 
 Step 4: Restore configuration.

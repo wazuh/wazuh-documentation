@@ -10,5 +10,4 @@ Usally, Wazuh is installed using a distributed architecture but you can optional
     :align: center
     :width: 100%
 
-To do this, follow the guide :ref:`Installation via packages <installation_main>`, taking note of the special instructions about single-server deployments.  This will result in completely bypassing Filebeat, and instead just having Logstash locally read the *alerts.json* or *archives.json* file.
-
+To do this, follow the guide :ref:`Installation via packages <installation_guide>`, taking note of the special instructions about single-server deployments.  This will result in completely bypassing Filebeat, and instead just having Logstash locally read the *alerts.json* or *archives.json* file.

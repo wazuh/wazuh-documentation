@@ -16,10 +16,10 @@ Following the proper installation guide, your OSSEC installation will be automat
 
 **Red Hat, CentOS and other RPM-based systems**
 
-- :ref:`Install Wazuh agent with RPM packages <installing_wazuh_agent>`
 - :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
+- :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`
 
 **Debian, Ubuntu, and other Debian-based systems**
 
 - :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
-- :ref:`Install Wazuh agent with Deb packages <installing_wazuh_agent>`
+- :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`

@@ -1,11 +1,11 @@
 .. _sources_installation:
 
-Installing from sources
+Install Wazuh server from sources
 ===================================================
 
 This guide describes how to install the manager and API from source code.
 
-Manager
+Installing Wazuh manager
 ---------------------------------------------------
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
@@ -40,7 +40,7 @@ Manager
 
     /var/ossec/bin/ossec-control start
 
-API
+Installing Wazuh API
 ---------------------------------------------------
 
 1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend you add the official repository as this has more recent versions.
@@ -98,9 +98,14 @@ For CentOS 6 and Red Hat 6, you can install the package *python27*.  It installs
         #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
         #   yum-config-manager --enable rhel-server-rhscl-6-rpms
 
-Filebeat
+Installing Filebeat
 ---------------------------------------------------
 
 While Filebeat can be installed from source (`see this doc <https://github.com/elastic/beats/blob/master/CONTRIBUTING.md>`_), the process is more complex than you may like, and it is beyond the scope of Wazuh documentation.  We recommend installing Filebeat via repository package, and if that is not available, to install it from a binary tarball that should work for any Linux distro.  See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
 
 In a single-server configuration, you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+
+Next steps
+----------
+
+Once you have installed the manager, API, and -- if needed -- Filebeat as well, you are ready to install Elastic Stack (:ref:`rpm <elastic_server_rpm>` or :ref:`deb <elastic_server_deb>`).

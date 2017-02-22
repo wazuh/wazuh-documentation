@@ -33,8 +33,8 @@ Step 2: Update Agents
 
 Following the next guide, your current installation will be automatically update:
 
-- :ref:`Install Wazuh agent with RPM packages <installing_wazuh_agent>`
-- :ref:`Install Wazuh agent with Deb packages <installing_wazuh_agent>`
+- :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`
+- :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`
 
 Step 3: Change from Logstash forwarder to Filebeat
 ----------------------------------------------------------

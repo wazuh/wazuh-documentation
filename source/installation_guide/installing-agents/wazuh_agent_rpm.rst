@@ -3,9 +3,14 @@
 Install Wazuh agent with RPM packages
 ==========================================
 
-The rpm package is suitable for installation on Red Hat, CentOS and other RPM-based systems.  Alternatively, if you prefer to download the wazuh-agent package directly, you can find it :ref:`here <packages>`.
+The rpm package is suitable for installation on Red Hat, CentOS and other RPM-based systems.
 
-**1.** First install the Wazuh repository on the system where you want to install the agent. Run the following command that corresponds to your specific Linux distribution: 
+Adding the Wazuh repository
+-------------------------------------------
+
+The first thing you need to do is to add the Wazuh repository to your host. Alternatively, if you prefer to download the wazuh-agent package directly, you can find it :ref:`here <packages>`.
+
+Run the following command that corresponds to your specific Linux distribution:
 
     a) For CentOS::
 
@@ -43,25 +48,30 @@ The rpm package is suitable for installation on Red Hat, CentOS and other RPM-ba
         protect=1
         EOF
 
-**2.** Install the Wazuh agent package::
+Installing Wazuh agent
+-------------------------------------------
+
+On your terminal, install the Wazuh agent::
 
 	yum install wazuh-agent
 
-Once the process is complete, you can check the state with
-
-	a) For Systemd::
-
-			systemctl status wazuh-agent
-
-	b) For SysV Init::
-
-			service wazuh-agent status
-
-**3.** Edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* with the manager's IP address. For example::
+Edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* with the manager's IP address. For example::
 
 	<ossec_config>
 	  <client>
 	    <server-ip>1.2.3.4</server_ip>
+
+Restart the agent to apply changes and check the agent status:
+
+    a) For Systemd::
+
+        systemctl restart wazuh-agent
+        systemctl status wazuh-agent
+
+    b) For SysV Init::
+
+        service wazuh-agent restart
+        service wazuh-agent status
 
 Next steps
 ----------

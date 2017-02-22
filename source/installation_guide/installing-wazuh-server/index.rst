@@ -24,5 +24,6 @@ The Wazuh manager can be installed on any Unix-like operating system, most commo
     .. toctree::
        :maxdepth: 2
 
-       packages-installation/index
+       wazuh_server_rpm
+       wazuh_server_deb
        sources_installation

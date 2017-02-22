@@ -14,7 +14,7 @@ There are several ways to install a Wazuh agent, depending on the operating syst
 +-------------------------------------------------+--------------------------------------------------+
 | :ref:`Windows installer <wazuh_agent_windows>`  | Install Wazuh agents on Windows.                 |
 +-------------------------------------------------+--------------------------------------------------+
-| :ref:`Sources <wazuh_agent_other>`              | Install Wazuh agents from source code.           |
+| :ref:`Sources <agent-sources>`                  | Install Wazuh agents from source code.           |
 +-------------------------------------------------+--------------------------------------------------+
 
 Once we have our agents installed, it is necessary to connect them with the manager. Check out the :ref:`registration process <connecting_agents>`.
@@ -24,6 +24,7 @@ Once we have our agents installed, it is necessary to connect them with the mana
     .. toctree::
         :maxdepth: 2
 
-        packages-installation/index
-        windows/index
-        sources/index
+        wazuh_agent_rpm
+        wazuh_agent_deb
+        agent-windows
+        agent-sources

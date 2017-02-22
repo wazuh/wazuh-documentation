@@ -5,15 +5,20 @@ Install Wazuh agent with Deb packages
 
 The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
-**1.** In order to perform this procedure properly, packages ``curl`` and ``apt-transport-https`` must be present on your system. If they are not, install them::
+Adding the Wazuh repository
+-------------------------------------------
+
+The first thing you need to do is to add the Wazuh repository to your host. Alternatively, if you prefer to download the wazuh-agent package directly, you can find it :ref:`here <packages>`.
+
+1. In order to perform this procedure properly, packages ``curl`` and ``apt-transport-https`` must be present on your system. If they are not, install them::
 
 	apt-get install curl apt-transport-https
 
-**2.** Install the Wazuh repository GPG key::
+2. Install the Wazuh repository GPG key::
 
 	curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-**3.** Add the Wazuh repository that corresponds to your operating system:
+3. Add the Wazuh repository that corresponds to your operating system:
 
 .. note::
 	To check your version, you can use: ``lsb_release -a``
@@ -58,20 +63,36 @@ The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
     echo "deb https://packages.wazuh.com/apt yakkety main" | tee /etc/apt/sources.list.d/wazuh.list
 
-**4.** Update the package information and install the Wazuh packages::
+4. Update the package information::
 
 	apt-get update
+
+Installing Wazuh agent
+-------------------------------------------
+
+On your terminal, install the Wazuh agent::
+
 	apt-get install wazuh-agent
 
-Once the process is complete, you can check the state with
 
-		a) For Systemd::
 
-				systemctl status wazuh-agent
+Edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* with the manager's IP address. For example::
 
-		b) For SysV Init::
+	<ossec_config>
+	  <client>
+	    <server-ip>1.2.3.4</server_ip>
 
-				service wazuh-agent status
+Restart the agent to apply changes and check the agent status:
+
+    a) For Systemd::
+
+        systemctl restart wazuh-agent
+        systemctl status wazuh-agent
+
+    b) For SysV Init::
+
+        service wazuh-agent restart
+        service wazuh-agent status
 
 Next steps
 ----------
