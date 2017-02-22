@@ -13,19 +13,13 @@ This section describes how to upgrade from OSSEC to Wazuh in case that OSSEC was
 
 Following the proper installation guide, your OSSEC installation will be automatically upgraded to Wazuh:
 
-**Debian, Ubuntu, and other Debian-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../../installation_guide/installing-wazuh-server/packages-installation/wazuh_server_deb
-    ../../installation_guide/installing-agents/packages-installation/wazuh_agent_deb
-
 
 **Red Hat, CentOS and other RPM-based systems**
 
-.. toctree::
-    :maxdepth: 1
+- :ref:`Install Wazuh agent with RPM packages <installing_wazuh_agent>`
+- :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
 
-    ../../installation_guide/installing-wazuh-server/packages-installation/wazuh_server_rpm
-    ../../installation_guide/installing-agents/packages-installation/wazuh_agent_rpm
+**Debian, Ubuntu, and other Debian-based systems**
+
+- :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
+- :ref:`Install Wazuh agent with Deb packages <installing_wazuh_agent>`

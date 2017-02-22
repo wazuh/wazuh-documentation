@@ -45,20 +45,8 @@ Step 3: Install Wazuh.
 
 Follow the next guide in order to install Wazuh agent:
 
-**Debian, Ubuntu, and other Debian-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../../installation_guide/installing-agents/packages-installation/wazuh_agent_deb
-
-
-**Red Hat, CentOS and other RPM-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../../installation_guide/installing-agents/packages-installation/wazuh_agent_rpm
+- :ref:`Install Wazuh agent with RPM packages <installing_wazuh_agent>`
+- :ref:`Install Wazuh agent with Deb packages <installing_wazuh_agent>`
 
 
 Step 4: Restore configuration.

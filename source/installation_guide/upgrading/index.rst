@@ -25,40 +25,16 @@ Step 1: Update Manager
 
 Following the next guide, your current installation will be automatically update:
 
-**Debian, Ubuntu, and other Debian-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../installing-wazuh-server/packages-installation/wazuh_server_deb
-
-
-**Red Hat, CentOS and other RPM-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../installing-wazuh-server/packages-installation/wazuh_server_rpm
+- :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
+- :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
 
 Step 2: Update Agents
 ----------------------------------------------------------
 
 Following the next guide, your current installation will be automatically update:
 
-**Debian, Ubuntu, and other Debian-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../installing-agents/packages-installation/wazuh_agent_deb
-
-
-**Red Hat, CentOS and other RPM-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../installing-agents/packages-installation/wazuh_agent_rpm
+- :ref:`Install Wazuh agent with RPM packages <installing_wazuh_agent>`
+- :ref:`Install Wazuh agent with Deb packages <installing_wazuh_agent>`
 
 Step 3: Change from Logstash forwarder to Filebeat
 ----------------------------------------------------------
@@ -93,17 +69,5 @@ Update to Elastic 5
 
 These are the steps to update Elastic Stack server, and configure it to work with Wazuh.
 
-**Debian, Ubuntu, and other Debian-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../installing-elastic-stack/elastic_server_deb
-
-
-**Red Hat, CentOS and other RPM-based systems**
-
-.. toctree::
-    :maxdepth: 1
-
-    ../installing-elastic-stack/elastic_server_rpm
+- :ref:`Install Elastic Stack with RPM packages <elastic_server_rpm>`
+- :ref:`Install Elastic Stack with Debian packages <elastic_server_deb>`
