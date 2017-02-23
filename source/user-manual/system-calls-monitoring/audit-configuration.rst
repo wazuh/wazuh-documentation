@@ -1,11 +1,8 @@
-.. _configuration:
+.. _audit-configuration:
 
 
 Configuration
 ================================================
-
-ToDo
-
 
 Manager
 ------------------------------------------------
