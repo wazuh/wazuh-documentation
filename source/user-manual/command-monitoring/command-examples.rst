@@ -3,9 +3,11 @@
 Examples
 =================================
 
-1. `Monitor running processes`_
-2. `Disk space utilization`_
-3. `Check if the output changed`_
+#. `Monitor running processes`_
+#. `Disk space utilization`_
+#. `Check if the output changed`_
+#. `Load average`_
+#. `Detect USB Storage`_
 
 Monitor running processes
 ---------------------------------
@@ -93,3 +95,47 @@ Wazuh already incorpore a rule to monitor this::
   </rule>
 
 If the output change, the system will generate an alert.
+
+Load average
+------------
+
+You can configure Wazuh to monitor the ``uptime`` command and alert when is higher than 2 for example:
+
+Configuration on the ``ossec.conf`` file::
+
+  <localfile>
+      <log_format>command</log_format>
+      <command>uptime</command>
+  </localfile>
+
+And the custom rule to alert when is higher than 2::
+
+  <rule id="100101" level="7" ignore="7200">
+    <if_sid>530</if_sid>
+    <match>ossec: output: 'uptime': </match>
+    <regex>load averages: 2.</regex>
+    <description>Load average reached 2..</description>
+  </rule>
+
+Detect USB Storage
+------------------
+
+It's possible to configure Wazuh in order to alert once a USB is connected. Thsi example is fot a Windows agent.
+
+Configure your agent to monitor the USBSTOR registry entry::
+
+  <agent_config os="windows">
+    <localfile>
+        <log_format>full_command</log_format>
+        <command>reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR</command>
+    </localfile>
+  </agent_config>
+
+Next create your custom rule::
+
+  <rule id="140125" level="7">
+      <if_sid>530</if_sid>
+      <match>ossec: output: 'reg QUERY</match>
+      <check_diff />
+      <description>New USB device connected</description>
+  </rule>

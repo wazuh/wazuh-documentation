@@ -3,8 +3,8 @@
 Faq
 ===
 
-1. `Can I monitor commands on Linux or Windows?`_
-2. `Which are the possibilities of this capability?`_
+#. `Can I monitor commands on Linux or Windows?`_
+#. `Which are the possibilities of this capability?`_
 
 Can I monitor commands on Linux or Windows?
 -----------------------------------------------

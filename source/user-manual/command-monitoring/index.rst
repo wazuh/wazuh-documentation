@@ -3,10 +3,9 @@
 Command monitoring
 ==================
 
-.. warning::
-	Draft document.
-
 Sometimes what we want to monitor is not included on the logs. To solve that gap, Wazuh incorpore the ability to monitor the commands ouput and treat the output as any other log.
+
+Command monitoring is configured inside the :ref:`ossec.conf <reference_ossec_conf>`, in the :ref:`localfile section<reference_ossec_localfile>`. It can be configured in the :ref:`agent.conf<reference_agent_conf>` file also.
 
 .. topic:: Contents
 
