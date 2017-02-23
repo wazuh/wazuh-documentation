@@ -1,10 +1,7 @@
-.. _register_agent_authd:
+.. _register_agent_manual:
 
-Register agents manually
-==============================
-
-.. note::
-	At the time to add an agent, you must know it's IP address in respect of the manager, in other words, the IP that the manager will see on the arriving packets from the manager. If don't know that IP, or the agent uses DHCP (dynamic IP addressing), use `any` as IP.
+Registering agents manually with manage_agents
+=================================================
 
 1. On the **manager**, run `manage_agents`::
 
@@ -94,3 +91,16 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	b) For SysV Init::
 
 		service wazuh restart
+
+
+Forcing insertion
+----------------------------
+
+If you try to add an agent with the same IP that other agent already registered, ``manage_agents`` will generate an error. You can use the argument *-d* in order to force the insertion.
+
+Example
+~~~~~~~~~~~~~~~~~~
+
+We have installed the agent *Server1* with IP 10.0.0.10 and ID 005. For some reason, we re-install the server, so we install a new agent and we need connect it to the manager. In this case, we can use the argument *-d* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID::
+
+    /var/ossec/bin/manage_agents -n Server1 -a 10.10.10.10 -d 0

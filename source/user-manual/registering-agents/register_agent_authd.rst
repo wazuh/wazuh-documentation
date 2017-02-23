@@ -1,6 +1,6 @@
-.. _register_agent_manual:
+.. _register_agent_authd:
 
-Register agents automatically with authd
+Registering agents automatically with authd
 =============================================
 
 Choose the method that best meets your needs:
@@ -200,3 +200,14 @@ First we are going to create a certificate of authority (CA) that we will use to
       # (Client)
       cp sslagent.cert sslagent.key /var/ossec/etc
       agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+
+
+Forcing insertion
+----------------------------
+
+If you try to add an agent with the same IP that other agent already registered, ``ossec-authd`` will generate an error. You can use the argument *-f* in order to force the insertion.
+
+Example
+^^^^^^^^^^
+
+We have installed the agent *Server1* with IP 10.0.0.10 and ID 005. For some reason, we re-install the server, so we install a new agent and we need connect it to the manager. In this case, we can use the argument *-f* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID.
