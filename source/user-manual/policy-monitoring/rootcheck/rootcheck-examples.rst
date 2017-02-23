@@ -1,14 +1,14 @@
-.. _how_to_rootcheck:
+.. _rootcheck-examples:
 
-HOWTOs
-=================================
+Examples
+========
 
-1. `Root access by SSH`_
+#. `Root access by SSH`_
 
 .. _how_to_rootcheck_ssh:
 
-``Root access by SSH``
-------------------------------------
+Root access by SSH
+------------------
 
 1. First you need to create your audit file (audit_test.txt):
 ::
