@@ -3,12 +3,12 @@
 VPC Use cases
 --------------
 
-Amazon Virtual Private Cloud (Amazon VPC) lets you provision a logically isolated section of the Amazon Web Services (AWS) Cloud where you can launch AWS resources in a virtual network that you define. You have complete control over your virtual networking environment, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways.
+Using an Amazon VPC (Virtual Private Cloud), you can logically isolate your AWS assets from the rest of AWS.  You can even set up your own virtual networking in the cloud.  It is important to carefully monitor what happens with your VPC as it represent a critical part of your cloud infrastructure.
 
 Create VPC
 ++++++++++
 
-If one VPC is created, the ``rule id 81000`` will apply and an alert will be generated as shown below:
+If a VPC is created, ``rule 81000`` will apply and an alert will be generated as shown below:
 
 +------------------------------------------------------------------------+
 |**Definition of rule 81000**                                            |
@@ -29,7 +29,7 @@ If one VPC is created, the ``rule id 81000`` will apply and an alert will be gen
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
 
-If the user doesn't have permissions, the ``rule id 81001`` will apply:
+If a user without proper permissions attempts to create a VPC, ``rule 81001`` will apply:
 
 +-------------------------------------------------------------------------------+
 |**Definition of rule 81001**                                                   |
