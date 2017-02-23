@@ -1,4 +1,4 @@
-.. _how_to_command:
+.. _command-examples:
 
 HOWTOs
 =================================
@@ -7,7 +7,7 @@ HOWTOs
 2. `Disk space utilization`_
 3. `Check if the output changed`_
 
-``Monitor running processes``
+Monitor running processes
 ---------------------------------
 Imagine you want to monitor the running proccess and alert if an important one is not running.
 
@@ -48,7 +48,7 @@ Frequency defines how often the command will be run (in seconds).
 
 First rule will create an alert "Important procces not running", unless the output matches `notepad.exe` (on second rule).
 
-``Disk space utilization``
+Disk space utilization
 --------------------------
 
 We need to configure the ``dh`` command on the :ref:`ossec.conf<reference_ossec_conf>` configuration file::
@@ -70,7 +70,7 @@ Wazuh already incorpore a rule to monitor this::
 
 The system will alert once the disk space reache 100%
 
-``Check if the output changed``
+Check if the output changed
 -------------------------------
 
 In this case we use the :ref:`check_dif option <rules_check_diff>`
