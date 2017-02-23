@@ -3,7 +3,7 @@
 Policy monitoring
 =================
 
-The OSSEC Rootcheck module can be used to enforce and monitor your security policy. This is the process of verifying that all systems conform to a set of pre-defined rules surrounding configuration settings and approved application usage.
+The rootcheck module can be used to enforce and monitor your security policy. This is the process of verifying that all systems conform to a set of predefined rules surrounding configuration settings and approved application usage.
 
 There are several PCI DSS requirements to verify that systems are properly hardened. An example would be:
 
@@ -11,7 +11,7 @@ There are several PCI DSS requirements to verify that systems are properly harde
 | Sources of industry-accepted system hardening standards may include, but are not limited to: Center for Internet Security (CIS), International Organization for Standardization (ISO), SysAdmin Audit Network Security (SANS), Institute National Institute of Standards Technology (NIST).
 |
 
-Wazuh includes out-of-the-box CIS baselines for Debian and Red Hat and other baselines could be created for other systems or applications, just by adding the corresponding rootcheck file:
+Wazuh includes out-of-the-box, CIS baselines for Debian and Red Hat.  Other baselines could be created for other systems or applications as well, just by adding the corresponding rootcheck file:
 
 .. code-block:: xml
 
@@ -21,12 +21,12 @@ Wazuh includes out-of-the-box CIS baselines for Debian and Red Hat and other bas
       <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
     </rootcheck>
 
-Other PCI DSS requirements will ask us to check that applications (especially network services) are configured in a secure way. One example is the following control:
+Other PCI DSS requirements ask us to check that applications (especially network services) are configured in a secure way. One example is the following control:
 
 | **2.2.4**: Configure system security parameters to prevent misuse.
 |
 
-The following are good examples of Rootcheck rules developed to check the configuration of SSH services:
+The following are good examples of rootcheck rules developed to check the configuration of SSH services:
 
 ::
 
@@ -36,12 +36,12 @@ The following are good examples of Rootcheck rules developed to check the config
     [SSH Configuration - Root login allowed {PCI_DSS: 2.2.4}] [any]
     f:/etc/ssh/sshd_config -> !r:^# && r:PermitRootLogin\.+yes;
 
-In our :ref:`OSSEC Wazuh fork <installation>`, the Rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**. Meaning that all rootchecks already have the PCI DSS requirement tag.
+In :ref:`Wazuh <installation>`, the rootcheck rules use this syntax in the rootcheck name: **{PCI_DSS: X.Y.Z}**, mapping all rootchecks to their relevant PCI DSS requirement.
 
 Use cases
 ---------
 
-In order to check the security parameters of SSH (and meet the requirement 2.2.4), we have developed the rootchecks ``system_audit_ssh``. In our example, when OSSEC runs the Rootcheck scan, it is able to detect some errors in the SSH configuration.
+In order to check SSH security settings and help meet requirement 2.2.4, we have developed the rootchecks ``system_audit_ssh``. In our example, when Wazuh runs a rootcheck scan, it is able to detect certain security deficiencies in the SSH configuration.
 
 .. code-block:: console
 
@@ -56,7 +56,7 @@ In order to check the security parameters of SSH (and meet the requirement 2.2.4
         <system_audit>/var/ossec/etc/shared/ssh/system_audit_ssh.txt<system_audit>
     </rootcheck>
 
-If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engine, whether it becomes alert or not:
+If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engine, whether it becomes an alert or not:
 
 .. code-block:: console
 

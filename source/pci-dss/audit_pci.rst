@@ -4,7 +4,7 @@
 Audit
 ================================================
 
-ToDo
+Wazuh is able to help with event auditing PCI requirements by parsing auditd logs on Unix-like systems.
 
 10.2.2 All actions taken by any individual with root or administrative privileges
 -----------------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ folder with restrictions ... produce exit status -13
 10.2.7 Creation and deletion of system level objects.
 -----------------------------------------------------------------------------------------------------------
 
-According to Payment Card Industry (PCI) Data Security Standard Glossary, Abbreviations and Acronyms System-level object has the following definition: ::
+According to **Payment Card Industry (PCI) Data Security Standard Glossary, Abbreviations and Acronyms**, "system-level object" has the following definition: ::
 
     Anything on a system component that is required for its operation, including but not limited to application executable and configuration files, system configuration files, static and shared libraries & DLL‹s, system executables, device drivers and device coniguration files, and added third-party components.
 

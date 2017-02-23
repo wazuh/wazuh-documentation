@@ -9,11 +9,11 @@ Here we will use Wazuh log collection and analysis capabilities to meet the foll
 | **10.2.5**: Use of and changes to identification and authentication mechanisms —including but not limited to creation of new accounts and escalation of privileges— and all changes, additions, or deletions to accounts with root or administrative privileges.
 |
 
-These controls require us to log invalid logical access attempts, multiple invalid login attempts (possible brute force attacks), escalation privileges, changes in accounts, etc. In order to achieve this, we have added PCI DSS tags to OSSEC log analysis rules, mapping them to the corresponding requirement. This way, it will be easy to analyze and visualize our PCI DSS related alerts.
+These controls require us to log invalid logical access attempts, multiple invalid login attempts (possible brute force attacks), privilege escalations, changes to accounts, etc. In order to achieve this, we have added PCI DSS tags to OSSEC log analysis rules, mapping them to the corresponding requirement(s). This makes it easy to analyze and visualize our PCI DSS related alerts.
 
-The syntax used for rule tagging is **pci_dss_** followed by the number of the requirement. In this case those would be: **pci_dss_10.2.4** and **pci_dss_10.2.5**.
+The syntax used for rule tagging is **pci_dss_** followed by the number of the requirement (e.g., **pci_dss_10.2.4** and **pci_dss_10.2.5**).
 
-See below examples of OSSEC rules tagged for PCI requirements 10.2.4 and 10.2.5:
+Here are some examples of OSSEC rules tagged for PCI requirements 10.2.4 and 10.2.5:
 
 .. code-block:: xml
 
@@ -73,7 +73,7 @@ In this scenario, we try to open the file ``cardholder_data.txt``. Since our cur
     Number: 0000-0000-0000-0000
     Holder: Mr. John Smith
 
-Using ``sudo`` log analysis decoder and rules, OSSEC will generate an alert for this particular action and print it on ``alerts.log``. Using the rule tags we can see which PCI DSS requirements are specifically related to this alert.
+Using the ``sudo`` log analysis decoder and rules, Wazuh will generate an alert for this particular action and write it to ``alerts.log``. Using the rule tags we can see which PCI DSS requirements are specifically related to this alert.
 
 .. code-block:: console
 
@@ -88,7 +88,7 @@ Using ``sudo`` log analysis decoder and rules, OSSEC will generate an alert for 
     pwd: /
     command: /bin/cat
 
-Since we have JSON output enabled, we can also see the alert at ``alerts.json``:
+Since we have JSON output enabled, we can also see the alert in ``alerts.json``:
 
 .. code-block:: console
 
@@ -135,7 +135,7 @@ Since we have JSON output enabled, we can also see the alert at ``alerts.json``:
       "location": "/var/log/secure"
     }
 
-Kibana displays information in an organized way, allowing filtering by different type of alert fields, including compliance controls. We have also developed some specific dashboards to display the PCI DSS related alerts.
+Kibana displays information in an organized way, allowing filtering by different types of alert fields, including compliance controls. We have also developed a couple of PCI DSS dashboards for convenient viewing of relevant alerts.
 
 .. thumbnail:: ../images/pci/log_analysis_1.png
     :title: Alert visualization at Kibana discover
