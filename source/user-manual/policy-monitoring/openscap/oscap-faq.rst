@@ -1,29 +1,29 @@
-.. _faqs_oscap:
+.. _oscap-faq:
 
 
-Frequently Asked Questions (FAQ)
+FAQ
 ================================================
 
-1. `Is there a noticeable performance impact when OpenSCAP wodle is enabled on an agent?`_
-2. `Are evaluations executed in parallel?`_
-3. `How does the interval work?`_
-4. `Are the policies evaluated when OSSEC starts?`_
-5. `Where are the policies?`_
+#. `Is there a noticeable performance impact when OpenSCAP wodle is enabled on an agent?`_
+#. `Are evaluations executed in parallel?`_
+#. `How does the interval work?`_
+#. `Are the policies evaluated when OSSEC starts?`_
+#. `Where are the policies?`_
 
-``Is there a noticeable performance impact when OpenSCAP wodle is enabled on an agent?``
-------------------------------------------------------------------------------------------------
+Is there a noticeable performance impact when OpenSCAP wodle is enabled on an agent?
+------------------------------------------------------------------------------------
 
 The OpenSCAP wodle is designed to be very efficient, however the perfomance will depend on how fast oscap is (the scanner). Depending on the chosen policy, oscap can consume many resources. We recommend to test your policies in a test agent before deploying it in production.
 
 
-``Are evaluations executed in parallel?``
-------------------------------------------------------------------------------------------------
+Are evaluations executed in parallel?
+-------------------------------------
 
 No, each evaluation is executed sequentially. That means when an evaluation is finished, the next is executed. Also, each profile of an evaluation is executed sequentially.
 
 
-``How does the interval work?``
-------------------------------------------------------------------------------------------------
+How does the interval work?
+---------------------------
 
 The interval is the space of time between OpenSCAP executions. There are 2 scenarios:
 
@@ -32,13 +32,13 @@ The interval is the space of time between OpenSCAP executions. There are 2 scena
  - Execution time more than interval: In this case, the log "interval overtaken" at /var/ossec/log/ossec.log will be generated and when the execution is finished, it will start again immediately.
 
 
-``Are the policies evaluated when OSSEC starts?``
-------------------------------------------------------------------------------------------------
+Are the policies evaluated when OSSEC starts?
+---------------------------------------------
 
 Yes, by default policies are evaluated when the wodle starts. Unless, you set <scan-on-start> to 'no'. In this case, the next evaluation will be executed after the interval specified. The wodle state is saved when OSSEC is stopped.
 
 
-``Where are the policies?``
-------------------------------------------------------------------------------------------------
+Where are the policies?
+-----------------------
 
 Each agent must have its policies in ``/var/ossec/wodles/oscap/policies``.

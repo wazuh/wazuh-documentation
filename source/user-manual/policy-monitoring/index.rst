@@ -3,9 +3,6 @@
 Policy and compliance monitoring
 =================================
 
-.. warning::
-	Draft document.
-
 Policiy monitoring is the process of verifying that all systems conform to a set of pre-defined rules regarding configuration settings and approved application usage.
 
 Wazuh uses two components to perform this task: *rootcheck* and *OpenSCAP*.
