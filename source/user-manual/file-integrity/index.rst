@@ -3,9 +3,9 @@
 File integrity monitoring
 ==========================
 
-File Integrity monitoring is the capabilitie that allows us to know if any file has changed. The component responsible for this task is called **syscheck**. This component, compares the cryptographic checksum of a known good file against the checksum of the same file after it has been modified.
+File Integrity monitoring is the capability that allows us to know if any file has changed. The component responsible for this task is called **syscheck**. This component, compares the cryptographic checksum of a known good file against the checksum of the same file after it has been modified.
 
-Syscheck is configured in :ref:`ossec.conf <reference_ossec_conf>`. If you want more information about the exactly configuration options go to :ref:`Syscheck <reference_ossec_syscheck>`. Usually yo use the following sections: :ref:`frequency <reference_ossec_syscheck_frequency>`, :ref:`directories <reference_ossec_syscheck_directories>`, :ref:`ignore <reference_ossec_syscheck_ignore>`, :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>`
+Syscheck is configured in :ref:`ossec.conf <reference_ossec_conf>`. If you want more information about the exactly configuration options go to :ref:`Syscheck <reference_ossec_syscheck>`. Usually you use the following sections: :ref:`frequency <reference_ossec_syscheck_frequency>`, :ref:`directories <reference_ossec_syscheck_directories>`, :ref:`ignore <reference_ossec_syscheck_ignore>`, :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>`
 
 
 .. topic:: Contents
@@ -21,7 +21,7 @@ How it works
 
 Syscheck is essential for the intrusion detection.
 
-.. image:: ../../images/manual/fim/fim.png
+.. image:: ../../images/manual/fim/fim-flow.png
   :align: center
   :width: 80%
 
