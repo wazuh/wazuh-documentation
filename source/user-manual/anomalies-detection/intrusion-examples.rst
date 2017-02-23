@@ -1,12 +1,12 @@
-.. _how_to_intrusions:
+.. _intrusion-examples:
 
-HOWTOs
-===================================
+Examples
+========
 
 1. `Ignoring false positives`_
 
-``Ignoring false positives``
------------------------------------
+Ignoring false positives
+------------------------
 
 .. code-block:: xml
 
