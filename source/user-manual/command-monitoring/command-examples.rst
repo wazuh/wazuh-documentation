@@ -1,6 +1,6 @@
 .. _command-examples:
 
-HOWTOs
+Examples
 =================================
 
 1. `Monitor running processes`_
