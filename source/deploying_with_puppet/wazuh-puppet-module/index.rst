@@ -11,4 +11,4 @@ Wazuh Puppet module
         install-wazuh-puppet.rst
         install-manager-puppet.rst
         install-agent-puppet.rst
-        reference-wazuh-puppet.rst
+        reference-wazuh-puppet/index
