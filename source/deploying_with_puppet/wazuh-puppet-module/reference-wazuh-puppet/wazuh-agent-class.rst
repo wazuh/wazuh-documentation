@@ -64,6 +64,7 @@ $ar_repeated_offenders
 
   `Default empty`
 
+.. _ref_agent_addlog:
 
 function ossec::addlog
 ----------------------

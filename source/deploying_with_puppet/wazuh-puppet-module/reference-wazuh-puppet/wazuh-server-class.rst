@@ -127,6 +127,8 @@ $ossec_email_idsname
 .. note::
   Consequently, if you add or remove any of the Wazuh rules later on, you'll need to ensure you add/remove the appropriate bits in the $ossec_extra_rules_config array parameter as well.
 
+.. _ref_server_email_alert:
+
 ``function ossec::email_alert``
 -------------------------------
 
@@ -140,6 +142,8 @@ $alert_group
 
 .. note::
   No email will be sent for alerts with a severity below the global ``$ossec_email_alert_level``, unless the rule has alert_email set.
+
+.. _ref_server_command:
 
 ``function ossec::command``
 ---------------------------
@@ -155,6 +159,8 @@ $command_expect
 
 $timeout_allowed
   `Default true`
+
+.. _ref_server_ar:
 
 ``function ossec::activeresponse``
 ----------------------------------
@@ -185,6 +191,8 @@ $ar_repeated_offenders
   A comma separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries.
 
   `Default empty`
+
+.. _ref_server_addlog:
 
 ``function ossec::addlog``
 --------------------------
