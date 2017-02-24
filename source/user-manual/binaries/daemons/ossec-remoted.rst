@@ -5,7 +5,6 @@ ossec-remoted
 =============
 
 ``ossec-remoted`` is the server side daemon that communicates with the agents.
-It can listen to port 1514/udp (for Wazuh communications) and/or 514 (for syslog).
 It runs as ossecr and is chrooted to ``/var/ossec`` by default.
 
 
