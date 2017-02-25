@@ -102,12 +102,12 @@ The attributes list below defines a rule
     Specifies the ID of the rule.
 
     Allowed values
-      Any number from 100 to 9999
+      Any number from 100 to 99999
   maxsize
     Specifies the maximum size of the event.
 
     Allowed values
-      Any number from 1 to 9999
+      Any number from 1 to 99999
   frequency
     Specifies the number of times the rule must have matched before firing.
     The number that triggers the rule is actually 2 more than this setting.

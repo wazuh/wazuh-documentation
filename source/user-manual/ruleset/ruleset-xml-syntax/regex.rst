@@ -6,9 +6,9 @@ There are two types of regular expressions: regex (*OS_Regex*) and sregex (*OS_M
 Regex (OS_Regex) syntax
 --------------------------------
 
-Fast and simple library for regular expressions in C.
+This is a fast and simple library for regular expressions in C.
 
-This library is designed to be simple, but support the most common regular expressions.
+This library is designed to be simple while still supporting the most common regular expressions.
 
 .. topic:: Supported expressions
 
@@ -55,7 +55,7 @@ This library is designed to be simple, but support the most common regular expre
   +-------------+--------------------------------------------------+
   | $           | To specify the end of the text                   |
   +-------------+--------------------------------------------------+
-  | \|          | To create a logic: or, between multiple patterns |
+  | \|          | To create a logical or between multiple patterns |
   +-------------+--------------------------------------------------+
 
 
@@ -73,7 +73,7 @@ This library is designed to be simple, but support the most common regular expre
 Sregex (OS_Match) syntax
 -----------------------------
 
-Faster than the OS_Regex/regex, but only supports simple string matching and the
+This is faster than OS_Regex, but only supports simple string matching and the
 following special characters.
 
 .. topic:: Special characters

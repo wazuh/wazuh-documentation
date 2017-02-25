@@ -3,7 +3,7 @@
 Getting started
 =================
 
-OSSEC default number of rules and decoders is limited. For this reason, we centralize, test and maintain decoders and rules submitted by Open Source contributors. As well, we create new rules and rootchecks periodically that are added to this repository so they can be used by the users community. Some examples are the new rules for Netscaler and Puppet.
+The default number of rules and decoders is limited. For this reason, we centralize, test and maintain decoders and rules submitted by open source contributors. We also create new rules and rootchecks periodically and add them to this repository so they can be used by the user community. Some examples are the new rules for Netscaler and Puppet.
 
 GitHub repository
 ------------------
@@ -11,17 +11,17 @@ GitHub repository
 In the ruleset repository you will find:
 
 * **New rules, decoders and rootchecks**
-   We update and maintain out-of-the-box rules provided by OSSEC, both to eliminate false positives or to increase their accuracy. In addition, we map those with PCI-DSS compliance controls, making it easy to identify when an alert is related to a compliance requirement.
+   We update and maintain the out-of-the-box rules provided by OSSEC, both to eliminate false positives and to increase accuracy. In addition, we map the rules to PCI-DSS compliance controls, making it easy to identify when an alert is related to a specific compliance requirement.
 
 
 * **Tools**
-   We provide some usefull tools for testing.
+   We provide some useful tools for testing.
 
 
 Resources
 ^^^^^^^^^
 * Visit our repository to view the rules in detail at `Github Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_
-* Find a complete description of the available rules: `Wazuh Ruleset Summary <http://www.wazuh.com/resources/OSSEC_Ruleset.pdf>`_
+* Find a complete description of the available rules at `Wazuh Ruleset Summary <http://www.wazuh.com/resources/OSSEC_Ruleset.pdf>`_
 
 
 Rule and Rootcheck example
@@ -61,6 +61,6 @@ The ruleset folder structure is shown below:
                   ├─ decoders/
                   └─ rules/
 
-Inside the ``ruleset/`` folder we will find all the common rules and decoders. All files inside this folder **will be overwritten** or modified in the Wazuh updating process, so please do not use this folder for custom files.
+Inside the ``ruleset/`` folder you will find all the common rules and decoders. All files inside this folder **will be overwritten** or modified in the Wazuh update process, so please do not edit files or add custom files in this folder.
 
 If we need to perform some :ref:`custom <ruleset_custom>` changes, we will use the ``etc/`` folder. You can add here your own decoders/rules files or use the default ``local_decoder.xml`` and ``local_rules.xml`` files.

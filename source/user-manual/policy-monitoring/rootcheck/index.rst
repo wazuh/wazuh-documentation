@@ -3,9 +3,9 @@
 Rootcheck
 =========
 
-Wazuh monitors configuration files to ensure they are compliant with your security policies, standards or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, not patched, or not properly configured.
+Wazuh monitors configuration files to ensure they are compliant with your security policies, standards or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, unpatched, misconfigured.
 
-To configure the options for rootcheck go to :ref:`ossec.conf <reference_ossec_conf>`, to the :ref:`Rootcheck section <reference_ossec_rootcheck>`. The usual configuration options are: :ref:`frequency <reference_ossec_rootcheck_frequency>`, :ref:`system-audit <reference_ossec_rootcheck_audit>`
+To configure the options for rootcheck, go to the :ref:`Rootcheck section <reference_ossec_rootcheck>` in :ref:`ossec.conf <reference_ossec_conf>`. The most common configuration options are: :ref:`frequency <reference_ossec_rootcheck_frequency>` and :ref:`system-audit <reference_ossec_rootcheck_audit>`
 
 
 .. topic:: Documentation sections
@@ -19,11 +19,11 @@ To configure the options for rootcheck go to :ref:`ossec.conf <reference_ossec_c
 How it works
 ------------
 
-The *rootcheck* engine has the capability to do the following checks:
+The *rootcheck* engine can perform the following checks:
 
-- if a process is running or not
-- if a file is present
-- if the contents of a file contains a pattern, or if a Windows registry key contains a string or is present.
+- check if a process is running
+- check if a file is present
+- check if the content of a file contains a pattern, or if a Windows registry key contains a string or is simply present.
 
 Using these checks, the following policies have been developed:
 
@@ -60,12 +60,12 @@ Alerts related to policy monitoring:
 - 514: Windows Application
 - 516: Unix Audit
 
-We can manage the policy and compliance monitoring database from the server side. Those will be shared with the agents.
+The policy and compliance monitoring databases are normally maintained on the manager, which distributes them to all the agents.
 
-Example of a policy rule created::
+Example of an existing policy rule::
 
- # PermitRootLogin no allowed
- # PermitRootLogin indicate if the user root can log in by ssh.
+ # PermitRootLogin not allowed
+ # PermitRootLogin indicates if the root user can log in via ssh.
  $sshd_file=/etc/ssh/sshd_config;
 
  [SSH Configuration - 1: Root can log in] [any] [1]
@@ -80,3 +80,5 @@ Alert example::
  System Audit: CIS - RHEL7 - 6.2.9 - SSH Configuration - Empty passwords permitted {CIS: 6.2.9 RHEL7} {PCI_DSS: 4.1}. File: /etc/ssh/sshd_config. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf .
  title: CIS - RHEL7 - 6.2.9 - SSH Configuration - Empty passwords permitted
  file: /etc/ssh/sshd_config
+
+

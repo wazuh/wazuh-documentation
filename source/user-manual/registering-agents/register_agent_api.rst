@@ -3,7 +3,7 @@
 Register agents automatically with the API
 ===========================================
 
-There are 2 request to register an agent using the API:
+Two requests are needed to register an agent using the API:
 
     - POST /agents :ref:`(reference) <api_reference>`
     - PUT /agents/:agent_name :ref:`(reference) <api_reference>`

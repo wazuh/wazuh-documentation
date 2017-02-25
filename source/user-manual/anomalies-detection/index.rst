@@ -3,11 +3,11 @@
 Intrusion and anomaly detection
 ===================================
 
-Anomaly detection refers to the action of finding patterns in the system that do not match the expected behavior. Once a malware (e.g rootkits) is installed on a system, it modifies the system to be hidden from the user. Although the malware uses a lot of techniques for this purpose, Wazuh is able to detect a pattern in them and alert about possible intruders.
+Anomaly detection refers to the action of finding patterns in the system that do not match the expected behavior. Once malware (e.g., a rootkit) is installed on a system, it modifies the system to be hidden from the user. Although malware uses a variety of techniques for this purpose, Wazuh uses a broad spectrum approach to finding anomalous patterns that indicate possible intruders.
 
-The component responsible for this task is *rootcheck*, although *syscheck* also plays an important role.
+The main component responsible for this task is *rootcheck*.  *Syscheck* also plays an important role.
 
-To configure the options for syscheck and rootcheck go to :ref:`ossec.conf <reference_ossec_conf>`. If you want more information about the exactly configuration options go to :ref:`Syscheck section <reference_ossec_syscheck>` and :ref:`Rootcheck section <reference_ossec_rootcheck>`. Mainly in the following sections: :ref:`frequency <reference_ossec_rootcheck_frequency>`, :ref:`rootkit_files <reference_ossec_rootcheck_rootkit_files>`, :ref:`rootkit_trojans <reference_ossec_rootcheck_rootkit_trojans>`
+To configure the options for syscheck and rootcheck go to :ref:`ossec.conf <reference_ossec_conf>`. If you want more information about the exact configuration options go to :ref:`Syscheck section <reference_ossec_syscheck>` and :ref:`Rootcheck section <reference_ossec_rootcheck>`. Also see the following sections: :ref:`frequency <reference_ossec_rootcheck_frequency>`, :ref:`rootkit_files <reference_ossec_rootcheck_rootkit_files>`, :ref:`rootkit_trojans <reference_ossec_rootcheck_rootkit_trojans>`
 
 .. topic:: Contents
 
@@ -20,7 +20,7 @@ To configure the options for syscheck and rootcheck go to :ref:`ossec.conf <refe
 How it works
 ------------
 
-This section describes the checks performed by Wazuh to find the anomalies caused by an intruder or a malware.
+This section describes the checks performed by Wazuh to find the anomalies caused by an intruder or malware.
 
 .. image:: ../../images/manual/intrusion-anomaly/rootcheck-flow.png
     :align: center
@@ -29,7 +29,7 @@ This section describes the checks performed by Wazuh to find the anomalies cause
 
 File integrity monitoring
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-Malware replaces files, directories and command, so performing file integrity check in the main directories allow to detect these actions. More info :ref:`File Integrity Monitoring Section <manual_file_integrity>`
+Malware replaces files, directories and commands, so performing file integrity checking on the main directories allows us to detect these actions. More info :ref:`File Integrity Monitoring Section <manual_file_integrity>`
 
 Example::
 
@@ -45,11 +45,11 @@ Example::
 
 Check running processes
 ^^^^^^^^^^^^^^^^^^^^^^^
-A malicious process can prevent from being visible in the system's list of processes (trojan version of *ps* command). Rootcheck inspects all process IDs (PID) looking for discrepancies with different system calls (getsid, getpgid).
+A malicious process can prevent itself from being seen in a system's list of processes (trojan version of *ps* command). Rootcheck inspects all process IDs (PID) looking for discrepancies with different system calls (getsid, getpgid).
 
 Example:
 
-Diamorfine is a kernel-mode rootkit able to hide itself from `ps` and also able to hide the process id. If we install this package, we will get an alert like this::
+Diamorphine is a kernel-mode rootkit able to hide itself from `ps` and also able to hide other processes. If we install this package and hide a process, we will get an alert like this::
 
   ** Alert 1460225922.841535: mail  - ossec,rootcheck
   2017 Feb 15 10:00:42 (localhost) 192.168.1.240->rootcheck
@@ -58,7 +58,7 @@ Diamorfine is a kernel-mode rootkit able to hide itself from `ps` and also able 
 
 Check hidden ports
 ^^^^^^^^^^^^^^^^^^
-Malware uses hidden ports to communicate with the attacker. Rootcheck checks every port in the system using *bind()* and if it is not possible to bind to a port and it is not in the *netstat* output, a malware could be using that port.
+Malware can use use hidden ports to communicate with the attacker. Rootcheck checks every port in the system using *bind()* and if it is not possible to bind to a port and it is not in the *netstat* output, a malware could be using that port.
 
 Check unusual files and permissions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -68,7 +68,7 @@ Scan the entire file system looking for unusual files and permissions. Files own
 Check hidden files using system calls
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Scan the entire system comparing the differences between the *stat size* and the files size when using the *fopen* + *read* calls. The number of nodes in each directory is also compared with the output of *opendir* + *readdir*. If any results do not match, you might have a malware installed.
+Scan the entire system comparing the differences between the *stat size* and the file size when using the *fopen* + *read* calls. The number of nodes in each directory is also compared with the output of *opendir* + *readdir*. If any results do not match, you might have malware installed.
 
 Alert Example::
 
@@ -77,13 +77,13 @@ Alert Example::
   Rule: 510 (level 7) -> 'Host-based anomaly detection event (rootcheck).'
   Files hidden inside directory '/etc'. Link count does not match number of files (128,129)
 
-Scan */dev* directory
-^^^^^^^^^^^^^^^^^^^^^
-The */dev* directory should only contain device-specific files. Any additional file should be inspected because malware use this partition to hide files.
+Scan the */dev* directory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The */dev* directory should only contain device-specific files. Any additional file should be inspected because malware uses this partition to hide files.
 
 Example:
 
-  If you create a hidden file on /dev, wazuh should alert because is a hidden file file on a directory that should only contain device-specific files. This is the alert generated in that case::
+  If you create a hidden file on /dev, Wazuh should alert because there is a hidden file in a directory that should only contain device-specific files. This is the alert generated in that case::
 
     ** Alert 1487182293.37491: - ossec,rootcheck,
     2017 Feb 15 10:11:33 localhost->rootcheck
@@ -94,8 +94,9 @@ Example:
 
 Scan network interfaces
 ^^^^^^^^^^^^^^^^^^^^^^^
-Scan all network interfaces on the system with *promiscuous mode* enabled. If the interface is in *promiscuous mode*, the output of the *ifconfig* command will show that. If not, we might have a malware installed.
+Scan for any network interfaces on the system with *promiscuous mode* enabled. If the interface is in *promiscuous mode*, the output of the *ifconfig* command will show that. If not, we might have a malware installed.
 
 Rootkit checks
 ^^^^^^^^^^^^^^
-Rootcheck perform several checks using its own database of rootkits signatures: *rootkit_files.txt*, *rootkit_trojans.txt* and *win_malware_rcl.txt*. Unfortunately, the signatures are out of date.
+Rootcheck performs several checks using its own database of rootkit signatures: *rootkit_files.txt*, *rootkit_trojans.txt* and *win_malware_rcl.txt*. Unfortunately, the signatures are out of date.
+

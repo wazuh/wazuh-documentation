@@ -3,61 +3,62 @@
 FAQ
 ===============================
 
-1. `Are the logs analyzed on each server?`_
-2. `How often the manager monitor the logs?`_
+1. `Are the logs analyzed on each agent?`_
+2. `How often does the manager monitor the logs?`_
 3. `How long are the logs stored on the server?`_
-4. `How this help me with the compliance regulations?`_
-5. `Which is the CPU usage on the servers?`_
-6. `Where can Wazuh read the messages?`_
+4. `How does this help me with regulatory compliance?`_
+5. `What is the CPU usage like on the agents?`_
+6. `From where can Wazuh get log messages?`_
 7. `Can I send firewall, vpn, authentication logs to Wazuh?`_
-8. `What information should Wazuh extracts from my logs?`_
-9. `Can I ignore those events that are not important?`_
-10. `Can I check if an application is running on a server?`_
+8. `What information should Wazuh extract from my logs?`_
+9. `Can I ignore events that are not important?`_
+10. `Can I check if an application is running on an agent?`_
 
-``Are the logs analyzed on each server?``
+``Are the logs analyzed on each agent?``
 ---------------------------------------------------------
 
-No, the manager gets the logs from all the servers and then analyze the messages.
+No, the manager gets the logs from all the agents and then analyzes the messages.
 
-``How often the manager monitor the logs?``
+``How often does the manager monitor the logs?``
 ---------------------------------------------------------
-Manager monitorize the log in real time.
+
+The manager monitors logs in real time.
 
 ``How long are the logs stored on the server?``
 ---------------------------------------------------------
 
-The log retention time is configurable by the user. This means that the individual entity, being a corporation or financial institution, needs to define its own log retention policy due to their legal and regulatory needs.
+Archived logs are not automatically deleted.  You choose when to manually or automatically (i.e., cron job) delete logs according to your own legal and regulatory requirements.
 
-``How this help me with the compliance regulations?``
+``How does this help me with regulatory compliance?``
 ---------------------------------------------------------
 
-Log Analysis is a requirement for : :ref:`PCI DSS Compliance <pci_dss_log_analysis>`,  HIPAA Compliance, FISMA Compliance and SOX Compliance.
+Log analysis is a requirement for : :ref:`PCI DSS Compliance <pci_dss_log_analysis>`,  HIPAA Compliance, FISMA Compliance and SOX Compliance.
 
-``Which is the CPU usage on the servers?``
+``What is the CPU usage like on the agents?``
 ---------------------------------------------------------
 
-The memory and CPU usage of the agent is insignificant because it only forwards events to the manager, however on the master CPU and memory consumption can increase quickly depending on the events per second (EPS) that the master has to analyze.
+The memory and CPU requirements of the agent are insignificant because it mostly just forwards events to the manager.  However, on the manager, CPU and memory consumption can increase quickly depending on the events per second (EPS) that the manager has to analyze.
 
-``Where can Wazuh read the messages?``
+``From where can Wazuh get log messages?``
 ---------------------------------------------------------
 
-Wazuh can read logs messages from: Log files, Windows event log or receive them by remote syslog, forwarding them to a central manager for analysis and storage. Logs are monitored in real time.
+Wazuh can read log messages from text log files, Windows event logs and event channels, and also via remote syslog.  Logs are monitored in real time.
 
-``Can I send firewall, vpn, authentication logs to Wazuh?``
+``Can I send firewall, VPN, authentication logs to Wazuh?``
 -----------------------------------------------------------
 
-Yes. Wazuh has the capability to receive and process logs from devices that send logs using the syslog protocol. It's posible to create rules for your device specific log.
+Yes. Wazuh has the capability to receive and process logs from devices that send logs using the syslog protocol. You can create custom decoders and rules for your device-specific logs.
 
-``What information should Wazuh extracts from my logs?``
+``What information should Wazuh extract from my logs?``
 -----------------------------------------------------------
 
-This is up to your needs. Once you know the format of your application logs and the typical events, you can create a decoder and rule for that.
+This depends on your needs. Once you know the format of your application logs and the typical events, you can create decoders and rules for them.
 
-``Can I ignore those events that are not important?``
+``Can I ignore events that are not important?``
 -----------------------------------------------------
 
 You can configure the rules to ignore certain events. More info: :ref:`Custom rules <ruleset_custom>`
 
-``Can I check if an application is running on a server?``
+``Can I check if an application is running on an agent?``
 ----------------------------------------------------------
-Yes, It's possible to monitor the running applications. :ref:`Example <log-analysis-examples>`
+Yes, it's possible to monitor running applications. :ref:`Example <log-analysis-examples>`

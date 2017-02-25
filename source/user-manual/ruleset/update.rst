@@ -3,7 +3,7 @@
 Update ruleset
 ===============
 
-Run ``update_ruleset.py`` script to update Wazuh Ruleset with no need to manually change OSSEC internal files.
+Run the ``update_ruleset.py`` script to update the Wazuh ruleset.  You should not need to make any other changes to accomodate the updated rules.
 
 
 Usage examples
@@ -35,6 +35,6 @@ Configure weekly updates
 
 Run ``update_ruleset.py`` weekly and keep your Wazuh Ruleset installation up to date by adding a crontab job to your system.
 
-Run ``sudo crontab -e`` and, at the end of the file, add the following line ::
+One way to do this would be to run ``sudo crontab -e`` and, at the end of the file, add the following line ::
 
   @weekly root cd /var/ossec/bin && ./update_ruleset.py -r
