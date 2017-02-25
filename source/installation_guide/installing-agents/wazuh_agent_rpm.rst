@@ -61,6 +61,8 @@ Edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* with the
 	  <client>
 	    <server-ip>1.2.3.4</server_ip>
 
+At this point, you need to :ref:`register the agent in the manager <connecting_agents>`.
+
 Restart the agent to apply changes and check the agent status:
 
     a) For Systemd::
@@ -72,8 +74,3 @@ Restart the agent to apply changes and check the agent status:
 
         service wazuh-agent restart
         service wazuh-agent status
-
-Next steps
-----------
-
-At this point the Wazuh agent is installed and configured. Now we should :ref:`connect it to the manager <connecting_agents>`.

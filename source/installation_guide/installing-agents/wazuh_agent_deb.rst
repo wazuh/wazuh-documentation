@@ -74,13 +74,13 @@ On your terminal, install the Wazuh agent::
 
 	apt-get install wazuh-agent
 
-
-
 Edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* with the manager's IP address. For example::
 
 	<ossec_config>
 	  <client>
 	    <server-ip>1.2.3.4</server_ip>
+
+At this point, you need to :ref:`register the agent in the manager <connecting_agents>`.
 
 Restart the agent to apply changes and check the agent status:
 
@@ -93,8 +93,3 @@ Restart the agent to apply changes and check the agent status:
 
         service wazuh-agent restart
         service wazuh-agent status
-
-Next steps
-----------
-
-At this point the Wazuh agent is installed and configured. Now we should :ref:`connect it to the manager <connecting_agents>`.
