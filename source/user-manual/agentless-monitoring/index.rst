@@ -7,8 +7,16 @@ Agentless monitoring
 .. warning::
 	Draft document.
 
-Agentless monitoring allows you to run integrity checking on systems without an agent installed such as: routers, firewalls, switches and even Linux/BSD systems.
-It can be executed just like our normal file integrity checking, alerting of checksum changes or doing diffs and showing exactly what has changed.
+Agentless monitoring allows you to monitorize devices or systems whihout having an agent installed, through ssh. Systems as:
+
+- routers
+- firewalls
+- switches
+- linux/bsd systems
+
+Agentless monitoring lets users who have restrictions on software being installed on systems meet security and compliance needs.
+
+It can alert onece checksum changes or doing diffs, and showing what exactly changed.
 
 Agentless monitoring is configured in :ref:`ossec.conf <reference_ossec_conf>`, in the section :ref:`Agentless <reference_ossec_agentless>`.
 
@@ -17,5 +25,12 @@ Agentless monitoring is configured in :ref:`ossec.conf <reference_ossec_conf>`, 
     .. toctree::
         :maxdepth: 1
 
-        how-it-works
-        configuring-agentless
+        agentless-configuration
+        agentless-examples
+        agentless-faq
+
+
+How it works
+------------
+
+ToDo

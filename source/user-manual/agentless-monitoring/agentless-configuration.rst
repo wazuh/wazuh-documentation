@@ -1,4 +1,4 @@
-.. _configuring_agentless:
+.. _agentless-configuration:
 
 Configuring agentless
 ======================
@@ -6,14 +6,13 @@ Configuring agentless
 Connection
 ^^^^^^^^^^
 
-First of all, once you have installed OSSEC, in your server; it needs to enable agentless monitoring:
+First of all, once you have installed Wazuh, in your server you need to enable agentless monitoring:
 
 .. code-block:: console
 
   /var/ossec/bin/ossec-control enable agentless
 
-
-In order to connect our server with the host using SSH authentication, we should use the script: ``register_host.sh``, located in: /var/ossec/agentless/
+In order to connect our server with the host using SSH authentication, we should use the script: ``register_host.sh``, located in: ``/var/ossec/agentless/``
 This script has two options: ``list``  and ``add``.
 
 Using the ``list`` option, we will get all the available host already added.
@@ -44,55 +43,72 @@ After add our hosts in the system, we need to configure the server to monitor th
 
 There are 4  different agentless types.
 
-ssh_integrity_check_bsd
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Integrity check BSD
+~~~~~~~~~~~~~~~~~~~
 
-With this option you give a list of directories in where OSSEC will do the integrity checking of the remote host.
+For BSD systems, it's possible to set a list of directories in the configuration section. Wazuh will do the integrity check inside the remote box. You need to configure the ``type`` option to ``ssh_integrity_check_bsd``
 
-ssh_integrity_check_linux
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+::
 
-As with ssh_integrity_check_bsd, in this option, you give a list of directories in where OSSEC will do the integrity checking of the remote host.
+  <agentless>
+    <type>ssh_integrity_check_bsd</type>
+    ...
+  </agentless>
 
-ssh_generic_diff
-~~~~~~~~~~~~~~~~~~~~
+Integrity check Linux
+~~~~~~~~~~~~~~~~~~~~~
 
-When you use it, you give a set of commands to run on the remote host in order to alert if the output of their execution, changes.
+For linux systems, it's possible to set a list of directories in the configuration and Wazuh will do the integrity check inside the remote box. This option is for linux based systems. You need to configure the ``type`` option to ``ssh_integrity_check_linux``
 
-ssh_pixconfig_diff
-~~~~~~~~~~~~~~~~~~~~~~
+::
 
-This option will alert when a Cisco PIX or router configuration changes.
+  <agentless>
+    <type>ssh_integrity_check_linux</type>
+    ...
+  </agentless>
 
-An example of ssh_generic_diff could be:
+Generic Diff
+~~~~~~~~~~~~
 
-.. code-block:: xml
+You can configure a set of commands to run on the remote device. Wazuh will alert you if the output of those commands changed. You need to configure the ``type`` option to ``ssh_generic_diff``
+
+::
 
   <agentless>
     <type>ssh_generic_diff</type>
-    <frequency>86400</frequency>
-    <host>root@example_adress.com</host>
-    <state>periodic_diff</state>
-    <arguments>ls -la /bin; cat /etc/sbin</arguments>
+    ...
   </agentless>
 
 .. note::
 
   To use ``su`` in a command as an argument, you have to set: ``use_su`` before the hostname. In the example before will be: host>use_su root@example_adress.com</host>
 
+
+Pix config
+~~~~~~~~~~
+
+This option will alert if a Cisco PIX/router configuration changes. You need to configure the ``type`` option to ``ssh_pixconfig_diff``
+
+::
+
+  <agentless>
+    <type>ssh_pixconfig_diff</type>
+    ...
+  </agentless>
+
 Checking the setup
 ^^^^^^^^^^^^^^^^^^
 
-Finally we should ensure that we have installed in our server the expect library which is necessary.
+Finally we should ensure that we have installed in our server the ``expect`` library which is necessary.
 
-After installing expect library we should restart OSSEC and
-in the /var/ossec/logs/ossec.log we could see:
+After installing expect library we should restart Wazuh and
+in the ``/var/ossec/logs/ossec.log`` we could see:
 
 .. code-block:: xml
 
   ossec-agentlessd: INFO: Test passed for 'ssh_integrity_check_linux'.
 
-And also, when OSSEC connect with the remote host, we could see:
+And also, when Wazuh connect with the remote host, we could see:
 
 .. code-block:: xml
 
