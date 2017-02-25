@@ -38,7 +38,7 @@ Brief introduction to SCAP
   - **Evaluation (scan)**: This is the process performed by the OpenSCAP scanner on an agent according to a specific security policy and profile.  It usually takes only a few minutes, depending on the number of rules selected in the profile.
 
 Requirements
-^^^^^^^^^^^^
+--------------------------
 
 This wodle is executed on the agent, so each agent must meet the following requirements:
 
@@ -54,3 +54,10 @@ OpenSCAP
 
 Python 2.6+
   Python is a core part of this wodle. Currently all Linux distributions come with python, so it should not be an inconvenience.
+
+How it works
+--------------------------
+
+.. image:: ../../../images/manual/policy-compliance/openscap-flow.png
+    :align: center
+    :width: 100%

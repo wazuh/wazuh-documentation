@@ -19,6 +19,12 @@ To configure the options for rootcheck, go to the :ref:`Rootcheck section <refer
 How it works
 ------------
 
+*Rootcheck* allows to define policies in order to check if the agents meet the requirement specified.
+
+.. image:: ../../../images/manual/policy-compliance/rootcheck-compliance.png
+    :align: center
+    :width: 100%
+
 The *rootcheck* engine can perform the following checks:
 
 - check if a process is running
@@ -80,5 +86,3 @@ Alert example::
  System Audit: CIS - RHEL7 - 6.2.9 - SSH Configuration - Empty passwords permitted {CIS: 6.2.9 RHEL7} {PCI_DSS: 4.1}. File: /etc/ssh/sshd_config. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf .
  title: CIS - RHEL7 - 6.2.9 - SSH Configuration - Empty passwords permitted
  file: /etc/ssh/sshd_config
-
-
