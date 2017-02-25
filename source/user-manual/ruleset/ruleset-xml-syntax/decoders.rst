@@ -88,7 +88,7 @@ Allow OSSEC to track events over multiple log messages based on a decoded id.
 ``program_name``
 ----------------
 
-It defines de name of the program in which the decoder is associated.
+It defines the name of the program with which the decoder is associated.
 
 .. topic:: Default value
 

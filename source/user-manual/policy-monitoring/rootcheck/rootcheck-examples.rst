@@ -3,27 +3,27 @@
 Examples
 ========
 
-#. `Root access by SSH`_
+#. `Root access to SSH`_
 
 .. _how_to_rootcheck_ssh:
 
-Root access by SSH
+Root access to SSH
 ------------------
 
-1. First you need to create your audit file (audit_test.txt):
+1. First you need to create your custom audit file (audit_test.txt):
 ::
 
-  # PermitRootLogin no allowed
-  # PermitRootLogin indicate if the user root can log in by ssh.
+  # PermitRootLogin not allowed
+  # PermitRootLogin indicates if the root user can log in by ssh.
   $sshd_file=/etc/ssh/sshd_config;
 
   [SSH Configuration - 1: Root can log in] [any] [1]
   f:$sshd_file -> !r:^# && r:PermitRootLogin\.+yes;
   f:$sshd_file -> r:^#\s*PermitRootLogin;
 
-2. Configure our created file on the rootcheck options:
+2. Reference our new file in the rootcheck options:
 ::
 
-  <rootcheck>
+   <rootcheck>
       <system_audit>/var/ossec/etc/shared/audit_test.txt</system_audit>
    </rootcheck>

@@ -18,7 +18,7 @@ Registering agents manually with manage_agents
 	   (Q)uit.
 	Choose your action: A,E,L,R or Q:
 
-2. Press `A` and `Enter` to add an agent. You'll be asked for the agent's name (use the agen't hostname or another arbitrary name), its IP and the agent ID (you can left this field empty to auto-assign an ID).
+2. Press `A` and `Enter` to add an agent. You'll be asked for the agent's name (use the agent hostname or another arbitrary name), its IP and the agent ID (you can leave this field empty to auto-assign an ID).
 
 In this example, we'll add an agent with name "Example", dynamic IP (`any`) and automatic ID::
 
@@ -62,7 +62,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	   (Q)uit.
 	Choose your action: I or Q:
 
-6. Press `I` and `Enter` to import a key. Then paste the key that you extracted at the manager::
+6. Press `I` and `Enter` to import a key. Then paste the key that you extracted on the manager::
 
 	Choose your action: I or Q: I
 
@@ -82,25 +82,18 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 7. Press `Q` and `Enter` to exit from `manage_agents`.
 
-8. Restart the agent. You'll do it depending on your OS init system:
+8. Restart the agent:: 
 
-	a) For Systemd::
-
-		systemctl restart wazuh
-
-	b) For SysV Init::
-
-		service wazuh restart
-
+	/var/ossec/bin/ossec-control restart
 
 Forcing insertion
 ----------------------------
 
-If you try to add an agent with the same IP that other agent already registered, ``manage_agents`` will generate an error. You can use the argument *-d* in order to force the insertion.
+If you try to add an agent with an IP that another agent is already registered with, ``manage_agents`` will generate an error. You can use the argument *-d* in order to force the insertion.
 
 Example
 ~~~~~~~~~~~~~~~~~~
 
-We have installed the agent *Server1* with IP 10.0.0.10 and ID 005. For some reason, we re-install the server, so we install a new agent and we need connect it to the manager. In this case, we can use the argument *-d* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID::
+We have installed the agent *Server1* with IP 10.0.0.10 and ID 005. For some reason, we had to reinstall the server, so now we must install a new agent and we need to connect it to the manager. In this case, we can use the argument *-d 0* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID::
 
     /var/ossec/bin/manage_agents -n Server1 -a 10.10.10.10 -d 0

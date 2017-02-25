@@ -5,9 +5,8 @@ User manual
 
 .. note::
 
-    This user manual is based on `OSSEC documentation`_.
+    Welcome to the Wazuh user manual!  Use it as your Wazuh reference library once you have a basic Wazuh installation in place.  In the same way that the main components of Wazuh are a fork of the renowned OSSEC HIDS project, so this user manual has been derived from the `OSSEC documentation <http://ossec.github.io/docs/>`_.  Kudos to Daniel Cid and to the OSSEC team for their huge contribution to the IT security community!
 
-    .. _OSSEC documentation: http://ossec.github.io/docs/
 
 
 .. topic:: Contents

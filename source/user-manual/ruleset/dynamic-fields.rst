@@ -3,12 +3,12 @@
 Dynamic fields
 ===============
 
-Traditional decoder
---------------------
+Traditional decoders
+---------------------
 
-An important step for the detection and processing of threats is the extraction of information from each event received, the great difference that OSSEC represents in this aspect is the ability to process an event and extract the most relevant fields, thus converting an event into plain text in an enriched alert, allowing its indexing and subsequent analysis.
+An important step for the detection and processing of threats is the extraction of information from each event received.  Wazuh uses decoders to identify event types and then extract the most relevant fields, thus enriching events and allowing them to be more deeply analysed and indexed.
 
-Traditionally, OSSEC provides thirteen predefined fields to store the extracted information in the decoding process (*user, srcip, dstip, srcport, dstport, protocol, action, id, url, data, extra_data, status, system_name*), but it is only possible to extract eight of them simultaneously.
+Traditionally, OSSEC has provided thirteen predefined fields for storing extracted information (*user, srcip, dstip, srcport, dstport, protocol, action, id, url, data, extra_data, status, system_name*), of which only eight can be extracted simultaneously. 
 
 Static fields:
 ::
@@ -22,11 +22,10 @@ Static fields:
   </decoder>
 
 
-Dynamic decoder
-----------------
+Dynamic decoders
+-----------------
 
-In most cases it is necessary to extract more than eight relevant fields from an event. In the case of important information that we want to extract and analyze, we can not afford this limit of fields, besides the name of each field is fixed, and in many cases we will extract information that has no place in fields like *'extra_data'* or *'status'*.
-Wazuh allows the insertion of new fields in a way that facilitates the understanding and treatment of the information extracted in the decoding process, thus being able to extract and create as many fields as we need, besides choosing the exact name for each situation and using several nesting levels.
+It is often necessary to extract more than eight relevant fields from an event, and often the actual data items extracted have no relationship to the limited list of predefined field names.  Knowing that we cannot afford to operate within these contraints, Wazuh has extended OSSEC to allow the decoding of an unlimited number of fields with field names that clearly relate to what is being extracted.   Even nested field names are supported.  
 
 Dynamic fields:
 ::
@@ -39,7 +38,7 @@ Dynamic fields:
 
 Wazuh transforms any field name included in the ``<order>`` tag into a JSON field.
 
-The next example shows how the Audit decoder extracts the information from an alert:
+The next example shows how the auditd decoder extracts the information from an alert:
 ::
 
   ** Alert 1486483073.60589: - audit,audit_configuration,
@@ -98,4 +97,4 @@ JSON Output:
 
 
 .. note::
-    By default the number of fields that can be extracted simultaneously from a ``<order>`` tag is **64**. This value can be modified by the variable ``analysisd.decoder_order_size`` inside the file ``/var/ossec/etc/internal_options.conf``
+    By default, the number of fields that can be extracted simultaneously from an ``<order>`` tag is **64**. This value can be modified by changing the variable ``analysisd.decoder_order_size`` seen in ``/var/ossec/etc/internal_options.conf``.  If you need to change this value, copy the ``analysisd.decoder_order_size`` section from ``/var/ossec/etc/internal_options.conf`` to ``/var/ossec/etc/local_internal_options.conf`` and change it there, since Wazuh software updates can replace ``/var/ossec/etc/internal_options.conf``

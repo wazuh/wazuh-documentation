@@ -4,7 +4,7 @@ Examples
 ==========================
 
 1. `Basic example`_
-2. `Realtime monitoring`_
+2. `Real-time monitoring`_
 3. `Reporting changes`_
 4. `Ignoring files`_
 5. `Ignoring files via rules`_
@@ -21,9 +21,9 @@ To configure syscheck, a list of files and directories must be provided. The che
         <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
     </syscheck>
 
-Realtime monitoring
+Real-time monitoring
 -------------------------------------------
-Realtime monitoring is configured with the ``realtime`` option. This option only works with directories, no for individual files. Realtime option is not detecting any changes during a syscheck scan, the changes won't be detected in a realtime-manner until syscheck  finishes the scan.
+Real-time monitoring is configured with the ``realtime`` option. This option only works with directories, not for individual files. Real-time change detection is paused during periodic syscheck scans, and reactivates as soon as scans complete.
 
 ::
 
@@ -36,7 +36,7 @@ Realtime monitoring is configured with the ``realtime`` option. This option only
 Reporting changes
 -------------------------------------------
 
-Using ``report_changes`` option, we can see what specifically changed. Be careful with the folders you set up to ``report_changes``, because in order to report changes, Wazuh copy every single file you want to monitorize into a private location.
+Using ``report_changes`` option, we can see what specifically changed in text files. Be careful about which folders you set up to ``report_changes``, because in order to report changes, Wazuh must copy every single file you want to monitor to a private location.
 
 ::
 
@@ -70,7 +70,7 @@ It is possible to ignore files using rules::
 
 Changing severity
 -------------------------------------------
-Creating a rule it is possible to alter the level of a syscheck alert::
+With a custom rule it is possible to alter the level of a syscheck alert when changes to a specific file or file pattern are detected::
 
     <rule id="100345" level="12">
         <if_group>syscheck</if_group>

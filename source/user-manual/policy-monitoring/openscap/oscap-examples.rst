@@ -3,12 +3,12 @@
 Examples
 ========
 
-#. `Evaluate PCI-DSS on RHEL7`_
+#. `Evaluate PCI-DSS compliance on RHEL7`_
 #. `Auditing Security Vulnerabilities of Red Hat Products`_
 
-Evaluate PCI-DSS on RHEL7
--------------------------
-This section describes how to evaluate the Payment Card Industry Data Security Standard (PCI-DSS) on Red Hat Enterprise Linux 7.
+Evaluate PCI-DSS compliance on RHEL7
+------------------------------------
+This section describes how to evaluate the Payment Card Industry Data Security Standard (PCI-DSS) compliance on Red Hat Enterprise Linux 7 agents.
 
 **Step 1: Configure agents**
 
@@ -25,7 +25,7 @@ Agent ``ossec.conf``:
 
 **Step 2: Configure manager**
 
-We want to execute the PCI-DSS profile of SSG RH7 policy only on Red Hat 7 servers.
+We want to execute the PCI-DSS profile of the SSG RH7 policy only on Red Hat 7 servers.
 
 Manager ``shared/agent.conf``:
 
@@ -43,19 +43,19 @@ Manager ``shared/agent.conf``:
 
 **Step 3: Restart manager and agents**
 
-To apply the new configuration restart the manager and agents:
+To apply the new configuration, restart the manager and agents:
 
 ::
 
   $ /var/ossec/bin/ossec-control restart
   $ /var/ossec/bin/agent_control -R -a
 
-If you prefer, you can restart a specific agent with option ``-u <id>``.
+If you prefer, you can restart a specific agent with the option ``-u <id>`` where **id** is the agent's id number.
 
 
 **Step 4: See alerts**
 
-When the evaluation is completed you will see the results as OSSEC alerts:
+When the evaluation is complete you will see the results as OSSEC alerts:
 
 ``/var/ossec/logs/alerts/alerts.log``
 
@@ -76,7 +76,7 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 ``Kibana``
 
-Note that each field is removed to facilitate searches.
+Note that each field is extracted to facilitate searches and analysis.
 
 .. image:: ../../../images/wodles-oscap/e1-alert1.png
     :align: center
@@ -101,7 +101,7 @@ The Red Hat Security Response Team provides OVAL definitions for all vulnerabili
 
 **Step 1: Configure agents**
 
-Each agent must be properly identified in order to know which policy and profile execute.
+Each agent must be properly identified in order to know which policy and profile to execute.
 
 Agent ``ossec.conf``:
 
@@ -114,7 +114,7 @@ Agent ``ossec.conf``:
 
 **Step 2: Configure manager**
 
-We want to execute the RedHat secutiy policy only on Red Hat 7 servers.
+We want to execute the RedHat security policy only on Red Hat 7 servers.
 
 Manager ``shared/agent.conf``:
 
@@ -130,7 +130,7 @@ Manager ``shared/agent.conf``:
 
 **Step 3: Restart manager and agents**
 
-To apply the new configuration restart the manager and agents:
+To apply the new configuration, restart the manager and agents:
 
 ::
 
@@ -165,7 +165,7 @@ When the evaluation is completed you will see the results as OSSEC alerts:
 
 ``Kibana``
 
-Note that each field is removed to facilitate searches.
+Note that each field is extracted to facilitate searches and analysis.
 
 .. image:: ../../../images/wodles-oscap/e2-alert1.png
     :align: center
@@ -175,9 +175,9 @@ Note that each field is removed to facilitate searches.
     :align: center
     :width: 100%
 
-**Step 5: Dashbaords**
+**Step 5: Dashboards**
 
-Finally, you can explore all results using the OpenSCAP dashboards for Kibana.
+Finally, you can explore all scan results using the OpenSCAP dashboards for Kibana.
 
 .. image:: ../../../images/wodles-oscap/e2-dashboards.png
     :align: center

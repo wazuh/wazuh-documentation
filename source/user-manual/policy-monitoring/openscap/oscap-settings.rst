@@ -5,18 +5,15 @@ Settings
 ========================
 
 
-To configure the options for OpenSCAP go to :ref:`ossec.conf <reference_ossec_conf>`
-If you want more information about the exactly configuration options go to :ref:`OpenSCAP section <wodle_openscap>`.
+To configure the options for OpenSCAP go to :ref:`ossec.conf <reference_ossec_conf>`, or for more details about specific options, see the :ref:`OpenSCAP section <wodle_openscap>`.
 
-Below, some configuration examples.
+Below are some configuration examples.
 
 
 Basic configuration
 ------------------------------------------------------------------
 
-In this example, we configure OSSEC to run OpenSCAP each day. Each evaluation has a timeout of 30 minutes.
-
-::
+In this example, we configure Wazuh to run OpenSCAP each day, with a timeout of 30 minutes. ::
 
     <wodle name="open-scap">
 
@@ -30,8 +27,9 @@ In this example, we configure OSSEC to run OpenSCAP each day. Each evaluation ha
     </wodle>
 
 
-Overwriting timeout
+Overwriting the timeout
 ------------------------------------------------------------------
+
 It is possible to overwrite the timeout for a specific evaluation: ::
 
     <wodle name="open-scap">
@@ -48,7 +46,7 @@ It is possible to overwrite the timeout for a specific evaluation: ::
 
 Profiles
 ------------------------------------------------------------------
-We can evaluate only specific profiles of a policy: ::
+We can limit the evaluation to only specific profiles of a policy: ::
 
     <wodle name="open-scap">
 
@@ -64,7 +62,7 @@ We can evaluate only specific profiles of a policy: ::
 CPE dictionary
 ------------------------------------------------------------------
 
-If necessary, you can also specify the CPE file. ::
+You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms. ::
 
     <wodle name="open-scap">
 
