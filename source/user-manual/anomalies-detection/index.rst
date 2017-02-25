@@ -22,9 +22,10 @@ How it works
 
 This section describes the checks performed by Wazuh to find the anomalies caused by an intruder or malware.
 
-.. image:: ../../images/manual/intrusion-anomaly/rootcheck-flow.png
-    :align: center
-    :width: 100%
+.. thumbnail:: ../../images/manual/intrusion-anomaly/rootcheck-flow.png
+  :title: Intrusion and anomaly detection
+  :align: center
+  :width: 100%
 
 
 File integrity monitoring
@@ -99,4 +100,3 @@ Scan for any network interfaces on the system with *promiscuous mode* enabled. I
 Rootkit checks
 ^^^^^^^^^^^^^^
 Rootcheck performs several checks using its own database of rootkit signatures: *rootkit_files.txt*, *rootkit_trojans.txt* and *win_malware_rcl.txt*. Unfortunately, the signatures are out of date.
-

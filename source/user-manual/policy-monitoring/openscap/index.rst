@@ -58,6 +58,7 @@ Python 2.6+
 How it works
 --------------------------
 
-.. image:: ../../../images/manual/policy-compliance/openscap-flow.png
-    :align: center
-    :width: 100%
+.. thumbnail:: ../../../images/manual/policy-compliance/openscap-flow.png
+  :title: OpenSCAP
+  :align: center
+  :width: 100%

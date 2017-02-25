@@ -21,9 +21,10 @@ How it works
 
 Syscheck is an essential component of intrusion detection.
 
-.. image:: ../../images/manual/fim/fim-flow.png
+.. thumbnail:: ../../images/manual/fim/fim-flow.png
+  :title: File integrity monitoring
   :align: center
-  :width: 80%
+  :width: 100%
 
 1. Wazuh agent scans the system and sends the checksums and attributes of the monitored files and Windows registry keys to the Wazuh manager. We can configure:
 

@@ -24,7 +24,8 @@ How it works
 
 The below figure illustrates the event flow:
 
-.. image:: ../../images/manual/log_analysis/log-analysis-flow.png
+.. thumbnail:: ../../images/manual/log_analysis/log-analysis-flow.png
+    :title: Log analysis flow
     :align: center
     :width: 100%
 
