@@ -4,9 +4,6 @@
 Agentless monitoring
 ======================
 
-.. warning::
-	Draft document.
-
 Agentless monitoring allows you to monitorize devices or systems whihout having an agent installed, through ssh. Systems as:
 
 - routers
