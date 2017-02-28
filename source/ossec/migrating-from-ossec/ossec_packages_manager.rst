@@ -3,25 +3,25 @@
 Migrating OSSEC Manager installed from packages
 ===================================================
 
-Step 1: Backup your current configuration.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1. Backup your current configuration
+------------------------------------
 
 Stop OSSEC: ::
 
     $ /var/ossec/bin/ossec-control stop
 
-Check if you have enough space to create a copy of */var/ossec*: ::
+Check if you have enough space to create a copy of ``/var/ossec``: ::
 
     $ du -h /var/ossec | tail -n1
     $ df -h /var
 
-Backup */var/ossec*: ::
+Backup ``/var/ossec``: ::
 
     $ cp -r /var/ossec /var/ossec_backup
 
 
-Step 2: Remove your current installation.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2. Remove your current installation
+-----------------------------------
 
 Debian and Ubuntu:
 ::
@@ -40,8 +40,8 @@ Remove directory:
     $ rm -rf /var/ossec
 
 
-Step 3: Install Wazuh.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3. Install Wazuh
+----------------
 
 Follow the next guide in order to install Wazuh server:
 
@@ -49,8 +49,8 @@ Follow the next guide in order to install Wazuh server:
 - :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
 
 
-Step 4: Restore configuration.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+4. Restore configuration
+------------------------
 
 Stop OSSEC: ::
 
@@ -78,13 +78,13 @@ The following files are required in order to preserve alerts log files and sysch
     $ cp -r /var/ossec_backup/queue/syscheck/* /var/ossec/queue/syscheck
 
 
-Step 5: Review ossec.conf.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5. Review ``ossec.conf``
+------------------------
 
-The previous configuration file is saved as */var/ossec/etc/ossec.conf.orig*. You should review the new configuration file */var/ossec/etc/ossec.conf* with the old one in case that you want to add some setting from the previous configuration.
+The previous configuration file is saved as ``/var/ossec/etc/ossec.conf.orig``. You should review the new configuration file ``/var/ossec/etc/ossec.conf`` with the old one in case that you want to add some setting from the previous configuration.
 
-Step 6: Start Wazuh.
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+6. Start Wazuh
+--------------
 
 ::
 

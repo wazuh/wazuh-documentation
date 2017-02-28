@@ -10,8 +10,6 @@ OSSEC
 
 Wazuh is born as an OSSEC HIDS fork.
 
-OSSEC agents are compatible with Wazuh Manager.
-
 .. topic:: Contents
 
     .. toctree::

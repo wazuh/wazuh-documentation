@@ -1,9 +1,9 @@
-.. _upgrading_ossec_elastic:
+.. _installing_ossec_elastic:
 
 Installing Elastic stack
 ===================================================
 
-At this point you should have your OSSEC Manager and agents migrated to Wazuh.
+At this point you should have your OSSEC Manager and agents migrated to Wazuh. Remeber that OSSEC agent are compatible with Wazuh manager.
 
 Install Elastic stack server following this guide:
 
