@@ -5,11 +5,11 @@ Main configuration
 
 Introducction
 ^^^^^^^^^^^^^^^
-``ossec.conf`` is the main configuration file to all the capabilities. It is located at ``/var/ossec/etc/ossec.conf``. It's a good a idea to backup your info before configure ossec.conf, because the file could become corrupt if improperly modified. It's essential for Wazuh to function properly.
+The ``ossec.conf`` file is the main configuration file on the Wazuh manager, and it also plays a role on the agents. It is located at ``/var/ossec/etc/ossec.conf``. It is recommended you back up this file before making changes to it, as an error in the configuration can completely prevent Wazuh services from starting up.
 
 ossec.conf
 ^^^^^^^^^^^
-XML excerpt to show location for *alerts* section:
+The ``ossec.conf`` file is in XML format, and all configuration options are nested in their appropriate section of the file.  In this file, the outermost XML tag is <ossec_config>.  For example, here is an example of the proper location of the *alerts* configuration section:
 
 .. code-block:: xml
 
@@ -20,9 +20,17 @@ XML excerpt to show location for *alerts* section:
             -->
         </alerts>
     </ossec_config>
+    
+agent.conf
+^^^^^^^^^^^
+The ``agent.conf`` file is very similar to ``ossec.conf`` except that it is used to centrally distribute configuration information to agents.  See more `here <../centralized-agent-configuration.html>`_.
+
+Installation types
+^^^^^^^^^^^^^^^^^^^^^^
+Wazuh can be installed in three possible ways.  The Wazuh manager uses the "server" installation type.  Agents use the "agent" installation type.  The 3rd type is local, which basically sets up a single system as a self-managing agent, but that is a rather limited way to use Wazuh in most corporate environments.
 
 +---------------------------------------------------------------+------------------------+
-| Sections                                                      | Supported installations|
+| Configuration Sections                                        | Supported installations|
 +===============================================================+========================+
 | `Active response <active-response-index.html>`_               | server, local          |
 +---------------------------------------------------------------+------------------------+
@@ -57,7 +65,7 @@ XML excerpt to show location for *alerts* section:
 | :ref:`Wodle OpenSCAP <wodle_openscap>`                        | server, local, agent   |
 +---------------------------------------------------------------+------------------------+
 
-All previous sections must be configured within the ``<ossec_config>`` tag.
+All of the above sections must be located within the top-level ``<ossec_config>`` tag.
 
 .. topic:: Sections
 

@@ -3,22 +3,20 @@
 RESTful API
 ==========================
 
-Wazuh API is an open source RESTful API to interact with the Wazuh manager from your own application, with a simple web browser or tools like cURL.
+The Wazuh API is an open source RESTful API that allows the Wazuh manager to be interacted with from a web browser, command line tool like cURL, or any script or program that can make web requests.  The Wazuh Kibana app relies on this heavily, and Wazuh's goal is to accommodate complete remote management of the Wazuh infrastructure via the Wazuh Kibana app. Use the API to easily perform everyday actions like adding an agent, restarting the manager/agent(s), or looking up syscheck details.
 
-Our goal is to completely manage the Wazuh manager remotely. Perform everyday actions like adding an agent, restart the manager, or look for syscheck files are now simplest using Wazuh API.
-
-If you want to get some idea of what you can do with this tool, just visit the :ref:`Use Cases <wazuh_api_use_cases>`.
+For more details, see :ref:`Use Cases <wazuh_api_use_cases>`.
 
 Wazuh API capabilities:
 
-* Agents management
+* Agent management
 * Manager control & overview
 * Rootcheck control & search
 * Syscheck control & search
 * Ruleset information
-* Statistical Information
-* HTTPS and User authentication
-* Error Handling
+* Statistical information
+* HTTPS and user authentication
+* Error handling
 
 
 .. topic:: Contents

@@ -9,7 +9,7 @@ Email alerts
 
 		<email_alerts>
 
-Extend the e-mail options configured in ``<global>`` section.
+This extends the email options configured in the ``<global>`` section.
 
 .. note::
   `Global  <./global>`_  email configuration is necessary to use granular email options.
@@ -18,30 +18,29 @@ Extend the e-mail options configured in ``<global>`` section.
 +-------------------+--------------------------------------------------------------------------------+
 | Options           | Allowed values                                                                 |
 +===================+================================================================================+
-| `email_to`_       | Any valid e-mail address                                                       |
+| `email_to`_       | Any single valid email address                                                 |
 +-------------------+--------------------------------------------------------------------------------+
 | `level`_          | Any alert level from 0 to 16                                                   |
 +-------------------+--------------------------------------------------------------------------------+
 | `group`_          | One or more groups or categories                                               |
 +-------------------+--------------------------------------------------------------------------------+
-| `event_location`_ | Any single agent name, hostname, ip address, or log file                       |
+| `event_location`_ | Any single agent name, hostname, IP address, or log file                       |
 +-------------------+--------------------------------------------------------------------------------+
 | `format`_         | full,  sms                                                                     |
 +-------------------+--------------------------------------------------------------------------------+
-| `rule_id`_        | Id rules                                                                       |
+| `rule_id`_        | one or more rule id(s)                                                         |
 +-------------------+--------------------------------------------------------------------------------+
-| `do_not_delay`_   | Using the tag                                                                  |
+| `do_not_delay`_   | XML tag with no value                                                          |
 +-------------------+--------------------------------------------------------------------------------+
-| `do_not_group`_   | Using the tag                                                                  |
+| `do_not_group`_   | XML tag with no value                                                          |
 +-------------------+--------------------------------------------------------------------------------+
-
 
 
 
 ``email_to``
 ------------
 
-E-Mail recipients of alerts.
+This specifies a single email address to which to send email alerts. If you want to send alerts to multiple addresses, each address must be listed in a separate <email_to> section.  Lists are not allowed.
 
 .. topic:: Default value
 
@@ -49,16 +48,17 @@ E-Mail recipients of alerts.
 
 .. topic:: Allowed values
 
-    Any valid e-mail address is allowed.
+    Any valid email address is allowed.
+
 
 ``level``
 ---------
 
-Minimum alerting level to forward the e-mails.
+This is the minimum alert severity level for which emails will be sent.
 
 
 .. note::
-  The option  ``level`` should be set at or above the `email_alert_level <./alerts.html#element-email_alert_level>`_ in the ``<alerts>`` section of the configuration.
+  The ``level`` option should be set at or above the `email_alert_level <./alerts.html#element-email_alert_level>`_ in the ``<alerts>`` section of the configuration.  
 
 
 .. topic:: Default value
@@ -69,10 +69,11 @@ Minimum alerting level to forward the e-mails.
 
     Any alert level 0 to 16 is allowed.
 
+
 ``group``
 ---------
 
-The alert that must match this group to be forwarded.
+This limits the sending of emails to only when rules are tripped that belongs to one of the listed groups.
 
 .. topic:: Default value
 
@@ -88,7 +89,7 @@ The alert that must match this group to be forwarded.
 ------------------
 
 The alert must match this event location to be forwarded.
-If this option is specified multiple times, the last will be used.
+Do not specify this option repeatedly, as only the last instance would be used.
 
 .. topic:: Default value
 
@@ -96,12 +97,13 @@ If this option is specified multiple times, the last will be used.
 
 .. topic:: Allowed values
 
-    Any single agent name, hostname, ip address, or log file is allowed
+    Any single agent name, hostname, IP address, or log file is allowed
+
 
 ``format``
 ----------
 
-Specifies the format of the e-mail
+This specifies the email format.
 
 .. topic:: Default value
 
@@ -111,14 +113,15 @@ Specifies the format of the e-mail
 
 .. topic:: Allowed values
 
-  full: for normal e-mails
+  full: Send normal emails.
 
-  sms: for reduced size suitable for SMS
+  sms: Use a compact format more suitable for SMS.
+
 
 ``rule_id``
 -----------
 
-Option to send granular emails based on rule id.
+This limits the sending of emails to only when rules are tripped that have one of the listed rule IDs.
 
 .. topic:: Default value
 
@@ -126,12 +129,13 @@ Option to send granular emails based on rule id.
 
 .. topic:: Allowed values
 
-    One or more rule IDs can be used here,  separated by a comma and a space ( ", " ).
+    One or more rule IDs can be used here, separated by a comma and a space ( ", " ).
+
 
 ``do_not_delay``
 ----------------
 
-Option to send the e-mail right away (no delay).
+This causes email alerts to be sent right away, rather than to be delayed for the purpose of batching multiple alerts together.
 
 .. topic:: Default value
 
@@ -145,10 +149,11 @@ Option to send the e-mail right away (no delay).
 
     <do_not_delay />
 
+
 ``do_not_group``
 ----------------
 
-Option to do not group alerts for this e-mail.
+This disables grouping of multiple alerts into the same email.
 
 .. topic:: Default value
 
@@ -161,3 +166,7 @@ Option to do not group alerts for this e-mail.
   .. code-block:: xml
 
     <do_not_group />
+
+.. warning::
+	Notice that **do_not_delay** and **do_not_group** are special empty-element XML tags, so they stand alone, not having a starting and ending version of the tag.  This is indicated by the tag name containing "/" at the end of the name.
+

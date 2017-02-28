@@ -19,7 +19,7 @@ Maild
 
 ``maild.strict_checking``
 -------------------------
-If it is set to 1, sctrict checking is enabled.
+Toggle to enable or disable strict checking.
 
 .. topic:: Default value
 
@@ -36,7 +36,7 @@ If it is set to 1, sctrict checking is enabled.
 ``maild.groupping``
 -------------------
 
-If it is set to 1 alerts will be grouped together in one email.
+Toggle to enable or disable grouping of alerts into a single email.
 
 .. topic:: Default value
 
@@ -53,7 +53,7 @@ If it is set to 1 alerts will be grouped together in one email.
 ``maild.full_subject``
 ----------------------
 
-If set to 1 maild will use  full subject when sends alert emails.
+Toggle to enable or disable full subject in alert emails.
 
 .. topic:: Default value
 
@@ -70,7 +70,7 @@ If set to 1 maild will use  full subject when sends alert emails.
 ``maild.geoip``
 ---------------
 
-If set to 1 mails will display GeoIP data in alert emails.
+Toggle to enable or disable GeoIP data in alert emails.
 
 .. topic:: Default value
 

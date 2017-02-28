@@ -23,7 +23,7 @@ Remoted
 ``remoted.recv_counter_flush``
 ------------------------------
 
-Remoted counter io flush.
+Flush rate for the receive counter.
 
 
 .. topic:: Default value
@@ -38,7 +38,7 @@ Remoted counter io flush.
 ``remoted.comp_average_printout``
 ---------------------------------
 
-Remoted compression averages printout.
+Compression averages printout.
 
 
 .. topic:: Default value
@@ -53,7 +53,7 @@ Remoted compression averages printout.
 ``remoted.verify_msg_id``
 -------------------------
 
-Verify msg id.
+Toggle to enable or disable verification of msg id.
 
 
 .. topic:: Default value
@@ -71,7 +71,7 @@ Verify msg id.
 ``remoted.pass_empty_keyfile``
 ------------------------------
 
-To not exit when client.keys is empty.
+Toggle to enable or disable acceptance of empty client.keys.
 
 
 .. topic:: Default value
@@ -89,7 +89,7 @@ To not exit when client.keys is empty.
 ``remoted.debug``
 -----------------
 
-Remoted debug, used in server installations.
+Debug level (used in server installations).
 
 
 .. topic:: Default value
@@ -99,8 +99,8 @@ Remoted debug, used in server installations.
 .. topic:: Allowed values
 
 	0
-		No debug
+		No debug output
 	1
-		First level of debug
+		Standard debug output
 	2
-		Full debugging
+		Verbose debug output

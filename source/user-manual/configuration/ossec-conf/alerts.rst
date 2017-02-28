@@ -9,7 +9,7 @@ Alerts
 
 		<alerts>
 
-Configure here minimum alert level for logging or sending alerts. Also enable or disabled Geolocation features.
+Configure here the minimum alert levels for logging or sending alerts. You can also enable or disable the geolocation feature.
 
 +----------------------+------------------------+
 | Options              | Allowed values         |
@@ -18,21 +18,20 @@ Configure here minimum alert level for logging or sending alerts. Also enable or
 +----------------------+------------------------+
 | `log_alert_level`_   | Any level from 1 to 16 |
 +----------------------+------------------------+
-| `use_geoip`_         | yes, no                |
+| `use_geoip`_         | yes or no              |
 +----------------------+------------------------+
 
 
 ``email_alert_level``
 ---------------------
 
-Minimum alert level to send e-mail notifications.
+This is the minimum severity level for an alert to generate an email notification.
 
 .. warning::
-	This is the minumum level for an alert to trigger an email.
+	This is the minimum level for an alert to trigger an email.
 	This overrides granular email alert levels.
-	Setting this to 10 would prevent emails for alerts at levels
-	lower than 10 to be sent despite settings in the granular email configuration.
-	Individual rules can override this with the *alert_by_email* option.
+	Setting this to 10 would prevent the sending of emails for alerts with levels lower than 10 even when there are settings in the granular email configuration referencing levels lower than 10.
+	Individual rules can override this with the *alert_by_email* option, which forces an email alert regardless of global or granular alert level thresholds.
 
 
 .. topic:: Default value
@@ -49,7 +48,7 @@ Minimum alert level to send e-mail notifications.
 ``log_alert_level``
 -------------------
 
-Minimum alert level to store the log messages.
+This is the minimum severity level for alerts to be stored to alerts.log and/or alerts.json.  
 
 .. topic:: Default value
 
@@ -76,4 +75,4 @@ Enable or disable GeoIP lookups.
 
 .. topic:: Allowed values
 
-  The options are: yes or no
+  The options are **yes** or **no**.

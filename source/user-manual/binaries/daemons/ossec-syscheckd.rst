@@ -4,8 +4,7 @@
 ossec-syscheckd
 ===============
 
-The ossec-syscheckd daemon checks configured files for changes to the checksums, permissions or ownership.
-ossec-syscheckd is started by ossec-control.
+The ossec-syscheckd program checks configured files for changes to the checksums, permissions and ownership.  It is run using ossec-control.
 
 +-------------------------+---------------------------------+
 | Options                 | Descriptions                    |
@@ -26,7 +25,7 @@ ossec-syscheckd is started by ossec-control.
 ``-c``
 ------
 
-Run ``ossec-syscheckd`` using ``<config>`` as the configuration file.
+Run using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
@@ -39,12 +38,12 @@ Run ``ossec-syscheckd`` using ``<config>`` as the configuration file.
 ``-d``
 ------
 
-Execute ``ossec-syscheckd`` in debug mode. This can be used more than once to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ``ossec-syscheckd`` in the foreground.
+Run in the foreground.
 
 ``-h``
 ------
@@ -59,4 +58,4 @@ Test configuration.
 ``-V``
 ------
 
-Version and license information.
+Display version and license information.

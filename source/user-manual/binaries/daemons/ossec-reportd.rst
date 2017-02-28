@@ -4,12 +4,10 @@
 ossec-reportd
 ==============
 
-``ossec-reportd`` is a program to create reports from Wazuh alerts.
-``ossec-reportd`` accepts alerts on ``stdin``, and outputs a report on ``stderr``.
+``ossec-reportd`` is a program to create reports from Wazuh alerts.  It accepts alerts on ``stdin``, and outputs a report on ``stderr``.
 
 .. note::
-  Since ``ossec-reportd`` outputs to ``stderr`` some utilities like ``less`` will not work if you do not redirect the output.
-  End the ossec-reportd with ``2>&1`` to redirect ``stderr`` to ``stdout``. ``more`` or ``less`` can be easily used after the stderr redirect.
+  Since ``ossec-reportd`` outputs to ``stderr``, some utilities like ``less`` will not work if you do not redirect the output.  To do this, end the ossec-reportd with ``2>&1`` to redirect ``stderr`` to ``stdout``. Following this redirect, ``more`` or ``less`` can be used with ease.
 
 +-----------------------------+----------------------------------------+
 | Options                     | Descriptions                           |
@@ -48,7 +46,7 @@ Chroot to <dir>.
 ``-d``
 ------
 
-Execute ossec-reportd in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 
 ``-f``
@@ -99,4 +97,4 @@ Show the alerts related to the summary.
 ``-V``
 ------
 
-Display OSSEC Version and license information.
+Display version and license information.

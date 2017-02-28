@@ -24,8 +24,9 @@ Run the agent’s processes in debug mode.
 .. topic:: Allowed values
 
 	0
-		No debug
+		No debug output
 	1
-		First level of debug
+		Standard debug output
 	2
-		Full debugging
+		Verbose debug output
+		

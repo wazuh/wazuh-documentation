@@ -10,7 +10,7 @@ Syslog output
 
 		<syslog_output>
 
-Configuration to send alerts to a syslog server.
+Configuration options for sending alerts to a syslog server.
 
 +-------------+-----------------------------------------------------------+
 | Options     | Allowed values                                            |
@@ -37,7 +37,7 @@ Configuration to send alerts to a syslog server.
 ``server``
 ----------
 
-IP Address of the syslog server.
+The IP Address of the syslog server.
 
 .. topic:: Default value
 
@@ -50,7 +50,7 @@ IP Address of the syslog server.
 ``port``
 --------
 
-Port to forward alerts to.
+The port to forward alerts to.
 
 .. topic:: Default value
 
@@ -66,7 +66,7 @@ Port to forward alerts to.
 ``level``
 ---------
 
-Minimum alert level of the alerts to be forwarded.
+The minimum level of the alerts to be forwarded.
 
 .. topic:: Default value
 
@@ -79,7 +79,7 @@ Minimum alert level of the alerts to be forwarded.
 ``group``
 ---------
 
-Alerts belonging to this group will be forwarded.
+Group of the alerts to be forwarded.
 
 .. topic:: Default value
 
@@ -94,7 +94,7 @@ Alerts belonging to this group will be forwarded.
 ``rule_id``
 -----------
 
-Alerts matching this rule_id will be forwarded.
+The rule_id of the alerts to be forwarded.
 
 
 .. topic:: Default value
@@ -108,7 +108,7 @@ Alerts matching this rule_id will be forwarded.
 ``location``
 ------------
 
-Alerts from this location will be forwarded.
+The location of the alerts to be forwarded.
 
 .. topic:: Default value
 
@@ -116,13 +116,13 @@ Alerts from this location will be forwarded.
 
 .. topic:: Allowed value
 
-  Any valid logfile location
+  Any valid log file location
 
 ``use_fqdn``
 ------------
 
-By default, ossec truncates the hostname at the first period ('.') when generating syslog messages.
-Setting this option to 'yes' will cause it to use the full hostname configured on the server.
+Toggle for full or truncated hostname configured on the server. By default, ossec truncates the hostname at the first period ('.') when generating syslog messages.
+
 
 .. topic:: Default value
 
@@ -137,13 +137,13 @@ Setting this option to 'yes' will cause it to use the full hostname configured o
 ``format``
 ----------
 
-Format of alert output.  The options are explained below:
+Format of alert output.  The options are:
 
-CEF is the ArcSight Common Event Format.
+-*"CEF"* will output data in the ArcSight Common Event Format.
 
-json can be used with a variety of tools.
+-*"json"* will output data in the JSON format that can be consumed by a variety of tools.
 
-The splunk option is for sending data to a Splunk server.
+-*"splunk"* will output data in a Splunk-friendly format.
 
 .. topic:: Default value
 

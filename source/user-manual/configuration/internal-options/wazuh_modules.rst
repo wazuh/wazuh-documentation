@@ -17,9 +17,9 @@ Wazuh_modules
 ``wazuh_modules.task_nice``
 ---------------------------
 
-This option indicates the priority of the tasks.
+Indicates the priority of the tasks.
 
-Lower value means higher priority.
+The lower the value, the higher the priority.
 
 .. topic:: Default value
 
@@ -34,7 +34,7 @@ Lower value means higher priority.
 ``wazuh_modules.debug``
 -----------------------
 
-Wazuh modules debug options.
+Debug level.
 
 .. topic:: Default value
 
@@ -43,8 +43,8 @@ Wazuh modules debug options.
 .. topic:: Allowed values
 
 	0
-		No debug
+		No debug output
 	1
-		First level of debug
+		Standard debug output
 	2
-		Full debugging
+		Verbose debug output

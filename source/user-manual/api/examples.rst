@@ -8,7 +8,7 @@ Examples
 CURL
 ^^^^^^^^^^^^^^^^^^
 
-cURL is a command-line tool for transferring data using various protocols. It can be used to interact with this API. It is pre-installed on many Linux and Mac systems. Some examples:
+cURL is a command-line tool for sending http/https requests and commands. It can be used to interact with the API. It is pre-installed on many Linux and Mac systems. Some examples:
 
 **GET**
 ::
@@ -53,7 +53,7 @@ Code:
     #!/usr/bin/env python
 
     import json
-    import requests # Install request: pip install requests
+    import requests # To install requests, use: pip install requests
 
     # Configuration
     base_url = 'https://IP:55000'
@@ -88,14 +88,14 @@ Output:
     }
     Status: 200
 
-Full example in ``wazuh-API/examples/api-client.py``.
+For a fuller example, see ``/var/ossec/api/examples/api-client.py``.
 
 .. _api_powershell_label:
 
-Powershell
+PowerShell
 ^^^^^^^^^^^^^^^^^^
 
-The **Invoke-RestMethod** cmdlet sends requests to the API and handle the response easily. This cmdlet is introduced in Windows PowerShell 3.0.
+The **Invoke-RestMethod** cmdlet sends requests to the API and handles the response easily. This cmdlet was introduced in Windows PowerShell 3.0.
 
 Code:
 ::
@@ -144,4 +144,4 @@ Output:
     0     @{syscheckTime=Wed Feb 24 09:55:04 2016; syscheckEndTime=Wed Feb 24 10:00:42 2016}
 
 
-Full example in ``wazuh-API/examples/api-client.ps1``.
+For a fuller example, see ``/var/ossec/api/examples/api-client.ps1``.

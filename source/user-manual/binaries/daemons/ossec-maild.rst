@@ -4,8 +4,7 @@
 ossec-maild
 =============
 
-The ``ossec-maild`` daemon sends Wazuh alerts via email.
-``ossec-maild`` is started by :ref:`ossec-control`.
+The ossec-maild program sends alerts via email.  It is started by :ref:`ossec-control`.
 
 +-------------------------------+---------------------------------+
 | Options                       | Descriptions                    |
@@ -24,7 +23,7 @@ The ``ossec-maild`` daemon sends Wazuh alerts via email.
 +-------------------------------+---------------------------------+
 | `-t`_                         | Test configuration              |
 +-------------------------------+---------------------------------+
-| `-u`_                         | Run as an user                  |
+| `-u`_                         | Run as a user                   |
 +-------------------------------+---------------------------------+
 | `-V`_                         | Version and license information |
 +-------------------------------+---------------------------------+
@@ -32,7 +31,7 @@ The ``ossec-maild`` daemon sends Wazuh alerts via email.
 ``-c``
 ------
 
-Run ``ossec-maild`` using ``<config>`` as the configuration file.
+Run using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
@@ -63,18 +62,18 @@ Chroot to ``<dir>``.
 ``-d``
 ------
 
-Execute ``ossec-maild`` in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ``ossec-maild`` in the foreground.
+Run in the foreground.
 
 
 ``-g``
 ------
 
-Run ``ossec-maild`` as ``<group>``.
+Run as a group.
 
 .. topic:: Arguments
 
@@ -93,7 +92,7 @@ Test configuration.
 ``-u``
 ------
 
-Run ``ossec-maild`` as ``<user>``.
+Run as a user.
 
 .. topic:: Arguments
 
@@ -106,4 +105,4 @@ Run ``ossec-maild`` as ``<user>``.
 ``-V``
 ------
 
-Version and license information.
+Display version and license information.

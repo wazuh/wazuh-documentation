@@ -4,11 +4,11 @@
 rootcheck_control
 =================
 
-The ``rootcheck_control`` tool allows you to manage the policy monitoring and system auditing database that is stored on the server (manager) side.
+The ``rootcheck_control`` tool allows for the management of the policy monitoring and system auditing database that is stored on the server side.
 
-You can list anomalies detected by the rootcheck functionality, categorized into resolved and outstanding issues.
+Anomalies detected by the rootcheck functionality can be listed, and categorized into resolved and outstanding issues.
 
-Moreover you can find out when ossec-rootcheck was run the last time.
+This tool can also display the last time that ossec-rootcheck was run.
 
 +--------------------------+--------------------------------------+
 | Options                  | Descriptions                         |
@@ -19,17 +19,17 @@ Moreover you can find out when ossec-rootcheck was run the last time.
 +--------------------------+--------------------------------------+
 | `-lc`_                   | List only currently connected agents |
 +--------------------------+--------------------------------------+
-| `-u`_                    | Updates the database of the agents   |
+| `-u`_                    | Update the database of the agents    |
 +--------------------------+--------------------------------------+
-| `-i`_                    | Prints database for the agent        |
+| `-i`_                    | Print database for the agent         |
 +--------------------------+--------------------------------------+
-| `-r`_                    | Prints the resolved issues           |
+| `-r`_                    | Print the resolved issues            |
 +--------------------------+--------------------------------------+
-| `-q`_                    | Prints the outstanding issues        |
+| `-q`_                    | Print the outstanding issues         |
 +--------------------------+--------------------------------------+
-| `-L <#rootcheck-scan>`__ | Prints the last scan                 |
+| `-L <#rootcheck-scan>`__ | Print the last scan                  |
 +--------------------------+--------------------------------------+
-| `-s`_                    | Changes the output to CSV format     |
+| `-s`_                    | Change the output to CSV format      |
 +--------------------------+--------------------------------------+
 
 
@@ -44,17 +44,17 @@ Display the help message.
 ``-l``
 ------
 
-List available agents.
+List the available agents.
 
 ``-lc``
 -------
 
-List only currently connected agents.
+List only the currently connected agents.
 
 ``-u``
 ------
 
-Updates the database for the <id> agent or all of them.
+Update the database for the identified or all agents.
 
 .. topic:: Arguments
 
@@ -65,7 +65,7 @@ Updates the database for the <id> agent or all of them.
 ``-i``
 ------
 
-Prints database for the agent.
+Print the database for the agent.
 
 .. topic:: Arguments
 
@@ -75,21 +75,21 @@ Prints database for the agent.
 ``-r``
 ------
 
-Used with -i, prints all the resolved issues.
+Used with -i to print all the resolved issues.
 
 ``-q``
 ------
 
-Used with -i, prints all the outstanding issues.
+Used with -i to print all the outstanding issues.
 
 .. _rootcheck-scan:
 
 ``-L``
 ------
 
-Used with -i, prints the last scan.
+Used with -i print the last scan.
 
 ``-s``
 ------
 
-Changes the output to CSV format.
+Change the output to CSV format.

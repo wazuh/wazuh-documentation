@@ -10,7 +10,7 @@ Rootcheck
 
 		<rootcheck>
 
-Configuration related to policy monitoring and anomalies detection.
+Configuration options for policy monitoring and anomaly detection.
 
 +-----------------------+---------------------------------------------+
 | Options               | Allowed values                              |
@@ -21,13 +21,13 @@ Configuration related to policy monitoring and anomalies detection.
 +-----------------------+---------------------------------------------+
 | `rootkit_trojans`_    | A file with the trojans signatures          |
 +-----------------------+---------------------------------------------+
-| `windows_audit`_      | n/a                                         |
+| `windows_audit`_      | Path to a Windows audit definition file     |
 +-----------------------+---------------------------------------------+
-| `system_audit`_       | n/a                                         |
+| `system_audit`_       | Audit definition file for Unix-like systems |
 +-----------------------+---------------------------------------------+
-| `windows_apps`_       | n/a                                         |
+| `windows_apps`_       | Path to a Windows application def. file     |
 +-----------------------+---------------------------------------------+
-| `windows_malware`_    | n/a                                         |
+| `windows_malware`_    | Path to a Windows malware definitions file  |
 +-----------------------+---------------------------------------------+
 | `scanall`_            | yes, no                                     |
 +-----------------------+---------------------------------------------+
@@ -92,7 +92,7 @@ systems_audit
 ``rootkit_files``
 -----------------
 
-This option can be used to change the location of the rootkit files database
+Change the location of the rootkit files database
 
 
 .. topic:: Default value
@@ -110,7 +110,7 @@ This option can be used to change the location of the rootkit files database
 ``rootkit_trojans``
 -------------------
 
-This option can be used to change the location of the rootkit trojans database
+Change the location of the rootkit trojans database
 
 .. topic:: Default value
 
@@ -125,21 +125,29 @@ This option can be used to change the location of the rootkit trojans database
 ``windows_audit``
 -----------------
 
+Specifies the path to a Windows audit definition file. 
+
 .. _reference_ossec_rootcheck_audit:
 
 ``system_audit``
 ----------------
 
+Specifies the path to an audit definition file for Unix-like systems
+
 ``windows_apps``
 ----------------
+
+Specifies the path to a Windows application definition file
 
 ``windows_malware``
 -------------------
 
+Specifies the path to a Windows malware definitions file
+
 ``scanall``
 -----------
 
-Tells rootcheck to scan the whole system (may lead to some false positives).
+Tells rootcheck to scan the entire system.  This option may lead to some false positives.
 
 .. topic:: Default value
 
@@ -187,7 +195,7 @@ Disables the execution of rootcheck.
 ``check_dev``
 -------------
 
-Enable or disable the checking of dev
+Enable or disable the checking of /dev.
 
 .. topic:: Default value
 
@@ -202,7 +210,7 @@ Enable or disable the checking of dev
 ``check_files``
 ---------------
 
-Enable or disable the checking of files
+Enable or disable the checking of files.
 
 .. topic:: Default value
 
@@ -217,7 +225,7 @@ Enable or disable the checking of files
 ``check_if``
 ------------
 
-Enable or disable the checking of if
+Enable or disable the checking of network interfaces.
 
 .. topic:: Default value
 
@@ -232,7 +240,7 @@ Enable or disable the checking of if
 ``check_pids``
 --------------
 
-Enable or disable the checking of pids
+Enable or disable the checking of process ID's.
 
 .. topic:: Default value
 
@@ -247,7 +255,7 @@ Enable or disable the checking of pids
 ``check_policy``
 ----------------
 
-Enable or disable the checking of policy
+Enable or disable the checking of policy.
 
 .. topic:: Default value
 
@@ -262,7 +270,7 @@ Enable or disable the checking of policy
 ``check_ports``
 ---------------
 
-Enable or disable the checking of network ports
+Enable or disable the checking of network ports.
 
 .. topic:: Default value
 
@@ -277,7 +285,7 @@ Enable or disable the checking of network ports
 ``check_sys``
 -------------
 
-Enable or disable the checking of sys
+Enable or disable checking for anomalous file system objects.
 
 .. topic:: Default value
 
@@ -292,7 +300,7 @@ Enable or disable the checking of sys
 ``check_trojans``
 -----------------
 
-Enable or disable the checking of trojans
+Enable or disable checking for trojans.
 
 .. topic:: Default value
 
@@ -307,7 +315,7 @@ Enable or disable the checking of trojans
 ``check_unixaudit``
 -------------------
 
-Enable or disable the checking of unixaudit
+Enable or disable the checking of unixaudit.
 
 .. topic:: Default value
 
@@ -322,7 +330,7 @@ Enable or disable the checking of unixaudit
 ``check_winapps``
 -----------------
 
-Enable or disable the checking of winapps
+Enable or disable the checking of winapps.
 
 .. topic:: Default value
 
@@ -337,7 +345,7 @@ Enable or disable the checking of winapps
 ``check_winaudit``
 ------------------
 
-Enable or disable the checking of winaudit
+Enable or disable the checking of winaudit.
 
 .. topic:: Default value
 
@@ -352,7 +360,7 @@ Enable or disable the checking of winaudit
 ``check_winmalware``
 --------------------
 
-Enable or disable the checking of Windows malware.
+Enable or disable checking for Windows malware.
 
 .. topic:: Default value
 
@@ -367,8 +375,8 @@ Enable or disable the checking of Windows malware.
 ``skip_nfs``
 ------------
 
-Specifies if rootcheck should scan network mounted filesystems. Works on Linux and FreeBSD.
-Currently skip_nfs will abort checks running against CIFS or NFS mounts.
+Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD).
+Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
 .. topic:: Default value
 

@@ -4,13 +4,13 @@
 Agentless monitoring
 ======================
 
-Agentless monitoring allows you to monitorize devices or systems without having an agent installed, through ssh. Systems as: routers, firewalls, switches and linux/bsd systems
+Agentless monitoring allows you to monitor devices or systems with no agent using SSH, such as: routers, firewalls, switches and linux/bsd systems.
 
-Agentless monitoring lets users who have restrictions on software being installed on systems meet security and compliance needs.
+Agentless monitoring allows users who have software installation restriction meet security and compliance requirements.
 
-It can alert once checksum changes or doing diffs, and showing what exactly changed.
+Alerts will be triggered when the checksum on the output changes and will show either the checksum or the exact diff output of the change.
 
-Agentless monitoring is configured in :ref:`ossec.conf <reference_ossec_conf>`, in the section :ref:`Agentless <reference_ossec_agentless>`.
+Agentless monitoring is configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the section :ref:`Agentless <reference_ossec_agentless>`.
 
 .. topic:: Contents
 
@@ -27,47 +27,44 @@ How it works
 1. Connection
 ^^^^^^^^^^^^^
 
-First of all, you need to enable agentless monitoring:
+First of all, agentless monitoring must be enabled:
 
 .. code-block:: console
 
   /var/ossec/bin/ossec-control enable agentless
 
-In order to connect our server with the host using SSH authentication, we should use the script: ``register_host.sh``, located in: ``/var/ossec/agentless/``
-This script has two options: ``list``  and ``add``.
+In order to connect the manager to the device using SSH authentication, the following script should be used: ``register_host.sh``, which is located in: ``/var/ossec/agentless/``  This script has two options: ``list``  and ``add``.
 
-Using the ``list`` option, we will get all the available host already added.
+Using the ``list`` option will list all hosts already included.
 
 .. code-block:: console
 
   /var/ossec/agentless/register_host.sh list
 
-The option ``add`` is used to connect the host to the server. If instead of a password, you want to use a public key authentication, you have to use: ``NOPASS`` as
-the password when you are adding the new host. For Cisco devices such as routers or firewalls for example, you should add the parameter: ``enablepass`` to enable the password.
+Using the ``add`` option will specify a new device to be added to the manager. ``NOPASS`` may be entered as the password to use public key authentication rather than using a password.  For Cisco devices, such as routers or firewalls, ``enablepass`` should be used to specify the enable password.
 
 .. code-block:: console
 
-  /var/ossec/agentless/register_host.sh add root@example_adress.com example_password [enablepass]
+  /var/ossec/agentless/register_host.sh add root@example_address.com example_password [enablepass]
 
-If you want to use a public key authentication you can use the below command:
+Public key authentication can be used with the following command:
 
 .. code-block:: console
 
   sudo -u ossec ssh-keygen
 
-Once it is created, you have to copy the public key in the remote host.
+Once created, the public key must be copied into the remote device.
 
 2. Monitoring
 ^^^^^^^^^^^^^
 
-After add our hosts in the system, we need to configure the server to monitor them. There are more configuration details, about how configure ``ossec.conf``, in the :ref:`agentless <reference_ossec_agentless>` section.
+After devices have been added to the list, the manager must be configured to monitor them. To view additional configuration options for the ``ossec.conf`` file, please refer to :ref:`agentless <reference_ossec_agentless>`.
 
-There are 4  different agentless types.
+The four types of agentless checks.
 
-Integrity check BSD
+BSD Integrity Check
 ~~~~~~~~~~~~~~~~~~~
-For BSD systems, it's possible to set a list of directories in the configuration section. Wazuh will do the integrity check inside the remote box. You need to configure the ``type`` option to ``ssh_integrity_check_bsd``
-
+For BSD systems, set the ``type`` as ``ssh_integrity_check_bsd`` as referenced below.  A space-separated list of directories may be referenced in the configuration section using the arguments tag.  Using this configuration, Wazuh will do an integrity check on the remote box. 
 ::
 
   <agentless>
@@ -78,9 +75,9 @@ For BSD systems, it's possible to set a list of directories in the configuration
     <arguments>/bin /var/</arguments>
   </agentless>
 
-Integrity check Linux
+Linux Integrity Check
 ~~~~~~~~~~~~~~~~~~~~~
-For linux systems, it's possible to set a list of directories in the configuration and Wazuh will do the integrity check inside the remote box. This option is for linux based systems. You need to configure the ``type`` option to ``ssh_integrity_check_linux``
+For Linux systems, set the ``type`` as ``ssh_integrity_check_linux`` as referenced below.  A space-separated list of directories may be referenced in the configuration section using the arguments tag.  Using this configuration, Wazuh will do an integrity check on the remote box.
 
 ::
 
@@ -94,7 +91,7 @@ For linux systems, it's possible to set a list of directories in the configurati
 
 Generic Diff
 ~~~~~~~~~~~~
-You can configure a set of commands to run on the remote device. Wazuh will alert you if the output of those commands changed. You need to configure the ``type`` option to ``ssh_generic_diff``
+A set of commands can also be configured to run on a remote device. Wazuh will alert you if the output of those commands changes. In order to use this option, set ``type`` as ``ssh_generic_diff``, as shown below.
 
 ::
 
@@ -108,12 +105,12 @@ You can configure a set of commands to run on the remote device. Wazuh will aler
 
 .. note::
 
-  To use ``su`` in a command as an argument, you have to set: ``use_su`` before the hostname. In the example before will be: host>use_su root@example_adress.com</host>
+  To use ``su`` in a command as an argument, ``use_su`` must be set before the hostname. In the previous example, this would appear as: <host>use_su root@example_address.com</host>
 
 
 Pix config
 ~~~~~~~~~~
-This option will alert if a Cisco PIX/router configuration changes. You need to configure the ``type`` option to ``ssh_pixconfig_diff``
+This option will alert if a Cisco PIX/router configuration changes. Set the ``type`` to ``ssh_pixconfig_diff``, as shown below.
 
 ::
 
@@ -127,16 +124,15 @@ This option will alert if a Cisco PIX/router configuration changes. You need to 
 3. Checking the setup
 ^^^^^^^^^^^^^^^^^^^^^
 
-Finally we should ensure that we have installed in our server the ``expect`` library which is necessary.
+Finally,the ``expect`` package must be present on the manager for this feature to work. 
 
-After installing expect library we should restart Wazuh and
-in the ``/var/ossec/logs/ossec.log`` we could see:
+When the ``expect`` package is present and Wazuh is restarted, the following is shown in the ``/var/ossec/logs/ossec.log`` file:
 
 .. code-block:: xml
 
   ossec-agentlessd: INFO: Test passed for 'ssh_integrity_check_linux'.
 
-And also, when Wazuh connect with the remote host, we could see:
+When Wazuh has connected to the remote device, the following will be shown in the same log file:
 
 .. code-block:: xml
 
@@ -145,7 +141,9 @@ And also, when Wazuh connect with the remote host, we could see:
 
 4. Alert
 ^^^^^^^^
-Once every is configured if something changes on the monitorized directories, commands or Cisco configurations, Wazuh will alert about those changes:
+Once configured as above, Wazuh alerts will be triggered when changes occur within the directories, configuration or outputs based on the above examples:
+
+Examples of alerts are as follows:
 
 Integrity check BSD/Linux example alert::
 

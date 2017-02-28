@@ -4,7 +4,7 @@
 ossec-logcollector
 ==================
 
-The ``ossec-logcollector`` daemon monitors configured files and commands for new log messages.
+The ossec-logcollector program monitors configured files and commands for new log messages.
 
 
 +-------------------------+---------------------------------+
@@ -27,7 +27,7 @@ The ``ossec-logcollector`` daemon monitors configured files and commands for new
 ``-c``
 ------
 
-Run ossec-logcollector using ``<config>`` as the configuration file.
+Run using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
@@ -40,13 +40,12 @@ Run ossec-logcollector using ``<config>`` as the configuration file.
 ``-d``
 ------
 
-
-Execute ``ossec-logcollector`` in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ``ossec-logcollector`` in the foreground.
+Run in the foreground.
 
 ``-h``
 ------
@@ -62,4 +61,4 @@ Test configuration.
 ``-V``
 ------
 
-Version and license information.
+Diplay version and license information.

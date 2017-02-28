@@ -4,12 +4,12 @@ Faq
 ===
 
 #. `Can I monitor commands on Linux or Windows?`_
-#. `Which are the possibilities of this capability?`_
+#. `What are the possibilities of this capability?`_
 
 Can I monitor commands on Linux or Windows?
 -----------------------------------------------
-You can monitor the command output on Linux and Windows OS.
+You can monitor command output on both Linux and Windows systems.
 
-Which are the possibilities of this capability?
+What are the possibilities of this capability?
 ---------------------------------------------------
-Some examples: Disk space utilization, detection if an important process is running or not, loada average...
+Some examples: Disk space utilization, detection if an important process is running or not, load average, change in network listeners...

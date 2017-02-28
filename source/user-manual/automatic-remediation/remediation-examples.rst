@@ -13,6 +13,8 @@ Examples
 Windows automatic remediation
 -----------------------------
 
+In this example, a command with the name *"win_rout-null"* is configured to use the *"route-null.cmd"* script using the data element *"srcip"*.  The **Active response** is configured to initiate the *"win_rout-null"* command on the local host when the  rule has a higher alert level than 7.  This is a *Stateful* response with a timeout set at 900 seconds.
+ 
 Command::
 
   <command>
@@ -21,8 +23,6 @@ Command::
     <expect>srcip</expect>
     <timeout_allowed>yes</timeout_allowed>
   </command>
-
-We allow the command to use timeout option.
 
 Active response::
 
@@ -36,7 +36,7 @@ Active response::
 Linux automatic remediation
 ---------------------------
 
-For this example we are going to use the ``restart-ossec.sh`` script.
+In this example, a command with the name *"restart-ossec"* is configured to use the *"restart-ossec.sh"* script with no data element.  The **Active response** is configured to initiate the *"restart-ossec"* command on the local host when the rule with ID 10005 fires.  This is a *Stateless* response as no timeout parameter is defined.
 
 Command::
 
@@ -54,12 +54,10 @@ Active response::
     <rules_id>10005</rules_id>
   </active-response>
 
-Active response will be triggered by rule with id 10005.
-
 Block an IP with PF
 -------------------
 
-In this example we are going to use the default script ``pf.sh``
+In this example, a command with the name *"pf-block"* is configured to use the *"pf.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"pf-block"* command on agent *"001"* when a rule in either the *"authentificaiton_failed"* or *"authentification_failures"* rule group fires.  This is a *Stateless* response as no timeout parameter is defined.
 
 Command::
 
@@ -81,7 +79,9 @@ Active response::
 Add an IP to the iptables deny list
 -----------------------------------
 
-Using the default ``firewall-drop.sh``, configure the command and the active response:
+In this example, a command with the name *"firewall-drop"* is configured to use the *"firewall-drop.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"firewall-block"* command on all systems when a rule in either the *"authentificaiton_failed"* or *"authentification_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The repeated offenders parameter increases the timeout period for each subsequent offence by a specific IP address.  
+
+**Note: This parameter is specified in minutes rather than seconds.** 
 
 Command::
 
@@ -103,10 +103,9 @@ Active response::
 
 Stateful command
 ----------------
+The action of a stateful response continues for a specified period of time. 
 
-Use the ``timeout_allowed`` option. More info: :ref:`command <reference_ossec_commands>`, his option will remove the action after a configured time.
-
-We are going to use a defined script. ``host-deny.sh``
+In this example, a command with the name *"host-deny"* is configured to use the *"host-deny.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"host-deny"* command on the local host when a rule with a higher alert level than 6 is fired.  
 
 Command::
 
@@ -126,14 +125,16 @@ Active response::
     <timeout>600</timeout>
   </active-response>
 
-Active response triggered by alerts higher than 7 and action removed after 600 seconds.
+More info: :ref:`command <reference_ossec_commands>`
 
 Stateless command
 -----------------
 
-The action will not be removed. Example script called "mail-test.sh"
+The action of a stateless command is a one-time action that will not be undone. 
 
-Define the command::
+In this example, a command with the name *"mail-test"* is configured to use the *"mail-test.sh"* script with no data element.  The **Active response** is configured to initiate the *"mail-test"* command on the server when the rule with ID 1002 fires.  
+
+Command::
 
   <command>
     <name>mail-test</name>
@@ -142,9 +143,7 @@ Define the command::
     <expect />
   </command>
 
-Timeout_allowed configured to "no", so the action will not be removed.
-
-Define the active response::
+Active response::
 
   <active-response>
       <command>mail-test</command>

@@ -7,9 +7,9 @@ Binaries
 +--------------------------+--------------------------------------------+-----------------------------+
 | Sections                 | Descriptions                               | Processes                   |
 +==========================+============================================+=============================+
-| :ref:`Daemons <daemons>` | List of processes which run in background  || :ref:`ossec-agentd`        |
+| :ref:`Daemons <daemons>` | List of processes which run in the         || :ref:`ossec-agentd`        |
 |                          |                                            || :ref:`ossec-agentlessd`    |
-|                          |                                            || :ref:`ossec-analysisd`     |
+|                          | background                                 || :ref:`ossec-analysisd`     |
 |                          |                                            || :ref:`ossec-authd`         |
 |                          |                                            || :ref:`ossec-csyslogd`      |
 |                          |                                            || :ref:`ossec-dbd`           |
@@ -22,9 +22,9 @@ Binaries
 |                          |                                            || :ref:`ossec-syscheckd`     |
 |                          |                                            || :ref:`wazuh-modulesd`      |
 +--------------------------+--------------------------------------------+-----------------------------+
-| :ref:`Tools <tools>`     | List of programs that can be run when      || :ref:`ossec-logtest`       |
+| :ref:`Tools <tools>`     | Command-line tools for controlling the     || :ref:`ossec-logtest`       |
 |                          |                                            || :ref:`ossec-control`       |
-|                          | an user need it                            || :ref:`agent-auth`          |
+|                          | manager and agents                         || :ref:`agent-auth`          |
 |                          |                                            || :ref:`agent_control`       |
 |                          |                                            || :ref:`manage_agents`       |
 |                          |                                            || :ref:`ossec-logtest`       |

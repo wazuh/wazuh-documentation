@@ -14,13 +14,13 @@ Global configuration generally applies to features that affect the system as a w
 +------------------------+-----------------------------------------------------------------------+
 | Options                | Allowed values                                                        |
 +========================+=======================================================================+
-| `email_notification`_  | yes, no                                                               |
+| `email_notification`_  | yes or no                                                             |
 +------------------------+-----------------------------------------------------------------------+
-| `email_to`_            | Any valid e-mail address                                              |
+| `email_to`_            | Any valid email address                                               |
 +------------------------+-----------------------------------------------------------------------+
-| `email_from`_          | Any valid e-mail address                                              |
+| `email_from`_          | Any valid email address                                               |
 +------------------------+-----------------------------------------------------------------------+
-| `email_reply_to`_      | Any valid e-mail address                                              |
+| `email_reply_to`_      | Any valid email address                                               |
 +------------------------+-----------------------------------------------------------------------+
 | `smtp_server`_         | Any valid hostname or IP Address                                      |
 +------------------------+-----------------------------------------------------------------------+
@@ -32,7 +32,7 @@ Global configuration generally applies to features that affect the system as a w
 +------------------------+-----------------------------------------------------------------------+
 | `stats`_               | Any level from 0 to 16                                                |
 +------------------------+-----------------------------------------------------------------------+
-| `logall`_              | yes, no                                                               |
+| `logall`_              | yes or no                                                             |
 +------------------------+-----------------------------------------------------------------------+
 | `memory_size`_         | Any size from 16 to 5096                                              |
 +------------------------+-----------------------------------------------------------------------+
@@ -40,7 +40,7 @@ Global configuration generally applies to features that affect the system as a w
 +------------------------+-----------------------------------------------------------------------+
 | `host_information`_    | Any level from 0 to 16                                                |
 +------------------------+-----------------------------------------------------------------------+
-| `jsonout_output`_      | yes, no                                                               |
+| `jsonout_output`_      | yes or no                                                             |
 +------------------------+-----------------------------------------------------------------------+
 | `prelude_output`_      | yes, no                                                               |
 +------------------------+-----------------------------------------------------------------------+
@@ -48,7 +48,7 @@ Global configuration generally applies to features that affect the system as a w
 +------------------------+-----------------------------------------------------------------------+
 | `picviz_socket`_       | File and path that ossec will create and feed events to               |
 +------------------------+-----------------------------------------------------------------------+
-| `zeromq_output`_       | yes, no                                                               |
+| `zeromq_output`_       | yes or no                                                             |
 +------------------------+-----------------------------------------------------------------------+
 | `zeromq_uri`_          | Format is defined by the ZeroMQ project                               |
 +------------------------+-----------------------------------------------------------------------+
@@ -60,7 +60,7 @@ Global configuration generally applies to features that affect the system as a w
 ``email_notification``
 ----------------------
 
-Enable or disable e-mail alerting.
+This enable or disables email alerting.
 
 .. topic:: Default value
 
@@ -76,7 +76,7 @@ Enable or disable e-mail alerting.
 ``email_to``
 ------------
 
-E-mail recipient of the alerts.
+This specifies the email recipient for alerts.
 
 .. note::
 
@@ -88,12 +88,13 @@ E-mail recipient of the alerts.
 
 .. topic:: Allowed values
 
-  Any valid e-mail address
+  Any single valid email address is allowed.  Use this section repeatedly for multiple email addresses, once per addresses.
+
 
 ``email_from``
 --------------
 
-E-mail “source” of the alerts.
+This controls the “source” address in email alerts.
 
 .. topic:: Default value
 
@@ -101,13 +102,13 @@ E-mail “source” of the alerts.
 
 .. topic:: Allowed values
 
-  Any valid e-mail address
+  Any valid email address
 
 
 ``email_reply_to``
 ------------------
 
-E-mail “Reply-to” of the alerts.
+This controls the “reply-to” address in email alerts.
 
 .. topic:: Default value
 
@@ -115,12 +116,13 @@ E-mail “Reply-to” of the alerts.
 
 .. topic:: Allowed values
 
-  Any valid e-mail address
+  Any valid email address
+
 
 ``smtp_server``
 ---------------
 
-SMTP server.
+This controls what SMTP server to forward email alerts to for delivery.
 
 .. topic:: Default value
 
@@ -128,17 +130,18 @@ SMTP server.
 
 .. topic:: Allowed values
 
-  Any valid hostname or IP Address can be used.
+  Any valid hostname or IP address can be used.
+
 
 ``email_maxperhour``
 --------------------
 
-Specifies the maximum number of e-mails to be sent per hour. All emails in excess of this setting will be queued for later distribution.
+This specifies the maximum number of emails to be sent per hour. All emails in excess of this setting will be queued for later distribution.
 
 
 .. note::
 
-  At the end of the hour any queued emails will be sent together in one email. This is true whether the mail grouping is enabled or disabled.
+  At the end of the hour any queued emails will be sent together in one email. This is true whether mail grouping is enabled or disabled.
 
 .. topic:: Default value
 
@@ -148,13 +151,13 @@ Specifies the maximum number of e-mails to be sent per hour. All emails in exces
 
 .. topic:: Allowed values
 
-  Can be used any number from 1 to 9999
+  Any number from 1 to 9999
 
 
 ``email_idsname``
 -----------------
 
-The name settled will be added to the email headers with the specified value.
+The name will be added to the email headers with the specified value.
 
 .. topic:: Default value
 
@@ -164,10 +167,11 @@ The name settled will be added to the email headers with the specified value.
 
   Any name
 
+
 ``custom_alert_output``
 -----------------------
 
-Specifies the format of alerts written to the logfile.
+This specifies the format of alerts written to alerts.log.
 
 .. topic:: Default value
 
@@ -208,7 +212,7 @@ Specifies the format of alerts written to the logfile.
 ``stats``
 ---------
 
-Alerting level for the events generated by the statistical analysis.
+This controls the severity level assigned to events generated by statistical analysis.
 
 .. topic:: Default value
 
@@ -218,14 +222,15 @@ Alerting level for the events generated by the statistical analysis.
 
 .. topic:: Allowed values
 
-  Can be used any level from 1 to 16
+  This can be any level from 1 to 16.
 
 .. _reference_ossec_global_logall:
+
 
 ``logall``
 ----------
 
-States if we should store all the events received.
+This controls whether or not to store all events received even when they do not trip a rule.  This results in output to /var/ossec/logs/archives/archives.log
 
 .. topic:: Default value
 
@@ -235,27 +240,29 @@ States if we should store all the events received.
 
 .. topic:: Allowed values
 
-  The options allowed are: yes, no
+  The options allowed are **yes** or **no**.
+
 
 ``memory_size``
 ---------------
 
-Sets the memory size for the event correlation.
+This sets the memory size for the event correlation engine.
 
 .. topic:: Default value
 
   .. code-block:: xml
 
-    <memory_size>1024</emory_size>
+    <memory_size>1024</memory_size>
 
 .. topic:: Allowed values
 
   Can be used any size from 16 to 5096
 
+
 ``white_list``
 --------------
 
-List of IP addresses that should never be blocked by the active response(one per element).
+This is a list of IP addresses that should never be blocked with active response.  Repeat this option for multiple IPs, one IP per line.
 This option is only valid in server and local installs.
 
 .. topic:: Default value
@@ -264,12 +271,13 @@ This option is only valid in server and local installs.
 
 .. topic:: Allowed values
 
-  Any IP address or netblock is accepted. It is possible indicate more of one of them.
+  Any IP address or CIDR netblock is accepted. 
+
 
 ``host_information``
 --------------------
 
-Alerting level for the events generated by the host change monitor.
+The controls the severity level for events generated by the host change monitor.
 
 
 .. topic:: Default value
@@ -282,10 +290,11 @@ Alerting level for the events generated by the host change monitor.
 
   Can be used any level from 0 to 16
 
+
 ``jsonout_output``
 ------------------
 
-Enable or disable writing of json-formated alerts at ``/var/ossec/logs/alerts/alerts.json``
+This enables/disables writing of JSON-formated alerts to ``/var/ossec/logs/alerts/alerts.json``.  This will include the same events that would be sent to alerts.log, but in JSON format.
 
 .. topic:: Default value
 
@@ -295,12 +304,13 @@ Enable or disable writing of json-formated alerts at ``/var/ossec/logs/alerts/al
 
 .. topic:: Allowed values
 
-  The options allowed are: yes, no
+  The options allowed are **yes** or **no**.
+
 
 ``prelude_output``
 ------------------
 
-Enables or disables prelude output.
+Enables or disables Prelude output.
 
 .. topic:: Default value
 
@@ -310,12 +320,13 @@ Enables or disables prelude output.
 
 .. topic:: Allowed values
 
-  The options allowed are: yes, no
+  The options allowed are **yes** or **no**.
+
 
 ``picviz_output``
 -----------------
 
-Enable picviz output.
+Enable PicViz output.
 
 .. topic:: Default value
 
@@ -327,10 +338,11 @@ Enable picviz output.
 
     <picviz_output>yes</picviz_output>
 
+
 ``picviz_socket``
 -----------------
 
-The full path of the socket that ossec will write alerts/events to. This will then be read by picviz for processing.
+This is the full path of the socket that Wazuh will write alerts/events to for PicViz to read.
 
 
 .. topic:: Default value
@@ -339,12 +351,13 @@ The full path of the socket that ossec will write alerts/events to. This will th
 
 .. topic:: Allowed values
 
-  File and path that ossec will create and feed events to
+  file and path that Wazuh will create and feed events to
+
 
 ``zeromq_output``
 -----------------
 
-Enable ZeroMQ Output
+Enable ZeroMQ output.
 
 
 .. topic:: Default value
@@ -353,21 +366,21 @@ Enable ZeroMQ Output
 
 .. topic:: Allowed values
 
-  The options allowed are: yes, no
+  The options allowed are **yes** or **no**.
 
 
 ``zeromq_uri``
 --------------
 
-This is zeromq URI that the publisher socket will bind to.
+This is the ZeroMQ URI that the publisher socket will bind to.
 
-This will listen for zeromq subscribers on ip address 127.0.0.1:11111
+For example, this will listen for ZeroMQ subscribers on IP address 127.0.0.1:11111.
 
 .. code-block:: xml
 
   <zeromq_uri>tcp://localhost:11111/</zeromq_uri>
 
-This will listen for zeromq subscribers on the ip address assiged to eth0 port 21212
+This will listen on port 21212 for ZeroMQ subscribers, binding to the IP address assiged to eth0.
 
 .. code-block:: xml
 
@@ -386,11 +399,12 @@ This will listen for zeromq on the Unix Domain socket /alerts-zmq.
 .. topic:: Allowed values
 
   This URI format is defined by the ZeroMQ project.
+  
 
 ``geoip_db_path``
 -----------------
 
-The full path to the GeoIP IPv4 database file location.
+This is the full path to the MaxMind GeoIP IPv4 database file.
 
 .. topic:: Default value
 

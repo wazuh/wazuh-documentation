@@ -4,7 +4,7 @@
 ossec-analysisd
 ===============
 
-It recveives the log messages and compares them to the rules. It will create alerts when a log message matches an applicable rule.
+The ossec-analysisd program receives the log messages and compares them to the rules.  It then creates an alert when a log message matches an applicable rule.
 
 +-------------------------------+---------------------------------+
 | Options                       | Descriptions                    |
@@ -23,7 +23,7 @@ It recveives the log messages and compares them to the rules. It will create ale
 +-------------------------------+---------------------------------+
 | `-t`_                         | Test configuration              |
 +-------------------------------+---------------------------------+
-| `-u`_                         | Run as an user                  |
+| `-u`_                         | Run as a user                   |
 +-------------------------------+---------------------------------+
 | `-V`                          | Version and license information |
 +-------------------------------+---------------------------------+
@@ -55,17 +55,17 @@ Chroot to ``<dir>``.
 ``-d``
 ------
 
-Execute ossec-analysisd in debug mode. This can be used more than once to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ossec-agentlessd in the foreground.
+Run in the foreground.
 
 ``-g``
 ------
 
-Run as group.
+Run as a group.
 
 .. topic:: Arguments
 
@@ -75,7 +75,7 @@ Run as group.
 ``-h``
 ------
 
-Display a help message.
+Display the help message.
 
 ``-t``
 ------
@@ -85,7 +85,7 @@ Test the configuration.
 ``-u``
 ------
 
-Run as user.
+Run as a user.
 
 ``-V``
 ------

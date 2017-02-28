@@ -3,14 +3,12 @@
 Automatic remediation
 ==========================
 
-A remediation solution can perform actions or alerts configurations to prevent the access to the service or network where the threat came from.
-This automated remediation is called **Active response** in Wazuh.
+Automatic remediation performs various countermeasures to address active threats such as blocking access to an agent from the threat source.  This automated remediation is called **Active response** in Wazuh.
 
-**Active response** allows to execute a script in response to certain triggers as specific alerts, alert levels or rule groups.
-Any number of responses can be attached to any of the trigger, but it is important to be careful because a bad implementation of the rules and responses, can be dangerous.
-An attacker coud use the rules against you.
+**Active response** executes a script in response to being triggered by a specific alert based on alert level or rule group.
+Any number of scripts can be initiated in response to a trigger, however these responses should be carefully considered as poor implementation of rules and responses could increase the vulnerability of the system. 
 
-Active response is configured inside the :ref:`ossec.conf <reference_ossec_conf>`, with the :ref:`Active Response <reference_ossec_active_response>` and :ref:`Command <reference_ossec_commands>` sections.
+**Active response** is configured in :ref:`ossec.conf <reference_ossec_conf>`, within the :ref:`Active Response <reference_ossec_active_response>` and :ref:`Command <reference_ossec_commands>` sections.
 
 .. topic:: Contents
 
@@ -23,26 +21,26 @@ Active response is configured inside the :ref:`ossec.conf <reference_ossec_conf>
 How it works
 ------------
 
-1. When is triggered?
-^^^^^^^^^^^^^^^^^^^^^
-Automatic remediation can be triggered by specific alerts, alert levels or rule groups. This is triggered as configured on the ossec.conf file, where we bind a script to execute with a certain rule/group.
+1. When is an **Active response** triggered?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+An **Active response** can be triggered by a specific alert, alert level or rule group as configured in the ossec.conf file, where a script is configured to execute with a certain rule/group.  **Active responses** are either stateful or stateless responses.  Stateful responses will undo the action after a specified period of time while stateless responses are one-time actions. 
 
-2. Where are they triggered?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The scripts are located at ``/var/ossec/active-response/bin``. This scripts runs on the agent that triggered the alert, on the server, on a specific agent or everywhere.
+2. Where are **Active response** actions executed?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Active responses** specify where their associated commanda will be executed: on the agent that triggered the alert, on the manager, on another specified agent, or on all agents plus the manager.
 
-3. Active Response Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3. **Active response** configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We can create triggers to remove the action after a certain time of time or actions that will not be removed. (Stateful vs Stateless commands). Active Response is configured on :ref:`ossec.conf <reference_ossec_conf>`, we need to follow the next steps:
+An **Active response** is configured in :ref:`ossec.conf <reference_ossec_conf>` as follows:
 
 1. Create a command
 
-	Scripts need a way to be referenced by the triggers to perform a particular active response. A **command** needs to be defined for this.
-	Any custom script that can receive parameters from the command line can be used for Active Response.
+	In order to configure an **Active response**, a **command** must be defined that will initiate a certain script in response to a trigger. 
+	
+	To configure the **Active response**, define the name of a **command** using the pattern below and then reference the script to be initiated. Next, define what data element(s) will be passed to the script. 
 
-	.. note::
-		More information about all the options you can define for the :ref:`command <reference_ossec_commands>`
+	Custom scripts that have the ability to receive parameters from the command line may also be used for an **Active response**.
 
 	Example::
 
@@ -53,14 +51,14 @@ We can create triggers to remove the action after a certain time of time or acti
 		  <timeout_allowed>yes</timeout_allowed>
 		</command>
 
-	In this example, we are defining a command called ``host-deny``, that use the ``host-deny.sh`` script, that expect ``srcip`` as input, and It's configured with timeout allowed.
-
-2. Create an active response
-
-	Once we have a command created, we need to bind the command to one or more rules, a specific severity level or source. In the active response definition,it is declared when and where a command is going to be executed, meaning on which environment (Agent, Manager, Local, or everywhere).
+	In this example, the command is called ``host-deny`` which initiates the ``host-deny.sh`` script.  The data element is defined as ``srcip`` and this command is configured with a specified period of time, making it a stateful response.
 
 	.. note::
-		More information about all the options you can define for the :ref:`Active response <reference_ossec_active_response>`
+		More information about options for creating a :ref:`command <reference_ossec_commands>`
+
+2. Define the **Active response**
+
+	The **Active response** configuration defines when and where a command is going to be executed. A command will be triggered when a specific rule with a specific id, severity level or source matches the **Active response** criteria.  This configuration will further define where the action of the command will be initiated, meaning in which environment (Agent, Manager, Local, or everywhere).
 
 	Example::
 
@@ -71,29 +69,31 @@ We can create triggers to remove the action after a certain time of time or acti
 		  <timeout>600</timeout>
 		</active‐response>
 
-	Here, the active response is going to use the command that was defined in the previous step. It will afect only to the localhost, for triggered rules with level bigger than 6 and that after 600 seconds will be removed.
+	In this example, the **Active response** is configured to execute the command that was defined in the previous step. The where of the action is defined as the local host and the when is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
+
+	.. note::
+		More information about all the options you can define for the :ref:`Active response <reference_ossec_active_response>`
 
 
+You can view the **Active response** log at ``/var/ossec/logs/active-response.log``.
 
-Active response has its own log ``/var/ossec/logs/active-response.log``.
+4. Default Active response scripts
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-4. Defaul Active response scripts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Wazuh already inclyde some predefined active response configured, using included scripts. Those scripts are:
+Wazuh is preconfigured with the following scripts:
 
 +--------------------------+---------------------------------------------------------------+
 | Script name              |                          Description                          |
 +==========================+===============================================================+
-| dissable-account.sh      | dissables an account by setting ``passwd-l``                  |
+| dissable-account.sh      | disables an account by setting ``passwd-l``                   |
 +--------------------------+---------------------------------------------------------------+
 | firewall-drop.sh         | adds an IP to the iptables deny list                          |
 +--------------------------+---------------------------------------------------------------+
-| firewalld-drop.sh        | adds an IP to  rewalld drop list                              |
+| firewalld-drop.sh        | adds an IP to firewalld drop list                             |
 +--------------------------+---------------------------------------------------------------+
 | host-deny.sh             | adds an IP to the /etc/hosts.deny file                        |
 +--------------------------+---------------------------------------------------------------+
-| ip-customblock.sh        | Custom OSSEC block, easily modi cable for custom response     |
+| ip-customblock.sh        | Custom OSSEC block, easily modifiable for custom response     |
 +--------------------------+---------------------------------------------------------------+
 | ipfw_mac.sh              | Firewall-drop response script created for the Mac OS          |
 +--------------------------+---------------------------------------------------------------+

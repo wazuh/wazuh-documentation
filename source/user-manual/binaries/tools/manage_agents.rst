@@ -4,10 +4,7 @@
 manage_agents
 =============
 
-``manage_agents`` is available in two versions:
-
-- a version for Wazuh server installations
-- a version for Wazuh agent installations
+The manage_agents program is available in both a version for server and agent installations.
 
 The purpose of manage_agents is to provide an easy-to-use interface to handle authentication
 keys for Wazuh agents. These authentication keys are required for secure (encrypted and
@@ -16,13 +13,13 @@ authenticated) communication between the Wazuh server and its affiliated agent i
 +---------+---------------------------------------+
 | Options | Descriptions                          |
 +=========+=======================================+
-| `-d`_   | Force the agent registration          |
+| `-d`_   | Force agent registration              |
 +---------+---------------------------------------+
-| `-e`_   | Extracts key for an agent             |
+| `-e`_   | Extract key for an agent              |
 +---------+---------------------------------------+
-| `-f`_   | Generate clients in bluck from a file |
+| `-f`_   | Generate clients in bulk from a file  |
 +---------+---------------------------------------+
-| `-h`_   | Display the help message              |
+| `-h`_   | Display help message                  |
 +---------+---------------------------------------+
 | `-i`_   | Import authentication key             |
 +---------+---------------------------------------+
@@ -35,8 +32,7 @@ authenticated) communication between the Wazuh server and its affiliated agent i
 
 ``-d``
 ------
-
-We have created a way to force the agent registration, option ``[-d <seconds>]`` will remove the old agent if it is disconnected since *<seconds>* value. Using ``0`` value will replace the agent in any case.
+Forces agent registration.  This option will remove the old agent if it is disconnected longer than the *<seconds>* value. Using ``0`` as the value will force the replacement of the agent without respect to disconnection time.
 
 .. topic:: Arguments
 
@@ -45,7 +41,7 @@ We have created a way to force the agent registration, option ``[-d <seconds>]``
 ``-e``
 ------
 
-Extracts key for an agent.
+Extract key for an agent.
 
 .. topic:: Arguments
 
@@ -58,8 +54,7 @@ Extracts key for an agent.
 ``-f``
 ------
 
-Generate clients in bulk from ``<file>``. The file is a comma delimited file containing the IP addresses and agent names to be added.
-This file should be located within /var/ossec, and referenced by its path relative to /var/ossec.
+Generate clients in bulk from the specified file. The file is a comma-delimited file containing the IP addresses and agent names to be added.  This file should be located within /var/ossec and referenced by its path relative to /var/ossec.
 
 .. topic:: Arguments
 
@@ -77,7 +72,7 @@ Display the help message.
 ``-i``
 ------
 
-Import authentication key.
+Import the authentication key.
 
 .. topic:: Arguments
 
@@ -108,4 +103,4 @@ Remove an agent.
 ``-V``
 ------
 
-Display Wazuh Version.
+Display the version and license information.

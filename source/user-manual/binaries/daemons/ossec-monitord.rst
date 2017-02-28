@@ -4,7 +4,7 @@
 ossec-monitord
 ==============
 
-The ``ossec-monitord`` daemon monitors agent connectivity and compress daily log files.
+The ossec-monitord program monitors agent connectivity and compresses daily log files.
 
 
 +-------------------------------+---------------------------------+
@@ -24,7 +24,7 @@ The ``ossec-monitord`` daemon monitors agent connectivity and compress daily log
 +-------------------------------+---------------------------------+
 | `-t`_                         | Test configuration              |
 +-------------------------------+---------------------------------+
-| `-u`_                         | Run as an user                  |
+| `-u`_                         | Run as a user                   |
 +-------------------------------+---------------------------------+
 | `-V`_                         | Version and license information |
 +-------------------------------+---------------------------------+
@@ -33,7 +33,7 @@ The ``ossec-monitord`` daemon monitors agent connectivity and compress daily log
 ``-c``
 ------
 
-Run ``ossec-monitord`` using ``<config>`` as the configuration file.
+Run using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
@@ -63,18 +63,18 @@ Chroot to ``<dir>``.
 ``-d``
 ------
 
-Execute ``ossec-monitord`` in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ``ossec-monitord`` in the foreground.
+Run in the foreground.
 
 
 ``-g``
 ------
 
-Run ``ossec-monitord`` as ``<group>``.
+Run as a group.
 
 .. topic:: Arguments
 
@@ -94,7 +94,7 @@ Test configuration.
 ``-u``
 ------
 
-Run ossec-monitord as ``<user>``.
+Run as a user.
 
 .. topic:: Arguments
 
@@ -108,4 +108,4 @@ Run ossec-monitord as ``<user>``.
 ``-V``
 ------
 
-Version and license information.
+Display version and license information.

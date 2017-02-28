@@ -4,14 +4,16 @@
 Active response
 ===============
 
-There are two parts to an active response configuration. The first is the `Commands <commands.html>`_  section. This details the command to be run, and the options it will use.
+Active responses each run a command, often some kind of countermeasure like a firewall block, when a specific rule or rule type fires and certain other criteria are met.  Stateful commands undo their actions after a configurable period of time.  Stateless commands are one-time actions that are not undone (i.e., a command to restart the agent when a change to agent.conf is detected).
 
-The second is the `Active response <active-response.html>`_ section. This section defines when the command will be run.
+There are two parts to an active response configuration. The first is the `command <commands.html>`_  section. This defines the command to be run, and the options it will use.
+
+The second is the `Active response <active-response.html>`_ section. This section defines the criteria for when a command will be run and the length of time until the command will be undone if it is stateful.
 
 .. topic:: Sections
 
     .. toctree::
        :maxdepth: 1
 
-       active-response
        commands
+       active-response

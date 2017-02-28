@@ -3,12 +3,12 @@
 Email report
 ============
 
-It is possible to configure Wazuh to send the alerts through emails also.
+Wazuh may be configured to send alerts through emails as follows:
 
 Configuration
 -------------
 
-To configure the email report, we need to go to the ``ossec.conf`` file. We use the ``report`` option. More information: :ref:`Report <reference_ossec_reports>`
+Configuration of email alerts is done in the ``ossec.conf`` file using the ``report`` option. More information: :ref:`Report <reference_ossec_reports>`
 ::
 
   <ossec_config>
@@ -19,9 +19,9 @@ To configure the email report, we need to go to the ``ossec.conf`` file. We use 
     </reports>
   </ossec_config>
 
-This configuration will send a daily report of all the :ref:`syscheck <manual_file_integrity>` alerts generated.
+The above configuration will send a daily report of all :ref:`syscheck <manual_file_integrity>` alerts.
 
-You can also filter the rules to report by level, source, username, rule id..
+Rules may also be filtered by level, source, username, rule id, etc.
 
 For example:
 ::
@@ -29,9 +29,9 @@ For example:
   <ossec_config>
     <reports>
         <level>10</level>
-        <title>Daily report: Alerts with level bigger than 10</title>
+        <title>Daily report: Alerts with level higher than 10</title>
         <email_to>example@test.com</email_to>
     </reports>
   </ossec_config>
 
-This configuration will send a report with all the rules with level bigger than 10.
+The above configuration will send a report with all rules that fired with a level higher than 10.

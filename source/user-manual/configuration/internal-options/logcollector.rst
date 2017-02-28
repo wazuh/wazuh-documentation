@@ -23,7 +23,7 @@ Logcollector
 ``logcollector.loop_timeout``
 -----------------------------
 
-Logcollector file loop timeout, check every 2 seconds for file changes.
+File polling interval.
 
 
 .. topic:: Default value
@@ -52,7 +52,7 @@ Number of attempts to open a log file.
 ``logcollector.remote_commands``
 --------------------------------
 
-Indicate if Logcollector should accept remote commands from the manager.
+Toggle to enable or disable Logcollector to accept remote commands from the manager.
 
 
 .. topic:: Default value
@@ -84,7 +84,7 @@ Number of readings before checking files.
 ``logcollector.debug``
 ----------------------
 
-Debug options of logcollector in server, local or unix agent installations.
+Debug level (used for local or unix agent installations).
 
 
 .. topic:: Default value
@@ -94,8 +94,8 @@ Debug options of logcollector in server, local or unix agent installations.
 .. topic:: Allowed values
 
 	0
-		No debug
+		No debug output
 	1
-		First level of debug
+		Standard debug output
 	2
-		Full debugging
+		Verbose debug output
