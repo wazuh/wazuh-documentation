@@ -10,7 +10,7 @@ Remote
 
 		<remote>
 
-Configure manager to listen events from the agents.
+Configuration of manager to listen for events from the agents.
 
 +----------------+-----------------------------------------------------------------------+
 | Options        | Allowed values                                                        |
@@ -34,7 +34,7 @@ Configure manager to listen events from the agents.
 ``connection``
 --------------
 
-Specify the type of connection being enabled: secure or using syslog.
+Specifies a type of incoming connection to accept: secure or syslog.
 
 .. topic:: Default value
 
@@ -51,7 +51,7 @@ Specify the type of connection being enabled: secure or using syslog.
 ``port``
 --------
 
-Specifies the port to listen for events.
+Specifies the port to use to listen for events.
 
 .. topic:: Default value
 
@@ -85,11 +85,11 @@ Specifies the protocol to use for syslog events.
 ``allowed-ips``
 ---------------
 
-List of IP addresses that are allowed to send syslog messages to the server (one per element).
+List of IP addresses that are allowed to send syslog messages to the server (one per line).
 
 .. note::
 
-   It is necessary to allow at least one IP address when using the syslog connection type.
+   It is necessary to list at least one IP address when using the syslog connection type.
 
 .. topic:: Default value
 
@@ -103,7 +103,7 @@ List of IP addresses that are allowed to send syslog messages to the server (one
 ``deny-ips``
 ------------
 
-List of IP addresses that are not allowed to send syslog messages to the server (one per element).
+List of IP addresses that are not allowed to send syslog messages to the server (one per line).
 
 .. topic:: Default value
 
@@ -117,7 +117,7 @@ List of IP addresses that are not allowed to send syslog messages to the server 
 ``local_ip``
 ------------
 
-Local ip address to listen for connections.
+Local ip address to use to listen for connections.
 
 .. topic:: Default value
 

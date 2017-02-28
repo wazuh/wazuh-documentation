@@ -5,19 +5,19 @@ Examples
 
 #. `Monitoring accesses to a directory`_
 #. `Monitoring all root actions`_
-#. `Privileges elevation`_
+#. `Privilege escalation`_
 
 Monitoring accesses to a directory
 ----------------------------------
 
-In this example, we are going to monitor every kind of access in the directory */home*: ::
+In this example, we are going to monitor every kind of access under the */home* directory: ::
 
     auditctl -w /home -p w -k audit-wazuh-w
     auditctl -w /home -p a -k audit-wazuh-a
     auditctl -w /home -p r -k audit-wazuh-r
     auditctl -w /home -p x -k audit-wazuh-x
 
-Once we configure the auditctl tool, we get those alerts, confirming new audit rules::
+Now we start getting alerts on account of the new audit rules::
 
   ** Alert 1487891035.24299: - audit,audit_configuration,
   2017 Feb 23 15:03:55 localhost->/var/log/audit/audit.log
@@ -60,7 +60,7 @@ Once we configure the auditctl tool, we get those alerts, confirming new audit r
   audit.res: 1
 
 .. note::
-    It is possible to define the previous rules as an unique rule with *-p warx*, but as we explained in the previous section, each type of key must have its own key.
+    While it would be possible to define the previous rules as one single rule that specifies *-p warx*, we intentionally separate them out so each rule has its own unique **key** value that is important for analysis.
 
 Let's see what happens when we execute the following commands:
 
@@ -300,12 +300,12 @@ Delete file
 Monitoring all root actions
 ------------------------------------------------
 
-We want that all commands run by a user who has admin privileges to be logged. The audit configuration for this is quite simple: ::
+Here we choose to audit all commands run by a user who has admin privileges. The audit configuration for this is quite simple: ::
 
     $ auditctl -a exit,always -F euid=0 -F arch=b64 -S execve -k audit-wazuh-c
     $ auditctl -a exit,always -F euid=0 -F arch=b32 -S execve -k audit-wazuh-c
 
-If root execute, nano for example, the alert looks like::
+If the root user executes nano, the alert will look like this::
 
   ** Alert 1487892032.56406: - audit,audit_command,
   2017 Feb 23 15:20:32 localhost->/var/log/audit/audit.log
@@ -345,14 +345,14 @@ If root execute, nano for example, the alert looks like::
   audit.file.inode: 18372489
   audit.file.mode: 0100755
 
-Privileges elevation
+Privilege escalation
 ------------------------------------------------
 
-By default, OSSEC is able to detect a privelege elevation by analyzing the corresponding log in */var/log/auth.log*. The below example show the user homer executing a root action: ::
+By default, Wazuh is able to detect privilege escalation by analyzing the corresponding log in */var/log/auth.log*. The below example shows the homer user executing a root action: ::
 
     $ homer@springfield:/$ sudo ls /var/ossec/etc
 
-OSSEC detects the action, extracting the *srcuser*, *dstuser* and *command* among other fields: ::
+Wazuh detects the action, extracting the *srcuser*, *dstuser* and *command* among other fields: ::
 
   ** Alert 1487892460.79075: - syslog,sudo,pci_dss_10.2.5,pci_dss_10.2.2,
   2017 Feb 23 15:27:40 localhost->/var/log/secure
@@ -363,16 +363,16 @@ OSSEC detects the action, extracting the *srcuser*, *dstuser* and *command* amon
   pwd: /home/leia
   command: /bin/ls
 
-Although, it is possible that you need more information about the action, so you can use Audit.
+However, you may find this level of detail inadequate, in which case you can use Audit.
 
-On the other hand, if you have created a rule to monitor root actions, like in the previous use case, every action with *sudo* will be logged but with an inconvenient: probably the field **auid** will be 0 (root user) instead of the user who executed the action, that means you lost what the user does.
+If you have created a rule to monitor root actions, like in the previous use case, every action with *sudo* will be logged, but the **auid** field will inconveniently be 0 (root user) instead of that of the actual user who initiated the escalated action.  You generally want to know who originally initiated a command, regardless of if it was escalated or not.
 
 In order to keep the track of the user after sudo, it is necessary to configure *PAM*.
 
 .. warning::
-    Be very careful with PAM configuration, a bad configuration could make a system inaccessible.
+    Be very careful with PAM configuration, as a bad configuration could make your system inaccessible.
 
-Add the following line to every pam service that you consider it: ::
+Add the following line to every PAM service that needs it: ::
 
     session required        pam_loginuid.so
 

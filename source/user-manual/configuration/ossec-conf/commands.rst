@@ -9,25 +9,26 @@ Commands
 
 		<command>
 
-In the commands configuration you create new commands to be used as responses. It is possible to have  as many commands as it is need but each one should be inside their own ``<command>`` element.
+In a command configuration section, you define a command to be used by one or more active responses. It is possible to have as many commands as needed, but each one must be in their own separate <command> section.
 
-+--------------------+-----------------+
-| Options            | Allowed values  |
-+====================+=================+
-| `name`_            | Any string      |
-+--------------------+-----------------+
-| `executable`_      | Any file name   |
-+--------------------+-----------------+
-| `expect`_          | srcip, username |
-+--------------------+-----------------+
-| `timeout_allowed`_ | yes, no         |
-+--------------------+-----------------+
+
++--------------------+----------------------+
+| Options            | Allowed values       |
++====================+======================+
+| `name`_            | Any string           |
++--------------------+----------------------+
+| `executable`_      | Any file name        |
++--------------------+----------------------+
+| `expect`_          | srcip, username, etc |
++--------------------+----------------------+
+| `timeout_allowed`_ | yes, no              |
++--------------------+----------------------+
 
 
 ``name``
 --------
 
-Used to link the command to the response.
+This is a descriptive name that active responses will use to refer to this command.
 
 .. topic:: Default value
 
@@ -44,8 +45,8 @@ Used to link the command to the response.
 ``executable``
 --------------
 
-It must be a file (with exec permissions) inside ``/var/ossec/active-response/bin``.
-You don’t need to provide the whole path.
+This must be a file (with the execute permission set) inside ``/var/ossec/active-response/bin``.
+You don’t need to provide the path.
 
 .. topic:: Default value
 
@@ -62,13 +63,11 @@ You don’t need to provide the whole path.
 ``expect``
 ----------
 
-The arguments this command is expecting. If a field is not within the ``expect`` option (srcip and username) it will be
-passed as a dash (``-``) instead of the actual value. For instance, if ``srcip`` is required for an active-response script to work it must
-be inside of an ``expect`` option.
+This is a list of zero or more names of extracted fields that are to be passed as parameters to the command. If any of the listed fields were not extracted in a certain instance, those field values would be passed as a dash (``-``) instead of as no value at all. A good example is the the firewall-block command which expects the ``srcip`` field so it knows which IP to block.  Multiple expected field names are comma separated.
 
 .. note::
 
-   It is not reqiured to populate it. ``<expect></expect>``, is valid if no options need to be passed to the active-response script.
+   You can specify no fields by using ``<expect></expect>``.  That is the valid setting when no options need to be passed to the active-response command.
 
 .. topic:: Default value
 
@@ -76,7 +75,7 @@ be inside of an ``expect`` option.
 
 .. topic:: Allowed values
 
-	The options are: srcip, username
+	Names of extracted fields, like **srcip** or **username**, separated by commas if there is more than one.
 
 .. topic:: Use
 
@@ -85,7 +84,7 @@ be inside of an ``expect`` option.
 ``timeout_allowed``
 -------------------
 
-Specifies if this command supports a timeout.
+If yes, this indicates that the command is stateful, and will be called again in a certain length of time and instructed to undo its original acton.
 
 .. topic:: Default value
 
@@ -95,4 +94,4 @@ Specifies if this command supports a timeout.
 
 .. topic:: Allowed values
 
-	The options accepted are: yes, no
+	The options accepted are **yes** and **no**.

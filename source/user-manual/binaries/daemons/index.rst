@@ -6,23 +6,23 @@ Daemons
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | Daemons                                           | Descriptions                                                    | Supported installations     |
 +===================================================+=================================================================+=============================+
-| :ref:`ossec-agentd <ossec-agentd>`                | The client side daemon that communicates                        | Agent                       |
+| :ref:`ossec-agentd <ossec-agentd>`                | Client side daemon that communicates                            | Agent                       |
 |                                                   |                                                                 |                             |
 |                                                   | with the server                                                 |                             |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-agentlessd <ossec-agentlessd>`        | Run integrity checking on systems without                       | Server, local               |
+| :ref:`ossec-agentlessd <ossec-agentlessd>`        | Runs integrity checking on systems without                      | Server, local               |
 |                                                   |                                                                 |                             |
 |                                                   | an agent installed                                              |                             |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-analysisd <ossec-analysisd>`          | Receives the log messages and compares                          | Server, local               |
+| :ref:`ossec-analysisd <ossec-analysisd>`          | Receives log messages and compares                              | Server, local               |
 |                                                   |                                                                 |                             |
 |                                                   | them to the rules                                               |                             |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-authd <ossec-authd>`                  | Adds agents to an OSSEC manager                                 | Server                      |
+| :ref:`ossec-authd <ossec-authd>`                  | Adds agents to Wazuh manager                                    | Server                      |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-csyslogd <ossec-csyslogd>`            | Forwards the OSSEC alerts via syslog                            | Server, local               |
+| :ref:`ossec-csyslogd <ossec-csyslogd>`            | Forwards Wazuh alerts via syslog                                | Server, local               |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-dbd <ossec-dbd>`                      | Inserts the alert logs into a database                          | Server, local               |
+| :ref:`ossec-dbd <ossec-dbd>`                      | Inserts alert logs into a database                              | Server, local               |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :ref:`ossec-execd <ossec-execd>`                  | Executes active responses                                       | Server, local, agent        |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
@@ -30,13 +30,13 @@ Daemons
 |                                                   |                                                                 |                             |
 |                                                   | new log messages                                                |                             |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-maild <ossec-maild>`                  | Sends OSSEC alerts via email                                    | Server, local               |
+| :ref:`ossec-maild <ossec-maild>`                  | Sends Wazuh alerts via email                                    | Server, local               |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-monitord <ossec-monitord>`            | Monitors agent connectivity and compress log files              | Server, local               |
+| :ref:`ossec-monitord <ossec-monitord>`            | Monitors agent connectivity and compresses log files            | Server, local               |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-remoted <ossec-remoted>`              | It communicates with the agents                                 | Server                      |
+| :ref:`ossec-remoted <ossec-remoted>`              | Communicates with agents                                        | Server                      |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-reportd <ossec-reportd>`              | Creates reports from OSSEC alerts                               | Server, local               |
+| :ref:`ossec-reportd <ossec-reportd>`              | Creates reports from Wazuh alerts                               | Server, local               |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :ref:`ossec-syscheckd <ossec-syscheckd>`          | Checks configured files for security changes                    | Server, local, agent        |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+

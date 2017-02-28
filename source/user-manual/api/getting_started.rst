@@ -3,11 +3,11 @@
 Getting started
 ======================
 
-This guide provides all the basic information you need to start using the API.
+This guide provides all the basic information you need to start using the Wazuh API.
 
-Starting and Stopping API
+Starting and stopping the API
 ---------------------------------
-The API is started at boot time. To start, stop, or manipulate it on a running system, use:
+The API starts at boot time. To control or check the wazuh-api service, use the systemctl or service command.
 
 **Systemd systems**
 ::
@@ -32,18 +32,18 @@ In order to check if everything is working as expected, you can use cURL to do a
 
 Explanation:
 
- * ``curl``: Command-line tool for transferring data using various protocols as HTTP and HTTPS.
- * ``-u foo:bar``: User and password.
+ * ``curl``: This is a command-line tool for sending requests and commands over HTTP and HTTPS.
+ * ``-u foo:bar``: Specify a username and password to authenticate with the API.
  * ``-k``: Allow connections to SSL sites with self signed certs.
- * ``https://127.0.0.1:55000``: API URL.
- * ``?pretty``: Param.
+ * ``https://127.0.0.1:55000``: This is the API URL to use if you are running the command on the manager itself. 
+ * ``?pretty``: This parameter makes the JSON output more human-readable.
 
 Basic concepts
 ---------------------------------
 
-These are the basic concepts about requests and responses:
+Basic concepts about making API requests and understanding their responses:
 
-* The *base URL* for each request is: ``https://IP:55000/``
+* The *base URL* for each request is ``https://IP:55000/`` or ``http://IP:55000/``, depending on if you enabled and set up SSL in the API.
 * All responses are in *JSON format* with the following structure:
 
     +---------+-------------------------------------------------------+
@@ -64,22 +64,22 @@ These are the basic concepts about requests and responses:
 
   * ``{ "error": "603", "message": "The requested URL was not found on this server" }``
 
-* Responses with collections (array of data) will return till a maximum of 500 elements. You should use the *offset* and *limit* params to iterate through the collection.
-* All responses have a HTTP Status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
-* All requests accept the param *pretty* to convert the JSON response to a string formatted.
-* API logs will be saved at ``/var/ossec/logs/api.log``.
+* Responses containing collections of data will return a maximum of 500 elements. You should use the *offset* and *limit* parameters to iterate through large collections.
+* All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
+* All requests accept the parameter *pretty* to convert the JSON response to a more human-readable format.
+* The API log is stored on the manager as ``/var/ossec/logs/api.log``.
 
 .. _wazuh_api_use_cases:
 
 Use cases
 ---------------------------------
 
-This section will introduce you to use cases for the API, with the goal you can see its potential. You can find information about all the used requests in the :ref:`reference <api_reference>`.
+This section will present several use cases to give you a taste for the API's potential. You can find details about all possible API requests in the :ref:`reference <api_reference>` section.
 
 Exploring the ruleset
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Usually when an alert is fired, we would like to know more information about the rule in question. The next request returns information about the rule *1002*:
+Often when an alert fires, it is helpful to know details about the rule itself. The following request enumerates the attributes of rule *1002*:
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/rules/1002?pretty"``
 
@@ -110,7 +110,7 @@ Usually when an alert is fired, we would like to know more information about the
       }
     }
 
-Also, sometimes we would like to know what rules are availables with some specific conditions. For example, we can show all rules with the **group web**, **PCI DSS 10.6.1** and with the word **failure**.
+It can also be helpful to know what rules are available that match specific criteria. For example, we can show all rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures**, which returns only one rule in this case.
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/rules?group=web&pci=10.6.1&search=failures&pretty"``
 
@@ -149,10 +149,10 @@ Also, sometimes we would like to know what rules are availables with some specif
       }
     }
 
-Searching in monitored files
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Mining the file integrity monitoring database of an agent
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can use the API to show information about all the files monitored by syscheck. For example, let's search all files of agent *000* (Manager) with extension *.py* that have been modified. In order to be concise we limit the result to only an element (*limit=1*).
+You can use the API to show information about all the files monitored by syscheck. For example, you can enumerate all monitored files on agent *000* (the manager) with extension *.py* that have been modified. In order to be concise, "*limit=1*" has been used in this example to limit the results to a single record.
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000/files?offset=0&limit=1&event=modified&search=.py&pretty"``
 
@@ -183,7 +183,7 @@ You can use the API to show information about all the files monitored by syschec
       }
     }
 
-In case you need to find a file using its md5/sha1 hash, you can do it with a simple request:
+In case you need to find a file using its md5/sha1 hash, you can do so with a simple request like this:
 
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000/files?hash=9d0ac660826f4245f3444b0247755c7229f1f9fe&pretty"``
@@ -215,10 +215,10 @@ In case you need to find a file using its md5/sha1 hash, you can do it with a si
       }
     }
 
-Getting outstanding rootcheck controls
+Listing outstanding rootcheck issues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Rootcheck requests are very similar to the syscheck ones. In order to get all rootcheck control with *outstanding* status you can run this request:
+Rootcheck requests are very similar to the syscheck ones. In order to get all rootcheck issues with an *outstanding* status you can run this request:
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/rootcheck/000?status=outstanding&offset=0&limit=1&pretty"``
 
@@ -239,10 +239,10 @@ Rootcheck requests are very similar to the syscheck ones. In order to get all ro
       }
     }
 
-Starting Manager and getting configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Starting the manager and dumping its configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is possible to do a lot of actions with the Manager, for example, you can stop/start/restart it or get its state just with a request:
+It is possible to use the API to interact with the Manager in many ways.  For example, you can stop/start/restart it or get its state with this simple request:
 
 ``curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"``
 
@@ -287,7 +287,7 @@ It is possible to do a lot of actions with the Manager, for example, you can sto
     }
 
 
-In case you do not have access to the Manager and you need to know the current configuration, you can retrieve it with the below request:
+You can even dump the manager's current configuration with the below request (response shortened for brevity):
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/manager/configuration?pretty"``
 
@@ -314,7 +314,7 @@ In case you do not have access to the Manager and you need to know the current c
 Playing with agents
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Of course, we can work with agents. Let's take a look to the **active** agents:
+Of course we can work with agents. This enumerates **active** agents:
 
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/agents?offset=0&limit=1&status=active&pretty"``
@@ -336,7 +336,7 @@ Of course, we can work with agents. Let's take a look to the **active** agents:
       }
     }
 
-Add an agent is now easy than ever. Just send a request with the agent name and its IP.
+Adding an agent is now easier than ever. Just send a request with the agent name and its IP.
 
 ``curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"``
 
@@ -347,7 +347,7 @@ Add an agent is now easy than ever. Just send a request with the agent name and 
       "data": "019"
     }
 
-Do you need the agent key?. Just get it with:
+You can fetch an agent's key like this:
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/agents/019/key?pretty"``
 
@@ -361,4 +361,4 @@ Do you need the agent key?. Just get it with:
 
 Conclusion
 ^^^^^^^^^^^^^^^^^^
-We hope you have seen the API potential with these real-life examples. Do not forget to visit the :ref:`reference <api_reference>` to discover all the available requests. Here you find a :ref:`summary <request_list>`.
+We hope you now better appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests. A nice summary can also be found here: :ref:`summary <request_list>`.

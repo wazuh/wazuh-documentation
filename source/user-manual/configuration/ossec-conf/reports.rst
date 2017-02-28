@@ -9,7 +9,7 @@ Reports
 
 		<reports>
 
-Options to configure reports about the generated alerts.
+Configuration options for reporting of alerts.
 
 +----------------+---------------------------------------------------------+
 | Options        | Allowed values                                          |
@@ -47,7 +47,7 @@ Filter by group/category.
 
 .. topic:: Allowed values
 
-  Any category used, is allowed.
+  Any category used is allowed.
 
 ``categories``
 --------------
@@ -60,12 +60,12 @@ Filter by group/category.
 
 .. topic:: Allowed values
 
-  Any category used, is allowed.
+  Any category used is allowed.
 
 ``rule``
 --------
 
-Rule ID to Filter for.
+Rule ID to filter for.
 
 .. topic:: Default value
 
@@ -73,12 +73,12 @@ Rule ID to Filter for.
 
 .. topic:: Allowed values
 
-  Any Rule ID in OSSEC Rules is allowed
+  Any Rule ID in Wazuh Rules is allowed
 
 ``level``
 ---------
 
-Alert level to filter for. This is an inclusive option so all higher level alerts will also match.
+Alert level to filter for. Report will include all levels above and including level specified.
 
 .. topic:: Default value
 
@@ -100,7 +100,7 @@ Filter by the log location or agent name.
 
 .. topic:: Allowed values
 
-  Any file path or hostname or network is allowed
+  Any file path, hostname or network is allowed
 
 ``srcip``
 ---------
@@ -119,7 +119,7 @@ Filter by the source ip of the event.
 ``user``
 --------
 
-Filter by the user name. This will match on either srcuser or dstuser
+Filter by the user name. This will match either the srcuser or dstuser.
 
 .. topic:: Default value
 
@@ -133,7 +133,7 @@ Filter by the user name. This will match on either srcuser or dstuser
 ``title``
 ---------
 
-The name of the report. This is a required field for reports to function.
+Name of the report. **This is a required field.**
 
 .. topic:: Default value
 
@@ -147,7 +147,7 @@ The name of the report. This is a required field for reports to function.
 ``email_to``
 ------------
 
-The email address to send the completed report. This is a required field for a report to function.
+The email address to send the completed report. **This is a required field.**
 
 .. topic:: Default value
 
@@ -161,7 +161,7 @@ The email address to send the completed report. This is a required field for a r
 ``showlogs``
 ------------
 
-Include logs when creating the report.
+Enable or disable the inclusion of logs when creating the report.
 
 .. topic:: Default value
 

@@ -3,14 +3,13 @@
 Integration with external APIs
 ==================================
 
-Integrator is a new daemon that allows to connect Wazuh to external APIs and
-alerting tools, such Slack and PagerDuty.
+Integrator is a new daemon that allows the connection of Wazuh to external APIs and alerting tools such as Slack and PagerDuty.
 
 Enabling Integrator
 -------------------
 
-Integrator is not enabled by default, but it can be enabled with the following
-command: ::
+Integrator is not enabled by default.  Integrator is enabled using the following command:
+::
 
     $ /var/ossec/bin/ossec-control enable integrator
     $ /var/ossec/bin/ossec-control restart
@@ -18,8 +17,7 @@ command: ::
 Configuration
 -------------
 
-Integrations are configured in the file ``etc/ossec.conf``, which is located inside
-your OSSEC installation directory. Add inside *<ossec_config></ossec_config>* tags your integration like this:
+Integrations are configured in the file ``etc/ossec.conf``, which is located inside your Wazuh installation directory. Add the following inside *<ossec_config> </ossec_config>* to configure this integration:
 ::
 
     <integration>
@@ -35,9 +33,7 @@ your OSSEC installation directory. Add inside *<ossec_config></ossec_config>* ta
          <event_location> </event_location>
     </integration>
 
-
-
-Integrating with Slack
+Integration with Slack
 ^^^^^^^^^^^^^^^^^^^^^^
 
 ::
@@ -47,8 +43,8 @@ Integrating with Slack
       <hook_url>https://hooks.slack.com/services/...</hook_url>
     </integration>
 
-Integrating with PagerDuty
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Integratiion with PagerDuty
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ::
 

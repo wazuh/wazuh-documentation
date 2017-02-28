@@ -4,7 +4,7 @@
 syscheck_control
 ================
 
-``syscheck_control`` provides an interface for managing and viewing the integrity checking database.
+The syscheck_control program provides an interface for managing and viewing the integrity checking database.
 
 +--------------------------+---------------------------------------------------+
 | Options                  | Descriptions                                      |
@@ -15,19 +15,19 @@ syscheck_control
 +--------------------------+---------------------------------------------------+
 | `-lc`_                   | List only currently connected agents              |
 +--------------------------+---------------------------------------------------+
-| `-u`_                    | Updates the database of the agents                |
+| `-u`_                    | Update the database of the agents                 |
 +--------------------------+---------------------------------------------------+
-| `-i`_                    | Prints database for the agent                     |
+| `-i`_                    | Print database for the agent                      |
 +--------------------------+---------------------------------------------------+
 | `-r`_                    | List modified registry entries for windows agents |
 +--------------------------+---------------------------------------------------+
-| `-f`_                    | Prints information about a modified file          |
+| `-f`_                    | Print information about a modified file           |
 +--------------------------+---------------------------------------------------+
-| `-z`_                    | With `-f`_ zeroes the auto-ignore counter         |
+| `-z`_                    | Used with `-f`_ to zero the auto-ignore counter   |
 +--------------------------+---------------------------------------------------+
-| `-d`_                    | With `-f`_ ignores the file                       |
+| `-d`_                    | Used with `-f`_ to ignore the file                |
 +--------------------------+---------------------------------------------------+
-| `-s`_                    | Changes the output to CSV format                  |
+| `-s`_                    | Change the output to CSV format                   |
 +--------------------------+---------------------------------------------------+
 
 ``-h``
@@ -43,12 +43,12 @@ List available agents.
 ``-lc``
 -------
 
-List only currently connected agents.
+List only the currently connected agents.
 
 ``-u``
 ------
 
-Updates the database for the <id> agent or all of them.
+Update the database for the identified or all agents.
 
 .. topic:: Arguments
 
@@ -59,7 +59,7 @@ Updates the database for the <id> agent or all of them.
 ``-i``
 ------
 
-Prints database for the agent.
+Print the database for the agent.
 
 .. topic:: Arguments
 
@@ -68,7 +68,7 @@ Prints database for the agent.
 ``-r``
 ------
 
-List modified registry entries for the agent.
+List the modified registry entries for the agent.
 
 .. topic:: Arguments
 
@@ -82,7 +82,7 @@ List modified registry entries for the agent.
 ``-f``
 ------
 
-Used with -i. Prints information about a modified file.
+Used with -i to print information about a modified file.
 
 .. topic:: Arguments
 
@@ -92,14 +92,14 @@ Used with -i. Prints information about a modified file.
 ``-z``
 ------
 
-Used with -f, zeroes the auto-ignore counter.
+Used with -f to zero the auto-ignore counter.
 
 ``-d``
 ------
 
-Used with -f, ignores that file.
+Used with -f to ignore that file.
 
 ``-s``
 ------
 
-Changes the output to CSV format.
+Change the output to CSV format.

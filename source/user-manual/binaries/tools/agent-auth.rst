@@ -4,7 +4,7 @@
 agent-auth
 =============
 
-The agent-auth program is the client application used with :ref:`ossec-authd` to automatically add agents to an Wazuh manager.
+The agent-auth program is the client application used with :ref:`ossec-authd` to automatically add agents to a Wazuh manager.
 
 .. warning::
 
@@ -31,7 +31,7 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 +--------------------------+--------------------------------------+
 | :ref:`-P <auth-pass>`    | Use the specified password           |
 +--------------------------+--------------------------------------+
-| :ref:`-p <auth-port>`    | Port where is running on             |
+| :ref:`-p <auth-port>`    | Port where program is running on     |
 +--------------------------+--------------------------------------+
 | `-V <#auth-version>`__   | Version and license information      |
 +--------------------------+--------------------------------------+
@@ -59,7 +59,7 @@ Agent name to be used.
 ``-D``
 ------
 
-Directory where OSSEC is installed.
+Directory where Wazuh is installed.
 
 .. topic:: Default
 
@@ -70,12 +70,12 @@ Directory where OSSEC is installed.
 ``-d``
 ------
 
-Execute agent-auth in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option can be repeated to increase the verbosity of the debug messages.
 
 ``-g``
 ------
 
-Run as ``<group>``.
+Run as a group.
 
 .. topic:: Arguments
 
@@ -89,7 +89,7 @@ Display the help message
 ``-k``
 ------
 
-Full path to the agent key.
+Display the full path to the agent key.
 
 .. topic:: Arguments
 
@@ -112,7 +112,7 @@ IP address of the manager.
 Use the specified password instead of searching for it at ``authd.pass``.
 
 If a password is not provided in the file nor on the console, the client will
-connect with the server without a password (insecure mode).
+connect to the server without a password (insecure mode).
 
 .. topic:: Arguments
 
@@ -136,14 +136,14 @@ Port ossec-authd is running on.
 ``-V``
 ------
 
-Display OSSEC Version and license information.
+Display version and license information.
 
 .. _auth-ca:
 
 ``-v``
 ------
 
-Full path to the CA certificate used to verify the server.
+Display the full path to the CA certificate used to verify the server.
 
 .. topic:: Arguments
 
@@ -152,7 +152,7 @@ Full path to the CA certificate used to verify the server.
 ``-x``
 ------
 
-Full path to the agent certificate.
+Display the full path to the agent certificate.
 
 .. topic:: Arguments
 

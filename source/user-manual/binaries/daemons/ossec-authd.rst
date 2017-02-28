@@ -4,13 +4,11 @@
 ossec-authd
 ===========
 
-The ossec-authd daemon will automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.
-``ossec-authd`` will create an agent with an ip address of any instead of using its actual IP.
+The ossec-authd program will automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.  ``ossec-authd`` creates an agent with an ip address of "any" instead of using its actual IP.
 
 .. warning::
 
-    By default there is no authentication or authorization involved in this transaction, so it is recommended that
-    this daemon only be run when a new agent is being added.
+    By default there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
 
 
 +----------------------------+-------------------------------------------------------------------------------+
@@ -61,18 +59,14 @@ Chroot to ``<dir>``.
 ``-d``
 ------
 
-Execute ``ossec-agentlessd`` in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Remove old agents with the same IP if they were not connected since ``<seconds>``. It has only sense along with option ``-i``.
+Remove old agents with the same IP if they were not connected since ``<seconds>``. This must be used in conjunction with option ``-i``.
 
-Option ``-f`` forces the insertion on IP collision, this means that if OSSEC
-finds another agent with the same IP, but it has not connected since a
-specified time, that agent will be deleted automatically and the new agent will
-be added. To force insertion always (regardless of the time of the last agent
-connection), use ``-f 0``.
+Option ``-f`` forces the registration even if the requesting agent's IP address is already registered, in which case the old registration is deleted.  This can include a minimum threshold for time since last check-in by the to-be-deleted registration or the threshold can be set to 0 to always delete/replace. 
 
 .. topic:: Arguments
 
@@ -81,7 +75,7 @@ connection), use ``-f 0``.
 ``-g``
 ------
 
-Run as group.
+Run as a group.
 
 .. topic:: Arguments
 
@@ -90,7 +84,7 @@ Run as group.
 ``-h``
 ------
 
-Display a help message.
+Display the help message.
 
 ``-i``
 ------
@@ -100,7 +94,7 @@ Add agents with a specific IP address.
 ``-k``
 ------
 
-Full path to the server key.
+Specifies the full path to the server key.
 
 .. topic:: Arguments
 
@@ -139,7 +133,7 @@ Test the configuration.
 -V
 ------
 
-Display OSSEC Version and license information.
+Display the version and license information.
 
 
 .. _authd-ca:
@@ -147,7 +141,7 @@ Display OSSEC Version and license information.
 -v
 ------
 
-Full path to the CA certificate used to verify the clients.
+Specifies the full path to the CA certificate used to verify clients.
 
 .. topic:: Arguments
 
@@ -158,7 +152,7 @@ Full path to the CA certificate used to verify the clients.
 ``-x``
 ------
 
-Full path to the server certificate.
+Specifies the full path to the server certificate.
 
 .. topic:: Arguments
 

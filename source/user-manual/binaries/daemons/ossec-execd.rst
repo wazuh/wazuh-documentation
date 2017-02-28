@@ -4,7 +4,7 @@
 ossec-execd
 =============
 
-``ossec-execd`` executes active responses by running the configured scripts.
+The ossec-execd program runs active responses by initiating the configured scripts.
 
 +-------------------------+---------------------------------+
 | Options                 | Descriptions                    |
@@ -28,7 +28,7 @@ ossec-execd
 ``-c``
 ------
 
-Run ossec-execd using ``<config>`` as the configuration file.
+Run using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
@@ -41,17 +41,17 @@ Run ossec-execd using ``<config>`` as the configuration file.
 ``-d``
 ------
 
-Execute ``ossec-execd`` in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ``ossec-execd`` in the foreground.
+Run in the foreground.
 
 ``-g``
 ------
 
-Run as group.
+Run as a group.
 
 .. topic:: Arguments
 
@@ -70,4 +70,4 @@ Test configuration.
 ``-V``
 ------
 
-Version and license information.
+Display version and license information.

@@ -4,7 +4,7 @@
 syscheck_update
 ===============
 
-Updates the integrity check database. This means that all information about files that were added to the integrity check database will be dismissed and leave an empty database which will be populated again the next time the syscheck daemon runs on agents or the server.
+The syscheck_update program wipes the integrity check database. All information about files that were added to the integrity check database will be deleted leaving an empty database which will be populated again the next time the syscheck daemon runs on the agents or the server.
 
 +---------+-------------------------------------+
 | Options | Descriptions                        |
@@ -13,9 +13,9 @@ Updates the integrity check database. This means that all information about file
 +---------+-------------------------------------+
 | `-l`_   | List available agents               |
 +---------+-------------------------------------+
-| `-a`_   | Updates the database for all agents |
+| `-a`_   | Updates database for all agents     |
 +---------+-------------------------------------+
-| `-u`_   | Updates the databases               |
+| `-u`_   | Updates databases                   |
 +---------+-------------------------------------+
 
 ``-h``
@@ -26,17 +26,17 @@ Display the help message.
 ``-l``
 ------
 
-List available agents.
+List the available agents.
 
 ``-a``
 ------
 
-Updates the database for all agents.
+Update the database for all agents.
 
 ``-u``
 ------
 
-Updates the database for the ``<agent_id>`` agent or the local database.
+Update the database for the specified agent or the local database.
 
 .. topic:: Arguments
 

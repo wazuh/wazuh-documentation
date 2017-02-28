@@ -19,7 +19,7 @@ Syscheck
 ``syscheck.sleep``
 ------------------
 
-This setting determines how long to sleep after reading `syscheck.sleep_after`_ number of files.
+Number of seconds to sleep after reading `syscheck.sleep_after`_ number of files.
 
 
 .. topic:: Default value
@@ -33,7 +33,7 @@ This setting determines how long to sleep after reading `syscheck.sleep_after`_ 
 ``syscheck.sleep_after``
 ------------------------
 
-This is the number of files to read before sleeping for `syscheck.sleep`_ seconds.
+Number of files to read before sleeping for `syscheck.sleep`_ seconds.
 
 
 .. topic:: Default value
@@ -49,7 +49,7 @@ This is the number of files to read before sleeping for `syscheck.sleep`_ second
 ``syscheck.debug``
 ------------------
 
-Syscheck debug options, used in local, server and unix agent installations.
+Debug level (used in local, server and unix agent installations).
 
 
 .. topic:: Default value
@@ -59,8 +59,8 @@ Syscheck debug options, used in local, server and unix agent installations.
 .. topic:: Allowed values
 
 	0
-		No debug
+		No debug output
 	1
-		First level of debug
+		Standard debug output
 	2
-		Full debugging
+		Verbose debug output

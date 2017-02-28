@@ -3,9 +3,9 @@
 Command monitoring
 ==================
 
-Sometimes what we want to monitor is not included on the logs. To solve that gap, Wazuh incorpore the ability to monitor the commands ouput and treat the output as any other log.
+Sometimes what we want to monitor is not included in the logs. To solve that problem, Wazuh incorporates the ability to monitor the output of specific commands and treat that output just like log file content.
 
-Command monitoring is configured inside the :ref:`ossec.conf <reference_ossec_conf>`, in the :ref:`localfile section<reference_ossec_localfile>`. It can be configured in the :ref:`agent.conf<reference_agent_conf>` file also.
+Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`ossec.conf <reference_ossec_conf>`. It can be also be centrally configured in :ref:`agent.conf<reference_agent_conf>`.
 
 .. topic:: Contents
 
@@ -18,22 +18,22 @@ Command monitoring is configured inside the :ref:`ossec.conf <reference_ossec_co
 How it works
 ------------
 
-In order to monitor the command ouput on a server we differenciate some phases:
+The following is required to set up the monitoring of a specific command's output on agents:
 
-Configure Wazuh in order to monitor a command
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configure Wazuh agents to accept remote commands from the manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We need to configure the agent in order to support remote commands from the manager. This is configured on the ``internal_options.conf`` file with the :ref:`logcollector option<reference_ossec_logcollector>`.
+It is usually best to locally configure agents to accept remote commands from the manager.  This is done by setting the :ref:`logcollector option<reference_ossec_logcollector>` in ``local_internal_options.conf`` on each agent.  If you will be using this widely, you can make this change part of the stock ossec.conf file you put on all newly installed agents.  Without allowing this feature, custom command monitoring configuration has to be added separately into each individual agent's ossec.conf file, which may quickly become impractical.  The only reason to not enable remote commands on an agent is if, for security reasons, you require that the Wazuh manager not have the capability to run arbitrary commands on that agent.
 
 Example::
 
-  # Logcollector - If it should accept remote commands from the manager
+  # Logcollector - Whether or not to accept remote commands from the manager
   logcollector.remote_commands=1
 
-Configure the commands to monitor
+Configure a command to monitor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Inside the :ref:`ossec.conf <reference_ossec_conf>` or :ref:`agent.conf <reference_agent_conf>`, we configure the commands that are going to be monitored by Wazuh.
+The commands to run and monitor, can be configured either inside the local :ref:`ossec.conf <reference_ossec_conf>` of individual agents, but the ideal location would be the appropriate config section of :ref:`agent.conf <reference_agent_conf>` on the manager.
 
 Example::
 
@@ -46,4 +46,4 @@ Example::
 Process the output
 ^^^^^^^^^^^^^^^^^^
 
-After configuring the system to monitor the command output as one more log, we can create custom rules like for :ref:`Log anlaysis <manual_log_analysis>`, in order to process the output and alert when is needed.
+After configuring the system to monitor the command's output as if it were log data, we can create custom rules like for :ref:`Log analysis <manual_log_analysis>`, in order to process the output and alert when is needed.

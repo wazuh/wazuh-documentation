@@ -6,11 +6,11 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | Tools                                             | Descriptions                                                               | Supported installations     |
 +===================================================+============================================================================+=============================+
-| :ref:`ossec-control <ossec-control>`              | Manage the status of Wazuh processes                                       | Server, local, agent        |
+| :ref:`ossec-control <ossec-control>`              | Manages the status of Wazuh processes                                      | Server, local, agent        |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`agent-auth <agent-auth>`                    | Add agents to an Wazuh manager                                             | Agent                       |
+| :ref:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | Agent                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`agent_control <agent_control>`              | Allows you to query and get information from                               | Server                      |
+| :ref:`agent_control <agent_control>`              | Allows queries of the manager to get information about                     | Server                      |
 |                                                   |                                                                            |                             |
 |                                                   | any agent                                                                  |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -18,11 +18,11 @@ Tools
 |                                                   |                                                                            |                             |
 |                                                   | keys for  agents                                                           |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-logtest <ossec-logtest>`              | Allows to test and verify log files                                        | Server, local               |
+| :ref:`ossec-logtest <ossec-logtest>`              | Allows testing and verification of rules against provided log records      | Server, local               |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-makelists <ossec-makelists>`          | Compile cdb databases                                                      | Server, local               |
+| :ref:`ossec-makelists <ossec-makelists>`          | Compiles cdb databases                                                     | Server, local               |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`rootcheck_control <rootcheck_control>`      | Allows you to manage the policy monitoring                                 | Server, local               |
+| :ref:`rootcheck_control <rootcheck_control>`      | Allows management of policy monitoring                                     | Server, local               |
 |                                                   |                                                                            |                             |
 |                                                   | and system auditing database                                               |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+

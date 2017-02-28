@@ -4,8 +4,7 @@
 ossec-control
 =============
 
-It is a script to start, stop, configure, or check on the status of Wazuh processes.
-ossc-control can enable or disable client-syslog, database logging, agentless configurations, and debug mode.
+The ossec-control script is used to start, stop, configure, or check on the status of Wazuh processes.  This script can enable or disable client-syslog, database logging, agentless configurations, integration with slack and pagerduty, and debug mode.
 
 +------------+---------------------------------------------+
 | Options    | Descriptions                                |
@@ -49,7 +48,7 @@ Restart all Wazuh processes except ossec-execd. This allows an agent to reload w
 
 .. note::
 
-   This is only available on an Wazuh agent.
+   This is only available on a Wazuh agent.
 
 ``status``
 ----------
@@ -71,7 +70,7 @@ Enable Wazuh functionality.
       Server and local
 
     .. note::
-        Database support must be compiled in at install time.
+        Database support must be compiled in during initial installation.
 
   client-syslog
     Enable ossec-csyslogd for logging to remote syslog.
@@ -80,19 +79,25 @@ Enable Wazuh functionality.
       Server and local
 
   agentless
-    Enable ossec-agentlessd for running commands on systems without OSSEC agents.
+    Enable ossec-agentlessd for running commands on systems without Wazuh agents.
 
     Supported installations
       Server and local
 
+  integrator
+    Enable integrator for connection to external APIs and alerting tools such as Slack and PagerDuty.
+
+    Supported installations
+      Server
+
   debug
-    Run all OSSEC daemons in debug mode.
+    Run all Wazuh daemons in debug mode.
 
 
 ``disable``
 -----------
 
-Disable OSSEC functionality.
+Disable Wazuh functionality.
 
 .. topic:: Allowed options
 
@@ -103,7 +108,7 @@ Disable OSSEC functionality.
       Server and local
 
     .. note::
-        Database support must be compiled in at install time.
+        Database support must be compiled in during initial installation.
 
   client-syslog
     Disable ossec-csyslogd for logging to remote syslog.
@@ -112,10 +117,16 @@ Disable OSSEC functionality.
       Server and local
 
   agentless
-    Disable ossec-agentlessd for running commands on systems without OSSEC agents.
+    Disable ossec-agentlessd for running commands on systems without Wazuh agents.
 
     Supported installations
       Server and local
+
+  integrator
+    Disable integrator for connection to external APIs and alerting tools such as Slack and PagerDuty.
+
+    Supported installations
+      Server
 
   debug
     Turn off debug mode.

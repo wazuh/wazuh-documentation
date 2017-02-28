@@ -5,7 +5,7 @@
 ossec-agentlessd
 ================
 
-Agentless monitoring allows you to run integrity checking on systems without an agent installed.
+The ossec-agentlessd program allows integrity checks to be run on systems without an agent installed.
 
 
 
@@ -26,7 +26,7 @@ Agentless monitoring allows you to run integrity checking on systems without an 
 +-------------------------------+---------------------------------+
 | `-t`_                         | Test configuration              |
 +-------------------------------+---------------------------------+
-| `-u`_                         | Run as an user                  |
+| `-u`_                         | Run as a user                   |
 +-------------------------------+---------------------------------+
 | `-V`_                         | Version and license information |
 +-------------------------------+---------------------------------+
@@ -60,29 +60,28 @@ Chroot to ``<dir>``.
 ``-d``
 ------
 
-Execute ossec-agentlessd in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ossec-agentlessd in the foreground.
+Run in the foreground.
 
 
 ``-g``
 ------
 
-Run as group.
+Run as a group.
 
 .. topic:: Arguments
 
   ``-g <group>``
 
 
-
 ``-h``
 ------
 
-Display a help message.
+Display the help message.
 
 ``-t``
 ------
@@ -92,9 +91,9 @@ Test the configuration.
 ``-u``
 ------
 
-Run as user.
+Run as a user.
 
 ``-V``
 ------
 
-Display OSSEC Version and license information.
+Display the version and license information.

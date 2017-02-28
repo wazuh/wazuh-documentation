@@ -3,25 +3,25 @@
 Examples
 =================================
 
-#. `Monitor running processes`_
+#. `Monitor running Windows processes`_
 #. `Disk space utilization`_
 #. `Check if the output changed`_
 #. `Load average`_
 #. `Detect USB Storage`_
 
-Monitor running processes
+Monitor running Windows processes
 ---------------------------------
 Imagine you want to monitor the running proccess and alert if an important one is not running.
 
 Example with notepad.exe:
 
-1. Configure the agent to accept remote commands from the manager (Agent ossec-agent/internal_options.conf)
+1. Configure the agent to accept remote commands from the manager, in the agent's **local_internal_options.conf**.
 ::
 
-  # Logcollector - If it should accept remote commands from the manager
+  # Logcollector - Whether or not to accept remote commands from the manager
   logcollector.remote_commands=1
 
-2. Configure the command to list the running processes (Manager agent.conf)
+2. Define the command to list running processes, in the manager's **agent.conf** file
 ::
 
   <localfile>
@@ -30,7 +30,7 @@ Example with notepad.exe:
        <frequency>120</frequency>
    </localfile>
 
-Frequency defines how often the command will be run (in seconds).
+The **frequency** defines how often the command will be run (in seconds).
 
 3. Define the rules
 ::
@@ -48,19 +48,19 @@ Frequency defines how often the command will be run (in seconds).
     <group>process_monitor,</group>
   </rule>
 
-First rule will create an alert "Important procces not running", unless the output matches `notepad.exe` (on second rule).
+The first rule (100010) will generate an alert ("Important process not running"), unless it is overridden by its child rule (100011) that matches `notepad.exe` in the command output.  You could add as many additional child rules as you need to enumerate all important processes you want to monitor.  You could also adapt this example to monitor Linux process by changing the <command> from "tasklist" to a Linux command that lists processes, like "ps -auxw".
 
 Disk space utilization
 --------------------------
 
-We need to configure the ``dh`` command on the :ref:`ossec.conf<reference_ossec_conf>` configuration file::
+We can configure the ``dh`` command in the manager's **agent.conf** file or in the agent's **ossec.conf** file::
 
   <localfile>
       <log_format>command</log_format>
       <command>df -P</command>
   </localfile>
 
-Wazuh already incorpore a rule to monitor this::
+Wazuh already has a rule to monitor this::
 
   <rule id="531" level="7" ignore="7200">
     <if_sid>530</if_sid>
@@ -70,21 +70,22 @@ Wazuh already incorpore a rule to monitor this::
     <group>low_diskspace,pci_dss_10.6.1,</group>
   </rule>
 
-The system will alert once the disk space reache 100%
+
+The system will alert once the disk space usage on any partition reaches 100%
 
 Check if the output changed
 -------------------------------
 
-In this case we use the :ref:`check_dif option <rules_check_diff>`
+In this case we use the Linux "netstat" command and the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening tcp sockets.
 
-Configuration on the ossec.conf file::
+Configuration in agent.conf or ossec.conf::
 
   <localfile>
     <log_format>full_command</log_format>
     <command>netstat -tan |grep LISTEN|grep -v 127.0.0.1</command>
   </localfile>
 
-Wazuh already incorpore a rule to monitor this::
+Wazuh already has a rule to monitor this::
 
   <rule id="533" level="7">
     <if_sid>530</if_sid>
@@ -94,14 +95,15 @@ Wazuh already incorpore a rule to monitor this::
     <group>pci_dss_10.2.7,pci_dss_10.6.1,</group>
   </rule>
 
-If the output change, the system will generate an alert.
+If the output changes, the system will generate an alert, indicating a network listener has disappeared or a new one has appeared, which could indicate something is broken or a network backdoor has been installed.
+
 
 Load average
 ------------
 
-You can configure Wazuh to monitor the ``uptime`` command and alert when is higher than 2 for example:
+You can configure Wazuh to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like 2 in this example.
 
-Configuration on the ``ossec.conf`` file::
+Configuration in agent.conf or ossec.conf::
 
   <localfile>
       <log_format>command</log_format>
@@ -120,11 +122,11 @@ And the custom rule to alert when is higher than 2::
 Detect USB Storage
 ------------------
 
-It's possible to configure Wazuh in order to alert once a USB is connected. Thsi example is fot a Windows agent.
+Wazuh can be configured to alert when a USB storage device is connected. This example is for a Windows agent.
 
-Configure your agent to monitor the USBSTOR registry entry::
+Configure your agent to monitor the USBSTOR registry entry, by adding this to the manager's agent.conf ::::
 
-  <agent_config os="windows">
+  <agent_config os="Windows">
     <localfile>
         <log_format>full_command</log_format>
         <command>reg QUERY HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR</command>

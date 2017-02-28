@@ -3,21 +3,19 @@
 wazuh-modulesd
 ==============
 
-wazuh-modulesd daemon is in charge on manage the correct working of
-
-the different Wazuh modules which are descripted below.
+The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: Elastic Stack integration
 
-  It is the combination of three popular Open Source projects for log management, known as Elasticsearch, Logstash and Kibana.
+  Elastic Stack is a combination of popular open source projects for log management, including Elasticsearch, Logstash, Kibana, and others.
 
-.. topic:: Wazuh Ruleset for OSSEC
+.. topic:: Wazuh Ruleset
 
-  There are OSSEC rules updated and new ones created in order to improve Wazuh functionality and detection capabilities.
+  Wazuh rules are based on of the OSSEC ruleset.  This ruleset has been revised and expanded with enhancements, corrections and additions to deepen Wazuh functionality and detection capabilities.
 
 .. topic:: RESTful API
 
-  Wazuh RESTful API is a service to control Wazuh Manager using REST requests; that brings new ways to use Wazuh managing agents, checking rootchek or syscheck routines and improving capabilities of large agent deployments.
+  The RESTful API controls the Wazuh manager using REST requests. This allows the Wazuh manager to be interacted with from a web browser, command line tool like cURL, or any script or program that can make web requests.  This API may be used to easily perform everyday actions like adding an agent, restarting the manager/agent(s), or looking up syscheck details.
 
 +---------+--------------------------+
 | Options | Descriptions             |
@@ -39,7 +37,7 @@ Increase debug mode.
 ``-f``
 ------
 
-Run in foreground.
+Run in the foreground.
 
 ``-h``
 ------

@@ -4,20 +4,12 @@
 ossec-logtest
 =============
 
-``ossec-logtest`` is the single most useful tool when working with ossec.  This tool allows oneself
-to test and verify log files in the exact same way that ossec-anaylistd does.
-
-Something ossec-logtest can help with:
-
-- Writing rules (Debugging your custom rules)
-- Troubleshooting false positives or false negatives
-
-ossec-logtest accepts standard input for all log to test.
+The ossec-logtest program is a useful tool when working with Wazuh rules.  This tool allows the testing and verification of rules against provided log examples in a way that simulates the action of ossec-analysisd. This can also assist with writing and debugging custom rules and troubleshooting false positives and negatives.
 
 +-----------------------------+------------------------------------------------------------+
 | Options                     | Descriptions                                               |
 +=============================+============================================================+
-| `-a`_                       | Analyze of input lines                                     |
+| `-a`_                       | Analyze input lines                                        |
 +-----------------------------+------------------------------------------------------------+
 | `-c`_                       | Run using a configuration file                             |
 +-----------------------------+------------------------------------------------------------+
@@ -29,7 +21,7 @@ ossec-logtest accepts standard input for all log to test.
 +-----------------------------+------------------------------------------------------------+
 | `-t`_                       | Test configuration                                         |
 +-----------------------------+------------------------------------------------------------+
-| `-U`_                       | Check if the last line tested matches the arguments passed |
+| `-U`_                       | Check if last log line tested matches the arguments passed |
 +-----------------------------+------------------------------------------------------------+
 | `-V <#logtest-version>`__   | Version and license information                            |
 +-----------------------------+------------------------------------------------------------+
@@ -39,12 +31,12 @@ ossec-logtest accepts standard input for all log to test.
 ``-a``
 ------
 
-Analyze of input lines as if they are live events.
+Analysis of input lines as though they are live events.
 
 ``-c``
 ------
 
-``<config>`` is the path and filename to load.
+Run using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
@@ -59,7 +51,7 @@ Analyze of input lines as if they are live events.
 ``-D``
 ------
 
-This is the path that ``ossec-logtest`` will chroot to before it completes loading all rules,
+Specifies the chroot before it completes loading all rules,
 decoders, and lists and processing standard input.
 
 .. topic:: Arguments
@@ -72,39 +64,34 @@ decoders, and lists and processing standard input.
 ``-d``
 ------
 
-Print debug output to the terminal. This option can be used multiple times to increase the verbosity of the debug messages.
+Print debug output to the terminal. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-h``
 ------
 
-Print the help message to the console.
+Display the help message.
 
 
 ``-t``
 ------
 
-Test configuration.  This will print file details on the ossec-anaylistd rules,
+Test configuration.  This will display file details on the rules to be loaded by ossec-analysisd,
 decoders, and lists as they are loaded and the order they were processed.
 
 
 ``-U``
 ------
 
-This option will cause ossec-logtest to return with an exit status other then zero unless
-the last line tested matches the arguments passed.
+This option will cause ossec-logtest to return a zero exit status if the test results for the provided log line match the criteria in the arguments.  Only one log line should be supplied for this to be useful.
 
 .. topic:: Arguments
 
   ``-U <rule-id:alert-level:decoder-name>``
 
-.. note::
-
-  This only works for the last, line so passing many lines into ossec-logtest with
-  this argument may not provide the desired results.
 
 .. note::
 
-  This ossec-logtest code requires access to all ossec configuation files.
+  This ossec-logtest code requires access to all ossec configuration files.
 
 
 
@@ -114,7 +101,7 @@ the last line tested matches the arguments passed.
 ``-V``
 ------
 
-Print the Version and license message for OSSEC and ossec-logtest.
+Display the version and license information for Wazuh and ossec-logtest.
 
 
 
@@ -123,8 +110,8 @@ Print the Version and license message for OSSEC and ossec-logtest.
 ``-v``
 ------
 
-Full output of all details and matches.
+Display the verbose results.
 
 .. note::
 
-    This the key argument to troubleshoot a rule, decoder problem.
+    This is the key option to troubleshoot a rule or decoder problem.

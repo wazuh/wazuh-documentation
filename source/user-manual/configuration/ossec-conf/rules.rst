@@ -10,20 +10,20 @@ Ruleset
 
 		<ruleset>
 
-Configuration for enable or disabled rules and decoders.
+Configuration options for enabling or disabling rules and decoders.
 
 +----------------+------------------------------------------------+
 | Options        | Allowed values                                 |
 +================+================================================+
-| `include`_     | Path and file name of rule to load             |
+| `include`_     | Path and filename of rule to load              |
 +----------------+------------------------------------------------+
-| `rule`_        | Path and file name of rule to load             |
+| `rule`_        | Path and filename of rule to load              |
 +----------------+------------------------------------------------+
 | `rule_dir`_    | Path to a directory of rule files              |
 +----------------+------------------------------------------------+
-| `decoder`_     | Path and file name of decoder to load          |
+| `decoder`_     | Path and filename of decoder to load           |
 +----------------+------------------------------------------------+
-| `decoder_dir`_ | Path to a directoy of decoder files            |
+| `decoder_dir`_ | Path to a directory of decoder files           |
 +----------------+------------------------------------------------+
 | `list`_        | Path to a list file to be loaded and compiled. |
 +----------------+------------------------------------------------+
@@ -39,7 +39,7 @@ Load a single rule file.
 
 .. topic:: Allowed values
 
-	Path and file name of rule to load example: rules/config.xml
+	Path and filename of rule to load. Example: rules/config.xml
 
 
 ``rule``
@@ -49,8 +49,7 @@ Load a single rule file.
 
 .. note::
 
-    This is the same as include, but created to keep the syntax constant with
-    other sections of the rules config.
+    This works the same as ``include`` but was created to mirror the syntax in other sections of the rules config.
 
 .. topic:: Default value
 
@@ -58,12 +57,12 @@ Load a single rule file.
 
 .. topic:: Allowed values
 
-	Path and file name of rule to load example: rules/config.xml
+	Path and filename of rule to load. Example: rules/config.xml
 
 ``rule_dir``
 ------------
 
-Load a directory of rules. The order of loaded files will be in alphebical order and will not load any files that have been loaded before.
+Load a directory of rules. The files will be loaded in alphabetical order and any duplicate filenames will be skipped. 
 
 .. topic:: Default value
 
@@ -77,24 +76,23 @@ Load a directory of rules. The order of loaded files will be in alphebical order
 
 .. topic:: Attributes
 
-	pattern
-	   is a regex match string use to determine if a file needs to be loaded.
+	An optional pattern can be included in the opening tag.  Example:  <rule_dir pattern="ruleset.xml">rules</rule_dir> The pattern is a regex match string used to determine if a file should be loaded.
 
 
 ``decoder``
 -----------
 
 
-Load a single decoder file. The path should be relative to the install directory, typically ``/var/ossec``.
+Load a single decoder file. The path should refer to the installation directory, typically ``/var/ossec``.
 
 .. note::
 
-	If no decoders are specified in ossec.conf the legacy ``etc/decoder.xml`` and
-	``etc/local_decoder.xml`` are loaded
+	If no decoders are specified in ossec.conf, the legacy ``etc/decoder.xml`` and
+	``etc/local_decoder.xml`` are loaded.
 
 .. warning::
 
-	If ``<decoder>`` or ``<decoder_dir>`` are used, the default decoder.xml will not be used. It must be specified explicitly.
+	If ``<decoder>`` or ``<decoder_dir>`` are used, the default decoder.xml will not be used and must be specifically referenced in order to load.
 
 .. topic:: Default value
 
@@ -102,13 +100,12 @@ Load a single decoder file. The path should be relative to the install directory
 
 .. topic:: Allowed values
 
-	Path and file name of decoder to load example: rules/decoder/decoder.xml
+	Path and filename of decoder to load example: rules/decoder/decoder.xml
 
 ``decoder_dir``
 ---------------
 
-Load a directory of decoders. The order of loaded files will be in alphebics order and will not load any files that have been loaded before.
-The path should be relative to the install directory, typically ``/var/ossec``.
+Load a directory of decoders. The files will be loaded in alphabetical order and any duplicate filenames will be skipped.  The path should refer to the installation directory, typically ``/var/ossec``.
 
 .. warning::
 
@@ -126,19 +123,16 @@ The path should be relative to the install directory, typically ``/var/ossec``.
 
 .. topic:: Attributes
 
-  pattern
-    is a regex match string use to determine if a file needs to be loaded.
+  An optional pattern can be included in the opening tag.  Example:  <decoder_dir pattern="-decoder.xml">ruleset/decoders</decoder_dir> The pattern is a regex match string used to determine if a file should be loaded.
 
 ``list``
 --------
 
-Load a single cdb references for inclusion by other rules.
+Load a single CDB reference for use by other rules.
 
 .. note::
 
-    Due to the way cdb files are compiled using tmp files by the `ossec-makelists`
-    program the file extension should not be include in this directive.  ossec's
-    tools will correctly append the correct .cdb or .txt extension as needed.
+    Do not include the file extension.  Wazuh will read the .cdb version of the file (the version generated by ossec-makelists from the .txt version of the file. 
 
 
 .. topic:: Default value

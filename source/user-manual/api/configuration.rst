@@ -3,18 +3,18 @@
 Configuration
 ======================
 
-The API will run on port 55000/tcp by default and protected with authentication. Below, we explain how to configure the API.
+The API will bind to port 55000/tcp by default and is requires username/password authentication. The default username and password is "foo" and "bar".
 
 
 Configuration script
 -------------------------
 
-Run the script ``/var/ossec/api/scripts/configure_api.sh`` in order to configure the basic settings.
+Run the script ``/var/ossec/api/scripts/configure_api.sh`` to configure the basic settings.
 
 Configuration file
 -------------------------
 
-You can configure some parameters using the file ``/var/ossec/api/configuration/config.js``: ::
+You can configure certain API settings in the file ``/var/ossec/api/configuration/config.js``: ::
 
     // Path
     config.ossec_path = "/var/ossec";
@@ -29,31 +29,35 @@ You can configure some parameters using the file ``/var/ossec/api/configuration/
     //In case the API run behind a proxy server, turn to "yes" this feature. Values: yes, no.
     config.BehindProxyServer = "no";
 
+Make sure to restart wazuh-api service after editing the config file using the command below appropriate for your system:
+
+    systemctl restart wazuh-api
+    service wazuh-api restart
+
+
 Basic Authentication
 -------------------------
 
-By default you can access by typing user "foo" and password "bar". We recommend you to generate new credentials. This can be done very easily, with the following steps::
+It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName** ::
 
     $ cd /var/ossec/api/configuration/auth
     $ sudo node htpasswd -c user myUserName
 
-SSL Certificate
--------------------------
+Manually enable https support
+---------------------------------
 
-At this point, you will create certificates to use the API.
-
-Follow the next steps to generate them (Openssl package is required): ::
+Generate key and certificate request (the Openssl package is required): ::
 
  $ cd /var/ossec/api/configuration/ssl
  $ sudo openssl genrsa -des3 -out server.key 1024
  $ sudo openssl req -new -key server.key -out server.csr
 
-The password must be entered everytime you run the server, if you don't want to enter the password everytime, you can remove it by running these commands: ::
+By default, the key's password must be entered every time you run the server.  If you don't want to enter the password every time, you can remove it by running these commands: ::
 
  $ sudo cp server.key server.key.org
  $ sudo openssl rsa -in server.key.org -out server.key
 
-Now generate your self-signed certificate: ::
+Next generate your self-signed certificate: ::
 
  $ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 

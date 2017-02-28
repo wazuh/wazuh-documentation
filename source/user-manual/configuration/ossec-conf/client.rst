@@ -20,7 +20,7 @@ Configure the connection parameters related to connecting to the manager.
 +--------------------+----------------------------------------------------------------------+
 | `port`_            | Any port number from 1 to 65535                                      |
 +--------------------+----------------------------------------------------------------------+
-| `config-profile`_  | Multiple profiles can be included, separated by a comma and a space  |
+| `config-profile`_  | One or more profile names separated by a comma and a space           |
 +--------------------+----------------------------------------------------------------------+
 | `notify_time`_     | A positive number (seconds)                                          |
 +--------------------+----------------------------------------------------------------------+
@@ -32,7 +32,7 @@ Configure the connection parameters related to connecting to the manager.
 ``server-ip``
 -------------
 
-Specifythe IP address of the analysis server
+Specify the IP address of the Wazuh manager.
 
 .. topic:: Default value
 
@@ -40,12 +40,13 @@ Specifythe IP address of the analysis server
 
 .. topic:: Allowed values
 
-    Any valid IP address is allowed
+    Any valid IP address is allowed.
+
 
 ``server-hostname``
 -------------------
 
-Specify the hostname of the analysis server
+Specify the hostname of the Wazuh manager.
 
 .. topic:: Default value
 
@@ -53,12 +54,13 @@ Specify the hostname of the analysis server
 
 .. topic:: Allowed values
 
-    Any valid hostname is allowed
+    Any resolvable hostname is allowed.
+
 
 ``port``
 --------
 
-Specifies the port to send the events (must be the same to the one used by the analysis server).
+Specify the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
 
 .. topic:: Default value
 
@@ -66,12 +68,13 @@ Specifies the port to send the events (must be the same to the one used by the a
 
 .. topic:: Allowed values
 
-    Any port number from 1 to 65535 is allowed
+    Any port number from 1 to 65535 is allowed.
+
 
 ``config-profile``
 ------------------
 
-Specifies the ``agent.conf`` profiles to be used by the agent.
+Specify the ``agent.conf`` profile(s) to be used by the agent.
 
 .. topic:: Default value
 
@@ -89,10 +92,11 @@ Specifies the ``agent.conf`` profiles to be used by the agent.
            <config-profile>webserver, lowmemory</config-profile>
      </client>
 
+
 ``notify_time``
 ---------------
 
-Specifies the time in seconds between information messages sent by the agents to the server.
+Specify the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated agent.conf file to agents, but also could put undue load on the manager if there are a large number of agents.
 
 .. topic:: Default value
 
@@ -101,11 +105,12 @@ Specifies the time in seconds between information messages sent by the agents to
 .. topic:: Allowed values
 
     A positive number (seconds)
+
 
 ``time-reconnect``
 ------------------
 
-Time in seconds until a reconnection attempt. This should be set to a higher number than notify_time.
+This is the time in seconds until a reconnection attempt. This should be set to a higher number than notify_time.  For example, a notify_time time of 60 combined with a time-reconnect of 300 would mean that agents will cause the agent to attempt to check in once per minute, but if a checkin attempt fails to get a response from the manager, the agent will wait five minutes before trying again.  Once it again succeeds, checkins will resume their normal one-minute interval.
 
 .. topic:: Default value
 
@@ -114,3 +119,6 @@ Time in seconds until a reconnection attempt. This should be set to a higher num
 .. topic:: Allowed values
 
     A positive number (seconds)
+    
+.. warning::
+	Notice that the notify_time value uses an underscore while the time-reconnect value uses a dash.  This is an unfortunate legacy naming inconsistency, and is easy to mix up.  

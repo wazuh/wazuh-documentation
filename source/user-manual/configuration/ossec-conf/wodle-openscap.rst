@@ -1,6 +1,6 @@
 .. _wodle_openscap:
 
-Wodle OpenSCAP
+The OpenSCAP wodle
 ========================
 
 .. topic:: XML section name
@@ -9,7 +9,7 @@ Wodle OpenSCAP
 
 		<wodle name="open-scap">
 
-Configure OpenSCAP wodle.
+Configuration options of the OpenSCAP wodle.
 
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
@@ -42,7 +42,7 @@ Timeout for each evaluation.
 ``interval``
 -------------------
 
-Space of time between OpenSCAP executions.
+Interval between OpenSCAP executions.
 
 .. topic:: Default value
 
@@ -52,12 +52,12 @@ Space of time between OpenSCAP executions.
 
 .. topic:: Allowed values
 
-    A positive number. It can contain a prefix character: s (seconds), m (minutes), h (hours), d (days).
+    A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days).
 
 ``scan-on-start``
 -------------------
 
-Run evaluation when on service start without waiting for interval.
+Run evaluation immediately when service is started.
 
 .. topic:: Default value
 
@@ -81,7 +81,7 @@ Define an evaluation.
     path
         Use the specified policy file (DataStream, XCCDF or OVAL). Default path: /var/ossec/wodles/oscap/policies
     timeout
-        Timeout for the evaluation (in seconds). It overwrites the generic timeout.
+        Timeout for the evaluation (in seconds).  Use of this attribute overwrites the generic timeout.
     xccdf-id
         XCCDF id.
     oval-id

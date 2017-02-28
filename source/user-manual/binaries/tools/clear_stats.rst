@@ -4,7 +4,7 @@
 clear_stats
 ===========
 
-Clear the events stats.
+The clear_stats program clears the events stats.
 
 +---------+-----------------------------+
 | Options | Descriptions                |
@@ -21,7 +21,7 @@ Clear the events stats.
 ``-h``
 ------
 
-Print and display a help message of all available options to clear_stats
+Display the help message.
 
 ``-a``
 ------

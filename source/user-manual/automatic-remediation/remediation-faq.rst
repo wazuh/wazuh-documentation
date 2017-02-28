@@ -9,7 +9,7 @@ Faq
 
 Can I use a custom script?
 --------------------------
-Yes. You can create your own script and configure the command and the active response to use it.
+Yes. You can create your own script and configure a command and active response to refer to it.
 
 Can I configure active response to only one host?
 -------------------------------------------------
@@ -17,4 +17,4 @@ Yes, using the location option. More info: :ref:`Active Response options <refere
 
 Can active response remove the action after a time?
 ---------------------------------------------------
-Yes, using timeout_allowed option  on the command and timeout on active response. :ref:`Example <remediation-examples>`
+Yes, using the *timeout_allowed* option on the command and the *timeout* option on tje active response. More info: :ref:`Example <remediation-examples>`

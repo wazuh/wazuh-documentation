@@ -4,8 +4,7 @@
 ossec-remoted
 =============
 
-``ossec-remoted`` is the server side daemon that communicates with the agents.
-It runs as ossecr and is chrooted to ``/var/ossec`` by default.
+The ossec-remoted program is the server side daemon that communicates with the agents.  It runs as ossecr and is chrooted to ``/var/ossec`` by default.
 
 
 +------------------------------+---------------------------------+
@@ -25,7 +24,7 @@ It runs as ossecr and is chrooted to ``/var/ossec`` by default.
 +------------------------------+---------------------------------+
 | `-t`_                        | Test configuration              |
 +------------------------------+---------------------------------+
-| `-u`_                        | Run as an user                  |
+| `-u`_                        | Run as a user                   |
 +------------------------------+---------------------------------+
 | `-V`_                        | Version and license information |
 +------------------------------+---------------------------------+
@@ -35,7 +34,7 @@ It runs as ossecr and is chrooted to ``/var/ossec`` by default.
 ``-c``
 ------
 
-Run ``ossec-remoted`` using ``<config>`` as the configuration file.
+Run using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
@@ -67,18 +66,18 @@ Chroot to ``<dir>``.
 ``-d``
 ------
 
-Execute ``ossec-remoted`` in debug mode. This can be used more than once to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 
 ``-f``
 ------
 
-Run ossec-remoted in the foreground.
+Run  in the foreground.
 
 ``-g``
 ------
 
-Run ``ossec-remoted`` as ``<group>``.
+Run  as a group.
 
 .. topic:: Arguments
 
@@ -100,7 +99,7 @@ Test configuration.
 ``-u``
 ------
 
-Run ``ossec-remoted`` as ``<user>``.
+Run as a user.
 
 .. topic:: Arguments
 
@@ -115,4 +114,4 @@ Run ``ossec-remoted`` as ``<user>``.
 ------
 
 
-Version and license information.
+Display version and license information.

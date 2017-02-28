@@ -11,7 +11,7 @@ Syscheck
 		<syscheck>
 
 
-Configuration related to file integrity monitoring.
+Configuration options for file integrity monitoring.
 
 +---------------------+----------------------------------------------+
 | Options             | Allowed values                               |
@@ -22,7 +22,7 @@ Configuration related to file integrity monitoring.
 +---------------------+----------------------------------------------+
 | `frequency`_        | A positive number (seconds)                  |
 +---------------------+----------------------------------------------+
-| `scan_time`_        | Time                                         |
+| `scan_time`_        | Time of day                                  |
 +---------------------+----------------------------------------------+
 | `scan_day`_         | Day of the week                              |
 +---------------------+----------------------------------------------+
@@ -46,13 +46,13 @@ Configuration related to file integrity monitoring.
 ``directories``
 ---------------
 
-Use this option to add or remove directories to be monitored. They must be comma separated.
+Use this option to add or remove directories to be monitored. The directories must be comma separated.
 
-All files and subdirectories will also be monitored.
+All files and subdirectories within the noted directories will also be monitored.
 
 Drive letters without directories are not valid. At a minimum the '.' should be included (``D:\.``).
 
-This should be set on the system you wish tomonitor (or in the agent.conf if appropriate).
+This is to be set on the system to be monitored (or in the agent.conf, if appropriate).
 
 .. topic:: Default value
 
@@ -67,11 +67,12 @@ This should be set on the system you wish tomonitor (or in the agent.conf if app
 .. topic:: Attributes
 
     realtime
-      This will enable realtime/continuous monitoring on Linux (using the inotify system calls) and Windows systems.
+      This will enable real-time/continuous monitoring on Linux (using the inotify system calls) and Windows systems.
 
       Allowed value: yes
+
     report_changes
-      Report diffs of file changes.  This is limited to text files at this time.
+      Report file changes.  This is limited to text files at this time.
 
       Allowed value: yes
 
@@ -79,37 +80,44 @@ This should be set on the system you wish tomonitor (or in the agent.conf if app
       All the following check_* options are used together.
 
       Allowed value: yes
+
     check_sum
-      Check the md5 and sha1 hashes of the  of the files will be checked. This is the same as using both check_sha1sum="yes" and check_md5sum="yes"
+      Check the MD5 and SHA-1 hashes of the files. This is the same as using both check_sha1sum="yes" and check_md5sum="yes"
 
       Allowed value: yes
+
     check_sha1sum
-      When used only the sha1 hash of the files will be checked.
+      Check only the SHA-1 hash of the files.
 
       Allowed value: yes
+
     check_md5sum
-      The md5 hash of the files will be checked.
+      Check only the MD5 hash of the files.
 
       Allowed value: yes
+
     check_size
-      The size of the files will be checked.
+      Check the size of the files.
 
       Allowed value: yes
+
     check_owner
-      Check the owner of the files selected.
+      Check the owner of the files.
 
       Allowed value: yes
+
     check_group
-      Check the group owner of the files/directories selected.
+      Check the group owner of the files/directories.
 
       Allowed value: yes
 
     check_perm
-      Check the UNIX permission of the files/directories selected. On windows this will only check the POSIX permissions.
+      Check the UNIX permission of the files/directories. On Windows, this will only check the POSIX permissions.
 
       Allowed value: yes
+
     restrict
-      A string that will limit checks to files containing that string in the file name. Any directory or file name (but not a path) are allowed
+      Limit checks to files containing the entered string in the file name. Any directory or file name (but not a path) is allowed
 
       Allowed value: string
 
@@ -118,7 +126,7 @@ This should be set on the system you wish tomonitor (or in the agent.conf if app
 ``ignore``
 ----------
 
-List of files or directories to be ignored (one entry per element). The files and directories are still checked, but the results are ignored.
+List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories.  These files and directories are still checked, but the results are ignored.
 
 .. topic:: Default value
 
@@ -142,7 +150,7 @@ List of files or directories to be ignored (one entry per element). The files an
 ``frequency``
 -------------
 
-Frequency that the syscheck is going to be executed (in seconds)
+Frequency that the syscheck will be run (in seconds)
 
 .. topic:: Default value
 
@@ -159,7 +167,7 @@ Frequency that the syscheck is going to be executed (in seconds)
 ``scan_time``
 -------------
 
-Time to run the scans. It can be in the formats: 21pm, 8:30
+Time to run the scans. Times may be represented as 21pm or 8:30
 
 .. topic:: Default value
 
@@ -171,12 +179,12 @@ Time to run the scans. It can be in the formats: 21pm, 8:30
 
 .. note::
 
-   This may delay the initialization of realtime scans.
+   This may delay the initialization of real-time scans.
 
 ``scan_day``
 ------------
 
-Day of the week to run the scans
+Day of the week to run the scans(one entry per line). Multiple lines may be entered to include multiple registry entries.
 
 
 .. topic:: Default value
@@ -191,7 +199,7 @@ Day of the week to run the scans
 ``auto_ignore``
 ---------------
 
-Specifies if syscheck will ignore files that change too often (after the third change)
+Specifies whether or not syscheck will ignore files that change too many times (after the third change)
 
 .. topic:: Default value
 
@@ -212,7 +220,7 @@ Specifies if syscheck will ignore files that change too often (after the third c
 ``alert_new_files``
 -------------------
 
-Specifies if syscheck should alert on new files created
+Specifies if syscheck should alert when new files are created
 
 .. topic:: Default value
 
@@ -226,13 +234,13 @@ Specifies if syscheck should alert on new files created
 
 .. note::
 
-   New files will only be detected on a full scan, this option does not work in realtime.
-   It valid on: server and local
+   New files will only be detected on a full scan (server or local). This option does not work in realtime.
+   
 
 ``scan_on_start``
 -----------------
 
-Specifies if syscheck should do the first scan as soon as it is started.
+Specifies if syscheck scans immediately when started.
 
 .. topic:: Default value
 
@@ -248,7 +256,7 @@ Specifies if syscheck should do the first scan as soon as it is started.
 ``windows_registry``
 --------------------
 
-Use this option to add Windows registry entries to be monitored (Windows-only).
+Use this option to monitor specified Windows registry entries (one entry per line). Multiple lines may be entered to include multiple registry entries.
 
 .. topic:: Default value
 
@@ -258,8 +266,7 @@ Use this option to add Windows registry entries to be monitored (Windows-only).
 
 .. topic:: Allowed values
 
-  Any registry entry (one per element)
-
+  Any registry entry 
 
 .. note::
 
@@ -268,7 +275,7 @@ Use this option to add Windows registry entries to be monitored (Windows-only).
 ``registry_ignore``
 -------------------
 
-List of registry entries to be ignored.
+List of registry entries to be ignored.  (one entry per line). Multiple lines may be entered to include multiple registry entries.
 
 .. topic:: Default value
 
@@ -278,12 +285,12 @@ List of registry entries to be ignored.
 
 .. topic:: Allowed values
 
-  Any registry entry (one per element)
+  Any registry entry
 
 ``prefilter_cmd``
 -----------------
 
-Command to run to prevent prelinking from creating false positives.
+Run to prevent prelinking from creating false positives.
 
 
 .. topic:: Default value
@@ -301,13 +308,12 @@ Command to run to prevent prelinking from creating false positives.
 
 .. note::
 
-   This option can potentially impact performance negatively. The configured command will be run for each and every file checked.
+   This option may negatively impact performance as the configured command will be run for each file checked.
 
 ``skip_nfs``
 ------------
 
-Specifies if syscheck should scan network mounted filesystems.
-Works on Linux and FreeBSD.Currently skip_nfs will abort checks running against CIFS or NFS mounts.
+Specifies if syscheck should scan network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
 .. topic:: Default value
 

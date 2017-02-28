@@ -4,22 +4,22 @@
 update-ruleset.sh
 =================
 
-Update decoders, rules and rootchecks.
+The update-ruleset.sh program updates decoders, rules and rootchecks.
 
 +---------------------+----------------------------+
 | Options             | Descriptions               |
 +=====================+============================+
-| `-r <#restart>`__   | Restart OSSEC              |
+| `-r <#restart>`__   | Restart Wazuh              |
 +---------------------+----------------------------+
-| `-R <#norestart>`__ | Do no restart OSSEC        |
+| `-R <#norestart>`__ | Do not restart Wazuh       |
 +---------------------+----------------------------+
 | `-b`_               | Restore backup             |
 +---------------------+----------------------------+
-| `-h`_               | Display the help message   |
+| `-h`_               | Display help message       |
 +---------------------+----------------------------+
 | `-f`_               | Force to update            |
 +---------------------+----------------------------+
-| `-o`_               | Set OSSEC path             |
+| `-o`_               | Set Wazuh path             |
 +---------------------+----------------------------+
 | `-s`_               | Select ruleset source path |
 +---------------------+----------------------------+
@@ -34,20 +34,20 @@ Update decoders, rules and rootchecks.
 ``-r``
 ------
 
-Restart OSSEC when required.
+Restart Wazuh when needed.
 
 .. _norestart:
 
 ``-R``
 ------
 
-Do not restart OSSEC when required.
+Do not restart Wazuh.
 
 
 ``-b``
 ------
 
-Restore last backup.
+Restore the last backup.
 
 
 ``-h``
@@ -58,13 +58,13 @@ Display the help message.
 ``-f``
 ------
 
-Force to update the ruleset.
+Force Wazuh to update the ruleset.
 
 
 ``-o``
 ------
 
-Set OSSEC path.
+Set Wazuh path.
 
 .. topic:: Default
 
@@ -74,15 +74,15 @@ Set OSSEC path.
 ``-s``
 ------
 
-Select ruleset source path (instead of download it).
+Select ruleset source path (instead of downloading it).
 
 
 ``-j``
 ------
 
-JSON output. It should be used with '-s' or '-S' argument.
+JSON output. This option must be used in conjunction with the '-s' or '-S' options.
 
 ``-d``
 ------
 
-Debug mode.
+Run in debug mode.

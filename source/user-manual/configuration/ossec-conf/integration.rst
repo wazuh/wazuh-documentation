@@ -10,7 +10,7 @@ Integration
 
 		<integration>
 
-Configure manager to connect Wazuh to external APIs and alerting tools, such Slack and PagerDuty.
+This configures the manager to connect Wazuh to external APIs and alerting tools such as Slack and PagerDuty.
 
 +------------------+-----------------------------------------------------------------------+
 | Options          | Allowed values                                                        |
@@ -23,7 +23,7 @@ Configure manager to connect Wazuh to external APIs and alerting tools, such Sla
 +------------------+-----------------------------------------------------------------------+
 | `level`_         | Any alert level from 0 to 16                                          |
 +------------------+-----------------------------------------------------------------------+
-| `rule_id`_       | Id rules                                                              |
+| `rule_id`_       | rules IDs                                                             |
 +------------------+-----------------------------------------------------------------------+
 | `group`_         | One or more groups or categories                                      |
 +------------------+-----------------------------------------------------------------------+
@@ -34,23 +34,26 @@ Configure manager to connect Wazuh to external APIs and alerting tools, such Sla
 ``name``
 --------
 
-Name of the service. Allowed values:
+This indicates the type of the service to integrate with. Allowed values:
 
 - ``slack``
 - ``pagerduty``
 
+
 ``hook_url``
 ------------
 
-The URL provided by Slack when the integration was enabled. **Mandatory for
+This is the URL provided by Slack when integration is enabled on the Slack side. This is **mandatory for
 Slack.**
+
 
 ``api_key``
 -----------
 
-The key that you retrieved from the PagerDuty API. **Mandatory for PagerDuty.**
+This is the key that you would have retrieved from the PagerDuty API. This is **mandatory for PagerDuty.**
 
-.. note:: You must restart OSSEC after changing the configuration.
+.. note:: You must restart OSSEC after changing this configuration.
+
 
 Optional filters
 ^^^^^^^^^^^^^^^^
@@ -58,21 +61,24 @@ Optional filters
 ``level``
 ---------
 
-Filter rules by level: push only alerts with the specified level or above.
+This filter alerts by rule level.  It will push only alerts with the specified level or above.
+
 
 ``rule_id``
 -----------
 
-Filter by rule ID.
+This filters alerts by rule ID.
+
 
 ``group``
 ---------
 
-Filter rules by category. `OS_Regex Syntax`_.
+This filters alerts by rules. `OS_Regex Syntax`_.
+
 
 ``event_location``
 ------------------
 
-Filter rules by location where they were originated. `OS_Regex Syntax`_
+This filters alerts by the location of where the event originated. `OS_Regex Syntax`_
 
 .. _`OS_Regex Syntax`: http://ossec-docs.readthedocs.org/en/latest/syntax/regex.html

@@ -4,7 +4,7 @@
 ossec-dbd
 =============
 
-The ``ossec-dbd`` daemon inserts the alert logs into a database, either postgresql or mysql.
+The ``ossec-dbd`` program inserts the alert logs into a database.  These alerts can be inserted into either postgresql or mysql.
 
 +-------------------------+---------------------------------+
 | Options                 | Descriptions                    |
@@ -23,7 +23,7 @@ The ``ossec-dbd`` daemon inserts the alert logs into a database, either postgres
 +-------------------------+---------------------------------+
 | `-t`_                   | Test configuration              |
 +-------------------------+---------------------------------+
-| `-u`_                   | Run as an user                  |
+| `-u`_                   | Run as a user                   |
 +-------------------------+---------------------------------+
 | `-V`_                   | Version and license information |
 +-------------------------+---------------------------------+
@@ -31,7 +31,7 @@ The ``ossec-dbd`` daemon inserts the alert logs into a database, either postgres
 ``-c``
 ------
 
-Run ``ossec-dbd`` using ``<config>`` as the configuration file.
+Run using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
@@ -64,17 +64,17 @@ Chroot to ``<dir>``.
 ``-d``
 ------
 
-Execute ossec-dbd in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ``ossec-dbd`` in the foreground.
+Run in the foreground.
 
 ``-g``
 ------
 
-Run ossec-dbd as <group>.
+Run as a group.
 
 .. topic:: Arguments
 
@@ -95,7 +95,7 @@ Test configuration.
 ``-u``
 ------
 
-Run ossec-dbd as ``<user>``.
+Run as a user.
 
 .. topic:: Arguments
 
@@ -108,4 +108,4 @@ Run ossec-dbd as ``<user>``.
 ``-V``
 ------
 
-Version and license information.
+Display version and license information.

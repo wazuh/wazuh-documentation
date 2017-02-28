@@ -166,7 +166,7 @@ Output GeoIP data at JSON alerts.
 ``analysisd.debug``
 -------------------
 
-Debug options of analysisd in server or local installations.
+Debug level (in server or local installations).
 
 
 .. topic:: Default value
@@ -176,8 +176,8 @@ Debug options of analysisd in server or local installations.
 .. topic:: Allowed values
 
 	0
-		No debug
+		No debug output
 	1
-		First level of debug
+		Standard debug output
 	2
-		Full debugging
+		Verbose debug output

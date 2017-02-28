@@ -12,7 +12,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :ref:`Rootkit detection <manual_anomaly_detection>` (**rootcheck**)
 - :ref:`Log analysis <manual_log_analysis>`
 
-Below, it is explained the syntax of *agent.conf* and how it works the process of pushing the configuration from the manager to the agent.
+Below, is the proper syntax of *agent.conf* and the process of pushing the configuration from the manager to the agent.
 
 agent.conf
 --------------------------------
@@ -32,18 +32,19 @@ It should be readable by the ossec user.
 +------------+---------------------+
 | Options    | Allowed values      |
 +============+=====================+
-| `name`_    | Any  agent name     |
+| `name`_    | Any agent name      |
 +------------+---------------------+
 | `os`_      | Any OS family       |
 +------------+---------------------+
 | `profile`_ | Any defined profile |
 +------------+---------------------+
 
+If no option is specified, this configuration section will be pushed to all agents. 
 
 ``name``
 --------
 
-This option allows you to assign the block to one particular agent.
+Allows assignment of the block to one particular agent.
 
 .. topic:: Default value
 
@@ -63,7 +64,7 @@ This option allows you to assign the block to one particular agent.
 ``os``
 ------
 
-This option allows you to assign the block to an operating system.
+Allows assignment of the block to an operating system.
 
 .. topic:: Default value
 
@@ -83,7 +84,7 @@ This option allows you to assign the block to an operating system.
 ``profile``
 -----------
 
-This option allows you to assign a profile name to a block; so any agent configured to use the defined profile may use the block.
+Allows assignment of a profile name to a block.  Any agent configured to use the defined profile may use the block.
 
 .. topic:: Default value
 
@@ -106,7 +107,7 @@ Centralized configuration process
 
 Edit the file */var/ossec/etc/shared/agent.conf*.
 
-You can create several configurations according to the *name*, *OS* or *profile* of an agent.
+Several configurations may be created according to the *name*, *OS* or *profile* of an agent.
 
 .. code-block:: xml
 
@@ -126,18 +127,20 @@ You can create several configurations according to the *name*, *OS* or *profile*
 
     <agent_config profile="database">
         <localfile>
-            <location>/var/log/database.loglocation>
+            <location>/var/log/database.log</location>
             <log_format>syslog</log_format>
         </localfile>
     </agent_config>
 
-2. Push the configuration to the agents
+2. Run /var/ossec/bin/verify-agent-conf and if any errors are reported, fix them and return to step one.  Failure to perform this step may allow errors to be pushed to agents, preventing them from running.  If that happens, you may be forced to visit each agent manually to recover them.   
 
-The manager will push the configuration automatically to the agents. It can take a while for it to complete, if you restart the manager the file will be pushed much faster.
+3. Push of the configuration to the agents
 
-3. Check if the agent received the configuration
+Each time agents check-in to the manager (10 minute default), they pull a fresh copy of *agent.conf* if a new version is available.  However, the new *agent.conf* is not used by the agent until the next time the agent is restarted in step 5. Restarting the manager will speed up how quickly it makes the new *agent.conf* available to the agents.
 
-Once the agent received the configuration, the "Client version" field will have the md5sum of the agent.conf file.
+4. Check if the agent received the configuration
+
+Once an agent received the configuration, the "Client version" field will have the md5sum of the *agent.conf* file.
 
 .. code-block:: console
 
@@ -181,9 +184,9 @@ Also, the API returns the md5sum of agent.conf in the field *sharedSum*:
     }
 
 
-4. Restart the agent
+5. Restart the agent
 
-In order to apply the changes, you must restart the agent. It can be done remotely:
+In order to apply the changes, you must restart the agent which may be completed remotely:
 
 .. code-block:: console
 

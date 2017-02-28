@@ -21,7 +21,7 @@ Monitord
 ``monitord.day_wait``
 ---------------------
 
-Ammount of seconds to wait before compressing or signing the files.
+Amount of seconds to wait before compressing or signing the files.
 
 .. topic:: Default value
 
@@ -35,7 +35,7 @@ Ammount of seconds to wait before compressing or signing the files.
 ``monitord.compress``
 ---------------------
 
-Option to compress the log files.
+Toggle to enable or disable log file compression.
 
 .. topic:: Default value
 
@@ -52,7 +52,7 @@ Option to compress the log files.
 ``monitord.sign``
 -----------------
 
-Option to sign the log files.
+Toggle to enable or disable signing the log files.
 
 .. topic:: Default value
 
@@ -68,7 +68,7 @@ Option to sign the log files.
 ``monitord.monitor_agents``
 ---------------------------
 
-Option to monitor agents.
+Toggle to enable or disable monitoring of agents.
 
 .. topic:: Default value
 

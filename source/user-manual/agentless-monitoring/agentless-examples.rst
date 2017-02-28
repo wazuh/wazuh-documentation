@@ -11,7 +11,7 @@ Examples
 
 Integrity check BSD
 -------------------
-This will monitorize ``/bin`` and ``/var`` directories
+In this example, the configuration is set to monitor the ``/bin`` and ``/var`` directories
 
 ::
 
@@ -28,7 +28,9 @@ This will monitorize ``/bin`` and ``/var`` directories
 Integrity check Linux
 ---------------------
 
-For linux systems, it's possible to set a list of directories in the configuration and Wazuh will do the integrity check inside the remote box. This option is for linux based systems. You need to configure the ``type`` option to ``ssh_integrity_check_linux``
+For Linux systems, set the ``type`` as ``ssh_integrity_check_linux`` as referenced below.  A space-separated list of directories may be referenced in the configuration section using the arguments tag.  Using this configuration, Wazuh will do an integrity check on the remote box.
+
+The below example is configured to monitor the ``/bin`` and ``/etc /sbin`` directories
 
 ::
 
@@ -40,13 +42,12 @@ For linux systems, it's possible to set a list of directories in the configurati
     <arguments>/bin /etc/ /sbin</arguments>
   </agentless>
 
-This will monitorize ``/bin`` and ``/etc /sbin`` directories
 
 
 Generic Diff
 ---------------------
 
-This will configure the host, to execute ``ls -la /etc`` and ``cat /etc/passwd`` every 20000 seconds, and will alert you if the output of those commands change at some point.
+In this example, the configuration is set to execute ``ls -la /etc`` and ``cat /etc/passwd`` commands every 20000 seconds. An alert will be triggered if the output of those commands change.
 
 .. code-block:: xml
 
@@ -61,7 +62,7 @@ This will configure the host, to execute ``ls -la /etc`` and ``cat /etc/passwd``
 Pix config
 ---------------------
 
-This option will alert when a Cisco PIX or router configuration changes.
+In this example, the configuration is set to trigger an alert when a Cisco PIX or router configuration changes.
 
 .. code-block:: xml
 

@@ -4,7 +4,7 @@
 ossec-csyslogd
 ==============
 
-``ossec-csyslogd`` is a daemon that forwards the Wazuh alerts via syslog.
+The ossec-csyslogd program forwards alerts via syslog.
 
 +------------------------------+---------------------------------+
 | Options                      | Descriptions                    |
@@ -23,7 +23,7 @@ ossec-csyslogd
 +------------------------------+---------------------------------+
 | `-t`_                        | Test configuration              |
 +------------------------------+---------------------------------+
-| `-u`_                        | Run as an user                  |
+| `-u`_                        | Run as a user                   |
 +------------------------------+---------------------------------+
 | `-V`_                        | Version and license information |
 +------------------------------+---------------------------------+
@@ -32,7 +32,7 @@ ossec-csyslogd
 ``-c``
 ------
 
-Run ossec-csyslogd using ``<config>`` as the configuration file.
+Run using ``<config>`` as the configuration file.
 
 .. topic:: Arguments
 
@@ -65,17 +65,17 @@ Chroot to ``<dir>``.
 ``-d``
 ------
 
-Execute ossec-csyslogd in debug mode. This option can be used multiple times to increase the verbosity of the debug messages.
+Run in debug mode. This option may be repeated to increase the verbosity of the debug messages.
 
 ``-f``
 ------
 
-Run ``ossec-csyslogd`` in the foreground.
+Run in the foreground.
 
 ``-g``
 ------
 
-Run ossec-csyslogd as <group>.
+Run as a group.
 
 .. topic:: Arguments
 
@@ -96,7 +96,7 @@ Test configuration.
 ``-u``
 ------
 
-Run ``ossec-csyslogd`` as ``<user>``.
+Run as a user.
 
 .. topic:: Arguments
 
@@ -110,4 +110,4 @@ Run ``ossec-csyslogd`` as ``<user>``.
 ``-V``
 ------
 
-Version and license information.
+Display the version and license information.

@@ -3,10 +3,7 @@
 Forwarding alerts
 =================
 
-.. warning::
-	Draft document.
-
-By default, the alerts are stored in the manager and forwared to Elasticsearch but also it is possible to forward them to: syslog, email, slack, etc.
+By default, the alerts are stored in the manager and forwarded to Elasticsearch, however, alerts may also be forwarded to syslog, email, slack, etc.
 
 .. topic:: Contents
 
