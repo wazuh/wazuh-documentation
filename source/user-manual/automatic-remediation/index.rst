@@ -29,12 +29,12 @@ Automatic remediation can be triggered by specific alerts, alert levels or rule 
 
 2. Where are they triggered?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-We can create triggers to remove the action after a certain time of time or actions that will not be removed. (Stateful vs Stateless commands). The scripts are located at ``/var/ossec/active-response/bin``
+The scripts are located at ``/var/ossec/active-response/bin``. This scripts runs on the agent that triggered the alert, on the server, on a specific agent or everywhere.
 
 3. Active Response Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Active Response is configured on :ref:`ossec.conf <reference_ossec_conf>`, we need to follow the next steps:
+We can create triggers to remove the action after a certain time of time or actions that will not be removed. (Stateful vs Stateless commands). Active Response is configured on :ref:`ossec.conf <reference_ossec_conf>`, we need to follow the next steps:
 
 1. Create a command
 
