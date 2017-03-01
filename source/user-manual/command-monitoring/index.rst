@@ -18,6 +18,11 @@ Command monitoring is configured in the :ref:`localfile section<reference_ossec_
 How it works
 ------------
 
+.. thumbnail:: ../../images/manual/command-monitoring/command-monitoring.png
+  :title: Command monitoring
+  :align: center
+  :width: 100%
+
 The following is required to set up the monitoring of a specific command's output on agents:
 
 Configure Wazuh agents to accept remote commands from the manager

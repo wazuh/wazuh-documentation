@@ -6,7 +6,7 @@ Automatic remediation
 Automatic remediation performs various countermeasures to address active threats such as blocking access to an agent from the threat source.  This automated remediation is called **Active response** in Wazuh.
 
 **Active response** executes a script in response to being triggered by a specific alert based on alert level or rule group.
-Any number of scripts can be initiated in response to a trigger, however these responses should be carefully considered as poor implementation of rules and responses could increase the vulnerability of the system. 
+Any number of scripts can be initiated in response to a trigger, however these responses should be carefully considered as poor implementation of rules and responses could increase the vulnerability of the system.
 
 **Active response** is configured in :ref:`ossec.conf <reference_ossec_conf>`, within the :ref:`Active Response <reference_ossec_active_response>` and :ref:`Command <reference_ossec_commands>` sections.
 
@@ -21,9 +21,15 @@ Any number of scripts can be initiated in response to a trigger, however these r
 How it works
 ------------
 
+.. thumbnail:: ../../images/manual/automatic-remediation/automatic-remediation.png
+  :title: Command monitoring
+  :align: center
+  :width: 100%
+
+
 1. When is an **Active response** triggered?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-An **Active response** can be triggered by a specific alert, alert level or rule group as configured in the ossec.conf file, where a script is configured to execute with a certain rule/group.  **Active responses** are either stateful or stateless responses.  Stateful responses will undo the action after a specified period of time while stateless responses are one-time actions. 
+An **Active response** can be triggered by a specific alert, alert level or rule group as configured in the ossec.conf file, where a script is configured to execute with a certain rule/group.  **Active responses** are either stateful or stateless responses.  Stateful responses will undo the action after a specified period of time while stateless responses are one-time actions.
 
 2. Where are **Active response** actions executed?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -36,9 +42,9 @@ An **Active response** is configured in :ref:`ossec.conf <reference_ossec_conf>`
 
 1. Create a command
 
-	In order to configure an **Active response**, a **command** must be defined that will initiate a certain script in response to a trigger. 
-	
-	To configure the **Active response**, define the name of a **command** using the pattern below and then reference the script to be initiated. Next, define what data element(s) will be passed to the script. 
+	In order to configure an **Active response**, a **command** must be defined that will initiate a certain script in response to a trigger.
+
+	To configure the **Active response**, define the name of a **command** using the pattern below and then reference the script to be initiated. Next, define what data element(s) will be passed to the script.
 
 	Custom scripts that have the ability to receive parameters from the command line may also be used for an **Active response**.
 
