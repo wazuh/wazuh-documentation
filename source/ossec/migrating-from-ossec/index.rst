@@ -7,7 +7,7 @@ Wazuh is born as a OSSEC HIDS fork, but we added a lot of capabilities that you 
 
 If you already have a ELK stack installed, we are not going to describe here the needed steps to integrate it with Wazuh, but you can ask on our mailing list.
 
-Subscribe to our mailing list, send an email to: wazuh+subscribe@googlegroups.com
+You can join our users `mailing list<https://groups.google.com/d/forum/wazuh>`_ by sending an email to wazuh+subscribe@googlegroups.com, to ask questions and participate in discussions.
 
 Prerequisite
 ------------
@@ -48,7 +48,7 @@ This section describes how to upgrade from OSSEC to Wazuh in case that OSSEC was
 .. warning::
     The configuration file ``/var/ossec/etc/ossec.conf`` **will be overwritten**. The *old* configuration file from the current installation is saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. You should compare the new file with the old one.
 
-A backup of your previous ruleset will be saved at ``/var/ossec/etc/backup_ruleset``. All the rules/decoders in other files than ``local_rules.xml`` or ``local_decoder.xml`` will be overwritten. You will need to review the backup in order to incorpore those missing rules. 
+A backup of your previous ruleset will be saved at ``/var/ossec/etc/backup_ruleset``. All the rules/decoders in other files than ``local_rules.xml`` or ``local_decoder.xml`` will be overwritten. You will need to review the backup in order to incorpore those missing rules.
 
 Following the proper installation guide, your OSSEC installation will be automatically upgraded to Wazuh:
 
