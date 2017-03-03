@@ -4,6 +4,30 @@
 Update to Elastic 5
 ===================
 
+#. Add the repositories
+
+	Deb Repositories, install the Elastic repository and its GPG key::
+
+		curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+		apt-get install apt-transport-https
+		echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-5.x.list
+		apt-get update
+
+	RPM Repositories, install the Elastic repository and its GPG key::
+
+		rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+		cat > /etc/yum.repos.d/elastic.repo << EOF
+		[elastic-5.x]
+		name=Elastic repository for 5.x packages
+		baseurl=https://artifacts.elastic.co/packages/5.x/yum
+		gpgcheck=1
+		gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+		enabled=1
+		autorefresh=1
+		type=rpm-md
+		EOF
+
 Logstash
 --------
 
@@ -16,9 +40,8 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 		systemctl stop logstash.service
 
 	b) For SysV Init::
+
 		service stop start
-
-
 
 #. Install the Logstash package:
 
@@ -30,6 +53,10 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 		yum install logstash
 
+#. Check the new version of logstash with ``/usr/share/logstash/bin/logstash -V``, the output should be something like::
+
+	$ /usr/share/logstash/bin/logstash -V
+	logstash 5.2.2
 
 #. Download the Wazuh config and template files for Logstash::
 
@@ -40,6 +67,7 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 	Edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled **Remote Wazuh Manager - Filebeat input** and uncommenting the entire input section titled **Local Wazuh Manager - JSON file input**.
 	::
+
 		# Wazuh - Logstash configuration file
 		## Remote Wazuh Manager - Filebeat input
 		#input {
@@ -62,9 +90,13 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 	This will set up Logstash to read the Wazuh alerts.json file directly from the local filesystem rather than expecting Filebeat on a separate server to forward the information in that file to Logstash.
 
+	Because Logstash user needs to read ``alerts.json`` file, please add it to OSSEC group by running::
+
+		usermod -a -G ossec logstash
+
 #. If you are running Wazuh server and the Elastic Stack server on separate systems (distributed architecture):
 
-	it is important to configure encryption between Filebeat and Logstash.  To do so, please see :ref:`elastic_ssl`.
+	Configure encryption between Filebeat and Logstash.  To do so, please see :ref:`elastic_ssl`.
 
 #. Enable and start the Logstash service:
 
@@ -74,10 +106,17 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 		systemctl enable logstash.service
 		systemctl start logstash.service
 
-	b) For SysV Init::
+	b) For SysV Init:
 
-		update-rc.d logstash defaults 95 10
-		service logstash start
+		RPM::
+
+			chkconfig --add logstash
+			service logstash start
+
+		Deb::
+
+			update-rc.d logstash defaults 95 10
+			service logstash start
 
 Elasticsearch
 -------------
@@ -94,6 +133,10 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 
 		yum install elasticsearch
 
+#. Check the new version of logstash with ``/usr/share/elasticsearch/bin/elasticsearch -V``, the output should be something like::
+
+	$ /usr/share/elasticsearch/bin/elasticsearch -V
+	Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
 
 #. Remove old configuration:
 
@@ -129,10 +172,17 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 		systemctl enable elasticsearch.service
 		systemctl start elasticsearch.service
 
-	b) For SysV Init::
+	b) For SysV Init:
 
-		update-rc.d elasticsearch defaults 95 10
-		service elasticsearch start
+		RPM::
+
+			chkconfig --add elasticsearch
+			service elasticsearch start
+
+		Deb::
+
+			update-rc.d elasticsearch defaults 95 10
+			service elasticsearch start
 
 Kibana
 ------
@@ -147,6 +197,11 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 	RPM Packages::
 
 		yum install kibana
+
+#. Check the new version of logstash with ``/usr/share/kibana/bin/kiban -V``, the output should be something like::
+
+	$ /usr/share/kibana/bin/kibana -V
+	5.2.2
 
 #. Install the Wazuh App plugin for Kibana::
 
@@ -164,7 +219,14 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 		systemctl enable kibana.service
 		systemctl start kibana.service
 
-	b) For SysV Init::
+	b) For SysV Init:
 
-		update-rc.d kibana defaults 95 10
-		service kibana start
+		RPM::
+
+			chkconfig --add kibana
+			service kibana start
+
+		Deb::
+
+			update-rc.d kibana defaults 95 10
+			service kibana start
