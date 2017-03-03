@@ -7,7 +7,7 @@ Wazuh is born as a OSSEC HIDS fork, but we added a lot of capabilities that you 
 
 If you already have a ELK stack installed, we are not going to describe here the needed steps to integrate it with Wazuh, but you can ask on our mailing list.
 
-You can join our users `mailing list<https://groups.google.com/d/forum/wazuh>`_ by sending an email to wazuh+subscribe@googlegroups.com, to ask questions and participate in discussions.
+You can join our users `mailing list <https://groups.google.com/d/forum/wazuh>`_ by sending an email to wazuh+subscribe@googlegroups.com, to ask questions and participate in discussions.
 
 Prerequisite
 ------------

@@ -122,6 +122,8 @@ For CentOS 6 and Red Hat 6, you can install the package *python27*, which instal
         #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
         #   yum-config-manager --enable rhel-server-rhscl-6-rpms
 
+.. _wazuh_server_rpm_filebeat:
+
 Installing Filebeat
 -------------------------------------------
 

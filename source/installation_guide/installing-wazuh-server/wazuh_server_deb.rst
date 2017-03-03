@@ -128,6 +128,8 @@ It is possible to set a custom Python path for the API to use in */var/ossec/api
         }
     ];
 
+.. _wazuh_server_deb_filebeat:
+
 Installing Filebeat
 -------------------------------------------
 

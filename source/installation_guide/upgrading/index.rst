@@ -3,71 +3,81 @@
 Upgrading to Wazuh 2.0
 ===================================================
 
-.. warning::
-	Draft document.
+This section describes how to upgrade an existing Wazuh installation to **Wazuh 2.0**, in order to access to the new features.
 
-Introduction
-----------------------------------------------------------
+If you find any problem or error please let us know on our mailing list: `mailing list <https://groups.google.com/d/forum/wazuh>`_
 
-This section describes how to upgrade an existing Wazuh installation to **Wazuh 2.0**.
+Singlehost Configuration
+------------------------
 
-.. warning::
-    The configuration file **/var/ossec/etc/ossec.conf will be overwritten**. The *old* configuration file from the current installation is saved as *ossec.conf.rpmorig* or *ossec.conf.deborig*. You should compare the new file with the old one.
+This section helps you to update your installation, having Wazuh 1.1 + ELK2 on the same server.
 
-    **Next upgrades (versions > 2.0) will not overwrite the file /var/ossec/etc/ossec.conf**. In these cases, the *new* configuration file from the update package is installed as *ossec.conf.rpmnew* or *ossec.conf.debnew* and might reflect new options or a new notion of best practices.
+Update to Wazuh 2.0 keeping Elastic 2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note::
-    A backup of your previous ruleset will be saved at */var/ossec/etc/backup_ruleset*. You need to review it in case you have created new rules/decoders in other file than *local_rules.xml* or *local_decoder.xml*.
+- Step 1: :ref:`Upgrade manager<upgrading_manager>`
+- Step 2: :ref:`Upgrade agent<upgrading_agent>`
+- Step 3: Download the new logstash configuration:
+
+		 ::
+
+			curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
+			curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
+
+At this point, you should have Wazuh 2.0 installed and working. ELK should be the same, but with the new templates.
+
+Update to Wazuh 2.0 and Elastic 5
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Step 1: :ref:`Upgrade manager<upgrading_manager>`
+- Step 2: :ref:`Upgrade agent<upgrading_agent>`
+- Step 3: :ref:`Upgrade ELK<upgrading_elk>`
+
+At this point, you should have Wazuh 2.0 and Elastic 5 installed and working.
+
+Distributed Configuration
+-------------------------
+
+This section helps you to update your installation, having Wazuh 1.1 and ELK2 on different servers
+
+Update to Wazuh 2.0 keeping Elastic 2
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Step 1: :ref:`Upgrade manager<upgrading_manager>`
+- Step 2: :ref:`Upgrade agent<upgrading_agent>`
+- Step 3: Download the new logstash configuration:
+
+		 ::
+
+			curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
+			curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
+
+At this point, you should have Wazuh 2.0 installed and working. ELK should be the same, but with the new templates.
+
+Update to Wazuh 2.0 and Elastic 5
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Step 1: :ref:`Upgrade manager<upgrading_manager>`
+- Step 2: :ref:`Upgrade agent<upgrading_agent>`
+- Step 4: :ref:`Upgrade Logstash-forwarder to Filebeat <upgrading_lf_to_filebeat>`
+- Step 3: :ref:`Upgrade ELK<upgrading_elk>`
 
 
-Step 1: Update Manager
-----------------------------------------------------------
+At this point, you should have Wazuh 2.0 and Elastic 5 installed and working.
 
-Following the next guide, your current installation will be automatically update:
+Migrate old data
+----------------
 
-- :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
-- :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
+We developed new templates in order to work with Elastic 5. For that reason, you will not see the old data at first on your system. But don't worry. Use this script in order to migrate the old data to the new configuration.
 
-Step 2: Update Agents
-----------------------------------------------------------
+ToDo
 
-Following the next guide, your current installation will be automatically update:
+.. topic:: Contents
 
-- :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`
-- :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`
+    .. toctree::
+       :maxdepth: 2
 
-Step 3: Change from Logstash forwarder to Filebeat
-----------------------------------------------------------
-
-.. warning::
-	Draft section.
-
-*ToDo*
-
- - Remove Logstash
- - Install Filebeat: filebeat_deb, filebeat_rpm.
-
-Step 4: Update Elastic configuration
-----------------------------------------------------------
-
-.. warning::
-	Draft section.
-
-*ToDo*
-
-Keep Elastic 2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Download the configuration template for Logstash::
-
-	curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
-	curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
-
-
-Update to Elastic 5
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-These are the steps to update Elastic Stack server, and configure it to work with Wazuh.
-
-- :ref:`Install Elastic Stack with RPM packages <elastic_server_rpm>`
-- :ref:`Install Elastic Stack with Debian packages <elastic_server_deb>`
+       upgrading_manager
+       upgrading_agent
+       upgrading_lf_to_filebeat
+       upgrading_ELK
