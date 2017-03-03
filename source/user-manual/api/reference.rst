@@ -101,6 +101,8 @@ Add a new agent.
 |                    |               | - IP/NET                                                                                                                                                                                               |
 |                    |               | - ANY                                                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| force              | Number        | Remove old agent with same IP if disconnected since <force> seconds.                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -112,7 +114,7 @@ Add a new agent.
 
 	{
 	   "error": 0,
-	   "data": "002"
+	   "data": "003"
 	}
 	
 
@@ -144,7 +146,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 
 	{
 	   "error": 0,
-	   "data": "003"
+	   "data": "004"
 	}
 	
 
@@ -176,6 +178,8 @@ Insert an agent with an existing id and key.
 | ``id``             | String        | Agent ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``key``            | String        | Agent key. Minimum length: 64 characters. Allowed values: ^[a-zA-Z0-9]+$                                                                                                                               |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| force              | Number        | Remove old agent with same IP if disconnected since <force> seconds.                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -254,8 +258,8 @@ Returns a summary of the available agents.
 	   "error": 0,
 	   "data": {
 	      "Active": 2,
-	      "Never connected": 2,
-	      "Total": 4,
+	      "Never connected": 3,
+	      "Total": 5,
 	      "Disconnected": 0
 	   }
 	}
@@ -304,12 +308,12 @@ Returns a list with the available agents.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 4,
+	      "totalItems": 5,
 	      "items": [
 	         {
 	            "status": "Never connected",
 	            "ip": "any",
-	            "id": "003",
+	            "id": "004",
 	            "name": "myNewAgent"
 	         },
 	         {
@@ -319,16 +323,22 @@ Returns a list with the available agents.
 	            "name": "NewHost_2"
 	         },
 	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.9",
+	            "id": "003",
+	            "name": "NewHost"
+	         },
+	         {
 	            "status": "Active",
-	            "ip": "10.0.0.8",
+	            "ip": "10.0.0.62",
 	            "id": "001",
-	            "name": "WindowsAgent"
+	            "name": "WebServer1"
 	         },
 	         {
 	            "status": "Active",
 	            "ip": "127.0.0.1",
 	            "id": "000",
-	            "name": "ip-10-0-0-220"
+	            "name": "ip-10-0-0-10"
 	         }
 	      ]
 	   }
@@ -365,12 +375,13 @@ Returns the information of an agent.
 	   "error": 0,
 	   "data": {
 	      "status": "Active",
-	      "name": "ip-10-0-0-220",
+	      "name": "ip-10-0-0-10",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2017-01-25 20:11:13",
+	      "dateAdd": "2017-03-02 18:46:12",
 	      "version": "Wazuh v2.0",
+	      "os_family": "Linux",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
-	      "os": "Linux ip-10-0-0-220 3.16.0-4-amd64 #1 SMP Debian 3.16.36-1+deb8u2 (2016-10-19) x86_64",
+	      "os": "Linux ip-10-0-0-10 3.16.0-4-amd64 #1 SMP Debian 3.16.36-1+deb8u2 (2016-10-19) x86_64",
 	      "id": "000"
 	   }
 	}
@@ -408,7 +419,7 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDAxIFdpbmRvd3NBZ2VudCAxMC4wLjAuOCBkNDhjNTQ3Njg1ZWRmNjBlMzRmNGRlN2QwMTNlN2NiNmZjZWJjZDBkY2JlNzYxNDI3ZmU5ZmE0OTE0MzkwZDYz"
+	   "data": "MDAxIFdlYlNlcnZlcjEgMTAuMC4wLjYyIDNlZjEwYTQ2MGZmZDEwNDlhNDhiMmI1NjRjZmFiNGQxNmFiYzIzMzQ2NDM3MWY0ODQwZDQ0ZDJjN2RkNDkwZTE="
 	}
 	
 
@@ -524,7 +535,7 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 427,
+	      "totalItems": 423,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -602,57 +613,57 @@ Returns all decoders files included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 79,
+	      "totalItems": 78,
 	      "items": [
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0260-rsa-auth-manager_decoders.xml"
+	            "file": "0060-cisco-estreamer_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0330-symantec_decoders.xml"
+	            "file": "0150-mysql_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0080-courier_decoders.xml"
+	            "file": "0215-portsentry_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0270-samba_decoders.xml"
+	            "file": "0325-suhosin_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0020-amazon_decoders.xml"
+	            "file": "0190-openvpn_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0355-vm-pop3_decoders.xml"
+	            "file": "0090-dragon-nids_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0160-netscaler_decoders.xml"
+	            "file": "0085-dovecot_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0280-serv-u_decoders.xml"
+	            "file": "0335-telnet_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0010-active-response_decoders.xml"
+	            "file": "0165-netscreen_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0025-apache_decoders.xml"
+	            "file": "0065-cisco-ios_decoders.xml"
 	         }
 	      ]
 	   }
@@ -840,8 +851,8 @@ Returns ossec.conf in JSON format.
 	      "jsonout_output": "yes",
 	      "smtp_server": "smtp.example.wazuh.com",
 	      "email_to": "recipient@example.wazuh.com",
-	      "logall": "yes",
-	      "email_maxperhour": 12,
+	      "logall": "no",
+	      "email_maxperhour": "12",
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
@@ -878,13 +889,15 @@ Returns basic information about Manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "openssl_support": "yes",
-	      "ruleset_version": "v2.0",
-	      "installation_date": "Wed Jan 25 20:09:17 UTC 2017",
+	      "installation_date": "Thu Mar  2 16:45:41 UTC 2017",
 	      "version": "v2.0",
+	      "openssl_support": "yes",
 	      "max_agents": "8000",
+	      "ruleset_version": "v2.0",
 	      "path": "/var/ossec",
-	      "type": "server"
+	      "tz_name": "UTC",
+	      "type": "server",
+	      "tz_offset": "+0000"
 	   }
 	}
 	
@@ -1005,64 +1018,59 @@ Returns a summary about the 3 last months of ossec.log.
 	   "error": 0,
 	   "data": {
 	      "wazuh-modulesd": {
-	         "info": 6,
-	         "all": 6,
+	         "info": 8,
+	         "all": 8,
 	         "error": 0
 	      },
 	      "ossec-testrule": {
-	         "info": 478,
-	         "all": 478,
+	         "info": 632,
+	         "all": 632,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:oscap": {
-	         "info": 23,
-	         "all": 23,
+	         "info": 8,
+	         "all": 8,
 	         "error": 0
 	      },
 	      "ossec-rootcheck": {
-	         "info": 21,
-	         "all": 21,
+	         "info": 20,
+	         "all": 20,
 	         "error": 0
 	      },
 	      "ossec-monitord": {
-	         "info": 21,
-	         "all": 21,
+	         "info": 15,
+	         "all": 15,
 	         "error": 0
 	      },
 	      "ossec-logcollector": {
-	         "info": 77,
-	         "all": 83,
-	         "error": 6
+	         "info": 95,
+	         "all": 103,
+	         "error": 8
 	      },
 	      "ossec-execd": {
-	         "info": 16,
-	         "all": 16,
+	         "info": 22,
+	         "all": 22,
 	         "error": 0
 	      },
 	      "ossec-remoted": {
-	         "info": 351,
-	         "all": 358,
-	         "error": 7
+	         "info": 246,
+	         "all": 7947,
+	         "error": 7701
 	      },
 	      "ossec-syscheckd": {
-	         "info": 157,
-	         "all": 157,
+	         "info": 201,
+	         "all": 201,
 	         "error": 0
 	      },
 	      "ossec-analysisd": {
-	         "info": 1075,
-	         "all": 1075,
-	         "error": 0
-	      },
-	      "ossec-maild": {
-	         "info": 6,
-	         "all": 6,
+	         "info": 1423,
+	         "all": 1423,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:database": {
-	         "info": 9,
-	         "all": 20,
-	         "error": 11
+	         "info": 10,
+	         "all": 3044,
+	         "error": 3034
 	      }
 	   }
 	}
@@ -1337,8 +1345,8 @@ Return the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "rootcheckEndTime": null,
-	      "rootcheckTime": null
+	      "rootcheckEndTime": "2017-03-02 23:48:52",
+	      "rootcheckTime": "2017-03-02 23:43:58"
 	   }
 	}
 	
@@ -1378,8 +1386,11 @@ Returns the CIS requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 0,
-	      "items": []
+	      "totalItems": 2,
+	      "items": [
+	         "1.4 Debian Linux",
+	         "4.13 Debian Linux"
+	      ]
 	   }
 	}
 	
@@ -1425,8 +1436,23 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 0,
-	      "items": []
+	      "totalItems": 9,
+	      "items": [
+	         {
+	            "status": "outstanding",
+	            "oldDay": "2017-03-02 23:43:59",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2017-03-02 23:43:59",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /opt is not on its own partition {CIS: 1.4 Debian Linux}. File: /opt. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
+	         },
+	         {
+	            "status": "outstanding",
+	            "oldDay": "2017-03-02 23:43:59",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2017-03-02 23:43:59",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /tmp is not on its own partition {CIS: 1.4 Debian Linux}. File: /etc/fstab. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
+	         }
+	      ]
 	   }
 	}
 	
@@ -1466,8 +1492,11 @@ Returns the PCI requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 0,
-	      "items": []
+	      "totalItems": 2,
+	      "items": [
+	         "2.2.2",
+	         "2.2.4"
+	      ]
 	   }
 	}
 	
@@ -1591,7 +1620,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1624,
+	      "totalItems": 1619,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -1679,7 +1708,7 @@ Returns the files of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 86,
+	      "totalItems": 85,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -1771,7 +1800,7 @@ Returns the groups of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 201,
+	      "totalItems": 200,
 	      "items": [
 	         "access_control",
 	         "access_denied",
@@ -1995,8 +2024,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "syscheckTime": "2017-01-27 02:11:35",
-	      "syscheckEndTime": null
+	      "syscheckTime": "2017-03-02 23:37:18",
+	      "syscheckEndTime": "2017-03-02 23:43:38"
 	   }
 	}
 	
@@ -2069,39 +2098,39 @@ Returns the syscheck files of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 136,
+	      "totalItems": 2762,
 	      "items": [
 	         {
-	            "sha1": "30c1bcccaa6542a90e5ba9ea67a0dd7667537a0d",
+	            "sha1": "4fed08ccbd0168593a6fffcd925adad65e5ae6d9",
 	            "group": "root",
 	            "uid": 0,
-	            "scanDate": "2017-01-27 02:11:51",
+	            "scanDate": "2017-03-02 23:43:28",
 	            "gid": 0,
 	            "user": "root",
-	            "file": "!1485483111 /etc/fonts/conf.d/11-lcdfilter-default.conf",
-	            "modificationDate": "2016-08-06 08:21:22",
-	            "octalMode": "120777",
-	            "permissions": "lrwxrwxrwx",
-	            "md5": "a877f23d2e9179ef3a1ee0ab6a9e2b15",
-	            "inode": 273646,
+	            "file": "!1488498208 /boot/config-3.16.0-4-amd64",
+	            "modificationDate": "2016-10-19 06:45:50",
+	            "octalMode": "100644",
+	            "permissions": "-rw-r--r--",
+	            "md5": "46d43391ae54c1084a2d40e8d1b4873c",
+	            "inode": 5217,
 	            "event": "added",
-	            "size": 58
+	            "size": 157721
 	         },
 	         {
-	            "sha1": "8f24e89783e072b8b2a48a45abe42bfb788e96bf",
+	            "sha1": "d48151a3d3638b723f5d7bc1e9c71d478fcde4e6",
 	            "group": "root",
 	            "uid": 0,
-	            "scanDate": "2017-01-27 02:11:51",
+	            "scanDate": "2017-03-02 23:43:26",
 	            "gid": 0,
 	            "user": "root",
-	            "file": "!1485483111 /etc/fonts/conf.d/20-unhint-small-dejavu-lgc-sans-mono.conf",
-	            "modificationDate": "2013-09-13 17:01:59",
-	            "octalMode": "120777",
-	            "permissions": "lrwxrwxrwx",
-	            "md5": "10d6f2176d76ee9b89a19a17811257f2",
-	            "inode": 273626,
+	            "file": "!1488498206 /boot/System.map-3.16.0-4-amd64",
+	            "modificationDate": "2016-10-19 06:45:50",
+	            "octalMode": "100644",
+	            "permissions": "-rw-r--r--",
+	            "md5": "29cc12246faecd4a14d212b4d9bac0fe",
+	            "inode": 5216,
 	            "event": "added",
-	            "size": 55
+	            "size": 2679264
 	         }
 	      ]
 	   }
