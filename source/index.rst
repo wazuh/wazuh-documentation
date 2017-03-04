@@ -59,7 +59,6 @@ Available documentation
    installation_guide/index
    deploying_with_puppet/index
    docker/index
-   learn_examples/index
    user-manual/index
    pci-dss/index
    amazon/index
