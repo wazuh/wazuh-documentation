@@ -19,8 +19,8 @@ Configure Kibana
 
 #. Set as default wildcard by clicking on the Star.
 
-.. image:: ../../images/installation/kibana-elk.png
-		:align: center
-		:width: 100%
+	.. image:: ../../images/installation/kibana-elk.png
+			:align: center
+			:width: 100%
 
 #. Go to Discover tag
