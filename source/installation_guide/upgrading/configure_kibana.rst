@@ -15,5 +15,12 @@ Configure Kibana
 			:align: center
 			:width: 100%
 
+	Click on Create
+
 #. Set as default wildcard by clicking on the Star.
+
+.. image:: ../../images/installation/kibana-elk.png
+		:align: center
+		:width: 100%
+
 #. Go to Discover tag
