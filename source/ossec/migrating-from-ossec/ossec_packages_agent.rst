@@ -17,7 +17,7 @@ Check if you have enough space to create a copy of ``/var/ossec``: ::
 
 Backup ``/var/ossec``: ::
 
-    $ cp -r /var/ossec /var/ossec_backup
+    $ cp -rp /var/ossec /var/ossec_backup
 
 
 2. Remove your current installation
@@ -58,10 +58,10 @@ Stop OSSEC: ::
 
 Restore files: ::
 
-    $ cp /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
-    $ cp /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
-    $ cp /var/ossec_backup/etc/client.keys /var/ossec/etc/
-    $ cp /var/ossec_backup/queue/rids/* /var/ossec/queue/rids/
+    $ cp -p /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
+    $ cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
+    $ cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
+    $ cp -p /var/ossec_backup/queue/rids/* /var/ossec/queue/rids/
 
 
 5. Review ossec.conf

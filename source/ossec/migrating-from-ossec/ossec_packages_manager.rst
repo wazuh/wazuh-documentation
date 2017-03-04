@@ -17,7 +17,7 @@ Check if you have enough space to create a copy of ``/var/ossec``: ::
 
 Backup ``/var/ossec``: ::
 
-    $ cp -r /var/ossec /var/ossec_backup
+    $ cp -rp /var/ossec /var/ossec_backup
 
 
 2. Remove your current installation
@@ -58,24 +58,24 @@ Stop OSSEC: ::
 
 Restore mandatory files: ::
 
-    $ cp /var/ossec_backup/agentless/.passlist /var/ossec/agentless/
-    $ cp /var/ossec_backup/etc/client.keys /var/ossec/etc/
-    $ cp /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
-    $ cp /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
-    $ cp /var/ossec_backup/etc/local_decoder.xml /var/ossec/etc/decoders/local_decoder.xml
-    $ cp /var/ossec_backup/etc/shared/agent.conf /var/ossec/etc/shared/agent.conf
-    $ cp /var/ossec_backup/rules/local_rules.xml /var/ossec/etc/rules/local_rules.xml
-    $ cp /var/ossec_backup/queue/rids/sender_counter /var/ossec/queue/rids/sender_counter
+    $ cp -p /var/ossec_backup/agentless/.passlist /var/ossec/agentless/
+    $ cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
+    $ cp -p /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
+    $ cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
+    $ cp -p /var/ossec_backup/etc/local_decoder.xml /var/ossec/etc/decoders/local_decoder.xml
+    $ cp -p /var/ossec_backup/etc/shared/agent.conf /var/ossec/etc/shared/agent.conf
+    $ cp -p /var/ossec_backup/rules/local_rules.xml /var/ossec/etc/rules/local_rules.xml
+    $ cp -p /var/ossec_backup/queue/rids/sender_counter /var/ossec/queue/rids/sender_counter
 
 Restore optional files
 
 The following files are required in order to preserve alerts log files and syscheck/rootcheck databases:
 ::
 
-    $ cp -r /var/ossec_backup/logs/archives/* /var/ossec/logs/archives
-    $ cp -r /var/ossec_backup/logs/alerts/* /var/ossec/logs/alerts
-    $ cp -r /var/ossec_backup/queue/rootcheck/* /var/ossec/queue/rootcheck
-    $ cp -r /var/ossec_backup/queue/syscheck/* /var/ossec/queue/syscheck
+    $ cp -rp /var/ossec_backup/logs/archives/* /var/ossec/logs/archives
+    $ cp -rp /var/ossec_backup/logs/alerts/* /var/ossec/logs/alerts
+    $ cp -rp /var/ossec_backup/queue/rootcheck/* /var/ossec/queue/rootcheck
+    $ cp -rp /var/ossec_backup/queue/syscheck/* /var/ossec/queue/syscheck
 
 
 5. Review ``ossec.conf``
