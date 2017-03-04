@@ -72,11 +72,8 @@ At this point you should have your OSSEC Manager and agents migrated to Wazuh. N
 
 Install Elastic stack server following this guide:
 
-.. toctree::
-   :maxdepth: 1
-
-   ../../installation_guide/installing-elastic-stack/elastic_server_rpm
-   ../../installation_guide/installing-elastic-stack/elastic_server_deb
+- :ref:`Install Elastic Stack with RPM packages <elastic_server_rpm>`
+- :ref:`Install Elastic Stack with Debian packages <elastic_server_deb>`
 
 .. image:: ../../images/screenshots/Overview_general_1024x1024.png
   :align: center

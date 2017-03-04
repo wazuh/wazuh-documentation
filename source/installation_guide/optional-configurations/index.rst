@@ -10,7 +10,6 @@ This section advises on best practices related to setting up an efficient, stabl
     .. toctree::
         :maxdepth: 1
 
-        singlehost_configuration
         elastic_ssl
         kibana_ssl
         securing-api

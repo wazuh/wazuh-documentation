@@ -127,7 +127,10 @@ For CentOS 6 and Red Hat 6, you can install the package *python27*, which instal
 Installing Filebeat
 -------------------------------------------
 
-Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack server(s).  In a single-server configuration, you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack server(s).
+
+.. warning::
+    In a single-server configuration, you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 The rpm package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
 
