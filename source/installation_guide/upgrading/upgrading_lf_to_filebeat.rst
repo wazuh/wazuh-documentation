@@ -15,6 +15,7 @@ Deb systems::
 	apt-get remove logstash-forwarder
 
 RPM systems::
+
 	yum remove logstash-forwarder
 
 Install Filebeat

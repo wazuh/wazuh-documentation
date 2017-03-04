@@ -68,7 +68,9 @@ At this point, you should have Wazuh 2.0 and Elastic 5 installed and working.
 Migrate old data
 ----------------
 
-We developed new templates in order to work with Elastic 5. For that reason, you will not see the old data at first on your system. But don't worry. Use this script in order to migrate the old data to the new configuration.
+We developed new templates in order to work with Elastic 5. For that reason, you will not see the old data at first on your system.
+
+We are currently working on a script to migrate the old data to the new configuration. 
 
 ToDo
 

@@ -33,7 +33,7 @@ Logstash
 
 Logstash is the tool that will collect logs, parse them, and then pass them along to Elasticsearch for indexing and storage. Learn more about `Logstash <https://www.elastic.co/products/logstash>`_
 
-#. Stop the running logstash:
+#. Stop the running Logstash instance:
 
 	a) For Systemd::
 
@@ -41,7 +41,7 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 	b) For SysV Init::
 
-		service stop start
+		service logstash stop
 
 #. Install the Logstash package:
 
@@ -53,10 +53,22 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 		yum install logstash
 
-#. Check the new version of logstash with ``/usr/share/logstash/bin/logstash -V``, the output should be something like::
+#. Check the new logstash version with ``/usr/share/logstash/bin/logstash -V``, the output should be something like::
 
 	$ /usr/share/logstash/bin/logstash -V
 	logstash 5.2.2
+
+#. Remove the old configuration and template files:
+
+	Singlehost Configuration::
+
+		rm /etc/logstash/conf.d/01-ossec-singlehost.conf
+		rm /etc/logstash/conf.d/elastic-ossec-template.json
+
+	Distributed Configuration::
+
+		rm /etc/logstash/conf.d/01-ossec.conf
+		rm /etc/logstash/conf.d/elastic-ossec-template.json
 
 #. Download the Wazuh config and template files for Logstash::
 
@@ -123,6 +135,16 @@ Elasticsearch
 
 Elasticsearch is a highly scalable full-text search and analytics engine. More info `Elastic <https://www.elastic.co/products/elasticsearch>`_.
 
+#. Stop the running Elasticsearch instance:
+
+	a) For Systemd::
+
+		systemctl stop elasticsearch.service
+
+	b) For SysV Init::
+
+		service elasticsearch stop
+
 #. Install the Elasticsearch package:
 
 	Deb Packages::
@@ -133,7 +155,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 
 		yum install elasticsearch
 
-#. Check the new version of logstash with ``/usr/share/elasticsearch/bin/elasticsearch -V``, the output should be something like::
+#. Check the new elasticsearch version with ``/usr/share/elasticsearch/bin/elasticsearch -V``, the output should be something like::
 
 	$ /usr/share/elasticsearch/bin/elasticsearch -V
 	Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
@@ -188,6 +210,16 @@ Kibana
 ------
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. More info at `Kibana <https://www.elastic.co/products/kibana>`_.
 
+#. Stop the running Kibana instance:
+
+	a) For Systemd::
+
+		systemctl stop kibana.service
+
+	b) For SysV Init::
+
+		service kibana stop
+
 #. Install the Kibana package:
 
 	Deb Packages::
@@ -198,7 +230,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 		yum install kibana
 
-#. Check the new version of logstash with ``/usr/share/kibana/bin/kiban -V``, the output should be something like::
+#. Check the new kibana version with ``/usr/share/kibana/bin/kibana -V``, the output should be something like::
 
 	$ /usr/share/kibana/bin/kibana -V
 	5.2.2
