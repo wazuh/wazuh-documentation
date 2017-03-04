@@ -9,6 +9,11 @@ If you already have a ELK stack installed, we are not going to describe here the
 
 You can join our users `mailing list <https://groups.google.com/d/forum/wazuh>`_ by sending an email to wazuh+subscribe@googlegroups.com, to ask questions and participate in discussions.
 
+#. `Prerequisite`_
+#. `Migrating OSSEC installed from packages`_ or `Migrating OSSEC installed from sources`_
+#. `Installing Elastic stack`_
+
+
 Prerequisite
 ------------
 - OSSEC 2.8.3 or higher
