@@ -56,7 +56,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Wazuh documentation'
+project = u'Documentation'
 copyright = u'2017, Wazuh, Inc'
 author = u'Wazuh, Inc.'
 
@@ -137,6 +137,7 @@ html_theme = 'sphinx_rtd_theme'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
+html_logo = '_static/logo.png'
 
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
@@ -232,7 +233,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'WazuhDocs.tex', u'OSSEC Wazuh documentation',
+  (master_doc, 'WazuhDocs.tex', u'Documentation',
    u'Wazuh, Inc.', 'manual'),
 ]
 
@@ -262,7 +263,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'wazuhdocs', u'Wazuh documentation',
+    (master_doc, 'wazuhdocs', u'Documentation',
      [author], 1)
 ]
 
@@ -276,8 +277,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'WazuhDocs', u'Wazuh documentation',
-   author, 'Wazuh', 'Wazuh documentation',
+  (master_doc, 'WazuhDocs', u'Documentation',
+   author, 'Wazuh', 'Documentation',
    'Miscellaneous'),
 ]
 

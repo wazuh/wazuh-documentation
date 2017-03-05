@@ -121,6 +121,12 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     display: none;
 }
 
+/* Navigator logo *************************************************************/
+
+.wy-side-nav-search>a img.logo {
+    width: 180px;
+}
+
 /* Version selector ***********************************************************/
 
 .menu-version {
