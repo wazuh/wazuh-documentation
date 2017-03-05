@@ -35,7 +35,15 @@ Installing Linux agent
 
     1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
 
-5. Start the services using this command::
+5. When the installation is completed, edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* with the manager's IP address. For example::
+
+	<ossec_config>
+	  <client>
+	    <server-ip>1.2.3.4</server_ip>
+
+6. At this point, you need to :ref:`register the agent in the manager <connecting_agents>`.
+
+7. Start the services using this command::
 
     /var/ossec/bin/ossec-control start
 
@@ -90,7 +98,7 @@ You should expect the following output near the end of the compile process: ::
    Done building winagent
 
 
-Now you should have a Wazuh agent installer for Windows here: ``./win32/wazuh-win32-agent.exe``, ready to be used.
+Now you should have a Wazuh agent installer for Windows here: ``./win32/wazuh-win32-agent.exe``, :ref:`ready to be used <wazuh_agent_windows>`.
 
 Next steps
 ----------
