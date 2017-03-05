@@ -5,14 +5,14 @@ Integration with AWS
 
 Prior to enabling the Wazuh rules for Amazon Web Services, follow the steps below to enable the AWS API to generate log messages and store them as JSON data files in an Amazon S3 bucket. A detailed description of each of the steps can be found below.
 
-1. Turn on CloudTrail.
-2. Create a user with permission to access S3.
-3. Install Python Boto on your Wazuh agent.
-4. Configure the AWS CLI on your Wazuh agent to use the credentials of the newly created user.
-5. Run the script getawslog.py to download the JSON log files and convert them into flat files.
+1. `Turn on CloudTrail`_.
+2. `Create a user with permission to access S3`_.
+3. `Install Python Boto on your Wazuh agent`_.
+4. `Configure user credentials with Python Boto`_.
+5. `Run the python script to download the JSON data`_.
 
 Turn on CloudTrail
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Create a trail for your AWS account. Trails can be created using the AWS CloudTrail console or the AWS Command Line Interface (AWS CLI). Both methods follow the same steps. In this case we will be focusing on the first one:
 
@@ -27,7 +27,7 @@ Create a trail for your AWS account. Trails can be created using the AWS CloudTr
 From now on, all the events in your Amazon AWS account will be logged. You can search log messages manually inside ``CloudTrail/API activity history``. Note that every 7 minutes, a JSON file containing new log messages will be stored in your bucket.
 
 Create a user with permission to access S3
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Sign in to the ``AWS Management Console`` and open the IAM console at https://console.aws.amazon.com/iam/.
 In the navigation panel, choose ``Users`` and then choose ``Create New Users``.
@@ -68,7 +68,7 @@ On the next page enter a ``Policy Name`` e.g. ossec-cloudtrail-s3-access, and fo
   }
 
 Install Python Boto on your Wazuh Agent
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To download and process the Amazon AWS logs that already are archived in S3 Bucket we need to install Python Boto on the Wazuh agent and configure it to connect to AWS S3.
 
@@ -111,18 +111,17 @@ Now that Python and pip are installed, use pip to install boto: ::
 
   $ sudo pip install boto
 
-
 Configure user credentials with Python Boto
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To configure the user credentials, you need to create a file called ``/etc/boto.cfg`` like this: ::
+It is necessary to configure the AWS CLI on your Wazuh agent to use the credentials of the newly created user. Create a file called ``/etc/boto.cfg`` like this: ::
 
   [Credentials]
   aws_access_key_id = <your_access_key_here>
   aws_secret_access_key = <your_secret_key_here>
 
 Run the python script to download the JSON data
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We use a python script to download JSON files from the S3 bucket and convert them into flat files that can be used with Wazuh. This script was written by Xavier Martens `@xme <https://blog.rootshell.be>` and contains minor modifications done by Wazuh. It is located in our `repository <https://github.com/wazuh>`_ at ``wazuh/wazuh-ruleset/tools/amazon/getawslog.py``.
 
