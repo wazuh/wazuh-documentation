@@ -271,7 +271,7 @@ This option is only valid in server and local installs.
 
 .. topic:: Allowed values
 
-  Any IP address or CIDR netblock is accepted. 
+  Any IP address or CIDR netblock is accepted.
 
 
 ``host_information``
@@ -300,7 +300,7 @@ This enables/disables writing of JSON-formated alerts to ``/var/ossec/logs/alert
 
   .. code-block:: xml
 
-    <jsonout_output>no</jsonout_output>
+    <jsonout_output>yes</jsonout_output>
 
 .. topic:: Allowed values
 
@@ -399,7 +399,7 @@ This will listen for zeromq on the Unix Domain socket /alerts-zmq.
 .. topic:: Allowed values
 
   This URI format is defined by the ZeroMQ project.
-  
+
 
 ``geoip_db_path``
 -----------------
