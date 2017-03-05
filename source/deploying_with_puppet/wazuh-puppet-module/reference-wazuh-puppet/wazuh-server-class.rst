@@ -4,7 +4,7 @@ Wazuh server class
 ===================
 
 
-``class ossec::server``
+``class wazuh::server``
 -----------------------
 
 $mailserver_ip
@@ -113,7 +113,7 @@ $mysql_username
 $ossec_extra_rules_config
   To use it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file.
 
-  You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the ossec::server class.
+  You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the wazuh::server class.
 
 $ossec_email_maxperhour
   Global Configuration with maximum number of emails per hour.
@@ -129,7 +129,7 @@ $ossec_email_idsname
 
 .. _ref_server_email_alert:
 
-``function ossec::email_alert``
+``function wazuh::email_alert``
 -------------------------------
 
 $alert_email
@@ -145,11 +145,11 @@ $alert_group
 
 .. _ref_server_command:
 
-``function ossec::command``
+``function wazuh::command``
 ---------------------------
 
 $command_name
-  Human readable name for ossec::activeresponse usage.
+  Human readable name for wazuh::activeresponse usage.
 
 $command_executable
   Name of the executable. OSSEC comes preloaded with disable-account.sh, host-deny.sh, ipfw.sh, pf.sh, route-null.sh, firewall-drop.sh, ipfw_mac.sh, ossec-tweeter.sh, restart-ossec.sh.
@@ -162,7 +162,7 @@ $timeout_allowed
 
 .. _ref_server_ar:
 
-``function ossec::activeresponse``
+``function wazuh::activeresponse``
 ----------------------------------
 
 $command_name
@@ -194,7 +194,7 @@ $ar_repeated_offenders
 
 .. _ref_server_addlog:
 
-``function ossec::addlog``
+``function wazuh::addlog``
 --------------------------
 
 $log_name

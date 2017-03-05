@@ -11,7 +11,7 @@ To overwrite the defaults or add in new paths to scan, you can use hiera to over
 
 To tell Wazuh to enable real time monitoring of the default paths:
 
-ossec::server::ossec_scanpaths:
+wazuh::server::ossec_scanpaths:
 -------------------------------
 
   path: /etc report_changes: 'no' realtime: 'no'

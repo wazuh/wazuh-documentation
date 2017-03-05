@@ -66,7 +66,7 @@ $ar_repeated_offenders
 
 .. _ref_agent_addlog:
 
-function ossec::addlog
+function wazuh::addlog
 ----------------------
 
 $log_name
