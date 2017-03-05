@@ -16,17 +16,37 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     font-weight: 500;
 }
 
+/* Side navigator layout ******************************************************/
+
+.wy-nav-side {
+    padding-bottom: 0;
+}
+
+.wy-side-nav-search {
+    margin-bottom: 0;
+}
+
+.wy-menu-vertical {
+    padding-top: .809em;
+    padding-bottom: 2em;
+}
+
 /* Side menu color and background *********************************************/
 
-/* Global (L1) background */
+/* Complete side navigator background */
 .wy-nav-side {
-    background: #e3e3e3;
-    box-shadow: 0 0 4px #bdbdbd;
-    border-radius: 2px;
+    background: initial;
 }
 
 .wy-side-nav-search {
     box-shadow: 0 0 4px #404040;
+    border-radius: 2px;
+}
+
+/* Global (L1) background */
+.wy-menu-vertical {
+    background: #e3e3e3;
+    box-shadow: 0 0 4px #bdbdbd;
     border-radius: 2px;
 }
 
@@ -80,13 +100,14 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 }
 
 .wy-nav-side {
-    position: static;
-    float: left;
+    left: 50%;
+    margin-left: -550px;
 }
 
 @media screen and (max-width: 768px) {
     .wy-nav-side {
-        position: fixed;
+        left: -300px;
+        margin-left: 0;
     }
 
     .wy-nav-side.shift {
