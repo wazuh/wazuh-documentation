@@ -3,13 +3,13 @@
 Architecture
 ============
 
-The Wazuh architecture consists of agents running on monitored hosts that report to a central manager. In addition, agentless devices (such as firewalls, switches, routers, access points, etc.) actively submit syslog data to the central manager and/or are probed by the manager for configuration changes. The central manager decodes and analyzes the incoming information and passes the results along to an Elasticsearch cluster for indexing and storage.
+The Wazuh architecture consists of agents running on monitored hosts that report to a central server. In addition, agentless devices (such as firewalls, switches, routers, access points, etc.) actively submit syslog data to the central server and/or are probed by the server for configuration changes. The central server decodes and analyzes the incoming information and passes the results along to an Elasticsearch cluster for indexing and storage.
 
 An Elasticsearch cluster is a collection of one or more nodes (servers) that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments (<50 agents), can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored systems, when a large volume of data is planned on, and/or when high availability is required.
 
-When the Wazuh manager and the Elasticsearch cluster are on different servers, Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch server(s) using TLS encryption.
+When the Wazuh server and the Elasticsearch cluster are on different hosts, Filebeat is used to securely forward Wazuh alerts and/or archived events to the Elasticsearch server(s) using TLS encryption.
 
-See below how components are distributed when the Wazuh manager and the Elasticsearch cluster run on different hosts. Note that with multi-node clusters there will be multiple Elastic Stack servers to which Filebeat is capable of forwarding data:
+See below how components are distributed when the Wazuh server and the Elasticsearch cluster run on different hosts. Note that with multi-node clusters there will be multiple Elastic Stack servers to which Filebeat is capable of forwarding data:
 
 .. thumbnail:: ../images/installation/installing_wazuh.png
     :title: Distributed architecture 
@@ -32,10 +32,10 @@ Data flow
     :width: 100%
 
 
-Agent-manager communication
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Agent-server communication
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh manager over port 1514 (UDP or TCP). The Wazuh manager then decodes and rule-checks the received events with the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not tripped a rule:
+Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh server over port 1514 (UDP or TCP). The Wazuh server then decodes and rule-checks the received events with the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not tripped a rule:
 
  - The file */var/ossec/logs/archives/archives.json* contains all events whether they tripped a rule or not.
  - The file */var/ossec/logs/alerts/alerts.json* contains only events that tripped a rule.
@@ -45,24 +45,24 @@ Note that if you use both of these files, alerts will be duplicated across both 
 The OSSEC message protocol encrypts messages using Blowfish with 192 bit encryption and the full 16-round implementation that at this time has no publicly known cryptographic weaknesses.
 
 
-Manager-elastic communication
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Wazuh-elastic communication
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In larger deployments, the Wazuh manager uses Filebeat to ship alert and event data to Logstash (5000/TCP) on the Elastic Stack server, using TLS encryption. For a single-host architecture, Logstash is able to read the events/alerts directly from the local filesystem without using Filebeat.
+In larger deployments, the Wazuh server uses Filebeat to ship alert and event data to Logstash (5000/TCP) on the Elastic Stack server, using TLS encryption. For a single-host architecture, Logstash is able to read the events/alerts directly from the local filesystem without using Filebeat.
 
 Logstash formats the incoming data, and optionally enriches it with GeoIP information, before sending it along to Elasticsearch (port 9200/TCP). Once the data is indexed into Elasticsearch, Kibana (port 5601/TCP) is used to mine and visualize the information.
 
-The Wazuh App runs inside Kibana and execute queries against the RESTful API (port 55000/TCP on the Manager) in order to display information related to the configuration and status of the manager and agents, as well as to initiate agent restarts when desired. This communication is encrypted with TLS and authenticated with username and password.
+The Wazuh App runs inside Kibana and execute queries against the RESTful API (port 55000/TCP on the Manager) in order to display information related to the configuration and status of the server and agents, as well as to initiate agent restarts when desired. This communication is encrypted with TLS and authenticated with username and password.
 
 
-Archival Data storage
------------------------------
+Archival data storage
+---------------------
 
-Alerts and non-alert events are together stored in files on the Wazuh manager in addition to being sent to Elasticsearch. These files can be written in JSON format (.json) and/or in plain text format (.log - no decoded fields but more compact). These files are daily compressed and signed using MD5 and SHA1 checksums. The directory and filename structure is as follows:
+Alerts and non-alert events are together stored in files on the Wazuh server in addition to being sent to Elasticsearch. These files can be written in JSON format (.json) and/or in plain text format (.log - no decoded fields but more compact). These files are daily compressed and signed using MD5 and SHA1 checksums. The directory and filename structure is as follows:
 
 .. code-block:: console
 
-    root@vpc-ossec-manager:/var/ossec/logs/archives/2017/Jan# ls -l
+    root@wazuh-server:/var/ossec/logs/archives/2017/Jan# ls -l
     total 176
     -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
     -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum
