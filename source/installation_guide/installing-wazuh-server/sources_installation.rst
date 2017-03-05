@@ -103,7 +103,8 @@ Installing Filebeat
 
 While Filebeat can be installed from source (`see this doc <https://github.com/elastic/beats/blob/master/CONTRIBUTING.md>`_), the process is more complex than you may like, and it is beyond the scope of Wazuh documentation.  We recommend installing Filebeat via repository package, and if that is not available, to install it from a binary tarball that should work for any Linux distro.  See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
 
-In a single-server configuration, you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+.. warning::
+    In a single-server configuration, you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 Next steps
 ----------
