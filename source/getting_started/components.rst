@@ -3,23 +3,23 @@
 Components
 ==========
 
-Wazuh's main components are the agent that runs on each monitored host, and the manager that analyzes data received from the agents and from other agentless sources like syslog. In addition, the manager forwards event data to an Elasticsearch cluster, where information is indexed and stored.
+Wazuh's main components are the agent that runs on each monitored host, and the server that analyzes data received from the agents and from other agentless sources like syslog. In addition, the server forwards event data to an Elasticsearch cluster, where information is indexed and stored.
 
 Wazuh agent
 -----------
 
-The Wazuh agent runs on monitored hosts that use a Windows, Linux, Solaris, BSD, or Mac operating system. It is used to collect different types of system and application data. The agent forwards the collected data to the Wazuh manager through an encrypted and authenticated channel. In order to establish this secure channel, a registration process involving unique pre-shared keys is utilized.
+The Wazuh agent runs on monitored hosts that use a Windows, Linux, Solaris, BSD, or Mac operating system. It is used to collect different types of system and application data. The agent forwards the collected data to the Wazuh server through an encrypted and authenticated channel. In order to establish this secure channel, a registration process involving unique pre-shared keys is utilized.
 
 Pre-compiled agent installation packages are already available for these operating systems: Linux, AIX, Solaris, Windows, and Darwin (Mac OS X).
 
-On Unix-based operating systems, the agent runs multiple processes that communicate through a local Unix domain socket with the process that communicates with the manager. On Windows systems there is only one agent process running multiple tasks using mutexes.
+On Unix-based operating systems, the agent runs multiple processes that communicate through a local Unix domain socket with the process that communicates with the server. On Windows systems there is only one agent process running multiple tasks using mutexes.
 
 Different agent tasks or processes are used to monitor the system in different ways (e.g., monitoring file integrity, reading system log messages, and scanning system configurations).
 
 The diagram below represents the internal tasks and processes that take place at the agent level:
 
 .. thumbnail:: ../images/agent_1024x1016.png
-   :title: Agent components
+   :title: Wazuh agent components
    :align: center
    :width: 80%
 
@@ -33,19 +33,19 @@ All agent processes have different purposes and configuration settings. Here is 
 
 + **OpenSCAP:** This module uses published `OVAL <https://oval.mitre.org/>`_ (Open Vulnerability Assessment Language) and `XCCDF <https://scap.nist.gov/specifications/xccdf/>`_ (Extensible Configuration Checklist Description Format) baseline security profiles to periodically scan the system looking for vulnerable applications or configurations that do not follow well-known standards such as those defined in `CIS <https://benchmarks.cisecurity.org/downloads/benchmarks/>`_ (Center for Internet Security) benchmarks.
 
-- **Agent Daemon:** This is the process that receives the data generated or collected by all other agent components. It compresses, encrypts and delivers the data to the manager through an authenticated channel. This process runs in an isolated “chroot” (change root) environment, meaning that it has limited access to the monitored system. This improves the overall security of the agent, as this is the only process that the agent runs that connects to the network.
+- **Agent Daemon:** This is the process that receives the data generated or collected by all other agent components. It compresses, encrypts and delivers the data to the server through an authenticated channel. This process runs in an isolated “chroot” (change root) environment, meaning that it has limited access to the monitored system. This improves the overall security of the agent, as this is the only process that the agent runs that connects to the network.
 
-Wazuh manager
--------------
+Wazuh server
+------------
 
-The manager component is the system that analyzes the data received from the agents, triggering alerts when an event matches a rule (e.g. intrusion detected, file changed, configuration not compliant with policy, possible rootkit, etc...).
+The server component is the system that analyzes the data received from the agents, triggering alerts when an event matches a rule (e.g. intrusion detected, file changed, configuration not compliant with policy, possible rootkit, etc...).
 
-.. thumbnail:: ../images/manager_1024x872.png
-   :title: Manager components
+.. thumbnail:: ../images/server_1024x872.png
+   :title: Wazuh server components
    :align: center
    :width: 80%
 
-The manager usually runs on a stand-alone physical server, virtual machine, or cloud instance. This server typically will also run local agent components for the purpose of monitoring itself. Below is a list of the main manager components:
+The server usually runs on a stand-alone physical server, virtual machine, or cloud instance. This server typically will also run local agent components for the purpose of monitoring itself. Below is a list of the main server components:
 
 - **Registration service:** This is used to register new agents by provisioning and distributing pre-shared agent authentication keys that are unique to each agent. This process runs as a network service and supports authentication via TLS/SSL and/or by a fixed password.
 
@@ -70,7 +70,7 @@ Wazuh integrates with Elastic Stack to provide a feed of already decoded log mes
 
 Elasticsearch is a highly scalable and mature search and analytics engine. An Elasticsearch *index* is a collection of documents that have somewhat similar characteristics (like certain common fields and shared data retention requirements). Wazuh utilizes as many as three different indices, created daily, to store different type of events:
 
-- wazuh-alerts: Index for alerts generated by the Wazuh manager each time an event trips a rule.
+- wazuh-alerts: Index for alerts generated by the Wazuh server each time an event trips a rule.
 - wazuh-events: Index for all events (archive data) received from the agents, whether or not they trip a rule.
 - wazuh-monitoring: Index for data related to agent status over time. It is used by the web interface to represent when individual agents are or have been “Active”, “Disconnected”, or “Never connected”.
 

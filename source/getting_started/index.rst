@@ -27,7 +27,7 @@ Wazuh is an open source project for security visibility, compliance and infrastr
 
 .. topic:: Table of Contents
 
-   This document will help you understand Wazuh components, functionality and architecture.
+   This document will help you understand Wazuh components and the solution architecture. It will also show you some common use cases.
 
 .. toctree::
    :maxdepth: 2

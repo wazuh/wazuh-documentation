@@ -27,21 +27,33 @@ Wazuh provides an updated log analysis ruleset, and a RESTful API that allows yo
 
 Wazuh also includes a rich web application (fully integrated as a Kibana app), for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
 
-Sample screenshots
-------------------
+Example screenshots
+-------------------
 
-.. |AGENT_DISCOVER| image:: images/screenshots/Agent_discover_300x285.png
-   :target: _static/screenshots/Agent_discover_1024x1024.png
-.. |AGENT_OVERVIEW| image:: images/screenshots/Agent_overview_300x285.png
-   :target: _static/screenshots/Agent_overview_1024x1024.png
-.. |DISCOVER_ALERT| image:: images/screenshots/Discover_alert_300x285.png
-   :target: _static/screenshots/Discover_alert_1024x1024.png
-.. |MANAGER_RULESET| image:: images/screenshots/Manager_ruleset_300x285.png
-   :target: _static/screenshots/Manager_ruleset_1024x1024.png
-.. |OVERVIEW_FIM| image:: images/screenshots/Overview_fim_300x285.png
-   :target: _static/screenshots/Overview_fim_1024x1024.png
-.. |OVERVIEW_GENERAL| image:: images/screenshots/Overview_general_300x285.png
-   :target: _static/screenshots/Overview_general_1024x1024.png
+.. |AGENT_DISCOVER| thumbnail:: images/screenshots/Agent_discover_1024x1024.png
+   :title: Agent discover
+   :align: center
+   :width: 100%
+.. |AGENT_OVERVIEW| thumbnail:: images/screenshots/Agent_overview_1024x1024.png
+   :title: Agent overview
+   :align: center
+   :width: 100%
+.. |DISCOVER_ALERT| thumbnail:: images/screenshots/Discover_alert_1024x1024.png
+   :title: Discover alerts
+   :align: center
+   :width: 100%
+.. |MANAGER_RULESET| thumbnail:: images/screenshots/Manager_ruleset_1024x1024.png
+   :title: Log analysis rules
+   :align: center
+   :width: 100%
+.. |OVERVIEW_FIM| thumbnail:: images/screenshots/Overview_fim_1024x1024.png
+   :title: Overview file integrity monitoring
+   :align: center
+   :width: 100%
+.. |OVERVIEW_GENERAL| thumbnail:: images/screenshots/Overview_general_1024x1024.png
+   :title: Overview alerts
+   :align: center
+   :width: 100%
 
 ==================  ==================  ==================
 |OVERVIEW_GENERAL|  |OVERVIEW_FIM|      |MANAGER_RULESET|
