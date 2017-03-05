@@ -39,10 +39,7 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 	usermod -a -G ossec logstash
 
-4. If you are running Wazuh server and the Elastic Stack server on separate systems (distributed architecture), then it is important to configure encryption between Filebeat and Logstash.  To do so, please see :ref:`elastic_ssl`.
-
-
-5. Enable and start the Logstash service:
+4. Enable and start the Logstash service:
 
 
 	a) For Systemd::
@@ -55,6 +52,11 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 		update-rc.d logstash defaults 95 10
 		service logstash start
+
+
+.. note::
+
+    If you are running Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), then it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elastic_ssl`.
 
 Elasticsearch
 -------------
