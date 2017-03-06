@@ -26,7 +26,7 @@ In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elastic
 Data flow
 ---------
 
-.. thumbnail:: ../images/data_flow_2048x794.png
+.. thumbnail:: ../images/getting_started/data_flow_2048x794.png
     :title: Data flow
     :align: center
     :width: 100%
