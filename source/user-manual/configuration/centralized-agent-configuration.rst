@@ -39,10 +39,10 @@ It should be readable by the ossec user.
 | `profile`_ | Any defined profile |
 +------------+---------------------+
 
-If no option is specified, this configuration section will be pushed to all agents. 
+If no option is specified, this configuration section will be pushed to all agents.
 
-``name``
---------
+name
+^^^^^^^^^^^^^^^^^^^^^^
 
 Allows assignment of the block to one particular agent.
 
@@ -60,9 +60,8 @@ Allows assignment of the block to one particular agent.
 
 		<agent_config name=”agent01”>
 
-
-``os``
-------
+os
+^^^^^^^^^^^^^^^^^^^^^^
 
 Allows assignment of the block to an operating system.
 
@@ -81,8 +80,8 @@ Allows assignment of the block to an operating system.
 		<agent_config os="Linux">
 
 
-``profile``
------------
+profile
+^^^^^^^^^^^^^^^^^^^^^^
 
 Allows assignment of a profile name to a block.  Any agent configured to use the defined profile may use the block.
 
@@ -132,7 +131,7 @@ Several configurations may be created according to the *name*, *OS* or *profile*
         </localfile>
     </agent_config>
 
-2. Run /var/ossec/bin/verify-agent-conf and if any errors are reported, fix them and return to step one.  Failure to perform this step may allow errors to be pushed to agents, preventing them from running.  If that happens, you may be forced to visit each agent manually to recover them.   
+2. Run /var/ossec/bin/verify-agent-conf and if any errors are reported, fix them and return to step one.  Failure to perform this step may allow errors to be pushed to agents, preventing them from running.  If that happens, you may be forced to visit each agent manually to recover them.
 
 3. Push of the configuration to the agents
 
