@@ -1,7 +1,7 @@
-.. _virtual_machines:
+.. _virtual_machine:
 
 Virtual Machine
-==============================================
+===============
 
 We provide a pre-built virtual machine image (OVA) that you can import into most virtualization systems.
 

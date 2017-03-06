@@ -1,7 +1,7 @@
 .. _installation_agents:
 
-Installing agents
-======================================================
+Installing Wazuh agent
+======================
 
 There are several ways to install a Wazuh agent, depending on the operating system and whether or not you wish to build from source. Consult the table below and choose how to proceed for a given agent:
 

@@ -13,21 +13,21 @@ Wazuh installation involves two central components, the Wazuh server and Elastic
 
 - **Wazuh agent**: Runs on the monitored host, collecting system log and configuration data, and detecting intrusions and anomalies. It talks to the Wazuh server, to which it forwards collected data for further analysis.
 
-Distributed architectures do run the Wazuh server and Elastic Stack cluster (one or more servers) in different hosts. On the other hand, single-host architectures do have  Wazuh server and Elastic Stack installed in the same system. This guide covers both distributed and single-host architectures. 
+Distributed architectures do run the Wazuh server and Elastic Stack cluster (one or more servers) in different hosts. On the other hand, single-host architectures do have  Wazuh server and Elastic Stack installed in the same system. This guide covers both installation options. 
 
 The diagrams below list the components that are run per host, both for single-host and distributed architectures.
-
-**Distributed architecture**:
-
-.. thumbnail:: ../images/installation/installing_wazuh.png
-    :title: Installing Wazuh server - distributed architecture
-    :align: center
-    :width: 100%
 
 **Single-host architecture**:
 
 .. thumbnail:: ../images/installation/installing_wazuh_singlehost.png
     :title: Installing Wazuh server - single server architecture
+    :align: center
+    :width: 100%
+
+**Distributed architecture**:
+
+.. thumbnail:: ../images/installation/installing_wazuh.png
+    :title: Installing Wazuh server - distributed architecture
     :align: center
     :width: 100%
 
@@ -41,8 +41,8 @@ The diagrams below list the components that are run per host, both for single-ho
 
         installing-wazuh-server/index
         installing-elastic-stack/index
-        installing-agents/index
+        installing-wazuh-agent/index
         optional-configurations/index
         upgrading/index
-        virtual_machines
-      	packages_list/index
+        virtual-machine
+      	packages-list/index
