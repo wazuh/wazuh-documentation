@@ -1,7 +1,7 @@
 .. _upgrading_manager:
 
-Upgrading Wazuh manager
-=======================
+Upgrading Wazuh server
+=====================================
 
 This section will update your current Wazuh 1.1 installation to Wazuh 2.0. Following the next guide, your current installation will be automatically update:
 
@@ -25,3 +25,24 @@ Also, a backup of your previous ruleset will be saved at */var/ossec/etc/backup_
 
 .. note::
 	**Next upgrades (versions > 2.0) will not overwrite the file /var/ossec/etc/ossec.conf**. In these cases, the *new* configuration file from the update package is installed as *ossec.conf.rpmnew* or *ossec.conf.debnew* and might reflect new options or a new notion of best practices.
+
+
+Change from Logstash forwarder to Filebeat
+--------------------------------------------
+
+In case you are setting up a distributed architecture, you must replace Logstash forwarder for Filebeat. Logstash-forwarder was the old system to ship logs from our host to our Logstash server. This system is now deprecated and replaced by Filebeat.
+
+Remove logstash-forwarder:
+
+    Deb systems::
+
+    	apt-get remove logstash-forwarder
+
+    RPM systems::
+
+    	yum remove logstash-forwarder
+
+Install Filebeat:
+
+- :ref:`Filebeat Deb Packages <wazuh_server_deb_filebeat>`
+- :ref:`Filebeat RPM Packages <wazuh_server_rpm_filebeat>`

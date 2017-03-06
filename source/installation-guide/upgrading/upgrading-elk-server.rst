@@ -1,8 +1,80 @@
 .. _upgrading_elk:
 
+Upgrading ELK stack server
+=====================================
 
-Update to Elastic 5
-===================
+Update to Wazuh 2.0 keeping Elastic 2
+-----------------------------------------
+
+Configure Logstash
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Download the new logstash configuration:
+
+	.. warning::
+		review 01-wazuh.conf to use elastic2-template.
+
+			 ::
+
+				curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
+				curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
+
+#. If you are using a single-server architecture:
+
+	Edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled **Remote Wazuh Manager - Filebeat input** and uncommenting the entire input section titled **Local Wazuh Manager - JSON file input**.
+	::
+
+		# Wazuh - Logstash configuration file
+		## Remote Wazuh Manager - Filebeat input
+		#input {
+		#beats {
+		#      port => 5000
+		#      codec => "json_lines"
+		#      ssl => true
+		#      ssl_certificate => "/etc/logstash/logstash.crt"
+		#      ssl_key => "/etc/logstash/logstash.key"
+		#  }
+		#}
+		# Local Wazuh Manager - JSON file input
+		input {
+		   file {
+		       type => "wazuh-alerts"
+		       path => "/var/ossec/logs/alerts/alerts.json"
+		       codec => "json"
+		   }
+		}
+		...
+
+	This will set up Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than expecting Filebeat on a separate server to forward the information in that file to Logstash.
+
+
+Configure Kibana
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+#. Go to Settings and configure a new wildcard
+
+	.. image:: ../../images/installation/kibana-elk2-set.png
+			:align: center
+			:width: 100%
+
+#. Set ``wazuh-*`` as wildcard and choose ``timestamp`` as time field:
+
+	.. image:: ../../images/installation/kibana-elk2.png
+			:align: center
+			:width: 100%
+
+	Click on Create
+
+#. Set as default wildcard by clicking on the Star.
+
+	.. image:: ../../images/installation/kibana-elk.png
+			:align: center
+			:width: 100%
+
+#. Go to Discover tag
+
+Update from Elatic 2 to Elastic 5
+-----------------------------------------
 
 #. Add the repositories
 
@@ -29,7 +101,7 @@ Update to Elastic 5
 		EOF
 
 Logstash
---------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Logstash is the tool that will collect logs, parse them, and then pass them along to Elasticsearch for indexing and storage. Learn more about `Logstash <https://www.elastic.co/products/logstash>`_
 
@@ -131,7 +203,7 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 			service logstash start
 
 Elasticsearch
--------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Elasticsearch is a highly scalable full-text search and analytics engine. More info `Elastic <https://www.elastic.co/products/elasticsearch>`_.
 
@@ -207,7 +279,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 			service elasticsearch start
 
 Kibana
-------
+^^^^^^^^^^^^^^^^^^^^^^^^
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. More info at `Kibana <https://www.elastic.co/products/kibana>`_.
 
 #. Stop the running Kibana instance:
@@ -262,3 +334,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 			update-rc.d kibana defaults 95 10
 			service kibana start
+
+
+Migrating old data
+-----------------------------------------
+
+We developed new templates in order to work with Elastic 5. For that reason, you will not see the old data at first on your system.
