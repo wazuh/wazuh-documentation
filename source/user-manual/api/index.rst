@@ -24,7 +24,7 @@ Wazuh API capabilities:
     .. toctree::
        :maxdepth: 2
 
-       getting_started
+       getting-started
        configuration
        reference
        examples

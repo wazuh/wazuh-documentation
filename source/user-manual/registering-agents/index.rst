@@ -34,6 +34,6 @@ Here are 3 ways to register an agent:
     .. toctree::
         :maxdepth: 1
 
-        register_agent_manual
-        register_agent_authd
-        register_agent_api
+        register-agent-manual
+        register-agent-authd
+        register-agent-api

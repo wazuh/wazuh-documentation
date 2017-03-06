@@ -40,8 +40,8 @@ This section describes how to migrate from OSSEC to Wazuh in case that OSSEC was
 .. toctree::
    :maxdepth: 1
 
-   ossec_packages_agent
-   ossec_packages_manager
+   ossec-packages-agent
+   ossec-packages-manager
 
 .. _upgrading_ossec_sources:
 

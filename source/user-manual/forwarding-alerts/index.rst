@@ -10,6 +10,6 @@ By default, the alerts are stored in the manager and forwarded to Elasticsearch,
     .. toctree::
        :maxdepth: 1
 
-       manual_integration
-       manual_syslog_output
-       manual_email_report
+       manual-integration
+       manual-syslog-output
+       manual-email-report

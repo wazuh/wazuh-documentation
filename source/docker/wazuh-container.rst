@@ -1,4 +1,4 @@
-.. _wazuh_container:
+.. _wazuh-container:
 
 Wazuh containers
 ===============================

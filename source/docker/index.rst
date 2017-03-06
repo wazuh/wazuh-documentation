@@ -17,6 +17,6 @@ We created our own fork based on `"deviantony" dockerfiles <https://github.com/d
     .. toctree::
        :maxdepth: 1
 
-       docker_installation
-       wazuh_container
-       faq_wazuh_container
+       docker-installation
+       wazuh-container
+       faq-wazuh-container

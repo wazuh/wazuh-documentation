@@ -10,7 +10,7 @@ This documentation explains how to install, update, and contribute to Wazuh Rule
     .. toctree::
        :maxdepth: 2
 
-       getting_started
+       getting-started
        update
        custom
        dynamic-fields

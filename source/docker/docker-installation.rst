@@ -1,4 +1,4 @@
-.. _docker_installation:
+.. _docker-installation:
 
 Installing Docker engine and Docker compose
 ==============================================

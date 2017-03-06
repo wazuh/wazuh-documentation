@@ -20,7 +20,7 @@ Wazuh is an open source project for security visibility, compliance and infrastr
 
  `OpenSCAP <https://www.open-scap.org>`_ is an `OVAL <https://oval.mitre.org/>`_ (Open Vulnerability Assessment Language) and `XCCDF <https://scap.nist.gov/specifications/xccdf/>`_ (Extensible Configuration Checklist Description Format) interpreter used to check system configurations and to detect vulnerable applications.
 
- It is a well recognized tool for checking the compliance and hardening of systems against industry standard security baselines for enterprise environments. 
+ It is a well recognized tool for checking the compliance and hardening of systems against industry standard security baselines for enterprise environments.
 .. topic:: Elastic Stack
 
  `Elastic Stack <https://www.elastic.co>`_ is a suite of tools (Filebeat, Logstash, Elasticsearch, Kibana) used to collect, parse, index, store, search, and present log data. It provides a web frontend useful for gaining a high level dashboard views of events, as well as for performing advanced analytics and data mining deep into your store of event data.
@@ -34,4 +34,4 @@ Wazuh is an open source project for security visibility, compliance and infrastr
 
    components
    architecture
-   use_cases
+   use-cases

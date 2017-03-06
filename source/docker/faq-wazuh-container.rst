@@ -1,4 +1,4 @@
-.. _wazuh_container_faq:
+.. _wazuh-container_faq:
 
 FAQ
 ===============================
@@ -59,7 +59,7 @@ Then map your configuration file inside the container in the ``docker-compose.ym
 How can I configure the Wazuh App?
 -------------------------------------------------------------------
 
-In Kibana, select the Wazuh item in the left menu and then click "ADD NEW API".  
+In Kibana, select the Wazuh item in the left menu and then click "ADD NEW API".
 
 The default configuration is::
 
