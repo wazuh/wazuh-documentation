@@ -3,6 +3,10 @@
 Welcome to Wazuh
 ================
 
+.. warning::
+
+    This is a preliminar version of Wazuh 2.0 documentation.
+
 Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level. This solution, based on lightweight multi-platform agents, provides the following capabilities:
 
 .. topic:: Log management and analysis
@@ -66,10 +70,10 @@ Available documentation
 .. toctree::
    :maxdepth: 1
 
-   getting_started/index
+   getting-started/index
    ossec/index
-   installation_guide/index
-   deploying_with_puppet/index
+   installation-guide/index
+   deploying-with-puppet/index
    docker/index
    user-manual/index
    pci-dss/index
