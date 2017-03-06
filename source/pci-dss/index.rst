@@ -22,4 +22,3 @@ In the following section we will elaborate on some specific use cases. They expl
     file-integrity-monitoring
     active-response
     elastic
-    audit_pci
