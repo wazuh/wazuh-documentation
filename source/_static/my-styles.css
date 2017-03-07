@@ -17,6 +17,12 @@
     box-shadow: 0 0 4px #c9c9c9;
 }
 
+/* Layout sizing **************************************************************/
+
+.wy-nav-content {
+    max-width: 960px;
+}
+
 /* Font family ****************************************************************/
 
 h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
@@ -105,24 +111,6 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
 
 .wy-side-nav-search>a img.logo {
     width: 180px;
-}
-
-/* Version selector ***********************************************************/
-
-.menu-version {
-    width: 100%;
-    bottom: 0;
-    margin-top: 16px;
-    padding-top: 16px;
-    text-align: right;
-}
-
-#select-version {
-    background: inherit;
-    min-width: 120px;
-    margin-right: 16px;
-    border: none;
-    color: #404040;
 }
 
 /* Color of code inside admonition sections ***********************************/
