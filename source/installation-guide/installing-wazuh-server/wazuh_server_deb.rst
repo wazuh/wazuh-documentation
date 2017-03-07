@@ -14,9 +14,7 @@ The first thing you need to do is to add the Wazuh repository to your Wazuh serv
 
 	apt-get install curl apt-transport-https lsb-release
 
-2. Install the GPG key:
-
-   .. code-block:: terminal
+2. Install the GPG key::
 
 	curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
