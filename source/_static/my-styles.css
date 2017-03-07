@@ -107,24 +107,6 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     width: 180px;
 }
 
-/* Version selector ***********************************************************/
-
-.menu-version {
-    width: 100%;
-    bottom: 0;
-    margin-top: 16px;
-    padding-top: 16px;
-    text-align: right;
-}
-
-#select-version {
-    background: inherit;
-    min-width: 120px;
-    margin-right: 16px;
-    border: none;
-    color: #404040;
-}
-
 /* Color of code inside admonition sections ***********************************/
 
 .admonition .highlight {
