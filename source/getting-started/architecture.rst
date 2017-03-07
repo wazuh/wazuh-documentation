@@ -60,7 +60,7 @@ Archival data storage
 
 Alerts and non-alert events are together stored in files on the Wazuh server in addition to being sent to Elasticsearch. These files can be written in JSON format (.json) and/or in plain text format (.log - no decoded fields but more compact). These files are daily compressed and signed using MD5 and SHA1 checksums. The directory and filename structure is as follows:
 
-.. code-block:: console
+.. code-block:: bash
 
     root@wazuh-server:/var/ossec/logs/archives/2017/Jan# ls -l
     total 176
