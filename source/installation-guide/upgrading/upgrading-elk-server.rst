@@ -73,7 +73,7 @@ Configure Kibana
 
 #. Go to Discover tag
 
-Update from Elatic 2 to Elastic 5
+Update from Elastic 2 to Elastic 5
 -----------------------------------------
 
 #. Add the repositories
@@ -135,12 +135,12 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 	Singlehost Configuration::
 
 		rm /etc/logstash/conf.d/01-ossec-singlehost.conf
-		rm /etc/logstash/conf.d/elastic-ossec-template.json
+		rm /etc/logstash/elastic-ossec-template.json
 
 	Distributed Configuration::
 
 		rm /etc/logstash/conf.d/01-ossec.conf
-		rm /etc/logstash/conf.d/elastic-ossec-template.json
+		rm /etc/logstash/elastic-ossec-template.json
 
 #. Download the Wazuh config and template files for Logstash::
 
