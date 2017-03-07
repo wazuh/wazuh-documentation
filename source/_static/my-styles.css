@@ -17,6 +17,12 @@
     box-shadow: 0 0 4px #c9c9c9;
 }
 
+/* Layout sizing **************************************************************/
+
+.wy-nav-content {
+    max-width: 960px;
+}
+
 /* Font family ****************************************************************/
 
 h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
