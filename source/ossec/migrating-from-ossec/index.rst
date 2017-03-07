@@ -3,78 +3,38 @@
 Migrating from OSSEC
 ====================
 
-Wazuh is born as a OSSEC HIDS fork, but we added a lot of capabilities that you will only be able to use if you have Wazuh installed in your system. Here we are going to give you the needed steps to migrate your an existing OSSEC installation (agent or server) to Wazuh.
+This document describes how to migrate your existing OSSEC installation (agent or manager) to Wazuh. For interactive help, our `email forum <https://groups.google.com/d/forum/wazuh>`_ is available.  You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.
 
-If you already have a ELK stack installed, we are not going to describe here the needed steps to integrate it with Wazuh, but you can ask on our mailing list.
+.. note::
+    OSSEC agents are compatible with Wazuh manager, but if you don't migrate your agents to Wazuh, you will lost some capabilities like :ref:`OpenSCAP<openscap_module>` or some :ref:`syscheck features<manual_file_integrity>` in those agents.
 
-You can join our users `mailing list <https://groups.google.com/d/forum/wazuh>`_ by sending an email to wazuh+subscribe@googlegroups.com, to ask questions and participate in discussions.
+The migration of ELK stack, in case that you already have it installed, it is beyond the scope of Wazuh documentation. We recommend you to visit our guides for :ref:`Installing Elastic Stack <installation_elastic>`.
 
-#. `Prerequisite`_
-#. `Migrating OSSEC installed from packages`_ or `Migrating OSSEC installed from sources`_
-#. `Installing Elastic stack`_
+Follow the appropriate section depending on the type of your OSSEC installation:
 
-
-Prerequisite
-------------
-- OSSEC 2.8.3 or higher
-
-OSSEC agents are compatible with Wazuh Manager, but if you don't migrate your agents to the Wazuh agents, you will lost some capabilities like :ref:`openscap<openscap_module>` or some :ref:`syscheck features<manual_file_integrity>` in those agents.
-
-Follow the appropriate section depending on the type of your OSSEC installation: from sources or packages:
-
-+--------------+-------------------+---------------+-----------------------------------------------------------------------+
-| Upgrade from | Installation type | Upgrade to    |                             Upgrade type                              |
-+==============+===================+===============+=======================================================================+
-| OSSEC 2.8.3+ | Packages          | Wazuh 2       | :ref:`Manual <upgrading_ossec_packages>`                              |
-+--------------+-------------------+---------------+-----------------------------------------------------------------------+
-| OSSEC 2.8.3+ | Sources           | Wazuh 2       | :ref:`Automatic <upgrading_ossec_sources>`                            |
-+--------------+-------------------+---------------+-----------------------------------------------------------------------+
-
-.. _upgrading_ossec_packages:
-
-Migrating OSSEC installed from packages
----------------------------------------
-
-This section describes how to migrate from OSSEC to Wazuh in case that OSSEC was installed using official OSSEC packages:
-
-.. toctree::
-   :maxdepth: 1
-
-   ossec-packages-agent
-   ossec-packages-manager
-
-.. _upgrading_ossec_sources:
-
-Migrating OSSEC installed from sources
---------------------------------------
-
-This section describes how to upgrade from OSSEC to Wazuh in case that OSSEC was installed from sources.
++--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
+| Upgrade from | Type    | Installation type | Upgrade to | Guide                                                                               |
++==============+=========+===================+============+=====================================================================================+
+| OSSEC 2.8.3+ | Manager | Packages          | Wazuh 2.0  | :ref:`Migrating OSSEC manager installed from packages <up_ossec_manager>`           |
++--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
+| OSSEC 2.8.3+ | Manager | Sources           | Wazuh 2.0  | :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`                    |
++              +         +                   +            +-------------------------------------------------------------------------------------+
+|              |         |                   |            | :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`                    |
++--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
+| OSSEC 2.8.3+ | Agent   | Packages          | Wazuh 2.0  | :ref:`Migrating OSSEC agent installed from packages <up_ossec_agent>`               |
++--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
+| OSSEC 2.8.3+ | Agent   | Sources           | Wazuh 2.0  | :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`                      |
++              +         +                   +            +-------------------------------------------------------------------------------------+
+|              |         |                   |            | :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`                      |
++--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
 
 .. warning::
-    The configuration file ``/var/ossec/etc/ossec.conf`` **will be overwritten**. The *old* configuration file from the current installation is saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. You should compare the new file with the old one.
+    **In case that OSSEC was installed from sources**, the configuration file ``/var/ossec/etc/ossec.conf`` **will be overwritten**. The *old* configuration file from the current installation is saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. You should compare the new file with the old one. Also, a backup of your previous ruleset will be saved at ``/var/ossec/etc/backup_ruleset``. All the rules/decoders in other files than ``local_rules.xml`` or ``local_decoder.xml`` will be overwritten.
 
-A backup of your previous ruleset will be saved at ``/var/ossec/etc/backup_ruleset``. All the rules/decoders in other files than ``local_rules.xml`` or ``local_decoder.xml`` will be overwritten. You will need to review the backup in order to incorpore those missing rules.
+.. topic:: Contents
 
-Following the proper installation guide, your OSSEC installation will be automatically upgraded to Wazuh:
+    .. toctree::
+       :maxdepth: 2
 
-+---------------------------------------------+-----------------------------------+-----------------------------------+
-|                                             |Wazuh server                       |Wazuh agent                        |
-+=============================================+===================================+===================================+
-| Red Hat, CentOS and other RPM-based systems | :ref:`Packages <wazuh_server_rpm>`| :ref:`Packages <wazuh_agent_rpm>` |
-+---------------------------------------------+-----------------------------------+-----------------------------------+
-| Ubuntu, and other Debian-based systems      | :ref:`Packages <wazuh_server_deb>`| :ref:`Packages <wazuh_agent_deb>` |
-+---------------------------------------------+-----------------------------------+-----------------------------------+
-
-Installing Elastic stack
-------------------------
-
-At this point you should have your OSSEC Manager and agents migrated to Wazuh. Now, we recommend you install the ELK stack, which will allow you to use our web application integrated as a Kibana app.
-
-Install Elastic stack server following this guide:
-
-- :ref:`Install Elastic Stack with RPM packages <elastic_server_rpm>`
-- :ref:`Install Elastic Stack with Debian packages <elastic_server_deb>`
-
-.. image:: ../../images/screenshots/Overview_general_1024x1024.png
-  :align: center
-  :width: 100%
+       ossec-packages-manager
+       ossec-packages-agent

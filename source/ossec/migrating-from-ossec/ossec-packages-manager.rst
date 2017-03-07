@@ -1,6 +1,6 @@
-.. _upgrading_ossec_packages_manager:
+.. _up_ossec_manager:
 
-Migrating OSSEC Manager installed from packages
+Migrating OSSEC manager installed from packages
 ===================================================
 
 1. Backup your current configuration
@@ -40,8 +40,8 @@ Remove directory:
     $ rm -rf /var/ossec
 
 
-3. Install Wazuh
-----------------
+3. Install Wazuh server
+--------------------------
 
 Follow the next guide in order to install Wazuh server:
 
@@ -78,7 +78,7 @@ The following files are required in order to preserve alerts log files and sysch
     $ cp -rp /var/ossec_backup/queue/syscheck/* /var/ossec/queue/syscheck
 
 
-5. Review ``ossec.conf``
+5. Review ossec.conf
 ------------------------
 
 The previous configuration file is saved as ``/var/ossec/etc/ossec.conf.orig``. You should review the new configuration file ``/var/ossec/etc/ossec.conf`` with the old one in case that you want to add some setting from the previous configuration.

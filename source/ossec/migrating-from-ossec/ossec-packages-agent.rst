@@ -1,6 +1,6 @@
-.. _upgrading_ossec_packages_agent:
+.. _up_ossec_agent:
 
-Migrating OSSEC Agent installed from packages
+Migrating OSSEC agent installed from packages
 ===================================================
 
 1. Backup your current configuration
@@ -40,8 +40,8 @@ Remove directory:
     $ rm -rf /var/ossec
 
 
-3. Install Wazuh
-----------------
+3. Install Wazuh agent
+------------------------
 
 Follow the next guide in order to install Wazuh agent:
 
