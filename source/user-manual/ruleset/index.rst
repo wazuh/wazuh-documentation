@@ -15,4 +15,5 @@ This documentation explains how to install, update, and contribute to Wazuh Rule
        custom
        dynamic-fields
        ruleset-xml-syntax/index.rst
+       testing
        contribute
