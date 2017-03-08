@@ -340,3 +340,60 @@ Migrating old data
 -----------------------------------------
 
 We developed new templates in order to work with Elastic 5. For that reason, you will not see the old data at first on your system.
+
+We have developed an script in order to migrate all your stored info to your upgraded system. You can use this script with singlehost or distributed systems.
+
+.. warning::
+	REVIEW the URLS!
+
+#. Create a new folder and dowload de configuration file and the script:
+
+	::
+
+		mkdir ~/migrate && cd ~/migrate
+		curl -so 02-wazuh-restoreAlerts.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/migration/02-wazuh-restoreAlerts.conf
+		curl -so restore_alerts.sh https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/migration/restore_alerts.sh
+
+#. Configure the ElasticServer IP on ``02-wazuh-restoreAlerts.conf`` in the output section:
+
+	::
+
+		output {
+		    stdout { codec => rubydebug }
+		    elasticsearch {
+		        hosts => ["127.0.0.1:9200"]
+		        index => "wazuh-alerts-%{+YYYY.MM.dd}"
+		        document_type => "wazuh"
+		        template => "/etc/logstash/wazuh-elastic5-template.json"
+		        template_name => "wazuh"
+		        template_overwrite => true
+		    }
+		}
+#. If you have a distributed architecture:
+
+		#. Create a rsa key par on the ELK Server
+
+			::
+
+				ssh-keygen -t rsa
+		#. Copy the key to the Wazuh manager
+
+			::
+
+				cat ~/.ssh/id_rsa.pub | ssh user@<Wazuh-server-ip> "mkdir -p ~/.ssh && cat >>  ~/.ssh/authorized_keys"
+
+#. Run the script on the ELK server
+
+	::
+
+		./restore_alerts.sh
+
+	This will ask you some questions about the architecture, the remote machine ip if distributed architecture, the date interval to migrate.
+
+	At the end, you will see something like:
+
+	::
+
+		### [Restoration ended] ###
+
+#. Go to kibana, you should see the old alerts.

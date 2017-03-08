@@ -1,5 +1,5 @@
-Update Agents
-----------------------------------
+Update Wazuh Agents
+===================
 
 This section will update your current Wazuh 1.1 installation to Wazuh 2.0. Following the next guide, your current installation will be automatically update:
 
