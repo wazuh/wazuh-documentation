@@ -72,9 +72,9 @@ Available documentation
 
    getting-started/index
    installation-guide/index
+   user-manual/index
    deploying-with-puppet/index
    docker/index
-   user-manual/index
    pci-dss/index
    amazon/index
    ossec/index

@@ -15,7 +15,7 @@ User manual
         :maxdepth: 1
 
         configuration/index
-        registering-agents/index
+        managing-agents/index
         log-analysis/index
         file-integrity/index
         anomalies-detection/index
