@@ -45,27 +45,29 @@ Installing Wazuh API
 
 1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend you add the official repository as this has more recent versions.
 
-**Debian, Ubuntu, and other Debian-based systems**
-::
 
-    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-    apt-get install -y nodejs
+  a) For RPM-based distributions::
 
-**Red Hat, CentOS and other RPM-based systems**
-::
+      curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+      yum -y install nodejs
 
-    curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-    yum -y install nodejs
+  b) For Debian-based distributions::
 
-.. note::
+      curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+      apt-get install -y nodejs
+
+    .. note::
 	`Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
 
 
 2. Download and execute the installation script::
 
-    curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/master/install_api.sh && bash ./install_api.sh download
+      curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/master/install_api.sh \
+      && bash ./install_api.sh download
 
-3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions. It is possible to set a custom Python path for the API to use, in */var/ossec/api/configuration/config.js*::
+3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions. It is possible to set a custom Python path for the API to use, in */var/ossec/api/configuration/config.js*:
+
+  .. code-block:: javascript
 
     config.python = [
         // Default installation
@@ -80,14 +82,14 @@ Installing Wazuh API
         }
     ];
 
-For CentOS 6 and Red Hat 6, you can install the package *python27*.  It installs Python 2.7 at */opt/rh/python27* in parallel to the older Python version included in the distro:
+  For CentOS 6 and Red Hat 6, you can install the package *python27*.  It installs Python 2.7 at */opt/rh/python27* in addition to the older Python version included in the distro:
 
-    a) For CentOS 6::
+  a) For CentOS 6::
 
         yum install -y centos-release-SCL
         yum install -y python27
 
-    b) For RHEL 6::
+  b) For RHEL 6::
 
         yum install python27
 
