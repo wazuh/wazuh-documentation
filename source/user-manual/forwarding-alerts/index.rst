@@ -12,4 +12,4 @@ By default, the alerts are stored in the manager and forwarded to Elasticsearch,
 
        manual-integration
        manual-syslog-output
-       manual-email-report
+       manual-email-report/index
