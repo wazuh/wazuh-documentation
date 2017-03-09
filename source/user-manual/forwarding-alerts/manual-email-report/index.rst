@@ -86,7 +86,7 @@ The minimum level you configured inside ``alerts`` section, will be also valid h
 
 So, for example, if you configure your system to send email once the rule 526 is triggered, if that rule has a level lower than the configured on the previous section the alert will not be sent.
 
-Email alert based on level and agent
+Email alert based on level
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The general configuration will be:
 ::
@@ -97,8 +97,7 @@ The general configuration will be:
    <do_not_delay />
  </email_alerts>
 
-This will send to ``you@example`` and email if the any rule with level greater or equal to 10 is triggered.
-
+This will send to ``you@example`` and email if the any rule with level greater or equal to 10 is triggered. Remember, if the level here is less than the email_alert_level configured on the previous section, this will not be sent. 
 
 Email alert based on level and agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

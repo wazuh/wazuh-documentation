@@ -10,6 +10,9 @@ FAQ
 5. `Can Wazuh report changes in the content of a text file?`_
 6. `How does Wazuh verify the integrity of files?`_
 7. `Does Wazuh monitor any directories by default?`_
+8. `Can I force an inmediate syscheck scan?`_
+9. `Does Syscheck start when Wazuh start?`_
+10. `Does Wazuh alert when a new file is created?`_
 
 How often does syscheck run?
 --------------------------------
@@ -45,3 +48,22 @@ Does Wazuh monitor any directories by default?
 --------------------------------------------------
 
 Yes. By default Wazuh monitors ``/etc``, ``/usr/bin``, ``/usr/sbin``, ``/bin`` and ``/sbin`` on Unix-like systems and ``C:\Windows\System32`` on Windows.
+
+Can I force an inmediate syscheck scan?
+--------------------------------------------------
+
+Yes, you can force an agent to perform a system integrity check with ::
+  /var/ossec/bin/agent_control -r -a
+  /var/ossec/bin/agent_control -r -u <agent_id>
+
+More info at :ref:`Ossec control section <ossec-control>`
+
+Does Syscheck start when Wazuh start?
+-------------------------------------
+
+By defult syscheck scan when Wazuh start, but you can change this with the :ref:`scan_on_start option<reference_ossec_syscheck_scan_start>`
+
+Does Wazuh alert when a new file is created?
+--------------------------------------------
+
+Yes, but you need to configure it. Use the :ref:`alert_new_files option<reference_ossec_syscheck_alert_new_files>`
