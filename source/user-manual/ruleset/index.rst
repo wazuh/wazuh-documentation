@@ -16,4 +16,5 @@ This documentation explains how to install, update, and contribute to Wazuh Rule
        dynamic-fields
        ruleset-xml-syntax/index.rst
        testing
+       cdb-list
        contribute
