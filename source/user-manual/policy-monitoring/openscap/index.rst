@@ -37,6 +37,30 @@ Brief introduction to SCAP
 
   - **Evaluation (scan)**: This is the process performed by the OpenSCAP scanner on an agent according to a specific security policy and profile.  It usually takes only a few minutes, depending on the number of rules selected in the profile.
 
+These are the Security Policy includes by default on Wazuh:
+
++----------+---------+------------------------+----------------+-----+-------------------------+
+| SO       | Version | File Name              | Main Profile   | PCI | Vulnerability assessment|
++==========+=========+========================+================+=====+=========================+
+| CentOS   | 6       | ssg-centos-6-ds.xml    | Server         |  Y  | N                       |
++----------+---------+------------------------+----------------+-----+-------------------------+
+| CentOS   | 7       | ssg-centos-7-ds.xml    | Common         |  Y  | N                       |
++----------+---------+------------------------+----------------+-----+-------------------------+
+| RedHat   | 6       | ssg-rhel-6-ds.xml      | Server         |  Y  | Y                       |
++----------+---------+------------------------+----------------+-----+-------------------------+
+| RedHat   | 7       | ssg-rhel-7-ds.xml      | Common         |  Y  | Y                       |
++----------+---------+------------------------+----------------+-----+-------------------------+
+| Debian   | 8       | ssg-debian-8-ds.xml    | Common         |  N  | v 6,7,8.2 y 9           |
++----------+---------+------------------------+----------------+-----+-------------------------+
+| Ubuntu   | xenial  | ssg-ubuntu-1604-ds.xml | Common         |  N  | N                       |
++----------+---------+------------------------+----------------+-----+-------------------------+
+| Ubuntu   | trusty  | cve-debian-oval.xml    | N/A            |  N  | N                       |
++----------+---------+------------------------+----------------+-----+-------------------------+
+| Ubuntu   | precise | cve-debian-oval.xml    | N/A            |  N  | N                       |
++----------+---------+------------------------+----------------+-----+-------------------------+
+| Fedora   | 24      | ssg-fedora-ds.xml      | Common         |  N  | N                       |
++----------+---------+------------------------+----------------+-----+-------------------------+
+
 Requirements
 --------------------------
 
