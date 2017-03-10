@@ -3,53 +3,7 @@
 Email alerts
 ============
 
-Wazuh may be configured to send alerts. It is also possible to configure it to send a daily report.
-
-Configuring generic email options
----------------------------------
-In order to configure Wazuh to send alerts through email, you need to configure the email settings inside the ``<global>`` section:
-
-::
-
-  <ossec_config>
-      <global>
-          <email_notification>yes</email_notification>
-          <email_to>me@test.com</email_to>
-          <smtp_server>mail.test.com..</smtp_server>
-          <email_from>wazuh@test.com</email_from>
-      </global>
-      ...
-  </ossec_config>
-
-To see all the available options to configure it, go to :ref:`global section <reference_ossec_global>`
-
-After the global configuration, we need to configure the ``email_alert_level``. This option stablish the minimum level to send an alert. By default is set to 7.
-
-::
-
-  <ossec_config>
-    <alerts>
-        <email_alert_level>10</email_alert_level>
-    </alerts>
-    ...
-  </ossec_config>
-
-This example will set the minimum level to 10.
-
-More information: :ref:`alerts section <reference_ossec_global>`.
-
-
-Once you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
-
-a) For Systemd:
-::
-
-  systemctl status wazuh-manager
-
-b) For SysV Init:
-::
-
-  service wazuh-manager status
+Wazuh can be configured to send the alerts to an email. You can configure the system to send emails once a certain rules are triggered or configure it to send a daily report.
 
 Mail Example:
 
@@ -74,15 +28,112 @@ Mail Example:
 
      --END OF NOTIFICATION
 
+Daily Report example:
+::
+
+ From: Wazuh                      12:01 AM (10 hours ago)
+ to me
+ ------------------------------------------------
+
+ Report 'Daily report: File changes' completed.
+ ------------------------------------------------
+ ->Processed alerts: 368
+ ->Post-filtering alerts: 58
+ ->First alert: 2017 Mar 08 06:31:26
+ ->Last alert: 2017 Mar 08 13:11:42
+
+ Top entries for 'Level':
+ ------------------------------------------------
+ Severity 5                                                                    |47      |
+ Severity 7                                                                    |11      |
+
+ Top entries for 'Group':
+ ------------------------------------------------
+ ossec                                                                         |58      |
+ pci_dss_11.5                                                                  |58      |
+ syscheck                                                                      |58      |
+
+ Top entries for 'Location':
+ ------------------------------------------------
+ localhost->syscheck                                                           |51      |
+ (bb8) 192.168.1.242->syscheck                                                 |7       |
+
+ Top entries for 'Rule':
+ ------------------------------------------------
+ 554 - File added to the system.                                               |47      |
+ 550 - Integrity checksum changed.                                             |11      |
+
+ Top entries for 'Filenames':
+ ------------------------------------------------
+ /boot/grub/grub.cfg                                                           |1       |
+ /etc/apt/apt.conf.d/01autoremove-kernels                                      |1       |
+ /etc/group                                                                    |1       |
+ /etc/group-                                                                   |1       |
+ /etc/gshadow                                                                  |1       |
+ /etc/gshadow-                                                                 |1       |
+ /etc/passwd                                                                   |1       |
+ /etc/passwd-                                                                  |1       |
+ /etc/postfix/main.cf                                                          |1       |
+ /etc/shadow                                                                   |1       |
+ /etc/shadow-                                                                  |1       |
+
+
+Configuring generic email options
+---------------------------------
+In order to configure Wazuh to send alerts through email, you need to configure the email settings inside the ``<global>`` section:
+
+::
+
+  <ossec_config>
+      <global>
+          <email_notification>yes</email_notification>
+          <email_to>me@test.com</email_to>
+          <smtp_server>mail.test.com..</smtp_server>
+          <email_from>wazuh@test.com</email_from>
+      </global>
+      ...
+  </ossec_config>
+
+To see all the available options to configure it, go to :ref:`global section <reference_ossec_global>`
+
+After the global configuration, we need to configure the ``email_alert_level``. This option stablishs the minimum level to send an alert. By default is set to 7.
+
+::
+
+  <ossec_config>
+    <alerts>
+        <email_alert_level>10</email_alert_level>
+    </alerts>
+    ...
+  </ossec_config>
+
+This example will set the minimum level to 10. More information: :ref:`alerts section <reference_ossec_global>`.
+
+Once you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
+
+a) For Systemd:
+::
+
+  systemctl status wazuh-manager
+
+b) For SysV Init:
+::
+
+  service wazuh-manager status
+
+
 .. warning::
- Wazuh doesn't handle authentication. If you want to use an email with it, you need to :ref:`configure a server relay<smtp_authentication>`.
+ Wazuh doesn't handle smtp authentication. If you want to use an email with it, you need to :ref:`configure a server relay<smtp_authentication>`.
 
 
 Configuring granular email options
 ----------------------------------
 
-Wazuh also allows a very granular configuration options for your alerts through email. Here you will find some examples about the granular configuration.
-The minimum level you configured inside ``alerts`` section, will be also valid here.
+Wazuh also allows a very granular configuration options for your alerts through email. Here you will find some examples about the granular configuration. More info: :ref:`email_alerts section <reference_ossec_global>`
+
+.. warning::
+
+  The minimum level you configured inside ``alerts`` section, will be also valid here.
 
 So, for example, if you configure your system to send email once the rule 526 is triggered, if that rule has a level lower than the configured on the previous section the alert will not be sent.
 
@@ -97,7 +148,7 @@ The general configuration will be:
    <do_not_delay />
  </email_alerts>
 
-This will send to ``you@example`` and email if the any rule with level greater or equal to 10 is triggered. Remember, if the level here is less than the email_alert_level configured on the previous section, this will not be sent. 
+This will send to ``you@example`` and email if the any rule with level greater or equal to 10 is triggered. Remember, if the level here is less than the email_alert_level configured on the previous section, this will not be sent.
 
 Email alert based on level and agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -195,27 +246,6 @@ So for example this rule:
 
 This will send an email everytime this rule is triggered. I doesn't matter the level minimum level configured on the ``<alerts>`` section in ``ossec.conf``
 
-Mail example:
-
-::
-
-
-    From: Wazuh <test@gmail.com>               5:45 PM (2 minutes ago)
-    to: me
-    -----------------------------
-    Wazuh Notification.
-    2017 Mar 08 17:44:58
-
-    Received From: localhost->ossec-monitord
-    Rule: 502 fired (level 3) -> "Ossec server started."
-    Portion of the log(s):
-
-    ossec: Ossec started.
-
-
-
-     --END OF NOTIFICATION
-
 
 Daily report
 ------------
@@ -246,55 +276,6 @@ For example:
  </ossec_config>
 
 The above configuration will send a report with all rules that fired with a level higher than 10.
-
-Example:
-::
-
-  From: Wazuh                      12:01 AM (10 hours ago)
-  to me
-  ------------------------------------------------
-
-  Report 'Daily report: File changes' completed.
-  ------------------------------------------------
-  ->Processed alerts: 368
-  ->Post-filtering alerts: 58
-  ->First alert: 2017 Mar 08 06:31:26
-  ->Last alert: 2017 Mar 08 13:11:42
-
-  Top entries for 'Level':
-  ------------------------------------------------
-  Severity 5                                                                    |47      |
-  Severity 7                                                                    |11      |
-
-  Top entries for 'Group':
-  ------------------------------------------------
-  ossec                                                                         |58      |
-  pci_dss_11.5                                                                  |58      |
-  syscheck                                                                      |58      |
-
-  Top entries for 'Location':
-  ------------------------------------------------
-  localhost->syscheck                                                           |51      |
-  (bb8) 192.168.1.242->syscheck                                                 |7       |
-
-  Top entries for 'Rule':
-  ------------------------------------------------
-  554 - File added to the system.                                               |47      |
-  550 - Integrity checksum changed.                                             |11      |
-
-  Top entries for 'Filenames':
-  ------------------------------------------------
-  /boot/grub/grub.cfg                                                           |1       |
-  /etc/apt/apt.conf.d/01autoremove-kernels                                      |1       |
-  /etc/group                                                                    |1       |
-  /etc/group-                                                                   |1       |
-  /etc/gshadow                                                                  |1       |
-  /etc/gshadow-                                                                 |1       |
-  /etc/passwd                                                                   |1       |
-  /etc/passwd-                                                                  |1       |
-  /etc/postfix/main.cf                                                          |1       |
-  /etc/shadow                                                                   |1       |
-  /etc/shadow-                                                                  |1       |
 
 .. topic:: Contents
 
