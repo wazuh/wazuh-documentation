@@ -81,3 +81,4 @@ All of the above sections must be located within the top-level ``<ossec_config>`
        syscheck
        syslog-output
        wodle-openscap
+       verifying-configuration
