@@ -3,8 +3,13 @@
 Upgrading ELK stack server
 =====================================
 
-Update to Wazuh 2.0 keeping Elastic 2
+#. `Keep Elastic 2 with Wazuh 2.0`_
+#. `Update from Elastic 2 to Elastic 5`_
+
+Keep Elastic 2 with Wazuh 2.0
 -----------------------------------------
+
+If you had Elastic2 in your previous installation and you don't want to update to Elastic 5, you only need to configure Elastic 2 to work with Wazuh 2.0.
 
 Configure Logstash
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -76,61 +81,23 @@ Configure Kibana
 Update from Elastic 2 to Elastic 5
 -----------------------------------------
 
-#. Add the repositories
+Follow this guide to Elastic5 from your current Elastic 2.
 
-	Deb Repositories, install the Elastic repository and its GPG key::
-
-		curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-		apt-get install apt-transport-https
-		echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-5.x.list
-		apt-get update
-
-	RPM Repositories, install the Elastic repository and its GPG key::
-
-		rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-
-		cat > /etc/yum.repos.d/elastic.repo << EOF
-		[elastic-5.x]
-		name=Elastic repository for 5.x packages
-		baseurl=https://artifacts.elastic.co/packages/5.x/yum
-		gpgcheck=1
-		gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-		enabled=1
-		autorefresh=1
-		type=rpm-md
-		EOF
-
-Logstash
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Logstash is the tool that will collect logs, parse them, and then pass them along to Elasticsearch for indexing and storage. Learn more about `Logstash <https://www.elastic.co/products/logstash>`_
-
-#. Stop the running Logstash instance:
+#. Stop the running Logstash, Elasticsearch and kibana instance
 
 	a) For Systemd::
 
 		systemctl stop logstash.service
+		systemctl stop elasticsearch.service
+		systemctl stop kibana.service
 
 	b) For SysV Init::
 
 		service logstash stop
+		service elasticsearch stop
+		service kibana stop
 
-#. Install the Logstash package:
-
-	Deb Packages::
-
-		apt-get install logstash
-
-	RPM Packages::
-
-		yum install logstash
-
-#. Check the new logstash version with ``/usr/share/logstash/bin/logstash -V``, the output should be something like::
-
-	$ /usr/share/logstash/bin/logstash -V
-	logstash 5.2.2
-
-#. Remove the old configuration and template files:
+#. Remove logstash old configuration and template files:
 
 	Singlehost Configuration::
 
@@ -141,96 +108,6 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 		rm /etc/logstash/conf.d/01-ossec.conf
 		rm /etc/logstash/elastic-ossec-template.json
-
-#. Download the Wazuh config and template files for Logstash::
-
-	curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
-	curl -so /etc/logstash/wazuh-elastic5-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic5-template.json
-
-#. If you are using a single-server architecture:
-
-	Edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled **Remote Wazuh Manager - Filebeat input** and uncommenting the entire input section titled **Local Wazuh Manager - JSON file input**.
-	::
-
-		# Wazuh - Logstash configuration file
-		## Remote Wazuh Manager - Filebeat input
-		#input {
-		#beats {
-		#      port => 5000
-		#      codec => "json_lines"
-		#      ssl => true
-		#      ssl_certificate => "/etc/logstash/logstash.crt"
-		#      ssl_key => "/etc/logstash/logstash.key"
-		#  }
-		#}
-		# Local Wazuh Manager - JSON file input
-		input {
-		   file {
-		       type => "wazuh-alerts"
-		       path => "/var/ossec/logs/alerts/alerts.json"
-		       codec => "json"
-		   }
-		}
-
-	This will set up Logstash to read the Wazuh alerts.json file directly from the local filesystem rather than expecting Filebeat on a separate server to forward the information in that file to Logstash.
-
-	Because Logstash user needs to read ``alerts.json`` file, please add it to OSSEC group by running::
-
-		usermod -a -G ossec logstash
-
-#. If you are running Wazuh server and the Elastic Stack server on separate systems (distributed architecture):
-
-	Configure encryption between Filebeat and Logstash.  To do so, please see :ref:`elastic_ssl`.
-
-#. Enable and start the Logstash service:
-
-	a) For Systemd::
-
-		systemctl daemon-reload
-		systemctl enable logstash.service
-		systemctl start logstash.service
-
-	b) For SysV Init:
-
-		RPM::
-
-			chkconfig --add logstash
-			service logstash start
-
-		Deb::
-
-			update-rc.d logstash defaults 95 10
-			service logstash start
-
-Elasticsearch
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Elasticsearch is a highly scalable full-text search and analytics engine. More info `Elastic <https://www.elastic.co/products/elasticsearch>`_.
-
-#. Stop the running Elasticsearch instance:
-
-	a) For Systemd::
-
-		systemctl stop elasticsearch.service
-
-	b) For SysV Init::
-
-		service elasticsearch stop
-
-#. Install the Elasticsearch package:
-
-	Deb Packages::
-
-		apt-get install elasticsearch
-
-	RPM Packages::
-
-		yum install elasticsearch
-
-#. Check the new elasticsearch version with ``/usr/share/elasticsearch/bin/elasticsearch -V``, the output should be something like::
-
-	$ /usr/share/elasticsearch/bin/elasticsearch -V
-	Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
 
 #. Remove old configuration:
 
@@ -258,83 +135,30 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 		...
 		MAX_OPEN_FILES=65535
 
-#. Enable and start the Elasticsearch service:
+#. Follow the installation guide:
 
-	a) For Systemd::
+	 - :ref:`Install ELK stach with RPM packages <elastic_server_rpm>`
+	 - :ref:`Install ELK stach with Deb packages <elastic_server_deb>`
 
-		systemctl daemon-reload
-		systemctl enable elasticsearch.service
-		systemctl start elasticsearch.service
+#. To check that eveything worked as expected, check the verions
 
-	b) For SysV Init:
+	Logstash
+	::
 
-		RPM::
+		$ /usr/share/logstash/bin/logstash -V
+		logstash 5.2.2
 
-			chkconfig --add elasticsearch
-			service elasticsearch start
+	Elasticsearch
+	::
 
-		Deb::
+		$ /usr/share/elasticsearch/bin/elasticsearch -V
+		Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
 
-			update-rc.d elasticsearch defaults 95 10
-			service elasticsearch start
+	Kibana
+	::
 
-Kibana
-^^^^^^^^^^^^^^^^^^^^^^^^
-Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. More info at `Kibana <https://www.elastic.co/products/kibana>`_.
-
-#. Stop the running Kibana instance:
-
-	a) For Systemd::
-
-		systemctl stop kibana.service
-
-	b) For SysV Init::
-
-		service kibana stop
-
-#. Install the Kibana package:
-
-	Deb Packages::
-
-		apt-get install kibana
-
-	RPM Packages::
-
-		yum install kibana
-
-#. Check the new kibana version with ``/usr/share/kibana/bin/kibana -V``, the output should be something like::
-
-	$ /usr/share/kibana/bin/kibana -V
-	5.2.2
-
-#. Install the Wazuh App plugin for Kibana::
-
-	/usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
-
-#. **Optional.** Kibana will listen only the loopback interface (localhost) by default. To set up Kibana to listen all interfaces, edit the file ``/etc/kibana/kibana.yml``. Uncomment the setting ``server.host`` and change the value to::
-
-	server.host: "0.0.0.0"
-
-#. Enable and start the Kibana service:
-
-	a) For Systemd::
-
-		systemctl daemon-reload
-		systemctl enable kibana.service
-		systemctl start kibana.service
-
-	b) For SysV Init:
-
-		RPM::
-
-			chkconfig --add kibana
-			service kibana start
-
-		Deb::
-
-			update-rc.d kibana defaults 95 10
-			service kibana start
-
+		$ /usr/share/kibana/bin/kibana -V
+		5.2.
 
 Migrating old data
 -----------------------------------------
