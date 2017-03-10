@@ -5,10 +5,29 @@ Upgrading Wazuh server
 
 This section will update your current Wazuh 1.1 installation to Wazuh 2.0. Following the next guide, your current installation will be automatically update:
 
-- :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
-- :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
+#. First of all, stop eveything:
 
-Run ``/var/ossec/bin/manage_agents -V`` to check that everything worked as expected::
+	::
+
+			/var/ossec/bin/ossec-control stop
+			systemctl stop wazuh-api
+
+#. If you have a distributed architecture, remove logstash-forwarder:
+
+	    Deb systems::
+
+	    	apt-get remove logstash-forwarder
+
+	    RPM systems::
+
+	    	yum remove logstash-forwarder
+
+#. Install Wazuh server:
+
+		- :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
+		- :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
+
+#. Run ``/var/ossec/bin/manage_agents -V`` to check that everything worked as expected::
 
 	root@bb8:/home/leia# /var/ossec/bin/manage_agents -V
 
@@ -19,30 +38,9 @@ Run ``/var/ossec/bin/manage_agents -V`` to check that everything worked as expec
 	published by the Free Software Foundation. For more details, go to
 	http://www.ossec.net/main/license/
 
-Once everything is updated, review your ``ossec.conf``. The configuration file **/var/ossec/etc/ossec.conf will be overwritten**. The *old* configuration file from the current installation is saved as *ossec.conf.rpmorig* or *ossec.conf.deborig*. You should compare the new file with the old one.
+#. Once everything is updated, review your ``ossec.conf``. The configuration file **/var/ossec/etc/ossec.conf will be overwritten**. The *old* configuration file from the current installation is saved as *ossec.conf.rpmorig* or *ossec.conf.deborig*. You should compare the new file with the old one.
 
-Also, a backup of your previous ruleset will be saved at */var/ossec/etc/backup_ruleset*. You need to review it in case you have created new rules/decoders in other file than *local_rules.xml* or *local_decoder.xml*.
+	Also, a backup of your previous ruleset will be saved at */var/ossec/etc/backup_ruleset*. You need to review it in case you have created new rules/decoders in other file than *local_rules.xml* or *local_decoder.xml*.
 
 .. note::
 	**Next upgrades (versions > 2.0) will not overwrite the file /var/ossec/etc/ossec.conf**. In these cases, the *new* configuration file from the update package is installed as *ossec.conf.rpmnew* or *ossec.conf.debnew* and might reflect new options or a new notion of best practices.
-
-
-Change from Logstash forwarder to Filebeat
---------------------------------------------
-
-In case you are setting up a distributed architecture, you must replace Logstash forwarder for Filebeat. Logstash-forwarder was the old system to ship logs from our host to our Logstash server. This system is now deprecated and replaced by Filebeat.
-
-Remove logstash-forwarder:
-
-    Deb systems::
-
-    	apt-get remove logstash-forwarder
-
-    RPM systems::
-
-    	yum remove logstash-forwarder
-
-Install Filebeat:
-
-- :ref:`Filebeat Deb Packages <wazuh_server_deb_filebeat>`
-- :ref:`Filebeat RPM Packages <wazuh_server_rpm_filebeat>`

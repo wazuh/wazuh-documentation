@@ -235,7 +235,8 @@ Specifies if syscheck should alert when new files are created
 .. note::
 
    New files will only be detected on a full scan (server or local). This option does not work in realtime.
-   
+
+.. _reference_ossec_syscheck_scan_start:
 
 ``scan_on_start``
 -----------------
@@ -266,7 +267,7 @@ Use this option to monitor specified Windows registry entries (one entry per lin
 
 .. topic:: Allowed values
 
-  Any registry entry 
+  Any registry entry
 
 .. note::
 

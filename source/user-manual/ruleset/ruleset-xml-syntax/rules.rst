@@ -585,6 +585,7 @@ Extra information may be added through the following attributes:
 
 
 
+.. _rules_options:
 
 ``options``
 -----------
