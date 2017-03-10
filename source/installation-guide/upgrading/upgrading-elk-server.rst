@@ -81,7 +81,7 @@ Configure Kibana
 Update from Elastic 2 to Elastic 5
 -----------------------------------------
 
-Follow this guide to Elastic5 from your current Elastic 2.
+If you had Elastic2 in your previous installation and you want to update it to Elastic 5, you should follow this guide. This will update your current installation.
 
 #. Stop the running Logstash, Elasticsearch and kibana instance
 
