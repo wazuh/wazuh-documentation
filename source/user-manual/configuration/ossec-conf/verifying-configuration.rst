@@ -8,7 +8,7 @@ Verifying configuration
 +======================================+========================================+
 | Syscheck/Rootcheck                   | /var/ossec/bin/ossec-syscheckd -t      |
 +--------------------------------------+----------------------------------------+
-| local files                          | /var/ossec/bin/logcollector -t         |
+| local files                          | /var/ossec/bin/ossec-logcollector -t   |
 +--------------------------------------+----------------------------------------+
 | Wodles                               | /var/ossec/bin/wazuh-modulesd -t       |
 +--------------------------------------+----------------------------------------+
