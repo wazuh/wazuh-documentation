@@ -6,7 +6,7 @@ Windows agent
 Agent pre-compiled installer
 ----------------------------
 
-You can find a pre-compiled version of the OSSEC agent for Windows, both for 32 and 64 bits architectures, at `our repository <http://ossec.wazuh.com/windows/>`_.
+You can find a pre-compiled version of the OSSEC agent for Windows, both for 32 and 64 bits architectures, at `our repository <http://ossec.wazuh.com/windows/ossec-win32-agent-2.8.3.exe>`_.
 
 Current version is 2.8.3 and these are the MD5 and SHA1 checksums:
 
@@ -56,7 +56,7 @@ Now, to install Nsis, follow these steps: ::
    $ mkdir /usr/local/nsis
    $ mv nsis-3.0b2-src.tar.bz2 nsis-3.0b2.zip /usr/local/nsis
    $ cd /usr/local/nsis
-   $ tar -jxvf nsis-3.0b2-src.tar.bz2 
+   $ tar -jxvf nsis-3.0b2-src.tar.bz2
    $ unzip nsis-3.0b2.zip
 
 Then we need to build ``makensis``, which will actually build the OSSEC Installer Package for Windows: ::
@@ -95,7 +95,7 @@ You should expect the following output: ::
 
    Output: "ossec-win32-agent.exe"
    Install: 7 pages (448 bytes), 3 sections (3144 bytes), 586 instructions (16408 bytes), 287 strings (31800 bytes), 1 language table (346 bytes).
-   Uninstall: 5 pages (320 bytes), 
+   Uninstall: 5 pages (320 bytes),
    1 section (1048 bytes), 347 instructions (9716 bytes), 181 strings (3323 bytes), 1 language table (290 bytes).
    Datablock optimizer saved 100205 bytes (~7.9%).
 
