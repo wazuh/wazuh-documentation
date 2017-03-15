@@ -39,7 +39,7 @@ This section will update your current Wazuh 1.1 installation to Wazuh 2.0. Follo
 
 #. Run ``/var/ossec/bin/manage_agents -V`` to check that everything worked as expected::
 
-	root@bb8:/home/leia# /var/ossec/bin/manage_agents -V
+	# /var/ossec/bin/manage_agents -V
 
 	Wazuh v2.0 - Wazuh Inc.
 

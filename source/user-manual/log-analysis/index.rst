@@ -113,7 +113,7 @@ In this phase, only static information is extracted from well-known fields.
 
 ::
 
-  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for leia from 192.168.1.133 port 49765 ssh2
+  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
 Extracted information:
   - *hostname*: 'localhost'
@@ -125,11 +125,11 @@ Decoding
 The Decode phase identifies/evaluates the type of a log message and then extracts known fields for that message type. Example of a log and its extracted info:
 ::
 
-  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for leia from 192.168.1.133 port 49765 ssh2
+  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
 Extracted information:
   - *program name*: sshd
-  - *dstuser*: leia
+  - *dstuser*: rromero
   - *srcip*: 192.168.1.133
 
 Rule matching
@@ -158,8 +158,8 @@ Once the rule is matched, the manager will create an alert::
   2017 Feb 14 12:19:06 localhost->/var/log/secure
   Rule: 5715 (level 3) -> 'sshd: authentication success.'
   Src IP: 192.168.1.133
-  User: leia
-  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for leia from 192.168.1.133 port 49765 ssh2
+  User: rromero
+  Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
 It will be stored in */var/ossec/logs/alerts/alerts.json* and/or */var/ossec/logs/alerts/alerts.log*.
 

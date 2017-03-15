@@ -358,9 +358,9 @@ Wazuh detects the action, extracting the *srcuser*, *dstuser* and *command* amon
   2017 Feb 23 15:27:40 localhost->/var/log/secure
   Rule: 5402 (level 3) -> 'Successful sudo to ROOT executed'
   User: root
-  Feb 23 15:27:40 localhost sudo:    leia : TTY=pts/0 ; PWD=/home/leia ; USER=root ; COMMAND=/bin/ls /var/ossec/etc
+  Feb 23 15:27:40 localhost sudo:    rromero : TTY=pts/0 ; PWD=/home/rromero ; USER=root ; COMMAND=/bin/ls /var/ossec/etc
   tty: pts/0
-  pwd: /home/leia
+  pwd: /home/rromero
   command: /bin/ls
 
 However, you may find this level of detail inadequate, in which case you can use Audit.
@@ -402,7 +402,7 @@ After configuring PAM, if we execute the previous command with the user *homer* 
   fsuid=0 egid=0 sgid=0 fsgid=0 tty=pts0 ses=346 comm="ls" exe="/usr/bin/ls"
   subj=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023 key="audit-wazuh-c" type=EXECVE
   msg=audit(1487892802.652:3054): argc=2 a0="ls" a1="/var/ossec/etc" type=CWD msg=audit(1487892802.652:3054):
-  cwd="/home/leia" type=PATH msg=audit(1487892802.652:3054): item=0 name="/bin/ls" inode=16912203 dev=fd:00
+  cwd="/home/rromero" type=PATH msg=audit(1487892802.652:3054): item=0 name="/bin/ls" inode=16912203 dev=fd:00
   mode=0100755 ouid=0 ogid=0 rdev=00:00 obj=system_u:object_r:bin_t:s0 objtype=NORMAL type=PATH
   msg=audit(1487892802.652:3054): item=1 name="/lib64/ld-linux-x86-64.so.2" inode=33595530 dev=fd:00
   mode=0100755 ouid=0 ogid=0 rdev=00:00 obj=system_u:object_r:ld_so_t:s0 objtype=NORMAL
@@ -427,7 +427,7 @@ After configuring PAM, if we execute the previous command with the user *homer* 
   audit.command: ls
   audit.exe: /usr/bin/ls
   audit.key: audit-wazuh-c
-  audit.cwd: /home/leia
+  audit.cwd: /home/rromero
   audit.file.name: /bin/ls
   audit.file.inode: 16912203
   audit.file.mode: 0100755

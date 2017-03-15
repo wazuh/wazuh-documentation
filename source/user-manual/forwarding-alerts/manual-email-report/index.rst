@@ -56,7 +56,7 @@ Daily Report example:
  Top entries for 'Location':
  ------------------------------------------------
  localhost->syscheck                                                           |51      |
- (bb8) 192.168.1.242->syscheck                                                 |7       |
+ (ubuntu) 192.168.1.242->syscheck                                              |7       |
 
  Top entries for 'Rule':
  ------------------------------------------------
