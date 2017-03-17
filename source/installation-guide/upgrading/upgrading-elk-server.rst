@@ -16,13 +16,26 @@ Configure Logstash
 
 #. Download the new logstash configuration:
 
-	.. warning::
-		review 01-wazuh.conf to use elastic2-template.
+	 ::
 
-			 ::
+		curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
+		curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
 
-				curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
-				curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
+#. On the output section, comment the line for elastic5-template and uncomment the line for elastic2-template
+
+		::
+
+			output {
+			  elasticsearch {
+			  hosts => ["localhost:9200"]
+			  index => "wazuh-alerts-%{+YYYY.MM.dd}"
+			  document_type => "wazuh"
+				#      template => "/etc/logstash/wazuh-elastic5-template.json"
+				      template => "/etc/logstash/wazuh-elastic2-template.json"
+				      template_name => "wazuh"
+				      template_overwrite => true
+				}
+			}
 
 #. If you are using a single-server architecture:
 
