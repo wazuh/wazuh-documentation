@@ -21,7 +21,7 @@ Configure Logstash
 		curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
 		curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
 
-#. On the output section, comment the line for elastic5-template and uncomment the line for elastic2-template
+#. In the output section, comment the line for elastic5-template and uncomment the line for elastic2-template
 
 		::
 
