@@ -192,3 +192,40 @@ In order to apply the changes, you must restart the agent which may be completed
     $ /var/ossec/bin/agent_control -R -u 1032
 
     Wazuh agent_control: Restarting agent: 1032
+
+Precedence
+----------
+
+It's important to know which is the precedence between ``ossec.conf`` and ``agent.conf``. The local and the shared configuration are merged. ``ossec.conf`` is read before the shared ``agent.conf``, the last definition of any setting will overwrite any previous appearance. Also, the settings that includes a path to file, will be concatenated.
+
+For example:
+
+Let's say we have this configuration on the ``ossec.conf`` file
+::
+
+	<rootcheck>
+	  <disabled>no</disabled>
+	  <check_unixaudit>no</check_unixaudit>
+	  <check_files>yes</check_files>
+	  <check_trojans>no</check_trojans>
+	  <check_dev>yes</check_dev>
+	  <check_sys>yes</check_sys>
+	  <check_pids>yes</check_pids>
+	  <check_ports>yes</check_ports>
+	  <check_if>yes</check_if>
+	  <system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
+	</rootcheck>
+
+and the ``agent.conf``
+::
+
+	<rootcheck>
+	  <check_unixaudit>yes</check_unixaudit>
+	  <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
+	  <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+	  <system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
+	  <system_audit>/var/ossec/etc/shared/cis_rhel_linux_rcl.txt</system_audit>
+	  <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
+	</rootcheck>
+
+The final configuration will overwrite ``check_unixaudit`` to "yes" because it appears on the ``agent.conf``. The path listed with ``system_audit`` option will be concatenated, so ``system_audit_rcl.txt`` (on the ``ossec.conf``) will be as valid as ``cis_debian_linux_rcl.txt`` (on the ``agent.conf``).
