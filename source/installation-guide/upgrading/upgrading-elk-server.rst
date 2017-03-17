@@ -180,16 +180,18 @@ We developed new templates in order to work with Elastic 5. For that reason, you
 
 We have developed an script in order to migrate all your stored info to your upgraded system. You can use this script with singlehost or distributed systems.
 
-.. warning::
-	REVIEW the URLS!
+
 
 #. Create a new folder and dowload de configuration file and the script:
 
-	::
+	.. warning::
+		REVIEW the URLS!
 
-		mkdir ~/migrate && cd ~/migrate
-		curl -so 02-wazuh-restoreAlerts.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/migration/02-wazuh-restoreAlerts.conf
-		curl -so restore_alerts.sh https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/migration/restore_alerts.sh
+			::
+
+				mkdir ~/migrate && cd ~/migrate
+				curl -so 02-wazuh-restoreAlerts.conf https://documentation.wazuh.com/tools/elastic/migration/02-wazuh-restoreAlerts.conf
+				curl -so restore_alerts.sh https://documentation.wazuh.com/tools/elastic/migration/restore_alerts.sh
 
 #. Configure the ElasticServer IP on ``02-wazuh-restoreAlerts.conf`` in the output section:
 
@@ -202,6 +204,7 @@ We have developed an script in order to migrate all your stored info to your upg
 		        index => "wazuh-alerts-%{+YYYY.MM.dd}"
 		        document_type => "wazuh"
 		        template => "/etc/logstash/wazuh-elastic5-template.json"
+		    #   template => "/etc/logstash/wazuh-elastic2-template.json"
 		        template_name => "wazuh"
 		        template_overwrite => true
 		    }
