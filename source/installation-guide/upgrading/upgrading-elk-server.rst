@@ -21,7 +21,7 @@ Configure Logstash
 		curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
 		curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
 
-#. In the output section, comment the line for elastic5-template and uncomment the line for elastic2-template
+#. In the output section, comment the line for elastic5-template and uncomment the line for elastic2-template on the ``/etc/logstash/conf.d/01-wazuh.conf``:
 
 		::
 
@@ -128,25 +128,15 @@ If you had Elastic2 in your previous installation and you want to update it to E
 
 	Comment the following lines on your ``/etc/elasticsearch/elasticsearch.yml``::
 
-		cluster.name: ossec
-		node.name: ossec_node1
-		bootstrap.mlockall: true
 		index.number_of_shards: 1
 		index.number_of_replicas: 0
 
-	Comment the following lines on ``/etc/security/limits.conf``::
-
-		elasticsearch - nofile  65535
-		elasticsearch - memlock unlimited
-
-	And finally, comment the following lines on ``/etc/sysconfig/elasticsearch`` ::
+	``ES_HEAP_SIZE`` option is now deprecated. If you were using that option on your ``/etc/sysconfig/elasticsearch`` you should remove or comment that line::
 
 		# ES_HEAP_SIZE - Set it to half your system RAM memory
 		ES_HEAP_SIZE=8g
-		...
-		MAX_LOCKED_MEMORY=unlimited
-		...
-		MAX_OPEN_FILES=65535
+
+	And configure it following the Elastic `jvm.options guide <https://www.elastic.co/guide/en/elasticsearch/reference/master/heap-size.html>`_
 
 #. Follow the installation guide:
 
