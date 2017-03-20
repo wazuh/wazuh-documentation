@@ -24,37 +24,37 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | Configuration sections                                        | Supported installations|
 +===============================================================+========================+
-| `Active response <active-response-index.html>`_               | manager                |
+| `active-response <active-response-index.html>`_               | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Agentless <agentless.html>`_                                 | manager                |
+| `agentless <agentless.html>`_                                 | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Alerts <alerts.html>`_                                       | manager                |
+| `alerts <alerts.html>`_                                       | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Client <client.html>`_                                       | agent                  |
+| `client <client.html>`_                                       | agent                  |
 +---------------------------------------------------------------+------------------------+
-| `Database output <database-output.html>`_                     | manager                |
+| `database_output <database-output.html>`_                     | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Email alerts <email_alerts.html>`_                           | manager                |
+| `email_alerts <email_alerts.html>`_                           | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Global  <global.html>`_                                      | manager                |
+| `global  <global.html>`_                                      | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Integration  <integration.html>`_                            | manager                |
+| `integration  <integration.html>`_                            | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Local file <localfile.html>`_                                | manager                |
+| `localfile <localfile.html>`_                                 | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Remote <remote.html>`_                                       | manager                |
+| `remote <remote.html>`_                                       | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Reports <reports.html>`_                                     | manager                |
+| `reports <reports.html>`_                                     | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Rootcheck <rootcheck.html>`_                                 | manager, agent         |
+| `rootcheck <rootcheck.html>`_                                 | manager, agent         |
 +---------------------------------------------------------------+------------------------+
-| `Ruleset <rules.html>`_                                       | manager                |
+| `ruleset <rules.html>`_                                       | manager                |
 +---------------------------------------------------------------+------------------------+
-| `Syscheck <syscheck.html>`_                                   | manager, agent         |
+| `syscheck <syscheck.html>`_                                   | manager, agent         |
 +---------------------------------------------------------------+------------------------+
-| `Syslog output <syslog-output.html>`_                         | manager                |
+| `syslog_output <syslog-output.html>`_                         | manager                |
 +---------------------------------------------------------------+------------------------+
-| :ref:`Wodle OpenSCAP <wodle_openscap>`                        | manager, agent         |
+| `wodle name="open-scap" <wodle-openscap.html>`_               | manager, agent         |
 +---------------------------------------------------------------+------------------------+
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag.

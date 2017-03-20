@@ -1,7 +1,7 @@
 .. _reference_ossec_active_response_index:
 
 
-Active response
+active-response
 ===============
 
 Active responses each run a command, often some kind of countermeasure like a firewall block, when a specific rule or rule type fires and certain other criteria are met.  Stateful commands undo their actions after a configurable period of time.  Stateless commands are one-time actions that are not undone (i.e., a command to restart the agent when a change to agent.conf is detected).

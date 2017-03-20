@@ -1,7 +1,7 @@
 .. _reference_ossec_syscheck:
 
 
-Syscheck
+syscheck
 =============
 
 .. topic:: XML section name

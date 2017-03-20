@@ -1,6 +1,6 @@
 .. _reference_ossec_global:
 
-Global
+global
 ======
 
 .. topic:: XML section name

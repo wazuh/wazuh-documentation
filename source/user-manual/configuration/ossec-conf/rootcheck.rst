@@ -1,7 +1,7 @@
 .. _reference_ossec_rootcheck:
 
 
-Rootcheck
+rootcheck
 =========
 
 .. topic:: XML section name
@@ -125,7 +125,7 @@ Change the location of the rootkit trojans database
 ``windows_audit``
 -----------------
 
-Specifies the path to a Windows audit definition file. 
+Specifies the path to a Windows audit definition file.
 
 .. _reference_ossec_rootcheck_audit:
 

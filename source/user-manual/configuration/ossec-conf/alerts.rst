@@ -1,6 +1,6 @@
 .. _reference_ossec_alerts:
 
-Alerts
+alerts
 ======
 
 .. topic:: XML section name
@@ -48,7 +48,7 @@ This is the minimum severity level for an alert to generate an email notificatio
 ``log_alert_level``
 -------------------
 
-This is the minimum severity level for alerts to be stored to alerts.log and/or alerts.json.  
+This is the minimum severity level for alerts to be stored to alerts.log and/or alerts.json.
 
 .. topic:: Default value
 

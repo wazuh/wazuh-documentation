@@ -1,6 +1,6 @@
 .. _reference_ossec_reports:
 
-Reports
+reports
 =======
 
 .. topic:: XML section name

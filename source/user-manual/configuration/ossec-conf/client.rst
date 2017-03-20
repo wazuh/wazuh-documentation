@@ -1,6 +1,6 @@
 .. _reference_ossec_client:
 
-Client
+client
 ======
 
 .. topic:: XML section name
@@ -119,6 +119,6 @@ This is the time in seconds until a reconnection attempt. This should be set to 
 .. topic:: Allowed values
 
     A positive number (seconds)
-    
+
 .. warning::
-	Notice that the notify_time value uses an underscore while the time-reconnect value uses a dash.  This is an unfortunate legacy naming inconsistency, and is easy to mix up.  
+	Notice that the notify_time value uses an underscore while the time-reconnect value uses a dash.  This is an unfortunate legacy naming inconsistency, and is easy to mix up.

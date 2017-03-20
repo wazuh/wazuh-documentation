@@ -1,6 +1,6 @@
 .. _reference_ossec_database_output:
 
-Database output
+database_output
 ===============
 
 .. topic:: XML section name

@@ -1,6 +1,6 @@
 .. _wodle_openscap:
 
-The OpenSCAP wodle
+wodle name="open-scap"
 ========================
 
 .. topic:: XML section name

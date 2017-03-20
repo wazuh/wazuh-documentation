@@ -1,7 +1,7 @@
 .. _reference_ossec_syslog_output:
 
 
-Syslog output
+syslog_output
 =============
 
 .. topic:: XML section name

@@ -1,6 +1,6 @@
 .. _reference_ossec_agentless:
 
-Agentless
+agentless
 =========
 
 .. topic:: XML section name
@@ -79,7 +79,7 @@ This determines whether the check type is periodic or periodic_diff.
 .. topic:: Allowed values
 
 	periodic
-		The output from each agentless check is analyzed with the Wazuh ruleset as if it were a monitored log.  For example, you might query a firewall for failover state and expect an alert if the output contains a string indicating a failover has occurred. 
+		The output from each agentless check is analyzed with the Wazuh ruleset as if it were a monitored log.  For example, you might query a firewall for failover state and expect an alert if the output contains a string indicating a failover has occurred.
 	periodic_diff
 		The output from each agentless check is compared to the output of the previous run, and changes are alerted on, similar to file integrity monitoring.  For example, you might dump the config of a router and expect to be alerted if the config has changed since the last check.
 

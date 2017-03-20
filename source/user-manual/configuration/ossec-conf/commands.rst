@@ -1,6 +1,6 @@
 .. _reference_ossec_commands:
 
-Commands
+command
 ========
 
 .. topic:: XML section name

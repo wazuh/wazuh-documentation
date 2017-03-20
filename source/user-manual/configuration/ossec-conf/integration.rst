@@ -1,7 +1,7 @@
 .. _reference_ossec_integration:
 
 
-Integration
+integration
 ===========
 
 .. topic:: XML section name

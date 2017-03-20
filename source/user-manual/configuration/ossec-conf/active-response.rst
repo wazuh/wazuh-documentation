@@ -1,6 +1,6 @@
 .. _reference_ossec_active_response:
 
-Active response
+active-response
 ===============
 
 .. topic:: XML section name
@@ -68,7 +68,7 @@ This is used to link the response to the command
 .. topic:: Allowed values
 
     Any defined active response command name
-    
+
 
 ``location``
 ------------
@@ -89,7 +89,7 @@ This indicates on which system(s) the command should be executed.
 	 	This runs the command on the Wazuh manager.
 	defined-agent
 	 	This runs the command on a specific agent identified by agent_id.  For example, if the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a command on that agent to blacklists an offending IP on the edge firewall.
-	all    
+	all
 	 	This runs the command on the Wazuh manager and on all agents.  Use with caution.
 
 
@@ -124,7 +124,7 @@ This defines a minimum severity level required for the command to be executed.
 ``rules_group``
 ---------------
 
-This requires that a rule must belong to one or more rule groups for the command to be executed.  
+This requires that a rule must belong to one or more rule groups for the command to be executed.
 
 .. topic:: Default value
 

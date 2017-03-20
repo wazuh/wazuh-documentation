@@ -1,7 +1,7 @@
 .. _reference_ossec_localfile:
 
 
-Local file
+localfile
 ==========
 
 .. topic:: XML section name
@@ -158,7 +158,7 @@ Set this option to **yes** to override this behaviour if desired.  Then Wazuh wo
 .. topic:: Allowed values
 
   The option accepted are **yes** or **no**.
-  
+
 
 ``query``
 ---------
@@ -232,7 +232,7 @@ This is the format of the log being read.
       This format reads in arbitrary output from the command (as run by root) defined by the command tag.
       Each line of output will be treated as a separate log.
   full_command
-      This format reads in arbitrary output from the command (as run by root) defined by the command tag. 
+      This format reads in arbitrary output from the command (as run by root) defined by the command tag.
       The entire output will be treated as a single log item.
 
   .. warning::
@@ -241,7 +241,7 @@ This is the format of the log being read.
 
   djb-multilog
       This option reads files in the format produced by the multilog service logger in daemontools.
-  
+
 
   multi-line
       This option will allow applications that log multiple lines per event to be monitored. This format requires the number of lines to be consistent.

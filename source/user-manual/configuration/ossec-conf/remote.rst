@@ -1,7 +1,7 @@
 .. _reference_ossec_remote:
 
 
-Remote
+remote
 =======
 
 .. topic:: XML section name
