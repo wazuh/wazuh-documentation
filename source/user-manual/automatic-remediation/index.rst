@@ -3,12 +3,12 @@
 Automatic remediation
 ==========================
 
-Automatic remediation performs various countermeasures to address active threats such as blocking access to an agent from the threat source.  This automated remediation is called **Active response** in Wazuh.
+Automatic remediation performs various countermeasures to address active threats such as blocking access to an agent from the threat source.  This automated remediation is called active responsein Wazuh.
 
-**Active response** executes a script in response to being triggered by a specific alert based on alert level or rule group.
+Active response executes a script in response to being triggered by a specific alert based on alert level or rule group.
 Any number of scripts can be initiated in response to a trigger, however these responses should be carefully considered as poor implementation of rules and responses could increase the vulnerability of the system.
 
-**Active response** is configured in :ref:`ossec.conf <reference_ossec_conf>`, within the :ref:`Active Response <reference_ossec_active_response>` and :ref:`Command <reference_ossec_commands>` sections.
+Active response is configured in :ref:`ossec.conf <reference_ossec_conf>`, within the :ref:`Active Response <reference_ossec_active_response>` and :ref:`Command <reference_ossec_commands>` sections.
 
 .. topic:: Contents
 
@@ -27,26 +27,26 @@ How it works
   :width: 100%
 
 
-1. When is an **Active response** triggered?
+1. When is an active response triggered?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-An **Active response** can be triggered by a specific alert, alert level or rule group as configured in the ossec.conf file, where a script is configured to execute with a certain rule/group.  **Active responses** are either stateful or stateless responses.  Stateful responses will undo the action after a specified period of time while stateless responses are one-time actions.
+An active response can be triggered by a specific alert, alert level or rule group as configured in the ossec.conf file, where a script is configured to execute with a certain rule/group.  **Active responses** are either stateful or stateless responses.  Stateful responses will undo the action after a specified period of time while stateless responses are one-time actions.
 
-2. Where are **Active response** actions executed?
+2. Where are active response actions executed?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-**Active responses** specify where their associated commanda will be executed: on the agent that triggered the alert, on the manager, on another specified agent, or on all agents plus the manager.
+Active response specify where their associated commanda will be executed: on the agent that triggered the alert, on the manager, on another specified agent, or on all agents plus the manager.
 
-3. **Active response** configuration
+3. Active response configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-An **Active response** is configured in :ref:`ossec.conf <reference_ossec_conf>` as follows:
+An active response is configured in :ref:`ossec.conf <reference_ossec_conf>` as follows:
 
 1. Create a command
 
-	In order to configure an **Active response**, a **command** must be defined that will initiate a certain script in response to a trigger.
+	In order to configure an active response, a **command** must be defined that will initiate a certain script in response to a trigger.
 
-	To configure the **Active response**, define the name of a **command** using the pattern below and then reference the script to be initiated. Next, define what data element(s) will be passed to the script.
+	To configure the active response, define the name of a **command** using the pattern below and then reference the script to be initiated. Next, define what data element(s) will be passed to the script.
 
-	Custom scripts that have the ability to receive parameters from the command line may also be used for an **Active response**.
+	Custom scripts that have the ability to receive parameters from the command line may also be used for an active response.
 
 	Example::
 
@@ -62,9 +62,9 @@ An **Active response** is configured in :ref:`ossec.conf <reference_ossec_conf>`
 	.. note::
 		More information about options for creating a :ref:`command <reference_ossec_commands>`
 
-2. Define the **Active response**
+2. Define the active response
 
-	The **Active response** configuration defines when and where a command is going to be executed. A command will be triggered when a specific rule with a specific id, severity level or source matches the **Active response** criteria.  This configuration will further define where the action of the command will be initiated, meaning in which environment (Agent, Manager, Local, or everywhere).
+	The active response configuration defines when and where a command is going to be executed. A command will be triggered when a specific rule with a specific id, severity level or source matches the active response criteria.  This configuration will further define where the action of the command will be initiated, meaning in which environment (Agent, Manager, Local, or everywhere).
 
 	Example::
 
@@ -75,13 +75,13 @@ An **Active response** is configured in :ref:`ossec.conf <reference_ossec_conf>`
 		  <timeout>600</timeout>
 		</active‐response>
 
-	In this example, the **Active response** is configured to execute the command that was defined in the previous step. The where of the action is defined as the local host and the when is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
+	In this example, the active response is configured to execute the command that was defined in the previous step. The where of the action is defined as the local host and the when is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
 
 	.. note::
 		More information about all the options you can define for the :ref:`Active response <reference_ossec_active_response>`
 
 
-You can view the **Active response** log at ``/var/ossec/logs/active-response.log``.
+You can view the active response log at ``/var/ossec/logs/active-response.log``.
 
 4. Default Active response scripts
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

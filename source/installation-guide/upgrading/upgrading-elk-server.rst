@@ -37,7 +37,7 @@ Configure Logstash
 				}
 			}
 
-#. If you are using a single-server architecture:
+#. If you are using a **single-server** architecture:
 
 	Edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled **Remote Wazuh Manager - Filebeat input** and uncommenting the entire input section titled **Local Wazuh Manager - JSON file input**.
 	::
