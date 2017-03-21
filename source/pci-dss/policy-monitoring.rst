@@ -122,3 +122,8 @@ Kibana shows the full information about the alert:
     :title: Wazuh PCI DSS dashboard showing PCI DSS 2. alerts
     :align: center
     :width: 100%
+
+.. thumbnail:: ../images/pci/p_monitoring_pci.png
+    :title: Wazuh App PCI DSS section showing PCI DSS 2. alerts
+    :align: center
+    :width: 100%

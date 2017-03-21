@@ -77,3 +77,8 @@ As you can see, syscheck alerts are tagged with the requirement 11.5.
     :title: Filtering alerts by PCI DSS and file path
     :align: center
     :width: 100%
+
+.. thumbnail:: ../images/pci/fim_pci.png
+    :title: Filtering alerts by PCI DSS on Wazuh App
+    :align: center
+    :width: 100%
