@@ -3,8 +3,30 @@
 Examples
 ========
 
+#. `Basic configuration`_
 #. `Evaluate PCI-DSS compliance on RHEL7`_
 #. `Auditing Security Vulnerabilities of Red Hat Products`_
+#. `Overwriting the timeout`_
+#. `Using profiles`_
+#. `Using CPE dictionary`_
+#. `Using IDs`_
+
+
+Basic configuration
+------------------------------------------------------------------
+
+In this example, we configure Wazuh to run OpenSCAP each day, with a timeout of 30 minutes. ::
+
+    <wodle name="open-scap">
+
+        <timeout>1800</timeout>
+        <interval>1d</interval>
+        <scan-on-start>yes</scan-on-start>
+
+        <content type="xccdf" path="ssg-centos7-ds.xml"/>
+        <content type="xccdf" path="ssg-centos6-ds.xml"/>
+
+    </wodle>
 
 Evaluate PCI-DSS compliance on RHEL7
 ------------------------------------
@@ -182,3 +204,65 @@ Finally, you can explore all scan results using the OpenSCAP dashboards for Kiba
 .. image:: ../../../images/wodles-oscap/e2-dashboards.png
     :align: center
     :width: 100%
+
+Overwriting the timeout
+------------------------------------------------------------------
+
+It is possible to overwrite the timeout for a specific evaluation: ::
+
+    <wodle name="open-scap">
+
+        <timeout>1800</timeout>
+
+        <content type="xccdf" path="ssg-centos7-ds.xml">
+            <timeout>120</timeout>
+        </content>
+
+        <content type="xccdf" path="ssg-centos6-ds.xml"/>
+
+    </wodle>
+
+Using profiles
+------------------------------------------------------------------
+We can limit the evaluation to only specific profiles of a policy: ::
+
+    <wodle name="open-scap">
+
+        <content type="xccdf" path="ssg-centos7-ds.xml">
+            <profile>xccdf_org.ssgproject.content_profile_standard</profile>
+            <profile>xccdf_org.ssgproject.content_profile_pci-dss</profile>
+        </content>
+
+        <content type="xccdf" path="ssg-centos6-ds.xml"/>
+
+    </wodle>
+
+Using CPE dictionary
+------------------------------------------------------------------
+
+You can also optionally specify the CPE dictionary file, which is used to determine which checks are relevant to specific platforms. ::
+
+    <wodle name="open-scap">
+
+        <content type="xccdf" path=policy="ssg-centos7-ds.xml">
+            <cpe>file.xml</cpe>
+        </content>
+
+        <content type="xccdf" path="ssg-centos6-ds.xml" />
+
+    </wodle>
+
+Using IDs
+------------------------------------------------------------------
+You can select a specific ID of the datastream file:  ::
+
+    <wodle name="open-scap">
+
+        <content type="xccdf" path="ssg-centos7-ds.xml">
+            <datastream-id>id</datastream-id>
+            <xccdf-id>id</xccdf-id>
+        </content>
+
+        <content type="xccdf" path="ssg-centos6-ds.xml" />
+
+    </wodle>
