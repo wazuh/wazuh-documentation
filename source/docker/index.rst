@@ -3,7 +3,7 @@
 Docker
 ===============================
 
-Wazuh is also available as a set of Docker images:
+Docker is an open-source project that automates the deployment of different applications inside software containers. Wazuh is also available as a set of Docker images:
 
 - `Wazuh Manager <https://github.com/wazuh/wazuh>`_ + `Wazuh API <https://github.com/wazuh/wazuh-api>`_ + `Filebeat <https://www.elastic.co/products/beats/filebeat>`_
 - `Logstash <https://registry.hub.docker.com/_/logstash/>`_
