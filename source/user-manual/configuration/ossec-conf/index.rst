@@ -24,13 +24,15 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | Configuration sections                                        | Supported installations|
 +===============================================================+========================+
-| `active-response <active-response-index.html>`_               | manager                |
+| `active-response <active-response.html>`_                     | manager                |
 +---------------------------------------------------------------+------------------------+
 | `agentless <agentless.html>`_                                 | manager                |
 +---------------------------------------------------------------+------------------------+
 | `alerts <alerts.html>`_                                       | manager                |
 +---------------------------------------------------------------+------------------------+
 | `client <client.html>`_                                       | agent                  |
++---------------------------------------------------------------+------------------------+
+| `command <commands.html>`_                                    | manager                |
 +---------------------------------------------------------------+------------------------+
 | `database_output <database-output.html>`_                     | manager                |
 +---------------------------------------------------------------+------------------------+
@@ -65,10 +67,11 @@ All of the above sections must be located within the top-level ``<ossec_config>`
        :maxdepth: 1
 
 
-       active-response-index
+       active-response
        agentless
        alerts
        client
+       commands
        database-output
        email_alerts
        global
