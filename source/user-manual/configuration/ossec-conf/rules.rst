@@ -12,139 +12,136 @@ ruleset
 
 Configuration options for enabling or disabling rules and decoders.
 
-+----------------+------------------------------------------------+
-| Options        | Allowed values                                 |
-+================+================================================+
-| `include`_     | Path and filename of rule to load              |
-+----------------+------------------------------------------------+
-| `rule`_        | Path and filename of rule to load              |
-+----------------+------------------------------------------------+
-| `rule_dir`_    | Path to a directory of rule files              |
-+----------------+------------------------------------------------+
-| `decoder`_     | Path and filename of decoder to load           |
-+----------------+------------------------------------------------+
-| `decoder_dir`_ | Path to a directory of decoder files           |
-+----------------+------------------------------------------------+
-| `list`_        | Path to a list file to be loaded and compiled. |
-+----------------+------------------------------------------------+
+Options
+-------
 
-``include``
------------
+- `include`_
+- `rule`_
+- `rule_dir`_
+- `decoder`_
+- `decoder_dir`_
+- `list`_
+
+include
+^^^^^^^
 
 Load a single rule file.
 
-.. topic:: Default value
++--------------------+-----------------------------------+
+| **Default Value**  | n/a                               |
++--------------------+-----------------------------------+
+| **Allowed values** | Path and filename of rule to load |
++--------------------+-----------------------------------+
 
-	n/a
-
-.. topic:: Allowed values
-
-	Path and filename of rule to load. Example: rules/config.xml
+Example: ``rules/config.xml``
 
 
-``rule``
---------
+rule
+^^^^^^^
 
 Load a single rule file.
+
++--------------------+-----------------------------------+
+| **Default Value**  | n/a                               |
++--------------------+-----------------------------------+
+| **Allowed values** | Path and filename of rule to load |
++--------------------+-----------------------------------+
+
+Example: ``rules/config.xml``
+
 
 .. note::
 
     This works the same as ``include`` but was created to mirror the syntax in other sections of the rules config.
 
-.. topic:: Default value
-
-	n/a
-
-.. topic:: Allowed values
-
-	Path and filename of rule to load. Example: rules/config.xml
-
-``rule_dir``
-------------
+rule_dir
+^^^^^^^^
 
 Load a directory of rules. The files will be loaded in alphabetical order and any duplicate filenames will be skipped.
 
-.. topic:: Default value
-
-	.. code-block:: xml
-
-		<rule_dir>ruleset/rules</rule_dir>
-
-.. topic:: Allowed values
-
-	Path to a directory of rule files.
++--------------------+------------------------------------+
+| **Default Value**  | ruleset/rules                      |
++--------------------+------------------------------------+
+| **Allowed values** | Path to a directory of rule files. |
++--------------------+------------------------------------+
 
 .. topic:: Attributes
 
-	An optional pattern can be included in the opening tag.  Example:  <rule_dir pattern="ruleset.xml">rules</rule_dir> The pattern is a regex match string used to determine if a file should be loaded.
+	An optional pattern can be included in the opening tag.
+
+	Example::
+
+		  <rule_dir pattern="ruleset.xml">rules</rule_dir>
+
+	The pattern is a regex match string used to determine if a file should be loaded.
 
 
-``decoder``
------------
+decoder
+^^^^^^^
 
 
 Load a single decoder file. The path should refer to the installation directory, typically ``/var/ossec``.
 
-.. note::
++--------------------+--------------------------------------+
+| **Default Value**  | n/a                                  |
++--------------------+--------------------------------------+
+| **Allowed values** | Path and filename of decoder to load |
++--------------------+--------------------------------------+
 
-	If no decoders are specified in ossec.conf, the legacy ``etc/decoder.xml`` and
-	``etc/local_decoder.xml`` are loaded.
+Example::
+
+	 rules/decoder/decoder.xml
+
+If no decoders are specified in ``ossec.conf``, the legacy ``etc/decoder.xml`` and
+``etc/local_decoder.xml`` are loaded.
 
 .. warning::
 
 	If ``<decoder>`` or ``<decoder_dir>`` are used, the default decoder.xml will not be used and must be specifically referenced in order to load.
 
-.. topic:: Default value
-
-	n/a
-
-.. topic:: Allowed values
-
-	Path and filename of decoder to load example: rules/decoder/decoder.xml
-
-``decoder_dir``
----------------
+decoder_dir
+^^^^^^^^^^^^^^
 
 Load a directory of decoders. The files will be loaded in alphabetical order and any duplicate filenames will be skipped.  The path should refer to the installation directory, typically ``/var/ossec``.
+
++--------------------+--------------------------------------+
+| **Default Value**  | ruleset/decoders                     |
++--------------------+--------------------------------------+
+| **Allowed values** | Path to a directory of decoder files |
++--------------------+--------------------------------------+
+
+.. topic:: Attributes
+
+  An optional pattern can be included in the opening tag.
+
+	Example::
+
+		<decoder_dir pattern="-decoder.xml">ruleset/decoders</decoder_dir>
+
+The pattern is a regex match string used to determine if a file should be loaded.
 
 .. warning::
 
     If ``<decoder>`` or ``<decoder_dir>`` are used, the default decoder.xml will not be used. It must be specified explicitly.
 
-.. topic:: Default value
 
-	.. code-block:: xml
-
-		<decoder_dir>ruleset/decoders</decoder_dir>
-
-.. topic:: Allowed values
-
-	Path to a directory of decoder files
-
-.. topic:: Attributes
-
-  An optional pattern can be included in the opening tag.  Example:  <decoder_dir pattern="-decoder.xml">ruleset/decoders</decoder_dir> The pattern is a regex match string used to determine if a file should be loaded.
-
-``list``
---------
+list
+^^^^^^^
 
 Load a single CDB reference for use by other rules.
+
++--------------------+------------------------------------------------+
+| **Default Value**  | n/a                                            |
++--------------------+------------------------------------------------+
+| **Allowed values** | Path to a list file to be loaded and compiled. |
++--------------------+------------------------------------------------+
+
+.. code-block:: xml
+
+	<rules>
+		<list>rules/lists/blocked_hosts</list>
+	</rules>
 
 .. note::
 
     Do not include the file extension.  Wazuh will read the .cdb version of the file (the version generated by ossec-makelists from the .txt version of the file.
-
-
-.. topic:: Default value
-
-	n/a
-
-.. topic:: Allowed values
-
-	Path to a list file to be loaded and compiled.
-
-	.. code-block:: xml
-
-		<rules>
-		  <list>rules/lists/blocked_hosts</list>
-		</rules>

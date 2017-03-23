@@ -11,6 +11,15 @@ wodle name="open-scap"
 
 Configuration options of the OpenSCAP wodle.
 
+Options
+-------
+
+- `timeout`_
+- `interval`_
+- `scan-on-start`_
+- `content`_
+
+
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
 +======================+=============================+
@@ -24,71 +33,67 @@ Configuration options of the OpenSCAP wodle.
 +----------------------+-----------------------------+
 
 
-``timeout``
----------------------
+timeout
+^^^^^^^
 
 Timeout for each evaluation.
 
-.. topic:: Default value
++--------------------+-----------------------------+
+| **Default Value**  | 1800                        |
++--------------------+-----------------------------+
+| **Allowed values** | A positive number (seconds) |
++--------------------+-----------------------------+
 
-    .. code-block:: xml
-
-        <timeout>1800</timeout>
-
-.. topic:: Allowed values
-
-    A positive number (seconds)
-
-``interval``
--------------------
+interval
+^^^^^^^^
 
 Interval between OpenSCAP executions.
 
-.. topic:: Default value
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default Value**  | 1d                                                                                                                                       |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
-    .. code-block:: xml
-
-        <interval>1d</interval>
-
-.. topic:: Allowed values
-
-    A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days).
-
-``scan-on-start``
--------------------
+scan-on-start
+^^^^^^^^^^^^^
 
 Run evaluation immediately when service is started.
 
-.. topic:: Default value
++--------------------+---------+
+| **Default Value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
 
-    .. code-block:: xml
-
-        <scan-on-start>yes</scan-on-start>
-
-.. topic:: Allowed values
-
-    yes, no
-
-``content``
--------------------
+content
+^^^^^^^
 
 Define an evaluation.
 
-.. topic:: Attributes
+Attributes
 
-    type
-        Select content type: xccdf or oval.
-    path
-        Use the specified policy file (DataStream, XCCDF or OVAL). Default path: /var/ossec/wodles/oscap/policies
-    timeout
-        Timeout for the evaluation (in seconds).  Use of this attribute overwrites the generic timeout.
-    xccdf-id
-        XCCDF id.
-    oval-id
-        OVAL id.
-    datastream-id
-        Datastream id.
-    cpe
-        CPE dictionary file. Default path: /var/ossec/wodles/oscap/policies
-    profile
-        Select profile.
+    - ``type`` : Select content type: xccdf or oval.
+    - ``path`` : Use the specified policy file (DataStream, XCCDF or OVAL). Default path: /var/ossec/wodles/oscap/policies
+    - ``timeout`` : Timeout for the evaluation (in seconds).  Use of this attribute overwrites the generic timeout.
+    - ``xccdf-id`` : XCCDF id.
+    - ``oval-id`` : OVAL id.
+    - ``datastream-id`` : Datastream id.
+    - ``cpe`` : CPE dictionary file. Default path: /var/ossec/wodles/oscap/policies
+    - ``profile`` : Select profile.
+
+Example
+-------
+
+::
+
+	<wodle name="open-scap">
+
+	    <timeout>1800</timeout>
+	    <interval>1d</interval>
+	    <scan-on-start>yes</scan-on-start>
+
+	    <content type="xccdf" path="ssg-centos7-ds.xml"/>
+	    <content type="xccdf" path="ssg-centos6-ds.xml"/>
+
+	</wodle>
