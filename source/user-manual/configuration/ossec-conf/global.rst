@@ -130,43 +130,36 @@ The name will be added to the email headers with the specified value.
 custom_alert_output
 ^^^^^^^^^^^^^^^^^^^
 
-This specifies the format of alerts written to alerts.log.
+This specifies the format of alerts written to ``alerts.log``. Check the allowed values for ``custom_alert_output`` in the following table:
 
-+--------------------+----------+
-| **Default Value**  | n/a      |
-+--------------------+----------+
-| **Allowed values** | list_    |
-+--------------------+----------+
 
-  .. _list:
-
-Variables:
-
-  "$TIMESTAMP"
-    The time the event was processed by OSSEC.
-  "$FTELL"
-    Unknown
-  "$RULEALERT"
-    Unknown
-  "$HOSTNAME"
-    Hostname of the system generating the event.
-  "$LOCATION"
-    The file the log messages was saved to.
-  "$RULEID"
-    The rule id of the alert.
-  "$RULELEVEL"
-    The rule level of the alert.
-  "$RULECOMMENT"
-    Unknown
-  "$SRCIP"
-    The source IP specified in the log message.
-  "$DSTUSER"
-    The destination user specified in the log message.
-  "$FULLLOG"
-    The original log message.
-  "$RULEGROUP"
-    The groups containing the rule.
-
++---------------+----------------------------------------------------+
+| Variable name | Description                                        |
++===============+====================================================+
+| $TIMESTAMP    | The time the event was processed by OSSEC.         |
++---------------+----------------------------------------------------+
+| $FTELL        | Unknown                                            |
++---------------+----------------------------------------------------+
+| $RULEALERT    | Unknown                                            |
++---------------+----------------------------------------------------+
+| $HOSTNAME     | Hostname of the system generating the event.       |
++---------------+----------------------------------------------------+
+| $LOCATION     | The file the log messages was saved to.            |
++---------------+----------------------------------------------------+
+| $RULEID       | The rule id of the alert.                          |
++---------------+----------------------------------------------------+
+| $RULELEVEL    | The rule level of the alert.                       |
++---------------+----------------------------------------------------+
+| $RULECOMMENT  | Unknown                                            |
++---------------+----------------------------------------------------+
+| $SRCIP        | The source IP specified in the log message.        |
++---------------+----------------------------------------------------+
+| $DSTUSER      | The destination user specified in the log message. |
++---------------+----------------------------------------------------+
+| $FULLLOG      | The original log message.                          |
++---------------+----------------------------------------------------+
+| $RULEGROUP    | The groups containing the rule.                    |
++---------------+----------------------------------------------------+
 
 stats
 ^^^^^^^^^^^^^^^^^^
