@@ -12,36 +12,20 @@ localfile
 
 This configuration section is used to specify the collection of log data from files, Windows events, and from output of commands.
 
-+-----------------------+--------------------------------------------------------------------------------------------+
-| Options               | Allowed values                                                                             |
-+=======================+============================================================================================+
-| `location`_           | Any log file                                                                               |
-+-----------------------+--------------------------------------------------------------------------------------------+
-| `command`_            | Any command line with arguments                                                            |
-+-----------------------+--------------------------------------------------------------------------------------------+
-| `alias`_              | Any string                                                                                 |
-+-----------------------+--------------------------------------------------------------------------------------------+
-| `frequency`_          | A number of seconds                                                                        |
-+-----------------------+--------------------------------------------------------------------------------------------+
-| `check_diff`_         | <check_diff />                                                                             |
-+-----------------------+--------------------------------------------------------------------------------------------+
-| `only-future-events`_ | yes or no                                                                                  |
-+-----------------------+--------------------------------------------------------------------------------------------+
-| `query`_              | Any XPATH query following the `event                                                       |
-|                       | schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_ |
-+-----------------------+--------------------------------------------------------------------------------------------+
-| `log_format`_         | syslog, snort-full, snort-fast, squid, iis,                                                |
-|                       |                                                                                            |
-|                       | eventlog, eventchannel, mysql_log,                                                         |
-|                       |                                                                                            |
-|                       | postgresql_log, nmapg, apache, command,                                                    |
-|                       |                                                                                            |
-|                       | full_command, djb-multilog, multi-line                                                     |
-+-----------------------+--------------------------------------------------------------------------------------------+
+Options
+-------
 
+- `location`_
+- `command`_
+- `alias`_
+- `frequency`_
+- `check_diff`_
+- `only-future-events`_
+- `query`_
+- `log_format`_
 
-``location``
-------------
+location
+^^^^^^^^
 
 Specify the location of a log or wildcarded group of logs to be read. ``strftime`` format strings may be used for log file names.
 
@@ -52,36 +36,35 @@ Wildcards may be used on non-Windows systems. When wildcards are used, the log f
 
 Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
 
-.. topic:: Default value
++--------------------+--------------+
+| **Default Value**  | n/a          |
++--------------------+--------------+
+| **Allowed values** | Any log file |
++--------------------+--------------+
 
-	n/a
-
-.. topic:: Allowed values
-
-	Any log file
-
-
-
-``command``
------------
+command
+^^^^^^^^
 
 A command to be run. All output from this command will be read as one or more log messages depending on whether
 command or full_command is used.
 
++--------------------+--------------------------------------------------+
+| **Default Value**  | n/a                                              |
++--------------------+--------------------------------------------------+
+| **Allowed values** | any command line, optionally including arguments |
++--------------------+--------------------------------------------------+
 
-.. topic:: Default value
-
-	n/a
-
-.. topic:: Allowed values
-
-	any command line, optionally including arguments
-
-
-``alias``
----------
+alias
+^^^^^^^^
 
 This is an alias to identify the command. This will replace the command in the log message.
+
++--------------------+------------+
+| **Default Value**  | n/a        |
++--------------------+------------+
+| **Allowed values** | any string |
++--------------------+------------+
+
 For example ``<alias>usb-check</alias>`` would replace:
 
 .. code-block:: xml
@@ -95,52 +78,44 @@ with:
    ossec: output: 'usb-check':
 
 
-.. topic:: Default value
-
-	n/a
-
-.. topic:: Allowed values
-
-	any string
-
-
-``frequency``
--------------
+frequency
+^^^^^^^^^^
 
 The minimum time in seconds between command runs. The command will probably not run every ``frequency``
 seconds exactly, but the time between runs will not be shorter than this setting.
 This is used with **command** and **full_command**.
 
-.. topic:: Default value
-
-	n/a
-
-.. topic:: Allowed values
-
-	any positive number of seconds
++--------------------+--------------------------------+
+| **Default Value**  | n/a                            |
++--------------------+--------------------------------+
+| **Allowed values** | any positive number of seconds |
++--------------------+--------------------------------+
 
 
-``check_diff``
---------------
+check_diff
+^^^^^^^^^^
 
 The output from an event will be stored in an internal database. Every time the same event is received, the output is compared
 to the previous output. If the output has changed, an alert will be generated.
 
-
-.. topic:: Default value
-
-	n/a
-
-.. topic:: Allowed values
-
-	<check_diff />
++--------------------+----------------+
+| **Default Value**  | n/a            |
++--------------------+----------------+
+| **Allowed values** | <check_diff /> |
++--------------------+----------------+
 
 
-``only-future-events``
-----------------------
+only-future-events
+^^^^^^^^^^^^^^^^^^^
 
 This is for use only with the ``eventchannel`` log format.  By default, when Wazuh starts, it will read all log content from a given Windows Event Channel since Wazuh was last stopped.
 Set this option to **yes** to override this behaviour if desired.  Then Wazuh would only receive events that occur after the Wazuh agent is started.
+
++--------------------+-----------+
+| **Default Value**  | n/a       |
++--------------------+-----------+
+| **Allowed values** | yes or no |
++--------------------+-----------+
 
 .. code-block:: xml
 
@@ -150,21 +125,18 @@ Set this option to **yes** to override this behaviour if desired.  Then Wazuh wo
 	  <only-future-events>yes</only-future-events>
 	</localfile>
 
-
-.. topic:: Default value
-
-  n/a
-
-.. topic:: Allowed values
-
-  The option accepted are **yes** or **no**.
-
-
-``query``
----------
+query
+^^^^^^^^
 
 This is for use only with the ``eventchannel`` log format. It is possible to specify an XPATH query following the event
 schema in order to filter the events that Wazuh will process.
+
++--------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                                                                              |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------+
+
 For example, the following configuration will only process events with an ID of 7040:
 
 .. code-block:: xml
@@ -175,17 +147,8 @@ For example, the following configuration will only process events with an ID of 
      <query>Event/System[EventID=7040]</query>
   </localfile>
 
-.. topic:: Default value
-
-  n/a
-
-.. topic:: Allowed values
-
-	Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_
-
-
-``log_format``
---------------
+log_format
+^^^^^^^^^^^
 
 This is the format of the log being read.
 
@@ -193,13 +156,11 @@ This is the format of the log being read.
 
   For most text log files that have one entry per line, you can just use syslog.
 
-.. topic:: Default value
-
-	.. code-block:: xml
-
-	  	<log_format>syslog</log_format>
-
-.. topic:: Allowed values
++--------------------+-----------+
+| **Default Value**  | syslog    |
++--------------------+-----------+
+| **Allowed values** |list below |
++--------------------+-----------+
 
   syslog
       This format is for plain text files in a syslog-like format. It can also be used when there is no support for the logging format, and the logs are single line messages.

@@ -11,87 +11,69 @@ database_output
 
 MySQL and PostgreSQL database output is supported. It is configured with the options below.
 
-+-------------+----------------------+
-| Options     | Allowed values       |
-+=============+======================+
-| `hostname`_ | Any valid IP address |
-+-------------+----------------------+
-| `username`_ | Any valid username   |
-+-------------+----------------------+
-| `password`_ | Any password         |
-+-------------+----------------------+
-| `database`_ | Database name        |
-+-------------+----------------------+
-| `type`_     | mysql or postgresql  |
-+-------------+----------------------+
+Options
+-------
+- `hostname`_
+- `username`_
+- `password`_
+- `database`_
+- `type`_
 
-
-
-``hostname``
-------------
+hostname
+^^^^^^^^
 
 Specify the IP address of the database server.
 
-.. topic:: Default value
++--------------------+----------------------+
+| **Default Value**  | n/a                  |
++--------------------+----------------------+
+| **Allowed values** | Any valid IP address |
++--------------------+----------------------+
 
-	n/a
-
-.. topic:: Allowed values
-
-	Any valid IP address
-
-``username``
-------------
+username
+^^^^^^^^
 
 Specify the username to access the database.
 
-.. topic:: Default value
++--------------------+--------------------+
+| **Default Value**  | n/a                |
++--------------------+--------------------+
+| **Allowed values** | Any valid username |
++--------------------+--------------------+
 
-	n/a
-
-.. topic:: Allowed values
-
-	Any valid username
-
-``password``
-------------
+password
+^^^^^^^^
 
 Specify the password to access the database.
 
-.. topic:: Default value
++--------------------+--------------+
+| **Default Value**  | n/a          |
++--------------------+--------------+
+| **Allowed values** | Any password |
++--------------------+--------------+
 
-	n/a
-
-.. topic:: Allowed values
-
-	Any password
-
-``database``
-------------
+database
+^^^^^^^^
 
 Specify the name of the database in which to store the alerts.
 
-.. topic:: Default value
++--------------------+---------------+
+| **Default Value**  | n/a           |
++--------------------+---------------+
+| **Allowed values** | Database name |
++--------------------+---------------+
 
-	n/a
-
-.. topic:: Allowed values
-
-	Database name
-
-``type``
---------
+type
+^^^^^^^^
 
 Type of database
+
++--------------------+------------------+
+| **Default Value**  | n/a              |
++--------------------+------------------+
+| **Allowed values** | mysql/postgresql |
++--------------------+------------------+
 
 .. note::
 
     Wazuh must be compiled with the database type that is to be used.
-
-.. topic:: Default value
-
-	n/a
-
-.. topic:: Allowed values
-
-	mysql/postgresql

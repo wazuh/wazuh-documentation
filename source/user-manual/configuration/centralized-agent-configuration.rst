@@ -29,15 +29,12 @@ The agent.conf is only valid on server installations.
 The ``agent.conf`` exists in ``/var/ossec/etc/shared``.
 It should be readable by the ossec user.
 
-+------------+---------------------+
-| Options    | Allowed values      |
-+============+=====================+
-| `name`_    | Any agent name      |
-+------------+---------------------+
-| `os`_      | Any OS family       |
-+------------+---------------------+
-| `profile`_ | Any defined profile |
-+------------+---------------------+
+Options
+-------
+
+- `name`_
+- `os`_
+- `profile`_
 
 If no option is specified, this configuration section will be pushed to all agents.
 
@@ -46,15 +43,13 @@ name
 
 Allows assignment of the block to one particular agent.
 
-.. topic:: Default value
++--------------------+---------------------+
+| **Default Value**  | n/a                 |
++--------------------+---------------------+
+| **Allowed values** | Any agent name      |
++--------------------+---------------------+
 
-	n/a
-
-.. topic:: Allowed values
-
-	Any agent name
-
-.. topic:: Example
+Example
 
 	.. code-block:: xml
 
@@ -65,15 +60,13 @@ os
 
 Allows assignment of the block to an operating system.
 
-.. topic:: Default value
++--------------------+---------------------+
+| **Default Value**  | n/a                 |
++--------------------+---------------------+
+| **Allowed values** | Any OS family       |
++--------------------+---------------------+
 
-	n/a
-
-.. topic:: Allowed values
-
-	Any OS family
-
-.. topic:: Example
+Example
 
 	.. code-block:: xml
 
@@ -85,22 +78,23 @@ profile
 
 Allows assignment of a profile name to a block.  Any agent configured to use the defined profile may use the block.
 
-.. topic:: Default value
++--------------------+---------------------+
+| **Default Value**  | n/a                 |
++--------------------+---------------------+
+| **Allowed values** | Any defined profile |
++--------------------+---------------------+
 
-	n/a
-
-.. topic:: Allowed values
-
-	Any defined profile
-
-.. topic:: Example
+Example
 
 	.. code-block:: xml
 
 		<agent_config profile="UnixHost">
 
+
 Centralized configuration process
 -----------------------------------
+
+Here we are going to explain how a centralized configuration can be done.
 
 1. Configuration
 
