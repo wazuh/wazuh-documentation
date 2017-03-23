@@ -31,7 +31,7 @@ type
 **ssh_integrity_check_bsd** and **ssh_integrity_check_linux** require a list of directories in <arguments>.  Wazuh will file integrity scan the files in those directories and alert if they have changed.  With **ssh_generic_diff** you supply an <arguments> value that consists of a set of commands to run.  Their output is then processed, looking for changes or rule matches.  Lastly, the **ssh_pixconfig_diff** type is specifically for checking if the config of a Cisco PIX/router changes.  It takes no <arguments> value.
 
 frequency
-^^^^
+^^^^^^^^^
 
 This controls the number of seconds between each check of the agentless device.
 

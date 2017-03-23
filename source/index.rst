@@ -73,6 +73,7 @@ Available documentation
    getting-started/index
    installation-guide/index
    user-manual/index
+   user-guide/index
    docker/index
    pci-dss/index
    amazon/index
