@@ -39,7 +39,7 @@ Installing Postfix by default will allow us to send emails, on the basics, we do
       smtp_sasl_auth_enable = yes
       smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
       smtp_sasl_security_options = noanonymous
-      smtp_tls_CAfile = /etc/ssl/certs/ca-certificates.crt
+      smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
       smtp_use_tls = yes
 
 #. Configure email address and password:
