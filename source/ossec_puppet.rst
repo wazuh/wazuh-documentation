@@ -331,8 +331,8 @@ class ossec::server
  - ``$ossec_service_provider``: (default: ``$::ossec::params::ossec_service_provider``) Set service provider to Redhat on Redhat systems.
  - ``$ossec_rootcheck_frequency``: (default: ``36000``) Frequency that the rootcheck is going to be executed (in seconds).
  - ``$ossec_rootcheck_checkports``: (default: ``true``) Look for the presence of hidden ports.
- - ``ossec_rootcheck_checkfiles``: (default: ``true``) Scan the whole filesystem looking for unusual files and permission problems.
-
+ - ``$ossec_rootcheck_checkfiles``: (default: ``true``) Scan the whole filesystem looking for unusual files and permission problems.
+ - ``$ossec_conf_template``: (default: ``ossec/10_ossec.conf.erb```) Allow to use a custom ossec.conf in the manager.
 
 Consequently, if you add or remove any of the Wazuh rules later on, you'll need to ensure to add/remove the appropriate bits in the "$ossec_extra_rules_config" array parameter as well.
 
@@ -383,6 +383,7 @@ OSSEC agent class
  - ``agent_package_name``: (default: ``$::ossec::params::agent_package``) Override package for client installation.
  - ``agent_service_name``: (default: ``$::ossec::params::agent_service``) Override service for client installation.
  - ``ossec_service_provider``: (default: ``$::ossec::params::ossec_service_provider``) Set service provider to Redhat on Redhat systems.
+ - ``$ossec_conf_template``: (default: ``ossec/10_ossec_agent.conf.erb```) Allow to use a custom ossec.conf in the agent.
 
 function ossec::addlog
  - ``$log_name``.
