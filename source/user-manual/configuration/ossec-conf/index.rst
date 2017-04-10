@@ -17,46 +17,46 @@ The ``ossec.conf`` file is in XML format, and all configuration options are nest
         </alerts>
     </ossec_config>
 
-The ``agent.conf`` file is very similar to ``ossec.conf`` except that it is used to centrally distribute configuration information to agents. See more `here <../centralized-agent-configuration.html>`_.
+The ``agent.conf`` file is very similar to ``ossec.conf`` except that it is used to centrally distribute configuration information to agents. See more :doc:`here <../centralized-agent-configuration>`.
 
 Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/manager" installation type and agents use the "agent" installation type.
 
 +---------------------------------------------------------------+------------------------+
 | Configuration sections                                        | Supported installations|
 +===============================================================+========================+
-| `active-response <active-response.html>`_                     | manager                |
+| :doc:`active-response <active-response>`                      | manager                |
 +---------------------------------------------------------------+------------------------+
-| `agentless <agentless.html>`_                                 | manager                |
+| :doc:`agentless <agentless>`                                  | manager                |
 +---------------------------------------------------------------+------------------------+
-| `alerts <alerts.html>`_                                       | manager                |
+| :doc:`alerts <alerts>`                                        | manager                |
 +---------------------------------------------------------------+------------------------+
-| `client <client.html>`_                                       | agent                  |
+| :doc:`client <client>`                                        | agent                  |
 +---------------------------------------------------------------+------------------------+
-| `command <commands.html>`_                                    | manager                |
+| :doc:`command <commands>`                                     | manager                |
 +---------------------------------------------------------------+------------------------+
-| `database_output <database-output.html>`_                     | manager                |
+| :doc:`database_output <database-output>`                      | manager                |
 +---------------------------------------------------------------+------------------------+
-| `email_alerts <email_alerts.html>`_                           | manager                |
+| :doc:`email_alerts <email_alerts>`                            | manager                |
 +---------------------------------------------------------------+------------------------+
-| `global  <global.html>`_                                      | manager                |
+| :doc:`global  <global>`                                       | manager                |
 +---------------------------------------------------------------+------------------------+
-| `integration  <integration.html>`_                            | manager                |
+| :doc:`integration  <integration>`                             | manager                |
 +---------------------------------------------------------------+------------------------+
-| `localfile <localfile.html>`_                                 | manager                |
+| :doc:`localfile <localfile>`                                  | manager                |
 +---------------------------------------------------------------+------------------------+
-| `remote <remote.html>`_                                       | manager                |
+| :doc:`remote <remote>`                                        | manager                |
 +---------------------------------------------------------------+------------------------+
-| `reports <reports.html>`_                                     | manager                |
+| :doc:`reports <reports>`                                      | manager                |
 +---------------------------------------------------------------+------------------------+
-| `rootcheck <rootcheck.html>`_                                 | manager, agent         |
+| :doc:`rootcheck <rootcheck>`                                  | manager, agent         |
 +---------------------------------------------------------------+------------------------+
-| `ruleset <rules.html>`_                                       | manager                |
+| :doc:`ruleset <rules>`                                        | manager                |
 +---------------------------------------------------------------+------------------------+
-| `syscheck <syscheck.html>`_                                   | manager, agent         |
+| :doc:`syscheck <syscheck>`                                    | manager, agent         |
 +---------------------------------------------------------------+------------------------+
-| `syslog_output <syslog-output.html>`_                         | manager                |
+| :doc:`syslog_output <syslog-output>`                          | manager                |
 +---------------------------------------------------------------+------------------------+
-| `wodle name="open-scap" <wodle-openscap.html>`_               | manager, agent         |
+| :doc:`wodle name="open-scap" <wodle-openscap>`                | manager, agent         |
 +---------------------------------------------------------------+------------------------+
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag.
