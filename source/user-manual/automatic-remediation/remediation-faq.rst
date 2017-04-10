@@ -17,4 +17,4 @@ Yes, using the location option. More info: :ref:`Active Response options <refere
 
 Can active response remove the action after a time?
 ---------------------------------------------------
-Yes, using the *timeout_allowed* option on the command and the *timeout* option on tje active response. More info: :ref:`Example <remediation-examples>`
+Yes, using the *timeout_allowed* option on the command and the *timeout* option on the active response. More info: :ref:`Example <remediation-examples>`
