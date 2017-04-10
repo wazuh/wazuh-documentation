@@ -70,11 +70,11 @@ Specify the agent.conf profile(s) to be used by the agent.
 
   Example:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-     <client>
-           <config-profile>webserver, lowmemory</config-profile>
-     </client>
+   <client>
+         <config-profile>webserver, lowmemory</config-profile>
+   </client>
 
 
 notify_time

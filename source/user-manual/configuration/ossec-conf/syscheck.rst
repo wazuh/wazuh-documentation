@@ -50,49 +50,57 @@ This is to be set on the system to be monitored (or in the agent.conf, if approp
 
 Atributes:
 
-  - ``realtime`` : This will enable real-time/continuous monitoring on Linux (using the inotify system calls) and Windows systems.
-
-    Allowed value: yes
-
-  - ``report_changes`` : Report file changes.  This is limited to text files at this time.
-
-    Allowed value: yes
-
-  - ``check_all`` : All the following check_* options are used together.
-
-    Allowed value: yes
-
-  - ``check_sum`` : Check the MD5 and SHA-1 hashes of the files. This is the same as using both check_sha1sum="yes" and check_md5sum="yes"
-
-    Allowed value: yes
-
-  - ``check_sha1sum`` : Check only the SHA-1 hash of the files.
-
-    Allowed value: yes
-
-  - ``check_md5sum`` : Check only the MD5 hash of the files.
-
-    Allowed value: yes
-
-  - ``check_size`` : Check the size of the files.
-
-    Allowed value: yes
-
-  - ``check_owner`` : Check the owner of the files.
-
-    Allowed value: yes
-
-  - ``check_group`` : Check the group owner of the files/directories.
-
-    Allowed value: yes
-
-  - ``check_perm`` : Check the UNIX permission of the files/directories. On Windows, this will only check the POSIX permissions.
-
-    Allowed value: yes
-
-  - ``restrict`` : Limit checks to files containing the entered string in the file name. Any directory or file name (but not a path) is allowed
-
-    Allowed value: string
++--------------------+-----------------------------------------------------------------------------------------------------------------+
+| **realtime**       | This will enable real-time/continuous monitoring on Linux (using the inotify system calls) and Windows systems. |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **report_changes** | Report file changes. This is limited to text files at this time.                                                |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **check_all**      | All the following check_* options are used together.                                                            |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **check_sum**      | Check the MD5 and SHA-1 hashes of the files.                                                                    |
+|                    |                                                                                                                 |
+|                    | Same as using both check_sha1sum="yes" and check_md5sum="yes"                                                   |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **check_sha1sum**  | Check only the SHA-1 hash of the files.                                                                         |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **check_md5sum**   | Check only the MD5 hash of the files.                                                                           |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **check_size**     | Check the size of the files.                                                                                    |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **check_owner**    | Check the owner of the files.                                                                                   |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **check_group**    | Check the group owner of the files/directories.                                                                 |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **check_perm**     | Check the UNIX permission of the files/directories.                                                             |
+|                    |                                                                                                                 |
+|                    | On Windows, this will only check the POSIX permissions.                                                         |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | yes                                                |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
+| **restrict**       | Limit checks to files containing the entered string in the file name.                                           |
+|                    |                                                                                                                 |
+|                    | Any directory or file name (but not a path) is allowed                                                          |
++                    +------------------------------------------------------------+----------------------------------------------------+
+|                    | Allowed Value                                              | string                                             |
++--------------------+------------------------------------------------------------+----------------------------------------------------+
 
 .. _reference_ossec_syscheck_ignore:
 
@@ -107,12 +115,13 @@ List of files or directories to be ignored (one entry per line). Multiple lines 
 | **Allowed values** | Any directory or file name |
 +--------------------+----------------------------+
 
-.. topic:: Attributes
+Attributes:
 
-  type
-    This is a simple regex pattern to filter out files so alerts are not generated
-
-    Allowed value: sregex
++----------+--------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated |
++          +--------------------------------------------+-----------------------------------+
+|          | Allowed Values                             | sregex                            |
++----------+--------------------------------------------+-----------------------------------+
 
 .. _reference_ossec_syscheck_frequency:
 

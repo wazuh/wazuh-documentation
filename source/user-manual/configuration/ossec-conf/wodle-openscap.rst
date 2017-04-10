@@ -73,14 +73,29 @@ Define an evaluation.
 
 Attributes
 
-    - ``type`` : Select content type: xccdf or oval.
-    - ``path`` : Use the specified policy file (DataStream, XCCDF or OVAL). Default path: /var/ossec/wodles/oscap/policies
-    - ``timeout`` : Timeout for the evaluation (in seconds).  Use of this attribute overwrites the generic timeout.
-    - ``xccdf-id`` : XCCDF id.
-    - ``oval-id`` : OVAL id.
-    - ``datastream-id`` : Datastream id.
-    - ``cpe`` : CPE dictionary file. Default path: /var/ossec/wodles/oscap/policies
-    - ``profile`` : Select profile.
++-------------------+-------------------------------------------------------------+
+| **type**          | Select content type: xccdf or oval.                         |
++-------------------+-------------------------------------------------------------+
+| **path**          | Use the specified policy file (DataStream, XCCDF or OVAL).  |
+|                   |                                                             |
+|                   | Default path: /var/ossec/wodles/oscap/policies              |
++-------------------+-------------------------------------------------------------+
+| **timeout**       | Timeout for the evaluation (in seconds).                    |
+|                   |                                                             |
+|                   | Use of this attribute overwrites the generic timeout.       |
++-------------------+-------------------------------------------------------------+
+| **xccdf-id**      | XCCDF id.                                                   |
++-------------------+-------------------------------------------------------------+
+| **oval-id**       | OVAL id.                                                    |
++-------------------+-------------------------------------------------------------+
+| **datastream-id** | Datastream id.                                              |
++-------------------+-------------------------------------------------------------+
+| **cpe**           | CPE dictionary file.                                        |
+|                   |                                                             |
+|                   | Default path: /var/ossec/wodles/oscap/policies              |
++-------------------+-------------------------------------------------------------+
+| **profile**       | Select profile.                                             |
++-------------------+-------------------------------------------------------------+
 
 Example
 -------

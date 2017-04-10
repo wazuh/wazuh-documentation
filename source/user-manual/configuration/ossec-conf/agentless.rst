@@ -22,13 +22,23 @@ Options
 
 type
 ^^^^
-+--------------------+------------------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                                      |
-+--------------------+------------------------------------------------------------------------------------------+
-| **Allowed values** | ssh_integrity_check_bsd, ssh_integrity_check_linux, ssh_generic_diff, ssh_pixconfig_diff |
-+--------------------+------------------------------------------------------------------------------------------+
-
-**ssh_integrity_check_bsd** and **ssh_integrity_check_linux** require a list of directories in <arguments>.  Wazuh will file integrity scan the files in those directories and alert if they have changed.  With **ssh_generic_diff** you supply an <arguments> value that consists of a set of commands to run.  Their output is then processed, looking for changes or rule matches.  Lastly, the **ssh_pixconfig_diff** type is specifically for checking if the config of a Cisco PIX/router changes.  It takes no <arguments> value.
++--------------------+----------------------------------------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                                                |
++--------------------+---------------------------+------------------------------------------------------------------------+
+| **Allowed values** | ssh_integrity_check_bsd   | Require a list of directories in <arguments>.                          |
+|                    |                           |                                                                        |
++                    +---------------------------+ Wazuh will file integrity scan the files in those directories.         +
+|                    | ssh_integrity_check_linux |                                                                        |
+|                    |                           | System will alert if they have changed.                                |
++                    +---------------------------+------------------------------------------------------------------------+
+|                    | ssh_generic_diff          | Supply an <arguments> value that consists of a set of commands to run. |
+|                    |                           |                                                                        |
+|                    |                           | Their output is then processed, looking for changes or rule matches.   |
++                    +---------------------------+------------------------------------------------------------------------+
+|                    | ssh_pixconfig_diff        | Specifically for checking if the config of a Cisco PIX/router changes. |
+|                    |                           |                                                                        |
+|                    |                           | No <arguments> required                                                |
++--------------------+---------------------------+------------------------------------------------------------------------+
 
 frequency
 ^^^^^^^^^
@@ -57,14 +67,15 @@ state
 
 This determines whether the check type is periodic or periodic_diff.
 
-+--------------------+--------------------------------------------------------+
-| **Default Value**  | n/a                                                    |
-+--------------------+--------------------------------------------------------+
-| **Allowed values** | periodic, periodic_diff                                |
-+--------------------+--------------------------------------------------------+
-
-- periodic: The output from each agentless check is analyzed with the Wazuh ruleset as if it were a monitored log.  For example, you might query a firewall for failover state and expect an alert if the output contains a string indicating a failover has occurred.
-- periodic_diff: The output from each agentless check is compared to the output of the previous run, and changes are alerted on, similar to file integrity monitoring.  For example, you might dump the config of a router and expect to be alerted if the config has changed since the last check.
++--------------------+--------------------------------------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                                              |
++--------------------+---------------+----------------------------------------------------------------------------------+
+| **Allowed values** | periodic      | Output from each check is analyzed with the Wazuh ruleset as if a monitored log. |
++                    +---------------+----------------------------------------------------------------------------------+
+|                    | periodic_diff | Output from each agentless check is compared to the output of the previous run.  |
+|                    |               |                                                                                  |
+|                    |               | Changes are alerted on, similar to file integrity monitoring.                    |
++--------------------+---------------+----------------------------------------------------------------------------------+
 
 arguments
 ^^^^^^^^^

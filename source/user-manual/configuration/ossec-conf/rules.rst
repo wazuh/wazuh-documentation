@@ -69,11 +69,11 @@ Load a directory of rules. The files will be loaded in alphabetical order and an
 
 	An optional pattern can be included in the opening tag.
 
-	Example::
+Example::
 
-		  <rule_dir pattern="ruleset.xml">rules</rule_dir>
+	  <rule_dir pattern="ruleset.xml">rules</rule_dir>
 
-	The pattern is a regex match string used to determine if a file should be loaded.
+The pattern is a regex match string used to determine if a file should be loaded.
 
 
 decoder

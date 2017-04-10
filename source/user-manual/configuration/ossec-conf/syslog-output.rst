@@ -108,16 +108,14 @@ format
 
 Format of alert output.
 
-+--------------------+----------------------------+
-| **Default Value**  | default                    |
-+--------------------+----------------------------+
-| **Allowed values** | default, cef, splunk, json |
-+--------------------+----------------------------+
-
-The options are:
-
-- ``CEF`` will output data in the ArcSight Common Event Format.
-
-- ``json`` will output data in the JSON format that can be consumed by a variety of tools.
-
-- ``splunk`` will output data in a Splunk-friendly format.
++--------------------+-------------------------------------------------------------------------------------------+
+| **Default Value**  | default                                                                                   |
++--------------------+---------+---------------------------------------------------------------------------------+
+| **Allowed values** | default                                                                                   |
++                    +---------+---------------------------------------------------------------------------------+
+|                    | cef     | will output data in the ArcSight Common Event Format.                           |
++                    +---------+---------------------------------------------------------------------------------+
+|                    | splunk  | will output data in a Splunk-friendly format.                                   |
++                    +---------+---------------------------------------------------------------------------------+
+|                    | json    | will output data in the JSON format that can be consumed by a variety of tools. |
++--------------------+---------+---------------------------------------------------------------------------------+

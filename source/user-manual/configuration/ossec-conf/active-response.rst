@@ -59,17 +59,23 @@ location
 
 This indicates on which system(s) the command should be executed.
 
-+--------------------+-------------------------------------------+
-| **Default Value**  | n/a                                       |
-+--------------------+-------------------------------------------+
-| **Allowed values** | local, server, defined-agent, all         |
-+--------------------+-------------------------------------------+
 
-- local: This runs the command on the agent that generated the event.
-- server: This runs the command on the Wazuh manager.
-- defined-agent: This runs the command on a specific agent identified by agent_id.  For example, if the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a command on that agent to blacklists an offending IP on the edge firewall.
-- all: This runs the command on the Wazuh manager and on all agents.  Use with caution.
++--------------------+----------------------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                              |
++--------------------+---------------+------------------------------------------------------------------+
+| **Allowed values** | local         | This runs the command on the agent that generated the event.     |
++--------------------+---------------+------------------------------------------------------------------+
+|                    | server        | This runs the command on the Wazuh manager.                      |
++                    +---------------+------------------------------------------------------------------+
+|                    | defined-agent | This runs the command on a specific agent identified by agent_id |
++                    +---------------+------------------------------------------------------------------+
+|                    | all           | This runs the command on the Wazuh manager and on all agents.    |
+|                    |               | Use with caution.                                                |
++--------------------+---------------+------------------------------------------------------------------+
 
+Example for ``defined-agent``:
+
+If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a command on that agent to blacklists an offending IP on the edge firewall.
 
 agent_id
 ^^^^^^^^

@@ -84,15 +84,13 @@ format
 
 This specifies the email format.
 
-+--------------------+-----------+
-| **Default Value**  | full      |
-+--------------------+-----------+
-| **Allowed values** | full, sms |
-+--------------------+-----------+
-
-- full: Send normal emails.
-
-- sms: Use a compact format more suitable for SMS.
++--------------------+----------------------------------------------------+
+| **Default Value**  | full                                               |
++--------------------+------+---------------------------------------------+
+| **Allowed values** | full | Send normal emails.                         |
++                    +------+---------------------------------------------+
+|                    | sms  | Use a compact format more suitable for SMS. |
++--------------------+------+---------------------------------------------+
 
 
 rule_id
