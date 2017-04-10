@@ -6,41 +6,41 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | Tools                                             | Descriptions                                                               | Supported installations     |
 +===================================================+============================================================================+=============================+
-| :ref:`ossec-control <ossec-control>`              | Manages the status of Wazuh processes                                      | Server, local, agent        |
+| :doc:`ossec-control <ossec-control>`              | Manages the status of Wazuh processes                                      | manager, agent              |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | Agent                       |
+| :doc:`agent-auth <agent-auth>`                    | Adds agents to a Wazuh manager                                             | agent                       |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`agent_control <agent_control>`              | Allows queries of the manager to get information about                     | Server                      |
+| :doc:`agent_control <agent_control>`              | Allows queries of the manager to get information about                     | manager                     |
 |                                                   |                                                                            |                             |
 |                                                   | any agent                                                                  |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`manage_agents <manage_agents>`              | Provides an interface to handle authentication                             | Server, agent               |
+| :doc:`manage_agents <manage_agents>`              | Provides an interface to handle authentication                             | manager, agent              |
 |                                                   |                                                                            |                             |
 |                                                   | keys for  agents                                                           |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-logtest <ossec-logtest>`              | Allows testing and verification of rules against provided log records      | Server, local               |
+| :doc:`ossec-logtest <ossec-logtest>`              | Allows testing and verification of rules against provided log records      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-makelists <ossec-makelists>`          | Compiles cdb databases                                                     | Server, local               |
+| :doc:`ossec-makelists <ossec-makelists>`          | Compiles cdb databases                                                     | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`rootcheck_control <rootcheck_control>`      | Allows management of policy monitoring                                     | Server, local               |
+| :doc:`rootcheck_control <rootcheck_control>`      | Allows management of policy monitoring                                     | manager                     |
 |                                                   |                                                                            |                             |
 |                                                   | and system auditing database                                               |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`syscheck_control <syscheck_control>`        | Provides an interface for managing the                                     | Server, local               |
+| :doc:`syscheck_control <syscheck_control>`        | Provides an interface for managing the                                     | manager                     |
 |                                                   |                                                                            |                             |
 |                                                   | integrity checking database                                                |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`syscheck_update <syscheck_update>`          | Updates the integrity check database                                       | Server, local               |
+| :doc:`syscheck_update <syscheck_update>`          | Updates the integrity check database                                       | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | Server, local               |
+| :doc:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`ossec-regex <ossec-regex>`                  | Validates a regex expression                                               | Server, local               |
+| :doc:`ossec-regex <ossec-regex>`                  | Validates a regex expression                                               | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`update-ruleset.py <update-ruleset.py>`      | Update Decoders, Rules and Rootchecks                                      | Server                      |
+| :doc:`update-ruleset.py <update-ruleset.py>`      | Update Decoders, Rules and Rootchecks                                      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`util.sh <util.sh>`                          | Adds a file to be monitored by ossec-logcollector                          | Server, local, agent        |
+| :doc:`util.sh <util.sh>`                          | Adds a file to be monitored by ossec-logcollector                          | manager agent               |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :ref:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh agent.conf configuration                                | Server                      |
+| :doc:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh agent.conf configuration                                | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 
 .. topic:: Contents
