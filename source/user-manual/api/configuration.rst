@@ -29,7 +29,7 @@ You can configure certain API settings in the file ``/var/ossec/api/configuratio
     //In case the API run behind a proxy server, turn to "yes" this feature. Values: yes, no.
     config.BehindProxyServer = "no";
 
-Make sure to restart wazuh-api service after editing the config file using the command below appropriate for your system:
+Make sure to restart wazuh-api service after editing the config file using the command below appropriate for your system::
 
     systemctl restart wazuh-api
     service wazuh-api restart
@@ -38,10 +38,12 @@ Make sure to restart wazuh-api service after editing the config file using the c
 Basic Authentication
 -------------------------
 
-It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName** ::
+It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName**::
 
     $ cd /var/ossec/api/configuration/auth
     $ sudo node htpasswd -c user myUserName
+
+Do not forget to restart the API to apply the changes.
 
 Manually enable https support
 ---------------------------------
