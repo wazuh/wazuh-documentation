@@ -38,8 +38,8 @@ Available options
 - `check_diff`_
 - `group`_
 
-``rule``
---------
+rule
+^^^^
 
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **level**     | Definition     | Specifies the level of the rule. Alerts and responses use this value.                             |
@@ -73,8 +73,8 @@ Available options
 |               | Allowed values | yes                                                                                               |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 
-``match``
----------
+match
+^^^^^
 Any string to match against the log event.
 
 +--------------------+-----------------------------------------------------------------+
@@ -83,8 +83,8 @@ Any string to match against the log event.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_ |
 +--------------------+-----------------------------------------------------------------+
 
-``regex``
----------
+regex
+^^^^^
 
 Any regex to match against the log event.
 
@@ -94,8 +94,8 @@ Any regex to match against the log event.
 | **Allowed values** | Any `regex <expression regex.html#os-regex-or-regex-syntax>`_ |
 +--------------------+---------------------------------------------------------------+
 
-``decoded_as``
---------------
+decoded_as
+^^^^^^^^^^
 
 +--------------------+------------------+
 | **Default Value**  | n/a              |
@@ -103,8 +103,8 @@ Any regex to match against the log event.
 | **Allowed values** | Any decoder name |
 +--------------------+------------------+
 
-``category``
-------------
+category
+^^^^^^^^^^
 
 The decoded category to match: ids, syslog, firewall, web-log, squid or windows.
 
@@ -114,8 +114,8 @@ The decoded category to match: ids, syslog, firewall, web-log, squid or windows.
 | **Allowed values** | Any category |
 +--------------------+--------------+
 
-``field``
--------------
+field
+^^^^^
 
 Any regex to be compared to a field extracted by the decoder.
 
@@ -124,8 +124,8 @@ Any regex to be compared to a field extracted by the decoder.
 +----------+-----------------------------------------------------------+
 
 
-``srcip``
----------
+srcip
+^^^^^
 
 Any IP address or CIDR block to be compared to an IP decoded as srcip. Use "!" to negate it.
 
@@ -135,8 +135,8 @@ Any IP address or CIDR block to be compared to an IP decoded as srcip. Use "!" t
 | **Allowed values** | Any srcip |
 +--------------------+-----------+
 
-``dstip``
----------
+dstip
+^^^^^
 
 Any IP address or CIDR block to be compared to an IP decoded as dstip. Use "!" to negate it.
 
@@ -147,10 +147,10 @@ Any IP address or CIDR block to be compared to an IP decoded as dstip. Use "!" t
 +--------------------+-----------+
 
 
-``extra_data``
---------------
+extra_data
+^^^^^^^^^^
 
-Any string that is decoded into the ``extra_data`` field.
+Any string that is decoded into the extra_data field.
 
 +--------------------+-------------+
 | **Default Value**  | n/a         |
@@ -158,8 +158,8 @@ Any string that is decoded into the ``extra_data`` field.
 | **Allowed values** | Any string. |
 +--------------------+-------------+
 
-``user``
---------
+user
+^^^^^
 
 Any username (decoded as the username).
 
@@ -169,8 +169,8 @@ Any username (decoded as the username).
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
 
-``program_name``
-----------------
+program_name
+^^^^^^^^^^^^^^^
 
 Program name is decoded from syslog process name.
 
@@ -181,8 +181,8 @@ Program name is decoded from syslog process name.
 +--------------------+------------------------------------------------------------------+
 
 
-``hostname``
-------------
+hostname
+^^^^^^^^^^
 
 Any hostname (decoded as the syslog hostname) or log file.
 
@@ -192,8 +192,8 @@ Any hostname (decoded as the syslog hostname) or log file.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
 
-``time``
---------
+time
+^^^^^
 
 Time that the event was generated.
 
@@ -203,8 +203,8 @@ Time that the event was generated.
 | **Allowed values** | Any time range (hh:mm-hh:mm) |
 +--------------------+------------------------------+
 
-``weekday``
------------
+weekday
+^^^^^^^^
 
  Week day that the event was generated.
 
@@ -214,8 +214,8 @@ Time that the event was generated.
  | **Allowed values** | monday - sunday, weekdays, weekends |
  +--------------------+-------------------------------------+
 
-``id``
-------
+id
+^^^
 
 Any ID (decoded as the ID).
 
@@ -225,8 +225,8 @@ Any ID (decoded as the ID).
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
 
-``url``
--------
+url
+^^^
 
 Any URL (decoded as the URL).
 
@@ -237,8 +237,8 @@ Any URL (decoded as the URL).
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
 
-``if_sid``
-----------
+if_sid
+^^^^^^
 
 Matches if the ID has matched.
 
@@ -248,8 +248,8 @@ Matches if the ID has matched.
 | **Allowed values** | Any rule id |
 +--------------------+-------------+
 
-``if_group``
-------------
+if_group
+^^^^^^^^
 
 Matches if the group has matched before.
 
@@ -259,8 +259,8 @@ Matches if the group has matched before.
 | **Allowed values** | Any Group |
 +--------------------+-----------+
 
-``if_level``
-------------
+if_level
+^^^^^^^^
 
 Matches if the level has matched before.
 
@@ -270,8 +270,8 @@ Matches if the level has matched before.
 | **Allowed values** | Any level from 1 to 16 |
 +--------------------+------------------------+
 
-``if_matched_sid``
-------------------
+if_matched_sid
+^^^^^^^^^^^^^^^
 
 Matches if an alert of the defined ID has been triggered in a set number of seconds.
 
@@ -284,12 +284,12 @@ This option is used in conjunction with frequency and timeframe.
 +--------------------+-------------+
 
 .. note::
-    Rules at level 0 are discarded immediately and will not be used with the ``if_matched_rules``. The level must be at least ``1``, but the ``<no_log>`` option can be added to the rule to make sure it does not get logged.
+    Rules at level 0 are discarded immediately and will not be used with the if_matched_rules. The level must be at least 1, but the <no_log> option can be added to the rule to make sure it does not get logged.
 
 
 
-``if_matched_group``
---------------------
+if_matched_group
+^^^^^^^^^^^^^^^^
 
 Matches if an alert of the defined group has been triggered in a set number of seconds.
 
@@ -302,8 +302,8 @@ This option is used in conjunction with frequency and timeframe.
 +--------------------+-----------+
 
 
-``same_id``
------------
+same_id
+^^^^^^^
 
 Specifies that the decoded id must be the same.
 This option is used in conjunction with frequency and timeframe.
@@ -314,8 +314,8 @@ This option is used in conjunction with frequency and timeframe.
 | **Allowed values** | n/a       |
 +--------------------+-----------+
 
-``same_source_ip``
-------------------
+same_source_ip
+^^^^^^^^^^^^^^
 
 Specifies that the decoded source ip must be the same.
 This option is used in conjunction with frequency and timeframe.
@@ -326,8 +326,8 @@ This option is used in conjunction with frequency and timeframe.
 | **Allowed values** | n/a       |
 +--------------------+-----------+
 
-``same_source_port``
---------------------
+same_source_port
+^^^^^^^^^^^^^^^^
 
 Specifies that the decoded source port must be the same.
 This option is used in conjunction with frequency and timeframe.
@@ -338,8 +338,8 @@ This option is used in conjunction with frequency and timeframe.
 | **Allowed values** | n/a       |
 +--------------------+-----------+
 
-``same_dst_port``
------------------
+same_dst_port
+^^^^^^^^^^^^^
 
 Specifies that the decoded destination port must be the same.
 This option is used in conjunction with frequency and timeframe.
@@ -350,8 +350,8 @@ This option is used in conjunction with frequency and timeframe.
 | **Allowed values** | n/a       |
 +--------------------+-----------+
 
-``same_location``
------------------
+same_location
+^^^^^^^^^^^^^
 
 Specifies that the location must be the same.
 This option is used in conjunction with frequency and timeframe.
@@ -362,8 +362,8 @@ This option is used in conjunction with frequency and timeframe.
 | **Allowed values** | n/a       |
 +--------------------+-----------+
 
-``same_user``
--------------
+same_user
+^^^^^^^^^
 
 Specifies that the decoded user must be the same.
 This option is used in conjunction with frequency and timeframe.
@@ -374,8 +374,8 @@ This option is used in conjunction with frequency and timeframe.
 | **Allowed values** | n/a       |
 +--------------------+-----------+
 
-``description``
----------------
+description
+^^^^^^^^^^^^
 
 Rule description.
 
@@ -385,11 +385,10 @@ Rule description.
 | **Allowed values** | Any string |
 +--------------------+------------+
 
-``list``
---------
+list
+^^^^
 
 Preform a CDB lookup using an ossec list.  This is a fast on disk database which will always find keys within two seeks of the file.
-
 
 +--------------------+-------------------------------------------------------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                                                               |
@@ -417,8 +416,8 @@ Preform a CDB lookup using an ossec list.  This is a fast on disk database which
 | **check_value** | regex for matching on the value pulled out of the cdb when using types: address_match_key_value, match_key_value  |
 +-----------------+-------------------------------------------------------------------------------------------------------------------+
 
-``info``
---------
+info
+^^^^
 
 Extra information may be added through the following attributes:
 
@@ -442,8 +441,8 @@ Extra information may be added through the following attributes:
 
 .. _rules_options:
 
-``options``
------------
+options
+^^^^^^^^
 
 Additional rule options
 
@@ -459,8 +458,8 @@ Additional rule options
 
 .. _rules_check_diff:
 
-``check_diff``
---------------
+check_diff
+^^^^^^^^^^^
 
 Used to determine when the output of a command changes.
 
@@ -470,12 +469,12 @@ Used to determine when the output of a command changes.
 | **Allowed values** | n/a       |
 +--------------------+-----------+
 
-``group``
----------
+group
+^^^^^^
 
 Add additional groups to the alert. Groups are optional tags added to alerts.
 
-They can be used by other rules by using ``if_group`` or ``if_matched_group``, or by alert parsing tools to categorize alerts.
+They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
 +--------------------+-----------+
 | **Default Value**  | n/a       |
 +--------------------+-----------+
