@@ -63,7 +63,7 @@ Proceed to download the API and copy API folder to OSSEC folder: ::
  $ cd ~
  $ wget https://github.com/wazuh/wazuh-api/archive/v1.2.1.tar.gz -O wazuh-API-1.2.1.tar.gz
  $ tar -xvf wazuh-API-*.tar.gz
- $ sudo mkdir -p /var/ossec/api && sudo cp -r wazuh-API-*/* /var/ossec/api
+ $ sudo mkdir -p /var/ossec/api && sudo cp -r wazuh-api-*/* /var/ossec/api
 
 Once you have installed NodeJS, NPM and the API, you must install the NodeJS modules: ::
 
