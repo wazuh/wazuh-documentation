@@ -1,9 +1,9 @@
-Installing Wazuh agent on MacOS
-===============================
+Installing Wazuh agent on Mac OS X
+==================================
 
 This agent has been tested on Darwin 10.12 (it should also be compatible with other versions). To install the agent this command needs to be run:
 
-#. Download MacOS package on :doc:`package index<../packages-list/index>`
+#. Download Mac OS package on :doc:`package index<../packages-list/index>`
 
 #. Installation
 
@@ -11,7 +11,7 @@ This agent has been tested on Darwin 10.12 (it should also be compatible with ot
 
       ::
 
-        installer -pkg ossec-hids-agent.pkg -target /
+        installer -pkg wazuh-agent-2.0-2.pkg -target /
 
     - via GUI
 
