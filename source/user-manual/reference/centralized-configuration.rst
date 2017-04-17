@@ -32,64 +32,29 @@ It should be readable by the ossec user.
 Options
 -------
 
-- `name`_
-- `os`_
-- `profile`_
++-------------+-------------------------------------------------------------------------------------------------------------------+
+| **name**    | Allows assignment of the block to one particular agent.                                                           |
++             +-------------------------------------------------------+-----------------------------------------------------------+
+|             | Allowed values                                        | Any agent name                                            |
++-------------+-------------------------------------------------------+-----------------------------------------------------------+
+| **os**      | Allows assignment of the block to an operating system.                                                            |
++             +-------------------------------------------------------+-----------------------------------------------------------+
+|             | Allowed values                                        | Any OS family                                             |
++-------------+-------------------------------------------------------+-----------------------------------------------------------+
+| **profile** | Allows assignment of a profile name to a block.Any agent configured to use the defined profile may use the block. |
++             +-------------------------------------------------------+-----------------------------------------------------------+
+|             | Allowed values                                        | Any defined profile                                       |
++-------------+-------------------------------------------------------+-----------------------------------------------------------+
 
-If no option is specified, this configuration section will be pushed to all agents.
-
-name
-^^^^^^^^^^^^^^^^^^^^^^
-
-Allows assignment of the block to one particular agent.
-
-+--------------------+---------------------+
-| **Default Value**  | n/a                 |
-+--------------------+---------------------+
-| **Allowed values** | Any agent name      |
-+--------------------+---------------------+
-
-Example
+Examples
 
 	.. code-block:: xml
 
 		<agent_config name=”agent01”>
-
-os
-^^^^^^^^^^^^^^^^^^^^^^
-
-Allows assignment of the block to an operating system.
-
-+--------------------+---------------------+
-| **Default Value**  | n/a                 |
-+--------------------+---------------------+
-| **Allowed values** | Any OS family       |
-+--------------------+---------------------+
-
-Example
-
-	.. code-block:: xml
-
+		...
 		<agent_config os="Linux">
-
-
-profile
-^^^^^^^^^^^^^^^^^^^^^^
-
-Allows assignment of a profile name to a block.  Any agent configured to use the defined profile may use the block.
-
-+--------------------+---------------------+
-| **Default Value**  | n/a                 |
-+--------------------+---------------------+
-| **Allowed values** | Any defined profile |
-+--------------------+---------------------+
-
-Example
-
-	.. code-block:: xml
-
+		...
 		<agent_config profile="UnixHost">
-
 
 Centralized configuration process
 -----------------------------------
@@ -98,9 +63,9 @@ Here we are going to explain how a centralized configuration can be done.
 
 1. Configuration
 
-Edit the file */var/ossec/etc/shared/agent.conf*.
+Edit the file ``/var/ossec/etc/shared/agent.conf``.
 
-Several configurations may be created according to the *name*, *OS* or *profile* of an agent.
+Several configurations may be created according to the ``name``, ``OS`` or ``profile`` of an agent.
 
 .. code-block:: xml
 
@@ -129,11 +94,11 @@ Several configurations may be created according to the *name*, *OS* or *profile*
 
 3. Push of the configuration to the agents
 
-Each time agents check-in to the manager (10 minute default), they pull a fresh copy of *agent.conf* if a new version is available.  However, the new *agent.conf* is not used by the agent until the next time the agent is restarted in step 5. Restarting the manager will speed up how quickly it makes the new *agent.conf* available to the agents.
+Each time agents check-in to the manager (10 minute default), they pull a fresh copy of ``agent.conf`` if a new version is available.  However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted in step 5. Restarting the manager will speed up how quickly it makes the new ``agent.conf`` available to the agents.
 
 4. Check if the agent received the configuration
 
-Once an agent received the configuration, the "Client version" field will have the md5sum of the *agent.conf* file.
+Once an agent received the configuration, the "Client version" field will have the md5sum of the ``agent.conf`` file.
 
 .. code-block:: console
 
@@ -155,7 +120,7 @@ Once an agent received the configuration, the "Client version" field will have t
        Syscheck last started  at: Wed Feb 15 13:24:32 2017
        Rootcheck last started at: Wed Feb 15 13:37:11 2017
 
-Also, the API returns the md5sum of agent.conf in the field *sharedSum*:
+Also, the API returns the md5sum of agent.conf in the field ``sharedSum``:
 
 .. code-block:: console
 
