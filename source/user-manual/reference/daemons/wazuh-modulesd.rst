@@ -17,35 +17,13 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
   The RESTful API controls the Wazuh manager using REST requests. This allows the Wazuh manager to be interacted with from a web browser, command line tool like cURL, or any script or program that can make web requests.  This API may be used to easily perform everyday actions like adding an agent, restarting the manager/agent(s), or looking up syscheck details.
 
-+---------+--------------------------+
-| Options | Descriptions             |
-+=========+==========================+
-| `-d`_   | Increase debug mode      |
-+---------+--------------------------+
-| `-f`_   | Run in foreground        |
-+---------+--------------------------+
-| `-h`_   | Display the help message |
-+---------+--------------------------+
-| `-t`_   | Test configuration       |
-+---------+--------------------------+
 
-``-d``
-------
-
-Increase debug mode.
-
-``-f``
-------
-
-Run in the foreground.
-
-``-h``
-------
-
-Display the help message.
-
-
-``-t``
-------
-
-Test configuration.
+  +---------+---------------------------+
+  | **-d**  | Increase debug mode.      |
+  +---------+---------------------------+
+  | **-f**  | Run in the foreground.    |
+  +---------+---------------------------+
+  | **-h**  | Display the help message. |
+  +---------+---------------------------+
+  | **-t**  | Test configuration.       |
+  +---------+---------------------------+
