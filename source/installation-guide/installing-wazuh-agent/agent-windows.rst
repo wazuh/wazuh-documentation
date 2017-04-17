@@ -5,7 +5,7 @@ Installing Wazuh agent on Windows
 
 1. Download the installer from the following location:
 
-  https://packages.wazuh.com/windows/wazuh-win32-agent.exe
+  https://packages.wazuh.com/windows/wazuh-agent-2.0.exe
 
 2. Run the downloaded installer, going through the setup wizard. Usually you will just want to take all the defaults.
 

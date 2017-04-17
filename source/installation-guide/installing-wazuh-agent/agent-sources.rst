@@ -79,7 +79,7 @@ Run the make command: ::
 You should expect the following output near the end of the compile process: ::
 
    ...
-   Output: "wazuh-win32-agent.exe"
+   Output: "wazuh-agent-2.0.exe"
    Install: 7 pages (448 bytes), 3 sections (3144 bytes), 774 instructions (21672 bytes), 322 strings (32417 bytes), 1 language table (346 bytes).
    Uninstall: 5 pages (320 bytes),
    1 section (1048 bytes), 351 instructions (9828 bytes), 186 strings (3380 bytes), 1 language table (290 bytes).
@@ -98,7 +98,7 @@ You should expect the following output near the end of the compile process: ::
    Done building winagent
 
 
-Now you should have a Wazuh agent installer for Windows here: ``./win32/wazuh-win32-agent.exe``, :ref:`ready to be used <wazuh_agent_windows>`.
+Now you should have a Wazuh agent installer for Windows here: ``./win32/wazuh-agent-2.0.exe``, :ref:`ready to be used <wazuh_agent_windows>`.
 
 Next steps
 ----------
