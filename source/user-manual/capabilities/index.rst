@@ -9,7 +9,7 @@ Capabilities
     .. toctree::
         :maxdepth: 1
 
-        log-analysis/index
+        log-data-collection/index
         file-integrity/index
         anomalies-detection/index
         policy-monitoring/index
