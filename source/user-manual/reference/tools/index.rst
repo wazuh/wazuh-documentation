@@ -43,9 +43,9 @@ Tools
 | :doc:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh agent.conf configuration                                | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 
-.. topic:: Contents
 
   .. toctree::
+    :hidden:
     :maxdepth: 1
 
     agent-auth

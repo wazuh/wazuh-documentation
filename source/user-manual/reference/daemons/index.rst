@@ -43,22 +43,22 @@ Daemons
 | :doc:`wazuh-modulesd <wazuh-modulesd>`            | Wazuh module manager                                            | manager, agent              |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 
-.. topic:: Contents
 
-    .. toctree::
-        :maxdepth: 1
+.. toctree::
+    :hidden:
+    :maxdepth: 1
 
-        ossec-agentd
-        ossec-agentlessd
-        ossec-analysisd
-        ossec-authd
-        ossec-csyslogd
-        ossec-dbd
-        ossec-execd
-        ossec-logcollector
-        ossec-maild
-        ossec-monitord
-        ossec-remoted
-        ossec-reportd
-        ossec-syscheckd
-        wazuh-modulesd
+    ossec-agentd
+    ossec-agentlessd
+    ossec-analysisd
+    ossec-authd
+    ossec-csyslogd
+    ossec-dbd
+    ossec-execd
+    ossec-logcollector
+    ossec-maild
+    ossec-monitord
+    ossec-remoted
+    ossec-reportd
+    ossec-syscheckd
+    wazuh-modulesd

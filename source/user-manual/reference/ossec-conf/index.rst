@@ -61,27 +61,27 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag.
 
-.. topic:: Configuration sections
 
-    .. toctree::
-       :maxdepth: 1
+.. toctree::
+   :hidden:
+   :maxdepth: 1
 
 
-       active-response
-       agentless
-       alerts
-       client
-       commands
-       database-output
-       email_alerts
-       global
-       integration
-       localfile
-       remote
-       reports
-       rootcheck
-       rules
-       syscheck
-       syslog-output
-       wodle-openscap
-       verifying-configuration
+   active-response
+   agentless
+   alerts
+   client
+   commands
+   database-output
+   email_alerts
+   global
+   integration
+   localfile
+   remote
+   reports
+   rootcheck
+   rules
+   syscheck
+   syslog-output
+   wodle-openscap
+   verifying-configuration
