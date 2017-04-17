@@ -1,6 +1,6 @@
 .. _system_call_monitoring:
 
-System call monitoring
+Monitoring system calls
 ==================================
 
 .. topic:: Introduction

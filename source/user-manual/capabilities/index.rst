@@ -13,7 +13,7 @@ Capabilities
         file-integrity/index
         anomalies-detection/index
         policy-monitoring/index
-        command-monitoring/index
-        automatic-remediation/index
         system-calls-monitoring/index
+        command-monitoring/index
+        active-response/index
         agentless-monitoring/index

@@ -1,6 +1,6 @@
 .. _manual_policy_monitoring:
 
-Policy and compliance monitoring
+Monitoring security policies
 =================================
 
 Policy monitoring is the process of verifying that all systems conform to a set of predefined rules regarding configuration settings and approved application usage.
