@@ -18,7 +18,7 @@ Command monitoring is configured in the :ref:`localfile section<reference_ossec_
 How it works
 ------------
 
-.. thumbnail:: ../../images/manual/command-monitoring/command-monitoring.png
+.. thumbnail:: ../../../images/manual/command-monitoring/command-monitoring.png
   :title: Command monitoring
   :align: center
   :width: 100%

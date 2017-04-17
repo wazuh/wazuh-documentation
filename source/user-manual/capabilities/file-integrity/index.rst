@@ -7,7 +7,7 @@ File integrity monitoring is the capability that allows us to know if any file h
 
 Syscheck is configured in :ref:`ossec.conf <reference_ossec_conf>`. If you want more information about detailed configuration options, go to :ref:`Syscheck <reference_ossec_syscheck>`. Usually you use the following sections: :ref:`frequency <reference_ossec_syscheck_frequency>`, :ref:`directories <reference_ossec_syscheck_directories>`, :ref:`ignore <reference_ossec_syscheck_ignore>`, :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>`
 
-.. thumbnail:: ../../images/manual/fim/fim-flow.png
+.. thumbnail:: ../../../images/manual/fim/fim-flow.png
   :title: File integrity monitoring
   :align: center
   :width: 100%

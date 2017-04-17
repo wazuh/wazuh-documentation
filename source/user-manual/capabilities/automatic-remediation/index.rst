@@ -21,7 +21,7 @@ Active response is configured in :ref:`ossec.conf <reference_ossec_conf>`, withi
 How it works
 ------------
 
-.. thumbnail:: ../../images/manual/automatic-remediation/automatic-remediation.png
+.. thumbnail:: ../../../images/manual/automatic-remediation/automatic-remediation.png
   :title: Command monitoring
   :align: center
   :width: 100%

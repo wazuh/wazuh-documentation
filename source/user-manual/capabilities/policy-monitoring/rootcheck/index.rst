@@ -21,7 +21,7 @@ How it works
 
 *Rootcheck* allows to define policies in order to check if the agents meet the requirement specified.
 
-.. thumbnail:: ../../../images/manual/policy-compliance/rootcheck-compliance.png
+.. thumbnail:: ../../../../images/manual/policy-compliance/rootcheck-compliance.png
   :title: Rootcheck policies
   :align: center
   :width: 100%

@@ -22,7 +22,7 @@ How it works
 
 This section describes the checks performed by Wazuh to find the anomalies caused by an intruder or malware.
 
-.. thumbnail:: ../../images/manual/intrusion-anomaly/rootcheck-flow.png
+.. thumbnail:: ../../../images/manual/intrusion-anomaly/rootcheck-flow.png
   :title: Intrusion and anomaly detection
   :align: center
   :width: 100%

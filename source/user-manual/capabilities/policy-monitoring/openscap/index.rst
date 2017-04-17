@@ -89,7 +89,7 @@ Each agent must have its policies in ``/var/ossec/wodles/oscap/policies``.
 Wodle flow
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. thumbnail:: ../../../images/manual/policy-compliance/openscap-flow.png
+.. thumbnail:: ../../../../images/manual/policy-compliance/openscap-flow.png
   :title: OpenSCAP
   :align: center
   :width: 100%

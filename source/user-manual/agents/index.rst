@@ -1,6 +1,6 @@
 .. _managing-agents:
 
-Managing agents
+Agents
 =================
 
 This section describes how to manage Wazuh agents.

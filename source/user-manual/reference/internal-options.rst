@@ -1,7 +1,7 @@
 .. _reference_internal_options:
 
-Internal options
-===================
+Internal configuration
+=======================
 
 The main configuration is located in the *ossec.conf* file, however some internal configuration features are located in the ``/var/ossec/etc/internal_options.conf`` file.
 

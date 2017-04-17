@@ -1,6 +1,6 @@
-.. _forwarding_alerts:
+.. _output_options:
 
-Forwarding alerts
+Output options
 =================
 
 By default, the alerts are stored in the manager and forwarded to Elasticsearch, however, alerts may also be forwarded to syslog, email, slack, etc.
