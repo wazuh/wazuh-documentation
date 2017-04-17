@@ -4,7 +4,7 @@ Examples
 ========
 
 #. `Monitoring accesses to a directory`_
-#. `Monitoring all root actions`_
+#. `Monitoring user actions`_
 #. `Privilege escalation`_
 
 Monitoring accesses to a directory
@@ -297,7 +297,7 @@ Delete file
 
 
 
-Monitoring all root actions
+Monitoring user actions
 ------------------------------------------------
 
 Here we choose to audit all commands run by a user who has admin privileges. The audit configuration for this is quite simple: ::
