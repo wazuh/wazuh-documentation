@@ -3,16 +3,17 @@
 Examples
 ==========================
 
-1. `Basic example`_
-2. `Real-time monitoring`_
-3. `Reporting changes`_
-4. `Ignoring files`_
-5. `Ignoring files via rules`_
-6. `Changing severity`_
+#. `Basic example`_
+#. `Configuring scheduled scans`_
+#. `Configuring real-time monitoring`_
+#. `Reporting changes`_
+#. `Ignoring files`_
+#. `Ignoring files via rules`_
+#. `Changing severity`_
 
 Basic example
 -------------------------------------------
-To configure syscheck, a list of files and directories must be provided. The check_all option checks md5, sha1, owner, and permissions of the file.
+To configure syscheck, a list of files and directories must be provided. The ``check_all`` option checks md5, sha1, owner, and permissions of the file.
 
 ::
 
@@ -21,7 +22,20 @@ To configure syscheck, a list of files and directories must be provided. The che
         <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
     </syscheck>
 
-Real-time monitoring
+Configuring scheduled scans
+--------------------------------------------
+
+Syscheck has an option to configure the frequency to scan the system. This is the ``frequency`` option. In this example we configure syscheck to run every 10 hours.
+
+::
+
+  <syscheck>
+    <frequency>36000</frequency>
+    <directories>/etc,/usr/bin,/usr/sbin</directories>
+    <directories>/bin,/sbin</directories>
+  </syscheck>
+
+Configuring real-time monitoring
 -------------------------------------------
 Real-time monitoring is configured with the ``realtime`` option. This option only works with directories, not for individual files. Real-time change detection is paused during periodic syscheck scans, and reactivates as soon as scans complete.
 
