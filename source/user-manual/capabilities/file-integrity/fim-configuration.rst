@@ -3,16 +3,18 @@
 Examples
 ==========================
 
-#. `Basic example`_
+#. `Basic usage`_
 #. `Configuring scheduled scans`_
 #. `Configuring real-time monitoring`_
-#. `Reporting changes`_
-#. `Ignoring files`_
+#. `Configure to report changes`_
+#. `Configure to ignore files`_
 #. `Ignoring files via rules`_
 #. `Changing severity`_
 
-Basic example
+Basic usage
 -------------------------------------------
+Syscheck is configured in :ref:`ossec.conf <reference_ossec_conf>`. If you want more information about detailed configuration options, go to :ref:`Syscheck <reference_ossec_syscheck>`. Usually you use the following sections: :ref:`frequency <reference_ossec_syscheck_frequency>`, :ref:`directories <reference_ossec_syscheck_directories>`, :ref:`ignore <reference_ossec_syscheck_ignore>`, :ref:`alert_new_files <reference_ossec_syscheck_alert_new_files>`
+
 To configure syscheck, a list of files and directories must be provided. The ``check_all`` option checks md5, sha1, owner, and permissions of the file.
 
 ::
@@ -47,7 +49,7 @@ Real-time monitoring is configured with the ``realtime`` option. This option onl
 
 .. _how_to_fim_report_changes:
 
-Reporting changes
+Configure to report changes
 -------------------------------------------
 
 Using ``report_changes`` option, we can see what specifically changed in text files. Be careful about which folders you set up to ``report_changes``, because in order to report changes, Wazuh must copy every single file you want to monitor to a private location.
@@ -60,7 +62,7 @@ Using ``report_changes`` option, we can see what specifically changed in text fi
 
 .. _how_to_fim_ignore:
 
-Ignoring files
+Configure to ignore files
 -------------------------------------------
 Files and directories can be ignored using the ignore option (or registry_ignore for Windows registry entries):
 In order to avoid false positives, syscheck can be configured to ignore certains files that we don't want to monitor with ``ignore`` tag (or registry_ignore for Windows registry entries).
