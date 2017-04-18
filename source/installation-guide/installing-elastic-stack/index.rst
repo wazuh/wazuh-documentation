@@ -7,10 +7,19 @@ This guide describes the installation of Logstash, Elasticsearch, and Kibana on 
 
 In addition to Elastic Stack components, you will also find here the instructions to install and configure the Wazuh App (deployed as a Kibana plugin).
 
-.. topic:: Contents
+Depending on your operating system you can choose to install Elastic Stack from RPM or DEB packages. Consult the table below and choose how to proceed:
 
-    .. toctree::
-       :maxdepth: 2
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| Type                                                                   | Description                                                 |
++========================================================================+=============================================================+
+| :ref:`RPM packages <elastic_server_rpm>`                               | Install Elastic Stack on CentOS/RHEL/Fedora.                |
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| :ref:`DEB packages <elastic_server_deb>`                               | Install Elastic Stack on Debian/Ubuntu.                     |
++------------------------------------------------------------------------+-------------------------------------------------------------+
 
-       elastic_server_rpm
-       elastic_server_deb
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+
+   elastic_server_rpm
+   elastic_server_deb
