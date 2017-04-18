@@ -1,6 +1,6 @@
 .. _agentless-examples:
 
-Examples
+Configuration
 ======================
 
 #. `Integrity check BSD`_
@@ -8,6 +8,7 @@ Examples
 #. `Generic Diff`_
 #. `Pix config`_
 
+Agentless monitoring is configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the section :ref:`Agentless <reference_ossec_agentless>`.
 
 Integrity check BSD
 -------------------

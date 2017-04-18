@@ -1,6 +1,6 @@
 .. _agentless-faq:
 
-FAQ
+Faq
 ======================
 
 #. `Is it possible to monitor the output of a command on a remote device?`_
