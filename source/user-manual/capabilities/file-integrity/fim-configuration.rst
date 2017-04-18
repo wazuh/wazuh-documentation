@@ -1,6 +1,6 @@
 .. _fim-examples:
 
-Examples
+Configuration
 ==========================
 
 #. `Basic usage`_
