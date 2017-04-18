@@ -1,9 +1,9 @@
 .. _oscap-examples:
 
-Examples
-========
+Configuration
+=============
 
-#. `Basic configuration`_
+#. `Basic usage`_
 #. `Evaluate PCI-DSS compliance on RHEL7`_
 #. `Auditing Security Vulnerabilities of Red Hat Products`_
 #. `Overwriting the timeout`_
@@ -12,8 +12,10 @@ Examples
 #. `Using IDs`_
 
 
-Basic configuration
+Basic usage
 ------------------------------------------------------------------
+
+To configure the options for OpenSCAP go to :ref:`ossec.conf <reference_ossec_conf>`, or for more details about specific options, see the :ref:`OpenSCAP section <wodle_openscap>`.
 
 In this example, we configure Wazuh to run OpenSCAP each day, with a timeout of 30 minutes. ::
 
