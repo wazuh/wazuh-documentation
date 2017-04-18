@@ -8,7 +8,7 @@ The below figure illustrates the event flow:
     :align: center
     :width: 100%
 
-1. Log collection
+Log collection
 -----------------
 
 The log source can be:
@@ -82,7 +82,7 @@ Log Example::
   1265939281.764 1 172.16.167.228 TCP_DENIED /403 734 POST http://lbcore1.metacafe.com/test/SystemInfoManager.php - NONE/- text/html
   [Sun Mar 06 08:52:16 2016] [error] [client 187.172.181.57] Invalid URI in request GET: index.php HTTP/1.0
 
-2. Analysis
+Analysis
 -----------
 
 Pre-decoding
@@ -128,7 +128,7 @@ For the previous example, rule 5715 is matched::
 .. note::
   More information about :ref:`Wazuh Ruleset <ruleset>`
 
-3. Alert
+Alert
 ---------
 
 Once the rule is matched, the manager will create an alert::
