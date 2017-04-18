@@ -1,13 +1,19 @@
 .. _command-examples:
 
-Examples
+Configuration
 =================================
 
+#. `Basic usage`_
 #. `Monitor running Windows processes`_
 #. `Disk space utilization`_
 #. `Check if the output changed`_
 #. `Load average`_
 #. `Detect USB Storage`_
+
+Basic usage
+-----------
+
+Command monitoring is configured in the :ref:`localfile section<reference_ossec_localfile>` of :ref:`ossec.conf <reference_ossec_conf>`. It can be also be centrally configured in :ref:`agent.conf<reference_agent_conf>`.
 
 Monitor running Windows processes
 ---------------------------------
