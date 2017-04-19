@@ -1,18 +1,18 @@
 .. _fim-faq:
 
-FAQ
+Faq
 ===============================
 
-1. `How often does syscheck run?`_
-2. `What is the CPU usage like on the agents?`_
-3. `Where are all the checksums stored?`_
-4. `Can I ignore files in a directory?`_
-5. `Can Wazuh report changes in the content of a text file?`_
-6. `How does Wazuh verify the integrity of files?`_
-7. `Does Wazuh monitor any directories by default?`_
-8. `Can I force an inmediate syscheck scan?`_
-9. `Does Syscheck start when Wazuh start?`_
-10. `Does Wazuh alert when a new file is created?`_
+#. `How often does syscheck run?`_
+#. `What is the CPU usage like on the agents?`_
+#. `Where are all the checksums stored?`_
+#. `Can I ignore files in a directory?`_
+#. `Can Wazuh report changes in the content of a text file?`_
+#. `How does Wazuh verify the integrity of files?`_
+#. `Does Wazuh monitor any directories by default?`_
+#. `Can I force an inmediate syscheck scan?`_
+#. `Does Syscheck start when Wazuh start?`_
+#. `Does Wazuh alert when a new file is created?`_
 
 How often does syscheck run?
 --------------------------------

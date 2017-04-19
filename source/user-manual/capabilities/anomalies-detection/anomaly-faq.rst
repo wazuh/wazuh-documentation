@@ -1,12 +1,12 @@
 .. _intrusion-faq:
 
-FAQ
+Faq
 ===================================
 
-1. `How often does rootcheck run?`_
-2. `How does rootcheck know the rootkit files to look for?`_
-3. `Does rootcheck inspect running processes?`_
-4. `What about hidden files?`_
+#. `How often does rootcheck run?`_
+#. `How does rootcheck know the rootkit files to look for?`_
+#. `Does rootcheck inspect running processes?`_
+#. `What about hidden files?`_
 
 
 How often does rootcheck run?

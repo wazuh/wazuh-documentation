@@ -1,18 +1,17 @@
 .. _log-analysis-FAQ:
 
-FAQ
+Faq
 ===============================
 
-1. `Are the logs analyzed on each agent?`_
-2. `How often does the manager monitor the logs?`_
-3. `How long are the logs stored on the server?`_
-4. `How does this help me with regulatory compliance?`_
-5. `What is the CPU usage like on the agents?`_
-6. `From where can Wazuh get log messages?`_
-7. `Can I send firewall, vpn, authentication logs to Wazuh?`_
-8. `What information should Wazuh extract from my logs?`_
-9. `Can I ignore events that are not important?`_
-10. `Can I check if an application is running on an agent?`_
+#. `Are the logs analyzed on each agent?`_
+#. `How often does the manager monitor the logs?`_
+#. `How long are the logs stored on the server?`_
+#. `How does this help me with regulatory compliance?`_
+#. `What is the CPU usage like on the agents?`_
+#. `From where can Wazuh get log messages?`_
+#. `Can I send firewall, vpn, authentication logs to Wazuh?`_
+#. `What information should Wazuh extract from my logs?`_
+#. `Can I ignore events that are not important?`_
 
 Are the logs analyzed on each agent?
 ---------------------------------------------------------
@@ -58,7 +57,3 @@ Can I ignore events that are not important?
 -----------------------------------------------------
 
 You can configure the rules to ignore certain events. More info: :ref:`Custom rules <ruleset_custom>`
-
-Can I check if an application is running on an agent?
-----------------------------------------------------------
-Yes, it's possible to monitor running applications. :ref:`Example <log-analysis-examples>`

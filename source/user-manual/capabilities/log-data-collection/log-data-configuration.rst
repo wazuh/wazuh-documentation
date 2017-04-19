@@ -4,7 +4,7 @@ Configuration
 ==========================
 
 #. `Basic usage`_
-#. `Using regular expressions`_
+#. `Monitoring logs using regular expressions for file names`_
 #. `Monitoring date-based logs`_
 #. `Reading logs from Windows Event Log`_
 #. `Reading events from Windows Event Channel`_
@@ -22,9 +22,9 @@ This is a basic usage example. Provide the name of the file to be monitored and 
         <log_format>syslog</log_format>
     </localfile>
 
-Using regular expressions
----------------------------------------------------
-OSSEC supports posix regular expressions. For example, to analyze every file that ends with a .log inside the ``/var/log`` directory, use the following configuration::
+Monitoring logs using regular expressions for file names
+--------------------------------------------------------
+Wazuh supports posix regular expressions. For example, to analyze every file that ends with a .log inside the ``/var/log`` directory, use the following configuration::
 
     <localfile>
         <location>/var/log/*.log</location>
