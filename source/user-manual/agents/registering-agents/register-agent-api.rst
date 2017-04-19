@@ -1,6 +1,6 @@
 .. _register_agent_api:
 
-Register agents automatically with the API
+Using the RESTful API
 ===========================================
 
 Two requests are needed to register an agent using the API:

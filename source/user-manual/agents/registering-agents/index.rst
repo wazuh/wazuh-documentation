@@ -33,15 +33,15 @@ Some registration methods detect automatically the IP of the agent during the re
 
 Here are 3 ways to register an agent:
 
-+---------------+----------------------------------------------+------------------------------------------------------------------------+
-| Type          | Component                                    | Description                                                            |
-+===============+==============================================+========================================================================+
-| Manually      | :doc:`manage_agents <register-agent-manual>` | Register an agent manually using manage_agents binary.                 |
-+---------------+----------------------------------------------+------------------------------------------------------------------------+
-| Automatically | :doc:`ossec-authd <register-agent-authd>`    | Register an agent automatically using ossec-authd binary.              |
-+               +----------------------------------------------+------------------------------------------------------------------------+
-|               | :doc:`API <register-agent-api>`              | Register an agent by scripting (bash, python, powershell) and the API. |
-+---------------+----------------------------------------------+------------------------------------------------------------------------+
++---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
+| Type          | Method                                                          | Description                                                            |
++===============+=================================================================+========================================================================+
+| Manually      | :doc:`Using the command line <register-agent-manual>`           | Register an agent manually using manage_agents binary.                 |
++---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
+| Automatically | :doc:`Using the registration service <register-agent-authd>`    | Register an agent automatically using ossec-authd binary.              |
++               +-----------------------------------------------------------------+------------------------------------------------------------------------+
+|               | :doc:`Using the RESTful API <register-agent-api>`               | Register an agent by scripting (bash, python, powershell) and the API. |
++---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
 
 .. toctree::
     :hidden:

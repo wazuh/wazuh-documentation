@@ -1,9 +1,9 @@
 .. _register_agent_authd:
 
-Registering agents automatically with authd
+Using the registration service
 =============================================
 
-Choose the method that best meets your needs:
+It's possible to register agents automatically with authd. Choose the method that best meets your needs:
 
 +----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 | Method                                             | Description                                                                                                                 |

@@ -1,6 +1,6 @@
 .. _register_agent_manual:
 
-Registering agents manually with manage_agents
+Using the command line 
 =================================================
 
 1. On the **manager**, run `manage_agents`::
@@ -82,7 +82,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 7. Press `Q` and `Enter` to exit from `manage_agents`.
 
-8. Restart the agent:: 
+8. Restart the agent::
 
 	/var/ossec/bin/ossec-control restart
 

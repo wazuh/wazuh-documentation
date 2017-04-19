@@ -5,11 +5,11 @@ Removing agents
 
 There are 2 ways to remove an agent from the manager:
 
-#. `Removing agents using API`_
-#. `Removing agents with manage_agents binary`_
+#. `Using the RESTful API`_
+#. `Using the command line`_
 
 
-Removing agents using API
+Using the RESTful API
 ----------------------------
 
 The request :ref:`DELETE /agents/:agent_id <request_list>` removes the specified agent.
@@ -20,7 +20,7 @@ The request :ref:`DELETE /agents/:agent_id <request_list>` removes the specified
 
     {"error":0,"data":"Agent removed"}
 
-Removing agents with manage_agents binary
+Using the command line
 ---------------------------------------------
 
 The binary */var/ossec/bin/manage_agents* allow us to remove agents.
