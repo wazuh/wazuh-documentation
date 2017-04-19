@@ -31,10 +31,10 @@ Follow the appropriate section depending on the type of your OSSEC installation:
 .. warning::
     **In case that OSSEC was installed from sources**, the configuration file ``/var/ossec/etc/ossec.conf`` **will be overwritten**. The *old* configuration file from the current installation is saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. You should compare the new file with the old one. Also, a backup of your previous ruleset will be saved at ``/var/ossec/etc/backup_ruleset``. All the rules/decoders in other files than ``local_rules.xml`` or ``local_decoder.xml`` will be overwritten.
 
-.. topic:: Contents
 
-    .. toctree::
-       :maxdepth: 2
+.. toctree::
+   :hidden:
+   :maxdepth: 2
 
-       ossec-packages-manager
-       ossec-packages-agent
+   ossec-packages-manager
+   ossec-packages-agent
