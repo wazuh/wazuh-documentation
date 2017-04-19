@@ -1,7 +1,7 @@
 .. _manual_syslog_output:
 
-Syslog output
-=============
+Configuring syslog output
+=========================
 
 Wazuh may be configured to send alerts to syslog as follows:
 

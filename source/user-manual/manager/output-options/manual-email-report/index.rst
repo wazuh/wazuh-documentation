@@ -1,11 +1,11 @@
 .. _manual_email_report:
 
-Email alerts
-============
+Configuring email alerts
+===============================
 
 Wazuh can be configured to send the alerts to an email. You can configure the system to send emails once a certain rules are triggered or configure it to send a daily report.
 
-Mail Example:
+Mail example:
 
 ::
 
@@ -28,7 +28,7 @@ Mail Example:
 
      --END OF NOTIFICATION
 
-Daily Report example:
+Generating automatic reports
 ::
 
  From: Wazuh                      12:01 AM (10 hours ago)
@@ -247,8 +247,8 @@ So for example this rule:
 This will send an email everytime this rule is triggered. I doesn't matter the level minimum level configured on the ``<alerts>`` section in ``ossec.conf``
 
 
-Daily report
-------------
+Generating automatic reports
+-----------------------------
 Daily reports are summaries of the alerts for the day. You can configure your own report. Configuration of report is done in the ``ossec.conf`` file using the ``report`` option. More information: :ref:`Report <reference_ossec_reports>`
 ::
 
