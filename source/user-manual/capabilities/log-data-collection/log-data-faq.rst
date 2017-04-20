@@ -1,7 +1,7 @@
 .. _log-analysis-FAQ:
 
-Faq
-===============================
+FAQ
+===
 
 #. `Are the logs analyzed on each agent?`_
 #. `How often does the manager monitor the logs?`_

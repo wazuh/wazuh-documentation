@@ -1,7 +1,7 @@
 .. _intrusion-faq:
 
-Faq
-===================================
+FAQ
+===
 
 #. `How often does rootcheck run?`_
 #. `How does rootcheck know the rootkit files to look for?`_

@@ -1,6 +1,6 @@
 .. _remediation-faq:
 
-Faq
+FAQ
 ===
 
 #. `Can I use a custom script for active response?`_

@@ -1,7 +1,7 @@
 .. _fim-faq:
 
-Faq
-===============================
+FAQ
+===
 
 #. `How often does syscheck run?`_
 #. `What is the CPU usage like on the agents?`_

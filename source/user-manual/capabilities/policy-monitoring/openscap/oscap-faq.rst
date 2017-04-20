@@ -2,7 +2,7 @@
 
 
 FAQ
-================================================
+===
 
 #. `Is there a noticeable performance impact when the OpenSCAP wodle is enabled on an agent?`_
 #. `Are evaluations executed in parallel?`_
@@ -19,7 +19,7 @@ The OpenSCAP wodle is designed to be very efficient, but the performance will de
 Are evaluations executed in parallel?
 -------------------------------------
 
-No, each evaluation is executed sequentially.  Also, each profile of an evaluation is executed sequentially.  This makes scans take somewhat longer but also reduces the load on agents caused by those scans. 
+No, each evaluation is executed sequentially.  Also, each profile of an evaluation is executed sequentially.  This makes scans take somewhat longer but also reduces the load on agents caused by those scans.
 
 
 How does the interval work?

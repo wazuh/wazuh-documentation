@@ -1,6 +1,6 @@
 .. _command-faq:
 
-Faq
+FAQ
 ===
 
 #. `Can I monitor commands on Linux or Windows?`_
