@@ -78,7 +78,7 @@ Generating automatic reports
  /etc/shadow-                                                                  |1       |
 
 
-Configuring generic email options
+Generic email options
 ---------------------------------
 In order to configure Wazuh to send alerts through email, you need to configure the email settings inside the ``<global>`` section:
 
@@ -126,7 +126,7 @@ b) For SysV Init:
  Wazuh doesn't handle smtp authentication. If you want to use an email with it, you need to :ref:`configure a server relay<smtp_authentication>`.
 
 
-Configuring granular email options
+Granular email options
 ----------------------------------
 
 Wazuh also allows a very granular configuration options for your alerts through email. Here you will find some examples about the granular configuration. More info: :ref:`email_alerts section <reference_ossec_global>`
@@ -222,31 +222,6 @@ This configuration will send:
 - An email tto bob@test.com if the alerts came from any machine on the ``192.168.0.0/24`` network
 - An email tto david@test.com if the alerts have a level equals or higher than 12.
 
-Force forwarding an alert by email
-----------------------------------
-
-It's also possible to force the mail alert on the rule declaration. In order to do this, you need to use :ref:`option<rules_options>`
-
-The possible values to this option are:
-
-- alert_by_email: Always alert by email.
-- no_email_alert: Never alert by email.
-- no_log: Do not log this alert.
-
-So for example this rule:
-
-::
-
-   <rule id="502" level="3">
-     <if_sid>500</if_sid>
-     <options>alert_by_email</options>
-     <match>Ossec started</match>
-     <description>Ossec server started.</description>
-   </rule>
-
-This will send an email everytime this rule is triggered. I doesn't matter the level minimum level configured on the ``<alerts>`` section in ``ossec.conf``
-
-
 Generating automatic reports
 -----------------------------
 Daily reports are summaries of the alerts for the day. You can configure your own report. Configuration of report is done in the ``ossec.conf`` file using the ``report`` option. More information: :ref:`Report <reference_ossec_reports>`
@@ -277,9 +252,33 @@ For example:
 
 The above configuration will send a report with all rules that fired with a level higher than 10.
 
-.. topic:: Contents
+Force forwarding an alert by email
+----------------------------------
 
-    .. toctree::
-       :maxdepth: 1
+It's also possible to force the mail alert on the rule declaration. In order to do this, you need to use :ref:`option<rules_options>`
 
-       smtp_authentication
+The possible values to this option are:
+
+- alert_by_email: Always alert by email.
+- no_email_alert: Never alert by email.
+- no_log: Do not log this alert.
+
+So for example this rule:
+
+::
+
+   <rule id="502" level="3">
+     <if_sid>500</if_sid>
+     <options>alert_by_email</options>
+     <match>Ossec started</match>
+     <description>Ossec server started.</description>
+   </rule>
+
+This will send an email everytime this rule is triggered. I doesn't matter the level minimum level configured on the ``<alerts>`` section in ``ossec.conf``
+
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   smtp_authentication
