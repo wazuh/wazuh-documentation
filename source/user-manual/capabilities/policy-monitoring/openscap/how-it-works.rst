@@ -28,7 +28,7 @@ This wodle is executed on the agent, so each agent must meet the following requi
 
       b) For Debian-based distributions::
 
-          sudo apt-get install libopenscap8
+          sudo apt-get install libopenscap8 xsltproc
 
     Python 2.6+
     Python is a core part of this wodle. Currently all Linux distributions come with python, so it should not be an inconvenience.
