@@ -1,12 +1,12 @@
 .. _amazon_use-cases_vpc:
 
 VPC Use cases
---------------
+=============
 
 Using an Amazon VPC (Virtual Private Cloud), you can logically isolate your AWS assets from the rest of AWS.  You can even set up your own virtual networking in the cloud.  It is important to carefully monitor what happens with your VPC as it represent a critical part of your cloud infrastructure.
 
 Create VPC
-++++++++++
+-------------------------
 
 If a VPC is created, ``rule 81000`` will apply and an alert will be generated as shown below:
 

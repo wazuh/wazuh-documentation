@@ -11,9 +11,9 @@ The diagram below shows how a log message about an AWS event flows from AWS to a
     :align: center
     :width: 100%
 
-1. CloudTrail is a web service that records AWS API calls for your account and writes them to log files. When an AWS event occurs, CloudTrail generates the log message. Using CloudTrail we can get more visibility into AWS user activity, tracking changes made to AWS resources.
-2. Once an event takes place, CloudTrail writes it to a log file on Amazon S3, where log files can be stored durably and inexpensively.
-3. The script ``getawslog.py`` downloads CloudTrail log files from Amazon S3 to the Wazuh agent, uncompresses them, and appends the new data to a local text file which is monitored by the Wazuh agent and forwarded to the Wazuh manager just like any other log file.
+#. CloudTrail is a web service that records AWS API calls for your account and writes them to log files. When an AWS event occurs, CloudTrail generates the log message. Using CloudTrail we can get more visibility into AWS user activity, tracking changes made to AWS resources.
+#. Once an event takes place, CloudTrail writes it to a log file on Amazon S3, where log files can be stored durably and inexpensively.
+#. The script ``getawslog.py`` downloads CloudTrail log files from Amazon S3 to the Wazuh agent, uncompresses them, and appends the new data to a local text file which is monitored by the Wazuh agent and forwarded to the Wazuh manager just like any other log file.
 
 This diagram makes it easier to understand the integration process described in the upcoming pages.
 

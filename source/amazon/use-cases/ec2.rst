@@ -1,14 +1,14 @@
 .. _amazon_use-cases_ec2:
 
 EC2 use cases
---------------
+=============
 
 Amazon EC2 (Elastic Compute Cloud) provides scalable computing capacity in the cloud.  When using a service like this, it is highly desirable to monitor for attacks or other unauthorized actions being performed against your cloud assets. With CloudTrail and Wazuh's EC2 event analysis capabilities, this is very possible.
 
 Following are some use cases for Wazuh rules built for EC2.
 
 Run a new instance in EC2
-+++++++++++++++++++++++++
+-------------------------
 
 When a user runs a new instance in EC2, an AWS event is generated.  As previously illustrated, the log message flows to the Wazuh agent which passes it on to Wazuh manager. The latter analyzes the log event and finds that it matches rule 80301, which results in an alert being generated, as can be seen in Kibana.
 
@@ -53,7 +53,7 @@ When a user tries to run an instance **without relevant permissions**, then the 
 +----------------------------------------------------------------------+
 
 Start instances in EC2
-++++++++++++++++++++++
+-------------------------
 
 When an instance in EC2 is started, the log message will match ``rule 80305`` and an alert will be generated as shown below:
 
@@ -98,7 +98,7 @@ If a user tries to start instances **without relevant permissions**, ``rule 8030
 +------------------------------------------------------------------------+
 
 Stop instances in EC2
-+++++++++++++++++++++
+-------------------------
 
 When an instance in EC2 is stopped, ``rule 80308`` will apply and an alert will be generated as shown below:
 
@@ -145,7 +145,7 @@ If a user tries to stop instances **without relevant permissions**, ``rule 80306
 
 
 Create Security Groups in EC2
-+++++++++++++++++++++++++++++
+-----------------------------
 
 When a new security group is created, ``rule 80404`` will fire and an alert will be shown as follows:
 
@@ -169,7 +169,7 @@ When a new security group is created, ``rule 80404`` will fire and an alert will
 +------------------------------------------------------------------------+
 
 Allocate a new Elastic IP address
-+++++++++++++++++++++++++++++++++
+---------------------------------
 
 If a new Elastic IP is allocated, then ``rule 80411`` will apply:
 
@@ -193,7 +193,7 @@ If a new Elastic IP is allocated, then ``rule 80411`` will apply:
 +------------------------------------------------------------------------+
 
 Associate a new Elastic IP address
-++++++++++++++++++++++++++++++++++
+----------------------------------
 
 If an Elastic IP address is associated, then ``rule 80446`` will apply, generating the corresponding alert:
 
