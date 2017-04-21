@@ -106,7 +106,7 @@ Filebeat is the tool on the Wazuh server that will securely forward the alerts a
 .. warning::
     In a single-server configuration, you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
-The deb package is suitable for Debian, Ubuntu, and other Debian-based systems.
+The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 1. Install the GPG keys from Elastic, and the Elastic repository:
 

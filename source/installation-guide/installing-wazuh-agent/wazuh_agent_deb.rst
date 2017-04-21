@@ -42,4 +42,4 @@ On your terminal, install the Wazuh agent::
 
 	apt-get install wazuh-agent
 
-.. note:: At this point your agent is installed and you need register and configure it to talk to your manager. For more information about this process please visit our user manual.
+.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.

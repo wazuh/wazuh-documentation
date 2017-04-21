@@ -14,22 +14,21 @@ There are several options to install a Wazuh agent, depending on the operating s
 +-------------------------------------------------+--------------------------------------------------+
 | :doc:`DEB packages <wazuh_agent_deb>`           | Install Wazuh agents on Debian/Ubuntu.           |
 +-------------------------------------------------+--------------------------------------------------+
-| :doc:`Windows installer <agent-windows>`        | Install Wazuh agents on Windows.                 |
+| :doc:`Windows installer <wazuh_agent_windows>`  | Install Wazuh agents on Windows.                 |
 +-------------------------------------------------+--------------------------------------------------+
-| :doc:`Mac OS installer <agent-macos>`           | Install Wazuh agents on Mac OS                   |
+| :doc:`Mac OS installer <wazuh_agent_macos>`     | Install Wazuh agents on Mac OS                   |
 +-------------------------------------------------+--------------------------------------------------+
-| :doc:`Sources <agent-sources>`                  | Install Wazuh agents from source code.           |
+| :doc:`Sources <wazuh_agent_sources>`            | Install Wazuh agents from source code.           |
 +-------------------------------------------------+--------------------------------------------------+
 
 .. note:: Deploying agents to a large number of servers or endpoints can be easier using automation tools like Puppet, Chef, SCCM or Ansible. Consider to explore these options if that is your case.
 
-.. topic:: Contents
+.. toctree::
+    :hidden:
+    :maxdepth: 2
 
-    .. toctree::
-        :maxdepth: 2
-
-        wazuh_agent_rpm
-        wazuh_agent_deb
-        agent-windows
-        agent-macos
-        agent-sources
+    wazuh_agent_rpm
+    wazuh_agent_deb
+    wazuh_agent_windows
+    wazuh_agent_macos
+    wazuh_agent_sources

@@ -65,7 +65,7 @@ Installing Wazuh API
       curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/master/install_api.sh \
       && bash ./install_api.sh download
 
-3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions. It is possible to set a custom Python path for the API to use, in */var/ossec/api/configuration/config.js*:
+3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions. It is possible to set a custom Python path for the API to use, in ``/var/ossec/api/configuration/config.js``:
 
   .. code-block:: javascript
 
@@ -82,7 +82,7 @@ Installing Wazuh API
         }
     ];
 
-  For CentOS 6 and Red Hat 6, you can install the package *python27*.  It installs Python 2.7 at */opt/rh/python27* in addition to the older Python version included in the distro:
+  For CentOS 6 and Red Hat 6, you can install the package ``python27``.  It installs Python 2.7 at ``/opt/rh/python27`` in addition to the older Python version included in the distro:
 
   a) For CentOS 6::
 
