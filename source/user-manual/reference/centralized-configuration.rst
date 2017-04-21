@@ -10,7 +10,8 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 
 - :ref:`File Integrity monitoring <manual_file_integrity>` (**syscheck**)
 - :ref:`Rootkit detection <manual_anomaly_detection>` (**rootcheck**)
-- :ref:`Log analysis <manual_log_analysis>`
+- :ref:`Log data collection <manual_log_analysis>` (**localfile**)
+- :ref:`Security policy monitoring <manual_policy_monitoring>` (**rootcheck**, **wodle name="open-scap"**)
 
 Below, is the proper syntax of *agent.conf* and the process of pushing the configuration from the manager to the agent.
 
@@ -63,7 +64,11 @@ Here we are going to explain how a centralized configuration can be done.
 
 1. Configuration
 
-Edit the file ``/var/ossec/etc/shared/agent.conf``.
+Edit the file ``/var/ossec/etc/shared/agent.conf``. If the file does not exist, create it::
+
+    $ touch /var/ossec/etc/shared/agent.conf
+    $ chown ossec:ossec /var/ossec/etc/shared/agent.conf
+    $ chmod 640 /var/ossec/etc/shared/agent.conf
 
 Several configurations may be created according to the ``name``, ``OS`` or ``profile`` of an agent.
 
