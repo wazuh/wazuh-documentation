@@ -45,9 +45,8 @@ Remove directory:
 
 Follow the next guide in order to install Wazuh agent:
 
-- :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`
-- :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`
-
+- :doc:`Install Wazuh agent with RPM packages <../installation-guide/installing-wazuh-agent/wazuh_agent_rpm>`
+- :doc:`Install Wazuh agent with Deb packages <../installation-guide/installing-wazuh-agent/wazuh_agent_deb>`
 
 4. Restore configuration
 ------------------------

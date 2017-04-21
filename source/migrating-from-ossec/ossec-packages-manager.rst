@@ -45,8 +45,8 @@ Remove directory:
 
 Follow the next guide in order to install Wazuh server:
 
-- :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
-- :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
+- :doc:`Install Wazuh server with RPM packages <../installation-guide/installing-wazuh-server/wazuh_server_rpm>`
+- :doc:`Install Wazuh server with Deb packages <../installation-guide/installing-wazuh-server/wazuh_server_deb>`
 
 
 4. Restore configuration
