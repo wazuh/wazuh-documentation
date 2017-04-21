@@ -12,7 +12,7 @@ When the Wazuh server and the Elasticsearch cluster are on different hosts, File
 See below how components are distributed when the Wazuh server and the Elasticsearch cluster run on different hosts. Note that with multi-node clusters there will be multiple Elastic Stack servers to which Filebeat is capable of forwarding data:
 
 .. thumbnail:: ../images/installation/installing_wazuh.png
-    :title: Distributed architecture 
+    :title: Distributed architecture
     :align: center
     :width: 100%
 
@@ -37,8 +37,8 @@ Agent-server communication
 
 Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh server over port 1514 (UDP or TCP). The Wazuh server then decodes and rule-checks the received events with the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not tripped a rule:
 
- - The file */var/ossec/logs/archives/archives.json* contains all events whether they tripped a rule or not.
- - The file */var/ossec/logs/alerts/alerts.json* contains only events that tripped a rule.
+ - The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
+ - The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule.
 
 Note that if you use both of these files, alerts will be duplicated across both files. Also note that both files receive fully decoded events data.
 
