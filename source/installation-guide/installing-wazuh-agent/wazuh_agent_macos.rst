@@ -14,6 +14,6 @@ Mac OS X agent can be downloaded from our :doc:`packages list<../packages-list/i
      .. thumbnail:: ../../images/installation/macos.png
          :align: center
 
-By default all agent files can be found at the following location: ``/Library/Ossec/etc/ossec.conf``.
+By default all agent files can be found at the following location: ``/Library/Ossec/``.
 
-.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
+.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our :doc:`user manual<../../user-manual/index>`.
