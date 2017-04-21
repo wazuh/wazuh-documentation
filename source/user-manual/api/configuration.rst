@@ -43,7 +43,10 @@ It is generally recommended to generate new credentials to replace foo:bar. This
     $ cd /var/ossec/api/configuration/auth
     $ sudo node htpasswd -c user myUserName
 
-Do not forget to restart the API to apply the changes.
+Do not forget to restart the API to apply the changes::
+
+    $ systemctl restart wazuh-api
+    $ service wazuh-api restart
 
 Manually enable https support
 ---------------------------------

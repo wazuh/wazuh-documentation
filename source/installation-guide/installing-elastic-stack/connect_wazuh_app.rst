@@ -19,8 +19,13 @@ In this section, we'll register the Wazuh App in Kibana to communicate with the 
 
 3. Before filling out the fields, go to your Wazuh server's command prompt as root and set a non-default username and password to protect your Wazuh API::
 
-    cd /var/ossec/api/configuration/auth
-    sudo node htpasswd -c user newname
+    # Replace your desired username for myUserName.
+    $ cd /var/ossec/api/configuration/auth
+    $ sudo node htpasswd -c user myUserName
+
+    # Do not forget to restart the API to apply the changes:
+    $ systemctl restart wazuh-api
+    $ service wazuh-api restart
 
 4. Fill in the new name and new password that you just defined.  Also, put in ``http://MANAGER_IP`` for URL, where *MANAGER_IP* is the real IP address of the Wazuh server, and "55000" for Port.
 
