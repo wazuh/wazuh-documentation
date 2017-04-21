@@ -3,7 +3,7 @@
 Overview
 ================
 
-This manual provides information for users of Wazuh that is an open source project for security visibility, compliance and infrastructure monitoring. It was born as a fork of OSSEC HIDS. The manual describes how each capability works and how to configure them. Also, this section explains the Wazuh RESTful API features and configuration aswell how to install, update, and contribute to :doc:`Wazuh Ruleset<ruleset/index>`.
+This manual provides information for users of Wazuh that is an open source project for security visibility, compliance and infrastructure monitoring. It was born as a fork of OSSEC HIDS. The manual describes how each capability works and how to configure them. Also, this section explains the Wazuh RESTful API features and configuration as well how to install, update, and contribute to :doc:`Wazuh Ruleset<ruleset/index>`.
 
 
 Wazuh server
@@ -11,7 +11,7 @@ Wazuh server
 
 The server component is the system that analyzes the data received from the agents, triggering alerts when an event matches a rule. Main components:
 
-- **Manager**, that receives data from the agents, identify the type of information being processed and extracts relevant data elements from the log messages. Also, the alerts generated can be forwarder to :doc:`other systems<manager/output-options/index>`
+- **Manager**, that receives data from the agents, identify the type of information being processed and extracts relevant data elements from the log messages. Also, the alerts generated can be forwarder to :doc:`other systems<manager/output-options/index>`.
 
 + :doc:`RESTful API <api/index>`, which provides an interface to manage and monitor the configuration and deployment status of agents. Also it's used by the Wazuh App.
 
