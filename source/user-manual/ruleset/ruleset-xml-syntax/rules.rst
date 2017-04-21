@@ -396,25 +396,25 @@ Preform a CDB lookup using an ossec list.  This is a fast on disk database which
 | **Allowed values** | Path to the CDB file to be used for lookup from the OSSEC directory.Must also be included in the ossec.conf file. |
 +--------------------+-------------------------------------------------------------------------------------------------------------------+
 
-+-----------------+-------------------------+-----------------------------------------------------------------------------------------+
-| Attribute       | Description                                                                                                       |
-+-----------------+-------------------------+-----------------------------------------------------------------------------------------+
-| **field**       | key in the CDB: srcip, srcport, dstip, dstport, extra_data, user, url, id, hostname, program_name, status, action |
-+-----------------+-------------------------+-----------------------------------------------------------------------------------------+
-| **lookup**      | match_key               | key to search within the cdb and will match if they key is present. Default.            |
-+-----------------+-------------------------+-----------------------------------------------------------------------------------------+
-|                 | not_match_key           | key to search and will match if it is not present in the database.                      |
-+-----------------+-------------------------+-----------------------------------------------------------------------------------------+
-|                 | match_key_value         | searched for in the cdb. It will be compared with regex from attribute check_value.     |
-+-----------------+-------------------------+-----------------------------------------------------------------------------------------+
-|                 | address_match_key       | IP and the key to search within the cdb and will match if they key is present.          |
-+-----------------+-------------------------+-----------------------------------------------------------------------------------------+
-|                 | not_address_match_key   | IP the key to search and will match if it IS NOT present in the database                |
-+-----------------+-------------------------+-----------------------------------------------------------------------------------------+
-|                 | address_match_key_value | IP to search in the cdb. It will be compared with regex from attribute check_value.     |
-+-----------------+-------------------------+-----------------------------------------------------------------------------------------+
-| **check_value** | regex for matching on the value pulled out of the cdb when using types: address_match_key_value, match_key_value  |
-+-----------------+-------------------------------------------------------------------------------------------------------------------+
++-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
+| Attribute       | Description                                                                                                                       |
++-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
+| **field**       | key in the CDB: srcip, srcport, dstip, dstport, extra_data, user, url, id, hostname, program_name, status, action, dynamic field. |
++-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
+| **lookup**      | match_key               | key to search within the cdb and will match if they key is present. Default.                            |
++-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
+|                 | not_match_key           | key to search and will match if it is not present in the database.                                      |
++-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
+|                 | match_key_value         | searched for in the cdb. It will be compared with regex from attribute check_value.                     |
++-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
+|                 | address_match_key       | IP and the key to search within the cdb and will match if they key is present.                          |
++-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
+|                 | not_address_match_key   | IP the key to search and will match if it IS NOT present in the database                                |
++-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
+|                 | address_match_key_value | IP to search in the cdb. It will be compared with regex from attribute check_value.                     |
++-----------------+-------------------------+---------------------------------------------------------------------------------------------------------+
+| **check_value** | regex for matching on the value pulled out of the cdb when using types: address_match_key_value, match_key_value                  |
++-----------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 info
 ^^^^

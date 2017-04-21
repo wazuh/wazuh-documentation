@@ -15,15 +15,18 @@ Configuration options for enabling or disabling rules and decoders.
 Options
 -------
 
-- `include`_
-- `rule`_
+- `rule_include`_
 - `rule_dir`_
-- `decoder`_
+- `rule_exclude`_
+- `decoder_include`_
 - `decoder_dir`_
+- `decoder_exclude`_
 - `list`_
 
-include
-^^^^^^^
+
+
+rule_include
+^^^^^^^^^^^^^
 
 Load a single rule file.
 
@@ -33,26 +36,13 @@ Load a single rule file.
 | **Allowed values** | Path and filename of rule to load |
 +--------------------+-----------------------------------+
 
-Example: ``rules/config.xml``
+Example:
+
+.. code-block:: xml
+
+	  <rule_include>ruleset/rules/my_rules.xml</rule_include>
 
 
-rule
-^^^^^^^
-
-Load a single rule file.
-
-+--------------------+-----------------------------------+
-| **Default Value**  | n/a                               |
-+--------------------+-----------------------------------+
-| **Allowed values** | Path and filename of rule to load |
-+--------------------+-----------------------------------+
-
-Example: ``rules/config.xml``
-
-
-.. note::
-
-    This works the same as ``include`` but was created to mirror the syntax in other sections of the rules config.
 
 rule_dir
 ^^^^^^^^
@@ -67,20 +57,37 @@ Load a directory of rules. The files will be loaded in alphabetical order and an
 
 .. topic:: Attributes
 
-	An optional pattern can be included in the opening tag.
+	An optional pattern can be included in the opening tag. The pattern is a regex match string used to determine if a file should be loaded.
 
-Example::
+Example:
 
-	  <rule_dir pattern="ruleset.xml">rules</rule_dir>
+.. code-block:: xml
 
-The pattern is a regex match string used to determine if a file should be loaded.
-
-
-decoder
-^^^^^^^
+      <rule_dir pattern="_rules.xml$">ruleset/rules</rule_dir>
 
 
-Load a single decoder file. The path should refer to the installation directory, typically ``/var/ossec``.
+rule_exclude
+^^^^^^^^^^^^^
+
+Exclude a single rule file.
+
++--------------------+--------------------------------------+
+| **Default Value**  | n/a                                  |
++--------------------+--------------------------------------+
+| **Allowed values** | Path and filename of rule to exclude |
++--------------------+--------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+	  <rule_exclude>0215-policy_rules.xml</rule_exclude>
+
+
+decoder_include
+^^^^^^^^^^^^^^^^^
+
+Load a single decoder file.
 
 +--------------------+--------------------------------------+
 | **Default Value**  | n/a                                  |
@@ -88,21 +95,17 @@ Load a single decoder file. The path should refer to the installation directory,
 | **Allowed values** | Path and filename of decoder to load |
 +--------------------+--------------------------------------+
 
-Example::
+Example:
 
-	 rules/decoder/decoder.xml
+.. code-block:: xml
 
-If no decoders are specified in ``ossec.conf``, the legacy ``etc/decoder.xml`` and
-``etc/local_decoder.xml`` are loaded.
+    <decoder_include>ruleset/decoders/my_decoder.xml</decoder_include>
 
-.. warning::
-
-	If ``<decoder>`` or ``<decoder_dir>`` are used, the default decoder.xml will not be used and must be specifically referenced in order to load.
 
 decoder_dir
 ^^^^^^^^^^^^^^
 
-Load a directory of decoders. The files will be loaded in alphabetical order and any duplicate filenames will be skipped.  The path should refer to the installation directory, typically ``/var/ossec``.
+Load a directory of decoders. The files will be loaded in alphabetical order and any duplicate filenames will be skipped.
 
 +--------------------+--------------------------------------+
 | **Default Value**  | ruleset/decoders                     |
@@ -112,18 +115,31 @@ Load a directory of decoders. The files will be loaded in alphabetical order and
 
 .. topic:: Attributes
 
-  An optional pattern can be included in the opening tag.
+  An optional pattern can be included in the opening tag. The pattern is a regex match string used to determine if a file should be loaded.
 
-	Example::
+Example:
 
-		<decoder_dir pattern="-decoder.xml">ruleset/decoders</decoder_dir>
+.. code-block:: xml
 
-The pattern is a regex match string used to determine if a file should be loaded.
+      <decoder_dir pattern=".xml$">ruleset/decoders</decoder_dir>
 
-.. warning::
 
-    If ``<decoder>`` or ``<decoder_dir>`` are used, the default decoder.xml will not be used. It must be specified explicitly.
+decoder_exclude
+^^^^^^^^^^^^^^^^^
 
+Exclude a single decoder file.
+
++--------------------+-----------------------------------------+
+| **Default Value**  | n/a                                     |
++--------------------+-----------------------------------------+
+| **Allowed values** | Path and filename of decoder to exclude |
++--------------------+-----------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+    <decoder_exclude>ruleset/decoders/my_decoder.xml</decoder_exclude>
 
 list
 ^^^^^^^
@@ -136,11 +152,11 @@ Load a single CDB reference for use by other rules.
 | **Allowed values** | Path to a list file to be loaded and compiled. |
 +--------------------+------------------------------------------------+
 
+Example:
+
 .. code-block:: xml
 
-	<rules>
-		<list>rules/lists/blocked_hosts</list>
-	</rules>
+    <list>etc/lists/blocked_hosts</list>
 
 .. note::
 

@@ -50,7 +50,7 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`rootcheck <rootcheck>`                                  | manager, agent         |
 +---------------------------------------------------------------+------------------------+
-| :doc:`ruleset <rules>`                                        | manager                |
+| :doc:`ruleset <ruleset>`                                      | manager                |
 +---------------------------------------------------------------+------------------------+
 | :doc:`syscheck <syscheck>`                                    | manager, agent         |
 +---------------------------------------------------------------+------------------------+
@@ -80,7 +80,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    remote
    reports
    rootcheck
-   rules
+   ruleset
    syscheck
    syslog-output
    wodle-openscap

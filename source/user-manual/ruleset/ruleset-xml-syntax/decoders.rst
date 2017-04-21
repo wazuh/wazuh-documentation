@@ -109,7 +109,7 @@ It defines what the parenthesis groups contain and the order in which they were 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+------------+-------------------------------------------------------+
-| **Allowed values** | srcuser    |     Extracts the source username                      |
+| **Static fields**  | srcuser    | Extracts the source username                          |
 +                    +------------+-------------------------------------------------------+
 |                    | dstuser    | Extracts the destination (target) username            |
 +                    +------------+-------------------------------------------------------+
@@ -134,6 +134,8 @@ It defines what the parenthesis groups contain and the order in which they were 
 |                    | status     | Event status (success, failure, etc)                  |
 +                    +------------+-------------------------------------------------------+
 |                    | extra_data | Any extra data                                        |
++--------------------+------------+-------------------------------------------------------+
+| **Dynamic fields** | Any string not included in the previous list                       |
 +--------------------+------------+-------------------------------------------------------+
 
 fts
