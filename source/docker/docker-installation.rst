@@ -1,7 +1,7 @@
 .. _docker-installation:
 
-Installing Docker engine and Docker compose
-==============================================
+Docker installation
+===================
 
 First thing you need to do is install Docker if you don't have it already.
 
