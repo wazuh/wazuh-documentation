@@ -1,6 +1,6 @@
 .. _wazuh-container:
 
-Wazuh containers
+Wazuh container
 ===============================
 
 Requirements
@@ -15,6 +15,10 @@ You need to increase ``max_map_count`` on your Docker host::
 
 To set this value permanently, update the vm.max_map_count setting in /etc/sysctl.conf. To verify after rebooting, run "sysctl vm.max_map_count".
 
+.. warning::
+
+  If you don't set the **max_map_count** on your host, Elasticsearch will probably don't work.
+
 SELinux
 ^^^^^^^^^^
 
@@ -26,13 +30,13 @@ On distributions which have SELinux enabled out-of-the-box, you will need to eit
 Usage
 -------------------------------
 
-Clone the *wazuh-docker* repository::
+#. Copy the docker-compose file to your system:
 
-    git clone https://github.com/wazuh/wazuh-docker
-    cd wazuh-docker
+    ::
 
+      curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/master/docker-compose.yml
 
-Start Wazuh and Elastic Stack using *docker-compose*:
+#. Start Wazuh and Elastic Stack using *docker-compose*:
 
     a) Foreground::
 
@@ -43,17 +47,27 @@ Start Wazuh and Elastic Stack using *docker-compose*:
 
         $ docker-compose up -d
 
-Then access the Kibana UI by hitting `http://localhost:5601 <http://localhost:5601>`_ with a web browser.
+    Then access the Kibana UI by hitting `http://localhost:5601 <http://localhost:5601>`_ with a web browser.
+
 
 By default, the stack exposes the following ports:
 
-    - 1514: Wazuh UDP.
-    - 1515: Wazuh TCP.
-    - 514 : Wazuh UDP.
-    - 55000: Wazuh API.
-    - 5000: Logstash TCP input.
-    - 9200: Elasticsearch HTTP.
-    - 9300: Elasticsearch TCP transport
-    - 5601: Kibana
++-----------+-----------------------------+
+| **1514**  | Wazuh UDP                   |
++-----------+-----------------------------+
+| **1515**  | Wazuh TCP                   |
++-----------+-----------------------------+
+| **514**   | Wazuh UDP                   |
++-----------+-----------------------------+
+| **55000** | Wazuh API                   |
++-----------+-----------------------------+
+| **5000**  | Logstash TCP input          |
++-----------+-----------------------------+
+| **9200**  | Elasticsearch HTTP          |
++-----------+-----------------------------+
+| **9300**  | Elasticsearch TCP transport |
++-----------+-----------------------------+
+| **5601**  | Kibana                      |
++-----------+-----------------------------+
 
 .. note:: Configuration is not dynamically reloaded, so you will need to restart the stack after any change in the configuration of a component.

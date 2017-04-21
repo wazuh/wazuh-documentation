@@ -56,26 +56,12 @@ Then map your configuration file inside the container in the ``docker-compose.ym
    networks:
      - docker_elk
 
-How can I configure the Wazuh App?
--------------------------------------------------------------------
-
-In Kibana, select the Wazuh item in the left menu and then click "ADD NEW API".
-
-The default configuration is::
-
-  User: foo
-  Password: bar
-  URL: http://wazuh
-  Port: 55000
-
-If you wish to change the default API configuration, you need to modify the ``user`` file in ``/var/ossec/api/configuration/auth/user/``, using the standard ``htpasswd`` tool.
-
 How can I store Wazuh data?
 -------------------------------------------------------------------
 
 The data stored in Wazuh will persist after container reboots but not after container removal.
 
-In order to preserve Wazuh data even after removing the Wazuh container, you'll have to mount a volume on your Docker host. Update the Wazuh container declaration to look like this::
+In order to preserve Wazuh data even after removing the Wazuh container, you'll have to mount a volume on your Docker host. Update the Wazuh container declaration in the ``docker-compose.yml`` to look like this::
 
    elasticsearch:
      image: wazuh/wazuh:latest
@@ -90,14 +76,14 @@ In order to preserve Wazuh data even after removing the Wazuh container, you'll 
      volumes:
        - /path/to/storage:/var/ossec/data
 
-  This will store Wazuh data inside `/path/to/storage` in the Docker host's local file system.
+This will store Wazuh data inside `/path/to/storage` in the Docker host's local file system.
 
 How can I store Elasticsearch data?
 -------------------------------------------------------------------
 
 The data stored in Elasticsearch will persist after container reboots but not after container removal.
 
-In order to preserve Elasticsearch data even after removing the Elasticsearch container, you'll have to mount a volume on your Docker host. Update the elasticsearch container declaration to look like this::
+In order to preserve Elasticsearch data even after removing the Elasticsearch container, you'll have to mount a volume on your Docker host. Update the elasticsearch container declaration in the ``docker-compose.yml`` file to look like this::
 
   elasticsearch:
     image: wazuh/wazuh-elasticsearch:latest
