@@ -11,53 +11,56 @@ By default, the communications between Kibana (including the Wazuh app) and the 
     2. `NGINX SSL proxy for Kibana (Debian-based distributions)`_
 
 NGINX SSL proxy for Kibana (RPM-based distributions)
--------------------------------------------------------
+----------------------------------------------------
 
 NGINX is a popular open-source web server and reverse proxy, known for its high performance, stability, rich feature set, simple configuration, and low resource consumption.  Here we will use it as a reverse proxy to provide end users with encrypted and authenticated access to Kibana.
 
 1. Install NGINX:
 
-    a. For CentOS::
+  a. For CentOS:
 
-        cat > /etc/yum.repos.d/nginx.repo <<\EOF
-        [nginx]
-        name=nginx repo
-        baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
-        gpgcheck=0
-        enabled=1
-        EOF
+    .. code-block:: bash
 
-        yum install nginx
+      cat > /etc/yum.repos.d/nginx.repo <<\EOF
+      [nginx]
+      name=nginx repo
+      baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
+      gpgcheck=0
+      enabled=1
+      EOF
 
-    a. For RHEL::
+      yum install nginx
 
-        cat > /etc/yum.repos.d/nginx.repo <<\EOF
-        [nginx]
-        name=nginx repo
-        baseurl=http://nginx.org/packages/rhel/$releasever/$basearch/
-        gpgcheck=0
-        enabled=1
-        EOF
+  a. For RHEL:
 
-        yum install nginx
+    .. code-block:: bash
 
-    .. note::
-        For more information, see `NGINX: Official Red Hat/CentOS packages <https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-red-hat-centos-packages>`_.
+      cat > /etc/yum.repos.d/nginx.repo <<\EOF
+      [nginx]
+      name=nginx repo
+      baseurl=http://nginx.org/packages/rhel/$releasever/$basearch/
+      gpgcheck=0
+      enabled=1
+      EOF
+
+      yum install nginx
+
+  .. note:: For more information, see `NGINX: Official Red Hat/CentOS packages <https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-red-hat-centos-packages>`_.
 
 2. Install your SSL certificate and private key:
 
-    a. If you have a valid **signed certificate**, copy your key file **<ssl_key>** and your certificate file **<ssl_pem>** to their proper locations::
+  a. If you have a valid **signed certificate**, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations::
 
-        mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-        cp <ssl_pem> /etc/pki/tls/certs/kibana-access.pem
-        cp <ssl_key> /etc/pki/tls/private/kibana-access.key
+      mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
+      cp <ssl_pem> /etc/pki/tls/certs/kibana-access.pem
+      cp <ssl_key> /etc/pki/tls/private/kibana-access.key
 
-    b. Otherwise, create a **self-signed certificate**. Remember to set the *Common Name* field to your server name. For instance, if your server is *example.com*, you would do the following::
+  b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following::
 
-        mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-        openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem -subj "/CN=example.com"
+      mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
+      openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem -subj "/CN=example.com"
 
-2. Configure NGINX as an HTTPS reverse proxy to Kibana::
+3. Configure NGINX as an HTTPS reverse proxy to Kibana::
 
     cat > /etc/nginx/conf.d/default.conf <<\EOF
     server {
@@ -85,22 +88,22 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
     }
     EOF
 
-3. Edit the file ``/etc/nginx/conf.d/default.conf`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
+4. Edit the file ``/etc/nginx/conf.d/default.conf`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
 
-4. Start NGINX:
+5. Start NGINX:
 
-    a. For Systemd::
+  a. For Systemd::
 
-        systemctl start nginx
+      systemctl start nginx
 
-    b. For SysV Init::
+  b. For SysV Init::
 
-        service nginx start
+      service nginx start
 
 Enable authentication by htpasswd (optional)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Install package *httpd-tools*::
+1. Install package ``httpd-tools``::
 
     yum install httpd-tools
 
@@ -109,7 +112,7 @@ Enable authentication by htpasswd (optional)
     auth_basic "Restricted";
     auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
 
-.. note::
+  .. note::
 
     The config file should end up looking like this::
 
@@ -139,26 +142,23 @@ Enable authentication by htpasswd (optional)
             }
         }
 
-3. Generate the *.htpasswd* file. Replace ``<user>`` with your chosen username::
+3. Generate the ``.htpasswd`` file. Replace ``<user>`` with your chosen username::
 
     htpasswd -c /etc/nginx/conf.d/kibana.htpasswd <user>
 
 4. Restart NGINX:
 
-    a. For Systemd::
+  a. For Systemd::
 
-        systemctl restart nginx
+      systemctl restart nginx
 
-    b. For SysV Init::
+  b. For SysV Init::
 
-        service nginx restart
+      service nginx restart
 
 Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.
 
-.. note::
-
-    If you are running **SELinux in enforcing mode**, you might need to do some additional configuration to allow NGINX to proxy connections to ``localhost:5601``.
-
+.. note:: If you are running **SELinux in enforcing mode**, you might need to do some additional configuration to allow NGINX to proxy connections to ``localhost:5601``.
 
 
 NGINX SSL proxy for Kibana (Debian-based distributions)
@@ -172,18 +172,20 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
 2. Install your SSL certificate and private key:
 
-    a. If you have a valid signed certificate, copy your key file <ssl_key> and your certificate file <ssl_pem> to their proper locations:
+  a. If you have a valid signed certificate, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations::
 
-        mkdir -p /etc/ssl/certs /etc/ssl/private
-        cp <ssl_pem> /etc/ssl/certs/kibana-access.pem
-        cp <ssl_key> /etc/ssl/private/kibana-access.key
+      mkdir -p /etc/ssl/certs /etc/ssl/private
+      cp <ssl_pem> /etc/ssl/certs/kibana-access.pem
+      cp <ssl_key> /etc/ssl/private/kibana-access.key
 
-    b. Otherwise, create a **self-signed certificate**. Remember to set the *Common Name* field to your server name. For instance, if your server is *example.com*, you would do the following::
+  b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following::
 
-        mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-        openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem -subj "/CN=example.com"
+      mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
+      openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem -subj "/CN=example.com"
 
-2. Configure NGINX as an HTTPS reverse proxy to Kibana::
+2. Configure NGINX as an HTTPS reverse proxy to Kibana:
+
+  .. code-block:: bash
 
     cat > /etc/nginx/sites-available/default <<\EOF
     server {
@@ -215,18 +217,18 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
 4. Restart NGINX:
 
-    a. For Systemd::
+  a. For Systemd::
 
-        systemctl restart nginx
+      systemctl restart nginx
 
-    b. For SysV Init::
+  b. For SysV Init::
 
-        service nginx restart
+      service nginx restart
 
 Enable authentication by htpasswd (optional)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Install package *apache2-utils*::
+1. Install package ``apache2-utils``::
 
     apt-get install apache2-utils
 
@@ -235,7 +237,7 @@ Enable authentication by htpasswd (optional)
     auth_basic "Restricted";
     auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
 
-.. note::
+  .. note::
 
     The config file should end up looking like this::
 
@@ -265,22 +267,20 @@ Enable authentication by htpasswd (optional)
             }
         }
 
-3. Generate the *.htpasswd* file. Replace ``<user>`` with your chosen username::
+3. Generate the ``.htpasswd`` file. Replace ``<user>`` with your chosen username::
 
     htpasswd -c /etc/nginx/conf.d/kibana.htpasswd <user>
 
 4. Restart NGINX:
 
-    a. For Systemd::
+  a. For Systemd::
 
-        systemctl restart nginx
+      systemctl restart nginx
 
-    b. For SysV Init::
+  b. For SysV Init::
 
-        service nginx restart
+      service nginx restart
 
 Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.
 
-.. note::
-
-    If you are running **SELinux in enforcing mode**, you might need to do some additional configuration to allow NGINX to proxy connections to ``localhost:5601``.
+.. note:: If you are running **SELinux in enforcing mode**, you might need to do some additional configuration to allow NGINX to proxy connections to ``localhost:5601``.

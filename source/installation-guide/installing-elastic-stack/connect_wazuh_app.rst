@@ -11,13 +11,15 @@ In this section, we'll register the Wazuh App in Kibana to communicate with the 
     :align: center
     :width: 100%
 
-2. Click on *Add new API*.
+2. Click on ``Add new API``.
 
   .. image:: ../../images/installation/wazuhapp/connect_api.png
     :align: center
     :width: 100%
 
-3. Before filling out the fields, go to your Wazuh server's command prompt as root and set a non-default username and password to protect your Wazuh API::
+3. Before filling out the fields, go to your Wazuh server's command prompt as root and set a non-default username and password to protect your Wazuh API:
+
+  .. code-block:: bash
 
     # Replace your desired username for myUserName.
     $ cd /var/ossec/api/configuration/auth
@@ -27,13 +29,13 @@ In this section, we'll register the Wazuh App in Kibana to communicate with the 
     $ systemctl restart wazuh-api
     $ service wazuh-api restart
 
-4. Fill in the new name and new password that you just defined.  Also, put in ``http://MANAGER_IP`` for URL, where *MANAGER_IP* is the real IP address of the Wazuh server, and "55000" for Port.
+4. Fill in the new name and new password that you just defined.  Also, put in ``http://MANAGER_IP`` for URL, where ``MANAGER_IP`` is the real IP address of the Wazuh server, and "55000" for Port.
 
   .. image:: ../../images/installation/wazuhapp/fields_api.png
     :align: center
     :width: 100%
 
-6. Click on *Save*.
+6. Click on ``Save``.
 
   .. image:: ../../images/installation/wazuhapp/app_running.png
     :align: center

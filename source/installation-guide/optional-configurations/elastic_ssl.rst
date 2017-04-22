@@ -20,6 +20,8 @@ First, we need an SSL certificate and a key.
 
 		cp /etc/pki/tls/openssl.cnf custom_openssl.cnf
 
+  .. note:: Typically you will run the Logstash server in your Elastic Stack server or, if you have set up a distributed Elasticsearch cluster, in one of its nodes.
+
 2. Edit the custom configuration file, ``custom_openssl.cnf``.
 
 	Find the section ``[ v3_ca ]`` and add a line like this, including your Elastic server's IP address::
@@ -78,7 +80,9 @@ Now we will configure Filebeat to verify the Logstash server's certificate.
 
 		scp root@LOGSTASH_SERVER_IP:/etc/logstash/logstash.crt /etc/filebeat
 
-2. Edit the file ``/etc/filebeat/filebeat.yml`` and uncomment the lines related to SSL inside ``logstash``. The file should remain like this::
+2. Edit the file ``/etc/filebeat/filebeat.yml`` and uncomment the lines related to SSL inside ``logstash``. The file should remain like this:
+
+  .. code-block: yaml
 
 	output:
 	 logstash:

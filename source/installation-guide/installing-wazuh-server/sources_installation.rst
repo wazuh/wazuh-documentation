@@ -27,12 +27,12 @@ Installing Wazuh manager
 
     curl -Ls https://github.com/wazuh/wazuh/archive/v2.0.0.tar.gz | tar zx
 
-3. Run the *install.sh* script. It will guide you through the source installation and compilation::
+3. Run the ``install.sh`` script. It will guide you through the source installation and compilation::
 
     cd wazuh-*
     ./install.sh
 
-4. The script will ask about what kind of installation you want. Type **server** to install Wazuh Manager::
+4. The script will ask about what kind of installation you want. Type ``server`` to install Wazuh Manager::
 
     1- What kind of installation do you want (server, agent, local, hybrid or help)? server
 
@@ -106,7 +106,7 @@ Installing Filebeat
 While Filebeat can be installed from source (`see this doc <https://github.com/elastic/beats/blob/master/CONTRIBUTING.md>`_), the process is more complex than you may like, and it is beyond the scope of Wazuh documentation.  We recommend installing Filebeat via repository package, and if that is not available, to install it from a binary tarball that should work for any Linux distro.  See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
 
 .. warning::
-    In a single-host architecture, you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 Next steps
 ----------

@@ -1,45 +1,39 @@
 .. _upgrading_manager:
 
 Upgrading Wazuh server
-=====================================
+======================
 
-This section will update your current Wazuh 1.1 installation to Wazuh 2.0. Following the next guide, your current installation will be automatically update:
+Follow next steps in order to update your ``Wazuh 1.X`` installation to ``Wazuh 2.0``.
 
-#. First of all, stop eveything:
+#. First of all, stop running processes::
 
-	::
+    /var/ossec/bin/ossec-control stop
+    systemctl stop wazuh-api
 
-			/var/ossec/bin/ossec-control stop
-			systemctl stop wazuh-api
+#. *Only if you have a distributed architecture*, remove logstash-forwarder (as it will be substituted by Filebeat):
 
-#. If you have a distributed architecture, remove logstash-forwarder:
+  Deb systems::
 
-	    Deb systems::
+    apt-get remove logstash-forwarder
 
-	    	apt-get remove logstash-forwarder
+  RPM systems::
 
-	    RPM systems::
-
-	    	yum remove logstash-forwarder
+    yum remove logstash-forwarder
 
 #. Install Wazuh server:
 
-		If you follow our installation guide, your current installation will be updated.
+  If you follow our installation guide, your current installation will be updated.
 
-			- :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
-			- :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
+  - :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
+  - :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
 
-		Once everything is updated, review your ``ossec.conf``. The configuration file **/var/ossec/etc/ossec.conf will be overwritten**. The *old* configuration file from the current installation is saved as *ossec.conf.rpmorig* or *ossec.conf.deborig*. You should compare the new file with the old one.
+  Once the package is installed, review your ``/var/ossec/etc/ossec.conf`` file, as it will be overwritten. The one that was previously in use has been saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. It is recommended to compare the new file with the old one and import old settings when needed.
 
-		Also, a backup of your previous ruleset will be saved at */var/ossec/etc/backup_ruleset*. You need to review it in case you have created new rules/decoders in other file than *local_rules.xml* or *local_decoder.xml*.
+  In addition, a backup of your previous rules will be saved at ``/var/ossec/etc/backup_ruleset``. If these files contain any kind of customization, you will need to do them again. It is recommended to use ``/var/ossec/etc/decoders`` and ``/var/ossec/etc/rules`` for custom rules and decoders. These directories won't be overwritten by future upgrades.
 
-		.. note::
-			**Next upgrades (versions > 2.0) will not overwrite the file /var/ossec/etc/ossec.conf**. In these cases, the *new* configuration file from the update package is installed as *ossec.conf.rpmnew* or *ossec.conf.debnew* and might reflect new options or a new notion of best practices.
+#. Run ``/var/ossec/bin/manage_agents -V`` to confirm that now you are running ``Wazuh v2.0``::
 
-
-#. Run ``/var/ossec/bin/manage_agents -V`` to check that everything worked as expected::
-
-	# /var/ossec/bin/manage_agents -V
+    /var/ossec/bin/manage_agents -V
 
 	Wazuh v2.0 - Wazuh Inc.
 

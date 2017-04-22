@@ -6,7 +6,7 @@ Install Wazuh agent from sources
 This guide describes how to install an agent from source code.
 
 Installing Linux agent
---------------------------
+----------------------
 
 1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
@@ -26,31 +26,21 @@ Installing Linux agent
 
     curl -Ls https://github.com/wazuh/wazuh/archive/v2.0.0.tar.gz | tar zx
 
-3. Run the *install.sh* script. It will guide you through the installation and compile the source::
+3. Run the ``install.sh`` script. It will guide you through the installation and compile the source::
 
     cd wazuh-*
     ./install.sh
 
-4. The script will ask about what kind of installation you want. Type **agent** in order to install a Wazuh agent::
+4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent::
 
     1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
 
-5. When the installation is completed, edit file `/var/ossec/etc/ossec.conf` and replace the text *MANAGER_IP* with the manager's IP address. For example::
-
-	<ossec_config>
-	  <client>
-	    <server-ip>1.2.3.4</server_ip>
-
-6. At this point, you need to :ref:`register the agent in the manager <connecting_agents>`.
-
-7. Start the services using this command::
-
-    /var/ossec/bin/ossec-control start
+.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
 
 Installing Windows agent
---------------------------
+------------------------
 
-This section describes how to download and compile the Wazuh HIDS Windows agent. The following procedure has been tested to work with Ubuntu 16.04 as the compilation environment, and may work fine with other Debian/Ubuntu versions as well.
+This section describes how to download and compile the Wazuh HIDS Windows agent from sources. The following procedure has been tested to work with Ubuntu 16.04 as the compilation environment, and may work fine with other Debian/Ubuntu versions as well.
 
 Set up Ubuntu build environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -70,7 +60,7 @@ Download the Wazuh source code and unzip it: ::
    $ unzip wazuh-master.zip
 
 Compiling the agent
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 Run the make command: ::
 
@@ -100,7 +90,4 @@ You should expect the following output near the end of the compile process: ::
 
 Now you should have a Wazuh agent installer for Windows here: ``./win32/wazuh-agent-2.0.exe``, :ref:`ready to be used <wazuh_agent_windows>`.
 
-Next steps
-----------
-
-At this point the Wazuh agent is installed and configured. Now we should :ref:`connect it to the manager <connecting_agents>`.
+.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.

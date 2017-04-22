@@ -98,7 +98,7 @@ Installing Wazuh API
 
 4. Python >= 2.7 is required in order to run the Wazuh API. It is installed by default or included in the official repositories in most Linux distributions.
 
-   It is possible to set a cutom Python path for the API in */var/ossec/api/configuration/config.js*, in case the stock version of Python in your distro is too old:
+   It is possible to set a cutom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
 
    .. code-block:: javascript
 
@@ -115,7 +115,7 @@ Installing Wazuh API
 	    }
 	];
 
-   For CentOS 6 and Red Hat 6, you can install the package *python27*, which installs Python 2.7 at */opt/rh/python27* in parallel to the older stock version of python already present:
+   For CentOS 6 and Red Hat 6, you can install the package ``python27``, which installs Python 2.7 at ``/opt/rh/python27`` in parallel to the older stock version of python already present:
 
   a) For CentOS 6::
 
@@ -138,7 +138,7 @@ Installing Filebeat
 Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack server(s).
 
 .. warning::
-    In a single-server configuration, you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
 
@@ -167,7 +167,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
 	curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/filebeat/filebeat.yml
 
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace *ELASTIC_SERVER_IP*  with the IP address or the hostname of the Elastic Stack server. For example::
+4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP``  with the IP address or the hostname of the Elastic Stack server. For example::
 
 	output:
 	  logstash:
