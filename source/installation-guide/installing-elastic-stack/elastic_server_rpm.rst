@@ -31,6 +31,28 @@ Preparation
 	type=rpm-md
 	EOF
 
+Elasticsearch
+-------------
+
+Elasticsearch is a highly scalable full-text search and analytics engine. More info at `Elastic <https://www.elastic.co/products/elasticsearch>`_.
+
+1. Install the Elasticsearch package::
+
+	yum install elasticsearch
+
+2. Enable and start the Elasticsearch service:
+
+  a) For Systemd::
+
+	systemctl daemon-reload
+	systemctl enable elasticsearch.service
+	systemctl start elasticsearch.service
+
+  b) For SysV Init::
+
+	chkconfig --add elasticsearch
+	service elasticsearch start
+
 Logstash
 --------
 
@@ -69,29 +91,7 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 .. note::
 
     If you are running Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), then it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elastic_ssl`.
-
-Elasticsearch
--------------
-
-Elasticsearch is a highly scalable full-text search and analytics engine. More info at `Elastic <https://www.elastic.co/products/elasticsearch>`_.
-
-1. Install the Elasticsearch package::
-
-	yum install elasticsearch
-
-2. Enable and start the Elasticsearch service:
-
-  a) For Systemd::
-
-	systemctl daemon-reload
-	systemctl enable elasticsearch.service
-	systemctl start elasticsearch.service
-
-  b) For SysV Init::
-
-	chkconfig --add elasticsearch
-	service elasticsearch start
-
+	
 Kibana
 ------
 

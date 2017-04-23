@@ -21,6 +21,28 @@ Preparation
 	echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-5.x.list
 	apt-get update
 
+Elasticsearch
+-------------
+
+Elasticsearch is a highly scalable full-text search and analytics engine. More info `Elastic <https://www.elastic.co/products/elasticsearch>`_.
+
+1. Install the Elasticsearch package::
+
+	apt-get install elasticsearch
+
+2. Enable and start the Elasticsearch service:
+
+  a) For Systemd::
+
+	systemctl daemon-reload
+	systemctl enable elasticsearch.service
+	systemctl start elasticsearch.service
+
+  b) For SysV Init::
+
+	update-rc.d elasticsearch defaults 95 10
+	service elasticsearch start
+
 Logstash
 --------
 
@@ -61,29 +83,7 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 .. note::
 
     If you are running Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), then it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elastic_ssl`.
-
-Elasticsearch
--------------
-
-Elasticsearch is a highly scalable full-text search and analytics engine. More info `Elastic <https://www.elastic.co/products/elasticsearch>`_.
-
-1. Install the Elasticsearch package::
-
-	apt-get install elasticsearch
-
-2. Enable and start the Elasticsearch service:
-
-  a) For Systemd::
-
-	systemctl daemon-reload
-	systemctl enable elasticsearch.service
-	systemctl start elasticsearch.service
-
-  b) For SysV Init::
-
-	update-rc.d elasticsearch defaults 95 10
-	service elasticsearch start
-
+	
 Kibana
 ------
 
