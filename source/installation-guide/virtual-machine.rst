@@ -3,9 +3,11 @@
 Virtual Machine
 ===============
 
-We provide a pre-built virtual machine image (OVA) that you can import into most virtualization systems.
+We provide a pre-built virtual machine image (OVA) that you can import into most virtualization systems. It has been built using VirtualBox, where you can import the OVA image directly.
 
-1. This virtual appliance contains the following components:
+.. note::  This VM can be run only on 64-bit systems and is not recommended for use in production environments. Instead it can be a useful tool for proof of concepts and labs. Distributed architectures, and multi-node Elastic Stack clusters are usually a better fit for production environments, where higher performance is required.
+
+1. This virtual appliance, available at https://packages.wazuh.com/vm/wazuh2.0-ELK5.2.2.ova, contains the following components:
 
     - CentOS 7
     - Wazuh 2.0
@@ -15,29 +17,21 @@ We provide a pre-built virtual machine image (OVA) that you can import into most
     - Kibana 5.2.2 port "**5601**""
     - WazuhAPP 2.0_5.2.2
 
-2. The virtual appliance is provided as an OVA which you can import into most virtualization systems.  We recommend using VirtualBox which can import the OVA image directly. We used VirtualBox to create this appliance and the OVA.
+2. Import the OVA in your virtualization platform, and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
 
-.. note::
-   This VM can be run only on 64-bit systems.
+  Although you don't need to change any Elastic Stack configuration settings, feel free to explore the options.  You can find Elasticsearch installed in ``/usr/share/elasticsearch``. Similarly, Logstash is installed in ``/usr/share/logstash`` and its config directory is ``/etc/logstash/conf.d/``.
 
-3. Download wazuh-virtual-appliance.ova from https://packages.wazuh.com/vm/wazuh2.0-ELK5.2.2.ova
+3. **Wazuh Manager** and the **Elastic Stack** are configured to work out of the box. You can now deploy the Wazuh agents, on those systems that you intend to monitor, and connect them to your virtual appliance. More documentation at:
 
-4. Import wazuh-virtual-appliance.ova with your virtualization manager.
+    - `How to install Wazuh agents <installation_agents>`_.
 
-5. In this virtual appliance, the root password is "**wazuh**" and the User/Password for Wazuh API is "**foo/bar**".
+  .. warning:: Before connecting any Wazuh agent, change the VM's network interface type from NAT - the factory default - to bridged so that it will be reachable to your network. By default, the VM will try to get an IP address from your network's DHCP server. Alternatively, you can set a static IP address for the VM by configuring the network files on the CentOS operating system this virtual machine is based on.
 
-6. Although you don't need to change any Elastic Stack configuration settings, feel free to explore.  The Elasticsearch system is installed in ``/usr/share/elasticsearch`` and the main configuration files are ``/etc/elasticsearch/elasticsearch.yml`` and ``/etc/sysconfig/elasticsearch``. Similarly, Logstash is installed in ``/usr/share/logstash`` and its config directory is ``/etc/logstash/conf.d/``.
-
-7. **Wazuh Manager** and the **Elastic Stack** stack are configured to work out of the box.  To install the Wazuh agents and connect them to your virtual appliance, see: `How to install Wazuh agents <installation_agents>`_.  Note that this virtual appliance is using a single-server architecture.
-
-.. warning::
-  Before installing any Wazuh agents, change the VM's network interface type from NAT - the factory default - to bridged so that it will be reachable to your network.  By default, the VM will try to get an IP address from your network's DHCP server.  Alternatively, you can set a static IP for the VM by configuring the network files on the CentOS system as you would any other Red Hat derived Linux system.
-
-8. You can start and stop wazuh-manager, elasticsearch, logstash, and kibana with the 'systemctl' command. Examples ::
+4. You can start and stop wazuh-manager, elasticsearch, logstash, and kibana with the 'systemctl' command. Examples ::
 
     systemctl restart wazuh-manager
     systemctl stop elasticsearch
     systemctl start logstash
     systemctl status kibana
 
-9. In order to connect with Kibana interface, you can login with http://OVA-ip:5601
+5. In order to connect to Kibana web user interface, you can login with http://OVA_IP_ADRESS:5601 (where ``OVA_IP_ADDRESS`` is your system IP).

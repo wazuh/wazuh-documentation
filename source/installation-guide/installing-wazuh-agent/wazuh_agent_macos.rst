@@ -1,3 +1,5 @@
+.. _wazuh_agent_macos:
+
 Install Wazuh agent on Mac OS X
 ===============================
 

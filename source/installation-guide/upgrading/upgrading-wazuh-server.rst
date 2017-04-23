@@ -3,7 +3,7 @@
 Upgrading Wazuh server
 ======================
 
-Follow next steps in order to update your ``Wazuh 1.X`` installation to ``Wazuh 2.0``.
+Follow next steps in order to update your ``Wazuh v1.X`` installation to ``Wazuh v2.0``.
 
 #. First of all, stop running processes::
 
@@ -39,5 +39,4 @@ Follow next steps in order to update your ``Wazuh 1.X`` installation to ``Wazuh 
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License (version 2) as
-	published by the Free Software Foundation. For more details, go to
-	http://www.ossec.net/main/license/
+	published by the Free Software Foundation.

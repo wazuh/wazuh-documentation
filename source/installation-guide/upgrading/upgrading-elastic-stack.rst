@@ -16,12 +16,12 @@ In this scenario you will only need to configure Logstash to receive data from F
 Configure Logstash
 ^^^^^^^^^^^^^^^^^^
 
-#. Download the new logstash configuration::
+1. Download the new logstash configuration::
 
     curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
     curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
 
-#. In the output section of ``/etc/logstash/conf.d/01-wazuh.conf``, comment the line for ``elastic5-template`` and uncomment the line for ``elastic2-template``:: 
+2. In the output section of ``/etc/logstash/conf.d/01-wazuh.conf``, comment the line for ``elastic5-template`` and uncomment the line for ``elastic2-template``:: 
 
     output {
       elasticsearch {
@@ -35,7 +35,7 @@ Configure Logstash
 	    }
     }
 
-#. *Only if you are using a single-host architecture* (where Wazuh server is running with Elastic Stack in the same host), edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled ``Remote Wazuh Manager - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh Manager - JSON file input``::
+3. *Only if you are using a single-host architecture* (where Wazuh server is running with Elastic Stack in the same host), edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled ``Remote Wazuh Manager - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh Manager - JSON file input``::
 
     # Wazuh - Logstash configuration file
     ## Remote Wazuh Manager - Filebeat input
@@ -66,99 +66,91 @@ Configure Kibana
 
 Below we will configure Kibana index pattern, in order to display Wazuh alerts data.
 
-#. Go to Settings and configure a new wildcard:
+1. Go to Settings and configure a new wildcard:
 
   .. image:: ../../images/installation/kibana-elk2-set.png
     :align: center
     :width: 100%
 
-#. Set ``wazuh-*`` as index pattern and choose ``timestamp`` as time field, then click on create:
+2. Set ``wazuh-*`` as index pattern and choose ``timestamp`` as time field, then click on create:
 
   .. image:: ../../images/installation/kibana-elk2.png
     :align: center
     :width: 100%
 
-#. Set as default wildcard by clicking on the Star:
+3. Set as default wildcard by clicking on the Star:
 
   .. image:: ../../images/installation/kibana-elk.png
     :align: center
     :width: 100%
 
-#. Go to the ``Discover`` tab in order to visualize the alerts data.
+4. Go to the ``Discover`` tab in order to visualize the alerts data.
 
 Upgrade from Elastic Stack 2.X to 5.X
 -------------------------------------
 
-If you had Elastic2 in your previous installation and you want to update it to Elastic 5, you should follow this guide. This will update your current installation.
+Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
-#. Stop the running Logstash, Elasticsearch and kibana instance
+1. Stop the running Logstash, Elasticsearch and Kibana instances:
 
-	a) For Systemd::
+  a) For Systemd::
 
-		systemctl stop logstash.service
-		systemctl stop elasticsearch.service
-		systemctl stop kibana.service
+      systemctl stop logstash.service
+      systemctl stop elasticsearch.service
+      systemctl stop kibana.service
 
-	b) For SysV Init::
+  b) For SysV Init::
 
-		service logstash stop
-		service elasticsearch stop
-		service kibana stop
+      service logstash stop
+      service elasticsearch stop
+      service kibana stop
 
-#. Remove logstash old configuration and template files:
+2. Remove Logstash old configuration and template files:
 
-	Singlehost Configuration::
+  For single-host architectures (Wazuh server and Elastic Stack running in the same system)::
 
-		rm /etc/logstash/conf.d/01-ossec-singlehost.conf
-		rm /etc/logstash/elastic-ossec-template.json
+   rm /etc/logstash/conf.d/01-ossec-singlehost.conf
+   rm /etc/logstash/elastic-ossec-template.json
 
-	Distributed Configuration::
+  For distributed architectures (Elastic Stack standalone server)::
 
-		rm /etc/logstash/conf.d/01-ossec.conf
-		rm /etc/logstash/elastic-ossec-template.json
+   rm /etc/logstash/conf.d/01-ossec.conf
+   rm /etc/logstash/elastic-ossec-template.json
 
-#. Remove old configuration:
+3. Remove deprecated settings from configuration file:
 
-	To avoid conflicts and errors, we are going to remove old configuration of our elasticsearch.
+  To avoid conflicts and errors, we are going to remove deprecated settings of Elasticsearch. To do that, comment the following lines on your ``/etc/elasticsearch/elasticsearch.yml`` file::
 
-	Comment the following lines on your ``/etc/elasticsearch/elasticsearch.yml``::
+    index.number_of_shards: 1
+    index.number_of_replicas: 0
 
-		index.number_of_shards: 1
-		index.number_of_replicas: 0
+  ``ES_HEAP_SIZE`` option is now deprecated. You should also remove or comment out this option in your  ``/etc/sysconfig/elasticsearch`` file::
 
-	``ES_HEAP_SIZE`` option is now deprecated. If you were using that option on your ``/etc/sysconfig/elasticsearch`` you should remove or comment that line::
+    # ES_HEAP_SIZE - Set it to half your system RAM memory
+    ES_HEAP_SIZE=8g
 
-		# ES_HEAP_SIZE - Set it to half your system RAM memory
-		ES_HEAP_SIZE=8g
+  Now you can go ahead and configure it following the Elastic `jvm.options guide <https://www.elastic.co/guide/en/elasticsearch/reference/master/heap-size.html>`_
 
-	And configure it following the Elastic `jvm.options guide <https://www.elastic.co/guide/en/elasticsearch/reference/master/heap-size.html>`_
+4. At this point you will have to install the new version of Elastic Stack. Depending on your operating system you can follow either of these installation instructions:
 
-#. Follow the installation guide:
+    - :ref:`Install Elastic Stack with RPM packages <elastic_server_rpm>`
+    - :ref:`Install Elastic Stack with DEB packages <elastic_server_deb>`
 
-	 - :ref:`Install ELK stach with RPM packages <elastic_server_rpm>`
-	 - :ref:`Install ELK stach with Deb packages <elastic_server_deb>`
+5. To check that eveything worked as expected, lets check the software version of the different components:
 
-#. To check that eveything worked as expected, check the verions
+  a) For Logstash::
 
-	Logstash
-	::
+      $ /usr/share/logstash/bin/logstash -V
+      logstash 5.2.2
 
-		$ /usr/share/logstash/bin/logstash -V
-		logstash 5.2.2
+  b) For Elasticsearch::
 
-	Elasticsearch
-	::
+      $ /usr/share/elasticsearch/bin/elasticsearch -V
+      Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
 
-		$ /usr/share/elasticsearch/bin/elasticsearch -V
-		Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
+  c) For Kibana::
 
-	Kibana
-	::
+      $ /usr/share/kibana/bin/kibana -V
+      5.2.
 
-		$ /usr/share/kibana/bin/kibana -V
-		5.2.
-
-Migrating previous alerts
------------------------------------------
-
-Wazuh 2 uses different indices and templates than Wazuh 1.1.1. For that reason, you will not be able to see the previous alerts using Kibana. It will be necessary to reindex all the previous indices in case you need to consult the alerts previous to the upgrade.
+.. note:: Wazuh v2.X uses different indices and templates than Wazuh v1.X For that reason, you will not be able to see the previous alerts using Kibana. If you need to access them, you will have to reindex the previous indices.

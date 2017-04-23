@@ -47,24 +47,24 @@ Set up Ubuntu build environment
 
 To compile the Windows Wazuh agent installer on Ubuntu, install these prerequisite packages: ::
 
-   $ apt-get install gcc-mingw-w64
-   $ apt-get install nsis
-   $ apt-get install make
+   apt-get install gcc-mingw-w64
+   apt-get install nsis
+   apt-get install make
 
 Source code download
 ^^^^^^^^^^^^^^^^^^^^
 
 Download the Wazuh source code and unzip it: ::
 
-   $ wget -O wazuh-master.zip https://github.com/wazuh/wazuh/archive/master.zip
-   $ unzip wazuh-master.zip
+   wget -O wazuh-master.zip https://github.com/wazuh/wazuh/archive/master.zip
+   unzip wazuh-master.zip
 
 Compiling the agent
 ^^^^^^^^^^^^^^^^^^^
 
 Run the make command: ::
 
-   $ make TARGET=winagent
+   make TARGET=winagent
 
 You should expect the following output near the end of the compile process: ::
 

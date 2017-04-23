@@ -1,26 +1,26 @@
-Update Wazuh Agents
-===================
+Upgrading Wazuh agents
+======================
 
-This section will update your current Wazuh 1.1 installation to Wazuh 2.0. Following the next guide, your current installation will be automatically update:
+This section will help you update your agents from v1.X to v2.X.
 
-#. First of all, stop eveything:
+a) On DEB or RPM based **Linux systems**, you can easily rely on the packages manager to upgrade your agents. The process differs very little from installing a new agent. More information available in our documentation at:
 
-	::
+  - :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`
+  - :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`
 
-			/var/ossec/bin/ossec-control stop
+  You can check your agent version running the following command:
 
-#. Install Wazuh agent:
+  .. code-block:: bash
 
-		- :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`
-		- :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`
+      /var/ossec/bin/manage_agents -V
 
-#. Run ``/var/ossec/bin/manage_agents -V`` to check that everything worked as expected::
+          Wazuh v2.0 - Wazuh Inc.
 
-	# /var/ossec/bin/manage_agents -V
+          This program is free software; you can redistribute it and/or modify
+          it under the terms of the GNU General Public License (version 2) as
+          published by the Free Software Foundation.
 
-	Wazuh v2.0 - Wazuh Inc.
+b) On **Windows**, **Mac OS** and other operating systems we would advise you to delete your previous version and install Wazuh v2.0 from scratch. More information can be found at:
 
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License (version 2) as
-	published by the Free Software Foundation. For more details, go to
-	http://www.ossec.net/main/license/
+  - :ref:`Install Wazuh agent on Windows <wazuh_agent_windows>`
+  - :ref:`Install Wazuh agent on Mac OS X <wazuh_agent_macos>`
