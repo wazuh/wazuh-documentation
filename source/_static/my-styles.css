@@ -101,11 +101,12 @@ h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
     line-height: 24px;
 }
 
-/* Hide version ***************************************************************/
+/* Hide version **************************************************************
 
 .version {
     display: none;
 }
+***/
 
 /* Navigator logo *************************************************************/
 
