@@ -25,7 +25,7 @@ Installing Wazuh manager
 
 2. Download and extract the latest version::
 
-    curl -Ls https://github.com/wazuh/wazuh/archive/v2.0.0.tar.gz | tar zx
+    curl -Ls https://github.com/wazuh/wazuh/archive/v2.0.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. It will guide you through the source installation and compilation::
 
