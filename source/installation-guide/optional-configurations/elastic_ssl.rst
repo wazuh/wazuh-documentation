@@ -8,7 +8,7 @@ If you are running Wazuh server and the Elastic Stack on separate systems (distr
 Generating a self-signed SSL certificate
 ----------------------------------------
 
-First, we need an SSL certificate and a key. 
+First, we need an SSL certificate and a key.
 
 1. On the **machine with Logstash server** installed, create a copy of the OpenSSL example configuration file. The file location may vary depending on your operating system:
 
@@ -80,17 +80,15 @@ Now we will configure Filebeat to verify the Logstash server's certificate.
 
 		scp root@LOGSTASH_SERVER_IP:/etc/logstash/logstash.crt /etc/filebeat
 
-2. Edit the file ``/etc/filebeat/filebeat.yml`` and uncomment the lines related to SSL inside ``logstash``. The file should remain like this:
+2. Edit the file ``/etc/filebeat/filebeat.yml`` and uncomment the lines related to SSL inside ``logstash``. The file should remain like this::
 
-  .. code-block: yaml
+    output:
+     logstash:
+       hosts: ["192.168.1.2:5000"]
+       ssl:
+         certificate_authorities: ["/etc/filebeat/logstash.crt"]
 
-	output:
-	 logstash:
-	   hosts: ["192.168.1.2:5000"]
-	   ssl:
-	     certificate_authorities: ["/etc/filebeat/logstash.crt"]
-
-2. Restart Filebeat. The command depends on the OS init system:
+3. Restart Filebeat. The command depends on the OS init system:
 
 	a. For Systemd::
 
