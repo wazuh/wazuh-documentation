@@ -70,6 +70,7 @@ Available documentation
    installation-guide/index
    user-manual/index
    docker/index
+   deploying-with-puppet/index
    pci-dss/index
    amazon/index
    migrating-from-ossec/index

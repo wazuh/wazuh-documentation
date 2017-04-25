@@ -15,8 +15,8 @@ Download and install the Wazuh module from Puppet Forge: ::
    Notice: Downloading from https://forgeapi.puppetlabs.com ...
    Notice: Installing -- do not interrupt ...
    /etc/puppet/modules
-   └─┬ wazuh-wazuh (v2.0.1)
-     ├── jfryman-selinux (v0.2.5)
+   └─┬ wazuh-wazuh (v2.0.21)
+     ├── puppet-selinux (v0.8.0)
      ├── puppetlabs-apt (v2.2.0)
      ├── puppetlabs-concat (v1.2.4)
      ├── puppetlabs-stdlib (v4.9.0)
@@ -63,19 +63,6 @@ Here is an example of a manifest ``wazuh-manager.pp``::
        logfile => '/var/log/secure',
        logtype => 'syslog'
      }
-
-    class { '::mysql::server':
-      root_password           => 'yourpassword',
-      remove_default_accounts => true,
-    }
-
-    mysql::db { 'ossec':
-      user     => 'ossec',
-      password => 'yourpassword',
-      host     => 'localhost',
-      grant    => ['ALL'],
-      sql      => '/var/ossec/contrib/sqlschema/mysql.schema'
-    }
   }
 
 Place the file at */etc/puppetlabs/code/environments/production/manifests/* in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf.
