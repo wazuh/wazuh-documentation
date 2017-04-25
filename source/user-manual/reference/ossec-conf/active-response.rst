@@ -30,7 +30,7 @@ disabled
 This is a special-case option, in that it occurs alone in its own active-response section for the sole purpose of enabling or disabling the active response facility in Wazuh.
 In the absence of a section like this, active response is by default enabled on Unix-like systems, and disabled on Windows systems.
 
-Setting it to ``yes`` on an agent will disable active-response for that agent only, while setting it in the manager's ossec.conf file will disable active-response on the manager and all agents..
+Setting it to ``yes`` on an agent will disable active-response for that agent only, while setting it in the manager's ``ossec.conf`` file will disable active-response on the manager and all agents..
 
 .. note::
 
@@ -140,8 +140,8 @@ repeated_offenders
 
 This is a comma-separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries. This must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**.
 
-+--------------------+----------------------------+
-| **Default Value**  | n/a                        |
-+--------------------+----------------------------+
-| **Allowed values** | A postive number (minutes) |
-+--------------------+----------------------------+
++--------------------+-----------------------------+
+| **Default Value**  | n/a                         |
++--------------------+-----------------------------+
+| **Allowed values** | A positive number (minutes) |
++--------------------+-----------------------------+

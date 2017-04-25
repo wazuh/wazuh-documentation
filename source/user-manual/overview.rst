@@ -35,4 +35,4 @@ The Wazuh agent runs on monitored hosts that use a Windows, Linux, Solaris, BSD,
 
 - **Manage agents**: In order to know how to register, remove or list the agents see :doc:`Agents <agents/index>`.
 
-+ **Capabilities**: To learn more about the capabilites that Wazuh offers, go to the :doc:`Capabilities section <capabilities/index>`.
++ **Capabilities**: To learn more about the capabilities that Wazuh offers, go to the :doc:`Capabilities section <capabilities/index>`.

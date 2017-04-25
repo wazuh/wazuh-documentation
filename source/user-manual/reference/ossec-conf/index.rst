@@ -5,7 +5,7 @@ Local configuration
 
 The ``ossec.conf`` file is the main configuration file on the Wazuh manager, and it also plays a role on the agents. It is located at ``/var/ossec/etc/ossec.conf`` both in the manager and agent. It is recommended you back up this file before making changes to it, as an error in the configuration can completely prevent Wazuh services from starting up.
 
-The ``ossec.conf`` file is in XML format, and all configuration options are nested in their appropriate section of the file.  In this file, the outermost XML tag is <ossec_config>.  For example, here is an example of the proper location of the *alerts* configuration section:
+The ``ossec.conf`` file is in XML format, and all configuration options are nested in their appropriate section of the file.  In this file, the outermost XML tag is ``<ossec_config>``.  For example, here is an example of the proper location of the *alerts* configuration section:
 
 .. code-block:: xml
 

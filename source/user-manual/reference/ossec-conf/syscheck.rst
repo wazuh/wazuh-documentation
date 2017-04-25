@@ -40,7 +40,7 @@ All files and subdirectories within the noted directories will also be monitored
 
 Drive letters without directories are not valid. At a minimum the '.' should be included (``D:\.``).
 
-This is to be set on the system to be monitored (or in the agent.conf, if appropriate).
+This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
 +--------------------+------------------------------------+
 | **Default Value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |

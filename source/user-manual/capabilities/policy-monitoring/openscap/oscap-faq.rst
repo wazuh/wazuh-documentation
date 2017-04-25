@@ -25,7 +25,7 @@ No, each evaluation is executed sequentially.  Also, each profile of an evaluati
 How does the interval work?
 ---------------------------
 
-The interval is the intended amount of time between the commencements of subsequent OpenSCAP scans on an agent.  If a scan takes longer than the configured interval, an "interval overtaken" log message will be written to /var/ossec/log/ossec.log, and when the scan is finished, it will start again immediately.
+The interval is the intended amount of time between the commencements of subsequent OpenSCAP scans on an agent.  If a scan takes longer than the configured interval, an "interval overtaken" log message will be written to ``/var/ossec/log/ossec.log``, and when the scan is finished, it will start again immediately.
 
 
 Are the policies evaluated when OSSEC starts?

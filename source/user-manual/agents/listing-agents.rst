@@ -11,7 +11,7 @@ There are 3 ways to list the registered agents in a manager:
 
 Using Wazuh app
 --------------------------------
-Acces to the Wazuh app and go to *Agents* tab:
+Access to the Wazuh app and go to *Agents* tab:
 
 .. thumbnail:: ../../images/manual/managing-agents/listing-agents-app.png
     :title: Listing agents from Wazuh app

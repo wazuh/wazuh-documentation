@@ -10,7 +10,7 @@ FAQ
 #. `Can Wazuh report changes in the content of a text file?`_
 #. `How does Wazuh verify the integrity of files?`_
 #. `Does Wazuh monitor any directories by default?`_
-#. `Can I force an inmediate syscheck scan?`_
+#. `Can I force an immediate syscheck scan?`_
 #. `Does Syscheck start when Wazuh start?`_
 #. `Does Wazuh alert when a new file is created?`_
 
@@ -49,7 +49,7 @@ Does Wazuh monitor any directories by default?
 
 Yes. By default Wazuh monitors ``/etc``, ``/usr/bin``, ``/usr/sbin``, ``/bin`` and ``/sbin`` on Unix-like systems and ``C:\Windows\System32`` on Windows.
 
-Can I force an inmediate syscheck scan?
+Can I force an immediate syscheck scan?
 --------------------------------------------------
 
 Yes, you can force an agent to perform a system integrity check with ::

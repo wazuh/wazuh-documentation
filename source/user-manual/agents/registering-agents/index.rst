@@ -3,7 +3,7 @@
 Registering agents
 ==============================
 
-Once we have our agents installed, it is necessary to connect them to the manager. The communication between an agent and the manager is performed via the OSSEC message protocol, which encrypts messages using a preshared key. The process of provisioning an agent authentication key on the manager and distributing it to an agent is called registration.
+Once we have our agents installed, it is necessary to connect them to the manager. The communication between an agent and the manager is performed via the OSSEC message protocol, which encrypts messages using a pre-shared key. The process of provisioning an agent authentication key on the manager and distributing it to an agent is called registration.
 
 **client.keys**
 

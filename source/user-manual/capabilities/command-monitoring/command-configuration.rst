@@ -17,7 +17,7 @@ Command monitoring is configured in the :ref:`localfile section<reference_ossec_
 
 Monitor running Windows processes
 ---------------------------------
-Imagine you want to monitor the running proccess and alert if an important one is not running.
+Imagine you want to monitor the running process and alert if an important one is not running.
 
 Example with notepad.exe:
 
@@ -84,7 +84,7 @@ Check if the output changed
 
 In this case we use the Linux "netstat" command and the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening tcp sockets.
 
-Configuration in agent.conf or ossec.conf::
+Configuration in ``agent.conf`` or ``ossec.conf``::
 
   <localfile>
     <log_format>full_command</log_format>
@@ -109,7 +109,7 @@ Load average
 
 You can configure Wazuh to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like 2 in this example.
 
-Configuration in agent.conf or ossec.conf::
+Configuration in ``agent.conf`` or ``ossec.conf``::
 
   <localfile>
       <log_format>command</log_format>
@@ -130,7 +130,7 @@ Detect USB Storage
 
 Wazuh can be configured to alert when a USB storage device is connected. This example is for a Windows agent.
 
-Configure your agent to monitor the USBSTOR registry entry, by adding this to the manager's agent.conf ::::
+Configure your agent to monitor the USBSTOR registry entry, by adding this to the manager's ``agent.conf`` ::::
 
   <agent_config os="Windows">
     <localfile>

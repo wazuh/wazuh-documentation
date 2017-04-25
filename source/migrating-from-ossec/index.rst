@@ -8,7 +8,7 @@ This document describes how to migrate your existing OSSEC installation (agent o
 .. note::
     OSSEC agents are compatible with Wazuh manager, but if you don't migrate your agents to Wazuh, you will lost some capabilities like :ref:`OpenSCAP<openscap_module>` or some :ref:`syscheck features<manual_file_integrity>` in those agents.
 
-The migration of ELK stack, in case that you already have it installed, it is beyond the scope of Wazuh documentation. We recommend you to visit our guides for :ref:`Installing Elastic Stack <installation_elastic>`.
+The migration of Elastic stack, in case that you already have it installed, it is beyond the scope of Wazuh documentation. We recommend you to visit our guides for :ref:`Installing Elastic Stack <installation_elastic>`.
 
 Follow the appropriate section depending on the type of your OSSEC installation:
 

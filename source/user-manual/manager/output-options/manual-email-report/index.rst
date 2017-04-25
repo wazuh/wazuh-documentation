@@ -96,7 +96,7 @@ In order to configure Wazuh to send alerts through email, you need to configure 
 
 To see all the available options to configure it, go to :ref:`global section <reference_ossec_global>`
 
-After the global configuration, we need to configure the ``email_alert_level``. This option stablishs the minimum level to send an alert. By default is set to 7.
+After the global configuration, we need to configure the ``email_alert_level``. This option establishes the minimum level to send an alert. By default is set to 7.
 
 ::
 
@@ -219,8 +219,8 @@ This configuration will send:
 
 - An email to alice@test.com if any alert on server1 or server2 is triggered
 - An email to is@test.com if the alerts came from ``/log/secure/``
-- An email tto bob@test.com if the alerts came from any machine on the ``192.168.0.0/24`` network
-- An email tto david@test.com if the alerts have a level equals or higher than 12.
+- An email to bob@test.com if the alerts came from any machine on the ``192.168.0.0/24`` network
+- An email to david@test.com if the alerts have a level equals or higher than 12.
 
 Generating automatic reports
 -----------------------------
@@ -259,9 +259,9 @@ It's also possible to force the mail alert on the rule declaration. In order to 
 
 The possible values to this option are:
 
-- alert_by_email: Always alert by email.
-- no_email_alert: Never alert by email.
-- no_log: Do not log this alert.
+- **alert_by_email**: Always alert by email.
+- **no_email_alert**: Never alert by email.
+- **no_log**: Do not log this alert.
 
 So for example this rule:
 
@@ -274,7 +274,7 @@ So for example this rule:
      <description>Ossec server started.</description>
    </rule>
 
-This will send an email everytime this rule is triggered. I doesn't matter the level minimum level configured on the ``<alerts>`` section in ``ossec.conf``
+This will send an email every time this rule is triggered. I doesn't matter the level minimum level configured on the ``<alerts>`` section in ``ossec.conf``
 
 
 .. toctree::

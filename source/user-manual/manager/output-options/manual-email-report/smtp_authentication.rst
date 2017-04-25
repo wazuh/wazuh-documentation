@@ -53,7 +53,7 @@ Installing Postfix by default will allow us to send emails, on the basics, we do
 #. Secure DB password
 
     ::
-      
+
       chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
       chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
 
@@ -69,7 +69,7 @@ Installing Postfix by default will allow us to send emails, on the basics, we do
 
       echo "Test mail from postfix" | mail -s "Test Postfix" you@example.com
 
-    You shoul receive an email on ``you@example.com``
+    You should receive an email on ``you@example.com``
 
 #. Configure Wazuh in the ``/var/ossec/etc/ossec.conf``:
 

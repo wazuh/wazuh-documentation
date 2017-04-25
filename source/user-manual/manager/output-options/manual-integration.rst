@@ -41,7 +41,7 @@ Integration with Slack
       <hook_url>https://hooks.slack.com/services/...</hook_url>
     </integration>
 
-Integratiion with PagerDuty
+Integration with PagerDuty
 ---------------------------
 
 ::

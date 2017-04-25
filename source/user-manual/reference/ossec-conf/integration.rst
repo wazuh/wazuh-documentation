@@ -37,8 +37,7 @@ This indicates the type of the service to integrate with.
 hook_url
 ^^^^^^^^^^^
 
-This is the URL provided by Slack when integration is enabled on the Slack side. This is **mandatory for
-Slack.**
+This is the URL provided by Slack when integration is enabled on the Slack side. This is **mandatory for Slack.**
 
 +--------------------+-----------+
 | **Default Value**  | n/a       |
@@ -51,7 +50,7 @@ api_key
 
 This is the key that you would have retrieved from the PagerDuty API. This is **mandatory for PagerDuty.**
 
-.. note:: You must restart OSSEC after changing this configuration.
+.. note:: You must restart Wazuh after changing this configuration.
 
 +--------------------+-------------------+
 | **Default Value**  | n/a               |

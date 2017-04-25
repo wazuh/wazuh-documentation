@@ -101,7 +101,7 @@ This option will alert if a Cisco PIX/router configuration changes. Set the ``ty
 Checking the setup
 --------------------------
 
-Finally,the ``expect`` package must be present on the manager for this feature to work.
+Finally, the ``expect`` package must be present on the manager for this feature to work.
 
 When the ``expect`` package is present and Wazuh is restarted, the following is shown in the ``/var/ossec/logs/ossec.log`` file:
 

@@ -109,7 +109,7 @@ only-future-events
 ^^^^^^^^^^^^^^^^^^^
 
 This is for use only with the ``eventchannel`` log format.  By default, when Wazuh starts, it will read all log content from a given Windows Event Channel since Wazuh was last stopped.
-Set this option to **yes** to override this behaviour if desired.  Then Wazuh would only receive events that occur after the Wazuh agent is started.
+Set this option to **yes** to override this behavior if desired.  Then Wazuh would only receive events that occur after the Wazuh agent is started.
 
 +--------------------+-----------+
 | **Default Value**  | n/a       |
@@ -222,7 +222,7 @@ This is the format of the log being read.
 
 	.. warning::
 
-			Agents will ignore ``command`` and ``full_command`` log sources unless they have "logcollector.remote_commands=1" set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution since it may not be permissable in all environments to allow the Wazuh manager to run arbitrary commands on agents in their root security context.
+			Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution since it may not be permissible in all environments to allow the Wazuh manager to run arbitrary commands on agents in their root security context.
 
 
 	Example:

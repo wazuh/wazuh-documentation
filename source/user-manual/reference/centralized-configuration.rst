@@ -13,7 +13,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**)
 
-Below, is the proper syntax of *agent.conf* and the process of pushing the configuration from the manager to the agent.
+Below, is the proper syntax of ``agent.conf`` and the process of pushing the configuration from the manager to the agent.
 
 agent.conf
 --------------------------------
@@ -25,7 +25,7 @@ agent.conf
 		    ...
 		</agent_config>
 
-The agent.conf is only valid on server installations.
+The ``agent.conf`` is only valid on server installations.
 
 The ``agent.conf`` exists in ``/var/ossec/etc/shared``.
 It should be readable by the ossec user.
@@ -125,7 +125,7 @@ Once an agent received the configuration, the "Client version" field will have t
        Syscheck last started  at: Wed Feb 15 13:24:32 2017
        Rootcheck last started at: Wed Feb 15 13:37:11 2017
 
-Also, the API returns the md5sum of agent.conf in the field ``sharedSum``:
+Also, the API returns the md5sum of ``agent.conf`` in the field ``sharedSum``:
 
 .. code-block:: console
 
