@@ -6,7 +6,21 @@ FAQ
 How can I tune the Kibana configuration?
 -------------------------------------------------------------------
 
-The Kibana default configuration is stored in ``kibana/config/kibana.yml``.
+The Kibana default configuration is stored in ``kibana/config/kibana.yml``.::
+
+  kibana:
+    image: wazuh/wazuh-kibana
+    hostname: kibana
+    restart: always
+    ports:
+      - "5601:5601"
+    networks:
+      - docker_elk
+    depends_on:
+      - elasticsearch
+    environment:
+      - "WAZUH_KIBANA_PLUGIN_URL=http://your.repo/wazuhapp-2.0_5.3.0.zip"
+    entrypoint: sh wait-for-it.sh elasticsearch
 
 How can I tune the Logstash configuration?
 -------------------------------------------------------------------
