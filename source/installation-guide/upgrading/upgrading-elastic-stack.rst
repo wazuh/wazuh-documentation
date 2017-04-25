@@ -18,10 +18,10 @@ Configure Logstash
 
 1. Download the new logstash configuration::
 
-    curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
-    curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic2-template.json
+    curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/logstash/01-wazuh.conf
+    curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/elasticsearch/wazuh-elastic2-template.json
 
-2. In the output section of ``/etc/logstash/conf.d/01-wazuh.conf``, comment the line for ``elastic5-template`` and uncomment the line for ``elastic2-template``:: 
+2. In the output section of ``/etc/logstash/conf.d/01-wazuh.conf``, comment the line for ``elastic5-template`` and uncomment the line for ``elastic2-template``::
 
     output {
       elasticsearch {

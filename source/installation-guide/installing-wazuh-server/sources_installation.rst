@@ -62,7 +62,7 @@ Installing Wazuh API
 
 2. Download and execute the installation script::
 
-      curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/master/install_api.sh \
+      curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/2.0/install_api.sh \
       && bash ./install_api.sh download
 
 3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions. It is possible to set a custom Python path for the API to use, in ``/var/ossec/api/configuration/config.js``:

@@ -64,8 +64,8 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 2. Download the Wazuh config and template files for Logstash::
 
-	curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/logstash/01-wazuh.conf
-	curl -so /etc/logstash/wazuh-elastic5-template.json https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/wazuh-elastic5-template.json
+	curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/logstash/01-wazuh.conf
+	curl -so /etc/logstash/wazuh-elastic5-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/elasticsearch/wazuh-elastic5-template.json
 
 3. **Only if you are using a single-host architecture**:
 
@@ -91,7 +91,7 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 .. note::
 
     If you are running Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), then it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elastic_ssl`.
-	
+
 Kibana
 ------
 
