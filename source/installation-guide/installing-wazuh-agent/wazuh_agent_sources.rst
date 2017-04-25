@@ -56,8 +56,8 @@ Source code download
 
 Download the Wazuh source code and unzip it: ::
 
-   wget -O wazuh-master.zip https://github.com/wazuh/wazuh/archive/master.zip
-   unzip wazuh-master.zip
+   curl -Ls https://github.com/wazuh/wazuh/archive/v2.0.tar.gz | tar zx
+   cd wazuh-*/src
 
 Compiling the agent
 ^^^^^^^^^^^^^^^^^^^
