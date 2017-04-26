@@ -1,37 +1,38 @@
 .. _user_manual_overview:
 
 Overview
-================
+========
 
-This manual provides information for users of Wazuh that is an open source project for security visibility, compliance and infrastructure monitoring. It was born as a fork of OSSEC HIDS. The manual describes how each capability works and how to configure them. Also, this section explains the Wazuh RESTful API features and configuration as well how to install, update, and contribute to :doc:`Wazuh Ruleset<ruleset/index>`.
+Wazuh is an open source project that provides security visibility, compliance and infrastructure monitoring capabilities. The project was born as a fork of OSSEC HIDS, and has evolved into a comprehensive solution by implementing new functionalities and integrating other tools like OpenSCAP and Elasticsearch.
 
+This manual describes how to configure and use each one of Wazuh components: Wazuh server, Wazuh agent, and Elastic Stack. 
 
 Wazuh server
 ------------
 
-The server component is the system that analyzes the data received from the agents, triggering alerts when an event matches a rule. Main components:
+The Wazuh server is the system that analyzes the data received from the agents, triggering alerts when an event matches a rule. It is also used to monitor and control the configuration and status of registered agents. Main componetns of this server are:
 
-- **Manager**, that receives data from the agents, identify the type of information being processed and extracts relevant data elements from the log messages. Also, the alerts generated can be forwarder to :doc:`other systems<manager/output-options/index>`.
+- **Manager**: It receives data and analyzes data from the agents. To do that it uses decoders and rules that have been crafted to trigger security alerts. The manager is also used to distribute configuration files to the agents, and to monitor their status. In addition it can send control messages to trigger automatic actions at an agent level.
 
-+ :doc:`RESTful API <api/index>`, which provides an interface to manage and monitor the configuration and deployment status of agents. Also it's used by the Wazuh App.
++ :doc:`RESTful API <api/index>`: It provides an interface to manage and monitor the configuration of the manager and agents. It can be also used to inspect the manager log messages, decoders and rules. In addition it provides useful information related to the agents, including their status, operating system details, and file integrity monitoring and rootcheck alerts. 
 
-- **Filebeat**, for distributed architecture used to transfer the information from the manager to Logstash. This component has its own `documentation <https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-overview.html>`_ developed by Elastic.
+- **Filebeat**: It is used in distributed architectures (where the Wazuh server and Elastic Stack live in different systems) to forward the alerts data to Logstash. This component has its own `documentation <https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-overview.html>`_ developed by Elastic.
 
 Elastic Stack
 -------------
 
-Elastic Stack is a unified suite of popular open source projects for log management, including Elasticsearch, Logstash, Kibana, Filebeat, and others. The projects especially relevant to the Wazuh solution are:
+Elastic Stack is used to index, browse and visualize Wazuh alerts data. In addition, the Wazuh app for Kibana can be used to visualize configuration settings, rules and decoders, agents status and information, and provides dashboards for policy, compliance and file integrity monitoring.
 
-- **Logstash** is a tool to collect logs, parse them, and pass them along to a storage system. `Logstash documentation <https://www.elastic.co/guide/en/logstash/current/index.html>`_ developed by Elastic.
+- **Logstash** is used to ingest data coming from one or more Wazuh servers, feeding the Elasticsearch cluster. In addition it enriches alerts adding Geolocation metadata. More information at `Logstash official documentation <https://www.elastic.co/guide/en/logstash/current/index.html>`_.
 
-+ **Elasticsearch** is a highly scalable full-text search and analytics engine. `Elasticsearch documentation <https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html>`_ developed by Elastic.
++ **Elasticsearch** is a highly scalable full-text search and analytics engine. It is used to index alerts data, and historical agents statuts information. More information at `Elasticsearch official documentation <https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html>`_.
 
-- **Kibana** is a flexible and intuitive web interface for mining, analyzing, and visualizing data. `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/index.html>`_ developed by Elastic.
+- **Kibana** is a flexible and intuitive web interface for mining, analyzing, and visualizing data. In combination with our Wazuh Kibana app, it is used as Wazuh web user interface (WUI). More information at `Kibana official documentation <https://www.elastic.co/guide/en/kibana/current/index.html>`_.
 
 Agents
 ------
 
-The Wazuh agent runs on monitored hosts that use a Windows, Linux, Solaris, BSD, or Mac operating system. It is used to collect different types of system and application data. The agent forwards the collected data to the manager through an encrypted and authenticated channel.
+The Wazuh agent runs on monitored systems, and is in charge of collecting log and event data, performing policy monitoring scans, detecting malware and rootkits and alert when watched files are modified. It communicates with the Wazuh server through an encrypted and authenitcated channel. 
 
 - **Manage agents**: In order to know how to register, remove or list the agents see :doc:`Agents <agents/index>`.
 

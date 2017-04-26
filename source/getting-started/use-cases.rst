@@ -155,7 +155,7 @@ Rootkits detection
 
 Wazuh agent periodically scans the monitored system to detect rootkits both at a kernel and user level. This type of malware is desinged to hide its existence, making it very difficult to detect. It usually replaces or changes existing operating system components in order to alter the behavior of the system, hidding itself and other processes, files or network connetions.
 
-Wazuh usues different detection mechanisms to look for system anomalies or well knwon malware. This is done peridically by the `Rootcheck` component:
+Wazuh uses different detection mechanisms to look for system anomalies or well knwon malware. This is done peridically by the `Rootcheck` component:
 
 +-------------------------------+---------------------------------+---------+-------------+
 | Action                        | Detection mechanism             | Binary  | System call |
