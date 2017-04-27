@@ -5,16 +5,16 @@ Overview
 
 Wazuh is an open source project that provides security visibility, compliance and infrastructure monitoring capabilities. The project was born as a fork of OSSEC HIDS, and has evolved into a comprehensive solution by implementing new functionalities and integrating other tools like OpenSCAP and Elasticsearch.
 
-This manual describes how to configure and use each one of Wazuh components: Wazuh server, Wazuh agent, and Elastic Stack. 
+This manual describes how to configure and use each one of Wazuh components: Wazuh server, Wazuh agent, and Elastic Stack.
 
 Wazuh server
 ------------
 
-The Wazuh server is the system that analyzes the data received from the agents, triggering alerts when an event matches a rule. It is also used to monitor and control the configuration and status of registered agents. Main componetns of this server are:
+The Wazuh server is the system that analyzes the data received from the agents, triggering alerts when an event matches a rule. It is also used to monitor and control the configuration and status of registered agents. Main components of this server are:
 
 - **Manager**: It receives data and analyzes data from the agents. To do that it uses decoders and rules that have been crafted to trigger security alerts. The manager is also used to distribute configuration files to the agents, and to monitor their status. In addition it can send control messages to trigger automatic actions at an agent level.
 
-+ :doc:`RESTful API <api/index>`: It provides an interface to manage and monitor the configuration of the manager and agents. It can be also used to inspect the manager log messages, decoders and rules. In addition it provides useful information related to the agents, including their status, operating system details, and file integrity monitoring and rootcheck alerts. 
++ :doc:`RESTful API <api/index>`: It provides an interface to manage and monitor the configuration of the manager and agents. It can be also used to inspect the manager log messages, decoders and rules. In addition it provides useful information related to the agents, including their status, operating system details, and file integrity monitoring and rootcheck alerts.
 
 - **Filebeat**: It is used in distributed architectures (where the Wazuh server and Elastic Stack live in different systems) to forward the alerts data to Logstash. This component has its own `documentation <https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-overview.html>`_ developed by Elastic.
 
@@ -32,7 +32,7 @@ Elastic Stack is used to index, browse and visualize Wazuh alerts data. In addit
 Agents
 ------
 
-The Wazuh agent runs on monitored systems, and is in charge of collecting log and event data, performing policy monitoring scans, detecting malware and rootkits and alert when watched files are modified. It communicates with the Wazuh server through an encrypted and authenitcated channel. 
+The Wazuh agent runs on monitored systems, and is in charge of collecting log and event data, performing policy monitoring scans, detecting malware and rootkits and alert when watched files are modified. It communicates with the Wazuh server through an encrypted and authenitcated channel.
 
 - **Manage agents**: In order to know how to register, remove or list the agents see :doc:`Agents <agents/index>`.
 
