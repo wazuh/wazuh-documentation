@@ -17,7 +17,7 @@ The ossec-control script is used to start, stop, configure, or check on the stat
 |             |                                                                                                         |
 |             | This allows an agent to reload without losing active response status.                                   |
 |             |                                                                                                         |
-|             | This is only available on a Wazuh agent.                                                                |
+|             | This option is not available on a local Wazuh installation.                                             |
 +-------------+---------------------------------------------------------------------------------------------------------+
 | **status**  | Determine which Wazuh processes are running.                                                            |
 +-------------+---------------------------------------------------------------------------------------------------------+
