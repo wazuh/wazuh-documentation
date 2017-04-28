@@ -3,9 +3,7 @@
 SMTP server with authentication
 ===============================
 
-In order to use emails with authentication like gmail, we need to configure a server relay because Wazuh does not handle authentication. Here you can see a guide to the configuration of ``postfix``:
-
-Installing Postfix by default will allow us to send emails, on the basics, we do not need to configure anything, so we are not configuring an SMTP private server or relaying server. Wazuh will sent email as the sender with specify, with no TLS, no encryption just the basic, BUT IN SOME CASES we need to use an authenticated SMTP to send email (for example, because the recipient is rejecting emails from Postfix because they are not identified) so we move on next configuration:
+In case that your SMTP server has authentication (like Gmail), we need to configure a server relay because Wazuh does not support it by default. For this purpose we will use ``Postfix``. The following guide describes the minimal configuration to perform in Postfix to allow Wazuh sends emails to a SMTP with authentication:
 
 #. Install the needed packages:
 
@@ -76,7 +74,7 @@ Installing Postfix by default will allow us to send emails, on the basics, we do
     ::
 
       <global>
-        <email_notification>no</email_notification>
+        <email_notification>yes</email_notification>
         <smtp_server>localhost</smtp_server>
         <email_from>USERNAME@gmail.com</email_from>
         <email_to>you@example.com</email_to>
