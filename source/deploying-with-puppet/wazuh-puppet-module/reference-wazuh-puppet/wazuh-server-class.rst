@@ -212,6 +212,11 @@ $ar_level
 
   `Default 7`
 
+$ar_agent_id
+  List of rule IDs.
+
+  `Default ''`
+
 $ar_rules_id
   List of rule IDs.
 

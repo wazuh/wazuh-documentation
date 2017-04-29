@@ -39,11 +39,6 @@ Here is an example of a manifest ``wazuh-manager.pp``::
      class { 'wazuh::server':
        mailserver_ip => 'localhost',
        ossec_emailto => ['user@mycompany.com'],
-       use_mysql => true,
-       mysql_hostname => '127.0.0.1',
-       mysql_name => 'ossec',
-       mysql_password => 'yourpassword',
-       mysql_username  => 'ossec',
      }
 
      wazuh::command { 'firewallblock':
@@ -55,6 +50,7 @@ Here is an example of a manifest ``wazuh-manager.pp``::
      wazuh::activeresponse { 'blockWebattack':
         command_name => 'firewall-drop',
         ar_level     => 9,
+        ar_agent_id  => 123,
         ar_rules_id  => [31153,31151],
         ar_repeated_offenders => '30,60,120'
      }
