@@ -7,17 +7,17 @@ Wazuh is often used to meet compliance requirements (such PCI DSS or HIPAA) and 
 
 Here is a list of common use cases:
 
-- `Signature-based log analysis`_
-- `File integrity monitoring`_
-- `Rootkits detection`_
-- `Security policy monitoring`_
+#. `Signature-based log analysis`_
+#. `File integrity monitoring`_
+#. `Rootkits detection`_
+#. `Security policy monitoring`_
 
 Signature-based log analysis
 ----------------------------
 
-Automated log analysis and management accelerates threats detection. There are many cases where evicence of an attack can be found in the logs of your devices, systems and applications. Wazuh can be used to automatically aggregate and analyze log data.
+Automated log analysis and management accelerates threat detection. There are many cases where evicence of an attack can be found in the logs of your devices, systems and applications. Wazuh can be used to automatically aggregate and analyze log data.
 
-Usually it is the Wazuh agent (running in the monitored host), the one in charge of reading operating system and application log messages, forwarding those to the Wazuh server, where the analysis takes place. The server can also receive data via syslog, from network devices or applications.
+The Wazuh agent (running on the monitored host) is usually the one in charge of reading operating system and application log messages, forwarding those to the Wazuh server, where the analysis takes place. When no agent is deployed, the server can also receive data via syslog, from network devices or applications.
 
 Wazuh uses decoders to identify the source application of the log message, and then analyzes it using application specific rules. Here is an example of a rule used to detect SSH authentication failure events:
 
@@ -88,7 +88,7 @@ Wazuh provides default ruleset, updated periodically, with over 1,600 rules for 
 File integrity monitoring
 -------------------------
 
-File integrity monitoring (FIM) component alerts you to changes in operating system and application software files. This capability is often used to detect access or changes to sensitive data. In fact, if your servers are in scope with PCI DSS, the requirement 11.5 states that you must install a file integrity monitoring solution to pass your audit.
+File integrity monitoring (FIM) component detects and alerts when operating system and application files are modified. This capability is often used to detect access or changes to sensitive data. In fact, if your servers are in scope with PCI DSS, the requirement 11.5 states that you must install a file integrity monitoring solution to pass your audit.
 
 Below is an example of an alert, generated when a monitored file is changed. Metadata includes MD5 and SHA1 checksums, file sizes (before and after the change), file permissions, file owner and content changes.
 
@@ -153,9 +153,9 @@ A good summary of file changes, can be found in the file integrity monitoring da
 Rootkits detection
 ------------------
 
-Wazuh agent periodically scans the monitored system to detect rootkits both at a kernel and user level. This type of malware is desinged to hide its existence, making it very difficult to detect. It usually replaces or changes existing operating system components in order to alter the behavior of the system, hidding itself and other processes, files or network connetions.
+Wazuh agent periodically scans the monitored system to detect rootkits both at a kernel and user level. This type of malware usually replaces or changes existing operating system components in order to alter the behavior of the system, hidding itself and other processes, files or network connetions.
 
-Wazuh uses different detection mechanisms to look for system anomalies or well knwon malware. This is done peridically by the `Rootcheck` component:
+Wazuh uses different detection mechanisms to look for system anomalies or well known intrusions. This is done peridically by the `Rootcheck` component:
 
 +-------------------------------+---------------------------------+---------+-------------+
 | Action                        | Detection mechanism             | Binary  | System call |
@@ -230,7 +230,7 @@ Security policy monitoring
 
 SCAP is a standardized compliance checking solution for enterprise-level infrastructure. It is a line of specifications maintained by the National Institute of Standards and Technology (NIST) for maintaining system security for enterprise systems.
 
-OpenSCAP is an auditing tool that utilizes the Extensible Configuration Checklist Description Format (XCCDF). XCCDF is a standard way of expressing checklist content and defines security checklists. It also combines with other specifications such as CPE, CCE, and OVAL, to create a SCAP-expressed checklist that can be processed by SCAP-validated products.
+OpenSCAP is an auditing tool that utilizes the Extensible Configuration Checklist Description Format (XCCDF). XCCDF is a standard way of expressing checklist content and defines security checklists. It also combines with other specifications such as CPE, CVE, CCE, and OVAL, to create a SCAP-expressed checklist that can be processed by SCAP-validated products.
 
 Wazuh agent uses OpenSCAP internally to verify that systems confirm to CIS hardening standards. Below is an example of an SCAP rule used to check if SSH daemon is configured to allow empty passwords:
 

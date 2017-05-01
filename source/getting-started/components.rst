@@ -8,9 +8,9 @@ Wazuh's main components are the agent that runs on each monitored host, and the 
 Wazuh agent
 -----------
 
-The Wazuh agent runs on monitored hosts that use a Windows, Linux, Solaris, BSD, or Mac operating system. It is used to collect different types of system and application data. The agent forwards the collected data to the Wazuh server through an encrypted and authenticated channel. In order to establish this secure channel, a registration process involving unique pre-shared keys is utilized.
+The Wazuh agent runs on monitored hosts that use a Windows, Linux, Solaris, BSD, or Mac operating system. It is used to detect security issues and collect different types of system and application data. The agent forwards the collected data to the Wazuh server through an encrypted and authenticated channel. In order to establish this secure channel, a registration process involving unique pre-shared keys is utilized.
 
-Pre-compiled agent installation packages are already available for these operating systems: Linux, AIX, Solaris, Windows, and Darwin (Mac OS X).
+The agents can be used to monitor physical servers, virtual machines and cloud instances (e.g. Amazon AWS, Azure or Google Cloud). Pre-compiled agent installation packages are already available for these operating systems: Linux, AIX, Solaris, Windows, and Darwin (Mac OS X).
 
 On Unix-based operating systems, the agent runs multiple processes that communicate through a local Unix domain socket with the process that communicates with the server. On Windows systems there is only one agent process running multiple tasks using mutexes.
 

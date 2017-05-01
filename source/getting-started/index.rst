@@ -3,7 +3,7 @@
 Getting started
 ===============
 
-Wazuh is an open source project for security visibility, compliance and infrastructure monitoring. It was born as a fork of OSSEC HIDS and was then integrated with Elastic Stack and OpenSCAP, evolving into a more comprehensive solution. Below is a brief description of these tools and what they do:
+Wazuh is an open source project for security detection, visibility and compliance. It was born as a fork of OSSEC HIDS and was then integrated with Elastic Stack and OpenSCAP, evolving into a more comprehensive solution. Below is a brief description of these tools and what they do:
 
 .. thumbnail:: ../images/getting_started/ossec_openscap_elastic_1024x445.png
    :title: OSSEC, OpenSCAP and Elastic Stack
@@ -12,7 +12,7 @@ Wazuh is an open source project for security visibility, compliance and infrastr
 
 .. topic:: OSSEC HIDS
 
- `OSSEC HIDS <http://ossec.github.io>`_ is a Host based Intrusion Detection System (HIDS) used both for security visibility and for compliance monitoring. Its architecture is based on a multi-platform agent that forwards system data (e.g log messages, file hashes, detected anomalies) to a central manager, where it is further analyzed and processed, resulting in security alerts. Agents convey event data to the central manager via a secure and authenticated channel.
+ `OSSEC HIDS <http://ossec.github.io>`_ is a Host based Intrusion Detection System (HIDS) used both for security detection, visibility and compliance monitoring. Its architecture is based on a multi-platform agent that forwards system data (e.g log messages, file hashes, detected anomalies) to a central manager, where it is further analyzed and processed, resulting in security alerts. Agents convey event data to the central manager via a secure and authenticated channel.
 
  Additionally, OSSEC HIDS functions as a centralized syslog server and agentless configuration monitoring system, providing security insight into the events and changes on agentless devices such as firewalls, switches, routers, access points, network appliances, etc.
 
