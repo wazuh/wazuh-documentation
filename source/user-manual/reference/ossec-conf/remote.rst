@@ -50,7 +50,7 @@ Specifies the port to use to listen for events.
 protocol
 ^^^^^^^^^^^
 
-Specifies the protocol to use for syslog events.
+Specifies the protocol to use. It is available for secure connections and syslog events.
 
 +--------------------+----------+
 | **Default Value**  | udp      |

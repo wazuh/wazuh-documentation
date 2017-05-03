@@ -52,10 +52,21 @@ port
 Specify the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
 
 +--------------------+---------------------------------------------+
-| **Default Value**  | n/a                                         |
+| **Default Value**  | 1514                                        |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any port number from 1 to 65535 is allowed. |
 +--------------------+---------------------------------------------+
+
+protocol
+^^^^^^^^^^^
+
+Specifies the protocol to use when connecting to manager.
+
++--------------------+----------+
+| **Default Value**  | udp      |
++--------------------+----------+
+| **Allowed values** | udp, tcp |
++--------------------+----------+
 
 config-profile
 ^^^^^^^^^^^^^^
@@ -83,7 +94,7 @@ notify_time
 Specify the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated agent.conf file to agents, but also could put undue load on the manager if there are a large number of agents.
 
 +--------------------+-----------------------------+
-| **Default Value**  | n/a                         |
+| **Default Value**  | 600                         |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
@@ -95,7 +106,7 @@ time-reconnect
 This is the time in seconds until a reconnection attempt. This should be set to a higher number than notify_time.  For example, a notify_time time of 60 combined with a time-reconnect of 300 would mean that agents will cause the agent to attempt to check in once per minute, but if a checkin attempt fails to get a response from the manager, the agent will wait five minutes before trying again.  Once it again succeeds, checkins will resume their normal one-minute interval.
 
 +--------------------+-----------------------------+
-| **Default Value**  | n/a                         |
+| **Default Value**  | 1800                        |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
