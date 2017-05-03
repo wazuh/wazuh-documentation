@@ -1,10 +1,10 @@
 
-.. _update-ruleset.py:
+.. _update_ruleset:
 
-update-ruleset.sh
+update_ruleset
 =================
 
-The update-ruleset.sh program updates decoders, rules and rootchecks.
+The update-ruleset program updates decoders, rules and rootchecks.
 
 +--------+-------------------------------------------------------------------------+
 | **-r** | Restart Wazuh when needed.                                              |
