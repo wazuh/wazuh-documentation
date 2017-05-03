@@ -213,11 +213,22 @@ windows_registry
 
 Use this option to monitor specified Windows registry entries (one entry per line). Multiple lines may be entered to include multiple registry entries.
 
-+--------------------+-----------------------------+
-| **Default Value**  | HKEY_LOCAL_MACHINE\Software |
-+--------------------+-----------------------------+
-| **Allowed values** | Any registry entry          |
-+--------------------+-----------------------------+
++--------------------+------------------------------+
+| **Default Value**  | HKEY_LOCAL_MACHINE\\Software |
++--------------------+------------------------------+
+| **Allowed values** | Any registry entry           |
++--------------------+------------------------------+
+
+Atributes:
+
++----------+---------------------------------------------------------+
+| **arch** | Select the Registry view depending on the architecture. |
++          +------------------+--------------------------------------+
+|          | Default value    | 32bit                                |
+|          +------------------+--------------------------------------+
+|          | Allowed values   | 32bit, 64bit, both                   |
++----------+------------------+--------------------------------------+
+
 
 .. note::
 
