@@ -15,6 +15,21 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 
+Agent grouping
+--------------------------------
+
+.. versionadded:: 3.0
+
+Agents can be grouped in order to send them a selective centralized configuration. Each agent only belongs to a group. By default, all agents belong to a group called ``default``.
+
+.. note::
+    Check the :doc:`agent_groups manual <./tools/agent_groups>` to learn how to add groups and assign them to agents.
+
+The manager pushes all files included in the group folder to the agents belonging this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to ``default`` group.
+The file ``ar.conf`` (active response status) will be always sent to manager even if it is not present in the group folder.
+
+The agent will store all received files into the folder ``/var/ossec/etc/shared``, not in a group folder.
+
 Below, is the proper syntax of ``agent.conf`` and the process of pushing the configuration from the manager to the agent.
 
 agent.conf
@@ -29,8 +44,9 @@ agent.conf
 
 The ``agent.conf`` is only valid on server installations.
 
-The ``agent.conf`` exists in ``/var/ossec/etc/shared``.
-It should be readable by the ossec user.
+The ``agent.conf`` may exist in each group folder at ``/var/ossec/etc/shared``.
+For example, for the ``default`` group, it is in ``/var/ossec/etc/shared/default``.
+All them should be readable by the ossec user.
 
 Options
 -------
@@ -66,11 +82,11 @@ Here we are going to explain how a centralized configuration can be done.
 
 1. Configuration
 
-Edit the file ``/var/ossec/etc/shared/agent.conf``. If the file does not exist, create it::
+Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/agent.conf``. If the file does not exist, create it::
 
-    $ touch /var/ossec/etc/shared/agent.conf
-    $ chown ossec:ossec /var/ossec/etc/shared/agent.conf
-    $ chmod 640 /var/ossec/etc/shared/agent.conf
+    $ touch /var/ossec/etc/shared/default/agent.conf
+    $ chown ossec:ossec /var/ossec/etc/shared/default/agent.conf
+    $ chmod 640 /var/ossec/etc/shared/default/agent.conf
 
 Several configurations may be created according to the ``name``, ``OS`` or ``profile`` of an agent.
 
@@ -99,33 +115,33 @@ Several configurations may be created according to the ``name``, ``OS`` or ``pro
 
 2. Run /var/ossec/bin/verify-agent-conf and if any errors are reported, fix them and return to step one.  Failure to perform this step may allow errors to be pushed to agents, preventing them from running.  If that happens, you may be forced to visit each agent manually to recover them.
 
-3. Push of the configuration to the agents
+3. Push of the configuration to the agents.
 
 Each time agents check-in to the manager (10 minute default), they pull a fresh copy of ``agent.conf`` if a new version is available.  However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted in step 5. Restarting the manager will speed up how quickly it makes the new ``agent.conf`` available to the agents.
 
-4. Check if the agent received the configuration
+4. Check if the agent received the configuration.
 
 Once an agent received the configuration, the "Client version" field will have the md5sum of the ``agent.conf`` file.
 
 .. code-block:: console
 
-    $ md5sum /var/ossec/etc/shared/agent.conf
-    078b0711a8b2ee8b18e839afdafe6be0  /var/ossec/etc/shared/agent.conf
+    $ md5sum /var/ossec/etc/shared/default/agent.conf
+    ab73af41699f13fdd81903b5f23d8d00  /var/ossec/etc/shared/default/agent.conf
 
     $ /var/ossec/bin/agent_control -i 1032
 
     Wazuh agent_control. Agent information:
-       Agent ID:   1032
-       Agent Name: vpc-agent-ubuntu
-       IP address: 10.0.0.122
-       Status:     Active
+        Agent ID:   1032
+        Agent Name: vpc-agent-ubuntu
+        IP address: 10.0.0.122
+        Status:     Active
 
-       Operating system:    Linux vpc-agent-ubuntu.wazuh.com 3.13.0-57-generic #95-Ubuntu SMP Fri Jun 19 09:28:15 UTC 2015 x86_64
-       Client version:      OSSEC Wazuh v1.2 / 078b0711a8b2ee8b18e839afdafe6be0
-       Last keep alive:     Wed Feb 15 15:35:15 2017
+        Operating system:    Linux vpc-agent-ubuntu.wazuh.com 4.4.0-75-generic #96-Ubuntu SMP Thu Apr 20 09:56:33 UTC 2017 x86_64
+        Client version:      Wazuh v3.0 / ab73af41699f13fdd81903b5f23d8d00
+        Last keep alive:     Wed May  3 09:57:09 2017
 
-       Syscheck last started  at: Wed Feb 15 13:24:32 2017
-       Rootcheck last started at: Wed Feb 15 13:37:11 2017
+        Syscheck last started  at: Wed May  3 09:08:14 2017
+        Rootcheck last started at: Wed May  3 09:16:04 2017
 
 Also, the API returns the md5sum of ``agent.conf`` in the field ``sharedSum``:
 
@@ -137,13 +153,15 @@ Also, the API returns the md5sum of ``agent.conf`` in the field ``sharedSum``:
        "error": 0,
        "data": {
           "status": "Active",
+          "group": "default",
           "name": "vpc-agent-ubuntu",
           "ip": "10.0.0.122",
-          "dateAdd": "2016-12-22 11:59:08",
-          "version": "OSSEC Wazuh v1.2",
-          "sharedSum": "078b0711a8b2ee8b18e839afdafe6be0",
-          "lastKeepAlive": "2017-02-15 15:44:57",
-          "os": "Linux vpc-agent-ubuntu.wazuh.com 3.13.0-57-generic #95-Ubuntu SMP Fri Jun 19 09:28:15 UTC 2015 x86_64",
+          "dateAdd": "2017-05-03 09:06:29",
+          "version": "Wazuh v3.0",
+          "os_family": "Linux",
+          "sharedSum": "ab73af41699f13fdd81903b5f23d8d00",
+          "lastKeepAlive": "2017-05-03 10:07:09",
+          "os": "Linux vpc-agent-ubuntu.wazuh.com 4.4.0-75-generic #96-Ubuntu SMP Thu Apr 20 09:56:33 UTC 2017 x86_64",
           "id": "1032"
        }
     }
