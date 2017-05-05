@@ -25,10 +25,74 @@ Agents can be grouped in order to send them a selective centralized configuratio
 .. note::
     Check the :doc:`agent_groups manual <./tools/agent_groups>` to learn how to add groups and assign them to agents.
 
-The manager pushes all files included in the group folder to the agents belonging this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to ``default`` group.
-The file ``ar.conf`` (active response status) will be always sent to manager even if it is not present in the group folder.
+The manager pushes all files included in the group folder to the agents belonging this group. For example,
+all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to ``default`` group.
+The file ``ar.conf`` (active response status) will be always sent to agents even if it is not present in the group folder.
 
 The agent will store all received files into the folder ``/var/ossec/etc/shared``, not in a group folder.
+
+Example:
+
++-----------------------------------------------------+-----------------------------------------------------+
+| **Manager**                                         | **Agent (Group: 'debian')**                         |
++-----------------------------------------------------+-----------------------------------------------------+
+|.. code-block:: console                              |.. code-block:: console                              |
+|                                                     |                                                     |
+|    /var/ossec/etc/shared/                           |    /var/ossec/etc/shared/                           |
+|    ├── ar.conf                                      |    ├── ar.conf                                      |
+|    ├── cis_debian_linux_rcl.txt                     |    ├── agent.conf                                   |
+|    ├── cis_rhel5_linux_rcl.txt                      |    ├── cis_debian_linux_rcl.txt                     |
+|    ├── cis_rhel6_linux_rcl.txt                      |    ├── cis_rhel5_linux_rcl.txt                      |
+|    ├── cis_rhel7_linux_rcl.txt                      |    ├── cis_rhel6_linux_rcl.txt                      |
+|    ├── cis_rhel_linux_rcl.txt                       |    ├── cis_rhel7_linux_rcl.txt                      |
+|    ├── cis_sles11_linux_rcl.txt                     |    ├── cis_rhel_linux_rcl.txt                       |
+|    ├── cis_sles12_linux_rcl.txt                     |    ├── cis_sles11_linux_rcl.txt                     |
+|    ├── debian                                       |    ├── cis_sles12_linux_rcl.txt                     |
+|    │   ├── agent.conf                               |    ├── custom_rootcheck.txt                         |
+|    │   ├── cis_debian_linux_rcl.txt                 |    ├── debian_ports_check.txt                       |
+|    │   ├── cis_rhel5_linux_rcl.txt                  |    ├── debian_test_files.txt                        |
+|    │   ├── cis_rhel6_linux_rcl.txt                  |    ├── merged.mg                                    |
+|    │   ├── cis_rhel7_linux_rcl.txt                  |    ├── rootkit_files.txt                            |
+|    │   ├── cis_rhel_linux_rcl.txt                   |    ├── rootkit_trojans.txt                          |
+|    │   ├── cis_sles11_linux_rcl.txt                 |    ├── system_audit_rcl.txt                         |
+|    │   ├── cis_sles12_linux_rcl.txt                 |    ├── system_audit_ssh.txt                         |
+|    │   ├── custom_rootcheck.txt                     |    ├── win_applications_rcl.txt                     |
+|    │   ├── debian_ports_check.txt                   |    ├── win_audit_rcl.txt                            |
+|    │   ├── debian_test_files.txt                    |    └── win_malware_rcl.txt                          |
+|    │   ├── merged.mg                                |                                                     |
+|    │   ├── rootkit_files.txt                        |                                                     |
+|    │   ├── rootkit_trojans.txt                      |                                                     |
+|    │   ├── system_audit_rcl.txt                     |                                                     |
+|    │   ├── system_audit_ssh.txt                     |                                                     |
+|    │   ├── win_applications_rcl.txt                 |                                                     |
+|    │   ├── win_audit_rcl.txt                        |                                                     |
+|    │   └── win_malware_rcl.txt                      |                                                     |
+|    ├── default                                      |                                                     |
+|    │   ├── agent.conf                               |                                                     |
+|    │   ├── cis_debian_linux_rcl.txt                 |                                                     |
+|    │   ├── cis_rhel5_linux_rcl.txt                  |                                                     |
+|    │   ├── cis_rhel6_linux_rcl.txt                  |                                                     |
+|    │   ├── cis_rhel7_linux_rcl.txt                  |                                                     |
+|    │   ├── cis_rhel_linux_rcl.txt                   |                                                     |
+|    │   ├── cis_sles11_linux_rcl.txt                 |                                                     |
+|    │   ├── cis_sles12_linux_rcl.txt                 |                                                     |
+|    │   ├── merged.mg                                |                                                     |
+|    │   ├── rootkit_files.txt                        |                                                     |
+|    │   ├── rootkit_trojans.txt                      |                                                     |
+|    │   ├── system_audit_rcl.txt                     |                                                     |
+|    │   ├── system_audit_ssh.txt                     |                                                     |
+|    │   ├── win_applications_rcl.txt                 |                                                     |
+|    │   ├── win_audit_rcl.txt                        |                                                     |
+|    │   └── win_malware_rcl.txt                      |                                                     |
+|    ├── rootkit_files.txt                            |                                                     |
+|    ├── rootkit_trojans.txt                          |                                                     |
+|    ├── system_audit_rcl.txt                         |                                                     |
+|    ├── system_audit_ssh.txt                         |                                                     |
+|    ├── win_applications_rcl.txt                     |                                                     |
+|    ├── win_audit_rcl.txt                            |                                                     |
+|    └── win_malware_rcl.txt                          |                                                     |
+|                                                     |                                                     |
++-----------------------------------------------------+-----------------------------------------------------+
 
 Below, is the proper syntax of ``agent.conf`` and the process of pushing the configuration from the manager to the agent.
 
