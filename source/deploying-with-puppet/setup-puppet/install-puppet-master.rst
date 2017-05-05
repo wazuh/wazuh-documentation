@@ -9,7 +9,7 @@ Installation on CentOS/RHEL/Fedora
 Install the Puppet yum repository and then the "puppet-server" package. See https://yum.puppetlabs.com to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, for CentOS 7 or RHEL 7, do the following::
 
    $ sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-   $ sudo yum install puppet-server
+   $ sudo yum install puppetserver
 
 
 Installation on Debian/Ubuntu
@@ -53,7 +53,7 @@ Installation on CentOS/RHEL 7 (Adjust if your version is different.)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-   $ sudo rpm -Uvh http://yum.postgresql.org/9.4/redhat/rhel-7-x86_64/pgdg-centos94-9.4-1.noarch.rpm
+   $ sudo rpm -Uvh https://yum.postgresql.org/9.4/redhat/rhel-latest-x86_64/pgdg-centos94-9.4-2.noarch.rpm
    $ yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
    $ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
    $ systemctl start postgresql-9.4
