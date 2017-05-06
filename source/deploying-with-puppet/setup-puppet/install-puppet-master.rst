@@ -54,10 +54,10 @@ Installation on CentOS/RHEL 7 (Adjust if your version is different.)
 ::
 
    $ sudo rpm -Uvh https://yum.postgresql.org/9.4/redhat/rhel-latest-x86_64/pgdg-centos94-9.4-2.noarch.rpm
-   $ yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
+   $ sudo yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
    $ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
-   $ systemctl start postgresql-9.4
-   $ systemctl enable postgresql-9.4
+   $ sudo systemctl start postgresql-9.4
+   $ sudo systemctl enable postgresql-9.4
 
 Installation on Ubuntu 14.04 (Adjust if your version is different.)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -67,7 +67,7 @@ Installation on Ubuntu 14.04 (Adjust if your version is different.)
   $ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
     sudo apt-key add -
   $ sudo apt-get update
-  $ apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
+  $ sudo apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
 
 Configuration
 ^^^^^^^^^^^^^
@@ -80,6 +80,10 @@ For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/9.4/data/
   host    all             all             127.0.0.1/32            md5
   # IPv6 local connections:
   host    all             all             ::1/128                 md5
+
+Restart your PostgresSQL server to apply changes: ::
+
+         $ sudo systemctl restart postgresql-9.4
 
 Create a PostgreSQL user and database: ::
 
@@ -127,6 +131,10 @@ Finally, update ``/etc/puppetlabs/puppet/puppet.conf``: ::
    [master]
     storeconfigs = true
     storeconfigs_backend = puppetdb
+
+Then, restart your PuppetDB to apply changes: ::
+
+       $ sudo service puppetdb start
 
 Once these steps are completed, restart your Puppet Server and run ``puppet agent --test``: ::
 
