@@ -97,7 +97,7 @@ Test database access and create the extension pg_trgm: ::
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb:
-   psql (8.4.13)
+   psql (9.4)
    Type "help" for help.
 
    puppetdb=> CREATE EXTENSION pg_trgm;
