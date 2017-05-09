@@ -81,26 +81,32 @@ For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/9.4/data/
   # IPv6 local connections:
   host    all             all             ::1/128                 md5
 
-Restart your PostgresSQL server to apply changes: ::
+Restart service after change configuration:
+::
 
-         $ sudo systemctl restart postgresql-9.4
+   $ sudo systemctl restart postgresql-9.4
 
 Create a PostgreSQL user and database: ::
 
    # su - postgres
    $ createuser -DRSP puppetdb
    $ createdb -O puppetdb puppetdb
+   $ exit
 
 The user is created with no permission to create databases (-D), or roles (-R) and does not have superuser privileges (-S). It will prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
 
-Test database access and create the extension pg_trgm: ::
+Create the extension pg_trgm is the RegExp-optimized index extension: ::
+
+   $ su - postgres
+   $ psql puppetdb -c 'create extension pg_trgm'
+   $ exit
+
+Test database access: ::
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb:
-   psql (9.4)
+   psql (9.4.11)
    Type "help" for help.
-
-   puppetdb=> CREATE EXTENSION pg_trgm;
    puppetdb=> \q
 
 Configure ``/etc/puppetlabs/puppetdb/conf.d/database.ini``: ::
@@ -132,9 +138,9 @@ Finally, update ``/etc/puppetlabs/puppet/puppet.conf``: ::
     storeconfigs = true
     storeconfigs_backend = puppetdb
 
-Then, restart your PuppetDB to apply changes: ::
+Start puppetdb service: ::
 
-       $ sudo service puppetdb start
+   $ sudo systemctl start puppetdb
 
 Once these steps are completed, restart your Puppet Server and run ``puppet agent --test``: ::
 
