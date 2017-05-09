@@ -12,6 +12,7 @@ The first thing you need to do is to add the Wazuh repository to your Wazuh serv
 
 1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be installed into your system. If they are not, install them::
 
+	apt-get update
 	apt-get install curl apt-transport-https lsb-release
 
 2. Install the GPG key::
@@ -113,7 +114,6 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
    .. code-block:: bash
 
 	curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-	apt-get install apt-transport-https
 	echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-5.x.list
 	apt-get update
 
