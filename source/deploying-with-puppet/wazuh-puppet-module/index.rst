@@ -37,7 +37,7 @@ Here is an example of a manifest ``wazuh-manager.pp``::
 
   node "server.yourhost.com" {
      class { 'wazuh::server':
-       mailserver_ip => 'localhost',
+       smtp_server => 'localhost',
        ossec_emailto => ['user@mycompany.com'],
      }
 

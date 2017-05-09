@@ -7,7 +7,7 @@ Wazuh server class
 ``class wazuh::server``
 -----------------------
 
-$mailserver_ip
+$smtp_server
   SMTP mail server.
 
 $ossec_emailfrom
