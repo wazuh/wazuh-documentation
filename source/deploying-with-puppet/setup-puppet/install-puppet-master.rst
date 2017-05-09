@@ -54,10 +54,10 @@ Installation on CentOS/RHEL 7 (Adjust if your version is different.)
 ::
 
    $ sudo rpm -Uvh https://yum.postgresql.org/9.4/redhat/rhel-latest-x86_64/pgdg-centos94-9.4-2.noarch.rpm
-   $ yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
+   $ sudo yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
    $ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
-   $ systemctl start postgresql-9.4
-   $ systemctl enable postgresql-9.4
+   $ sudo systemctl start postgresql-9.4
+   $ sudo systemctl enable postgresql-9.4
 
 Installation on Ubuntu 14.04 (Adjust if your version is different.)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -67,7 +67,7 @@ Installation on Ubuntu 14.04 (Adjust if your version is different.)
   $ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
     sudo apt-key add -
   $ sudo apt-get update
-  $ apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
+  $ sudo apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
 
 Configuration
 ^^^^^^^^^^^^^
@@ -81,22 +81,32 @@ For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/9.4/data/
   # IPv6 local connections:
   host    all             all             ::1/128                 md5
 
+Restart service after change configuration:
+::
+
+   $ sudo systemctl restart postgresql-9.4
+
 Create a PostgreSQL user and database: ::
 
    # su - postgres
    $ createuser -DRSP puppetdb
    $ createdb -O puppetdb puppetdb
+   $ exit
 
 The user is created with no permission to create databases (-D), or roles (-R) and does not have superuser privileges (-S). It will prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
 
-Test database access and create the extension pg_trgm: ::
+Create the extension pg_trgm is the RegExp-optimized index extension: ::
+
+   $ su - postgres
+   $ psql puppetdb -c 'create extension pg_trgm'
+   $ exit
+
+Test database access: ::
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb:
-   psql (8.4.13)
+   psql (9.4.11)
    Type "help" for help.
-
-   puppetdb=> CREATE EXTENSION pg_trgm;
    puppetdb=> \q
 
 Configure ``/etc/puppetlabs/puppetdb/conf.d/database.ini``: ::
@@ -127,6 +137,10 @@ Finally, update ``/etc/puppetlabs/puppet/puppet.conf``: ::
    [master]
     storeconfigs = true
     storeconfigs_backend = puppetdb
+
+Start puppetdb service: ::
+
+   $ sudo systemctl start puppetdb
 
 Once these steps are completed, restart your Puppet Server and run ``puppet agent --test``: ::
 
