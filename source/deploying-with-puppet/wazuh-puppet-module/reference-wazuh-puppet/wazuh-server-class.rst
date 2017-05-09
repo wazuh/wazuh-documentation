@@ -129,6 +129,11 @@ $ossec_service_provider
 
   `Default $::ossec::params::ossec_service_provide`
 
+$ossec_rootcheck
+  Enable rootcheck.
+
+  `Default true`
+
 $ossec_rootcheck_frequency
   Frequency that the rootcheck is going to be executed (in seconds).
 
