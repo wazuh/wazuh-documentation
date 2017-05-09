@@ -8,13 +8,24 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 Preparation
 -----------
 
-1. Oracle Java JRE is required by Logstash and Elasticsearch::
+1. Oracle Java JRE is required by Logstash and Elasticsearch:
+
+  a) For Debian::
+
+	echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+	echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+	apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+
+  b) For Ubuntu::
 
 	add-apt-repository ppa:webupd8team/java
+
+2. Once added the repository, we will install Java JRE::
+
 	apt-get update
 	apt-get install oracle-java8-installer
 
-2. We will also install the Elastic repository and its GPG key::
+3. We will also install the Elastic repository and its GPG key::
 
 	curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 	apt-get install apt-transport-https
