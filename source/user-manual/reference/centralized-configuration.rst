@@ -15,7 +15,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 
-Agent grouping
+Agent groups
 --------------------------------
 
 .. versionadded:: 3.0
