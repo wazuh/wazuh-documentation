@@ -53,6 +53,10 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 	chkconfig --add elasticsearch
 	service elasticsearch start
 
+.. note::
+
+    It is recommended to edit the default configuration to improve the Elasticsearch performance. To do so, please see :ref:`elastic_tuning`.
+
 Logstash
 --------
 

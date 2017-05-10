@@ -13,3 +13,4 @@ This section advises on best practices related to setting up an efficient, stabl
         elastic_ssl
         kibana_ssl
         securing-api
+        elastic-tuning
