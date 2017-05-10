@@ -15,11 +15,16 @@ Install the Puppet yum repository and then the "puppet-server" package. See http
 Installation on Debian/Ubuntu
 ------------------------------
 
-Install the Puppet apt repository, and then the "puppetserver" package.  See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution.  For example, with the Trusty release of Ubuntu, you would do the following::
+Install ``curl``, ``apt-transport-https`` and ``lsb-release``::
 
-   $ wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
-   $ sudo dpkg -i puppetlabs-release-pc1-trusty.deb
-   $ sudo apt-get update && apt-get install puppetserver
+	$ sudo apt-get update
+	$ sudo apt-get install curl apt-transport-https lsb-release
+
+Get the adecuate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution, you can use next script to make installation more silently::
+
+  $ wget "https://apt.puppetlabs.com/puppetlabs-release-pc1-$(lsb_release -cs).deb"
+  $ sudo dpkg -i "puppetlabs-release-pc1-$(lsb_release -cs).deb"
+  $ sudo apt-get update && apt-get install puppetserver
 
 Memory Allocation
 --------------------------
@@ -40,9 +45,19 @@ Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``
 
 .. note:: If you find ``templatedir=$confdir/templates`` in the config file, delete that line.  It has been deprecated.
 
-Then, restart your Puppet Server to apply changes: ::
+Then, restart your Puppet Server to apply changes:
 
-   $ sudo service puppetserver start
+  a) For Systemd:
+
+  ::
+
+    $ systemctl start puppetserver
+
+  b) For SysV Init:
+
+  ::
+
+    $ service puppetserver start
 
 PuppetDB installation
 ---------------------
@@ -59,13 +74,12 @@ Installation on CentOS/RHEL 7 (Adjust if your version is different.)
    $ sudo systemctl start postgresql-9.4
    $ sudo systemctl enable postgresql-9.4
 
-Installation on Ubuntu 14.04 (Adjust if your version is different.)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installation on Debian/Ubuntu
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-  $ sudo echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list.d/pgdg.list
-  $ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
-    sudo apt-key add -
+  $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+  $ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
   $ sudo apt-get update
   $ sudo apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
 
