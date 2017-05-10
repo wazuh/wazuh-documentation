@@ -24,7 +24,7 @@ Get the adecuate Puppet apt repository, and then the "puppetserver" package. See
 
   $ wget "https://apt.puppetlabs.com/puppetlabs-release-pc1-$(lsb_release -cs).deb"
   $ sudo dpkg -i "puppetlabs-release-pc1-$(lsb_release -cs).deb"
-  $ sudo apt-get update && apt-get install puppetserver
+  $ sudo apt-get update && sudo apt-get install puppetserver
 
 Memory Allocation
 --------------------------
