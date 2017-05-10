@@ -1,5 +1,7 @@
 {% extends "!layout.html" %}
+{% set script_files = script_files + ["_static/my-script.js"] %}
 {% set css_files = css_files + ["_static/my-styles.css"] %}
+{%- set version = '<select id="select-version"></select>' %}
 
 {% block footer %}
 {{ super() }}
