@@ -27,8 +27,8 @@ Preparation
 
 3. We will also install the Elastic repository and its GPG key::
 
+	apt-get install curl apt-transport-https
 	curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-	apt-get install apt-transport-https
 	echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-5.x.list
 	apt-get update
 
