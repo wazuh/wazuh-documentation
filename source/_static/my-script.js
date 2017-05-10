@@ -1,7 +1,10 @@
 var versions = [
-    {name: "3.0.0-alpha1", url: "http://documentation.wazuh.com/3.0.0"},
-    {name: "2.0 (current)", url: "http://documentation.wazuh.com/current"}
+    {name: "3.0.0-alpha1", url: "/3.0"},
+    {name: "2.0 (current)", url: "/2.0"},
+    {name: "1.1", url: "/1.1"}
 ];
+
+var current_version = "2.0";
 
 $( document ).ready(function() {
     addVersions();
@@ -9,10 +12,15 @@ $( document ).ready(function() {
 
 function addVersions() {
     var select_version = $("#select-version");
+    var path = document.location.pathname.split('/')[1];
 
     if (select_version == null) {
         console.error("No such element 'select-version'");
         return;
+    }
+
+    if (path == "current") {
+        path = current_version;
     }
 
     for (var i = 0; i < versions.length; i++) {
@@ -22,7 +30,7 @@ function addVersions() {
         select_version.append(option);
     }
 
-    select_version.value = window.location.href.split('/', 4).join('/');
+    select_version.val('/' + path);
 
     select_version.change(function(event) {
         window.location.href = event.target.value;
