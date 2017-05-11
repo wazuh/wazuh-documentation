@@ -90,7 +90,15 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
 4. Edit the file ``/etc/nginx/conf.d/default.conf`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
 
-5. Start NGINX:
+5. Allow NGINX to connect to Kibana port if you're using SELinux:
+
+    semanage port -a -t http_port_t -p tcp 5601
+
+  .. note::
+  
+    We assume that you have ``policycoreutils-python`` installed to manage SELinux.
+
+6. Start NGINX:
 
   a. For Systemd::
 
