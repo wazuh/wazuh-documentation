@@ -1,0 +1,181 @@
+/* Body and layout background *************************************************/
+
+.wy-body-for-nav {
+    background: #edf0f2;
+}
+
+.wy-grid-for-nav {
+    background: inherit;
+}
+
+.wy-nav-content-wrap {
+  background: inherit;
+}
+
+.wy-nav-content {
+    background: #fcfcfc;
+    box-shadow: 0 0 4px #c9c9c9;
+}
+
+/* Layout sizing **************************************************************/
+
+.wy-nav-content {
+    max-width: 960px;
+}
+
+/* Font family ****************************************************************/
+
+h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
+}
+
+/* Side navigator layout ******************************************************/
+
+.wy-nav-side {
+    padding-bottom: 0;
+    height: 100%;
+}
+
+.wy-side-nav-search {
+    margin-bottom: 0;
+}
+
+.wy-menu-vertical {
+    padding-top: .809em;
+    padding-bottom: 2em;
+}
+
+/* Side menu color and background *********************************************/
+
+/* Global (L1) background */
+.wy-nav-side {
+  background: #e3e3e3;
+  box-shadow: 0 0 4px #bdbdbd;
+  border-radius: 2px;
+}
+
+.wy-side-nav-search {
+    box-shadow: 0 0 4px #404040;
+    border-radius: 2px;
+}
+
+/* L1 border (separator) */
+.wy-menu-vertical .toctree-l1 {
+    border-bottom: solid 1px #c9c9c9;
+}
+
+/* L1 border (collides with separator) */
+.wy-menu-vertical li.current>a {
+    border-top: none;
+}
+
+/* L1 hovered */
+.wy-menu-vertical a:hover {
+    background: #d6d6d6;
+}
+
+/* L2 background */
+.wy-menu-vertical li.current {
+    background: #d6d6d6;
+}
+
+/* L2 hovered */
+.wy-menu-vertical li.current a:hover {
+    background: #c9c9c9;
+}
+
+/* L1 text */
+.wy-menu-vertical a {
+    color: #404040;
+}
+
+/* Submenu text */
+.wy-menu-vertical li.current a {
+    color: #404040;
+}
+
+/* Side menu sizes ************************************************************/
+
+.wy-menu-vertical a {
+    line-height: 24px;
+}
+
+/* Navigator logo *************************************************************/
+
+.wy-side-nav-search>a img.logo {
+    width: 180px;
+}
+
+/* Color of code inside admonition sections ***********************************/
+
+.admonition .highlight {
+    border: none;
+    background: inherit;
+}
+
+/* Admonition sections shadow *************************************************/
+
+.admonition, .admonition-title {
+    border-radius: 2px;
+    box-shadow: 0 0 4px #bdbdbd;
+}
+
+/* Home page topics ***********************************************************/
+
+#welcome-to-wazuh .topic {
+    padding-left: 24px;
+}
+
+#welcome-to-wazuh .topic-title:before {
+    font-family: "FontAwesome";
+    margin-right: 4px;
+}
+
+#welcome-to-wazuh .topic:nth-of-type(1) .topic-title:before {
+    content: "";
+}
+
+#welcome-to-wazuh .topic:nth-of-type(2) .topic-title:before {
+    content: "";
+}
+
+#welcome-to-wazuh .topic:nth-of-type(3) .topic-title:before {
+    content: "";
+}
+
+#welcome-to-wazuh .topic:nth-of-type(4) .topic-title:before {
+    content: "";
+}
+
+#welcome-to-wazuh .topic:nth-of-type(5) .topic-title:before {
+    content: "";
+}
+
+/* Code-block vertical marging inside admonition ******************************/
+.admonition p,
+.admonition div[class^='highlight'] {
+    margin-bottom: 0;
+}
+
+/* Code style on headings and menu ********************************************/
+
+h2 code.docutils.literal,
+dt code.docutils.literal {
+    color: inherit;
+    background: inherit;
+    border: initial;
+    padding: 0;
+    font-size: inherit;
+}
+
+a code.docutils.literal {
+    font-size: inherit;
+    font-family: inherit;
+}
+
+h2 {
+    /*border-bottom: solid 1px #6ab0de;*/
+    border-bottom: solid 1px #c9c9c9;
+    padding-bottom: 4px;
+}
