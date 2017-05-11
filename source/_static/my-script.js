@@ -1,7 +1,6 @@
 var versions = [
     {name: "3.0.0-alpha1", url: "/3.0"},
-    {name: "2.0 (current)", url: "/2.0"},
-    {name: "1.1", url: "/1.1"}
+    {name: "2.0 (current)", url: "/2.0"}
 ];
 
 var current_version = "2.0";
