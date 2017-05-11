@@ -204,4 +204,5 @@ div.version:after {
     padding: 6px 12px;
     color: #404040;
     font-size: 80%;
+    pointer-events: none;
 }
