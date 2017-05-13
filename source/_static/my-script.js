@@ -1,5 +1,5 @@
 var versions = [
-    {name: "3.0.0-alpha1", url: "/3.0"},
+    {name: "3.0.0-beta1", url: "/3.0"},
     {name: "2.0 (current)", url: "/2.0"}
 ];
 
