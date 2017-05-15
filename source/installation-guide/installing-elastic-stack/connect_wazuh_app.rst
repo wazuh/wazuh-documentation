@@ -35,6 +35,8 @@ In this section, we'll register the Wazuh App in Kibana to communicate with the 
     :align: center
     :width: 100%
 
+.. note:: If you have followed the Wazuh Documentation for Nginx, the field URL must be filled with ``https://localhost``.
+
 6. Click on ``Save``.
 
   .. image:: ../../images/installation/wazuhapp/app_running.png

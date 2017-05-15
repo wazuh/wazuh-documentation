@@ -70,32 +70,26 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
     }
 
     server {
-        listen *:443;
-        listen [::]:443;
-
-        server_name "";
-
-        ssl on;
-        ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-        ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
-
-        access_log /var/log/nginx/kibana.access.log;
-        error_log /var/log/nginx/kibana.error.log;
-
-        location ~ (/|/app/kibana|/bundles/|/kibana4|/status|/plugins) {
-            proxy_pass http://localhost:5601;
-        }
+           listen 443 default_server;
+           listen            [::]:443;
+           ssl on;
+           ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
+           ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+           server_name           "Wazuh Nginx Proxy";
+           access_log            /var/log/nginx/nginx.access.log;
+           error_log            /var/log/nginx/nginx.error.log;
     }
     EOF
 
 4. Edit the file ``/etc/nginx/conf.d/default.conf`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
+
 
 5. Allow NGINX to connect to Kibana port if you're using SELinux:
 
     semanage port -a -t http_port_t -p tcp 5601
 
   .. note::
-  
+
     We assume that you have ``policycoreutils-python`` installed to manage SELinux.
 
 6. Start NGINX:
@@ -118,11 +112,12 @@ Enable authentication by htpasswd (optional)
 2. Edit file ``/etc/nginx/sites-available/default`` and insert the following lines into the ``location`` section::
 
     auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    auth_basic_user_file /etc/nginx/conf.d/wazuh.htpasswd;
+    proxy_pass http://localhost:5601/;
 
   .. note::
 
-    The config file should end up looking like this::
+    We configure nginx in order to encapsulate the IP address of kibana server. This configuration allow us to redirect Kibana requests to HTTPS localhost. The config file should end up looking like this::
 
         server {
             listen 80;
@@ -130,29 +125,26 @@ Enable authentication by htpasswd (optional)
             return 301 https://$host$request_uri;
         }
 
-        server {
-            listen *:443;
-            listen [::]:443;
+    	server {
+           listen 443 default_server;
+           listen            [::]:443;
+           ssl on;
+           ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
+           ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+           server_name           "Wazuh Nginx Proxy";
+           access_log            /var/log/nginx/nginx.access.log;
+           error_log            /var/log/nginx/nginx.error.log;
+           location / {
+                   auth_basic "Restricted";
+                   auth_basic_user_file /etc/nginx/conf.d/wazuh.htpasswd;
+                   proxy_pass http://localhost:5601/;
+           }
+    	}
+        
 
-            server_name "example.com";
+3. Generate the ``.htpasswd`` file. Replace ``wazuh`` with your chosen username (it must match with `auth_basic_user_file`)::
 
-            ssl on;
-            ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-            ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
-
-            access_log /var/log/nginx/kibana.access.log;
-            error_log /var/log/nginx/kibana.error.log;
-
-            location ~ (/|/app/kibana|/bundles/|/kibana4|/status|/plugins) {
-                proxy_pass http://localhost:5601;
-                auth_basic "Restricted";
-                auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            }
-        }
-
-3. Generate the ``.htpasswd`` file. Replace ``<user>`` with your chosen username::
-
-    htpasswd -c /etc/nginx/conf.d/kibana.htpasswd <user>
+    htpasswd -c /etc/nginx/conf.d/kibana.htpasswd wazuh
 
 4. Restart NGINX:
 
@@ -166,7 +158,6 @@ Enable authentication by htpasswd (optional)
 
 Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.
 
-.. note:: If you are running **SELinux in enforcing mode**, you might need to do some additional configuration to allow NGINX to proxy connections to ``localhost:5601``.
 
 
 NGINX SSL proxy for Kibana (Debian-based distributions)
@@ -195,7 +186,7 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
   .. code-block:: bash
 
-    cat > /etc/nginx/sites-available/default <<\EOF
+    cat > /etc/nginx/conf.d/default.conf <<\EOF
     server {
         listen 80;
         listen [::]:80;
@@ -203,21 +194,14 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
     }
 
     server {
-        listen *:443;
-        listen [::]:443;
-
-        server_name "";
-
-        ssl on;
-        ssl_certificate /etc/ssl/certs/kibana-access.pem;
-        ssl_certificate_key /etc/ssl/private/kibana-access.key;
-
-        access_log /var/log/nginx/kibana.access.log;
-        error_log /var/log/nginx/kibana.error.log;
-
-        location ~ (/|/app/kibana|/bundles/|/kibana4|/status|/plugins) {
-            proxy_pass http://localhost:5601;
-        }
+           listen 443 default_server;
+           listen            [::]:443;
+           ssl on;
+           ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
+           ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+           server_name           "Wazuh Nginx Proxy";
+           access_log            /var/log/nginx/nginx.access.log;
+           error_log            /var/log/nginx/nginx.error.log;
     }
     EOF
 
@@ -243,11 +227,12 @@ Enable authentication by htpasswd (optional)
 2. Edit file ``/etc/nginx/sites-available/default`` and insert the following lines into ``location`` section::
 
     auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    auth_basic_user_file /etc/nginx/conf.d/wazuh.htpasswd;
+    proxy_pass http://localhost:5601/;
 
   .. note::
 
-    The config file should end up looking like this::
+    We configure nginx in order to encapsulate the IP address of kibana server. This configuration allow us to redirect Kibana requests to HTTPS localhost. The config file should end up looking like this::
 
         server {
             listen 80;
@@ -255,25 +240,21 @@ Enable authentication by htpasswd (optional)
             return 301 https://$host$request_uri;
         }
 
-        server {
-            listen *:443;
-            listen [::]:443;
-
-            server_name "example.com";
-
-            ssl on;
-            ssl_certificate /etc/ssl/certs/kibana-access.pem;
-            ssl_certificate_key /etc/ssl/private/kibana-access.key;
-
-            access_log /var/log/nginx/kibana.access.log;
-            error_log /var/log/nginx/kibana.error.log;
-
-            location ~ (/|/app/kibana|/bundles/|/kibana4|/status|/plugins) {
-                proxy_pass http://localhost:5601;
-                auth_basic "Restricted";
-                auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            }
-        }
+    	server {
+           listen 443 default_server;
+           listen            [::]:443;
+           ssl on;
+           ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
+           ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+           server_name           "Wazuh Nginx Proxy";
+           access_log            /var/log/nginx/nginx.access.log;
+           error_log            /var/log/nginx/nginx.error.log;
+           location / {
+                   auth_basic "Restricted";
+                   auth_basic_user_file /etc/nginx/conf.d/wazuh.htpasswd;
+                   proxy_pass http://localhost:5601/;
+           }
+    	}
 
 3. Generate the ``.htpasswd`` file. Replace ``<user>`` with your chosen username::
 
@@ -291,4 +272,3 @@ Enable authentication by htpasswd (optional)
 
 Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.
 
-.. note:: If you are running **SELinux in enforcing mode**, you might need to do some additional configuration to allow NGINX to proxy connections to ``localhost:5601``.
