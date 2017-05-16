@@ -14,3 +14,4 @@ This section will describe how list, remove and register agents to and from the 
         restful-api/index
         wazuh-app
         agent-connection
+        grouping-agents
