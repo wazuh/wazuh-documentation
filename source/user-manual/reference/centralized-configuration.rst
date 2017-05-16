@@ -40,58 +40,43 @@ Example:
 |                                                     |                                                     |
 |    /var/ossec/etc/shared/                           |    /var/ossec/etc/shared/                           |
 |    ├── ar.conf                                      |    ├── ar.conf                                      |
-|    ├── cis_debian_linux_rcl.txt                     |    ├── agent.conf                                   |
-|    ├── cis_rhel5_linux_rcl.txt                      |    ├── cis_debian_linux_rcl.txt                     |
-|    ├── cis_rhel6_linux_rcl.txt                      |    ├── cis_rhel5_linux_rcl.txt                      |
-|    ├── cis_rhel7_linux_rcl.txt                      |    ├── cis_rhel6_linux_rcl.txt                      |
-|    ├── cis_rhel_linux_rcl.txt                       |    ├── cis_rhel7_linux_rcl.txt                      |
-|    ├── cis_sles11_linux_rcl.txt                     |    ├── cis_rhel_linux_rcl.txt                       |
-|    ├── cis_sles12_linux_rcl.txt                     |    ├── cis_sles11_linux_rcl.txt                     |
-|    ├── debian                                       |    ├── cis_sles12_linux_rcl.txt                     |
-|    │   ├── agent.conf                               |    ├── custom_rootcheck.txt                         |
-|    │   ├── cis_debian_linux_rcl.txt                 |    ├── debian_ports_check.txt                       |
-|    │   ├── cis_rhel5_linux_rcl.txt                  |    ├── debian_test_files.txt                        |
-|    │   ├── cis_rhel6_linux_rcl.txt                  |    ├── merged.mg                                    |
-|    │   ├── cis_rhel7_linux_rcl.txt                  |    ├── rootkit_files.txt                            |
-|    │   ├── cis_rhel_linux_rcl.txt                   |    ├── rootkit_trojans.txt                          |
-|    │   ├── cis_sles11_linux_rcl.txt                 |    ├── system_audit_rcl.txt                         |
-|    │   ├── cis_sles12_linux_rcl.txt                 |    ├── system_audit_ssh.txt                         |
-|    │   ├── custom_rootcheck.txt                     |    ├── win_applications_rcl.txt                     |
-|    │   ├── debian_ports_check.txt                   |    ├── win_audit_rcl.txt                            |
-|    │   ├── debian_test_files.txt                    |    └── win_malware_rcl.txt                          |
-|    │   ├── merged.mg                                |                                                     |
-|    │   ├── rootkit_files.txt                        |                                                     |
-|    │   ├── rootkit_trojans.txt                      |                                                     |
-|    │   ├── system_audit_rcl.txt                     |                                                     |
-|    │   ├── system_audit_ssh.txt                     |                                                     |
-|    │   ├── win_applications_rcl.txt                 |                                                     |
-|    │   ├── win_audit_rcl.txt                        |                                                     |
+|    ├── debian                                       |    ├── agent.conf                                   |
+|    │   ├── agent.conf                               |    ├── cis_debian_linux_rcl.txt                     |
+|    │   ├── cis_debian_linux_rcl.txt                 |    ├── cis_rhel5_linux_rcl.txt                      |
+|    │   ├── cis_rhel5_linux_rcl.txt                  |    ├── cis_rhel6_linux_rcl.txt                      |
+|    │   ├── cis_rhel6_linux_rcl.txt                  |    ├── cis_rhel7_linux_rcl.txt                      |
+|    │   ├── cis_rhel7_linux_rcl.txt                  |    ├── cis_rhel_linux_rcl.txt                       |
+|    │   ├── cis_rhel_linux_rcl.txt                   |    ├── cis_sles11_linux_rcl.txt                     |
+|    │   ├── cis_sles11_linux_rcl.txt                 |    ├── cis_sles12_linux_rcl.txt                     |
+|    │   ├── cis_sles12_linux_rcl.txt                 |    ├── custom_rootcheck.txt                         |
+|    │   ├── custom_rootcheck.txt                     |    ├── debian_ports_check.txt                       |
+|    │   ├── debian_ports_check.txt                   |    ├── debian_test_files.txt                        |
+|    │   ├── debian_test_files.txt                    |    ├── merged.mg                                    |
+|    │   ├── merged.mg                                |    ├── rootkit_files.txt                            |
+|    │   ├── rootkit_files.txt                        |    ├── rootkit_trojans.txt                          |
+|    │   ├── rootkit_trojans.txt                      |    ├── system_audit_rcl.txt                         |
+|    │   ├── system_audit_rcl.txt                     |    ├── system_audit_ssh.txt                         |
+|    │   ├── system_audit_ssh.txt                     |    ├── win_applications_rcl.txt                     |
+|    │   ├── win_applications_rcl.txt                 |    ├── win_audit_rcl.txt                            |
+|    │   ├── win_audit_rcl.txt                        |    └── win_malware_rcl.txt                          |
 |    │   └── win_malware_rcl.txt                      |                                                     |
-|    ├── default                                      |                                                     |
-|    │   ├── agent.conf                               |                                                     |
-|    │   ├── cis_debian_linux_rcl.txt                 |                                                     |
-|    │   ├── cis_rhel5_linux_rcl.txt                  |                                                     |
-|    │   ├── cis_rhel6_linux_rcl.txt                  |                                                     |
-|    │   ├── cis_rhel7_linux_rcl.txt                  |                                                     |
-|    │   ├── cis_rhel_linux_rcl.txt                   |                                                     |
-|    │   ├── cis_sles11_linux_rcl.txt                 |                                                     |
-|    │   ├── cis_sles12_linux_rcl.txt                 |                                                     |
-|    │   ├── merged.mg                                |                                                     |
-|    │   ├── rootkit_files.txt                        |                                                     |
-|    │   ├── rootkit_trojans.txt                      |                                                     |
-|    │   ├── system_audit_rcl.txt                     |                                                     |
-|    │   ├── system_audit_ssh.txt                     |                                                     |
-|    │   ├── win_applications_rcl.txt                 |                                                     |
-|    │   ├── win_audit_rcl.txt                        |                                                     |
-|    │   └── win_malware_rcl.txt                      |                                                     |
-|    ├── rootkit_files.txt                            |                                                     |
-|    ├── rootkit_trojans.txt                          |                                                     |
-|    ├── system_audit_rcl.txt                         |                                                     |
-|    ├── system_audit_ssh.txt                         |                                                     |
-|    ├── win_applications_rcl.txt                     |                                                     |
-|    ├── win_audit_rcl.txt                            |                                                     |
-|    └── win_malware_rcl.txt                          |                                                     |
-|                                                     |                                                     |
+|    └── default                                      |                                                     |
+|        ├── agent.conf                               |                                                     |
+|        ├── cis_debian_linux_rcl.txt                 |                                                     |
+|        ├── cis_rhel5_linux_rcl.txt                  |                                                     |
+|        ├── cis_rhel6_linux_rcl.txt                  |                                                     |
+|        ├── cis_rhel7_linux_rcl.txt                  |                                                     |
+|        ├── cis_rhel_linux_rcl.txt                   |                                                     |
+|        ├── cis_sles11_linux_rcl.txt                 |                                                     |
+|        ├── cis_sles12_linux_rcl.txt                 |                                                     |
+|        ├── merged.mg                                |                                                     |
+|        ├── rootkit_files.txt                        |                                                     |
+|        ├── rootkit_trojans.txt                      |                                                     |
+|        ├── system_audit_rcl.txt                     |                                                     |
+|        ├── system_audit_ssh.txt                     |                                                     |
+|        ├── win_applications_rcl.txt                 |                                                     |
+|        ├── win_audit_rcl.txt                        |                                                     |
+|        └── win_malware_rcl.txt                      |                                                     |
 +-----------------------------------------------------+-----------------------------------------------------+
 
 Below, is the proper syntax of ``agent.conf`` and the process of pushing the configuration from the manager to the agent.
