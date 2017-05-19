@@ -3,9 +3,9 @@
 Install Wazuh server with DEB packages
 ======================================
 
-For Debian/Ubuntu platforms, installing Wazuh server components is a matter of little more than adding the appropriate repositories and installing the relevant packages from them.
+For Debian/Ubuntu platforms, installing Wazuh server components is a matter of adding the appropriate repositories and installing the relevant packages from them.
 
-Adding Wazuh repositories
+Adding Wazuh Repositories
 -------------------------
 
 The first thing you need to do is to add the Wazuh repository to your Wazuh server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
@@ -36,7 +36,7 @@ These are the supported codename values:
 
 	apt-get update
 
-Installing manager
+Installing Wazuh Manager
 ------------------
 
 On your terminal, install the Wazuh manager::
@@ -56,7 +56,7 @@ Once the process is completed, you can check the state with
 Installing Wazuh API
 --------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the API. If you do not have installed NodeJS or your version is older than 4.6.1, we recommend you add the official repository like this::
+1. NodeJS >= 4.6.1 is required in order to run the API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official repository like this::
 
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
