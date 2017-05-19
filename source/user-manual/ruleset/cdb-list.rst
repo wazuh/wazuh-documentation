@@ -32,7 +32,7 @@ For IP addresses the dot notation is used for subnet matches:
 
 Example of IP address list file::
 
-    192.168.: Matches 92.168.0.0 - 192.168.255.255
+    192.168.: Matches 192.168.0.0 - 192.168.255.255
     172.16.19.: Matches 172.16.19.0 - 172.16.19.255
     10.1.1.1: Matches 10.1.1.1
 
