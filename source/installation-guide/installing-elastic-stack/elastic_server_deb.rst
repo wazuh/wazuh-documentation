@@ -53,7 +53,16 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 
 	update-rc.d elasticsearch defaults 95 10
 	service elasticsearch start
+	
+3. Load Wazuh Elasticsearch template::
 
+	curl https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/master/server/startup/integration_files/template_file.json | \
+	curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+
+4. Insert sample alert::
+
+	curl https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/master/server/startup/integration_files/alert_sample.json | \
+	curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 .. note::
 
     It is recommended to edit the default configuration to improve the Elasticsearch performance. To do so, please see :ref:`elastic_tuning`.
