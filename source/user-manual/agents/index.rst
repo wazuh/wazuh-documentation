@@ -1,15 +1,16 @@
 .. _managing-agents:
 
-Agents
-=================
+Agent management
+================
 
-This section will describe how to manage the agents. Some basic actions like registering agents using different methods, listing the agents that a manager have registered and remove a registered agent. This action can be done by binary files, through the api or using the Wazuh app in some cases.
+This section will describe how list, remove and register agents to and from the Wazuh server, this could be done via command line or RESTful API. Any method describe here you choose to use is valid, one more secure than others, some need more user interventions that others.
 
 .. topic:: Contents
 
     .. toctree::
         :maxdepth: 2
 
-        registering-agents/index
-        listing-agents
-        removing-agents
+        command-line/index
+        restful-api/index
+        wazuh-app
+        agent-connection

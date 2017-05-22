@@ -1,0 +1,48 @@
+.. _restful-api-listing:
+
+Listing Agents
+--------------------------------
+
+The request :ref:`GET /agents <request_list>` returns the list of available agents.
+
+::
+
+    curl -u foo:bar -k http://127.0.0.1:55000/agents?pretty
+
+.. code-block:: json
+
+    {
+       "error": 0,
+       "data": {
+          "totalItems": 15,
+          "items": [
+             {
+                "status": "Active",
+                "ip": "127.0.0.1",
+                "id": "000",
+                "name": "vpc-ossec-manager"
+             },
+             {
+                "status": "Active",
+                "ip": "10.0.0.121",
+                "id": "003",
+                "name": "vpc-agent-debian"
+             },
+             {
+                "status": "Active",
+                "ip": "10.0.0.126",
+                "id": "005",
+                "name": "vpc-agent-ubuntu-public"
+             },
+             {
+                "status": "Active",
+                "ip": "10.0.0.124",
+                "id": "006",
+                "name": "vpc-agent-windows"
+             },
+            {
+                "...": "..."
+            }
+          ]
+       }
+    }

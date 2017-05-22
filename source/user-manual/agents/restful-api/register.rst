@@ -1,7 +1,7 @@
-.. _register_agent_api:
+.. _restful-api-register:
 
-Using the RESTful API
-===========================================
+Register Agents
+----------------------------
 
 Two requests are needed to register an agent using the API:
 

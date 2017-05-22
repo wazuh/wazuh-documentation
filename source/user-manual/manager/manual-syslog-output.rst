@@ -26,7 +26,19 @@ Syslog output is configured in ``ossec.conf``. All the available options are det
 The above configuration will send alerts to ``192.168.1.240``and, if the alert level is higher than 9, will also send the alert to ``192.168.1.241``.
 
 After the configuration of the ``ossec.conf`` file, the client-syslog must be enabled followed by a restart of Wazuh using the following command:
+
 ::
 
   /var/ossec/bin/ossec-control enable client-syslog
-  /var/ossec/bin/ossec-control restart
+
+a. For Systemd:
+
+::
+
+  systemctl restart wazuh-manager
+
+b. For SysV Init:
+
+::
+
+  service wazuh-manager restart
