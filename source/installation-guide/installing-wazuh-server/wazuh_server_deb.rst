@@ -37,7 +37,7 @@ These are the supported codename values:
 	apt-get update
 
 Installing Wazuh Manager
-------------------
+------------------------
 
 On your terminal, install the Wazuh manager::
 

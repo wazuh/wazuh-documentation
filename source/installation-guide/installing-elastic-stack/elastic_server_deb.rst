@@ -63,6 +63,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 
 	curl https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/master/server/startup/integration_files/alert_sample.json | \
 	curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+
 .. note::
 
     It is recommended to edit the default configuration to improve the Elasticsearch performance. To do so, please see :ref:`elastic_tuning`.
