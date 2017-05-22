@@ -13,7 +13,7 @@ Wazuh installation involves two central components, the Wazuh server and Elastic
 
 - **Wazuh agent**: Runs on the monitored host, collecting system log and configuration data, and detecting intrusions and anomalies. It talks to the Wazuh server, to which it forwards collected data for further analysis.
 
-Distributed architectures do run the Wazuh server and Elastic Stack cluster (one or more servers) in different hosts. On the other hand, single-host architectures do have  Wazuh server and Elastic Stack installed in the same system. This guide covers both installation options. 
+Distributed architectures do run the Wazuh server and Elastic Stack cluster (one or more servers) in different hosts. On the other hand, single-host architectures have Wazuh server and Elastic Stack installed in the same system. This guide covers both installation options. 
 
 The diagrams below list the components that are run per host, both for single-host and distributed architectures.
 
