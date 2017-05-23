@@ -177,9 +177,8 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
       cp <ssl_pem> /etc/ssl/certs/kibana-access.pem
       cp <ssl_key> /etc/ssl/private/kibana-access.key
 
-  b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following::
+  b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following (you can use hostname –f to find your FQDN)::
 
-      mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
       openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem -subj "/CN=example.com"
 
 2. Configure NGINX as an HTTPS reverse proxy to Kibana:
@@ -197,8 +196,8 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
            listen 443 default_server;
            listen            [::]:443;
            ssl on;
-           ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-           ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+           ssl_certificate /etc/ssl/certs/kibana-access.pem;
+           ssl_certificate_key /etc/ssl/private/kibana-access.key;
            server_name           "Wazuh Nginx Proxy";
            access_log            /var/log/nginx/nginx.access.log;
            error_log            /var/log/nginx/nginx.error.log;
@@ -220,11 +219,11 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 Enable authentication by htpasswd (optional)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Install package ``apache2-utils``::
+1. Install the package ``apache2-utils``::
 
     apt-get install apache2-utils
 
-2. Edit file ``/etc/nginx/sites-available/default`` and insert the following lines into ``location`` section::
+2. Edit the file ``/etc/nginx/sites-available/default`` and insert the following lines into the ``location`` section::
 
     auth_basic "Restricted";
     auth_basic_user_file /etc/nginx/conf.d/wazuh.htpasswd;
@@ -232,7 +231,7 @@ Enable authentication by htpasswd (optional)
 
   .. note::
 
-    We configure nginx in order to encapsulate the IP address of kibana server. This configuration allow us to redirect Kibana requests to HTTPS localhost. The config file should end up looking like this::
+    We configure nginx in order to encapsulate the IP address of the Kibana server. This configuration allows us to redirect Kibana requests to HTTPS localhost. The config file should end up looking like this::
 
         server {
             listen 80;
