@@ -20,7 +20,7 @@ Preparation
 
 	add-apt-repository ppa:webupd8team/java
 
-2. Once added the repository, we will install Java JRE::
+2. Once the repository is added, we will install Java JRE::
 
 	apt-get update
 	apt-get install oracle-java8-installer
@@ -35,7 +35,7 @@ Preparation
 Elasticsearch
 -------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. More info `Elastic <https://www.elastic.co/products/elasticsearch>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more info please see `Elastic <https://www.elastic.co/products/elasticsearch>`_.
 
 1. Install the Elasticsearch package::
 
@@ -71,7 +71,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. More i
 Logstash
 --------
 
-Logstash is the tool that will collect logs, parse them, and then pass them along to Elasticsearch for indexing and storage. Learn more about `Logstash <https://www.elastic.co/products/logstash>`_.
+Logstash is the tool that will collect logs, parse them, and then pass them along to Elasticsearch for indexing and storage. For more info please see `Logstash <https://www.elastic.co/products/logstash>`_.
 
 1. Install the Logstash package::
 
@@ -82,11 +82,11 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 	curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/logstash/01-wazuh.conf
 	curl -so /etc/logstash/wazuh-elastic5-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/elasticsearch/wazuh-elastic5-template.json
 
-3. **Only if you are using a single-host architecture**:
+3. **Follow this step only if you are using a single-host architecture**:
 
     a) Edit ``/etc/logstash/conf.d/01-wazuh.conf``, commenting out the entire input section titled "Remote Wazuh Manager - Filebeat input" and uncommenting the entire input section titled "Local Wazuh Manager - JSON file input".  This will set up Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than expecting Filebeat on a separate server to forward the information in that file to Logstash.
 
-    b) Because Logstash user needs to read alerts.json file, please add it to OSSEC group by running::
+    b) Because the Logstash user needs to read alerts.json file, please add it to OSSEC group by running::
 
 	usermod -a -G ossec logstash
 
@@ -126,13 +126,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     The Kibana plugin installation process may take several minutes. Please wait patiently.
 
-3. **Optional.** Kibana will listen only the loopback interface (localhost) by default. To set up Kibana to listen all interfaces, edit the file ``/etc/kibana/kibana.yml``. Uncomment the setting ``server.host`` and change the value to::
+3. **Optional.** Kibana will listen only on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml``. Uncomment the setting ``server.host`` and change the value to::
 
 	server.host: "0.0.0.0"
 
   .. note::
 
-    It is recommended to set up an Nginx proxy for Kibana to use SSL encryption and to enable authentication. Instructions to set it up can be found at :ref:`kibana_ssl`.
+    It is recommended to set up an Nginx proxy for Kibana in order to use SSL encryption and to enable authentication. Instructions to set the proxy up can be found at :ref:`kibana_ssl`.
 
 4. Enable and start the Kibana service:
 
