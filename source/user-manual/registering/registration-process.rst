@@ -7,10 +7,9 @@ The registration process consist on a mechanims to create a trust relationship b
 
 Another aproach is using the RESTful API, this is just a wrapper for local registration on Wazuh Manager.
 
-Some hints
------------
 
-**client.keys**
+Agent keys
+-----------
 
 The manager uses the file ``/var/ossec/etc/client.keys`` to store the registration record of each agent, which includes ID, name, IP, and key. Example::
 
@@ -34,7 +33,8 @@ There are several ways to set the agent IP:
 
 Some registration methods detect automatically the IP of the agent during the registration process.
 
-**Registration methods**
+Registration methods
+----------------------
 
 Here are 3 ways to register an agent:
 
