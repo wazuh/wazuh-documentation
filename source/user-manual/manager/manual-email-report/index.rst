@@ -73,7 +73,7 @@ b) For SysV Init:
 
 
 .. warning::
- Wazuh doesn't handle smtp authentication. If you want to use an email with it, you need to :ref:`configure a server relay<smtp_authentication>`.
+ Wazuh doesn't handle SMTP authentication. If you want to use an email with it, you need to :ref:`configure a server relay<smtp_authentication>`.
 
 
 Granular email options
