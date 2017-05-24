@@ -62,6 +62,8 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
 3. Configure NGINX as an HTTPS reverse proxy to Kibana::
 
+  .. code-block:: bash
+
     cat > /etc/nginx/conf.d/default.conf <<\EOF
     server {
         listen 80;
@@ -70,16 +72,25 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
     }
 
     server {
-           listen 443 default_server;
-           listen            [::]:443;
-           ssl on;
-           ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-           ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
-           server_name           "Wazuh Nginx Proxy";
-           access_log            /var/log/nginx/nginx.access.log;
-           error_log            /var/log/nginx/nginx.error.log;
+        listen 443 default_server;
+        listen            [::]:443;
+        ssl on;
+        ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
+        ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+        server_name           "Wazuh Nginx Proxy";
+        access_log            /var/log/nginx/nginx.access.log;
+        error_log            /var/log/nginx/nginx.error.log;
+        location / {
+            auth_basic "Restricted";
+            auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+            proxy_pass http://localhost:5601/;
+        }
     }
     EOF
+	
+.. note::
+
+    We configure nginx in order to encapsulate the IP address of the kibana server. This configuration allow us to redirect Kibana requests to HTTPS localhost. If this configuration is enable, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart kibana service. 
 
 4. Edit the file ``/etc/nginx/conf.d/default.conf`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
 
@@ -92,61 +103,19 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
     We assume that you have ``policycoreutils-python`` installed to manage SELinux.
 
-6. Start NGINX:
 
-  a. For Systemd::
-
-      systemctl start nginx
-
-  b. For SysV Init::
-
-      service nginx start
-
-Enable authentication by htpasswd (optional)
+Enable authentication by htpasswd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Install package ``httpd-tools``::
+1. Install the package ``httpd-tools``::
 
     yum install httpd-tools
 
-2. Edit file ``/etc/nginx/sites-available/default`` and insert the following lines into the ``location`` section::
-
-    auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/wazuh.htpasswd;
-    proxy_pass http://localhost:5601/;
-
-  .. note::
-
-    We configure nginx in order to encapsulate the IP address of kibana server. This configuration allow us to redirect Kibana requests to HTTPS localhost. The config file should end up looking like this::
-
-        server {
-            listen 80;
-            listen [::]:80;
-            return 301 https://$host$request_uri;
-        }
-
-    	server {
-           listen 443 default_server;
-           listen            [::]:443;
-           ssl on;
-           ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-           ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
-           server_name           "Wazuh Nginx Proxy";
-           access_log            /var/log/nginx/nginx.access.log;
-           error_log            /var/log/nginx/nginx.error.log;
-           location / {
-                   auth_basic "Restricted";
-                   auth_basic_user_file /etc/nginx/conf.d/wazuh.htpasswd;
-                   proxy_pass http://localhost:5601/;
-           }
-    	}
-        
-
-3. Generate the ``.htpasswd`` file. Replace ``wazuh`` with your chosen username (it must match with `auth_basic_user_file`)::
+2. Generate the ``.htpasswd`` file. Replace ``wazuh`` with your chosen username (it must match with `auth_basic_user_file`)::
 
     htpasswd -c /etc/nginx/conf.d/kibana.htpasswd wazuh
 
-4. Restart NGINX:
+3. Restart NGINX:
 
   a. For Systemd::
 
@@ -179,14 +148,14 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
   b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following::
 
-      mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
+      mkdir -p /etc/ssl/certs /etc/ssl/private
       openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem -subj "/CN=example.com"
 
-2. Configure NGINX as an HTTPS reverse proxy to Kibana:
+3. Configure NGINX as an HTTPS reverse proxy to Kibana:
 
   .. code-block:: bash
 
-    cat > /etc/nginx/conf.d/default.conf <<\EOF
+    cat > /etc/nginx/sites-available/default <<\EOF
     server {
         listen 80;
         listen [::]:80;
@@ -194,73 +163,41 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
     }
 
     server {
-           listen 443 default_server;
-           listen            [::]:443;
-           ssl on;
-           ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-           ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
-           server_name           "Wazuh Nginx Proxy";
-           access_log            /var/log/nginx/nginx.access.log;
-           error_log            /var/log/nginx/nginx.error.log;
+        listen 443 default_server;
+        listen            [::]:443;
+        ssl on;
+        ssl_certificate /etc/ssl/certs/kibana-access.pem;
+        ssl_certificate_key /etc/ssl/private/kibana-access.key;
+        server_name           "Wazuh Nginx Proxy";
+        access_log            /var/log/nginx/nginx.access.log;
+        error_log            /var/log/nginx/nginx.error.log;
+        location / {
+            auth_basic "Restricted";
+            auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+            proxy_pass http://localhost:5601/;
+        }
     }
     EOF
 
-3. Edit the file ``/etc/nginx/sites-available/default`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
+.. note::
 
-4. Restart NGINX:
+    We configure nginx in order to encapsulate the IP address of the kibana server. This configuration allows us to redirect Kibana requests to HTTPS localhost. If this configuration is enable, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart kibana service. 
 
-  a. For Systemd::
+4. Edit the file ``/etc/nginx/sites-available/default`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
 
-      systemctl restart nginx
 
-  b. For SysV Init::
-
-      service nginx restart
-
-Enable authentication by htpasswd (optional)
+Enable authentication by htpasswd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Install package ``apache2-utils``::
+1. Install the package ``apache2-utils``::
 
     apt-get install apache2-utils
 
-2. Edit file ``/etc/nginx/sites-available/default`` and insert the following lines into ``location`` section::
-
-    auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/wazuh.htpasswd;
-    proxy_pass http://localhost:5601/;
-
-  .. note::
-
-    We configure nginx in order to encapsulate the IP address of kibana server. This configuration allow us to redirect Kibana requests to HTTPS localhost. The config file should end up looking like this::
-
-        server {
-            listen 80;
-            listen [::]:80;
-            return 301 https://$host$request_uri;
-        }
-
-    	server {
-           listen 443 default_server;
-           listen            [::]:443;
-           ssl on;
-           ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-           ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
-           server_name           "Wazuh Nginx Proxy";
-           access_log            /var/log/nginx/nginx.access.log;
-           error_log            /var/log/nginx/nginx.error.log;
-           location / {
-                   auth_basic "Restricted";
-                   auth_basic_user_file /etc/nginx/conf.d/wazuh.htpasswd;
-                   proxy_pass http://localhost:5601/;
-           }
-    	}
-
-3. Generate the ``.htpasswd`` file. Replace ``<user>`` with your chosen username::
+2. Generate the ``.htpasswd`` file. Replace ``<user>`` with your chosen username::
 
     htpasswd -c /etc/nginx/conf.d/kibana.htpasswd <user>
 
-4. Restart NGINX:
+3. Restart NGINX:
 
   a. For Systemd::
 

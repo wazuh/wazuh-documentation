@@ -24,7 +24,7 @@ Step 2: Edit limit of system resources
 
 Where to configure systems settings depends on which package you have used to install Elasticsearch, and which operating system you are using:
 
- - For systems which uses **systemd**, system limits need to be specified via systemd. Add a file called ``/etc/systemd/system/elasticsearch.service.d/elasticsearch.conf`` and specify any changes in that file::
+ - For systems which uses **systemd**, system limits need to be specified via systemd. First, create the folder executing the command: ``mkdir -p /etc/systemd/system/elasticsearch.service.d/``, add a file called ``elasticsearch.conf`` and specify any changes in that file::
 
     [Service]
     LimitMEMLOCK=infinity
@@ -63,7 +63,8 @@ Step 4: Restart Elasticsearch
 Finally, restart Elasticsearch service:
 
     a) For Systemd::
-
+	
+        systemctl daemon-reload
         systemctl restart elasticsearch
 
     b) For SysV Init::
