@@ -13,17 +13,17 @@ $ossec_rootcheck
   `Default true`
 
 $ossec_rootcheck_frequency
-  Setup frequency rootcheck
+  Setup rootcheck frequency.
 
   `Default 36000`
 
 $ossec_rootcheck_checkports
-  Enable rootcheck checkports option
+  Enable rootcheck checkports option.
 
   `Default true`
 
 $ossec_rootcheck_checkfiles
-  Enable rootcheck checkfiles option
+  Enable rootcheck checkfiles option.
 
   `Default true`
 
@@ -34,7 +34,7 @@ $ossec_server_hostname
   Hostname of the server.
 
 $ossec_server_port
-  Server port configuration
+  Server port configuration.
 
   `Default 1514`
 
@@ -84,12 +84,12 @@ $selinux
   `Default false`
 
 $agent_name
-   Configure agent hostname
+   Configure agent host name of the system
 
   `Default $::hostname`
 
 $agent_ip_address
-   Configure agent IP Adress
+   Configure agent IPv4 address for the default network interface.
 
   `Default $::ipaddress`
 
@@ -147,7 +147,7 @@ function wazuh::addlog
 ----------------------
 
 $log_name
-  Wazuh log name
+  Configure Wazuh log name
 
 $agent_log
   `Default false`
