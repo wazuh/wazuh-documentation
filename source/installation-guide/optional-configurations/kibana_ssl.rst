@@ -58,9 +58,9 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
   b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following::
 
       mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-      openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem -subj "/CN=example.com"
+      openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem
 
-3. Configure NGINX as an HTTPS reverse proxy to Kibana::
+3. Configure NGINX as an HTTPS reverse proxy to Kibana:
 
   .. code-block:: bash
 
@@ -77,7 +77,6 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
         ssl on;
         ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
         ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
-        server_name           "Wazuh Nginx Proxy";
         access_log            /var/log/nginx/nginx.access.log;
         error_log            /var/log/nginx/nginx.error.log;
         location / {
@@ -88,14 +87,13 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
     }
     EOF
 	
-.. note::
+  .. note::
 
     We configure nginx in order to encapsulate the IP address of the kibana server. This configuration allow us to redirect Kibana requests to HTTPS localhost. If this configuration is enable, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart kibana service. 
 
-4. Edit the file ``/etc/nginx/conf.d/default.conf`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
+4. Allow NGINX to connect to Kibana port if you're using SELinux:
 
-
-5. Allow NGINX to connect to Kibana port if you're using SELinux:
+  .. code-block:: bash
 
     semanage port -a -t http_port_t -p tcp 5601
 
@@ -149,7 +147,7 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
   b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following::
 
       mkdir -p /etc/ssl/certs /etc/ssl/private
-      openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem -subj "/CN=example.com"
+      openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem
 
 3. Configure NGINX as an HTTPS reverse proxy to Kibana:
 
@@ -168,7 +166,6 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
         ssl on;
         ssl_certificate /etc/ssl/certs/kibana-access.pem;
         ssl_certificate_key /etc/ssl/private/kibana-access.key;
-        server_name           "Wazuh Nginx Proxy";
         access_log            /var/log/nginx/nginx.access.log;
         error_log            /var/log/nginx/nginx.error.log;
         location / {
@@ -179,12 +176,9 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
     }
     EOF
 
-.. note::
+  .. note::
 
     We configure nginx in order to encapsulate the IP address of the kibana server. This configuration allows us to redirect Kibana requests to HTTPS localhost. If this configuration is enable, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart kibana service. 
-
-4. Edit the file ``/etc/nginx/sites-available/default`` and fill in the ``server_name`` field with your server name (the same name that appears in the SSL certificate).
-
 
 Enable authentication by htpasswd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
