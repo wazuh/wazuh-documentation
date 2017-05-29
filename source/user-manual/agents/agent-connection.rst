@@ -28,11 +28,11 @@ b. For SysV Init:
 
   service wazuh-agent restart
 
-After you register the Agent and successful started you could see a list of connected agents into Manager with:
+After you register the agent and it be successfully connected, you could see a list of connected agents into Manager with:
 
 ::
 
-  $ /var/ossec/bin/agent_control -l
+  $ /var/ossec/bin/agent_control -lc
 
 This will display every registered Agent, also you can check if a Agent is correctly connected verifying if the UDP connection to Manager is established:
 

@@ -3,7 +3,7 @@ The registration process
 
 Every Wazuh Agent send data to Wazuh Manager via secure way called OSSEC message protocol this encrypts messages using a pre-shared key. Initially when you succeful install a new Wazuh Agent this cannot comunicate with Wazuh Manager for lack of the pre-shared key.
 
-The registration process consist on a mechanims to create a trust relationship between the Manager and a Agent, this process could be done in a Manager itself  or with a registration service, this service it listen on the Manager, a Agent could request a pre-shared key using some credentiales and if they are apropiate for the Manager this respond with the pre-shared key and store the new Agent in local database.
+The registration process consists on a mechanims to create a trust relationship between the Manager and a Agent, this process could be done in a Manager itself or with a registration service, this service it listen on the Manager, a Agent could request a pre-shared key using some credentiales and it will reply with the pre-shared key and store the new Agent in local database.
 
 Another aproach is using the RESTful API, this is just a wrapper for local registration on Wazuh Manager.
 
@@ -36,7 +36,7 @@ Some registration methods detect automatically the IP of the agent during the re
 Registration methods
 ----------------------
 
-Here are 3 ways to register an agent:
+Here are three ways to register an agent:
 
 +---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
 | Type          | Method                                                          | Description                                                            |
