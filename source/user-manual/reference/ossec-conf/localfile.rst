@@ -19,7 +19,6 @@ Options
 - `command`_
 - `alias`_
 - `frequency`_
-- `check_diff`_
 - `only-future-events`_
 - `query`_
 - `log_format`_
@@ -90,19 +89,6 @@ This is used with **command** and **full_command**.
 +--------------------+--------------------------------+
 | **Allowed values** | any positive number of seconds |
 +--------------------+--------------------------------+
-
-
-check_diff
-^^^^^^^^^^
-
-The output from an event will be stored in an internal database. Every time the same event is received, the output is compared
-to the previous output. If the output has changed, an alert will be generated.
-
-+--------------------+----------------+
-| **Default Value**  | n/a            |
-+--------------------+----------------+
-| **Allowed values** | <check_diff /> |
-+--------------------+----------------+
 
 
 only-future-events
