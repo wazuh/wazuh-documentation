@@ -57,23 +57,29 @@ $ossec_email_alert_level
   Threshold defining minimum severity for a rule to fire an email alert.
   Some rules circumvent this threshold (``alert_email`` option).
 
-    `Default 7`
+  `Default 7`
 
 $ossec_ignorepaths
-  text
+  Specify paths to ignore ossec scan
+
+  `Default []`
 
 $ossec_scanpaths
-  text
+  Define paths to ossec scan
 
 $ossec_white_list
   Allow white listing of IP addresses.
+
+  `Default []`
 
 $ossec_extra_rules_config
   To use it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file.
   You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the wazuh::server class.
 
+  `Default []`
+
 $ossec_local_files
-  text
+  Define path log files to scan with ossec
 
 $ossec_emailnotification
   Whether or not to send email notifications.
@@ -86,12 +92,13 @@ $ossec_email_maxperhour
      `Default 12`
 
 $ossec_email_idsname
-  text
 
    `Default undef`
 
 $ossec_syscheck_frequency
-  text
+  Frequency that syscheck is executed default every 22 hours
+
+  `Default 79200`
 
 $ossec_auto_ignore
  Specifies if syscheck will ignore files that change too often (after the third change)
@@ -137,10 +144,15 @@ $manage_client_keys
   `Default true`
 
 $agent_auth_password
-  text
+
+  `Default undef`
 
 $ar_repeated_offenders
-  text
+  A comma separated list of increasing timeouts in minutes for repeat offenders.
+
+  There can be a maximum of 5 entries.
+
+  `Default empty`
 
 $syslog_output
   Allows an Wazuh manager to send the OSSEC alerts to one or more syslog servers
@@ -148,36 +160,32 @@ $syslog_output
   `Default false`
 
 $syslog_output_server
-  text
+  The IP Address of the syslog server.
 
   `Default undef`
 
 $syslog_output_format
-  text
+  Format of alert output.
 
   `Default undef`
 
 $enable_wodle_openscap
-  text
+  Enable openscap cofiguration in ossec.conf
+
+  `Default false`
 
 $local_decoder_template
+
   `Default ossec/local_decoder.xml.erb`
 
 $local_rules_template
+
   `Default ossec/local_rules.xml.erb`
 
 $shared_agent_template
   Enable the configuration to deploy through agent.,conf
 
   `Default `wazuh/ossec_shared_agent.conf.erb`
-
-$enable_wodle_openscap
-  Enable openscap cofiguration in ossec.conf
-
-    `Default false`
-
-
-
 
 $manage_paths
   Follow the instructions on :ref:`ossec-scanpaths <reference_ossec_scanpaths>`.
@@ -188,7 +196,6 @@ $ossec_conf_template ## cliente
   Allow to use a custom ossec.conf in the manager.
 
   `Default ossec/10_ossec.conf.erb`
-
 
 .. note::
   Consequently, if you add or remove any of the Wazuh rules later on, you'll need to ensure you add/remove the appropriate bits in the $ossec_extra_rules_config array parameter as well.
@@ -232,7 +239,8 @@ $timeout_allowed
 ----------------------------------
 
 $command_name
-  .
+  Human readable name for wazuh::activeresponse usage.
+
 $ar_location
   It can be set to local, server, defined-agent, all.
 
@@ -242,11 +250,6 @@ $ar_level
   Can take values between 0 and 16.
 
   `Default 7`
-
-####$ar_agent_id
-  List of rule IDs.
-
-  `Default ''`
 
 $ar_rules_id
   List of rule IDs.
@@ -269,13 +272,14 @@ $ar_repeated_offenders
 --------------------------
 
 $log_name
-  .
+  Configure Wazuh log name
 
-#####$agent_log
+$agent_log
+
   `Default false`
 
 $logfile
-  /path/to/log/file.
+  Path to log file.
 
 $logtype
   The OSSEC log_format of the file.

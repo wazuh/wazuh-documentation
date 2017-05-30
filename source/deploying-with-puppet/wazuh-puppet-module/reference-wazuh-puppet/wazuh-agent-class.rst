@@ -84,12 +84,12 @@ $selinux
   `Default false`
 
 $agent_name
-   Configure agent host name of the system
+  Configure agent host name of the system
 
   `Default $::hostname`
 
 $agent_ip_address
-   Configure agent IPv4 address for the default network interface.
+  Configure agent IPv4 address for the default network interface.
 
   `Default $::ipaddress`
 
@@ -105,7 +105,6 @@ $manage_epel_repo
 
 $agent_package_name
 
-
 $agent_package_version
 
    `Default installed`
@@ -118,10 +117,13 @@ $manage_client_keys
   `Default export`
 
 $agent_auth_password
+  Define password for agent-auth
 
 $agent_seed
 
 $max_clients
+
+  `Default 3000`
 
 $ar_repeated_offenders
   A comma separated list of increasing timeouts in minutes for repeat offenders.
@@ -131,12 +133,19 @@ $ar_repeated_offenders
   `Default empty`
 
 $enable_wodle_openscap
+  Enable openscap cofiguration in ossec.conf
+
+  `Default false`
 
 $wodle_openscap_content
+  Depending linux distribution assign profile xccdf.
 
 $service_has_status
 
+  `Default true`
+
 $ossec_conf_template
+  Path of ossec configuration agent template.
 
   `Default wazuh/wazuh_agent.conf.erb`
 
@@ -150,10 +159,12 @@ $log_name
   Configure Wazuh log name
 
 $agent_log
+  Path to log file.
+
   `Default false`
 
 $logfile
-  /path/to/log/file.
+  Path to log file.
 
 $logtype
   The OSSEC log_format of the file.
