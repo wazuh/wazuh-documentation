@@ -1,11 +1,15 @@
-.. _connecting_agents:
+The registration process
+=========================
 
-Registering agents
-==============================
+Every Wazuh Agent send data to Wazuh Manager via secure way called OSSEC message protocol this encrypts messages using a pre-shared key. Initially when you succeful install a new Wazuh Agent this cannot comunicate with Wazuh Manager for lack of the pre-shared key.
 
-Once we have our agents installed, it is necessary to connect them to the manager. The communication between an agent and the manager is performed via the OSSEC message protocol, which encrypts messages using a pre-shared key. The process of provisioning an agent authentication key on the manager and distributing it to an agent is called registration.
+The registration process consists on a mechanims to create a trust relationship between the Manager and a Agent, this process could be done in a Manager itself or with a registration service, this service it listen on the Manager, a Agent could request a pre-shared key using some credentiales and it will reply with the pre-shared key and store the new Agent in local database.
 
-**client.keys**
+Another aproach is using the RESTful API, this is just a wrapper for local registration on Wazuh Manager.
+
+
+Agent keys
+-----------
 
 The manager uses the file ``/var/ossec/etc/client.keys`` to store the registration record of each agent, which includes ID, name, IP, and key. Example::
 
@@ -29,24 +33,17 @@ There are several ways to set the agent IP:
 
 Some registration methods detect automatically the IP of the agent during the registration process.
 
-**Registration methods**
+Registration methods
+----------------------
 
-Here are 3 ways to register an agent:
+Here are three ways to register an agent:
 
 +---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
 | Type          | Method                                                          | Description                                                            |
 +===============+=================================================================+========================================================================+
-| Manually      | :doc:`Using the command line <register-agent-manual>`           | Register an agent manually using manage_agents binary.                 |
+| Manually      | :ref:`Using the command line <command-line-register>`           | Register an agent manually using manage_agents binary.                 |
 +---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
-| Automatically | :doc:`Using the registration service <register-agent-authd>`    | Register an agent automatically using ossec-authd binary.              |
+| Automatically | :doc:`Using the registration service <use-registration-service>`| Register an agent automatically using ossec-authd binary.              |
 +               +-----------------------------------------------------------------+------------------------------------------------------------------------+
-|               | :doc:`Using the RESTful API <register-agent-api>`               | Register an agent by scripting (bash, python, powershell) and the API. |
+|               | :ref:`Using the RESTful API <restful-api-register>`             | Register an agent by scripting (bash, python, powershell) and the API. |
 +---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
-
-.. toctree::
-    :hidden:
-    :maxdepth: 1
-
-    register-agent-manual
-    register-agent-authd
-    register-agent-api

@@ -1,7 +1,7 @@
-.. _register_agent_manual:
+.. _command-line-register:
 
-Using the command line 
-=================================================
+Register Agent
+----------------------------
 
 1. On the **manager**, run `manage_agents`::
 
@@ -87,7 +87,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	/var/ossec/bin/ossec-control restart
 
 Forcing insertion
-----------------------------
+^^^^^^^^^^^^^^^^^^^
 
 If you try to add an agent with an IP that another agent is already registered with, ``manage_agents`` will generate an error. You can use the argument *-d* in order to force the insertion.
 

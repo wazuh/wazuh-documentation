@@ -1,4 +1,4 @@
-.. _register_agent_authd:
+.. _use-registration-service:
 
 Using the registration service
 =============================================
@@ -19,7 +19,7 @@ It's possible to register agents automatically with authd. Choose the method tha
 |                         | No host validation       | The manager validates the agent by CA but not the host address. This method allows the use of a shared agent certificate.   |
 +-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
-``Simple method``
+Simple method
 -----------------
 
 Get an SSL certificate
@@ -85,8 +85,8 @@ Launching the authd daemon with default options would allow any agent to registe
 .. note::
     These methods can be combined.
 
-``Use a password to authorize agents``
---------------------------------------
+Use a password to authorize agents
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
   Reference :ref:`ossec-authd`
@@ -122,7 +122,7 @@ On the agent side, the key can be put in a file of the same name or specified as
     /var/ossec/bin/agent-auth -m 192.168.1.2 -P "abcd1234"
 
 Use SSL to verify hosts
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Create a Certificate of Authority
 """""""""""""""""""""""""""""""""
@@ -134,8 +134,8 @@ First we are going to create a certificate of authority (CA) that we will use to
 .. warning::
     The file ``rootCA.key`` that we have just created is the **private key** of the certificate of authority. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
 
-``Verify manager via SSL``
------------------------------------------------
+Verify manager via SSL
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Issue and sign a certificate for the authd server, entering the hostname or the IP address that agents will use to connect to the server. For example, if the server's IP is 192.168.1.2::
 
@@ -154,9 +154,8 @@ First we are going to create a certificate of authority (CA) that we will use to
     cp rootCA.pem /var/ossec/etc
     agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
 
-``Verify agents via SSL``
---------------------------
-
+Verify agents via SSL
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Verify agents via SSL (no host validation)**
 
