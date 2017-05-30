@@ -30,6 +30,8 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`alerts <alerts>`                                        | manager                |
 +---------------------------------------------------------------+------------------------+
+| :doc:`auth <auth>`                                            | manager                |
++---------------------------------------------------------------+------------------------+
 | :doc:`client <client>`                                        | agent                  |
 +---------------------------------------------------------------+------------------------+
 | :doc:`command <commands>`                                     | manager                |
@@ -70,6 +72,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    active-response
    agentless
    alerts
+   auth
    client
    commands
    database-output
