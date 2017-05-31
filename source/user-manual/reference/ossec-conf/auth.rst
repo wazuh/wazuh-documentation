@@ -21,6 +21,7 @@ Options
 
 - `port`_
 - `use-source-ip`_
+- `force-insert`_
 - `force-time`_
 - `clear-removed`_
 - `use-password`_
@@ -53,21 +54,36 @@ Use client's source IP address instead of "any" to add agent.
 |                    | - no                |
 +--------------------+---------------------+
 
-force-time
+force-insert
 ^^^^^^^^^^^^^^^^^^^
 
-Force insertion: remove old agent with same name or IP if its keepalive has more than <time> seconds.
+Force insertion: remove old agent with same name or IP.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
 +--------------------+---------------------+
-| **Allowed values** | - Positive number   |
-|                    | - 0                 |
+| **Allowed values** | - yes               |
 |                    | - no                |
 +--------------------+---------------------+
 
 Value ``0`` means to force always.
 Value ``no`` means to force never.
+
+force-time
+^^^^^^^^^^^^^^^^^^^
+
+When forcing to remove old agents with same name or IP, this options specifies
+that the deletion will be performed only if the agent's keepalive has more than
+a number of seconds.
+
++--------------------+---------------------+
+| **Default value**  | 0                   |
++--------------------+---------------------+
+| **Allowed values** | - Positive number   |
+|                    | - 0                 |
++--------------------+---------------------+
+
+Value ``0`` means to force always.
 
 clear-removed
 ^^^^^^^^^^^^^^^^^^^
@@ -158,3 +174,22 @@ Auto select SSL/TLS method.
 By default only TLS v1.2 is allowed. When set to ``yes`` the system will negotiate the most secure common method with the client.
 
 In older systems, where the **manager does not support TLS v1.2**, this option will be enabled automatically.
+
+Default configuration
+---------------------
+
+.. code-block:: xml
+
+    <auth>
+      <port>1515</port>
+      <use-source-ip>no</use-source-ip>
+      <force-insert>no</force-insert>
+      <force-time>0</force-time>
+      <clear-removed>no</clear-removed>
+      <use-password>no</use-password>
+      <!-- <ssl-agent-ca></ssl-agent-ca> -->
+      <ssl-verify-host>no</ssl-verify-host>
+      <ssl-manager-cert>/var/ossec/etc/sslmanager.cert</ssl-manager-cert>
+      <ssl-manager-key>/var/ossec/etc/sslmanager.key</ssl-manager-key>
+      <ssl-auto-negotiate>no</ssl-auto-negotiate>
+    </auth>
