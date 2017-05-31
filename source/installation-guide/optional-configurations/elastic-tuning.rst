@@ -5,6 +5,9 @@ Elasticsearch tuning
 
 This guide summarizes the relevant configurations that allow us to optimize Elasticsearch.
 
+#. `Memory locking`_
+#. `Shards and replicas`_
+
 Memory locking
 ----------------------------------------
 
@@ -63,7 +66,7 @@ Step 4: Restart Elasticsearch
 Finally, restart Elasticsearch service:
 
     a) For Systemd::
-	
+
         systemctl daemon-reload
         systemctl restart elasticsearch
 
@@ -96,3 +99,95 @@ Reference:
   - `Enable bootstrap.memory_lock <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-configuration-memory.html#mlockall>`_.
   - `Heap: Sizing and Swapping <https://www.elastic.co/guide/en/elasticsearch/guide/current/heap-sizing.html>`_.
   - `Limiting memory usage <https://www.elastic.co/guide/en/elasticsearch/guide/current/_limiting_memory_usage.html#_limiting_memory_usage>`_.
+
+Shards and replicas
+----------------------------------------
+
+Elasticsearch provides the ability to split an index in multiple pieces called shards. Each shard is in itself a fully-functional and independent "index" that can be hosted on any node in the cluster. Sharding is important for two primary reasons:
+
+- It allows you to horizontally split/scale your content volume.
+
+- It allows you to distribute and parallelize operations across shards thus increasing performance/throughput.
+
+Also, Elasticsearch allows you to make one or more copies of your index’s shards into what are called replica shards, or replicas for short. Replication is important for two primary reasons:
+
+- It provides high availability in case a shard/node fails.
+
+- It allows you to scale out your search volume/throughput since searches can be executed on all replicas in parallel.
+
+.. warning::
+
+    The number of shards and replicas can be defined per index at the time the index is created. After the index is created, you may change the number of replicas dynamically anytime but you cannot change the number of shards after-the-fact.
+
+
+How many shards should my index have?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Due to is not possible to *reshard* (changing the number of shards) without reindexing, you must to answer this question before create your first index. However, we can't decide how many shards use without talk about nodes. In general, you will get the optimal performance by using the same number of shards as nodes. So, a cluster with 3 nodes will have 3 shards while a cluster with one node will only have a shard.
+
+How many replicas should my index have?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Let's consider what will happen in a cluster with 3 nodes and 3 shards:
+
+- No replica: Each node has 1 shard. If a node falls down, we will have a incomplete index of 2 shards.
+
+- 1 replica: Each node has 1 shard and 1 replica. If a node falls down, we will have a complete index.
+
+- 2 replicas: Each node has 1 shard an 2 replicas (the full index). Now, the cluster can work with just one node. This looks like the best solution but also it increase the storage requirements.
+
+Setting number of shards and replicas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The default installation of Elastic Stack with :ref:`RPM <elastic_server_rpm>` or :ref:`Debian <elastic_server_deb>` packages will configure each index with 5 primary shards and 1 replica.
+
+In case you want to change these settings you need to edit the Elasticsearch template. In the following example, we configure the proper values for shards and replicas in a cluster with only 1 node.
+
+.. warning::
+
+    We assume that your index has not yet been created, otherwise you will have to `reindex <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ after editing the template.
+
+1. Download the Wazuh Elasticsearch template::
+
+    curl https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/elasticsearch/wazuh-elastic5-template.json -o w-elastic-template.json
+
+2. Edit the template in order to set 1 shard a 0 replicas::
+
+    nano w-elastic-template.json
+
+    {
+      "order": 0,
+      "template": "wazuh*",
+      "settings": {
+        "index.refresh_interval": "5s",
+        "number_of_shards" :   1,
+        "number_of_replicas" : 0
+      },
+      "mappings": {
+      "...": "..."
+      }
+    }
+
+3. Load the template::
+
+    curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @w-elastic-template.json
+
+
+Changing number of replicas
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The number of replicas can be changed dynamically using the Elasticsearch API.
+
+In a cluster with 1 node, the number of replicas should be 0::
+
+    curl -XPUT 'localhost:9200/wazuh-*?pretty' -H 'Content-Type: application/json' -d'
+    {
+        "settings": {
+            "number_of_replicas" : 0
+        }
+    }
+    '
+
+Reference:
+
+  - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#getting-started-shards-and-replicas>`_.
