@@ -104,12 +104,14 @@ $manage_epel_repo
   `Default true`
 
 $agent_package_name
+  Define package name defined in params.pp
 
 $agent_package_version
 
    `Default installed`
 
 $agent_service_name
+  Define service name defined in params.pps
 
 $manage_client_keys
   Manage client keys option.
@@ -118,6 +120,8 @@ $manage_client_keys
 
 $agent_auth_password
   Define password for agent-auth
+
+  `Default undef`
 
 $agent_seed
 

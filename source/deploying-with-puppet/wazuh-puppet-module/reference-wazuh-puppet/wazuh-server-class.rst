@@ -144,6 +144,7 @@ $manage_client_keys
   `Default true`
 
 $agent_auth_password
+  Define password for agent-auth
 
   `Default undef`
 
@@ -175,12 +176,14 @@ $enable_wodle_openscap
   `Default false`
 
 $local_decoder_template
+  Allow to use a custom local_decoder.xml in the manager.
 
-  `Default ossec/local_decoder.xml.erb`
+  `Default wazuh/local_decoder.xml.erb`
 
 $local_rules_template
+  Allow to use a custom local_rules.xml in the manager.
 
-  `Default ossec/local_rules.xml.erb`
+  `Default wazuh/local_rules.xml.erb`
 
 $shared_agent_template
   Enable the configuration to deploy through agent.,conf
@@ -191,11 +194,6 @@ $manage_paths
   Follow the instructions on :ref:`ossec-scanpaths <reference_ossec_scanpaths>`.
 
   `Default [ {'path' => '/etc,/usr/bin,/usr/sbin', 'report_changes' => 'no', 'realtime' => 'no'}, {'path' => '/bin,/sbin', 'report_changes' => 'yes', 'realtime' => 'yes'} ]`
-
-$ossec_conf_template ## cliente
-  Allow to use a custom ossec.conf in the manager.
-
-  `Default ossec/10_ossec.conf.erb`
 
 .. note::
   Consequently, if you add or remove any of the Wazuh rules later on, you'll need to ensure you add/remove the appropriate bits in the $ossec_extra_rules_config array parameter as well.
@@ -275,6 +273,7 @@ $log_name
   Configure Wazuh log name
 
 $agent_log
+  Path to log file.
 
   `Default false`
 
