@@ -94,7 +94,7 @@ This example is a search for the key stored in the field attribute and will matc
 
     <list field="user" lookup="not_match_key">etc/lists/list-user</list>
 
-In case the field is an IP address, you must to use *not_address_match_key*:
+In case the field is an IP address, you must use *not_address_match_key*:
 
 .. code-block:: xml
 
@@ -109,7 +109,7 @@ This example is a search for the key stored in the field attribute, and on a pos
 
      <list field="user" lookup="match_key_value" check_value="^block">etc/lists/list-user</list>
 
-In case the field is an IP address, you must to use *not_address_match_key*:
+In case the field is an IP address, you must use *not_address_match_key*:
 
 .. code-block:: xml
 
