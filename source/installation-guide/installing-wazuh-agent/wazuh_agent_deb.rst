@@ -10,9 +10,9 @@ Adding the Wazuh repository
 
 The first thing you need to do is to add the Wazuh repository to your host. Alternatively, if you prefer to download the wazuh-agent package directly, you can find it :ref:`here <packages>`.
 
-1. In order to perform this procedure properly, packages ``curl`` and ``apt-transport-https`` must be present on your system. If they are not, install them::
+1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be present on your system. If they are not, install them::
 
-	apt-get install curl apt-transport-https
+	apt-get install curl apt-transport-https lsb-release
 
 2. Install the Wazuh repository GPG key::
 
