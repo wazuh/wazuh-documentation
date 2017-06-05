@@ -89,7 +89,7 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 	
   .. note::
 
-    We configure nginx in order to encapsulate the IP address of the kibana server. This configuration allow us to redirect Kibana requests to HTTPS localhost. If this configuration is enable, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart kibana service. 
+    We configure nginx in order to encapsulate the IP address of the Kibana server. This configuration allows us to redirect Kibana requests to HTTPS localhost. If this configuration is enabled, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart the Kibana service. 
 
 4. Allow NGINX to connect to Kibana port if you're using SELinux:
 
@@ -178,7 +178,7 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
   .. note::
 
-    We configure nginx in order to encapsulate the IP address of the kibana server. This configuration allows us to redirect Kibana requests to HTTPS localhost. If this configuration is enable, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart kibana service. 
+    We configure nginx in order to encapsulate the IP address of the Kibana server. This configuration allows us to redirect Kibana requests to HTTPS localhost. If this configuration is enabled, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart the Kibana service. 
 
 Enable authentication by htpasswd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
