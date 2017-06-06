@@ -192,10 +192,6 @@ Specifies if syscheck should alert when new files are created
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-.. note::
-
-   New files will only be detected on a full scan (server or local). This option does not work in realtime.
-
 .. _reference_ossec_syscheck_scan_start:
 
 scan_on_start
