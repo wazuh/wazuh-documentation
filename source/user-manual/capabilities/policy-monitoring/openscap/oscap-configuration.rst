@@ -19,16 +19,17 @@ To configure the options for OpenSCAP go to :ref:`ossec.conf <reference_ossec_co
 
 In this example, we configure Wazuh to run OpenSCAP each day, with a timeout of 30 minutes. ::
 
-    <wodle name="open-scap">
+  <wodle name="open-scap">
+    <disabled>yes</disabled>
+    <timeout>1800</timeout>
+    <interval>1d</interval>
+    <scan-on-start>yes</scan-on-start>
 
-        <timeout>1800</timeout>
-        <interval>1d</interval>
-        <scan-on-start>yes</scan-on-start>
-
-        <content type="xccdf" path="ssg-centos7-ds.xml"/>
-        <content type="xccdf" path="ssg-centos6-ds.xml"/>
-
-    </wodle>
+    <content type="xccdf" path="ssg-centos-7-ds.xml">
+      <profile>xccdf_org.ssgproject.content_profile_pci-dss</profile>
+      <profile>xccdf_org.ssgproject.content_profile_common</profile>
+    </content>
+  </wodle>
 
 Evaluate PCI-DSS compliance on RHEL7
 ------------------------------------
