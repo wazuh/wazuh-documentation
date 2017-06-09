@@ -17,6 +17,7 @@ Options
 - `server-ip`_
 - `server-hostname`_
 - `port`_
+- `protocol`_
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
