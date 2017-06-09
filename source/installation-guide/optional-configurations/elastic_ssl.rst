@@ -76,7 +76,7 @@ Now we will configure Filebeat to verify the Logstash server's certificate.
 
 1. On the **machine with Filebeat installed** (Wazuh server), fetch the Logstash server's file ``/etc/logstash/logstash.crt`` and copy it into ``/etc/filebeat/logstash.crt``.
 
-	Here is an **example** of what you might to copy the cert from the Wazuh server to the Wazuh manager ::
+	Here is an **example** of what you might use to copy the cert from the Wazuh server to the Wazuh manager ::
 
 		scp root@LOGSTASH_SERVER_IP:/etc/logstash/logstash.crt /etc/filebeat
 
@@ -99,4 +99,4 @@ Now we will configure Filebeat to verify the Logstash server's certificate.
 		service filebeat restart
 
 .. note::
-	More detailed information is available from the `Securing communication with Logstash <https://www.elastic.co/guide/en/beats/filebeat/current/configuring-ssl-logstash.html>`_ guide from Elastic.
+	More detailed information is available in the `Securing communication with Logstash <https://www.elastic.co/guide/en/beats/filebeat/current/configuring-ssl-logstash.html>`_ guide from Elastic.
