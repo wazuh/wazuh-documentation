@@ -11,7 +11,7 @@ There are 3 ways to list the registered agents in a manager:
 
 Using Wazuh app
 --------------------------------
-Access to the Wazuh app and go to *Agents* tab:
+Access to the Wazuh app and go to the *Agents* tab:
 
 .. thumbnail:: ../../images/manual/managing-agents/listing-agents-app.png
     :title: Listing agents from Wazuh app
@@ -68,7 +68,7 @@ The request :ref:`GET /agents <request_list>` returns the list of available agen
 Using the command line
 --------------------------------------------
 
-The binary */var/ossec/bin/agent_control* allow us to retrieve the list of available agents:
+A list of the available agents can be called with the binary file */var/ossec/bin/agent_control*:
 
 .. code-block:: console
 
