@@ -27,7 +27,7 @@ There are several ways to set the agent IP:
  - **Fixed IP**: Allow the agent to connect only from the specified IP. Example: ``ServerProd`` has the IP ``192.246.247.247``.
  - **Range IP**: Allow the agent to connect from the specified range of IPs. Example: ``DBServer`` has the IP range ``192.168.0.1/24``.
 
-Some registration methods detect automatically the IP of the agent during the registration process.
+Some registration methods automatically detect the IP of the agent during the registration process.
 
 **Registration methods**
 
