@@ -20,7 +20,7 @@ To configure the options for OpenSCAP go to :ref:`ossec.conf <reference_ossec_co
 In this example, we configure Wazuh to run OpenSCAP each day, with a timeout of 30 minutes. ::
 
   <wodle name="open-scap">
-    <disabled>yes</disabled>
+    <disabled>no</disabled>
     <timeout>1800</timeout>
     <interval>1d</interval>
     <scan-on-start>yes</scan-on-start>
