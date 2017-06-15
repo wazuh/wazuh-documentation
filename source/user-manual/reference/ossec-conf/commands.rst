@@ -35,7 +35,7 @@ You don’t need to provide the path.
 expect
 ^^^^^^
 
-This is a list of zero or more names of extracted fields that are to be passed as parameters to the command. If any of the listed fields were not extracted in a certain instance, those field values would be passed as a dash (``-``) instead of as no value at all. A good example is the the firewall-block command which expects the ``srcip`` field so it knows which IP to block.  Multiple expected field names are comma separated.
+This is a list of zero or more names of extracted fields that are to be passed as parameters to the command. If any of the listed fields were not extracted in a certain instance, those field values would be passed as a dash (``-``) instead of as no value at all. A good example is the firewall-block command which expects the ``srcip`` field so it knows which IP to block.  Multiple expected field names are comma separated.
 
 +--------------------+-----------------------------------------------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                                                       |
@@ -53,7 +53,7 @@ This is a list of zero or more names of extracted fields that are to be passed a
 timeout_allowed
 ^^^^^^^^^^^^^^^
 
-If yes, this indicates that the command is stateful, and will be called again in a certain length of time and instructed to undo its original acton.
+If yes, this indicates that the command is stateful, and will be called again in a certain length of time and instructed to undo its original action.
 
 +--------------------+--------+
 | **Default Value**  | yes    |
