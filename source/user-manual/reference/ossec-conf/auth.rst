@@ -66,9 +66,6 @@ Force insertion: remove old agent with same name or IP.
 |                    | - no                |
 +--------------------+---------------------+
 
-Value ``0`` means to force always.
-Value ``no`` means to force never.
-
 force-time
 ^^^^^^^^^^^^^^^^^^^
 
@@ -97,8 +94,8 @@ Delete definitely agents when removing.
 |                    | - no                |
 +--------------------+---------------------+
 
-When set to ``no`` removed agents will be kept in the client keys file, marked as removed.
-However, when set to ``yes``, agents will be definitely deleted.
+When set to ``no`` removed agents will remain in the client keys file, marked as removed.
+However, when set to ``yes``, client keys file will be purged.
 
 use-password
 ^^^^^^^^^^^^^^^^^^^
