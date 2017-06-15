@@ -19,7 +19,7 @@ The agents also have the file ``/var/ossec/etc/client.keys`` containing only the
 
 **Basic data for registering an agent**
 
-In order to register an agent it is necessary to provide the name and the IP of the agent.
+In order to register an agent, it is necessary to provide the name and the IP of the agent.
 
 There are several ways to set the agent IP:
 
