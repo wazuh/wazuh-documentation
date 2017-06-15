@@ -3,7 +3,7 @@
 Docker installation
 ===================
 
-First thing you need to do is install Docker if you don't have it already.
+The first thing you need to do is install Docker if you don't have it already.
 
 Docker engine
 ----------------------------------------------
