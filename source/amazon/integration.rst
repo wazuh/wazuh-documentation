@@ -157,7 +157,7 @@ Now the Wazuh manager needs to be configured to be able to collect the log messa
 
 .. note:: The file ``/path-with-write-permission/amazon.log`` must be the same one you setup in the above step: `Run the python script to download the JSON data`_.
 
-Finnaly, restart the Wazuh manager to apply changes:
+Finally, restart the Wazuh manager to apply changes:
 
 a. For Systemd: ::
 
