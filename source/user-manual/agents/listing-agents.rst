@@ -21,7 +21,7 @@ Access to the Wazuh app and go to the *Agents* tab:
 Using the RESTful API
 --------------------------------
 
-The request :ref:`GET /agents <request_list>` return the list of available agents.
+The request :ref:`GET /agents <request_list>` returns the list of available agents.
 
 ::
 
