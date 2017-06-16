@@ -24,19 +24,19 @@ Step 2: Edit limit of system resources
 
 Where to configure systems settings depends on which package you have used to install Elasticsearch, and which operating system you are using:
 
- - For systems which uses **systemd**, system limits need to be specified via systemd. First, create the folder executing the command: ``mkdir -p /etc/systemd/system/elasticsearch.service.d/``, add a file called ``elasticsearch.conf`` and specify any changes in that file::
+ - For systems using **systemd**, system limits need to be specified via systemd. First, create the folder executing the command: ``mkdir -p /etc/systemd/system/elasticsearch.service.d/``; add a file called ``elasticsearch.conf``: ``cat >> /etc/systemd/system/elasticsearch.service.d/elasticsearch.conf``; add the following to that file::
 
     [Service]
     LimitMEMLOCK=infinity
 
- - In other case, edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian::
+ - For SysV Init, edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian::
 
      MAX_LOCKED_MEMORY=unlimited
 
 Step 3: Limit memory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The previous configuration might cause node instability or even node death (with an *OutOfMemory* exception) if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help us to limit the memory usage and prevent this situation.
+The previous configuration might cause node instability or even node death (with an *OutOfMemory* exception) if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help us limit the memory usage and prevent this situation.
 
 There are two rules to apply when setting the Elasticsearch heap size:
 
