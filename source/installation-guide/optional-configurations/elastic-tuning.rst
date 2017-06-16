@@ -45,7 +45,7 @@ Where to configure systems settings depends on which package and operating syste
 Step 3: Limit memory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The previous configuration might cause node instability or even node death (with an *OutOfMemory* exception) if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help us to define the memory usage and prevent this situation.
+The previous configuration might cause node instability or even node death (with an *OutOfMemory* exception) if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help us limit the memory usage and prevent this situation.
 
 There are two rules to apply when setting the Elasticsearch heap size:
 
