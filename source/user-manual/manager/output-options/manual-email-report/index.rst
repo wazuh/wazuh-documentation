@@ -109,7 +109,7 @@ After the global configuration, we need to configure the ``email_alert_level``. 
 
 This example will set the minimum level to 10. More information: :ref:`alerts section <reference_ossec_global>`.
 
-Once you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
+Where you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
 
 a) For Systemd:
 ::
@@ -224,7 +224,7 @@ This configuration will send:
 
 Generating automatic reports
 -----------------------------
-Daily reports are summaries of the alerts for the day. You can configure your own report. The Configuration of report is done in the ``ossec.conf`` file using the ``report`` option. More information: :ref:`Report <reference_ossec_reports>`
+Daily reports are summaries of the alerts for the day. You can configure your own report. The Configuration of report in the ``ossec.conf`` file using the ``report`` option. More information: :ref:`Report <reference_ossec_reports>`
 ::
 
  <ossec_config>
@@ -255,7 +255,7 @@ The above configuration will send a report with all rules that fired with a leve
 Force forwarding an alert by email
 ----------------------------------
 
-It's also possible to force the mail alert on the rule declaration. In order to do this, you need to use :ref:`option<rules_options>`
+It's also possible to force the mail alert on the rule declaration. In order to do so, you need to use :ref:`option<rules_options>`
 
 The possible values for this option are:
 
