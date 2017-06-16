@@ -230,7 +230,7 @@ Security policy monitoring
 
 SCAP is a standardized compliance checking solution for enterprise-level infrastructure. It is a line of specifications maintained by the National Institute of Standards and Technology (NIST) with the purpose of maintaining enterprise systems security.
 
-OpenSCAP is an auditing tool that utilizes the Extensible Configuration Checklist Description Format (XCCDF). XCCDF is a standard way of expressing checklist content and defines security checklists. It also combines with other specifications such as CPE, CVE, CCE, and OVAL, to create a SCAP-expressed checklist that can be processed by SCAP-validated products.
+OpenSCAP is an auditing tool that utilizes the Extensible Configuration Checklist Description Format (XCCDF). XCCDF is a standard way of expressing checklist content and defines security checklists. It also combines with other specifications such as CPE, CVE, CCE, and OVAL, to create SCAP-expressed checklist that can be processed by SCAP-validated products.
 
 Wazuh agent uses OpenSCAP internally to verify that systems conform to CIS hardening standards. Below is an example of an SCAP rule used to check if SSH daemon is configured to allow empty passwords:
 
