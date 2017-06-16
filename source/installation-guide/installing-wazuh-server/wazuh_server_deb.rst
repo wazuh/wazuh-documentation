@@ -3,12 +3,14 @@
 Install Wazuh server with DEB packages
 ======================================
 
-For Debian/Ubuntu platforms, installing Wazuh server components is a matter of adding the appropriate repositories and installing the relevant packages from them.
+For Debian/Ubuntu platforms, installing Wazuh server components is just install relevant packages by previously adding the appropriate repositories.
+
+.. note:: Many of the commands described below need to be executed with root user privileges.
 
 Adding Wazuh Repositories
 -------------------------
 
-The first thing you need to do is to add the Wazuh repository to your Wazuh server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
+The first thing you need is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
 
 1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be installed into your system. If they are not, install them::
 
@@ -43,7 +45,7 @@ On your terminal, install the Wazuh manager::
 
 	apt-get install wazuh-manager
 
-Once the process is completed, you can check the state with
+Once the process is complete, you can check the service status with:
 
   a) For Systemd::
 
@@ -56,7 +58,7 @@ Once the process is completed, you can check the state with
 Installing Wazuh API
 --------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official repository like this::
+1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend you add the official NodeJS repository like this: ::
 
 	curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
@@ -68,7 +70,7 @@ Installing Wazuh API
 
 	apt-get install wazuh-api
 
-3. Once the process is completed, you can check the state with
+3. Once the process is complete, you can check the service status with:
 
   a) For Systemd::
 
@@ -147,4 +149,4 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to :ref:`install Elastic Stack <elastic_server_deb>`.
+Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to :ref:`install Elastic Stack <installation_elastic>`.

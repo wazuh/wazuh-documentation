@@ -3,14 +3,16 @@
 Install Wazuh server with RPM packages
 ======================================
 
-For CentOS/RHEL/Fedora platforms, installing Wazuh server components is a matter of little more than adding the appropriate repositories and installing the relevant packages from them.
+For CentOS/RHEL/Fedora platforms, installing Wazuh server components is just install relevant packages by previously adding the appropriate repositories.
+
+.. note:: Many of the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------
 
-The first thing you need to do is to add the Wazuh repository to your Wazuh server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
+The first thing you need is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
 
-To set up the RPM repository, run the command that corresponds to your specific Linux distribution:
+To set up the repository, run the command that corresponds to your specific RPM-based Linux distribution:
 
     a) For CentOS:
 
@@ -57,11 +59,11 @@ To set up the RPM repository, run the command that corresponds to your specific 
 Installing Wazuh manager
 ------------------------
 
-While logged into your Wazuh server as root, install the Wazuh manager with the appropriate command::
+The next will install Wazuh manager on your system: ::
 
 	yum install wazuh-manager
 
-Once the process is complete, you can check the state with
+Once the process is complete, you can check the service status with:
 
     a) For Systemd::
 
@@ -74,7 +76,7 @@ Once the process is complete, you can check the state with
 Installing Wazuh API
 --------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend you add the official repository like this::
+1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend you add the official NodeJS repository like this: ::
 
 	curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
@@ -82,11 +84,11 @@ Installing Wazuh API
 
 	yum install nodejs
 
-2. Install the Wazuh API. It will update NodeJS if it is required::
+2. Install the Wazuh API. It will update NodeJS if it is required: ::
 
 	yum install wazuh-api
 
-3. Once the process is completed, you can check the state with
+3. Once the process is complete, you can check the service status with:
 
   a) For Systemd::
 
@@ -115,7 +117,7 @@ Installing Wazuh API
 	    }
 	];
 
-   For CentOS 6 and Red Hat 6, you can install the package ``python27``, which installs Python 2.7 at ``/opt/rh/python27`` in parallel to the older stock version of python already present:
+  CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel maintaining older version:
 
   a) For CentOS 6::
 
@@ -189,4 +191,4 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to :ref:`install Elastic Stack <elastic_server_rpm>`.
+Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to :ref:`install Elastic Stack <installation_elastic>`.
