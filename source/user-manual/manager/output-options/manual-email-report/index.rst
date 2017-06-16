@@ -3,7 +3,7 @@
 Configuring email alerts
 ===============================
 
-Wazuh can be configured to send the alerts to an email. You can configure the system to send emails once certain rules are triggered or configure it to send a daily report.
+Wazuh can be configured to send the alerts to an email. You can configure the system to send emails when certain rules are triggered or configure it to send a daily report.
 
 Mail example:
 
@@ -135,7 +135,7 @@ Wazuh also allows a very granular configuration options for your alerts through 
 
   The minimum level you configured inside ``alerts`` section, will be also valid here.
 
-So, for example, if you configure your system to send an email once the rule 526 is triggered, if that rule has a level lower than the configured on the previous section the alert will not be sent.
+So, for example, if you configure your system to send an email when the rule 526 is triggered, if that rule has a level lower than the configured on the previous section the alert will not be sent.
 
 Email alert based on level
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
