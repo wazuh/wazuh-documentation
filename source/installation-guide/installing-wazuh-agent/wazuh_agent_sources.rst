@@ -3,7 +3,9 @@
 Install Wazuh agent from sources
 =================================
 
-This guide describes how to install an agent from source code.
+This guide describes how to install an Wazuh agent from source code.
+
+.. note:: Many of the commands described below need to be executed with root user privileges.
 
 Installing Linux agent
 ----------------------
@@ -26,7 +28,7 @@ Installing Linux agent
 
     curl -Ls https://github.com/wazuh/wazuh/archive/v2.0.tar.gz | tar zx
 
-3. Run the ``install.sh`` script. It will guide you through the installation and compile the source::
+3. Run the ``install.sh`` script, this will display a wizard that will guide you through the installation process using the Wazuh sources: ::
 
     cd wazuh-*
     ./install.sh
@@ -35,17 +37,17 @@ Installing Linux agent
 
     1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
 
-.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
+.. note:: At this point, your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual at the :ref:`Registering agents <connecting_agents>` section.
 
 Installing Windows agent
 ------------------------
 
-This section describes how to download and compile the Wazuh HIDS Windows agent from sources. The following procedure has been tested to work with Ubuntu 16.04 as the compilation environment, and may work fine with other Debian/Ubuntu versions as well.
+This section describes how to download and build the Wazuh HIDS Windows agent from sources. The following procedure has been tested to work with Ubuntu 16.04 as building environment, may work fine with other Debian/Ubuntu versions as well.
 
 Set up Ubuntu build environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To compile the Windows Wazuh agent installer on Ubuntu, install these prerequisite packages: ::
+Install these dependencies to build the Windows Wazuh agent installer on Ubuntu: ::
 
    apt-get install gcc-mingw-w64
    apt-get install nsis
@@ -66,7 +68,7 @@ Run the make command: ::
 
    make TARGET=winagent
 
-You should expect the following output near the end of the compile process: ::
+You should expect the following output near the end of the building process: ::
 
    ...
    Output: "wazuh-agent-2.0.exe"
@@ -88,6 +90,6 @@ You should expect the following output near the end of the compile process: ::
    Done building winagent
 
 
-Now you should have a Wazuh agent installer for Windows here: ``./win32/wazuh-agent-2.0.exe``, :ref:`ready to be used <wazuh_agent_windows>`.
+Now you should have a Wazuh agent installer for Windows here: ``./win32/wazuh-agent-2.0.exe``, you can use our guide :ref:`here <wazuh_agent_windows>` to install it.
 
-.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
+.. note:: At this point, your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual at the :ref:`Registering agents <connecting_agents>` section.
