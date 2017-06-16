@@ -3,12 +3,14 @@
 Setting up SSL for Filebeat and Logstash
 ========================================
 
-If you are running Wazuh server and the Elastic Stack on separate systems (distributed architecture), then it is important to configure SSL encryption between Filebeat and Logstash.  This does not apply to single-server architectures.
+If you are running Wazuh server and Elastic Stack on separate systems & servers (distributed architecture), then it is important to configure SSL encryption between Filebeat and Logstash. This not applies to single-server architectures.
+
+.. note:: Many of the commands described below need to be executed with root user privileges.
 
 Generating a self-signed SSL certificate
 ----------------------------------------
 
-First, we need an SSL certificate and a key.
+1. First, we need an SSL certificate and key.
 
 1. On the **machine with Logstash server** installed, create a copy of the OpenSSL example configuration file. The file location may vary depending on your operating system:
 
@@ -34,7 +36,7 @@ First, we need an SSL certificate and a key.
 		[ v3_ca ]
 		subjectAltName = IP: 192.168.1.2
 
-3. Generate the SSL certificate and key::
+3. Generate the SSL certificate and key: ::
 
 	openssl req -x509 -batch -nodes -days 3650 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
 
@@ -45,9 +47,9 @@ First, we need an SSL certificate and a key.
 Configure Logstash server
 -------------------------
 
-At this point you should have your certificate and key at ``/etc/logstash/logstash.crt`` and ``/etc/logstash/logstash.key`` respectively. Now we'll configure Logstash to use it on connections with Filebeat.
+At this point you should have your SSL certificate and key at ``/etc/logstash/logstash.crt`` and ``/etc/logstash/logstash.key`` respectively. Now we'll configure Logstash to use it across with Filebeat.
 
-1. Edit file ``/etc/logstash/conf.d/01-wazuh.conf`` and uncomment the lines related to SSL under ``input/beats``. The active input section should now look like this::
+1. Edit file ``/etc/logstash/conf.d/01-wazuh.conf`` and uncomment the lines related to SSL under ``input/beats``. The active input section should now look like this: ::
 
 	input {
 	    beats {
@@ -74,9 +76,9 @@ Configure Filebeat
 
 Now we will configure Filebeat to verify the Logstash server's certificate.
 
-1. On the **machine with Filebeat installed** (Wazuh server), fetch the Logstash server's file ``/etc/logstash/logstash.crt`` and copy it into ``/etc/filebeat/logstash.crt``.
+1. On the **machine with Filebeat installed** (Wazuh server), fetch the Logstash server's SSL certificate file at ``/etc/logstash/logstash.crt`` and copy it into ``/etc/filebeat/logstash.crt``.
 
-	Here is an **example** of what you might use to copy the cert from the Wazuh server to the Wazuh manager ::
+	Here is an **example** you might use to copy the SSL certificate from the Logstash server to Wazuh server where Filebeat is installed::
 
 		scp root@LOGSTASH_SERVER_IP:/etc/logstash/logstash.crt /etc/filebeat
 

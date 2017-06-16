@@ -3,7 +3,11 @@
 Setting up SSL and authentication for Kibana
 =============================================
 
-By default, the communications between Kibana (including the Wazuh app) and the web browser on end-user systems are not encrypted. It’s strongly recommended to configure Kibana to use SSL encryption and to enable authentication.
+By default, the communications between Kibana (including the Wazuh app) and the web browser on end-user systems are not encrypted. It’s strongly recommended to configure Kibana to use SSL encryption and to enable authentication, next we briefly describe how to do this with a NGINX setup.
+
+NGINX is a popular open-source web server and reverse proxy, known for its high performance, stability, rich feature set, simple configuration, and low resource consumption. Here we will use it as a reverse proxy to provide to the end users an encrypted and authenticated access to Kibana.
+
+.. note:: Many of the commands described below need to be executed with root user privileges.
 
 .. topic:: Contents
 
@@ -13,9 +17,7 @@ By default, the communications between Kibana (including the Wazuh app) and the 
 NGINX SSL proxy for Kibana (RPM-based distributions)
 ----------------------------------------------------
 
-NGINX is a popular open-source web server and reverse proxy, known for its high performance, stability, rich feature set, simple configuration, and low resource consumption.  Here we will use it as a reverse proxy to provide end users with encrypted and authenticated access to Kibana.
-
-1. Install NGINX:
+1. First, install NGINX:
 
   a. For CentOS:
 
@@ -86,10 +88,10 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
         }
     }
     EOF
-	
+
   .. note::
 
-    We configure nginx in order to encapsulate the IP address of the Kibana server. This configuration allows us to redirect Kibana requests to HTTPS localhost. If this configuration is enabled, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart the Kibana service. 
+    We configure nginx in order to encapsulate the IP address of the Kibana server. This configuration allows us to redirect Kibana requests to HTTPS, when you use this configuration it's recommended to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``, then you must restart the Kibana service to apply this change.
 
 4. Allow NGINX to connect to Kibana port if you're using SELinux:
 
@@ -126,11 +128,8 @@ Enable authentication by htpasswd
 Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.
 
 
-
 NGINX SSL proxy for Kibana (Debian-based distributions)
 -------------------------------------------------------
-
-NGINX is a popular open-source web server and reverse proxy, known for its high performance, stability, rich feature set, simple configuration, and low resource consumption. Here we will use it as a reverse proxy to provide end users with encrypted and authenticated access to Kibana.
 
 1. Install NGINX::
 
@@ -178,7 +177,7 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 
   .. note::
 
-    We configure nginx in order to encapsulate the IP address of the Kibana server. This configuration allows us to redirect Kibana requests to HTTPS localhost. If this configuration is enabled, we recommend to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``. Then, it's necessary to restart the Kibana service. 
+    We configure nginx in order to encapsulate the IP address of the Kibana server. This configuration allows us to redirect Kibana requests to HTTPS, when you use this configuration it's recommended to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``, then you must restart the Kibana service to apply this change.
 
 Enable authentication by htpasswd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -202,4 +201,3 @@ Enable authentication by htpasswd
       service nginx restart
 
 Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.
-
