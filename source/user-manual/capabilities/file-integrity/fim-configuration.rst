@@ -64,7 +64,7 @@ Using ``report_changes`` option, we can see what specifically changed in text fi
 
 Configure to ignore files
 -------------------------------------------
-Files and directories can be ignored using the ignore option (or registry_ignore for Windows registry entries):
+Files and directories can be omitted using the ignore option (or registry_ignore for Windows registry entries):
 In order to avoid false positives, syscheck can be configured to ignore certain files that we don't want to monitor with ``ignore`` tag (or registry_ignore for Windows registry entries).
 ::
 
