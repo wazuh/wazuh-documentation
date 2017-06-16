@@ -25,7 +25,7 @@ Static fields:
 Dynamic decoders
 -----------------
 
-It is often necessary to extract more than eight relevant fields from an event, and often the actual data items extracted have no relationship to the limited list of predefined field names.  Knowing that we cannot afford to operate within these contraints, Wazuh has extended OSSEC to allow the decoding of an unlimited number of fields with field names that clearly relate to what is being extracted.   Even nested field names are supported.
+It is often necessary to extract more than eight relevant fields from an event, and often the actual data items extracted have no relationship to the limited list of predefined field names.  Knowing that we cannot afford to operate within these constraints, Wazuh has extended OSSEC to allow the decoding of an unlimited number of fields with field names that clearly relate to what is being extracted.   Even nested field names are supported.
 
 Dynamic fields:
 ::
