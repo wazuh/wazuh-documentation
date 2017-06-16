@@ -3,7 +3,7 @@
 Rootkit detection
 =================
 
-Rootkit and trojan detection is performed using two files: ``rootkit_files.txt`` and ``rootkit_trojans.txt``. In addition, other low-level tests are performed to detect kernel-level rootkits. You can use these capabilities by adding references to these files in ``ossec.conf``:
+Rootkit and trojan detection are performed using two files: ``rootkit_files.txt`` and ``rootkit_trojans.txt``. In addition, other low-level tests are performed to detect kernel-level rootkits. You can use these capabilities by adding references to these files in ``ossec.conf``:
 
 ::
 
