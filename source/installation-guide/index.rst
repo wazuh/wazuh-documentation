@@ -3,7 +3,7 @@
 Installation guide
 ========================
 
-This document will guide you through the installation process. For interactive help, our `email forum <https://groups.google.com/d/forum/wazuh>`_ is available.  You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.
+This document will guide you through the installation process. For interactive help, our `email forum <https://groups.google.com/d/forum/wazuh>`_ is available. You can subscribe by sending an email to `Wazuh subscribe <mailto:wazuh%2Bsubscribe@googlegroups.com>`_.
 
 Wazuh installation involves two central components, the Wazuh server, and Elastic Stack. In addition, Wazuh agents will need to be deployed to the monitored hosts in your environment:
 
