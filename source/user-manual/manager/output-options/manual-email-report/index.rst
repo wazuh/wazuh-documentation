@@ -109,7 +109,7 @@ After the global configuration, we need to configure the ``email_alert_level``. 
 
 This example will set the minimum level to 10. More information: :ref:`alerts section <reference_ossec_global>`.
 
-Where you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
+When you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
 
 a) For Systemd:
 ::
