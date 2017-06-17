@@ -16,12 +16,16 @@ In this scenario you will only need to configure Logstash to receive data from F
 Configure Logstash
 ^^^^^^^^^^^^^^^^^^
 
-1. Download the new logstash configuration::
+1. Download the new logstash configuration:
 
-    curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/logstash/01-wazuh.conf
-    curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/elasticsearch/wazuh-elastic2-template.json
+  .. code-block:: bash
 
-2. In the output section of ``/etc/logstash/conf.d/01-wazuh.conf``, comment the line for ``elastic5-template`` and uncomment the line for ``elastic2-template``::
+    $ curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/logstash/01-wazuh.conf
+    $ curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/elasticsearch/wazuh-elastic2-template.json
+
+2. In the output section of ``/etc/logstash/conf.d/01-wazuh.conf``, comment the line for ``elastic5-template`` and uncomment the line for ``elastic2-template``:
+
+  .. code-block:: bash
 
     output {
       elasticsearch {
@@ -35,7 +39,9 @@ Configure Logstash
 	    }
     }
 
-3. *Only if you are using a single-host architecture* (where Wazuh server is running with Elastic Stack in the same host), edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled ``Remote Wazuh Manager - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh Manager - JSON file input``::
+3. *Only if you are using a single-host architecture* (where Wazuh server is running with Elastic Stack in the same host), edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled ``Remote Wazuh Manager - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh Manager - JSON file input``:
+
+  .. code-block:: bash
 
     # Wazuh - Logstash configuration file
     ## Remote Wazuh Manager - Filebeat input
@@ -92,38 +98,50 @@ Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
 1. Stop the running Logstash, Elasticsearch and Kibana instances:
 
-  a) For Systemd::
+  a) For Systemd:
 
-      systemctl stop logstash.service
-      systemctl stop elasticsearch.service
-      systemctl stop kibana.service
+    .. code-block:: bash
 
-  b) For SysV Init::
+        $ systemctl stop logstash.service
+        $ systemctl stop elasticsearch.service
+        $ systemctl stop kibana.service
 
-      service logstash stop
-      service elasticsearch stop
-      service kibana stop
+  b) For SysV Init:
+
+    .. code-block:: bash
+
+      $ service logstash stop
+      $ service elasticsearch stop
+      $ service kibana stop
 
 2. Remove Logstash old configuration and template files:
 
-  For single-host architectures (Wazuh server and Elastic Stack running in the same system)::
+  For single-host architectures (Wazuh server and Elastic Stack running in the same system):
 
-   rm /etc/logstash/conf.d/01-ossec-singlehost.conf
-   rm /etc/logstash/elastic-ossec-template.json
+  .. code-block:: bash
 
-  For distributed architectures (Elastic Stack standalone server)::
+   $ rm /etc/logstash/conf.d/01-ossec-singlehost.conf
+   $ rm /etc/logstash/elastic-ossec-template.json
 
-   rm /etc/logstash/conf.d/01-ossec.conf
-   rm /etc/logstash/elastic-ossec-template.json
+  For distributed architectures (Elastic Stack standalone server):
+
+  .. code-block:: bash
+
+   $ rm /etc/logstash/conf.d/01-ossec.conf
+   $ rm /etc/logstash/elastic-ossec-template.json
 
 3. Remove deprecated settings from configuration file:
 
-  Removing deprecated settings on Elasticsearch will avoid errors & conflicts after the upgrade, To do that, comment the following lines on your ``/etc/elasticsearch/elasticsearch.yml`` file::
+  Removing deprecated settings on Elasticsearch will avoid errors & conflicts after the upgrade, To do that, comment the following lines on your ``/etc/elasticsearch/elasticsearch.yml`` file:
+
+  .. code-block:: yaml
 
     index.number_of_shards: 1
     index.number_of_replicas: 0
 
-  ``ES_HEAP_SIZE`` option is now deprecated. You should remove or comment out this option in your  ``/etc/sysconfig/elasticsearch`` file::
+  ``ES_HEAP_SIZE`` option is now deprecated. You should remove or comment out this option in your  ``/etc/sysconfig/elasticsearch`` file:
+
+  .. code-block:: bash
 
     # ES_HEAP_SIZE - Set it to half your system RAM memory
     ES_HEAP_SIZE=8g
@@ -137,17 +155,23 @@ Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
 5. Let's check the software version of the different components to verify everything worked as expected:
 
-  a) For Logstash::
+  a) For Logstash:
+
+    .. code-block:: bash
 
       $ /usr/share/logstash/bin/logstash -V
       logstash 5.2.2
 
-  b) For Elasticsearch::
+  b) For Elasticsearch:
+
+    .. code-block:: bash
 
       $ /usr/share/elasticsearch/bin/elasticsearch -V
       Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
 
-  c) For Kibana::
+  c) For Kibana:
+
+    .. code-block:: bash
 
       $ /usr/share/kibana/bin/kibana -V
       5.2.

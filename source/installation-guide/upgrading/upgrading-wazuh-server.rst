@@ -5,22 +5,28 @@ Upgrading Wazuh server
 
 Follow next steps in order to update your ``Wazuh v1.X`` installation to ``Wazuh v2.0``.
 
-#. First of all, stop running processes::
+1. First of all, stop running processes:
 
-    /var/ossec/bin/ossec-control stop
-    systemctl stop wazuh-api
+  .. code-block:: bash
 
-#. *Only if you have a distributed architecture*, remove logstash-forwarder (it's been replaced by Filebeat):
+    $ /var/ossec/bin/ossec-control stop
+    $ systemctl stop wazuh-api
 
-  Deb systems::
+2. *Only if you have a distributed architecture*, remove logstash-forwarder (it's been replaced by Filebeat):
 
-    apt-get remove logstash-forwarder
+  Deb systems:
 
-  RPM systems::
+  .. code-block:: bash
 
-    yum remove logstash-forwarder
+    $ apt-get remove logstash-forwarder
 
-#. Install Wazuh server:
+  RPM systems:
+
+  .. code-block:: bash
+
+    $ yum remove logstash-forwarder
+
+3. Install Wazuh server:
 
   You could upgrade your current installation by following our installation guide.
 
@@ -33,12 +39,14 @@ Follow next steps in order to update your ``Wazuh v1.X`` installation to ``Wazuh
 
   A backup of your custom rules and decoders will be saved at ``/var/ossec/etc/backup_ruleset``. You need to reapply them again, we recommend use ``/var/ossec/etc/decoders`` and ``/var/ossec/etc/rules`` for custom rules and decoders, these directories won't be overwritten by future upgrades.
 
-#. Run ``/var/ossec/bin/manage_agents -V`` to confirm that now you are running ``Wazuh v2.0``::
+#. Run ``/var/ossec/bin/manage_agents -V`` to confirm that now you are running ``Wazuh v2.0``:
 
-    /var/ossec/bin/manage_agents -V
+.. code-block:: bash
 
-	Wazuh v2.0 - Wazuh Inc.
+    $ /var/ossec/bin/manage_agents -V
 
-	This program is free software; you can redistribute it and/or modify
-	it under the terms of the GNU General Public License (version 2) as
-	published by the Free Software Foundation.
+  	Wazuh v2.0 - Wazuh Inc.
+
+  	This program is free software; you can redistribute it and/or modify
+  	it under the terms of the GNU General Public License (version 2) as
+  	published by the Free Software Foundation.

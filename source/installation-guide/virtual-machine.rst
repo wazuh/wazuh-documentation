@@ -27,11 +27,13 @@ We provide a pre-built virtual machine image (OVA), you can directly import usin
 
   .. warning:: Before connecting any Wazuh agent, change the VM's network interface type from NAT (the factory default) to bridge for be reachable to your network. By default, the VM will try to get an IP address from your network's DHCP server. Alternatively, you can set a static IP address by configuring the proper network files on the CentOS operating system where it's this virtual machine based on.
 
-4. You can start and stop wazuh-manager, elasticsearch, logstash, and kibana with the 'systemctl' command. Examples: ::
+4. You can start and stop wazuh-manager, elasticsearch, logstash, and kibana with the 'systemctl' command. Examples:
 
-    systemctl restart wazuh-manager
-    systemctl stop elasticsearch
-    systemctl start logstash
-    systemctl status kibana
+  .. code-block:: bash
+
+    $ systemctl restart wazuh-manager
+    $ systemctl stop elasticsearch
+    $ systemctl start logstash
+    $ systemctl status kibana
 
 5. In order to connect to Kibana web user interface, you can login with http://OVA_IP_ADRESS:5601 (where ``OVA_IP_ADDRESS`` is your system IP).
