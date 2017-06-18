@@ -5,7 +5,7 @@ Scan paths configuration
 
 Leaving this unconfigured will result in Wazuh using the module defaults.
 
-By default, it will monitor /etc, /usr/bin, /usr/sbin, /bin and /sbin on the Wazuh Server, with real time monitoring disabled and report_changes enabled.
+By default, it will monitor ``/etc``, ``/usr/bin``, ``/usr/sbin``, ``/bin`` and ``/sbin`` on the Wazuh Server, with real time monitoring disabled and report_changes enabled.
 
 To overwrite the defaults or add in new paths to scan, you can use hiera to overwrite the defaults.
 

@@ -21,5 +21,4 @@ Back on the Puppet agent node, run the puppet agent again: ::
 
    $ sudo puppet agent -t
 
-.. note:: Remember that private network DNS is a prerequisite fori successful certificate signing.
-
+.. note:: Remember that private network DNS is a prerequisite for a successful certificate signing.

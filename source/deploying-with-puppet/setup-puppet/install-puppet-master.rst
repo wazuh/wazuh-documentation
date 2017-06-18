@@ -51,13 +51,13 @@ Then, restart your Puppet Server to apply changes:
 
   ::
 
-    $ systemctl start puppetserver
+    $ sudo systemctl start puppetserver
 
   b) For SysV Init:
 
   ::
 
-    $ service puppetserver start
+    $ sudo service puppetserver start
 
 PuppetDB installation
 ---------------------
