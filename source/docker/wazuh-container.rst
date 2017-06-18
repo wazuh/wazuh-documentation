@@ -25,7 +25,7 @@ SELinux
 On distributions which have SELinux enabled out-of-the-box, you will need to either re-context the files or put SELinux into Permissive mode for docker-elk to start properly. For example, on Red Hat and CentOS the following command will apply the proper context::
 
   .-root@centos ~
-  -$ chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
+  -# chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
 
 Docker for OSX
 ^^^^^^^^^^^^^^
@@ -40,7 +40,7 @@ Usage
 
     ::
 
-      curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/master/docker-compose.yml
+      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/master/docker-compose.yml
 
 #. Start Wazuh and Elastic Stack using *docker-compose*:
 
