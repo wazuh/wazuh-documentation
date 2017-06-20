@@ -24,9 +24,8 @@ SELinux
 
 On distributions which have SELinux enabled out-of-the-box, you will need to either re-context the files or put SELinux into Permissive mode for docker-elk to start properly. For example, on Red Hat and CentOS the following command will apply the proper context::
 
-.. code-block:: console
-
-  # chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
+  .-root@centos ~
+  -# chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
 
 Docker for OSX
 ^^^^^^^^^^^^^^
