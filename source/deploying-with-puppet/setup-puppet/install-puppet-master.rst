@@ -119,7 +119,7 @@ Create the extension pg_trgm is the RegExp-optimized index extension: ::
 
 Test database access: ::
 
-   # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
+   $ psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb:
    psql (9.4.11)
    Type "help" for help.
