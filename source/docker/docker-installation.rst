@@ -16,7 +16,7 @@ To check your current kernel version, open a terminal and use ``uname -r`` to di
 
 Run the Docker installation script.
 
-::
+.. code-block:: console
 
    # curl -sSL https://get.docker.com/ | sh
 
