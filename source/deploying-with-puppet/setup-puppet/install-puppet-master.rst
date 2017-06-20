@@ -100,7 +100,9 @@ Restart service after change configuration:
 
    $ sudo systemctl restart postgresql-9.4
 
-Create a PostgreSQL user and database: ::
+Create a PostgreSQL user and database:
+
+.. code-block:: console
 
    # su - postgres
    $ createuser -DRSP puppetdb

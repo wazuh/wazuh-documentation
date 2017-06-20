@@ -31,7 +31,9 @@ If you would like to use Docker as a non-root user, you should now consider addi
 Docker compose
 ----------------------------------------------
 
-Docker compose 1.6 or newer is required. Install it like this::
+Docker compose 1.6 or newer is required. Install it like this:
+
+.. code-block:: console
 
     # curl -L "https://github.com/docker/compose/releases/download/1.12.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
     # chmod +x /usr/local/bin/docker-compose
