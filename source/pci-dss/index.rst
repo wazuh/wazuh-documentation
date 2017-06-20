@@ -10,7 +10,7 @@ Wazuh helps to implement PCI DSS by performing log analysis, file integrity chec
 * `Wazuh for PCI DSS Guide (PDF) <http://ossec.wazuh.com/ruleset/PCI_Guide.pdf>`_
 * `Wazuh for PCI DSS Guide (Excel) <http://ossec.wazuh.com/ruleset/PCI_Guide.xlsx>`_
 
-In the following section we will elaborate on some specific use cases. They explain how to use Wazuh capabilities to meet the standard requirements.
+In the following section, we will elaborate on some specific use cases. They explain how to use Wazuh capabilities to meet the standard requirements.
 
 .. toctree::
     :maxdepth: 1
