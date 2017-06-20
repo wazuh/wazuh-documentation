@@ -18,6 +18,7 @@ Options
 
 - `directories`_
 - `ignore`_
+- `nodiff`_
 - `frequency`_
 - `scan_time`_
 - `scan_day`_
@@ -115,6 +116,25 @@ List of files or directories to be ignored (one entry per line). Multiple lines 
 | **Default Value**  | /etc/mtab                  |
 +--------------------+----------------------------+
 | **Allowed values** | Any directory or file name |
++--------------------+----------------------------+
+
+Attributes:
+
++----------+--------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated |
++          +--------------------------------------------+-----------------------------------+
+|          | Allowed Values                             | sregex                            |
++----------+--------------------------------------------+-----------------------------------+
+
+nodiff
+^^^^^^
+
+List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file, or database configuration, avoiding data leaking by sending the file content changes through alerts.
+
++--------------------+----------------------------+
+| **Default Value**  | /etc/ssl/private.key       |
++--------------------+----------------------------+
+| **Allowed values** | Any file name              |
 +--------------------+----------------------------+
 
 Attributes:
