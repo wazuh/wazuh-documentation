@@ -73,7 +73,7 @@ $ossec_white_list
   `Default []`
 
 $ossec_extra_rules_config
-  using it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file.
+  Using it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file.
   You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the wazuh::server class.
 
   `Default []`
@@ -176,12 +176,12 @@ $enable_wodle_openscap
   `Default false`
 
 $local_decoder_template
-  Allow using a custom local_decoder.xml in the manager.
+  Allow to use a custom local_decoder.xml in the manager.
 
   `Default wazuh/local_decoder.xml.erb`
 
 $local_rules_template
-  Allow using a custom local_rules.xml in the manager.
+  Allow to use a custom local_rules.xml in the manager.
 
   `Default wazuh/local_rules.xml.erb`
 
