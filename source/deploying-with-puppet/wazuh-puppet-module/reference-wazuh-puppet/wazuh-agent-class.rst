@@ -8,7 +8,7 @@ $ossec_active_response
   `Default true`
 
 $ossec_rootcheck
-  Enable rootchek on this host.
+  Enable rootcheck on this host.
 
   `Default true`
 
@@ -39,7 +39,7 @@ $ossec_server_port
   `Default 1514`
 
 $ossec_scanpaths
-  Agents can be Linux or Windows. For this reason don't have ossec_scanpaths by default.
+  Agents can be Linux or Windows. For this reason, don't have ossec_scanpaths by default.
 
   `Default []`
 
@@ -71,7 +71,7 @@ $ossec_prefilter
   `Default false`
 
 $ossec_service_provider
-  This option asocciate Operative System Family
+  This option associate Operative System Family
 
 $ossec_config_profiles
   Specify the agent.conf profile(s) to be used by the agent.
@@ -164,4 +164,3 @@ $logtype
   The OSSEC log_format of the file.
 
   `Default syslog`
-

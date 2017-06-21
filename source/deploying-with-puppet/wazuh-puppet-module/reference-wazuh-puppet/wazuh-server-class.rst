@@ -73,7 +73,7 @@ $ossec_white_list
   `Default []`
 
 $ossec_extra_rules_config
-  To use it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file.
+  using it, after enabling the Wazuh ruleset (either manually or via the automated script), take a look at the changes made to the ossec.conf file.
   You will need to put these same changes into the "$ossec_extra_rules_config" array parameter when calling the wazuh::server class.
 
   `Default []`
@@ -124,7 +124,7 @@ $ossec_server_port
   `Default: '1514'`
 
 $server_package_version
-  Modified client.pp and server.pp to accept package versions as parameter.
+  Modified client.pp and server.pp to accept package versions as a parameter.
 
   `Default installed`
 
@@ -156,7 +156,7 @@ $ar_repeated_offenders
   `Default empty`
 
 $syslog_output
-  Allows an Wazuh manager to send the OSSEC alerts to one or more syslog servers
+  Allows a Wazuh manager to send the OSSEC alerts to one or more syslog servers
 
   `Default false`
 
@@ -171,22 +171,22 @@ $syslog_output_format
   `Default undef`
 
 $enable_wodle_openscap
-  Enable openscap cofiguration in ossec.conf
+  Enable openscap configuration in ossec.conf
 
   `Default false`
 
 $local_decoder_template
-  Allow to use a custom local_decoder.xml in the manager.
+  Allow using a custom local_decoder.xml in the manager.
 
   `Default wazuh/local_decoder.xml.erb`
 
 $local_rules_template
-  Allow to use a custom local_rules.xml in the manager.
+  Allow using a custom local_rules.xml in the manager.
 
   `Default wazuh/local_rules.xml.erb`
 
 $shared_agent_template
-  Enable the configuration to deploy through agent.,conf
+  Enable the configuration to deploy through agent.conf
 
   `Default `wazuh/ossec_shared_agent.conf.erb`
 
@@ -207,7 +207,7 @@ $alert_email
   Email to send to.
 
 $alert_group
-  Array of rule group names.
+  An array of rule group names.
 
   `Default false`
 
@@ -284,4 +284,3 @@ $logtype
   The OSSEC log_format of the file.
 
   `Default syslog`
-
