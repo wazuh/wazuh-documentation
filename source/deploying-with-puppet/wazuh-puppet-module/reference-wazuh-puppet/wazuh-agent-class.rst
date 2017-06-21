@@ -131,7 +131,7 @@ $ar_repeated_offenders
   `Default empty`
 
 $enable_wodle_openscap
-  Enable openscap cofiguration in ossec.conf
+  Enable openscap configuration in ossec.conf
 
   `Default false`
 
