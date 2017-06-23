@@ -13,7 +13,7 @@ Download the Windows installer from our :doc:`packages list<../packages-list/ind
 
      Double click on the downloaded file and follow the wizard. If unsure, leave default answers.
 
-Once installed, the agent includes a graphic user interface that can be used to configure it, to open the log file or to start/stop the service.
+Once installed, the agent includes a graphical user interface that can be used for configuration, opening the log file or to start/stop the service.
 
   .. thumbnail:: ../../images/manual/windows-agent.png
       :align: center
