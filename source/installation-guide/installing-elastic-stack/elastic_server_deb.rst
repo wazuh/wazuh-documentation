@@ -53,7 +53,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
 	update-rc.d elasticsearch defaults 95 10
 	service elasticsearch start
-	
+
 3. Load Wazuh Elasticsearch template::
 
 	curl https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/master/server/startup/integration_files/template_file.json | \
@@ -89,6 +89,12 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
     b) Because the Logstash user needs to read alerts.json file, please add it to OSSEC group by running::
 
 	usermod -a -G ossec logstash
+
+       If you use CentOS-6/RHEL-6 or Amazon AMI, in this versions Logstash use Upstart like service manager, this service manager contains a `bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_ in this case, follow the next steps::
+
+  	1) Edith the file /etc/logstash/startup.options and in the line 30 change the LS_GROUP=logstash to LS_GROUP=ossec.
+  	2) Update the service with the new parameters run the command /usr/share/logstash/bin/system-install
+  	3) Start Logstash again.
 
 4. Enable and start the Logstash service:
 
