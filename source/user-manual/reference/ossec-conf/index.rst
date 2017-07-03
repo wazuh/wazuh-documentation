@@ -46,6 +46,8 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`localfile <localfile>`                                  | manager                |
 +---------------------------------------------------------------+------------------------+
+| :doc:`logging <logging>`                                      | manager, agent         |
++---------------------------------------------------------------+------------------------+
 | :doc:`remote <remote>`                                        | manager                |
 +---------------------------------------------------------------+------------------------+
 | :doc:`reports <reports>`                                      | manager                |
@@ -80,6 +82,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    global
    integration
    localfile
+   logging
    remote
    reports
    rootcheck
