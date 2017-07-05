@@ -96,7 +96,9 @@ This controls what SMTP server to forward email alerts to for delivery.
 +--------------------+-----------------------------------------------+
 | **Default Value**  | n/a                                           |
 +--------------------+-----------------------------------------------+
-| **Allowed values** | Any valid hostname or IP address can be used. |
+| **Allowed values** | - Valid hostname or IP address.               |
+|                    |                                               |
+|                    | - Full path to a sendmail-like executable.    |
 +--------------------+-----------------------------------------------+
 
 email_maxperhour
