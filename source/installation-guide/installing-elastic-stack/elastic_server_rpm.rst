@@ -51,7 +51,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For in
 
 1. Install the Elasticsearch package::
 
-	yum install elasticsearch
+	yum install elasticsearch-5.4.3-1
 
 2. Enable and start the Elasticsearch service:
 
@@ -87,7 +87,7 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 1. Install the Logstash package::
 
-	yum install logstash
+	yum install logstash-5.4.3-1
 
 2. Download the Wazuh config and template files for Logstash::
 
@@ -134,7 +134,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 1. Install the Kibana package::
 
-	yum install kibana
+	yum install kibana-5.4.3-1
 
 2. Install the Wazuh App plugin for Kibana::
 

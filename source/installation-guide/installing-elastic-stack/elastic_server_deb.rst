@@ -39,7 +39,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
 1. Install the Elasticsearch package::
 
-	apt-get install elasticsearch
+	apt-get install elasticsearch=5.4.3
 
 2. Enable and start the Elasticsearch service:
 
@@ -75,7 +75,7 @@ Logstash is the tool that will collect logs, parse them, and then pass them alon
 
 1. Install the Logstash package::
 
-	apt-get install logstash
+	apt-get install logstash=1:5.4.3-1
 
 2. Download the Wazuh config and template files for Logstash::
 
@@ -122,7 +122,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 1. Install the Kibana package::
 
-	apt-get install kibana
+	apt-get install kibana=5.4.3
 
 2. Install the Wazuh App plugin for Kibana::
 
