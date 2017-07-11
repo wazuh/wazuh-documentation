@@ -5,7 +5,7 @@ IAM use cases
 
 AWS Identity and Access Management (IAM) enables you to securely control your users' access to AWS services and resources. Using IAM, you can create and manage AWS users and groups, and use permissions to allow and deny their access to AWS resources.
 
-Following are some use cases for Wazuh rules built for IAM events.
+Following are some use cases for Wazuh rules built in for IAM events.
 
 
 Create user account

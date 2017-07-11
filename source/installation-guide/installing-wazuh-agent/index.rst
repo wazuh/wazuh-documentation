@@ -3,7 +3,7 @@
 Installing Wazuh agent
 ======================
 
-The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities: log and data collection, file integrity monitoring, rootkits and malware detection and security policy monitoring. In addition, it talks to the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
+The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities: log and data collection, file integrity monitoring, rootkits and malware detection, and security policy monitoring. In addition, it talks to the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
 There are several options to install a Wazuh agent, depending on the operating system and whether or not you wish to build from source. Consult the table below and choose how to proceed for a given agent:
 
@@ -23,7 +23,7 @@ There are several options to install a Wazuh agent, depending on the operating s
 | :doc:`Sources <wazuh_agent_sources>`            | Install Wazuh agents from source code.           |
 +-------------------------------------------------+--------------------------------------------------+
 
-.. note:: Deploying agents to a large number of servers or endpoints can be easier using automation tools like Puppet, Chef, SCCM or Ansible. Consider to explore these options if that is your case.
+.. note:: Deploying agents to a large number of servers or endpoints can be easier using automation tools like Puppet, Chef, SCCM or Ansible. Consider exploring these options if that is your case.
 
 .. toctree::
     :hidden:
