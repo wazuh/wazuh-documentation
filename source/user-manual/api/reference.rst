@@ -11,7 +11,7 @@ This API reference is organized by resources:
 * `Rules`_
 * `Syscheck`_
 
-Also, it is provided an `Request List`_ with all available requests.
+Also, it is provided a `Request List`_ with all available requests.
 
 .. _request_list:
 
@@ -116,7 +116,7 @@ Add a new agent.
 	   "error": 0,
 	   "data": "003"
 	}
-	
+
 
 Add agent (quick method)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -148,7 +148,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": "004"
 	}
-	
+
 
 Insert agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -194,7 +194,7 @@ Insert an agent with an existing id and key.
 	   "error": 0,
 	   "data": "123"
 	}
-	
+
 
 
 Delete
@@ -230,7 +230,7 @@ Removes an agent. You must restart OSSEC after removing an agent.
 	   "error": 0,
 	   "data": "Agent removed"
 	}
-	
+
 
 
 Info
@@ -263,7 +263,7 @@ Returns a summary of the available agents.
 	      "Disconnected": 0
 	   }
 	}
-	
+
 
 Get all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -284,7 +284,7 @@ Returns a list with the available agents.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -343,7 +343,7 @@ Returns a list with the available agents.
 	      ]
 	   }
 	}
-	
+
 
 Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -385,7 +385,7 @@ Returns the information of an agent.
 	      "id": "000"
 	   }
 	}
-	
+
 
 
 Key
@@ -421,7 +421,7 @@ Returns the key of an agent.
 	   "error": 0,
 	   "data": "MDAxIFdlYlNlcnZlcjEgMTAuMC4wLjYyIDNlZjEwYTQ2MGZmZDEwNDlhNDhiMmI1NjRjZmFiNGQxNmFiYzIzMzQ2NDM3MWY0ODQwZDQ0ZDJjN2RkNDkwZTE="
 	}
-	
+
 
 
 Restart
@@ -446,7 +446,7 @@ Restarts all agents.
 ::
 
 	{
-	    "data": "Restarting all agents", 
+	    "data": "Restarting all agents",
 	    "error": 0
 	}
 
@@ -477,7 +477,7 @@ Restarts the agent.
 ::
 
 	{
-	    "data": "Restarting agent", 
+	    "data": "Restarting agent",
 	    "error": 0
 	}
 
@@ -507,7 +507,7 @@ Returns all decoders included in ossec.conf.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -562,7 +562,7 @@ Returns all decoders included in ossec.conf.
 	      ]
 	   }
 	}
-	
+
 
 Get all decoders files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -583,7 +583,7 @@ Returns all decoders files included in ossec.conf.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -668,7 +668,7 @@ Returns all decoders files included in ossec.conf.
 	      ]
 	   }
 	}
-	
+
 
 Get all parent decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -689,7 +689,7 @@ Returns all parent decoders included in ossec.conf
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -732,7 +732,7 @@ Returns all parent decoders included in ossec.conf
 	      ]
 	   }
 	}
-	
+
 
 Get decoders by name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -755,7 +755,7 @@ Returns the decoders with the specified name.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -806,7 +806,7 @@ Returns the decoders with the specified name.
 	      ]
 	   }
 	}
-	
+
 
 
 
@@ -862,7 +862,7 @@ Returns ossec.conf in JSON format.
 	      "logall_json": "no"
 	   }
 	}
-	
+
 
 
 Info
@@ -900,7 +900,7 @@ Returns basic information about Manager.
 	      "tz_offset": "+0000"
 	   }
 	}
-	
+
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -934,7 +934,7 @@ Returns the Manager processes that are running.
 	      "ossec-maild": "stopped"
 	   }
 	}
-	
+
 
 
 Logs
@@ -959,7 +959,7 @@ Returns the 3 last months of ossec.log.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -984,15 +984,15 @@ Returns the 3 last months of ossec.log.
 
 	{
 	    "data": {
-	        "totalItems": 16480, 
+	        "totalItems": 16480,
 	        "items": [
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Syscheck scan frequency: 3600 seconds", 
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck scan (forwarding database).", 
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck database (pre-scan).", 
-	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Started (pid: 2832).", 
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Syscheck scan frequency: 3600 seconds",
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck scan (forwarding database).",
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck database (pre-scan).",
+	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Started (pid: 2832).",
 	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Monitoring output of command(360): df -P"
 	        ]
-	    }, 
+	    },
 	    "error": 0
 	}
 
@@ -1074,7 +1074,7 @@ Returns a summary about the 3 last months of ossec.log.
 	      }
 	   }
 	}
-	
+
 
 
 Stats
@@ -1109,31 +1109,31 @@ Returns OSSEC statistical information of current date.
 	{
 	    "data": [
 	        {
-	            "hour": 5, 
-	            "firewall": 0, 
+	            "hour": 5,
+	            "firewall": 0,
 	            "alerts": [
 	                {
-	                    "level": 3, 
-	                    "sigid": 5715, 
+	                    "level": 3,
+	                    "sigid": 5715,
 	                    "times": 4
-	                }, 
+	                },
 	                {
-	                    "level": 2, 
-	                    "sigid": 1002, 
+	                    "level": 2,
+	                    "sigid": 1002,
 	                    "times": 2
-	                }, 
+	                },
 	                {
 	                    "...": "..."
 	                }
-	            ], 
-	            "totalAlerts": 107, 
-	            "syscheck": 1257, 
+	            ],
+	            "totalAlerts": 107,
+	            "syscheck": 1257,
 	            "events": 1483
-	        }, 
+	        },
 	        {
 	            "...": "..."
 	        }
-	    ], 
+	    ],
 	    "error": 0
 	}
 
@@ -1158,16 +1158,16 @@ Returns OSSEC statistical information per hour. Each item in averages field repr
 	{
 	    "data": {
 	        "averages": [
-	            100, 
-	            357, 
-	            242, 
-	            500, 
-	            422, 
-	            "...", 
+	            100,
+	            357,
+	            242,
+	            500,
+	            422,
+	            "...",
 	            123
-	        ], 
+	        ],
 	        "interactions": 0
-	    }, 
+	    },
 	    "error": 0
 	}
 
@@ -1193,61 +1193,61 @@ Returns OSSEC statistical information per week. Each item in hours field represe
 	    "data": {
 	        "Wed": {
 	            "hours": [
-	                223, 
-	                "...", 
+	                223,
+	                "...",
 	                456
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Sun": {
 	            "hours": [
-	                332, 
-	                "...", 
+	                332,
+	                "...",
 	                313
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Thu": {
 	            "hours": [
-	                888, 
-	                "...", 
+	                888,
+	                "...",
 	                123
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Tue": {
 	            "hours": [
-	                536, 
-	                "...", 
+	                536,
+	                "...",
 	                345
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Mon": {
 	            "hours": [
-	                444, 
-	                "...", 
+	                444,
+	                "...",
 	                556
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Fri": {
 	            "hours": [
-	                131, 
-	                "...", 
+	                131,
+	                "...",
 	                432
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Sat": {
 	            "hours": [
-	                134, 
-	                "...", 
+	                134,
+	                "...",
 	                995
-	            ], 
+	            ],
 	            "interactions": 0
 	        }
-	    }, 
+	    },
 	    "error": 0
 	}
 
@@ -1277,7 +1277,7 @@ Clears the rootcheck database for all agents.
 ::
 
 	{
-	    "data": "Rootcheck database deleted", 
+	    "data": "Rootcheck database deleted",
 	    "error": 0
 	}
 
@@ -1308,7 +1308,7 @@ Clears the rootcheck database for an agent.
 ::
 
 	{
-	    "data": "Rootcheck database deleted", 
+	    "data": "Rootcheck database deleted",
 	    "error": 0
 	}
 
@@ -1349,7 +1349,7 @@ Return the timestamp of the last rootcheck scan.
 	      "rootcheckTime": "2017-03-02 23:43:58"
 	   }
 	}
-	
+
 
 Get rootcheck CIS requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1370,7 +1370,7 @@ Returns the CIS requirements of all rootchecks of the agent.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1393,7 +1393,7 @@ Returns the CIS requirements of all rootchecks of the agent.
 	      ]
 	   }
 	}
-	
+
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1420,7 +1420,7 @@ Returns the rootcheck database of an agent.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1455,7 +1455,7 @@ Returns the rootcheck database of an agent.
 	      ]
 	   }
 	}
-	
+
 
 Get rootcheck pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1476,7 +1476,7 @@ Returns the PCI requirements of all rootchecks of the agent.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1499,7 +1499,7 @@ Returns the PCI requirements of all rootchecks of the agent.
 	      ]
 	   }
 	}
-	
+
 
 
 Run
@@ -1524,7 +1524,7 @@ Runs syscheck and rootcheck on all agent, due to OSSEC launches both processes a
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents", 
+	    "data": "Restarting Syscheck/Rootcheck on all agents",
 	    "error": 0
 	}
 
@@ -1558,7 +1558,7 @@ Runs syscheck and rootcheck on an agent, due to OSSEC launches both processes at
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-	
+
 
 
 
@@ -1586,7 +1586,7 @@ Returns all rules.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1657,7 +1657,7 @@ Returns all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get files of rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1678,7 +1678,7 @@ Returns the files of all rules.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1692,7 +1692,7 @@ Returns the files of all rules.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | path               | String        | Filters the rules by path.                                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| file               | String        | Filters the rules by filefile.                                                                                                                                                                         |
+| file               | String        | Filters the rules by file.                                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | download           | String        | Downloads the file                                                                                                                                                                                     |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1763,7 +1763,7 @@ Returns the files of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rule groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1784,7 +1784,7 @@ Returns the groups of all rules.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1815,7 +1815,7 @@ Returns the groups of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1836,7 +1836,7 @@ Returns the PCI requirements of all rules.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1867,7 +1867,7 @@ Returns the PCI requirements of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rules by id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1890,7 +1890,7 @@ Returns the rules with the specified id.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1928,7 +1928,7 @@ Returns the rules with the specified id.
 	      ]
 	   }
 	}
-	
+
 
 
 
@@ -1956,7 +1956,7 @@ Clears the syscheck database for all agents.
 ::
 
 	{
-	    "data": "Syscheck database deleted", 
+	    "data": "Syscheck database deleted",
 	    "error": 0
 	}
 
@@ -1987,7 +1987,7 @@ Clears the syscheck database for an agent.
 ::
 
 	{
-	    "data": "Syscheck database deleted", 
+	    "data": "Syscheck database deleted",
 	    "error": 0
 	}
 
@@ -2028,7 +2028,7 @@ Return the timestamp of the last syscheck scan.
 	      "syscheckEndTime": "2017-03-02 23:43:38"
 	   }
 	}
-	
+
 
 Get syscheck files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2051,7 +2051,7 @@ Returns the syscheck files of an agent.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -2135,7 +2135,7 @@ Returns the syscheck files of an agent.
 	      ]
 	   }
 	}
-	
+
 
 
 Run
@@ -2160,7 +2160,7 @@ Runs syscheck and rootcheck on all agent, due to OSSEC launches both processes a
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents", 
+	    "data": "Restarting Syscheck/Rootcheck on all agents",
 	    "error": 0
 	}
 
@@ -2194,7 +2194,3 @@ Runs syscheck and rootcheck on an agent, due to OSSEC launches both processes at
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-	
-
-
-
