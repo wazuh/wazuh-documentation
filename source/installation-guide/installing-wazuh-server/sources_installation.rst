@@ -74,7 +74,7 @@ Installing Wazuh API
       $ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
       $ apt-get install -y nodejs
 
-    .. note::
+  .. note::
 	`Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
 
 2. Download and execute the installation script:

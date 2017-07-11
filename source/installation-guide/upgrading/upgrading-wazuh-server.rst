@@ -35,11 +35,9 @@ Follow next steps in order to update your ``Wazuh v1.X`` installation to ``Wazuh
 
   Once the package is installed, review your ``/var/ossec/etc/ossec.conf`` file, as it will be overwritten. The one that was previously in use has been saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. It is recommended to compare the new file with the old one and import old settings when needed.
 
-  A backup of your customized rules and decoders will be saved at ``/var/ossec/etc/backup_ruleset``. You need to reapplied them again
-
   A backup of your custom rules and decoders will be saved at ``/var/ossec/etc/backup_ruleset``. You need to reapply them again, we recommend use ``/var/ossec/etc/decoders`` and ``/var/ossec/etc/rules`` for custom rules and decoders, these directories won't be overwritten by future upgrades.
 
-#. Run ``/var/ossec/bin/manage_agents -V`` to confirm that now you are running ``Wazuh v2.0``:
+4. Run ``/var/ossec/bin/manage_agents -V`` to confirm that now you are running ``Wazuh v2.0``:
 
 .. code-block:: bash
 

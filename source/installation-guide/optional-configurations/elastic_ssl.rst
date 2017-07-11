@@ -12,7 +12,7 @@ Generating a self-signed SSL certificate
 
 1. First, we need an SSL certificate and key.
 
-1. On the **machine with Logstash server** installed, create a copy of the OpenSSL example configuration file. The file location may vary depending on your operating system:
+	On the **machine with Logstash server** installed, create a copy of the OpenSSL example configuration file. The file location may vary depending on your operating system:
 
 	a. On Debian or Ubuntu:
 

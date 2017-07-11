@@ -222,8 +222,8 @@ Enable authentication by htpasswd
 
   b. For SysV Init:
   
-  .. code-block:: bash
+    .. code-block:: bash
 
-    $ service nginx restart
+      $ service nginx restart
 
 Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.

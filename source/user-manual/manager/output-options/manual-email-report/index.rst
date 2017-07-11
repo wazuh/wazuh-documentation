@@ -224,7 +224,7 @@ This configuration will send:
 
 Generating automatic reports
 -----------------------------
-Daily reports are summaries of the alerts for the day. You can configure your own report. The Configuration of report in the ``ossec.conf`` file using the ``report`` option. More information: :ref:`Report <reference_ossec_reports>`
+Daily reports are summaries of the alerts for the day. You can configure your own report. The Configuration of report is in ``ossec.conf`` file using the ``report`` option. More information: :ref:`Report <reference_ossec_reports>`
 ::
 
  <ossec_config>

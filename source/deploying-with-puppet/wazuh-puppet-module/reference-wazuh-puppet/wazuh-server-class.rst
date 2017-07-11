@@ -16,7 +16,7 @@ $ossec_emailto
 $ossec_emailfrom
   Email from address.
 
-  `Default ``ossec@${domain}```
+  *Default ossec@${domain}*
 
 $ossec_active_response
   Enable or disable active-response.
@@ -84,16 +84,17 @@ $ossec_local_files
 $ossec_emailnotification
   Whether or not to send email notifications.
 
-   `Default yes`
+  `Default yes`
 
 $ossec_email_maxperhour
- Global Configuration with maximum number of emails per hour.
+  Global Configuration with maximum number of emails per hour.
 
-     `Default 12`
+  `Default 12`
 
 $ossec_email_idsname
+  Define email ID name
 
-   `Default undef`
+  `Default undef`
 
 $ossec_syscheck_frequency
   Frequency that syscheck is executed default every 22 hours
@@ -101,17 +102,17 @@ $ossec_syscheck_frequency
   `Default 79200`
 
 $ossec_auto_ignore
- Specifies if syscheck will ignore files that change too often (after the third change)
+  Specifies if syscheck will ignore files that change too often (after the third change)
 
-   `Default yes`
+  `Default yes`
 
 $ossec_prefilter
   Command to run to prevent prelinking from creating false positives.
 
-   .. note::
+  .. note::
      This option can potentially impact performance negatively. The configured command will be run for each and every file checked.
 
-   `Default false`
+  `Default false`
 
 $ossec_service_provider
   Set service provider to Redhat on Redhat systems.

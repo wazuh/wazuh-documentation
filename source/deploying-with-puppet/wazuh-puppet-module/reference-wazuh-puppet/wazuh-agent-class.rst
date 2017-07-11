@@ -64,7 +64,7 @@ $ossec_syscheck_frequency
   `Default 43200`
 
 $ossec_prefilter
-  Command to run to prevent prelinking from creating false positives.
+  Command used to prevent prelinking from creating false positives.
 
   This option can potentially impact performance negatively. The configured command will be run for each and every file checked.
 
@@ -107,8 +107,9 @@ $agent_package_name
   Define package name defined in params.pp
 
 $agent_package_version
-
-   `Default installed`
+  Define package version
+  
+  `Default installed`
 
 $agent_service_name
   Define service name defined in params.pps

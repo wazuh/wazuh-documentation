@@ -52,7 +52,7 @@ On your terminal, install the Wazuh manager:
 
 		$ apt-get install wazuh-manager
 
-Once the process is complete, you can check the service status with:
+Once the process is completed, you can check the service status with:
 
   a) For Systemd:
 
@@ -87,7 +87,7 @@ Installing Wazuh API
 
 		$ apt-get install wazuh-api
 
-3. Once the process is complete, you can check the service status with:
+3. Once the process is completed, you can check the service status with:
 
   a) For Systemd:
 

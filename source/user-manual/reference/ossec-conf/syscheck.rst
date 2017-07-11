@@ -129,7 +129,7 @@ Attributes:
 nodiff
 ^^^^^^
 
-List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file, or database configuration, avoiding data leaking by sending the file content changes through alerts.
+List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
 
 +--------------------+----------------------------+
 | **Default Value**  | /etc/ssl/private.key       |

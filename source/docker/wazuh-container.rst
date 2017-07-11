@@ -13,7 +13,7 @@ You need to increase ``max_map_count`` on your Docker host::
 
   $ sudo sysctl -w vm.max_map_count=262144
 
-To set this value permanently, update the vm.max_map_count setting in /etc/sysctl.conf. To verify after rebooting, run "sysctl vm.max_map_count".
+To set this value permanently, update the vm.max_map_count setting in ``/etc/sysctl.conf``. To verify after rebooting, run "sysctl vm.max_map_count".
 
 .. warning::
 
@@ -37,13 +37,13 @@ In Docker for OSX, there is a default memory limit of 2GB, in order to run `dock
 Usage
 -------------------------------
 
-#. Copy the docker-compose file to your system:
+#. Copy the `docker-compose` file to your system:
 
     ::
 
       $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/master/docker-compose.yml
 
-#. Start Wazuh and Elastic Stack using *docker-compose*:
+#. Start Wazuh and Elastic Stack using `docker-compose`:
 
     a) Foreground::
 
