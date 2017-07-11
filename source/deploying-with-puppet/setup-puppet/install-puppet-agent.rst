@@ -3,7 +3,7 @@
 Installing Puppet agent
 ============================
 
-In this section we assume you have already installed the apt or yum Puppet repository on your agent system in the same way that you did on your Puppet Server.
+In this section we assume you have already installed the ``apt`` or ``yum`` Puppet repository on your agent system in the same way that you did on your Puppet Server.
 
 Installation on CentOS/RHEL/Fedora
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

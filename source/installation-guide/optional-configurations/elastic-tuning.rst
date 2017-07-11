@@ -15,37 +15,45 @@ We will set the *bootstrap.memory_lock* setting to true, so Elasticsearch will l
 Step 1: Set bootstrap.memory_lock
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Uncomment or add this line to the ``/etc/elasticsearch/elasticsearch.yml`` file::
+Uncomment or add this line to the ``/etc/elasticsearch/elasticsearch.yml`` file:
+
+.. code-block:: yaml
 
     bootstrap.memory_lock: true
 
 Step 2: Edit limit of system resources
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Where to configure systems settings depends on which package you have used to install Elasticsearch, and which operating system you are using:
+Where to configure systems settings depends on which package and operating system you choose to use for Elasticsearch installation.
 
- - For systems which uses **systemd**, system limits need to be specified via systemd. First, create the folder executing the command: ``mkdir -p /etc/systemd/system/elasticsearch.service.d/``, add a file called ``elasticsearch.conf`` and specify any changes in that file::
+ - In a case where **systemd** is used, system limits need to be specified via systemd. First, create the folder executing the command: ``mkdir -p /etc/systemd/system/elasticsearch.service.d/``, add a file called ``elasticsearch.conf`` and specify any changes in that file:
+
+ .. code-block:: ini
 
     [Service]
     LimitMEMLOCK=infinity
 
- - In other case, edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian::
+ - In other case, edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
+
+ .. code-block:: bash
 
      MAX_LOCKED_MEMORY=unlimited
 
 Step 3: Limit memory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The previous configuration might cause node instability or even node death (with an *OutOfMemory* exception) if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help us to limit the memory usage and prevent this situation.
+The previous configuration might cause node instability or even node death (with an *OutOfMemory* exception) if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help us to define the memory usage and prevent this situation.
 
 There are two rules to apply when setting the Elasticsearch heap size:
 
   - No more than 50% of available RAM.
   - No more than 32 GB.
 
-In addition, you must take into account the memory usage of the other software running in the host as well as the operating system.
+In addition, you must take into account the memory usage by the operating system, services and software running on the host.
 
-The default installation of Elasticsearch is configured with a 1 GB heap. You can change the heap size via JVM flags using the ``/etc/elasticsearch/jvm.options`` file::
+By default, Elasticsearch is configured with a 1 GB heap. You can change the heap size via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
+
+.. code-block:: bash
 
     # Xms represents the initial size of total heap space
     # Xmx represents the maximum size of total heap space
@@ -54,24 +62,29 @@ The default installation of Elasticsearch is configured with a 1 GB heap. You ca
     -Xmx4g
 
 .. warning::
-
-    Ensure that the min (Xms) and max (Xmx) sizes are the same to prevent the heap from resizing at runtime, a very costly process.
+  Ensure that the min (Xms) and max (Xmx) sizes are the same, this prevents JVM heap resizing at runtime, a very costly process.
 
 Step 4: Restart Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Finally, restart Elasticsearch service:
 
-    a) For Systemd::
-	
+    a) For Systemd:
+
+      .. code-block:: bash
+
         systemctl daemon-reload
         systemctl restart elasticsearch
 
-    b) For SysV Init::
+    b) For SysV Init:
+
+      .. code-block:: bash
 
         service elasticsearch restart
 
-After starting Elasticsearch, you can see whether this setting was applied successfully by checking the value of mlockall in the output from this request::
+After starting Elasticsearch, you can see whether this setting was successfully applied by checking the value of ``mlockall`` in the output of the next request:
+
+.. code-block:: bash
 
     curl -XGET 'localhost:9200/_nodes?filter_path=**.mlockall&pretty'
 
@@ -87,7 +100,7 @@ After starting Elasticsearch, you can see whether this setting was applied succe
       }
     }
 
-If you see that mlockall is false, then it means that the mlockall request has failed. You will also see a line with more information in the logs (*/var/log/elasticsearch/elasticsearch.log*) with the words *Unable to lock JVM Memory*.
+The request has failed when you see the above output have ``"mlockall" : false`` field. You will also see a line with more information in the logs (*/var/log/elasticsearch/elasticsearch.log*) with the words *Unable to lock JVM Memory*.
 
 Reference:
 
