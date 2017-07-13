@@ -13,7 +13,7 @@ Global configuration generally applies to features that affect the system as a w
 
 Options
 -------
-
+- `alerts_log`_
 - `email_notification`_
 - `email_to`_
 - `email_from`_
@@ -34,6 +34,18 @@ Options
 - `zeromq_output`_
 - `zeromq_uri`_
 - `geoip_db_path`_
+
+alerts_log
+^^^^^^^^^^
+
+This enable or disable writing alerts to ``/var/ossec/logs/alerts/alerts.log``.
+
++--------------------+---------+
+| **Default Value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
 
 email_notification
 ^^^^^^^^^^^^^^^^^^
