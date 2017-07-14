@@ -133,6 +133,16 @@ Where ``s3bucketname`` is the name of the bucket created when CloudTrail was act
 
 .. note:: If you don't want to use an existing folder, create a new one manually before running the script.
 
+.. warning:: The above script will delete all logs on the Amazon S3 bucket after download.
+
+if you want to maintain the logs files in the bucket, you need to use the script without ``-D`` parameter like the following example: ::
+
+  $ ./getawslog.py -b s3bucketname -d -j -l /path-with-write-permission/amazon.log -s /path-with-write-permission/awslogstat.db
+
+Using ``-s /path-with-write-permission/awslogstat.db`` will track downloaded log files avoiding processing them again, without it the script will download previously processed log files adding its content again to ``/path-with-write-permission/amazon.log``. Also you need to install ``sqlite`` module for python: ::
+
+  $ sudo pip install pysqlite
+
 CloudTrail delivers log files to your S3 bucket approximately every 7 minutes. Create a cron job to periodically run the script.  Note that running it more frequently than once every 7 minutes would be useless. CloudTrail does not deliver log files if no API calls are made on your account.
 
 Run ``crontab -e`` and, at the end of the file, add the following line ::

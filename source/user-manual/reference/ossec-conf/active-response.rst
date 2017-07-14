@@ -30,7 +30,7 @@ disabled
 This is a special-case option, in that it occurs alone in its own active-response section for the sole purpose of enabling or disabling the active response facility in Wazuh.
 In the absence of a section like this, active response is by default enabled on Unix-like systems, and disabled on Windows systems.
 
-Setting it to ``yes`` on an agent will disable active-response for that agent only, while setting it in the manager's ``ossec.conf`` file will disable active-response on the manager and all agents..
+Setting it to ``yes`` on an agent will disable active-response for that agent only, while setting it in the manager's ``ossec.conf`` file will disable active-response on the manager and all agents.
 
 .. note::
 
@@ -39,14 +39,14 @@ Setting it to ``yes`` on an agent will disable active-response for that agent on
 +--------------------+--------------------------------------------------------------+
 | **Default Value**  | **no** for Unix-like systems and **yes** for Windows systems |
 +--------------------+--------------------------------------------------------------+
-| **Allowed values** | The option accepted are **yes** and **no**                   |
+| **Allowed values** | The options accepted are **yes** and **no**                  |
 +--------------------+--------------------------------------------------------------+
 
 
 command
 ^^^^^^^
 
-This is used to link the response to the command
+This is used to link the response to the command.
 
 +--------------------+-------------------------------------------+
 | **Default Value**  | n/a                                       |

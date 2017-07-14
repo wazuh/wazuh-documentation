@@ -15,7 +15,7 @@ Options
 -------
 
 - `group`_
-- `categories`_
+- `category`_
 - `rule`_
 - `level`_
 - `location`_
@@ -34,10 +34,10 @@ Filter by group/category.
 +--------------------+-------------------------------+
 | **Default Value**  | n/a                           |
 +--------------------+-------------------------------+
-| **Allowed values** | Any category used is allowed. |
+| **Allowed values** | Any group used is allowed.    |
 +--------------------+-------------------------------+
 
-categories
+category
 ^^^^^^^^^^
 
 Filter by group/category.
@@ -62,7 +62,7 @@ Rule ID to filter for.
 level
 ^^^^^^^^^^
 
-Alert level to filter for. Report will include all levels above and including level specified.
+Alert level to filter for. The report will include all levels above and including level specified.
 
 +--------------------+------------------------------------------+
 | **Default Value**  | n/a                                      |

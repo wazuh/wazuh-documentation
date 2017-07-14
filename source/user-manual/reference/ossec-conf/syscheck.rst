@@ -18,6 +18,7 @@ Options
 
 - `directories`_
 - `ignore`_
+- `nodiff`_
 - `frequency`_
 - `scan_time`_
 - `scan_day`_
@@ -52,6 +53,8 @@ Atributes:
 
 +--------------------+-----------------------------------------------------------------------------------------------------------------+
 | **realtime**       | This will enable real-time/continuous monitoring on Linux (using the inotify system calls) and Windows systems. |
+|                    |                                                                                                                 |
+|                    | Real time only works with directories, not individual files.                                                    |
 +                    +------------------------------------------------------------+----------------------------------------------------+
 |                    | Allowed Value                                              | yes                                                |
 +--------------------+------------------------------------------------------------+----------------------------------------------------+
@@ -113,6 +116,25 @@ List of files or directories to be ignored (one entry per line). Multiple lines 
 | **Default Value**  | /etc/mtab                  |
 +--------------------+----------------------------+
 | **Allowed values** | Any directory or file name |
++--------------------+----------------------------+
+
+Attributes:
+
++----------+--------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated |
++          +--------------------------------------------+-----------------------------------+
+|          | Allowed Values                             | sregex                            |
++----------+--------------------------------------------+-----------------------------------+
+
+nodiff
+^^^^^^
+
+List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
+
++--------------------+----------------------------+
+| **Default Value**  | /etc/ssl/private.key       |
++--------------------+----------------------------+
+| **Allowed values** | Any file name              |
 +--------------------+----------------------------+
 
 Attributes:
@@ -192,7 +214,7 @@ Specifies if syscheck should alert when new files are created
 
 .. note::
 
-   New files will only be detected on a full scan (server or local). This option does not work in realtime.
+   It is valid on: server and local
 
 .. _reference_ossec_syscheck_scan_start:
 

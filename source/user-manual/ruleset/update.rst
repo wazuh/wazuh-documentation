@@ -3,7 +3,7 @@
 Update ruleset
 ===============
 
-Run the ``update_ruleset.py`` script to update the Wazuh ruleset.  You should not need to make any other changes to accomodate the updated rules.
+Run the ``update_ruleset.py`` script to update the Wazuh ruleset.  You should not need to make any other changes to accommodate the updated rules.
 
 
 Usage examples

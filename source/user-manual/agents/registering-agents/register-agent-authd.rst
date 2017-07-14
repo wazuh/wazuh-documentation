@@ -19,13 +19,13 @@ It's possible to register agents automatically with authd. Choose the method tha
 |                         | No host validation       | The manager validates the agent by CA but not the host address. This method allows the use of a shared agent certificate.   |
 +-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
-``Simple method``
+Simple method
 -----------------
 
 Get an SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The first step is to get an SSL key and certificate. This is required in order to make authd to work.
+The first step is to get an SSL key and certificate. This is required in order to make authd work.
 
 1. If you have a valid SSL certificate with its key, copy them into the `etc` folder::
 
@@ -53,22 +53,22 @@ Register the agent
 Some hints
 ^^^^^^^^^^
 
-By default, authd adds agents with a dynamic IP (like using "any" on ``manage_agents``). If you want to add agents with static address, use ``-i`` at server-side::
+By default, authd adds agents with a dynamic IP (like using "any" on ``manage_agents``). If you want to add agents with static IP addresses, use ``-i`` at server-side::
 
     # (Manager)
     /var/ossec/bin/ossec-authd -i
 
-On the other hand, **duplicate IPs are not allowed**, so an agent won't be added if there is already another agent registered with the same IP. Authd can be told to **force a registration** if it finds an older agent with the same IP by first deleting the former registration, by using the ``-f`` option::
+On the other hand, **duplicate IPs are not allowed**, so an agent won't be added if there is already another agent registered with the same IP. By using the ``-f`` option, authd can be told to **force a registration** if it finds an older agent with the same IP - the older agent's registration will be deleted::
 
     # (Manager)
     /var/ossec/bin/ossec-authd -i -f 0
 
-The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be erased). In this case, ``0`` means to delete the old agent's registration regardless of how recently it has checked in.
+The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, ``0`` means to delete the old agent's registration regardless of how recently it has checked in.
 
 Secure methods
 ------------------------------
 
-Launching the authd daemon with default options would allow any agent to register itself, and then connect to a manager. The following options provides some mechanisms to authorize connections. We will introduce the following methods:
+Launching the authd daemon with default options would allow any agent to register itself, and then connect to a manager. The following options provide some mechanisms to authorize connections:
 
 +----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 | Method                                             | Description                                                                                                                 |
@@ -85,7 +85,7 @@ Launching the authd daemon with default options would allow any agent to registe
 .. note::
     These methods can be combined.
 
-``Use a password to authorize agents``
+Use a password to authorize agents
 --------------------------------------
 
 .. note::
@@ -134,7 +134,7 @@ First we are going to create a certificate of authority (CA) that we will use to
 .. warning::
     The file ``rootCA.key`` that we have just created is the **private key** of the certificate of authority. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
 
-``Verify manager via SSL``
+Verify manager via SSL
 -----------------------------------------------
 
 1. Issue and sign a certificate for the authd server, entering the hostname or the IP address that agents will use to connect to the server. For example, if the server's IP is 192.168.1.2::
@@ -154,13 +154,13 @@ First we are going to create a certificate of authority (CA) that we will use to
     cp rootCA.pem /var/ossec/etc
     agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
 
-``Verify agents via SSL``
+Verify agents via SSL
 --------------------------
 
 
 **Verify agents via SSL (no host validation)**
 
-  In this example, we are going to create a certificate for agents without specifying their hostname, so that the same certificate can be used by many agents. This verifies that agents have a certificate signed by our CA, no matter where are they connecting from.
+  In this example, we are going to create a certificate for agents without specifying their hostname, so that the same certificate can be used by many agents. This verifies that agents have a certificate signed by our CA, no matter where they are connecting from.
 
   1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field::
 
@@ -209,4 +209,4 @@ If you try to add an agent with an IP already listed in an existing registration
 Example
 ^^^^^^^^^^
 
-We previously installed and registered Wazuh agent on *Server1* with IP 10.0.0.10 and ID 005. For some reason, we then had to completely re-install *Server1* and thus we now need to install and reregister the Wazuh agent on *Server1*. In this case, we can use the "*-f 0*" parameter which results in the previous agent (005) being removed (with a backup) and a new agent being successfully registered. The new agent will have a new ID.
+We previously installed and registered the Wazuh agent on *Server1* with IP 10.0.0.10 and ID 005. For some reason, we then had to completely re-install *Server1* and thus we now need to install and reregister the Wazuh agent on *Server1*. In this case, we can use the "*-f 0*" parameter which results in the previous agent (005) being removed (with a backup) and a new agent being successfully registered. The new agent will have a new ID.

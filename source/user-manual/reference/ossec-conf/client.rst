@@ -17,10 +17,12 @@ Options
 - `server-ip`_
 - `server-hostname`_
 - `port`_
+- `protocol`_
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
-
+- `local_ip`_
+- `disable-active-response`_
 
 server-ip
 ^^^^^^^^^^^^^
@@ -113,3 +115,29 @@ This is the time in seconds until a reconnection attempt. This should be set to 
 
 .. warning::
 	Notice that the notify_time value uses an underscore while the time-reconnect value uses a dash.  This is an unfortunate legacy naming inconsistency, and is easy to mix up.
+	
+local_ip
+^^^^^^^^^^^^^^
+
+When the agent has multiple network interfaces, this parameter specifies which IP address will comunicate with the manager from.
+
++--------------------+----------------------------------+
+| **Default Value**  | n/a                              |
++--------------------+----------------------------------+
+| **Allowed values** | Any valid IP address is allowed. |
++--------------------+----------------------------------+
+
+disable-active-response
+^^^^^^^^^^^^^^^^^^^^^^^
+
+**Deprecated:** This is an obsolete method to disable active response.
+
+.. warning::
+
+        The recommended way is using the :doc:`active-response <active-response>` section.
+
++--------------------+------------------------------------------------+
+| **Default Value**  | **no**                                         |
++--------------------+------------------------------------------------+
+| **Allowed values** | The options accepted are **yes** and **no**    |
++--------------------+------------------------------------------------+

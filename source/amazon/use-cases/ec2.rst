@@ -5,12 +5,12 @@ EC2 use cases
 
 Amazon EC2 (Elastic Compute Cloud) provides scalable computing capacity in the cloud.  When using a service like this, it is highly desirable to monitor for attacks or other unauthorized actions being performed against your cloud assets. With CloudTrail and Wazuh's EC2 event analysis capabilities, this is very possible.
 
-Following are some use cases for Wazuh rules built for EC2.
+Following are some use cases for Wazuh rules built in for EC2.
 
 Run a new instance in EC2
 -------------------------
 
-When a user runs a new instance in EC2, an AWS event is generated.  As previously illustrated, the log message flows to the Wazuh agent which passes it on to Wazuh manager. The latter analyzes the log event and finds that it matches rule 80301, which results in an alert being generated, as can be seen in Kibana.
+When a user runs a new instance in EC2, an AWS event is generated.  As previously illustrated, the log message flows to the Wazuh agent which passes it on to Wazuh manager. The latter analyzes the log event and finds that it matches rule ``80301``, which results in an alert being generated, as can be seen in Kibana.
 
 +----------------------------------------------------------------------+
 |**Definition of rule 80301**                                          |

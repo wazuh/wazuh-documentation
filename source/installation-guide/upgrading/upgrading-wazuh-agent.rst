@@ -20,7 +20,7 @@ a) On DEB or RPM based **Linux systems**, you can easily rely on the packages ma
           it under the terms of the GNU General Public License (version 2) as
           published by the Free Software Foundation.
 
-b) On **Windows**, **Mac OS** and other operating systems we would advise you to delete your previous version and install Wazuh v2.0 from scratch. More information can be found at:
+b) On **Windows**, **Mac OS** and other operating systems, we advise you to delete your previous version and install Wazuh v2.0 from scratch. More information can be found at:
 
   - :ref:`Install Wazuh agent on Windows <wazuh_agent_windows>`
   - :ref:`Install Wazuh agent on Mac OS X <wazuh_agent_macos>`
