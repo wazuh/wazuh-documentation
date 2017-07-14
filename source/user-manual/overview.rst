@@ -12,6 +12,7 @@ Wazuh server
 
 The Wazuh server is based on a suite of applications, every application/component is designed to acomplished certain task, but when they working together it could analyze the data receive from agents, triggering alerts when an event matches a rule, register new clients/agents, sending data to Elastick Stack server, all paired with a with a RESTful API.
 
+
 Components
 ``````````
 - **Wazuh Manager**:  It receives data and analyzes data from the agents. To do that it uses decoders and rules that have been crafted to trigger security alerts. The manager is also used to distribute configuration files to the agents, and to monitor their status. In addition it can send control messages to trigger automatic actions at an agent level.
@@ -25,7 +26,8 @@ Components
 Elastic Stack
 -------------
 
-Elastic Stack is used to index, browse and visualize Wazuh alerts data. In addition, the Wazuh app for Kibana can be used to visualize configuration settings, rules and decoders, agents status and information, and provides dashboards for policy, compliance and file integrity monitoring.
+Elastic Stack is used to indexing, browse and visualize Wazuh alerts data. In addition, the Wazuh app for Kibana can be used to visualize configuration settings, rules, and decoders, agents status, information, and provides dashboards for policy, compliance and file integrity monitoring.
+
 
 Components
 ``````````
@@ -41,7 +43,7 @@ Components
 Wazuh agents
 ------------
 
-The Wazuh agent runs on monitored systems, and is in charge of collecting log and event data, performing policy monitoring scans, detecting malware and rootkits and alert when watched files are modified. It communicates with the Wazuh server through an encrypted and authenitcated channel.
+The Wazuh agent runs on monitored systems and is in charge of collecting log and event data, performing policy monitoring scans, detecting malware and rootkits and alert when watched files are modified. It communicates with the Wazuh server through an encrypted and authenticated channel.
 
 Components
 ``````````

@@ -56,7 +56,7 @@ The ossec-authd program will automatically add an agent to a Wazuh manager and p
 +                +-------------+-----------------------------------------------------------------------------------------+
 |                | **Default** | /var/ossec/etc/sslmanager.key.                                                          |
 +----------------+-------------+-----------------------------------------------------------------------------------------+
-| **-a**         | Auto select SSL/TLS method.                                                                           |
+| **-a**         | Auto negotiate the most secure common SSL/TLS method with the client.                                 |
 +                +-------------+-----------------------------------------------------------------------------------------+
-|                | **Default** | TLS v1.2 only.                                                                          |
+|                | **Default** | TLS v1.2 only (if supported by the server).                                             |
 +----------------+-------------+-----------------------------------------------------------------------------------------+

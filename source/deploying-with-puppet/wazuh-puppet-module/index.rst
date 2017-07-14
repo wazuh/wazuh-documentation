@@ -3,7 +3,7 @@
 Wazuh Puppet module
 ============================
 
-This `module <https://github.com/wazuh/wazuh-puppet>`_ has been authored by Nicolas Zin, and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for the contribution.
+This `module <https://github.com/wazuh/wazuh-puppet>`_ has been authored by Nicolas Zin and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for the contribution.
 
 Install Wazuh module
 -------------------------------------------------------------------
@@ -68,7 +68,7 @@ Install agent via Puppet
 
 The agent is configured by installing the ``wazuh::client`` class.
 
-Here is an example of a manifest ``wazuh-agent.pp``::
+Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP address)::
 
  node "client.yourhost.com" {
 

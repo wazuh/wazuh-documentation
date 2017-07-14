@@ -3,7 +3,7 @@
 Listing Agents
 ----------------------------
 
-The binary */var/ossec/bin/agent_control* allow us to retrieve the list of available agents:
+The binary */var/ossec/bin/agent_control* allows us to retrieve the list of available agents:
 
 .. code-block:: console
 

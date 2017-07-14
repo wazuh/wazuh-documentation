@@ -13,7 +13,7 @@ You need to increase ``max_map_count`` on your Docker host::
 
   $ sudo sysctl -w vm.max_map_count=262144
 
-To set this value permanently, update the vm.max_map_count setting in /etc/sysctl.conf. To verify after rebooting, run "sysctl vm.max_map_count".
+To set this value permanently, update the vm.max_map_count setting in ``/etc/sysctl.conf``. To verify after rebooting, run "sysctl vm.max_map_count".
 
 .. warning::
 
@@ -22,21 +22,28 @@ To set this value permanently, update the vm.max_map_count setting in /etc/sysct
 SELinux
 ^^^^^^^^^^
 
-On distributions which have SELinux enabled out-of-the-box, you will need to either re-context the files or put SELinux into Permissive mode for docker-elk to start properly. For example, on Red Hat and CentOS the following command will apply the proper context::
+On distributions which have SELinux enabled out-of-the-box, you will need to either re-context the files or put SELinux into Permissive mode for docker-elk to start properly. For example, on Red Hat and CentOS the following command will apply the proper context
 
-  .-root@centos ~
-  -$ chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
+.. code-block:: console
+
+  # chcon -R system_u:object_r:admin_home_t:s0 docker-elk/
+
+Docker for OSX
+^^^^^^^^^^^^^^
+
+In Docker for OSX, there is a default memory limit of 2GB, in order to run `docker-compose up` successfully you have to change default memory settings from 2GB to at least 4 or 5GB. To do so, click on the Docker icon in the menu bar, then "Preferences...", go to "Advanced" tab and set 5GB of memory, then click on "Apply & Restart" and run `docker-compose up`.
+
 
 Usage
 -------------------------------
 
-#. Copy the docker-compose file to your system:
+#. Copy the `docker-compose` file to your system:
 
     ::
 
-      curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/master/docker-compose.yml
+      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/master/docker-compose.yml
 
-#. Start Wazuh and Elastic Stack using *docker-compose*:
+#. Start Wazuh and Elastic Stack using `docker-compose`:
 
     a) Foreground::
 

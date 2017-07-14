@@ -24,7 +24,7 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | Configuration sections                                        | Supported installations|
 +===============================================================+========================+
-| :doc:`active-response <active-response>`                      | manager                |
+| :doc:`active-response <active-response>`                      | manager, agent         |
 +---------------------------------------------------------------+------------------------+
 | :doc:`agentless <agentless>`                                  | manager                |
 +---------------------------------------------------------------+------------------------+
@@ -44,7 +44,7 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`integration  <integration>`                             | manager                |
 +---------------------------------------------------------------+------------------------+
-| :doc:`localfile <localfile>`                                  | manager                |
+| :doc:`localfile <localfile>`                                  | manager, agent         |
 +---------------------------------------------------------------+------------------------+
 | :doc:`logging <logging>`                                      | manager, agent         |
 +---------------------------------------------------------------+------------------------+

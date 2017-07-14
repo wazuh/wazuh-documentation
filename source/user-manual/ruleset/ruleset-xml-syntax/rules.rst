@@ -91,7 +91,7 @@ Any regex to match against the log event.
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <expression regex.html#os-regex-or-regex-syntax>`_ |
+| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_ |
 +--------------------+---------------------------------------------------------------+
 
 decoded_as
@@ -475,8 +475,9 @@ group
 Add additional groups to the alert. Groups are optional tags added to alerts.
 
 They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | Any String|
-+--------------------+-----------+
+
++--------------------+------------+
+| **Default Value**  | n/a        |
++--------------------+------------+
+| **Allowed values** | Any String |
++--------------------+------------+

@@ -3,7 +3,7 @@
 Configuring email alerts
 ===============================
 
-Wazuh can be configured to send the alerts to an email. You can configure the system to send emails once a certain rules are triggered or configure it to send a daily report.
+Wazuh can be configured to send the alerts to an email. You can configure the system to send emails when certain rules are triggered or configure it to send a daily report.
 
 Mail example:
 
@@ -59,7 +59,7 @@ After the global configuration, we need to configure the ``email_alert_level``. 
 
 This example will set the minimum level to 10. More information: :ref:`alerts section <reference_ossec_global>`.
 
-Once you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
+When you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
 
 a) For Systemd:
 ::
@@ -79,13 +79,13 @@ b) For SysV Init:
 Granular email options
 ----------------------------------
 
-Wazuh also allows a very granular configuration options for your alerts through email. Here you will find some examples about the granular configuration. More info: :ref:`email_alerts section <reference_ossec_global>`
+Wazuh also allows a very granular configuration options for your alerts through email. Here you will find some examples of the granular configuration. More info: :ref:`email_alerts section <reference_ossec_global>`
 
 .. warning::
 
   The minimum level you configured inside ``alerts`` section, will be also valid here.
 
-So, for example, if you configure your system to send email once the rule 526 is triggered, if that rule has a level lower than the configured on the previous section the alert will not be sent.
+So, for example, if you configure your system to send an email when the rule 526 is triggered, if that rule has a level lower than the configured on the previous section the alert will not be sent.
 
 Email alert based on level
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -175,9 +175,9 @@ This configuration will send:
 Force forwarding an alert by email
 ----------------------------------
 
-It's also possible to force the mail alert on the rule declaration. In order to do this, you need to use :ref:`option<rules_options>`
+It's also possible to force the mail alert on the rule declaration. In order to do so, you need to use :ref:`option<rules_options>`
 
-The possible values to this option are:
+The possible values for this option are:
 
 - **alert_by_email**: Always alert by email.
 - **no_email_alert**: Never alert by email.

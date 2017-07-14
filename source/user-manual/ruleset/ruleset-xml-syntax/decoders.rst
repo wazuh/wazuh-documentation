@@ -98,7 +98,7 @@ regex
 +--------------------+---------------------------------------------------------------+
 | **Default Value**  | n/a                                                           |
 +--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex <expression regex.html#os-regex-or-regex-syntax>`_ |
+| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_ |
 +--------------------+---------------------------------------------------------------+
 
 order
