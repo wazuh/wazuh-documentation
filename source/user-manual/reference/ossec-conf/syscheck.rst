@@ -279,6 +279,7 @@ Run to prevent prelinking from creating false positives.
 +--------------------+-------------------------------+
 
 Example:
+
 .. code-block:: xml
 
   <prefilter_cmd>/usr/sbin/prelink -y</prefilter_cmd>
