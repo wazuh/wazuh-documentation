@@ -15,10 +15,10 @@ This section allows to configure internal logs.
 Options
 -------
 
-- `log-format`_
+- `log_format`_
 
 
-log-format
+log_format
 ^^^^^^^^^^^
 
 Specifies the log format between JSON output (.json) or plain text (.log). It also can be established both formats at the same time separated by comma.
@@ -39,5 +39,5 @@ Default configuration
 
     <!-- Choose between plain or json format (or both) for internal logs -->
     <logging>
-      <log-format>plain</log-format>
+      <log_format>plain</log_format>
     </logging>
