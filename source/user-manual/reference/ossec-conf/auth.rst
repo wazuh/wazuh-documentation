@@ -19,17 +19,30 @@ This section has options for the registering service.
 Options
 -------
 
+- `disabled`_
 - `port`_
-- `use-source-ip`_
-- `force-insert`_
-- `force-time`_
-- `clear-removed`_
-- `use-password`_
-- `ssl-agent-ca`_
-- `ssl-verify-host`_
-- `ssl-manager-cert`_
-- `ssl-manager-key`_
-- `ssl-auto-negotiate`_
+- `use_source_ip`_
+- `force_insert`_
+- `force_time`_
+- `purge`_
+- `use_password`_
+- `ssl_agent_ca`_
+- `ssl_verify_host`_
+- `ssl_manager_cert`_
+- `ssl_manager_key`_
+- `ssl_auto_negotiate`_
+
+disabled
+^^^^^^^^
+
+Disables the execution of the Auth daemon.
+
++--------------------+---------------------+
+| **Default value**  | no                  |
++--------------------+---------------------+
+| **Allowed values** | - yes               |
+|                    | - no                |
++--------------------+---------------------+
 
 port
 ^^^^
@@ -42,7 +55,7 @@ TCP port number to listen to connections.
 | **Allowed values** | 0 - 65535           |
 +--------------------+---------------------+
 
-use-source-ip
+use_source_ip
 ^^^^^^^^^^^^^^^^^^^
 
 Use client's source IP address instead of "any" to add agent.
@@ -54,7 +67,7 @@ Use client's source IP address instead of "any" to add agent.
 |                    | - no                |
 +--------------------+---------------------+
 
-force-insert
+force_insert
 ^^^^^^^^^^^^^^^^^^^
 
 Force insertion: remove old agent with same name or IP.
@@ -66,7 +79,7 @@ Force insertion: remove old agent with same name or IP.
 |                    | - no                |
 +--------------------+---------------------+
 
-force-time
+force_time
 ^^^^^^^^^^^^^^^^^^^
 
 When forcing to remove old agents with same name or IP, this options specifies
@@ -82,7 +95,7 @@ a number of seconds.
 
 Value ``0`` means to force always.
 
-clear-removed
+purge
 ^^^^^^^^^^^^^^^^^^^
 
 Delete definitely agents when removing.
@@ -97,7 +110,7 @@ Delete definitely agents when removing.
 When set to ``no`` removed agents will remain in the client keys file, marked as removed.
 However, when set to ``yes``, client keys file will be purged.
 
-use-password
+use_password
 ^^^^^^^^^^^^^^^^^^^
 
 Enable shared password authentication.
@@ -113,7 +126,7 @@ When enabled, the shared password will be read from file at ``/var/ossec/etc/aut
 
 If this file does not exist, a **random password** will be generated.
 
-ssl-agent-ca
+ssl_agent_ca
 ^^^^^^^^^^^^^^^^^^^
 
 Full path to CA certificate used to verify clients.
@@ -122,7 +135,7 @@ Full path to CA certificate used to verify clients.
 | **Allowed values** | A full path         |
 +--------------------+---------------------+
 
-ssl-verify-host
+ssl_verify_host
 ^^^^^^^^^^^^^^^^^^^
 
 When CA certificate is specified, this option enables source host verification. This means that the client source IP will be validated using the *Common Name* field.
@@ -134,7 +147,7 @@ When CA certificate is specified, this option enables source host verification. 
 |                    | - no                |
 +--------------------+---------------------+
 
-ssl-manager-cert
+ssl_manager_cert
 ^^^^^^^^^^^^^^^^^^^
 
 Full path to server SSL certificate.
@@ -145,7 +158,7 @@ Full path to server SSL certificate.
 | **Allowed values** | A full path                    |
 +--------------------+--------------------------------+
 
-ssl-manager-key
+ssl_manager_key
 ^^^^^^^^^^^^^^^^^^^
 
 Full path to server SSL key.
@@ -156,7 +169,7 @@ Full path to server SSL key.
 | **Allowed values** | A full path                    |
 +--------------------+--------------------------------+
 
-ssl-auto-negotiate
+ssl_auto_negotiate
 ^^^^^^^^^^^^^^^^^^^
 
 Auto select SSL/TLS method.
@@ -178,15 +191,16 @@ Default configuration
 .. code-block:: xml
 
     <auth>
+	  <disabled>no</disabled>
       <port>1515</port>
-      <use-source-ip>no</use-source-ip>
-      <force-insert>no</force-insert>
-      <force-time>0</force-time>
-      <clear-removed>no</clear-removed>
-      <use-password>no</use-password>
-      <!-- <ssl-agent-ca></ssl-agent-ca> -->
-      <ssl-verify-host>no</ssl-verify-host>
-      <ssl-manager-cert>/var/ossec/etc/sslmanager.cert</ssl-manager-cert>
-      <ssl-manager-key>/var/ossec/etc/sslmanager.key</ssl-manager-key>
-      <ssl-auto-negotiate>no</ssl-auto-negotiate>
+      <use_source_ip>no</use_source_ip>
+      <force_insert>no</force_insert>
+      <force_time>0</force_time>
+      <purge>no</purge>
+      <use_password>no</use_password>
+      <!-- <ssl_agent_ca></ssl_agent_ca> -->
+      <ssl_verify_host>no</ssl_verify_host>
+      <ssl_manager_cert>/var/ossec/etc/sslmanager.cert</ssl_manager_cert>
+      <ssl_manager_key>/var/ossec/etc/sslmanager.key</ssl_manager_key>
+      <ssl_auto_negotiate>no</ssl_auto_negotiate>
     </auth>
