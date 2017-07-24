@@ -56,19 +56,19 @@ To set up the repository, run the command that corresponds to your specific RPM-
       protect=1
       EOF
 
-    d) For Amazon Linux:
+  d) For Amazon Linux:
 
-       .. code-block:: bash
+     .. code-block:: bash
 
-	cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-	[wazuh_repo]
-	gpgcheck=1
-	gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-	enabled=1
-	name=Amazon Linux - Wazuh
-	baseurl=https://packages.wazuh.com/yum/el/7/$basearch
-	protect=1
-	EOF
+    	$ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+    	[wazuh_repo]
+    	gpgcheck=1
+    	gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+    	enabled=1
+    	name=Amazon Linux - Wazuh
+    	baseurl=https://packages.wazuh.com/yum/el/7/$basearch
+    	protect=1
+    	EOF
 
 
 Installing Wazuh manager
