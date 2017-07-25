@@ -18,7 +18,7 @@ b) Upgrade Wazuh server on Debian/Ubuntu:
 
 .. code-block:: bash
 
-    $ sudo apt-get update && sudo apt-get upgrade wazuh-manager
+    $ sudo apt-get update && sudo apt-get install --only-upgrade wazuh-manager
 
 Upgrade Wazuh agent
 ---------------------
@@ -33,4 +33,4 @@ b) Upgrade Wazuh agent on Debian/Ubuntu:
 
 .. code-block:: bash
 
-    $ sudo apt-get update && sudo apt-get upgrade wazuh-agent
+    $ sudo apt-get update && sudo apt-get install --only-upgrade wazuh-agent
