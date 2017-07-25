@@ -3,7 +3,7 @@
 Upgrading Wazuh server
 ======================
 
-Follow next steps in order to update your ``Wazuh v1.X`` installation to ``Wazuh v2.0``.
+Follow next steps in order to update your ``Wazuh v1.x`` server to ``Wazuh v2.x``.
 
 1. First of all, stop running processes:
 
@@ -37,7 +37,7 @@ Follow next steps in order to update your ``Wazuh v1.X`` installation to ``Wazuh
 
   A backup of your custom rules and decoders will be saved at ``/var/ossec/etc/backup_ruleset``. You need to reapply them again, we recommend use ``/var/ossec/etc/decoders`` and ``/var/ossec/etc/rules`` for custom rules and decoders, these directories won't be overwritten by future upgrades.
 
-4. Run ``/var/ossec/bin/manage_agents -V`` to confirm that now you are running ``Wazuh v2.0``:
+4. Run ``/var/ossec/bin/manage_agents -V`` to confirm that now you are running ``Wazuh v2.x``:
 
 .. code-block:: bash
 
