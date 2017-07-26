@@ -106,7 +106,7 @@ Toggle for full or truncated hostname configured on the server. By default, osse
 format
 ^^^^^^
 
-Format of alert output.
+Format of alert output. When ``jsonout_output`` in :doc:`global  <global>` section is enabled, alerts are read from alerts.json instead of alerts.log for JSON format.  
 
 +--------------------+-------------------------------------------------------------------------------------------+
 | **Default value**  | default                                                                                   |
