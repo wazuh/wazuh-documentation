@@ -32,7 +32,7 @@ group
 Filter by group/category.
 
 +--------------------+-------------------------------+
-| **Default Value**  | n/a                           |
+| **Default value**  | n/a                           |
 +--------------------+-------------------------------+
 | **Allowed values** | Any group used is allowed.    |
 +--------------------+-------------------------------+
@@ -43,7 +43,7 @@ category
 Filter by group/category.
 
 +--------------------+-------------------------------+
-| **Default Value**  | n/a                           |
+| **Default value**  | n/a                           |
 +--------------------+-------------------------------+
 | **Allowed values** | Any category used is allowed. |
 +--------------------+-------------------------------+
@@ -54,7 +54,7 @@ rule
 Rule ID to filter for.
 
 +--------------------+---------------------------------------+
-| **Default Value**  | n/a                                   |
+| **Default value**  | n/a                                   |
 +--------------------+---------------------------------------+
 | **Allowed values** | Any Rule ID in Wazuh Rules is allowed |
 +--------------------+---------------------------------------+
@@ -65,7 +65,7 @@ level
 Alert level to filter for. The report will include all levels above and including level specified.
 
 +--------------------+------------------------------------------+
-| **Default Value**  | n/a                                      |
+| **Default value**  | n/a                                      |
 +--------------------+------------------------------------------+
 | **Allowed values** | Any Alert level from 1 to 16 can be used |
 +--------------------+------------------------------------------+
@@ -76,7 +76,7 @@ location
 Filter by the log location or agent name.
 
 +--------------------+-----------------------------------------------+
-| **Default Value**  | n/a                                           |
+| **Default value**  | n/a                                           |
 +--------------------+-----------------------------------------------+
 | **Allowed values** | Any file path, hostname or network is allowed |
 +--------------------+-----------------------------------------------+
@@ -87,7 +87,7 @@ srcip
 Filter by the source ip of the event.
 
 +--------------------+--------------------------------------+
-| **Default Value**  | n/a                                  |
+| **Default value**  | n/a                                  |
 +--------------------+--------------------------------------+
 | **Allowed values** | Any hostname or network can be used. |
 +--------------------+--------------------------------------+
@@ -98,7 +98,7 @@ user
 Filter by the user name. This will match either the srcuser or dstuser.
 
 +--------------------+--------------+
-| **Default Value**  | n/a          |
+| **Default value**  | n/a          |
 +--------------------+--------------+
 | **Allowed values** | Any username |
 +--------------------+--------------+
@@ -110,7 +110,7 @@ title
 Name of the report. **This is a required field.**
 
 +--------------------+----------+
-| **Default Value**  | n/a      |
+| **Default value**  | n/a      |
 +--------------------+----------+
 | **Allowed values** | Any text |
 +--------------------+----------+
@@ -121,7 +121,7 @@ email_to
 The email address to send the completed report. **This is a required field.**
 
 +--------------------+-------------------+
-| **Default Value**  | n/a               |
+| **Default value**  | n/a               |
 +--------------------+-------------------+
 | **Allowed values** | Any email address |
 +--------------------+-------------------+
@@ -132,7 +132,7 @@ showlogs
 Enable or disable the inclusion of logs when creating the report.
 
 +--------------------+---------+
-| **Default Value**  | no      |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+

@@ -37,7 +37,7 @@ Setting it to ``yes`` on an agent will disable active-response for that agent on
     This option is available on server, local, and agent installations.
 
 +--------------------+--------------------------------------------------------------+
-| **Default Value**  | **no** for Unix-like systems and **yes** for Windows systems |
+| **Default value**  | **no** for Unix-like systems and **yes** for Windows systems |
 +--------------------+--------------------------------------------------------------+
 | **Allowed values** | The options accepted are **yes** and **no**                  |
 +--------------------+--------------------------------------------------------------+
@@ -49,7 +49,7 @@ command
 This is used to link the response to the command.
 
 +--------------------+-------------------------------------------+
-| **Default Value**  | n/a                                       |
+| **Default value**  | n/a                                       |
 +--------------------+-------------------------------------------+
 | **Allowed values** | Any defined active response command name  |
 +--------------------+-------------------------------------------+
@@ -61,7 +61,7 @@ This indicates on which system(s) the command should be executed.
 
 
 +--------------------+----------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                              |
+| **Default value**  | n/a                                                                              |
 +--------------------+---------------+------------------------------------------------------------------+
 | **Allowed values** | local         | This runs the command on the agent that generated the event.     |
 +--------------------+---------------+------------------------------------------------------------------+
@@ -83,7 +83,7 @@ agent_id
 The ID of the agent to execute the active response command (used when defined-agent is set).
 
 +--------------------+--------------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                                  |
+| **Default value**  | n/a                                                                                  |
 +--------------------+--------------------------------------------------------------------------------------+
 | **Allowed values** | Any agent id number, as long as **defined-agent** has been specified as the location.|
 +--------------------+--------------------------------------------------------------------------------------+
@@ -94,7 +94,7 @@ level
 This defines a minimum severity level required for the command to be executed.
 
 +--------------------+------------------------+
-| **Default Value**  | n/a                    |
+| **Default value**  | n/a                    |
 +--------------------+------------------------+
 | **Allowed values** | Any level from 1 to 16 |
 +--------------------+------------------------+
@@ -106,7 +106,7 @@ rules_group
 This requires that a rule must belong to one or more rule groups for the command to be executed.
 
 +--------------------+-------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                           |
+| **Default value**  | n/a                                                                           |
 +--------------------+-------------------------------------------------------------------------------+
 | **Allowed values** | Any rule group is allowed. Multiple groups can be defined if comma-separated. |
 +--------------------+-------------------------------------------------------------------------------+
@@ -117,7 +117,7 @@ rules_id
 This limits command execution to only when one or more listed rules fire.
 
 +--------------------+---------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                             |
+| **Default value**  | n/a                                                                             |
 +--------------------+---------------------------------------------------------------------------------+
 | **Allowed values** | Any rule identification. Multiple IDs can be specified if separated by a comma. |
 +--------------------+---------------------------------------------------------------------------------+
@@ -129,7 +129,7 @@ timeout
 This specifies how long in seconds until the reverse command is executed.  When ``repeated_offenders`` is used, ``timeout`` only applies to the first offense.
 
 +--------------------+-----------------------------+
-| **Default Value**  | n/a                         |
+| **Default value**  | n/a                         |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
@@ -141,7 +141,7 @@ repeated_offenders
 This is a comma-separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries. This must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**.
 
 +--------------------+-----------------------------+
-| **Default Value**  | n/a                         |
+| **Default value**  | n/a                         |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (minutes) |
 +--------------------+-----------------------------+

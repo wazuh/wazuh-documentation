@@ -36,7 +36,7 @@ Wildcards may be used on non-Windows systems. When wildcards are used, the log f
 Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
 
 +--------------------+--------------+
-| **Default Value**  | n/a          |
+| **Default value**  | n/a          |
 +--------------------+--------------+
 | **Allowed values** | Any log file |
 +--------------------+--------------+
@@ -48,7 +48,7 @@ A command to be run. All output from this command will be read as one or more lo
 command or full_command is used.
 
 +--------------------+--------------------------------------------------+
-| **Default Value**  | n/a                                              |
+| **Default value**  | n/a                                              |
 +--------------------+--------------------------------------------------+
 | **Allowed values** | any command line, optionally including arguments |
 +--------------------+--------------------------------------------------+
@@ -59,7 +59,7 @@ alias
 This is an alias to identify the command. This will replace the command in the log message.
 
 +--------------------+------------+
-| **Default Value**  | n/a        |
+| **Default value**  | n/a        |
 +--------------------+------------+
 | **Allowed values** | any string |
 +--------------------+------------+
@@ -85,7 +85,7 @@ seconds exactly, but the time between runs will not be shorter than this setting
 This is used with **command** and **full_command**.
 
 +--------------------+--------------------------------+
-| **Default Value**  | n/a                            |
+| **Default value**  | n/a                            |
 +--------------------+--------------------------------+
 | **Allowed values** | any positive number of seconds |
 +--------------------+--------------------------------+
@@ -98,7 +98,7 @@ This is for use only with the ``eventchannel`` log format.  By default, when Waz
 Set this option to **yes** to override this behavior if desired.  Then Wazuh would only receive events that occur after the Wazuh agent is started.
 
 +--------------------+-----------+
-| **Default Value**  | n/a       |
+| **Default value**  | n/a       |
 +--------------------+-----------+
 | **Allowed values** | yes or no |
 +--------------------+-----------+
@@ -118,7 +118,7 @@ This is for use only with the ``eventchannel`` log format. It is possible to spe
 schema in order to filter the events that Wazuh will process.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                                                                              |
+| **Default value**  | n/a                                                                                                                              |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------+
@@ -144,7 +144,7 @@ This is the format of the log being read.
 
 
 	+--------------------+-------------------------------------------------------------------------------------------------------+
-	| **Default Value**  | syslog                                                                                                |
+	| **Default value**  | syslog                                                                                                |
 	+--------------------+----------------+--------------------------------------------------------------------------------------+
 	| **Allowed values** | syslog         | This format is for plain text files in a syslog-like format.                         |
 	|                    |                |                                                                                      |

@@ -31,7 +31,7 @@ rule_include
 Load a single rule file.
 
 +--------------------+-----------------------------------+
-| **Default Value**  | n/a                               |
+| **Default value**  | n/a                               |
 +--------------------+-----------------------------------+
 | **Allowed values** | Path and filename of rule to load |
 +--------------------+-----------------------------------+
@@ -50,7 +50,7 @@ rule_dir
 Load a directory of rules. The files will be loaded in alphabetical order and any duplicate filenames will be skipped.
 
 +--------------------+------------------------------------+
-| **Default Value**  | ruleset/rules                      |
+| **Default value**  | ruleset/rules                      |
 +--------------------+------------------------------------+
 | **Allowed values** | Path to a directory of rule files. |
 +--------------------+------------------------------------+
@@ -72,7 +72,7 @@ rule_exclude
 Exclude a single rule file.
 
 +--------------------+--------------------------------------+
-| **Default Value**  | n/a                                  |
+| **Default value**  | n/a                                  |
 +--------------------+--------------------------------------+
 | **Allowed values** | Path and filename of rule to exclude |
 +--------------------+--------------------------------------+
@@ -90,7 +90,7 @@ decoder_include
 Load a single decoder file.
 
 +--------------------+--------------------------------------+
-| **Default Value**  | n/a                                  |
+| **Default value**  | n/a                                  |
 +--------------------+--------------------------------------+
 | **Allowed values** | Path and filename of decoder to load |
 +--------------------+--------------------------------------+
@@ -108,7 +108,7 @@ decoder_dir
 Load a directory of decoders. The files will be loaded in alphabetical order and any duplicate filenames will be skipped.
 
 +--------------------+--------------------------------------+
-| **Default Value**  | ruleset/decoders                     |
+| **Default value**  | ruleset/decoders                     |
 +--------------------+--------------------------------------+
 | **Allowed values** | Path to a directory of decoder files |
 +--------------------+--------------------------------------+
@@ -130,7 +130,7 @@ decoder_exclude
 Exclude a single decoder file.
 
 +--------------------+-----------------------------------------+
-| **Default Value**  | n/a                                     |
+| **Default value**  | n/a                                     |
 +--------------------+-----------------------------------------+
 | **Allowed values** | Path and filename of decoder to exclude |
 +--------------------+-----------------------------------------+
@@ -147,7 +147,7 @@ list
 Load a single CDB reference for use by other rules.
 
 +--------------------+------------------------------------------------+
-| **Default Value**  | n/a                                            |
+| **Default value**  | n/a                                            |
 +--------------------+------------------------------------------------+
 | **Allowed values** | Path to a list file to be loaded and compiled. |
 +--------------------+------------------------------------------------+

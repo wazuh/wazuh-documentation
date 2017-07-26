@@ -44,6 +44,8 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`integration  <integration>`                             | manager                |
 +---------------------------------------------------------------+------------------------+
+| :doc:`labels  <labels>`                                       | manager, agent         |
++---------------------------------------------------------------+------------------------+
 | :doc:`localfile <localfile>`                                  | manager, agent         |
 +---------------------------------------------------------------+------------------------+
 | :doc:`logging <logging>`                                      | manager, agent         |
@@ -81,6 +83,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    email_alerts
    global
    integration
+   labels
    localfile
    logging
    remote

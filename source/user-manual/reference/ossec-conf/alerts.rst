@@ -32,7 +32,7 @@ This is the minimum severity level for an alert to generate an email notificatio
 	Individual rules can override this with the *alert_by_email* option, which forces an email alert regardless of global or granular alert level thresholds.
 
 +--------------------+-------------------------+
-| **Default Value**  | 7                       |
+| **Default value**  | 7                       |
 +--------------------+-------------------------+
 | **Allowed values** | Any level from 1 to 16  |
 +--------------------+-------------------------+
@@ -44,7 +44,7 @@ log_alert_level
 This is the minimum severity level for alerts to be stored to alerts.log and/or alerts.json.
 
 +--------------------+------------------------+
-| **Default Value**  | 1                      |
+| **Default value**  | 1                      |
 +--------------------+------------------------+
 | **Allowed values** | Any level from 1 to 16 |
 +--------------------+------------------------+
@@ -56,7 +56,7 @@ use_geoip
 Enable or disable GeoIP lookups.
 
 +--------------------+------------------------------------+
-| **Default Value**  | no                                 |
+| **Default value**  | no                                 |
 +--------------------+------------------------------------+
 | **Allowed values** | The options are **yes** or **no**. |
 +--------------------+------------------------------------+
