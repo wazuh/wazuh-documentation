@@ -9,6 +9,7 @@ integration
 	.. code-block:: xml
 
 		<integration>
+		</integration>
 
 This configures the manager to connect Wazuh to external APIs and alerting tools such as Slack and PagerDuty.
 
@@ -88,11 +89,14 @@ group
 
 This filters alerts by rules. `OS_Regex Syntax`_.
 
-+--------------------+----------------------------------+
-| **Default value**  | n/a                              |
-+--------------------+----------------------------------+
-| **Allowed values** | One or more groups or categories |
-+--------------------+----------------------------------+
++--------------------+---------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                         |
++--------------------+---------------------------------------------------------------------------------------------+
+| **Allowed values** | Any rule group is allowed. Multiple groups should be separated with a pipe character (“|”). |
++--------------------+---------------------------------------------------------------------------------------------+
+
+.. note::
+	Observe that all groups must be finished by comma.
 
 event_location
 ^^^^^^^^^^^^^^^
@@ -101,8 +105,20 @@ This filters alerts by the location of where the event originated. `OS_Regex Syn
 
 .. _`OS_Regex Syntax`: http://ossec-docs.readthedocs.org/en/latest/syntax/regex.html
 
-+--------------------+----------------------------------------------------------+
-| **Default value**  | n/a                                                      |
-+--------------------+----------------------------------------------------------+
-| **Allowed values** | Any single agent name, hostname, ip address, or log file |
-+--------------------+----------------------------------------------------------+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | n/a                                                       |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | Any single agent name, hostname, ip address, or log file. |
++--------------------+-----------------------------------------------------------+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <integration>
+      <name>slack</name>
+      <hook_url>https://hooks.slack.com/services/T000/B000/XXXXX</hook_url>
+      <level>10</level>
+      <group>multiple_drops,|authentication_failures,</group>
+    </integration>

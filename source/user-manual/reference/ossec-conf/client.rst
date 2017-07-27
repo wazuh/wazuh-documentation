@@ -8,9 +8,10 @@ client
 	.. code-block:: xml
 
 		<client>
+		</client>
 
-Configure the connection parameters related to connecting to the manager. It also
-can be used to configure the agent buffer parameters in order to avoid events flooding.
+Configure the connection parameters related to connecting to the manager. It
+can also be used to configure the agent buffer parameters in order to avoid events flooding.
 
 Options
 -------
@@ -51,6 +52,8 @@ Specify the hostname of the Wazuh manager.
 | **Allowed values** | Any resolvable hostname is allowed. |
 +--------------------+-------------------------------------+
 
+.. warning::
+		This parameter is incompatible with `server-ip`_.
 
 port
 ^^^^
@@ -84,14 +87,6 @@ Specify the agent.conf profile(s) to be used by the agent.
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Multiple profiles can be included, separated by a comma and a space. |
 +--------------------+----------------------------------------------------------------------+
-
-  Example:
-
-.. code-block:: xml
-
-   <client>
-         <config-profile>webserver, lowmemory</config-profile>
-   </client>
 
 
 notify_time
@@ -157,16 +152,6 @@ Specifies the number of events sent to the manager per seconds. Note that this p
 | **Allowed values** | Any number between 1 and 1000.   |
 +--------------------+----------------------------------+
 
-	Example of buffer configuration:
-
-.. code-block:: xml
-
- 	<client>
-	  <disable_buffer>no</disable_buffer>
-	  <buffer_length>10000</buffer_length>
-	  <events_per_second>300</events_per_second>
- 	</client>
-
 local_ip
 ^^^^^^^^^^^^^^
 
@@ -192,3 +177,18 @@ disable-active-response
 +--------------------+------------------------------------------------+
 | **Allowed values** | The options accepted are **yes** and **no**    |
 +--------------------+------------------------------------------------+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <client>
+      <server-ip>192.168.1.100</server-ip>
+      <config-profile>webserver, debian8</config-profile>
+
+      <!-- Agent buffer options -->
+      <disable_buffer>no</disable_buffer>
+      <buffer_length>4000</buffer_length>
+      <events_per_second>300</events_per_second>
+    </client>

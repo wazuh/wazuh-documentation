@@ -8,6 +8,7 @@ agentless
 	.. code-block:: xml
 
 		<agentless>
+		</agentless>
 
 Agentless monitoring allows you to run integrity checking on systems without an agent installed.
 
@@ -87,3 +88,16 @@ This defines the arguments passed to the agentless check
 +--------------------+------------------------------------------------------------------------------------------+
 | **Allowed values** | This is a space-delimited list of files or directories to be monitored.                  |
 +--------------------+------------------------------------------------------------------------------------------+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <agentless>
+      <type>ssh_integrity_check_linux</type>
+      <frequency>300</frequency>
+      <host>admin@192.168.1.108</host>
+      <state>periodic_diff</state>
+      <arguments>/etc /usr/bin /usr/sbin</arguments>
+    </agentless>

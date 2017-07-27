@@ -8,6 +8,7 @@ reports
 	.. code-block:: xml
 
 		<reports>
+		</reports>
 
 Configuration options for reporting of alerts.
 
@@ -29,7 +30,7 @@ Options
 group
 ^^^^^^^^^^
 
-Filter by group/category.
+Filter by group/category. It only accepts one group/category.
 
 +--------------------+-------------------------------+
 | **Default value**  | n/a                           |
@@ -136,3 +137,17 @@ Enable or disable the inclusion of logs when creating the report.
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <reports>
+      <group>authentication_failed,</group>
+      <srcip>192.168.1.10</srcip>
+      <title>Auth_Report</title>
+      <email_to>recipient@example.wazuh.com</email_to>
+      <showlogs>yes</showlogs>
+    </reports>

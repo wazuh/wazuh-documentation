@@ -8,6 +8,7 @@ global
 	.. code-block:: xml
 
 		<global>
+		</global>
 
 Global configuration generally applies to features that affect the system as a whole, rather than just one component.
 
@@ -347,3 +348,20 @@ Example
 .. code-block:: xml
 
   <geoip_db_path>/etc/GeoLiteCity.dat</geoip_db_path>
+
+Default configuration
+---------------------
+
+.. code-block:: xml
+
+    <global>
+      <jsonout_output>yes</jsonout_output>
+      <alerts_log>yes</alerts_log>
+      <logall>no</logall>
+      <logall_json>no</logall_json>
+      <email_notification>no</email_notification>
+      <smtp_server>smtp.example.wazuh.com</smtp_server>
+      <email_from>ossecm@example.wazuh.com</email_from>
+      <email_to>recipient@example.wazuh.com</email_to>
+      <email_maxperhour>12</email_maxperhour>
+    </global>

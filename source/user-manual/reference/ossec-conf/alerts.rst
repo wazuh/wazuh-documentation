@@ -8,17 +8,29 @@ alerts
 	.. code-block:: xml
 
 		<alerts>
+		</alerts>
 
 Configure here the minimum alert levels for logging or sending alerts. You can also enable or disable the geolocation feature.
 
 Options
 -------
 
-- `email_alert_level`_
 - `log_alert_level`_
+- `email_alert_level`_
 - `use_geoip`_
 
 .. _reference_ossec_alerts_ea:
+
+log_alert_level
+^^^^^^^^^^^^^^^^
+
+This is the minimum severity level for alerts to be stored to alerts.log and/or alerts.json.
+
++--------------------+------------------------+
+| **Default value**  | 3                      |
++--------------------+------------------------+
+| **Allowed values** | Any level from 1 to 16 |
++--------------------+------------------------+
 
 email_alert_level
 ^^^^^^^^^^^^^^^^^
@@ -32,23 +44,10 @@ This is the minimum severity level for an alert to generate an email notificatio
 	Individual rules can override this with the *alert_by_email* option, which forces an email alert regardless of global or granular alert level thresholds.
 
 +--------------------+-------------------------+
-| **Default value**  | 7                       |
+| **Default value**  | 12                      |
 +--------------------+-------------------------+
 | **Allowed values** | Any level from 1 to 16  |
 +--------------------+-------------------------+
-
-
-log_alert_level
-^^^^^^^^^^^^^^^^
-
-This is the minimum severity level for alerts to be stored to alerts.log and/or alerts.json.
-
-+--------------------+------------------------+
-| **Default value**  | 1                      |
-+--------------------+------------------------+
-| **Allowed values** | Any level from 1 to 16 |
-+--------------------+------------------------+
-
 
 use_geoip
 ^^^^^^^^^
@@ -60,3 +59,13 @@ Enable or disable GeoIP lookups.
 +--------------------+------------------------------------+
 | **Allowed values** | The options are **yes** or **no**. |
 +--------------------+------------------------------------+
+
+Default configuration
+---------------------
+
+.. code-block:: xml
+
+    <alerts>
+      <log_alert_level>3</log_alert_level>
+      <email_alert_level>12</email_alert_level>
+    </alerts>
