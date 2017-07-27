@@ -44,7 +44,7 @@ Drive letters without directories are not valid. At a minimum the '.' should be 
 This is to be set on the system to be monitored (or in the ``agent.conf``, if appropriate).
 
 +--------------------+------------------------------------+
-| **Default Value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
+| **Default value**  | /etc,/usr/bin,/usr/sbin,/bin,/sbin |
 +--------------------+------------------------------------+
 | **Allowed values** | Any directory                      |
 +--------------------+------------------------------------+
@@ -120,7 +120,7 @@ Atributes:
 |                    |                                                                                                                 |
 |                    | Any directory or file name (but not a path) is allowed                                                          |
 +                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed Value                                              | string                                             |
+|                    | Allowed value                                              | string                                             |
 +--------------------+------------------------------------------------------------+----------------------------------------------------+
 
 .. _reference_ossec_syscheck_ignore:
@@ -131,7 +131,7 @@ ignore
 List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories.  These files and directories are still checked, but the results are ignored.
 
 +--------------------+----------------------------+
-| **Default Value**  | /etc/mtab                  |
+| **Default value**  | /etc/mtab                  |
 +--------------------+----------------------------+
 | **Allowed values** | Any directory or file name |
 +--------------------+----------------------------+
@@ -141,7 +141,7 @@ Attributes:
 +----------+--------------------------------------------------------------------------------+
 | **type** | This is a simple regex pattern to filter out files so alerts are not generated |
 +          +--------------------------------------------+-----------------------------------+
-|          | Allowed Values                             | sregex                            |
+|          | Allowed values                             | sregex                            |
 +----------+--------------------------------------------+-----------------------------------+
 
 nodiff
@@ -150,7 +150,7 @@ nodiff
 List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
 
 +--------------------+----------------------------+
-| **Default Value**  | /etc/ssl/private.key       |
+| **Default value**  | /etc/ssl/private.key       |
 +--------------------+----------------------------+
 | **Allowed values** | Any file name              |
 +--------------------+----------------------------+
@@ -160,7 +160,7 @@ Attributes:
 +----------+--------------------------------------------------------------------------------+
 | **type** | This is a simple regex pattern to filter out files so alerts are not generated |
 +          +--------------------------------------------+-----------------------------------+
-|          | Allowed Values                             | sregex                            |
+|          | Allowed values                             | sregex                            |
 +----------+--------------------------------------------+-----------------------------------+
 
 .. _reference_ossec_syscheck_frequency:
@@ -168,10 +168,10 @@ Attributes:
 frequency
 ^^^^^^^^^^^
 
-Frequency that the syscheck will be run (in seconds)
+Frequency that the syscheck will be run (in seconds).
 
 +--------------------+------------------------------------+
-| **Default Value**  | 21600                              |
+| **Default value**  | 21600                              |
 +--------------------+------------------------------------+
 | **Allowed values** | A positive number, time in seconds |
 +--------------------+------------------------------------+
@@ -179,10 +179,10 @@ Frequency that the syscheck will be run (in seconds)
 scan_time
 ^^^^^^^^^^^
 
-Time to run the scans. Times may be represented as 21pm or 8:30
+Time to run the scans. Times may be represented as 21pm or 8:30.
 
 +--------------------+-------------+
-| **Default Value**  | n/a         |
+| **Default value**  | n/a         |
 +--------------------+-------------+
 | **Allowed values** | Time of day |
 +--------------------+-------------+
@@ -197,7 +197,7 @@ scan_day
 Day of the week to run the scans(one entry per line). Multiple lines may be entered to include multiple registry entries.
 
 +--------------------+-----------------+
-| **Default Value**  | n/a             |
+| **Default value**  | n/a             |
 +--------------------+-----------------+
 | **Allowed values** | Day of the week |
 +--------------------+-----------------+
@@ -205,34 +205,34 @@ Day of the week to run the scans(one entry per line). Multiple lines may be ente
 auto_ignore
 ^^^^^^^^^^^
 
-Specifies whether or not syscheck will ignore files that change too many times (after the third change)
+Specifies whether or not syscheck will ignore files that change too many times (after the third change).
 
 +--------------------+---------+
-| **Default Value**  | yes     |
+| **Default value**  | yes     |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
 .. note::
 
-   It is valid on: server and local
+   It is valid on: server and local.
 
 .. _reference_ossec_syscheck_alert_new_files:
 
 alert_new_files
 ^^^^^^^^^^^^^^^^
 
-Specifies if syscheck should alert when new files are created
+Specifies if syscheck should alert when new files are created.
 
 +--------------------+---------+
-| **Default Value**  | no      |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
 .. note::
 
-   It is valid on: server and local
+   It is valid on: server and local.
 
 .. _reference_ossec_syscheck_scan_start:
 
@@ -242,7 +242,7 @@ scan_on_start
 Specifies if syscheck scans immediately when started.
 
 +--------------------+---------+
-| **Default Value**  | yes     |
+| **Default value**  | yes     |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
@@ -254,7 +254,7 @@ windows_registry
 Use this option to monitor specified Windows registry entries (one entry per line). Multiple lines may be entered to include multiple registry entries.
 
 +--------------------+------------------------------+
-| **Default Value**  | HKEY_LOCAL_MACHINE\\Software |
+| **Default value**  | HKEY_LOCAL_MACHINE\\Software |
 +--------------------+------------------------------+
 | **Allowed values** | Any registry entry           |
 +--------------------+------------------------------+
@@ -280,7 +280,7 @@ registry_ignore
 List of registry entries to be ignored.  (one entry per line). Multiple lines may be entered to include multiple registry entries.
 
 +--------------------+--------------------+
-| **Default Value**  | ..CryptographyRNG  |
+| **Default value**  | ..CryptographyRNG  |
 +--------------------+--------------------+
 | **Allowed values** | Any registry entry |
 +--------------------+--------------------+
@@ -291,7 +291,7 @@ prefilter_cmd
 Run to prevent prelinking from creating false positives.
 
 +--------------------+-------------------------------+
-| **Default Value**  | n/a                           |
+| **Default value**  | n/a                           |
 +--------------------+-------------------------------+
 | **Allowed values** | Command to prevent prelinking |
 +--------------------+-------------------------------+
@@ -313,7 +313,7 @@ skip_nfs
 Specifies if syscheck should scan network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
 +--------------------+---------+
-| **Default Value**  | no      |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
