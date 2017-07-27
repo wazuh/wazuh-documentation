@@ -29,7 +29,7 @@ connection
 Specifies a type of incoming connection to accept: secure or syslog.
 
 +--------------------+----------------+
-| **Default Value**  | secure         |
+| **Default value**  | secure         |
 +--------------------+----------------+
 | **Allowed values** | secure, syslog |
 +--------------------+----------------+
@@ -40,7 +40,7 @@ port
 Specifies the port to use to listen for events.
 
 +--------------------+---------------------------------+
-| **Default Value**  | 1514 if secure, 514 if syslog   |
+| **Default value**  | 1514 if secure, 514 if syslog   |
 +--------------------+---------------------------------+
 | **Allowed values** | Any port number from 1 to 65535 |
 +--------------------+---------------------------------+
@@ -53,11 +53,13 @@ protocol
 Specifies the protocol to use. It is available for secure connections and syslog events.
 
 +--------------------+----------+
-| **Default Value**  | udp      |
+| **Default value**  | udp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
 
+.. note::
+	It is not possible to use both protocols simultaneously.
 
 allowed-ips
 ^^^^^^^^^^^
@@ -65,7 +67,7 @@ allowed-ips
 List of IP addresses that are allowed to send syslog messages to the server (one per line).
 
 +--------------------+---------------------------+
-| **Default Value**  | n/a                       |
+| **Default value**  | n/a                       |
 +--------------------+---------------------------+
 | **Allowed values** | Any IP address or network |
 +--------------------+---------------------------+
@@ -80,7 +82,7 @@ deny-ips
 List of IP addresses that are not allowed to send syslog messages to the server (one per line).
 
 +--------------------+---------------------------+
-| **Default Value**  | n/a                       |
+| **Default value**  | n/a                       |
 +--------------------+---------------------------+
 | **Allowed values** | Any IP address or network |
 +--------------------+---------------------------+
@@ -92,7 +94,7 @@ local_ip
 Local ip address to use to listen for connections.
 
 +--------------------+-------------------------+
-| **Default Value**  | All interfaces          |
+| **Default value**  | All interfaces          |
 +--------------------+-------------------------+
 | **Allowed values** | Any internal ip address |
 +--------------------+-------------------------+
@@ -104,7 +106,7 @@ ipv6
 Local ipv6 address to listen for connections.
 
 +--------------------+------------------+
-| **Default Value**  | n/a              |
+| **Default value**  | n/a              |
 +--------------------+------------------+
 | **Allowed values** | Any IPv6 address |
 +--------------------+------------------+

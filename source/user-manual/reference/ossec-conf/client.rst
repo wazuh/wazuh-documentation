@@ -34,7 +34,7 @@ server-ip
 Specify the IP address of the Wazuh manager.
 
 +--------------------+----------------------------------+
-| **Default Value**  | n/a                              |
+| **Default value**  | n/a                              |
 +--------------------+----------------------------------+
 | **Allowed values** | Any valid IP address is allowed. |
 +--------------------+----------------------------------+
@@ -46,11 +46,13 @@ server-hostname
 Specify the hostname of the Wazuh manager.
 
 +--------------------+-------------------------------------+
-| **Default Value**  | n/a                                 |
+| **Default value**  | n/a                                 |
 +--------------------+-------------------------------------+
 | **Allowed values** | Any resolvable hostname is allowed. |
 +--------------------+-------------------------------------+
 
+.. warning::
+		This parameter is incompatible with `server-ip`_.
 
 port
 ^^^^
@@ -58,7 +60,7 @@ port
 Specify the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
 
 +--------------------+---------------------------------------------+
-| **Default Value**  | 1514                                        |
+| **Default value**  | 1514                                        |
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any port number from 1 to 65535 is allowed. |
 +--------------------+---------------------------------------------+
@@ -69,7 +71,7 @@ protocol
 Specifies the protocol to use when connecting to manager.
 
 +--------------------+----------+
-| **Default Value**  | udp      |
+| **Default value**  | udp      |
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
@@ -80,7 +82,7 @@ config-profile
 Specify the agent.conf profile(s) to be used by the agent.
 
 +--------------------+----------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                  |
+| **Default value**  | n/a                                                                  |
 +--------------------+----------------------------------------------------------------------+
 | **Allowed values** | Multiple profiles can be included, separated by a comma and a space. |
 +--------------------+----------------------------------------------------------------------+
@@ -100,7 +102,7 @@ notify_time
 Specify the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated agent.conf file to agents, but also could put undue load on the manager if there are a large number of agents.
 
 +--------------------+-----------------------------+
-| **Default Value**  | 600                         |
+| **Default value**  | 600                         |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
@@ -112,7 +114,7 @@ time-reconnect
 This is the time in seconds until a reconnection attempt. This should be set to a higher number than notify_time.  For example, a notify_time time of 60 combined with a time-reconnect of 300 would mean that agents will cause the agent to attempt to check in once per minute, but if a checkin attempt fails to get a response from the manager, the agent will wait five minutes before trying again.  Once it again succeeds, checkins will resume their normal one-minute interval.
 
 +--------------------+-----------------------------+
-| **Default Value**  | 1800                        |
+| **Default value**  | 1800                        |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
@@ -173,7 +175,7 @@ local_ip
 When the agent has multiple network interfaces, this parameter specifies which IP address will comunicate with the manager from.
 
 +--------------------+----------------------------------+
-| **Default Value**  | n/a                              |
+| **Default value**  | n/a                              |
 +--------------------+----------------------------------+
 | **Allowed values** | Any valid IP address is allowed. |
 +--------------------+----------------------------------+
@@ -188,7 +190,7 @@ disable-active-response
         The recommended way is using the :doc:`active-response <active-response>` section.
 
 +--------------------+------------------------------------------------+
-| **Default Value**  | **no**                                         |
+| **Default value**  | **no**                                         |
 +--------------------+------------------------------------------------+
 | **Allowed values** | The options accepted are **yes** and **no**    |
 +--------------------+------------------------------------------------+

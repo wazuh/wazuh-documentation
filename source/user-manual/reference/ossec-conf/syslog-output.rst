@@ -30,7 +30,7 @@ server
 The IP Address of the syslog server.
 
 +--------------------+----------------------+
-| **Default Value**  | n/a                  |
+| **Default value**  | n/a                  |
 +--------------------+----------------------+
 | **Allowed values** | Any valid IP address |
 +--------------------+----------------------+
@@ -41,7 +41,7 @@ port
 The port to forward alerts to.
 
 +--------------------+----------------+
-| **Default Value**  | 514            |
+| **Default value**  | 514            |
 +--------------------+----------------+
 | **Allowed values** | Any valid port |
 +--------------------+----------------+
@@ -53,7 +53,7 @@ level
 The minimum level of the alerts to be forwarded.
 
 +--------------------+------------------------+
-| **Default Value**  | n/a                    |
+| **Default value**  | n/a                    |
 +--------------------+------------------------+
 | **Allowed values** | Any level from 1 to 16 |
 +--------------------+------------------------+
@@ -64,10 +64,13 @@ group
 Group of the alerts to be forwarded.
 
 +--------------------+--------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                      |
+| **Default value**  | n/a                                                                      |
 +--------------------+--------------------------------------------------------------------------+
 | **Allowed values** | Any valid group. Separate multiple groups with the pipe ("|") character. |
 +--------------------+--------------------------------------------------------------------------+
+
+.. note::
+	Observe that all groups must be finished by comma.
 
 
 rule_id
@@ -76,7 +79,7 @@ rule_id
 The rule_id of the alerts to be forwarded.
 
 +--------------------+-------------------+
-| **Default Value**  | n/a               |
+| **Default value**  | n/a               |
 +--------------------+-------------------+
 | **Allowed values** | Any valid rule_id |
 +--------------------+-------------------+
@@ -87,7 +90,7 @@ location
 The location of the alerts to be forwarded.
 
 +--------------------+-----------------------------+
-| **Default Value**  | n/a                         |
+| **Default value**  | n/a                         |
 +--------------------+-----------------------------+
 | **Allowed values** | Any valid log file location |
 +--------------------+-----------------------------+
@@ -98,7 +101,7 @@ use_fqdn
 Toggle for full or truncated hostname configured on the server. By default, ossec truncates the hostname at the first period ('.') when generating syslog messages.
 
 +--------------------+---------+
-| **Default Value**  | no      |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
@@ -109,7 +112,7 @@ format
 Format of alert output.
 
 +--------------------+-------------------------------------------------------------------------------------------+
-| **Default Value**  | default                                                                                   |
+| **Default value**  | default                                                                                   |
 +--------------------+---------+---------------------------------------------------------------------------------+
 | **Allowed values** | default                                                                                   |
 +                    +---------+---------------------------------------------------------------------------------+
