@@ -56,19 +56,19 @@ Run the following command that corresponds to your specific Linux distribution:
          protect=1
          EOF
 
-    d) For Amazon Linux:
+  d) For Amazon Linux:
 
-       .. code-block:: bash
+     .. code-block:: bash
 
-           cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-           [wazuh_repo]
-           gpgcheck=1
-           gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-           name=Amazon Linux - Wazuh
-           enabled=1
-           baseurl=https://packages.wazuh.com/yum/el/7/$basearch
-           protect=1
-           EOF
+        $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+        [wazuh_repo]
+        gpgcheck=1
+        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+        name=Amazon Linux - Wazuh
+        enabled=1
+        baseurl=https://packages.wazuh.com/yum/el/7/$basearch
+        protect=1
+        EOF
 
 Installing Wazuh agent
 ----------------------
