@@ -28,6 +28,20 @@ Run the following command that corresponds to your specific Linux distribution:
          protect=1
          EOF
 
+  a.1) For CentOS-5:
+
+      .. code-block:: bash
+
+        $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+        [wazuh_repo]
+        gpgcheck=1
+        gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-OSSEC-RHEL5
+        enabled=1
+        name=CentOS-$releasever - Wazuh
+        baseurl=https://packages.wazuh.com/yum/el/$releasever/$basearch
+        protect=1
+        EOF
+
   b) For RHEL:
 
      .. code-block:: bash
@@ -41,6 +55,20 @@ Run the following command that corresponds to your specific Linux distribution:
          baseurl=https://packages.wazuh.com/yum/rhel/$releasever/$basearch
          protect=1
          EOF
+
+  b.1) For RHEL-5:
+
+      .. code-block:: bash
+
+      $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=https://packages.wazuh.com/key/RPM-GPG-KEY-OSSEC-RHEL5
+      enabled=1
+      name=RHEL-$releasever - Wazuh
+      baseurl=https://packages.wazuh.com/yum/rhel/$releasever/$basearch
+      protect=1
+      EOF
 
   c) For Fedora:
 
