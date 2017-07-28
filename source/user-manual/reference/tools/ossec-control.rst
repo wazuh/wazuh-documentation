@@ -21,7 +21,7 @@ The ossec-control script is used to start, stop, configure, or check on the stat
 +-------------+---------------------------------------------------------------------------------------------------------+
 | **status**  | Determine which Wazuh processes are running.                                                            |
 +-------------+---------------------------------------------------------------------------------------------------------+
-| **enable**  | List available agents.                                                                                  |
+| **enable**  | Enable Wazuh functionality.                                                                             |
 +             +-----------------+---------------+-----------------------------------------------------------------------+
 |             | Allowed options | database      | Enable the ossec-dbd daemon for logging to a database.                |
 +             +                 +               +-----------------------------------------------------------------------+
