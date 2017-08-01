@@ -12,6 +12,8 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**)
+- :doc:`Anti-flooding mechanism <../capabilities/internal-capabilities/antiflooding>` (**bucket options**)
+- :doc:`Labels for agent alerts <ossec-conf/labels>` (**labels**)
 
 Below, is the proper syntax of ``agent.conf`` and the process of pushing the configuration from the manager to the agent.
 
@@ -42,7 +44,7 @@ Options
 +             +-------------------------------------------------------+-----------------------------------------------------------+
 |             | Allowed values                                        | Any OS family                                             |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------+
-| **profile** | Allows assignment of a profile name to a block.Any agent configured to use the defined profile may use the block. |
+| **profile** | Allows assignment of a profile name to a block. Any agent configured to use the defined profile may use the block.|
 +             +-------------------------------------------------------+-----------------------------------------------------------+
 |             | Allowed values                                        | Any defined profile                                       |
 +-------------+-------------------------------------------------------+-----------------------------------------------------------+
@@ -164,32 +166,34 @@ It's important to know which is the precedence between ``ossec.conf`` and ``agen
 
 For example:
 
-Let's say we have this configuration on the ``ossec.conf`` file
-::
+Let's say we have this configuration on the ``ossec.conf`` file.
 
-	<rootcheck>
-	  <disabled>no</disabled>
-	  <check_unixaudit>no</check_unixaudit>
-	  <check_files>yes</check_files>
-	  <check_trojans>no</check_trojans>
-	  <check_dev>yes</check_dev>
-	  <check_sys>yes</check_sys>
-	  <check_pids>yes</check_pids>
-	  <check_ports>yes</check_ports>
-	  <check_if>yes</check_if>
-	  <system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
-	</rootcheck>
+.. code-block:: xml
 
-and the ``agent.conf``
-::
+  <rootcheck>
+    <disabled>no</disabled>
+    <check_unixaudit>no</check_unixaudit>
+    <check_files>yes</check_files>
+    <check_trojans>no</check_trojans>
+    <check_dev>yes</check_dev>
+    <check_sys>yes</check_sys>
+    <check_pids>yes</check_pids>
+    <check_ports>yes</check_ports>
+    <check_if>yes</check_if>
+    <system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
+  </rootcheck>
 
-	<rootcheck>
-	  <check_unixaudit>yes</check_unixaudit>
-	  <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-	  <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
-	  <system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
-	  <system_audit>/var/ossec/etc/shared/cis_rhel_linux_rcl.txt</system_audit>
-	  <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
-	</rootcheck>
+and the ``agent.conf``.
+
+.. code-block:: xml
+
+  <rootcheck>
+    <check_unixaudit>yes</check_unixaudit>
+    <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
+    <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
+    <system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
+    <system_audit>/var/ossec/etc/shared/cis_rhel_linux_rcl.txt</system_audit>
+    <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
+  </rootcheck>
 
 The final configuration will overwrite ``check_unixaudit`` to "yes" because it appears on the ``agent.conf``. The path listed with ``system_audit`` option will be concatenated, so ``system_audit_rcl.txt`` (on the ``ossec.conf``) will be as valid as ``cis_debian_linux_rcl.txt`` (on the ``agent.conf``).
