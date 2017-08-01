@@ -19,6 +19,35 @@ To set this value permanently, update the vm.max_map_count setting in ``/etc/sys
 
   If you don't set the **max_map_count** on your host, Elasticsearch will probably don't work.
 
+Increase max_map_count on your host (Windows)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You need to increase ``max_map_count`` on your Docker host::
+
+  $ docker-machine ssh default
+  $ sudo sysctl -w vm.max_map_count=262144
+  $ exit
+
+To set this value permanently, update the vm.max_map_count setting in ``/var/lib/boot2docker/profile``::
+
+  $ docker-machine ssh default
+  $ sudo vi /var/lib/boot2docker/bootlocal.sh
+
+Add the following line into the profile file::
+
+  sysctl -w vm.max_map_count=262144
+
+Make the script runneable::
+
+  $ sudo chmod +x /var/lib/boot2docker/bootlocal.sh
+
+To verify after rebooting, run "sysctl vm.max_map_count".
+
+.. warning::
+
+  If you don't set the **max_map_count** on your host, Elasticsearch will probably don't work.
+
+
 SELinux
 ^^^^^^^^^^
 
