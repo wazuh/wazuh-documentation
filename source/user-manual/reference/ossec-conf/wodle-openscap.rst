@@ -14,6 +14,7 @@ Configuration options of the OpenSCAP wodle.
 Options
 -------
 
+- `disabled`_
 - `timeout`_
 - `interval`_
 - `scan-on-start`_
@@ -23,6 +24,8 @@ Options
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
 +======================+=============================+
+| `disabled`_          | yes, no                     |
++----------------------+-----------------------------+
 | `timeout`_           | A positive number (seconds) |
 +----------------------+-----------------------------+
 | `interval`_          | A positive number           |
@@ -32,6 +35,17 @@ Options
 | `content`_           | N/A                         |
 +----------------------+-----------------------------+
 
+
+disabled
+^^^^^^^^
+
+Disables the OpenSCAP wodle.
+
++--------------------+-----------------------------+
+| **Default value**  | no                          |
++--------------------+-----------------------------+
+| **Allowed values** | yes, no                     |
++--------------------+-----------------------------+
 
 timeout
 ^^^^^^^
