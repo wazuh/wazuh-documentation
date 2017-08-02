@@ -49,7 +49,7 @@ This enable or disable writing alerts to ``/var/ossec/logs/alerts/alerts.log``.
 +--------------------+---------+
 
 .. warning::
-	Disabling JSON and plain text formated alerts simultaneously is not allowed.
+  Disabling JSON and plain text formated alerts simultaneously is not compatible with the integrator, syslog client and email features.
 
 email_notification
 ^^^^^^^^^^^^^^^^^^
