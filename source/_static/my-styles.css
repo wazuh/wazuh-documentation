@@ -186,23 +186,6 @@ div.version {
     position: relative;
 }
 
-#select-version {
-    -webkit-appearance: none;
-    padding: 6px 12px;
-    border-radius: 48px;
-    min-height: 24px;
-    width: 100%;
-    margin: 0;
-    color: #404040;
-}
-
-div.version:after {
-    content: "▼";
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 6px 12px;
-    color: #404040;
-    font-size: 80%;
-    pointer-events: none;
+.wy-side-nav-search>div.version {
+    color: white;
 }
