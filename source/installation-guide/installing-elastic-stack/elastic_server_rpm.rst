@@ -122,7 +122,9 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
       $ usermod -a -G ossec logstash
 
-       If you use CentOS-6/RHEL-6 or Amazon AMI, in this versions Logstash use Upstart like service manager, this service manager contains a `bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_ in this case, follow the next steps::
+.. note::      
+
+    Follow the next steps if you use CentOS-6/RHEL-6 or Amazon AMI (logstash uses Upstart like service manager and need to be fixed, see `bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_) ::
 
 	1) Edit the file /etc/logstash/startup.options and in the line 30 change the LS_GROUP=logstash to LS_GROUP=ossec.
 	2) Update the service with the new parameters run the command /usr/share/logstash/bin/system-install
