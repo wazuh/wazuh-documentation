@@ -3,11 +3,11 @@
 Release Notes
 =============
 
-In Wazuh release notes section it will appears the most important new features of each release.
+This section summarizes the most important features of each release.
 
 .. topic:: Contents
 
     .. toctree::
         :maxdepth: 2
 
-        release2_1
+        release_2_1_0

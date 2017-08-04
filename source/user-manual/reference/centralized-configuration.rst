@@ -12,8 +12,8 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**)
-- :doc:`Anti-flooding mechanism <../capabilities/internal-capabilities/antiflooding>` (**bucket options**)
-- :doc:`Labels for agent alerts <../capabilities/internal-capabilities/labels>` (**labels**)
+- :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
+- :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 
 Below, is the proper syntax of ``agent.conf`` and the process of pushing the configuration from the manager to the agent.
 

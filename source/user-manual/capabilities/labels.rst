@@ -1,13 +1,13 @@
 .. _labels:
 
-Labels for agent alerts
+Agent labels
 =======================
 
-This feature provides the opportunity to personalize alerts information from agents, giving us the chance of
-include information specific of each agent which could be useful when dealing with alerts. In addition, in large
+This feature provides the opportunity to customize alerts information from agents, giving us the chance of
+include specific information of each agent which could be useful when dealing with alerts. In addition, in large
 environments it could be used to distinguish groups of agents by any common characteristic like their time zone, for example.
 
-The following sections shows how this fuction works as well as an example ilustrating its use.
+The following sections shows how this feature works as well as an use case.
 
 - `How it works`_
 - `Use case`_
@@ -15,16 +15,16 @@ The following sections shows how this fuction works as well as an example ilustr
 How it works
 ------------
 
-Configuring labels for being shown at alerts is too simple. It can be done using a simple XML struture which permits add
-information with the format ``key:value``, how to configure them it is explained at :doc:`Labels section <../../reference/ossec-conf/labels>` section
-of ``ossec.conf``. It is remarkable that it exists the possibility of using dots to split "key" names nesting them in JSON formated alerts.
+Configuring labels for being shown at alerts is too simple. It can be done using a simple XML structure which allows to add
+information with the format ``key:value``, how to configure them it is explained at :doc:`Labels section <../reference/ossec-conf/labels>` section
+of ``ossec.conf``. It is remarkable that it exists the possibility of using dots to split "key" names nesting them in JSON formatted alerts.
 
-Configuration of labels function is also allowed to centralize it using ``agent.conf``. This way, from the manager side it is
+It is also allowed to centralize it using ``agent.conf``. This way, from the manager side it is
 possible to set labels for specific agents. Note that whether it exists a duplicated label key in ``ossec.conf`` and ``agent.conf``,
 the second one will override the first one. For more information about usage of centralized configuration see its dedicated
-section: :doc:`Centralized configuration <../../reference/centralized-configuration>`.
+section: :doc:`Centralized configuration <../reference/centralized-configuration>`.
 
-In addition, more technical configuration is available in :doc:`Internal configuration <../../reference/internal-options>`. Particularly,
+In addition, more technical configuration is available in :doc:`Internal configuration <../reference/internal-options>`. Particularly,
 ``analysisd.label_cache_maxage`` and ``analysisd.show_hidden_labels``.
 
 Use case
@@ -66,7 +66,7 @@ Whether the configuration is set from the manager, the configuration has to be s
         </labels>
       </agent_config>
 
-When this particular agent provokes an alert in the manager. Previous configuration will add to alerts the specified information:
+When an alert is fired for this agent, the previous configuration will add to alerts the specified information:
 
 .. code-block:: console
    :emphasize-lines: 3,4,5,6
