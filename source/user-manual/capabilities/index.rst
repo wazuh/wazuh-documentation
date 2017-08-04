@@ -18,3 +18,4 @@ The capabilities are:
     command-monitoring/index
     active-response/index
     agentless-monitoring/index
+    internal-capabilities/index
