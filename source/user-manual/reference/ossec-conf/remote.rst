@@ -9,6 +9,7 @@ remote
 	.. code-block:: xml
 
 		<remote>
+		</remote>
 
 Configuration of manager to listen for events from the agents.
 
@@ -110,3 +111,22 @@ Local ipv6 address to listen for connections.
 +--------------------+------------------+
 | **Allowed values** | Any IPv6 address |
 +--------------------+------------------+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <remote>
+      <connection>syslog</connection>
+      <port>514</port>
+      <protocol>udp</protocol>
+      <allowed_ips>192.168.1.0/24</allowed_ips>
+      <local_ip>192.168.1.5</local_ip>
+    </remote>
+
+    <remote>
+      <connection>secure</connection>
+      <port>1514</port>
+      <protocol>udp</protocol>
+    </remote>

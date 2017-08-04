@@ -9,6 +9,7 @@ syslog_output
 	.. code-block:: xml
 
 		<syslog_output>
+		</syslog_output>
 
 Configuration options for sending alerts to a syslog server.
 
@@ -109,7 +110,7 @@ Toggle for full or truncated hostname configured on the server. By default, osse
 format
 ^^^^^^
 
-Format of alert output.
+Format of alert output. When ``jsonout_output`` in :doc:`global  <global>` section is enabled, alerts are read from alerts.json instead of alerts.log for JSON format.
 
 +--------------------+-------------------------------------------------------------------------------------------+
 | **Default value**  | default                                                                                   |
@@ -122,3 +123,14 @@ Format of alert output.
 +                    +---------+---------------------------------------------------------------------------------+
 |                    | json    | will output data in the JSON format that can be consumed by a variety of tools. |
 +--------------------+---------+---------------------------------------------------------------------------------+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <syslog_output>
+      <server>192.168.1.3</server>
+      <level>7</level>
+      <format>json</format>
+    </syslog_output>

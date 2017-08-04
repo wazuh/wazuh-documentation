@@ -37,7 +37,11 @@ The ossec-control script is used to start, stop, configure, or check on the stat
 +             +                 +               +-----------------------------------------------------------------------+
 |             |                 |               | Server and local                                                      |
 +             +                 +---------------+-----------------------------------------------------------------------+
-|             |                 | integrator    | Enable integrator for connection to external APIs and alerting tools  |
+|             |                 | integrator    | Enable integrator for connection to external APIs and alerting tools. |
++             +                 +               +-----------------------------------------------------------------------+
+|             |                 |               | Server                                                                |
++             +                 +---------------+-----------------------------------------------------------------------+
+|             |                 | auth          | Enable the ossec-authd daemon for add agents to the manager.          |
 +             +                 +               +-----------------------------------------------------------------------+
 |             |                 |               | Server                                                                |
 +             +                 +---------------+-----------------------------------------------------------------------+
@@ -47,21 +51,25 @@ The ossec-control script is used to start, stop, configure, or check on the stat
 +             +-----------------+---------------+-----------------------------------------------------------------------+
 |             | Allowed options | database      | Disable the ossec-dbd daemon for logging to a database.               |
 +             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | server and local                                                      |
+|             |                 |               | Server and local                                                      |
 +             +                 +---------------+-----------------------------------------------------------------------+
 |             |                 | client-syslog | Disable ossec-csyslogd for logging to remote syslog.                  |
 +             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | server and local                                                      |
+|             |                 |               | Server and local                                                      |
 +             +                 +---------------+-----------------------------------------------------------------------+
 |             |                 | agentless     | Disable ossec-agentlessd for running commands on systems              |
 |             |                 |               |                                                                       |
 |             |                 |               | without Wazuh agents.                                                 |
 +             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | server and local                                                      |
+|             |                 |               | Server and local                                                      |
 +             +                 +---------------+-----------------------------------------------------------------------+
-|             |                 | integrator    | Disable integrator for connection to external APIs and alerting tools |
+|             |                 | integrator    | Disable integrator for connection to external APIs and alerting tools.|
 +             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | server                                                                |
+|             |                 |               | Server                                                                |
++             +                 +---------------+-----------------------------------------------------------------------+
+|             |                 | auth          | Enable the ossec-authd daemon for add agents to the manager.          |
++             +                 +               +-----------------------------------------------------------------------+
+|             |                 |               | Server                                                                |
 +             +                 +---------------+-----------------------------------------------------------------------+
 |             |                 | debug         | Turn off debug mode.                                                  |
 +-------------+-----------------+---------------+-----------------------------------------------------------------------+

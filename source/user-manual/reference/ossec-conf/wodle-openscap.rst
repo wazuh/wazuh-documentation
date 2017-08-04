@@ -8,6 +8,7 @@ wodle name="open-scap"
 	.. code-block:: xml
 
 		<wodle name="open-scap">
+		</wodle>
 
 Configuration options of the OpenSCAP wodle.
 
@@ -97,18 +98,18 @@ Attributes
 | **profile**       | Select profile.                                             |
 +-------------------+-------------------------------------------------------------+
 
-Example
--------
+Example of configuration
+------------------------
 
 .. code-block:: xml
 
-	<wodle name="open-scap">
+  <wodle name="open-scap">
 
-	    <timeout>1800</timeout>
-	    <interval>1d</interval>
-	    <scan-on-start>yes</scan-on-start>
+    <timeout>1800</timeout>
+    <interval>1d</interval>
+    <scan-on-start>yes</scan-on-start>
 
-	    <content type="xccdf" path="ssg-centos7-ds.xml"/>
-	    <content type="xccdf" path="ssg-centos6-ds.xml"/>
+    <content type="xccdf" path="ssg-centos7-ds.xml"/>
+    <content type="xccdf" path="ssg-centos6-ds.xml"/>
 
-	</wodle>
+  </wodle>

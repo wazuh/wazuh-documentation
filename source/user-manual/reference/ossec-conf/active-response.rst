@@ -8,6 +8,7 @@ active-response
 	.. code-block:: xml
 
 		<active-response>
+		</active-response>
 
 In the active response configuration section, you bind an existing command to one or more rules or rule types and specify additional criteria for when to actually execute the command. It is possible to have as many responses as needed, but each must be in their own separate ``<active-response>`` section.
 
@@ -113,7 +114,7 @@ This requires that a rule must belong to one or more rule groups for the command
 
 .. note::
 	Observe that all groups must be finished by comma.
-	
+
 rules_id
 ^^^^^^^^
 
@@ -148,3 +149,19 @@ This is a comma-separated list of increasing timeouts in minutes for repeat offe
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (minutes) |
 +--------------------+-----------------------------+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <active-response>
+      <disabled>no</disabled>
+      <command>host-deny</command>
+      <location>defined-agent</location>
+      <agent-id>032</agent-id>
+      <level>10</level>
+      <rules_group>sshd,|pci_dss_11.4,</rules_group>
+      <timeout>1</timeout>
+      <repeated_offenders>1,5,10</repeated_offenders>
+    </active-response>

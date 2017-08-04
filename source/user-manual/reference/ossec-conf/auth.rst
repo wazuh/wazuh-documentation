@@ -191,7 +191,7 @@ Default configuration
 .. code-block:: xml
 
     <auth>
-	  <disabled>no</disabled>
+      <disabled>no</disabled>
       <port>1515</port>
       <use_source_ip>no</use_source_ip>
       <force_insert>no</force_insert>

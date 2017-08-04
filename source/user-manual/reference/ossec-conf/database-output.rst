@@ -8,6 +8,7 @@ database_output
 	.. code-block:: xml
 
 		<database_output>
+		</database_output>
 
 MySQL and PostgreSQL database output is supported. It is configured with the options below.
 
@@ -77,3 +78,16 @@ Type of database
 .. note::
 
     Wazuh must be compiled with the database type that is to be used.
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <database_output>
+      <hostname>192.168.1.122</hostname>
+      <username>MySQLadmin</username>
+      <password>secret1234</password>
+      <database>Alerts_DB</database>
+      <type>mysql</type>
+    </database_output>

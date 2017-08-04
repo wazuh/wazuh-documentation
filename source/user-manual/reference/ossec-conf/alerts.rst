@@ -8,6 +8,7 @@ alerts
 	.. code-block:: xml
 
 		<alerts>
+		</alerts>
 
 Configure here the minimum alert levels for logging or sending alerts. You can also enable or disable the geolocation feature.
 
@@ -49,8 +50,6 @@ This is the minimum severity level for an alert to generate an email notificatio
 | **Allowed values** | Any level from 1 to 16  |
 +--------------------+-------------------------+
 
-
-
 use_geoip
 ^^^^^^^^^
 
@@ -61,3 +60,13 @@ Enable or disable GeoIP lookups.
 +--------------------+------------------------------------+
 | **Allowed values** | The options are **yes** or **no**. |
 +--------------------+------------------------------------+
+
+Default configuration
+---------------------
+
+.. code-block:: xml
+
+    <alerts>
+      <log_alert_level>3</log_alert_level>
+      <email_alert_level>12</email_alert_level>
+    </alerts>

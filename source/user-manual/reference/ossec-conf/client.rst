@@ -8,9 +8,9 @@ client
 	.. code-block:: xml
 
 		<client>
+		</client>
 
-Configure the connection parameters related to connecting to the manager. It also
-can be used to configure the agent buffer parameters in order to avoid events flooding.
+Configure the connection parameters related to connecting to the manager.
 
 Options
 -------
@@ -22,9 +22,6 @@ Options
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
-- `disable_buffer`_
-- `buffer_length`_
-- `events_per_second`_
 - `local_ip`_
 - `disable-active-response`_
 
@@ -87,14 +84,6 @@ Specify the agent.conf profile(s) to be used by the agent.
 | **Allowed values** | Multiple profiles can be included, separated by a comma and a space. |
 +--------------------+----------------------------------------------------------------------+
 
-  Example:
-
-.. code-block:: xml
-
-   <client>
-         <config-profile>webserver, lowmemory</config-profile>
-   </client>
-
 
 notify_time
 ^^^^^^^^^^^^
@@ -122,53 +111,6 @@ This is the time in seconds until a reconnection attempt. This should be set to 
 .. warning::
 	Notice that the notify_time value uses an underscore while the time-reconnect value uses a dash.  This is an unfortunate legacy naming inconsistency, and is easy to mix up.
 
-disable_buffer
-^^^^^^^^^^^^^^
-
-This parameter allows to disable the Agent Buffer and send events to the manager without any congestion control.
-
-+--------------------+------------------------------------------------+
-| **Default Value**  | **no**                                         |
-+--------------------+------------------------------------------------+
-| **Allowed values** | The options accepted are **yes** and **no**.   |
-+--------------------+------------------------------------------------+
-
-.. warning::
-	Disabling this functionality in large environments, agents may collapse the manager and the network.
-
-
-buffer_length
-^^^^^^^^^^^^^
-
-The capacity of Agent Buffer in number of events.
-
-+--------------------+----------------------------------+
-| **Default Value**  | 5000                             |
-+--------------------+----------------------------------+
-| **Allowed values** | Any number between 1 and 100000. |
-+--------------------+----------------------------------+
-
-events_per_second
-^^^^^^^^^^^^^^^^^
-
-Specifies the number of events sent to the manager per seconds. Note that this parameter should be configurated according to the capacity of the network and the manager.
-
-+--------------------+----------------------------------+
-| **Default Value**  | 500                              |
-+--------------------+----------------------------------+
-| **Allowed values** | Any number between 1 and 1000.   |
-+--------------------+----------------------------------+
-
-	Example of buffer configuration:
-
-.. code-block:: xml
-
- 	<client>
-	  <disable_buffer>no</disable_buffer>
-	  <buffer_length>10000</buffer_length>
-	  <events_per_second>300</events_per_second>
- 	</client>
-
 local_ip
 ^^^^^^^^^^^^^^
 
@@ -194,3 +136,16 @@ disable-active-response
 +--------------------+------------------------------------------------+
 | **Allowed values** | The options accepted are **yes** and **no**    |
 +--------------------+------------------------------------------------+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <client>
+      <server-ip>192.168.1.100</server-ip>
+      <config-profile>webserver, debian8</config-profile>
+      <protocol>tcp</protocol>
+      <notify_time>300</notify_time>
+      <time-reconnect>900</time-reconnect>
+    </client>

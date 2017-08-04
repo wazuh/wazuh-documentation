@@ -8,6 +8,7 @@ command
 	.. code-block:: xml
 
 		<command>
+		</command>
 
 In a command configuration section, you define a command to be used by one or more active responses. It is possible to have as many commands as needed, but each one must be in their own separate <command> section.
 
@@ -74,3 +75,24 @@ If yes, this indicates that the command is stateful, and will be called again in
 +--------------------+--------+
 | **Allowed values** | yes/no |
 +--------------------+--------+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <!-- For Unix systems -->
+    <command>
+      <name>host-deny</name>
+      <executable>host-deny.sh</executable>
+      <expect>srcip</expect>
+      <timeout_allowed>yes</timeout_allowed>
+    </command>
+
+    <!-- For Windows systems -->
+    <command>
+      <name>win_route-null</name>
+      <executable>route-null.cmd</executable>
+      <expect>srcip</expect>
+      <timeout_allowed>yes</timeout_allowed>
+    </command>

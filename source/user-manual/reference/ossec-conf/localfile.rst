@@ -9,6 +9,7 @@ localfile
 	.. code-block:: xml
 
 		<localfile>
+		</localfile>
 
 This configuration section is used to specify the collection of log data from files, Windows events, and from output of commands.
 
@@ -103,13 +104,6 @@ Set this option to **yes** to override this behavior if desired.  Then Wazuh wou
 | **Allowed values** | yes or no |
 +--------------------+-----------+
 
-.. code-block:: xml
-
-	<localfile>
-	  <location>System</location>
-	  <log_format>eventchannel</log_format>
-	  <only-future-events>yes</only-future-events>
-	</localfile>
 
 query
 ^^^^^^^^
@@ -228,3 +222,37 @@ This is the format of the log being read.
 	.. code-block:: console
 
 	   Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
+
+Example of configuration
+------------------------
+
+Linux configuration:
+
+.. code-block:: xml
+
+    <!-- For monitor log files -->
+    <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/log/syslog</location>
+      <expect>srcip</expect>
+      <timeout_allowed>yes</timeout_allowed>
+    </command>
+
+    <!-- For monitor commands output -->
+    <localfile>
+      <log_format>command</log_format>
+      <command>df -P</command>
+      <frequency>360</frequency>
+    </localfile>
+
+Windows configuration:
+
+.. code-block:: xml
+
+    <!-- For monitor Windows eventchannel -->
+    <localfile>
+      <location>Security</location>
+      <log_format>eventchannel</log_format>
+      <only-future-events>yes</only-future-events>
+      <query>Event/System[EventID != 5145 and EventID != 5156]</query>
+    </localfile>

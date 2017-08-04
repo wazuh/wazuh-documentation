@@ -9,6 +9,7 @@ logging
 	.. code-block:: xml
 
 		<logging>
+		</logging>
 
 This section allows to configure internal logs.
 
