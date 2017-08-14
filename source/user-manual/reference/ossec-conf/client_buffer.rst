@@ -16,7 +16,7 @@ Options
 -------
 
 - `disable`_
-- `length`_
+- `queue_size`_
 - `events_per_second`_
 
 disable
@@ -34,7 +34,7 @@ This parameter allows to disable the Agent Buffer and send events to the manager
 	Disabling this functionality in large environments, agents may collapse the manager and the network.
 
 
-length
+queue_size
 ^^^^^^^^^^^^^
 
 The capacity of Agent Buffer in number of events.
@@ -64,6 +64,6 @@ Default configuration
     <client_buffer>
       <!-- Agent buffer options -->
       <disable>no</disable>
-      <length>5000</length>
+      <queue_size>5000</queue_size>
       <events_per_second>500</events_per_second>
     </client_buffer>
