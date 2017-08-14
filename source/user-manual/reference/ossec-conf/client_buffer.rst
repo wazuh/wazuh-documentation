@@ -15,11 +15,11 @@ Configure the agent bucket parameters in order to avoid events flooding.
 Options
 -------
 
-- `disable_buffer`_
-- `buffer_length`_
+- `disable`_
+- `length`_
 - `events_per_second`_
 
-disable_buffer
+disable
 ^^^^^^^^^^^^^^
 
 This parameter allows to disable the Agent Buffer and send events to the manager without any congestion control.
@@ -34,7 +34,7 @@ This parameter allows to disable the Agent Buffer and send events to the manager
 	Disabling this functionality in large environments, agents may collapse the manager and the network.
 
 
-buffer_length
+length
 ^^^^^^^^^^^^^
 
 The capacity of Agent Buffer in number of events.
