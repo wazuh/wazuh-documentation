@@ -12,6 +12,8 @@ This section describes how to upgrade an existing Wazuh installation. The upgrad
 +--------------+--------------+-------------------------------------------------------------------------------------+
 | 2.0.x        | 2.0.y        | :ref:`Upgrade from the same minor version <upgrading_same_minor>` (where y > x)     |
 +--------------+--------------+-------------------------------------------------------------------------------------+
+| 2.0.x        | 2.1.x        | :ref:`Upgrade from the same major version <upgrading_same_major>`                   |
++--------------+--------------+-------------------------------------------------------------------------------------+
 
 .. warning::
     Wazuh v2 uses different index names and templates than Wazuh v1. For that reason, you will not able to see the alerts previous to the upgrade in Wazuh App. If you need to access them, you will need to reindex the previous indices.
@@ -26,3 +28,4 @@ This section describes how to upgrade an existing Wazuh installation. The upgrad
 
     legacy/index
     same_minor
+    same_major
