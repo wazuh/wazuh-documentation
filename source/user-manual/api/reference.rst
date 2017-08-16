@@ -8,6 +8,7 @@ Reference
 This API reference is organized by resources:
 
 * `Agents`_
+* `Cluster`_
 * `Decoders`_
 * `Manager`_
 * `Rootcheck`_
@@ -22,25 +23,42 @@ Request List
 ---------------------------------
 
 `Agents`_
+	* DELETE /agents  (`Delete a list of agents`_)
 	* DELETE /agents/:agent_id  (`Delete an agent`_)
 	* DELETE /agents/:agent_id/group  (`Unset the agent group`_)
 	* DELETE /agents/groups/:group_id  (`Remove group`_)
 	* GET /agents  (`Get all agents`_)
 	* GET /agents/:agent_id  (`Get an agent`_)
 	* GET /agents/:agent_id/key  (`Get agent key`_)
+	* GET /agents/:agent_id/upgrade_result  (`Get upgrade result from agent`_)
 	* GET /agents/groups  (`Get groups`_)
 	* GET /agents/groups/:group_id  (`Get agents in a group`_)
 	* GET /agents/groups/:group_id/configuration  (`Get group configuration`_)
 	* GET /agents/groups/:group_id/files  (`Get group files`_)
 	* GET /agents/groups/:group_id/files/:filename  (`Get a file in group`_)
+	* GET /agents/outdated  (`Get outdated agents`_)
 	* GET /agents/summary  (`Get agents summary`_)
+	* GET /agents/summary/os  (`Get OS summary`_)
 	* POST /agents  (`Add agent`_)
 	* POST /agents/insert  (`Insert agent`_)
+	* POST /agents/restart  (`Restart a list of agents`_)
 	* PUT /agents/:agent_id/group/:group_id  (`Set agent group`_)
 	* PUT /agents/:agent_id/restart  (`Restart an agent`_)
+	* PUT /agents/:agent_id/upgrade  (`Upgrade agent using online repository`_)
+	* PUT /agents/:agent_id/upgrade_custom  (`Upgrade agent using custom file`_)
 	* PUT /agents/:agent_name  (`Add agent (quick method)`_)
 	* PUT /agents/groups/:group_id  (`Create a group`_)
 	* PUT /agents/restart  (`Restart all agents`_)
+
+`Cluster`_
+	* GET /cluster/node  (`Get node info`_)
+	* GET /cluster/node/token  (`Get node token`_)
+	* GET /cluster/nodes  (`Get nodes list`_)
+	* GET /cluster/sync/status  (`Get sync status`_)
+	* PUT /cluster/sync  (`Sync files`_)
+	* PUT /cluster/sync/disable  (`Disable syncrhonization`_)
+	* PUT /cluster/sync/enable  (`Enable syncrhonization`_)
+	* PUT /cluster/sync/force  (`Sync files (force)`_)
 
 `Decoders`_
 	* GET /decoders  (`Get all decoders`_)
@@ -50,6 +68,7 @@ Request List
 
 `Manager`_
 	* GET /manager/configuration  (`Get manager configuration`_)
+	* GET /manager/files  (`Check files status`_)
 	* GET /manager/info  (`Get manager information`_)
 	* GET /manager/logs  (`Get ossec.log`_)
 	* GET /manager/logs/summary  (`Get summary of ossec.log`_)
@@ -126,7 +145,7 @@ Add a new agent.
 
 	{
 	   "error": 0,
-	   "data": "005"
+	   "data": "006"
 	}
 
 
@@ -158,7 +177,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 
 	{
 	   "error": 0,
-	   "data": "006"
+	   "data": "007"
 	}
 
 
@@ -212,6 +231,40 @@ Insert an agent with an existing id and key.
 Delete
 ++++++++++++++++++++++++++++++++++++++++
 
+Delete a list of agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removes a list of agents. You must restart OSSEC after removing an agent.
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``ids``            | String[]      | Array of agent ID's.                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["003","005"]}' "https://127.0.0.1:55000/agents?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "msg": "All selected agents were removed"
+	   }
+	}
+
+
 Delete an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Removes an agent. You must restart OSSEC after removing an agent.
@@ -233,14 +286,16 @@ Removes an agent. You must restart OSSEC after removing an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/002?pretty"
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/001?pretty"
 
 **Example Response:**
 ::
 
 	{
 	   "error": 0,
-	   "data": "Agent removed"
+	   "data": {
+	      "msg": "All selected agents were removed"
+	   }
 	}
 
 
@@ -365,7 +420,7 @@ Returns the list of agent in a group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/webserver?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/dmz?pretty"
 
 **Example Response:**
 ::
@@ -373,11 +428,15 @@ Returns the list of agent in a group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1,
+	      "totalItems": 2,
 	      "items": [
 	         {
-	            "id": "001",
-	            "name": "server001"
+	            "id": "002",
+	            "name": "dmz001"
+	         },
+	         {
+	            "id": "004",
+	            "name": "dmz002"
 	         }
 	      ]
 	   }
@@ -428,9 +487,7 @@ Returns the group configuration (agent.conf).
 	                  }
 	               ]
 	            },
-	            "filters": {
-	               "os": "Linux"
-	            }
+	            "filters": {}
 	         }
 	      ]
 	   }
@@ -474,14 +531,14 @@ Returns the files belonging to the group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 17,
+	      "totalItems": 16,
 	      "items": [
 	         {
 	            "hash": "76d8be9b97d8eae4c239e530ee7e71c8",
 	            "filename": "../ar.conf"
 	         },
 	         {
-	            "hash": "61a072cf32c24dbb3d3d45574106f441",
+	            "hash": "2444adef60a891267637fe832d50b484",
 	            "filename": "agent.conf"
 	         },
 	         {
@@ -497,7 +554,7 @@ Returns the files belonging to the group.
 	            "filename": "cis_rhel6_linux_rcl.txt"
 	         },
 	         {
-	            "hash": "3d5fd9a4927fa2e666e0e608aebbfcb3",
+	            "hash": "aaff4375a9cf76f0bfb4acd3529642c1",
 	            "filename": "cis_rhel7_linux_rcl.txt"
 	         },
 	         {
@@ -513,10 +570,6 @@ Returns the files belonging to the group.
 	            "filename": "cis_sles12_linux_rcl.txt"
 	         },
 	         {
-	            "hash": "cf5ac2d87948e6144c21f9dffe66d856",
-	            "filename": "merged.mg"
-	         },
-	         {
 	            "hash": "a403c34392032ace267fbb163fc7cfad",
 	            "filename": "rootkit_files.txt"
 	         },
@@ -529,7 +582,7 @@ Returns the files belonging to the group.
 	            "filename": "system_audit_rcl.txt"
 	         },
 	         {
-	            "hash": "072526aa22390da8d1ae90675daa89ab",
+	            "hash": "f617bec303b3276d49245b1361e83e42",
 	            "filename": "system_audit_ssh.txt"
 	         },
 	         {
@@ -587,15 +640,15 @@ Returns the list of existing agent groups.
 	      "totalItems": 5,
 	      "items": [
 	         {
-	            "count": 1,
+	            "count": 0,
 	            "name": "database"
 	         },
 	         {
-	            "count": 3,
+	            "count": 0,
 	            "name": "default"
 	         },
 	         {
-	            "count": 1,
+	            "count": 2,
 	            "name": "dmz"
 	         },
 	         {
@@ -603,7 +656,7 @@ Returns the list of existing agent groups.
 	            "name": "pciserver"
 	         },
 	         {
-	            "count": 1,
+	            "count": 0,
 	            "name": "webserver"
 	         }
 	      ]
@@ -642,6 +695,7 @@ Removes the group. Agents will have 'default' group.
 	   "data": {
 	      "msg": "Group 'dmz' removed.",
 	      "affected_agents": [
+	         "002",
 	         "004"
 	      ]
 	   }
@@ -671,14 +725,14 @@ Sets the specified group to the agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/001/group/webserver?pretty"
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/004/group/webserver?pretty"
 
 **Example Response:**
 ::
 
 	{
 	   "error": 0,
-	   "data": "Group 'webserver' set to agent '001'."
+	   "data": "Group 'webserver' set to agent '004'."
 	}
 
 
@@ -718,6 +772,49 @@ Unsets the group of the agent. The group will be 'default'.
 Info
 ++++++++++++++++++++++++++++++++++++++++
 
+Get OS summary
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a summary of OS.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/summary/os
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/summary/os?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 1,
+	      "items": [
+	         "debian"
+	      ]
+	   }
+	}
+
+
 Get agents summary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns a summary of the available agents.
@@ -740,8 +837,8 @@ Returns a summary of the available agents.
 	   "error": 0,
 	   "data": {
 	      "Active": 1,
-	      "Never connected": 6,
-	      "Total": 7,
+	      "Never connected": 5,
+	      "Total": 6,
 	      "Disconnected": 0
 	   }
 	}
@@ -778,6 +875,10 @@ Returns a list with the available agents.
 |                    |               | - never connected                                                                                                                                                                                      |
 |                    |               | - disconnected                                                                                                                                                                                         |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| os.platform        | String        | Filters by OS platform                                                                                                                                                                                 |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| os.version         | String        | Filters by OS version                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -790,12 +891,12 @@ Returns a list with the available agents.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 7,
+	      "totalItems": 6,
 	      "items": [
 	         {
 	            "status": "Never connected",
 	            "ip": "any",
-	            "id": "006",
+	            "id": "007",
 	            "name": "myNewAgent"
 	         },
 	         {
@@ -807,20 +908,20 @@ Returns a list with the available agents.
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.9",
-	            "id": "005",
+	            "id": "006",
 	            "name": "NewHost"
 	         },
 	         {
 	            "status": "Never connected",
-	            "ip": "10.0.0.62",
-	            "id": "001",
-	            "name": "server001"
+	            "ip": "10.0.0.14",
+	            "id": "004",
+	            "name": "dmz002"
 	         },
 	         {
 	            "status": "Never connected",
-	            "ip": "10.0.0.15",
-	            "id": "003",
-	            "name": "main_database"
+	            "ip": "10.0.0.12",
+	            "id": "002",
+	            "name": "dmz001"
 	         }
 	      ]
 	   }
@@ -857,13 +958,20 @@ Returns the information of an agent.
 	   "error": 0,
 	   "data": {
 	      "status": "Active",
-	      "name": "ip-10-0-0-10",
+	      "name": "debian",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2017-05-17 11:32:02",
-	      "version": "Wazuh v3.0.0-alpha2",
-	      "os_family": "Linux",
+	      "dateAdd": "2017-08-16 16:53:56",
+	      "version": "Wazuh v3.0.0-beta5",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
-	      "os": "Linux ip-10-0-0-10 3.16.0-4-amd64 #1 SMP Debian 3.16.36-1+deb8u2 (2016-10-19) x86_64",
+	      "os": {
+	         "major": "9",
+	         "name": "Debian GNU/Linux",
+	         "platform": "debian",
+	         "uname": "Linux debian 4.9.0-3-amd64 #1 SMP Debian 4.9.30-2+deb9u2 (2017-06-26) x86_64",
+	         "version": "9",
+	         "codename": "stretch",
+	         "arch": "x86_64"
+	      },
 	      "id": "000"
 	   }
 	}
@@ -894,20 +1002,51 @@ Returns the key of an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/key?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/004/key?pretty"
 
 **Example Response:**
 ::
 
 	{
 	   "error": 0,
-	   "data": "MDAxIHNlcnZlcjAwMSAxMC4wLjAuNjIgMmM0OWFlNWJmYmI1N2EzYjFmMWFlYzBmM2ZlM2NmMDFmYzgwNTIyMDYxNWIzOTcxNTBmZjBjMzE0ZjY3Y2VmZQ=="
+	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgMjFkOTdkOTkzNzdhMTQwMmQyZTQwYjMxODkyMzlmZWY5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
 	}
 
 
 
 Restart
 ++++++++++++++++++++++++++++++++++++++++
+
+Restart a list of agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Restarts a list of agents.
+
+**Request**:
+
+``POST`` ::
+
+	/agents/restart
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``ids``            | String[]      | Array of agent ID's.                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"ids":["002","004"]}' "https://127.0.0.1:55000/agents/restart?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "All selected agents were restarted",
+	    "error": 0
+	}
 
 Restart all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -953,7 +1092,7 @@ Restarts the agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/000/restart?pretty"
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/007/restart?pretty"
 
 **Example Response:**
 ::
@@ -962,6 +1101,340 @@ Restarts the agent.
 	    "data": "Restarting agent",
 	    "error": 0
 	}
+
+
+Upgrade
+++++++++++++++++++++++++++++++++++++++++
+
+Get outdated agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the list of outdated groups.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/outdated
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the begining to ascending or descending order.                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/outdated?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "totalItems": 2,
+	        "items": [
+	            {
+	                "version": "Wazuh v3.0.0",
+	                "id": "003",
+	                "name": "main_database"
+	            },
+	            {
+	                "version": "Wazuh v3.0.0",
+	                "id": "004",
+	                "name": "dmz002"
+	            }
+	        ]
+	    },
+	    "error": 0
+	}
+
+Get upgrade result from agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the upgrade result from an agent.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/:agent_id/upgrade_result
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| timeout            | Number        | Seconds waiting for agent response.                                                                                                                                                                    |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/003/upgrade_result?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Agent upgraded successfully",
+	    "error": 0
+	}
+
+Upgrade agent using custom file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Upgrade the agent using a custom file.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/:agent_id/upgrade_custom
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file_path``      | String        | WPK file path.                                                                                                                                                                                         |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``installer``      | String        | Installation script.                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade_custom?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Installation started",
+	    "error": 0
+	}
+
+Upgrade agent using online repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Upgrade the agent using a WPK file from online repository.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/:agent_id/upgrade
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| wpk_repo           | String        | WPK repository.                                                                                                                                                                                        |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| version            | String        | Wazuh version.                                                                                                                                                                                         |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| force              | number        | Force upgrade.                                                                                                                                                                                         |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - 0                                                                                                                                                                                                    |
+|                    |               | - 1                                                                                                                                                                                                    |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Upgrade procedure started",
+	    "error": 0
+	}
+
+
+
+Cluster
+----------------------------------------
+Nodes
+++++++++++++++++++++++++++++++++++++++++
+
+Get node info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the Node info
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/node
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node"
+
+**Example Response:**
+::
+
+	{"error":0,"data":{"node":"node1","cluster":"wazuh"}}
+
+Get node token
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the Node token
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/node/token
+
+**Example Request:**
+::
+
+	curl -u wazuh:wazuh -k -X GET "https://127.0.0.1:55000/cluster/node/token"
+
+**Example Response:**
+::
+
+	{"error":0,"data":"cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e"}
+
+Get nodes list
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the Nodes list
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/nodes
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes"
+
+**Example Response:**
+::
+
+	{"error":0,"data":{"totalItems":0,"items":[]}}
+
+
+Syncrhonization
+++++++++++++++++++++++++++++++++++++++++
+
+Disable syncrhonization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Disables sync
+
+**Request**:
+
+``PUT`` ::
+
+	/cluster/sync/disable
+
+**Example Request:**
+::
+
+	curl -u wazuh:wazuh -k -X PUT "https://127.0.0.1:55000/cluster/sync/disable"
+
+**Example Response:**
+::
+
+	{"error":0,"data":"Sync disabled"}
+
+Enable syncrhonization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Enables sync
+
+**Request**:
+
+``PUT`` ::
+
+	/cluster/sync/enable
+
+**Example Request:**
+::
+
+	curl -u wazuh:wazuh -k -X PUT "https://127.0.0.1:55000/cluster/sync/enable"
+
+**Example Response:**
+::
+
+	{"error":0,"data":"Sync enabled"}
+
+Get sync status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns sync status
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/sync/status
+
+**Example Request:**
+::
+
+	curl -u wazuh:wazuh -k -X GET "https://127.0.0.1:55000/cluster/sync/status"
+
+**Example Response:**
+::
+
+	{"error":0,"data":"Sync enabled"}
+
+Sync files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sync files
+
+**Request**:
+
+``PUT`` ::
+
+	/cluster/sync
+
+**Example Request:**
+::
+
+	curl -u wazuh:wazuh -k -X PUT "https://127.0.0.1:55000/cluster/sync"
+
+**Example Response:**
+::
+
+	{"error":0,"data":{"discard":[],"updated":[],"error":[]}}
+
+Sync files (force)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sync files (force)
+
+**Request**:
+
+``PUT`` ::
+
+	/cluster/sync/force
+
+**Example Request:**
+::
+
+	curl -u wazuh:wazuh -k -X PUT "https://127.0.0.1:55000/cluster/sync/force"
+
+**Example Response:**
+::
+
+	{"error":0,"data":{"discard":[],"updated":[],"error":[]}}
 
 
 
@@ -1017,27 +1490,29 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 468,
+	      "totalItems": 480,
 	      "items": [
 	         {
 	            "status": "enabled",
-	            "name": "json",
+	            "name": "wazuh",
 	            "details": {
-	               "plugin_decoder": "JSON_Decoder",
-	               "prematch": "^{\\s*\""
+	               "prematch": "^wazuh: "
 	            },
-	            "file": "0005-json_decoders.xml",
+	            "file": "0005-wazuh_decoders.xml",
 	            "position": 0,
 	            "path": "/var/ossec/ruleset/decoders"
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "ar_log",
+	            "name": "agent-buffer",
 	            "details": {
-	               "prematch": "^\\w\\w\\w \\w+\\s+\\d+ \\d\\d:\\d\\d:\\d\\d \\w+ \\d+ /\\S+/active-response/bin/|^\\w\\w\\w \\d\\d/\\d\\d/\\d\\d\\d\\d \\.+\"active-response/bin/"
+	               "regex": "^ '(\\S+)'.",
+	               "prematch": "^Agent buffer:",
+	               "parent": "wazuh",
+	               "order": "level"
 	            },
-	            "file": "0010-active-response_decoders.xml",
-	            "position": 0,
+	            "file": "0005-wazuh_decoders.xml",
+	            "position": 1,
 	            "path": "/var/ossec/ruleset/decoders"
 	         }
 	      ]
@@ -1094,22 +1569,22 @@ Returns all decoders files included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 83,
+	      "totalItems": 85,
 	      "items": [
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0060-cisco-estreamer_decoders.xml"
+	            "file": "0045-barracuda_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0150-mysql_decoders.xml"
+	            "file": "0040-auditd_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0215-portsentry_decoders.xml"
+	            "file": "0300-sophos_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
@@ -1119,12 +1594,17 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0190-openvpn_decoders.xml"
+	            "file": "0275-sendmail_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0405-mongodb_decoders.xml"
+	            "file": "0005-wazuh_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0185-openldap_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
@@ -1134,17 +1614,12 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0085-dovecot_decoders.xml"
+	            "file": "0200-ossec_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0335-telnet_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0165-netscreen_decoders.xml"
+	            "file": "0350-unix_decoders.xml"
 	         }
 	      ]
 	   }
@@ -1186,7 +1661,7 @@ Returns all parent decoders included in ossec.conf
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 120,
+	      "totalItems": 121,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -1256,7 +1731,7 @@ Returns the decoders with the specified name.
 	            "status": "enabled",
 	            "name": "apache-errorlog",
 	            "details": {
-	               "program_name": "^httpd"
+	               "program_name": "^apache2|^httpd"
 	            },
 	            "file": "0025-apache_decoders.xml",
 	            "position": 0,
@@ -1335,7 +1810,7 @@ Returns ossec.conf in JSON format.
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "10.0.0.2"
+	         "192.168.42.2"
 	      ],
 	      "email_from": "ossecm@example.wazuh.com",
 	      "logall_json": "no"
@@ -1346,6 +1821,34 @@ Returns ossec.conf in JSON format.
 
 Info
 ++++++++++++++++++++++++++++++++++++++++
+
+Check files status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the file content
+
+**Request**:
+
+``GET`` ::
+
+	/manager/files
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``file_name``      | string        | File Name                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/files?file=ossec.conf&download
+
+**Example Response:**
+::
+
+	{"error":612,"message":"Param not valid. Valid characters: a-z A-Z 0-9 space _ - /  : . \" ' @ ~ +.  Field: download"}
 
 Get manager information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1368,15 +1871,15 @@ Returns basic information about Manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "installation_date": "Wed May 17 11:31:01 UTC 2017",
-	      "version": "v3.0.0-alpha2",
+	      "installation_date": "Wed Aug 16 16:50:57 CEST 2017",
+	      "version": "v3.0.0-beta5",
 	      "openssl_support": "yes",
 	      "max_agents": "8000",
-	      "ruleset_version": "v3.0.0-alpha1",
+	      "ruleset_version": "1002",
 	      "path": "/var/ossec",
-	      "tz_name": "UTC",
+	      "tz_name": "CEST",
 	      "type": "server",
-	      "tz_offset": "+0000"
+	      "tz_offset": "+0200"
 	   }
 	}
 
@@ -1407,7 +1910,7 @@ Returns the Manager processes that are running.
 	      "ossec-monitord": "running",
 	      "ossec-logcollector": "running",
 	      "ossec-execd": "running",
-	      "ossec-remoted": "running",
+	      "ossec-remoted": "stopped",
 	      "ossec-syscheckd": "running",
 	      "ossec-analysisd": "running",
 	      "ossec-maild": "stopped"
@@ -1497,59 +2000,59 @@ Returns a summary about the 3 last months of ossec.log.
 	   "error": 0,
 	   "data": {
 	      "wazuh-modulesd": {
-	         "info": 1,
-	         "all": 1,
+	         "info": 3,
+	         "all": 3,
 	         "error": 0
 	      },
 	      "ossec-testrule": {
-	         "info": 86,
-	         "all": 86,
+	         "info": 264,
+	         "all": 264,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:oscap": {
-	         "info": 1,
-	         "all": 1,
+	         "info": 3,
+	         "all": 3,
 	         "error": 0
 	      },
 	      "ossec-rootcheck": {
-	         "info": 2,
-	         "all": 2,
+	         "info": 5,
+	         "all": 5,
 	         "error": 0
 	      },
 	      "ossec-monitord": {
-	         "info": 1,
-	         "all": 1,
+	         "info": 5,
+	         "all": 5,
 	         "error": 0
 	      },
 	      "ossec-logcollector": {
-	         "info": 12,
-	         "all": 13,
-	         "error": 1
+	         "info": 32,
+	         "all": 32,
+	         "error": 0
 	      },
 	      "ossec-execd": {
-	         "info": 1,
-	         "all": 1,
+	         "info": 7,
+	         "all": 7,
 	         "error": 0
 	      },
 	      "ossec-remoted": {
-	         "info": 4,
-	         "all": 5,
-	         "error": 1
+	         "info": 9,
+	         "all": 9,
+	         "error": 0
 	      },
 	      "ossec-syscheckd": {
-	         "info": 25,
-	         "all": 25,
+	         "info": 73,
+	         "all": 73,
 	         "error": 0
 	      },
 	      "ossec-analysisd": {
-	         "info": 190,
-	         "all": 190,
+	         "info": 584,
+	         "all": 584,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:database": {
-	         "info": 1,
-	         "all": 2,
-	         "error": 1
+	         "info": 3,
+	         "all": 6,
+	         "error": 3
 	      }
 	   }
 	}
@@ -1824,8 +2327,8 @@ Return the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-05-17 11:32:18",
-	      "end": null
+	      "start": "2017-08-16 16:56:04",
+	      "end": "2017-08-16 16:56:27"
 	   }
 	}
 
@@ -1865,10 +2368,12 @@ Returns the CIS requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2,
+	      "totalItems": 4,
 	      "items": [
 	         "1.4 Debian Linux",
-	         "4.13 Debian Linux"
+	         "2.3 Debian Linux",
+	         "7.2 Debian Linux",
+	         "7.3 Debian Linux"
 	      ]
 	   }
 	}
@@ -1915,8 +2420,23 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 0,
-	      "items": []
+	      "totalItems": 16,
+	      "items": [
+	         {
+	            "status": "outstanding",
+	            "oldDay": "2017-08-16 16:56:06",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2017-08-16 16:56:06",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /opt is not on its own partition {CIS: 1.4 Debian Linux}. File: /opt. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
+	         },
+	         {
+	            "status": "outstanding",
+	            "oldDay": "2017-08-16 16:56:06",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2017-08-16 16:56:06",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /tmp is not on its own partition {CIS: 1.4 Debian Linux}. File: /etc/fstab. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
+	         }
+	      ]
 	   }
 	}
 
@@ -1958,8 +2478,8 @@ Returns the PCI requirements of all rootchecks of the agent.
 	   "data": {
 	      "totalItems": 2,
 	      "items": [
-	         "2.2.2",
-	         "2.2.4"
+	         "2.2.4",
+	         "4.1"
 	      ]
 	   }
 	}
@@ -2084,7 +2604,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1472,
+	      "totalItems": 1496,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -2172,7 +2692,7 @@ Returns the files of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 91,
+	      "totalItems": 93,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -2183,6 +2703,11 @@ Returns the files of all rules.
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/rules",
 	            "file": "0015-ossec_rules.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/rules",
+	            "file": "0016-wazuh_rules.xml"
 	         },
 	         {
 	            "status": "enabled",
@@ -2218,11 +2743,6 @@ Returns the files of all rules.
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/rules",
 	            "file": "0050-ms-exchange_rules.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0055-courier_rules.xml"
 	         }
 	      ]
 	   }
@@ -2264,7 +2784,7 @@ Returns the groups of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 236,
+	      "totalItems": 242,
 	      "items": [
 	         "access_control",
 	         "access_denied",
@@ -2273,9 +2793,9 @@ Returns the groups of all rules.
 	         "active_response",
 	         "adduser",
 	         "agent",
+	         "agent_flooding",
 	         "agentless",
-	         "amazon",
-	         "amazon-error"
+	         "amazon"
 	      ]
 	   }
 	}
@@ -2488,8 +3008,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-05-17 11:32:15",
-	      "end": "2017-05-17 11:32:18"
+	      "start": "2017-08-16 16:55:55",
+	      "end": "2017-08-16 16:56:04"
 	   }
 	}
 
@@ -2560,13 +3080,45 @@ Returns the syscheck files of an agent.
 ::
 
 	{
-	   "error": 0,
-	   "data": {
-	      "totalItems": 0,
-	      "items": []
-	   }
+	    "data": {
+	        "totalItems": 2762,
+	        "items": [
+	            {
+	                "size": 157721,
+	                "uid": 0,
+	                "scanDate": "2017-03-02 23:43:28",
+	                "user": "root",
+	                "file": "!1488498208 /boot/config-3.16.0-4-amd64",
+	                "modificationDate": "2016-10-19 06:45:50",
+	                "octalMode": "100644",
+	                "inode": 5217,
+	                "event": "added",
+	                "permissions": "-rw-r--r--",
+	                "sha1": "4fed08ccbd0168593a6fffcd925adad65e5ae6d9",
+	                "group": "root",
+	                "gid": 0,
+	                "md5": "46d43391ae54c1084a2d40e8d1b4873c"
+	            },
+	            {
+	                "size": 2679264,
+	                "uid": 0,
+	                "scanDate": "2017-03-02 23:43:26",
+	                "user": "root",
+	                "file": "!1488498206 /boot/System.map-3.16.0-4-amd64",
+	                "modificationDate": "2016-10-19 06:45:50",
+	                "octalMode": "100644",
+	                "inode": 5216,
+	                "event": "added",
+	                "permissions": "-rw-r--r--",
+	                "sha1": "d48151a3d3638b723f5d7bc1e9c71d478fcde4e6",
+	                "group": "root",
+	                "gid": 0,
+	                "md5": "29cc12246faecd4a14d212b4d9bac0fe"
+	            }
+	        ]
+	    },
+	    "error": 0
 	}
-
 
 
 Run
