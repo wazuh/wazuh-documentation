@@ -137,91 +137,91 @@ This is the format of the log being read.
   For most text log files that have one entry per line, you can just use syslog.
 
 
-	+--------------------+-------------------------------------------------------------------------------------------------------+
-	| **Default value**  | syslog                                                                                                |
-	+--------------------+----------------+--------------------------------------------------------------------------------------+
-	| **Allowed values** | syslog         | This format is for plain text files in a syslog-like format.                         |
-	|                    |                |                                                                                      |
-	|                    |                | Also can be used when the logs are single line messages.                             |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | snort-full     | This is used for Snort’s full-output format.                                         |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | snort-fast     | This is used for Snort's fast-output format.                                         |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | squid          | This is used for squid logs.                                                         |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | iis            | This is used for IIS logs.                                                           |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | eventlog       | This is used for the classic Microsoft Windows event log format.                     |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | eventchannel   | This is used for Microsoft Windows event logs, using the new EventApi.               |
-	|                    |                |                                                                                      |
-	|                    |                | Monitorize: standard “Windows” eventlogs and "Application and Services" logs.        |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | mysql_log      | This is used for ``MySQL`` logs. It does not support multi-line logs.                |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | postgresql_log | This is used for ``PostgreSQL`` logs. It does not support multi-line logs.           |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | nmapg          | Used for monitoring files conforming to the grepable output from ``nmap``.           |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | apache         | Apache's default log format.                                                         |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | command        | Read in arbitrary output from the command (as run by root).                          |
-	|                    |                |                                                                                      |
-	|                    |                | Command defined by the command tag.                                                  |
-	|                    |                |                                                                                      |
-	|                    |                |                                                                                      |
-	|                    |                | Each line of output will be treated as a separate log.                               |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | full_command   | Read in arbitrary output from the command (as run by root)                           |
-	|                    |                |                                                                                      |
-	|                    |                | Command defined by the command tag.                                                  |
-	|                    |                |                                                                                      |
-	|                    |                | The entire output will be treated as a single log item.                              |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | djb-multilog   | Read files in the format produced by the multilog service logger in daemontools.     |
-	+                    +----------------+--------------------------------------------------------------------------------------+
-	|                    | multi-line     |                                                                                      |
-	|                    |                | Allow applications that log multiple lines per event to be monitored.                |
-	|                    |                |                                                                                      |
-	|                    |                |                                                                                      |
-	|                    |                | Require the number of lines to be consistent.                                        |
-	|                    |                |                                                                                      |
-	|                    |                | ``multi-line:`` is followed by the number of lines in each log entry.                |
-	|                    |                |                                                                                      |
-	|                    |                | Each line will be combined with the previous lines until all lines are gathered.     |
-	|                    |                |                                                                                      |
-	|                    |                | There may be multiple timestamps in a finalized event.                               |
-	|                    |                |                                                                                      |
-	|                    |                | The format is: <log_format>multi-line: NUMBER</log_format>                           |
-	+--------------------+----------------+--------------------------------------------------------------------------------------+
++--------------------+-------------------------------------------------------------------------------------------------------+
+| **Default value**  | syslog                                                                                                |
++--------------------+----------------+--------------------------------------------------------------------------------------+
+| **Allowed values** | syslog         | This format is for plain text files in a syslog-like format.                         |
+|                    |                |                                                                                      |
+|                    |                | Also can be used when the logs are single line messages.                             |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | snort-full     | This is used for Snort’s full-output format.                                         |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | snort-fast     | This is used for Snort's fast-output format.                                         |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | squid          | This is used for squid logs.                                                         |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | iis            | This is used for IIS logs.                                                           |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | eventlog       | This is used for the classic Microsoft Windows event log format.                     |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | eventchannel   | This is used for Microsoft Windows event logs, using the new EventApi.               |
+|                    |                |                                                                                      |
+|                    |                | Monitorize: standard “Windows” eventlogs and "Application and Services" logs.        |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | mysql_log      | This is used for ``MySQL`` logs. It does not support multi-line logs.                |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | postgresql_log | This is used for ``PostgreSQL`` logs. It does not support multi-line logs.           |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | nmapg          | Used for monitoring files conforming to the grepable output from ``nmap``.           |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | apache         | Apache's default log format.                                                         |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | command        | Read in arbitrary output from the command (as run by root).                          |
+|                    |                |                                                                                      |
+|                    |                | Command defined by the command tag.                                                  |
+|                    |                |                                                                                      |
+|                    |                |                                                                                      |
+|                    |                | Each line of output will be treated as a separate log.                               |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | full_command   | Read in arbitrary output from the command (as run by root)                           |
+|                    |                |                                                                                      |
+|                    |                | Command defined by the command tag.                                                  |
+|                    |                |                                                                                      |
+|                    |                | The entire output will be treated as a single log item.                              |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | djb-multilog   | Read files in the format produced by the multilog service logger in daemontools.     |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | multi-line     |                                                                                      |
+|                    |                | Allow applications that log multiple lines per event to be monitored.                |
+|                    |                |                                                                                      |
+|                    |                |                                                                                      |
+|                    |                | Require the number of lines to be consistent.                                        |
+|                    |                |                                                                                      |
+|                    |                | ``multi-line:`` is followed by the number of lines in each log entry.                |
+|                    |                |                                                                                      |
+|                    |                | Each line will be combined with the previous lines until all lines are gathered.     |
+|                    |                |                                                                                      |
+|                    |                | There may be multiple timestamps in a finalized event.                               |
+|                    |                |                                                                                      |
+|                    |                | The format is: <log_format>multi-line: NUMBER</log_format>                           |
++--------------------+----------------+--------------------------------------------------------------------------------------+
 
-	.. warning::
+.. warning::
 
-			The eventchannel log format cannot be used on Windows agents older than Vista since they do not produce that kind of log.
+	The eventchannel log format cannot be used on Windows agents older than Vista since they do not produce that kind of log.
 
-	.. warning::
+.. warning::
 
-			Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution since it may not be permissible in all environments to allow the Wazuh manager to run arbitrary commands on agents in their root security context.
+	Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution since it may not be permissible in all environments to allow the Wazuh manager to run arbitrary commands on agents in their root security context.
 
 
-	Example:
+Example:
 
-	Multi-line log message in original log file:
+Multi-line log message in original log file:
 
-	.. code-block:: console
+.. code-block:: console
 
-	   Aug 9 14:22:47 hostname log line one
-	   Aug 9 14:22:47 hostname log line two
-	   Aug 9 14:22:47 hostname log line four
-	   Aug 9 14:22:47 hostname log line three
-	   Aug 9 14:22:47 hostname log line five
+	Aug 9 14:22:47 hostname log line one
+	Aug 9 14:22:47 hostname log line two
+	Aug 9 14:22:47 hostname log line four
+	Aug 9 14:22:47 hostname log line three
+	Aug 9 14:22:47 hostname log line five
 
-	Log message as analyzed by ossec-analysisd:
+Log message as analyzed by ossec-analysisd:
 
-	.. code-block:: console
+.. code-block:: console
 
-	   Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
+	Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
 
 Example of configuration
 ------------------------
