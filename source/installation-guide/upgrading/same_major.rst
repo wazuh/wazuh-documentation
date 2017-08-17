@@ -8,6 +8,9 @@ Use these instructions if you are upgrading your Wazuh installation within the s
 Upgrade Wazuh manager
 ---------------------
 
+Before upgrading the Wazuh manager, stop ``ossec-authd`` in case that it is running in background. Since Wazuh 2.1.0, ``ossec-authd`` should be configured in the :doc:`auth section <../../user-manual/reference/ossec-conf/auth>` of ``ossec.conf``.
+
+
 a) Upgrade Wazuh server on CentOS/RHEL/Fedora:
 
 .. code-block:: bash
