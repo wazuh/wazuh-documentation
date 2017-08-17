@@ -16,6 +16,10 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 +                     +---------------------------------------+-----------------------------------+
 |                     | Default Value                         | hostname                          |
 +---------------------+---------------------------------------+-----------------------------------+
+| **-a**              | Auto negotiate the most secure common SSL/TLS method with the client.     |
++                     +-------------+-------------------------------------------------------------+
+|                     | **Default** | TLS v1.2 only (if supported by the server).                 |
++---------------------+-------------+-------------------------------------------------------------+
 | **-D**              | Directory where Wazuh is installed.                                       |
 +                     +---------------------------------------+-----------------------------------+
 |                     | Default Value                         | /var/ossec                        |
@@ -41,6 +45,8 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 +                     +---------------------------------------+-----------------------------------+
 |                     | Default Value                         | 1515                              |
 +---------------------+---------------------------------------+-----------------------------------+
+| **-t**              | Test configuration.                                                       |
++---------------------+---------------------------------------------------------------------------+
 | **-V**              | Display version and license information.                                  |
 +---------------------+---------------------------------------------------------------------------+
 | **-v <path>**       | Display the full path to the CA certificate used to verify the server.    |
