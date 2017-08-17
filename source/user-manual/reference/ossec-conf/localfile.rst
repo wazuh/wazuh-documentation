@@ -22,6 +22,7 @@ Options
 - `frequency`_
 - `only-future-events`_
 - `query`_
+- `label`_
 - `log_format`_
 
 location
@@ -127,6 +128,60 @@ For example, the following configuration will only process events with an ID of 
      <query>Event/System[EventID=7040]</query>
   </localfile>
 
+label
+^^^^^
+
+This option allows to append custom extra data into JSON event. It is available when `log_format`_ is ``json``.
+
+It has the format ``key:value``, which means that it is necessary to include the atribute ``key`` to work properly.
+Thinking in the JSON alerts, it is possible to nest labels by splitting this atribute with dots.
+
+**Example:**
+
+.. code-block:: xml
+
+  <localfile>
+    <location>/var/log/myapp/log.json</location>
+    <log_format>json</log_format>
+    <label key="@source">myapp</label>
+    <label key="agent.type">webserver</label>
+  </localfile>
+
+Example JSON object from the log file:
+
+.. code-block:: json
+
+  {
+    "event": {
+      "type": "write",
+      "destination": "sample.txt"
+    },
+    "agent": {
+      "name": "web01"
+    }
+  }
+
+The resulting event would be:
+
+.. code-block:: json
+
+  {
+    "event": {
+      "type": "write",
+      "destination": "sample.txt"
+    },
+    "agent": {
+      "name": "web01",
+      "type": "webserver"
+    },
+    "@source": "myapp"
+  }
+
+.. note::
+
+	If a label key existed in the source JSON it won't be included.
+	We recommend to use a distinctive label key, for instance a name starting with ``@``, like ``source``.
+
 log_format
 ^^^^^^^^^^^
 
@@ -143,6 +198,12 @@ This is the format of the log being read.
 | **Allowed values** | syslog         | This format is for plain text files in a syslog-like format.                         |
 |                    |                |                                                                                      |
 |                    |                | Also can be used when the logs are single line messages.                             |
++                    +----------------+--------------------------------------------------------------------------------------+
+|                    | json           | This format is to monitor JSON files in one-line format.                             |
+|                    |                |                                                                                      |
+|                    |                | This option allows to insert custom extra strings into the JSON event.               |
+|                    |                |                                                                                      |
+|                    |                | See also the tag `label`_.                                                           |
 +                    +----------------+--------------------------------------------------------------------------------------+
 |                    | snort-full     | This is used for Snort’s full-output format.                                         |
 +                    +----------------+--------------------------------------------------------------------------------------+
