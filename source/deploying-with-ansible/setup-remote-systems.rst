@@ -1,0 +1,105 @@
+.. _setup_ansible_hosts:
+
+Remote Hosts
+============================
+
+Ansible born with the idea to be an agentless automation platform. Ansible relaying to SSH the connection mechanisms to remote hosts, you can connect to remote host in the same way as SSH does. Next, we briefly explain two (2) of this methods.
+
+.. note:: We recommend the use of `Using passwords`_ method, this avoid you share your public SSH Key among several hosts.
+
+Using passwords
+-------------------
+
+Ansible does most of the work via SSH, SSH share their authentication mechanisms with Ansible, so in order to stablish a connection with remote hosts a user/password must be supplied that Ansible can use, next we describe some useful options that you can use for SSH authentication:
+
+.. code-block:: bash
+
+  -u <user>   Set the connection user.
+  -k          Ask the password of the connection user.
+  -b          Execute task and operations with a privilege user.
+  -K          Ask for sudo password, intended for privilege escalation.
+
+You can use the above args like the following:
+
+.. code-block:: bash
+
+  ansible -m setup all -u foo -k -b -K
+
+This will set the connection user as ``foo``, also will ask for the connection user password and privileged user password.
+
+Using SSH keypairing
+--------------------
+
+You can setup a SSH keypairing to provide a silent auth mechanism, first create a OpenSSH keypair:
+
+.. code-block:: bash
+
+  $ ssh-keygen
+
+To improve security on this setup, please ensure you provide a password for this key.
+
+.. code-block:: bash
+
+  Enter passphrase (empty for no passphrase): ************
+  Enter same passphrase again: ************
+
+Using ssh-agent avoid of asking the key password over and over again on every Ansible deploy, ssh-agent will cached your key to be use in further actions, until you logout.
+
+Installing public key
+---------------------
+
+After creating Control machine key, you need install public key into every remote hosts, copy the content of ``.ssh/id_rsa.pub`` of Control machine to ``.ssh/authorized_keys`` on your host, be aware of the user you using to store ``authorized_keys``, this will be the user you use for any action via Ansible.
+
+Set the correct permisions:
+
+.. code-block:: bash
+
+  $ chmod 600 .ssh/authorized_keys
+
+Add hosts to control
+----------------------
+
+Adding hosts is easy just put the hostname or IP Address on ``/etc/ansible/hosts``.
+
+.. code-block:: bash
+
+  $ cat /etc/ansible/hosts
+
+  hosts1.example.net
+  hosts2.example.net
+
+Also, you can group hosts, this could be useful to execute tasks and roles to several hosts at once:
+
+.. code-block:: bash
+
+  $ cat /etc/ansible/hosts
+
+  [wazuh-elasticsearch]
+  hosts1.example.net
+  hosts2.example.net
+
+.. note:: You can see the `Ansible inventory documentation <http://docs.ansible.com/ansible/intro_inventory.html>`_ for more info regarding hosts and groups.
+
+Test connection
+-----------------
+
+This will attemp a connection with the remote hosts using ``ping`` module.
+
+.. code-block:: bash
+
+  $ ansible all -m ping
+
+You will get a output like this.
+
+.. code-block:: bash
+
+  hosts1.example.net | SUCCESS => {
+      "changed": false,
+      "ping": "pong"
+  }
+  hosts2.example.net | SUCCESS => {
+      "changed": false,
+      "ping": "pong"
+  }
+
+If you see the above, then Ansible is fully usable.
