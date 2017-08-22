@@ -15,3 +15,4 @@ This section will describe how list, remove and register agents to and from the 
         wazuh-app
         agent-connection
         grouping-agents
+        remote-upgrading/index
