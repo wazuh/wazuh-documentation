@@ -212,7 +212,7 @@ Maild
 +                           +---------------+---------------------------------------------------------------------+
 |                           | Allowed value | 0, 1                                                                |
 +---------------------------+---------------+---------------------------------------------------------------------+
-|    **maild.groupping**    | Description   | Toggle to enable or disable grouping of alerts into a single email. |
+|    **maild.grouping**     | Description   | Toggle to enable or disable grouping of alerts into a single email. |
 +                           +---------------+---------------------------------------------------------------------+
 |                           | Default value | 1                                                                   |
 +                           +---------------+---------------------------------------------------------------------+
