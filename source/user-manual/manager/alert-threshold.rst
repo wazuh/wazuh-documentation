@@ -8,7 +8,7 @@ Every posible event on the Wazuh Agent is set with certain level, by defatult is
 Configuration
 -------------
 
-All configuracion of Remote Service is done via ``ossec.conf`` using ``<alerts>`` XML tag, all the available options are detailed in :ref:`Alerts reference <reference_ossec_alerts>`
+All configuration of Remote Service is done via ``ossec.conf`` using ``<alerts>`` XML tag, all the available options are detailed in :ref:`Alerts reference <reference_ossec_alerts>`
 
 ::
 

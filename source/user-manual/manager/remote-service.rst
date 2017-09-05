@@ -8,7 +8,7 @@ You can set how Wazuh Manager could publish their remote service used by Agents:
 Configuration
 -------------
 
-All configuracion of Remote Service is done via ``ossec.conf`` using ``<remote>`` XML tag, all the available options are detailed in :ref:`Remote config <reference_ossec_remote>`
+All configuration of Remote Service is done via ``ossec.conf`` using ``<remote>`` XML tag, all the available options are detailed in :ref:`Remote config <reference_ossec_remote>`
 
 You can change what ip address use to listen the service:
 
