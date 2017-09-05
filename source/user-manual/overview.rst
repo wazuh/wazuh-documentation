@@ -54,4 +54,4 @@ Components
 
 - **Syscheck**: runs periodically to check if any configured file (or registry entry on Windows) has changed.
 
-+ **OpenSCAP**: desing to check weak and vulnerable applicactions and configurations.
++ **OpenSCAP**: desing to check weak and vulnerable applications and configurations.
