@@ -337,7 +337,7 @@ Rootcheck
 ---------
 
 +--------------------------+----------------+-------------------------------------------------------------------------------+
-|    **rootcheck.sleep**   | Description    | Number of milliseconds to sleep after reading one PID or suspictious port.    |
+|    **rootcheck.sleep**   | Description    | Number of milliseconds to sleep after reading one PID or suspicious port.     |
 |                          |                |                                                                               |
 |                          |                | .. versionadded:: 2.1                                                         |
 +                          +----------------+-------------------------------------------------------------------------------+
