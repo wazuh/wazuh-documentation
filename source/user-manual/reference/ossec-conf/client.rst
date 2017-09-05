@@ -24,6 +24,7 @@ Options
 - `time-reconnect`_
 - `local_ip`_
 - `disable-active-response`_
+- `auto_restart`_
 
 server-ip
 ^^^^^^^^^^^^^
@@ -137,6 +138,17 @@ disable-active-response
 | **Allowed values** | The options accepted are **yes** and **no**    |
 +--------------------+------------------------------------------------+
 
+auto_restart
+^^^^^^^^^^^^
+
+This parameter enable or disable the agent restart when it receives a new valid configuration from the manager.
+
++--------------------+------------------------------------------------+
+| **Default value**  | **yes**                                        |
++--------------------+------------------------------------------------+
+| **Allowed values** | The options accepted are **yes** and **no**    |
++--------------------+------------------------------------------------+
+
 Example of configuration
 ------------------------
 
@@ -148,4 +160,5 @@ Example of configuration
       <protocol>tcp</protocol>
       <notify_time>300</notify_time>
       <time-reconnect>900</time-reconnect>
+      <auto_restart>yes</auto_restart>
     </client>

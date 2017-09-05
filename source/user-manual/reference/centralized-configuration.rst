@@ -216,9 +216,9 @@ Also, the API returns the md5sum of ``agent.conf`` in the field ``sharedSum``:
     }
 
 
-5. Restart the agent
+5. Manual update
 
-In order to apply the changes, you must restart the agent which may be completed remotely:
+If ``auto_restart`` has been disabled, you will need to manually restart it so that the new configuration is set. You can do this remotely:
 
 .. code-block:: console
 
