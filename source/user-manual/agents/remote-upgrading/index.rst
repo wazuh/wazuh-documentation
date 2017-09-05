@@ -12,7 +12,8 @@ Remote upgrading
 
         upgrading-agent
         custom-repository
-        custom-wpk
+        create-custom-wpk
+        install-custom-wpk
         wpk-list
 
 From version 3.0 agents have the ability to be upgraded remotely. The manager sends each agent a **WPK** (Wazuh signed package) file
