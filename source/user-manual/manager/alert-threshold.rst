@@ -3,7 +3,7 @@
 Defining an alert level threshold
 ==================================
 
-Every posible event on the Wazuh Agent is set with certain level, by defatult is 1, all events from this level will trigger and alert into Wazuh Manager.
+Every posible event on the Wazuh Agent is set with certain level, by default is 1, all events from this level will trigger and alert into Wazuh Manager.
 
 Configuration
 -------------
