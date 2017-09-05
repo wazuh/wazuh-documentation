@@ -61,7 +61,7 @@ More info at :ref:`Ossec control section <ossec-control>`
 Does Syscheck start when Wazuh start?
 -------------------------------------
 
-By defult syscheck scan when Wazuh start, but you can change this with the :ref:`scan_on_start option<reference_ossec_syscheck_scan_start>`
+By default syscheck scan when Wazuh start, but you can change this with the :ref:`scan_on_start option<reference_ossec_syscheck_scan_start>`
 
 Does Wazuh alert when a new file is created?
 --------------------------------------------
