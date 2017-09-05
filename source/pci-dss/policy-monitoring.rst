@@ -65,7 +65,7 @@ If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engin
     2016 Jan 29 13:07:18 manager->ossec-monitord ossec: Ossec started.
     2016 Jan 29 13:08:34 manager->rootcheck Starting rootcheck scan.
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 3: Root can log in {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 3 .
-    2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 4: No Public Key autentication {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 4 .
+    2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 4: No Public Key authentication {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 4 .
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 5: Password Authentication {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 5 .
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 6: Empty passwords allowed {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 6 .
     2016 Jan 29 13:08:36 manager->rootcheck System Audit: SSH Hardening - 7: Rhost or shost used for authentication {PCI_DSS: 2.2.4}. File: /etc/sshd/sshd_config. Reference: 7 .
