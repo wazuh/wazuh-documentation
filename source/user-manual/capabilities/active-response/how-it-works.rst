@@ -73,7 +73,7 @@ Wazuh is preconfigured with the following scripts:
 +--------------------------+---------------------------------------------------------------+
 | Script name              |                          Description                          |
 +==========================+===============================================================+
-| dissable-account.sh      | disables an account by setting ``passwd-l``                   |
+| disable-account.sh       | disables an account by setting ``passwd-l``                   |
 +--------------------------+---------------------------------------------------------------+
 | firewall-drop.sh         | adds an IP to the iptables deny list                          |
 +--------------------------+---------------------------------------------------------------+
