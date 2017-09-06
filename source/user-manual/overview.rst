@@ -10,7 +10,7 @@ This manual describes how to configure and use each one of Wazuh components: Waz
 Wazuh server
 ------------
 
-The Wazuh server is based on a suite of applications, every application/component is designed to acomplished certain task, but when they working together it could analyze the data receive from agents, triggering alerts when an event matches a rule, register new clients/agents, sending data to Elastick Stack server, all paired with a with a RESTful API.
+The Wazuh server is based on a suite of applications, every application/component is designed to accomplished certain task, but when they working together it could analyze the data receive from agents, triggering alerts when an event matches a rule, register new clients/agents, sending data to Elastic Stack server, all paired with a with a RESTful API.
 
 
 Components
@@ -54,4 +54,4 @@ Components
 
 - **Syscheck**: runs periodically to check if any configured file (or registry entry on Windows) has changed.
 
-+ **OpenSCAP**: desing to check weak and vulnerable applicactions and configurations.
++ **OpenSCAP**: designed to check weak and vulnerable applications and configurations.

@@ -188,7 +188,7 @@ Verify agents via SSL
       openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=192.168.1.3'
       openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-  2. Copy the CA (but not the key) to the manager's ``etc`` folder (if not already there) and start ``ossec-authd``. Note that we use the ``-s`` option in order to enable agent host veritication::
+  2. Copy the CA (but not the key) to the manager's ``etc`` folder (if not already there) and start ``ossec-authd``. Note that we use the ``-s`` option in order to enable agent host verification::
 
       # (Manager)
       cp rootCA.pem /var/ossec/etc

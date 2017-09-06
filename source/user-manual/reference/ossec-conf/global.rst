@@ -321,7 +321,7 @@ For example, this will listen for ZeroMQ subscribers on IP address 127.0.0.1:111
 
   <zeromq_uri>tcp://localhost:11111/</zeromq_uri>
 
-This will listen on port 21212 for ZeroMQ subscribers, binding to the IP address assiged to eth0.
+This will listen on port 21212 for ZeroMQ subscribers, binding to the IP address assigned to eth0.
 
 .. code-block:: xml
 

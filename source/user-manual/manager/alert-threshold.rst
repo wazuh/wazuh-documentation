@@ -3,12 +3,12 @@
 Defining an alert level threshold
 ==================================
 
-Every posible event on the Wazuh Agent is set with certain level, by defatult is 1, all events from this level will trigger and alert into Wazuh Manager.
+Every posible event on the Wazuh Agent is set with certain level, by default is 1, all events from this level will trigger and alert into Wazuh Manager.
 
 Configuration
 -------------
 
-All configuracion of Remote Service is done via ``ossec.conf`` using ``<alerts>`` XML tag, all the available options are detailed in :ref:`Alerts reference <reference_ossec_alerts>`
+All configuration of Remote Service is done via ``ossec.conf`` using ``<alerts>`` XML tag, all the available options are detailed in :ref:`Alerts reference <reference_ossec_alerts>`
 
 ::
 

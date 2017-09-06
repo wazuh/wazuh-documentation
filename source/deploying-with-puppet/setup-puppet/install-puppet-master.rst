@@ -20,7 +20,7 @@ Install ``curl``, ``apt-transport-https`` and ``lsb-release``::
 	$ sudo apt-get update
 	$ sudo apt-get install curl apt-transport-https lsb-release
 
-Get the adecuate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution, you can use next script to make installation more silently::
+Get the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution, you can use next script to make installation more silently::
 
   $ wget "https://apt.puppetlabs.com/puppetlabs-release-pc1-$(lsb_release -cs).deb"
   $ sudo dpkg -i "puppetlabs-release-pc1-$(lsb_release -cs).deb"

@@ -1,4 +1,4 @@
-.. _agent-conection:
+.. _agent-connection:
 
 Checking connection with Manager
 ================================
