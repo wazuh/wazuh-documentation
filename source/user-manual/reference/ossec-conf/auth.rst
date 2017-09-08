@@ -32,6 +32,7 @@ Options
 - `ssl_manager_key`_
 - `ssl_auto_negotiate`_
 - `ciphers`_
+- `register_limit`_
 
 disabled
 ^^^^^^^^
@@ -196,6 +197,20 @@ Set the list of ciphers for the network communication using SSL.
 +--------------------+----------------------------------------------------+
 
 The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
+
+.. versionadded:: 3.0
+
+register_limit
+^^^^^^^^^^^^^^^^^^^
+
+When disabled, the maximum limit of agents that can be added is ignored.
+
++--------------------+---------------------+
+| **Default value**  | yes                 |
++--------------------+---------------------+
+| **Allowed values** | - yes               |
+|                    | - no                |
++--------------------+---------------------+
 
 .. versionadded:: 3.0
 

@@ -64,5 +64,8 @@ The ossec-authd program will automatically add an agent to a Wazuh manager and p
 +                  +-------------+-----------------------------------------------------------------------------------------+
 |                  | **Default** | TLS v1.2 only (if supported by the server).                                             |
 +------------------+-------------+-----------------------------------------------------------------------------------------+
+| **-l**           | Disables the agents registration limit                                                                |
++------------------+-------------+-----------------------------------------------------------------------------------------+
+
 
 .. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.0/apps/ciphers.html
