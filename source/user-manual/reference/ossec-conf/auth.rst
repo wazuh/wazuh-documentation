@@ -32,7 +32,7 @@ Options
 - `ssl_manager_key`_
 - `ssl_auto_negotiate`_
 - `ciphers`_
-- `register_limit`_
+- `limit_maxagents`_
 
 disabled
 ^^^^^^^^
@@ -200,7 +200,7 @@ The format of this parameter is described in `SSL ciphers <https://www.openssl.o
 
 .. versionadded:: 3.0
 
-register_limit
+limit_maxagents
 ^^^^^^^^^^^^^^^^^^^
 
 When disabled, the maximum limit of agents that can be added is ignored.
@@ -227,6 +227,7 @@ Default configuration
       <force_time>0</force_time>
       <purge>no</purge>
       <use_password>no</use_password>
+      <limit_maxagents>yes</limit_maxagents>
       <ciphers>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ciphers>
       <!-- <ssl_agent_ca></ssl_agent_ca> -->
       <ssl_verify_host>no</ssl_verify_host>
