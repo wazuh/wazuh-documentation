@@ -10,7 +10,7 @@ Ansible born with the idea to be an agentless automation platform. Ansible relay
 Using passwords
 -------------------
 
-Ansible does most of the work via SSH, SSH share their authentication mechanisms with Ansible, so in order to stablish a connection with remote hosts a user/password must be supplied that Ansible can use, next we describe some useful options that you can use for SSH authentication:
+Ansible does most of the work via SSH, SSH share their authentication mechanisms with Ansible, so in order to establish a connection with remote hosts a user/password must be supplied that Ansible can use, next we describe some useful options that you can use for SSH authentication:
 
 .. code-block:: bash
 
@@ -27,10 +27,15 @@ You can use the above args like the following:
 
 This will set the connection user as ``foo``, also will ask for the connection user password and privileged user password.
 
-Using SSH keypairing
---------------------
+Windows authentication
+----------------------
 
-You can setup a SSH keypairing to provide a silent auth mechanism, first create a OpenSSH keypair:
+Windows hosts use a different mechanism than SSH to perform authentication, please refer to `Authentication Options <http://docs.ansible.com/ansible/latest/intro_windows.html#authentication-options>`_ in order to setup the adequate option.
+
+Using SSH key-pairing
+----------------------
+
+You can setup a SSH key-pairing to provide a silent auth mechanism, first create a OpenSSH key-pair:
 
 .. code-block:: bash
 
@@ -50,7 +55,7 @@ Installing public key
 
 After creating Control machine key, you need install public key into every remote hosts, copy the content of ``.ssh/id_rsa.pub`` of Control machine to ``.ssh/authorized_keys`` on your host, be aware of the user you using to store ``authorized_keys``, this will be the user you use for any action via Ansible.
 
-Set the correct permisions:
+Set the correct permissions:
 
 .. code-block:: bash
 
@@ -83,7 +88,7 @@ Also, you can group hosts, this could be useful to execute tasks and roles to se
 Test connection
 -----------------
 
-This will attemp a connection with the remote hosts using ``ping`` module.
+This will attempt a connection with the remote hosts using ``ping`` module.
 
 .. code-block:: bash
 

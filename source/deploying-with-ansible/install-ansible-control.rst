@@ -6,7 +6,15 @@ Install Ansible
 OpenSSH Compatibility
 ------------------------------
 
-Ansible 1.3 and later use native OpenSSH for remote communication and also use ControlPersist a feature available from OpenSSH v5.6. This will increase performance by speeding up SSH Session Creation what is useful for Ansible. Otherwise, you will need to consider the setup `Accelerated Mode <http://docs.ansible.com/ansible/playbooks_acceleration.html>`_ on Ansible.
+Ansible version 1.3 and later use native OpenSSH for remote communication and also use ControlPersist a feature available from OpenSSH v5.6. This will increase performance by speeding up SSH Session Creation what is useful for Ansible. Otherwise, you will need to consider the setup `Accelerated Mode <http://docs.ansible.com/ansible/playbooks_acceleration.html>`_ on Ansible.
+
+Windows hosts
+------------------
+
+Windows hosts support is included in Ansible from version 1.7, this is done via the remote execution of PowerShell. Is necessary to make prior tasks before using Ansible in Windows hosts, please refer to `Windows Support <http://docs.ansible.com/ansible/latest/intro_windows.html#windows-support>`_ on Ansible official documentation. Consider the following minimal requirements:
+
+* `Pywinrm <https://pypi.python.org/pypi/pywinrm>`_ version 0.2.2 or later is required in Ansible control machine.
+* PowerShell 3.0 or later must be present to run Ansible modules on Windows hosts.
 
 Installation on CentOS/RHEL/Fedora
 ------------------------------------
