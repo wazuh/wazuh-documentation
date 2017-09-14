@@ -3,6 +3,8 @@
 Variables references
 --------------------
 
+.. _wazuh_ansible_reference_elasticsearch:
+
 Elasticseach
 ===================
 
@@ -46,6 +48,8 @@ elasticsearch_replicas
 
   *Default 1*
 
+.. _wazuh_ansible_reference_kibana:
+
 Kibana
 =========
 
@@ -73,6 +77,8 @@ elastic_stack_version
   Version of Kibana to install
 
   *Default 5.5.2*
+
+.. _wazuh_ansible_reference_logstash:
 
 Logstash
 ===================
@@ -131,6 +137,8 @@ logstash_ssl_key_file
   SSL key file to be copied from Ansible server to logstash server.
 
   *Default null*
+
+.. _wazuh_ansible_reference_filebeat:
 
 Filebeat
 ===================
@@ -221,6 +229,8 @@ filebeat_ssl_insecure:
   Verify validity of the server certificate hostname.
 
   *Default false*
+
+.. _wazuh_ansible_reference_manager:
 
 Wazuh Manager
 ===================
@@ -442,6 +452,22 @@ wazuh_agent_configs:
           - format: 'System'
             location: 'eventlog'
 
+cdb_lists:
+  Configure CDB lists used by the Wazuh Manager (located at ``ansible-wazuh-manager/vars/cdb_lists.yml``).
+
+  *Example:*
+
+  .. code-block:: yaml
+
+    cdb_lists:
+    - name: 'audit-keys'
+      content: |
+        audit-wazuh-w:write
+        audit-wazuh-r:read
+        audit-wazuh-a:attribute
+        audit-wazuh-x:execute
+        audit-wazuh-c:command
+
 .. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect Wazuh, agentless and authd credentials.
 
 agentless_creeds:
@@ -482,6 +508,8 @@ authd_pass:
   .. code-block:: yaml
 
     authd_pass: foobar
+
+.. _wazuh_ansible_reference_agent:
 
 Wazuh Agent
 ===================
@@ -595,3 +623,14 @@ wazuh_agent_config:
       - format: 'full_command'
         command: 'last -n 20'
         frequency: '360'
+
+  .. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect authd credentials.
+
+  authd_pass:
+    Wazuh authd credentials for agent registration.
+
+    *Example:*
+
+    .. code-block:: yaml
+
+      authd_pass: foobar
