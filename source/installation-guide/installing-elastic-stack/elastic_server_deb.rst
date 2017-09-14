@@ -3,10 +3,6 @@
 Install Elastic Stack with Debian packages
 ===========================================
 
-.. warning::
-
-    Currently Wazuh is compatible with version 5.5.2 of Elastic Stack.
-
 The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
@@ -55,7 +51,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: bash
 
-    $ apt-get install elasticsearch=5.5.2
+    $ apt-get install elasticsearch
 
 2. Enable and start the Elasticsearch service:
 
@@ -99,7 +95,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-    $ apt-get install logstash=1:5.5.2-1
+    $ apt-get install logstash
 
 2. Download the Wazuh config and template files for Logstash:
 
@@ -149,7 +145,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: bash
 
-   $ apt-get install kibana=5.5.2
+   $ apt-get install kibana
 
 2. Install the Wazuh App plugin for Kibana:
 

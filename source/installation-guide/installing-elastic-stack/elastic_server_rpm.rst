@@ -3,10 +3,6 @@
 Install Elastic Stack with RPM packages
 =======================================
 
-.. warning::
-
-    Currently Wazuh is compatible with version 5.5.2 of Elastic Stack.
-
 The RPM packages are suitable for installation on Red Hat, CentOS and other RPM-based systems.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
@@ -63,7 +59,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: bash
 
-	 $ yum install elasticsearch-5.5.2-1
+	 $ yum install elasticsearch
 
 2. Enable and start the Elasticsearch service:
 
@@ -107,7 +103,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-    $ yum install logstash-5.5.2-1
+    $ yum install logstash
 
 2. Download the Wazuh config and template files for Logstash:
 
@@ -126,7 +122,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
       $ usermod -a -G ossec logstash
 
-.. note::
+.. note::      
 
     Follow the next steps if you use CentOS-6/RHEL-6 or Amazon AMI (logstash uses Upstart like service manager and need to be fixed, see `bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_) ::
 
@@ -166,7 +162,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: bash
 
-	 $ yum install kibana-5.5.2-1
+	 $ yum install kibana
 
 2. Install the Wazuh App plugin for Kibana:
 
