@@ -3,12 +3,14 @@
 Roles
 ======
 
-You can use this roles to deploy Elastic Stack components, Wazuh API, Wazuh Manager and Agents, first clone our `GitHub repository <https://github.com/wazuh/wazuh-ansible>`_ directly to your ansible roles folder: ::
+You can use these roles to deploy Elastic Stack components, Wazuh API, Wazuh Manager and Wazuh Agents, first clone our `GitHub repository <https://github.com/wazuh/wazuh-ansible>`_ directly to your Ansible roles folder:
 
-  $ cd /etc/ansible/roles
-  $ git clone https://github.com/wazuh/wazuh-ansible.git .
+  .. code-block:: yaml
 
-Next we explain briefly how use this roles, please checkout `Ansible Playbooks <http://docs.ansible.com/ansible/playbooks.html>`_ for more information.
+    $ cd /etc/ansible/roles
+    $ git clone https://github.com/wazuh/wazuh-ansible.git .
+
+Following, we explain briefly how to use these roles, please check out `Ansible Playbooks <http://docs.ansible.com/ansible/playbooks.html>`_ for more information.
 
 .. topic:: Contents
 

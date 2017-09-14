@@ -5,9 +5,10 @@ Logstash
 
 This role will install and configure Logstash with Wazuh template on the hosts you selected, you can customize the installation with this vars:
 
-- **elasticsearch_network_host:** define elasticsearch node ip address (default: ``127.0.0.1``).
-- **elasticsearch_http_port:** define elasticsearch node port (default: ``9200``).
-- **elastic_stack_version**: define kibana version to be installed.
+- **elasticsearch_network_host:** define Elasticsearch node ip address (default: ``127.0.0.1``).
+- **elasticsearch_http_port:** define Elasticsearch node port (default: ``9200``).
+- **elastic_stack_version**: define Logstash version to be installed.
+- **logstash_input_beats**: define the use of File input or Filebeat input. (defauls: ``false``)
 
 Create a YAML file ``wazuh-logstash.yml`` to be used be Ansible playbook:
 
@@ -24,12 +25,14 @@ a. For production enviroment ``vars-production.yml``:
 .. code-block:: yaml
 
     elasticsearch_network_host: '10.1.1.10'
+    logstash_input_beats: true
 
 b. For development enviroment ``vars-development.yml``:
 
 .. code-block:: yaml
 
-    elasticsearch_network_host: '192.168.0.10'
+    elasticsearch_network_host: '127.0.0.1'
+    logstash_input_beats: false
 
 Next, run the ansible playbook:
 
@@ -37,4 +40,6 @@ Next, run the ansible playbook:
 
   ansible-playbook wazuh-logstash.yml -e@vars-production.yml
 
-The example above will install Logstash and configure to use ``10.1.1.10`` as Elasticsearch node.
+The example above will install Logstash and configure to use ``10.1.1.10`` as Elasticsearch node enabling the Filebeat input.
+
+Please review the :ref:`references <wazuh_ansible_reference_logstash>` section to see all variables available for this role.
