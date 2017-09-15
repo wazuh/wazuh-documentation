@@ -97,14 +97,19 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
     $ apt-get install logstash
 
-2. Download the Wazuh config and template files for Logstash:
+2. Download the Wazuh config for Logstash:
 
   .. code-block:: bash
 
   	$ curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/logstash/01-wazuh.conf
+
+3. Download the Wazuh Logstash template:
+
+  .. code-block:: bash
+
   	$ curl -so /etc/logstash/wazuh-elastic5-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/elasticsearch/wazuh-elastic5-template.json
 
-3. **Follow this step only if you are using a single-host architecture**:
+4. **Follow this step only if you are using a single-host architecture**:
 
   a) Edit ``/etc/logstash/conf.d/01-wazuh.conf``, commenting out the entire input section titled "Remote Wazuh Manager - Filebeat input" and uncommenting the entire input section titled "Local Wazuh Manager - JSON file input".  This will set up Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than expecting Filebeat on a separate server to forward the information in that file to Logstash.
 
@@ -115,7 +120,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
     $ usermod -a -G ossec logstash
 
 
-4. Enable and start the Logstash service:
+5. Enable and start the Logstash service:
 
   a) For Systemd:
 
