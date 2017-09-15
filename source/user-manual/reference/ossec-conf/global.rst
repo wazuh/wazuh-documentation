@@ -250,7 +250,7 @@ jsonout_output
 This enables/disables writing of JSON-formated alerts to /var/ossec/logs/alerts/alerts.json.  This will include the same events that would be sent to alerts.log, but in JSON format.
 
 +--------------------+--------------------------------------------+
-| **Default value**  | yes                                        |
+| **Default value**  | no                                         |
 +--------------------+--------------------------------------------+
 | **Allowed values** | The options allowed are **yes** or **no**. |
 +--------------------+--------------------------------------------+
