@@ -82,7 +82,13 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 7. Press `Q` and `Enter` to exit from `manage_agents`.
 
-8. Restart the agent::
+8. Edit the wazuh-agent configuration in ``/var/ossec/etc/ossec.conf`` to add the wazuh-manager IP address. In ``<client>`` section change the ``MANAGE_IP`` value to the wazuh-manager address::
+
+         <client> 
+               <server-ip>MANAGE_IP</server-ip> 
+         </client>
+
+9. Restart the agent::
 
 	/var/ossec/bin/ossec-control restart
 
