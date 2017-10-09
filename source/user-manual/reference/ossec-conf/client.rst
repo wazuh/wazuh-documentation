@@ -12,48 +12,36 @@ client
 
 Configure the connection parameters related to connecting to the manager.
 
-Options
--------
+Subsections
+-----------
 
-- `server-ip`_
-- `server-hostname`_
+- `server`_
+
+server
+^^^^^^^^
+
+Configure the connection parameters for each server connected to an agent.
+
+Server subsection options
+-------------------------
+
+- `address`_
 - `port`_
 - `protocol`_
-- `config-profile`_
-- `notify_time`_
-- `time-reconnect`_
-- `local_ip`_
-- `disable-active-response`_
-- `auto_restart`_
 
-server-ip
-^^^^^^^^^^^^^
+address
+^^^^^^^^
 
-Specify the IP address of the Wazuh manager.
+Specify the IP address or the hostname of the Wazuh manager.
 
-+--------------------+----------------------------------+
-| **Default value**  | n/a                              |
-+--------------------+----------------------------------+
-| **Allowed values** | Any valid IP address is allowed. |
-+--------------------+----------------------------------+
-
-
-server-hostname
-^^^^^^^^^^^^^^^
-
-Specify the hostname of the Wazuh manager.
-
-+--------------------+-------------------------------------+
-| **Default value**  | n/a                                 |
-+--------------------+-------------------------------------+
-| **Allowed values** | Any resolvable hostname is allowed. |
-+--------------------+-------------------------------------+
-
-.. warning::
-		This parameter is incompatible with `server-ip`_.
++--------------------+-------------------------------------------------------------+
+| **Default value**  | n/a                                                         |
++--------------------+-------------------------------------------------------------+
+| **Allowed values** | Any valid IP address or any resolvable hostname is allowed. |
++--------------------+-------------------------------------------------------------+
 
 port
-^^^^
+^^^^^^
 
 Specify the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
 
@@ -73,6 +61,17 @@ Specifies the protocol to use when connecting to manager.
 +--------------------+----------+
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
+
+Options
+-------
+
+- `config-profile`_
+- `notify_time`_
+- `time-reconnect`_
+- `local_ip`_
+- `disable-active-response`_
+- `auto_restart`_
+
 
 config-profile
 ^^^^^^^^^^^^^^
@@ -155,7 +154,15 @@ Example of configuration
 .. code-block:: xml
 
     <client>
-      <server-ip>192.168.1.100</server-ip>
+      <server>
+        <address>192.168.1.100</address>
+        <port>1514</port>
+        <protocol>tcp</protocol>
+      </server>
+      <server>
+        <address>example.hostname</address>
+        <protocol>udp</protocol>
+      </server>
       <config-profile>webserver, debian8</config-profile>
       <protocol>tcp</protocol>
       <notify_time>300</notify_time>
