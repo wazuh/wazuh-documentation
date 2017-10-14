@@ -20,14 +20,16 @@ Subsections
 server
 ^^^^^^^^
 
+.. versionadded:: 3.0
+
 Configure the connection parameters for each server connected to an agent.
 
 Server subsection options
 -------------------------
 
 - `address`_
-- `port`_
-- `protocol`_
+- :ref:`port <server_port>`
+- :ref:`protocol <server_protocol>`
 
 address
 ^^^^^^^^
@@ -40,6 +42,8 @@ Specify the IP address or the hostname of the Wazuh manager.
 | **Allowed values** | Any valid IP address or any resolvable hostname is allowed. |
 +--------------------+-------------------------------------------------------------+
 
+.. _server_port:
+
 port
 ^^^^^^
 
@@ -50,6 +54,8 @@ Specify the port on the manager to send events to.  This must match the associat
 +--------------------+---------------------------------------------+
 | **Allowed values** | Any port number from 1 to 65535 is allowed. |
 +--------------------+---------------------------------------------+
+
+.. _server_protocol:
 
 protocol
 ^^^^^^^^^^^
@@ -65,6 +71,10 @@ Specifies the protocol to use when connecting to manager.
 Options
 -------
 
+- :ref:`server-ip <legacy_server-ip>`
+- :ref:`server-hostname <legacy_server-hostname>`
+- :ref:`port <legacy_port>`
+- :ref:`protocol <legacy_protocol>`
 - `config-profile`_
 - `notify_time`_
 - `time-reconnect`_
@@ -72,6 +82,69 @@ Options
 - `disable-active-response`_
 - `auto_restart`_
 
+.. _legacy_server-hostname:
+
+server-ip
+^^^^^^^^^^^^^
+
+.. deprecated:: 3.0
+
+Specify the IP address of the Wazuh manager.
+
++--------------------+----------------------------------+
+| **Default value**  | n/a                              |
++--------------------+----------------------------------+
+| **Allowed values** | Any valid IP address is allowed. |
++--------------------+----------------------------------+
+
+
+.. _legacy_server-ip:
+
+server-hostname
+^^^^^^^^^^^^^^^
+
+.. deprecated:: 3.0
+
+Specify the hostname of the Wazuh manager.
+
++--------------------+-------------------------------------+
+| **Default value**  | n/a                                 |
++--------------------+-------------------------------------+
+| **Allowed values** | Any resolvable hostname is allowed. |
++--------------------+-------------------------------------+
+
+.. warning::
+		This parameter is incompatible with `server-ip`_.
+
+.. _legacy_port:
+
+port
+^^^^
+
+.. deprecated:: 3.0
+
+Specify the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
+
++--------------------+---------------------------------------------+
+| **Default value**  | 1514                                        |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any port number from 1 to 65535 is allowed. |
++--------------------+---------------------------------------------+
+
+.. _legacy_protocol:
+
+protocol
+^^^^^^^^^^^
+
+.. deprecated:: 3.0
+
+Specifies the protocol to use when connecting to manager.
+
++--------------------+----------+
+| **Default value**  | udp      |
++--------------------+----------+
+| **Allowed values** | udp, tcp |
++--------------------+----------+
 
 config-profile
 ^^^^^^^^^^^^^^
