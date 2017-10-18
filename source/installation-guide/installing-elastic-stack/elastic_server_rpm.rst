@@ -18,7 +18,7 @@ Preparation
 
   .. code-block:: bash
 
-      $ curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u144-b01/090f390dda5b47b9b721c7dfaa008135/jre-8u144-linux-x64.rpm"
+      $ curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jre-8u151-linux-x64.rpm"
 
   Now check if the package was download successfully:
 
@@ -127,7 +127,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
       $ usermod -a -G ossec logstash
 
-.. note::      
+.. note::
 
     Follow the next steps if you use CentOS-6/RHEL-6 or Amazon AMI (logstash uses Upstart like service manager and need to be fixed, see `bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_) ::
 
