@@ -431,17 +431,7 @@ Rootcheck
 Wazuh_database
 --------------
 
-The Wazuh core uses list-based databases to store information related to agent keys and FIM / Rootcheck event data. Such information is highly optimized to be handled by the core.
-
-In order to provide well-structured data that could be accessed by the user or the Wazuh API, new **SQLite-based databases** have been introduced in the Wazuh manager. The Database Synchronization Module is a **user-transparent component** that collects the following information from the core:
-
-- Agent's name, address, encryption key, last connection time, operating system, agent version and shared configuration hash.
-- FIM data: creation, modification and deletion of regular files and Windows registry entries.
-- Rootcheck detected defects: issue message, first detection date and last alert time.
-- Static core settings, such as maximum permitted agents or SSL being enabled for Authd.
-
-.. note::
-    The Wazuh Database Synchronization Module starts automatically on the server and local profiles and requires no configuration, however, some optional settings are available.
+The Wazuh Database Synchronization Module starts automatically on the server and local profiles and requires no configuration. However, some optional settings are available.
 
 The module uses *inotify* from Linux to monitor changes to every log file in real-time. Databases will be updated as soon as possible when a change is detected. **If inotify is not supported**, (for example, on operating systems other than Linux) every log file will be scanned continuously, looking for changes, with a default delay of one minute between scans.
 
