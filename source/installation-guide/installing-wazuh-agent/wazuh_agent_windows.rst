@@ -30,7 +30,7 @@ Using the command line
 
 Run the installer on a command line (the ``/q`` argument is used for unattended installations)::
 
-    wazuh-agent-2.1.1-1.msi /q
+    wazuh-agent-3.0-1.msi /q
 
 You can automate the agent registration with authd using the following parameters:
 
@@ -39,9 +39,7 @@ You can automate the agent registration with authd using the following parameter
 +=======================+=============================================================================================+
 |   APPLICATIONFOLDER   |  Installation path. Default C:\Program Files (x86)\ossec-agent\.                            |
 +-----------------------+---------------------------------------------------------------------------------------------+
-|   SERVER_IP           |  Manager IP address. Optionally accepts a list of IPs separated by commas.                  |
-+-----------------------+---------------------------------------------------------------------------------------------+
-|   SERVER_HOSTNAME     |  Hostname from the manager. Optionally accepts a list of hostnames separated by commas.     |
+|   ADDRESS             |  Manager IP address. Optionally accepts a list of IPs separated by commas.                  |
 +-----------------------+---------------------------------------------------------------------------------------------+
 |   SERVER_PORT         |  Manager connection port.                                                                   |
 +-----------------------+---------------------------------------------------------------------------------------------+
@@ -66,4 +64,4 @@ You can automate the agent registration with authd using the following parameter
 
 Usage example::
 
-    wazuh-agent-2.1.1-1.msi /q SERVER_IP="192.168.1.1" AUTHD_SERVER="192.168.1.1" PASSWORD="TopSecret" AGENT_NAME="W2012"
+    wazuh-agent-3.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" PASSWORD="TopSecret" AGENT_NAME="W2012"
