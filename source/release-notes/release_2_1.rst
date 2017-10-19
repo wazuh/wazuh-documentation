@@ -1,9 +1,9 @@
-.. _release_2_1_0:
+.. _release_2_1:
 
-2.1.0 Release Notes
+2.1 Release Notes
 ===================
 
-This section shows the most relevant new features of Wazuh v2.1.0. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/2.1/CHANGELOG.md>`_ file.
+This section shows the most relevant new features of Wazuh v2.1. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/2.1/CHANGELOG.md>`_ file.
 
 **New features:**
 
@@ -32,7 +32,7 @@ For more details about this new feature see our :doc:`Labels section <../user-ma
 Improved Authd performance
 --------------------------
 
-The Authd program has been improved in this version. Before Wazuh 2.1.0, the Wazuh API and the ``manage_agents`` tools could not register an agent while ``ossec-authd`` was running.
+The Authd program has been improved in this version. Before Wazuh 2.1, the Wazuh API and the ``manage_agents`` tools could not register an agent while ``ossec-authd`` was running.
 Now agent registration is simultaneously supported via all of these methods.
 
 Additionally, since this new version of :doc:`ossec-authd <../user-manual/reference/daemons/ossec-authd>` runs in the background, it can be enabled using the command ``ossec-control enable auth``. Its options
@@ -45,7 +45,7 @@ New features for internal logs
 
 It is widely known that JSON is one of the most popular logging formats.  Because of this, it is now possible to have internal logs written in JSON format, plain text, of both.  This can be configured in the :doc:`logging section <../user-manual/reference/ossec-conf/logging>` of ``ossec.conf``.
 
-In addition, internal logs are rotated and compressed daily, simplifying their management.  To control disk space use, there is also a configurable threshold for how long to retain rotated logs before automatic deletion. 
+In addition, internal logs are rotated and compressed daily, simplifying their management.  To control disk space use, there is also a configurable threshold for how long to retain rotated logs before automatic deletion.
 These parameters are configured in the ``monitord`` section of :doc:`Internal configuration <../user-manual/reference/internal-options>`.
 
 Updated external libraries
