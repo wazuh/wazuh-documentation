@@ -4,7 +4,7 @@
 ossec-monitord
 ==============
 
-The ossec-monitord program monitors agent connectivity and compresses daily log files.
+The ossec-monitord program monitors agent connectivity. In addition, it rotates and compresses internal logs daily, or when they reach a certain configurable size.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config>, as the configuration file.                                                  |

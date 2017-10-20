@@ -131,12 +131,16 @@ For example, the following configuration will only process events with an ID of 
 label
 ^^^^^
 
+  .. versionadded:: 3.0
+
 This option allows to append custom extra data into JSON event. It is available when `log_format`_ is ``json``.
 
 It has the format ``key:value``, which means that it is necessary to include the atribute ``key`` to work properly.
 Thinking in the JSON alerts, it is possible to nest labels by splitting this atribute with dots.
 
-**Example:**
+**Usage example:**
+
+For example, this option could be used to distinguish the source of each log when monitoring several files simultaneously. This is done as shown below.
 
 .. code-block:: xml
 
@@ -204,6 +208,8 @@ This is the format of the log being read.
 |                    |                | This option allows to insert custom extra strings into the JSON event.               |
 |                    |                |                                                                                      |
 |                    |                | See also the tag `label`_.                                                           |
+|                    |                |                                                                                      |
+|                    |                | .. versionadded:: 3.0                                                                |
 +                    +----------------+--------------------------------------------------------------------------------------+
 |                    | snort-full     | This is used for Snort’s full-output format.                                         |
 +                    +----------------+--------------------------------------------------------------------------------------+

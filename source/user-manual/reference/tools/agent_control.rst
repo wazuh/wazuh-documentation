@@ -6,6 +6,16 @@ agent_control
 
 The agent_control program allows you to query the manager for information about any agent and also allows you to initiate a syscheck/rootcheck scan on an agent the next time it checks in.
 
+With this tool you can check the status of each available agent, which can be any of the following:
+
+- Active: The agent is correctly connected to the manager.
+- Pending: The agent is waiting for a response from the manager.
+- Disconnected: The agent is not connected to the manager.
+- Never connected: The agent has never connected to the manager.
+
+agent_control options
+---------------------
+
 +-------------------+---------------------------------------------------------+
 | **-h**            | Display the help message                                |
 +-------------------+---------------------------------------------------------+

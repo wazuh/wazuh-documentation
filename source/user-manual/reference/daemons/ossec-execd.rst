@@ -4,7 +4,7 @@
 ossec-execd
 =============
 
-The ossec-execd program runs active responses by initiating the configured scripts.
+The ossec-execd program runs active responses by initiating the configured scripts. It also handles the socket needed to perform remote upgrades in the agents. 
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config>, as the configuration file.                                                  |

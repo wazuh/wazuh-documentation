@@ -31,8 +31,6 @@ Options
 - `host_information`_
 - `jsonout_output`_
 - `prelude_output`_
-- `picviz_output`_
-- `picviz_socket`_
 - `zeromq_output`_
 - `zeromq_uri`_
 - `geoip_db_path`_
@@ -266,30 +264,6 @@ Enables or disables Prelude output.
 +--------------------+--------------------------------------------+
 | **Allowed values** | The options allowed are **yes** or **no**. |
 +--------------------+--------------------------------------------+
-
-
-picviz_output
-^^^^^^^^^^^^^^^^^^
-
-Enable PicViz output.
-
-+--------------------+-----+
-| **Default value**  | n/a |
-+--------------------+-----+
-| **Allowed values** | yes |
-+--------------------+-----+
-
-
-picviz_socket
-^^^^^^^^^^^^^^^^^^
-
-This is the full path of the socket that Wazuh will write alerts/events to for PicViz to read.
-
-+--------------------+---------------------------------------------------------+
-| **Default value**  | n/a                                                     |
-+--------------------+---------------------------------------------------------+
-| **Allowed values** | file and path that Wazuh will create and feed events to |
-+--------------------+---------------------------------------------------------+
 
 
 zeromq_output

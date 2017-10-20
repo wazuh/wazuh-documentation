@@ -82,7 +82,7 @@ Options
 - `disable-active-response`_
 - `auto_restart`_
 
-.. _legacy_server-hostname:
+.. _legacy_server-ip:
 
 server-ip
 ^^^^^^^^^^^^^
@@ -98,7 +98,7 @@ Specify the IP address of the Wazuh manager.
 +--------------------+----------------------------------+
 
 
-.. _legacy_server-ip:
+.. _legacy_server-hostname:
 
 server-hostname
 ^^^^^^^^^^^^^^^
@@ -114,7 +114,7 @@ Specify the hostname of the Wazuh manager.
 +--------------------+-------------------------------------+
 
 .. warning::
-		This parameter is incompatible with `server-ip`_.
+		This parameter is incompatible with `server-ip`_. Since version 3.0, these fields have been merged into a single field called `address` that accepts both formats.
 
 .. _legacy_port:
 
@@ -237,7 +237,6 @@ Example of configuration
         <protocol>udp</protocol>
       </server>
       <config-profile>webserver, debian8</config-profile>
-      <protocol>tcp</protocol>
       <notify_time>300</notify_time>
       <time-reconnect>900</time-reconnect>
       <auto_restart>yes</auto_restart>

@@ -9,8 +9,10 @@ First you need to be sure that the Agent is poiting to Manager Address this is s
 
   <ossec_config>
     <client>
-      <server-ip>10.0.0.10</server-ip>
-      <protocol>udp</protocol>
+      <server>
+        <address>10.0.0.10</address>
+        <protocol>udp</protocol>
+      </server>
     </client>
   </ossec_config>
 
@@ -41,3 +43,5 @@ This will display every registered Agent, also you can check if a Agent is corre
   $ netstat -vatunp|grep ossec-agentd
 
 This could match with the Agent and Manager ip addresses.
+
+In the :doc:`agent_control section <../reference/tools/agent_control>` it can be found information about the different states in which agents registered in a manager are.

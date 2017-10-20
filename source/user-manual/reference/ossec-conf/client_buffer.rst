@@ -17,6 +17,7 @@ Options
 
 - `disable`_
 - `queue_size`_
+- :ref:`length <legacy_length>`
 - `events_per_second`_
 
 disable
@@ -44,6 +45,25 @@ The capacity of Agent Buffer in number of events.
 +--------------------+----------------------------------+
 | **Allowed values** | Any number between 1 and 100000. |
 +--------------------+----------------------------------+
+
+.. _legacy_length:
+
+length
+^^^^^^^
+
+.. deprecated:: 3.0
+
+The capacity of Agent Buffer in number of events.
+
++--------------------+----------------------------------+
+| **Default value**  | 5000                             |
++--------------------+----------------------------------+
+| **Allowed values** | Any number between 1 and 100000. |
++--------------------+----------------------------------+
+
+.. warning::
+
+    Even if this field is accepted, it is recommended to replace it with `queue_size`_.
 
 events_per_second
 ^^^^^^^^^^^^^^^^^
