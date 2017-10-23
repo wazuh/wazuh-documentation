@@ -61,7 +61,7 @@ In the ``<client_buffer>`` section of :doc:`Local configuration <../reference/os
 
 - Disable buffer: This parameter disables the use of the leaky bucket, resulting in no restriction on the rate of events transmitted by the agent to the manger.  This is how previous versions of the agent worked.
 
-- Buffer length: The buffer length is the maximum number of events that can be held in the leaky bucket at one time.  It should be configured according to the expected rate at which an agent may generate events. This value is set to 5000 events by default, which is a generous buffer size for most environments.
+- Queue size: The queue size is the maximum number of events that can be held in the leaky bucket at one time.  It should be configured according to the expected rate at which an agent may generate events. This value is set to 5000 events by default, which is a generous buffer size for most environments.
 
 - Events per second: This is the maximum rate at which events will be pulled from the agent's buffer and transmitted to its manager. The default is a generous 500 EPS, but this should be set taking into account the capacity of the network and the number of agents that a manager is serving.
 
@@ -98,8 +98,9 @@ Once it has reached the ``warning level``, an alert like this one is triggered o
 
   ** Alert 1501604235.59814: - wazuh,agent_flooding,
   2017 Aug 01 18:17:15 (fedora) any->ossec-agent
-  Rule: 521 (level 7) -> 'Agent buffer is close to an overflow state.'
+  Rule: 202 (level 7) -> 'Agent buffer queue is 90% full.'
   wazuh: Agent buffer: '90%'.
+  level: 90%
 
 Despite this alert, **no events have been dropped** because there is still **free space** in the buffer.
 
@@ -112,8 +113,9 @@ When the buffer continues receiving events faster than they are removed, it will
 
   ** Alert 1501604236.60027: - wazuh,agent_flooding,
   2017 Aug 01 18:17:16 (fedora) any->ossec-agent
-  Rule: 522 (level 9) -> 'Agent buffer is full. Events may be lost.'
+  Rule: 203 (level 9) -> 'Agent event queue is full. Events may be lost.'
   wazuh: Agent buffer: 'full'.
+  level: full
 
 
 It is important to understand that when the buffer is full, all newly arriving events **will be dropped** until free space opens up in the buffer again. For example, if in one second, 1000 events arrive to a full buffer with a throughput limit of 500 EPS, 500 of these events will be stored and the other 500 **will be dropped**.
@@ -139,8 +141,9 @@ As already mentioned, a severe alert is triggered when ``tolerance time`` has el
 
   ** Alert 1501604250.60248: mail  - wazuh,agent_flooding,
   2017 Aug 01 18:17:30 (fedora) any->ossec-agent
-  Rule: 523 (level 12) -> 'Agent buffer is flooded. Check the agent configuration.'
+  Rule: 204 (level 12) -> 'Agent event queue is flooded. Check the agent configuration.'
   wazuh: Agent buffer: 'flooded'.
+  level: flooded
 
 
 .. warning::
@@ -158,8 +161,9 @@ In order to let the manager know when an agent is working properly again, anothe
 
   ** Alert 1501604257.60486: - wazuh,agent_flooding,
   2017 Aug 01 18:17:37 (fedora) any->ossec-agent
-  Rule: 524 (level 3) -> 'Agent buffer is back to normal load.'
+  Rule: 205 (level 3) -> 'Agent event queue is back to normal load.'
   wazuh: Agent buffer: 'normal'.
+  level: normal
 
 
 When the bucket is in this status **no events are dropped**.
