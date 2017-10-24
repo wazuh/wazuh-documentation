@@ -32,5 +32,5 @@ The ossec-remoted program is the server side daemon that communicates with the a
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **m**           | Avoid creating shared merged file (read only)                                                   |
+| **-m**          | Avoid creating shared merged file (read only)                                                   |
 +-----------------+-------------------------------------------------------------------------------------------------+
