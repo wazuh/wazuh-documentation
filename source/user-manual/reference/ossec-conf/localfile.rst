@@ -131,7 +131,7 @@ For example, the following configuration will only process events with an ID of 
 label
 ^^^^^
 
-  .. versionadded:: 3.0
+  .. versionadded:: 3.0.0
 
 This option allows to append custom extra data into JSON event. It is available when `log_format`_ is ``json``.
 
@@ -209,7 +209,7 @@ This is the format of the log being read.
 |                    |                |                                                                                      |
 |                    |                | See also the tag `label`_.                                                           |
 |                    |                |                                                                                      |
-|                    |                | .. versionadded:: 3.0                                                                |
+|                    |                | .. versionadded:: 3.0.0                                                              |
 +                    +----------------+--------------------------------------------------------------------------------------+
 |                    | snort-full     | This is used for Snort’s full-output format.                                         |
 +                    +----------------+--------------------------------------------------------------------------------------+

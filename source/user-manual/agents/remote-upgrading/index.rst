@@ -16,7 +16,7 @@ Remote upgrading
         install-custom-wpk
         wpk-list
 
-From version 3.0 agents have the ability to be upgraded remotely. The manager sends each agent a **WPK** (Wazuh signed package) file
+From version 3.0.0 agents have the ability to be upgraded remotely. The manager sends each agent a **WPK** (Wazuh signed package) file
 with the files needed to perform the upgrade on the agent. This functionality is intended to enable the upgrading of agents easily,
 safely and without having to access the agent.
 

@@ -198,7 +198,7 @@ Set the list of ciphers for the network communication using SSL.
 
 The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
 
-.. versionadded:: 3.0
+.. versionadded:: 3.0.0
 
 limit_maxagents
 ^^^^^^^^^^^^^^^^^^^
@@ -212,7 +212,7 @@ When disabled, the maximum limit of agents that can be added is ignored.
 |                    | - no                |
 +--------------------+---------------------+
 
-.. versionadded:: 3.0
+.. versionadded:: 3.0.0
 
 Default configuration
 ---------------------

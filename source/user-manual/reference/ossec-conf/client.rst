@@ -20,7 +20,7 @@ Subsections
 server
 ^^^^^^^^
 
-.. versionadded:: 3.0
+.. versionadded:: 3.0.0
 
 Configure the connection parameters for each server connected to an agent.
 

@@ -3,7 +3,7 @@
 agent_groups
 =============
 
-.. versionadded:: 3.0
+.. versionadded:: 3.0.0
 
 The agent_groups program allows you to list, assign and manage the agents groups.
 

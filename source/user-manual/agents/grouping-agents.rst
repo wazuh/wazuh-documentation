@@ -3,7 +3,7 @@
 Grouping agents
 =================
 
-.. versionadded:: 3.0
+.. versionadded:: 3.0.0
 
 Once the agent is registered, we have two different ways to configure it. We can configure agents locally
 with the :doc:`ossec.conf <../reference/ossec-conf/index>` file, or remotely using
@@ -71,5 +71,5 @@ agents to have a specific configuration, we will follow the next steps:
    including the ``agent.conf`` file that we modified in the previous step, to the agent in a maximum of 20 minutes.
 
 4. Agents will receive the files in a time period depending on the files size, the amount of agents and also on
-   the connection protocol used. For example, we need around 8 minutes to receive a 10 MB folder (excluding **merged.mg** file) 
+   the connection protocol used. For example, we need around 8 minutes to receive a 10 MB folder (excluding **merged.mg** file)
    on 100 agents using UDP. Using TCP will be faster, depending on the network bandwidth.

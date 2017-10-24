@@ -18,7 +18,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 Agent groups
 --------------------------------
 
-.. versionadded:: 3.0
+.. versionadded:: 3.0.0
 
 Agents can be grouped in order to send them a selective centralized configuration. Each agent only belongs to a group. By default, all agents belong to a group called ``default``.
 

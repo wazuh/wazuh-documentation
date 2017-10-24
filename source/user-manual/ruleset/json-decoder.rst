@@ -3,7 +3,7 @@
 JSON decoder
 =============
 
-.. versionadded:: 3.0
+.. versionadded:: 3.0.0
 
 Wazuh incorporates an integrated decoder for JSON format. This decoder allows us to extract data from any source in JSON format.
 
