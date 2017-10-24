@@ -67,3 +67,5 @@ You can automate the agent registration with authd using the following parameter
 Usage example::
 
     wazuh-agent-2.1.1-1.msi /q SERVER_IP="192.168.1.1" AUTHD_SERVER="192.168.1.1" PASSWORD="TopSecret" AGENT_NAME="W2012"
+
+.. note:: Unattended installations must be launched with administrator permissions.
