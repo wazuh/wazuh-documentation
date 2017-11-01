@@ -6,20 +6,20 @@ Install Ansible
 OpenSSH Compatibility
 ------------------------------
 
-Ansible version 1.3 and later use native OpenSSH for remote communication and also use ControlPersist a feature available from OpenSSH v5.6. This will increase performance by speeding up SSH Session Creation what is useful for Ansible. Otherwise, you will need to consider the setup `Accelerated Mode <http://docs.ansible.com/ansible/playbooks_acceleration.html>`_ on Ansible.
+Ansible version 1.3 and later uses native OpenSSH for remote communication and, also, uses ControlPersist, a feature available for OpenSSH v5.6. This will increase performance by speeding up SSH Session Creation, which is very useful useful for Ansible. Otherwise, you will need to consider the setup `Accelerated Mode <http://docs.ansible.com/ansible/playbooks_acceleration.html>`_ on Ansible.
 
 Windows hosts
 ------------------
 
-Windows hosts support is included in Ansible from version 1.7, this is done via the remote execution of PowerShell. Is necessary to make prior tasks before using Ansible in Windows hosts, please refer to `Windows Support <http://docs.ansible.com/ansible/latest/intro_windows.html#windows-support>`_ on Ansible official documentation. Consider the following minimal requirements:
+Windows hosts are supported by Ansible from version 1.7 via the remote execution of PowerShell. As opposed to Linux hosts, it is necessary to do some pre-work before being able to use Ansible in Windows hosts. Please refer to `Windows Support <http://docs.ansible.com/ansible/latest/intro_windows.html#windows-support>`_ on Ansible official documentation. Consider the following minimum requirements:
 
-* `Pywinrm <https://pypi.python.org/pypi/pywinrm>`_ version 0.2.2 or later is required in Ansible control machine.
-* PowerShell 3.0 or later must be present to run Ansible modules on Windows hosts.
+* `Pywinrm <https://pypi.python.org/pypi/pywinrm>`_ version 0.2.2 or later is required for Ansible control machine.
+* PowerShell 3.0 or later is required to be able to run Ansible modules on Windows hosts.
 
 Installation on CentOS/RHEL/Fedora
 ------------------------------------
 
-Install using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_, only 6,7 CentOS/RedHat version and Fedora distrutions are currently supported, follow the next steps:
+Install using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS/RedHat version 6 or 7, and Fedora distrutions, are currently supported. Follow the next steps:
 
 1. Install EPEL repository:
 
@@ -36,7 +36,7 @@ Install using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_, only 6,7 Ce
 Installation on Debian/Ubuntu
 ------------------------------
 
-For Debian and Ubuntu we will use the ansible PPA repository, follow the next steps:
+For Debian and Ubuntu we will use the Ansible PPA repository. Follow the next steps:
 
 1. Install required dependencies:
 
