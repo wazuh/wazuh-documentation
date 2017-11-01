@@ -36,7 +36,7 @@ elasticsearch_jvm_xms
 elastic_stack_version
   Version of Elasticsearch to install
 
-  *Default 5.5.2*
+  *Default 5.6.3*
 
 elasticsearch_shards
   Set number of shards for indices
@@ -76,7 +76,7 @@ kibana_server_port
 elastic_stack_version
   Version of Kibana to install
 
-  *Default 5.5.2*
+  *Default 5.6.3*
 
 .. _wazuh_ansible_reference_logstash:
 
@@ -116,7 +116,7 @@ elasticsearch_replicas
 elastic_stack_version
   Version of Logstash to install
 
-  *Default 5.5.2*
+  *Default 5.6.3*
 
 logstash_ssl
   Using ssl between filebeat and logstash
@@ -559,10 +559,10 @@ wazuh_winagent_config
   .. code-block:: yaml
 
     install_dir: 'C:\wazuh-agent\'
-    version: '2.1.0'
-    revision: '1'
+    version: '2.1.1'
+    revision: '2'
     repo: https://packages.wazuh.com/windows/
-    md5: 715fbd55f670c2cecc607f2cbd0b2310
+    md5: fd9a3ce30cd6f9f553a1bc71e74a6c9f
 
 wazuh_agent_config:
   Wazuh Agent related configuration.

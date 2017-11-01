@@ -1,3 +1,6 @@
+from docutils.parsers.rst.directives.admonitions import BaseAdmonition
+from sphinx.util import compat
+compat.make_admonition = BaseAdmonition
 # Remember!
 # pip install sphinx_rtd_theme
 
