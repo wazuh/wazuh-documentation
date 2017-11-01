@@ -3,7 +3,7 @@
 Upgrade from the same major version
 =====================================
 
-Use these instructions if you are upgrading your Wazuh installation within the same major version. As an example, from 2.0.1 to 2.1.0.
+Use these instructions if you are upgrading your Wazuh installation within the same major version. As an example, from 2.0.1 to 2.1.1.
 
 Upgrade Wazuh manager
 ---------------------
