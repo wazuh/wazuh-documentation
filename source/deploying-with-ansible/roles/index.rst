@@ -10,7 +10,7 @@ You can use these roles to deploy Elastic Stack components, Wazuh API, Wazuh Man
     $ cd /etc/ansible/roles
     $ git clone https://github.com/wazuh/wazuh-ansible.git .
 
-Following, we explain briefly how to use these roles, please check out `Ansible Playbooks <http://docs.ansible.com/ansible/playbooks.html>`_ for more information.
+Below we explain briefly how to use these roles, please check out `Ansible Playbooks <http://docs.ansible.com/ansible/playbooks.html>`_ for more information.
 
 .. topic:: Contents
 

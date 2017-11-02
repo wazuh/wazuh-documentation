@@ -3,7 +3,7 @@
 Wazuh Agent
 --------------
 
-This role is designed to install and configure the Wazuh Agent on different hosts, is compatible with Linux and Windows machines. Also, has the capability to register the agent using the ``ossec-authd`` service on the Wazuh Manager, you could use several variables to customize the installation:
+This role is designed to install and configure Wazuh Agent on different hosts, this agent is compatible with Linux and Windows machines. Also, has the ability to register the agent using the ``ossec-authd`` service on the Wazuh Manager, you can use several variables to customize the installation:
 
 - **wazuh_manager_ip:** set Wazuh server to connect.
 - **wazuh_agent_authd:** array with a set of options to register the Wazuh agent on the Wazuh server, will require the ``ossec-authd`` service started on the Wazuh server.
@@ -50,6 +50,6 @@ Next, run the ansible playbook:
 
   $ ansible-playbook wazuh-agent.yml -e@vars-production.yml
 
-The example above for production environment will install Wazuh agent in all host excepting ``wazuh-manager``. then will register it against ``wazuh-manager`` with ip ``10.1.1.12``.
+The example above for production environment will install Wazuh agent in all host except ``wazuh-manager``. then it will register against ``wazuh-manager`` with ip ``10.1.1.12``.
 
 Please review the :ref:`references <wazuh_ansible_reference_agent>` section to see all variables available for this role.

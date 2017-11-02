@@ -3,12 +3,12 @@
 Kibana
 --------------
 
-This is similar to the Elasticsearch role and is intended to deploy Kibana whit the correct Wazuh APP version, you can customize the installation with the following:
+This is similar to the Elasticsearch role and is intended to deploy Kibana with the correct Wazuh APP version, you can customize the installation with the following:
 
-- **elasticsearch_network_host:** define Elasticsearch node ip address (default: ``127.0.0.1``).
-- **elasticsearch_http_port:** define Elasticsearch node port (default: ``9200``).
-- **kibana_server_host**: define Kibana listen address (default: ``0.0.0.0``).
-- **elastic_stack_version**: define Kibana version to be installed.
+- **elasticsearch_network_host:** defines Elasticsearch node ip address (default: ``127.0.0.1``).
+- **elasticsearch_http_port:** defines Elasticsearch node port (default: ``9200``).
+- **kibana_server_host**: defines Kibana listen address (default: ``0.0.0.0``).
+- **elastic_stack_version**: defines Kibana version to be installed.
 
 You can create a YAML file ``wazuh-kibana.yml`` to be used be Ansible playbook:
 
@@ -18,7 +18,7 @@ You can create a YAML file ``wazuh-kibana.yml`` to be used be Ansible playbook:
     roles:
       - ansible-role-kibana
 
-You can set your custom variable definitions for different environment, be example:
+You can set your custom variable definitions for different environments, for example:
 
 a. For production environment ``vars-production.yml``:
 

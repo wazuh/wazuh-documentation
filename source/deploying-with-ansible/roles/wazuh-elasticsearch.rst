@@ -5,10 +5,10 @@ Elasticsearch
 
 This role is intended to deploy Elasticsearch node, you have some variables that can be used to customize the installation:
 
-- **elasticsearch_network_host:** define listen ip address (default: ``127.0.0.1``).
-- **elasticsearch_http_port:** define listen port (default: ``9200``).
+- **elasticsearch_network_host:** defines listen ip address (default: ``127.0.0.1``).
+- **elasticsearch_http_port:** defines listen port (default: ``9200``).
 - **elasticsearch_jvm_xms**: amount of memory for java (default: ``null``).
-- **elastic_stack_version**: define elk version to be installed.
+- **elastic_stack_version**: defines elk version to be installed.
 
 You can create a YAML file ``wazuh-elastic.yml`` to be used by Ansible playbook:
 
@@ -18,7 +18,7 @@ You can create a YAML file ``wazuh-elastic.yml`` to be used by Ansible playbook:
     roles:
     - ansible-role-elasticsearch
 
-You can set your custom variable definitions for different environment, be example:
+You can set your custom variable definitions for different environments, for example:
 
 a. For production enviroment ``vars-production.yml``:
 
