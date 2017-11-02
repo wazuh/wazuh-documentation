@@ -19,12 +19,12 @@ elasticsearch_node_name
   *Default node-1*
 
 elasticsearch_http_port
-  Listen port of Elasticsearch
+  ElasticSearch listening port 
 
   *Default 9200*
 
 elasticsearch_network_host
-  Listen ip address of Elasticsearch
+  ElasticSearch, listening ip address
 
   *Default 127.0.0.1*
 
@@ -54,7 +54,7 @@ Kibana
 =========
 
 elasticsearch_http_port
-  Port of Elasticsearch node.
+  Elasticsearch node port.
 
   *Default 9200*
 
@@ -64,12 +64,12 @@ elasticsearch_network_host
   *Default 127.0.0.1*
 
 kibana_server_host
-  Listen IP address of Kibana.
+  Listening IP address of Kibana.
 
   *Default 0.0.0.0*
 
 kibana_server_port
-  Listen port of Kibana.
+  Listening port of Kibana.
 
   *Default 5601*
 
@@ -89,7 +89,7 @@ logstash_create_config
   *Defaults true*
 
 logstash_input_beats
-  When is set to true, it will configure Logstash to use Filebeat input otherwise will use File input.
+  When is set to true, it will configure Logstash to use Filebeat input. Otherwise it will use File input.
 
   *Defaults false*
 
@@ -129,7 +129,7 @@ logstash_ssl_dir
   *Default /etc/pki/logstash*
 
 logstash_ssl_certificate_file
-  SSL cert file to be copied from Ansible server to logstash server.
+  SSL certificate file to be copied from Ansible server to logstash server.
 
   *Default null*
 
