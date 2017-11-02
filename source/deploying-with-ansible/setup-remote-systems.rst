@@ -3,14 +3,14 @@
 Remote Hosts
 ============================
 
-Ansible born with the idea to be an agentless automation platform. Ansible relaying to SSH the connection mechanisms to remote hosts, you can connect to remote host in the same way as SSH does. Next, we briefly explain two (2) of this methods.
+Ansible was born with the idea to be an agentless automation platform. Ansible relies on SSH the connection to remote hosts, meaning that, you can connect to remote hosts as SSH does. To follow, we briefly explain two (2) of this methods.
 
 .. note:: We recommend the use of `Using passwords`_ method, this avoid you share your public SSH Key among several hosts.
 
 Using passwords
 -------------------
 
-Ansible does most of the work via SSH, SSH share their authentication mechanisms with Ansible, so in order to establish a connection with remote hosts a user/password must be supplied that Ansible can use, next we describe some useful options that you can use for SSH authentication:
+Ansible does most of the work via SSH, SSH share their authentication mechanisms with Ansible, so, in order to establish a connection with remote hosts, a user/password must be supplied. To follow there is a description of some useful options to use for SSH authentication:
 
 .. code-block:: bash
 
@@ -19,18 +19,18 @@ Ansible does most of the work via SSH, SSH share their authentication mechanisms
   -b          Execute task and operations with a privilege user.
   -K          Ask for sudo password, intended for privilege escalation.
 
-You can use the above args like the following:
+You can use the above args as follows:
 
 .. code-block:: bash
 
   ansible -m setup all -u foo -k -b -K
 
-This will set the connection user as ``foo``, also will ask for the connection user password and privileged user password.
+This will set the connection user as ``foo``. Also, it will ask for the connection user password and privileged user password.
 
 Windows authentication
 ----------------------
 
-Windows hosts use a different mechanism than SSH to perform authentication, please refer to `Authentication Options <http://docs.ansible.com/ansible/latest/intro_windows.html#authentication-options>`_ in order to setup the adequate option.
+Windows hosts use a different mechanism to perform authentication. Please refer to `Authentication Options <http://docs.ansible.com/ansible/latest/intro_windows.html#authentication-options>`_ in order to setup the adequate option.
 
 Using SSH key-pairing
 ----------------------
@@ -48,12 +48,12 @@ To improve security on this setup, please ensure you provide a password for this
   Enter passphrase (empty for no passphrase): ************
   Enter same passphrase again: ************
 
-Using ssh-agent avoid of asking the key password over and over again on every Ansible deploy, ssh-agent will cached your key to be use in further actions, until you logout.
+Using ssh-agent, avoid asking the key password over and over again on every Ansible deploy. Ssh-agent will cached your key to be use in further actions, until you logout.
 
 Installing public key
 ---------------------
 
-After creating Control machine key, you need install public key into every remote hosts, copy the content of ``.ssh/id_rsa.pub`` of Control machine to ``.ssh/authorized_keys`` on your host, be aware of the user you using to store ``authorized_keys``, this will be the user you use for any action via Ansible.
+After creating the Control machine key, you need to install the public key into every remote hosts, copy the content of ``.ssh/id_rsa.pub`` of Control machine to ``.ssh/authorized_keys`` on your host. Make sure you know the user to store ``authorized_keys``, this will be the user you use for any action via Ansible.
 
 Set the correct permissions:
 
@@ -64,7 +64,7 @@ Set the correct permissions:
 Add hosts to control
 ----------------------
 
-Adding hosts is easy just put the hostname or IP Address on ``/etc/ansible/hosts``.
+Adding hosts is easy, just put the hostname or IP Address on ``/etc/ansible/hosts``.
 
 .. code-block:: bash
 
@@ -73,7 +73,7 @@ Adding hosts is easy just put the hostname or IP Address on ``/etc/ansible/hosts
   hosts1.example.net
   hosts2.example.net
 
-Also, you can group hosts, this could be useful to execute tasks and roles to several hosts at once:
+Also, you can group hosts. This could be useful to execute tasks and roles to several hosts at once:
 
 .. code-block:: bash
 
