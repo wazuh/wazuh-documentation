@@ -64,7 +64,7 @@ These are the Security Policy includes by default on Wazuh:
 | Fedora   | 24      | ssg-fedora-ds.xml      | Common          | N/A                     |
 +----------+---------+------------------------+-----------------+-------------------------+
 
-Each agent must have its policies in ``/var/ossec/wodles/oscap/policies``.
+Each agent must have its policies in ``/var/ossec/wodles/oscap/content``.
 
 Wodle flow
 ------------

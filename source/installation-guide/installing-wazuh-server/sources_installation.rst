@@ -43,6 +43,7 @@ Installing Wazuh manager
     $ cd wazuh-*
     $ ./install.sh
 
+
 4. The script will ask about what kind of installation you want. Type ``server`` to install Wazuh Manager:
 
   .. code-block:: bash
@@ -118,6 +119,8 @@ Installing Wazuh API
     	# You may need to first enable a repository in order to get python27, with a command like this:
     	#   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
     	#   yum-config-manager --enable rhel-server-rhscl-6-rpms
+
+.. note:: You can also run an :doc:`unattended installation<../unattended-installation>` of the Wazuh manager and API.
 
 Installing Filebeat
 -------------------
