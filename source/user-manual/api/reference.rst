@@ -60,14 +60,6 @@ Request List
 
 `Cluster`_
 	* GET /cluster/node  (`Get node info`_)
-	* GET /cluster/node/files  (`Check files status`_)
-	* GET /cluster/node/token  (`Get node token`_)
-	* GET /cluster/nodes  (`Get nodes list`_)
-	* GET /cluster/sync/status  (`Get sync status`_)
-	* PUT /cluster/sync  (`Sync files`_)
-	* PUT /cluster/sync/disable  (`Disable synchronization`_)
-	* PUT /cluster/sync/enable  (`Enable synchronization`_)
-	* PUT /cluster/sync/force  (`Sync files (force)`_)
 
 `Decoders`_
 	* GET /decoders  (`Get all decoders`_)
@@ -607,7 +599,7 @@ Returns the files belonging to the group.
 	            "filename": "cis_sles12_linux_rcl.txt"
 	         },
 	         {
-	            "hash": "2c9ca009af3ce03299cd0dead8513659",
+	            "hash": "3a12edfe0ab71fe883a79cf7a13d4450",
 	            "filename": "merged.mg"
 	         },
 	         {
@@ -627,15 +619,15 @@ Returns the files belonging to the group.
 	            "filename": "system_audit_ssh.txt"
 	         },
 	         {
-	            "hash": "6456a5c8ac70ae06d8d17e516331b7c9",
+	            "hash": "0e1f8f16e217a70b9b80047646823587",
 	            "filename": "win_applications_rcl.txt"
 	         },
 	         {
-	            "hash": "a5f1cfc1e8e4fb2756f2f50cf81f2255",
+	            "hash": "4c2207e003d08db69822754271f9cb60",
 	            "filename": "win_audit_rcl.txt"
 	         },
 	         {
-	            "hash": "7bc1077bea8e768a0b4a9b0c82c329f4",
+	            "hash": "6fd9fa5dc1367e89cc4b30fe4cd0030e",
 	            "filename": "win_malware_rcl.txt"
 	         }
 	      ]
@@ -682,20 +674,20 @@ Returns the list of existing agent groups.
 	      "items": [
 	         {
 	            "count": 0,
-	            "conf_sum": "3f5ed86bc34ec47116cccb90c07d3d3d",
-	            "merged_sum": "7a97ac1887e31176ae9d80b3ff675bee",
+	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "merged_sum": "3a12edfe0ab71fe883a79cf7a13d4450",
 	            "name": "default"
 	         },
 	         {
 	            "count": 2,
-	            "conf_sum": "8b2a01de0861d9639fb29f206c162673",
-	            "merged_sum": "39eacb76bcf16c9f945301bc7c7c3f1b",
+	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "merged_sum": "e631c6287ed57d424c9cdf0c10a38d2c",
 	            "name": "dmz"
 	         },
 	         {
 	            "count": 0,
-	            "conf_sum": "b41a8e63f202510feb4eb1051b737512",
-	            "merged_sum": "059bd732d6718828d998fffc8b5aeaf5",
+	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "merged_sum": "3a12edfe0ab71fe883a79cf7a13d4450",
 	            "name": "pciserver"
 	         }
 	      ]
@@ -799,7 +791,7 @@ Unsets the group of the agent. The group will be 'default'.
 
 	{
 	   "error": 0,
-	   "data": "Group unset. Current group for agent '004': 'default'."
+	   "data": "Group unset for agent '004'."
 	}
 
 
@@ -872,8 +864,8 @@ Returns a summary of the available agents.
 	   "error": 0,
 	   "data": {
 	      "Active": 1,
-	      "Never connected": 4,
-	      "Total": 5,
+	      "Never connected": 5,
+	      "Total": 6,
 	      "Disconnected": 0
 	   }
 	}
@@ -902,17 +894,20 @@ Returns a list with the available agents.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| status             | string        | Filters by agent status.                                                                                                                                                                               |
+| status             | String        | Filters by agent status.                                                                                                                                                                               |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | - active                                                                                                                                                                                               |
+|                    |               | - pending                                                                                                                                                                                              |
 |                    |               | - never connected                                                                                                                                                                                      |
 |                    |               | - disconnected                                                                                                                                                                                         |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| os.platform        | String        | Filters by OS platform                                                                                                                                                                                 |
+| os.platform        | String        | Filters by OS platform.                                                                                                                                                                                |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| os.version         | String        | Filters by OS version                                                                                                                                                                                  |
+| os.version         | String        | Filters by OS version.                                                                                                                                                                                 |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| manager            | String        | Filters by manager hostname to which agents are connected.                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -926,8 +921,14 @@ Returns a list with the available agents.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 5,
+	      "totalItems": 6,
 	      "items": [
+	         {
+	            "status": "Never connected",
+	            "ip": "any",
+	            "id": "007",
+	            "name": "myNewAgent"
+	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.10.10",
@@ -947,22 +948,17 @@ Returns a list with the available agents.
 	            "name": "dmz002"
 	         },
 	         {
-	            "status": "Never connected",
-	            "ip": "10.0.0.12",
-	            "id": "002",
-	            "name": "dmz001"
-	         },
-	         {
 	            "status": "Active",
-	            "name": "ubuntu",
-	            "ip": "127.0.0.1",
-	            "version": "Wazuh v3.0.0-beta8",
+	            "name": "dmz001"
+	            "ip": "10.0.0.12",
+	            "version": "Wazuh v3.0.0-beta11",
+	            "manager_host": "ubuntu",
 	            "os": {
-	               "platform": "ubuntu",
-	               "version": "17.04",
-	               "name": "Ubuntu"
+	               "platform": "centos",
+	               "version": "7",
+	               "name": "CentOS Linux"
 	            },
-	            "id": "000"
+	            "id": "002",
 	         }
 	      ]
 	   }
@@ -990,7 +986,7 @@ Returns the information of an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/000?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/008?pretty"
 
 **Example Response:**
 ::
@@ -999,22 +995,25 @@ Returns the information of an agent.
 	   "error": 0,
 	   "data": {
 	      "status": "Active",
-	      "name": "ubuntu",
-	      "ip": "127.0.0.1",
-	      "dateAdd": "2017-09-21 19:09:13",
-	      "version": "Wazuh v3.0.0-beta8",
-	      "lastKeepAlive": "9999-12-31 23:59:59",
+	      "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+	      "group": "webserver",
+	      "name": "dmz003",
+	      "mergedSum": "3a12edfe0ab71fe883a79cf7a13d4450",
+	      "ip": "10.0.0.29",
+	      "dateAdd": "2017-11-06 17:29:59",
+	      "version": "Wazuh v3.0.0-beta11",
+	      "manager_host": "ubuntu",
+	      "lastKeepAlive": "2017-11-06 17:34:55",
 	      "os": {
-	         "major": "17",
-	         "name": "Ubuntu",
-	         "platform": "ubuntu",
-	         "uname": "Linux ubuntu 4.10.0-33-generic #37-Ubuntu SMP Fri Aug 11 10:55:28 UTC 2017 x86_64",
-	         "version": "17.04",
-	         "codename": "Zesty Zapus",
-	         "arch": "x86_64",
-	         "minor": "04"
+	        "major": "7",
+	        "name": "CentOS Linux",
+	        "platform": "centos",
+	        "uname": "Linux centos 3.10.0-514.el7.x86_64 #1 SMP Tue Nov 22 16:42:41 UTC 2016 x86_64",
+	        "version": "7",
+	        "codename": "Core",
+	        "arch": "x86_64"
 	      },
-	      "id": "000"
+	      "id": "008"
 	   }
 	}
 
@@ -1051,7 +1050,7 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgZmQyNThhMDkyMTU3NzgxNDE3MjNhY2M5NjdiNGRmNzc5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
+	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgYTIwYmI3ODRlM2MzNzBiMzM2YjU3OTJlOTE1MmE2M2E5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
 	}
 
 
@@ -1344,15 +1343,11 @@ Clears cache of the specified group.
 	   "error": 0,
 	   "data": {
 	      "all": [
-	         "/agents/summary/os?pretty",
-	         "/agents/summary?pretty",
 	         "/agents?pretty&offset=0&limit=5&sort=-ip,name",
 	         "/agents/000?pretty"
 	      ],
 	      "groups": {
 	         "agents": [
-	            "/agents/summary/os?pretty",
-	            "/agents/summary?pretty",
 	            "/agents?pretty&offset=0&limit=5&sort=-ip,name",
 	            "/agents/000?pretty"
 	         ]
@@ -1454,38 +1449,6 @@ Returns cache configuration.
 
 Cluster
 ----------------------------------------
-Info
-++++++++++++++++++++++++++++++++++++++++
-
-Check files status
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the file content
-
-**Request**:
-
-``GET`` ::
-
-	/cluster/node/files
-
-**Parameters:**
-
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``file_name``      | string        | File Name                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node/files
-
-**Example Response:**
-::
-
-	{"error":0,"data":{"/etc/client.keys":{"size":622,"format":"plain","umask":79,"modification_time":"2017-09-21 17:11:19","write_mode":"atomic","conditions":{"higher_remote_time":true,"different_md5":true,"larger_remote_size":true},"md5":"60e42b433759271beef8f613d763f77f"},"/queue/agent-groups/002":{"size":3,"format":"plain","umask":79,"modification_time":"2017-09-21 17:10:11","write_mode":"normal","conditions":{"higher_remote_time":true,"different_md5":false,"larger_remote_size":false},"md5":"6ffdb974418ac331f39c01fc396b5818"}}}
-
-
 Nodes
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -1507,151 +1470,7 @@ Returns the Node info
 **Example Response:**
 ::
 
-	{"error":0,"data":{"node":"node1","cluster":"wazuh"}}
-
-Get node token
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the Node token
-
-**Request**:
-
-``GET`` ::
-
-	/cluster/node/token
-
-**Example Request:**
-::
-
-	curl -u wazuh:wazuh -k -X GET "https://127.0.0.1:55000/cluster/node/token"
-
-**Example Response:**
-::
-
-	{"error":0,"data":"cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e"}
-
-Get nodes list
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the Nodes list
-
-**Request**:
-
-``GET`` ::
-
-	/cluster/nodes
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes"
-
-**Example Response:**
-::
-
-	{"error":0,"data":{"totalItems":0,"items":[]}}
-
-
-Synchronization
-++++++++++++++++++++++++++++++++++++++++
-
-Disable synchronization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Disables sync
-
-**Request**:
-
-``PUT`` ::
-
-	/cluster/sync/disable
-
-**Example Request:**
-::
-
-	curl -u wazuh:wazuh -k -X PUT "https://127.0.0.1:55000/cluster/sync/disable"
-
-**Example Response:**
-::
-
-	{"error":0,"data":"Sync disabled"}
-
-Enable synchronization
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Enables sync
-
-**Request**:
-
-``PUT`` ::
-
-	/cluster/sync/enable
-
-**Example Request:**
-::
-
-	curl -u wazuh:wazuh -k -X PUT "https://127.0.0.1:55000/cluster/sync/enable"
-
-**Example Response:**
-::
-
-	{"error":0,"data":"Sync enabled"}
-
-Get sync status
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns sync status
-
-**Request**:
-
-``GET`` ::
-
-	/cluster/sync/status
-
-**Example Request:**
-::
-
-	curl -u wazuh:wazuh -k -X GET "https://127.0.0.1:55000/cluster/sync/status"
-
-**Example Response:**
-::
-
-	{"error":0,"data":"Sync enabled"}
-
-Sync files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Sync files
-
-**Request**:
-
-``PUT`` ::
-
-	/cluster/sync
-
-**Example Request:**
-::
-
-	curl -u wazuh:wazuh -k -X PUT "https://127.0.0.1:55000/cluster/sync"
-
-**Example Response:**
-::
-
-	{"error":0,"data":{"discard":0,"updated":0,"error":[]}}
-
-Sync files (force)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Sync files (force)
-
-**Request**:
-
-``PUT`` ::
-
-	/cluster/sync/force
-
-**Example Request:**
-::
-
-	curl -u wazuh:wazuh -k -X PUT "https://127.0.0.1:55000/cluster/sync/force"
-
-**Example Response:**
-::
-
-	{"error":0,"data":{"discard":0,"updated":0,"error":[]}}
+	{"error":0,"data":{"node":"node01","cluster":"wazuh"}}
 
 
 
@@ -1707,7 +1526,7 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 508,
+	      "totalItems": 521,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -1786,27 +1605,47 @@ Returns all decoders files included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 87,
+	      "totalItems": 89,
 	      "items": [
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0355-vm-pop3_decoders.xml"
+	            "file": "0365-vpopmail_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0255-roundcube_decoders.xml"
+	            "file": "0095-dropbear_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0350-unix_decoders.xml"
+	            "file": "0440-proxmox-ve_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0170-nginx_decoders.xml"
+	            "file": "0300-sophos_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0290-solaris_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0045-barracuda_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0190-openvpn_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0135-imperva_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
@@ -1816,27 +1655,7 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0070-cisco-vpn_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0430-cylance_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0415-jenkins_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0235-puppet_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0145-mailscanner_decoders.xml"
+	            "file": "0335-telnet_decoders.xml"
 	         }
 	      ]
 	   }
@@ -1878,7 +1697,7 @@ Returns all parent decoders included in ossec.conf
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 126,
+	      "totalItems": 132,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -1892,11 +1711,11 @@ Returns all parent decoders included in ossec.conf
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "cylance_events",
+	            "name": "pvedaemon",
 	            "details": {
-	               "prematch": "^\\S+\\t\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\w\\t\\S+\\t\\d+/\\d+/\\d+ \\d+:\\d+\\t"
+	               "program_name": "^pvedaemon"
 	            },
-	            "file": "0430-cylance_decoders.xml",
+	            "file": "0440-proxmox-ve_decoders.xml",
 	            "position": 0,
 	            "path": "/var/ossec/ruleset/decoders"
 	         }
@@ -2027,8 +1846,7 @@ Returns ossec.conf in JSON format.
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "192.168.42.2",
-	         "127.0.0.53"
+	         "127.0.1.1"
 	      ],
 	      "email_from": "ossecm@example.wazuh.com",
 	      "logall_json": "no"
@@ -2061,15 +1879,15 @@ Returns basic information about Manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "installation_date": "Thu Sep 21 19:06:33 CEST 2017",
-	      "version": "v3.0.0-beta8",
+	      "installation_date": "lun nov  6 17:07:08 CET 2017",
+	      "version": "v3.0.0-beta11",
 	      "openssl_support": "yes",
 	      "max_agents": "8000",
 	      "ruleset_version": "1002",
 	      "path": "/var/ossec",
-	      "tz_name": "CEST",
+	      "tz_name": "CET",
 	      "type": "server",
-	      "tz_offset": "+0200"
+	      "tz_offset": "+0100"
 	   }
 	}
 
@@ -2135,15 +1953,16 @@ Returns the 3 last months of ossec.log.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| type_log           | string        | Filters by type of log.                                                                                                                                                                                |
+| type_log           | String        | Filters by type of log.                                                                                                                                                                                |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | - all                                                                                                                                                                                                  |
 |                    |               | - error                                                                                                                                                                                                |
+|                    |               | - warning                                                                                                                                                                                              |
 |                    |               | - info                                                                                                                                                                                                 |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| category           | string        | Filters by category of log.                                                                                                                                                                            |
+| category           | String        | Filters by category of log.                                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2190,59 +2009,54 @@ Returns a summary about the 3 last months of ossec.log.
 	   "error": 0,
 	   "data": {
 	      "wazuh-modulesd": {
-	         "info": 2,
-	         "all": 2,
-	         "error": 0
-	      },
-	      "ossec-testrule": {
-	         "info": 180,
-	         "all": 180,
-	         "error": 0
-	      },
-	      "wazuh-modulesd:oscap": {
-	         "info": 2,
-	         "all": 2,
-	         "error": 0
-	      },
-	      "ossec-rootcheck": {
 	         "info": 5,
 	         "all": 5,
 	         "error": 0
 	      },
-	      "ossec-monitord": {
+	      "ossec-testrule": {
+	         "info": 92,
+	         "all": 92,
+	         "error": 0
+	      },
+	      "ossec-rootcheck": {
 	         "info": 3,
 	         "all": 3,
 	         "error": 0
 	      },
+	      "ossec-monitord": {
+	         "info": 1,
+	         "all": 1,
+	         "error": 0
+	      },
 	      "ossec-logcollector": {
-	         "info": 21,
-	         "all": 23,
-	         "error": 2
+	         "info": 10,
+	         "all": 11,
+	         "error": 1
 	      },
 	      "ossec-execd": {
+	         "info": 1,
+	         "all": 1,
+	         "error": 0
+	      },
+	      "ossec-remoted": {
 	         "info": 4,
 	         "all": 4,
 	         "error": 0
 	      },
-	      "ossec-remoted": {
-	         "info": 11,
-	         "all": 13,
-	         "error": 2
-	      },
 	      "ossec-syscheckd": {
-	         "info": 51,
-	         "all": 51,
+	         "info": 25,
+	         "all": 25,
 	         "error": 0
 	      },
 	      "ossec-analysisd": {
-	         "info": 397,
-	         "all": 397,
+	         "info": 203,
+	         "all": 203,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:database": {
-	         "info": 2,
-	         "all": 8,
-	         "error": 6
+	         "info": 1,
+	         "all": 4,
+	         "error": 3
 	      }
 	   }
 	}
@@ -2517,8 +2331,8 @@ Return the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-09-21 19:11:20",
-	      "end": "2017-09-21 19:10:11"
+	      "start": "2017-11-06 17:09:15",
+	      "end": "2017-11-06 17:09:37"
 	   }
 	}
 
@@ -2558,12 +2372,11 @@ Returns the CIS requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 4,
+	      "totalItems": 3,
 	      "items": [
 	         "1.4 Debian Linux",
-	         "2.3 Debian Linux",
 	         "4.13 Debian Linux",
-	         "5.2 Debian Linux"
+	         "4.16 Debian Linux"
 	      ]
 	   }
 	}
@@ -2610,21 +2423,19 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 14,
+	      "totalItems": 12,
 	      "items": [
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-09-21 19:09:47",
-	            "cis": "1.4 Debian Linux",
-	            "readDay": "2017-09-21 19:11:22",
-	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /opt is not on its own partition {CIS: 1.4 Debian Linux}. File: /opt. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
+	            "oldDay": "2017-11-06 17:09:17",
+	            "readDay": "2017-11-06 17:09:17",
+	            "event": "File '/root/infinite' is owned by root and has written permissions to anyone."
 	         },
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-09-21 19:09:47",
-	            "cis": "1.4 Debian Linux",
-	            "readDay": "2017-09-21 19:11:22",
-	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /tmp is not on its own partition {CIS: 1.4 Debian Linux}. File: /etc/fstab. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
+	            "oldDay": "2017-11-06 17:09:17",
+	            "readDay": "2017-11-06 17:09:17",
+	            "event": "File '/root/infinite.save' is owned by root and has written permissions to anyone."
 	         }
 	      ]
 	   }
@@ -2666,11 +2477,10 @@ Returns the PCI requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 3,
+	      "totalItems": 2,
 	      "items": [
 	         "2.2.2",
-	         "2.2.4",
-	         "4.1"
+	         "2.2.4"
 	      ]
 	   }
 	}
@@ -2795,7 +2605,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1525,
+	      "totalItems": 1544,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -2883,7 +2693,7 @@ Returns the files of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 95,
+	      "totalItems": 98,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -2975,7 +2785,7 @@ Returns the groups of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 247,
+	      "totalItems": 279,
 	      "items": [
 	         "access_control",
 	         "access_denied",
@@ -3091,6 +2901,7 @@ Returns the rules with the specified id.
 	            "level": 2,
 	            "path": "/var/ossec/ruleset/rules",
 	            "groups": [
+	               "gpg13_4.3",
 	               "syslog",
 	               "errors"
 	            ],
@@ -3199,8 +3010,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-09-21 19:11:17",
-	      "end": "2017-09-21 19:11:20"
+	      "start": "2017-11-06 17:09:11",
+	      "end": "2017-11-06 17:09:15"
 	   }
 	}
 
