@@ -37,7 +37,7 @@ To upgrade agents using the command line we will use the :doc:`agent_upgrade <..
         Agent upgraded: Wazuh v3.0.0 -> Wazuh v3.1.0
 
 
-3. Once we receive the last confirmation message, we can check the new agent version:
+3. Once we receive the last confirmation message, the agent is restarted and we can check the new agent version:
 
     .. code-block:: console
 

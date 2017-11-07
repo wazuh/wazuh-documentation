@@ -28,7 +28,10 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 +--------------------------------------------+---------------------------------------------------------+
 | **-x EXECUTE, --execute EXECUTE**          | Executable filename in the WPK custom file.             |
 +--------------------------------------------+---------------------------------------------------------+
+| **-t TIMEOUT, --timeout TIMEOUT**          | Timeout where the agent cannot restart while updating.  |
++--------------------------------------------+---------------------------------------------------------+
 
+.. note:: By default, the timeout will be the maximum allowed by the agent in :doc:`internal_options.conf<../internal-options>`.
 
 Examples
 ----------
@@ -62,7 +65,7 @@ Examples
 
 .. code-block:: console
 
-    # agent_upgrade -a 002 -dF -v v3.0.0 -r http://mycompany.wpkrepo.com/
+    # agent_upgrade -a 002 -dF -v v3.0.0 -r http://mycompany.wpkrepo.com/ -t 500
 
     Manager version: v3.1.0
     Agent version: v3.1.0
@@ -71,6 +74,8 @@ Examples
     WPK file downloaded: /var/ossec/var/upgrade/wazuh_agent_v3.0.0_debian_9_x86_64.wpk - SHA1SUM: d6f6855b65839d8ce75cc6977ab8b492174699f6
     Upgrade PKG: wazuh_agent_v3.0.0_debian_9_x86_64.wpk (4151 KB)
     MSG SENT: 002 com open wb wazuh_agent_v3.0.0_debian_9_x86_64.wpk
+    RESPONSE: ok
+    MSG SENT: 002 com lock_restart 500
     RESPONSE: ok
     Sending: /var/ossec/var/upgrade/wazuh_agent_v3.0.0_debian_9_x86_64.wpk
     MSG SENT: 002 com close wazuh_agent_v3.0.0_debian_9_x86_64.wpk
@@ -95,6 +100,8 @@ Examples
     Custom WPK file: upgrade_openscap_debian.wpk (852 KB)
     MSG SENT: 002 com open w upgrade_openscap_debian.wpk
     RESPONSE: ok
+    MSG SENT: 002 com lock_restart -1
+    RESPONSE: ok
     FILE SHA1: b47bb9807a1bb4ffea8d0528c81ff8fa64fa6355
     MSG SENT: 002 com close upgrade_openscap_debian.wpk
     RESPONSE: ok
@@ -107,3 +114,6 @@ Examples
     MSG SENT: 002 com upgrade_result
     RESPONSE: ok 0
     Agent upgraded successfully
+
+
+.. note:: When the agent finishes updating, it is automatically restarted to apply the new configuration.
