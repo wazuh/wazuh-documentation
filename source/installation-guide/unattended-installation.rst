@@ -2,7 +2,7 @@
 
 Unattended Installation
 =======================
-Unattended installation saves the user having to interact with the installation interface to complete the process, allowing the automation of agents deployments. To do this, you must modify the ``preloaded-vars.conf`` file uncommenting the configuration lines that you want to automate in the installation process.
+The unattended installation saves time to the process of agents deployment, allowing the user to predefine several installation variables instead of waiting them to be prompted. This can be made modifying the ``preloaded-vars.conf`` file and uncommenting the configuration lines that you want to automate during the installation process.
 
 - `Global`_
 - `Agent`_
