@@ -21,7 +21,7 @@ Options
 - `key`_
 - `interval`_
 - `port`_
-- `host`_
+- `bind_addr`_
 - `nodes`_
 
 name
@@ -49,7 +49,7 @@ The name of the current node of the cluster.
 node_type
 ^^^^^^^^^^
 
-The role of this node.
+The role of the node.
 
 +--------------------+------------------+
 | **Default value**  | master           |
@@ -60,7 +60,16 @@ The role of this node.
 key
 ^^^^
 
-**Describe this field.**
+Any key for encrypting the communication between nodes.
+
+.. note::
+	This key has to be the same for all the nodes of the cluster.
+
++--------------------+---------------------------------------------+
+| **Default value**  | n/a                                         |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any alphanumeric string of 32 characters.   |
++--------------------+---------------------------------------------+
 
 interval
 ^^^^^^^^
@@ -86,21 +95,27 @@ Specify the port for the cluster communications.
 +--------------------+---------------------------------------------+
 
 
-host
-^^^^
+bind_addr
+^^^^^^^^^^
 
-**Describe this field.**
+When the node has multiple network interfaces, this parameter specifies which IP address will comunicate with the cluster.
+
++--------------------+----------------------------------+
+| **Default value**  | n/a                              |
++--------------------+----------------------------------+
+| **Allowed values** | Any valid IP address is allowed. |
++--------------------+----------------------------------+
 
 nodes
 ^^^^^^
 
-List to specify all the nodes that make up the cluster, using the `<node>` tag for each one.
+List to specify all the nodes that make up the cluster, using the ``<node>`` tag for each one.
 
-+--------------------+---------------------------------+
-| **Default value**  | localhost                       |
-+--------------------+---------------------------------+
-| **Allowed values** | Any node name                   |
-+--------------------+---------------------------------+
++--------------------+-----------------------------------------+
+| **Default value**  | localhost                               |
++--------------------+-----------------------------------------+
+| **Allowed values** | Any valid IP address of a cluster node. |
++--------------------+-----------------------------------------+
 
 Example of configuration
 ------------------------
@@ -110,13 +125,14 @@ Example of configuration
     <cluster>
       <name>wazuh</name>
       <node_name>manager_01</node_name>
+	  <node_type>master</node_type>
       <key>ugdtAnd7Pi9myP7CVts4qZaZQEQcRYZa</key>
       <interval>2m</interval>
       <port>1516</port>
-      <host></host>
+      <bind_addr>0.0.0.0</bind_addr>
       <nodes>
-        <node>manager_01</node>
-        <node>manager_02</node>
-        <node>manager_03</node>
+        <node>172.17.0.2</node>
+        <node>172.17.0.3</node>
+        <node>172.17.0.4</node>
       <nodes>
     </cluster>

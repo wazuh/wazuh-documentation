@@ -3,7 +3,7 @@
 wazuh-clusterd
 ==============
 
-The wazuh-clusterd program manages the Wazuh cluster ...
+The wazuh-clusterd program manages the Wazuh cluster communications among managers belonging to the cluster.
 
 
 wazuh-clusterd options
