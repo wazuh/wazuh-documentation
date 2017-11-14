@@ -59,7 +59,7 @@ Manager ``shared/agent.conf``:
   <agent_config profile="redhat7">
 
     <wodle name="open-scap">
-      <content type="xccdf" path="ssg-rhel7-ds.xml">
+      <content type="xccdf" path="ssg-rhel-7-ds.xml">
         <profile>xccdf_org.ssgproject.content_profile_pci-dss</profile>
       </content>
     </wodle>
