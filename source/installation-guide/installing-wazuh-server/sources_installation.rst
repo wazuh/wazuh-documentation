@@ -44,11 +44,11 @@ Installing Wazuh manager
     $ ./install.sh
 
 
-4. The script will ask about what kind of installation you want. Type ``server`` to install Wazuh Manager:
+4. The script will ask about what kind of installation you want. Type ``manager`` to install Wazuh Manager:
 
   .. code-block:: bash
 
-    1- What kind of installation do you want (server, agent, local, hybrid or help)? server
+    1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
 
 5. Start the services using this command:
 

@@ -52,7 +52,7 @@ Installing Linux agent
 
   .. code-block:: bash
 
-    1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
+    1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
 
 .. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
 
