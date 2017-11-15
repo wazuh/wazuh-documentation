@@ -30,6 +30,8 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 +--------------------------------------------+---------------------------------------------------------+
 | **-t TIMEOUT, --timeout TIMEOUT**          | Timeout where the agent cannot restart while updating.  |
 +--------------------------------------------+---------------------------------------------------------+
+| **-c CHUNK_SIZE, --chunk_size CHUNK_SIZE** | Chunk size sending WPK file.                            |
++--------------------------------------------+---------------------------------------------------------+
 
 .. note:: By default, the timeout will be the maximum allowed by the agent in :doc:`internal_options.conf<../internal-options>`.
 
