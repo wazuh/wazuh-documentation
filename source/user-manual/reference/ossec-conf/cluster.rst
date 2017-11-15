@@ -54,7 +54,7 @@ The role of the node.
 +--------------------+------------------+
 | **Default value**  | master           |
 +--------------------+------------------+
-| **Allowed values** | master, slave    |
+| **Allowed values** | master, client   |
 +--------------------+------------------+
 
 key

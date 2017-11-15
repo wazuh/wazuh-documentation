@@ -80,7 +80,7 @@ In order to deploy a Wazuh cluster, we have to follow these steps:
 
 In the ``<cluster>`` section of the :doc:`Local configuration <../reference/ossec-conf/cluster>` it should be set the configuration for the cluster regarding the following considerations.
 
-- One manager should be the master and the other ones, the slaves. This is specified in the ``<node_type>`` field.
+- One manager should be the master and the other ones, the clients. This is specified in the ``<node_type>`` field.
 - The key should be the same for all the nodes of the cluster.
 - In the ``<nodes>`` list, it should be specified the IP address of the other nodes.
 
