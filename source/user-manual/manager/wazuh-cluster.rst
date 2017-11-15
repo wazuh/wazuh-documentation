@@ -17,7 +17,7 @@ The Wazuh cluster provides horizontal scalability to our Wazuh environment, allo
 to ingest more events than before distributing the load of information between several managers simultaneously.
 
 In addition, a cluster of Wazuh managers is prepared to handle the fall of any manager without affecting its operation, unless it is the master manager.
-Agents that were reporting to this fallen manager will start to report to another manager of the cluster automatically, without the loss of event.
+Agents that were reporting to this fallen manager will start to report to another manager of the cluster automatically, without the loss of events.
 
 Finally, the Wazuh cluster is in continuous development and we hope it to include many new features very soon. For example, we refer to the possibility of
 switching the role of master between the different managers providing high availability.
@@ -41,7 +41,7 @@ to centralize the following configurations:
 To sum up, the master node sends to its clients the whole ``etc/shared`` folder contained in the Wazuh installation directory, with
 the centralized configuration of each agent ordered by groups, as well as the ``client.keys`` file. These shared files allow to connect each agent to each manager of the cluster.
 
-For all the communications in the cluster, it has been developed an own protocol which synchronize those files with a specific interval time, defined in
+For all the communications in the cluster, it has been developed an own protocol which synchronizes those files with a specific interval time, defined in
 the ``<cluster>`` section of :doc:`Local configuration <../reference/ossec-conf/cluster>`.
 These communications are encrypted with AES providing confidentiality.
 
@@ -103,12 +103,38 @@ An example of configuration could be the following.
       <nodes>
     </cluster>
 
+2. Agents should be configured for connecting to all the managers of the cluster.
 
-2. Enable and start the Wazuh cluster daemon for starting the synchronization.
+For example, if we have three managers in the cluster with the IP addresses ``192.168.0.3-5`` the configuration in agents should be like this.
+
+.. code-block:: xml
+
+    <client>
+      ...
+      <server>
+        <address>192.168.0.3</address>
+        <port>1514</port>
+        <protocol>udp</protocol>
+      <server>
+      <server>
+        <address>192.168.0.4</address>
+        <port>1514</port>
+        <protocol>tcp</protocol>
+      <server>
+      <server>
+        <address>192.168.0.5</address>
+        <port>1514</port>
+        <protocol>tcp</protocol>
+      <server>
+      ...
+    </client>
+
+
+3. Enable and start the Wazuh cluster daemon in managers for starting the synchronization.
 
     .. code-block:: bash
 
         $ sudo /var/ossec/bin/ossec-control enable cluster
         $ sudo /var/ossec/bin/wazuh-clusterd
 
-3. Check if the shared files are being synchronized correctly.
+4. Since this moment, the cluster should be synchronized and the shared files should be the same in all the managers.

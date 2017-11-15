@@ -9,6 +9,7 @@ This section shows the most relevant new features of Wazuh v3.0.0. You will find
 
 - `Grouping agents`_
 - `Remote agent upgrades`_
+- `Wazuh cluster for managers`_
 - `Improved JSON integration`_
 - `MSI Windows installer for agents`_
 - `More relevant features`_
@@ -32,6 +33,16 @@ compressed and signed which performs the upgrade automatically.
 For this reason, it will be available the necessaries WPK files for performing remote agent upgrades easily in each release. Additionally, it is possible to add a custom WPK repository.
 
 In our dedicated section for :doc:`Remote upgrading <../user-manual/agents/remote-upgrading/index>` you can find more useful information.
+
+Wazuh cluster for managers
+--------------------------
+
+It has been developed a Wazuh cluster that provides synchronizing internal files between managers. This feature allows agents to report to any manager of the cluster avoiding the loss of
+events if any manager of the cluster falls.
+
+In addition, the Wazuh cluster provides horizontal scalability achieving the ingest of more events from the agents in parallel.
+
+If you want read more about this functionality see its dedicated section at :doc:`Wazuh cluster <../user-manual/manager/wazuh-cluster>`.
 
 Improved JSON integration
 -------------------------

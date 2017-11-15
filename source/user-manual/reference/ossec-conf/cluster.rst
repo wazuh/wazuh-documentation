@@ -101,7 +101,7 @@ bind_addr
 When the node has multiple network interfaces, this parameter specifies which IP address will comunicate with the cluster.
 
 +--------------------+----------------------------------+
-| **Default value**  | n/a                              |
+| **Default value**  | 0.0.0.0                          |
 +--------------------+----------------------------------+
 | **Allowed values** | Any valid IP address is allowed. |
 +--------------------+----------------------------------+
@@ -125,7 +125,7 @@ Example of configuration
     <cluster>
       <name>wazuh</name>
       <node_name>manager_01</node_name>
-	  <node_type>master</node_type>
+      <node_type>master</node_type>
       <key>ugdtAnd7Pi9myP7CVts4qZaZQEQcRYZa</key>
       <interval>2m</interval>
       <port>1516</port>
