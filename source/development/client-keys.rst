@@ -3,7 +3,7 @@
 Client keys file
 ================
 
-The *client.keys* file stores the data used to authenticate secure agents.
+The ``client.keys`` file stores the data used to authenticate secure agents.
 
 Location
 --------
@@ -17,7 +17,7 @@ Windows agents
 File format
 -----------
 
-This file contains one line per each agent entry. In the case of agents, only one line is allowed, and this line must match exactly one entry in the *client.keys* file at manager, otherwise the agent will be rejected.
+This file contains one line per each agent entry. In the case of agents, only one line is allowed, and this line must match exactly one entry in the ``client.keys`` file at manager, otherwise the agent will be rejected.
 
 ::
 

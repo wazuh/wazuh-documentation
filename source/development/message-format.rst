@@ -5,10 +5,21 @@
 Standard OSSEC message format
 =============================
 
+This page aims to describe the format of messages that OSSEC (and Wazuh) accepts and sends between its components:
+
+Input logs
+    Strings ingested by *Logcollector* from log files, Windows events, program outputs, etc.
+
+Standard OSSEC events
+    Data sent **locally** between OSSEC components, usually to *Agent daemon* (in agents) or *Analysis daemon* (in manager).
+
+Secure messages
+    Data delivered **remotely** between *Agent daemon* and *Remote daemon*.
+
 Input logs
 ----------
 
-Logs can be in Syslog format or any other custom format.
+Input logs are messages ingested by Logcollector. They can be in Syslog format or any other custom format. In the former case the message header is parsed by the pre-decoder.
 
 Syslog message
 ~~~~~~~~~~~~~~
@@ -17,7 +28,7 @@ Syslog message
 
     Nov  9 16:06:26 localhost salute: Hello world.
 
-Logs go through a pre-decoding stage that tries to extract some data from the logs, in the case they are in Syslog format.
+These logs go through a pre-decoding stage that tries to extract some data from the logs, in the case they are in Syslog format.
 
 - Date: ``Nov  9 16:06:26``
 - Host name: ``localhost``
@@ -74,6 +85,13 @@ Example:
 
 Secure message format
 ---------------------
+
+Secure messages are those messages sent through a network between an agent (*Agent daemon*) and the manager (*Analysis daemon*). They are:
+
+- Encrypted.
+- Compressed.
+- Randomized.
+- Numerated.
 
 Step by step procedure
 ~~~~~~~~~~~~~~~~~~~~~~
