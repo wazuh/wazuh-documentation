@@ -60,7 +60,7 @@ The role of the node.
 key
 ^^^^
 
-Any key for encrypting the communication between nodes. It must be 32 characters long. Refer to the :doc:`Wazuh cluster manual <../reference/manager/wazuh-cluster>` to find out how to generate a key.
+Any key for encrypting the communication between nodes. It must be 32 characters long. Refer to the :doc:`Wazuh cluster manual <../../manager/wazuh-cluster>` to find out how to generate a key.
 
 .. note::
 	This key has to be the same for all the nodes of the cluster.
@@ -79,7 +79,7 @@ Interval between cluster synchronizations.
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 2m                                                                                                                                       |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes) |
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes)                       |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -113,7 +113,7 @@ List to specify all the nodes that make up the cluster, using the ``<node>`` tag
 
 .. note::
 	This list must be the same in all managers of the cluster. For each manager, specify any of the IPs returned
-	by the ``hostname --all-ip-addresses``command. If not, an error will be raised.
+	by the ``hostname --all-ip-addresses`` command. If not, an error will be raised.
 
 +--------------------+-----------------------------------------+
 | **Default value**  | localhost                               |
