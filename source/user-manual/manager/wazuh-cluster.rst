@@ -4,7 +4,7 @@ Deploying a Wazuh cluster
 =========================
 
 The Wazuh cluster has been developed in order to get a stronger communication between agents and managers. This means that the cluster is able to synchronize the necessary files between
-its manager to allow agents for reporting events to any manager of the cluster.
+its nodes to allow agents to report events to any manager of the cluster.
 
 - `Why do we need a Wazuh cluster?`_
 - `How it works`_
@@ -13,14 +13,14 @@ its manager to allow agents for reporting events to any manager of the cluster.
 Why do we need a Wazuh cluster?
 -------------------------------
 
-The Wazuh cluster provides horizontal scalability to our Wazuh environment, allowing agents to report to any manager belonging to the cluster. In this way, we have the ability
-to ingest more events than before distributing the load of information between several managers simultaneously.
+The Wazuh cluster provides horizontal scalability to our Wazuh environment, allowing agents to report to any manager belonging to the cluster. This way, we have the ability
+to process more events than before distributing the load of information between several managers simultaneously.
 
 In addition, a cluster of Wazuh managers is prepared to handle the fall of any manager without affecting its operation, unless it is the master manager.
 Agents that were reporting to this fallen manager will start to report to another manager of the cluster automatically, without the loss of events.
 
 Finally, the Wazuh cluster is in continuous development and we hope it to include many new features very soon. For example, we refer to the possibility of
-switching the role of master between the different managers providing high availability.
+switching the role of master between all managers to provide high availability.
 
 
 How it works
@@ -38,10 +38,10 @@ to centralize the following configurations:
 - Configuration of agents grouping.
 - Centralized configuration for agents, synchronizing its ``agent.conf`` file.
 
-To sum up, the master node sends to its clients the whole ``etc/shared`` folder contained in the Wazuh installation directory, with
-the centralized configuration of each agent ordered by groups, as well as the ``client.keys`` file. These shared files allow to connect each agent to each manager of the cluster.
+To sum up, the master node sends to its clients the whole ``etc/shared`` directory contained in the Wazuh installation directory, with
+the centralized configuration of each agent ordered by groups, as well as the ``client.keys`` file. These shared files agents to report to any manager of the cluster.
 
-For all the communications in the cluster, it has been developed an own protocol which synchronizes those files with a specific interval time, defined in
+The comunications between nodes of the cluster are made with a self developed protocol which synchronizes those files with a specific interval time, defined in
 the ``<cluster>`` section of :doc:`Local configuration <../reference/ossec-conf/cluster>`.
 These communications are encrypted with AES providing confidentiality.
 
@@ -49,40 +49,48 @@ These communications are encrypted with AES providing confidentiality.
 Client
 ^^^^^^^^
 
-Managers which have the client role in the cluster receive the data from the master node, and they update their files with the received ones. In this way, we make sure that they will always
-contain the same shared configuration for the agents.
+Managers which have the client role in the cluster receive the data from the master node, and update their files with the received ones. This way, it's guaranteed that the shared configuration 
+for the agents is the same in all managers.
 
-On the other hand, client nodes send to the master the ``agent-info`` file. This file contains the most important information of each agent, and allows to the master node to know in real-time
-the connection state of agents, as well as which manager is connected to each agent.
+On the other hand, client nodes send to the master the ``agent-info`` file of their reporting agents. This file contains the most important information of each agent, and allows to the master node to know in real-time
+the connection state of agents, as well as the manager each agent is reporting to.
 
 Cluster daemons
 ^^^^^^^^^^^^^^^^^
 
-- **wazuh-clusterd** is the module that manage the synchronization between managers in the cluster. This daemon has to be running in all the managers of the cluster in order to ensure the correct communication between them. There exits a file located at  ``logs/cluster.log`` where can be found all the logging messages of the cluster.
+- **wazuh-clusterd** is the module that manage the synchronization between managers in the cluster. There exits a file located at ``logs/cluster.log`` where can be found all the logging messages of this daemon.
 
-- **wazuh-clusterd-internal** is the daemon in charge of manage the cluster database and the files located in each manager.
+- **wazuh-clusterd-internal** is the daemon in charge of monitoring the files to synchronize and managing the cluster database. The logs of this daemon are stored in ``logs/ossec.log`` file.
 
-In the section :doc:`Daemons <../reference/daemons/index>` can be found more information about the usage of these daemons.
+Those daemons must be running in all the managers of the cluster in order to ensure everything works properly. The **wazuh-clusterd** will start the **wazuh-clusterd-internal** daemon.
+
+Refer to the section :doc:`Daemons <../reference/daemons/index>` to find out more information about the usage of these daemons.
 
 Cluster database
 ^^^^^^^^^^^^^^^^^
 
-It has been incorporated a database for each manager in the cluster called `cluster.db`. In this database is stored information about the state of each synchronized
-file for each manager in the format ``<node> <file> <state>``.
+It has been incorporated a database for each manager in the cluster called `cluster_db`. Information about the state of each synchronized
+file is stored in that database. Each row of the database has the structure ``<node> <file> <state>``.
 
 
 Use case: Deploying a Wazuh cluster
 -----------------------------------
 
-In order to deploy a Wazuh cluster, we have to follow these steps:
+In order to deploy a Wazuh cluster, follow these steps:
 
 1. Set the properly configuration in all the managers of the cluster.
 
 In the ``<cluster>`` section of the :doc:`Local configuration <../reference/ossec-conf/cluster>` it should be set the configuration for the cluster regarding the following considerations.
 
 - One manager should be the master and the other ones, the clients. This is specified in the ``<node_type>`` field.
-- The key should be the same for all the nodes of the cluster.
-- In the ``<nodes>`` list, it should be specified the IP address of the other nodes.
+- The key should be the same for all the nodes of the cluster and it must be 32 characters long. To generate a random password you can use the following command:
+
+    .. code-block:: bash
+
+        $ openssl rand -hex 32
+
+- The IP addresses of all **nodes** of the cluster must be specified in the ``<nodes>``, including the IP of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` 
+to find out which IP from the list is theirs. If none of the IPs match with the ones returned by the ``hostname --all-ip-addresses`` command, an error will be raised.
 
 An example of configuration could be the following.
 
