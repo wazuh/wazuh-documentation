@@ -89,8 +89,7 @@ In the ``<cluster>`` section of the :doc:`Local configuration <../reference/osse
 
         $ openssl rand -hex 32
 
-- The IP addresses of all **nodes** of the cluster must be specified in the ``<nodes>``, including the IP of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` 
-to find out which IP from the list is theirs. If none of the IPs match with the ones returned by the ``hostname --all-ip-addresses`` command, an error will be raised.
+- The IP addresses of all **nodes** of the cluster must be specified in the ``<nodes>``, including the IP of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` to find out which IP from the list is theirs. If none of the IPs match with the ones returned by the ``hostname --all-ip-addresses`` command, an error will be raised.
 
 An example of configuration could be the following.
 
