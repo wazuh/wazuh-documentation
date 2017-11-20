@@ -186,9 +186,9 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
     $ rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
     $ cat > /etc/yum.repos.d/elastic.repo << EOF
-    [elastic-5.x]
-    name=Elastic repository for 5.x packages
-    baseurl=https://artifacts.elastic.co/packages/5.x/yum
+    [elasticsearch-6.x]
+    name=Elasticsearch repository for 6.x packages
+    baseurl=https://artifacts.elastic.co/packages/6.x/yum
     gpgcheck=1
     gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
     enabled=1
@@ -206,7 +206,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: bash
 
-	 $ curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/filebeat/filebeat.yml
+	 $ curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/filebeat/filebeat.yml
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP``  with the IP address or the hostname of the Elastic Stack server. For example:
 
