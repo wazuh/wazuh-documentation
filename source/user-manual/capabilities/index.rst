@@ -20,3 +20,4 @@ The capabilities are:
     agentless-monitoring/index
     antiflooding
     labels
+    virustotal-scan/index
