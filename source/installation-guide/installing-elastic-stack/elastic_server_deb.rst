@@ -39,7 +39,7 @@ Preparation
 
   	$ apt-get install curl apt-transport-https
   	$ curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-  	$ echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-5.x.list
+  	$ echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
   	$ apt-get update
 
 Elasticsearch
@@ -70,17 +70,21 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
   	$ update-rc.d elasticsearch defaults 95 10
   	$ service elasticsearch start
 
-3. Load Wazuh Elasticsearch template:
+3. Load Wazuh Elasticsearch templates:
 
   .. code-block:: bash
 
-  	$ curl https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/2.1/server/startup/integration_files/template_file.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+  	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+
+  .. code-block:: bash
+
+	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
 4. Insert sample alert:
 
   .. code-block:: bash
 
-  	$ curl https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/2.1/server/startup/integration_files/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+  	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -101,7 +105,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-  	$ curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/logstash/01-wazuh.conf
+  	$ curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh.conf
 
 3. Download the Wazuh Logstash template:
 
