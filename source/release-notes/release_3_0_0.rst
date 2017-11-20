@@ -14,6 +14,7 @@ This section shows the most relevant new features of Wazuh v3.0.0. You will find
 - `MSI Windows installer for agents`_
 - `More relevant features`_
 - `Wazuh API`_
+- `Ruleset`_
 - `Updated external libraries`_
 
 Grouping agents
@@ -150,7 +151,14 @@ The Wazuh API has significantly expanded its functionality, including the follow
 - Requests for managing groups.
 - Management of the new Wazuh Cluster.
 
-In addition, more new features could be found in the `API changelog <https://github.com/wazuh/wazuh-api/blob/master/CHANGELOG.md>`_.
+In addition, more new features could be found in the `API changelog <https://github.com/wazuh/wazuh-api/blob/3.0/CHANGELOG.md>`_.
+
+Ruleset
+--------
+
+The Ruleset has been improved along with the other components, including the rules necessaries for the VirusTotal integration for example.
+
+For getting more details about the included changes in the Ruleset you can visit its own `Ruleset changelog <https://github.com/wazuh/wazuh-ruleset/blob/3.0/CHANGELOG.md>`_.
 
 Updated external libraries
 --------------------------
