@@ -10,6 +10,7 @@ This section shows the most relevant new features of Wazuh v3.0.0. You will find
 - `Grouping agents`_
 - `Remote agent upgrades`_
 - `Improved JSON integration`_
+- `VirusTotal integration`_
 - `MSI Windows installer for agents`_
 - `More relevant features`_
 - `Wazuh API`_
@@ -86,6 +87,38 @@ Joining the previous configuration with the JSON log, we obtain the following re
   }
 
 In the :doc:`localfile section <../user-manual/reference/ossec-conf/localfile>` of ``ossec.conf`` can be found how to configure this feature.
+
+VirusTotal Integration
+-----------------------
+
+It has been developed an integration with the VirusTotal platform that allows us to scan monitored files by FIM in order to detect malicious content in them.
+This integration uses an own API provided by VirusTotal, performing requests for the monitored files. An example of alert with a positive result is shown below.
+
+.. code-block:: console
+   :emphasize-lines: 3
+
+   ** Alert 1510684984.55826: mail  - virustotal,
+   2017 Nov 14 18:43:04 PC->virustotal
+   Rule: 87105 (level 12) -> 'VirusTotal: Alert - /media/user/software/suspicious-file.exe - 7 engines detected this file'
+   {"virustotal": {"permalink": "https://www.virustotal.com/file/8604adffc091a760deb4f4d599ab07540c300a0ccb5581de437162e940663a1e/analysis/1510680277/", "sha1": "68b92d885317929e5b283395400ec3322bc9db5e", "malicious": 1, "source": {"alert_id": "1510684983.55139", "sha1": "68b92d885317929e5b283395400ec3322bc9db5e", "file": "/media/user/software/suspicious-file.exe", "agent": {"id": "006", "name": "agent_centos"}, "md5": "9519135089d69ad7ae6b00a78480bb2b"}, "positives": 7, "found": 1, "total": 67, "scan_date": "2017-11-14 17:24:37"}, "integration": "virustotal"}
+   virustotal.permalink: https://www.virustotal.com/file/8604adffc091a760deb4f4d599ab07540c300a0ccb5581de437162e940663a1e/analysis/1510680277/
+   virustotal.sha1: 68b92d885317929e5b283395400ec3322bc9db5e
+   virustotal.malicious: 1
+   virustotal.source.alert_id: 1510684983.55139
+   virustotal.source.sha1: 68b92d885317929e5b283395400ec3322bc9db5e
+   virustotal.source.file: /media/user/software/suspicious-file.exe
+   virustotal.source.agent.id: 006
+   virustotal.source.agent.name: agent_centos
+   virustotal.source.md5: 9519135089d69ad7ae6b00a78480bb2b
+   virustotal.positives: 7
+   virustotal.found: 1
+   virustotal.total: 67
+   virustotal.scan_date: 2017-11-14 17:24:37
+   integration: virustotal
+
+As we can see, it is a powerful functionality for searching malicious files in our systems.
+
+The complete documentation about this integration is located at :doc:`VirusTotal integration section <../user-manual/capabilities/virustotal-scan/index>`.
 
 MSI Windows installer for agents
 --------------------------------
