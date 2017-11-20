@@ -31,7 +31,7 @@ Create a user with permission to access S3
 ------------------------------------------
 
 Sign in to the ``AWS Management Console`` and open the `IAM console <https://console.aws.amazon.com/iam/>`_.
-In the navigation panel, choose ``Users`` and then choose ``Create New Users``.
+In the navigation panel, choose ``Users`` and then choose ``Add users``.
 Type the username for the user you would like to create.
 
 .. note:: Usernames can only use a combination of alphanumeric characters and these characters: plus (+), equal (=), comma (,), period (.), at (@), and hyphen (-). Names must be unique within an account.
@@ -42,8 +42,7 @@ The user will need access to the API, which requires an access key. To generate 
 
 Give the user access to this specific S3 bucket (based on `Writing IAM Policies: How to Grant Access to an Amazon S3 Bucket <http://blogs.aws.amazon.com/security/post/Tx3VRSWZ6B3SHAV/Writing-IAM-Policies-How-to-grant-access-to-an-Amazon-S3-bucket>`_)
 
-Under the IAM console, select ``Users`` and go to the ``Permissions`` tab, in the ``Inline Policies`` section, push the ``Create User Policy`` button. Click the ``Custom Policy`` option and push the ``Select`` button.
-
+Under the IAM console, select ``Users`` and go to the ``Permissions`` tab. Then click the ``Add inline policy`` button. Then select the ``Custom Policy`` choice.
 
 On the next page enter a ``Policy Name`` e.g. ossec-cloudtrail-s3-access, and for ``Policy Document`` use the example provided below:
 
