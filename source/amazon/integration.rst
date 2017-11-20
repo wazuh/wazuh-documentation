@@ -176,3 +176,40 @@ a. For Systemd: ::
 b. For SysV Init: ::
 
     service wazuh-manager restart
+
+Geolocate AWS IPs
+-----------------
+
+In order to geoLocate the IP of AWS alerts, it is necessary to modify the Wazuh config file for Logstash. This file is located in ``/etc/logstash/conf.d/01-wazuh.conf``. ::
+
+  filter {
+    if [data][srcip] {
+        mutate {
+            add_field => [ "@src_ip", "%{[data][srcip]}" ]
+        }
+    }
+    if [data][sourceIPAddress] {
+        mutate {
+            add_field => [ "@src_ip", "%{[data][src_ip]}" ]
+        }
+    }
+  }
+
+This filter will add a new field named ``src_ip`` with the source IP of the alert and must be set before of the ``geoip`` filter. This new field will help us to geoLocate the IP, but also, it is needed to modify the ``geoip`` filter: ::
+  filter {
+    geoip {
+        source => "@src_ip"
+        target => "GeoLocation"
+        fields => ["city_name", "continent_code", "country_code2", "country_name", "region_name", "location"]
+    }
+    date {
+        match => ["timestamp", "ISO8601"]
+        target => "@timestamp"
+    }
+    mutate {
+        remove_field => [ "timestamp", "beat", "input_type", "tags", "count", "@version", "log", "offset", "type","@src_ip"]
+        add_field => { "cluster.name" => "wazuh" }
+    }
+  }
+
+This will geolocate the IP stored in ``src_ip``, extract the fields and delete all unnecessary data. 
