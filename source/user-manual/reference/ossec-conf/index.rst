@@ -36,6 +36,8 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`client_buffer <client_buffer>`                          | agent                  |
 +---------------------------------------------------------------+------------------------+
+| :doc:`cluster <cluster>`                                      | manager                |
++---------------------------------------------------------------+------------------------+
 | :doc:`command <commands>`                                     | manager                |
 +---------------------------------------------------------------+------------------------+
 | :doc:`database_output <database-output>`                      | manager                |
@@ -81,6 +83,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    auth
    client
    client_buffer
+   cluster
    commands
    database-output
    email_alerts

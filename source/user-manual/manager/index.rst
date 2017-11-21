@@ -17,3 +17,4 @@ Wazuh manager is the system that analyzes the data received from all the agents,
         automatic-reports
         manual-email-report/index
         manual-email-report/smtp_authentication
+        wazuh-cluster

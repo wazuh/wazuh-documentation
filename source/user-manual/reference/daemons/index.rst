@@ -40,7 +40,11 @@ Daemons
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`ossec-syscheckd <ossec-syscheckd>`          | Checks configured files for security changes                    | manager, agent              |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`wazuh-modulesd <wazuh-modulesd>`            | Wazuh module manager                                            | manager, agent              |
+| :doc:`wazuh-clusterd <clusterd>`                  | Wazuh cluster manager                                           | manager                     |
++---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
+| :doc:`wazuh-clusterd-internal <clusterd-internal>`| Wazuh cluster manager (**internal?**)                           | manager                     |
++---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
+| :doc:`wazuh-modulesd <wazuh-modulesd>`            | Wazuh modules manager                                           | manager, agent              |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 
 
@@ -61,4 +65,6 @@ Daemons
     ossec-remoted
     ossec-reportd
     ossec-syscheckd
+    clusterd
+    clusterd-internal
     wazuh-modulesd
