@@ -3,6 +3,8 @@
 Deploying a Wazuh cluster
 =========================
 
+.. versionadded:: 3.0.0
+
 The Wazuh cluster has been developed in order to get a stronger communication between agents and managers. This means that the cluster is able to synchronize the necessary files between
 its nodes to allow agents to report events to any manager of the cluster.
 
@@ -49,7 +51,7 @@ These communications are encrypted with AES providing confidentiality.
 Client
 ^^^^^^^^
 
-Managers which have the client role in the cluster receive the data from the master node, and update their files with the received ones. This way, it's guaranteed that the shared configuration 
+Managers which have the client role in the cluster receive the data from the master node, and update their files with the received ones. This way, it's guaranteed that the shared configuration
 for the agents is the same in all managers.
 
 On the other hand, client nodes send to the master the ``agent-info`` file of their reporting agents. This file contains the most important information of each agent, and allows to the master node to know in real-time
