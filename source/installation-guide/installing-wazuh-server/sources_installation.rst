@@ -50,11 +50,14 @@ Installing Wazuh manager
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
 
-5. Start the services using this command:
+5. The installer asks if you want to start Wazuh at the end of the installation. If you have chosen not to start automatically, you can do it with:
 
   .. code-block:: bash
 
     $ /var/ossec/bin/ossec-control start
+
+    # If you want to check that it has started
+    $ /var/ossec/bin/ossec-control status
 
 Installing Wazuh API
 --------------------
