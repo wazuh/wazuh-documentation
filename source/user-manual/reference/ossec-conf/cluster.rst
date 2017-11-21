@@ -138,5 +138,5 @@ Example of configuration
         <node>172.17.0.2</node>
         <node>172.17.0.3</node>
         <node>172.17.0.4</node>
-      <nodes>
+      </nodes>
     </cluster>

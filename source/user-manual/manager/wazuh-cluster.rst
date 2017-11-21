@@ -109,7 +109,7 @@ An example of configuration could be the following.
         <node>192.168.0.3</node>
         <node>192.168.0.4</node>
         <node>192.168.0.5</node>
-      <nodes>
+      </nodes>
     </cluster>
 
 2. Agents should be configured for connecting to all the managers of the cluster.
@@ -124,17 +124,17 @@ For example, if we have three managers in the cluster with the IP addresses ``19
         <address>192.168.0.3</address>
         <port>1514</port>
         <protocol>udp</protocol>
-      <server>
+      </server>
       <server>
         <address>192.168.0.4</address>
         <port>1514</port>
         <protocol>tcp</protocol>
-      <server>
+      </server>
       <server>
         <address>192.168.0.5</address>
         <port>1514</port>
         <protocol>tcp</protocol>
-      <server>
+      </server>
       ...
     </client>
 
