@@ -24,13 +24,17 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | Configuration sections                                        | Supported installations|
 +===============================================================+========================+
-| :doc:`active-response <active-response>`                      | manager                |
+| :doc:`active-response <active-response>`                      | manager, agent         |
 +---------------------------------------------------------------+------------------------+
 | :doc:`agentless <agentless>`                                  | manager                |
 +---------------------------------------------------------------+------------------------+
 | :doc:`alerts <alerts>`                                        | manager                |
 +---------------------------------------------------------------+------------------------+
+| :doc:`auth <auth>`                                            | manager                |
++---------------------------------------------------------------+------------------------+
 | :doc:`client <client>`                                        | agent                  |
++---------------------------------------------------------------+------------------------+
+| :doc:`client_buffer <client_buffer>`                          | agent                  |
 +---------------------------------------------------------------+------------------------+
 | :doc:`command <commands>`                                     | manager                |
 +---------------------------------------------------------------+------------------------+
@@ -42,7 +46,11 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`integration  <integration>`                             | manager                |
 +---------------------------------------------------------------+------------------------+
-| :doc:`localfile <localfile>`                                  | manager                |
+| :doc:`labels  <labels>`                                       | manager, agent         |
++---------------------------------------------------------------+------------------------+
+| :doc:`localfile <localfile>`                                  | manager, agent         |
++---------------------------------------------------------------+------------------------+
+| :doc:`logging <logging>`                                      | manager, agent         |
 +---------------------------------------------------------------+------------------------+
 | :doc:`remote <remote>`                                        | manager                |
 +---------------------------------------------------------------+------------------------+
@@ -70,13 +78,17 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    active-response
    agentless
    alerts
+   auth
    client
+   client_buffer
    commands
    database-output
    email_alerts
    global
    integration
+   labels
    localfile
+   logging
    remote
    reports
    rootcheck

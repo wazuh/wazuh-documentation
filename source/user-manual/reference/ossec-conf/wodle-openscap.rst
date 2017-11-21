@@ -8,12 +8,14 @@ wodle name="open-scap"
 	.. code-block:: xml
 
 		<wodle name="open-scap">
+		</wodle>
 
 Configuration options of the OpenSCAP wodle.
 
 Options
 -------
 
+- `disabled`_
 - `timeout`_
 - `interval`_
 - `scan-on-start`_
@@ -23,6 +25,8 @@ Options
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
 +======================+=============================+
+| `disabled`_          | yes, no                     |
++----------------------+-----------------------------+
 | `timeout`_           | A positive number (seconds) |
 +----------------------+-----------------------------+
 | `interval`_          | A positive number           |
@@ -33,13 +37,24 @@ Options
 +----------------------+-----------------------------+
 
 
+disabled
+^^^^^^^^
+
+Disables the OpenSCAP wodle.
+
++--------------------+-----------------------------+
+| **Default value**  | no                          |
++--------------------+-----------------------------+
+| **Allowed values** | yes, no                     |
++--------------------+-----------------------------+
+
 timeout
 ^^^^^^^
 
 Timeout for each evaluation.
 
 +--------------------+-----------------------------+
-| **Default Value**  | 1800                        |
+| **Default value**  | 1800                        |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
@@ -50,7 +65,7 @@ interval
 Interval between OpenSCAP executions.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default Value**  | 1d                                                                                                                                       |
+| **Default value**  | 1d                                                                                                                                       |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
@@ -61,7 +76,7 @@ scan-on-start
 Run evaluation immediately when service is started.
 
 +--------------------+---------+
-| **Default Value**  | yes     |
+| **Default value**  | yes     |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
@@ -97,18 +112,18 @@ Attributes
 | **profile**       | Select profile.                                             |
 +-------------------+-------------------------------------------------------------+
 
-Example
--------
+Example of configuration
+------------------------
 
-::
+.. code-block:: xml
 
-	<wodle name="open-scap">
+  <wodle name="open-scap">
 
-	    <timeout>1800</timeout>
-	    <interval>1d</interval>
-	    <scan-on-start>yes</scan-on-start>
+    <timeout>1800</timeout>
+    <interval>1d</interval>
+    <scan-on-start>yes</scan-on-start>
 
-	    <content type="xccdf" path="ssg-centos7-ds.xml"/>
-	    <content type="xccdf" path="ssg-centos6-ds.xml"/>
+    <content type="xccdf" path="ssg-centos7-ds.xml"/>
+    <content type="xccdf" path="ssg-centos6-ds.xml"/>
 
-	</wodle>
+  </wodle>

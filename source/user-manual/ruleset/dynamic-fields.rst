@@ -6,9 +6,9 @@ Dynamic fields
 Traditional decoders
 ---------------------
 
-An important step for the detection and processing of threats is the extraction of information from each event received.  Wazuh uses decoders to identify event types and then extract the most relevant fields, thus enriching events and allowing them to be more deeply analysed and indexed.
+An important step for the detection and processing of threats is the extraction of information from each event received.  Wazuh uses decoders to identify event types and then extract the most relevant fields, thus enriching events and allowing them to be more deeply analyzed and indexed.
 
-Traditionally, OSSEC has provided thirteen predefined fields for storing extracted information (*user, srcip, dstip, srcport, dstport, protocol, action, id, url, data, extra_data, status, system_name*), of which only eight can be extracted simultaneously. 
+Traditionally, OSSEC has provided thirteen predefined fields for storing extracted information (*user, srcip, dstip, srcport, dstport, protocol, action, id, url, data, extra_data, status, system_name*), of which only eight can be extracted simultaneously.
 
 Static fields:
 ::
@@ -25,7 +25,7 @@ Static fields:
 Dynamic decoders
 -----------------
 
-It is often necessary to extract more than eight relevant fields from an event, and often the actual data items extracted have no relationship to the limited list of predefined field names.  Knowing that we cannot afford to operate within these contraints, Wazuh has extended OSSEC to allow the decoding of an unlimited number of fields with field names that clearly relate to what is being extracted.   Even nested field names are supported.  
+It is often necessary to extract more than eight relevant fields from an event, and often the actual data items extracted have no relationship to the limited list of predefined field names.  Knowing that we cannot afford to operate within these constraints, Wazuh has extended OSSEC to allow the decoding of an unlimited number of fields with field names that clearly relate to what is being extracted.   Even nested field names are supported.
 
 Dynamic fields:
 ::

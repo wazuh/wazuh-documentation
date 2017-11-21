@@ -81,7 +81,7 @@ In order to preserve Wazuh data even after removing the Wazuh container, you'll 
      image: wazuh/wazuh:latest
      hostname: wazuh-manager
      ports:
-       - "1514:1514"
+       - "1514:1514/udp"
        - "1515:1515"
        - "514:514"
        - "55000:55000"

@@ -12,6 +12,7 @@ This documentation explains how to install, update, and contribute to Wazuh Rule
 
        getting-started
        update
+       json-decoder
        custom
        dynamic-fields
        ruleset-xml-syntax/index.rst

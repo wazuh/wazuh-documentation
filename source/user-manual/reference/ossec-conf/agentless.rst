@@ -8,6 +8,7 @@ agentless
 	.. code-block:: xml
 
 		<agentless>
+		</agentless>
 
 Agentless monitoring allows you to run integrity checking on systems without an agent installed.
 
@@ -23,7 +24,7 @@ Options
 type
 ^^^^
 +--------------------+----------------------------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                                                |
+| **Default value**  | n/a                                                                                                |
 +--------------------+---------------------------+------------------------------------------------------------------------+
 | **Allowed values** | ssh_integrity_check_bsd   | Require a list of directories in <arguments>.                          |
 |                    |                           |                                                                        |
@@ -46,7 +47,7 @@ frequency
 This controls the number of seconds between each check of the agentless device.
 
 +--------------------+--------------------------------------------------------+
-| **Default Value**  | n/a                                                    |
+| **Default value**  | n/a                                                    |
 +--------------------+--------------------------------------------------------+
 | **Allowed values** | An integer in seconds                                  |
 +--------------------+--------------------------------------------------------+
@@ -57,7 +58,7 @@ host
 This defines the username and the name of the agentless host.
 
 +--------------------+--------------------------------------------------------+
-| **Default Value**  | n/a                                                    |
+| **Default value**  | n/a                                                    |
 +--------------------+--------------------------------------------------------+
 | **Allowed values** | Any username and host (user@hostname)                  |
 +--------------------+--------------------------------------------------------+
@@ -68,7 +69,7 @@ state
 This determines whether the check type is periodic or periodic_diff.
 
 +--------------------+--------------------------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                                              |
+| **Default value**  | n/a                                                                                              |
 +--------------------+---------------+----------------------------------------------------------------------------------+
 | **Allowed values** | periodic      | Output from each check is analyzed with the Wazuh ruleset as if a monitored log. |
 +                    +---------------+----------------------------------------------------------------------------------+
@@ -83,7 +84,20 @@ arguments
 This defines the arguments passed to the agentless check
 
 +--------------------+------------------------------------------------------------------------------------------+
-| **Default Value**  | n/a                                                                                      |
+| **Default value**  | n/a                                                                                      |
 +--------------------+------------------------------------------------------------------------------------------+
 | **Allowed values** | This is a space-delimited list of files or directories to be monitored.                  |
 +--------------------+------------------------------------------------------------------------------------------+
+
+Example of configuration
+------------------------
+
+.. code-block:: xml
+
+    <agentless>
+      <type>ssh_integrity_check_linux</type>
+      <frequency>300</frequency>
+      <host>admin@192.168.1.108</host>
+      <state>periodic_diff</state>
+      <arguments>/etc /usr/bin /usr/sbin</arguments>
+    </agentless>

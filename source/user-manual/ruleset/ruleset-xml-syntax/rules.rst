@@ -446,15 +446,17 @@ options
 
 Additional rule options
 
-+--------------------+------------------------+
-| Attribute          | Description            |
-+====================+========================+
-| **alert_by_email** | Always alert by email. |
-+--------------------+------------------------+
-| **no_email_alert** | Never alert by email.  |
-+--------------------+------------------------+
-| **no_log**         | Do not log this alert. |
-+--------------------+------------------------+
++--------------------+-----------------------------------------------------+
+| Attribute          | Description                                         |
++====================+=====================================================+
+| **alert_by_email** | Always alert by email.                              |
++--------------------+-----------------------------------------------------+
+| **no_email_alert** | Never alert by email.                               |
++--------------------+-----------------------------------------------------+
+| **no_log**         | Do not log this alert.                              |
++--------------------+-----------------------------------------------------+
+| **no_full_log**    | Do not include the ``full_log`` field in the alert. |
++--------------------+-----------------------------------------------------+
 
 .. _rules_check_diff:
 
@@ -475,8 +477,9 @@ group
 Add additional groups to the alert. Groups are optional tags added to alerts.
 
 They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | Any String|
-+--------------------+-----------+
+
++--------------------+------------+
+| **Default Value**  | n/a        |
++--------------------+------------+
+| **Allowed values** | Any String |
++--------------------+------------+

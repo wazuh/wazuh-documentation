@@ -20,7 +20,7 @@ Install ``curl``, ``apt-transport-https`` and ``lsb-release``::
 	$ sudo apt-get update
 	$ sudo apt-get install curl apt-transport-https lsb-release
 
-Get the adecuate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution, you can use next script to make installation more silently::
+Get the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution, you can use next script to make installation more silently::
 
   $ wget "https://apt.puppetlabs.com/puppetlabs-release-pc1-$(lsb_release -cs).deb"
   $ sudo dpkg -i "puppetlabs-release-pc1-$(lsb_release -cs).deb"
@@ -51,13 +51,13 @@ Then, restart your Puppet Server to apply changes:
 
   ::
 
-    $ systemctl start puppetserver
+    $ sudo systemctl start puppetserver
 
   b) For SysV Init:
 
   ::
 
-    $ service puppetserver start
+    $ sudo service puppetserver start
 
 PuppetDB installation
 ---------------------
@@ -100,7 +100,9 @@ Restart service after change configuration:
 
    $ sudo systemctl restart postgresql-9.4
 
-Create a PostgreSQL user and database: ::
+Create a PostgreSQL user and database:
+
+.. code-block:: console
 
    # su - postgres
    $ createuser -DRSP puppetdb
@@ -117,7 +119,7 @@ Create the extension pg_trgm is the RegExp-optimized index extension: ::
 
 Test database access: ::
 
-   # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
+   $ psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb:
    psql (9.4.11)
    Type "help" for help.

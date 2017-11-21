@@ -15,7 +15,7 @@ An active response can be triggered by a specific alert, alert level or rule gro
 Where are active response actions executed?
 -------------------------------------------
 
-Active response specify where their associated commanda will be executed: on the agent that triggered the alert, on the manager, on another specified agent, or on all agents plus the manager.
+Active response specifies where their associated command a will be executed: on the agent that triggered the alert, on the manager, on another specified agent, or on all agents plus the manager.
 
 Active response configuration
 ----------------------------------------
@@ -73,7 +73,7 @@ Wazuh is preconfigured with the following scripts:
 +--------------------------+---------------------------------------------------------------+
 | Script name              |                          Description                          |
 +==========================+===============================================================+
-| dissable-account.sh      | disables an account by setting ``passwd-l``                   |
+| disable-account.sh       | disables an account by setting ``passwd-l``                   |
 +--------------------------+---------------------------------------------------------------+
 | firewall-drop.sh         | adds an IP to the iptables deny list                          |
 +--------------------------+---------------------------------------------------------------+

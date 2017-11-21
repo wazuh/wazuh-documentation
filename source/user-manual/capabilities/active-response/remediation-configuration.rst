@@ -61,7 +61,7 @@ Active response::
 Block an IP with PF
 -------------------
 
-In this example, a command with the name *"pf-block"* is configured to use the *"pf.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"pf-block"* command on agent *"001"* when a rule in either the *"authentificaiton_failed"* or *"authentification_failures"* rule group fires.  This is a *Stateless* response as no timeout parameter is defined.
+In this example, a command with the name *"pf-block"* is configured to use the *"pf.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"pf-block"* command on agent *"001"* when a rule in either the *"authentificaiton_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateless* response as no timeout parameter is defined.
 
 Command::
 
@@ -83,7 +83,7 @@ Active response::
 Add an IP to the iptables deny list
 -----------------------------------
 
-In this example, a command with the name *"firewall-drop"* is configured to use the *"firewall-drop.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"firewall-block"* command on all systems when a rule in either the *"authentificaiton_failed"* or *"authentification_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The repeated offenders parameter increases the timeout period for each subsequent offence by a specific IP address.
+In this example, a command with the name *"firewall-drop"* is configured to use the *"firewall-drop.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"firewall-block"* command on all systems when a rule in either the *"authentificaiton_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The repeated offenders parameter increases the timeout period for each subsequent offence by a specific IP address.
 
 **Note: This parameter is specified in minutes rather than seconds.**
 

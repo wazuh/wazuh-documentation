@@ -69,10 +69,13 @@ Available documentation
    getting-started/index
    installation-guide/index
    user-manual/index
+   development/index
    docker/index
    deploying-with-puppet/index
+   deploying-with-ansible/index
    pci-dss/index
    amazon/index
    migrating-from-ossec/index
+   release-notes/index
 
 .. note:: If you want to contribute to this documentation or our project please head over to our `Github repositories <https://github.com/wazuh>`_. You can also join our `users mailing list <https://groups.google.com/d/forum/wazuh>`_, by sending an email to ``wazuh+subscribe@googlegroups.com``, to ask questions and participate in discussions.

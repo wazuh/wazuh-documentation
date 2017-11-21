@@ -7,7 +7,7 @@ Here you will find instructions to install and deploy Wazuh HIDS.
 
 Current: https://documentation.wazuh.com/current
 
-Branch 2.0: https://documentation.wazuh.com/2.0
+Branch 2.0: https://documentation.wazuh.com/2.1
 
 ## Contributions
 

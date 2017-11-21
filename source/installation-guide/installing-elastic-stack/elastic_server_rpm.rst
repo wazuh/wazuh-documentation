@@ -5,38 +5,44 @@ Install Elastic Stack with RPM packages
 
 The RPM packages are suitable for installation on Red Hat, CentOS and other RPM-based systems.
 
+.. note:: Many of the commands described below need to be executed with root user privileges.
+
 Preparation
 -----------
 
 1. Oracle Java JRE is required by Logstash and Elasticsearch.
 
-    .. note::
+  .. note::
 
-        The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
-
-    ::
-
-        curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u131-b11/d54c1d3a095b4ff2b6607d096fa80163/jre-8u131-linux-x64.rpm"
-
-    Now check if the package was download successfully::
-
-        rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
-
-    Finally, install the RPM package using yum::
-
-    	yum install jre-8-linux-x64.rpm
-    	rm jre-8-linux-x64.rpm
-
-2. We will also install the Elastic repository and its GPG key:
+      The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
 
   .. code-block:: bash
 
-	rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+      $ curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jre-8u151-linux-x64.rpm"
 
-	cat > /etc/yum.repos.d/elastic.repo << EOF
-	[elastic-5.x]
-	name=Elastic repository for 5.x packages
-	baseurl=https://artifacts.elastic.co/packages/5.x/yum
+  Now check if the package was download successfully:
+
+  .. code-block:: bash
+
+      $ rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
+
+  Finally, install the RPM package using yum:
+
+  .. code-block:: bash
+
+  	$ yum install jre-8-linux-x64.rpm
+  	$ rm jre-8-linux-x64.rpm
+
+2. Install the Elastic repository and its GPG key:
+
+  .. code-block:: bash
+
+	$ rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+
+	$ cat > /etc/yum.repos.d/elastic.repo << EOF
+	[elasticsearch-6.x]
+	name=Elasticsearch repository for 6.x packages
+	baseurl=https://artifacts.elastic.co/packages/6.x/yum
 	gpgcheck=1
 	gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
 	enabled=1
@@ -47,34 +53,46 @@ Preparation
 Elasticsearch
 -------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For info at `Elastic <https://www.elastic.co/products/elasticsearch>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more info please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
-1. Install the Elasticsearch package::
+1. Install the Elasticsearch package:
 
-	yum install elasticsearch
+  .. code-block:: bash
+
+	 $ yum install elasticsearch
 
 2. Enable and start the Elasticsearch service:
 
-  a) For Systemd::
+  a) For Systemd:
 
-	systemctl daemon-reload
-	systemctl enable elasticsearch.service
-	systemctl start elasticsearch.service
+  .. code-block:: bash
 
-  b) For SysV Init::
+  	$ systemctl daemon-reload
+  	$ systemctl enable elasticsearch.service
+  	$ systemctl start elasticsearch.service
 
-	chkconfig --add elasticsearch
-	service elasticsearch start
+  b) For SysV Init:
 
-3. Load Wazuh Elasticsearch template::
+  .. code-block:: bash
 
-	curl https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/master/server/startup/integration_files/template_file.json | \
-	curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+  	$ chkconfig --add elasticsearch
+  	$ service elasticsearch start
 
-4. Insert sample alert::
+3. Load Wazuh Elasticsearch templates:
 
-	curl https://raw.githubusercontent.com/wazuh/wazuh-kibana-app/master/server/startup/integration_files/alert_sample.json | \
-	curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+  .. code-block:: bash
+
+	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+
+  .. code-block:: bash
+
+	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
+
+4. Insert sample alert:
+
+  .. code-block:: bash
+
+	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -83,37 +101,54 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For in
 Logstash
 --------
 
-Logstash is the tool that will collect logs, parse them, and then pass them along to Elasticsearch for indexing and storage. For more info please see `Logstash <https://www.elastic.co/products/logstash>`_.
+Logstash is the tool that will collect, parse, and forward to Elasticsearch for indexing and storage all logs generated by Wazuh server. For more info please see `Logstash <https://www.elastic.co/products/logstash>`_.
 
-1. Install the Logstash package::
+1. Install the Logstash package:
 
-	yum install logstash
+  .. code-block:: bash
 
-2. Download the Wazuh config and template files for Logstash::
+    $ yum install logstash
 
-	curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/logstash/01-wazuh.conf
-	curl -so /etc/logstash/wazuh-elastic5-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.0/extensions/elasticsearch/wazuh-elastic5-template.json
+2. Download the Wazuh config for Logstash:
+
+  .. code-block:: bash
+
+    $ curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh.conf
 
 3. **Follow this step only if you are using a single-host architecture**:
 
     a) Edit ``/etc/logstash/conf.d/01-wazuh.conf``, commenting out the entire input section titled "Remote Wazuh Manager - Filebeat input" and uncommenting the entire input section titled "Local Wazuh Manager - JSON file input". This will set up Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than expecting Filebeat on a separate server to forward the information in that file to Logstash.
 
-    b) Because the Logstash user needs to read alerts.json file, please add it to OSSEC group by running::
+    b) Because the Logstash user needs to read alerts.json file, please add it to OSSEC group by running:
 
-	usermod -a -G ossec logstash
+    .. code-block:: bash
+
+      $ usermod -a -G ossec logstash
+
+.. note::
+
+    Follow the next steps if you use CentOS-6/RHEL-6 or Amazon AMI (logstash uses Upstart like service manager and need to be fixed, see `bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_) ::
+
+	1) Edit the file /etc/logstash/startup.options and in the line 30 change the LS_GROUP=logstash to LS_GROUP=ossec.
+	2) Update the service with the new parameters run the command /usr/share/logstash/bin/system-install
+	3) Start Logstash again.
 
 4. Enable and start the Logstash service:
 
-  a) For Systemd::
+  a) For Systemd:
 
-	systemctl daemon-reload
-	systemctl enable logstash.service
-	systemctl start logstash.service
+  .. code-block:: bash
 
-  b) For SysV Init::
+    $ systemctl daemon-reload
+    $ systemctl enable logstash.service
+    $ systemctl start logstash.service
 
-	chkconfig --add logstash
-	service logstash start
+  b) For SysV Init:
+
+  .. code-block:: bash
+
+  	$ chkconfig --add logstash
+  	$ service logstash start
 
 .. note::
 
@@ -124,21 +159,27 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. More info at `Kibana <https://www.elastic.co/products/kibana>`_.
 
-1. Install the Kibana package::
+1. Install the Kibana package:
 
-	yum install kibana
+  .. code-block:: bash
 
-2. Install the Wazuh App plugin for Kibana::
+	 $ yum install kibana
 
-	/usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+2. Install the Wazuh App plugin for Kibana:
+
+  .. code-block:: bash
+
+	 $ /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
   .. warning::
 
     The Kibana plugin installation process may take several minutes. Please wait patiently.
 
-3. **Optional.** Kibana will listen only on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml``. Uncomment the setting ``server.host`` and change the value to::
+3. **Optional.** Kibana will listen only on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml``. Uncomment the setting ``server.host`` and change the value to:
 
-	server.host: "0.0.0.0"
+  .. code-block:: yaml
+
+	 server.host: "0.0.0.0"
 
   .. note::
 
@@ -146,16 +187,20 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 4. Enable and start the Kibana service:
 
-  a) For Systemd::
+  a) For Systemd:
 
-	systemctl daemon-reload
-	systemctl enable kibana.service
-	systemctl start kibana.service
+  .. code-block:: bash
 
-  b) For SysV Init::
+  	$ systemctl daemon-reload
+  	$ systemctl enable kibana.service
+  	$ systemctl start kibana.service
 
-	chkconfig --add kibana
-	service kibana start
+  b) For SysV Init:
+
+  .. code-block:: bash
+
+  	$ chkconfig --add kibana
+  	$ service kibana start
 
 Connecting the Wazuh App with the API
 -------------------------------------
