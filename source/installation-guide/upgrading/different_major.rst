@@ -180,7 +180,7 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
         # systemctl daemon-reload
         # systemctl restart elasticsearch
 
-9. Reenable allocation:
+9. Reenable allocation::
 
         # curl -XPUT 'localhost:9200/_cluster/settings?pretty' -H 'Content-Type: application/json' -d'
               {
