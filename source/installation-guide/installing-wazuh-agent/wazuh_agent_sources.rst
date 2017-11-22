@@ -28,7 +28,7 @@ Installing Linux agent
 
   .. code-block:: bash
 
-      sudo apt-get install gcc make libc6-dev
+      sudo apt-get install gcc make libc6-dev curl
 
       # If you want to use Auth, also install:
       sudo apt-get install libssl-dev
@@ -37,14 +37,14 @@ Installing Linux agent
 
   .. code-block:: bash
 
-    $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.0.tar.gz | tar zx
+    $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.1.tar.gz | tar zx
 
 3. Run the ``install.sh`` script, this will display a wizard that will guide you through the installation process using the Wazuh sources:
 
   .. code-block:: bash
 
     $ cd wazuh-*
-    $ ./install.sh
+    $ sudo ./install.sh
 
 .. note:: You can also run an :doc:`unattended installation<../unattended-installation>`.
 
@@ -70,9 +70,9 @@ Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
   .. code-block:: bash
 
-   $ apt-get install gcc-mingw-w64
-   $ apt-get install nsis
-   $ apt-get install make
+   $ sudo apt-get install gcc-mingw-w64
+   $ sudo apt-get install nsis
+   $ sudo apt-get install make
 
 Set up Windows build environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -90,7 +90,7 @@ Download the Wazuh source code and unzip it:
 
   .. code-block:: bash
 
-   $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.0.tar.gz | tar zx
+   $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.1.tar.gz | tar zx
    $ cd wazuh-*/src
 
 Compiling the agent
