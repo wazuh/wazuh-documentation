@@ -42,7 +42,7 @@ The user will need access to the API, which requires an access key. To generate 
 
 Give the user access to this specific S3 bucket (based on `Writing IAM Policies: How to Grant Access to an Amazon S3 Bucket <http://blogs.aws.amazon.com/security/post/Tx3VRSWZ6B3SHAV/Writing-IAM-Policies-How-to-grant-access-to-an-Amazon-S3-bucket>`_)
 
-Under the IAM console, select ``Users`` and go to the ``Permissions`` tab. Then click the ``Add inline policy`` button. Then select the ``Custom Policy`` choice.
+Under the IAM console, select ``Users`` and go to the ``Permissions`` tab. Then click the ``Add inline policy`` button. Then click the ``Custom Policy`` button.
 
 On the next page enter a ``Policy Name`` e.g. ossec-cloudtrail-s3-access, and for ``Policy Document`` use the example provided below:
 
