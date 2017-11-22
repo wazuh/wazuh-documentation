@@ -68,6 +68,13 @@ Those daemons must be running in all the managers of the cluster in order to ens
 
 Refer to the section :doc:`Daemons <../reference/daemons/index>` to find out more information about the usage of these daemons.
 
+Cluster management
+^^^^^^^^^^^^^^^^^^^^
+
+The cluster can be efficiently controlled from any manager with the **cluster_control**. This tool allows you to obtain real-time information about any node, as well as the status of the all synchronized files and information about agents connected to the cluster.
+
+The manual about this tool can be found at :doc:`cluster_control tool <../reference/tools/cluster_control>`.
+
 Cluster database
 ^^^^^^^^^^^^^^^^^
 
