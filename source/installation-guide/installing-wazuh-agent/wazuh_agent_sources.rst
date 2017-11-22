@@ -34,7 +34,7 @@ Installing Linux agent
 
   .. code-block:: bash
 
-    $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.0.tar.gz | tar zx
+    $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.1.tar.gz | tar zx
 
 3. Run the ``install.sh`` script, this will display a wizard that will guide you through the installation process using the Wazuh sources:
 
@@ -76,7 +76,7 @@ Download the Wazuh source code and unzip it:
 
   .. code-block:: bash
 
-   $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.0.tar.gz | tar zx
+   $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.1.tar.gz | tar zx
    $ cd wazuh-*/src
 
 Compiling the agent
