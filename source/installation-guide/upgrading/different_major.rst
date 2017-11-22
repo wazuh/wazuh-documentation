@@ -161,15 +161,17 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
             }
             '
 
-10. Load Wazuh Agent Elasticsearch template:
+10. Load Wazuh Elasticsearch templates:
 
-    .. code-block:: bash
-        # curl https://url_of_wazuh_agent_templates/template.json |  curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+  .. code-block:: bash
 
-11. Load Wazuh Elasticsearch template:
-    ..code-block:: bash
-        # curl https://url_of_wazuh_templates/template.json |  curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    $ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
+  .. code-block:: bash
+
+    $ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
+
+.. ToDO:
 12. Reindex your old Wazuh alerts:
     a) Download our reindex script:
     ..code-block:: bash
