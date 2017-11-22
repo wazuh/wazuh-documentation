@@ -25,7 +25,7 @@ Installing Wazuh manager
 
     .. code-block:: bash
 
-      $ sudo apt-get install gcc make git libc6-dev
+      $ sudo apt-get install gcc make git libc6-dev curl
 
       # If you want to use Auth, also install:
       $ sudo apt-get install libssl-dev
@@ -34,14 +34,14 @@ Installing Wazuh manager
 
   .. code-block:: bash
 
-    $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.0.tar.gz | tar zx
+    $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.1.tar.gz | tar zx
 
 3. Run the ``install.sh`` script, this will display a wizard that will guide you through the installation process using the Wazuh sources:
 
   .. code-block:: bash
 
     $ cd wazuh-*
-    $ ./install.sh
+    $ sudo ./install.sh
 
 
 4. The script will ask about what kind of installation you want. Type ``server`` to install Wazuh Manager:
@@ -54,7 +54,7 @@ Installing Wazuh manager
 
   .. code-block:: bash
 
-    $ /var/ossec/bin/ossec-control start
+    $ sudo /var/ossec/bin/ossec-control start
 
 Installing Wazuh API
 --------------------
@@ -66,14 +66,14 @@ Installing Wazuh API
     .. code-block:: bash
 
       $ curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-      $ yum -y install nodejs
+      $ sudo yum -y install nodejs
 
   b) For Debian-based distributions:
 
     .. code-block:: bash
 
       $ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-      $ apt-get install -y nodejs
+      $ sudo apt-get install -y nodejs
 
   .. note::
 	`Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
@@ -82,7 +82,7 @@ Installing Wazuh API
 
   .. code-block:: bash
 
-      $ curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v2.1.0/install_api.sh && bash ./install_api.sh download
+      $ curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v2.1.1/install_api.sh && bash ./install_api.sh download
 
 3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions. It is possible to set a custom Python path for the API to use, in ``/var/ossec/api/configuration/config.js``:
 
@@ -107,18 +107,18 @@ Installing Wazuh API
 
     .. code-block:: bash
 
-    	$ yum install -y centos-release-scl
-    	$ yum install -y python27
+    	$ sudo yum install -y centos-release-scl
+    	$ sudo yum install -y python27
 
   b) For RHEL 6:
 
     .. code-block:: bash
 
-    	$ yum install python27
+    	$ sudo yum install python27
 
     	# You may need to first enable a repository in order to get python27, with a command like this:
-    	#   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
-    	#   yum-config-manager --enable rhel-server-rhscl-6-rpms
+    	#   sudo yum-config-manager --enable rhui-REGION-rhel-server-rhscl
+    	#   sudo yum-config-manager --enable rhel-server-rhscl-6-rpms
 
 .. note:: You can also run an :doc:`unattended installation<../unattended-installation>` of the Wazuh manager and API.
 
