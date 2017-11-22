@@ -29,3 +29,4 @@ This section describes how to upgrade an existing Wazuh installation. The upgrad
     legacy/index
     same_minor
     same_major
+    different_major
