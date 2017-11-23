@@ -17,7 +17,7 @@ To set up the repository, run this command:
      .. code-block:: bash
 
          $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-         [wazuh_repo_dev]
+         [wazuh_repo]
          gpgcheck=1
          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
          enabled=1
@@ -31,7 +31,7 @@ For CentOS-5 and RHEL-5:
     .. code-block:: bash
 
         $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-        [wazuh_repo_dev]
+        [wazuh_repo]
         gpgcheck=1
         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
         enabled=1
