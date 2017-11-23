@@ -29,7 +29,7 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
    .. code-block:: bash
 
-		$ echo "deb https://packages.wazuh.com/3.x/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+		$ echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 4. Update the package information:
 

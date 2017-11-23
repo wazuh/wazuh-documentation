@@ -28,7 +28,7 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
    .. code-block:: bash
 
-		$ echo "deb https://packages.wazuh.com/apt $CODENAME main" | tee /etc/apt/sources.list.d/wazuh.list
+		$ echo "deb https://packages.wazuh.com/apt main" | tee /etc/apt/sources.list.d/wazuh.list
 
 4. Update the package information:
 
