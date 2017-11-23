@@ -10,66 +10,35 @@ For CentOS/RHEL/Fedora platforms, installing Wazuh server components is just ins
 Adding the Wazuh repository
 ---------------------------
 
-The first thing you need is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
+The first thing you need is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
 
-To set up the repository, run the command that corresponds to your specific RPM-based Linux distribution:
-
-  a) For CentOS:
-
-    .. code-block:: bash
-
-    	$ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-    	[wazuh_repo]
-    	gpgcheck=1
-    	gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    	enabled=1
-    	name=CentOS-$releasever - Wazuh
-    	baseurl=https://packages.wazuh.com/yum/el/$releasever/$basearch
-    	protect=1
-    	EOF
-
-  b) For RHEL:
-
-    .. code-block:: bash
-
-      $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-      [wazuh_repo]
-      gpgcheck=1
-      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-      enabled=1
-      name=RHEL-$releasever - Wazuh
-      baseurl=https://packages.wazuh.com/yum/rhel/$releasever/$basearch
-      protect=1
-      EOF
-
-  c) For Fedora:
-
-    .. code-block:: bash
-
-      $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-      [wazuh_repo]
-      gpgcheck=1
-      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-      name=Fedora-$releasever - Wazuh
-      enabled=1
-      baseurl=https://packages.wazuh.com/yum/fc/$releasever/$basearch
-      protect=1
-      EOF
-
-  d) For Amazon Linux:
+To set up the repository, run this command:
 
      .. code-block:: bash
 
-    	$ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-    	[wazuh_repo]
-    	gpgcheck=1
-    	gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    	enabled=1
-    	name=Amazon Linux - Wazuh
-    	baseurl=https://packages.wazuh.com/yum/el/7/$basearch
-    	protect=1
-    	EOF
+         $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+         [wazuh_repo_dev]
+         gpgcheck=1
+         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+         enabled=1
+         name=CentOS-$releasever - Wazuh
+         baseurl=http://packages.wazuh.com/3.x/yum/
+         protect=1
+         EOF
 
+For CentOS-5 and RHEL-5:
+
+    .. code-block:: bash
+
+        $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+        [wazuh_repo_dev]
+        gpgcheck=1
+        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+        enabled=1
+        name=CentOS-$releasever - Wazuh
+        baseurl=http://packages.wazuh.com/3.x/yum/5/
+        protect=1
+        EOF
 
 Installing Wazuh manager
 ------------------------

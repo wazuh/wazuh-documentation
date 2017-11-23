@@ -25,17 +25,11 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
 		$ curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-3. Getting the distribution codename and adding the repository:
+3. Adding the repository:
 
    .. code-block:: bash
 
-		$ CODENAME=$(lsb_release -cs)
-		$ echo "deb https://packages.wazuh.com/apt $CODENAME main" | tee /etc/apt/sources.list.d/wazuh.list
-
-These are the supported codename values:
-
-	- For Debian: wheezy, jessie, stretch and sid
-	- For Ubuntu: trusty, vivid, wily, xenial and yakkety
+		$ echo "deb https://packages.wazuh.com/3.x/apt/ unstable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 4. Update the package information:
 
