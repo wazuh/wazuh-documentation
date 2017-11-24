@@ -87,70 +87,84 @@ Use case: Deploying a Wazuh cluster
 
 In order to deploy a Wazuh cluster, follow these steps:
 
-1. Set the properly configuration in all the managers of the cluster.
+1. Install dependencies
 
-In the ``<cluster>`` section of the :doc:`Local configuration <../reference/ossec-conf/cluster>` it should be set the configuration for the cluster regarding the following considerations.
-
-- One manager should be the master and the other ones, the clients. This is specified in the ``<node_type>`` field.
-- The key should be the same for all the nodes of the cluster and it must be 32 characters long. To generate a random password you can use the following command:
+  a. For RPM-based distributions:
 
     .. code-block:: bash
 
-        $ openssl rand -hex 16
+      $ sudo yum install python-setuptools python-cryptography
 
-- The IP addresses of all **nodes** of the cluster must be specified in the ``<nodes>``, including the IP of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` to find out which IP from the list is theirs. If none of the IPs match with the ones returned by the ``hostname --all-ip-addresses`` command, an error will be raised.
+  b. For Debian-based distributions:
 
-An example of configuration could be the following.
+    .. code-block:: bash
 
-.. code-block:: xml
+      $ sudo apt install python-cryptography
 
-    <cluster>
-      <name>cluster01</name>
-      <node_name>manager_centos</node_name>
-      <node_type>master</node_type>
-      <key>nso42FGdswR0805tnVqeww0u3Rubwk2a</key>
-      <interval>2m</interval>
-      <port>1516</port>
-      <bind_addr>0.0.0.0</bind_addr>
-      <nodes>
-        <node>192.168.0.3</node>
-        <node>192.168.0.4</node>
-        <node>192.168.0.5</node>
-      </nodes>
-    </cluster>
+2. Set the properly configuration in all the managers of the cluster.
 
-2. Agents should be configured for connecting to all the managers of the cluster.
+  In the ``<cluster>`` section of the :doc:`Local configuration <../reference/ossec-conf/cluster>` it should be set the configuration for the cluster regarding the following considerations.
 
-For example, if we have three managers in the cluster with the IP addresses ``192.168.0.3-5`` the configuration in agents should be like this.
+  - One manager should be the master and the other ones, the clients. This is specified in the ``<node_type>`` field.
+  - The key should be the same for all the nodes of the cluster and it must be 32 characters long. To generate a random password you can use the following command:
 
-.. code-block:: xml
+      .. code-block:: bash
 
-    <client>
-      ...
-      <server>
-        <address>192.168.0.3</address>
-        <port>1514</port>
-        <protocol>udp</protocol>
-      </server>
-      <server>
-        <address>192.168.0.4</address>
-        <port>1514</port>
-        <protocol>tcp</protocol>
-      </server>
-      <server>
-        <address>192.168.0.5</address>
-        <port>1514</port>
-        <protocol>tcp</protocol>
-      </server>
-      ...
-    </client>
+          $ openssl rand -hex 16
+
+  - The IP addresses of all **nodes** of the cluster must be specified in the ``<nodes>``, including the IP of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` to find out which IP from the list is theirs. If none of the IPs match with the ones returned by the ``hostname --all-ip-addresses`` command, an error will be raised.
+
+  An example of configuration could be the following.
+
+  .. code-block:: xml
+
+      <cluster>
+        <name>cluster01</name>
+        <node_name>manager_centos</node_name>
+        <node_type>master</node_type>
+        <key>nso42FGdswR0805tnVqeww0u3Rubwk2a</key>
+        <interval>2m</interval>
+        <port>1516</port>
+        <bind_addr>0.0.0.0</bind_addr>
+        <nodes>
+          <node>192.168.0.3</node>
+          <node>192.168.0.4</node>
+          <node>192.168.0.5</node>
+        </nodes>
+      </cluster>
+
+3. Agents should be configured for connecting to all the managers of the cluster.
+
+  For example, if we have three managers in the cluster with the IP addresses ``192.168.0.3-5`` the configuration in agents should be like this.
+
+  .. code-block:: xml
+
+      <client>
+        ...
+        <server>
+          <address>192.168.0.3</address>
+          <port>1514</port>
+          <protocol>udp</protocol>
+        </server>
+        <server>
+          <address>192.168.0.4</address>
+          <port>1514</port>
+          <protocol>tcp</protocol>
+        </server>
+        <server>
+          <address>192.168.0.5</address>
+          <port>1514</port>
+          <protocol>tcp</protocol>
+        </server>
+        ...
+      </client>
 
 
-3. Enable and start the Wazuh cluster daemon in managers for starting the synchronization.
+4. Enable and start the Wazuh cluster daemon in managers for starting the synchronization.
 
     .. code-block:: bash
 
         $ sudo /var/ossec/bin/ossec-control enable cluster
         $ sudo /var/ossec/bin/wazuh-clusterd
 
-4. Since this moment, the cluster should be synchronized and the shared files should be the same in all the managers.
+5. Since this moment, the cluster should be synchronized and the shared files should be the same in all the managers.
