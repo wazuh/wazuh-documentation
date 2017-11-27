@@ -73,3 +73,6 @@ agents to have a specific configuration, we will follow the next steps:
 4. Agents will receive the files in a time period depending on the files size, the amount of agents and also on
    the connection protocol used. For example, we need around 8 minutes to receive a 10 MB folder (excluding **merged.mg** file)
    on 100 agents using UDP. Using TCP will be faster, depending on the network bandwidth.
+
+Once a specific agent belongs to a group, even though an agent is registered again with other name or ID, it will be **automatically reassigned**
+to the same group as before. This is made possible by comparing the checksum of the ``merged.mg`` sent by the agent with the checksums saved for all agents in the manager.
