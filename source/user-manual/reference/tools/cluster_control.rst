@@ -22,6 +22,8 @@ cluster_control options
 +-------------------------------------------+------------------------------------------------------------+
 | **-a, --agents [AGENT [AGENT ...]]**      | List configuration files in group.                         |
 +-------------------------------------------+------------------------------------------------------------+
+| **-l, --list [NODE [NODE ...]]**          | List the status of nodes of the cluster.                   |
++-------------------------------------------+------------------------------------------------------------+
 
 .. note::
     The ``--manager`` parameter is required to be used with the ``--file`` parameter for retrieving the synchronized files in a specific manager.
@@ -112,3 +114,20 @@ In this table we can see in real-time to which manager is reporting each connect
     ----------------------------------------------
     192.168.56.104  /etc/client.keys  synchronized
     ----------------------------------------------
+
+* Get the status of all nodes:
+
+.. code-block:: console
+
+    $ /var/ossec/bin/cluster_control -l
+    -------------------------------------------
+    Node         Status          Address
+    -------------------------------------------
+    node01       connected       localhost
+    -------------------------------------------
+    node02       connected       192.168.56.103
+    -------------------------------------------
+    node03       connected       192.168.56.104
+    -------------------------------------------
+    unknown      disconnected    192.168.56.111
+    -------------------------------------------
