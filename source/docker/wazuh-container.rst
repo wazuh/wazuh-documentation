@@ -26,7 +26,7 @@ You need to increase ``max_map_count`` on your Docker host::
 
   $ docker-machine ssh default
   # sysctl -w vm.max_map_count=262144
-  $ exit
+  # exit
 
 To set this value permanently, update the vm.max_map_count setting in ``/var/lib/boot2docker/profile``::
 

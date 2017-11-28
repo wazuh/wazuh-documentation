@@ -10,13 +10,13 @@ Upgrade Wazuh manager
 
 a) Upgrade Wazuh server on CentOS/RHEL/Fedora:
 
-.. code-block:: bash
+.. code-block:: console
 
     # yum upgrade wazuh-manager
 
 b) Upgrade Wazuh server on Debian/Ubuntu:
 
-.. code-block:: bash
+.. code-block:: console
 
     # apt-get update && sudo apt-get install --only-upgrade wazuh-manager
 
@@ -25,12 +25,12 @@ Upgrade Wazuh agent
 
 a) Upgrade Wazuh agent on CentOS/RHEL/Fedora:
 
-.. code-block:: bash
+.. code-block:: console
 
     # yum upgrade wazuh-agent
 
 b) Upgrade Wazuh agent on Debian/Ubuntu:
 
-.. code-block:: bash
+.. code-block:: console
 
     # apt-get update && sudo apt-get install --only-upgrade wazuh-agent

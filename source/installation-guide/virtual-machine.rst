@@ -29,7 +29,7 @@ We provide a pre-built virtual machine image (OVA), you can directly import usin
 
 4. You can start and stop wazuh-manager, elasticsearch, logstash, and kibana with the 'systemctl' command. Examples:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # systemctl restart wazuh-manager
     # systemctl stop elasticsearch

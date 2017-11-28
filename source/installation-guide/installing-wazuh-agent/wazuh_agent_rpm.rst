@@ -14,7 +14,7 @@ The first thing you need is to add the Wazuh repository to your server. If you w
 
 To set up the repository, run this command:
 
-     .. code-block:: bash
+     .. code-block:: console
 
          # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
          [wazuh_repo]
@@ -28,7 +28,7 @@ To set up the repository, run this command:
 
 For CentOS-5 and RHEL-5:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
         [wazuh_repo]
@@ -46,7 +46,7 @@ Installing Wazuh agent
 
 On your terminal, install the Wazuh agent:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # yum install wazuh-agent
 

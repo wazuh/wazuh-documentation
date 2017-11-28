@@ -41,7 +41,7 @@ Basic Authentication
 It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName**::
 
     # cd /var/ossec/api/configuration/auth
-    # sudo node htpasswd -c user myUserName
+    # node htpasswd -c user myUserName
 
 Do not forget to restart the API to apply the changes::
 

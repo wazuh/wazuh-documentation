@@ -91,13 +91,13 @@ In order to deploy a Wazuh cluster, follow these steps:
 
   a. For RPM-based distributions:
 
-    .. code-block:: bash
+    .. code-block:: console
 
       # yum install python-setuptools python-cryptography
 
   b. For Debian-based distributions:
 
-    .. code-block:: bash
+    .. code-block:: console
 
       # apt install python-cryptography
 
@@ -108,7 +108,7 @@ In order to deploy a Wazuh cluster, follow these steps:
   - One manager should be the master and the other ones, the clients. This is specified in the ``<node_type>`` field.
   - The key should be the same for all the nodes of the cluster and it must be 32 characters long. To generate a random password you can use the following command:
 
-      .. code-block:: bash
+      .. code-block:: console
 
           # openssl rand -hex 16
 
@@ -162,7 +162,7 @@ In order to deploy a Wazuh cluster, follow these steps:
 
 4. Enable and start the Wazuh cluster daemon in all managers for starting the synchronization.
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # /var/ossec/bin/ossec-control enable cluster
         # /var/ossec/bin/wazuh-clusterd

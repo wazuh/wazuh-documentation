@@ -14,25 +14,25 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
 1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be present on your system. If they are not, install them:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# apt-get install curl apt-transport-https lsb-release
 
 2. Install the Wazuh repository GPG key:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
 3. Adding the repository:
 
-   .. code-block:: bash
+   .. code-block:: console
 
 		# echo "deb https://packages.wazuh.com/apt main" | tee /etc/apt/sources.list.d/wazuh.list
 
 4. Update the package information:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# apt-get update
 
@@ -41,7 +41,7 @@ Installing Wazuh agent
 
 On your terminal, install the Wazuh agent:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# apt-get install wazuh-agent
 

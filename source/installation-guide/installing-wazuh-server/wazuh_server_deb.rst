@@ -14,26 +14,26 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
 1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be installed into your system. If they are not, install them:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# apt-get update
 		# apt-get install curl apt-transport-https lsb-release
 
 2. Install the GPG key:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
 3. Adding the repository:
 
-   .. code-block:: bash
+   .. code-block:: console
 
 		# echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 4. Update the package information:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# apt-get update
 
@@ -42,7 +42,7 @@ Installing Wazuh Manager
 
 On your terminal, install the Wazuh manager:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# apt-get install wazuh-manager
 
@@ -50,13 +50,13 @@ Once the process is completed, you can check the service status with:
 
   a) For Systemd:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# systemctl status wazuh-manager
 
   b) For SysV Init:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# service wazuh-manager status
 
@@ -65,19 +65,19 @@ Installing Wazuh API
 
 1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend you add the official NodeJS repository like this:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
    and then, install nodejs:
 
-	 .. code-block:: bash
+	 .. code-block:: console
 
 	 	# apt-get install nodejs
 
 2. Install the Wazuh API. It will update NodeJS if it is required:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# apt-get install wazuh-api
 
@@ -85,13 +85,13 @@ Installing Wazuh API
 
   a) For Systemd:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# systemctl status wazuh-api
 
   b) For SysV Init:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# service wazuh-api status
 
@@ -128,7 +128,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 1. Install the GPG keys from Elastic, and the Elastic repository:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
 		# echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
@@ -136,13 +136,13 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 2. Install Filebeat:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# apt-get install filebeat
 
 3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/filebeat/filebeat.yml
 
@@ -158,7 +158,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   a) For Systemd:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# systemctl daemon-reload
 		# systemctl enable filebeat.service
@@ -166,7 +166,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   b) For SysV Init:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# update-rc.d filebeat defaults 95 10
 		# service filebeat start

@@ -86,11 +86,11 @@ If Python 2.7 or later is not installed, then install it with your distribution'
 
 * On Debian derivatives such as Ubuntu, use APT: ::
 
-  $ sudo apt-get install python2.7
+  # apt-get install python2.7
 
 * On Red Hat and derivatives, use yum: ::
 
-  $ sudo yum install python27
+  # yum install python27
 
 Open a command prompt or shell and run the following command to verify that Python has been installed correctly: ::
 
@@ -105,11 +105,11 @@ To install Pip on Linux:
 
 * Run the script with Python: ::
 
-  $ sudo python get-pip.py
+  # python get-pip.py
 
 Now that Python and pip are installed, use pip to install boto: ::
 
-  $ sudo pip install boto
+  # pip install boto
 
 Configure user credentials with Python Boto
 -------------------------------------------
@@ -141,7 +141,7 @@ if you want to maintain the logs files in the bucket, you need to use the script
 
 Using ``-s /path-with-write-permission/awslogstat.db`` will track downloaded log files avoiding processing them again, without it the script will download previously processed log files adding its content again to ``/path-with-write-permission/amazon.log``. Also you need to install ``sqlite`` module for python: ::
 
-  $ sudo pip install pysqlite
+  # pip install pysqlite
 
 CloudTrail delivers log files to your S3 bucket approximately every 7 minutes. Create a cron job to periodically run the script.  Note that running it more frequently than once every 7 minutes would be useless. CloudTrail does not deliver log files if no API calls are made on your account.
 
@@ -170,8 +170,8 @@ Finally, restart the Wazuh manager to apply changes:
 
 a. For Systemd: ::
 
-    systemctl restart wazuh-manager
+    # systemctl restart wazuh-manager
 
 b. For SysV Init: ::
 
-    service wazuh-manager restart
+    # service wazuh-manager restart

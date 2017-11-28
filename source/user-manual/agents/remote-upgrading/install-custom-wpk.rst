@@ -14,7 +14,7 @@ You have two options:
 
     .. code-block:: console
 
-        cp /path/to/certificate etc/wpk_root.pem
+        # cp /path/to/certificate etc/wpk_root.pem
 
     b. Add a new certificate by editing the ossec.conf file:
 

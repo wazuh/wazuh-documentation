@@ -16,26 +16,26 @@ Preparation
 
       The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jre-8u151-linux-x64.rpm"
 
   Now check if the package was download successfully:
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
 
   Finally, install the RPM package using yum:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# yum install jre-8-linux-x64.rpm
   	# rm jre-8-linux-x64.rpm
 
 2. Install the Elastic repository and its GPG key:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	# rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
@@ -57,7 +57,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
 1. Install the Elasticsearch package:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # yum install elasticsearch
 
@@ -65,7 +65,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   a) For Systemd:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# systemctl daemon-reload
   	# systemctl enable elasticsearch.service
@@ -73,24 +73,24 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   b) For SysV Init:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# chkconfig --add elasticsearch
   	# service elasticsearch start
 
 3. Load Wazuh Elasticsearch templates:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
 4. Insert sample alert:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
@@ -105,13 +105,13 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
 1. Install the Logstash package:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # yum install logstash
 
 2. Download the Wazuh config for Logstash:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh.conf
 
@@ -121,7 +121,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
     b) Because the Logstash user needs to read alerts.json file, please add it to OSSEC group by running:
 
-    .. code-block:: bash
+    .. code-block:: console
 
       # usermod -a -G ossec logstash
 
@@ -137,7 +137,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   a) For Systemd:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # systemctl daemon-reload
     # systemctl enable logstash.service
@@ -145,7 +145,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   b) For SysV Init:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# chkconfig --add logstash
   	# service logstash start
@@ -161,13 +161,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 1. Install the Kibana package:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # yum install kibana
 
 2. Install the Wazuh App plugin for Kibana:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
@@ -189,7 +189,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   a) For Systemd:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# systemctl daemon-reload
   	# systemctl enable kibana.service
@@ -197,7 +197,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   b) For SysV Init:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# chkconfig --add kibana
   	# service kibana start

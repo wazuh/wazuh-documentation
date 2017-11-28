@@ -17,25 +17,37 @@ Installing Linux agent
 
   a) For RPM-based distributions:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-      sudo yum install make gcc
+      # yum install make gcc
+
+  If you want to use Auth, also install:
+
+  .. code-block:: console
+  
+      # yum install openssl-devel
 
   b) For Debian-based distributions:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-      sudo apt-get install gcc make libc6-dev curl
+      # apt-get install gcc make libc6-dev curl
+
+  .. If you want to use Auth, also install:
+
+  .. code-block:: console
+
+      # apt-get install libssl-dev
 
 2. Download and extract the latest version:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/3.0.tar.gz | tar zx
+    $ curl -Ls https://github.com/wazuh/wazuh/archive/3.0.tar.gz | tar zx
 
 3. Run the ``install.sh`` script, this will display a wizard that will guide you through the installation process using the Wazuh sources:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # cd wazuh-*
     # ./install.sh
@@ -62,7 +74,7 @@ Set up Ubuntu build environment
 
 Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
-  .. code-block:: bash
+  .. code-block:: console
 
    # apt-get install gcc-mingw-w64
    # apt-get install nsis
@@ -82,7 +94,7 @@ Source code download
 
 Download the Wazuh source code and unzip it:
 
-  .. code-block:: bash
+  .. code-block:: console
 
    # curl -Ls https://github.com/wazuh/wazuh/archive/3.0.tar.gz | tar zx
    # cd wazuh-*/src
@@ -92,20 +104,20 @@ Compiling the agent
 
 Run the make command:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # make TARGET=winagent
 
 You should expect the following output at the end of the building process:
 
-  .. code-block:: bash
+  .. code-block:: console
 
    Done building winagent
 
 
 Once the agent has been compiled, we should transfer the ``src`` folder to a Windows system. This folder could be compressed at first to speed up the process.
 
-      .. code-block:: bash
+      .. code-block:: console
 
         # zip -r ../src *
 
