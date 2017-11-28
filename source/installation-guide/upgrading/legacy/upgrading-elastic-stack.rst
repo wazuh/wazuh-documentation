@@ -20,8 +20,8 @@ Configure Logstash
 
   .. code-block:: bash
 
-    $ curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/logstash/01-wazuh.conf
-    $ curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/elasticsearch/wazuh-elastic2-template.json
+    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/logstash/01-wazuh.conf
+    # curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/elasticsearch/wazuh-elastic2-template.json
 
 2. In the output section of ``/etc/logstash/conf.d/01-wazuh.conf``, comment the line for ``elastic5-template`` and uncomment the line for ``elastic2-template``:
 
@@ -102,17 +102,17 @@ Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
     .. code-block:: bash
 
-        $ systemctl stop logstash.service
-        $ systemctl stop elasticsearch.service
-        $ systemctl stop kibana.service
+        # systemctl stop logstash.service
+        # systemctl stop elasticsearch.service
+        # systemctl stop kibana.service
 
   b) For SysV Init:
 
     .. code-block:: bash
 
-      $ service logstash stop
-      $ service elasticsearch stop
-      $ service kibana stop
+      # service logstash stop
+      # service elasticsearch stop
+      # service kibana stop
 
 2. Remove Logstash old configuration and template files:
 
@@ -120,15 +120,15 @@ Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
   .. code-block:: bash
 
-   $ rm /etc/logstash/conf.d/01-ossec-singlehost.conf
-   $ rm /etc/logstash/elastic-ossec-template.json
+   # rm /etc/logstash/conf.d/01-ossec-singlehost.conf
+   # rm /etc/logstash/elastic-ossec-template.json
 
   For distributed architectures (Elastic Stack standalone server):
 
   .. code-block:: bash
 
-   $ rm /etc/logstash/conf.d/01-ossec.conf
-   $ rm /etc/logstash/elastic-ossec-template.json
+   # rm /etc/logstash/conf.d/01-ossec.conf
+   # rm /etc/logstash/elastic-ossec-template.json
 
 3. Remove deprecated settings from configuration file:
 
@@ -159,21 +159,21 @@ Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
     .. code-block:: bash
 
-      $ /usr/share/logstash/bin/logstash -V
+      # /usr/share/logstash/bin/logstash -V
       logstash 5.2.2
 
   b) For Elasticsearch:
 
     .. code-block:: bash
 
-      $ /usr/share/elasticsearch/bin/elasticsearch -V
+      # /usr/share/elasticsearch/bin/elasticsearch -V
       Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
 
   c) For Kibana:
 
     .. code-block:: bash
 
-      $ /usr/share/kibana/bin/kibana -V
+      # /usr/share/kibana/bin/kibana -V
       5.2.
 
 .. note:: Wazuh v2.x uses different indices and templates than Wazuh v1.x For that reason, you will not be able to see the previous alerts using Kibana. If you need to access them, you will have to reindex the previous indices.

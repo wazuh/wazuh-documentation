@@ -16,31 +16,31 @@ Preparation
 
   .. code-block:: bash
 
-    $ echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
-    $ echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
-    $ apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+    # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+    # echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+    # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 
   b) For Ubuntu:
 
   .. code-block:: bash
 
-	 $ add-apt-repository ppa:webupd8team/java
+	 # add-apt-repository ppa:webupd8team/java
 
 2. Once the repository is added, install Java JRE:
 
   .. code-block:: bash
 
-  	$ apt-get update
-  	$ apt-get install oracle-java8-installer
+  	# apt-get update
+  	# apt-get install oracle-java8-installer
 
 3. Install the Elastic repository and its GPG key:
 
   .. code-block:: bash
 
-  	$ apt-get install curl apt-transport-https
-  	$ curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-  	$ echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
-  	$ apt-get update
+  	# apt-get install curl apt-transport-https
+  	# curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+  	# echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
+  	# apt-get update
 
 Elasticsearch
 -------------
@@ -51,7 +51,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: bash
 
-    $ apt-get install elasticsearch
+    # apt-get install elasticsearch
 
 2. Enable and start the Elasticsearch service:
 
@@ -59,32 +59,32 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: bash
 
-    $ systemctl daemon-reload
-    $ systemctl enable elasticsearch.service
-    $ systemctl start elasticsearch.service
+    # systemctl daemon-reload
+    # systemctl enable elasticsearch.service
+    # systemctl start elasticsearch.service
 
   b) For SysV Init:
 
   .. code-block:: bash
 
-  	$ update-rc.d elasticsearch defaults 95 10
-  	$ service elasticsearch start
+  	# update-rc.d elasticsearch defaults 95 10
+  	# service elasticsearch start
 
 3. Load Wazuh Elasticsearch templates:
 
   .. code-block:: bash
 
-  	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+  	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
   .. code-block:: bash
 
-	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
+	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
 4. Insert sample alert:
 
   .. code-block:: bash
 
-  	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+  	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -99,13 +99,13 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-    $ apt-get install logstash
+    # apt-get install logstash
 
 2. Download the Wazuh config for Logstash:
 
   .. code-block:: bash
 
-  	$ curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh.conf
+  	# curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh.conf
 
 3. **Follow this step only if you are using a single-host architecture**:
 
@@ -115,7 +115,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-    $ usermod -a -G ossec logstash
+    # usermod -a -G ossec logstash
 
 4. Enable and start the Logstash service:
 
@@ -123,16 +123,16 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-  	$ systemctl daemon-reload
-  	$ systemctl enable logstash.service
-  	$ systemctl start logstash.service
+  	# systemctl daemon-reload
+  	# systemctl enable logstash.service
+  	# systemctl start logstash.service
 
   b) For SysV Init:
 
   .. code-block:: bash
 
-    $ update-rc.d logstash defaults 95 10
-    $ service logstash start
+    # update-rc.d logstash defaults 95 10
+    # service logstash start
 
 .. note::
 
@@ -147,13 +147,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: bash
 
-   $ apt-get install kibana
+   # apt-get install kibana
 
 2. Install the Wazuh App plugin for Kibana:
 
   .. code-block:: bash
 
-    $ /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
   .. warning::
 
@@ -175,16 +175,16 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: bash
 
-  	$ systemctl daemon-reload
-  	$ systemctl enable kibana.service
-  	$ systemctl start kibana.service
+  	# systemctl daemon-reload
+  	# systemctl enable kibana.service
+  	# systemctl start kibana.service
 
   b) For SysV Init:
 
   .. code-block:: bash
 
-   $ update-rc.d kibana defaults 95 10
-   $ service kibana start
+   # update-rc.d kibana defaults 95 10
+   # service kibana start
 
 Connecting the Wazuh App with the API
 -------------------------------------

@@ -33,7 +33,7 @@ Get the WPK package into the Wazuh manager and run:
 
 .. code-block:: console
 
-    /var/ossec/bin/agent_upgrade -a 001 -f path/to/myagent.wpk -x upgrade.sh
+    # /var/ossec/bin/agent_upgrade -a 001 -f path/to/myagent.wpk -x upgrade.sh
 
 Where:
     - **-a 001** specifies the agent to upgrade.

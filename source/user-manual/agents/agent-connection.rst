@@ -22,25 +22,25 @@ a. For Systemd:
 
 ::
 
-  systemctl restart wazuh-agent
+  # systemctl restart wazuh-agent
 
 b. For SysV Init:
 
 ::
 
-  service wazuh-agent restart
+  # service wazuh-agent restart
 
 After you register the agent and it be successfully connected, you could see a list of connected agents into Manager with:
 
 ::
 
-  $ /var/ossec/bin/agent_control -lc
+  # /var/ossec/bin/agent_control -lc
 
 This will display every registered Agent, also you can check if a Agent is correctly connected verifying if the UDP connection to Manager is established:
 
 ::
 
-  $ netstat -vatunp|grep ossec-agentd
+  # netstat -vatunp|grep ossec-agentd
 
 This could match with the Agent and Manager ip addresses.
 

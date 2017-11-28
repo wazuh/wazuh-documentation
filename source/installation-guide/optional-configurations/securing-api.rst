@@ -11,8 +11,8 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
 
   .. code-block:: bash
 
-    $ cd /var/ossec/api/configuration/auth
-    $ sudo node htpasswd -c user myUserName
+    # cd /var/ossec/api/configuration/auth
+    # sudo node htpasswd -c user myUserName
 
 2. Enable HTTPS:
 

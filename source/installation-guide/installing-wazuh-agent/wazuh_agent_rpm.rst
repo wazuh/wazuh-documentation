@@ -16,7 +16,7 @@ To set up the repository, run this command:
 
      .. code-block:: bash
 
-         $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+         # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
          [wazuh_repo]
          gpgcheck=1
          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
@@ -30,7 +30,7 @@ For CentOS-5 and RHEL-5:
 
     .. code-block:: bash
 
-        $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+        # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
         [wazuh_repo]
         gpgcheck=1
         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
@@ -48,6 +48,6 @@ On your terminal, install the Wazuh agent:
 
   .. code-block:: bash
 
-	 $ yum install wazuh-agent
+	 # yum install wazuh-agent
 
 .. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.

@@ -11,7 +11,7 @@ Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
 To check your current kernel version, open a terminal and use ``uname -r`` to display your kernel version::
 
-   $ sudo uname -r
+   # uname -r
    3.10.0-229.el7.x86_64
 
 Run the Docker installation script.
@@ -24,7 +24,7 @@ If you would like to use Docker as a non-root user, you should now consider addi
 
 ::
 
-  $ sudo usermod -aG docker your-user
+  # usermod -aG docker your-user
 
 .. note:: Remember that you will have to log out and log back in for this to take effect.
 

@@ -9,16 +9,16 @@ Installation on CentOS/RHEL/Fedora
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-   $ sudo yum install puppet
-   $ sudo puppet resource package puppet ensure=latest
+   # yum install puppet
+   # puppet resource package puppet ensure=latest
 
 Installation on Debian/Ubuntu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-   $ sudo apt-get install puppet
-   $ sudo apt-get update
-   $ sudo puppet resource package puppet ensure=latest
+   # apt-get install puppet
+   # apt-get update
+   # puppet resource package puppet ensure=latest
 
 Configuration
 ^^^^^^^^^^^^^
@@ -30,4 +30,4 @@ Add the server value to the ``[main]`` section of the node’s ``/etc/puppet/pup
 
 Restart the Puppet service::
 
-   $ service puppet restart
+   # service puppet restart

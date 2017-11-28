@@ -24,11 +24,11 @@ This wodle is executed on the agent, so each agent must meet the following requi
 
       a) For RPM-based distributions::
 
-          sudo yum install openscap-scanner
+          # yum install openscap-scanner
 
       b) For Debian-based distributions::
 
-          sudo apt-get install libopenscap8 xsltproc
+          # apt-get install libopenscap8 xsltproc
 
     Python 2.6+
     Python is a core part of this wodle. Currently all Linux distributions come with python, so it should not be an inconvenience.

@@ -51,8 +51,8 @@ For doing this, we have to include in the ``ossec.conf`` file a section like tha
 
 ::
 
-    $ /var/ossec/bin/ossec-control enable integrator
-    $ /var/ossec/bin/ossec-control restart
+    # /var/ossec/bin/ossec-control enable integrator
+    # /var/ossec/bin/ossec-control restart
 
 From this moment, any FIM alert will trigger the VirusTotal integration.
 

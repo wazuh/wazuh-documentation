@@ -72,8 +72,8 @@ To apply the new configuration, restart the manager and agents:
 
 ::
 
-  $ /var/ossec/bin/ossec-control restart
-  $ /var/ossec/bin/agent_control -R -a
+  # /var/ossec/bin/ossec-control restart
+  # /var/ossec/bin/agent_control -R -a
 
 If you prefer, you can restart a specific agent with the option ``-u <id>`` where **id** is the agent's id number.
 
@@ -155,8 +155,8 @@ To apply the new configuration, restart the manager and agents:
 
 ::
 
-  $ /var/ossec/bin/ossec-control restart
-  $ /var/ossec/bin/agent_control -R -a
+  # /var/ossec/bin/ossec-control restart
+  # /var/ossec/bin/agent_control -R -a
 
 If you prefer, you can restart a specific agent with option ``-u <id>``.
 

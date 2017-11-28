@@ -64,12 +64,12 @@ When you have configured the ``alert_level``, Wazuh needs to be restarted for th
 a) For Systemd:
 ::
 
-  systemctl status wazuh-manager
+  # systemctl status wazuh-manager
 
 b) For SysV Init:
 ::
 
-  service wazuh-manager status
+  # service wazuh-manager status
 
 
 .. warning::

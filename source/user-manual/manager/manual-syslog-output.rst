@@ -29,16 +29,16 @@ After the configuration of the ``ossec.conf`` file, the client-syslog must be en
 
 ::
 
-  /var/ossec/bin/ossec-control enable client-syslog
+  # /var/ossec/bin/ossec-control enable client-syslog
 
 a. For Systemd:
 
 ::
 
-  systemctl restart wazuh-manager
+  # systemctl restart wazuh-manager
 
 b. For SysV Init:
 
 ::
 
-  service wazuh-manager restart
+  # service wazuh-manager restart

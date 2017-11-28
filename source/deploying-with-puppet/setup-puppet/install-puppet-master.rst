@@ -8,8 +8,8 @@ Installation on CentOS/RHEL/Fedora
 
 Install the Puppet yum repository and then the "puppet-server" package. See https://yum.puppetlabs.com to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, for CentOS 7 or RHEL 7, do the following::
 
-   $ sudo rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-   $ sudo yum install puppetserver
+   # rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
+   # yum install puppetserver
 
 
 Installation on Debian/Ubuntu
@@ -17,14 +17,14 @@ Installation on Debian/Ubuntu
 
 Install ``curl``, ``apt-transport-https`` and ``lsb-release``::
 
-	$ sudo apt-get update
-	$ sudo apt-get install curl apt-transport-https lsb-release
+	# apt-get update
+	# apt-get install curl apt-transport-https lsb-release
 
 Get the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution, you can use next script to make installation more silently::
 
-  $ wget "https://apt.puppetlabs.com/puppetlabs-release-pc1-$(lsb_release -cs).deb"
-  $ sudo dpkg -i "puppetlabs-release-pc1-$(lsb_release -cs).deb"
-  $ sudo apt-get update && sudo apt-get install puppetserver
+  # wget "https://apt.puppetlabs.com/puppetlabs-release-pc1-$(lsb_release -cs).deb"
+  # dpkg -i "puppetlabs-release-pc1-$(lsb_release -cs).deb"
+  # apt-get update && sudo apt-get install puppetserver
 
 Memory Allocation
 --------------------------
@@ -51,13 +51,13 @@ Then, restart your Puppet Server to apply changes:
 
   ::
 
-    $ sudo systemctl start puppetserver
+    # systemctl start puppetserver
 
   b) For SysV Init:
 
   ::
 
-    $ sudo service puppetserver start
+    # service puppetserver start
 
 PuppetDB installation
 ---------------------
@@ -68,20 +68,20 @@ Installation on CentOS/RHEL 7 (Adjust if your version is different.)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-   $ sudo rpm -Uvh https://yum.postgresql.org/9.4/redhat/rhel-latest-x86_64/pgdg-centos94-9.4-2.noarch.rpm
-   $ sudo yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
-   $ sudo /usr/pgsql-9.4/bin/postgresql94-setup initdb
-   $ sudo systemctl start postgresql-9.4
-   $ sudo systemctl enable postgresql-9.4
+   # rpm -Uvh https://yum.postgresql.org/9.4/redhat/rhel-latest-x86_64/pgdg-centos94-9.4-2.noarch.rpm
+   # yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
+   # /usr/pgsql-9.4/bin/postgresql94-setup initdb
+   # systemctl start postgresql-9.4
+   # systemctl enable postgresql-9.4
 
 Installation on Debian/Ubuntu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ::
 
-  $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-  $ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-  $ sudo apt-get update
-  $ sudo apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
+  # sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+  # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+  # apt-get update
+  # apt-get install puppetdb-terminus puppetdb postgresql-9.4 postgresql-contrib-9.4
 
 Configuration
 ^^^^^^^^^^^^^
@@ -98,7 +98,7 @@ For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/9.4/data/
 Restart service after change configuration:
 ::
 
-   $ sudo systemctl restart postgresql-9.4
+   # systemctl restart postgresql-9.4
 
 Create a PostgreSQL user and database:
 
@@ -119,7 +119,7 @@ Create the extension pg_trgm is the RegExp-optimized index extension: ::
 
 Test database access: ::
 
-   $ psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
+   # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb:
    psql (9.4.11)
    Type "help" for help.
@@ -156,10 +156,10 @@ Finally, update ``/etc/puppetlabs/puppet/puppet.conf``: ::
 
 Start puppetdb service: ::
 
-   $ sudo systemctl start puppetdb
+   # systemctl start puppetdb
 
 Once these steps are completed, restart your Puppet Server and run ``puppet agent --test``: ::
 
-   $ puppet agent --test
+   # puppet agent --test
 
 Now PuppetDB is working.

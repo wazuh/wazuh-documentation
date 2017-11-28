@@ -64,7 +64,7 @@ where:
 
 For example, to define a rule that logs all write access to, and every attribute change of, the */etc/passwd* file, execute the following command:::
 
-   $ auditctl -w /etc/passwd -p wa -k passwd_changes
+   # auditctl -w /etc/passwd -p wa -k passwd_changes
 
 System Call Rules
 -----------------
@@ -120,8 +120,8 @@ where:
 
 For example, to define a rule that creates a log entry every time a file is deleted or renamed by a system user whose ID is 500 or larger, use the following.  Note that the *-F auid!=4294967295* option is used to exclude users whose login UID is not set. ::
 
-   $ auditctl -a always,exit -S unlink -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete
+   # auditctl -a always,exit -S unlink -S unlinkat -S rename -S renameat -F auid>=500 -F auid!=4294967295 -k delete
 
 It is also possible to define a file system rule using the system call rule syntax. The following command creates a rule for system calls that is analogous to the **-w /etc/shadow -p wa** file system rule:::
 
-   $ auditctl -a always,exit -F path=/etc/shadow -F perm=wa
+   # auditctl -a always,exit -F path=/etc/shadow -F perm=wa

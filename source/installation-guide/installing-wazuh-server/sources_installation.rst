@@ -16,19 +16,19 @@ Installing Wazuh manager
 
     .. code-block:: bash
 
-      $ sudo yum install make gcc git
+      # yum install make gcc git
 
       # If you want to use Auth, also install:
-      $ sudo yum install openssl-devel
+      # yum install openssl-devel
 
   b) For Debian-based distributions:
 
     .. code-block:: bash
 
-      $ sudo apt-get install gcc make git libc6-dev curl
+      # apt-get install gcc make git libc6-dev curl
 
       # If you want to use Auth, also install:
-      $ sudo apt-get install libssl-dev
+      # apt-get install libssl-dev
 
 2. Download and extract the latest version:
 
@@ -41,7 +41,7 @@ Installing Wazuh manager
   .. code-block:: bash
 
     $ cd wazuh-*
-    $ sudo ./install.sh
+    # ./install.sh
 
 
 4. The script will ask about what kind of installation you want. Type ``manager`` to install Wazuh Manager:
@@ -54,7 +54,7 @@ Installing Wazuh manager
 
   .. code-block:: bash
 
-    $ sudo /var/ossec/bin/ossec-control start
+    # /var/ossec/bin/ossec-control start
 
     # If you want to check that it has started
     $ /var/ossec/bin/ossec-control status
@@ -68,15 +68,15 @@ Installing Wazuh API
 
     .. code-block:: bash
 
-      $ curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
-      $ sudo yum -y install nodejs
+      # curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+      # yum -y install nodejs
 
   b) For Debian-based distributions:
 
     .. code-block:: bash
 
-      $ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-      $ sudo apt-get install -y nodejs
+      # curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+      # apt-get install -y nodejs
 
   .. note::
 	`Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
@@ -110,14 +110,14 @@ Installing Wazuh API
 
     .. code-block:: bash
 
-    	$ sudo yum install -y centos-release-scl
-    	$ sudo yum install -y python27
+    	# yum install -y centos-release-scl
+    	# yum install -y python27
 
   b) For RHEL 6:
 
     .. code-block:: bash
 
-    	$ sudo yum install python27
+    	# yum install python27
 
     	# You may need to first enable a repository in order to get python27, with a command like this:
     	#   sudo yum-config-manager --enable rhui-REGION-rhel-server-rhscl

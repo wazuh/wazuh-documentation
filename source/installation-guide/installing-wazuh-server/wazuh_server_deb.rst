@@ -16,26 +16,26 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
 	.. code-block:: bash
 
-		$ apt-get update
-		$ apt-get install curl apt-transport-https lsb-release
+		# apt-get update
+		# apt-get install curl apt-transport-https lsb-release
 
 2. Install the GPG key:
 
 	.. code-block:: bash
 
-		$ curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+		# curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
 3. Adding the repository:
 
    .. code-block:: bash
 
-		$ echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+		# echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 4. Update the package information:
 
 	.. code-block:: bash
 
-		$ apt-get update
+		# apt-get update
 
 Installing Wazuh Manager
 ------------------------
@@ -44,7 +44,7 @@ On your terminal, install the Wazuh manager:
 
 	.. code-block:: bash
 
-		$ apt-get install wazuh-manager
+		# apt-get install wazuh-manager
 
 Once the process is completed, you can check the service status with:
 
@@ -52,13 +52,13 @@ Once the process is completed, you can check the service status with:
 
 	.. code-block:: bash
 
-		$ systemctl status wazuh-manager
+		# systemctl status wazuh-manager
 
   b) For SysV Init:
 
 	.. code-block:: bash
 
-		$ service wazuh-manager status
+		# service wazuh-manager status
 
 Installing Wazuh API
 --------------------
@@ -67,19 +67,19 @@ Installing Wazuh API
 
 	.. code-block:: bash
 
-		$ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+		# curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 
    and then, install nodejs:
 
 	 .. code-block:: bash
 
-	 	$ apt-get install nodejs
+	 	# apt-get install nodejs
 
 2. Install the Wazuh API. It will update NodeJS if it is required:
 
 	.. code-block:: bash
 
-		$ apt-get install wazuh-api
+		# apt-get install wazuh-api
 
 3. Once the process is completed, you can check the service status with:
 
@@ -87,13 +87,13 @@ Installing Wazuh API
 
 	.. code-block:: bash
 
-		$ systemctl status wazuh-api
+		# systemctl status wazuh-api
 
   b) For SysV Init:
 
 	.. code-block:: bash
 
-		$ service wazuh-api status
+		# service wazuh-api status
 
 4. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in most Linux distributions.
 
@@ -130,21 +130,21 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 	.. code-block:: bash
 
-		$ curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-		$ echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
-		$ apt-get update
+		# curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+		# echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
+		# apt-get update
 
 2. Install Filebeat:
 
 	.. code-block:: bash
 
-		$ apt-get install filebeat
+		# apt-get install filebeat
 
 3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
 
 	.. code-block:: bash
 
-		$ curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/filebeat/filebeat.yml
+		# curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/filebeat/filebeat.yml
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elastic Stack server. For example:
 
@@ -160,16 +160,16 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 	.. code-block:: bash
 
-		$ systemctl daemon-reload
-		$ systemctl enable filebeat.service
-		$ systemctl start filebeat.service
+		# systemctl daemon-reload
+		# systemctl enable filebeat.service
+		# systemctl start filebeat.service
 
   b) For SysV Init:
 
 	.. code-block:: bash
 
-		$ update-rc.d filebeat defaults 95 10
-		$ service filebeat start
+		# update-rc.d filebeat defaults 95 10
+		# service filebeat start
 
 Next steps
 ----------

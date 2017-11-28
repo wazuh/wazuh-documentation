@@ -11,14 +11,14 @@ Create root CA
 
 .. code-block:: console
 
-    openssl req -x509 -new -nodes -newkey rsa:2048 -keyout wpk_root.key -out wpk_root.pem -batch
+    # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout wpk_root.key -out wpk_root.pem -batch
 
 Create certificate and key
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: console
 
-    openssl req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
+    # openssl req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
 
 Where:
     - /C=US is the country.
@@ -30,7 +30,7 @@ Sign this certificate with the root CA:
 
 .. code-block:: console
 
-    openssl x509 -req -days 365 -in wpkcert.csr -CA wpk_root.pem -CAkey wpk_root.key -out wpkcert.pem -CAcreateserial
+    # openssl x509 -req -days 365 -in wpkcert.csr -CA wpk_root.pem -CAkey wpk_root.key -out wpkcert.pem -CAcreateserial
 
 2. Compile a package
 ---------------------
@@ -61,7 +61,7 @@ Canonical WPK package example
 
 .. code-block:: console
 
-    curl -Lo wazuh-3.0.zip https://github.com/wazuh/wazuh/archive/3.0.zip && unzip wazuh-3.0.zip
+    # curl -Lo wazuh-3.0.zip https://github.com/wazuh/wazuh/archive/3.0.zip && unzip wazuh-3.0.zip
 
 2. Modify the ``wazuh-3.0/etc/preload-vars.conf`` file from downloaded sources to deploy
 an :doc:`unattended update <../../../installation-guide/unattended-installation>` in the agent. It has to be uncommented the following lines.
@@ -76,25 +76,25 @@ an :doc:`unattended update <../../../installation-guide/unattended-installation>
 
 .. code-block:: console
 
-    make -C wazuh-3.0/src TARGET=agent
+    # make -C wazuh-3.0/src TARGET=agent
 
 4. Change to the base directory:
 
 .. code-block:: console
 
-    cd wazuh-3.0
+    # cd wazuh-3.0
 
 5. Install the root CA, only if you want to overwrite the root CA with the file you created before:
 
 .. code-block:: console
 
-    cp path/to/wpk_root.pem etc/wpk_root.pem
+    # cp path/to/wpk_root.pem etc/wpk_root.pem
 
 6. Compile the WPK package. You need your SSL certificate and key:
 
 .. code-block:: console
 
-    contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
+    # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
 
 Where:
     - **output/myagent.wpk** is the name of the output WPK package.

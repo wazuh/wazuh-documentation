@@ -17,8 +17,8 @@ Configuration
 Integrator is not enabled by default.  Integrator is enabled using the following command:
 ::
 
-    $ /var/ossec/bin/ossec-control enable integrator
-    $ /var/ossec/bin/ossec-control restart
+    # /var/ossec/bin/ossec-control enable integrator
+    # /var/ossec/bin/ossec-control restart
 
 
 Integrations are configured in the file ``etc/ossec.conf``, which is located inside your Wazuh installation directory. Add the following inside *<ossec_config> </ossec_config>* to configure this integration:

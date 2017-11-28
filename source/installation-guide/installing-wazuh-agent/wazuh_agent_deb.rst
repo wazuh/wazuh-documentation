@@ -16,25 +16,25 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
 	.. code-block:: bash
 
-		$ apt-get install curl apt-transport-https lsb-release
+		# apt-get install curl apt-transport-https lsb-release
 
 2. Install the Wazuh repository GPG key:
 
 	.. code-block:: bash
 
-		$ curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+		# curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
 3. Adding the repository:
 
    .. code-block:: bash
 
-		$ echo "deb https://packages.wazuh.com/apt main" | tee /etc/apt/sources.list.d/wazuh.list
+		# echo "deb https://packages.wazuh.com/apt main" | tee /etc/apt/sources.list.d/wazuh.list
 
 4. Update the package information:
 
 	.. code-block:: bash
 
-		$ apt-get update
+		# apt-get update
 
 Installing Wazuh agent
 ----------------------
@@ -43,6 +43,6 @@ On your terminal, install the Wazuh agent:
 
 	.. code-block:: bash
 
-		$ apt-get install wazuh-agent
+		# apt-get install wazuh-agent
 
 .. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.

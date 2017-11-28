@@ -26,10 +26,10 @@ a. For Systemd:
 
 ::
 
-  systemctl restart wazuh-manager
+  # systemctl restart wazuh-manager
 
 b. For SysV Init:
 
 ::
 
-  service wazuh-manager restart
+  # service wazuh-manager restart

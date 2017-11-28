@@ -22,12 +22,12 @@ In this section, we'll register the Wazuh API (installed on the Wazuh server) in
   .. code-block:: bash
 
     # Replace your desired username for myUserName.
-    $ cd /var/ossec/api/configuration/auth
-    $ sudo node htpasswd -c user myUserName
+    # cd /var/ossec/api/configuration/auth
+    # node htpasswd -c user myUserName
 
     # Do not forget to restart the API to apply the changes:
-    $ systemctl restart wazuh-api
-    $ service wazuh-api restart
+    # systemctl restart wazuh-api
+    # service wazuh-api restart
 
 4. Fill Username and Password with appropriate credentials you created in previous step.  Enter ``http://MANAGER_IP`` for the URL, where ``MANAGER_IP`` is the real IP address of the Wazuh qserver. Enter "55000" for the Port.
 

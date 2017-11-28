@@ -5,7 +5,7 @@ Register Agent
 
 1. On the **manager**, run `manage_agents`::
 
-	$ /var/ossec/bin/manage_agents
+	# /var/ossec/bin/manage_agents
 
 	****************************************
 	* Wazuh v2.0 Agent manager.            *
@@ -52,7 +52,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 5. Now on the **agent** run `manage_agents`::
 
-	$ /var/ossec/bin/manage_agents
+	# /var/ossec/bin/manage_agents
 
 	****************************************
 	* Wazuh v2.0 Agent manager.            *
@@ -84,8 +84,8 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 8. Edit the wazuh-agent configuration in ``/var/ossec/etc/ossec.conf`` to add the wazuh-manager IP address. In ``<client>`` section change the ``MANAGE_IP`` value to the wazuh-manager address::
 
-         <client> 
-               <server-ip>MANAGE_IP</server-ip> 
+         <client>
+               <server-ip>MANAGE_IP</server-ip>
          </client>
 
 9. Restart the agent::

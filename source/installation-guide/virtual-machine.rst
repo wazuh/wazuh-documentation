@@ -31,9 +31,9 @@ We provide a pre-built virtual machine image (OVA), you can directly import usin
 
   .. code-block:: bash
 
-    $ systemctl restart wazuh-manager
-    $ systemctl stop elasticsearch
-    $ systemctl start logstash
-    $ systemctl status kibana
+    # systemctl restart wazuh-manager
+    # systemctl stop elasticsearch
+    # systemctl start logstash
+    # systemctl status kibana
 
 5. In order to connect to Kibana web user interface, you can login with http://OVA_IP_ADRESS:5601 (where ``OVA_IP_ADDRESS`` is your system IP).

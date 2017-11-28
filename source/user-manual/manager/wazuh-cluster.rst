@@ -93,13 +93,13 @@ In order to deploy a Wazuh cluster, follow these steps:
 
     .. code-block:: bash
 
-      $ sudo yum install python-setuptools python-cryptography
+      # yum install python-setuptools python-cryptography
 
   b. For Debian-based distributions:
 
     .. code-block:: bash
 
-      $ sudo apt install python-cryptography
+      # apt install python-cryptography
 
 2. Set the properly configuration in all the managers of the cluster.
 
@@ -110,7 +110,7 @@ In order to deploy a Wazuh cluster, follow these steps:
 
       .. code-block:: bash
 
-          $ openssl rand -hex 16
+          # openssl rand -hex 16
 
   - The IP addresses of all **nodes** of the cluster must be specified in the ``<nodes>``, including the IP of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` to find out which IP from the list is theirs. If none of the IPs match with the ones returned by the ``hostname --all-ip-addresses`` command, an error will be raised.
 
@@ -164,7 +164,7 @@ In order to deploy a Wazuh cluster, follow these steps:
 
     .. code-block:: bash
 
-        $ sudo /var/ossec/bin/ossec-control enable cluster
-        $ sudo /var/ossec/bin/wazuh-clusterd
+        # /var/ossec/bin/ossec-control enable cluster
+        # /var/ossec/bin/wazuh-clusterd
 
 5. Since this moment, the cluster should be synchronized and the shared files should be the same in all the managers.

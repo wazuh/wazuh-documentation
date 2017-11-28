@@ -16,7 +16,7 @@ To set up the repository, run this command:
 
      .. code-block:: bash
 
-         $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+         # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
          [wazuh_repo]
          gpgcheck=1
          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
@@ -30,7 +30,7 @@ For CentOS-5 and RHEL-5:
 
     .. code-block:: bash
 
-        $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+        # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
         [wazuh_repo]
         gpgcheck=1
         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
@@ -47,7 +47,7 @@ The next will install Wazuh manager on your system:
 
   .. code-block:: bash
 
-	 $ yum install wazuh-manager
+	 # yum install wazuh-manager
 
 Once the process is completed, you can check the service status with:
 
@@ -55,13 +55,13 @@ Once the process is completed, you can check the service status with:
 
     .. code-block:: bash
 
-      $ systemctl status wazuh-manager
+      # systemctl status wazuh-manager
 
     b) For SysV Init:
 
     .. code-block:: bash
 
-      $ service wazuh-manager status
+      # service wazuh-manager status
 
 Installing Wazuh API
 --------------------
@@ -70,19 +70,19 @@ Installing Wazuh API
 
   .. code-block:: bash
 
-	 $ curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+	 # curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
   and then, install nodejs:
 
   .. code-block:: bash
 
-	 $ yum install nodejs
+	 # yum install nodejs
 
 2. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: bash
 
-	 $ yum install wazuh-api
+	 # yum install wazuh-api
 
 3. Once the process is completed, you can check the service status with:
 
@@ -90,13 +90,13 @@ Installing Wazuh API
 
   .. code-block:: bash
 
-	 $ systemctl status wazuh-api
+	 # systemctl status wazuh-api
 
   b) For SysV Init:
 
   .. code-block:: bash
 
-	 $ service wazuh-api status
+	 # service wazuh-api status
 
 4. Python >= 2.7 is required in order to run the Wazuh API. It is installed by default or included in the official repositories in most Linux distributions.
 
@@ -123,14 +123,14 @@ Installing Wazuh API
 
   .. code-block:: bash
 
-  	$ yum install -y centos-release-scl
-  	$ yum install -y python27
+  	# yum install -y centos-release-scl
+  	# yum install -y python27
 
   b) For RHEL 6:
 
   .. code-block:: bash
 
-  	$ yum install python27
+  	# yum install python27
 
   	# You may need to first enable a repository in order to get python27, with a command like this:
   	#   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
@@ -152,9 +152,9 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: bash
 
-    $ rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+    # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
-    $ cat > /etc/yum.repos.d/elastic.repo << EOF
+    # cat > /etc/yum.repos.d/elastic.repo << EOF
     [elasticsearch-6.x]
     name=Elasticsearch repository for 6.x packages
     baseurl=https://artifacts.elastic.co/packages/6.x/yum
@@ -169,13 +169,13 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: bash
 
-	 $ yum install filebeat
+	 # yum install filebeat
 
 3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
 
   .. code-block:: bash
 
-	 $ curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/filebeat/filebeat.yml
+	 # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/filebeat/filebeat.yml
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP``  with the IP address or the hostname of the Elastic Stack server. For example:
 
@@ -191,16 +191,16 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: bash
 
-    $ systemctl daemon-reload
-    $ systemctl enable filebeat.service
-    $ systemctl start filebeat.service
+    # systemctl daemon-reload
+    # systemctl enable filebeat.service
+    # systemctl start filebeat.service
 
   b) For SysV Init:
 
   .. code-block:: bash
 
-  	$ chkconfig --add filebeat
-  	$ service filebeat start
+  	# chkconfig --add filebeat
+  	# service filebeat start
 
 Next steps
 ----------

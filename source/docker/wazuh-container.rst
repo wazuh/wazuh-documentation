@@ -11,7 +11,7 @@ Increase max_map_count on your host (Linux)
 
 You need to increase ``max_map_count`` on your Docker host::
 
-  $ sudo sysctl -w vm.max_map_count=262144
+  # sysctl -w vm.max_map_count=262144
 
 To set this value permanently, update the vm.max_map_count setting in ``/etc/sysctl.conf``. To verify after rebooting, run "sysctl vm.max_map_count".
 
@@ -25,13 +25,13 @@ Increase max_map_count on your host (Windows)
 You need to increase ``max_map_count`` on your Docker host::
 
   $ docker-machine ssh default
-  $ sudo sysctl -w vm.max_map_count=262144
+  # sysctl -w vm.max_map_count=262144
   $ exit
 
 To set this value permanently, update the vm.max_map_count setting in ``/var/lib/boot2docker/profile``::
 
   $ docker-machine ssh default
-  $ sudo vi /var/lib/boot2docker/bootlocal.sh
+  # vi /var/lib/boot2docker/bootlocal.sh
 
 Add the following line into the profile file::
 
@@ -39,7 +39,7 @@ Add the following line into the profile file::
 
 Make the script runneable::
 
-  $ sudo chmod +x /var/lib/boot2docker/bootlocal.sh
+  # chmod +x /var/lib/boot2docker/bootlocal.sh
 
 To verify after rebooting, run "sysctl vm.max_map_count".
 

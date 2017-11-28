@@ -64,12 +64,12 @@ In this scenario, we try to open the file ``cardholder_data.txt``. Since our cur
 
 .. code-block:: console
 
-    [agent@centos ~]$ ls -l
+    [agent@centos ~]# ls -l
     total 0
     drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 centos
     drwxr-x---  2 root  root  33 Jan  5 18:32 credit_cards
     drwxrwxr-x. 2 agent agent  6 Jan  5 18:34 user_data
-    [agent@centos ~]$ sudo cat credit_cards/cardholder_data.txt
+    [agent@centos ~]# cat credit_cards/cardholder_data.txt
     Number: 0000-0000-0000-0000
     Holder: Mr. John Smith
 

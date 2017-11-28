@@ -7,7 +7,7 @@ The binary */var/ossec/bin/agent_control* allows us to retrieve the list of avai
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_control -l
+    # /var/ossec/bin/agent_control -l
     Wazuh agent_control. List of available agents:
        ID: 000, Name: vpc-ossec-manager (server), IP: 127.0.0.1, Active/Local
        ID: 1040, Name: ip-10-0-0-76, IP: 10.0.0.76, Active

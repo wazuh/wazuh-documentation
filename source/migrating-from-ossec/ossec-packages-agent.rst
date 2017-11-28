@@ -8,16 +8,16 @@ Migrating OSSEC agent installed from packages
 
 Stop OSSEC: ::
 
-    $ /var/ossec/bin/ossec-control stop
+    # /var/ossec/bin/ossec-control stop
 
 Check if you have enough space to create a copy of ``/var/ossec``: ::
 
-    $ du -h /var/ossec | tail -n1
-    $ df -h /var
+    # du -h /var/ossec | tail -n1
+    # df -h /var
 
 Backup ``/var/ossec``: ::
 
-    $ cp -rp /var/ossec /var/ossec_backup
+    # cp -rp /var/ossec /var/ossec_backup
 
 
 2. Remove your current installation
@@ -26,18 +26,18 @@ Backup ``/var/ossec``: ::
 Debian and Ubuntu:
 ::
 
-    $ apt-get remove ossec-hids-agent --purge
+    # apt-get remove ossec-hids-agent --purge
 
 CentOS and Red Hat:
 ::
 
-    $ yum remove ossec-hids-agent
+    # yum remove ossec-hids-agent
 
 Remove directory:
 
 ::
 
-    $ rm -rf /var/ossec
+    # rm -rf /var/ossec
 
 
 3. Install Wazuh agent
@@ -53,14 +53,14 @@ Follow the next guide in order to install Wazuh agent:
 
 Stop OSSEC: ::
 
-    $ systemctl stop wazuh-agent
+    # systemctl stop wazuh-agent
 
 Restore files: ::
 
-    $ cp -p /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
-    $ cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
-    $ cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
-    $ cp -p /var/ossec_backup/queue/rids/* /var/ossec/queue/rids/
+    # cp -p /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
+    # cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
+    # cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
+    # cp -p /var/ossec_backup/queue/rids/* /var/ossec/queue/rids/
 
 
 5. Review ossec.conf
@@ -81,4 +81,4 @@ Do not forget to restore the IP of the manager:
 --------------
 ::
 
-    $ /var/ossec/bin/ossec-control start
+    # /var/ossec/bin/ossec-control start

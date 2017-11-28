@@ -31,8 +31,8 @@ You can configure certain API settings in the file ``/var/ossec/api/configuratio
 
 Make sure to restart wazuh-api service after editing the config file using the command below appropriate for your system::
 
-    systemctl restart wazuh-api
-    service wazuh-api restart
+    # systemctl restart wazuh-api
+    # service wazuh-api restart
 
 
 Basic Authentication
@@ -40,33 +40,33 @@ Basic Authentication
 
 It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName**::
 
-    $ cd /var/ossec/api/configuration/auth
-    $ sudo node htpasswd -c user myUserName
+    # cd /var/ossec/api/configuration/auth
+    # sudo node htpasswd -c user myUserName
 
 Do not forget to restart the API to apply the changes::
 
-    $ systemctl restart wazuh-api
-    $ service wazuh-api restart
+    # systemctl restart wazuh-api
+    # service wazuh-api restart
 
 Manually enable https support
 ---------------------------------
 
 Generate key and certificate request (the Openssl package is required): ::
 
- $ cd /var/ossec/api/configuration/ssl
- $ sudo openssl genrsa -des3 -out server.key 1024
- $ sudo openssl req -new -key server.key -out server.csr
+ # cd /var/ossec/api/configuration/ssl
+ # openssl genrsa -des3 -out server.key 1024
+ # openssl req -new -key server.key -out server.csr
 
 By default, the key's password must be entered every time you run the server.  If you don't want to enter the password every time, you can remove it by running these commands: ::
 
- $ sudo cp server.key server.key.org
- $ sudo openssl rsa -in server.key.org -out server.key
+ # cp server.key server.key.org
+ # openssl rsa -in server.key.org -out server.key
 
 Next generate your self-signed certificate: ::
 
- $ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+ # openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 And remove temporary files: ::
 
- $ sudo rm server.csr
- $ sudo rm server.key.org
+ # rm server.csr
+ # rm server.key.org

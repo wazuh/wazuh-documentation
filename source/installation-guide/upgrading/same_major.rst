@@ -15,13 +15,13 @@ a) Upgrade Wazuh server on CentOS/RHEL/Fedora:
 
 .. code-block:: bash
 
-    $ sudo yum upgrade wazuh-manager
+    # yum upgrade wazuh-manager
 
 b) Upgrade Wazuh server on Debian/Ubuntu:
 
 .. code-block:: bash
 
-    $ sudo apt-get update && sudo apt-get install --only-upgrade wazuh-manager
+    # apt-get update && sudo apt-get install --only-upgrade wazuh-manager
 
 Upgrade Wazuh API
 ---------------------
@@ -30,13 +30,13 @@ a) Upgrade Wazuh API on CentOS/RHEL/Fedora:
 
 .. code-block:: bash
 
-    $ sudo yum upgrade wazuh-api
+    # yum upgrade wazuh-api
 
 b) Upgrade Wazuh API on Debian/Ubuntu:
 
 .. code-block:: bash
 
-    $ sudo apt-get update && sudo apt-get install --only-upgrade wazuh-api
+    # apt-get update && sudo apt-get install --only-upgrade wazuh-api
 
 
 Upgrade Wazuh agent
@@ -46,13 +46,13 @@ a) Upgrade Wazuh agent on CentOS/RHEL/Fedora:
 
 .. code-block:: bash
 
-    $ sudo yum upgrade wazuh-agent
+    # yum upgrade wazuh-agent
 
 b) Upgrade Wazuh agent on Debian/Ubuntu:
 
 .. code-block:: bash
 
-    $ sudo apt-get update && sudo apt-get install --only-upgrade wazuh-agent
+    # apt-get update && sudo apt-get install --only-upgrade wazuh-agent
 
 
 Upgrade Wazuh Kibana App
@@ -63,7 +63,7 @@ Upgrade Wazuh Kibana App
 
     .. code-block:: bash
 
-        $ /usr/share/kibana/bin/kibana-plugin remove wazuh
+        # /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 2) Once the process is completed, you must stop Kibana with:
 
@@ -71,25 +71,25 @@ Upgrade Wazuh Kibana App
 
     .. code-block:: bash
 
-        $ systemctl stop kibana
+        # systemctl stop kibana
 
   b) For SysV Init:
 
     .. code-block:: bash
 
-        $ service kibana stop
+        # service kibana stop
 
 3) Remove the current kibana bundles:
 
 .. code-block:: bash
 
-    $ rm -rf /usr/share/kibana/optimize/bundles
+    # rm -rf /usr/share/kibana/optimize/bundles
 
 4) Upgrade Wazuh Kibana App (this can take a while):
 
 .. code-block:: bash
 
-    $ /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
 5) Once the process is completed, you must start Kibana again with:
 
@@ -97,10 +97,10 @@ Upgrade Wazuh Kibana App
 
     .. code-block:: bash
 
-        $ systemctl start kibana
+        # systemctl start kibana
 
   b) For SysV Init:
 
     .. code-block:: bash
 
-        $ service kibana start
+        # service kibana start

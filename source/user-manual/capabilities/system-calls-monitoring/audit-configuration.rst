@@ -32,7 +32,7 @@ where:
 
 By default, OSSEC includes a CDB list with the following keys: ::
 
-    $ cat /var/ossec/etc/lists/audit-keys
+    # cat /var/ossec/etc/lists/audit-keys
 
     audit-wazuh-w:write
     audit-wazuh-r:read
@@ -60,11 +60,11 @@ In order to use the Audit system, you must have the audit package installed on y
 
 Red Hat, CentOS and Fedora: ::
 
-    $ yum install audit
+    # yum install audit
 
 Debian and Ubuntu based Linux distributions: ::
 
-    $ apt-get install auditd
+    # apt-get install auditd
 
 Editing ossec.conf
 ~~~~~~~~~~~~~~~~~~
@@ -79,7 +79,7 @@ Restarting OSSEC
 ~~~~~~~~~~~~~~~~~
 Finally, we must restart Wazuh agent in order to apply the changes: ::
 
-    $ /var/ossec/bin/ossec-control restart
+    # /var/ossec/bin/ossec-control restart
 
 Now everything is ready to process audit events. You only need to create the proper audit rules (via *auditctl* or */etc/audit/audit.rules*). In the next section we will describe some good use cases.
 
@@ -143,7 +143,7 @@ Let's see what happens when we execute the following commands:
 New File
   Command::
 
-      $ touch /home/malware.py
+      # touch /home/malware.py
 
   Alert::
 
@@ -191,7 +191,7 @@ New File
 Write Access
   Command::
 
-      $ nano /home/malware.py
+      # nano /home/malware.py
 
   Alert::
 
@@ -239,7 +239,7 @@ Write Access
 Change Permissions
   Command::
 
-      $ chmod u+x /home/malware.py
+      # chmod u+x /home/malware.py
 
   Alert::
 
@@ -283,7 +283,7 @@ Change Permissions
 Read access
   Command::
 
-      $ /home/malware.py
+      # /home/malware.py
 
   Alert::
 
@@ -326,7 +326,7 @@ Read access
 Delete file
   Command::
 
-      $ rm /home/malware.py
+      # rm /home/malware.py
 
   Alert::
 
@@ -378,8 +378,8 @@ Monitoring user actions
 
 Here we choose to audit all commands run by a user who has admin privileges. The audit configuration for this is quite simple: ::
 
-    $ auditctl -a exit,always -F euid=0 -F arch=b64 -S execve -k audit-wazuh-c
-    $ auditctl -a exit,always -F euid=0 -F arch=b32 -S execve -k audit-wazuh-c
+    # auditctl -a exit,always -F euid=0 -F arch=b64 -S execve -k audit-wazuh-c
+    # auditctl -a exit,always -F euid=0 -F arch=b32 -S execve -k audit-wazuh-c
 
 If the root user executes nano, the alert will look like this::
 
@@ -426,7 +426,7 @@ Privilege escalation
 
 By default, Wazuh is able to detect privilege escalation by analyzing the corresponding log in */var/log/auth.log*. The below example shows the homer user executing a root action: ::
 
-    $ homer@springfield:/$ sudo ls /var/ossec/etc
+    # homer@springfield:/# sudo ls /var/ossec/etc
 
 Wazuh detects the action, extracting the *srcuser*, *dstuser* and *command* among other fields: ::
 
@@ -454,7 +454,7 @@ Add the following line to every PAM service that needs it: ::
 
 A common configuration should include: *login*, *common-session*, *cron* and *sshd*: ::
 
-    $ grep -R "pam_loginuid.so" /etc/pam.d/
+    # grep -R "pam_loginuid.so" /etc/pam.d/
 
     /etc/pam.d/login:session    required     pam_loginuid.so
     /etc/pam.d/common-session:session required        pam_loginuid.so
@@ -466,7 +466,7 @@ After configuring PAM, if we execute the previous command with the user *homer* 
 
 ::
 
-    $ homer@springfield:/$ sudo ls /var/ossec/etc
+    # homer@springfield:/# sudo ls /var/ossec/etc
 
 ::
 

@@ -37,14 +37,14 @@ Installing Linux agent
 
   .. code-block:: bash
 
-    $ curl -Ls https://github.com/wazuh/wazuh/archive/3.0.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/3.0.tar.gz | tar zx
 
 3. Run the ``install.sh`` script, this will display a wizard that will guide you through the installation process using the Wazuh sources:
 
   .. code-block:: bash
 
-    $ cd wazuh-*
-    $ sudo ./install.sh
+    # cd wazuh-*
+    # ./install.sh
 
 .. note:: You can also run an :doc:`unattended installation<../unattended-installation>`.
 
@@ -70,9 +70,9 @@ Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
   .. code-block:: bash
 
-   $ sudo apt-get install gcc-mingw-w64
-   $ sudo apt-get install nsis
-   $ sudo apt-get install make
+   # apt-get install gcc-mingw-w64
+   # apt-get install nsis
+   # apt-get install make
 
 Set up Windows build environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -90,8 +90,8 @@ Download the Wazuh source code and unzip it:
 
   .. code-block:: bash
 
-   $ curl -Ls https://github.com/wazuh/wazuh/archive/3.0.tar.gz | tar zx
-   $ cd wazuh-*/src
+   # curl -Ls https://github.com/wazuh/wazuh/archive/3.0.tar.gz | tar zx
+   # cd wazuh-*/src
 
 Compiling the agent
 ^^^^^^^^^^^^^^^^^^^
@@ -100,7 +100,7 @@ Run the make command:
 
   .. code-block:: bash
 
-    $ make TARGET=winagent
+    # make TARGET=winagent
 
 You should expect the following output at the end of the building process:
 
@@ -113,7 +113,7 @@ Once the agent has been compiled, we should transfer the ``src`` folder to a Win
 
       .. code-block:: bash
 
-        $ zip -r ../src *
+        # zip -r ../src *
 
 Once in Windows, we only need to run ``src/win32/wazuh-installer-build-msi.bat`` to start the installer generation. If we don't want to sign the installer, we will have to comment or delete the signtool line.
 

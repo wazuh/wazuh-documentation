@@ -29,13 +29,13 @@ agents to have a specific configuration, we will follow the next steps:
 
    .. code-block:: console
 
-      $ /var/ossec/bin/agent_groups -a -i 002 -g dbms
+      # /var/ossec/bin/agent_groups -a -i 002 -g dbms
 
    Using the API:
 
    .. code-block:: console
 
-      $ curl -u foo:bar -k -X PUT "https://API_ADDRESS:55000/agents/002/group/dbms?pretty"
+      # curl -u foo:bar -k -X PUT "https://API_ADDRESS:55000/agents/002/group/dbms?pretty"
 
    .. note:: If the group to which we are going to assign the agents does not exist, it will be created when the first
       agent is added and will contain the same files than the *'default'* group. It is also possible to create new groups
@@ -48,7 +48,7 @@ agents to have a specific configuration, we will follow the next steps:
 
    .. code-block:: console
 
-      $ /var/ossec/bin/agent_groups -l -g dbms
+      # /var/ossec/bin/agent_groups -l -g dbms
 
         5 agent(s) in group 'dbms':
           ID: 002  Name: agent-dbms-e1.
@@ -61,7 +61,7 @@ agents to have a specific configuration, we will follow the next steps:
 
    .. code-block:: console
 
-      curl -u foo:bar -k -X GET "https://API_ADDRESS:55000/agents/groups/dbms?pretty"
+      # curl -u foo:bar -k -X GET "https://API_ADDRESS:55000/agents/groups/dbms?pretty"
 
 
 2. Now we can edit the ``agents.conf`` file for this group. To do this we have to modify the file ``etc/shared/dbms/agents.conf``.

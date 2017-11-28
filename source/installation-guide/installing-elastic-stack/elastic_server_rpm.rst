@@ -18,28 +18,28 @@ Preparation
 
   .. code-block:: bash
 
-      $ curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jre-8u151-linux-x64.rpm"
+      # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jre-8u151-linux-x64.rpm"
 
   Now check if the package was download successfully:
 
   .. code-block:: bash
 
-      $ rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
+      # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
 
   Finally, install the RPM package using yum:
 
   .. code-block:: bash
 
-  	$ yum install jre-8-linux-x64.rpm
-  	$ rm jre-8-linux-x64.rpm
+  	# yum install jre-8-linux-x64.rpm
+  	# rm jre-8-linux-x64.rpm
 
 2. Install the Elastic repository and its GPG key:
 
   .. code-block:: bash
 
-	$ rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+	# rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
-	$ cat > /etc/yum.repos.d/elastic.repo << EOF
+	# cat > /etc/yum.repos.d/elastic.repo << EOF
 	[elasticsearch-6.x]
 	name=Elasticsearch repository for 6.x packages
 	baseurl=https://artifacts.elastic.co/packages/6.x/yum
@@ -59,7 +59,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: bash
 
-	 $ yum install elasticsearch
+	 # yum install elasticsearch
 
 2. Enable and start the Elasticsearch service:
 
@@ -67,32 +67,32 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: bash
 
-  	$ systemctl daemon-reload
-  	$ systemctl enable elasticsearch.service
-  	$ systemctl start elasticsearch.service
+  	# systemctl daemon-reload
+  	# systemctl enable elasticsearch.service
+  	# systemctl start elasticsearch.service
 
   b) For SysV Init:
 
   .. code-block:: bash
 
-  	$ chkconfig --add elasticsearch
-  	$ service elasticsearch start
+  	# chkconfig --add elasticsearch
+  	# service elasticsearch start
 
 3. Load Wazuh Elasticsearch templates:
 
   .. code-block:: bash
 
-	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
   .. code-block:: bash
 
-	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
+	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
 4. Insert sample alert:
 
   .. code-block:: bash
 
-	$ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -107,13 +107,13 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-    $ yum install logstash
+    # yum install logstash
 
 2. Download the Wazuh config for Logstash:
 
   .. code-block:: bash
 
-    $ curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh.conf
+    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh.conf
 
 3. **Follow this step only if you are using a single-host architecture**:
 
@@ -123,7 +123,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
     .. code-block:: bash
 
-      $ usermod -a -G ossec logstash
+      # usermod -a -G ossec logstash
 
 .. note::
 
@@ -139,16 +139,16 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-    $ systemctl daemon-reload
-    $ systemctl enable logstash.service
-    $ systemctl start logstash.service
+    # systemctl daemon-reload
+    # systemctl enable logstash.service
+    # systemctl start logstash.service
 
   b) For SysV Init:
 
   .. code-block:: bash
 
-  	$ chkconfig --add logstash
-  	$ service logstash start
+  	# chkconfig --add logstash
+  	# service logstash start
 
 .. note::
 
@@ -163,13 +163,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: bash
 
-	 $ yum install kibana
+	 # yum install kibana
 
 2. Install the Wazuh App plugin for Kibana:
 
   .. code-block:: bash
 
-	 $ /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+	 # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
   .. warning::
 
@@ -191,16 +191,16 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: bash
 
-  	$ systemctl daemon-reload
-  	$ systemctl enable kibana.service
-  	$ systemctl start kibana.service
+  	# systemctl daemon-reload
+  	# systemctl enable kibana.service
+  	# systemctl start kibana.service
 
   b) For SysV Init:
 
   .. code-block:: bash
 
-  	$ chkconfig --add kibana
-  	$ service kibana start
+  	# chkconfig --add kibana
+  	# service kibana start
 
 Connecting the Wazuh App with the API
 -------------------------------------
