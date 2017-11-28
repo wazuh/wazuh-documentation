@@ -59,6 +59,8 @@ Request List
 	* GET /cache/config  (`Return cache configuration`_)
 
 `Cluster`_
+	* GET /cluster/agents  (`Get info about agents in cluster`_)
+	* GET /cluster/files  (`Get info about files in cluster`_)
 	* GET /cluster/node  (`Get node info`_)
 
 `Decoders`_
@@ -563,12 +565,12 @@ Returns the files belonging to the group.
 	      "totalItems": 17,
 	      "items": [
 	         {
-	            "hash": "76d8be9b97d8eae4c239e530ee7e71c8",
-	            "filename": "../ar.conf"
-	         },
-	         {
 	            "hash": "ab73af41699f13fdd81903b5f23d8d00",
 	            "filename": "agent.conf"
+	         },
+	         {
+	            "hash": "76d8be9b97d8eae4c239e530ee7e71c8",
+	            "filename": "ar.conf"
 	         },
 	         {
 	            "hash": "9beed128b4305943eead1a66a86d27d5",
@@ -599,7 +601,7 @@ Returns the files belonging to the group.
 	            "filename": "cis_sles12_linux_rcl.txt"
 	         },
 	         {
-	            "hash": "3a12edfe0ab71fe883a79cf7a13d4450",
+	            "hash": "fcd103e698e31b7683fc035fa34c7776",
 	            "filename": "merged.mg"
 	         },
 	         {
@@ -675,19 +677,19 @@ Returns the list of existing agent groups.
 	         {
 	            "count": 0,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "3a12edfe0ab71fe883a79cf7a13d4450",
+	            "merged_sum": "fcd103e698e31b7683fc035fa34c7776",
 	            "name": "default"
 	         },
 	         {
 	            "count": 2,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "e631c6287ed57d424c9cdf0c10a38d2c",
+	            "merged_sum": "90e6ed87db2d1cb00fd6d75d84953e4d",
 	            "name": "dmz"
 	         },
 	         {
 	            "count": 0,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "3a12edfe0ab71fe883a79cf7a13d4450",
+	            "merged_sum": "fcd103e698e31b7683fc035fa34c7776",
 	            "name": "pciserver"
 	         }
 	      ]
@@ -926,24 +928,28 @@ Returns a list with the available agents.
 	         {
 	            "status": "Never connected",
 	            "ip": "any",
+	            "dateAdd": "2017-11-28 16:14:55",
 	            "id": "007",
 	            "name": "myNewAgent"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.10.10",
+	            "dateAdd": "2017-11-28 16:14:55",
 	            "id": "123",
 	            "name": "NewHost_2"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.9",
+	            "dateAdd": "2017-11-28 16:14:55",
 	            "id": "006",
 	            "name": "NewHost"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.14",
+	            "dateAdd": "2017-11-28 15:38:18",
 	            "id": "004",
 	            "name": "dmz002"
 	         },
@@ -994,16 +1000,16 @@ Returns the information of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "status": "Active",
+	      	"status": "Active",
 	      "configSum": "ab73af41699f13fdd81903b5f23d8d00",
 	      "group": "webserver",
 	      "name": "dmz003",
 	      "mergedSum": "3a12edfe0ab71fe883a79cf7a13d4450",
 	      "ip": "10.0.0.29",
-	      "dateAdd": "2017-11-06 17:29:59",
+	      "dateAdd": "2017-11-28 15:38:18",
 	      "version": "Wazuh v3.0.0-beta11",
 	      "manager_host": "ubuntu",
-	      "lastKeepAlive": "2017-11-06 17:34:55",
+	      "lastKeepAlive": "2017-11-28 15:48:28",
 	      "os": {
 	        "major": "7",
 	        "name": "CentOS Linux",
@@ -1050,7 +1056,7 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgYTIwYmI3ODRlM2MzNzBiMzM2YjU3OTJlOTE1MmE2M2E5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
+	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgTm9uZQ=="
 	}
 
 
@@ -1343,11 +1349,15 @@ Clears cache of the specified group.
 	   "error": 0,
 	   "data": {
 	      "all": [
+	         "/agents/summary/os?pretty",
+	         "/agents/summary?pretty",
 	         "/agents?pretty&offset=0&limit=5&sort=-ip,name",
 	         "/agents/000?pretty"
 	      ],
 	      "groups": {
 	         "agents": [
+	            "/agents/summary/os?pretty",
+	            "/agents/summary?pretty",
 	            "/agents?pretty&offset=0&limit=5&sort=-ip,name",
 	            "/agents/000?pretty"
 	         ]
@@ -1452,6 +1462,46 @@ Cluster
 Nodes
 ++++++++++++++++++++++++++++++++++++++++
 
+Get info about agents in cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the state of each agent and the manager it's reporting to in the cluster
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/agents
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/agents"
+
+**Example Response:**
+::
+
+	{"error":0,"data":{"None":[{"status":"Never connected","ip":"10.0.0.12","id":"002","name":"dmz001"},{"status":"Never connected","ip":"10.0.0.14","id":"004","name":"dmz002"},{"status":"Never connected","ip":"10.0.0.9","id":"006","name":"NewHost"},{"status":"Never connected","ip":"any","id":"007","name":"myNewAgent"},{"status":"Never connected","ip":"10.0.10.10","id":"123","name":"NewHost_2"}]}}
+
+Get info about files in cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the state of each file in the cluster
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/files
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/files"
+
+**Example Response:**
+::
+
+	{"error":1000,"message":"Wazuh-Python Internal Error: [Errno 2] No such file or directory"}
+
 Get node info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the Node info
@@ -1470,7 +1520,7 @@ Returns the Node info
 **Example Response:**
 ::
 
-	{"error":0,"data":{"node":"node01","cluster":"wazuh"}}
+	{"error":0,"data":{"node":"node01","cluster":"wazuh","type":"master"}}
 
 
 
@@ -1526,7 +1576,7 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 521,
+	      "totalItems": 523,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -1610,42 +1660,7 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0365-vpopmail_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0095-dropbear_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0440-proxmox-ve_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0300-sophos_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0290-solaris_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0045-barracuda_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0190-openvpn_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0135-imperva_decoders.xml"
+	            "file": "0075-clamav_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
@@ -1655,7 +1670,42 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0335-telnet_decoders.xml"
+	            "file": "0415-jenkins_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0355-vm-pop3_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0310-ssh_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0200-ossec_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0380-windows_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0140-kernel_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0350-unix_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0115-grandstream_decoders.xml"
 	         }
 	      ]
 	   }
@@ -1697,7 +1747,7 @@ Returns all parent decoders included in ossec.conf
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 132,
+	      "totalItems": 133,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -1846,7 +1896,8 @@ Returns ossec.conf in JSON format.
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "127.0.1.1"
+	         "80.58.61.250",
+	         "80.58.61.254"
 	      ],
 	      "email_from": "ossecm@example.wazuh.com",
 	      "logall_json": "no"
@@ -1879,11 +1930,11 @@ Returns basic information about Manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "installation_date": "lun nov  6 17:07:08 CET 2017",
-	      "version": "v3.0.0-beta11",
+	      "installation_date": "mar nov 28 15:35:34 CET 2017",
+	      "version": "v3.0.0-rc2",
 	      "openssl_support": "yes",
 	      "max_agents": "8000",
-	      "ruleset_version": "1002",
+	      "ruleset_version": "1003",
 	      "path": "/var/ossec",
 	      "tz_name": "CET",
 	      "type": "server",
@@ -2018,6 +2069,11 @@ Returns a summary about the 3 last months of ossec.log.
 	         "all": 92,
 	         "error": 0
 	      },
+	      "wazuh-modulesd:oscap": {
+	         "info": 1,
+	         "all": 1,
+	         "error": 0
+	      },
 	      "ossec-rootcheck": {
 	         "info": 3,
 	         "all": 3,
@@ -2029,9 +2085,9 @@ Returns a summary about the 3 last months of ossec.log.
 	         "error": 0
 	      },
 	      "ossec-logcollector": {
-	         "info": 10,
-	         "all": 11,
-	         "error": 1
+	         "info": 6,
+	         "all": 6,
+	         "error": 0
 	      },
 	      "ossec-execd": {
 	         "info": 1,
@@ -2040,8 +2096,8 @@ Returns a summary about the 3 last months of ossec.log.
 	      },
 	      "ossec-remoted": {
 	         "info": 4,
-	         "all": 4,
-	         "error": 0
+	         "all": 5,
+	         "error": 1
 	      },
 	      "ossec-syscheckd": {
 	         "info": 25,
@@ -2331,8 +2387,8 @@ Return the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-11-06 17:09:15",
-	      "end": "2017-11-06 17:09:37"
+	      "start": "2017-11-28 15:48:18",
+	      "end": "2017-11-28 15:49:34"
 	   }
 	}
 
@@ -2423,19 +2479,19 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 12,
+	      "totalItems": 147,
 	      "items": [
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-11-06 17:09:17",
-	            "readDay": "2017-11-06 17:09:17",
+	            "oldDay": "2017-11-28 15:48:28",
+	            "readDay": "2017-11-28 15:48:28",
 	            "event": "File '/root/infinite' is owned by root and has written permissions to anyone."
 	         },
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-11-06 17:09:17",
-	            "readDay": "2017-11-06 17:09:17",
-	            "event": "File '/root/infinite.save' is owned by root and has written permissions to anyone."
+	            "oldDay": "2017-11-28 15:48:28",
+	            "readDay": "2017-11-28 15:48:28",
+	            "event": "File '/root/.atom/.node-gyp/.node-gyp/iojs-1.6.15/common.gypi' is owned by root and has written permissions to anyone."
 	         }
 	      ]
 	   }
@@ -2605,7 +2661,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1544,
+	      "totalItems": 1545,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -3010,8 +3066,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-11-06 17:09:11",
-	      "end": "2017-11-06 17:09:15"
+	      "start": "2017-11-28 15:36:42",
+	      "end": "2017-11-28 15:47:58"
 	   }
 	}
 
