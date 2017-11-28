@@ -21,17 +21,11 @@ Installing Linux agent
 
       sudo yum install make gcc
 
-      # If you want to use Auth, also install:
-      sudo yum install openssl-devel
-
   b) For Debian-based distributions:
 
   .. code-block:: bash
 
       sudo apt-get install gcc make libc6-dev curl
-
-      # If you want to use Auth, also install:
-      sudo apt-get install libssl-dev
 
 2. Download and extract the latest version:
 

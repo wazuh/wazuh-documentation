@@ -160,7 +160,7 @@ In order to deploy a Wazuh cluster, follow these steps:
       </client>
 
 
-4. Enable and start the Wazuh cluster daemon in managers for starting the synchronization.
+4. Enable and start the Wazuh cluster daemon in all managers for starting the synchronization.
 
     .. code-block:: bash
 
