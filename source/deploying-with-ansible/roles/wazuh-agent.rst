@@ -46,7 +46,7 @@ b. For development environment ``vars-development.yml``:
 
 Next, run the ansible playbook:
 
-.. code-block:: bash
+.. code-block:: console
 
   $ ansible-playbook wazuh-agent.yml -e@vars-production.yml
 

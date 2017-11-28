@@ -90,7 +90,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 9. Restart the agent::
 
-	/var/ossec/bin/ossec-control restart
+	# /var/ossec/bin/ossec-control restart
 
 Forcing insertion
 ^^^^^^^^^^^^^^^^^^^

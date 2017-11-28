@@ -34,7 +34,7 @@ b. For development enviroment ``vars-development.yml``:
 
 Next, run the ansible playbook: ::
 
-  ansible-playbook wazuh-elastic.yml -e@vars-production.yml
+  $ ansible-playbook wazuh-elastic.yml -e@vars-production.yml
 
 The example above will install Elasticsearch and set the listen address to: ``10.1.1.10`` using ``vars-production.yml``.
 

@@ -7,7 +7,7 @@ The following steps show how to upgrade from Wazuh 2.x to Wazuh 3.x, including a
 
 Before starting the upgrade is important to stop  Logstash service to avoid problems.
 
-.. code-block:: bash
+.. code-block:: console
 
     # systemctl stop logstash
 
@@ -20,13 +20,13 @@ Before upgrading Wazuh's manager, it is very important to stop ``ossec-authd`` i
 
 a) Upgrade Wazuh manager on CentOS/RHEL/Fedora:
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # yum install wazuh-manager
 
 b) Upgrade Wazuh manager on Debian/Ubuntu:
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # apt-get install wazuh-manager
 
@@ -35,13 +35,13 @@ Upgrade Wazuh API
 
 a) Upgrade Wazuh API on CentOS/RHEL/Fedora:
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # yum install wazuh-api
 
 b) Upgrade Wazuh API on Debian/Ubuntu:
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # apt-get install wazuh-api
 
@@ -52,13 +52,13 @@ In order to upgrade Wazuh agents, you only need to add Wazuh's repository and up
 
 a) Upgrade Wazuh agent on CentOS/RHEL/Fedora:
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # yum install wazuh-agent
 
 b) Upgrade Wazuh agent on Debian/Ubuntu:
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # apt-get install wazuh-agent
 
@@ -81,19 +81,19 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
 2. Stop indexing and perform a synced flush:
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # curl -XPOST 'localhost:9200/_flush/synced?pretty'
 
 3. Stop elasticsearch service.
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # systemctl stop elasticsearch.service
 
 4. Remove Wazuh Kibana App plugin from Kibana:
 
-  .. code-block:: bash
+  .. code-block:: console
 
       # /usr/share/kibana/bin/kibana-plugin remove wazuh
       #  rm -rf /usr/share/kibana/optimize/bundles
@@ -102,7 +102,7 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
   - Add RPM repository:
 
-  .. code-block:: bash
+  .. code-block:: console
 
               # cat >> /etc/yum.repos.d/elastic.repo << EOF
               [elasticsearch-6.x]
@@ -117,7 +117,7 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
   - Add APT repository:
 
-  .. code-block:: bash
+  .. code-block:: console
 
      # echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
      # apt-get update
@@ -129,13 +129,13 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
       - If you are using  CentOS/RHEL/Fedora:
 
-      .. code-block:: bash
+      .. code-block:: console
 
          # yum install elasticsearch
 
       - If you are using Debian/Ubuntu:
 
-      .. code-block:: bash
+      .. code-block:: console
 
           # apt-get install elasticsearch
 
@@ -143,13 +143,13 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
       - If you are using  CentOS/RHEL/Fedora:
 
-      .. code-block:: bash
+      .. code-block:: console
 
         # yum install logstash
 
       - If you are using Debian/Ubuntu:
 
-      .. code-block:: bash
+      .. code-block:: console
 
         # apt-get install logstash
 
@@ -157,25 +157,25 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
       - If you are using  CentOS/RHEL/Fedora:
 
-      .. code-block:: bash
+      .. code-block:: console
 
         # yum install kibana
 
       - If you are using Debian/Ubuntu:
 
-      .. code-block:: bash
+      .. code-block:: console
 
         # apt-get install kibana
 
 7. Upgrade Wazuh Kibana App:
 
-    .. code-block:: bash
+    .. code-block:: console
 
      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
 8. Restart elasticsearch node:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # systemctl daemon-reload
         # systemctl restart elasticsearch
@@ -192,11 +192,11 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
 10. Load Wazuh Elasticsearch templates:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
@@ -206,7 +206,7 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
     a) Download our reindex script:
 
-        .. code-block:: bash
+        .. code-block:: console
 
           # curl -so /path/for/wazuh_elastic_reindex_index.sh https://github.com/wazuh/repository/...
 
@@ -228,13 +228,13 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
     c) Restart elasticsearch:
 
-     .. code-block:: bash
+     .. code-block:: console
 
         # systemctl restart elasticsearch
 
 12. Restart Logstash and Kibana
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # systemctl restart logstash
         # systemctl restart kibana

@@ -13,13 +13,13 @@ Before upgrading the Wazuh manager, stop ``ossec-authd`` in case that it is runn
 
 a) Upgrade Wazuh server on CentOS/RHEL/Fedora:
 
-.. code-block:: bash
+.. code-block:: console
 
     # yum upgrade wazuh-manager
 
 b) Upgrade Wazuh server on Debian/Ubuntu:
 
-.. code-block:: bash
+.. code-block:: console
 
     # apt-get update && sudo apt-get install --only-upgrade wazuh-manager
 
@@ -28,13 +28,13 @@ Upgrade Wazuh API
 
 a) Upgrade Wazuh API on CentOS/RHEL/Fedora:
 
-.. code-block:: bash
+.. code-block:: console
 
     # yum upgrade wazuh-api
 
 b) Upgrade Wazuh API on Debian/Ubuntu:
 
-.. code-block:: bash
+.. code-block:: console
 
     # apt-get update && sudo apt-get install --only-upgrade wazuh-api
 
@@ -44,13 +44,13 @@ Upgrade Wazuh agent
 
 a) Upgrade Wazuh agent on CentOS/RHEL/Fedora:
 
-.. code-block:: bash
+.. code-block:: console
 
     # yum upgrade wazuh-agent
 
 b) Upgrade Wazuh agent on Debian/Ubuntu:
 
-.. code-block:: bash
+.. code-block:: console
 
     # apt-get update && sudo apt-get install --only-upgrade wazuh-agent
 
@@ -61,7 +61,7 @@ Upgrade Wazuh Kibana App
 
 1) On your terminal, remove the current Wazuh Kibana App:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # /usr/share/kibana/bin/kibana-plugin remove wazuh
 
@@ -69,25 +69,25 @@ Upgrade Wazuh Kibana App
 
   a) For Systemd:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # systemctl stop kibana
 
   b) For SysV Init:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # service kibana stop
 
 3) Remove the current kibana bundles:
 
-.. code-block:: bash
+.. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
 
 4) Upgrade Wazuh Kibana App (this can take a while):
 
-.. code-block:: bash
+.. code-block:: console
 
     # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
@@ -95,12 +95,12 @@ Upgrade Wazuh Kibana App
 
   a) For Systemd:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # systemctl start kibana
 
   b) For SysV Init:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # service kibana start

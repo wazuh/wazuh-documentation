@@ -14,7 +14,7 @@ Preparation
 
   a) For Debian:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
     # echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
@@ -22,20 +22,20 @@ Preparation
 
   b) For Ubuntu:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # add-apt-repository ppa:webupd8team/java
 
 2. Once the repository is added, install Java JRE:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# apt-get update
   	# apt-get install oracle-java8-installer
 
 3. Install the Elastic repository and its GPG key:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# apt-get install curl apt-transport-https
   	# curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
@@ -49,7 +49,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
 1. Install the Elasticsearch package:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # apt-get install elasticsearch
 
@@ -57,7 +57,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   a) For Systemd:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # systemctl daemon-reload
     # systemctl enable elasticsearch.service
@@ -65,24 +65,24 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   b) For SysV Init:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# update-rc.d elasticsearch defaults 95 10
   	# service elasticsearch start
 
 3. Load Wazuh Elasticsearch templates:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
 4. Insert sample alert:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
@@ -97,13 +97,13 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
 1. Install the Logstash package:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # apt-get install logstash
 
 2. Download the Wazuh config for Logstash:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh.conf
 
@@ -113,7 +113,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   b) Because the Logstash user needs to read alerts.json file, please add it to OSSEC group by running:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # usermod -a -G ossec logstash
 
@@ -121,7 +121,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   a) For Systemd:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# systemctl daemon-reload
   	# systemctl enable logstash.service
@@ -129,7 +129,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   b) For SysV Init:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # update-rc.d logstash defaults 95 10
     # service logstash start
@@ -145,13 +145,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 1. Install the Kibana package:
 
-  .. code-block:: bash
+  .. code-block:: console
 
    # apt-get install kibana
 
 2. Install the Wazuh App plugin for Kibana:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
@@ -173,7 +173,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   a) For Systemd:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# systemctl daemon-reload
   	# systemctl enable kibana.service
@@ -181,7 +181,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   b) For SysV Init:
 
-  .. code-block:: bash
+  .. code-block:: console
 
    # update-rc.d kibana defaults 95 10
    # service kibana start

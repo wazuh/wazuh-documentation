@@ -113,7 +113,7 @@ The user is created with no permission to create databases (-D), or roles (-R) a
 
 Create the extension pg_trgm is the RegExp-optimized index extension: ::
 
-   $ su - postgres
+   # su - postgres
    $ psql puppetdb -c 'create extension pg_trgm'
    $ exit
 

@@ -14,7 +14,7 @@ The first thing you need is to add the Wazuh repository to your server. If you w
 
 To set up the repository, run this command:
 
-     .. code-block:: bash
+     .. code-block:: console
 
          # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
          [wazuh_repo]
@@ -28,7 +28,7 @@ To set up the repository, run this command:
 
 For CentOS-5 and RHEL-5:
 
-    .. code-block:: bash
+    .. code-block:: console
 
         # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
         [wazuh_repo]
@@ -45,7 +45,7 @@ Installing Wazuh manager
 
 The next will install Wazuh manager on your system:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # yum install wazuh-manager
 
@@ -53,13 +53,13 @@ Once the process is completed, you can check the service status with:
 
     a) For Systemd:
 
-    .. code-block:: bash
+    .. code-block:: console
 
       # systemctl status wazuh-manager
 
     b) For SysV Init:
 
-    .. code-block:: bash
+    .. code-block:: console
 
       # service wazuh-manager status
 
@@ -68,19 +68,19 @@ Installing Wazuh API
 
 1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend you add the official NodeJS repository like this:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
   and then, install nodejs:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # yum install nodejs
 
 2. Install the Wazuh API. It will update NodeJS if it is required:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # yum install wazuh-api
 
@@ -88,13 +88,13 @@ Installing Wazuh API
 
   a) For Systemd:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # systemctl status wazuh-api
 
   b) For SysV Init:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # service wazuh-api status
 
@@ -121,14 +121,14 @@ Installing Wazuh API
 
   a) For CentOS 6:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# yum install -y centos-release-scl
   	# yum install -y python27
 
   b) For RHEL 6:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# yum install python27
 
@@ -150,7 +150,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
 1. Install the GPG keys from Elastic, and the Elastic repository:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
@@ -167,13 +167,13 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
 2. Install Filebeat:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # yum install filebeat
 
 3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
 
-  .. code-block:: bash
+  .. code-block:: console
 
 	 # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/filebeat/filebeat.yml
 
@@ -189,7 +189,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   a) For Systemd:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # systemctl daemon-reload
     # systemctl enable filebeat.service
@@ -197,7 +197,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   b) For SysV Init:
 
-  .. code-block:: bash
+  .. code-block:: console
 
   	# chkconfig --add filebeat
   	# service filebeat start

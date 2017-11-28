@@ -34,7 +34,7 @@ b. For development enviroment ``vars-development.yml``:
 
 Next, run the Ansible playbook: ::
 
-  ansible-playbook wazuh-kibana.yml -e@vars-production.yml
+  $ ansible-playbook wazuh-kibana.yml -e@vars-production.yml
 
 The example above will install Kibana and configure to use ``10.1.1.10`` as Elasticsearch node.
 

@@ -10,9 +10,9 @@ a) On DEB or RPM based **Linux systems**, you can easily rely on the packages ma
 
   You can check your agent version running the following command:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-      /var/ossec/bin/manage_agents -V
+      # /var/ossec/bin/manage_agents -V
 
           Wazuh v2.0 - Wazuh Inc.
 

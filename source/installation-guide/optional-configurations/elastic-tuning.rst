@@ -74,22 +74,22 @@ Finally, restart Elasticsearch service:
 
     a) For Systemd:
 
-      .. code-block:: bash
+      .. code-block:: console
 
-        systemctl daemon-reload
-        systemctl restart elasticsearch
+        # systemctl daemon-reload
+        # systemctl restart elasticsearch
 
     b) For SysV Init:
 
-      .. code-block:: bash
+      .. code-block:: console
 
-        service elasticsearch restart
+        # service elasticsearch restart
 
 After starting Elasticsearch, you can see whether this setting was successfully applied by checking the value of ``mlockall`` in the output of the next request:
 
-.. code-block:: bash
+.. code-block:: console
 
-    curl -XGET 'localhost:9200/_nodes?filter_path=**.mlockall&pretty'
+    $ curl -XGET 'localhost:9200/_nodes?filter_path=**.mlockall&pretty'
 
 .. code-block:: json
 
@@ -162,11 +162,11 @@ In case you want to change these settings you need to edit the Elasticsearch tem
 
 1. Download the Wazuh Elasticsearch template::
 
-    curl https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/elasticsearch/wazuh-elastic5-template.json -o w-elastic-template.json
+    $ curl https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/elasticsearch/wazuh-elastic5-template.json -o w-elastic-template.json
 
 2. Edit the template in order to set 1 shard a 0 replicas::
 
-    nano w-elastic-template.json
+    $ nano w-elastic-template.json
 
     {
       "order": 0,
@@ -183,7 +183,7 @@ In case you want to change these settings you need to edit the Elasticsearch tem
 
 3. Load the template::
 
-    curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @w-elastic-template.json
+    $ curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @w-elastic-template.json
 
 
 Changing number of replicas
@@ -193,7 +193,7 @@ The number of replicas can be changed dynamically using the Elasticsearch API.
 
 In a cluster with 1 node, the number of replicas should be 0::
 
-    curl -XPUT 'localhost:9200/wazuh-*/_settings?pretty' -H 'Content-Type: application/json' -d'
+    $ curl -XPUT 'localhost:9200/wazuh-*/_settings?pretty' -H 'Content-Type: application/json' -d'
     {
         "settings": {
             "number_of_replicas" : 0
