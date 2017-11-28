@@ -24,6 +24,7 @@ Options
 - `rules_id`_
 - `timeout`_
 - `repeated_offenders`_
+- `ca_store`_
 
 disabled
 ^^^^^^^^
@@ -145,6 +146,17 @@ This is a comma-separated list of increasing timeouts in minutes for repeat offe
 | **Default value**  | n/a                         |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (minutes) |
++--------------------+-----------------------------+
+
+ca_store
+^^^^^^^^^
+
+This indicates the path to root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.
+
++--------------------+-----------------------------+
+| **Default value**  | n/a                         |
++--------------------+-----------------------------+
+| **Allowed values** | Path to root CA certificate |
 +--------------------+-----------------------------+
 
 Example of configuration
