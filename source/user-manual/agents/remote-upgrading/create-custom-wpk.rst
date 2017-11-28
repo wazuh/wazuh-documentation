@@ -63,25 +63,34 @@ Canonical WPK package example
 
     curl -Lo wazuh-3.0.zip https://github.com/wazuh/wazuh/archive/3.0.zip && unzip wazuh-3.0.zip
 
-2. Compile the project:
+2. Modify the ``wazuh-3.0/etc/preload-vars.conf`` file from downloaded sources to deploy
+an :doc:`unattended update <../../../installation-guide/unattended-installation>` in the agent. It has to be uncommented the following lines.
+
+.. code-block:: console
+
+    USER_LANGUAGE="en"
+    USER_NO_STOP="y"
+    USER_UPDATE="y"
+
+3. Compile the project:
 
 .. code-block:: console
 
     make -C wazuh-3.0/src TARGET=agent
 
-3. Change to the base directory:
+4. Change to the base directory:
 
 .. code-block:: console
 
     cd wazuh-3.0
 
-4. Install the root CA, only if you want to overwrite the root CA with the file you created before:
+5. Install the root CA, only if you want to overwrite the root CA with the file you created before:
 
 .. code-block:: console
 
     cp path/to/wpk_root.pem etc/wpk_root.pem
 
-5. Compile the WPK package. You need your SSL certificate and key:
+6. Compile the WPK package. You need your SSL certificate and key:
 
 .. code-block:: console
 
