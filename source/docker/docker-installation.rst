@@ -7,9 +7,12 @@ The first thing you need to do is install Docker if you don't have it already.
 
 Docker engine
 ----------------------------------------------
+
 Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
-To check your current kernel version, open a terminal and use ``uname -r`` to display your kernel version::
+To check your current kernel version, open a terminal and use ``uname -r`` to display your kernel version:
+
+.. code-block:: console
 
    # uname -r
    3.10.0-229.el7.x86_64
@@ -22,7 +25,7 @@ Run the Docker installation script.
 
 If you would like to use Docker as a non-root user, you should now consider adding your user to the "docker" group with something like:
 
-::
+.. code-block:: console
 
   # usermod -aG docker your-user
 

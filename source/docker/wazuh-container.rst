@@ -9,7 +9,9 @@ Requirements
 Increase max_map_count on your host (Linux)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You need to increase ``max_map_count`` on your Docker host::
+You need to increase ``max_map_count`` on your Docker host:
+
+.. code-block:: console
 
   # sysctl -w vm.max_map_count=262144
 
@@ -37,7 +39,9 @@ Add the following line into the profile file::
 
   sysctl -w vm.max_map_count=262144
 
-Make the script runneable::
+Make the script runneable:
+
+.. code-block:: console
 
   # chmod +x /var/lib/boot2docker/bootlocal.sh
 

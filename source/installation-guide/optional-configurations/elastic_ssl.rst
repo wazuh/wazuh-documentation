@@ -16,13 +16,13 @@ Generating a self-signed SSL certificate
 
 	a. On Debian or Ubuntu:
 
-		.. code-block:: bash
+		.. code-block:: console
 
 			# cp /etc/ssl/openssl.cnf custom_openssl.cnf
 
 	b. On CentOS or Red Hat:
 
-		.. code-block:: bash
+		.. code-block:: console
 
 			# cp /etc/pki/tls/openssl.cnf custom_openssl.cnf
 
@@ -46,13 +46,13 @@ Generating a self-signed SSL certificate
 
 3. Generate the SSL certificate and key:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# openssl req -x509 -batch -nodes -days 3650 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
 
 4. You may remove the custom configuration file:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# rm custom_openssl.cnf
 
@@ -79,13 +79,13 @@ At this point you should have your SSL certificate and key at ``/etc/logstash/lo
 
 	a. For Systemd:
 
-		.. code-block:: bash
+		.. code-block:: console
 
 			# systemctl restart logstash.service
 
 	b. For legacy SysV Init:
 
-		.. code-block:: bash
+		.. code-block:: console
 
 			# service logstash restart
 
@@ -98,7 +98,7 @@ Now we will configure Filebeat to verify the Logstash server's certificate.
 
 	Here is an **example** you might use to copy the SSL certificate from the Logstash server to Wazuh server where Filebeat is installed:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# scp root@LOGSTASH_SERVER_IP:/etc/logstash/logstash.crt /etc/filebeat
 
@@ -116,13 +116,13 @@ Now we will configure Filebeat to verify the Logstash server's certificate.
 
 	a. For Systemd:
 
-		.. code-block:: bash
+		.. code-block:: console
 
 			# systemctl restart filebeat.service
 
 	b. For legacy SysV Init:
 
-		.. code-block:: bash
+		.. code-block:: console
 
 			# service filebeat restart
 

@@ -26,12 +26,12 @@ When you change any value on ``ossec.conf`` file, you need to restart the servic
 
 a. For Systemd:
 
-::
+.. code-block:: console
 
   # systemctl restart wazuh-manager
 
 b. For SysV Init:
 
-::
+.. code-block:: console
 
   # service wazuh-manager restart

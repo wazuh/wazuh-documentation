@@ -3,7 +3,9 @@
 Register Agent
 ----------------------------
 
-1. On the **manager**, run `manage_agents`::
+1. On the **manager**, run `manage_agents`:
+
+.. code-block:: console
 
 	# /var/ossec/bin/manage_agents
 
@@ -50,7 +52,9 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 4. Exit from `manage_agents` by pressing `Q` and `Enter`.
 
-5. Now on the **agent** run `manage_agents`::
+5. Now on the **agent** run `manage_agents`:
+
+.. code-block:: console
 
 	# /var/ossec/bin/manage_agents
 
@@ -88,7 +92,9 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
                <server-ip>MANAGE_IP</server-ip>
          </client>
 
-9. Restart the agent::
+9. Restart the agent:
+
+.. code-block:: console
 
 	# /var/ossec/bin/ossec-control restart
 

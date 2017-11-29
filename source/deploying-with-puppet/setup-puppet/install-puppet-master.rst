@@ -6,7 +6,9 @@ Installing Puppet master
 Installation on CentOS/RHEL/Fedora
 ------------------------------------
 
-Install the Puppet yum repository and then the "puppet-server" package. See https://yum.puppetlabs.com to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, for CentOS 7 or RHEL 7, do the following::
+Install the Puppet yum repository and then the "puppet-server" package. See https://yum.puppetlabs.com to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, for CentOS 7 or RHEL 7, do the following:
+
+.. code-block:: console
 
    # rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
    # yum install puppetserver
@@ -15,12 +17,16 @@ Install the Puppet yum repository and then the "puppet-server" package. See http
 Installation on Debian/Ubuntu
 ------------------------------
 
-Install ``curl``, ``apt-transport-https`` and ``lsb-release``::
+Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
+
+.. code-block:: console
 
 	# apt-get update
 	# apt-get install curl apt-transport-https lsb-release
 
-Get the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution, you can use next script to make installation more silently::
+Get the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution, you can use next script to make installation more silently:
+
+.. code-block:: console
 
   # wget "https://apt.puppetlabs.com/puppetlabs-release-pc1-$(lsb_release -cs).deb"
   # dpkg -i "puppetlabs-release-pc1-$(lsb_release -cs).deb"
@@ -49,15 +55,15 @@ Then, restart your Puppet Server to apply changes:
 
   a) For Systemd:
 
-  ::
+  .. code-block:: console
 
-    # systemctl start puppetserver
+        # systemctl start puppetserver
 
   b) For SysV Init:
 
-  ::
+  .. code-block:: console
 
-    # service puppetserver start
+        # service puppetserver start
 
 PuppetDB installation
 ---------------------
@@ -66,7 +72,8 @@ After configuring Puppet Server to run on Apache with Passenger, the next step i
 
 Installation on CentOS/RHEL 7 (Adjust if your version is different.)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-::
+
+.. code-block:: console
 
    # rpm -Uvh https://yum.postgresql.org/9.4/redhat/rhel-latest-x86_64/pgdg-centos94-9.4-2.noarch.rpm
    # yum install puppetdb-terminus.noarch puppetdb postgresql94-server postgresql94 postgresql94-contrib.x86_64
@@ -75,8 +82,9 @@ Installation on CentOS/RHEL 7 (Adjust if your version is different.)
    # systemctl enable postgresql-9.4
 
 Installation on Debian/Ubuntu
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-::
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: console
 
   # sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
   # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -88,7 +96,7 @@ Configuration
 
 For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/9.4/data/pg_hba.conf`` and modify the METHOD to be ``md5`` in these two lines:
 
-::
+.. code-block:: console
 
   # IPv4 local connections:
   host    all             all             127.0.0.1/32            md5
@@ -96,7 +104,8 @@ For CentOS/RHEL/Fedora only, the next step is to edit ``/var/lib/pgsql/9.4/data/
   host    all             all             ::1/128                 md5
 
 Restart service after change configuration:
-::
+
+.. code-block:: console
 
    # systemctl restart postgresql-9.4
 
@@ -111,13 +120,17 @@ Create a PostgreSQL user and database:
 
 The user is created with no permission to create databases (-D), or roles (-R) and does not have superuser privileges (-S). It will prompt for a password (-P). Let’s assume a password of "yourpassword"” has been used. The database is created and owned (-O) by the puppetdb user.
 
-Create the extension pg_trgm is the RegExp-optimized index extension: ::
+Create the extension pg_trgm is the RegExp-optimized index extension:
+
+.. code-block:: console
 
    # su - postgres
    $ psql puppetdb -c 'create extension pg_trgm'
    $ exit
 
-Test database access: ::
+Test database access:
+
+.. code-block:: console
 
    # psql -h 127.0.0.1 -p 5432 -U puppetdb -W puppetdb
    Password for user puppetdb:
@@ -154,11 +167,15 @@ Finally, update ``/etc/puppetlabs/puppet/puppet.conf``: ::
     storeconfigs = true
     storeconfigs_backend = puppetdb
 
-Start puppetdb service: ::
+Start puppetdb service:
+
+.. code-block:: console
 
    # systemctl start puppetdb
 
-Once these steps are completed, restart your Puppet Server and run ``puppet agent --test``: ::
+Once these steps are completed, restart your Puppet Server and run ``puppet agent --test``:
+
+.. code-block:: consoles
 
    # puppet agent --test
 

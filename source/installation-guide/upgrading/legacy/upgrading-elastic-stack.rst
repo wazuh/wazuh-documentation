@@ -141,7 +141,7 @@ Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
   ``ES_HEAP_SIZE`` option is now deprecated. You should remove or comment out this option in your  ``/etc/sysconfig/elasticsearch`` file:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # ES_HEAP_SIZE - Set it to half your system RAM memory
     ES_HEAP_SIZE=8g

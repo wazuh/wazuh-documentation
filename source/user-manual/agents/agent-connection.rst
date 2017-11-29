@@ -20,25 +20,25 @@ This will set 10.0.0.10 as Wazuh Manager server, after you need restart the Agen
 
 a. For Systemd:
 
-::
+.. code-block:: console
 
   # systemctl restart wazuh-agent
 
 b. For SysV Init:
 
-::
+.. code-block:: console
 
   # service wazuh-agent restart
 
 After you register the agent and it be successfully connected, you could see a list of connected agents into Manager with:
 
-::
+.. code-block:: console
 
   # /var/ossec/bin/agent_control -lc
 
 This will display every registered Agent, also you can check if a Agent is correctly connected verifying if the UDP connection to Manager is established:
 
-::
+.. code-block:: console
 
   # netstat -vatunp|grep ossec-agentd
 

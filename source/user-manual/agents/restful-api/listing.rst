@@ -5,7 +5,7 @@ Listing Agents
 
 The request :ref:`GET /agents <request_list>` returns the list of available agents.
 
-::
+.. code-block:: console
 
     $ curl -u foo:bar -k http://127.0.0.1:55000/agents?pretty
 

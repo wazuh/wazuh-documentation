@@ -22,11 +22,15 @@ This wodle is executed on the agent, so each agent must meet the following requi
     OpenSCAP
     In order to perform SCAP evaluations, we need the scanner. As we mentioned above, we use OpenSCAP. You can install it with this command:
 
-      a) For RPM-based distributions::
+      a) For RPM-based distributions:
+
+        .. code-block:: console
 
           # yum install openscap-scanner
 
-      b) For Debian-based distributions::
+      b) For Debian-based distributions:
+
+        .. code-block:: console
 
           # apt-get install libopenscap8 xsltproc
 

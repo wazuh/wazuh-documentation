@@ -49,7 +49,7 @@ For doing this, we have to include in the ``ossec.conf`` file a section like tha
 
 - The second step is to enable the integrator daemon and restart Wazuh.
 
-::
+.. code-block:: console
 
     # /var/ossec/bin/ossec-control enable integrator
     # /var/ossec/bin/ossec-control restart

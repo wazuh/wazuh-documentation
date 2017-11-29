@@ -84,11 +84,15 @@ Check if Python is already installed: ::
 
 If Python 2.7 or later is not installed, then install it with your distribution's package manager as shown below:
 
-* On Debian derivatives such as Ubuntu, use APT: ::
+* On Debian derivatives such as Ubuntu, use APT:
+
+.. code-block:: console
 
   # apt-get install python2.7
 
-* On Red Hat and derivatives, use yum: ::
+* On Red Hat and derivatives, use yum:
+
+.. code-block:: console
 
   # yum install python27
 
@@ -103,11 +107,15 @@ To install Pip on Linux:
 
   $ curl -O https://bootstrap.pypa.io/get-pip.py
 
-* Run the script with Python: ::
+* Run the script with Python:
+
+.. code-block:: console
 
   # python get-pip.py
 
-Now that Python and pip are installed, use pip to install boto: ::
+Now that Python and pip are installed, use pip to install boto:
+
+.. code-block:: console
 
   # pip install boto
 
@@ -127,7 +135,7 @@ We use a python script to download JSON files from the S3 bucket and convert the
 
 Run the following command to use this script: ::
 
-  $ ./getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log
+  # ./getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log
 
 Where ``s3bucketname`` is the name of the bucket created when CloudTrail was activated (see the first step in this section: "Turn on CloudTrail") and ``/path-with-write-permission/amazon.log`` is the path where the flat log file is stored once has been converted by the script.
 
@@ -137,9 +145,11 @@ Where ``s3bucketname`` is the name of the bucket created when CloudTrail was act
 
 if you want to maintain the logs files in the bucket, you need to use the script without ``-D`` parameter like the following example: ::
 
-  $ ./getawslog.py -b s3bucketname -d -j -l /path-with-write-permission/amazon.log -s /path-with-write-permission/awslogstat.db
+  # ./getawslog.py -b s3bucketname -d -j -l /path-with-write-permission/amazon.log -s /path-with-write-permission/awslogstat.db
 
-Using ``-s /path-with-write-permission/awslogstat.db`` will track downloaded log files avoiding processing them again, without it the script will download previously processed log files adding its content again to ``/path-with-write-permission/amazon.log``. Also you need to install ``sqlite`` module for python: ::
+Using ``-s /path-with-write-permission/awslogstat.db`` will track downloaded log files avoiding processing them again, without it the script will download previously processed log files adding its content again to ``/path-with-write-permission/amazon.log``. Also you need to install ``sqlite`` module for python:
+
+.. code-block:: console
 
   # pip install pysqlite
 
@@ -171,10 +181,14 @@ Since Wazuh 3.0.0 we can specify JSON log format for reading the JSON log files 
 
 Finally, restart the Wazuh manager to apply changes:
 
-a. For Systemd: ::
+a. For Systemd:
+
+.. code-block:: console
 
     # systemctl restart wazuh-manager
 
-b. For SysV Init: ::
+b. For SysV Init:
+
+.. code-block:: console
 
     # service wazuh-manager restart

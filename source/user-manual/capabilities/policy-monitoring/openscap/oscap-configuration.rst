@@ -153,7 +153,7 @@ Manager ``shared/agent.conf``:
 
 To apply the new configuration, restart the manager and agents:
 
-::
+.. code-block:: console
 
   # /var/ossec/bin/ossec-control restart
   # /var/ossec/bin/agent_control -R -a

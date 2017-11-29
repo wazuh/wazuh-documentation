@@ -6,16 +6,22 @@ Migrating OSSEC manager installed from packages
 1. Backup your current configuration
 ------------------------------------
 
-Stop OSSEC: ::
+Stop OSSEC:
+
+.. code-block:: console
 
     # /var/ossec/bin/ossec-control stop
 
-Check if you have enough space to create a copy of ``/var/ossec``: ::
+Check if you have enough space to create a copy of ``/var/ossec``:
+
+.. code-block:: console
 
     # du -h /var/ossec | tail -n1
     # df -h /var
 
-Backup ``/var/ossec``: ::
+Backup ``/var/ossec``:
+
+.. code-block:: console
 
     # cp -rp /var/ossec /var/ossec_backup
 
@@ -24,18 +30,20 @@ Backup ``/var/ossec``: ::
 -----------------------------------
 
 Debian and Ubuntu:
-::
+
+.. code-block:: console
 
     # apt-get remove ossec-hids --purge
 
 CentOS and Red Hat:
-::
+
+.. code-block:: console
 
     # yum remove ossec-hids
 
 Remove directory:
 
-::
+.. code-block:: console
 
     # rm -rf /var/ossec
 
@@ -52,11 +60,15 @@ Follow the next guide in order to install Wazuh server:
 4. Restore configuration
 ------------------------
 
-Stop OSSEC: ::
+Stop OSSEC:
+
+.. code-block:: console
 
     # systemctl stop wazuh-manager
 
-Restore mandatory files: ::
+Restore mandatory files:
+
+.. code-block:: console
 
     # cp -p /var/ossec_backup/agentless/.passlist /var/ossec/agentless/
     # cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
@@ -70,7 +82,8 @@ Restore mandatory files: ::
 Restore optional files
 
 The following files are required in order to preserve alerts log files and syscheck/rootcheck databases:
-::
+
+.. code-block:: console
 
     # cp -rp /var/ossec_backup/logs/archives/* /var/ossec/logs/archives
     # cp -rp /var/ossec_backup/logs/alerts/* /var/ossec/logs/alerts
@@ -86,6 +99,6 @@ The previous configuration file is saved as ``/var/ossec/etc/ossec.conf.orig``. 
 6. Start Wazuh
 --------------
 
-::
+.. code-block:: console
 
     # /var/ossec/bin/ossec-control start

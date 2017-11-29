@@ -15,7 +15,8 @@ Configuration
 -------------------
 
 Integrator is not enabled by default.  Integrator is enabled using the following command:
-::
+
+.. code-block:: console
 
     # /var/ossec/bin/ossec-control enable integrator
     # /var/ossec/bin/ossec-control restart

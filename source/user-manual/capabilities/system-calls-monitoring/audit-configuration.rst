@@ -30,7 +30,9 @@ where:
   - attribute: File system rules with -p **a**.
   - command: System call rules.
 
-By default, OSSEC includes a CDB list with the following keys: ::
+By default, OSSEC includes a CDB list with the following keys:
+
+.. code-block:: console
 
     # cat /var/ossec/etc/lists/audit-keys
 
@@ -41,13 +43,16 @@ By default, OSSEC includes a CDB list with the following keys: ::
     audit-wazuh-c:command
 
 You can add your own key with its value to the list like this:
-::
 
-    echo "my_key_write_type:write" >> /var/ossec/etc/lists/audit-keys
+.. code-block:: console
 
-Each time you modify a CDB list, you must compile it: ::
+    # echo "my_key_write_type:write" >> /var/ossec/etc/lists/audit-keys
 
-    /var/ossec/bin/ossec-makelists
+Each time you modify a CDB list, you must compile it:
+
+.. code-block:: console
+
+    # /var/ossec/bin/ossec-makelists
 
 
 Agent
@@ -58,11 +63,15 @@ Installing Audit
 
 In order to use the Audit system, you must have the audit package installed on your system. If you do not have this  package installed, execute the following command as the root user to install it.
 
-Red Hat, CentOS and Fedora: ::
+Red Hat, CentOS and Fedora:
+
+.. code-block:: console
 
     # yum install audit
 
-Debian and Ubuntu based Linux distributions: ::
+Debian and Ubuntu based Linux distributions:
+
+.. code-block:: console
 
     # apt-get install auditd
 
@@ -77,7 +86,9 @@ Wazuh must be aware of the events detected by Audit. So, it is needs to be confi
 
 Restarting OSSEC
 ~~~~~~~~~~~~~~~~~
-Finally, we must restart Wazuh agent in order to apply the changes: ::
+Finally, we must restart Wazuh agent in order to apply the changes:
+
+.. code-block:: console
 
     # /var/ossec/bin/ossec-control restart
 
@@ -141,7 +152,9 @@ Now we start getting alerts on account of the new audit rules::
 Let's see what happens when we execute the following commands:
 
 New File
-  Command::
+  Command:
+
+ .. code-block:: console
 
       # touch /home/malware.py
 
@@ -189,7 +202,9 @@ New File
     audit.file.mode: 0100644
 
 Write Access
-  Command::
+  Command:
+
+  .. code-block:: console
 
       # nano /home/malware.py
 
@@ -237,7 +252,9 @@ Write Access
     audit.file.mode: 0100644
 
 Change Permissions
-  Command::
+  Command:
+
+ .. code-block:: console
 
       # chmod u+x /home/malware.py
 
@@ -281,7 +298,9 @@ Change Permissions
 
 
 Read access
-  Command::
+  Command:
+
+  .. code-block:: console
 
       # /home/malware.py
 
@@ -324,7 +343,9 @@ Read access
     audit.file.mode: 0100744
 
 Delete file
-  Command::
+  Command:
+
+  .. code-block:: console
 
       # rm /home/malware.py
 
@@ -376,7 +397,9 @@ Delete file
 Monitoring user actions
 ------------------------------------------------
 
-Here we choose to audit all commands run by a user who has admin privileges. The audit configuration for this is quite simple: ::
+Here we choose to audit all commands run by a user who has admin privileges. The audit configuration for this is quite simple:
+
+.. code-block:: console
 
     # auditctl -a exit,always -F euid=0 -F arch=b64 -S execve -k audit-wazuh-c
     # auditctl -a exit,always -F euid=0 -F arch=b32 -S execve -k audit-wazuh-c
@@ -424,7 +447,9 @@ If the root user executes nano, the alert will look like this::
 Privilege escalation
 ------------------------------------------------
 
-By default, Wazuh is able to detect privilege escalation by analyzing the corresponding log in */var/log/auth.log*. The below example shows the homer user executing a root action: ::
+By default, Wazuh is able to detect privilege escalation by analyzing the corresponding log in */var/log/auth.log*. The below example shows the homer user executing a root action:
+
+.. code-block:: console
 
     # homer@springfield:/# sudo ls /var/ossec/etc
 
@@ -452,7 +477,9 @@ Add the following line to every PAM service that needs it: ::
 
     session required        pam_loginuid.so
 
-A common configuration should include: *login*, *common-session*, *cron* and *sshd*: ::
+A common configuration should include: *login*, *common-session*, *cron* and *sshd*:
+
+.. code-block:: console
 
     # grep -R "pam_loginuid.so" /etc/pam.d/
 
@@ -464,7 +491,7 @@ A common configuration should include: *login*, *common-session*, *cron* and *ss
 
 After configuring PAM, if we execute the previous command with the user *homer* we will see that the field *auid* is 1004, the id of the user homer.
 
-::
+.. code-block:: console
 
     # homer@springfield:/# sudo ls /var/ossec/etc
 

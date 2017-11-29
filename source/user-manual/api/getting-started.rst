@@ -10,19 +10,23 @@ Starting and stopping the API
 The API starts at boot time. To control or check the wazuh-api service, use the systemctl or service command.
 
 **Systemd systems**
-::
+
+.. code-block:: console
 
     # systemctl start/status/stop/restart wazuh-api
 
 **SysVinit systems**
-::
+
+.. code-block:: console
 
     # service wazuh-api start/status/stop/restart
 
 
 Hello world!
 ---------------------------------
-In order to check if everything is working as expected, you can use cURL to do a *request*: ::
+In order to check if everything is working as expected, you can use cURL to do a *request*:
+
+.. code-block:: console
 
     # curl -u foo:bar -k https://127.0.0.1:55000?pretty
     {

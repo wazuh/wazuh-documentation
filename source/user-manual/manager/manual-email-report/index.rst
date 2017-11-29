@@ -62,12 +62,14 @@ This example will set the minimum level to 10. More information: :ref:`alerts se
 When you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
 
 a) For Systemd:
-::
+
+.. code-block:: console
 
   # systemctl status wazuh-manager
 
 b) For SysV Init:
-::
+
+.. code-block:: console
 
   # service wazuh-manager status
 

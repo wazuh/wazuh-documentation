@@ -212,13 +212,13 @@ A reindex can be a tricky process, depending on how big is your dataset,  but we
 
     b) Reindex your data with ``wazuh_elastic_reindex_index.sh``.
 
-        .. code-block:: bash
+        .. code-block:: console
 
           #/path/for/wazuh_elastic_reindex_index.sh start_date end_date elasticsearch_ip
 
         You can see an example below:
 
-        .. code-block:: bash
+        .. code-block:: console
 
            #/path/for/wazuh_elastic_reindex_index.sh 20171101 20171131 localhost
 

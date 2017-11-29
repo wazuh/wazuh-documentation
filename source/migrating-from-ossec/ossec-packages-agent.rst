@@ -6,16 +6,22 @@ Migrating OSSEC agent installed from packages
 1. Backup your current configuration
 ------------------------------------
 
-Stop OSSEC: ::
+Stop OSSEC:
+
+.. code-block:: console
 
     # /var/ossec/bin/ossec-control stop
 
-Check if you have enough space to create a copy of ``/var/ossec``: ::
+Check if you have enough space to create a copy of ``/var/ossec``:
+
+.. code-block:: console
 
     # du -h /var/ossec | tail -n1
     # df -h /var
 
-Backup ``/var/ossec``: ::
+Backup ``/var/ossec``:
+
+.. code-block:: console
 
     # cp -rp /var/ossec /var/ossec_backup
 
@@ -24,18 +30,20 @@ Backup ``/var/ossec``: ::
 -----------------------------------
 
 Debian and Ubuntu:
-::
+
+.. code-block:: console
 
     # apt-get remove ossec-hids-agent --purge
 
 CentOS and Red Hat:
-::
+
+.. code-block:: console
 
     # yum remove ossec-hids-agent
 
 Remove directory:
 
-::
+.. code-block:: console
 
     # rm -rf /var/ossec
 
@@ -51,11 +59,15 @@ Follow the next guide in order to install Wazuh agent:
 4. Restore configuration
 ------------------------
 
-Stop OSSEC: ::
+Stop OSSEC:
+
+.. code-block:: console
 
     # systemctl stop wazuh-agent
 
-Restore files: ::
+Restore files:
+
+.. code-block:: console
 
     # cp -p /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
     # cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
@@ -79,6 +91,7 @@ Do not forget to restore the IP of the manager:
 
 6. Start Wazuh
 --------------
-::
+
+.. code-block:: console
 
     # /var/ossec/bin/ossec-control start

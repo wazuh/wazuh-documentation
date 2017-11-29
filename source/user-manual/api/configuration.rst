@@ -29,7 +29,9 @@ You can configure certain API settings in the file ``/var/ossec/api/configuratio
     //In case the API run behind a proxy server, turn to "yes" this feature. Values: yes, no.
     config.BehindProxyServer = "no";
 
-Make sure to restart wazuh-api service after editing the config file using the command below appropriate for your system::
+Make sure to restart wazuh-api service after editing the config file using the command below appropriate for your system:
+
+.. code-block:: console
 
     # systemctl restart wazuh-api
     # service wazuh-api restart
@@ -38,12 +40,16 @@ Make sure to restart wazuh-api service after editing the config file using the c
 Basic Authentication
 -------------------------
 
-It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName**::
+It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName**:
+
+.. code-block:: console
 
     # cd /var/ossec/api/configuration/auth
     # node htpasswd -c user myUserName
 
-Do not forget to restart the API to apply the changes::
+Do not forget to restart the API to apply the changes:
+
+.. code-block:: console
 
     # systemctl restart wazuh-api
     # service wazuh-api restart
@@ -51,22 +57,30 @@ Do not forget to restart the API to apply the changes::
 Manually enable https support
 ---------------------------------
 
-Generate key and certificate request (the Openssl package is required): ::
+Generate key and certificate request (the Openssl package is required):
+
+.. code-block:: console
 
  # cd /var/ossec/api/configuration/ssl
  # openssl genrsa -des3 -out server.key 1024
  # openssl req -new -key server.key -out server.csr
 
-By default, the key's password must be entered every time you run the server.  If you don't want to enter the password every time, you can remove it by running these commands: ::
+By default, the key's password must be entered every time you run the server.  If you don't want to enter the password every time, you can remove it by running these commands:
+
+.. code-block:: console
 
  # cp server.key server.key.org
  # openssl rsa -in server.key.org -out server.key
 
-Next generate your self-signed certificate: ::
+Next generate your self-signed certificate:
+
+.. code-block:: console
 
  # openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
-And remove temporary files: ::
+And remove temporary files:
+
+.. code-block:: console
 
  # rm server.csr
  # rm server.key.org

@@ -8,7 +8,9 @@ This `module <https://github.com/wazuh/wazuh-puppet>`_ has been authored by Nico
 Install Wazuh module
 -------------------------------------------------------------------
 
-Download and install the Wazuh module from Puppet Forge: ::
+Download and install the Wazuh module from Puppet Forge:
+
+.. code-block:: console
 
    # puppet module install wazuh-wazuh
    Notice: Preparing to install into /etc/puppet/modules ...

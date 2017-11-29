@@ -11,14 +11,16 @@ CURL
 cURL is a command-line tool for sending http/https requests and commands. It can be used to interact with the API. It is pre-installed on many Linux and Mac systems. Some examples:
 
 **GET**
-::
+
+.. code-block:: console
 
     # curl -u foo:bar -k https://127.0.0.1:55000
 
 ``{"error":"0","data": "Welcome to Wazuh HIDS API"}``
 
 **PUT**
-::
+
+.. code-block:: console
 
     # curl -u foo:bar -k -X PUT https://127.0.0.1:55000/agents/new_agent
 
@@ -27,14 +29,16 @@ cURL is a command-line tool for sending http/https requests and commands. It can
 
 
 **POST**
-::
+
+.. code-block:: console
 
     # curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000//agents"
 
 ``{"error":0,"data":"004"}``
 
 **DELETE**
-::
+
+.. code-block:: console
 
     # curl -u foo:bar -k -X DELETE https://127.0.0.1:55000/rootcheck/001
 
@@ -48,7 +52,8 @@ Python
 It is very easy to interact with the API using Python:
 
 Code:
-::
+
+.. code-block:: console
 
     #!/usr/bin/env python
 

@@ -27,18 +27,18 @@ The above configuration will send alerts to ``192.168.1.240`` and, if the alert 
 
 After the configuration of the ``ossec.conf`` file, the client-syslog must be enabled followed by a restart of Wazuh using the following command:
 
-::
+.. code-block:: console
 
   # /var/ossec/bin/ossec-control enable client-syslog
 
 a. For Systemd:
 
-::
+.. code-block:: console
 
   # systemctl restart wazuh-manager
 
 b. For SysV Init:
 
-::
+.. code-block:: console
 
   # service wazuh-manager restart
