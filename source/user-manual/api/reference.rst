@@ -464,17 +464,22 @@ Returns the list of agent in a group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2,
-	      "items": [
+	      "totalItems": 1,
+	      "data": [
 	         {
-	            "ip": "10.0.0.12",
-	            "id": "002",
-	            "name": "dmz001"
-	         },
-	         {
-	            "ip": "10.0.0.14",
-	            "id": "004",
-	            "name": "dmz002"
+	            "merged_sum": "1a444ca7d27c3ecffaf04b0a04f425c4",
+	            "last_keepalive": "2017-11-29 12:22:35",
+	            "ip": "192.168.56.105",
+	            "version": "Wazuh v3.0.0-rc2",
+	            "config_sum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "manager_host": "node01",
+	            "os": {
+	               "platform": "centos",
+	               "version": "007",
+	               "name": "CentOS Linux"
+	            },
+	            "id": "001",
+	            "name": "centos"
 	         }
 	      ]
 	   }
@@ -1000,24 +1005,22 @@ Returns the information of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      	"status": "Active",
-	      "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-	      "group": "webserver",
-	      "name": "dmz003",
-	      "mergedSum": "3a12edfe0ab71fe883a79cf7a13d4450",
-	      "ip": "10.0.0.29",
-	      "dateAdd": "2017-11-28 15:38:18",
-	      "version": "Wazuh v3.0.0-beta11",
-	      "manager_host": "ubuntu",
-	      "lastKeepAlive": "2017-11-28 15:48:28",
+	      "status": "Active",
+	      "group": "default",
+	      "name": "centos",
+	      "ip": "192.168.56.105",
+	      "dateAdd": "2017-11-29 12:15:11",
+	      "version": "Wazuh v3.0.0-rc2",
+	      "manager_host": "node01",
+	      "lastKeepAlive": "2017-11-29 12:17:35",
 	      "os": {
-	        "major": "7",
-	        "name": "CentOS Linux",
-	        "platform": "centos",
-	        "uname": "Linux centos 3.10.0-514.el7.x86_64 #1 SMP Tue Nov 22 16:42:41 UTC 2016 x86_64",
-	        "version": "7",
-	        "codename": "Core",
-	        "arch": "x86_64"
+	         "major": "7",
+	         "name": "CentOS Linux",
+	         "uname": "Linux manager 3.10.0-514.el7.x86_64 #1 SMP Tue Nov 22 16:42:41 UTC 2016 x86_64",
+	         "platform": "centos",
+	         "version": "7",
+	         "codename": "Core",
+	         "arch": "x86_64"
 	      },
 	      "id": "008"
 	   }
@@ -1480,7 +1483,42 @@ Returns the state of each agent and the manager it's reporting to in the cluster
 **Example Response:**
 ::
 
-	{"error":0,"data":{"None":[{"status":"Never connected","ip":"10.0.0.12","id":"002","name":"dmz001"},{"status":"Never connected","ip":"10.0.0.14","id":"004","name":"dmz002"},{"status":"Never connected","ip":"10.0.0.9","id":"006","name":"NewHost"},{"status":"Never connected","ip":"any","id":"007","name":"myNewAgent"},{"status":"Never connected","ip":"10.0.10.10","id":"123","name":"NewHost_2"}]}}
+	{
+	  "error": 0,
+	  "data": {
+	    "None":
+	      {
+	        "status": "Never connected",
+	        "ip": "10.0.0.12",
+	        "id": "002",
+	        "name": "dmz001"
+	      },
+	      {
+	        "status": "Never connected",
+	        "ip": "10.0.0.14",
+	        "id": "004",
+	        "name": "dmz002"
+	      },
+	      {
+	        "status": "Never connected",
+	        "ip": "10.0.0.9",
+	        "id": "006",
+	        "name": "NewHost"
+	      },
+	      {
+	        "status": "Never connected",
+	        "ip": "any",
+	        "id": "007",
+	        "name": "myNewAgent"
+	      },
+	      {
+	        "status": "Never connected",
+	        "ip": "10.0.10.10",
+	        "id": "123",
+	        "name": "NewHost_2"
+	      }
+	  }
+	}
 
 Get info about files in cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1495,12 +1533,60 @@ Returns the state of each file in the cluster
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/files"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/files?pretty"
 
 **Example Response:**
 ::
 
-	{"error":1000,"message":"Wazuh-Python Internal Error: [Errno 2] No such file or directory"}
+	{
+		"error": 0,
+		"data": {
+		  "192.168.56.104": {
+			 "synchronized": [
+				"/etc/shared/default/cis_sles11_linux_rcl.txt",
+				"/etc/client.keys",
+				"/etc/shared/default/rootkit_files.txt",
+				"/etc/shared/default/win_malware_rcl.txt",
+				"/etc/shared/default/cis_rhel7_linux_rcl.txt",
+				"/etc/shared/default/agent.conf",
+				"/etc/shared/default/system_audit_ssh.txt",
+				"/etc/shared/default/cis_rhel5_linux_rcl.txt",
+				"/etc/shared/default/cis_rhel_linux_rcl.txt",
+				"/etc/shared/default/rootkit_trojans.txt",
+				"/etc/shared/ar.conf",
+				"/etc/shared/default/merged.mg",
+				"/etc/shared/default/cis_debian_linux_rcl.txt",
+				"/etc/shared/default/system_audit_rcl.txt",
+				"/etc/shared/default/win_applications_rcl.txt",
+				"/etc/shared/default/cis_sles12_linux_rcl.txt",
+				"/etc/shared/default/cis_rhel6_linux_rcl.txt",
+				"/etc/shared/default/win_audit_rcl.txt"
+			 ]
+		  },
+		  "192.168.56.103": {
+			 "synchronized": [
+				"/etc/shared/default/cis_sles11_linux_rcl.txt",
+				"/etc/client.keys",
+				"/etc/shared/default/rootkit_files.txt",
+				"/etc/shared/default/win_malware_rcl.txt",
+				"/etc/shared/default/cis_rhel7_linux_rcl.txt",
+				"/etc/shared/default/agent.conf",
+				"/etc/shared/default/system_audit_ssh.txt",
+				"/etc/shared/default/cis_rhel5_linux_rcl.txt",
+				"/etc/shared/default/cis_rhel_linux_rcl.txt",
+				"/etc/shared/default/rootkit_trojans.txt",
+				"/etc/shared/ar.conf",
+				"/etc/shared/default/merged.mg",
+				"/etc/shared/default/cis_debian_linux_rcl.txt",
+				"/etc/shared/default/system_audit_rcl.txt",
+				"/etc/shared/default/win_applications_rcl.txt",
+				"/etc/shared/default/cis_sles12_linux_rcl.txt",
+				"/etc/shared/default/cis_rhel6_linux_rcl.txt",
+				"/etc/shared/default/win_audit_rcl.txt"
+			 ]
+		  }
+		}
+	}
 
 Get node info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
