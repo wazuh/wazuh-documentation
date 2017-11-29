@@ -159,10 +159,13 @@ Now the Wazuh manager needs to be configured to be able to collect the log messa
 
   <ossec_config>
       <localfile>
-        <log_format>syslog</log_format>
+        <log_format>json</log_format>
         <location>/path-with-write-permission/amazon.log</location>
+        <label key="aws.integration">cloudtrail</label>
       </localfile>
   </ossec_config>
+
+Since Wazuh 3.0.0 we can specify JSON log format for reading the JSON log files directly, and take advantage of this feature for adding labels like is shown in the above example.
 
 .. note:: The file ``/path-with-write-permission/amazon.log`` must be the same one you setup in the above step: `Run the python script to download the JSON data`_.
 
