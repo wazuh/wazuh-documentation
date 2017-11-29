@@ -23,6 +23,7 @@ Options
 - `port`_
 - `bind_addr`_
 - `nodes`_
+- `hidden`_
 
 name
 ^^^^
@@ -121,6 +122,17 @@ List to specify all the nodes that make up the cluster, using the ``<node>`` tag
 | **Allowed values** | Any valid IP address of a cluster node. |
 +--------------------+-----------------------------------------+
 
+hidden
+^^^^^^^
+
+If it is set to yes, information about the cluster that generated the event will be added to the alert.
+
++--------------------+-----------------------------------------+
+| **Default value**  | no                                      |
++--------------------+-----------------------------------------+
+| **Allowed values** | yes/no                                  |
++--------------------+-----------------------------------------+
+
 Example of configuration
 ------------------------
 
@@ -139,4 +151,5 @@ Example of configuration
         <node>172.17.0.3</node>
         <node>172.17.0.4</node>
       </nodes>
+      <hidden>no</hidden>
     </cluster>
