@@ -16,19 +16,19 @@ cluster_control options
 +-------------------------------------------+------------------------------------------------------------+
 | ``-p, --push``                            | Send all not synchronized files.                           |
 +-------------------------------------------+------------------------------------------------------------+
-| ``--force``                               | Send all files. It can be combined with ``-m``.            |
+| ``-f, --force``                           | Send all files. It can be combined with ``-m``.            |
 +-------------------------------------------+------------------------------------------------------------+
-| ``-f, --files [FILE [FILE ...]]``         | List the status of specified files.                        |
+| ``-l, --files [FILE [FILE ...]]``         | List the status of specified files.                        |
 +-------------------------------------------+------------------------------------------------------------+
 | ``-m, --manager [MANAGER [MANAGER ...]]`` | List the status of the synchronized files in that manager. |
 +-------------------------------------------+------------------------------------------------------------+
 | ``-a, --agents [AGENT [AGENT ...]]``      | List configuration files in group.                         |
 +-------------------------------------------+------------------------------------------------------------+
-| ``-l, --list [NODE [NODE ...]]``          | List the status of nodes of the cluster.                   |
+| ``-n, --nodes [NODE [NODE ...]]``         | List the status of nodes of the cluster.                   |
 +-------------------------------------------+------------------------------------------------------------+
 
 .. note::
-    The ``--manager`` parameter must be be used with the ``--file`` parameter for retrieving the synchronized files in a specific manager or with the ``--force`` parameter to force synchronization in a specific manager. Multiple managers can be specified.
+    The ``--manager`` parameter must be be used with the ``--files`` parameter for retrieving the synchronized files in a specific manager or with the ``--force`` parameter to force synchronization in a specific manager. Multiple managers can be specified.
 
 Examples of use
 ---------------
@@ -113,7 +113,7 @@ In this table we can see in real-time to which manager is reporting each connect
 
 .. code-block:: console
 
-    $ /var/ossec/bin/cluster_control -f -m 192.168.56.103
+    $ /var/ossec/bin/cluster_control -l -m 192.168.56.103
     --------------------------------------------------------------------------
     Manager         Filename                                      Status
     --------------------------------------------------------------------------
@@ -143,7 +143,7 @@ In this table we can see in real-time to which manager is reporting each connect
 
 .. code-block:: console
 
-    $ /var/ossec/bin/cluster_control -f /etc/client.keys -m 192.168.56.103, 192.168.56.104
+    $ /var/ossec/bin/cluster_control -l /etc/client.keys -m 192.168.56.103, 192.168.56.104
     ----------------------------------------------
     Manager         Filename          Status
     ----------------------------------------------
@@ -156,7 +156,7 @@ In this table we can see in real-time to which manager is reporting each connect
 
 .. code-block:: console
 
-    $ /var/ossec/bin/cluster_control -l
+    $ /var/ossec/bin/cluster_control -n
     -------------------------------------------
     Node         Status          Address
     -------------------------------------------
