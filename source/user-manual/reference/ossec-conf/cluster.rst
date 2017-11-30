@@ -10,7 +10,7 @@ cluster
 		<cluster>
 		</cluster>
 
-This section allows to configure the Wazuh cluster for synchronize managers.
+This section allows to configure the Wazuh cluster for manager synchronization.
 
 Options
 -------
@@ -125,7 +125,7 @@ List to specify all the nodes that make up the cluster, using the ``<node>`` tag
 hidden
 ^^^^^^^
 
-If it is set to yes, information about the cluster that generated the event will be added to the alert.
+If it is set to ``yes``, information about the cluster that generated the event won't be included in the alert.
 
 +--------------------+-----------------------------------------+
 | **Default value**  | no                                      |
