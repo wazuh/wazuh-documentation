@@ -175,7 +175,7 @@ Start puppetdb service:
 
 Once these steps are completed, restart your Puppet Server and run ``puppet agent --test``:
 
-.. code-block:: consoles
+.. code-block:: console
 
    # puppet agent --test
 
