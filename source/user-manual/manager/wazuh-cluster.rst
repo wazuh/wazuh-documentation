@@ -131,6 +131,8 @@ In order to deploy a Wazuh cluster, follow these steps:
           <node>192.168.0.4</node>
           <node>192.168.0.5</node>
         </nodes>
+        <hidden>no</hidden>
+        <disabled>yes</disabled>
       </cluster>
 
 3. Agents should be configured for connecting to all the managers of the cluster.
@@ -160,11 +162,10 @@ In order to deploy a Wazuh cluster, follow these steps:
       </client>
 
 
-4. Enable and start the Wazuh cluster daemon in all managers for starting the synchronization.
+4. To enable the Wazuh cluster, set the field ``<disabled>`` to ``no`` in the ``<cluster>`` section of the ossec.conf file and restart:
 
     .. code-block:: console
 
-        # /var/ossec/bin/ossec-control enable cluster
-        # /var/ossec/bin/wazuh-clusterd
+        # /var/ossec/bin/ossec-control restart
 
 5. Since this moment, the cluster should be synchronized and the shared files should be the same in all the managers.
