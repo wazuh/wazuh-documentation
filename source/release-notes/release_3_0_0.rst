@@ -5,12 +5,14 @@
 
 This section shows the most relevant new features of Wazuh v3.0.0. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/3.0/CHANGELOG.md>`_ file.
 
+For deploying your Wazuh environment see the :doc:`Installation guide <../installation-guide/index>`.
+
 **New features:**
 
 - `Grouping agents`_
 - `Remote agent upgrades`_
 - `Wazuh cluster for managers`_
-- `Improved JSON integration`_
+- `Automatic decoding for JSON events`_
 - `VirusTotal integration`_
 - `MSI Windows installer for agents`_
 - `More relevant features`_
@@ -52,14 +54,14 @@ Thanks to this, agents can now report to multiple managers(cluster nodes), allow
 
 If you want read more about this functionality see its dedicated section at :doc:`Wazuh cluster <../user-manual/manager/wazuh-cluster>`.
 
-Improved JSON integration
--------------------------
+Automatic decoding for JSON events
+----------------------------------
 
 Wazuh manager now includes a native decoder for JSON format which can read any JSON event and extract its fields dynamically. This way, we are able to use all JSON fields/values for creating rules.
 
 See the complete section of the :doc:`JSON decoder <../user-manual/ruleset/json-decoder>` for knowing how it works.
 
-In combination with the JSON decoder, we included a new a log source type in LogCollector to monitor JSON log files. Custom labels can be included from the endpoint, adding valuable metadata to our monitored JSON logs.
+In combination with the JSON decoder, we included a new a log source type in Logcollector to monitor JSON log files. Custom labels can be included from the endpoint, adding valuable metadata to our monitored JSON logs.
 
 Here we can see a simple configuration where adding labels to a monitored JSON log file.
 
