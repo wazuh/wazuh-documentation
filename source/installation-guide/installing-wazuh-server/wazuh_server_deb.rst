@@ -27,7 +27,7 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
 3. Adding the repository:
 
-   .. code-block:: console
+	.. code-block:: console
 
 		# echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
