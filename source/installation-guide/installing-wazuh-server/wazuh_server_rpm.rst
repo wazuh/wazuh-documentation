@@ -33,7 +33,7 @@ For CentOS-5 and RHEL-5:
         # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
         [wazuh_repo]
         gpgcheck=1
-        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH5
         enabled=1
         name=CentOS-$releasever - Wazuh
         baseurl=http://packages.wazuh.com/3.x/yum/5/
