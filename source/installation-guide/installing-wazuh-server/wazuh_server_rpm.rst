@@ -78,13 +78,55 @@ Installing Wazuh API
 
 	 # yum install nodejs
 
-2. Install the Wazuh API. It will update NodeJS if it is required:
+2. Python >= 2.7 is required in order to run the Wazuh API. It is installed by default or included in the official repositories in most Linux distributions.
+
+   It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
+
+   .. code-block:: javascript
+
+    config.python = [
+        // Default installation
+        {
+            bin: "python",
+            lib: ""
+        },
+        // Package 'python27' for CentOS 6
+        {
+            bin: "/opt/rh/python27/root/usr/bin/python",
+            lib: "/opt/rh/python27/root/usr/lib64"
+        }
+    ];
+
+  CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel maintaining older version:
+
+  a) For CentOS 6:
+
+  .. code-block:: console
+
+    # yum install -y centos-release-scl
+    # yum install -y python27
+
+  b) For RHEL 6:
+
+  .. code-block:: console
+
+    # yum install python27
+
+    # You may need to first enable a repository in order to get python27, with a command like this:
+    #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
+    #   yum-config-manager --enable rhel-server-rhscl-6-rpms
+
+.. note::
+
+  Follow this step if your python version is lower than 2.7. You can check this running ``python --version``.
+
+3. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: console
 
 	 # yum install wazuh-api
 
-3. Once the process is completed, you can check the service status with:
+4. Once the process is completed, you can check the service status with:
 
   a) For Systemd:
 
@@ -98,43 +140,7 @@ Installing Wazuh API
 
 	 # service wazuh-api status
 
-4. Python >= 2.7 is required in order to run the Wazuh API. It is installed by default or included in the official repositories in most Linux distributions.
 
-   It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
-
-   .. code-block:: javascript
-
-  	config.python = [
-  	    // Default installation
-  	    {
-  	        bin: "python",
-  	        lib: ""
-  	    },
-  	    // Package 'python27' for CentOS 6
-  	    {
-  	        bin: "/opt/rh/python27/root/usr/bin/python",
-  	        lib: "/opt/rh/python27/root/usr/lib64"
-  	    }
-  	];
-
-  CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel maintaining older version:
-
-  a) For CentOS 6:
-
-  .. code-block:: console
-
-  	# yum install -y centos-release-scl
-  	# yum install -y python27
-
-  b) For RHEL 6:
-
-  .. code-block:: console
-
-  	# yum install python27
-
-  	# You may need to first enable a repository in order to get python27, with a command like this:
-  	#   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
-  	#   yum-config-manager --enable rhel-server-rhscl-6-rpms
 
 .. _wazuh_server_rpm_filebeat:
 
