@@ -168,7 +168,7 @@ Example of configuration
       <disabled>no</disabled>
       <command>host-deny</command>
       <location>defined-agent</location>
-      <agent-id>032</agent-id>
+      <agent_id>032</agent_id>
       <level>10</level>
       <rules_group>sshd,|pci_dss_11.4,</rules_group>
       <timeout>1</timeout>
