@@ -95,8 +95,6 @@ This filters alerts by rules. For the VirusTotal integration, only rules from `s
 | **Allowed values** | Any rule group is allowed. Multiple groups should be separated with a pipe character (“|”). |
 +--------------------+---------------------------------------------------------------------------------------------+
 
-.. note::
-	Observe that all groups should be finished by comma.
 
 event_location
 ^^^^^^^^^^^^^^^
@@ -122,12 +120,12 @@ Example of configuration
       <name>slack</name>
       <hook_url>https://hooks.slack.com/services/T000/B000/XXXXX</hook_url>
       <level>10</level>
-      <group>multiple_drops,|authentication_failures,</group>
+      <group>multiple_drops|authentication_failures</group>
     </integration>
 
     <!-- Integration with VirusTotal -->
     <integration>
       <name>virustotal</name>
       <api_key>VirusTotal_API_Key</api_key>
-      <group>syscheck,</group>
+      <group>syscheck</group>
     </integration>
