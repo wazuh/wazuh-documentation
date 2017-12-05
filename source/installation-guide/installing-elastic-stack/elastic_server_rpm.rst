@@ -92,7 +92,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -111,19 +111,23 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
 2. Download the Wazuh config for Logstash:
 
-  .. code-block:: console
+  a) Local configuration:
 
-    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh.conf
+    .. code-block:: console
 
-3. **Follow this step only if you are using a single-host architecture**:
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh-local.conf
 
-    a) Edit ``/etc/logstash/conf.d/01-wazuh.conf``, commenting out the entire input section titled "Remote Wazuh Manager - Filebeat input" and uncommenting the entire input section titled "Local Wazuh Manager - JSON file input". This will set up Logstash to read the Wazuh ``alerts.json`` file directly from the local filesystem rather than expecting Filebeat on a separate server to forward the information in that file to Logstash.
-
-    b) Because the Logstash user needs to read alerts.json file, please add it to OSSEC group by running:
+    Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
 
     .. code-block:: console
 
       # usermod -a -G ossec logstash
+
+  b) Remote configuration:
+
+    .. code-block:: console
+
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh-remote.conf
 
 .. note::
 
@@ -133,7 +137,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 	2) Update the service with the new parameters run the command /usr/share/logstash/bin/system-install
 	3) Start Logstash again.
 
-4. Enable and start the Logstash service:
+3. Enable and start the Logstash service:
 
   a) For Systemd:
 
