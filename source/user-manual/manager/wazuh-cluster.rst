@@ -85,6 +85,9 @@ file is stored in that database. Each row of the database has the structure ``<n
 Use case: Deploying a Wazuh cluster
 -----------------------------------
 
+.. note::
+  To run the wazuh-clusterd binary, **Python 2.7** is required. If your OS has a lower python version, please check section `Run the cluster in CentOS 6`_
+
 In order to deploy a Wazuh cluster, follow these steps:
 
 1. Install dependencies
@@ -169,3 +172,62 @@ In order to deploy a Wazuh cluster, follow these steps:
         # /var/ossec/bin/ossec-control restart
 
 5. Since this moment, the cluster should be synchronized and the shared files should be the same in all the managers.
+
+Run the cluster in CentOS 6
+---------------------------
+Python 2.6 is the default python version in CentOS6. Since Python 2.7 is required to run the cluster, follow these steps:
+
+1. Install Python 2.7:
+  
+  .. code-block:: console
+
+    # yum install -y centos-release-scl
+    # yum install -y python27
+
+2. Enable python2.7 in bash:
+
+  .. code-block:: console
+
+    # scl enable python27 bash
+
+3. The default version of ``sqlite3`` library is not compatible but a compiled version of ``sqlite3`` can be found at ``/var/ossec/framework/lib``. To load this version follow these steps:
+  
+  1. Install ``chrpath``:
+
+    .. code-block:: console
+
+      # yum install -y chrpath
+
+  2. Use ``chrpath`` to remove the reference path to the system's sqlite3 library:
+
+    .. code-block:: console
+
+      # chrpath --delete /opt/rh/python27/root/usr/lib64/python2.7/lib-dynload/_sqlite3.so
+
+  3. Add the compiled version of sqlite3 to the ``LD_LIBRARY_PATH`` variable:
+
+    .. code-block:: console
+
+      # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/ossec/framework/lib
+
+4. Install dependencies:
+
+  .. code-block:: console
+
+    # /opt/rh/python27/root/usr/bin/pip2.7 install cryptography
+
+5. Use ``python2.7`` to start the cluster:
+
+  .. code-block:: console
+
+    # python2.7 /var/ossec/bin/wazuh-clusterd
+
+6. Finally, if the cluster is correctly configured, check it's running:
+
+  .. code-block:: console
+
+    # ps -aux | grep cluster
+    ossec     6533  0.0  1.4 135424 15128 ?        S    07:19   0:00 python2.7 /var/ossec/bin/wazuh-clusterd
+    root      6536  0.0  0.4 158608  4584 ?        Ssl  07:19   0:00 /var/ossec/bin/wazuh-clusterd-internal -tmaster
+    ossec     6539  0.0  1.5 136464 15932 ?        S    07:19   0:00 python2.7 /var/ossec/bin/wazuh-clusterd
+    root      6556  0.0  0.2   8032  2092 ?        S+   07:21   0:00 grep cluster
