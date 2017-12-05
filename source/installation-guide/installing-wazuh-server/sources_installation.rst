@@ -18,23 +18,11 @@ Installing Wazuh manager
 
       # yum install make gcc git
 
-    If you want to use Auth, also install:
-
-    .. code-block:: console
-
-      # yum install openssl-devel
-
   b) For Debian-based distributions:
 
     .. code-block:: console
 
       # apt-get install gcc make git libc6-dev curl
-
-    If you want to use Auth, also install:
-
-    .. code-block:: console
-
-      # apt-get install libssl-dev
 
 2. Download and extract the latest version:
 
