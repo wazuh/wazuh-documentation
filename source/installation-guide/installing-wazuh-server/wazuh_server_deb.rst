@@ -3,14 +3,14 @@
 Install Wazuh server with DEB packages
 ======================================
 
-For Debian/Ubuntu platforms, installing Wazuh server components is just install relevant packages by previously adding the appropriate repositories.
+For Debian/Ubuntu platforms, installing Wazuh server components entails installing the relevant packages after adding the appropriate repositories.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
 Adding Wazuh Repositories
 -------------------------
 
-The first thing you need is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
+The first step is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
 
 1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be installed into your system. If they are not, install them:
 
@@ -43,7 +43,7 @@ These are the supported codename values:
 
 		$ apt-get update
 
-Installing Wazuh Manager
+Installing the Wazuh Manager
 ------------------------
 
 On your terminal, install the Wazuh manager:
@@ -66,10 +66,10 @@ Once the process is completed, you can check the service status with:
 
 		$ service wazuh-manager status
 
-Installing Wazuh API
+Installing the Wazuh API
 --------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend you add the official NodeJS repository like this:
+1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
 	.. code-block:: bash
 
@@ -132,7 +132,7 @@ Filebeat is the tool on the Wazuh server that will securely forward the alerts a
 
 The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
-1. Install the GPG keys from Elastic, and the Elastic repository:
+1. Install the GPG keys from Elastic and then the Elastic repository:
 
 	.. code-block:: bash
 
