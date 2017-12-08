@@ -3,7 +3,7 @@
 Install Wazuh server with RPM packages
 ======================================
 
-For CentOS/RHEL/Fedora platforms, installing Wazuh server components is just install relevant packages by previously adding the appropriate repositories.
+For CentOS/RHEL/Fedora platforms, installing Wazuh server components just entails installing the relevant packages after adding the appropriate repositories.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
@@ -71,10 +71,10 @@ To set up the repository, run the command that corresponds to your specific RPM-
     	EOF
 
 
-Installing Wazuh manager
+Installing the Wazuh Manager
 ------------------------
 
-The next will install Wazuh manager on your system:
+The next step is to install the Wazuh Manager on your system:
 
   .. code-block:: bash
 
@@ -94,10 +94,10 @@ Once the process is completed, you can check the service status with:
 
       $ service wazuh-manager status
 
-Installing Wazuh API
+Installing the Wazuh API
 --------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend you add the official NodeJS repository like this:
+1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
   .. code-block:: bash
 
@@ -148,7 +148,7 @@ Installing Wazuh API
   	    }
   	];
 
-  CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel maintaining older version:
+  CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel, thus maintaining the older version:
 
   a) For CentOS 6:
 
@@ -179,7 +179,7 @@ Filebeat is the tool on the Wazuh server that will securely forward the alerts a
 
 The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
 
-1. Install the GPG keys from Elastic, and the Elastic repository:
+1. Install the GPG keys from Elastic and then the Elastic repository:
 
   .. code-block:: bash
 
