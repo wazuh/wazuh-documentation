@@ -101,7 +101,7 @@ Installing Wazuh API
         }
     ];
 
-  CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel maintaining older version:
+  CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel maintaining the older version(s):
 
   a) For CentOS 6:
 
@@ -125,7 +125,7 @@ Installing Wazuh API
 Installing Filebeat
 -------------------
 
-While Filebeat can be installed from source (`see this doc <https://github.com/elastic/beats/blob/master/CONTRIBUTING.md>`_), the process is more complex than you may like, and it is beyond the scope of Wazuh documentation. We recommend installing Filebeat via repository package, otherwise, you can install it from a binary tarball, that's should work for any Linux distro.  See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
+While Filebeat can be installed from source (`see this doc <https://github.com/elastic/beats/blob/master/CONTRIBUTING.md>`_), the process is more complex than you may like, and it is beyond the scope of Wazuh documentation. We recommend installing Filebeat via repository package, otherwise, you can install it from a binary tarball, that should work for any Linux distro.  See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
 
 .. warning::
     In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
