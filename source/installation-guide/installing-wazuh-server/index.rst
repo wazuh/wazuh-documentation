@@ -3,7 +3,7 @@
 Installing Wazuh server
 =======================
 
-The Wazuh server can be installed on any Unix-like operating system, most commonly on Linux. It is more convenient install it via packages if one is available for your distribution.  However, build and install it from sources is also pretty simple.
+The Wazuh server can be installed on any Unix-like operating system, most commonly on Linux. It is more convenient to install it via packages if one is available for your distribution.  However, building and installing from sources is also pretty simple.
 
 There are two components that you usually have to install on a Wazuh server: the manager and the API. In addition, for distributed architectures (where the Wazuh server sends data to a remote Elastic Stack cluster) you will need to install Filebeat.
 
