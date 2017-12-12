@@ -49,7 +49,7 @@ Wazuh cluster for managers
 
 Wazuh cluster provides the capability to scale horizontally, adding as much nodes as needed to increase events per second ingestion ratio.
 
-Cluster arquitecture is master/client based, synchronizing internal configuration files (agent keys, groups configuration, agents configuration and agent statuses) between all clients nodes.
+Cluster architecture is master/client based, synchronizing internal configuration files (agent keys, groups configuration, agents configuration and agent statuses) between all clients nodes.
 Thanks to this, agents can now report to multiple managers(cluster nodes), allowing Wazuh ecosystem to work in high availability and support fail over prevention.
 
 If you want read more about this functionality see its dedicated section at :doc:`Wazuh cluster <../user-manual/manager/wazuh-cluster>`.
@@ -112,7 +112,7 @@ VirusTotal Integration
 An integration with the VirusTotal platform is included in version 3.0.
 It allows the Manager to send collected files hashes (via Syscheck) to VirusTotal API, reporting back the scan results and generating an alert based on the positives found.
 
-Adding VirusTotal as a thread intellience source to the already FIM capabilities suppose a great improvement in malware detection.
+Adding VirusTotal as a thread intelligence source to the already FIM capabilities suppose a great improvement in malware detection.
 
 An example of alert with a positive result is shown below.
 
@@ -143,22 +143,10 @@ The complete documentation about this integration is located at :doc:`VirusTotal
 MSI Windows installer for agents
 --------------------------------
 
-A new digitaly signed MSI Windows installer has been developed in order to improve the installation process for Windows agents.
+A new digitally signed MSI Windows installer has been developed in order to improve the installation process for Windows agents.
 Among its many advantages, the new installer can be launched in unattended mode via command line, simplifying the agent installation, configuration, registration and connection to one single step.
 
 The procedure for using the MSI installer can be found at the following section: :doc:`Install Wazuh agent on Windows <../../installation-guide/installing-wazuh-agent/wazuh_agent_windows>`
-
-
-More relevant features
-----------------------
-
-Additional features have been added to Wazuh 3.0.0 in order to improve its performance. Most relevant of them are the following:
-
-- Possibility of choose the Cipher suite in Authd settings.
-- When a new shared configuration is added from the manager to an agent, this agent will be restarted automatically.
-- New state 'pending' is shown for agents which are waiting for a manager response.
-- Possibility of configure several manager for each agent, specifying its own protocol and port for each one of them.
-- New function to rotate and compress internal logs by size.
 
 
 Wazuh API
@@ -183,3 +171,15 @@ Updated external libraries
 --------------------------
 
 External libraries used by Wazuh have been updated to improve their integration with our components.
+
+
+More relevant features
+----------------------
+
+Additional features have been added to Wazuh 3.0.0 in order to improve its performance. Most relevant of them are the following:
+
+- Possibility of choose the Cipher suite in Authd settings.
+- When a new shared configuration is added from the manager to an agent, this agent will be restarted automatically.
+- New state 'pending' is shown for agents which are waiting for a manager response.
+- Possibility of configure several manager for each agent, specifying its own protocol and port for each one of them.
+- New function to rotate and compress internal logs by size.
