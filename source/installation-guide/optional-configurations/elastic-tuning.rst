@@ -162,7 +162,7 @@ In case you want to change these settings you need to edit the Elasticsearch tem
 
 1. Download the Wazuh Elasticsearch template::
 
-    $ curl https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/elasticsearch/wazuh-elastic5-template.json -o w-elastic-template.json
+    $ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
 
 2. Edit the template in order to set 1 shard a 0 replicas::
 
@@ -183,8 +183,25 @@ In case you want to change these settings you need to edit the Elasticsearch tem
 
 3. Load the template::
 
-    $ curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @w-elastic-template.json
+	$ curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @w-elastic-template.json
 
+	{ "acknowledged" : true }
+
+4. *Optional*. Check that your configuration was updated successfully::
+
+    $ curl "http://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings"
+
+    {
+        "wazuh" : {
+            "settings" : {
+                "index" : {
+                    "number_of_shards" : "1",
+                    "number_of_replicas" : "0",
+                    "refresh_interval" : "5s"
+                }
+            }
+        }
+    }
 
 Changing number of replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -193,13 +210,21 @@ The number of replicas can be changed dynamically using the Elasticsearch API.
 
 In a cluster with 1 node, the number of replicas should be 0::
 
-    $ curl -XPUT 'localhost:9200/wazuh-*/_settings?pretty' -H 'Content-Type: application/json' -d'
-    {
-        "settings": {
-            "number_of_replicas" : 0
-        }
-    }
-    '
+	$ curl -XPUT 'localhost:9200/wazuh-alerts-*/_settings?pretty' -H 'Content-Type: application/json' -d'
+	{
+		"settings": {
+			"number_of_replicas" : 0
+		}
+	}
+	'
+
+	{ "acknowledged" : true }
+
+Note that we are assuming that your target index pattern is **"wazuh-alerts-*"**, but you may use a different index pattern. You can see a full list of your current indexes with the following command::
+
+	$ curl 'localhost:9200/_cat/indices'
+
+
 
 Reference:
 
