@@ -7,7 +7,7 @@ The following steps show how to upgrade from Wazuh 2.x to Wazuh 3.x (which impli
 
 
 Upgrade Wazuh agent
-------------------------
+-------------------
 
 1. Stop the service:
 
@@ -69,7 +69,7 @@ Upgrade Wazuh agent
 
 
 Upgrade Wazuh manager
-------------------------
+---------------------
 
 1. Stop services:
 
@@ -117,7 +117,7 @@ Upgrade Wazuh manager
       # apt-get update
 
 
-4. Upgrade the manager
+4. Upgrade the manager.
 
   a) Upgrade Wazuh manager on CentOS/RHEL/Fedora:
 
@@ -132,7 +132,7 @@ Upgrade Wazuh manager
       # apt-get install wazuh-manager
 
 
-5. Upgrade the API
+5. Upgrade the API.
 
   a) Upgrade Wazuh API on CentOS/RHEL/Fedora:
 
@@ -147,7 +147,7 @@ Upgrade Wazuh manager
       # apt-get install wazuh-api
 
 
-Upgrade Elastic Stack
+Prepare Elastic Stack 
 ---------------------
 
 1. Stop services:
@@ -202,7 +202,10 @@ Upgrade Elastic Stack
       # apt-get update
 
 
-4. Update Elasticsearch:
+Upgrade Elasticsearch
+---------------------
+
+1. Update Elasticsearch:
 
   a) For CentOS/RHEL/Fedora:
 
@@ -217,7 +220,7 @@ Upgrade Elastic Stack
       # apt-get install elasticsearch
 
 
-5. Start Elasticsearch:
+2. Start Elasticsearch:
 
   .. code-block:: console
 
@@ -226,7 +229,7 @@ Upgrade Elastic Stack
     # systemctl start elasticsearch.service
 
 
-6. Load Wazuh Elasticsearch templates:
+3. Load Wazuh Elasticsearch templates:
 
   .. code-block:: console
 
@@ -237,14 +240,17 @@ Upgrade Elastic Stack
     # curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
 
-7. Insert sample alert in Elasticsearch:
+4. Insert sample alert in Elasticsearch:
 
   .. code-block:: console
 
     # curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
 
-8. Upgrade Logstash:
+Upgrade Logstash
+----------------
+
+1. Upgrade Logstash:
 
   a) For CentOS/RHEL/Fedora:
 
@@ -259,9 +265,9 @@ Upgrade Elastic Stack
       # apt-get install logstash
 
 
-9. Download and set the Wazuh configuration for Logstash:
+2. Download and set the Wazuh configuration for Logstash:
 
-This substitution will overwrite previous logstash configuration. **We recommend to backup the current configuration before applying the new one.**
+	This substitution will overwrite previous logstash configuration. **We recommend to backup the current configuration before applying the new one.**
 
   a) Local configuration:
 
@@ -279,7 +285,7 @@ This substitution will overwrite previous logstash configuration. **We recommend
       # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh-remote.conf
 
 
-10. Start Logstash:
+3. Start Logstash:
 
   .. code-block:: console
 
@@ -288,7 +294,10 @@ This substitution will overwrite previous logstash configuration. **We recommend
     # systemctl start logstash.service
 
 
-11. Upgrade Kibana:
+Upgrade Kibana
+--------------
+
+1. Upgrade Kibana:
 
   a) For CentOS/RHEL/Fedora:
 
@@ -303,24 +312,21 @@ This substitution will overwrite previous logstash configuration. **We recommend
       # apt-get install kibana
 
 
-12. Remove the Wazuh Kibana App plugin from Kibana:
+2. Remove the Wazuh Kibana App plugin from Kibana:
 
     .. code-block:: console
 
       # /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 
-13. Migrate .kibana from 5.x to 6.x:
+3. Migrate .kibana from 5.x to 6.x:
 
-The .kibana index (which holds Kibana configuration) has drastically changed. To migrate it, follow the official documentation:
+	The .kibana index (which holds Kibana configuration) has drastically changed. To migrate it, follow the official documentation:
 
   - Upgrading Elasticsearch: https://www.elastic.co/guide/en/kibana/current/migrating-6.0-index.html
 
-.. warning::
-    This process will delete the old .kibana index and, although the procedure is safe, be warned.
 
-
-14. Upgrade Wazuh Kibana App:
+4. Upgrade Wazuh Kibana App:
 
   .. code-block:: console
 
@@ -328,7 +334,10 @@ The .kibana index (which holds Kibana configuration) has drastically changed. To
     # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
 
-15. Upgrade Filebeat:
+Upgrade Kibana
+--------------
+
+1. Upgrade Filebeat:
 
   a) For CentOS/RHEL/Fedora:
 
@@ -343,7 +352,7 @@ The .kibana index (which holds Kibana configuration) has drastically changed. To
       # apt-get install filebeat
 
 
-.. note:: The step showed describe a simple upgrade process. If you need something more specific, please refer to the official upgrading guides from Elastic
+.. note:: The steps showed above describe a simple upgrade process. If you need something more specific, please refer to the official upgrading guides from Elastic.
 
 
 Official Upgrading guides for Elastic Stack:
