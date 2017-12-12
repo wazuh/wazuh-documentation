@@ -267,13 +267,11 @@ Upgrade Logstash
 
 2. Download and set the Wazuh configuration for Logstash:
 
-	This substitution will overwrite previous logstash configuration. **We recommend to backup the current configuration before applying the new one.**
-
   a) Local configuration:
 
     .. code-block:: console
 
-      # cp /etc/logstash/conf.d/01-wazuh.conf /path/01-wazuh.conf.bak
+      # cp /etc/logstash/conf.d/01-wazuh.conf /etc/logstash/conf.d/01-wazuh.conf.bak
       # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh-local.conf
       # usermod -a -G ossec logstash
 
@@ -281,7 +279,7 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # cp /etc/logstash/conf.d/01-wazuh.conf /path/01-wazuh.conf.bak
+      # cp /etc/logstash/conf.d/01-wazuh.conf /etc/logstash/conf.d/01-wazuh.conf.bak
       # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh-remote.conf
 
 
@@ -323,7 +321,7 @@ Upgrade Kibana
 
 	The .kibana index (which holds Kibana configuration) has drastically changed. To migrate it, follow the official documentation:
 
-  - Upgrading Elasticsearch: https://www.elastic.co/guide/en/kibana/current/migrating-6.0-index.html
+  - Migrating Kibana .index to 6.0: https://www.elastic.co/guide/en/kibana/current/migrating-6.0-index.html
 
 
 4. Upgrade Wazuh Kibana App:
@@ -334,8 +332,8 @@ Upgrade Kibana
     # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
 
-Upgrade Kibana
---------------
+Upgrade Filebeat
+----------------
 
 1. Upgrade Filebeat:
 
@@ -350,9 +348,6 @@ Upgrade Kibana
     .. code-block:: console
 
       # apt-get install filebeat
-
-
-.. note:: The steps showed above describe a simple upgrade process. If you need something more specific, please refer to the official upgrading guides from Elastic.
 
 
 Official Upgrading guides for Elastic Stack:
