@@ -1,10 +1,9 @@
 var versions = [
-    {name: "3.0.0-beta1", url: "/3.0"},
-    {name: "2.1 (preliminary)", url: "/2.1"},
-    {name: "2.0 (current)", url: "/2.0"}
+    {name: "3.x (current)", url: "/3.x"},
+    {name: "2.1", url: "/2.1"},
 ];
 
-var current_version = "2.0";
+var current_version = "3.x";
 
 $( document ).ready(function() {
     addVersions();
