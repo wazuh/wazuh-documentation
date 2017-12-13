@@ -22,7 +22,7 @@ To set up the repository, run this command:
          gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
          enabled=1
          name=CentOS-$releasever - Wazuh
-         baseurl=http://packages.wazuh.com/3.x/yum/
+         baseurl=https://packages.wazuh.com/3.x/yum/
          protect=1
          EOF
 
@@ -36,7 +36,7 @@ For CentOS-5 and RHEL-5:
         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
         enabled=1
         name=CentOS-$releasever - Wazuh
-        baseurl=http://packages.wazuh.com/3.x/yum/5/
+        baseurl=https://packages.wazuh.com/3.x/yum/5/
         protect=1
         EOF
 
