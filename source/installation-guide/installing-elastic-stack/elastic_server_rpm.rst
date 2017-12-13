@@ -212,7 +212,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 5. Disable the Elasticsearch repository:
   
-  a) We recommend to disable the Elasticsearch repository in order to prevent an upgrade of the ELK to 6.1.0  due to breaking changes with our App, so you should do it as follow:
+  a) We recommend to disable the Elasticsearch repository in order to prevent an upgrade of the Elastic Stack to 6.1.0  due to breaking changes with our App, so you should do it as follow:
 
   .. code-block:: console
 
