@@ -26,8 +26,8 @@ Upgrade Wazuh agent
         gpgcheck=1
         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
         enabled=1
-        name=CentOS-$releasever - Wazuh
-        baseurl=http://packages.wazuh.com/3.x/yum/
+        name=Wazuh repository
+        baseurl=https://packages.wazuh.com/3.x/yum/
         protect=1
         EOF
 
@@ -90,8 +90,8 @@ Upgrade Wazuh manager
         gpgcheck=1
         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
         enabled=1
-        name=CentOS-$releasever - Wazuh
-        baseurl=http://packages.wazuh.com/3.x/yum/
+        name=Wazuh repository
+        baseurl=https://packages.wazuh.com/3.x/yum/
         protect=1
         EOF
 
