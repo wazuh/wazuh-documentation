@@ -22,14 +22,14 @@ Upgrade Wazuh agent
     .. code-block:: console
 
       # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-        [wazuh_repo]
-        gpgcheck=1
-        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-        enabled=1
-        name=Wazuh repository
-        baseurl=https://packages.wazuh.com/3.x/yum/
-        protect=1
-        EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+      enabled=1
+      name=Wazuh repository
+      baseurl=https://packages.wazuh.com/3.x/yum/
+      protect=1
+      EOF
 
   b) For Debian/Ubuntu:
 
@@ -86,14 +86,14 @@ Upgrade Wazuh manager
     .. code-block:: console
 
       # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-        [wazuh_repo]
-        gpgcheck=1
-        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-        enabled=1
-        name=Wazuh repository
-        baseurl=https://packages.wazuh.com/3.x/yum/
-        protect=1
-        EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+      enabled=1
+      name=Wazuh repository
+      baseurl=https://packages.wazuh.com/3.x/yum/
+      protect=1
+      EOF
 
   b) For Debian/Ubuntu:
 
@@ -169,15 +169,15 @@ Prepare Elastic Stack
       # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
       # cat > /etc/yum.repos.d/elastic.repo << EOF
-        [elasticsearch-6.x]
-        name=Elasticsearch repository for 6.x packages
-        baseurl=https://artifacts.elastic.co/packages/6.x/yum
-        gpgcheck=1
-        gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-        enabled=1
-        autorefresh=1
-        type=rpm-md
-        EOF
+      [elasticsearch-6.x]
+      name=Elasticsearch repository for 6.x packages
+      baseurl=https://artifacts.elastic.co/packages/6.x/yum
+      gpgcheck=1
+      gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+      enabled=1
+      autorefresh=1
+      type=rpm-md
+      EOF
 
   b) For Debian/Ubuntu:
 
