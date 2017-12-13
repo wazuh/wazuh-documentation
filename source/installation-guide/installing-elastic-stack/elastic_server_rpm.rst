@@ -110,8 +110,8 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
     # yum install logstash
 
 2. Download the Wazuh config for Logstash:
-
-  a) Local configuration:
+  
+  - **Local** configuration (only in a **single-host** architecture):
 
     .. code-block:: console
 
@@ -123,11 +123,12 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
       # usermod -a -G ossec logstash
 
-  b) Remote configuration:
+  - **Remote** configuration (only in a **distributed** architecture):
 
     .. code-block:: console
 
       # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh-remote.conf
+
 
 .. note::
 
