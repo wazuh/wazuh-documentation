@@ -59,7 +59,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-	 # yum install elasticsearch-6.0.1
+	 # yum install elasticsearch
 
 2. Enable and start the Elasticsearch service:
 
@@ -107,7 +107,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: console
 
-    # yum install logstash-6.0.1
+    # yum install logstash
 
 2. Download the Wazuh config for Logstash:
   
@@ -168,7 +168,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-	 # yum install kibana-6.0.1
+	 # yum install kibana
 
 2. Install the Wazuh App plugin for Kibana:
 
