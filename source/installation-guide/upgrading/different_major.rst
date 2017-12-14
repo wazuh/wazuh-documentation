@@ -15,7 +15,7 @@ Upgrade Wazuh agent
 
     # systemctl stop wazuh-agent
 
-2. Add the new repository for Wazuh 3.x. 
+2. Add the new repository for Wazuh 3.x.
 
   a) For CentOS/RHEL/Fedora:
 
@@ -119,17 +119,17 @@ Upgrade Wazuh manager
       # apt-get install wazuh-api
 
 
-Prepare Elastic Stack 
+Prepare Elastic Stack
 ---------------------
 
 1. Stop services:
 
   .. code-block:: console
 
-    # systemctl stop filebeat 
-    # systemctl stop logstash 
-    # systemctl stop kibana 
-    # systemctl stop elasticsearch 
+    # systemctl stop filebeat
+    # systemctl stop logstash
+    # systemctl stop kibana
+    # systemctl stop elasticsearch
 
 
 2. Add the new repository for Elastic Stack 6.x:
@@ -278,7 +278,7 @@ Upgrade Kibana
 
 3. Migrate .kibana from 5.x to 6.x:
 
-	The .kibana index (which holds Kibana configuration) has drastically changed. To migrate it, follow the official documentation:
+  The .kibana index (which holds Kibana configuration) has drastically changed. To migrate it, follow the official documentation:
 
   - Migrating Kibana .index to 6.0: https://www.elastic.co/guide/en/kibana/current/migrating-6.0-index.html
 
@@ -290,6 +290,14 @@ Upgrade Kibana
     # rm -rf /usr/share/kibana/optimize/bundles
     # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
+
+5. Start Kibana:
+
+  .. code-block:: console
+
+    # systemctl daemon-reload
+    # systemctl enable kibana.service
+    # systemctl start kibana.service
 
 Upgrade Filebeat
 ----------------
@@ -320,7 +328,7 @@ Official Upgrading guides for Elastic Stack:
     - Upgrading Filebeat: https://www.elastic.co/guide/en/beats/libbeat/6.0/upgrading.html
 
 Disable the Elasticsearch repository
--------------------------------
+------------------------------------
 
 We recommend to disable the Elasticsearch repository in order to prevent an upgrade of the Elastic Stack to 6.1.0  due to breaking changes with our App, so you should do it as follow:
 
