@@ -22,14 +22,14 @@ Upgrade Wazuh agent
     .. code-block:: console
 
       # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-        [wazuh_repo]
-        gpgcheck=1
-        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-        enabled=1
-        name=Wazuh repository
-        baseurl=https://packages.wazuh.com/3.x/yum/
-        protect=1
-        EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+      enabled=1
+      name=Wazuh repository
+      baseurl=https://packages.wazuh.com/3.x/yum/
+      protect=1
+      EOF
 
   b) For Debian/Ubuntu:
 
@@ -38,22 +38,7 @@ Upgrade Wazuh agent
       # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 
-3. Update the repositories in your system.
-
-  a) For CentOS/RHEL/Fedora:
-
-    .. code-block:: console
-
-      # yum update
-
-  b) For Debian/Ubuntu:
-
-    .. code-block:: console
-
-      # apt-get update
-
-
-4. Upgrade the agent.
+3. Upgrade the agent.
 
   a) Upgrade Wazuh agent on CentOS/RHEL/Fedora:
 
@@ -65,6 +50,7 @@ Upgrade Wazuh agent
 
     .. code-block:: console
 
+      # apt-get update
       # apt-get install wazuh-agent
 
 
@@ -86,14 +72,14 @@ Upgrade Wazuh manager
     .. code-block:: console
 
       # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-        [wazuh_repo]
-        gpgcheck=1
-        gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-        enabled=1
-        name=Wazuh repository
-        baseurl=https://packages.wazuh.com/3.x/yum/
-        protect=1
-        EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+      enabled=1
+      name=Wazuh repository
+      baseurl=https://packages.wazuh.com/3.x/yum/
+      protect=1
+      EOF
 
   b) For Debian/Ubuntu:
 
@@ -102,22 +88,7 @@ Upgrade Wazuh manager
       # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
 
-3. Update the repositories in your system.
-
-  a) For CentOS/RHEL/Fedora:
-
-    .. code-block:: console
-
-      # yum update
-
-  b) For Debian/Ubuntu:
-
-    .. code-block:: console
-
-      # apt-get update
-
-
-4. Upgrade the manager.
+3. Upgrade the manager.
 
   a) Upgrade Wazuh manager on CentOS/RHEL/Fedora:
 
@@ -129,6 +100,7 @@ Upgrade Wazuh manager
 
     .. code-block:: console
 
+      # apt-get update
       # apt-get install wazuh-manager
 
 
@@ -169,15 +141,15 @@ Prepare Elastic Stack
       # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
       # cat > /etc/yum.repos.d/elastic.repo << EOF
-        [elasticsearch-6.x]
-        name=Elasticsearch repository for 6.x packages
-        baseurl=https://artifacts.elastic.co/packages/6.x/yum
-        gpgcheck=1
-        gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-        enabled=1
-        autorefresh=1
-        type=rpm-md
-        EOF
+      [elasticsearch-6.x]
+      name=Elasticsearch repository for 6.x packages
+      baseurl=https://artifacts.elastic.co/packages/6.x/yum
+      gpgcheck=1
+      gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+      enabled=1
+      autorefresh=1
+      type=rpm-md
+      EOF
 
   b) For Debian/Ubuntu:
 
@@ -186,20 +158,6 @@ Prepare Elastic Stack
       # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
       # echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
 
-
-3. Update the repositories in your system.
-
-  a) For CentOS/RHEL/Fedora:
-
-    .. code-block:: console
-
-      # yum update
-
-  b) For Debian/Ubuntu:
-
-    .. code-block:: console
-
-      # apt-get update
 
 
 Upgrade Elasticsearch
@@ -211,13 +169,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch
+      # yum install elasticsearch-6.0.1
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install elasticsearch
+      # apt-get update
+      # apt-get install elasticsearch=6.0.1
 
 
 2. Start Elasticsearch:
@@ -256,13 +215,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash
+      # yum install logstash-6.0.1
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash
+      # apt-get install logstash=6.0.1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -301,13 +260,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana
+      # yum install kibana-6.0.1
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana
+      # apt-get install kibana=6.0.1
 
 
 2. Remove the Wazuh Kibana App plugin from Kibana:
@@ -341,13 +300,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat
+      # yum install filebeat-6.0.1
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat
+      # apt-get install filebeat=6.0.1
 
 
 Official Upgrading guides for Elastic Stack:
@@ -360,6 +319,22 @@ Official Upgrading guides for Elastic Stack:
 
     - Upgrading Filebeat: https://www.elastic.co/guide/en/beats/libbeat/6.0/upgrading.html
 
+Disable the Elasticsearch repository
+-------------------------------
+
+We recommend to disable the Elasticsearch repository in order to prevent an upgrade of the Elastic Stack to 6.1.0  due to breaking changes with our App, so you should do it as follow:
+
+  a) For CentOS/RHEL/Fedora:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+
+  b) For Debian/Ubuntu:
+
+    .. code-block:: console
+
+      # sed -i -r '/deb https:\/\/artifacts.elastic.co\/packages\/6.x\/apt stable main/ s/^(.*)$/#\1/g' /etc/apt/sources.list.d/elastic-6.x.list
 
 Reindexing your previous alerts
 -------------------------------
