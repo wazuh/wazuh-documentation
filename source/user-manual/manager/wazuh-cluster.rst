@@ -30,6 +30,9 @@ How it works
 
 The Wazuh cluster is managed by a cluster daemon which communicates managers, following a master-client architecture.
 
+.. note::
+  All managers in the cluster should be configured with the same time and date. You can use the `NTP (Network Time Protocol) <https://wiki.debian.org/NTP>`_.
+
 Master
 ^^^^^^^^
 
