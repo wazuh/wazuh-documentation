@@ -141,34 +141,7 @@ In order to deploy a Wazuh cluster, follow these steps:
         <disabled>yes</disabled>
       </cluster>
 
-3. Agents should be configured for connecting to all the managers of the cluster.
-
-  For example, if we have three managers in the cluster with the IP addresses ``192.168.0.3-5`` the configuration in agents should be like this.
-
-  .. code-block:: xml
-
-      <client>
-        ...
-        <server>
-          <address>192.168.0.3</address>
-          <port>1514</port>
-          <protocol>udp</protocol>
-        </server>
-        <server>
-          <address>192.168.0.4</address>
-          <port>1514</port>
-          <protocol>tcp</protocol>
-        </server>
-        <server>
-          <address>192.168.0.5</address>
-          <port>1514</port>
-          <protocol>tcp</protocol>
-        </server>
-        ...
-      </client>
-
-
-4. To enable the Wazuh cluster, set the field ``<disabled>`` to ``no`` in the ``<cluster>`` section of the ossec.conf file and restart:
+3. To enable the Wazuh cluster, set the field ``<disabled>`` to ``no`` in the ``<cluster>`` section of the ossec.conf file and restart:
 
     .. code-block:: console
 
