@@ -19,7 +19,7 @@ The Wazuh cluster provides horizontal scalability to our Wazuh environment, allo
 to process more events than before distributing the load of information between several managers simultaneously.
 
 In addition, a cluster of Wazuh managers is prepared to handle the fall of any manager without affecting its operation, unless it is the master manager.
-Agents that were reporting to this fallen manager will start to report to another manager of the cluster automatically, without the loss of events.
+Agents that were reporting to this fallen manager will start to report to another manager of the cluster automatically, without the loss of events. The cluster provides high availability since the agents will always have a manager to report to but it doesn't provide load balancing. We recommend to configure a load balancer between agents and the cluster nodes. The agents will have configured the IP of the load balancer as manager IP.
 
 Finally, the Wazuh cluster is in continuous development and we hope it to include many new features very soon. For example, we refer to the possibility of
 switching the role of master between all managers to provide high availability.
