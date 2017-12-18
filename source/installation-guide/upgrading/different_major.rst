@@ -163,6 +163,9 @@ Prepare Elastic Stack
 Upgrade Elasticsearch
 ---------------------
 
+.. note::
+  Since you are upgrading to a different major version of Elasticsearch you should backup **/etc/elasticsearch/elasticsearch.yml** and **/etc/elasticsearch/jvm.options** before upgrade Elasticsearch. Check https://www.elastic.co/guide/en/elasticsearch/reference/6.x/index.html for more information.
+
 1. Update Elasticsearch:
 
   a) For CentOS/RHEL/Fedora:
