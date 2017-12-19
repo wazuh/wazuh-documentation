@@ -169,14 +169,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch
+      # yum install elasticsearch-6.1.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch
+      # apt-get install elasticsearch=6.1.0
 
 
 2. Start Elasticsearch:
@@ -215,13 +215,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash
+      # yum install logstash-6.1.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash
+      # apt-get install logstash=6.1.0
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -260,13 +260,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana
+      # yum install kibana-6.1.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana
+      # apt-get install kibana=6.1.0
 
 
 2. Remove the Wazuh Kibana App plugin from Kibana:
@@ -308,13 +308,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat
+      # yum install filebeat-6.1.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat
+      # apt-get install filebeat=6.1.0
 
 
 Official Upgrading guides for Elastic Stack:
@@ -330,7 +330,7 @@ Official Upgrading guides for Elastic Stack:
 Disable the Elasticsearch repository
 ------------------------------------
 
-We recommend to disable the Elasticsearch repository in order to prevent an upgrade of the Elastic Stack to 6.1.0  due to breaking changes with our App, so you should do it as follow:
+We recommend to disable the Elasticsearch repository in order to prevent an upgrade to a newer Elastic Stack version due to possible breaking changes with our App, so you should do it as follow:
 
   a) For CentOS/RHEL/Fedora:
 
