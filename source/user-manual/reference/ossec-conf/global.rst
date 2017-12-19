@@ -330,13 +330,12 @@ Example
 rotate_interval
 ^^^^^^^^^^^^^^^
 
-Is the time lapse between rotations.
+Is the time lapse between rotations. Maximun allowed value is ``min_rotate_interval``. 
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0                                                                                                                                        |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
-|                         | Maximun allowed value is min_rotate_interval.                                                                                            |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example
@@ -348,14 +347,13 @@ Example
 max_output_size
 ^^^^^^^^^^^^^^^
 
-Is the time lapse between rotations.
+Is the time lapse between rotations. Maximun allowed value is 1TiB. 
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0                                                                                                                                        |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number that should contain a suffix character indicating a size unit, such as, B (bytes), K (kibibyte), M (mebibyte),         |
 |                         | G (gibibyte), T (tebibyte).                                                                                                              |
-|                         | Maximun allowed value is 1TiB.                                                                                                           |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example
