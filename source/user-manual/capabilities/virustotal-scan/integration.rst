@@ -45,6 +45,7 @@ For doing this, we have to include in the ``ossec.conf`` file a section like tha
       <name>virustotal</name>
       <api_key>4548f9e04e6e5f83cf00746f9680805ca1cb3cff542da54297fb14fceceb4f04</api_key>   <!-- Replace with your key -->
       <group>syscheck</group>
+      <alert_format>json</alert_format>
     </integration>
 
 - The second step is to enable the integrator daemon and restart Wazuh.

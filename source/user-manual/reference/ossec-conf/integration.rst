@@ -23,6 +23,7 @@ Options
 - `rule_id`_
 - `group`_
 - `event_location`_
+- `alert_format`_
 
 name
 ^^^^^^^^^^^
@@ -108,6 +109,17 @@ This filters alerts by the location of where the event originated. `OS_Regex Syn
 | **Default value**  | n/a                                                       |
 +--------------------+-----------------------------------------------------------+
 | **Allowed values** | Any single agent name, hostname, ip address, or log file. |
++--------------------+-----------------------------------------------------------+
+
+alert_format
+^^^^^^^^^^^^
+
+Write temporal alert file in JSON format. Integrator make use this temporal file to fetch fields values.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | n/a                                                       |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | json                                                      |
 +--------------------+-----------------------------------------------------------+
 
 Example of configuration
