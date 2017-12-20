@@ -68,6 +68,8 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`wodle name="open-scap" <wodle-openscap>`                | manager, agent         |
 +---------------------------------------------------------------+------------------------+
+| :doc:`wodle name="command" <wodle-command>`                   | manager, agent         |
++---------------------------------------------------------------+------------------------+
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag.
 
@@ -99,4 +101,5 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    syscheck
    syslog-output
    wodle-openscap
+   wodle-command
    verifying-configuration
