@@ -330,7 +330,7 @@ Example
 rotate_interval
 ^^^^^^^^^^^^^^^
 
-Is the time lapse between rotations. Maximun allowed value is ``min_rotate_interval``. 
+It is the time lapse between rotations. The highest allowed value is ``min_rotate_interval``. 
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0                                                                                                                                        |
@@ -347,7 +347,7 @@ Example
 max_output_size
 ^^^^^^^^^^^^^^^
 
-Is the time lapse between rotations. Maximun allowed value is 1TiB. 
+Is the time lapse between rotations. Maximum allowed value is 1TiB. 
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0                                                                                                                                        |
