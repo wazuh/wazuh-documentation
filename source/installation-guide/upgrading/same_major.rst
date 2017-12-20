@@ -87,9 +87,19 @@ Upgrade Wazuh Kibana App
 
 4) Upgrade Wazuh Kibana App (this can take a while):
 
-.. code-block:: console
 
-    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+    4.1) In order to install the Wazuh App properly, it’s needed to set an enviroment variable to be injected to the Node.js interpreter. 
+    There is a known fail with the default memory heap limit of Node.js, it's solved incrementing it by 3GB, do it as follow:
+
+    .. code-block:: console
+
+        # export NODE_OPTIONS="--max-old-space-size=3072"
+        
+    4.2) Install Wazuh App:
+
+    .. code-block:: console
+
+        # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
 5) Once the process is completed, you must start Kibana again with:
 

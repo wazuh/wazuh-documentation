@@ -172,9 +172,18 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 2. Install the Wazuh App plugin for Kibana:
 
+  2.1) In order to install the Wazuh App properly, it’s needed to set an enviroment variable to be injected to the Node.js interpreter. 
+  There is a known fail with the default memory heap limit of Node.js, it's solved incrementing it by 3GB, do it as follow:
+
   .. code-block:: console
 
-	 # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+      # export NODE_OPTIONS="--max-old-space-size=3072"
+      
+  2.2) Install Wazuh App:
+
+  .. code-block:: console
+
+      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
   .. warning::
 
