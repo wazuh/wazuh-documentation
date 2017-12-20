@@ -288,8 +288,8 @@ Upgrade Kibana
 
 4. Upgrade Wazuh Kibana App:
 
-  4.1) In order to install the Wazuh App properly, it’s needed to set an enviroment variable to be injected to the Node.js interpreter. 
-  There is a known fail with the default memory heap limit of Node.js, it's solved incrementing it by 3GB, do it as follow:
+  4.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. 
+  Set the limit as follow: 
 
   .. code-block:: console
 
