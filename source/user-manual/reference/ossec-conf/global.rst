@@ -330,10 +330,12 @@ Example
 rotate_interval
 ^^^^^^^^^^^^^^^
 
-It is the time lapse between rotations. The highest allowed value is ``min_rotate_interval``. 
+.. versionadded:: 3.1.0
+
+It is the time lapse between rotations. The highest allowed value is ``min_rotate_interval``.
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 0                                                                                                                                        |
+| **Default value**       | 0 (disabled)                                                                                                                             |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
@@ -347,10 +349,12 @@ Example
 max_output_size
 ^^^^^^^^^^^^^^^
 
-Is the time lapse between rotations. Maximum allowed value is 1TiB. 
+.. versionadded:: 3.1.0
+
+Is the time lapse between rotations. Maximum allowed value is 1TiB.
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 0                                                                                                                                        |
+| **Default value**       | 0 (disabled)                                                                                                                             |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number that should contain a suffix character indicating a size unit, such as, B (bytes), K (kibibyte), M (mebibyte),         |
 |                         | G (gibibyte), T (tebibyte).                                                                                                              |

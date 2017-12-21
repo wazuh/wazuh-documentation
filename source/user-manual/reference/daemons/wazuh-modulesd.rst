@@ -23,6 +23,11 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
   The complete documentation about this wodle can be found at its dedicated section: :doc:`OpenSCAP integration<../../capabilities/policy-monitoring/openscap/index>`.
 
+.. topic:: CIS-CAT wodle
+
+  The CIS-CAT wodle allows you to run CIS policies scans visualizing the assessments results into our Wazuh App. See the dedicated section
+  of the :doc:`CIS-CAT integration<../../capabilities/policy-monitoring/ciscat/ciscat>` for knowing more about this functionality.
+
 wazuh-modulesd options
 ----------------------
 
