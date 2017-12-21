@@ -224,7 +224,7 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # apt-get install logstash=6.1.0
+      # apt-get install logstash=1:6.1.0-1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -288,13 +288,13 @@ Upgrade Kibana
 
 4. Upgrade Wazuh Kibana App:
 
-  4.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. 
-  Set the limit as follow: 
+  4.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
+  Set the limit as follow:
 
   .. code-block:: console
 
       # export NODE_OPTIONS="--max-old-space-size=3072"
-      
+
   4.2) Install Wazuh App:
 
   .. code-block:: console

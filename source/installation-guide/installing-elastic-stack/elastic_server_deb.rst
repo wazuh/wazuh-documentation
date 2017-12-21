@@ -99,7 +99,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: console
 
-    # apt-get install logstash=6.1.0
+    # apt-get install logstash=1:6.1.0-1
 
 2. Download the Wazuh config for Logstash:
 
@@ -156,13 +156,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 2. Install the Wazuh App plugin for Kibana:
 
-  2.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. 
+  2.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
   Set the limit as follow:
 
   .. code-block:: console
 
       # export NODE_OPTIONS="--max-old-space-size=3072"
-      
+
   2.2) Install Wazuh App:
 
   .. code-block:: console
