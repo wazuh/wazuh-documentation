@@ -3,6 +3,8 @@
 wodle name="command"
 ========================
 
+.. versionadded:: 3.1.0
+
 .. topic:: XML section name
 
 	.. code-block:: xml
@@ -113,7 +115,6 @@ Example of configuration
 
 .. code-block:: xml
 
-  
     <wodle name="command">
       <disabled>no</disabled>
       <tag>test</tag>
@@ -122,3 +123,5 @@ Example of configuration
       <ignore_output>no</ignore_output>
       <run_on_start>yes</run_on_start>
     </wodle>
+
+.. note:: You can see more examples of this command in the :doc:`Vuls integration section<../../capabilities/vuls>`. 

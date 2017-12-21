@@ -21,3 +21,4 @@ The capabilities are:
     antiflooding
     labels
     virustotal-scan/index
+    vuls
