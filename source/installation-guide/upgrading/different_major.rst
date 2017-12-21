@@ -163,6 +163,9 @@ Prepare Elastic Stack
 Upgrade Elasticsearch
 ---------------------
 
+.. note::
+  Since you are upgrading to a different major version of Elasticsearch you should backup **/etc/elasticsearch/elasticsearch.yml** and **/etc/elasticsearch/jvm.options** before upgrade Elasticsearch. Check https://www.elastic.co/guide/en/elasticsearch/reference/6.x/index.html for more information.
+
 1. Update Elasticsearch:
 
   a) For CentOS/RHEL/Fedora:
@@ -221,7 +224,7 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # apt-get install logstash=6.1.0
+      # apt-get install logstash=1:6.1.0-1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -285,10 +288,19 @@ Upgrade Kibana
 
 4. Upgrade Wazuh Kibana App:
 
+  4.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
+  Set the limit as follow:
+
   .. code-block:: console
 
-    # rm -rf /usr/share/kibana/optimize/bundles
-    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+      # export NODE_OPTIONS="--max-old-space-size=3072"
+
+  4.2) Install Wazuh App:
+
+  .. code-block:: console
+
+      # rm -rf /usr/share/kibana/optimize/bundles
+      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
 
 5. Start Kibana:
