@@ -32,3 +32,4 @@ This section describes how to upgrade an existing Wazuh installation. The upgrad
     same_minor
     same_major
     different_major
+    restore_alerts
