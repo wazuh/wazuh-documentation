@@ -457,6 +457,11 @@ Additional rule options
 +--------------------+-----------------------------------------------------+
 | **no_full_log**    | Do not include the ``full_log`` field in the alert. |
 +--------------------+-----------------------------------------------------+
+| **no_counter**     | Omit field ``rule.firedtimes`` in the JSON alert.   |
++--------------------+-----------------------------------------------------+
+
+.. note::
+    Use one ``<option>`` tag for each option you want to add.
 
 .. _rules_check_diff:
 
