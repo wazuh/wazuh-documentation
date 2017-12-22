@@ -12,3 +12,4 @@ This section summarizes the most important features of each release.
 
         release_2_1
         release_3_0_0
+        release_3_1_0

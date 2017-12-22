@@ -15,10 +15,10 @@ For deploying your Wazuh environment see the :doc:`Installation guide <../instal
 - `Automatic decoding for JSON events`_
 - `VirusTotal integration`_
 - `MSI Windows installer for agents`_
-- `More relevant features`_
 - `Wazuh API`_
 - `Ruleset`_
 - `Updated external libraries`_
+- `More relevant features`_
 
 Grouping agents
 ---------------
