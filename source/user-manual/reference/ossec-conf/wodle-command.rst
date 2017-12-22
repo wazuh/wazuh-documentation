@@ -45,7 +45,7 @@ Options
 disabled
 ^^^^^^^^
 
-Disables the Command wodle.
+Disable the Command wodle.
 
 +--------------------+-----------------------------+
 | **Default value**  | no                          |
@@ -100,9 +100,7 @@ Run command immediately when service is started.
 ignore-output
 ^^^^^^^^^^^^^
 
-Ignore the command output when executed
-
-Attributes
+Ignore the command output when executed.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -124,4 +122,4 @@ Example of configuration
       <run_on_start>yes</run_on_start>
     </wodle>
 
-.. note:: You can see more examples of this command in the :doc:`Vuls integration section<../../capabilities/vuls>`. 
+.. note:: You can see an use case for this command in the :doc:`Vuls integration section<../../capabilities/vuls>`.

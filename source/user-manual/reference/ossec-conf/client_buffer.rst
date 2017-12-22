@@ -15,12 +15,13 @@ Configure the agent bucket parameters in order to avoid events flooding.
 Options
 -------
 
-- `disable`_
+- `disabled`_
+- :ref:`disable <legacy_disable>`
 - `queue_size`_
 - :ref:`length <legacy_length>`
 - `events_per_second`_
 
-disable
+disabled
 ^^^^^^^^^^^^^^
 
 This parameter allows to disable the Agent Buffer and send events to the manager without any congestion control.
@@ -34,6 +35,21 @@ This parameter allows to disable the Agent Buffer and send events to the manager
 .. warning::
 	Disabling this functionality in large environments, agents may collapse the manager and the network.
 
+.. _legacy_disable:
+
+disable
+^^^^^^^^^^^^^^
+
+.. deprecated:: 3.1
+
+This parameter allows to disable the Agent Buffer and send events to the manager without any congestion control.
+Due to compatibility issues, it is better to **replace** this option by `disabled`_.
+
++--------------------+------------------------------------------------+
+| **Default value**  | **no**                                         |
++--------------------+------------------------------------------------+
+| **Allowed values** | The options accepted are **yes** and **no**.   |
++--------------------+------------------------------------------------+
 
 queue_size
 ^^^^^^^^^^^^^
@@ -83,7 +99,7 @@ Default configuration
 
     <client_buffer>
       <!-- Agent buffer options -->
-      <disable>no</disable>
+      <disabled>no</disabled>
       <queue_size>5000</queue_size>
       <events_per_second>500</events_per_second>
     </client_buffer>

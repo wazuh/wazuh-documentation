@@ -5,11 +5,11 @@ Vuls integration
 
 .. versionadded:: 3.1.0
 
-The integration of Vuls project with Wazuh allows to launch periodic vulnerability scan both in manager and agents. This avoids system administrators the task of daily analysis in search of vulnerable packages, being able to automate both this process and interpretation of vulnerabilities using Wazuh Ruleset.
+The integration of Vuls project with Wazuh allows you to launch periodic vulnerability scan both in manager and agents. This avoids system administrators the task of daily analysis in search of vulnerable packages, being able to automate both this process and interpretation of vulnerabilities using Wazuh Ruleset.
 
 - `What it is Vuls?`_
 - `How it works?`_
-- `How to configure`_
+- `How to configure it`_
 - `Use case`_
 
 
@@ -27,12 +27,12 @@ The agent (or manager) being monitored will launch Vuls scans with the periodici
 2) Scan of the server software.
 3) Check if the computer software is affected by any of the vulnerabilities of the databases.
 
-After this, the agent will report to the manager the vulnerabilities found, and this will trigger rules depending on the severity of the results.
+After this, the agent will report to the manager the vulnerabilities found, and this will trigger alerts depending on the severity of the results.
 
-How to configure
-------------------
+How to configure it
+-------------------
 
-First, you must deploy Vuls. To do this, just run the deployment script (`/var/ossec/wodles/vuls/deploy_vuls.sh`) including the name of your operating system and version as a parameter:
+First of all, you must deploy Vuls. To do this, just run the deployment script (`/var/ossec/wodles/vuls/deploy_vuls.sh`) including the name of your operating system and version as parameters:
 
 .. code-block:: console
 
@@ -54,7 +54,7 @@ This script will install dependencies, download VULS, download CVE and OVAL data
 | Oracle  | 5, 6, 7     |
 +---------+-------------+
 
-To configure vulnerability scanning you must add the following block to ``ossec. conf``:
+To configure vulnerability scans you must add the following block to ``ossec. conf``:
 
 .. code-block:: xml
 
@@ -66,22 +66,22 @@ To configure vulnerability scanning you must add the following block to ``ossec.
       <run_on_start>yes</run_on_start>
     </wodle>
 
-The previous example would launch a simple VULS analysis every day. However, you can configure this analysis by adding the following parameters to the c     all:
+The previous example would launch a simple VULS analysis every day. However, you can configure this analysis by adding the following parameters to the script call:
 
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Parameter              | Description                                                                                                                                               |
 +========================+===========================================================================================================================================================+
-|                        | Will not report vulnerabilities with a CVSS less than the indicated value. Default is 0.                                                                  |
+|                        | Will not report vulnerabilities with a CVSS less than the indicated value. Default value is 0.                                                            |
 + **mincvss**            +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | **Supported value** | A positive number.                                                                                                                  |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                        | Choose to extract information from the NVD or OVAL of system. By default it will take the font that gives a higher score.                                 |
+|                        | Choose to extract information from the NVD or OVAL of system. By default, it will take the font that gives a higher score.                                |
 + **source**             +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | **Supported value** | nvd, oval                                                                                                                           |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **updatenvd**          | Update NVD database.                                                                                                                                      |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                        | Indicates the year from which the NVD database will be downloaded if the updatenvd parameter is included. Default starts 10 years ago.                    |
+|                        | Indicates the year from which the NVD database will be downloaded if the ``updatenvd`` parameter is included. Default starts 10 years ago.                |
 + **nvd-year**           +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | **Supported value** | A valid year.                                                                                                                       |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -93,7 +93,7 @@ The previous example would launch a simple VULS analysis every day. However, you
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **updateorac**         | Update Oracle OVAL database.                                                                                                                              |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                        | If a parameter is used to update an OVAL database, the SO version must be included with this parameter.                                                   |
+|                        | If a parameter is used to update an OVAL database, the OS version must be included with this parameter.                                                   |
 + **os-version**         +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | **Supported value** | The operating system version.                                                                                                       |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -113,7 +113,7 @@ The previous example would launch a simple VULS analysis every day. However, you
 Use case
 ---------
 
-The following use case shows how to configure a daily vulnerability scan, which will not report level 5 minor alerts unless its vulnerability has been updated within the last 20 days. We will also update the NVD (since 2016) and OVAL databases.
+The following use case shows how to configure a daily vulnerability scan, which will not report alerts of level less than 5 unless its vulnerability has been updated within the last 20 days. We will also update the NVD (since 2016) and OVAL databases.
 
 .. code-block:: xml
 
@@ -128,6 +128,7 @@ The following use case shows how to configure a daily vulnerability scan, which 
 Alerts examples:
 
 .. code-block:: console
+   :emphasize-lines: 3
 
     ** Alert 1513880084.806869: - vuls,
     2017 Dec 21 18:14:44 ip-172-31-42-67->Wazuh-VULS
@@ -154,10 +155,11 @@ Alerts examples:
     ScanDate: 2017-12-21 18:14:36
 
 .. code-block:: console
+   :emphasize-lines: 3
 
     ** Alert 1513880084.799653: - vuls,
     2017 Dec 21 18:14:44 ip-172-31-42-67->Wazuh-VULS
-    Rule: 22402 (level 7) -> '$(CveID) has a update date lower than 20 days.'
+    Rule: 22402 (level 7) -> 'CVE-2017-15115 has a update date lower than 20 days.'
     {"integration": "vuls", "AffectedPackages": "linux-aws (Not fixable)", "AffectedPackagesInfo": {"linux-aws": {"Repository": "", "NewVersion": "", "Version": "4.4.0-1044.53", "NewRelease": "", "Release": "", "Fixable": "No", "Arch": ""}}, "Days": 20, "event": "CVE-2017-15115 has a update date lower than 20 days."}
     integration: vuls
     AffectedPackages: linux-aws (Not fixable)
