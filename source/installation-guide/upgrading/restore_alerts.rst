@@ -11,8 +11,8 @@ To do so, you must download the ``restore_alerts.sh`` script `from this link <ht
 
     .. code-block:: console
 
-        $ curl -so restore_alerts.sh https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts.sh
-        $ curl -so restore_alerts.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts.conf
+        $ curl -so restore_alerts.sh https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts/restore_alerts.sh
+        $ curl -so restore_alerts.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts/restore_alerts.conf
 
 
 Once the script and the configuration file are downloaded, you can restore your Wazuh's alerts in two different ways: **restoring them from Elasticsearch** and index them in Elasticsearch or **restoring from your Wazuh's manager** and index them in Elasticsearch.
