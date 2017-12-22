@@ -366,7 +366,7 @@ indices and templates than Wazuh 2.x.
 
 For that reason, you will not be able to see the previous alerts using Kibana. If you need to access them, you will have to reindex the previous indices.
 
-The Wazuh team is currently working on a reindex script to accomplish this process.
+There's a reindex script developed by the Wazuh Team which documentation is available at :doc:`Restore Wazuh alerts from Wazuh 2.x <./restore_alerts>`.
 
 .. note::
     Not reindexing alerts doesn't mean that they will disappear, alerts will still be stored in Elasticsearch and the Wazuh manager.
