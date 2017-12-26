@@ -123,7 +123,7 @@ Installing Wazuh API
     	#   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
     	#   yum-config-manager --enable rhel-server-rhscl-6-rpms
 
-.. note:: You can also run an :doc:`unattended installation<../unattended-installation>` for the Wazuh manager and API.
+.. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
 
 Installing Filebeat
 -------------------

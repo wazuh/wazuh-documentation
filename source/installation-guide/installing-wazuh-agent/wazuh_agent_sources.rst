@@ -40,7 +40,7 @@ Installing Linux agent
     # cd wazuh-*
     # ./install.sh
 
-.. note:: You can also run an :doc:`unattended installation<../unattended-installation>`.
+.. note:: You can also run an :ref:`unattended installation <unattended-installation>`.
 
 4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 

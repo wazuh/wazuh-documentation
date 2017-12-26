@@ -16,3 +16,4 @@ This part of the user manual will cover the configuration files used by Wazuh an
        internal-options
        daemons/index
        tools/index
+       unattended-installation
