@@ -54,6 +54,9 @@ This script will install dependencies, download VULS, download CVE and OVAL data
 | Oracle  | 5, 6, 7     |
 +---------+-------------+
 
+.. note::
+    Your system requires 2 GB RAM or more to deploy VULS. 1 GB RAM and 1 GB SWAP memory is also enough.
+
 To configure vulnerability scans you must add the following block to ``ossec. conf``:
 
 .. code-block:: xml
@@ -172,3 +175,27 @@ Alerts examples:
     AffectedPackagesInfo.linux-aws.Arch:
     Days: 20
     event: CVE-2017-15115 has a update date lower than 20 days.
+
+Centralized configuration
+-------------------------
+
+Vuls may be specified in the :ref:`centralized configuration <reference_agent_conf>`:
+
+.. code-block:: xml
+
+    <agent_config>
+      <wodle name="command">
+        <tag>Wazuh-VULS</tag>
+        <command>/usr/bin/python /var/ossec/wodles/vuls/vuls.py --mincvss 5 --antiquity-limit 20 --updatenvd --nvd-year 2016 --autoupdate</command>
+        <interval>1d</interval>
+        <ignore_output>yes</ignore_output>
+        <run_on_start>yes</run_on_start>
+      </wodle>
+    </agent_config>
+
+When setting Vuls as shared agent configuration, **you must enable remote commands for Agent Modules**.
+You can do it by adding the next line to the file *etc/local_internal_options.conf* in the agent:
+
+.. code-block:: shell
+
+    wazuh_command.remote_commands=1

@@ -20,8 +20,9 @@ Generally, this file is reserved for debugging issues and for troubleshooting. *
 - `Remoted`_
 - `Syscheck`_
 - `Rootcheck`_
-- `Wazuh_database`_
-- `Wazuh_modules`_
+- `Wazuh Database`_
+- `Wazuh Modules`_
+- `Wazuh Command`_
 - `Windows`_
 
 
@@ -244,7 +245,9 @@ Logcollector
 +                                  +---------------+----------------------------------------------------------------------------+
 |                                  | Default value | 0                                                                          |
 +                                  +---------------+----------------------------------------------------------------------------+
-|                                  | Allowed value | 0, 1                                                                       |
+|                                  | Allowed value | 0: Disable remote commands                                                 |
++                                  +               +----------------------------------------------------------------------------+
+|                                  |               | 1: Enable remote commands                                                  |
 +----------------------------------+---------------+----------------------------------------------------------------------------+
 |   **logcollector.vcheck_files**  | Description   | Number of readings before checking files.                                  |
 +                                  +---------------+----------------------------------------------------------------------------+
@@ -515,7 +518,7 @@ Rootcheck
 |                          | Allowed values | Any integer between 0 and 50                                                  |
 +--------------------------+----------------+-------------------------------------------------------------------------------+
 
-Wazuh_database
+Wazuh Database
 --------------
 
 The Wazuh Database Synchronization Module starts automatically on the server and local profiles and requires no configuration. However, some optional settings are available.
@@ -581,7 +584,7 @@ Once these settings have been adjusted, save the file and **restart Wazuh**.  Wi
 |                                               | Allowed value | Any integer between 0 and 2147483647                                            |
 +-----------------------------------------------+---------------+---------------------------------------------------------------------------------+
 
-Wazuh_modules
+Wazuh Modules
 -------------
 
 +-----------------------------+---------------+--------------------------------------------------------------------+
@@ -607,6 +610,19 @@ Wazuh_modules
 +                             +               +--------------------------------------------------------------------+
 |                             |               | 2: Verbose debug output                                            |
 +-----------------------------+---------------+--------------------------------------------------------------------+
+
+Wazuh Command
+-------------
+
++-----------------------------------+---------------+-------------------------------------------------------------------------------------------+
+| **wazuh_command.remote_commands** | Description   | Choose whether Command Module should accept commands defined in the shared configuration. |
++                                   +---------------+-------------------------------------------------------------------------------------------+
+|                                   | Default value | 0                                                                                         |
++                                   +---------------+-------------------------------------------------------------------------------------------+
+|                                   | Allowed value | 0: Disable remote commands                                                                |
++                                   +               +-------------------------------------------------------------------------------------------+
+|                                   |               | 1: Enable remote commands                                                                 |
++-----------------------------------+---------------+-------------------------------------------------------------------------------------------+
 
 Windows
 -------

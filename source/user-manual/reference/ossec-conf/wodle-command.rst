@@ -108,6 +108,19 @@ Ignore the command output when executed.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+Centralized configuration
+-------------------------
+
+Remote commands may be specified in the :ref:`centralized configuration <reference_agent_conf>`,
+but remote commands are disabled by default due to security reasons.
+
+When setting commands as shared agent configuration, **you must enable remote commands for Agent Modules**.
+You can do it by adding the next line to the file *etc/local_internal_options.conf* in the agent:
+
+.. code-block:: shell
+
+    wazuh_command.remote_commands=1
+
 Example of configuration
 ------------------------
 
