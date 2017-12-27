@@ -59,7 +59,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-	 # yum install elasticsearch-6.1.0
+	 # yum install elasticsearch-6.1.1
 
 2. Enable and start the Elasticsearch service:
 
@@ -107,7 +107,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: console
 
-    # yum install logstash-6.1.0
+    # yum install logstash-6.1.1
 
 2. Download the Wazuh config for Logstash:
 
@@ -168,17 +168,17 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-	 # yum install kibana-6.1.0
+	 # yum install kibana-6.1.1
 
 2. Install the Wazuh App plugin for Kibana:
 
-  2.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. 
+  2.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
   Set the limit as follow:
 
   .. code-block:: console
 
       # export NODE_OPTIONS="--max-old-space-size=3072"
-      
+
   2.2) Install Wazuh App:
 
   .. code-block:: console
