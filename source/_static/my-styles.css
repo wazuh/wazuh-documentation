@@ -184,6 +184,7 @@ h2 {
 
 div.version {
     position: relative;
+    display: none;
 }
 
 #select-version {
