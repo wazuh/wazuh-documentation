@@ -10,8 +10,14 @@ $( document ).ready(function() {
 });
 
 function addVersions() {
+    var version = $(".version");
     var select_version = $("#select-version");
     var path = document.location.pathname.split('/')[1];
+
+    if (version == null) {
+        console.error("No such element of class 'version'");
+        return;
+    }
 
     if (select_version == null) {
         console.error("No such element 'select-version'");
@@ -34,4 +40,6 @@ function addVersions() {
     select_version.change(function(event) {
         window.location.href = event.target.value;
     });
+
+    version.css("display", "block");
 }
