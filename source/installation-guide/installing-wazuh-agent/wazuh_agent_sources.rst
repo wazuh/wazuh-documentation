@@ -74,7 +74,7 @@ Set up Windows build environment
 To generate the installer we need to solve the following dependencies in Windows:
 
 * `WiX Toolset <http://wixtoolset.org/>`_.
-* .NET framework 3.5.1 or higher.
+* .NET framework 3.5.1.
 * Microsoft Windows SDK.
 
 Source code download
