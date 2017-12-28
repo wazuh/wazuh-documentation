@@ -59,7 +59,9 @@ You can automate the agent registration with authd using the following parameter
 +-----------------------+-------------------------------------------------------------------------------------------------------+
 |   AGENT_NAME          |  Agent's name. By default will be the computer name.                                                  |
 +-----------------------+-------------------------------------------------------------------------------------------------------+
-|   /l*v installer.log  |  Generates a log of the installation process.                                                         |
+|   \/l  installer.log  |  Generates a log of the installation process.                                                         |
++-----------------------+-------------------------------------------------------------------------------------------------------+
+|   /l*v installer.log  |  Generates a log of the installation process, including verbose messages.                             |
 +-----------------------+-------------------------------------------------------------------------------------------------------+
 
 
