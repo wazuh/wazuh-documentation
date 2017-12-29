@@ -31,7 +31,7 @@ Installing Linux agent
 
   .. code-block:: console
 
-    $ curl -Ls https://github.com/wazuh/wazuh/archive/3.0.tar.gz | tar zx
+    $ curl -Ls https://github.com/wazuh/wazuh/archive/3.1.tar.gz | tar zx
 
 3. Run the ``install.sh`` script, this will display a wizard that will guide you through the installation process using the Wazuh sources:
 
@@ -84,7 +84,7 @@ Download the Wazuh source code and unzip it:
 
   .. code-block:: console
 
-   # curl -Ls https://github.com/wazuh/wazuh/archive/3.0.tar.gz | tar zx
+   # curl -Ls https://github.com/wazuh/wazuh/archive/3.1.tar.gz | tar zx
    # cd wazuh-*/src
 
 Compiling the agent
@@ -103,12 +103,12 @@ You should expect the following output at the end of the building process:
    Done building winagent
 
 
-Once the agent has been compiled, we should transfer the ``src`` folder to a Windows system. This folder could be compressed at first to speed up the process.
+Once the agent has been compiled, we should transfer the Wazuh folder to a Windows system. This folder could be compressed at first to speed up the process.
 
       .. code-block:: console
 
-        # zip -r ../src *
+        # zip -r wazuh.zip ../../wazuh-3.1
 
-Once in Windows, we only need to run ``src/win32/wazuh-installer-build-msi.bat`` to start the installer generation. If we don't want to sign the installer, we will have to comment or delete the signtool line.
+Once in Windows, we only need to run ``wazuh-3.1/src/win32/wazuh-installer-build-msi.bat`` to start the installer generation. If we don't want to sign the installer, we will have to comment or delete the signtool line.
 
 .. note:: At this point the installer is ready. You can launch it with a normal or unattended installation. For more information about this process please visit our :doc:`installation section for Windows<./wazuh_agent_windows>`.
