@@ -103,7 +103,7 @@ You should expect the following output at the end of the building process:
    Done building winagent
 
 
-Once the agent has been compiled, we should transfer the ``src`` folder to a Windows system. This folder could be compressed at first to speed up the process.
+Once the agent has been compiled, we should transfer the Wazuh folder to a Windows system. This folder could be compressed at first to speed up the process.
 
       .. code-block:: console
 
