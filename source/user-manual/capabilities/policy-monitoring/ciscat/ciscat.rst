@@ -34,6 +34,14 @@ CIS-CAT are JRE 6, 7, 8.
 For running this integration, the CIS-CAT tool should reside in the local agent that runs the scans. However, the JRE can be located on
 a removable disk or network drive for sharing it between multiple agents.
 
+In addition, in Unix systems the CIS-CAT script might need to be granted execute permissions. To do this, in the CIS-CAT directory run the following command:
+
+.. code-block:: console
+
+    # chmod +x CIS-CAT.sh
+
+Finally, the ``xsltproc`` tool is necessary to convert CIS-CAT reports into Wazuh alerts. It is a common tool that can be easily found in any Unix distribution.
+
 Once you have the requirements for running CIS evaluations, you can configure the wodle for evaluate specific Benchmarks with a configured
 frequency, scan results after executing the checks are sent to the manager and you will be able to visualize them as you prefer.
 
@@ -67,7 +75,7 @@ In order to deploy the CIS-CAT integration, this section can be follow as exampl
 
 If no profile is specified for a certain content, it will be selected the first one, which is usually the most permisive.
 
-2. After set the configuration and restart the Wazuh agent, evaluations will be executed with the specified interval, triggering alerts
+2. After restart the Wazuh agent, evaluations will be executed with the specified interval, triggering alerts
 as shown below.
 
 Information about the executed scan
