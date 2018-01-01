@@ -133,48 +133,48 @@ Alerts examples:
 .. code-block:: console
    :emphasize-lines: 3
 
-    ** Alert 1513880084.806869: - vuls,
-    2017 Dec 21 18:14:44 ip-172-31-42-67->Wazuh-VULS
-    Rule: 22405 (level 10) -> 'High vulnerability CVE-2017-16649 detected in scanning launched on 2017-12-21 18:14:36 with 100% reliability (OvalMatch). Score: 7.200000 (National Vulnerability Database). Affected packages: linux-aws (Not fixable)'
-    {"KernelVersion": "4.4.0-1044-aws", "Source": "National Vulnerability Database", "LastModified": "2017-11-28 14:05:55", "AffectedPackagesInfo": {"linux-aws": {"Repository": "", "NewVersion": "", "Version": "4.4.0-1044.53", "NewRelease": "", "Release": "", "Fixable": "No", "Arch": ""}}, "integration": "vuls", "ScannedCVE": "CVE-2017-16649", "AffectedPackages": "linux-aws (Not fixable)", "DetectionMethod": "OvalMatch", "Score": 7.2, "Link": "https://nvd.nist.gov/vuln/detail/CVE-2017-16649", "OSversion": "ubuntu 16.04", "Assurance": "100%", "ScanDate": "2017-12-21 18:14:36"}
-    KernelVersion: 4.4.0-1044-aws
-    Source: National Vulnerability Database
-    LastModified: 2017-11-28 14:05:55
-    AffectedPackagesInfo.linux-aws.Repository: Update
-    AffectedPackagesInfo.linux-aws.NewVersion:
-    AffectedPackagesInfo.linux-aws.Version: 4.4.0-1044.53
-    AffectedPackagesInfo.linux-aws.NewRelease:
-    AffectedPackagesInfo.linux-aws.Release:
-    AffectedPackagesInfo.linux-aws.Fixable: No
-    AffectedPackagesInfo.linux-aws.Arch:
-    integration: vuls
-    ScannedCVE: CVE-2017-16649
-    AffectedPackages: linux-aws (Not fixable)
-    DetectionMethod: OvalMatch
-    Score: 7.200000
-    Link: https://nvd.nist.gov/vuln/detail/CVE-2017-16649
-    OSversion: ubuntu 16.04
-    Assurance: 100%
-    ScanDate: 2017-12-21 18:14:36
+   ** Alert 1514822251.14842332: - vuls,
+   2018 Jan 01 16:57:31 (ttes) any->Wazuh-VULS
+   Rule: 22403 (level 5) -> 'Low vulnerability CVE-2017-16649 detected in scanning launched on c with 100% reliability (OvalMatch). Score: $(vuls.core) (Ubuntu OVAL). Affected packages: linux-image-4.4.0-87-generic (Not fixable)'
+   {"vuls": {"last_modified": "0001-01-01 00:00:00", "detection_method": "OvalMatch", "kernel_version": "4.4.0-87-generic", "scan_date": "2018-01-01 07:57:27", "affected_packages": "linux-image-4.4.0-87-generic (Not fixable)", "integration": "vuls", "os_version": "ubuntu 16.04", "score": 3.99, "link": "http://people.ubuntu.com/~ubuntu-security/cve/CVE-2017-16649", "source": "Ubuntu OVAL", "scanned_cve": "CVE-2017-16649", "tittle": "CVE-2017-16649 on Ubuntu 16.04 LTS (xenial) - low.", "assurance": "100%", "affected_packages_info": {"linux-image-4.4.0-87-generic": {"fixable": "No", "version": "4.4.0-87.110"}}}}
+   vuls.last_modified: 0001-01-01 00:00:00
+   vuls.detection_method: OvalMatch
+   vuls.kernel_version: 4.4.0-87-generic
+   vuls.scan_date: 2018-01-01 07:57:27
+   vuls.affected_packages: linux-image-4.4.0-87-generic (Not fixable)
+   vuls.integration: vuls
+   vuls.os_version: ubuntu 16.04
+   vuls.score: 3.990000
+   vuls.link: http://people.ubuntu.com/~ubuntu-security/cve/CVE-2017-16649
+   vuls.source: Ubuntu OVAL
+   vuls.scanned_cve: CVE-2017-16649
+   vuls.tittle: CVE-2017-16649 on Ubuntu 16.04 LTS (xenial) - low.
+   vuls.assurance: 100%
+   vuls.affected_packages_info.linux-image-4.4.0-87-generic.fixable: No
+   vuls.affected_packages_info.linux-image-4.4.0-87-generic.version: 4.4.0-87.110
 
 .. code-block:: console
    :emphasize-lines: 3
 
-    ** Alert 1513880084.799653: - vuls,
-    2017 Dec 21 18:14:44 ip-172-31-42-67->Wazuh-VULS
-    Rule: 22402 (level 7) -> 'CVE-2017-15115 has a update date lower than 20 days.'
-    {"integration": "vuls", "AffectedPackages": "linux-aws (Not fixable)", "AffectedPackagesInfo": {"linux-aws": {"Repository": "", "NewVersion": "", "Version": "4.4.0-1044.53", "NewRelease": "", "Release": "", "Fixable": "No", "Arch": ""}}, "Days": 20, "event": "CVE-2017-15115 has a update date lower than 20 days."}
-    integration: vuls
-    AffectedPackages: linux-aws (Not fixable)
-    AffectedPackagesInfo.linux-aws.Repository:
-    AffectedPackagesInfo.linux-aws.NewVersion:
-    AffectedPackagesInfo.linux-aws.Version: 4.4.0-1044.53
-    AffectedPackagesInfo.linux-aws.NewRelease:
-    AffectedPackagesInfo.linux-aws.Release:
-    AffectedPackagesInfo.linux-aws.Fixable: No
-    AffectedPackagesInfo.linux-aws.Arch:
-    Days: 20
-    event: CVE-2017-15115 has a update date lower than 20 days.
+   ** Alert 1514818543.694640: - vuls,
+   2018 Jan 01 15:55:43 (agent) any->Wazuh-VULS
+   Rule: 22402 (level 7) -> 'CVE-2017-1000410 has a update date lower than 20 days.'
+   {"vuls": {"last_modified": "2017-12-24 21:29:12", "detection_method": "OvalMatch", "ke$
+   vuls.last_modified: 2017-12-24 21:29:12
+   vuls.detection_method: OvalMatch
+   vuls.kernel_version: 4.4.0-87-generic
+   vuls.scan_date: 2018-01-01 06:55:41
+   vuls.days: 20
+   vuls.integration: vuls
+   vuls.os_version: ubuntu 16.04
+   vuls.score: 5
+   vuls.link: https://nvd.nist.gov/vuln/detail/CVE-2017-1000410
+   vuls.source: National Vulnerability Database
+   vuls.scanned_cve: CVE-2017-1000410
+   vuls.tittle: CVE-2017-1000410
+   vuls.event: CVE-2017-1000410 has a update date lower than 20 days.
+   vuls.assurance: 100%
+
 
 Centralized configuration
 -------------------------
