@@ -13,30 +13,30 @@ Before upgrading the Wazuh manager, stop ``ossec-authd`` in case that it is runn
 
 a) Upgrade Wazuh server on CentOS/RHEL/Fedora:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ sudo yum upgrade wazuh-manager
+    # yum upgrade wazuh-manager
 
 b) Upgrade Wazuh server on Debian/Ubuntu:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ sudo apt-get update && sudo apt-get install --only-upgrade wazuh-manager
+    # apt-get update && sudo apt-get install --only-upgrade wazuh-manager
 
 Upgrade Wazuh API
 ---------------------
 
 a) Upgrade Wazuh API on CentOS/RHEL/Fedora:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ sudo yum upgrade wazuh-api
+    # yum upgrade wazuh-api
 
 b) Upgrade Wazuh API on Debian/Ubuntu:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ sudo apt-get update && sudo apt-get install --only-upgrade wazuh-api
+    # apt-get update && sudo apt-get install --only-upgrade wazuh-api
 
 
 Upgrade Wazuh agent
@@ -44,15 +44,15 @@ Upgrade Wazuh agent
 
 a) Upgrade Wazuh agent on CentOS/RHEL/Fedora:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ sudo yum upgrade wazuh-agent
+    # yum upgrade wazuh-agent
 
 b) Upgrade Wazuh agent on Debian/Ubuntu:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ sudo apt-get update && sudo apt-get install --only-upgrade wazuh-agent
+    # apt-get update && sudo apt-get install --only-upgrade wazuh-agent
 
 
 Upgrade Wazuh Kibana App
@@ -61,46 +61,57 @@ Upgrade Wazuh Kibana App
 
 1) On your terminal, remove the current Wazuh Kibana App:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-        $ /usr/share/kibana/bin/kibana-plugin remove wazuh
+        # /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 2) Once the process is completed, you must stop Kibana with:
 
   a) For Systemd:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-        $ systemctl stop kibana
+        # systemctl stop kibana
 
   b) For SysV Init:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-        $ service kibana stop
+        # service kibana stop
 
 3) Remove the current kibana bundles:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ rm -rf /usr/share/kibana/optimize/bundles
+    # rm -rf /usr/share/kibana/optimize/bundles
 
 4) Upgrade Wazuh Kibana App (this can take a while):
 
-.. code-block:: bash
 
-    $ /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+    4.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
+
+    Set the limit as follow:
+
+    .. code-block:: console
+
+        # export NODE_OPTIONS="--max-old-space-size=3072"
+
+    4.2) Install Wazuh App:
+
+    .. code-block:: console
+
+        # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
 
 5) Once the process is completed, you must start Kibana again with:
 
   a) For Systemd:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-        $ systemctl start kibana
+        # systemctl start kibana
 
   b) For SysV Init:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-        $ service kibana start
+        # service kibana start

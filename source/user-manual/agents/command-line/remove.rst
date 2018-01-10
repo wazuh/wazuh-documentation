@@ -9,7 +9,7 @@ Confirmation before removing the agent:
 
 .. code-block:: console
 
-    /var/ossec/bin/manage_agents
+    # /var/ossec/bin/manage_agents
 
     ****************************************
     * Wazuh v2.0 Agent manager.            *
@@ -36,7 +36,7 @@ No confirmation before removing the agent:
 
 .. code-block:: console
 
-    $ /var/ossec/bin/manage_agents -r 001
+    # /var/ossec/bin/manage_agents -r 001
 
 
     ****************************************

@@ -36,9 +36,9 @@ b. For development enviroment ``vars-development.yml``:
 
 Next, run the Ansible playbook:
 
-.. code-block:: bash
+.. code-block:: console
 
-  ansible-playbook wazuh-logstash.yml -e@vars-production.yml
+  $ ansible-playbook wazuh-logstash.yml -e@vars-production.yml
 
 The example above will install Logstash and configure to use ``10.1.1.10`` as Elasticsearch node enabling the Filebeat input.
 

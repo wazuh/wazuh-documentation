@@ -31,11 +31,12 @@ Options
 - `host_information`_
 - `jsonout_output`_
 - `prelude_output`_
-- `picviz_output`_
-- `picviz_socket`_
 - `zeromq_output`_
 - `zeromq_uri`_
 - `geoip_db_path`_
+- `rotate_interval`_
+- `max_output_size`_
+
 
 alerts_log
 ^^^^^^^^^^
@@ -268,30 +269,6 @@ Enables or disables Prelude output.
 +--------------------+--------------------------------------------+
 
 
-picviz_output
-^^^^^^^^^^^^^^^^^^
-
-Enable PicViz output.
-
-+--------------------+-----+
-| **Default value**  | n/a |
-+--------------------+-----+
-| **Allowed values** | yes |
-+--------------------+-----+
-
-
-picviz_socket
-^^^^^^^^^^^^^^^^^^
-
-This is the full path of the socket that Wazuh will write alerts/events to for PicViz to read.
-
-+--------------------+---------------------------------------------------------+
-| **Default value**  | n/a                                                     |
-+--------------------+---------------------------------------------------------+
-| **Allowed values** | file and path that Wazuh will create and feed events to |
-+--------------------+---------------------------------------------------------+
-
-
 zeromq_output
 ^^^^^^^^^^^^^^^^^^
 
@@ -349,6 +326,47 @@ Example
 .. code-block:: xml
 
   <geoip_db_path>/etc/GeoLiteCity.dat</geoip_db_path>
+
+rotate_interval
+^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.1.0
+
+It is the time lapse between rotations. The highest allowed value is ``min_rotate_interval``.
+
++-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 0 (disabled)                                                                                                                             |
++-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
++-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+
+Example
+
+.. code-block:: xml
+
+  <rotate_interval>10h</rotate_interval>
+
+max_output_size
+^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.1.0
+
+Is the time lapse between rotations. Maximum allowed value is 1TiB.
+
++-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 0 (disabled)                                                                                                                             |
++-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should contain a suffix character indicating a size unit, such as, B (bytes), K (kibibyte), M (mebibyte),         |
+|                         | G (gibibyte), T (tebibyte).                                                                                                              |
++-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+
+Example
+
+.. code-block:: xml
+
+  <max_output_size>20M</max_output_size>
+
+
 
 Default configuration
 ---------------------

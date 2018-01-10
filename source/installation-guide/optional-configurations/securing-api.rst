@@ -9,10 +9,10 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
 
   By default you can access by typing user "foo" and password "bar". We recommend you to generate new credentials. This can be done very easily, with the following steps:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ cd /var/ossec/api/configuration/auth
-    $ sudo node htpasswd -c user myUserName
+    # cd /var/ossec/api/configuration/auth
+    # node htpasswd -c user myUserName
 
 2. Enable HTTPS:
 

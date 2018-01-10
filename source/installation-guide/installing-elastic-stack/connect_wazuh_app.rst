@@ -17,17 +17,19 @@ In this section, we'll register the Wazuh API (installed on the Wazuh server) in
     :align: center
     :width: 100%
 
-3. Before filling out the fields, go to your Wazuh server and using the command prompt as root set a non-default credentials to protect your Wazuh API:
+3. Before filling out the fields, go to your Wazuh server and using the command prompt as root set a non-default credentials to protect your Wazuh API, replace your desired username for myUserName.:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    # Replace your desired username for myUserName.
-    $ cd /var/ossec/api/configuration/auth
-    $ sudo node htpasswd -c user myUserName
+    # cd /var/ossec/api/configuration/auth
+    # node htpasswd -c user myUserName
 
-    # Do not forget to restart the API to apply the changes:
-    $ systemctl restart wazuh-api
-    $ service wazuh-api restart
+  Do not forget to restart the API to apply the changes:
+
+  .. code-block:: console
+  
+    # systemctl restart wazuh-api
+    # service wazuh-api restart
 
 4. Fill Username and Password with appropriate credentials you created in previous step.  Enter ``http://MANAGER_IP`` for the URL, where ``MANAGER_IP`` is the real IP address of the Wazuh qserver. Enter "55000" for the Port.
 

@@ -17,42 +17,36 @@ Installing Linux agent
 
   a) For RPM-based distributions:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-      sudo yum install make gcc
-
-      # If you want to use Auth, also install:
-      sudo yum install openssl-devel
+      # yum install make gcc
 
   b) For Debian-based distributions:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-      sudo apt-get install gcc make libc6-dev curl
-
-      # If you want to use Auth, also install:
-      sudo apt-get install libssl-dev
+      # apt-get install gcc make libc6-dev curl
 
 2. Download and extract the latest version:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.1.tar.gz | tar zx
+    $ curl -Ls https://github.com/wazuh/wazuh/archive/3.1.tar.gz | tar zx
 
 3. Run the ``install.sh`` script, this will display a wizard that will guide you through the installation process using the Wazuh sources:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ cd wazuh-*
-    $ sudo ./install.sh
+    # cd wazuh-*
+    # ./install.sh
 
-.. note:: You can also run an :doc:`unattended installation<../unattended-installation>`.
+.. note:: You can also run an :ref:`unattended installation <unattended-installation>`.
 
 4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
   .. code-block:: bash
 
-    1- What kind of installation do you want (server, agent, local, hybrid or help)? agent
+    1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
 
 .. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
 
@@ -68,11 +62,11 @@ Set up Ubuntu build environment
 
 Install these dependencies to build the Windows Wazuh agent installer on Ubuntu:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-   $ sudo apt-get install gcc-mingw-w64
-   $ sudo apt-get install nsis
-   $ sudo apt-get install make
+   # apt-get install gcc-mingw-w64
+   # apt-get install nsis
+   # apt-get install make
 
 Set up Windows build environment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -80,7 +74,7 @@ Set up Windows build environment
 To generate the installer we need to solve the following dependencies in Windows:
 
 * `WiX Toolset <http://wixtoolset.org/>`_.
-* .NET framework 3.5.1 or higher.
+* .NET framework 3.5.1.
 * Microsoft Windows SDK.
 
 Source code download
@@ -88,33 +82,33 @@ Source code download
 
 Download the Wazuh source code and unzip it:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-   $ curl -Ls https://github.com/wazuh/wazuh/archive/v2.1.1.tar.gz | tar zx
-   $ cd wazuh-*/src
+   # curl -Ls https://github.com/wazuh/wazuh/archive/3.1.tar.gz | tar zx
+   # cd wazuh-*/src
 
 Compiling the agent
 ^^^^^^^^^^^^^^^^^^^
 
 Run the make command:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ make TARGET=winagent
+    # make TARGET=winagent
 
 You should expect the following output at the end of the building process:
 
-  .. code-block:: bash
+  .. code-block:: console
 
    Done building winagent
 
 
-Once the agent has been compiled, we should transfer the ``src`` folder to a Windows system. This folder could be compressed at first to speed up the process.
+Once the agent has been compiled, we should transfer the Wazuh folder to a Windows system. This folder could be compressed at first to speed up the process.
 
-      .. code-block:: bash
+      .. code-block:: console
 
-        $ zip -r ../src *
+        # zip -r wazuh.zip ../../wazuh-3.1
 
-Once in Windows, we only need to run ``src/win32/wazuh-installer-build-msi.bat`` to start the installer generation. If we don't want to sign the installer, we will have to comment or delete the signtool line.
+Once in Windows, we only need to run ``wazuh-3.1/src/win32/wazuh-installer-build-msi.bat`` to start the installer generation. If we don't want to sign the installer, we will have to comment or delete the signtool line.
 
 .. note:: At this point the installer is ready. You can launch it with a normal or unattended installation. For more information about this process please visit our :doc:`installation section for Windows<./wazuh_agent_windows>`.

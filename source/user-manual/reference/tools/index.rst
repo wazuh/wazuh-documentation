@@ -36,11 +36,17 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`ossec-regex <ossec-regex>`                  | Validates a regex expression                                               | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`update-ruleset.py <update-ruleset.py>`      | Update Decoders, Rules and Rootchecks                                      | manager                     |
+| :doc:`update_ruleset <update_ruleset>`            | Update Decoders, Rules and Rootchecks                                      | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`util.sh <util.sh>`                          | Adds a file to be monitored by ossec-logcollector                          | manager agent               |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`verify-agent-conf <verify-agent-conf>`      | Verifies the Wazuh agent.conf configuration                                | manager                     |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`agent_groups <agent_groups>`                | Manages and assigns groups                                                 | manager                     |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`agent_upgrade <agent_upgrade>`              | List outgraded agent and upgrade them                                      | manager                     |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`cluster_control <cluster_control>`          | Manages and retrieves cluster information                                  | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 
 
@@ -59,6 +65,9 @@ Tools
     syscheck_update
     clear_stats
     ossec-regex
-    update-ruleset.py
+    update_ruleset
     util.sh
     verify-agent-conf
+    agent_groups
+    agent_upgrade
+    cluster_control

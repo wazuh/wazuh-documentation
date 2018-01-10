@@ -7,18 +7,20 @@ In this section we assume you have already installed the ``apt`` or ``yum`` Pupp
 
 Installation on CentOS/RHEL/Fedora
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-::
 
-   $ sudo yum install puppet
-   $ sudo puppet resource package puppet ensure=latest
+.. code-block:: console
+
+   # yum install puppet
+   # puppet resource package puppet ensure=latest
 
 Installation on Debian/Ubuntu
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-::
 
-   $ sudo apt-get install puppet
-   $ sudo apt-get update
-   $ sudo puppet resource package puppet ensure=latest
+.. code-block:: console
+
+   # apt-get install puppet
+   # apt-get update
+   # puppet resource package puppet ensure=latest
 
 Configuration
 ^^^^^^^^^^^^^
@@ -28,6 +30,8 @@ Add the server value to the ``[main]`` section of the node’s ``/etc/puppet/pup
    [main]
    server = puppet.example.com
 
-Restart the Puppet service::
+Restart the Puppet service:
 
-   $ service puppet restart
+.. code-block:: console
+
+   # service puppet restart

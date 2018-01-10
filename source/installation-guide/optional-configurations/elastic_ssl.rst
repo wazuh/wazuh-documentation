@@ -16,15 +16,15 @@ Generating a self-signed SSL certificate
 
 	a. On Debian or Ubuntu:
 
-		.. code-block:: bash
+		.. code-block:: console
 
-			$ cp /etc/ssl/openssl.cnf custom_openssl.cnf
+			# cp /etc/ssl/openssl.cnf custom_openssl.cnf
 
 	b. On CentOS or Red Hat:
 
-		.. code-block:: bash
+		.. code-block:: console
 
-			$ cp /etc/pki/tls/openssl.cnf custom_openssl.cnf
+			# cp /etc/pki/tls/openssl.cnf custom_openssl.cnf
 
   .. note:: Typically you will run the Logstash server in your Elastic Stack server or, if you have set up a distributed Elasticsearch cluster, in one of its nodes.
 
@@ -46,15 +46,15 @@ Generating a self-signed SSL certificate
 
 3. Generate the SSL certificate and key:
 
-	.. code-block:: bash
+	.. code-block:: console
 
-		$ openssl req -x509 -batch -nodes -days 3650 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
+		# openssl req -x509 -batch -nodes -days 3650 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
 
 4. You may remove the custom configuration file:
 
-	.. code-block:: bash
+	.. code-block:: console
 
-		$ rm custom_openssl.cnf
+		# rm custom_openssl.cnf
 
 Configure Logstash server
 -------------------------
@@ -79,15 +79,15 @@ At this point you should have your SSL certificate and key at ``/etc/logstash/lo
 
 	a. For Systemd:
 
-		.. code-block:: bash
+		.. code-block:: console
 
-			$ systemctl restart logstash.service
+			# systemctl restart logstash.service
 
 	b. For legacy SysV Init:
 
-		.. code-block:: bash
+		.. code-block:: console
 
-			$ service logstash restart
+			# service logstash restart
 
 Configure Filebeat
 ------------------
@@ -98,9 +98,9 @@ Now we will configure Filebeat to verify the Logstash server's certificate.
 
 	Here is an **example** you might use to copy the SSL certificate from the Logstash server to Wazuh server where Filebeat is installed:
 
-	.. code-block:: bash
+	.. code-block:: console
 
-		$ scp root@LOGSTASH_SERVER_IP:/etc/logstash/logstash.crt /etc/filebeat
+		# scp root@LOGSTASH_SERVER_IP:/etc/logstash/logstash.crt /etc/filebeat
 
 2. Edit the file ``/etc/filebeat/filebeat.yml`` and uncomment the lines related to SSL inside ``logstash``. The file should remain like this:
 
@@ -116,15 +116,15 @@ Now we will configure Filebeat to verify the Logstash server's certificate.
 
 	a. For Systemd:
 
-		.. code-block:: bash
+		.. code-block:: console
 
-			$ systemctl restart filebeat.service
+			# systemctl restart filebeat.service
 
 	b. For legacy SysV Init:
 
-		.. code-block:: bash
+		.. code-block:: console
 
-			$ service filebeat restart
+			# service filebeat restart
 
 .. note::
 	More detailed information is available in the `Securing communication with Logstash <https://www.elastic.co/guide/en/beats/filebeat/current/configuring-ssl-logstash.html>`_ guide from Elastic.

@@ -46,4 +46,3 @@ The diagrams below list the components that are run per host, both for single-ho
         upgrading/index
         virtual-machine
       	packages-list/index
-        unattended-installation

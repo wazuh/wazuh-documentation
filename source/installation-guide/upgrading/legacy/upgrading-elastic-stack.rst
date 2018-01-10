@@ -18,14 +18,14 @@ Configure Logstash
 
 1. Download the new logstash configuration:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/logstash/01-wazuh.conf
-    $ curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/elasticsearch/wazuh-elastic2-template.json
+    # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/logstash/01-wazuh.conf
+    # curl -so /etc/logstash/wazuh-elastic2-template.json https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/elasticsearch/wazuh-elastic2-template.json
 
 2. In the output section of ``/etc/logstash/conf.d/01-wazuh.conf``, comment the line for ``elastic5-template`` and uncomment the line for ``elastic2-template``:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     output {
       elasticsearch {
@@ -41,7 +41,7 @@ Configure Logstash
 
 3. *Only if you are using a single-host architecture* (where Wazuh server is running with Elastic Stack in the same host), edit ``/etc/logstash/conf.d/01-wazuh.conf`` commenting out the entire input section titled ``Remote Wazuh Manager - Filebeat input`` and uncommenting the entire input section titled ``Local Wazuh Manager - JSON file input``:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # Wazuh - Logstash configuration file
     ## Remote Wazuh Manager - Filebeat input
@@ -100,35 +100,35 @@ Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
   a) For Systemd:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-        $ systemctl stop logstash.service
-        $ systemctl stop elasticsearch.service
-        $ systemctl stop kibana.service
+        # systemctl stop logstash.service
+        # systemctl stop elasticsearch.service
+        # systemctl stop kibana.service
 
   b) For SysV Init:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ service logstash stop
-      $ service elasticsearch stop
-      $ service kibana stop
+      # service logstash stop
+      # service elasticsearch stop
+      # service kibana stop
 
 2. Remove Logstash old configuration and template files:
 
   For single-host architectures (Wazuh server and Elastic Stack running in the same system):
 
-  .. code-block:: bash
+  .. code-block:: console
 
-   $ rm /etc/logstash/conf.d/01-ossec-singlehost.conf
-   $ rm /etc/logstash/elastic-ossec-template.json
+   # rm /etc/logstash/conf.d/01-ossec-singlehost.conf
+   # rm /etc/logstash/elastic-ossec-template.json
 
   For distributed architectures (Elastic Stack standalone server):
 
-  .. code-block:: bash
+  .. code-block:: console
 
-   $ rm /etc/logstash/conf.d/01-ossec.conf
-   $ rm /etc/logstash/elastic-ossec-template.json
+   # rm /etc/logstash/conf.d/01-ossec.conf
+   # rm /etc/logstash/elastic-ossec-template.json
 
 3. Remove deprecated settings from configuration file:
 
@@ -141,7 +141,7 @@ Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
   ``ES_HEAP_SIZE`` option is now deprecated. You should remove or comment out this option in your  ``/etc/sysconfig/elasticsearch`` file:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # ES_HEAP_SIZE - Set it to half your system RAM memory
     ES_HEAP_SIZE=8g
@@ -157,23 +157,23 @@ Follow next steps to upgrade your Elastic Stack cluster to version 5.X:
 
   a) For Logstash:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ /usr/share/logstash/bin/logstash -V
+      # /usr/share/logstash/bin/logstash -V
       logstash 5.2.2
 
   b) For Elasticsearch:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ /usr/share/elasticsearch/bin/elasticsearch -V
+      # /usr/share/elasticsearch/bin/elasticsearch -V
       Version: 5.2.2, Build: f9d9b74/2017-02-24T17:26:45.835Z, JVM: 1.8.0_60
 
   c) For Kibana:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ /usr/share/kibana/bin/kibana -V
+      # /usr/share/kibana/bin/kibana -V
       5.2.
 
 .. note:: Wazuh v2.x uses different indices and templates than Wazuh v1.x For that reason, you will not be able to see the previous alerts using Kibana. If you need to access them, you will have to reindex the previous indices.

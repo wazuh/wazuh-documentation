@@ -29,44 +29,58 @@ You can configure certain API settings in the file ``/var/ossec/api/configuratio
     //In case the API run behind a proxy server, turn to "yes" this feature. Values: yes, no.
     config.BehindProxyServer = "no";
 
-Make sure to restart wazuh-api service after editing the config file using the command below appropriate for your system::
+Make sure to restart wazuh-api service after editing the config file using the command below appropriate for your system:
 
-    systemctl restart wazuh-api
-    service wazuh-api restart
+.. code-block:: console
+
+    # systemctl restart wazuh-api
+    # service wazuh-api restart
 
 
 Basic Authentication
 -------------------------
 
-It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName**::
+It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName**:
 
-    $ cd /var/ossec/api/configuration/auth
-    $ sudo node htpasswd -c user myUserName
+.. code-block:: console
 
-Do not forget to restart the API to apply the changes::
+    # cd /var/ossec/api/configuration/auth
+    # node htpasswd -c user myUserName
 
-    $ systemctl restart wazuh-api
-    $ service wazuh-api restart
+Do not forget to restart the API to apply the changes:
+
+.. code-block:: console
+
+    # systemctl restart wazuh-api
+    # service wazuh-api restart
 
 Manually enable https support
 ---------------------------------
 
-Generate key and certificate request (the Openssl package is required): ::
+Generate key and certificate request (the Openssl package is required):
 
- $ cd /var/ossec/api/configuration/ssl
- $ sudo openssl genrsa -des3 -out server.key 1024
- $ sudo openssl req -new -key server.key -out server.csr
+.. code-block:: console
 
-By default, the key's password must be entered every time you run the server.  If you don't want to enter the password every time, you can remove it by running these commands: ::
+ # cd /var/ossec/api/configuration/ssl
+ # openssl genrsa -des3 -out server.key 1024
+ # openssl req -new -key server.key -out server.csr
 
- $ sudo cp server.key server.key.org
- $ sudo openssl rsa -in server.key.org -out server.key
+By default, the key's password must be entered every time you run the server.  If you don't want to enter the password every time, you can remove it by running these commands:
 
-Next generate your self-signed certificate: ::
+.. code-block:: console
 
- $ sudo openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+ # cp server.key server.key.org
+ # openssl rsa -in server.key.org -out server.key
 
-And remove temporary files: ::
+Next generate your self-signed certificate:
 
- $ sudo rm server.csr
- $ sudo rm server.key.org
+.. code-block:: console
+
+ # openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
+
+And remove temporary files:
+
+.. code-block:: console
+
+ # rm server.csr
+ # rm server.key.org

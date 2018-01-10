@@ -24,12 +24,10 @@ Options
 - `rules_id`_
 - `timeout`_
 - `repeated_offenders`_
+- `ca_store`_
 
 disabled
 ^^^^^^^^
-
-This is a special-case option, in that it occurs alone in its own active-response section for the sole purpose of enabling or disabling the active response facility in Wazuh.
-In the absence of a section like this, active response is by default enabled on Unix-like systems, and disabled on Windows systems.
 
 Setting it to ``yes`` on an agent will disable active-response for that agent only, while setting it in the manager's ``ossec.conf`` file will disable active-response on the manager and all agents.
 
@@ -38,7 +36,7 @@ Setting it to ``yes`` on an agent will disable active-response for that agent on
     This option is available on server, local, and agent installations.
 
 +--------------------+--------------------------------------------------------------+
-| **Default value**  | **no** for Unix-like systems and **yes** for Windows systems |
+| **Default value**  | **no**                                                       |
 +--------------------+--------------------------------------------------------------+
 | **Allowed values** | The options accepted are **yes** and **no**                  |
 +--------------------+--------------------------------------------------------------+
@@ -150,6 +148,17 @@ This is a comma-separated list of increasing timeouts in minutes for repeat offe
 | **Allowed values** | A positive number (minutes) |
 +--------------------+-----------------------------+
 
+ca_store
+^^^^^^^^^
+
+This indicates the path to root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.
+
++--------------------+-----------------------------+
+| **Default value**  | n/a                         |
++--------------------+-----------------------------+
+| **Allowed values** | Path to root CA certificate |
++--------------------+-----------------------------+
+
 Example of configuration
 ------------------------
 
@@ -159,7 +168,7 @@ Example of configuration
       <disabled>no</disabled>
       <command>host-deny</command>
       <location>defined-agent</location>
-      <agent-id>032</agent-id>
+      <agent_id>032</agent_id>
       <level>10</level>
       <rules_group>sshd,|pci_dss_11.4,</rules_group>
       <timeout>1</timeout>

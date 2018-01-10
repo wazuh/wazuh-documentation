@@ -4,7 +4,7 @@
 ossec-monitord
 ==============
 
-The ossec-monitord program monitors agent connectivity and compresses daily log files.
+The ossec-monitord program monitors agent connectivity. In addition, it rotates and compresses internal logs daily, or when they reach a certain configurable size.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config>, as the configuration file.                                                  |
@@ -23,11 +23,15 @@ The ossec-monitord program monitors agent connectivity and compresses daily log 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-h**          | Display the help message.                                                                       |
 +-----------------+-------------------------------------------------------------------------------------------------+
+| **-n**          | Disable agent monitoring.                                                                       |
++-----------------+-------------------------------------------------------------------------------------------------+
 | **-t**          | Test configuration.                                                                             |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-u <user>**   | Run as a user.                                                                                  |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | ossecm                                              |
++-----------------+-------------------------------------------------------------------------------------------------+
+| **-w <sec>**    | Time in seconds to wait before rotating logs and alerts.                                        |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+

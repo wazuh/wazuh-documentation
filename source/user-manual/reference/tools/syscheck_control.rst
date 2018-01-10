@@ -29,3 +29,5 @@ The syscheck_control program provides an interface for managing and viewing the 
 +----------------------+----------------------------------------------------------+
 | **-s**               | Change the output to CSV format.                         |
 +----------------------+----------------------------------------------------------+
+| **-j**               | Change the output to JSON format.                        |
++----------------------+----------------------------------------------------------+

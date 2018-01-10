@@ -20,6 +20,8 @@ There are several options to install a Wazuh agent, depending on the operating s
 +-------------------------------------------------+--------------------------------------------------+
 | :doc:`Solaris installer <wazuh_agent_solaris>`  | Install Wazuh agents on Solaris                  |
 +-------------------------------------------------+--------------------------------------------------+
+| :doc:`HP-UX installer <wazuh_agent_hpux>`       | Install Wazuh agents on HP-UX                    |
++-------------------------------------------------+--------------------------------------------------+
 | :doc:`Sources <wazuh_agent_sources>`            | Install Wazuh agents from source code.           |
 +-------------------------------------------------+--------------------------------------------------+
 
@@ -34,4 +36,5 @@ There are several options to install a Wazuh agent, depending on the operating s
     wazuh_agent_windows
     wazuh_agent_macos
     wazuh_agent_solaris
+    wazuh_agent_hpux
     wazuh_agent_sources

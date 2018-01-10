@@ -6,38 +6,46 @@ Migrating OSSEC agent installed from packages
 1. Backup your current configuration
 ------------------------------------
 
-Stop OSSEC: ::
+Stop OSSEC:
 
-    $ /var/ossec/bin/ossec-control stop
+.. code-block:: console
 
-Check if you have enough space to create a copy of ``/var/ossec``: ::
+    # /var/ossec/bin/ossec-control stop
 
-    $ du -h /var/ossec | tail -n1
-    $ df -h /var
+Check if you have enough space to create a copy of ``/var/ossec``:
 
-Backup ``/var/ossec``: ::
+.. code-block:: console
 
-    $ cp -rp /var/ossec /var/ossec_backup
+    # du -h /var/ossec | tail -n1
+    # df -h /var
+
+Backup ``/var/ossec``:
+
+.. code-block:: console
+
+    # cp -rp /var/ossec /var/ossec_backup
 
 
 2. Remove your current installation
 -----------------------------------
 
 Debian and Ubuntu:
-::
 
-    $ apt-get remove ossec-hids-agent --purge
+.. code-block:: console
+
+    # apt-get remove ossec-hids-agent --purge
 
 CentOS and Red Hat:
-::
 
-    $ yum remove ossec-hids-agent
+.. code-block:: console
+
+    # yum remove ossec-hids-agent
 
 Remove directory:
 
-::
+.. code-block:: console
 
-    $ rm -rf /var/ossec
+    # rm -rf /var/ossec
 
 
 3. Install Wazuh agent
@@ -51,16 +59,20 @@ Follow the next guide in order to install Wazuh agent:
 4. Restore configuration
 ------------------------
 
-Stop OSSEC: ::
+Stop OSSEC:
 
-    $ systemctl stop wazuh-agent
+.. code-block:: console
 
-Restore files: ::
+    # systemctl stop wazuh-agent
 
-    $ cp -p /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
-    $ cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
-    $ cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
-    $ cp -p /var/ossec_backup/queue/rids/* /var/ossec/queue/rids/
+Restore files:
+
+.. code-block:: console
+
+    # cp -p /var/ossec_backup/etc/ossec.conf /var/ossec/etc/ossec.conf.orig
+    # cp -p /var/ossec_backup/etc/local_internal_options.conf /var/ossec/etc/local_internal_options.conf
+    # cp -p /var/ossec_backup/etc/client.keys /var/ossec/etc/
+    # cp -p /var/ossec_backup/queue/rids/* /var/ossec/queue/rids/
 
 
 5. Review ossec.conf
@@ -79,6 +91,7 @@ Do not forget to restore the IP of the manager:
 
 6. Start Wazuh
 --------------
-::
 
-    $ /var/ossec/bin/ossec-control start
+.. code-block:: console
+
+    # /var/ossec/bin/ossec-control start

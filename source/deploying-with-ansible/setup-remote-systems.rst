@@ -23,7 +23,7 @@ You can use the above args as follows:
 
 .. code-block:: bash
 
-  ansible -m setup all -u foo -k -b -K
+  $ ansible -m setup all -u foo -k -b -K
 
 This will set the connection user as ``foo``. Also, it will ask for the connection user password and privileged user password.
 

@@ -10,162 +10,137 @@ For CentOS/RHEL/Fedora platforms, installing Wazuh server components just entail
 Adding the Wazuh repository
 ---------------------------
 
-The first thing you need is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
+The first thing you need is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
 
-To set up the repository, run the command that corresponds to your specific RPM-based Linux distribution:
+To set up the repository, run this command:
 
-  a) For CentOS:
+     .. code-block:: console
 
-    .. code-block:: bash
+         # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+         [wazuh_repo]
+         gpgcheck=1
+         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+         enabled=1
+         name=Wazuh repository
+         baseurl=https://packages.wazuh.com/3.x/yum/
+         protect=1
+         EOF
 
-    	$ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-    	[wazuh_repo]
-    	gpgcheck=1
-    	gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    	enabled=1
-    	name=CentOS-$releasever - Wazuh
-    	baseurl=https://packages.wazuh.com/yum/el/$releasever/$basearch
-    	protect=1
-    	EOF
+For CentOS-5 and RHEL-5:
 
-  b) For RHEL:
+    .. code-block:: console
 
-    .. code-block:: bash
-
-      $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-      [wazuh_repo]
-      gpgcheck=1
-      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-      enabled=1
-      name=RHEL-$releasever - Wazuh
-      baseurl=https://packages.wazuh.com/yum/rhel/$releasever/$basearch
-      protect=1
-      EOF
-
-  c) For Fedora:
-
-    .. code-block:: bash
-
-      $ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-      [wazuh_repo]
-      gpgcheck=1
-      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-      name=Fedora-$releasever - Wazuh
-      enabled=1
-      baseurl=https://packages.wazuh.com/yum/fc/$releasever/$basearch
-      protect=1
-      EOF
-
-  d) For Amazon Linux:
-
-     .. code-block:: bash
-
-    	$ cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-    	[wazuh_repo]
-    	gpgcheck=1
-    	gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    	enabled=1
-    	name=Amazon Linux - Wazuh
-    	baseurl=https://packages.wazuh.com/yum/el/7/$basearch
-    	protect=1
-    	EOF
-
+        # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+        [wazuh_repo]
+        gpgcheck=1
+        gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+        enabled=1
+        name=Wazuh repository
+        baseurl=http://packages.wazuh.com/3.x/yum/5/
+        protect=1
+        EOF
 
 Installing the Wazuh Manager
 ------------------------
 
 The next step is to install the Wazuh Manager on your system:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-	 $ yum install wazuh-manager
+	 # yum install wazuh-manager
 
 Once the process is completed, you can check the service status with:
 
     a) For Systemd:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ systemctl status wazuh-manager
+      # systemctl status wazuh-manager
 
     b) For SysV Init:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ service wazuh-manager status
+      # service wazuh-manager status
 
 Installing the Wazuh API
 --------------------
 
 1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-	 $ curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+	 # curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
   and then, install nodejs:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-	 $ yum install nodejs
+	 # yum install nodejs
 
-2. Install the Wazuh API. It will update NodeJS if it is required:
-
-  .. code-block:: bash
-
-	 $ yum install wazuh-api
-
-3. Once the process is completed, you can check the service status with:
-
-  a) For Systemd:
-
-  .. code-block:: bash
-
-	 $ systemctl status wazuh-api
-
-  b) For SysV Init:
-
-  .. code-block:: bash
-
-	 $ service wazuh-api status
-
-4. Python >= 2.7 is required in order to run the Wazuh API. It is installed by default or included in the official repositories in most Linux distributions.
+2. Python >= 2.7 is required in order to run the Wazuh API. It is installed by default or included in the official repositories in most Linux distributions.
 
    It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
 
    .. code-block:: javascript
 
-  	config.python = [
-  	    // Default installation
-  	    {
-  	        bin: "python",
-  	        lib: ""
-  	    },
-  	    // Package 'python27' for CentOS 6
-  	    {
-  	        bin: "/opt/rh/python27/root/usr/bin/python",
-  	        lib: "/opt/rh/python27/root/usr/lib64"
-  	    }
-  	];
+    config.python = [
+        // Default installation
+        {
+            bin: "python",
+            lib: ""
+        },
+        // Package 'python27' for CentOS 6
+        {
+            bin: "/opt/rh/python27/root/usr/bin/python",
+            lib: "/opt/rh/python27/root/usr/lib64"
+        }
+    ];
 
   CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel, thus maintaining the older version:
 
   a) For CentOS 6:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-  	$ yum install -y centos-release-scl
-  	$ yum install -y python27
+    # yum install -y centos-release-scl
+    # yum install -y python27
 
   b) For RHEL 6:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-  	$ yum install python27
+    # yum install python27
 
-  	# You may need to first enable a repository in order to get python27, with a command like this:
-  	#   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
-  	#   yum-config-manager --enable rhel-server-rhscl-6-rpms
+    # You may need to first enable a repository in order to get python27, with a command like this:
+    #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
+    #   yum-config-manager --enable rhel-server-rhscl-6-rpms
+
+.. note::
+
+  Follow this step if your python version is lower than 2.7. You can check this running ``python --version``.
+
+3. Install the Wazuh API. It will update NodeJS if it is required:
+
+  .. code-block:: console
+
+	 # yum install wazuh-api
+
+4. Once the process is completed, you can check the service status with:
+
+  a) For Systemd:
+
+  .. code-block:: console
+
+	 # systemctl status wazuh-api
+
+  b) For SysV Init:
+
+  .. code-block:: console
+
+	 # service wazuh-api status
+
+
 
 .. _wazuh_server_rpm_filebeat:
 
@@ -181,14 +156,14 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
 1. Install the GPG keys from Elastic and then the Elastic repository:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+    # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
-    $ cat > /etc/yum.repos.d/elastic.repo << EOF
-    [elastic-5.x]
-    name=Elastic repository for 5.x packages
-    baseurl=https://artifacts.elastic.co/packages/5.x/yum
+    # cat > /etc/yum.repos.d/elastic.repo << EOF
+    [elasticsearch-6.x]
+    name=Elasticsearch repository for 6.x packages
+    baseurl=https://artifacts.elastic.co/packages/6.x/yum
     gpgcheck=1
     gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
     enabled=1
@@ -198,15 +173,15 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
 2. Install Filebeat:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-	 $ yum install filebeat
+	 # yum install filebeat-6.1.1
 
 3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-	 $ curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/2.1/extensions/filebeat/filebeat.yml
+	 # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/filebeat/filebeat.yml
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP``  with the IP address or the hostname of the Elastic Stack server. For example:
 
@@ -220,18 +195,18 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   a) For Systemd:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ systemctl daemon-reload
-    $ systemctl enable filebeat.service
-    $ systemctl start filebeat.service
+    # systemctl daemon-reload
+    # systemctl enable filebeat.service
+    # systemctl start filebeat.service
 
   b) For SysV Init:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-  	$ chkconfig --add filebeat
-  	$ service filebeat start
+  	# chkconfig --add filebeat
+  	# service filebeat start
 
 Next steps
 ----------

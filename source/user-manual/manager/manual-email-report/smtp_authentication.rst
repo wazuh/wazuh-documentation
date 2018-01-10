@@ -8,14 +8,14 @@ In case that your SMTP server has authentication (like Gmail), we need to config
 #. Install the needed packages:
 
     Ubuntu
-    ::
+    .. code-block:: console
 
-      apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
+      # apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 
     CentOS
-    ::
+    .. code-block:: console
 
-      yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
+      # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
 
 
 #. Set Postfix config file ``/etc/postfix/main.cf``. Add this lines to the end of the file:
@@ -42,30 +42,30 @@ In case that your SMTP server has authentication (like Gmail), we need to config
 
 #. Configure email address and password:
 
-    ::
+    .. code-block:: console
 
-      echo [smtp.gmail.com]:587 USERNAME@gmail.com:PASSWORD > /etc/postfix/sasl_passwd
-      postmap /etc/postfix/sasl_passwd
-      chmod 400 /etc/postfix/sasl_passwd
+      # echo [smtp.gmail.com]:587 USERNAME@gmail.com:PASSWORD > /etc/postfix/sasl_passwd
+      # postmap /etc/postfix/sasl_passwd
+      # chmod 400 /etc/postfix/sasl_passwd
 
 #. Secure DB password
 
-    ::
+    .. code-block:: console
 
-      chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
-      chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+      # chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
+      # chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
 
 #. Reload Postfix
 
-    ::
+    .. code-block:: console
 
-      systemctl reload postfix
+      # systemctl reload postfix
 
 #. Test you configuration with:
 
-    ::
+    .. code-block:: console
 
-      echo "Test mail from postfix" | mail -s "Test Postfix" you@example.com
+      # echo "Test mail from postfix" | mail -s "Test Postfix" you@example.com
 
     You should receive an email on ``you@example.com``
 

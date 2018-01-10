@@ -1,5 +1,6 @@
 {# TEMPLATE VAR SETTINGS #}
 {%- set url_root = pathto('', 1) %}
+{% set script_files = script_files + ["_static/my-script.js"] %}
 {% set css_files = css_files + ["_static/my-styles.css"] %}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
 {%- if not embedded and docstitle %}
@@ -122,7 +123,7 @@
             {% endif %}
             {% if nav_version %}
               <div class="version">
-                 {{ release|e }}
+                 <select id="select-version"></select>
               </div>
             {% endif %}
           {% endif %}

@@ -31,7 +31,7 @@ Create a user with permission to access S3
 ------------------------------------------
 
 Sign in to the ``AWS Management Console`` and open the `IAM console <https://console.aws.amazon.com/iam/>`_.
-In the navigation panel, choose ``Users`` and then choose ``Create New Users``.
+In the navigation panel, choose ``Users`` and then choose ``Add users``.
 Type the username for the user you would like to create.
 
 .. note:: Usernames can only use a combination of alphanumeric characters and these characters: plus (+), equal (=), comma (,), period (.), at (@), and hyphen (-). Names must be unique within an account.
@@ -42,8 +42,7 @@ The user will need access to the API, which requires an access key. To generate 
 
 Give the user access to this specific S3 bucket (based on `Writing IAM Policies: How to Grant Access to an Amazon S3 Bucket <http://blogs.aws.amazon.com/security/post/Tx3VRSWZ6B3SHAV/Writing-IAM-Policies-How-to-grant-access-to-an-Amazon-S3-bucket>`_)
 
-Under the IAM console, select ``Users`` and go to the ``Permissions`` tab, in the ``Inline Policies`` section, push the ``Create User Policy`` button. Click the ``Custom Policy`` option and push the ``Select`` button.
-
+Under the IAM console, select ``Users`` and go to the ``Permissions`` tab. Then click the ``Add inline policy`` button. Then click the ``Custom Policy`` button.
 
 On the next page enter a ``Policy Name`` e.g. ossec-cloudtrail-s3-access, and for ``Policy Document`` use the example provided below:
 
@@ -85,13 +84,17 @@ Check if Python is already installed: ::
 
 If Python 2.7 or later is not installed, then install it with your distribution's package manager as shown below:
 
-* On Debian derivatives such as Ubuntu, use APT: ::
+* On Debian derivatives such as Ubuntu, use APT:
 
-  $ sudo apt-get install python2.7
+.. code-block:: console
 
-* On Red Hat and derivatives, use yum: ::
+  # apt-get install python2.7
 
-  $ sudo yum install python27
+* On Red Hat and derivatives, use yum:
+
+.. code-block:: console
+
+  # yum install python27
 
 Open a command prompt or shell and run the following command to verify that Python has been installed correctly: ::
 
@@ -104,13 +107,17 @@ To install Pip on Linux:
 
   $ curl -O https://bootstrap.pypa.io/get-pip.py
 
-* Run the script with Python: ::
+* Run the script with Python:
 
-  $ sudo python get-pip.py
+.. code-block:: console
 
-Now that Python and pip are installed, use pip to install boto: ::
+  # python get-pip.py
 
-  $ sudo pip install boto
+Now that Python and pip are installed, use pip to install boto:
+
+.. code-block:: console
+
+  # pip install boto
 
 Configure user credentials with Python Boto
 -------------------------------------------
@@ -128,7 +135,7 @@ We use a python script to download JSON files from the S3 bucket and convert the
 
 Run the following command to use this script: ::
 
-  $ ./getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log
+  # ./getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log
 
 Where ``s3bucketname`` is the name of the bucket created when CloudTrail was activated (see the first step in this section: "Turn on CloudTrail") and ``/path-with-write-permission/amazon.log`` is the path where the flat log file is stored once has been converted by the script.
 
@@ -138,17 +145,19 @@ Where ``s3bucketname`` is the name of the bucket created when CloudTrail was act
 
 if you want to maintain the logs files in the bucket, you need to use the script without ``-D`` parameter like the following example: ::
 
-  $ ./getawslog.py -b s3bucketname -d -j -l /path-with-write-permission/amazon.log -s /path-with-write-permission/awslogstat.db
+  # ./getawslog.py -b s3bucketname -d -j -l /path-with-write-permission/amazon.log -s /path-with-write-permission/awslogstat.db
 
-Using ``-s /path-with-write-permission/awslogstat.db`` will track downloaded log files avoiding processing them again, without it the script will download previously processed log files adding its content again to ``/path-with-write-permission/amazon.log``. Also you need to install ``sqlite`` module for python: ::
+Using ``-s /path-with-write-permission/awslogstat.db`` will track downloaded log files avoiding processing them again, without it the script will download previously processed log files adding its content again to ``/path-with-write-permission/amazon.log``. Also you need to install ``sqlite`` module for python:
 
-  $ sudo pip install pysqlite
+.. code-block:: console
+
+  # pip install pysqlite
 
 CloudTrail delivers log files to your S3 bucket approximately every 7 minutes. Create a cron job to periodically run the script.  Note that running it more frequently than once every 7 minutes would be useless. CloudTrail does not deliver log files if no API calls are made on your account.
 
 Run ``crontab -e`` and, at the end of the file, add the following line ::
 
-  */5 *   * * * /usr/bin/flock -n /tmp/cron.lock -c python path_to_script/getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log
+  */5 *   * * * root /usr/bin/flock -n /tmp/cron.lock -c "python path_to_script/getawslog.py -b s3bucketname -d -j -D -l /path-with-write-permission/amazon.log"
 
 
 .. note:: This script downloads and deletes the files from your S3 Bucket. However, you can always review the log messages generated during the last 7 days within the CloudTrail console.
@@ -160,19 +169,26 @@ Now the Wazuh manager needs to be configured to be able to collect the log messa
 
   <ossec_config>
       <localfile>
-        <log_format>syslog</log_format>
+        <log_format>json</log_format>
         <location>/path-with-write-permission/amazon.log</location>
+        <label key="aws.integration">cloudtrail</label>
       </localfile>
   </ossec_config>
+
+Since Wazuh 3.0.0 we can specify JSON log format for reading the JSON log files directly, and take advantage of this feature for adding labels like is shown in the above example.
 
 .. note:: The file ``/path-with-write-permission/amazon.log`` must be the same one you setup in the above step: `Run the python script to download the JSON data`_.
 
 Finally, restart the Wazuh manager to apply changes:
 
-a. For Systemd: ::
+a. For Systemd:
 
-    systemctl restart wazuh-manager
+.. code-block:: console
 
-b. For SysV Init: ::
+    # systemctl restart wazuh-manager
 
-    service wazuh-manager restart
+b. For SysV Init:
+
+.. code-block:: console
+
+    # service wazuh-manager restart

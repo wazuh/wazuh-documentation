@@ -6,10 +6,10 @@ auth
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+    .. code-block:: xml
 
-		<auth>
-		</auth>
+        <auth>
+        </auth>
 
 
 This section has options for the registering service.
@@ -31,6 +31,8 @@ Options
 - `ssl_manager_cert`_
 - `ssl_manager_key`_
 - `ssl_auto_negotiate`_
+- `ciphers`_
+- `limit_maxagents`_
 
 disabled
 ^^^^^^^^
@@ -185,6 +187,33 @@ By default only TLS v1.2 is allowed. When set to ``yes`` the system will negotia
 
 In older systems, where the **manager does not support TLS v1.2**, this option will be enabled automatically.
 
+ciphers
+^^^^^^^
+
+Set the list of ciphers for the network communication using SSL.
+
++--------------------+----------------------------------------------------+
+| **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
++--------------------+----------------------------------------------------+
+
+The format of this parameter is described in `SSL ciphers <https://www.openssl.org/docs/man1.1.0/apps/ciphers.html>`_.
+
+.. versionadded:: 3.0.0
+
+limit_maxagents
+^^^^^^^^^^^^^^^^^^^
+
+When disabled, the maximum limit of agents that can be added is ignored.
+
++--------------------+---------------------+
+| **Default value**  | yes                 |
++--------------------+---------------------+
+| **Allowed values** | - yes               |
+|                    | - no                |
++--------------------+---------------------+
+
+.. versionadded:: 3.0.0
+
 Default configuration
 ---------------------
 
@@ -198,6 +227,8 @@ Default configuration
       <force_time>0</force_time>
       <purge>no</purge>
       <use_password>no</use_password>
+      <limit_maxagents>yes</limit_maxagents>
+      <ciphers>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ciphers>
       <!-- <ssl_agent_ca></ssl_agent_ca> -->
       <ssl_verify_host>no</ssl_verify_host>
       <ssl_manager_cert>/var/ossec/etc/sslmanager.cert</ssl_manager_cert>

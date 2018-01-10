@@ -6,7 +6,7 @@ Install Ansible
 OpenSSH Compatibility
 ------------------------------
 
-Ansible version 1.3 and later uses native OpenSSH for remote communication and, also, uses ControlPersist, a feature available for OpenSSH v5.6. This will increase performance by speeding up SSH Session Creation, which is very useful useful for Ansible. Otherwise, you will need to consider the setup `Accelerated Mode <http://docs.ansible.com/ansible/playbooks_acceleration.html>`_ on Ansible.
+Ansible version 1.3 and later uses native OpenSSH for remote communication and, also, uses ControlPersist, a feature available for OpenSSH v5.6. This will increase performance by speeding up SSH Session Creation, which is very useful for Ansible. Otherwise, you will need to consider to setup `Accelerated Mode <http://docs.ansible.com/ansible/playbooks_acceleration.html>`_ on Ansible.
 
 Windows hosts
 ------------------
@@ -23,15 +23,15 @@ Install using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS
 
 1. Install EPEL repository:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ sudo yum -y install epel-release
+    # yum -y install epel-release
 
 2. Install ansible:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ sudo yum install ansible
+    # yum install ansible
 
 Installation on Debian/Ubuntu
 ------------------------------
@@ -40,30 +40,30 @@ For Debian and Ubuntu we will use the Ansible PPA repository. Follow the next st
 
 1. Install required dependencies:
 
-.. code-block:: bash
+.. code-block:: console
 
-  	$ sudo apt-get update
-  	$ sudo apt-get install lsb-release software-properties-common
+  	# apt-get update
+  	# apt-get install lsb-release software-properties-common
 
 2. Setup ansible repository:
 
   a. For Ubuntu:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-      sudo apt-add-repository -y ppa:ansible/ansible
-      sudo apt-get update
+      # apt-add-repository -y ppa:ansible/ansible
+      # apt-get update
 
   b. For Debian:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-      echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
-      sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-      sudo apt-get update
+      # echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" | sudo tee -a /etc/apt/sources.list.d/ansible-debian.list
+      apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+      apt-get update
 
 3. Finally, install ansible:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ sudo apt-get install ansible
+    # apt-get install ansible

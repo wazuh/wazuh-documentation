@@ -12,6 +12,10 @@ The ``ossec-makelists`` utility to compile cdb databases.  This will scan :ref:`
 +                 +-------------------------------------+-----------------------------------------------+
 |                 | Default Value                       | /var/ossec/etc/ossec.conf                     |
 +-----------------+-------------------------------------+-----------------------------------------------+
+| **-D <dir>**    | Directory to chroot into.                                                           |
++                 +-------------------------------------+-----------------------------------------------+
+|                 | Default value                       | /var/ossec                                    |
++-----------------+-------------------------------------+-----------------------------------------------+
 | **-d**          | Run in debug mode, may be repeated to increase the verbosity of the debug messages. |
 +-----------------+-------------------------------------------------------------------------------------+
 | **-F**          | Force the rebuild of all configured databases.                                      |

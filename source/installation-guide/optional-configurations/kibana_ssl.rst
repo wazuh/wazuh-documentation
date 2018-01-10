@@ -21,9 +21,9 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
 
   a. For CentOS:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ cat > /etc/yum.repos.d/nginx.repo <<\EOF
+      # cat > /etc/yum.repos.d/nginx.repo <<\EOF
       [nginx]
       name=nginx repo
       baseurl=http://nginx.org/packages/centos/$releasever/$basearch/
@@ -31,13 +31,13 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
       enabled=1
       EOF
 
-      $ yum install nginx
+      # yum install nginx
 
   a. For RHEL:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ cat > /etc/yum.repos.d/nginx.repo <<\EOF
+      # cat > /etc/yum.repos.d/nginx.repo <<\EOF
       [nginx]
       name=nginx repo
       baseurl=http://nginx.org/packages/rhel/$releasever/$basearch/
@@ -45,7 +45,7 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
       enabled=1
       EOF
 
-      $ yum install nginx
+      # yum install nginx
 
   .. note:: For more information, see `NGINX: Official Red Hat/CentOS packages <https://www.nginx.com/resources/wiki/start/topics/tutorials/install/#official-red-hat-centos-packages>`_.
 
@@ -53,24 +53,24 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
 
   a. If you have a valid **signed certificate**, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-      $ cp <ssl_pem> /etc/pki/tls/certs/kibana-access.pem
-      $ cp <ssl_key> /etc/pki/tls/private/kibana-access.key
+      # mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
+      # cp <ssl_pem> /etc/pki/tls/certs/kibana-access.pem
+      # cp <ssl_key> /etc/pki/tls/private/kibana-access.key
 
   b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-      $ openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem
+      # mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
+      # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem
 
 3. Configure NGINX as an HTTPS reverse proxy to Kibana:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ cat > /etc/nginx/conf.d/default.conf <<\EOF
+    # cat > /etc/nginx/conf.d/default.conf <<\EOF
     server {
         listen 80;
         listen [::]:80;
@@ -99,9 +99,9 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
 
 4. Allow NGINX to connect to Kibana port if you're using SELinux:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ semanage port -a -t http_port_t -p tcp 5601
+    # semanage port -a -t http_port_t -p tcp 5601
 
   .. note::
 
@@ -113,29 +113,29 @@ Enable authentication by htpasswd
 
 1. Install the package ``httpd-tools``:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ yum install httpd-tools
+    # yum install httpd-tools
 
 2. Generate the ``.htpasswd`` file. Replace ``wazuh`` with your chosen username (it must match with `auth_basic_user_file`):
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ htpasswd -c /etc/nginx/conf.d/kibana.htpasswd wazuh
+    # htpasswd -c /etc/nginx/conf.d/kibana.htpasswd wazuh
 
 3. Restart NGINX:
 
   a. For Systemd:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ systemctl restart nginx
+      # systemctl restart nginx
 
   b. For SysV Init:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ service nginx restart
+      # service nginx restart
 
 Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.
 
@@ -145,32 +145,32 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
 
 1. Install NGINX:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ apt-get install nginx
+    # apt-get install nginx
 
 2. Install your SSL certificate and private key:
 
   a. If you have a valid signed certificate, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ mkdir -p /etc/ssl/certs /etc/ssl/private
-      $ cp <ssl_pem> /etc/ssl/certs/kibana-access.pem
-      $ cp <ssl_key> /etc/ssl/private/kibana-access.key
+      # mkdir -p /etc/ssl/certs /etc/ssl/private
+      # cp <ssl_pem> /etc/ssl/certs/kibana-access.pem
+      # cp <ssl_key> /etc/ssl/private/kibana-access.key
 
   b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ mkdir -p /etc/ssl/certs /etc/ssl/private
-      $ openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem
+      # mkdir -p /etc/ssl/certs /etc/ssl/private
+      # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem
 
 3. Configure NGINX as an HTTPS reverse proxy to Kibana:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ cat > /etc/nginx/sites-available/default <<\EOF
+    # cat > /etc/nginx/sites-available/default <<\EOF
     server {
         listen 80;
         listen [::]:80;
@@ -202,28 +202,28 @@ Enable authentication by htpasswd
 
 1. Install the package ``apache2-utils``:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ apt-get install apache2-utils
+    # apt-get install apache2-utils
 
 2. Generate the ``.htpasswd`` file. Replace ``<user>`` with your chosen username:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ htpasswd -c /etc/nginx/conf.d/kibana.htpasswd <user>
+    # htpasswd -c /etc/nginx/conf.d/kibana.htpasswd <user>
 
 3. Restart NGINX:
 
   a. For Systemd:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      $ systemctl restart nginx
+      # systemctl restart nginx
 
   b. For SysV Init:
-  
-    .. code-block:: bash
 
-      $ service nginx restart
+    .. code-block:: console
+
+      # service nginx restart
 
 Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.

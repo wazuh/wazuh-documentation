@@ -15,7 +15,7 @@ Usage
 
 .. code-block:: none
 
-    manage_agents -[Vhlj] [-a <ip> -n <name>] [-F sec] [-e id] [-r id] [-i id] [-f file]
+    manage_agents -[VhljL] [-a <ip> -n <name>] [-F sec] [-e id] [-r id] [-i id] [-f file]
 
 Options
 -------
@@ -28,6 +28,10 @@ Options
 +---------------+-----------------------------------------------------------------------+
 | **-l**        | List available agents.                                                |
 +---------------+-----------------------------------------------------------------------+
+| **-L**        | Disables the agents registration limit.                               |
+|               +-----------------------------+-----------------------------------------+
+|               | **Supported installations** | Manager                                 |
++---------------+-----------------------------+-----------------------------------------+
 | **-a <ip>**   | Add new agent.                                                        |
 |               +-----------------------------+-----------------------------------------+
 |               | **Supported installations** | Manager                                 |

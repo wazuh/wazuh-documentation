@@ -36,6 +36,8 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`client_buffer <client_buffer>`                          | agent                  |
 +---------------------------------------------------------------+------------------------+
+| :doc:`cluster <cluster>`                                      | manager                |
++---------------------------------------------------------------+------------------------+
 | :doc:`command <commands>`                                     | manager                |
 +---------------------------------------------------------------+------------------------+
 | :doc:`database_output <database-output>`                      | manager                |
@@ -66,6 +68,10 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`wodle name="open-scap" <wodle-openscap>`                | manager, agent         |
 +---------------------------------------------------------------+------------------------+
+| :doc:`wodle name="command" <wodle-command>`                   | manager, agent         |
++---------------------------------------------------------------+------------------------+
+| :doc:`wodle name="cis-cat" <wodle-ciscat>`                    | manager, agent         |
++---------------------------------------------------------------+------------------------+
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag.
 
@@ -81,6 +87,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    auth
    client
    client_buffer
+   cluster
    commands
    database-output
    email_alerts
@@ -96,4 +103,6 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    syscheck
    syslog-output
    wodle-openscap
+   wodle-command
+   wodle-ciscat
    verifying-configuration

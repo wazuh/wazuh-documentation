@@ -1,10 +1,15 @@
 .. _api_reference:
 
+
+.. Do not modify this file manually. It is generated automatically.
+
 Reference
 ======================
 This API reference is organized by resources:
 
 * `Agents`_
+* `Cache`_
+* `Cluster`_
 * `Decoders`_
 * `Manager`_
 * `Rootcheck`_
@@ -21,17 +26,48 @@ Request List
 `Agents`_
 	* DELETE /agents  (`Delete a list of agents`_)
 	* DELETE /agents/:agent_id  (`Delete an agent`_)
+	* DELETE /agents/:agent_id/group  (`Unset the agent group`_)
+	* DELETE /agents/groups  (`Delete a list of groups`_)
+	* DELETE /agents/groups/:group_id  (`Remove group`_)
 	* GET /agents  (`Get all agents`_)
 	* GET /agents/:agent_id  (`Get an agent`_)
 	* GET /agents/:agent_id/key  (`Get agent key`_)
+	* GET /agents/:agent_id/upgrade_result  (`Get upgrade result from agent`_)
+	* GET /agents/groups  (`Get groups`_)
+	* GET /agents/groups/:group_id  (`Get agents in a group`_)
+	* GET /agents/groups/:group_id/configuration  (`Get group configuration`_)
+	* GET /agents/groups/:group_id/files  (`Get group files`_)
+	* GET /agents/groups/:group_id/files/:filename  (`Get a file in group`_)
+	* GET /agents/name/:agent_name  (`Get an agent by its name`_)
+	* GET /agents/outdated  (`Get outdated agents`_)
 	* GET /agents/summary  (`Get agents summary`_)
 	* GET /agents/summary/os  (`Get OS summary`_)
+	* GET /purgeable/:timeframe  (`Get list of purgeable agents`_)
 	* POST /agents  (`Add agent`_)
 	* POST /agents/insert  (`Insert agent`_)
+	* POST /agents/purge  (`Purge old agents from manager`_)
 	* POST /agents/restart  (`Restart a list of agents`_)
+	* PUT /agents/:agent_id/group/:group_id  (`Set agent group`_)
 	* PUT /agents/:agent_id/restart  (`Restart an agent`_)
+	* PUT /agents/:agent_id/upgrade  (`Upgrade agent using online repository`_)
+	* PUT /agents/:agent_id/upgrade_custom  (`Upgrade agent using custom file`_)
 	* PUT /agents/:agent_name  (`Add agent (quick method)`_)
+	* PUT /agents/groups/:group_id  (`Create a group`_)
 	* PUT /agents/restart  (`Restart all agents`_)
+
+`Cache`_
+	* DELETE /cache  (`Clear group cache`_)
+	* DELETE /cache  (`Delete cache index`_)
+	* GET /cache  (`Get cache index`_)
+	* GET /cache/config  (`Return cache configuration`_)
+
+`Cluster`_
+	* GET /cluster/agents  (`Get info about agents in cluster`_)
+	* GET /cluster/config  (`Get the cluster configuration`_)
+	* GET /cluster/files  (`Get info about files in cluster`_)
+	* GET /cluster/node  (`Get node info`_)
+	* GET /cluster/nodes  (`Get nodes info`_)
+	* GET /cluster/status  (`Get info about cluster status`_)
 
 `Decoders`_
 	* GET /decoders  (`Get all decoders`_)
@@ -117,7 +153,10 @@ Add a new agent.
 
 	{
 	   "error": 0,
-	   "data": "005"
+	   "data": {
+	      "id": "006",
+	      "key": "MDA2IE5ld0hvc3QgMTAuMC4wLjkgNGI3NGZiZTkzNjc5OWZmZDFjN2NiMmYyMGYzYmYyMTcyMGY3YmQ2NWVlM2NjOWRiYWNlNGRmNGM1MTdkNTY1Ng=="
+	   }
 	}
 
 
@@ -149,7 +188,10 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 
 	{
 	   "error": 0,
-	   "data": "006"
+	   "data": {
+	      "id": "007",
+	      "key": "MDA3IG15TmV3QWdlbnQgYW55IDg1YzllNGFkNDYxYTI5NWI0ZjM4NjY2NWQxNTE0YjU2YTEzOWY2OTNkZWUzMGU4OTRiZjQ1MmY0YjhlOTBkYzc="
+	   }
 	}
 
 
@@ -195,7 +237,10 @@ Insert an agent with an existing id and key.
 
 	{
 	   "error": 0,
-	   "data": "123"
+	   "data": {
+	      "id": "123",
+	      "key": "1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64"
+	   }
 	}
 
 
@@ -220,11 +265,13 @@ Removes a list of agents. You must restart OSSEC after removing an agent.
 +====================+===============+========================================================================================================================================================================================================+
 | ``ids``            | String[]      | Array of agent ID's.                                                                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``purge``          | Boolean       | Delete agent definitely from the key store.                                                                                                                                                            |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://127.0.0.1:55000/agents?pretty"
+	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["003","005"]}' "https://127.0.0.1:55000/agents?pretty"
 
 **Example Response:**
 ::
@@ -232,14 +279,59 @@ Removes a list of agents. You must restart OSSEC after removing an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "msg": "All selected agents were removed"
+	      "msg": "All selected agents were removed",
+	      "affected_agents": [
+	         "003",
+	         "005"
+	      ]
+	   }
+	}
+
+
+Delete a list of groups
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removes a list of groups.
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents/groups
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``ids``            | String[]      | Array of group ID's.                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["webserver","database"]}' "https://127.0.0.1:55000/agents/groups?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "msg": "All selected groups were removed",
+	      "ids": [
+	         "webserver",
+	         "database"
+	      ],
+	      "affected_agents": [
+	         "001"
+	      ]
 	   }
 	}
 
 
 Delete an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Removes an agent. You must restart OSSEC after removing an agent.
+Removes an agent.
 
 **Request**:
 
@@ -254,11 +346,13 @@ Removes an agent. You must restart OSSEC after removing an agent.
 +====================+===============+========================================================================================================================================================================================================+
 | ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``purge``          | String        | Delete agent definitely from the key store.                                                                                                                                                            |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/002?pretty"
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/001?pretty"
 
 **Example Response:**
 ::
@@ -266,11 +360,480 @@ Removes an agent. You must restart OSSEC after removing an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "msg": "Some agents were not removed",
-	      "ids": [
-	         "002"
+	      "msg": "All selected agents were removed",
+	      "affected_agents": [
+	         "001"
 	      ]
 	   }
+	}
+
+
+
+Groups
+++++++++++++++++++++++++++++++++++++++++
+
+Create a group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Creates a new group.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/groups/:group_id
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/groups/pciserver?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Group 'pciserver' created."
+	}
+
+
+Get a file in group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the specified file belonging to the group parsed to JSON.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/groups/:group_id/files/:filename
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file_name``      | String        | Filename                                                                                                                                                                                               |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| type               | String        | Type of file.                                                                                                                                                                                          |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - conf                                                                                                                                                                                                 |
+|                    |               | - rootkit_files                                                                                                                                                                                        |
+|                    |               | - rootkit_trojans                                                                                                                                                                                      |
+|                    |               | - rcl                                                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/webserver/files/cis_debian_linux_rcl.txt?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "controls": [
+	            {
+	                "...": "..."
+	            },
+	            {
+	                "condition": "all required",
+	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1",
+	                "reference": "CIS_Debian_Benchmark_v1.0pdf",
+	                "checks": [
+	                    "f:/etc/debian_version;"
+	                ]
+	            }
+	        ]
+	    },
+	    "error": 0
+	}
+
+Get agents in a group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the list of agent in a group.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/groups/:group_id
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/dmz?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2,
+	      "items": [
+	         {
+	            "ip": "10.0.0.12",
+	            "id": "002",
+	            "name": "dmz001"
+	         },
+	         {
+	            "ip": "10.0.0.14",
+	            "id": "004",
+	            "name": "dmz002"
+	         }
+	      ]
+	   }
+	}
+
+
+Get group configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the group configuration (agent.conf).
+
+**Request**:
+
+``GET`` ::
+
+	/agents/groups/:group_id/configuration
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/dmz/configuration?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 1,
+	      "items": [
+	         {
+	            "config": {},
+	            "filters": {}
+	         }
+	      ]
+	   }
+	}
+
+
+Get group files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the files belonging to the group.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/groups/:group_id/files
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/default/files?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 17,
+	      "items": [
+	         {
+	            "hash": "ab73af41699f13fdd81903b5f23d8d00",
+	            "filename": "agent.conf"
+	         },
+	         {
+	            "hash": "76d8be9b97d8eae4c239e530ee7e71c8",
+	            "filename": "ar.conf"
+	         },
+	         {
+	            "hash": "9beed128b4305943eead1a66a86d27d5",
+	            "filename": "cis_debian_linux_rcl.txt"
+	         },
+	         {
+	            "hash": "e03345360941dbff248f63765971f87e",
+	            "filename": "cis_rhel5_linux_rcl.txt"
+	         },
+	         {
+	            "hash": "d53e584559b759cb6ec3956f23dee46f",
+	            "filename": "cis_rhel6_linux_rcl.txt"
+	         },
+	         {
+	            "hash": "bc742a625c5f8d60ae67489811e307ae",
+	            "filename": "cis_rhel7_linux_rcl.txt"
+	         },
+	         {
+	            "hash": "24e83427d2678aada50fa401b921a0cd",
+	            "filename": "cis_rhel_linux_rcl.txt"
+	         },
+	         {
+	            "hash": "16cfc690e7c5fda8d5be45b7c3b6d257",
+	            "filename": "cis_sles11_linux_rcl.txt"
+	         },
+	         {
+	            "hash": "533ec3f8eda8e52edb181e3f6bd44d52",
+	            "filename": "cis_sles12_linux_rcl.txt"
+	         },
+	         {
+	            "hash": "fcd103e698e31b7683fc035fa34c7776",
+	            "filename": "merged.mg"
+	         },
+	         {
+	            "hash": "a403c34392032ace267fbb163fc7cfad",
+	            "filename": "rootkit_files.txt"
+	         },
+	         {
+	            "hash": "b5d427623664d76140acbcb91f42d586",
+	            "filename": "rootkit_trojans.txt"
+	         },
+	         {
+	            "hash": "6cca8467c592a23fcf62cd5f33608fc3",
+	            "filename": "system_audit_rcl.txt"
+	         },
+	         {
+	            "hash": "e778eb44e4e8116a1e4c017b9b23eea2",
+	            "filename": "system_audit_ssh.txt"
+	         },
+	         {
+	            "hash": "0e1f8f16e217a70b9b80047646823587",
+	            "filename": "win_applications_rcl.txt"
+	         },
+	         {
+	            "hash": "4c2207e003d08db69822754271f9cb60",
+	            "filename": "win_audit_rcl.txt"
+	         },
+	         {
+	            "hash": "6fd9fa5dc1367e89cc4b30fe4cd0030e",
+	            "filename": "win_malware_rcl.txt"
+	         }
+	      ]
+	   }
+	}
+
+
+Get groups
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the list of existing agent groups.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/groups
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 3,
+	      "items": [
+	         {
+	            "count": 0,
+	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "merged_sum": "fcd103e698e31b7683fc035fa34c7776",
+	            "name": "default"
+	         },
+	         {
+	            "count": 2,
+	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "merged_sum": "90e6ed87db2d1cb00fd6d75d84953e4d",
+	            "name": "dmz"
+	         },
+	         {
+	            "count": 0,
+	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "merged_sum": "961ebdfd2ae81e77dd20dae66cd59acf",
+	            "name": "pciserver"
+	         }
+	      ]
+	   }
+	}
+
+
+Remove group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removes the group. Agents will have 'default' group.
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents/groups/:group_id
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/groups/dmz?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "msg": "All selected groups were removed",
+	      "ids": [
+	         "dmz"
+	      ],
+	      "affected_agents": [
+	         "002",
+	         "004"
+	      ]
+	   }
+	}
+
+
+Set agent group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Sets the specified group to the agent.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/:agent_id/group/:group_id
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/004/group/webserver?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Group 'webserver' set to agent '004'."
+	}
+
+
+Unset the agent group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Unsets the group of the agent. The group will be 'default'.
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents/:agent_id/group
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Group unset for agent '004'."
 	}
 
 
@@ -313,11 +876,9 @@ Returns a summary of OS.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 3,
+	      "totalItems": 1,
 	      "items": [
-	         "debian",
-	         "ubuntu",
-	         "windows"
+	         "centos"
 	      ]
 	   }
 	}
@@ -344,8 +905,8 @@ Returns a summary of the available agents.
 	{
 	   "error": 0,
 	   "data": {
-	      "Active": 3,
-	      "Never connected": 3,
+	      "Active": 1,
+	      "Never connected": 5,
 	      "Total": 6,
 	      "Disconnected": 0
 	   }
@@ -375,17 +936,20 @@ Returns a list with the available agents.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| status             | string        | Filters by agent status.                                                                                                                                                                               |
+| status             | String        | Filters by agent status.                                                                                                                                                                               |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | - active                                                                                                                                                                                               |
+|                    |               | - pending                                                                                                                                                                                              |
 |                    |               | - never connected                                                                                                                                                                                      |
 |                    |               | - disconnected                                                                                                                                                                                         |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| os.platform        | String        | Filters by OS platform                                                                                                                                                                                 |
+| os.platform        | String        | Filters by OS platform.                                                                                                                                                                                |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| os.version         | String        | Filters by OS version                                                                                                                                                                                  |
+| os.version         | String        | Filters by OS version.                                                                                                                                                                                 |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| manager            | String        | Filters by manager hostname to which agents are connected.                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -402,44 +966,39 @@ Returns a list with the available agents.
 	      "totalItems": 6,
 	      "items": [
 	         {
-	            "status": "Active",
-	            "ip": "any",
-	            "os": {
-	               "platform": "windows",
-	               "version": "10.0.14393",
-	               "name": "Microsoft Windows Server 2016 Datacenter"
-	            },
-	            "id": "004",
-	            "name": "win_server"
-	         },
-	         {
-	            "status": "Active",
-	            "ip": "any",
-	            "os": {
-	               "platform": "ubuntu",
-	               "version": "16.04.2 LTS",
-	               "name": "Ubuntu"
-	            },
-	            "id": "003",
-	            "name": "u16"
-	         },
-	         {
 	            "status": "Never connected",
 	            "ip": "any",
-	            "id": "006",
+	            "dateAdd": "2017-12-22 19:23:39",
+	            "id": "007",
 	            "name": "myNewAgent"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.10.10",
+	            "dateAdd": "2017-12-22 19:23:39",
 	            "id": "123",
 	            "name": "NewHost_2"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.9",
-	            "id": "005",
+	            "dateAdd": "2017-12-22 19:23:39",
+	            "id": "006",
 	            "name": "NewHost"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.14",
+	            "dateAdd": "2017-12-22 19:21:40",
+	            "id": "004",
+	            "name": "dmz002"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.12",
+	            "dateAdd": "2017-12-22 19:21:40",
+	            "id": "002",
+	            "name": "dmz001"
 	         }
 	      ]
 	   }
@@ -476,22 +1035,89 @@ Returns the information of an agent.
 	   "error": 0,
 	   "data": {
 	      "status": "Active",
-	      "name": "ip-10-0-0-10",
+	      "name": "PC",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2017-08-05 14:47:01",
-	      "version": "Wazuh v2.1.0",
+	      "dateAdd": "2017-12-22 19:07:16",
+	      "version": "Wazuh v3.1.0",
+	      "manager_host": "PC",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
-	         "major": "8",
-	         "name": "Debian GNU/Linux",
-	         "platform": "debian",
-	         "uname": "Linux ip-10-0-0-10 3.16.0-4-amd64 #1 SMP Debian 3.16.36-1+deb8u2 (2016-10-19) x86_64",
-	         "version": "8",
-	         "codename": "jessie"
+	         "major": "15",
+	         "name": "CentOS Linux",
+	         "platform": "centos",
+	         "uname": "Linux manager 3.10.0-514.el7.x86_64 #1 SMP Tue Nov 22 16:42:41 UTC 2016 x86_64",
+	         "version": "15.5",
+	         "arch": "x86_64",
+	         "minor": "5"
 	      },
 	      "id": "000"
 	   }
 	}
+
+
+Get an agent by its name
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the information of an agent called :agent_name.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/name/:agent_name
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_name``     | String        | Agent name.                                                                                                                                                                                            |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/myAgent?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 1000,
+	   "message": "Wazuh-Python Internal Error: 'NoneType' object has no attribute '__getitem__'"
+	}
+
+
+Get list of purgeable agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a list of agents that can be purged
+
+**Request**:
+
+``GET`` ::
+
+	/purgeable/:timeframe
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``timeframe``      | String        | Time from last connection in seconds or or [n_days]d[n_hours]h[n_minutes]m[n_seconds]s.                                                                                                                |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/purgeable/10800?pretty"
+
+**Example Response:**
+::
+
+	ToDo - Hardcoded output
 
 
 
@@ -519,15 +1145,50 @@ Returns the key of an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/key?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/004/key?pretty"
 
 **Example Response:**
 ::
 
 	{
 	   "error": 0,
-	   "data": "MDAxIFdlYlNlcnZlcjEgMTAuMC4wLjYyIDNlZjEwYTQ2MGZmZDEwNDlhNDhiMmI1NjRjZmFiNGQxNmFiYzIzMzQ2NDM3MWY0ODQwZDQ0ZDJjN2RkNDkwZTE"
+	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgMjcyZjdkOTM0NGYxZTcxODZhNWNiYzg5YTZmMzY5YzU5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
 	}
+
+
+
+Purge
+++++++++++++++++++++++++++++++++++++++++
+
+Purge old agents from manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Deletes all agents that did not connected in the last timeframe seconds.
+
+**Request**:
+
+``POST`` ::
+
+	/agents/purge
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``timeframe``      | String        | Time from last connection in seconds or or [n_days]d[n_hours]h[n_minutes]m[n_seconds]s.                                                                                                                |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``verbose``        | Boolean       | Return information about agents purgeds.                                                                                                                                                               |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"timeframe":10800}' "https://127.0.0.1:55000/agents/purge?pretty"
+
+**Example Response:**
+::
+
+	ToDo - Hardcoded output
 
 
 
@@ -555,22 +1216,15 @@ Restarts a list of agents.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://127.0.0.1:55000/agents/restart?pretty"
+	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"ids":["002","004"]}' "https://127.0.0.1:55000/agents/restart?pretty"
 
 **Example Response:**
 ::
 
 	{
-	   "error": 0,
-	   "data": {
-	      "msg": "Some agents were not restarted",
-	      "ids": [
-	         "001",
-	         "002"
-	      ]
-	   }
+	    "data": "All selected agents were restarted",
+	    "error": 0
 	}
-
 
 Restart all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -616,7 +1270,7 @@ Restarts the agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/000/restart?pretty"
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/007/restart?pretty"
 
 **Example Response:**
 ::
@@ -626,6 +1280,654 @@ Restarts the agent.
 	    "error": 0
 	}
 
+
+Upgrade
+++++++++++++++++++++++++++++++++++++++++
+
+Get outdated agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the list of outdated groups.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/outdated
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/outdated?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "totalItems": 2,
+	        "items": [
+	            {
+	                "version": "Wazuh v3.0.0",
+	                "id": "003",
+	                "name": "main_database"
+	            },
+	            {
+	                "version": "Wazuh v3.0.0",
+	                "id": "004",
+	                "name": "dmz002"
+	            }
+	        ]
+	    },
+	    "error": 0
+	}
+
+Get upgrade result from agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the upgrade result from an agent.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/:agent_id/upgrade_result
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| timeout            | Number        | Seconds waiting for agent response.                                                                                                                                                                    |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/003/upgrade_result?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Agent upgraded successfully",
+	    "error": 0
+	}
+
+Upgrade agent using custom file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Upgrade the agent using a custom file.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/:agent_id/upgrade_custom
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file_path``      | String        | WPK file path.                                                                                                                                                                                         |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``installer``      | String        | Installation script.                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade_custom?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Installation started",
+	    "error": 0
+	}
+
+Upgrade agent using online repository
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Upgrade the agent using a WPK file from online repository.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/:agent_id/upgrade
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| wpk_repo           | String        | WPK repository.                                                                                                                                                                                        |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| version            | String        | Wazuh version.                                                                                                                                                                                         |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| force              | number        | Force upgrade.                                                                                                                                                                                         |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - 0                                                                                                                                                                                                    |
+|                    |               | - 1                                                                                                                                                                                                    |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Upgrade procedure started",
+	    "error": 0
+	}
+
+
+
+Cache
+----------------------------------------
+Delete
+++++++++++++++++++++++++++++++++++++++++
+
+Clear group cache
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Clears cache of the specified group.
+
+**Request**:
+
+``DELETE`` ::
+
+	/cache
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``group``          | String        | cache group.                                                                                                                                                                                           |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cache/mygroup?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "all": [
+	         "/agents/summary?pretty",
+	         "/agents?pretty&offset=0&limit=5&sort=-ip,name",
+	         "/agents/000?pretty",
+	         "/agents/name/myAgent?pretty"
+	      ],
+	      "groups": {
+	         "agents": [
+	            "/agents/summary?pretty",
+	            "/agents?pretty&offset=0&limit=5&sort=-ip,name",
+	            "/agents/000?pretty",
+	            "/agents/name/myAgent?pretty"
+	         ]
+	      }
+	   }
+	}
+
+
+Delete cache index
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Clears entire cache.
+
+**Request**:
+
+``DELETE`` ::
+
+	/cache
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cache?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "all": [],
+	      "groups": {}
+	   }
+	}
+
+
+
+Info
+++++++++++++++++++++++++++++++++++++++++
+
+Get cache index
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns current cache index.
+
+**Request**:
+
+``GET`` ::
+
+	/cache
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cache?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "all": [],
+	      "groups": {}
+	   }
+	}
+
+
+Return cache configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns cache configuration.
+
+**Request**:
+
+``GET`` ::
+
+	/cache/config
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cache/config?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "debug": false,
+	      "defaultDuration": 750,
+	      "enabled": true,
+	      "appendKey": [],
+	      "jsonp": false,
+	      "redisClient": false
+	   }
+	}
+
+
+
+
+Cluster
+----------------------------------------
+Node
+++++++++++++++++++++++++++++++++++++++++
+
+Get node info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the Node info
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/node
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node"
+
+**Example Response:**
+::
+
+	{"error":0,"data":{"node":"nodemaster","cluster":"wazuh","type":"master"}}
+
+
+Nodes
+++++++++++++++++++++++++++++++++++++++++
+
+Get info about agents in cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the state of each agent and the manager it's reporting to in the cluster
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/agents
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/agents"
+
+**Example Response:**
+::
+
+	{
+		"error":0,
+		"data":{
+				"None":[
+						{
+								"status":"Never connected",
+								"ip":"10.0.0.12",
+								"id":"002",
+								"name":"dmz001"
+						},
+						{
+								"status":"Never connected",
+								"ip":"10.0.0.14",
+								"id":"004",
+								"name":"dmz002"
+						},
+						{
+								"status":"Never connected",
+								"ip":"10.0.0.9",
+								"id":"006",
+								"name":"NewHost"
+						},
+						{
+								"status":"Never connected",
+								"ip":"any",
+								"id":"007",
+								"name":"myNewAgent"
+						},
+						{
+								"status":"Never connected",
+								"ip":"10.0.10.10",
+								"id":"123",
+								"name":"NewHost_2"
+						}
+				]
+		}
+	}
+
+Get info about files in cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the state of each file in the cluster
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/files
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/files"
+
+**Example Response:**
+::
+
+	{
+	    "error":0,
+	    "data":{
+	        "172.18.0.108":{
+	            "synchronized":[
+	                "/etc/shared/dmz/system_audit_ssh.txt",
+	                "/etc/shared/default/rootkit_trojans.txt",
+	                "/etc/shared/dmz/win_audit_rcl.txt",
+	                "/etc/shared/dmz/system_audit_rcl.txt",
+	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
+	                "/etc/shared/default/win_malware_rcl.txt",
+	                "/etc/shared/webserver/win_applications_rcl.txt",
+	                "/etc/shared/default/win_applications_rcl.txt",
+	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
+	                "/etc/shared/webserver/win_audit_rcl.txt",
+	                "/etc/shared/webserver/win_malware_rcl.txt",
+	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
+	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
+	                "/etc/shared/database/rootkit_trojans.txt",
+	                "/etc/shared/dmz/rootkit_files.txt",
+	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
+	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
+	                "/etc/shared/webserver/rootkit_files.txt",
+	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
+	                "/etc/shared/webserver/system_audit_ssh.txt",
+	                "/etc/shared/database/agent.conf",
+	                "/etc/shared/dmz/win_applications_rcl.txt",
+	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
+	            ]
+	        },
+	        "172.18.0.106":{
+	            "synchronized":[
+	                "/etc/shared/dmz/system_audit_ssh.txt",
+	                "/etc/shared/default/rootkit_trojans.txt",
+	                "/etc/shared/dmz/win_audit_rcl.txt",
+	                "/etc/shared/dmz/system_audit_rcl.txt",
+	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
+	                "/etc/shared/default/win_malware_rcl.txt",
+	                "/etc/shared/webserver/win_applications_rcl.txt",
+	                "/etc/shared/default/win_applications_rcl.txt",
+	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
+	                "/etc/shared/webserver/win_audit_rcl.txt",
+	                "/etc/shared/webserver/win_malware_rcl.txt",
+	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
+	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
+	                "/etc/shared/database/rootkit_trojans.txt",
+	                "/etc/shared/dmz/rootkit_files.txt",
+	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
+	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
+	                "/etc/shared/webserver/rootkit_files.txt",
+	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
+	                "/etc/shared/webserver/system_audit_ssh.txt",
+	                "/etc/shared/database/agent.conf",
+	                "/etc/shared/dmz/win_applications_rcl.txt",
+	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
+	            ]
+	        },
+	        "172.18.0.107":{
+	            "synchronized":[
+	                "/etc/shared/dmz/system_audit_ssh.txt",
+	                "/etc/shared/default/rootkit_trojans.txt",
+	                "/etc/shared/dmz/win_audit_rcl.txt",
+	                "/etc/shared/dmz/system_audit_rcl.txt",
+	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
+	                "/etc/shared/default/win_malware_rcl.txt",
+	                "/etc/shared/webserver/win_applications_rcl.txt",
+	                "/etc/shared/default/win_applications_rcl.txt",
+	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
+	                "/etc/shared/webserver/win_audit_rcl.txt",
+	                "/etc/shared/webserver/win_malware_rcl.txt",
+	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
+	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
+	                "/etc/shared/database/rootkit_trojans.txt",
+	                "/etc/shared/dmz/rootkit_files.txt",
+	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
+	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
+	                "/etc/shared/webserver/rootkit_files.txt",
+	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
+	                "/etc/shared/webserver/system_audit_ssh.txt",
+	                "/etc/shared/database/agent.conf",
+	                "/etc/shared/dmz/win_applications_rcl.txt",
+	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
+	            ]
+	        },
+	        "172.18.0.105":{
+	            "synchronized":[
+	                "/etc/shared/dmz/system_audit_ssh.txt",
+	                "/etc/shared/default/rootkit_trojans.txt",
+	                "/etc/shared/dmz/win_audit_rcl.txt",
+	                "/etc/shared/dmz/system_audit_rcl.txt",
+	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
+	                "/etc/shared/default/win_malware_rcl.txt",
+	                "/etc/shared/webserver/win_applications_rcl.txt",
+	                "/etc/shared/default/win_applications_rcl.txt",
+	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
+	                "/etc/shared/webserver/win_audit_rcl.txt",
+	                "/etc/shared/webserver/win_malware_rcl.txt",
+	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
+	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
+	                "/etc/shared/database/rootkit_trojans.txt",
+	                "/etc/shared/dmz/rootkit_files.txt",
+	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
+	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
+	                "/etc/shared/webserver/rootkit_files.txt",
+	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
+	                "/etc/shared/webserver/system_audit_ssh.txt",
+	                "/etc/shared/database/agent.conf",
+	                "/etc/shared/dmz/win_applications_rcl.txt",
+	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
+	            ]
+	        }
+	    }
+	}
+
+Get nodes info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the Nodes info
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/nodes
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes"
+
+**Example Response:**
+::
+
+	{
+	    "error":0,
+	    "data":{
+	        "totalItems":5,
+	        "items":[
+	            {
+	                "url":"localhost",
+	                "node":"nodemaster",
+	                "status":"connected",
+	                "cluster":"wazuh"
+	            },
+	            {
+	                "url":"172.18.0.105",
+	                "node":"node01",
+	                "status":"connected",
+	                "cluster":"wazuh"
+	            },
+	            {
+	                "url":"172.18.0.106",
+	                "node":"node03",
+	                "status":"connected",
+	                "cluster":"wazuh"
+	            },
+	            {
+	                "url":"172.18.0.107",
+	                "node":"node02",
+	                "status":"connected",
+	                "cluster":"wazuh"
+	            },
+	            {
+	                "url":"172.18.0.108",
+	                "node":"node04",
+	                "status":"connected",
+	                "cluster":"wazuh"
+	            }
+	        ]
+	    }
+	}
+
+Status
+++++++++++++++++++++++++++++++++++++++++
+
+Get info about cluster status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns if the cluster is enabled or disabled
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/status
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status"
+
+**Example Response:**
+::
+
+	{"error":0,"data":{"running":"yes","enabled":"yes"}}
+
+
+config
+++++++++++++++++++++++++++++++++++++++++
+
+Get the cluster configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the cluster configuration
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/config
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config"
+
+**Example Response:**
+::
+
+	{
+	    "error":0,
+	    "data":{
+	        "disabled":"no",
+	        "hidden":"no",
+	        "name":"wazuh",
+	        "interval":"2m",
+	        "node_name":"nodemaster",
+	        "bind_addr":"0.0.0.0",
+	        "node_type":"master",
+	        "key":"a7de21bdd629661b2669d5bc5ec6866d",
+	        "nodes":[
+	            "172.18.0.1",
+	            "172.18.0.105",
+	            "172.18.0.106",
+	            "172.18.0.107",
+	            "172.18.0.108"
+	        ],
+	        "port":"1516"
+	    }
+	}
 
 
 Decoders
@@ -680,7 +1982,7 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 480,
+	      "totalItems": 523,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -699,7 +2001,7 @@ Returns all decoders included in ossec.conf.
 	               "regex": "^ '(\\S+)'.",
 	               "prematch": "^Agent buffer:",
 	               "parent": "wazuh",
-	               "order": "status"
+	               "order": "level"
 	            },
 	            "file": "0005-wazuh_decoders.xml",
 	            "position": 1,
@@ -759,57 +2061,57 @@ Returns all decoders files included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 85,
+	      "totalItems": 89,
 	      "items": [
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0060-cisco-estreamer_decoders.xml"
+	            "file": "0075-clamav_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0150-mysql_decoders.xml"
+	            "file": "0250-redis_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0215-portsentry_decoders.xml"
+	            "file": "0415-jenkins_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0325-suhosin_decoders.xml"
+	            "file": "0355-vm-pop3_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0190-openvpn_decoders.xml"
+	            "file": "0310-ssh_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0405-mongodb_decoders.xml"
+	            "file": "0200-ossec_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0090-dragon-nids_decoders.xml"
+	            "file": "0380-windows_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0085-dovecot_decoders.xml"
+	            "file": "0140-kernel_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0335-telnet_decoders.xml"
+	            "file": "0350-unix_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0165-netscreen_decoders.xml"
+	            "file": "0115-grandstream_decoders.xml"
 	         }
 	      ]
 	   }
@@ -851,7 +2153,7 @@ Returns all parent decoders included in ossec.conf
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 121,
+	      "totalItems": 133,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -865,11 +2167,11 @@ Returns all parent decoders included in ossec.conf
 	         },
 	         {
 	            "status": "enabled",
-	            "name": "jenkins",
+	            "name": "pvedaemon",
 	            "details": {
-	               "prematch": "^\\w+ \\d+, \\d+ \\d+:\\d+:\\d+ \\w\\w \\S+ \\w+\\s"
+	               "program_name": "^pvedaemon"
 	            },
-	            "file": "0415-jenkins_decoders.xml",
+	            "file": "0440-proxmox-ve_decoders.xml",
 	            "position": 0,
 	            "path": "/var/ossec/ruleset/decoders"
 	         }
@@ -1000,7 +2302,7 @@ Returns ossec.conf in JSON format.
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "10.0.0.2"
+	         "192.168.0.1"
 	      ],
 	      "email_from": "ossecm@example.wazuh.com",
 	      "logall_json": "no"
@@ -1033,15 +2335,15 @@ Returns basic information about Manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "installation_date": "Sat Aug  5 14:46:32 UTC 2017",
-	      "version": "v2.1.0",
+	      "installation_date": "vie dic 22 19:07:15 CET 2017",
+	      "version": "v3.1.0",
 	      "openssl_support": "yes",
 	      "max_agents": "8000",
-	      "ruleset_version": "v2.1.0",
+	      "ruleset_version": "1005",
 	      "path": "/var/ossec",
-	      "tz_name": "UTC",
+	      "tz_name": "CET",
 	      "type": "server",
-	      "tz_offset": "+0000"
+	      "tz_offset": "+0100"
 	   }
 	}
 
@@ -1069,6 +2371,7 @@ Returns the Manager processes that are running.
 	   "data": {
 	      "wazuh-modulesd": "running",
 	      "ossec-authd": "stopped",
+	      "wazuh-clusterd": "running",
 	      "ossec-monitord": "running",
 	      "ossec-logcollector": "running",
 	      "ossec-execd": "running",
@@ -1107,15 +2410,16 @@ Returns the 3 last months of ossec.log.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| type_log           | string        | Filters by type of log.                                                                                                                                                                                |
+| type_log           | String        | Filters by type of log.                                                                                                                                                                                |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | - all                                                                                                                                                                                                  |
 |                    |               | - error                                                                                                                                                                                                |
+|                    |               | - warning                                                                                                                                                                                              |
 |                    |               | - info                                                                                                                                                                                                 |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| category           | string        | Filters by category of log.                                                                                                                                                                            |
+| category           | String        | Filters by category of log.                                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -1162,59 +2466,74 @@ Returns a summary about the 3 last months of ossec.log.
 	   "error": 0,
 	   "data": {
 	      "wazuh-modulesd": {
-	         "info": 2,
-	         "all": 2,
+	         "info": 20,
+	         "all": 20,
 	         "error": 0
 	      },
 	      "ossec-testrule": {
-	         "info": 172,
-	         "all": 172,
+	         "info": 460,
+	         "all": 460,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:oscap": {
-	         "info": 2,
-	         "all": 2,
+	         "info": 5,
+	         "all": 5,
+	         "error": 0
+	      },
+	      "wazuh-clusterd-internal:inotify": {
+	         "info": 16,
+	         "all": 16,
+	         "error": 0
+	      },
+	      "wazuh-modulesd:ciscat": {
+	         "info": 5,
+	         "all": 5,
 	         "error": 0
 	      },
 	      "ossec-rootcheck": {
-	         "info": 6,
-	         "all": 6,
+	         "info": 5,
+	         "all": 5,
 	         "error": 0
 	      },
 	      "ossec-monitord": {
+	         "info": 9,
+	         "all": 9,
+	         "error": 0
+	      },
+	      "ossec-logcollector": {
+	         "info": 34,
+	         "all": 34,
+	         "error": 0
+	      },
+	      "ossec-execd": {
+	         "info": 13,
+	         "all": 13,
+	         "error": 0
+	      },
+	      "ossec-remoted": {
+	         "info": 58,
+	         "all": 63,
+	         "error": 5
+	      },
+	      "ossec-syscheckd": {
+	         "info": 117,
+	         "all": 117,
+	         "error": 0
+	      },
+	      "wazuh-clusterd-internal": {
 	         "info": 3,
 	         "all": 3,
 	         "error": 0
 	      },
-	      "ossec-logcollector": {
-	         "info": 25,
-	         "all": 27,
-	         "error": 2
-	      },
-	      "ossec-execd": {
-	         "info": 4,
-	         "all": 4,
-	         "error": 0
-	      },
-	      "ossec-remoted": {
-	         "info": 416,
-	         "all": 1047,
-	         "error": 631
-	      },
-	      "ossec-syscheckd": {
-	         "info": 51,
-	         "all": 51,
-	         "error": 0
-	      },
 	      "ossec-analysisd": {
-	         "info": 389,
-	         "all": 389,
+	         "info": 1029,
+	         "all": 1029,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:database": {
-	         "info": 2,
-	         "all": 2,
-	         "error": 0
+	         "info": 5,
+	         "all": 11,
+	         "error": 6
 	      }
 	   }
 	}
@@ -1489,8 +2808,8 @@ Return the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-08-05 14:48:07",
-	      "end": "2017-08-05 14:47:33"
+	      "start": "2017-12-22 19:05:11",
+	      "end": "2017-12-22 16:49:40"
 	   }
 	}
 
@@ -1530,11 +2849,12 @@ Returns the CIS requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2,
+	      "totalItems": 3,
 	      "items": [
-	         "1.4 Debian Linux",
-	         "4.13 Debian Linux"
-	      ]
+					 "1.4 Debian Linux",
+					 "4.13 Debian Linux",
+				   "4.16 Debian Linux"
+				]
 	   }
 	}
 
@@ -1580,20 +2900,19 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 8,
+	      "totalItems": 1194,
 	      "items": [
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-08-05 14:47:18",
-	            "readDay": "2017-08-05 14:48:08",
-	            "event": "File '/var/lib/test' is owned by root and has written permissions to anyone."
+	            "oldDay": "2017-12-22 16:48:05",
+	            "readDay": "2017-12-22 19:05:35",
+	            "event": "Files hidden inside directory '/var/lib/docker/overlay2/0289a9e9ba1dbc311ce9bc92414dcb17e291cbfbcc6b5a49d3819130dc25cb62/merged'. Link count does not match number of files (21,1)."
 	         },
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-08-05 14:47:18",
-	            "cis": "1.4 Debian Linux",
-	            "readDay": "2017-08-05 14:48:07",
-	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /opt is not on its own partition {CIS: 1.4 Debian Linux}. File: /opt. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
+	            "oldDay": "2017-12-22 16:48:05",
+	            "readDay": "2017-12-22 19:05:35",
+	            "event": "Files hidden inside directory '/var/lib/docker/overlay2/0289a9e9ba1dbc311ce9bc92414dcb17e291cbfbcc6b5a49d3819130dc25cb62/merged/dev'. Link count does not match number of files (4,1)."
 	         }
 	      ]
 	   }
@@ -1636,10 +2955,10 @@ Returns the PCI requirements of all rootchecks of the agent.
 	   "error": 0,
 	   "data": {
 	      "totalItems": 2,
-	      "items": [
-	         "2.2.2",
-	         "2.2.4"
-	      ]
+				"items": [
+				   "2.2.2",
+				   "2.2.4"
+				]
 	   }
 	}
 
@@ -1763,7 +3082,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1701,
+	      "totalItems": 1565,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -1851,7 +3170,7 @@ Returns the files of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 95,
+	      "totalItems": 100,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -1943,7 +3262,7 @@ Returns the groups of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 242,
+	      "totalItems": 281,
 	      "items": [
 	         "access_control",
 	         "access_denied",
@@ -1953,8 +3272,8 @@ Returns the groups of all rules.
 	         "adduser",
 	         "agent",
 	         "agent_flooding",
-	         "agentless",
-	         "amazon"
+	         "agent_restarting",
+	         "agentless"
 	      ]
 	   }
 	}
@@ -2059,6 +3378,7 @@ Returns the rules with the specified id.
 	            "level": 2,
 	            "path": "/var/ossec/ruleset/rules",
 	            "groups": [
+	               "gpg13_4.3",
 	               "syslog",
 	               "errors"
 	            ],
@@ -2167,8 +3487,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-08-05 14:48:04",
-	      "end": "2017-08-05 14:48:07"
+	      "start": "2017-12-22 19:23:19",
+	      "end": "2017-12-22 19:05:11"
 	   }
 	}
 
@@ -2239,13 +3559,45 @@ Returns the syscheck files of an agent.
 ::
 
 	{
-	   "error": 0,
-	   "data": {
-	      "totalItems": 0,
-	      "items": []
-	   }
+	    "data": {
+	        "totalItems": 2762,
+	        "items": [
+	            {
+	                "size": 157721,
+	                "uid": 0,
+	                "scanDate": "2017-03-02 23:43:28",
+	                "user": "root",
+	                "file": "!1488498208 /boot/config-3.16.0-4-amd64",
+	                "modificationDate": "2016-10-19 06:45:50",
+	                "octalMode": "100644",
+	                "inode": 5217,
+	                "event": "added",
+	                "permissions": "-rw-r--r--",
+	                "sha1": "4fed08ccbd0168593a6fffcd925adad65e5ae6d9",
+	                "group": "root",
+	                "gid": 0,
+	                "md5": "46d43391ae54c1084a2d40e8d1b4873c"
+	            },
+	            {
+	                "size": 2679264,
+	                "uid": 0,
+	                "scanDate": "2017-03-02 23:43:26",
+	                "user": "root",
+	                "file": "!1488498206 /boot/System.map-3.16.0-4-amd64",
+	                "modificationDate": "2016-10-19 06:45:50",
+	                "octalMode": "100644",
+	                "inode": 5216,
+	                "event": "added",
+	                "permissions": "-rw-r--r--",
+	                "sha1": "d48151a3d3638b723f5d7bc1e9c71d478fcde4e6",
+	                "group": "root",
+	                "gid": 0,
+	                "md5": "29cc12246faecd4a14d212b4d9bac0fe"
+	            }
+	        ]
+	    },
+	    "error": 0
 	}
-
 
 
 Run

@@ -1,10 +1,10 @@
 
-.. _update-ruleset.py:
+.. _update_ruleset:
 
-update-ruleset.sh
+update_ruleset
 =================
 
-The update-ruleset.sh program updates decoders, rules and rootchecks.
+The update-ruleset program updates decoders, rules and rootchecks.
 
 +--------+-------------------------------------------------------------------------+
 | **-r** | Restart Wazuh when needed.                                              |
@@ -23,7 +23,9 @@ The update-ruleset.sh program updates decoders, rules and rootchecks.
 +--------+-----------------------------------+-------------------------------------+
 | **-s** | Select ruleset source path (instead of downloading it).                 |
 +--------+-------------------------------------------------------------------------+
-| **-j** | JSON output. Must be used in conjunction with the '-s' or '-S' options. |
+| **-j** | JSON output. Must be used in conjunction with the '-s' option.          |
 +--------+-------------------------------------------------------------------------+
 | **-d** | Run in debug mode.                                                      |
++--------+-------------------------------------------------------------------------+
+| **-n** | Branch name (default: stable).                                          |
 +--------+-------------------------------------------------------------------------+

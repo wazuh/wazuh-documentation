@@ -31,7 +31,7 @@ This library is designed to be simple while still supporting the most common reg
   +------------+------------------------------------+
   | \\S        | Anything not \s                    |
   +------------+------------------------------------+
-  | \\.        | Anything                           |
+  | \\\\.      | Anything                           |
   +------------+------------------------------------+
 
 

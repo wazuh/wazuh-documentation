@@ -11,7 +11,7 @@ integration
 		<integration>
 		</integration>
 
-This configures the manager to connect Wazuh to external APIs and alerting tools such as Slack and PagerDuty.
+This configures the manager to connect Wazuh to external APIs and alerting tools such as Slack, PagerDuty and VirusTotal.
 
 Options
 -------
@@ -23,17 +23,18 @@ Options
 - `rule_id`_
 - `group`_
 - `event_location`_
+- `alert_format`_
 
 name
 ^^^^^^^^^^^
 
 This indicates the type of the service to integrate with.
 
-+--------------------+-----------------+
-| **Default value**  | n/a             |
-+--------------------+-----------------+
-| **Allowed values** | slack, pagerdty |
-+--------------------+-----------------+
++--------------------+-----------------------------+
+| **Default value**  | n/a                         |
++--------------------+-----------------------------+
+| **Allowed values** | slack, pagerdty, virustotal |
++--------------------+-----------------------------+
 
 hook_url
 ^^^^^^^^^^^
@@ -49,15 +50,15 @@ This is the URL provided by Slack when integration is enabled on the Slack side.
 api_key
 ^^^^^^^^^^^
 
-This is the key that you would have retrieved from the PagerDuty API. This is **mandatory for PagerDuty.**
+This is the key that you would have retrieved from the PagerDuty or VirusTotal API. This is **mandatory for PagerDuty and VirusTotal.**
 
 .. note:: You must restart Wazuh after changing this configuration.
 
-+--------------------+-------------------+
-| **Default value**  | n/a               |
-+--------------------+-------------------+
-| **Allowed values** | PagerDuty Api key |
-+--------------------+-------------------+
++--------------------+------------------------------+
+| **Default value**  | n/a                          |
++--------------------+------------------------------+
+| **Allowed values** | PagerDuty/VirusTotal Api key |
++--------------------+------------------------------+
 
 Optional filters
 ----------------
@@ -87,7 +88,7 @@ This filters alerts by rule ID.
 group
 ^^^^^
 
-This filters alerts by rules. `OS_Regex Syntax`_.
+This filters alerts by rules. For the VirusTotal integration, only rules from `syscheck` group are available. `OS_Regex Syntax`_.
 
 +--------------------+---------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                         |
@@ -95,8 +96,6 @@ This filters alerts by rules. `OS_Regex Syntax`_.
 | **Allowed values** | Any rule group is allowed. Multiple groups should be separated with a pipe character (“|”). |
 +--------------------+---------------------------------------------------------------------------------------------+
 
-.. note::
-	Observe that all groups must be finished by comma.
 
 event_location
 ^^^^^^^^^^^^^^^
@@ -112,14 +111,33 @@ This filters alerts by the location of where the event originated. `OS_Regex Syn
 | **Allowed values** | Any single agent name, hostname, ip address, or log file. |
 +--------------------+-----------------------------------------------------------+
 
+alert_format
+^^^^^^^^^^^^
+
+Write temporal alert file in JSON format. Integrator make use this temporal file to fetch fields values.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | n/a                                                       |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | json                                                      |
++--------------------+-----------------------------------------------------------+
+
 Example of configuration
 ------------------------
 
 .. code-block:: xml
 
+    <!-- Integration with Slack -->
     <integration>
       <name>slack</name>
       <hook_url>https://hooks.slack.com/services/T000/B000/XXXXX</hook_url>
       <level>10</level>
-      <group>multiple_drops,|authentication_failures,</group>
+      <group>multiple_drops|authentication_failures</group>
+    </integration>
+
+    <!-- Integration with VirusTotal -->
+    <integration>
+      <name>virustotal</name>
+      <api_key>VirusTotal_API_Key</api_key>
+      <group>syscheck</group>
     </integration>

@@ -7,24 +7,24 @@ Follow next steps in order to update your ``Wazuh v1.x`` server to ``Wazuh v2.x`
 
 1. First of all, stop running processes:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ /var/ossec/bin/ossec-control stop
-    $ systemctl stop wazuh-api
+    # /var/ossec/bin/ossec-control stop
+    # systemctl stop wazuh-api
 
 2. *Only if you have a distributed architecture*, remove logstash-forwarder (it's been replaced by Filebeat):
 
   Deb systems:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ apt-get remove logstash-forwarder
+    # apt-get remove logstash-forwarder
 
   RPM systems:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    $ yum remove logstash-forwarder
+    # yum remove logstash-forwarder
 
 3. Install Wazuh server:
 
@@ -39,9 +39,9 @@ Follow next steps in order to update your ``Wazuh v1.x`` server to ``Wazuh v2.x`
 
 4. Run ``/var/ossec/bin/manage_agents -V`` to confirm that now you are running ``Wazuh v2.x``:
 
-.. code-block:: bash
+.. code-block:: console
 
-    $ /var/ossec/bin/manage_agents -V
+    # /var/ossec/bin/manage_agents -V
 
   	Wazuh v2.0 - Wazuh Inc.
 
