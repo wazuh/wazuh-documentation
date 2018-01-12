@@ -21,11 +21,26 @@ Requirements
 AWS: Subscribe to CloudTrail
 ----------------------------
 
-From your AWS console, choose “CloudTrail” from the Deployment & Management section.
+1. From your AWS console, choose “CloudTrail” from the Deployment & Management section.
 
-IMAGE
 
-Provide a name for the new S3 bucket that will hold the CloudTrail logs. (Remember the name you provide here, you’ll need to reference it during plugin set up.)
+.. thumbnail:: ../../images/aws/aws-cloudtrail-1.png
+    :align: center
+    :width: 100%
+
+2. Create a new trail
+
+.. thumbnail:: ../../images/aws/aws-cloudtrail-2.png
+    :align: center
+    :width: 100%
+    
+3. Provide a name for the new S3 bucket that will hold the CloudTrail logs. (Remember the name you provide here, you’ll need to reference it during plugin set up.)
+
+.. thumbnail:: ../../images/aws/aws-cloudtrail-3.png
+    :align: center
+    :width: 100%
+    
+
 
 
 AWS: Create IAM User
