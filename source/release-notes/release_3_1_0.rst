@@ -18,13 +18,11 @@ This section shows the most relevant new features of Wazuh v3.1.0. You will find
 VULS integration
 ----------------
 
-Vuls (VULnerability Scanner) is a tool create to perform vulnerability analysis in your Linux systems automatically, looking for known vulnerabilities that affect to your software
-in databases such as NVD (National Vulnerability Database).
+Vuls (VULnerability Scanner) is a tool that was created for analyzing the vulnerability of Linux systems. This tool looks for known vulnerabilities referenced in databases such as the National Vulnerability Database (NVD).
 
-The integration of this tool in Wazuh is made through the new `Command wodle` which allows you to run the necessary scripts for scheduling vulnerability scans in agents periodically, reporting the results
-to the manager and triggering alerts in case of any vulnerability affects the scanned software.
+This integration is achieved through the use of the new `Command wodle`.  This module allows you to run a command at a specified interval or to ignore the output of the command.  The Vuls script is designed run Vuls on the agent and send results directly back to the manager and triggering alerts when a vulnerability is identified. 
 
-You can see below an example where reporting a found vulnerability.
+Below is an example of results where a vulnerability is identified:
 
 .. code-block:: console
    :emphasize-lines: 3
@@ -58,10 +56,9 @@ You can read more about this integration in the :doc:`Vuls integration section <
 CIS-CAT Wazuh module to scan CIS policies
 -----------------------------------------
 
-Another integration in form of Wazuh module has been developed for evaluating CIS benchmarks into Wazuh agents. This module allows agents to be compliance with
-CIS policies and apply best security practices in your IT systems.
+The new CIS-CAT module was developed for evaluating CIS benchmarks in Wazuh agents. This module assesses an agent's compliance with CIS policies to ensure the application of the best practices in in the security of your IT systems.
 
-With the CIS-CAT wodle you are able to run assessments periodically, sending reports to manager and displaying results for each check as well as a report overview as you can see below.
+With the CIS-CAT wodle assessments can be scheduled to run periodically, sending reports to the manager and displaying results for each check.  A report overview is also displayed as in the example below:
 
 .. code-block:: console
    :emphasize-lines: 3
@@ -77,58 +74,56 @@ With the CIS-CAT wodle you are able to run assessments periodically, sending rep
    cis-data.timestamp: 2017-12-21T11:55:50.143-08:00
    cis-data.score: 53
 
-For now, it is focused to Linux systems. However, it will be available for Windows agents in future versions.
+Currently, this module is focused only on Linux systems, however, this will also be available for Windows systems in future versions. 
 
-In our dedicated section for :doc:`CIS-CAT integration<../user-manual/capabilities/policy-monitoring/ciscat/ciscat>` you can find more useful information about this new module.
+You will find further information about this new module in the :doc:`CIS-CAT integration<../user-manual/capabilities/policy-monitoring/ciscat/ciscat>` section.
 
 New "Command" Wazuh module
 --------------------------
 
-It has been included a new Wazuh module for running commands asynchronously. Among its capabilities, it allows you to specify an interval for running the certain command, as well as an option
-to ignore the output of it.
+The new `Command wodle` has been included in this version to allow commands to be run asynchronously. This module allows commands to be run at specified intervals and includes an option to ignore the output.
 
 The complete configuration guide for this command can be found at :doc:`Command wodle configuration <../user-manual/reference/ossec-conf/wodle-command>`.
 
 New rotation capabilities for alerts
 ------------------------------------
 
-In large enviroments, the alerts file may take up a vast amount of disk space in managers. That is why Wazuh 3.1 includes support to rotate the following files by time or size:
+In large environments, the alerts file may take up a large amount of disk space. To address this, Wazuh 3.1 includes support for rotating the following files by time or size:
 
-- Alerts (plain-text and JSON).
-- Archives (plain-text and JSON).
-- Firewall events (plain-text).
+- alerts (plain-text and JSON),
+- archives (plain-text and JSON), and
+- firewall events (plain-text).
 
-So far, alert files were rotated once a day. Now, you have the possibility of rotate them setting the rotation interval (maximum one day), or specifying a maximum file size to trigger the rotation procedure.
-Rotate files are compresses and signed, storing them as before.
+Until this release, alert files were rotated once a day. With this release, you now have the ability to set a more frequent rotation interval (maximum one day) and specify a maximum file size that will trigger the rotation procedure. Rotated files are compresses and signed and stored in the same way they were previously.
 
-In the ``<global>`` section of the :doc:`Local configuration <../user-manual/reference/ossec-conf/global>` can be found how to configure this feature.
+In the ``<global>`` section of the :doc:`Local configuration <../user-manual/reference/ossec-conf/global>` you will find information on how to configure this feature.
 
 Wazuh API
 ---------
 
-The Wazuh API has been enhanced with new requests like the described below:
+The Wazuh API has been enhanced with new requests, such as:
 
-- New request for getting agent information by agent name.
-- Request to purge `never connected` or `disconnected` agents more than a defined timeframe.
-- New request to get purgeable agents.
+- a request for getting agent information by agent name,
+- a request for purging `never connected` or `disconnected` agents after a defined time-frame, and
+- a request for getting purgeable agents.
 
-In addition, more new features could be found in the `API changelog <https://github.com/wazuh/wazuh-api/blob/3.1/CHANGELOG.md>`_.
+In addition, more new features can be found in the `API changelog <https://github.com/wazuh/wazuh-api/blob/3.1/CHANGELOG.md>`_.
 
 Ruleset
 --------
 
-The Ruleset has been improved along with the other components, including the necessary rules for the CIS-CAT and VULS integrations.
+The Ruleset has been improved to include the necessary rules for the CIS-CAT and VULS integrations.
 
-For getting more details about the included changes in the Ruleset you can visit its own `Ruleset changelog <https://github.com/wazuh/wazuh-ruleset/blob/3.1/CHANGELOG.md>`_.
+More information on changes to the Ruleset can be found on the `Ruleset changelog <https://github.com/wazuh/wazuh-ruleset/blob/3.1/CHANGELOG.md>`_.
 
 
 More relevant features
 ----------------------
 
-Additional features have been added to Wazuh 3.1.0 in order to improve its performance. Most relevant of them are the following:
+Additional features have been added to Wazuh 3.1.0 in order to improve its performance, including, but not limited to:
 
-- New field in JSON alerts including timestamp from predecoded logs.
-- Possibility of refusing shared configuration in agents locally.
-- Stop related daemon when disabling components in ossec-control.
-- Let Syscheck report file changes on first scan.
-- Fixed reported bugs.
+- a new field in JSON alerts including timestamp from predecoded logs,
+- the ability to refuse shared configuration in agents locally using the ``agent.remote_conf`` option as explained in the :doc:`Internal configuration<../user-manual/reference/internal-options>` section,
+- When ossec is used to disable a component, the relevant daemon is now immediately stopped,
+- The Syscheck reporting_changes feature formerly suppressed inclusion of file change details in alerts if the changes were detected during the first Syscheck scan after an agent restarted.  Now, file changes will be included every time textual file change data is available, and 
+- fixes to reported bugs.

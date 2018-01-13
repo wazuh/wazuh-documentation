@@ -5,40 +5,40 @@ Vuls integration
 
 .. versionadded:: 3.1.0
 
-The integration of Vuls project with Wazuh allows you to launch periodic vulnerability scan both in manager and agents. This avoids system administrators the task of daily analysis in search of vulnerable packages, being able to automate both this process and interpretation of vulnerabilities using Wazuh Ruleset.
+The integration of the Vuls project with Wazuh allows for the scheduling of periodic vulnerability scans in both the manager and the agents. This new addition allows system administrators the ability to automate the process of analyzing their systems for security vulnerabilities using the updated Wazuh Ruleset to interpret the VuLs scan results.
 
 - `What it is Vuls?`_
 - `How it works?`_
-- `How to configure it`_
+- `How to configure Vuls scans`_
 - `Use case`_
 
 
 What it is Vuls?
 -----------------
 
-Vuls is a tool created to automate the process of checking whether software installed on servers is being affected by a known vulnerability, whether any fixes have been published, their impact and others relevant information.
+Vuls is a tool that was created to automate the process of analyzing installed software on Linux servers for known security vulnerabilities. This tool also looks to see whether any fixes have been published, what the impact of the vulnerability is along with  other relevant information.
 
 How it works?
 --------------
 
-The agent (or manager) being monitored will launch Vuls scans with the periodicity indicated in the configuration. This scan consists of the following steps:
+The agent (or manager) being monitored will launch Vuls scans at the interval specified in the configuration. This scan consists of the following steps:
 
-1) Update of vulnerability databases. This step is optional but highly recommended to ensure the quality of the analysis.
-2) Scan of the server software.
-3) Check if the computer software is affected by any of the vulnerabilities of the databases.
+1) The update of the vulnerability databases. Though this step is optional, it is highly recommended to ensure the quality of the analysis.
+2) A scan of the server software.
+3) An analysis of the server software using the vulnerability databases to look for known vulnerabilities.
 
-After this, the agent will report to the manager the vulnerabilities found, and this will trigger alerts depending on the severity of the results.
+After this, the agent will report to the manager any vulnerabilities found and these will be assessed using the Wazuh Ruleset, triggering alerts based on the severity of the reported vulnerabilities.
 
-How to configure it
--------------------
+How to configure VuLs scans
+---------------------------
 
-First of all, you must deploy Vuls. To do this, just run the deployment script (`/var/ossec/wodles/vuls/deploy_vuls.sh`) including the name of your operating system and version as parameters:
+First of all, you must deploy Vuls by running the deployment script (`/var/ossec/wodles/vuls/deploy_vuls.sh`) including the name of your operating system and version as parameters:
 
 .. code-block:: console
 
     # /var/ossec/wodles/vuls/deploy_vuls.sh ubuntu 16
 
-This script will install dependencies, download VULS, download CVE and OVAL databases, and configure VULS. The deployment supports the following operating systems:
+This script will install dependencies, download VULS, download CVE and OVAL databases, and configure VULS. This deployment supports the following operating systems:
 
 +---------+-------------+
 | Distro  | Versions    |
@@ -55,7 +55,7 @@ This script will install dependencies, download VULS, download CVE and OVAL data
 +---------+-------------+
 
 .. note::
-    Your system requires 2 GB RAM or more to deploy VULS. 1 GB RAM and 1 GB SWAP memory is also enough.
+    Your system requires 2 GB RAM or more to deploy VULS, though it may also be deployed on systems with 1 GB RAM and 1 GB SWAP memory.
 
 To configure vulnerability scans you must add the following block to ``ossec. conf``:
 
@@ -69,42 +69,42 @@ To configure vulnerability scans you must add the following block to ``ossec. co
       <run_on_start>yes</run_on_start>
     </wodle>
 
-The previous example would launch a simple VULS analysis every day. However, you can configure this analysis by adding the following parameters to the script call:
+The previous example would launch a simple VULS analysis every day. You can configure this analysis further by adding the following parameters to the script call:
 
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Parameter              | Description                                                                                                                                               |
 +========================+===========================================================================================================================================================+
-|                        | Will not report vulnerabilities with a CVSS less than the indicated value. Default value is 0.                                                            |
+|                        | Sets the CVSS threshold for reporting vulnerabilities. Default value is 0.                                                                                |
 + **mincvss**            +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | **Supported value** | A positive number.                                                                                                                  |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                        | Choose to extract information from the NVD or OVAL of system. By default, it will take the font that gives a higher score.                                |
+|                        | Allows for the selection of the NVD or OVAL database of the system from which to extract information. By default, it takes the source with a higher score.|
 + **source**             +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | **Supported value** | nvd, oval                                                                                                                           |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **updatenvd**          | Update NVD database.                                                                                                                                      |
+| **updatenvd**          | Updates the NVD database.                                                                                                                                 |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | Indicates the year from which the NVD database will be downloaded if the ``updatenvd`` parameter is included. Default starts 10 years ago.                |
 + **nvd-year**           +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | **Supported value** | A valid year.                                                                                                                       |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **updaterh**           | Update Redhat OVAL database.                                                                                                                              |
+| **updaterh**           | Updates Redhat OVAL database.                                                                                                                             |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **updateub***          | Update Ubuntu OVAL database.                                                                                                                              |
+| **updateub***          | Updates Ubuntu OVAL database.                                                                                                                             |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **updatedeb**          | Update Debian OVAL database.                                                                                                                              |
+| **updatedeb**          | Updates Debian OVAL database.                                                                                                                             |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **updateorac**         | Update Oracle OVAL database.                                                                                                                              |
+| **updateorac**         | Updates Oracle OVAL database.                                                                                                                             |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                        | If a parameter is used to update an OVAL database, the OS version must be included with this parameter.                                                   |
+|                        | Indicates the OS version.  This is required when a parameter is used to update an OVAL database.                                                          |
 + **os-version**         +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | **Supported value** | The operating system version.                                                                                                       |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **autoupdate**         | Detects the operating system, version, and updates its OVAL database.                                                                                     |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **onlyupdate**         | The script will only update.                                                                                                                              |
+| **onlyupdate**         | Updates only the script.                                                                                                                                  |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                        | It will trigger an alert if the detected vulnerability has been updated in less than the indicated days ago.                                              |
+|                        | Triggers an alert if the detected vulnerability has been updated in less than the specified time-frame.                                                   |
 + **antiquity-limit**    +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                        | **Supported value** | Maximum number of days to trigger the vulnerability update alert.                                                                   |
 +------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -116,7 +116,7 @@ The previous example would launch a simple VULS analysis every day. However, you
 Use case
 ---------
 
-The following use case shows how to configure a daily vulnerability scan, which will not report alerts of level less than 5 unless its vulnerability has been updated within the last 20 days. We will also update the NVD (since 2016) and OVAL databases.
+The following use case shows how to configure a daily vulnerability scan.  In this example, only alerts that are level 5 or higher will be reported, unless its vulnerability has been updated within the last 20 days. This configuration example is also set to update the NVD (since 2016) and OVAL databases.
 
 .. code-block:: xml
 
@@ -128,7 +128,7 @@ The following use case shows how to configure a daily vulnerability scan, which 
       <run_on_start>yes</run_on_start>
     </wodle>
 
-Alerts examples:
+Alert examples:
 
 .. code-block:: console
    :emphasize-lines: 3
@@ -179,7 +179,7 @@ Alerts examples:
 Centralized configuration
 -------------------------
 
-Vuls may be specified in the :ref:`centralized configuration <reference_agent_conf>`:
+The Vuls tool can be specified in the :ref:`centralized configuration <reference_agent_conf>` as follows:
 
 .. code-block:: xml
 
@@ -193,8 +193,9 @@ Vuls may be specified in the :ref:`centralized configuration <reference_agent_co
       </wodle>
     </agent_config>
 
-When setting Vuls as shared agent configuration, **you must enable remote commands for Agent Modules**.
-You can do it by adding the next line to the file *etc/local_internal_options.conf* in the agent:
+When setting up Vuls in a shared agent configuration, **you must enable remote commands for Agent Modules**.
+
+This is enabled by adding the following line to the file *etc/local_internal_options.conf* in the agent:
 
 .. code-block:: shell
 
