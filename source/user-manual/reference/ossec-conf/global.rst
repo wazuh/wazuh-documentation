@@ -10,7 +10,7 @@ global
 		<global>
 		</global>
 
-Global configuration generally applies to features that affect the system as a whole, rather than just one component.
+Global configuration generally applies to features that affect the system as a whole, rather than a specific component.
 
 Options
 -------
@@ -41,7 +41,7 @@ Options
 alerts_log
 ^^^^^^^^^^
 
-This enable or disable writing alerts to ``/var/ossec/logs/alerts/alerts.log``.
+This toggles the writing of alerts to ``/var/ossec/logs/alerts/alerts.log``.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -50,13 +50,13 @@ This enable or disable writing alerts to ``/var/ossec/logs/alerts/alerts.log``.
 +--------------------+---------+
 
 .. warning::
-  Disabling JSON and plain text formated alerts simultaneously is not compatible with the integrator, syslog client and email features.
+  Disabling JSON and plain text formated alerts simultaneously is not compatible with the integrator, syslog client or email features.
 
 
 email_notification
 ^^^^^^^^^^^^^^^^^^
 
-This enable or disables email alerting.
+This toggles the use of email alerting.
 
 +--------------------+---------+
 | **Default value**  | no      |
@@ -72,7 +72,7 @@ This specifies the email recipient for alerts.
 
 .. note::
 
-  To use granular email configurations, a base configuration is necessary in the section.
+  A base configuration must be included in the section in order to use granular email configurations, .
 
 +--------------------+-------------------------+
 | **Default value**  | n/a                     |
@@ -80,13 +80,13 @@ This specifies the email recipient for alerts.
 | **Allowed values** | Any valid email address |
 +--------------------+-------------------------+
 
-Use this section repeatedly for multiple email addresses, once per addresses.
+This section will only allow for one email address, but the section can be repeated for each email address you would wish include.
 
 
 email_from
 ^^^^^^^^^^^^^^^^^^
 
-This controls the “source” address in email alerts.
+This specifies the “source” address contained in the email alerts.
 
 +--------------------+-------------------------+
 | **Default value**  | n/a                     |
@@ -98,7 +98,7 @@ This controls the “source” address in email alerts.
 email_reply_to
 ^^^^^^^^^^^^^^^^^^
 
-This controls the “reply-to” address in email alerts.
+This specifies the “reply-to” address contained in the email alerts.
 
 +--------------------+-------------------------+
 | **Default value**  | n/a                     |
@@ -109,7 +109,7 @@ This controls the “reply-to” address in email alerts.
 smtp_server
 ^^^^^^^^^^^^^^^^^^
 
-This controls what SMTP server to forward email alerts to for delivery.
+In this option defines what SMTP server to use to deliver alerts. 
 
 +--------------------+-----------------------------------------------+
 | **Default value**  | n/a                                           |
@@ -122,12 +122,12 @@ This controls what SMTP server to forward email alerts to for delivery.
 email_maxperhour
 ^^^^^^^^^^^^^^^^^^
 
-This specifies the maximum number of emails to be sent per hour. All emails in excess of this setting will be queued for later distribution.
+This sets the maximum number of email alerts that can be sent per hour. All emails beyond this hourly threshold are then queued to be sent together in a single email at the end of the hour.
 
 
 .. note::
 
-  At the end of the hour any queued emails will be sent together in one email. This is true whether mail grouping is enabled or disabled.
+  At the end of the hour, the queued emails will be sent together in one email whether mail grouping is turned on or not.
 
 +--------------------+---------------------------+
 | **Default value**  | 12                        |
@@ -150,8 +150,7 @@ The name will be added to the email headers with the specified value.
 custom_alert_output
 ^^^^^^^^^^^^^^^^^^^
 
-This specifies the format of alerts written to ``alerts.log``. Check the allowed values for ``custom_alert_output`` in the following table:
-
+The values below may be used with this option to specify the format of the alerts that are written to ``alerts.log``:
 
 +---------------+----------------------------------------------------+
 | Variable name | Description                                        |
@@ -164,7 +163,7 @@ This specifies the format of alerts written to ``alerts.log``. Check the allowed
 +---------------+----------------------------------------------------+
 | $HOSTNAME     | Hostname of the system generating the event.       |
 +---------------+----------------------------------------------------+
-| $LOCATION     | The file the log messages was saved to.            |
+| $LOCATION     | The file the log messages were saved to.           |
 +---------------+----------------------------------------------------+
 | $RULEID       | The rule id of the alert.                          |
 +---------------+----------------------------------------------------+
@@ -178,13 +177,13 @@ This specifies the format of alerts written to ``alerts.log``. Check the allowed
 +---------------+----------------------------------------------------+
 | $FULLLOG      | The original log message.                          |
 +---------------+----------------------------------------------------+
-| $RULEGROUP    | The groups containing the rule.                    |
+| $RULEGROUP    | The group containing the rule.                     |
 +---------------+----------------------------------------------------+
 
 stats
 ^^^^^^^^^^^^^^^^^^
 
-This controls the severity level assigned to events generated by statistical analysis.
+This sets the severity level for events that are generated by statistical analysis.
 
 +--------------------+------------------------+
 | **Default value**  | 8                      |
@@ -198,13 +197,13 @@ This controls the severity level assigned to events generated by statistical ana
 logall
 ^^^^^^^^^^^^^^^^^^
 
-This controls whether or not to store all events received even when they do not trip a rule.  This results in output to /var/ossec/logs/archives/archives.log
+This toggles whether to store events even when they do not trip a rule with results written to /var/ossec/logs/archives/archives.log.
 
-+--------------------+-----------+
-| **Default value**  | no        |
-+--------------------+-----------+
-| **Allowed values** | yes or no |
-+--------------------+-----------+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
 
 
 memory_size
@@ -222,8 +221,8 @@ This sets the memory size for the event correlation engine.
 white_list
 ^^^^^^^^^^^^^^^^^^
 
-This is a list of IP addresses that should never be blocked with active response.  Repeat this option for multiple IPs, one IP per line.
-This option is only valid in server and local installs.
+This designates IP addresses that should never be blocked with an active response and, though only one IP address can be included in this section, you may repeat this as many times as needed to include additional IP addresses.
+
 
 +--------------------+----------------------------+
 | **Default value**  | n/a                        |
@@ -231,11 +230,14 @@ This option is only valid in server and local installs.
 | **Allowed values** | Any IP address or netblock |
 +--------------------+----------------------------+
 
+.. note::
+
+  This option is only valid in server and local installs.
 
 host_information
 ^^^^^^^^^^^^^^^^^^
 
-The controls the severity level for events generated by the host change monitor.
+This sets the severity level for events generated by the host change monitor.
 
 
 +--------------------+------------------------------------+
@@ -248,43 +250,43 @@ The controls the severity level for events generated by the host change monitor.
 jsonout_output
 ^^^^^^^^^^^^^^^^^^
 
-This enables/disables writing of JSON-formated alerts to /var/ossec/logs/alerts/alerts.json.  This will include the same events that would be sent to alerts.log, but in JSON format.
+This toggles the writing of JSON-formated alerts to /var/ossec/logs/alerts/alerts.json which would include the same events that would be sent to alerts.log, only in JSON format.
 
-+--------------------+--------------------------------------------+
-| **Default value**  | no                                         |
-+--------------------+--------------------------------------------+
-| **Allowed values** | The options allowed are **yes** or **no**. |
-+--------------------+--------------------------------------------+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
 
 
 prelude_output
 ^^^^^^^^^^^^^^^^^^
 
-Enables or disables Prelude output.
+This toggles Prelude output.
 
-+--------------------+--------------------------------------------+
-| **Default value**  | yes                                        |
-+--------------------+--------------------------------------------+
-| **Allowed values** | The options allowed are **yes** or **no**. |
-+--------------------+--------------------------------------------+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
 
 
 zeromq_output
 ^^^^^^^^^^^^^^^^^^
 
-Enable ZeroMQ output.
+This enables ZeroMQ output.
 
-+--------------------+--------------------------------------------+
-| **Default value**  | n/a                                        |
-+--------------------+--------------------------------------------+
-| **Allowed values** | The options allowed are **yes** or **no**. |
-+--------------------+--------------------------------------------+
++--------------------+---------+
+| **Default value**  | n/a     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
 
 
 zeromq_uri
 ^^^^^^^^^^^^^^^^^^
 
-This is the ZeroMQ URI that the publisher socket will bind to.
+This specifies the ZeroMQ URI for the publisher socket to bind to.
 
 +--------------------+---------------------------------------------------+
 | **Default value**  | n/a                                               |
@@ -292,7 +294,9 @@ This is the ZeroMQ URI that the publisher socket will bind to.
 | **Allowed values** | This URI format is defined by the ZeroMQ project. |
 +--------------------+---------------------------------------------------+
 
-For example, this will listen for ZeroMQ subscribers on IP address 127.0.0.1:11111.
+For example: 
+
+This will listen for ZeroMQ subscribers on IP address 127.0.0.1:11111.
 
 .. code-block:: xml
 
@@ -310,10 +314,11 @@ This will listen for zeromq on the Unix Domain socket /alerts-zmq.
 
   <zeromq_uri>ipc:///alerts-zmq</zeromq_uri>
 
+
 geoip_db_path
 ^^^^^^^^^^^^^^^^^^
 
-This is the full path to the MaxMind GeoIP IPv4 database file.
+This indicates the full path of the MaxMind GeoIP IPv4 database file.
 
 +--------------------+-----------------------------------------------+
 | **Default value**  | n/a                                           |
@@ -321,23 +326,24 @@ This is the full path to the MaxMind GeoIP IPv4 database file.
 | **Allowed values** | Path to the GeoIP IPv4 database file location |
 +--------------------+-----------------------------------------------+
 
-Example
+For example:
 
 .. code-block:: xml
 
   <geoip_db_path>/etc/GeoLiteCity.dat</geoip_db_path>
+
 
 rotate_interval
 ^^^^^^^^^^^^^^^
 
 .. versionadded:: 3.1.0
 
-It is the time lapse between rotations. The highest allowed value is ``min_rotate_interval``.
+This sets the interval between file rotation with ``min_rotate_interval`` the highest allowed value.
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0 (disabled)                                                                                                                             |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
+| **Allowed values**      | A positive number that should ends with character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days).        |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example
@@ -351,7 +357,7 @@ max_output_size
 
 .. versionadded:: 3.1.0
 
-Is the time lapse between rotations. Maximum allowed value is 1TiB.
+This sets the size limit of alert files with a maximum allowed value of 1TiB.
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0 (disabled)                                                                                                                             |
@@ -378,7 +384,7 @@ Default configuration
       <alerts_log>yes</alerts_log>
       <logall>no</logall>
       <logall_json>no</logall_json>
-      <email_notification>no</email_notification>
+      <email_notification>yes</email_notification>
       <smtp_server>smtp.example.wazuh.com</smtp_server>
       <email_from>ossecm@example.wazuh.com</email_from>
       <email_to>recipient@example.wazuh.com</email_to>
