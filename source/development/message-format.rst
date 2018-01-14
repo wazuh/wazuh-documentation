@@ -236,3 +236,15 @@ Encryption key
         <Key> = MD5(<Pass>) MD5(MD5(<Name>) MD5(<ID>))[0:15]
 
     To clarify: the second MD5 hash is cut to its first 15 bytes (from 0 to 14th).
+
+    Example::
+
+        <ID> = 003
+        <Name> = myagent
+        <Pass> = 2801fb64625a4ca5523395d8ab7370dbed275a227688542493c6577c3d9fdf2c
+
+        MD5(<Pass>) = 7c07f68ea8494b2f8b9fea297119350d
+        MD5(<Name>) = 370ca80d72402c8a4dbafa5b6888e2c5
+        MD5(<ID>) = e88a49bccde359f0cabb40db83ba6080
+        MD5(MD5(<Name>) MD5(<ID>))[0:15] = 78708afa69c1c76
+        <Key> = 7c07f68ea8494b2f8b9fea297119350d78708afa69c1c76
