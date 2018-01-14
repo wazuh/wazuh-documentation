@@ -162,7 +162,7 @@ In case you want to change these settings you need to edit the Elasticsearch tem
 
 1. Download the Wazuh Elasticsearch template::
 
-    $ curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
+    $ curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
 
 2. Edit the template in order to set 1 shard a 0 replicas::
 
