@@ -2,7 +2,7 @@
 
 
 localfile
-==========
+=========
 
 .. topic:: XML section name
 
@@ -11,7 +11,7 @@ localfile
 		<localfile>
 		</localfile>
 
-This configuration section is used to specify the collection of log data from files, Windows events, and from output of commands.
+This configuration section is used to configure the collection of log data from files, Windows events, and from the output of commands.
 
 Options
 -------
@@ -28,12 +28,11 @@ Options
 location
 ^^^^^^^^
 
-Specify the location of a log or wildcarded group of logs to be read. ``strftime`` format strings may be used for log file names.
+This indicates the location of a log or wild-carded group of logs to be read. ``strftime`` format strings may be used for log file names.
 
 For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017).
 
-Wildcards may be used on non-Windows systems. When wildcards are used, the log files must exist at the time
-``ossec-logcollector`` is started. It will not automatically begin monitoring new log files.
+Wildcards may be used on non-Windows systems, however, the log file must exist at the time ``ossec-logcollector`` is started as it will not automatically begin monitoring new log files.
 
 Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
 
@@ -44,10 +43,9 @@ Note that ``strftime`` format strings and wildcards cannot be used on the same e
 +--------------------+--------------+
 
 command
-^^^^^^^^
+^^^^^^^
 
-A command to be run. All output from this command will be read as one or more log messages depending on whether
-command or full_command is used.
+This designates a command to be run. All output from this command will be read as one or more log messages depending on whether command or full_command is used.
 
 +--------------------+--------------------------------------------------+
 | **Default value**  | n/a                                              |
@@ -56,9 +54,9 @@ command or full_command is used.
 +--------------------+--------------------------------------------------+
 
 alias
-^^^^^^^^
+^^^^^
 
-This is an alias to identify the command. This will replace the command in the log message.
+This is used to assign an alias to a command that will replace the command name in the log message.
 
 +--------------------+------------+
 | **Default value**  | n/a        |
@@ -78,13 +76,12 @@ with:
 
    ossec: output: 'usb-check':
 
-
 frequency
-^^^^^^^^^^
+^^^^^^^^^
 
-The minimum time in seconds between command runs. The command will probably not run every ``frequency``
-seconds exactly, but the time between runs will not be shorter than this setting.
-This is used with **command** and **full_command**.
+The specifies the minimum amount of time in seconds between command runs. The command will likely not repeat in the exact the number of seconds specified, however, the time between runs will be no less than the number of seconds specified.
+
+This can be used with **command** or **full_command**.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -92,12 +89,12 @@ This is used with **command** and **full_command**.
 | **Allowed values** | any positive number of seconds |
 +--------------------+--------------------------------+
 
-
 only-future-events
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
-This is for use only with the ``eventchannel`` log format.  By default, when Wazuh starts, it will read all log content from a given Windows Event Channel since Wazuh was last stopped.
-Set this option to **yes** to override this behavior if desired.  Then Wazuh would only receive events that occur after the Wazuh agent is started.
+This is only to be used with the ``eventchannel`` log format.  By default, when Wazuh starts, it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
+
+If this is set to **yes** Wazuh would then only receive events that occurred after the agent was started.
 
 +--------------------+-----------+
 | **Default value**  | n/a       |
@@ -105,12 +102,10 @@ Set this option to **yes** to override this behavior if desired.  Then Wazuh wou
 | **Allowed values** | yes or no |
 +--------------------+-----------+
 
-
 query
-^^^^^^^^
+^^^^^
 
-This is for use only with the ``eventchannel`` log format. It is possible to specify an XPATH query following the event
-schema in order to filter the events that Wazuh will process.
+This is also only to be used with the ``eventchannel`` log format. With this option, you can identify an XPATH query following the event schema that will filter the events that Wazuh will process.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                                              |
@@ -133,14 +128,11 @@ label
 
   .. versionadded:: 3.0.0
 
-This option allows to append custom extra data into JSON event. It is available when `log_format`_ is ``json``.
+This option allows for the addition of custom data in JSON events and is available when `log_format`_ is set to ``json``.
 
-It has the format ``key:value``, which means that it is necessary to include the atribute ``key`` to work properly.
-Thinking in the JSON alerts, it is possible to nest labels by splitting this atribute with dots.
+Labels can be nested by separating the terms by a period.
 
-**Usage example:**
-
-For example, this option could be used to distinguish the source of each log when monitoring several files simultaneously. This is done as shown below.
+This option can be used as follows to identify the source of each log entry when monitoring several files simultaneously: 
 
 .. code-block:: xml
 
@@ -151,7 +143,7 @@ For example, this option could be used to distinguish the source of each log whe
     <label key="agent.type">webserver</label>
   </localfile>
 
-Example JSON object from the log file:
+This is a sample JSON object from the log file:
 
 .. code-block:: json
 
@@ -165,7 +157,7 @@ Example JSON object from the log file:
     }
   }
 
-The resulting event would be:
+The additional fields configured above would appear in the resulting event as below:
 
 .. code-block:: json
 
@@ -181,100 +173,81 @@ The resulting event would be:
     "@source": "myapp"
   }
 
-.. note::
-
-	If a label key existed in the source JSON it won't be included.
-	We recommend to use a distinctive label key, for instance a name starting with ``@``, like ``source``.
+.. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key be defined by using a symbol prior to the key name as in *@source*.
 
 log_format
-^^^^^^^^^^^
+^^^^^^^^^^
 
-This is the format of the log being read.
+This specifies the format of the log being read.
 
-.. note::
-
-  For most text log files that have one entry per line, you can just use syslog.
+.. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
 
-+--------------------+-------------------------------------------------------------------------------------------------------+
-| **Default value**  | syslog                                                                                                |
-+--------------------+----------------+--------------------------------------------------------------------------------------+
-| **Allowed values** | syslog         | This format is for plain text files in a syslog-like format.                         |
-|                    |                |                                                                                      |
-|                    |                | Also can be used when the logs are single line messages.                             |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | json           | This format is to monitor JSON files in one-line format.                             |
-|                    |                |                                                                                      |
-|                    |                | This option allows to insert custom extra strings into the JSON event.               |
-|                    |                |                                                                                      |
-|                    |                | See also the tag `label`_.                                                           |
-|                    |                |                                                                                      |
-|                    |                | .. versionadded:: 3.0.0                                                              |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | snort-full     | This is used for Snort’s full-output format.                                         |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | snort-fast     | This is used for Snort's fast-output format.                                         |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | squid          | This is used for squid logs.                                                         |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | iis            | This is used for IIS logs.                                                           |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | eventlog       | This is used for the classic Microsoft Windows event log format.                     |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | eventchannel   | This is used for Microsoft Windows event logs, using the new EventApi.               |
-|                    |                |                                                                                      |
-|                    |                | Monitorize: standard “Windows” eventlogs and "Application and Services" logs.        |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | mysql_log      | This is used for ``MySQL`` logs. It does not support multi-line logs.                |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | postgresql_log | This is used for ``PostgreSQL`` logs. It does not support multi-line logs.           |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | nmapg          | Used for monitoring files conforming to the grepable output from ``nmap``.           |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | apache         | Apache's default log format.                                                         |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | command        | Read in arbitrary output from the command (as run by root).                          |
-|                    |                |                                                                                      |
-|                    |                | Command defined by the command tag.                                                  |
-|                    |                |                                                                                      |
-|                    |                |                                                                                      |
-|                    |                | Each line of output will be treated as a separate log.                               |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | full_command   | Read in arbitrary output from the command (as run by root)                           |
-|                    |                |                                                                                      |
-|                    |                | Command defined by the command tag.                                                  |
-|                    |                |                                                                                      |
-|                    |                | The entire output will be treated as a single log item.                              |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | djb-multilog   | Read files in the format produced by the multilog service logger in daemontools.     |
-+                    +----------------+--------------------------------------------------------------------------------------+
-|                    | multi-line     |                                                                                      |
-|                    |                | Allow applications that log multiple lines per event to be monitored.                |
-|                    |                |                                                                                      |
-|                    |                |                                                                                      |
-|                    |                | Require the number of lines to be consistent.                                        |
-|                    |                |                                                                                      |
-|                    |                | ``multi-line:`` is followed by the number of lines in each log entry.                |
-|                    |                |                                                                                      |
-|                    |                | Each line will be combined with the previous lines until all lines are gathered.     |
-|                    |                |                                                                                      |
-|                    |                | There may be multiple timestamps in a finalized event.                               |
-|                    |                |                                                                                      |
-|                    |                | The format is: <log_format>multi-line: NUMBER</log_format>                           |
-+--------------------+----------------+--------------------------------------------------------------------------------------+
++--------------------+-------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | syslog                                                                                                            |
++--------------------+----------------+--------------------------------------------------------------------------------------------------+
+| **Allowed values** | syslog         | Used for plain text files in a syslog-like format.                                               |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | json           | Used for single-line JSON files and allows for customized labels to be added to JSON events.     |
+|                    |                |                                                                                                  |
+|                    |                | See also the tag `label`_ for more information.                                                  |
+|                    |                |                                                                                                  |
+|                    |                | .. versionadded:: 3.0.0                                                                          |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | snort-full     | Used for Snort’s full-output format.                                                             |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | snort-fast     | Used for Snort's fast-output format.                                                             |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | squid          | Used for squid logs.                                                                             |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | iis            | Used for IIS logs.                                                                               |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | eventlog       | Used for the classic Microsoft Windows event log format.                                         |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | eventchannel   | Used for Microsoft Windows event logs, using the new EventApi.                                   |
+|                    |                |                                                                                                  |
+|                    |                | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | mysql_log      | Used for ``MySQL`` logs, however, this value does not support multi-line logs.                   |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | postgresql_log | Used for ``PostgreSQL`` logs, however, this value does not support multi-line logs.              |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | nmapg          | Used for monitoring files conforming to the grep-able output from ``nmap``.                      |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | apache         | Used for Apache's default log format.                                                            |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | command        | Used to read output from the command (as run by root) specified by the command tag.              |
+|                    |                |                                                                                                  |
+|                    |                | Each line of output is be treated as a separate log.                                             |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | full_command   | Used to read output from the command (as run by root) specified by the command tag.              |
+|                    |                |                                                                                                  |
+|                    |                | The entire output will be treated as a single log item.                                          |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | djb-multilog   | Used to read files in the format produced by the multilog service logger in daemontools.         |
++                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | multi-line     | Used to monitor applications that log multiple lines per event.                                  |
+|                    |                |                                                                                                  |
+|                    |                | The number of lines must be consistent in order to use this value.                               |
+|                    |                |                                                                                                  |
+|                    |                | The number of lines in each log entry must be specified following the ``multi-line:`` value.     |
+|                    |                |                                                                                                  |
+|                    |                | Each line will be combined with the previous lines until all lines are gathered which means there|
+|                    |                |                                                                                                  |
+|                    |                | may be multiple timestamps in the final event.                                                   |
+|                    |                |                                                                                                  |
+|                    |                | The format for this value is: <log_format>multi-line: NUMBER</log_format>                        |
++--------------------+----------------+--------------------------------------------------------------------------------------------------+
 
 .. warning::
 
-	The eventchannel log format cannot be used on Windows agents older than Vista since they do not produce that kind of log.
+	The eventchannel log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
 
 .. warning::
 
-	Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution since it may not be permissible in all environments to allow the Wazuh manager to run arbitrary commands on agents in their root security context.
+	Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh Manager from running arbitrary commands on agents in their root security context. 
 
-
-Example:
-
-Multi-line log message in original log file:
+Sample of Multi-line log message in original log file:
 
 .. code-block:: console
 
@@ -284,20 +257,20 @@ Multi-line log message in original log file:
 	Aug 9 14:22:47 hostname log line three
 	Aug 9 14:22:47 hostname log line five
 
-Log message as analyzed by ossec-analysisd:
+Sample Log message as analyzed by ossec-analysisd:
 
 .. code-block:: console
 
 	Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
 
-Example of configuration
-------------------------
+Configuration examples
+----------------------
 
 Linux configuration:
 
 .. code-block:: xml
 
-    <!-- For monitor log files -->
+    <!-- For monitoring log files -->
     <localfile>
       <log_format>syslog</log_format>
       <location>/var/log/syslog</location>
@@ -305,7 +278,7 @@ Linux configuration:
       <timeout_allowed>yes</timeout_allowed>
     </command>
 
-    <!-- For monitor commands output -->
+    <!-- For monitoring command output -->
     <localfile>
       <log_format>command</log_format>
       <command>df -P</command>
@@ -316,7 +289,7 @@ Windows configuration:
 
 .. code-block:: xml
 
-    <!-- For monitor Windows eventchannel -->
+    <!-- For monitoring Windows eventchannel -->
     <localfile>
       <location>Security</location>
       <log_format>eventchannel</log_format>
