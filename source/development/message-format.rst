@@ -101,7 +101,7 @@ Block
 
 The *block* is the result of joining a header and the input event::
 
-    <Block> = <Random> <Global counter> ":" <Local counter> <Event>
+    <Block> = <Random> <Global counter> ":" <Local counter> ":" <Event>
 
 Random
     5-byte 0-padded random unsigned integer.
@@ -183,17 +183,17 @@ Complete encryption formula
 
 For agents with restricted address::
 
-    ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> <Event>) <Random> <Global> ":" <Local> <Event>))
+    ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
 For agents with unrestricted address (address ``any`` or netmask different from 32)::
 
-    "!" <ID> "!:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> <Event>) <Random> <Global> ":" <Local> <Event>))
+    "!" <ID> "!:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
 This is the **encryption flow chart**:
 
 .. image:: ../images/development/encryption_flow.png
     :align: center
-    :width: 100%
+    :width: 50%
 
 Network protocol
 ~~~~~~~~~~~~~~~~
