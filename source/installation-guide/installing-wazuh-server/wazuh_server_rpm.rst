@@ -41,7 +41,7 @@ For CentOS-5 and RHEL-5:
         EOF
 
 Installing the Wazuh Manager
-------------------------
+----------------------------
 
 The next step is to install the Wazuh Manager on your system:
 
@@ -64,7 +64,7 @@ Once the process is completed, you can check the service status with:
       # service wazuh-manager status
 
 Installing the Wazuh API
---------------------
+------------------------
 
 1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
