@@ -1,19 +1,18 @@
 .. _upgrading-agent:
 
 Upgrading agent
-=================
+===============
 
+The following is a description of the upgrade procedure by means of a use case.
 
-We will describe the upgrade procedure using a use case.
-In this use case we will upgrade an agent remotely using two different ways: using the command line and using the API.
+Upgrading an agent remotely can be performed at the command line and through the API.
 
 Using the command line
---------------------------
+----------------------
 
-To upgrade agents using the command line we will use the :doc:`agent_upgrade <../../reference/tools/agent_upgrade>` tool.
+To upgrade agents using the command line, use the :doc:`agent_upgrade <../../reference/tools/agent_upgrade>` tool as follows:
 
-
-1. We will list all outdated agents using the *'-l'* parameter:
+1. List all outdated agents using the *'-l'* parameter:
 
     .. code-block:: console
 
@@ -26,7 +25,7 @@ To upgrade agents using the command line we will use the :doc:`agent_upgrade <..
 
         Total outdated agents: 3
 
-2. We will upgrade the agent 002. So, we will use the *'-a'* parameter and the agent ID:
+2. Upgrade the agent with ID 002 using the *'-a'* parameter followed by the agent ID:
 
     .. code-block:: console
 
@@ -37,7 +36,7 @@ To upgrade agents using the command line we will use the :doc:`agent_upgrade <..
         Agent upgraded: Wazuh v3.0.0 -> Wazuh v3.1.0
 
 
-3. Once we receive the last confirmation message, the agent is restarted and we can check the new agent version:
+3. Following the upgrade, the agent is automatically restarted.  Check the agent version to ensure it has been properly upgraded as follows:
 
     .. code-block:: console
 
@@ -61,7 +60,7 @@ To upgrade agents using the command line we will use the :doc:`agent_upgrade <..
 Using the RESTful API
 ----------------------
 
-1.  We will list all outdated agents:
+1.  List all outdated agents:
 
     .. code-block:: console
 
@@ -92,7 +91,7 @@ Using the RESTful API
         }
 
 
-2. We will upgrade the agent 002:
+2. Upgrade the agent with ID 002:
 
     .. code-block:: console
 
@@ -116,7 +115,7 @@ Using the RESTful API
         }
 
 
-4. Check new agent version:
+4.  Following the upgrade, the agent is automatically restarted.  Check the agent version to ensure it has been properly upgraded follows:
 
     .. code-block:: console
 

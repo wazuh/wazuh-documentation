@@ -5,25 +5,15 @@ Grouping agents
 
 .. versionadded:: 3.0.0
 
-Once the agent is registered, we have two different ways to configure it. We can configure agents locally
-with the :doc:`ossec.conf <../reference/ossec-conf/index>` file, or remotely using
-the :doc:`centralized configuration <../reference/centralized-configuration>`. If we select the centraliced
-configuration option, it is possible to group agents, making the configuration easier.
+There are two methods for configuring registered. They can either be configured locally with the :doc:`ossec.conf <../reference/ossec-conf/index>` file or remotely using
+the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups with each group possessing a unique configuration.  This greatly simplifies the overall configuration process. 
 
-By default, all the new agents belong to the **'default'** group. This group is created on the installation
-process and has all configuration files contained in the folder ``etc/shared/default/``. These files will be
-pushed from the manager and received for all agents belonging to this group.
+Unless otherwise assigned, all new agents automatically belong to the **'default'** group. This group is created during the installation process with the configuration files placed in the ``etc/shared/default/`` folder. These files will be pushed from the manager to all agents belonging to this group.
 
-To describe this functionality we will use the following example:
+Below are the steps to assign agents to a group with a specific configuration:
 
-We will assume that we have a group of agents that host a database management system. If we want these
-agents to have a specific configuration, we will follow the next steps:
-
-1. If we already have all agents added to the manager, the next step is to assign them to the group.
-   To do this we will use the :doc:`agent_groups <../reference/tools/agent_groups>` tool or the
-   :doc:`API <../api/index>`.
-   In our example we are going to assign the agent with id 002 to the group *'dbms'*, so we will use
-   the following commands:
+1. Once an agent has been added to the manager, assign it to a group using the :doc:`agent_groups <../reference/tools/agent_groups>` tool or the
+   :doc:`API <../api/index>`.  Below are examples of how to assign an agent with ID 002 to the group *'dbms'* using these methods:
 
    Using **agent_groups**:
 
@@ -37,12 +27,9 @@ agents to have a specific configuration, we will follow the next steps:
 
       # curl -u foo:bar -k -X PUT "https://API_ADDRESS:55000/agents/002/group/dbms?pretty"
 
-   .. note:: If the group to which we are going to assign the agents does not exist, it will be created when the first
-      agent is added and will contain the same files than the *'default'* group. It is also possible to create new groups
-      in advance.
+   .. note:: New groups may be created and configured before assigning agents. If a group does not exist prior to assigning an agent, it will be created when the first agent is added and set up with the files from the *'default'* group.
 
-
-   Once added to the group, we can check if the group was correctly added:
+   An agent's group assignment can be checked using one of the following commands:
 
    Using **agent_groups**:
 
@@ -64,15 +51,8 @@ agents to have a specific configuration, we will follow the next steps:
       # curl -u foo:bar -k -X GET "https://API_ADDRESS:55000/agents/groups/dbms?pretty"
 
 
-2. Now we can edit the ``agents.conf`` file for this group. To do this we have to modify the file ``etc/shared/dbms/agents.conf``.
-   Each agent belonging to this group will receive this file.
+2. Once a group is created, its ``agents.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, the file to be edited is located at ``etc/shared/dbms/agents.conf`` and each agent belonging to this group will receive this file.
 
-3. Once the agent connects to the manager, the manager will sent the files inside the *'dbms'* folder,
-   including the ``agent.conf`` file that we modified in the previous step, to the agent in a maximum of 20 minutes.
+3. Within 20 minutes of connecting to the manager, each agent assigned to a group will receive the files contained in the *'dbms'* folder from the manager, including the ``agent.conf`` file that was modified in the previous step.  The length of time it takes for the manager to push these files to the agents depends on the size of the files, the number of agents in the group and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding **merged.mg** file) on 100 agents using UDP, however if TCP is used, this may move along much faster.
 
-4. Agents will receive the files in a time period depending on the files size, the amount of agents and also on
-   the connection protocol used. For example, we need around 8 minutes to receive a 10 MB folder (excluding **merged.mg** file)
-   on 100 agents using UDP. Using TCP will be faster, depending on the network bandwidth.
-
-Once a specific agent belongs to a group, even though an agent is registered again with other name or ID, it will be **automatically reassigned**
-to the same group as before. This is made possible by comparing the checksum of the ``merged.mg`` sent by the agent with the checksums saved for all agents in the manager.
+4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager.

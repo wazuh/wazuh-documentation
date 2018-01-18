@@ -1,14 +1,13 @@
 .. _install-custom-wpk:
 
-Installing custom WPK package
-==============================
+Installing a custom WPK package
+===============================
 
 1. Install the root CA into the agent
---------------------------------------
+-------------------------------------
+Either the root CA certificate or the certificate used to sign the WPK package must be installed in the agent before running an upgrade.
 
-The root CA certificate, or failing that, the certificate used to sign the WPK package, must be installed in the agent before running an upgrade.
-
-You have two options:
+You have two options to perform this action:
 
     a. Overwrite the shipped root CA with your certificate. This will prevent your agent from upgrading using WPK packages from Wazuh.
 
@@ -27,9 +26,9 @@ You have two options:
 
 
 2. Run the upgrade
---------------------
+------------------
 
-Get the WPK package into the Wazuh manager and run:
+Run the WPK package from the Wazuh manager:
 
 .. code-block:: console
 
@@ -37,7 +36,7 @@ Get the WPK package into the Wazuh manager and run:
 
 Where:
     - **-a 001** specifies the agent to upgrade.
-    - **-f path/to/myagent.wpk** is the path to the WPK package.
+    - **-f path/to/myagent.wpk** designates the path to the WPK package.
     - **-x upgrade.sh** is the name of the upgrading script contained in the package.
 
 Output example:

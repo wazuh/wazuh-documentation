@@ -5,8 +5,7 @@ Deploying a Wazuh cluster
 
 .. versionadded:: 3.0.0
 
-The Wazuh cluster has been developed in order to get a stronger communication between agents and managers. This means that the cluster is able to synchronize the necessary files between
-its nodes to allow agents to report events to any manager of the cluster.
+The Wazuh cluster functionality has been developed to strengthen the communication between agents and managers. The cluster can synchronize events between its nodes to allow agents to report them to any manager that is a part of the cluster.
 
 - `Why do we need a Wazuh cluster?`_
 - `How it works`_
@@ -15,83 +14,75 @@ its nodes to allow agents to report events to any manager of the cluster.
 Why do we need a Wazuh cluster?
 -------------------------------
 
-The Wazuh cluster provides horizontal scalability to our Wazuh environment, allowing agents to report to any manager belonging to the cluster. This way, we have the ability
-to process more events than before distributing the load of information between several managers simultaneously.
+The Wazuh cluster provides horizontal scalability to the Wazuh environment, allowing agents to report to any manager belonging to the cluster. This enables Wazuh to process a greater number of events than a single manager environment, distributing the load between multiple managers simultaneously.
 
-In addition, a cluster of Wazuh managers is prepared to handle the fall of any manager without affecting its operation, unless it is the master manager.
-Agents that were reporting to this fallen manager will start to report to another manager of the cluster automatically, without the loss of events. The cluster provides high availability since the agents will always have a manager to report to but it doesn't provide load balancing. We recommend to configure a load balancer between agents and the cluster nodes. The agents will have configured the IP of the load balancer as manager IP.
+Additionally, a cluster of Wazuh managers provides a level of fault tolerance so that if one manager goes off-line, Wazuh can continue operating so long as the master manager is still accessible. To accomplish this, agents that were reporting to a manager that goes off-line will automatically be redirected to another manager in the cluster without losing events. This functionality dramatically increases the availability and efficiency of the Wazuh environment.
 
-Finally, the Wazuh cluster is in continuous development and we hope it to include many new features very soon. For example, we refer to the possibility of
-switching the role of master between all managers to provide high availability.
+Please note, however, that the cluster functionality does not provide automated load balancing. We recommend that a load balancer be configured between agents and the cluster nodes. With a load balancer in place, the agents would be configured to use the IP of the load balancer as their manager IP.
 
+The Wazuh cluster is under continuous development and we hope to include many additional features very soon, including switching the role of master between all managers to provide even greater availability and fault tolerance.
 
 How it works
 ------------
 
-The Wazuh cluster is managed by a cluster daemon which communicates managers, following a master-client architecture.
+The Wazuh cluster is managed by a cluster daemon which communicates with the managers following a master-client architecture.
 
 .. note::
-  All managers in the cluster should be configured with the same time and date. You can use the `NTP (Network Time Protocol) <https://wiki.debian.org/NTP>`_.
+  The date and time must be synchronized between all managers in the cluster. This can be done using the `NTP (Network Time Protocol) <https://wiki.debian.org/NTP>`_.
 
 Master
-^^^^^^^^
+^^^^^^
 
-The master node is the manager who has the control of the cluster. This means that every configuration done in the master node is pushed to the others managers, and it allows
-to centralize the following configurations:
+The master node is the manager that controls the cluster. The configuration of the master node is pushed to the other managers which allows for the centralization of the following:
 
-- Agents registration and deletion.
-- Configuration of agents grouping.
-- Centralized configuration for agents, synchronizing its ``agent.conf`` file.
+- agent registration,
+- agent deletion,
+- configuration of agents grouping, and
+- centralized configuration of the ``agent.conf`` file used by the agents within each agent group.
 
-To sum up, the master node sends to its clients the whole ``etc/shared`` directory contained in the Wazuh installation directory, with
-the centralized configuration of each agent ordered by groups, as well as the ``client.keys`` file. These shared files agents to report to any manager of the cluster.
+The master node sends to its clients the complete ``etc/shared`` directory contained in its Wazuh installation directory.  This includes the centralized configuration of agents ordered by groups and the ``client.keys`` file. These shared files allow agents to report to any manager of the cluster.
 
-The comunications between nodes of the cluster are made with a self developed protocol which synchronizes those files with a specific interval time, defined in
-the ``<cluster>`` section of :doc:`Local configuration <../reference/ossec-conf/cluster>`.
-These communications are encrypted with AES providing confidentiality.
-
+The communication between the nodes of the cluster is performed by means of a self-developed protocol.  This synchronization occurs at the frequency defined in the ``<cluster>`` section of :doc:`Local configuration <../reference/ossec-conf/cluster>`. These cluster communications are sent with the AES encryption algorithm providing for security and confidentiality.
 
 Client
-^^^^^^^^
+^^^^^^
 
-Managers which have the client role in the cluster receive the data from the master node, and update their files with the received ones. This way, it's guaranteed that the shared configuration
-for the agents is the same in all managers.
+Cluster managers that have the client role update their files with the data received from the master node. This ensures that the shared configuration for the agents is the same in all managers.
 
-On the other hand, client nodes send to the master the ``agent-info`` file of their reporting agents. This file contains the most important information of each agent, and allows to the master node to know in real-time
-the connection state of agents, as well as the manager each agent is reporting to.
+Client nodes send the ``agent-info`` file of their reporting agents to the master. This file contains important information about each agent and allows the master node to have real-time awareness of the connection status of all agents and the manager that each agent is reporting to.
 
 Cluster daemons
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
+Wazuh clusters function through the use of the following two daemons:
 
-- **wazuh-clusterd** is the module that manage the synchronization between managers in the cluster. There exits a file located at ``logs/cluster.log`` where can be found all the logging messages of this daemon.
+- **wazuh-clusterd** synchronizes the managers in the cluster and outputs a logfile to ``logs/cluster.log``.
 
-- **wazuh-clusterd-internal** is the daemon in charge of monitoring the files to synchronize and managing the cluster database. The logs of this daemon are stored in ``logs/ossec.log`` file.
+- **wazuh-clusterd-internal** monitors the files to synchronize and manages the cluster database. The logs of this daemon can be found in the ``logs/ossec.log`` file.
 
-Those daemons must be running in all the managers of the cluster in order to ensure everything works properly. The **wazuh-clusterd** will start the **wazuh-clusterd-internal** daemon.
+Both of these daemons must be running in all the managers of the cluster. The **wazuh-clusterd** will automatically start the **wazuh-clusterd-internal** daemon.
 
-Refer to the section :doc:`Daemons <../reference/daemons/index>` to find out more information about the usage of these daemons.
+Refer to the :doc:`Daemons <../reference/daemons/index>` section for more information about the use of these daemons.
 
 Cluster management
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
-The cluster can be efficiently controlled from any manager with the **cluster_control**. This tool allows you to obtain real-time information about any node, as well as the status of the all synchronized files and information about agents connected to the cluster.
+The cluster can be efficiently controlled from any manager with the **cluster_control** tool. This tool allows you to obtain real-time information about any node, the status of the synchronized files and information about agents connected to the cluster.
 
-The manual about this tool can be found at :doc:`cluster_control tool <../reference/tools/cluster_control>`.
+The manual for this tool can be found at :doc:`cluster_control tool <../reference/tools/cluster_control>`.
 
 Cluster database
 ^^^^^^^^^^^^^^^^^
 
-It has been incorporated a database for each manager in the cluster called `cluster_db`. Information about the state of each synchronized
-file is stored in that database. Each row of the database has the structure ``<node> <file> <state>``.
+The cluster database has been incorporated into the database for each manager in the cluster.  This database is called `cluster_db` and contains information about the syncronization status of the files. Each row of the database contains the ``<node> <file> <state>`` fields.
 
 
 Use case: Deploying a Wazuh cluster
 -----------------------------------
 
 .. note::
-  To run the wazuh-clusterd binary, **Python 2.7** is required. If your OS has a lower python version, please check section `Run the cluster in CentOS 6`_
+  To run the wazuh-clusterd binary, **Python 2.7** is required. If your OS has a previous python version, please refer to `Run the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
 
-In order to deploy a Wazuh cluster, follow these steps:
+Follow these steps to deploy a Wazuh cluster:
 
 1. Install dependencies
 
@@ -107,20 +98,20 @@ In order to deploy a Wazuh cluster, follow these steps:
 
       # apt install python-cryptography
 
-2. Set the properly configuration in all the managers of the cluster.
+2. Set the configurtion of the managers of the cluster.
 
-  In the ``<cluster>`` section of the :doc:`Local configuration <../reference/ossec-conf/cluster>` it should be set the configuration for the cluster regarding the following considerations.
+  In the ``<cluster>`` section of the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the configuration for the cluster as below:
 
-  - One manager should be the master and the other ones, the clients. This is specified in the ``<node_type>`` field.
-  - The key should be the same for all the nodes of the cluster and it must be 32 characters long. To generate a random password you can use the following command:
+  - Designate one manager as the master and the rest as clients under the ``<node_type>`` field.
+  - The key must be 32 characters long and should be the same for all of the nodes of the cluster. Use the following command to generate a random password:
 
       .. code-block:: console
 
           # openssl rand -hex 16
 
-  - The IP addresses of all **nodes** of the cluster must be specified in the ``<nodes>``, including the IP of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` to find out which IP from the list is theirs. If none of the IPs match with the ones returned by the ``hostname --all-ip-addresses`` command, an error will be raised.
+  - The IP addresses of all of the **nodes** of the cluster must be specified under ``<nodes>``, including the IP of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` to find out which IP from the list is theirs. If the ``hostname --all-ip-addresses`` command finds there is a duplicate IP address, an error will be displayed.
 
-  An example of configuration could be the following.
+  The following is an example of this configuration:
 
   .. code-block:: xml
 
@@ -141,32 +132,32 @@ In order to deploy a Wazuh cluster, follow these steps:
         <disabled>yes</disabled>
       </cluster>
 
-3. To enable the Wazuh cluster, set the field ``<disabled>`` to ``no`` in the ``<cluster>`` section of the ossec.conf file and restart:
+3. To enable the Wazuh cluster, set ``<disabled>`` to ``no`` in the ``<cluster>`` section of the ossec.conf file and restart:
 
     .. code-block:: console
 
         # /var/ossec/bin/ossec-control restart
 
-5. Since this moment, the cluster should be synchronized and the shared files should be the same in all the managers.
+4. The cluster should now be synchronized with the same shared files in all managers.
 
 Run the cluster in CentOS 6
 ---------------------------
-Python 2.6 is the default python version in CentOS6. Since Python 2.7 is required to run the cluster, follow these steps:
+Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is required to run the cluster, follow these steps to install and use this version:
 
-1. Install Python 2.7:
+1. Install Python 2.7 as follows:
   
   .. code-block:: console
 
     # yum install -y centos-release-scl
     # yum install -y python27
 
-2. Enable python2.7 in bash:
+2. Enable python 2.7 in bash:
 
   .. code-block:: console
 
     # scl enable python27 bash
 
-3. The default version of ``sqlite3`` library is not compatible but a compiled version of ``sqlite3`` can be found at ``/var/ossec/framework/lib``. To load this version follow these steps:
+3. The default version of ``sqlite3`` library is also not compatible with Wazuh clusters.  However, a compiled version of ``sqlite3`` that is compatible can be found at ``/var/ossec/framework/lib``. Load this version as follows:
   
   1. Install ``chrpath``:
 
@@ -186,24 +177,24 @@ Python 2.6 is the default python version in CentOS6. Since Python 2.7 is require
 
       # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/ossec/framework/lib
 
-4. Install dependencies:
+  4. Install dependencies:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /opt/rh/python27/root/usr/bin/pip2.7 install cryptography
+      # /opt/rh/python27/root/usr/bin/pip2.7 install cryptography
 
-5. Use ``python2.7`` to start the cluster:
+  5. Use ``python2.7`` to start the cluster daemon:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # python2.7 /var/ossec/bin/wazuh-clusterd
+      # python2.7 /var/ossec/bin/wazuh-clusterd
 
-6. Finally, if the cluster is correctly configured, check it's running:
+  6. Finally, check the status of the cluster as follows:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # ps -aux | grep cluster
-    ossec     6533  0.0  1.4 135424 15128 ?        S    07:19   0:00 python2.7 /var/ossec/bin/wazuh-clusterd
-    root      6536  0.0  0.4 158608  4584 ?        Ssl  07:19   0:00 /var/ossec/bin/wazuh-clusterd-internal -tmaster
-    ossec     6539  0.0  1.5 136464 15932 ?        S    07:19   0:00 python2.7 /var/ossec/bin/wazuh-clusterd
-    root      6556  0.0  0.2   8032  2092 ?        S+   07:21   0:00 grep cluster
+      # ps -aux | grep cluster
+      ossec     6533  0.0  1.4 135424 15128 ?        S    07:19   0:00 python2.7 /var/ossec/bin/wazuh-clusterd
+      root      6536  0.0  0.4 158608  4584 ?        Ssl  07:19   0:00 /var/ossec/bin/wazuh-clusterd-internal -tmaster
+      ossec     6539  0.0  1.5 136464 15932 ?        S    07:19   0:00 python2.7 /var/ossec/bin/wazuh-clusterd
+      root      6556  0.0  0.2   8032  2092 ?        S+   07:21   0:00 grep cluster

@@ -6,7 +6,7 @@ CIS-CAT integration
 
 .. versionadded:: 3.1.0
 
-The **CIS-CAT wodle** has been developed with the aim of running CIS benchmarks assessments into Wazuh agents.
+The **CIS-CAT wodle** has been developed for the purpose of integrating CIS benchmark assessments into Wazuh agents.
 
 - `What is CIS-CAT`_
 - `How it works`_
@@ -19,38 +19,37 @@ CIS (Center for Internet Security) is an entity dedicated to safeguard private a
 CIS benchmarks guidelines, which are a recognized global standard and best practices for securing IT systems and data against cyberattacks.
 
 In addition, CIS-CAT pro is a "cross-platform Java app" tool developed for scanning target systems and generating a report comparing the system settings to
-the CIS benchmarks. There exists more than 80 CIS benchmarks with coverage for nearly all OS, providing different profiles depending on the specific need.
+the CIS benchmarks. There are more than 80 CIS benchmarks that cover nearly all OSs, providing different profiles depending on the specific need.
 
-We have to highlight that CIS-CAT pro is a proprietary software and it is necessary for using this integration.
+It is important to note that CIS-CAT pro is proprietary software which is required for the use of this integration.
 
 How it works
 ------------
 
-The CIS-CAT Wazuh module attempts to integrate CIS benchmark assessments into Wazuh agents and report results of each scan in alerts form.
+The CIS-CAT Wazuh module integrates CIS benchmark assessments into Wazuh agents and reports the results of each scan in the form of an alert.
 
 CIS-CAT pro is written in Java, so it requires a Java Runtime Environment in order to execute it. Currently, the JRE versions supported in
 CIS-CAT are JRE 6, 7, 8.
 
-For running this integration, the CIS-CAT tool should reside in the local agent that runs the scans. However, the JRE can be located on
-a removable disk or network drive for sharing it between multiple agents.
+For running this integration, the CIS-CAT tool must reside on the local agent that runs the scans. However, the JRE can be located on
+a removable disk or network drive for the purpose of sharing between multiple agents.
 
-In addition, in Unix systems the CIS-CAT script might need to be granted execute permissions. To do this, in the CIS-CAT directory run the following command:
+In addition, in Unix systems, the CIS-CAT script may need to be granted execute permissions. To do this, run the following command from the CIS-CAT directory:
 
 .. code-block:: console
 
     # chmod +x CIS-CAT.sh
 
-Finally, the ``xsltproc`` tool is necessary to convert CIS-CAT reports into Wazuh alerts. It is a common tool that can be easily found in any Unix distribution.
+Finally, the ``xsltproc`` tool is needed to convert CIS-CAT reports into Wazuh alerts. It is a common tool that can be easily found in any Unix distribution.
 
-Once you have the requirements for running CIS evaluations, you can configure the wodle for evaluate specific Benchmarks with a configured
-frequency, scan results after executing the checks are sent to the manager and you will be able to visualize them as you prefer.
+Once you have the requirements for running CIS evaluations, you can configure the wodle to check for specific benchmarks at a your chosen interval. The scan results from these checks are sent to the manager and can be included in the visualizations. 
 
 Use case: Running a CIS evaluation
 ----------------------------------
 
-In order to deploy the CIS-CAT integration, this section can be follow as example of how to use it.
+The following is an example of how to deploy the CIS-CAT integration:
 
-1. In the configuration file, ``ossec.conf``, you have to set a section like the following one.
+1. In the configuration file, ``ossec.conf``, set up a section as follows:
 
 .. code-block:: xml
 
@@ -71,12 +70,11 @@ In order to deploy the CIS-CAT integration, this section can be follow as exampl
   </wodle>
 
 .. note::
-    Be sure that Java and CIS-CAT tool are located in the specified paths. Apart from that, the defined path of the benchmark selected has to be relative to the CIS-CAT tool.
+    Make sure the paths are correct for the location of your Java and the CIS-CAT tool and the path to the selected benchmark is relative to the CIS-CAT tool path. 
 
-If no profile is specified for a certain content, it will be selected the first one, which is usually the most permisive.
+    If no profile is specified, the first one, which is usually the most permissive, will be selected.
 
-2. After restart the Wazuh agent, evaluations will be executed with the specified interval, triggering alerts
-as shown below.
+2. After restarting the Wazuh agent, the benchmark checks will be executed at the specified interval, triggering alerts as shown below.
 
 Information about the executed scan
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

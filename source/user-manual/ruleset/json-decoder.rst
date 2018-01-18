@@ -1,30 +1,30 @@
 .. _ruleset_json-decoder:
 
 JSON decoder
-=============
+============
 
 .. versionadded:: 3.0.0
 
-Wazuh incorporates an integrated decoder for JSON format. This decoder allows us to extract data from any source in JSON format.
+Wazuh now incorporates an integrated decoder for JSON logs enabling the extraction of data from any source in this format.
 
-The decoder is able to extract the following data types:
+This decoder has the ability to extract the following data types:
 
 +------------------+--------------------------------------------------------------------------------------------+
 |**Numbers**       | Integer or decimal numbers.                                                                |
 +------------------+--------------------------------------------------------------------------------------------+
-|**Strings**       | A sequence of zero or more characters.                                                     |
+|**Strings**       | A sequence of characters.                                                                  |
 +------------------+--------------------------------------------------------------------------------------------+
-|**Booleans**      | Either of the values *true* or *false*.                                                    |
+|**Booleans**      | The values *true* or *false*.                                                              |
 +------------------+--------------------------------------------------------------------------------------------+
 |**Null values**   | Empty values.                                                                              |
 +------------------+--------------------------------------------------------------------------------------------+
-|**Arrays**        | List with zero or more values. These values may be different, but they must belong to      |
+|**Arrays**        | Lists with zero or more values. These values may be different, but they must belong to     |
 |                  | some of the above. **An array of objects is not supported.**                               |
 +------------------+--------------------------------------------------------------------------------------------+
-|**Objects**       | Collection of key/value pairs where the keys are strings.                                  |
+|**Objects**       | Collections of key/value pairs where the keys are strings.                                 |
 +------------------+--------------------------------------------------------------------------------------------+
 
-Extracted fields are casted to strings, stored as :doc:`Dynamic Fields <dynamic-fields>` and can be used for rules generation.
+Extracted fields are stored as :doc:`Dynamic Fields <dynamic-fields>` and can be referred to by the rules.
 
 The following example shows how Wazuh decodes a JSON log and generates an alert for *Suricata*.
 
@@ -58,11 +58,9 @@ The following example shows how Wazuh decodes a JSON log and generates an alert 
    }
 
 
-We don't need to create a specific decoder for *Suricata*, since the JSON decoder extracts all the content fields and we can use them directly in the rules.
-We only need to check the fields extracted by the decoder to identify the log received and generate the alert.
-In the following example we show how the rules contained in the file ``0470-suricata_rules.xml`` work.
-We use the first rule to check the existence of the *'timestamp'* and *'event_type'* fields to determine the type of log (*Suricata*),
-and in the second rule we can display the alert using the value of the extracted fields.
+The JSON decoder extracts each the fields from the log data for comparison against the rules such that a specific *Suricata* decoder is not needed.  The rules will be used to identify the source of the JSON event based on the existence of certain fields that are specific to the source that the JSON event was generated from. 
+
+The following example shows how the rules contained in the file ``0470-suricata_rules.xml`` work. Initially, there is a parent rule to check for the existence of the *'timestamp'* and *'event_type'* fields to determine the type of log (*Suricata*), then the child rule displays the alert using the value of the extracted fields.
 
 .. code-block:: xml
 
@@ -84,7 +82,7 @@ and in the second rule we can display the alert using the value of the extracted
    ...
 
 
-Output obtained using *ossec-logtest*:
+The output of *ossec-logtest* from the above JSON record is as follows:
 
 ::
 
