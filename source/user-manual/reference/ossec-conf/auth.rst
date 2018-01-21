@@ -12,7 +12,7 @@ auth
         </auth>
 
 
-This section has options for the registering service.
+This section shows the options for the registering service.
 
 .. versionadded:: 2.1
 
@@ -37,19 +37,18 @@ Options
 disabled
 ^^^^^^^^
 
-Disables the execution of the Auth daemon.
+Toggles the execution of the Auth daemon on or off.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
 +--------------------+---------------------+
-| **Allowed values** | - yes               |
-|                    | - no                |
+| **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
 port
 ^^^^
 
-TCP port number to listen to connections.
+Defines the TCP port number for listening to connections.
 
 +--------------------+---------------------+
 | **Default value**  | 1515                |
@@ -58,35 +57,31 @@ TCP port number to listen to connections.
 +--------------------+---------------------+
 
 use_source_ip
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
-Use client's source IP address instead of "any" to add agent.
+Toggles the use of the client's source IP address or the use of "any" to add an agent.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
 +--------------------+---------------------+
-| **Allowed values** | - yes               |
-|                    | - no                |
+| **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
 force_insert
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
-Force insertion: remove old agent with same name or IP.
+Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP which would then remove the old agent with same name or IP.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
 +--------------------+---------------------+
-| **Allowed values** | - yes               |
-|                    | - no                |
+| **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
 force_time
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
-When forcing to remove old agents with same name or IP, this options specifies
-that the deletion will be performed only if the agent's keepalive has more than
-a number of seconds.
+When forcing to remove old agents with same name or IP, this options specifies that the deletion will be performed only if the agent's keepalive has more than the defined number of seconds.
 
 +--------------------+---------------------+
 | **Default value**  | 0                   |
@@ -98,61 +93,57 @@ a number of seconds.
 Value ``0`` means to force always.
 
 purge
-^^^^^^^^^^^^^^^^^^^
+^^^^^
 
-Delete definitely agents when removing.
+Toggles the deletion of client keys on or off when agents are removed.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
 +--------------------+---------------------+
-| **Allowed values** | - yes               |
-|                    | - no                |
+| **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
-When set to ``no`` removed agents will remain in the client keys file, marked as removed.
-However, when set to ``yes``, client keys file will be purged.
+When set to ``no`` removed agents will remain in the client keys file, marked as removed.  When set to ``yes``, client keys file will be purged.
 
 use_password
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
-Enable shared password authentication.
+Toggles shared password authentication on or off.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
 +--------------------+---------------------+
-| **Allowed values** | - yes               |
-|                    | - no                |
+| **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
-When enabled, the shared password will be read from file at ``/var/ossec/etc/authd.pass``.
+When enabled, the shared password will be read from the ``/var/ossec/etc/authd.pass`` file.
 
 If this file does not exist, a **random password** will be generated.
 
 ssl_agent_ca
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
-Full path to CA certificate used to verify clients.
+Specifies the full path to CA certificate used to verify clients.
 
 +--------------------+---------------------+
 | **Allowed values** | A full path         |
 +--------------------+---------------------+
 
 ssl_verify_host
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
-When CA certificate is specified, this option enables source host verification. This means that the client source IP will be validated using the *Common Name* field.
+When CA certificate is specified, this option toggles source host verification on and off. This means that the client source IP will be validated using the *Common Name* field.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
 +--------------------+---------------------+
-| **Allowed values** | - yes               |
-|                    | - no                |
+| **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
 ssl_manager_cert
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
-Full path to server SSL certificate.
+Specifies the full path to server SSL certificate.
 
 +--------------------+--------------------------------+
 | **Default value**  | /var/ossec/etc/sslmanager.cert |
@@ -161,9 +152,9 @@ Full path to server SSL certificate.
 +--------------------+--------------------------------+
 
 ssl_manager_key
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
-Full path to server SSL key.
+Specifies the full path to server SSL key.
 
 +--------------------+--------------------------------+
 | **Default value**  | /var/ossec/etc/sslmanager.key  |
@@ -172,15 +163,14 @@ Full path to server SSL key.
 +--------------------+--------------------------------+
 
 ssl_auto_negotiate
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
-Auto select SSL/TLS method.
+Toggles whether to Auto select SSL/TLS method or not.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
 +--------------------+---------------------+
-| **Allowed values** | - yes               |
-|                    | - no                |
+| **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
 By default only TLS v1.2 is allowed. When set to ``yes`` the system will negotiate the most secure common method with the client.
@@ -201,15 +191,16 @@ The format of this parameter is described in `SSL ciphers <https://www.openssl.o
 .. versionadded:: 3.0.0
 
 limit_maxagents
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
+
+Toggles whether to operate based on the maximum number of agents. 
 
 When disabled, the maximum limit of agents that can be added is ignored.
 
 +--------------------+---------------------+
 | **Default value**  | yes                 |
 +--------------------+---------------------+
-| **Allowed values** | - yes               |
-|                    | - no                |
+| **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
 .. versionadded:: 3.0.0

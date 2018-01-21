@@ -1,38 +1,38 @@
 .. _agent_groups:
 
 agent_groups
-=============
+============
 
 .. versionadded:: 3.0.0
 
-The agent_groups program allows you to list, assign and manage the agents groups.
+The agent_groups program allows you to list agents assigned to a group, assign agents to a group and manage the agents groups. Below are the parameters that can be used with this new function:
 
 +---------------------------------------+---------------------------------------------------------+
-| **-h**                                | Display the help message                                |
+| **-h**                                | Displays the help message                               |
 +---------------------------------------+---------------------------------------------------------+
-| **-l**                                | List all groups                                         |
+| **-l**                                | Lists all groups                                        |
 +---------------------------------------+---------------------------------------------------------+
-| **-q**                                | Quiet (no confirmation)                                 |
+| **-q**                                | Quiet mode (outputs no confirmation)                    |
 +---------------------------------------+---------------------------------------------------------+
-| **-l -g group_id**                    | List agents in group                                    |
+| **-l -g group_id**                    | Lists the agents in the group                           |
 +---------------------------------------+---------------------------------------------------------+
-| **-c -g group_id**                    | List configuration files in group                       |
+| **-c -g group_id**                    | Lists the configuration files in group                  |
 +---------------------------------------+---------------------------------------------------------+
-| **-a -i agent_id -g group_id [-q]**   | Set agent group                                         |
+| **-a -i agent_id -g group_id [-q]**   | Sets the agent's group                                  |
 +---------------------------------------+---------------------------------------------------------+
-| **-r -i agent_id [-q]**               | Unset agent group                                       |
+| **-r -i agent_id [-q]**               | Unset the agent's group                                 |
 +---------------------------------------+---------------------------------------------------------+
-| **-s -i agent_id**                    | Show group of agent                                     |
+| **-s -i agent_id**                    | Shows the group of an agent                             |
 +---------------------------------------+---------------------------------------------------------+
-| **-a -g group_id [-q]**               | Create group                                            |
+| **-a -g group_id [-q]**               | Creates a group                                         |
 +---------------------------------------+---------------------------------------------------------+
-| **-r -g group_id [-q]**               | Remove group                                            |
+| **-r -g group_id [-q]**               | Removes a group from all agents assigned to it          |
 +---------------------------------------+---------------------------------------------------------+
 | **-d**                                | Debug                                                   |
 +---------------------------------------+---------------------------------------------------------+
 
 Examples
-----------
+--------
 
 * Assign group *'debian'* to agent 002:
 
@@ -74,7 +74,7 @@ Examples
       system_audit_rcl.txt
 
 
-* Remove the current group of the agent 002:
+* Remove agent 002 from the current group:
 
 .. code-block:: console
 
@@ -83,7 +83,7 @@ Examples
     Group removed. Current group for agent '002': 'default'.
 
 
-* Remove the group *'debian'* in every agent:
+* Remove the group *'debian'* from every agent:
 
 .. code-block:: console
 

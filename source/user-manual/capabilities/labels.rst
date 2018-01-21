@@ -1,13 +1,9 @@
 .. _labels:
 
 Agent labels
-=======================
+============
 
-This feature provides the opportunity to customize alerts information from agents, giving us the chance of
-include specific information of each agent which could be useful when dealing with alerts. In addition, in large
-environments it could be used to distinguish groups of agents by any common characteristic like their time zone, for example.
-
-The following sections shows how this feature works as well as an use case.
+This feature allows the user to customize the alert information from agents to include specific information related to the agent generating the alert.  This can prove useful when addressing or reviewing alerts. In addition, in large environments this capability can be used to identify groups of agents by any common characteristic like their time zone, for example.
 
 - `How it works`_
 - `Use case`_
@@ -15,23 +11,22 @@ The following sections shows how this feature works as well as an use case.
 How it works
 ------------
 
-Configuring labels for being shown at alerts is too simple. It can be done using a simple XML structure which allows to add
-information with the format ``key:value``, how to configure them it is explained at :doc:`Labels section <../reference/ossec-conf/labels>` section
-of ``ossec.conf``. It is remarkable that it exists the possibility of using dots to split "key" names nesting them in JSON formatted alerts.
+Configuring labels that will be included in alerts is a straightforward process. It can be done using a simple XML structure that adds information into alerts. Labels can be nested by separating "key" terms by a period for inclusion in JSON formatted alerts.  
 
-It is also allowed to centralize it using ``agent.conf``. This way, from the manager side it is
-possible to set labels for specific agents. Note that whether it exists a duplicated label key in ``ossec.conf`` and ``agent.conf``,
-the second one will override the first one. For more information about usage of centralized configuration see its dedicated
-section: :doc:`Centralized configuration <../reference/centralized-configuration>`.
+Information on how to configure labels can be found in the :doc:`Labels section <../reference/ossec-conf/labels>` of ``ossec.conf``. 
 
-In addition, more technical configuration is available in :doc:`Internal configuration <../reference/internal-options>`. Particularly,
-``analysisd.label_cache_maxage`` and ``analysisd.show_hidden_labels``.
+Agent labels can also be centralized using the ``agent.conf`` file, such that labels can be set for specific agents at the manager level. When there is pre-existing label that is the same as one the user has defined in ``ossec.conf`` or ``agent.conf``, the second one will override the first. 
+
+For more information about on how to centralize agent configuration, see the :doc:`Centralized configuration <../reference/centralized-configuration>` section.
+
+Addition configuration information is available in the :doc:`Internal configuration <../reference/internal-options>` section. This includes information on ``analysisd.label_cache_maxage`` and ``analysisd.show_hidden_labels``.
 
 Use case
 --------
 
-It is interesting to think about a scenario where the use of labels could be useful. Let's imagine we have a large environment deployed
-in Amazon Web Service (AWS) and monitored by Wazuh. In that situation, we want to know in the manager the following information about
+Below is a case where the use of labels could prove helpful. 
+
+Let's imagine we have a large environment deployed in Amazon Web Service (AWS) and monitored by Wazuh. In this situation, we want the manager to have the following information about
 each agent when an alert is triggered:
 
 - AWS instance-id.
@@ -40,7 +35,7 @@ each agent when an alert is triggered:
 - Network MAC.
 - Date of installation (hidden).
 
-To include these labels into alerts of a specific agent, it is necessary to set the following configuration in ``ossec.conf``:
+To include these labels in alerts from a specific agent, the following configuration must be inserted into the ``ossec.conf`` file:
 
 .. code-block:: xml
 
@@ -52,7 +47,7 @@ To include these labels into alerts of a specific agent, it is necessary to set 
           <label key="installation" hidden="yes">January 1st, 2017</label>
         </labels>
 
-Whether the configuration is set from the manager, the configuration has to be set in ``agent.conf`` using this format:
+To set the labels at the manager level, the following configuration would be added to the ``agent.conf`` file:
 
 .. code-block:: xml
 
@@ -66,7 +61,7 @@ Whether the configuration is set from the manager, the configuration has to be s
         </labels>
       </agent_config>
 
-When an alert is fired for this agent, the previous configuration will add to alerts the specified information:
+When an alert is fired for an agent with the above configuration applied from the manager, the defined labels will add information to alerts as shown below:
 
 .. code-block:: console
    :emphasize-lines: 3,4,5,6
@@ -85,7 +80,7 @@ When an alert is fired for this agent, the previous configuration will add to al
     Old sha1sum was: 'c6368b866a835b15baf20976ae5ea7ea2788a30e'
     New sha1sum is : 'c959321244bdcec824ff0a32cad6d4f1246f53e9'
 
-And the same alert in JSON format shows the advantage of using splitting in "key" names:
+And the same alert in JSON format shows the advantage of using nested labels:
 
 .. code-block:: javascript
 
@@ -142,7 +137,7 @@ And the same alert in JSON format shows the advantage of using splitting in "key
     "location": "syscheck"
   }
 
-Finally, when we have enabled email reports. It will be sent an email as follows:
+If email reports have been enabled, the following email notification would then be received:
 
 .. code-block:: console
 

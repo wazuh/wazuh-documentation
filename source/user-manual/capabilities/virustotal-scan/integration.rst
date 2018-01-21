@@ -5,17 +5,17 @@ Integration
 #. `Use case: scanning a file with the VirusTotal integration`_
 
 How it works
--------------
+------------
 
-The VirusTotal integration bases its operation on an API provided by VirusTotal, this allows to detect malicious content in files monitored by **syscheck** following the flow below.
+This integration utilizes the VirusTotal API to detect malicious content within the files monitored by **syscheck**. This integration functions as described below:
 
-1. FIM allows to detect any addition, change or deletion of files in folders monitored by the **syscheck** module. This module works storing the hash of these files and triggering alerts when any change has been made.
+1. FIM looks for any addition, change or deletion of files in the folders monitored by the **syscheck** module. This module stores the hash of the monitored files and triggers alerts when any change has been made.
 
-2. When the VirusTotal integration is enabled, it is triggered when any FIM alert appears. From this alert, the module extracts the hash field of the file related to the alert.
+2. When the VirusTotal integration is enabled, it is triggered when a FIM alert occurs. From this alert, the module extracts the hash field of the file.
 
-3. After that, the module make a HTTP POST request to the VirusTotal database using the API. In that request, the extracted hash is searched for a match in VirusTotal.
+3. The module then makes an HTTP POST request to the VirusTotal database using the VirusTotal API for comparison between the extracted hash and the information contained in the database.
 
-4. A JSON response is received with the search result and the possible alerts triggered by that search are the following.
+4. A JSON response is then received that is the result of this search which will trigger one of the following alerts:
 
 - Error: Public API request rate limit reached.
 - Error: Check credentials.
@@ -23,21 +23,19 @@ The VirusTotal integration bases its operation on an API provided by VirusTotal,
 - Alert: No positives found.
 - Alert: X engines detected this file.
 
-These alerts are logged in the ``integration.log`` file and they are also stored in the ``alerts.log`` file with all other alerts.
-In the `VirusTotal integration alerts`_ section is shown some examples of these alerts.
+The triggered alert is logged in the ``integration.log`` file and stored in the ``alerts.log`` file with all other alerts.
 
+In the `VirusTotal integration alerts`_ section below you will find examples of these alerts.
 
 Use case: scanning a file with the VirusTotal integration
-----------------------------------------------------------
-
-In this section we can see the flow described above in a practical way.
+---------------------------------------------------------
 
 Getting started
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
-- At first, we should configure the VirusTotal integration, as it is explained in the :doc:`Local configuration section <../../reference/ossec-conf/integration>`.
+In order for this integration to function, the first thing that must be completed is the configuration of the VirusTotal integration as explained in the :doc:`Local configuration section <../../reference/ossec-conf/integration>` and as shown below:
 
-For doing this, we have to include in the ``ossec.conf`` file a section like that.
+1. The following section must be added to the ``ossec.conf`` file:
 
 .. code-block:: xml
 
@@ -48,21 +46,21 @@ For doing this, we have to include in the ``ossec.conf`` file a section like tha
       <alert_format>json</alert_format>
     </integration>
 
-- The second step is to enable the integrator daemon and restart Wazuh.
+2. The integrator daemon must be enabled and followed by a restart of Wazuh, as shown below:
 
 .. code-block:: console
 
     # /var/ossec/bin/ossec-control enable integrator
     # /var/ossec/bin/ossec-control restart
 
-From this moment, any FIM alert will trigger the VirusTotal integration.
+After this is complete, and FIM alert automatically triggers the VirusTotal integration.
 
 Using FIM to monitor a directory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this Probe of Concept, we will monitor the folder ``/media/user/software`` in an agent.
+For this use case, we will show how to monitor the folder ``/media/user/software`` with an agent.
 
-In the ``<syscheck>`` section of the configuration file we have to include a line like the following one.
+1. The following must be added to the ``<syscheck>`` section of the configuration file:
 
 .. code-block:: xml
 
@@ -72,7 +70,9 @@ In the ``<syscheck>`` section of the configuration file we have to include a lin
   ...
   </syscheck>
 
-After restarting the syscheck module, the configuration is applied and the specified folder will be monitored in real-time.
+2. The **syscheck** module must then be restarted. 
+
+After restarting the **syscheck** module, the configuration is applied and the specified folder will be monitored in real-time.
 
 The alert below appears when a file is added to the monitored directory.
 
@@ -93,15 +93,15 @@ The alert below appears when a file is added to the monitored directory.
    New date: Tue Nov 14 18:42:41 2017
    New inode: 104062
 
-From this alert, the integrator daemon extracts the hash fields and sends the request to VirusTotal. In the following section the possible responses from VirusTotal are shown.
+From this alert, the integrator daemon extracts the hash fields, sending the request to VirusTotal for comparison. 
 
 .. note::
-    In the :doc:`FIM dedicated section.<../file-integrity/index>` you can see more information about using FIM, with normal scans or scanning directories in real-time.
+    In the :doc:`FIM dedicated section.<../file-integrity/index>` you will find more information about using FIM with normal scans or real-time scans of directories.
 
 VirusTotal integration alerts
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When a request to VirusTotal is done by the integrator module, different alerts will be triggered depending on the situation.
+When a request to VirusTotal is sent by the integrator module, as noted above, different alerts will be triggered depending on the situation. Below are examples and explanations of these alerts:
 
 - The API credentials are incorrect.
 
@@ -118,7 +118,8 @@ When a request to VirusTotal is done by the integrator module, different alerts 
 
 This error means that the API key set in the configuration is invalid.
 
-- The following alert is triggered when we have reached the request rate limit set by VirusTotal. See the :doc:`ToS section <terms-of-service>` for knowing more about this limitation.
+- The API has reached the set rate limit.
+
 
 .. code-block:: console
    :emphasize-lines: 3
@@ -131,7 +132,9 @@ This error means that the API key set in the configuration is invalid.
     virustotal.error: 204
     integration: virustotal
 
-Previous alerts represent the possible errors that we can get, if everything works fine we would receive alerts like the following ones.
+This error is triggered when the request rate limit set by VirusTotal has been reached. See the :doc:`ToS section <terms-of-service>` for more information on this limitation. 
+
+While the two previous alerts represent errors that may occur, the following are samples of alerts returned from a successful request:
 
 - Alert received when there are no records in the VirusTotal database.
 
@@ -152,7 +155,7 @@ Previous alerts represent the possible errors that we can get, if everything wor
    virustotal.source.md5: 9c8a83c9f4c39e8200661c33e188e79b
    integration: virustotal
 
-- Alert received when the scanned file has been found in the database and it has been detected as malware by the antivirus engines.
+- Alert received when the scanned file was found and identified by the database as malware.
 
 .. code-block:: console
    :emphasize-lines: 3
