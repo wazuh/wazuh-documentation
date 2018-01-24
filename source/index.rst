@@ -15,17 +15,17 @@ Wazuh helps you to gain deeper security visibility into your infrastructure by m
 
 .. topic:: Automated log analysis
 
-    Wazuh agents read operating system and application logs, and securely forward them to a central manager for rule-based analysis and storage. The Wazuh rules help bring to your attention application or system errors, misconfigurations, attempted and/or successful malicious activities, policy violations and a variety of other security and operational issues.
+    Wazuh agents read operating system and application logs, and securely forward them to a central manager for rule-based analysis and storage. The Wazuh rules help make you aware of application or system errors, misconfigurations, attempted and/or successful malicious activities, policy violations and a variety of other security and operational issues.
 
 .. topic:: Policy and compliance monitoring
 
-    Wazuh monitors configuration files to ensure they are compliant with your security policies, standards or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, unpatched, or insecurely configured.
+    Wazuh monitors configuration files to ensure they are compliant with your security policies, standards and/or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, unpatched, or insecurely configured.
 
-This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic Stack, making them work together as a unified solution, and simplifying their configuration and management.
+This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic Stack into a unified solution and simplifying their configuration and management.
 
-Wazuh provides an updated log analysis ruleset, and a RESTful API that allows you to monitor the status and configuration of all Wazuh agents.
+Wazuh provides an updated log analysis ruleset and a RESTful API that allows you to monitor the status and configuration of all Wazuh agents.
 
-Wazuh also includes a rich web application (fully integrated as a Kibana app), for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
+Wazuh also includes a rich web application (fully integrated as a Kibana app) for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
 
 Example screenshots
 -------------------
@@ -78,4 +78,4 @@ Available documentation
    migrating-from-ossec/index
    release-notes/index
 
-.. note:: If you want to contribute to this documentation or our project please head over to our `Github repositories <https://github.com/wazuh>`_. You can also join our `users mailing list <https://groups.google.com/d/forum/wazuh>`_, by sending an email to ``wazuh+subscribe@googlegroups.com``, to ask questions and participate in discussions.
+.. note:: If you want to contribute to this documentation or our project please head over to our `Github repositories <https://github.com/wazuh>`_. You can also join our `users mailing list <https://groups.google.com/d/forum/wazuh>`_ to ask questions and participate in discussions by sending an email to ``wazuh+subscribe@googlegroups.com``.
