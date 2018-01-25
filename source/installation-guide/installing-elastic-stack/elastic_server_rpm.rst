@@ -59,7 +59,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: bash
 
-	 $ yum install elasticsearch
+	 $ yum install elasticsearch-5.6.5
 
 2. Enable and start the Elasticsearch service:
 
@@ -103,7 +103,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-    $ yum install logstash
+    $ yum install logstash-5.6.5
 
 2. Download the Wazuh config for Logstash:
 
@@ -167,7 +167,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: bash
 
-	 $ yum install kibana
+	 $ yum install kibana-5.6.5
 
 2. Install the Wazuh App plugin for Kibana:
 
@@ -205,6 +205,14 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   	$ chkconfig --add kibana
   	$ service kibana start
+
+5. Disable the Elasticsearch repository:
+
+  We recommend to disable the Elasticsearch repository in order to prevent an upgrade to a newer Elastic Stack version due to possible breaking changes with our App, so you should do it as follow:
+
+  .. code-block:: console
+
+    $ sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
 Connecting the Wazuh App with the API
 -------------------------------------

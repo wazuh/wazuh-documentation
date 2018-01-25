@@ -51,7 +51,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: bash
 
-    $ apt-get install elasticsearch
+    $ apt-get install elasticsearch=5.6.5
 
 2. Enable and start the Elasticsearch service:
 
@@ -95,7 +95,7 @@ Logstash is the tool that will collect, parse, and forward to Elasticsearch for 
 
   .. code-block:: bash
 
-    $ apt-get install logstash
+    $ apt-get install logstash=1:5.6.5-1
 
 2. Download the Wazuh config for Logstash:
 
@@ -150,7 +150,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: bash
 
-   $ apt-get install kibana
+   $ apt-get install kibana=5.6.5
 
 2. Install the Wazuh App plugin for Kibana:
 
@@ -188,6 +188,14 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
    $ update-rc.d kibana defaults 95 10
    $ service kibana start
+
+5. Disable the Elastic repository:
+
+  We recommend to disable the Elasticsearch repository in order to prevent an upgrade to a newer Elastic Stack version due to possible breaking changes with our App, so you should do it as follow:
+
+  .. code-block:: console
+
+    $ sed -i -r '/deb https:\/\/artifacts.elastic.co\/packages\/5.x\/apt stable main/ s/^(.*)$/#\1/g' /etc/apt/sources.list.d/elastic-5.x.list
 
 Connecting the Wazuh App with the API
 -------------------------------------

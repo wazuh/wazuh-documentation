@@ -200,7 +200,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: bash
 
-	 $ yum install filebeat
+	 $ yum install filebeat-5.6.5
 
 3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
 
