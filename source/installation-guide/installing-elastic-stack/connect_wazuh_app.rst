@@ -3,7 +3,7 @@
 Connect the Wazuh App with the API
 ==================================
 
-In this section, we will show you how to register the Wazuh API (installed on the Wazuh server) into the Wazuh App in Kibana:
+In this section, we will show you how to register the Wazuh API (installed on the Wazuh server) with the Wazuh App in Kibana:
 
 1. Open a web browser and go to the Elastic Stack server's IP address on port 5601 (default Kibana port). Then, from the left menu, go to the Wazuh App.
 

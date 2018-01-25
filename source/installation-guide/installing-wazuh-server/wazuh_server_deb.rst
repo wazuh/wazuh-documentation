@@ -12,7 +12,7 @@ Adding Wazuh Repositories
 
 The first step is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
 
-1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be installed into your system. If they are not, install them:
+1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be installed on your system. If they are not, install them using the commands below:
 
 	.. code-block:: console
 
@@ -25,7 +25,7 @@ The first step is to add the Wazuh repository to your server. Alternatively, if 
 
 		# curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-3. Adding the repository:
+3. Add the repository:
 
 	.. code-block:: console
 
@@ -63,7 +63,7 @@ Once the process is completed, you can check the service status with:
 Installing the Wazuh API
 ------------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
+1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
 	.. code-block:: console
 
@@ -81,7 +81,7 @@ Installing the Wazuh API
 
 		# apt-get install wazuh-api
 
-3. Once the process is completed, you can check the service status with:
+3. Once the process is complete, you can check the service status with:
 
   a) For Systemd:
 
@@ -122,7 +122,7 @@ Installing Filebeat
 Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack server(s).
 
 .. warning::
-    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
@@ -140,7 +140,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 		# apt-get install filebeat=6.1.2
 
-3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
+3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
 	.. code-block:: console
 

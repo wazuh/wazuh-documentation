@@ -3,7 +3,7 @@
 Install Wazuh server with RPM packages
 ======================================
 
-For CentOS/RHEL/Fedora platforms, installing Wazuh server components just entails installing the relevant packages after adding the appropriate repositories.
+For CentOS/RHEL/Fedora platforms, installing Wazuh server components entails installing the relevant packages after adding the appropriate repositories.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
@@ -49,7 +49,7 @@ The next step is to install the Wazuh Manager on your system:
 
 	 # yum install wazuh-manager
 
-Once the process is completed, you can check the service status with:
+Once the process is complete, you can check the service status with:
 
     a) For Systemd:
 
@@ -66,7 +66,7 @@ Once the process is completed, you can check the service status with:
 Installing the Wazuh API
 ------------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
+1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
   .. code-block:: console
 
@@ -97,7 +97,7 @@ Installing the Wazuh API
         }
     ];
 
-  CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel, thus maintaining the older version:
+  CentOS 6 and Red Hat 6 come with Python 2.6, however, you can install Python 2.7 in parallel to maintain the older version(s):
 
   a) For CentOS 6:
 
@@ -118,7 +118,7 @@ Installing the Wazuh API
 
 .. note::
 
-  Follow this step if your python version is lower than 2.7. You can check this running ``python --version``.
+  Follow this step if your python version is lower than 2.7. You can check this by running ``python --version``.
 
 3. Install the Wazuh API. It will update NodeJS if it is required:
 
@@ -126,7 +126,7 @@ Installing the Wazuh API
 
 	 # yum install wazuh-api
 
-4. Once the process is completed, you can check the service status with:
+4. Once the process is complete, you can check the service status with:
 
   a) For Systemd:
 
@@ -150,7 +150,7 @@ Installing Filebeat
 Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack server(s).
 
 .. warning::
-    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
 
@@ -177,7 +177,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
 	 # yum install filebeat-6.1.2
 
-3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
+3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
   .. code-block:: console
 

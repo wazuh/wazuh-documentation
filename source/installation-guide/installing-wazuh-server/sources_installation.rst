@@ -28,9 +28,9 @@ Installing Wazuh manager
 
   .. code-block:: console
 
-    $ curl -Ls https://github.com/wazuh/wazuh/archive/3.1.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/3.1.tar.gz | tar zx
 
-3. Run the ``install.sh`` script, this will display a wizard that will guide you through the installation process using the Wazuh sources:
+3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
   .. code-block:: console
 
@@ -38,7 +38,7 @@ Installing Wazuh manager
     # ./install.sh
 
 
-4. The script will ask about what kind of installation you want. Type ``manager`` to install Wazuh Manager:
+4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
 
   .. code-block:: bash
 
@@ -50,7 +50,7 @@ Installing Wazuh manager
 
     # /var/ossec/bin/ossec-control start
 
-  If you want to check that it has started
+  If you want to confirm that it started:
 
   .. code-block:: console
 
@@ -84,7 +84,9 @@ Installing Wazuh API
 
       # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/3.1/install_api.sh && bash ./install_api.sh download
 
-3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions. It is possible to set a custom Python path for the API to use, in ``/var/ossec/api/configuration/config.js``:
+3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions. 
+
+It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
 
   .. code-block:: javascript
 
@@ -101,7 +103,7 @@ Installing Wazuh API
         }
     ];
 
-  CentOS 6 and Red Hat 6 come with Python 2.6, you can install Python 2.7 in parallel maintaining the older version(s):
+  CentOS 6 and Red Hat 6 come with Python 2.6, however, you can install Python 2.7 in parallel and still maintain the older version(s):
 
   a) For CentOS 6:
 
@@ -128,10 +130,10 @@ Installing Wazuh API
 Installing Filebeat
 -------------------
 
-While Filebeat can be installed from source (`see this doc <https://github.com/elastic/beats/blob/master/CONTRIBUTING.md>`_), the process is more complex than you may like, and it is beyond the scope of Wazuh documentation. We recommend installing Filebeat via repository package, otherwise, you can install it from a binary tarball, that should work for any Linux distro.  See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
+While Filebeat can be installed from source (`see this doc <https://github.com/elastic/beats/blob/master/CONTRIBUTING.md>`_), the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend installing Filebeat via repository package, otherwise, you can install it from a binary tarball that should work for any Linux distro.  See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
 
 .. warning::
-    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 Next steps
 ----------

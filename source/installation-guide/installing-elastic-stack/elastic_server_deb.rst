@@ -18,7 +18,7 @@ Preparation
 
       # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
       # echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
-      apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+      # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 
   b) For Ubuntu:
 
@@ -45,7 +45,7 @@ Preparation
 Elasticsearch
 -------------
 
-Elasticsearch is a highly scalable full-text search and analytics engine. For more info please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
+Elasticsearch is a highly scalable full-text search and analytics engine. For more information, please see `Elasticsearch <https://www.elastic.co/products/elasticsearch>`_.
 
 1. Install the Elasticsearch package:
 
@@ -88,7 +88,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
 .. note::
 
-    It is recommended that you edit the default configuration to improve the Elasticsearch performance. To do so, please see :ref:`elastic_tuning`.
+    It is recommended that the default configuration be edited to improve the performance of Elasticsearch. To do so, please see :ref:`elastic_tuning`.
 
 Logstash
 --------
@@ -103,7 +103,7 @@ Logstash is the tool that will collect, parse, and forward data to Elasticsearch
 
 2. Download the Wazuh config for Logstash:
 
-  a) Local configuration:
+  a) **Local** configuration (only in a **single-host** architecture):
 
     .. code-block:: console
 
@@ -115,7 +115,7 @@ Logstash is the tool that will collect, parse, and forward data to Elasticsearch
 
       # usermod -a -G ossec logstash
 
-  b) Remote configuration:
+  b) **Remote** configuration (only in a **distributed** architecture):
 
     .. code-block:: console
 
@@ -146,7 +146,7 @@ Logstash is the tool that will collect, parse, and forward data to Elasticsearch
 Kibana
 ------
 
-Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more info at `Kibana <https://www.elastic.co/products/kibana>`_.
+Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Kibana <https://www.elastic.co/products/kibana>`_.
 
 1. Install the Kibana package:
 
@@ -157,13 +157,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 2. Install the Wazuh App plugin for Kibana:
 
   2.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
-  Set the limit as follow:
+  Set the limit as follows:
 
   .. code-block:: console
 
       # export NODE_OPTIONS="--max-old-space-size=3072"
 
-  2.2) Install Wazuh App:
+  2.2) Install the Wazuh App:
 
   .. code-block:: console
 
@@ -175,9 +175,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note::
 
-    If you want to download a different Wazuh App plugin for another version of Wazuh or the Elastic Stack, you can check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropiate installation command.
+    If you want to download a different Wazuh App plugin for another version of Wazuh or the Elastic Stack, you can check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
 
-3. **Optional.** Kibana will listen only on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
+3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 
   .. code-block:: yaml
 
@@ -204,9 +204,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
    # update-rc.d kibana defaults 95 10
    # service kibana start
 
-5. Disable the Elastic repository:
+5. Disable the Elasticsearch repository:
 
-  We recommend that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App.  To do this, use the following command:
+  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App.  To do this, use the following command:
 
   .. code-block:: console
 
