@@ -12,38 +12,28 @@ Preparation
 
 1. Oracle Java JRE is required by Logstash and Elasticsearch:
 
-  .. note::
-      The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
-
-  Download the binary package with the latest version:
+  a) For Debian:
 
   .. code-block:: console
 
-      # curl -Lo jre-8-linux-x64.tar.gz --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jre-8u161-linux-x64.tar.gz
+      # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+      # echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+      apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 
-  Extract the package and move it to the default Java installation path:
-
-  .. code-block:: console
-
-      # tar -zxf jre-8-linux-x64.tar.gz
-      # JAVA=$(echo jre1.8*)
-      # mv $JAVA /opt
-
-  Export the necessary environment variables in order to properly execute the Java binaries:
+  b) For Ubuntu:
 
   .. code-block:: console
 
-      # echo export PATH=$PATH:/opt/$JAVA/bin >> /etc/profile
-      # echo export JAVA_HOME=/opt/$JAVA >> /etc/profile
+      # add-apt-repository ppa:webupd8team/java
 
-  And finally, confirm the installation process finished successfully:
+2. Once the repository is added, install Java JRE:
 
   .. code-block:: console
 
-      # . /etc/profile
-      # java -version
+      # apt-get update
+      # apt-get install oracle-java8-installer
 
-2. Install the Elastic repository and its GPG key:
+3. Install the Elastic repository and its GPG key:
 
   .. code-block:: console
 
