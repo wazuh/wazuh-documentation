@@ -206,6 +206,14 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
   	$ chkconfig --add kibana
   	$ service kibana start
 
+5. Disable the Elasticsearch repository:
+
+  We recommend to disable the Elasticsearch repository in order to prevent an upgrade to a newer Elastic Stack version due to possible breaking changes with our App, so you should do it as follow:
+
+  .. code-block:: console
+
+    $ sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+
 Connecting the Wazuh App with the API
 -------------------------------------
 

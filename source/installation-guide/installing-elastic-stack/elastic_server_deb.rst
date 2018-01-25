@@ -189,6 +189,14 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
    $ update-rc.d kibana defaults 95 10
    $ service kibana start
 
+5. Disable the Elastic repository:
+
+  We recommend to disable the Elasticsearch repository in order to prevent an upgrade to a newer Elastic Stack version due to possible breaking changes with our App, so you should do it as follow:
+
+  .. code-block:: console
+
+    $ sed -i -r '/deb https:\/\/artifacts.elastic.co\/packages\/5.x\/apt stable main/ s/^(.*)$/#\1/g' /etc/apt/sources.list.d/elastic-5.x.list
+
 Connecting the Wazuh App with the API
 -------------------------------------
 
