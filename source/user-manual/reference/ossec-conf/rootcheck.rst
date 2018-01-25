@@ -36,7 +36,7 @@ Options
 - `check_trojans`_
 - `check_unixaudit`_
 - `check_winapps`_
-- `check_winapps`_
+- `check_winaudit`_
 - `check_winmalware`_
 - `skip_nfs`_
 
