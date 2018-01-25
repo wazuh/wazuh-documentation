@@ -130,7 +130,7 @@ label
 
 This option allows for the addition of custom data in JSON events and is available when `log_format`_ is set to ``json``.
 
-Labels can be nested by separating the terms by a period.
+Labels can be nested in JSON formatted alerts by separating the "key" terms by a period.
 
 This option can be used as follows to identify the source of each log entry when monitoring several files simultaneously: 
 

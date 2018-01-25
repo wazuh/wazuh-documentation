@@ -2,7 +2,7 @@
 
 
 labels
-=============
+======
 
 .. topic:: XML section name
 
@@ -11,8 +11,7 @@ labels
 	    <labels>
 	    </labels>
 
-This section permits include extra information about agents in their alerts. When email notifications are enabled, labeled data is
-sent within alerts by email without any additional configuration.
+The labels section of ``ossec.conf`` allows additional user-defined information about agents to be included in alerts. When email notifications are enabled, this additional data is also contained in the email alerts without any further configuration.
 
 Options
 -------
@@ -24,24 +23,23 @@ Options
 label
 ^^^^^
 
-This option specifies the information that appears in alerts. It has the format ``key:value``, which means that it is necessary to include
-the atribute ``key`` to work properly. Thinking in the JSON alerts, it is possible to nest labels splitting this atribute by dots.
+This option specifies the additional information that will appear in alerts. Labels can be nested in JSON formatted alerts by separating the "key" terms by a period.
 
 
-Atributes:
+Attributes:
 
 +--------------------+-------------------------------------------------------------+
 | **key**            | The title that will describe the information of the label.  |
 +                    +---------------------------------------+---------------------+
-|                    | Allowed value                         | string              |
+|                    | Allowed value                         | Any string          |
 +--------------------+---------------------------------------+---------------------+
-| **hidden**         | Permits not to show the specified label by default.         |
+| **hidden**         | For labels that are hidden by default.                      |
 +                    +---------------------------------------+---------------------+
 |                    | Allowed value                         | yes                 |
 +--------------------+---------------------------------------+---------------------+
 
 .. note::
-    In ``internal_options.conf`` there is the possibility of show hidden labels in the alerts.
+    In ``internal_options.conf``, hidden labels can be set to be displayed in alerts.
 
 Example of configuration
 ------------------------
