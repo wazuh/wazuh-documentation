@@ -3,8 +3,7 @@
 Install Wazuh agent on AIX
 ==============================
 
-
-AIX agent can be downloaded from our :doc:`packages list<../packages-list/index>`. The installation steps are:
+The Wazuh agent for AIX can be downloaded from our :doc:`packages list<../packages-list/index>`. The installation steps are:
 
 Create user and group OSSEC:
 
@@ -28,4 +27,4 @@ Unzip the package in ``/``:
 
     # tar -xvf wazuh-agent_v3.1.0-aix7.1.tar.gz -C /
 
-.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.

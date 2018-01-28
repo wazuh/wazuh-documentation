@@ -10,7 +10,7 @@ This guide describes how to install the manager and API from source code. In add
 Installing Wazuh manager
 ------------------------
 
-1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
+1. Install the development tools and compilers. In Linux, this can easily be done using your distribution's package manager:
 
   a) For RPM-based distributions:
 
@@ -44,7 +44,7 @@ Installing Wazuh manager
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
 
-5. The installer asks if you want to start Wazuh at the end of the installation. If you have chosen not to start automatically, you can do it with:
+5. The installer asks if you want to start Wazuh at the end of the installation. If you chosen not to, you can start it later with:
 
   .. code-block:: console
 
@@ -76,7 +76,7 @@ Installing Wazuh API
       # apt-get install -y nodejs
 
   .. note::
-	`Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
+	For more information, see the `Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
 
 2. Download and execute the installation script:
 

@@ -7,7 +7,7 @@ This guide describes the installation of an Elastic Stack server comprised of Lo
 
 In addition to Elastic Stack components, you will also find the instructions to install and configure the Wazuh App (deployed as a Kibana plugin).
 
-Depending on your operating system you can choose to install Elastic Stack from RPM or DEB packages. Consult the table below to choose how to proceed:
+Depending on your operating system you can choose to install Elastic Stack from RPM or DEB packages. Consult the table below and choose how to proceed:
 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Type                                                                   | Description                                                 |

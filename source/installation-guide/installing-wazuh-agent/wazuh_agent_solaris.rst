@@ -3,8 +3,7 @@
 Install Wazuh agent on Solaris
 ===============================
 
-
-Solaris agent can be downloaded from our :doc:`packages list<../packages-list/index>`. Current version has been tested on Solaris 11 version 5.11 and Solaris 10 version 5.10. The installation step is:
+The Wazuh agent for Solaris can be downloaded from our :doc:`packages list<../packages-list/index>`. The current version has been tested on Solaris 11 version 5.11 and Solaris 10 version 5.10. Install the agent as follows:
 
   a) For Solaris 11 i386::
 
@@ -23,4 +22,4 @@ Solaris agent can be downloaded from our :doc:`packages list<../packages-list/in
 	pkgadd -d wazuh-agent_2.1.0-sol10-sparc.pkg
 
 
-.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.

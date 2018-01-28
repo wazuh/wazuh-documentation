@@ -3,14 +3,14 @@
 Install Wazuh server with RPM packages
 ======================================
 
-For CentOS/RHEL/Fedora platforms, installing Wazuh server components entails installing the relevant packages after adding the appropriate repositories.
+For CentOS/RHEL/Fedora platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------
 
-The first thing you need is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
+The first step to setting up Wazuh is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
 To set up the repository, run this command:
 
@@ -72,7 +72,7 @@ Installing the Wazuh API
 
 	 # curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
 
-  and then, install nodejs:
+  and then, install NodeJS:
 
   .. code-block:: console
 
@@ -80,9 +80,15 @@ Installing the Wazuh API
 
 2. Python >= 2.7 is required in order to run the Wazuh API. It is installed by default or included in the official repositories in most Linux distributions.
 
+   To determine if the python version on your system is lower than 2.7, you can run the following:
+
+  .. code-block:: console
+
+    # python --version
+
    It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
 
-   .. code-block:: javascript
+  .. code-block:: javascript
 
     config.python = [
         // Default installation
@@ -112,15 +118,14 @@ Installing the Wazuh API
 
     # yum install python27
 
-    # You may need to first enable a repository in order to get python27, with a command like this:
+    You may need to first enable a repository in order to get python27, with a command like this:
+
+  .. code-block:: console
+
     #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
     #   yum-config-manager --enable rhel-server-rhscl-6-rpms
 
-.. note::
-
-  Follow this step if your python version is lower than 2.7. You can check this by running ``python --version``.
-
-3. Install the Wazuh API. It will update NodeJS if it is required:
+  3. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: console
 
@@ -140,14 +145,12 @@ Installing the Wazuh API
 
 	 # service wazuh-api status
 
-
-
 .. _wazuh_server_rpm_filebeat:
 
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack server(s).
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to the Logstash service on the Elastic Stack server(s).
 
 .. warning::
     In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
@@ -177,7 +180,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
 	 # yum install filebeat-6.1.2
 
-3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
+3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
   .. code-block:: console
 

@@ -3,16 +3,16 @@
 Install Wazuh agent with DEB packages
 =====================================
 
-The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
+The DEB packages are suitable for Debian, Ubuntu, and other Debian-based systems.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------
 
-The first thing you need is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-agent package directly, you can find it :ref:`here <packages>`.
+The first step to installing the Wazuh agent is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-agent package directly, you can find it :ref:`here <packages>`.
 
-1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be present on your system. If they are not, install them:
+1. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
 	.. code-block:: console
 
@@ -24,7 +24,7 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
 		# curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-3. Adding the repository:
+3. Add the repository:
 
    .. code-block:: console
 
@@ -45,4 +45,4 @@ On your terminal, install the Wazuh agent:
 
 		# apt-get install wazuh-agent
 
-.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.
