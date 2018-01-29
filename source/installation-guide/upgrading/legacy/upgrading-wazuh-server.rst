@@ -3,16 +3,16 @@
 Upgrading Wazuh server
 ======================
 
-Follow next steps in order to update your ``Wazuh v1.x`` server to ``Wazuh v2.x``.
+Follow these steps to update your ``Wazuh v1.x`` server to ``Wazuh v2.x``.
 
-1. First of all, stop running processes:
+1. First, stop the processes:
 
   .. code-block:: console
 
     # /var/ossec/bin/ossec-control stop
     # systemctl stop wazuh-api
 
-2. *Only if you have a distributed architecture*, remove logstash-forwarder (it's been replaced by Filebeat):
+2. **If you have a distributed architecture**, remove logstash-forwarder as it has been replaced by Filebeat:
 
   Deb systems:
 
@@ -26,18 +26,18 @@ Follow next steps in order to update your ``Wazuh v1.x`` server to ``Wazuh v2.x`
 
     # yum remove logstash-forwarder
 
-3. Install Wazuh server:
+3. Install the Wazuh server:
 
-  You could upgrade your current installation by following our installation guide.
+  You can upgrade your current installation by following the below installation guide for your specific operating system:
 
   - :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`
   - :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`
 
-  Once the package is installed, review your ``/var/ossec/etc/ossec.conf`` file, as it will be overwritten. The one that was previously in use has been saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. It is recommended to compare the new file with the old one and import old settings when needed.
+  Once the package is installed, review your ``/var/ossec/etc/ossec.conf`` file because your previous version will have been overwritten. The previous version has been saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. It is recommended that you  compare the new file with the old one and import old settings where needed.
 
-  A backup of your custom rules and decoders will be saved at ``/var/ossec/etc/backup_ruleset``. You need to reapply them again, we recommend use ``/var/ossec/etc/decoders`` and ``/var/ossec/etc/rules`` for custom rules and decoders, these directories won't be overwritten by future upgrades.
+  A backup of your custom rules and decoders will also be saved at ``/var/ossec/etc/backup_ruleset``. You will need to reapply them. We recommend that you use ``/var/ossec/etc/decoders`` and ``/var/ossec/etc/rules`` for custom rules and decoders going forward as these directories will not be overwritten by future upgrades.
 
-4. Run ``/var/ossec/bin/manage_agents -V`` to confirm that now you are running ``Wazuh v2.x``:
+4. Run ``/var/ossec/bin/manage_agents -V`` to confirm that you are now running ``Wazuh v2.x``:
 
 .. code-block:: console
 

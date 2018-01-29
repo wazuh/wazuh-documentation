@@ -3,16 +3,16 @@
 Install Wazuh server with DEB packages
 ======================================
 
-For Debian/Ubuntu platforms, installing Wazuh server components entails installing the relevant packages after adding the appropriate repositories.
+For Debian/Ubuntu platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
 Adding Wazuh Repositories
 -------------------------
 
-The first step is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
+The first step to setting up Wazuh is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
-1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be installed on your system. If they are not, install them using the commands below:
+1. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
 	.. code-block:: console
 
@@ -69,7 +69,7 @@ Installing the Wazuh API
 
 		# curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
-   and then, install nodejs:
+   and then, install NodeJS:
 
 	 .. code-block:: console
 
@@ -119,7 +119,7 @@ Installing the Wazuh API
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack server(s).
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to the Logstash service on the Elastic Stack server(s).
 
 .. warning::
     In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.

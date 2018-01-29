@@ -5,7 +5,7 @@ Install Wazuh agent on Windows
 
 .. note:: You will need administrator privileges to perform this installation.
 
-The first step to installing the Wazuh agent on a Windows machine is to download the Windows installer from the :doc:`packages list<../packages-list/index>`. Once this is downloaded, you can install the Windows agent in one of two ways:
+The first step to installing the Wazuh agent on a Windows machine is to download the Windows installer from the :doc:`packages list<../packages-list/index>`. Once this is downloaded, the Windows agent can be installed in one of two ways:
 
 - `Using the GUI`_
 - `Using the command line`_
@@ -23,7 +23,7 @@ Once installed, the agent uses a graphical user interface for configuration, ope
 
 By default, all agent files will be found in: ``C:\Program Files(x86)\ossec-agent``.
 
-.. note:: At this point, your agent is installed and ready to be registered with the manager. For information about the registration process see the user manual.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.
 
 Using the command line
 ----------------------

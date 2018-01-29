@@ -1,11 +1,11 @@
 .. _kibana_ssl:
 
 Setting up SSL and authentication for Kibana
-=============================================
+============================================
 
-By default, the communications between Kibana (including the Wazuh app) and the web browser on end-user systems are not encrypted. It’s strongly recommended to configure Kibana to use SSL encryption and to enable authentication, next we briefly describe how to do this with a NGINX setup.
+By default, the communication between Kibana (including the Wazuh app) and the web browser on end-user systems is not encrypted. It’s strongly recommended that Kibana be configured to use SSL encryption and to enable authentication.  In this section, we will briefly describe how this can be done with a NGINX setup.
 
-NGINX is a popular open-source web server and reverse proxy, known for its high performance, stability, rich feature set, simple configuration, and low resource consumption. Here we will use it as a reverse proxy to provide to the end users an encrypted and authenticated access to Kibana.
+NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption. In this example, we will use it as a reverse proxy to provide encrypted and authenticated access to Kibana to the end users.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
@@ -17,7 +17,7 @@ NGINX is a popular open-source web server and reverse proxy, known for its high 
 NGINX SSL proxy for Kibana (RPM-based distributions)
 ----------------------------------------------------
 
-1. First, install NGINX:
+1. Install NGINX:
 
   a. For CentOS:
 
@@ -33,7 +33,7 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
 
       # yum install nginx
 
-  a. For RHEL:
+  b. For RHEL:
 
     .. code-block:: console
 
@@ -59,12 +59,32 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
       # cp <ssl_pem> /etc/pki/tls/certs/kibana-access.pem
       # cp <ssl_key> /etc/pki/tls/private/kibana-access.key
 
-  b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
+  b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
 
     .. code-block:: console
 
       # mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-      # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem
+      # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem
+        Generating a 2048 bit RSA private key
+        ...........+++
+        ................+++
+        writing new private key to '/etc/pki/tls/private/kibana-access.key'
+        -----
+        You are about to be asked to enter information that will be incorporated
+        into your certificate request.
+        What you are about to enter is what is called a Distinguished Name or a DN.
+        There are quite a few fields but you can leave some blank
+        For some fields there will be a default value,
+        If you enter '.', the field will be left blank.
+        -----
+        Country Name (2 letter code) [AU]: US
+        State or Province Name (full name) [Some-State]: California
+        Locality Name (eg, city) []: San Jose
+        Organization Name (eg, company) [Internet Widgits Pty Ltd]: Example Inc.
+        Organizational Unit Name (eg, section) []: section
+        Common Name (e.g. server FQDN or YOUR name) []: example.com
+        Email Address []: example@mail.com
+
 
 3. Configure NGINX as an HTTPS reverse proxy to Kibana:
 
@@ -95,9 +115,9 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
 
   .. note::
 
-    We configure nginx in order to encapsulate the IP address of the Kibana server. This configuration allows us to redirect Kibana requests to HTTPS, when you use this configuration it's recommended to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``, then you must restart the Kibana service to apply this change.
+    We configure Nginx in order to encapsulate the IP address of the Kibana server. This configuration allows Kibana requests to be redirected to HTTPS. When using this configuration, it is recommended that the file ``/etc/kibana/kibana.yml`` be edited to set the field ``server.host`` to ``localhost``. The Kibana service must be restarted to apply this change.
 
-4. Allow NGINX to connect to Kibana port if you're using SELinux:
+4. Allow NGINX to connect to the Kibana port if SELinux is being used:
 
   .. code-block:: console
 
@@ -105,11 +125,11 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
 
   .. note::
 
-    We assume that you have ``policycoreutils-python`` installed to manage SELinux.
+    This assumes that you have ``policycoreutils-python`` installed to manage SELinux.
 
 
 Enable authentication by htpasswd
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Install the package ``httpd-tools``:
 
@@ -117,7 +137,7 @@ Enable authentication by htpasswd
 
     # yum install httpd-tools
 
-2. Generate the ``.htpasswd`` file. Replace ``wazuh`` with your chosen username (it must match with `auth_basic_user_file`):
+2. Generate the ``.htpasswd`` file. Make sure to replace ``wazuh`` with your chosen username, matching with the `auth_basic_user_file`:
 
   .. code-block:: console
 
@@ -137,8 +157,7 @@ Enable authentication by htpasswd
 
       # service nginx restart
 
-Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.
-
+Now, access the Kibana web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
 
 NGINX SSL proxy for Kibana (Debian-based distributions)
 -------------------------------------------------------
@@ -151,7 +170,7 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
 
 2. Install your SSL certificate and private key:
 
-  a. If you have a valid signed certificate, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations:
+  a. If you have a valid **signed certificate**, copy your key file ``<ssl_key>`` and your certificate file ``<ssl_pem>`` to their proper locations:
 
     .. code-block:: console
 
@@ -159,12 +178,31 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
       # cp <ssl_pem> /etc/ssl/certs/kibana-access.pem
       # cp <ssl_key> /etc/ssl/private/kibana-access.key
 
-  b. Otherwise, create a **self-signed certificate**. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
+  b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
 
     .. code-block:: console
 
       # mkdir -p /etc/ssl/certs /etc/ssl/private
-      # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem
+      # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem
+        Generating a 2048 bit RSA private key
+        ...........+++
+        ................+++
+        writing new private key to '/etc/pki/tls/private/kibana-access.key'
+        -----
+        You are about to be asked to enter information that will be incorporated
+        into your certificate request.
+        What you are about to enter is what is called a Distinguished Name or a DN.
+        There are quite a few fields but you can leave some blank
+        For some fields there will be a default value,
+        If you enter '.', the field will be left blank.
+        -----
+        Country Name (2 letter code) [AU]: US
+        State or Province Name (full name) [Some-State]: California
+        Locality Name (eg, city) []: San Jose
+        Organization Name (eg, company) [Internet Widgits Pty Ltd]: Example Inc.
+        Organizational Unit Name (eg, section) []: section
+        Common Name (e.g. server FQDN or YOUR name) []: example.com
+        Email Address []: example@mail.com
 
 3. Configure NGINX as an HTTPS reverse proxy to Kibana:
 
@@ -195,10 +233,10 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
 
   .. note::
 
-    We configure nginx in order to encapsulate the IP address of the Kibana server. This configuration allows us to redirect Kibana requests to HTTPS, when you use this configuration it's recommended to edit the file ``/etc/kibana/kibana.yml`` and set the field ``server.host`` to ``localhost``, then you must restart the Kibana service to apply this change.
+    We configure Nginx in order to encapsulate the IP address of the Kibana server. This configuration allows Kibana requests to be redirected to HTTPS. When using this configuration, it is recommended that the file ``/etc/kibana/kibana.yml`` be edited to set the field ``server.host`` to ``localhost``. The Kibana service must be restarted to apply this change.
 
 Enable authentication by htpasswd
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Install the package ``apache2-utils``:
 
@@ -206,7 +244,7 @@ Enable authentication by htpasswd
 
     # apt-get install apache2-utils
 
-2. Generate the ``.htpasswd`` file. Replace ``<user>`` with your chosen username:
+2. Generate the ``.htpasswd`` file replacing ``<user>`` below with your chosen username:
 
   .. code-block:: console
 
@@ -226,4 +264,4 @@ Enable authentication by htpasswd
 
       # service nginx restart
 
-Now try to access the Kibana web interface via HTTPS. It should prompt you for the username and password that you just created.
+Now, access the Kibana web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.

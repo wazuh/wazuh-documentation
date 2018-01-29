@@ -5,57 +5,59 @@ Restore Wazuh alerts from Wazuh 2.x
 
 .. versionadded:: 3.1.0
 
-After upgrading Wazuh from 2.x to 3.x, your alerts will not be lost, but you cannot visualize your old alerts in Kibana due to a change in the Wazuh alerts' template. So, in order to work again with your old alerts and the new ones, it is necessary to reindex your alerts in Elasticsearch, applying the new mapping.
+After upgrading Wazuh from 2.x to 3.x, your old alerts will not be lost, however, they cannot be visualized in Kibana due to a change in the Wazuh alerts' template. In order to access the old alerts and visualize them along with the new ones, the indices need to be reindexed to apply the new mapping.
 
-To do so, you must download the ``restore_alerts.sh`` script `from this link <https://github.com/wazuh/wazuh/tree/master/extensions/elasticsearch/restore_alerts/restore_alerts.sh>`_ and a Logstash's configuration file called ``restore_alerts.conf`` `from here <https://github.com/wazuh/wazuh/tree/master/extensions/elasticsearch/restore_alerts/restore_alerts.conf>`_.
+To do so, download the ``restore_alerts.sh`` script `from this link <https://github.com/wazuh/wazuh/tree/master/extensions/elasticsearch/restore_alerts/restore_alerts.sh>`_ and Logstash's configuration file called ``restore_alerts.conf`` `from here <https://github.com/wazuh/wazuh/tree/master/extensions/elasticsearch/restore_alerts/restore_alerts.conf>`_.
 
     .. code-block:: console
 
-        $ curl -so restore_alerts.sh https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts/restore_alerts.sh
-        $ curl -so restore_alerts.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts/restore_alerts.conf
+        # curl -so restore_alerts.sh https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts/restore_alerts.sh
+        # curl -so restore_alerts.conf https://raw.githubusercontent.com/wazuh/wazuh/master/extensions/elasticsearch/restore_alerts/restore_alerts.conf
 
 
-Once the script and the configuration file are downloaded, you can restore your Wazuh's alerts in two different ways: **restoring them from Elasticsearch** and index them in Elasticsearch or **restoring from your Wazuh's manager** and index them in Elasticsearch.
+Once the script and the configuration file are downloaded, you can restore your Wazuh alerts in two different ways:
+
+- by **restoring them from Elasticsearch** to index them in Elasticsearch, or
+- by **restoring from your Wazuh's manager** to index them in Elasticsearch.
 
 Restore the alerts
 ^^^^^^^^^^^^^^^^^^
 
-Before you start restoring your alerts, you must stop Logstash.
+1. Stop Logstash.
 
     .. code-block:: console
 
         # systemctl stop logstash
 
 
-Once you stopped Logstash, you can run the ``restore_alerts.sh`` script as **superuser** to reindex your old Wazuh alerts.
+2. Run the ``restore_alerts.sh`` script as **superuser** to reindex your old Wazuh alerts.
 
     .. code-block:: console
 
-        # ./restore_alerts.sh 
+        # ./restore_alerts.sh
 
 
 .. note::
-    The script needs Logstash to be installed in the same machine, so if the script can't find Logstash, the script will install it in order to do the job. After the reindex has finished, you can uninstall Logstash.
+    The script needs Logstash to be installed on the same machine. If the script can't find Logstash, it will install Logstash in order to complete the task. After the reindex has finished, you can then uninstall Logstash.
 
-After that, the script will ask you for information to fill in some needed parameters:
+3. Insert the requested parameters into the prompts from the  script as defined below :
 
 - ``reindex_type``: Store what kind of reindex do you want. It could be:
   - ``ELS2ELS``: from Elasticsearch to Elasticsearch.
   - ``WM2ELS``: from Wazuh's manager to Elasticsearch.
 
-- ``elastic_ip``: Is the Elasticsearch IP address. By default, is `localhost`.
+- ``elastic_ip``: Is the Elasticsearch IP address. By default, this is set to is `localhost`.
 - ``dateFrom``: starting date as YYYY-MM-DD (2017-12-01).
 - ``dateTo``: end date as YYYY-MM-DD (2017-12-11).
 
 .. note::
-    If you want to reindex only a day, set ``dateFrom`` and ``dateTo`` to the same date.
+    If you want to reindex only a single day, set ``dateFrom`` and ``dateTo`` to the same date.
 
 Also, you can execute the script adding the values for the parameters as arguments:
 
     .. code-block:: console
 
         # ./restore_alerts.sh date_from(yyyy-mm-dd) date_to(yyyy-mm-dd) elasticsearch_ip ELS2ELS|WM2ELS
-
 
 Once the script has finished, you can start Logstash again:
 
@@ -66,14 +68,14 @@ Once the script has finished, you can start Logstash again:
 Check that the reindex has worked
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once the reindex of your alerts has finished, you can check that it works by asking Elasticsearch about the *indices*.
+Once the reindex of your alerts has finished, you can confirm that it was successful by asking Elasticsearch about the *indices*.
 
     .. code-block:: console
 
         $ curl localhost:9200/_cat/indices?v
 
 
-If everything worked well, it must appear something like this in the output:
+If everything worked well, the output will appear something like this:
 
     .. code-block:: console
 
