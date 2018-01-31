@@ -172,14 +172,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.1.2
+      # yum install elasticsearch-6.1.3
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch=6.1.2
+      # apt-get install elasticsearch=6.1.3
 
 
 2. Start Elasticsearch:
@@ -218,13 +218,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash-6.1.2
+      # yum install logstash-6.1.3
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash=1:6.1.2-1
+      # apt-get install logstash=1:6.1.3-1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -263,13 +263,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-6.1.2
+      # yum install kibana-6.1.3
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=6.1.2
+      # apt-get install kibana=6.1.3
 
 
 2. Remove the Wazuh Kibana App plugin from Kibana:
@@ -319,13 +319,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.1.2
+      # yum install filebeat-6.1.3
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.1.2
+      # apt-get install filebeat=6.1.3
 
 2. Download the Filebeat configuration file from the Wazuh repository:
 
