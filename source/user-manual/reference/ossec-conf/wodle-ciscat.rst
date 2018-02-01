@@ -135,11 +135,6 @@ Attributes
 | **profile**       | Select profile.                                             |
 +-------------------+-------------------------------------------------------------+
 
-.. note::
-    To set a policy file in the ``path`` parameter, you should specify the relative path of the benchmark file from where CIS-CAT is installed.
-
-
-
 Example of configuration
 ------------------------
 
