@@ -132,7 +132,7 @@ This option allows for the addition of custom data in JSON events and is availab
 
 Labels can be nested in JSON formatted alerts by separating the "key" terms by a period.
 
-This option can be used as follows to identify the source of each log entry when monitoring several files simultaneously: 
+This option can be used as follows to identify the source of each log entry when monitoring several files simultaneously:
 
 .. code-block:: xml
 
@@ -208,6 +208,10 @@ This specifies the format of the log being read.
 |                    |                |                                                                                                  |
 |                    |                | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
 +                    +----------------+--------------------------------------------------------------------------------------------------+
+|                    | audit          | Used for events from Auditd.                                                                     |
+|                    |                |                                                                                                  |
+|                    |                | This format chains consecutive logs with the same ID into a single event.                        |
++                    +----------------+--------------------------------------------------------------------------------------------------+
 |                    | mysql_log      | Used for ``MySQL`` logs, however, this value does not support multi-line logs.                   |
 +                    +----------------+--------------------------------------------------------------------------------------------------+
 |                    | postgresql_log | Used for ``PostgreSQL`` logs, however, this value does not support multi-line logs.              |
@@ -245,7 +249,7 @@ This specifies the format of the log being read.
 
 .. warning::
 
-	Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh Manager from running arbitrary commands on agents in their root security context. 
+	Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh Manager from running arbitrary commands on agents in their root security context.
 
 Sample of Multi-line log message in original log file:
 
