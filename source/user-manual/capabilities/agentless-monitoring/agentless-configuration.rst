@@ -1,18 +1,18 @@
 .. _agentless-examples:
 
 Configuration
-======================
+=============
 
 #. `Integrity check BSD`_
 #. `Integrity check Linux`_
 #. `Generic Diff`_
 #. `Pix config`_
 
-Agentless monitoring is configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the section :ref:`Agentless <reference_ossec_agentless>`.
+Agentless monitoring is configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the section :ref:`agentless <reference_ossec_agentless>`.
 
 Integrity check BSD
 -------------------
-In this example, the configuration is set to monitor the ``/bin`` and ``/var`` directories
+This sample configuration will monitor the ``/bin`` and ``/var`` directories:
 
 ::
 
@@ -24,14 +24,14 @@ In this example, the configuration is set to monitor the ``/bin`` and ``/var`` d
     <arguments>/bin /var/</arguments>
   </agentless>
 
-
+Notice in the ``<arguments>`` tag that multiple directories may be included, separated by a space.
 
 Integrity check Linux
 ---------------------
 
-For Linux systems, set the ``type`` as ``ssh_integrity_check_linux`` as referenced below.  A space-separated list of directories may be referenced in the configuration section using the arguments tag.  Using this configuration, Wazuh will do an integrity check on the remote box.
+For Linux systems, set the ``type`` as ``ssh_integrity_check_linux`` as referenced below.  Here also, a space-separated list of directories may be referenced in the configuration section using the ``<arguments>`` tag.  Using this configuration, Wazuh will do an integrity check on the remote box.
 
-The below example is configured to monitor the ``/bin`` and ``/etc /sbin`` directories
+The sample configuration will monitor the ``/bin``, ``/etc`` and ``/sbin`` directories
 
 ::
 
@@ -40,15 +40,13 @@ The below example is configured to monitor the ``/bin`` and ``/etc /sbin`` direc
     <frequency>36000</frequency>
     <host>root@test.com</host>
     <state>periodic</state>
-    <arguments>/bin /etc/ /sbin</arguments>
+    <arguments>/bin /etc /sbin</arguments>
   </agentless>
 
-
-
 Generic Diff
----------------------
+------------
 
-In this example, the configuration is set to execute ``ls -la /etc`` and ``cat /etc/passwd`` commands every 20000 seconds. An alert will be triggered if the output of those commands change.
+In this configuration the ``ls -la /etc`` and ``cat /etc/passwd`` commands will execute every 20000 seconds. An alert will be triggered if the output of the commands changes.
 
 .. code-block:: xml
 
@@ -60,10 +58,12 @@ In this example, the configuration is set to execute ``ls -la /etc`` and ``cat /
     <arguments>ls -la /etc; cat /etc/passwd</arguments>
   </agentless>
 
-Pix config
----------------------
+Notice that multiple entries in the ``<arguments>`` tag can be included, separated by a **";"**.
 
-In this example, the configuration is set to trigger an alert when a Cisco PIX or router configuration changes.
+Pix config
+----------
+
+In this configuration, an alert will be triggered when a Cisco PIX or router configuration changes.
 
 .. code-block:: xml
 

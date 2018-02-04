@@ -1,7 +1,7 @@
 .. _vuls:
 
 Vuls integration
-=================
+================
 
 .. versionadded:: 3.1.0
 
@@ -23,9 +23,9 @@ How it works?
 
 The agent (or manager) being monitored will launch Vuls scans at the interval specified in the configuration. This scan consists of the following steps:
 
-1) The update of the vulnerability databases. Though this step is optional, it is highly recommended to ensure the quality of the analysis.
-2) A scan of the server software.
-3) An analysis of the server software using the vulnerability databases to look for known vulnerabilities.
+1. The update of the vulnerability databases. Though this step is optional, it is highly recommended to ensure the quality of the analysis.
+2. A scan of the server software.
+3. An analysis of the server software using the vulnerability databases to look for known vulnerabilities.
 
 After this, the agent will report to the manager any vulnerabilities found and these will be assessed using the Wazuh Ruleset, triggering alerts based on the severity of the reported vulnerabilities.
 

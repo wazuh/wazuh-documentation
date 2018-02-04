@@ -1,7 +1,7 @@
 .. _restful-api-remove:
 
 Remove Agents
---------------------------------
+-------------
 
 The request :ref:`DELETE /agents/:agent_id <request_list>` removes the specified agent.
 
