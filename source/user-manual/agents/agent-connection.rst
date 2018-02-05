@@ -3,7 +3,7 @@
 Checking connection with Manager
 ================================
 
-First you need to be sure that the Agent is poiting to Manager Address this is set on ``ossec.conf`` using ``<client>`` XML tag, for more see :ref:`Client reference <reference_ossec_client>`.
+Before you check the agent's connection with the manager, first ensure the agent is pointing to the manager's IP address. This is set in ``ossec.conf`` using the ``<client>`` XML tag. For more on this, see :ref:`Client reference <reference_ossec_client>`.
 
 ::
 
@@ -16,7 +16,7 @@ First you need to be sure that the Agent is poiting to Manager Address this is s
     </client>
   </ossec_config>
 
-This will set 10.0.0.10 as Wazuh Manager server, after you need restart the Agent:
+This will set 10.0.0.10 as the Wazuh Manager server. Once this is done, you will need restart the Agent:
 
 a. For Systemd:
 
@@ -30,18 +30,18 @@ b. For SysV Init:
 
   # service wazuh-agent restart
 
-After you register the agent and it be successfully connected, you could see a list of connected agents into Manager with:
+After you register the agent and it has successfully connected, you can see a list of agents that are connected to the manager with:
 
 .. code-block:: console
 
   # /var/ossec/bin/agent_control -lc
 
-This will display every registered Agent, also you can check if a Agent is correctly connected verifying if the UDP connection to Manager is established:
+You can also check to see if an agent connected correctly by verifying if the UDP connection to the manager is established:
 
 .. code-block:: console
 
   # netstat -vatunp|grep ossec-agentd
 
-This could match with the Agent and Manager ip addresses.
+The result should match the agent and manager IP addresses.
 
-In the :doc:`agent_control section <../reference/tools/agent_control>` it can be found information about the different states in which agents registered in a manager are.
+In the :doc:`agent_control section <../reference/tools/agent_control>`, you can find information about the status of the agents that are registered with the manager.

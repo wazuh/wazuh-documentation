@@ -1,9 +1,11 @@
 .. _restful-api-listing:
 
 Listing Agents
---------------------------------
+--------------
 
 The request :ref:`GET /agents <request_list>` returns the list of available agents.
+
+.. note:: GET is the default action of curl and does not need to be specifically referenced.
 
 .. code-block:: console
 

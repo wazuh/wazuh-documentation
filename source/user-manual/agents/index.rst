@@ -3,7 +3,7 @@
 Agent management
 ================
 
-This section will describe how list, remove and register agents to and from the Wazuh server, this could be done via command line or RESTful API. Any method describe here you choose to use is valid, one more secure than others, some need more user interventions that others.
+This section describes how to list and remove registered agents and register agents with the Wazuh server. These tasks can be performed via the command line (CLI) or RESTful API. Both methods are secure and valid for agent management depending on your needs.
 
 .. topic:: Contents
 

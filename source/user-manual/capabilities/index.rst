@@ -1,11 +1,20 @@
 .. _capabilities:
 
 Capabilities
-================
+============
 
-This section explain more in detail how each capability works, how can be configured, frequently asked questions and some examples that allow a better understanding of all the features. If you find a problem, error or if you want to ask related questions please let us know on our `mailing list <https://groups.google.com/d/forum/wazuh>`_.
+In this section, you will find:
 
-The capabilities are:
+- a deeper explanation of how each capability works,
+
+- configuration options for specific capabilities,
+
+- frequently asked questions, and
+
+- some practical examples.
+
+
+If you find a problem, error or if you want to ask related questions, please contact us through our `mailing list <https://groups.google.com/d/forum/wazuh>`_.
 
 .. toctree::
     :maxdepth: 2

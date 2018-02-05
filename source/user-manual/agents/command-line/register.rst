@@ -1,16 +1,18 @@
 .. _command-line-register:
 
 Register Agent
-----------------------------
+--------------
 
-1. On the **manager**, run `manage_agents`:
+To register an agent, follow these steps:
+
+1. On the **manager**, run ``manage_agents``:
 
 .. code-block:: console
 
 	# /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v2.0 Agent manager.            *
+	* Wazuh v3.1 Agent manager.            *
 	* The following options are available: *
 	****************************************
 	   (A)dd an agent (A).
@@ -20,7 +22,7 @@ Register Agent
 	   (Q)uit.
 	Choose your action: A,E,L,R or Q:
 
-2. Press `A` and `Enter` to add an agent. You'll be asked for the agent's name (use the agent hostname or another arbitrary name), its IP and the agent ID (you can leave this field empty to auto-assign an ID).
+2. Select `A` to add an agent. You'll be asked for the agent's name (use the agent hostname or another arbitrary name), its IP address and the agent ID (this field can be left blank to auto-assign an ID).
 
 In this example, we'll add an agent with name "Example", dynamic IP (`any`) and automatic ID::
 
@@ -50,23 +52,23 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	Agent key information for '001' is:
 	MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
 
-4. Exit from `manage_agents` by pressing `Q` and `Enter`.
+4. Exit from `manage_agents` by selecting `Q`.
 
-5. Now on the **agent** run `manage_agents`:
+5. Now on the **agent** run ``manage_agents``:
 
 .. code-block:: console
 
 	# /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v2.0 Agent manager.            *
+	* Wazuh v3.1 Agent manager.            *
 	* The following options are available: *
 	****************************************
 	   (I)mport key from the server (I).
 	   (Q)uit.
 	Choose your action: I or Q:
 
-6. Press `I` and `Enter` to import a key. Then paste the key that you extracted on the manager::
+6. Select `I` to import a key and paste in the key that you extracted on the manager::
 
 	Choose your action: I or Q: I
 
@@ -84,9 +86,9 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	Confirm adding it?(y/n): y
 	Added.
 
-7. Press `Q` and `Enter` to exit from `manage_agents`.
+7. Select 'Q' to exit from `manage_agents`.
 
-8. Edit the wazuh-agent configuration in ``/var/ossec/etc/ossec.conf`` to add the wazuh-manager IP address. In ``<client>`` section change the ``MANAGE_IP`` value to the wazuh-manager address::
+8. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client>`` section, change the ``MANAGE_IP`` value to the Wazuh manager address::
 
          <client>
                <server-ip>MANAGE_IP</server-ip>
@@ -99,13 +101,13 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	# /var/ossec/bin/ossec-control restart
 
 Forcing insertion
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
-If you try to add an agent with an IP that another agent is already registered with, ``manage_agents`` will generate an error. You can use the argument *-d* in order to force the insertion.
+If you try to add an agent with an IP address that was already registered to another agent, the ``manage_agents`` command will return an error. You can still force the addition by using the *-d* option.
 
 Example
-~~~~~~~~~~~~~~~~~~
+~~~~~~~
 
-We have installed the agent *Server1* with IP 10.0.0.10 and ID 005. For some reason, we had to reinstall the server, so now we must install a new agent and we need to connect it to the manager. In this case, we can use the argument *-d 0* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID::
+The agent named *Server1* at IP 10.0.0.10 was installed and given the ID 005. If we assume that we had to reinstall the server, we would have to reinstall a new agent and connect it to the manager. In this case, we can use the argument *-d 0* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID::
 
     /var/ossec/bin/manage_agents -n Server1 -a 10.10.10.10 -d 0

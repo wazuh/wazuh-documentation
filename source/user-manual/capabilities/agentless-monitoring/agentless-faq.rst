@@ -7,9 +7,9 @@ FAQ
 #. `Can I monitor directories on a remote system?`_
 
 Is it possible to monitor the output of a command on a remote device?
-------------------------------------------------------------------------
-Yes, using the ``ssh_generic_diff`` option :ref:`example <agentless-examples>`
+---------------------------------------------------------------------
+Yes, using the ``ssh_generic_diff`` option: :ref:`example <agentless-examples>`
 
 Can I monitor directories on a remote system?
-----------------------------------------------
-Yes, using the ``ssh_integrity_check_bsd`` or ``ssh_integrity_check_linux`` options.
+---------------------------------------------
+Yes, using either the ``ssh_integrity_check_bsd`` or ``ssh_integrity_check_linux`` options.

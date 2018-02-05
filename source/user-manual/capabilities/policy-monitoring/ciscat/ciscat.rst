@@ -40,9 +40,7 @@ In addition, in Unix systems, the CIS-CAT script may need to be granted execute 
 
     # chmod +x CIS-CAT.sh
 
-Finally, the ``xsltproc`` tool is needed to convert CIS-CAT reports into Wazuh alerts. It is a common tool that can be easily found in any Unix distribution.
-
-Once you have the requirements for running CIS evaluations, you can configure the wodle to check for specific benchmarks at a your chosen interval. The scan results from these checks are sent to the manager and can be included in the visualizations. 
+Once you have the requirements for running CIS evaluations, you can configure the wodle to check for specific benchmarks at a your chosen interval. The scan results from these checks are sent to the manager and can be included in the visualizations.
 
 Use case: Running a CIS evaluation
 ----------------------------------
@@ -70,7 +68,7 @@ The following is an example of how to deploy the CIS-CAT integration:
   </wodle>
 
 .. note::
-    Make sure the paths are correct for the location of your Java and the CIS-CAT tool and the path to the selected benchmark is relative to the CIS-CAT tool path. 
+    Make sure the paths are correct for the location of your Java and the CIS-CAT tool and the path to the selected benchmark is relative to the CIS-CAT tool path.
 
     If no profile is specified, the first one, which is usually the most permissive, will be selected.
 
