@@ -23,7 +23,7 @@ Once installed, the agent includes a graphical user interface that can be used t
 
 By default all agent files can be found at the following location: ``C:\Program Files(x86)\ossec-agent``.
 
-.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
+.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual at .
 
 Using the command line
 ----------------------
