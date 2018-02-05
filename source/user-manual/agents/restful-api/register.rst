@@ -1,14 +1,14 @@
 .. _restful-api-register:
 
 Register Agents
-----------------------------
+---------------
 
 Two requests are needed to register an agent using the API:
 
     - POST /agents :ref:`(reference) <api_reference>`
     - PUT /agents/:agent_name :ref:`(reference) <api_reference>`
 
-We have prepared a few scripts in different languages to help with the task of registering an agent with the API:
+We have prepared a few scripts in different programming languages to help with the task of registering an agent with the API:
 
     - `Register an agent using a shell script <https://raw.githubusercontent.com/wazuh/wazuh-api/master/examples/api-register-agent.sh>`_.
     - `Register an agent using a Python script <https://raw.githubusercontent.com/wazuh/wazuh-api/master/examples/api-register-agent.py>`_.
@@ -38,7 +38,7 @@ Basically, the scripts perform the following steps:
 
 .. warning::
 
-    If you paste the command directly in the terminal, the agent key will be saved in the bash history. Use *manage_agents* without arguments or from a script.
+    If you paste the command directly into the terminal, the agent key will be saved in the bash history. Use ``manage_agents`` without arguments or from a script.
 
 **Step 4:** Restart the agent.
 

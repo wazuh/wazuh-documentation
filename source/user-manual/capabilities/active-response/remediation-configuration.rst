@@ -12,11 +12,11 @@ Configuration
 
 
 Basic usage
----------------------------
+-----------
 
-Active response is configured in :ref:`ossec.conf <reference_ossec_conf>`, within the :ref:`Active Response <reference_ossec_active_response>` and :ref:`Command <reference_ossec_commands>` sections.
+An active response is configured in the :ref:`ossec.conf <reference_ossec_conf>` file in the :ref:`Active Response <reference_ossec_active_response>` and :ref:`Command <reference_ossec_commands>` sections.
 
-In this example, a command with the name *"restart-ossec"* is configured to use the *"restart-ossec.sh"* script with no data element.  The **Active response** is configured to initiate the *"restart-ossec"* command on the local host when the rule with ID 10005 fires.  This is a *Stateless* response as no timeout parameter is defined.
+In this example, the ``restart-ossec`` command is configured to use the ``restart-ossec.sh`` script with no data element.  The active response is configured to initiate the ``restart-ossec`` command on the local host when the rule with ID 10005 fires.  This is a *Stateless* response as no timeout parameter is defined.
 
 Command::
 
@@ -37,7 +37,7 @@ Active response::
 Windows automatic remediation
 -----------------------------
 
-In this example, a command with the name *"win_rout-null"* is configured to use the *"route-null.cmd"* script using the data element *"srcip"*.  The **Active response** is configured to initiate the *"win_rout-null"* command on the local host when the  rule has a higher alert level than 7.  This is a *Stateful* response with a timeout set at 900 seconds.
+In this example, the ``win_rout-null`` command is configured to use the ``route-null.cmd`` script using the data element ``srcip``.  The active response is configured to initiate the ``win_rout-null`` command on the local host when the rule has a higher alert level than 7.  This is a *Stateful* response with a timeout set at 900 seconds.
 
 Command::
 
@@ -61,7 +61,7 @@ Active response::
 Block an IP with PF
 -------------------
 
-In this example, a command with the name *"pf-block"* is configured to use the *"pf.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"pf-block"* command on agent *"001"* when a rule in either the *"authentificaiton_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateless* response as no timeout parameter is defined.
+In this example, the ``pf-block`` command is configured to use the ``pf.sh`` script using the data element ``scrip``.  The active response is configured to initiate the ``pf-block`` command on agent 001 when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateless* response as no timeout parameter is defined.
 
 Command::
 
@@ -83,9 +83,9 @@ Active response::
 Add an IP to the iptables deny list
 -----------------------------------
 
-In this example, a command with the name *"firewall-drop"* is configured to use the *"firewall-drop.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"firewall-block"* command on all systems when a rule in either the *"authentificaiton_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The repeated offenders parameter increases the timeout period for each subsequent offence by a specific IP address.
+In this example, the ``firewall-drop`` command is configured to use the ``firewall-drop.sh`` script using the data element ``scrip``.  The active response is configured to initiate the ``firewall-block`` command on all systems when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The ``<repeated_offenders>`` tag increases the timeout period for each subsequent offense by a specific IP address.
 
-**Note: This parameter is specified in minutes rather than seconds.**
+.. note:: This parameter is specified in minutes rather than seconds.
 
 Command::
 
@@ -110,7 +110,7 @@ Active response for a specified period of time
 
 The action of a stateful response continues for a specified period of time.
 
-In this example, a command with the name *"host-deny"* is configured to use the *"host-deny.sh"* script using the data element *"scrip"*.  The **Active response** is configured to initiate the *"host-deny"* command on the local host when a rule with a higher alert level than 6 is fired.
+In this example, the ``host-deny`` command is configured to use the ``host-deny.sh`` script using the data element ``scrip``.  The active response is configured to initiate the ``host-deny`` command on the local host when a rule with a higher alert level than 6 is fired.
 
 Command::
 
@@ -130,14 +130,14 @@ Active response::
     <timeout>600</timeout>
   </active-response>
 
-More info: :ref:`command <reference_ossec_commands>`
+More information: :ref:`command <reference_ossec_commands>`
 
 Active response that will not be undone
 ---------------------------------------
 
 The action of a stateless command is a one-time action that will not be undone.
 
-In this example, a command with the name *"mail-test"* is configured to use the *"mail-test.sh"* script with no data element.  The **Active response** is configured to initiate the *"mail-test"* command on the server when the rule with ID 1002 fires.
+In this example, the ``mail-test`` command is configured to use the ``mail-test.sh`` script with no data element.  The active response is configured to initiate the ``mail-test`` command on the server when the rule with ID 1002 fires.
 
 Command::
 
@@ -145,7 +145,7 @@ Command::
     <name>mail-test</name>
     <executable>mail-test.sh</executable>
     <timeout_allowed>no</timeout_allowed>
-    <expect />
+    <expect></expect>
   </command>
 
 Active response::

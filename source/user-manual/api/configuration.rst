@@ -1,18 +1,18 @@
 .. _api_configuration:
 
 Configuration
-======================
+=============
 
-The API will bind to port 55000/tcp by default and is requires username/password authentication. The default username and password is "foo" and "bar".
+The API will bind to port 55000/tcp by default and requires username and password authentication. The default username and password is "foo" and "bar".
 
 
 Configuration script
--------------------------
+--------------------
 
 Run the script ``/var/ossec/api/scripts/configure_api.sh`` to configure the basic settings.
 
 Configuration file
--------------------------
+------------------
 
 You can configure certain API settings in the file ``/var/ossec/api/configuration/config.js``: ::
 
@@ -29,35 +29,50 @@ You can configure certain API settings in the file ``/var/ossec/api/configuratio
     //In case the API run behind a proxy server, turn to "yes" this feature. Values: yes, no.
     config.BehindProxyServer = "no";
 
-Make sure to restart wazuh-api service after editing the config file using the command below appropriate for your system:
+Make sure to restart wazuh-api service after editing the configuration file:
 
-.. code-block:: console
+  a. For Systemd:
+
+  .. code-block:: console
 
     # systemctl restart wazuh-api
+
+  b. For SysV Init:
+
+  .. code-block:: console
+
     # service wazuh-api restart
 
-
 Basic Authentication
--------------------------
+--------------------
 
-It is generally recommended to generate new credentials to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName**:
+It is generally recommended that new credentials be created to replace foo:bar. This can be done very easily with the following steps, substituting your desired username for **myUserName**:
 
 .. code-block:: console
 
     # cd /var/ossec/api/configuration/auth
     # node htpasswd -c user myUserName
 
+Once you run the above command, enter your desired password at the prompt.
+
 Do not forget to restart the API to apply the changes:
 
-.. code-block:: console
+ a. For Systemd:
+
+  .. code-block:: console
 
     # systemctl restart wazuh-api
+
+  b. For SysV Init:
+
+  .. code-block:: console
+
     # service wazuh-api restart
 
 Manually enable https support
----------------------------------
+-----------------------------
 
-Generate key and certificate request (the Openssl package is required):
+Generate the key and certificate request (the Openssl package is required):
 
 .. code-block:: console
 

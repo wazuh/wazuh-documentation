@@ -3,7 +3,7 @@
 Using the RESTful API
 =====================
 
-Similar to command-line you can do certain task via RESTful API:
+As with the command line, certain tasks can be performed via the RESTful API:
 
 .. topic:: Contents
 
