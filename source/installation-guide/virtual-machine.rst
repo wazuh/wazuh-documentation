@@ -23,7 +23,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 3. The **Wazuh Manager** and the **Elastic Stack** included in this virtual image are configured to work out of the box. The next step of the process is to deploy the Wazuh agents on the systems you intend to monitor. Once installed, connect them to your virtual appliance. More documentation can be found at:
 
-    - `How to install Wazuh agents <installation-wazuh-agent>`_.
+    - :doc:`How to install Wazuh agents<installing-wazuh-agent/index>`
 
   .. warning:: Before connecting any of the Wazuh agents, change the VM's network interface type from NAT (the factory default) to bridge for communication with your network. By default, the VM will try to get an IP address from your network's DHCP server. Alternatively, you can set a static IP address by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
