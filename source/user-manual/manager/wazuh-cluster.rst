@@ -37,10 +37,13 @@ The master node is the manager that controls the cluster. The configuration of t
 
 - agent registration,
 - agent deletion,
+- rules, decoders and CDB lists synchronization,
 - configuration of agents grouping, and
 - centralized configuration of the ``agent.conf`` file used by the agents within each agent group.
 
 The master node sends to its clients the complete ``etc/shared`` directory contained in its Wazuh installation directory.  This includes the centralized configuration of agents ordered by groups and the ``client.keys`` file. These shared files allow agents to report to any manager of the cluster.
+
+Before sending rules and decoders, the master node runs ``ossec-logtest`` to verify the pending rules/decoders to push are correct. This check is also done in the clients when rules, decoders or CDB lists are received. If ``ossec-logtest`` runs doesn't report any error, the client manager is restarted. **The** ``ossec.conf`` **file is not synchronized.** If any rule or decoder is excluded in the master's ``ossec.conf``, it should be synchronized manually. Otherwise, the ``ossec-logtest`` check will fail on the client and it won't be restarted.
 
 The communication between the nodes of the cluster is performed by means of a self-developed protocol.  This synchronization occurs at the frequency defined in the ``<cluster>`` section of :doc:`Local configuration <../reference/ossec-conf/cluster>`. These cluster communications are sent with the AES encryption algorithm providing for security and confidentiality.
 
@@ -73,7 +76,7 @@ The manual for this tool can be found at :doc:`cluster_control tool <../referenc
 Cluster database
 ^^^^^^^^^^^^^^^^^
 
-The cluster database has been incorporated into the database for each manager in the cluster.  This database is called `cluster_db` and contains information about the syncronization status of the files. Each row of the database contains the ``<node> <file> <state>`` fields.
+The cluster database has been incorporated into the database for each manager in the cluster.  This database is called ``cluster.db`` and contains information about the syncronization status of the files. Each row of the database contains the ``<node> <file> <state>`` fields.
 
 
 Use case: Deploying a Wazuh cluster
@@ -151,50 +154,34 @@ Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is requir
     # yum install -y centos-release-scl
     # yum install -y python27
 
-2. Enable python 2.7 in bash:
+2. Install the Python package ``cryptography`` via pip:
 
   .. code-block:: console
 
-    # scl enable python27 bash
+    # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/python27/root/usr/lib64:/opt/rh/python27/root/usr/lib
+    # /opt/rh/python27/root/usr/bin/pip2.7 install cryptography
 
-3. The default version of ``sqlite3`` library is also not compatible with Wazuh clusters.  However, a compiled version of ``sqlite3`` that is compatible can be found at ``/var/ossec/framework/lib``. Load this version as follows:
-  
-  1. Install ``chrpath``:
+3. Since the cluster doesn't use the default python version in CentOS 6, the service file should be modified to load the correct python version when ``wazuh-manager`` service starts:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # yum install -y chrpath
+     # sed -i 's#echo -n "Starting OSSEC: "#echo -n "Starting OSSEC (EL6): "; source /opt/rh/python27/enable; export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/ossec/framework/lib#' /etc/init.d/wazuh-manager
 
-  2. Use ``chrpath`` to remove the reference path to the system's sqlite3 library:
+4. Use ``service`` command instead of ``/var/ossec/bin/ossec-control`` to start, stop and restart Wazuh:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # chrpath --delete /opt/rh/python27/root/usr/lib64/python2.7/lib-dynload/_sqlite3.so
+    # service wazuh-manager restart
+    Stopping OSSEC:                                            [  OK  ]
+    Starting OSSEC (EL6):                                      [  OK  ]
 
-  3. Add the compiled version of sqlite3 to the ``LD_LIBRARY_PATH`` variable:
+5. Finally, check the cluster is running:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/ossec/framework/lib
-
-  4. Install dependencies:
-
-    .. code-block:: console
-
-      # /opt/rh/python27/root/usr/bin/pip2.7 install cryptography
-
-  5. Use ``python2.7`` to start the cluster daemon:
-
-    .. code-block:: console
-
-      # python2.7 /var/ossec/bin/wazuh-clusterd
-
-  6. Finally, check the status of the cluster as follows:
-
-    .. code-block:: console
-
-      # ps -aux | grep cluster
-      ossec     6533  0.0  1.4 135424 15128 ?        S    07:19   0:00 python2.7 /var/ossec/bin/wazuh-clusterd
-      root      6536  0.0  0.4 158608  4584 ?        Ssl  07:19   0:00 /var/ossec/bin/wazuh-clusterd-internal -tmaster
-      ossec     6539  0.0  1.5 136464 15932 ?        S    07:19   0:00 python2.7 /var/ossec/bin/wazuh-clusterd
-      root      6556  0.0  0.2   8032  2092 ?        S+   07:21   0:00 grep cluster
+    # ps aux | grep cluster
+    ossec     9714  0.1  1.3 136572 14140 ?        S    14:22   0:00 python /var/ossec/bin/wazuh-clusterd
+    root      9718  0.0  0.4 176044  4700 ?        Ssl  14:22   0:00 /var/ossec/bin/wazuh-clusterd-internal -tmaster
+    ossec     9720  0.0  1.2 220256 12988 ?        Sl   14:22   0:00 python /var/ossec/bin/wazuh-clusterd
+    ossec     9725  0.1  1.3 137364 14216 ?        S    14:22   0:00 python /var/ossec/bin/wazuh-clusterd
+    root      9767  0.0  0.0 103340   904 pts/0    S+   14:22   0:00 grep cluster
