@@ -143,6 +143,8 @@ Follow these steps to deploy a Wazuh cluster:
 
 4. The cluster should now be synchronized with the same shared files in all managers.
 
+.. _run-cluster-centos6:
+
 Run the cluster in CentOS 6
 ---------------------------
 Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is required to run the cluster, follow these steps to install and use this version:
