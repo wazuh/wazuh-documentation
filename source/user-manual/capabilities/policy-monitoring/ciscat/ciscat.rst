@@ -49,23 +49,45 @@ The following is an example of how to deploy the CIS-CAT integration:
 
 1. In the configuration file, ``ossec.conf``, set up a section as follows:
 
-.. code-block:: xml
+  1.1 If you a using a UNIX environment:
 
-  <wodle name="cis-cat">
+  .. code-block:: xml
 
-    <disabled>no</disabled>
-    <timeout>1800</timeout>
-    <interval>1d</interval>
-    <scan-on-start>yes</scan-on-start>
+    <wodle name="cis-cat">
 
-    <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
-    <ciscat_path>/var/ossec/wodles/ciscat</ciscat_path>
+      <disabled>no</disabled>
+      <timeout>1800</timeout>
+      <interval>1d</interval>
+      <scan-on-start>yes</scan-on-start>
 
-    <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
-      <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
-    </content>
+      <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
+      <ciscat_path>/var/ossec/wodles/ciscat</ciscat_path>
 
-  </wodle>
+      <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
+        <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
+      </content>
+
+    </wodle>
+
+
+  1.2 If you a using a Windows environment:
+
+  .. code-block:: xml
+    
+    <wodle name="cis-cat">
+      <disabled>no</disabled>
+      <timeout>1800</timeout>
+      <interval>1d</interval>
+      <scan-on-start>yes</scan-on-start>
+
+      <java_path>\\server\jre\bin\java.exe</java_path>
+      <ciscat_path>C:\cis-cat</ciscat_path>
+
+      <content type="xccdf" path="benchmarks/your_windows_benchamark_file_xccdf.xml">
+        <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
+      </content>
+
+    </wodle>
 
 .. note::
     Make sure the paths are correct for the location of your Java and the CIS-CAT tool and the path to the selected benchmark is relative to the CIS-CAT tool path.
