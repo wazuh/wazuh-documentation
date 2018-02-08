@@ -18,4 +18,4 @@ Unzip the package in ``/``:
 
     tar -xvf wazuh-agent-3.1.0-1-hpux-11v3-ia64.tar -C /
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
