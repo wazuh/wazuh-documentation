@@ -11,7 +11,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
 - :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
-- :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**)
+- :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 
@@ -37,7 +37,7 @@ The file ``ar.conf`` (active response status) will always be sent to agents even
 
 The agent will store the shared files in ``/var/ossec/etc/shared``, not in a group folder.
 
-Below are the files that would be found in this folder on an agent assigned to the **debian** group.  Notice that these files are pushed to the agent from the manager's ``/var/ossec/etc/shared/debian`` folder. 
+Below are the files that would be found in this folder on an agent assigned to the **debian** group.  Notice that these files are pushed to the agent from the manager's ``/var/ossec/etc/shared/debian`` folder.
 
 +-----------------------------------------------------+-----------------------------------------------------+
 | **Manager**                                         | **Agent (Group: 'debian')**                         |
@@ -174,7 +174,7 @@ Each time you make a change to the ``agent.conf`` file, it is important to check
 
 3. Push the configuration to the agents.
 
-Each time an agent checks-in with the manager (10 minute default), it looks to see if a new version of ``agent.conf`` is available from the manager.  When a new version is available, it automatically pulls the new file. However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted, as in step 5. 
+Each time an agent checks-in with the manager (10 minute default), it looks to see if a new version of ``agent.conf`` is available from the manager.  When a new version is available, it automatically pulls the new file. However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted, as in step 5.
 
 .. note:: Restarting the manager will make the new ``agent.conf`` file available to the agents more quickly.
 
@@ -273,7 +273,3 @@ and this configuration in the ``agent.conf`` file.
   </rootcheck>
 
 The final configuration will overwrite ``check_unixaudit`` to "yes" because it appears in the ``agent.conf`` file. However, the path listed with the ``system_audit`` option will be repeated with both settings in the final configuration. In other words, ``system_audit_rcl.txt`` (from ``ossec.conf``) and ``cis_debian_linux_rcl.txt`` (from ``agent.conf``) will be included.
-
-
-
-

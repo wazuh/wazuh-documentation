@@ -73,7 +73,7 @@ The following is an example of how to deploy the CIS-CAT integration:
   1.2 If you a using a Windows environment:
 
   .. code-block:: xml
-    
+
     <wodle name="cis-cat">
       <disabled>no</disabled>
       <timeout>1800</timeout>
@@ -83,50 +83,39 @@ The following is an example of how to deploy the CIS-CAT integration:
       <java_path>\\server\jre\bin\java.exe</java_path>
       <ciscat_path>C:\cis-cat</ciscat_path>
 
-      <content type="xccdf" path="benchmarks/your_windows_benchamark_file_xccdf.xml">
+      <content type="xccdf" path="C:\cis-cat\benchmarks\your_windows_benchamark_file_xccdf.xml">
         <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
       </content>
 
     </wodle>
 
 .. note::
-    Make sure the paths are correct for the location of your Java and the CIS-CAT tool and the path to the selected benchmark is relative to the CIS-CAT tool path.
+    Make sure the paths are correct for the location of your Java and the CIS-CAT tool.
 
     If no profile is specified, the first one, which is usually the most permissive, will be selected.
 
 2. After restarting the Wazuh agent, the benchmark checks will be executed at the specified interval, triggering alerts as shown below.
 
-Information about the executed scan
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Information about the executed scan and report overview
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: console
 
-   ** Alert 1513855072.2400: - ciscat,
-   2017 Dec 21 03:17:52 ubuntu->wodle_cis-cat
-   Rule: 87402 (level 3) -> 'CIS-CAT: assessment information for scan 75459013'
-   {"type":"scan_info","scan_id":75459013,"cis-data":{"benchmark":"CIS Ubuntu Linux 16.04 LTS Benchmark","hostname":"ubuntu","timestamp":"2017-12-21T03:16:54.431-08:00","score":53}}
+   ** Alert 1518119251.42536: - ciscat,
+   2018 Feb 08 11:47:31 ubuntu->wodle_cis-cat
+   Rule: 87411 (level 5) -> 'CIS-CAT Report overview: Score less than 80% (53%)'
+   {"type":"scan_info","scan_id":1701467600,"cis":{"benchmark":"CIS Ubuntu Linux 16.04 LTS Benchmark","hostname":"ubuntu","timestamp":"2018-02-08T11:47:28.066-08:00","pass":98,"fail":85,"error":0,"unknown":1,"notchecked":36,"score":"53%"}}
    type: scan_info
-   scan_id: 75459013
-   cis-data.benchmark: CIS Ubuntu Linux 16.04 LTS Benchmark
-   cis-data.hostname: ubuntu
-   cis-data.timestamp: 2017-12-21T03:16:54.431-08:00
-   cis-data.score: 53
-
-Information about the report overview
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code-block:: console
-
-   ** Alert 1513886205.7639319: - ciscat,
-   2017 Dec 21 11:56:45 ubuntu->wodle_cis-cat
-   Rule: 87411 (level 5) -> 'CIS-CAT Report overview: Score less than 80 % (53 %)'
-   {"type":"scan_info","scan_id":1222716123,"cis-data":{"benchmark":"CIS Ubuntu Linux 16.04 LTS Benchmark","hostname":"ubuntu","timestamp":"2017-12-21T11:55:50.143-08:00","score":53}}
-   type: scan_info
-   scan_id: 1222716123
-   cis-data.benchmark: CIS Ubuntu Linux 16.04 LTS Benchmark
-   cis-data.hostname: ubuntu
-   cis-data.timestamp: 2017-12-21T11:55:50.143-08:00
-   cis-data.score: 53
+   scan_id: 1701467600
+   cis.benchmark: CIS Ubuntu Linux 16.04 LTS Benchmark
+   cis.hostname: ubuntu
+   cis.timestamp: 2018-02-08T11:47:28.066-08:00
+   cis.pass: 98
+   cis.fail: 85
+   cis.error: 0
+   cis.unknown: 1
+   cis.notchecked: 36
+   cis.score: 53%
 
 
 Information about a specific result
@@ -134,16 +123,16 @@ Information about a specific result
 
 .. code-block:: console
 
-   ** Alert 1513855072.92242: - ciscat,
-   2017 Dec 21 03:17:52 ubuntu->wodle_cis-cat
-   Rule: 87409 (level 7) -> 'CIS-CAT: Monitor login and logout events. The parameters below track changes to files associated with login/logout events. The file /var/log/faillog tracks failed events from login. The file /var/log/lastlog maintain records of the last time a user successfully logged in. The file /var/log/tallylog maintains records of failures via the pam_tally2 module (not passed)'
-   {"type":"scan_result","scan_id":75459013,"cis-data":{"rule_id":"4.1.8","rule_title":"Ensure login and logout events are collected","group":"Initial Setup","description":"Monitor login and logout events. The parameters below track changes to files associated with login/logout events. The file /var/log/faillog tracks failed events from login. The file /var/log/lastlog maintain records of the last time a user successfully logged in. The file /var/log/tallylog maintains records of failures via the pam_tally2 module","rationale":"Monitoring login/logout events could provide a system administrator with information associated with brute force attacks against user logins.","remediation":"Add the following lines to the /etc/audit/audit.rules file: -w /var/log/faillog -p wa -k logins-w /var/log/lastlog -p wa -k logins-w /var/log/tallylog -p wa -k logins","result":"fail"}}
+   ** Alert 1518119251.125999: - ciscat,
+   2018 Feb 08 11:47:31 ubuntu->wodle_cis-cat
+   Rule: 87409 (level 7) -> 'CIS-CAT: Ensure login and logout events are collected (failed)'
+   {"type":"scan_result","scan_id":1701467600,"cis":{"rule_id":"4.1.8","rule_title":"Ensure login and logout events are collected","group":"Logging and Auditing","description":"Monitor login and logout events. The parameters below track changes to files associated with login/logout events. The file /var/log/faillog tracks failed events from login. The file /var/log/lastlog maintain records of the last time a user successfully logged in. The file /var/log/tallylog maintains records of failures via the pam_tally2 module","rationale":"Monitoring login/logout events could provide a system administrator with information associated with brute force attacks against user logins.","remediation":"Add the following lines to the /etc/audit/audit.rules file: -w /var/log/faillog -p wa -k logins-w /var/log/lastlog -p wa -k logins-w /var/log/tallylog -p wa -k logins","result":"fail"}}
    type: scan_result
-   scan_id: 75459013
-   cis-data.rule_id: 4.1.8
-   cis-data.rule_title: Ensure login and logout events are collected
-   cis-data.group: Initial Setup
-   cis-data.description: Monitor login and logout events. The parameters below track changes to files associated with login/logout events. The file /var/log/faillog tracks failed events from login. The file /var/log/lastlog maintain records of the last time a user successfully logged in. The file /var/log/tallylog maintains records of failures via the pam_tally2 module
-   cis-data.rationale: Monitoring login/logout events could provide a system administrator with information associated with brute force attacks against user logins.
-   cis-data.remediation: Add the following lines to the /etc/audit/audit.rules file: -w /var/log/faillog -p wa -k logins-w /var/log/lastlog -p wa -k logins-w /var/log/tallylog -p wa -k logins
-   cis-data.result: fail
+   scan_id: 1701467600
+   cis.rule_id: 4.1.8
+   cis.rule_title: Ensure login and logout events are collected
+   cis.group: Logging and Auditing
+   cis.description: Monitor login and logout events. The parameters below track changes to files associated with login/logout events. The file /var/log/faillog tracks failed events from login. The file /var/log/lastlog maintain records of the last time a user successfully logged in. The file /var/log/tallylog maintains records of failures via the pam_tally2 module
+   cis.rationale: Monitoring login/logout events could provide a system administrator with information associated with brute force attacks against user logins.
+   cis.remediation: Add the following lines to the /etc/audit/audit.rules file: -w /var/log/faillog -p wa -k logins-w /var/log/lastlog -p wa -k logins-w /var/log/tallylog -p wa -k logins
+   cis.result: fail
