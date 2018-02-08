@@ -10,9 +10,9 @@ Two requests are needed to register an agent using the API:
 
 We have prepared a few scripts in different programming languages to help with the task of registering an agent with the API:
 
-    - `Register an agent using a shell script <https://raw.githubusercontent.com/wazuh/wazuh-api/master/examples/api-register-agent.sh>`_.
-    - `Register an agent using a Python script <https://raw.githubusercontent.com/wazuh/wazuh-api/master/examples/api-register-agent.py>`_.
-    - `Register an agent using a PowerShell script <https://raw.githubusercontent.com/wazuh/wazuh-api/master/examples/api-register-agent.ps1>`_.
+    - `Register an agent using a shell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.2/examples/api-register-agent.sh>`_.
+    - `Register an agent using a Python script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.2/examples/api-register-agent.py>`_.
+    - `Register an agent using a PowerShell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.2/examples/api-register-agent.ps1>`_.
 
 Basically, the scripts perform the following steps:
 
