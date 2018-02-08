@@ -31,7 +31,7 @@ Installing Linux agent
 
   .. code-block:: console
 
-    $ curl -Ls https://github.com/wazuh/wazuh/archive/3.1.tar.gz | tar zx
+    $ curl -Ls https://github.com/wazuh/wazuh/archive/3.2.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
@@ -75,7 +75,7 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
   .. code-block:: console
 
-   # curl -Ls https://github.com/wazuh/wazuh/archive/3.1.tar.gz | tar zx
+   # curl -Ls https://github.com/wazuh/wazuh/archive/3.2.tar.gz | tar zx
    # cd wazuh-*/src
 
 4. Compile the agent by running the ``make`` command:
