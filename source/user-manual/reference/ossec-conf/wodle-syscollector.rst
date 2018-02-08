@@ -10,7 +10,7 @@ wodle name="syscollector"
 		<wodle name="syscollector">
 		</wodle>
 
-Configuration options of the Syscollector wodle.
+Configuration options of the Syscollector wodle for system monitoring.
 
 Options
 -------
@@ -65,7 +65,7 @@ interval
 Time between system scans.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 2s                                                                                                                                       |
+| **Default value**  | 1h                                                                                                                                       |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
@@ -135,6 +135,16 @@ Enables the ports scan.
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
+
+Atribute:
+
++--------------------+----------------------------------------------------------+
+| **all**            | Collect all opened ports instead of listening ports.     |
++                    +-----------------+----------------------------------------+
+|                    | Default value   | no                                     |
++                    +-----------------+----------------------------------------+
+|                    | Allowed values  | yes, no                                |
++--------------------+-----------------+----------------------------------------+
 
 processes
 ^^^^^^^^^
