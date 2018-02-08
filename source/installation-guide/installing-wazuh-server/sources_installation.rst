@@ -28,7 +28,7 @@ Installing Wazuh manager
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/3.1.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/3.2.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 

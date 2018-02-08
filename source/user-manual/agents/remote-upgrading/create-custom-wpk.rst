@@ -57,13 +57,13 @@ Requirements
 Canonical WPK package example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Download the sources from GitHub branch 3.1:
+1. Download the sources from GitHub branch 3.2:
 
 .. code-block:: console
 
-    # curl -Lo wazuh-3.1.zip https://github.com/wazuh/wazuh/archive/3.1.zip && unzip wazuh-3.1.zip
+    # curl -Lo wazuh-3.2.zip https://github.com/wazuh/wazuh/archive/3.2.zip && unzip wazuh-3.2.zip
 
-2. Modify the ``wazuh-3.1/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
+2. Modify the ``wazuh-3.2/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
 .. code-block:: console
 
@@ -75,13 +75,13 @@ Canonical WPK package example
 
 .. code-block:: console
 
-    # make -C wazuh-3.1/src TARGET=agent
+    # make -C wazuh-3.2/src TARGET=agent
 
 4. Change to the base directory:
 
 .. code-block:: console
 
-    # cd wazuh-3.1
+    # cd wazuh-3.2
 
 5. Install the root CA if you want to overwrite the root CA with the file you created previously:
 
