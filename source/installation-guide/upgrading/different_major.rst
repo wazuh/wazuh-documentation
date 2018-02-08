@@ -172,14 +172,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.1.2
+      # yum install elasticsearch-6.2.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch=6.1.2
+      # apt-get install elasticsearch=6.2.0
 
 
 2. Start Elasticsearch:
@@ -195,18 +195,18 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
 
 4. Insert sample alert in Elasticsearch:
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
 
 Upgrade Logstash
@@ -218,13 +218,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash-6.1.2
+      # yum install logstash-6.2.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash=1:6.1.2-1
+      # apt-get install logstash=1:6.2.0-1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -234,7 +234,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /etc/logstash/conf.d/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-local.conf
       # usermod -a -G ossec logstash
 
   b) Remote configuration:
@@ -242,7 +242,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /etc/logstash/conf.d/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-remote.conf
 
 
 3. Start Logstash:
@@ -263,13 +263,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-6.1.2
+      # yum install kibana-6.2.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=6.1.2
+      # apt-get install kibana=6.2.0
 
 
 2. Remove the Wazuh Kibana App plugin from Kibana:
@@ -319,19 +319,19 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.1.2
+      # yum install filebeat-6.2.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.1.2
+      # apt-get install filebeat=6.2.0
 
 2. Download the Filebeat configuration file from the Wazuh repository:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/filebeat/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/filebeat/filebeat.yml
 
 3. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of your Elastic Stack server:
 
