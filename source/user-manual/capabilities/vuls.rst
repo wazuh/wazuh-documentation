@@ -3,7 +3,10 @@
 Vuls integration
 ================
 
-.. versionadded:: 3.1.0
+**Deprecated since Wazuh v3.2.0.**
+
+.. note::
+    Since Wazuh v3.2.0, the :doc:`Vulnerability detector wodle<vulnerability-detector>` performs the software vulnerability assessments natively.
 
 The integration of the Vuls project with Wazuh allows for the scheduling of periodic vulnerability scans in both the manager and the agents. This new addition allows system administrators the ability to automate the process of analyzing their systems for security vulnerabilities using the updated Wazuh Ruleset to interpret the VuLs scan results.
 
@@ -29,7 +32,7 @@ The agent (or manager) being monitored will launch Vuls scans at the interval sp
 
 After this, the agent will report to the manager any vulnerabilities found and these will be assessed using the Wazuh Ruleset, triggering alerts based on the severity of the reported vulnerabilities.
 
-How to configure VuLs scans
+How to configure Vuls scans
 ---------------------------
 
 First of all, you must deploy Vuls by running the deployment script (`/var/ossec/wodles/vuls/deploy_vuls.sh`) including the name of your operating system and version as parameters:
@@ -40,24 +43,24 @@ First of all, you must deploy Vuls by running the deployment script (`/var/ossec
 
 This script will install dependencies, download VULS, download CVE and OVAL databases, and configure VULS. This deployment supports the following operating systems:
 
-+---------+-------------+
-| Distro  | Versions    |
-+=========+=============+
-| Redhat  | 5, 6, 7     |
-+---------+-------------+
-| Centos  | 5, 6, 7     |
-+---------+-------------+
-| Ubuntu  | 12, 14, 16  |
-+---------+-------------+
-| Debian  | 7, 8, 9, 10 |
-+---------+-------------+
-| Oracle  | 5, 6, 7     |
-+---------+-------------+
++---------------+-------------+
+| Distribution  | Versions    |
++===============+=============+
+| Redhat        | 5, 6, 7     |
++---------------+-------------+
+| Centos        | 5, 6, 7     |
++---------------+-------------+
+| Ubuntu        | 12, 14, 16  |
++---------------+-------------+
+| Debian        | 7, 8, 9, 10 |
++---------------+-------------+
+| Oracle        | 5, 6, 7     |
++---------------+-------------+
 
 .. note::
     Your system requires 2 GB RAM or more to deploy VULS, though it may also be deployed on systems with 1 GB RAM and 1 GB SWAP memory.
 
-To configure vulnerability scans you must add the following block to ``ossec. conf``:
+To configure vulnerability scans you must add the following block to ``ossec.conf``:
 
 .. code-block:: xml
 
