@@ -51,11 +51,17 @@ The integration as well support an IAM role configured in the instance.
 
 1. Create new user
 
+Navigate to Services > IAM > clusters
+
 .. thumbnail:: ../images/aws/aws-user.png
     :align: center
     :width: 100%
 
+Click on Next Permissions to continue
+
 2. Create policy
+
+Create a new policy, later on, we will attach this policy to the user we are creating.
 
 .. thumbnail:: ../images/aws/aws-create-policy.png
     :align: center
@@ -66,6 +72,29 @@ Ensure that the policy looks like this
 .. thumbnail:: ../images/aws/aws-summary-policy.png
     :align: center
     :width: 100%
+
+RAW:
+
+.. code-block:: json
+
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "VisualEditor0",
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject",
+                   "s3:ListBucket"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::wazuh-cloudtrail",
+                   "arn:aws:s3:::wazuh-cloudtrail/*"
+               ]
+           }
+       ]
+   }
+
 
 3. Attach policy
 
@@ -78,6 +107,8 @@ Ensure that the policy looks like this
 .. thumbnail:: ../images/aws/aws-summary-user.png
     :align: center
     :width: 100%
+
+Save the credentials, you will use it later to configure the module.
 
 Wazuh host: Installing dependencies
 -----------------------------------
