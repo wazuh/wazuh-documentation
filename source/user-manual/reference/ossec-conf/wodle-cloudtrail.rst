@@ -1,57 +1,55 @@
-.. _wodle_ciscat:
+.. _wodle_cloudtrail:
 
-wodle name="cis-cat"
-========================
+wodle name="aws-cloudtrail"
+===========================
 
-.. versionadded:: 3.1.0
+.. versionadded:: 3.2.0
 
 .. topic:: XML section name
 
 	.. code-block:: xml
 
-		<wodle name="cis-cat">
+		<wodle name="aws-cloudtrail">
 		</wodle>
 
-Configuration options of the CIS-CAT wodle.
+Configuration options of the AWS-CloudTrail wodle.
 
-.. warning::
-    CIS-CAT is not installed by default. It is a proprietary software that you have to obtain for using this module.
 
 Options
 -------
 
 - `disabled`_
-- `timeout`_
+- `bucket`_
 - `interval`_
-- `scan-on-start`_
-- `java_path`_
-- `ciscat_path`_
-- `content`_
+- `access_key`_
+- `secret_key`_
+- `remove_from_bucket`_
+- `run_on_start`_
 
 
-+----------------------+-----------------------------+
-| Options              | Allowed values              |
-+======================+=============================+
-| `disabled`_          | yes, no                     |
-+----------------------+-----------------------------+
-| `timeout`_           | A positive number (seconds) |
-+----------------------+-----------------------------+
-| `interval`_          | A positive number           |
-+----------------------+-----------------------------+
-| `scan-on-start`_     | yes, no                     |
-+----------------------+-----------------------------+
-| `java_path`_         | Any valid path              |
-+----------------------+-----------------------------+
-| `ciscat_path`_       | Any valid path              |
-+----------------------+-----------------------------+
-| `content`_           | N/A                         |
-+----------------------+-----------------------------+
++-----------------------+-----------------------------+
+| Options               | Allowed values              |
++=======================+=============================+
+| `disabled`_           | yes, no                     |
++-----------------------+-----------------------------+
+| `bucket`_             | Any valid bucket name       |
++-----------------------+-----------------------------+
+| `interval`_           | A positive number (seconds) |
++-----------------------+-----------------------------+
+| `access_key`_         | Alphanumerical key          |
++-----------------------+-----------------------------+
+| `secret_key`_         | Alphanumerical key          |
++-----------------------+-----------------------------+
+| `remove_from_bucket`_ | yes, no                     |
++-----------------------+-----------------------------+
+| `run_on_start`_       | yes, no                     |
++-----------------------+-----------------------------+
 
 
 disabled
 ^^^^^^^^
 
-Disables the CIS-CAT wodle.
+Disables the CloudTrail wodle.
 
 +--------------------+-----------------------------+
 | **Default value**  | no                          |
@@ -59,29 +57,62 @@ Disables the CIS-CAT wodle.
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
 
-timeout
+bucket
 ^^^^^^^
 
-Timeout for each evaluation.
+Name of the S3 bucket from where logs are read.
 
 +--------------------+-----------------------------+
-| **Default value**  | 1800                        |
+| **Default value**  | N/A                         |
 +--------------------+-----------------------------+
-| **Allowed values** | A positive number (seconds) |
+| **Allowed values** | Any valid bucket name       |
 +--------------------+-----------------------------+
 
 interval
 ^^^^^^^^
 
-Interval between CIS-CAT executions.
+Frequency for reading from the S3 bucket.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                                       |
+| **Default value**  | 10m                                                                                                                                      |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
-scan-on-start
+access_key
+^^^^^^^^^^
+
+The access key ID for the IAM user with the permission to read logs from the bucket.
+
++--------------------+--------------------------+
+| **Default value**  | N/A                      |
++--------------------+--------------------------+
+| **Allowed values** | Any alphanumerical key.  |
++--------------------+--------------------------+
+
+secret_key
+^^^^^^^^^^
+
+The secret key created for the IAM user with the permission to read logs from the bucket.
+
++--------------------+--------------------------+
+| **Default value**  | N/A                      |
++--------------------+--------------------------+
+| **Allowed values** | Any alphanumerical key.  |
++--------------------+--------------------------+
+
+remove_from_bucket
+^^^^^^^^^^^^^^^^^^
+
+Define if you want to remove logs from your S3 bucket after they are read by the wodle.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+run_on_start
 ^^^^^^^^^^^^^
 
 Run evaluation immediately when service is started.
@@ -92,71 +123,18 @@ Run evaluation immediately when service is started.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-java_path
-^^^^^^^^^^
-
-Define where Java is located. If this parameter is not set, the wodle will seach for the Java location in the default environment variable ``$PATH``.
-
-+--------------------+------------------+
-| **Default value**  | /usr/bin         |
-+--------------------+------------------+
-| **Allowed values** | Any valid path.  |
-+--------------------+------------------+
-
-ciscat_path
-^^^^^^^^^^^^
-
-Define where CIS-CAT is located.
-
-+--------------------+----------------------------+
-| **Default value**  | /var/ossec/wodles/ciscat   |
-+--------------------+----------------------------+
-| **Allowed values** | Any valid path.            |
-+--------------------+----------------------------+
-
-content
-^^^^^^^
-
-Define an evaluation. At present, you can only run assessments for XCCDF policy files.
-
-Attributes
-
-+-------------------+-------------------------------------------------------------+
-| **type**          | Select content type.                                        |
-+-------------------+-------------------------------------------------------------+
-| **path**          | Use the specified policy file.                              |
-|                   |                                                             |
-|                   | Default path: ``ciscat_path``/benchmarks                    |
-+-------------------+-------------------------------------------------------------+
-| **timeout**       | Timeout for the evaluation (in seconds).                    |
-|                   |                                                             |
-|                   | Use of this attribute overwrites the generic timeout.       |
-+-------------------+-------------------------------------------------------------+
-| **profile**       | Select profile.                                             |
-+-------------------+-------------------------------------------------------------+
-
-.. note::
-    To set a policy file in the ``path`` parameter, you should specify the relative path of the benchmark file from where CIS-CAT is installed.
-
-
 
 Example of configuration
 ------------------------
 
 .. code-block:: xml
 
-  <wodle name="cis-cat">
-
-    <disabled>no</disabled>
-    <timeout>1800</timeout>
-    <interval>1d</interval>
-    <scan-on-start>yes</scan-on-start>
-
-    <java_path>/usr/bin</java_path>
-    <ciscat_path>/var/ossec/wodles/ciscat</ciscat_path>
-
-    <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
-      <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
-    </content>
-
-  </wodle>
+    <wodle name="aws-cloudtrail">
+      <disabled>no</disabled>
+      <bucket>wazuh-cloudtrail</bucket>
+      <interval>10m</interval>
+      <access_key>your_access_key</access_key>
+      <secret_key>your_secret_key</secret_key>
+      <remove_from_bucket>no</remove_from_bucket>
+      <run_on_start>no</run_on_start>
+    </wodle>

@@ -27,7 +27,7 @@ When we create a new user account in IAM, an AWS event is generated. As per the 
 +----------------------------------------------------------------------+
 |    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
-|.. thumbnail:: ../../images/aws/aws-login-1.png                    |
+|.. thumbnail:: ../../images/aws/aws-login-1.png                       |
 |    :align: center                                                    |
 |    :width: 100%                                                      |
 +----------------------------------------------------------------------+
@@ -51,7 +51,7 @@ If a user without permission to create new users, attempts to create a new user,
 +----------------------------------------------------------------------+
 |    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
-|.. thumbnail:: ../../images/aws/aws-login-2.png                    |
+|.. thumbnail:: ../../images/aws/aws-login-2.png                       |
 |    :align: center                                                    |
 |    :width: 100%                                                      |
 +----------------------------------------------------------------------+
@@ -75,7 +75,7 @@ When a user tries to log in with an invalid password, a new event and log messag
 +---------------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                              |
 +---------------------------------------------------------------------------------+
-|.. thumbnail:: ../../images/aws/aws-login-3.png                               |
+|.. thumbnail:: ../../images/aws/aws-login-3.png                                  |
 |    :align: center                                                               |
 |    :width: 100%                                                                 |
 +---------------------------------------------------------------------------------+
@@ -98,7 +98,7 @@ When more than 4 authentication failures occur in a **360** second time window, 
 +-----------------------------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                                            |
 +-----------------------------------------------------------------------------------------------+
-|.. thumbnail:: ../../images/aws/aws-login-4.png                                             |
+|.. thumbnail:: ../../images/aws/aws-login-4.png                                                |
 |    :align: center                                                                             |
 |    :width: 100%                                                                               |
 +-----------------------------------------------------------------------------------------------+
@@ -122,7 +122,7 @@ After a successful login, the ``rule 80801`` will match the log message generate
 +----------------------------------------------------------------------+
 |    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
-|.. thumbnail:: ../../images/aws/aws-login-5.png                    |
+|.. thumbnail:: ../../images/aws/aws-login-5.png                       |
 |    :align: center                                                    |
 |    :width: 100%                                                      |
 +----------------------------------------------------------------------+
@@ -132,7 +132,7 @@ The Kibana Dashboards will show:
 +----------------------------------------------------------+------------------------------------------------------------+
 | Pie Chart                                                | Stacked Groups                                             |
 +==========================================================+============================================================+
-| .. thumbnail:: ../../images/aws/aws-iam-pannels-1.png | .. thumbnail:: ../../images/aws/aws-iam-pannels-2.png   |
+| .. thumbnail:: ../../images/aws/aws-iam-pannels-1.png    | .. thumbnail:: ../../images/aws/aws-iam-pannels-2.png      |
 |    :align: center                                        |    :align: center                                          |
 |    :width: 100%                                          |    :width: 100%                                            |
 +----------------------------------------------------------+------------------------------------------------------------+

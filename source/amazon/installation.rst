@@ -33,33 +33,51 @@ AWS: Subscribe to CloudTrail
 .. thumbnail:: ../images/aws/aws-cloudtrail-2.png
     :align: center
     :width: 100%
-    
+
 3. Provide a name for the new S3 bucket that will hold the CloudTrail logs. (Remember the name you provide here, you’ll need to reference it during plugin set up.)
 
 .. thumbnail:: ../images/aws/aws-cloudtrail-3.png
     :align: center
     :width: 100%
-    
+
 
 
 
 AWS: Create IAM User
 --------------------
 
-Wazuh will need permission to pull the CloudTrail log data from your S3 bucket. The easiest way to accomplish this is by creating a new IAM user on your account. The new user will have only have permission to read from the S3 bucket.
+Wazuh will need permission to pull the CloudTrail log data from your S3 bucket. The easiest way to accomplish this is by creating a new IAM user on your account. The new user will have only permission to read from the S3 bucket.
 The integration as well support an IAM role configured in the instance.
 
 1. Create new user
 
+.. thumbnail:: ../images/aws/aws-user.png
+    :align: center
+    :width: 100%
 
 2. Create policy
 
+.. thumbnail:: ../images/aws/aws-create-policy.png
+    :align: center
+    :width: 100%
+
+Ensure that the policy looks like this
+
+.. thumbnail:: ../images/aws/aws-summary-policy.png
+    :align: center
+    :width: 100%
 
 3. Attach policy
 
+.. thumbnail:: ../images/aws/aws-attach-policy.png
+    :align: center
+    :width: 100%
 
-4. Confirm user creation
+4. Confirm user creation and get credentials
 
+.. thumbnail:: ../images/aws/aws-summary-user.png
+    :align: center
+    :width: 100%
 
 Wazuh host: Installing dependencies
 -----------------------------------
@@ -88,6 +106,7 @@ c) From sources:
     # python get-pip.py
 
 .. _Boto3:
+
 Boto3
 ^^^^^^
 
@@ -120,11 +139,11 @@ Wazuh host: Plugin configuration
       <run_on_start>no</run_on_start>
     </wodle>
 
-*Check the user manual reference to read more details about each setting:* :ref:`AWS CloudTrail settings <cloudtrail_settings>`
+*Check the user manual reference to read more details about each setting:* :doc:`AWS CloudTrail settings <../user-manual/reference/ossec-conf/wodle-cloudtrail>`
 
-Credentials could be loaded from different locations, you could either specify the credentials as they are in the previous block of configuration or load them from other `Boto3 supported locations. <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_ 
+Credentials could be loaded from different locations, you could either specify the credentials as they are in the previous block of configuration or load them from other `Boto3 supported locations. <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_
 
-3. Restart Manager or Agent to apply changes
+3. Restart Manager or Agent to apply changes.
 
 
 Wazuh host: Validate the integration
