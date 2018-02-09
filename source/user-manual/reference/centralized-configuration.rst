@@ -11,7 +11,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
 - :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
-- :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**)
+- :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 

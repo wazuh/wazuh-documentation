@@ -103,6 +103,9 @@ Define where Java is located. If this parameter is not set, the wodle will seach
 | **Allowed values** | Any valid path.  |
 +--------------------+------------------+
 
+.. warning::
+    For Windows environments, the ``java_path`` has to include the executable as follows: ``C:\path\to\java\java.exe``. On the other hand, for Unix agents the path should not include the Java binary.
+
 ciscat_path
 ^^^^^^^^^^^^
 
