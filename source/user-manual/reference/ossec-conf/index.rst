@@ -72,6 +72,8 @@ Wazuh can be installed in two possible ways: the Wazuh manager uses the "server/
 +---------------------------------------------------------------+------------------------+
 | :doc:`wodle name="cis-cat" <wodle-ciscat>`                    | manager, agent         |
 +---------------------------------------------------------------+------------------------+
+| :doc:`wodle name="aws-cloudtrail" <wodle-cloudtrail>`         | manager, agent         |
++---------------------------------------------------------------+------------------------+
 | :doc:`wodle name="syscollector" <wodle-syscollector>`         | manager, agent         |
 +---------------------------------------------------------------+------------------------+
 
@@ -107,5 +109,6 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    wodle-openscap
    wodle-command
    wodle-ciscat
+   wodle-cloudtrail
    wodle-syscollector
    verifying-configuration
