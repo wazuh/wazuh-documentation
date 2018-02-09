@@ -20,10 +20,7 @@ Options
 - `scan_on_start`_
 - `hardware`_
 - `os`_
-- `network`_
 - `programs`_
-- `ports`_
-- `processes`_
 
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
@@ -38,13 +35,7 @@ Options
 +----------------------+-----------------------------+
 | `os`_                | yes, no                     |
 +----------------------+-----------------------------+
-| `network`_           | yes, no                     |
-+----------------------+-----------------------------+
 | `programs`_          | yes, no                     |
-+----------------------+-----------------------------+
-| `ports`_             | yes, no                     |
-+----------------------+-----------------------------+
-| `processes`_         | yes, no                     |
 +----------------------+-----------------------------+
 
 
@@ -103,53 +94,10 @@ Enables the OS scan.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-network
-^^^^^^^
-
-Enables the network scan.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
 programs
 ^^^^^^^^^
 
 Enables the programs scan.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-ports
-^^^^^^
-
-Enables the ports scan.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-Atribute:
-
-+--------------------+----------------------------------------------------------+
-| **all**            | Collect all opened ports instead of listening ports.     |
-+                    +-----------------+----------------------------------------+
-|                    | Default value   | no                                     |
-+                    +-----------------+----------------------------------------+
-|                    | Allowed values  | yes, no                                |
-+--------------------+-----------------+----------------------------------------+
-
-processes
-^^^^^^^^^
-
-Enables the processes scan.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -169,8 +117,5 @@ Example of configuration
 	  <scan_on_start>yes</scan_on_start>
 	  <hardware>yes</hardware>
 	  <os>yes</os>
-	  <network>yes</network>
 	  <programs>yes</programs>
-	  <ports>yes</ports>
-	  <processes>yes</processes>
 	</wodle>
