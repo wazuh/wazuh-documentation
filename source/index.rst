@@ -74,7 +74,7 @@ Available documentation
    deploying-with-puppet/index
    deploying-with-ansible/index
    pci-dss/index
-   plugins/index
+   amazon/index
    migrating-from-ossec/index
    release-notes/index
 

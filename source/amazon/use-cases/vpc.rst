@@ -24,7 +24,7 @@ If a VPC is created, ``rule 81000`` will apply and an alert will be generated as
 +------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-vpc-1.png                        |
+|.. thumbnail:: ../../images/aws/aws-vpc-1.png                        |
 |    :align: center                                                      |
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
@@ -45,7 +45,7 @@ If a user without proper permissions attempts to create a VPC, ``rule 81001`` wi
 +-------------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                            |
 +-------------------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-vpc-2.png                               |
+|.. thumbnail:: ../../images/aws/aws-vpc-2.png                               |
 |    :align: center                                                             |
 |    :width: 100%                                                               |
 +-------------------------------------------------------------------------------+

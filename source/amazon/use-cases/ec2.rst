@@ -26,7 +26,7 @@ When a user runs a new instance in EC2, an AWS event is generated.  As previousl
 +----------------------------------------------------------------------+
 |    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-ec2-1.png                      |
+|.. thumbnail:: ../../images/aws/aws-ec2-1.png                      |
 |    :align: center                                                    |
 |    :width: 100%                                                      |
 +----------------------------------------------------------------------+
@@ -47,7 +47,7 @@ When a user tries to run an instance **without relevant permissions**, then the 
 +----------------------------------------------------------------------+
 |    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-ec2-2.png                      |
+|.. thumbnail:: ../../images/aws/aws-ec2-2.png                      |
 |    :align: center                                                    |
 |    :width: 100%                                                      |
 +----------------------------------------------------------------------+
@@ -71,7 +71,7 @@ When an instance in EC2 is started, the log message will match ``rule 80305`` an
 +----------------------------------------------------------------------+
 |    **Kibana will show this alert**                                   |
 +----------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-ec2-3.png                      |
+|.. thumbnail:: ../../images/aws/aws-ec2-3.png                      |
 |    :align: center                                                    |
 |    :width: 100%                                                      |
 +----------------------------------------------------------------------+
@@ -92,7 +92,7 @@ If a user tries to start instances **without relevant permissions**, ``rule 8030
 +------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-ec2-4.png                        |
+|.. thumbnail:: ../../images/aws/aws-ec2-4.png                        |
 |    :align: center                                                      |
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
@@ -116,7 +116,7 @@ When an instance in EC2 is stopped, ``rule 80308`` will apply and an alert will 
 +------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-ec2-5.png                        |
+|.. thumbnail:: ../../images/aws/aws-ec2-5.png                        |
 |    :align: center                                                      |
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
@@ -138,7 +138,7 @@ If a user tries to stop instances **without relevant permissions**, ``rule 80306
 +------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-ec2-6.png                        |
+|.. thumbnail:: ../../images/aws/aws-ec2-6.png                        |
 |    :align: center                                                      |
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
@@ -163,7 +163,7 @@ When a new security group is created, ``rule 80404`` will fire and an alert will
 +------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-ec2-7.png                        |
+|.. thumbnail:: ../../images/aws/aws-ec2-7.png                        |
 |    :align: center                                                      |
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
@@ -187,7 +187,7 @@ If a new Elastic IP is allocated, then ``rule 80411`` will apply:
 +------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-ec2-8.png                        |
+|.. thumbnail:: ../../images/aws/aws-ec2-8.png                        |
 |    :align: center                                                      |
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
@@ -211,7 +211,7 @@ If an Elastic IP address is associated, then ``rule 80446`` will apply, generati
 +------------------------------------------------------------------------+
 |    **Kibana will show this alert**                                     |
 +------------------------------------------------------------------------+
-|.. thumbnail:: ../../../images/aws/aws-ec2-9.png                        |
+|.. thumbnail:: ../../images/aws/aws-ec2-9.png                        |
 |    :align: center                                                      |
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
@@ -221,7 +221,7 @@ The Kibana Dashboards will show:
 +----------------------------------------------------------+------------------------------------------------------------+
 | Pie Chart                                                | Stacked Groups                                             |
 +==========================================================+============================================================+
-| .. thumbnail:: ../../../images/aws/aws-ec2-pannels-1.png | .. thumbnail:: ../../../images/aws/aws-ec2-pannels-2.png   |
+| .. thumbnail:: ../../images/aws/aws-ec2-pannels-1.png | .. thumbnail:: ../../images/aws/aws-ec2-pannels-2.png   |
 |    :align: center                                        |    :align: center                                          |
 |    :width: 100%                                          |    :width: 100%                                            |
 +----------------------------------------------------------+------------------------------------------------------------+

@@ -24,19 +24,19 @@ AWS: Subscribe to CloudTrail
 1. From your AWS console, choose “CloudTrail” from the Deployment & Management section.
 
 
-.. thumbnail:: ../../images/aws/aws-cloudtrail-1.png
+.. thumbnail:: ../images/aws/aws-cloudtrail-1.png
     :align: center
     :width: 100%
 
 2. Create a new trail
 
-.. thumbnail:: ../../images/aws/aws-cloudtrail-2.png
+.. thumbnail:: ../images/aws/aws-cloudtrail-2.png
     :align: center
     :width: 100%
     
 3. Provide a name for the new S3 bucket that will hold the CloudTrail logs. (Remember the name you provide here, you’ll need to reference it during plugin set up.)
 
-.. thumbnail:: ../../images/aws/aws-cloudtrail-3.png
+.. thumbnail:: ../images/aws/aws-cloudtrail-3.png
     :align: center
     :width: 100%
     
@@ -87,6 +87,7 @@ c) From sources:
     # curl -O https://bootstrap.pypa.io/get-pip.py
     # python get-pip.py
 
+.. _Boto3:
 Boto3
 ^^^^^^
 
@@ -119,7 +120,7 @@ Wazuh host: Plugin configuration
       <run_on_start>no</run_on_start>
     </wodle>
 
-*Check the user manual reference to read more details about each setting:* `AWS CloudTrail settings <http://boto3.readthedocs.io/en/latest/guide/configuration.html#environment-variables>`_ 
+*Check the user manual reference to read more details about each setting:* :ref:`AWS CloudTrail settings <cloudtrail_settings>`
 
 Credentials could be loaded from different locations, you could either specify the credentials as they are in the previous block of configuration or load them from other `Boto3 supported locations. <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_ 
 
@@ -128,6 +129,8 @@ Credentials could be loaded from different locations, you could either specify t
 
 Wazuh host: Validate the integration
 -------------------------------------
+
+A successful boot up and fetch will output the logs below in the manager/agent log file ``logs/ossec.log``
 
 1. Module starting
 
@@ -149,13 +152,17 @@ Troubleshooting
 
 - Wrong credentials
 
+AWS IAM credentials were not set properly or they don't have enough privileges.
+
 .. code-block:: console
 
     2018/01/12 19:02:22 wazuh-modulesd:aws-cloudtrail: WARNING: Returned exit code 3.
     2018/01/12 19:02:22 wazuh-modulesd:aws-cloudtrail: WARNING: Invalid credentials to access S3 Bucket
 
 
-- Missing boto3 dependency
+- Missing Boto3 dependency
+
+Boto3 package is not installed in the system. Please, Boto3 installation section.
 
 .. code-block:: console
 
@@ -165,11 +172,9 @@ Troubleshooting
 
 - Time interval overtaken
 
+In case the fetching and forwarding process extends for longer than interval time, a warning will be displayed. There is no impact in the current process and the module will keep running.
+
+
 .. code-block:: console
 
     2018/01/12 19:10:37 wazuh-modulesd:aws-cloudtrail: WARNING: Interval overtaken.
-
-
-- No alerts are generated
-
-
