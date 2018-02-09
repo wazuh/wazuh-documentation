@@ -8,11 +8,13 @@ In case that your SMTP server has authentication (like Gmail), we need to config
 #. Install the needed packages:
 
     Ubuntu
+
     .. code-block:: console
 
       # apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 
     CentOS
+    
     .. code-block:: console
 
       # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain

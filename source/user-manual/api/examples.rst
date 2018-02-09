@@ -1,14 +1,14 @@
 .. _api_examples:
 
 Examples
-------------
+--------
 
 .. _api_curl_label:
 
 CURL
-^^^^^^^^^^^^^^^^^^
+^^^^
 
-cURL is a command-line tool for sending http/https requests and commands. It can be used to interact with the API. It is pre-installed on many Linux and Mac systems. Some examples:
+cURL is a command-line tool for sending http/https requests and commands. It is pre-installed on many Linux and Mac systems and can be used to interact with the API. Some examples:
 
 **GET**
 
@@ -25,8 +25,6 @@ cURL is a command-line tool for sending http/https requests and commands. It can
     # curl -u foo:bar -k -X PUT https://127.0.0.1:55000/agents/new_agent
 
 ``{"error":0,"data":"004"}``
-
-
 
 **POST**
 
@@ -47,9 +45,9 @@ cURL is a command-line tool for sending http/https requests and commands. It can
 .. _api_python-label:
 
 Python
-^^^^^^^^^^^^^^^^^^
+^^^^^^
 
-It is very easy to interact with the API using Python:
+You can also interact with the API using Python as shown below:
 
 Code:
 
@@ -93,14 +91,14 @@ Output:
     }
     Status: 200
 
-For a fuller example, see ``/var/ossec/api/examples/api-client.py``.
+For a more complete example, see ``/var/ossec/api/examples/api-client.py``.
 
 .. _api_powershell_label:
 
 PowerShell
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^
 
-The **Invoke-RestMethod** cmdlet sends requests to the API and handles the response easily. This cmdlet was introduced in Windows PowerShell 3.0.
+The **Invoke-RestMethod** cmdlet was introduced in PowerShell 3.0.  It sends requests to the API and handles the response.
 
 Code:
 ::
@@ -149,4 +147,4 @@ Output:
     0     @{syscheckTime=Wed Feb 24 09:55:04 2016; syscheckEndTime=Wed Feb 24 10:00:42 2016}
 
 
-For a fuller example, see ``/var/ossec/api/examples/api-client.ps1``.
+For a more complete example, see ``/var/ossec/api/examples/api-client.ps1``.

@@ -26,9 +26,9 @@ Options
 - `alert_format`_
 
 name
-^^^^^^^^^^^
+^^^^
 
-This indicates the type of the service to integrate with.
+This indicates the service to integrate with.
 
 +--------------------+-----------------------------+
 | **Default value**  | n/a                         |
@@ -37,7 +37,7 @@ This indicates the type of the service to integrate with.
 +--------------------+-----------------------------+
 
 hook_url
-^^^^^^^^^^^
+^^^^^^^^
 
 This is the URL provided by Slack when integration is enabled on the Slack side. This is **mandatory for Slack.**
 
@@ -48,11 +48,11 @@ This is the URL provided by Slack when integration is enabled on the Slack side.
 +--------------------+-----------+
 
 api_key
-^^^^^^^^^^^
+^^^^^^^
 
 This is the key that you would have retrieved from the PagerDuty or VirusTotal API. This is **mandatory for PagerDuty and VirusTotal.**
 
-.. note:: You must restart Wazuh after changing this configuration.
+.. note:: You must restart Wazuh after changing this option.
 
 +--------------------+------------------------------+
 | **Default value**  | n/a                          |
@@ -66,7 +66,7 @@ Optional filters
 level
 ^^^^^
 
-This filter alerts by rule level.  It will push only alerts with the specified level or above.
+This filters alerts by rule level so that only alerts with the specified level or above are pushed.
 
 +--------------------+------------------------------+
 | **Default value**  | n/a                          |
@@ -75,7 +75,7 @@ This filter alerts by rule level.  It will push only alerts with the specified l
 +--------------------+------------------------------+
 
 rule_id
-^^^^^^^^^^
+^^^^^^^
 
 This filters alerts by rule ID.
 
@@ -88,7 +88,7 @@ This filters alerts by rule ID.
 group
 ^^^^^
 
-This filters alerts by rules. For the VirusTotal integration, only rules from `syscheck` group are available. `OS_Regex Syntax`_.
+This filters alerts by rules. For the VirusTotal integration, only rules from the `syscheck` group are available. `OS_Regex Syntax`_.
 
 +--------------------+---------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                         |
@@ -98,9 +98,9 @@ This filters alerts by rules. For the VirusTotal integration, only rules from `s
 
 
 event_location
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
-This filters alerts by the location of where the event originated. `OS_Regex Syntax`_
+This filters alerts by where the event originated. `OS_Regex Syntax`_
 
 .. _`OS_Regex Syntax`: http://ossec-docs.readthedocs.org/en/latest/syntax/regex.html
 
@@ -114,7 +114,7 @@ This filters alerts by the location of where the event originated. `OS_Regex Syn
 alert_format
 ^^^^^^^^^^^^
 
-Write temporal alert file in JSON format. Integrator make use this temporal file to fetch fields values.
+This writes the alert file in the JSON format. The Integrator makes use this file to fetch fields values.
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | n/a                                                       |
@@ -122,8 +122,8 @@ Write temporal alert file in JSON format. Integrator make use this temporal file
 | **Allowed values** | json                                                      |
 +--------------------+-----------------------------------------------------------+
 
-Example of configuration
-------------------------
+Configuration example
+---------------------
 
 .. code-block:: xml
 

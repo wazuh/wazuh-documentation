@@ -1,37 +1,43 @@
 .. _reference_agent_conf:
 
 Centralized configuration
-=======================================
+=========================
 
 Introduction
---------------------------------
+------------
 
 Agents can be configured remotely by using the ``agent.conf`` file. The following capabilities can be configured remotely:
 
 - :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
 - :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
-- :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**)
+- :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 
+.. note:: When setting up a shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the file *etc/local_internal_options.conf* in the agent:
+
+.. code-block:: shell
+
+    wazuh_command.remote_commands=1
+
 Agent groups
---------------------------------
+------------
 
 .. versionadded:: 3.0.0
 
-Agents can be grouped in order to send them a selective centralized configuration. Each agent only belongs to a group. By default, all agents belong to a group called ``default``.
+Agents can be grouped together in order to send them unique centralized configuration that is group specific. Each agent can only belong to one group and unless otherwise configured, all agents belong to a group called ``default``.
 
 .. note::
-    Check the :doc:`agent_groups manual <./tools/agent_groups>` to learn how to add groups and assign them to agents.
+    Check the :doc:`agent_groups manual <./tools/agent_groups>` to learn how to add groups and assign agents to them.
 
-The manager pushes all files included in the group folder to the agents belonging this group. For example,
-all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to ``default`` group.
-The file ``ar.conf`` (active response status) will be always sent to agents even if it is not present in the group folder.
+The manager pushes all files included in the group folder to the agents belonging this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to ``default`` group.
 
-The agent will store all received files into the folder ``/var/ossec/etc/shared``, not in a group folder.
+The file ``ar.conf`` (active response status) will always be sent to agents even if it is not present in the group folder.
 
-Example:
+The agent will store the shared files in ``/var/ossec/etc/shared``, not in a group folder.
+
+Below are the files that would be found in this folder on an agent assigned to the **debian** group.  Notice that these files are pushed to the agent from the manager's ``/var/ossec/etc/shared/debian`` folder.
 
 +-----------------------------------------------------+-----------------------------------------------------+
 | **Manager**                                         | **Agent (Group: 'debian')**                         |
@@ -41,48 +47,48 @@ Example:
 |    /var/ossec/etc/shared/                           |    /var/ossec/etc/shared/                           |
 |    ├── ar.conf                                      |    ├── ar.conf                                      |
 |    ├── debian                                       |    ├── agent.conf                                   |
-|    │   ├── agent.conf                               |    ├── cis_debian_linux_rcl.txt                     |
-|    │   ├── cis_debian_linux_rcl.txt                 |    ├── cis_rhel5_linux_rcl.txt                      |
-|    │   ├── cis_rhel5_linux_rcl.txt                  |    ├── cis_rhel6_linux_rcl.txt                      |
-|    │   ├── cis_rhel6_linux_rcl.txt                  |    ├── cis_rhel7_linux_rcl.txt                      |
-|    │   ├── cis_rhel7_linux_rcl.txt                  |    ├── cis_rhel_linux_rcl.txt                       |
-|    │   ├── cis_rhel_linux_rcl.txt                   |    ├── cis_sles11_linux_rcl.txt                     |
-|    │   ├── cis_sles11_linux_rcl.txt                 |    ├── cis_sles12_linux_rcl.txt                     |
-|    │   ├── cis_sles12_linux_rcl.txt                 |    ├── custom_rootcheck.txt                         |
-|    │   ├── custom_rootcheck.txt                     |    ├── debian_ports_check.txt                       |
-|    │   ├── debian_ports_check.txt                   |    ├── debian_test_files.txt                        |
-|    │   ├── debian_test_files.txt                    |    ├── merged.mg                                    |
-|    │   ├── merged.mg                                |    ├── rootkit_files.txt                            |
-|    │   ├── rootkit_files.txt                        |    ├── rootkit_trojans.txt                          |
-|    │   ├── rootkit_trojans.txt                      |    ├── system_audit_rcl.txt                         |
-|    │   ├── system_audit_rcl.txt                     |    ├── system_audit_ssh.txt                         |
-|    │   ├── system_audit_ssh.txt                     |    ├── win_applications_rcl.txt                     |
-|    │   ├── win_applications_rcl.txt                 |    ├── win_audit_rcl.txt                            |
-|    │   ├── win_audit_rcl.txt                        |    └── win_malware_rcl.txt                          |
-|    │   └── win_malware_rcl.txt                      |                                                     |
+|    │   ├── agent.conf                               |    ├── cis_debian_linux_rcl.txt                     |
+|    │   ├── cis_debian_linux_rcl.txt                 |    ├── cis_rhel5_linux_rcl.txt                      |
+|    │   ├── cis_rhel5_linux_rcl.txt                  |    ├── cis_rhel6_linux_rcl.txt                      |
+|    │   ├── cis_rhel6_linux_rcl.txt                  |    ├── cis_rhel7_linux_rcl.txt                      |
+|    │   ├── cis_rhel7_linux_rcl.txt                  |    ├── cis_rhel_linux_rcl.txt                       |
+|    │   ├── cis_rhel_linux_rcl.txt                   |    ├── cis_sles11_linux_rcl.txt                     |
+|    │   ├── cis_sles11_linux_rcl.txt                 |    ├── cis_sles12_linux_rcl.txt                     |
+|    │   ├── cis_sles12_linux_rcl.txt                 |    ├── custom_rootcheck.txt                         |
+|    │   ├── custom_rootcheck.txt                     |    ├── debian_ports_check.txt                       |
+|    │   ├── debian_ports_check.txt                   |    ├── debian_test_files.txt                        |
+|    │   ├── debian_test_files.txt                    |    ├── merged.mg                                    |
+|    │   ├── merged.mg                                |    ├── rootkit_files.txt                            |
+|    │   ├── rootkit_files.txt                        |    ├── rootkit_trojans.txt                          |
+|    │   ├── rootkit_trojans.txt                      |    ├── system_audit_rcl.txt                         |
+|    │   ├── system_audit_rcl.txt                     |    ├── system_audit_ssh.txt                         |
+|    │   ├── system_audit_ssh.txt                     |    ├── win_applications_rcl.txt                     |
+|    │   ├── win_applications_rcl.txt                 |    ├── win_audit_rcl.txt                            |
+|    │   ├── win_audit_rcl.txt                        |    └── win_malware_rcl.txt                          |
+|    │   └── win_malware_rcl.txt                      |                                                     |
 |    └── default                                      |                                                     |
-|        ├── agent.conf                               |                                                     |
-|        ├── cis_debian_linux_rcl.txt                 |                                                     |
-|        ├── cis_rhel5_linux_rcl.txt                  |                                                     |
-|        ├── cis_rhel6_linux_rcl.txt                  |                                                     |
-|        ├── cis_rhel7_linux_rcl.txt                  |                                                     |
-|        ├── cis_rhel_linux_rcl.txt                   |                                                     |
-|        ├── cis_sles11_linux_rcl.txt                 |                                                     |
-|        ├── cis_sles12_linux_rcl.txt                 |                                                     |
-|        ├── merged.mg                                |                                                     |
-|        ├── rootkit_files.txt                        |                                                     |
-|        ├── rootkit_trojans.txt                      |                                                     |
-|        ├── system_audit_rcl.txt                     |                                                     |
-|        ├── system_audit_ssh.txt                     |                                                     |
-|        ├── win_applications_rcl.txt                 |                                                     |
-|        ├── win_audit_rcl.txt                        |                                                     |
-|        └── win_malware_rcl.txt                      |                                                     |
+|        ├── agent.conf                               |                                                     |
+|        ├── cis_debian_linux_rcl.txt                 |                                                     |
+|        ├── cis_rhel5_linux_rcl.txt                  |                                                     |
+|        ├── cis_rhel6_linux_rcl.txt                  |                                                     |
+|        ├── cis_rhel7_linux_rcl.txt                  |                                                     |
+|        ├── cis_rhel_linux_rcl.txt                   |                                                     |
+|        ├── cis_sles11_linux_rcl.txt                 |                                                     |
+|        ├── cis_sles12_linux_rcl.txt                 |                                                     |
+|        ├── merged.mg                                |                                                     |
+|        ├── rootkit_files.txt                        |                                                     |
+|        ├── rootkit_trojans.txt                      |                                                     |
+|        ├── system_audit_rcl.txt                     |                                                     |
+|        ├── system_audit_ssh.txt                     |                                                     |
+|        ├── win_applications_rcl.txt                 |                                                     |
+|        ├── win_audit_rcl.txt                        |                                                     |
+|        └── win_malware_rcl.txt                      |                                                     |
 +-----------------------------------------------------+-----------------------------------------------------+
 
-Below, is the proper syntax of ``agent.conf`` and the process of pushing the configuration from the manager to the agent.
+The proper syntax of ``agent.conf`` is shown below along with the process for pushing the configuration from the manager to the agent.
 
 agent.conf
---------------------------------
+----------
 .. topic:: XML section name
 
 	.. code-block:: xml
@@ -94,8 +100,8 @@ agent.conf
 The ``agent.conf`` is only valid on server installations.
 
 The ``agent.conf`` may exist in each group folder at ``/var/ossec/etc/shared``.
-For example, for the ``default`` group, it is in ``/var/ossec/etc/shared/default``.
-All them should be readable by the ossec user.
+
+For example, for the ``default`` group, it is in ``/var/ossec/etc/shared/default``.  Each of these files should be readable by the ossec user.
 
 Options
 -------
@@ -125,11 +131,11 @@ Examples
 		<agent_config profile="UnixHost">
 
 Centralized configuration process
------------------------------------
+---------------------------------
 
-Here we are going to explain how a centralized configuration can be done.
+The following is an example of how a centralized configuration can be done.
 
-1. Configuration
+1. Configure the ``agent.conf`` file.
 
 Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/agent.conf``. If the file does not exist, create it::
 
@@ -137,7 +143,7 @@ Edit the file corresponding to the agent group. For example, for the ``default``
     $ chown ossec:ossec /var/ossec/etc/shared/default/agent.conf
     $ chmod 640 /var/ossec/etc/shared/default/agent.conf
 
-Several configurations may be created according to the ``name``, ``OS`` or ``profile`` of an agent.
+Several configurations may be created based on the ``name``, ``OS`` or ``profile`` of an agent.
 
 .. code-block:: xml
 
@@ -162,15 +168,19 @@ Several configurations may be created according to the ``name``, ``OS`` or ``pro
         </localfile>
     </agent_config>
 
-2. Run /var/ossec/bin/verify-agent-conf and if any errors are reported, fix them and return to step one.  Failure to perform this step may allow errors to be pushed to agents, preventing them from running.  If that happens, you may be forced to visit each agent manually to recover them.
+2. Run /var/ossec/bin/verify-agent-conf
 
-3. Push of the configuration to the agents.
+Each time you make a change to the ``agent.conf`` file, it is important to check for configuration errors. If any errors are reported by this check, they must be fixed before the next step.  Failure to perform this step may allow errors to be pushed to agents which may prevent the agents from running.  At that point, it is very likely that you will be forced to visit each agent manually to recover them.
 
-Each time agents check-in to the manager (10 minute default), they pull a fresh copy of ``agent.conf`` if a new version is available.  However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted in step 5. Restarting the manager will speed up how quickly it makes the new ``agent.conf`` available to the agents.
+3. Push the configuration to the agents.
 
-4. Check if the agent received the configuration.
+Each time an agent checks-in with the manager (10 minute default), it looks to see if a new version of ``agent.conf`` is available from the manager.  When a new version is available, it automatically pulls the new file. However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted, as in step 5.
 
-Once an agent received the configuration, the "Client version" field will have the md5sum of the ``agent.conf`` file.
+.. note:: Restarting the manager will make the new ``agent.conf`` file available to the agents more quickly.
+
+4. Confirm that the agent received the configuration.
+
+Once an agent receives the configuration, the "Client version" field will have the md5sum of the ``agent.conf`` file that was pulled from the manager.
 
 .. code-block:: console
 
@@ -192,7 +202,7 @@ Once an agent received the configuration, the "Client version" field will have t
         Syscheck last started  at: Wed May  3 09:08:14 2017
         Rootcheck last started at: Wed May  3 09:16:04 2017
 
-Also, the API returns the md5sum of ``agent.conf`` in the field ``sharedSum``:
+Also, the API returns the md5sum of the ``agent.conf`` file in the field ``sharedSum`` as shown below:
 
 .. code-block:: console
 
@@ -215,10 +225,9 @@ Also, the API returns the md5sum of ``agent.conf`` in the field ``sharedSum``:
        }
     }
 
-
 5. Manual update
 
-If ``auto_restart`` has been disabled, you will need to manually restart it so that the new configuration is set. You can do this remotely:
+If ``auto_restart`` has been disabled, the agent will have to be manually restarted so that the new ``agent.conf`` file will be used. This can be done as follows:
 
 .. code-block:: console
 
@@ -229,11 +238,11 @@ If ``auto_restart`` has been disabled, you will need to manually restart it so t
 Precedence
 ----------
 
-It's important to know which is the precedence between ``ossec.conf`` and ``agent.conf``. The local and the shared configuration are merged. ``ossec.conf`` is read before the shared ``agent.conf``, the last definition of any setting will overwrite any previous appearance. Also, the settings that includes a path to file, will be concatenated.
+It's important to understand which configuration file takes precedence between ``ossec.conf`` and ``agent.conf`` when central configuration is used. When central configuration is utilized, the local and the shared configuration are merged, however, the ``ossec.conf`` file is read before the shared ``agent.conf`` and the last configuration of any setting will overwrite the previous. Also, if a file path for a particular setting is set in both of the configuration files, both paths will be included in the final configuration.
 
 For example:
 
-Let's say we have this configuration on the ``ossec.conf`` file.
+Let's say we have this configuration in the ``ossec.conf`` file:
 
 .. code-block:: xml
 
@@ -250,7 +259,7 @@ Let's say we have this configuration on the ``ossec.conf`` file.
     <system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
   </rootcheck>
 
-and the ``agent.conf``.
+and this configuration in the ``agent.conf`` file.
 
 .. code-block:: xml
 
@@ -263,4 +272,4 @@ and the ``agent.conf``.
     <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
   </rootcheck>
 
-The final configuration will overwrite ``check_unixaudit`` to "yes" because it appears on the ``agent.conf``. The path listed with ``system_audit`` option will be concatenated, so ``system_audit_rcl.txt`` (on the ``ossec.conf``) will be as valid as ``cis_debian_linux_rcl.txt`` (on the ``agent.conf``).
+The final configuration will overwrite ``check_unixaudit`` to "yes" because it appears in the ``agent.conf`` file. However, the path listed with the ``system_audit`` option will be repeated with both settings in the final configuration. In other words, ``system_audit_rcl.txt`` (from ``ossec.conf``) and ``cis_debian_linux_rcl.txt`` (from ``agent.conf``) will be included.

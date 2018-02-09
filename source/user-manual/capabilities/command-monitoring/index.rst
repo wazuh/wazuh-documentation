@@ -3,7 +3,7 @@
 Command monitoring
 ==================
 
-Sometimes what we want to monitor is not included in the logs. To solve that problem, Wazuh incorporates the ability to monitor the output of specific commands and treat that output just like log file content.
+There are times when you may want to monitor things that are not in the logs. To address this, Wazuh incorporates the ability to monitor the output of specific commands and treat the output as though it were log file content.
 
 .. topic:: Contents
 

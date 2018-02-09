@@ -11,9 +11,7 @@ The following is required to set up the monitoring of a specific command's outpu
 Configure Wazuh agents to accept remote commands from the manager
 -----------------------------------------------------------------
 
-Agents do have the ability to run commands pushed from the manager (via the files in the ``shared`` directory). Before this feature can be used, it needs to be explicitly allowed at an agent level. This can be done by setting the :ref:`logcollector.remote_commands <ossec_internal_logcollector>` in ``local_internal_options.conf`` on each agent.
-
-Example::
+Agents have the ability to run commands pushed from the manager (via the files in the ``shared`` directory). Before this feature can be used, however, the agents must be explicitly configured to accept remote commands. This can be done by setting the :ref:`logcollector.remote_commands <ossec_internal_logcollector>` in the ``local_internal_options.conf`` file on each agent as shown below::
 
   # Logcollector - Whether or not to accept remote commands from the manager
   logcollector.remote_commands=1
@@ -21,7 +19,7 @@ Example::
 Configure a command to monitor
 ------------------------------
 
-The commands to run and monitor, can be configured either inside the local :ref:`ossec.conf <reference_ossec_conf>` of individual agents, but the ideal location would be the appropriate config section of :ref:`agent.conf <reference_agent_conf>` on the manager.
+The commands to run and monitor can be configured in the local the :ref:`ossec.conf <reference_ossec_conf>` file of individual agents, however, the ideal location for this configuration is in the appropriate configuration section of the :ref:`agent.conf <reference_agent_conf>` file on the manager.
 
 Example::
 
@@ -34,4 +32,4 @@ Example::
 Process the output
 ------------------
 
-After configuring the system to monitor the command's output as if it were log data, we can create custom rules like for :ref:`Log analysis <manual_log_analysis>`, in order to process the output and alert when is needed.
+After configuring the system to monitor the command's output as if it were log data, custom rules can be created, like for :ref:`Log analysis <manual_log_analysis>` for instance, in order to process the output and trigger an alert when alert criteria are met.

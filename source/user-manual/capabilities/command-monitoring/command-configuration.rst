@@ -1,7 +1,7 @@
 .. _command-examples:
 
 Configuration
-=================================
+=============
 
 #. `Basic usage`_
 #. `Monitor running Windows processes`_
@@ -17,17 +17,17 @@ Command monitoring is configured in the :ref:`localfile section<reference_ossec_
 
 Monitor running Windows processes
 ---------------------------------
-Imagine you want to monitor the running process and alert if an important one is not running.
+Let's say you want to monitor running processes and alert if an important process is not running.
 
-Example with notepad.exe:
+Example with notepad.exe as the important process to monitor:
 
-1. Configure the agent to accept remote commands from the manager, in the agent's **local_internal_options.conf**.
+1. Configure the agent in the agent's **local_internal_options.conf** file to accept remote commands from the manager.
 ::
 
   # Logcollector - Whether or not to accept remote commands from the manager
   logcollector.remote_commands=1
 
-2. Define the command to list running processes, in the manager's **agent.conf** file
+2. Define the command in the manager's **agent.conf** file to list running processes.
 ::
 
   <localfile>
@@ -36,9 +36,9 @@ Example with notepad.exe:
        <frequency>120</frequency>
    </localfile>
 
-The **frequency** defines how often the command will be run (in seconds).
+The ``<frequency>`` tag defines how often the command will be run in seconds.
 
-3. Define the rules
+3. Define the rules.
 ::
 
   <rule id="100010" level="6">
@@ -54,12 +54,12 @@ The **frequency** defines how often the command will be run (in seconds).
     <group>process_monitor,</group>
   </rule>
 
-The first rule (100010) will generate an alert ("Important process not running"), unless it is overridden by its child rule (100011) that matches `notepad.exe` in the command output.  You could add as many additional child rules as you need to enumerate all important processes you want to monitor.  You could also adapt this example to monitor Linux process by changing the <command> from "tasklist" to a Linux command that lists processes, like "ps -auxw".
+The first rule (100010) will generate an alert ("Important process not running"), unless it is overridden by its child rule (100011) that matches `notepad.exe` in the command output.  You may add as many child rules as needed to enumerate all of the important processes you want to monitor.  You can also adapt this example to monitor Linux processes by changing the ``<command>`` from ``tasklist`` to a Linux command that lists processes, like ``ps -auxw``.
 
 Disk space utilization
---------------------------
+----------------------
 
-We can configure the ``dh`` command in the manager's **agent.conf** file or in the agent's **ossec.conf** file::
+The ``df`` command can be configured in the manager's ``agent.conf`` file or in the agent's ``ossec.conf`` file::
 
   <localfile>
       <log_format>command</log_format>
@@ -77,14 +77,14 @@ Wazuh already has a rule to monitor this::
   </rule>
 
 
-The system will alert once the disk space usage on any partition reaches 100%
+The system will alert once the disk space usage on any partition reaches 100%.
 
 Check if the output changed
--------------------------------
+---------------------------
 
-In this case we use the Linux "netstat" command and the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening tcp sockets.
+In this case, the Linux "netstat" command is used along with the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening tcp sockets.
 
-Configuration in ``agent.conf`` or ``ossec.conf``::
+This can be configured in either the ``agent.conf`` file or the ``ossec.conf`` file::
 
   <localfile>
     <log_format>full_command</log_format>
@@ -101,22 +101,21 @@ Wazuh already has a rule to monitor this::
     <group>pci_dss_10.2.7,pci_dss_10.6.1,</group>
   </rule>
 
-If the output changes, the system will generate an alert, indicating a network listener has disappeared or a new one has appeared, which could indicate something is broken or a network backdoor has been installed.
-
+If the output changes, the system will generate an alert indicating a network listener has disappeared or a new one has appeared. This may indicate something is broken or a network backdoor has been installed.
 
 Load average
 ------------
 
-You can configure Wazuh to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like 2 in this example.
+Wazuh can be configured to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like 2 in this example.
 
-Configuration in ``agent.conf`` or ``ossec.conf``::
+This can be configured in ``agent.conf`` or ``ossec.conf``::
 
   <localfile>
       <log_format>command</log_format>
       <command>uptime</command>
   </localfile>
 
-And the custom rule to alert when is higher than 2::
+And the custom rule to alert when "uptime" is higher than 2::
 
   <rule id="100101" level="7" ignore="7200">
     <if_sid>530</if_sid>
@@ -130,7 +129,7 @@ Detect USB Storage
 
 Wazuh can be configured to alert when a USB storage device is connected. This example is for a Windows agent.
 
-Configure your agent to monitor the USBSTOR registry entry, by adding this to the manager's ``agent.conf`` ::::
+Configure your agent to monitor the USBSTOR registry entry by adding the following to the manager's ``agent.conf`` ::
 
   <agent_config os="Windows">
     <localfile>
@@ -139,7 +138,7 @@ Configure your agent to monitor the USBSTOR registry entry, by adding this to th
     </localfile>
   </agent_config>
 
-Next create your custom rule::
+Next create a custom rule::
 
   <rule id="140125" level="7">
       <if_sid>530</if_sid>

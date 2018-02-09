@@ -10,9 +10,9 @@ The RPM package is suitable for installation on Red Hat, CentOS and other RPM-ba
 Adding the Wazuh repository
 ---------------------------
 
-The first thing you need is to add the Wazuh repository to your server. If you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
+The first step to installing the Wazuh agent is to add the Wazuh repository to your server.  Alternatively, if you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
 
-To set up the repository, run this command:
+Set up the repository by running the following command:
 
      .. code-block:: console
 
@@ -44,10 +44,10 @@ For CentOS-5 and RHEL-5:
 Installing Wazuh agent
 ----------------------
 
-On your terminal, install the Wazuh agent:
+On your terminal, install the Wazuh agent as follows:
 
   .. code-block:: console
 
 	 # yum install wazuh-agent
 
-.. note:: At this point your agent is installed and you just need to register and configure it to talk to your manager. For more information about this process please visit our user manual.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.

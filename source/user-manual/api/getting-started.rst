@@ -1,13 +1,14 @@
 .. _api_getting_started:
 
 Getting started
-======================
+===============
 
-This guide provides all the basic information you need to start using the Wazuh API.
+This guide provides the basic information you need to start using the Wazuh API.
 
 Starting and stopping the API
----------------------------------
-The API starts at boot time. To control or check the wazuh-api service, use the systemctl or service command.
+-----------------------------
+
+The API starts at boot time. To control or check the **wazuh-api** service, use the ``systemctl`` or ``service`` command.
 
 **Systemd systems**
 
@@ -21,10 +22,7 @@ The API starts at boot time. To control or check the wazuh-api service, use the 
 
     # service wazuh-api start/status/stop/restart
 
-
-Hello world!
----------------------------------
-In order to check if everything is working as expected, you can use cURL to do a *request*:
+Use the cURL command to send a *request* to confirm that everything is working as expected:
 
 .. code-block:: console
 
@@ -36,18 +34,18 @@ In order to check if everything is working as expected, you can use cURL to do a
 
 Explanation:
 
- * ``curl``: This is a command-line tool for sending requests and commands over HTTP and HTTPS.
- * ``-u foo:bar``: Specify a username and password to authenticate with the API.
- * ``-k``: Allow connections to SSL sites with self signed certs.
- * ``https://127.0.0.1:55000``: This is the API URL to use if you are running the command on the manager itself.
- * ``?pretty``: This parameter makes the JSON output more human-readable.
+ * ``curl``: A command-line tool for sending requests and commands over HTTP and HTTPS.
+ * ``-u foo:bar``: The username and password to authenticate with the API.
+ * ``-k``: The parameter that allows connections to SSL sites with self-signed certificates.
+ * ``https://127.0.0.1:55000``: The API URL to use if you are running the command on the manager itself.
+ * ``?pretty``: The parameter that makes the JSON output more human-readable.
 
 Basic concepts
----------------------------------
+--------------
 
-Basic concepts about making API requests and understanding their responses:
+Here are some of the basic concepts related to making API requests and understanding their responses:
 
-* The *base URL* for each request is ``https://IP:55000/`` or ``http://IP:55000/``, depending on if you enabled and set up SSL in the API.
+* The *base URL* for each request is ``https://IP:55000/`` or ``http://IP:55000/``, depending on whether or not SSL is enabled and set up in the API.
 * All responses are in *JSON format* with the following structure:
 
     +---------+-------------------------------------------------------+
@@ -55,33 +53,33 @@ Basic concepts about making API requests and understanding their responses:
     +=========+=======================================================+
     | error   | 0 if everything was fine and an error code otherwise. |
     +---------+-------------------------------------------------------+
-    | data    | data requested. Only if error is equal to 0.          |
+    | data    | The data requested. Only if error is equal to 0.      |
     +---------+-------------------------------------------------------+
-    | message | error description. Only if error is different to 0.   |
+    | message | The error description. Only if error is other than 0. |
     +---------+-------------------------------------------------------+
 
  * Example response without errors:
 
-  * ``{ "error": "0", "data": "Welcome to Wazuh HIDS API" }``
+  ``{ "error": "0", "data": "Welcome to Wazuh HIDS API" }``
 
  * Example response with errors:
 
-  * ``{ "error": "603", "message": "The requested URL was not found on this server" }``
+  ``{ "error": "603", "message": "The requested URL was not found on this server" }``
 
-* Responses containing collections of data will return a maximum of 500 elements. You should use the *offset* and *limit* parameters to iterate through large collections.
+* Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
 * All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
-* All requests accept the parameter *pretty* to convert the JSON response to a more human-readable format.
+* All requests accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 * The API log is stored on the manager as ``/var/ossec/logs/api.log``.
 
 .. _wazuh_api_use_cases:
 
 Use cases
----------------------------------
+---------
 
 This section will present several use cases to give you a taste for the API's potential. You can find details about all possible API requests in the :ref:`reference <api_reference>` section.
 
 Exploring the ruleset
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 Often when an alert fires, it is helpful to know details about the rule itself. The following request enumerates the attributes of rule *1002*:
 
@@ -114,7 +112,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
       }
     }
 
-It can also be helpful to know what rules are available that match specific criteria. For example, we can show all rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures**, which returns only one rule in this case.
+It can also be helpful to know what rules are available that match specific criteria. For example, we can show all of the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures**. In the example below, only one rule is returned:
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/rules?group=web&pci=10.6.1&search=failures&pretty"``
 
@@ -154,9 +152,9 @@ It can also be helpful to know what rules are available that match specific crit
     }
 
 Mining the file integrity monitoring database of an agent
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can use the API to show information about all the files monitored by syscheck. For example, you can enumerate all monitored files on agent *000* (the manager) with extension *.py* that have been modified. In order to be concise, "*limit=1*" has been used in this example to limit the results to a single record.
+You can use the API to show information about all of the files monitored by syscheck. For example, you can enumerate all of the monitored files on agent *000* (the manager) with extension *.py* that have been modified. In order to be concise, "*limit=1*" has been used in this example to limit the results to a single record:
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000/files?offset=0&limit=1&event=modified&search=.py&pretty"``
 
@@ -187,7 +185,7 @@ You can use the API to show information about all the files monitored by syschec
       }
     }
 
-In case you need to find a file using its md5/sha1 hash, you can do so with a simple request like this:
+You can find a file using its md5/sha1 hash:
 
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000/files?hash=9d0ac660826f4245f3444b0247755c7229f1f9fe&pretty"``
@@ -220,9 +218,9 @@ In case you need to find a file using its md5/sha1 hash, you can do so with a si
     }
 
 Listing outstanding rootcheck issues
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Rootcheck requests are very similar to the syscheck ones. In order to get all rootcheck issues with an *outstanding* status you can run this request:
+Rootcheck requests are very similar to the syscheck requests. In order to get all rootcheck issues with the **outstanding** status, run this request:
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/rootcheck/000?status=outstanding&offset=0&limit=1&pretty"``
 
@@ -244,9 +242,9 @@ Rootcheck requests are very similar to the syscheck ones. In order to get all ro
     }
 
 Starting the manager and dumping its configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is possible to use the API to interact with the Manager in many ways.  For example, you can stop/start/restart it or get its state with this simple request:
+It is possible to use the API to interact with the manager in multiple ways.  For example, you can stop, start, restart or get its state with a request such as:
 
 ``curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"``
 
@@ -316,9 +314,11 @@ You can even dump the manager's current configuration with the below request (re
 
 
 Playing with agents
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
-Of course we can work with agents. This enumerates **active** agents:
+Here are some commands for working with the agents. 
+
+This enumerates **active** agents:
 
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/agents?offset=0&limit=1&status=active&pretty"``
@@ -340,7 +340,7 @@ Of course we can work with agents. This enumerates **active** agents:
       }
     }
 
-Adding an agent is now easier than ever. Just send a request with the agent name and its IP.
+Adding an agent is now easier than ever. Simply send a request with the agent name and its IP.
 
 ``curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"``
 
@@ -351,7 +351,7 @@ Adding an agent is now easier than ever. Just send a request with the agent name
       "data": "019"
     }
 
-You can fetch an agent's key like this:
+You can also fetch an agent's key:
 
 ``curl -u foo:bar -k "https://127.0.0.1:55000/agents/019/key?pretty"``
 
@@ -364,5 +364,5 @@ You can fetch an agent's key like this:
 
 
 Conclusion
-^^^^^^^^^^^^^^^^^^
-We hope you now better appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests. A nice summary can also be found here: :ref:`summary <request_list>`.
+^^^^^^^^^^
+We hope this sections has helped you to appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests. A nice summary can also be found here: :ref:`summary <request_list>`.

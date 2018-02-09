@@ -1,18 +1,18 @@
 .. _command-line-remove:
 
 Remove Agents
-----------------------------
+-------------
 
-The binary */var/ossec/bin/manage_agents* allow us to remove agents.
+The binary */var/ossec/bin/manage_agents* allows for the removal of agents.
 
-Confirmation before removing the agent:
+If you would like a confirmation before removing the agent, use the following:
 
 .. code-block:: console
 
     # /var/ossec/bin/manage_agents
 
     ****************************************
-    * Wazuh v2.0 Agent manager.            *
+    * Wazuh v3.1.0 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
@@ -32,7 +32,7 @@ Confirmation before removing the agent:
 
     manage_agents: Exiting.
 
-No confirmation before removing the agent:
+If you would like to remove the agent with no confirmation, use the option shown below:
 
 .. code-block:: console
 
@@ -40,7 +40,7 @@ No confirmation before removing the agent:
 
 
     ****************************************
-    * Wazuh v2.0 Agent manager.            *
+    * Wazuh v3.1.0 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).

@@ -1,9 +1,9 @@
 .. _command-line:
 
 Using the command line
-=================================================
+======================
 
-There are some actions you can do via command line:
+In this section, you will find some of the actions that can be performed via command line.
 
 .. topic:: Contents
 

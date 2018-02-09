@@ -27,10 +27,12 @@ Available options
 - `if_matched_group`_
 - `same_id`_
 - `same_source_ip`_
-- `same_source_port`_
+- `same_src_port`_
 - `same_dst_port`_
 - `same_location`_
 - `same_user`_
+- `different_url`_
+- `different_srcgeoip`_
 - `description`_
 - `list`_
 - `info`_
@@ -326,8 +328,8 @@ This option is used in conjunction with frequency and timeframe.
 | **Allowed values** | n/a       |
 +--------------------+-----------+
 
-same_source_port
-^^^^^^^^^^^^^^^^
+same_src_port
+^^^^^^^^^^^^^
 
 Specifies that the decoded source port must be the same.
 This option is used in conjunction with frequency and timeframe.
@@ -366,6 +368,30 @@ same_user
 ^^^^^^^^^
 
 Specifies that the decoded user must be the same.
+This option is used in conjunction with frequency and timeframe.
+
++--------------------+-----------+
+| **Default Value**  | n/a       |
++--------------------+-----------+
+| **Allowed values** | n/a       |
++--------------------+-----------+
+
+different_url
+^^^^^^^^^^^^^
+
+Specifies that the decoded url must be different.
+This option is used in conjunction with frequency and timeframe.
+
++--------------------+-----------+
+| **Default Value**  | n/a       |
++--------------------+-----------+
+| **Allowed values** | n/a       |
++--------------------+-----------+
+
+different_srcgeoip
+^^^^^^^^^^^^^^^^^^
+
+Specifies that the source geoip location must be different.
 This option is used in conjunction with frequency and timeframe.
 
 +--------------------+-----------+

@@ -3,16 +3,16 @@
 Install Wazuh server with DEB packages
 ======================================
 
-For Debian/Ubuntu platforms, installing Wazuh server components is just install relevant packages by previously adding the appropriate repositories.
+For Debian/Ubuntu platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
 Adding Wazuh Repositories
 -------------------------
 
-The first thing you need is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-manager package directly, you can find it :ref:`here <packages>`.
+The first step to setting up Wazuh is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
-1. In order to perform this procedure properly, packages ``curl``, ``apt-transport-https`` and ``lsb-release`` must be installed into your system. If they are not, install them:
+1. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
 	.. code-block:: console
 
@@ -25,7 +25,7 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
 		# curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-3. Adding the repository:
+3. Add the repository:
 
 	.. code-block:: console
 
@@ -37,8 +37,8 @@ The first thing you need is to add the Wazuh repository to your server. Alternat
 
 		# apt-get update
 
-Installing Wazuh Manager
-------------------------
+Installing the Wazuh Manager
+----------------------------
 
 On your terminal, install the Wazuh manager:
 
@@ -60,16 +60,16 @@ Once the process is completed, you can check the service status with:
 
 		# service wazuh-manager status
 
-Installing Wazuh API
---------------------
+Installing the Wazuh API
+------------------------
 
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed, or your version is older than 4.6.1, we recommend you add the official NodeJS repository like this:
+1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend that you add the official NodeJS repository like this:
 
 	.. code-block:: console
 
 		# curl -sL https://deb.nodesource.com/setup_6.x | bash -
 
-   and then, install nodejs:
+   and then, install NodeJS:
 
 	 .. code-block:: console
 
@@ -81,7 +81,7 @@ Installing Wazuh API
 
 		# apt-get install wazuh-api
 
-3. Once the process is completed, you can check the service status with:
+3. Once the process is complete, you can check the service status with:
 
   a) For Systemd:
 
@@ -119,14 +119,14 @@ Installing Wazuh API
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that will securely forward the alerts and archived events to the Logstash service on the Elastic Stack server(s).
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to the Logstash service on the Elastic Stack server(s).
 
 .. warning::
-    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), you may entirely skip installing Filebeat, since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
-1. Install the GPG keys from Elastic, and the Elastic repository:
+1. Install the GPG keys from Elastic and then the Elastic repository:
 
 	.. code-block:: console
 
@@ -138,13 +138,13 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 	.. code-block:: console
 
-		# apt-get install filebeat=6.1.1
+		# apt-get install filebeat=6.2.0
 
-3. Download the Filebeat config file from the Wazuh repository, which is preconfigured to forward Wazuh alerts to Logstash:
+3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
 	.. code-block:: console
 
-		# curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/filebeat/filebeat.yml
+		# curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/filebeat/filebeat.yml
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elastic Stack server. For example:
 

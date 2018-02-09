@@ -1,7 +1,7 @@
 .. _upgrading_different_major:
 
 Upgrade from different major version
-=====================================
+====================================
 
 The following steps show how to upgrade from Wazuh 2.x to Wazuh 3.x (which implies upgrading from Elastic Stack 5.x to 6.x).
 
@@ -40,13 +40,13 @@ Upgrade Wazuh agent
 
 3. Upgrade the agent.
 
-  a) Upgrade Wazuh agent on CentOS/RHEL/Fedora:
+  a) Upgrade the Wazuh agent on CentOS/RHEL/Fedora:
 
     .. code-block:: console
 
       # yum install wazuh-agent
 
-  b) Upgrade Wazuh agent on Debian/Ubuntu:
+  b) Upgrade the Wazuh agent on Debian/Ubuntu:
 
     .. code-block:: console
 
@@ -57,7 +57,7 @@ Upgrade Wazuh agent
 Upgrade Wazuh manager
 ---------------------
 
-1. Stop services:
+1. Stop the services:
 
   .. code-block:: console
 
@@ -90,13 +90,13 @@ Upgrade Wazuh manager
 
 3. Upgrade the manager.
 
-  a) Upgrade Wazuh manager on CentOS/RHEL/Fedora:
+  a) Upgrade the Wazuh manager on CentOS/RHEL/Fedora:
 
     .. code-block:: console
 
       # yum install wazuh-manager
 
-  b) Upgrade Wazuh manager on Debian/Ubuntu:
+  b) Upgrade the Wazuh manager on Debian/Ubuntu:
 
     .. code-block:: console
 
@@ -104,15 +104,15 @@ Upgrade Wazuh manager
       # apt-get install wazuh-manager
 
 
-5. Upgrade the API.
+4. Upgrade the API.
 
-  a) Upgrade Wazuh API on CentOS/RHEL/Fedora:
+  a) Upgrade the Wazuh API on CentOS/RHEL/Fedora:
 
     .. code-block:: console
 
       # yum install wazuh-api
 
-  b) Upgrade Wazuh API on Debian/Ubuntu:
+  b) Upgrade the Wazuh API on Debian/Ubuntu:
 
     .. code-block:: console
 
@@ -122,7 +122,7 @@ Upgrade Wazuh manager
 Prepare Elastic Stack
 ---------------------
 
-1. Stop services:
+1. Stop the services:
 
   .. code-block:: console
 
@@ -164,7 +164,7 @@ Upgrade Elasticsearch
 ---------------------
 
 .. note::
-  Since you are upgrading to a different major version of Elasticsearch you should backup **/etc/elasticsearch/elasticsearch.yml** and **/etc/elasticsearch/jvm.options** before upgrade Elasticsearch. Check https://www.elastic.co/guide/en/elasticsearch/reference/6.x/index.html for more information.
+  Since you are upgrading to a different major version of Elasticsearch , it's important that you backup **/etc/elasticsearch/elasticsearch.yml** and **/etc/elasticsearch/jvm.options** before upgrading Elasticsearch. Check the `Elasticsearch Reference <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/index.html>`_ for more information.
 
 1. Update Elasticsearch:
 
@@ -172,14 +172,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.1.1
+      # yum install elasticsearch-6.2.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch=6.1.1
+      # apt-get install elasticsearch=6.2.0
 
 
 2. Start Elasticsearch:
@@ -191,22 +191,22 @@ Upgrade Elasticsearch
     # systemctl start elasticsearch.service
 
 
-3. Load Wazuh Elasticsearch templates:
+3. Load the Wazuh Elasticsearch templates:
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
 
 4. Insert sample alert in Elasticsearch:
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
 
 Upgrade Logstash
@@ -218,13 +218,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash-6.1.1
+      # yum install logstash-6.2.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash=1:6.1.1-1
+      # apt-get install logstash=1:6.2.0-1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -234,7 +234,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /etc/logstash/conf.d/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-local.conf
       # usermod -a -G ossec logstash
 
   b) Remote configuration:
@@ -242,7 +242,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /etc/logstash/conf.d/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.0/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-remote.conf
 
 
 3. Start Logstash:
@@ -263,13 +263,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-6.1.1
+      # yum install kibana-6.2.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=6.1.1
+      # apt-get install kibana=6.2.0
 
 
 2. Remove the Wazuh Kibana App plugin from Kibana:
@@ -281,21 +281,20 @@ Upgrade Kibana
 
 3. Migrate .kibana from 5.x to 6.x:
 
-  The .kibana index (which holds Kibana configuration) has drastically changed. To migrate it, follow the official documentation:
+  The .kibana index (which holds Kibana's configuration) has drastically changed. To migrate it, follow the official documentation:
 
-  - Migrating Kibana .index to 6.0: https://www.elastic.co/guide/en/kibana/current/migrating-6.0-index.html
+  - `Migrating Kibana .index to 6.0 <https://www.elastic.co/guide/en/kibana/current/migrating-6.0-index.html>`_
 
 
-4. Upgrade Wazuh Kibana App:
+4. Upgrade the Wazuh Kibana App:
 
-  4.1) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
-  Set the limit as follow:
+  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. Set the limit as follow:
 
   .. code-block:: console
 
       # export NODE_OPTIONS="--max-old-space-size=3072"
 
-  4.2) Install Wazuh App:
+  b) Install the Wazuh App:
 
   .. code-block:: console
 
@@ -320,21 +319,21 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.1.1
+      # yum install filebeat-6.2.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.1.1
+      # apt-get install filebeat=6.2.0
 
-2. Download the Filebeat config file from the Wazuh repository:
+2. Download the Filebeat configuration file from the Wazuh repository:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/filebeat/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/filebeat/filebeat.yml
 
-3. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elastic Stack server. For example:
+3. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of your Elastic Stack server:
 
   .. code-block:: yaml
 
@@ -350,20 +349,20 @@ Upgrade Filebeat
     # systemctl enable filebeat.service
     # systemctl start filebeat.service
 
-Official Upgrading guides for Elastic Stack:
+Official upgrading guides for Elastic Stack:
 
-    - Upgrading Elasticsearch: https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html
+    - `Upgrading Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html>`_
 
-    - Upgrading Logstash: https://www.elastic.co/guide/en/logstash/current/upgrading-logstash.html
+    - `Upgrading Logstash <https://www.elastic.co/guide/en/logstash/current/upgrading-logstash.html>`_
 
-    - Upgrading Kibana: https://www.elastic.co/guide/en/kibana/current/upgrade.html
+    - `Upgrading Kibana <https://www.elastic.co/guide/en/kibana/current/upgrade.html>`_
 
-    - Upgrading Filebeat: https://www.elastic.co/guide/en/beats/libbeat/6.0/upgrading.html
+    - `Upgrading Filebeat <https://www.elastic.co/guide/en/beats/libbeat/6.0/upgrading.html>`_
 
 Disable the Elasticsearch repository
 ------------------------------------
 
-We recommend to disable the Elasticsearch repository in order to prevent an upgrade to a newer Elastic Stack version due to possible breaking changes with our App, so you should do it as follow:
+We recommend that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version. An untimely or unplanned upgrade may break the Wazuh App. To disable the repository, follow these steps:
 
   a) For CentOS/RHEL/Fedora:
 
@@ -380,14 +379,14 @@ We recommend to disable the Elasticsearch repository in order to prevent an upgr
 Reindexing your previous alerts
 -------------------------------
 
-A reindex can be a complex process depending on how big is your dataset. Do it only if you are interested in visualizing alerts generated before the upgrade in your Kibana environment.
+In the new version of Wazuh, the structure of the Wazuh alerts have changed. The new alerts present more information to the end user than the old alerts. This is why Wazuh 3.x uses different indices and templates than Wazuh 2.x.
 
-In the new version of Wazuh, there's a change in the Wazuh alerts structure. Now, the new alerts bring more information to the final user. That is why Wazuh 3.x uses different
-indices and templates than Wazuh 2.x.
+For this reason, you will not be able to see the previous alerts using Kibana. If you need to access them, you will have to reindex the previous indices.
 
-For that reason, you will not be able to see the previous alerts using Kibana. If you need to access them, you will have to reindex the previous indices.
+Reindexing can be a complex process, depending on the size of your dataset. This should only be done if you need to visualize alerts that were generated before the upgrade of your Kibana environment.
 
-There's a reindex script developed by the Wazuh Team which documentation is available at :doc:`Restore Wazuh alerts from Wazuh 2.x <./restore_alerts>`.
+
+There is a reindex script developed by the Wazuh Team. The documentation for this script  is available at :doc:`Restore Wazuh alerts from Wazuh 2.x <./restore_alerts>`.
 
 .. note::
-    Not reindexing alerts doesn't mean that they will disappear, alerts will still be stored in Elasticsearch and the Wazuh manager.
+    Older alerts will not disappear if you choose not to reindex. These alerts will still be stored in Elasticsearch and the Wazuh manager.

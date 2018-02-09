@@ -7,11 +7,11 @@ Configuration
 #. `Ignoring false positives`_
 
 Basic example
---------------
+-------------
 
-To configure the options for syscheck and rootcheck go to :ref:`ossec.conf <reference_ossec_conf>`. If you want more information about the exact configuration options go to :ref:`Syscheck section <reference_ossec_syscheck>` and :ref:`Rootcheck section <reference_ossec_rootcheck>`. Also see the following sections: :ref:`frequency <reference_ossec_rootcheck_frequency>`, :ref:`rootkit_files <reference_ossec_rootcheck_rootkit_files>`, :ref:`rootkit_trojans <reference_ossec_rootcheck_rootkit_trojans>`
+To configure the options for syscheck and rootcheck, go to :ref:`ossec.conf <reference_ossec_conf>`. If you want more information about the exact configuration options that are available, go to the :ref:`Syscheck section <reference_ossec_syscheck>` and :ref:`Rootcheck section <reference_ossec_rootcheck>`. Also, see the following sections: :ref:`frequency <reference_ossec_rootcheck_frequency>`, :ref:`rootkit_files <reference_ossec_rootcheck_rootkit_files>` and :ref:`rootkit_trojans <reference_ossec_rootcheck_rootkit_trojans>`.
 
-A basic example to configure the database for rootkits (files and trojans):
+Here is a basic example of how to configure the database for rootkits (files and trojans):
 
 .. code-block:: xml
 

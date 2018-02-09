@@ -3,16 +3,16 @@
 Setting up SSL for Filebeat and Logstash
 ========================================
 
-If you are running Wazuh server and Elastic Stack on separate systems & servers (distributed architecture), then it is important to configure SSL encryption between Filebeat and Logstash. This not applies to single-server architectures.
+If you are running Wazuh server and Elastic Stack on separate systems and servers (**distributed architecture**), it is important to configure SSL encryption between Filebeat and Logstash. (This does not apply to **single-server architectures**.)
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
 Generating a self-signed SSL certificate
 ----------------------------------------
 
-1. First, we need an SSL certificate and key.
+1. Generate an SSL certificate and key as follows:
 
-	On the **machine with Logstash server** installed, create a copy of the OpenSSL example configuration file. The file location may vary depending on your operating system:
+	On the **machine with Logstash server** installed, create a copy of the OpenSSL sample configuration file. The file location may vary depending on your operating system:
 
 	a. On Debian or Ubuntu:
 
@@ -28,9 +28,9 @@ Generating a self-signed SSL certificate
 
   .. note:: Typically you will run the Logstash server in your Elastic Stack server or, if you have set up a distributed Elasticsearch cluster, in one of its nodes.
 
-2. Edit the custom configuration file, ``custom_openssl.cnf``.
+2. Edit the custom configuration file, ``custom_openssl.cnf``:
 
-	Find the section ``[ v3_ca ]`` and add a line like this, including your Elastic server's IP address:
+	Find the section ``[ v3_ca ]`` and add a line like the one below that includes your Elastic server's IP address:
 
 		.. code-block:: ini
 
@@ -59,9 +59,9 @@ Generating a self-signed SSL certificate
 Configure Logstash server
 -------------------------
 
-At this point you should have your SSL certificate and key at ``/etc/logstash/logstash.crt`` and ``/etc/logstash/logstash.key`` respectively. Now we'll configure Logstash to use it across with Filebeat.
+The newly generated SSL certificate and key will be found at ``/etc/logstash/logstash.crt`` and ``/etc/logstash/logstash.key``, respectively. Next, configure Logstash to use this new key for communication with Filebeat.
 
-1. Edit file ``/etc/logstash/conf.d/01-wazuh.conf`` and uncomment the lines related to SSL under ``input/beats``. The active input section should now look like this:
+1. Edit the file ``/etc/logstash/conf.d/01-wazuh.conf`` and uncomment the lines related to SSL under ``input/beats``. The active input section should now look like this:
 
 	.. code-block:: bash
 
@@ -92,17 +92,17 @@ At this point you should have your SSL certificate and key at ``/etc/logstash/lo
 Configure Filebeat
 ------------------
 
-Now we will configure Filebeat to verify the Logstash server's certificate.
+Configure Filebeat to verify the Logstash server's certificate.
 
-1. On the **machine with Filebeat installed** (Wazuh server), fetch the Logstash server's SSL certificate file at ``/etc/logstash/logstash.crt`` and copy it into ``/etc/filebeat/logstash.crt``.
+1. On the **machine with Filebeat installed** (the Wazuh server), fetch the Logstash server's SSL certificate file at ``/etc/logstash/logstash.crt`` and copy it into ``/etc/filebeat/logstash.crt``.
 
-	Here is an **example** you might use to copy the SSL certificate from the Logstash server to Wazuh server where Filebeat is installed:
+	Here is an example that can be used to copy the SSL certificate from the Logstash server to the Wazuh server where Filebeat is installed:
 
 	.. code-block:: console
 
 		# scp root@LOGSTASH_SERVER_IP:/etc/logstash/logstash.crt /etc/filebeat
 
-2. Edit the file ``/etc/filebeat/filebeat.yml`` and uncomment the lines related to SSL inside ``logstash``. The file should remain like this:
+2. Edit the file ``/etc/filebeat/filebeat.yml`` and uncomment the lines related to SSL inside of ``logstash``. The file should look like this:
 
 	.. code-block:: yaml
 

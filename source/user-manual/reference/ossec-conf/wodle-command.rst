@@ -32,7 +32,7 @@ Options
 +----------------------+-----------------------------+
 | `tag`_               | A descriptive name          |
 +----------------------+-----------------------------+
-| `command`_           | Instruction to be executed  |
+| `command`_           | Command to be executed      |
 +----------------------+-----------------------------+
 | `interval`_          | A positive number (seconds) |
 +----------------------+-----------------------------+
@@ -111,11 +111,11 @@ Ignore the command output when executed.
 Centralized configuration
 -------------------------
 
-Remote commands may be specified in the :ref:`centralized configuration <reference_agent_conf>`,
-but remote commands are disabled by default due to security reasons.
+Remote commands may be specified in the :ref:`centralized configuration <reference_agent_conf>`, however, they are disabled by default due to security reasons.
 
-When setting commands as shared agent configuration, **you must enable remote commands for Agent Modules**.
-You can do it by adding the next line to the file *etc/local_internal_options.conf* in the agent:
+When setting commands in a shared agent configuration, **you must enable remote commands for Agent Modules**.
+
+This is enabled by adding the following line to the file *etc/local_internal_options.conf* in the agent:
 
 .. code-block:: shell
 
@@ -135,4 +135,4 @@ Example of configuration
       <run_on_start>yes</run_on_start>
     </wodle>
 
-.. note:: You can see an use case for this command in the :doc:`Vuls integration section<../../capabilities/vuls>`.
+.. note:: See the :doc:`Vuls integration section<../../capabilities/vuls>` for a use case of this command.

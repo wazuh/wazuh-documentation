@@ -15,15 +15,15 @@ Follow the appropriate section depending on the type of your OSSEC installation:
 +--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
 | Upgrade from | Type    | Installation type | Upgrade to | Guide                                                                               |
 +==============+=========+===================+============+=====================================================================================+
-| OSSEC 2.8.3+ | Manager | Packages          | Wazuh 2.0  | :ref:`Migrating OSSEC manager installed from packages <up_ossec_manager>`           |
+| OSSEC 2.8.3+ | Manager | Packages          | Wazuh 3.x  | :ref:`Migrating OSSEC manager installed from packages <up_ossec_manager>`           |
 +--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
-| OSSEC 2.8.3+ | Manager | Sources           | Wazuh 2.0  | :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`                    |
+| OSSEC 2.8.3+ | Manager | Sources           | Wazuh 3.x  | :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`                    |
 +              +         +                   +            +-------------------------------------------------------------------------------------+
 |              |         |                   |            | :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`                    |
 +--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
-| OSSEC 2.8.3+ | Agent   | Packages          | Wazuh 2.0  | :ref:`Migrating OSSEC agent installed from packages <up_ossec_agent>`               |
+| OSSEC 2.8.3+ | Agent   | Packages          | Wazuh 3.x  | :ref:`Migrating OSSEC agent installed from packages <up_ossec_agent>`               |
 +--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
-| OSSEC 2.8.3+ | Agent   | Sources           | Wazuh 2.0  | :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`                      |
+| OSSEC 2.8.3+ | Agent   | Sources           | Wazuh 3.x  | :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`                      |
 +              +         +                   +            +-------------------------------------------------------------------------------------+
 |              |         |                   |            | :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`                      |
 +--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+

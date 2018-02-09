@@ -1,14 +1,14 @@
 .. _wazup-app:
 
 Using Wazup App
-=============================================
+===============
 
 Listing Agents
 --------------
 
-You can list and see all Registered Agents with only accessing to the Wazuh app and go to *Agents* tab:
+You can list and see basic information about all registered agents by going to the *Agents* tab in the Wazuh App:
 
-.. thumbnail:: ../../images/manual/managing-agents/listing-agents-app.png
+.. thumbnail:: ../../images/kibana-app/agents/agents-preview.png
     :title: Listing agents from Wazuh app
     :align: center
     :width: 100%
@@ -16,9 +16,9 @@ You can list and see all Registered Agents with only accessing to the Wazuh app 
 Show Agent
 ----------
 
-Clicking on certain Agent will show you more information about it.
+Clicking on an agent will display more information about that specific agent:
 
-.. thumbnail:: ../../images/manual/managing-agents/show-agent-app.png
+.. thumbnail:: ../../images/kibana-app/agents/agents-general.png
     :title: Show agent from Wazuh app
     :align: center
     :width: 100%

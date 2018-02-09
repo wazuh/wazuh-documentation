@@ -4,11 +4,11 @@
 ossec-authd
 ===========
 
-The ossec-authd program will automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.  ``ossec-authd`` creates an agent with an ip address of "any" instead of using its actual IP.
+The ossec-authd program can automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.  ``ossec-authd`` creates an agent with an ip address of "any" instead of using its actual IP.
 
 .. warning::
 
-    By default there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
+    By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
 
 
 +------------------+-------------------------------------------------------------------------------------------------------+
@@ -64,7 +64,7 @@ The ossec-authd program will automatically add an agent to a Wazuh manager and p
 +                  +-------------+-----------------------------------------------------------------------------------------+
 |                  | **Default** | TLS v1.2 only (if supported by the server).                                             |
 +------------------+-------------+-----------------------------------------------------------------------------------------+
-| **-L**           | Force insertion though agent limit reached.                                                           |
+| **-L**           | Force insertion even though agent limit reached.                                                      |
 +------------------+-------------------------------------------------------------------------------------------------------+
 
 
