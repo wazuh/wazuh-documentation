@@ -4,11 +4,11 @@
 ossec-remoted
 =============
 
-The ossec-remoted program is the server side daemon that communicates with the agents.  It runs as ossecr and is chrooted to ``/var/ossec`` by default.
+The ossec-remoted program is the server side daemon that communicates with the agents.  It runs as ``ossecr`` and is chrooted to ``/var/ossec`` by default.
 
 
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-c <config>** | Run using <config>, as the configuration file.                                                  |
+| **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec/etc/ossec.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
@@ -20,13 +20,13 @@ The ossec-remoted program is the server side daemon that communicates with the a
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-f**          | Run in the foreground.                                                                          |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-g <group>**  | Run as a group.                                                                                 |
+| **-g <group>**  | Run as a specific group.                                                                        |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-h**          | Display the help message.                                                                       |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-t**          | Test configuration.                                                                             |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-u <user>**   | Run as a user.                                                                                  |
+| **-u <user>**   | Run as a specific user.                                                                         |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | ossecm                                              |
 +-----------------+-------------------------------------------+-----------------------------------------------------+

@@ -10,7 +10,7 @@ cluster
 		<cluster>
 		</cluster>
 
-This section allows to configure the Wazuh cluster for manager synchronization.
+This section explains how to configure the Wazuh cluster for manager synchronization.
 
 Options
 -------
@@ -28,7 +28,7 @@ Options
 name
 ^^^^
 
-This field specifies the name of the cluster this node belongs to.
+Specifies the name of the cluster this node belongs to.
 
 +--------------------+---------------+
 | **Default value**  | wazuh         |
@@ -39,7 +39,7 @@ This field specifies the name of the cluster this node belongs to.
 node_name
 ^^^^^^^^^^
 
-The name of the current node of the cluster.
+Specifies the name of the current node of the cluster.
 
 +--------------------+---------------+
 | **Default value**  | node01        |
@@ -48,9 +48,9 @@ The name of the current node of the cluster.
 +--------------------+---------------+
 
 node_type
-^^^^^^^^^^
+^^^^^^^^^
 
-The role of the node.
+Specifies the role of the node.
 
 +--------------------+------------------+
 | **Default value**  | master           |
@@ -59,12 +59,12 @@ The role of the node.
 +--------------------+------------------+
 
 key
-^^^^
+^^^
 
-Any key for encrypting the communication between nodes. It must be 32 characters long. Refer to the :doc:`Wazuh cluster manual <../../manager/wazuh-cluster>` to find out how to generate a key.
+Defines the key used to encrypt the communication between the nodes. This key must be 32 characters long. Refer to the :doc:`Wazuh cluster manual <../../manager/wazuh-cluster>` for information on how to generate a key.
 
 .. note::
-	This key has to be the same for all the nodes of the cluster.
+	This key must be the same for all of the nodes of the cluster.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | n/a                                         |
@@ -75,46 +75,42 @@ Any key for encrypting the communication between nodes. It must be 32 characters
 interval
 ^^^^^^^^
 
-Interval between cluster synchronizations.
+Sets the interval between cluster synchronizations.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 2m                                                                                                                                       |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes)                       |
+| **Allowed values** | A positive number ending with a character that indicates a time unit, such as s (seconds) or m (minutes).                                |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 port
-^^^^^^
+^^^^
 
-Specify the port for the cluster communications.
+Specifies the port to use for the cluster communications.
 
-+--------------------+---------------------------------------------+
-| **Default value**  | 1516                                        |
-+--------------------+---------------------------------------------+
-| **Allowed values** | Any port number from 1 to 65535 is allowed. |
-+--------------------+---------------------------------------------+
++--------------------+----------------------------------+
+| **Default value**  | 1516                             |
++--------------------+----------------------------------+
+| **Allowed values** | Any port number from 1 to 65535. |
++--------------------+----------------------------------+
 
 
 bind_addr
 ^^^^^^^^^^
 
-When the node has multiple network interfaces, this parameter specifies which IP address will comunicate with the cluster.
+Specifies which IP address will communicate with the cluster when the node has multiple network interfaces.
 
-+--------------------+----------------------------------+
-| **Default value**  | 0.0.0.0                          |
-+--------------------+----------------------------------+
-| **Allowed values** | Any valid IP address is allowed. |
-+--------------------+----------------------------------+
++--------------------+-----------------------+
+| **Default value**  | 0.0.0.0               |
++--------------------+-----------------------+
+| **Allowed values** | Any valid IP address. |
++--------------------+-----------------------+
 
 nodes
-^^^^^^
+^^^^^
 
-List to specify all the nodes that make up the cluster, using the ``<node>`` tag for each one.
-
-.. note::
-	This list must be the same in all managers of the cluster. For each manager, specify any of the IPs returned
-	by the ``hostname --all-ip-addresses`` command. If not, an error will be raised.
+Lists all of the nodes that make up the cluster using the ``<node>`` tag for each one.
 
 +--------------------+-----------------------------------------+
 | **Default value**  | localhost                               |
@@ -122,19 +118,22 @@ List to specify all the nodes that make up the cluster, using the ``<node>`` tag
 | **Allowed values** | Any valid IP address of a cluster node. |
 +--------------------+-----------------------------------------+
 
-hidden
-^^^^^^^
+.. note::
+	This list must be the same in all managers of the cluster. For each manager, specify any of the IP addresses returned by the ``hostname --all-ip-addresses`` command. If this is not correct, it will result in an error.
 
-If it is set to ``yes``, information about the cluster that generated the event won't be included in the alert.
+hidden
+^^^^^^
+
+Toggles whether or not to show information about the cluster that generated an alerts. If this is set to ``yes``, information about the cluster that generated the event won't be included in the alert.
 
 +--------------------+-----------------------------------------+
 | **Default value**  | no                                      |
 +--------------------+-----------------------------------------+
-| **Allowed values** | yes/no                                  |
+| **Allowed values** | yes, no                                 |
 +--------------------+-----------------------------------------+
 
-Example of configuration
-------------------------
+Sample configuration
+--------------------
 
 .. code-block:: xml
 

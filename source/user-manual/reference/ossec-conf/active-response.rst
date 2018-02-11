@@ -10,7 +10,7 @@ active-response
 		<active-response>
 		</active-response>
 
-In the active response configuration section, you bind an existing command to one or more rules or rule types and specify additional criteria for when to actually execute the command. It is possible to have as many responses as needed, but each must be in their own separate ``<active-response>`` section.
+In the active response configuration section, an existing command is bound to one or more rules or rule types along with dditional criteria for when to execute the command. There is no limit to the number of active responses that can be used, however, each active response must be configured in its own separate ``<active-response>`` section.
 
 Options
 -------
@@ -29,23 +29,23 @@ Options
 disabled
 ^^^^^^^^
 
-Setting it to ``yes`` on an agent will disable active-response for that agent only, while setting it in the manager's ``ossec.conf`` file will disable active-response on the manager and all agents.
+Toggles the active-response capabilitiy on and off. Setting this option to ``yes`` on an agent will disable active-response for that agent only, while setting it in the manager's ``ossec.conf`` file will disable active-response on the manager and all agents.
 
 .. note::
 
     This option is available on server, local, and agent installations.
 
-+--------------------+--------------------------------------------------------------+
-| **Default value**  | **no**                                                       |
-+--------------------+--------------------------------------------------------------+
-| **Allowed values** | The options accepted are **yes** and **no**                  |
-+--------------------+--------------------------------------------------------------+
++--------------------+------------+
+| **Default value**  | no         |
++--------------------+------------+
+| **Allowed values** | yes,no     |
++--------------------+------------+
 
 
 command
 ^^^^^^^
 
-This is used to link the response to the command.
+Links the active-response to the command.
 
 +--------------------+-------------------------------------------+
 | **Default value**  | n/a                                       |
@@ -56,8 +56,7 @@ This is used to link the response to the command.
 location
 ^^^^^^^^
 
-This indicates on which system(s) the command should be executed.
-
+Indicates which system(s) the command should be executed on.
 
 +--------------------+----------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                              |
@@ -66,20 +65,20 @@ This indicates on which system(s) the command should be executed.
 +--------------------+---------------+------------------------------------------------------------------+
 |                    | server        | This runs the command on the Wazuh manager.                      |
 +                    +---------------+------------------------------------------------------------------+
-|                    | defined-agent | This runs the command on a specific agent identified by agent_id |
+|                    | defined-agent | This runs the command on a specific agent identified by agent_id.|
 +                    +---------------+------------------------------------------------------------------+
 |                    | all           | This runs the command on the Wazuh manager and on all agents.    |
 |                    |               | Use with caution.                                                |
 +--------------------+---------------+------------------------------------------------------------------+
 
-Example for ``defined-agent``:
+Example:
 
-If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a command on that agent to blacklists an offending IP on the edge firewall.
+If the application that interfaces with your edge firewall runs on one of your agents, you might have a firewall-block-edge command that runs a script on that agent to blacklist an offending IP on the edge firewall.
 
 agent_id
 ^^^^^^^^
 
-The ID of the agent to execute the active response command (used when defined-agent is set).
+Specifies the ID of the agent on which to execute the active response command (used when defined-agent is set).
 
 +--------------------+--------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                  |
@@ -90,7 +89,7 @@ The ID of the agent to execute the active response command (used when defined-ag
 level
 ^^^^^
 
-This defines a minimum severity level required for the command to be executed.
+Defines a minimum severity level required for the command to be executed.
 
 +--------------------+------------------------+
 | **Default value**  | n/a                    |
@@ -102,7 +101,7 @@ This defines a minimum severity level required for the command to be executed.
 rules_group
 ^^^^^^^^^^^
 
-This requires that a rule must belong to one or more rule groups for the command to be executed.
+Defines the rule group thata  rule must belong to one for the command to be executed.
 
 +--------------------+---------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                         |
@@ -111,12 +110,12 @@ This requires that a rule must belong to one or more rule groups for the command
 +--------------------+---------------------------------------------------------------------------------------------+
 
 .. note::
-	Observe that all groups must be finished by comma.
+	All groups must end with a comma.
 
 rules_id
 ^^^^^^^^
 
-This limits command execution to only when one or more listed rules fire.
+Limits the command execution to only when one or more listed rules fire.
 
 +--------------------+---------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                             |
@@ -128,7 +127,7 @@ This limits command execution to only when one or more listed rules fire.
 timeout
 ^^^^^^^
 
-This specifies how long in seconds until the reverse command is executed.  When ``repeated_offenders`` is used, ``timeout`` only applies to the first offense.
+Specifies how long in seconds before the reverse command is executed.  When ``repeated_offenders`` is used, ``timeout`` only applies to the first offense.
 
 +--------------------+-----------------------------+
 | **Default value**  | n/a                         |
@@ -140,7 +139,7 @@ This specifies how long in seconds until the reverse command is executed.  When 
 repeated_offenders
 ^^^^^^^^^^^^^^^^^^
 
-This is a comma-separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries. This must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**.
+Sets timeouts in minutes for repeat offenders. This is a comma-separated list of increasing timeouts that can contain a maximum of 5 entries. This must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**.
 
 +--------------------+-----------------------------+
 | **Default value**  | n/a                         |
@@ -149,9 +148,9 @@ This is a comma-separated list of increasing timeouts in minutes for repeat offe
 +--------------------+-----------------------------+
 
 ca_store
-^^^^^^^^^
+^^^^^^^^
 
-This indicates the path to root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.
+Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.
 
 +--------------------+-----------------------------+
 | **Default value**  | n/a                         |
@@ -159,8 +158,8 @@ This indicates the path to root CA certificate. The agent needs the certificate 
 | **Allowed values** | Path to root CA certificate |
 +--------------------+-----------------------------+
 
-Example of configuration
-------------------------
+Sample Configuration
+--------------------
 
 .. code-block:: xml
 

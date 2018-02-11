@@ -5,7 +5,7 @@ wazuh-clusterd
 
 .. versionadded:: 3.0.0
 
-The wazuh-clusterd program manages the Wazuh cluster communications among managers belonging to the cluster and synchronizes all files every *interval* (specified in the :doc:`Local configuration <../ossec-conf/cluster>`) time.
+The wazuh-clusterd program manages the Wazuh cluster communications between the managers belonging to the cluster and synchronizes all files according to the *interval* specified in the :doc:`Local configuration <../ossec-conf/cluster>`.
 
 
 wazuh-clusterd options

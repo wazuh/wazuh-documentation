@@ -8,7 +8,7 @@ Wazuh may be configured to send alerts to syslog as follows:
 Configuration
 -------------
 
-Syslog output is configured in ``ossec.conf``. All the available options are detailed in :ref:`Syslog output <reference_ossec_syslog_output>`
+Syslog output is configured in the ``ossec.conf`` file. All of the available options are detailed in :ref:`Syslog output <reference_ossec_syslog_output>`.
 
 ::
 
@@ -23,9 +23,9 @@ Syslog output is configured in ``ossec.conf``. All the available options are det
     </syslog_output>
   </ossec_config>
 
-The above configuration will send alerts to ``192.168.1.240`` and, if the alert level is higher than 9, will also send the alert to ``192.168.1.241``.
+The above configuration will send alerts to ``192.168.1.240`` and, if the alert level is higher than 9, also to ``192.168.1.241``.
 
-After the configuration of the ``ossec.conf`` file, the client-syslog must be enabled followed by a restart of Wazuh using the following command:
+After the configuration of the ``ossec.conf`` file, the client-syslog must be enabled, followed by a restart of Wazuh using the following command:
 
 .. code-block:: console
 

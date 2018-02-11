@@ -7,7 +7,7 @@ ossec-analysisd
 The ossec-analysisd program receives the log messages and compares them to the rules.  It then creates an alert when a log message matches an applicable rule.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-c <config>** | Configuration file ossec-analysisd should use.                                                  |
+| **-c <config>** | Run using <config> as the configuration file.                                                   |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-D <dir>**    | Chroot to <dir>                                                                                 |
 +-----------------+-------------------------------------------------------------------------------------------------+
@@ -21,7 +21,7 @@ The ossec-analysisd program receives the log messages and compares them to the r
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-t**          | Test configuration.                                                                             |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-u**          | Run as a user.                                                                                  |
+| **-u**          | Run as a specific user.                                                                         |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+

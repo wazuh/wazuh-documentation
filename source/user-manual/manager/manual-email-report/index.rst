@@ -1,11 +1,11 @@
 .. _manual_email_report:
 
 Configuring email alerts
-===============================
+========================
 
-Wazuh can be configured to send the alerts to an email. You can configure the system to send emails when certain rules are triggered or configure it to send a daily report.
+Wazuh can be configured to send email alerts to one or more email addresses when certain rules are triggered or for daily event reports.
 
-Mail example:
+Sample email:
 
 ::
 
@@ -29,8 +29,9 @@ Mail example:
      --END OF NOTIFICATION
 
 Generic email options
----------------------------------
-In order to configure Wazuh to send alerts through email, you need to configure the email settings inside the ``<global>`` section:
+---------------------
+
+In order to configure Wazuh to send email alerts, the email settings must be configured in the ``<global>`` section of the ``ossec.conf`` file:
 
 ::
 
@@ -44,9 +45,9 @@ In order to configure Wazuh to send alerts through email, you need to configure 
       ...
   </ossec_config>
 
-To see all the available options to configure it, go to :ref:`global section <reference_ossec_global>`
+To see all of the available email configuration options, go to the :ref:`global section <reference_ossec_global>`.
 
-After the global configuration, we need to configure the ``email_alert_level``. This option establishes the minimum level to send an alert. By default is set to 7.
+Once the above has been configured, the ``email_alert_level`` needs to be set to the minimum alert level that will trigger an email. By default, this level is set to 7.
 
 ::
 
@@ -57,9 +58,9 @@ After the global configuration, we need to configure the ``email_alert_level``. 
     ...
   </ossec_config>
 
-This example will set the minimum level to 10. More information: :ref:`alerts section <reference_ossec_global>`.
+This example will set the minimum level to 10. For more information, see the :ref:`alerts section <reference_ossec_global>`.
 
-When you have configured the ``alert_level``, Wazuh needs to be restarted for the change take effect
+After the ``alert_level`` has been configured, Wazuh needs to be restarted for the change to take effect.
 
 a) For Systemd:
 
@@ -75,23 +76,22 @@ b) For SysV Init:
 
 
 .. warning::
- Wazuh doesn't handle SMTP authentication. If you want to use an email with it, you need to :ref:`configure a server relay<smtp_authentication>`.
+ Wazuh doesn't handle SMTP authentication. If your email service uses this, you will need to :ref:`configure a server relay<smtp_authentication>`.
 
 
 Granular email options
-----------------------------------
+----------------------
 
-Wazuh also allows a very granular configuration options for your alerts through email. Here you will find some examples of the granular configuration. More info: :ref:`email_alerts section <reference_ossec_global>`
+Wazuh also allows granular configuration options for email alerts. Below are some sample granular configurations. For more information, see the :ref:`email_alerts section <reference_ossec_global>`.
 
 .. warning::
 
-  The minimum level you configured inside ``alerts`` section, will be also valid here.
-
-So, for example, if you configure your system to send an email when the rule 526 is triggered, if that rule has a level lower than the configured on the previous section the alert will not be sent.
+  The minimum level configured in the ``alerts`` section will also apply to and override these configurations.  For example, if you configure your system to send an email when the `rule 526` is triggered, but the rule has a level lower than the minimum level specified, the alert will not be sent.
 
 Email alert based on level
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The general configuration will be:
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+This is configured as follows:
+
 ::
 
  <email_alerts>
@@ -100,11 +100,14 @@ The general configuration will be:
    <do_not_delay />
  </email_alerts>
 
-This will send to ``you@example`` and email if the any rule with level greater or equal to 10 is triggered. Remember, if the level here is less than the email_alert_level configured on the previous section, this will not be sent.
+This will send an email to ``you@example.com`` when any rule with a level greater than or equal to 4 is triggered. 
+
+.. note:: Remember, if the level here is less than the ``email_alert_level`` configured in the previous section, this will not be sent.
 
 Email alert based on level and agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The general configuration will be:
+This is configured as follows:
+
 ::
 
  <email_alerts>
@@ -113,8 +116,9 @@ The general configuration will be:
    <do_not_delay />
  </email_alerts>
 
-This will send to ``you@example`` and email if the for the rules triggered on the ``server1``.
-Also, ``event_location`` can be configured to monitor a specific log, hostname or network (IP)
+This will send an email to ``you@example.com`` when the rules trigger on the ``server1``.
+
+The ``event_location`` field can be configured to monitor a specific log, hostname or network (IP).
 
 Email based on rules ID
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -126,12 +130,12 @@ Email based on rules ID
    <do_not_delay />
  </email_alerts>
 
-This will send an email if the rules 515 or 516 are triggered on any agent.
+This will send an email when the rules 515 or 516 are triggered on any agent.
 
 Email based on the group
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Each rule can have one or more groups configured. We can use this groups to filter the rules that we want to send through email:
+Email alerts can be configured to send an email based on one or more rule groups:
 ::
 
  <email_alerts>
@@ -139,12 +143,12 @@ Each rule can have one or more groups configured. We can use this groups to filt
    <group>pci_dss_10.6.1</group>
  </email_alerts>
 
-This will send an alert if any rule part of the ``pci_dss_10.6.1`` group is triggered on any machine.
+This will send an alert when any rule that is part of the ``pci_dss_10.6.1`` group is triggered on any Wazuh monitored device.
 
 Multiples options and multiples email
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This example will show you the real capacity of this capability:
+This example shows capability of email alerts can be.  Email alerts can be to be sent to multiple email addresses, each with it's own unique criteria:
 
 ::
 
@@ -169,15 +173,15 @@ This example will show you the real capacity of this capability:
 
 This configuration will send:
 
-- An email to alice@test.com if any alert on server1 or server2 is triggered
-- An email to is@test.com if the alerts came from ``/log/secure/``
-- An email to bob@test.com if the alerts came from any machine on the ``192.168.0.0/24`` network
-- An email to david@test.com if the alerts have a level equals or higher than 12.
+- An email to alice@test.com if any alert on server1 or server2 is triggered,
+- An email to is@test.com if the alerts came from ``/log/secure/``,
+- An email to bob@test.com if the alerts came from any machine on the ``192.168.0.0/24`` network, and
+- An email to david@test.com if the alerts have a level equal to or higher than 12.
 
 Force forwarding an alert by email
 ----------------------------------
 
-It's also possible to force the mail alert on the rule declaration. In order to do so, you need to use :ref:`option<rules_options>`
+It's also possible to force an email alert on rule declaration that is below the configured minimum level. In order to do so, you need to use one of the below :ref:`options<rules_options>`.
 
 The possible values for this option are:
 
@@ -185,7 +189,7 @@ The possible values for this option are:
 - **no_email_alert**: Never alert by email.
 - **no_log**: Do not log this alert.
 
-So for example this rule:
+For example:
 
 ::
 
@@ -196,7 +200,7 @@ So for example this rule:
      <description>Ossec server started.</description>
    </rule>
 
-This will send an email every time this rule is triggered. I doesn't matter the level minimum level configured on the ``<alerts>`` section in ``ossec.conf``
+This configuration will send an email every time rule 502 is triggered regardless of what the minimum level is set to.
 
 
 .. toctree::

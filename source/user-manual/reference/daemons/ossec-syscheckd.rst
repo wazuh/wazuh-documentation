@@ -7,7 +7,7 @@ ossec-syscheckd
 The ossec-syscheckd program checks configured files for changes to the checksums, permissions and ownership.  It is run using ossec-control.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-c <config>** | Run using <config>, as the configuration file.                                                  |
+| **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec/etc/ossec.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
