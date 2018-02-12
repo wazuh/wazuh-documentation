@@ -4,7 +4,7 @@
 ossec-authd
 ===========
 
-The ossec-authd program can automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.  ``ossec-authd`` creates an agent with an ip address of "any" instead of using its actual IP.
+The ossec-authd program can automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.  ``ossec-authd`` creates an agent with an IP address of "any" instead of using a specifig IP address.
 
 .. warning::
 
@@ -24,7 +24,7 @@ The ossec-authd program can automatically add an agent to a Wazuh manager and pr
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-i**           | Use client's source IP address instead of any.                                                        |
 +------------------+-------------------------------------------------------------------------------------------------------+
-| **-F <time>**    | Remove old agent with same name or IP if its keepalive has more than <time> seconds.                  |
+| **-F <time>**    | Remove old agent with same name or IP if its keepalive has more than the specified number of seconds. |
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-F no**        | Disable force insertion.                                                                              |
 +------------------+-------------------------------------------------------------------------------------------------------+
@@ -64,7 +64,7 @@ The ossec-authd program can automatically add an agent to a Wazuh manager and pr
 +                  +-------------+-----------------------------------------------------------------------------------------+
 |                  | **Default** | TLS v1.2 only (if supported by the server).                                             |
 +------------------+-------------+-----------------------------------------------------------------------------------------+
-| **-L**           | Force insertion even though agent limit reached.                                                      |
+| **-L**           | Force insertion even though agent limit has been reached.                                             |
 +------------------+-------------------------------------------------------------------------------------------------------+
 
 

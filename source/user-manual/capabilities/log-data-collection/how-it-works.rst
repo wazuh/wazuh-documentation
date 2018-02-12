@@ -1,7 +1,7 @@
 How it works
 ============
 
-The below figure illustrates the event flow:
+The below image illustrations how events flow through the Wazuh environment:
 
 .. thumbnail:: ../../../images/manual/log_analysis/log-analysis-flow.png
     :title: Log analysis flow
@@ -9,15 +9,15 @@ The below figure illustrates the event flow:
     :width: 100%
 
 Log collection
------------------
+--------------
 
-The log source can be:
+Log information can come from :
 
 Log files
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^
 The Log analysis engine can be configured to monitor specific files on the servers.
 
-Configuration example:
+Sample Configuration:
 
 Linux:
 ::
@@ -36,12 +36,12 @@ Windows:
     </localfile>
 
 
-Windows event log
-^^^^^^^^^^^^^^^^^^^^^^^
+Windows event logs
+^^^^^^^^^^^^^^^^^^
 
 Wazuh can monitor classic Windows event logs, as well as the newer Windows event channels:
 
-Configuration example:
+Sample configuration:
 
 Event log:
 ::
@@ -60,11 +60,11 @@ Event channel:
   </localfile>
 
 Remote syslog
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
-For other devices like firewalls, you can configure the log analysis component to receive log events through syslog.
+On other devices, like firewalls, for instance, the log analysis component can be configured to receive log events through syslog.
 
-Configuration example:
+Sample Configuration:
 ::
 
   <ossec_config>
@@ -74,7 +74,7 @@ Configuration example:
     </remote>
   <ossec_config>
 
-``<connection>syslog</connection>`` indicates the manager will accept incoming syslog messages from across the network, and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network from which syslog messages will be accepted.
+``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network from which syslog messages will be accepted.
 
 Log Example::
 
@@ -83,12 +83,12 @@ Log Example::
   [Sun Mar 06 08:52:16 2016] [error] [client 187.172.181.57] Invalid URI in request GET: index.php HTTP/1.0
 
 Analysis
------------
+--------
 
 Pre-decoding
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
-In this phase, only static information is extracted from well-known fields.
+In the pre-decoding phase of analysis, static information from well-known fields all that is extracted from the log. data
 
 ::
 
@@ -99,9 +99,12 @@ Extracted information:
   - *program_name*: 'sshd'
 
 Decoding
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^
 
-The Decode phase identifies/evaluates the type of a log message and then extracts known fields for that message type. Example of a log and its extracted info:
+In the decoding phase, the log message is evaluated to identify what type of log it is and known fields for that specific log type are then extracted. 
+
+Sample log and its extracted info:
+
 ::
 
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
@@ -112,9 +115,9 @@ Extracted information:
   - *srcip*: 192.168.1.133
 
 Rule matching
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
-The next step is to check if any of the rules match.
+In the next phase, the extracted log information is compared to the ruleset to look for matches:
 
 For the previous example, rule 5715 is matched::
 
@@ -126,12 +129,12 @@ For the previous example, rule 5715 is matched::
   </rule>
 
 .. note::
-  More information about :ref:`Wazuh Ruleset <ruleset>`
+  For more information,see the :ref:`Wazuh Ruleset <ruleset>`
 
 Alert
----------
+-----
 
-Once the rule is matched, the manager will create an alert::
+Once a rule is matched, the manager will create an alert as below::
 
   ** Alert 1487103546.21448: - syslog,sshd,authentication_success,pci_dss_10.2.5,
   2017 Feb 14 12:19:06 localhost->/var/log/secure
@@ -140,10 +143,8 @@ Once the rule is matched, the manager will create an alert::
   User: rromero
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
-It will be stored in ``/var/ossec/logs/alerts/alerts.json`` and/or ``/var/ossec/logs/alerts/alerts.log``.
+By default, alerts will be generated on events that are important or of security relevance. To store all events even if they do not match a rule, enable the ``<log_all>`` option.
 
-By default, it will generate alerts on events that are important or of security relevance. To store all events even if they do not match a rule, you need to enable the ``<log_all>`` option.
+Alerts will be stored at ``/var/ossec/logs/alerts/alerts.(json|log)`` and events at ``/var/ossec/logs/archives/archives.(json|log)``. Logs are rotated and an individual directory is created for each month and year.
 
-Alerts will be stored at ``/var/ossec/logs/alerts/alerts.(json|log)`` and events at ``/var/ossec/logs/archives/archives.(json|log)``. It uses log rotation and creates an individual directory for each year and month.
-
-Archived logs are not automatically deleted.  You choose when to manually or automatically (i.e., cron job) delete logs according to your own legal and regulatory requirements.
+.. note:: Archived logs are not automatically deleted by default.  You can choose when to manually or automatically (e.g., cron job) delete logs according to your own legal and regulatory requirements.

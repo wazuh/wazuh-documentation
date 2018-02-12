@@ -10,7 +10,7 @@ agentless
 		<agentless>
 		</agentless>
 
-Agentless monitoring allows you to run integrity checking on systems without an agent installed.
+Agentless monitoring allows you to run integrity checks on systems without an agent installed.
 
 Options
 -------
@@ -26,11 +26,11 @@ type
 +--------------------+----------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                |
 +--------------------+---------------------------+------------------------------------------------------------------------+
-| **Allowed values** | ssh_integrity_check_bsd   | Require a list of directories in <arguments>.                          |
+| **Allowed values** | ssh_integrity_check_bsd   | Requires a list of directories in <arguments>.                         |
 |                    |                           |                                                                        |
-+                    +---------------------------+ Wazuh will file integrity scan the files in those directories.         +
++                    +---------------------------+ Wazuh will integrity scan the files in the specified directories.      +
 |                    | ssh_integrity_check_linux |                                                                        |
-|                    |                           | System will alert if they have changed.                                |
+|                    |                           | The system will alert if these files have changed.                     |
 +                    +---------------------------+------------------------------------------------------------------------+
 |                    | ssh_generic_diff          | Supply an <arguments> value that consists of a set of commands to run. |
 |                    |                           |                                                                        |
@@ -38,13 +38,13 @@ type
 +                    +---------------------------+------------------------------------------------------------------------+
 |                    | ssh_pixconfig_diff        | Specifically for checking if the config of a Cisco PIX/router changes. |
 |                    |                           |                                                                        |
-|                    |                           | No <arguments> required                                                |
+|                    |                           | No <arguments> required.                                               |
 +--------------------+---------------------------+------------------------------------------------------------------------+
 
 frequency
 ^^^^^^^^^
 
-This controls the number of seconds between each check of the agentless device.
+Controls the number of seconds between each check of the agentless device.
 
 +--------------------+--------------------------------------------------------+
 | **Default value**  | n/a                                                    |
@@ -55,18 +55,18 @@ This controls the number of seconds between each check of the agentless device.
 host
 ^^^^
 
-This defines the username and the name of the agentless host.
+Defines the username and the name of the agentless host.
 
 +--------------------+--------------------------------------------------------+
 | **Default value**  | n/a                                                    |
 +--------------------+--------------------------------------------------------+
-| **Allowed values** | Any username and host (user@hostname)                  |
+| **Allowed values** | Any username and host (username@hostname)              |
 +--------------------+--------------------------------------------------------+
 
 state
 ^^^^^
 
-This determines whether the check type is periodic or periodic_diff.
+Determines whether the type of checkis periodic or periodic_diff.
 
 +--------------------+--------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                              |
@@ -81,7 +81,7 @@ This determines whether the check type is periodic or periodic_diff.
 arguments
 ^^^^^^^^^
 
-This defines the arguments passed to the agentless check
+Defines the arguments passed to the agentless check.
 
 +--------------------+------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                      |
@@ -89,8 +89,8 @@ This defines the arguments passed to the agentless check
 | **Allowed values** | This is a space-delimited list of files or directories to be monitored.                  |
 +--------------------+------------------------------------------------------------------------------------------+
 
-Example of configuration
-------------------------
+Sample configuration
+--------------------
 
 .. code-block:: xml
 

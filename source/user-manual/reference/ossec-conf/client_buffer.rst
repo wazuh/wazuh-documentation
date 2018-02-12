@@ -10,7 +10,7 @@ client_buffer
 		<client_buffer>
 		</client_buffer>
 
-Configure the agent bucket parameters in order to avoid events flooding.
+This section shows how to configure the agent bucket parameters in order to avoid events flooding.
 
 Options
 -------
@@ -22,39 +22,41 @@ Options
 - `events_per_second`_
 
 disabled
-^^^^^^^^^^^^^^
+^^^^^^^^
 
-This parameter allows to disable the Agent Buffer and send events to the manager without any congestion control.
+Toggles the agent buffer on and off. When set to ``yes``, the agent will send events to the manager without any congestion control.
 
-+--------------------+------------------------------------------------+
-| **Default value**  | **no**                                         |
-+--------------------+------------------------------------------------+
-| **Allowed values** | The options accepted are **yes** and **no**.   |
-+--------------------+------------------------------------------------+
++--------------------+---------------------+
+| **Default value**  | no                  |
++--------------------+---------------------+
+| **Allowed values** | yes, no             |
++--------------------+---------------------+
 
 .. warning::
-	Disabling this functionality in large environments, agents may collapse the manager and the network.
+	Disabling this functionality in large environments may overwhelm the manager and the network causing them to fail.
 
 .. _legacy_disable:
 
 disable
-^^^^^^^^^^^^^^
+^^^^^^^
 
 .. deprecated:: 3.1
 
-This parameter allows to disable the Agent Buffer and send events to the manager without any congestion control.
-Due to compatibility issues, it is better to **replace** this option by `disabled`_.
+Toggles the agent buffer on and off. When set to ``yes``, the agent will send events to the manager without any congestion control. Due to compatibility issues, it is recommended that this option be replaced by the `disabled`_ parameter.
 
-+--------------------+------------------------------------------------+
-| **Default value**  | **no**                                         |
-+--------------------+------------------------------------------------+
-| **Allowed values** | The options accepted are **yes** and **no**.   |
-+--------------------+------------------------------------------------+
++--------------------+---------------------+
+| **Default value**  | no                  |
++--------------------+---------------------+
+| **Allowed values** | yes, no             |
++--------------------+---------------------+
+
+.. warning::
+	Disabling this functionality in large environments may overwhelm the manager and the network causing them to fail.
 
 queue_size
-^^^^^^^^^^^^^
+^^^^^^^^^^
 
-The capacity of Agent Buffer in number of events.
+Sets the capacity of the agent buffer in number of events.
 
 +--------------------+----------------------------------+
 | **Default value**  | 5000                             |
@@ -65,11 +67,11 @@ The capacity of Agent Buffer in number of events.
 .. _legacy_length:
 
 length
-^^^^^^^
+^^^^^^
 
 .. deprecated:: 3.0
 
-The capacity of Agent Buffer in number of events.
+Sets the capacity of the agent buffer in number of events.
 
 +--------------------+----------------------------------+
 | **Default value**  | 5000                             |
@@ -79,12 +81,12 @@ The capacity of Agent Buffer in number of events.
 
 .. warning::
 
-    Even if this field is accepted, it is recommended to replace it with `queue_size`_.
+    Even if this field is accepted, it is recommended that it be replaced with the `queue_size`_ parameter.
 
 events_per_second
 ^^^^^^^^^^^^^^^^^
 
-Specifies the number of events sent to the manager per second.
+Specifies the number of events that can be sent to the manager per second.
 
 +--------------------+----------------------------------+
 | **Default value**  | 500                              |

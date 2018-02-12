@@ -2,12 +2,12 @@
 .. _ossec-execd:
 
 ossec-execd
-=============
+===========
 
-The ossec-execd program runs active responses by initiating the configured scripts. It also handles the socket needed to perform remote upgrades in the agents. 
+The ossec-execd program runs active responses by initiating the configured scripts. It also handles the socket needed to perform remote upgrades in the agents.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-c <config>** | Run using <config>, as the configuration file.                                                  |
+| **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec/etc/ossec.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
@@ -15,7 +15,7 @@ The ossec-execd program runs active responses by initiating the configured scrip
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-f**          | Run in the foreground.                                                                          |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-g <group>**  | Run as a group.                                                                                 |
+| **-g <group>**  | Run as a specific group.                                                                        |
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-h**          | Display the help message.                                                                       |
 +-----------------+-------------------------------------------------------------------------------------------------+

@@ -1,20 +1,20 @@
 .. _manual_integration:
 
 Integration with external APIs
-==================================
+==============================
 
-Integrator is a new daemon that allows the connection of Wazuh to external APIs and alerting tools such as Slack and PagerDuty.
+The **Integrator** is a new daemon that allows Wazuh to connect to external APIs and alerting tools such as Slack and PagerDuty.
 
 .. versionadded:: 3.0.0
 
-For Wazuh 3.0 it has been developed a new integration that allows to inspect malicious files using the VirusTotal database.
+A new integration has been developed in Wazuh 3.0 that allows for the inspection of malicious files using the VirusTotal database.
 
-The complete documentation about this new feature can be found at the :doc:`VirusTotal integration section<../capabilities/virustotal-scan/index>`.
+The complete documentation of this new feature can be found at the :doc:`VirusTotal integration section<../capabilities/virustotal-scan/index>`.
 
 Configuration
--------------------
+-------------
 
-Integrator is not enabled by default.  Integrator is enabled using the following command:
+The Integrator is not enabled by default, however, it can be enabled using the following command:
 
 .. code-block:: console
 
@@ -22,7 +22,7 @@ Integrator is not enabled by default.  Integrator is enabled using the following
     # /var/ossec/bin/ossec-control restart
 
 
-Integrations are configured in the file ``etc/ossec.conf``, which is located inside your Wazuh installation directory. Add the following inside *<ossec_config> </ossec_config>* to configure this integration:
+Integrations are configured in the ``etc/ossec.conf`` file which is located inside your Wazuh installation directory.  Add the following information inside *<ossec_config> </ossec_config>* to configure integration:
 
 .. code-block:: xml
 

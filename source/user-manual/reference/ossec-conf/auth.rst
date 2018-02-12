@@ -12,7 +12,7 @@ auth
         </auth>
 
 
-This section shows the options for the registering service.
+This section shows the options for the registration service.
 
 .. versionadded:: 2.1
 
@@ -70,7 +70,7 @@ Toggles the use of the client's source IP address or the use of "any" to add an 
 force_insert
 ^^^^^^^^^^^^
 
-Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP which would then remove the old agent with same name or IP.
+Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP address. This will remove the old agent with same name or IP address.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
@@ -81,7 +81,7 @@ Toggles whether or not to force the insertion of an agent if there is a duplicat
 force_time
 ^^^^^^^^^^
 
-When forcing to remove old agents with same name or IP, this options specifies that the deletion will be performed only if the agent's keepalive has more than the defined number of seconds.
+When forcing to remove old agents with the same name or IP address, this options specifies that the deletion will be performed only if the agent's keepalive has more than the defined number of seconds.
 
 +--------------------+---------------------+
 | **Default value**  | 0                   |
@@ -90,7 +90,7 @@ When forcing to remove old agents with same name or IP, this options specifies t
 |                    | - 0                 |
 +--------------------+---------------------+
 
-Value ``0`` means to force always.
+Value ``0`` means to always force the deletion.
 
 purge
 ^^^^^
@@ -103,7 +103,7 @@ Toggles the deletion of client keys on or off when agents are removed.
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
 
-When set to ``no`` removed agents will remain in the client keys file, marked as removed.  When set to ``yes``, client keys file will be purged.
+When set to ``no``, removed agents will remain in the client keys file marked as removed.  When set to ``yes``, the client keys file will be purged.
 
 use_password
 ^^^^^^^^^^^^
@@ -123,7 +123,7 @@ If this file does not exist, a **random password** will be generated.
 ssl_agent_ca
 ^^^^^^^^^^^^
 
-Specifies the full path to CA certificate used to verify clients.
+Specifies the full path to the CA certificate used to verify clients.
 
 +--------------------+---------------------+
 | **Allowed values** | A full path         |
@@ -132,7 +132,7 @@ Specifies the full path to CA certificate used to verify clients.
 ssl_verify_host
 ^^^^^^^^^^^^^^^
 
-When CA certificate is specified, this option toggles source host verification on and off. This means that the client source IP will be validated using the *Common Name* field.
+Toggles source host verification on and off when a CA certificate is specified. This means that the client source IP address will be validated using the *Common Name* field.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
@@ -143,7 +143,7 @@ When CA certificate is specified, this option toggles source host verification o
 ssl_manager_cert
 ^^^^^^^^^^^^^^^^
 
-Specifies the full path to server SSL certificate.
+Specifies the full path to the server SSL certificate.
 
 +--------------------+--------------------------------+
 | **Default value**  | /var/ossec/etc/sslmanager.cert |
@@ -154,7 +154,7 @@ Specifies the full path to server SSL certificate.
 ssl_manager_key
 ^^^^^^^^^^^^^^^
 
-Specifies the full path to server SSL key.
+Specifies the full path to the server's SSL key.
 
 +--------------------+--------------------------------+
 | **Default value**  | /var/ossec/etc/sslmanager.key  |
@@ -165,7 +165,7 @@ Specifies the full path to server SSL key.
 ssl_auto_negotiate
 ^^^^^^^^^^^^^^^^^^
 
-Toggles whether to Auto select SSL/TLS method or not.
+Toggles whether or not to auto select the SSL/TLS method.
 
 +--------------------+---------------------+
 | **Default value**  | no                  |
@@ -180,7 +180,7 @@ In older systems, where the **manager does not support TLS v1.2**, this option w
 ciphers
 ^^^^^^^
 
-Set the list of ciphers for the network communication using SSL.
+Sets the list of ciphers for network communication using SSL.
 
 +--------------------+----------------------------------------------------+
 | **Default value**  | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH |
@@ -193,9 +193,9 @@ The format of this parameter is described in `SSL ciphers <https://www.openssl.o
 limit_maxagents
 ^^^^^^^^^^^^^^^
 
-Toggles whether to operate based on the maximum number of agents. 
+Toggles whether or not to operate based on the maximum number of agents.
 
-When disabled, the maximum limit of agents that can be added is ignored.
+When set to ``no``, the maximum limit of agents that can be added is ignored.
 
 +--------------------+---------------------+
 | **Default value**  | yes                 |

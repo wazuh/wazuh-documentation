@@ -3,7 +3,7 @@
 SMTP server with authentication
 ===============================
 
-In case that your SMTP server has authentication (like Gmail), we need to configure a server relay because Wazuh does not support it by default. For this purpose we will use ``Postfix``. The following guide describes the minimal configuration to perform in Postfix to allow Wazuh sends emails to a SMTP with authentication:
+If your SMTP server uses authentication (like Gmail, for instance), a server relay will need to be configured as Wazuh does not support this. **Postfix** can be configured to provide this capability. The following guide describes the minimal configuration needed to use Postfix to send emails:
 
 #. Install the needed packages:
 
@@ -20,7 +20,7 @@ In case that your SMTP server has authentication (like Gmail), we need to config
       # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
 
 
-#. Set Postfix config file ``/etc/postfix/main.cf``. Add this lines to the end of the file:
+#. Configure Postfix in the ``/etc/postfix/main.cf`` file adding these lines to the end of the file:
 
     Ubuntu
     ::
@@ -42,7 +42,7 @@ In case that your SMTP server has authentication (like Gmail), we need to config
       smtp_tls_CAfile = /etc/ssl/certs/ca-bundle.crt
       smtp_use_tls = yes
 
-#. Configure email address and password:
+#. Configure the email address and password:
 
     .. code-block:: console
 
@@ -50,28 +50,28 @@ In case that your SMTP server has authentication (like Gmail), we need to config
       # postmap /etc/postfix/sasl_passwd
       # chmod 400 /etc/postfix/sasl_passwd
 
-#. Secure DB password
+#. Secure the DB password
 
     .. code-block:: console
 
       # chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
       # chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
 
-#. Reload Postfix
+#. Restart Postfix
 
     .. code-block:: console
 
       # systemctl reload postfix
 
-#. Test you configuration with:
+#. Test the configuration with:
 
     .. code-block:: console
 
       # echo "Test mail from postfix" | mail -s "Test Postfix" you@example.com
 
-    You should receive an email on ``you@example.com``
+    You should receive an email at ``you@example.com``
 
-#. Configure Wazuh in the ``/var/ossec/etc/ossec.conf``:
+#. Configure Wazuh in the ``/var/ossec/etc/ossec.conf`` as follows:
 
     ::
 

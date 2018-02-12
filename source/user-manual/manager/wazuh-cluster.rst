@@ -5,7 +5,7 @@ Deploying a Wazuh cluster
 
 .. versionadded:: 3.0.0
 
-The Wazuh cluster functionality has been developed to strengthen the communication between agents and managers. The cluster can synchronize events between its nodes to allow agents to report them to any manager that is a part of the cluster.
+The Wazuh cluster functionality has been developed to strengthen the communication between agents and managers. The cluster can synchronize events between its nodes to allow agents to report events to any manager that is a part of the cluster.
 
 - `Why do we need a Wazuh cluster?`_
 - `How it works`_
@@ -14,13 +14,13 @@ The Wazuh cluster functionality has been developed to strengthen the communicati
 Why do we need a Wazuh cluster?
 -------------------------------
 
-The Wazuh cluster provides horizontal scalability to the Wazuh environment, allowing agents to report to any manager belonging to the cluster. This enables Wazuh to process a greater number of events than a single manager environment, distributing the load between multiple managers simultaneously.
+The Wazuh cluster provides horizontal scalability to the Wazuh environment, allowing agents to report to any manager belonging to the cluster. This enables Wazuh to process a greater number of events than with a single manager environment as the cluster distributes the load between multiple managers simultaneously.
 
 Additionally, a cluster of Wazuh managers provides a level of fault tolerance so that if one manager goes off-line, Wazuh can continue operating so long as the master manager is still accessible. To accomplish this, agents that were reporting to a manager that goes off-line will automatically be redirected to another manager in the cluster without losing events. This functionality dramatically increases the availability and efficiency of the Wazuh environment.
 
-Please note, however, that the cluster functionality does not provide automated load balancing. We recommend that a load balancer be configured between agents and the cluster nodes. With a load balancer in place, the agents would be configured to use the IP of the load balancer as their manager IP.
+Please note, however, that the cluster functionality does not provide automated load balancing. We recommend that a load balancer be configured between agents and the cluster nodes. With a load balancer in place, the agents would be configured to use the IP address of the load balancer as their manager IP address.
 
-The Wazuh cluster is under continuous development and we hope to include many additional features very soon, including switching the role of master between all managers to provide even greater availability and fault tolerance.
+The Wazuh cluster is under further development and we hope to include many additional features very soon, including switching the role of master between all managers to provide even greater availability and fault tolerance.
 
 How it works
 ------------
@@ -58,9 +58,9 @@ Cluster daemons
 ^^^^^^^^^^^^^^^
 Wazuh clusters function through the use of the following two daemons:
 
-- **wazuh-clusterd** synchronizes the managers in the cluster and outputs a logfile to ``logs/cluster.log``.
+- **wazuh-clusterd** which synchronizes the managers in the cluster and outputs a logfile to ``logs/cluster.log``, and
 
-- **wazuh-clusterd-internal** monitors the files to synchronize and manages the cluster database. The logs of this daemon can be found in the ``logs/ossec.log`` file.
+- **wazuh-clusterd-internal** which monitors the files to synchronize and manages the cluster database. The logs of this daemon can be found in the ``logs/ossec.log`` file.
 
 Both of these daemons must be running in all the managers of the cluster. The **wazuh-clusterd** will automatically start the **wazuh-clusterd-internal** daemon.
 
@@ -112,7 +112,7 @@ Follow these steps to deploy a Wazuh cluster:
 
           # openssl rand -hex 16
 
-  - The IP addresses of all of the **nodes** of the cluster must be specified under ``<nodes>``, including the IP of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` to find out which IP from the list is theirs. If the ``hostname --all-ip-addresses`` command finds there is a duplicate IP address, an error will be displayed.
+  - The IP addresses of all of the **nodes** of the cluster must be specified under ``<nodes>``, including the IP address of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` to find out which IP address from the list is theirs. If the ``hostname --all-ip-addresses`` command finds there is a duplicate IP address, an error will be displayed.
 
   The following is an example of this configuration:
 

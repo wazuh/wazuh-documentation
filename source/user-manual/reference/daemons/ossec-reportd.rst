@@ -4,10 +4,10 @@
 ossec-reportd
 ==============
 
-``ossec-reportd`` is a program to create reports from Wazuh alerts.  It accepts alerts on ``stdin``, and outputs a report on ``stderr``.
+The ossec-reportd program creates reports from Wazuh alerts.  It accepts alerts on ``stdin`` and outputs a report on ``stderr``.
 
 .. note::
-  Since ``ossec-reportd`` outputs to ``stderr``, some utilities like ``less`` will not work if you do not redirect the output.  To do this, end the ossec-reportd with ``2>&1`` to redirect ``stderr`` to ``stdout``. Following this redirect, ``more`` or ``less`` can be used with ease.
+  Since the ossec-reportd daemon outputs to ``stderr``, some utilities like ``less`` will not work if the output is not redirected.  To do this, end the ossec-reportd with ``2>&1`` to redirect ``stderr`` to ``stdout``. Following this redirect, ``more`` or ``less`` can be used with ease.
 
 +-------------------------+-------------------------------------------------------------------------------------------------+
 | **-D <dir>**            | Chroot to <dir> .                                                                               |

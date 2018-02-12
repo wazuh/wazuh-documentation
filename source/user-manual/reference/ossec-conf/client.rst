@@ -10,7 +10,7 @@ client
 		<client>
 		</client>
 
-Configure the connection parameters related to connecting to the manager.
+This section explains how to configure the connection to the manager.
 
 Subsections
 -----------
@@ -18,11 +18,11 @@ Subsections
 - `server`_
 
 server
-^^^^^^^^
+^^^^^^
 
 .. versionadded:: 3.0.0
 
-Configure the connection parameters for each server connected to an agent.
+Configures the connection parameters for each server an agent connects to.
 
 Server subsection options
 -------------------------
@@ -34,7 +34,7 @@ Server subsection options
 address
 ^^^^^^^^
 
-Specify the IP address or the hostname of the Wazuh manager.
+Specifies the IP address or the hostname of the Wazuh manager.
 
 +--------------------+-------------------------------------------------------------+
 | **Default value**  | n/a                                                         |
@@ -45,9 +45,9 @@ Specify the IP address or the hostname of the Wazuh manager.
 .. _server_port:
 
 port
-^^^^^^
+^^^^
 
-Specify the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
+Specifies the port to send events to on the manager.  This must match the associated listening port configured on the Wazuh manager.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1514                                        |
@@ -58,9 +58,9 @@ Specify the port on the manager to send events to.  This must match the associat
 .. _server_protocol:
 
 protocol
-^^^^^^^^^^^
+^^^^^^^^
 
-Specifies the protocol to use when connecting to manager.
+Specifies the protocol to use when connecting to the manager.
 
 +--------------------+----------+
 | **Default value**  | udp      |
@@ -85,11 +85,11 @@ Options
 .. _legacy_server-ip:
 
 server-ip
-^^^^^^^^^^^^^
+^^^^^^^^^
 
 .. deprecated:: 3.0
 
-Specify the IP address of the Wazuh manager.
+Specifies the IP address of the Wazuh manager.
 
 +--------------------+----------------------------------+
 | **Default value**  | n/a                              |
@@ -105,7 +105,7 @@ server-hostname
 
 .. deprecated:: 3.0
 
-Specify the hostname of the Wazuh manager.
+Specifies the hostname of the Wazuh manager.
 
 +--------------------+-------------------------------------+
 | **Default value**  | n/a                                 |
@@ -123,7 +123,7 @@ port
 
 .. deprecated:: 3.0
 
-Specify the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
+Specifies the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
 
 +--------------------+---------------------------------------------+
 | **Default value**  | 1514                                        |
@@ -134,7 +134,7 @@ Specify the port on the manager to send events to.  This must match the associat
 .. _legacy_protocol:
 
 protocol
-^^^^^^^^^^^
+^^^^^^^^
 
 .. deprecated:: 3.0
 
@@ -149,7 +149,7 @@ Specifies the protocol to use when connecting to manager.
 config-profile
 ^^^^^^^^^^^^^^
 
-Specify the agent.conf profile(s) to be used by the agent.
+Specifies the ``agent.conf`` profile(s) to be used by the agent.
 
 +--------------------+----------------------------------------------------------------------+
 | **Default value**  | n/a                                                                  |
@@ -159,9 +159,9 @@ Specify the agent.conf profile(s) to be used by the agent.
 
 
 notify_time
-^^^^^^^^^^^^
+^^^^^^^^^^^
 
-Specify the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated agent.conf file to agents, but also could put undue load on the manager if there are a large number of agents.
+Specifies the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated ``agent.conf`` file to the agents, but may also put an undo load on the manager if there are a large number of agents.
 
 +--------------------+-----------------------------+
 | **Default value**  | 60                          |
@@ -173,7 +173,9 @@ Specify the time in seconds between agent checkins to the manager.  More frequen
 time-reconnect
 ^^^^^^^^^^^^^^
 
-This is the time in seconds until a reconnection attempt. This should be set to a higher number than notify_time.  For example, a notify_time time of 60 combined with a time-reconnect of 300 would mean that agents will cause the agent to attempt to check in once per minute, but if a checkin attempt fails to get a response from the manager, the agent will wait five minutes before trying again.  Once it again succeeds, checkins will resume their normal one-minute interval.
+Specifies the time in seconds before a reconnection is attempted. This should be set to a higher number than the ``notify_time`` parameter.  
+
+For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 300 would mean that agents will attempt to check in once per minute, but if a checkin attempt fails to get a response from the manager, the agent will wait five minutes before trying again.  Checkins will resume their normal one-minute interval following a successful connection attempt.
 
 +--------------------+-----------------------------+
 | **Default value**  | 300                         |
@@ -182,12 +184,12 @@ This is the time in seconds until a reconnection attempt. This should be set to 
 +--------------------+-----------------------------+
 
 .. warning::
-	Notice that the notify_time value uses an underscore while the time-reconnect value uses a dash.  This is an unfortunate legacy naming inconsistency, and is easy to mix up.
+	Notice that the ``notify_time`` value uses an underscore while the ``time-reconnect`` value uses a dash.  This is an unfortunate legacy naming inconsistency that is easy to mix up.
 
 local_ip
-^^^^^^^^^^^^^^
+^^^^^^^^
 
-When the agent has multiple network interfaces, this parameter specifies which IP address will comunicate with the manager from.
+Specifies which IP address will be used to communicate with the manager when the agent has multiple network interfaces.
 
 +--------------------+----------------------------------+
 | **Default value**  | n/a                              |
@@ -198,31 +200,31 @@ When the agent has multiple network interfaces, this parameter specifies which I
 disable-active-response
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-**Deprecated:** This is an obsolete method to disable active response.
+**Deprecated:** 
 
 .. warning::
 
-        The recommended way is using the :doc:`active-response <active-response>` section.
+        This is an obsolete method to disable active response. The recommended way is by configuring as shown in the :doc:`active-response <active-response>` section.
 
-+--------------------+------------------------------------------------+
-| **Default value**  | **no**                                         |
-+--------------------+------------------------------------------------+
-| **Allowed values** | The options accepted are **yes** and **no**    |
-+--------------------+------------------------------------------------+
++--------------------+---------------------+
+| **Default value**  | no                  |
++--------------------+---------------------+
+| **Allowed values** | yes, no             |
++--------------------+---------------------+
 
 auto_restart
 ^^^^^^^^^^^^
 
-This parameter enable or disable the agent restart when it receives a new valid configuration from the manager.
+Toggles on and off the automatic restart of agents when a new valid configuration is received from the manager.
 
-+--------------------+------------------------------------------------+
-| **Default value**  | **yes**                                        |
-+--------------------+------------------------------------------------+
-| **Allowed values** | The options accepted are **yes** and **no**    |
-+--------------------+------------------------------------------------+
++--------------------+---------------------+
+| **Default value**  | no                  |
++--------------------+---------------------+
+| **Allowed values** | yes, no             |
++--------------------+---------------------+
 
-Example of configuration
-------------------------
+Sample configuration
+--------------------
 
 .. code-block:: xml
 

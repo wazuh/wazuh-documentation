@@ -4,10 +4,10 @@
 ossec-monitord
 ==============
 
-The ossec-monitord program monitors agent connectivity. In addition, it rotates and compresses internal logs daily, or when they reach a certain configurable size.
+The ossec-monitord program monitors agent connectivity. In addition, it rotates and compresses internal logs daily or when they reach a certain configurable size.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-c <config>** | Run using <config>, as the configuration file.                                                  |
+| **-c <config>** | Run using <config> as the configuration file.                                                   |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | /var/ossec/etc/ossec.conf                           |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
@@ -27,11 +27,11 @@ The ossec-monitord program monitors agent connectivity. In addition, it rotates 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-t**          | Test configuration.                                                                             |
 +-----------------+-------------------------------------------------------------------------------------------------+
-| **-u <user>**   | Run as a user.                                                                                  |
+| **-u <user>**   | Run as a specific user.                                                                         |
 +                 +-------------------------------------------+-----------------------------------------------------+
 |                 | Default value                             | ossecm                                              |
-+-----------------+-------------------------------------------------------------------------------------------------+
-| **-w <sec>**    | Time in seconds to wait before rotating logs and alerts.                                        |
 +-----------------+-------------------------------------------+-----------------------------------------------------+
+| **-w <sec>**    | Time in seconds to wait before rotating logs and alerts.                                        |
++-----------------+-------------------------------------------------------------------------------------------------+
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+

@@ -2,7 +2,7 @@
 
 Generating automatic reports
 -----------------------------
-Daily reports are summaries of the alerts for the day. You can configure your own report. Configuration of report is done in the ``ossec.conf`` file using the  ``report`` option. More information: :ref:`Report <reference_ossec_reports>`, make sure you have plenty configure your SMTP server in order to receive emails, see :ref:`Configuring email alerts <manual_email_report>` and :ref:`SMTP server with authentication <smtp_authentication>` for reference.
+Daily reports are summaries of the alerts that were triggered each day. You can configure your own customized report by using the ``report`` option in the ``ossec.conf`` file. More information on this can be found at :ref:`Report <reference_ossec_reports>`. For information on how to configure email alerts , see the :ref:`Configuring email alerts <manual_email_report>` and :ref:`SMTP server with authentication <smtp_authentication>` sections for reference.
 
 ::
 
@@ -14,7 +14,7 @@ Daily reports are summaries of the alerts for the day. You can configure your ow
    </reports>
  </ossec_config>
 
-The above configuration will send a daily report of all :ref:`syscheck <manual_file_integrity>` alerts.
+The above configuration will send a daily report of all :ref:`syscheck <manual_file_integrity>` alerts to ``example@test.com``.
 
 Rules may also be filtered by level, source, username, rule id, etc.
 

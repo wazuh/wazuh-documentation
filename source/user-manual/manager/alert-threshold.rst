@@ -3,12 +3,12 @@
 Defining an alert level threshold
 ==================================
 
-Every posible event on the Wazuh Agent is set with certain level, by default is 1, all events from this level will trigger and alert into Wazuh Manager.
+Each event on the Wazuh Agent is set to a certain severity level with 1 as the default. All events from this level up will trigger an alert in the Wazuh Manager.
 
 Configuration
 -------------
 
-All configuration of Remote Service is done via ``ossec.conf`` using ``<alerts>`` XML tag, all the available options are detailed in :ref:`Alerts reference <reference_ossec_alerts>`
+The alert level threshold is configured in the ``ossec.conf`` file using the ``<alerts>`` XML tag. The available options for this are detailed in :ref:`Alerts reference <reference_ossec_alerts>`
 
 ::
 
@@ -18,9 +18,9 @@ All configuration of Remote Service is done via ``ossec.conf`` using ``<alerts>`
     </alerts>
   </ossec_config>
 
-This will set to level 6 the minimum severity level for alerts to be stored to alerts.log and/or alerts.json.
+This will set the minimum severity level that will trigger alerts that will be stored in the ``alerts.log`` and/or the ``alerts.json`` file(s).
 
-When you change any value on ``ossec.conf`` file, you need to restart the service to enabling previously changed values.
+When any value is changed in the ``ossec.conf`` file, the service must be restarted before the changes will take effect. 
 
 a. For Systemd:
 
