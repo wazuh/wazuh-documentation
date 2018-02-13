@@ -6,7 +6,7 @@ Vuls integration
 **Deprecated since Wazuh v3.2.0.**
 
 .. note::
-    Since Wazuh v3.2.0, the :doc:`Vulnerability detector wodle<vulnerability-detector>` performs the software vulnerability assessments natively.
+    Since Wazuh v3.2.0, the :doc:`Vulnerability detector wodle<vulnerability-detection>` performs the software vulnerability assessments natively.
 
 The integration of the Vuls project with Wazuh allows for the scheduling of periodic vulnerability scans in both the manager and the agents. This new addition allows system administrators the ability to automate the process of analyzing their systems for security vulnerabilities using the updated Wazuh Ruleset to interpret the VuLs scan results.
 
