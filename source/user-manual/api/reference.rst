@@ -4,7 +4,7 @@
 .. Do not modify this file manually. It is generated automatically.
 
 Reference
-=========
+======================
 This API reference is organized by resources:
 
 * `Agents`_
@@ -15,13 +15,14 @@ This API reference is organized by resources:
 * `Rootcheck`_
 * `Rules`_
 * `Syscheck`_
+* `Syscollector`_
 
 Below is the `Request List`_ that shows all of the available requests.
 
 .. _request_list:
 
 Request List
-------------
+---------------------------------
 
 `Agents`_
 	* DELETE /agents  (`Delete a list of agents`_)
@@ -110,6 +111,14 @@ Request List
 	* PUT /syscheck  (`Run syscheck scan in all agents`_)
 	* PUT /syscheck/:agent_id  (`Run syscheck scan in an agent`_)
 
+`Syscollector`_
+	* GET /syscollector/:agent_id/hardware  (`Get hardware info`_)
+	* GET /syscollector/:agent_id/os  (`Get os info`_)
+	* GET /syscollector/:agent_id/packages  (`Get packages info`_)
+	* GET /syscollector/hardware  (`Get hardware info of all agents`_)
+	* GET /syscollector/os  (`Get os info of all agents`_)
+	* GET /syscollector/packages  (`Get packages info of all agents`_)
+
 Agents
 ----------------------------------------
 Add
@@ -140,7 +149,7 @@ Add a new agent.
 |                    |               | - IP/NET                                                                                                                                                                                               |
 |                    |               | - ANY                                                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``force``          | Number        | Remove old agent with same IP if disconnected since <force> seconds.                                                                                                                                   |
+| ``force``          | Number        | Remove the old agent with the same IP if disconnected since <force> seconds.                                                                                                                           |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -155,7 +164,7 @@ Add a new agent.
 	   "error": 0,
 	   "data": {
 	      "id": "006",
-	      "key": "MDA2IE5ld0hvc3QgMTAuMC4wLjkgNGI3NGZiZTkzNjc5OWZmZDFjN2NiMmYyMGYzYmYyMTcyMGY3YmQ2NWVlM2NjOWRiYWNlNGRmNGM1MTdkNTY1Ng=="
+	      "key": "MDA2IE5ld0hvc3QgMTAuMC4wLjkgMTVhZTNiZDU4Mjg2MzRjN2E4MTBiZmRjYzY1Y2E2MmEyMGY3YmQ2NWVlM2NjOWRiYWNlNGRmNGM1MTdkNTY1Ng=="
 	   }
 	}
 
@@ -190,7 +199,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": {
 	      "id": "007",
-	      "key": "MDA3IG15TmV3QWdlbnQgYW55IDg1YzllNGFkNDYxYTI5NWI0ZjM4NjY2NWQxNTE0YjU2YTEzOWY2OTNkZWUzMGU4OTRiZjQ1MmY0YjhlOTBkYzc="
+	      "key": "MDA3IG15TmV3QWdlbnQgYW55IDcwMTQ2MjNiNmEzMjYyMjVjNGRiNzQ2MTllMTM4MzVkYTEzOWY2OTNkZWUzMGU4OTRiZjQ1MmY0YjhlOTBkYzc="
 	   }
 	}
 
@@ -224,7 +233,7 @@ Insert an agent with an existing id and key.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``key``            | String        | Agent key. Minimum length: 64 characters. Allowed values: ^[a-zA-Z0-9]+$                                                                                                                               |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``force``          | Number        | Remove the old agent with the same IP if disconnected since <force> seconds.                                                                                                                           |
+| ``force``          | Number        | Remove the old agent the with same IP if disconnected since <force> seconds.                                                                                                                           |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -595,7 +604,7 @@ Returns the files belonging to the group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 17,
+	      "totalItems": 19,
 	      "items": [
 	         {
 	            "hash": "ab73af41699f13fdd81903b5f23d8d00",
@@ -608,6 +617,14 @@ Returns the files belonging to the group.
 	         {
 	            "hash": "9beed128b4305943eead1a66a86d27d5",
 	            "filename": "cis_debian_linux_rcl.txt"
+	         },
+	         {
+	            "hash": "ee520e627150c8751493bc32540b859a",
+	            "filename": "cis_mysql5-6_community_rcl.txt"
+	         },
+	         {
+	            "hash": "672c92a1f57463e33ff14011b43727de",
+	            "filename": "cis_mysql5-6_enterprise_rcl.txt"
 	         },
 	         {
 	            "hash": "e03345360941dbff248f63765971f87e",
@@ -634,7 +651,7 @@ Returns the files belonging to the group.
 	            "filename": "cis_sles12_linux_rcl.txt"
 	         },
 	         {
-	            "hash": "fcd103e698e31b7683fc035fa34c7776",
+	            "hash": "613f16b8c8d8978b7e07bbd1fa6c29ca",
 	            "filename": "merged.mg"
 	         },
 	         {
@@ -662,7 +679,7 @@ Returns the files belonging to the group.
 	            "filename": "win_audit_rcl.txt"
 	         },
 	         {
-	            "hash": "6fd9fa5dc1367e89cc4b30fe4cd0030e",
+	            "hash": "f9c3330533586eb380f294dcbd9918d8",
 	            "filename": "win_malware_rcl.txt"
 	         }
 	      ]
@@ -710,19 +727,19 @@ Returns the list of existing agent groups.
 	         {
 	            "count": 0,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "fcd103e698e31b7683fc035fa34c7776",
+	            "merged_sum": "613f16b8c8d8978b7e07bbd1fa6c29ca",
 	            "name": "default"
 	         },
 	         {
 	            "count": 2,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "90e6ed87db2d1cb00fd6d75d84953e4d",
+	            "merged_sum": "2e57fa6141fc6ff5656e2a751536fd7c",
 	            "name": "dmz"
 	         },
 	         {
 	            "count": 0,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "961ebdfd2ae81e77dd20dae66cd59acf",
+	            "merged_sum": "613f16b8c8d8978b7e07bbd1fa6c29ca",
 	            "name": "pciserver"
 	         }
 	      ]
@@ -786,7 +803,7 @@ Sets an agent to the specified group.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent's unique ID.                                                                                                                                                                                     |
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -837,6 +854,7 @@ Unsets the group of the agent. The agent will automatically revert to the 'defau
 	}
 
 
+
 Info
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -877,7 +895,7 @@ Returns a summary of the OS.
 	   "data": {
 	      "totalItems": 1,
 	      "items": [
-	         "centos"
+	         "ubuntu"
 	      ]
 	   }
 	}
@@ -950,6 +968,8 @@ Returns a list with the available agents.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``manager``        | String        | Filters by manager hostname to which agents are connected.                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``version``        | String        | Filters by agents version.                                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -967,35 +987,35 @@ Returns a list with the available agents.
 	         {
 	            "status": "Never connected",
 	            "ip": "any",
-	            "dateAdd": "2017-12-22 19:23:39",
+	            "dateAdd": "2018-02-13 01:02:38",
 	            "id": "007",
 	            "name": "myNewAgent"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.10.10",
-	            "dateAdd": "2017-12-22 19:23:39",
+	            "dateAdd": "2018-02-13 01:02:39",
 	            "id": "123",
 	            "name": "NewHost_2"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.9",
-	            "dateAdd": "2017-12-22 19:23:39",
+	            "dateAdd": "2018-02-13 01:02:38",
 	            "id": "006",
 	            "name": "NewHost"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.14",
-	            "dateAdd": "2017-12-22 19:21:40",
+	            "dateAdd": "2018-02-13 01:00:41",
 	            "id": "004",
 	            "name": "dmz002"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.12",
-	            "dateAdd": "2017-12-22 19:21:40",
+	            "dateAdd": "2018-02-13 01:00:20",
 	            "id": "002",
 	            "name": "dmz001"
 	         }
@@ -1034,20 +1054,21 @@ Returns various information from an agent.
 	   "error": 0,
 	   "data": {
 	      "status": "Active",
-	      "name": "PC",
+	      "name": "ubuntu",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2017-12-22 19:07:16",
-	      "version": "Wazuh v3.1.0",
-	      "manager_host": "PC",
+	      "dateAdd": "2018-02-13 00:51:41",
+	      "version": "Wazuh v3.2.0",
+	      "manager_host": "ubuntu",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
-	         "major": "15",
-	         "name": "CentOS Linux",
-	         "platform": "centos",
-	         "uname": "Linux manager 3.10.0-514.el7.x86_64 #1 SMP Tue Nov 22 16:42:41 UTC 2016 x86_64",
-	         "version": "15.5",
+	         "major": "16",
+	         "name": "Ubuntu",
+	         "uname": "Linux |ubuntu |4.13.0-32-generic |#35~16.04.1-Ubuntu SMP Thu Jan 25 10:13:43 UTC 2018 |x86_64",
+	         "platform": "ubuntu",
+	         "version": "16.04.3 LTS",
+	         "codename": "Xenial Xerus",
 	         "arch": "x86_64",
-	         "minor": "5"
+	         "minor": "04"
 	      },
 	      "id": "000"
 	   }
@@ -1075,20 +1096,26 @@ Returns various information from an agent called :agent_name.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/myAgent?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/NewHost?pretty"
 
 **Example Response:**
 ::
 
 	{
-	   "error": 1000,
-	   "message": "Wazuh-Python Internal Error: 'NoneType' object has no attribute '__getitem__'"
+	   "error": 0,
+	   "data": {
+	      "status": "Never connected",
+	      "ip": "10.0.0.9",
+	      "dateAdd": "2018-02-13 01:02:38",
+	      "id": "006",
+	      "name": "NewHost"
+	   }
 	}
 
 
 Get list of purgeable agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns a list of agents that can be purged
+Returns a list of agents that can be purged.
 
 **Request**:
 
@@ -1111,12 +1138,27 @@ Returns a list of agents that can be purged
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/purgeable/10800?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/purgeable/1d5h?pretty"
 
 **Example Response:**
 ::
 
-	ToDo - Hardcoded output
+	{
+	    "data": {
+	        "items": [
+	            {
+	                "id": "001",
+	                "name": "test1"
+	            },
+	            {
+	                "id": "002",
+	                "name": "test2"
+	            }
+	        ],
+	        "timeframe": 104400
+	    },
+	    "error": 0
+	}
 
 
 Key
@@ -1150,8 +1192,9 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgMjcyZjdkOTM0NGYxZTcxODZhNWNiYzg5YTZmMzY5YzU5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
+	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgNmEzMTI4NzMwY2YzODNmZjVjYTAwYzc4OGI3NGUwOWY5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
 	}
+
 
 
 Purge
@@ -1159,7 +1202,7 @@ Purge
 
 Purge old agents from manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Deletes all agents that did not connect in the last ``timeframe`` seconds.
+Deletes all agents that did not connect in the last timeframe seconds.
 
 **Request**:
 
@@ -1180,12 +1223,28 @@ Deletes all agents that did not connect in the last ``timeframe`` seconds.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"timeframe":10800}' "https://127.0.0.1:55000/agents/purge?pretty"
+	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"timeframe":"1d5h","verbose":true}' "https://127.0.0.1:55000/agents/purge?pretty"
 
 **Example Response:**
 ::
 
-	ToDo - Hardcoded output
+	{
+	    "data": {
+	        "totalItems": 2,
+	        "items": [
+	            {
+	                "id": "001",
+	                "name": "test1"
+	            },
+	            {
+	                "id": "002",
+	                "name": "test2"
+	            }
+	        ],
+	        "timeframe": 104400
+	    },
+	    "error": 0
+	}
 
 
 Restart
@@ -1476,17 +1535,13 @@ Clears cache of the specified group.
 	   "error": 0,
 	   "data": {
 	      "all": [
-	         "/agents/summary?pretty",
-	         "/agents?pretty&offset=0&limit=5&sort=-ip,name",
 	         "/agents/000?pretty",
-	         "/agents/name/myAgent?pretty"
+	         "/agents/name/NewHost?pretty"
 	      ],
 	      "groups": {
 	         "agents": [
-	            "/agents/summary?pretty",
-	            "/agents?pretty&offset=0&limit=5&sort=-ip,name",
 	            "/agents/000?pretty",
-	            "/agents/name/myAgent?pretty"
+	            "/agents/name/NewHost?pretty"
 	         ]
 	      }
 	   }
@@ -1602,12 +1657,20 @@ Returns the Node information
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node?pretty"
 
 **Example Response:**
 ::
 
-	{"error":0,"data":{"node":"nodemaster","cluster":"wazuh","type":"master"}}
+	{
+	   "error": 0,
+	   "data": {
+	      "node": "ubuntu_node",
+	      "cluster": "wazuh",
+	      "type": "master"
+	   }
+	}
+
 
 
 Nodes
@@ -1626,48 +1689,49 @@ Returns the state of each agent and the manager it's reporting to in the cluster
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/agents"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/agents?pretty"
 
 **Example Response:**
 ::
 
 	{
-		"error":0,
-		"data":{
-				"None":[
-						{
-								"status":"Never connected",
-								"ip":"10.0.0.12",
-								"id":"002",
-								"name":"dmz001"
-						},
-						{
-								"status":"Never connected",
-								"ip":"10.0.0.14",
-								"id":"004",
-								"name":"dmz002"
-						},
-						{
-								"status":"Never connected",
-								"ip":"10.0.0.9",
-								"id":"006",
-								"name":"NewHost"
-						},
-						{
-								"status":"Never connected",
-								"ip":"any",
-								"id":"007",
-								"name":"myNewAgent"
-						},
-						{
-								"status":"Never connected",
-								"ip":"10.0.10.10",
-								"id":"123",
-								"name":"NewHost_2"
-						}
-				]
-		}
+	   "error": 0,
+	   "data": {
+	      "None": [
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.12",
+	            "id": "002",
+	            "name": "dmz001"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.14",
+	            "id": "004",
+	            "name": "dmz002"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.9",
+	            "id": "006",
+	            "name": "NewHost"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "any",
+	            "id": "007",
+	            "name": "myNewAgent"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.10.10",
+	            "id": "123",
+	            "name": "NewHost_2"
+	         }
+	      ]
+	   }
 	}
+
 
 Get info about files in cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1682,128 +1746,26 @@ Returns the state of each file in the cluster
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/files"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/files?pretty"
 
 **Example Response:**
 ::
 
 	{
-	    "error":0,
-	    "data":{
-	        "172.18.0.108":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        },
-	        "172.18.0.106":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        },
-	        "172.18.0.107":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        },
-	        "172.18.0.105":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        }
-	    }
+	   "error": 0,
+	   "data": {
+	      "192.168.1.135": {
+	         "synchronized": [
+	            "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
+	         ]
+	      }
+	   }
 	}
+
 
 Get nodes info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the Nodes information
+Returns the Nodes info
 
 **Request**:
 
@@ -1814,49 +1776,33 @@ Returns the Nodes information
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes?pretty"
 
 **Example Response:**
 ::
 
 	{
-	    "error":0,
-	    "data":{
-	        "totalItems":5,
-	        "items":[
-	            {
-	                "url":"localhost",
-	                "node":"nodemaster",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.105",
-	                "node":"node01",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.106",
-	                "node":"node03",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.107",
-	                "node":"node02",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.108",
-	                "node":"node04",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            }
-	        ]
-	    }
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2,
+	      "items": [
+	         {
+	            "url": "localhost",
+	            "node": "node01",
+	            "status": "connected",
+	            "cluster": "wazuh"
+	         },
+	         {
+	            "url": "192.168.1.135",
+	            "node": "node02",
+	            "status": "connected",
+	            "cluster": "wazuh"
+	         }
+	      ]
+	   }
 	}
+
+
 
 Status
 ++++++++++++++++++++++++++++++++++++++++
@@ -1874,12 +1820,19 @@ Returns whether the cluster is enabled or disabled
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status?pretty"
 
 **Example Response:**
 ::
 
-	{"error":0,"data":{"running":"yes","enabled":"yes"}}
+	{
+	   "error": 0,
+	   "data": {
+	      "running": "yes",
+	      "enabled": "yes"
+	   }
+	}
+
 
 
 config
@@ -1898,32 +1851,31 @@ Returns the cluster configuration
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config?pretty"
 
 **Example Response:**
 ::
 
 	{
-	    "error":0,
-	    "data":{
-	        "disabled":"no",
-	        "hidden":"no",
-	        "name":"wazuh",
-	        "interval":"2m",
-	        "node_name":"nodemaster",
-	        "bind_addr":"0.0.0.0",
-	        "node_type":"master",
-	        "key":"a7de21bdd629661b2669d5bc5ec6866d",
-	        "nodes":[
-	            "172.18.0.1",
-	            "172.18.0.105",
-	            "172.18.0.106",
-	            "172.18.0.107",
-	            "172.18.0.108"
-	        ],
-	        "port":"1516"
-	    }
+	   "error": 0,
+	   "data": {
+	      "disabled": "no",
+	      "hidden": "no",
+	      "name": "wazuh",
+	      "interval": "2m",
+	      "node_name": "ubuntu_node",
+	      "bind_addr": "0.0.0.0",
+	      "node_type": "master",
+	      "key": "dcb3640dc9bb2b136fe1a942c3cad892",
+	      "nodes": [
+	         "192.168.1.36",
+	         "192.168.1.135"
+	      ],
+	      "port": "1516"
+	   }
 	}
+
+
 
 
 Decoders
@@ -1978,7 +1930,7 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 523,
+	      "totalItems": 527,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -2057,37 +2009,27 @@ Returns all decoders files included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 89,
+	      "totalItems": 90,
 	      "items": [
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0075-clamav_decoders.xml"
+	            "file": "0090-dragon-nids_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0250-redis_decoders.xml"
+	            "file": "0440-proxmox-ve_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0415-jenkins_decoders.xml"
+	            "file": "0125-hp_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0355-vm-pop3_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0310-ssh_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0200-ossec_decoders.xml"
+	            "file": "0430-cylance_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
@@ -2097,17 +2039,27 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0140-kernel_decoders.xml"
+	            "file": "0190-openvpn_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0350-unix_decoders.xml"
+	            "file": "0395-sqlserver_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0115-grandstream_decoders.xml"
+	            "file": "0065-cisco-ios_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0275-sendmail_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0425-qualysguard_decoders.xml"
 	         }
 	      ]
 	   }
@@ -2298,7 +2250,7 @@ Returns ossec.conf in JSON format.
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "192.168.0.1"
+	         "127.0.1.1"
 	      ],
 	      "email_from": "ossecm@example.wazuh.com",
 	      "logall_json": "no"
@@ -2331,22 +2283,22 @@ Returns basic information about manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "installation_date": "vie dic 22 19:07:15 CET 2017",
-	      "version": "v3.1.0",
+	      "compilation_date": "Tue Feb 13 00:51:40 PST 2018",
+	      "version": "v3.2.0",
 	      "openssl_support": "yes",
 	      "max_agents": "8000",
-	      "ruleset_version": "1005",
+	      "ruleset_version": "3206",
 	      "path": "/var/ossec",
-	      "tz_name": "CET",
-	      "type": "server",
-	      "tz_offset": "+0100"
+	      "tz_name": "PST",
+	      "type": "manager",
+	      "tz_offset": "-0800"
 	   }
 	}
 
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the status of the manager processes
+Returns the status of the manager processes.
 
 **Request**:
 
@@ -2442,7 +2394,7 @@ Returns the three last months of ossec.log.
 
 Get summary of ossec.log
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns a summary of the last three months of the ``ossec.log`` file.
+Returns a summary of the last three months of the <code>ossec.log</code> file.
 
 **Request**:
 
@@ -2462,74 +2414,74 @@ Returns a summary of the last three months of the ``ossec.log`` file.
 	   "error": 0,
 	   "data": {
 	      "wazuh-modulesd": {
-	         "info": 20,
-	         "all": 20,
-	         "error": 0
-	      },
-	      "ossec-testrule": {
-	         "info": 460,
-	         "all": 460,
+	         "info": 4,
+	         "all": 4,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:oscap": {
-	         "info": 5,
-	         "all": 5,
+	         "info": 4,
+	         "all": 4,
 	         "error": 0
 	      },
-	      "wazuh-clusterd-internal:inotify": {
-	         "info": 16,
-	         "all": 16,
+	      "wazuh-db": {
+	         "info": 7,
+	         "all": 7,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:ciscat": {
-	         "info": 5,
-	         "all": 5,
+	         "info": 4,
+	         "all": 4,
 	         "error": 0
 	      },
 	      "ossec-rootcheck": {
-	         "info": 5,
-	         "all": 5,
+	         "info": 6,
+	         "all": 6,
 	         "error": 0
 	      },
 	      "ossec-monitord": {
-	         "info": 9,
-	         "all": 9,
+	         "info": 7,
+	         "all": 7,
 	         "error": 0
 	      },
 	      "ossec-logcollector": {
-	         "info": 34,
-	         "all": 34,
-	         "error": 0
+	         "info": 43,
+	         "all": 47,
+	         "error": 4
 	      },
 	      "ossec-execd": {
-	         "info": 13,
-	         "all": 13,
+	         "info": 10,
+	         "all": 10,
 	         "error": 0
 	      },
 	      "ossec-remoted": {
-	         "info": 58,
-	         "all": 63,
-	         "error": 5
+	         "info": 19,
+	         "all": 23,
+	         "error": 4
 	      },
 	      "ossec-syscheckd": {
-	         "info": 117,
-	         "all": 117,
+	         "info": 95,
+	         "all": 95,
 	         "error": 0
 	      },
 	      "wazuh-clusterd-internal": {
-	         "info": 3,
-	         "all": 3,
+	         "info": 2,
+	         "all": 2,
+	         "error": 0
+	      },
+	      "wazuh-clusterd-internal:inotify": {
+	         "info": 26,
+	         "all": 26,
 	         "error": 0
 	      },
 	      "ossec-analysisd": {
-	         "info": 1029,
-	         "all": 1029,
+	         "info": 835,
+	         "all": 835,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:database": {
-	         "info": 5,
-	         "all": 11,
-	         "error": 6
+	         "info": 4,
+	         "all": 7,
+	         "error": 3
 	      }
 	   }
 	}
@@ -2711,6 +2663,7 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	}
 
 
+
 Rootcheck
 ----------------------------------------
 Clear
@@ -2803,8 +2756,8 @@ Returns the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-12-22 19:05:11",
-	      "end": "2017-12-22 16:49:40"
+	      "start": "2018-02-13 01:00:12",
+	      "end": "2018-02-13 01:00:41"
 	   }
 	}
 
@@ -2844,12 +2797,14 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 3,
+	      "totalItems": 5,
 	      "items": [
-					 "1.4 Debian Linux",
-					 "4.13 Debian Linux",
-				   "4.16 Debian Linux"
-				]
+	         "1.4 Debian Linux",
+	         "2.3 Debian Linux",
+	         "4.13 Debian Linux",
+	         "7.2 Debian Linux",
+	         "7.3 Debian Linux"
+	      ]
 	   }
 	}
 
@@ -2895,19 +2850,21 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1194,
+	      "totalItems": 14,
 	      "items": [
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-12-22 16:48:05",
-	            "readDay": "2017-12-22 19:05:35",
-	            "event": "Files hidden inside directory '/var/lib/docker/overlay2/0289a9e9ba1dbc311ce9bc92414dcb17e291cbfbcc6b5a49d3819130dc25cb62/merged'. Link count does not match number of files (21,1)."
+	            "oldDay": "2018-02-13 01:00:14",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2018-02-13 01:00:14",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /opt is not on its own partition {CIS: 1.4 Debian Linux}. File: /opt. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
 	         },
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-12-22 16:48:05",
-	            "readDay": "2017-12-22 19:05:35",
-	            "event": "Files hidden inside directory '/var/lib/docker/overlay2/0289a9e9ba1dbc311ce9bc92414dcb17e291cbfbcc6b5a49d3819130dc25cb62/merged/dev'. Link count does not match number of files (4,1)."
+	            "oldDay": "2018-02-13 01:00:14",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2018-02-13 01:00:14",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /tmp is not on its own partition {CIS: 1.4 Debian Linux}. File: /etc/fstab. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
 	         }
 	      ]
 	   }
@@ -2949,11 +2906,12 @@ Returns the PCI requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2,
-				"items": [
-				   "2.2.2",
-				   "2.2.4"
-				]
+	      "totalItems": 3,
+	      "items": [
+	         "2.2.2",
+	         "2.2.4",
+	         "4.1"
+	      ]
 	   }
 	}
 
@@ -2964,7 +2922,7 @@ Run
 
 Run rootcheck scan in all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously)
+Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously).
 
 **Request**:
 
@@ -2987,7 +2945,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 
 Run rootcheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on a the specified agent (Wazuh launches both processes simultaneously)
+Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes simultaneously)
 
 **Request**:
 
@@ -3015,6 +2973,8 @@ Runs syscheck and rootcheck on a the specified agent (Wazuh launches both proces
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
+
+
 
 
 Rules
@@ -3075,7 +3035,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1565,
+	      "totalItems": 1579,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -3163,7 +3123,7 @@ Returns the files of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 100,
+	      "totalItems": 102,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -3222,7 +3182,7 @@ Returns the files of all rules.
 
 Get rule groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the groups of all rules
+Returns the groups of all rules.
 
 **Request**:
 
@@ -3255,7 +3215,7 @@ Returns the groups of all rules
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 281,
+	      "totalItems": 283,
 	      "items": [
 	         "access_control",
 	         "access_denied",
@@ -3274,7 +3234,7 @@ Returns the groups of all rules
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the PCI requirements of all rules
+Returns the PCI requirements of all rules.
 
 **Request**:
 
@@ -3386,6 +3346,8 @@ Returns the rules with the specified id.
 	}
 
 
+
+
 Syscheck
 ----------------------------------------
 Clear
@@ -3478,8 +3440,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-12-22 19:23:19",
-	      "end": "2017-12-22 19:05:11"
+	      "start": "2018-02-13 01:00:08",
+	      "end": "2018-02-13 01:00:12"
 	   }
 	}
 
@@ -3596,7 +3558,7 @@ Run
 
 Run syscheck scan in all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously)
+Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously).
 
 **Request**:
 
@@ -3619,7 +3581,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 
 Run syscheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultaneously)
+Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultaneously).
 
 **Request**:
 
@@ -3646,4 +3608,383 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 	{
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
+	}
+
+
+
+
+Syscollector
+----------------------------------------
+System inventory for agents
+++++++++++++++++++++++++++++++++++++++++
+
+Get hardware info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's hardware info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/hardware
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/hardware?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "ram": {
+	            "total": 1883804,
+	            "free": 1114784
+	        },
+	        "scan": {
+	            "id": 826635219,
+	            "time": "2018/02/12 23:21:10"
+	        },
+	        "cpu": {
+	            "cores": 1,
+	            "mhz": 1795.917,
+	            "name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz"
+	        },
+	        "board_serial": "BSS-24TR232FGF25"
+	    },
+	    "error": 0
+	}
+
+Get hardware info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's hardware info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/hardware
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/hardware?pretty&sort=-ram_free"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "totalItems": 3,
+	        "items": [
+	            {
+	                "ram_free": 5351420,
+	                "scan_id": 565830616,
+	                "agent_id": "002",
+	                "ram_total": 6291000,
+	                "board_serial": "BSS-41SGRW31214",
+	                "scan_time": "2018/02/12 16:09:45",
+	                "cpu_mhz": 1796,
+	                "cpu_name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz",
+	                "cpu_cores": 4
+	            },
+	            {
+	                "ram_free": 2374568,
+	                "scan_id": 263523550,
+	                "agent_id": "001",
+	                "ram_total": 2988700,
+	                "board_serial": "BSS-2524522AAAF4",
+	                "scan_time": "2018/02/12 16:47:29",
+	                "cpu_mhz": 1795.917,
+	                "cpu_name": " Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz",
+	                "cpu_cores": 2
+	            },
+	            {
+	                "ram_free": 950384,
+	                "scan_id": 22856332,
+	                "agent_id": "000",
+	                "ram_total": 1883804,
+	                "board_serial": "BSS-675RG5GYTTTW3",
+	                "scan_time": "2018/02/13 00:24:30",
+	                "cpu_mhz": 1795.917,
+	                "cpu_name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz",
+	                "cpu_cores": 4
+	            }
+	        ]
+	    },
+	    "error": 0
+	}
+
+Get os info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's OS info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/os
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/os?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "sysname": "centos",
+	        "scan": {
+	            "id": 1363438688,
+	            "time": "2018/02/12 23:21:10"
+	        },
+	        "hostname": "node01",
+	        "version": "3.10.0-514.el7.x86_64",
+	        "architecture": "x86_64",
+	        "release": "Linux",
+	        "os": {
+	            "version": "7 (Core)",
+	            "name": "CentOS Linux"
+	        }
+	    },
+	    "error": 0
+	}
+
+Get os info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's os info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/os
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/os?pretty&sort=-os_name"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "totalItems": 3,
+	        "items": [
+	            {
+	                "scan_id": 1857569867,
+	                "os_name": "Microsoft Windows 7 Home Premium",
+	                "scan_time": "2018/02/12 16:09:44",
+	                "hostname": "WAZUH-PC",
+	                "os_version": "6.1.7601",
+	                "architecture": "i686",
+	                "agent_id": "002"
+	            },
+	            {
+	                "sysname": "centos",
+	                "scan_id": 686817457,
+	                "os_name": "CentOS Linux",
+	                "version": "3.10.0-514.el7.x86_64",
+	                "os_version": "7 (Core)",
+	                "scan_time": "2018/02/13 00:24:30",
+	                "release": "Linux",
+	                "hostname": "node01",
+	                "agent_id": "000",
+	                "architecture": "x86_64"
+	            },
+	            {
+	                "sysname": "centos",
+	                "scan_id": 1004984843,
+	                "os_name": "CentOS Linux",
+	                "version": "3.10.0-514.el7.x86_64",
+	                "os_version": "7 (Core)",
+	                "scan_time": "2018/02/12 16:47:29",
+	                "release": "Linux",
+	                "hostname": "manager",
+	                "agent_id": "001",
+	                "architecture": "x86_64"
+	            }
+	        ]
+	    },
+	    "error": 0
+	}
+
+Get packages info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's packages info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/packages
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/packages?pretty&limit=2&offset=10&sort=-name"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "totalItems": 372,
+	        "items": [
+	            {
+	                "scan_id": 1516906568,
+	                "version": "1.1.0-1.el7",
+	                "vendor": "CentOS",
+	                "description": "ALSA tools for uploading firmware to some soundcards",
+	                "name": "alsa-tools-firmware",
+	                "format": "rpm",
+	                "scan_time": "2018/02/12 23:21:10",
+	                "architecture": "x86_64"
+	            },
+	            {
+	                "scan_id": 1516906568,
+	                "version": "2.6.5-3.el7",
+	                "vendor": "CentOS",
+	                "description": "User space tools for 2.6 kernel auditing",
+	                "name": "audit",
+	                "format": "rpm",
+	                "scan_time": "2018/02/12 23:21:10",
+	                "architecture": "x86_64"
+	            }
+	        ]
+	    },
+	    "error": 0
+	}
+
+Get packages info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's packages info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/packages
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/packages?pretty&sort=-name&limit=2&offset=4"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "totalItems": 2,
+	        "items": [
+	            {
+	                "scan_id": 373751880,
+	                "version": "1:1.4.0-12.el7",
+	                "vendor": "CentOS",
+	                "description": "Wifi plugin for NetworkManager",
+	                "name": "NetworkManager-wifi",
+	                "format": "rpm",
+	                "scan_time": "2018/02/13 00:24:30",
+	                "architecture": "x86_64",
+	                "agent_id": "000"
+	            },
+	            {
+	                "scan_id": 373751880,
+	                "version": "1:1.4.0-12.el7",
+	                "vendor": "CentOS",
+	                "description": "NetworkManager curses-based UI",
+	                "name": "NetworkManager-tui",
+	                "format": "rpm",
+	                "scan_time": "2018/02/13 00:24:30",
+	                "architecture": "x86_64",
+	                "agent_id": "000"
+	            }
+	        ]
+	    },
+	    "error": 0
 	}
