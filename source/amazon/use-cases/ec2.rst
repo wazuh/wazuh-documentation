@@ -3,14 +3,14 @@
 EC2 use cases
 =============
 
-Amazon EC2 (Elastic Compute Cloud) provides scalable computing capacity in the cloud.  When using a service like this, it is highly desirable to monitor for attacks or other unauthorized actions being performed against your cloud assets. With CloudTrail and Wazuh's EC2 event analysis capabilities, this is very possible.
+Amazon EC2 (Elastic Compute Cloud) provides scalable computing capacity in the cloud.  When using this service, it is highly recommended to monitor it for intrusion attempts or other unauthorized actions performed against your cloud infrastructure.
 
-Following are some use cases for Wazuh rules built in for EC2.
+Below are some use cases for Wazuh rules built for EC2.
 
 Run a new instance in EC2
 -------------------------
 
-When a user runs a new instance in EC2, an AWS event is generated.  As previously illustrated, the log message flows to the Wazuh agent which passes it on to Wazuh manager. The latter analyzes the log event and finds that it matches rule ``80301``, which results in an alert being generated, as can be seen in Kibana.
+When a user runs a new instance in EC2, an AWS event is generated.  As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. It is expected that these type of messages match rule ``80301``, resulting in an alert being generated, as can be seen in Kibana.
 
 +----------------------------------------------------------------------+
 |**Definition of rule 80301**                                          |
@@ -31,7 +31,7 @@ When a user runs a new instance in EC2, an AWS event is generated.  As previousl
 |    :width: 100%                                                      |
 +----------------------------------------------------------------------+
 
-When a user tries to run an instance **without relevant permissions**, then the log message will match ``rule 80303`` and an alert will be generated as seen below:
+When a user tries to run an instance **without relevant permissions**, then the log message will match rule ``80303`` and an alert will be generated as seen below:
 
 +----------------------------------------------------------------------+
 |**Definition of rule 80303**                                          |
@@ -55,7 +55,7 @@ When a user tries to run an instance **without relevant permissions**, then the 
 Start instances in EC2
 -------------------------
 
-When an instance in EC2 is started, the log message will match ``rule 80305`` and an alert will be generated as shown below:
+When an instance in EC2 is started, the log message will match rule ``80305`` and an alert will be generated as shown below:
 
 +----------------------------------------------------------------------+
 |**Definition of rule 80305**                                          |
@@ -76,7 +76,7 @@ When an instance in EC2 is started, the log message will match ``rule 80305`` an
 |    :width: 100%                                                      |
 +----------------------------------------------------------------------+
 
-If a user tries to start instances **without relevant permissions**, ``rule 80306`` will apply and an alert will be generated as shown below:
+If a user tries to start instances **without relevant permissions**, rule ``80306`` will match and an alert will be generated as shown below:
 
 +------------------------------------------------------------------------+
 |**Definition of rule 80306**                                            |
@@ -100,7 +100,7 @@ If a user tries to start instances **without relevant permissions**, ``rule 8030
 Stop instances in EC2
 -------------------------
 
-When an instance in EC2 is stopped, ``rule 80308`` will apply and an alert will be generated as shown below:
+When an instance in EC2 is stopped, rule ``80308`` will match and an alert will be generated as shown below:
 
 +------------------------------------------------------------------------+
 |**Definition of rule 80308**                                            |
@@ -121,7 +121,7 @@ When an instance in EC2 is stopped, ``rule 80308`` will apply and an alert will 
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
 
-If a user tries to stop instances **without relevant permissions**, ``rule 80306`` will apply and an alert will be generated as shown below:
+If a user tries to stop instances **without relevant permissions**, rule ``80306`` will match and an alert will be generated as shown below:
 
 +------------------------------------------------------------------------+
 |**Definition of rule 80309**                                            |
@@ -147,7 +147,7 @@ If a user tries to stop instances **without relevant permissions**, ``rule 80306
 Create Security Groups in EC2
 -----------------------------
 
-When a new security group is created, ``rule 80404`` will fire and an alert will be shown as follows:
+When a new security group is created, rule ``80404`` will fire and an alert will be shown as follows:
 
 +------------------------------------------------------------------------+
 |**Definition of rule 80404**                                            |
@@ -171,7 +171,7 @@ When a new security group is created, ``rule 80404`` will fire and an alert will
 Allocate a new Elastic IP address
 ---------------------------------
 
-If a new Elastic IP is allocated, then ``rule 80411`` will apply:
+If a new Elastic IP is allocated, then rule ``80411`` will match, triggering the following alert:
 
 +------------------------------------------------------------------------+
 |**Definition of rule 80411**                                            |
@@ -195,7 +195,7 @@ If a new Elastic IP is allocated, then ``rule 80411`` will apply:
 Associate a new Elastic IP address
 ----------------------------------
 
-If an Elastic IP address is associated, then ``rule 80446`` will apply, generating the corresponding alert:
+If an Elastic IP address is associated, then rule ``80446`` will apply, generating the corresponding alert:
 
 +------------------------------------------------------------------------+
 |**Definition of rule 80446**                                            |
@@ -216,7 +216,7 @@ If an Elastic IP address is associated, then ``rule 80446`` will apply, generati
 |    :width: 100%                                                        |
 +------------------------------------------------------------------------+
 
-The Kibana Dashboards will show:
+And here are the Kibana dashboards for EC2 events:
 
 +----------------------------------------------------------+------------------------------------------------------------+
 | Pie Chart                                                | Stacked Groups                                             |

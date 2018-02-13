@@ -3,11 +3,11 @@
 Installation
 ============
 
-Prior to enabling the Wazuh rules for Amazon Web Services, follow the steps below to enable the AWS API to generate log messages and store them as JSON data files in an Amazon S3 bucket. A detailed description of each of the steps can be found below.
+Prior to enabling the Wazuh rules for Amazon Web Services, follow the steps below to configure AWS to generate log messages, and store them as JSON data files in an Amazon S3 bucket. A detailed description of each of the steps can be found below.
 
+.. note::
 
-The integration can be configured in Wazuh Manager or Wazuh Agent, centralized configuration is as well supported.
-
+        The integration with AWS Cloudtrail can be done at the Wazuh manager (which also behaves as an agent) or directly at a Wazuh agent. This choice merely depends on how you decide to access your AWS infrastructure in your environment.
 
 Requirements
 -------------
@@ -17,39 +17,33 @@ Requirements
 - Pip
 - Boto3
 
+Subscribe to CloudTrail
+-----------------------
 
-AWS: Subscribe to CloudTrail
-----------------------------
-
-1. From your AWS console, choose “CloudTrail” from the Deployment & Management section.
-
+1. From your AWS console, choose “CloudTrail” from the Deployment & Management section:
 
 .. thumbnail:: ../images/aws/aws-cloudtrail-1.png
     :align: center
     :width: 100%
 
-2. Create a new trail
+2. Create a new trail:
 
 .. thumbnail:: ../images/aws/aws-cloudtrail-2.png
     :align: center
     :width: 100%
 
-3. Provide a name for the new S3 bucket that will hold the CloudTrail logs. (Remember the name you provide here, you’ll need to reference it during plugin set up.)
+3. Provide a name for the new S3 bucket that will be used to store the CloudTrail logs (reemember the name you provide here, you’ll need to reference it during plugin setup):
 
 .. thumbnail:: ../images/aws/aws-cloudtrail-3.png
     :align: center
     :width: 100%
 
+Create an IAM User
+------------------
 
+Wazuh will need a user with permissions to pull the CloudTrail log data from your S3 bucket. The easiest way to accomplish this is by creating a new IAM user for your account. We will only allow it to read data from the S3 bucket.
 
-
-AWS: Create IAM User
---------------------
-
-Wazuh will need permission to pull the CloudTrail log data from your S3 bucket. The easiest way to accomplish this is by creating a new IAM user on your account. The new user will have only permission to read from the S3 bucket.
-The integration as well support an IAM role configured in the instance.
-
-1. Create new user
+1. Create new user:
 
 Navigate to Services > IAM > clusters
 
@@ -57,23 +51,23 @@ Navigate to Services > IAM > clusters
     :align: center
     :width: 100%
 
-Click on Next Permissions to continue
+Click on "Next: Permissions" to continue.
 
-2. Create policy
+2. Create policy:
 
-Create a new policy, later on, we will attach this policy to the user we are creating.
+We will attach this policy later to the user we are creating.
 
 .. thumbnail:: ../images/aws/aws-create-policy.png
     :align: center
     :width: 100%
 
-Ensure that the policy looks like this
+Check that your new policy looks like this:
 
 .. thumbnail:: ../images/aws/aws-summary-policy.png
     :align: center
     :width: 100%
 
-RAW:
+Raw output for the example policy:
 
 .. code-block:: json
 
@@ -96,26 +90,29 @@ RAW:
        ]
    }
 
-3. Attach policy
+3. Attach policy:
 
 .. thumbnail:: ../images/aws/aws-attach-policy.png
     :align: center
     :width: 100%
 
-4. Confirm user creation and get credentials
+4. Confirm user creation and get credentials:
 
 .. thumbnail:: ../images/aws/aws-summary-user.png
     :align: center
     :width: 100%
 
-Save the credentials, you will use it later to configure the module.
+Save the credentials, you will use them later to configure the module.
 
-Wazuh host: Installing dependencies
------------------------------------
+Installing dependencies
+-----------------------
+
+Python Boto3 module is required on the system running the Wazuh module to pull AWS events. This will usually be one of your agents (or your manager).
 
 Pip
 ^^^
-AWS SDK for Python is required in this integration, in order to complete the installation pip package manager must be installed.
+
+Pip can be used as Python package manager to install the required module. In order to use it, we will start installing this tool.
 
 a) CentOS/RHEL/Fedora:
 
@@ -141,22 +138,22 @@ c) From sources:
 Boto3
 ^^^^^^
 
-Boto3 is the official package supported by Amazon to manage AWS resources. It will be used to handle logs from the S3 Bucket, including the authentication.
+Boto3 is the official package supported by Amazon to manage AWS resources. It will be used to download the log messages from the S3 Bucket.
 
 .. code-block:: console
 
     # pip install boto3
 
-Wazuh host: Plugin configuration
---------------------------------
+Plugin configuration
+--------------------
 
-1. Open Wazuh configuration file.
+1. Open Wazuh configuration file:
 
 .. code-block:: console
 
     # vi /var/ossec/etc/ossec.conf
 
-2. Add the following block of configuration to enable the integration, enter the AWS IAM User credentials you created before.
+2. Add the following block of configuration to enable the integration, enter the AWS IAM User credentials you created before:
 
 .. code-block:: xml
 
@@ -172,35 +169,39 @@ Wazuh host: Plugin configuration
 
 *Check the user manual reference to read more details about each setting:* :doc:`AWS CloudTrail settings <../user-manual/reference/ossec-conf/wodle-cloudtrail>`
 
-Credentials could be loaded from different locations, you could either specify the credentials as they are in the previous block of configuration or load them from other `Boto3 supported locations. <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_
+.. note::
 
-3. Restart Manager or Agent to apply changes.
+        Credentials can be loaded from different locations, you can either specify the credentials as they are in the previous block of configuration or load them from other `Boto3 supported locations. <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_
 
+3. Restart your Wazuh system to apply the changes:
 
-Wazuh host: Validate the integration
--------------------------------------
+.. code-block:: console
 
-A successful boot up and fetch will output the logs below in the manager/agent log file ``logs/ossec.log``
+    # /var/ossec/bin/ossec-control restart
 
-1. Module starting
+Test the integration
+--------------------
+
+After configuring the module successfully you can expect to see the following log messages in your agent log file: ``/var/ossec/logs/ossec.log``
+
+1. Module starting:
 
 .. code-block:: console
 
     2018/01/12 18:47:09 wazuh-modulesd:aws-cloudtrail: INFO: Module AWS-CloudTrail started
 
 
-2. Scheduled scan
+2. Scheduled scan:
 
 .. code-block:: console
 
     2018/01/12 18:49:10 wazuh-modulesd:aws-cloudtrail: INFO: Fetching logs started
     2018/01/12 18:49:11 wazuh-modulesd:aws-cloudtrail: INFO: Fetching logs finished.
 
-
 Troubleshooting
 ----------------
 
-- Wrong credentials
+1. Wrong credentials:
 
 AWS IAM credentials were not set properly or they don't have enough privileges.
 
@@ -210,7 +211,7 @@ AWS IAM credentials were not set properly or they don't have enough privileges.
     2018/01/12 19:02:22 wazuh-modulesd:aws-cloudtrail: WARNING: Invalid credentials to access S3 Bucket
 
 
-- Missing Boto3 dependency
+2. Missing Boto3 dependency:
 
 Boto3 package is not installed in the system. Please, Boto3 installation section.
 
@@ -220,10 +221,9 @@ Boto3 package is not installed in the system. Please, Boto3 installation section
     2018/01/12 19:03:17 wazuh-modulesd:aws-cloudtrail: WARNING: boto3 module is required.
 
 
-- Time interval overtaken
+3. Time interval is shorter than the time taken to pull log data:
 
-In case the fetching and forwarding process extends for longer than interval time, a warning will be displayed. There is no impact in the current process and the module will keep running.
-
+In this case a simple warning will be displayed. There is no impact in the event data fetching process and the module will keep running.
 
 .. code-block:: console
 
