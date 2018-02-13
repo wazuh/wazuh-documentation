@@ -11,10 +11,6 @@ This section provides instructions to configure the integration. It also explain
 
 The diagram below shows how a log message about an AWS event flows from AWS to a Wazuh agent. Once the agent reads the message, it sends it to the Wazuh manager which analyses it with decoders and rules. When a rule matches, an alert is triggered if the rule severity is high enough.
 
-.. thumbnail:: ../images/aws/aws-diagram.png
-    :align: center
-    :width: 100%
-
 .. topic:: Contents
 
     .. toctree::

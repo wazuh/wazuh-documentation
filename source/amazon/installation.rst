@@ -85,7 +85,8 @@ RAW:
                "Effect": "Allow",
                "Action": [
                    "s3:GetObject",
-                   "s3:ListBucket"
+                   "s3:ListBucket",
+                   "s3:DeleteObject"
                ],
                "Resource": [
                    "arn:aws:s3:::wazuh-cloudtrail",
@@ -94,7 +95,6 @@ RAW:
            }
        ]
    }
-
 
 3. Attach policy
 
