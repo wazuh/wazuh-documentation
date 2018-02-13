@@ -95,9 +95,9 @@ The following output will appear at the end of the building process:
 
   .. code-block:: console
 
-    # zip -r wazuh.zip ../../wazuh-3.1
+    # zip -r wazuh.zip ../../wazuh-3.2
 
-6. Once in Windows, run the ``wazuh-3.1/src/win32/wazuh-installer-build-msi.bat`` file to start the installer generation. If you do not want to sign the installer, you will have to comment or delete the signtool line.
+6. Once in Windows, run the ``wazuh-3.2/src/win32/wazuh-installer-build-msi.bat`` file to start the installer generation. If you do not want to sign the installer, you will have to comment or delete the signtool line.
 
 .. note:: The installer is now ready.  It can be launched with a normal or unattended installation. For more information about this process, please visit our :doc:`installation section for Windows<./wazuh_agent_windows>`.
 
