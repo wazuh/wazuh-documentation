@@ -4,7 +4,7 @@
 .. Do not modify this file manually. It is generated automatically.
 
 Reference
-=========
+======================
 This API reference is organized by resources:
 
 * `Agents`_
@@ -16,12 +16,12 @@ This API reference is organized by resources:
 * `Rules`_
 * `Syscheck`_
 
-Below is the `Request List`_ that shows all of the available requests.
+Also, it is provided an `Request List`_ with all available requests.
 
 .. _request_list:
 
 Request List
-------------
+---------------------------------
 
 `Agents`_
 	* DELETE /agents  (`Delete a list of agents`_)
@@ -132,7 +132,7 @@ Add a new agent.
 +====================+===============+========================================================================================================================================================================================================+
 | ``name``           | String        | Agent name.                                                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``ip``             | String        | If this is not included, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.                                       |
+| ip                 | String        | If you do not include this param, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.                              |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -140,7 +140,7 @@ Add a new agent.
 |                    |               | - IP/NET                                                                                                                                                                                               |
 |                    |               | - ANY                                                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``force``          | Number        | Remove old agent with same IP if disconnected since <force> seconds.                                                                                                                                   |
+| force              | Number        | Remove old agent with same IP if disconnected since <force> seconds.                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -155,7 +155,7 @@ Add a new agent.
 	   "error": 0,
 	   "data": {
 	      "id": "006",
-	      "key": "MDA2IE5ld0hvc3QgMTAuMC4wLjkgNGI3NGZiZTkzNjc5OWZmZDFjN2NiMmYyMGYzYmYyMTcyMGY3YmQ2NWVlM2NjOWRiYWNlNGRmNGM1MTdkNTY1Ng=="
+	      "key": "MDA2IE5ld0hvc3QgMTAuMC4wLjkgMWI3YTZhOWY1OTk0NzFmZTQ2ZjJlYWM0ZjE0NzRjMzYyMGY3YmQ2NWVlM2NjOWRiYWNlNGRmNGM1MTdkNTY1Ng=="
 	   }
 	}
 
@@ -190,7 +190,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": {
 	      "id": "007",
-	      "key": "MDA3IG15TmV3QWdlbnQgYW55IDg1YzllNGFkNDYxYTI5NWI0ZjM4NjY2NWQxNTE0YjU2YTEzOWY2OTNkZWUzMGU4OTRiZjQ1MmY0YjhlOTBkYzc="
+	      "key": "MDA3IG15TmV3QWdlbnQgYW55IGEzZTg1ZDc3NzM1MzM1NTNlNzBiZDY3Njg5NDhhMmM5YTEzOWY2OTNkZWUzMGU4OTRiZjQ1MmY0YjhlOTBkYzc="
 	   }
 	}
 
@@ -212,7 +212,7 @@ Insert an agent with an existing id and key.
 +====================+===============+========================================================================================================================================================================================================+
 | ``name``           | String        | Agent name.                                                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``ip``             | String        | If this is not included, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.                                       |
+| ip                 | String        | If you do not include this param, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.                              |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -224,7 +224,7 @@ Insert an agent with an existing id and key.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``key``            | String        | Agent key. Minimum length: 64 characters. Allowed values: ^[a-zA-Z0-9]+$                                                                                                                               |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``force``          | Number        | Remove the old agent with the same IP if disconnected since <force> seconds.                                                                                                                           |
+| force              | Number        | Remove old agent with same IP if disconnected since <force> seconds.                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -250,7 +250,7 @@ Delete
 
 Delete a list of agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Removes a list of agents. The Wazuh API must be restarted after removing an agent.
+Removes a list of agents. You must restart OSSEC after removing an agent.
 
 **Request**:
 
@@ -265,7 +265,7 @@ Removes a list of agents. The Wazuh API must be restarted after removing an agen
 +====================+===============+========================================================================================================================================================================================================+
 | ``ids``            | String[]      | Array of agent ID's.                                                                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``purge``          | Boolean       | Delete an agent from the key store.                                                                                                                                                                    |
+| ``purge``          | Boolean       | Delete agent definitely from the key store.                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -346,7 +346,7 @@ Removes an agent.
 +====================+===============+========================================================================================================================================================================================================+
 | ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``purge``          | String        | Delete an agent from the key store.                                                                                                                                                                    |
+| ``purge``          | String        | Delete agent definitely from the key store.                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -423,7 +423,7 @@ Returns the specified file belonging to the group parsed to JSON.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``file_name``      | String        | Filename                                                                                                                                                                                               |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``type``           | String        | Type of file.                                                                                                                                                                                          |
+| type               | String        | Type of file.                                                                                                                                                                                          |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -462,7 +462,7 @@ Returns the specified file belonging to the group parsed to JSON.
 
 Get agents in a group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the list of agents in a group.
+Returns the list of agent in a group.
 
 **Request**:
 
@@ -477,13 +477,13 @@ Returns the list of agents in a group.
 +====================+===============+========================================================================================================================================================================================================+
 | ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -531,9 +531,9 @@ Returns the group configuration (agent.conf).
 +====================+===============+========================================================================================================================================================================================================+
 | ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -575,13 +575,13 @@ Returns the files belonging to the group.
 +====================+===============+========================================================================================================================================================================================================+
 | ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -595,7 +595,7 @@ Returns the files belonging to the group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 17,
+	      "totalItems": 19,
 	      "items": [
 	         {
 	            "hash": "ab73af41699f13fdd81903b5f23d8d00",
@@ -608,6 +608,14 @@ Returns the files belonging to the group.
 	         {
 	            "hash": "9beed128b4305943eead1a66a86d27d5",
 	            "filename": "cis_debian_linux_rcl.txt"
+	         },
+	         {
+	            "hash": "ee520e627150c8751493bc32540b859a",
+	            "filename": "cis_mysql5-6_community_rcl.txt"
+	         },
+	         {
+	            "hash": "672c92a1f57463e33ff14011b43727de",
+	            "filename": "cis_mysql5-6_enterprise_rcl.txt"
 	         },
 	         {
 	            "hash": "e03345360941dbff248f63765971f87e",
@@ -634,7 +642,7 @@ Returns the files belonging to the group.
 	            "filename": "cis_sles12_linux_rcl.txt"
 	         },
 	         {
-	            "hash": "fcd103e698e31b7683fc035fa34c7776",
+	            "hash": "f8fd82787ec47feeddfc6c286d549667",
 	            "filename": "merged.mg"
 	         },
 	         {
@@ -662,7 +670,7 @@ Returns the files belonging to the group.
 	            "filename": "win_audit_rcl.txt"
 	         },
 	         {
-	            "hash": "6fd9fa5dc1367e89cc4b30fe4cd0030e",
+	            "hash": "f9c3330533586eb380f294dcbd9918d8",
 	            "filename": "win_malware_rcl.txt"
 	         }
 	      ]
@@ -685,13 +693,13 @@ Returns the list of existing agent groups.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -710,19 +718,19 @@ Returns the list of existing agent groups.
 	         {
 	            "count": 0,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "fcd103e698e31b7683fc035fa34c7776",
+	            "merged_sum": "f8fd82787ec47feeddfc6c286d549667",
 	            "name": "default"
 	         },
 	         {
 	            "count": 2,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "90e6ed87db2d1cb00fd6d75d84953e4d",
+	            "merged_sum": "2ec4952f19f4d646f325c7985f661a34",
 	            "name": "dmz"
 	         },
 	         {
 	            "count": 0,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "961ebdfd2ae81e77dd20dae66cd59acf",
+	            "merged_sum": "f8fd82787ec47feeddfc6c286d549667",
 	            "name": "pciserver"
 	         }
 	      ]
@@ -732,7 +740,7 @@ Returns the list of existing agent groups.
 
 Remove group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Removes the group. Agents that were assigned to the removed group will automatically revert to the 'default' group.
+Removes the group. Agents will have 'default' group.
 
 **Request**:
 
@@ -773,7 +781,7 @@ Removes the group. Agents that were assigned to the removed group will automatic
 
 Set agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Sets an agent to the specified group.
+Sets the specified group to the agent.
 
 **Request**:
 
@@ -786,7 +794,7 @@ Sets an agent to the specified group.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent's unique ID.                                                                                                                                                                                     |
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -807,7 +815,7 @@ Sets an agent to the specified group.
 
 Unset the agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Unsets the group of the agent. The agent will automatically revert to the 'default' group.
+Unsets the group of the agent. The group will be 'default'.
 
 **Request**:
 
@@ -837,12 +845,13 @@ Unsets the group of the agent. The agent will automatically revert to the 'defau
 	}
 
 
+
 Info
 ++++++++++++++++++++++++++++++++++++++++
 
 Get OS summary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns a summary of the OS.
+Returns a summary of OS.
 
 **Request**:
 
@@ -855,13 +864,13 @@ Returns a summary of the OS.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -927,15 +936,15 @@ Returns a list with the available agents.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters by agent status.                                                                                                                                                                               |
+| status             | String        | Filters by agent status.                                                                                                                                                                               |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -944,11 +953,13 @@ Returns a list with the available agents.
 |                    |               | - never connected                                                                                                                                                                                      |
 |                    |               | - disconnected                                                                                                                                                                                         |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``os.platform``    | String        | Filters by OS platform.                                                                                                                                                                                |
+| os.platform        | String        | Filters by OS platform.                                                                                                                                                                                |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``os.version``     | String        | Filters by OS version.                                                                                                                                                                                 |
+| os.version         | String        | Filters by OS version.                                                                                                                                                                                 |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``manager``        | String        | Filters by manager hostname to which agents are connected.                                                                                                                                             |
+| manager            | String        | Filters by manager hostname to which agents are connected.                                                                                                                                             |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| version            | String        | Filters by agents version.                                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -967,35 +978,35 @@ Returns a list with the available agents.
 	         {
 	            "status": "Never connected",
 	            "ip": "any",
-	            "dateAdd": "2017-12-22 19:23:39",
+	            "dateAdd": "2018-02-08 16:56:41",
 	            "id": "007",
 	            "name": "myNewAgent"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.10.10",
-	            "dateAdd": "2017-12-22 19:23:39",
+	            "dateAdd": "2018-02-08 16:56:42",
 	            "id": "123",
 	            "name": "NewHost_2"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.9",
-	            "dateAdd": "2017-12-22 19:23:39",
+	            "dateAdd": "2018-02-08 16:56:41",
 	            "id": "006",
 	            "name": "NewHost"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.14",
-	            "dateAdd": "2017-12-22 19:21:40",
+	            "dateAdd": "2018-02-08 16:54:46",
 	            "id": "004",
 	            "name": "dmz002"
 	         },
 	         {
 	            "status": "Never connected",
 	            "ip": "10.0.0.12",
-	            "dateAdd": "2017-12-22 19:21:40",
+	            "dateAdd": "2018-02-08 16:54:45",
 	            "id": "002",
 	            "name": "dmz001"
 	         }
@@ -1006,7 +1017,7 @@ Returns a list with the available agents.
 
 Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns various information from an agent.
+Returns the information of an agent.
 
 **Request**:
 
@@ -1034,20 +1045,20 @@ Returns various information from an agent.
 	   "error": 0,
 	   "data": {
 	      "status": "Active",
-	      "name": "PC",
+	      "name": "manager",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2017-12-22 19:07:16",
-	      "version": "Wazuh v3.1.0",
-	      "manager_host": "PC",
+	      "dateAdd": "2018-02-08 16:52:52",
+	      "version": "Wazuh v3.2.0",
+	      "manager_host": "manager",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
-	         "major": "15",
+	         "major": "7",
 	         "name": "CentOS Linux",
+	         "uname": "Linux |manager |3.10.0-693.11.1.el7.x86_64 |#1 SMP Mon Dec 4 23:52:40 UTC 2017 |x86_64",
 	         "platform": "centos",
-	         "uname": "Linux manager 3.10.0-514.el7.x86_64 #1 SMP Tue Nov 22 16:42:41 UTC 2016 x86_64",
-	         "version": "15.5",
-	         "arch": "x86_64",
-	         "minor": "5"
+	         "version": "7",
+	         "codename": "Core",
+	         "arch": "x86_64"
 	      },
 	      "id": "000"
 	   }
@@ -1056,7 +1067,7 @@ Returns various information from an agent.
 
 Get an agent by its name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns various information from an agent called :agent_name.
+Returns the information of an agent called :agent_name.
 
 **Request**:
 
@@ -1075,20 +1086,26 @@ Returns various information from an agent called :agent_name.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/myAgent?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/NewHost?pretty"
 
 **Example Response:**
 ::
 
 	{
-	   "error": 1000,
-	   "message": "Wazuh-Python Internal Error: 'NoneType' object has no attribute '__getitem__'"
+	   "error": 0,
+	   "data": {
+	      "status": "Never connected",
+	      "ip": "10.0.0.9",
+	      "dateAdd": "2018-02-08 16:56:41",
+	      "id": "006",
+	      "name": "NewHost"
+	   }
 	}
 
 
 Get list of purgeable agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns a list of agents that can be purged
+Returns a list of agents that can be purged.
 
 **Request**:
 
@@ -1103,20 +1120,35 @@ Returns a list of agents that can be purged
 +====================+===============+========================================================================================================================================================================================================+
 | ``timeframe``      | String        | Time from last connection in seconds or [n_days]d[n_hours]h[n_minutes]m[n_seconds]s.                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/purgeable/10800?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/purgeable/1d5h?pretty"
 
 **Example Response:**
 ::
 
-	ToDo - Hardcoded output
+	{
+	    "data": {
+	        "items": [
+	            {
+	                "id": "001",
+	                "name": "test1"
+	            },
+	            {
+	                "id": "002",
+	                "name": "test2"
+	            }
+	        ],
+	        "timeframe": 104400
+	    },
+	    "error": 0
+	}
 
 
 Key
@@ -1150,8 +1182,9 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgMjcyZjdkOTM0NGYxZTcxODZhNWNiYzg5YTZmMzY5YzU5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
+	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgMzFhZTlhZTczYzc0NWY0Y2Q0MzQ2MGY1ZDJkZjliYzI5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
 	}
+
 
 
 Purge
@@ -1159,7 +1192,7 @@ Purge
 
 Purge old agents from manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Deletes all agents that did not connect in the last ``timeframe`` seconds.
+Deletes all agents that did not connected in the last timeframe seconds.
 
 **Request**:
 
@@ -1174,18 +1207,34 @@ Deletes all agents that did not connect in the last ``timeframe`` seconds.
 +====================+===============+========================================================================================================================================================================================================+
 | ``timeframe``      | String        | Time from last connection in seconds or [n_days]d[n_hours]h[n_minutes]m[n_seconds]s.                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``verbose``        | Boolean       | Return information about agents purged.                                                                                                                                                                |
+| ``verbose``        | Boolean       | Return information about agents purgeds.                                                                                                                                                               |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"timeframe":10800}' "https://127.0.0.1:55000/agents/purge?pretty"
+	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"timeframe":"1d5h","verbose":true}' "https://127.0.0.1:55000/agents/purge?pretty"
 
 **Example Response:**
 ::
 
-	ToDo - Hardcoded output
+	{
+	    "data": {
+	        "totalItems": 2,
+	        "items": [
+	            {
+	                "id": "001",
+	                "name": "test1"
+	            },
+	            {
+	                "id": "002",
+	                "name": "test2"
+	            }
+	        ],
+	        "timeframe": 104400
+	    },
+	    "error": 0
+	}
 
 
 Restart
@@ -1247,7 +1296,7 @@ Restarts all agents.
 
 Restart an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Restarts the specified agent.
+Restarts the agent.
 
 **Request**:
 
@@ -1282,7 +1331,7 @@ Upgrade
 
 Get outdated agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the list of outdated agents.
+Returns the list of outdated groups.
 
 **Request**:
 
@@ -1295,11 +1344,11 @@ Returns the list of outdated agents.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -1346,7 +1395,7 @@ Returns the upgrade result from an agent.
 +====================+===============+========================================================================================================================================================================================================+
 | ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``timeout``        | Number        | Seconds to wait for the agent to respond.                                                                                                                                                              |
+| timeout            | Number        | Seconds waiting for agent response.                                                                                                                                                                    |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -1414,11 +1463,11 @@ Upgrade the agent using a WPK file from online repository.
 +====================+===============+========================================================================================================================================================================================================+
 | ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``wpk_repo``       | String        | WPK repository.                                                                                                                                                                                        |
+| wpk_repo           | String        | WPK repository.                                                                                                                                                                                        |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``version``        | String        | Wazuh version.                                                                                                                                                                                         |
+| version            | String        | Wazuh version.                                                                                                                                                                                         |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``force``          | number        | Force upgrade.                                                                                                                                                                                         |
+| force              | number        | Force upgrade.                                                                                                                                                                                         |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -1476,17 +1525,13 @@ Clears cache of the specified group.
 	   "error": 0,
 	   "data": {
 	      "all": [
-	         "/agents/summary?pretty",
-	         "/agents?pretty&offset=0&limit=5&sort=-ip,name",
 	         "/agents/000?pretty",
-	         "/agents/name/myAgent?pretty"
+	         "/agents/name/NewHost?pretty"
 	      ],
 	      "groups": {
 	         "agents": [
-	            "/agents/summary?pretty",
-	            "/agents?pretty&offset=0&limit=5&sort=-ip,name",
 	            "/agents/000?pretty",
-	            "/agents/name/myAgent?pretty"
+	            "/agents/name/NewHost?pretty"
 	         ]
 	      }
 	   }
@@ -1591,7 +1636,7 @@ Node
 
 Get node info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the Node information
+Returns the Node info
 
 **Request**:
 
@@ -1602,12 +1647,20 @@ Returns the Node information
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node?pretty"
 
 **Example Response:**
 ::
 
-	{"error":0,"data":{"node":"nodemaster","cluster":"wazuh","type":"master"}}
+	{
+	   "error": 0,
+	   "data": {
+	      "node": "node01",
+	      "cluster": "wazuh",
+	      "type": "master"
+	   }
+	}
+
 
 
 Nodes
@@ -1626,48 +1679,49 @@ Returns the state of each agent and the manager it's reporting to in the cluster
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/agents"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/agents?pretty"
 
 **Example Response:**
 ::
 
 	{
-		"error":0,
-		"data":{
-				"None":[
-						{
-								"status":"Never connected",
-								"ip":"10.0.0.12",
-								"id":"002",
-								"name":"dmz001"
-						},
-						{
-								"status":"Never connected",
-								"ip":"10.0.0.14",
-								"id":"004",
-								"name":"dmz002"
-						},
-						{
-								"status":"Never connected",
-								"ip":"10.0.0.9",
-								"id":"006",
-								"name":"NewHost"
-						},
-						{
-								"status":"Never connected",
-								"ip":"any",
-								"id":"007",
-								"name":"myNewAgent"
-						},
-						{
-								"status":"Never connected",
-								"ip":"10.0.10.10",
-								"id":"123",
-								"name":"NewHost_2"
-						}
-				]
-		}
+	   "error": 0,
+	   "data": {
+	      "None": [
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.12",
+	            "id": "002",
+	            "name": "dmz001"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.14",
+	            "id": "004",
+	            "name": "dmz002"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.0.9",
+	            "id": "006",
+	            "name": "NewHost"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "any",
+	            "id": "007",
+	            "name": "myNewAgent"
+	         },
+	         {
+	            "status": "Never connected",
+	            "ip": "10.0.10.10",
+	            "id": "123",
+	            "name": "NewHost_2"
+	         }
+	      ]
+	   }
 	}
+
 
 Get info about files in cluster
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1682,128 +1736,27 @@ Returns the state of each file in the cluster
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/files"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/files?pretty"
 
 **Example Response:**
 ::
 
 	{
-	    "error":0,
-	    "data":{
-	        "172.18.0.108":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        },
-	        "172.18.0.106":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        },
-	        "172.18.0.107":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        },
-	        "172.18.0.105":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        }
-	    }
+	   "error": 0,
+	   "data": {
+	      "192.168.1.53": {
+	         "deleted": [
+	            "/etc/shared/dmz/win_applications_rcl.txt",
+	            "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
+	         ]
+	      }
+	   }
 	}
+
 
 Get nodes info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the Nodes information
+Returns the Nodes info
 
 **Request**:
 
@@ -1814,56 +1767,40 @@ Returns the Nodes information
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes?pretty"
 
 **Example Response:**
 ::
 
 	{
-	    "error":0,
-	    "data":{
-	        "totalItems":5,
-	        "items":[
-	            {
-	                "url":"localhost",
-	                "node":"nodemaster",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.105",
-	                "node":"node01",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.106",
-	                "node":"node03",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.107",
-	                "node":"node02",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.108",
-	                "node":"node04",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            }
-	        ]
-	    }
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2,
+	      "items": [
+	         {
+	            "url": "localhost",
+	            "node": "node01",
+	            "status": "connected",
+	            "cluster": "wazuh"
+	         },
+	         {
+	            "url": "192.168.1.53",
+	            "node": "node02",
+	            "status": "connected",
+	            "cluster": "wazuh"
+	         }
+	      ]
+	   }
 	}
+
+
 
 Status
 ++++++++++++++++++++++++++++++++++++++++
 
 Get info about cluster status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns whether the cluster is enabled or disabled
+Returns if the cluster is enabled or disabled
 
 **Request**:
 
@@ -1874,12 +1811,19 @@ Returns whether the cluster is enabled or disabled
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status?pretty"
 
 **Example Response:**
 ::
 
-	{"error":0,"data":{"running":"yes","enabled":"yes"}}
+	{
+	   "error": 0,
+	   "data": {
+	      "running": "yes",
+	      "enabled": "yes"
+	   }
+	}
+
 
 
 config
@@ -1898,32 +1842,31 @@ Returns the cluster configuration
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config?pretty"
 
 **Example Response:**
 ::
 
 	{
-	    "error":0,
-	    "data":{
-	        "disabled":"no",
-	        "hidden":"no",
-	        "name":"wazuh",
-	        "interval":"2m",
-	        "node_name":"nodemaster",
-	        "bind_addr":"0.0.0.0",
-	        "node_type":"master",
-	        "key":"a7de21bdd629661b2669d5bc5ec6866d",
-	        "nodes":[
-	            "172.18.0.1",
-	            "172.18.0.105",
-	            "172.18.0.106",
-	            "172.18.0.107",
-	            "172.18.0.108"
-	        ],
-	        "port":"1516"
-	    }
+	   "error": 0,
+	   "data": {
+	      "disabled": "no",
+	      "hidden": "no",
+	      "name": "wazuh",
+	      "interval": "1s",
+	      "node_name": "node01",
+	      "bind_addr": "0.0.0.0",
+	      "node_type": "master",
+	      "key": "023257dc1495f3e2eb5b364c11fb00db",
+	      "nodes": [
+	         "192.168.1.62",
+	         "192.168.1.53"
+	      ],
+	      "port": "1516"
+	   }
 	}
+
+
 
 
 Decoders
@@ -1946,19 +1889,19 @@ Returns all decoders included in ossec.conf.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters by filename.                                                                                                                                                                                   |
+| file               | String        | Filters by filename.                                                                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``           | String        | Filters by path.                                                                                                                                                                                       |
+| path               | String        | Filters by path.                                                                                                                                                                                       |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters the decoders by status.                                                                                                                                                                        |
+| status             | String        | Filters the decoders by status.                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -1978,7 +1921,7 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 523,
+	      "totalItems": 527,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -2023,15 +1966,15 @@ Returns all decoders files included in ossec.conf.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters the decoders by status.                                                                                                                                                                        |
+| status             | String        | Filters the decoders by status.                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -2039,11 +1982,11 @@ Returns all decoders files included in ossec.conf.
 |                    |               | - disabled                                                                                                                                                                                             |
 |                    |               | - all                                                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters by filename.                                                                                                                                                                                   |
+| file               | String        | Filters by filename.                                                                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``           | String        | Filters by path.                                                                                                                                                                                       |
+| path               | String        | Filters by path.                                                                                                                                                                                       |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``download``       | String        | Downloads the file                                                                                                                                                                                     |
+| download           | String        | Downloads the file                                                                                                                                                                                     |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2057,57 +2000,57 @@ Returns all decoders files included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 89,
+	      "totalItems": 90,
 	      "items": [
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0075-clamav_decoders.xml"
+	            "file": "0005-wazuh_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0250-redis_decoders.xml"
+	            "file": "0006-json_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0415-jenkins_decoders.xml"
+	            "file": "0010-active-response_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0355-vm-pop3_decoders.xml"
+	            "file": "0015-aix-ipsec_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0310-ssh_decoders.xml"
+	            "file": "0025-apache_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0200-ossec_decoders.xml"
+	            "file": "0030-arpwatch_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0380-windows_decoders.xml"
+	            "file": "0035-asterisk_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0140-kernel_decoders.xml"
+	            "file": "0040-auditd_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0350-unix_decoders.xml"
+	            "file": "0045-barracuda_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0115-grandstream_decoders.xml"
+	            "file": "0050-checkpoint_decoders.xml"
 	         }
 	      ]
 	   }
@@ -2129,13 +2072,13 @@ Returns all parent decoders included in ossec.conf
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2193,13 +2136,13 @@ Returns the decoders with the specified name.
 +====================+===============+========================================================================================================================================================================================================+
 | ``decoder_name``   | String        | Decoder name.                                                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2272,9 +2215,9 @@ Returns ossec.conf in JSON format.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``section``        | String        | Indicates the ossec.conf section: global, rules, syscheck, rootcheck, remote, alerts, command, active-response, localfile.                                                                             |
+| section            | String        | Indicates the ossec.conf section: global, rules, syscheck, rootcheck, remote, alerts, command, active-response, localfile.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``field``          | String        | Indicates a section child, e.g, fields for rule section are: include, decoder_dir, etc.                                                                                                                |
+| field              | String        | Indicates a section child, e.g, fields for rule section are: include, decoder_dir, etc.                                                                                                                |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2298,7 +2241,8 @@ Returns ossec.conf in JSON format.
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "192.168.0.1"
+	         "80.58.61.250",
+	         "80.58.61.254"
 	      ],
 	      "email_from": "ossecm@example.wazuh.com",
 	      "logall_json": "no"
@@ -2312,7 +2256,7 @@ Info
 
 Get manager information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns basic information about manager.
+Returns basic information about Manager.
 
 **Request**:
 
@@ -2331,14 +2275,14 @@ Returns basic information about manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "installation_date": "vie dic 22 19:07:15 CET 2017",
-	      "version": "v3.1.0",
+	      "compilation_date": "jue feb  8 16:52:18 CET 2018",
+	      "version": "v3.2.0",
 	      "openssl_support": "yes",
 	      "max_agents": "8000",
-	      "ruleset_version": "1005",
+	      "ruleset_version": "3206",
 	      "path": "/var/ossec",
 	      "tz_name": "CET",
-	      "type": "server",
+	      "type": "manager",
 	      "tz_offset": "+0100"
 	   }
 	}
@@ -2346,7 +2290,7 @@ Returns basic information about manager.
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the status of the manager processes
+Returns the Manager processes that are running.
 
 **Request**:
 
@@ -2385,7 +2329,7 @@ Logs
 
 Get ossec.log
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the three last months of ossec.log.
+Returns the 3 last months of ossec.log.
 
 **Request**:
 
@@ -2398,15 +2342,15 @@ Returns the three last months of ossec.log.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``type_log``       | String        | Filters by type of log.                                                                                                                                                                                |
+| type_log           | String        | Filters by type of log.                                                                                                                                                                                |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -2415,7 +2359,7 @@ Returns the three last months of ossec.log.
 |                    |               | - warning                                                                                                                                                                                              |
 |                    |               | - info                                                                                                                                                                                                 |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``category``       | String        | Filters by category of log.                                                                                                                                                                            |
+| category           | String        | Filters by category of log.                                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2442,7 +2386,7 @@ Returns the three last months of ossec.log.
 
 Get summary of ossec.log
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns a summary of the last three months of the ``ossec.log`` file.
+Returns a summary about the 3 last months of ossec.log.
 
 **Request**:
 
@@ -2462,74 +2406,89 @@ Returns a summary of the last three months of the ``ossec.log`` file.
 	   "error": 0,
 	   "data": {
 	      "wazuh-modulesd": {
-	         "info": 20,
-	         "all": 20,
+	         "info": 2,
+	         "all": 2,
 	         "error": 0
 	      },
 	      "ossec-testrule": {
-	         "info": 460,
-	         "all": 460,
+	         "info": 279,
+	         "all": 279,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:oscap": {
-	         "info": 5,
-	         "all": 5,
+	         "info": 2,
+	         "all": 2,
 	         "error": 0
 	      },
-	      "wazuh-clusterd-internal:inotify": {
-	         "info": 16,
-	         "all": 16,
-	         "error": 0
-	      },
-	      "wazuh-modulesd:ciscat": {
-	         "info": 5,
-	         "all": 5,
-	         "error": 0
-	      },
-	      "ossec-rootcheck": {
-	         "info": 5,
-	         "all": 5,
-	         "error": 0
-	      },
-	      "ossec-monitord": {
-	         "info": 9,
-	         "all": 9,
-	         "error": 0
-	      },
-	      "ossec-logcollector": {
-	         "info": 34,
-	         "all": 34,
-	         "error": 0
-	      },
-	      "ossec-execd": {
-	         "info": 13,
-	         "all": 13,
-	         "error": 0
-	      },
-	      "ossec-remoted": {
-	         "info": 58,
-	         "all": 63,
-	         "error": 5
-	      },
-	      "ossec-syscheckd": {
-	         "info": 117,
-	         "all": 117,
-	         "error": 0
-	      },
-	      "wazuh-clusterd-internal": {
+	      "wazuh-db": {
 	         "info": 3,
 	         "all": 3,
 	         "error": 0
 	      },
+	      "wazuh-modulesd:ciscat": {
+	         "info": 2,
+	         "all": 2,
+	         "error": 0
+	      },
+	      "wazuh-modulesd:syscollector": {
+	         "info": 19,
+	         "all": 19,
+	         "error": 0
+	      },
+	      "wazuh-clusterd-internal:inotify": {
+	         "info": 19,
+	         "all": 19,
+	         "error": 0
+	      },
+	      "ossec-monitord": {
+	         "info": 3,
+	         "all": 3,
+	         "error": 0
+	      },
+	      "ossec-rootcheck": {
+	         "info": 4,
+	         "all": 4,
+	         "error": 0
+	      },
+	      "ossec-execd": {
+	         "info": 4,
+	         "all": 4,
+	         "error": 0
+	      },
+	      "ossec-remoted": {
+	         "info": 11,
+	         "all": 11,
+	         "error": 0
+	      },
+	      "ossec-syscheckd": {
+	         "info": 46,
+	         "all": 46,
+	         "error": 0
+	      },
+	      "wazuh-clusterd-internal": {
+	         "info": 1,
+	         "all": 1,
+	         "error": 0
+	      },
+	      "ossec-logcollector": {
+	         "info": 19,
+	         "all": 19,
+	         "error": 0
+	      },
+	      "wazuh-modulesd:vulnerability-detector": {
+	         "info": 10,
+	         "all": 10,
+	         "error": 0
+	      },
 	      "ossec-analysisd": {
-	         "info": 1029,
-	         "all": 1029,
+	         "info": 417,
+	         "all": 417,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:database": {
-	         "info": 5,
-	         "all": 11,
-	         "error": 6
+	         "info": 2,
+	         "all": 5,
+	         "error": 3
 	      }
 	   }
 	}
@@ -2541,7 +2500,7 @@ Stats
 
 Get manager stats
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns Wazuh statistical information for the current or specified date.
+Returns OSSEC statistical information of current date.
 
 **Request**:
 
@@ -2554,7 +2513,7 @@ Returns Wazuh statistical information for the current or specified date.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``date``           | String        | Selects the date for getting the statistical information. Format: YYYYMMDD                                                                                                                             |
+| date               | String        | Selects the date for getting the statistical information. Format: YYYYMMDD                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2598,7 +2557,7 @@ Returns Wazuh statistical information for the current or specified date.
 
 Get manager stats by hour
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns Wazuh statistical information per hour. Each number in the averages field represents the average of alerts per hour.
+Returns OSSEC statistical information per hour. Each item in averages field represents the average of alerts per hour.
 
 **Request**:
 
@@ -2632,7 +2591,7 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 
 Get manager stats by week
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns Wazuh statistical information per week. Each number in the hours field represents the average alerts per hour for that specific day.
+Returns OSSEC statistical information per week. Each item in hours field represents the average of alerts per hour and week day.
 
 **Request**:
 
@@ -2711,6 +2670,7 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	}
 
 
+
 Rootcheck
 ----------------------------------------
 Clear
@@ -2741,7 +2701,7 @@ Clears the rootcheck database for all agents.
 
 Clear rootcheck database of an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Clears the rootcheck database for a specific agent.
+Clears the rootcheck database for an agent.
 
 **Request**:
 
@@ -2776,7 +2736,7 @@ Info
 
 Get last rootcheck scan
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the timestamp of the last rootcheck scan.
+Return the timestamp of the last rootcheck scan.
 
 **Request**:
 
@@ -2803,15 +2763,15 @@ Returns the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-12-22 19:05:11",
-	      "end": "2017-12-22 16:49:40"
+	      "start": "2018-02-08 16:53:48",
+	      "end": "2018-02-08 16:54:27"
 	   }
 	}
 
 
 Get rootcheck CIS requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the CIS requirements of all rootchecks of the specified agent.
+Returns the CIS requirements of all rootchecks of the agent.
 
 **Request**:
 
@@ -2824,13 +2784,13 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2844,12 +2804,16 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 3,
+	      "totalItems": 7,
 	      "items": [
-					 "1.4 Debian Linux",
-					 "4.13 Debian Linux",
-				   "4.16 Debian Linux"
-				]
+	         "1.1.1 RHEL7",
+	         "1.1.5 RHEL7",
+	         "4.1.2 RHEL7",
+	         "4.2.3 RHEL7",
+	         "4.2.4 RHEL7",
+	         "6.2.8 RHEL7",
+	         "6.2.9 RHEL7"
+	      ]
 	   }
 	}
 
@@ -2871,17 +2835,17 @@ Returns the rootcheck database of an agent.
 +====================+===============+========================================================================================================================================================================================================+
 | ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``pci``            | String        | Filters by pci requirement.                                                                                                                                                                            |
+| pci                | String        | Filters by pci requirement.                                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``cis``            | String        | Filters by CIS.                                                                                                                                                                                        |
+| cis                | String        | Filters by CIS.                                                                                                                                                                                        |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2895,19 +2859,22 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1194,
+	      "totalItems": 17,
 	      "items": [
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-12-22 16:48:05",
-	            "readDay": "2017-12-22 19:05:35",
-	            "event": "Files hidden inside directory '/var/lib/docker/overlay2/0289a9e9ba1dbc311ce9bc92414dcb17e291cbfbcc6b5a49d3819130dc25cb62/merged'. Link count does not match number of files (21,1)."
+	            "oldDay": "2018-02-08 16:53:54",
+	            "pci": "2.2.4",
+	            "readDay": "2018-02-08 16:53:54",
+	            "event": "System Audit:  CIS - RHEL7 - 6.2.5 - SSH Configuration - Set SSH MaxAuthTries to 4 or Less  {CIS - RHEL7 - 6.2.5} {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf ."
 	         },
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2017-12-22 16:48:05",
-	            "readDay": "2017-12-22 19:05:35",
-	            "event": "Files hidden inside directory '/var/lib/docker/overlay2/0289a9e9ba1dbc311ce9bc92414dcb17e291cbfbcc6b5a49d3819130dc25cb62/merged/dev'. Link count does not match number of files (4,1)."
+	            "oldDay": "2018-02-08 16:53:54",
+	            "event": "System Audit: CIS - RHEL7 - 4.1.2 - Network parameters - IP send redirects enabled {CIS: 4.1.2 RHEL7} {PCI_DSS: 2.2.4}. File: /proc/sys/net/ipv4/conf/all/send_redirects. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf .",
+	            "cis": "4.1.2 RHEL7",
+	            "pci": "2.2.4",
+	            "readDay": "2018-02-08 16:53:54"
 	         }
 	      ]
 	   }
@@ -2929,13 +2896,13 @@ Returns the PCI requirements of all rootchecks of the agent.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2950,10 +2917,10 @@ Returns the PCI requirements of all rootchecks of the agent.
 	   "error": 0,
 	   "data": {
 	      "totalItems": 2,
-				"items": [
-				   "2.2.2",
-				   "2.2.4"
-				]
+	      "items": [
+	         "2.2.4",
+	         "4.1"
+	      ]
 	   }
 	}
 
@@ -2964,7 +2931,7 @@ Run
 
 Run rootcheck scan in all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously)
+Runs syscheck and rootcheck on all agent, due to OSSEC launches both processes at once.
 
 **Request**:
 
@@ -2987,7 +2954,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 
 Run rootcheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on a the specified agent (Wazuh launches both processes simultaneously)
+Runs syscheck and rootcheck on an agent, due to OSSEC launches both processes at once.
 
 **Request**:
 
@@ -3017,6 +2984,8 @@ Runs syscheck and rootcheck on a the specified agent (Wazuh launches both proces
 	}
 
 
+
+
 Rules
 ----------------------------------------
 Info
@@ -3037,15 +3006,15 @@ Returns all rules.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters the rules by status.                                                                                                                                                                           |
+| status             | String        | Filters the rules by status.                                                                                                                                                                           |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -3053,15 +3022,15 @@ Returns all rules.
 |                    |               | - disabled                                                                                                                                                                                             |
 |                    |               | - all                                                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``group``          | String        | Filters the rules by group.                                                                                                                                                                            |
+| group              | String        | Filters the rules by group.                                                                                                                                                                            |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``level``          | Range         | Filters the rules by level. level=2 or level=2-5.                                                                                                                                                      |
+| level              | Range         | Filters the rules by level. level=2 or level=2-5.                                                                                                                                                      |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``           | String        | Filters the rules by path.                                                                                                                                                                             |
+| path               | String        | Filters the rules by path.                                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters the rules by file name.                                                                                                                                                                        |
+| file               | String        | Filters the rules by file name.                                                                                                                                                                        |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``pci``            | String        | Filters the rules by pci requirement.                                                                                                                                                                  |
+| pci                | String        | Filters the rules by pci requirement.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -3075,7 +3044,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1565,
+	      "totalItems": 1579,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -3129,15 +3098,15 @@ Returns the files of all rules.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters files by status.                                                                                                                                                                               |
+| status             | String        | Filters files by status.                                                                                                                                                                               |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -3145,11 +3114,11 @@ Returns the files of all rules.
 |                    |               | - disabled                                                                                                                                                                                             |
 |                    |               | - all                                                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``           | String        | Filters the rules by path.                                                                                                                                                                             |
+| path               | String        | Filters the rules by path.                                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters the rules by filefile.                                                                                                                                                                         |
+| file               | String        | Filters the rules by filefile.                                                                                                                                                                         |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``download``       | String        | Downloads the file                                                                                                                                                                                     |
+| download           | String        | Downloads the file                                                                                                                                                                                     |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -3163,7 +3132,7 @@ Returns the files of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 100,
+	      "totalItems": 102,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -3222,7 +3191,7 @@ Returns the files of all rules.
 
 Get rule groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the groups of all rules
+Returns the groups of all rules.
 
 **Request**:
 
@@ -3235,13 +3204,13 @@ Returns the groups of all rules
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -3255,7 +3224,7 @@ Returns the groups of all rules
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 281,
+	      "totalItems": 283,
 	      "items": [
 	         "access_control",
 	         "access_denied",
@@ -3274,7 +3243,7 @@ Returns the groups of all rules
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the PCI requirements of all rules
+Returns the PCI requirements of all rules.
 
 **Request**:
 
@@ -3287,13 +3256,13 @@ Returns the PCI requirements of all rules
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param              | Type          | Description                                                                                                                                                                                            |
 +====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -3341,13 +3310,13 @@ Returns the rules with the specified id.
 +====================+===============+========================================================================================================================================================================================================+
 | ``id``             | Number        | rule.                                                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -3386,6 +3355,8 @@ Returns the rules with the specified id.
 	}
 
 
+
+
 Syscheck
 ----------------------------------------
 Clear
@@ -3416,7 +3387,7 @@ Clears the syscheck database for all agents.
 
 Clear syscheck database of an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Clears the syscheck database for the specified agent.
+Clears the syscheck database for an agent.
 
 **Request**:
 
@@ -3478,8 +3449,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-12-22 19:23:19",
-	      "end": "2017-12-22 19:05:11"
+	      "start": "2018-02-08 16:53:41",
+	      "end": "2018-02-08 16:53:48"
 	   }
 	}
 
@@ -3501,15 +3472,15 @@ Returns the syscheck files of an agent.
 +====================+===============+========================================================================================================================================================================================================+
 | ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
+| offset             | Number        | First element to return in the collection.                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
+| limit              | Number        | Maximum number of elements to return.                                                                                                                                                                  |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
+| sort               | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to ascending or descending order.                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
+| search             | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``event``          | String        | Filters files by event.                                                                                                                                                                                |
+| event              | String        | Filters files by event.                                                                                                                                                                                |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
@@ -3518,27 +3489,27 @@ Returns the syscheck files of an agent.
 |                    |               | - modified                                                                                                                                                                                             |
 |                    |               | - deleted                                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters file by filename.                                                                                                                                                                              |
+| file               | String        | Filters file by filename.                                                                                                                                                                              |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``filetype``       | String        | Selects type of file.                                                                                                                                                                                  |
+| filetype           | String        | Selects type of file.                                                                                                                                                                                  |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | - file                                                                                                                                                                                                 |
 |                    |               | - registry                                                                                                                                                                                             |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``summary``        | String        | Returns a summary grouping by filename.                                                                                                                                                                |
+| summary            | String        | Returns a summary grouping by filename.                                                                                                                                                                |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | - yes                                                                                                                                                                                                  |
 |                    |               | - no                                                                                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``md5``            | String        | Returns the files with the specified md5 hash.                                                                                                                                                         |
+| md5                | String        | Returns the files with the specified md5 hash.                                                                                                                                                         |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sha1``           | String        | Returns the files with the specified sha1 hash.                                                                                                                                                        |
+| sha1               | String        | Returns the files with the specified sha1 hash.                                                                                                                                                        |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``hash``           | String        | Returns the files with the specified hash (md5 or sha1).                                                                                                                                               |
+| hash               | String        | Returns the files with the specified hash (md5 or sha1).                                                                                                                                               |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -3596,7 +3567,7 @@ Run
 
 Run syscheck scan in all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously)
+Runs syscheck and rootcheck on all agent, due to OSSEC launches both processes at once.
 
 **Request**:
 
@@ -3619,7 +3590,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 
 Run syscheck scan in an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultaneously)
+Runs syscheck and rootcheck on an agent, due to OSSEC launches both processes at once.
 
 **Request**:
 
