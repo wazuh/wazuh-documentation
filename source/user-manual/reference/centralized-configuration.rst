@@ -12,10 +12,11 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**, **wodle name="cis-cat"**)
+- :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 
-.. note:: When setting up a shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the file *etc/local_internal_options.conf* in the agent:
+.. note:: When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the file *etc/local_internal_options.conf* in the agent:
 
 .. code-block:: shell
 
@@ -225,9 +226,11 @@ Also, the API returns the md5sum of the ``agent.conf`` file in the field ``share
        }
     }
 
-5. Manual update
+5. Restarting the agent
 
-If ``auto_restart`` has been disabled, the agent will have to be manually restarted so that the new ``agent.conf`` file will be used. This can be done as follows:
+By default, the agent restarts by itself automatically when it receives a new shared configuration.
+
+If ``auto_restart`` has been disabled (in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index>`), the agent will have to be manually restarted so that the new ``agent.conf`` file will be used. This can be done as follows:
 
 .. code-block:: console
 
@@ -273,3 +276,12 @@ and this configuration in the ``agent.conf`` file.
   </rootcheck>
 
 The final configuration will overwrite ``check_unixaudit`` to "yes" because it appears in the ``agent.conf`` file. However, the path listed with the ``system_audit`` option will be repeated with both settings in the final configuration. In other words, ``system_audit_rcl.txt`` (from ``ossec.conf``) and ``cis_debian_linux_rcl.txt`` (from ``agent.conf``) will be included.
+
+How to ignore shared configuration
+----------------------------------
+
+Whether for any reason you don`t want to apply the shared configuration in a specific agent, it can be disabled by adding the following line to the file *etc/local_internal_options.conf* in that agent:
+
+.. code-block:: shell
+
+    agent.remote_conf=0

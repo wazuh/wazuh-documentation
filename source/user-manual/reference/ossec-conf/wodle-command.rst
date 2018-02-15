@@ -103,7 +103,7 @@ ignore-output
 Ignore the command output when executed.
 
 +--------------------+---------+
-| **Default value**  | yes     |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
