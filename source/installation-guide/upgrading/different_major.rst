@@ -190,6 +190,8 @@ Upgrade Elasticsearch
     # systemctl enable elasticsearch.service
     # systemctl start elasticsearch.service
 
+.. warning::
+  After starting the services, it's needed to wait at least **15 seconds** so the Elasticsearch server loads completely, in order to follow the next steps.
 
 3. Load the Wazuh Elasticsearch templates:
 

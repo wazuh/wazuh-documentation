@@ -78,6 +78,9 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
   	# chkconfig --add elasticsearch
   	# service elasticsearch start
 
+.. warning::
+  After starting the services, it's needed to wait at least **15 seconds** so the Elasticsearch server loads completely, in order to follow the next steps.
+
 3. Load Wazuh Elasticsearch templates:
 
   .. code-block:: console
