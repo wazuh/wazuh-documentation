@@ -79,7 +79,7 @@ with:
 frequency
 ^^^^^^^^^
 
-The specifies the minimum amount of time in seconds between command runs. The command will likely not repeat in the exact the number of seconds specified, however, the time between runs will be no less than the number of seconds specified.
+The frequency specifies the minimum amount of time in seconds between command runs. The command will likely not repeat in the exact the number of seconds specified, however, the time between runs will be no less than the number of seconds specified.
 
 This can be used with **command** or **full_command**.
 
@@ -174,6 +174,17 @@ The additional fields configured above would appear in the resulting event as be
   }
 
 .. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key be defined by using a symbol prior to the key name as in *@source*.
+
+target
+^^^^^^^^^
+
+Target specifies the name of the socket where the output will be redirected. The socket must be defined previusly to use it with this option.
+
++--------------------+--------------------------------+
+| **Default value**  | agent                          |
++--------------------+--------------------------------+
+| **Allowed values** | any defined socket             |
++--------------------+--------------------------------+
 
 log_format
 ^^^^^^^^^^

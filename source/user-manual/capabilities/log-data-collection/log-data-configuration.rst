@@ -10,6 +10,8 @@ Configuration
 #. `Reading events from Windows Event Channel`_
 #. `Filtering events from Windows Event Channel with queries`_
 #. `Using environment variables`_
+#. `Using multiple outputs`_
+
 
 Basic usage
 -----------
@@ -83,3 +85,41 @@ Environment variables like ``%WinDir%`` can be used in the location pattern. The
         <location>%WinDir%\System32\LogFiles\W3SVC3\ex%y%m%d.log</location>
         <log_format>iis</log_format>
     </localfile>
+
+Using multiple outputs
+----------------------
+
+Log data is sent to the agent socket by default, but is also possible to specify other sockets as output. ``ossec-logcollector`` uses UNIX type sockets to communicate allowing TCP or UDP protocolos.
+To add a new output socket we need to specify it using the tag ``<socket>`` as showed in the following example configuration::
+
+    <socket>
+        <name>custom_socket</name>
+        <location>/var/run/custom.sock</location>
+        <mode>tcp</mode>
+        <prefix>custom_syslog: </prefix>
+    </socket>
+
+    <socket>
+        <name>test_socket</name>
+        <location>/var/run/test.sock</location>
+    </socket>
+
+    .. note::
+		More information aboud defining a socket: :ref:`socket <reference_ossec_socket>`
+
+Once the socket is defined, it's possible to add the destination socket for each *localfile*::
+
+    <localfile>
+        <log_format>syslog</log_format>
+        <location>/var/log/messages</location>
+        <target>agent,test_socket</target>
+    </localfile>
+
+    <localfile>
+        <log_format>syslog</log_format>
+        <location>/var/log/messages</location>
+        <target>custom_socket,test_socket</target>
+    </localfile>
+
+    .. warning::
+        To keep the output to the default socket we need to specify it using 'agent' as target. Otherwise the output will be redirected only to the specified targets.
