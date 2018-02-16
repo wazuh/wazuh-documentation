@@ -109,6 +109,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    reports
    rootcheck
    ruleset
+   socket
    syscheck
    syslog-output
    wodle-openscap
