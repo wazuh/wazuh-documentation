@@ -57,7 +57,7 @@ UNIX socket communication protocol.
 prefix
 ^^^^^^^^^^
 
-The prefix will be added to the message.
+The prefix is placed before the message.
 
 +--------------------+------------------------------------------+
 | **Default value**  | n/a                                      |

@@ -104,8 +104,8 @@ To add a new output socket we need to specify it using the tag ``<socket>`` as s
         <location>/var/run/test.sock</location>
     </socket>
 
-    .. note::
-		More information aboud defining a socket: :ref:`socket <reference_ossec_socket>`
+.. note::
+	More information aboud defining a socket: :ref:`socket <reference_ossec_socket>`
 
 Once the socket is defined, it's possible to add the destination socket for each *localfile*::
 
@@ -121,5 +121,5 @@ Once the socket is defined, it's possible to add the destination socket for each
         <target>custom_socket,test_socket</target>
     </localfile>
 
-    .. warning::
-        To keep the output to the default socket we need to specify it using 'agent' as target. Otherwise the output will be redirected only to the specified targets.
+.. warning::
+    To keep the output to the default socket we need to specify it using 'agent' as target. Otherwise the output will be redirected only to the specified targets.
