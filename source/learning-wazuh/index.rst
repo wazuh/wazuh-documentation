@@ -27,5 +27,5 @@ will assume that the previous labs have already been completed, so we encourage 
     shellshock
     audit-commands
     suricata
+    vuln-detection
     
-
