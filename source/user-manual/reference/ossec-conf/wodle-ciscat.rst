@@ -95,7 +95,7 @@ Run evaluation immediately when service is started.
 java_path
 ^^^^^^^^^^
 
-Define where Java is located. If this parameter is not set, the wodle will seach for the Java location in the default environment variable ``$PATH``.
+Define where Java is located. If this parameter is not set, the wodle will search for the Java location in the default environment variable ``$PATH``.
 
 +--------------------+------------------+
 | **Default value**  | /usr/bin         |
@@ -153,7 +153,7 @@ Example of configuration
     <java_path>/usr/bin</java_path>
     <ciscat_path>/var/ossec/wodles/ciscat</ciscat_path>
 
-    <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
+    <content type="xccdf" path="/var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
       <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
     </content>
 
