@@ -190,8 +190,27 @@ Upgrade Elasticsearch
     # systemctl enable elasticsearch.service
     # systemctl start elasticsearch.service
 
-.. warning::
-  After starting the services, it's needed to wait at least **15 seconds** so the Elasticsearch server loads completely, in order to follow the next steps.
+  It's important to wait until the Elasticsearch server finishes starting. Check the current status with the following command, which should give you a response like the shown below:
+
+  .. code-block:: console
+
+    # curl localhost:9200/?pretty
+
+    {
+      "name" : "5urh-FJ",
+      "cluster_name" : "elasticsearch",
+      "cluster_uuid" : "B5rXKBg2Tr-KWwFdbDHJQg",
+      "version" : {
+        "number" : "6.2.1",
+        "build_hash" : "7299dc3",
+        "build_date" : "2018-02-07T19:34:26.990113Z",
+        "build_snapshot" : false,
+        "lucene_version" : "7.2.1",
+        "minimum_wire_compatibility_version" : "5.6.0",
+        "minimum_index_compatibility_version" : "5.0.0"
+      },
+      "tagline" : "You Know, for Search"
+    }
 
 3. Load the Wazuh Elasticsearch templates:
 
