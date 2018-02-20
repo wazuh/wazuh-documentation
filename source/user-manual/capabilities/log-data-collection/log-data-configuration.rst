@@ -105,7 +105,7 @@ To add a new output socket we need to specify it using the tag ``<socket>`` as s
     </socket>
 
 .. note::
-	More information aboud defining a socket: :ref:`socket <reference_ossec_socket>`
+	More information about defining a socket: :ref:`socket <reference_ossec_socket>`
 
 Once the socket is defined, it's possible to add the destination socket for each *localfile*::
 
