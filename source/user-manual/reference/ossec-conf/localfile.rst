@@ -178,7 +178,7 @@ The additional fields configured above would appear in the resulting event as be
 target
 ^^^^^^^^^
 
-Target specifies the name of the socket where the output will be redirected. The socket must be defined previusly to use it with this option.
+Target specifies the name of the socket where the output will be redirected. The socket must be defined previously to use it with this option.
 
 +--------------------+--------------------------------+
 | **Default value**  | agent                          |
