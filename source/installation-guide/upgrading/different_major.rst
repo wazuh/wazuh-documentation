@@ -201,7 +201,7 @@ Upgrade Elasticsearch
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "B5rXKBg2Tr-KWwFdbDHJQg",
       "version" : {
-        "number" : "6.2.1",
+        "number" : "6.2.2",
         "build_hash" : "7299dc3",
         "build_date" : "2018-02-07T19:34:26.990113Z",
         "build_snapshot" : false,
