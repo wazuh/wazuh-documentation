@@ -102,14 +102,13 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-        # yum install elasticsearch-6.2.1
+        # yum install elasticsearch-6.2.2
 
     b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-        # apt-get update
-        # apt-get install elasticsearch=6.2.1
+        # apt-get install elasticsearch=6.2.2
 
 2. Start the Elasticsearch service:
 
@@ -130,7 +129,7 @@ Upgrade Elasticsearch
           "cluster_name" : "elasticsearch",
           "cluster_uuid" : "B5rXKBg2Tr-KWwFdbDHJQg",
           "version" : {
-            "number" : "6.2.1",
+            "number" : "6.2.2",
             "build_hash" : "7299dc3",
             "build_date" : "2018-02-07T19:34:26.990113Z",
             "build_snapshot" : false,
@@ -166,14 +165,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-        # yum install logstash-6.2.1
+        # yum install logstash-6.2.2
 
     b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-        # apt-get update
-        # apt-get install logstash=1:6.2.1-1
+        # apt-get install logstash=1:6.2.2-1
 
 2. Start the Logstash service:
 
@@ -195,14 +193,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-        # yum install kibana-6.2.1
+        # yum install kibana-6.2.2
 
     b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-        # apt-get update
-        # apt-get install kibana=6.2.1
+        # apt-get install kibana=6.2.2
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -223,7 +220,7 @@ Upgrade Kibana
     .. code-block:: console
 
         # rm -rf /usr/share/kibana/optimize/bundles
-        # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+        # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.0_6.2.2.zip
 
 .. warning::
     The Wazuh app installation process may take several minutes. Please wait patiently.
@@ -245,14 +242,14 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-        # yum install filebeat-6.2.1
+        # yum install filebeat-6.2.2
 
     b) For Debian/Ubuntu:
 
     .. code-block:: console
 
         # apt-get update
-        # apt-get install filebeat=6.2.1
+        # apt-get install filebeat=6.2.2
 
 2. Start the Filebeat service:
 
