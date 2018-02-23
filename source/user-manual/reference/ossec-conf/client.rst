@@ -173,7 +173,7 @@ Specifies the time in seconds between agent checkins to the manager.  More frequ
 time-reconnect
 ^^^^^^^^^^^^^^
 
-Specifies the time in seconds before a reconnection is attempted. This should be set to a higher number than the ``notify_time`` parameter.  
+Specifies the time in seconds before a reconnection is attempted. This should be set to a higher number than the ``notify_time`` parameter.
 
 For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 300 would mean that agents will attempt to check in once per minute, but if a checkin attempt fails to get a response from the manager, the agent will wait five minutes before trying again.  Checkins will resume their normal one-minute interval following a successful connection attempt.
 
@@ -200,7 +200,7 @@ Specifies which IP address will be used to communicate with the manager when the
 disable-active-response
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-**Deprecated:** 
+**Deprecated:**
 
 .. warning::
 
@@ -218,7 +218,7 @@ auto_restart
 Toggles on and off the automatic restart of agents when a new valid configuration is received from the manager.
 
 +--------------------+---------------------+
-| **Default value**  | no                  |
+| **Default value**  | yes                 |
 +--------------------+---------------------+
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+

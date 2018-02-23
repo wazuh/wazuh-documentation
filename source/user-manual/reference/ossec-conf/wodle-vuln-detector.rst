@@ -124,4 +124,4 @@ Example of configuration
 
 
 
-.. note:: See the :doc:`Vulnerability detector section<../../capabilities/vulnerability-detector>` to obtain more information about this module.
+.. note:: See the :doc:`Vulnerability detector section<../../capabilities/vulnerability-detection>` to obtain more information about this module.

@@ -278,9 +278,7 @@ Linux configuration:
     <localfile>
       <log_format>syslog</log_format>
       <location>/var/log/syslog</location>
-      <expect>srcip</expect>
-      <timeout_allowed>yes</timeout_allowed>
-    </command>
+    </localfile>
 
     <!-- For monitoring command output -->
     <localfile>

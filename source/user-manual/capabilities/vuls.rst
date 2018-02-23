@@ -6,12 +6,12 @@ Vuls integration
 **Deprecated since Wazuh v3.2.0.**
 
 .. note::
-    Since Wazuh v3.2.0, the :doc:`Vulnerability detector wodle<vulnerability-detector>` performs the software vulnerability assessments natively.
+    Since Wazuh v3.2.0, the :doc:`Vulnerability detector wodle<vulnerability-detection>` performs the software vulnerability assessments natively.
 
 The integration of the Vuls project with Wazuh allows for the scheduling of periodic vulnerability scans in both the manager and the agents. This new addition allows system administrators the ability to automate the process of analyzing their systems for security vulnerabilities using the updated Wazuh Ruleset to interpret the VuLs scan results.
 
 - `What is Vuls?`_
-- `How it works?`_
+- `How it works`_
 - `How to configure Vuls scans`_
 - `Use case`_
 
@@ -21,8 +21,8 @@ What is Vuls?
 
 Vuls is a tool that was created to automate the process of analyzing installed software on Linux servers for known security vulnerabilities. This tool also looks to see whether any fixes have been published, what the impact of the vulnerability is along with  other relevant information.
 
-How it works?
---------------
+How it works
+------------
 
 The agent (or manager) being monitored will launch Vuls scans at the interval specified in the configuration. This scan consists of the following steps:
 

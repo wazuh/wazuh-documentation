@@ -20,7 +20,7 @@ Options
 - `scan_on_start`_
 - `hardware`_
 - `os`_
-- `programs`_
+- `packages`_
 
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
@@ -35,7 +35,7 @@ Options
 +----------------------+-----------------------------+
 | `os`_                | yes, no                     |
 +----------------------+-----------------------------+
-| `programs`_          | yes, no                     |
+| `packages`_          | yes, no                     |
 +----------------------+-----------------------------+
 
 
@@ -94,10 +94,10 @@ Enables the OS scan.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-programs
+packages
 ^^^^^^^^^
 
-Enables the programs scan.
+Enables the packages scan.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -117,5 +117,5 @@ Example of configuration
 	  <scan_on_start>yes</scan_on_start>
 	  <hardware>yes</hardware>
 	  <os>yes</os>
-	  <programs>yes</programs>
+	  <packages>yes</packages>
 	</wodle>

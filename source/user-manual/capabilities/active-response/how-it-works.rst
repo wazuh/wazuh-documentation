@@ -42,7 +42,7 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 	In this example, the command is called ``host-deny`` and initiates the ``host-deny.sh`` script.  The data element is defined as ``srcip``. This command is configured to allow a timeout after a specified period of time, making it a stateful response.
 
 	.. note::
-		More information on options for creating a command: :ref:`command <reference_ossec_commands>`
+		More information and options to create a command here: :ref:`command <reference_ossec_commands>`
 
 2. Define the **active response**
 
@@ -57,7 +57,7 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 		  <timeout>600</timeout>
 		</active‐response>
 
-	In this example, the active response is configured to execute the command that was defined in the previous step. The *where* of the action is defined as the local host and the *when* is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example. 
+	In this example, the active response is configured to execute the command that was defined in the previous step. The *where* of the action is defined as the local host and the *when* is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
 
 .. note::
 	More information about active response options: :ref:`Active response <reference_ossec_active_response>`
