@@ -233,6 +233,16 @@ Upgrade Kibana
         # systemctl enable kibana.service
         # systemctl start kibana.service
 
+5. Refresh the field list to properly load the new and updated visualizations:
+
+    a) Go to the Kibana web interface, and go to **Management > Index Patterns**.
+
+        .. image:: ../../images/kibana-app/others/refresh-1.png
+
+    b) Click the **Refresh field list** button, located at the top right corner of the page.
+
+        .. image:: ../../images/kibana-app/others/refresh-2.png
+
 Upgrade Filebeat
 ^^^^^^^^^^^^^^^^
 
