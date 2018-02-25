@@ -36,7 +36,7 @@ elasticsearch_jvm_xms
 elastic_stack_version
   Version of Elasticsearch to install
 
-  *Default 5.6.3*
+  *Default 6.2.2*
 
 elasticsearch_shards
   Set number of shards for indices
@@ -81,12 +81,12 @@ kibana_server_port
 elastic_stack_version
   Version of Kibana to install
 
-  *Default 5.6.3*
+  *Default 6.2.2*
 
 wazuh_version
   Wazuh APP compatible version to install
 
-  *Default 3.1.0*
+  *Default 3.2.0*
 
 .. _wazuh_ansible_reference_logstash:
 
@@ -126,7 +126,7 @@ elasticsearch_replicas
 elastic_stack_version
   Version of Logstash to install
 
-  *Default 5.6.3*
+  *Default 6.2.2*
 
 logstash_ssl
   Using ssl between filebeat and logstash
