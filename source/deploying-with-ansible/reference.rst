@@ -19,7 +19,7 @@ elasticsearch_node_name
   *Default node-1*
 
 elasticsearch_http_port
-  ElasticSearch listening port 
+  ElasticSearch listening port
 
   *Default 9200*
 
@@ -47,6 +47,11 @@ elasticsearch_replicas
   Set number of shards for indices
 
   *Default 1*
+
+elasticsearch_install_java
+  When it's present will install Oracle Java.
+
+  *Default yes*
 
 .. _wazuh_ansible_reference_kibana:
 
@@ -77,6 +82,11 @@ elastic_stack_version
   Version of Kibana to install
 
   *Default 5.6.3*
+
+wazuh_version
+  Wazuh APP compatible version to install
+
+  *Default 3.1.0*
 
 .. _wazuh_ansible_reference_logstash:
 
@@ -137,6 +147,11 @@ logstash_ssl_key_file
   SSL key file to be copied from Ansible server to logstash server.
 
   *Default null*
+
+logstash_install_java
+  When it's present will install Oracle Java.
+
+  *Default yes*
 
 .. _wazuh_ansible_reference_filebeat:
 
@@ -252,145 +267,182 @@ wazuh_manager_config:
       alerts_log: 'yes'
       logall: 'no'
       log_format: 'plain'
+      cluster:
+        disable: 'yes'
+        name: 'wazuh'
+        node_name: 'manager_01'
+        node_type: 'master'
+        key: 'ugdtAnd7Pi9myP7CVts4qZaZQEQcRYZa'
+        interval: '2m'
+        port: '1516'
+        bind_addr: '0.0.0.0'
+        nodes:
+          - '172.17.0.2'
+          - '172.17.0.3'
+          - '172.17.0.4'
+        hidden: 'no'
       connection:
-      - type: 'secure'
-        port: '1514'
-        protocol: 'tcp'
+        - type: 'secure'
+          port: '1514'
+          protocol: 'tcp'
       authd:
-      enable: false
-      port: 1515
-      use_source_ip: 'no'
-      force_insert: 'no'
-      force_time: 0
-      purge: 'no'
-      use_password: 'no'
-      ssl_agent_ca: null
-      ssl_verify_host: 'no'
-      ssl_manager_cert: null
-      ssl_manager_key: null
-      ssl_auto_negotiate: 'no'
+        enable: true
+        port: 1515
+        use_source_ip: 'yes'
+        force_insert: 'yes'
+        force_time: 0
+        purge: 'no'
+        use_password: 'no'
+        ssl_agent_ca: null
+        ssl_verify_host: 'no'
+        ssl_manager_cert: '/var/ossec/etc/sslmanager.cert'
+        ssl_manager_key: '/var/ossec/etc/sslmanager.key'
+        ssl_auto_negotiate: 'no'
       email_notification: 'no'
       mail_to:
-      - 'admin@example.net'
+        - 'admin@example.net'
       mail_smtp_server: localhost
       mail_from: wazuh-server@example.com
       extra_emails:
-      - enable: false
-        mail_to: 'admin@example.net'
-        format: full
-        level: 7
-        event_location: null
-        group: null
-        do_not_delay: false
-        do_not_group: false
-        rule_id: null
+        - enable: false
+          mail_to: 'admin@example.net'
+          format: full
+          level: 7
+          event_location: null
+          group: null
+          do_not_delay: false
+          do_not_group: false
+          rule_id: null
       reports:
-      - enable: false
-        category: 'syscheck'
-        title: 'Daily report: File changes'
-        email_to: 'admin@example.net'
-        location: null
-        group: null
-        rule: null
-        level: null
-        srcip: null
-        user: null
-        showlogs: null
+        - enable: false
+          category: 'syscheck'
+          title: 'Daily report: File changes'
+          email_to: 'admin@example.net'
+          location: null
+          group: null
+          rule: null
+          level: null
+          srcip: null
+          user: null
+          showlogs: null
       syscheck:
-      frequency: 43200
-      scan_on_start: 'yes'
-      auto_ignore: 'no'
-      alert_new_files: 'yes'
-      ignore:
-        - /etc/mtab
-        - /etc/mnttab
-        - /etc/hosts.deny
-        - /etc/mail/statistics
-        - /etc/random-seed
-        - /etc/random.seed
-        - /etc/adjtime
-        - /etc/httpd/logs
-        - /etc/utmpx
-        - /etc/wtmpx
-        - /etc/cups/certs
-        - /etc/dumpdates
-        - /etc/svc/volatile
-      no_diff:
-        - /etc/ssl/private.key
-      directories:
-        - dirs: /etc,/usr/bin,/usr/sbin
-          checks: 'check_all="yes"'
-        - dirs: /bin,/sbin
-          checks: 'check_all="yes"'
+        frequency: 43200
+        scan_on_start: 'yes'
+        auto_ignore: 'no'
+        alert_new_files: 'yes'
+        ignore:
+          - /etc/mtab
+          - /etc/mnttab
+          - /etc/hosts.deny
+          - /etc/mail/statistics
+          - /etc/random-seed
+          - /etc/random.seed
+          - /etc/adjtime
+          - /etc/httpd/logs
+          - /etc/utmpx
+          - /etc/wtmpx
+          - /etc/cups/certs
+          - /etc/dumpdates
+          - /etc/svc/volatile
+        no_diff:
+          - /etc/ssl/private.key
+        directories:
+          - dirs: /etc,/usr/bin,/usr/sbin
+            checks: 'check_all="yes"'
+          - dirs: /bin,/sbin
+            checks: 'check_all="yes"'
       rootcheck:
-      frequency: 43200
+        frequency: 43200
       openscap:
-      timeout: 1800
-      interval: '1d'
-      scan_on_start: 'yes'
+        disable: 'no'
+        timeout: 1800
+        interval: '1d'
+        scan_on_start: 'yes'
+      cis_cat:
+        disable: 'yes'
+        install_java: 'yes'
+        timeout: 1800
+        interval: '1d'
+        scan_on_start: 'yes'
+        java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
+        ciscat_path: '/var/ossec/wodles/ciscat'
+        content:
+          - type: 'xccdf'
+            path: 'benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml'
+            profile: 'xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Server'
+      vuls:
+        disable: 'yes'
+        interval: '1d'
+        run_on_start: 'yes'
+        args:
+          - 'mincvss 5'
+          - 'antiquity-limit 20'
+          - 'updatenvd'
+          - 'nvd-year 2016'
+          - 'autoupdate'
       log_level: 1
       email_level: 12
       localfiles:
-      - format: 'syslog'
-        location: '/var/log/messages'
-      - format: 'syslog'
-        location: '/var/log/secure'
-      - format: 'command'
-        command: 'df -P'
-        frequency: '360'
-      - format: 'full_command'
-        command: 'netstat -tln | grep -v 127.0.0.1 | sort'
-        frequency: '360'
-      - format: 'full_command'
-        command: 'last -n 20'
-        frequency: '360'
+        - format: 'syslog'
+          location: '/var/log/messages'
+        - format: 'syslog'
+          location: '/var/log/secure'
+        - format: 'command'
+          command: 'df -P'
+          frequency: '360'
+        - format: 'full_command'
+          command: 'netstat -tln | grep -v 127.0.0.1 | sort'
+          frequency: '360'
+        - format: 'full_command'
+          command: 'last -n 20'
+          frequency: '360'
       globals:
-      - '127.0.0.1'
-      - '192.168.2.1'
+        - '127.0.0.1'
+        - '192.168.2.1'
       commands:
-      - name: 'disable-account'
-        executable: 'disable-account.sh'
-        expect: 'user'
-        timeout_allowed: 'yes'
-      - name: 'restart-ossec'
-        executable: 'restart-ossec.sh'
-        expect: ''
-        timeout_allowed: 'no'
-      - name: 'win_restart-ossec'
-        executable: 'restart-ossec.cmd'
-        expect: ''
-        timeout_allowed: 'no'
-      - name: 'firewall-drop'
-        executable: 'firewall-drop.sh'
-        expect: 'srcip'
-        timeout_allowed: 'yes'
-      - name: 'host-deny'
-        executable: 'host-deny.sh'
-        expect: 'srcip'
-        timeout_allowed: 'yes'
-      - name: 'route-null'
-        executable: 'route-null.sh'
-        expect: 'srcip'
-        timeout_allowed: 'yes'
-      - name: 'win_route-null'
-        executable: 'route-null.cmd'
-        expect: 'srcip'
-        timeout_allowed: 'yes'
+        - name: 'disable-account'
+          executable: 'disable-account.sh'
+          expect: 'user'
+          timeout_allowed: 'yes'
+        - name: 'restart-ossec'
+          executable: 'restart-ossec.sh'
+          expect: ''
+          timeout_allowed: 'no'
+        - name: 'win_restart-ossec'
+          executable: 'restart-ossec.cmd'
+          expect: ''
+          timeout_allowed: 'no'
+        - name: 'firewall-drop'
+          executable: 'firewall-drop.sh'
+          expect: 'srcip'
+          timeout_allowed: 'yes'
+        - name: 'host-deny'
+          executable: 'host-deny.sh'
+          expect: 'srcip'
+          timeout_allowed: 'yes'
+        - name: 'route-null'
+          executable: 'route-null.sh'
+          expect: 'srcip'
+          timeout_allowed: 'yes'
+        - name: 'win_route-null'
+          executable: 'route-null.cmd'
+          expect: 'srcip'
+          timeout_allowed: 'yes'
       active_responses:
-      - command: 'restart-ossec'
-        location: 'local'
-        rules_id: '100002'
-      - command: 'win_restart-ossec'
-        location: 'local'
-        rules_id: '100003'
-      - command: 'host-deny'
-        location: 'local'
-        level: 6
-        timeout: 600
+        - command: 'restart-ossec'
+          location: 'local'
+          rules_id: '100002'
+        - command: 'win_restart-ossec'
+          location: 'local'
+          rules_id: '100003'
+        - command: 'host-deny'
+          location: 'local'
+          level: 6
+          timeout: 600
       syslog_outputs:
-      - server: null
-        port: null
-        format: null
+        - server: null
+          port: null
+          format: null
 
 wazuh_agent_configs:
   This store the different settings and profiles for centralized agent configuration via Wazuh Manager.
@@ -514,10 +566,19 @@ authd_pass:
 Wazuh Agent
 ===================
 
-wazuh_manager_ip:
-  Set Wazuh Manager server IP address to be used by the agent.
+wazuh_managers:
+  Set Wazuh Manager servers IP address, protocol, and port to be used by the agent.
 
-  *Default null*
+  *Example:*
+
+  .. code-block:: yaml
+
+      wazuh_managers:
+      - address: 172.16.24.56
+        protocol: udp
+      - address: 192.168.10.15
+        port: 1514
+        protocol: tcp
 
 wazuh_profile:
   Configure what profiles this agent will have.
@@ -531,7 +592,7 @@ wazuh_profile:
       wazuh_profile: "centos7, centos7-web"
 
 wazuh_agent_authd:
-  Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager.
+  Set the agent-authd facility. This will enable or not the automatic agent registration, you could set various options in accordance of the authd service configured in the Wazuh Manager. Be aware that this Ansible role will use the first Wazuh Manager address defined on `wazuh_managers` as the authd registration server.
 
   .. code-block:: yaml
 
@@ -571,58 +632,80 @@ wazuh_agent_config:
 
   .. code-block:: yaml
 
-    log_format: 'plain'
-    syscheck:
-      frequency: 43200
-      scan_on_start: 'yes'
-      auto_ignore: 'no'
-      alert_new_files: 'yes'
-      ignore:
-        - /etc/mtab
-        - /etc/mnttab
-        - /etc/hosts.deny
-        - /etc/mail/statistics
-        - /etc/random-seed
-        - /etc/random.seed
-        - /etc/adjtime
-        - /etc/httpd/logs
-        - /etc/utmpx
-        - /etc/wtmpx
-        - /etc/cups/certs
-        - /etc/dumpdates
-        - /etc/svc/volatile
-      no_diff:
-        - /etc/ssl/private.key
-      directories:
-        - dirs: /etc,/usr/bin,/usr/sbin
-          checks: 'check_all="yes"'
-        - dirs: /bin,/sbin
-          checks: 'check_all="yes"'
-      windows_registry:
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\batfile'
-          arch: 'both'
-        - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
-    rootcheck:
-      frequency: 43200
-    openscap:
-      disable: 'yes'
-      timeout: 1800
-      interval: '1d'
-      scan_on_start: 'yes'
-    localfiles:
-      - format: 'syslog'
-        location: '/var/log/messages'
-      - format: 'syslog'
-        location: '/var/log/secure'
-      - format: 'command'
-        command: 'df -P'
-        frequency: '360'
-      - format: 'full_command'
-        command: 'netstat -tln | grep -v 127.0.0.1 | sort'
-        frequency: '360'
-      - format: 'full_command'
-        command: 'last -n 20'
-        frequency: '360'
+      log_format: 'plain'
+      syscheck:
+        frequency: 43200
+        scan_on_start: 'yes'
+        auto_ignore: 'no'
+        alert_new_files: 'yes'
+        ignore:
+          - /etc/mtab
+          - /etc/mnttab
+          - /etc/hosts.deny
+          - /etc/mail/statistics
+          - /etc/random-seed
+          - /etc/random.seed
+          - /etc/adjtime
+          - /etc/httpd/logs
+          - /etc/utmpx
+          - /etc/wtmpx
+          - /etc/cups/certs
+          - /etc/dumpdates
+          - /etc/svc/volatile
+        no_diff:
+          - /etc/ssl/private.key
+        directories:
+          - dirs: /etc,/usr/bin,/usr/sbin
+            checks: 'check_all="yes"'
+          - dirs: /bin,/sbin
+            checks: 'check_all="yes"'
+        windows_registry:
+          - key: 'HKEY_LOCAL_MACHINE\Software\Classes\batfile'
+            arch: 'both'
+          - key: 'HKEY_LOCAL_MACHINE\Software\Classes\Folder'
+      rootcheck:
+        frequency: 43200
+      openscap:
+        disable: 'yes'
+        timeout: 1800
+        interval: '1d'
+        scan_on_start: 'yes'
+      cis_cat:
+        disable: 'yes'
+        install_java: 'yes'
+        timeout: 1800
+        interval: '1d'
+        scan_on_start: 'yes'
+        java_path: '/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin'
+        ciscat_path: '/var/ossec/wodles/ciscat'
+        content:
+          - type: 'xccdf'
+            path: 'benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml'
+            profile: 'xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Server'
+      vuls:
+        disable: 'yes'
+        interval: '1d'
+        run_on_start: 'yes'
+        args:
+          - 'mincvss 5'
+          - 'antiquity-limit 20'
+          - 'updatenvd'
+          - 'nvd-year 2016'
+          - 'autoupdate'
+      localfiles:
+        - format: 'syslog'
+          location: '/var/log/messages'
+        - format: 'syslog'
+          location: '/var/log/secure'
+        - format: 'command'
+          command: 'df -P'
+          frequency: '360'
+        - format: 'full_command'
+          command: 'netstat -tln | grep -v 127.0.0.1 | sort'
+          frequency: '360'
+        - format: 'full_command'
+          command: 'last -n 20'
+          frequency: '360'
 
   .. warning:: We recommend the use of `Ansible Vault <http://docs.ansible.com/ansible/playbooks_vault.html>`_ to protect authd credentials.
 
