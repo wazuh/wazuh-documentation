@@ -128,8 +128,6 @@ Attributes
 | **type**          | Select content type.                                        |
 +-------------------+-------------------------------------------------------------+
 | **path**          | Use the specified policy file.                              |
-|                   |                                                             |
-|                   | Default path: ``ciscat_path``/benchmarks                    |
 +-------------------+-------------------------------------------------------------+
 | **timeout**       | Timeout for the evaluation (in seconds).                    |
 |                   |                                                             |
@@ -137,6 +135,10 @@ Attributes
 +-------------------+-------------------------------------------------------------+
 | **profile**       | Select profile.                                             |
 +-------------------+-------------------------------------------------------------+
+
+.. note::
+
+    The ``path`` attribute must be filled in with the whole path where the benchmark files are located.
 
 Example of configuration
 ------------------------
