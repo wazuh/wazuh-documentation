@@ -37,4 +37,4 @@ Yes, by default, policies are evaluated when the wodle starts. You can change th
 Where are the policies?
 -----------------------
 
-Each agent must have its policies in ``/var/ossec/wodles/oscap/policies``.
+Each agent must have its policies in ``/var/ossec/wodles/oscap/content``.

@@ -63,7 +63,7 @@ The following is an example of how to deploy the CIS-CAT integration:
       <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
       <ciscat_path>/var/ossec/wodles/ciscat</ciscat_path>
 
-      <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
+      <content type="xccdf" path="/var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
         <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
       </content>
 
@@ -89,10 +89,10 @@ The following is an example of how to deploy the CIS-CAT integration:
 
     </wodle>
 
-.. note::
-    Make sure the paths are correct for the location of your Java and the CIS-CAT tool.
+  Make sure the paths are correct for the location of your Java and the CIS-CAT tool. Also, consider the following tips when configuring the ``content`` section:
 
-    If no profile is specified, the first one, which is usually the most permissive, will be selected.
+  - The location of the selected benchmark file have to be indicated by the whole path.
+  - If no profile is specified, the first one, which is usually the most permissive, will be selected.
 
 2. After restarting the Wazuh agent, the benchmark checks will be executed at the specified interval, triggering alerts as shown below.
 

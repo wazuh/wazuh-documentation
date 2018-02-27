@@ -172,14 +172,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.2.1
+      # yum install elasticsearch-6.2.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch=6.2.1
+      # apt-get install elasticsearch=6.2.2
 
 
 2. Start Elasticsearch:
@@ -190,6 +190,27 @@ Upgrade Elasticsearch
     # systemctl enable elasticsearch.service
     # systemctl start elasticsearch.service
 
+  It's important to wait until the Elasticsearch server finishes starting. Check the current status with the following command, which should give you a response like the shown below:
+
+  .. code-block:: console
+
+    # curl localhost:9200/?pretty
+
+    {
+      "name" : "5urh-FJ",
+      "cluster_name" : "elasticsearch",
+      "cluster_uuid" : "B5rXKBg2Tr-KWwFdbDHJQg",
+      "version" : {
+        "number" : "6.2.2",
+        "build_hash" : "7299dc3",
+        "build_date" : "2018-02-07T19:34:26.990113Z",
+        "build_snapshot" : false,
+        "lucene_version" : "7.2.1",
+        "minimum_wire_compatibility_version" : "5.6.0",
+        "minimum_index_compatibility_version" : "5.0.0"
+      },
+      "tagline" : "You Know, for Search"
+    }
 
 3. Load the Wazuh Elasticsearch templates:
 
@@ -218,13 +239,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash-6.2.1
+      # yum install logstash-6.2.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash=1:6.2.1-1
+      # apt-get install logstash=1:6.2.2-1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -263,13 +284,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-6.2.1
+      # yum install kibana-6.2.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=6.2.1
+      # apt-get install kibana=6.2.2
 
 
 2. Remove the Wazuh Kibana App plugin from Kibana:
@@ -299,7 +320,7 @@ Upgrade Kibana
   .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.0_6.2.2.zip
 
 
 5. Start Kibana:
@@ -319,13 +340,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.2.1
+      # yum install filebeat-6.2.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.2.1
+      # apt-get install filebeat=6.2.2
 
 2. Download the Filebeat configuration file from the Wazuh repository:
 

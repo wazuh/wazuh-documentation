@@ -594,7 +594,7 @@ Wazuh Modules
 +                             +---------------+-----------------------------------------------------------------------------------+
 |                             | Allowed value | Any integer between -20 and 19                                                    |
 +-----------------------------+---------------+-----------------------------------------------------------------------------------+
-| **wazuh_modules.max_eps**   | Description   | Maximum number of events per second sent by OpenSCAP Wazuh Module.                |
+| **wazuh_modules.max_eps**   | Description   | Maximum number of events per second sent by all Wazuh Module.                     |
 +                             +---------------+-----------------------------------------------------------------------------------+
 |                             | Default value | 1000                                                                              |
 +                             +---------------+-----------------------------------------------------------------------------------+
