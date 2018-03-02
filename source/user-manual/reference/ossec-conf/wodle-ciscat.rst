@@ -98,13 +98,13 @@ java_path
 Define where Java is located. If this parameter is not set, the wodle will search for the Java location in the default environment variable ``$PATH``.
 
 +--------------------+------------------+
-| **Default value**  | /usr/bin         |
+| **Default value**  | wodles/java      |
 +--------------------+------------------+
 | **Allowed values** | Any valid path.  |
 +--------------------+------------------+
 
 .. warning::
-    For Windows environments, the ``java_path`` has to include the executable as follows: ``C:\path\to\java\java.exe``. On the other hand, for Unix agents the path should not include the Java binary.
+    For this field, it can be set a full path or a relative path. Whether you specify a relative path, it concatenates to the Wazuh installation path. ``ciscat_path`` has the same behavior.
 
 ciscat_path
 ^^^^^^^^^^^^
@@ -112,7 +112,7 @@ ciscat_path
 Define where CIS-CAT is located.
 
 +--------------------+----------------------------+
-| **Default value**  | /var/ossec/wodles/ciscat   |
+| **Default value**  | wodles/ciscat              |
 +--------------------+----------------------------+
 | **Allowed values** | Any valid path.            |
 +--------------------+----------------------------+
@@ -138,7 +138,7 @@ Attributes
 
 .. note::
 
-    The ``path`` attribute must be filled in with the whole path where the benchmark files are located.
+    The ``path`` attribute can be filled in with the whole path where the benchmark files are located, or with a relative path to the CIS-CAT tool location.
 
 Example of configuration
 ------------------------
@@ -153,9 +153,9 @@ Example of configuration
     <scan-on-start>yes</scan-on-start>
 
     <java_path>/usr/bin</java_path>
-    <ciscat_path>/var/ossec/wodles/ciscat</ciscat_path>
+    <ciscat_path>wodles/ciscat</ciscat_path>
 
-    <content type="xccdf" path="/var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
+    <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
       <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
     </content>
 
