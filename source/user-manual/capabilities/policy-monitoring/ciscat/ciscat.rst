@@ -61,9 +61,9 @@ The following is an example of how to deploy the CIS-CAT integration:
       <scan-on-start>yes</scan-on-start>
 
       <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
-      <ciscat_path>/var/ossec/wodles/ciscat</ciscat_path>
+      <ciscat_path>wodles/ciscat</ciscat_path>
 
-      <content type="xccdf" path="/var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
+      <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
         <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
       </content>
 
@@ -80,18 +80,18 @@ The following is an example of how to deploy the CIS-CAT integration:
       <interval>1d</interval>
       <scan-on-start>yes</scan-on-start>
 
-      <java_path>\\server\jre\bin\java.exe</java_path>
+      <java_path>\\server\jre\bin</java_path>
       <ciscat_path>C:\cis-cat</ciscat_path>
 
-      <content type="xccdf" path="C:\cis-cat\benchmarks\your_windows_benchamark_file_xccdf.xml">
+      <content type="xccdf" path="benchmarks\your_windows_benchamark_file_xccdf.xml">
         <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
       </content>
 
     </wodle>
 
-  Make sure the paths are correct for the location of your Java and the CIS-CAT tool. Also, consider the following tips when configuring the ``content`` section:
+  Make sure the paths are correct for the location of your Java and the CIS-CAT tool. For both cases, you could specify the full path, or a relative path to the Wazuh installation folder. Also, consider the following tips when configuring the ``content`` section:
 
-  - The location of the selected benchmark file have to be indicated by the whole path.
+  - The location of the selected benchmark file have to be indicated by the full path, or by a relative path to the CIS-CAT installation folder.
   - If no profile is specified, the first one, which is usually the most permissive, will be selected.
 
 2. After restarting the Wazuh agent, the benchmark checks will be executed at the specified interval, triggering alerts as shown below.
