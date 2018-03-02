@@ -28,4 +28,5 @@ will assume that the previous labs have already been completed, so we encourage 
     audit-commands
     suricata
     vuln-detection
+    cloudtrail
     
