@@ -12,28 +12,35 @@ This release is a bug fix release. This section shows the most relevant improvem
 
 Wazuh modules
 -------------
-Fixed some bugs in Wazuh modules that affected performance and functionality. Verification has also been improved when setting up these modules remotely.
 
-In vulnerability-detector module the following bugs have been fixed: problems detecting agents with supported operating systems, duplicate alerts and RAM consumption. Furthermore, the module is no longer included in the agents, reducing package size and preventing errors.
+Several bugs has been fixed in this release, improving the performance of the Wazuh modules.
 
-In syscollector module the agent software collection has been improved and some bugs in its configuration fixed. The creation of zombie processes is also prevented.
+First of all, it has been established a maximum of events sent per sencond for every module in order to avoid the agent flooding.
+This limit is configurable by the ``wazuh_modules.max_eps`` parameter of the internal configuration.
 
-Finally, CIS-CAT has improved the JAVA selection, updated its rules, fixed memory leaks and added support for relative/full/network paths in its configuration
+For the vulnerability-detector module several bugs have been fixed related to duplicated alerts and RAM consumption.
+Furthermore, this module is no longer included in the agents, reducing package size and preventing errors.
+
+In addition, a bug that made it impossible to set the centralized configuration of the agents software collector has been solved.
+
+For the CIS-CAT wodle it has been improved the JAVA binary selection, updated its rules, added support for relative/full/network paths in its configuration.
+
+Finally, some memory leaks and other bugs reported by Coverity have been solved.
 
 Cluster
 -------
-Several bugs have been fixed in the cluster. It has improved ``cluster-control`` to give more information about type of nodes and now is possible to enable a debug mode.
+Several bugs have been fixed in the cluster. It has improved ``cluster-control`` to give more information about type of nodes and now it is possible to enable a debug mode.
 
 Agents management
 -----------------
 
-At the agent level, the bug that did not recognize correctly the version of some operating systems has been fixed.
+At the agent level, a bug that did not recognize correctly the version of some operating systems has been fixed.
 
-The API call ``GET/agents/purgeable/: timeframe`` has been restructured to add a new field, totalItems. This field contains the number of agents that can be removed.
+The API call ``GET/agents/purgeable/: timeframe`` has been restructured to add a new field called ``totalItems``. This field contains the number of agents that can be removed.
 
 OpenSSL library
 ---------------
-OpenSSL library is updated from 1.0.21 to `1.1.0g <https://www.openssl.org/news/changelog.html#x1>`_ . This version fixes two security vulnerabilities:
+OpenSSL library has been updated from 1.0.2k to `1.1.0g <https://www.openssl.org/news/changelog.html#x1>`_ . This version fixes two security vulnerabilities:
 
 - `CVE-2017-3736 <https://www.openssl.org/news/secadv/20171102.txt>`_ : It can allow an attacker to recover the encryption keys used to protect communications.
 - `CVE-2017-3735 <https://www.openssl.org/news/secadv/20170828.txt>`_ : It can allow a malicious user to do a one-byte overread.
