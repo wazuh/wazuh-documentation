@@ -9,8 +9,7 @@ to your VPC configuration, etc...  You may even need to monitor read and/or writ
 purposes, AWS provides CloudTrail, a rich facility for establishing an audit trail of all such events.  
 
 Wazuh natively supports the collection and analysis of CloudTrail logs.  In this lab we will enable CloudTrail in our Wazuh AWS lab 
-environment, configure Wazuh to ingest these logs, and craft a couple of custom rules to ale
-rt on successful off-hours logins to your AWS Management
+environment, configure Wazuh to ingest these logs, and craft a couple of custom rules to alert on successful off-hours logins to your AWS Management
 Console. 
 
 Create the trail
@@ -157,7 +156,7 @@ Set up wazuh-server to fetch and analyze the CloudTrail logs
             <run_on_start>yes</run_on_start>
         </wodle>
 
-3. Restart Wazuh manager with ``ossec-control restart`` on wazuh-server
+3. Restart Wazuh manager with ``ossec-control restart`` on wazuh-server.
 
 4. Confirm wazuh-server is fetching CloudTrail logs successfully, by looking at the logs.
 
@@ -205,28 +204,97 @@ Generate some events and find them in Kibana and in the ruleset
 Custom alert on off-hours logins to AWS Management console
 ----------------------------------------------------------
 
-child rule of 80253 - Amazon: signin.amazonaws.com - ConsoleLogin - User Login Success.
-<time>6 am - 6 pm</time>
-The time is when the event actually reaches wazuh-server, not compared to timestamp in log recorded
+1. In ``/var/ossec/etc/rules/local_rules.xml``, add a new child rule to 80253 (Amazon: signin.amazonaws.com - ConsoleLogin - User Login Success).  Set the ``<time>`` value to a time window that includes the current time reported on wazuh-server.
+
+    .. code-block:: xml
+
+        <rule id="100300" level="12">
+            <if_sid>80253</if_sid>
+            <description>Off-hours successful login to AWS Management Console</description>
+            <time>13:00 - 16:00</time>
+        </rule>
+
+2. Find a recent successful AWS console login event in Kibana by searching for "ConsoleLogin AND Success".  Copy the content of the full_log field.
+
+3. Run ``ossec-logtest -v`` on wazuh-server and paste in the login event.  The last portion of the output should look like this:
+
+    .. code-block:: console
+
+          **Phase 3: Completed filtering (rules).
+            Rule id: '100300'
+            Level: '12'
+            Description: 'Off-hours login to AWS Management Console'
+        **Alert to be generated.
+
+    .. note::
+        The <time> value in Wazuh rules is evaluated relative to the actual system time on the server where the Wazuh manager is running when it receives the log entry, 
+        not relative to any time field in the log entry itself.
+
+4. Change the <time> window in the rule to something outside of the current time on wazuh-server, and paste the login event again into ``ossec-logtest -v``.  You should see different results, like this:
+
+    .. code-block:: console
+
+        **Phase 3: Completed filtering (rules).
+            Rule id: '80253'
+            Level: '3'
+            Description: 'Amazon: signin.amazonaws.com - ConsoleLogin - User Login Success.'
+        **Alert to be generated.
 
 
 
 Custom alert on logins to AWS Management console from unauthorized IP blocks
 ----------------------------------------------------------------------------
 
-IP CDB
+1. Create a CDB at ``/var/ossec/etc/lists/aws-console-ips`` of net blocks and individual IPs from which it is normal for logins to your AWS console to originate.
 
-add your office public IP block to CDB
+    .. code-block:: console
 
-add list to ossec.conf and make-lists it
+        8.8.8.:office public IP block
+        55.77.22.:another office public IP block
+        57.65.45.23:John Smith home IP
+        22.33.22.11:cloud server X
 
-child of 80253 again, but this time with a negative lookup
+2. Surf to ``https://www.whatismyip.com/`` to find what public IP you using on the Internet, and then use it to replace the "8.8.8." IP prefix above with something that contains the IP you are using.  For example, if your public IP is 1.2.3.4, then replace "8.8.8." with "1.2.3.".
 
-<list field="aws.sourceIPAddress" lookup="not_address_match_key">etc/lists/aws-console-IPs</list>
+3. In the ``<ruleset>`` section of ossec.conf on wazuh-server, add this reference to your new list:
 
-logout and back in to AWS console from your local system
-then RDP to windows-agent and login to AWS console from there.
+    .. code-block:: console
 
+        <list>etc/lists/aws-console-ips</list>
+
+3. On wazuh-server, run ``ossec-makelists` to compile the new list.  Output should include:
+
+    .. code-block:: console
+    
+        * File etc/lists/aws-console-ips.cdb needs to be updated
+
+4. In ``/var/ossec/etc/rules/local_rules.xml``, add another new child rule to 80253.  This one will check the source IP of each successful login to your AWS console, and alert if the IP in not in your approved list of IPs and networks.
+
+    .. code-block:: xml
+
+        <rule id="100310" level="13">
+            <if_sid>80253</if_sid>
+            <list field="aws.sourceIPAddress" lookup="not_address_match_key">etc/lists/aws-console-ips</list>
+            <description>Successful login to AWS Managment Console from unexpected IP.</description>
+        </rule>
+
+5. On wazuh-server, restart the Wazuh manager with ``ossec-control restart``.
+
+6. From your own computer, log out of the AWS Management Console and then log back in.  Wait 15 minutes to ensure that AWS has posted the login event to CloudTrail, and then restart Wazuh manager with ``ossec-control restart`` to immediately import the latest CloudTrail logs.
+
+7. Use Kibana to find your successful login, and note that the Wazuh rule that fired was not the one you just created, because you logged in from an "authorized" IP.
+
+8. Copy the full_log content of your AWS Console login event.  In a text editor, adapt the sourceIPAddress value from your IP to some other IP.
+
+9. Paste the revised log event into ``ossec-logtest -v`` and you should see this:
+
+    .. code-block:: console
+
+        **Phase 3: Completed filtering (rules).
+            Rule id: '100310'
+            Level: '13'
+            Description: 'Successful login to AWS Managment Console from unexpected IP.'
+        **Alert to be generated.
 
 
 
