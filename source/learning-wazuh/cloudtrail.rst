@@ -5,12 +5,12 @@ Alert on suspicious logins to your AWS Management Console
 
 If you are responsible for resources in the AWS Amazon Cloud such as EC2 instances or S3 buckets, it is important to monitor AWS management
 events related to those resources, such as creation/deletion of EC2 instances, changes to object permissions or security groups, revisions 
-to your VPC configuration, etc...  You may even need to monitor read and/or write operations to data stored in certain S3 buckets.  For these
-purposes, AWS provides CloudTrail, a rich facility for establishing an audit trail of all such events.  
+to your VPC configuration, etc...  For these purposes, AWS provides CloudTrail, a rich facility for establishing an audit trail of all such 
+events.  
 
 Wazuh natively supports the collection and analysis of CloudTrail logs.  In this lab we will enable CloudTrail in our Wazuh AWS lab 
-environment, configure Wazuh to ingest these logs, and craft a couple of custom rules to alert on successful off-hours logins to your AWS Management
-Console. 
+environment, configure Wazuh to ingest these logs, and craft a couple of custom rules to alert on suspicious-looking logins to your 
+AWS Management Console. 
 
 Create the trail
 ----------------
@@ -42,7 +42,7 @@ Create the trail
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-    You now have a new Trail and a new S3 bucket it will write logs to:
+    You now have a new Trail and a new S3 bucket to which it will write logs:
 
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/created-trail.png                                |
@@ -109,9 +109,9 @@ IAM user under your AWS account and granting it access only to this specific buc
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-4. Close the AWS policy tab in your browser which should return you to the IAM Management Console screen where we are now ready to assign our new policy to our new user.  Click on t
+4. Close the AWS policy tab in your browser which should return you to the IAM Management Console screen where we are now ready to assign our new policy to our new user.  
 
-5. In the "Search" field, type "wazuh" and when it pops in in the results, checkmark the "wazuh-cloudtrail" policy and click **[Next: Review]** and then on **[Create user]**.
+5. In the "Search" field, type "wazuh" and when it pops up in the results, checkmark the "wazuh-cloudtrail" policy and click **[Next: Review]** and then **[Create user]**.
 
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/cloudtrail-policy-assign.png                     |
@@ -156,7 +156,7 @@ Set up wazuh-server to fetch and analyze the CloudTrail logs
             <run_on_start>yes</run_on_start>
         </wodle>
 
-3. Restart Wazuh manager with ``ossec-control restart`` on wazuh-server.
+3. Restart the Wazuh manager with ``ossec-control restart`` on wazuh-server.
 
 4. Confirm wazuh-server is fetching CloudTrail logs successfully, by looking at the logs.
 
@@ -201,10 +201,10 @@ Generate some events and find them in Kibana and in the ruleset
 
 5. Take time to explore the variety of other kinds of CloudTrail events already collected by Wazuh.  Also, explore the Wazuh rules relevant to CloudTrail at ``/var/ossec/ruleset/rules/0350-amazon_rules.xml`` on wazuh-server.
 
-Custom alert on off-hours logins to AWS Management console
+Custom alert on off-hours logins to AWS Management Console
 ----------------------------------------------------------
 
-1. In ``/var/ossec/etc/rules/local_rules.xml``, add a new child rule to 80253 (Amazon: signin.amazonaws.com - ConsoleLogin - User Login Success).  Set the ``<time>`` value to a time window that includes the current time reported on wazuh-server.
+1. In ``/var/ossec/etc/rules/local_rules.xml``, add a new child rule to 80253 (Amazon: signin.amazonaws.com - ConsoleLogin - User Login Success).  Set the ``<time>`` value to a time window that includes the current time reported on wazuh-server.  For the purposes of this lab we are pretending that right now is "off-hours."
 
     .. code-block:: xml
 
@@ -228,7 +228,7 @@ Custom alert on off-hours logins to AWS Management console
 
     .. note::
         The <time> value in Wazuh rules is evaluated relative to the actual system time on the server where the Wazuh manager is running when it receives the log entry, 
-        not relative to any time field in the log entry itself.
+        not relative to any time field in the log entry itself.  
 
 4. Change the <time> window in the rule to something outside of the current time on wazuh-server, and paste the login event again into ``ossec-logtest -v``.  You should see different results, like this:
 
@@ -242,8 +242,8 @@ Custom alert on off-hours logins to AWS Management console
 
 
 
-Custom alert on logins to AWS Management console from unauthorized IP blocks
-----------------------------------------------------------------------------
+Custom alert on logins to AWS Management console from unauthorized IPs
+----------------------------------------------------------------------
 
 1. Create a CDB at ``/var/ossec/etc/lists/aws-console-ips`` of net blocks and individual IPs from which it is normal for logins to your AWS console to originate.
 
@@ -284,9 +284,9 @@ Custom alert on logins to AWS Management console from unauthorized IP blocks
 
 7. Use Kibana to find your successful login, and note that the Wazuh rule that fired was not the one you just created, because you logged in from an "authorized" IP.
 
-8. Copy the full_log content of your AWS Console login event.  In a text editor, adapt the sourceIPAddress value from your IP to some other IP.
+8. Copy the full_log content of your AWS Console login event.  In a text editor, adapt the sourceIPAddress value from your real IP to "5.6.7.8".
 
-9. Paste the revised log event into ``ossec-logtest -v`` and you should see this:
+9. Paste the revised log event into ``ossec-logtest -v`` and you should see this, because 5.6.7.8 was not in the CDB list:
 
     .. code-block:: console
 
@@ -296,6 +296,6 @@ Custom alert on logins to AWS Management console from unauthorized IP blocks
             Description: 'Successful login to AWS Managment Console from unexpected IP.'
         **Alert to be generated.
 
-
+We have only touched the tip of the iceberg when it comes to monitoring CloudTrail events, but hopeful this has whetted you appetite to explore further.
 
 
