@@ -39,13 +39,7 @@ Upgrade the Wazuh manager
 
         # apt-get update && apt-get install --only-upgrade wazuh-manager
 
-2. Upgrade the ruleset with the latest changes:
-
-    .. code-block:: console
-
-        # /var/ossec/bin/update_ruleset -n 3.2
-
-3. Upgrade the ``wazuh-api`` package:
+2. Upgrade the ``wazuh-api`` package:
 
     a) For CentOS/RHEL/Fedora:
 
@@ -220,7 +214,7 @@ Upgrade Kibana
     .. code-block:: console
 
         # rm -rf /usr/share/kibana/optimize/bundles
-        # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.0_6.2.2.zip
+        # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.1_6.2.2.zip
 
 .. warning::
     The Wazuh app installation process may take several minutes. Please wait patiently.
