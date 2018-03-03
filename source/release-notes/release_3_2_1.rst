@@ -3,7 +3,7 @@
 3.2.1 Release Notes
 ===================
 
-This release is a bug fix release. This section shows the most relevant improvements and fixes of Wazuh v3.2.1. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/3.2/CHANGELOG.md>`_ file.
+This release is a bug fix release. This section shows the most relevant improvements and fixes of Wazuh v3.2.1. You will find more detailed information in the `changelog <https://github.com/wazuh/wazuh/blob/3.2/CHANGELOG.md#v321>`_ file.
 
 - `Wazuh modules`_
 - `Cluster`_
