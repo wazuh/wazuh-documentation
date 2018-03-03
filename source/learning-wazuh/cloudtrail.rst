@@ -1,7 +1,7 @@
 .. _learning_wazuh_cloudtrail:
 
 Alert on suspicious logins to your AWS Management Console
-========================================================
+=========================================================
 
 If you are responsible for resources in the AWS Amazon Cloud such as EC2 instances or S3 buckets, it is important to monitor AWS management
 events related to those resources, such as creation/deletion of EC2 instances, changes to object permissions or security groups, revisions 
@@ -262,7 +262,7 @@ Custom alert on logins to AWS Management console from unauthorized IP blocks
 
         <list>etc/lists/aws-console-ips</list>
 
-3. On wazuh-server, run ``ossec-makelists` to compile the new list.  Output should include:
+3. On wazuh-server, run ``ossec-makelists`` to compile the new list.  Output should include:
 
     .. code-block:: console
     
