@@ -53,6 +53,9 @@ Packages List
 | AIX 6 or greater |  3.2.0  |   LPARs      | `wazuh-agent_v3.2.0-aix6.1.tar <https://packages.wazuh.com/3.x/aix/wazuh-agent_v3.2.0-aix6.1.tar>`_                                                     | 20a6e48e93504b54066dfc1dda9853a6  |
 +------------------+---------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+
 
+.. note::
+   In RPM based packages are included CentOS/RHEL, Fedora, SLES and Amazon Linux.
+
 OVA Wazuh 3.2.1 + ELK 6.2.1
 ----------------------------
 
