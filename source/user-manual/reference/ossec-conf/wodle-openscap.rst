@@ -123,7 +123,7 @@ Example of configuration
     <interval>1d</interval>
     <scan-on-start>yes</scan-on-start>
 
-    <content type="xccdf" path="ssg-centos7-ds.xml"/>
-    <content type="xccdf" path="ssg-centos6-ds.xml"/>
+    <content type="xccdf" path="ssg-centos-7-ds.xml"/>
+    <content type="xccdf" path="ssg-centos-6-ds.xml"/>
 
   </wodle>
