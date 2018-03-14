@@ -121,7 +121,7 @@ Example of configuration
       <connection>syslog</connection>
       <port>514</port>
       <protocol>udp</protocol>
-      <allowed_ips>192.168.1.0/24</allowed_ips>
+      <allowed-ips>192.168.1.0/24</allowed-ips>
       <local_ip>192.168.1.5</local_ip>
     </remote>
 
