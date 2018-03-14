@@ -125,7 +125,7 @@ Installing the Wazuh API
     #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
     #   yum-config-manager --enable rhel-server-rhscl-6-rpms
 
-  3. Install the Wazuh API. It will update NodeJS if it is required:
+3. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: console
 
