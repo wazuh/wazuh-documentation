@@ -144,12 +144,6 @@ Upgrade Elasticsearch
 
         # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
-4. Insert the sample alert in Elasticsearch:
-
-    .. code-block:: console
-
-        # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
-
 Upgrade Logstash
 ^^^^^^^^^^^^^^^^
 
@@ -226,16 +220,6 @@ Upgrade Kibana
         # systemctl daemon-reload
         # systemctl enable kibana.service
         # systemctl start kibana.service
-
-5. Refresh the field list to properly load the new and updated visualizations:
-
-    a) Go to the Kibana web interface, and go to **Management > Index Patterns**.
-
-        .. image:: ../../images/kibana-app/others/refresh-1.png
-
-    b) Click the **Refresh field list** button, located at the top right corner of the page.
-
-        .. image:: ../../images/kibana-app/others/refresh-2.png
 
 Upgrade Filebeat
 ^^^^^^^^^^^^^^^^
