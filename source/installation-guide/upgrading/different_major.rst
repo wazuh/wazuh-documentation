@@ -222,14 +222,6 @@ Upgrade Elasticsearch
 
     # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
-
-4. Insert sample alert in Elasticsearch:
-
-  .. code-block:: console
-
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
-
-
 Upgrade Logstash
 ----------------
 
