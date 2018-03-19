@@ -100,15 +100,11 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       "tagline" : "You Know, for Search"
     }
 
-3. Load Wazuh Elasticsearch templates:
+3. Load the Wazuh template for Elasticsearch:
 
   .. code-block:: console
 
 	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
-
-  .. code-block:: console
-
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
 
 .. note::
 
