@@ -35,7 +35,7 @@ Upgrade the Wazuh agent
 
   * Using the command line:
 
-  To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt (the /q argument is used for unattended installations):
+  To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt (the ``/q`` argument is used for unattended installations):
 
   .. code-block:: console
 
