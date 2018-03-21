@@ -45,18 +45,17 @@ base_directory
 
 The base directory that will be appended to the following options:
 
-rootkit_files
-rootkit_trojans
-windows_malware
-windows_audit
-windows_apps
-systems_audit
+- rootkit_files
+- rootkit_trojans
+- systems_audit
 
-+--------------------+---------------------+
-| **Default value**  | /var/ossec          |
-+--------------------+---------------------+
-| **Allowed values** | Path to a directory |
-+--------------------+---------------------+
++-----------------------------+---------------------+
+| **Default value (UNIX)**    | /                   |
++-----------------------------+---------------------+
+| **Default value (Windows)** | C:\\                |
++-----------------------------+---------------------+
+| **Allowed values**          | Path to a directory |
++-----------------------------+---------------------+
 
 .. _reference_ossec_rootcheck_rootkit_files:
 
