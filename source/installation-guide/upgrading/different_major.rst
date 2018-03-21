@@ -37,7 +37,6 @@ Upgrade Wazuh agent
 
       # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
-
 3. Upgrade the agent.
 
   a) Upgrade the Wazuh agent on CentOS/RHEL/Fedora:
@@ -53,6 +52,27 @@ Upgrade Wazuh agent
       # apt-get update
       # apt-get install wazuh-agent
 
+  c) For Windows:
+
+  The agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it (both of them require **administrator rights**):
+
+  * Using the GUI installer:
+
+  Open the installer and follow the instructions to upgrade the agent.
+
+    .. image:: ../../images/installation/windows.png
+      :align: center
+
+  * Using the command line:
+
+  To upgrade the Windows agent from the command line, run the installer using Windows PowerShell or the command prompt (the /q argument is used for unattended installations):
+
+  .. code-block:: console
+
+    # wazuh-agent-3.2.1-1.msi /q
+
+.. note::
+  To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
 
 Upgrade Wazuh manager
 ---------------------
