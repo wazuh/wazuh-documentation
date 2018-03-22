@@ -32,19 +32,19 @@ Sign up for a free VirusTotal account and get your API key
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-7. Then click on "Settings" and then on "API Key"
+7. Click on "Settings" and then on "API Key".
 
 8. Copy the API Key that is displayed, as you will need to include it in the configuration of Wazuh's VirusTotal integration.
 
 
-Create a rule to identify specific FIM events that should trigger VirusTotal lookups
-------------------------------------------------------------------------------------
+Create a rule to identify specific FIM events to trigger VirusTotal lookups
+---------------------------------------------------------------------------
 
 In this lab we will only call VirusTotal about new or changed files in a directory called ``/vt-test``, as described in new rule 100400.  
 
 Append the following to the very end of ``/var/ossec/etc/rules/local_rules.xml`` on wazuh-server:
 
-  .. code-block:: xml
+    .. code-block:: xml
 
         <group name="syscheck,">
         <rule id="100400" level="7">
@@ -55,7 +55,7 @@ Append the following to the very end of ``/var/ossec/etc/rules/local_rules.xml``
         </group>
 
 
-Enable and Configure VirusTotal integration on wazuh-server
+Enable and configure VirusTotal integration on wazuh-server
 -----------------------------------------------------------
 
 1. Enable the Wazuh integrations feature with this one-time command
@@ -74,6 +74,9 @@ Enable and Configure VirusTotal integration on wazuh-server
             <rule_id>100400</rule_id>
             <alert_format>json</alert_format>
         </integration>
+
+.. note::
+    While in this case we are using a specific rule as our criteria for calling VirusTotal, see the documentation for other additional or separate kinds of criteria that can be used here.
 
 
 Centralize Linux agent FIM configuration and set it up for this lab
@@ -103,7 +106,7 @@ Instead of making the same ``<syscheck>`` configuration changes on each Linux ag
         # verify-agent-conf
         # ossec-control restart
 
-4. Wait a few moments while both Linux agent systems automatically pick up the change and restart.  They won't actually start real-time scanning the ``/vt-test`` directory since it does not yet exist.
+4. Wait a few moments while both Linux agent systems automatically pick up the change and restart.  They won't actually start real-time scanning the ``/vt-test`` directory yet since it does not yet exist.
 
 
 Go get some (simulated) malware!
@@ -120,7 +123,7 @@ alerted on as malicious according to VirusTotal.
         # mkdir /vt-test
         # ossec-control restart
 
-2. Wait about 2 minutes for the real time FIM scanning engine to initialize on the agent.  Confirm it is ready with this check:
+2. Wait about two minutes for the real time FIM scanning engine to initialize on the agent.  Confirm it is ready with this check:
 
     .. code-block:: console
 
@@ -145,7 +148,7 @@ Look at the results in Kibana
 By now, Wazuh should have noticed the zip file and the unzipped "malware," and both should have been checked against VirusTotal.  Only the
 unzipped malware should actually match.
 
-1. Search Kibana for "syscheck OR virustotal" (not in quotes) to see recent FIM and VT lookup events.  Choose fields for columnar display like below.
+1. Search Kibana for ``syscheck OR virustotal`` to see recent FIM and VT lookup events.  Choose fields for columnar display like below.
 
     +-----------------------------------------------------------------------------------------------+
     | .. thumbnail:: ../images/learning-wazuh/labs/vt-events.png                                    |
@@ -184,5 +187,8 @@ unzipped malware should actually match.
 Food for thought
 ----------------
 
-Consider how you might use a custom active response to integrate with the API of your edge firewall such that local hosts would be
+1. You could get this lab to work with windows-agent, too.  Mostly you would just need to change config file references from ``/vt-test`` to ``c:/vt-test``, and 
+for the ``agent.conf`` file, make sure to edit ``/var/ossec/etc/shared/windows/agent.conf`` instead of the one for the linux agent group.
+
+2. Consider how you might use a custom active response to integrate with the API of your edge firewall such that local hosts would be
 quarantined from reaching the Internet if they have a specifically defined VirusTotal malware match event.
