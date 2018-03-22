@@ -29,4 +29,5 @@ will assume that the previous labs have already been completed, so we encourage 
     suricata
     vuln-detection
     cloudtrail
+    virus-total
     
