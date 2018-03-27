@@ -69,7 +69,7 @@ Upgrade Wazuh agent
 
   .. code-block:: console
 
-    # wazuh-agent-3.2.1-1.msi /q
+    # wazuh-agent-3.2.2-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
@@ -328,7 +328,7 @@ Upgrade Kibana
   .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.1_6.2.3.zip
+      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.2_6.2.3.zip
 
 
 5. Start Kibana:
@@ -403,7 +403,8 @@ We recommend that the Elasticsearch repository be disabled in order to prevent a
 
     .. code-block:: console
 
-      # sed -i -r '/deb https:\/\/artifacts.elastic.co\/packages\/6.x\/apt stable main/ s/^(.*)$/#\1/g' /etc/apt/sources.list.d/elastic-6.x.list
+      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
+      # apt-get update
 
 Reindexing your previous alerts
 -------------------------------
