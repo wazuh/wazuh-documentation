@@ -22,13 +22,13 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # apt-get install gcc make git libc6-dev curl
+      # apt-get install python gcc make git libc6-dev curl
 
 2. Download and extract the latest version:
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/3.2.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.2.1.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 

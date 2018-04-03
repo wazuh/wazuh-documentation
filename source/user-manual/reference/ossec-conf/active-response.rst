@@ -67,7 +67,7 @@ Indicates which system(s) the command should be executed on.
 +                    +---------------+------------------------------------------------------------------+
 |                    | defined-agent | This runs the command on a specific agent identified by agent_id.|
 +                    +---------------+------------------------------------------------------------------+
-|                    | all           | This runs the command on the Wazuh manager and on all agents.    |
+|                    | all           | This runs the command on all agents.                             |
 |                    |               | Use with caution.                                                |
 +--------------------+---------------+------------------------------------------------------------------+
 
