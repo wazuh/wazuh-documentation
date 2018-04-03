@@ -22,7 +22,7 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # apt-get install gcc make git libc6-dev curl
+      # apt-get install python gcc make git libc6-dev curl
 
 2. Download and extract the latest version:
 
