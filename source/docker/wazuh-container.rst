@@ -19,7 +19,7 @@ To set this value permanently, update the vm.max_map_count setting in ``/etc/sys
 
 .. warning::
 
-  If you don't set the **max_map_count** on your host, Elasticsearch will probably don't work.
+  If you don't set the **max_map_count** on your host, Elasticsearch will probably NOT work.
 
 Increase max_map_count on your host (Windows)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -49,7 +49,7 @@ To verify after rebooting, run "sysctl vm.max_map_count".
 
 .. warning::
 
-  If you don't set the **max_map_count** on your host, Elasticsearch will probably don't work.
+  If you don't set the **max_map_count** on your host, Elasticsearch will probably NOT work.
 
 
 SELinux

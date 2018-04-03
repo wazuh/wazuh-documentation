@@ -20,7 +20,7 @@ Options
 - `port`_
 - `protocol`_
 - `allowed-ips`_
-- `deny-ips`_
+- `denied-ips`_
 - `local_ip`_
 - `ipv6`_
 
@@ -77,7 +77,7 @@ List of IP addresses that are allowed to send syslog messages to the server (one
 
    It is necessary to list at least one IP address when using the syslog connection type.
 
-deny-ips
+denied-ips
 ^^^^^^^^^^^
 
 List of IP addresses that are not allowed to send syslog messages to the server (one per line).
