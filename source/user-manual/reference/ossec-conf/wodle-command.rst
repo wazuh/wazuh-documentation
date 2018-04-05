@@ -23,6 +23,7 @@ Options
 - `interval`_
 - `run-on-start`_
 - `ignore-output`_
+- `timeout`_
 
 
 +----------------------+-----------------------------+
@@ -40,7 +41,8 @@ Options
 +----------------------+-----------------------------+
 | `ignore-output`_     | yes, no                     |
 +----------------------+-----------------------------+
-
+| `timeout`_           | A positive number (seconds) |
++----------------------+-----------------------------+
 
 disabled
 ^^^^^^^^
@@ -108,6 +110,20 @@ Ignore the command output when executed.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+timeout
+^^^^^^^
+
+.. versionadded:: 3.2.2
+
+Timeout for each command to wait for the end of the execution. Whether this parameter is set to 0, it will wait indefinitely for the end of the process.
+However, if the timeout is other than 0, the execution will finished if it expires.
+
++--------------------+-----------------------------+
+| **Default value**  | n/a                         |
++--------------------+-----------------------------+
+| **Allowed values** | A positive number (seconds) |
++--------------------+-----------------------------+
+
 Centralized configuration
 -------------------------
 
@@ -133,6 +149,7 @@ Example of configuration
       <interval>1d</interval>
       <ignore_output>no</ignore_output>
       <run_on_start>yes</run_on_start>
+      <timeout>0</timeout>
     </wodle>
 
 .. note:: See the :doc:`Vuls integration section<../../capabilities/vuls>` for a use case of this command.

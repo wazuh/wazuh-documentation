@@ -118,8 +118,8 @@ Example of configuration
 	  <disabled>no</disabled>
 	  <interval>1d</interval>
 	  <run_on_start>yes</run_on_start>
-	  <update_ubuntu_oval interval="1d" version="16,14,12">yes</update_ubuntu_oval>
-	  <update_redhat_oval interval="1d" version="7,5,6">yes</update_redhat_oval>
+	  <update_ubuntu_oval interval="1d" version="16,14">yes</update_ubuntu_oval>
+	  <update_redhat_oval interval="1d" version="7,6">yes</update_redhat_oval>
 	</wodle>
 
 
