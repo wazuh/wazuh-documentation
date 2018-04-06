@@ -180,7 +180,7 @@ Frequency that the syscheck will be run (in seconds).
 scan_time
 ^^^^^^^^^^^
 
-Time to run the scans. Times may be represented as 21pm or 8:30.
+Time to run the scans. Times may be represented as 9pm or 8:30.
 
 +--------------------+-------------+
 | **Default value**  | n/a         |

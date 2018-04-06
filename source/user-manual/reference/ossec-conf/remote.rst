@@ -20,9 +20,10 @@ Options
 - `port`_
 - `protocol`_
 - `allowed-ips`_
-- `deny-ips`_
+- `denied-ips`_
 - `local_ip`_
 - `ipv6`_
+- `queue_size`_
 
 connection
 ^^^^^^^^^^^
@@ -77,7 +78,7 @@ List of IP addresses that are allowed to send syslog messages to the server (one
 
    It is necessary to list at least one IP address when using the syslog connection type.
 
-deny-ips
+denied-ips
 ^^^^^^^^^^^
 
 List of IP addresses that are not allowed to send syslog messages to the server (one per line).
@@ -112,6 +113,17 @@ Local ipv6 address to listen for connections.
 | **Allowed values** | Any IPv6 address |
 +--------------------+------------------+
 
+queue_size
+^^^^^^^^^^^^
+
+Sets the capacity of the remote daemon queue in number of events.
+
++--------------------+----------------------------------+
+| **Default value**  | 16384                            |
++--------------------+----------------------------------+
+| **Allowed values** | Any number between 1 and 262144. |
++--------------------+----------------------------------+
+
 Example of configuration
 ------------------------
 
@@ -121,7 +133,7 @@ Example of configuration
       <connection>syslog</connection>
       <port>514</port>
       <protocol>udp</protocol>
-      <allowed_ips>192.168.1.0/24</allowed_ips>
+      <allowed-ips>192.168.1.0/24</allowed-ips>
       <local_ip>192.168.1.5</local_ip>
     </remote>
 
@@ -129,4 +141,5 @@ Example of configuration
       <connection>secure</connection>
       <port>1514</port>
       <protocol>udp</protocol>
+      <queue_size>16384</queue_size>
     </remote>

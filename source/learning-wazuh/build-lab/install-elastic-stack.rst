@@ -98,7 +98,7 @@ Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logs
     # echo -e "[Service]\nLimitMEMLOCK=infinity" > /etc/systemd/system/elasticsearch.service.d/elasticsearch.conf
     # sed -i 's/^-Xms.*/-Xms12g/;s/^-Xmx.*/-Xmx12g/' /etc/elasticsearch/jvm.options
     # systemctl daemon-reload
-    # systemctl restart elasticsearch  
+    # systemctl restart elasticsearch
 
   .. note::
     The two references to "12g" in the above steps will only work if the Elastic Server was launched with the recommended instance size t2.xlarge.  If you chose to use t2.large instead, change the "12g" references to "5g".
@@ -132,7 +132,7 @@ Logstash takes the Wazuh alerts and logs written as JSON records by Wazuh Manage
 Setting up SSL for Filebeat and Logstash
 ----------------------------------------
 
-Since your Wazuh Server and Elastic Server instances are on separate servers, it is important to configure SSL encryption and 
+Since your Wazuh Server and Elastic Server instances are on separate servers, it is important to configure SSL encryption and
 verification between Filebeat and Logstash.
 
 
@@ -155,7 +155,7 @@ Configure Logstash to use SSL (on Elastic Server)
     Uncomment the default SSL-related lines in the Logstash config to use the new key and cert, and then restart Logstash.
 
     .. code-block:: console
-    
+
         # sed -i "s/#       ssl/        ssl/g" /etc/logstash/conf.d/01-wazuh.conf
         # grep "  ssl" /etc/logstash/conf.d/01-wazuh.conf -B4 -A2
         # systemctl restart logstash.service
@@ -194,8 +194,8 @@ Configure Filebeat to use SSL
 
           # cat /etc/filebeat/filebeat.yml
           # sed -i 's/#   ssl/   ssl/;s/#     certificate/      certificate/' /etc/filebeat/filebeat.yml
-          # cat /etc/filebeat/filebeat.yml    
-          # systemctl restart filebeat.service   
+          # cat /etc/filebeat/filebeat.yml
+          # systemctl restart filebeat.service
 
 
 Kibana
@@ -232,11 +232,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 Disable the Elastic repository
 ------------------------------
 
-Now disable the Elastic repository in order to prevent a future unintended Elastic Stack upgrade to a version 
+Now disable the Elastic repository in order to prevent a future unintended Elastic Stack upgrade to a version
 that may be in conflict with the latest stable Wazuh packages.
 
   .. code-block:: console
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
-
-
