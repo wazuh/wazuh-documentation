@@ -177,7 +177,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
   {
     "order": 0,
-    "template": "wazuh*",
+    "template": "wazuh-alerts-3.x-*",
     "settings": {
       "index.refresh_interval": "5s",
       "number_of_shards" :   1,
