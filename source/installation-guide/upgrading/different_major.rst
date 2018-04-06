@@ -262,7 +262,7 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # cp /etc/logstash/conf.d/01-wazuh.conf /etc/logstash/conf.d/01-wazuh.conf.bak
+      # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
       # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-local.conf
       # usermod -a -G ossec logstash
 
@@ -270,7 +270,7 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # cp /etc/logstash/conf.d/01-wazuh.conf /etc/logstash/conf.d/01-wazuh.conf.bak
+      # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
       # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-remote.conf
 
 
