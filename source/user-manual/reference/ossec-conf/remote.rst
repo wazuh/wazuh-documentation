@@ -23,6 +23,7 @@ Options
 - `denied-ips`_
 - `local_ip`_
 - `ipv6`_
+- `queue_size`_
 
 connection
 ^^^^^^^^^^^
@@ -112,6 +113,17 @@ Local ipv6 address to listen for connections.
 | **Allowed values** | Any IPv6 address |
 +--------------------+------------------+
 
+queue_size
+^^^^^^^^^^^^
+
+Sets the capacity of the remote daemon queue in number of events.
+
++--------------------+----------------------------------+
+| **Default value**  | 16384                            |
++--------------------+----------------------------------+
+| **Allowed values** | Any number between 1 and 262144. |
++--------------------+----------------------------------+
+
 Example of configuration
 ------------------------
 
@@ -129,4 +141,5 @@ Example of configuration
       <connection>secure</connection>
       <port>1514</port>
       <protocol>udp</protocol>
+      <queue_size>16384</queue_size>
     </remote>
