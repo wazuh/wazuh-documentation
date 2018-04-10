@@ -123,6 +123,10 @@ Limits the command execution to only when one or more listed rules fire.
 | **Allowed values** | Any rule identification. Multiple IDs can be specified if separated by a comma. |
 +--------------------+---------------------------------------------------------------------------------+
 
+.. note::
+    When setting ``level``, ``rules_group`` and ``rules_id`` together, the active response will be triggered always that any rule matches with **one** of these options. In other words,
+    they are accumulative options, not restrictive.
+
 
 timeout
 ^^^^^^^

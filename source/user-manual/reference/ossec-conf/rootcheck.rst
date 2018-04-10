@@ -30,7 +30,6 @@ Options
 - `check_files`_
 - `check_if`_
 - `check_pids`_
-- `check_policy`_
 - `check_ports`_
 - `check_sys`_
 - `check_trojans`_
@@ -201,17 +200,6 @@ check_pids
 ^^^^^^^^^^^^^^^
 
 Enable or disable the checking of process ID's.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-check_policy
-^^^^^^^^^^^^^^^
-
-Enable or disable the checking of policy.
 
 +--------------------+---------+
 | **Default value**  | yes     |
