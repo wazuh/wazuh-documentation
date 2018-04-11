@@ -11,7 +11,7 @@ The Wazuh agent for Solaris can be downloaded from our :doc:`packages list<../pa
 
   b) For Solaris 10 i386::
 
-	pkgadd -d wazuh-agent_v3.2.1-sol10-i386.pkg
+	pkgadd -d wazuh-agent_v3.2.2-sol10-i386.pkg
 
   c) For Solaris 11 sparc::
 
