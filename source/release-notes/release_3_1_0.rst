@@ -7,7 +7,7 @@ This section shows the most relevant new features of Wazuh v3.1.0. You will find
 
 **New features:**
 
-- `VULS integration`_
+- `VULS integration (Deprecated)`_
 - `CIS-CAT Wazuh module to scan CIS policies`_
 - `New "Command" Wazuh module`_
 - `New rotation capabilities for alerts`_
@@ -15,12 +15,14 @@ This section shows the most relevant new features of Wazuh v3.1.0. You will find
 - `Ruleset`_
 - `More relevant features`_
 
-VULS integration
-----------------
+VULS integration (Deprecated)
+-----------------------------
+
+**Deprecated since Wazuh v3.2.0.**
 
 Vuls (VULnerability Scanner) is a tool that was created for analyzing the vulnerability of Linux systems. This tool looks for known vulnerabilities referenced in databases such as the National Vulnerability Database (NVD).
 
-This integration is achieved through the use of the new `Command wodle`.  This module allows you to run a command at a specified interval or to ignore the output of the command.  The Vuls script is designed run Vuls on the agent and send results directly back to the manager and triggering alerts when a vulnerability is identified. 
+This integration is achieved through the use of the new `Command wodle`.  This module allows you to run a command at a specified interval or to ignore the output of the command.  The Vuls script is designed run Vuls on the agent and send results directly back to the manager and triggering alerts when a vulnerability is identified.
 
 Below is an example of results where a vulnerability is identified:
 
@@ -74,7 +76,7 @@ With the CIS-CAT wodle assessments can be scheduled to run periodically, sending
    cis-data.timestamp: 2017-12-21T11:55:50.143-08:00
    cis-data.score: 53
 
-Currently, this module is focused only on Linux systems, however, this will also be available for Windows systems in future versions. 
+Currently, this module is focused only on Linux systems, however, this will also be available for Windows systems in future versions.
 
 You will find further information about this new module in the :doc:`CIS-CAT integration<../user-manual/capabilities/policy-monitoring/ciscat/ciscat>` section.
 
@@ -125,5 +127,5 @@ Additional features have been added to Wazuh 3.1.0 in order to improve its perfo
 - a new field in JSON alerts including timestamp from predecoded logs,
 - the ability to refuse shared configuration in agents locally using the ``agent.remote_conf`` option as explained in the :doc:`Internal configuration<../user-manual/reference/internal-options>` section,
 - When ossec is used to disable a component, the relevant daemon is now immediately stopped,
-- The Syscheck reporting_changes feature formerly suppressed inclusion of file change details in alerts if the changes were detected during the first Syscheck scan after an agent restarted.  Now, file changes will be included every time textual file change data is available, and 
+- The Syscheck reporting_changes feature formerly suppressed inclusion of file change details in alerts if the changes were detected during the first Syscheck scan after an agent restarted.  Now, file changes will be included every time textual file change data is available, and
 - fixes to reported bugs.

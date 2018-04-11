@@ -1,7 +1,7 @@
 .. _vuls:
 
-Vuls integration
-================
+Vuls integration (Deprecated)
+=============================
 
 **Deprecated since Wazuh v3.2.0.**
 
