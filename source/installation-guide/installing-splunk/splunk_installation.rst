@@ -78,6 +78,3 @@ d) Clean data from all indexes:
     .. code-block:: console
 
         # /opt/splunk/bin/splunk clean eventdata
-
-
-

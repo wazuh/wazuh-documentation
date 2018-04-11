@@ -22,5 +22,3 @@ These are the two main components in a common Splunk architecture:
         splunk_forwarder
         splunk_index
         splunk_wazuh
-
-
