@@ -51,7 +51,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.2.3
+    # apt-get install elasticsearch=6.2.4
 
 2. Enable and start the Elasticsearch service:
 
@@ -81,7 +81,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "B5rXKBg2Tr-KWwFdbDHJQg",
       "version" : {
-        "number" : "6.2.3",
+        "number" : "6.2.4",
         "build_hash" : "7299dc3",
         "build_date" : "2018-02-07T19:34:26.990113Z",
         "build_snapshot" : false,
@@ -111,7 +111,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.2.3-1
+    # apt-get install logstash=1:6.2.4-1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -164,7 +164,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=6.2.3
+    # apt-get install kibana=6.2.4
 
 2. Install the Wazuh App plugin for Kibana:
 
@@ -179,7 +179,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.1_6.2.3.zip
+    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.1_6.2.4.zip
 
   .. warning::
 
