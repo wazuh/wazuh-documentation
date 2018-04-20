@@ -1,4 +1,4 @@
-.. _wazup-app:
+.. _wazuh-app:
 
 Using Wazuh App
 ===============
