@@ -12,46 +12,35 @@ Preparation
 
 1. Oracle Java JRE is required by Logstash and Elasticsearch:
 
-  .. note::
-
-    The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
-
-  Download the binary package with the latest version:
+  a) For Debian:
 
   .. code-block:: console
 
-    # curl -Lo jre-8-linux-x64.tar.gz --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz
+      # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+      # echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+      # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 
-  Extract the package and move it to the default Java installation path:
-
-  .. code-block:: console
-
-    # tar -zxf jre-8-linux-x64.tar.gz
-    # JAVA=$(echo jre1.8*)
-    # mv $JAVA /opt
-
-  Export the necessary environment variables in order to properly execute the Java binaries:
+  b) For Ubuntu:
 
   .. code-block:: console
 
-    # echo export PATH=$PATH:/opt/$JAVA/bin >> /etc/profile
-    # echo export JAVA_HOME=/opt/$JAVA >> /etc/profile
+      # add-apt-repository ppa:webupd8team/java
 
-  And finally, check if the installation process finished successfully:
-
-  .. code-block:: console
-
-    # . /etc/profile
-    # java -version
-
-2. Install the Elastic repository and its GPG key:
+2. Once the repository is added, install Java JRE:
 
   .. code-block:: console
 
-    # apt-get install curl apt-transport-https
-    # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-    # echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
-    # apt-get update
+      # apt-get update
+      # apt-get install oracle-java8-installer
+
+3. Install the Elastic repository and its GPG key:
+
+  .. code-block:: console
+
+  	# apt-get install curl apt-transport-https
+  	# curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+  	# echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
+  	# apt-get update
 
 Elasticsearch
 -------------
