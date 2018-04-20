@@ -10,41 +10,30 @@ The DEB package is suitable for Debian, Ubuntu and other Debian-based systems.
 Preparation
 -----------
 
-1. Oracle Java JRE is required by Logstash and Elasticsearch:
+1. Oracle Java JRE 8 is required by Logstash and Elasticsearch:
 
-  .. note::
-
-    The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
-
-  Download the binary package with the latest version:
+  a) For Debian:
 
   .. code-block:: console
 
-    # curl -Lo jre-8-linux-x64.tar.gz --header "Cookie: oraclelicense=accept-securebackup-cookie" http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jdk-8u171-linux-x64.tar.gz
+    # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+    # echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+    # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 
-  Extract the package and move it to the default Java installation path:
-
-  .. code-block:: console
-
-    # tar -zxf jre-8-linux-x64.tar.gz
-    # JAVA=$(echo jre1.8*)
-    # mv $JAVA /opt
-
-  Export the necessary environment variables in order to properly execute the Java binaries:
+  b) For Ubuntu:
 
   .. code-block:: console
 
-    # echo export PATH=$PATH:/opt/$JAVA/bin >> /etc/profile
-    # echo export JAVA_HOME=/opt/$JAVA >> /etc/profile
+    # add-apt-repository ppa:webupd8team/java
 
-  And finally, check if the installation process finished successfully:
+2. Once the repository is added, install Java JRE:
 
   .. code-block:: console
 
-    # . /etc/profile
-    # java -version
+    # apt-get update
+    # apt-get install oracle-java8-installer
 
-2. Install the Elastic repository and its GPG key:
+3. Install the Elastic repository and its GPG key:
 
   .. code-block:: console
 
@@ -78,8 +67,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-  	# update-rc.d elasticsearch defaults 95 10
-  	# service elasticsearch start
+    # update-rc.d elasticsearch defaults 95 10
+    # service elasticsearch start
 
   It's important to wait until the Elasticsearch server finishes starting. Check the current status with the following command, which should give you a response like the shown below:
 
@@ -107,7 +96,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-  	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -130,7 +119,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-    	# curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-local.conf
 
     Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
 
@@ -151,9 +140,9 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-  	# systemctl daemon-reload
-  	# systemctl enable logstash.service
-  	# systemctl start logstash.service
+    # systemctl daemon-reload
+    # systemctl enable logstash.service
+    # systemctl start logstash.service
 
   b) For SysV Init:
 
@@ -175,7 +164,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-   # apt-get install kibana=6.2.3
+    # apt-get install kibana=6.2.3
 
 2. Install the Wazuh App plugin for Kibana:
 
@@ -184,13 +173,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-      # export NODE_OPTIONS="--max-old-space-size=3072"
+    # export NODE_OPTIONS="--max-old-space-size=3072"
 
   b) Install the Wazuh App:
 
   .. code-block:: console
 
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.1_6.2.3.zip
+    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.2.1_6.2.3.zip
 
   .. warning::
 
@@ -216,16 +205,16 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-  	# systemctl daemon-reload
-  	# systemctl enable kibana.service
-  	# systemctl start kibana.service
+    # systemctl daemon-reload
+    # systemctl enable kibana.service
+    # systemctl start kibana.service
 
   b) For SysV Init:
 
   .. code-block:: console
 
-   # update-rc.d kibana defaults 95 10
-   # service kibana start
+    # update-rc.d kibana defaults 95 10
+    # service kibana start
 
 5. Disable the Elasticsearch repository:
 
@@ -233,7 +222,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-   # sed -i -r '/deb https:\/\/artifacts.elastic.co\/packages\/6.x\/apt stable main/ s/^(.*)$/#\1/g' /etc/apt/sources.list.d/elastic-6.x.list
+    # sed -i -r '/deb https:\/\/artifacts.elastic.co\/packages\/6.x\/apt stable main/ s/^(.*)$/#\1/g' /etc/apt/sources.list.d/elastic-6.x.list
 
 Connecting the Wazuh App with the API
 -------------------------------------
@@ -241,6 +230,6 @@ Connecting the Wazuh App with the API
 Follow the next guide in order to connect the Wazuh App with the API:
 
 .. toctree::
-	:maxdepth: 1
+  :maxdepth: 1
 
-	connect_wazuh_app
+  connect_wazuh_app

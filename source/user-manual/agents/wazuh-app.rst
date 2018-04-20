@@ -1,6 +1,6 @@
-.. _wazup-app:
+.. _wazuh-app:
 
-Using Wazup App
+Using Wazuh App
 ===============
 
 Listing Agents
