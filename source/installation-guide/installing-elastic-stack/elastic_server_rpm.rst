@@ -144,7 +144,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
 .. note::
 
-    Follow the next steps if you use CentOS-6/RHEL-6 or Amazon AMI (logstash uses Upstart like a service manager and needs to be fixed, see `bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_) ::
+    Follow the next steps if you use CentOS-6/RHEL-6 or Amazon AMI (logstash uses Upstart like a service manager and needs to be fixed, see `this bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_):
 
     1) Edit the file /etc/logstash/startup.options changing line 30 from *LS_GROUP=logstash* to *LS_GROUP=ossec*.
     2) Update the service with the new parameters by running the command /usr/share/logstash/bin/system-install
