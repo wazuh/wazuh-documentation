@@ -1,18 +1,17 @@
 .. _splunk_wazuh:
 
-Splunk App for Wazuh
+Splunk app for Wazuh
 ====================
 
-Splunk App for Splunk offers an option to visualize Wazuh Alerts and API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
-In case that your infraestructure had a few clustered indexers, install the Wazuh app on your Search Head. 
+Wazuh app for Splunk offers an UI to visualize Wazuh alerts and API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
 
 
 Installation
 ------------
 
-1. Download the latests stable version from the Splunk App for Wazuh `repository <https://github.com/wazuh/wazuh-splunk/releases/>`_.
+1. Download the latest stable version from the Splunk app for Wazuh `repository <https://github.com/wazuh/wazuh-splunk/releases/>`_.
 
-2. Install our Wazuh app for Splunk on your Indexer or on each search head that you have. 
+2. Install the Wazuh app for Splunk in your indexer or in every search head in your environment (if you have clustered indexers). 
 
   - CLI mode:
 
@@ -30,13 +29,11 @@ Installation
 
 4. Open Splunk on your desired browser.
 
-5. Click on the Wazuh app icon and navigate to Configuration -> Global
+5. Click on the Wazuh app icon and navigate to Configuration -> API
 
-6. Fill the input fields with the following information:
+6. Fill in the input fields with the following information:
 
-  - Base IP: current IP where Splunk is accessed by.
-  - Base PORT: Splunk web port, usually 8000.
-  - API IP: Address of Wazuh API server.
-  - API Port: Port of Wazuh API server, usually 55000.
-  - Api User: Username for Wazuh API authorization, usually 'foo'.
-  - Api Password: Password for Wazuh API authorization, usually 'bar'.
+  - API ip: Wazuh API ip.
+  - API port: Wazuh API port, usually 55000.
+  - Api user: Wazuh API username.
+  - Api password: Wazuh API password.

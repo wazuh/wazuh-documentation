@@ -6,8 +6,8 @@ Splunk installation
 Splunk Enterprise installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Download any desired Splunk Enterprise package from `here <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
-Then install it with the following command depends on your operating system:
+Download any desired Splunk Enterprise package from `it's official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
+Then install it with the following command depending on your operating system:
 
 a) For RPM based distributions: 
 
@@ -21,7 +21,7 @@ b) For Debian/Ubuntu distributions:
 
   # dpkg --install splunk-enterprise-package.deb
 
-When the installation was done, ensure that Splunk is already installed in:
+Upon completion, ensure Splunk is already installed in:
 
 .. code-block:: console
 
@@ -32,7 +32,7 @@ Splunk Forwarder installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can download any desired Splunk Forwarder package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.  
-Then process to install it with the following command depending on your operating system:
+Then proceed to install it with the following command depending on your operating system:
 
 a) For RPM based distributions: 
 
@@ -46,7 +46,7 @@ b) For Debian/Ubuntu distributions:
 
   # dpkg --install splunkforwarder-package.deb
 
-When the installation was done, ensure that Splunk is already installed in:
+Upon completion, ensure Splunk is already installed in:
 
 .. code-block:: console
 

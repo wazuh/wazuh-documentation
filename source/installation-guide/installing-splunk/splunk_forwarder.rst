@@ -6,9 +6,9 @@ Splunk Forwarder Configuration
 Requirements
 ------------
 
-1. You need to :ref:`install <splunk_installation>` and setup a Splunk Universal Forwarder where the Wazuh's manager is installed.
-2. An already installed :ref:`Wazuh Manager <installation>` with access to the API via HTTP (usually on port 55000).
-3. User and password (credentials) for api basic authentication.
+1. :ref:`Install <splunk_installation>` and setup a Splunk Universal Forwarder in the Wazuh manager instance.
+2. An already installed :ref:`Wazuh Manager <installation>` with access to the Wazuh API via HTTP (usually on port 55000).
+3. User and password (credentials) for API basic authentication.
 4. Set the :ref:`indexers <splunk_index>` to receiving data.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
@@ -16,15 +16,9 @@ Requirements
 Setting up Splunk Forwarder
 ---------------------------
 
-1. Go to ``$SPLUNK_HOME/etc/system/local``:
+.. note:: By default $SPLUNK_HOME = /opt/splunk/
 
-  .. note:: By default $SPLUNK_HOME = /opt/splunk/
-
-  .. code-block:: console
-
-    cd /opt/splunk
-
-2. Edit the file *inputs.conf*:
+1. Edit *$SPLUNK_HOME/etc/system/local/inputs.conf* file:
 
   .. code-block:: console
 
@@ -34,11 +28,11 @@ Setting up Splunk Forwarder
     index = wazuh
     sourcetype = wazuh
   
-  - host = wazuhmanager, hostname of Wazuh Manager.
-  - index = wazuh, index by default to store alerts.
-  - sourcetype = wazuh sourcetype by default to alerts received.
+  - host = wazuhmanager, Wazuh Manager hostname.
+  - index = wazuh, default index name where alerts will be stored.
+  - sourcetype = wazuh, default sourcetype for alerts.
 
-3. Edit the file and add the following stanza on *props.conf*. If it doesn't exist, create it:
+2. Edit *$SPLUNK_HOME/etc/system/local/props.conf* file and add the following. If it doesn't exist, create it:
 
   .. code-block:: console
 
@@ -51,17 +45,17 @@ Setting up Splunk Forwarder
     disabled = false
     pulldown_type = true
 
-4. Point the output to the Wazuh's Indexer (or indexers):
+3. Point the output to the Wazuh's Indexer (or indexers):
 
   .. code-block:: console
 
     $SPLUNK_HOME/bin/splunk add forward-server <host name or ip address>:<listening port>
 
-  - Host name or IP address IP address of Splunk Indexer.
-  - Listening port By default on port 9997.
+  - Host name or ip address: Splunk Indexer location.
+  - Listening port: by default on port 9997.
   - Remember that Splunk username/password are: admin/changeme by default.
 
-  If you have multiple indexers, please set *outputs.conf* like this:
+  If you have multiple indexers, please set *$SPLUNK_HOME/etc/system/local/outputs.conf* like this:
 
   .. code-block:: console
 
@@ -74,7 +68,7 @@ Setting up Splunk Forwarder
     [tcpout:indexer2]
     server=IP_SECOND_INDEXER:9997
   
-5. Restart Splunk service:
+4. Restart Splunk service:
 
   .. code-block:: console
 
