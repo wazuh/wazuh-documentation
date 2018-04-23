@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _reference_ossec_global:
 
 global
@@ -109,7 +111,7 @@ This specifies the “reply-to” address contained in the email alerts.
 smtp_server
 ^^^^^^^^^^^^^^^^^^
 
-In this option defines what SMTP server to use to deliver alerts. 
+In this option defines what SMTP server to use to deliver alerts.
 
 +--------------------+-----------------------------------------------+
 | **Default value**  | n/a                                           |
@@ -294,7 +296,7 @@ This specifies the ZeroMQ URI for the publisher socket to bind to.
 | **Allowed values** | This URI format is defined by the ZeroMQ project. |
 +--------------------+---------------------------------------------------+
 
-For example: 
+For example:
 
 This will listen for ZeroMQ subscribers on IP address 127.0.0.1:11111.
 

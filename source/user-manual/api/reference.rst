@@ -1,10 +1,11 @@
-.. _api_reference:
-
-
+.. Copyright (C) 2018 Wazuh, Inc.
 .. Do not modify this file manually. It is generated automatically.
 
+.. _api_reference:
+
 Reference
-======================
+=========
+
 This API reference is organized by resources:
 
 * `Agents`_

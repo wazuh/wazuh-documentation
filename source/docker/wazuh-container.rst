@@ -1,7 +1,9 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh-container:
 
 Wazuh container
-===============================
+===============
 
 Requirements
 -------------

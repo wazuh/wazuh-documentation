@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _upgrading_wazuh_legacy:
 
 Upgrading from a legacy version

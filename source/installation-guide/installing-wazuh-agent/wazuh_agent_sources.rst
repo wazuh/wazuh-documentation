@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _agent-sources:
 
 Install Wazuh agent from sources

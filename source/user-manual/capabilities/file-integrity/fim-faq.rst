@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _fim-faq:
 
 FAQ
@@ -17,7 +19,7 @@ FAQ
 How often does syscheck run?
 --------------------------------
 
-By default, **Syscheck** runs every 6 hours, but the interval between scans can be user-defined with the :ref:`frequency <reference_ossec_syscheck_frequency>` option. 
+By default, **Syscheck** runs every 6 hours, but the interval between scans can be user-defined with the :ref:`frequency <reference_ossec_syscheck_frequency>` option.
 
 What is the CPU usage like on the agents?
 -----------------------------------------

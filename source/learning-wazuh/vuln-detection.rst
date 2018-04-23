@@ -1,20 +1,22 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _learning_wazuh_vuln_detection:
 
 Track down vulnerable applications
 ==================================
 
 .. warning::
-  This lab requires manager and agents to run Wazuh 3.2.1 or higher because in 3.2.0 the syscollector wodle configuration breaks the 
+  This lab requires manager and agents to run Wazuh 3.2.1 or higher because in 3.2.0 the syscollector wodle configuration breaks the
   Wazuh agents if distributed through agent.conf.
 
-Of the many software packages installed on your Red Hat, CentOS, and/or Ubuntu systems, which ones have known vulnerabilities that might 
-impact your security posture?  Wazuh helps you answer this question with the ``syscollector`` and ``vulnerability-detector`` modules.  
-On each agent, ``syscollector`` can scan the system for the presence and version of all software packages.  This information is submitted 
-to the Wazuh manager where it is stored in an agent-specific database for later assessment.  On the Wazuh manager, 
-``vulnerability-detector`` maintains a fresh copy of the desired CVE sources of vulnerability data, and periodically compares agent 
+Of the many software packages installed on your Red Hat, CentOS, and/or Ubuntu systems, which ones have known vulnerabilities that might
+impact your security posture?  Wazuh helps you answer this question with the ``syscollector`` and ``vulnerability-detector`` modules.
+On each agent, ``syscollector`` can scan the system for the presence and version of all software packages.  This information is submitted
+to the Wazuh manager where it is stored in an agent-specific database for later assessment.  On the Wazuh manager,
+``vulnerability-detector`` maintains a fresh copy of the desired CVE sources of vulnerability data, and periodically compares agent
 packages with the relevant CVE database and generates alerts on matches.
 
-In this lab, we will configure ``syscollector`` to run on wazuh-server and on both of the Linux agents.  We will also configure 
+In this lab, we will configure ``syscollector`` to run on wazuh-server and on both of the Linux agents.  We will also configure
 ``vulnerability-detector`` on wazuh-server to periodically scan the collected inventory data for known vulnerable packages. We will
 observe relevant log messages and vulnerability alerts in Kibana including a dashboard dedicated to this.  We will also interact with
 the Wazuh API to more deeply mine the inventory data, and even take a look at the databases where it is stored.
@@ -22,7 +24,7 @@ the Wazuh API to more deeply mine the inventory data, and even take a look at th
 Configure ``syscollector`` for the Linux agents
 -----------------------------------------------
 
-In ``/var/ossec/etc/shared/linux/agent.conf`` on wazuh-server, just before the ``open-scap`` wodle configuration section, insert the 
+In ``/var/ossec/etc/shared/linux/agent.conf`` on wazuh-server, just before the ``open-scap`` wodle configuration section, insert the
 following so each Linux agent will scan itself.
 
   .. code-block:: xml
@@ -43,7 +45,7 @@ Run ``verify-agent-conf`` to confirm no errors were introduced into agent.conf.
 Configure ``vulnerability-detector`` and ``syscollector`` on wazuh-server
 -------------------------------------------------------------------------
 
-In ``ossec.conf`` on wazuh-server, just before the ``open-scap`` wodle configuration section, insert the following so 
+In ``ossec.conf`` on wazuh-server, just before the ``open-scap`` wodle configuration section, insert the following so
 that it will inventory its own software plus scan all collected software inventories against published CVEs, alerting where
 there are matches:
 
@@ -84,7 +86,7 @@ Try ``grep syscollector: /var/ossec/logs/ossec.log`` on the manager and on an ag
       2018/02/23 00:55:34 wazuh-modulesd:syscollector: INFO: Starting evaluation.
       2018/02/23 00:55:35 wazuh-modulesd:syscollector: INFO: Evaluation finished.
 
-and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manager 
+and try ``grep vulnerability-detector: /var/ossec/logs/ossec.log`` on the manager
 
   .. code-block:: console
 
@@ -114,17 +116,17 @@ Expand one of the records to see all the information available:
     |     :align: center                                                                            |
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
- 
+
 
 
 Look deeper with the Wazuh API:
 -------------------------------
 
 Up to now we have only seen the Wazuh API enable the Wazuh Kibana App to interface directly with the Wazuh manager.  However, you can also
-access the API directly from your own scripts or from the command line with curl.  This is especially helpful here as full software 
+access the API directly from your own scripts or from the command line with curl.  This is especially helpful here as full software
 inventory data is not stored in Elasticsearch or visible in Kibana -- only the CVE match alerts are.  The actual inventory data is kept
 in agent-specific databases on the Wazuh manager.  To see that, plus other information collected
-by ``syscollector``, you can mine the Wazuh API.  Not only are software packages inventoried, but basic hardware and operating 
+by ``syscollector``, you can mine the Wazuh API.  Not only are software packages inventoried, but basic hardware and operating
 system data is also tracked.
 
 1. Run ``agent_control -l`` on wazuh-server to list your agents as you will need to query the API by agent id number:
@@ -249,15 +251,15 @@ system data is also tracked.
     }
 
 .. note::
-  Take time to read the online documentation about the Wazuh API.  It is a powerful facility that puts all sorts of data,  
-  configuration details, and state information at your fingertips once you know how to ask for it.  
+  Take time to read the online documentation about the Wazuh API.  It is a powerful facility that puts all sorts of data,
+  configuration details, and state information at your fingertips once you know how to ask for it.
 
 
 
 A quick peek at the actual agent databases
 ------------------------------------------
 
-Agent-specific databases on the Wazuh manager store, among other things, the ``syscollector`` scan results for each agent. 
+Agent-specific databases on the Wazuh manager store, among other things, the ``syscollector`` scan results for each agent.
 
 1. On wazuh-server, list the tables in linux-agent's SQLite database (agent 001):
 
@@ -332,6 +334,6 @@ Optional exercise
 
 You could create a CDB for escalating alerts about your own custom set of high priority CVEs.  Write a child rule of Wazuh rule 23501 that
 looks for a match in this CDB and generates alerts of a high severity like 12.  Consider how you might use a key/value CDB listing pairs of
-agent names and software package names that you want to especially keep an eye on.  For example, you might want an escalated alert about 
-high-level CVE matches on the "apache" software package on your Internet-facing web servers but not for other internal servers. 
+agent names and software package names that you want to especially keep an eye on.  For example, you might want an escalated alert about
+high-level CVE matches on the "apache" software package on your Internet-facing web servers but not for other internal servers.
 The possibilities are endless...

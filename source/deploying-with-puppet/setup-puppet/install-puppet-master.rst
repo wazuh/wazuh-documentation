@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _setup_puppet_master:
 
 Installing Puppet master

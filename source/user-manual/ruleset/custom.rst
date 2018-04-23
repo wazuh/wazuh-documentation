@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _ruleset_custom:
 
 Custom rules and decoders

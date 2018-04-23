@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _release_3_2_1:
 
 3.2.1 Release Notes

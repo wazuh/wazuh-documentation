@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _kibana_ssl:
 
 Setting up SSL and authentication for Kibana

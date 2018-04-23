@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_build_vpc:
 
 Build the Wazuh Lab VPC
@@ -5,13 +7,13 @@ Build the Wazuh Lab VPC
 
 Here we will create the VPC and take care of all the VPC components that our EC2 instances will need to operate.
 
-To get started, sign into your your AWS console `here <https://console.aws.amazon.com/console/home>`_.  If you do not already have an AWS account, sign up for one `here <https://portal.aws.amazon.com/billing/signup#/start>`_.
+To get started, sign into your your AWS console at `this link <https://console.aws.amazon.com/console/home>`_.  If you do not already have an AWS account, sign up for one `here <https://portal.aws.amazon.com/billing/signup#/start>`_.
 
 .. note::
   There will be costs to you to maintain a Wazuh lab environment in AWS but they should be small.  Most costs only apply when your
   instances are actually running.  It should cost you an estimated USD $3-4 per day to operate this lab with all EC2 instances
   running.  When all instances are shut down, and all Elastic IPs are released, a dormant lab would only cost around $3 per month
-  (just the cost of EC2 block storage).  These are only estimates. See `here <https://aws.amazon.com/ec2/pricing/>`_ for
+  (just the cost of EC2 block storage).  These are only estimates. See `this page <https://aws.amazon.com/ec2/pricing/>`_ for
   authoritative details on Amazon EC2 pricing.
 
 Create VPC

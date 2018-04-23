@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _amazon_use-cases_ec2:
 
 EC2 use cases

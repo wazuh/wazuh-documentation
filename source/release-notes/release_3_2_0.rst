@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _release_3_2_0:
 
 3.2.0 Release Notes
@@ -107,7 +109,7 @@ Cluster: Ruleset synchronization and performance improvements
 
 Several bugs have been fixed in the cluster. Also, its general performance has been improved.
 
-The cluster is now able to synchronize decoders, rules and CDB lists. It also makes use of ``ossec-logtest`` tool to test that new rules, decoders or CDB lists are correctly formatted, before sending those to the rest of the cluster nodes. 
+The cluster is now able to synchronize decoders, rules and CDB lists. It also makes use of ``ossec-logtest`` tool to test that new rules, decoders or CDB lists are correctly formatted, before sending those to the rest of the cluster nodes.
 
 The full list of files synchronized across cluster nodes is:
 

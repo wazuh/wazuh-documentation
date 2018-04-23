@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _elastic_server_rpm:
 
 Install Elastic Stack with RPM packages

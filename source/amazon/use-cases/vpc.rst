@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _amazon_use-cases_vpc:
 
 VPC Use cases

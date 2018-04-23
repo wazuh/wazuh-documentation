@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_install_wazuh_server:
 
 Install Wazuh Server Components
@@ -95,7 +97,7 @@ The Wazuh API is most commonly used by the Wazuh Kibana app to communicate with 
 3. Restart Wazuh API
 
   .. code-block:: console
-	  
+
     # systemctl restart wazuh-api
 
 

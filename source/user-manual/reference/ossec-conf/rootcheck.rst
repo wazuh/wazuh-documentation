@@ -1,5 +1,6 @@
-.. _reference_ossec_rootcheck:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_rootcheck:
 
 rootcheck
 =========

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_access_ec2_instances:
 
 Establish access to your EC2 instances
@@ -11,12 +13,12 @@ Elastic IPs
 -----------
 
 We will set up an Elastic IP for each new EC2 instance.  You will use these IPs only for reaching your EC2 instances from outside
-of the VPC, like for SSH, RDP, or HTTPS.  The instances will communicate with each other exclusively via their 
+of the VPC, like for SSH, RDP, or HTTPS.  The instances will communicate with each other exclusively via their
 VPC private IPs.
 
 Separately for each new EC2 instance, do the following
 
-- From your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_, click **[Elastic IPs]**. 
+- From your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_, click **[Elastic IPs]**.
 - Click **[Allocate new address]**, choose "VPC" and click **[Allocate]** and then **[Close]**.
 - Select only the unassociated EIP (has no Instance yet).
 - Click **[Actions]** and choose "Associate address".
@@ -54,7 +56,7 @@ Use PuTTYgen to convert your key file into a form Putty can authenticate with
     .. thumbnail:: ../../images/learning-wazuh/build-lab/putty-2.png
         :title: PuTTY
         :align: center
-        :width: 50%      
+        :width: 50%
 
     - Under Connection->SSH->Auth, click **[Browse]** and choose the WazuhLab.ppk file you just saved from PuTTYgen.
     - Scroll back up and click on "Session" and then on **[Save]** to save all of this for future use.
@@ -70,14 +72,14 @@ Use PuTTYgen to convert your key file into a form Putty can authenticate with
 SSH access to Linux instances via command-line SSH client
 ---------------------------------------------------------
 
-First of all, make sure your WazuhLab.pem file is only readable by you.  The SSH client will not use it if it is world readable.  
+First of all, make sure your WazuhLab.pem file is only readable by you.  The SSH client will not use it if it is world readable.
 Then log in something like this, substituting the EIP of your Linux instance for the 1.2.3.4 below:
 
 .. code-block:: console
 
     ssh -i WazuhLab.pem centos@1.2.3.4
 
-The exact syntax of this command may vary depending on your operating system and specific ssh client.  Consult your system's 
+The exact syntax of this command may vary depending on your operating system and specific ssh client.  Consult your system's
 and/or ssh client's documentation if the above does not work for you.
 
 

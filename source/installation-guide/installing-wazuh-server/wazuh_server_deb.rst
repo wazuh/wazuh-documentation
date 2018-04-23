@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh_server_deb:
 
 Install Wazuh server with DEB packages

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _up_ossec_manager:
 
 Migrating OSSEC manager installed from packages
