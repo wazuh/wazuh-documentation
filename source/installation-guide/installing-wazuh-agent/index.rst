@@ -1,9 +1,11 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _installation_agents:
 
 Installing Wazuh agent
 ======================
 
-The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities: 
+The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities:
 
 - log and data collection,
 - file integrity monitoring,

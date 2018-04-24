@@ -1,3 +1,4 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _ossec-authd:
 
@@ -9,7 +10,6 @@ The ossec-authd program can automatically add an agent to a Wazuh manager and pr
 .. warning::
 
     By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
-
 
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-V**           | Version and license message.                                                                          |

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh_agent_hpux:
 
 Install Wazuh agent on HP-UX

@@ -1,6 +1,6 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _ossec-agentlessd:
-
 
 ossec-agentlessd
 ================

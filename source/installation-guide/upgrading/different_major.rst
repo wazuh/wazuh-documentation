@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _upgrading_different_major:
 
 Upgrade from different major version

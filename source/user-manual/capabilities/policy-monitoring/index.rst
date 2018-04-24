@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _manual_policy_monitoring:
 
 Monitoring security policies

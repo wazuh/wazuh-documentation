@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _setup_puppet_certificates:
 
 Setting up Puppet certificates
@@ -23,7 +25,7 @@ Approve the certificate, replacing ``hostname.example.com`` with your agent's no
 
    # puppet cert sign hostname.example.com
 
-Back on the Puppet agent node, run the puppet agent again: 
+Back on the Puppet agent node, run the puppet agent again:
 
 .. code-block:: console
 

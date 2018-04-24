@@ -1,26 +1,28 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _learning_wazuh_ssh_brute_force:
 
 Detect an SSH brute-force attack
 ================================
 
-Here you will wage a small ssh brute force attack against your Linux Agent instance.  You will see how Wazuh detects and 
+Here you will wage a small ssh brute force attack against your Linux Agent instance.  You will see how Wazuh detects and
 alerts on each login failure, and how a higher severity alert is produced when enough login failures from the same source IP
-are seen in the same time window.  You will also inspect the actual rules that fire as well as the enriched alert records 
+are seen in the same time window.  You will also inspect the actual rules that fire as well as the enriched alert records
 that subsequently can be seen in Kibana.
 
 Attack
 ------
 
-Using the ssh client of your choice, attempt to login as user "blimey" to the Elastic IP of your Linux Agent instance.  
+Using the ssh client of your choice, attempt to login as user "blimey" to the Elastic IP of your Linux Agent instance.
 The attempts will most likely be rejected before you are even prompted for a password since "blimey" is not an authorized
-ssh user on that system.  Do this a total of eight times, making sure to get all your attempts made in the same 2-minute 
+ssh user on that system.  Do this a total of eight times, making sure to get all your attempts made in the same 2-minute
 time window.
 
 The first alert
 ---------------
 
-Use the file viewer of your choice to look at /var/ossec/logs/alerts/alerts.log on the Wazuh Server.  This file is optionally 
-written to by Wazuh and is mainly useful for learning and debugging purposes.  Search for the text "blimey" and the first alert 
+Use the file viewer of your choice to look at /var/ossec/logs/alerts/alerts.log on the Wazuh Server.  This file is optionally
+written to by Wazuh and is mainly useful for learning and debugging purposes.  Search for the text "blimey" and the first alert
 you find should look like this:
 
 .. code-block:: console
@@ -33,9 +35,9 @@ you find should look like this:
     Jan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372
 
 
-The really important alert output file written to by Wazuh is /var/ossec/logs/alerts/alerts.json.  It consists of sigle-line JSON 
-records containing much more detail than what the alerts.log file shows.  These JSON records are conveyed by Filebeat to Logstash 
-for enrichment and insertion into Elasticsearch.  From there they can then be seen with Kibana.  Here is a beautified example of 
+The really important alert output file written to by Wazuh is /var/ossec/logs/alerts/alerts.json.  It consists of sigle-line JSON
+records containing much more detail than what the alerts.log file shows.  These JSON records are conveyed by Filebeat to Logstash
+for enrichment and insertion into Elasticsearch.  From there they can then be seen with Kibana.  Here is a beautified example of
 the JSON record in alerts.json that corresponds to the same alert above in alerts.log.
 
 .. code-block:: json
@@ -90,7 +92,7 @@ the JSON record in alerts.json that corresponds to the same alert above in alert
 Moving on to Kibana
 -------------------
 
-It is good to know about the log files, but Kibana is usually the best tool for looking at and analyzing Wazuh alerts.  
+It is good to know about the log files, but Kibana is usually the best tool for looking at and analyzing Wazuh alerts.
 
 Log in to Kibana.  Click on the Wazuh icon on the left and then on the DISCOVER link at the top.
 
@@ -108,8 +110,8 @@ Now you see a nice summary of recent events mentioning "blimey".
         :align: center
         :width: 100%
 
-Take a closer look at the full details of first alert that occurred (bottom record in the list), by clicking on the little triangle 
-to the left of the record.  Notice there is even more information here than in the original JSON record, due to enrichment by Logstash, 
+Take a closer look at the full details of first alert that occurred (bottom record in the list), by clicking on the little triangle
+to the left of the record.  Notice there is even more information here than in the original JSON record, due to enrichment by Logstash,
 most notably including GeoLocation fields based on the "attacker's" IP address.
 
 .. thumbnail:: ../images/learning-wazuh/labs/brute-2.png
@@ -131,13 +133,13 @@ To better understand this alert, let's look up rule 5710 (from the rule.id field
     /var/ossec/ruleset/rules/0095-sshd_rules.xml:  </rule>
 
 This simple rule 5710 looks for matching text "illegal user" or "invalid user" to appear in any log event that has already triggered parent
-rule 5700.  Parent rule 5700 simply detects all sshd events and has a number of child rules that are used to fire on specific sshd event 
-patterns like 5710 does.  Because these rules deal with individual events with no correlation across separate events, they are called 
-"atomic" rules.  
+rule 5700.  Parent rule 5700 simply detects all sshd events and has a number of child rules that are used to fire on specific sshd event
+patterns like 5710 does.  Because these rules deal with individual events with no correlation across separate events, they are called
+"atomic" rules.
 
-However, after we repeated our ssh logon failure a number of times, another rule fired.  Scroll back up in Kibana and find the event 
+However, after we repeated our ssh logon failure a number of times, another rule fired.  Scroll back up in Kibana and find the event
 with a description
-of "sshd: brute force trying to get access to the system"  which will be the first or nearly the first entry is your Kibana results.  
+of "sshd: brute force trying to get access to the system"  which will be the first or nearly the first entry is your Kibana results.
 Expand that record to have a closer look.
 
 .. thumbnail:: ../images/learning-wazuh/labs/brute-3.png
@@ -159,20 +161,20 @@ Let's look up this new rule 5712 and see why it fired.
     /var/ossec/ruleset/rules/0095-sshd_rules.xml:    <group>authentication_failures,pci_dss_11.4,pci_dss_10.2.4,pci_dss_10.2.5,</group>
     /var/ossec/ruleset/rules/0095-sshd_rules.xml:  </rule>
 
-This rule 5712 is a special kind of child rule to rule 5710.  It will only fire if rule 5710 fires on events involving the same source IP 
-at least eight times in a 120 second period.  The severity level of this rule is higher (10) than the previous one (only 5) because a 
+This rule 5712 is a special kind of child rule to rule 5710.  It will only fire if rule 5710 fires on events involving the same source IP
+at least eight times in a 120 second period.  The severity level of this rule is higher (10) than the previous one (only 5) because a
 cluster of ssh login failure attempts from the same source is commonly a sign of a brute force attack.  This kind of rule is correlating
-multiple events over time and is thus called a "composite" rule.  
+multiple events over time and is thus called a "composite" rule.
 
-.. note:: 
-  While the "frequency" value in a composite rule indicates how many occurrences of the parent rule must be seen in the 
-  specified time window for the rule to match, for legacy reasons the parent rule actually has to fire two more times than indicated by 
-  the "frequency" value before the composite rule will fire.  
+.. note::
+  While the "frequency" value in a composite rule indicates how many occurrences of the parent rule must be seen in the
+  specified time window for the rule to match, for legacy reasons the parent rule actually has to fire two more times than indicated by
+  the "frequency" value before the composite rule will fire.
 
 Testing the rules with ossec-logtest
 ------------------------------------
 
-The ossec-logtest tool is very helpful for finding out from the command line what log entries would fire what rules and why, without 
+The ossec-logtest tool is very helpful for finding out from the command line what log entries would fire what rules and why, without
 actually generating real alerts in your system.  It is an essential tool for developing, tuning, and debugging rules.
 
 The actual log line generated by sshd when we try to log in via ssh as "blimey" looks like this:
@@ -181,7 +183,7 @@ The actual log line generated by sshd when we try to log in via ssh as "blimey" 
 
     Jan 21 02:39:54 linux-agent sshd[30449]: Invalid user blimey from 208.103.56.41 port 51498
 
-On wazuh-server, run the ossec-logtest command and then paste in the above line and hit <Enter>.  You should see an analysis of the event 
+On wazuh-server, run the ossec-logtest command and then paste in the above line and hit <Enter>.  You should see an analysis of the event
 and the resulting rule 5710 match like this:
 
 .. code-block:: console
@@ -207,8 +209,8 @@ and the resulting rule 5710 match like this:
 
 .. note::
 
-    When ossec-logtest indicates "\*\*Alert to be generated." it really means that an alert *would* be generated if the tested event were 
-    to occur outside of the ossec-logtest environment.  The ossec-logtest tool will never cause records to be written to alerts.log or 
+    When ossec-logtest indicates "\*\*Alert to be generated." it really means that an alert *would* be generated if the tested event were
+    to occur outside of the ossec-logtest environment.  The ossec-logtest tool will never cause records to be written to alerts.log or
     alerts.json, and thus you will never see anything in Kibana caused by an ossec-logtest test.
 
 Paste that log record in a number of times.  On the 8th time, you should see a rule 5712 match instead:
@@ -240,9 +242,9 @@ Hit Control-C to exit ossec-logtest.  Then restart ossec-logtest but this time w
 
     # ossec-logtest -v
 
-Paste the same log record in 8 times again, noting especially the output for the last record which trips rule 5712 below.  See how early on 
-the very generic rule 5700 matched, leading to the evaluation of all of the child rules of 5700, of which rule 5710 matched, after which 
-rule 5710's child rules were evaluated, of which rule 5712 matched.  The verbose output of ossec-logtest is very helpful for understanding 
+Paste the same log record in 8 times again, noting especially the output for the last record which trips rule 5712 below.  See how early on
+the very generic rule 5700 matched, leading to the evaluation of all of the child rules of 5700, of which rule 5710 matched, after which
+rule 5710's child rules were evaluated, of which rule 5712 matched.  The verbose output of ossec-logtest is very helpful for understanding
 the hierarchical way that rules are evaluated.
 
 .. code-block:: console
@@ -341,6 +343,6 @@ the hierarchical way that rules are evaluated.
         Description: 'sshd: brute force trying to get access to the system.'
     **Alert to be generated.
 
-Congatulations on your completion of your first "Learning Wazuh" lab!  
+Congatulations on your completion of your first "Learning Wazuh" lab!
 
 Before moving on, you might be interested to look at  more detailed documentation about Wazuh rules `here <https://documentation.wazuh.com/current/user-manual/ruleset/index.html#field>`_.

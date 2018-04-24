@@ -1,3 +1,7 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
+.. _registration-process:
+
 The registration process
 =========================
 

@@ -1,3 +1,7 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
+.. _rules_syntax:
+
 Rules Syntax
 ============
 

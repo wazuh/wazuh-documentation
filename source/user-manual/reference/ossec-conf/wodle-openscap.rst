@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wodle_openscap:
 
 wodle name="open-scap"

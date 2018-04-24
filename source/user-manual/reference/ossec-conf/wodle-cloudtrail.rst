@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wodle_cloudtrail:
 
 wodle name="aws-cloudtrail"
@@ -32,13 +34,13 @@ Options
 +=======================+=============================+====================+
 | `disabled`_           | yes, no                     | Mandatory          |
 +-----------------------+-----------------------------+--------------------+
-| `bucket`_             | Any valid bucket name       | Mandatory          |          
+| `bucket`_             | Any valid bucket name       | Mandatory          |
 +-----------------------+-----------------------------+--------------------+
-| `interval`_           | A positive number (seconds) | Mandatory          |          
+| `interval`_           | A positive number (seconds) | Mandatory          |
 +-----------------------+-----------------------------+--------------------+
 | `run_on_start`_       | yes, no                     | Mandatory          |
 +-----------------------+-----------------------------+--------------------+
-| `access_key`_         | Alphanumerical key          | Optional           |   
+| `access_key`_         | Alphanumerical key          | Optional           |
 +-----------------------+-----------------------------+--------------------+
 | `secret_key`_         | Alphanumerical key          | Optional           |
 +-----------------------+-----------------------------+--------------------+

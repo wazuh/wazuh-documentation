@@ -1,15 +1,16 @@
-.. _reference_ossec_logging:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_logging:
 
 logging
 =======
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+    .. code-block:: xml
 
-		<logging>
-		</logging>
+      <logging>
+      </logging>
 
 This section shows how to configure the format of internal logs.
 
@@ -17,7 +18,6 @@ Options
 -------
 
 - `log_format`_
-
 
 log_format
 ^^^^^^^^^^
@@ -31,7 +31,6 @@ Specifies the log format between JSON output (.json) or plain text (.log). It al
 |                    | - json         |
 |                    | - plain, json  |
 +--------------------+----------------+
-
 
 Default configuration
 ---------------------

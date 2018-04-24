@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wodle_vuln_detector:
 
 wodle name="vulnerability-detector"

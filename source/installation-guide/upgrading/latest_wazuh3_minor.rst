@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _upgrading_latest_minor:
 
 Upgrade to the latest version of Wazuh 3.x

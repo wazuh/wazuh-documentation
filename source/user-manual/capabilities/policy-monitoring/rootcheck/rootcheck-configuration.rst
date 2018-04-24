@@ -1,10 +1,11 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 Configuration
 =============
 
 #. `Basic usage`_
 #. `Configure periodic scans`_
 #. `Root access to SSH`_
-
 
 Basic usage
 -----------

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _manual_email_report:
 
 Configuring email alerts
@@ -100,7 +102,7 @@ This is configured as follows:
    <do_not_delay />
  </email_alerts>
 
-This will send an email to ``you@example.com`` when any rule with a level greater than or equal to 4 is triggered. 
+This will send an email to ``you@example.com`` when any rule with a level greater than or equal to 4 is triggered.
 
 .. note:: Remember, if the level here is less than the ``email_alert_level`` configured in the previous section, this will not be sent.
 

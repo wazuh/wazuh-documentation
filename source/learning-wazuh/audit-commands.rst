@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _learning_wazuh_audit_commands:
 
 Keep watch for malicious command execution
@@ -317,6 +319,4 @@ Observe the order in which our child rules are evaluated
 
     **Why does my new rule never fire?**
 
-    |
-    Sometimes a new rule never matches anything because of a flaw in its criteria.  Other times it never matches because it
-    is never even evalutated.  Remember, ``ossec-logtest -v`` is your friend.  Use it to see if your rule is being evaluated at all, and if not, what rule might be overshadowing it.
+    Sometimes a new rule never matches anything because of a flaw in its criteria.  Other times it never matches because it is never even evalutated.  Remember, ``ossec-logtest -v`` is your friend.  Use it to see if your rule is being evaluated at all, and if not, what rule might be overshadowing it.

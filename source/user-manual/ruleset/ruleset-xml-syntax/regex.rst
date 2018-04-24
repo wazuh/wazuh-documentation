@@ -1,3 +1,7 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
+.. _regex_syntax:
+
 Regular Expression Syntax
 =========================
 

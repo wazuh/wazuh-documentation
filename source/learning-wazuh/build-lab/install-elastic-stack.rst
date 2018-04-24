@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_install_elastic_stack:
 
 Install Elastic Stack
@@ -81,7 +83,7 @@ Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logs
 
   This process will set optimal index sharding, replication, and memory usage values for Elasticsearch.
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
     # sed -i 's/"index.refresh_interval": "5s"/"index.refresh_interval": "5s",\n    "number_of_shards" :   1,\n    "number_of_replicas" : 0/' w-elastic-template.json

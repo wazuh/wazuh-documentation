@@ -1,8 +1,9 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _agent-auth:
 
 agent-auth
-=============
+===========
 
 The agent-auth program is the client application used with :ref:`ossec-authd` to automatically add agents to a Wazuh manager.
 

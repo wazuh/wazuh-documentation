@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _smtp_authentication:
 
 SMTP server with authentication
@@ -14,7 +16,7 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
       # apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 
     CentOS
-    
+
     .. code-block:: console
 
       # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain

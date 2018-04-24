@@ -1,7 +1,9 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _use-registration-service:
 
 Using the registration service
-=============================================
+==============================
 
 It's possible to register agents automatically with authd. Choose the method that best meets your needs:
 
@@ -20,7 +22,7 @@ It's possible to register agents automatically with authd. Choose the method tha
 +-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 Simple method
------------------
+-------------
 
 Get an SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^

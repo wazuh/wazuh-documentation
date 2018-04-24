@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _antiflooding:
 
 Anti-flooding mechanism
@@ -134,7 +136,7 @@ When the buffer is 100% full, a timer is started which is compared to the ``tole
 
 At this point, two possible things could happen:
 
-1. The use of the buffer decreases to below the ``warning level`` before the timer reaches the ``tolerance time``.  If this occurs, no alert about flooding appears on the manager. 
+1. The use of the buffer decreases to below the ``warning level`` before the timer reaches the ``tolerance time``.  If this occurs, no alert about flooding appears on the manager.
 
 This graphic illustrates this situation.
 
@@ -148,7 +150,7 @@ This graphic illustrates this situation.
 Flooding status (red area)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If the conditions in number 2 above are met, where the buffer stays above the ``warning level`` beyond the defined ``tolerance time``, the ``Flooding status`` alert is triggered. 
+If the conditions in number 2 above are met, where the buffer stays above the ``warning level`` beyond the defined ``tolerance time``, the ``Flooding status`` alert is triggered.
 
 This alert has the following appearance:
 

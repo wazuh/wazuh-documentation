@@ -1,7 +1,9 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _amazon:
 
 AWS CloudTrail
-==========================================
+==============
 
 .. versionadded:: 3.2.0
 

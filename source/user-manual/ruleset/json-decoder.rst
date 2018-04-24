@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _ruleset_json-decoder:
 
 JSON decoder
@@ -58,7 +60,7 @@ The following example shows how Wazuh decodes a JSON log and generates an alert 
    }
 
 
-The JSON decoder extracts each the fields from the log data for comparison against the rules such that a specific *Suricata* decoder is not needed.  The rules will be used to identify the source of the JSON event based on the existence of certain fields that are specific to the source that the JSON event was generated from. 
+The JSON decoder extracts each the fields from the log data for comparison against the rules such that a specific *Suricata* decoder is not needed.  The rules will be used to identify the source of the JSON event based on the existence of certain fields that are specific to the source that the JSON event was generated from.
 
 The following example shows how the rules contained in the file ``0470-suricata_rules.xml`` work. Initially, there is a parent rule to check for the existence of the *'timestamp'* and *'event_type'* fields to determine the type of log (*Suricata*), then the child rule displays the alert using the value of the extracted fields.
 

@@ -1,15 +1,17 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _learning_wazuh_replace_stock_rule:
 
 Change the rules
 ================
 
-The `Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_ is maintained by Wazuh, Inc. and is contributed to by the Wazuh 
-community.  These stock rules are located in various files in /var/ossec/ruleset/rules/ on the Wazuh Manager and should never 
-be edited in that location because they are overwritten when you upgrade Wazuh Manager or pull a Wazuh Ruleset update.  
+The `Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_ is maintained by Wazuh, Inc. and is contributed to by the Wazuh
+community.  These stock rules are located in various files in /var/ossec/ruleset/rules/ on the Wazuh Manager and should never
+be edited in that location because they are overwritten when you upgrade Wazuh Manager or pull a Wazuh Ruleset update.
 
-To change something about a stock rule, you must copy the rule to /var/ossec/etc/rules/local_rules.xml or elsewhere in that 
-same directory, where you can then adjust it to suit your requirements. In this new location the rule must be tagged 
-as an *overwrite* rule so that it is clear the original version of the rule is being replaced.  
+To change something about a stock rule, you must copy the rule to /var/ossec/etc/rules/local_rules.xml or elsewhere in that
+same directory, where you can then adjust it to suit your requirements. In this new location the rule must be tagged
+as an *overwrite* rule so that it is clear the original version of the rule is being replaced.
 
 In this lab you will raise the severity level of a specific rule in the Wazuh Ruleset.
 
@@ -56,9 +58,8 @@ In this lab you will raise the severity level of a specific rule in the Wazuh Ru
             Description: 'sshd: insecure connection attempt (scan).'
         **Alert to be generated.
 
-.. note::   
-    The Wazuh Manager only reads in the rules when started or restarted, so any real events like above would not be affected 
-    by your customized rule until you restart Wazuh Manager.  The ossec-logtest tool does not require Wazuh Manager to be 
+.. note::
+    The Wazuh Manager only reads in the rules when started or restarted, so any real events like above would not be affected
+    by your customized rule until you restart Wazuh Manager.  The ossec-logtest tool does not require Wazuh Manager to be
     restarted to notice your latest rule changes, which provides you with a convenient way to test your rule changes before
     making them take effect on real events.
-

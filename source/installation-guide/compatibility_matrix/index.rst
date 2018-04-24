@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _compatibility_matrix:
 
 Compatibility matrix
