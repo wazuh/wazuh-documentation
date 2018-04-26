@@ -19,7 +19,7 @@ It has been created an input buffer in the manager side, this queue will act as 
 
 Between the features of this queue, it dispatches events as fast as possible avoiding any delay in the communication process, and it warns when gets full stopping to ingest more events.
 
-In addition, the capacity of the buffer is configurable in the ``remote`` section of the :doc:`Local configuration <../user-manual/reference/ossec-conf/remote>`
+In addition, the capacity of the buffer is configurable in the ``remote`` section of the :doc:`Local configuration <../user-manual/reference/ossec-conf/remote>`.
 
 Wazuh modules
 -------------
@@ -46,3 +46,4 @@ In addition to the previous points, another important changes have been included
 - The Slack integration has been updated since some used parameters were deprecated by Slack. This integration allows Wazuh to send notifications to Slack when desired alerts are triggered.
 - It has been fixed the agent group file deletion when using the Auth daemon. As well as the client of the daemon for old versions of Windows.
 - Fixed the filter of the output syslog daemon when filtering by rule group.
+- Added new installation guides to the documentation for installing the Wazuh app for Splunk.
