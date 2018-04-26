@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _splunk_forwarder:
 
 Splunk Forwarder Configuration
@@ -27,7 +29,7 @@ Setting up Splunk Forwarder
     host = wazuhmanager
     index = wazuh
     sourcetype = wazuh
-  
+
   - host = wazuhmanager, Wazuh Manager hostname.
   - index = wazuh, default index name where alerts will be stored.
   - sourcetype = wazuh, default sourcetype for alerts.
@@ -37,7 +39,7 @@ Setting up Splunk Forwarder
   .. code-block:: console
 
     [wazuh]
-    DATETIME_CONFIG = 
+    DATETIME_CONFIG =
     INDEXED_EXTRACTIONS = json
     KV_MODE = none
     NO_BINARY_CHECK = true
@@ -67,7 +69,7 @@ Setting up Splunk Forwarder
 
     [tcpout:indexer2]
     server=IP_SECOND_INDEXER:9997
-  
+
 4. Restart Splunk service:
 
   .. code-block:: console
