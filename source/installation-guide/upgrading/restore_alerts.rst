@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _restore_alerts:
 
 Restore Wazuh alerts from Wazuh 2.x

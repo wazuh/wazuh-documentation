@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_install_elastic_stack:
 
 Install Elastic Stack
@@ -22,7 +24,7 @@ Preparation
 
   .. code-block:: console
 
-    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jre-8u151-linux-x64.rpm"
+    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u171-b11/512cd62ec5174c3487ac17c61aaa89e8/jre-8u171-linux-x64.rpm"
     # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
     # yum -y install jre-8-linux-x64.rpm
     # rm -f jre-8-linux-x64.rpm
@@ -81,7 +83,7 @@ Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logs
 
   This process will set optimal index sharding, replication, and memory usage values for Elasticsearch.
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
     # sed -i 's/"index.refresh_interval": "5s"/"index.refresh_interval": "5s",\n    "number_of_shards" :   1,\n    "number_of_replicas" : 0/' w-elastic-template.json

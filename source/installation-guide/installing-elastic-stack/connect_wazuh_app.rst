@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _connect_wazuh_app:
 
 Connect the Wazuh App with the API

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _manual_file_integrity:
 
 File integrity monitoring

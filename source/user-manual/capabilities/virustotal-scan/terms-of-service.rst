@@ -1,10 +1,12 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 ToS: Public API vs Private API
 ==============================
 
 VirusTotal's Terms of Service specify the two ways the VirusTotal API may be used:
 
 Public API
-------------
+----------
 
 This method uses a free API with many of VirusTotal's functionalities, however, it has some important limitations, such as:
 

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _api_getting_started:
 
 Getting started
@@ -316,7 +318,7 @@ You can even dump the manager's current configuration with the below request (re
 Playing with agents
 ^^^^^^^^^^^^^^^^^^^
 
-Here are some commands for working with the agents. 
+Here are some commands for working with the agents.
 
 This enumerates **active** agents:
 

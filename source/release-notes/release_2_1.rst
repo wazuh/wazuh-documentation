@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _release_2_1:
 
 2.1 Release Notes
@@ -32,7 +34,7 @@ For more details about this new feature see our :doc:`Labels section <../user-ma
 Improved Authd performance
 --------------------------
 
-The Authd program has been improved in this version such that the Wazuh API and the ``manage_agents`` tools can now register an agent while ``ossec-authd`` is running. 
+The Authd program has been improved in this version such that the Wazuh API and the ``manage_agents`` tools can now register an agent while ``ossec-authd`` is running.
 
 Additionally, :doc:`ossec-authd <../user-manual/reference/daemons/ossec-authd>` now runs in the background and can be enabled using the command ``ossec-control enable auth``. See the :doc:`auth section <../user-manual/reference/ossec-conf/auth>` of ``ossec.conf`` for configuration options and sample configuration.
 

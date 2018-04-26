@@ -1,11 +1,11 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _ruleset_update:
 
 Update ruleset
 ===============
 
 Run the ``update_ruleset.py`` script to update the Wazuh ruleset.  You should not need to make any other changes to accommodate the updated rules.
-
-
 
 Usage examples
 ----------------

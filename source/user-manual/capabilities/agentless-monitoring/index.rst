@@ -1,5 +1,6 @@
-.. _manual_agentless:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _manual_agentless:
 
 Agentless monitoring
 ====================

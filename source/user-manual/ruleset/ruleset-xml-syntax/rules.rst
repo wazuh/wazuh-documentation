@@ -1,3 +1,7 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
+.. _rules_syntax:
+
 Rules Syntax
 ============
 
@@ -125,7 +129,6 @@ Any regex to be compared to a field extracted by the decoder.
 | **name** | Specifies the name of the field extracted by the decoder. |
 +----------+-----------------------------------------------------------+
 
-
 srcip
 ^^^^^
 
@@ -147,7 +150,6 @@ Any IP address or CIDR block to be compared to an IP decoded as dstip. Use "!" t
 +--------------------+-----------+
 | **Allowed values** | Any dstip |
 +--------------------+-----------+
-
 
 extra_data
 ^^^^^^^^^^
@@ -182,7 +184,6 @@ Program name is decoded from syslog process name.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
 
-
 hostname
 ^^^^^^^^^^
 
@@ -208,13 +209,13 @@ Time that the event was generated.
 weekday
 ^^^^^^^^
 
- Week day that the event was generated.
+Week day that the event was generated.
 
- +--------------------+-------------------------------------+
- | **Default Value**  | n/a                                 |
- +--------------------+-------------------------------------+
- | **Allowed values** | monday - sunday, weekdays, weekends |
- +--------------------+-------------------------------------+
++--------------------+-------------------------------------+
+| **Default Value**  | n/a                                 |
++--------------------+-------------------------------------+
+| **Allowed values** | monday - sunday, weekdays, weekends |
++--------------------+-------------------------------------+
 
 id
 ^^^
@@ -231,7 +232,6 @@ url
 ^^^
 
 Any URL (decoded as the URL).
-
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -286,9 +286,7 @@ This option is used in conjunction with frequency and timeframe.
 +--------------------+-------------+
 
 .. note::
-    Rules at level 0 are discarded immediately and will not be used with the if_matched_rules. The level must be at least 1, but the <no_log> option can be added to the rule to make sure it does not get logged.
-
-
+  Rules at level 0 are discarded immediately and will not be used with the if_matched_rules. The level must be at least 1, but the <no_log> option can be added to the rule to make sure it does not get logged.
 
 if_matched_group
 ^^^^^^^^^^^^^^^^
@@ -487,7 +485,7 @@ Additional rule options
 +--------------------+-----------------------------------------------------+
 
 .. note::
-    Use one ``<option>`` tag for each option you want to add.
+  Use one ``<option>`` tag for each option you want to add.
 
 .. _rules_check_diff:
 

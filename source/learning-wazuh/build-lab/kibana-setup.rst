@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_nginx_setup:
 
 Set up Kibana

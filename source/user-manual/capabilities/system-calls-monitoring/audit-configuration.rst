@@ -1,5 +1,6 @@
-.. _audit-configuration:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _audit-configuration:
 
 Configuration
 ================================================

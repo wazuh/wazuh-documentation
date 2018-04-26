@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _pci_dss:
 
 Using Wazuh for PCI DSS

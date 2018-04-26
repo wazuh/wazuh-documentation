@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _sources_installation:
 
 Install Wazuh server from sources

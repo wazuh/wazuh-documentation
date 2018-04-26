@@ -1,5 +1,6 @@
-.. _ciscat_module:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _ciscat_module:
 
 CIS-CAT integration
 ===================

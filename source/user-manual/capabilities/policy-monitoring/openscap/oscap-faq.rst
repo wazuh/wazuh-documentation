@@ -1,5 +1,6 @@
-.. _oscap-faq:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _oscap-faq:
 
 FAQ
 ===

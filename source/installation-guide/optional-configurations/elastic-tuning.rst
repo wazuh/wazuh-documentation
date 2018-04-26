@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _elastic_tuning:
 
 Elasticsearch tuning

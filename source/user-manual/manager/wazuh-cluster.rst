@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh-cluster:
 
 Deploying a Wazuh cluster
@@ -150,7 +152,7 @@ Run the cluster in CentOS 6
 Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is required to run the cluster, follow these steps to install and use this version:
 
 1. Install Python 2.7 as follows:
-  
+
   .. code-block:: console
 
     # yum install -y centos-release-scl

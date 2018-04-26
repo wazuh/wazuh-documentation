@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _upgrading_same_minor:
 
 Upgrade from the same minor version

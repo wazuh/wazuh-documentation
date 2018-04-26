@@ -1,6 +1,8 @@
-.. _wazup-app:
+.. Copyright (C) 2018 Wazuh, Inc.
 
-Using Wazup App
+.. _wazuh-app:
+
+Using Wazuh App
 ===============
 
 Listing Agents

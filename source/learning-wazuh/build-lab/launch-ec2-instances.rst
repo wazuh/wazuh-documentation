@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_launch_ec2_instances:
 
 Launch the EC2 instances
@@ -8,9 +10,9 @@ Here we will launch the Wazuh Server, the Elastic Server, and the Linux Agent as
 Launch a Wazuh Server instance
 ------------------------------
 
-- From your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_, click **[Launch Instance]**.  
-- On the left click on "AWS Marketplace".  
-- Type "centos 7" into the search field and hit <Enter>. 
+- From your `EC2 Dashboard <https://console.aws.amazon.com/ec2/v2/home>`_, click **[Launch Instance]**.
+- On the left click on "AWS Marketplace".
+- Type "centos 7" into the search field and hit <Enter>.
 - Find the image below and click **[Select]** next to it.
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/centos-ami.png
@@ -20,7 +22,7 @@ Launch a Wazuh Server instance
 
 - Click **[Continue]**.
 - Select the General purpose t2.micro image and click **[Next: Configure Instance Details]**
-- For *Network*, choose your VPC, and for the *Primary IP* of eth0, put in "172.30.0.10".  
+- For *Network*, choose your VPC, and for the *Primary IP* of eth0, put in "172.30.0.10".
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/config-inst-details.png
     :title: Config instance
@@ -42,10 +44,10 @@ Launch a Wazuh Server instance
     fi
     if [ "$IP" == "172.30.0.20" ]; then
     	hostnamectl set-hostname --static elastic-server
-    fi  
+    fi
     if [ "$IP" == "172.30.0.30" ]; then
     	hostnamectl set-hostname --static linux-agent
-    fi  
+    fi
     echo "preserve_hostname: true" >> /etc/cloud/cloud.cfg
     echo "172.30.0.10 wazuh-server" >> /etc/hosts
     echo "172.30.0.20 elastic-server" >> /etc/hosts
@@ -116,4 +118,3 @@ Repeat the process for "Launch a Wazuh Server" with the following exceptions:
 - Do not change the Storage Size to smaller than the default of 30GB.  Larger if fine if you wish.
 - Set the *Name* Tag to "Windows Agent".
 - Pick the "Wazuh Windows" security group instead of the "Wazuh Linux" one.
-

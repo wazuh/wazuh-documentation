@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _setup_ansible_hosts:
 
 Remote Hosts

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _compatibility_matrix:
 
 Compatibility matrix
@@ -9,7 +11,6 @@ Wazuh software can be installed in many operating systems, but depending on your
 
 - `Manager`_
 - `Agent`_
-
 
 Manager
 -------

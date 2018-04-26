@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _agent-sources:
 
 Install Wazuh agent from sources
@@ -75,8 +77,8 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
   .. code-block:: console
 
-   # curl -Ls https://github.com/wazuh/wazuh/archive/v3.2.2.tar.gz | tar zx
-   # cd wazuh-*/src
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.2.2.tar.gz | tar zx
+    # cd wazuh-*/src
 
 4. Compile the agent by running the ``make`` command:
 
@@ -95,7 +97,7 @@ The following output will appear at the end of the building process:
 
   .. code-block:: console
 
-    # zip -r wazuh.zip ../../wazuh-3.2-2
+    # zip -r wazuh.zip ../../wazuh-3.2.2
 
 6. Once in Windows, run the ``wazuh-3.2.2/src/win32/wazuh-installer-build-msi.bat`` file to start the installer generation. If you do not want to sign the installer, you will have to comment or delete the signtool line.
 

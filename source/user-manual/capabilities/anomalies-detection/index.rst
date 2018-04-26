@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _manual_anomaly_detection:
 
 Anomaly and malware detection

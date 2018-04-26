@@ -1,3 +1,4 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _ossec-agentd:
 
@@ -5,7 +6,6 @@ ossec-agentd
 ============
 
 The ossec-agentd program is the client-side daemon that communicates with the server. It runs as ``ossec`` and is chrooted to ``/var/ossec``.
-
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |

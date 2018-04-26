@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh_agent_deb:
 
 Install Wazuh agent with DEB packages

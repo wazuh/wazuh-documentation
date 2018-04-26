@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _elastic_ssl:
 
 Setting up SSL for Filebeat and Logstash

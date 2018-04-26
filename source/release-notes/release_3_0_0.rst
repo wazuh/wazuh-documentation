@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _release_3_0_0:
 
 3.0.0 Release Notes
@@ -23,7 +25,7 @@ For deploying your Wazuh environment see the :doc:`Installation guide <../instal
 Grouping agents
 ---------------
 
-Support for the grouping of agents has now been included at the Wazuh manager level, which makes centralized configuration more flexible and efficient. 
+Support for the grouping of agents has now been included at the Wazuh manager level, which makes centralized configuration more flexible and efficient.
 
 Version 3.0.0 allows agents to be assigned to a specific group which may have different agent configuration, rootcheck policies and hardening checks than other groups. The manager will then send only the necessary files to each agent based on this assignment. Once the new configuration is received, the agent will restart itself to apply the changes.
 
@@ -34,7 +36,7 @@ More information about this feature is found at :doc:`Grouping agents <../user-m
 Remote agent upgrades
 ---------------------
 
-The manager can now upgrade agents remotely.  The agent version and OS it is running on are registered with the manager. The manager uses this information to know which agents need to be upgraded and which upgrade package to send. 
+The manager can now upgrade agents remotely.  The agent version and OS it is running on are registered with the manager. The manager uses this information to know which agents need to be upgraded and which upgrade package to send.
 
 A custom procedure has been created to perform these upgrades without relying on external package managers (apt/yum). The manager will instead
 send a compressed and signed WPK (Wazuh Signed Package) that contains the necessary binaries and instructions to upgrade the agent.
@@ -48,7 +50,7 @@ In our dedicated section for :doc:`Remote upgrading <../user-manual/agents/remot
 Wazuh cluster for managers
 --------------------------
 
-The Wazuh cluster provides new capability to scale Wazuh horizontally by adding as many manager nodes as needed to process events from the reporting agents. 
+The Wazuh cluster provides new capability to scale Wazuh horizontally by adding as many manager nodes as needed to process events from the reporting agents.
 
 The cluster architecture is master/client based, synchronizing internal configuration files (agent keys, groups configuration, agents configuration and agent statuses) between all clients nodes.  This allows agents to report to multiple managers (cluster nodes) which increases availability and fault tolerance.
 

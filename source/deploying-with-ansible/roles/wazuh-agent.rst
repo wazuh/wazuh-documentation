@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _ansible-wazuh-agent:
 
 Wazuh Agent
@@ -22,26 +24,28 @@ a. For production environment ``vars-production.yml``:
 
 .. code-block:: yaml
 
-    wazuh_manager_ip: 10.1.1.12
+    wazuh_managers:
+      - address: 10.1.1.12
+        port: 1514
+        protocol: udp
     wazuh_agent_authd:
       enable: true
       port: 1515
       ssl_agent_ca: null
-      ssl_agent_cert: null
-      ssl_agent_key: null
       ssl_auto_negotiate: 'no'
 
 b. For development environment ``vars-development.yml``:
 
 .. code-block:: yaml
 
-    wazuh_manager_ip: 192.168.0.10
+    wazuh_managers:
+      - address: 192.168.0.10
+        port: 1514
+        protocol: udp
     wazuh_agent_authd:
       enable: true
       port: 1515
       ssl_agent_ca: null
-      ssl_agent_cert: null
-      ssl_agent_key: null
       ssl_auto_negotiate: 'no'
 
 Next, run the ansible playbook:

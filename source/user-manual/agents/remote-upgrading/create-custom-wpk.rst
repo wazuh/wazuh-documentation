@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _create-custom-wpk:
 
 Creating custom WPK packages
@@ -42,7 +44,7 @@ A WPK package must contain an installation program in binary form or a script in
 
     * fork itself, as the parent will return 0 immediately,
     * restart the agent, and
-    * the installer must write a file called upgrade_result containing a status number (0 means OK) before exiting. 
+    * the installer must write a file called upgrade_result containing a status number (0 means OK) before exiting.
 
 Requirements
 ^^^^^^^^^^^^

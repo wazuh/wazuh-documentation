@@ -1,5 +1,6 @@
-.. _reference_ossec_integration:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_integration:
 
 integration
 ===========

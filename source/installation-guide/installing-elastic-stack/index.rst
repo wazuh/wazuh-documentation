@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _installation_elastic:
 
 Installing Elastic Stack

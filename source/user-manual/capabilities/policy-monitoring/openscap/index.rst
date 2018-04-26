@@ -1,5 +1,6 @@
-.. _openscap_module:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _openscap_module:
 
 OpenSCAP
 ========
