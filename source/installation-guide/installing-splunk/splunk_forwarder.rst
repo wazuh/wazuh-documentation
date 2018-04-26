@@ -2,7 +2,7 @@
 
 .. _splunk_forwarder:
 
-Splunk Forwarder Configuration
+Splunk Forwarder configuration
 ==============================
 
 Requirements

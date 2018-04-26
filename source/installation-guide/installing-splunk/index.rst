@@ -2,8 +2,8 @@
 
 .. _installation_splunk:
 
-Splunk
-======
+Installing Splunk
+=================
 
 This guide describes the installation of a Splunk infrastructure comprised of a Splunk Enterprise instance as indexer and a Splunk Forwarder node.
 In addition to Splunk Enterprise components, you will also find the instructions to install and configure the Wazuh app for Splunk.

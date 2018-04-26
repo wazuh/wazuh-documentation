@@ -2,10 +2,10 @@
 
 .. _splunk_index:
 
-Splunk Indexer Setup
+Splunk Indexer setup
 ====================
 
-Setup Receiving data
+Setup receiving data
 --------------------
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
