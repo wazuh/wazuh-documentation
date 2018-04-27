@@ -38,6 +38,16 @@ The cluster communication procedure has been received some important improvement
 - A synchronization timeout has been added to prevent it from an indefinitely block state.
 - The cluster client protocol has been reimplemented to use permanent connections, instead of creating new connections for each request. This way, the connections between the cluster nodes will be more efficient.
 
+Wazuh app
+---------
+
+The Wazuh app received lots of new improvements for this release. In addition to several bugfixes and performance improvements, these are the major highlights for this Wazuh app version:
+
+- New dynamic visualization loading system. Now the app loads visualizations on demand, and never store them on the ``.kibana`` index.
+- A new design for the Ruleset tab, providing the information about the rules and decoders in a cleaner, more organized way.
+- A new system for role detection over index patterns when using the X-Pack plugin for the Elastic Stack.
+- Refinements and adjustments to the user interface.
+
 Other relevant changes
 ----------------------
 
