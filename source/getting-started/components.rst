@@ -12,7 +12,7 @@ Wazuh agent
 
 The Wazuh agent runs on Windows, Linux, Solaris, BSD, and Mac operating systems. It is used to collect different types of system and application data that it forwards to the Wazuh server through an encrypted and authenticated channel. In order to establish this secure channel, a registration process involving unique pre-shared keys is utilized.
 
-The agents can be used to monitor physical servers, virtual machines and cloud instances (e.g. Amazon AWS, Azure or Google Cloud). Pre-compiled agent installation packages are available for Linux, AIX, Solaris, Windows, and Darwin (Mac OS X).
+The agents can be used to monitor physical servers, virtual machines and cloud instances (e.g. Amazon AWS, Azure or Google Cloud). Pre-compiled agent installation packages are available for Linux, HP-UX, AIX, Solaris, Windows, and Darwin (Mac OS X).
 
 On Unix-based operating systems, the agent runs multiple processes which communicate with each other through a local Unix domain socket. One of those processes is in charge of the communication and data sending to the Wazuh server. On Windows systems, there is only one agent process running multiple tasks using mutexes.
 
