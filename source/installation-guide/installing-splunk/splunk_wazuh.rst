@@ -35,7 +35,7 @@ Installation
 
 6. Fill in the input fields with the following information:
 
-  - API ip: Wazuh API ip.
-  - API port: Wazuh API port, usually 55000.
-  - Api user: Wazuh API username.
-  - Api password: Wazuh API password.
+  - URL: Wazuh API url (http(s)://<IP>).
+  - Port: Wazuh API port, usually 55000.
+  - User: Wazuh API credential username.
+  - Password: Wazuh API credential password.
