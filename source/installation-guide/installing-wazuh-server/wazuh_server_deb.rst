@@ -176,4 +176,4 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to :ref:`install Elastic Stack <installation_elastic>`.
+Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>` or :ref:`Splunk <installation_splunk>`.

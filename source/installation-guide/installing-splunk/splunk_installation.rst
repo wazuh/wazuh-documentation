@@ -5,6 +5,10 @@
 Splunk installation
 ===================
 
+You can install Splunk and the Splunk Forwarder for RPM and DEB systems.
+
+.. note:: Many of the commands described below need to be executed with root user privileges.
+
 Splunk Enterprise installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -23,12 +27,7 @@ b) For Debian/Ubuntu distributions:
 
   # dpkg --install splunk-enterprise-package.deb
 
-Upon completion, ensure Splunk is already installed in:
-
-.. code-block:: console
-
-      # /opt/splunk/
-
+Upon completion, ensure Splunk is already installed in ``/opt/splunk``
 
 Splunk Forwarder installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -48,35 +47,33 @@ b) For Debian/Ubuntu distributions:
 
   # dpkg --install splunkforwarder-package.deb
 
-Upon completion, ensure Splunk is already installed in:
-
-.. code-block:: console
-
-      # /opt/splunkforwarder/
+Upon completion, ensure Splunk is already installed in ``/opt/splunkforwarder``
 
 Useful Splunk examples
 ^^^^^^^^^^^^^^^^^^^^^^
 
 a) Start/stop/restart Splunk service:
 
-    .. code-block:: console
+  .. code-block:: console
 
-        # /opt/splunk/bin/splunk start | stop | restart
+    # /opt/splunk/bin/splunk start | stop | restart
 
 b) Start Splunk service at boot time:
 
-    .. code-block:: console
+  .. code-block:: console
 
-        # /opt/splunk/bin/splunk enable boot-start
+    # /opt/splunk/bin/splunk enable boot-start
 
 c) Clean Splunk data from an index:
 
-    .. code-block:: console
+  .. code-block:: console
 
-        # /opt/splunk/bin/splunk clean eventdata -index <index-name>
+    # /opt/splunk/bin/splunk clean eventdata -index <index-name>
 
 d) Clean data from all indexes:
 
-    .. code-block:: console
+  .. code-block:: console
 
-        # /opt/splunk/bin/splunk clean eventdata
+    # /opt/splunk/bin/splunk clean eventdata
+
+Now that you've finished installing Splunk Enterprise, proceed with the next step and set up the :ref:`Splunk indexer <splunk_index>`.

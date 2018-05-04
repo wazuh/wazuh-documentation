@@ -5,28 +5,38 @@
 Splunk Indexer setup
 ====================
 
+.. note:: Many of the commands described below need to be executed with root user privileges.
+
 Setup receiving data
 --------------------
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: By default, ``$SPLUNK_HOME = /opt/splunk``
 
-1. Specify the TCP port you want the receiver to listen to (the listening port, also known as the receiving port). You can specify any unused port.
+Specify the TCP port you want the receiver to listen to (the listening port, also known as the receiving port). You can specify any unused port.
 
-  You can use a tool like netstat to determine what ports are available on your system. Make sure the port you select is not in use by splunkweb or splunkd.
+You can use a tool like ``netstat`` to determine what ports are available on your system. Make sure the port you select is not in use by *splunkweb* or *splunkd*.
 
 a) CLI mode:
 
-  Add a new receiving configuration editing inputs.conf file, adding the following lines:
+  1. Add a new receiving configuration opening the ``$SPLUNK_HOME/etc/apps/launcher/local/inputs.conf`` file, and adding the following lines:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    [splunktcp://9997]
-    connection_host = <forwarder ip>
+      [splunktcp://<CUSTOM_PORT>]
+      connection_host = ip
+
+  2. Restart Splunk:
+
+    .. code-block:: console
+
+      # $SPLUNK_HOME/bin/splunk restart
+
+.. note:: The default Splunk port is ``9997``
 
 b) GUI mode:
 
-  .. code-block:: console
+  1. On the Splunk web interface, click on ``Settings > Forwarding and receiving``
+  2. At ``Configure receiving``, click on ``+ Add new``
+  3. Set the desired port.
 
-    1. Click Settings > Forwarding and receiving.
-    2. At Configure receiving, click Add new.
-    3. Set the chosen port
+After configuring the indexer, we can continue with the next step and setting up the :ref:`Splunk Forwarder <splunk_forwarder>`.

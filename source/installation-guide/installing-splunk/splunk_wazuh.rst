@@ -7,7 +7,6 @@ Splunk app for Wazuh
 
 Wazuh app for Splunk offers an UI to visualize Wazuh alerts and API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
 
-
 Installation
 ------------
 
@@ -20,6 +19,7 @@ Installation
     .. code-block:: console
 
       $SPLUNK_HOME/bin/splunk install app SplunkAppForWazuh.tgz
+      $SPLUNK_HOME/bin/splunk restart
 
   - Web GUI:
 
