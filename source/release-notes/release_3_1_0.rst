@@ -9,7 +9,7 @@ This section shows the most relevant new features of Wazuh v3.1.0. You will find
 
 **New features:**
 
-- `VULS integration (Deprecated)`_
+- `VULS integration`_
 - `CIS-CAT Wazuh module to scan CIS policies`_
 - `New "Command" Wazuh module`_
 - `New rotation capabilities for alerts`_
@@ -17,10 +17,8 @@ This section shows the most relevant new features of Wazuh v3.1.0. You will find
 - `Ruleset`_
 - `More relevant features`_
 
-VULS integration (Deprecated)
------------------------------
-
-**Deprecated since Wazuh v3.2.0.**
+VULS integration
+----------------
 
 Vuls (VULnerability Scanner) is a tool that was created for analyzing the vulnerability of Linux systems. This tool looks for known vulnerabilities referenced in databases such as the National Vulnerability Database (NVD).
 

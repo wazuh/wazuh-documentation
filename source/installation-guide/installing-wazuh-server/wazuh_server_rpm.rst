@@ -216,4 +216,4 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>` or :ref:`Splunk <installation_splunk>`.
+Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>`.
