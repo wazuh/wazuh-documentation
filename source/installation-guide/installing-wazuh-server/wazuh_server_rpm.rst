@@ -38,7 +38,7 @@ For CentOS-5 and RHEL-5:
     gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
     enabled=1
     name=Wazuh repository
-    baseurl=http://packages.wazuh.com/3.x/yum/5/
+    baseurl=http://packages.wazuh.com/3.x/yum/5/$basearch/
     protect=1
     EOF
 
@@ -216,4 +216,4 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to :ref:`install Elastic Stack <installation_elastic>`.
+Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>`.
