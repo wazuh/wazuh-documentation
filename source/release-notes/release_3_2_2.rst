@@ -5,13 +5,12 @@
 3.2.2 Release Notes
 ===================
 
-From the Wazuh team, we continue working hard improving the existing features as well as fixing bugs. This section shows the most relevant improvements and fixes in version 3.2.2. You can find more detailed information in each component changelog.
+From the Wazuh team, we continue working hard improving the existing features as well as fixing bugs. This section shows the most relevant improvements and fixes in version 3.2.2. Find more details in each component changelog.
 
-- `Wazuh <https://github.com/wazuh/wazuh/blob/v3.2.2/CHANGELOG.md>`
-- `API <https://github.com/wazuh/wazuh-api/blob/v3.2.2/CHANGELOG.md>`
-- `Ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.2.2/CHANGELOG.md>`
-- `Kibana app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.2.2-6.2.4/CHANGELOG.md>`
-- `Splunk app <https://github.com/wazuh/wazuh-splunk/blob/v2.2.0/CHANGELOG.md>`
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.2.2/CHANGELOG.md>`_
+- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.2.2/CHANGELOG.md>`_
+- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.2.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.2.2-6.2.4/CHANGELOG.md>`_
 
 Manager-agent communication
 ---------------------------
@@ -37,12 +36,6 @@ The Wazuh app received lots of new improvements for this release. In addition to
 - A new system for role detection over index patterns when using the X-Pack plugin for the Elastic Stack.
 - Refinements and adjustments to the user interface.
 
-Wazuh app: Splunk
------------------
-
-Wazuh app for Splunk offers an option to visualize Wazuh Alerts and API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
-
-:doc:`The Splunk installation guide is available in the documentation. <../installation-guide/installing-splunk/>`.
 
 Other relevant changes
 ----------------------
