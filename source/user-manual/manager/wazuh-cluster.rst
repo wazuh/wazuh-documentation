@@ -37,6 +37,8 @@ There are different independent threads running, each one is framed in the image
     - **Agent info thread**: Responsible of sending the statuses of the agents that are reporting to that node.
     - **Integrity thread**: Responsible of synchronizing the files sent by the master.
 
+The cluster only uses the daemon **wazuh-clusterd**, which outputs to the file ``logs/cluster.log``. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
+
 .. image:: ../../images/manual/cluster/cluster_flow.png
 
 Keep alive thread
@@ -93,17 +95,6 @@ Client nodes are responsible of two main tasks:
     - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
     - Sending :ref:`agent status updates <agent-info-thread>` to the master.
 
-Cluster daemons
-^^^^^^^^^^^^^^^
-Wazuh clusters function through the use of the following two daemons:
-
-- **wazuh-clusterd** which synchronizes the managers in the cluster and outputs a logfile to ``logs/cluster.log``, and
-
-- **wazuh-clusterd-internal** which monitors the files to synchronize and manages the cluster database. The logs of this daemon can be found in the ``logs/ossec.log`` file.
-
-Both of these daemons must be running in all the managers of the cluster. The **wazuh-clusterd** will automatically start the **wazuh-clusterd-internal** daemon.
-
-Refer to the :doc:`Daemons <../reference/daemons/index>` section for more information about the use of these daemons.
 
 Cluster management
 ^^^^^^^^^^^^^^^^^^
