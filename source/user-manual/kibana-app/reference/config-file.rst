@@ -5,9 +5,9 @@
 Configuration file
 ==================
 
-The Wazuh app includes a configuration file (located at ``/usr/share/kibana/plugins/wazuh/config.yml``) where you can define custom values for several options. This section describes all the options available in this file.
+The Wazuh app includes a configuration file (located at ``/usr/share/kibana/plugins/wazuh/config.yml``) where you can define custom values for several options. This section describes all the settings available in this file.
 
-The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of the options and apply the desired values.
+The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of them and apply the desired values.
 
 .. warning::
 
