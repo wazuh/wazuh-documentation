@@ -108,7 +108,7 @@ Use case: Deploying a Wazuh cluster
 -----------------------------------
 
 .. note::
-  To run the wazuh-clusterd binary, **Python 2.7** is required. If your OS has a previous python version, please refer to `Run the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
+  To run the wazuh-clusterd binary, **Python 2.7** or higher is required. If your OS has a previous python version, please refer to `Run the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
 
 Follow these steps to deploy a Wazuh cluster:
 
@@ -126,47 +126,44 @@ Follow these steps to deploy a Wazuh cluster:
 
       # apt install python-cryptography
 
-2. Set the configurtion of the managers of the cluster.
+2. Set the cluster configuration
 
-  In the ``<cluster>`` section of the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the configuration for the cluster as below:
+  Using the ``<cluster>`` section in the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the cluster configuration as below:
 
-  - Designate one manager as the master and the rest as clients under the ``<node_type>`` field.
-  - The key must be 32 characters long and should be the same for all of the nodes of the cluster. Use the following command to generate a random password:
+  - Select one manager as the master and the rest as clients under the ``<node_type>`` field.
+  - Add a key under the ``<key>``. The key must be 32 characters long and should be the same for all of the nodes of the cluster. Use the following command to generate a random one:
 
       .. code-block:: console
 
           # openssl rand -hex 16
 
-  - The IP addresses of all of the **nodes** of the cluster must be specified under ``<nodes>``, including the IP address of the local manager. The managers will use the bash command ``hostname --all-ip-addresses`` to find out which IP address from the list is theirs. If the ``hostname --all-ip-addresses`` command finds there is a duplicate IP address, an error will be displayed.
+  - Enable the cluster setting the field ``<disabled>`` to ``no``.
+  - The address of the **master** must be specified under ``<nodes>`` in all nodes (including the master itself). The address can be either an IP or a DNS.
 
   The following is an example of this configuration:
 
   .. code-block:: xml
 
-      <cluster>
-        <name>cluster01</name>
-        <node_name>manager_centos</node_name>
-        <node_type>master</node_type>
-        <key>nso42FGdswR0805tnVqeww0u3Rubwk2a</key>
-        <interval>2m</interval>
+    <cluster>
+        <name>wazuh</name>
+        <node_name>node02</node_name>
+        <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+        <node_type>client</node_type>
         <port>1516</port>
         <bind_addr>0.0.0.0</bind_addr>
         <nodes>
-          <node>192.168.0.3</node>
-          <node>192.168.0.4</node>
-          <node>192.168.0.5</node>
+          <node>master</node>
         </nodes>
         <hidden>no</hidden>
-        <disabled>yes</disabled>
-      </cluster>
+        <disabled>no</disabled>
+    </cluster>
 
-3. To enable the Wazuh cluster, set ``<disabled>`` to ``no`` in the ``<cluster>`` section of the ossec.conf file and restart:
+
+3. Restart the node
 
     .. code-block:: console
 
         # /var/ossec/bin/ossec-control restart
-
-4. The cluster should now be synchronized with the same shared files in all managers.
 
 .. _run-cluster-centos6:
 
