@@ -8,8 +8,8 @@ Splunk Forwarder configuration
 Requirements
 ------------
 
-1. :ref:`Install <splunk_installation>` and setup a Splunk Universal Forwarder in the Wazuh manager instance.
-2. An already installed :ref:`Wazuh Manager <installation>` with access to the Wazuh API via HTTP (usually on port 55000).
+1. An already installed :ref:`Wazuh Manager <installation>` with access to the Wazuh API via HTTP (usually on port 55000).
+2. :ref:`Install <splunk_installation>` a Splunk Universal Forwarder in the Wazuh manager instance.
 3. User and password (credentials) for API basic authentication.
 4. Set the :ref:`indexers <splunk_index>` to receiving data.
 
@@ -57,12 +57,11 @@ Setting up Splunk Forwarder
   - ``INDEXER_PORT``: by default on port 9997.
   - Remember that the default Splunk username/password are ``admin/changeme``
 
-  If you have multiple indexers, please set the ``$SPLUNK_FORWARDER_HOME/etc/system/local/outputs.conf`` file like this:
-
-  .. thumbnail:: ../../images/splunk-app/distributed-arch.png
-    :title: Distributed architecture
+  .. image:: ../../images/splunk-app/simple-distributed-arch.png
     :align: center
-    :width: 100%
+
+
+  If you have multiple indexers, please set the ``$SPLUNK_FORWARDER_HOME/etc/system/local/outputs.conf`` file like this:
 
   .. code-block:: console
 
@@ -74,6 +73,9 @@ Setting up Splunk Forwarder
 
     [tcpout:indexer2]
     server=IP_SECOND_INDEXER:9997
+
+  .. image:: ../../images/splunk-app/distributed-arch.png
+    :align: center
 
 4. Restart Splunk Forwarder service:
 

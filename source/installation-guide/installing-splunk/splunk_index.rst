@@ -12,7 +12,7 @@ Setup receiving data
 
 .. note:: By default, ``$SPLUNK_HOME = /opt/splunk``
 
-The app provides an already configured port listening for forwarded data at 9997,but it's possible to change this value to Tany TCP port you want the receiver to listen to, any unused port can be chosen.
+The app provides an already configured port listening for forwarded data at 9997,but it's possible to change this value to the TCP port you want the receiver to listen to, any unused port can be chosen.
 
 You can use a tool like ``netstat`` to determine what ports are available on your system. Make sure the port you select is not in use by *splunkweb* or *splunkd*.
 

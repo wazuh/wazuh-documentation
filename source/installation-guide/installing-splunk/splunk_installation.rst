@@ -47,33 +47,8 @@ b) For Debian/Ubuntu distributions:
 
   # dpkg --install splunkforwarder-package.deb
 
-Upon completion, ensure Splunk is already installed in ``/opt/splunkforwarder``
+Upon completion, ensure Splunk is already installed in ``/opt/splunkforwarder``.
 
-Useful Splunk examples
-^^^^^^^^^^^^^^^^^^^^^^
+Additionally, useful Splunk CLI commands can be found in the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.0/Admin/CLIadmincommands>`_
 
-a) Start/stop/restart Splunk service:
-
-  .. code-block:: console
-
-    # /opt/splunk/bin/splunk start | stop | restart
-
-b) Start Splunk service at boot time:
-
-  .. code-block:: console
-
-    # /opt/splunk/bin/splunk enable boot-start
-
-c) Clean Splunk data from an index:
-
-  .. code-block:: console
-
-    # /opt/splunk/bin/splunk clean eventdata -index <index-name>
-
-d) Clean data from all indexes:
-
-  .. code-block:: console
-
-    # /opt/splunk/bin/splunk clean eventdata
-
-Now that you've finished installing Splunk Enterprise, you can change the index configuration :ref:`Splunk app for Wazuh <splunk_wazuh>`.
+Now that you've finished installing Splunk Enterprise, you can proceed with the :ref:`Splunk app for Wazuh <splunk_wazuh>` installation.

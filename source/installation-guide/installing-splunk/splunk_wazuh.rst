@@ -46,6 +46,6 @@ Installation
 .. thumbnail:: ../../images/splunk-app/general.png
   :title: Splunk app overview general tab
   :align: center
-  :width: 100%
+  :width: 85%
 
 Now that you've finished installing Splunk app for Wazuh, you can setup indexers following :ref:`the next page <splunk_index>`.
