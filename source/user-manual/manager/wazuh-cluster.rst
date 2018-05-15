@@ -29,6 +29,38 @@ How it works
 
 The Wazuh cluster is managed by a cluster daemon which communicates with the managers following a master-client architecture.
 
+The image bellow shows the communications between a client and a master node. Each client-master communication is independent from each other, since clients are the ones who start the communication with the master.
+
+There are different independent threads running, each one is framed in the image:
+
+    - **Keep alive thread**: Responsible of sending a keep alive to the master every so often.
+    - **Agent info thread**: Responsible of sending the statuses of the agents that are reporting to that node.
+    - **Integrity thread**: Responsible of synchronizing the files sent by the master.
+
+.. image:: ../../images/manual/cluster/cluster_flow.png
+
+Keep alive thread
+^^^^^^^^^^^^^^^^^
+
+This thread is responsible of sending a keep-alive to the master every so often. This keep-alive thread is necessary to keep the connection opened between master and client, since the cluster uses permanent connections.
+
+Agent info thread
+^^^^^^^^^^^^^^^^^
+
+This thread is responsible of sending the statuses of the agents that are reporting to the sender node. The master checks the modification date of each received agent status file and keeps the most recent one.
+
+The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master to store unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified client nodes yet.
+
+Integrity thread
+^^^^^^^^^^^^^^^^
+
+This thread is responsible of synchrozing the files sent by the master node to the clients. Those files are:
+
+- :ref:`agent-keys-registration` file.
+- :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
+- :doc:`Agent groups files and assignments <../agents/grouping-agents>`. The master can require agent groups assignments from a client node if an agent starts reporting in that client node.
+
+The integrity of each file is calculated using its MD5 checksum and its modification time. To avoid calculating the integrity with each client connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
 
 Master
 ^^^^^^
