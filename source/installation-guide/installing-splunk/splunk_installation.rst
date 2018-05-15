@@ -76,4 +76,4 @@ d) Clean data from all indexes:
 
     # /opt/splunk/bin/splunk clean eventdata
 
-Now that you've finished installing Splunk Enterprise, proceed with the next step and set up the :ref:`Splunk indexer <splunk_index>`.
+Now that you've finished installing Splunk Enterprise, you can change the index configuration :ref:`Splunk app for Wazuh <splunk_wazuh>`.

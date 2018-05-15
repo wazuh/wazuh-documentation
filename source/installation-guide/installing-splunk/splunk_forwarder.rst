@@ -59,6 +59,11 @@ Setting up Splunk Forwarder
 
   If you have multiple indexers, please set the ``$SPLUNK_FORWARDER_HOME/etc/system/local/outputs.conf`` file like this:
 
+  .. thumbnail:: ../../images/splunk-app/distributed-arch.png
+    :title: Distributed architecture
+    :align: center
+    :width: 100%
+
   .. code-block:: console
 
     [tcpout]
@@ -76,4 +81,4 @@ Setting up Splunk Forwarder
 
     $SPLUNK_FORWARDER_HOME/bin/splunk restart
 
-After installing the Splunk Forwarder, now it's time to install the :ref:`Wazuh app for Splunk <splunk_wazuh>`.
+After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.

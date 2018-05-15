@@ -38,4 +38,5 @@ b) GUI mode:
   1. On the Splunk web interface, click on ``Settings > Forwarding and receiving``
   2. At ``Configure receiving``, click on ``+ Add new`` or edit the existing one.
 
+In the case of having a distributed Indexers architecture, In the case of having an Indexer cluster, the `Splunk official docs <http://docs.splunk.com/Documentation/Splunk/7.1.0/Indexer/useforwarders>`_ may help with the administration and configuration.
 After configuring the indexer, we can continue with the next step and setting up the :ref:`Splunk Forwarder <splunk_forwarder>`.
