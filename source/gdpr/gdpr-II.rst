@@ -14,7 +14,8 @@ Basic principles of the regulation. Formal requirement.
 Chapter II, Article 5 Head 1(f)
 -------------------------------
 
-**Article 5**  Principles relating to processing of personal data. **Head 1(f)**. processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures ('integrity and confidentiality').
+.. note::
+	**Article 5**  Principles relating to processing of personal data. **Head 1(f)**. processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures ('integrity and confidentiality').
 
 It is necessary to ensure the confidentiality, integrity, availability and resilience of the processing systems and services, verifying their modifications, accesses, locations and guaranteeing their security, as well as of the stored data. To have controlled at all times the accesses to the data, when these accesses take place, by whom and to control the processing carried out on the data. 
 

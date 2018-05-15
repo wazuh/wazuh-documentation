@@ -20,3 +20,4 @@ Wazuh supports GDPR compliance by file integrity monitoring, temporary access re
     gdpr-I
     gdpr-II
     gdpr-III
+    gdpr-IV
