@@ -16,7 +16,7 @@ These are the two main components in a common Splunk architecture:
 .. topic:: Contents
 
   .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     splunk_installation
     splunk_wazuh
