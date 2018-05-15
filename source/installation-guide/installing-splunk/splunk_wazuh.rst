@@ -7,13 +7,17 @@ Splunk app for Wazuh
 
 Wazuh app for Splunk offers an UI to visualize Wazuh alerts and API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
 
+
+
 Installation
 ------------
 
 1. Download the latest stable version from the Splunk app for Wazuh `repository <https://github.com/wazuh/wazuh-splunk/releases/>`_.
 
-2. Install the Wazuh app for Splunk in your indexer or in every search head in your environment (if you have clustered indexers).
+.. warning:: The app currently provides an __indexes.conf__ and an __inputs.conf__ file which both create an index named 'wazuh' and listen for forwarded data on port 9997 on the machine where it's already installed.
+In the case of having an Indexer cluster, first delete __/SplunkAppForWazuh/default/indexes.conf__ and __/SplunkAppForWazuh/default/inputs.conf__ files, install the app on the Search Head machine and configure a 'wazuh' index following the `Splunk official docs <http://docs.splunk.com/Documentation/Splunk/7.1.0/Indexer/useforwarders>`_ .
 
+2. Install the Wazuh app for Splunk. 
   - CLI mode:
 
     .. code-block:: console
@@ -27,13 +31,11 @@ Installation
 
       Apps -> Manage apps -> install app from file
 
-3. This app creates a new index named **wazuh**.
+3. Open Splunk on your desired browser.
 
-4. Open Splunk on your desired browser.
+4. Click on the Wazuh app icon and navigate to Configuration -> API
 
-5. Click on the Wazuh app icon and navigate to Configuration -> API
-
-6. Fill in the input fields with the following information:
+5. Fill in the input fields with the following information:
 
   - URL: Wazuh API url (http(s)://<IP>).
   - Port: Wazuh API port, usually 55000.

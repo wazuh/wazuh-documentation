@@ -12,13 +12,13 @@ Setup receiving data
 
 .. note:: By default, ``$SPLUNK_HOME = /opt/splunk``
 
-Specify the TCP port you want the receiver to listen to (the listening port, also known as the receiving port). You can specify any unused port.
+The app provides an already configured port listening for forwarded data at 9997,but it's possible to change this value to Tany TCP port you want the receiver to listen to, any unused port can be chosen.
 
 You can use a tool like ``netstat`` to determine what ports are available on your system. Make sure the port you select is not in use by *splunkweb* or *splunkd*.
 
 a) CLI mode:
 
-  1. Add a new receiving configuration opening the ``$SPLUNK_HOME/etc/apps/launcher/local/inputs.conf`` file, and adding the following lines:
+  1. Edit the ``$SPLUNK_HOME/etc/apps/SplunkAppForWazuh/default/inputs.conf`` file, and adding the following lines:
 
     .. code-block:: console
 
@@ -36,7 +36,6 @@ a) CLI mode:
 b) GUI mode:
 
   1. On the Splunk web interface, click on ``Settings > Forwarding and receiving``
-  2. At ``Configure receiving``, click on ``+ Add new``
-  3. Set the desired port.
+  2. At ``Configure receiving``, click on ``+ Add new`` or edit the existing one.
 
 After configuring the indexer, we can continue with the next step and setting up the :ref:`Splunk Forwarder <splunk_forwarder>`.

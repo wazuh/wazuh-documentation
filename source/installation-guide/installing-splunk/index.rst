@@ -19,6 +19,7 @@ These are the two main components in a common Splunk architecture:
     :maxdepth: 2
 
     splunk_installation
+    splunk_wazuh
     splunk_index
     splunk_forwarder
-    splunk_wazuh
+
