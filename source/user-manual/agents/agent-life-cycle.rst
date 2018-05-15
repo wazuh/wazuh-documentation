@@ -17,6 +17,8 @@ A registered agent will remain in the manager until it is removed by the user. T
     :align: center
     :width: 100%
 
+.. _agent-status-cycle:
+
 Agent status
 ------------
 

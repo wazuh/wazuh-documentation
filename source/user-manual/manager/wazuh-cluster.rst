@@ -44,12 +44,16 @@ Keep alive thread
 
 This thread is responsible of sending a keep-alive to the master every so often. This keep-alive thread is necessary to keep the connection opened between master and client, since the cluster uses permanent connections.
 
+.. _agent-info-thread:
+
 Agent info thread
 ^^^^^^^^^^^^^^^^^
 
-This thread is responsible of sending the statuses of the agents that are reporting to the sender node. The master checks the modification date of each received agent status file and keeps the most recent one.
+This thread is responsible of sending the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the sender node. The master checks the modification date of each received agent status file and keeps the most recent one.
 
 The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master to store unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified client nodes yet.
+
+.. _integrity-thread:
 
 Integrity thread
 ^^^^^^^^^^^^^^^^
@@ -84,9 +88,10 @@ The communication between the nodes of the cluster is performed by means of a se
 Client
 ^^^^^^
 
-Cluster managers that have the client role update their files with the data received from the master node. This ensures that the shared configuration for the agents is the same in all managers.
+Client nodes are responsible of two main tasks:
 
-Client nodes send the ``agent-info`` file of their reporting agents to the master. This file contains important information about each agent and allows the master node to have real-time awareness of the connection status of all agents and the manager that each agent is reporting to.
+    - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
+    - Sending :ref:`agent status updates <agent-info-thread>` to the master.
 
 Cluster daemons
 ^^^^^^^^^^^^^^^
