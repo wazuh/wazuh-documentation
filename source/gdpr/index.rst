@@ -10,7 +10,7 @@ The European Union's **General Data Protection Regulation (GDPR)** has been draw
 Wazuh supports GDPR compliance by file integrity monitoring, temporary access restrictions, permanent data deletion, policy monitoring, data protection in the processing, audit logs, categorize files, access management, security breach notices, risk evaluation and security monitoring. With this guide, we can show you how these capabilities provide help for GDPR compliance: 
 
 * `Wazuh for GDPR White Paper (PDF) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_
-* `Wazuh for GDPR Guide (PDF) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_ `Wazuh for GDPR Guide (Excel) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_
+* `Wazuh for GDPR Guide (PDF) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_ ` (Excel) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_
 
 
 .. toctree::
