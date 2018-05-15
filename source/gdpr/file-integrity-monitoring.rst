@@ -13,7 +13,7 @@ First, the Wazuh agent scans the system at an interval you specify, and it sends
 
 **Article 5**  Principles relating to processing of personal data. **Head 1(f)**. processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures ('integrity and confidentiality').
 
-The syntax used for rule tagging is gdpr_ followed by the chapter, article and, where appropriate, the section and paragraph to which the requirement belongs.  (e.g., gdpr_II_5.1.f).
+The syntax used for rule tagging is **gdpr_** followed by the chapter, article and, where appropriate, the section and paragraph to which the requirement belongs.  (e.g., gdpr_II_5.1.f).
 
 Here are some examples of OSSEC rules tagged gdpr_II_5.1.f:
 
