@@ -62,22 +62,24 @@ This thread is responsible of synchrozing the files sent by the master node to t
 
 The integrity of each file is calculated using its MD5 checksum and its modification time. To avoid calculating the integrity with each client connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
 
+Types of nodes
+--------------
+
 Master
 ^^^^^^
 
-The master node is the manager that controls the cluster. The configuration of the master node is pushed to the other managers which allows for the centralization of the following:
+The master node is the manager that controls the cluster. The configuration of the master node is pushed to the client nodes which allows for the centralization of the following:
 
 - agent registration,
 - agent deletion,
 - rules, decoders and CDB lists synchronization,
-- configuration of agents grouping, and
-- centralized configuration of the ``agent.conf`` file used by the agents within each agent group.
+- configuration of agents grouping
 
-The master node sends to its clients the complete ``etc/shared`` directory contained in its Wazuh installation directory.  This includes the centralized configuration of agents ordered by groups and the ``client.keys`` file. These shared files allow agents to report to any manager of the cluster.
+The master doesn't send its :doc:`local configuration file <../reference/index>` to the clients. If the configuration is changed in the master node, it should be changed manually in the clients. When synchronizing the configuration manually, take care of not overwriting the cluster section in the local configuration of each client.
 
-Before sending rules and decoders, the master node runs ``ossec-logtest`` to verify the pending rules/decoders to push are correct. This check is also done in the clients when rules, decoders or CDB lists are received. If ``ossec-logtest`` runs doesn't report any error, the client manager is restarted. **The** ``ossec.conf`` **file is not synchronized.** If any rule or decoder is excluded in the master's ``ossec.conf``, it should be synchronized manually. Otherwise, the ``ossec-logtest`` check will fail on the client and it won't be restarted.
+Also, when rules, decoders or CDB lists are synchronized, the client nodes are not being restarted. They must be restarted manually.
 
-The communication between the nodes of the cluster is performed by means of a self-developed protocol.  This synchronization occurs at the frequency defined in the ``<cluster>`` section of :doc:`Local configuration <../reference/ossec-conf/cluster>`. These cluster communications are sent with the AES encryption algorithm providing for security and confidentiality.
+The communication between the nodes of the cluster is performed by means of a self-developed protocol. These cluster communications are sent with the AES encryption algorithm providing for security and confidentiality.
 
 Client
 ^^^^^^
