@@ -2,8 +2,8 @@
 
 .. _wazuh-cluster:
 
-Deploying a Wazuh cluster
-=========================
+Configuring a Wazuh cluster
+===========================
 
 .. versionadded:: 3.0.0
 
@@ -13,7 +13,8 @@ The Wazuh cluster functionality has been developed to strengthen the communicati
 - `How it works`_
 - `Types of nodes`_
 - `Cluster management`_
-- `Use case: Deploying a Wazuh cluster`_
+- `Deploying a Wazuh cluster`_
+- `Updating the cluster from older versions`_
 - `Run the cluster in CentOS 6`_
 
 Why do we need a Wazuh cluster?
@@ -107,8 +108,8 @@ The cluster can be efficiently controlled from any manager with the **cluster_co
 The manual for this tool can be found at :doc:`cluster_control tool <../reference/tools/cluster_control>`.
 
 
-Use case: Deploying a Wazuh cluster
------------------------------------
+Deploying a Wazuh cluster
+-------------------------
 
 .. note::
   To run the wazuh-clusterd binary, **Python 2.7** or higher is required. If your OS has a previous python version, please refer to `Run the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
@@ -169,6 +170,16 @@ Follow these steps to deploy a Wazuh cluster:
         # /var/ossec/bin/ossec-control restart
 
 .. _run-cluster-centos6:
+
+Updating the cluster from older versions
+----------------------------------------
+If you already have a cluster installation from a **version inferior to 3.2.2**, you should do some changes in your cluster configuration:
+
+    * Remove ``<interval>`` section.
+    * Remove client nodes from ``<nodes>`` section.
+
+The cluster will work with an old configuration but it is recommended to update it.
+
 
 Run the cluster in CentOS 6
 ---------------------------
