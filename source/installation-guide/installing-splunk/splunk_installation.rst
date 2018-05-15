@@ -49,6 +49,6 @@ b) For Debian/Ubuntu distributions:
 
 Upon completion, ensure Splunk is already installed in ``/opt/splunkforwarder``.
 
-Additionally, useful Splunk CLI commands can be found in the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.0/Admin/CLIadmincommands>`_
+Additionally, useful Splunk CLI commands can be found in the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.0/Admin/CLIadmincommands>`_ .
 
 Now that you've finished installing Splunk Enterprise, you can proceed with the :ref:`Splunk app for Wazuh <splunk_wazuh>` installation.
