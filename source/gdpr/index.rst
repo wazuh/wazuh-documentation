@@ -12,3 +12,10 @@ Wazuh supports GDPR compliance by file integrity monitoring, temporary access re
 * `Wazuh for GDPR White Paper (PDF) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_
 * `Wazuh for GDPR Guide (PDF) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_
 * `Wazuh for GDPR Guide (Excel) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_
+
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Contents
+
+    file-integrity-monitoring
