@@ -49,6 +49,7 @@ Integration with Slack
     <integration>
       <name>slack</name>
       <hook_url>https://hooks.slack.com/services/...</hook_url>
+      <alert_format>json</alert_format>
     </integration>
 
 
