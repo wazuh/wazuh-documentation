@@ -97,16 +97,11 @@ Client nodes are responsible of two main tasks:
 
 
 Cluster management
-^^^^^^^^^^^^^^^^^^
+------------------
 
-The cluster can be efficiently controlled from any manager with the **cluster_control** tool. This tool allows you to obtain real-time information about any node, the status of the synchronized files and information about agents connected to the cluster.
+The cluster can be efficiently controlled from any manager with the **cluster_control** tool. This tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster.
 
 The manual for this tool can be found at :doc:`cluster_control tool <../reference/tools/cluster_control>`.
-
-Cluster database
-^^^^^^^^^^^^^^^^^
-
-The cluster database has been incorporated into the database for each manager in the cluster.  This database is called ``cluster.db`` and contains information about the syncronization status of the files. Each row of the database contains the ``<node> <file> <state>`` fields.
 
 
 Use case: Deploying a Wazuh cluster
