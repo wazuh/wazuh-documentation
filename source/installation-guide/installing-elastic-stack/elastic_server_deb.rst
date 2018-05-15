@@ -230,9 +230,4 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 Connecting the Wazuh App with the API
 -------------------------------------
 
-Follow the next guide in order to connect the Wazuh App with the API:
-
-.. toctree::
-  :maxdepth: 1
-
-  connect_wazuh_app
+Follow the :ref:`next guide <connect_kibana_app>` in order to connect the Wazuh App with the API.

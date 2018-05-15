@@ -9,29 +9,41 @@ The Wazuh app includes a configuration file (located at ``/usr/share/kibana/plug
 
 The configuration file shows the default values for all of the possible options. You can edit the file, uncomment any of the options and apply the desired values.
 
-Available options
------------------
+.. warning::
 
-- `pattern`_
-- `timeout`_
-- `ip.selector`_
-- `xpack.rbac.enabled`_
-- `wazuh.monitoring.enabled`_
-- `wazuh.monitoring.frequency`_
-- `checks.pattern`_
-- `checks.template`_
-- `checks.api`_
-- `checks.setup`_
-- `extensions.pci`_
-- `extensions.gdpr`_
-- `extensions.audit`_
-- `extensions.oscap`_
-- `extensions.aws`_
-- `extensions.virustotal`_
-- `wazuh.shards`_
-- `wazuh.replicas`_
-- `wazuh-version.shards`_
-- `wazuh-version.replicas`_
+    Don't forget to restart the Kibana service after applying changes to this settings.
+
+The configuration file reference is organized by sections:
+
+`Basic options`_
+    - `pattern`_
+    - `timeout`_
+    - `ip.selector`_
+    - `xpack.rbac.enabled`_
+
+`Monitoring`_
+    - `wazuh.monitoring.enabled`_
+    - `wazuh.monitoring.frequency`_
+
+`Checks`_
+    - `checks.pattern`_
+    - `checks.template`_
+    - `checks.api`_
+    - `checks.setup`_
+
+`Extensions`_
+    - `extensions.pci`_
+    - `extensions.gdpr`_
+    - `extensions.audit`_
+    - `extensions.oscap`_
+    - `extensions.aws`_
+    - `extensions.virustotal`_
+
+`Advanced index options`_
+    - `wazuh.shards`_
+    - `wazuh.replicas`_
+    - `wazuh-version.shards`_
+    - `wazuh-version.replicas`_
 
 Basic options
 -------------
@@ -225,8 +237,8 @@ Enable or disable the VirusTotal tab on *Overview* and *Agents*.
 | **Allowed values** | true,false |
 +--------------------+------------+
 
-Advanced indices options
-------------------------
+Advanced index options
+----------------------
 
 .. warning::
 
