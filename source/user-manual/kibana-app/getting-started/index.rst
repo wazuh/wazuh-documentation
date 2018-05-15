@@ -13,3 +13,4 @@ This section describes the first steps to do after installing Kibana and the Waz
         :maxdepth: 1
 
         connect-kibana-app
+        configure-rbac-xpack
