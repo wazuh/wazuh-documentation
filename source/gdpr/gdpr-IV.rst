@@ -81,7 +81,7 @@ Chapter IV, Article 33
 
 .. note::
 	Article
-	
+
 Notify the supervisory authority of a violation of the data in 72 hours and in certain cases, the injured parties. It is a required obligation, any breach of security that endangers the data stored or any violation of the integrity and security of the same must be reported within the established period of time with a maximum delay of 72 hours.
 
 Wazuh can facilitate this communication, for example, with the notice by mail when a specific alert is triggered, or a group of alerts, related to the monitoring of the files that contain the personal data. The rules used in event analysis can be configured to send emails to the relevant security officers.
@@ -128,8 +128,5 @@ Use cases
 
 Chapter IV, Article 37
 ----------------------
-
-.. note::
-	Article
 
 Designate a data protection officer. Formal requirement. 
