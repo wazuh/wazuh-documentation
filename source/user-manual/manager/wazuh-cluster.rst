@@ -204,8 +204,5 @@ Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is requir
   .. code-block:: console
 
     # ps aux | grep cluster
-    ossec     9714  0.1  1.3 136572 14140 ?        S    14:22   0:00 python /var/ossec/bin/wazuh-clusterd
-    root      9718  0.0  0.4 176044  4700 ?        Ssl  14:22   0:00 /var/ossec/bin/wazuh-clusterd-internal -tmaster
-    ossec     9720  0.0  1.2 220256 12988 ?        Sl   14:22   0:00 python /var/ossec/bin/wazuh-clusterd
     ossec     9725  0.1  1.3 137364 14216 ?        S    14:22   0:00 python /var/ossec/bin/wazuh-clusterd
     root      9767  0.0  0.0 103340   904 pts/0    S+   14:22   0:00 grep cluster
