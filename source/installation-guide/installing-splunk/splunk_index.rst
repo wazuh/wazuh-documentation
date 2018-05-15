@@ -18,7 +18,7 @@ You can use a tool like ``netstat`` to determine what ports are available on you
 
 a) CLI mode:
 
-  1. Edit the ``$SPLUNK_HOME/etc/apps/SplunkAppForWazuh/default/inputs.conf`` file, and adding the following lines:
+  1. Edit the ``$SPLUNK_HOME/etc/apps/SplunkAppForWazuh/default/inputs.conf`` file:
 
     .. code-block:: console
 
@@ -31,7 +31,7 @@ a) CLI mode:
 
       # $SPLUNK_HOME/bin/splunk restart
 
-.. note:: The default Splunk port is ``9997``
+.. note:: The default listening port is ``9997``
 
 b) GUI mode:
 
