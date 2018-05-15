@@ -11,7 +11,10 @@ The Wazuh cluster functionality has been developed to strengthen the communicati
 
 - `Why do we need a Wazuh cluster?`_
 - `How it works`_
+- `Types of nodes`_
+- `Cluster management`_
 - `Use case: Deploying a Wazuh cluster`_
+- `Run the cluster in CentOS 6`_
 
 Why do we need a Wazuh cluster?
 -------------------------------
