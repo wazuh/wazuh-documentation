@@ -60,3 +60,64 @@ In this example, we have configured Wazuh to detect changes in the file ``/root/
 
 So, when we modify the file, Wazuh generates an alert.
 
+.. code-block:: console
+
+	root@agent:~# ls -l personal_data
+	total 4
+	-rw-r--r-- 1 root root 18 may 16 11:39 subject_data.txt
+	root@agent:~# cat personal_data/subject_data.txt
+	User01= user03_ID
+	root@agent:~# echo "User01= user02_ID" > personal_data/subject_data.txt
+	root@agent:~# cat personal_data/subject_data.txt
+	User01= user02_ID
+
+As you can see, syscheck alerts are tagged with gdpr_II_5.1.f.
+
+.. code-block:: console
+
+	** Alert 1526470666.11377: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
+	2018 May 16 13:37:46 (agent01) 192.168.1.50->syscheck
+	Rule: 550 (level 7) -> 'Integrity checksum changed.'
+	Integrity checksum changed for: '/root/personal_data/subject_data.txt'
+	Old md5sum was: 'c86fc18b025cb03c698548a5a7e04bc1'
+	New md5sum is : '425e63943d8ae5491f1769033da66456'
+	Old sha1sum was: '3bef1dc414e7fe247cdca4d4900c23047e003a06'
+	New sha1sum is : '048af26252c3b9eb6fd4335d5e218891f90c9037'
+	What changed:
+	1c1
+	< User01= user03_ID
+	---
+	> User01= user02_ID
+
+	File: /root/personal_data/subject_data.txt
+	New size: 18
+	New permissions: 100644
+	New user: root (0)
+	New group: root (0)
+	Old MD5: c86fc18b025cb03c698548a5a7e04bc1
+	New MD5: 425e63943d8ae5491f1769033da66456
+	Old SHA1: 3bef1dc414e7fe247cdca4d4900c23047e003a06
+	New SHA1: 048af26252c3b9eb6fd4335d5e218891f90c9037
+	Old date: Wed May 16 12:18:15 2018
+	New date: Wed May 16 13:32:54 2018
+	New inode: 19690
+
+
+.. thumbnail:: ../images/gdpr/fim_1.png
+    :title: Alert visualization at Kibana Discover
+    :align: center
+    :width: 100%
+
+.. thumbnail:: ../images/gdpr/fim_2.png
+    :title: Filtering alerts by GDPR and file path
+    :align: center
+    :width: 100%
+
+.. thumbnail:: ../images/gdpr/fim_3.png
+    :title: Filtering alerts by GDPR on Wazuh App
+    :align: center
+    :width: 100%
+
+
+
+
