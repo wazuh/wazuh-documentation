@@ -48,14 +48,14 @@ All cluster logs are written in the file ``logs/cluster.log``.
 Keep alive thread
 ^^^^^^^^^^^^^^^^^
 
-This thread is responsible of sending a keep-alive to the master every so often. It is necessary to keep the connection opened between master and client, since the cluster uses permanent connections.
+The *keep alive thread* sends a keep-alive to the master every so often. It is necessary to keep the connection opened between master and client, since the cluster uses permanent connections.
 
 .. _agent-info-thread:
 
 Agent info thread
 ^^^^^^^^^^^^^^^^^
 
-This thread is responsible of sending the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the client node. The master checks the modification date of each received agent status file and keeps the most recent one.
+The *agent info thread* sends the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the client node. The master checks the modification date of each received agent status file and keeps the most recent one.
 
 The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master to store unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified client nodes yet.
 
@@ -64,7 +64,7 @@ The master also checks whether the agent exists or not before saving its status 
 Integrity thread
 ^^^^^^^^^^^^^^^^
 
-This thread is responsible of synchrozing the files sent by the master node to the clients. Those files are:
+The *integrity thread* is in charge of synchrozing the files sent by the master node to the clients. Those files are:
 
 - :ref:`agent-keys-registration` file.
 - :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
@@ -83,7 +83,7 @@ Types of nodes
 Master
 ^^^^^^
 
-The master node controls the cluster. It provides the centralization of the following:
+The master node centralizes and coordinates client nodes, making sure the critical and required data is consistent across all nodes. It provides the centralization of the following:
 
 - Agent registration.
 - Agent deletion.
@@ -98,7 +98,7 @@ The master node controls the cluster. It provides the centralization of the foll
 .. warning::
     When rules, decoders or CDB lists are synchronized, the client nodes are not restarted. They must be restarted manually in order to apply the received configuration.
 
-All communications among ndoes in the cluster are encrypted using AES algorithm.
+All communications among nodes in the cluster are encrypted using AES algorithm.
 
 Client
 ^^^^^^
@@ -112,9 +112,20 @@ Client nodes are responsible of two main tasks:
 Cluster management
 ------------------
 
-The **cluster_control** tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster. This information can also be obtained using the API. -> enlace a la docu de la api.
+The **cluster_control** tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster. This information can also be obtained using the :doc:`API <../api/reference>`.
 
-The manual for this tool can be found at :doc:`cluster_control tool <../reference/tools/cluster_control>`.
+For example, the following snippet shows the health status of the cluster in real time:
+
+.. code-block:: shell
+
+    # /var/ossec/bin/cluster_control -i
+    Cluster name: wazuh
+
+    Last completed synchronization for connected nodes (3):
+    node02 (192.168.56.103): Integrity: 2018-05-15 17:25:12.64 | Agents-info: 2018-05-15 17:25:14.74 | Agent-groups: n/a.
+    node03 (192.168.56.105): Integrity: 2018-05-15 17:25:15.35 | Agents-info: n/a | Agent-groups: n/a.
+
+If you want to see more examples and check all its options, refer to :doc:`its manual <../reference/tools/cluster_control>`.
 
 
 .. _deploy_wazuh_cluster:
@@ -196,13 +207,13 @@ Follow these steps to deploy a Wazuh cluster:
 
     .. code-block:: console
 
-        # /var/ossec/bin/ossec-control restart
+        # systemctl restart wazuh-manager
 
 .. _run-cluster-centos6:
 
 Updating the cluster from older versions
 ----------------------------------------
-If you already have a cluster installation from a **version inferior to 3.2.2**, you should do some changes in your cluster configuration:
+If you already have a cluster installation from a **version inferior or equal to 3.2.2**, you should do some changes in your cluster configuration:
 
     * Remove ``<interval>`` section.
     * Remove client nodes from ``<nodes>`` section. Only the master node is allowed.
