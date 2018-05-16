@@ -13,9 +13,7 @@ Management of the control and processing of the data. The requirements mentioned
 Chapter IV, Article 24, Head 2
 ------------------------------
 
-.. code-block:: console
-
-	**Article 24**  Responsibility of the controller. **Head 2**. Where proportionate in relation to processing activities, the measures referred to in paragraph 1 shall include the implementation of appropriate data protection policies by the controller.
+**Article 24**  Responsibility of the controller. **Head 2**. Where proportionate in relation to processing activities, the measures referred to in paragraph 1 shall include the implementation of appropriate data protection policies by the controller.
 
 Be able to demonstrate GDPR compliance by complying with data protection policies. In most cases, it will be necessary to comply with additional security and data protection policies, therefore, the entity in charge of processing and storing the data must be able to comply with these policies.
 
@@ -56,9 +54,7 @@ If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engin
 Chapter IV, Article 28, Head 3 (c) 
 ----------------------------------
 
-.. code-block:: console
-
-	**Article 28**  Processor. **Head 3 (c)**. Processing by a processor shall be governed by a contract or other legal act under Union or Member State law, that is binding on the processor with regard to the controller and that sets out the subject-matter and duration of the processing, the nature and purpose of the processing, the type of personal data and categories of data subjects and the obligations and rights of the controller. That contract or other legal act shall stipulate, in particular, that the processor: takes all measures required pursuant to Article 32
+**Article 28**  Processor. **Head 3 (c)**. Processing by a processor shall be governed by a contract or other legal act under Union or Member State law, that is binding on the processor with regard to the controller and that sets out the subject-matter and duration of the processing, the nature and purpose of the processing, the type of personal data and categories of data subjects and the obligations and rights of the controller. That contract or other legal act shall stipulate, in particular, that the processor: takes all measures required pursuant to Article 32
 
 Ensuring data protection during processing, through technical and organizational measures. In the process of processing data, it is necessary to ensure the protection and integrity of the same in order to avoid any alteration that may be harmful to the individual to whom the information belongs.
 
@@ -67,12 +63,49 @@ By using `Syscheck <http://ossec-docs.readthedocs.org/en/latest/manual/syscheck/
 Use cases
 ^^^^^^^^^
 
-Chapter IV, Article 30, Head 1 (g)
-----------------------------------
+Wazuh can help to control the security in the processing of data using Syscheck we can see the events that arise, the accesses, who performs them, etc.
 
 .. code-block:: console
 
-	**Article 30** Records of processing activities. **Head 1 (g)**. Each controller and, where applicable, the controller's representative, shall maintain a record of processing activities under its responsibility. That record shall contain all of the following information: where possible, a general description of the technical and organisational security measures referred to in Article 32(1).
+	** Alert 1526486886.138354: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
+	2018 May 16 18:08:06 (agent01) 192.168.1.50->syscheck
+	Rule: 550 (level 7) -> 'Integrity checksum changed.'
+	Integrity checksum changed for: '/root/personal_data/secret_data.txt'
+	Size changed from '0' to '13'
+	Old md5sum was: 'd41d8cd98f00b204e9800998ecf8427e'
+	New md5sum is : '2dc8f4959967624fef8b817e01f0d996'
+	Old sha1sum was: 'da39a3ee5e6b4b0d3255bfef95601890afd80709'
+	New sha1sum is : '0f26c2227a2101cffbfc4643f21f3802b4ff0926'
+	What changed:
+	0a1
+	> Data secret
+
+	File: /root/personal_data/secret_data.txt
+	Old size: 0
+	New size: 13
+	New permissions: 100644
+	New user: root (0)
+	New group: root (0)
+	Old MD5: d41d8cd98f00b204e9800998ecf8427e
+	New MD5: 2dc8f4959967624fef8b817e01f0d996
+	Old SHA1: da39a3ee5e6b4b0d3255bfef95601890afd80709
+	New SHA1: 0f26c2227a2101cffbfc4643f21f3802b4ff0926
+	Old date: Wed May 16 18:07:43 2018
+	New date: Wed May 16 18:08:02 2018
+	Old inode: 19712
+	New inode: 19715
+
+.. thumbnail:: ../images/gdpr/process.png
+    :title: Alert visualization at Kibana Discover
+    :align: center
+    :width: 100%
+
+
+Chapter IV, Article 30, Head 1 (g)
+----------------------------------
+
+
+**Article 30** Records of processing activities. **Head 1 (g)**. Each controller and, where applicable, the controller's representative, shall maintain a record of processing activities under its responsibility. That record shall contain all of the following information: where possible, a general description of the technical and organisational security measures referred to in Article 32(1).
 
 It is necessary to keep all processing activities documented, to carry out an inventory of data from beginning to end and an audit, in order to know all the places where personal and sensitive data are located, processed, stored or transmitted.
 
@@ -119,28 +152,10 @@ We can also see the event stored in our log file ``archives.log``, as long as th
     :align: center
     :width: 100%
 
-
-Chapter IV, Article 32, Head 1, (c)
------------------------------------
-
-.. code-block:: console
-
-	**Article 32** Security of processing. **Head 1 (c)**. Taking into account the state of the art, the costs of implementation and the nature, scope, context and purposes of processing as well as the risk of varying likelihood and severity for the rights and freedoms of natural persons, the controller and the processor shall implement appropriate technical and organisational measures to ensure a level of security appropriate to the risk, including inter alia as appropriate: the ability to restore the availability and access to personal data in a timely manner in the event of a physical or technical incident.
-
-
-Tools may be needed to block or quarantine such data streams as a DLP might do. Properly classify current data to determine specific categories of data that will be subject to GDPR.
-
-Through `active response <https://documentation.wazuh.com/current/user-manual/capabilities/active-response/index.html>`_, Wazuh can execute an action according to Syscheck alerts. These actions can create the desired quarantine zone for the specified data. Wazuh also provides the ability to create specific rules for categorizing files. It also performs various countermeasures to address active threats, such as blocking access to an agent from the source of the threat when certain criteria are met and executes a script in response to the activation of specific alerts based on the alert level or rule group. Any number of scripts can be started in response to a trigger.
-
-Use cases
-^^^^^^^^^
-
 Chapter IV, Article 32,  Head 2
 -------------------------------
 
-.. code-block:: console
-
-	**Article 32** Security of processing. **Head 2**. In assessing the appropriate level of security account shall be taken in particular of the risks that are presented by processing, in particular from accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to personal data transmitted, stored or otherwise processed.
+**Article 32** Security of processing. **Head 2**. In assessing the appropriate level of security account shall be taken in particular of the risks that are presented by processing, in particular from accidental or unlawful destruction, loss, alteration, unauthorised disclosure of, or access to personal data transmitted, stored or otherwise processed.
 
 To control access to data, you will need account management tools that closely monitor actions taken by standard administrators and users using standard or privileged account credentials. In this way, the data protection officer will be able to check who is accessing and processing the data, whether they are authorized to do so and whether they are who they say they are.
 
@@ -185,9 +200,7 @@ Wazuh will generate an alert like this.
 Chapter IV, Article 33 
 ----------------------
 
-.. code-block:: console
-
-	**Article 33**  Notification of a personal data breach to the supervisory authority.
+**Article 33**  Notification of a personal data breach to the supervisory authority.
 
 Notify the supervisory authority of a violation of the data in 72 hours and in certain cases, the injured parties. It is a required obligation, any breach of security that endangers the data stored or any violation of the integrity and security of the same must be reported within the established period of time with a maximum delay of 72 hours.
 
@@ -236,9 +249,7 @@ A basic configuration could be:
 Chapter IV, Article 35, Head 1
 ------------------------------
 
-.. code-block:: console
-
-	**Article 35** Data protection impact assessment. **Head 1 **.Where a type of processing in particular using new technologies, and taking into account the nature, scope, context and purposes of the processing, is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall, prior to the processing, carry out an assessment of the impact of the envisaged processing operations on the protection of personal data. A single assessment may address a set of similar processing operations that present similar high risks.
+**Article 35** Data protection impact assessment. **Head 1**. Where a type of processing in particular using new technologies, and taking into account the nature, scope, context and purposes of the processing, is likely to result in a high risk to the rights and freedoms of natural persons, the controller shall, prior to the processing, carry out an assessment of the impact of the envisaged processing operations on the protection of personal data. A single assessment may address a set of similar processing operations that present similar high risks.
 
 Perform a data protection impact evaluation for elevated risk processes. Implement appropriate technical measures to safeguard the rights and freedoms of data subjects, informed by an assessment of the risks to these rights and freedoms.
 
@@ -247,12 +258,29 @@ Wazuh has security measures in place to safeguard personal data, as well as the 
 Use cases
 ^^^^^^^^^
 
+One possibility is to use rules that, based on their fields, the module that generates them or the specific objective they affect, increase the level of alert by supporting risk assessment. 
+
+In this case we would have a rule with an alert level of 10 because the data of a subject has changed. But if the data belong to critical fields (in this example if the altered data is in ``/customers/personal_dat``), the alert level would rise to 15. 
+
+.. code-block:: xml
+
+	<rule id="105756" level="10">
+	    <if_matched_group>syscheck</if_matched_group>
+	    <description>Changes made in the data of the subjects</description>
+	</rule>
+	
+	<rule id="105757" level="15">
+		<if_sid>105756</if_sid>
+	    <if_matched_group>syscheck</if_matched_group>
+	    <match>/customers/personal_data</match>
+	    <description>Changes to //customers/personal_data - Critical file!</description>
+	</rule>
+
+
 Chapter IV, Article 35, Head 7 (d)
 ----------------------------------
 
-.. code-block:: console
-
-	**Article 35** Data protection impact assessment. **Head 7 (f) ** The assessment shall contain at least the measures envisaged to address the risks, including safeguards, security measures and mechanisms to ensure the protection of personal data and to demonstrate compliance with this Regulation taking into account the rights and legitimate interests of data subjects and other persons concerned.
+**Article 35** Data protection impact assessment. **Head 7 (f)** The assessment shall contain at least the measures envisaged to address the risks, including safeguards, security measures and mechanisms to ensure the protection of personal data and to demonstrate compliance with this Regulation taking into account the rights and legitimate interests of data subjects and other persons concerned.
 
 Necessary security measures include data breach identification, blocking and forensic investigation capabilities. Anti-malware and anti-ransomware to ensure the integrity, availability, and resilience of data systems, blocking and preventing malware and rescue threats from entering devices.Behavioral analysis services that use machine intelligence to identify people who do anomalous things on the network may be required to provide early visibility and alert employees who become corrupt. 
 To meet these security requirements, Wazuh provides solutions such as Intrusion and anomaly detection. Agents scan the system looking for malware, rootkits or suspicious anomalies. They can detect hidden files, cloaked processes or unregistered network listeners, as well as inconsistencies in system call responses. In addition, the integration of Wazuh with NIDS is viable.

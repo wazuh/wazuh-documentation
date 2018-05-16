@@ -14,9 +14,7 @@ Regulation of the data subject rigths. The requirements mentioned in this sectio
 Chapter III, Article 14, Head 2 (c)
 -----------------------------------
 
-.. code-block:: console
-
-	**Article 14**  Information to be provided where personal data have not been obtained from the data subject. **Head 2(c)**. In addition to the information referred to in paragraph 1, the controller shall provide the data subject with the following information necessary to ensure fair and transparent processing in respect of the data subject: the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject and to object to processing as well as the right to data portability.
+**Article 14**  Information to be provided where personal data have not been obtained from the data subject. **Head 2(c)**. In addition to the information referred to in paragraph 1, the controller shall provide the data subject with the following information necessary to ensure fair and transparent processing in respect of the data subject: the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject and to object to processing as well as the right to data portability.
 
 Occasionally, an individual may request that the processing of his or her personal data be temporarily restricted. The entity in charge of processing and storing such data must ensure that within the stipulated period of time there is no access to such data.
 
@@ -42,9 +40,8 @@ We have the ability to control access to data through Syscheck and can control t
 
 Chapter III, Article 17
 -----------------------
-.. code-block:: console
 
-	**Article 17**  Right to erasure ('right to be forgotten'). 
+**Article 17**  Right to erasure ('right to be forgotten'). 
 
 In some scenarios, an individual may request the permanent deletion of their personal information. In this case, the entity in charge of the processing and storing of the subject's data must delete such information as long as the individual's request for deletion is accepted, normally when the storage of the same is meaningless.
 
@@ -55,3 +52,26 @@ Permanent data deletion (Syscheck). Wazuh has the ability to monitor deleted fil
 
 Use cases
 ^^^^^^^^^
+
+Using Syscheck to monitor in real time using ``realtime`` we can see if the data has been deleted, helping the task of this requirement. 
+
+.. code-block:: console
+
+	<syscheck>
+		<directories check_all="yes" realtime="yes" report_changes="yes">/root/personal_data</directories>
+	</syscheck>
+
+Getting the following alert in case of deleting a file in that directory:
+
+.. code-block:: console
+
+	** Alert 1526485921.128966: - ossec,syscheck,pci_dss_11.5,gpg13_4.11,gdpr_II_5.1.f,
+	2018 May 16 17:52:01 (agent01) 192.168.1.50->syscheck
+	Rule: 553 (level 7) -> 'File deleted. Unable to retrieve checksum.'
+	File '/root/personal_data/subject_data_secret.txt' was deleted. Unable to retrieve checksum.
+	File: /root/personal_data/subject_data_secret.txt
+
+.. thumbnail:: ../images/gdpr/deleted.png
+    :title: Filtering alerts by Syscheck alert
+    :align: center
+    :width: 100%
