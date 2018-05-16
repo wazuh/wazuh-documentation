@@ -108,6 +108,8 @@ The cluster can be efficiently controlled from any manager with the **cluster_co
 The manual for this tool can be found at :doc:`cluster_control tool <../reference/tools/cluster_control>`.
 
 
+.. _deploy_wazuh_cluster:
+
 Deploying a Wazuh cluster
 -------------------------
 
