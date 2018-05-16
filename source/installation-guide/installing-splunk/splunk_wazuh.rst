@@ -16,20 +16,22 @@ Installation
 ------------
 
 1. Download the latest stable version from the Splunk app for Wazuh `repository <https://github.com/wazuh/wazuh-splunk/releases/>`_.
-
 2. Install the Wazuh app for Splunk:
 
-  The app currently provides an ``indexes.conf`` and an ``inputs.conf`` file which both create an index named 'wazuh' and listen for forwarded data on port 9997 on the machine where it's already installed. 
+  The app currently provides the ``/SplunkAppForWazuh/default/indexes.conf`` and ``/SplunkAppForWazuh/default/inputs.conf`` file which create an index named 'wazuh' and listen for forwarded data on port 9997 on the machine where it's already installed. 
 
   .. warning::
 
-    In the case of having an Indexer cluster, first delete `/SplunkAppForWazuh/default/indexes.conf` and `/SplunkAppForWazuh/default/inputs.conf` files, install the app on the Search Head machine and configure a 'wazuh' index following the `Splunk official docs <http://docs.splunk.com/Documentation/Splunk/7.1.0/Indexer/useforwarders>`_ .
+    In the case of having an Indexer cluster, first delete `indexes.conf` and `inputs.conf` files, install the app on the Search Head machine and configure a 'wazuh' index following the `Splunk official docs <http://docs.splunk.com/Documentation/Splunk/7.1.0/Indexer/useforwarders>`_ .
 
   - CLI mode:
 
     .. code-block:: console
 
       $SPLUNK_HOME/bin/splunk install app SplunkAppForWazuh.tgz
+
+    .. code-block:: console
+
       $SPLUNK_HOME/bin/splunk restart
 
   - Web GUI:
@@ -48,6 +50,9 @@ Installation
   .. code-block:: console
 
     # cd /var/ossec/api/configuration/auth
+
+  .. code-block:: console
+
     # node htpasswd -c user myUserName
 
   Do not forget to restart the API to apply the changes with these commands:
@@ -55,6 +60,9 @@ Installation
   .. code-block:: console
 
     # systemctl restart wazuh-api
+
+  .. code-block:: console
+
     # service wazuh-api restart
 
 5. Fill in the Username and Password fields with the credentials you created in the previous step.  Enter ``http(s)://MANAGER_IP`` for the URL where ``MANAGER_IP`` is the real IP address of the Wazuh server and enter "55000" for the Port:

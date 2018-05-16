@@ -7,7 +7,7 @@ Splunk Forwarder configuration
 
 .. note:: By default, ``$SPLUNK_FORWARDER_HOME = /opt/splunkforwarder``
 
-1. Edit the ``$SPLUNK_FORWARDER_HOME/etc/system/local/inputs.conf`` file and add the following. If it doesn't exist, create it:
+1. The forwarder needs to read data from an input, and that's what the ``inputs.conf`` file is used for. For forwarding the Wazuh logs that will be indexed afterwards, please edit the ``$SPLUNK_FORWARDER_HOME/etc/system/local/inputs.conf`` file and set it to read from `alerts.json` file. For that, add the following content to the file. If it doesn't exist, create it:
 
   .. code-block:: console
 
@@ -21,7 +21,7 @@ Splunk Forwarder configuration
   - index = wazuh, default index name where alerts will be stored.
   - sourcetype = wazuh, default sourcetype for alerts.
 
-2. Edit the ``$SPLUNK_FORWARDER_HOME/etc/system/local/props.conf`` file and add the following. If it doesn't exist, create it:
+2. For consuming data inputs, Splunk needs to specify what kind of format will be handled. That's why the file `props.conf` exists, so please edit the ``$SPLUNK_FORWARDER_HOME/etc/system/local/props.conf`` file and add the following. If it doesn't exist, create it:
 
   .. code-block:: console
 
@@ -36,9 +36,12 @@ Splunk Forwarder configuration
 
   .. note:: If you're using a **single-host architecture**, before continuing, you must change the Splunk Forwarder internal port. You can easily change it just by restarting the Splunk Forwarder by using ``$SPLUNK_FORWARDER_HOME/bin/splunk restart``, and it will automatically prompt you to change the internal port.
 
-3. Point the output to the Wazuh's Indexer:
+3. Now the forwarder needs to send the data flow to a remote indexer, so point the output to the Wazuh's Indexer with the following command depending on your architecture:
 
   a) In simple distributed architecture:
+
+    .. image:: ../../images/splunk-app/simple-distributed-arch.png
+      :align: center
 
     .. code-block:: console
 
@@ -48,10 +51,11 @@ Splunk Forwarder configuration
     - ``INDEXER_PORT``: by default on port 9997.
     - Remember that the default Splunk username/password are ``admin/changeme``
 
-    .. image:: ../../images/splunk-app/simple-distributed-arch.png
-      :align: center
 
   b) In clustered architecture:
+    
+    .. image:: ../../images/splunk-app/distributed-arch.png
+      :align: center
 
     If you have multiple indexers, please set the ``$SPLUNK_FORWARDER_HOME/etc/system/local/outputs.conf`` file like this:
 
@@ -66,8 +70,6 @@ Splunk Forwarder configuration
       [tcpout:indexer2]
       server=IP_SECOND_INDEXER:9997
 
-    .. image:: ../../images/splunk-app/distributed-arch.png
-      :align: center
 
 4. Restart Splunk Forwarder service:
 

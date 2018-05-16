@@ -27,7 +27,7 @@ b) For Debian/Ubuntu distributions:
 
   # dpkg --install splunk-enterprise-package.deb
 
-Upon completion, ensure Splunk is already installed in ``/opt/splunk``
+Upon completion, ensure Splunk forwarder is already installed in ``/opt/splunk``
 
 Splunk Forwarder installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
