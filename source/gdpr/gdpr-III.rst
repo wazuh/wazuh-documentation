@@ -8,13 +8,14 @@ GDPR III
 Chapter III, Rights of the data subject 
 ---------------------------------------
 
-Regulation of the data subject rigths. Formal requirement.
+Regulation of the data subject rigths. The requirements mentioned in this section are of a formal nature and the option of extracting technical requirements for compliance through the support of Wazuh is not viable. 
 
 
 Chapter III, Article 14, Head 2 (c)
 -----------------------------------
 
-.. note::
+.. code-block:: console
+
 	**Article 14**  Information to be provided where personal data have not been obtained from the data subject. **Head 2(c)**. In addition to the information referred to in paragraph 1, the controller shall provide the data subject with the following information necessary to ensure fair and transparent processing in respect of the data subject: the existence of the right to request from the controller access to and rectification or erasure of personal data or restriction of processing concerning the data subject and to object to processing as well as the right to data portability.
 
 Occasionally, an individual may request that the processing of his or her personal data be temporarily restricted. The entity in charge of processing and storing such data must ensure that within the stipulated period of time there is no access to such data.
@@ -26,9 +27,23 @@ Temporary access restrictions (Syscheck) is possible with Wazuh, we can review t
 Use cases
 ^^^^^^^^^
 
+We have the ability to control access to data through Syscheck and can control that there are no accesses to such data using time intervals with the Kibana application.
+
+.. thumbnail:: ../images/gdpr/time_alert.png
+    :title: Filtering alerts by Syscheck alert
+    :align: center
+    :width: 100%
+
+.. thumbnail:: ../images/gdpr/time_no_alert.png
+    :title: Filtering alerts by Syscheck no alert
+    :align: center
+    :width: 100% 
+
+
 Chapter III, Article 17
 -----------------------
-.. note::
+.. code-block:: console
+
 	**Article 17**  Right to erasure ('right to be forgotten'). 
 
 In some scenarios, an individual may request the permanent deletion of their personal information. In this case, the entity in charge of the processing and storing of the subject's data must delete such information as long as the individual's request for deletion is accepted, normally when the storage of the same is meaningless.
