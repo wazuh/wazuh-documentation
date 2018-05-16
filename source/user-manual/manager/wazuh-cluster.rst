@@ -2,14 +2,14 @@
 
 .. _wazuh-cluster:
 
-Configuring a Wazuh cluster
-===========================
+Configuring a cluster
+=====================
 
 .. versionadded:: 3.0.0
 
-The Wazuh cluster functionality has been developed to strengthen the communication between agents and managers. The cluster can synchronize events between its nodes to allow agents to report events to any manager that is a part of the cluster.
+The Wazuh cluster functionality has been developed to strengthen the communication between agents and managers. The cluster synchronization among manager nodes allows the agents to report events to any manager in the cluster.
 
-- `Why do we need a Wazuh cluster?`_
+- `Why do we need a cluster?`_
 - `How it works`_
 - `Types of nodes`_
 - `Cluster management`_
@@ -17,10 +17,10 @@ The Wazuh cluster functionality has been developed to strengthen the communicati
 - `Updating the cluster from older versions`_
 - `Run the cluster in CentOS 6`_
 
-Why do we need a Wazuh cluster?
--------------------------------
+Why do we need a cluster?
+-------------------------
 
-The Wazuh cluster provides horizontal scalability to the Wazuh environment, allowing agents to report to any manager belonging to the cluster. This enables Wazuh to process a greater number of events than with a single manager environment as the cluster distributes the load between multiple managers simultaneously.
+The cluster provides horizontal scalability to the Wazuh environment, allowing agents to report to any manager belonging to the cluster. This enables Wazuh to process a greater number of events than with a single manager environment as the cluster distributes the load between multiple managers simultaneously.
 
 Additionally, a cluster of Wazuh managers provides a level of fault tolerance so that if one manager goes off-line, Wazuh can continue operating so long as the master manager is still accessible. To accomplish this, agents that were reporting to a manager that goes off-line will automatically be redirected to another manager in the cluster without losing events. This functionality dramatically increases the availability and efficiency of the Wazuh environment.
 
@@ -31,9 +31,9 @@ The Wazuh cluster is under further development and we hope to include many addit
 How it works
 ------------
 
-The Wazuh cluster is managed by a cluster daemon which communicates with the managers following a master-client architecture.
+The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates all the nodes following a master-client architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
 
-The image bellow shows the communications between a client and a master node. Each client-master communication is independent from each other, since clients are the ones who start the communication with the master.
+The image below shows the communications between a client and a master node. Each client-master communication is independent from each other, since clients are the ones who start the communication with the master.
 
 There are different independent threads running, each one is framed in the image:
 
@@ -41,21 +41,21 @@ There are different independent threads running, each one is framed in the image
     - **Agent info thread**: Responsible of sending the statuses of the agents that are reporting to that node.
     - **Integrity thread**: Responsible of synchronizing the files sent by the master.
 
-The cluster only uses the daemon **wazuh-clusterd**, which outputs to the file ``logs/cluster.log``. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
+All cluster logs are written in the file ``logs/cluster.log``.
 
 .. image:: ../../images/manual/cluster/cluster_flow.png
 
 Keep alive thread
 ^^^^^^^^^^^^^^^^^
 
-This thread is responsible of sending a keep-alive to the master every so often. This keep-alive thread is necessary to keep the connection opened between master and client, since the cluster uses permanent connections.
+This thread is responsible of sending a keep-alive to the master every so often. It is necessary to keep the connection opened between master and client, since the cluster uses permanent connections.
 
 .. _agent-info-thread:
 
 Agent info thread
 ^^^^^^^^^^^^^^^^^
 
-This thread is responsible of sending the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the sender node. The master checks the modification date of each received agent status file and keeps the most recent one.
+This thread is responsible of sending the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the client node. The master checks the modification date of each received agent status file and keeps the most recent one.
 
 The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master to store unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified client nodes yet.
 
@@ -68,7 +68,12 @@ This thread is responsible of synchrozing the files sent by the master node to t
 
 - :ref:`agent-keys-registration` file.
 - :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
-- :doc:`Agent groups files and assignments <../agents/grouping-agents>`. The master can require agent groups assignments from a client node if an agent starts reporting in that client node.
+- :doc:`Agent groups files and assignments <../agents/grouping-agents>`.
+
+Usually, the master is responsible for sending group assignments, but just in case a new agent starts reporting in a client node, the client will send the new agent's group assignment to the master.
+
+File Integrity Thread
+^^^^^^^^^^^^^^^^^^^^^
 
 The integrity of each file is calculated using its MD5 checksum and its modification time. To avoid calculating the integrity with each client connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
 
@@ -78,18 +83,22 @@ Types of nodes
 Master
 ^^^^^^
 
-The master node is the manager that controls the cluster. The configuration of the master node is pushed to the client nodes which allows for the centralization of the following:
+The master node controls the cluster. It provides the centralization of the following:
 
-- agent registration,
-- agent deletion,
-- rules, decoders and CDB lists synchronization,
-- configuration of agents grouping
+- Agent registration.
+- Agent deletion.
+- Rules, decoders and CDB lists synchronization.
+- Configuration of agents grouping.
 
-The master doesn't send its :doc:`local configuration file <../reference/index>` to the clients. If the configuration is changed in the master node, it should be changed manually in the clients. When synchronizing the configuration manually, take care of not overwriting the cluster section in the local configuration of each client.
 
-Also, when rules, decoders or CDB lists are synchronized, the client nodes are not being restarted. They must be restarted manually.
+.. warning::
 
-The communication between the nodes of the cluster is performed by means of a self-developed protocol. These cluster communications are sent with the AES encryption algorithm providing for security and confidentiality.
+    The master doesn't send its :doc:`local configuration file <../reference/index>` to the clients. If the configuration is changed in the master node, it should be changed manually in the clients. When synchronizing the configuration manually, take care of not overwriting the cluster section in the local configuration of each client.
+
+.. warning::
+    When rules, decoders or CDB lists are synchronized, the client nodes are not restarted. They must be restarted manually in order to apply the received configuration.
+
+All communications among ndoes in the cluster are encrypted using AES algorithm.
 
 Client
 ^^^^^^
@@ -103,7 +112,7 @@ Client nodes are responsible of two main tasks:
 Cluster management
 ------------------
 
-The cluster can be efficiently controlled from any manager with the **cluster_control** tool. This tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster.
+The **cluster_control** tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster. This information can also be obtained using the API. -> enlace a la docu de la api.
 
 The manual for this tool can be found at :doc:`cluster_control tool <../reference/tools/cluster_control>`.
 
@@ -114,7 +123,7 @@ Deploying a Wazuh cluster
 -------------------------
 
 .. note::
-  To run the wazuh-clusterd binary, **Python 2.7** or higher is required. If your OS has a previous python version, please refer to `Run the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
+  To run the cluster, **Python 2.7 or higher** is required. In case you're using CentOS 6, please refer to `Run the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
 
 Follow these steps to deploy a Wazuh cluster:
 
@@ -136,34 +145,52 @@ Follow these steps to deploy a Wazuh cluster:
 
   Using the ``<cluster>`` section in the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the cluster configuration as below:
 
-  - Select one manager as the master and the rest as clients under the ``<node_type>`` field.
-  - Add a key under the ``<key>``. The key must be 32 characters long and should be the same for all of the nodes of the cluster. Use the following command to generate a random one:
+  - ``<node_type>``: Set the node type.
+  - ``<key>``: The key must be 32 characters long and should be the same for all of the nodes of the cluster. You may use the following command to generate a random one:
 
       .. code-block:: console
 
           # openssl rand -hex 16
 
-  - Enable the cluster setting the field ``<disabled>`` to ``no``.
-  - The address of the **master** must be specified under ``<nodes>`` in all nodes (including the master itself). The address can be either an IP or a DNS.
+  - ``<disabled>``: Set this field to ``no`` in order to enable the cluster.
+  - ``<nodes>``: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
 
-  The following is an example of this configuration:
+    The following is an example of the configuration of a **client** node:
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-    <cluster>
-        <name>wazuh</name>
-        <node_name>node02</node_name>
-        <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
-        <node_type>client</node_type>
-        <port>1516</port>
-        <bind_addr>0.0.0.0</bind_addr>
-        <nodes>
-          <node>master</node>
-        </nodes>
-        <hidden>no</hidden>
-        <disabled>no</disabled>
-    </cluster>
+        <cluster>
+            <name>wazuh</name>
+            <node_name>node02</node_name>
+            <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+            <node_type>client</node_type>
+            <port>1516</port>
+            <bind_addr>0.0.0.0</bind_addr>
+            <nodes>
+              <node>master</node>
+            </nodes>
+            <hidden>no</hidden>
+            <disabled>no</disabled>
+        </cluster>
 
+
+    And the following is an example of the configuration of a **master** node:
+
+    .. code-block:: xml
+
+      <cluster>
+          <name>wazuh</name>
+          <node_name>node01</node_name>
+          <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
+          <node_type>master</node_type>
+          <port>1516</port>
+          <bind_addr>0.0.0.0</bind_addr>
+          <nodes>
+            <node>master</node>
+          </nodes>
+          <hidden>no</hidden>
+          <disabled>no</disabled>
+      </cluster>
 
 3. Restart the node
 
@@ -178,7 +205,7 @@ Updating the cluster from older versions
 If you already have a cluster installation from a **version inferior to 3.2.2**, you should do some changes in your cluster configuration:
 
     * Remove ``<interval>`` section.
-    * Remove client nodes from ``<nodes>`` section.
+    * Remove client nodes from ``<nodes>`` section. Only the master node is allowed.
 
 The cluster will work with an old configuration but it is recommended to update it.
 
