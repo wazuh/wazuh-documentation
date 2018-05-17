@@ -5,38 +5,53 @@
 Splunk Forwarder configuration
 ==============================
 
+This section will explain what kind of configuration files the Splunk Forwarder instance needs for working properly and send Wazuh alerts to the Indexer component.
+First, the forwarder needs to read data from an input and that's what the ``inputs.conf`` file is used for. Also for consuming data inputs, Splunk needs to specify what kind of format will be handled and that's what the file `props.conf` does.
+
 .. note:: By default, ``$SPLUNK_FORWARDER_HOME = /opt/splunkforwarder``
 
-1. The forwarder needs to read data from an input, and that's what the ``inputs.conf`` file is used for. For forwarding the Wazuh logs that will be indexed afterwards, please edit the ``$SPLUNK_FORWARDER_HOME/etc/system/local/inputs.conf`` file and set it to read from `alerts.json` file. For that, add the following content to the file. If it doesn't exist, create it:
+Set up data collection
+----------------------
 
-  .. code-block:: console
+Configuring inputs
+^^^^^^^^^^^^^^^^^^
 
-    [monitor:///var/ossec/logs/alerts/alerts.json]
-    disabled = 0
-    host = wazuhmanager
-    index = wazuh
-    sourcetype = wazuh
+For forwarding the Wazuh logs that will be indexed afterwards, please edit the ``$SPLUNK_FORWARDER_HOME/etc/system/local/inputs.conf`` file and set it to read from `alerts.json` file. For that, add the following content. If the file doesn't exist, please create it:
 
-  - host = wazuhmanager, Wazuh Manager hostname.
-  - index = wazuh, default index name where alerts will be stored.
-  - sourcetype = wazuh, default sourcetype for alerts.
+.. code-block:: console
 
-2. For consuming data inputs, Splunk needs to specify what kind of format will be handled. That's why the file `props.conf` exists, so please edit the ``$SPLUNK_FORWARDER_HOME/etc/system/local/props.conf`` file and add the following. If it doesn't exist, create it:
+  [monitor:///var/ossec/logs/alerts/alerts.json]
+  disabled = 0
+  host = wazuhmanager
+  index = wazuh
+  sourcetype = wazuh
 
-  .. code-block:: console
+- host = wazuhmanager, Wazuh Manager hostname.
+- index = wazuh, default index name where alerts will be stored.
+- sourcetype = wazuh, default sourcetype for alerts.
 
-    [wazuh]
-    DATETIME_CONFIG =
-    INDEXED_EXTRACTIONS = json
-    KV_MODE = none
-    NO_BINARY_CHECK = true
-    category = Application
-    disabled = false
-    pulldown_type = true
+Configuring props
+^^^^^^^^^^^^^^^^^
 
-  .. note:: If you're using a **single-host architecture**, before continuing, you must change the Splunk Forwarder internal port. You can easily change it just by restarting the Splunk Forwarder by using ``$SPLUNK_FORWARDER_HOME/bin/splunk restart``, and it will automatically prompt you to change the internal port.
+Edit the ``$SPLUNK_FORWARDER_HOME/etc/system/local/props.conf`` file and add the following stanza. If it doesn't exist, create it:
 
-3. Now the forwarder needs to send the data flow to a remote indexer, so point the output to the Wazuh's Indexer with the following command depending on your architecture:
+.. code-block:: console
+
+  [wazuh]
+  DATETIME_CONFIG =
+  INDEXED_EXTRACTIONS = json
+  KV_MODE = none
+  NO_BINARY_CHECK = true
+  category = Application
+  disabled = false
+  pulldown_type = true
+
+.. note:: If you're using a **single-host architecture** with a Forwarder and an Indexer on the same machine, before continuing, you must change the Splunk Forwarder internal port. You can change it just by restarting the Splunk Forwarder by using ``$SPLUNK_FORWARDER_HOME/bin/splunk restart``, and it will automatically prompt you to change the internal port.
+
+Set up data forwarding
+----------------------
+
+1. Now the forwarder needs to send the data flow to a remote indexer, so point the output to the Wazuh's Indexer with the following command depending on your architecture:
 
   a) In simple distributed architecture:
 
@@ -52,12 +67,12 @@ Splunk Forwarder configuration
     - Remember that the default Splunk username/password are ``admin/changeme``
 
 
-  b) In clustered architecture:
+  b) In the case that you have more than one Indexers (clustered architecture):
     
     .. image:: ../../images/splunk-app/distributed-arch.png
       :align: center
 
-    If you have multiple indexers, please set the ``$SPLUNK_FORWARDER_HOME/etc/system/local/outputs.conf`` file like this:
+    Set the ``$SPLUNK_FORWARDER_HOME/etc/system/local/outputs.conf`` file like this:
 
     .. code-block:: console
 
@@ -71,7 +86,7 @@ Splunk Forwarder configuration
       server=IP_SECOND_INDEXER:9997
 
 
-4. Restart Splunk Forwarder service:
+2. Restart Splunk Forwarder service:
 
   .. code-block:: console
 
