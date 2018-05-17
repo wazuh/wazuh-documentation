@@ -7,81 +7,38 @@ Configuring a cluster
 
 .. versionadded:: 3.0.0
 
-The Wazuh cluster functionality has been developed to strengthen the communication between agents and managers. The cluster synchronization among manager nodes allows the agents to report events to any manager in the cluster.
-
-- `Why do we need a cluster?`_
-- `How it works`_
-- `Types of nodes`_
+- `Introduction`_
+- `Getting started`_
+- `Upgrading from older versions`_
+- `How the cluster works`_
 - `Cluster management`_
-- `Deploying a Wazuh cluster`_
-- `Updating the cluster from older versions`_
-- `Run the cluster in CentOS 6`_
 
-Why do we need a cluster?
--------------------------
-
-The cluster provides horizontal scalability to the Wazuh environment, allowing agents to report to any manager belonging to the cluster. This enables Wazuh to process a greater number of events than with a single manager environment as the cluster distributes the load between multiple managers simultaneously.
-
-Additionally, a cluster of Wazuh managers provides a level of fault tolerance so that if one manager goes off-line, Wazuh can continue operating so long as the master manager is still accessible. To accomplish this, agents that were reporting to a manager that goes off-line will automatically be redirected to another manager in the cluster without losing events. This functionality dramatically increases the availability and efficiency of the Wazuh environment.
-
-Please note, however, that the cluster functionality does not provide automated load balancing. We recommend that a load balancer be configured between agents and the cluster nodes. With a load balancer in place, the agents would be configured to use the IP address of the load balancer as their manager IP address.
-
-The Wazuh cluster is under further development and we hope to include many additional features very soon, including switching the role of master between all managers to provide even greater availability and fault tolerance.
-
-How it works
+Introduction
 ------------
+The cluster provides horizontal scalability and high availability to Wazuh. It allows several managers to work as if they were one and multiplies the ability to process events from the agents. It also provides high availability, the agents will always have a manager to report to.
 
-The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates all the nodes following a master-client architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
+Reasons for using a cluster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The image below shows the communications between a client and a master node. Each client-master communication is independent from each other, since clients are the ones who start the communication with the master.
+Scalability
+~~~~~~~~~~~
 
-There are different independent threads running, each one is framed in the image:
+Our cluster supports **horizontal scalability**. It multiplies Wazuh's event processing capacity and allows to have thousands of agents reporting. It is very simple to add a new node to the cluster, it is just necessary to add the master's address to the node's configuration and that's it. This task is very easy to automate, giving the user the ability to implement auto scaling.
 
-    - **Keep alive thread**: Responsible of sending a keep alive to the master every so often.
-    - **Agent info thread**: Responsible of sending the statuses of the agents that are reporting to that node.
-    - **Integrity thread**: Responsible of synchronizing the files sent by the master.
+High availability
+~~~~~~~~~~~~~~~~~
 
-All cluster logs are written in the file ``logs/cluster.log``.
+Server eventually fail: hardware can be broken, a human can turn them off, the system can go down... And while the server is restored, you won't be able to see what is happening in your agents. Using a cluster you make sure your agents will always have a manager to report to.
 
-.. image:: ../../images/manual/cluster/cluster_flow.png
+.. image:: ../../images/manual/cluster/introduction_cluster.png
+    :align: center
 
-Keep alive thread
-^^^^^^^^^^^^^^^^^
-
-The *keep alive thread* sends a keep-alive to the master every so often. It is necessary to keep the connection opened between master and client, since the cluster uses permanent connections.
-
-.. _agent-info-thread:
-
-Agent info thread
-^^^^^^^^^^^^^^^^^
-
-The *agent info thread* sends the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the client node. The master checks the modification date of each received agent status file and keeps the most recent one.
-
-The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master to store unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified client nodes yet.
-
-.. _integrity-thread:
-
-Integrity thread
-^^^^^^^^^^^^^^^^
-
-The *integrity thread* is in charge of synchrozing the files sent by the master node to the clients. Those files are:
-
-- :ref:`agent-keys-registration` file.
-- :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
-- :doc:`Agent groups files and assignments <../agents/grouping-agents>`.
-
-Usually, the master is responsible for sending group assignments, but just in case a new agent starts reporting in a client node, the client will send the new agent's group assignment to the master.
-
-File Integrity Thread
-^^^^^^^^^^^^^^^^^^^^^
-
-The integrity of each file is calculated using its MD5 checksum and its modification time. To avoid calculating the integrity with each client connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
 
 Types of nodes
---------------
+^^^^^^^^^^^^^^
 
 Master
-^^^^^^
+~~~~~~
 
 The master node centralizes and coordinates client nodes, making sure the critical and required data is consistent across all nodes. It provides the centralization of the following:
 
@@ -101,37 +58,20 @@ The master node centralizes and coordinates client nodes, making sure the critic
 All communications among nodes in the cluster are encrypted using AES algorithm.
 
 Client
-^^^^^^
+~~~~~~
 
 Client nodes are responsible of two main tasks:
 
     - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
     - Sending :ref:`agent status updates <agent-info-thread>` to the master.
 
-
-Cluster management
-------------------
-
-The **cluster_control** tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster. This information can also be obtained using the :doc:`API <../api/reference>`.
-
-For example, the following snippet shows the health status of the cluster in real time:
-
-.. code-block:: shell
-
-    # /var/ossec/bin/cluster_control -i
-    Cluster name: wazuh
-
-    Last completed synchronization for connected nodes (3):
-    node02 (192.168.56.103): Integrity: 2018-05-15 17:25:12.64 | Agents-info: 2018-05-15 17:25:14.74 | Agent-groups: n/a.
-    node03 (192.168.56.105): Integrity: 2018-05-15 17:25:15.35 | Agents-info: n/a | Agent-groups: n/a.
-
-If you want to see more examples and check all its options, refer to :doc:`its manual <../reference/tools/cluster_control>`.
-
+Getting started
+---------------
 
 .. _deploy_wazuh_cluster:
 
 Deploying a Wazuh cluster
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
   To run the cluster, **Python 2.7 or higher** is required. In case you're using CentOS 6, please refer to `Run the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
@@ -211,18 +151,9 @@ Follow these steps to deploy a Wazuh cluster:
 
 .. _run-cluster-centos6:
 
-Updating the cluster from older versions
-----------------------------------------
-If you already have a cluster installation from a **version inferior or equal to 3.2.2**, you should do some changes in your cluster configuration:
-
-    * Remove ``<interval>`` section.
-    * Remove client nodes from ``<nodes>`` section. Only the master node is allowed.
-
-The cluster will work with an old configuration but it is recommended to update it.
-
-
 Run the cluster in CentOS 6
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is required to run the cluster, follow these steps to install and use this version:
 
 1. Install Python 2.7 as follows:
@@ -260,3 +191,117 @@ Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is requir
     # ps aux | grep cluster
     ossec     9725  0.1  1.3 137364 14216 ?        S    14:22   0:00 python /var/ossec/bin/wazuh-clusterd
     root      9767  0.0  0.0 103340   904 pts/0    S+   14:22   0:00 grep cluster
+
+
+Upgrading from older versions
+-----------------------------
+
+If you already have a cluster installation from a **version older or equal to 3.2.2**, you should do some changes in your cluster configuration:
+
+    * Remove ``<interval>`` section.
+    * Remove client nodes from ``<nodes>`` section. Only the master node is allowed.
+
+The cluster will work with an old configuration but it is recommended to update it.
+
+
+How the cluster works
+---------------------
+
+The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates all the nodes following a master-client architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
+
+The image below shows the communications between a client and a master node. Each client-master communication is independent from each other, since clients are the ones who start the communication with the master.
+
+There are different independent threads running, each one is framed in the image:
+
+    - **Keep alive thread**: Responsible of sending a keep alive to the master every so often.
+    - **Agent info thread**: Responsible of sending the statuses of the agents that are reporting to that node.
+    - **Integrity thread**: Responsible of synchronizing the files sent by the master.
+
+All cluster logs are written in the file ``logs/cluster.log``.
+
+.. image:: ../../images/manual/cluster/cluster_flow.png
+
+Keep alive thread
+^^^^^^^^^^^^^^^^^
+
+The *keep alive thread* sends a keep-alive to the master every so often. It is necessary to keep the connection opened between master and client, since the cluster uses permanent connections.
+
+.. _agent-info-thread:
+
+Agent info thread
+^^^^^^^^^^^^^^^^^
+
+The *agent info thread* sends the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the client node. The master checks the modification date of each received agent status file and keeps the most recent one.
+
+The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master to store unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified client nodes yet.
+
+.. _integrity-thread:
+
+Integrity thread
+^^^^^^^^^^^^^^^^
+
+The *integrity thread* is in charge of synchrozing the files sent by the master node to the clients. Those files are:
+
+- :ref:`agent-keys-registration` file.
+- :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
+- :doc:`Agent groups files and assignments <../agents/grouping-agents>`.
+
+Usually, the master is responsible for sending group assignments, but just in case a new agent starts reporting in a client node, the client will send the new agent's group assignment to the master.
+
+File Integrity Thread
+^^^^^^^^^^^^^^^^^^^^^
+
+The integrity of each file is calculated using its MD5 checksum and its modification time. To avoid calculating the integrity with each client connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
+
+
+Cluster management
+------------------
+
+The **cluster_control** tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster. This information can also be obtained using the :ref:`API calls reference <cluster_api>`.
+
+For example, the following snippet shows the connected nodes in the cluster:
+
+.. code-block:: shell
+
+    # /var/ossec/bin/cluster_control -l
+    ---------------------------------------
+    Name    Address         Type    Version
+    ---------------------------------------
+    node01  192.168.56.101  master  3.2.3
+    node02  192.168.56.103  client  3.2.3
+    node03  192.168.56.105  client  3.2.3
+    ---------------------------------------
+
+This information can also be obtained using the Restful API:
+
+.. code-block:: javascript
+
+    $ curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes?pretty"
+    {
+       "error": 0,
+       "data": {
+          "totalItems": 3,
+          "items": [
+             {
+                "ip": "192.168.56.103",
+                "version": "3.2.3",
+                "type": "client",
+                "name": "node02"
+             },
+             {
+                "ip": "192.168.56.105",
+                "version": "3.2.3",
+                "type": "client",
+                "name": "node03"
+             },
+             {
+                "ip": "192.168.56.101",
+                "version": "3.2.3",
+                "type": "master",
+                "name": "node01"
+             }
+          ]
+       }
+    }
+
+If you want to see more examples and check all its options, refer to :doc:`the cluster_control manual <../reference/tools/cluster_control>` or the :ref:`API calls reference <cluster_api>`.
