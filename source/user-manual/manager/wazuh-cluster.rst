@@ -149,6 +149,17 @@ Follow these steps to deploy a Wazuh cluster:
 
         # systemctl restart wazuh-manager
 
+
+Pointing agents to the cluster with a load balancer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you want your agents to report to the cluster, the ideal setup is to use a load balancer. The following configuration is necessary to do so:
+
+* **Use TCP protocol instead of UDP**. This is necessary since permanent connections and stickiness are needed in order to make sure agent data is consistent. To use the TCP protocol, you should configure both your :ref:`agents <server_protocol>` and your :ref:`nodes <manager_protocol>`.
+
+* **Disable the option** ``use_source_ip`` **in your authd configuration**. When using a LB, the cluster nodes will only see the LB's IP and no the agents'. This will make the agents unable to connect to the cluster.
+
+
 .. _run-cluster-centos6:
 
 Run the cluster in CentOS 6
