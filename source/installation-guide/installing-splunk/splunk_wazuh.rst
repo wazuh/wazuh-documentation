@@ -15,14 +15,19 @@ Wazuh app for Splunk offers an UI to visualize Wazuh alerts and API data. Wazuh 
 Installation
 ------------
 
-1. Download the latest stable version from the Splunk app for Wazuh `repository <https://github.com/wazuh/wazuh-splunk/releases/>`_.
+1. Download the latest stable version from the Splunk app for Wazuh `repository <https://github.com/wazuh/wazuh-splunk/releases/>`_. You can also download it by CLI with the following command:
+
+ .. code-block:: console
+
+      curl -o SplunkAppForWazuh.tar.gz https://github.com/wazuh/wazuh-splunk/releases/download/v3.2.3-7.1.0/v3.2.3-7.1.0.tar.gz
+
 2. Install the Wazuh app for Splunk:
 
   The app currently provides the ``/SplunkAppForWazuh/default/indexes.conf`` and ``/SplunkAppForWazuh/default/inputs.conf`` file which create an index named 'wazuh' and listen for forwarded data on port 9997 on the machine where it's already installed. 
 
   .. warning::
 
-    In the case of having an Indexer cluster, first delete `indexes.conf` and `inputs.conf` files, install the app on the Search Head machine and configure a 'wazuh' index following the `Splunk official docs <http://docs.splunk.com/Documentation/Splunk/7.1.0/Indexer/useforwarders>`_ .
+    In the case of having an Indexer cluster, first delete `indexes.conf` and `inputs.conf` files for avoiding to create an index in the current machine, install the app on the Search Head machine and configure a 'wazuh' index following the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.0/Indexer/useforwarders>`_ .
 
   - CLI mode:
 
@@ -45,27 +50,7 @@ Installation
   .. image:: ../../images/splunk-app/appconf-0.png
     :align: center
 
-4. Before filling out the fields, go to your Wazuh server and, using the command prompt as root, replace the default credentials with your desired username where `myUsername` is shown below to protect your Wazuh API.
-
-  .. code-block:: console
-
-    # cd /var/ossec/api/configuration/auth
-
-  .. code-block:: console
-
-    # node htpasswd -c user myUserName
-
-  Do not forget to restart the API to apply the changes with these commands:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-api
-
-  .. code-block:: console
-
-    # service wazuh-api restart
-
-5. Fill in the Username and Password fields with the credentials you created in the previous step.  Enter ``http(s)://MANAGER_IP`` for the URL where ``MANAGER_IP`` is the real IP address of the Wazuh server and enter "55000" for the Port:
+4. Fill in the Username and Password fields with the credentials, you can get more information about how to do this at :ref:`securing_api`. Enter ``http(s)://MANAGER_IP`` for the URL where ``MANAGER_IP`` is the real IP address of the Wazuh server and enter "55000" for the Port:
 
   .. thumbnail:: ../../images/splunk-app/appconf-1.png
     :align: center
