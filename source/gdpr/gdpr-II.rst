@@ -5,11 +5,7 @@
 GDPR II
 =======
 
-Chapter II, Principles
-----------------------
-
-Basic principles of the regulation. The requirements mentioned in this section are of a formal nature and the option of extracting technical requirements for compliance through the support of Wazuh is not viable. 
-
+In this chapter the requirements concerning the basic principles of the regulation are mentioned, having as main purpose the personal data and how they are to be processed. 
 
 Chapter II, Article 5 Head 1(f)
 -------------------------------

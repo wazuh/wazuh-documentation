@@ -5,11 +5,7 @@
 GDPR III 
 ============
 
-Chapter III, Rights of the data subject 
----------------------------------------
-
-Regulation of the data subject rigths. The requirements mentioned in this section are of a formal nature and the option of extracting technical requirements for compliance through the support of Wazuh is not viable. 
-
+In this chapter we can observe that the necessary requirements for the fulfillment of the regulation are centered in the regulation of the rights of the interested parties related to their personal data. 
 
 Chapter III, Article 14, Head 2 (c)
 -----------------------------------

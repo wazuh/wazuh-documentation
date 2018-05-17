@@ -5,10 +5,7 @@
 GDPR IV
 =======
 
-Chapter IV, Controller and processor
-------------------------------------
-
-Management of the control and processing of the data. The requirements mentioned in this section are of a formal nature and the option of extracting technical requirements for compliance through the support of Wazuh is not viable. 
+In this chapter we can find that the requirements for compliance with the regulations have as their main reference the management and control of the processing of personal data.
 
 Chapter IV, Article 24, Head 2
 ------------------------------
@@ -334,7 +331,3 @@ Wazuh will generate an alert like this.
     :align: center
     :width: 100%
 
-Chapter IV, Article 37
-----------------------
-
-Designate a data protection officer. The requirements mentioned in this section are of a formal nature and the option of extracting technical requirements for compliance through the support of Wazuh is not viable. 
