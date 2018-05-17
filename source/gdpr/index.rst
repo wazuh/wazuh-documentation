@@ -13,13 +13,13 @@ The European Union's **General Data Protection Regulation (GDPR)** has been draw
 Introduction
 ------------
 
-Wazuh supports GDPR compliance by file integrity monitoring, temporary access restrictions, permanent data deletion, policy monitoring, data protection in the processing, audit logs, access management, security breach notices, risk evaluation and security monitoring. With this guide, we can show you how these capabilities provide help for GDPR compliance.
+Wazuh has the capacity to support GDPR compliance, helping with most technical requirements. The personal data of subjects under the protection of the GDPR will be controlled with the file monitoring offered by Wazuh, as well as protected by the detection of anomalies and intrusions that Wazuh faces. It also has the ability to monitor compliance with security policies and provide various logs on events that occur in the environment where personal data is processed and stored. 
 
-One of the ways in which Wazuh supports the GDPR is through its Ruleset, where it applies the following tagging to those rules that help compliance of the standard:
 
-**Tagging:** The syntax used for rule tagging is **gdpr_** followed by the chapter, article and, where appropriate, the section and paragraph to which the requirement belongs.  (e.g. gdpr_II_5.1.f).
+One of the ways in which Wazuh supports the GDPR is through its Ruleset, where it applies the following tagging to those rules that help compliance of the standard. The syntax used for rule tagging is **gdpr_** followed by the chapter, article and, where appropriate, the section and paragraph to which the requirement belongs.  (e.g. gdpr_II_5.1.f).
 
-The formal requirements in the content of some chapters of the GDPR are out of the technical scope and therefore are not considered in this document. These chapters are: Chapters I,V,VI,VII,VIII,IX,X,XI.
+
+The formal requirements in the content of some chapters of the GDPR are out of the technical scope and therefore are not considered in this document. 
 
 
 .. toctree::
@@ -33,14 +33,10 @@ The formal requirements in the content of some chapters of the GDPR are out of t
 Contents
 --------
 
-* GDPR I
-* :ref:`GDPR II <gdpr_II>`
-* :ref:`GDPR III <gdpr_III>`
-* :ref:`GDPR IV <gdpr_IV>`
-* GDPR V
-* GDPR VI
-* GDPR VII
-* GDPR VIII
-* GDPR IX
-* GDPR X
-* GDPR XI
+The technical requirements that Wazuh supports can be found in the following chapters: 
+
+* :ref:`GDPR II, Principles <gdpr_II>`
+* :ref:`GDPR III, Rights of the data subject <gdpr_III>`
+* :ref:`GDPR IV, Controller and processor <gdpr_IV>`
+
+
