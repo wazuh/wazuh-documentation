@@ -150,6 +150,12 @@ Follow these steps to deploy a Wazuh cluster:
         # systemctl restart wazuh-manager
 
 
+Configuring the Wazuh Kibana App
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Although all nodes can have an API installed, the Wazuh Kibana app must be configured with the master's API because the master node is the one that has all the information about the agents and the cluster.
+
+
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
