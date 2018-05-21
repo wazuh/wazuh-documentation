@@ -13,4 +13,6 @@ Work in progress.
         :maxdepth: 1
 
         agents
+        agent-view
         dev-tools
+
