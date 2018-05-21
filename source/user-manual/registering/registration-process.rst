@@ -11,6 +11,7 @@ The registration process consists of a mechanism to create a trust relationship 
 
 Another aproach is using the RESTful API, this is just a wrapper for local registration on Wazuh Manager.
 
+.. _agent-keys-registration:
 
 Agent keys
 -----------
