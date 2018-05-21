@@ -15,4 +15,5 @@ Work in progress.
         agents
         agent-view
         dev-tools
+        settings
 
