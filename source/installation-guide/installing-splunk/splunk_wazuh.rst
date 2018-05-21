@@ -23,11 +23,11 @@ Installation
 
 2. Install the Wazuh app for Splunk:
 
-  The app currently provides the ``/SplunkAppForWazuh/default/indexes.conf`` and ``/SplunkAppForWazuh/default/inputs.conf`` file which create an index named 'wazuh' and listen for forwarded data on port 9997 on the machine where it's already installed. 
+  The app uses the ``/SplunkAppForWazuh/default/indexes.conf`` file to create an index named 'wazuh' and ``/SplunkAppForWazuh/default/inputs.conf`` file to listen to forwarded data on port 9997 on the machine where it's already installed. 
 
   .. warning::
 
-    In the case of having an Indexer cluster, first delete `indexes.conf` and `inputs.conf` files for avoiding to create an index in the current machine, install the app on the Search Head machine and configure a 'wazuh' index following the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.0/Indexer/useforwarders>`_ .
+    In the case you have an Indexer cluster, first delete `indexes.conf` and `inputs.conf` files for avoiding to create an index in the current machine, install the app on the Search Head machine and configure a 'wazuh' index following the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.0/Indexer/useforwarders>`_ .
 
   - CLI mode:
 

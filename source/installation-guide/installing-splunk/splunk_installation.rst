@@ -6,7 +6,6 @@ Splunk installation
 ===================
 
 This document will guide the process to install a simple distributed architecture according to the :ref:`previous page <installation_splunk>` schema, where an Indexer instance receives Wazuh alerts from a Forwarder machine.
-The necessary packages for Splunk Enterprise and Splunk Forwarder for RPM and DEB systems download links can be found along this document below.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
@@ -14,7 +13,7 @@ Splunk Indexer installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This component will work receiving the data flow streamed by a Forwarder and indexing it.
-Download any desired Splunk Enterprise package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_. As Splunk is not open source software it requires to get a license for working with it. So an enterprise license may be purchased and also a free trial license can be adquired.
+Download Splunk v7.1.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_. As Splunk is not open source software it requires to get a license for working with it. So an enterprise license may be purchased and also a free trial license can be adquired.
 This guide will guide the installation process for a Linux operating system, so once a Splunk Linux package was downloaded, install it with the following command depending on your operating system distribution:
 
 a) For RPM based distributions:
@@ -29,7 +28,7 @@ b) For Debian/Ubuntu distributions:
 
   # dpkg --install splunk-enterprise-package.deb
 
-Upon completion, ensure Splunk is already installed in ``/opt/splunk`` and start the service:
+Upon completion, ensure Splunk v7.1.0 is already installed in ``/opt/splunk`` and start the service:
 
 .. code-block:: console
 
@@ -46,7 +45,7 @@ Splunk Forwarder installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A Forwarder component is required in order to send alerts to the Indexer, so this instance will have to be installed where the Wazuh manager is.
-You can download any desired Splunk Forwarder package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
+You can download Splunk Forwarder v7.1.0 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
 Then proceed to install it with the following command depending on your operating system:
 
 a) For RPM based distributions:
@@ -61,7 +60,7 @@ b) For Debian/Ubuntu distributions:
 
   # dpkg --install splunkforwarder-package.deb
 
-Upon completion, ensure Splunk forwarder is already installed in ``/opt/splunkforwarder``.
+Upon completion, ensure Splunk Forwarder v7.1.0 is already installed in ``/opt/splunkforwarder``.
 
 Useful Splunk CLI commands can be found in the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.0/Admin/CLIadmincommands>`_ .
 

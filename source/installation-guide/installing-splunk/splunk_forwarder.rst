@@ -36,58 +36,42 @@ For forwarding the Wazuh logs that will be indexed afterwards, please edit the `
 Configuring props
 ^^^^^^^^^^^^^^^^^
 
-Edit the ``$SPLUNK_FORWARDER_HOME/etc/system/local/props.conf`` file and add the following stanza. If it doesn't exist, create it:
+1. Download the ``props.conf`` template:
 
-.. code-block:: console
+  .. code-block:: console
 
-  [wazuh]
-  DATETIME_CONFIG =
-  INDEXED_EXTRACTIONS = json
-  KV_MODE = none
-  NO_BINARY_CHECK = true
-  category = Application
-  disabled = false
-  pulldown_type = true
+    # curl -so /opt/splunk/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/props.conf
 
-.. note:: If you're using a **single-host architecture** with a Forwarder and an Indexer on the same machine, before continuing, you must change the Splunk Forwarder internal port. You can change it just by restarting the Splunk Forwarder by using ``$SPLUNK_FORWARDER_HOME/bin/splunk restart``, and it will automatically prompt you to change the internal port.
+2. Download the ``inputs.conf`` template:
+
+   .. code-block:: console
+
+    # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/inputs.conf
+
+  And set the Wazuh manager hostname into it:
+
+ .. code-block:: console
+
+    # sed -i "s:MANAGER_HOSTNAME:$(hostname):g" /opt/splunk/etc/system/local/inputs.conf
+
+.. note:: Note that the commands above works for default ``$SPLUNK_FORWARDER_HOME``. If yours is changed, please modify the curl command to your custom location.
+
 
 Set up data forwarding
 ----------------------
 
 1. Now the forwarder needs to send the data flow to a remote indexer, so point the output to the Wazuh's Indexer with the following command depending on your architecture:
 
-  a) In simple distributed architecture:
+  .. image:: ../../images/splunk-app/simple-distributed-arch.png
+    :align: center
 
-    .. image:: ../../images/splunk-app/simple-distributed-arch.png
-      :align: center
+  .. code-block:: console
 
-    .. code-block:: console
+    $SPLUNK_FORWARDER_HOME/bin/splunk add forward-server <INDEXER_IP>:<INDEXER_PORT>
 
-      $SPLUNK_FORWARDER_HOME/bin/splunk add forward-server <INDEXER_IP>:<INDEXER_PORT>
-
-    - ``INDEXER_IP``: Splunk Indexer location.
-    - ``INDEXER_PORT``: by default on port 9997.
-    - Remember that the default Splunk username/password are ``admin/changeme``
-
-
-  b) In the case that you have more than one Indexers (clustered architecture):
-    
-    .. image:: ../../images/splunk-app/distributed-arch.png
-      :align: center
-
-    Set the ``$SPLUNK_FORWARDER_HOME/etc/system/local/outputs.conf`` file like this:
-
-    .. code-block:: console
-
-      [tcpout]
-      defaultGroup=indexer1,indexer2
-
-      [tcpout:indexer1]
-      server=IP_FIRST_INDEXER:9997
-
-      [tcpout:indexer2]
-      server=IP_SECOND_INDEXER:9997
-
+  - ``INDEXER_IP``: Splunk Indexer location.
+  - ``INDEXER_PORT``: by default on port 9997.
+  - Remember that the default Splunk username/password are ``admin/changeme``
 
 2. Restart Splunk Forwarder service:
 
