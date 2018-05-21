@@ -34,4 +34,6 @@ The most relevant changes in the Wazuh core are the following:
 Wazuh cluster
 --------------
 
-XXXXXXXXXXXXXXXXXXXXx
+Communications and the synchronization algorithm have been redesign in order to improve the performance and reliability. Now, the client nodes initialize the communication and it is just necessary to specify the master node in the client configuration.
+
+The number of daemon has been reduce to one: wazuh-clusterd.
