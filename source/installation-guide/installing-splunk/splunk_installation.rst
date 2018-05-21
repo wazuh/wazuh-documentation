@@ -32,13 +32,13 @@ Upon completion, ensure Splunk v7.1.0 is already installed in ``/opt/splunk`` an
 
 .. code-block:: console
 
-  # $SPLUNK_HOME/bin/splunk start
+  # /opt/splunk/bin/splunk start
 
 If you additionally want Splunk service to start at boot time, please execute the following command:
 
 .. code-block:: console
 
-  # $SPLUNK_HOME/bin/splunk enable boot-start
+  # /opt/splunk/bin/splunk enable boot-start
 
 
 Splunk Forwarder installation

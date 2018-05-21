@@ -21,7 +21,7 @@ Installation
 
       curl -o SplunkAppForWazuh.tar.gz https://github.com/wazuh/wazuh-splunk/releases/download/v3.2.3-7.1.0/v3.2.3-7.1.0.tar.gz
 
-2. Install the Wazuh app for Splunk:
+2. Install the Splunk app for Wazuh:
 
   The app uses the ``/SplunkAppForWazuh/default/indexes.conf`` file to create an index named 'wazuh' and ``/SplunkAppForWazuh/default/inputs.conf`` file to listen to forwarded data on port 9997 on the machine where it's already installed. 
 
@@ -33,11 +33,11 @@ Installation
 
     .. code-block:: console
 
-      $SPLUNK_HOME/bin/splunk install app SplunkAppForWazuh.tgz
+      # /opt/splunk/bin/splunk install app v3.2.3-7.1.0.tgz
 
     .. code-block:: console
 
-      $SPLUNK_HOME/bin/splunk restart
+      # /opt/splunk/bin/splunk restart
 
   - Web GUI:
 
