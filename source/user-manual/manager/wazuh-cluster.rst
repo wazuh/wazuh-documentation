@@ -74,7 +74,7 @@ Deploying a Wazuh cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
-  To run the cluster, **Python 2.7 or higher** is required. In case you're using CentOS 6, please refer to `Run the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
+  To run the cluster, **Python 2.7 or higher** is required. In case you're using CentOS 6, please refer to `Running the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
 
 Follow these steps to deploy a Wazuh cluster:
 
