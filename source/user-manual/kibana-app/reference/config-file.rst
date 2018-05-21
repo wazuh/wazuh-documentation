@@ -113,13 +113,17 @@ Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
 wazuh.monitoring.frequency
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Define the frequency the app generates a new document on the `wazuh-monitoring` index.
+Define in seconds the frequency the app generates a new document on the `wazuh-monitoring` index.
 
-+--------------------+----------------------------+
-| **Default value**  | 3600 (seconds)             |
-+--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
-+--------------------+----------------------------+
++--------------------+-----------------------------+
+| **Default value**  | 3600 (seconds)              |
++--------------------+-----------------------------+
+| **Allowed values** | Any number starting from 60 |
++--------------------+-----------------------------+
+
+.. warning::
+
+    Although the minimum value can be ``60``, we recommend adjusting it to at least ``300`` seconds to avoid overloading issues due to the excessive creation of documents into the index.
 
 Checks
 ------
