@@ -5,8 +5,11 @@
 Splunk Forwarder configuration
 ==============================
 
-This section will explain what kind of configuration files the Splunk Forwarder instance needs for working properly and send Wazuh alerts to the Indexer component.
-First, the forwarder needs to read data from an input and that's what the ``inputs.conf`` file is used for. Also for consuming data inputs, Splunk needs to specify what kind of format will be handled and that's what the file `props.conf` does.
+This section will explain what kind of configuration files the Splunk Forwarder instance needs to work properly and send Wazuh alerts to the Indexer component.
+
+- **inputs.conf** : This configuration file is needed by the forwarder for reading data from an input.
+
+- **props.conf** : For consuming data inputs, Splunk needs to specify what kind of format will be handled.
 
 .. note:: By default, ``$SPLUNK_FORWARDER_HOME = /opt/splunkforwarder``
 
