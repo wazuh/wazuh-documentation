@@ -98,7 +98,11 @@ Monitoring
 wazuh.monitoring.enabled
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Enable or disable the ``wazuh-monitoring`` index creation. If ``worker`` is given as a value, the app will show the ``Agents status`` visualization, but won't insert data.
+Enable or disable the ``wazuh-monitoring`` index creation and/or visualization:
+
+- When the value is set to ``true``, the app will show the *Agents status* visualization and will insert monitoring-related data.
+- When the value is set to ``false``, the app won't show the visualization and won't insert monitoring-related data.
+- When the value is set to ``worker``, the app will show the visualization, but won't insert monitoring-related data.
 
 +--------------------+-------------------+
 | **Default value**  | true              |
