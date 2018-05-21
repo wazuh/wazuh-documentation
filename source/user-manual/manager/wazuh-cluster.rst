@@ -168,8 +168,8 @@ If you want your agents to report to the cluster, the ideal setup is to use a lo
 
 .. _run-cluster-centos6:
 
-Run the cluster in CentOS 6
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Running the cluster in CentOS 6
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is required to run the cluster, follow these steps to install and use this version:
 
@@ -209,6 +209,31 @@ Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is requir
     ossec     9725  0.1  1.3 137364 14216 ?        S    14:22   0:00 python /var/ossec/bin/wazuh-clusterd
     root      9767  0.0  0.0 103340   904 pts/0    S+   14:22   0:00 grep cluster
 
+
+Running the cluster in Ubuntu Trusty (14.04)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In order to run the Wazuh cluster in Ubuntu Trusty, ensure that Python 2.7 is installed in your machine. After that, to run the cluster follow these steps:
+
+1. Install the following packages:
+
+  .. code-block:: console
+
+      # apt-get install python-pip libssl-dev python-dev libffi-dev
+
+2. Install the latests version of `setuptools` package using `pip`:
+
+  .. code-block:: console
+
+      # pip install setuptools --upgrade
+
+3. Install `cryptography` module, its dependencies and `ipaddress`:
+
+  .. code-block:: console
+
+      # pip install enum34 six cffi cryptography ipaddress
+
+Once you have executed all these commands, you can set the cluster configuration and run the cluster.
 
 Upgrading from older versions
 -----------------------------
