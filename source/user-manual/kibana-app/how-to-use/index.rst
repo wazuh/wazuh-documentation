@@ -17,5 +17,6 @@ Work in progress.
         dev-tools
         discover
         lists
+        manager/index
         overview
         settings

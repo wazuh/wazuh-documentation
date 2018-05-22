@@ -43,7 +43,7 @@ In this section, we will show you how to register the Wazuh API (installed on th
 
 6. Click on ``Save``.
 
-  .. image:: ../../../images/kibana-app/overview/overview-general.png
+  .. image:: ../../../images/kibana-app/overview/old-overview-general.png
     :align: center
     :width: 100%
 
