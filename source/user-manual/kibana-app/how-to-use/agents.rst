@@ -57,3 +57,8 @@ You could use the OS platform selector to apply a filter by operative system.
     :title: agents-5
     :align: center
     :width: 20%
+
+More information
+----------------
+
+https://documentation.wazuh.com/current/user-manual/agents/index.html

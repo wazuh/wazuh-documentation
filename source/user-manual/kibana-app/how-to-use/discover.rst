@@ -37,3 +37,8 @@ ID filter.
     :title: discover-3
     :align: center
     :width: 100%
+
+More information
+----------------
+
+https://www.elastic.co/guide/en/kibana/current/discover.html

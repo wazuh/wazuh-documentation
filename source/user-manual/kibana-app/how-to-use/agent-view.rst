@@ -63,4 +63,19 @@ Agent configuration
 
 Since an agent always is included into a Wazuh group, you'll be able to see its applied configuration under the configuration tab.
 
-..In progress..
+.. thumbnail:: ../../../images/kibana-app/agents/config-1.png
+    :title: config-1
+    :align: center
+    :width: 100%
+
+Also you could see the raw content of the agent configuration.
+
+.. thumbnail:: ../../../images/kibana-app/agents/config-2.png
+    :title: config-2
+    :align: center
+    :width: 100%
+
+More information
+----------------
+
+https://documentation.wazuh.com/current/user-manual/agents/index.html
