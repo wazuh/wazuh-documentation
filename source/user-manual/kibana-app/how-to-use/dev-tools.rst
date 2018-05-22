@@ -90,3 +90,8 @@ The Wazuh API to be used is your selected Wazuh API.
     :title: devtools-1
     :align: center
     :width: 100%
+
+More information
+----------------
+
+https://documentation.wazuh.com/current/user-manual/api/index.html

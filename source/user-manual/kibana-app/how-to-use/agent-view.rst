@@ -64,3 +64,8 @@ Agent configuration
 Since an agent always is included into a Wazuh group, you'll be able to see its applied configuration under the configuration tab.
 
 ..In progress..
+
+More information
+----------------
+
+https://documentation.wazuh.com/current/user-manual/agents/index.html
