@@ -2,7 +2,31 @@
 
 Recommended Specs
 =================
-This section describes hardware recommendations as well as the recommended operating systems where Wazuh can be deployed.
+This section describes hardware recommendations as well as the recommended operating systems where Wazuh can be deployed. In order to deploy an elastic cluster with optimal performance follow the guidelines described in https://www.elastic.co/guide/en/elasticsearch/guide/current/hardware.html.
+
+
+CPUs
+----
+
+Wazuh doesn't currently paralyze processes, so if you need to choose between faster CPUs or more cores, choose faster CPUs. 
+
+As you can see from the tables, the CPU is not the most important hardware feature to increase, only when the load is excessive is the processor used to a significant measure. Both managers and agents can work with a single core without even making high use of the resources it provides.
+
+Memory
+------
+
+This feature does not have too high a consumption by the agents, in the case of the managers it is possible to give a more considerable use depending on the processes that are being carried out. In the case of managers, the amount (always indicative) suggested for an optimal operation has been 8 GB, while the consumption of less than 0.1% over 1 GB of RAM in agents makes this feature irrelevant for them.
+
+Disk
+----
+
+Regarding the use of persistent storage, a considerable size is required in the master, since the generation of logs (and their constant rotation) can take up a lot of space on the hard disk and even more if you have activated the "logall" option in ossec.conf, since all the events that reach the manager will be stored, not just those that generate alerts. On the agent side, information is also stored but in no case in the same amount as in the manager. This is why a 256GB capacity on a solid state hard disk is recommended.
+
+Network
+-------
+
+Regards the generation of network traffic, in the agents the incoming traffic is minimal since the manager barely sends information to the agent, beyond the control information, active responses, etc. All this generates an average incoming traffic of less than 0.1KB/s which can be considered insignificant, the outgoing traffic is somewhat higher since the log information is sent regularly to the manager, reaching 174.6 KB/s in extreme cases.  As is to be expected in the manager the traffic is mostly incoming, since all the agents report to it, only in the case of using a cluster with several managers these values can vary, although not in a very significant way.
+
 
 Manager recommendations
 -----------------------
@@ -33,7 +57,7 @@ Agent recommendations
 ---------------------
 
 
-Most significant values of consumption are shown in the following table:
+Most significant values of consumption are shown in the following table (The specifications of the machine used are 1 processor at 3.0 GHz and 1 GB of memory):
 
 +-------------------------------+---------------+---------------------+----------------+-----------------------+
 | Type                          | Low (5 EPS)   | Medium (20 EPS)     | High (60 EPS)  | Very high (> 500 EPS) |
@@ -48,98 +72,3 @@ Most significant values of consumption are shown in the following table:
 +-------------------------------+---------------+---------------------+----------------+-----------------------+
 | I/O                           | < 1 KB/s      | < 1 KB/s            | < 1  KB/s      |    < 1 KB/s           |
 +-------------------------------+---------------+---------------------+----------------+-----------------------+
-
-It can be observed that Wazuh's agents do not consume significant resources, even in the most extreme cases, such as the last experiment, CPU consumption is less than 15%, memory consumption less than 1% and bandwidth consumption is minimal regard to the bandwidth of current networks.
-
-
-The data included in the table above have been obtained through the following 4 experiments. The machine configuration for testing will have a 3.0 GHz processor and 1 GB RAM memory.
-
-- `Low load`_
-- `Medium load`_
-- `High load`_
-- `Very high load`_
-
-
-
-Low load
---------
-
-For this test, the agent receives 5 events per second.
-
-
-In this test the cpu consumption is 0.1 % and the memory usage is lower than 0.1 % of the total memory.
-
-Regarding network traffic, the total bandwidth consumption of the agent is 1.4 KB/s of outgoing traffic. The inbound traffic is lower than 0.1 %.
-
-.. image:: processMEM2.png
-	:align: center
-
-The memory consumption of Wazuh processes is trivial for this load.
-
-.. image:: processCPU2.png
-	:align: center
-
-The above list shows how the only Wazuh process that has an appreciable CPU consumption is ossec-agentd.
-
-
-
-Medium load
------------
-
-This second test use the same machine as in the previous example, but receiving 20 events per second.
-
-The use of CPU has increased by 0.2% since the previous example and memory usage has been maintained. 
-
-As far as network traffic is concerned, the output traffic has doubled but the input traffic has remained practically the same.
-
-.. image:: processMEM3.png
-	:align: center
-
-As in the previous tests, the memory usage of Wazuh processes is insignificant.
-
-.. image:: processCPU3.png
-	:align: center
-
-Here you can see how the ossec-agentd cpu usage percentage has tripled but remains below 1%.
-
-
-High load
----------
-
-For this test, the agent will receive 60 EPS, which is well above the maximum values a Wazuh agent receives under normal circumstances.
-
-As in all other experiments, the use of ram remains constant, indicating that the Wazuh agent is not having a significant memory consumption. The CPU usage in this case it has multiplied by three times with respect to the previous example, which makes sense since the EPS has also multiplied by three times.
-
-Outgoing traffic has increased by less than 25 KB/s since the previous case.
-
-In this case the consumption of CPU exceeds are much higher than those that a "normal" operation of a Wazuh agent would have, since in no case are going to reach the 60 EPS in an agent. Memory consumption remains within the limits at which it has remained in all experiments.
-
-.. image:: 4.png
-	:align: center
-
-Memory consumption relative to Wazuh processes still does not appear in the top 10 most memory consuming processes.
-
-.. image:: 5.png
-	:align: center
-
-The top 10 of processes by CPU consumption shows in this case two Wazuh processes, ossec-agentd, with a consumption of 1.87 %, and appears for the first time in ossec-logcollector with 0.1 %, even so neither between the two processes reach the 2 % consumption of a processor.
-
-
-Very high load
-----------------
-
-At this point a test will be done to saturate the agent's event buffer, to check the maximum consumption that an agent can reach. In Wazuh's agent there is a "bucket" of events that can host 500 events. If it is possible to receive more than 500 events per second, the agent will reach the highest possible consumption and the agent's log will show a saturated buffer error.
-
-
-
-The consumption of CPU has increased to an average of 13 %. Compared to the previous test you can see how it has multiplied by 10, although the case of memory consumption remains unchanged.
-
-The outgoing traffic has only increased by 5 times, this is because not all the events that the agent receives are processed and sent to the manager, since the event bucket is saturated and some are being lost.
-
-.. image:: 4-500.png
-
-In the top 10 list processes by memory consumption, the ossec-agentd process appears for the first time in this series of experiments, using 0.7% of the total RAM memory. This tells us that even when the buffer is saturated, memory consumption is still insignificant.
-
-.. image:: 5-500.png
-
-The top 10 processes list by CPU consumption shows how ossec-agentd has consumed 12.67% and ossec-logcollector 0.33%. This consumption is the maximum that an agent will be able to have in a system with the characteristics specified in these experiments since the event bucket prevents a Denial of Service from occurring on the machine where the agent is held.
