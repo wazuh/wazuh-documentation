@@ -12,6 +12,7 @@ Work in progress.
     .. toctree::
         :maxdepth: 1
 
+        manager/index
         agents
         agent-view
         dev-tools
