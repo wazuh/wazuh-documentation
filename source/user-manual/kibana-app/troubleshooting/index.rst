@@ -25,6 +25,31 @@ Troubleshooting
 
         curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
+**Wazuh RESTful API seems to be down**
+
+    It means your Wazuh API could be unavailable. Since the Wazuh App needs data from the Wazuh API, it must to be available for the Wazuh App.
+
+    If you are using ``systemd``, please check the status as follow:
+
+    .. code-block:: console
+
+        # systemctl status wazuh-api
+
+
+    If you are using ``sysv`` init, please check the status as follow:
+
+    .. code-block:: console
+
+        # service wazuh-api status
+
+    If the above suggestion says the Wazuh API is up, try to fetch data using the CLI from the Kibana server to the Wazuh API server:
+
+    .. code-block:: console
+
+        # curl api_user:api_pass@api_url:55000/version
+
+    If the *curl* command fails but the Wazuh API is running properly, it means you have a connectivity problem between servers.
+
 **I don't see alerts in the Wazuh App**
 
     The first step is to check if there are indeed no alerts in Elasticsearch.
