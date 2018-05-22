@@ -9,3 +9,8 @@ The Configuration tab lists the whole Wazuh manager configuration, structured in
 
 .. image:: ../../../../images/kibana-app/manager/manager-configuration.png
   :align: center
+
+More information
+----------------
+
+https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/index.html

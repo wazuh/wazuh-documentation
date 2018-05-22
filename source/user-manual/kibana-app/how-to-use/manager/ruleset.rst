@@ -32,7 +32,7 @@ It gives you suggestions while you are typing and allows you to switch between r
   :width: 100%
 
 Lucene like syntax queries using the search bar
-------------------------------------------
+-----------------------------------------------
 
 You could use the next queries to filter your rules:
 
@@ -71,7 +71,7 @@ At the bottom you'll see related rules to the selected rule to quickly switch be
   :width: 100%
 
 Filter decoders using the search bar
----------------------------------
+------------------------------------
 
 The search bar you'll find at the top of the decoders list provides you a powerful searching tool.
 It gives you suggestions while you are typing and allows you to switch between rules quickly. 
@@ -87,7 +87,7 @@ Since decoders could be parents or child from a parent decoder the Wazuh App pro
 
 .. thumbnail:: ../../../../images/kibana-app/manager/decoders-2.png
   :align: center
-  :width: 20%
+  :width: 25%
 
 Decoder detail
 --------------
@@ -97,3 +97,8 @@ Once you select a specific decoder, you'll see a detail view with the details of
 .. thumbnail:: ../../../../images/kibana-app/manager/decoders-3.png
   :align: center
   :width: 100%
+
+More information
+----------------
+
+  https://documentation.wazuh.com/current/user-manual/ruleset/index.html?highlight=ruleset

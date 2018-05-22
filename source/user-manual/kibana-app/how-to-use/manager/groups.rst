@@ -34,3 +34,8 @@ Clicking on a file will open the JSON viewer to see the full file contents.
 .. thumbnail:: ../../../../images/kibana-app/manager/manager-groups-content-raw.png
   :align: center
   :width: 100%
+
+More information
+----------------
+
+https://documentation.wazuh.com/current/user-manual/reference/centralized-configuration.html?highlight=groups

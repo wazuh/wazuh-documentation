@@ -7,11 +7,6 @@ Status
 
 The Status tab provides a quick look at your manager daemons, basic installation information and the last registered agent.
 
-.. thumbnail:: ../../../../images/kibana-app/manager/manager-status-1.png
-    :title: manager-status-1
-    :align: center
-    :width: 100%
-
 Daemons statuses and metrics
 ----------------------------
 
@@ -35,3 +30,8 @@ Wazuh manager.
     :title: manager-status-3
     :align: center
     :width: 100%
+
+More information
+----------------
+
+https://documentation.wazuh.com/current/user-manual/reference/daemons/index.html?highlight=daemons
