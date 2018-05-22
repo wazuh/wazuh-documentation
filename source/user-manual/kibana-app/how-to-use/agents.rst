@@ -2,8 +2,8 @@
 
 .. _agents:
 
-Agents preview
-==============
+Agents 
+======
 
 You are able to check your agents statuses from the Wazuh App. Once you click on the Agents tab you'll see a list of agents 
 provided by the Wazuh API. It means you'll see the same information as requesting to the Wazuh API on a better format. 

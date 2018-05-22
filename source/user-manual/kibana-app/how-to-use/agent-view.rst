@@ -2,8 +2,8 @@
 
 .. _agent_view:
 
-Agent
-=====
+Agent view
+==========
 
 Once you select an agent from the agents list you'll see a new view regarding to the citated agent.
 It will look like Overview main section but specific filter will be applied to filter the data from Elasticsearch.
