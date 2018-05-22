@@ -17,4 +17,5 @@ Work in progress.
         dev-tools
         discover
         lists
+        overview
         settings
