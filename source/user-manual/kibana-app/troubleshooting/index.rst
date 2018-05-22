@@ -10,6 +10,6 @@ Work in progress.
 .. topic:: Contents
 
     .. toctree::
-        :maxdepth: 2
+        :maxdepth: 1
 
-        .. troubleshooting/index
+        faq
