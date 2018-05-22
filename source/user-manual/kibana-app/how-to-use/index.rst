@@ -16,4 +16,5 @@ Work in progress.
         agent-view
         dev-tools
         discover
+        lists
         settings
