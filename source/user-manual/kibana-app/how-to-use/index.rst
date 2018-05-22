@@ -5,7 +5,7 @@
 How to use
 ==========
 
-Work in progress.
+Learn how to use the Wazuh App following this *How to use* guide. See bellow table of content.
 
 .. topic:: Contents
 

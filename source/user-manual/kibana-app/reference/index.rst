@@ -13,3 +13,4 @@ This part of the user manual will cover the configuration files used by the Wazu
         :maxdepth: 1
 
         config-file
+        elasticsearch
