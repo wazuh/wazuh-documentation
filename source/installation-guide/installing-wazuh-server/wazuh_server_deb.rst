@@ -69,7 +69,12 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-    # curl -sL https://deb.nodesource.com/setup_6.x | bash -
+    # curl -sL https://deb.nodesource.com/setup_8.x | bash -
+
+  .. note::
+
+      If you are using **Ubuntu 12.04 (Precise)** or **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
+
 
   and then, install NodeJS:
 
