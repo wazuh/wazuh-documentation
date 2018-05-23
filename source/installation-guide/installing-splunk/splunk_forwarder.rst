@@ -21,7 +21,7 @@ Configuring inputs
 
   .. code-block:: console
 
-    # curl -so /opt/splunk/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/props.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/props.conf
 
 Configuring props
 ^^^^^^^^^^^^^^^^^
@@ -30,13 +30,13 @@ Configuring props
 
    .. code-block:: console
 
-    # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/inputs.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/inputs.conf
 
 2. And set the Wazuh manager hostname into it:
 
   .. code-block:: console
 
-    # sed -i "s:MANAGER_HOSTNAME:$(hostname):g" /opt/splunk/etc/system/local/inputs.conf
+    # sed -i "s:MANAGER_HOSTNAME:$(hostname):g" /opt/splunkforwarder/etc/system/local/inputs.conf
 
 
 Set up data forwarding
