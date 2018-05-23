@@ -103,7 +103,7 @@ Follow these steps to deploy a Wazuh cluster:
 
       # apt install python-cryptography
 
-2. Set the configurtion of the managers of the cluster.
+2. Set the configuration of the managers of the cluster.
 
   In the ``<cluster>`` section of the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the configuration for the cluster as below:
 

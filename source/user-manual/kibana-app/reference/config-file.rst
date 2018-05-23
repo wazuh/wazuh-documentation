@@ -252,6 +252,8 @@ Advanced index options
 
     This options are only valid if they're modified before starting the Kibana service for the very first time.
 
+    You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
+
 wazuh.shards
 ^^^^^^^^^^^^
 
@@ -260,7 +262,7 @@ Define the number of shards to use for the ``wazuh`` index.
 +--------------------+----------------------------+
 | **Default value**  | 1                          |
 +--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
+| **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
 
 wazuh.replicas
@@ -271,7 +273,7 @@ Define the number of replicas to use for the ``wazuh`` index.
 +--------------------+----------------------------+
 | **Default value**  | 1                          |
 +--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
+| **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
 
 wazuh-version.shards
@@ -282,7 +284,7 @@ Define the number of shards to use for the ``wazuh-version`` index.
 +--------------------+----------------------------+
 | **Default value**  | 1                          |
 +--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
+| **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
 
 wazuh-version.replicas
@@ -293,5 +295,5 @@ Define the number of replicas to use for the ``wazuh-version`` index.
 +--------------------+----------------------------+
 | **Default value**  | 1                          |
 +--------------------+----------------------------+
-| **Allowed values** | Any number starting from 1 |
+| **Allowed values** | Any number starting from 0 |
 +--------------------+----------------------------+
