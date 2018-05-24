@@ -16,27 +16,27 @@ GDPR Support
 ------------
 
 The new **General Data Protection Regulation** takes effect in the European Union on 25 May 2018. Accordingly, Wazuh has been upgraded to provide GDPR compliance.
-Taking advance of Wazuh features such as FIM or Policy Monitoring, it helps with most technical requirements.
+Taking advantage of Wazuh features such as File Integrity or Policy Monitoring, it helps with most technical requirements.
 
 In addition to that, the entire Ruleset has been mapped following the GDPR regulation, enriching all the alerts related to this purpose.
 
-More information about the GDPR regulation and how Wazuh faces it, read it dedicated section at: :doc:`Using Wazuh for GDPR <../gdpr/index>`.
+You can read more information about the GDPR regulation and how Wazuh faces it on the dedicated section: :ref:`gdpr`.
 
 Core improvements
 -----------------
 
-The most relevant changes in the Wazuh core are the following:
+These are the most relevant changes in the Wazuh core:
 
-- Vulnerability-detector continues to expand its scope, now adding support for Amazon Linux. It also has been solved a bug when comparing epoch versions.
-- The agent limit has been increased to 14000 by default, improving the manager availability in large environments.
+- Vulnerability-detector continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
+- The agent limit has been increased to ``14000`` by default, improving the manager availability in large environments.
 - More internal bugs reported by the community have been fixed for this version.
 
 Wazuh cluster
 -------------
 
-Communications and the synchronization algorithm have been redesign in order to improve the performance and reliability. Now, the client nodes initialize the communication and it is just necessary to specify the master node in the client configuration.
+The communications and synchronization algorithm have been redesigned in order to improve the cluster performance and reliability. Now, the client nodes initialize the communication and it's just necessary to specify the master node in the client configuration.
 
-The number of daemon has been reduce to one: ``wazuh-clusterd``.
+The number of daemons has been reduce to one: ``wazuh-clusterd``.
 
 Wazuh app: Kibana
 -----------------
