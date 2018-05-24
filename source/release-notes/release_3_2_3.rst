@@ -47,7 +47,7 @@ Also, along with the GDPR compliance, the app now has a tab for visualizing thes
 
 Other relevant changes in the Wazuh app are the following:
 
-- New button for downloading lists on a *CSV* format. Currently available for the Ruleset, Logs and Groups sections on the Manager tab.
+- New button for downloading lists on a *CSV* format. Currently available for the Ruleset, Logs and Groups sections on the Manager tab and also the Agents tab.
 - New option on the configuration file for enabling or disabling the ``wazuh-monitoring`` indices creation/visualization.
 - Design improvements for the Ruleset tab.
 - Performance improvements on visualization filters.
