@@ -19,7 +19,7 @@ This component will work receiving the data flow streamed by a Forwarder and sto
 
   .. note:: As Splunk is not open source software it requires to get a license for working with it, so an enterprise license may be purchased and also a free trial license can be adquired.
 
-2. Install the already downloaded Splunk v1.7.0 package:
+2. Install the already downloaded Splunk v7.1.0 package:
 
   a) For RPM based distributions:
 
