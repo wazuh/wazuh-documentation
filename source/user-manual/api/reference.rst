@@ -26,7 +26,7 @@ Request List
 ---------------------------------
 
 `Agents`_
-	* DELETE /agents  (`Delete a list of agents`_)
+	* DELETE /agents  (`Delete agents`_)
 	* DELETE /agents/:agent_id  (`Delete an agent`_)
 	* DELETE /agents/:agent_id/group  (`Unset the agent group`_)
 	* DELETE /agents/groups  (`Delete a list of groups`_)
@@ -45,10 +45,8 @@ Request List
 	* GET /agents/outdated  (`Get outdated agents`_)
 	* GET /agents/summary  (`Get agents summary`_)
 	* GET /agents/summary/os  (`Get OS summary`_)
-	* GET /purgeable/:timeframe  (`Get list of purgeable agents`_)
 	* POST /agents  (`Add agent`_)
 	* POST /agents/insert  (`Insert agent`_)
-	* POST /agents/purge  (`Purge old agents from manager`_)
 	* POST /agents/restart  (`Restart a list of agents`_)
 	* PUT /agents/:agent_id/group/:group_id  (`Set agent group`_)
 	* PUT /agents/:agent_id/restart  (`Restart an agent`_)
@@ -67,6 +65,7 @@ Request List
 `Cluster`_
 	* GET /cluster/config  (`Get the cluster configuration`_)
 	* GET /cluster/healthcheck  (`Show cluster health`_)
+	* GET /cluster/node  (`Get local node info`_)
 	* GET /cluster/nodes  (`Get nodes info`_)
 	* GET /cluster/nodes/:node_name  (`Get node info`_)
 	* GET /cluster/status  (`Get info about cluster status`_)
@@ -163,10 +162,13 @@ Add a new agent.
 ::
 
 	{
-	   "error": 9007,
-	   "message": "Duplicated IP"
+	   "error": 0,
+	   "data": {
+	      "id": "006",
+	      "key": "MDA2IE5ld0hvc3QgMTAuMC4wLjkgOTdiZTMyZGYwOTNkNGE1MmMxODM4ZTc0Yjc0MDNjZTQyMGY3YmQ2NWVlM2NjOWRiYWNlNGRmNGM1MTdkNTY1Ng=="
+	   }
 	}
-
+	
 
 Add agent (quick method)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -195,10 +197,13 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 ::
 
 	{
-	   "error": 9008,
-	   "message": "Duplicated name"
+	   "error": 0,
+	   "data": {
+	      "id": "007",
+	      "key": "MDA3IG15TmV3QWdlbnQgYW55IDljZjBlYTA5NzRkNGU3YWFkZjZiZTNkMjJlMTA4ZDE2YTEzOWY2OTNkZWUzMGU4OTRiZjQ1MmY0YjhlOTBkYzc="
+	   }
 	}
-
+	
 
 Insert agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -241,67 +246,17 @@ Insert an agent with an existing id and key.
 ::
 
 	{
-	   "error": 9007,
-	   "message": "Duplicated IP"
+	   "error": 0,
+	   "data": {
+	      "id": "123",
+	      "key": "1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64"
+	   }
 	}
-
+	
 
 
 Delete
 ++++++++++++++++++++++++++++++++++++++++
-
-Delete a list of agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Removes a list of agents. The Wazuh API must be restarted after removing an agent.
-
-**Request**:
-
-``DELETE`` ::
-
-	/agents
-
-**Parameters:**
-
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``ids``            | String[]      | Array of agent ID's.                                                                                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``purge``          | Boolean       | Delete an agent from the key store.                                                                                                                                                                    |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["003","005"]}' "https://127.0.0.1:55000/agents?pretty"
-
-**Example Response:**
-::
-
-	{
-	   "error": 0,
-	   "data": {
-	      "msg": "Some agents were not removed",
-	      "failed_ids": [
-	         {
-	            "id": "003",
-	            "error": {
-	               "message": "Agent ID not found",
-	               "code": 9011
-	            }
-	         },
-	         {
-	            "id": "005",
-	            "error": {
-	               "message": "Agent ID not found",
-	               "code": 9011
-	            }
-	         }
-	      ],
-	      "affected_agents": []
-	   }
-	}
-
 
 Delete a list of groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -332,23 +287,71 @@ Removes a list of groups.
 	{
 	   "error": 0,
 	   "data": {
-	      "msg": "Some groups were not removed",
-	      "failed_ids": [
-	         {
-	            "id": "database",
-	            "error": {
-	               "message": "The group does not exist: database",
-	               "code": 1710
-	            }
-	         }
-	      ],
+	      "msg": "All selected groups were removed",
 	      "ids": [
-	         "webserver"
+	         "webserver",
+	         "database"
 	      ],
-	      "affected_agents": []
+	      "affected_agents": [
+	         "001",
+	         "005",
+	         "003"
+	      ]
 	   }
 	}
+	
 
+Delete agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removes agents, using a list of them or a criterion based on the status or time of the last connection. The Wazuh API must be restarted after removing an agent.
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``ids``            | String[]      | Array of agent ID's.                                                                                                                                                                                   |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``purge``          | Boolean       | Delete an agent from the key store.                                                                                                                                                                    |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``         | String        | Filters by agent status. Use commas to enter multiple statuses.                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | Allowed values:                                                                                                                                                                                        |
+|                    |               |                                                                                                                                                                                                        |
+|                    |               | - active                                                                                                                                                                                               |
+|                    |               | - pending                                                                                                                                                                                              |
+|                    |               | - neverconnected                                                                                                                                                                                       |
+|                    |               | - disconnected                                                                                                                                                                                         |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``older_than``     | String        | Filters out disconnected agents for longer than specified. Time in seconds, '[n_days]d', '[n_hours]h', '[n_minutes]m' or '[n_seconds]s'. For never connected agents, uses the register date.           |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["003","005"]}' "https://127.0.0.1:55000/agents?pretty&older_than=10s"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "msg": "All selected agents were removed",
+	      "older_than": "10s",
+	      "affected_agents": [
+	         "003",
+	         "005"
+	      ]
+	   }
+	}
+	
 
 Delete an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -381,20 +384,13 @@ Removes an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "msg": "Some agents were not removed",
-	      "failed_ids": [
-	         {
-	            "id": "001",
-	            "error": {
-	               "message": "Agent ID not found",
-	               "code": 9011
-	            }
-	         }
-	      ],
-	      "affected_agents": []
+	      "msg": "All selected agents were removed",
+	      "affected_agents": [
+	         "001"
+	      ]
 	   }
 	}
-
+	
 
 
 Groups
@@ -430,7 +426,7 @@ Creates a new group.
 	   "error": 1711,
 	   "message": "The group already exists: pciserver"
 	}
-
+	
 
 Get a file in group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -474,17 +470,17 @@ Returns the specified file belonging to the group parsed to JSON.
 	        "controls": [
 	            {
 	                "...": "..."
-	            },
+	            }, 
 	            {
-	                "condition": "all required",
-	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1",
-	                "reference": "CIS_Debian_Benchmark_v1.0pdf",
+	                "condition": "all required", 
+	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1", 
+	                "reference": "CIS_Debian_Benchmark_v1.0pdf", 
 	                "checks": [
 	                    "f:/etc/debian_version;"
 	                ]
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -525,11 +521,22 @@ Returns the list of agents in a group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 0,
-	      "items": []
+	      "totalItems": 2,
+	      "items": [
+	         {
+	            "ip": "10.0.0.12",
+	            "id": "002",
+	            "name": "dmz001"
+	         },
+	         {
+	            "ip": "10.0.0.14",
+	            "id": "004",
+	            "name": "dmz002"
+	         }
+	      ]
 	   }
 	}
-
+	
 
 Get agents without group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -568,32 +575,27 @@ Returns a list with the available agents without group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 4,
+	      "totalItems": 3,
 	      "items": [
 	         {
-	            "ip": "10.0.0.20",
-	            "id": "006",
-	            "name": "server002"
-	         },
-	         {
 	            "ip": "10.0.0.9",
-	            "id": "007",
+	            "id": "006",
 	            "name": "NewHost"
 	         },
 	         {
 	            "ip": "any",
-	            "id": "008",
+	            "id": "007",
 	            "name": "myNewAgent"
 	         },
 	         {
 	            "ip": "10.0.10.10",
-	            "id": "009",
+	            "id": "123",
 	            "name": "NewHost_2"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get group configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -626,10 +628,18 @@ Returns the group configuration (agent.conf).
 ::
 
 	{
-	   "error": 1710,
-	   "message": "The group does not exist: dmz"
+	   "error": 0,
+	   "data": {
+	      "totalItems": 1,
+	      "items": [
+	         {
+	            "config": {},
+	            "filters": {}
+	         }
+	      ]
+	   }
 	}
-
+	
 
 Get group files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -753,7 +763,7 @@ Returns the files belonging to the group.
 	      ]
 	   }
 	}
-
+	
 
 Get groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -790,13 +800,19 @@ Returns the list of existing agent groups.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2,
+	      "totalItems": 3,
 	      "items": [
 	         {
-	            "count": 2,
+	            "count": 0,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
 	            "merged_sum": "d9835ca466a5f6ede52e0684537f76bd",
 	            "name": "default"
+	         },
+	         {
+	            "count": 2,
+	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "merged_sum": "7d606d93d0b0f00d292f931c3309e7e8",
+	            "name": "dmz"
 	         },
 	         {
 	            "count": 0,
@@ -807,7 +823,7 @@ Returns the list of existing agent groups.
 	      ]
 	   }
 	}
-
+	
 
 Remove group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -838,21 +854,17 @@ Removes the group. Agents that were assigned to the removed group will automatic
 	{
 	   "error": 0,
 	   "data": {
-	      "msg": "Some groups were not removed",
-	      "failed_ids": [
-	         {
-	            "id": "dmz",
-	            "error": {
-	               "message": "The group does not exist: dmz",
-	               "code": 1710
-	            }
-	         }
+	      "msg": "All selected groups were removed",
+	      "ids": [
+	         "dmz"
 	      ],
-	      "ids": [],
-	      "affected_agents": []
+	      "affected_agents": [
+	         "002",
+	         "004"
+	      ]
 	   }
 	}
-
+	
 
 Set agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -886,7 +898,7 @@ Sets an agent to the specified group.
 	   "error": 0,
 	   "data": "Group 'webserver' set to agent '004'."
 	}
-
+	
 
 Unset the agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -918,7 +930,7 @@ Unsets the group of the agent. The agent will automatically revert to the 'defau
 	   "error": 0,
 	   "data": "Group unset for agent '004'."
 	}
-
+	
 
 
 Info
@@ -965,7 +977,7 @@ Returns a summary of the OS.
 	      ]
 	   }
 	}
-
+	
 
 Get agents summary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -989,12 +1001,12 @@ Returns a summary of the available agents.
 	   "error": 0,
 	   "data": {
 	      "Active": 1,
-	      "Never connected": 6,
-	      "Total": 7,
+	      "Never connected": 5,
+	      "Total": 6,
 	      "Disconnected": 0
 	   }
 	}
-
+	
 
 Get all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1019,14 +1031,16 @@ Returns a list with the available agents.
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters by agent status.                                                                                                                                                                               |
+| ``status``         | String        | Filters by agent status. Use commas to enter multiple statuses.                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | Allowed values:                                                                                                                                                                                        |
 |                    |               |                                                                                                                                                                                                        |
 |                    |               | - active                                                                                                                                                                                               |
 |                    |               | - pending                                                                                                                                                                                              |
-|                    |               | - never connected                                                                                                                                                                                      |
+|                    |               | - neverconnected                                                                                                                                                                                       |
 |                    |               | - disconnected                                                                                                                                                                                         |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``older_than``     | String        | Filters out disconnected agents for longer than specified. Time in seconds, '[n_days]d', '[n_hours]h', '[n_minutes]m' or '[n_seconds]s'. For never connected agents, uses the register date.           |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``os.platform``    | String        | Filters by OS platform.                                                                                                                                                                                |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1048,53 +1062,54 @@ Returns a list with the available agents.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 7,
+	      "totalItems": 6,
 	      "items": [
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-05-16 14:45:04",
+	            "dateAdd": "2018-05-25 17:13:07",
 	            "name": "myNewAgent",
 	            "ip": "any",
-	            "id": "008",
-	            "node_name": "unknown"
-	         },
-	         {
-	            "status": "Never connected",
-	            "dateAdd": "2018-05-16 14:45:04",
-	            "name": "NewHost_2",
-	            "ip": "10.0.10.10",
-	            "id": "009",
-	            "node_name": "unknown"
-	         },
-	         {
-	            "status": "Never connected",
-	            "dateAdd": "2018-05-16 14:45:03",
-	            "name": "NewHost",
-	            "ip": "10.0.0.9",
 	            "id": "007",
 	            "node_name": "unknown"
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-05-16 14:42:59",
-	            "group": "default",
-	            "name": "server001",
-	            "ip": "10.0.0.62",
-	            "id": "002",
+	            "dateAdd": "2018-05-25 17:13:07",
+	            "name": "NewHost_2",
+	            "ip": "10.0.10.10",
+	            "id": "123",
 	            "node_name": "unknown"
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-05-16 14:43:37",
-	            "name": "server002",
-	            "ip": "10.0.0.20",
+	            "dateAdd": "2018-05-25 17:13:06",
+	            "name": "NewHost",
+	            "ip": "10.0.0.9",
 	            "id": "006",
+	            "node_name": "unknown"
+	         },
+	         {
+	            "status": "Never connected",
+	            "dateAdd": "2018-05-25 17:11:16",
+	            "group": "default",
+	            "name": "dmz002",
+	            "ip": "10.0.0.14",
+	            "id": "004",
+	            "node_name": "unknown"
+	         },
+	         {
+	            "status": "Never connected",
+	            "dateAdd": "2018-05-25 17:11:04",
+	            "group": "default",
+	            "name": "dmz001",
+	            "ip": "10.0.0.12",
+	            "id": "002",
 	            "node_name": "unknown"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1126,16 +1141,16 @@ Returns various information from an agent.
 	   "error": 0,
 	   "data": {
 	      "status": "Active",
-	      "name": "localhost.localdomain",
+	      "name": "manager",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2018-05-16 14:37:34",
+	      "dateAdd": "2018-05-25 13:31:51",
 	      "version": "Wazuh v3.2.3",
-	      "manager_host": "localhost.localdomain",
+	      "manager_host": "manager",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
 	         "major": "7",
 	         "name": "CentOS Linux",
-	         "uname": "Linux |localhost.localdomain |3.10.0-693.21.1.el7.x86_64 |#1 SMP Wed Mar 7 19:03:37 UTC 2018 |x86_64",
+	         "uname": "Linux |manager |3.10.0-693.21.1.el7.x86_64 |#1 SMP Wed Mar 7 19:03:37 UTC 2018 |x86_64",
 	         "platform": "centos",
 	         "version": "7",
 	         "codename": "Core",
@@ -1144,7 +1159,7 @@ Returns various information from an agent.
 	      "id": "000"
 	   }
 	}
-
+	
 
 Get an agent by its name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1177,59 +1192,12 @@ Returns various information from an agent called :agent_name.
 	   "data": {
 	      "status": "Never connected",
 	      "ip": "10.0.0.9",
-	      "dateAdd": "2018-05-16 14:45:03",
-	      "id": "007",
+	      "dateAdd": "2018-05-25 17:13:06",
+	      "id": "006",
 	      "name": "NewHost"
 	   }
 	}
-
-
-Get list of purgeable agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns a list of agents that can be purged.
-
-**Request**:
-
-``GET`` ::
-
-	/purgeable/:timeframe
-
-**Parameters:**
-
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``timeframe``      | String        | Time from last connection in seconds or [n_days]d[n_hours]h[n_minutes]m[n_seconds]s.                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/purgeable/1d5h?pretty"
-
-**Example Response:**
-::
-
-	{
-	    "data": {
-	        "items": [
-	            {
-	                "id": "001",
-	                "name": "test1"
-	            },
-	            {
-	                "id": "002",
-	                "name": "test2"
-	            }
-	        ],
-	        "timeframe": 104400
-	    },
-	    "error": 0
-	}
+	
 
 
 Key
@@ -1263,59 +1231,9 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IG1haW5fZGF0YWJhc2UgMTAuMC4wLjE1IDg2ZjcyNjE4MjQxZjY2YzA4M2VhY2IyZDFlMmYwNWU4MDUyZmU0NjUwZTNlYmNlNGM1Yjc5YzM5YWU2NTU4OWQ="
+	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgYmJlYTI4NDBiM2UyNzc5YzFjZGQ0YzVmNjMxNWU5Y2U5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
 	}
-
-
-
-Purge
-++++++++++++++++++++++++++++++++++++++++
-
-Purge old agents from manager
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Deletes all agents that did not connect in the last timeframe seconds.
-
-**Request**:
-
-``POST`` ::
-
-	/agents/purge
-
-**Parameters:**
-
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``timeframe``      | String        | Time from last connection in seconds or [n_days]d[n_hours]h[n_minutes]m[n_seconds]s.                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``verbose``        | Boolean       | Return information about agents purged.                                                                                                                                                                |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"timeframe":"1d5h","verbose":true}' "https://127.0.0.1:55000/agents/purge?pretty"
-
-**Example Response:**
-::
-
-	{
-	    "data": {
-	        "totalItems": 2,
-	        "items": [
-	            {
-	                "id": "001",
-	                "name": "test1"
-	            },
-	            {
-	                "id": "002",
-	                "name": "test2"
-	            }
-	        ],
-	        "timeframe": 104400
-	    },
-	    "error": 0
-	}
+	
 
 
 Restart
@@ -1348,7 +1266,7 @@ Restarts a list of agents.
 ::
 
 	{
-	    "data": "All selected agents were restarted",
+	    "data": "All selected agents were restarted", 
 	    "error": 0
 	}
 
@@ -1371,7 +1289,7 @@ Restarts all agents.
 ::
 
 	{
-	    "data": "Restarting all agents",
+	    "data": "Restarting all agents", 
 	    "error": 0
 	}
 
@@ -1402,7 +1320,7 @@ Restarts the specified agent.
 ::
 
 	{
-	    "data": "Restarting agent",
+	    "data": "Restarting agent", 
 	    "error": 0
 	}
 
@@ -1442,20 +1360,20 @@ Returns the list of outdated agents.
 
 	{
 	    "data": {
-	        "totalItems": 2,
+	        "totalItems": 2, 
 	        "items": [
 	            {
-	                "version": "Wazuh v3.0.0",
-	                "id": "003",
+	                "version": "Wazuh v3.0.0", 
+	                "id": "003", 
 	                "name": "main_database"
-	            },
+	            }, 
 	            {
-	                "version": "Wazuh v3.0.0",
-	                "id": "004",
+	                "version": "Wazuh v3.0.0", 
+	                "id": "004", 
 	                "name": "dmz002"
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -1488,7 +1406,7 @@ Returns the upgrade result from an agent.
 ::
 
 	{
-	    "data": "Agent upgraded successfully",
+	    "data": "Agent upgraded successfully", 
 	    "error": 0
 	}
 
@@ -1523,7 +1441,7 @@ Upgrade the agent using a custom file.
 ::
 
 	{
-	    "data": "Installation started",
+	    "data": "Installation started", 
 	    "error": 0
 	}
 
@@ -1565,7 +1483,7 @@ Upgrade the agent using a WPK file from online repository.
 ::
 
 	{
-	    "data": "Upgrade procedure started",
+	    "data": "Upgrade procedure started", 
 	    "error": 0
 	}
 
@@ -1615,7 +1533,7 @@ Clears cache of the specified group.
 	      }
 	   }
 	}
-
+	
 
 Delete cache index
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1642,7 +1560,7 @@ Clears entire cache.
 	      "groups": {}
 	   }
 	}
-
+	
 
 
 Info
@@ -1673,7 +1591,7 @@ Returns current cache index.
 	      "groups": {}
 	   }
 	}
-
+	
 
 Return cache configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1704,10 +1622,9 @@ Returns cache configuration.
 	      "redisClient": false
 	   }
 	}
+	
 
 
-
-.. _cluster_api:
 
 Cluster
 ----------------------------------------
@@ -1741,14 +1658,14 @@ Returns the cluster configuration
 	      "node_name": "node01",
 	      "bind_addr": "0.0.0.0",
 	      "node_type": "master",
-	      "key": "35fe2d1eec3bb8198ad919c4ced11209",
+	      "key": "a4c2cc8be9e2e8520fce4e21ccb21828",
 	      "nodes": [
-	         "192.168.56.101"
+	         "192.168.56.102"
 	      ],
 	      "port": 1516
 	   }
 	}
-
+	
 
 
 Info
@@ -1779,7 +1696,7 @@ Returns whether the cluster is enabled or disabled
 	      "enabled": "yes"
 	   }
 	}
-
+	
 
 Show cluster health
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1821,49 +1738,15 @@ Show cluster health
 	            },
 	            "status": {
 	               "last_sync_agentinfo": {
-	                  "date_start_master": "2018-05-16 14:45:07.55",
-	                  "date_end_master": "2018-05-16 14:45:07.55",
-	                  "total_agentinfo": 0
-	               },
-	               "sync_integrity_free": true,
-	               "last_sync_agentgroups": {
-	                  "date_end_master": "2018-05-16 14:45:34.45",
-	                  "total_agentgroups": 0,
-	                  "date_start_master": "2018-05-16 14:45:34.44"
-	               },
-	               "last_sync_integrity": {
-	                  "total_files": {
-	                     "shared": 0,
-	                     "missing": 0,
-	                     "extra_valid": 0,
-	                     "extra": 0
-	                  },
-	                  "date_end_master": "2018-05-16 15:29:23.48",
-	                  "date_start_master": "2018-05-16 15:29:23.47"
-	               },
-	               "sync_agentinfo_free": true,
-	               "sync_extravalid_free": true
-	            }
-	         },
-	         "node03": {
-	            "info": {
-	               "ip": "192.168.56.105",
-	               "version": "3.2.3",
-	               "type": "client",
-	               "name": "node03",
-	               "n_active_agents": 0
-	            },
-	            "status": {
-	               "last_sync_agentinfo": {
 	                  "date_start_master": "n/a",
 	                  "date_end_master": "n/a",
 	                  "total_agentinfo": 0
 	               },
 	               "sync_integrity_free": true,
 	               "last_sync_agentgroups": {
-	                  "date_end_master": "2018-05-16 14:45:34.70",
+	                  "date_end_master": "2018-05-25 16:17:44.71",
 	                  "total_agentgroups": 0,
-	                  "date_start_master": "2018-05-16 14:45:34.69"
+	                  "date_start_master": "2018-05-25 16:17:44.70"
 	               },
 	               "last_sync_integrity": {
 	                  "total_files": {
@@ -1872,8 +1755,8 @@ Show cluster health
 	                     "extra_valid": 0,
 	                     "extra": 0
 	                  },
-	                  "date_end_master": "2018-05-16 15:29:24.94",
-	                  "date_start_master": "2018-05-16 15:29:24.92"
+	                  "date_end_master": "2018-05-25 17:13:00.95",
+	                  "date_start_master": "2018-05-25 17:13:00.94"
 	               },
 	               "sync_agentinfo_free": true,
 	               "sync_extravalid_free": true
@@ -1881,7 +1764,7 @@ Show cluster health
 	         },
 	         "node01": {
 	            "info": {
-	               "ip": "192.168.56.101",
+	               "ip": "192.168.56.102",
 	               "version": "3.2.3",
 	               "type": "master",
 	               "name": "node01",
@@ -1889,14 +1772,42 @@ Show cluster health
 	            }
 	         }
 	      },
-	      "n_connected_nodes": 3
+	      "n_connected_nodes": 2
 	   }
 	}
-
+	
 
 
 Nodes
 ++++++++++++++++++++++++++++++++++++++++
+
+Get local node info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the local node info
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/node
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "node": "node01",
+	      "cluster": "wazuh",
+	      "type": "master"
+	   }
+	}
+	
 
 Get node info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1919,13 +1830,13 @@ Returns the node info
 	{
 	   "error": 0,
 	   "data": {
-	      "ip": "192.168.56.101",
+	      "ip": "192.168.56.102",
 	      "version": "3.2.3",
 	      "type": "master",
 	      "name": "node01"
 	   }
 	}
-
+	
 
 Get nodes info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1964,7 +1875,7 @@ Returns the nodes info
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 3,
+	      "totalItems": 2,
 	      "items": [
 	         {
 	            "ip": "192.168.56.103",
@@ -1973,13 +1884,7 @@ Returns the nodes info
 	            "name": "node02"
 	         },
 	         {
-	            "ip": "192.168.56.105",
-	            "version": "3.2.3",
-	            "type": "client",
-	            "name": "node03"
-	         },
-	         {
-	            "ip": "192.168.56.101",
+	            "ip": "192.168.56.102",
 	            "version": "3.2.3",
 	            "type": "master",
 	            "name": "node01"
@@ -1987,7 +1892,7 @@ Returns the nodes info
 	      ]
 	   }
 	}
-
+	
 
 
 
@@ -2071,7 +1976,7 @@ Returns all decoders included in ossec.conf.
 	      ]
 	   }
 	}
-
+	
 
 Get all decoders files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2127,16 +2032,6 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0005-wazuh_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0006-json_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
 	            "file": "0010-active-response_decoders.xml"
 	         },
 	         {
@@ -2173,11 +2068,21 @@ Returns all decoders files included in ossec.conf.
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
 	            "file": "0050-checkpoint_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0055-cimserver_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0060-cisco-estreamer_decoders.xml"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get all parent decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2239,7 +2144,7 @@ Returns all parent decoders included in ossec.conf
 	      ]
 	   }
 	}
-
+	
 
 Get decoders by name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2313,7 +2218,7 @@ Returns the decoders with the specified name.
 	      ]
 	   }
 	}
-
+	
 
 
 
@@ -2363,15 +2268,13 @@ Returns ossec.conf in JSON format.
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "209.222.18.222",
-	         "209.222.18.218",
 	         "192.168.0.1"
 	      ],
 	      "email_from": "ossecm@example.wazuh.com",
 	      "logall_json": "no"
 	   }
 	}
-
+	
 
 
 Info
@@ -2398,18 +2301,18 @@ Returns basic information about manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "compilation_date": "Wed May 16 14:37:33 CEST 2018",
+	      "compilation_date": "Fri May 25 13:31:51 UTC 2018",
 	      "version": "v3.2.3",
 	      "openssl_support": "yes",
 	      "max_agents": "14000",
 	      "ruleset_version": "3230",
 	      "path": "/var/ossec",
-	      "tz_name": "CEST",
+	      "tz_name": "UTC",
 	      "type": "manager",
-	      "tz_offset": "+0200"
+	      "tz_offset": "+0000"
 	   }
 	}
-
+	
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2433,7 +2336,7 @@ Returns the status of the manager processes.
 	   "error": 0,
 	   "data": {
 	      "wazuh-modulesd": "running",
-	      "ossec-authd": "running",
+	      "ossec-authd": "stopped",
 	      "wazuh-clusterd": "running",
 	      "ossec-monitord": "running",
 	      "ossec-logcollector": "running",
@@ -2444,7 +2347,7 @@ Returns the status of the manager processes.
 	      "ossec-maild": "stopped"
 	   }
 	}
-
+	
 
 
 Logs
@@ -2495,15 +2398,15 @@ Returns the three last months of ossec.log.
 
 	{
 	    "data": {
-	        "totalItems": 16480,
+	        "totalItems": 16480, 
 	        "items": [
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Syscheck scan frequency: 3600 seconds",
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck scan (forwarding database).",
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck database (pre-scan).",
-	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Started (pid: 2832).",
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Syscheck scan frequency: 3600 seconds", 
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck scan (forwarding database).", 
+	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck database (pre-scan).", 
+	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Started (pid: 2832).", 
 	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Monitoring output of command(360): df -P"
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -2529,73 +2432,68 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	   "error": 0,
 	   "data": {
 	      "wazuh-modulesd": {
-	         "info": 3,
-	         "all": 3,
-	         "error": 0
-	      },
-	      "wazuh-modulesd:oscap": {
-	         "info": 3,
-	         "all": 3,
-	         "error": 0
-	      },
-	      "wazuh-db": {
-	         "info": 5,
-	         "all": 5,
-	         "error": 0
-	      },
-	      "ossec-authd": {
-	         "info": 16,
-	         "all": 28,
-	         "error": 12
-	      },
-	      "wazuh-modulesd:ciscat": {
-	         "info": 3,
-	         "all": 3,
-	         "error": 0
-	      },
-	      "ossec-rootcheck": {
-	         "info": 9,
-	         "all": 9,
-	         "error": 0
-	      },
-	      "ossec-monitord": {
-	         "info": 5,
-	         "all": 5,
-	         "error": 0
-	      },
-	      "ossec-logcollector": {
-	         "info": 29,
-	         "all": 29,
-	         "error": 0
-	      },
-	      "ossec-execd": {
 	         "info": 7,
 	         "all": 7,
 	         "error": 0
 	      },
+	      "wazuh-modulesd:oscap": {
+	         "info": 7,
+	         "all": 7,
+	         "error": 0
+	      },
+	      "wazuh-db": {
+	         "info": 13,
+	         "all": 13,
+	         "error": 0
+	      },
+	      "wazuh-modulesd:ciscat": {
+	         "info": 7,
+	         "all": 7,
+	         "error": 0
+	      },
+	      "ossec-rootcheck": {
+	         "info": 19,
+	         "all": 19,
+	         "error": 0
+	      },
+	      "ossec-monitord": {
+	         "info": 13,
+	         "all": 13,
+	         "error": 0
+	      },
+	      "ossec-logcollector": {
+	         "info": 69,
+	         "all": 69,
+	         "error": 0
+	      },
+	      "ossec-execd": {
+	         "info": 19,
+	         "all": 19,
+	         "error": 0
+	      },
 	      "ossec-remoted": {
-	         "info": 14,
-	         "all": 17,
-	         "error": 3
+	         "info": 34,
+	         "all": 41,
+	         "error": 7
 	      },
 	      "ossec-syscheckd": {
-	         "info": 77,
-	         "all": 77,
+	         "info": 178,
+	         "all": 178,
 	         "error": 0
 	      },
 	      "ossec-analysisd": {
-	         "info": 647,
-	         "all": 647,
+	         "info": 1511,
+	         "all": 1511,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:database": {
-	         "info": 3,
-	         "all": 6,
-	         "error": 3
+	         "info": 7,
+	         "all": 29,
+	         "error": 22
 	      }
 	   }
 	}
-
+	
 
 
 Stats
@@ -2630,31 +2528,31 @@ Returns Wazuh statistical information for the current or specified date.
 	{
 	    "data": [
 	        {
-	            "hour": 5,
-	            "firewall": 0,
+	            "hour": 5, 
+	            "firewall": 0, 
 	            "alerts": [
 	                {
-	                    "level": 3,
-	                    "sigid": 5715,
+	                    "level": 3, 
+	                    "sigid": 5715, 
 	                    "times": 4
-	                },
+	                }, 
 	                {
-	                    "level": 2,
-	                    "sigid": 1002,
+	                    "level": 2, 
+	                    "sigid": 1002, 
 	                    "times": 2
-	                },
+	                }, 
 	                {
 	                    "...": "..."
 	                }
-	            ],
-	            "totalAlerts": 107,
-	            "syscheck": 1257,
+	            ], 
+	            "totalAlerts": 107, 
+	            "syscheck": 1257, 
 	            "events": 1483
-	        },
+	        }, 
 	        {
 	            "...": "..."
 	        }
-	    ],
+	    ], 
 	    "error": 0
 	}
 
@@ -2679,16 +2577,16 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 	{
 	    "data": {
 	        "averages": [
-	            100,
-	            357,
-	            242,
-	            500,
-	            422,
-	            "...",
+	            100, 
+	            357, 
+	            242, 
+	            500, 
+	            422, 
+	            "...", 
 	            123
-	        ],
+	        ], 
 	        "interactions": 0
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -2714,61 +2612,61 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	    "data": {
 	        "Wed": {
 	            "hours": [
-	                223,
-	                "...",
+	                223, 
+	                "...", 
 	                456
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Sun": {
 	            "hours": [
-	                332,
-	                "...",
+	                332, 
+	                "...", 
 	                313
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Thu": {
 	            "hours": [
-	                888,
-	                "...",
+	                888, 
+	                "...", 
 	                123
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Tue": {
 	            "hours": [
-	                536,
-	                "...",
+	                536, 
+	                "...", 
 	                345
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Mon": {
 	            "hours": [
-	                444,
-	                "...",
+	                444, 
+	                "...", 
 	                556
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Fri": {
 	            "hours": [
-	                131,
-	                "...",
+	                131, 
+	                "...", 
 	                432
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Sat": {
 	            "hours": [
-	                134,
-	                "...",
+	                134, 
+	                "...", 
 	                995
-	            ],
+	            ], 
 	            "interactions": 0
 	        }
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -2798,7 +2696,7 @@ Clears the rootcheck database for all agents.
 ::
 
 	{
-	    "data": "Rootcheck database deleted",
+	    "data": "Rootcheck database deleted", 
 	    "error": 0
 	}
 
@@ -2829,7 +2727,7 @@ Clears the rootcheck database for a specific agent.
 ::
 
 	{
-	    "data": "Rootcheck database deleted",
+	    "data": "Rootcheck database deleted", 
 	    "error": 0
 	}
 
@@ -2866,11 +2764,11 @@ Returns the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2018-05-16 15:13:48",
-	      "end": "2018-05-16 15:14:09"
+	      "start": "2018-05-25 17:04:10",
+	      "end": "2018-05-25 17:04:39"
 	   }
 	}
-
+	
 
 Get rootcheck CIS requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2907,9 +2805,10 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 7,
+	      "totalItems": 8,
 	      "items": [
 	         "1.1.1 RHEL7",
+	         "1.1.10 RHEL7",
 	         "1.1.5 RHEL7",
 	         "4.1.2 RHEL7",
 	         "4.2.3 RHEL7",
@@ -2919,7 +2818,7 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 	      ]
 	   }
 	}
-
+	
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2962,26 +2861,28 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 18,
+	      "totalItems": 21,
 	      "items": [
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2018-05-16 14:43:00",
-	            "readDay": "2018-05-16 15:13:51",
-	            "event": "File '/etc/systemd/system/wazuh-manager.service' is owned by root and has written permissions to anyone."
+	            "oldDay": "2018-05-24 10:01:45",
+	            "event": "System Audit: CIS - RHEL7 - 1.1.10 -  Partition /home without 'nodev' set {CIS: 1.1.10 RHEL7} {PCI_DSS: 2.2.4}. File: /etc/fstab. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf .",
+	            "cis": "1.1.10 RHEL7",
+	            "pci": "2.2.4",
+	            "readDay": "2018-05-25 17:04:14"
 	         },
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2018-05-16 14:43:00",
+	            "oldDay": "2018-05-24 10:01:45",
 	            "event": "System Audit: CIS - RHEL7 - 4.1.2 - Network parameters - IP send redirects enabled {CIS: 4.1.2 RHEL7} {PCI_DSS: 2.2.4}. File: /proc/sys/net/ipv4/conf/all/send_redirects. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf .",
 	            "cis": "4.1.2 RHEL7",
 	            "pci": "2.2.4",
-	            "readDay": "2018-05-16 15:13:51"
+	            "readDay": "2018-05-25 17:04:14"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get rootcheck pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3025,7 +2926,7 @@ Returns the PCI requirements of all rootchecks of the agent.
 	      ]
 	   }
 	}
-
+	
 
 
 Run
@@ -3050,7 +2951,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents",
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
 	    "error": 0
 	}
 
@@ -3084,7 +2985,7 @@ Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes 
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-
+	
 
 
 
@@ -3185,7 +3086,7 @@ Returns all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get files of rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3291,7 +3192,7 @@ Returns the files of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rule gdpr requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3337,7 +3238,7 @@ Returns the GDPR requirements of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rule groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3389,7 +3290,7 @@ Returns the groups of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3441,7 +3342,7 @@ Returns the PCI requirements of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rules by id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3503,7 +3404,7 @@ Returns the rules with the specified id.
 	      ]
 	   }
 	}
-
+	
 
 
 
@@ -3531,7 +3432,7 @@ Clears the syscheck database for all agents.
 ::
 
 	{
-	    "data": "Syscheck database deleted",
+	    "data": "Syscheck database deleted", 
 	    "error": 0
 	}
 
@@ -3562,7 +3463,7 @@ Clears the syscheck database for the specified agent.
 ::
 
 	{
-	    "data": "Syscheck database deleted",
+	    "data": "Syscheck database deleted", 
 	    "error": 0
 	}
 
@@ -3599,11 +3500,11 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2018-05-16 15:14:09",
-	      "end": "2018-05-16 15:14:17"
+	      "start": "2018-05-25 17:04:39",
+	      "end": "2018-05-25 16:59:10"
 	   }
 	}
-
+	
 
 Get syscheck files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3672,42 +3573,42 @@ Returns the syscheck files of an agent.
 
 	{
 	    "data": {
-	        "totalItems": 2762,
+	        "totalItems": 2762, 
 	        "items": [
 	            {
-	                "size": 157721,
-	                "uid": 0,
-	                "scanDate": "2017-03-02 23:43:28",
-	                "user": "root",
-	                "file": "!1488498208 /boot/config-3.16.0-4-amd64",
-	                "modificationDate": "2016-10-19 06:45:50",
-	                "octalMode": "100644",
-	                "inode": 5217,
-	                "event": "added",
-	                "permissions": "-rw-r--r--",
-	                "sha1": "4fed08ccbd0168593a6fffcd925adad65e5ae6d9",
-	                "group": "root",
-	                "gid": 0,
+	                "size": 157721, 
+	                "uid": 0, 
+	                "scanDate": "2017-03-02 23:43:28", 
+	                "user": "root", 
+	                "file": "!1488498208 /boot/config-3.16.0-4-amd64", 
+	                "modificationDate": "2016-10-19 06:45:50", 
+	                "octalMode": "100644", 
+	                "inode": 5217, 
+	                "event": "added", 
+	                "permissions": "-rw-r--r--", 
+	                "sha1": "4fed08ccbd0168593a6fffcd925adad65e5ae6d9", 
+	                "group": "root", 
+	                "gid": 0, 
 	                "md5": "46d43391ae54c1084a2d40e8d1b4873c"
-	            },
+	            }, 
 	            {
-	                "size": 2679264,
-	                "uid": 0,
-	                "scanDate": "2017-03-02 23:43:26",
-	                "user": "root",
-	                "file": "!1488498206 /boot/System.map-3.16.0-4-amd64",
-	                "modificationDate": "2016-10-19 06:45:50",
-	                "octalMode": "100644",
-	                "inode": 5216,
-	                "event": "added",
-	                "permissions": "-rw-r--r--",
-	                "sha1": "d48151a3d3638b723f5d7bc1e9c71d478fcde4e6",
-	                "group": "root",
-	                "gid": 0,
+	                "size": 2679264, 
+	                "uid": 0, 
+	                "scanDate": "2017-03-02 23:43:26", 
+	                "user": "root", 
+	                "file": "!1488498206 /boot/System.map-3.16.0-4-amd64", 
+	                "modificationDate": "2016-10-19 06:45:50", 
+	                "octalMode": "100644", 
+	                "inode": 5216, 
+	                "event": "added", 
+	                "permissions": "-rw-r--r--", 
+	                "sha1": "d48151a3d3638b723f5d7bc1e9c71d478fcde4e6", 
+	                "group": "root", 
+	                "gid": 0, 
 	                "md5": "29cc12246faecd4a14d212b4d9bac0fe"
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -3734,7 +3635,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents",
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
 	    "error": 0
 	}
 
@@ -3768,7 +3669,7 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-
+	
 
 
 
@@ -3806,20 +3707,20 @@ Returns the agent's hardware info
 	{
 	    "data": {
 	        "ram": {
-	            "total": 1883804,
+	            "total": 1883804, 
 	            "free": 1114784
-	        },
+	        }, 
 	        "scan": {
-	            "id": 826635219,
+	            "id": 826635219, 
 	            "time": "2018/02/12 23:21:10"
-	        },
+	        }, 
 	        "cpu": {
-	            "cores": 1,
-	            "mhz": 1795.917,
+	            "cores": 1, 
+	            "mhz": 1795.917, 
 	            "name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz"
-	        },
+	        }, 
 	        "board_serial": "0"
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -3859,43 +3760,43 @@ Returns the agent's hardware info
 
 	{
 	    "data": {
-	        "totalItems": 3,
+	        "totalItems": 3, 
 	        "items": [
 	            {
-	                "ram_free": 5351420,
-	                "scan_id": 565830616,
-	                "agent_id": "002",
-	                "ram_total": 6291000,
-	                "board_serial": "0",
-	                "scan_time": "2018/02/12 16:09:45",
-	                "cpu_mhz": 1796,
-	                "cpu_name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz",
+	                "ram_free": 5351420, 
+	                "scan_id": 565830616, 
+	                "agent_id": "002", 
+	                "ram_total": 6291000, 
+	                "board_serial": "0", 
+	                "scan_time": "2018/02/12 16:09:45", 
+	                "cpu_mhz": 1796, 
+	                "cpu_name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz", 
 	                "cpu_cores": 1
-	            },
+	            }, 
 	            {
-	                "ram_free": 2374568,
-	                "scan_id": 263523550,
-	                "agent_id": "001",
-	                "ram_total": 2988700,
-	                "board_serial": "0",
-	                "scan_time": "2018/02/12 16:47:29",
-	                "cpu_mhz": 1795.917,
-	                "cpu_name": " Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz",
+	                "ram_free": 2374568, 
+	                "scan_id": 263523550, 
+	                "agent_id": "001", 
+	                "ram_total": 2988700, 
+	                "board_serial": "0", 
+	                "scan_time": "2018/02/12 16:47:29", 
+	                "cpu_mhz": 1795.917, 
+	                "cpu_name": " Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz", 
 	                "cpu_cores": 1
-	            },
+	            }, 
 	            {
-	                "ram_free": 950384,
-	                "scan_id": 22856332,
-	                "agent_id": "000",
-	                "ram_total": 1883804,
-	                "board_serial": "0",
-	                "scan_time": "2018/02/13 00:24:30",
-	                "cpu_mhz": 1795.917,
-	                "cpu_name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz",
+	                "ram_free": 950384, 
+	                "scan_id": 22856332, 
+	                "agent_id": "000", 
+	                "ram_total": 1883804, 
+	                "board_serial": "0", 
+	                "scan_time": "2018/02/13 00:24:30", 
+	                "cpu_mhz": 1795.917, 
+	                "cpu_name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz", 
 	                "cpu_cores": 1
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -3931,20 +3832,20 @@ Returns the agent's OS info
 
 	{
 	    "data": {
-	        "sysname": "centos",
+	        "sysname": "centos", 
 	        "scan": {
-	            "id": 1363438688,
+	            "id": 1363438688, 
 	            "time": "2018/02/12 23:21:10"
-	        },
-	        "hostname": "node01",
-	        "version": "3.10.0-514.el7.x86_64",
-	        "architecture": "x86_64",
-	        "release": "Linux",
+	        }, 
+	        "hostname": "node01", 
+	        "version": "3.10.0-514.el7.x86_64", 
+	        "architecture": "x86_64", 
+	        "release": "Linux", 
 	        "os": {
-	            "version": "7 (Core)",
+	            "version": "7 (Core)", 
 	            "name": "CentOS Linux"
 	        }
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -3984,43 +3885,43 @@ Returns the agent's os info
 
 	{
 	    "data": {
-	        "totalItems": 3,
+	        "totalItems": 3, 
 	        "items": [
 	            {
-	                "scan_id": 1857569867,
-	                "os_name": "Microsoft Windows 7 Home Premium",
-	                "scan_time": "2018/02/12 16:09:44",
-	                "hostname": "WAZUH-PC",
-	                "os_version": "6.1.7601",
-	                "architecture": "i686",
+	                "scan_id": 1857569867, 
+	                "os_name": "Microsoft Windows 7 Home Premium", 
+	                "scan_time": "2018/02/12 16:09:44", 
+	                "hostname": "WAZUH-PC", 
+	                "os_version": "6.1.7601", 
+	                "architecture": "i686", 
 	                "agent_id": "002"
-	            },
+	            }, 
 	            {
-	                "sysname": "centos",
-	                "scan_id": 686817457,
-	                "os_name": "CentOS Linux",
-	                "version": "3.10.0-514.el7.x86_64",
-	                "os_version": "7 (Core)",
-	                "scan_time": "2018/02/13 00:24:30",
-	                "release": "Linux",
-	                "hostname": "node01",
-	                "agent_id": "000",
+	                "sysname": "centos", 
+	                "scan_id": 686817457, 
+	                "os_name": "CentOS Linux", 
+	                "version": "3.10.0-514.el7.x86_64", 
+	                "os_version": "7 (Core)", 
+	                "scan_time": "2018/02/13 00:24:30", 
+	                "release": "Linux", 
+	                "hostname": "node01", 
+	                "agent_id": "000", 
 	                "architecture": "x86_64"
-	            },
+	            }, 
 	            {
-	                "sysname": "centos",
-	                "scan_id": 1004984843,
-	                "os_name": "CentOS Linux",
-	                "version": "3.10.0-514.el7.x86_64",
-	                "os_version": "7 (Core)",
-	                "scan_time": "2018/02/12 16:47:29",
-	                "release": "Linux",
-	                "hostname": "manager",
-	                "agent_id": "001",
+	                "sysname": "centos", 
+	                "scan_id": 1004984843, 
+	                "os_name": "CentOS Linux", 
+	                "version": "3.10.0-514.el7.x86_64", 
+	                "os_version": "7 (Core)", 
+	                "scan_time": "2018/02/12 16:47:29", 
+	                "release": "Linux", 
+	                "hostname": "manager", 
+	                "agent_id": "001", 
 	                "architecture": "x86_64"
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -4064,30 +3965,30 @@ Returns the agent's packages info
 
 	{
 	    "data": {
-	        "totalItems": 372,
+	        "totalItems": 372, 
 	        "items": [
 	            {
-	                "scan_id": 1516906568,
-	                "version": "1.1.0-1.el7",
-	                "vendor": "CentOS",
-	                "description": "ALSA tools for uploading firmware to some soundcards",
-	                "name": "alsa-tools-firmware",
-	                "format": "rpm",
-	                "scan_time": "2018/02/12 23:21:10",
+	                "scan_id": 1516906568, 
+	                "version": "1.1.0-1.el7", 
+	                "vendor": "CentOS", 
+	                "description": "ALSA tools for uploading firmware to some soundcards", 
+	                "name": "alsa-tools-firmware", 
+	                "format": "rpm", 
+	                "scan_time": "2018/02/12 23:21:10", 
 	                "architecture": "x86_64"
-	            },
+	            }, 
 	            {
-	                "scan_id": 1516906568,
-	                "version": "2.6.5-3.el7",
-	                "vendor": "CentOS",
-	                "description": "User space tools for 2.6 kernel auditing",
-	                "name": "audit",
-	                "format": "rpm",
-	                "scan_time": "2018/02/12 23:21:10",
+	                "scan_id": 1516906568, 
+	                "version": "2.6.5-3.el7", 
+	                "vendor": "CentOS", 
+	                "description": "User space tools for 2.6 kernel auditing", 
+	                "name": "audit", 
+	                "format": "rpm", 
+	                "scan_time": "2018/02/12 23:21:10", 
 	                "architecture": "x86_64"
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -4127,31 +4028,34 @@ Returns the agent's packages info
 
 	{
 	    "data": {
-	        "totalItems": 2,
+	        "totalItems": 2, 
 	        "items": [
 	            {
-	                "scan_id": 373751880,
-	                "version": "1:1.4.0-12.el7",
-	                "vendor": "CentOS",
-	                "description": "Wifi plugin for NetworkManager",
-	                "name": "NetworkManager-wifi",
-	                "format": "rpm",
-	                "scan_time": "2018/02/13 00:24:30",
-	                "architecture": "x86_64",
+	                "scan_id": 373751880, 
+	                "version": "1:1.4.0-12.el7", 
+	                "vendor": "CentOS", 
+	                "description": "Wifi plugin for NetworkManager", 
+	                "name": "NetworkManager-wifi", 
+	                "format": "rpm", 
+	                "scan_time": "2018/02/13 00:24:30", 
+	                "architecture": "x86_64", 
 	                "agent_id": "000"
-	            },
+	            }, 
 	            {
-	                "scan_id": 373751880,
-	                "version": "1:1.4.0-12.el7",
-	                "vendor": "CentOS",
-	                "description": "NetworkManager curses-based UI",
-	                "name": "NetworkManager-tui",
-	                "format": "rpm",
-	                "scan_time": "2018/02/13 00:24:30",
-	                "architecture": "x86_64",
+	                "scan_id": 373751880, 
+	                "version": "1:1.4.0-12.el7", 
+	                "vendor": "CentOS", 
+	                "description": "NetworkManager curses-based UI", 
+	                "name": "NetworkManager-tui", 
+	                "format": "rpm", 
+	                "scan_time": "2018/02/13 00:24:30", 
+	                "architecture": "x86_64", 
 	                "agent_id": "000"
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
+
+
+
