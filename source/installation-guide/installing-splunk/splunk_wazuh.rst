@@ -29,7 +29,7 @@ Installation
 
     In the case you have an Indexer cluster, first delete `indexes.conf` and `inputs.conf` files for avoiding to create an index in the current machine, install the app on the Search Head machine and configure a 'wazuh' index following the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.0/Indexer/useforwarders>`_ .
 
-  - CLI mode:
+  a. CLI mode:
 
     .. code-block:: console
 
@@ -39,7 +39,7 @@ Installation
 
       # /opt/splunk/bin/splunk restart
 
-  - Web GUI:
+  b. Web GUI:
 
     .. code-block:: console
 

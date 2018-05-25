@@ -53,7 +53,6 @@ Set up data forwarding
 
   - ``INDEXER_IP``: Splunk Indexer location.
   - ``INDEXER_PORT``: by default on port 9997.
-  - Remember that the default Splunk username/password are ``admin/changeme``
 
 2. Restart Splunk Forwarder service:
 

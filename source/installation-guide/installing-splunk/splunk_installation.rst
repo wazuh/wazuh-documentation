@@ -14,10 +14,9 @@ Splunk Indexer installation
 
 This component will work receiving the data flow streamed by a Forwarder and store it in a Splunk index.
 
-
 1. Download Splunk v7.1.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_. 
 
-  .. note:: As Splunk is not open source software it requires to get a license for working with it, so an enterprise license may be purchased and also a free trial license can be adquired.
+  .. note:: As Splunk is not open source software it requires the user to be registered and to get a license for working with it, so an enterprise license may be purchased and also a free trial license can be adquired.
 
 2. Install the already downloaded Splunk v7.1.0 package:
 
@@ -39,6 +38,10 @@ This component will work receiving the data flow streamed by a Forwarder and sto
 
     # /opt/splunk/bin/splunk start
 
+  .. note:: At this point, after accepting the license a new password will be required to be inserted for the user 'admin'.
+
+  After this step Splunk Web service will be listening at the 8000 port, so you can browse to http://<your-machine-ip>:8000 in order to access the Web GUI.
+
 4. Optional. If you additionally want Splunk service to start at boot time, please execute the following command:
 
   .. code-block:: console
@@ -51,7 +54,6 @@ Splunk Forwarder installation
 A Forwarder component is required in order to send alerts to the Indexer, so this instance will have to be installed where the Wazuh manager is.
 
 1. Download Splunk Forwarder v7.1.0 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
-
 
 2. Proceed to install it with the following command depending on your operating system:
 
