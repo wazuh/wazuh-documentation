@@ -15,11 +15,11 @@ Wazuh app for Splunk offers an UI to visualize Wazuh alerts and API data. Wazuh 
 Installation
 ------------
 
-1. Download the latest stable version from the Splunk app for Wazuh `repository <https://github.com/wazuh/wazuh-splunk/releases/>`_. You can also download it by CLI with the following command:
+1. Download the latest stable version from the Splunk app for Wazuh package repository. You can do it by ``curl`` with the following command:
 
  .. code-block:: console
 
-      curl -o SplunkAppForWazuh.tar.gz https://github.com/wazuh/wazuh-splunk/releases/download/v3.2.3-7.1.0/v3.2.3-7.1.0.tar.gz
+      curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.2.3_7.1.0.tar.gz
 
 2. Install the Splunk app for Wazuh:
 
