@@ -15,15 +15,15 @@ Configuring a cluster
 
 Introduction
 ------------
-The cluster provides horizontal scalability and high availability to Wazuh. It allows several managers to work as if they were one and multiplies the ability to process events from the agents. It also provides high availability, the agents will always have a manager to report to.
+The cluster extends the managers into a cluster of managers to enhance the availability and scalability of the service.
 
 Reasons for using a cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Scalability
-~~~~~~~~~~~
+Horizontal scalability
+~~~~~~~~~~~~~~~~~~~~~~
 
-Our cluster supports **horizontal scalability**. It multiplies Wazuh's event processing capacity and allows to have thousands of agents reporting. It is very simple to add a new node to the cluster, it is just necessary to add the master's address to the node's configuration and that's it. This task is very easy to automate, giving the user the ability to implement auto scaling.
+It multiplies Wazuh's event processing capacity and allows to have thousands of agents reporting. Adding a new node to the cluster is very simple (just add the master's address in the configuration) and it can be automated easily, giving the user the ability to implement auto-scaling.
 
 High availability
 ~~~~~~~~~~~~~~~~~
@@ -50,7 +50,7 @@ The master node centralizes and coordinates client nodes, making sure the critic
 
 .. warning::
 
-    The master doesn't send its :doc:`local configuration file <../reference/index>` to the clients. If the configuration is changed in the master node, it should be changed manually in the clients. When synchronizing the configuration manually, take care of not overwriting the cluster section in the local configuration of each client.
+    The master doesn't send its :doc:`local configuration file <../reference/index>` to the clients. If the configuration is changed in the master node, it should be changed manually in the clients. Take care of not overwriting the cluster section in the local configuration of each client.
 
 .. warning::
     When rules, decoders or CDB lists are synchronized, the client nodes are not restarted. They must be restarted manually in order to apply the received configuration.
@@ -159,7 +159,7 @@ Although all nodes can have an API installed, the Wazuh Kibana app must be confi
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If you want your agents to report to the cluster, the ideal setup is to use a load balancer. The following configuration is necessary to do so:
+The best setup to report agents' events to a cluster is a load balancer. Keep in mind the following considerations:
 
 * **Use TCP protocol instead of UDP**. This is necessary since permanent connections and stickiness are needed in order to make sure agent data is consistent. To use the TCP protocol, you should configure both your :ref:`agents <server_protocol>` and your :ref:`nodes <manager_protocol>`.
 
@@ -299,7 +299,7 @@ The integrity of each file is calculated using its MD5 checksum and its modifica
 Cluster management
 ------------------
 
-The **cluster_control** tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster. This information can also be obtained using the :ref:`API calls reference <cluster_api>`.
+The **cluster_control** tool allows you to obtain real-time information about the cluster health, connected nodes and the agents reporting to the cluster. This information can also be obtained using the :doc:`API requests <../api/reference>`.
 
 For example, the following snippet shows the connected nodes in the cluster:
 
@@ -346,4 +346,4 @@ This information can also be obtained using the Restful API:
        }
     }
 
-If you want to see more examples and check all its options, refer to :doc:`the cluster_control manual <../reference/tools/cluster_control>` or the :ref:`API calls reference <cluster_api>`.
+If you want to see more examples and check all its options, refer to :doc:`the cluster_control manual <../reference/tools/cluster_control>` or the :doc:`API requests <../api/reference>`.
