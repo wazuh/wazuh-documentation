@@ -15,12 +15,21 @@ This section shows the most relevant improvements and fixes in version 3.2.3. Mo
 GDPR Support
 ------------
 
-The new **General Data Protection Regulation** takes effect in the European Union on 25 May 2018. Accordingly, Wazuh has been upgraded to provide GDPR compliance.
-Taking advantage of Wazuh features such as File Integrity or Policy Monitoring, it helps with most technical requirements.
+The `General Data Protection Regulation <https://www.eugdpr.org/>`_ took effect on 25th May 2018. Wazuh helps with most technical requirements, taking advantage of features such as File Integrity or Policy monitoring. In addition, the entire Ruleset has been mapped following the GDPR regulation, enriching all the alerts related to this purpose.
 
-In addition to that, the entire Ruleset has been mapped following the GDPR regulation, enriching all the alerts related to this purpose.
+You can read more information about the GDPR regulation and how Wazuh faces it on the this section: :ref:`gdpr`.
 
-You can read more information about the GDPR regulation and how Wazuh faces it on the dedicated section: :ref:`gdpr`.
+
+Wazuh cluster
+-------------
+
+This version fixes several performance issues (like CPU usage) and synchronization errors. The communications and synchronization algorithm have been redesigned in order to improve the cluster performance and reliability.
+
+
+Now, the client nodes initialize the communication and only the master node is included in the client configuration.
+
+The number of daemons has been reduced to one: ``wazuh-clusterd``.
+
 
 Core improvements
 -----------------
@@ -31,21 +40,15 @@ These are the most relevant changes in the Wazuh core:
 - The agent limit has been increased to ``14000`` by default, improving the manager availability in large environments.
 - More internal bugs reported by the community have been fixed for this version.
 
-Wazuh cluster
--------------
-
-The communications and synchronization algorithm have been redesigned in order to improve the cluster performance and reliability. Now, the client nodes initialize the communication and it's just necessary to specify the master node in the client configuration.
-
-The number of daemons has been reduce to one: ``wazuh-clusterd``.
 
 Wazuh app: Kibana
 -----------------
 
-The Wazuh app for Kibana also got several improvements and additions for this new version. Now you can execute Wazuh API calls on the new **Dev tools** tab, just like you can execute Elasticsearch calls on its own tab in Kibana.
+The **Dev tools** tab has been added in this version. You can use it to interact with the managers by API requests.
 
-Also, along with the GDPR compliance, the app now has a tab for visualizing these alerts. Similar to PCI DSS, you can see a description of the GDPR requirements and the latest alerts from your manager.
+Similar to PCI DSS, a new tab for **GDPR** is included in order to visualize the related alerts.
 
-Other relevant changes in the Wazuh app are the following:
+Other relevant changes in the Wazuh app are:
 
 - New button for downloading lists on a *CSV* format. Currently available for the Ruleset, Logs and Groups sections on the Manager tab and also the Agents tab.
 - New option on the configuration file for enabling or disabling the ``wazuh-monitoring`` indices creation/visualization.
