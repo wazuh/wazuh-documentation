@@ -9,8 +9,7 @@ The European Union's **General Data Protection Regulation (GDPR)** has been draw
 
 To this end, it seeks to enhance the privacy of such data and to reform the way in which EU organizations approach data privacy. 
 
-* Wazuh for GDPR White Paper `(PDF) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_
-* Wazuh for GDPR Guide `(PDF) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_ `(Excel) <http://ossec.wazuh.com/ruleset/GDPR_Guide.xlsx>`_
+* Wazuh for GDPR White Paper `(PDF) <https://wazuh.com/resources/Wazuh_GDPR_White_Paper.pdf>`_
 
 Introduction
 ------------
