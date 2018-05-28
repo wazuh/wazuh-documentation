@@ -2,24 +2,21 @@
 
 .. _gdpr_II:
 
-GDPR II
-=======
+GDPR II, Principles <gdpr_II>
+=============================
 
-In this chapter the requirements concerning the basic principles of the regulation are mentioned, having as main purpose the personal data and how they are to be processed. 
+This chapter describes requirements concerning GDPR basic principles, mainly for personal data and how to process it, but also regarding shared data.
 
 Chapter II, Article 5 Head 1(f)
 -------------------------------
 
-**Article 5**  Principles relating to processing of personal data. **Head 1(f)**. processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures ('integrity and confidentiality').
+**Article 5**  "Principles relating to processing of personal data. **Head 1(f)**. processed in a manner that ensures appropriate security of the personal data, including protection against unauthorised or unlawful processing and against accidental loss, destruction or damage, using appropriate technical or organisational measures ('integrity and confidentiality')."
 
-Ensure the ongoing confidentiality, integrity, availability and resilience of processing systems and services, verifying its modifications, accesses, locations and guarantee the safety of them. File sharing protection and file sharing technologies that meet the requirements of data protection. 
+The article ensures the ongoing confidentiality, integrity, availability and resilience of processing systems and services, verifying its modifications, accesses, locations while guaranteeing the safety of them. File sharing protection and file sharing technologies that meet data protection requirements. 
 
-One of the solutions that Wazuh offers us is file integrity monitoring. Wazuh monitors the file system, identifying changes in content, permissions, ownership, and attributes of files that you need to keep an eye on.
+Wazuh’s File integrity monitoring (FIM) helps on this task by watching specific files and triggering alerts when these are modified. The component responsible for this task is called `Syscheck <https://documentation.wazuh.com/3.x/user-manual/reference/ossec-conf/syscheck.html>`_. It stores the cryptographic checksum and other attributes from file or Windows registry keys and regularly compares it to the file's current checksum.
 
-Wazuh’s File integrity monitoring (FIM) watches specified files triggering alerts when these files are modified. The component responsible for this task is called `Syscheck <http://ossec-docs.readthedocs.org/en/latest/manual/syscheck/index.html>`_. This component stores the cryptographic checksum and other attributes of a known good file or Windows registry key and regularly compares it to the current file being used by the system, watching for changes, being possible multiple configurations, for example to do the monitoring in real time, in intervals of time, only on specific objectives, etc. In the same way that personal data files are monitored, Wazuh can monitor the sharing files to make sure they are protected.
-
-
-Here are some examples of OSSEC rules tagged gdpr_II_5.1.f:
+Here are some Wazuh rules examples tagged as gdpr_II_5.1.f:
 
 .. code-block:: xml
 
@@ -41,7 +38,7 @@ Here are some examples of OSSEC rules tagged gdpr_II_5.1.f:
 Use cases
 ^^^^^^^^^
 
-In this example, we have configured Wazuh to detect changes in the file ``/root/personal_data``.
+In this example we configured Wazuh to detect changes in ``/root/personal_data``.
 
 .. code-block:: xml
 
@@ -49,7 +46,7 @@ In this example, we have configured Wazuh to detect changes in the file ``/root/
         <directories check_all="yes" report_changes="yes">/root/personal_data</directories>
     </syscheck>
 
-So, when we modify the file, Wazuh generates an alert.
+When we modify the file Wazuh generates an alert.
 
 .. code-block:: console
 
