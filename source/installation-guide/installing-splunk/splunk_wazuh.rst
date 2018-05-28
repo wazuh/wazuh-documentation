@@ -23,7 +23,7 @@ Installation
 
 2. Install the Splunk app for Wazuh:
 
-  The app uses the ``/SplunkAppForWazuh/default/indexes.conf`` file to create an index named 'wazuh' and ``/SplunkAppForWazuh/default/inputs.conf`` file to listen to forwarded data on port 9997 on the machine where it's already installed. 
+  The app uses the ``/SplunkAppForWazuh/default/indexes.conf`` file to create an index named 'wazuh' and ``/SplunkAppForWazuh/default/inputs.conf`` file to listen to forwarded data on port 9997 on the machine where it's already installed.
 
   .. warning::
 
@@ -33,7 +33,7 @@ Installation
 
     .. code-block:: console
 
-      # /opt/splunk/bin/splunk install app v3.2.3-7.1.0.tgz
+      # /opt/splunk/bin/splunk install app SplunkAppForWazuh.tar.gz
 
     .. code-block:: console
 
