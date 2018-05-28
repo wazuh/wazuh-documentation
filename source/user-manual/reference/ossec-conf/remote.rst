@@ -48,7 +48,7 @@ Specifies the port to use to listen for events.
 | **Allowed values** | Any port number from 1 to 65535 |
 +--------------------+---------------------------------+
 
-
+.. _manager_protocol:
 
 protocol
 ^^^^^^^^^^^

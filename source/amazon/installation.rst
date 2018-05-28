@@ -47,7 +47,7 @@ Wazuh will need a user with permissions to pull the CloudTrail log data from you
 
 1. Create new user:
 
-Navigate to Services > IAM > clusters
+Navigate to Services > IAM > Users
 
 .. thumbnail:: ../images/aws/aws-user.png
     :align: center
@@ -181,8 +181,8 @@ Plugin configuration
 
     # /var/ossec/bin/ossec-control restart
 
-Test the integration
---------------------
+Testing the integration
+-----------------------
 
 After configuring the module successfully you can expect to see the following log messages in your agent log file: ``/var/ossec/logs/ossec.log``
 
@@ -201,7 +201,7 @@ After configuring the module successfully you can expect to see the following lo
     2018/01/12 18:49:11 wazuh-modulesd:aws-cloudtrail: INFO: Fetching logs finished.
 
 Troubleshooting
-----------------
+---------------
 
 1. Wrong credentials:
 
