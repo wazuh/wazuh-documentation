@@ -90,7 +90,7 @@ Follow these steps to deploy a Wazuh cluster:
 
     .. code-block:: console
 
-      # apt install python-cryptography
+      # apt-get install python-cryptography
 
 2. Set the cluster configuration
 
