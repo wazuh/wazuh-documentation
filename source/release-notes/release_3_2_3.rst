@@ -30,7 +30,7 @@ Now, the client nodes initialize the communication and only the master node is i
 
 The number of daemons has been reduced to one: ``wazuh-clusterd``.
 
-You can check our documentation for Wazuh cluster in the following `link <http://192.168.0.128/user-manual/manager/wazuh-cluster.html>`_ .
+You can check our documentation for Wazuh cluster in the following `link <https://documentation.wazuh.com/current/user-manual/manager/wazuh-cluster.html>`_ .
 
 
 Core improvements
@@ -38,7 +38,7 @@ Core improvements
 
 These are the most relevant changes in the Wazuh core:
 
-- `Vulnerability-detector <http://192.168.0.128/user-manual/capabilities/vulnerability-detection.html>`_  continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
+- `Vulnerability-detector <https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection.html>`_  continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
 - The agent limit has been increased to ``14000`` by default, improving the manager availability in large environments.
 - More internal bugs reported by the community have been fixed for this version.
 
