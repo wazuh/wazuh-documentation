@@ -163,7 +163,7 @@ The best setup to report agents' events to a cluster is a load balancer. Keep in
 
 * **It is recommended to use TCP protocol instead of UDP**. Permanent connections and stickiness are needed in order to make sure agent data is consistent. In order to use the TCP protocol, you should configure both your :ref:`agents <server_protocol>` and your :ref:`nodes <manager_protocol>`.
 
-* **Disable the option**  `use_source_ip <https://documentation.wazuh.com/3.x/user-manual/reference/ossec-conf/auth.html#use-source-ip>`_  **in your authd configuration**. When using a LB, the cluster nodes will only see the LB's IP and no the agents'. This will make the agents unable to connect to the cluster.
+* **Disable the option**  :ref:`use_source_ip <use_source_ip>` **in your authd configuration**. When using a LB, the cluster nodes will only see the LB's IP and no the agents'. This will make the agents unable to connect to the cluster.
 
 
 .. _run-cluster-centos6:

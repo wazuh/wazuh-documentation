@@ -30,7 +30,7 @@ Now, the client nodes initialize the communication and only the master node is i
 
 The number of daemons has been reduced to one: ``wazuh-clusterd``.
 
-You can check our documentation for Wazuh cluster in the following `link <https://documentation.wazuh.com/current/user-manual/manager/wazuh-cluster.html>`_ .
+You can check our documentation for Wazuh cluster in the following :doc:`link <../user-manual/manager/wazuh-cluster>` .
 
 
 Core improvements
@@ -38,14 +38,14 @@ Core improvements
 
 These are the most relevant changes in the Wazuh core:
 
-- `Vulnerability-detector <https://documentation.wazuh.com/current/user-manual/capabilities/vulnerability-detection.html>`_  continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
+- :doc:`Vulnerability-detector <../user-manual/capabilities/vulnerability-detection>` continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
 - The agent limit has been increased to ``14000`` by default, improving the manager availability in large environments.
 - More internal bugs reported by the community have been fixed for this version.
 
 Wazuh app for Splunk
 -----------------
 
-New section describing the installation process for the `Wazuh app for Splunk <https://documentation.wazuh.com/current/installation-guide/installing-splunk/index.html>`_ 
+New section describing the installation process for the :doc:`Wazuh app for Splunk <../installation-guide/installing-splunk/index>`
 
 
 Wazuh app for Kibana
