@@ -177,7 +177,7 @@ The additional fields configured above would appear in the resulting event as be
 .. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key be defined by using a symbol prior to the key name as in *@source*.
 
 target
-^^^^^^^^^
+^^^^^^
 
 Target specifies the name of the socket where the output will be redirected. The socket must be defined previously to use it with this option.
 
