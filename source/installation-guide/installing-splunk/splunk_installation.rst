@@ -5,20 +5,20 @@
 Splunk installation
 ===================
 
-This document will guide you through the simple distributed architecture installation process according to the :ref:`previous page <installation_splunk>` schema, where an Indexer instance receives Wazuh alerts from a Forwarder machine.
+This document will guide you through the simple distributed architecture installation process according to the :ref:`previous page <installation_splunk>` schema.
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
 Splunk Indexer installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This component will work receiving the data flow streamed by a Forwarder and store it in a Splunk index.
+This component works receiving the data flow streamed by a Forwarder and stores it in a Splunk index.
 
-1. Download Splunk v7.1.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_. 
+1. Download Splunk v7.1.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
-  .. note:: As Splunk is not open source software it requires the user to be registered and to get a license for working with it, so an enterprise license may be purchased and also a free trial license can be adquired.
+  .. note:: Splunk is not open source software and it requires a registered user and license to work. You can also use a free trial license.
 
-2. Install the already downloaded Splunk v7.1.0 package:
+2. Install the Splunk v7.1.0 package:
 
   a) For RPM based distributions:
 
@@ -32,15 +32,15 @@ This component will work receiving the data flow streamed by a Forwarder and sto
 
     # dpkg --install splunk-enterprise-package.deb
 
-3. Ensure Splunk v7.1.0 is already installed in ``/opt/splunk`` and start the service:
+3. Ensure Splunk v7.1.0 is installed in ``/opt/splunk`` and start the service:
 
   .. code-block:: console
 
     # /opt/splunk/bin/splunk start
 
-  .. note:: At this point, after accepting the license a new password will be required to be inserted for the user 'admin'.
+  .. note:: You will be prompted for a password for the 'admin' user.
 
-  After this step Splunk Web service will be listening at the 8000 port, so you can browse to http://<your-machine-ip>:8000 in order to access the Web GUI.
+  After this step the Splunk Web service will be listening to port 8000. You can browse http://<your-instance-ip>:8000 in order to access the Web GUI.
 
 4. Optional. If you additionally want Splunk service to start at boot time, please execute the following command:
 
@@ -51,11 +51,11 @@ This component will work receiving the data flow streamed by a Forwarder and sto
 Splunk Forwarder installation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A Forwarder component is required in order to send alerts to the Indexer, so this instance will have to be installed where the Wazuh manager is.
+A Forwarder is required in order to send alerts to the Indexer. This component will be installed in the manager instance.
 
 1. Download Splunk Forwarder v7.1.0 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
 
-2. Proceed to install it with the following command depending on your operating system:
+2. Install it with the following command depending on your operating system:
 
   a) For RPM based distributions:
 
@@ -69,7 +69,7 @@ A Forwarder component is required in order to send alerts to the Indexer, so thi
 
     # dpkg --install splunkforwarder-package.deb
 
-3. Ensure Splunk Forwarder v7.1.0 is already installed in ``/opt/splunkforwarder``.
+3. Ensure Splunk Forwarder v7.1.0 is installed in ``/opt/splunkforwarder``.
 
 Useful Splunk CLI commands can be found in the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.0/Admin/CLIadmincommands>`_ .
 

@@ -153,7 +153,7 @@ Follow these steps to deploy a Wazuh cluster:
 Configuring the Wazuh Kibana App
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Although all nodes can have an API installed, the Wazuh Kibana app must be configured with the master's API because the master node is the one that has all the information about the agents and the cluster.
+Although all nodes can have an API installed, the Wazuh Kibana app must be configured with the master node API because the master node is the one that has all the information about the agents and the cluster.
 
 
 Pointing agents to the cluster with a load balancer
@@ -161,9 +161,9 @@ Pointing agents to the cluster with a load balancer
 
 The best setup to report agents' events to a cluster is a load balancer. Keep in mind the following considerations:
 
-* **Use TCP protocol instead of UDP**. This is necessary since permanent connections and stickiness are needed in order to make sure agent data is consistent. To use the TCP protocol, you should configure both your :ref:`agents <server_protocol>` and your :ref:`nodes <manager_protocol>`.
+* **It is recommended to use TCP protocol instead of UDP**. Permanent connections and stickiness are needed in order to make sure agent data is consistent. In order to use the TCP protocol, you should configure both your :ref:`agents <server_protocol>` and your :ref:`nodes <manager_protocol>`.
 
-* **Disable the option** ``use_source_ip`` **in your authd configuration**. When using a LB, the cluster nodes will only see the LB's IP and no the agents'. This will make the agents unable to connect to the cluster.
+* **Disable the option**  :ref:`use_source_ip <auth_use_source_ip>` **in your authd configuration**. When using a LB, the cluster nodes will only see the LB's IP and no the agents'. This will make the agents unable to connect to the cluster.
 
 
 .. _run-cluster-centos6:
