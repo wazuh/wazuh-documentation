@@ -57,10 +57,11 @@ Defines the TCP port number for listening to connections.
 | **Allowed values** | 0 - 65535           |
 +--------------------+---------------------+
 
+.. _auth_use_source_ip:
 
 use_source_ip
 ^^^^^^^^^^^^^
-.. _use_source_ip:
+
 Toggles the use of the client's source IP address or the use of "any" to add an agent.
 
 +--------------------+---------------------+

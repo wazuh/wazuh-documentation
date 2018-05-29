@@ -14,7 +14,7 @@ Splunk Indexer installation
 
 This component works receiving the data flow streamed by a Forwarder and stores it in a Splunk index.
 
-1. Download Splunk v7.1.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_. 
+1. Download Splunk v7.1.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
   .. note:: Splunk is not open source software and it requires a registered user and license to work. You can also use a free trial license.
 
@@ -53,7 +53,7 @@ Splunk Forwarder installation
 
 A Forwarder is required in order to send alerts to the Indexer. This component will be installed in the manager instance.
 
-1. Download Splunk Forwarder v7.1.0 package from `its official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
+1. Download Splunk Forwarder v7.1.0 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
 
 2. Install it with the following command depending on your operating system:
 
