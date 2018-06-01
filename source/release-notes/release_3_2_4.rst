@@ -19,7 +19,7 @@ Wazuh minor fixes
 
 Most of the bug fixes in this release are fairly minor, but a few fixes deserve special mention:
 
- - `<queue_size>` setting was not properly parsed by `maild` cuasing the termination of the process.
+ - ``<queue_size>`` setting was not properly parsed by `maild` cuasing the termination of the process.
  - Python 3 incompatibilities in the framework that may affect the correct behavior of the cluster.
 
 Wazuh app for Splunk
