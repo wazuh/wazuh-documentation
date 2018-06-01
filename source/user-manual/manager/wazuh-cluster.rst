@@ -150,6 +150,14 @@ Follow these steps to deploy a Wazuh cluster:
         # systemctl restart wazuh-manager
 
 
+.. _agent-registration-cluster:
+
+Agent registration in the cluster
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**All agents must be registered in the master node**. The master is responsible for replicating the new agent's information across all client nodes. If an agent is registered in a client node, it will be deleted by the master node.
+
+
 Configuring the Wazuh Kibana App
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
