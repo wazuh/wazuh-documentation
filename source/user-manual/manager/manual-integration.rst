@@ -44,6 +44,26 @@ Integrations are configured in the ``etc/ossec.conf`` file which is located insi
 Integration with Slack
 ----------------------
 
+In order to make the Slack integration work, we need to install the ``python-requests`` package:
+
+    a) For RPM systems:
+
+    .. code-block:: console
+
+        # yum install python-requests
+
+    b) For Debian systems:
+
+    .. code-block:: console
+
+        # apt-get install python-requests
+
+    b) Using the Python `pip` tool:
+
+    .. code-block:: console
+
+        # pip install requests
+
 .. code-block:: xml
 
     <integration>
