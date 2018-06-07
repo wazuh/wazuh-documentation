@@ -101,7 +101,7 @@ Installing Wazuh API
 
   .. code-block:: bash
 
-	 $ curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+	 $ curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
 
   and then, install nodejs:
 
