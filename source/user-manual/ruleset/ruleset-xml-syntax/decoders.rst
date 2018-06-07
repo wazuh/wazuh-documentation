@@ -17,6 +17,8 @@ Options
 - `order`_
 - `fts`_
 - `ftscomment`_
+- `plugin_decoder`_
+- `use_own_name`_
 
 decoder
 ^^^^^^^
@@ -38,7 +40,7 @@ The attributes list below defines a decoder.
 +-----------+---------------------------+
 | name      | The name of the decoder   |
 +-----------+---------------------------+
-| type      | The type of the decoder   |
+| type      | The type of the decoder   |   
 +-----------+---------------------------+
 | status    | The status of the decoder |
 +-----------+---------------------------+
@@ -53,7 +55,6 @@ It is used to link a subordinate codeblock to his parent.
 +--------------------+------------------+
 | **Allowed values** | Any decoder name |
 +--------------------+------------------+
-
 
 accumulate
 ^^^^^^^^^^^
@@ -70,40 +71,56 @@ Allow OSSEC to track events over multiple log messages based on a decoded id.
 | **Allowed values** | n/a |
 +--------------------+-----+
 
-
-
-
 program_name
 ^^^^^^^^^^^^^
 
 It defines the name of the program with which the decoder is associated.
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
-+--------------------+------------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                |
++--------------------+--------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_    |
++--------------------+--------------------------------------------------------------------+
 
 prematch
 ^^^^^^^^^
 
 It attempts to find a match within the log for the string defined.
 
-+--------------------+------------------------------------------------------------------+
-| **Default Value**  | n/a                                                              |
-+--------------------+------------------------------------------------------------------+
-| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
-+--------------------+------------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                |
++--------------------+--------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_    |
++--------------------+--------------------------------------------------------------------+
 
+The attribute below is optional, it allows to discard some of the content of the entry.
+
++--------------------+--------------------+
+| Attribute          | Value              |
++====================+====================+
+| **offset**         | after_regex        |
++--------------------+--------------------+
 
 regex
 ^^^^^^^
 
-+--------------------+---------------------------------------------------------------+
-| **Default Value**  | n/a                                                           |
-+--------------------+---------------------------------------------------------------+
-| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_ |
-+--------------------+---------------------------------------------------------------+
++--------------------+--------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                |
++--------------------+--------------------------------------------------------------------+
+| **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_      |
++--------------------+--------------------------------------------------------------------+
+
+The attribute below is optional, it allows to discard some of the content of the entry.
+
++--------------------+--------------------+
+| Attribute          | Value              |
++====================+====================+
+| **offset**         | after_regex        |
++                    +                    +
+|                    | after_parent       |
++                    +                    +
+|                    | after_prematch     |
++--------------------+--------------------+
 
 order
 ^^^^^^
@@ -147,7 +164,6 @@ fts
 
 It is used to designate a decoder as one in which the first time it matches the administrator would like to be alerted.
 
-
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+------------+-------------------------------------------------------+
@@ -189,4 +205,44 @@ It adds a comment to a decoder when `<fts>` tag is used.
 | **Default Value**  | n/a        |
 +--------------------+------------+
 | **Allowed values** | Any string |
++--------------------+------------+
+
+plugin_decoder
+^^^^^^^^^^^^^^^
+
+Set an specific decoder plugin.
+
++--------------------+--------------------------------------------------------------------+
+| **Default Value**  | n/a                                                                |
++--------------------+--------------------------------------------------------------------+
+| **Allowed values** | PF_Decoder                                                         |
++                    +--------------------------------------------------------------------+
+|                    | SymantecWS_Decoder                                                 |
++                    +--------------------------------------------------------------------+
+|                    | SonicWall_Decoder                                                  |
++                    +--------------------------------------------------------------------+
+|                    | OSSECAlert_Decoder                                                 |
++                    +--------------------------------------------------------------------+
+|                    | JSON_Decoder                                                       |
++--------------------+--------------------------------------------------------------------+
+
+The attribute below is optional, it allows to discard some of the content of the entry.
+
++--------------------+--------------------+
+| Attribute          | Value              |
++====================+====================+
+| **offset**         | after_parent       |
++                    +                    +
+|                    | after_prematch     |
++--------------------+--------------------+
+
+use_own_name
+^^^^^^^^^^^^^
+
+Allows to set the name of the child decoder from the name attribute instead of using the name of the parent decoder.
+
++--------------------+------------+
+| **Default Value**  | n/a        |
++--------------------+------------+
+| **Allowed values** | true       |
 +--------------------+------------+
