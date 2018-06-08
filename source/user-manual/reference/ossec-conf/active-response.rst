@@ -154,8 +154,7 @@ Sets timeouts in minutes for repeat offenders. This is a comma-separated list of
 +--------------------+-----------------------------+
 
 .. warning::
-     This option must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined
-     in the upper ``<active-response>`` section found in the configuration file.
+    This option must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
 
 ca_store
 ^^^^^^^^
