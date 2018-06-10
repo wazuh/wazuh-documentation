@@ -40,7 +40,7 @@ The attributes list below defines a decoder.
 +-----------+---------------------------+
 | name      | The name of the decoder   |
 +-----------+---------------------------+
-| type      | The type of the decoder   |   
+| type      | The type of the decoder   |
 +-----------+---------------------------+
 | status    | The status of the decoder |
 +-----------+---------------------------+
@@ -59,7 +59,7 @@ It is used to link a subordinate codeblock to his parent.
 accumulate
 ^^^^^^^^^^^
 
-Allow OSSEC to track events over multiple log messages based on a decoded id.
+Allow Wazuh to track events over multiple log messages based on a decoded id.
 
 .. note::
 
@@ -210,7 +210,7 @@ It adds a comment to a decoder when `<fts>` tag is used.
 plugin_decoder
 ^^^^^^^^^^^^^^^
 
-Set an specific decoder plugin.
+Use a specific plugin decoder to decode the incoming fields. It is useful for particular cases where it would be tricky to extract the fields by using regexes.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -226,7 +226,7 @@ Set an specific decoder plugin.
 |                    | JSON_Decoder                                                       |
 +--------------------+--------------------------------------------------------------------+
 
-The attribute below is optional, it allows to discard some of the content of the entry.
+The attribute below is optional, it allows to start the decode process after a particular point of the log.
 
 +--------------------+--------------------+
 | Attribute          | Value              |
@@ -235,6 +235,8 @@ The attribute below is optional, it allows to discard some of the content of the
 +                    +                    +
 |                    | after_prematch     |
 +--------------------+--------------------+
+
+An example of its use is described at the :doc:`JSON decoder <../json-decoder>` section.
 
 use_own_name
 ^^^^^^^^^^^^^
