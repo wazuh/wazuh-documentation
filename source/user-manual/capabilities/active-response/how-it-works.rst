@@ -52,12 +52,12 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 
 	Example::
 
-		<active‐response>
+		<active-response>
 		  <command>host‐deny</command>
 		  <location>local</location>
 		  <level>7</level>
 		  <timeout>600</timeout>
-		</active‐response>
+		</active-response>
 
 	In this example, the active response is configured to execute the command that was defined in the previous step. The *where* of the action is defined as the local host and the *when* is defined as any time the rule has a level higher than 6.  The timeout that was allowed in the command configuration is also defined in the above example.
 
