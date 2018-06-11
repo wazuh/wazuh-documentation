@@ -190,13 +190,13 @@ Target specifies the name of the socket where the output will be redirected. The
 log_format
 ^^^^^^^^^^
 
-This specifies the format of the log being read.
+This specifies the format of the log being read. **It is required field.**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
 
 +--------------------+-------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | syslog                                                                                                            |
+| **Default value**  | n/a                                                                                                               |
 +--------------------+----------------+--------------------------------------------------------------------------------------------------+
 | **Allowed values** | syslog         | Used for plain text files in a syslog-like format.                                               |
 +                    +----------------+--------------------------------------------------------------------------------------------------+
