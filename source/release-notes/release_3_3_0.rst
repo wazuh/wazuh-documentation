@@ -44,6 +44,5 @@ Wazuh app for Splunk
 --------------------
 
 - Added monitoring for collecting periodical agent status data.
-- New tab for GDPR alerts.
-- Added multi-index support.
+- Now the ``.wazuh`` index will be the default one if no one is selected.
 - Several bugfixes and performance improvements.
