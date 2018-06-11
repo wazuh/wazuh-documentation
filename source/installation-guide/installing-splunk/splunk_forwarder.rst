@@ -21,7 +21,7 @@ Configuring inputs
 
   .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/props.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/splunk/props.conf
 
 Configuring props
 ^^^^^^^^^^^^^^^^^
@@ -30,7 +30,7 @@ Configuring props
 
    .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/inputs.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/splunk/inputs.conf
 
 2. Set the Wazuh manager hostname:
 

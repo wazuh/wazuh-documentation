@@ -13,7 +13,6 @@ This section shows the most relevant improvements and fixes in version 3.2.4. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.2.4-6.2.4/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.2.4-7.1.1/CHANGELOG.md>`_
 
-
 Wazuh minor fixes
 -----------------
 
