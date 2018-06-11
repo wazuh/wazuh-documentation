@@ -16,24 +16,28 @@ This section shows the most relevant improvements and fixes in version 3.3.0. Mo
 Wazuh core
 ----------
 
-The log collector now supports socket connection for log output mirroring. This feature allows to send the same event to the Wazuh manager and to a 3rd party log processor like Fluent Bit. We have also introduced an event formatter in the log collector to build custom events, this allows to add some data into the event.
+Logcollector now supports socket connection for log output mirroring. This feature allows to send the same event to the Wazuh manager and to a 3rd party log processor like Fluent Bit. You can find more information :ref:`here <reference_ossec_socket>`.
 
-There's now static field substitution in rule comments. If a field doesn't exist or it's empty, the parameter will be deleted.
+We have also introduced an event formatter in the log collector to build custom events, this allows to add some data into the event. Read more about it on :ref:`this section <ruleset_json-decoder>`.
 
 As of this version, the timestamp of the alerts in JSON format will include milliseconds.
 
-The analysis engine includes new options for the plugin decoders to set the input offset with respect to the prematch expression or the parent decoder.
+The analysis engine includes new options for the :ref:`plugin decoders <decoders_syntax>` to set the input offset with respect to the prematch expression or the parent decoder.
 
-In addition to this, we've added numerous bugfixes and improvements for the Python framework, log collector, the Agentless daemon and the cluster.
+Plugin decoders and multi-regex decoders are some powerful features for log analysis. This version makes possible to use the together.
+
+The implementation of the Agentless daemon has been improved for enhanced security.
+
+Some other fixes and improvements have been introduced in the Framework and the Cluster.
 
 Wazuh API
 ---------
 
-We've added filters by group on the ``GET /agents`` call and by status on the ``GET /agents/groups/:group_id`` and ``GET /agents/groups/:group_id`` calls.
+The API now has filters by group on the ``GET /agents`` call and by status on the ``GET /agents/groups/:group_id`` and ``GET /agents/groups/:group_id`` calls.
 
 Now the ``limit`` parameter has been modified to retrieve all items using ``limit=0``.
 
-We've also added several bugfixes and performance improvements for the API.
+In addition to this, several bugfixes and performance improvements for the API have been added.
 
 Wazuh app for Kibana
 --------------------
