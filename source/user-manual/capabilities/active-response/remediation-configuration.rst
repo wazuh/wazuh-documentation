@@ -52,12 +52,12 @@ Command::
 
 Active response::
 
-  <active‐response>
-    <command>win_route‐null</command>
+  <active-response>
+    <command>win_route-null</command>
     <location>local</location>
     <level>8</level>
     <timeout>900</timeout>
-  </active‐response>
+  </active-response>
 
 
 Block an IP with PF

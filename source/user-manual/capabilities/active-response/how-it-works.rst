@@ -35,8 +35,8 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 	Example::
 
 		<command>
-		  <name>host‐deny</name>
-		  <executable>host‐deny.sh</executable>
+		  <name>host-deny</name>
+		  <executable>host-deny.sh</executable>
 		  <expect>srcip</expect>
 		  <timeout_allowed>yes</timeout_allowed>
 		</command>
@@ -53,7 +53,7 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 	Example::
 
 		<active-response>
-		  <command>host‐deny</command>
+		  <command>host-deny</command>
 		  <location>local</location>
 		  <level>7</level>
 		  <timeout>600</timeout>
