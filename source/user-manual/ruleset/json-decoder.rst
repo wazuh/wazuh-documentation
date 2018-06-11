@@ -123,6 +123,8 @@ The output of *ossec-logtest* from the above JSON record is as follows:
            Description: 'Suricata: Alert - ET WEB_SERVER Possible CVE-2014-6271 Attempt in HTTP Version Number'
     **Alert to be generated.
 
+.. _json_decoder_example_3.3:
+
 .. versionadded:: 3.3.0
 
 Lets see another example where we use the JSON decoder to extract a JSON included as a part of an incoming log. This is possible thanks to the new attribute ``offset`` introduced to the decoder options, that allows to discard some parts

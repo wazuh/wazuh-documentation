@@ -18,13 +18,11 @@ Wazuh core
 
 Logcollector now supports socket connection for log output mirroring. This feature allows to send the same event to the Wazuh manager and to a 3rd party log processor like Fluent Bit. You can find more information :ref:`here <reference_ossec_socket>`.
 
-We have also introduced an event formatter in the log collector to build custom events, this allows to add some data into the event. Read more about it on :ref:`this section <ruleset_json-decoder>`.
+The analysis engine includes new options for the :ref:`plugin decoders <decoders_syntax>` to set the input offset with respect to the prematch expression or the parent decoder. See an example about this on :ref:`this section <json_decoder_example_3.3>`. In addition, plugin decoders and multi-regex decoders can be used together.
+
+We have also introduced an event formatter in the log collector to build custom events, this allows to add some data into the event.
 
 As of this version, the timestamp of the alerts in JSON format will include milliseconds.
-
-The analysis engine includes new options for the :ref:`plugin decoders <decoders_syntax>` to set the input offset with respect to the prematch expression or the parent decoder.
-
-Plugin decoders and multi-regex decoders are some powerful features for log analysis. This version makes possible to use the together.
 
 The implementation of the Agentless daemon has been improved for enhanced security.
 
