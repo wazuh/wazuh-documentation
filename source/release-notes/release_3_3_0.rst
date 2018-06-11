@@ -16,20 +16,24 @@ This section shows the most relevant improvements and fixes in version 3.3.0. Mo
 Wazuh core
 ----------
 
-- Now *Logcollector* supports multiple socket output.
-- Allowed static field parameters insertiong on rules comments.
-- Included millisecond timing in timestamp to JSON events.
-- Added an option in *Analysisd* to set input event offset for plugin decoders.
-- Allow decoders mix plugin and multiregex children.
-- Several bugfixes and improvements for the Python framework, *Logcollector*, the Agentless daemon and the cluster.
+The log collector now supports socket connection for log output mirroring. This feature allows to send the same event to the Wazuh manager and to a 3rd party log processor like Fluent Bit. We have also introduced an event formatter in the log collector to build custom events, this allows to add some data into the event.
+
+There's now static field substitution in rule comments. If a field doesn't exist or it's empty, the parameter will be deleted.
+
+As of this version, the timestamp of the alerts in JSON format will include milliseconds.
+
+The analysis engine includes new options for the plugin decoders to set the input offset with respect to the prematch expression or the parent decoder.
+
+In addition to this, we've added numerous bugfixes and improvements for the Python framework, log collector, the Agentless daemon and the cluster.
 
 Wazuh API
 ---------
 
-- Added filter by group on the ``GET /agents`` call.
-- Added filter by status on the ``GET /agents/groups/:group_id`` and ``GET /agents/groups/:group_id`` calls.
-- The ``limit`` parameter has been modified to retrieve all items using ``limit=0``.
-- Several bugfixes and performance improvements.
+We've added filters by group on the ``GET /agents`` call and by status on the ``GET /agents/groups/:group_id`` and ``GET /agents/groups/:group_id`` calls.
+
+Now the ``limit`` parameter has been modified to retrieve all items using ``limit=0``.
+
+We've also added several bugfixes and performance improvements for the API.
 
 Wazuh app for Kibana
 --------------------
