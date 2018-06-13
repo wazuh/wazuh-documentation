@@ -26,6 +26,7 @@ Options
 - `label`_
 - `target`_
 - `log_format`_
+- `out_format`_
 
 location
 ^^^^^^^^
@@ -281,6 +282,39 @@ Sample Log message as analyzed by ossec-analysisd:
 .. code-block:: console
 
 	Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
+
+out_format
+^^^^^^^^^^
+
+.. versionadded:: 3.3.0
+
+This option allows formatting logs from Logcollector using field substitution.
+
+The syntax is:
+
+::
+
+	$(parameter)
+
+The list of available parameters is:
+
++------------------------+-----------------------------------------------------------------------+
+| **Parameter**          | **Description**                                                       |
++========================+=======================================================================+
+| ``log``                | Message from the log.                                                 |
++------------------------+-----------------------------------------------------------------------+
+| ``output``             | Output from a command. Alias of ``log``.                              |
++------------------------+-----------------------------------------------------------------------+
+| ``location``           | Path to the source log file.                                          |
++------------------------+-----------------------------------------------------------------------+
+| ``command``            | Command line or alias defined for the command. Alias of ``location``. |
++------------------------+-----------------------------------------------------------------------+
+| ``timestamp``          | Current timestamp (when the log is sent), in RFC3164 format.          |
++------------------------+-----------------------------------------------------------------------+
+| ``timestamp <format>`` | Custom timestamp, in ``strftime`` string format.                      |
++------------------------+-----------------------------------------------------------------------+
+| ``hostname``           | System's host name.                                                   |
++------------------------+-----------------------------------------------------------------------+
 
 Configuration examples
 ----------------------
