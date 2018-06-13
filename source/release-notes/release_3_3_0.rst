@@ -20,7 +20,7 @@ Logcollector now supports socket connection for log output mirroring. This featu
 
 The analysis engine includes new options for the :ref:`plugin decoders <decoders_syntax>` to set the input offset with respect to the prematch expression or the parent decoder. See an example about this on :ref:`this section <json_decoder_example_3.3>`. In addition, plugin decoders and multi-regex decoders can be used together.
 
-We have also introduced an event formatter in the log collector to build custom events, this allows to add some data into the event.
+We have also introduced an :ref:`event formatter <ossec_localfile_out_format>` in the log collector to build custom events, this allows to add some data into the event.
 
 As of this version, the timestamp of the alerts in JSON format will include milliseconds.
 
