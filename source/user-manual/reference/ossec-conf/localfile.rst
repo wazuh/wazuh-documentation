@@ -24,6 +24,7 @@ Options
 - `only-future-events`_
 - `query`_
 - `label`_
+- `target`_
 - `log_format`_
 
 location
@@ -178,6 +179,8 @@ The additional fields configured above would appear in the resulting event as be
 
 target
 ^^^^^^
+
+.. versionadded:: 3.3.0
 
 Target specifies the name of the socket where the output will be redirected. The socket must be defined previously to use it with this option.
 
