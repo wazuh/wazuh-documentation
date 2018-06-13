@@ -129,7 +129,7 @@ For example, the following configuration will only process events with an ID of 
 label
 ^^^^^
 
-  .. versionadded:: 3.0.0
+.. versionadded:: 3.0.0
 
 This option allows for the addition of custom data in JSON events and is available when `log_format`_ is set to ``json``.
 
@@ -197,7 +197,6 @@ log_format
 This specifies the format of the log being read. **It is required field.**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
-
 
 +--------------------+-------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                               |
@@ -282,6 +281,8 @@ Sample Log message as analyzed by ossec-analysisd:
 .. code-block:: console
 
 	Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
+
+.. _ossec_localfile_out_format:
 
 out_format
 ^^^^^^^^^^
