@@ -19,28 +19,22 @@ Configuration options of the CIS-CAT wodle.
 .. warning::
     CIS-CAT is not installed by default. It is a proprietary software that you have to obtain for using this module.
 
-Options
--------
+Main options
+------------
 
 - `disabled`_
 - `timeout`_
-- `interval`_
-- `scan-on-start`_
 - `java_path`_
 - `ciscat_path`_
 - `content`_
 
 
 +----------------------+-----------------------------+
-| Options              | Allowed values              |
+| Main options         | Allowed values              |
 +======================+=============================+
 | `disabled`_          | yes, no                     |
 +----------------------+-----------------------------+
 | `timeout`_           | A positive number (seconds) |
-+----------------------+-----------------------------+
-| `interval`_          | A positive number           |
-+----------------------+-----------------------------+
-| `scan-on-start`_     | yes, no                     |
 +----------------------+-----------------------------+
 | `java_path`_         | Any valid path              |
 +----------------------+-----------------------------+
@@ -49,6 +43,34 @@ Options
 | `content`_           | N/A                         |
 +----------------------+-----------------------------+
 
+Scheduling options
+------------------
+
+- `scan-on-start`_
+- `interval`_
+- `day`_
+- `wday`_
+- `time`_
+
+
++----------------------+-----------------------------+
+| Scheduling options   | Allowed values              |
++======================+=============================+
+| `scan-on-start`_     | yes, no                     |
++----------------------+-----------------------------+
+| `interval`_          | A positive number + suffix  |
++----------------------+-----------------------------+
+| `day`_               | A day of the month          |
++----------------------+-----------------------------+
+| `wday`_              | A day of the week           |
++----------------------+-----------------------------+
+| `time`_              | A time of the day *[hh:mm]* |
++----------------------+-----------------------------+
+
+In the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat/ciscat>` section are shown some cases of using these options.
+
+Main options
+------------
 
 disabled
 ^^^^^^^^
@@ -64,7 +86,7 @@ Disables the CIS-CAT wodle.
 timeout
 ^^^^^^^
 
-Timeout for each evaluation.
+Timeout for each evaluation. In case the execution takes longer that the specified timeout, it stops.
 
 +--------------------+-----------------------------+
 | **Default value**  | 1800                        |
@@ -72,27 +94,6 @@ Timeout for each evaluation.
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
-interval
-^^^^^^^^
-
-Interval between CIS-CAT executions.
-
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1d                                                                                                                                       |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
-+--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-
-scan-on-start
-^^^^^^^^^^^^^
-
-Run evaluation immediately when service is started.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
 
 java_path
 ^^^^^^^^^^
@@ -142,6 +143,93 @@ Attributes
 
     The ``path`` attribute can be filled in with the whole path where the benchmark files are located, or with a relative path to the CIS-CAT tool location.
 
+Scheduling options
+------------------
+
+scan-on-start
+^^^^^^^^^^^^^
+
+Run evaluation immediately when service is started.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+
+interval
+^^^^^^^^
+
+Interval between CIS-CAT executions.
+
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | 1d                                                                                                                                                             |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days), w (weeks), M (months) |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+The interval option is conditioned by the following described options ``day``, ``wday`` and ``time``. If none of these options are set, the interval can take any allowed value.
+
+day
+^^^
+
+.. versionadded:: 3.4.0
+
+Day of the month to run the CIS-CAT scan.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the month [1..31] |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``day`` option is set, the interval value must be a multiple of months. By default, the interval is set to a month.
+
+
+wday
+^^^^
+
+.. versionadded:: 3.4.0
+
+Day of the week to run the CIS-CAT scan. This option is **not compatible** with the ``day`` option.
+
++--------------------+--------------------------+
+| **Default value**  | n/a                      |
++--------------------+--------------------------+
+| **Allowed values** | Day of the week:         |
+|                    |   - sunday/sun           |
+|                    |   - monday/mon           |
+|                    |   - tuesday/tue          |
+|                    |   - wednesday/wed        |
+|                    |   - thursday/thu         |
+|                    |   - friday/fri           |
+|                    |   - saturday/sat         |
++--------------------+--------------------------+
+
+.. note::
+
+	When the ``wday`` option is set, the interval value must be a multiple of weeks. By default, the interval is set to a week.
+
+time
+^^^^
+
+.. versionadded:: 3.4.0
+
+Time of the day to run the scan. It has to be represented in the format *hh:mm*.
+
++--------------------+-----------------------+
+| **Default value**  | n/a                   |
++--------------------+-----------------------+
+| **Allowed values** | Time of day *[hh:mm]* |
++--------------------+-----------------------+
+
+.. note::
+
+	When only the ``time`` option is set, the interval value must be a multiple of days. By default, the interval is set to a day.
+
 Example of configuration
 ------------------------
 
@@ -151,7 +239,9 @@ Example of configuration
 
     <disabled>no</disabled>
     <timeout>1800</timeout>
-    <interval>1d</interval>
+    <wday>monday</wday>
+    <time>04:00</time>
+    <interval>2w</interval>
     <scan-on-start>yes</scan-on-start>
 
     <java_path>/usr/bin</java_path>
