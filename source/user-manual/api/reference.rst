@@ -165,7 +165,7 @@ Add a new agent.
 	   "error": 0,
 	   "data": {
 	      "id": "006",
-	      "key": "MDA2IE5ld0hvc3QgMTAuMC4wLjkgOTdiZTMyZGYwOTNkNGE1MmMxODM4ZTc0Yjc0MDNjZTQyMGY3YmQ2NWVlM2NjOWRiYWNlNGRmNGM1MTdkNTY1Ng=="
+	      "key": "MDA2IE5ld0hvc3QgMTAuMC4wLjkgMjc4ODg1ZTRiZTg2ZmZlOTU3NTQ0ODhjZTJmZGQxNjEyMGY3YmQ2NWVlM2NjOWRiYWNlNGRmNGM1MTdkNTY1Ng=="
 	   }
 	}
 	
@@ -200,7 +200,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": {
 	      "id": "007",
-	      "key": "MDA3IG15TmV3QWdlbnQgYW55IDljZjBlYTA5NzRkNGU3YWFkZjZiZTNkMjJlMTA4ZDE2YTEzOWY2OTNkZWUzMGU4OTRiZjQ1MmY0YjhlOTBkYzc="
+	      "key": "MDA3IG15TmV3QWdlbnQgYW55IGFlNDVmNTkzYTZiOWIyYmUyZDU2YzZjOWUzY2EwNzBjYTEzOWY2OTNkZWUzMGU4OTRiZjQ1MmY0YjhlOTBkYzc="
 	   }
 	}
 	
@@ -293,7 +293,6 @@ Removes a list of groups.
 	         "database"
 	      ],
 	      "affected_agents": [
-	         "001",
 	         "005",
 	         "003"
 	      ]
@@ -348,7 +347,8 @@ Removes agents, using a list of them or a criterion based on the status or time 
 	      "affected_agents": [
 	         "003",
 	         "005"
-	      ]
+	      ],
+	      "total_affected_agents": 2
 	   }
 	}
 	
@@ -423,8 +423,8 @@ Creates a new group.
 ::
 
 	{
-	   "error": 1711,
-	   "message": "The group already exists: pciserver"
+	   "error": 0,
+	   "data": "Group 'pciserver' created."
 	}
 	
 
@@ -524,14 +524,24 @@ Returns the list of agents in a group.
 	      "totalItems": 2,
 	      "items": [
 	         {
+	            "status": "Never connected",
+	            "group": "dmz",
+	            "name": "dmz001",
 	            "ip": "10.0.0.12",
-	            "id": "002",
-	            "name": "dmz001"
+	            "node_name": "unknown",
+	            "dateAdd": "2018-06-15 16:13:51",
+	            "key": "4535c25d86737008cc89b0348ec5a054f0da370eb8a7a05a553540ec0f4732ee",
+	            "id": "002"
 	         },
 	         {
+	            "status": "Never connected",
+	            "group": "dmz",
+	            "name": "dmz002",
 	            "ip": "10.0.0.14",
-	            "id": "004",
-	            "name": "dmz002"
+	            "node_name": "unknown",
+	            "dateAdd": "2018-06-15 16:13:52",
+	            "key": "ef79dd9d9dd29c31692b335c40fc43a9904ad7e32116449a6ecaffcc3369753e",
+	            "id": "004"
 	         }
 	      ]
 	   }
@@ -578,19 +588,31 @@ Returns a list with the available agents without group.
 	      "totalItems": 3,
 	      "items": [
 	         {
+	            "status": "Never connected",
+	            "dateAdd": "2018-06-15 16:14:06",
+	            "name": "NewHost",
+	            "key": "278885e4be86ffe95754488ce2fdd16120f7bd65ee3cc9dbace4df4c517d5656",
 	            "ip": "10.0.0.9",
 	            "id": "006",
-	            "name": "NewHost"
+	            "node_name": "unknown"
 	         },
 	         {
+	            "status": "Never connected",
+	            "dateAdd": "2018-06-15 16:14:06",
+	            "name": "myNewAgent",
+	            "key": "ae45f593a6b9b2be2d56c6c9e3ca070ca139f693dee30e894bf452f4b8e90dc7",
 	            "ip": "any",
 	            "id": "007",
-	            "name": "myNewAgent"
+	            "node_name": "unknown"
 	         },
 	         {
+	            "status": "Never connected",
+	            "dateAdd": "2018-06-15 16:14:07",
+	            "name": "NewHost_2",
+	            "key": "1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64",
 	            "ip": "10.0.10.10",
 	            "id": "123",
-	            "name": "NewHost_2"
+	            "node_name": "unknown"
 	         }
 	      ]
 	   }
@@ -817,7 +839,7 @@ Returns the list of existing agent groups.
 	         {
 	            "count": 0,
 	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "e58487ce5d5ac77c6a0d199699be003b",
+	            "merged_sum": "d9835ca466a5f6ede52e0684537f76bd",
 	            "name": "pciserver"
 	         }
 	      ]
@@ -1066,45 +1088,50 @@ Returns a list with the available agents.
 	      "items": [
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-05-25 17:13:07",
+	            "dateAdd": "2018-06-15 16:14:06",
 	            "name": "myNewAgent",
+	            "key": "ae45f593a6b9b2be2d56c6c9e3ca070ca139f693dee30e894bf452f4b8e90dc7",
 	            "ip": "any",
 	            "id": "007",
 	            "node_name": "unknown"
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-05-25 17:13:07",
+	            "dateAdd": "2018-06-15 16:14:07",
 	            "name": "NewHost_2",
+	            "key": "1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64",
 	            "ip": "10.0.10.10",
 	            "id": "123",
 	            "node_name": "unknown"
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-05-25 17:13:06",
+	            "dateAdd": "2018-06-15 16:14:06",
 	            "name": "NewHost",
+	            "key": "278885e4be86ffe95754488ce2fdd16120f7bd65ee3cc9dbace4df4c517d5656",
 	            "ip": "10.0.0.9",
 	            "id": "006",
 	            "node_name": "unknown"
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-05-25 17:11:16",
 	            "group": "default",
 	            "name": "dmz002",
 	            "ip": "10.0.0.14",
-	            "id": "004",
-	            "node_name": "unknown"
+	            "node_name": "unknown",
+	            "dateAdd": "2018-06-15 16:13:52",
+	            "key": "ef79dd9d9dd29c31692b335c40fc43a9904ad7e32116449a6ecaffcc3369753e",
+	            "id": "004"
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-05-25 17:11:04",
 	            "group": "default",
 	            "name": "dmz001",
 	            "ip": "10.0.0.12",
-	            "id": "002",
-	            "node_name": "unknown"
+	            "node_name": "unknown",
+	            "dateAdd": "2018-06-15 16:13:51",
+	            "key": "4535c25d86737008cc89b0348ec5a054f0da370eb8a7a05a553540ec0f4732ee",
+	            "id": "002"
 	         }
 	      ]
 	   }
@@ -1143,15 +1170,15 @@ Returns various information from an agent.
 	      "status": "Active",
 	      "name": "manager",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2018-05-25 13:31:51",
-	      "version": "Wazuh v3.2.3",
+	      "dateAdd": "2018-06-15 16:08:07",
+	      "version": "Wazuh v3.3.1",
 	      "manager_host": "manager",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
 	         "major": "7",
 	         "name": "CentOS Linux",
-	         "uname": "Linux |manager |3.10.0-693.21.1.el7.x86_64 |#1 SMP Wed Mar 7 19:03:37 UTC 2018 |x86_64",
 	         "platform": "centos",
+	         "uname": "Linux |manager |3.10.0-693.21.1.el7.x86_64 |#1 SMP Wed Mar 7 19:03:37 UTC 2018 |x86_64",
 	         "version": "7",
 	         "codename": "Core",
 	         "arch": "x86_64"
@@ -1192,7 +1219,7 @@ Returns various information from an agent called :agent_name.
 	   "data": {
 	      "status": "Never connected",
 	      "ip": "10.0.0.9",
-	      "dateAdd": "2018-05-25 17:13:06",
+	      "dateAdd": "2018-06-15 16:14:06",
 	      "id": "006",
 	      "name": "NewHost"
 	   }
@@ -1231,7 +1258,7 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgYmJlYTI4NDBiM2UyNzc5YzFjZGQ0YzVmNjMxNWU5Y2U5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
+	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgZWY3OWRkOWQ5ZGQyOWMzMTY5MmIzMzVjNDBmYzQzYTk5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
 	}
 	
 
@@ -1524,10 +1551,12 @@ Clears cache of the specified group.
 	   "error": 0,
 	   "data": {
 	      "all": [
+	         "/agents/000?pretty",
 	         "/agents/name/NewHost?pretty"
 	      ],
 	      "groups": {
 	         "agents": [
+	            "/agents/000?pretty",
 	            "/agents/name/NewHost?pretty"
 	         ]
 	      }
@@ -1658,9 +1687,9 @@ Returns the cluster configuration
 	      "node_name": "node01",
 	      "bind_addr": "0.0.0.0",
 	      "node_type": "master",
-	      "key": "a4c2cc8be9e2e8520fce4e21ccb21828",
+	      "key": "4c52c9d87e3473c2dd1325741c6a9d06",
 	      "nodes": [
-	         "192.168.56.102"
+	         "192.168.1.54"
 	      ],
 	      "port": 1516
 	   }
@@ -1730,8 +1759,8 @@ Show cluster health
 	      "nodes": {
 	         "node02": {
 	            "info": {
-	               "ip": "192.168.56.103",
-	               "version": "3.2.3",
+	               "ip": "192.168.1.50",
+	               "version": "3.2.4",
 	               "type": "client",
 	               "name": "node02",
 	               "n_active_agents": 0
@@ -1744,19 +1773,19 @@ Show cluster health
 	               },
 	               "sync_integrity_free": true,
 	               "last_sync_agentgroups": {
-	                  "date_end_master": "2018-05-25 16:17:44.71",
+	                  "date_end_master": "n/a",
 	                  "total_agentgroups": 0,
-	                  "date_start_master": "2018-05-25 16:17:44.70"
+	                  "date_start_master": "n/a"
 	               },
 	               "last_sync_integrity": {
 	                  "total_files": {
-	                     "shared": 0,
-	                     "missing": 0,
+	                     "shared": 1,
+	                     "missing": 7,
 	                     "extra_valid": 0,
 	                     "extra": 0
 	                  },
-	                  "date_end_master": "2018-05-25 17:13:00.95",
-	                  "date_start_master": "2018-05-25 17:13:00.94"
+	                  "date_end_master": "2018-06-15 16:14:06.01",
+	                  "date_start_master": "2018-06-15 16:14:04.82"
 	               },
 	               "sync_agentinfo_free": true,
 	               "sync_extravalid_free": true
@@ -1764,8 +1793,8 @@ Show cluster health
 	         },
 	         "node01": {
 	            "info": {
-	               "ip": "192.168.56.102",
-	               "version": "3.2.3",
+	               "ip": "192.168.1.54",
+	               "version": "3.2.4",
 	               "type": "master",
 	               "name": "node01",
 	               "n_active_agents": 1
@@ -1830,8 +1859,8 @@ Returns the node info
 	{
 	   "error": 0,
 	   "data": {
-	      "ip": "192.168.56.102",
-	      "version": "3.2.3",
+	      "ip": "192.168.1.54",
+	      "version": "3.2.4",
 	      "type": "master",
 	      "name": "node01"
 	   }
@@ -1878,14 +1907,14 @@ Returns the nodes info
 	      "totalItems": 2,
 	      "items": [
 	         {
-	            "ip": "192.168.56.103",
-	            "version": "3.2.3",
+	            "ip": "192.168.1.50",
+	            "version": "3.2.4",
 	            "type": "client",
 	            "name": "node02"
 	         },
 	         {
-	            "ip": "192.168.56.102",
-	            "version": "3.2.3",
+	            "ip": "192.168.1.54",
+	            "version": "3.2.4",
 	            "type": "master",
 	            "name": "node01"
 	         }
@@ -2032,6 +2061,16 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0005-wazuh_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0006-json_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
 	            "file": "0010-active-response_decoders.xml"
 	         },
 	         {
@@ -2068,16 +2107,6 @@ Returns all decoders files included in ossec.conf.
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
 	            "file": "0050-checkpoint_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0055-cimserver_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0060-cisco-estreamer_decoders.xml"
 	         }
 	      ]
 	   }
@@ -2262,13 +2291,15 @@ Returns ossec.conf in JSON format.
 	      "alerts_log": "yes",
 	      "jsonout_output": "yes",
 	      "smtp_server": "smtp.example.wazuh.com",
+	      "queue_size": "131072",
 	      "email_to": "recipient@example.wazuh.com",
 	      "logall": "no",
 	      "email_maxperhour": "12",
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "192.168.0.1"
+	         "80.58.61.250",
+	         "80.58.61.254"
 	      ],
 	      "email_from": "ossecm@example.wazuh.com",
 	      "logall_json": "no"
@@ -2301,11 +2332,11 @@ Returns basic information about manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "compilation_date": "Fri May 25 13:31:51 UTC 2018",
-	      "version": "v3.2.3",
+	      "compilation_date": "Fri Jun 15 16:08:07 UTC 2018",
+	      "version": "v3.3.1",
 	      "openssl_support": "yes",
 	      "max_agents": "14000",
-	      "ruleset_version": "3230",
+	      "ruleset_version": "3301",
 	      "path": "/var/ossec",
 	      "tz_name": "UTC",
 	      "type": "manager",
@@ -2432,64 +2463,64 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	   "error": 0,
 	   "data": {
 	      "wazuh-modulesd": {
-	         "info": 7,
-	         "all": 7,
+	         "info": 5,
+	         "all": 5,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:oscap": {
-	         "info": 7,
-	         "all": 7,
+	         "info": 5,
+	         "all": 5,
 	         "error": 0
 	      },
 	      "wazuh-db": {
-	         "info": 13,
-	         "all": 13,
+	         "info": 9,
+	         "all": 9,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:ciscat": {
-	         "info": 7,
-	         "all": 7,
+	         "info": 5,
+	         "all": 5,
 	         "error": 0
 	      },
 	      "ossec-rootcheck": {
-	         "info": 19,
-	         "all": 19,
+	         "info": 6,
+	         "all": 6,
 	         "error": 0
 	      },
 	      "ossec-monitord": {
-	         "info": 13,
-	         "all": 13,
+	         "info": 9,
+	         "all": 9,
 	         "error": 0
 	      },
 	      "ossec-logcollector": {
-	         "info": 69,
-	         "all": 69,
+	         "info": 49,
+	         "all": 49,
 	         "error": 0
 	      },
 	      "ossec-execd": {
-	         "info": 19,
-	         "all": 19,
+	         "info": 18,
+	         "all": 18,
 	         "error": 0
 	      },
 	      "ossec-remoted": {
-	         "info": 34,
-	         "all": 41,
-	         "error": 7
+	         "info": 28,
+	         "all": 58,
+	         "error": 30
 	      },
 	      "ossec-syscheckd": {
-	         "info": 178,
-	         "all": 178,
+	         "info": 116,
+	         "all": 116,
 	         "error": 0
 	      },
 	      "ossec-analysisd": {
-	         "info": 1511,
-	         "all": 1511,
+	         "info": 1079,
+	         "all": 1079,
 	         "error": 0
 	      },
 	      "wazuh-modulesd:database": {
-	         "info": 7,
-	         "all": 29,
-	         "error": 22
+	         "info": 5,
+	         "all": 7,
+	         "error": 2
 	      }
 	   }
 	}
@@ -2764,8 +2795,8 @@ Returns the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2018-05-25 17:04:10",
-	      "end": "2018-05-25 17:04:39"
+	      "start": "2018-06-15 16:14:02",
+	      "end": null
 	   }
 	}
 	
@@ -3047,7 +3078,7 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1632,
+	      "totalItems": 1633,
 	      "items": [
 	         {
 	            "status": "enabled",
@@ -3500,8 +3531,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2018-05-25 17:04:39",
-	      "end": "2018-05-25 16:59:10"
+	      "start": "2018-06-15 16:13:58",
+	      "end": "2018-06-15 16:14:02"
 	   }
 	}
 	
