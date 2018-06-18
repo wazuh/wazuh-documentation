@@ -14,13 +14,13 @@ This section shows the most relevant improvements and fixes in version 3.3.1. Mo
 Wazuh core
 ----------
 
-Most of the fixes introduced in this new version are focused on the user experience when dealing with the Wazuh management. Improving log messages,
-configuration issues or version controls, among other things. We can highlight some of these changes:
+Most of the fixes introduced in this new version are focused on the user experience when dealing with the Wazuh management. Improving log messages and
+configuration issues among other things. There are a few changes which are worth highlighting:
 
-- It is now possible to set up empty blocks of configuration for some modules. For example, the vulnerability detector module can be enabled by typing ``<wodle name="vulnerability-detector"/>``, applying it the default configuration for that module.
+- Fixed a bug that prevented the remote upgrades for Ubuntu agents.
 - An alert has been added to be aware when the process of unmerging the centralized configuration fails.
-- Fixed a bug that blocked the remote upgrades for Ubuntu agents.
 - Prevented interferences between the Windows Defender antivirus and the Wazuh agent when managing temporary bookmark files.
+- It is now possible to set up empty blocks of configuration for some modules. For example, the vulnerability detector module can be enabled by typing ``<wodle name="vulnerability-detector"/>``, applying it the default configuration for that module.
 
 Wazuh API
 ---------
