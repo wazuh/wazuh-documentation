@@ -19,7 +19,7 @@ configuration issues among other things. There are a few changes which are worth
 
 - Fixed a bug that prevented the remote upgrades for Ubuntu agents.
 - An alert has been added to be aware when the process of unmerging the centralized configuration fails.
-- Prevented interferences between the Windows Defender antivirus and the Wazuh agent when managing temporary bookmark files.
+- Prevent interferences between the Windows Defender antivirus and the Wazuh agent when managing temporary bookmark files.
 - It is now possible to set up empty blocks of configuration for some modules. For example, the vulnerability detector module can be enabled by typing ``<wodle name="vulnerability-detector"/>``, applying it the default configuration for that module.
 
 Wazuh API
