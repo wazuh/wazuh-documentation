@@ -21,7 +21,7 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
     # apt-get update
     # apt-get install curl apt-transport-https lsb-release
 
-  If the ``/usr/bin/python`` file doesn't exist (like in **Ubuntu 16.04 LTS or later**), create a symlink to Python 3 with the following command:
+  If the ``/usr/bin/python`` file doesn't exist (like in **Ubuntu 16.04 LTS or later**), create a symlink to Python (2.7 or newer) with the following command:
 
   .. code-block:: console
 
