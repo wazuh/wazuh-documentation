@@ -194,14 +194,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.2.4
+      # yum install elasticsearch-6.3.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch=6.2.4
+      # apt-get install elasticsearch=6.3.0
 
 
 2. Start Elasticsearch:
@@ -223,7 +223,7 @@ Upgrade Elasticsearch
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "B5rXKBg2Tr-KWwFdbDHJQg",
       "version" : {
-        "number" : "6.2.4",
+        "number" : "6.3.0",
         "build_hash" : "7299dc3",
         "build_date" : "2018-02-07T19:34:26.990113Z",
         "build_snapshot" : false,
@@ -249,13 +249,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash-6.2.4
+      # yum install logstash-6.3.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash=1:6.2.4-1
+      # apt-get install logstash=1:6.3.0-1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -294,13 +294,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-6.2.4
+      # yum install kibana-6.3.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=6.2.4
+      # apt-get install kibana=6.3.0
 
 
 2. Remove the Wazuh Kibana App plugin from Kibana:
@@ -330,7 +330,7 @@ Upgrade Kibana
   .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.0_6.2.4.zip
+      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.1_6.3.0.zip
 
 
 5. Start Kibana:
@@ -350,13 +350,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.2.4
+      # yum install filebeat-6.3.0
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.2.4
+      # apt-get install filebeat=6.3.0
 
 2. Download the Filebeat configuration file from the Wazuh repository:
 
