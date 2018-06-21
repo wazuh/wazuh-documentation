@@ -181,7 +181,24 @@ Upgrade Logstash
 
     # apt-get install logstash=1:6.3.0-1
 
-2. Start the Logstash service:
+2. Download and set the Wazuh configuration for Logstash:
+
+  a) Local configuration:
+
+    .. code-block:: console
+
+      # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-local.conf
+      # usermod -a -G ossec logstash
+
+  b) Remote configuration:
+
+    .. code-block:: console
+
+      # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-remote.conf
+
+3. Start the Logstash service:
 
   .. code-block:: console
 
@@ -190,7 +207,8 @@ Upgrade Logstash
     # systemctl start logstash.service
 
 .. note::
-  This is an upgrade of the same major version of the Elastic Stack, so it's not neccesary to set again the Wazuh configuration file for Logstash.
+
+  The Logstash configuration file has been replaced for an updated one. If you already configured the encryption between Filebeat and Logstash, don't forget to check again :ref:`elastic_ssl` if you're using a **distributed architecture**.
 
 Upgrade Kibana
 ^^^^^^^^^^^^^^
