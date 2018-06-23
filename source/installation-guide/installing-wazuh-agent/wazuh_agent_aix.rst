@@ -20,7 +20,7 @@ Unzip the package in ``/``:
 
 .. code-block:: console
 
-    # tar -xvf wazuh-agent_v3.2.3-aix5.3.tar
+    # tar -xvf wazuh-agent_v3.3.1-aix5.3.tar
 
 * Installing in AIX 6 and 7
 
