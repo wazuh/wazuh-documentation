@@ -330,7 +330,7 @@ Upgrade Kibana
   .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.0_6.2.4.zip
+      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.1_6.2.4.zip
 
 
 5. Start Kibana:
