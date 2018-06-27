@@ -14,7 +14,7 @@ This section explains how to configure the Splunk Forwarder to send alerts to th
 Set up data collection
 ----------------------
 
-Configuring inputs
+Configuring props
 ^^^^^^^^^^^^^^^^^^
 
 1. Download and insert the ``props.conf`` template:
@@ -23,7 +23,7 @@ Configuring inputs
 
     # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/splunk/props.conf
 
-Configuring props
+Configuring inputs
 ^^^^^^^^^^^^^^^^^
 
 1. Download and insert the ``inputs.conf`` template:
