@@ -317,6 +317,14 @@ The list of available parameters is:
 | ``hostname``           | System's host name.                                                   |
 +------------------------+-----------------------------------------------------------------------+
 
+Attributes:
+
++------------+-----------------------------------------------------------------------------------+
+| **target** | This option selects a defined target to apply the output format.                  |
++            +----------------+------------------------------------------------------------------+
+|            | Allowed values | Any target defined in the option ``<target>``                    |
++------------+----------------+------------------------------------------------------------------+
+
 Configuration examples
 ----------------------
 
@@ -335,6 +343,14 @@ Linux configuration:
       <log_format>command</log_format>
       <command>df -P</command>
       <frequency>360</frequency>
+    </localfile>
+
+	<!-- To use a custom target or format -->
+    <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/log/auth.log</location>
+	  <target>agent,custom_socket</target>
+	  <out_format target="custom_socket">$(timestamp %Y-%m-%d %H:%M:%S): $(log)</out_format>
     </localfile>
 
 Windows configuration:
