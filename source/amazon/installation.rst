@@ -155,7 +155,7 @@ Plugin configuration
 
     # vi /var/ossec/etc/ossec.conf
 
-2. Add the following block of configuration to enable the integration, enter the AWS IAM User credentials you created before:
+2. Add the following block of configuration to enable the integration, enter the AWS IAM User credentials you created before and the AWS Account ID of the CloudTrail logs to be processed:
 
 .. code-block:: xml
 
@@ -169,7 +169,7 @@ Plugin configuration
         <bucket>wazuh-cloudtrail</bucket>
         <access_key>insert_access_key</access_key>
         <secret_key>insert_secret_key</secret_key>
-        <aws_account_id>123456789012</aws_account_id>
+        <aws_account_id>insert_account_id</aws_account_id>
       </cloudtrail>
     </wodle>
 

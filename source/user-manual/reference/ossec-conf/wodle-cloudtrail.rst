@@ -67,7 +67,7 @@ Disables the CloudTrail wodle.
 bucket
 ^^^^^^^
 
-.. deprecated::
+.. deprecated::Unknown
 
 Name of the S3 bucket from where logs are read.
 
@@ -91,7 +91,7 @@ Frequency for reading from the S3 bucket.
 access_key
 ^^^^^^^^^^
 
-.. deprecated::
+.. deprecated::Unknown
 
 The access key ID for the IAM user with the permission to read logs from the bucket.
 
@@ -104,7 +104,7 @@ The access key ID for the IAM user with the permission to read logs from the buc
 secret_key
 ^^^^^^^^^^
 
-.. deprecated::
+.. deprecated::Unknown
 
 The secret key created for the IAM user with the permission to read logs from the bucket.
 
@@ -117,7 +117,7 @@ The secret key created for the IAM user with the permission to read logs from th
 remove_from_bucket
 ^^^^^^^^^^^^^^^^^^
 
-.. deprecated::
+.. deprecated::Unknown
 
 Define if you want to remove logs from your S3 bucket after they are read by the wodle.
 
@@ -157,43 +157,43 @@ Define an CloudTrail to process.
 Options
 -------
 
-- `bucket`_
-- `aws_account_id`_
-- `aws_account_alias`_
-- `access_key`_
-- `secret_key`_
-- `aws_profile`_
-- `iam_role_arn`_
-- `trail_prefix`_
-- `only_logs_after`_
-- `region`_
+- `cloudtrail\bucket`_
+- `cloudtrail\aws_account_id`_
+- `cloudtrail\aws_account_alias`_
+- `cloudtrail\access_key`_
+- `cloudtrail\secret_key`_
+- `cloudtrail\aws_profile`_
+- `cloudtrail\iam_role_arn`_
+- `cloudtrail\trail_prefix`_
+- `cloudtrail\only_logs_after`_
+- `cloudtrail\region`_
 
-+-----------------------+-----------------------------+--------------------+
-| Options               | Allowed values              | Mandatory/Optional |
-+=======================+=============================+====================+
-| `bucket`_             | Any valid bucket name       | Mandatory          |
-+-----------------------+-----------------------------+--------------------+
-| `aws_account_id`_     | 12-digit AWS account ID     | Mandatory          |
-+-----------------------+-----------------------------+--------------------+
-| `aws_account_alias`_  | Any string                  | Optional           |
-+-----------------------+-----------------------------+--------------------+
-| `access_key`_         | Alphanumerical key          | Optional           |
-+-----------------------+-----------------------------+--------------------+
-| `secret_key`_         | Alphanumerical key          | Optional           |
-+-----------------------+-----------------------------+--------------------+
-| `aws_profile`_        | yes, no                     | Optional           |
-+-----------------------+-----------------------------+--------------------+
-| `iam_role_arn`_       | IAM role ARN                | Optional           |
-+-----------------------+-----------------------------+--------------------+
-| `trail_prefix`_       | Prefix for S3 bucket key    | Optional           |
-+-----------------------+-----------------------------+--------------------+
-| `only_logs_after`_    | Date                        | Optional           |
-+-----------------------+-----------------------------+--------------------+
-| `region`_             | Comma list of AWS regions   | Optional           |
-+-----------------------+-----------------------------+--------------------+
++----------------------------------+-----------------------------+--------------------+
+| Options                          | Allowed values              | Mandatory/Optional |
++==================================+=============================+====================+
+| `cloudtrail\bucket`_             | Any valid bucket name       | Mandatory          |
++----------------------------------+-----------------------------+--------------------+
+| `cloudtrail\aws_account_id`_     | 12-digit AWS account ID     | Mandatory          |
++----------------------------------+-----------------------------+--------------------+
+| `cloudtrail\aws_account_alias`_  | Any string                  | Optional           |
++----------------------------------+-----------------------------+--------------------+
+| `cloudtrail\access_key`_         | Alphanumerical key          | Optional           |
++----------------------------------+-----------------------------+--------------------+
+| `cloudtrail\secret_key`_         | Alphanumerical key          | Optional           |
++----------------------------------+-----------------------------+--------------------+
+| `cloudtrail\aws_profile`_        | yes, no                     | Optional           |
++----------------------------------+-----------------------------+--------------------+
+| `cloudtrail\iam_role_arn`_       | IAM role ARN                | Optional           |
++----------------------------------+-----------------------------+--------------------+
+| `cloudtrail\trail_prefix`_       | Prefix for S3 bucket key    | Optional           |
++----------------------------------+-----------------------------+--------------------+
+| `cloudtrail\only_logs_after`_    | Date                        | Optional           |
++----------------------------------+-----------------------------+--------------------+
+| `cloudtrail\region`_             | Comma list of AWS regions   | Optional           |
++----------------------------------+-----------------------------+--------------------+
 
-bucket
-^^^^^^
+cloudtrail\bucket
+^^^^^^^^^^^^^^^^^
 
 Name of the S3 bucket from where logs are read.
 
@@ -203,8 +203,8 @@ Name of the S3 bucket from where logs are read.
 | **Allowed values** | Any valid bucket name       |
 +--------------------+-----------------------------+
 
-aws_account_id
-^^^^^^^^^^^^^^
+cloudtrail\aws_account_id
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The AWS Account ID for the CloudTrail logs.
 
@@ -215,8 +215,8 @@ The AWS Account ID for the CloudTrail logs.
 +--------------------+-----------------------------+
 
 
-aws_account_alias
-^^^^^^^^^^^^^^^^^
+cloudtrail\aws_account_alias
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A user-friendly name for the AWS account.
 
@@ -226,8 +226,8 @@ A user-friendly name for the AWS account.
 | **Allowed values** | Any string                  |
 +--------------------+-----------------------------+
 
-access_key
-^^^^^^^^^^
+cloudtrail\access_key
+^^^^^^^^^^^^^^^^^^^^^
 
 The access key ID for the IAM user with the permission to read logs from the bucket.
 
@@ -237,8 +237,8 @@ The access key ID for the IAM user with the permission to read logs from the buc
 | **Allowed values** | Any alphanumerical key.  |
 +--------------------+--------------------------+
 
-secret_key
-^^^^^^^^^^
+cloudtrail\secret_key
+^^^^^^^^^^^^^^^^^^^^^
 
 The secret key created for the IAM user with the permission to read logs from the bucket.
 
@@ -248,8 +248,8 @@ The secret key created for the IAM user with the permission to read logs from th
 | **Allowed values** | Any alphanumerical key.  |
 +--------------------+--------------------------+
 
-aws_profile
-^^^^^^^^^^^
+cloudtrail\aws_profile
+^^^^^^^^^^^^^^^^^^^^^^
 
 A valid profile name from a Shared Credential File or AWS Config File with the permission to read logs from the bucket.
 See here for more:  https://boto3.readthedocs.io/en/latest/guide/configuration.html#shared-credentials-file
@@ -260,8 +260,8 @@ See here for more:  https://boto3.readthedocs.io/en/latest/guide/configuration.h
 | **Allowed values** | Valid profile name |
 +--------------------+--------------------+
 
-iam_role_arn
-^^^^^^^^^^^^
+cloudtrail\iam_role_arn
+^^^^^^^^^^^^^^^^^^^^^^^
 
 A valid role arn with permission to read logs from the bucket.
 
@@ -271,9 +271,19 @@ A valid role arn with permission to read logs from the bucket.
 | **Allowed values** | Valid role arn |
 +--------------------+----------------+
 
+cloudtrail\trail_prefix
+^^^^^^^^^^^^^^^^^^^^^^^
 
-only_logs_after
-^^^^^^^^^^^^^^^
+If defined, the prefix for the CloudTrail.
+
++--------------------+---------------+
+| **Default value**  | N/A           |
++--------------------+---------------+
+| **Allowed values** | Valid Prefix  |
++--------------------+---------------+
+
+cloudtrail\only_logs_after
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A valid date, in YYYY-MMM-DD format, that only logs from after that date will be parsed.  All logs from before that date will be skipped.
 
@@ -283,8 +293,8 @@ A valid date, in YYYY-MMM-DD format, that only logs from after that date will be
 | **Allowed values** | Valid date  |
 +--------------------+-------------+
 
-region
-^^^^^^^^^^^^^^^
+cloudtrail\region
+^^^^^^^^^^^^^^^^^
 
 A comma-delimited list of regions to limit parsing of logs.
 
