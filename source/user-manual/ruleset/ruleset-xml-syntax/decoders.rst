@@ -19,6 +19,7 @@ Options
 - `ftscomment`_
 - `plugin_decoder`_
 - `use_own_name`_
+- `json_null_field`_
 
 decoder
 ^^^^^^^
@@ -248,3 +249,18 @@ Allows to set the name of the child decoder from the name attribute instead of u
 +--------------------+------------+
 | **Allowed values** | true       |
 +--------------------+------------+
+
+json_null_field
+^^^^^^^^^^^^^^^
+
+Specify how to treat the `NULL` fields coming from the JSON events. Only for the JSON decoder.
+
++--------------------+-------------------------------------------------------------------------+
+| **Default Value**  | string                                                                  |
++--------------------+-------------------------------------------------------------------------+
+| **Allowed values** | string (It shows the NULL value as string)                              |
++                    +-------------------------------------------------------------------------+
+|                    | discard (It discard NULL fields and doesn't store them into the alert)  |
++                    +-------------------------------------------------------------------------+
+|                    | empty (It shows the NULL field as an empty field)                       |
++--------------------+-------------------------------------------------------------------------+
