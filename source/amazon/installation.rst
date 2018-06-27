@@ -34,7 +34,7 @@ Subscribe to CloudTrail
     :align: center
     :width: 100%
 
-3. Provide a name for the new S3 bucket that will be used to store the CloudTrail logs (reemember the name you provide here, you’ll need to reference it during plugin setup):
+3. Provide a name for the new S3 bucket that will be used to store the CloudTrail logs (remember the name you provide here, you’ll need to reference it during plugin setup):
 
 .. thumbnail:: ../images/aws/aws-cloudtrail-3.png
     :align: center
@@ -159,15 +159,20 @@ Plugin configuration
 
 .. code-block:: xml
 
+
     <wodle name="aws-cloudtrail">
       <disabled>no</disabled>
-      <bucket>wazuh-cloudtrail</bucket>
-      <access_key>insert_access_key</access_key>
-      <secret_key>insert_secret_key</secret_key>
-      <remove_from_bucket>no</remove_from_bucket>
       <interval>10m</interval>
       <run_on_start>no</run_on_start>
+      <error_not_skip><error_not_skip>
+      <cloudtrail>
+        <bucket>wazuh-cloudtrail</bucket>
+        <access_key>insert_access_key</access_key>
+        <secret_key>insert_secret_key</secret_key>
+        <aws_account_id>123456789012</aws_account_id>
+      </cloudtrail>
     </wodle>
+
 
 *Check the user manual reference to read more details about each setting:* :doc:`AWS CloudTrail settings <../user-manual/reference/ossec-conf/wodle-cloudtrail>`
 
