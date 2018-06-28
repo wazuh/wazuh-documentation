@@ -5,7 +5,7 @@
 Upgrade from the same minor version
 ===================================
 
-Use these instructions if you are upgrading your Wazuh installation within the same minor version. For example, from 2.0.0 to 2.1.1.
+Use these instructions if you are upgrading your Wazuh installation within the same minor version. For example, from 2.1.0 to 2.1.1.
 
 Upgrade the Wazuh manager
 -------------------------
