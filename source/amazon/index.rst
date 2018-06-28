@@ -18,3 +18,4 @@ This section provides instructions to configure the integration with Cloudtrail.
 
        installation
        use-cases/index
+       troubleshooting

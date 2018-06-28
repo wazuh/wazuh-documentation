@@ -92,6 +92,11 @@ Raw output for the example policy:
        ]
    }
 
+.. note::
+
+        The s3:DeleteObject action is only required if the CloudTrail logs will be removed from the S3 bucket by the wodle.
+
+
 3. Attach policy:
 
 .. thumbnail:: ../images/aws/aws-attach-policy.png
@@ -173,12 +178,13 @@ Plugin configuration
       </cloudtrail>
     </wodle>
 
+To monitor CloudTrail logs for multiple AWS accounts, configure multiple <cloudtrail> options within the aws-cloudtrail wodle
 
 *Check the user manual reference to read more details about each setting:* :doc:`AWS CloudTrail settings <../user-manual/reference/ossec-conf/wodle-cloudtrail>`
 
 .. note::
 
-        Credentials can be loaded from different locations, you can either specify the credentials as they are in the previous block of configuration or load them from other `Boto3 supported locations. <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_
+        Credentials can be loaded from different locations, you can either specify the credentials as they are in the previous block of configuration, assume an IAM role, or load them from other `Boto3 supported locations. <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_ (including the use of profiles)
 
 3. Restart your Wazuh system to apply the changes:
 
@@ -186,52 +192,13 @@ Plugin configuration
 
     # /var/ossec/bin/ossec-control restart
 
-Testing the integration
------------------------
+Considerations for configuration
+--------------------------------
 
-After configuring the module successfully you can expect to see the following log messages in your agent log file: ``/var/ossec/logs/ossec.log``
-
-1. Module starting:
-
-.. code-block:: console
-
-    2018/01/12 18:47:09 wazuh-modulesd:aws-cloudtrail: INFO: Module AWS-CloudTrail started
+- If the S3 bucket contains a long history of CloudTrail logs, and it is not desired to ingest these old logs into Wazuh, it is recommended to configure the only_logs_after option to skip the older logs on initial execution.
+- The aws-cloudtrail wodle only looks for new logs based upon the key for last processed log object, which includes the datetime stamp.  If older logs are loaded into the S3 bucket or the only_logs_after option date is set to a datetime earlier than previous executions of the wodle, the older log files will be ignored and not ingested into Wazuh.
 
 
-2. Scheduled scan:
-
-.. code-block:: console
-
-    2018/01/12 18:49:10 wazuh-modulesd:aws-cloudtrail: INFO: Fetching logs started
-    2018/01/12 18:49:11 wazuh-modulesd:aws-cloudtrail: INFO: Fetching logs finished.
-
-Troubleshooting
----------------
-
-1. Wrong credentials:
-
-AWS IAM credentials were not set properly or they don't have enough privileges.
-
-.. code-block:: console
-
-    2018/01/12 19:02:22 wazuh-modulesd:aws-cloudtrail: WARNING: Returned exit code 3.
-    2018/01/12 19:02:22 wazuh-modulesd:aws-cloudtrail: WARNING: Invalid credentials to access S3 Bucket
 
 
-2. Missing Boto3 dependency:
 
-Boto3 package is not installed in the system. Please, Boto3 installation section.
-
-.. code-block:: console
-
-    2018/01/12 19:03:17 wazuh-modulesd:aws-cloudtrail: WARNING: Returned exit code 4.
-    2018/01/12 19:03:17 wazuh-modulesd:aws-cloudtrail: WARNING: boto3 module is required.
-
-
-3. Time interval is shorter than the time taken to pull log data:
-
-In this case a simple warning will be displayed. There is no impact in the event data fetching process and the module will keep running.
-
-.. code-block:: console
-
-    2018/01/12 19:10:37 wazuh-modulesd:aws-cloudtrail: WARNING: Interval overtaken.
