@@ -5,8 +5,8 @@
 Settings
 ========
 
-The very first time you open the Wazuh APP it will advice you about need a Wazuh API in order to work properly.
-You'll be redirected to this section inmediately and a form as the shown bellow will appear to be filled by yourself.
+The first time you open the Wazuh APP it will advice you about introducing a Wazuh API in order for it to work properly.
+You'll be redirected to this section inmediately and a form as the shown bellow will appear.
 
 .. thumbnail:: ../../../images/kibana-app/settings/settings-1.png
     :title: settings-1
@@ -40,8 +40,8 @@ You'll see a form as the shown bellow, once done click on `Update API` button to
 Adding more than one Wazuh API
 ------------------------------
 
-You could need to add extra Wazuh API entries cause you could be using more than one Wazuh API.
-Just click on `Add new API` and fill the form which will appear.
+You can add extra Wazuh API entries.
+Just click on `Add new API` and fill the form.
 
 .. thumbnail:: ../../../images/kibana-app/settings/settings-7.png
     :title: settings-7
@@ -52,32 +52,33 @@ Just click on `Add new API` and fill the form which will appear.
 Extensions
 ----------
 
-You could have some tabs from Overview and from specific agent views you don't want see. The reason could be different depending on your usage.
-You could not want to see PCI tab since it's not relevant for you, just disable it.
+You can enable and disable specific tabs from Overview and a specific agent view. 
+For example, you may not want to see the PCI tab since it's not relevant for you.
 
 .. thumbnail:: ../../../images/kibana-app/settings/settings-3.png
     :title: settings-3
     :align: center
     :width: 100%
 
-The default values you are seeing come from the `config.yml` file of your deployment. Any new Wazuh API added using the form from this section will have 
-the default values from that file. Once added, you can change them here. In the above example, we have disabled PCI tab.
+The default values for the extensions are configured in the `config.yml` file. 
 
-You'll be able to change it whenever you want to do it. 
+Any new Wazuh API added using the form from this section will have the default values from that file. 
+
+Once added, you can change them here. In the above example, we have disabled PCI tab.
 
 Pattern
 -------
 
-Since Kibana uses index patterns to fetch indices from Elasticsearch, the Wazuh APP needs to have a selected index pattern always. By default you'll have 
-`wazuh-alerts-3.x-*` which matches all Elasticsearch indices we are creating by default. Of course you could have a different environment, custom indices, etc. then you 
-could need a different index pattern. 
+You can select the index-pattern used by the Wazuh app in all of the different visualizations and discover tabs it uses.
+
+By default it's `wazuh-alerts-3.x-*` which matches all Elasticsearch indices Wazuh creates using a default installation. 
 
 .. thumbnail:: ../../../images/kibana-app/settings/settings-4.png
     :title: settings-4
     :align: center
     :width: 100%
 
-Additionally you'll be always able to change it from the top right corner of the Wazuh App, at the main menu bar.
+Additionally you can change the index-pattern from the top right corner of the Wazuh App in the main menu bar.
 
 .. thumbnail:: ../../../images/kibana-app/settings/settings-5.png
     :title: settings-5
@@ -87,9 +88,10 @@ Additionally you'll be always able to change it from the top right corner of the
 About
 -----
 
-Information about the technologies being used, and which is your current environment.
+Information about Wazuh and Wazuh app version.
 
 .. thumbnail:: ../../../images/kibana-app/settings/settings-6.png
     :title: settings-6
     :align: center
     :width: 100%
+    

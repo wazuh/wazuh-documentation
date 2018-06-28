@@ -2,12 +2,12 @@
 
 .. _connect_kibana_app:
 
-Connect the app with the API
+Connect the Wazuh app with the API
 ============================
 
-In this section, we will show you how to register the Wazuh API (installed on the Wazuh server) with the Wazuh app in Kibana:
+Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kibana:
 
-1. Open a web browser and go to the Elastic Stack server's IP address on port 5601 (default Kibana port). Then, from the left menu, go to the Wazuh app.
+1. Open a web browser and go to the Kibana's IP address on port 5601 (default Kibana port). Then, from the left menu, go to the Wazuh app.
 
   .. image:: ../../../images/kibana-app/others/starting-app.png
     :align: center
@@ -19,7 +19,7 @@ In this section, we will show you how to register the Wazuh API (installed on th
     :align: center
     :width: 100%
 
-3. Before filling out the fields, go to your Wazuh server and, using the command prompt as root, replace the default credentials with your desired username where `myUsername` is shown below to protect your Wazuh API.
+3. Before filling out the fields, go to your Wazuh manager and, using the command prompt as root, replace the default credentials with your desired username where `myUsername` is shown below to protect your Wazuh API.
 
   .. code-block:: console
 
@@ -33,7 +33,7 @@ In this section, we will show you how to register the Wazuh API (installed on th
     # systemctl restart wazuh-api
     # service wazuh-api restart
 
-4. Fill in the Username and Password fields with the credentials you created in the previous step.  Enter ``http://MANAGER_IP`` for the URL where ``MANAGER_IP`` is the real IP address of the Wazuh server and enter "55000" for the Port.
+4. Fill in the Username and Password fields with the credentials you created in the previous step.  Enter ``http://MANAGER_IP`` for the URL where ``MANAGER_IP`` is the real IP address of the Wazuh manager and enter "55000" for the Port.
 
   .. image:: ../../../images/kibana-app/settings/add-api.png
     :align: center

@@ -5,7 +5,7 @@
 Getting started
 ===============
 
-This section describes the first steps to do after installing Kibana and the Wazuh app. The articles below contains useful information about how to get your Wazuh app up and running to use, and start managing your Wazuh server.
+This section describes the first steps after installing Kibana and the Wazuh app. The articles below contain useful information about how to get your Wazuh app up and running and start managing your Wazuh environment.
 
 .. topic:: Contents
 
@@ -13,4 +13,3 @@ This section describes the first steps to do after installing Kibana and the Waz
         :maxdepth: 1
 
         connect-kibana-app
-        configure-rbac-xpack
