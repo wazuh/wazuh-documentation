@@ -1,7 +1,7 @@
 .. _configure_xpack:
 
 Configure Wazuh app with X-Pack
-==========================
+===============================
 
 X-Pack provides RBAC (role based access control) capabilities, among other features, for the Elastic Stack.
 
@@ -19,7 +19,7 @@ Follow the next steps to install X-Pack:
   .. code-block:: console
 
     # /usr/share/elasticsearch/bin/elasticsearch-plugin install x-pack
-    
+
 2. Restart Elasticsearch:
 
   .. code-block:: console
@@ -32,7 +32,7 @@ It's important to wait until Elasticsearch finishes loading. Check the current s
 
   # curl localhost:9200/?pretty -u elastic:elastic_password
 
-  { 
+  {
     "name" : "5urh-FJ",
     "cluster_name" : "elasticsearch",
     "cluster_uuid" : "B5rXKBg2Tr-KWwFdbDHJQg",

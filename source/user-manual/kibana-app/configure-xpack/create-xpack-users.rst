@@ -1,4 +1,4 @@
-.. __create_xpack_users:
+.. _create_xpack_users:
 
 Create X-Pack users
 ===================

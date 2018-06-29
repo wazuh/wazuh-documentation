@@ -22,7 +22,7 @@ And it throws an error:
     :align: center
     :width: 100%
 
-It happens because Jack has no privileges to modify the `.kibana` index. 
+It happens because Jack has no privileges to modify the `.kibana` index.
 
 We need to login with another user with higher privileges to dismiss it. We can use the Wazuh admin user to do it or use the `elastic` user and go to Management > Kibana > Advanced settings as follow:
 
@@ -43,7 +43,7 @@ Using a different index pattern
 
 If you are indexing data with a different partern, for example `my-alerts-*` you need a different role with access to that new pattern:
 
-  .. code-block:: console
+  .. code-block:: none
 
       # curl -XPOST "http://localhost:9200/_xpack/security/role/my-user" -H 'Content-Type: application/json' -d'
       {
@@ -61,7 +61,7 @@ If you are indexing data with a different partern, for example `my-alerts-*` you
 
 Now assign it to your desired user(s):
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl -XPUT "http://localhost:9200/_xpack/security/user/john" -H 'Content-Type: application/json' -d'
     {

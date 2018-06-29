@@ -3,7 +3,7 @@
 .. _connect_kibana_app:
 
 Connect the Wazuh app with the API
-============================
+==================================
 
 Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kibana:
 

@@ -97,7 +97,7 @@ Using CLI
 
 1. Creating the **wazuh-admin** role:
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl -XPOST "http://localhost:9200/_xpack/security/role/wazuh-admin" -H 'Content-Type: application/json' -d'
     {
@@ -115,7 +115,7 @@ Using CLI
 
 2. Creating the **wazuh-basic** role:
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl -XPOST "http://localhost:9200/_xpack/security/role/wazuh-basic" -H 'Content-Type: application/json' -d'
     {
@@ -133,7 +133,7 @@ Using CLI
 
 3. Creating the **wazuh-api-admin** role:
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl -XPOST "http://localhost:9200/_xpack/security/role/wazuh-api-admin" -H 'Content-Type: application/json' -d'
     {
@@ -153,7 +153,7 @@ Using CLI
 
   .. note:: Ensure the password is enough strong, it will be the superuser for your environment.
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl -XPOST "http://localhost:9200/_xpack/security/user/wazuhsystem" -H 'Content-Type: application/json' -d'
     {
@@ -168,7 +168,7 @@ Using CLI
 
 5. Creating the Wazuh admin user:
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl -XPOST "http://localhost:9200/_xpack/security/user/jack" -H 'Content-Type: application/json' -d'
     {
@@ -185,7 +185,7 @@ Using CLI
 
   .. note:: This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 5).
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl -XPOST "http://localhost:9200/_xpack/security/user/john" -H 'Content-Type: application/json' -d'
     {
@@ -200,7 +200,7 @@ Using CLI
 
 7. Set the right user on `kibana.yml` file:
 
-  .. code-block:: console
+  .. code-block:: none
 
     # vi /etc/kibana/kibana.yml
 
