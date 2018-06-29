@@ -61,3 +61,9 @@ Set up data forwarding
     # /opt/splunkforwarder/bin/splunk restart
 
 After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
+
+3. Optional. If you additionally want the Splunk Forwarder service to start at boot time, please execute the following command:
+
+  .. code-block:: console
+
+    # /opt/splunkforwarder/bin/splunk enable boot-start
