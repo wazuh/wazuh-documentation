@@ -40,7 +40,7 @@ This component works receiving the data flow streamed by a Forwarder and stores 
 
   .. note:: You will be prompted for a password for the 'admin' user.
 
-  After this step the Splunk Web service will be listening to port 8000. You can browse http://<your-instance-ip>:8000 in order to access the Web GUI.
+  After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
 4. Optional. If you additionally want Splunk service to start at boot time, please execute the following command:
 
