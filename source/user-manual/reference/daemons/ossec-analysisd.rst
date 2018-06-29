@@ -27,15 +27,15 @@ The ossec-analysisd program receives the log messages and compares them to the r
 | **-V**          | Display the version and license information                                                     |
 +-----------------+-------------------------------------------------------------------------------------------------+
 
-The internal structure of the multithreaded ossec-analysisd daemon is as follows:
----------------------------------------------------------------------------------
+Daemon multithreaded internal structure
+---------------------------------------
 
 .. thumbnail:: ../../../images/manual/analysisd-structure.png
-    :title: Ossec-analysisd architecture
+    :title: Analysisd architecture
     :align: center
     :width: 100%
 
-Steps
+Steps involucrated
 
 1. The socket receives the message and sends it to the respective decoder queue. They can be one of the following:
     a. Syscheck event decoder queue.
@@ -47,34 +47,110 @@ Steps
     If the selected queue is full, the event is dropped.
 
 2. Each decoder thread:
-    a. Takes out the event from it's queue
-    b. Cleans the event
-    c. Decodes the event
-    d. Sends the event to the rule matching queue
+    a. Takes out the event from it's queue.
+    b. Cleans the event.
+    c. Decodes the event.
+    d. Sends the event to the rule matching queue.
 
 3. Each rule matching thread:
-    a. Takes the event from the queue
-    b. Runs rule matching
-    c. If the event is a firewall event, it is sended to the firewall queue
-    d. If the event has statistical flag, it is sended to the statistical queue
-    e. If the event has the FTS flag, it is sended to the FTS queue
-    f. If an alert is generated, it is sended to the alert queue
-    g. If logall is activated, the event is sended to the archives queue
+    a. Takes the event from the queue.
+    b. Runs rule matching.
+    c. If the event is a firewall event, it is sended to the firewall queue.
+    d. If the event has statistical flag, it is sended to the statistical queue.
+    e. If the event has the FTS flag, it is sended to the FTS queue.
+    f. If an alert is generated, it is sended to the alert queue.
+    g. If logall is activated, the event is sended to the archives queue.
 
 4. Each writer thread:
     a. Takes the event from the queue.
-    b. Stores the element in memory to be written on the it's own log file.
+    b. Stores the element in memory to be written on it's own log file.
 
 5. Every 1 second, all the log files are writted to the HDD.
 
 6. Every 5 seconds (by default, if not overrided), the status file for analysisd is generated.
 
+Flow example of an event
+------------------------
+
+The image below shows the flow for a rootcheck event that generates an alert.
+
+.. thumbnail:: ../../../images/manual/analysisd-flow-example.png
+    :title: Flow example
+    :align: center
+    :width: 100%
+
+As you can see, every part of the analsysd multithreaded engine is independent from one another, except for the rule matching threads that shares the same queue.
+
+Automatic leveling of the threads
+----------------------------------
+
+By the default when analysisd starts, it will spawn the number of threads based on the number of CPU cores of the machine it runs on.
+For example if the machine has 4 physiscal cores, the threads created will be:
+
+    - 4 threads for decoders (4 for Syscheck,4 for Syscollector,4 for Rootcheck, 4 for Hostinfo,4 for others)
+    - 4 threads for rule matching
+
+This default configuration can be changed on the ``internal_options.conf`` file by changing the following fields:
+
++----------------------------------------------+---------------+---------------------------------------------------------------------+
+|        **analysisd.event_threads**           | Description   | Number of event decoder threads                                     |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Default value | 0                                                                   |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
++                                              +               +---------------------------------------------------------------------+
+|                                              |               | Any integer between 0 and 32                                        |
++----------------------------------------------+---------------+---------------------------------------------------------------------+
+|       **analysisd.syscheck_threads**         | Description   | Number of syshceck event decoder threads                            |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Default value | 0                                                                   |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
++                                              +               +---------------------------------------------------------------------+
+|                                              |               | Any integer between 0 and 32                                        |
++----------------------------------------------+---------------+---------------------------------------------------------------------+
+|     **analysisd.syscollector_threads**       | Description   | Number of syscollector event decoder threads                        |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Default value | 0                                                                   |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
++                                              +               +---------------------------------------------------------------------+
+|                                              |               | Any integer between 0 and 32                                        |
++----------------------------------------------+---------------+---------------------------------------------------------------------+
+|        **analysisd.rootcheck_threads**       | Description   | Number of rootcheck event decoder threads                           |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Default value | 0                                                                   |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
++                                              +               +---------------------------------------------------------------------+
+|                                              |               | Any integer between 0 and 32                                        |
++----------------------------------------------+---------------+---------------------------------------------------------------------+
+|       **analysisd.hostinfo_threads**         | Description   | Number of hostinfo event decoder threads                            |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Default value | 0                                                                   |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
++                                              +               +---------------------------------------------------------------------+
+|                                              |               | Any integer between 0 and 32                                        |
++----------------------------------------------+---------------+---------------------------------------------------------------------+
+|     **analysisd.rule_matching_threads**      | Description   | Number of rule matching threads                                     |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Default value | 0                                                                   |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
++                                              +               +---------------------------------------------------------------------+
+|                                              |               | Any integer between 0 and 32                                        |
++----------------------------------------------+---------------+---------------------------------------------------------------------+
+
+For example if our mananger receives few rootcheck events, we can lower the number of rootcheck decoder threads. 
+Take a look at the next sections below to learn how tune **analysisd**.
+
 Status file
 -----------
 
-This file shows information relative to the status of the **analysisd daemon**. It can help to analyse situations where you need to troubleshoot problems related on getting less events or alerts as expected. 
+This file shows the information relative to the status of the **analysisd daemon**, displaying realtime data. It can help to analyse situations where you need to troubleshoot problems related on getting less events or alerts as expected.
 
-The format of the file is bash. You see the information of the **analysisd daemon** at ``/var/ossec/var/run/ossec-analysisd.state``.
+The format of the file is bash. You can see the information of the **analysisd daemon** at ``/var/ossec/var/run/ossec-analysisd.state``.
 
 In the table below, are the fields of the file:
 
@@ -104,6 +180,8 @@ In the table below, are the fields of the file:
 | **events_processed**               | Total events processed by the rule matching threads                          |
 +------------------------------------+------------------------------------------------------------------------------+
 | **events_edps**                    | Events processed by the rule matching threads per second                     |
++------------------------------------+------------------------------------------------------------------------------+
+| **events_received**                | Total events received by the socket                                          |
 +------------------------------------+------------------------------------------------------------------------------+
 | **events_dropped**                 | Events dropped by the receiver thread                                        |
 +------------------------------------+------------------------------------------------------------------------------+
@@ -152,12 +230,12 @@ In the table below, are the fields of the file:
 | **archives_queue_size**            | Archives log queue size                                                      |
 +------------------------------------+------------------------------------------------------------------------------+
 
-Use cases of the status file
-----------------------------
+Use cases of the analysisd status file
+--------------------------------------
 
-1. Example of troubleshooting on the next use case scenario:
+Example of troubleshooting on the next use case scenario:
 
-First we get the content of the file ``/var/ossec/var/run/ossec-analysisd.state``:
+First we get the content of the file ``/var/ossec/var/run/ossec-analysisd.state`` (only relevant fields are shown):
 
 
 .. code-block:: bash
@@ -167,223 +245,57 @@ First we get the content of the file ``/var/ossec/var/run/ossec-analysisd.state`
     # Total events decoded
     events_decoded='10000'
 
-    # Syscheck events decoded
-    syscheck_events_decoded='0'
-    syscheck_edps='0'
-
-    # Syscollector events decoded
-    syscollector_events_decoded='0'
-    syscollector_edps='0'
-
-    # Rootcheck events decoded
-    rootcheck_events_decoded='0'
-    rootcheck_edps='0'
-
-    # Hostinfo events decoded
-    hostinfo_events_decoded='0'
-    hostinfo_edps='0'
-
-    # Other events decoded
-    other_events_decoded='10000'
-    other_events_edps='2000'
-
-    # Events processed (Rule matching)
-    events_processed='10000'
-    events_edps='2000'
-
-    # Events dropped
-    events_dropped='20000'
-
-    # Alerts written to disk
-    alerts_written='245'
-
-    # Firewall alerts written to disk
-    firewall_written='0'
-
-    # FTS alerts written to disk
-    fts_written='0'
-
-    # Syscheck queue
-    syscheck_queue_usage='0'
-
-    # Syscheck queue size
-    syscheck_queue_size='1280'
-
-    # Syscollector queue
-    syscollector_queue_usage='0'
-
-    # Syscollector queue size
-    syscollector_queue_size='1280'
-
-    # Rootcheck queue
-    rootcheck_queue_usage='0'
-
-    # Rootcheck queue size
-    rootcheck_queue_size='1280'
-
-    # Hostinfo queue
-    hostinfo_queue_usage='0'
-
-    # Hostinfo queue size
-    hostinfo_queue_size='1280'
-
     # Event queue
-    event_queue_usage='0.99'
-
-    # Event queue size
-    event_queue_size='1280'
+    event_queue_usage='1.00'
 
     # Rule matching queue
-    rule_matching_queue_usage='0.99'
-
-    # Rule matching queue size
-    rule_matching_queue_size='1280'
+    rule_matching_queue_usage='1.00'
 
     # Alerts log queue
-    alerts_queue_usage='0.99'
+    alerts_queue_usage='1.00'
 
-    # Alerts log queue size
-    alerts_queue_size='1280'
+.. thumbnail:: ../../../images/manual/analysisd-alerts-queue-full.png
+    :title: Alerts queue full
+    :align: center
+    :width: 100%
 
-    # Firewall log queue
-    firewall_queue_usage='0'
-
-    # Firewall log queue size
-    firewall_queue_size='1280'
-
-    # Statistical log queue
-    statistical_queue_usage='0'
-
-    # Statistical log queue size
-    statistical_queue_size='1280'
-
-    # Archives log queue
-    archives_queue_usage='0'
-
-    # Archives log queue size
-    archives_queue_size='1280'
-
-As we can see the ``alerts_queue_usage='0.99'`` is full. This indicates that our hard drive is creating a bottleneck causing the ``rule_matching_queue_usage='0.99'`` 
-to be full waiting for the alerts_queue and the ``event_queue_usage='0.99'`` to be waiting for the rule_matching_queue.
+As we can see the ``alerts_queue_usage='1.00'`` is full. This indicates that **our hard drive** is creating a **bottleneck** causing the ``rule_matching_queue_usage='1.00'`` 
+to be full waiting for the alerts_queue and the ``event_queue_usage='1.00'`` to be waiting for the **rule_matching_queue**.
 
 To overcome this issue we have a few options:
 
-1. Get a faster HDD so the ``alerts_queue`` can get emptier faster.
-2. Increment the ``alerts_queue_size`` in the ``internal_options.conf`` file.
-3. Decrease the number of alerts generated by our agents.
+    1. Get a faster hard drive so the ``alerts_queue`` can get emptier faster.
+    2. Increment the ``alerts_queue_size`` in the ``internal_options.conf`` file.
+    3. Decrease the number of alerts generated by our agents.
 
-2. Example of troubleshooting on the next use case scenario:
+Example of troubleshooting on the next use case scenario:
 
-First we get the content of the file ``/var/ossec/var/run/ossec-analysisd.state``:
+First we get the content of the file ``/var/ossec/var/run/ossec-analysisd.state`` (only relevant fields are shown):
 
 
 .. code-block:: bash
 
     # State file for ossec-analysisd
 
-    # Total events decoded
-    events_decoded='10500'
-
-    # Syscheck events decoded
-    syscheck_events_decoded='10000'
-    syscheck_edps='2000'
-
-    # Syscollector events decoded
-    syscollector_events_decoded='0'
-    syscollector_edps='0'
-
-    # Rootcheck events decoded
-    rootcheck_events_decoded='0'
-    rootcheck_edps='0'
-
-    # Hostinfo events decoded
-    hostinfo_events_decoded='0'
-    hostinfo_edps='0'
-
-    # Other events decoded
-    other_events_decoded='500'
-    other_events_edps='100'
-
-    # Events processed (Rule matching)
-    events_processed='10000'
-    events_edps='2000'
-
-    # Events dropped
-    events_dropped='20000'
-
-    # Alerts written to disk
-    alerts_written='28'
-
-    # Firewall alerts written to disk
-    firewall_written='0'
-
-    # FTS alerts written to disk
-    fts_written='0'
-
     # Syscheck queue
-    syscheck_queue_usage='0.99'
-
-    # Syscheck queue size
-    syscheck_queue_size='1280'
-
-    # Syscollector queue
-    syscollector_queue_usage='0'
-
-    # Syscollector queue size
-    syscollector_queue_size='1280'
-
-    # Rootcheck queue
-    rootcheck_queue_usage='0'
-
-    # Rootcheck queue size
-    rootcheck_queue_size='1280'
-
-    # Hostinfo queue
-    hostinfo_queue_usage='0'
-
-    # Hostinfo queue size
-    hostinfo_queue_size='1280'
-
-    # Event queue
-    event_queue_usage='0.29'
-
-    # Event queue size
-    event_queue_size='1280'
+    syscheck_queue_usage='1.00'
 
     # Rule matching queue
     rule_matching_queue_usage='0.81'
 
-    # Rule matching queue size
-    rule_matching_queue_size='1280'
-
     # Alerts log queue
-    alerts_queue_usage='0.1'
+    alerts_queue_usage='0.10'
 
-    # Alerts log queue size
-    alerts_queue_size='1280'
+.. thumbnail:: ../../../images/manual/analysisd-syscheck-full.png
+    :title: Syscheck queue full
+    :align: center
+    :width: 100%
 
-    # Firewall log queue
-    firewall_queue_usage='0'
-
-    # Firewall log queue size
-    firewall_queue_size='1280'
-
-    # Statistical log queue
-    statistical_queue_usage='0'
-
-    # Statistical log queue size
-    statistical_queue_size='1280'
-
-    # Archives log queue
-    archives_queue_usage='0'
-
-    # Archives log queue size
-    archives_queue_size='1280'
-
-As we can see the ``syscheck_queue_usage='0.99'`` is full. This indicates that the manager is getting too many syscheck events per second.
+As we can see the ``syscheck_queue_usage='1.00'`` is full. This indicates that the manager is getting too many syscheck events per second.
+Our CPU is becoming a bottleneck right now.
 
 To overcome this issue we have a few options:
 
-1. Increase the ``syscheck_queue_size`` in the ``internal_options.conf`` file.
-2. Decrease the number of syscheck events generated by our agents.
-
+    1. Increase the ``syscheck_queue_size`` in the ``internal_options.conf`` file.
+    2. Increase the number of syscheck decoder threads and the rule matching threads in the ``internal_options.conf`` file.
+    3. Decrease the number of syscheck events generated by our agents.
