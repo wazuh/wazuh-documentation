@@ -64,6 +64,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`ruleset <ruleset>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`socket <socket>`                                              | manager, agent         |
++---------------------------------------------------------------------+------------------------+
 | :doc:`syscheck <syscheck>`                                          | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`syslog_output <syslog-output>`                                | manager                |
@@ -109,6 +111,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    reports
    rootcheck
    ruleset
+   socket
    syscheck
    syslog-output
    wodle-openscap

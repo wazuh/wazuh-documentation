@@ -11,6 +11,7 @@ The registration process consists of a mechanism to create a trust relationship 
 
 Another aproach is using the RESTful API, this is just a wrapper for local registration on Wazuh Manager.
 
+.. _agent-keys-registration:
 
 Agent keys
 -----------
@@ -51,3 +52,7 @@ Here are three ways to register an agent:
 +               +-----------------------------------------------------------------+------------------------------------------------------------------------+
 |               | :ref:`Using the RESTful API <restful-api-register>`             | Register an agent by scripting (bash, python, powershell) and the API. |
 +---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
+
+.. note::
+
+	If you're running Wazuh in cluster mode, refer to the :ref:`Configuring a cluster section <agent-registration-cluster>` to get more details about the registration process in the cluster.

@@ -27,6 +27,7 @@ Options
 - `timeout`_
 - `repeated_offenders`_
 - `ca_store`_
+- `ca_verification`_
 
 disabled
 ^^^^^^^^
@@ -145,7 +146,7 @@ Specifies how long in seconds before the reverse command is executed.  When ``re
 repeated_offenders
 ^^^^^^^^^^^^^^^^^^
 
-Sets timeouts in minutes for repeat offenders. This is a comma-separated list of increasing timeouts that can contain a maximum of 5 entries. This must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**.
+Sets timeouts in minutes for repeat offenders. This is a comma-separated list of increasing timeouts that can contain a maximum of 5 entries.
 
 +--------------------+-----------------------------+
 | **Default value**  | n/a                         |
@@ -153,21 +154,37 @@ Sets timeouts in minutes for repeat offenders. This is a comma-separated list of
 | **Allowed values** | A positive number (minutes) |
 +--------------------+-----------------------------+
 
+.. warning::
+    This option must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
+
 ca_store
 ^^^^^^^^
 
 Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.
 
 +--------------------+-----------------------------+
-| **Default value**  | n/a                         |
+| **Default value**  | wpk_root.pem                |
 +--------------------+-----------------------------+
 | **Allowed values** | Path to root CA certificate |
++--------------------+-----------------------------+
+
+ca_verification
+^^^^^^^^^^^^^^^
+
+This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to ``no`` the agent will accept any WPK package coming from the manager.
+
++--------------------+-----------------------------+
+| **Default value**  | yes                         |
++--------------------+-----------------------------+
+| **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
 
 Sample Configuration
 --------------------
 
 .. code-block:: xml
+
+    <!-- On the manager side -->
 
     <active-response>
       <disabled>no</disabled>
@@ -177,5 +194,9 @@ Sample Configuration
       <level>10</level>
       <rules_group>sshd,|pci_dss_11.4,</rules_group>
       <timeout>1</timeout>
+    </active-response>
+
+    <!-- On the agent side -->
+    <active-response>
       <repeated_offenders>1,5,10</repeated_offenders>
     </active-response>

@@ -152,8 +152,8 @@ Follow these steps to upgrade your Elastic Stack cluster to version 5.X:
 
 4. At this point, you are ready to install the new version of Elastic Stack. Follow the appropriate link below for installation instructions for your specific operating system:
 
-    - :ref:`Install Elastic Stack with RPM packages <elastic_server_rpm>`
-    - :ref:`Install Elastic Stack with DEB packages <elastic_server_deb>`
+    - `Install Elastic Stack with RPM packages <https://documentation.wazuh.com/2.1/installation-guide/installing-elastic-stack/elastic_server_rpm.html#elastic-server-rpm>`_
+    - `Install Elastic Stack with DEB packages <https://documentation.wazuh.com/2.1/installation-guide/installing-elastic-stack/elastic_server_deb.html#elastic-server-deb>`_
 
 5. Following this installation, check the software version of the Elasticsearch components to verify that everything updated as expected:
 

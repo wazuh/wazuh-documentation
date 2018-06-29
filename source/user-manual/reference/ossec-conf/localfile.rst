@@ -24,7 +24,9 @@ Options
 - `only-future-events`_
 - `query`_
 - `label`_
+- `target`_
 - `log_format`_
+- `out_format`_
 
 location
 ^^^^^^^^
@@ -80,7 +82,7 @@ with:
 frequency
 ^^^^^^^^^
 
-The specifies the minimum amount of time in seconds between command runs. The command will likely not repeat in the exact the number of seconds specified, however, the time between runs will be no less than the number of seconds specified.
+The frequency specifies the minimum amount of time in seconds between command runs. The command will likely not repeat in the exact the number of seconds specified, however, the time between runs will be no less than the number of seconds specified.
 
 This can be used with **command** or **full_command**.
 
@@ -127,7 +129,7 @@ For example, the following configuration will only process events with an ID of 
 label
 ^^^^^
 
-  .. versionadded:: 3.0.0
+.. versionadded:: 3.0.0
 
 This option allows for the addition of custom data in JSON events and is available when `log_format`_ is set to ``json``.
 
@@ -176,16 +178,28 @@ The additional fields configured above would appear in the resulting event as be
 
 .. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key be defined by using a symbol prior to the key name as in *@source*.
 
+target
+^^^^^^
+
+.. versionadded:: 3.3.0
+
+Target specifies the name of the socket where the output will be redirected. The socket must be defined previously to use it with this option.
+
++--------------------+--------------------------------+
+| **Default value**  | agent                          |
++--------------------+--------------------------------+
+| **Allowed values** | any defined socket             |
++--------------------+--------------------------------+
+
 log_format
 ^^^^^^^^^^
 
-This specifies the format of the log being read.
+This specifies the format of the log being read. **It is required field.**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
-
 +--------------------+-------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | syslog                                                                                                            |
+| **Default value**  | n/a                                                                                                               |
 +--------------------+----------------+--------------------------------------------------------------------------------------------------+
 | **Allowed values** | syslog         | Used for plain text files in a syslog-like format.                                               |
 +                    +----------------+--------------------------------------------------------------------------------------------------+
@@ -267,6 +281,41 @@ Sample Log message as analyzed by ossec-analysisd:
 .. code-block:: console
 
 	Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
+
+.. _ossec_localfile_out_format:
+
+out_format
+^^^^^^^^^^
+
+.. versionadded:: 3.3.0
+
+This option allows formatting logs from Logcollector using field substitution.
+
+The syntax is:
+
+::
+
+	$(parameter)
+
+The list of available parameters is:
+
++------------------------+-----------------------------------------------------------------------+
+| **Parameter**          | **Description**                                                       |
++========================+=======================================================================+
+| ``log``                | Message from the log.                                                 |
++------------------------+-----------------------------------------------------------------------+
+| ``output``             | Output from a command. Alias of ``log``.                              |
++------------------------+-----------------------------------------------------------------------+
+| ``location``           | Path to the source log file.                                          |
++------------------------+-----------------------------------------------------------------------+
+| ``command``            | Command line or alias defined for the command. Alias of ``location``. |
++------------------------+-----------------------------------------------------------------------+
+| ``timestamp``          | Current timestamp (when the log is sent), in RFC3164 format.          |
++------------------------+-----------------------------------------------------------------------+
+| ``timestamp <format>`` | Custom timestamp, in ``strftime`` string format.                      |
++------------------------+-----------------------------------------------------------------------+
+| ``hostname``           | System's host name.                                                   |
++------------------------+-----------------------------------------------------------------------+
 
 Configuration examples
 ----------------------
