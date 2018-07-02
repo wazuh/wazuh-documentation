@@ -43,7 +43,7 @@ Installation
 
     .. code-block:: console
 
-      Apps -> Manage apps -> install app from file
+      Apps -> Manage apps -> Install app from file
 
 3. Open Splunk in your desired browser and click on the Wazuh app icon:
 
@@ -57,13 +57,11 @@ Installation
     :title: IP Configuration
     :width: 100%
 
-
-  You can check the connection by pressing 'Check connection' button below the API list. A successful message appears in the right bottom corner:
+You can check the connection by pressing 'Check connection' button on each API entry. A successful message appears in the right bottom corner:
 
   .. thumbnail:: ../../images/splunk-app/appconf-2.png
     :align: center
     :title: Checking API connection
     :width: 100%
-
 
 Now that you've finished installing Splunk app for Wazuh, you can setup forwarders following :ref:`the next page <splunk_forwarder>`.
