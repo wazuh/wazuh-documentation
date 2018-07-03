@@ -15,7 +15,7 @@ Set up data collection
 ----------------------
 
 Configuring props
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 1. Download and insert the ``props.conf`` template:
 
@@ -24,7 +24,7 @@ Configuring props
     # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/splunk/props.conf
 
 Configuring inputs
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 1. Download and insert the ``inputs.conf`` template:
 
