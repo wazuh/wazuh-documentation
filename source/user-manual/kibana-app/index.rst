@@ -7,7 +7,7 @@ Kibana app
 
 The Wazuh app lets you visualize and analyze Wazuh alerts stored in Elasticsearch. You can obtain statistics per agent, search alerts and filter using different visualizations. It integrates with Wazuh RESTful API to retrieve information about manager and agents configuration, logs, ruleset, groups and much more.
 
-This section describes the configuration process to get it started and the different app sections that you can navigate through. In addition to this, you can find a troubleshooting and reference guide for quick access to some key solutions and configuration options.
+This manual describes the configuration process to get it started and the different app features that you can use. In addition to this, you can find a troubleshooting and reference guide for quick access to some key solutions and configuration options.
 
 .. topic:: Contents
 
