@@ -229,7 +229,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
     # apt-get update
 
-Connecting the Wazuh App with the API
--------------------------------------
+Next steps
+----------
 
-Follow the :ref:`next guide <connect_kibana_app>` in order to connect the Wazuh App with the API.
+Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
+
+You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.

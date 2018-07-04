@@ -36,6 +36,7 @@ The configuration file reference is organized by sections:
     - `extensions.gdpr`_
     - `extensions.audit`_
     - `extensions.oscap`_
+    - `extensions.ciscat`_
     - `extensions.aws`_
     - `extensions.virustotal`_
 
@@ -219,6 +220,17 @@ Enable or disable the Open SCAP tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.ciscat
+^^^^^^^^^^^^^^^^^
+
+Enable or disable the CIS-CAT tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
 +--------------------+------------+
 | **Allowed values** | true,false |
 +--------------------+------------+

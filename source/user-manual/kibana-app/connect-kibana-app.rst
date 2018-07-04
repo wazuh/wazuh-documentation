@@ -46,12 +46,3 @@ Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kiban
   .. image:: ../../images/kibana-app/overview/old-overview-general.png
     :align: center
     :width: 100%
-
-Next steps
-----------
-
-Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow the appropriate link below for your specific installation environment:
-
-- :ref:`Debian/Ubuntu <wazuh_agent_deb>`
-- :ref:`RedHat/CentOS <wazuh_agent_rpm>`
-- :ref:`Windows <wazuh_agent_windows>`
