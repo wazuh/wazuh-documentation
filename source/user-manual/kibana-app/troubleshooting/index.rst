@@ -5,17 +5,17 @@
 Troubleshooting
 ===============
 
-**"Plugin installation was unsuccessful due to error "Incorrect Kibana version in plugin [wazuh]. Expected [6.2.3]; found [6.2.4]"**
+**"Plugin installation was unsuccessful due to error "Incorrect Kibana version in plugin [wazuh]. Expected [6.2.4]; found [6.3.0]"**
 
     The Wazuh app has a file named *package.json*, it includes dependencies along more information. One included thing is the Kibana version:
 
     .. code-block:: console
 
         "kibana": {
-            "version": "6.2.4"
+            "version": "6.3.0"
         },
 
-    Your app must to match to the installed Kibana version. If you have, for example, ``6.2.4`` in the *package.json* file, your installed Kibana version must be ``6.2.4``.
+    Your app must to match to the installed Kibana version. If you have, for example, ``6.3.0`` in the *package.json* file, your installed Kibana version must be ``6.3.0``. You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
 **No template found for the selected index-pattern**
 
@@ -36,7 +36,7 @@ Troubleshooting
         # systemctl status wazuh-api
 
 
-    If you are using ``sysv`` init, please check the status as follow:
+    If you are using ``SysV Init``, please check the status as follow:
 
     .. code-block:: console
 
