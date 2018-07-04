@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _configure_xpack_users:
 
 Configure X-Pack users

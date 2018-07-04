@@ -8,14 +8,13 @@ Elasticsearch indices
 Once you've installed the Wazuh App some new indices will be generated in Elasticsearch. Let's see a more in deep view about them.
 The user shouldn't take care about them and shouldn't modify them unless the Wazuh team suggest it.
 
-The *.wazuh* index
-------------------
+The ``.wazuh`` index
+--------------------
 
 This index is used by the Wazuh App to store Wazuh API credentials and useful information about the Wazuh manager currently being used.
 The next document example shows you how we store a Wazuh API entry. This index could grow up if you add more Wazuh API entries.
 
 .. code-block:: console
-
 
     {
         "api_user" : "foo",
@@ -38,16 +37,15 @@ The next document example shows you how we store a Wazuh API entry. This index c
         "virustotal" : false
         }
     }
-    
 
-The *.wazuh-version* index
---------------------------
 
-This index has only one document and it includes useful information and it's being used by internal Wazuh App purposes.
-It includes information such your current version or your installation date. The next example shows you how we store that information.
+The ``.wazuh-version`` index
+----------------------------
+
+This index has only one document and it includes useful information and it's being used by internal Wazuh App purposes. It includes information such your current version or your installation date. The next example shows you how we store that information.
 
 .. code-block:: console
-    
+
     {
         "name" : "Wazuh App",
         "app-version" : "3.2.2",
@@ -56,23 +54,20 @@ It includes information such your current version or your installation date. The
         "lastRestart" : "2018-05-22T07:13:30.327Z"
     }
 
-The *.kibana* index
--------------------
+The ``.kibana`` index
+---------------------
 
-This index is mainly used by Kibana itself. It's useful to tell Kibana how are the index patterns we are using along other technical details.
-This index should be similar for any user and it's a bit long to show its content here. Also its content is useless for the user knowledge.
+This index is mainly used by Kibana itself. It's useful to tell Kibana how are the index patterns we are using along other technical details. This index should be similar for any user and it's a bit long to show its content here. Also its content is useless for the user knowledge.
 
-The *wazuh-alerts-3.x-* indices
--------------------------------
+The ``wazuh-alerts-3.x-`` indices
+---------------------------------
 
 They are auto-generated and they store the Wazuh alerts. Logstash will send data to Elasticsearch and will create an index per day.
 
-The *wazuh-monitoring-3.x-* indices
------------------------------------
+The ``wazuh-monitoring-3.x-`` indices
+-------------------------------------
 
-They are auto-generated and they store the Wazuh agents statuses periodically. The Wazuh App is which will send data to Elasticsearch and will 
-create an index per day. This feature could be disabled. Also you could modify the insertion frequency. These indices are mainly used by the Agents status visualization
-from the Overview dashboard in the Wazuh App.
+They are auto-generated and they store the Wazuh agents statuses periodically. The Wazuh App is which will send data to Elasticsearch and will create an index per day. This feature can be disabled. You can also adjust the insertion frequency. These indices are mainly used by the ``Agents status`` visualization from the Overview dashboard in the Wazuh App.
 
 More information
 ----------------

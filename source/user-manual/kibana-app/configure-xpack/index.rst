@@ -1,14 +1,13 @@
-.. _configure_xpack:
+.. Copyright (C) 2018 Wazuh, Inc.
 
-Configure Wazuh app with X-Pack
-===============================
+.. _kibana_xpack:
+
+Configure the app with X-Pack
+=============================
 
 X-Pack provides RBAC (role based access control) capabilities, among other features, for the Elastic Stack.
 
 This guide provides steps to configure specific users to use the Wazuh app with X-Pack.
-
-Preparation
-------------
 
 .. note:: Follow the official Elastic guide https://www.elastic.co/downloads/x-pack for a more in depth explanation.
 

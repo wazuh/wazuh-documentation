@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _create_xpack_users:
 
 Create X-Pack users

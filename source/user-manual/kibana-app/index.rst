@@ -18,8 +18,8 @@ This section describes the configuration process to get it started and the diffe
     .. toctree::
         :maxdepth: 1
 
-        getting-started/index
+        connect-kibana-app
         configure-xpack/index
-        how-to-use/index
+        features/index
         troubleshooting/index
         reference/index

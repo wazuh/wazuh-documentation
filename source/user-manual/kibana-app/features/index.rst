@@ -1,11 +1,11 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _kibana_how_to_use:
+.. _kibana_features:
 
-How to use
-==========
+App features
+============
 
-Learn how to use the Wazuh App following this *How to use* guide. See bellow table of contents.
+Learn how to use the Wazuh App following this *Features* guide. See bellow table of contents.
 
 .. topic:: Contents
 
