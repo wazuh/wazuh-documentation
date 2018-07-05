@@ -12,11 +12,12 @@ The Wazuh app for Kibana gives you a quick view of your cluster, agents and aler
     .. toctree::
         :maxdepth: 1
 
+        settings
         index-pattern
+        download-csv
         overview
         manager/index
         agents/index
         discover
         dev-tools
-        settings
         lists
