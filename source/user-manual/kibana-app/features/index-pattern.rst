@@ -16,7 +16,7 @@ You can select a different index pattern in two ways:
   :align: center
   :width: 100%
 
-You can open the *Management > Index Patterns* page on the Kibana interface to manage them, and create more. Make sure to use ``@timestamp`` as the *Time Filter field name* to properly order the alerts by creation date.
+You can open the *Management > Index Patterns* page on the Kibana interface to manage them, and create even more. Make sure to use ``@timestamp`` as the *Time Filter field name* to properly order the alerts by creation date.
 
 .. image:: ../../../images/kibana-app/features/index-pattern/management-patterns.png
   :align: center
@@ -24,4 +24,4 @@ You can open the *Management > Index Patterns* page on the Kibana interface to m
 
 .. note::
 
-  If you change the index pattern with the top menu bar selector, the app will be reloaded to apply the change.
+  If you change the index pattern using the top menu bar selector, the app will be reloaded to apply the change.

@@ -1,97 +1,90 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _settings:
+.. _kibana_settings:
 
 Settings
 ========
 
-The first time you open the Wazuh APP it will advice you about introducing a Wazuh API in order for it to work properly.
-You'll be redirected to this section inmediately and a form as the shown bellow will appear.
+The *Settings* page allows you to configure and customize your Wazuh app experience. This section is automatically opened the first time you open the app in order to configure your first Wazuh API credentials, so the app can work properly. There are multiple options to configure on *Settings*, such as:
 
-.. thumbnail:: ../../../images/kibana-app/settings/settings-1.png
-    :title: settings-1
-    :align: center
-    :width: 100%
+- **API credentials**
+- **Extensions**
+- **Index pattern**
 
-Once done, you should see something like the next picture:
+Each option is described on the following sections below.
 
-.. thumbnail:: ../../../images/kibana-app/settings/settings-2.png
-    :title: settings-2
-    :align: center
-    :width: 100%
+API
+---
 
-Edit an existing Wazuh API
---------------------------
+In this section, you can list all your inserted API credentials. The yellow star icon indicates the currently used API to show information on the app. Each entry has multiple available actions to manage it. Keep in mind that a working API is needed in order to add or edit an entry. Check your API connection status prior to adding them to the app.
 
-Look at your desired Wazuh API and click on the pencil icon to edit it.
+.. image:: ../../../images/kibana-app/features/settings/api.png
+  :align: center
+  :width: 100%
 
-.. thumbnail:: ../../../images/kibana-app/settings/settings-8.png
-    :title: settings-8
-    :align: center
-    :width: 15%
+.. topic:: Mark as selected
 
-You'll see a form as the shown bellow, once done click on `Update API` button to save it.
+  Select the API you want to use to filter the alerts on *Overview* and *Agents*, and show cluster information on *Management*.
 
-.. thumbnail:: ../../../images/kibana-app/settings/settings-9.png
-    :title: settings-9
-    :align: center
-    :width: 100%
+.. note::
 
-Adding more than one Wazuh API
-------------------------------
+  The *Mark as selected* option only applies to your browser, and it's stored in a cookie. Multiple users can select different APIs on their own Internet browsers.
 
-You can add extra Wazuh API entries.
-Just click on `Add new API` and fill the form.
+.. topic:: Check connection
 
-.. thumbnail:: ../../../images/kibana-app/settings/settings-7.png
-    :title: settings-7
-    :align: center
-    :width: 15%
+  Check if the app can communicate with the API. An error message will appear indicating the reason if there is a connection problem.
 
+.. topic:: Delete API
+
+  Delete an API entry if it's not used anymore.
+
+.. warning::
+
+  You can't delete the currently selected API. If you want to remove it, select a different API before.
+
+.. topic:: Edit API
+
+  If you've changed your API credentials, you can modify the entry so you can continue using the API.
 
 Extensions
 ----------
 
-You can enable and disable specific tabs from Overview and a specific agent view. 
-For example, you may not want to see the PCI tab since it's not relevant for you.
+Wazuh provides multiple integrations and capabilities to monitor and analyze your hosts. If you're using some of them, you can enable multiple extensions on the app to visualize tailored dashboards, which provide rich and useful information. Some of these extensions are disabled by default because you have to previously enable them on your manager configuration in order to generate alerts.
 
-.. thumbnail:: ../../../images/kibana-app/settings/settings-3.png
-    :title: settings-3
-    :align: center
-    :width: 100%
+The app provides the following extensions:
 
-The default values for the extensions are configured in the `config.yml` file. 
+- :ref:`PCI DSS <pci_dss>`
+- :ref:`GDPR <gdpr>`
+- :ref:`Audit <system_call_monitoring>`
+- :ref:`Open SCAP <openscap_module>`
+- :ref:`CIS-CAT <ciscat_module>`
+- :ref:`AWS <amazon>`
+- :ref:`VirusTotal <virustotal-scan>`
 
-Any new Wazuh API added using the form from this section will have the default values from that file. 
+.. image:: ../../../images/kibana-app/features/settings/extensions.png
+  :align: center
+  :width: 100%
 
-Once added, you can change them here. In the above example, we have disabled PCI tab.
+.. note::
 
-Pattern
--------
+    The selected extensions are stored in a browser cookie. Multiple users can select different extensions on their own Internet browsers.
 
-You can select the index-pattern used by the Wazuh app in all of the different visualizations and discover tabs it uses.
+    The default extensions configuration can be customized for newly inserted APIs. You can read more about it on the :ref:`kibana_config_file` section.
 
-By default it's `wazuh-alerts-3.x-*` which matches all Elasticsearch indices Wazuh creates using a default installation. 
+Index pattern
+-------------
 
-.. thumbnail:: ../../../images/kibana-app/settings/settings-4.png
-    :title: settings-4
-    :align: center
-    :width: 100%
+The index pattern functionality is completely described at the :ref:`kibana_index_pattern` section.
 
-Additionally you can change the index-pattern from the top right corner of the Wazuh App in the main menu bar.
-
-.. thumbnail:: ../../../images/kibana-app/settings/settings-5.png
-    :title: settings-5
-    :align: center
-    :width: 20%
+.. image:: ../../../images/kibana-app/features/settings/pattern.png
+  :align: center
+  :width: 100%
 
 About
 -----
 
-Information about Wazuh and Wazuh app version.
+This section provides information about your currently installed Wazuh app package, such as version, revision, and installation date. If you want to discover what's new on each app release, you can go to our `Changelog file <https://github.com/wazuh/wazuh-kibana-app/blob/master/CHANGELOG.md>`_ to check it out.
 
-.. thumbnail:: ../../../images/kibana-app/settings/settings-6.png
-    :title: settings-6
-    :align: center
-    :width: 100%
-    
+.. image:: ../../../images/kibana-app/features/settings/about.png
+  :align: center
+  :width: 100%
