@@ -1,5 +1,7 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
+.. _kibana_download_csv:
+
 Download as CSV
 ===============
 
