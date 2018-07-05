@@ -1,95 +1,28 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _dev_tools:
+.. _kibana_dev_tools:
 
 Dev tools
 =========
 
-The Wazuh App includes a useful tab to type requests and send them directly to the Wazuh API.
+The *Dev tools* tab provides an user interface to interact with the Wazuh API. You can use it to send requests and get a response. This tab uses your currently selected API from :ref:`kibana_settings`. The interface is splitted into two panes: **Editor pane** and **Response pane**.
 
-Due to security reasons you'll only be able to fetch data, this means using GET requests. 
+.. image:: ../../../images/kibana-app/features/dev-tools/dev-tools.png
+  :align: center
+  :width: 100%
 
-The Dev tool is split into two panes: an editor pane (left) and a response pane (right).
+On the editor pane, you can type API requests in several ways:
 
-.. thumbnail:: ../../../images/kibana-app/dev-tools/devtools-2.png
-    :title: devtools-2
-    :align: center
-    :width: 100%
+- Using **in-line parameters**, just like in a browser.
+- Using **JSON-formatted parameters**.
+- **Combining both** in-line and JSON-formatted parameters. Keep in mind that if you place the same parameters with different values, the in-line parameter has precedende over the JSON-formatted one.
 
-Editor pane
------------
+To execute a request, place the cursor on the desired request line and click on the ``Play`` button. Comments are also compatible on the editor pane using the ``#`` character at the beggining of the line.
 
-Here you type the route and request. Depending on the route your request could be empty.
+.. note::
 
-.. thumbnail:: ../../../images/kibana-app/dev-tools/devtools-3.png
-    :title: devtools-3
-    :align: center
-    :width: 100%
+  Using the local browser storage, you can close the tab, and the same content will be available the next time you open *Dev tools*.
 
-Example:
+.. warning::
 
-    .. code-block:: console
-
-        GET /agents
-        {
-           "limit": 10
-        }
-
-The above request is the same as:
-
-    .. code-block:: console
-
-        curl -XGET localhost:55000/agents?limit=10
-
-Since you could have multiple requests on your editor pane, the selected request (it'll be highlighted) is the request 
-that will be sent. To send your request press the green *play* icon at the top right corner of the editor pane.
-
-
-Response pane
--------------
-
-Here is where you'll see the result of the request in JSON format.
-
-.. thumbnail:: ../../../images/kibana-app/dev-tools/devtools-4.png
-    :title: devtools-4
-    :align: center
-    :width: 100%
-
-
-Saved requests
---------------
-
-Everything you type in the editor pane is stored in the local storage from your browser in real time.
-
-This means you can continue with your last request once the browser is closed and opened again.
-
-
-Multiline comments
-------------------
-
-Commenting is allowed on the editor pane, and multiline comments are available too. You need to use 
-the `#` character at the beginning of the comment line.
-
-How the Wazuh API is being used?
---------------------------------
-
-We store your Wazuh API credentials in Elasticsearch indices and make the requests from the server side using the stored credentials.
-This means we are not sending your credentials on every request. 
-
-It also means you are not sending the request from the Dev tools to the Wazuh API directly cause
-we are fetching your request at server side and then requesting the Wazuh API, it's a double request indeed.
-
-Which Wazuh API is being used?
-------------------------------
-
-The API used for the request is the current one selected in the Wazuh app.
-
-.. thumbnail:: ../../../images/kibana-app/dev-tools/devtools-1.png
-    :title: devtools-1
-    :align: center
-    :width: 100%
-
-More information
-----------------
-
-https://documentation.wazuh.com/current/user-manual/api/index.html
+  Currently, the tab only allows fetching data with ``GET`` requests due to security reasons.

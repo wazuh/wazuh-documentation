@@ -52,7 +52,7 @@ Example screenshots
    :title: Overview file integrity monitoring
    :align: center
    :width: 100%
-.. |OVERVIEW_GENERAL| thumbnail:: images/kibana-app/showcase/overview-general.png
+.. |OVERVIEW_GENERAL| thumbnail:: images/kibana-app/showcase/old-overview-general.png
    :title: Overview alerts
    :align: center
    :width: 100%
