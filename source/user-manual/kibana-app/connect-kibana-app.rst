@@ -46,7 +46,7 @@ Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kiban
 
 6. Click on the ``Save API`` button to store it. Now you can go to the other app sections, like *Overview*, and start visualizing your alerts.
 
-  .. image:: ../../images/kibana-app/overview/overview-general.png
+  .. image:: ../../images/kibana-app/showcase/overview-general.png
     :align: center
     :width: 100%
 
