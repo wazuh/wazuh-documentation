@@ -12,6 +12,8 @@ The Wazuh app for Kibana gives you a quick view of your cluster, agents and aler
     .. toctree::
         :maxdepth: 1
 
+        app-overview
+        ruleset
         settings
         dev-tools
         reporting
