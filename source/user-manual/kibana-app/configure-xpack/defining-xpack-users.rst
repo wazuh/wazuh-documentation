@@ -1,9 +1,21 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _create_xpack_users:
+.. _defining_xpack_users:
 
-Create X-Pack users
-===================
+Defining X-Pack users
+=====================
+
+Using the X-Pack Security plugin feature, we can define user roles to determine who can use the app or see specific index patterns. Below you'll find a summary table of what we need to configure for the app to work properly. The following sections describe briefly what each role can do.
+
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| User                                                                   | Roles                                                       |
++========================================================================+=============================================================+
+| Kibana system user                                                     | **wazuh-admin**, **kibana_system**                          |
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| Wazuh admin user                                                       | **wazuh-basic**, **wazuh-api-admin**                        |
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| Wazuh standard user #1, Wazuh standard user #2...                      | **wazuh-basic**                                             |
++------------------------------------------------------------------------+-------------------------------------------------------------+
 
 Kibana system user
 ------------------
@@ -79,16 +91,3 @@ Wazuh standard user
 -------------------
 
 We need one or more users who will be able to login into Kibana UI with read only privileges. This user only needs to use the wazuh-basic role.
-
-Users summary
--------------
-
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-|User                                                                    | Roles                                                       |
-+========================================================================+=============================================================+
-|Kibana system user                                                      | **wazuh-admin**, **kibana_system**                          |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-|Wazuh admin user                                                        | **wazuh-basic**, **wazuh-api-admin**                        |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-|Wazuh standard user #1, Wazuh standard user #2...                       | **wazuh-basic**                                             |
-+------------------------------------------------------------------------+-------------------------------------------------------------+

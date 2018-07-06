@@ -5,6 +5,8 @@
 Configure X-Pack users
 ======================
 
+This section helps to configure the X-Pack users and roles mentioned on the :ref:`previous article <defining_xpack_users>`, using the interface provided by Kibana.
+
 Using Kibana UI with the `elastic` user
 ---------------------------------------
 

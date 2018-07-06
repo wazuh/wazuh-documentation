@@ -2,10 +2,12 @@
 
 .. _kibana_xpack:
 
-Configure the app with X-Pack
-=============================
+Wazuh app and X-Pack
+====================
 
 X-Pack provides RBAC (role based access control) capabilities, among other features, for the Elastic Stack. This guide provides steps to configure specific users to use the Wazuh app with X-Pack.
+
+In this `link <https://www.elastic.co/products/x-pack>`_ you can learn more about the X-Pack features for the Elastic Stack, and all the advanced capabilities that add to your Elastic installation.
 
 .. note::
 
@@ -17,13 +19,13 @@ X-Pack provides RBAC (role based access control) capabilities, among other featu
 
 Follow these steps to enable X-Pack:
 
-1. Open *Management > License Management* on the Kibana interface. On this section, you can choose between a free 30-day trial to try the advanced X-Pack features, or insert a license if you already purchased one.
+1. Open *Management > License Management* on the Kibana interface. On this section, you can choose between a free 30-day trial to try the advanced X-Pack features, or upload a license if you already purchased one.
 
 .. image:: ../../../images/kibana-app/configure-xpack/xpack-install/license-management.png
   :align: center
   :width: 100%
 
-2. Enable the Security plugin on Elasticsearch. Open the ``/etc/elasticsearch/elasticsearch.yml`` file and set this option to ``true``:
+2. Enable the Security plugin on Elasticsearch. On the same machine where Elasticsearch is installed, open the ``/etc/elasticsearch/elasticsearch.yml`` file and set this option to ``true``:
 
   .. code-block:: yaml
 
@@ -70,7 +72,7 @@ Follow these steps to enable X-Pack:
       "tagline" : "You Know, for Search"
     }
 
-5. Temporarily set the `elastic` user for Kibana, editing the ``/etc/kibana/kibana.yml`` file as follow:
+5. On the host where Kibana is installed, set the `elastic` user in its configuration, editing the ``/etc/kibana/kibana.yml`` file as follow:
 
   .. code-block:: yaml
 
@@ -95,6 +97,6 @@ Follow these steps to enable X-Pack:
     .. toctree::
         :maxdepth: 1
 
-        create-xpack-users
+        defining-xpack-users
         configure-xpack-users
         xpack-troubleshooting

@@ -45,7 +45,7 @@ The Wazuh app is available on the left side of the screen, on the Kibana sidebar
 
 .. topic:: Dev tools
 
-    The *Dev tools* tab provides an user interface to interact with the Wazuh API. You can use it to send requests and get a response. This section is fully described on :ref:`this section <kibana_dev_tools>` of the documentation.
+    The *Dev tools* tab provides an user interface to interact with the Wazuh API. You can use it to send requests and get a response. Click :ref:`here <kibana_dev_tools>` for more details about this section.
 
 .. topic:: Settings
 
