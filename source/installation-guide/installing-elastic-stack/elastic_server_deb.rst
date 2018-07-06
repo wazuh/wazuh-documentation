@@ -170,16 +170,16 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # apt-get install kibana=6.3.0
 
-2. Install the Wazuh App plugin for Kibana:
+2. Install the Wazuh app plugin for Kibana:
 
-  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
+  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app.
   Set the limit as follows:
 
   .. code-block:: console
 
     # export NODE_OPTIONS="--max-old-space-size=3072"
 
-  b) Install the Wazuh App:
+  b) Install the Wazuh app:
 
   .. code-block:: console
 
@@ -191,7 +191,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note::
 
-    If you want to download a different Wazuh App plugin for another version of Wazuh or the Elastic Stack, check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
+    If you want to download a different Wazuh app plugin for another version of Wazuh or the Elastic Stack, check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
 
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 

@@ -321,13 +321,13 @@ Upgrade Kibana
 
 4. Upgrade the Wazuh Kibana App:
 
-  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. Set the limit as follow:
+  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app. Set the limit as follow:
 
   .. code-block:: console
 
       # export NODE_OPTIONS="--max-old-space-size=3072"
 
-  b) Install the Wazuh App:
+  b) Install the Wazuh app:
 
   .. code-block:: console
 
@@ -395,7 +395,7 @@ Official upgrading guides for Elastic Stack:
 Disable the Elasticsearch repository
 ------------------------------------
 
-We recommend that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version. An untimely or unplanned upgrade may break the Wazuh App. To disable the repository, follow these steps:
+We recommend that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version. An untimely or unplanned upgrade may break the Wazuh app. To disable the repository, follow these steps:
 
   a) For CentOS/RHEL/Fedora:
 

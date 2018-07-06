@@ -5,7 +5,8 @@
 X-Pack troubleshooting
 ======================
 
-**"How can I use a different index pattern?"**
+How can I use a different index pattern?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 If you are indexing data with a different index pattern, for example ``my-alerts-*`` you need a different role with access to that new pattern:
 
@@ -39,7 +40,8 @@ Now assign it to your desired user(s):
 
     {"user":{"created":false}} // If the user did exist previously
 
-**"I have issues when using the index pattern selector"**
+Issues when using the index pattern selector
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The index pattern list is calculated from the server and it's filtered depending on the user role. It means the user can only select the index patterns it has access to.
 
