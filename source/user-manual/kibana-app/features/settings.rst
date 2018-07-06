@@ -69,6 +69,8 @@ The app provides the following extensions:
 
     The selected extensions are stored in a browser cookie. Multiple users can select different extensions on their own Internet browsers.
 
+.. note::
+
     The default extensions configuration can be customized for newly inserted APIs. You can read more about it on the :ref:`kibana_config_file` section.
 
 Index pattern

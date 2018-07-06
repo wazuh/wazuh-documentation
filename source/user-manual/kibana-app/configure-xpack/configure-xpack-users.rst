@@ -52,9 +52,9 @@ Using Kibana UI with the `elastic` user
 
 8. Create a standard user:
 
-.. note::
+  .. note::
 
-  This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 7).
+    This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 7).
 
 .. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack08.png
   :align: center
@@ -62,9 +62,9 @@ Using Kibana UI with the `elastic` user
 
 9. Create the Kibana system user:
 
-.. warning::
+  .. warning::
 
-  Ensure the password is enough strong, it will be the superuser for your environment.
+    Ensure the password is strong enough, it will be the superuser for your environment.
 
 .. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack09.png
   :align: center
@@ -141,9 +141,9 @@ Using CLI
 
 4. Create the Kibana system user:
 
-.. warning::
+  .. warning::
 
-  Ensure the password is enough strong, it will be the superuser for your environment.
+    Ensure the password is strong enough, it will be the superuser for your environment.
 
   .. code-block:: none
 
@@ -173,9 +173,9 @@ Using CLI
 
 6. Create a standard user:
 
-.. note::
+  .. note::
 
-  This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 5).
+    This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 5).
 
   .. code-block:: none
 

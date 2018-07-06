@@ -16,7 +16,7 @@ The reports **can't be generated** on a tab when some of the conditions below ar
   :align: center
   :width: 100%
 
-The generated reports ara available on *Management > Reporting*. From there, you can list them, refresh the list to scan for new generated reports, download or delete them. The reports are generated and downloaded in PDF format to your computer.
+The generated reports are available on *Management > Reporting*. From there, you can list them, refresh the list to scan for new generated reports, download or delete them. The reports are generated and downloaded in PDF format to your computer.
 
 .. image:: ../../../images/kibana-app/features/reporting/list-reports.png
   :align: center

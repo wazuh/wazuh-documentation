@@ -8,11 +8,11 @@ Create X-Pack users
 Kibana system user
 ------------------
 
-This user is based on the pre-built role named **kibana_system**, but it must be able to fetch and write data to Wazuh indices too.
+This user is based on the pre-built role named ``kibana_system``, but it must be able to fetch and write data to Wazuh indices too.
 
-To do so, we'll define another role called **wazuh-admin** to handle data related to Wazuh.
+To do so, we'll define another role called ``wazuh-admin`` to handle data related to Wazuh.
 
-1. Defining the wazuh-admin role
+1. Defining the ``wazuh-admin`` role:
 
     a) At cluster level, it will need the following privileges:
 
@@ -43,9 +43,11 @@ Wazuh admin user
 
 This user will be able to login into Kibana UI, navigate through the Wazuh app and also add/delete Wazuh API entries.
 
-.. note:: This user will use two roles: **wazuh-basic** and **wazuh-api-admin**. The **wazuh-admin** role will be used to handle data related to Wazuh and the **wazuh-api-admin** role will be used to add/delete Wazuh API entries.
+.. note::
 
-1. Defining the wazuh-basic role:
+    This user will use two roles: ``wazuh-basic`` and ``wazuh-api-admin``. The ``wazuh-admin`` role will be used to handle data related to Wazuh and the ``wazuh-api-admin`` role will be used to add/delete Wazuh API entries.
+
+1. Defining the ``wazuh-basic`` role:
 
     a) At cluster level, it won't need any privileges. At index level, it will need the following privileges:
 
@@ -63,7 +65,7 @@ This user will be able to login into Kibana UI, navigate through the Wazuh app a
     |wazuh-monitoring-3.x-*                                                  | **read**                                                    |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
 
-2. Defining the wazuh-api-admin role:
+2. Defining the ``wazuh-api-admin`` role:
 
     a) At cluster level, it won't need any privileges. At index level, it will need the following privileges:
 
@@ -76,8 +78,7 @@ This user will be able to login into Kibana UI, navigate through the Wazuh app a
 Wazuh standard user
 -------------------
 
-We need one or more users who will be able to login into Kibana UI with read only privileges. This user only needs
-to use the wazuh-basic role.
+We need one or more users who will be able to login into Kibana UI with read only privileges. This user only needs to use the wazuh-basic role.
 
 Users summary
 -------------
