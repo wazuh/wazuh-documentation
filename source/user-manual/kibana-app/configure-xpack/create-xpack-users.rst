@@ -24,7 +24,6 @@ To do so, we'll define another role called **wazuh-admin** to handle data relate
     |manage_index_templates                                                  | **Yes**                                                     |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
 
-
     b) At index level, it will need the following privileges:
 
     +------------------------------------------------------------------------+-------------------------------------------------------------+
@@ -75,7 +74,7 @@ This user will be able to login into Kibana UI, navigate through the Wazuh app a
     +------------------------------------------------------------------------+-------------------------------------------------------------+
 
 Wazuh standard user
---------------------
+-------------------
 
 We need one or more users who will be able to login into Kibana UI with read only privileges. This user only needs
 to use the wazuh-basic role.

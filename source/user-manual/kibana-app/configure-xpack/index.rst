@@ -19,7 +19,7 @@ Follow these steps to enable X-Pack:
 
 1. Open *Management > License Management* on the Kibana interface. On this section, you can choose between a free 30-day trial to try the advanced X-Pack features, or insert a license if you already purchased one.
 
-.. image:: ../../../images/kibana-app/configure-xpack/license-management.png
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-install/license-management.png
   :align: center
   :width: 100%
 
@@ -86,7 +86,7 @@ Follow these steps to enable X-Pack:
 
 7. Login into the Kibana interface using the ``elastic`` user when prompted. Now you can continue configuring X-Pack Security on the following sections.
 
-.. image:: ../../../images/kibana-app/configure-xpack/kibana-login.png
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-install/kibana-login.png
   :align: center
   :width: 100%
 

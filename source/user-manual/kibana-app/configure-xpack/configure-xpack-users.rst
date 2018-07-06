@@ -8,72 +8,67 @@ Configure X-Pack users
 Using Kibana UI with the `elastic` user
 ---------------------------------------
 
-1. Login into Kibana using the `elastic` user:
+1. Login into Kibana using the ``elastic`` user:
 
-  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack01.png
-      :title: Configure through Kibana 1
-      :align: center
-      :width: 40%
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack01.png
+    :align: center
+    :width: 40%
 
-2. Go to Management > Security > Roles:
+2. Go to *Management > Security > Roles*:
 
-  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack02.png
-      :title: Configure through Kibana 2
-      :align: center
-      :width: 100%
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack02.png
+    :align: center
+    :width: 100%
 
-3. Creating the **wazuh-admin** role:
+3. Create the ``wazuh-admin`` role:
 
-  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack03.png
-      :title: Configure through Kibana 3
-      :align: center
-      :width: 100%
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack03.png
+    :align: center
+    :width: 100%
 
-4. Creating the **wazuh-basic** role:
+4. Create the ``wazuh-basic`` role:
 
-  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack04.png
-      :title: Configure through Kibana 4
-      :align: center
-      :width: 100%
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack04.png
+    :align: center
+    :width: 100%
 
-5. Creating the **wazuh-api-admin** role:
+5. Create the ``wazuh-api-admin`` role:
 
-  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack05.png
-      :title: Configure through Kibana 5
-      :align: center
-      :width: 100%
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack05.png
+    :align: center
+    :width: 100%
 
-6. Go to Management > Security > Users:
+6. Go to *Management > Security > Users*:
 
-  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack06.png
-      :title: Configure through Kibana 6
-      :align: center
-      :width: 100%
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack06.png
+    :align: center
+    :width: 100%
 
-7. Creating the Wazuh admin user:
+7. Create the Wazuh admin user:
 
-  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack07.png
-      :title: Configure through Kibana 7
-      :align: center
-      :width: 100%
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack07.png
+    :align: center
+    :width: 100%
 
-8. Creating a standard user:
+8. Create a standard user:
 
-  .. note:: This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 7).
+.. note::
 
-  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack08.png
-      :title: Configure through Kibana 8
-      :align: center
-      :width: 100%
+  This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 7).
 
-9. Creating the Kibana system user:
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack08.png
+  :align: center
+  :width: 100%
 
-  .. note:: Ensure the password is enough strong, it will be the superuser for your environment.
+9. Create the Kibana system user:
 
-  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack09.png
-      :title: Configure through Kibana 9
-      :align: center
-      :width: 100%
+.. warning::
+
+  Ensure the password is enough strong, it will be the superuser for your environment.
+
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack09.png
+  :align: center
+  :width: 100%
 
 10. Set the right user on `kibana.yml` file:
 
@@ -84,20 +79,16 @@ Using Kibana UI with the `elastic` user
     elasticsearch.username: "wazuhsystem"
     elasticsearch.password: "wazuhsystem"
 
-
 11. Restart Kibana:
 
   .. code-block:: console
 
     # systemctl restart kibana
 
-
 Using CLI
 ---------
 
-.. note:: Before configure the roles and users you must to install X-Pack.
-
-1. Creating the **wazuh-admin** role:
+1. Create the ``wazuh-admin`` role:
 
   .. code-block:: none
 
@@ -114,8 +105,7 @@ Using CLI
 
     {"role":{"created":true}}
 
-
-2. Creating the **wazuh-basic** role:
+2. Create the ``wazuh-basic`` role:
 
   .. code-block:: none
 
@@ -132,8 +122,7 @@ Using CLI
 
     {"role":{"created":true}}
 
-
-3. Creating the **wazuh-api-admin** role:
+3. Create the ``wazuh-api-admin`` role:
 
   .. code-block:: none
 
@@ -150,10 +139,11 @@ Using CLI
 
     {"role":{"created":true}}
 
+4. Create the Kibana system user:
 
-4. Creating the Kibana system user:
+.. warning::
 
-  .. note:: Ensure the password is enough strong, it will be the superuser for your environment.
+  Ensure the password is enough strong, it will be the superuser for your environment.
 
   .. code-block:: none
 
@@ -167,8 +157,7 @@ Using CLI
 
     {"user":{"created":true}}
 
-
-5. Creating the Wazuh admin user:
+5. Create the Wazuh admin user:
 
   .. code-block:: none
 
@@ -182,10 +171,11 @@ Using CLI
 
     {"user":{"created":true}}
 
+6. Create a standard user:
 
-6. Creating a standard user:
+.. note::
 
-  .. note:: This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 5).
+  This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 5).
 
   .. code-block:: none
 
@@ -199,7 +189,6 @@ Using CLI
 
     {"user":{"created":true}}
 
-
 7. Set the right user on `kibana.yml` file:
 
   .. code-block:: none
@@ -208,7 +197,6 @@ Using CLI
 
     elasticsearch.username: "wazuhsystem"
     elasticsearch.password: "wazuhsystem"
-
 
 8. Restart Kibana:
 
