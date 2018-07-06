@@ -5,6 +5,8 @@
 Troubleshooting
 ===============
 
+This section collects common installation or usage problems on the Wazuh app, and some basic steps to solve them.
+
 **"Plugin installation was unsuccessful due to error "Incorrect Kibana version in plugin [wazuh]. Expected [6.2.4]; found [6.3.0]"**
 
     The Wazuh app has a file named *package.json*, it includes dependencies along more information. One included thing is the Kibana version:
@@ -78,12 +80,19 @@ Troubleshooting
 
 **API version mismatch. Expected v3.2.0**
 
-    The Wazuh app uses the Wazuh API to fetch some information, and they are compatible between patch versions, this means you could
-    usean app designed for Wazuh 3.2.1 with a Wazuh API 3.2.2.
+    The Wazuh app uses the Wazuh API to fetch some information, and they are compatible between patch versions, this means you could use an app designed for Wazuh 3.3.1 with a Wazuh API 3.3.0.
 
-    You can't use the 3.3.0 version of Wazuh API with a Wazuh app designed for Wazuh 3.0.0.
+    You can't use the 3.3.0 version of Wazuh API with a Wazuh app designed for Wazuh 3.2.4.
 
-**None of the above solutions are matching my problem**
+    Check our :ref:`compatibility_matrix` to learn more about compatibility between the API and the app.
+
+**Routes. Error. Cannot read property 'manager' of undefined**
+
+    This error usually means that you're using Wazuh v2.x with Elastic Stack v6.x, or Wazuh v3.x with Elastic Stack v5.x.
+
+    You have to use the correct versions of Wazuh and the Elastic Stack to work properly. We always recommend upgrading to the latest version following :ref:`this guide <upgrading_different_major>`.
+
+**None of the above solutions are fixing my problem**
 
     All the technologies we are using have their own logs files, so you could check them and look for error messages and warning messages.
 
@@ -107,4 +116,4 @@ Troubleshooting
 
         # cat /var/ossec/logs/ossec.log | grep -i -E "error|warn"
 
-You can also open a new thread in our `Google mailing list <https://groups.google.com/forum/#!forum/wazuh>`_, or a new issue in our `GitHub repository <https://github.com/wazuh/wazuh-kibana-app/issues>`_.
+You can also open a new thread in our `Google mailing list <https://groups.google.com/group/wazuh>`_, or a new issue in our `GitHub repository <https://github.com/wazuh/wazuh-kibana-app/issues>`_.

@@ -17,5 +17,5 @@ This manual describes the configuration process to get it started and the differ
         connect-kibana-app
         configure-xpack/index
         features/index
-        troubleshooting/index
+        troubleshooting
         reference/index
