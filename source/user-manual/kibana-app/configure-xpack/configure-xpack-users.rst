@@ -10,49 +10,49 @@ Using Kibana UI with the `elastic` user
 
 1. Login into Kibana using the `elastic` user:
 
-  .. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack01.png
+  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack01.png
       :title: Configure through Kibana 1
       :align: center
       :width: 40%
 
 2. Go to Management > Security > Roles:
 
-  .. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack02.png
+  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack02.png
       :title: Configure through Kibana 2
       :align: center
       :width: 100%
 
 3. Creating the **wazuh-admin** role:
 
-  .. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack03.png
+  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack03.png
       :title: Configure through Kibana 3
       :align: center
       :width: 100%
 
 4. Creating the **wazuh-basic** role:
 
-  .. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack04.png
+  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack04.png
       :title: Configure through Kibana 4
       :align: center
       :width: 100%
 
 5. Creating the **wazuh-api-admin** role:
 
-  .. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack05.png
+  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack05.png
       :title: Configure through Kibana 5
       :align: center
       :width: 100%
 
 6. Go to Management > Security > Users:
 
-  .. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack06.png
+  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack06.png
       :title: Configure through Kibana 6
       :align: center
       :width: 100%
 
 7. Creating the Wazuh admin user:
 
-  .. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack07.png
+  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack07.png
       :title: Configure through Kibana 7
       :align: center
       :width: 100%
@@ -61,7 +61,7 @@ Using Kibana UI with the `elastic` user
 
   .. note:: This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 7).
 
-  .. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack08.png
+  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack08.png
       :title: Configure through Kibana 8
       :align: center
       :width: 100%
@@ -70,7 +70,7 @@ Using Kibana UI with the `elastic` user
 
   .. note:: Ensure the password is enough strong, it will be the superuser for your environment.
 
-  .. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack09.png
+  .. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack09.png
       :title: Configure through Kibana 9
       :align: center
       :width: 100%

@@ -2,24 +2,24 @@
 
 .. _xpack_troubleshooting:
 
-Troubleshooting
-===============
+X-Pack troubleshooting
+======================
 
-"Welcome to X-Pack!" banner
----------------------------
+"Help us improve the Elastic Stack" banner
+------------------------------------------
 
-After loging into Kibana UI I click `Dismiss` in the banner:
+After loging into Kibana UI I click `Yes` or `No` in the banner:
 After follow every step on this tutorial, I've logged in through the Kibana UI with a Wazuh standard
 user and I can see this banner:
 
-.. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack12.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-troubleshooting/xpack12.png
     :title: xPackMonitoring.showBanner 1
     :align: center
     :width: 100%
 
 And it throws an error:
 
-.. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack13.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-troubleshooting/xpack13.png
     :title: xPackMonitoring.showBanner 2
     :align: center
     :width: 100%
@@ -28,14 +28,14 @@ It happens because Jack has no privileges to modify the `.kibana` index.
 
 We need to login with another user with higher privileges to dismiss it. We can use the Wazuh admin user to do it or use the `elastic` user and go to Management > Kibana > Advanced settings as follow:
 
-.. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack10.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-troubleshooting/xpack10.png
     :title: xPackMonitoring.showBanner 3
     :align: center
     :width: 100%
 
 You should see a list with many options, disable the xPackMonitoring.showBanner option as follow:
 
-.. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack11.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-troubleshooting/xpack11.png
     :title: xPackMonitoring.showBanner 4
     :align: center
     :width: 100%
@@ -83,7 +83,7 @@ The index pattern list is calculated from the server and it's filtered depending
 
 If the user can't access to any pattern, the app will display the following screen:
 
-.. thumbnail:: ../../../images/kibana-app/rbac-xpack/xpack14.png
+.. thumbnail:: ../../../images/kibana-app/configure-xpack/xpack-troubleshooting/xpack14.png
     :title: Index pattern selector
     :align: center
     :width: 100%
