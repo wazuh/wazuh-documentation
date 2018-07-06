@@ -175,6 +175,8 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     If you are running the Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elastic_ssl`.
 
+.. _install_kibana_app_rpm:
+
 Kibana
 ------
 
