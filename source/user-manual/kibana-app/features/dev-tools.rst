@@ -25,4 +25,4 @@ To execute a request, place the cursor on the desired request line and click on 
 
 .. warning::
 
-  Currently, the tab only allows fetching data with ``GET`` requests due to security reasons.
+  Currently, the tab only allows fetching data with ``GET`` requests.

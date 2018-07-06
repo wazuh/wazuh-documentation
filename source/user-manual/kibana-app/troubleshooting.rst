@@ -18,7 +18,7 @@ This section collects common installation or usage problems on the Wazuh app, an
             "version": "6.3.0"
         },
 
-    Your app must match to the installed Kibana version. If you have, for example, ``6.3.0`` in the *package.json* file, your installed Kibana version must be ``6.3.0``.
+    Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.3.0`` then your installed Kibana version must be ``6.3.0``.
 
     You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
@@ -87,10 +87,10 @@ I don't see alerts in the Wazuh app
 
     There should be two processes reading the *alerts.json* file: *ossec-analysisd* and *filebeat*.
 
-API version mismatch. Expected v3.2.0
+API version mismatch. Expected vx.y.z
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. This means you can use an app designed for Wazuh 3.3.1 with a Wazuh API 3.3.0.
+    The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.3.1 with a Wazuh API 3.3.0.
 
     You can't use the 3.3.0 version of Wazuh API with a Wazuh app designed for Wazuh 3.2.4.
 
