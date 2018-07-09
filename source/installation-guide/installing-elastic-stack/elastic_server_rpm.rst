@@ -61,7 +61,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # yum install elasticsearch-6.3.0
+    # yum install elasticsearch-6.3.1
 
 2. Enable and start the Elasticsearch service:
 
@@ -87,15 +87,15 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # curl localhost:9200/?pretty
 
     {
-      "name" : "116m4ct",
+      "name" : "yk-Jl_9",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "2TbJlE6MRBKB6uHybVSQJA",
+      "cluster_uuid" : "YdDkcAkdRquf6lMQjP0HNA",
       "version" : {
-        "number" : "6.3.0",
+        "number" : "6.3.1",
         "build_flavor" : "default",
         "build_type" : "rpm",
-        "build_hash" : "424e937",
-        "build_date" : "2018-06-11T23:38:03.357887Z",
+        "build_hash" : "eb782d0",
+        "build_date" : "2018-06-29T21:59:26.107521Z",
         "build_snapshot" : false,
         "lucene_version" : "7.3.1",
         "minimum_wire_compatibility_version" : "5.6.0",
@@ -123,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # yum install logstash-6.3.0
+    # yum install logstash-6.3.1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -184,7 +184,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # yum install kibana-6.3.0
+    # yum install kibana-6.3.1
 
 2. Install the Wazuh App plugin for Kibana:
 
@@ -198,7 +198,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.1_6.3.0.zip
+    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.1_6.3.1.zip
 
   .. warning::
 
