@@ -61,7 +61,7 @@ Real-time monitoring is configured with the ``realtime`` option. This option onl
 Configure to report changes
 ---------------------------
 
-Using the``report_changes`` option, we can see what specifically changed in text files. Be careful about which folders you set up to ``report_changes`` to, because in order to do this, Wazuh copies every single file you want to monitor to a private location.
+Using the ``report_changes`` option, we can see what specifically changed in text files. Be careful about which folders you set up to ``report_changes`` to, because in order to do this, Wazuh copies every single file you want to monitor to a private location.
 
 ::
 
