@@ -16,7 +16,7 @@ Configuration
 
 Firstly we need to check if the Audit daemon is installed in our system.
 
-In RedHat based system, Auditd is commonly installed by default. If it's not installed we need to install it using the following command:
+In RedHat based system, Auditd is commonly installed by default. If it's not installed, we need to install it using the following command:
 ::
 
     yum install auditd
@@ -88,7 +88,7 @@ The following fields are received in FIM alerts when who-data is enabled:
 Alert examples
 ^^^^^^^^^^^^^^
 
-In the following example we can see how the user *Smith* added a new IP to the file ``/etc/hosts.allow`` using the *nano* files editor with **sudo** privileges:
+In the following example we can see how the user *Smith* added a new IP to the file ``/etc/hosts.allow`` using the *nano* editor with **sudo** privileges:
 
 
 Alert in log format:
@@ -160,7 +160,7 @@ Alert in JSON format:
         "name":"vpc-agent-debian"
     },
     "manager":{
-        "name":"vpc-ossec-manager"
+        "name":"vpc-wazuh-manager"
     },
     "id":"1531224328.283446",
     "syscheck":{
