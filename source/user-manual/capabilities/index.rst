@@ -23,6 +23,7 @@ If you find a problem, error or if you want to ask related questions, please con
 
     log-data-collection/index
     file-integrity/index
+    auditing-whodata/index
     anomalies-detection/index
     policy-monitoring/index
     system-calls-monitoring/index

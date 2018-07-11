@@ -56,9 +56,14 @@ Real-time monitoring is configured with the ``realtime`` option. This option onl
       <directories check_all="yes" realtime="yes">c:/tmp</directories>
     </syscheck>
 
+
 Configuring who-data monitoring
 --------------------------------
-Who-data monitoring is configured with the ``whodata`` option. This option only works with directories rather than with individual files.
+
+.. versionadded:: 3.4.0
+
+Who-data monitoring is configured with the ``whodata`` option. This option replaces the ``realtime`` option, which means that ``whodata`` implies real-time monitoring but adding the who-data information.
+This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so additional configurations might be necessary. Check the :ref:`Auditing who-data <auditing-whodata>` entry to get further information.
 
 ::
 
