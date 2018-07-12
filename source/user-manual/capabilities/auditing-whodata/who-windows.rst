@@ -8,6 +8,9 @@ Auditing who-data in Windows
 How it works
 ^^^^^^^^^^^^
 
+The who-data monitoring functionality uses the Microsoft Windows SACL subsystem to get the information about who made the changes in a monitored directory.
+These changes produce audit events that are processed by *syscheck* and reported to the manager.
+
 Configuration
 ^^^^^^^^^^^^^
 
