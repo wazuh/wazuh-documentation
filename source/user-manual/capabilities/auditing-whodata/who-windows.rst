@@ -47,7 +47,6 @@ Alert in log format:
     2018 Jul 11 17:43:52 (vpc-agent-win) any->syscheck
     Rule: 550 (level 7) -> 'Integrity checksum changed.'
     Integrity checksum changed for: 'C:\Windows\System32\drivers\etc\hosts'
-    Attributes changed: size,md5,sha1,sha256,mtime
     Size changed from '825' to '857'
     Old md5sum was: '76eae1f63f77154db8c9dd884a47e994'
     New md5sum is : 'e71b0c5cf0e3a8d1848312f1394e448f'
