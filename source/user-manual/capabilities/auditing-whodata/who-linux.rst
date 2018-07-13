@@ -33,7 +33,9 @@ Next step is to configure syscheck to enable who-data monitoring in the selected
       <directories check_all="yes" whodata="yes">/etc</directories>
     </syscheck>
 
-Once the configuration is finished and Wazuh is restarted, we can check if the Audit rule for monitoring the selected folder is applied. To check that, we need to execute the following command
+Once this configuration is added, we need to restart Wazuh to apply the changes.
+
+We can check if the Audit rule for monitoring the selected folder is applied. To check that, we need to execute the following command
 ::
 
     auditctl -l | grep wazuh_fim
@@ -43,6 +45,7 @@ and check if the rule was added
 
     -w /etc -p wa -k wazuh_fim
 
+When the agent is stopped, we can use the same command to check that the added rule was successfully removed.
 
 Alert fields
 ^^^^^^^^^^^^
