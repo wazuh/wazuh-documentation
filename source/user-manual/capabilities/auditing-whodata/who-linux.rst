@@ -102,7 +102,6 @@ Alert in log format:
     2018 Jul 10 14:05:28 (vpc-agent-debian) any->syscheck
     Rule: 550 (level 7) -> 'Integrity checksum changed.'
     Integrity checksum changed for: '/etc/hosts.allow'
-    Attributes changed: size,md5,sha1,sha256,mtime
     Size changed from '421' to '433'
     Old md5sum was: '4b8ee210c257bc59f2b1d4fa0cbbc3da'
     New md5sum is : 'acb2289fba96e77cee0a2c3889b49643'
