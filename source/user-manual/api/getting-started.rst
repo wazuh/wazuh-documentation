@@ -28,7 +28,7 @@ Use the cURL command to send a *request* to confirm that everything is working a
 
 .. code-block:: console
 
-    # curl -u foo:bar -k https://127.0.0.1:55000?pretty
+    # curl -u foo:bar -k "https://127.0.0.1:55000?pretty"
     {
        "error": 0,
        "data": "Welcome to Wazuh HIDS API"
