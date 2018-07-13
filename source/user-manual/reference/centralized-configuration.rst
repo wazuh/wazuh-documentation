@@ -209,7 +209,7 @@ Also, the API returns the md5sum of the ``agent.conf`` file in the field ``share
 
 .. code-block:: console
 
-    $ curl -u foo:bar -k "http://127.0.0.1:55000/agents/1032?pretty"
+    $ curl -u foo:bar "http://localhost:55000/agents/1032?pretty"
 
     {
        "error": 0,

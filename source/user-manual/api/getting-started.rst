@@ -28,7 +28,7 @@ Use the cURL command to send a *request* to confirm that everything is working a
 
 .. code-block:: console
 
-    # curl -u foo:bar -k "https://127.0.0.1:55000?pretty"
+    # curl -u foo:bar "http://localhost:55000?pretty"
     {
        "error": 0,
        "data": "Welcome to Wazuh HIDS API"
@@ -38,8 +38,7 @@ Explanation:
 
  * ``curl``: A command-line tool for sending requests and commands over HTTP and HTTPS.
  * ``-u foo:bar``: The username and password to authenticate with the API.
- * ``-k``: The parameter that allows connections to SSL sites with self-signed certificates.
- * ``https://127.0.0.1:55000``: The API URL to use if you are running the command on the manager itself.
+ * ``http://localhost:55000``: The API URL to use if you are running the command on the manager itself.
  * ``?pretty``: The parameter that makes the JSON output more human-readable.
 
 Basic concepts
@@ -85,7 +84,7 @@ Exploring the ruleset
 
 Often when an alert fires, it is helpful to know details about the rule itself. The following request enumerates the attributes of rule *1002*:
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/rules/1002?pretty"``
+``curl -u foo:bar "http://localhost:55000/rules/1002?pretty"``
 
 ::
 
@@ -116,7 +115,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 
 It can also be helpful to know what rules are available that match specific criteria. For example, we can show all of the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures**. In the example below, only one rule is returned:
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/rules?group=web&pci=10.6.1&search=failures&pretty"``
+``curl -u foo:bar "http://localhost:55000/rules?group=web&pci=10.6.1&search=failures&pretty"``
 
 ::
 
@@ -158,7 +157,7 @@ Mining the file integrity monitoring database of an agent
 
 You can use the API to show information about all of the files monitored by syscheck. For example, you can enumerate all of the monitored files on agent *000* (the manager) with extension *.py* that have been modified. In order to be concise, "*limit=1*" has been used in this example to limit the results to a single record:
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000/files?offset=0&limit=1&event=modified&search=.py&pretty"``
+``curl -u foo:bar "http://localhost:55000/syscheck/000/files?offset=0&limit=1&event=modified&search=.py&pretty"``
 
 ::
 
@@ -190,7 +189,7 @@ You can use the API to show information about all of the files monitored by sysc
 You can find a file using its md5/sha1 hash:
 
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000/files?hash=9d0ac660826f4245f3444b0247755c7229f1f9fe&pretty"``
+``curl -u foo:bar "http://localhost:55000/syscheck/000/files?hash=9d0ac660826f4245f3444b0247755c7229f1f9fe&pretty"``
 
 ::
 
@@ -224,7 +223,7 @@ Listing outstanding rootcheck issues
 
 Rootcheck requests are very similar to the syscheck requests. In order to get all rootcheck issues with the **outstanding** status, run this request:
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/rootcheck/000?status=outstanding&offset=0&limit=1&pretty"``
+``curl -u foo:bar "http://localhost:55000/rootcheck/000?status=outstanding&offset=0&limit=1&pretty"``
 
 ::
 
@@ -248,7 +247,7 @@ Starting the manager and dumping its configuration
 
 It is possible to use the API to interact with the manager in multiple ways.  For example, you can stop, start, restart or get its state with a request such as:
 
-``curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"``
+``curl -u foo:bar -X PUT "http://localhost:55000/manager/restart?pretty"``
 
 ::
 
@@ -293,7 +292,7 @@ It is possible to use the API to interact with the manager in multiple ways.  Fo
 
 You can even dump the manager's current configuration with the below request (response shortened for brevity):
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/manager/configuration?pretty"``
+``curl -u foo:bar "http://localhost:55000/manager/configuration?pretty"``
 
 ::
 
@@ -323,7 +322,7 @@ Here are some commands for working with the agents.
 This enumerates **active** agents:
 
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/agents?offset=0&limit=1&status=active&pretty"``
+``curl -u foo:bar "http://localhost:55000/agents?offset=0&limit=1&status=active&pretty"``
 
 ::
 
@@ -344,7 +343,7 @@ This enumerates **active** agents:
 
 Adding an agent is now easier than ever. Simply send a request with the agent name and its IP.
 
-``curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"``
+``curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "http://localhost:55000/agents?pretty"``
 
 ::
 
@@ -355,7 +354,7 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 You can also fetch an agent's key:
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/agents/019/key?pretty"``
+``curl -u foo:bar "http://localhost:55000/agents/019/key?pretty"``
 
 ::
 

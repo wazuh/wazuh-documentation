@@ -16,7 +16,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -u foo:bar -k https://127.0.0.1:55000
+    # curl -u foo:bar "http://localhost:55000"
 
 ``{"error":"0","data": "Welcome to Wazuh HIDS API"}``
 
@@ -24,7 +24,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -u foo:bar -k -X PUT https://127.0.0.1:55000/agents/new_agent
+    # curl -u foo:bar -X PUT "http://localhost:55000/agents/new_agent"
 
 ``{"error":0,"data":"004"}``
 
@@ -32,7 +32,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000//agents"
+    # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "http://localhost:55000//agents"
 
 ``{"error":0,"data":"004"}``
 
@@ -40,7 +40,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -u foo:bar -k -X DELETE https://127.0.0.1:55000/rootcheck/001
+    # curl -u foo:bar -X DELETE "http://localhost:55000/rootcheck/001"
 
 ``{"error":"0","data":"Policy and auditing database updated"}``
 

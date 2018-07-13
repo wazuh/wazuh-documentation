@@ -134,7 +134,7 @@ system data is also tracked.
   .. code-block:: console
 
     Wazuh agent_control. List of available agents:
-      ID: 000, Name: wazuh-server (server), IP: 127.0.0.1, Active/Local
+      ID: 000, Name: wazuh-server (server), IP: localhost, Active/Local
       ID: 001, Name: linux-agent, IP: any, Active
       ID: 002, Name: elastic-server, IP: any, Active
       ID: 003, Name: windows-agent, IP: any, Active
@@ -143,7 +143,7 @@ system data is also tracked.
 
   .. code-block:: console
 
-    # curl -u wazuhapiuser:wazuhlab -k -X GET "https://127.0.0.1:55000/syscollector/002/hardware?pretty"
+    # curl -u wazuhapiuser:wazuhlab -k -X GET "https://localhost:55000/syscollector/002/hardware?pretty"
 
   The results should look like this:
 
@@ -173,7 +173,7 @@ system data is also tracked.
 
   .. code-block:: console
 
-    # curl -u wazuhapiuser:wazuhlab -k -X GET "https://127.0.0.1:55000/syscollector/002/os?pretty"
+    # curl -u wazuhapiuser:wazuhlab -k -X GET "https://localhost:55000/syscollector/002/os?pretty"
 
   The results should look like this:
 
@@ -202,7 +202,7 @@ system data is also tracked.
 
   .. code-block:: console
 
-    # curl -u wazuhapiuser:wazuhlab -k -X GET "https://127.0.0.1:55000/syscollector/packages?pretty&search=wget"
+    # curl -u wazuhapiuser:wazuhlab -k -X GET "https://localhost:55000/syscollector/packages?pretty&search=wget"
 
   The results should look like this:
 
