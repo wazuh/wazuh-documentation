@@ -18,19 +18,19 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # yum install make gcc git
+      # yum install make gcc policycoreutils-python automake autoconf libtool
 
   b) For Debian-based distributions:
 
     .. code-block:: console
 
-      # apt-get install python gcc make git libc6-dev curl
+      # apt-get install python gcc make libc6-dev curl policycoreutils-python-utils automake autoconf libtool
 
 2. Download and extract the latest version:
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.3.1.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.4.0.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
