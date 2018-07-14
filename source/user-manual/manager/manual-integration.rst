@@ -58,7 +58,7 @@ In order to make the Slack integration work, we need to install the ``python-req
 
         # apt-get install python-requests
 
-    b) Using the Python `pip` tool:
+    c) Using the Python `pip` tool:
 
     .. code-block:: console
 
