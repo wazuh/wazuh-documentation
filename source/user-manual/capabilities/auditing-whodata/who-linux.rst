@@ -27,7 +27,8 @@ For Debian based systems, use the following:
     apt install auditd
 
 Next step is to configure syscheck to enable who-data monitoring in the selected folder in our ``ossec.conf`` file:
-::
+
+.. code-block:: xml
 
     <syscheck>
       <directories check_all="yes" whodata="yes">/etc</directories>
