@@ -14,7 +14,7 @@ This information contains the user who made the changes on the monitored files a
 .. topic:: Contents
 
     .. toctree::
-        :maxdepth: 2
+        :maxdepth: 1
 
         who-linux
         who-windows
