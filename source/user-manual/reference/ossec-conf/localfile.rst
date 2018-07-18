@@ -322,7 +322,9 @@ Attributes:
 +------------+-----------------------------------------------------------------------------------+
 | **target** | This option selects a defined target to apply the output format.                  |
 +            +----------------+------------------------------------------------------------------+
-|            | Allowed values | Any target defined in the option ``<target>``                    |
+|            | Allowed values | Any target defined in the option ``<target>``.                   |
+|            +----------------+------------------------------------------------------------------+
+|            | Default value  | Select all targets defined in the ``<localfile>`` stanza.        |
 +------------+----------------+------------------------------------------------------------------+
 
 Configuration examples
