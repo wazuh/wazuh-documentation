@@ -20,7 +20,7 @@ Preparation
 
   .. code-block:: console
 
-    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jre-8u172-linux-x64.rpm"
+    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-linux-x64.rpm"
 
   Now, check if the package was download successfully:
 
@@ -32,8 +32,8 @@ Preparation
 
   .. code-block:: console
 
-    # yum install jre-8-linux-x64.rpm
-    # rm jre-8-linux-x64.rpm
+    # yum -y install jre-8-linux-x64.rpm
+    # rm -f jre-8-linux-x64.rpm
 
 2. Install the Elastic repository and its GPG key:
 
