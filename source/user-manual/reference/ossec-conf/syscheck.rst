@@ -31,6 +31,7 @@ Options
 - `registry_ignore`_
 - `prefilter_cmd`_
 - `skip_nfs`_
+- `remove_old_diff`_
 - `windows_audit_interval`_
 
 .. _reference_ossec_syscheck_directories:
@@ -345,8 +346,23 @@ Specifies if syscheck should scan network mounted filesystems (Works on Linux an
 | **Allowed values** | yes, no  |
 +--------------------+----------+
 
+remove_old_diff
+^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.4.0
+
+Specifies if Syscheck should delete the local snapshots that are not currently being monitorized.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
 windows_audit_interval
 ^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.5.0
 
 This option sets the frequency with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
 
@@ -356,7 +372,6 @@ This option sets the frequency with which the Windows agent will check that the 
 | **Allowed values** | A positive number, time in seconds |
 +--------------------+------------------------------------+
 
-.. versionadded:: 3.4.0
 
 Default Unix configuration
 --------------------------
