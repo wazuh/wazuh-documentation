@@ -120,13 +120,13 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # yum install elasticsearch-6.3.0
+    # yum install elasticsearch-6.3.1
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.3.0
+    # apt-get install elasticsearch=6.3.1
 
 2. Start the Elasticsearch service:
 
@@ -143,15 +143,15 @@ Upgrade Elasticsearch
     # curl localhost:9200/?pretty
 
     {
-      "name" : "116m4ct",
+      "name" : "yk-Jl_9",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "2TbJlE6MRBKB6uHybVSQJA",
+      "cluster_uuid" : "YdDkcAkdRquf6lMQjP0HNA",
       "version" : {
-        "number" : "6.3.0",
+        "number" : "6.3.1",
         "build_flavor" : "default",
-        "build_type" : "deb",
-        "build_hash" : "424e937",
-        "build_date" : "2018-06-11T23:38:03.357887Z",
+        "build_type" : "rpm",
+        "build_hash" : "eb782d0",
+        "build_date" : "2018-06-29T21:59:26.107521Z",
         "build_snapshot" : false,
         "lucene_version" : "7.3.1",
         "minimum_wire_compatibility_version" : "5.6.0",
@@ -175,13 +175,13 @@ Upgrade Logstash
 
   .. code-block:: console
 
-    # yum install logstash-6.3.0
+    # yum install logstash-6.3.1
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.3.0-1
+    # apt-get install logstash=1:6.3.1-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -221,13 +221,13 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # yum install kibana-6.3.0
+    # yum install kibana-6.3.1
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install kibana=6.3.0
+    # apt-get install kibana=6.3.1
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -248,7 +248,7 @@ Upgrade Kibana
   .. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
-    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.1_6.3.0.zip
+    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.1_6.3.1.zip
 
 .. warning::
   The Wazuh app installation process may take several minutes. Please wait patiently.
@@ -270,14 +270,14 @@ Upgrade Filebeat
 
   .. code-block:: console
 
-    # yum install filebeat-6.3.0
+    # yum install filebeat-6.3.1
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
     # apt-get update
-    # apt-get install filebeat=6.3.0
+    # apt-get install filebeat=6.3.1
 
 2. Start the Filebeat service:
 
