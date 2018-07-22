@@ -18,3 +18,4 @@ This information contains the user who made the changes on the monitored files a
 
         who-linux
         who-windows
+        who-windows-policies
