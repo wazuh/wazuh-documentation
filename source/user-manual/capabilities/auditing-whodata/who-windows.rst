@@ -23,7 +23,7 @@ starting on directories declared with the tag ``whodata="yes"`` in the file ``os
       <directories check_all="yes" whodata="yes">C:\Windows\System32\drivers\etc</directories>
     </syscheck>
 
-System audit policies also need to be properly configured. This part is also done automatically for most supported Windows systems.If your system is
+System audit policies also need to be properly configured. This part is also done automatically for most supported Windows systems. If your system is
 superior to Windows Vista but the audit policies cannot be self-configured, see :ref:`the guide to configure Local Audit Policies<who-windows-policies>`.
 
 Alert fields
@@ -151,8 +151,3 @@ Alert in JSON format:
         },
         "location":"syscheck"
     }
-
-.. toctree::
-    :hidden:
-
-    who-windows-policies
