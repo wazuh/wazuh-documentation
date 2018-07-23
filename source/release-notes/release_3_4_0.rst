@@ -9,7 +9,6 @@ This section shows the most relevant improvements and fixes in version 3.4.0. Mo
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.4.0/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.4.0/CHANGELOG.md>`_
-- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.4.0/CHANGELOG.md>`_
 
 Wazuh core
 ----------
@@ -33,3 +32,10 @@ Other important changes are the following:
 - Added a new option to customize the output format per-target in Logcollector.
 - Added support for unified WPK. Now the WPK files are compatible between versions for the same OS.
 - The CA verification was fixed to allow with more than one *'ca_store'* definition.
+
+
+Wazuh API
+---------
+
+- Added new API request: *GET/agents/stats/distinct*. This new request returns all the different combinations that agents have for the selected fields.
+- Added *experimental_feature* option to enable new features in development.
