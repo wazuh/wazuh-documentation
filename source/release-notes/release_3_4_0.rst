@@ -34,10 +34,11 @@ Syscheck
 
 Many others improvements and fixes have been included in Syscheck in this new version:
 
+- The level of recursiveness when scanning directories can be defined in the ``internal_options.conf`` file. By default, it's set to 256.
 - Added support for SHA256 checksum (by Arshad Khan @arshad01).
 - Enhanced visualization of Syscheck alerts and insertion of all the available fields in the Syscheck messages from the Wazuh configuration files.
 - The value *xxx* (not enabled) was replaced for *n/a* if the hash couldn't be calculated.
-- Fixed registry_ignore problem on syscheck for Windows when *arch="both"* was used.
+- Fixed registry_ignore problem on syscheck for Windows when ``arch="both"`` was used.
 - Allow more than 256 directories in real-time for Windows agent using recursive watchers.
 
 
@@ -52,8 +53,8 @@ Wazuh core
 Wazuh API
 ---------
 
-- Added new API request: *GET/agents/stats/distinct*. This new request returns all the different combinations that agents have for the selected fields.
-- Added *experimental_feature* option to enable new features in development.
+- Added new API request: ``GET/agents/stats/distinct``. This new request returns all the different combinations that agents have for the selected fields.
+- Added ``experimental_feature`` option to enable new features in development.
 
 
 Wazuh ruleset
