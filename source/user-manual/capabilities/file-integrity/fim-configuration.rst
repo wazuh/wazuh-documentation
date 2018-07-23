@@ -24,7 +24,7 @@ Basic usage
 
 For detailed configuration options, go to :ref:`Syscheck <reference_ossec_syscheck>`.
 
-To configure syscheck, a list of files and directories must be identified. The ``check_all`` option checks md5, sha1, owner, and permissions of the file.
+To configure syscheck, a list of files and directories must be identified. The ``check_all`` option checks file size, permissions, owner, last modification date, inode and all the hash sums (MD5, SHA1 and SHA256).
 
 ::
 
