@@ -356,6 +356,8 @@ This option sets the frequency with which the Windows agent will check that the 
 | **Allowed values** | A positive number, time in seconds |
 +--------------------+------------------------------------+
 
+.. versionadded:: 3.4.0
+
 Default Unix configuration
 --------------------------
 
