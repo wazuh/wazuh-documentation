@@ -9,7 +9,7 @@ This section shows the most relevant improvements and fixes in version 3.4.0. Mo
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.4.0/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.4.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.4.0-6.3/CHANGELOG.md>`_
+- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.4.0/CHANGELOG.md>`_
 
 **New features:**
 
