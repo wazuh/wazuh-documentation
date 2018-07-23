@@ -17,6 +17,7 @@ This section shows the most relevant improvements and fixes in version 3.4.0. Mo
 - `Syscheck`_
 - `Wazuh core`_
 - `Wazuh API`_
+- `Wazuh ruleset`_
 
 
 Who-data
@@ -34,7 +35,7 @@ Syscheck
 Many others improvements and fixes have been included in Syscheck in this new version:
 
 - Added support for SHA256 checksum (by Arshad Khan @arshad01).
-- Enhanced visualization of Syscheck alerts and include all the available fields in the Syscheck messages from the Wazuh configuration files.
+- Enhanced visualization of Syscheck alerts and insertion of all the available fields in the Syscheck messages from the Wazuh configuration files.
 - The value *xxx* (not enabled) was replaced for *n/a* if the hash couldn't be calculated.
 - Fixed registry_ignore problem on syscheck for Windows when *arch="both"* was used.
 - Allow more than 256 directories in real-time for Windows agent using recursive watchers.
@@ -53,3 +54,9 @@ Wazuh API
 
 - Added new API request: *GET/agents/stats/distinct*. This new request returns all the different combinations that agents have for the selected fields.
 - Added *experimental_feature* option to enable new features in development.
+
+
+Wazuh ruleset
+-------------
+
+- In older versions, the frecuency attribute in rules was the number of hits + 2. In this version this value has been modified to match exactly the number of hits. By this way this value is more easy to understand.
