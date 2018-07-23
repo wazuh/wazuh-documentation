@@ -9,14 +9,27 @@ This section shows the most relevant improvements and fixes in version 3.4.0. Mo
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.4.0/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.4.0/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.4.0-6.3/CHANGELOG.md>`_
 
-Wazuh core
-----------
+**New features:**
+
+- `Who-data`_
+- `Syscheck`_
+- `Wazuh core`_
+- `Wazuh API`_
+
+
+Who-data
+--------
 
 The main feature introduced in this version is the ability to monitor the information relative to the user who
 makes changes to any file monitored with FIM. This information (who-data) contains the user who makes the changes
 and also the process used. This new functionality is available in Syscheck on Linux and Windows.
+See the :doc:`Auditing who-data <../user-manual/capabilities/auditing-whodata>` section for further information.
 
+
+Syscheck
+--------
 
 Many others improvements and fixes have been included in Syscheck in this new version:
 
@@ -27,7 +40,8 @@ Many others improvements and fixes have been included in Syscheck in this new ve
 - Allow more than 256 directories in real-time for Windows agent using recursive watchers.
 
 
-Other important changes are the following:
+Wazuh core
+----------
 
 - Added a new option to customize the output format per-target in Logcollector.
 - Added support for unified WPK. Now the WPK files are compatible between versions for the same OS.
