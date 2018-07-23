@@ -1171,7 +1171,7 @@ Returns various information from an agent.
 	      "name": "manager",
 	      "ip": "127.0.0.1",
 	      "dateAdd": "2018-06-15 16:08:07",
-	      "version": "Wazuh v3.3.1",
+	      "version": "Wazuh v3.4.0",
 	      "manager_host": "manager",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
@@ -2333,7 +2333,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "compilation_date": "Fri Jun 15 16:08:07 UTC 2018",
-	      "version": "v3.3.1",
+	      "version": "v3.4.0",
 	      "openssl_support": "yes",
 	      "max_agents": "14000",
 	      "ruleset_version": "3301",
