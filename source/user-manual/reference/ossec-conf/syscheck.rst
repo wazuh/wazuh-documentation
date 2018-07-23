@@ -51,10 +51,11 @@ This is to be set on the system to be monitored (or in the ``agent.conf``, if ap
 | **Allowed values** | Any directory                      |
 +--------------------+------------------------------------+
 
-Atributes:
+Attributes:
 
 +------------------------+-----------------------------------------------------------------------------------------------------------------+
 | **realtime**           | This will enable real-time/continuous monitoring on Linux (using the inotify system calls) and Windows systems. |
++                        +                                                                                                                 +
 |                        | Real time only works with directories, not individual files.                                                    |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
@@ -63,11 +64,12 @@ Atributes:
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_all**          | All the following check_* options are used together.                                                            |
+| **check_all**          | All attributes with the prefix ``check_`` will be activated.                                                    |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
 | **check_sum**          | Check the MD5 and SHA-1 hashes of the files.                                                                    |
++                        +                                                                                                                 +
 |                        | Same as using both ``check_sha1sum="yes"`` and ``check_md5sum="yes"``.                                          |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
@@ -95,32 +97,38 @@ Atributes:
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
 | **check_group**        | Check the group owner of the files/directories.                                                                 |
++                        +                                                                                                                 +
 |                        | Available for UNIX. On Windows, gid will always be 0 and the group name will be blank.                          |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
 | **check_perm**         | Check the UNIX permission of the files/directories.                                                             |
++                        +                                                                                                                 +
 |                        | On Windows, this will only check the POSIX permissions.                                                         |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
 | **check_mtime**        | Check the modification time of a file.                                                                          |
-|                        |                                                                                                                 |
++                        +                                                                                                                 +
 |                        | .. versionadded:: 2.0                                                                                           |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
 | **check_inode**        | Check the file inode.                                                                                           |
++                        +                                                                                                                 +
 |                        | Available for UNIX. On Windows, inode will always be 0.                                                         |
++                        +                                                                                                                 +
 |                        | .. versionadded:: 2.0                                                                                           |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
 | **restrict**           | Limit checks to files containing the entered string in the file name.                                           |
++                        +                                                                                                                 +
 |                        | Any directory or file name (but not a path) is allowed                                                          |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed value                                              | sregex                                             |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
+
 
 .. _reference_ossec_syscheck_ignore:
 
@@ -212,7 +220,7 @@ Specifies whether or not syscheck will ignore files that change too many times (
 | **Allowed values** | yes, no  |
 +--------------------+----------+
 
-Atributes:
+Attributes:
 
 +---------------+------------------------------------------------------------------------------+
 | **frequency** | Number of times the alert can be repeated in the'timeframe' time interval.   |
@@ -274,7 +282,7 @@ Use this option to monitor specified Windows registry entries (one entry per lin
 | **Allowed values** | Any registry entry.          |
 +--------------------+------------------------------+
 
-Atributes:
+Attributes:
 
 +----------+---------------------------------------------------------+
 | **arch** | Select the Registry view depending on the architecture. |
