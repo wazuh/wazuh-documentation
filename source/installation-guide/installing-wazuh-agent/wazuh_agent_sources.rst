@@ -21,13 +21,13 @@ Installing Linux agent
 
   .. code-block:: console
 
-      # yum install make gcc
+      # yum install make gcc policycoreutils-python automake autoconf libtool
 
   b) For Debian-based distributions:
 
   .. code-block:: console
 
-      # apt-get install gcc make libc6-dev curl
+      # apt-get install make gcc libc6-dev curl policycoreutils-python-utils automake autoconf libtool
 
 2. Download and extract the latest version:
 

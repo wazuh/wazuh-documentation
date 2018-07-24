@@ -92,58 +92,90 @@ File integrity monitoring
 
 The File integrity monitoring (FIM) component detects and alerts when operating system and application files are modified. This capability is often used to detect access or changes to sensitive data. If your servers are in scope with PCI DSS, the requirement 11.5 states that you must install a file integrity monitoring solution to pass your audit.
 
-Below is an example of an alert generated when a monitored file is changed. Metadata includes MD5 and SHA1 checksums, file sizes (before and after the change), file permissions, file owner and content changes.
+Below is an example of an alert generated when a monitored file is changed. Metadata includes MD5 and SHA1 checksums, file sizes (before and after the change), file permissions, file owner, content changes and the user who made these changes (who-data).
 
 .. code-block:: json
 
-  {
-    "agent": {
-        "id": "003",
-        "ip": "10.0.0.121",
-        "name": "vpc-agent-debian"
-    },
-    "decoder": {
-        "name": "syscheck_integrity_changed"
-    },
-    "full_log": "Integrity checksum changed for: '/root/hola.txt'\nSize changed from '3089' to '3213'\nOld md5sum was: '20db2c4c9bdd937975371bc5ca25af92'\nNew md5sum is : '3841e727a28f733e6d34413afd49d607'\nOld sha1sum was: 'a6c57142a6e6e7e55c58b3174ee52b4f8ec996e3'\nNew sha1sum is : '99aa4b60467a932c89f32603e410a6c194fb1ac3'\n",
-    "location": "syscheck",
-    "manager": {
-        "name": "vpc-ossec-manager"
-    },
-    "rule": {
-        "description": "Integrity checksum changed.",
-        "firedtimes": 8,
-        "groups": [
-            "ossec",
-            "syscheck"
-        ],
-        "id": "550",
-        "level": 7,
-        "pci_dss": [
-            "11.5"
-        ]
-    },
-    "syscheck": {
-        "diff": "0a1,2\n> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua\n> \n",
-        "event": "modified",
-        "gid_after": "0",
-        "gname_after": "root",
-        "inode_after": 398585,
-        "md5_after": "3841e727a28f733e6d34413afd49d607",
-        "md5_before": "20db2c4c9bdd937975371bc5ca25af92",
-        "mtime_after": "2017-03-05T13:47:32",
-        "mtime_before": "2017-03-05T13:44:15",
-        "path": "/root/hola.txt",
-        "perm_after": "100666",
-        "sha1_after": "99aa4b60467a932c89f32603e410a6c194fb1ac3",
-        "sha1_before": "a6c57142a6e6e7e55c58b3174ee52b4f8ec996e3",
-        "size_after": "3213",
-        "size_before": "3089",
-        "uid_after": "1000",
-        "uname_after": "admin"
-    },
-    "timestamp": "2017-03-05T13:44:18-0800"
-  }
+    {
+        "timestamp":"2018-07-10T14:05:28.452-0800",
+        "rule":{
+            "level":7,
+            "description":"Integrity checksum changed.",
+            "id":"550",
+            "firedtimes":10,
+            "mail":false,
+            "groups":[
+                "ossec",
+                "syscheck"
+            ],
+            "pci_dss":[
+                "11.5"
+            ],
+            "gpg13":[
+                "4.11"
+            ],
+            "gdpr":[
+                "II_5.1.f"
+            ]
+        },
+        "agent":{
+            "id":"058",
+            "ip": "10.0.0.121",
+            "name":"vpc-agent-debian"
+        },
+        "manager":{
+            "name":"vpc-ossec-manager"
+        },
+        "id":"1531224328.283446",
+        "syscheck":{
+            "path":"/etc/hosts.allow",
+            "size_before":"421",
+            "size_after":"433",
+            "perm_after":"100644",
+            "uid_after":"0",
+            "gid_after":"0",
+            "md5_before":"4b8ee210c257bc59f2b1d4fa0cbbc3da",
+            "md5_after":"acb2289fba96e77cee0a2c3889b49643",
+            "sha1_before":"d3452e66d5cfd3bcb5fc79fbcf583e8dec736cfd",
+            "sha1_after":"b87a0e558ca67073573861b26e3265fa0ab35d20",
+            "sha256_before":"6504e867b41a6d1b87e225cfafaef3779a3ee9558b2aeae6baa610ec884e2a81",
+            "sha256_after":"bfa1c0ec3ebfaac71378cb62101135577521eb200c64d6ee8650efe75160978c",
+            "uname_after":"root",
+            "gname_after":"root",
+            "mtime_before":"2018-07-10T14:04:25",
+            "mtime_after":"2018-07-10T14:05:28",
+            "inode_after":268234,
+            "diff":"10a11,12\n> 10.0.12.34\n",
+            "event":"modified",
+            "audit":{
+                "user":{
+                    "id":"0",
+                    "name":"root"
+                },
+                "group":{
+                    "id":"0",
+                    "name":"root"
+                },
+                "proccess":{
+                    "id":"82845",
+                    "name":"/bin/nano",
+                    "ppid":"3195"
+                },
+                "login_user":{
+                    "id":"1000",
+                    "name":"smith"
+                },
+                "effective_user":{
+                    "id":"0",
+                    "name":"root"
+                }
+            }
+        },
+        "decoder":{
+            "name":"syscheck_integrity_changed"
+        },
+        "location":"syscheck"
+    }
 
 A good summary of file changes can be found in the FIM dashboard which provides drill-down capabilities to view all of the details of the alerts triggered.
 
