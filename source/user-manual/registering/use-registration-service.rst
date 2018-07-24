@@ -204,6 +204,7 @@ Verify agents via SSL
   In this example, we are going to create a certificate for agents without specifying their hostname, so that the same certificate can be used by many agents. This verifies that agents have a certificate signed by our CA, no matter where they are connecting from.
 
   1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field:
+
     .. code-block:: console
 
         # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
