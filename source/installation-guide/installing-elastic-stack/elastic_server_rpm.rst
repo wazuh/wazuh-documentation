@@ -143,7 +143,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3./extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.4/extensions/logstash/01-wazuh-remote.conf
 
 
 .. note::

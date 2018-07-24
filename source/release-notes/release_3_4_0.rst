@@ -61,3 +61,22 @@ Wazuh ruleset
 -------------
 
 - In older versions, the frecuency attribute in rules was the number of hits + 2. In this version this value has been modified to match exactly the number of hits. By this way this value is more easy to understand.
+
+Wazuh app for Kibana
+--------------------
+
+- Tables redesign.
+- Improved reporting capabilities.
+- Improved Discover performance.
+- UI redesign, including simpler Welcome screen.
+- New healthcheck design.
+- Dev tools one liners.
+- New inventory tab.
+- Minor bugfixes.
+
+Wazuh app for Splunk
+--------------------
+
+- Support for Splunk v7.1.2.
+- Dashboard tabs redesign.
+- Minor bugfixes.
