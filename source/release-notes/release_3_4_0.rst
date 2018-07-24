@@ -20,7 +20,8 @@ Wazuh core
 The main feature introduced in this version is the ability to monitor the information relative to the user who
 makes changes to any file monitored with FIM. This information (who-data) contains the user who makes the changes
 and also the process used. This new functionality is available in Syscheck on Linux and Windows.
-See the :doc:`Auditing who-data <../user-manual/capabilities/auditing-whodata>` section for further information.
+See the :ref:`Auditing who-data <auditing-whodata>` section for further information.
+
 
 Many others improvements and fixes have been included in Syscheck in this new version:
 
