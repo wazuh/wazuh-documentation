@@ -58,7 +58,7 @@ Packages List
 .. note::
    In RPM based packages are included CentOS/RHEL 6 or greater, Fedora 22 or greater, SLES 12 and Amazon Linux.
 
-OVA Wazuh 3.3.1 + ELK 6.2.4
+OVA Wazuh 3.4.0 + ELK 6.3.1
 ---------------------------
 
 +--------------+---------+-------------+----------------------------------------------------------------------------------------------+----------------------------------+
