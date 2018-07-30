@@ -25,6 +25,8 @@ Options
 - `ignore_time`_
 - `feed`_
 
+.. note:: Since Wazuh 3.5 the options ``update_ubuntu_oval`` and ``update_redhat_oval`` are deprecated. It is recommended to use ``feed`` instead.
+
 +---------------------------+-----------------------------+
 | Options                   | Allowed values              |
 +===========================+=============================+
@@ -59,7 +61,7 @@ Time between vulnerabilities detections.
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1m                                                                                                                                       |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).        |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 run_on_start
@@ -81,7 +83,7 @@ Time during which vulnerabilities that have already been alerted will be ignored
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 6 hours                                                                                                                                                                   |
 +--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days).                                  |
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).                                         |
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 feed
@@ -100,11 +102,11 @@ Configuration block to specify vulnerability updates.
 |                    |                 |                    |         +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                 |                    |         | 18                                                                                                                                                                                                                                              |
 |                    |                 |                    +---------+---+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed tags**   | name            | **Allowed values** |         | 5 | Valid for scan agents with RedHat 5 and CentOS 5.                                                                                                                                                                                           |
+| **Allowed tags**   | name            | **Allowed values** |         | 5 | Valid for scan agents with Red Hat 5 and CentOS 5.                                                                                                                                                                                          |
 |                    |                 |                    |         +---+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                 |                    | redhat  | 6 | Valid for scan agents with RedHat 6 and CentOS 6.                                                                                                                                                                                           |
+|                    |                 |                    | redhat  | 6 | Valid for scan agents with Red Hat 6 and CentOS 6.                                                                                                                                                                                          |
 |                    |                 |                    |         +---+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                 |                    |         | 7 | Valid for scan agents with RedHat 7, CentOS 7 and Amazon Linux 1/2.                                                                                                                                                                         |
+|                    |                 |                    |         | 7 | Valid for scan agents with Red Hat 7, CentOS 7 and Amazon Linux 1/2.                                                                                                                                                                        |
 |                    |                 |                    +---------+---+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                 |                    |         | 7                                                                                                                                                                                                                                               |
 |                    |                 |                    |         +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -118,11 +120,11 @@ Configuration block to specify vulnerability updates.
 |                    +-----------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                 | How often the vulnerability database is updated.                                                                                                                                                                                                                               |
 |                    | update_interval +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days).                                                                                                                  |
+|                    |                 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).                                                                                                                         |
 |                    +-----------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                 | Link to an alternative OVAL file.                                                                                                                                                                                                                                              |
 |                    |                 +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                 | **Allowed values** | Links to OVAL file obtained from `RedHat <https://www.redhat.com/security/data/oval>`_, `Canonical <https://people.canonical.com/~ubuntu-security/oval>`_ or `Debian <https://www.debian.org/security/oval>`_. The download server must use HTTPS.        |
+|                    |                 | **Allowed values** | Links to OVAL file obtained from `Red Hat <https://www.redhat.com/security/data/oval>`_, `Canonical <https://people.canonical.com/~ubuntu-security/oval>`_ or `Debian <https://www.debian.org/security/oval>`_. The download server must use HTTPS.       |
 | **Allowed values** | url             +--------------------+--------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                 |                    |        | Server port where the OVAL file is located.                                                                                                                                                                                                      |
 |                    |                 | **Allowed tags**   | port   +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -130,7 +132,7 @@ Configuration block to specify vulnerability updates.
 |                    +-----------------+--------------------+--------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                 | Path to an alternative OVAL file.                                                                                                                                                                                                                                              |
 |                    | path            +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                 | **Allowed values** | Path to OVAL file obtained from `RedHat <https://www.redhat.com/security/data/oval>`_, `Canonical <https://people.canonical.com/~ubuntu-security/oval>`_ or `Debian <https://www.debian.org/security/oval>`_.                                             |
+|                    |                 | **Allowed values** | Path to OVAL file obtained from `Red Hat <https://www.redhat.com/security/data/oval>`_, `Canonical <https://people.canonical.com/~ubuntu-security/oval>`_ or `Debian <https://www.debian.org/security/oval>`_.                                            |
 |                    +-----------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                 | Allows you to use the vulnerability database with agents with different operating system.                                                                                                                                                                                      |
 |                    | allow           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -140,7 +142,7 @@ Configuration block to specify vulnerability updates.
 Example of configuration
 ------------------------
 
-The following configuration allows you to use the vulnerability database for Debian 9, RedHat 7 and Ubuntu 16 agents. It also allows you to extract vulnerabilities from agents with Linux Mint 18.X and Ubuntu 15.X using the Ubuntu 16 vulnerability database.
+The following configuration allows you to use the vulnerability database for Debian 9, Red Hat 7 and Ubuntu 16 agents. It also allows you to extract vulnerabilities from agents with Linux Mint 18.X and Ubuntu 15.X using the Ubuntu 16 vulnerability database.
 
 .. code-block:: xml
 
