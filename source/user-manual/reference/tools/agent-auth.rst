@@ -21,6 +21,10 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 +                     +-------------+-----------------------------------------------------------------+
 |                     | **Default** | TLS v1.2 only (if supported by the server).                     |
 +---------------------+-------------+-----------------------------------------------------------------+
+| **-c <ciphers>**    | SSL cipher list. The format of this parameter is described in `SSL ciphers`_. |
++                     +-------------+-----------------------------------------------------------------+
+|                     | **Default** | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH              |
++------------------+-------------+--------------------------------------------------------------------+
 | **-D**              | Directory where Wazuh is installed.                                           |
 +                     +---------------------------------------+---------------------------------------+
 |                     | Default Value                         | /var/ossec                            |
@@ -28,6 +32,10 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 | **-d**              | Run in debug mode, can be repeated to increase the verbosity of messages.     |
 +---------------------+-------------------------------------------------------------------------------+
 | **-g <group>**      | Run as a group.                                                               |
++---------------------+-------------------------------------------------------------------------------+
+| **-G <group>**      | Set the group for centralized configuration.                                  |
++---------------------+-------------------------------------------------------------------------------+
+| **-I**              | Set the agent IP address                                                      |
 +---------------------+-------------------------------------------------------------------------------+
 | **-h**              | Display the help message                                                      |
 +---------------------+-------------------------------------------------------------------------------+
