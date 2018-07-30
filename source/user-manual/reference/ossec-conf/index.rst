@@ -82,6 +82,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="vulnerability-detector" <wodle-vuln-detector>`    | manager                |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`wodle name="osquery" <wodle-osquery>`                         | agent                  |
++---------------------------------------------------------------------+------------------------+
 
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag.
@@ -120,4 +122,5 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    wodle-cloudtrail
    wodle-syscollector
    wodle-vuln-detector
+   wodle-osquery
    verifying-configuration
