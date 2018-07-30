@@ -1527,7 +1527,6 @@ Returns all the different combinations that agents have for the selected fields.
 	}
 
 
-
 Upgrade
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -1951,11 +1950,11 @@ Show cluster health
 	                  "date_end_master": "n/a",
 	                  "total_agentinfo": 0
 	               },
-	               "sync_integrity_free": true,
+	               "sync_integrity_free": false,
 	               "last_sync_agentgroups": {
-	                  "date_end_master": "n/a",
+	                  "date_end_master": "2018-07-17 10:59:57.63",
 	                  "total_agentgroups": 0,
-	                  "date_start_master": "n/a"
+	                  "date_start_master": "2018-07-17 10:59:57.62"
 	               },
 	               "last_sync_integrity": {
 	                  "total_files": {
@@ -2243,7 +2242,17 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0230-proftpd_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
 	            "file": "0005-wazuh_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0260-rsa-auth-manager_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
@@ -2253,7 +2262,17 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0210-pix_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
 	            "file": "0010-active-response_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0265-rshd_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
@@ -2263,32 +2282,12 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0270-samba_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
 	            "file": "0025-apache_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0030-arpwatch_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0035-asterisk_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0040-auditd_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0045-barracuda_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0050-checkpoint_decoders.xml"
 	         }
 	      ]
 	   }
@@ -2429,7 +2428,6 @@ Returns the decoders with the specified name.
 	      ]
 	   }
 	}
-
 
 
 
@@ -3389,7 +3387,6 @@ Returns ossec.conf in JSON format.
 	}
 
 
-
 Info
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -3425,7 +3422,6 @@ Returns basic information about manager.
 	      "tz_offset": "+0000"
 	   }
 	}
-
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3547,6 +3543,7 @@ Returns the three last months of ossec.log.
 	      ]
 	   }
 	}
+	
 
 
 Get summary of ossec.log
@@ -5078,6 +5075,8 @@ Returns the agent's network interface info
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``rx_dropped``     | String        | Filters by rx_dropped.                                                                                                                                                                                 |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``         | String        | List of selected fields.                                                                                                                                                                               |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -5405,6 +5404,18 @@ Returns the agent's ports info
 | ``tx_queue``       | Number        | Filters by tx_queue.                                                                                                                                                                                   |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``state``          | String        | Filters by state.                                                                                                                                                                                      |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``         | String        | List of selected fields.                                                                                                                                                                               |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``vendor``         | String        | Filters by vendor.                                                                                                                                                                                     |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``name``           | String        | Filters by name.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``architecture``   | String        | Filters by architecture.                                                                                                                                                                               |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``format``         | String        | Filters by format.                                                                                                                                                                                     |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``version``        | String        | Filters by version.                                                                                                                                                                                    |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**

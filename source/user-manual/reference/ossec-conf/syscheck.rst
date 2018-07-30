@@ -31,6 +31,7 @@ Options
 - `registry_ignore`_
 - `prefilter_cmd`_
 - `skip_nfs`_
+- `windows_audit_interval`_
 
 .. _reference_ossec_syscheck_directories:
 
@@ -57,6 +58,10 @@ Attributes:
 | **realtime**           | This will enable real-time/continuous monitoring on Linux (using the inotify system calls) and Windows systems. |
 +                        +                                                                                                                 +
 |                        | Real time only works with directories, not individual files.                                                    |
++                        +------------------------------------------------------------+----------------------------------------------------+
+|                        | Allowed values                                             | yes, no                                            |
++------------------------+------------------------------------------------------------+----------------------------------------------------+
+| **whodata**            | This will enable who-data monitoring on Linux and Windows systems.                                              |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
@@ -128,7 +133,6 @@ Attributes:
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed value                                              | sregex                                             |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
-
 
 .. _reference_ossec_syscheck_ignore:
 
@@ -340,6 +344,19 @@ Specifies if syscheck should scan network mounted filesystems (Works on Linux an
 +--------------------+----------+
 | **Allowed values** | yes, no  |
 +--------------------+----------+
+
+windows_audit_interval
+^^^^^^^^^^^^^^^^^^^^^^
+
+This option sets the frequency with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
+
++--------------------+------------------------------------+
+| **Default value**  | 5 minutes                          |
++--------------------+------------------------------------+
+| **Allowed values** | A positive number, time in seconds |
++--------------------+------------------------------------+
+
+.. versionadded:: 3.4.0
 
 Default Unix configuration
 --------------------------
