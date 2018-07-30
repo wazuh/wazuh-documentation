@@ -18,19 +18,19 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # yum install make gcc git
+      # yum install make gcc policycoreutils-python automake autoconf libtool
 
   b) For Debian-based distributions:
 
     .. code-block:: console
 
-      # apt-get install python gcc make git libc6-dev curl
+      # apt-get install python gcc make libc6-dev curl policycoreutils-python-utils automake autoconf libtool
 
 2. Download and extract the latest version:
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.2.3.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.4.0.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -87,7 +87,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.2.3/install_api.sh && bash ./install_api.sh download
+      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.4.0/install_api.sh && bash ./install_api.sh download
 
 3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions.
 

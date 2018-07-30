@@ -12,6 +12,10 @@ This section summarizes the most important features of each release.
     .. toctree::
         :maxdepth: 2
 
+        release_3_4_0
+        release_3_3_1
+        release_3_3_0
+        release_3_2_4
         release_3_2_3
         release_3_2_2
         release_3_2_1

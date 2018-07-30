@@ -162,7 +162,7 @@ First we are going to create a certificate of authority (CA) that we will use to
 
    .. code-block:: console
 
-        # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.pem -batch
+        # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Manager"
 
 .. warning::
     The file ``rootCA.key`` that we have just created is the **private key** of the certificate of authority. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
@@ -205,8 +205,10 @@ Verify agents via SSL
 
   1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field:
 
-      # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
-      # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+    .. code-block:: console
+
+        # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
+        # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
   2. Copy the CA (but not the key) to the manager's ``etc`` folder (if not already there) and start ``ossec-authd``:
 

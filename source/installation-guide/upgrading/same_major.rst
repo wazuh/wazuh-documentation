@@ -100,7 +100,7 @@ Upgrade the Wazuh Kibana App
 
     .. code-block:: console
 
-        # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+        # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-2.1.1_5.6.5.zip
 
 5) Once the process is complete, restart Kibana:
 

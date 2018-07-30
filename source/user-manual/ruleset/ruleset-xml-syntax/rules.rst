@@ -409,6 +409,8 @@ Rule description.
 | **Allowed values** | Any string |
 +--------------------+------------+
 
+Since Wazuh v3.3.0 it is possible to include any decoded field (static or dynamic) to the description message.
+
 list
 ^^^^
 

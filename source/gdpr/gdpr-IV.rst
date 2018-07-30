@@ -14,14 +14,14 @@ Chapter IV, Article 24, Head 2
 
 It will be necessary to comply with security and data protection policies. Therefore, the entity in charge of processing and storing data must be able to comply with these policies.
 
-Wazuh monitors configuration files to ensure they are compliant with your security policies, standards and/or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, unpatched, or insecurely configured. 
+Wazuh monitors configuration files to ensure they are compliant with your security policies, standards and/or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, unpatched, or insecurely configured.
 
 Policy monitoring is the process of verifying that all systems conform to a set of predefined rules regarding configuration settings and approved application usage. Wazuh uses three components to perform this task: `Rootcheck <https://documentation.wazuh.com/current/user-manual/capabilities/policy-monitoring/rootcheck/how-it-works.html>`_, `OpenSCAP <https://documentation.wazuh.com/current/user-manual/capabilities/policy-monitoring/openscap/index.html>`_ and `CIS-CAT <https://documentation.wazuh.com/current/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html>`_.
 
 Use cases
 ^^^^^^^^^
 
-We can use rootcheck to monitor security policies. The first thing to do is to enable the appropriate rootcheck file. 
+We can use rootcheck to monitor security policies. The first thing to do is to enable the appropriate rootcheck file.
 
 .. code-block:: console
 
@@ -48,7 +48,7 @@ If enabled, the file ``archives.log`` stores every log parsed by the Wazuh engin
 	2018 May 16 17:15:06 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
 
 
-Chapter IV, Article 28, Head 3 (c) 
+Chapter IV, Article 28, Head 3 (c)
 ----------------------------------
 
 **Article 28**  "Processor. **Head 3 (c)**. Processing by a processor shall be governed by a contract or other legal act under Union or Member State law, that is binding on the processor with regard to the controller and that sets out the subject-matter and duration of the processing, the nature and purpose of the processing, the type of personal data and categories of data subjects and the obligations and rights of the controller. That contract or other legal act shall stipulate, in particular, that the processor: takes all measures required pursuant to Article 32"
@@ -193,7 +193,7 @@ Wazuh will generate an alert like this.
     :width: 100%
 
 
-Chapter IV, Article 33 
+Chapter IV, Article 33
 ----------------------
 
 **Article 33**  "Notification of a personal data breach to the supervisory authority."
@@ -205,7 +205,7 @@ Wazuh can facilitate this communication, for example, notifying with `mail <http
 Use cases
 ^^^^^^^^^
 
-A sample email could be: 
+A sample email could be:
 
 .. code-block:: console
 
@@ -227,7 +227,7 @@ A sample email could be:
 
 	 --END OF NOTIFICATION
 
-A basic configuration could be:	 
+A basic configuration could be:
 
 .. code-block:: xml
 
@@ -254,9 +254,9 @@ Wazuh has security measures in place to safeguard personal data, as well as the 
 Use cases
 ^^^^^^^^^
 
-One possibility is to use rules that, based on their fields, the module that generates them or the specific objective they affect, increase the alert level by supporting risk assessment. 
+One possibility is to use rules that, based on their fields, the module that generates them or the specific objective they affect, increase the alert level by supporting risk assessment.
 
-In this case we would have a rule with an alert level 10 because data of a specific subject has changed. But if data belong to critical fields (in this example if the altered data is in ``/customers/personal_dat``), the alert level would rise to 15. 
+In this case we would have a rule with an alert level 10 because data of a specific subject has changed. But if data belong to critical fields (in this example if the altered data is in ``/customers/personal_dat``), the alert level would rise to 15.
 
 .. code-block:: xml
 
@@ -264,7 +264,7 @@ In this case we would have a rule with an alert level 10 because data of a speci
 	    <if_matched_group>syscheck</if_matched_group>
 	    <description>Changes made in the data of the subjects</description>
 	</rule>
-	
+
 	<rule id="105757" level="15">
 		<if_sid>105756</if_sid>
 	    <if_matched_group>syscheck</if_matched_group>
@@ -276,17 +276,17 @@ In this case we would have a rule with an alert level 10 because data of a speci
 Chapter IV, Article 35, Head 7 (d)
 ----------------------------------
 
-**Article 35** "Data protection impact assessment. **Head 7 (f)** The assessment shall contain at least the measures envisaged to address the risks, including safeguards, security measures and mechanisms to ensure the protection of personal data and to demonstrate compliance with this Regulation taking into account the rights and legitimate interests of data subjects and other persons concerned."
+**Article 35** "Data protection impact assessment. **Head 7 (d)**. The assessment shall contain at least the measures envisaged to address the risks, including safeguards, security measures and mechanisms to ensure the protection of personal data and to demonstrate compliance with this Regulation taking into account the rights and legitimate interests of data subjects and other persons concerned."
 
 Necessary security measures include data breach identification, blocking and forensic investigation capabilities. Anti-malware and anti-ransomware are needed to ensure the integrity, availability, and resilience of data systems, blocking and preventing malware and rescue threats from entering devices.
 
-Also behavioral analysis services that use machine intelligence to identify people who do anomalous things on the network may be required to provide early visibility and alert employees who become corrupt. 
+Also behavioral analysis services that use machine intelligence to identify people who do anomalous things on the network may be required to provide early visibility and alert employees who become corrupt.
 
 In order to meet these security requirements, Wazuh provides solutions such as intrusion and anomaly detection. Agents scan the system looking for malware, rootkits or suspicious anomalies. They can detect hidden files, cloaked processes or unregistered network listeners, as well as inconsistencies in system call responses. In addition, the integration of Wazuh with NIDS is viable.
 
 Anomaly detection refers to the action of finding patterns in the system that do not match the expected behavior. Once malware (e.g., a rootkit) is installed on a system, it modifies the system to hide itself from the user. Although malware uses a variety of techniques to accomplish this, Wazuh uses a broad-spectrum approach to find anomalous patterns that indicate possible intruders. The main component responsible for this task is Rootcheck, however, Syscheck also plays a significant role.
 
-We may be aware of application or system errors, misconfigurations, attempted and/or successful malicious activity, policy violations and a variety of other operational and security issues through Wazuh rules. Using Automated logs analysis Wazuh agents read operating system and application logs, and securely forward them to a central manager for rule-based analysis and storage. 
+We may be aware of application or system errors, misconfigurations, attempted and/or successful malicious activity, policy violations and a variety of other operational and security issues through Wazuh rules. Using Automated logs analysis Wazuh agents read operating system and application logs, and securely forward them to a central manager for rule-based analysis and storage.
 
 It is worth highlighting the ability to detect vulnerabilities. Now agents are able to natively collect a list of installed applications, sending it periodically to the manager (where it is stored in local sqlite databases, one per agent). In addition, the manager builds a global vulnerabilities database, using public OVAL CVE repositories, using it later to cross correlate this information with agent’s applications inventory data.
 
@@ -332,4 +332,3 @@ Wazuh will generate an alert like this.
     :title: Filtering alerts by GDPR on Wazuh App
     :align: center
     :width: 100%
-

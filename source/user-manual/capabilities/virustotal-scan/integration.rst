@@ -49,7 +49,7 @@ In order for this integration to function, the first thing that must be complete
 
     <integration>
       <name>virustotal</name>
-      <api_key>4548f9e04e6e5f83cf00746f9680805ca1cb3cff542da54297fb14fceceb4f04</api_key>   <!-- Replace with your key -->
+      <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
       <group>syscheck</group>
       <alert_format>json</alert_format>
     </integration>

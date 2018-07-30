@@ -31,7 +31,7 @@ There are several options to install a Wazuh agent, depending on the operating s
 +-------------------------------------------------+--------------------------------------------------+
 | :doc:`HP-UX installer <wazuh_agent_hpux>`       | Install Wazuh agents on HP-UX                    |
 +-------------------------------------------------+--------------------------------------------------+
-| :doc:`AIX 5.3 installer <wazuh_agent_aix>`      | Install Wazuh agents on AIX                      |
+| :doc:`AIX installer <wazuh_agent_aix>`          | Install Wazuh agents on AIX                      |
 +-------------------------------------------------+--------------------------------------------------+
 | :doc:`Sources <wazuh_agent_sources>`            | Install Wazuh agents from source code.           |
 +-------------------------------------------------+--------------------------------------------------+

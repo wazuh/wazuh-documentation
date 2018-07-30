@@ -11,6 +11,7 @@ This section shows the most relevant improvements and fixes in version 3.2.3. Mo
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.2.3/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.2.3/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.2.3-6.2.4/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.2.3-7.1.0/CHANGELOG.md>`_
 
 GDPR Support
 ------------
@@ -19,30 +20,33 @@ The `General Data Protection Regulation <https://www.eugdpr.org/>`_ took effect 
 
 You can read more information about the GDPR regulation and how Wazuh faces it on the this section: :ref:`gdpr`.
 
-
 Wazuh cluster
 -------------
 
 This version fixes several performance issues (like CPU usage) and synchronization errors. The communications and synchronization algorithm have been redesigned in order to improve the cluster performance and reliability.
 
-
 Now, the client nodes initialize the communication and only the master node is included in the client configuration.
 
 The number of daemons has been reduced to one: ``wazuh-clusterd``.
 
+You can check our documentation for Wazuh cluster in the following :ref:`link <wazuh-cluster>`.
 
 Core improvements
 -----------------
 
 These are the most relevant changes in the Wazuh core:
 
-- Vulnerability-detector continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
+- :ref:`Vulnerability-detector <vulnerability-detection>` continues to expand its scope, now adding support for Amazon Linux. A bug when comparing epoch versions has also been fixed.
 - The agent limit has been increased to ``14000`` by default, improving the manager availability in large environments.
 - More internal bugs reported by the community have been fixed for this version.
 
+Wazuh app for Splunk
+--------------------
 
-Wazuh app: Kibana
------------------
+New section describing the installation process for the :ref:`Wazuh app for Splunk <installation_splunk>`.
+
+Wazuh app for Kibana
+--------------------
 
 The **Dev tools** tab has been added in this version. You can use it to interact with the managers by API requests.
 

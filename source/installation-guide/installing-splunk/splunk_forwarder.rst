@@ -5,34 +5,34 @@
 Splunk Forwarder configuration
 ==============================
 
-This section will explain what kind of configuration files the Splunk Forwarder instance needs to work properly and send Wazuh alerts to the Indexer component.
+This section explains how to configure the Splunk Forwarder to send alerts to the Indexer component.
 
-- **inputs.conf** : This configuration file is needed by the forwarder for reading data from an input.
+- **inputs.conf** : The Forwarder needs this file to read data from an input.
 
-- **props.conf** : For consuming data inputs, Splunk needs to specify what kind of format will be handled.
+- **props.conf** : In order to consume data inputs, Splunk needs to specify what kind of format will handle.
 
 Set up data collection
 ----------------------
 
-Configuring inputs
-^^^^^^^^^^^^^^^^^^
+Configuring props
+^^^^^^^^^^^^^^^^^
 
 1. Download and insert the ``props.conf`` template:
 
   .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/props.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.4/extensions/splunk/props.conf
 
-Configuring props
-^^^^^^^^^^^^^^^^^
+Configuring inputs
+^^^^^^^^^^^^^^^^^^
 
-1. Download the ``inputs.conf`` template:
+1. Download and insert the ``inputs.conf`` template:
 
    .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/splunk/inputs.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.4/extensions/splunk/inputs.conf
 
-2. And set the Wazuh manager hostname into it:
+2. Set the Wazuh manager hostname:
 
   .. code-block:: console
 
@@ -42,7 +42,7 @@ Configuring props
 Set up data forwarding
 ----------------------
 
-1. Now the forwarder needs to send the data flow to a remote indexer, so point the output to the Wazuh's Indexer with the following command depending on your architecture:
+1. Point Forwarder output to Wazuh's Indexer with the following command:
 
   .. image:: ../../images/splunk-app/simple-distributed-arch.png
     :align: center
@@ -61,3 +61,9 @@ Set up data forwarding
     # /opt/splunkforwarder/bin/splunk restart
 
 After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
+
+3. Optional. If you additionally want the Splunk Forwarder service to start at boot time, please execute the following command:
+
+  .. code-block:: console
+
+    # /opt/splunkforwarder/bin/splunk enable boot-start

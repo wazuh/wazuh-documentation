@@ -23,8 +23,8 @@ Options
 - `tag`_
 - `command`_
 - `interval`_
-- `run-on-start`_
-- `ignore-output`_
+- `run_on_start`_
+- `ignore_output`_
 - `timeout`_
 
 
@@ -39,9 +39,9 @@ Options
 +----------------------+-----------------------------+
 | `interval`_          | A positive number (seconds) |
 +----------------------+-----------------------------+
-| `run-on-start`_      | yes, no                     |
+| `run_on_start`_      | yes, no                     |
 +----------------------+-----------------------------+
-| `ignore-output`_     | yes, no                     |
+| `ignore_output`_     | yes, no                     |
 +----------------------+-----------------------------+
 | `timeout`_           | A positive number (seconds) |
 +----------------------+-----------------------------+
@@ -90,7 +90,7 @@ Time between commands executions.
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
-run-on-start
+run_on_start
 ^^^^^^^^^^^^^
 
 Run command immediately when service is started.
@@ -101,7 +101,7 @@ Run command immediately when service is started.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-ignore-output
+ignore_output
 ^^^^^^^^^^^^^
 
 Ignore the command output when executed.

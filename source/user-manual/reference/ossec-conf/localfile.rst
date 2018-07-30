@@ -24,7 +24,9 @@ Options
 - `only-future-events`_
 - `query`_
 - `label`_
+- `target`_
 - `log_format`_
+- `out_format`_
 
 location
 ^^^^^^^^
@@ -127,7 +129,7 @@ For example, the following configuration will only process events with an ID of 
 label
 ^^^^^
 
-  .. versionadded:: 3.0.0
+.. versionadded:: 3.0.0
 
 This option allows for the addition of custom data in JSON events and is available when `log_format`_ is set to ``json``.
 
@@ -179,6 +181,8 @@ The additional fields configured above would appear in the resulting event as be
 target
 ^^^^^^
 
+.. versionadded:: 3.3.0
+
 Target specifies the name of the socket where the output will be redirected. The socket must be defined previously to use it with this option.
 
 +--------------------+--------------------------------+
@@ -190,13 +194,12 @@ Target specifies the name of the socket where the output will be redirected. The
 log_format
 ^^^^^^^^^^
 
-This specifies the format of the log being read.
+This specifies the format of the log being read. **It is required field.**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
-
 +--------------------+-------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | syslog                                                                                                            |
+| **Default value**  | n/a                                                                                                               |
 +--------------------+----------------+--------------------------------------------------------------------------------------------------+
 | **Allowed values** | syslog         | Used for plain text files in a syslog-like format.                                               |
 +                    +----------------+--------------------------------------------------------------------------------------------------+
@@ -279,6 +282,51 @@ Sample Log message as analyzed by ossec-analysisd:
 
 	Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
 
+.. _ossec_localfile_out_format:
+
+out_format
+^^^^^^^^^^
+
+.. versionadded:: 3.3.0
+
+This option allows formatting logs from Logcollector using field substitution.
+
+The syntax is:
+
+::
+
+	$(parameter)
+
+The list of available parameters is:
+
++------------------------+-----------------------------------------------------------------------+
+| **Parameter**          | **Description**                                                       |
++========================+=======================================================================+
+| ``log``                | Message from the log.                                                 |
++------------------------+-----------------------------------------------------------------------+
+| ``output``             | Output from a command. Alias of ``log``.                              |
++------------------------+-----------------------------------------------------------------------+
+| ``location``           | Path to the source log file.                                          |
++------------------------+-----------------------------------------------------------------------+
+| ``command``            | Command line or alias defined for the command. Alias of ``location``. |
++------------------------+-----------------------------------------------------------------------+
+| ``timestamp``          | Current timestamp (when the log is sent), in RFC3164 format.          |
++------------------------+-----------------------------------------------------------------------+
+| ``timestamp <format>`` | Custom timestamp, in ``strftime`` string format.                      |
++------------------------+-----------------------------------------------------------------------+
+| ``hostname``           | System's host name.                                                   |
++------------------------+-----------------------------------------------------------------------+
+
+Attributes:
+
++------------+-----------------------------------------------------------------------------------+
+| **target** | This option selects a defined target to apply the output format.                  |
++            +----------------+------------------------------------------------------------------+
+|            | Allowed values | Any target defined in the option ``<target>``.                   |
+|            +----------------+------------------------------------------------------------------+
+|            | Default value  | Select all targets defined in the ``<localfile>`` stanza.        |
++------------+----------------+------------------------------------------------------------------+
+
 Configuration examples
 ----------------------
 
@@ -297,6 +345,14 @@ Linux configuration:
       <log_format>command</log_format>
       <command>df -P</command>
       <frequency>360</frequency>
+    </localfile>
+
+	<!-- To use a custom target or format -->
+    <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/log/auth.log</location>
+	  <target>agent,custom_socket</target>
+	  <out_format target="custom_socket">$(timestamp %Y-%m-%d %H:%M:%S): $(log)</out_format>
     </localfile>
 
 Windows configuration:
