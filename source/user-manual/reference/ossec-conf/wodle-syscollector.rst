@@ -138,7 +138,7 @@ Enables the ports scan.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-With option **all='no'** only will scan listening ports
+With option **all='no'** it will only scan listening ports.
 
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
