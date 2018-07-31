@@ -58,5 +58,11 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 +---------------------+-------------------------------------------------------------------------------+
 | **-x <path>**       | Display the full path to the agent certificate.                               |
 +---------------------+-------------------------------------------------------------------------------+
+| **-G <group>**      | Set the group for centralized configuration.                                  |
++---------------------+-------------------------------------------------------------------------------+
+| **-I <IP>**         | Set the agent IP address.                                                     |
++---------------------+-------------------------------------------------------------------------------+
+| **-i**              | Let the agent IP address be set by the manager connection.                    |
++---------------------+-------------------------------------------------------------------------------+
 
 .. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.0/apps/ciphers.html
