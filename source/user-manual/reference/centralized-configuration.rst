@@ -287,3 +287,78 @@ Whether for any reason you don`t want to apply the shared configuration in a spe
 .. code-block:: shell
 
     agent.remote_conf=0
+
+
+Download configuration files from remote location
+-------------------------------------------------
+
+Wazuh manager has the capability to download configuration files like ``merged.mg`` as well as other files to be merged for the groups that you want to.
+
+To use this feature, we need to put a yaml file name ``files.yml`` under the directory ``/var/ossec/etc/shared/``. When the **manager** starts, it will read and parse the file.
+
+The ``files.yml`` has the following structure as in the example bellow:
+
+.. code-block:: yaml
+
+    groups:
+        my_group_1:
+            files:
+                agent.conf: https://example.com/agent.conf
+                rootcheck.txt: https://example.com/rootcheck.txt
+                merged.mg: https://example.com/merged.mg
+            poll: 15
+
+        my_group_2:
+            files:
+                agent.conf: https://example.com/agent.conf
+            poll: 200
+
+    agents:
+        001: my_group_1
+        002: my_group_2
+        003: another_group
+
+Here we can distinct the two main blocks: ``groups`` and ``agents``.
+
+
+1. In the ``groups`` block we define the group name that we want to download the files for.
+
+    - If a file has the name ``merged.mg`` it will download this file only. Then it is validated.
+    - The ``poll`` label indicates the download rate in seconds of the specified files.
+    - If the group doesn't exists, it will be created.
+
+2. In the ``agents`` block we define for each agent, the group to which we want the agent to belong.
+
+This configuration can be changed on the fly, the **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
+
+The information about the parsing is showed on the ``/var/ossec/logs/ossec.log`` file. For example:
+
+- Parsing is successful:
+
+.. code-block:: shell
+
+    INFO: Successfully parsed of yaml file: /etc/shared/files.yml
+
+- File has been changed:
+
+.. code-block:: shell
+
+    INFO: File '/etc/shared/files.yml' changed. Reloading data
+
+- Parsing failed due to bad token:
+
+.. code-block:: shell
+
+    INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'    
+
+- Download of file failed:
+
+.. code-block:: shell
+
+    ERROR: Failed to download file from url: https://example.com/merged.mg
+
+- Downloaded ``merged.mg`` file is corrupted or not valid:
+
+.. code-block:: shell
+
+    ERROR: The downloaded file '/var/download/merged.mg' is corrupted.
