@@ -28,6 +28,23 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
   The CIS-CAT wodle allows you to run CIS policy scans visualizing the results of assessments in the Wazuh App. See the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat/ciscat>` for more information on this functionality.
 
+.. topic:: Command wodle
+
+  The Command module allows running external commands asynchronously, one in each thread.
+
+.. topic:: Syscollector wodle
+
+  The Syscollector module performs periodic scans in the system to obtain information related to the installed hardware, operating system information, network information, installed packages, active ports, and running processes.
+
+.. topic:: AWS Cloudtrail wodle
+
+  The AWS Cloudtrail module adds a native way for ingesting AWS CloudTrail logs.
+  Logs are fetched in JSON format from the bucket and they are sent to Wazuh socket.
+
+.. topic:: Vulnerability detector wodle
+
+  The Vulnerability Detector module detects applications that are known to be vulnerable (affected by a CVE).
+
 wazuh-modulesd options
 ----------------------
 
