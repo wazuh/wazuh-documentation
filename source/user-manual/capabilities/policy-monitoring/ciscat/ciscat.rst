@@ -51,7 +51,7 @@ The following is an example of how to deploy the CIS-CAT integration:
 
 1. In the configuration file, ``ossec.conf``, set up a section as follows:
 
-  1.1 If you a using a UNIX environment:
+  1.1 If you are using a UNIX environment:
 
   .. code-block:: xml
 
@@ -72,7 +72,7 @@ The following is an example of how to deploy the CIS-CAT integration:
     </wodle>
 
 
-  1.2 If you a using a Windows environment:
+  1.2 If you are using a Windows environment:
 
   .. code-block:: xml
 
@@ -120,7 +120,7 @@ Information about the executed scan and report overview
    cis.notchecked: 36
    cis.score: 53%
 
-Since Wazuh v3.4.0, the report summary is stored in the agents DB with the purpose to query it by the API. This allows to know about the last scan every time the user wants to.
+Since Wazuh v3.5.0, the report summary is stored in the agents DB with the purpose to query it by the API. This allows to know about the last scan every time the user wants to.
 
 Information about a specific result
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -144,9 +144,9 @@ Information about a specific result
 Use case: Scheduling CIS-CAT executions
 ---------------------------------------
 
-.. versionadded:: 3.4.0
+.. versionadded:: 3.5.0
 
-New scheduling options have been added for the CIS-CAT module which allows the user to decide when to launch CIS scans in every agents.
+New scheduling options have been added for the CIS-CAT module which allows the user to decide when to launch CIS scans in every agent.
 
 As it is described in the :doc:`CIS-CAT section <../../../reference/ossec-conf/wodle-ciscat>` of the reference documentation, there are available some new options that we could mix to reach the desired behavior.
 
