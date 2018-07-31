@@ -24,7 +24,7 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 | **-c <ciphers>**    | SSL cipher list. The format of this parameter is described in `SSL ciphers`_. |
 +                     +-------------+-----------------------------------------------------------------+
 |                     | **Default** | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH              |
-+------------------+-------------+--------------------------------------------------------------------+
++---------------------+-------------+-----------------------------------------------------------------+
 | **-D**              | Directory where Wazuh is installed.                                           |
 +                     +---------------------------------------+---------------------------------------+
 |                     | Default Value                         | /var/ossec                            |
@@ -34,6 +34,8 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 | **-g <group>**      | Run as a group.                                                               |
 +---------------------+-------------------------------------------------------------------------------+
 | **-G <group>**      | Set the group for centralized configuration.                                  |
++---------------------+-------------------------------------------------------------------------------+
+| **-i**              | Let the agent IP address be set by the manager connection.                    |
 +---------------------+-------------------------------------------------------------------------------+
 | **-I**              | Set the agent IP address                                                      |
 +---------------------+-------------------------------------------------------------------------------+
@@ -53,10 +55,6 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 | **-p <port>**       | Port ossec-authd is running on.                                               |
 +                     +---------------------------------------+---------------------------------------+
 |                     | Default Value                         | 1515                                  |
-+---------------------+---------------------------------------+---------------------------------------+
-| **-c <ciphers>**    | SSL cipher list. The format of this parameter is described in `SSL ciphers`_. |
-+                     +-------------+-----------------------------------------------------------------+
-|                     | **Default** | HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH              |
 +---------------------+-------------+-----------------------------------------------------------------+
 | **-t**              | Test configuration.                                                           |
 +---------------------+-------------------------------------------------------------------------------+
