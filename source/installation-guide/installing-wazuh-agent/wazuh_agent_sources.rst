@@ -42,6 +42,8 @@ Installing Linux agent
     # cd wazuh-*
     # ./install.sh
 
+.. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
+
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>`.
 
 4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
@@ -84,6 +86,7 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
   .. code-block:: console
 
+    # make deps
     # make TARGET=winagent
 
 The following output will appear at the end of the building process:
