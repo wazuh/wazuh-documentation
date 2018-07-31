@@ -44,7 +44,7 @@ Wazuh agents use the OSSEC message protocol to send collected events to the Wazu
 
 .. note:: Alerts will be duplicated if you use both of these files. Also, note that both files receive fully decoded event data.
 
-The OSSEC message protocol uses a 192-bit Blowfish encryption with a full 16-round implementation, which at this time has no publicly known cryptographic weaknesses.
+The Wazuh message protocol uses a 192-bit Blowfish encryption with a full 16-round implementation, or AES encryption with 128 bits per block and 256-bit keys.
 
 Wazuh-Elastic communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
