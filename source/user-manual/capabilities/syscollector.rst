@@ -2,25 +2,31 @@
 
 .. _syscollector:
 
-Syscollector
-============
+System inventory
+================
 
-Syscollector es el módulo encargado de recoger y almacenar información de los agentes en una base de datos
+The Wazuh agents are able to collect interesting system information and store it into a DB for each agent on the manager side. The `Syscollector` module is in charge of this collection.
 
 - `Available scans`_
+    - Hardware
+    - Operating System
+    - Network interfaces
+    - Packages
+    - Ports
+    - Processes
 - `Compatibility matrix`_
 - `How it works`_
-- `Use case: Get inventory data from Syscollector's scan in kibana dashboard`_
+- `Use case: Visualize system inventory in the Wazuh App`_
 
 Available scans
 ---------------
 
-La información que podemos consultar se divide en los siguientes scans
+The collected information from Wazuh agents are stored in different SQLite tables. Here is described the content of each available table.
 
- - `Hardware`
- ^^^^^^^^^^^^
+Hardware
+^^^^^^^^
 
- Obtiene información del hardware
+ Retrieve basic information about the Hardware components of a system.
 
 +--------------+---------------------+-------------------------------------------+-----------+
 | Field        | Description         | Example                                   | Available |
@@ -44,7 +50,7 @@ La información que podemos consultar se divide en los siguientes scans
 
  - `Operating system`
 
-
+ Retrieve basic information about the Operating System.
 
 +--------------+-------------------------+-----------------------------------------------------+-----------+
 | Field        | Description             | Example                                             | Available |
@@ -81,10 +87,10 @@ La información que podemos consultar se divide en los siguientes scans
 
  - `Network`
 
-
+ Retrieve information about the existing network interface of a system (up and down interfaces) as well as their routing configuration.
 
 +--------------+---------------------------+-----------------------------------------------------+-----------+
-| Field        | Description               | Example                                             | Available 
+| Field        | Description               | Example                                             | Available
 +==============+===========================+=====================================================+===========+
 | id           | Id                        | 1                                                   |
 +--------------+---------------------------+-----------------------------------------------------+-----------+
@@ -156,14 +162,22 @@ La información que podemos consultar se divide en los siguientes scans
 
 
 
- - `Packages`
+- `Packages`
+
+ The currently packages inventory of each Wazuh agent. On Linux systems, retrieved packages can be `deb` or `rpm` types.
+
  - `Ports`
+
+ List of the opened ports of a system.
+
  - `Processes`
+
+ List of the current processes running in a system host.
 
 Compatibility matrix
 ---------------------
 
-The following table shows 
+The following table shows ...
 
 
 
@@ -172,8 +186,8 @@ How its works
 
 
 
-Use case: Get information of Syscollector's scan in kibana dashboard
---------------------------------------------------
+Use case: Visualize system inventory in the Wazuh App
+-----------------------------------------------------
 
 
 
