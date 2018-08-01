@@ -229,7 +229,7 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 crypto_method
 ^^^^^^^^^^^^^
 
-Choose the coding of the messages that the agent sends to the manager.
+Choose the encryption of the messages that the agent sends to the manager.
 
 +--------------------+---------------------+
 | **Default value**  | aes                 |
