@@ -85,7 +85,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       "version" : {
         "number" : "6.3.2",
         "build_flavor" : "default",
-        "build_type" : "rpm",
+        "build_type" : "deb",
         "build_hash" : "053779d",
         "build_date" : "2018-07-20T05:20:23.451332Z",
         "build_snapshot" : false,
