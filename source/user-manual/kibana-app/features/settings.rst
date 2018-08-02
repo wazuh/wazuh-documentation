@@ -38,10 +38,6 @@ In this section, you can list all your inserted API credentials. The yellow star
 
   Delete an API entry if it's not used anymore.
 
-.. warning::
-
-  You can't delete the currently selected API. If you want to remove it, select a different API before.
-
 .. topic:: Edit API
 
   If you've changed your API credentials, you can modify the entry so you can continue using the API.
@@ -81,6 +77,28 @@ The index pattern functionality is completely described at the :ref:`kibana_inde
 .. image:: ../../../images/kibana-app/features/settings/pattern.png
   :align: center
   :width: 100%
+
+Configuration
+-------------
+
+You can take a quick look to the full Wazuh app configuration file here. The documentation for the ``config.yml`` file can be found on the :ref:`kibana_config_file` section.
+
+.. image:: ../../../images/kibana-app/features/settings/configuration.png
+  :align: center
+  :width: 100%
+
+Logs
+----
+
+The Wazuh app stores log information on the ``/usr/share/kibana/optimize/wazuh-logs/wazuhapp.log`` file. This logs can be helpful for troubleshooting purposes. The *Logs* section allows you to check the last 20 log messages along with its date and severity level.
+
+.. image:: ../../../images/kibana-app/features/settings/logs.png
+  :align: center
+  :width: 100%
+
+.. note::
+
+    If you want to check older log messages, you can open the ``wazuhapp.log`` file with your preferred text editor on a terminal.
 
 About
 -----

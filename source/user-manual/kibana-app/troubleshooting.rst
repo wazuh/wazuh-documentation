@@ -15,10 +15,10 @@ This section collects common installation or usage problems on the Wazuh app, an
     .. code-block:: console
 
         "kibana": {
-            "version": "6.3.0"
+            "version": "6.3.2"
         },
 
-    Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.3.0`` then your installed Kibana version must be ``6.3.0``.
+    Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.3.2`` then your installed Kibana version must be ``6.3.2``.
 
     You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
@@ -29,7 +29,7 @@ No template found for the selected index pattern
 
     .. code-block:: console
 
-        # curl https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+        # curl https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
     .. warning::
 
@@ -92,7 +92,7 @@ API version mismatch. Expected vx.y.z
 
     The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.3.1 with a Wazuh API 3.3.0.
 
-    You can't use the 3.3.0 version of Wazuh API with a Wazuh app designed for Wazuh 3.2.4.
+    You can't use the 3.5.0 version of Wazuh API with a Wazuh app designed for Wazuh 3.4.0.
 
     Check our :ref:`compatibility_matrix` to learn more about compatibility between the API and the app.
 
