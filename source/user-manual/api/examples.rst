@@ -60,7 +60,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: javascript
 
-    # curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck/001?pretty"
+    $ curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck/001?pretty"
     {
        "error": 0,
        "data": "Rootcheck database deleted"

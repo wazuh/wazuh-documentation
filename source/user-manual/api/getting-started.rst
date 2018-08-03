@@ -68,7 +68,17 @@ Here are some of the basic concepts related to making API requests and understan
 
  * Example response without errors:
 
-  ``{"error":0,"data":{"msg":"Welcome to Wazuh HIDS API","api_version":"v3.5.0","hostname":"wazuh","timestamp":"Fri Aug 03 2018 00:37:50 GMT+0000 (UTC)"}}``
+  .. code-block:: javascript
+
+        {
+            "error":0,
+            "data":{
+                "msg":"Welcome to Wazuh HIDS API",
+                "api_version":"v3.5.0",
+                "hostname":"wazuh",
+                "timestamp":"Fri Aug 03 2018 00:37:50 GMT+0000 (UTC)"
+            }
+        }
 
  * Example response with errors:
 
