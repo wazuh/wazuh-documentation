@@ -28,7 +28,7 @@ Use the cURL command to send a *request* to confirm that everything is working a
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k https://127.0.0.1:55000?pretty
+    $ curl -u foo:bar -k "https://127.0.0.1:55000?pretty"
     {
         "error": 0,
         "data": {
