@@ -26,13 +26,19 @@ The API starts at boot time. To control or check the **wazuh-api** service, use 
 
 Use the cURL command to send a *request* to confirm that everything is working as expected:
 
-.. code-block:: console
+.. code-block:: javascript
 
-    # curl -u foo:bar -k https://127.0.0.1:55000?pretty
+    $ curl -u foo:bar -k "https://127.0.0.1:55000?pretty"
     {
-       "error": 0,
-       "data": "Welcome to Wazuh HIDS API"
+        "error": 0,
+        "data": {
+            "msg": "Welcome to Wazuh HIDS API",
+            "api_version": "v3.5.0",
+            "hostname": "wazuh",
+            "timestamp": "Fri Aug 03 2018 00:36:13 GMT+0000 (UTC)"
+        }
     }
+
 
 Explanation:
 
@@ -62,7 +68,17 @@ Here are some of the basic concepts related to making API requests and understan
 
  * Example response without errors:
 
-  ``{ "error": "0", "data": "Welcome to Wazuh HIDS API" }``
+  .. code-block:: javascript
+
+        {
+            "error":0,
+            "data":{
+                "msg":"Welcome to Wazuh HIDS API",
+                "api_version":"v3.5.0",
+                "hostname":"wazuh",
+                "timestamp":"Fri Aug 03 2018 00:37:50 GMT+0000 (UTC)"
+            }
+        }
 
  * Example response with errors:
 
@@ -71,7 +87,7 @@ Here are some of the basic concepts related to making API requests and understan
 * Responses containing collections of data will return a maximum of 500 elements. The *offset* and *limit* parameters may be used to iterate through large collections.
 * All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 * All requests accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
-* The API log is stored on the manager as ``/var/ossec/logs/api.log``.
+* The API log is stored on the manager as ``/var/ossec/logs/api.log``. The API logs are rotated daily. The rotations are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
 
 .. _wazuh_api_use_cases:
 
@@ -85,218 +101,247 @@ Exploring the ruleset
 
 Often when an alert fires, it is helpful to know details about the rule itself. The following request enumerates the attributes of rule *1002*:
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/rules/1002?pretty"``
+.. code-block:: javascript
 
-::
-
+    $ curl -u foo:bar -k "https://127.0.0.1:55000/rules/1002?pretty"
     {
-      "error": 0,
-      "data": {
-        "totalItems": 1,
-        "items": [
-          {
-            "status": "enabled",
-            "pci": [],
-            "description": "Unknown problem somewhere in the system.",
-            "file": "syslog_rules.xml",
-            "level": 2,
-            "groups": [
-              "syslog",
-              "errors"
-            ],
-            "id": 1002,
-            "details": {
-              "options": "alert_by_email",
-              "match": "$BAD_WORDS"
-            }
-          }
-        ]
-      }
+       "error": 0,
+       "data": {
+          "totalItems": 1,
+          "items": [
+             {
+                "status": "enabled",
+                "pci": [],
+                "description": "Unknown problem somewhere in the system.",
+                "file": "0020-syslog_rules.xml",
+                "level": 2,
+                "path": "/var/ossec/ruleset/rules",
+                "details": {
+                   "match": "$BAD_WORDS"
+                },
+                "groups": [
+                   "gpg13_4.3",
+                   "syslog",
+                   "errors"
+                ],
+                "id": 1002,
+                "gdpr": []
+             }
+          ]
+       }
     }
 
-It can also be helpful to know what rules are available that match specific criteria. For example, we can show all of the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures**. In the example below, only one rule is returned:
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/rules?group=web&pci=10.6.1&search=failures&pretty"``
+It can also be helpful to know what rules are available that match a specific criteria. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command bellow:
 
-::
+.. code-block:: javascript
 
+    $ curl -u foo:bar -k "https://127.0.0.1:55000/rules?group=web&pci=10.6.1&search=failures&pretty"
     {
-      "error": 0,
-      "data": {
-        "totalItems": 1,
-        "items": [
-          {
-            "status": "enabled",
-            "pci": [
-              "10.6.1",
-              "10.2.4",
-              "10.2.5",
-              "11.4"
-            ],
-            "description": "Multiple web authentication failures.",
-            "file": "nginx_rules.xml",
-            "level": 10,
-            "groups": [
-              "authentication_failures",
-              "nginx",
-              "web"
-            ],
-            "id": 31316,
-            "details": {
-              "same_source_ip": null,
-              "frequency": "6",
-              "if_matched_sid": "31315",
-              "timeframe": "240"
-            }
-          }
-        ]
-      }
+       "error": 0,
+       "data": {
+          "totalItems": 1,
+          "items": [
+             {
+                "status": "enabled",
+                "pci": [
+                   "10.6.1",
+                   "10.2.4",
+                   "10.2.5",
+                   "11.4"
+                ],
+                "description": "Nginx: Multiple web authentication failures.",
+                "file": "0260-nginx_rules.xml",
+                "level": 10,
+                "path": "/var/ossec/ruleset/rules",
+                "details": {
+                   "same_source_ip": "",
+                   "frequency": "8",
+                   "if_matched_sid": "31315",
+                   "timeframe": "240"
+                },
+                "groups": [
+                   "authentication_failures",
+                   "gpg13_7.1",
+                   "nginx",
+                   "web"
+                ],
+                "id": 31316,
+                "gdpr": [
+                   "IV_35.7.d",
+                   "IV_32.2"
+                ]
+             }
+          ]
+       }
     }
+
+
 
 Mining the file integrity monitoring database of an agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can use the API to show information about all of the files monitored by syscheck. For example, you can enumerate all of the monitored files on agent *000* (the manager) with extension *.py* that have been modified. In order to be concise, "*limit=1*" has been used in this example to limit the results to a single record:
+The API can be used to show information about all monitored files by syscheck. The following example shows all modified *.py* files in agent *000* (the manager):
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000/files?offset=0&limit=1&event=modified&search=.py&pretty"``
+.. code-block:: javascript
 
-::
-
+    $ curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000?event=modified&search=.py&pretty"
     {
-      "error": 0,
-      "data": {
-        "totalItems": 1,
-        "items": [
-          {
-            "uid": 0,
-            "scanDate": "2016-07-14 10:58:45",
-            "user": "root",
-            "file": "/home/example.py",
-            "modificationDate": "2016-07-14 10:58:18",
-            "octalMode": "100777",
-            "inode": 270323,
-            "event": "modified",
-            "size": 8,
-            "sha1": "a38c98822f783fd45c256fe8fc928300c169d138",
-            "group": "root",
-            "gid": 0,
-            "permissions": "-rwxrwxrwx",
-            "md5": "b7f912e271b6c3e86ba2787f227d984c"
-          }
-        ]
-      }
+        "error": 0,
+        "data": {
+            "totalItems": 2,
+            "items": [
+                {
+                    "sha1": "67b0a8ccf18bf5d2eb8c7f214b5a5d0d4a5e409d",
+                    "group": "root",
+                    "uid": 0,
+                    "scanDate": "2018-08-02 16:49:47",
+                    "gid": 0,
+                    "user": "root",
+                    "file": "/etc/python2.7/sitecustomize.py",
+                    "modificationDate": "2018-04-15 21:51:34",
+                    "octalMode": "100644",
+                    "permissions": "-rw-r--r--",
+                    "md5": "d6b276695157bde06a56ba1b2bc53670",
+                    "inode": 536845,
+                    "event": "modified",
+                    "size": 155
+                },
+                {
+                    "sha1": "67b0a8ccf18bf5d2eb8c7f214b5a5d0d4a5e409d",
+                    "group": "root",
+                    "uid": 0,
+                    "scanDate": "2018-08-02 16:49:33",
+                    "gid": 0,
+                    "user": "root",
+                    "file": "/etc/python3.6/sitecustomize.py",
+                    "modificationDate": "2018-04-01 05:46:30",
+                    "octalMode": "100644",
+                    "permissions": "-rw-r--r--",
+                    "md5": "d6b276695157bde06a56ba1b2bc53670",
+                    "inode": 394698,
+                    "event": "modified",
+                    "size": 155
+                }
+            ]
+        }
     }
 
-You can find a file using its md5/sha1 hash:
 
+You can find a file using its md5/sha1 hash. In the following examples, the same file is retrieved using both its md5 and sha1:
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000/files?hash=9d0ac660826f4245f3444b0247755c7229f1f9fe&pretty"``
+.. code-block:: javascript
 
-::
-
+    $ curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000?pretty&hash=17f51705df5b61c53ef600fc1fcbe031e4d53c20"
     {
-      "error": 0,
-      "data": {
-        "totalItems": 1,
-        "items": [
-          {
-            "uid": 0,
-            "scanDate": "2016-07-14 08:49:27",
-            "user": "root",
-            "file": "/etc/default/cron",
-            "modificationDate": "2014-10-25 22:04:09",
-            "octalMode": "100644",
-            "inode": 262805,
-            "event": "added",
-            "size": 955,
-            "sha1": "9d0ac660826f4245f3444b0247755c7229f1f9fe",
-            "group": "root",
-            "gid": 0,
-            "permissions": "-rw-r--r--",
-            "md5": "eae0d979b5007d2af41540d8c2631359"
-          }
-        ]
-      }
+       "error": 0,
+       "data": {
+          "totalItems": 1,
+          "items": [
+             {
+                "sha1": "17f51705df5b61c53ef600fc1fcbe031e4d53c20",
+                "group": "root",
+                "uid": 0,
+                "scanDate": "2018-08-02 16:50:12",
+                "gid": 0,
+                "user": "root",
+                "file": "/sbin/swapon",
+                "modificationDate": "2018-03-15 22:47:34",
+                "octalMode": "100755",
+                "permissions": "-rwxr-xr-x",
+                "md5": "39b88ab3ddfaf00db53e5cf193051351",
+                "inode": 584,
+                "event": "modified",
+                "size": 47184
+             }
+          ]
+       }
     }
+
+.. code-block:: javascript
+
+    $ curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000?pretty&hash=39b88ab3ddfaf00db53e5cf193051351"
+    {
+       "error": 0,
+       "data": {
+          "totalItems": 1,
+          "items": [
+             {
+                "sha1": "17f51705df5b61c53ef600fc1fcbe031e4d53c20",
+                "group": "root",
+                "uid": 0,
+                "scanDate": "2018-08-02 16:50:12",
+                "gid": 0,
+                "user": "root",
+                "file": "/sbin/swapon",
+                "modificationDate": "2018-03-15 22:47:34",
+                "octalMode": "100755",
+                "permissions": "-rwxr-xr-x",
+                "md5": "39b88ab3ddfaf00db53e5cf193051351",
+                "inode": 584,
+                "event": "modified",
+                "size": 47184
+             }
+          ]
+       }
+    }
+
 
 Listing outstanding rootcheck issues
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Rootcheck requests are very similar to the syscheck requests. In order to get all rootcheck issues with the **outstanding** status, run this request:
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/rootcheck/000?status=outstanding&offset=0&limit=1&pretty"``
+.. code-block:: javascript
 
-::
-
+    $ curl -u foo:bar -k "https://127.0.0.1:55000/rootcheck/000?status=outstanding&offset=10&limit=1&pretty"
     {
-      "error": 0,
-      "data": {
-        "totalItems": 3,
-        "items": [
-          {
-            "status": "outstanding",
-            "oldDay": "2016-07-14 08:49:28",
-            "readDay": "2016-07-14 08:49:28",
-            "event": "System Audit: SSH Hardening - 1: Port 22 {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config"
-          }
-        ]
-      }
+       "error": 0,
+       "data": {
+          "totalItems": 14,
+          "items": [
+             {
+                "status": "outstanding",
+                "oldDay": "2018-08-02 16:50:41",
+                "pci": "2.2.4",
+                "readDay": "2018-08-03 00:27:29",
+                "event": "System Audit: SSH Hardening - 6: Empty passwords allowed {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 6 ."
+             }
+          ]
+       }
     }
 
-Starting the manager and dumping its configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It is possible to use the API to interact with the manager in multiple ways.  For example, you can stop, start, restart or get its state with a request such as:
+Getting information about the manager
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-``curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"``
+Some information about the manager can be retrieved using the API. Configuration, status, information, logs, etc. The following example retrieves the status of each daemon Wazuh runs:
 
-::
+.. code-block:: javascript
 
+    $ curl -u foo:bar -k "https://127.0.0.1:55000/manager/status?pretty"
     {
-      "error": 0,
-      "data": [
-        {
-          "status": "running",
-          "daemon": "wazuh-moduled"
-        },
-        {
-          "status": "running",
-          "daemon": "ossec-maild"
-        },
-        {
-          "status": "running",
-          "daemon": "ossec-execd"
-        },
-        {
-          "status": "running",
-          "daemon": "ossec-analysisd"
-        },
-        {
-          "status": "running",
-          "daemon": "ossec-logcollector"
-        },
-        {
-          "status": "running",
-          "daemon": "ossec-remoted"
-        },
-        {
-          "status": "running",
-          "daemon": "ossec-syscheckd"
-        },
-        {
-          "status": "running",
-          "daemon": "ossec-monitord"
+        "error": 0,
+        "data": {
+          "wazuh-modulesd": "running",
+          "ossec-authd": "stopped",
+          "wazuh-clusterd": "running",
+          "ossec-monitord": "running",
+          "ossec-logcollector": "running",
+          "ossec-execd": "running",
+          "ossec-remoted": "running",
+          "ossec-syscheckd": "running",
+          "ossec-analysisd": "running",
+          "ossec-maild": "stopped"
         }
-      ]
     }
 
 
-You can even dump the manager's current configuration with the below request (response shortened for brevity):
+You can even dump the manager's current configuration with the request bellow (response shortened for brevity):
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/manager/configuration?pretty"``
+.. code-block:: javascript
 
-::
-
+    $ curl -u foo:bar -k "https://127.0.0.1:55000/manager/configuration?pretty"
     {
       "error": 0,
       "data": {
@@ -322,49 +367,58 @@ Here are some commands for working with the agents.
 
 This enumerates **active** agents:
 
+.. code-block:: javascript
 
-``curl -u foo:bar -k "https://127.0.0.1:55000/agents?offset=0&limit=1&status=active&pretty"``
-
-::
-
+    $ curl -u foo:bar -k "https://127.0.0.1:55000/agents?offset=1&limit=1&status=active&pretty"
     {
-      "error": 0,
-      "data": {
-        "totalItems": 1,
-        "items": [
-          {
-            "status": "Active",
-            "ip": "127.0.0.1",
-            "id": "000",
-            "name": "LinMV"
-          }
-        ]
-      }
+       "error": 0,
+       "data": {
+          "totalItems": 2,
+          "items": [
+             {
+                "status": "Active",
+                "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+                "group": "default",
+                "name": "ubuntu",
+                "mergedSum": "f1a9e24e02ba4cc5ea80a9d3feb3bb9a",
+                "ip": "192.168.185.7",
+                "node_name": "node01",
+                "dateAdd": "2018-08-02 16:52:04",
+                "version": "Wazuh v3.5.0",
+                "key": "ac7b7eddf95d65374cb82003024096effa8d90789d447805c375427cb62c75a2",
+                "manager_host": "wazuh",
+                "lastKeepAlive": "2018-08-03 01:27:33",
+                "os": {
+                   "major": "16",
+                   "name": "Ubuntu",
+                   "uname": "Linux |ubuntu |4.4.0-131-generic |#157-Ubuntu SMP Thu Jul 12 15:51:36 UTC 2018 |x86_64",
+                   "platform": "ubuntu",
+                   "version": "16.04.5 LTS",
+                   "codename": "Xenial Xerus",
+                   "arch": "x86_64",
+                   "minor": "04"
+                },
+                "id": "001"
+             }
+          ]
+       }
     }
+
 
 Adding an agent is now easier than ever. Simply send a request with the agent name and its IP.
 
-``curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"``
+.. code-block:: javascript
 
-::
-
+    $ curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
     {
-      "error": 0,
-      "data": "019"
-    }
-
-You can also fetch an agent's key:
-
-``curl -u foo:bar -k "https://127.0.0.1:55000/agents/019/key?pretty"``
-
-::
-
-    {
-      "error": 0,
-      "data": "MDE5IGFkZmFmZGFkZmFkZmFkZmEgMTg1LjE2LjIxMS44OCBjN2Y2YzFhMjc4NWI1NjBhOWZiZGJiNjY2ODMwMzdlODNkMjQwNDc5NmUxMDI2Yzk1ZTBmMmY2MDQ5ZDU1Mjlj"
+        "error": 0,
+        "data": {
+          "id": "007",
+          "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgYzc2YmZiOTEyYzI0MmMyYzFmMjY2ZTZiMzMyMDM4OTlkMzQ5M2E3OTRkOTMyMDU1MzAzZTE3ZDBkN2I0MmM5Yw=="
+        }
     }
 
 
 Conclusion
 ^^^^^^^^^^
-We hope this sections has helped you to appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests. A nice summary can also be found here: :ref:`summary <request_list>`.
+We hope those examples have helped you to appreciate the potential of the Wazuh API. Remember to check out the :ref:`reference <api_reference>` document to discover all the available API requests. A nice summary can also be found here: :ref:`summary <request_list>`.
