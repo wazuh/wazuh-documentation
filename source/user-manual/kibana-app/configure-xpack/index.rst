@@ -72,7 +72,27 @@ Follow these steps to enable X-Pack:
       "tagline" : "You Know, for Search"
     }
 
-5. On the host where Kibana is installed, set the `elastic` user in its configuration, editing the ``/etc/kibana/kibana.yml`` file as follow:
+5. The Logstash configuration file also needs some modifications in order to properly connect with Elasticsearch and send the alerts. Open the file at ``/etc/logstash/conf.d/01-wazuh.conf`` and add the ``elastic`` user credentials on the ``output`` section as follows:
+
+  .. code-block:: console
+
+    output {
+        elasticsearch {
+            hosts => ["localhost:9200"]
+            index => "wazuh-alerts-3.x-%{+YYYY.MM.dd}"
+            document_type => "wazuh"
+            user => "elastic"
+            password => "<elastic_password>"
+        }
+    }
+
+6. Restart Logstash
+
+  .. code-block:: console
+
+    # systemctl restart logstash
+
+7. On the host where Kibana is installed, set the `elastic` user in its configuration, editing the ``/etc/kibana/kibana.yml`` file as follow:
 
   .. code-block:: yaml
 
@@ -80,13 +100,13 @@ Follow these steps to enable X-Pack:
     elasticsearch.username: "elastic"
     elasticsearch.password: "<elastic_password>"
 
-6. Restart Kibana
+8. Restart Kibana
 
   .. code-block:: console
 
     # systemctl restart kibana
 
-7. Login into the Kibana interface using the ``elastic`` user when prompted. Now you can continue configuring X-Pack Security on the following sections.
+9. Login into the Kibana interface using the ``elastic`` user when prompted. Now you can continue configuring X-Pack Security on the following sections.
 
 .. image:: ../../../images/kibana-app/configure-xpack/xpack-install/kibana-login.png
   :align: center

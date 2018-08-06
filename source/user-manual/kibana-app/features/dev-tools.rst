@@ -15,13 +15,13 @@ On the editor pane, you can type API requests in several ways:
 
 - Using **in-line parameters**, just like in a browser.
 - Using **JSON-formatted parameters**.
-- **Combining both** in-line and JSON-formatted parameters. Keep in mind that if you place the same parameters with different values, the in-line parameter has precedende over the JSON-formatted one.
+- **Combining both** in-line and JSON-formatted parameters. Keep in mind that if you place the same parameters with different values, the in-line parameter has precedence over the JSON-formatted one.
 
 To execute a request, place the cursor on the desired request line and click on the ``Play`` button. Comments are also compatible on the editor pane using the ``#`` character at the beggining of the line.
 
 .. note::
 
-  Using the local browser storage, you can close the tab, and the same content will be available the next time you open *Dev tools*.
+  Using the web browser's local storage, you can close the tab, and the same content will be available the next time you open *Dev tools*.
 
 .. warning::
 
