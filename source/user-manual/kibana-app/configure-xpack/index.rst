@@ -59,7 +59,7 @@ Follow these steps to enable X-Pack:
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "2TbJlE6MRBKB6uHybVSQJA",
       "version" : {
-        "number" : "6.3.0",
+        "number" : "6.3.2",
         "build_flavor" : "default",
         "build_type" : "deb",
         "build_hash" : "424e937",
