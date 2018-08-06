@@ -5,7 +5,7 @@
 System inventory
 ================
 
-The Wazuh agents are able to collect interesting system information and store it into a DB for each agent on the manager side. The `Syscollector` module is in charge of this collection.
+The Wazuh agents are able to collect interesting system information and store it into an SQLite database for each agent on the manager side. The `Syscollector` module is in charge of this task.
 
 - `How it works`_
 - `Available scans`_
@@ -21,7 +21,7 @@ The Wazuh agents are able to collect interesting system information and store it
 How it works
 -------------
 
-As mentioned above, this module tries to gather the most relevant information from the monitored system.
+As mentioned above, the main purpose of this module is to gather the most relevant information from the monitored system.
 
 Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the new collected data to the manager who updates the appropriate tables of the database.
 
@@ -35,10 +35,12 @@ Available scans
 
 The collected information from Wazuh agents are stored in different SQLite tables. Here is described the content of each available table.
 
-At present, this module is available for Linux, Windows, MacOS, OpenBS and FreeBSD.
+At present, this module is available for Linux, Windows, MacOS, OpenBS and FreeBSD. See the `compatibility matrix`_ for more information.
 
 Hardware
 ^^^^^^^^
+
+.. versionadded:: 3.2.0
 
 Retrieve basic information about the hardware components of a system.
 
@@ -66,6 +68,8 @@ Retrieve basic information about the hardware components of a system.
 
 Operating system
 ^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.2.0
 
 Retrieve basic information about the Operating System.
 
@@ -104,6 +108,8 @@ Retrieve basic information about the Operating System.
 
 Packages
 ^^^^^^^^
+
+.. versionadded:: 3.2.0
 
 The currently packages inventory of each Wazuh agent. On Linux systems, retrieved packages can be `deb` or `rpm` types.
 
@@ -144,6 +150,8 @@ The currently packages inventory of each Wazuh agent. On Linux systems, retrieve
 
 Network interfaces
 ^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.5.0
 
 The network interfaces scan retrieves information about the existing network interface of a system (up and down interfaces) as well as their routing configuration,
 it is composed of three tables to ensure that the information is as structured as possible.
@@ -232,7 +240,9 @@ Referencing interfaces described at `sys_netiface`, this table shows the routing
 Ports
 ^^^^^
 
- List the opened ports of a system.
+.. versionadded:: 3.5.0
+
+List the opened ports of a system.
 
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | Field            | Description                            | Example                                           | Available         |
@@ -268,7 +278,9 @@ Ports
 Processes
 ^^^^^^^^^
 
- List the current processes running in a system host.
+.. versionadded:: 3.5.0
+
+List the current processes running in a system host.
 
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 | Field           | Description                            | Example                                           | Available         |
@@ -338,7 +350,7 @@ Processes
 Compatibility matrix
 ---------------------
 
-The following table shows the scans compatibility for the different available Operating Systems:
+The following table shows the Operating Systems that this module currently supports.
 
 +------------------------+----------------------------------------------------------------------+
 |                        |                      **Syscollector scan**                           |
@@ -359,3 +371,82 @@ The following table shows the scans compatibility for the different available Op
 
 Use case: Visualize system inventory in the Wazuh App
 -----------------------------------------------------
+
+The Syscollector module is enabled by default in all compatible systems including all the available scans. Here we can see the default configuration block:
+
+.. code-block:: xml
+
+  <!-- System inventory -->
+  <wodle name="syscollector">
+    <disabled>no</disabled>
+    <interval>1h</interval>
+    <scan_on_start>yes</scan_on_start>
+    <hardware>yes</hardware>
+    <os>yes</os>
+    <network>yes</network>
+    <packages>yes</packages>
+    <ports all="no">yes</ports>
+    <processes>yes</processes>
+  </wodle>
+
+Once the module starts, it will run periodically scans and send the new data in JSON events to the manager, where it will be decoded and stored into a particular database
+for each agent.
+
+The current inventory could be consulted in different ways. Let see an example querying for a particular package in a Debian agent:
+
+- Querying the Database directly on the manager side, located at ``$install_directory/queue/db/:agent_id.db``.
+
+.. code-block:: console
+
+  # sqlite3 /var/ossec/queue/db/003.db
+  SQLite version 3.7.17 2013-05-20 00:56:22
+  Enter ".help" for instructions
+  Enter SQL statements terminated with a ";"
+  sqlite> select * from sys_programs where name="wazuh-agent";
+  696614220|2018/08/06 02:07:30|deb|wazuh-agent|extra|admin|105546|Wazuh, Inc <support@wazuh.com>||3.5.0-1|amd64|||Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring||0
+
+- By querying the API, which retrieves nested data in JSON format.
+
+.. code-block:: console
+
+  # curl -u foo:bar "localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
+  {
+   "error": 0,
+   "data": {
+      "totalItems": 1,
+      "items": [
+         {
+            "vendor": "Wazuh, Inc <support@wazuh.com>",
+            "description": "Wazuh helps you to gain security visibility into your infrastructure by monitoring hosts at an operating system and application level. It provides the following capabilities: log analysis, file integrity monitoring, intrusions detection and policy and compliance monitoring",
+            "scan": {
+               "id": 696614220,
+               "time": "2018/08/06 02:07:30"
+            },
+            "section": "admin",
+            "format": "deb",
+            "name": "wazuh-agent",
+            "priority": "extra",
+            "version": "3.5.0-1",
+            "architecture": "amd64",
+            "size": 105546
+         }
+      ]
+   }
+  }
+
+Moreover, the same information can be consulted at the Wazuh APP, which includes an `Inventory` tab for each agent.
+For now it is available the OS, hardware and packages inventories at this tab, which looks like the following screenshot:
+
+.. thumbnail:: ../../images/manual/inventory.png
+    :title: Inventory tab
+    :align: center
+    :width: 100%
+
+It also is available the `DevTool` tab to query the API directly from the Wazuh APP as is shown below:
+
+.. thumbnail:: ../../images/manual/devtools-syscollector.png
+    :title: Inventory tab
+    :align: center
+    :width: 100%
+
+You could find more information about how to configure this capability at the :doc:`Syscollector configuration <../reference/ossec-conf/wodle-syscollector>` section.
