@@ -24,13 +24,13 @@ Basic usage
 
 For detailed configuration options, go to :ref:`Syscheck <reference_ossec_syscheck>`.
 
-To configure syscheck, a list of files and directories must be identified. The ``check_all`` option checks md5, sha1, owner, and permissions of the file.
+To configure syscheck, a list of files and directories must be identified. The ``check_all`` option checks file size, permissions, owner, last modification date, inode and all the hash sums (MD5, SHA1 and SHA256).
 
 ::
 
     <syscheck>
-        <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
-        <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
+      <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
+      <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
     </syscheck>
 
 Configuring scheduled scans
@@ -52,22 +52,37 @@ Real-time monitoring is configured with the ``realtime`` option. This option onl
 
 ::
 
-	<syscheck>
-		<directories check_all="yes" realtime="yes">c:/tmp</directories>
-	</syscheck>
+    <syscheck>
+      <directories check_all="yes" realtime="yes">c:/tmp</directories>
+    </syscheck>
+
+
+Configuring who-data monitoring
+--------------------------------
+
+.. versionadded:: 3.4.0
+
+Who-data monitoring is configured with the ``whodata`` option. This option replaces the ``realtime`` option, which means that ``whodata`` implies real-time monitoring but adding the who-data information.
+This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so additional configurations might be necessary. Check the :ref:`Auditing who-data <auditing-whodata>` entry to get further information.
+
+::
+
+    <syscheck>
+      <directories check_all="yes" whodata="yes">/etc</directories>
+    </syscheck>
 
 .. _how_to_fim_report_changes:
 
 Configure to report changes
 ---------------------------
 
-Using the``report_changes`` option, we can see what specifically changed in text files. Be careful about which folders you set up to ``report_changes`` to, because in order to do this, Wazuh copies every single file you want to monitor to a private location.
+Using the ``report_changes`` option, we can see what specifically changed in text files. Be careful about which folders you set up to ``report_changes`` to, because in order to do this, Wazuh copies every single file you want to monitor to a private location.
 
 ::
 
-	<syscheck>
-		<directories check_all="yes" realtime="yes" report_changes="yes">/test</directories>
-	</syscheck>
+    <syscheck>
+      <directories check_all="yes" realtime="yes" report_changes="yes">/test</directories>
+    </syscheck>
 
 .. _how_to_fim_ignore:
 
@@ -79,9 +94,9 @@ Files and directories can be omitted using the ignore option (or registry_ignore
 ::
 
     <syscheck>
-        <ignore>/etc/random-seed</ignore>
-        <ignore>/root/dir</ignore>
-        <ignore type="sregex">.log$|.tmp</ignore>
+      <ignore>/etc/random-seed</ignore>
+      <ignore>/root/dir</ignore>
+      <ignore type="sregex">.log$|.tmp</ignore>
     </syscheck>
 
 Ignoring files via rules
@@ -90,9 +105,9 @@ Ignoring files via rules
 It is also possible to ignore files using rules, as in this example::
 
     <rule id="100345" level="0">
-        <if_group>syscheck</if_group>
-        <match>/var/www/htdocs</match>
-        <description>Ignore changes to /var/www/htdocs</description>
+      <if_group>syscheck</if_group>
+      <match>/var/www/htdocs</match>
+      <description>Ignore changes to /var/www/htdocs</description>
     </rule>
 
 Changing severity
@@ -103,7 +118,7 @@ With a custom rule, the level of a **syscheck** alert can be altered when change
 ::
 
     <rule id="100345" level="12">
-        <if_group>syscheck</if_group>
-        <match>/var/www/htdocs</match>
-        <description>Changes to /var/www/htdocs - Critical file!</description>
+      <if_group>syscheck</if_group>
+      <match>/var/www/htdocs</match>
+      <description>Changes to /var/www/htdocs - Critical file!</description>
     </rule>

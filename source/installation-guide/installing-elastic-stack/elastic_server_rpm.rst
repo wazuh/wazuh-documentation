@@ -20,7 +20,7 @@ Preparation
 
   .. code-block:: console
 
-    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u172-b11/a58eab1ec242421181065cdc37240b08/jre-8u172-linux-x64.rpm"
+    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-linux-x64.rpm"
 
   Now, check if the package was download successfully:
 
@@ -32,8 +32,8 @@ Preparation
 
   .. code-block:: console
 
-    # yum install jre-8-linux-x64.rpm
-    # rm jre-8-linux-x64.rpm
+    # yum -y install jre-8-linux-x64.rpm
+    # rm -f jre-8-linux-x64.rpm
 
 2. Install the Elastic repository and its GPG key:
 
@@ -61,7 +61,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # yum install elasticsearch-6.3.0
+    # yum install elasticsearch-6.3.2
 
 2. Enable and start the Elasticsearch service:
 
@@ -87,15 +87,15 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # curl localhost:9200/?pretty
 
     {
-      "name" : "116m4ct",
+      "name" : "Zr2Shu_",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "2TbJlE6MRBKB6uHybVSQJA",
+      "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.3.0",
+        "number" : "6.3.2",
         "build_flavor" : "default",
         "build_type" : "rpm",
-        "build_hash" : "424e937",
-        "build_date" : "2018-06-11T23:38:03.357887Z",
+        "build_hash" : "053779d",
+        "build_date" : "2018-07-20T05:20:23.451332Z",
         "build_snapshot" : false,
         "lucene_version" : "7.3.1",
         "minimum_wire_compatibility_version" : "5.6.0",
@@ -108,7 +108,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.4/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -123,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # yum install logstash-6.3.0
+    # yum install logstash-6.3.2
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -131,7 +131,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.4/extensions/logstash/01-wazuh-local.conf
 
     Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
 
@@ -143,7 +143,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.4/extensions/logstash/01-wazuh-remote.conf
 
 
 .. note::
@@ -186,7 +186,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # yum install kibana-6.3.0
+    # yum install kibana-6.3.2
 
 2. Install the Wazuh app plugin for Kibana:
 
@@ -200,7 +200,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.1_6.3.0.zip
+    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.4.0_6.3.2.zip
 
   .. warning::
 
