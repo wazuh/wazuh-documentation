@@ -40,6 +40,8 @@ Wazuh core
 
 - Added new support for AES encryption for manager and agent.
 
+- Enhanced active response process. Added a new feature which allows the user to customize the parameters sent to the agent's active response script.
+
 - Added synchronization for remoted counters (rids), being reloaded if the inode of the file has changed.
 
 - Windows deletes pending active-responses when an output signal is received.
@@ -87,3 +89,25 @@ Wazuh app for Kibana
 - Now it’s possible to remove all the API entries from Settings.
 - More design improvements for the Welcome tab on some app sections.
 - More bug fixes, code refactoring and performance improvements.
+
+
+Kaspersky integration
+---------------------
+
+A Python wrapper of KES (Kaspersky Endpoint Security for Linux) has been integrated with Wazuh agent via Active Response to generate alerts based on the events received using its rule engine. 
+Kaspersky simplifies trigger creation using tagged alerts to generate a scan task on the endpoint, it uses pre-defined rule groups associated with a specific scan type.
+This allows various options and scanning several processes:
+
++-----------------------+----------------------------+---------------------+------------------+
+| Rule group            | Scan type                  | Wrapper command     | KES CLI          |
++-----------------------+----------------------------+---------------------+------------------+
+| kaspersky_full_scan   | Full scan                  | -\\-full_scan       | -\\-start-task 2 |
++-----------------------+----------------------------+---------------------+------------------+
+| kaspersky_memory_scan | Memory scan                | -\\-memory_scan     | -\\-start-task 5 |
++-----------------------+----------------------------+---------------------+------------------+
+| kaspersky_boot_scan   | Boot scan                  | -\\-boot_scan       | -\\-start-task 4 |
++-----------------------+----------------------------+---------------------+------------------+
+| kaspersky_realtime    | Enable realtime protection | -\\-enable_realtime | -\\-start-task 1 |
++-----------------------+----------------------------+---------------------+------------------+
+
+Also it provides realtime protection, Kaspersky tasks query and the posibility to scan a custom folder or file, allowing to apply an action to that file after the scan.
