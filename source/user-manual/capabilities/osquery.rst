@@ -41,7 +41,7 @@ A complete list of all the available tables can be found `here <https://osquery.
 
 Configuration
 -------------
-The first thing we need is to install osquery in our system. To install osquery we must go to the osquery official `download page <https://osquery.io/downloads/official/3.2.6/>`_ and get the version compatible with our operating system.
+The first thing we need is to install Osquery in our system. To install Osquery we must go to the Osquery official `page <https://osquery.io/downloads/official/3.2.6/>`_ and download the compatible version.
 
 Once we have it installed, we will need a configuration file for osquery. If you don't have any, you can use the following one provided by Wazuh:
 
