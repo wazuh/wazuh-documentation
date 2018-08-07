@@ -5,7 +5,7 @@
 Wazuh app and X-Pack
 ====================
 
-X-Pack provides RBAC (role based access control) capabilities, among other features, for the Elastic Stack. This guide provides steps to configure specific users to use the Wazuh app with X-Pack.
+X-Pack provides RBAC (role based access control) capabilities, among other features, for the Elastic Stack. This guide provides steps to configure specific users to use the Wazuh app with X-Pack, using the `Security plugin <https://www.elastic.co/products/stack/security>`_.
 
 In this `link <https://www.elastic.co/products/x-pack>`_ you can learn more about the X-Pack features for the Elastic Stack, and all the advanced capabilities that add to your Elastic installation.
 
@@ -40,7 +40,7 @@ Follow these steps to enable X-Pack:
 
 .. note::
 
-    Find more information about built-in users in `this Elastic documentation article <https://www.elastic.co/guide/en/elastic-stack-overview/current/built-in-users.html>`_.
+    Find more information about built-in users in `this Elastic documentation article <https://www.elastic.co/guide/en/elastic-stack-overview/6.3/built-in-users.html>`_.
 
 4. Restart Elasticsearch:
 
@@ -111,6 +111,10 @@ Follow these steps to enable X-Pack:
 .. image:: ../../../images/kibana-app/configure-xpack/xpack-install/kibana-login.png
   :align: center
   :width: 100%
+
+.. note::
+
+    For more extended documentation about the Security plugin, you can read the `Securing the Elastic Stack <https://www.elastic.co/guide/en/elastic-stack-overview/current/xpack-security.html>`_ guide from the Elastic documentation.
 
 .. topic:: Contents
 

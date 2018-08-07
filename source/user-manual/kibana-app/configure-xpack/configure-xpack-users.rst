@@ -7,7 +7,7 @@ Configure X-Pack users
 
 This section helps to configure the X-Pack users and roles mentioned on the :ref:`previous article <defining_xpack_users>`, using the interface provided by Kibana.
 
-Using Kibana UI with the `elastic` user
+Using Kibana UI with the ``elastic`` user
 ---------------------------------------
 
 1. Login into Kibana using the ``elastic`` user:
@@ -46,7 +46,7 @@ Using Kibana UI with the `elastic` user
     :align: center
     :width: 100%
 
-7. Create the Wazuh admin user:
+7. Create the Wazuh administrator user:
 
 .. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack07.png
     :align: center
@@ -56,7 +56,7 @@ Using Kibana UI with the `elastic` user
 
   .. note::
 
-    This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 7).
+    This user is not able to add/remove/edit a Wazuh API, use the Wazuh administrator user instead (step 7).
 
 .. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack08.png
   :align: center
@@ -72,14 +72,14 @@ Using Kibana UI with the `elastic` user
   :align: center
   :width: 100%
 
-10. Set the right user on `kibana.yml` file:
+10. Set the right user credentials on the ``kibana.yml`` file:
 
   .. code-block:: console
 
     # vi /etc/kibana/kibana.yml
 
     elasticsearch.username: "wazuhsystem"
-    elasticsearch.password: "wazuhsystem"
+    elasticsearch.password: "<wazuhsystem_password>"
 
 11. Restart Kibana:
 
@@ -87,8 +87,8 @@ Using Kibana UI with the `elastic` user
 
     # systemctl restart kibana
 
-Using CLI
----------
+Using the command-line interface (CLI)
+--------------------------------------
 
 1. Create the ``wazuh-admin`` role:
 
@@ -159,7 +159,7 @@ Using CLI
 
     {"user":{"created":true}}
 
-5. Create the Wazuh admin user:
+5. Create the Wazuh administrator user:
 
   .. code-block:: none
 
@@ -177,7 +177,7 @@ Using CLI
 
   .. note::
 
-    This user is not able to add/remove/edit a Wazuh API, use the Wazuh admin user instead (step 5).
+    This user is not able to add/remove/edit a Wazuh API, use the Wazuh administrator user instead (step 5).
 
   .. code-block:: none
 
@@ -191,14 +191,14 @@ Using CLI
 
     {"user":{"created":true}}
 
-7. Set the right user on `kibana.yml` file:
+7. Set the right user credentials on the ``kibana.yml`` file:
 
   .. code-block:: none
 
     # vi /etc/kibana/kibana.yml
 
     elasticsearch.username: "wazuhsystem"
-    elasticsearch.password: "wazuhsystem"
+    elasticsearch.password: "<wazuhsystem_password>"
 
 8. Restart Kibana:
 

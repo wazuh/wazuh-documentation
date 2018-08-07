@@ -5,14 +5,14 @@
 Defining X-Pack users
 =====================
 
-Using the X-Pack Security plugin feature, we can define user roles to determine who can use the app or see specific index patterns. Below you'll find a summary table of what we need to configure for the app to work properly. The following sections describe briefly what each role can do.
+Using the X-Pack `Security plugin <https://www.elastic.co/products/stack/security>`_ and its RBAC features, we can define user roles to determine who can use the app or see specific index patterns. Below you'll find a summary table of what we need to configure for the app to work properly. The following sections describe briefly what each role can do.
 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | User                                                                   | Roles                                                       |
 +========================================================================+=============================================================+
 | Kibana system user                                                     | **wazuh-admin**, **kibana_system**                          |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-| Wazuh admin user                                                       | **wazuh-basic**, **wazuh-api-admin**                        |
+| Wazuh administrator user                                               | **wazuh-basic**, **wazuh-api-admin**                        |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Wazuh standard user #1, Wazuh standard user #2...                      | **wazuh-basic**                                             |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
@@ -50,8 +50,8 @@ To do so, we'll define another role called ``wazuh-admin`` to handle data relate
     |wazuh-*                                                                 | **all**                                                     |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
 
-Wazuh admin user
-----------------
+Wazuh administrator user
+------------------------
 
 This user will be able to login into Kibana UI, navigate through the Wazuh app and also add/delete Wazuh API entries.
 
