@@ -11,7 +11,7 @@ The configuration file shows the default values for all of the possible options.
 
 .. warning::
 
-    Don't forget to restart the Kibana service after applying changes to this settings.
+    Don't forget to restart the Kibana service after applying changes to these settings.
 
 The configuration file reference is organized by sections:
 
@@ -178,7 +178,7 @@ Extensions
 
 .. note::
 
-    This options are only applied for newly inserted APIs on the *Settings* tab, not for the existing ones.
+    These options are only applied for newly inserted APIs on the *Settings* tab, not for the existing ones.
 
 extensions.pci
 ^^^^^^^^^^^^^^
@@ -262,7 +262,7 @@ Advanced index options
 
 .. warning::
 
-    This options are only valid if they're modified before starting the Kibana service for the very first time.
+    These options are only valid if they're modified before starting the Kibana service for the very first time.
 
     You can read more about configuring the shards and replicas in :ref:`elastic_tuning`.
 
