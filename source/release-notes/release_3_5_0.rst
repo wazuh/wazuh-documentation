@@ -7,10 +7,11 @@
 
 This section shows the most relevant improvements and fixes in version 3.5.0. More details about these changes are provided in each component changelog.
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/3.5/CHANGELOG.md>`_
-- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/3.5/CHANGELOG.md>`_
-- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/3.5/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/3.5-update-changelog/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.5.0/CHANGELOG.md>`_
+- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.5.0/CHANGELOG.md>`_
+- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.5.0/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.5.0-6.3.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.5.0-7.1.2/CHANGELOG.md>`_
 
 
 Wazuh core
