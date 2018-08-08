@@ -23,17 +23,17 @@ How it works
 
 As mentioned above, the main purpose of this module is to gather the most relevant information from the monitored system.
 
-Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the new collected data to the manager who updates the appropriate tables of the database.
+Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the new collected data to the manager, which updates the appropriate tables of the database.
 
-The agent inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. It is also available the `Dev tools` tab
-where it can be queried the API directly about the different scans being able to filter by any desired field.
+The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available, 
+with this feature the API can be directly queried about the different scans being able to filter by any desired field.
 
-In addition, the packages inventory is used as packages feed for the :doc:`Vulnerability detector module<./vulnerability-detection>`.
+In addition, the packages inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection>`.
 
 Available scans
 ---------------
 
-The collected information from Wazuh agents are stored in different SQLite tables. Here is described the content of each available table.
+The collected information from Wazuh agents is stored in different SQLite tables. Here the content of each available table is described .
 
 At present, this module is available for Linux, Windows, MacOS, OpenBS and FreeBSD. See the `compatibility matrix`_ for more information.
 
@@ -71,7 +71,7 @@ Operating system
 
 .. versionadded:: 3.2.0
 
-Retrieve basic information about the Operating System.
+Retrieve basic information about the operating system.
 
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
 | Field            | Description             | Example                                             | Available         |
@@ -111,7 +111,7 @@ Packages
 
 .. versionadded:: 3.2.0
 
-The currently packages inventory of each Wazuh agent. On Linux systems, retrieved packages can be `deb` or `rpm` types.
+The current packages inventory of each Wazuh agent. On Linux systems, retrieved packages can be `deb` or `rpm` types.
 
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | Field            | Description                            | Example                                           | Available         |
@@ -350,7 +350,7 @@ List the current processes running in a system host.
 Compatibility matrix
 ---------------------
 
-The following table shows the Operating Systems that this module currently supports.
+The following table shows the operating systems that this module currently supports.
 
 +------------------------+----------------------------------------------------------------------+
 |                        |                      **Syscollector scan**                           |
@@ -389,10 +389,10 @@ The Syscollector module is enabled by default in all compatible systems includin
     <processes>yes</processes>
   </wodle>
 
-Once the module starts, it will run periodically scans and send the new data in JSON events to the manager, where it will be decoded and stored into a particular database
+Once the module starts, it will run periodically scans and send the new data in JSON events format to the manager, where it will be decoded and stored into a particular database
 for each agent.
 
-The current inventory could be consulted in different ways. Let see an example querying for a particular package in a Debian agent:
+The current inventory can be consulted in different ways. Let's see an example querying for a particular package in a Debian agent:
 
 - Querying the Database directly on the manager side, located at ``$install_directory/queue/db/:agent_id.db``.
 
@@ -435,14 +435,14 @@ The current inventory could be consulted in different ways. Let see an example q
   }
 
 Moreover, the same information can be consulted at the Wazuh APP, which includes an `Inventory` tab for each agent.
-For now it is available the OS, hardware and packages inventories at this tab, which looks like the following screenshot:
+For now, there are available OS, hardware and packages inventories at this tab, which looks like the following screenshot:
 
 .. thumbnail:: ../../images/manual/inventory.png
     :title: Inventory tab
     :align: center
     :width: 100%
 
-It also is available the `DevTool` tab to query the API directly from the Wazuh APP as is shown below:
+The `DevTool` tab is also available to query the API directly from the Wazuh APP as shown below:
 
 .. thumbnail:: ../../images/manual/devtools-syscollector.png
     :title: Inventory tab
