@@ -229,6 +229,8 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 crypto_method
 ^^^^^^^^^^^^^
 
+.. versionadded:: 3.5.0
+
 Choose the encryption of the messages that the agent sends to the manager.
 
 +--------------------+---------------------+
