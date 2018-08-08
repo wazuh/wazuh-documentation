@@ -19,13 +19,13 @@ The Wazuh agents are able to collect interesting system information and store it
 - `Use case: Visualize system inventory in the Wazuh App`_
 
 How it works
--------------
+------------
 
 As mentioned above, the main purpose of this module is to gather the most relevant information from the monitored system.
 
 Once the agent starts, `Syscollector` runs periodically scans of defined targets (hardware, OS, packages, etc.), forwarding the new collected data to the manager, which updates the appropriate tables of the database.
 
-The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available, 
+The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available,
 with this feature the API can be directly queried about the different scans being able to filter by any desired field.
 
 In addition, the packages inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection>`.
@@ -67,7 +67,7 @@ Retrieve basic information about the hardware components of a system.
 +------------------+-----------------------------+-------------------------------------------+-------------------+
 
 Operating system
-^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 .. versionadded:: 3.2.0
 
@@ -104,7 +104,6 @@ Retrieve basic information about the operating system.
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
 | **version**      | Release version         | #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 | All               |
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
-
 
 Packages
 ^^^^^^^^
@@ -146,7 +145,6 @@ The current packages inventory of each Wazuh agent. On Linux systems, retrieved 
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **location**     | Location of the package                | C:\\Program Files\\VMware\\VMware Tools\\         | win/pkg           |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
-
 
 Network interfaces
 ^^^^^^^^^^^^^^^^^^
@@ -236,7 +234,6 @@ Referencing interfaces described at `sys_netiface`, this table shows the routing
 | **dhcp**         | DHCP status                     | enabled                                             | Linux/Windows     |
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
 
-
 Ports
 ^^^^^
 
@@ -273,7 +270,6 @@ List the opened ports of a system.
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **process**      | Name of the PID                        | System                                            | Windows           |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
-
 
 Processes
 ^^^^^^^^^
@@ -346,9 +342,8 @@ List the current processes running in a system host.
 | **processor**   | Number of the processor                | 0                                                 | Linux             |
 +-----------------+----------------------------------------+---------------------------------------------------+-------------------+
 
-
 Compatibility matrix
----------------------
+--------------------
 
 The following table shows the operating systems that this module currently supports.
 
@@ -368,8 +363,7 @@ The following table shows the operating systems that this module currently suppo
 |    OpenBSD             |     ✓     |     ✓     |     ✗     |     ✓    |     ✗     |     ✗     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+
 
-
-Use case: Visualize system inventory in the Wazuh App
+Use case: Visualize system inventory in the Wazuh app
 -----------------------------------------------------
 
 The Syscollector module is enabled by default in all compatible systems including all the available scans. Here we can see the default configuration block:
@@ -434,19 +428,18 @@ The current inventory can be consulted in different ways. Let's see an example q
    }
   }
 
-Moreover, the same information can be consulted at the Wazuh APP, which includes an `Inventory` tab for each agent.
-For now, there are available OS, hardware and packages inventories at this tab, which looks like the following screenshot:
+Moreover, the same information can be consulted at the Wazuh app, which includes an `Inventory` tab for each agent. For now, there are available OS, hardware and packages inventories at this tab, which looks like the following screenshot:
 
 .. thumbnail:: ../../images/manual/inventory.png
     :title: Inventory tab
     :align: center
     :width: 100%
 
-The `DevTool` tab is also available to query the API directly from the Wazuh APP as shown below:
+The *Dev tools* tab is also available to query the API directly from the Wazuh app as shown below:
 
 .. thumbnail:: ../../images/manual/devtools-syscollector.png
-    :title: Inventory tab
+    :title: Dev tools tab
     :align: center
     :width: 100%
 
-You could find more information about how to configure this capability at the :doc:`Syscollector configuration <../reference/ossec-conf/wodle-syscollector>` section.
+You could find more information about how to configure this capability at the :doc:`Syscollector configuration <../reference/ossec-conf/wodle-syscollector>` reference.
