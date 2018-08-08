@@ -77,6 +77,7 @@ Canonical WPK package example
 
 .. code-block:: console
 
+    # make deps
     # make -C wazuh-3.2/src TARGET=agent
 
 4. Change to the base directory:

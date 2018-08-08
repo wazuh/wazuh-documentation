@@ -39,6 +39,7 @@ Installing Wazuh manager
     # cd wazuh-*
     # ./install.sh
 
+  .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
 4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
 
