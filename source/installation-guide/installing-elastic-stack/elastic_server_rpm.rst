@@ -61,7 +61,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # yum install elasticsearch-6.3.1
+    # yum install elasticsearch-6.3.2
 
 2. Enable and start the Elasticsearch service:
 
@@ -87,15 +87,15 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     # curl localhost:9200/?pretty
 
     {
-      "name" : "yk-Jl_9",
+      "name" : "Zr2Shu_",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "YdDkcAkdRquf6lMQjP0HNA",
+      "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.3.1",
+        "number" : "6.3.2",
         "build_flavor" : "default",
         "build_type" : "rpm",
-        "build_hash" : "eb782d0",
-        "build_date" : "2018-06-29T21:59:26.107521Z",
+        "build_hash" : "053779d",
+        "build_date" : "2018-07-20T05:20:23.451332Z",
         "build_snapshot" : false,
         "lucene_version" : "7.3.1",
         "minimum_wire_compatibility_version" : "5.6.0",
@@ -108,7 +108,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.4/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -123,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # yum install logstash-6.3.1
+    # yum install logstash-6.3.2
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -131,7 +131,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.4/extensions/logstash/01-wazuh-local.conf
 
     Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
 
@@ -143,7 +143,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.4/extensions/logstash/01-wazuh-remote.conf
 
 
 .. note::
@@ -175,6 +175,8 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     If you are running the Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elastic_ssl`.
 
+.. _install_kibana_app_rpm:
+
 Kibana
 ------
 
@@ -184,21 +186,21 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # yum install kibana-6.3.1
+    # yum install kibana-6.3.2
 
-2. Install the Wazuh App plugin for Kibana:
+2. Install the Wazuh app plugin for Kibana:
 
-  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. Set the limit as follows:
+  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app. Set the limit as follows:
 
   .. code-block:: console
 
     # export NODE_OPTIONS="--max-old-space-size=3072"
 
-  b) Install the Wazuh App:
+  b) Install the Wazuh app:
 
   .. code-block:: console
 
-    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.1_6.3.1.zip
+    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.4.0_6.3.2.zip
 
   .. warning::
 
@@ -206,7 +208,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note::
 
-    If you want to download a different Wazuh App plugin for another version of Wazuh or Elastic Stack, check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
+    If you want to download a different Wazuh app plugin for another version of Wazuh or Elastic Stack, check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
 
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 
@@ -243,12 +245,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
-Connecting the Wazuh App with the API
--------------------------------------
+Next steps
+----------
 
-Follow the next guide in order to connect the Wazuh App with the API:
+Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
 
-.. toctree::
-  :maxdepth: 1
-
-  connect_wazuh_app
+You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.

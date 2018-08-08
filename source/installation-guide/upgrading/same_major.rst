@@ -88,7 +88,7 @@ Upgrade the Wazuh Kibana App
 
 4) Upgrade the Wazuh Kibana App (this can take a while):
 
-    a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
+    a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app.
 
     Set the limit as follow:
 
@@ -96,7 +96,7 @@ Upgrade the Wazuh Kibana App
 
         # export NODE_OPTIONS="--max-old-space-size=3072"
 
-    b) Install the Wazuh App:
+    b) Install the Wazuh app:
 
     .. code-block:: console
 

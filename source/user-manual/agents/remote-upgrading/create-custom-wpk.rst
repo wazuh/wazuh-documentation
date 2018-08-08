@@ -63,7 +63,7 @@ Canonical WPK package example
 
 .. code-block:: console
 
-    # curl -Lo wazuh-3.3.zip https://github.com/wazuh/wazuh/archive/3.3.zip && unzip wazuh-3.3.zip
+    # curl -Lo wazuh-3.4.zip https://github.com/wazuh/wazuh/archive/3.4.zip && unzip wazuh-3.4.zip
 
 2. Modify the ``wazuh-3.2/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
