@@ -82,7 +82,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="vulnerability-detector" <wodle-vuln-detector>`    | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="osquery" <wodle-osquery>`                         | agent                  |
+| :doc:`wodle name="osquery" <wodle-osquery>`                         | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 
 

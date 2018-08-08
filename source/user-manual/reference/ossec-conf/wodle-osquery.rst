@@ -62,7 +62,7 @@ Disable the osquery wodle.
 run_daemon
 ^^^^^^^^^^
 
-Makes the module run osqueryd as subprocess or lets the module monitor the results log without running osquery.
+Makes the module run `osqueryd` as a subprocess or lets the module monitor the results log without running Osquery.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -73,7 +73,7 @@ Makes the module run osqueryd as subprocess or lets the module monitor the resul
 bin_path
 ^^^^^^^^
 
-Full path to the folder that contains the osqueryd executable.
+Full path to the folder that contains the `osqueryd` executable.
 
 +-------------------------------+------------------------------------------------------+
 | **Default value on Linux**    | Empty                                                |
@@ -86,7 +86,7 @@ Full path to the folder that contains the osqueryd executable.
 log_path
 ^^^^^^^^
 
-Full path to the results log written by osquery.
+Full path to the results log written by Osquery.
 
 +-------------------------------+------------------------------------------------------+
 | **Default value on Linux**    | /var/log/osquery/osqueryd.results.log                |
@@ -99,7 +99,7 @@ Full path to the results log written by osquery.
 config_path
 ^^^^^^^^^^^
 
-Path to the osquery configuration file. This path can be relative to the folder where the Wazuh agent is running.
+Path to the Osquery configuration file. This path can be relative to the folder where the Wazuh agent is running.
 
 +-------------------------------+------------------------------------------------------+
 | **Default value on Linux**    | /etc/osquery/osquery.conf                            |

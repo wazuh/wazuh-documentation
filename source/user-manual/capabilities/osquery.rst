@@ -5,7 +5,10 @@
 Osquery
 ============
 
-.. versionadded:: 3.5.0 
+.. versionadded:: 3.5.0
+
+It has been added a new Wazuh module which allows to manage the Osquery tool from Wazuh agents, being able to set the Osquery configuration and collect the generated
+information by Osquery to send it to the manager, generating the corresponding alerts if necessary.
 
 - `How it works`_
 - `Configuration`_
@@ -21,7 +24,7 @@ List all the local users of the machine.
 
 .. code-block:: sql
 
-    SELECT * FROM users; 
+    SELECT * FROM users;
 
 Get the process name, port, and PID, for processes listening on all interfaces.
 
@@ -81,13 +84,13 @@ Once we have it installed, we will need a configuration file for osquery. If you
         }
     }
 
-As you can see in this sample configuration, ``system_info``, ``high_load_average`` and ``low_free_memory`` queries will be executed every hour. 
+As you can see in this sample configuration, ``system_info``, ``high_load_average`` and ``low_free_memory`` queries will be executed every hour.
 
 Furthermore, this configuration uses some default packs such as ``osquery-monitoring``, ``hardware-monitoring`` or ``ossec-rootkit`` among others. You can define you own packs and use it with this wodle.
 
 Alert examples
 --------------
-Sample alert in log format: 
+Sample alert in log format:
 
 .. code-block:: console
 
@@ -102,7 +105,7 @@ Sample alert in log format:
         epoch: 0
         counter: 461
         columns.cgroup_namespace: 4026531835
-        columns.cmdline: 
+        columns.cmdline:
         columns.cwd: /
         columns.disk_bytes_read: 0
         columns.disk_bytes_written: 0
@@ -116,11 +119,11 @@ Sample alert in log format:
         columns.nice: 0
         columns.on_disk: -1
         columns.parent: 2
-        columns.path: 
+        columns.path:
         columns.pgroup: 0
         columns.pid: 9
         columns.pid_namespace: 4026531836
-        columns.resident_size: 
+        columns.resident_size:
         columns.root: /
         columns.sgid: 0
         columns.start_time: 0
@@ -128,7 +131,7 @@ Sample alert in log format:
         columns.suid: 0
         columns.system_time: 2
         columns.threads: 1
-        columns.total_size: 
+        columns.total_size:
         columns.uid: 0
         columns.user_namespace: 4026531837
         columns.user_time: 0
