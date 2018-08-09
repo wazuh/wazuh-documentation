@@ -32,34 +32,34 @@ Wazuh also includes a rich web application (fully integrated as a Kibana app) fo
 Example screenshots
 -------------------
 
-.. |AGENT_DISCOVER| thumbnail:: images/kibana-app/agents/agents-discover.png
-   :title: Agent discover
+.. |EXTENSIONS| thumbnail:: images/kibana-app/showcase/extensions.png
+   :title: App extensions
    :align: center
    :width: 100%
-.. |AGENT_OVERVIEW| thumbnail:: images/kibana-app/agents/agents-general.png
+.. |AGENT_OVERVIEW| thumbnail:: images/kibana-app/showcase/agents-general.png
    :title: Agent overview
    :align: center
    :width: 100%
-.. |DISCOVER_ALERTS| thumbnail:: images/kibana-app/discover/discover.png
+.. |DISCOVER_ALERTS| thumbnail:: images/kibana-app/showcase/discover.png
    :title: Discover alerts
    :align: center
    :width: 100%
-.. |MANAGER_RULESET| thumbnail:: images/kibana-app/manager/manager-ruleset.png
+.. |MANAGER_RULESET| thumbnail:: images/kibana-app/showcase/ruleset.png
    :title: Log analysis rules
    :align: center
    :width: 100%
-.. |OVERVIEW_FIM| thumbnail:: images/kibana-app/overview/overview-fim.png
+.. |OVERVIEW_FIM| thumbnail:: images/kibana-app/showcase/overview-fim.png
    :title: Overview file integrity monitoring
    :align: center
    :width: 100%
-.. |OVERVIEW_GENERAL| thumbnail:: images/kibana-app/overview/overview-general.png
+.. |OVERVIEW_GENERAL| thumbnail:: images/kibana-app/showcase/overview-general.png
    :title: Overview alerts
    :align: center
    :width: 100%
 
 ==================  ==================  ==================
 |OVERVIEW_GENERAL|  |OVERVIEW_FIM|      |MANAGER_RULESET|
-|AGENT_DISCOVER|    |AGENT_OVERVIEW|    |DISCOVER_ALERTS|
+|EXTENSIONS|        |AGENT_OVERVIEW|    |DISCOVER_ALERTS|
 ==================  ==================  ==================
 
 Available documentation

@@ -83,6 +83,7 @@ Options
 - `local_ip`_
 - `disable-active-response`_
 - `auto_restart`_
+- `crypto_method`_
 
 .. _legacy_server-ip:
 
@@ -223,6 +224,19 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 | **Default value**  | yes                 |
 +--------------------+---------------------+
 | **Allowed values** | yes, no             |
++--------------------+---------------------+
+
+crypto_method
+^^^^^^^^^^^^^
+
+.. versionadded:: 3.5.0
+
+Choose the encryption of the messages that the agent sends to the manager.
+
++--------------------+---------------------+
+| **Default value**  | aes                 |
++--------------------+---------------------+
+| **Allowed values** | blowfish, aes       |
 +--------------------+---------------------+
 
 Sample configuration

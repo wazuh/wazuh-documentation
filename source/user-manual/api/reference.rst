@@ -179,10 +179,10 @@ Add a new agent.
 	   "error": 0,
 	   "data": {
 	      "id": "007",
-	      "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgYWJjYzU2YjNkNjZhNDc4ODQwOTUyYjAzNTQyZjgyNmJkMzQ5M2E3OTRkOTMyMDU1MzAzZTE3ZDBkN2I0MmM5Yw=="
+	      "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgYzc2YmZiOTEyYzI0MmMyYzFmMjY2ZTZiMzMyMDM4OTlkMzQ5M2E3OTRkOTMyMDU1MzAzZTE3ZDBkN2I0MmM5Yw=="
 	   }
 	}
-
+	
 
 Add agent (quick method)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -214,10 +214,10 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": {
 	      "id": "008",
-	      "key": "MDA4IG15TmV3QWdlbnQgYW55IGI1ODRjYTRkMDYwMTYzY2IwYmVmNGZhZjcyZjEyN2JiNTMzY2VmZDQ0NGY4MDk2MTBlYTVlZWI1YjU1OGQzMjY="
+	      "key": "MDA4IG15TmV3QWdlbnQgYW55IGYwNjI0M2Q4YzIyZjI0N2FmNzZjZDFlNjBjZjBjMmE3NTMzY2VmZDQ0NGY4MDk2MTBlYTVlZWI1YjU1OGQzMjY="
 	   }
 	}
-
+	
 
 Insert agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -266,7 +266,7 @@ Insert an agent with an existing id and key.
 	      "key": "1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64"
 	   }
 	}
-
+	
 
 
 Delete
@@ -307,12 +307,13 @@ Removes a list of groups.
 	         "database"
 	      ],
 	      "affected_agents": [
+	         "002",
 	         "005",
 	         "003"
 	      ]
 	   }
 	}
-
+	
 
 Delete agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -365,7 +366,7 @@ Removes agents, using a list of them or a criterion based on the status or time 
 	      "total_affected_agents": 2
 	   }
 	}
-
+	
 
 Delete an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -390,7 +391,7 @@ Removes an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/001?pretty"
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/008?pretty"
 
 **Example Response:**
 ::
@@ -400,11 +401,11 @@ Removes an agent.
 	   "data": {
 	      "msg": "All selected agents were removed",
 	      "affected_agents": [
-	         "001"
+	         "008"
 	      ]
 	   }
 	}
-
+	
 
 
 Groups
@@ -437,10 +438,10 @@ Creates a new group.
 ::
 
 	{
-   	   "error": 0,
+	   "error": 0,
 	   "data": "Group 'pciserver' created."
 	}
-
+	
 
 Get a file in group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -484,17 +485,17 @@ Returns the specified file belonging to the group parsed to JSON.
 	        "controls": [
 	            {
 	                "...": "..."
-	            },
+	            }, 
 	            {
-	                "condition": "all required",
-	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1",
-	                "reference": "CIS_Debian_Benchmark_v1.0pdf",
+	                "condition": "all required", 
+	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1", 
+	                "reference": "CIS_Debian_Benchmark_v1.0pdf", 
 	                "checks": [
 	                    "f:/etc/debian_version;"
 	                ]
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -549,14 +550,29 @@ Returns the list of agents in a group.
 	      "totalItems": 2,
 	      "items": [
 	         {
-	            "status": "Never connected",
+	            "status": "Active",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
 	            "group": "dmz",
-	            "name": "server001",
-	            "ip": "10.0.0.62",
-	            "node_name": "unknown",
-	            "dateAdd": "2018-07-27 14:04:54",
-	            "key": "5fb968d2352f64d4f59663eea085b2038a030e7696384195d61968bd7d107bb7",
-	            "id": "002"
+	            "name": "ubuntu",
+	            "mergedSum": "a83a96777380449bd8c10719f88f0048",
+	            "ip": "192.168.185.7",
+	            "node_name": "node01",
+	            "dateAdd": "2018-08-02 16:52:04",
+	            "version": "Wazuh v3.5.0",
+	            "key": "ac7b7eddf95d65374cb82003024096effa8d90789d447805c375427cb62c75a2",
+	            "manager_host": "wazuh",
+	            "lastKeepAlive": "2018-08-03 00:26:32",
+	            "os": {
+	               "major": "16",
+	               "name": "Ubuntu",
+	               "uname": "Linux |ubuntu |4.4.0-131-generic |#157-Ubuntu SMP Thu Jul 12 15:51:36 UTC 2018 |x86_64",
+	               "platform": "ubuntu",
+	               "version": "16.04.5 LTS",
+	               "codename": "Xenial Xerus",
+	               "arch": "x86_64",
+	               "minor": "04"
+	            },
+	            "id": "001"
 	         },
 	         {
 	            "status": "Never connected",
@@ -564,14 +580,14 @@ Returns the list of agents in a group.
 	            "name": "main_database",
 	            "ip": "10.0.0.15",
 	            "node_name": "unknown",
-	            "dateAdd": "2018-07-27 14:04:54",
-	            "key": "ea28caaa4f1611c8b14cb8a6dc7b0021882fbbb208a22abe7c3a3e1f42681c8d",
+	            "dateAdd": "2018-08-03 00:24:46",
+	            "key": "af1bdfe73ef104254bc654837c4c3f9b882fbbb208a22abe7c3a3e1f42681c8d",
 	            "id": "004"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get agents without group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -610,38 +626,29 @@ Returns a list with the available agents without group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 4,
+	      "totalItems": 3,
 	      "items": [
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-07-27 14:04:55",
+	            "dateAdd": "2018-08-03 00:25:01",
 	            "name": "server002",
-	            "key": "27b97dfa8c13c7cb402f993627fb04b85c13e58256ee6c380022080da7d21f31",
+	            "key": "e4df6380401202714d757ca8b37e76c15c13e58256ee6c380022080da7d21f31",
 	            "ip": "10.0.0.20",
 	            "id": "006",
 	            "node_name": "unknown"
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-07-27 14:05:28",
+	            "dateAdd": "2018-08-03 00:26:34",
 	            "name": "NewHost",
-	            "key": "abcc56b3d66a478840952b03542f826bd3493a794d932055303e17d0d7b42c9c",
+	            "key": "c76bfb912c242c2c1f266e6b33203899d3493a794d932055303e17d0d7b42c9c",
 	            "ip": "10.0.0.9",
 	            "id": "007",
 	            "node_name": "unknown"
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-07-27 14:05:28",
-	            "name": "myNewAgent",
-	            "key": "b584ca4d060163cb0bef4faf72f127bb533cefd444f809610ea5eeb5b558d326",
-	            "ip": "any",
-	            "id": "008",
-	            "node_name": "unknown"
-	         },
-	         {
-	            "status": "Never connected",
-	            "dateAdd": "2018-07-27 14:05:28",
+	            "dateAdd": "2018-08-03 00:26:34",
 	            "name": "NewHost_2",
 	            "key": "1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64",
 	            "ip": "10.0.10.10",
@@ -651,7 +658,7 @@ Returns a list with the available agents without group.
 	      ]
 	   }
 	}
-
+	
 
 Get group configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -689,13 +696,22 @@ Returns the group configuration (agent.conf).
 	      "totalItems": 1,
 	      "items": [
 	         {
-	            "config": {},
-	            "filters": {}
+	            "config": {
+	               "localfile": [
+	                  {
+	                     "log_format": "syslog",
+	                     "location": "/var/log/linux.log"
+	                  }
+	               ]
+	            },
+	            "filters": {
+	               "os": "Linux"
+	            }
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get group files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -835,7 +851,7 @@ Returns the files belonging to the group.
 	      ]
 	   }
 	}
-
+	
 
 Get groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -877,27 +893,27 @@ Returns the list of existing agent groups.
 	      "totalItems": 3,
 	      "items": [
 	         {
-	            "count": 0,
+	            "count": 1,
 	            "mergedSum": "f1a9e24e02ba4cc5ea80a9d3feb3bb9a",
 	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
 	            "name": "default"
 	         },
 	         {
 	            "count": 2,
-	            "mergedSum": "0361f2c015a0fc2e6e7331789fd1cfee",
-	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "mergedSum": "bab45db2c0f1440dc60721c468b53265",
+	            "configSum": "3710695280e1f52b18797c882a28df89",
 	            "name": "dmz"
 	         },
 	         {
 	            "count": 0,
-	            "mergedSum": "01f8d7dcfae76fa0e5b1e39c0bacd3f7",
+	            "mergedSum": "f1a9e24e02ba4cc5ea80a9d3feb3bb9a",
 	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
 	            "name": "pciserver"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Remove group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -933,12 +949,12 @@ Removes the group. Agents that were assigned to the removed group will automatic
 	         "dmz"
 	      ],
 	      "affected_agents": [
-	         "002",
+	         "001",
 	         "004"
 	      ]
 	   }
 	}
-
+	
 
 Set agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -972,7 +988,7 @@ Sets an agent to the specified group.
 	   "error": 0,
 	   "data": "Group 'webserver' set to agent '004'."
 	}
-
+	
 
 Unset the agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1004,7 +1020,7 @@ Unsets the group of the agent. The agent will automatically revert to the 'defau
 	   "error": 0,
 	   "data": "Group unset for agent '004'."
 	}
-
+	
 
 
 Info
@@ -1047,11 +1063,11 @@ Returns a summary of the OS.
 	   "data": {
 	      "totalItems": 1,
 	      "items": [
-	         "centos"
+	         "ubuntu"
 	      ]
 	   }
 	}
-
+	
 
 Get agents summary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1074,13 +1090,13 @@ Returns a summary of the available agents.
 	{
 	   "error": 0,
 	   "data": {
-	      "Active": 1,
-	      "Never connected": 6,
+	      "Active": 2,
+	      "Never connected": 5,
 	      "Total": 7,
 	      "Disconnected": 0
 	   }
 	}
-
+	
 
 Get all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1145,37 +1161,54 @@ Returns a list with the available agents.
 	      "totalItems": 7,
 	      "items": [
 	         {
-	            "status": "Never connected",
-	            "dateAdd": "2018-07-27 14:05:28",
-	            "name": "myNewAgent",
-	            "key": "b584ca4d060163cb0bef4faf72f127bb533cefd444f809610ea5eeb5b558d326",
-	            "ip": "any",
-	            "id": "008",
-	            "node_name": "unknown"
+	            "status": "Active",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "group": "default",
+	            "name": "ubuntu",
+	            "mergedSum": "a83a96777380449bd8c10719f88f0048",
+	            "ip": "192.168.185.7",
+	            "node_name": "node01",
+	            "dateAdd": "2018-08-02 16:52:04",
+	            "version": "Wazuh v3.5.0",
+	            "key": "ac7b7eddf95d65374cb82003024096effa8d90789d447805c375427cb62c75a2",
+	            "manager_host": "wazuh",
+	            "lastKeepAlive": "2018-08-03 00:26:32",
+	            "os": {
+	               "major": "16",
+	               "name": "Ubuntu",
+	               "uname": "Linux |ubuntu |4.4.0-131-generic |#157-Ubuntu SMP Thu Jul 12 15:51:36 UTC 2018 |x86_64",
+	               "platform": "ubuntu",
+	               "version": "16.04.5 LTS",
+	               "codename": "Xenial Xerus",
+	               "arch": "x86_64",
+	               "minor": "04"
+	            },
+	            "id": "001"
 	         },
 	         {
 	            "status": "Active",
-	            "name": "manager",
+	            "name": "wazuh",
 	            "ip": "127.0.0.1",
 	            "node_name": "node01",
-	            "dateAdd": "2018-07-27 10:09:49",
+	            "dateAdd": "2018-08-02 16:48:58",
 	            "version": "Wazuh v3.5.0",
-	            "manager_host": "manager",
+	            "manager_host": "wazuh",
 	            "lastKeepAlive": "9999-12-31 23:59:59",
 	            "os": {
-	               "major": "7",
-	               "name": "CentOS Linux",
-	               "uname": "Linux |manager |3.10.0-693.21.1.el7.x86_64 |#1 SMP Wed Mar 7 19:03:37 UTC 2018 |x86_64",
-	               "platform": "centos",
-	               "version": "7",
-	               "codename": "Core",
-	               "arch": "x86_64"
+	               "major": "18",
+	               "name": "Ubuntu",
+	               "uname": "Linux |wazuh |4.15.0-29-generic |#31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 |x86_64",
+	               "platform": "ubuntu",
+	               "version": "18.04 LTS",
+	               "codename": "Bionic Beaver",
+	               "arch": "x86_64",
+	               "minor": "04"
 	            },
 	            "id": "000"
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-07-27 14:05:28",
+	            "dateAdd": "2018-08-03 00:26:34",
 	            "name": "NewHost_2",
 	            "key": "1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64",
 	            "ip": "10.0.10.10",
@@ -1184,9 +1217,9 @@ Returns a list with the available agents.
 	         },
 	         {
 	            "status": "Never connected",
-	            "dateAdd": "2018-07-27 14:05:28",
+	            "dateAdd": "2018-08-03 00:26:34",
 	            "name": "NewHost",
-	            "key": "abcc56b3d66a478840952b03542f826bd3493a794d932055303e17d0d7b42c9c",
+	            "key": "c76bfb912c242c2c1f266e6b33203899d3493a794d932055303e17d0d7b42c9c",
 	            "ip": "10.0.0.9",
 	            "id": "007",
 	            "node_name": "unknown"
@@ -1197,14 +1230,14 @@ Returns a list with the available agents.
 	            "name": "server001",
 	            "ip": "10.0.0.62",
 	            "node_name": "unknown",
-	            "dateAdd": "2018-07-27 14:04:54",
-	            "key": "5fb968d2352f64d4f59663eea085b2038a030e7696384195d61968bd7d107bb7",
+	            "dateAdd": "2018-08-03 00:24:35",
+	            "key": "3cb62630ddc77dccbda46542e8c469728a030e7696384195d61968bd7d107bb7",
 	            "id": "002"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1238,25 +1271,26 @@ Returns various information from an agent.
 	   "error": 0,
 	   "data": {
 	      "status": "Active",
-	      "name": "manager",
+	      "name": "wazuh",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2018-07-27 10:09:49",
+	      "dateAdd": "2018-08-02 16:48:58",
 	      "version": "Wazuh v3.5.0",
-	      "manager_host": "manager",
+	      "manager_host": "wazuh",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
-	         "major": "7",
-	         "name": "CentOS Linux",
-	         "platform": "centos",
-	         "uname": "Linux |manager |3.10.0-693.21.1.el7.x86_64 |#1 SMP Wed Mar 7 19:03:37 UTC 2018 |x86_64",
-	         "version": "7",
-	         "codename": "Core",
-	         "arch": "x86_64"
+	         "major": "18",
+	         "name": "Ubuntu",
+	         "platform": "ubuntu",
+	         "uname": "Linux |wazuh |4.15.0-29-generic |#31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 |x86_64",
+	         "version": "18.04 LTS",
+	         "codename": "Bionic Beaver",
+	         "arch": "x86_64",
+	         "minor": "04"
 	      },
 	      "id": "000"
 	   }
 	}
-
+	
 
 Get an agent by its name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1291,12 +1325,12 @@ Returns various information from an agent called :agent_name.
 	   "data": {
 	      "status": "Never connected",
 	      "ip": "10.0.0.9",
-	      "dateAdd": "2018-07-27 14:05:28",
+	      "dateAdd": "2018-08-03 00:26:34",
 	      "id": "007",
 	      "name": "NewHost"
 	   }
 	}
-
+	
 
 
 Key
@@ -1330,9 +1364,9 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IG1haW5fZGF0YWJhc2UgMTAuMC4wLjE1IGVhMjhjYWFhNGYxNjExYzhiMTRjYjhhNmRjN2IwMDIxODgyZmJiYjIwOGEyMmFiZTdjM2EzZTFmNDI2ODFjOGQ="
+	   "data": "MDA0IG1haW5fZGF0YWJhc2UgMTAuMC4wLjE1IGFmMWJkZmU3M2VmMTA0MjU0YmM2NTQ4MzdjNGMzZjliODgyZmJiYjIwOGEyMmFiZTdjM2EzZTFmNDI2ODFjOGQ="
 	}
-
+	
 
 
 Restart
@@ -1365,7 +1399,7 @@ Restarts a list of agents.
 ::
 
 	{
-	    "data": "All selected agents were restarted",
+	    "data": "All selected agents were restarted", 
 	    "error": 0
 	}
 
@@ -1388,7 +1422,7 @@ Restarts all agents.
 ::
 
 	{
-	    "data": "Restarting all agents",
+	    "data": "Restarting all agents", 
 	    "error": 0
 	}
 
@@ -1419,7 +1453,7 @@ Restarts the specified agent.
 ::
 
 	{
-	    "data": "Restarting agent",
+	    "data": "Restarting agent", 
 	    "error": 0
 	}
 
@@ -1466,23 +1500,41 @@ Returns all the different combinations that agents have for the selected fields.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 3,
+	      "totalItems": 4,
 	      "items": [
 	         {
 	            "count": 1,
 	            "version": "Wazuh v3.5.0",
 	            "group": null,
-	            "manager_host": "manager",
+	            "manager_host": "wazuh",
 	            "os": {
-	               "major": "7",
-	               "name": "CentOS Linux",
-	               "uname": "Linux |manager |3.10.0-693.21.1.el7.x86_64 |#1 SMP Wed Mar 7 19:03:37 UTC 2018 |x86_64",
-	               "platform": "centos",
-	               "version": "7",
+	               "major": "18",
+	               "name": "Ubuntu",
+	               "uname": "Linux |wazuh |4.15.0-29-generic |#31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 |x86_64",
+	               "platform": "ubuntu",
+	               "version": "18.04 LTS",
 	               "build": null,
-	               "codename": "Core",
+	               "codename": "Bionic Beaver",
 	               "arch": "x86_64",
-	               "minor": null
+	               "minor": "04"
+	            },
+	            "node_name": "node01"
+	         },
+	         {
+	            "count": 1,
+	            "version": "Wazuh v3.5.0",
+	            "group": "default",
+	            "manager_host": "wazuh",
+	            "os": {
+	               "major": "16",
+	               "name": "Ubuntu",
+	               "uname": "Linux |ubuntu |4.4.0-131-generic |#157-Ubuntu SMP Thu Jul 12 15:51:36 UTC 2018 |x86_64",
+	               "platform": "ubuntu",
+	               "version": "16.04.5 LTS",
+	               "build": null,
+	               "codename": "Xenial Xerus",
+	               "arch": "x86_64",
+	               "minor": "04"
 	            },
 	            "node_name": "node01"
 	         },
@@ -1505,7 +1557,7 @@ Returns all the different combinations that agents have for the selected fields.
 	            "node_name": "unknown"
 	         },
 	         {
-	            "count": 4,
+	            "count": 3,
 	            "version": null,
 	            "group": null,
 	            "manager_host": null,
@@ -1525,6 +1577,7 @@ Returns all the different combinations that agents have for the selected fields.
 	      ]
 	   }
 	}
+	
 
 
 Upgrade
@@ -1562,20 +1615,20 @@ Returns the list of outdated agents.
 
 	{
 	    "data": {
-	        "totalItems": 2,
+	        "totalItems": 2, 
 	        "items": [
 	            {
-	                "version": "Wazuh v3.0.0",
-	                "id": "003",
+	                "version": "Wazuh v3.0.0", 
+	                "id": "003", 
 	                "name": "main_database"
-	            },
+	            }, 
 	            {
-	                "version": "Wazuh v3.0.0",
-	                "id": "004",
+	                "version": "Wazuh v3.0.0", 
+	                "id": "004", 
 	                "name": "dmz002"
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -1608,7 +1661,7 @@ Returns the upgrade result from an agent.
 ::
 
 	{
-	    "data": "Agent upgraded successfully",
+	    "data": "Agent upgraded successfully", 
 	    "error": 0
 	}
 
@@ -1643,7 +1696,7 @@ Upgrade the agent using a custom file.
 ::
 
 	{
-	    "data": "Installation started",
+	    "data": "Installation started", 
 	    "error": 0
 	}
 
@@ -1687,7 +1740,7 @@ Upgrade the agent using a WPK file from online repository.
 ::
 
 	{
-	    "data": "Upgrade procedure started",
+	    "data": "Upgrade procedure started", 
 	    "error": 0
 	}
 
@@ -1728,11 +1781,15 @@ Clears cache of the specified group.
 	   "error": 0,
 	   "data": {
 	      "all": [
+	         "/agents?pretty&offset=0&limit=5&sort=-ip,name",
+	         "/agents/000?pretty",
 	         "/agents/name/NewHost?pretty",
 	         "/agents/stats/distinct?pretty"
 	      ],
 	      "groups": {
 	         "agents": [
+	            "/agents?pretty&offset=0&limit=5&sort=-ip,name",
+	            "/agents/000?pretty",
 	            "/agents/name/NewHost?pretty"
 	         ],
 	         "manager": [
@@ -1741,7 +1798,7 @@ Clears cache of the specified group.
 	      }
 	   }
 	}
-
+	
 
 Delete cache index
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1768,7 +1825,7 @@ Clears entire cache.
 	      "groups": {}
 	   }
 	}
-
+	
 
 
 Info
@@ -1799,7 +1856,7 @@ Returns current cache index.
 	      "groups": {}
 	   }
 	}
-
+	
 
 Return cache configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1830,7 +1887,7 @@ Returns cache configuration.
 	      "redisClient": false
 	   }
 	}
-
+	
 
 
 
@@ -1866,14 +1923,14 @@ Returns the cluster configuration
 	      "node_name": "node01",
 	      "bind_addr": "0.0.0.0",
 	      "node_type": "master",
-	      "key": "b99ee84a0de1f0eccde6d3d0fb6566e2",
+	      "key": "b36430de0e4f51627cd8c468f1a3c681",
 	      "nodes": [
-	         "192.168.1.57"
+	         "192.168.185.3"
 	      ],
 	      "port": 1516
 	   }
 	}
-
+	
 
 
 Info
@@ -1904,7 +1961,7 @@ Returns whether the cluster is enabled or disabled
 	      "enabled": "yes"
 	   }
 	}
-
+	
 
 Show cluster health
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1938,7 +1995,7 @@ Show cluster health
 	      "nodes": {
 	         "node02": {
 	            "info": {
-	               "ip": "192.168.1.51",
+	               "ip": "192.168.185.4",
 	               "version": "3.5.0",
 	               "type": "worker",
 	               "name": "node02",
@@ -1950,21 +2007,21 @@ Show cluster health
 	                  "date_end_master": "n/a",
 	                  "total_agentinfo": 0
 	               },
-	               "sync_integrity_free": false,
+	               "sync_integrity_free": true,
 	               "last_sync_agentgroups": {
-	                  "date_end_master": "2018-07-17 10:59:57.63",
+	                  "date_end_master": "2018-08-02 23:46:16.58",
 	                  "total_agentgroups": 0,
-	                  "date_start_master": "2018-07-17 10:59:57.62"
+	                  "date_start_master": "2018-08-02 23:46:16.58"
 	               },
 	               "last_sync_integrity": {
 	                  "total_files": {
-	                     "shared": 3,
-	                     "missing": 4,
+	                     "shared": 1,
+	                     "missing": 0,
 	                     "extra_valid": 0,
 	                     "extra": 0
 	                  },
-	                  "date_end_master": "2018-07-27 14:05:22.62",
-	                  "date_start_master": "2018-07-27 14:05:21.42"
+	                  "date_end_master": "2018-08-03 00:26:20.77",
+	                  "date_start_master": "2018-08-03 00:26:19.63"
 	               },
 	               "sync_agentinfo_free": true,
 	               "sync_extravalid_free": true
@@ -1972,18 +2029,18 @@ Show cluster health
 	         },
 	         "node01": {
 	            "info": {
-	               "ip": "192.168.1.57",
+	               "ip": "192.168.185.3",
 	               "version": "3.5.0",
 	               "type": "master",
 	               "name": "node01",
-	               "n_active_agents": 1
+	               "n_active_agents": 2
 	            }
 	         }
 	      },
 	      "n_connected_nodes": 2
 	   }
 	}
-
+	
 
 
 Nodes
@@ -2015,7 +2072,7 @@ Returns the local node info
 	      "type": "master"
 	   }
 	}
-
+	
 
 Get node info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2038,13 +2095,13 @@ Returns the node info
 	{
 	   "error": 0,
 	   "data": {
-	      "ip": "192.168.1.57",
+	      "ip": "192.168.185.3",
 	      "version": "3.5.0",
 	      "type": "master",
 	      "name": "node01"
 	   }
 	}
-
+	
 
 Get nodes info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2088,13 +2145,13 @@ Returns the nodes info
 	      "totalItems": 2,
 	      "items": [
 	         {
-	            "ip": "192.168.1.51",
+	            "ip": "192.168.185.4",
 	            "version": "3.5.0",
 	            "type": "worker",
 	            "name": "node02"
 	         },
 	         {
-	            "ip": "192.168.1.57",
+	            "ip": "192.168.185.3",
 	            "version": "3.5.0",
 	            "type": "master",
 	            "name": "node01"
@@ -2102,7 +2159,7 @@ Returns the nodes info
 	      ]
 	   }
 	}
-
+	
 
 
 
@@ -2186,7 +2243,7 @@ Returns all decoders included in ossec.conf.
 	      ]
 	   }
 	}
-
+	
 
 Get all decoders files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2242,57 +2299,57 @@ Returns all decoders files included in ossec.conf.
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0230-proftpd_decoders.xml"
+	            "file": "0275-sendmail_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0410-docker_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0440-proxmox-ve_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0065-cisco-ios_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0325-suhosin_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0340-trend-osce_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0195-oscap_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0115-grandstream_decoders.xml"
+	         },
+	         {
+	            "status": "enabled",
+	            "path": "/var/ossec/ruleset/decoders",
+	            "file": "0380-windows_decoders.xml"
 	         },
 	         {
 	            "status": "enabled",
 	            "path": "/var/ossec/ruleset/decoders",
 	            "file": "0005-wazuh_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0260-rsa-auth-manager_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0006-json_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0210-pix_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0010-active-response_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0265-rshd_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0015-aix-ipsec_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0270-samba_decoders.xml"
-	         },
-	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0025-apache_decoders.xml"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get all parent decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2354,7 +2411,7 @@ Returns all parent decoders included in ossec.conf
 	      ]
 	   }
 	}
-
+	
 
 Get decoders by name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2428,6 +2485,7 @@ Returns the decoders with the specified name.
 	      ]
 	   }
 	}
+	
 
 
 
@@ -2485,46 +2543,50 @@ Returns the agent's hardware info
 ::
 
 	{
-	    "data": {
-	        "totalItems": 3,
-	        "items": [
-	            {
-	                "ram_free": 5351420,
-	                "scan_id": 565830616,
-	                "agent_id": "002",
-	                "ram_total": 6291000,
-	                "board_serial": "0",
-	                "scan_time": "2018/02/12 16:09:45",
-	                "cpu_mhz": 1796,
-	                "cpu_name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz",
-	                "cpu_cores": 1
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2,
+	      "items": [
+	         {
+	            "board_serial": "0",
+	            "agent_id": "000",
+	            "ram": {
+	               "usage": 56,
+	               "total": 6053772,
+	               "free": 2677484
 	            },
-	            {
-	                "ram_free": 2374568,
-	                "scan_id": 263523550,
-	                "agent_id": "001",
-	                "ram_total": 2988700,
-	                "board_serial": "0",
-	                "scan_time": "2018/02/12 16:47:29",
-	                "cpu_mhz": 1795.917,
-	                "cpu_name": " Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz",
-	                "cpu_cores": 1
+	            "cpu": {
+	               "cores": 2,
+	               "mhz": 1991.998,
+	               "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
 	            },
-	            {
-	                "ram_free": 950384,
-	                "scan_id": 22856332,
-	                "agent_id": "000",
-	                "ram_total": 1883804,
-	                "board_serial": "0",
-	                "scan_time": "2018/02/13 00:24:30",
-	                "cpu_mhz": 1795.917,
-	                "cpu_name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz",
-	                "cpu_cores": 1
+	            "scan": {
+	               "id": 208137997,
+	               "time": "2018/08/02 23:45:54"
 	            }
-	        ]
-	    },
-	    "error": 0
+	         },
+	         {
+	            "board_serial": "0",
+	            "agent_id": "001",
+	            "ram": {
+	               "usage": 71,
+	               "total": 1015976,
+	               "free": 297140
+	            },
+	            "cpu": {
+	               "cores": 1,
+	               "mhz": 1991.998,
+	               "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
+	            },
+	            "scan": {
+	               "id": 2056454263,
+	               "time": "2018/08/02 17:25:53"
+	            }
+	         }
+	      ]
+	   }
 	}
+	
 
 
 Netaddr
@@ -2567,7 +2629,7 @@ Returns the agent's network address info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netaddr?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netaddr?pretty&limit=2&sort=proto"
 
 **Example Response:**
 ::
@@ -2575,55 +2637,28 @@ Returns the agent's network address info
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 5,
+	      "totalItems": 8,
 	      "items": [
 	         {
-	            "broadcast": "10.0.2.255",
-	            "scan_id": 788552187,
+	            "scan_id": 483670720,
 	            "agent_id": "000",
-	            "proto": "ipv4",
-	            "address": "10.0.2.15",
-	            "netmask": "255.255.255.0",
-	            "id": 13
-	         },
-	         {
-	            "scan_id": 788552187,
 	            "proto": "ipv6",
+	            "address": "fe80::a00:27ff:fed6:8e4f",
 	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "agent_id": "000",
-	            "address": "fe80::2cb0:ce5d:dc42:8753",
-	            "id": 13
+	            "id": 17
 	         },
 	         {
-	            "broadcast": "192.168.1.255",
-	            "scan_id": 788552187,
+	            "scan_id": 483670720,
 	            "agent_id": "000",
-	            "proto": "ipv4",
-	            "address": "192.168.1.57",
-	            "netmask": "255.255.255.0",
-	            "id": 14
-	         },
-	         {
-	            "scan_id": 788552187,
 	            "proto": "ipv6",
+	            "address": "fe80::a00:27ff:fea9:6759",
 	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "agent_id": "000",
-	            "address": "fe80::13da:3857:98d3:4f5",
-	            "id": 14
-	         },
-	         {
-	            "scan_id": 788552187,
-	            "proto": "ipv6",
-	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "agent_id": "000",
-	            "address": "fe80::ef5f:af71:26a3:88e7",
-	            "id": 14
+	            "id": 18
 	         }
 	      ]
 	   }
 	}
-
-
+	
 
 
 Netiface
@@ -2684,7 +2719,7 @@ Returns the agent's network interface info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netiface?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netiface?pretty&limit=2&sort=rx_bytes"
 
 **Example Response:**
 ::
@@ -2692,63 +2727,62 @@ Returns the agent's network interface info
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2,
+	      "totalItems": 4,
 	      "items": [
 	         {
 	            "name": "enp0s3",
 	            "tx": {
-	               "packets": 3399,
+	               "packets": 144,
 	               "errors": 0,
-	               "bytes": 557564,
+	               "bytes": 16993,
 	               "dropped": 0
 	            },
 	            "scan": {
-	               "id": 788552187,
-	               "time": "2018/07/27 14:04:39"
+	               "id": 483670720,
+	               "time": "2018/08/02 23:45:54"
 	            },
 	            "rx": {
-	               "packets": 8554,
+	               "packets": 352,
 	               "errors": 0,
-	               "bytes": 8543944,
+	               "bytes": 346608,
 	               "dropped": 0
 	            },
-	            "mac": "08:00:27:03:85:DD",
+	            "mac": "08:00:27:D6:8E:4F",
 	            "mtu": 1500,
 	            "state": "up",
 	            "agent_id": "000",
 	            "type": "ethernet",
-	            "id": 13
+	            "id": 17
 	         },
 	         {
 	            "name": "enp0s8",
 	            "tx": {
-	               "packets": 68323,
+	               "packets": 1580,
 	               "errors": 0,
-	               "bytes": 92045845,
+	               "bytes": 229506,
 	               "dropped": 0
 	            },
 	            "scan": {
-	               "id": 788552187,
-	               "time": "2018/07/27 14:04:39"
+	               "id": 483670720,
+	               "time": "2018/08/02 23:45:54"
 	            },
 	            "rx": {
-	               "packets": 89051,
+	               "packets": 6032,
 	               "errors": 0,
-	               "bytes": 8863610,
+	               "bytes": 1600051,
 	               "dropped": 0
 	            },
-	            "mac": "08:00:27:14:9A:0E",
+	            "mac": "08:00:27:A9:67:59",
 	            "mtu": 1500,
 	            "state": "up",
 	            "agent_id": "000",
 	            "type": "ethernet",
-	            "id": 14
+	            "id": 18
 	         }
 	      ]
 	   }
 	}
-
-
+	
 
 
 Netproto
@@ -2791,7 +2825,7 @@ Returns the agent's network protocol info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netproto?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netproto?pretty&limit=2&sort=type"
 
 **Example Response:**
 ::
@@ -2799,47 +2833,28 @@ Returns the agent's network protocol info
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 4,
+	      "totalItems": 8,
 	      "items": [
 	         {
-	            "scan_id": 788552187,
-	            "iface": "enp0s3",
-	            "agent_id": "000",
-	            "dhcp": "enabled",
-	            "type": "ipv4",
-	            "id": 13,
-	            "gateway": "10.0.2.2"
-	         },
-	         {
-	            "scan_id": 788552187,
+	            "scan_id": 483670720,
 	            "iface": "enp0s3",
 	            "agent_id": "000",
 	            "dhcp": "enabled",
 	            "type": "ipv6",
-	            "id": 13
+	            "id": 17
 	         },
 	         {
-	            "scan_id": 788552187,
-	            "iface": "enp0s8",
-	            "agent_id": "000",
-	            "dhcp": "enabled",
-	            "type": "ipv4",
-	            "id": 14,
-	            "gateway": "192.168.1.1"
-	         },
-	         {
-	            "scan_id": 788552187,
+	            "scan_id": 483670720,
 	            "iface": "enp0s8",
 	            "agent_id": "000",
 	            "dhcp": "enabled",
 	            "type": "ipv6",
-	            "id": 14
+	            "id": 18
 	         }
 	      ]
 	   }
 	}
-
-
+	
 
 
 OS
@@ -2892,46 +2907,54 @@ Returns the agent's os info
 ::
 
 	{
-	    "data": {
-	        "totalItems": 3,
-	        "items": [
-	            {
-	                "scan_id": 1857569867,
-	                "os_name": "Microsoft Windows 7 Home Premium",
-	                "scan_time": "2018/02/12 16:09:44",
-	                "hostname": "WAZUH-PC",
-	                "os_version": "6.1.7601",
-	                "architecture": "i686",
-	                "agent_id": "002"
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2,
+	      "items": [
+	         {
+	            "sysname": "Linux",
+	            "scan": {
+	               "id": 433934775,
+	               "time": "2018/08/02 23:45:54"
 	            },
-	            {
-	                "sysname": "centos",
-	                "scan_id": 686817457,
-	                "os_name": "CentOS Linux",
-	                "version": "3.10.0-514.el7.x86_64",
-	                "os_version": "7 (Core)",
-	                "scan_time": "2018/02/13 00:24:30",
-	                "release": "Linux",
-	                "hostname": "node01",
-	                "agent_id": "000",
-	                "architecture": "x86_64"
+	            "hostname": "wazuh",
+	            "version": "#31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018",
+	            "agent_id": "000",
+	            "release": "4.15.0-29-generic",
+	            "os": {
+	               "major": "18",
+	               "name": "Ubuntu",
+	               "platform": "ubuntu",
+	               "version": "18.04 LTS (Bionic Beaver)",
+	               "codename": "Bionic Beaver",
+	               "minor": "04"
 	            },
-	            {
-	                "sysname": "centos",
-	                "scan_id": 1004984843,
-	                "os_name": "CentOS Linux",
-	                "version": "3.10.0-514.el7.x86_64",
-	                "os_version": "7 (Core)",
-	                "scan_time": "2018/02/12 16:47:29",
-	                "release": "Linux",
-	                "hostname": "manager",
-	                "agent_id": "001",
-	                "architecture": "x86_64"
-	            }
-	        ]
-	    },
-	    "error": 0
+	            "architecture": "x86_64"
+	         },
+	         {
+	            "sysname": "Linux",
+	            "scan": {
+	               "id": 2004741248,
+	               "time": "2018/08/02 17:25:53"
+	            },
+	            "hostname": "ubuntu",
+	            "version": "#157-Ubuntu SMP Thu Jul 12 15:51:36 UTC 2018",
+	            "agent_id": "001",
+	            "release": "4.4.0-131-generic",
+	            "os": {
+	               "major": "16",
+	               "name": "Ubuntu",
+	               "platform": "ubuntu",
+	               "version": "16.04.5 LTS (Xenial Xerus)",
+	               "codename": "Xenial Xerus",
+	               "minor": "04"
+	            },
+	            "architecture": "x86_64"
+	         }
+	      ]
+	   }
 	}
+	
 
 
 Packages
@@ -2982,35 +3005,46 @@ Returns the agent's packages info
 ::
 
 	{
-	    "data": {
-	        "totalItems": 2,
-	        "items": [
-	            {
-	                "scan_id": 373751880,
-	                "version": "1:1.4.0-12.el7",
-	                "vendor": "CentOS",
-	                "description": "Wifi plugin for NetworkManager",
-	                "name": "NetworkManager-wifi",
-	                "format": "rpm",
-	                "scan_time": "2018/02/13 00:24:30",
-	                "architecture": "x86_64",
-	                "agent_id": "000"
+	   "error": 0,
+	   "data": {
+	      "totalItems": 1107,
+	      "items": [
+	         {
+	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+	            "name": "apache2",
+	            "scan": {
+	               "id": 1222412658,
+	               "time": "2018/08/02 23:45:54"
 	            },
-	            {
-	                "scan_id": 373751880,
-	                "version": "1:1.4.0-12.el7",
-	                "vendor": "CentOS",
-	                "description": "NetworkManager curses-based UI",
-	                "name": "NetworkManager-tui",
-	                "format": "rpm",
-	                "scan_time": "2018/02/13 00:24:30",
-	                "architecture": "x86_64",
-	                "agent_id": "000"
-	            }
-	        ]
-	    },
-	    "error": 0
+	            "section": "httpd",
+	            "format": "deb",
+	            "architecture": "amd64",
+	            "priority": "optional",
+	            "version": "2.4.29-1ubuntu4.2",
+	            "agent_id": "000",
+	            "size": 520,
+	            "description": "Apache HTTP Server"
+	         },
+	         {
+	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+	            "name": "amd64-microcode",
+	            "scan": {
+	               "id": 1222412658,
+	               "time": "2018/08/02 23:45:54"
+	            },
+	            "section": "non-free/admin",
+	            "format": "deb",
+	            "architecture": "amd64",
+	            "priority": "standard",
+	            "version": "3.20180524.1~ubuntu0.18.04.1",
+	            "agent_id": "000",
+	            "size": 74,
+	            "description": "Processor microcode firmware for AMD CPUs"
+	         }
+	      ]
+	   }
 	}
+	
 
 
 Ports
@@ -3057,141 +3091,60 @@ Returns the agent's ports info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/ports?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/ports?pretty&limit=2&sort=protocol"
 
 **Example Response:**
 ::
 
 	{
-   "error": 0,
-   "data": {
-      "totalItems": 6,
-      "items": [
-         {
-            "remote": {
-               "ip": "0.0.0.0",
-               "port": 0
-            },
-            "scan": {
-               "id": 1484904709,
-               "time": "2018/07/27 14:04:43"
-            },
-            "inode": 5937482,
-            "state": "listening",
-            "tx_queue": 0,
-            "agent_id": "000",
-            "protocol": "tcp",
-            "rx_queue": 0,
-            "local": {
-               "ip": "0.0.0.0",
-               "port": 1516
-            }
-         },
-         {
-            "remote": {
-               "ip": "0.0.0.0",
-               "port": 0
-            },
-            "scan": {
-               "id": 1484904709,
-               "time": "2018/07/27 14:04:43"
-            },
-            "inode": 17041,
-            "state": "listening",
-            "tx_queue": 0,
-            "agent_id": "000",
-            "protocol": "tcp",
-            "rx_queue": 0,
-            "local": {
-               "ip": "0.0.0.0",
-               "port": 22
-            }
-         },
-         {
-            "remote": {
-               "ip": "0.0.0.0",
-               "port": 0
-            },
-            "scan": {
-               "id": 1484904709,
-               "time": "2018/07/27 14:04:43"
-            },
-            "inode": 17741,
-            "state": "listening",
-            "tx_queue": 0,
-            "agent_id": "000",
-            "protocol": "tcp",
-            "rx_queue": 0,
-            "local": {
-               "ip": "127.0.0.1",
-               "port": 25
-            }
-         },
-         {
-            "remote": {
-               "ip": "::",
-               "port": 0
-            },
-            "scan": {
-               "id": 1484904709,
-               "time": "2018/07/27 14:04:43"
-            },
-            "inode": 17050,
-            "state": "listening",
-            "tx_queue": 0,
-            "agent_id": "000",
-            "protocol": "tcp6",
-            "rx_queue": 0,
-            "local": {
-               "ip": "::",
-               "port": 22
-            }
-         },
-         {
-            "remote": {
-               "ip": "::",
-               "port": 0
-            },
-            "scan": {
-               "id": 1484904709,
-               "time": "2018/07/27 14:04:43"
-            },
-            "inode": 5938182,
-            "state": "listening",
-            "tx_queue": 0,
-            "agent_id": "000",
-            "protocol": "tcp6",
-            "rx_queue": 0,
-            "local": {
-               "ip": "::",
-               "port": 55000
-            }
-         },
-         {
-            "remote": {
-               "ip": "::",
-               "port": 0
-            },
-            "scan": {
-               "id": 1484904709,
-               "time": "2018/07/27 14:04:43"
-            },
-            "inode": 17742,
-            "state": "listening",
-            "tx_queue": 0,
-            "agent_id": "000",
-            "protocol": "tcp6",
-            "rx_queue": 0,
-            "local": {
-               "ip": "::1",
-               "port": 25
-            }
-         }
-      ]
-   }
+	   "error": 0,
+	   "data": {
+	      "totalItems": 16,
+	      "items": [
+	         {
+	            "remote": {
+	               "ip": "::",
+	               "port": 0
+	            },
+	            "scan": {
+	               "id": 1219576791,
+	               "time": "2018/08/02 23:45:56"
+	            },
+	            "inode": 164751,
+	            "state": "listening",
+	            "tx_queue": 0,
+	            "agent_id": "000",
+	            "protocol": "tcp6",
+	            "rx_queue": 0,
+	            "local": {
+	               "ip": "::ffff:127.0.0.1",
+	               "port": 9600
+	            }
+	         },
+	         {
+	            "remote": {
+	               "ip": "::",
+	               "port": 0
+	            },
+	            "scan": {
+	               "id": 1219576791,
+	               "time": "2018/08/02 23:45:56"
+	            },
+	            "inode": 164667,
+	            "state": "listening",
+	            "tx_queue": 0,
+	            "agent_id": "000",
+	            "protocol": "tcp6",
+	            "rx_queue": 0,
+	            "local": {
+	               "ip": "::ffff:127.0.0.1",
+	               "port": 9200
+	            }
+	         }
+	      ]
+	   }
 	}
-
-
+	
 
 
 Processes
@@ -3246,7 +3199,7 @@ Returns the agent's processes info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/processes?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/processes?pretty&limit=2&sort=priority"
 
 **Example Response:**
 ::
@@ -3254,7 +3207,7 @@ Returns the agent's processes info
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 108,
+	      "totalItems": 206,
 	      "items": [
 	         {
 	            "euser": "root",
@@ -3262,72 +3215,72 @@ Returns the agent's processes info
 	            "rgroup": "root",
 	            "sgroup": "root",
 	            "scan": {
-	               "id": 1749889128,
-	               "time": "2018/07/27 14:04:43"
-	            },
-	            "resident": 1083,
-	            "start_time": 3,
-	            "share": 652,
-	            "tgid": 1,
-	            "session": 1,
-	            "stime": 245,
-	            "vm_size": 128168,
-	            "size": 32042,
-	            "agent_id": "000",
-	            "nlwp": 1,
-	            "egroup": "root",
-	            "name": "systemd",
-	            "fgroup": "root",
-	            "argvs": "--switched-root,--system,--deserialize,21",
-	            "utime": 91,
-	            "cmd": "/usr/lib/systemd/systemd",
-	            "priority": 20,
-	            "pgrp": 1,
-	            "state": "S",
-	            "ruser": "root",
-	            "suser": "root",
-	            "ppid": 0,
-	            "processor": 1,
-	            "nice": 0
-	         },
-	         {
-	            "euser": "root",
-	            "tty": 0,
-	            "rgroup": "root",
-	            "sgroup": "root",
-	            "scan": {
-	               "id": 1749889128,
-	               "time": "2018/07/27 14:04:43"
+	               "id": 2147483647,
+	               "time": "2018/08/02 23:45:56"
 	            },
 	            "resident": 0,
-	            "start_time": 3,
 	            "share": 0,
+	            "start_time": 3,
+	            "pid": "29",
 	            "session": 0,
-	            "stime": 3,
+	            "stime": 0,
 	            "vm_size": 0,
 	            "size": 0,
 	            "agent_id": "000",
-	            "nlwp": 1,
+	            "ppid": 2,
 	            "egroup": "root",
-	            "name": "kthreadd",
+	            "name": "khugepaged",
 	            "pgrp": 0,
-	            "tgid": 2,
+	            "tgid": 29,
 	            "utime": 0,
-	            "priority": 20,
+	            "priority": 39,
 	            "fgroup": "root",
 	            "state": "S",
 	            "ruser": "root",
 	            "suser": "root",
-	            "ppid": 0,
+	            "nlwp": 1,
 	            "processor": 1,
-	            "nice": 0
+	            "nice": 19
+	         },
+	         {
+	            "euser": "logstash",
+	            "tty": 0,
+	            "rgroup": "logstash",
+	            "sgroup": "logstash",
+	            "scan": {
+	               "id": 2147483647,
+	               "time": "2018/08/02 23:45:56"
+	            },
+	            "resident": 152574,
+	            "share": 5026,
+	            "start_time": 1178,
+	            "pid": "975",
+	            "tgid": 975,
+	            "session": 975,
+	            "stime": 733,
+	            "vm_size": 3631444,
+	            "size": 907861,
+	            "agent_id": "000",
+	            "ppid": 1,
+	            "egroup": "logstash",
+	            "name": "java",
+	            "pgrp": 975,
+	            "argvs": "-Xms1g,-Xmx1g,-XX:+UseParNewGC,-XX:+UseConcMarkSweepGC,-XX:CMSInitiatingOccupancyFraction=75,-XX:+UseCMSInitiatingOccupancyOnly,-Djava.awt.headless=true,-Dfile.encoding=UTF-8,-Djruby.compile.invokedynamic=true,-Djruby.jit.threshold=0,-XX:+HeapDumpOnOutOfMemoryError,-Djava.security.egd=file:/dev/urandom,-cp,/usr/share/logstash/logstash-core/lib/jars/commons-compiler-3.0.8.jar:/usr/share/logstash/logstash-core/lib/jars/google-java-format-1.1.jar:/usr/share/logstash/logstash-core/lib/jars/guava-19.0.jar:/usr/share/logstash/logstash-core/lib/jars/jackson-annotations-2.9.5.jar:/usr/share/logstash/logstash-core/lib/jars/jackson-core-2.9.5.jar:/usr/share/logstash/logstash-core/lib/jars/jackson-databind-2.9.5.jar:/usr/share/logstash/logstash-core/lib/jars/jackson-dataformat-cbor-2.9.5.jar:/usr/share/logstash/logstash-core/lib/jars/janino-3.0.8.jar:/usr/share/logstash/logstash-core/lib/jars/jruby-complete-9.1.13.0.jar:/usr/share/logstash/logstash-core/lib/jars/log4j-api-2.9.1.jar:/usr/share/logstash/logstash-core/lib/jars/log4j-core-2.9.1.jar:/usr/share/logstash/logstash-core/lib/jars/log4j-slf4j-impl-2.9.1.jar:/usr/share/logstash/logstash-core/lib/jars/logstash-core.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.core.commands-3.6.0.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.core.contenttype-3.4.100.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.core.expressions-3.4.300.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.core.filesystem-1.3.100.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.core.jobs-3.5.100.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.core.resources-3.7.100.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.core.runtime-3.7.0.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.equinox.app-1.3.100.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.equinox.common-3.6.0.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.equinox.preferences-3.4.1.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.equinox.registry-3.5.101.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.jdt.core-3.10.0.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.osgi-3.7.1.jar:/usr/share/logstash/logstash-core/lib/jars/org.eclipse.text-3.5.101.jar:/usr/share/logstash/logstash-core/lib/jars/slf4j-api-1.7.25.jar,org.logstash.Logstash,--path.settings,/etc/logstash",
+	            "utime": 13764,
+	            "cmd": "/usr/bin/java",
+	            "priority": 39,
+	            "fgroup": "logstash",
+	            "state": "S",
+	            "ruser": "logstash",
+	            "suser": "logstash",
+	            "nlwp": 31,
+	            "processor": 0,
+	            "nice": 19
 	         }
-				]
-			}
+	      ]
+	   }
 	}
-
-
-
+	
 
 
 
@@ -3378,13 +3331,13 @@ Returns ossec.conf in JSON format.
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "80.58.61.250",
-	         "80.58.61.254"
+	         "127.0.0.53"
 	      ],
 	      "email_from": "ossecm@example.wazuh.com",
 	      "logall_json": "no"
 	   }
 	}
+	
 
 
 Info
@@ -3411,17 +3364,18 @@ Returns basic information about manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "compilation_date": "Fri Jul 27 10:09:48 UTC 2018",
+	      "compilation_date": "Thu Aug  2 16:48:56 UTC 2018",
 	      "version": "v3.5.0",
 	      "openssl_support": "yes",
 	      "max_agents": "14000",
-	      "ruleset_version": "3401",
+	      "ruleset_version": "3500",
 	      "path": "/var/ossec",
 	      "tz_name": "UTC",
 	      "type": "manager",
 	      "tz_offset": "+0000"
 	   }
 	}
+	
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3456,7 +3410,7 @@ Returns the status of the manager processes.
 	      "ossec-maild": "stopped"
 	   }
 	}
-
+	
 
 
 Logs
@@ -3508,43 +3462,42 @@ Returns the three last months of ossec.log.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2000,
+	      "totalItems": 29,
 	      "items": [
 	         {
-	            "timestamp": "2018-07-27 14:05:37",
-	            "tag": "ossec-remoted",
-	            "description": "(1404): Authentication error. Wrong key from 'any'.",
-	            "level": "warning"
-	         },
-	         {
-	            "timestamp": "2018-07-27 14:05:33",
-	            "tag": "ossec-remoted",
-	            "description": "(1404): Authentication error. Wrong key from 'any'.",
-	            "level": "warning"
-	         },
-	         {
-	            "timestamp": "2018-07-27 14:05:29",
+	            "timestamp": "2018-08-03 00:26:35",
 	            "tag": "wazuh-modulesd:database",
 	            "description": "Couldn't get database status for agent '3'.",
 	            "level": "error"
 	         },
 	         {
-	            "timestamp": "2018-07-27 14:05:29",
+	            "timestamp": "2018-08-03 00:26:35",
 	            "tag": "wazuh-modulesd:database",
 	            "description": "Couldn't get database status for agent '5'.",
 	            "level": "error"
 	         },
 	         {
-	            "timestamp": "2018-07-27 14:05:28",
+	            "timestamp": "2018-08-03 00:26:34",
 	            "tag": "ossec-remoted",
-	            "description": "(1404): Authentication error. Wrong key from 'any'.",
-	            "level": "warning"
+	            "description": "(1409): Authentication file changed. Updating.",
+	            "level": "info"
+	         },
+	         {
+	            "timestamp": "2018-08-03 00:26:34",
+	            "tag": "ossec-remoted",
+	            "description": "(1410): Reading authentication keys file.",
+	            "level": "info"
+	         },
+	         {
+	            "timestamp": "2018-08-03 00:25:54",
+	            "tag": "wazuh-db",
+	            "description": "at wdb_process_insert(): sqlite3_step(): UNIQUE constraint failed: sys_processes.scan_id, sys_processes.pid",
+	            "level": "error"
 	         }
 	      ]
 	   }
 	}
 	
-
 
 Get summary of ossec.log
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3567,71 +3520,31 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	{
 	   "error": 0,
 	   "data": {
-	      "wazuh-modulesd": {
-	         "info": 6,
-	         "all": 6,
+	      "ossec-remoted": {
+	         "info": 8,
+	         "all": 8,
 	         "critical": 0,
 	         "error": 0,
 	         "debug": 0,
 	         "warning": 0
 	      },
-	      "wazuh-modulesd:oscap": {
-	         "info": 6,
-	         "all": 6,
+	      "ossec-analysisd": {
+	         "info": 0,
+	         "all": 1,
 	         "critical": 0,
-	         "error": 0,
+	         "error": 1,
 	         "debug": 0,
 	         "warning": 0
 	      },
-	      "wazuh-modulesd:download": {
-	         "info": 6,
-	         "all": 6,
+	      "wazuh-db": {
+	         "info": 0,
+	         "all": 2,
 	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 0
-	      },
-	      "wazuh-modulesd:ciscat": {
-	         "info": 6,
-	         "all": 6,
-	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 0
-	      },
-	      "wazuh-modulesd:syscollector": {
-	         "info": 25,
-	         "all": 25,
-	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 0
-	      },
-	      "ossec-rootcheck": {
-	         "info": 86,
-	         "all": 86,
-	         "critical": 0,
-	         "error": 0,
+	         "error": 2,
 	         "debug": 0,
 	         "warning": 0
 	      },
 	      "ossec-monitord": {
-	         "info": 11,
-	         "all": 11,
-	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 0
-	      },
-	      "ossec-logcollector": {
-	         "info": 59,
-	         "all": 59,
-	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 0
-	      },
-	      "ossec-execd": {
 	         "info": 16,
 	         "all": 16,
 	         "critical": 0,
@@ -3639,57 +3552,17 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "debug": 0,
 	         "warning": 0
 	      },
-	      "ossec-remoted": {
-	         "info": 81,
-	         "all": 2043,
-	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 1962
-	      },
-	      "ossec-syscheckd": {
-	         "info": 235,
-	         "all": 235,
-	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 0
-	      },
-	      "wazuh-modulesd:osquery": {
-	         "info": 6,
-	         "all": 6,
-	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 0
-	      },
-	      "wazuh-db": {
-	         "info": 11,
-	         "all": 11,
-	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 0
-	      },
-	      "ossec-analysisd": {
-	         "info": 1313,
-	         "all": 1313,
-	         "critical": 0,
-	         "error": 0,
-	         "debug": 0,
-	         "warning": 0
-	      },
 	      "wazuh-modulesd:database": {
-	         "info": 6,
-	         "all": 20,
+	         "info": 0,
+	         "all": 2,
 	         "critical": 0,
-	         "error": 14,
+	         "error": 2,
 	         "debug": 0,
 	         "warning": 0
 	      }
 	   }
 	}
-
+	
 
 
 Stats
@@ -3724,31 +3597,31 @@ Returns Wazuh statistical information for the current or specified date.
 	{
 	    "data": [
 	        {
-	            "hour": 5,
-	            "firewall": 0,
+	            "hour": 5, 
+	            "firewall": 0, 
 	            "alerts": [
 	                {
-	                    "level": 3,
-	                    "sigid": 5715,
+	                    "level": 3, 
+	                    "sigid": 5715, 
 	                    "times": 4
-	                },
+	                }, 
 	                {
-	                    "level": 2,
-	                    "sigid": 1002,
+	                    "level": 2, 
+	                    "sigid": 1002, 
 	                    "times": 2
-	                },
+	                }, 
 	                {
 	                    "...": "..."
 	                }
-	            ],
-	            "totalAlerts": 107,
-	            "syscheck": 1257,
+	            ], 
+	            "totalAlerts": 107, 
+	            "syscheck": 1257, 
 	            "events": 1483
-	        },
+	        }, 
 	        {
 	            "...": "..."
 	        }
-	    ],
+	    ], 
 	    "error": 0
 	}
 
@@ -3773,16 +3646,16 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 	{
 	    "data": {
 	        "averages": [
-	            100,
-	            357,
-	            242,
-	            500,
-	            422,
-	            "...",
+	            100, 
+	            357, 
+	            242, 
+	            500, 
+	            422, 
+	            "...", 
 	            123
-	        ],
+	        ], 
 	        "interactions": 0
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -3808,61 +3681,61 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	    "data": {
 	        "Wed": {
 	            "hours": [
-	                223,
-	                "...",
+	                223, 
+	                "...", 
 	                456
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Sun": {
 	            "hours": [
-	                332,
-	                "...",
+	                332, 
+	                "...", 
 	                313
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Thu": {
 	            "hours": [
-	                888,
-	                "...",
+	                888, 
+	                "...", 
 	                123
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Tue": {
 	            "hours": [
-	                536,
-	                "...",
+	                536, 
+	                "...", 
 	                345
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Mon": {
 	            "hours": [
-	                444,
-	                "...",
+	                444, 
+	                "...", 
 	                556
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Fri": {
 	            "hours": [
-	                131,
-	                "...",
+	                131, 
+	                "...", 
 	                432
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Sat": {
 	            "hours": [
-	                134,
-	                "...",
+	                134, 
+	                "...", 
 	                995
-	            ],
+	            ], 
 	            "interactions": 0
 	        }
-	    },
+	    }, 
 	    "error": 0
 	}
 
@@ -3892,7 +3765,7 @@ Clears the rootcheck database for all agents.
 ::
 
 	{
-	    "data": "Rootcheck database deleted",
+	    "data": "Rootcheck database deleted", 
 	    "error": 0
 	}
 
@@ -3923,7 +3796,7 @@ Clears the rootcheck database for a specific agent.
 ::
 
 	{
-	    "data": "Rootcheck database deleted",
+	    "data": "Rootcheck database deleted", 
 	    "error": 0
 	}
 
@@ -3960,11 +3833,11 @@ Returns the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2018-07-27 14:04:49",
-	      "end": "2018-07-27 14:05:18"
+	      "start": "2018-08-02 23:45:59",
+	      "end": "2018-08-02 23:46:31"
 	   }
 	}
-
+	
 
 Get rootcheck CIS requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4001,20 +3874,15 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 8,
+	      "totalItems": 3,
 	      "items": [
-	         "1.1.1 RHEL7",
-	         "1.1.10 RHEL7",
-	         "1.1.5 RHEL7",
-	         "4.1.2 RHEL7",
-	         "4.2.3 RHEL7",
-	         "4.2.4 RHEL7",
-	         "6.2.8 RHEL7",
-	         "6.2.9 RHEL7"
+	         "1.4 Debian Linux",
+	         "2.3 Debian Linux",
+	         "4.13 Debian Linux"
 	      ]
 	   }
 	}
-
+	
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4059,28 +3927,26 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 21,
+	      "totalItems": 14,
 	      "items": [
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2018-07-27 10:11:37",
-	            "event": "System Audit: CIS - RHEL7 - 1.1.10 -  Partition /home without 'nodev' set {CIS: 1.1.10 RHEL7} {PCI_DSS: 2.2.4}. File: /etc/fstab. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf .",
-	            "cis": "1.1.10 RHEL7",
-	            "pci": "2.2.4",
-	            "readDay": "2018-07-27 14:04:53"
+	            "oldDay": "2018-08-02 16:50:41",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2018-08-02 23:46:02",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /opt is not on its own partition {CIS: 1.4 Debian Linux}. File: /opt. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
 	         },
 	         {
 	            "status": "outstanding",
-	            "oldDay": "2018-07-27 10:11:37",
-	            "event": "System Audit: CIS - RHEL7 - 4.1.2 - Network parameters - IP send redirects enabled {CIS: 4.1.2 RHEL7} {PCI_DSS: 2.2.4}. File: /proc/sys/net/ipv4/conf/all/send_redirects. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf .",
-	            "cis": "4.1.2 RHEL7",
-	            "pci": "2.2.4",
-	            "readDay": "2018-07-27 14:04:53"
+	            "oldDay": "2018-08-02 16:50:41",
+	            "cis": "1.4 Debian Linux",
+	            "readDay": "2018-08-02 23:46:02",
+	            "event": "System Audit: CIS - Debian Linux - 1.4 - Robust partition scheme - /tmp is not on its own partition {CIS: 1.4 Debian Linux}. File: /etc/fstab. Reference: https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf ."
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get rootcheck pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4117,14 +3983,15 @@ Returns the PCI requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2,
+	      "totalItems": 3,
 	      "items": [
+	         "2.2.2",
 	         "2.2.4",
 	         "4.1"
 	      ]
 	   }
 	}
-
+	
 
 
 Run
@@ -4149,7 +4016,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents",
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
 	    "error": 0
 	}
 
@@ -4183,7 +4050,7 @@ Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes 
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-
+	
 
 
 
@@ -4286,7 +4153,7 @@ Returns all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get files of rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4392,7 +4259,7 @@ Returns the files of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rule gdpr requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4438,7 +4305,7 @@ Returns the GDPR requirements of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rule groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4490,7 +4357,7 @@ Returns the groups of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4542,7 +4409,7 @@ Returns the PCI requirements of all rules.
 	      ]
 	   }
 	}
-
+	
 
 Get rules by id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4604,7 +4471,7 @@ Returns the rules with the specified id.
 	      ]
 	   }
 	}
-
+	
 
 
 
@@ -4632,7 +4499,7 @@ Clears the syscheck database for all agents.
 ::
 
 	{
-	    "data": "Syscheck database deleted",
+	    "data": "Syscheck database deleted", 
 	    "error": 0
 	}
 
@@ -4663,7 +4530,7 @@ Clears the syscheck database for the specified agent.
 ::
 
 	{
-	    "data": "Syscheck database deleted",
+	    "data": "Syscheck database deleted", 
 	    "error": 0
 	}
 
@@ -4700,11 +4567,11 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2018-07-27 14:04:40",
-	      "end": "2018-07-27 14:04:49"
+	      "start": "2018-08-02 23:45:55",
+	      "end": "2018-08-02 23:45:59"
 	   }
 	}
-
+	
 
 Get syscheck files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4772,45 +4639,46 @@ Returns the syscheck files of an agent.
 ::
 
 	{
-	    "data": {
-	        "totalItems": 2762,
-	        "items": [
-	            {
-	                "size": 157721,
-	                "uid": 0,
-	                "scanDate": "2017-03-02 23:43:28",
-	                "user": "root",
-	                "file": "!1488498208 /boot/config-3.16.0-4-amd64",
-	                "modificationDate": "2016-10-19 06:45:50",
-	                "octalMode": "100644",
-	                "inode": 5217,
-	                "event": "added",
-	                "permissions": "-rw-r--r--",
-	                "sha1": "4fed08ccbd0168593a6fffcd925adad65e5ae6d9",
-	                "group": "root",
-	                "gid": 0,
-	                "md5": "46d43391ae54c1084a2d40e8d1b4873c"
-	            },
-	            {
-	                "size": 2679264,
-	                "uid": 0,
-	                "scanDate": "2017-03-02 23:43:26",
-	                "user": "root",
-	                "file": "!1488498206 /boot/System.map-3.16.0-4-amd64",
-	                "modificationDate": "2016-10-19 06:45:50",
-	                "octalMode": "100644",
-	                "inode": 5216,
-	                "event": "added",
-	                "permissions": "-rw-r--r--",
-	                "sha1": "d48151a3d3638b723f5d7bc1e9c71d478fcde4e6",
-	                "group": "root",
-	                "gid": 0,
-	                "md5": "29cc12246faecd4a14d212b4d9bac0fe"
-	            }
-	        ]
-	    },
-	    "error": 0
+	   "error": 0,
+	   "data": {
+	      "totalItems": 3494,
+	      "items": [
+	         {
+	            "sha1": "4d6b55312cbfedc71a7f52158de7d2eb59443bde",
+	            "group": "root",
+	            "uid": 0,
+	            "scanDate": "2018-08-02 16:50:19",
+	            "gid": 0,
+	            "user": "root",
+	            "file": "/boot/System.map-4.15.0-29-generic",
+	            "modificationDate": "2018-07-17 08:57:50",
+	            "octalMode": "100600",
+	            "permissions": "-rw-------",
+	            "md5": "b8f99e91ffa3c53c05b7e03cdbdf408d",
+	            "inode": 535047,
+	            "event": "modified",
+	            "size": 4040379
+	         },
+	         {
+	            "sha1": "7a604af2743cee6a5b19b0f7e0728c824f69efd5",
+	            "group": "root",
+	            "uid": 0,
+	            "scanDate": "2018-08-02 16:50:19",
+	            "gid": 0,
+	            "user": "root",
+	            "file": "/boot/initrd.img-4.15.0-23-generic",
+	            "modificationDate": "2018-07-10 01:08:40",
+	            "octalMode": "100644",
+	            "permissions": "-rw-r--r--",
+	            "md5": "66b71b3d5881277a3620972a702e631f",
+	            "inode": 524297,
+	            "event": "modified",
+	            "size": 54209624
+	         }
+	      ]
+	   }
 	}
+	
 
 
 Run
@@ -4835,7 +4703,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents",
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
 	    "error": 0
 	}
 
@@ -4869,7 +4737,7 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-
+	
 
 
 
@@ -4907,24 +4775,26 @@ Returns the agent's hardware info
 ::
 
 	{
-	    "data": {
-	        "ram": {
-	            "total": 1883804,
-	            "free": 1114784
-	        },
-	        "scan": {
-	            "id": 826635219,
-	            "time": "2018/02/12 23:21:10"
-	        },
-	        "cpu": {
-	            "cores": 1,
-	            "mhz": 1795.917,
-	            "name": "Intel(R) Core(TM) i5-3337U CPU @ 1.80GHz"
-	        },
-	        "board_serial": "0"
-	    },
-	    "error": 0
+	   "error": 0,
+	   "data": {
+	      "board_serial": "0",
+	      "ram": {
+	         "usage": 56,
+	         "total": 6053772,
+	         "free": 2677484
+	      },
+	      "cpu": {
+	         "cores": 2,
+	         "mhz": 1991.998,
+	         "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
+	      },
+	      "scan": {
+	         "id": 208137997,
+	         "time": "2018/08/02 23:45:54"
+	      }
+	   }
 	}
+	
 
 
 Netaddr
@@ -4967,7 +4837,7 @@ Returns the agent's network address info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/:agent_id/netaddr?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netaddr?pretty&limit=2&sort=proto"
 
 **Example Response:**
 ::
@@ -4975,50 +4845,26 @@ Returns the agent's network address info
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 5,
+	      "totalItems": 4,
 	      "items": [
 	         {
-	            "broadcast": "10.0.2.255",
-	            "scan_id": 788552187,
-	            "proto": "ipv4",
-	            "address": "10.0.2.15",
-	            "netmask": "255.255.255.0",
-	            "id": 13
-	         },
-	         {
-	            "id": 13,
-	            "scan_id": 788552187,
-	            "address": "fe80::2cb0:ce5d:dc42:8753",
+	            "id": 17,
+	            "scan_id": 483670720,
+	            "address": "fe80::a00:27ff:fed6:8e4f",
 	            "netmask": "ffff:ffff:ffff:ffff::",
 	            "proto": "ipv6"
 	         },
 	         {
-	            "broadcast": "192.168.1.255",
-	            "scan_id": 788552187,
-	            "proto": "ipv4",
-	            "address": "192.168.1.57",
-	            "netmask": "255.255.255.0",
-	            "id": 14
-	         },
-	         {
-	            "id": 14,
-	            "scan_id": 788552187,
-	            "address": "fe80::13da:3857:98d3:4f5",
-	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "proto": "ipv6"
-	         },
-	         {
-	            "id": 14,
-	            "scan_id": 788552187,
-	            "address": "fe80::ef5f:af71:26a3:88e7",
+	            "id": 18,
+	            "scan_id": 483670720,
+	            "address": "fe80::a00:27ff:fea9:6759",
 	            "netmask": "ffff:ffff:ffff:ffff::",
 	            "proto": "ipv6"
 	         }
 	      ]
 	   }
 	}
-
-
+	
 
 
 Netiface
@@ -5075,13 +4921,11 @@ Returns the agent's network interface info
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``rx_dropped``     | String        | Filters by rx_dropped.                                                                                                                                                                                 |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``select``         | String        | List of selected fields.                                                                                                                                                                               |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/:agent_id/netiface?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netiface?pretty&limit=2&sort=state"
 
 **Example Response:**
 ::
@@ -5094,56 +4938,55 @@ Returns the agent's network interface info
 	         {
 	            "name": "enp0s3",
 	            "tx": {
-	               "packets": 3399,
+	               "packets": 144,
 	               "errors": 0,
-	               "bytes": 557564,
+	               "bytes": 16993,
 	               "dropped": 0
 	            },
 	            "scan": {
-	               "id": 788552187,
-	               "time": "2018/07/27 14:04:39"
+	               "id": 483670720,
+	               "time": "2018/08/02 23:45:54"
 	            },
 	            "rx": {
-	               "packets": 8554,
+	               "packets": 352,
 	               "errors": 0,
-	               "bytes": 8543944,
+	               "bytes": 346608,
 	               "dropped": 0
 	            },
-	            "mac": "08:00:27:03:85:DD",
+	            "mac": "08:00:27:D6:8E:4F",
 	            "mtu": 1500,
 	            "state": "up",
 	            "type": "ethernet",
-	            "id": 13
+	            "id": 17
 	         },
 	         {
 	            "name": "enp0s8",
 	            "tx": {
-	               "packets": 68323,
+	               "packets": 1580,
 	               "errors": 0,
-	               "bytes": 92045845,
+	               "bytes": 229506,
 	               "dropped": 0
 	            },
 	            "scan": {
-	               "id": 788552187,
-	               "time": "2018/07/27 14:04:39"
+	               "id": 483670720,
+	               "time": "2018/08/02 23:45:54"
 	            },
 	            "rx": {
-	               "packets": 89051,
+	               "packets": 6032,
 	               "errors": 0,
-	               "bytes": 8863610,
+	               "bytes": 1600051,
 	               "dropped": 0
 	            },
-	            "mac": "08:00:27:14:9A:0E",
+	            "mac": "08:00:27:A9:67:59",
 	            "mtu": 1500,
 	            "state": "up",
 	            "type": "ethernet",
-	            "id": 14
+	            "id": 18
 	         }
 	      ]
 	   }
 	}
-
-
+	
 
 
 Netproto
@@ -5186,7 +5029,7 @@ Returns the agent's network protocol info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/:agent_id/netproto?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netproto?pretty&limit=2&sort=type"
 
 **Example Response:**
 ::
@@ -5197,40 +5040,23 @@ Returns the agent's network protocol info
 	      "totalItems": 4,
 	      "items": [
 	         {
-	            "scan_id": 788552187,
-	            "iface": "enp0s3",
 	            "dhcp": "enabled",
-	            "type": "ipv4",
-	            "id": 13,
-	            "gateway": "10.0.2.2"
-	         },
-	         {
-	            "dhcp": "enabled",
-	            "scan_id": 788552187,
+	            "scan_id": 483670720,
 	            "iface": "enp0s3",
 	            "type": "ipv6",
-	            "id": 13
-	         },
-	         {
-	            "scan_id": 788552187,
-	            "iface": "enp0s8",
-	            "dhcp": "enabled",
-	            "type": "ipv4",
-	            "id": 14,
-	            "gateway": "192.168.1.1"
+	            "id": 17
 	         },
 	         {
 	            "dhcp": "enabled",
-	            "scan_id": 788552187,
+	            "scan_id": 483670720,
 	            "iface": "enp0s8",
 	            "type": "ipv6",
-	            "id": 14
+	            "id": 18
 	         }
 	      ]
 	   }
 	}
-
-
+	
 
 
 OS
@@ -5265,23 +5091,28 @@ Returns the agent's OS info
 ::
 
 	{
-	    "data": {
-	        "sysname": "centos",
-	        "scan": {
-	            "id": 1363438688,
-	            "time": "2018/02/12 23:21:10"
-	        },
-	        "hostname": "node01",
-	        "version": "3.10.0-514.el7.x86_64",
-	        "architecture": "x86_64",
-	        "release": "Linux",
-	        "os": {
-	            "version": "7 (Core)",
-	            "name": "CentOS Linux"
-	        }
-	    },
-	    "error": 0
+	   "error": 0,
+	   "data": {
+	      "sysname": "Linux",
+	      "version": "#31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018",
+	      "architecture": "x86_64",
+	      "scan": {
+	         "id": 433934775,
+	         "time": "2018/08/02 23:45:54"
+	      },
+	      "release": "4.15.0-29-generic",
+	      "hostname": "wazuh",
+	      "os": {
+	         "major": "18",
+	         "name": "Ubuntu",
+	         "platform": "ubuntu",
+	         "version": "18.04 LTS (Bionic Beaver)",
+	         "codename": "Bionic Beaver",
+	         "minor": "04"
+	      }
+	   }
 	}
+	
 
 
 Packages
@@ -5334,33 +5165,44 @@ Returns the agent's packages info
 ::
 
 	{
-	    "data": {
-	        "totalItems": 372,
-	        "items": [
-	            {
-	                "scan_id": 1516906568,
-	                "version": "1.1.0-1.el7",
-	                "vendor": "CentOS",
-	                "description": "ALSA tools for uploading firmware to some soundcards",
-	                "name": "alsa-tools-firmware",
-	                "format": "rpm",
-	                "scan_time": "2018/02/12 23:21:10",
-	                "architecture": "x86_64"
+	   "error": 0,
+	   "data": {
+	      "totalItems": 644,
+	      "items": [
+	         {
+	            "vendor": "Martin Pitt <martin.pitt@ubuntu.com>",
+	            "name": "apport",
+	            "scan": {
+	               "id": 1222412658,
+	               "time": "2018/08/02 23:45:54"
 	            },
-	            {
-	                "scan_id": 1516906568,
-	                "version": "2.6.5-3.el7",
-	                "vendor": "CentOS",
-	                "description": "User space tools for 2.6 kernel auditing",
-	                "name": "audit",
-	                "format": "rpm",
-	                "scan_time": "2018/02/12 23:21:10",
-	                "architecture": "x86_64"
-	            }
-	        ]
-	    },
-	    "error": 0
+	            "section": "utils",
+	            "format": "deb",
+	            "priority": "optional",
+	            "version": "2.20.9-0ubuntu7",
+	            "architecture": "all",
+	            "size": 764,
+	            "description": "automatically generate crash reports for debugging"
+	         },
+	         {
+	            "vendor": "Ubuntu Developers <ubuntu-motu@lists.ubuntu.com>",
+	            "name": "apport-symptoms",
+	            "scan": {
+	               "id": 1222412658,
+	               "time": "2018/08/02 23:45:54"
+	            },
+	            "section": "utils",
+	            "format": "deb",
+	            "priority": "optional",
+	            "version": "0.20",
+	            "architecture": "all",
+	            "size": 75,
+	            "description": "symptom scripts for apport"
+	         }
+	      ]
+	   }
 	}
+	
 
 
 Ports
@@ -5405,23 +5247,11 @@ Returns the agent's ports info
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``state``          | String        | Filters by state.                                                                                                                                                                                      |
 +--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``select``         | String        | List of selected fields.                                                                                                                                                                               |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``vendor``         | String        | Filters by vendor.                                                                                                                                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``name``           | String        | Filters by name.                                                                                                                                                                                       |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``architecture``   | String        | Filters by architecture.                                                                                                                                                                               |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``format``         | String        | Filters by format.                                                                                                                                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``version``        | String        | Filters by version.                                                                                                                                                                                    |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/:agent_id/ports?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/ports?pretty&sort=-protocol&limit=2"
 
 **Example Response:**
 ::
@@ -5429,7 +5259,7 @@ Returns the agent's ports info
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 6,
+	      "totalItems": 14,
 	      "items": [
 	         {
 	            "remote": {
@@ -5437,17 +5267,17 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 1484904709,
-	               "time": "2018/07/27 14:04:43"
+	               "id": 1219576791,
+	               "time": "2018/08/02 23:45:56"
 	            },
-	            "inode": 5937482,
+	            "inode": 33140,
 	            "state": "listening",
 	            "tx_queue": 0,
 	            "protocol": "tcp",
 	            "rx_queue": 0,
 	            "local": {
 	               "ip": "0.0.0.0",
-	               "port": 1516
+	               "port": 5601
 	            }
 	         },
 	         {
@@ -5456,24 +5286,23 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 1484904709,
-	               "time": "2018/07/27 14:04:43"
+	               "id": 1219576791,
+	               "time": "2018/08/02 23:45:56"
 	            },
-	            "inode": 17041,
+	            "inode": 168808,
 	            "state": "listening",
 	            "tx_queue": 0,
 	            "protocol": "tcp",
 	            "rx_queue": 0,
 	            "local": {
 	               "ip": "0.0.0.0",
-	               "port": 22
+	               "port": 1516
 	            }
 	         }
 	      ]
 	   }
 	}
-
-
+	
 
 
 Processes
@@ -5538,39 +5367,39 @@ Returns the agent's processes info
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 108,
+	      "totalItems": 111,
 	      "items": [
 	         {
 	            "euser": "root",
-	            "tty": 0,
+	            "tty": 34816,
 	            "rgroup": "root",
 	            "sgroup": "root",
 	            "scan": {
-	               "id": 1749889128,
-	               "time": "2018/07/27 14:04:43"
+	               "id": 2147483647,
+	               "time": "2018/08/02 23:45:56"
 	            },
-	            "resident": 238,
-	            "start_time": 501,
-	            "share": 212,
-	            "tgid": 671,
-	            "session": 671,
-	            "stime": 45,
-	            "vm_size": 126236,
-	            "size": 31559,
-	            "nlwp": 1,
+	            "resident": 1294,
+	            "share": 835,
+	            "start_time": 2172,
+	            "pid": "1780",
+	            "session": 1780,
+	            "stime": 16,
+	            "vm_size": 21540,
+	            "size": 5385,
+	            "ppid": 1447,
 	            "egroup": "root",
-	            "name": "crond",
-	            "fgroup": "root",
-	            "argvs": "-n",
-	            "utime": 0,
-	            "cmd": "/usr/sbin/crond",
+	            "name": "bash",
+	            "pgrp": 1780,
+	            "tgid": 1780,
+	            "utime": 27,
+	            "cmd": "-bash",
 	            "priority": 20,
-	            "pgrp": 671,
+	            "fgroup": "root",
 	            "state": "S",
 	            "ruser": "root",
 	            "suser": "root",
-	            "ppid": 1,
-	            "processor": 1,
+	            "nlwp": 1,
+	            "processor": 0,
 	            "nice": 0
 	         },
 	         {
@@ -5579,30 +5408,35 @@ Returns the agent's processes info
 	            "rgroup": "root",
 	            "sgroup": "root",
 	            "scan": {
-	               "id": 1749889128,
-	               "time": "2018/07/27 14:04:43"
+	               "id": 2147483647,
+	               "time": "2018/08/02 23:45:56"
 	            },
 	            "resident": 0,
-	            "start_time": 48,
 	            "share": 0,
+	            "start_time": 105,
+	            "pid": "121",
 	            "session": 0,
 	            "stime": 0,
 	            "vm_size": 0,
 	            "size": 0,
-	            "ppid": 2,
+	            "nlwp": 1,
 	            "egroup": "root",
-	            "name": "crypto",
+	            "name": "charger_manager",
 	            "pgrp": 0,
-	            "tgid": 34,
+	            "tgid": 121,
 	            "utime": 0,
 	            "priority": 0,
 	            "fgroup": "root",
-	            "state": "S",
+	            "state": "I",
 	            "ruser": "root",
 	            "suser": "root",
-	            "nlwp": 1,
+	            "ppid": 2,
 	            "processor": 1
 	         }
 	      ]
 	   }
 	}
+	
+
+
+
