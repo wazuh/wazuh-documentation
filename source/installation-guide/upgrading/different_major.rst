@@ -194,14 +194,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.3.1
+      # yum install elasticsearch-6.3.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch=6.3.1
+      # apt-get install elasticsearch=6.3.2
 
 
 2. Start Elasticsearch:
@@ -219,15 +219,15 @@ Upgrade Elasticsearch
     # curl localhost:9200/?pretty
 
     {
-      "name" : "yk-Jl_9",
+      "name" : "Zr2Shu_",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "YdDkcAkdRquf6lMQjP0HNA",
+      "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.3.1",
+        "number" : "6.3.2",
         "build_flavor" : "default",
         "build_type" : "rpm",
-        "build_hash" : "eb782d0",
-        "build_date" : "2018-06-29T21:59:26.107521Z",
+        "build_hash" : "053779d",
+        "build_date" : "2018-07-20T05:20:23.451332Z",
         "build_snapshot" : false,
         "lucene_version" : "7.3.1",
         "minimum_wire_compatibility_version" : "5.6.0",
@@ -251,13 +251,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash-6.3.1
+      # yum install logstash-6.3.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash=1:6.3.1-1
+      # apt-get install logstash=1:6.3.2-1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -296,13 +296,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-6.3.1
+      # yum install kibana-6.3.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=6.3.1
+      # apt-get install kibana=6.3.2
 
 
 2. Remove the Wazuh Kibana App plugin from Kibana:
@@ -321,18 +321,18 @@ Upgrade Kibana
 
 4. Upgrade the Wazuh Kibana App:
 
-  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. Set the limit as follow:
+  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app. Set the limit as follow:
 
   .. code-block:: console
 
       # export NODE_OPTIONS="--max-old-space-size=3072"
 
-  b) Install the Wazuh App:
+  b) Install the Wazuh app:
 
   .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.4.0_6.3.1.zip
+      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.4.0_6.3.2.zip
 
 
 5. Start Kibana:
@@ -352,13 +352,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.3.1
+      # yum install filebeat-6.3.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.3.1
+      # apt-get install filebeat=6.3.2
 
 2. Download the Filebeat configuration file from the Wazuh repository:
 
@@ -395,7 +395,7 @@ Official upgrading guides for Elastic Stack:
 Disable the Elasticsearch repository
 ------------------------------------
 
-We recommend that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version. An untimely or unplanned upgrade may break the Wazuh App. To disable the repository, follow these steps:
+We recommend that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version. An untimely or unplanned upgrade may break the Wazuh app. To disable the repository, follow these steps:
 
   a) For CentOS/RHEL/Fedora:
 
