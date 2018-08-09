@@ -13,7 +13,6 @@ This section shows the most relevant improvements and fixes in version 3.5.0. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.5.0-6.3.2/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.5.0-7.1.2/CHANGELOG.md>`_
 
-
 Wazuh core
 ----------
 
@@ -34,7 +33,7 @@ Wazuh core
 
     - Added ``feed`` tag for updating each operating system OVAL, allowing to set a different configuration for each of them.
     - Packages already scanned won't be checked unless no Syscollector scans are detected in a period longer than 24 hours.
-    - Added arch check for Red Hat's OVAL. 
+    - Added arch check for Red Hat's OVAL.
     - Force the vulnerability detection in unsupported OS with the ``<allow>`` attribute.
 
 - Fixed alerts format in Vulnerability Detector. When showing Vulnerability Detector alerts from a Red Hat agent, an RHSA patch was shown instead of a CVE. This patch consists in various CVEs compressed. The RHSA patches are unpackaged and alerts manifest that the system is vulnerable to each of the CVEs contained in that RHSA.
@@ -59,8 +58,7 @@ Wazuh core
     - Storage of multiple addresses/netmasks/broadcasts per interface in the DB.
     - CentOS 5 compatibility to run the network scan.
 
-
-Wazuh API 
+Wazuh API
 ---------
 
 - Added information about the user who made the request in the API logs.
@@ -69,14 +67,12 @@ Wazuh API
 - Added new API requests for syscollector.
 - Ignore uppercase and lowercase sorting an array.
 
-
 Wazuh ruleset
 -------------
 
 - Added rules for the new osquery integration.
 - Improved CIS-CAT rules.
 - Ingoring syscollector events rule added.
-
 
 Wazuh app for Kibana
 --------------------
@@ -91,11 +87,12 @@ Wazuh app for Kibana
 - More design improvements for the Welcome tab on some app sections.
 - More bug fixes, code refactoring and performance improvements.
 
+In addition to this, the documentation now has a :ref:`dedicated section <kibana_app>` for the Wazuh app, where you can learn more about its capabilities, how to configure it and install the X-Pack Security plugin.
 
 Kaspersky integration
 ---------------------
 
-A Python wrapper of KES (Kaspersky Endpoint Security for Linux) has been integrated with Wazuh agent via Active Response to generate alerts based on the events received using its rule engine. 
+A Python wrapper of KES (Kaspersky Endpoint Security for Linux) has been integrated with Wazuh agent via Active Response to generate alerts based on the events received using its rule engine.
 Kaspersky simplifies trigger creation using tagged alerts to generate a scan task on the endpoint, it uses pre-defined rule groups associated with a specific scan type.
 This allows various options and scanning several processes:
 
