@@ -80,7 +80,7 @@ Wazuh app for Kibana
 - As part of the Elastic Stack v6.3.x compatibility process, now we have support for Kuery as query language for the app search bars.
 - Added new tab on Configuration to show the current Wazuh app configuration file values.
 - Added new tab on Configuration to show the latest Wazuh app logs.
-- Added XML/JSON viewer to Management > Configuration.
+- Added XML/JSON viewer to Management → Configuration.
 - Improved reports, now with a better design and document structure.
 - Human-readability improvements for visualizations, tables and CSV files.
 - Now it’s possible to remove all the API entries from Settings.
@@ -88,24 +88,3 @@ Wazuh app for Kibana
 - More bug fixes, code refactoring and performance improvements.
 
 In addition to this, the documentation now has a :ref:`dedicated section <kibana_app>` for the Wazuh app, where you can learn more about its capabilities, how to configure it and install the X-Pack Security plugin.
-
-Kaspersky integration
----------------------
-
-A Python wrapper of KES (Kaspersky Endpoint Security for Linux) has been integrated with Wazuh agent via Active Response to generate alerts based on the events received using its rule engine.
-Kaspersky simplifies trigger creation using tagged alerts to generate a scan task on the endpoint, it uses pre-defined rule groups associated with a specific scan type.
-This allows various options and scanning several processes:
-
-+-----------------------+----------------------------+---------------------+------------------+
-| Rule group            | Scan type                  | Wrapper command     | KES CLI          |
-+-----------------------+----------------------------+---------------------+------------------+
-| kaspersky_full_scan   | Full scan                  | -\\-full_scan       | -\\-start-task 2 |
-+-----------------------+----------------------------+---------------------+------------------+
-| kaspersky_memory_scan | Memory scan                | -\\-memory_scan     | -\\-start-task 5 |
-+-----------------------+----------------------------+---------------------+------------------+
-| kaspersky_boot_scan   | Boot scan                  | -\\-boot_scan       | -\\-start-task 4 |
-+-----------------------+----------------------------+---------------------+------------------+
-| kaspersky_realtime    | Enable realtime protection | -\\-enable_realtime | -\\-start-task 1 |
-+-----------------------+----------------------------+---------------------+------------------+
-
-Also it provides realtime protection, Kaspersky tasks query and the posibility to scan a custom folder or file, allowing to apply an action to that file after the scan.
