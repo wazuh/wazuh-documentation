@@ -31,6 +31,8 @@ Options
 - `registry_ignore`_
 - `prefilter_cmd`_
 - `skip_nfs`_
+- `remove_old_diff`_
+- `restart_audit`_
 - `windows_audit_interval`_
 
 .. _reference_ossec_syscheck_directories:
@@ -345,8 +347,37 @@ Specifies if syscheck should scan network mounted filesystems (Works on Linux an
 | **Allowed values** | yes, no  |
 +--------------------+----------+
 
+remove_old_diff
+^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.4.0
+
+Specifies if Syscheck should delete the local snapshots that are not currently being monitorized.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+restart_audit
+^^^^^^^^^^^^^
+
+.. versionadded:: 3.5.0
+
+Allow the system to restart `Auditd` after installing the plugin. Note that setting this field to ``no`` the new
+whodata rules won't be applied automatically.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
 windows_audit_interval
 ^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.5.0
 
 This option sets the frequency with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
 
@@ -356,7 +387,6 @@ This option sets the frequency with which the Windows agent will check that the 
 | **Allowed values** | A positive number, time in seconds |
 +--------------------+------------------------------------+
 
-.. versionadded:: 3.4.0
 
 Default Unix configuration
 --------------------------
@@ -400,4 +430,10 @@ Default Unix configuration
     <nodiff>/etc/ssl/private.key</nodiff>
 
     <skip_nfs>yes</skip_nfs>
+
+    <!-- Remove not monitored files -->
+    <remove_old_diff>yes</remove_old_diff>
+
+    <!-- Allow the system to restart Auditd after installing the plugin -->
+    <restart_audit>yes</restart_audit>
   </syscheck>

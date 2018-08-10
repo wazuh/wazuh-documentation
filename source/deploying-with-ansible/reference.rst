@@ -372,16 +372,6 @@ wazuh_manager_config:
           - type: 'xccdf'
             path: 'benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml'
             profile: 'xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Server'
-      vuls:
-        disable: 'yes'
-        interval: '1d'
-        run_on_start: 'yes'
-        args:
-          - 'mincvss 5'
-          - 'antiquity-limit 20'
-          - 'updatenvd'
-          - 'nvd-year 2016'
-          - 'autoupdate'
       log_level: 1
       email_level: 12
       localfiles:
@@ -684,16 +674,6 @@ wazuh_agent_config:
           - type: 'xccdf'
             path: 'benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml'
             profile: 'xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Server'
-      vuls:
-        disable: 'yes'
-        interval: '1d'
-        run_on_start: 'yes'
-        args:
-          - 'mincvss 5'
-          - 'antiquity-limit 20'
-          - 'updatenvd'
-          - 'nvd-year 2016'
-          - 'autoupdate'
       localfiles:
         - format: 'syslog'
           location: '/var/log/messages'

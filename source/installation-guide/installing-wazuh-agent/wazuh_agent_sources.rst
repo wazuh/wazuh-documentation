@@ -33,7 +33,7 @@ Installing Linux agent
 
   .. code-block:: console
 
-    $ curl -Ls https://github.com/wazuh/wazuh/archive/v3.4.0.tar.gz | tar zx
+    $ curl -Ls https://github.com/wazuh/wazuh/archive/v3.5.0.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
@@ -41,6 +41,8 @@ Installing Linux agent
 
     # cd wazuh-*
     # ./install.sh
+
+.. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>`.
 
@@ -77,13 +79,14 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.4.0.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.5.0.tar.gz | tar zx
     # cd wazuh-*/src
 
 4. Compile the agent by running the ``make`` command:
 
   .. code-block:: console
 
+    # make deps
     # make TARGET=winagent
 
 The following output will appear at the end of the building process:
@@ -97,9 +100,9 @@ The following output will appear at the end of the building process:
 
   .. code-block:: console
 
-    # zip -r wazuh.zip ../../wazuh-3.4.0
+    # zip -r wazuh.zip ../../wazuh-3.5.0
 
-6. Once in Windows, run the ``wazuh-3.4.0/src/win32/wazuh-installer-build-msi.bat`` file to start the installer generation. If you do not want to sign the installer, you will have to comment or delete the signtool line.
+6. Once in Windows, run the ``wazuh-3.5.0/src/win32/wazuh-installer-build-msi.bat`` file to start the installer generation. If you do not want to sign the installer, you will have to comment or delete the signtool line.
 
 .. note:: The installer is now ready.  It can be launched with a normal or unattended installation. For more information about this process, please visit our :doc:`installation section for Windows<./wazuh_agent_windows>`.
 
