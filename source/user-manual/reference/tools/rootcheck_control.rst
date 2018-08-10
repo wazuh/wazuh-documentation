@@ -18,6 +18,8 @@ This tool can also display the last time that ossec-rootcheck was run.
 +----------------------+-------------------------------------------------------+
 | **-lc**              | List only the currently connected agents.             |
 +----------------------+-------------------------------------------------------+
+| **-ln**              | List only the currently disconnected agents.          |
++----------------------+-------------------------------------------------------+
 | **-u <id> / -u all** | Update the database for the identified or all agents. |
 +----------------------+-------------------------------------------------------+
 | **-i <agent_id>**    | Print the database for the agent.                     |
