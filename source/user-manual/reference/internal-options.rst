@@ -574,16 +574,6 @@ Syscheck
 +                            +---------------+--------------------------------------------------------------------------------+
 |                            | Allowed value | Any integer between 1 and 9999                                                 |
 +----------------------------+---------------+--------------------------------------------------------------------------------+
-|    **syscheck.debug**      | Description   | Debug level (used in manager and unix agent installations).                    |
-+                            +---------------+--------------------------------------------------------------------------------+
-|                            | Default value | 0                                                                              |
-+                            +---------------+--------------------------------------------------------------------------------+
-|                            | Allowed value | 0: No debug output                                                             |
-+                            +               +--------------------------------------------------------------------------------+
-|                            |               | 1: Standard debug output                                                       |
-+                            +               +--------------------------------------------------------------------------------+
-|                            |               | 2: Verbose debug output                                                        |
-+----------------------------+---------------+--------------------------------------------------------------------------------+
 | **syscheck.rt_delay**      | Description   | Time in milliseconds for delay between alerts in real-time.                    |
 |                            |               |                                                                                |
 |                            |               | .. versionadded:: 3.4.0                                                        |
@@ -592,7 +582,7 @@ Syscheck
 +                            +---------------+--------------------------------------------------------------------------------+
 |                            | Allowed value | Any integer between 1 and 1000                                                 |
 +----------------------------+---------------+--------------------------------------------------------------------------------+
-| **syscheck.max_fd_win_rt** | Description   | Maximum numbers of directories can be configured in ossec.conf for windows     |
+| **syscheck.max_fd_win_rt** | Description   | Maximum numbers of directories can be configured in ossec.conf for Windows     |
 |                            |               | in realtime and whodata mode.                                                  |
 |                            |               |                                                                                |
 |                            |               | .. versionadded:: 3.4.0                                                        |
@@ -607,7 +597,7 @@ Syscheck
 +                            +---------------+--------------------------------------------------------------------------------+
 |                            | Allowed value | Any integer between 1 and 320                                                  |
 +----------------------------+---------------+--------------------------------------------------------------------------------+
-|    **syscheck.debug**      | Description   | Debug level (used in manager and unix agent installations).                    |
+|    **syscheck.debug**      | Description   | Debug level (used in manager and Unix agent installations).                    |
 +                            +---------------+--------------------------------------------------------------------------------+
 |                            | Default value | 0                                                                              |
 +                            +---------------+--------------------------------------------------------------------------------+
