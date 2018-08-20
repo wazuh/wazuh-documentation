@@ -233,7 +233,7 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # /usr/share/kibana/bin/kibana-plugin remove wazuh
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 3. Upgrade the Wazuh app:
 
@@ -248,7 +248,7 @@ Upgrade Kibana
   .. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
-    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.5.0_6.3.2.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.5.0_6.3.2.zip
 
 .. warning::
   The Wazuh app installation process may take several minutes. Please wait patiently.
