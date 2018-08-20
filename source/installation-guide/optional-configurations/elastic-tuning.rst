@@ -245,7 +245,7 @@ Note that we are assuming your target index pattern is **"wazuh-alerts-*"**, how
 
 .. code-block:: console
 
-  # curl 'localhost:9200/_cat/indices'
+  # curl "localhost:9200/_cat/indices"
 
 Reference:
 

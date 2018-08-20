@@ -28,7 +28,7 @@ Use the cURL command to send a *request* to confirm that everything is working a
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000?pretty"
+    # curl -u foo:bar "http://localhost:55000?pretty"
     {
         "error": 0,
         "data": {
@@ -44,8 +44,7 @@ Explanation:
 
  * ``curl``: A command-line tool for sending requests and commands over HTTP and HTTPS.
  * ``-u foo:bar``: The username and password to authenticate with the API.
- * ``-k``: The parameter that allows connections to SSL sites with self-signed certificates.
- * ``https://127.0.0.1:55000``: The API URL to use if you are running the command on the manager itself.
+ * ``http://localhost:55000``: The API URL to use if you are running the command on the manager itself.
  * ``?pretty``: The parameter that makes the JSON output more human-readable.
 
 Basic concepts
@@ -103,7 +102,7 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/rules/1002?pretty"
+    # curl -u foo:bar "http://localhost:55000/rules/1002?pretty"
     {
        "error": 0,
        "data": {
@@ -136,7 +135,7 @@ It can also be helpful to know what rules are available that match a specific cr
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/rules?group=web&pci=10.6.1&search=failures&pretty"
+    # curl -u foo:bar "http://localhost:55000/rules?group=web&pci=10.6.1&search=failures&pretty"
     {
        "error": 0,
        "data": {
@@ -185,7 +184,7 @@ The API can be used to show information about all monitored files by syscheck. T
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000?event=modified&search=.py&pretty"
+    # curl -u foo:bar "http://localhost:55000/syscheck/000?event=modified&search=.py&pretty"
     {
         "error": 0,
         "data": {
@@ -232,7 +231,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000?pretty&hash=17f51705df5b61c53ef600fc1fcbe031e4d53c20"
+    # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=17f51705df5b61c53ef600fc1fcbe031e4d53c20"
     {
        "error": 0,
        "data": {
@@ -260,7 +259,7 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000?pretty&hash=39b88ab3ddfaf00db53e5cf193051351"
+    # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=39b88ab3ddfaf00db53e5cf193051351"
     {
        "error": 0,
        "data": {
@@ -294,7 +293,7 @@ Rootcheck requests are very similar to the syscheck requests. In order to get al
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/rootcheck/000?status=outstanding&offset=10&limit=1&pretty"
+    # curl -u foo:bar "http://localhost:55000/rootcheck/000?status=outstanding&offset=10&limit=1&pretty"
     {
        "error": 0,
        "data": {
@@ -319,7 +318,7 @@ Some information about the manager can be retrieved using the API. Configuration
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/manager/status?pretty"
+    # curl -u foo:bar "http://localhost:55000/manager/status?pretty"
     {
         "error": 0,
         "data": {
@@ -341,7 +340,7 @@ You can even dump the manager's current configuration with the request bellow (r
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/manager/configuration?pretty"
+    # curl -u foo:bar "http://localhost:55000/manager/configuration?pretty"
     {
       "error": 0,
       "data": {
@@ -369,7 +368,7 @@ This enumerates **active** agents:
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/agents?offset=1&limit=1&status=active&pretty"
+    # curl -u foo:bar "http://localhost:55000/agents?offset=1&limit=1&status=active&pretty"
     {
        "error": 0,
        "data": {
@@ -409,7 +408,7 @@ Adding an agent is now easier than ever. Simply send a request with the agent na
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
+    # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "http://localhost:55000/agents?pretty"
     {
         "error": 0,
         "data": {

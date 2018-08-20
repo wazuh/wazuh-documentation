@@ -76,7 +76,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # curl localhost:9200/?pretty
+    # curl "localhost:9200/?pretty"
 
     {
       "name" : "Zr2Shu_",
