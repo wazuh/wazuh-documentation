@@ -153,5 +153,3 @@ Example of configuration
       <run_on_start>yes</run_on_start>
       <timeout>0</timeout>
     </wodle>
-
-.. note:: See the :doc:`Vuls integration section<../../capabilities/vuls>` for a use case of this command.

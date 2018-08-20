@@ -18,6 +18,10 @@ Options
 -------
 
 - `disabled`_
+
+Manager side
+^^^^^^^^^^^^
+
 - `command`_
 - `location`_
 - `agent_id`_
@@ -25,6 +29,10 @@ Options
 - `rules_group`_
 - `rules_id`_
 - `timeout`_
+
+Agent side
+^^^^^^^^^^
+
 - `repeated_offenders`_
 - `ca_store`_
 - `ca_verification`_
@@ -198,5 +206,8 @@ Sample Configuration
 
     <!-- On the agent side -->
     <active-response>
+      <disabled>no</disabled>
+      <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
+      <ca_verification>yes</ca_verification>
       <repeated_offenders>1,5,10</repeated_offenders>
     </active-response>

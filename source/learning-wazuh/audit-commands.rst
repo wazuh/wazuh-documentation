@@ -12,7 +12,7 @@ in a sudo command or after sudo-ing to root.  After causing some audit events to
 Then we will set up several custom Wazuh rules to alert on especially suspicious command calls, making use of the CDB list lookup
 facility that allows rules to look up decoded field values in various lists and to use the results as part of the alert criteria.
 
-The Linux auditd system is an extensive auditing facility, which we will only touch on here.  Consider searching the Wazuh
+The Linux auditd system is an extensive auditing tool, which we will only touch on here. Consider searching the Wazuh
 documentation for "Monitoring system calls" to get a broader picture of the ways you can take advantage of it.
 
 Turn on program call auditing on linux-agent

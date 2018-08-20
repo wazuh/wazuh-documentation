@@ -41,7 +41,7 @@ Upgrade the Wazuh agent
 
   .. code-block:: console
 
-    # wazuh-agent-3.3.1-1.msi /q
+    # wazuh-agent-3.5.0-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
@@ -120,13 +120,13 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # yum install elasticsearch-6.3.1
+    # yum install elasticsearch-6.3.2
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.3.1
+    # apt-get install elasticsearch=6.3.2
 
 2. Start the Elasticsearch service:
 
@@ -143,15 +143,15 @@ Upgrade Elasticsearch
     # curl "localhost:9200/?pretty"
 
     {
-      "name" : "yk-Jl_9",
+      "name" : "Zr2Shu_",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "YdDkcAkdRquf6lMQjP0HNA",
+      "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.3.1",
+        "number" : "6.3.2",
         "build_flavor" : "default",
         "build_type" : "rpm",
-        "build_hash" : "eb782d0",
-        "build_date" : "2018-06-29T21:59:26.107521Z",
+        "build_hash" : "053779d",
+        "build_date" : "2018-07-20T05:20:23.451332Z",
         "build_snapshot" : false,
         "lucene_version" : "7.3.1",
         "minimum_wire_compatibility_version" : "5.6.0",
@@ -164,7 +164,7 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
 Upgrade Logstash
 ^^^^^^^^^^^^^^^^
@@ -175,13 +175,13 @@ Upgrade Logstash
 
   .. code-block:: console
 
-    # yum install logstash-6.3.1
+    # yum install logstash-6.3.2
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.3.1-1
+    # apt-get install logstash=1:6.3.2-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -190,7 +190,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/logstash/01-wazuh-local.conf
       # usermod -a -G ossec logstash
 
   b) Remote configuration:
@@ -198,7 +198,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/logstash/01-wazuh-remote.conf
 
 3. Start the Logstash service:
 
@@ -221,19 +221,19 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # yum install kibana-6.3.1
+    # yum install kibana-6.3.2
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install kibana=6.3.1
+    # apt-get install kibana=6.3.2
 
 2. Uninstall the Wazuh app from Kibana:
 
   .. code-block:: console
 
-    # /usr/share/kibana/bin/kibana-plugin remove wazuh
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 3. Upgrade the Wazuh app:
 
@@ -248,7 +248,7 @@ Upgrade Kibana
   .. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
-    # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.1_6.3.1.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.5.0_6.3.2.zip
 
 .. warning::
   The Wazuh app installation process may take several minutes. Please wait patiently.
@@ -270,14 +270,14 @@ Upgrade Filebeat
 
   .. code-block:: console
 
-    # yum install filebeat-6.3.1
+    # yum install filebeat-6.3.2
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
     # apt-get update
-    # apt-get install filebeat=6.3.1
+    # apt-get install filebeat=6.3.2
 
 2. Start the Filebeat service:
 
