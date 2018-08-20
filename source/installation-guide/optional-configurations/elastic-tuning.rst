@@ -93,7 +93,7 @@ After starting Elasticsearch, you can see whether this setting was successfully 
 
 .. code-block:: console
 
-    # curl -XGET 'localhost:9200/_nodes?filter_path=**.mlockall&pretty'
+    # curl "localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
 
