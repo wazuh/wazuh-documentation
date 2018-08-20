@@ -14,7 +14,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 **GET**
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar "http://localhost:55000"
     {
@@ -30,7 +30,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 **PUT**
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar -X PUT "http://localhost:55000/agents/new_agent"
     {
@@ -44,7 +44,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 **POST**
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "http://localhost:55000//agents"
     {
@@ -58,7 +58,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 **DELETE**
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar -X DELETE "https://localhost:55000/rootcheck/001?pretty"
     {
