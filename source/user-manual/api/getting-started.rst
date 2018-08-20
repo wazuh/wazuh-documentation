@@ -26,9 +26,9 @@ The API starts at boot time. To control or check the **wazuh-api** service, use 
 
 Use the cURL command to send a *request* to confirm that everything is working as expected:
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000?pretty"
+    # curl -u foo:bar "http://localhost:55000?pretty"
     {
         "error": 0,
         "data": {
@@ -44,8 +44,7 @@ Explanation:
 
  * ``curl``: A command-line tool for sending requests and commands over HTTP and HTTPS.
  * ``-u foo:bar``: The username and password to authenticate with the API.
- * ``-k``: The parameter that allows connections to SSL sites with self-signed certificates.
- * ``https://127.0.0.1:55000``: The API URL to use if you are running the command on the manager itself.
+ * ``http://localhost:55000``: The API URL to use if you are running the command on the manager itself.
  * ``?pretty``: The parameter that makes the JSON output more human-readable.
 
 Basic concepts
@@ -68,7 +67,7 @@ Here are some of the basic concepts related to making API requests and understan
 
  * Example response without errors:
 
-  .. code-block:: javascript
+  .. code-block:: console
 
         {
             "error":0,
@@ -101,9 +100,9 @@ Exploring the ruleset
 
 Often when an alert fires, it is helpful to know details about the rule itself. The following request enumerates the attributes of rule *1002*:
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/rules/1002?pretty"
+    # curl -u foo:bar "http://localhost:55000/rules/1002?pretty"
     {
        "error": 0,
        "data": {
@@ -134,9 +133,9 @@ Often when an alert fires, it is helpful to know details about the rule itself. 
 
 It can also be helpful to know what rules are available that match a specific criteria. For example, all the rules with a group of **web**, a PCI tag of **10.6.1**, and containing the word **failures** can be showed using the command bellow:
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/rules?group=web&pci=10.6.1&search=failures&pretty"
+    # curl -u foo:bar "http://localhost:55000/rules?group=web&pci=10.6.1&search=failures&pretty"
     {
        "error": 0,
        "data": {
@@ -183,9 +182,9 @@ Mining the file integrity monitoring database of an agent
 
 The API can be used to show information about all monitored files by syscheck. The following example shows all modified *.py* files in agent *000* (the manager):
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000?event=modified&search=.py&pretty"
+    # curl -u foo:bar "http://localhost:55000/syscheck/000?event=modified&search=.py&pretty"
     {
         "error": 0,
         "data": {
@@ -230,9 +229,9 @@ The API can be used to show information about all monitored files by syscheck. T
 
 You can find a file using its md5/sha1 hash. In the following examples, the same file is retrieved using both its md5 and sha1:
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000?pretty&hash=17f51705df5b61c53ef600fc1fcbe031e4d53c20"
+    # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=17f51705df5b61c53ef600fc1fcbe031e4d53c20"
     {
        "error": 0,
        "data": {
@@ -258,9 +257,9 @@ You can find a file using its md5/sha1 hash. In the following examples, the same
        }
     }
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/syscheck/000?pretty&hash=39b88ab3ddfaf00db53e5cf193051351"
+    # curl -u foo:bar "http://localhost:55000/syscheck/000?pretty&hash=39b88ab3ddfaf00db53e5cf193051351"
     {
        "error": 0,
        "data": {
@@ -292,9 +291,9 @@ Listing outstanding rootcheck issues
 
 Rootcheck requests are very similar to the syscheck requests. In order to get all rootcheck issues with the **outstanding** status, run this request:
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/rootcheck/000?status=outstanding&offset=10&limit=1&pretty"
+    # curl -u foo:bar "http://localhost:55000/rootcheck/000?status=outstanding&offset=10&limit=1&pretty"
     {
        "error": 0,
        "data": {
@@ -317,9 +316,9 @@ Getting information about the manager
 
 Some information about the manager can be retrieved using the API. Configuration, status, information, logs, etc. The following example retrieves the status of each daemon Wazuh runs:
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/manager/status?pretty"
+    # curl -u foo:bar "http://localhost:55000/manager/status?pretty"
     {
         "error": 0,
         "data": {
@@ -339,9 +338,9 @@ Some information about the manager can be retrieved using the API. Configuration
 
 You can even dump the manager's current configuration with the request bellow (response shortened for brevity):
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/manager/configuration?pretty"
+    # curl -u foo:bar "http://localhost:55000/manager/configuration?pretty"
     {
       "error": 0,
       "data": {
@@ -367,9 +366,9 @@ Here are some commands for working with the agents.
 
 This enumerates **active** agents:
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k "https://127.0.0.1:55000/agents?offset=1&limit=1&status=active&pretty"
+    # curl -u foo:bar "http://localhost:55000/agents?offset=1&limit=1&status=active&pretty"
     {
        "error": 0,
        "data": {
@@ -407,9 +406,9 @@ This enumerates **active** agents:
 
 Adding an agent is now easier than ever. Simply send a request with the agent name and its IP.
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
+    # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "http://localhost:55000/agents?pretty"
     {
         "error": 0,
         "data": {

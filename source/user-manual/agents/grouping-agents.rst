@@ -27,7 +27,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. code-block:: console
 
-      # curl -u foo:bar -k -X PUT "https://API_ADDRESS:55000/agents/002/group/dbms?pretty"
+      # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/group/dbms?pretty"
 
    .. note:: New groups may be created and configured before assigning agents. If a group does not exist prior to assigning an agent, it will be created when the first agent is added and set up with the files from the *'default'* group.
 
@@ -50,7 +50,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. code-block:: console
 
-      # curl -u foo:bar -k -X GET "https://API_ADDRESS:55000/agents/groups/dbms?pretty"
+      # curl -u foo:bar -X GET "http://localhost:55000/agents/groups/dbms?pretty"
 
 
 2. Once a group is created, its ``agents.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, the file to be edited is located at ``etc/shared/dbms/agents.conf`` and each agent belonging to this group will receive this file.
