@@ -38,8 +38,8 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: AWS Cloudtrail wodle
 
-  The AWS Cloudtrail module adds a native way for ingesting AWS CloudTrail logs.
-  Logs are fetched in JSON format from the bucket and they are sent to Wazuh socket.
+The AWS CloudTrail wodle allows you to gather and parse AWS CloudTrail logs from S3. See the :doc:`AWS CloudTrail <../../../amazon/index>` for more information on this functionality.
+
 
 .. topic:: Vulnerability detector wodle
 
@@ -53,12 +53,14 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 wazuh-modulesd options
 ----------------------
 
-+--------+---------------------------+
-| **-d** | Increase debug mode.      |
-+--------+---------------------------+
-| **-f** | Run in the foreground.    |
-+--------+---------------------------+
-| **-h** | Display the help message. |
-+--------+---------------------------+
-| **-t** | Test configuration.       |
-+--------+---------------------------+
++---------+---------------------------+
+| **-d**  | Basic debug mode.         |
++---------+---------------------------+
+| **-dd** | Verbose debug mode.       |
++---------+---------------------------+
+| **-f**  | Run in the foreground.    |
++---------+---------------------------+
+| **-h**  | Display the help message. |
++---------+---------------------------+
+| **-t**  | Test configuration.       |
++---------+---------------------------+
