@@ -19,7 +19,7 @@ Installation
 
  .. code-block:: console
 
-      curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.3.0_7.1.1.tar.gz
+      curl -o SplunkAppForWazuh.tar.gz https://packages.wazuh.com/3.x/splunkapp/v3.5.0_7.1.2.tar.gz
 
 2. Install the Splunk app for Wazuh:
 
@@ -27,7 +27,7 @@ Installation
 
   .. warning::
 
-    In case you have an Indexer cluster, first delete `indexes.conf` and `inputs.conf` files to avoid index creation in the current instance, then install the app on the Search Head and configure a 'wazuh' index following the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.1/Indexer/useforwarders>`_ .
+    In case you have an Indexer cluster, first delete `indexes.conf` and `inputs.conf` files to avoid index creation in the current instance, then install the app on the Search Head and configure a 'wazuh' index following the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.2/Indexer/useforwarders>`_ .
 
   a. CLI mode:
 
@@ -43,7 +43,7 @@ Installation
 
     .. code-block:: console
 
-      Apps -> Manage apps -> install app from file
+      Apps -> Manage apps -> Install app from file
 
 3. Open Splunk in your desired browser and click on the Wazuh app icon:
 
@@ -57,13 +57,11 @@ Installation
     :title: IP Configuration
     :width: 100%
 
-
-  You can check the connection by pressing 'Check connection' button below the API list. A successful message appears in the right bottom corner:
+You can check the connection by pressing 'Check connection' button on each API entry. A successful message appears in the right bottom corner:
 
   .. thumbnail:: ../../images/splunk-app/appconf-2.png
     :align: center
     :title: Checking API connection
     :width: 100%
-
 
 Now that you've finished installing Splunk app for Wazuh, you can setup forwarders following :ref:`the next page <splunk_forwarder>`.

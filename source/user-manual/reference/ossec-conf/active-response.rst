@@ -18,6 +18,10 @@ Options
 -------
 
 - `disabled`_
+
+Manager side
+^^^^^^^^^^^^
+
 - `command`_
 - `location`_
 - `agent_id`_
@@ -25,8 +29,13 @@ Options
 - `rules_group`_
 - `rules_id`_
 - `timeout`_
+
+Agent side
+^^^^^^^^^^
+
 - `repeated_offenders`_
 - `ca_store`_
+- `ca_verification`_
 
 disabled
 ^^^^^^^^
@@ -162,9 +171,20 @@ ca_store
 Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.
 
 +--------------------+-----------------------------+
-| **Default value**  | n/a                         |
+| **Default value**  | wpk_root.pem                |
 +--------------------+-----------------------------+
 | **Allowed values** | Path to root CA certificate |
++--------------------+-----------------------------+
+
+ca_verification
+^^^^^^^^^^^^^^^
+
+This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to ``no`` the agent will accept any WPK package coming from the manager.
+
++--------------------+-----------------------------+
+| **Default value**  | yes                         |
++--------------------+-----------------------------+
+| **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
 
 Sample Configuration
@@ -186,5 +206,8 @@ Sample Configuration
 
     <!-- On the agent side -->
     <active-response>
+      <disabled>no</disabled>
+      <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
+      <ca_verification>yes</ca_verification>
       <repeated_offenders>1,5,10</repeated_offenders>
     </active-response>

@@ -165,7 +165,7 @@ The JSON decoder will extract the fields contained in the JSON event as dynamic 
         number: '30'
         position: 'point guard'
 
-As we can see, the JSON decoder is not affected by any more data adter a valid JSON object.
+As we can see, the JSON decoder is not affected by any more data after a valid JSON object.
 
 In addition, we could define a rule for these raw events decoded:
 

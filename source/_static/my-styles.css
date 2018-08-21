@@ -218,3 +218,10 @@ div.version:after {
     font-size: 80%;
     pointer-events: none;
 }
+
+/* Tables tweak for Firefox ***************************************************/
+
+.wy-table-bordered-all td,
+.rst-content table.docutils td {
+    border-left: 1px solid #e1e4e5 !important;
+}

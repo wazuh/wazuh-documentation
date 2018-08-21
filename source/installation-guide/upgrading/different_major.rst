@@ -71,7 +71,7 @@ Upgrade Wazuh agent
 
   .. code-block:: console
 
-    # wazuh-agent-3.3.0-1.msi /q
+    # wazuh-agent-3.5.0-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
@@ -194,14 +194,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.2.4
+      # yum install elasticsearch-6.3.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch=6.2.4
+      # apt-get install elasticsearch=6.3.2
 
 
 2. Start Elasticsearch:
@@ -216,18 +216,20 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # curl localhost:9200/?pretty
+    # curl "localhost:9200/?pretty"
 
     {
-      "name" : "5urh-FJ",
+      "name" : "Zr2Shu_",
       "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "B5rXKBg2Tr-KWwFdbDHJQg",
+      "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.2.4",
-        "build_hash" : "7299dc3",
-        "build_date" : "2018-02-07T19:34:26.990113Z",
+        "number" : "6.3.2",
+        "build_flavor" : "default",
+        "build_type" : "rpm",
+        "build_hash" : "053779d",
+        "build_date" : "2018-07-20T05:20:23.451332Z",
         "build_snapshot" : false,
-        "lucene_version" : "7.2.1",
+        "lucene_version" : "7.3.1",
         "minimum_wire_compatibility_version" : "5.6.0",
         "minimum_index_compatibility_version" : "5.0.0"
       },
@@ -238,7 +240,7 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
 Upgrade Logstash
 ----------------
@@ -249,13 +251,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash-6.2.4
+      # yum install logstash-6.3.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash=1:6.2.4-1
+      # apt-get install logstash=1:6.3.2-1
 
 
 2. Download and set the Wazuh configuration for Logstash:
@@ -265,7 +267,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/logstash/01-wazuh-local.conf
       # usermod -a -G ossec logstash
 
   b) Remote configuration:
@@ -273,7 +275,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/logstash/01-wazuh-remote.conf
 
 
 3. Start Logstash:
@@ -294,20 +296,20 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-6.2.4
+      # yum install kibana-6.3.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=6.2.4
+      # apt-get install kibana=6.3.2
 
 
 2. Remove the Wazuh Kibana App plugin from Kibana:
 
     .. code-block:: console
 
-      # /usr/share/kibana/bin/kibana-plugin remove wazuh
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 
 3. Migrate .kibana from 5.x to 6.x:
@@ -319,18 +321,18 @@ Upgrade Kibana
 
 4. Upgrade the Wazuh Kibana App:
 
-  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. Set the limit as follow:
+  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app. Set the limit as follow:
 
   .. code-block:: console
 
       # export NODE_OPTIONS="--max-old-space-size=3072"
 
-  b) Install the Wazuh App:
+  b) Install the Wazuh app:
 
   .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.3.0_6.2.4.zip
+      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.5.0_6.3.2.zip
 
 
 5. Start Kibana:
@@ -350,19 +352,19 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.2.4
+      # yum install filebeat-6.3.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.2.4
+      # apt-get install filebeat=6.3.2
 
 2. Download the Filebeat configuration file from the Wazuh repository:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/filebeat/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/filebeat/filebeat.yml
 
 3. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of your Elastic Stack server:
 
@@ -393,7 +395,7 @@ Official upgrading guides for Elastic Stack:
 Disable the Elasticsearch repository
 ------------------------------------
 
-We recommend that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version. An untimely or unplanned upgrade may break the Wazuh App. To disable the repository, follow these steps:
+We recommend that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version. An untimely or unplanned upgrade may break the Wazuh app. To disable the repository, follow these steps:
 
   a) For CentOS/RHEL/Fedora:
 

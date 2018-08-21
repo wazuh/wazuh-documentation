@@ -60,8 +60,12 @@ Specifies the role of the node.
 +--------------------+------------------+
 | **Default value**  | master           |
 +--------------------+------------------+
-| **Allowed values** | master, client   |
+| **Allowed values** | master, worker   |
 +--------------------+------------------+
+
+.. warning::
+
+	Using ``client`` as ``node_type`` in configuration is still valid but a warning message will be shown in logs.
 
 key
 ^^^

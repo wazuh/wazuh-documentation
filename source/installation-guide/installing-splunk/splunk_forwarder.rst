@@ -14,23 +14,23 @@ This section explains how to configure the Splunk Forwarder to send alerts to th
 Set up data collection
 ----------------------
 
-Configuring inputs
-^^^^^^^^^^^^^^^^^^
+Configuring props
+^^^^^^^^^^^^^^^^^
 
 1. Download and insert the ``props.conf`` template:
 
   .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/splunk/props.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/splunk/props.conf
 
-Configuring props
-^^^^^^^^^^^^^^^^^
+Configuring inputs
+^^^^^^^^^^^^^^^^^^
 
 1. Download and insert the ``inputs.conf`` template:
 
    .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/splunk/inputs.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/splunk/inputs.conf
 
 2. Set the Wazuh manager hostname:
 
@@ -61,3 +61,9 @@ Set up data forwarding
     # /opt/splunkforwarder/bin/splunk restart
 
 After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
+
+3. Optional. If you additionally want the Splunk Forwarder service to start at boot time, please execute the following command:
+
+  .. code-block:: console
+
+    # /opt/splunkforwarder/bin/splunk enable boot-start

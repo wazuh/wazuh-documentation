@@ -14,11 +14,11 @@ Splunk Indexer installation
 
 This component works receiving the data flow streamed by a Forwarder and stores it in a Splunk index.
 
-1. Download Splunk v7.1.1 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
+1. Download Splunk v7.1.2 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
   .. note:: Splunk is not open source software and it requires a registered user and license to work. You can also use a free trial license.
 
-2. Install the Splunk v7.1.1 package:
+2. Install the Splunk v7.1.2 package:
 
   a) For RPM based distributions:
 
@@ -32,7 +32,7 @@ This component works receiving the data flow streamed by a Forwarder and stores 
 
     # dpkg --install splunk-enterprise-package.deb
 
-3. Ensure Splunk v7.1.1 is installed in ``/opt/splunk`` and start the service:
+3. Ensure Splunk v7.1.2 is installed in ``/opt/splunk`` and start the service:
 
   .. code-block:: console
 
@@ -40,9 +40,9 @@ This component works receiving the data flow streamed by a Forwarder and stores 
 
   .. note:: You will be prompted for a password for the 'admin' user.
 
-  After this step the Splunk Web service will be listening to port 8000. You can browse http://<your-instance-ip>:8000 in order to access the Web GUI.
+  After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
-4. Optional. If you additionally want Splunk service to start at boot time, please execute the following command:
+4. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
 
   .. code-block:: console
 
@@ -53,7 +53,7 @@ Splunk Forwarder installation
 
 A Forwarder is required in order to send alerts to the Indexer. This component will be installed in the manager instance.
 
-1. Download Splunk Forwarder v7.1.1 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
+1. Download Splunk Forwarder v7.1.2 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
 
 2. Install it with the following command depending on your operating system:
 
@@ -69,8 +69,8 @@ A Forwarder is required in order to send alerts to the Indexer. This component w
 
     # dpkg --install splunkforwarder-package.deb
 
-3. Ensure Splunk Forwarder v7.1.1 is installed in ``/opt/splunkforwarder``.
+3. Ensure Splunk Forwarder v7.1.2 is installed in ``/opt/splunkforwarder``.
 
-Useful Splunk CLI commands can be found in the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.1/Admin/CLIadmincommands>`_ .
+Useful Splunk CLI commands can be found in the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.1.2/Admin/CLIadmincommands>`_ .
 
 Now that you've finished installing Splunk, you can proceed with the :ref:`Splunk app for Wazuh <splunk_wazuh>` installation.
