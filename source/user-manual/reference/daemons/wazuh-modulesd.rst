@@ -38,8 +38,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: AWS Cloudtrail wodle
 
-The AWS CloudTrail wodle allows you to gather and parse AWS CloudTrail logs from S3. See the :doc:`AWS CloudTrail <../../../amazon/index>` for more information on this functionality.
-
+  The AWS CloudTrail wodle allows you to gather and parse AWS CloudTrail logs from S3. See the :doc:`AWS CloudTrail <../../../amazon/index>` for more information on this functionality.
 
 .. topic:: Vulnerability detector wodle
 
