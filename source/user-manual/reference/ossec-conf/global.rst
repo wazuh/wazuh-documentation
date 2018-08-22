@@ -361,7 +361,7 @@ This sets the size limit of alert files with a maximum allowed value of 1TiB.
 | **Default value**       | 0 (disabled)                                                                                                                             |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number that should contain a suffix character indicating a size unit, such as, B (bytes), K (kibibyte), M (mebibyte),         |
-|                         | G (gibibyte).                                                                                                              |
+|                         | G (gibibyte).                                                                                                                            |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example
