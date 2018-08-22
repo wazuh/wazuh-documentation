@@ -90,7 +90,7 @@ Options
 server-ip
 ^^^^^^^^^
 
-.. deprecated:: 3.0
+.. deprecated:: 3.0.0
 
 Specifies the IP address of the Wazuh manager.
 
@@ -106,7 +106,7 @@ Specifies the IP address of the Wazuh manager.
 server-hostname
 ^^^^^^^^^^^^^^^
 
-.. deprecated:: 3.0
+.. deprecated:: 3.0.0
 
 Specifies the hostname of the Wazuh manager.
 
@@ -124,7 +124,7 @@ Specifies the hostname of the Wazuh manager.
 port
 ^^^^
 
-.. deprecated:: 3.0
+.. deprecated:: 3.0.0
 
 Specifies the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
 
@@ -139,7 +139,7 @@ Specifies the port on the manager to send events to.  This must match the associ
 protocol
 ^^^^^^^^
 
-.. deprecated:: 3.0
+.. deprecated:: 3.0.0
 
 Specifies the protocol to use when connecting to manager.
 

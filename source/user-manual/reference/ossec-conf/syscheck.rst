@@ -311,7 +311,7 @@ Attributes:
 +----------+------------------+--------------------------------------+
 | **tags** | Add tags to alerts for monitored registry entries.      |
 +          +                                                         +
-|          | .. versionadded:: 3.6                                   |
+|          | .. versionadded:: 3.6.0                                 |
 +          +------------------+--------------------------------------+
 |          | Allowed values   | Tags list separated by commas        |
 +----------+------------------+--------------------------------------+
