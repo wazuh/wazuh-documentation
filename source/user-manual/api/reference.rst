@@ -51,6 +51,7 @@ Request List
 	* POST /agents/insert  (`Insert agent`_)
 	* POST /agents/restart  (`Restart a list of agents`_)
 	* PUT /agents/:agent_id/group/:group_id  (`Set agent group`_)
+	* PUT /agents/:agent_id/add_group/:group_id  (`Add agent group`_)
 	* PUT /agents/:agent_id/restart  (`Restart an agent`_)
 	* PUT /agents/:agent_id/upgrade  (`Upgrade agent using online repository`_)
 	* PUT /agents/:agent_id/upgrade_custom  (`Upgrade agent using custom file`_)
@@ -988,7 +989,40 @@ Sets an agent to the specified group.
 	   "error": 0,
 	   "data": "Group 'webserver' set to agent '004'."
 	}
-	
+
+Add agent group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Add an agent to the specified group.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/:agent_id/add_group/:group_id
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -X PUT "http://localhost:55000/agents/004/add_group/webserver?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Group 'webserver' added to agent '002'."
+	}	
+
 
 Unset the agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
