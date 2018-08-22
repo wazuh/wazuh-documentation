@@ -347,12 +347,12 @@ Linux configuration:
       <frequency>360</frequency>
     </localfile>
 
-	<!-- To use a custom target or format -->
+    <!-- To use a custom target or format -->
     <localfile>
       <log_format>syslog</log_format>
       <location>/var/log/auth.log</location>
-	  <target>agent,custom_socket</target>
-	  <out_format target="custom_socket">$(timestamp %Y-%m-%d %H:%M:%S): $(log)</out_format>
+      <target>agent,custom_socket</target>
+      <out_format target="custom_socket">$(timestamp %Y-%m-%d %H:%M:%S): $(log)</out_format>
     </localfile>
 
 Windows configuration:
