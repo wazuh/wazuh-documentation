@@ -223,6 +223,7 @@ Example of configuration
       <timeout>0</timeout>
       <verify_md5>5aada3704685dad6fd27beb58e6687de</verify_md5>
       <verify_sha1>da39a3ee5e6b4b0d3255bfef95601890afd80709</verify_sha1>
+      <verify_sha256>292a188e498caea5c5fbfb0beca413c980e7a5edf40d47cf70e1dbc33e4f395e</verify_sha256>
     </wodle>
 
 .. note:: See the :doc:`Vuls integration section<../../capabilities/vuls>` for a use case of this command.
