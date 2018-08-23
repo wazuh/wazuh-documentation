@@ -45,6 +45,8 @@ The configuration file reference is organized by sections:
     - `wazuh.replicas`_
     - `wazuh-version.shards`_
     - `wazuh-version.replicas`_
+    - `wazuh.monitoring.shards`_
+    - `wazuh.monitoring.replicas`_
 
 Basic options
 -------------
@@ -303,6 +305,28 @@ wazuh-version.replicas
 ^^^^^^^^^^^^^^^^^^^^^^
 
 Define the number of replicas to use for the ``wazuh-version`` index.
+
++--------------------+----------------------------+
+| **Default value**  | 1                          |
++--------------------+----------------------------+
+| **Allowed values** | Any number starting from 0 |
++--------------------+----------------------------+
+
+wazuh.monitoring.shards
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the number of shards to use for the ``wazuh-monitoring-3.x-*`` indices.
+
++--------------------+----------------------------+
+| **Default value**  | 5                          |
++--------------------+----------------------------+
+| **Allowed values** | Any number starting from 0 |
++--------------------+----------------------------+
+
+wazuh.monitoring.replicas
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Define the number of replicas to use for the ``wazuh-monitoring-3.x-*`` indices.
 
 +--------------------+----------------------------+
 | **Default value**  | 1                          |
