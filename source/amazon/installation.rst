@@ -259,10 +259,6 @@ Boto3 is the official package supported by Amazon to manage AWS resources. It wi
 Plugin configuration
 --------------------
 
-.. note::
-    The old configuration is compatible with the new one, but a warning message will be shown in logs if it's used.
-
-
 1. Open Wazuh configuration file:
 
 .. code-block:: console

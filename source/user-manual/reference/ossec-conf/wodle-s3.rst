@@ -3,7 +3,7 @@
 .. _wodle_s3:
 
 wodle name="aws-s3"
-===========================
+===================
 
 .. versionadded:: 3.2.0
 
@@ -153,8 +153,8 @@ bucket type
 
 Defines a bucket to process. Must have its attribute ``type`` defined. (Supports multiple instances of this option).
 
-Options
--------
+Bucket options
+~~~~~~~~~~~~~~
 
 - `bucket\\name`_
 - `bucket\\aws_account_id`_
