@@ -2,8 +2,8 @@
 
 .. _amazon:
 
-AWS S3
-======
+Using Wazuh to Monitor AWS Environments
+=======================================
 
 .. versionadded:: 3.2.0
 

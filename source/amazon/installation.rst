@@ -5,22 +5,26 @@
 Installation
 ============
 
-Prior to enabling the Wazuh rules for Amazon Web Services, follow the steps below to configure AWS to generate log messages, and store them as JSON data files in an Amazon S3 bucket. A detailed description of each of the steps can be found below.
+Prior to enabling the Wazuh rules for Amazon Web Services, follow the steps below to configure AWS to generate log messages, and store them as JSON data files in an Amazon S3 bucket. A detailed description of each of the steps can be found bellow.
 
 .. note::
 
-        The integration with AWS Cloudtrail can be done at the Wazuh manager (which also behaves as an agent) or directly at a Wazuh agent. This choice merely depends on how you decide to access your AWS infrastructure in your environment.
+        The integration with AWS S3 can be done at the Wazuh manager (which also behaves as an agent) or directly at a Wazuh agent. This choice merely depends on how you decide to access your AWS infrastructure in your environment.
 
 Requirements
 -------------
-- AWS CloudTrail
-- Wazuh >= 3.2
+- AWS
+- Wazuh >= 3.6
 - Python >= 2.7
 - Pip
 - Boto3
 
-Subscribe to CloudTrail
------------------------
+Storing AWS logs on S3
+----------------------
+Depending on the AWS service to be monitored, the necessary steps to follow are different.
+
+CloudTrail
+^^^^^^^^^^
 
 1. From your AWS console, choose “CloudTrail” from the Deployment & Management section:
 
@@ -40,79 +44,9 @@ Subscribe to CloudTrail
     :align: center
     :width: 100%
 
-Create an IAM User
-------------------
 
-Wazuh will need a user with permissions to pull the CloudTrail log data from your S3 bucket. The easiest way to accomplish this is by creating a new IAM user for your account. We will only allow it to read data from the S3 bucket.
-
-1. Create new user:
-
-Navigate to Services > IAM > Users
-
-.. thumbnail:: ../images/aws/aws-user.png
-    :align: center
-    :width: 100%
-
-Click on "Next: Permissions" to continue.
-
-2. Create policy:
-
-We will attach this policy later to the user we are creating.
-
-.. thumbnail:: ../images/aws/aws-create-policy.png
-    :align: center
-    :width: 100%
-
-Check that your new policy looks like this:
-
-.. thumbnail:: ../images/aws/aws-summary-policy.png
-    :align: center
-    :width: 100%
-
-Raw output for the example policy:
-
-.. code-block:: json
-
-   {
-       "Version": "2012-10-17",
-       "Statement": [
-           {
-               "Sid": "VisualEditor0",
-               "Effect": "Allow",
-               "Action": [
-                   "s3:GetObject",
-                   "s3:ListBucket",
-                   "s3:DeleteObject"
-               ],
-               "Resource": [
-                   "arn:aws:s3:::wazuh-cloudtrail",
-                   "arn:aws:s3:::wazuh-cloudtrail/*"
-               ]
-           }
-       ]
-   }
-
-.. note::
-
-        The s3:DeleteObject action is only required if the CloudTrail logs will be removed from the S3 bucket by the wodle.
-
-
-3. Attach policy:
-
-.. thumbnail:: ../images/aws/aws-attach-policy.png
-    :align: center
-    :width: 100%
-
-4. Confirm user creation and get credentials:
-
-.. thumbnail:: ../images/aws/aws-summary-user.png
-    :align: center
-    :width: 100%
-
-Save the credentials, you will use them later to configure the module.
-
-Configuring a Firehose bucket
------------------------------
+Other AWS Services
+^^^^^^^^^^^^^^^^^^
 
 This section explains how to get logs from other AWS Services such as Guard Duty, Macie, IAM, Inspector or VPC.
 
@@ -139,7 +73,6 @@ This section explains how to get logs from other AWS Services such as Guard Duty
 .. thumbnail:: ../images/aws/aws-create-firehose-4.png
     :align: center
     :width: 100%
-
 
 4.1. If it's the first time you're using this service, you'll see the following screen. Just click on *Get started*:
 
@@ -215,6 +148,79 @@ This section explains how to get logs from other AWS Services such as Guard Duty
 
 16. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
 
+
+Create an IAM User
+------------------
+
+Wazuh will need a user with permissions to pull the CloudTrail log data from your S3 bucket. The easiest way to accomplish this is by creating a new IAM user for your account. We will only allow it to read data from the S3 bucket.
+
+1. Create new user:
+
+Navigate to Services > IAM > Users
+
+.. thumbnail:: ../images/aws/aws-user.png
+    :align: center
+    :width: 100%
+
+Click on "Next: Permissions" to continue.
+
+2. Create policy:
+
+We will attach this policy later to the user we are creating.
+
+.. thumbnail:: ../images/aws/aws-create-policy.png
+    :align: center
+    :width: 100%
+
+Check that your new policy looks like this:
+
+.. thumbnail:: ../images/aws/aws-summary-policy.png
+    :align: center
+    :width: 100%
+
+Raw output for the example policy:
+
+.. code-block:: json
+
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "VisualEditor0",
+               "Effect": "Allow",
+               "Action": [
+                   "s3:GetObject",
+                   "s3:ListBucket",
+                   "s3:DeleteObject"
+               ],
+               "Resource": [
+                   "arn:aws:s3:::wazuh-cloudtrail",
+                   "arn:aws:s3:::wazuh-cloudtrail/*"
+               ]
+           }
+       ]
+   }
+
+.. note::
+
+        The s3:DeleteObject action is only required if the CloudTrail logs will be removed from the S3 bucket by the wodle.
+
+
+3. Attach policy:
+
+.. thumbnail:: ../images/aws/aws-attach-policy.png
+    :align: center
+    :width: 100%
+
+4. Confirm user creation and get credentials:
+
+.. thumbnail:: ../images/aws/aws-summary-user.png
+    :align: center
+    :width: 100%
+
+Save the credentials, you will use them later to configure the module.
+
+
 Installing dependencies
 -----------------------
 
@@ -275,7 +281,7 @@ Plugin configuration
       <run_on_start>no</run_on_start>
       <skip_on_error>no</skip_on_error>
       <bucket type="cloudtrail">
-        <bucket>wazuh-cloudtrail</bucket>
+        <name>wazuh-cloudtrail</name>
         <access_key>insert_access_key</access_key>
         <secret_key>insert_secret_key</secret_key>
       </bucket>
