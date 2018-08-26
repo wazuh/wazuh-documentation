@@ -327,7 +327,7 @@ Plugin configuration
       </bucket>
     </wodle>
 
-To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` options within the ``aws-s3`` wodle. Bucket tags must have a ``type`` attribute which value can be ``cloudtrail`` to monitor CloudTrail logs or ``custom`` to monitor any other type of logs, for example, Firehouse ones.
+To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` options within the ``aws-s3`` wodle. Bucket tags must have a ``type`` attribute which value can be ``cloudtrail`` to monitor CloudTrail logs or ``custom`` to monitor any other type of logs, for example, Firehose ones.
 
 *Check the user manual reference to read more details about each setting:* :doc:`AWS S3 settings <../user-manual/reference/ossec-conf/wodle-s3>`
 

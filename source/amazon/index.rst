@@ -2,8 +2,8 @@
 
 .. _amazon:
 
-Using Wazuh to Monitor AWS Environments
-=======================================
+Using Wazuh to Monitor AWS
+==========================
 
 .. versionadded:: 3.2.0
 
