@@ -32,17 +32,7 @@ Follow these steps to enable X-Pack:
     # Set this option in /etc/elasticsearch/elasticsearch.yml
     xpack.security.enabled: true
 
-3. Create the passwords for the built-in users. The *interactive* mode prompts the user to enter new passwords for the ``elastic``, ``kibana``, ``logstash_system``, and ``beats_system`` users:
-
-  .. code-block:: console
-
-    # /usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive
-
-.. note::
-
-    Find more information about built-in users in `this Elastic documentation article <https://www.elastic.co/guide/en/elastic-stack-overview/6.3/built-in-users.html>`_.
-
-4. Restart Elasticsearch:
+3. Restart Elasticsearch:
 
   .. code-block:: console
 
@@ -71,6 +61,16 @@ Follow these steps to enable X-Pack:
       },
       "tagline" : "You Know, for Search"
     }
+
+4. Create the passwords for the built-in users. The *interactive* mode prompts the user to enter new passwords for the ``elastic``, ``kibana``, ``logstash_system``, and ``beats_system`` users:
+
+  .. code-block:: console
+
+    # /usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive
+
+.. note::
+
+    Find more information about built-in users in `this Elastic documentation article <https://www.elastic.co/guide/en/elastic-stack-overview/6.3/built-in-users.html>`_.
 
 5. The Logstash configuration file also needs some modifications in order to properly connect with Elasticsearch and send the alerts. Open the file at ``/etc/logstash/conf.d/01-wazuh.conf`` and add the ``elastic`` user credentials on the ``output`` section as follows:
 
