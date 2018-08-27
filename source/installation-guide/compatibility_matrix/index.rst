@@ -157,6 +157,10 @@ The compatibility between agent and manager is guaranteed when the agent has an 
 |       2.1.0       |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |   ✓   |
 +-------------------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+
 
+.. note::
+
+    The Wazuh manager is also compatible with **OSSEC agents**, but keep in mind that not all the capabilities will be available for them.
+
 Manager and API
 ^^^^^^^^^^^^^^^
 
