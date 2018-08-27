@@ -33,9 +33,7 @@ location
 
 This indicates the location of a log or wild-carded group of logs to be read. ``strftime`` format strings may be used for log file names.
 
-For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017).
-
-Wildcards may be used on non-Windows systems, however, the log file must exist at the time ``ossec-logcollector`` is started as it will not automatically begin monitoring new log files.
+For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017). Another type of wildcard cannot be used on Windows systems.
 
 Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
 
