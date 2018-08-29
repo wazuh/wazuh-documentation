@@ -108,7 +108,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -131,7 +131,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/logstash/01-wazuh-local.conf
 
     Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
 
@@ -143,7 +143,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/logstash/01-wazuh-remote.conf
 
 
 .. note::
@@ -200,7 +200,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.5.0_6.4.0.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.6.0_6.4.0.zip
 
   .. warning::
 
