@@ -10,13 +10,13 @@ This section shows the most relevant improvements and fixes in version 3.6.0. Mo
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.6.0/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.6.0/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.6.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.6.0-6.3.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.6.0-6.4.0/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.6.0-7.1.2/CHANGELOG.md>`_
 
 Wazuh core
 ----------
 
-This section shows the main features introduced in this new version for the Wazuh core. 
+This section shows the main features introduced in this new version for the Wazuh core.
 Some of this new improvements are related with Logcollector and Rootcheck, in adittion, some bugs have been fixed.
 
 Rootcheck now runs independently from Syscheck (FIM) and it is parallelized; moreover, Logcollector has been enhanced with multithreaded input, which allows having a parallelized read of logs, a new wildcards support and improvement of its detection by enabling a periodically rescanning of files.
