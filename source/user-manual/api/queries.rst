@@ -9,14 +9,13 @@ Filtering data using queries
 
 Advance filtering is possible using the Wazuh API's queries. A query has the following structure:
 
-.. code-block::
-
-    field_name operator value separator field_name operator value separator field_name operator value ...
-
 * **Field name**: Field name to filter by. If an incorrect field name is used, an error will be raised.
 * **Operator**: Operator to filter by. Available operators are ``=``, ``!=``, ``<`` and ``>``.
 * **Value**: Value to filter filter by.
-* **Separator**: Operator to join multiple "queries", it can be both ``,`` which represents an ``OR`` or an ``;`` which represents an ``AND``.
+* **Separator**: Operator to join multiple "queries":
+
+    * ``,``: represents an ``OR``.
+    * ``;``: represents an ``AND``.
 
 Examples
 --------
