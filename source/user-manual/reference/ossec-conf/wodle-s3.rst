@@ -329,7 +329,7 @@ Example of configuration
       <run_on_start>no</run_on_start>
       <error_not_skip>no<error_not_skip>
       <bucket type="cloudtrail">
-          <bucket>s3-dev-bucket</bucket>
+          <name>s3-dev-bucket</name>
           <access_key>insert_access_key</access_key>
           <secret_key>insert_secret_key</secret_key>
           <only_logs_after>2018-JUN-01</only_logs_after>
@@ -339,7 +339,7 @@ Example of configuration
           <aws_account_alias>dev1-account</aws_account_alias>
       </bucket>
       <bucket type="cloudtrail">
-          <bucket>s3-dev-bucket</bucket>
+          <name>s3-dev-bucket</name>
           <access_key>insert_access_key</access_key>
           <secret_key>insert_secret_key</secret_key>
           <only_logs_after>2018-JUN-01</only_logs_after>
@@ -349,16 +349,15 @@ Example of configuration
           <aws_account_alias>dev2-account</aws_account_alias>
       </bucket>
       <bucket type="custom">
-          <bucket>s3-stage-bucket</bucket>
+          <name>s3-stage-bucket</name>
           <aws_profile>stage-creds</aws_profile>
           <aws_account_id>111222333444</aws_account_id>
           <aws_account_alias>stage-account</aws_account_alias>
       </bucket>
       <bucket type="custom">
-          <bucket>s3-prod-bucket</bucket>
+          <name>s3-prod-bucket</name>
           <iam_role_arn>arn:aws:iam::010203040506:role/ROLE_SVC_Log-Parser</iam_role_arn>
           <aws_account_id>11112222333</aws_account_id>
           <aws_account_alias>prod-account</aws_account_alias>
       </bucket>
   </wodle>
-
