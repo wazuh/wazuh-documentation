@@ -5,7 +5,7 @@
 Splunk app for Wazuh
 ====================
 
-.. thumbnail:: ../../images/splunk-app/general.png
+.. thumbnail:: ../images/splunk-app/general.png
   :title: Splunk app overview general tab
   :align: center
   :width: 85%
@@ -47,19 +47,19 @@ Installation
 
 3. Open Splunk in your desired browser and click on the Wazuh app icon:
 
-  .. image:: ../../images/splunk-app/appconf-0.png
+  .. image:: ../images/splunk-app/appconf-0.png
     :align: center
 
 4. Fill in the Username and Password fields with your credentials; you can get more information about how to do this at :ref:`securing_api`. Enter ``http(s)://MANAGER_IP`` for the URL where ``MANAGER_IP`` is the Wazuh manager IP address and use "55000" for the Port:
 
-  .. thumbnail:: ../../images/splunk-app/appconf-1.png
+  .. thumbnail:: ../images/splunk-app/appconf-1.png
     :align: center
     :title: IP Configuration
     :width: 100%
 
 You can check the connection by pressing 'Check connection' button on each API entry. A successful message appears in the right bottom corner:
 
-  .. thumbnail:: ../../images/splunk-app/appconf-2.png
+  .. thumbnail:: ../images/splunk-app/appconf-2.png
     :align: center
     :title: Checking API connection
     :width: 100%
