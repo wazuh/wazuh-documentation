@@ -17,6 +17,7 @@ The following sections describe some use cases for IAM, EC2, and VPC services. T
     .. toctree::
        :maxdepth: 2
 
+       s3
        iam
        ec2
        vpc
