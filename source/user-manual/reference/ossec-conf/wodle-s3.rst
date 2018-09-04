@@ -327,13 +327,13 @@ Example of configuration
       <remove_from_bucket>no</remove_from_bucket>
       <interval>10m</interval>
       <run_on_start>no</run_on_start>
-      <error_not_skip>no<error_not_skip>
+      <skip_on_error>no</skip_on_error>
       <bucket type="cloudtrail">
           <name>s3-dev-bucket</name>
           <access_key>insert_access_key</access_key>
           <secret_key>insert_secret_key</secret_key>
           <only_logs_after>2018-JUN-01</only_logs_after>
-          <region>us-east-1,us-west-1,eu-central-1</region>
+          <regions>us-east-1,us-west-1,eu-central-1</regions>
           <path>/dev1/</path>
           <aws_account_id>123456789012</aws_account_id>
           <aws_account_alias>dev1-account</aws_account_alias>
@@ -343,7 +343,7 @@ Example of configuration
           <access_key>insert_access_key</access_key>
           <secret_key>insert_secret_key</secret_key>
           <only_logs_after>2018-JUN-01</only_logs_after>
-          <region>us-east-1,us-west-1,eu-central-1</region>
+          <regions>us-east-1,us-west-1,eu-central-1</regions>
           <path>/dev2/</path>
           <aws_account_id>112233445566</aws_account_id>
           <aws_account_alias>dev2-account</aws_account_alias>
