@@ -38,7 +38,7 @@ Two new features have been added to **file integrity monitoring**:
 Wazuh modules
 ^^^^^^^^^^^^^
 
-- Introducing a re-work of the AWS S3 integration, now supporting CloudTrail, GuardDuty, Macie, Inspector, IAM, and VPC Flow log data.
+- Introducing a re-work of the AWS S3 integration, now supporting CloudTrail, GuardDuty, Macie, IAM, and VPC Flow log data.
 - The download of OVAL files for Vulnerability Detector has been fixed since Red Hat has changed its protocol to send this files.
 - Custom command execution (wodle command) supports MD5/SHA1/SHA256 validation of the target binary for execution authorization.
 
