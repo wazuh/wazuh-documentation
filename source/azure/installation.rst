@@ -95,5 +95,3 @@ azure-storage-blob
     # pip install azure-storage-blob
 
 
-Plugin configuration
---------------------
