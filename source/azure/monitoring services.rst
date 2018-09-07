@@ -179,7 +179,7 @@ From the ``Azure Active Directory`` entry we select the ``Audit logs`` entry and
 Kibana visualization
 ^^^^^^^^^^^^^^^^^^^^
 
-When our integration performs the query, we will be able to see the results in Kibana. As we can see through the rule ``200002`` the dates of the events coincide (taking into account the time difference between teams)
+When our integration performs the query, we will be able to see the results in Kibana. As we can see through the rule ``200002`` the dates of the events coincide (taking into consideration the time difference between computers)
 
 .. thumbnail:: ../images/azure/kibana_services1.png
     :title: AAD
