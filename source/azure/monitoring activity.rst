@@ -19,6 +19,8 @@ The `Activity Log <https://docs.microsoft.com/en-us/azure/monitoring-and-diagnos
 
 - **Recomendation Data:** Includes Azure Advisor recommendation events.
 
+To monitor the activities of our infrastructure we can use the **Azure Log Analytics REST API** or we can directly access the content of **Azure Storage** accounts. We proceed to explain the two ways to proceed, looking at the steps to follow in the Microsoft Azure portal and using the Wodle `azure-logs` in our Wazuh manager. 
+
 
 Using Azure Log Analytics
 -------------------------
@@ -38,12 +40,15 @@ We can consult all the data collected by Log Analytics through the **Azure Log A
 In order to use Azure Log Analytics, we need to perform additional configuration on the Microsoft Azure portal. The goal is to have an application or client qualified to use the Azure Log Analytics REST API. 
 
 
-Register the Application
-^^^^^^^^^^^^^^^^^^^^^^^^
+1 Register the application
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
 
-        The process explained below details the creation of the application that will use the of Azure Log Analytics REST API. You can also configure an existing application, the process is similar from the creation of the application. 
+        The process explained below details the creation of the application that will use the of Azure Log Analytics REST API. You can also configure an existing application, the process is similar from the creation of the application, in this case, start directly at step 1.2. 
+
+1.1 Creation of the application 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the ``Azure Active Directory`` section select the option ``App registrations`` and once inside, select ``New application registration``.
 
@@ -58,6 +63,9 @@ Proceed to create our application
     :title: Log Analytics App
     :align: center
     :width: 40%
+
+1.2 Giving permission to the application
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Whether we have created a new application or are using one we already have, we need to access the application ``settings`` and select ``Required permissions``. Note that we can also see the ``application ID``, a necessary field to authenticate the application later. 
 
@@ -80,7 +88,10 @@ Select the permissions. Choose the permissions you want to provide to the applic
     :align: center
     :width: 100%
 
-Then select ``Keys`` and fill in the ``DESCRIPTION`` and ``EXPIRES`` fields. Once we ``save`` the key we will get its ``value``. This will be the key with which we will authenticate our application in order to use the API.
+1.3 Obtaining the application key for authentication 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Select ``Keys`` and fill in the ``DESCRIPTION`` and ``EXPIRES`` fields. Once we ``save`` the key we will get its ``value``. This will be the key with which we will authenticate our application in order to use the API.
 
 .. thumbnail:: ../images/azure/la_create_key.png
     :title: Log Analytics App
@@ -91,6 +102,9 @@ Then select ``Keys`` and fill in the ``DESCRIPTION`` and ``EXPIRES`` fields. Onc
     :title: Log Analytics App
     :align: center
     :width: 100%
+
+1.4 Giving access to our application to the Log Analytics API
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Finally, we must configure Log Analytics to ensure our access once we have authenticated ourselves in our application. First select the ``Log Analytics`` entry. Next we will choose the workspace. Here we can see the ``Workspace Id`` field, which we will use to make requests to the API. 
 
@@ -107,10 +121,22 @@ Now we will select the ``Access control (IAM)`` input and choose the ``add`` opt
     :width: 100%
 
 
-Wazuh Configuration
-^^^^^^^^^^^^^^^^^^^
+2 Wazuh configuration
+^^^^^^^^^^^^^^^^^^^^^
 
-Next we will see the options we have to configure our integration. We will use the data that we have taken previously as the **key and the id of the application**. In this case, we have introduced both fields in a **file** for authentication. You will also need the **workspace id**.  Through the following configuration, Wazuh is ready to search for any `query <https://docs.loganalytics.io/docs/Language-Reference>`_ accepted by Azure Log Analytics. In this case we are going to monitor all the activity by means of the query **AzureActivity**. Finally we will indicate that request will be made every Monday at 02:00 and the first search will be made two days ago and that does not run on start:
+Next we will see the options we have to configure our integration. 
+
+2.1 azure-logs configuration 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We proceed to configure the `azure-logs` wodle in the Wazuh manager. We will use the data that we have taken previously as the **key and the id of the application**. In this case, we have introduced both fields in a **file** for authentication. You will also need the **workspace id**.  Through the following configuration, Wazuh is ready to search for any `query <https://docs.loganalytics.io/docs/Language-Reference>`_ accepted by Azure Log Analytics. In this case we are going to monitor all the activity by means of the query **AzureActivity**. Finally we will indicate that request will be made every Monday at 02:00 and the first search will be made two days ago and that does not run on start:
+
+.. note::
+
+        When we choose to use a file for authentication, its content must be ``field = value``. For example:
+            application_id = 317...764 
+                   
+            application_key = wUj...9cj
 
 .. code-block:: xml
 
@@ -145,6 +171,11 @@ The field tenant is necessary and we can obtain it easily. In the azure portal, 
 
 Adding this section to the configuration file of our Wazuh manager, we will start with the monitoring of activities using Azure Log Analytics. 
 
+Azure Log Analytics Use Case
+----------------------------
+
+Using the previously mentioned configuration, we will see an example of monitoring the activity of our infrastructure. 
+
 Wazuh Rules
 ^^^^^^^^^^^
 
@@ -170,6 +201,8 @@ As the records are in ``.json`` format, with this rules we can start generating 
         <description>Azure: Log analytics: $(OperationName)</description>
     </rule>
 
+Creating a virtual machine
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We will see as an example, the creation of a new virtual machine. We are going to deploy an Ubuntu 18.04 server.
 
@@ -185,14 +218,20 @@ In this example we have prepared a minimum configuration when creating the virtu
     :align: center
     :width: 100%
 
-We select the `Log Analytics` entry, write our query `AzureActivity`and `run` the search. We can see for example this log, where we can see that **a virtual machine has been created or updated**. If we look at the `Resource` column we can see what we just deployed. 
+Azure portal visualization
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We select the ``Log Analytics`` entry, write our query ``AzureActivity`` and ``run`` the search. We can see for example this log, where we can see that **a virtual machine has been created or updated**. If we look at the `Resource` column we can see what we just deployed. 
 
 .. thumbnail:: ../images/azure/vm_created_portal.png
     :title: Log Analytics App
     :align: center
     :width: 100%
 
-When our integration performs the query, we will be able to see the results in Kibana. In this case we can notice that the `20011` rule has been triggered and see that the fields `OperationName` and `EventSubmissionTimestamp` coincide among others. 
+Kibana visualization
+^^^^^^^^^^^^^^^^^^^^
+
+When our integration performs the query, we will be able to see the results in Kibana. In this case we can notice that the ``200011`` rule has been triggered and see that the fields ``OperationName`` and ``EventSubmissionTimestamp`` coincide among others. 
 
 .. thumbnail:: ../images/azure/vm_kibana_search.png
     :title: Log Analytics App
@@ -205,6 +244,181 @@ When our integration performs the query, we will be able to see the results in K
     :width: 100%
 
 
-
 Using Azure Storage
 -------------------
+
+`Azure Storage <https://docs.microsoft.com/en-us/azure/storage/common/storage-introduction>`_ refers to Microsoft Azure cloud storage by providing a massively scalable object store for data objects, a messaging store for reliable messaging, a file system service for the cloud, and a NoSQL store.
+
+.. thumbnail:: ../images/azure/storage_activity_log.png
+    :title: Storage
+    :align: center
+    :width: 50%
+
+Next we will show how to use the Azure portal to archive the Azure activity log in a storage account, how to configure the ``azure-logs`` wodle and show a usage case for a better understanding. 
+
+1 Export Activity Logs
+^^^^^^^^^^^^^^^^^^^^^^
+
+As an alternative to the Azure Log Analytics REST API, Wazuh offers the possibility to access Azure Storage accounts in a simple way. The activity logs of the Microsoft Azure infrastructure can be exported to the storage accounts.
+
+1.1 Access to Activity log
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We will search the ``Activity logs`` entry from the ``All services`` entry. Just type "Activity" in the search engine. 
+
+.. thumbnail:: ../images/azure/storage_activity.png
+    :title: Storage
+    :align: center
+    :width: 50%
+
+1.2 Configuring the Activity log export
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Once we access the log of activities, we select the option to export. 
+
+.. thumbnail:: ../images/azure/storage_activity2.png
+    :title: Storage
+    :align: center
+    :width: 50%
+
+Select the option to export to a storage account, establish the subscription we want to monitor and choose the account where the activity logs will be stored. 
+
+.. thumbnail:: ../images/azure/storage_activity3.png
+    :title: Storage
+    :align: center
+    :width: 50%
+
+2 Wazuh configuration
+^^^^^^^^^^^^^^^^^^^^^
+
+We will be able to see the credentials needed to access the desired storage account in the ``Storage accounts`` section. We will select our account and then we will choose the `Access keys` entry, where we will use the ``key1``. 
+
+.. note::
+
+        When we choose to use a file for authentication, its content must be `field = value`. For example:
+            account_name = wazuhgroupdiag665
+
+            account_key = wr+...jOQ
+
+.. thumbnail:: ../images/azure/account_credentials.png
+    :title: Storage
+    :align: center
+    :width: 50%
+
+In this case, the integration will be executed with an ``interval`` of one day, the credentials will be taken from a file and we will proceed to search in the container ``insights-operational-logs``, all the blobs that have the extension ``.json`` in the last ``24 hours``. We also indicate the type of content that have the blobs that we are going to recover, in this case ``json_file``: 
+
+.. note::
+        
+        From November 1, 2018 the format of logs stored in Azure accounts will become json inline (json_inline in Wazuh) and the previous format will be obsolete (json_file in Wazuh). 
+
+.. code-block:: xml
+
+    <wodle name="azure-logs">
+
+        <interval>1d</interval>
+        <run-on-start>no</run-on-start>
+
+        <storage>
+
+            <account>
+
+                <authentication_path>/home/manager/Azure/storage_auth.txt</authentication_path>
+                <tag>azure-activity</tag>
+
+                <container name="insights-operational-logs">
+                    <blobs>.json</blobs>
+                    <content_type>json_file</content_type>
+                    <time_range>24h</time_range>
+                </container>
+
+            </account>
+        </storage>
+    </wodle>
+
+Azure Storage Use Case
+----------------------
+
+Using the previously mentioned configuration, we will see an example of monitoring the activity of our infrastructure. 
+
+Wazuh Rules
+^^^^^^^^^^^
+
+The logs are stored in json files, therefore, with these simple rules we will be able to obtain the related alerts. 
+
+.. code-block:: xml
+
+    <rule id="200003" level="3">
+        <decoded_as>json</decoded_as>
+        <field name="azure_tag">azure-storage</field>
+        <description>Azure: Storage</description>
+    </rule>
+
+    <rule id="200013" level="3">
+        <if_sid>200003</if_sid>
+        <field name="operationName">\.+</field>
+        <description>Azure: Storage: $(OperationName)</description>
+    </rule>
+
+
+Removing a virtual machine
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As an example we are going to remove the virtual machine we created for the example of Azure Log Analytics. From the ``Storage accounts`` entry, select our virtual machine and choose the ``delete`` option. Confirm the deletion and proceed. 
+
+.. thumbnail:: ../images/azure/vm_delete.png
+    :title: Log Analytics App
+    :align: center
+    :width: 100%
+
+Again from the ``Storage accounts`` section, we select the account we want to access. Once there we access the ``Blobs`` section. 
+
+.. thumbnail:: ../images/azure/storage_sample.png
+    :title: Log Analytics App
+    :align: center
+    :width: 100%
+
+We select the container where we store the blobs. 
+
+.. thumbnail:: ../images/azure/storage_container.png
+    :title: Log Analytics App
+    :align: center
+    :width: 100%
+
+We navigate through the directories until we find the blob we want to check, in this case will be ``PTIH.json``. 
+
+.. thumbnail:: ../images/azure/storage_blob.png
+    :title: Log Analytics App
+    :align: center
+    :width: 100%
+
+We download the blob to check its content. 
+
+.. thumbnail:: ../images/azure/storage_download.png
+    :title: Log Analytics App
+    :align: center
+    :width: 100%
+
+File visualization
+^^^^^^^^^^^^^^^^^^
+
+In the blob we downloaded we found several logs, we focus on this particular log, which refers to the removal of the virtual machine. 
+
+.. thumbnail:: ../images/azure/storage_file.png
+    :title: Log Analytics App
+    :align: center
+    :width: 100%
+
+Kibana visualization
+^^^^^^^^^^^^^^^^^^^^
+
+When our integration performs the access, we will be able to see the results in Kibana. In this case we can notice that the ``200013`` rule has been triggered and see that the fields ``operationName`` and ``time`` coincide among others.
+
+.. thumbnail:: ../images/azure/storage_kibana1.png
+    :title: Log Analytics App
+    :align: center
+    :width: 100%
+
+.. thumbnail:: ../images/azure/storage_kibana2.png
+    :title: Log Analytics App
+    :align: center
+    :width: 100%
