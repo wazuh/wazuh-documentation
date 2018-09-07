@@ -2,19 +2,20 @@
 
 .. _azure_integration:
 
-Installation
-============
+Manager Requierements
+=====================
 
-The use of Wazuh integration with Microsoft Azure depends on a previous configuration and the installation of certain requirements. 
+Wazuhs manager will be in charge of carrying out the integration with Microsoft Azure when monitoring infrastructure activity and monitoring services. The correct use of the integration depends on the previous installation of certain requirements.  
 
-Requirementes
--------------
--	Microsoft Azure
--	Wazuh >= 3.7
--	Python >= 2.7
--	Pip
--	pytz
--	azure-storage-blob
+Dependencies
+------------
+
+- Microsoft Azure
+- Wazuh >= 3.7
+- Python >= 2.7
+- Pip
+- pytz
+- azure-storage-blob
 
 Microsoft Azure
 ^^^^^^^^^^^^^^^
@@ -46,7 +47,7 @@ azure-storage-blob
 
 `azure-storage-blob <https://docs.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-python>`_ library makes it easy to use and access Microsoft Azure Storage content.
 
-Installing dependencies
+Installing Dependencies
 -----------------------
 
 Python pytz and azure-storage-blob modules are required on the system running the Wazuh module to pull Microsoft Azure events. 
