@@ -57,7 +57,7 @@ This user will be able to login into Kibana UI, navigate through the Wazuh app a
 
 .. note::
 
-    This user will use two roles: ``wazuh-basic`` and ``wazuh-api-admin``. The ``wazuh-admin`` role will be used to handle data related to Wazuh and the ``wazuh-api-admin`` role will be used to add/delete Wazuh API entries.
+    This user will use two roles: ``wazuh-basic`` and ``wazuh-api-admin``. The ``wazuh-basic`` role will be used to handle data related to Wazuh and the ``wazuh-api-admin`` role will be used to add/delete Wazuh API entries.
 
 1. Defining the ``wazuh-basic`` role:
 
@@ -90,4 +90,4 @@ This user will be able to login into Kibana UI, navigate through the Wazuh app a
 Wazuh standard user
 -------------------
 
-We need one or more users who will be able to login into Kibana UI with read only privileges. This user only needs to use the wazuh-basic role.
+We need one or more users who will be able to login into Kibana UI with read only privileges. This user only needs to use the ``wazuh-basic`` role.
