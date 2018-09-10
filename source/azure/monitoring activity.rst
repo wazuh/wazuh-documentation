@@ -129,7 +129,7 @@ Next we will see the options we have to configure our integration.
 5. azure-logs configuration 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-5.1 - We proceed to configure the `azure-logs` wodle in the Wazuh manager. We will use the data that we have taken previously as the **key and the id of the application**. In this case, we have introduced both fields in a **file** for authentication. You will also need the **workspace id**.  Through the following configuration, Wazuh is ready to search for any `query <https://docs.loganalytics.io/docs/Language-Reference>`_ accepted by Azure Log Analytics. In this case we are going to monitor all the activity by means of the query **AzureActivity**. Finally we add a representative ``tag`` and we will indicate that request will be made every Monday at 02:00 and the first search will be made two days ago and that does not run on start:
+5.1 - We proceed to configure the `azure-logs` wodle in the Wazuh manager. We will use the data that we have taken previously as the **key and the id of the application**. In this case, we have introduced both fields in a **file** for authentication. You will also need the **workspace ID**.  Through the following configuration, Wazuh is ready to search for any `query <https://docs.loganalytics.io/docs/Language-Reference>`_ accepted by Azure Log Analytics. In this case we are going to monitor all the activity by means of the query **AzureActivity**. Finally we add a representative ``tag`` and we will indicate that request will be made every Monday at 02:00 and the first search will be made two days ago and that does not run on start:
 
 .. note::
 
@@ -142,9 +142,10 @@ Next we will see the options we have to configure our integration.
 
     <wodle name="azure-logs">
 
+        <disabled>no</disabled>
         <wday>monday</wday>
         <time>02:00</time>
-        <run-on-start>no</run-on-start>
+        <run_on_start>no</run_on_start>
 
         <log_analytics>
 
@@ -154,7 +155,7 @@ Next we will see the options we have to configure our integration.
             <request>
                 <tag>azure-activity</tag>
                 <query>AzureActivity</query>
-                <workspace_id>d6b...efa</workspace_id>
+                <workspace>d6b...efa</workspace>
                 <time_offset>2d</time_offset>
             </request>
 
@@ -315,8 +316,9 @@ In this case, the integration will be executed with an ``interval`` of one day, 
 
     <wodle name="azure-logs">
 
+        <disabled>no</disabled>
         <interval>1d</interval>
-        <run-on-start>no</run-on-start>
+        <run_on_start>yes</run_on_start>
 
         <storage>
 

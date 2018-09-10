@@ -104,9 +104,10 @@ Next we will see the options we have to configure our integration.
 
     <wodle name="azure-logs">
 
+        <disabled>no</disabled>
         <wday>Friday</wday>
         <time>12:00</time>
-        <run-on-start>no</run-on-start>
+        <run_on_start>no</run_on_start>
 
         <graph>
 
