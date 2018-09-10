@@ -15,3 +15,5 @@ The Wazuh agent runs on the hosts that you want to monitor (Windows, Linux, Sola
 - security policy monitoring
 
 In addition, it communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
+
+We explain all agent installation options :ref:`here <installation_agents>`.
