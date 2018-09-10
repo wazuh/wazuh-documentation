@@ -322,18 +322,15 @@ In this case, the integration will be executed with an ``interval`` of one day, 
 
         <storage>
 
-            <account>
-
                 <authentication_path>/home/manager/Azure/storage_auth.txt</authentication_path>
                 <tag>azure-activity</tag>
 
                 <container name="insights-operational-logs">
                     <blobs>.json</blobs>
                     <content_type>json_file</content_type>
-                    <time_range>24h</time_range>
+                    <time_offset>24h</time_offset>
                 </container>
 
-            </account>
         </storage>
     </wodle>
 
