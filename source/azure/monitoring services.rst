@@ -111,7 +111,7 @@ Next we will see the options we have to configure our integration.
 
         <graph>
 
-            <authentication_path>/home/manager/Azure/graph_auth.txt</authentication_path>
+            <auth_path>/home/manager/Azure/graph_auth.txt</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
