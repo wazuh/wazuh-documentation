@@ -149,7 +149,7 @@ Next we will see the options we have to configure our integration.
 
         <log_analytics>
 
-            <authentication_path>/home/manager/Azure/log_analytics_auth.txt</authentication_path>
+            <auth_path>/home/manager/Azure/log_analytics_auth.txt</auth_path>
             <tenantdomain>wazuh.onmicrosoft.com</tenantdomain>
 
             <request>
@@ -322,7 +322,7 @@ In this case, the integration will be executed with an ``interval`` of one day, 
 
         <storage>
 
-                <authentication_path>/home/manager/Azure/storage_auth.txt</authentication_path>
+                <auth_path>/home/manager/Azure/storage_auth.txt</auth_path>
                 <tag>azure-activity</tag>
 
                 <container name="insights-operational-logs">
