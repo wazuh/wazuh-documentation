@@ -12,6 +12,7 @@ Ansible is an open source platform designed for automating tasks. It comes with 
     .. toctree::
         :maxdepth: 2
 
+        installation-guide
         consider
         install-ansible-control
         setup-remote-systems
