@@ -43,4 +43,4 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 .. note::
 
-        You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0.ovf> file and the `vmdk <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0-disk001.vmdk>` disk.
+        You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0-disk001.vmdk>`_ disk.
