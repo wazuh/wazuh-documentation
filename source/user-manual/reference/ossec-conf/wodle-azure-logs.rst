@@ -245,6 +245,8 @@ request options
 +-----------------------------------------+----------------------------------------------+
 | `log_analytics\\request\\workspace`_    | Any string                                   |
 +-----------------------------------------+----------------------------------------------+
+| `log_analytics\\request\\timeout`_      | A positive number (seconds)                  |
++-----------------------------------------+----------------------------------------------+
 | `log_analytics\\request\\time_offset`_  | A positive number + suffix                   |
 +-----------------------------------------+----------------------------------------------+
 
@@ -280,6 +282,17 @@ Defines the workspace where we will perform the queries.
 +--------------------+--------------------+
 | **Allowed values** | Any String         |
 +--------------------+--------------------+
+
+log_analytics\\request\\timeout
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+
++--------------------+-----------------------------+
+| **Default value**  | 0                           |
++--------------------+-----------------------------+
+| **Allowed values** | A positive number (seconds) |
++--------------------+-----------------------------+
 
 log_analytics\\request\\time_offset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -413,6 +426,8 @@ request options
 +-----------------------------------------+----------------------------------------------+
 | `graph\\request\\query`_                | Any string                                   |
 +-----------------------------------------+----------------------------------------------+
+| `graph\\request\\timeout`_              | A positive number (seconds)                  |
++-----------------------------------------+----------------------------------------------+
 | `graph\\request\\time_offset`_          | A positive number + suffix                   |
 +-----------------------------------------+----------------------------------------------+
 
@@ -437,6 +452,18 @@ This is the query we will make to the Azure Log Analytics API. This option is re
 +--------------------+--------------------+
 | **Allowed values** | Any String         |
 +--------------------+--------------------+
+
+graph\\request\\timeout
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+
++--------------------+-----------------------------+
+| **Default value**  | 0                           |
++--------------------+-----------------------------+
+| **Allowed values** | A positive number (seconds) |
++--------------------+-----------------------------+
+
 
 graph\\request\\time_offset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -558,7 +585,9 @@ storage\\container
 +-----------------------------------------+----------------------------------------------+
 | `storage\\container\\content_type`_     | text, json_file or json_inline               |
 +-----------------------------------------+----------------------------------------------+
-| `storage\\request\\time_offset`_        | A positive number + suffix                   |
+| `storage\\container\\timeout`_          | A positive number (seconds)                  |
++-----------------------------------------+----------------------------------------------+
+| `storage\\container\\time_offset`_      | A positive number + suffix                   |
 +-----------------------------------------+----------------------------------------------+
 
 storage\\container name
@@ -606,8 +635,20 @@ Specifies the content of the blobs.
 | **Allowed values** | text/json_file/json_inline |
 +--------------------+----------------------------+
 
-storage\\request\\time_offset
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+storage\\container\\timeout
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Timeout for each request evaluation. This option overwrites the general `timeout`_ option. In case the execution takes longer that the specified timeout, it stops.
+
++--------------------+-----------------------------+
+| **Default value**  | 0                           |
++--------------------+-----------------------------+
+| **Allowed values** | A positive number (seconds) |
++--------------------+-----------------------------+
+
+
+storage\\container\\time_offset
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system. 
 
@@ -679,6 +720,7 @@ Example of all integration
             <request>
                 <tag>azure-active_directory</tag>
                 <query>activities/audit?api-version=beta</query>
+                <timeout>7200</timeout>
                 <time_offset>1d</time_offset>
             </request>
 
