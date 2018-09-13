@@ -10,13 +10,20 @@ Installing Ansible
 	Ansible version 1.3 and later uses native OpenSSH for remote communication.
 
 
+- `Windows hosts`_
+- `Installation on CentOS/RHEL/Fedora`_
+- `Installation on Debian/Ubuntu`_
+- `Remote Connection`_
+- `Test Connection`_
+- `Playbooks and Roles`_
+
 Windows hosts
 -------------
 
 Windows hosts are supported by Ansible from version 1.7 via the remote execution of PowerShell. As opposed to Linux hosts, it is necessary to do some pre-work before being able to use Ansible in Windows hosts. Please refer to `Windows Guide <https://docs.ansible.com/ansible/latest/user_guide/windows.html>`_ on Ansible official documentation. Consider the following minimum requirements:
 
 Installation on CentOS/RHEL/Fedora
-------------------------------------
+----------------------------------
 
 Install using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS/RedHat version 6 or 7, and Fedora distrutions, are currently supported. Follow the next steps:
 
@@ -33,7 +40,7 @@ Install using yum from `EPEL <http://fedoraproject.org/wiki/EPEL>`_. Only CentOS
     # yum install ansible
 
 Installation on Debian/Ubuntu
-------------------------------
+-----------------------------
 
 For Debian and Ubuntu we will use the Ansible PPA repository. Follow the next steps:
 
@@ -324,10 +331,10 @@ You will get a output like this:
 
 This way we will know that Ansible server reaches the remote system (Wazuh server).
 
-Playbooks
----------
+Playbooks and Roles
+-------------------
 
-We can obtain the necessary palybooks for the installation of the Wazuh server components, Elastic Stack components and Wazuh agents cloning the repository in ``/etc/ansible/roles``.
+We can obtain the necessary palybooks and roles for the installation of the Wazuh server components, Elastic Stack components and Wazuh agents cloning the repository in ``/etc/ansible/roles``.
 
 From Ansible server.
 

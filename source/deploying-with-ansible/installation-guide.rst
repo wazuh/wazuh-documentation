@@ -18,7 +18,7 @@ The main objective of this section is to guide any user in the installation of a
 
 
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     guide/install-ansible
     guide/install-wazuh-server

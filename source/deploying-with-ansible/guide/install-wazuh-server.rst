@@ -7,8 +7,12 @@ Install Wazuh Server
 
 Once the Ansible repository has been cloned, we proceed to install the Wazuh server, that is, we will install a Wazuh manager, Wazuh API and Filebeat.
 
-1 - Access to wazuh-ansible. 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- `1 - Access to wazuh-ansible`_
+- `2 - Preparing the playbook`_
+- `3 - Running the playbook`_
+
+1 - Access to wazuh-ansible 
+---------------------------
 
 1.1 - We access the directory where we have cloned the repository from our Ansible server
 
@@ -22,6 +26,8 @@ Once the Ansible repository has been cloned, we proceed to install the Wazuh ser
 Using **Wazuh Manager** role we will install and configure Wazuh Manager and Wazuh API, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`. 
 
 If we want to change the default configuration we can change the ``/etc/ansible/wazuh-ansible/ansible-wazuh-manager/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref: `Wazuh Manager <ansible-wazuh-manager>` role, where we can also see how to change the default configuration of agentless and Wazuh API. 
+
+We also can create another YAML file only with the content we want to change the configuration for **Filebeat** or directly in the ``/etc/ansible/wazuh-ansible/ansible-wazuh-filebeat/defaults/main.yml`` file. We can find more information at :ref: `Wazuh Manager <ansible-wazuh-filebeat>` role.
 
 Let's see below, the content of the YAML file ``/etc/ansible/wazuh-ansible/wazuh-manager.yml`` that we are going to run for a complete installation of the server. 
 
@@ -41,7 +47,7 @@ The first line ``hosts:`` indicates the machines where the commands below will b
 The ``roles:`` section indicates the roles that will be executed on the hosts mentioned above. Specifically, we are going to install the role of wazuh-manager (Wazuh manager + API) and the role of filebeat to which we indicate to overwrite the field ``filebeat_output_logstash_hosts`` with that IP address.
 
 2 - Preparing the playbook 
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 2.1 - We must create a similar YAML file or modify the one we already have to adapt it to our configuration. We will use the IP address of the machine where we are going to install the Wazuh server adding it to the hosts section and we will add the IP address of the machine where we are going to install our Logstash service to the ``filebeat_output_logstash_hosts`` field. 
 
@@ -77,7 +83,7 @@ Our resulting file is:
 
 
 3 - Running the playbook
-~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------
 
 It seems that we are ready to run the playbook and start the installation, but some of the operations we will perform on the remote systems will need sudo permissions. We can solve this in several ways, opting to enter the password when Ansible requests it. To contemplate other options we consult the option `become <https://docs.ansible.com/ansible/latest/user_guide/become.html#id1>`_ (to avoid entering passwords one by one). 
 
@@ -90,11 +96,55 @@ It seems that we are ready to run the playbook and start the installation, but s
 
 	ansible@ansible:/etc/ansible/wazuh-ansible$ ansible-playbook wazuh-manager.yml -b -K
 
-We will obtain a final result similar to the one shown in the following image. 
+We will obtain a final result similar to the one shown in the following code block. 
 
-.. thumbnail:: ../../images/ansible/ansible-manager.png
-    :align: center
-    :width: 100%
+.. code-block:: console
+
+	TASK [ansible-role-filebeat : Debian/Ubuntu | Add Filebeat repository.] **********************************************************************************
+	skipping: [192.168.0.180]
+
+	TASK [ansible-role-filebeat : Install Filebeat.] *********************************************************************************************************
+	changed: [192.168.0.180]
+
+	TASK [ansible-role-filebeat : Copy Filebeat configuration.] **********************************************************************************************
+	changed: [192.168.0.180]
+
+	TASK [ansible-role-filebeat : Ensure Filebeat SSL key pair directory exists.] ****************************************************************************
+	skipping: [192.168.0.180]
+
+	TASK [ansible-role-filebeat : Copy SSL key and cert for filebeat.] ***************************************************************************************
+	skipping: [192.168.0.180] => (item=)
+	skipping: [192.168.0.180] => (item=)
+
+	TASK [ansible-role-filebeat : Reload systemd] ************************************************************************************************************
+	ok: [192.168.0.180]
+
+	TASK [ansible-role-filebeat : Ensure Filebeat is started and enabled at boot.] ***************************************************************************
+	changed: [192.168.0.180]
+
+	TASK [ansible-role-filebeat : RedHat/CentOS/Fedora | Remove Filebeat repository (and clean up left-over metadata)] ***************************************
+	changed: [192.168.0.180]
+
+	TASK [ansible-role-filebeat : Debian/Ubuntu | Remove Filebeat repository (and clean up left-over metadata)] **********************************************
+	skipping: [192.168.0.180]
+
+	RUNNING HANDLER [ansible-wazuh-manager : rebuild cdb_lists] **********************************************************************************************
+	changed: [192.168.0.180]
+
+	RUNNING HANDLER [ansible-wazuh-manager : restart wazuh-manager] ******************************************************************************************
+	changed: [192.168.0.180]
+
+	RUNNING HANDLER [ansible-wazuh-manager : restart wazuh-api] **********************************************************************************************
+	changed: [192.168.0.180]
+
+	RUNNING HANDLER [ansible-role-filebeat : restart filebeat] ***********************************************************************************************
+	changed: [192.168.0.180]
+
+	PLAY RECAP ***********************************************************************************************************************************************
+	192.168.0.180              : ok=36   changed=19   unreachable=0    failed=0
+
+	ansible@ansible:/etc/ansible/wazuh-ansible$
+
 
 We can check the status of our new services in our Wazuh server. 
 
@@ -116,7 +166,7 @@ We can check the status of our new services in our Wazuh server.
 	   Loaded: loaded (/etc/systemd/system/wazuh-api.service; enabled; vendor preset: disabled)
 	   Active: active (running) since jue 2018-09-13 12:36:54 CEST; 36min ago
 
-- Filebeat
+- Filebeat.
 
 .. code-block:: console
 
