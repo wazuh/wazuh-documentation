@@ -577,6 +577,10 @@ storage\\container\\blobs
 
 Specifies the extension of the blobs, like ``.json``. Enter "*" to access all blobs of the container/s. 
 
+.. note::
+
+    This option is related to option ``content_type``, because if any blob has a different content to the one we have indicated, it will not be read correctly. Therefore, we need to be aware of what content we are trying to obtain and take it into consideration when using this option with ``"*"``. 
+
 +--------------------+--------------------+
 | **Default value**  | N/A                |
 +--------------------+--------------------+
