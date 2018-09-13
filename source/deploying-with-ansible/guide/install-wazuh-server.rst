@@ -95,3 +95,31 @@ We will obtain a final result similar to the one shown in the following image.
 .. thumbnail:: ../../images/ansible/ansible-manager.png
     :align: center
     :width: 100%
+
+We can check the status of our new services in our Wazuh server. 
+
+- Wazuh manager.
+
+.. code-block:: console
+
+	[root@localhost centos]# systemctl status wazuh-manager
+	● wazuh-manager.service - Wazuh manager
+	   Loaded: loaded (/etc/systemd/system/wazuh-manager.service; enabled; vendor preset: disabled)
+	   Active: active (running) since jue 2018-09-13 12:36:52 CEST; 35min ago
+
+- Wazuh API.
+
+.. code-block:: console
+
+	[root@localhost centos]# systemctl status wazuh-api
+	● wazuh-api.service - Wazuh API daemon
+	   Loaded: loaded (/etc/systemd/system/wazuh-api.service; enabled; vendor preset: disabled)
+	   Active: active (running) since jue 2018-09-13 12:36:54 CEST; 36min ago
+
+- Filebeat
+
+.. code-block:: console
+
+	● filebeat.service - Filebeat sends log files to Logstash or directly to Elasticsearch.
+	   Loaded: loaded (/usr/lib/systemd/system/filebeat.service; enabled; vendor preset: disabled)
+	   Active: active (running) since jue 2018-09-13 12:36:55 CEST; 37min ago
