@@ -256,8 +256,8 @@ system data is also tracked.
 
 
 
-A quick peek at the actual agent databases
-------------------------------------------
+Take a quick peek at an agent's database
+----------------------------------------
 
 Agent-specific databases on the Wazuh manager store, among other things, the ``syscollector`` scan results for each agent.
 
@@ -317,7 +317,7 @@ Wazuh Kibana App
 ----------------
 
 While the Wazuh API and SQLite databases let you get at the nitty-gritty data, usually the most beautiful place to see your vulnerability
-detection results are in the Wazuh Kibana App itself.  Both in the OVERVIEW section as well as when you have drilled down into a specific agent, you
+detection results is in the Wazuh Kibana App itself.  Both in the OVERVIEW section as well as when you have drilled down into a specific agent, you
 can open the VULNERABILITIES tab to see a nice dashboard of this information:
 
     +-----------------------------------------------------------------------------------------------+
