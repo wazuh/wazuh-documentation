@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_install_windows_agent:
 
 Install the Windows Wazuh Agent
@@ -14,7 +16,7 @@ Download the Wazuh Agent package
 
     https://packages.wazuh.com/3.x/windows/wazuh-agent-3.1.0-1.msi
 
-3. Hit <Enter>. In the Warning dialog, click **[Add]** and then **[Add]** again, and then **[Close]**.  
+3. Hit <Enter>. In the Warning dialog, click **[Add]** and then **[Add]** again, and then **[Close]**.
 
 4. Re-paste the above link into the address bar and hit <Enter> again.  Click **[Save]**.  The MSI installer is now in your Downloads folder.
 
@@ -116,7 +118,7 @@ Switch over to your Wazuh Server SSH window and run these commands, looking for 
         2018 Jan 17 01:24:20 (elastic-server) any->ossec
         Rule: 501 (level 3) -> 'New ossec agent connected.'
         ossec: Agent started: 'elastic-server->any'.
-        --      
+        --
         2018 Jan 17 02:27:23 (windows-agent) any->ossec
         Rule: 501 (level 3) -> 'New ossec agent connected.'
         ossec: Agent started: 'windows-agent->any'.

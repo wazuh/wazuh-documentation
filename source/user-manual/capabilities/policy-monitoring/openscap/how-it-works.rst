@@ -1,7 +1,9 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 How it works
 ============
 
-The `Security Content Automation Protocol (SCAP) <https://scap.nist.gov/>`_ is a specification for expressing and manipulating security data in standardized ways. SCAP jointly uses several specifications in order to automate continuous monitoring, vulnerability management, and reporting on results of security compliance scans.
+The `Security Content Automation Protocol (SCAP) <https://scap.nist.gov/>`_ is a specification for expressing and manipulating security data in standardized ways. SCAP uses several specifications in order to automate continuous monitoring, vulnerability management, and reporting the results of security compliance scans.
 
 Components of the security compliance evaluation process:
 

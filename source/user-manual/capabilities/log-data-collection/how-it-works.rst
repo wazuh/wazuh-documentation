@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 How it works
 ============
 
@@ -101,7 +103,7 @@ Extracted information:
 Decoding
 ^^^^^^^^
 
-In the decoding phase, the log message is evaluated to identify what type of log it is and known fields for that specific log type are then extracted. 
+In the decoding phase, the log message is evaluated to identify what type of log it is and known fields for that specific log type are then extracted.
 
 Sample log and its extracted info:
 

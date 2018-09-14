@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _user_manual_overview:
 
 Overview
@@ -23,7 +25,7 @@ Components
 
 + The **Registration Service** uses a secure mechanism to register agents without any intervention from server side.
 
-- The **:doc:`RESTful API <api/index>`** provides an interface to manage and monitor the configuration of the manager and agents. I can be used to register agents, inspect the manager log messages, decoders and rules and provide useful information related to the agents, including their status, operating system details, and alerts related to file integrity monitoring and rootchecks.
+- The :doc:`RESTful API <api/index>` provides an interface to manage and monitor the configuration of the manager and agents. It can be used to register agents, inspect the manager log messages, decoders and rules and provide useful information related to the agents, including their status, operating system details, and alerts related to file integrity monitoring and rootchecks.
 
 + **Filebeat** is used in **distributed architectures** (where the Wazuh server and Elastic Stack live in different systems) to forward alerts data to Logstash. This component has its own `documentation <https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-overview.html>`_ developed by Elastic.
 

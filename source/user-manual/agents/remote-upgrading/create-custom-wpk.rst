@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _create-custom-wpk:
 
 Creating custom WPK packages
@@ -42,7 +44,7 @@ A WPK package must contain an installation program in binary form or a script in
 
     * fork itself, as the parent will return 0 immediately,
     * restart the agent, and
-    * the installer must write a file called upgrade_result containing a status number (0 means OK) before exiting. 
+    * the installer must write a file called upgrade_result containing a status number (0 means OK) before exiting.
 
 Requirements
 ^^^^^^^^^^^^
@@ -61,7 +63,7 @@ Canonical WPK package example
 
 .. code-block:: console
 
-    # curl -Lo wazuh-3.2.zip https://github.com/wazuh/wazuh/archive/3.2.zip && unzip wazuh-3.2.zip
+    # curl -Lo wazuh-3.4.zip https://github.com/wazuh/wazuh/archive/3.4.zip && unzip wazuh-3.4.zip
 
 2. Modify the ``wazuh-3.2/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
@@ -75,6 +77,7 @@ Canonical WPK package example
 
 .. code-block:: console
 
+    # make deps
     # make -C wazuh-3.2/src TARGET=agent
 
 4. Change to the base directory:

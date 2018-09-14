@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _manual_integration:
 
 Integration with external APIs
@@ -42,11 +44,32 @@ Integrations are configured in the ``etc/ossec.conf`` file which is located insi
 Integration with Slack
 ----------------------
 
+In order to make the Slack integration work, we need to install the ``python-requests`` package:
+
+    a) For RPM systems:
+
+    .. code-block:: console
+
+        # yum install python-requests
+
+    b) For Debian systems:
+
+    .. code-block:: console
+
+        # apt-get install python-requests
+
+    c) Using the Python `pip` tool:
+
+    .. code-block:: console
+
+        # pip install requests
+
 .. code-block:: xml
 
     <integration>
       <name>slack</name>
       <hook_url>https://hooks.slack.com/services/...</hook_url>
+      <alert_format>json</alert_format>
     </integration>
 
 

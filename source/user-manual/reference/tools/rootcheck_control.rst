@@ -1,3 +1,4 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _rootcheck_control:
 
@@ -16,6 +17,8 @@ This tool can also display the last time that ossec-rootcheck was run.
 | **-l**               | List the available agents.                            |
 +----------------------+-------------------------------------------------------+
 | **-lc**              | List only the currently connected agents.             |
++----------------------+-------------------------------------------------------+
+| **-ln**              | List only the currently disconnected agents.          |
 +----------------------+-------------------------------------------------------+
 | **-u <id> / -u all** | Update the database for the identified or all agents. |
 +----------------------+-------------------------------------------------------+

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _message-format:
 
 .. highlight:: none
@@ -181,13 +183,33 @@ The payload is the final message that will be sent to the peer (secure manager o
 Complete encryption formula
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For agents with restricted address::
+For agents with restricted address:
 
-    ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+    a) Blowfish encryption
 
-For agents with unrestricted address (address ``any`` or netmask different from 32)::
+    .. code-block:: console
 
-    "!" <ID> "!:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+        ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+
+    b) AES encryption
+
+    .. code-block:: console
+
+        "#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+
+For agents with unrestricted address (address ``any`` or netmask different from 32):
+
+    a) Blowfish encryption
+
+    .. code-block:: console
+
+        "!" <ID> "!#AES:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+
+    b) AES encryption
+
+    .. code-block:: console
+
+        "!" <ID> "!#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
 This is the **encryption flow chart**:
 

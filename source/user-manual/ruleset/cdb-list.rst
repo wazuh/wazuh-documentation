@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _ruleset_cdb-list:
 
 Using CDB lists
@@ -56,7 +58,7 @@ Making the CDB list
 
 The list files must be compiled before they can be used. The tool */var/ossec/bin/ossec-makelists* will process and compile all the lists if needed.
 
-Remember to compile the lists every time that you update them. It is not necessary to restart OSSEC to apply the changes.
+Remember to compile the lists every time that you update them. It is necessary to restart OSSEC to apply the changes.
 
 
 Using the CDB list in the rules

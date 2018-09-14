@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _pci_dss_log_analysis:
 
 Log analysis

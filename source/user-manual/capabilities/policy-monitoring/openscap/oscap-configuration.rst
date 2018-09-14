@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _oscap-examples:
 
 Configuration
@@ -214,11 +216,11 @@ It is possible to overwrite the timeout for a specific evaluation: ::
 
         <timeout>1800</timeout>
 
-        <content type="xccdf" path="ssg-centos7-ds.xml">
+        <content type="xccdf" path="ssg-centos-7-ds.xml">
             <timeout>120</timeout>
         </content>
 
-        <content type="xccdf" path="ssg-centos6-ds.xml"/>
+        <content type="xccdf" path="ssg-centos-6-ds.xml"/>
 
     </wodle>
 
@@ -228,12 +230,12 @@ We can limit the evaluation to only specific profiles of a policy: ::
 
     <wodle name="open-scap">
 
-        <content type="xccdf" path="ssg-centos7-ds.xml">
+        <content type="xccdf" path="ssg-centos-7-ds.xml">
             <profile>xccdf_org.ssgproject.content_profile_standard</profile>
             <profile>xccdf_org.ssgproject.content_profile_pci-dss</profile>
         </content>
 
-        <content type="xccdf" path="ssg-centos6-ds.xml"/>
+        <content type="xccdf" path="ssg-centos-6-ds.xml"/>
 
     </wodle>
 
@@ -244,11 +246,11 @@ You can also optionally specify the CPE dictionary file, which is used to determ
 
     <wodle name="open-scap">
 
-        <content type="xccdf" path=policy="ssg-centos7-ds.xml">
+        <content type="xccdf" path=policy="ssg-centos-7-ds.xml">
             <cpe>file.xml</cpe>
         </content>
 
-        <content type="xccdf" path="ssg-centos6-ds.xml" />
+        <content type="xccdf" path="ssg-centos-6-ds.xml" />
 
     </wodle>
 
@@ -258,11 +260,11 @@ You can select a specific ID of the datastream file:  ::
 
     <wodle name="open-scap">
 
-        <content type="xccdf" path="ssg-centos7-ds.xml">
+        <content type="xccdf" path="ssg-centos-7-ds.xml">
             <datastream-id>id</datastream-id>
             <xccdf-id>id</xccdf-id>
         </content>
 
-        <content type="xccdf" path="ssg-centos6-ds.xml" />
+        <content type="xccdf" path="ssg-centos-6-ds.xml" />
 
     </wodle>

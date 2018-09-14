@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _api_configuration:
 
 Configuration
@@ -10,6 +12,8 @@ Configuration script
 --------------------
 
 Run the script ``/var/ossec/api/scripts/configure_api.sh`` to configure the basic settings.
+
+The script supports both unattended and attended configuration. To set the parameters of the unattended configuration use the file ``/var/ossec/api/configuration/preloaded_vars.conf``. This file will be removed after running the script to remove any sensitive information written there.
 
 Configuration file
 ------------------

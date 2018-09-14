@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _elastic_server_deb:
 
 Install Elastic Stack with Debian packages
@@ -10,37 +12,37 @@ The DEB package is suitable for Debian, Ubuntu and other Debian-based systems.
 Preparation
 -----------
 
-1. Oracle Java JRE is required by Logstash and Elasticsearch:
+1. Oracle Java JRE 8 is required by Logstash and Elasticsearch:
 
   a) For Debian:
 
   .. code-block:: console
 
-      # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
-      # echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
-      # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+    # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+    # echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
+    # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
 
   b) For Ubuntu:
 
   .. code-block:: console
 
-      # add-apt-repository ppa:webupd8team/java
+    # add-apt-repository ppa:webupd8team/java
 
 2. Once the repository is added, install Java JRE:
 
   .. code-block:: console
 
-      # apt-get update
-      # apt-get install oracle-java8-installer
+    # apt-get update
+    # apt-get install oracle-java8-installer
 
 3. Install the Elastic repository and its GPG key:
 
   .. code-block:: console
 
-  	# apt-get install curl apt-transport-https
-  	# curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-  	# echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
-  	# apt-get update
+    # apt-get install curl apt-transport-https
+    # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+    # echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
+    # apt-get update
 
 Elasticsearch
 -------------
@@ -51,7 +53,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.2.1
+    # apt-get install elasticsearch=6.4.0
 
 2. Enable and start the Elasticsearch service:
 
@@ -67,24 +69,38 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-  	# update-rc.d elasticsearch defaults 95 10
-  	# service elasticsearch start
+    # update-rc.d elasticsearch defaults 95 10
+    # service elasticsearch start
 
-3. Load Wazuh Elasticsearch templates:
-
-  .. code-block:: console
-
-  	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+  It's important to wait until the Elasticsearch server finishes starting. Check the current status with the following command, which should give you a response like the shown below:
 
   .. code-block:: console
 
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
+    # curl "localhost:9200/?pretty"
 
-4. Insert the sample alert:
+    {
+      "name" : "Zr2Shu_",
+      "cluster_name" : "elasticsearch",
+      "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
+      "version" : {
+        "number" : "6.4.0",
+        "build_flavor" : "default",
+        "build_type" : "deb",
+        "build_hash" : "053779d",
+        "build_date" : "2018-07-20T05:20:23.451332Z",
+        "build_snapshot" : false,
+        "lucene_version" : "7.3.1",
+        "minimum_wire_compatibility_version" : "5.6.0",
+        "minimum_index_compatibility_version" : "5.0.0"
+      },
+      "tagline" : "You Know, for Search"
+    }
+
+3. Load the Wazuh template for Elasticsearch:
 
   .. code-block:: console
 
-  	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -99,7 +115,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.2.1-1
+    # apt-get install logstash=1:6.4.0-1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -107,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-    	# curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/logstash/01-wazuh-local.conf
 
     Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
 
@@ -119,7 +135,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/logstash/01-wazuh-remote.conf
 
 
 3. Enable and start the Logstash service:
@@ -128,9 +144,9 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-  	# systemctl daemon-reload
-  	# systemctl enable logstash.service
-  	# systemctl start logstash.service
+    # systemctl daemon-reload
+    # systemctl enable logstash.service
+    # systemctl start logstash.service
 
   b) For SysV Init:
 
@@ -143,6 +159,8 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     If you are running Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elastic_ssl`.
 
+.. _install_kibana_app_deb:
+
 Kibana
 ------
 
@@ -152,22 +170,22 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-   # apt-get install kibana=6.2.1
+    # apt-get install kibana=6.4.0
 
-2. Install the Wazuh App plugin for Kibana:
+2. Install the Wazuh app plugin for Kibana:
 
-  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App.
+  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app.
   Set the limit as follows:
 
   .. code-block:: console
 
-      # export NODE_OPTIONS="--max-old-space-size=3072"
+    # export NODE_OPTIONS="--max-old-space-size=3072"
 
-  b) Install the Wazuh App:
+  b) Install the Wazuh app:
 
   .. code-block:: console
 
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.6.1_6.4.0.zip
 
   .. warning::
 
@@ -175,7 +193,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note::
 
-    If you want to download a different Wazuh App plugin for another version of Wazuh or the Elastic Stack, check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
+    If you want to download a different Wazuh app plugin for another version of Wazuh or the Elastic Stack, check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
 
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 
@@ -193,16 +211,16 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-  	# systemctl daemon-reload
-  	# systemctl enable kibana.service
-  	# systemctl start kibana.service
+    # systemctl daemon-reload
+    # systemctl enable kibana.service
+    # systemctl start kibana.service
 
   b) For SysV Init:
 
   .. code-block:: console
 
-   # update-rc.d kibana defaults 95 10
-   # service kibana start
+    # update-rc.d kibana defaults 95 10
+    # service kibana start
 
 5. Disable the Elasticsearch repository:
 
@@ -210,14 +228,12 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-   # sed -i -r '/deb https:\/\/artifacts.elastic.co\/packages\/6.x\/apt stable main/ s/^(.*)$/#\1/g' /etc/apt/sources.list.d/elastic-6.x.list
+    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
+    # apt-get update
 
-Connecting the Wazuh App with the API
--------------------------------------
+Next steps
+----------
 
-Follow the next guide in order to connect the Wazuh App with the API:
+Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
 
-.. toctree::
-	:maxdepth: 1
-
-	connect_wazuh_app
+You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.

@@ -1,5 +1,6 @@
-.. _ciscat_module:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _ciscat_module:
 
 CIS-CAT integration
 ===================
@@ -11,6 +12,7 @@ The **CIS-CAT wodle** has been developed for the purpose of integrating CIS benc
 - `What is CIS-CAT`_
 - `How it works`_
 - `Use case: Running a CIS evaluation`_
+- `Use case: Scheduling CIS-CAT executions`_
 
 What is CIS-CAT
 ---------------
@@ -49,7 +51,7 @@ The following is an example of how to deploy the CIS-CAT integration:
 
 1. In the configuration file, ``ossec.conf``, set up a section as follows:
 
-  1.1 If you a using a UNIX environment:
+  1.1 If you are using a UNIX environment:
 
   .. code-block:: xml
 
@@ -61,7 +63,7 @@ The following is an example of how to deploy the CIS-CAT integration:
       <scan-on-start>yes</scan-on-start>
 
       <java_path>/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/bin</java_path>
-      <ciscat_path>/var/ossec/wodles/ciscat</ciscat_path>
+      <ciscat_path>wodles/ciscat</ciscat_path>
 
       <content type="xccdf" path="benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml">
         <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
@@ -70,7 +72,7 @@ The following is an example of how to deploy the CIS-CAT integration:
     </wodle>
 
 
-  1.2 If you a using a Windows environment:
+  1.2 If you are using a Windows environment:
 
   .. code-block:: xml
 
@@ -80,19 +82,19 @@ The following is an example of how to deploy the CIS-CAT integration:
       <interval>1d</interval>
       <scan-on-start>yes</scan-on-start>
 
-      <java_path>\\server\jre\bin\java.exe</java_path>
+      <java_path>\\server\jre\bin</java_path>
       <ciscat_path>C:\cis-cat</ciscat_path>
 
-      <content type="xccdf" path="C:\cis-cat\benchmarks\your_windows_benchamark_file_xccdf.xml">
+      <content type="xccdf" path="benchmarks\your_windows_benchamark_file_xccdf.xml">
         <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
       </content>
 
     </wodle>
 
-.. note::
-    Make sure the paths are correct for the location of your Java and the CIS-CAT tool.
+  Make sure the paths are correct for the location of your Java and the CIS-CAT tool. For both cases, you could specify the full path, or a relative path to the Wazuh installation folder. Also, consider the following tips when configuring the ``content`` section:
 
-    If no profile is specified, the first one, which is usually the most permissive, will be selected.
+  - The location of the selected benchmark file have to be indicated by the full path, or by a relative path to the CIS-CAT installation folder.
+  - If no profile is specified, the first one, which is usually the most permissive, will be selected.
 
 2. After restarting the Wazuh agent, the benchmark checks will be executed at the specified interval, triggering alerts as shown below.
 
@@ -104,10 +106,11 @@ Information about the executed scan and report overview
    ** Alert 1518119251.42536: - ciscat,
    2018 Feb 08 11:47:31 ubuntu->wodle_cis-cat
    Rule: 87411 (level 5) -> 'CIS-CAT Report overview: Score less than 80% (53%)'
-   {"type":"scan_info","scan_id":1701467600,"cis":{"benchmark":"CIS Ubuntu Linux 16.04 LTS Benchmark","hostname":"ubuntu","timestamp":"2018-02-08T11:47:28.066-08:00","pass":98,"fail":85,"error":0,"unknown":1,"notchecked":36,"score":"53%"}}
+   {"type":"scan_info","scan_id":1701467600,"cis":{"benchmark":"CIS Ubuntu Linux 16.04 LTS Benchmark","profile":"xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server","hostname":"ubuntu","timestamp":"2018-02-08T11:47:28.066-08:00","pass":98,"fail":85,"error":0,"unknown":1,"notchecked":36,"score":"53%"}}
    type: scan_info
    scan_id: 1701467600
    cis.benchmark: CIS Ubuntu Linux 16.04 LTS Benchmark
+   cis.profile: xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server
    cis.hostname: ubuntu
    cis.timestamp: 2018-02-08T11:47:28.066-08:00
    cis.pass: 98
@@ -117,6 +120,7 @@ Information about the executed scan and report overview
    cis.notchecked: 36
    cis.score: 53%
 
+Since Wazuh v3.5.0, the report summary is stored in the agents DB with the purpose to query it by the API. This allows to know about the last scan every time the user wants to.
 
 Information about a specific result
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -136,3 +140,79 @@ Information about a specific result
    cis.rationale: Monitoring login/logout events could provide a system administrator with information associated with brute force attacks against user logins.
    cis.remediation: Add the following lines to the /etc/audit/audit.rules file: -w /var/log/faillog -p wa -k logins-w /var/log/lastlog -p wa -k logins-w /var/log/tallylog -p wa -k logins
    cis.result: fail
+
+Use case: Scheduling CIS-CAT executions
+---------------------------------------
+
+.. versionadded:: 3.5.0
+
+New scheduling options have been added for the CIS-CAT module which allows the user to decide when to launch CIS scans in every agent.
+
+As it is described in the :doc:`CIS-CAT section <../../../reference/ossec-conf/wodle-ciscat>` of the reference documentation, there are available some new options that we could mix to reach the desired behavior.
+
+The following sample blocks of the wodle configuration show the new possibilities to schedule when the module is launched. All of these options are independent to the ``scan-on-start`` option, which runs the scan
+always when the service is started.
+
+Scheduling executions by an interval since the start of the service
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml
+
+  <!-- Every 5 minutes from start -->
+  <interval>5m</interval>
+
+Scheduling executions by time of day
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml
+
+  <!-- 18:00 every day -->
+  <time>18:00</time>
+
+.. code-block:: xml
+
+  <!-- 5:00 every four days -->
+  <time>5:00</time>
+  <interval>4d</interval>
+
+Scheduling executions by day of the week
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml
+
+  <!-- 00:00 every monday -->
+  <wday>monday</wday>
+
+.. code-block:: xml
+
+  <!-- 18:00 every monday -->
+  <wday>monday</monday>
+  <time>18:00</time>
+
+.. code-block:: xml
+
+  <!-- 18:00 every monday with three weeks of frequency -->
+  <wday>monday</monday>
+  <time>18:00</time>
+  <interval>3w</interval>
+
+Scheduling executions by day of the month
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: xml
+
+  <!-- 00:00 every 20th of the month -->
+  <day>20</day>
+
+.. code-block:: xml
+
+  <!-- 18:00 every 20th of the month -->
+  <day>20</day>
+  <time>18:00</time>
+
+.. code-block:: xml
+
+  <!-- 18:00,  20th every two months-->
+  <day>20</day>
+  <time>18:00</time>
+  <interval>2M</interval>

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh_agent_aix:
 
 Install Wazuh agent on AIX
@@ -18,13 +20,12 @@ Unzip the package in ``/``:
 
 .. code-block:: console
 
-    # tar -xvf wazuh-agent_v3.1.0-aix5.3.tar.gz -C /
+    # tar -xvf wazuh-agent_v3.6.1-aix5.3.tar
 
-
-* Installing in AIX 7
+* Installing in AIX 6 and 7
 
 .. code-block:: console
 
-    # tar -xvf wazuh-agent_v3.1.0-aix7.1.tar.gz -C /
+    # tar -xvf wazuh-agent_v3.6.1-aix6.1.tar
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.

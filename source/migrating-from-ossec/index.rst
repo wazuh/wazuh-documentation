@@ -1,40 +1,115 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _upgrading_ossec:
 
 Migrating from OSSEC
 ====================
 
-This document describes how to migrate your existing OSSEC installation (agent or manager) to Wazuh. For interactive help, our `email forum <https://groups.google.com/d/forum/wazuh>`_ is available.  You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.
+Why it's time to migrate
+------------------------
 
-.. note::
-    OSSEC agents are compatible with Wazuh manager, but if you don't migrate your agents to Wazuh, you will lose some capabilities like :ref:`OpenSCAP<openscap_module>` or some :ref:`syscheck features<manual_file_integrity>` in those agents.
+Unfortunately OSSEC users have not seen lots of new features over the last decade. The project has been in maintenance mode for a long time and very little development work has been done. There is no active roadmap and last releases consist mostly in bug fixes reported by occasional contributors.
+
+This is why, back in 2015, Wazuh team decided to fork the project. The result is a much more comprehensive, easy to use, reliable and scalable solution. The fork has had great adoption among the open source community, quickly becoming a broadly used solution in enterprise environments. 
+
+Regarding project activity and roadmap, you can find Wazuh code in our `Github repository <https://github.com/wazuh/wazuh>`_. We believe is relevant to mention that, at the time of writing this documentation, the project has over 8,500 commits (3,000+ more than OSSEC). 
+
+Here is a brief summary of the value we added to the OSSEC project, and good reasons to upgrade your security monitoring infrastructure moving it to Wazuh:
+
+Scalability and reliability
++++++++++++++++++++++++++++
+
+* Cluster support for managers to scale horizontally.
+* Support for Puppet, Chef, Ansible and Docker deployments.
+* TCP support for agent-manager communications.
+* Anti-flooding feature to prevent large burst of events from being lost or negatively impact network performance.
+* AES encryption used for agent-manager communications (instead of Blowfish).
+* Multi-thread support for manager processes, dramatically increaing their performance.
+
+Installation and configuration management
++++++++++++++++++++++++++++++++++++++++++
+
+* MSI signed package for Windows systems, with auto registration and configuration support.
+* Unified RPM and Deb Linux packages.
+* Support for AIX, Solaris, Mac OS X and HP-UX.
+* RESTful API for status monitoring, querying and configuration management.
+* Ability to upgrade agents from the managers.
+* Improved centralized configuration management using agent groups.
+
+Intrusion detection
++++++++++++++++++++
+
+* Improved log analysis engine, with native JSON decoding and ability to name fields dynamically.
+* Increased maximum message size from 6KB to 64KB (being able to analyze much larger log messages).
+* Updated ruleset with new log analysis rules and decoders.
+* Native rules for Suricata, making use of JSON decoder.
+* Integration with `Owhl project <https://www.owlh.net>`_ for unified NIDS management.
+* Support for IP reputation databases (e.g. `AlienVault OTX <https://www.alienvault.com/open-threat-exchange>`_).
+* Native integration with Linux auditing kernel subsystem and Windows audit policies to capture who-data for FIM events.
+
+Integration with cloud providers
+++++++++++++++++++++++++++++++++
+
+* Module for native integration with Amazon AWS (pulling data from `Cloudtrail <https://aws.amazon.com/cloudtrail/>`_ or `Cloudwatch <https://aws.amazon.com/cloudwatch/>`_).
+* New rules and decoders for Amazon AWS.
+* Module for native integration with Microsoft Azure.
+* New rules and decoders for Microsoft Azure.
+
+Regulatory compliance
++++++++++++++++++++++
+
+* Alert mapping with PCI DSS and GPG13 requirements.
+* Compliance dashboards for `Elastic Stack <https://www.elastic.co>`_, provided by Wazuh Kibana plugin.
+* Compliance dashboards for `Splunk <https://www.splunk.com>`_, provided by Wazuh app.
+* Use of `Owhl project <https://www.owlh.net>`_ Suricata mapping for compliance.
+* SHA256 hashes used for file integrity monitoring (in addition to to MD5 and SHA1).
+* Module for integration with `OpenScap <https://www.open-scap.org>`_, used for configuration assessment.
+
+Elastic Stack integration
++++++++++++++++++++++++++
+
+* Provides the ability to index and query data.
+* Data enrichment using GeoIP Logstash module.
+* Kibana plugin used to visualize data (integrated using Wazuh REStful API).
+* Web user interface pre-configured extensions, adapting it to your use cases.
+
+Incident response
++++++++++++++++++
+
+* Module for collection of software and hardware inventory data.
+* Ability to query for software and hardware via RESTful API.
+* Module for integration with `Osquery <https://osquery.io>`_, being able to run queries on demand.
+* Implementation of new output options for log collector component.
+* Module for integration with `Virustotal <https://www.virustotal.com/>`_, used to detect the presence of malicious files.
+
+Vulnerability detection and configuration assessment
+++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+* Dynamic creation of CVE vulnerability databases, gathering data from OVAL repositories.
+* Cross correlation with applications inventory data to detect vulnerable software.
+* Module for integration with `OpenScap <https://www.open-scap.org>`_ allows the user to remotely configured scans.
+* Support for CIS-CAT, by `Center of Internet Security <https://www.cisecurity.org>`_ scanner integration.
+
+How to move to Wazuh
+--------------------
+
+The following guides describe how to migrate your existing OSSEC installation to Wazuh. Follow the appropriate one depending on the type (server or agent) of your OSSEC installation:
+
+.. csv-table::
+   :header: Installation type, Upgrade from, Upgrade to, Guide
+   :widths: 20 30 20 30
+
+   Server, OSSEC 2.8.3 or higher, Wazuh 3.x, :ref:`Upgrade OSSEC server <ossec_server>`
+   Agent, OSSEC 2.8.3 or higher, Wazuh 3.x, :ref:`Upgrade OSSEC agent <ossec_agent>`
 
 The migration of Elastic stack, in the case that you already have it installed, is beyond the scope of Wazuh documentation. We recommend you visit our guides for :ref:`Installing Elastic Stack <installation_elastic>`.
 
-Follow the appropriate section depending on the type of your OSSEC installation:
-
-+--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
-| Upgrade from | Type    | Installation type | Upgrade to | Guide                                                                               |
-+==============+=========+===================+============+=====================================================================================+
-| OSSEC 2.8.3+ | Manager | Packages          | Wazuh 3.x  | :ref:`Migrating OSSEC manager installed from packages <up_ossec_manager>`           |
-+--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
-| OSSEC 2.8.3+ | Manager | Sources           | Wazuh 3.x  | :ref:`Install Wazuh server with RPM packages <wazuh_server_rpm>`                    |
-+              +         +                   +            +-------------------------------------------------------------------------------------+
-|              |         |                   |            | :ref:`Install Wazuh server with Deb packages <wazuh_server_deb>`                    |
-+--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
-| OSSEC 2.8.3+ | Agent   | Packages          | Wazuh 3.x  | :ref:`Migrating OSSEC agent installed from packages <up_ossec_agent>`               |
-+--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
-| OSSEC 2.8.3+ | Agent   | Sources           | Wazuh 3.x  | :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`                      |
-+              +         +                   +            +-------------------------------------------------------------------------------------+
-|              |         |                   |            | :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`                      |
-+--------------+---------+-------------------+------------+-------------------------------------------------------------------------------------+
-
-.. warning::
-    **For cases where OSSEC was installed from sources**, the configuration file ``/var/ossec/etc/ossec.conf`` **will be overwritten**. The *old* configuration file from the current installation is saved as ``ossec.conf.rpmorig`` or ``ossec.conf.deborig``. You should compare the new file with the old one. Also, a backup of your previous ruleset will be saved at ``/var/ossec/etc/backup_ruleset``. All the rules/decoders in files other than ``local_rules.xml`` or ``local_decoder.xml`` will be overwritten.
-
+.. note::
+    OSSEC agents are compatible with Wazuh server. You can even have different versions of Wazuh and OSSEC agents reporting to a centralized Wazuh server. Having said that, it is recommended to keep both server and agents updated to the latest version. For interactive help, our `mailing list <https://groups.google.com/d/forum/wazuh>`_ is available. You can subscribe by sending an email to ``wazuh+subscribe@googlegroups.com``.
 
 .. toctree::
    :hidden:
    :maxdepth: 2
 
-   ossec-packages-manager
-   ossec-packages-agent
+   ossec-server
+   ossec-agent

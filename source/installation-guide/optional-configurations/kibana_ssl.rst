@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _kibana_ssl:
 
 Setting up SSL and authentication for Kibana
@@ -183,26 +185,12 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
     .. code-block:: console
 
       # mkdir -p /etc/ssl/certs /etc/ssl/private
-      # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem
+      # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem
         Generating a 2048 bit RSA private key
-        ...........+++
-        ................+++
-        writing new private key to '/etc/pki/tls/private/kibana-access.key'
+        .............+++
+        ..+++
+        writing new private key to '/etc/ssl/private/kibana-access.key'
         -----
-        You are about to be asked to enter information that will be incorporated
-        into your certificate request.
-        What you are about to enter is what is called a Distinguished Name or a DN.
-        There are quite a few fields but you can leave some blank
-        For some fields there will be a default value,
-        If you enter '.', the field will be left blank.
-        -----
-        Country Name (2 letter code) [AU]: US
-        State or Province Name (full name) [Some-State]: California
-        Locality Name (eg, city) []: San Jose
-        Organization Name (eg, company) [Internet Widgits Pty Ltd]: Example Inc.
-        Organizational Unit Name (eg, section) []: section
-        Common Name (e.g. server FQDN or YOUR name) []: example.com
-        Email Address []: example@mail.com
 
 3. Configure NGINX as an HTTPS reverse proxy to Kibana:
 

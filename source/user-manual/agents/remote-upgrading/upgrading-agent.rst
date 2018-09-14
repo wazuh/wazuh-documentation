@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _upgrading-agent:
 
 Upgrading agent
@@ -64,7 +66,7 @@ Using the RESTful API
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET -k "http://127.0.0.1:55000/agents/outdated?pretty"
+        # curl -u foo:bar -X GET "http://localhost:55000/agents/outdated?pretty"
 
         {
           "error": 0,
@@ -95,7 +97,7 @@ Using the RESTful API
 
     .. code-block:: console
 
-        # curl -u foo:bar -X PUT -k "http://127.0.0.1:55000/agents/002/upgrade?pretty"
+        # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/upgrade?pretty"
 
         {
            "error": 0,
@@ -107,7 +109,7 @@ Using the RESTful API
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET -k "http://127.0.0.1:55000/agents/002/upgrade_result?pretty"
+        # curl -u foo:bar -X GET "http://localhost:55000/agents/002/upgrade_result?pretty"
 
         {
            "error": 0,
@@ -119,7 +121,7 @@ Using the RESTful API
 
     .. code-block:: console
 
-        # curl -u foo:bar -X GET -k "http://127.0.0.1:55000/agents/002?pretty"
+        # curl -u foo:bar -X GET "http://localhost:55000/agents/002?pretty"
 
         {
            "error": 0,

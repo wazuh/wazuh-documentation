@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_nginx_setup:
 
 Set up Kibana
@@ -8,7 +10,7 @@ Here we will set up SSL communications on the front end and back end of Kibana a
 Set up Nginx as an authenticating SSL reverse proxy to Kibana
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Since Kibana does not natively provide authentication or https service for web browser access, we will now set up Nginx to serve 
+Since Kibana does not natively provide authentication or https service for web browser access, we will now set up Nginx to serve
 as an authenticating SSL reverse proxy to Kibana.  Do the following on the Elastic Server:
 
 1. Install Nginx:
@@ -87,19 +89,13 @@ Log in to Kibana and connect it to the Wazuh API
 
 1. Now use your local web browser to surf to https://SERVER_IP where SERVER_IP is the Elastic IP assigned to your Elastic Server instance.  Bypass the security warnings caused by the fact that we are using a self-signed certificate.  You should then be prompted to authenticate with the "wazuh" username, and the password you just created.
 
-2. Click on "Management", then on "Index Patterns", then on "wazuh-alerts-3.x-*", and finally on the grey star button (upper right).  This will establish your default index pattern.
+2. Click on "Management", then on "Index Patterns", then on "wazuh-alerts-3.x-\*", and finally on the grey star button (upper right).  This will establish your default index pattern.
 
 3. Click on the Wazuh icon on the left.  Fill out the form for connecting to the API like below (API password is "wazuhlab"):
-  
+
   .. thumbnail:: ../../images/learning-wazuh/build-lab/kibana-to-api.png
       :title: API Connect
       :align: center
       :width: 75%
 
 4. Click **[Save]** and then click on the Wazuh icon again to bring up the Wazuh Kibana App.  It should now be ready to use.
-
-
-
-
-
-

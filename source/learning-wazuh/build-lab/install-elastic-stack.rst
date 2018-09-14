@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _build_lab_install_elastic_stack:
 
 Install Elastic Stack
@@ -22,7 +24,7 @@ Preparation
 
   .. code-block:: console
 
-    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u151-b12/e758a0de34e24606bca991d704f6dcbf/jre-8u151-linux-x64.rpm"
+    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-linux-x64.rpm"
     # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
     # yum -y install jre-8-linux-x64.rpm
     # rm -f jre-8-linux-x64.rpm
@@ -81,7 +83,7 @@ Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logs
 
   This process will set optimal index sharding, replication, and memory usage values for Elasticsearch.
 
-  .. code-block:: console
+  .. code-block:: none
 
     # curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
     # sed -i 's/"index.refresh_interval": "5s"/"index.refresh_interval": "5s",\n    "number_of_shards" :   1,\n    "number_of_replicas" : 0/' w-elastic-template.json
@@ -98,7 +100,7 @@ Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logs
     # echo -e "[Service]\nLimitMEMLOCK=infinity" > /etc/systemd/system/elasticsearch.service.d/elasticsearch.conf
     # sed -i 's/^-Xms.*/-Xms12g/;s/^-Xmx.*/-Xmx12g/' /etc/elasticsearch/jvm.options
     # systemctl daemon-reload
-    # systemctl restart elasticsearch  
+    # systemctl restart elasticsearch
 
   .. note::
     The two references to "12g" in the above steps will only work if the Elastic Server was launched with the recommended instance size t2.xlarge.  If you chose to use t2.large instead, change the "12g" references to "5g".
@@ -132,7 +134,7 @@ Logstash takes the Wazuh alerts and logs written as JSON records by Wazuh Manage
 Setting up SSL for Filebeat and Logstash
 ----------------------------------------
 
-Since your Wazuh Server and Elastic Server instances are on separate servers, it is important to configure SSL encryption and 
+Since your Wazuh Server and Elastic Server instances are on separate servers, it is important to configure SSL encryption and
 verification between Filebeat and Logstash.
 
 
@@ -155,7 +157,7 @@ Configure Logstash to use SSL (on Elastic Server)
     Uncomment the default SSL-related lines in the Logstash config to use the new key and cert, and then restart Logstash.
 
     .. code-block:: console
-    
+
         # sed -i "s/#       ssl/        ssl/g" /etc/logstash/conf.d/01-wazuh.conf
         # grep "  ssl" /etc/logstash/conf.d/01-wazuh.conf -B4 -A2
         # systemctl restart logstash.service
@@ -194,8 +196,8 @@ Configure Filebeat to use SSL
 
           # cat /etc/filebeat/filebeat.yml
           # sed -i 's/#   ssl/   ssl/;s/#     certificate/      certificate/' /etc/filebeat/filebeat.yml
-          # cat /etc/filebeat/filebeat.yml    
-          # systemctl restart filebeat.service   
+          # cat /etc/filebeat/filebeat.yml
+          # systemctl restart filebeat.service
 
 
 Kibana
@@ -232,11 +234,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 Disable the Elastic repository
 ------------------------------
 
-Now disable the Elastic repository in order to prevent a future unintended Elastic Stack upgrade to a version 
+Now disable the Elastic repository in order to prevent a future unintended Elastic Stack upgrade to a version
 that may be in conflict with the latest stable Wazuh packages.
 
   .. code-block:: console
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
-
-

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _virtual_machine:
 
 Virtual Machine
@@ -7,15 +9,15 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 .. note::  This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Distributed architectures and multi-node Elastic Stack clusters are usually a better fit for production environments where higher performance is required.
 
-1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh3.1.0_6.1.1.ova>`_, contains the following components:
+1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0.ova>`_, contains the following components:
 
     - CentOS 7
-    - Wazuh 3.1.0-1
-    - RESTful API 3.1.0-1
-    - Elasticsearch 6.1.1
-    - Logstash 6.1.1
-    - Kibana 6.1.1 port "**5601**""
-    - WazuhAPP 3.1.0_6.1.1
+    - Wazuh 3.6.1-1
+    - RESTful API 3.6.1-1
+    - Elasticsearch 6.4.0
+    - Logstash 6.4.0
+    - Kibana 6.4.0 port "**5601**""
+    - WazuhAPP 3.6.1_6.4.0
 
 2. Import the OVA in your virtualization platform and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
 
@@ -38,3 +40,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
     # systemctl status kibana
 
 5. In order to connect to the Kibana web user interface, login with http://OVA_IP_ADRESS:5601 (where ``OVA_IP_ADDRESS`` is your system IP).
+
+.. note::
+
+        You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0-disk001.vmdk>`_ disk.

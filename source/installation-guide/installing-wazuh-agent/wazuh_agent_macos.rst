@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh_agent_macos:
 
 Install Wazuh agent on Mac OS X
@@ -7,7 +9,7 @@ Mac OS X agent can be downloaded from our :doc:`packages list<../packages-list/i
 
   a) The command line::
 
-        installer -pkg wazuh-agent-3.1.0-2.pkg -target /
+        installer -pkg wazuh-agent-3.6.1-1.pkg -target /
 
   b) The GUI:
 

@@ -1,5 +1,6 @@
-.. _reference_ossec_integration:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_integration:
 
 integration
 ===========
@@ -30,11 +31,11 @@ name
 
 This indicates the service to integrate with.
 
-+--------------------+-----------------------------+
-| **Default value**  | n/a                         |
-+--------------------+-----------------------------+
-| **Allowed values** | slack, pagerdty, virustotal |
-+--------------------+-----------------------------+
++--------------------+------------------------------+
+| **Default value**  | n/a                          |
++--------------------+------------------------------+
+| **Allowed values** | slack, pagerduty, virustotal |
++--------------------+------------------------------+
 
 hook_url
 ^^^^^^^^
@@ -133,6 +134,7 @@ Configuration example
       <hook_url>https://hooks.slack.com/services/T000/B000/XXXXX</hook_url>
       <level>10</level>
       <group>multiple_drops|authentication_failures</group>
+      <alert_format>json</alert_format>
     </integration>
 
     <!-- Integration with VirusTotal -->
@@ -140,4 +142,5 @@ Configuration example
       <name>virustotal</name>
       <api_key>VirusTotal_API_Key</api_key>
       <group>syscheck</group>
+      <alert_format>json</alert_format>
     </integration>

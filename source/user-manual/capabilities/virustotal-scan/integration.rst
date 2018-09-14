@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 Integration
 ===========
 
@@ -35,18 +37,24 @@ Getting started
 
 In order for this integration to function, the first thing that must be completed is the configuration of the VirusTotal integration as explained in the :doc:`Local configuration section <../../reference/ossec-conf/integration>` and as shown below:
 
-1. The following section must be added to the ``ossec.conf`` file:
+1. Install python ``requests`` module:
+
+.. code-block:: xml
+
+    # pip install requests
+
+2. The following section must be added to the ``ossec.conf`` file:
 
 .. code-block:: xml
 
     <integration>
       <name>virustotal</name>
-      <api_key>4548f9e04e6e5f83cf00746f9680805ca1cb3cff542da54297fb14fceceb4f04</api_key>   <!-- Replace with your key -->
+      <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
       <group>syscheck</group>
       <alert_format>json</alert_format>
     </integration>
 
-2. The integrator daemon must be enabled and followed by a restart of Wazuh, as shown below:
+3. The integrator daemon must be enabled and followed by a restart of Wazuh, as shown below:
 
 .. code-block:: console
 
@@ -70,7 +78,7 @@ For this use case, we will show how to monitor the folder ``/media/user/software
   ...
   </syscheck>
 
-2. The **syscheck** module must then be restarted. 
+2. The **syscheck** module must then be restarted.
 
 After restarting the **syscheck** module, the configuration is applied and the specified folder will be monitored in real-time.
 
@@ -93,7 +101,7 @@ The alert below appears when a file is added to the monitored directory.
    New date: Tue Nov 14 18:42:41 2017
    New inode: 104062
 
-From this alert, the integrator daemon extracts the hash fields, sending the request to VirusTotal for comparison. 
+From this alert, the integrator daemon extracts the hash fields, sending the request to VirusTotal for comparison.
 
 .. note::
     In the :doc:`FIM dedicated section.<../file-integrity/index>` you will find more information about using FIM with normal scans or real-time scans of directories.
@@ -132,7 +140,7 @@ This error means that the API key set in the configuration is invalid.
     virustotal.error: 204
     integration: virustotal
 
-This error is triggered when the request rate limit set by VirusTotal has been reached. See the :doc:`ToS section <terms-of-service>` for more information on this limitation. 
+This error is triggered when the request rate limit set by VirusTotal has been reached. See the :doc:`ToS section <terms-of-service>` for more information on this limitation.
 
 While the two previous alerts represent errors that may occur, the following are samples of alerts returned from a successful request:
 

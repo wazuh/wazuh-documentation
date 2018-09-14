@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _reference_ossec_email_alerts:
 
 email_alerts
@@ -13,7 +15,7 @@ email_alerts
 This extends the email options configured in the ``<global>`` section.
 
 .. note::
-  `Global  <./global>`_  email configuration is necessary to use granular email options.
+  :doc:`Global <global>` email configuration is necessary to use granular email options.
 
 Options
 -------

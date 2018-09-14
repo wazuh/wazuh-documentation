@@ -1,5 +1,6 @@
-.. _reference_ossec_rootcheck:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_rootcheck:
 
 rootcheck
 =========
@@ -30,7 +31,6 @@ Options
 - `check_files`_
 - `check_if`_
 - `check_pids`_
-- `check_policy`_
 - `check_ports`_
 - `check_sys`_
 - `check_trojans`_
@@ -45,18 +45,17 @@ base_directory
 
 The base directory that will be appended to the following options:
 
-rootkit_files
-rootkit_trojans
-windows_malware
-windows_audit
-windows_apps
-systems_audit
+- rootkit_files
+- rootkit_trojans
+- systems_audit
 
-+--------------------+---------------------+
-| **Default value**  | /var/ossec          |
-+--------------------+---------------------+
-| **Allowed values** | Path to a directory |
-+--------------------+---------------------+
++-----------------------------+---------------------+
+| **Default value (UNIX)**    | /                   |
++-----------------------------+---------------------+
+| **Default value (Windows)** | C:\\                |
++-----------------------------+---------------------+
+| **Allowed values**          | Path to a directory |
++-----------------------------+---------------------+
 
 .. _reference_ossec_rootcheck_rootkit_files:
 
@@ -202,17 +201,6 @@ check_pids
 ^^^^^^^^^^^^^^^
 
 Enable or disable the checking of process ID's.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
-check_policy
-^^^^^^^^^^^^^^^
-
-Enable or disable the checking of policy.
 
 +--------------------+---------+
 | **Default value**  | yes     |

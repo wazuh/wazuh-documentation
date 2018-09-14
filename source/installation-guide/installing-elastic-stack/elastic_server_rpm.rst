@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _elastic_server_rpm:
 
 Install Elastic Stack with RPM packages
@@ -10,45 +12,45 @@ The RPM packages are suitable for installation on Red Hat, CentOS and other RPM-
 Preparation
 -----------
 
-1. Oracle Java JRE is required by Logstash and Elasticsearch.
+1. Oracle Java JRE 8 is required by Logstash and Elasticsearch.
 
   .. note::
 
-      The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
+    The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
 
   .. code-block:: console
 
-      # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u161-b12/2f38c3b165be4555a1fa6e98c45e0808/jre-8u161-linux-x64.rpm"
+    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u181-b13/96a7b8442fe848ef90c96a2fad6ed6d1/jre-8u181-linux-x64.rpm"
 
   Now, check if the package was download successfully:
 
   .. code-block:: console
 
-      # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
+    # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
 
   Finally, install the RPM package using yum:
 
   .. code-block:: console
 
-  	# yum install jre-8-linux-x64.rpm
-  	# rm jre-8-linux-x64.rpm
+    # yum -y install jre-8-linux-x64.rpm
+    # rm -f jre-8-linux-x64.rpm
 
 2. Install the Elastic repository and its GPG key:
 
   .. code-block:: console
 
-	# rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+    # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
-	# cat > /etc/yum.repos.d/elastic.repo << EOF
-	[elasticsearch-6.x]
-	name=Elasticsearch repository for 6.x packages
-	baseurl=https://artifacts.elastic.co/packages/6.x/yum
-	gpgcheck=1
-	gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-	enabled=1
-	autorefresh=1
-	type=rpm-md
-	EOF
+    # cat > /etc/yum.repos.d/elastic.repo << EOF
+    [elasticsearch-6.x]
+    name=Elasticsearch repository for 6.x packages
+    baseurl=https://artifacts.elastic.co/packages/6.x/yum
+    gpgcheck=1
+    gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    enabled=1
+    autorefresh=1
+    type=rpm-md
+    EOF
 
 Elasticsearch
 -------------
@@ -59,7 +61,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-	 # yum install elasticsearch-6.2.1
+    # yum install elasticsearch-6.4.0
 
 2. Enable and start the Elasticsearch service:
 
@@ -67,32 +69,46 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-  	# systemctl daemon-reload
-  	# systemctl enable elasticsearch.service
-  	# systemctl start elasticsearch.service
+    # systemctl daemon-reload
+    # systemctl enable elasticsearch.service
+    # systemctl start elasticsearch.service
 
   b) For SysV Init:
 
   .. code-block:: console
 
-  	# chkconfig --add elasticsearch
-  	# service elasticsearch start
+    # chkconfig --add elasticsearch
+    # service elasticsearch start
 
-3. Load Wazuh Elasticsearch templates:
-
-  .. code-block:: console
-
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+  It's important to wait until the Elasticsearch server finishes starting. Check the current status with the following command, which should give you a response like the shown below:
 
   .. code-block:: console
 
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
+    # curl "localhost:9200/?pretty"
 
-4. Insert the sample alert:
+    {
+      "name" : "Zr2Shu_",
+      "cluster_name" : "elasticsearch",
+      "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
+      "version" : {
+        "number" : "6.4.0",
+        "build_flavor" : "default",
+        "build_type" : "rpm",
+        "build_hash" : "053779d",
+        "build_date" : "2018-07-20T05:20:23.451332Z",
+        "build_snapshot" : false,
+        "lucene_version" : "7.3.1",
+        "minimum_wire_compatibility_version" : "5.6.0",
+        "minimum_index_compatibility_version" : "5.0.0"
+      },
+      "tagline" : "You Know, for Search"
+    }
+
+3. Load the Wazuh template for Elasticsearch:
 
   .. code-block:: console
 
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -107,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # yum install logstash-6.2.1
+    # yum install logstash-6.4.0
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -115,7 +131,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/logstash/01-wazuh-local.conf
 
     Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
 
@@ -127,16 +143,16 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/logstash/01-wazuh-remote.conf
 
 
 .. note::
 
-    Follow the next steps if you use CentOS-6/RHEL-6 or Amazon AMI (logstash uses Upstart like a service manager and needs to be fixed, see `bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_) ::
+    Follow the next steps if you use CentOS-6/RHEL-6 or Amazon AMI (logstash uses Upstart like a service manager and needs to be fixed, see `this bug <https://bugs.launchpad.net/upstart/+bug/812870/>`_):
 
-	1) Edit the file /etc/logstash/startup.options changing line 30 from *LS_GROUP=logstash* to *LS_GROUP=ossec*.
-	2) Update the service with the new parameters by running the command /usr/share/logstash/bin/system-install
-	3) Restart Logstash.
+    1) Edit the file /etc/logstash/startup.options changing line 30 from *LS_GROUP=logstash* to *LS_GROUP=ossec*.
+    2) Update the service with the new parameters by running the command /usr/share/logstash/bin/system-install
+    3) Restart Logstash.
 
 3. Enable and start the Logstash service:
 
@@ -152,12 +168,14 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-  	# chkconfig --add logstash
-  	# service logstash start
+    # chkconfig --add logstash
+    # service logstash start
 
 .. note::
 
     If you are running the Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elastic_ssl`.
+
+.. _install_kibana_app_rpm:
 
 Kibana
 ------
@@ -168,21 +186,21 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-	 # yum install kibana-6.2.1
+    # yum install kibana-6.4.0
 
-2. Install the Wazuh App plugin for Kibana:
+2. Install the Wazuh app plugin for Kibana:
 
-  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh App. Set the limit as follows:
-
-  .. code-block:: console
-
-      # export NODE_OPTIONS="--max-old-space-size=3072"
-
-  b) Install the Wazuh App:
+  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app. Set the limit as follows:
 
   .. code-block:: console
 
-      # /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp.zip
+    # export NODE_OPTIONS="--max-old-space-size=3072"
+
+  b) Install the Wazuh app:
+
+  .. code-block:: console
+
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.6.1_6.4.0.zip
 
   .. warning::
 
@@ -190,13 +208,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note::
 
-    If you want to download a different Wazuh App plugin for another version of Wazuh or Elastic Stack, check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
+    If you want to download a different Wazuh app plugin for another version of Wazuh or Elastic Stack, check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
 
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 
   .. code-block:: yaml
 
-	 server.host: "0.0.0.0"
+    server.host: "0.0.0.0"
 
   .. note::
 
@@ -208,16 +226,16 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-  	# systemctl daemon-reload
-  	# systemctl enable kibana.service
-  	# systemctl start kibana.service
+    # systemctl daemon-reload
+    # systemctl enable kibana.service
+    # systemctl start kibana.service
 
   b) For SysV Init:
 
   .. code-block:: console
 
-  	# chkconfig --add kibana
-  	# service kibana start
+    # chkconfig --add kibana
+    # service kibana start
 
 5. Disable the Elasticsearch repository:
 
@@ -227,12 +245,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
-Connecting the Wazuh App with the API
--------------------------------------
+Next steps
+----------
 
-Follow the next guide in order to connect the Wazuh App with the API:
+Once the Wazuh and Elastic Stack servers are installed and connected, you can install and connect Wazuh agents. Follow :ref:`this guide <installation_agents>` and read the instructions for your specific environment.
 
-.. toctree::
-	:maxdepth: 1
-
-	connect_wazuh_app
+You can also read the Kibana app :ref:`user manual <kibana_app>` to learn more about its features and how to use it.

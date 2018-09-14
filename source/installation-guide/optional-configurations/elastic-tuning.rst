@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _elastic_tuning:
 
 Elasticsearch tuning
@@ -15,13 +17,13 @@ Elasticsearch performs poorly when the system is swapping the memory. It is vita
 
 In this guide, we will show how to set the *bootstrap.memory_lock* setting to true so Elasticsearch will lock the process address space into RAM. This prevents any Elasticsearch memory from being swapped out.
 
-1. Set bootstrap.memory_lock
+1. Set ``bootstrap.memory_lock``
 
 Uncomment or add this line to the ``/etc/elasticsearch/elasticsearch.yml`` file:
 
 .. code-block:: yaml
 
-    bootstrap.memory_lock: true
+  bootstrap.memory_lock: true
 
 2. Edit the limit of system resources
 
@@ -29,26 +31,26 @@ Where to configure systems settings depends on which package and operating syste
 
  - In a case where **systemd** is used, system limits need to be specified via systemd. To do this, create the folder executing the command:
 
-.. code-block:: console
+  .. code-block:: console
 
-			# mkdir -p /etc/systemd/system/elasticsearch.service.d/
+    # mkdir -p /etc/systemd/system/elasticsearch.service.d/
 
 Then, in the new directory, add a file called ``elasticsearch.conf`` and specify any changes in that file:
 
 .. code-block:: ini
 
-    [Service]
-    LimitMEMLOCK=infinity
+  [Service]
+  LimitMEMLOCK=infinity
 
 In other cases, edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
 
 .. code-block:: bash
 
-    MAX_LOCKED_MEMORY=unlimited
+  MAX_LOCKED_MEMORY=unlimited
 
 3. Limit memory
 
-The previous configuration might cause node instability or even node death with an *OutOfMemory* exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit the memory usage and prevent this situation.
+The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit the memory usage and prevent this situation.
 
 There are two rules to apply when setting the Elasticsearch heap size:
 
@@ -61,11 +63,11 @@ By default, Elasticsearch is configured with a 1 GB heap. You can change the hea
 
 .. code-block:: bash
 
-    # Xms represents the initial size of total heap space
-    # Xmx represents the maximum size of total heap space
+  # Xms represents the initial size of total heap space
+  # Xmx represents the maximum size of total heap space
 
-    -Xms4g
-    -Xmx4g
+  -Xms4g
+  -Xmx4g
 
 .. warning::
   Ensure that the min (Xms) and max (Xmx) sizes are the same to prevent JVM heap resizing at runtime as this is a very costly process.
@@ -74,24 +76,24 @@ By default, Elasticsearch is configured with a 1 GB heap. You can change the hea
 
 Finally, restart the Elasticsearch service:
 
-    a) For Systemd:
+  a) For Systemd:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # systemctl daemon-reload
-        # systemctl restart elasticsearch
+      # systemctl daemon-reload
+      # systemctl restart elasticsearch
 
-    b) For SysV Init:
+  b) For SysV Init:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # service elasticsearch restart
+      # service elasticsearch restart
 
 After starting Elasticsearch, you can see whether this setting was successfully applied by checking the value of ``mlockall`` in the output of the next request:
 
 .. code-block:: console
 
-    # curl -XGET 'localhost:9200/_nodes?filter_path=**.mlockall&pretty'
+    # curl "localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
 
@@ -105,7 +107,7 @@ After starting Elasticsearch, you can see whether this setting was successfully 
       }
     }
 
-If the output of the ``"mlockall"`` field is **false**, the request has failed. You will also find the line *Unable to lock JVM Memory* in the logs (*/var/log/elasticsearch/elasticsearch.log*).
+If the output of the ``"mlockall"`` field is **false**, the request has failed. You will also find the line *Unable to lock JVM Memory* in the logs (located at ``/var/log/elasticsearch/elasticsearch.log``).
 
 Reference:
 
@@ -132,7 +134,7 @@ Also, Elasticsearch allows you to make one or more copies of your index’s shar
 
 .. warning::
 
-    The number of shards and replicas can be defined per index at the time the index is created. After the index is created, you may change the number of *replicas* dynamically, however, you cannot change the number of *shards* after-the-fact.
+  The number of shards and replicas can be defined per index at the time the index is created. After the index is created, you may change the number of *replicas* dynamically, however, you cannot change the number of *shards* after-the-fact.
 
 How many shards should my index have?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -159,64 +161,64 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
 .. warning::
 
-    If your index has already been created, you will have to `reindex <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ after editing the template.
+  If your index has already been created, you will have to `reindex <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ after editing the template.
 
 1. Download the Wazuh Elasticsearch template:
 
 .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
 
 2. Edit the template in order to set one shard with no replicas:
 
 .. code-block:: console
 
-    # nano w-elastic-template.json
+  # nano w-elastic-template.json
 
 .. code-block:: json
 
-    {
-      "order": 0,
-      "template": "wazuh*",
-      "settings": {
-        "index.refresh_interval": "5s",
-        "number_of_shards" :   1,
-        "number_of_replicas" : 0
-      },
-      "mappings": {
-      "...": "..."
-      }
+  {
+    "order": 0,
+    "template": "wazuh-alerts-3.x-*",
+    "settings": {
+      "index.refresh_interval": "5s",
+      "number_of_shards" :   1,
+      "number_of_replicas" : 0
+    },
+    "mappings": {
+    "...": "..."
     }
+  }
 
 3. Load the template:
 
 .. code-block:: console
 
-	# curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @w-elastic-template.json
+  # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @w-elastic-template.json
 
 .. code-block:: json
 
-	{ "acknowledged" : true }
+  { "acknowledged" : true }
 
 4. *Optional*. Confirm your configuration was updated successfully:
 
 .. code-block:: console
 
-    # curl "http://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings"
+  # curl "http://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings"
 
 .. code-block:: json
 
-    {
-        "wazuh" : {
-            "settings" : {
-                "index" : {
-                    "number_of_shards" : "1",
-                    "number_of_replicas" : "0",
-                    "refresh_interval" : "5s"
-                }
-            }
+  {
+    "wazuh" : {
+      "settings" : {
+        "index" : {
+          "number_of_shards" : "1",
+          "number_of_replicas" : "0",
+          "refresh_interval" : "5s"
         }
+      }
     }
+  }
 
 Changing the number of replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -225,29 +227,26 @@ The number of replicas can be changed dynamically using the Elasticsearch API.
 
 In a cluster with one node, the number of replicas should be set to zero:
 
-.. code-block:: console
+.. code-block:: none
 
-	# curl -XPUT 'localhost:9200/wazuh-alerts-*/_settings?pretty' -H 'Content-Type: application/json' -d
+  # curl -XPUT 'localhost:9200/wazuh-alerts-*/_settings?pretty' -H 'Content-Type: application/json' -d'
+  {
+    "settings" : {
+      "number_of_replicas" : 0
+    }
+  }
+  '
 
 .. code-block:: json
 
-	{
-		"settings": {
-			"number_of_replicas" : 0
-		}
-	}
-
-
-	{ "acknowledged" : true }
+  { "acknowledged" : true }
 
 Note that we are assuming your target index pattern is **"wazuh-alerts-*"**, however, a different index pattern may be used. You can see a full list of your current indexes using the following command:
 
 .. code-block:: console
 
-	# curl 'localhost:9200/_cat/indices'
+  # curl "localhost:9200/_cat/indices"
 
-
-
-For reference:
+Reference:
 
   - `Shards & Replicas <https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#getting-started-shards-and-replicas>`_.

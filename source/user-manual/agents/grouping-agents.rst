@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _grouping-agents:
 
 Grouping agents
@@ -6,7 +8,7 @@ Grouping agents
 .. versionadded:: 3.0.0
 
 There are two methods for configuring registered agents. They can either be configured locally with the :doc:`ossec.conf <../reference/ossec-conf/index>` file or remotely using
-the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups with each group possessing a unique configuration.  This greatly simplifies the overall configuration process. 
+the :doc:`centralized configuration <../reference/centralized-configuration>`. If the centralized configuration is used, agents may be assigned to groups with each group possessing a unique configuration.  This greatly simplifies the overall configuration process.
 
 Unless otherwise assigned, all new agents automatically belong to the **'default'** group. This group is created during the installation process with the configuration files placed in the ``etc/shared/default/`` folder. These files will be pushed from the manager to all agents belonging to this group.
 
@@ -25,7 +27,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. code-block:: console
 
-      # curl -u foo:bar -k -X PUT "https://API_ADDRESS:55000/agents/002/group/dbms?pretty"
+      # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/group/dbms?pretty"
 
    .. note:: New groups may be created and configured before assigning agents. If a group does not exist prior to assigning an agent, it will be created when the first agent is added and set up with the files from the *'default'* group.
 
@@ -48,7 +50,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    .. code-block:: console
 
-      # curl -u foo:bar -k -X GET "https://API_ADDRESS:55000/agents/groups/dbms?pretty"
+      # curl -u foo:bar -X GET "http://localhost:55000/agents/groups/dbms?pretty"
 
 
 2. Once a group is created, its ``agents.conf`` file can be edited to include the specific configuration you wish to assign to this group. For this example, the file to be edited is located at ``etc/shared/dbms/agents.conf`` and each agent belonging to this group will receive this file.

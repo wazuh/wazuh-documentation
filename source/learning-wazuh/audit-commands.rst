@@ -1,16 +1,18 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _learning_wazuh_audit_commands:
 
 Keep watch for malicious command execution
 ==========================================
 
-Linux systems have a powerful auditing facility called auditd which can give a very detailed accounting of actions on and changes 
-to a system, but by default no auditd rules are active so we tend to miss out on this detailed history.  In this lab we will 
-configure auditd on linux-agent to account for all commands executed by the "centos" user, including commands run by user "centos" 
-in a sudo command or after sudo-ing to root.  After causing some audit events to be generated, we will look them over in Kibana.  
+Linux systems have a powerful auditing facility called auditd which can give a very detailed accounting of actions on and changes
+to a system, but by default no auditd rules are active so we tend to miss out on this detailed history.  In this lab we will
+configure auditd on linux-agent to account for all commands executed by the "centos" user, including commands run by user "centos"
+in a sudo command or after sudo-ing to root.  After causing some audit events to be generated, we will look them over in Kibana.
 Then we will set up several custom Wazuh rules to alert on especially suspicious command calls, making use of the CDB list lookup
 facility that allows rules to look up decoded field values in various lists and to use the results as part of the alert criteria.
 
-The Linux auditd system is an extensive auditing facility, which we will only touch on here.  Consider searching the Wazuh
+The Linux auditd system is an extensive auditing tool, which we will only touch on here. Consider searching the Wazuh
 documentation for "Monitoring system calls" to get a broader picture of the ways you can take advantage of it.
 
 Turn on program call auditing on linux-agent
@@ -80,7 +82,7 @@ Look over the audit events
 --------------------------
 
 1. On linux-agent, inspect the content of ``/var/log/audit/audit.log``.  Auditd writes events here, but it is not very readable.  Thankfully Linux Wazuh agents already monitor this file by default.
-2. Search Kibana for ``rule.id:80792`` in the Kibana Discover area.  That will catch all auditd command audit events.  
+2. Search Kibana for ``rule.id:80792`` in the Kibana Discover area.  That will catch all auditd command audit events.
 
 3. Pick the following Kibana fields for columnar display:
 
@@ -109,7 +111,7 @@ Look over the relevant Wazuh rule
 
     Parent rule 80700 catches all auditd events, while this rule focuses on auditd command events.  Notice how the ``<list>`` line in this
     rule takes the decoded ``audit.key`` value which all our auditd rules set to "audit-wazuh-c" presently, and looks this up in a
-    CDB list called ``audit-keys`` to see if the ``audit.key`` value is listed with a value of "command". 
+    CDB list called ``audit-keys`` to see if the ``audit.key`` value is listed with a value of "command".
 
 2. Look over the key-value pairs in the lookup file.  The file is ``/var/ossec/etc/lists/audit-keys``.
 
@@ -121,7 +123,7 @@ Look over the relevant Wazuh rule
         audit-wazuh-x:execute
         audit-wazuh-c:command
 
-    This CDB list contains keys and values separated colons.  Some lists only contain keys, in which case each key exists 
+    This CDB list contains keys and values separated colons.  Some lists only contain keys, in which case each key exists
     on a line of its own and is directly followed by a colon.
 
 3. Notice that in addition to the text file ``/var/ossec/etc/lists/audit-keys``, there is also a binary ``/var/ossec/etc/lists/audit-keys.cdb`` file that Wazuh uses for actual lookups.
@@ -132,11 +134,11 @@ Create a list of commands that Wazuh will watch for
 
 Wazuh allows you to maintain flat file CDB lists (key only or key:value) which are compiled into a special binary format to
 facilitate high-performance lookups in Wazuh rules.  Such lists must be created as files, added to the Wazuh configuration, and then compiled.
-After that, rules can be built that look up decoded fields in those CDB lists as part of their match criteria.  Right now we want 
+After that, rules can be built that look up decoded fields in those CDB lists as part of their match criteria.  Right now we want
 a list of commands that Wazuh should give us a special alert about when they are executed.
 
 1. On wazuh-manager, create ``/var/ossec/etc/lists/suspicious-programs`` with this content:
-    
+
     .. code-block:: console
 
         ncat:
@@ -148,7 +150,7 @@ a list of commands that Wazuh should give us a special alert about when they are
 
     .. code-block:: console
 
-        <list>etc/lists/suspicious-programs</list>   
+        <list>etc/lists/suspicious-programs</list>
 
 3. Restart the Wazuh manager
 
@@ -184,7 +186,7 @@ Make a rule to watch for the listed programs
             <group>audit_command,</group>
         </rule>
 
-    In this case we are simply checking to see if the decoded ``audit.command`` value appears in our new CDB lists at all, 
+    In this case we are simply checking to see if the decoded ``audit.command`` value appears in our new CDB lists at all,
     with no checking of a value.
 
 2. Restart Wazuh manager with ``ossec-control restart``.
@@ -205,7 +207,7 @@ Make a smarter list
 Let's make this list a little smarter by including values that indicate how alarmed we should be about a given program being run.
 
 1. On wazuh-manager, replace ``/var/ossec/etc/lists/suspicious-programs`` with this content:
-    
+
     .. code-block:: console
 
         ncat:red
@@ -220,15 +222,15 @@ Let's make this list a little smarter by including values that indicate how alar
         # ossec-makelists
 
     .. note::
-        The ``ossec-makelists`` program not only recompiles any CDB files that have been changed, but it causes ossec-analysisd 
-        to reload the changed lists without Wazuh manager restarting.  You do not need to run ``ossec-control restart`` after 
+        The ``ossec-makelists`` program not only recompiles any CDB files that have been changed, but it causes ossec-analysisd
+        to reload the changed lists without Wazuh manager restarting.  You do not need to run ``ossec-control restart`` after
         running ``ossec-makelists`` to make Wazuh use your updated lists.
 
 
 Make a smarter rule
 -------------------
 
-Now that our ``suspicious-programs`` list is more granular, let's create a higher severity rule to fire specifically on 
+Now that our ``suspicious-programs`` list is more granular, let's create a higher severity rule to fire specifically on
 instances when a "red" program is executed.
 
 1. Add this new rule to ``/var/ossec/etc/rules/local_rules.xml`` on wazuh-manager, directly after rule 100200:
@@ -242,7 +244,7 @@ instances when a "red" program is executed.
             <group>audit_command,</group>
         </rule>
 
-2. Restart Wazuh manager with ``ossec-control restart``. 
+2. Restart Wazuh manager with ``ossec-control restart``.
 
 3. On linux-agent install and run a "red" program (netcat):
 
@@ -250,14 +252,14 @@ instances when a "red" program is executed.
 
         # yum -y install nmap-ncat
         # nc -v
-        
+
 4. Search Kibana for ``data.audit.command:nc`` and expand the record, noting especially the rule.description of "Audit: Highly Suspicious Command: /usr/bin/ncat"
 
 
 Make an exception
 -----------------
 
-You have ``ping`` in your CDB list, but perhaps you have several systems that routinely ping 8.8.8.8 as a connectivity check and 
+You have ``ping`` in your CDB list, but perhaps you have several systems that routinely ping 8.8.8.8 as a connectivity check and
 you don't want these events to be logged.  Another child rule of 80297, with a level of "0" could provide such an exception.
 
 1. Add this new rule to ``/var/ossec/etc/rules/local_rules.xml`` on wazuh-manager, directly after rule 100210:
@@ -311,14 +313,10 @@ Observe the order in which our child rules are evaluated
         Trying rule: 100210 - Audit: Highly Suspicious Command: $(audit.exe)
         Trying rule: 100200 - Audit: Suspicious Command: $(audit.exe)
 
-5. Remember that when a rule matches, if it has multiple child rules, they are not evaluated in id order nor in the order they appear in the rule file.  Instead, child rules of level "0" are checked first since they are for making exceptions.  Then any remaining child rules are checked in the order of highest severity to lowest severity.  Keep this in mind as you build child rules of your own.  
+5. Remember that when a rule matches, if it has multiple child rules, they are not evaluated in id order nor in the order they appear in the rule file.  Instead, child rules of level "0" are checked first since they are for making exceptions.  Then any remaining child rules are checked in the order of highest severity to lowest severity.  Keep this in mind as you build child rules of your own.
 
 .. warning::
 
-    **Why does my new rule never fire?
-    
-    |
-    Sometimes a new rule never matches anything because of a flaw in its criteria.  Other times it never matches because it
-    is never even evalutated.  Remember, ``ossec-logtest -v`` is your friend.  Use it to see if your rule is being evaluated at all, and if not, what rule might be overshadowing it.
+    **Why does my new rule never fire?**
 
-
+    Sometimes a new rule never matches anything because of a flaw in its criteria.  Other times it never matches because it is never even evalutated.  Remember, ``ossec-logtest -v`` is your friend.  Use it to see if your rule is being evaluated at all, and if not, what rule might be overshadowing it.

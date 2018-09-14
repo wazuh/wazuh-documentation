@@ -1,3 +1,7 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
+.. _rules_syntax:
+
 Rules Syntax
 ============
 
@@ -50,29 +54,31 @@ rule
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **id**        | Definition     | Specifies the ID of the rule.                                                                     |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                                         |
+|               | Allowed values | Any number from 1 to 999999                                                                       |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **maxsize**   | Definition     | Specifies the maximum size of the event.                                                          |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | from 1 to 99999                                                                                   |
+|               | Allowed values | Any number from 1 to 9999                                                                         |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **frequency** | Definition     | Number of times the rule must have matched before firing.                                         |
-+               +                +                                                                                                   +
-|               |                | Triggers when 2 more than this setting.                                                           |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                                         |
+|               | Allowed values | Any number from 2 to 9999                                                                         |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **timeframe** | Definition     | The timeframe in seconds. This option is intended to be used with the frequency option.           |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                                         |
+|               | Allowed values | Any number from 1 to 99999                                                                        |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **ignore**    | Definition     | The time (in seconds) to ignore this rule after firing it (to avoid floods).                      |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                                         |
+|               | Allowed values | Any number from 1 to 999999                                                                       |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
-| **overwrite** | Definition     | Used to supercede an OSSEC rule with local changes.                                               |
+| **overwrite** | Definition     | Used to supersede an OSSEC rule with local changes.                                               |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | yes                                                                                               |
+|               | Allowed values | yes, no                                                                                           |
++---------------+----------------+---------------------------------------------------------------------------------------------------+
+| **noalert**   | Definition     | Not trigger any alert if the rule matches.                                                        |
++               +----------------+---------------------------------------------------------------------------------------------------+
+|               | Allowed values | Attribute with no value                                                                           |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 
 match
@@ -125,7 +131,6 @@ Any regex to be compared to a field extracted by the decoder.
 | **name** | Specifies the name of the field extracted by the decoder. |
 +----------+-----------------------------------------------------------+
 
-
 srcip
 ^^^^^
 
@@ -147,7 +152,6 @@ Any IP address or CIDR block to be compared to an IP decoded as dstip. Use "!" t
 +--------------------+-----------+
 | **Allowed values** | Any dstip |
 +--------------------+-----------+
-
 
 extra_data
 ^^^^^^^^^^
@@ -182,7 +186,6 @@ Program name is decoded from syslog process name.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
 
-
 hostname
 ^^^^^^^^^^
 
@@ -208,13 +211,13 @@ Time that the event was generated.
 weekday
 ^^^^^^^^
 
- Week day that the event was generated.
+Week day that the event was generated.
 
- +--------------------+-------------------------------------+
- | **Default Value**  | n/a                                 |
- +--------------------+-------------------------------------+
- | **Allowed values** | monday - sunday, weekdays, weekends |
- +--------------------+-------------------------------------+
++--------------------+-------------------------------------+
+| **Default Value**  | n/a                                 |
++--------------------+-------------------------------------+
+| **Allowed values** | monday - sunday, weekdays, weekends |
++--------------------+-------------------------------------+
 
 id
 ^^^
@@ -231,7 +234,6 @@ url
 ^^^
 
 Any URL (decoded as the URL).
-
 
 +--------------------+------------------------------------------------------------------+
 | **Default Value**  | n/a                                                              |
@@ -286,9 +288,7 @@ This option is used in conjunction with frequency and timeframe.
 +--------------------+-------------+
 
 .. note::
-    Rules at level 0 are discarded immediately and will not be used with the if_matched_rules. The level must be at least 1, but the <no_log> option can be added to the rule to make sure it does not get logged.
-
-
+  Rules at level 0 are discarded immediately and will not be used with the if_matched_rules. The level must be at least 1, but the <no_log> option can be added to the rule to make sure it does not get logged.
 
 if_matched_group
 ^^^^^^^^^^^^^^^^
@@ -411,6 +411,8 @@ Rule description.
 | **Allowed values** | Any string |
 +--------------------+------------+
 
+Since Wazuh v3.3.0 it is possible to include any decoded field (static or dynamic) to the description message.
+
 list
 ^^^^
 
@@ -487,7 +489,7 @@ Additional rule options
 +--------------------+-----------------------------------------------------+
 
 .. note::
-    Use one ``<option>`` tag for each option you want to add.
+  Use one ``<option>`` tag for each option you want to add.
 
 .. _rules_check_diff:
 

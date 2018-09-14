@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _daemons:
 
 Daemons
@@ -34,8 +36,6 @@ Daemons
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-clusterd <clusterd>`                  | Manages the Wazuh cluster manager                               | manager                     |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
-| :doc:`wazuh-clusterd-internal <clusterd-internal>`| Manages the Wazuh cluster (**internal**)                        | manager                     |
-+---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 | :doc:`wazuh-modulesd <wazuh-modulesd>`            | Manages the Wazuh modules                                       | manager, agent              |
 +---------------------------------------------------+-----------------------------------------------------------------+-----------------------------+
 
@@ -58,5 +58,4 @@ Daemons
     ossec-reportd
     ossec-syscheckd
     clusterd
-    clusterd-internal
     wazuh-modulesd

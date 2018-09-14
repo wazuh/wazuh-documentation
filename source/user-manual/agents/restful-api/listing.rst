@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _restful-api-listing:
 
 Listing Agents
@@ -9,7 +11,7 @@ The request :ref:`GET /agents <request_list>` returns the list of available agen
 
 .. code-block:: console
 
-    $ curl -u foo:bar -k http://127.0.0.1:55000/agents?pretty
+    $ curl -u foo:bar "http://localhost:55000/agents?pretty"
 
 .. code-block:: json
 

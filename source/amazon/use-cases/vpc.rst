@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _amazon_use-cases_vpc:
 
 VPC Use cases
@@ -8,44 +10,31 @@ Using an Amazon VPC (Virtual Private Cloud), you can logically isolate some of y
 Create a VPC
 ------------
 
-If a VPC is created, rule ``81000`` will match and an alert will be generated as shown below:
+If a VPC is created, the following alert will be shown on Kibana:
 
-+------------------------------------------------------------------------+
-|**Definition of rule 81000**                                            |
-+------------------------------------------------------------------------+
-|::                                                                      |
-|                                                                        |
-|  <rule id="81000" level="2">                                           |
-|      <if_sid>80300</if_sid>                                            |
-|      <action>CreateVpc</action>                                        |
-|      <description>Amazon-vpc: Vpc Created</description>                |
-|      <group>amazon,pci_dss_10.6.1,</group>                             |
-|  </rule>                                                               |
-+------------------------------------------------------------------------+
-|    **Kibana will show this alert**                                     |
-+------------------------------------------------------------------------+
-|.. thumbnail:: ../../images/aws/aws-vpc-1.png                           |
-|    :align: center                                                      |
-|    :width: 100%                                                        |
-+------------------------------------------------------------------------+
+.. thumbnail:: ../../images/aws/aws-vpc-1.png
+    :align: center
+    :width: 100%
 
-If a user without proper permissions attempts to create a VPC, rule ``81001`` will match, triggering an alert:
+If a user without proper permissions attempts to create a VPC, the following alert will be shown on Kibana:
 
-+-------------------------------------------------------------------------------+
-|**Definition of rule 81001**                                                   |
-+-------------------------------------------------------------------------------+
-|::                                                                             |
-|                                                                               |
-|  <rule id="81001" level="5">                                                  |
-|      <if_sid>81000</if_sid>                                                   |
-|      <match>"errorCode":"Client.UnauthorizedOperation"</match>                |
-|      <description>Amazon-Vpc: Vpc Created Unauthorized Operation</description>|
-|      <group>amazon,pci_dss_10.6.1,</group>                                    |
-|  </rule>                                                                      |
-+-------------------------------------------------------------------------------+
-|    **Kibana will show this alert**                                            |
-+-------------------------------------------------------------------------------+
-|.. thumbnail:: ../../images/aws/aws-vpc-2.png                                  |
-|    :align: center                                                             |
-|    :width: 100%                                                               |
-+-------------------------------------------------------------------------------+
+.. thumbnail:: ../../images/aws/aws-vpc-2.png
+    :align: center
+    :width: 100%
+
+Working with VPC Data
+---------------------
+
+A VPC alert contains data such as dest and source IP address, dst and source port and how many bytes were sent:
+
+.. thumbnail:: ../../images/aws/aws-vpc-3.png
+    :align: center
+    :width: 100%
+
+These alerts can be easily analyzed using visualizations like the following one:
+
+.. thumbnail:: ../../images/aws/vpc_flow_dataviz.png
+    :align: center
+    :width: 100%
+
+On that visualization you can look for peaks in your network, once you found a peak you can filter the alerts generated on that time and check which IPs were comunicating. Since IP address is a field used in many AWS alerts, you'll probably found other alerts and find out what happened.

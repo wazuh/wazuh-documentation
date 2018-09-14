@@ -1,5 +1,6 @@
-.. _reference_ossec_syslog_output:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_syslog_output:
 
 syslog_output
 =============
@@ -88,12 +89,22 @@ The rule_id of the alerts to be forwarded.
 location
 ^^^^^^^^
 
-The location of the alerts to be forwarded.
+The location field refers to the origin of the alert, that it could be:
+
+- syscheck
+- rootcheck
+- File path
+- Command or its alias
+- command_tag (woodle)
+- aws-cloudtrail
+- cis-cat
+- vulnerability-detector
+- syscollector
 
 +--------------------+-----------------------------+
 | **Default value**  | n/a                         |
 +--------------------+-----------------------------+
-| **Allowed values** | Any valid log file location |
+| **Allowed values** | Any valid location          |
 +--------------------+-----------------------------+
 
 use_fqdn

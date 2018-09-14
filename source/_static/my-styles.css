@@ -1,3 +1,8 @@
+/*
+ * Wazuh documentation - Custom stylesheet
+ * Copyright (C) 2018 Wazuh, Inc.
+ */
+
 /* Body and layout background *************************************************/
 
 .wy-body-for-nav {
@@ -212,4 +217,11 @@ div.version:after {
     color: #404040;
     font-size: 80%;
     pointer-events: none;
+}
+
+/* Tables tweak for Firefox ***************************************************/
+
+.wy-table-bordered-all td,
+.rst-content table.docutils td {
+    border-left: 1px solid #e1e4e5 !important;
 }

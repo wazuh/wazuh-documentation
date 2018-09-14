@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wodle-syscollector:
 
 wodle name="syscollector"
@@ -20,7 +22,10 @@ Options
 - `scan_on_start`_
 - `hardware`_
 - `os`_
+- `network`_
 - `packages`_
+- `ports`_
+- `processes`_
 
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
@@ -35,7 +40,13 @@ Options
 +----------------------+-----------------------------+
 | `os`_                | yes, no                     |
 +----------------------+-----------------------------+
+| `network`_           | yes, no                     |
++----------------------+-----------------------------+
 | `packages`_          | yes, no                     |
++----------------------+-----------------------------+
+| `ports`_             | yes, no                     |
++----------------------+-----------------------------+
+| `processes`_         | yes, no                     |
 +----------------------+-----------------------------+
 
 
@@ -94,10 +105,51 @@ Enables the OS scan.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
+network
+^^^^^^^
+
+Enables the network scan.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
 packages
-^^^^^^^^^
+^^^^^^^^
 
 Enables the packages scan.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+ports
+^^^^^
+
+Enables the ports scan.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+With option **all='no'** it will only scan listening ports.
+
++----------------------+-----------------------------+
+| Options              | Allowed values              |
++======================+=============================+
+| **all**              | yes, no                     |
++----------------------+-----------------------------+
+
+processes
+^^^^^^^^^
+
+Enables the processes scan.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -117,5 +169,8 @@ Example of configuration
 	  <scan_on_start>yes</scan_on_start>
 	  <hardware>yes</hardware>
 	  <os>yes</os>
+	  <network>yes</network>
 	  <packages>yes</packages>
+	  <ports all="no">yes</ports>
+	  <processes>yes</processes>
 	</wodle>

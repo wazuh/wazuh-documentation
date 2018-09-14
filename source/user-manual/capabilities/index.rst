@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _capabilities:
 
 Capabilities
@@ -5,13 +7,13 @@ Capabilities
 
 In this section, you will find:
 
-- a deeper explanation of how each capability works,
+- A deeper explanation of how each capability works.
 
-- configuration options for specific capabilities,
+- Configuration options for specific capabilities.
 
-- frequently asked questions, and
+- Frequently asked questions.
 
-- some practical examples.
+- Some practical examples.
 
 
 If you find a problem, error or if you want to ask related questions, please contact us through our `mailing list <https://groups.google.com/d/forum/wazuh>`_.
@@ -21,6 +23,7 @@ If you find a problem, error or if you want to ask related questions, please con
 
     log-data-collection/index
     file-integrity/index
+    auditing-whodata/index
     anomalies-detection/index
     policy-monitoring/index
     system-calls-monitoring/index
@@ -29,6 +32,7 @@ If you find a problem, error or if you want to ask related questions, please con
     agentless-monitoring/index
     antiflooding
     labels
+    syscollector
     vulnerability-detection
     virustotal-scan/index
-    vuls
+    osquery

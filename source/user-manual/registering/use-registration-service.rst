@@ -1,7 +1,9 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _use-registration-service:
 
 Using the registration service
-=============================================
+==============================
 
 It's possible to register agents automatically with authd. Choose the method that best meets your needs:
 
@@ -20,7 +22,7 @@ It's possible to register agents automatically with authd. Choose the method tha
 +-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 Simple method
------------------
+-------------
 
 Get an SSL certificate
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -72,13 +74,13 @@ By default, authd adds agents with a dynamic IP (like using "any" on ``manage_ag
 
     # /var/ossec/bin/ossec-authd -i
 
-On the other hand, **duplicate IPs are not allowed**, so an agent won't be added if there is already another agent registered with the same IP. By using the ``-f`` option, authd can be told to **force a registration** if it finds an older agent with the same IP - the older agent's registration will be deleted:
+On the other hand, **duplicate IPs are not allowed**, so an agent won't be added if there is already another agent registered with the same IP. By using the ``-F`` option, authd can be told to **force a registration** if it finds an older agent with the same IP - the older agent's registration will be deleted:
 
    (Manager)
 
    .. code-block:: console
 
-        # /var/ossec/bin/ossec-authd -i -f 0
+        # /var/ossec/bin/ossec-authd -i -F 0
 
 The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, ``0`` means to delete the old agent's registration regardless of how recently it has checked in.
 
@@ -160,7 +162,7 @@ First we are going to create a certificate of authority (CA) that we will use to
 
    .. code-block:: console
 
-        # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.pem -batch
+        # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Manager"
 
 .. warning::
     The file ``rootCA.key`` that we have just created is the **private key** of the certificate of authority. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
@@ -203,8 +205,10 @@ Verify agents via SSL
 
   1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field:
 
-      # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
-      # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+    .. code-block:: console
+
+        # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
+        # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
   2. Copy the CA (but not the key) to the manager's ``etc`` folder (if not already there) and start ``ossec-authd``:
 
@@ -257,9 +261,9 @@ Verify agents via SSL
 Forcing insertion
 ----------------------------
 
-If you try to add an agent with an IP already listed in an existing registration, ``ossec-authd`` will generate an error. You can use the argument *-f* to force the insertion.
+If you try to add an agent with an IP already listed in an existing registration, ``ossec-authd`` will generate an error. You can use the argument *-F* to force the insertion.
 
 Example
 ^^^^^^^^^^
 
-We previously installed and registered the Wazuh agent on *Server1* with IP 10.0.0.10 and ID 005. For some reason, we then had to completely re-install *Server1* and thus we now need to install and reregister the Wazuh agent on *Server1*. In this case, we can use the "*-f 0*" parameter which results in the previous agent (005) being removed (with a backup) and a new agent being successfully registered. The new agent will have a new ID.
+We previously installed and registered the Wazuh agent on *Server1* with IP 10.0.0.10 and ID 005. For some reason, we then had to completely re-install *Server1* and thus we now need to install and reregister the Wazuh agent on *Server1*. In this case, we can use the "*-F 0*" parameter which results in the previous agent (005) being removed (with a backup) and a new agent being successfully registered. The new agent will have a new ID.

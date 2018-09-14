@@ -1,3 +1,4 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _ossec-authd:
 
@@ -10,7 +11,6 @@ The ossec-authd program can automatically add an agent to a Wazuh manager and pr
 
     By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
 
-
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-V**           | Version and license message.                                                                          |
 +------------------+-------------------------------------------------------------------------------------------------------+
@@ -22,13 +22,7 @@ The ossec-authd program can automatically add an agent to a Wazuh manager and pr
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-f**           | Run in foreground.                                                                                    |
 +------------------+-------------------------------------------------------------------------------------------------------+
-| **-i**           | Use client's source IP address instead of any.                                                        |
-+------------------+-------------------------------------------------------------------------------------------------------+
 | **-F <time>**    | Remove old agent with same name or IP if its keepalive has more than the specified number of seconds. |
-+------------------+-------------------------------------------------------------------------------------------------------+
-| **-F no**        | Disable force insertion.                                                                              |
-+------------------+-------------------------------------------------------------------------------------------------------+
-| **-r**           | Do not keep removed agents (delete).                                                                  |
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-g <group>**   | Group to run as.                                                                                      |
 +                  +-------------+-----------------------------------------------------------------------------------------+

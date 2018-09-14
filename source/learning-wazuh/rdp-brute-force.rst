@@ -1,22 +1,24 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _learning_wazuh_rdp_brute_force:
 
 Detect an RDP brute force attack
 ================================
 
-Here you will wage a small RDP brute force attack against your Windows Agent instance.  You will see how Wazuh detects and 
-alerts on each login failure, and how a higher severity alert is produced when enough login failures are seen.  Lastly you 
+Here you will wage a small RDP brute force attack against your Windows Agent instance.  You will see how Wazuh detects and
+alerts on each login failure, and how a higher severity alert is produced when enough login failures are seen.  Lastly you
 will take a closer look at the decoders and rules involved in the detection of your "attack".
 
 Perform the attack
 ------------------
 
-Using a Windows Remote Desktop client, attempt to log in as user "george" to the Elastic IP assigned to your Windows Agent instance six times in a fairly small time window.  
+Using a Windows Remote Desktop client, attempt to log in as user "george" to the Elastic IP assigned to your Windows Agent instance six times in a fairly small time window.
 
 
 See the resulting alerts in Kibana
 ----------------------------------
 
-1. Search Kibana for "george".  
+1. Search Kibana for "george".
 
 2. Select the following fields for display:
 
@@ -40,7 +42,7 @@ See the resulting alerts in Kibana
 Hold your breath for a deep dive!
 ---------------------------------
 
-Let's take a thorough look at how this log event is being decoded and what leads Wazuh to the final conclusion that brute force activity is occurring. 
+Let's take a thorough look at how this log event is being decoded and what leads Wazuh to the final conclusion that brute force activity is occurring.
 
 1. In Kibana, copy the complete contents of the full_log field for one of the Windows logon failure events.
 
@@ -62,14 +64,14 @@ Let's take a thorough look at how this log event is being decoded and what leads
     |
 
     .. note::
-        The first step that Wazuh takes in processing an incoming log record is to pre-decode it.  This breaks down the record in a 
+        The first step that Wazuh takes in processing an incoming log record is to pre-decode it.  This breaks down the record in a
         very basic way based on Wazuh's knowledge of where it was acquired, like from a syslog file or a Windows Event Log.  There are
         no decoder files representing how this is done; it is all done directly in the Wazuh code.
 
-    .. warning:: 
+    .. warning::
         Windows events and certain other log types do not have the local computer name as a consistent part of the log header, and so
-        the hostname cannot be determined during the pre-decoding phase.  When this occurs, ossec-logtest will simply report the 
-        hostname in phase 1 as the hostname of the Wazuh Server itself.  It is then the job of decoders in phase 2 to find 
+        the hostname cannot be determined during the pre-decoding phase.  When this occurs, ossec-logtest will simply report the
+        hostname in phase 1 as the hostname of the Wazuh Server itself.  It is then the job of decoders in phase 2 to find
         the correct hostname from deeper within the log record.
 
 5. Look over the phase 2 output:
@@ -127,29 +129,29 @@ Let's take a thorough look at how this log event is being decoded and what leads
     |                                                                                                                                                 |
     |::                                                                                                                                               |
     |                                                                                                                                                 |
-    | <decoder name="windows_fields">                                                                                                                 | 
-    |  <type>windows</type>                                                                                                                           |                                                                            
+    | <decoder name="windows_fields">                                                                                                                 |
+    |  <type>windows</type>                                                                                                                           |
     |  <parent>windows</parent>                                                                                                                       |
     |  <regex offset="after_regex">Account Name:\t*\s*(\S\S+)</regex>                                                                                 |
-    |  <order>account_name</order>                                                                                                                    | 
+    |  <order>account_name</order>                                                                                                                    |
     | </decoder>                                                                                                                                      |
     |                                                                                                                                                 |
     |::                                                                                                                                               |
     |                                                                                                                                                 |
-    | <decoder name="windows_fields">                                                                                                                 | 
-    |  <type>windows</type>                                                                                                                           |                                                                            
+    | <decoder name="windows_fields">                                                                                                                 |
+    |  <type>windows</type>                                                                                                                           |
     |  <parent>windows</parent>                                                                                                                       |
     |  <regex offset="after_regex">Account Domain:\t*\s*(\S\S+)\t*\s*</regex>                                                                         |
-    |  <order>account_domain</order>                                                                                                                  | 
+    |  <order>account_domain</order>                                                                                                                  |
     | </decoder>                                                                                                                                      |
     |                                                                                                                                                 |
     |::                                                                                                                                               |
     |                                                                                                                                                 |
-    | <decoder name="windows_fields">                                                                                                                 | 
-    |  <type>windows</type>                                                                                                                           |                                                                            
+    | <decoder name="windows_fields">                                                                                                                 |
+    |  <type>windows</type>                                                                                                                           |
     |  <parent>windows</parent>                                                                                                                       |
     |  <regex>Logon Type:\t*\s*(\S+)</regex>                                                                                                          |
-    |  <order>logon_type</order>                                                                                                                      | 
+    |  <order>logon_type</order>                                                                                                                      |
     | </decoder>                                                                                                                                      |
     |                                                                                                                                                 |
     |::                                                                                                                                               |
@@ -207,17 +209,17 @@ Let's take a thorough look at how this log event is being decoded and what leads
 
         |
 
-        When a rule matches a log record, if it has no children then that is the final rule match.  
-        Otherwise, the child rules of that rule are evaluated.  
+        When a rule matches a log record, if it has no children then that is the final rule match.
+        Otherwise, the child rules of that rule are evaluated.
         Child rules are evaluated in the order of descending severity level with the exception
         that level zero child rules are looked at first.
         Once a child rule matches, none of the other child rules of the same parent will be considered.
         Instead, analysis drops down to the level of checking child rules of the child that just matched.
         This process continues until a rule matches that has no children or no matching children.
-        When mulitiple children of the same severity level are involved, they are evaluated in 
+        When mulitiple children of the same severity level are involved, they are evaluated in
         load order (the order the rule files are loaded and the order the rules appear in the rule files).
 
-9. Use the show-wazuh-rule script to carefully examine and understand each rule that matched for this event, like this:  
+9. Use the show-wazuh-rule script to carefully examine and understand each rule that matched for this event, like this:
 
     .. code-block:: console
 
@@ -228,7 +230,7 @@ Let's take a thorough look at how this log event is being decoded and what leads
         /var/ossec/ruleset/rules/0220-msauth_rules.xml:    <description>Group of windows rules.</description>
         /var/ossec/ruleset/rules/0220-msauth_rules.xml:  </rule>
 
-10. Read up on the components of each rule in the Wazuh User manual.  Search for "Rules Syntax". 
+10. Read up on the components of each rule in the Wazuh User manual.  Search for "Rules Syntax".
 
 11. Here are some helpful hints about the rules we see in this lab:
 
@@ -242,7 +244,7 @@ Let's take a thorough look at how this log event is being decoded and what leads
 Where could things proceed from here?
 -------------------------------------
 
-The generation of the "Multiple Windows Logon Failures" does not have to be the end of the story for this log event.  
+The generation of the "Multiple Windows Logon Failures" does not have to be the end of the story for this log event.
 Other things that could additionally or alternatively take place might be:
 
 1. An email, Slack, or PagerDuty message could be generated about this alert.

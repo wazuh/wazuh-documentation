@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _reference_agent_conf:
 
 Centralized configuration
@@ -12,10 +14,11 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**, **wodle name="cis-cat"**)
+- :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 
-.. note:: When setting up a shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the file *etc/local_internal_options.conf* in the agent:
+.. note:: When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the file *etc/local_internal_options.conf* in the agent:
 
 .. code-block:: shell
 
@@ -206,7 +209,7 @@ Also, the API returns the md5sum of the ``agent.conf`` file in the field ``share
 
 .. code-block:: console
 
-    $ curl -u foo:bar -k http://127.0.0.1:55000/agents/1032?pretty
+    $ curl -u foo:bar "http://localhost:55000/agents/1032?pretty"
 
     {
        "error": 0,
@@ -225,9 +228,11 @@ Also, the API returns the md5sum of the ``agent.conf`` file in the field ``share
        }
     }
 
-5. Manual update
+5. Restarting the agent
 
-If ``auto_restart`` has been disabled, the agent will have to be manually restarted so that the new ``agent.conf`` file will be used. This can be done as follows:
+By default, the agent restarts by itself automatically when it receives a new shared configuration.
+
+If ``auto_restart`` has been disabled (in the ``<client>`` section of :doc:`Local configuration <ossec-conf/index>`), the agent will have to be manually restarted so that the new ``agent.conf`` file will be used. This can be done as follows:
 
 .. code-block:: console
 
@@ -273,3 +278,87 @@ and this configuration in the ``agent.conf`` file.
   </rootcheck>
 
 The final configuration will overwrite ``check_unixaudit`` to "yes" because it appears in the ``agent.conf`` file. However, the path listed with the ``system_audit`` option will be repeated with both settings in the final configuration. In other words, ``system_audit_rcl.txt`` (from ``ossec.conf``) and ``cis_debian_linux_rcl.txt`` (from ``agent.conf``) will be included.
+
+How to ignore shared configuration
+----------------------------------
+
+Whether for any reason you don`t want to apply the shared configuration in a specific agent, it can be disabled by adding the following line to the file *etc/local_internal_options.conf* in that agent:
+
+.. code-block:: shell
+
+    agent.remote_conf=0
+
+
+Download configuration files from remote location
+-------------------------------------------------
+
+Wazuh manager has the capability to download configuration files like ``merged.mg`` as well as other files to be merged for the groups that you want to.
+
+To use this feature, we need to put a yaml file named ``files.yml`` under the directory ``/var/ossec/etc/shared/``. When the **manager** starts, it will read and parse the file.
+
+The ``files.yml`` has the following structure as shown in the following example:
+
+.. code-block:: yaml
+
+    groups:
+        my_group_1:
+            files:
+                agent.conf: https://example.com/agent.conf
+                rootcheck.txt: https://example.com/rootcheck.txt
+                merged.mg: https://example.com/merged.mg
+            poll: 15
+
+        my_group_2:
+            files:
+                agent.conf: https://example.com/agent.conf
+            poll: 200
+
+    agents:
+        001: my_group_1
+        002: my_group_2
+        003: another_group
+
+Here we can distinct the two main blocks: ``groups`` and ``agents``.
+
+
+1. In the ``groups`` block we define the group name from which we want to download the files.
+
+    - If the group doesn't exists, it will be created.
+    - If a file has the name ``merged.mg``, only this file will be downloaded. Then it will be validated.
+    - The ``poll`` label indicates the download rate in seconds of the specified files.
+
+2. In the ``agents`` block, we define for each agent the group to which we want it to belong.
+
+This configuration can be changed on the fly. The **manager** will reload the file and parse it again so there is no need to restart the **manager** every time.
+
+The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` file. For example:
+
+- Parsing is successful:
+
+.. code-block:: shell
+
+    INFO: Successfully parsed of yaml file: /etc/shared/files.yml
+
+- File has been changed:
+
+.. code-block:: shell
+
+    INFO: File '/etc/shared/files.yml' changed. Reloading data
+
+- Parsing failed due to bad token:
+
+.. code-block:: shell
+
+    INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'    
+
+- Download of file failed:
+
+.. code-block:: shell
+
+    ERROR: Failed to download file from url: https://example.com/merged.mg
+
+- Downloaded ``merged.mg`` file is corrupted or not valid:
+
+.. code-block:: shell
+
+    ERROR: The downloaded file '/var/download/merged.mg' is corrupted.

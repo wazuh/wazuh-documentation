@@ -1,3 +1,8 @@
+/*
+ * Wazuh documentation - Version selector script
+ * Copyright (C) 2018 Wazuh, Inc.
+ */
+
 var versions = [
     {name: "3.x (current)", url: "/3.x"},
     {name: "2.1", url: "/2.1"},
