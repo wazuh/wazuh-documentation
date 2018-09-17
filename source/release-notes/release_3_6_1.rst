@@ -11,7 +11,7 @@ This section shows the most relevant improvements and fixes in version 3.6.1. Mo
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.6.1/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.6.1/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.6.1-6.4.0/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.6.1-7.1.2/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.6.1-7.1.3/CHANGELOG.md>`_
 
 Wazuh core
 ----------
