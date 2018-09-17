@@ -2,8 +2,8 @@
 
 .. _wazuh_ansible_installation:
 
-Installing Ansible
-==================
+Install Ansible
+===============
 
 .. note:: OpenSSH Compatibility
 
