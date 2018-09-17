@@ -17,6 +17,7 @@ The deployment of the Elastic Stack server involves the installation of Elastics
 
 
 	192.168.0.180 ansible_ssh_user=centos
+	
 	192.168.0.108 ansible_ssh_user=elk      ansible_python_interpreter=/usr/bin/python3
 
 	.. code-block:: console
@@ -35,7 +36,7 @@ The deployment of the Elastic Stack server involves the installation of Elastics
 1 - Access to wazuh-ansible
 ---------------------------
 
-1.1 - We access the directory where we have cloned the repository from our Ansible server
+1.1 - We access the directory where we have cloned the repository from our Ansible server.
 
 .. code-block:: console
 
@@ -53,9 +54,9 @@ If we want to change the default configuration we can change the following files
 
 We also can create another YAML file only with the content we want to change the configuration for each role. We can find more information here:
 
-- :ref: `Elasticsearch <ansible-wazuh-elasticsearch>` role. 
-- :ref: `Logstash <ansible-wazuh-logstash>` role. 
-- :ref: `Kibana <ansible-wazuh-kibana>` role. 
+- :ref:`Elasticsearch <ansible-wazuh-elasticsearch>` role. 
+- :ref:`Logstash <ansible-wazuh-logstash>` role. 
+- :ref:`Kibana <ansible-wazuh-kibana>` role. 
 
 
 Let's see below, the content of the YAML files ``/etc/ansible/wazuh-elastic.yml``. 
@@ -204,3 +205,9 @@ We can check the status of our new services in our Elastic Stack server.
 	● kibana.service - Kibana
 	   Loaded: loaded (/etc/systemd/system/kibana.service; enabled; vendor preset: enabled)
 	   Active: active (running) since Thu 2018-09-13 16:53:32 CEST; 4min 58s ago
+
+Once the Wazuh API is registered we can access it through our Kibana portal. 
+
+.. thumbnail:: ../../images/ansible/ansible-elk.png
+    :align: center
+    :width: 100%
