@@ -233,6 +233,8 @@ Upgrade Kibana
 
   .. code-block:: console
 
+    # chown -R kibana:kibana /usr/share/kibana/optimize
+    # chown -R kibana:kibana /usr/share/kibana/plugins
     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 3. Upgrade the Wazuh app:
