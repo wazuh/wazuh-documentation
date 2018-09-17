@@ -305,12 +305,19 @@ Upgrade Kibana
       # apt-get install kibana=6.4.0
 
 
-2. Remove the Wazuh Kibana App plugin from Kibana:
+2. Uninstall the Wazuh app from Kibana:
+
+    a) Update file permissions. This will avoid several errors prior to updating the app:
 
     .. code-block:: console
 
       # chown -R kibana:kibana /usr/share/kibana/optimize
       # chown -R kibana:kibana /usr/share/kibana/plugins
+
+    b) Remove the Wazuh app:
+
+    .. code-block:: console
+
       # sudo -u kibana /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 

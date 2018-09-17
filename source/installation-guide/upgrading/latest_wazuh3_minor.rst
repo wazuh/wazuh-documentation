@@ -231,10 +231,17 @@ Upgrade Kibana
 
 2. Uninstall the Wazuh app from Kibana:
 
+  a) Update file permissions. This will avoid several errors prior to updating the app:
+
   .. code-block:: console
 
     # chown -R kibana:kibana /usr/share/kibana/optimize
     # chown -R kibana:kibana /usr/share/kibana/plugins
+
+  b) Remove the Wazuh app:
+
+  .. code-block:: console
+
     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 3. Upgrade the Wazuh app:
@@ -250,8 +257,6 @@ Upgrade Kibana
   .. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
-    # chown -R kibana:kibana /usr/share/kibana/optimize
-    # chown -R kibana:kibana /usr/share/kibana/plugins
     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.6.1_6.4.0.zip
 
 .. warning::
