@@ -5,7 +5,7 @@
 Monitoring Services
 ===================
 
-`Azure Active Directory <https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis>`_ (Azure AD) es el servicio de administración de identidades y directorios que combina servicios básicos de directorio, administración de acceso a aplicaciones y protección de identidades en una sola solución.
+`Azure Active Directory <https://docs.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-whatis>`_ is the identity and directory management service that combines basic directory services, application access management, and identity protection in a single solution.
 
 .. thumbnail:: ../images/azure/graph_intro.png
     :title: AAD
