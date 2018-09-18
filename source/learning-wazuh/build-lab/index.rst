@@ -2,8 +2,8 @@
 
 .. _build_lab:
 
-Prepare your Wazuh Lab Environment
-==================================
+Do it yourself: Prepare your Wazuh Lab Environment
+==================================================
 
 The Learning Wazuh labs are built for use in a dedicated Amazon Virtual Private Cloud environment.  With some
 adjustments, you could certainly get the labs to work with other kinds of hosts, but these labs have been specifically
