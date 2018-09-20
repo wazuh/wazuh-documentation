@@ -95,7 +95,7 @@ The location field refers to the origin of the alert, that it could be:
 - rootcheck
 - File path
 - Command or its alias
-- command_tag (woodle)
+- command_tag (wodle)
 - aws-cloudtrail
 - cis-cat
 - vulnerability-detector
