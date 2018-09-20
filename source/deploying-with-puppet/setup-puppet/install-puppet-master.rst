@@ -39,13 +39,14 @@ Get the appropriate Puppet apt repository, and then the "puppetserver" package. 
   # apt update
   # apt-get install -y puppetserver
 
-.. note:: 
-  
-  For a correct installation we recommend the use of Puppet versions equal or greater than 5. The releases supported by the manifest to install Wazuh are as follows: 
+.. note:: For a correct installation we recommend the use of Puppet versions equal or greater than 5. 
 
-  Ubuntu: **precise | trusty | vivid | wily | xenial | yakketi**
 
-  Debian: **jessie | wheezy | stretch | sid**
+.. note:: The releases supported by the manifest to install Wazuh are as follows: 
+
+      Ubuntu: **precise | trusty | vivid | wily | xenial | yakketi**
+
+      Debian: **jessie | wheezy | stretch | sid**
 
 
 Memory Allocation

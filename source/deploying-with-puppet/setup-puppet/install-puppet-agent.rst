@@ -40,13 +40,16 @@ Get the appropriate Puppet apt repository, and then the "puppet-agent" package. 
   # apt update
   # apt-get install -y puppet-agent
 
-.. note:: 
+.. note:: For a correct installation we recommend the use of Puppet versions equal or greater than 5. 
+
+
+.. note:: The releases supported by the manifest to install Wazuh are as follows: 
+
+      Ubuntu: **precise | trusty | vivid | wily | xenial | yakketi**
+
+      Debian: **jessie | wheezy | stretch | sid**
   
-  For a correct installation we recommend the use of Puppet versions equal or greater than 5. The releases supported by the manifest to install Wazuh are as follows: 
 
-  Ubuntu: precise|trusty|vivid|wily|xenial|yakketi
-
-  Debian: jessie|wheezy|stretch|sid
 
 Configuration
 ^^^^^^^^^^^^^
