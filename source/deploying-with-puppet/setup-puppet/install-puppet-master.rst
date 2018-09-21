@@ -8,12 +8,16 @@ Installing Puppet master
 Installation on CentOS/RHEL/Fedora
 ------------------------------------
 
-Install the Puppet yum repository and then the "puppet-server" package. See https://yum.puppetlabs.com to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, for CentOS 7 or RHEL 7, do the following:
+Install the Puppet yum repository and then the "puppetserver" package. See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, to install Puppet 5 for CentOS 7 or RHEL 7, do the following:
 
 .. code-block:: console
 
-   # rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm
-   # yum install puppetserver
+   # rpm -ivh https://yum.puppetlabs.com/puppet5/puppet5-release-el-7.noarch.rpm
+   # yum -y install puppetserver
+
+.. note:: 
+
+  For a correct installation we recommend the use of Puppet versions equal or greater than 5. 
 
 
 Installation on Debian/Ubuntu
@@ -26,13 +30,24 @@ Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 	# apt-get update
 	# apt-get install curl apt-transport-https lsb-release
 
-Get the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the puppet repo for your Linux distribution, you can use next script to make installation more silently:
+Get the appropriate Puppet apt repository, and then the "puppetserver" package. See https://apt.puppetlabs.com to find the correct deb file to install the Puppet 5 repo for your Linux distribution.
 
 .. code-block:: console
 
-  # wget "https://apt.puppetlabs.com/puppetlabs-release-pc1-$(lsb_release -cs).deb"
-  # dpkg -i "puppetlabs-release-pc1-$(lsb_release -cs).deb"
-  # apt-get update && sudo apt-get install puppetserver
+  # wget https://apt.puppetlabs.com/puppet5-release-xenial.deb
+  # dpkg -i puppet5-release-xenial.deb
+  # apt update
+  # apt-get install -y puppetserver
+
+.. note:: For a correct installation we recommend the use of Puppet versions equal or greater than 5. 
+
+
+.. note:: The releases supported by the manifest to install Wazuh are as follows: 
+
+      Ubuntu: **precise | trusty | vivid | wily | xenial | yakketi**
+
+      Debian: **jessie | wheezy | stretch | sid**
+
 
 Memory Allocation
 --------------------------
@@ -47,7 +62,7 @@ Replace 2g with the amount of memory you want to allocate to Puppet Server. For 
 Configuration
 --------------------------
 
-Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section, and replacing ``puppet.example.com`` with your own FQDN: ::
+Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet.example.com`` with your own FQDN: ::
 
    dns_alt_names = puppet,puppet.example.com
 
@@ -60,15 +75,19 @@ Then, restart your Puppet Server to apply changes:
   .. code-block:: console
 
         # systemctl start puppetserver
+        # systemctl enable puppetserver
 
   b) For SysV Init:
 
   .. code-block:: console
 
         # service puppetserver start
+        # update-rc.d puppetserver
 
-PuppetDB installation
----------------------
+PuppetDB installation (Optional)
+--------------------------------
+
+.. warning:: Some of these steps may be outdated. If it is not necessary to install, continue in the next section. 
 
 After configuring Puppet Server to run on Apache with Passenger, the next step is to add PuppetDB so that you can take advantage of exported resources, as well as have a central storage location for Puppet facts and catalogs.
 
