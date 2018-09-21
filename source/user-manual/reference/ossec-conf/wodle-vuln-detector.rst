@@ -48,7 +48,7 @@ disabled
 Disable the Vulnerability detector wodle.
 
 +--------------------+-----------------------------+
-| **Default value**  | yes                         |
+| **Default value**  | no                          |
 +--------------------+-----------------------------+
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
