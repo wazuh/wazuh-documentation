@@ -54,7 +54,7 @@ disabled
 Disable the osquery wodle.
 
 +--------------------+---------+
-| **Default value**  | yes     |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
