@@ -36,7 +36,7 @@ Options
 - `prelude_output`_
 - `zeromq_output`_
 - `zeromq_uri`_
-- `geoip_db_path`_
+- `geoipdb`_
 - `rotate_interval`_
 - `max_output_size`_
 - `queue_size`_
@@ -314,10 +314,11 @@ This will listen for zeromq on the Unix Domain socket /alerts-zmq.
 
   <zeromq_uri>ipc:///alerts-zmq</zeromq_uri>
 
-geoip_db_path
-^^^^^^^^^^^^^
+geoipdb
+^^^^^^^
 
 This indicates the full path of the MaxMind GeoIP IPv4 database file.
+(NOTE: it is referenced outside the /var/ossec chroot)
 
 +--------------------+-----------------------------------------------+
 | **Default value**  | n/a                                           |
@@ -329,7 +330,7 @@ For example:
 
 .. code-block:: xml
 
-  <geoip_db_path>/etc/GeoLiteCity.dat</geoip_db_path>
+  <geoipdb>/var/ossec/etc/GeoLiteCity.dat</geoipdb>
 
 rotate_interval
 ^^^^^^^^^^^^^^^
