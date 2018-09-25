@@ -17,7 +17,7 @@ How it works
 ------------
 Osquery can be used to expose an operating system as a high-performance relational database. This allows you to write SQL-based queries to explore operating system data.
 
-Bellow you can see some examples of the queries you can make:
+Below you can see some examples of the queries you can make:
 
 List all the local users of the machine.
 
