@@ -14,30 +14,93 @@ Once the Ansible repository has been cloned, we proceed to install the Wazuh ser
 1 - Access to wazuh-ansible 
 ---------------------------
 
-1.1 - We access the directory where we have cloned the repository from our Ansible server
+1.1 - We access the directory where we have cloned the repository from our Ansible server.
 
 .. code-block:: console
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$ ls
-	ansible-role-elasticsearch  ansible-role-logstash  meta             wazuh-elastic_stack-distributed.yml  wazuh-kibana.yml
-	ansible-role-filebeat       ansible-wazuh-agent    README.md        wazuh-elastic_stack-single.yml       wazuh-logstash.yml
-	ansible-role-kibana         ansible-wazuh-manager  wazuh-agent.yml  wazuh-elastic.yml                    wazuh-manager.yml
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ ls
+	CHANGELOG.md  playbooks  README.md  roles  VERSION
+
+We can see the roles we have. 
+
+.. code-block:: console
+
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree roles -d
+	roles
+	├── ansible-galaxy
+	│   └── meta
+	├── elastic-stack
+	│   ├── ansible-elasticsearch
+	│   │   ├── defaults
+	│   │   ├── handlers
+	│   │   ├── meta
+	│   │   ├── tasks
+	│   │   └── templates
+	│   ├── ansible-kibana
+	│   │   ├── defaults
+	│   │   ├── handlers
+	│   │   ├── meta
+	│   │   ├── tasks
+	│   │   └── templates
+	│   └── ansible-logstash
+	│       ├── defaults
+	│       ├── handlers
+	│       ├── meta
+	│       ├── tasks
+	│       └── templates
+	└── wazuh
+	    ├── ansible-filebeat
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── tests
+	    ├── ansible-wazuh-agent
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── vars
+	    └── ansible-wazuh-manager
+	        ├── defaults
+	        ├── handlers
+	        ├── meta
+	        ├── tasks
+	        ├── templates
+	        └── vars
+
+And we can see the preconfigured playbooks we have. 
+
+.. code-block:: console
+
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree playbooks/
+	playbooks/
+	├── wazuh-agent.yml
+	├── wazuh-elastic_stack-distributed.yml
+	├── wazuh-elastic_stack-single.yml
+	├── wazuh-elastic.yml
+	├── wazuh-kibana.yml
+	├── wazuh-logstash.yml
+	└── wazuh-manager.yml
+
 
 Using **Wazuh Manager** role we will install and configure Wazuh Manager and Wazuh API, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`. 
 
-If we want to change the default configuration we can change the ``/etc/ansible/wazuh-ansible/ansible-wazuh-manager/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref: `Wazuh Manager <ansible-wazuh-manager>` role, where we can also see how to change the default configuration of agentless and Wazuh API. 
+If we want to change the default configuration we can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref: `Wazuh Manager <ansible-wazuh-manager>` role, where we can also see how to change the default configuration of agentless and Wazuh API. 
 
-We also can create another YAML file only with the content we want to change the configuration for **Filebeat** or directly in the ``/etc/ansible/wazuh-ansible/ansible-wazuh-filebeat/defaults/main.yml`` file. We can find more information at :ref: `Wazuh Manager <ansible-wazuh-filebeat>` role.
+We also can create another YAML file only with the content we want to change the configuration for **Filebeat** or directly in the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat/defaults/main.yml`` file. We can find more information at :ref: `Wazuh Manager <ansible-wazuh-filebeat>` role.
 
-Let's see below, the content of the YAML file ``/etc/ansible/wazuh-ansible/wazuh-manager.yml`` that we are going to run for a complete installation of the server. 
+Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-manager.yml`` that we are going to run for a complete installation of the server. 
 
 .. code-block:: console
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$ cat wazuh-manager.yml
-	- hosts: wazuh-manager
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible/playbooks$ cat wazuh-manager.yml
+	- hosts: <your wazuh server host>
 	  roles:
-	    - role: ansible-wazuh-manager
-	    - { role: ansible-role-filebeat, filebeat_output_logstash_hosts: '192.168.33.169:5000' }
+	    - role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager
+	    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_logstash_hosts: 'your logstash IP' }
 
 
 Let's take a closer look at the content. 
@@ -57,9 +120,8 @@ Our resulting file is:
 
 	- hosts: 192.168.0.180
 	  roles:
-	    - role: ansible-wazuh-manager
-	    - { role: ansible-role-filebeat, filebeat_output_logstash_hosts: '192.168.0.108:5000' }
-
+	    - role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager
+	    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_logstash_hosts: '192.168.0.108:5000' }
 
 .. note::
 
@@ -69,7 +131,7 @@ Our resulting file is:
 
 		- hosts: 192.168.0.180
 		  roles:
-		    - role: ansible-wazuh-manager
+		    - role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager
 
 .. note::
 
@@ -79,7 +141,7 @@ Our resulting file is:
 
 		- hosts: 192.168.0.180
 		  roles:
-		    - { role: ansible-role-filebeat, filebeat_output_logstash_hosts: '192.168.0.108:5000' }
+		    - { role: /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat, filebeat_output_logstash_hosts: '192.168.0.108:5000' }
 
 
 3 - Running the playbook
@@ -94,7 +156,7 @@ It seems that we are ready to run the playbook and start the installation, but s
 
 .. code-block:: console
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$ ansible-playbook wazuh-manager.yml -b -K
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible/playbooks$ ansible-playbook wazuh-manager.yml -b -K
 
 We will obtain a final result similar to the one shown in the following code block. 
 

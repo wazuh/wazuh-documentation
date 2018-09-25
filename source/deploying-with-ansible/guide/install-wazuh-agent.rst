@@ -47,25 +47,87 @@ We can install the Wazuh agent using the roles and playbooks available in the Wa
 
 .. code-block:: console
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$ ls
-	ansible-role-elasticsearch  ansible-role-logstash  meta             wazuh-elastic_stack-distributed.yml  wazuh-kibana.yml
-	ansible-role-filebeat       ansible-wazuh-agent    README.md        wazuh-elastic_stack-single.yml       wazuh-logstash.yml
-	ansible-role-kibana         ansible-wazuh-manager  wazuh-agent.yml  wazuh-elastic.yml                    wazuh-manager.yml
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ ls
+	CHANGELOG.md  playbooks  README.md  roles  VERSION
+
+We can see the roles we have. 
+
+.. code-block:: console
+
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree roles -d
+	roles
+	├── ansible-galaxy
+	│   └── meta
+	├── elastic-stack
+	│   ├── ansible-elasticsearch
+	│   │   ├── defaults
+	│   │   ├── handlers
+	│   │   ├── meta
+	│   │   ├── tasks
+	│   │   └── templates
+	│   ├── ansible-kibana
+	│   │   ├── defaults
+	│   │   ├── handlers
+	│   │   ├── meta
+	│   │   ├── tasks
+	│   │   └── templates
+	│   └── ansible-logstash
+	│       ├── defaults
+	│       ├── handlers
+	│       ├── meta
+	│       ├── tasks
+	│       └── templates
+	└── wazuh
+	    ├── ansible-filebeat
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── tests
+	    ├── ansible-wazuh-agent
+	    │   ├── defaults
+	    │   ├── handlers
+	    │   ├── meta
+	    │   ├── tasks
+	    │   ├── templates
+	    │   └── vars
+	    └── ansible-wazuh-manager
+	        ├── defaults
+	        ├── handlers
+	        ├── meta
+	        ├── tasks
+	        ├── templates
+	        └── vars
+
+And we can see the preconfigured playbooks we have. 
+
+.. code-block:: console
+
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible$ tree playbooks/
+	playbooks/
+	├── wazuh-agent.yml
+	├── wazuh-elastic_stack-distributed.yml
+	├── wazuh-elastic_stack-single.yml
+	├── wazuh-elastic.yml
+	├── wazuh-kibana.yml
+	├── wazuh-logstash.yml
+	└── wazuh-manager.yml
 
 In this occasion we are going to use the role of **wazuh-agent**, which contains the necessary commands to install an agent and register it in our Wazuh environment. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`. 
 
-If we want to change the default configuration we can change the ``/etc/ansible/wazuh-ansible/ansible-wazuh-agent/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref: `Wazuh Agent <ansible-wazuh-agent>` role.
+If we want to change the default configuration we can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref: `Wazuh Agent <ansible-wazuh-agent>` role.
 
-Let's see below, the content of the YAML file ``/etc/ansible/wazuh-ansible/wazuh-ansible.yml`` that we are going to run for a complete installation of the Wazuh agent.
+Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-agent.yml`` that we are going to run for a complete installation of the Wazuh agent.
 
 .. code-block:: yaml
 
-	- hosts: all:!wazuh-manager
+	- hosts: <your wazuh agents hosts>
 	  roles:
-	    - ansible-wazuh-agent
+	    - /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent
 	  vars:
 	    wazuh_managers:
-	      - address: 127.0.0.1
+	      - address: <your manager IP>
 	        port: 1514
 	        protocol: udp
 	        api_port: 55000
@@ -76,6 +138,7 @@ Let's see below, the content of the YAML file ``/etc/ansible/wazuh-ansible/wazuh
 	      port: 1515
 	      ssl_agent_ca: null
 	      ssl_auto_negotiate: 'no'
+
 
 Let's take a closer look at the content. 
 
@@ -98,7 +161,7 @@ Our resulting file is:
 
 	- hosts: 192.168.0.102
 	  roles:
-	    - ansible-wazuh-agent
+	    - /etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent
 	  vars:
 	    wazuh_managers:
 	      - address: 192.168.0.180
@@ -126,7 +189,7 @@ It seems that we are ready to run the playbook and start the installation, but s
 
 .. code-block:: console
 
-	ansible@ansible:/etc/ansible/wazuh-ansible$ ansible-playbook wazuh-agent.yml -b -K
+	ansible@ansible:/etc/ansible/roles/wazuh-ansible/playboks$ ansible-playbook wazuh-agent.yml -b -K
 
 We will obtain a final result similar to the one shown in the following code block. 
 

@@ -340,8 +340,8 @@ From Ansible server.
 
 .. code-block:: console
 	
-	ansible@ansible:~$ cd /etc/ansible/
-	ansible@ansible:/etc/ansible$ sudo git clone https://github.com/wazuh/wazuh-ansible.git
-	ansible@ansible:/etc/ansible$ ls
-	ansible.cfg  hosts  roles  wazuh-ansible
+	ansible@ansible:~$ cd /etc/ansible/roles/
+	ansible@ansible:/etc/ansible/roles$ sudo git clone https://github.com/wazuh/wazuh-ansible.git
+	ansible@ansible:/etc/ansible/roles$ ls
+	wazuh-ansible
 
