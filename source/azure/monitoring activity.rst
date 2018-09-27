@@ -184,20 +184,20 @@ As the records are in ``.json`` format, with this rules we can start generating 
 
 .. code-block:: xml
 
-    <rule id="200001" level="5">
+    <rule id="87801" level="5">
         <decoded_as>json</decoded_as>
         <field name="azure_tag">azure-log-analytics</field>
         <description>Azure: Log analytics</description>
     </rule>
 
-    <rule id="200010" level="3">
-        <if_sid>200001</if_sid>
+    <rule id="87810" level="3">
+        <if_sid>87801</if_sid>
         <field name="Type">AzureActivity</field>
         <description>Azure: Log analytics activity</description>
     </rule>
 
-    <rule id="200011" level="3">
-        <if_sid>200010</if_sid>
+    <rule id="87811" level="3">
+        <if_sid>87810</if_sid>
         <field name="OperationName">\.+</field>
         <description>Azure: Log analytics: $(OperationName)</description>
     </rule>
@@ -232,7 +232,7 @@ We select the ``Log Analytics`` entry, write our query ``AzureActivity`` and ``r
 Kibana visualization
 ^^^^^^^^^^^^^^^^^^^^
 
-When our integration performs the query, we will be able to see the results in Kibana. In this case we can notice that the ``200011`` rule has been triggered and see that the fields ``OperationName`` and ``EventSubmissionTimestamp`` coincide among others. 
+When our integration performs the query, we will be able to see the results in Kibana. In this case we can notice that the ``87811`` rule has been triggered and see that the fields ``OperationName`` and ``EventSubmissionTimestamp`` coincide among others. 
 
 .. thumbnail:: ../images/azure/vm_kibana_search.png
     :title: Log Analytics App
@@ -346,14 +346,14 @@ The logs are stored in json files, therefore, with these simple rules we will be
 
 .. code-block:: xml
 
-    <rule id="200003" level="3">
+    <rule id="87803" level="3">
         <decoded_as>json</decoded_as>
         <field name="azure_tag">azure-storage</field>
         <description>Azure: Storage</description>
     </rule>
 
-    <rule id="200013" level="3">
-        <if_sid>200003</if_sid>
+    <rule id="87813" level="3">
+        <if_sid>87803</if_sid>
         <field name="operationName">\.+</field>
         <description>Azure: Storage: $(OperationName)</description>
     </rule>
@@ -410,7 +410,7 @@ In the blob we downloaded we found several logs, we focus on this particular log
 Kibana visualization
 ^^^^^^^^^^^^^^^^^^^^
 
-When our integration performs the access, we will be able to see the results in Kibana. In this case we can notice that the ``200013`` rule has been triggered and see that the fields ``operationName`` and ``time`` coincide among others.
+When our integration performs the access, we will be able to see the results in Kibana. In this case we can notice that the ``87813`` rule has been triggered and see that the fields ``operationName`` and ``time`` coincide among others.
 
 .. thumbnail:: ../images/azure/storage_kibana1.png
     :title: Log Analytics App
