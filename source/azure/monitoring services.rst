@@ -145,7 +145,7 @@ As the records are in ``.json`` format, with this rules we can start generating 
 
 .. code-block:: xml
 
-	<rule id="200002" level="3">
+	<rule id="87802" level="3">
 		<decoded_as>json</decoded_as>
 		<field name="azure_tag">azure-ad-graph</field>
 		<description>Azure: AD $(activity)</description>
@@ -180,9 +180,14 @@ From the ``Azure Active Directory`` entry we select the ``Audit logs`` entry and
 Kibana visualization
 ^^^^^^^^^^^^^^^^^^^^
 
-When our integration performs the query, we will be able to see the results in Kibana. As we can see through the rule ``200002`` the dates of the events coincide (taking into consideration the time difference between computers)
+When our integration performs the query, we will be able to see the results in Kibana. As we can see through the rule ``87802`` the dates of the events coincide (taking into consideration the time difference between computers)
 
 .. thumbnail:: ../images/azure/kibana_services1.png
+    :title: AAD
+    :align: center
+    :width: 100%
+
+.. thumbnail:: ../images/azure/kibana_services2.png
     :title: AAD
     :align: center
     :width: 100%
