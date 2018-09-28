@@ -489,7 +489,7 @@ Additional rule options
 +--------------------+-----------------------------------------------------+
 
 .. note::
-  Use one ``<option>`` tag for each option you want to add.
+  Use one ``<options>`` tag for each option you want to add.
 
 .. _rules_check_diff:
 

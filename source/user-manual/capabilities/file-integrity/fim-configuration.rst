@@ -10,6 +10,7 @@ Configuration
 #. `Configuring real-time monitoring`_
 #. `Configure to report changes`_
 #. `Configure to ignore files`_
+#. `Configure maximum recursion level allowed`_
 #. `Ignoring files via rules`_
 #. `Changing severity`_
 
@@ -98,6 +99,48 @@ Files and directories can be omitted using the ignore option (or registry_ignore
       <ignore>/root/dir</ignore>
       <ignore type="sregex">.log$|.tmp</ignore>
     </syscheck>
+
+Configure maximum recursion level allowed
+-----------------------------------------
+
+.. versionadded:: 3.6.0
+
+It is possible to configure the maximum recursion level allowed for a specific directory by setting the ``recursion_level`` option. This option must be an 
+integer between **0 and 320**. An example of use:
+
+::
+
+    <syscheck>
+      <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
+      <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
+      <directories check_all="yes" recursion_level="3">folder_test</directories>
+    </syscheck>
+
+Using the following directory structure and ``recursion_level="3"``:
+
+:: 
+    
+    folder_test
+    ├── file_0.txt
+    └── level_1
+        ├── file_1.txt
+        └── level_2
+            ├── file_2.txt
+            └── level_3
+                ├── file_3.txt
+                └── level_4
+                    ├── file_4.txt
+                    └── level_5
+                        └── file_5.txt
+                            
+
+We will receive alerts for all files up to ``folder_test/level_1/level_2/level_3/`` but we won't receive alerts from any directory deeper than ``level_3``.
+
+If we don't want any recursion (just get alerts from the files in the monitored folder), we must set ``recursion_level`` to 0. 
+
+.. warning:: If no ``recursion_level`` is specified, it will be setted to the default value defined by ``syscheck.default_max_depth`` in the :doc:`internal options <../../reference/internal-options>` configuration file.
+
+
 
 Ignoring files via rules
 ------------------------

@@ -36,10 +36,9 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
   The Syscollector module performs periodic scans in the system to obtain information related to the installed hardware, operating system information, network information, installed packages, active ports, and running processes.
 
-.. topic:: AWS Cloudtrail wodle
+.. topic:: AWS S3 wodle
 
-  The AWS Cloudtrail module adds a native way for ingesting AWS CloudTrail logs.
-  Logs are fetched in JSON format from the bucket and they are sent to Wazuh socket.
+  The AWS S3 wodle allows you to gather and parse logs from multiple AWS services, such as Guard Duty, Macie, VPC Flow, etc. See the :doc:`AWS S3 <../../../amazon/index>` section for more information on this functionality.
 
 .. topic:: Vulnerability detector wodle
 
@@ -53,12 +52,14 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 wazuh-modulesd options
 ----------------------
 
-+--------+---------------------------+
-| **-d** | Increase debug mode.      |
-+--------+---------------------------+
-| **-f** | Run in the foreground.    |
-+--------+---------------------------+
-| **-h** | Display the help message. |
-+--------+---------------------------+
-| **-t** | Test configuration.       |
-+--------+---------------------------+
++---------+---------------------------+
+| **-d**  | Basic debug mode.         |
++---------+---------------------------+
+| **-dd** | Verbose debug mode.       |
++---------+---------------------------+
+| **-f**  | Run in the foreground.    |
++---------+---------------------------+
+| **-h**  | Display the help message. |
++---------+---------------------------+
+| **-t**  | Test configuration.       |
++---------+---------------------------+

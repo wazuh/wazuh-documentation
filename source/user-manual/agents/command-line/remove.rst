@@ -14,7 +14,7 @@ If you would like a confirmation before removing the agent, use the following:
     # /var/ossec/bin/manage_agents
 
     ****************************************
-    * Wazuh v3.5.0 Agent manager.          *
+    * Wazuh v3.6.1 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
@@ -41,7 +41,7 @@ If you would like to remove the agent with no confirmation, use the option shown
     # /var/ossec/bin/manage_agents -r 001
 
     ****************************************
-    * Wazuh v3.5.0 Agent manager.          *
+    * Wazuh v3.6.1 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).

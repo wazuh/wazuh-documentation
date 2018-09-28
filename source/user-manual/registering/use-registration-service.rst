@@ -66,21 +66,26 @@ Register the agent
 Some hints
 ^^^^^^^^^^
 
-By default, authd adds agents with a dynamic IP (like using "any" on ``manage_agents``). If you want to add agents with static IP addresses, use ``-i`` at server-side:
+By default, authd adds the agents with their static IP. If you want to add agents whith a dynamic IP address (like using ``any`` on ``manage_agents``) you must change ``etc/ossec.conf`` on the server-side:
 
    (Manager)
 
-   .. code-block:: console
+   .. code-block:: xml
 
-    # /var/ossec/bin/ossec-authd -i
+    <auth>
+	<use_source_ip>no</use_source_ip>
+    </auth>
 
-On the other hand, **duplicate IPs are not allowed**, so an agent won't be added if there is already another agent registered with the same IP. By using the ``-F`` option, authd can be told to **force a registration** if it finds an older agent with the same IP - the older agent's registration will be deleted:
+On the other hand, **duplicate IPs are not allowed**, so an agent won't be added if there is already another agent registered with the same IP. By changing ``etc/ossec.conf``, authd can be told to **force a registration** if it finds an older agent with the same IP - the older agent's registration will be deleted:
 
    (Manager)
 
-   .. code-block:: console
+   .. code-block:: xml
 
-        # /var/ossec/bin/ossec-authd -i -F 0
+    <auth>
+	<force_insert>yes</force_insert>
+	<force_time>0</force_time>
+    </auth>
 
 The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, ``0`` means to delete the old agent's registration regardless of how recently it has checked in.
 

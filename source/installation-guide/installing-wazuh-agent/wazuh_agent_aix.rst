@@ -20,12 +20,12 @@ Unzip the package in ``/``:
 
 .. code-block:: console
 
-    # tar -xvf wazuh-agent_v3.5.0-aix5.3.tar
+    # tar -xvf wazuh-agent_v3.6.1-aix5.3.tar
 
 * Installing in AIX 6 and 7
 
 .. code-block:: console
 
-    # tar -xvf wazuh-agent_v3.5.0-aix6.1.tar
+    # tar -xvf wazuh-agent_v3.6.1-aix6.1.tar
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.

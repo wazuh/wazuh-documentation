@@ -21,7 +21,7 @@ Configuring props
 
   .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/splunk/props.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/splunk/props.conf
 
 Configuring inputs
 ^^^^^^^^^^^^^^^^^^
@@ -30,7 +30,7 @@ Configuring inputs
 
    .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.5/extensions/splunk/inputs.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/splunk/inputs.conf
 
 2. Set the Wazuh manager hostname:
 
@@ -44,7 +44,7 @@ Set up data forwarding
 
 1. Point Forwarder output to Wazuh's Indexer with the following command:
 
-  .. image:: ../../images/splunk-app/simple-distributed-arch.png
+  .. image:: ../images/splunk-app/simple-distributed-arch.png
     :align: center
 
   .. code-block:: console
