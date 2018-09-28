@@ -63,6 +63,13 @@ Toggles GeoIP lookups on or off.
 | **Allowed values** | yes, no     |
 +--------------------+-------------+
 
+.. note::
+    This option is only available when wazuh has been compiled with
+    [`LIBGEOIP_ENABLED`](https://github.com/wazuh/wazuh/blob/master/src/config/alerts-config.c#L61).
+    Otherwise, use of this option will result in an
+    [Invalid element](https://github.com/wazuh/wazuh/blob/master/src/error_messages/error_messages.h#L84)
+    error and prevent wazuh from starting.
+
 Default configuration
 ---------------------
 
@@ -72,3 +79,4 @@ Default configuration
       <log_alert_level>3</log_alert_level>
       <email_alert_level>12</email_alert_level>
     </alerts>
+
