@@ -18,4 +18,5 @@ This section describes how to list and remove registered agents and register age
         wazuh-app
         agent-connection
         grouping-agents
+        multigroups
         remote-upgrading/index
