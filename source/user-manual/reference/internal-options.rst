@@ -145,9 +145,9 @@ Analysisd
 +------------------------------------+---------------+--------------------------------------------------------------------+
 |  **analysisd.decoder_order_size**  | Description   | Maximum number of fields in a decoder (order tag).                 |
 +                                    +---------------+--------------------------------------------------------------------+
-|                                    | Default value | 64                                                                 |
+|                                    | Default value | 1024                                                                 |
 +                                    +---------------+--------------------------------------------------------------------+
-|                                    | Allowed value | Any integer between 10 and 64                                      |
+|                                    | Allowed value | Any integer between 10 and 1024                                      |
 +------------------------------------+---------------+--------------------------------------------------------------------+
 |     **analysisd.geoip_jsonout**    | Description   | Toggle to turn on or off output of GeoIP data in JSON alerts.      |
 +                                    +---------------+--------------------------------------------------------------------+
