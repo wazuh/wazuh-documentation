@@ -53,8 +53,6 @@ Below is an example of results where a vulnerability is identified:
    Assurance: 100%
    ScanDate: 2017-12-21 18:14:36
 
-You can read more about this integration in the :doc:`Vuls integration section <../user-manual/capabilities/vuls>`.
-
 CIS-CAT Wazuh module to scan CIS policies
 -----------------------------------------
 

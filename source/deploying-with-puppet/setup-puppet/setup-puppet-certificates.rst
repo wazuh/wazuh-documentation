@@ -5,11 +5,15 @@
 Setting up Puppet certificates
 =================================
 
-Run Puppet agent to generate a certificate for the Puppet Server to sign:
+Run in your Puppet agent to generate a certificate for the Puppet Server to sign:
 
 .. code-block:: console
 
    # puppet agent -t
+
+.. note:: 
+
+   You will see a message like this:  ``Exiting; no certificate found and waitforcert is disabled``
 
 Log into to your Puppet Server, and list the certificates that need approval:
 

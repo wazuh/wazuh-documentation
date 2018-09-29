@@ -28,6 +28,10 @@ Download and install the Wazuh module from Puppet Forge:
 
 This module installs and configures Wazuh agent and manager.
 
+.. note:: 
+
+  Wazuh version 2.1.1 will be installed. We are working on the update to install 3.x.
+
 Install manager via Puppet
 -------------------------------------------------------------------
 
@@ -36,6 +40,21 @@ The manager is configured by installing the ``wazuh::server`` class, and optiona
  - ``wazuh::command``: to define active response command (like ``firewall-drop.sh``).
  - ``wazuh::activeresponse``: to link rules to active response commands.
  - ``wazuh::addlog``: to define additional log files to monitor.
+
+.. warning::
+
+  On Debian-based operating systems, we will have to add the following section to the ``/etc/puppetlabs/code/environments/production/modules/wazuh/manifests/repo.pp`` file for proper execution:
+
+  ``server => 'pgp.mit.edu'``. Line 9 to 12, do not forget the ``,`` after source entry.
+
+  .. code-block:: console
+
+    apt::key { 'wazuh':
+        id     => '0DCFCA5547B19D2A6099506096B3EE5F29111145',
+        source => 'https://packages.wazuh.com/key/GPG-KEY-WAZUH',
+        server => 'pgp.mit.edu'
+      }
+
 
 Here is an example of a manifest ``wazuh-manager.pp``::
 
@@ -65,7 +84,12 @@ Here is an example of a manifest ``wazuh-manager.pp``::
      }
   }
 
-Place the file at */etc/puppetlabs/code/environments/production/manifests/* in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf.
+Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf. However, if you want to run it first, try the following command in the Puppet agent. 
+
+.. code-block:: console
+
+  # /opt/puppetlabs/bin/puppet agent -t
+
 
 Install agent via Puppet
 -------------------------------------------------------------------
@@ -82,7 +106,11 @@ Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP
 
  }
 
-Place the file at */etc/puppetlabs/code/environments/production/manifests/* in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf.
+Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf. However, if you want to run it first, try the following command in the Puppet agent. 
+
+.. code-block:: console
+
+  # /opt/puppetlabs/bin/puppet agent -t
 
 Reference Wazuh puppet
 -------------------------------------------------------------------

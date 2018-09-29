@@ -54,29 +54,31 @@ rule
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **id**        | Definition     | Specifies the ID of the rule.                                                                     |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                                         |
+|               | Allowed values | Any number from 1 to 999999                                                                       |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **maxsize**   | Definition     | Specifies the maximum size of the event.                                                          |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | from 1 to 99999                                                                                   |
+|               | Allowed values | Any number from 1 to 9999                                                                         |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **frequency** | Definition     | Number of times the rule must have matched before firing.                                         |
-+               +                +                                                                                                   +
-|               |                | Triggers when 2 more than this setting.                                                           |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                                         |
+|               | Allowed values | Any number from 2 to 9999                                                                         |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **timeframe** | Definition     | The timeframe in seconds. This option is intended to be used with the frequency option.           |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                                         |
+|               | Allowed values | Any number from 1 to 99999                                                                        |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 | **ignore**    | Definition     | The time (in seconds) to ignore this rule after firing it (to avoid floods).                      |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | Any number from 1 to 9999                                                                         |
+|               | Allowed values | Any number from 1 to 999999                                                                       |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
-| **overwrite** | Definition     | Used to supercede an OSSEC rule with local changes.                                               |
+| **overwrite** | Definition     | Used to supersede an OSSEC rule with local changes.                                               |
 +               +----------------+---------------------------------------------------------------------------------------------------+
-|               | Allowed values | yes                                                                                               |
+|               | Allowed values | yes, no                                                                                           |
++---------------+----------------+---------------------------------------------------------------------------------------------------+
+| **noalert**   | Definition     | Not trigger any alert if the rule matches.                                                        |
++               +----------------+---------------------------------------------------------------------------------------------------+
+|               | Allowed values | Attribute with no value                                                                           |
 +---------------+----------------+---------------------------------------------------------------------------------------------------+
 
 match
@@ -487,7 +489,7 @@ Additional rule options
 +--------------------+-----------------------------------------------------+
 
 .. note::
-  Use one ``<option>`` tag for each option you want to add.
+  Use one ``<options>`` tag for each option you want to add.
 
 .. _rules_check_diff:
 

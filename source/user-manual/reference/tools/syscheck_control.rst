@@ -14,6 +14,8 @@ The syscheck_control program provides an interface for managing and viewing the 
 +----------------------+----------------------------------------------------------+
 | **-lc**              | List only the currently connected agents.                |
 +----------------------+----------------------------------------------------------+
+| **-ln**              | List only the currently disconnected agents.             |
++----------------------+----------------------------------------------------------+
 | **-u <id> / -u all** | Update the database for the identified or all agents.    |
 +----------------------+----------------------------------------------------------+
 | **-i <agent_id>**    | Print the database for the agent.                        |

@@ -13,22 +13,22 @@ in order to use this tool.
 cluster_control options
 -----------------------
 
-The options available for masters and clients are different. Bellow, the options for each one are explained.
+The options available for masters and workers are different. Bellow, the options for each one are explained.
 
 +-----------------------------------------+---------------------------------------------------+-----------------+
 | Option name                             | Option description                                | Available in    |
 +=========================================+===================================================+=================+
-| ``-h, --help``                          | Display the help message.                         | master, client  |
+| ``-h, --help``                          | Display the help message.                         | master, worker  |
 +-----------------------------------------+---------------------------------------------------+-----------------+
-| ``-i, --health [more] [-fs]``           | Display the cluster's healthcheck.                | master, client  |
+| ``-i, --health [more] [-fs]``           | Display the cluster's healthcheck.                | master, worker  |
 +-----------------------------------------+---------------------------------------------------+-----------------+
-| ``-l, --list-nodes [-fn]``              | Display connected nodes in the cluster.           | master, client  |
+| ``-l, --list-nodes [-fn]``              | Display connected nodes in the cluster.           | master, worker  |
 +-----------------------------------------+---------------------------------------------------+-----------------+
-| ``-d, --debug``                         | Show debug messages.                              | master, client  |
+| ``-d, --debug``                         | Show debug messages.                              | master, worker  |
 +-----------------------------------------+---------------------------------------------------+-----------------+
 | ``-a, --list-agents [-fs] [-fn]``       | Display agents in the cluster.                    | master          |
 +-----------------------------------------+---------------------------------------------------+-----------------+
-| ``-fn, --filter-node [NODE_NAME]``      | Display information of specified node(s) only     | master, client  |
+| ``-fn, --filter-node [NODE_NAME]``      | Display information of specified node(s) only     | master, worker  |
 +-----------------------------------------+---------------------------------------------------+-----------------+
 | ``-fs, --filter-agent-status [STATUS]`` | Display agents with the specified status(es) only | master          |
 +-----------------------------------------+---------------------------------------------------+-----------------+
@@ -58,13 +58,13 @@ Get cluster's healthcheck
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.2.3
+            Version: 3.6.1
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.2.3
-            Type: client
+            Version: 3.6.1
+            Type: worker
             Active agents: 1
             Status:
                 Integrity
@@ -81,8 +81,8 @@ Get cluster's healthcheck
                     Permission to synchronize: True.
 
         node03 (192.168.56.105)
-            Version: 3.2.3
-            Type: client
+            Version: 3.6.1
+            Type: worker
             Active agents: 0
             Status:
                 Integrity
@@ -107,13 +107,13 @@ Get cluster's healthcheck
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.2.3
+            Version: 3.6.1
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.2.3
-            Type: client
+            Version: 3.6.1
+            Type: worker
             Active agents: 1
             Status:
                 Integrity
@@ -140,9 +140,9 @@ Get connected nodes
         ---------------------------------------
         Name    Address         Type    Version
         ---------------------------------------
-        node01  192.168.56.101  master  3.2.3
-        node02  192.168.56.103  client  3.2.3
-        node03  192.168.56.105  client  3.2.3
+        node01  192.168.56.101  master  3.6.1
+        node02  192.168.56.103  worker  3.6.1
+        node03  192.168.56.105  worker  3.6.1
         ---------------------------------------
 
 * Filter connected nodes by name
@@ -152,8 +152,8 @@ Get connected nodes
         ---------------------------------------
         Name    Address         Type    Version
         ---------------------------------------
-        node01  192.168.56.101  master  3.2.3
-        node03  192.168.56.105  client  3.2.3
+        node01  192.168.56.101  master  3.6.1
+        node03  192.168.56.105  worker  3.6.1
         ---------------------------------------
 
 Get agents in cluster
