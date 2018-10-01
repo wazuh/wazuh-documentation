@@ -593,7 +593,7 @@ storage\\container
 storage\\container name
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the name of the container. Enter "*" to access all account containers. 
+Specifies the name of the container. Enter ``*`` to access all account containers. 
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
