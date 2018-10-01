@@ -7,15 +7,19 @@ Setting up reverse proxy configuration for Splunk
 
 According to the Splunk official documentation, Splunk web can be placed behind a proxy in a reverse proxy type of configuration. 
 In this section, we will briefly describe how this can be done with a NGINX setup.
-
 NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption. 
 In this example, we will use it as a reverse proxy to provide encrypted and authenticated access to Splunk to the end users.
 
- .. warning::
-  Note: The App Manager is not supported for use with a proxy server, if you use a proxy server with Splunk Web, you must download and update apps manually.
+.. warning::
+    Note: The App Manager is not supported for use with a proxy server, if you use a proxy server with Splunk Web, you must download and update apps manually.
 
-Installing NGINX
-----------------
+.. topic:: Contents
+
+    1. `NGINX SSL proxy for Splunk (RPM-based distributions)`_
+    2. `NGINX SSL proxy for Splunk (Debian-based distributions)`_
+
+NGINX SSL proxy for Splunk (RPM-based distributions)
+----------------------------------------------------
 
 1. Install NGINX:
 
@@ -108,7 +112,7 @@ Installing NGINX
         location / {
             auth_basic "Restricted";
             auth_basic_user_file /etc/nginx/conf.d/splunk.htpasswd;
-            proxy_pass http://localhost:8000/splunk;
+            proxy_pass http://splunk-server-ip:8000/;
         }
     }
     EOF
@@ -208,7 +212,7 @@ NGINX SSL proxy for Splunk (Debian-based distributions)
         location / {
             auth_basic "Restricted";
             auth_basic_user_file /etc/nginx/conf.d/splunk.htpasswd;
-            proxy_pass http://localhost:8000/splunk;
+            proxy_pass http://splunk-server-ip:8000/;
         }
     }
     EOF
@@ -244,6 +248,8 @@ Enable authentication by htpasswd
 
 Now, access the Splunk web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
 
+.. warning::
+    If you're facing permission issues or 502 code error, try executing this command: ``setsebool -P httpd_can_network_connect 1``
 
 Root endpoint
 -------------
