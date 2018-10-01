@@ -110,7 +110,7 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
         location / {
             auth_basic "Restricted";
             auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            proxy_pass http://localhost:5601/;
+            proxy_pass http://kibana-server-ip:5601/;
         }
     }
     EOF
@@ -160,6 +160,9 @@ Enable authentication by htpasswd
       # service nginx restart
 
 Now, access the Kibana web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
+
+.. warning::
+    If you're facing permission issues or getting 502 code error, try executing this command: ``setsebool -P httpd_can_network_connect 1``
 
 NGINX SSL proxy for Kibana (Debian-based distributions)
 -------------------------------------------------------
@@ -214,7 +217,7 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
         location / {
             auth_basic "Restricted";
             auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            proxy_pass http://localhost:5601/;
+            proxy_pass http://kibana-server-ip:5601/;
         }
     }
     EOF
