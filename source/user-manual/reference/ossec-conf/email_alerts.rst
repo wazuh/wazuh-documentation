@@ -40,6 +40,8 @@ This specifies a single email address to which to send email alerts. If you want
 +--------------------+-------------------------------------+
 | **Allowed values** | Any valid email address is allowed. |
 +--------------------+-------------------------------------+
+| use                | Required.                           |
++--------------------+-------------------------------------+
 
 
 level
