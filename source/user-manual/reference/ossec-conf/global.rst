@@ -34,6 +34,8 @@ Options
 - `host_information`_
 - `jsonout_output`_
 - `prelude_output`_
+- `prelude_log_level`_
+- `prelude_profile`_
 - `zeromq_output`_
 - `zeromq_uri`_
 - `geoip_db_path`_
@@ -271,6 +273,28 @@ This toggles Prelude output.
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
+
+prelude_log_level
+^^^^^^^^^^^^^^^^^
+
+The minimum alert level required to triger prelude output.
+
++--------------------+------------------------------------+
+| **Default value**  | 0                                  |
++--------------------+------------------------------------+
+| **Allowed values** | Any integer from 0 to 16 inclusive |
++--------------------+------------------------------------+
+
+prelude_profile
+^^^^^^^^^^^^^^^
+
+The prelude client analyzer name.
+
++--------------------+------------------------------------+
+| **Default value**  | OSSEC                              |
++--------------------+------------------------------------+
+| **Allowed values** | Any valid prelude client analyzer. |
++--------------------+------------------------------------+
 
 zeromq_output
 ^^^^^^^^^^^^^
