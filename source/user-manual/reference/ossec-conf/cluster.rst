@@ -146,10 +146,10 @@ Toggles whether or not to show information about the cluster that generated an a
 disabled
 ^^^^^^^^
 
-Toggles whether the cluster is enabled or not. If this value is set to **yes**, the cluster won't start.
+If set to ``yes``, forces ``hidden`` to ``yes``.
 
 +--------------------+-----------------------------------------+
-| **Default value**  | yes                                     |
+| **Default value**  | no                                      |
 +--------------------+-----------------------------------------+
 | **Allowed values** | yes, no                                 |
 +--------------------+-----------------------------------------+
