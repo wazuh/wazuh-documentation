@@ -25,7 +25,7 @@ Options
 - `group`_
 - `event_location`_
 - `alert_format`_
-- `max_count` 
+- `max_count`_
 
 name
 ^^^^
