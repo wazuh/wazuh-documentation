@@ -94,9 +94,9 @@ This specifies the email format.
 +--------------------+-------------------------------------------------------+
 | **Default value**  | full                                                  |
 +--------------------+---------+---------------------------------------------+
-| **Allowed values** | default | Same as full.                               |
+| **Allowed values** | default | Send normal emails.                         |
 +                    +---------+---------------------------------------------+
-| **Allowed values** | full    | Send normal emails.                         |
+|                    | full    | Send normal emails.                         |
 +                    +---------+---------------------------------------------+
 |                    | sms     | Use a compact format more suitable for SMS. |
 +--------------------+---------+---------------------------------------------+
