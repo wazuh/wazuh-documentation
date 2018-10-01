@@ -92,10 +92,8 @@ Listing multigroups
    
     # /var/ossec/bin/agent_groups -l -g group1
     2 agent(s) in group 'group1':
-      ID: 001  Name: agent1. *
+      ID: 001  Name: agent1.
       ID: 002  Name: agent2.
-
-The asterisk next to the agent name means that this agent is also assigned to other groups different than group1.
 
 .. note::
 

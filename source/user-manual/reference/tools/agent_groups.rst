@@ -20,9 +20,9 @@ The agent_groups program allows you to list agents assigned to a group, assign a
 +---------------------------------------+---------------------------------------------------------+
 | **-c -g group_id**                    | Lists the configuration files in group                  |
 +---------------------------------------+---------------------------------------------------------+
-| **-a -i agent_id -g group_id [-q]**   | Sets the agent's group                                  |
+| **-a -i agent_id -g group_id [-q]**   | Appends group_id to the agent's group                   |
 +---------------------------------------+---------------------------------------------------------+
-| **-e -i agent_id -g group_id [-q]**   | Adds the agent's group                                  |
+| **-a -e -i agent_id -g group_id [-q]**| Replaces the agent's group to group_id                  |
 +---------------------------------------+---------------------------------------------------------+
 | **-r -i agent_id [-q]**               | Unset the agent's group                                 |
 +---------------------------------------+---------------------------------------------------------+
@@ -95,3 +95,42 @@ Examples
     Do you want to remove the 'debian' group of every agent? [y/N]: y
     Group 'debian' removed.
     Affected agents: 003, 004.
+
+* Replace the groups of an agent for *'group1'*:
+
+.. code-block:: console
+
+    $ /var/ossec/bin/agent_groups -a -e -i 001 -g group1
+    Do you want to set the group 'group1' to the agent '001'? [y/N]: y
+    Group 'group1' set to agent '001'.
+
+* Add an agent to more than one group:
+
+.. code-block:: console
+
+    $ /var/ossec/bin/agent_groups -a -i 001 -g group1
+    Do you want to add the group 'group1' to the agent '001'? [y/N]: y
+    Group 'group1' added to agent '001'.
+
+    $ /var/ossec/bin/agent_groups -a -i 001 -g group2
+    Do you want to add the group 'group2' to the agent '001'? [y/N]: y
+    Group 'group2' added to agent '001'.
+
+Now 'agent1' belongs to 'default', 'group1' and 'group2'.
+
+.. code-block:: console
+
+    $ /var/ossec/bin/agent_groups -l -g default
+    1 agent(s) in group 'default':
+    ID: 001  Name: agent1.
+
+    $ /var/ossec/bin/agent_groups -l -g group1
+    1 agent(s) in group 'group1':
+    ID: 001  Name: agent1.
+
+    $ /var/ossec/bin/agent_groups -l -g group2
+    1 agent(s) in group 'group2':
+    ID: 001  Name: agent1.
+
+
+*** New agent_groups functionality for adding and listing multiple groups at a time in development ***
