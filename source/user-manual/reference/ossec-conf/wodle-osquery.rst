@@ -125,17 +125,19 @@ pack
 
 Add a query pack to the configuration. This option can be defined multiple times.
 
-Attributes
-
-+----------+--------------------+
-| **name** | Name for this pack |
-+----------+--------------------+
-
 +--------------------+---------------------------------+
 | **Default value**  | Empty                           |
 +--------------------+---------------------------------+
 | **Allowed values** | Path to pack configuration file |
 +--------------------+---------------------------------+
+
+Attributes:
+
++----------+----------------------+
+| **name** | Name for this pack   |
++----------+----------------+-----+
+|          | Allowed values | Any |
++----------+----------------+-----+
 
 
 Example of configuration
