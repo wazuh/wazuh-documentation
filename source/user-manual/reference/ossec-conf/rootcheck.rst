@@ -268,11 +268,11 @@ check_winaudit
 
 Enable or disable the checking of winaudit.
 
-+--------------------+-------+
-| **Default value**  | 1     |
-+--------------------+-------+
-| **Allowed values** | 0 , 1 |
-+--------------------+-------+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
 
 check_winmalware
 ^^^^^^^^^^^^^^^^
