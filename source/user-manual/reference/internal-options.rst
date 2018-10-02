@@ -36,13 +36,13 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 15                                                                               |
 +                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 0 and 600                                                    |
+|                           | Allowed value  | Any integer between 0 and 600.                                                   |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
 | **agent.warn_level**      | Description    | Percentage of occupied capacity in agent buffer to trigger a warning alert.      |
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 90                                                                               |
 +                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 1 and 100                                                    |
+|                           | Allowed value  | Any integer between 1 and 100.                                                   |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
 | **agent.normal_level**    | Description    | Percentage of occupied capacity in agent buffer to return to normal state.       |
 +                           +----------------+----------------------------------------------------------------------------------+
@@ -54,7 +54,7 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 50                                                                               |
 +                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 1 and 1000                                                   |
+|                           | Allowed value  | Any integer between 1 and 1000.                                                  |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
 | **agent.recv_timeout**    | Description    | Maximum number of seconds to wait for server response from the TCP client socket.|
 |                           |                |                                                                                  |
@@ -62,7 +62,7 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 60                                                                               |
 +                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 1 and 600                                                    |
+|                           | Allowed value  | Any integer between 1 and 600.                                                   |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
 | **agent.state_interval**  | Description    | Interval between the updates of the agent status file in seconds.                |
 |                           |                |                                                                                  |
@@ -70,17 +70,17 @@ Agent
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 5                                                                                |
 +                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | Any integer between 0 and 86400                                                  |
+|                           | Allowed value  | Any integer between 0 and 86400.                                                 |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
 | **agent.debug**           | Description    | Run the unix agent’s processes in debug mode.                                    |
 +                           +----------------+----------------------------------------------------------------------------------+
 |                           | Default value  | 0                                                                                |
 +                           +----------------+----------------------------------------------------------------------------------+
-|                           | Allowed value  | 0: No debug output                                                               |
+|                           | Allowed value  | 0: No debug output.                                                              |
 +                           +                +----------------------------------------------------------------------------------+
-|                           |                | 1: Standard debug output                                                         |
+|                           |                | 1: Standard debug output.                                                        |
 +                           +                +----------------------------------------------------------------------------------+
-|                           |                | 2: Verbose debug output                                                          |
+|                           |                | 2: Verbose debug output.                                                         |
 +---------------------------+----------------+----------------------------------------------------------------------------------+
 | **agent.remote_conf**     | Description    | Apply or refuse remote configuration.                                            |
 |                           |                |                                                                                  |
@@ -102,37 +102,37 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 360                                                                 |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 60 and 360                                      |
+|                                              | Allowed value | Any integer between 60 and 360.                                     |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |     **analysisd.stats_maxdiff**              | Description   | Stats maximum diff.                                                 |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 999000                                                              |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 10 and 999999                                   |
+|                                              | Allowed value | Any integer between 10 and 999999.                                  |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |     **analysisd.stats_mindiff**              | Description   | Stats minimum diff.                                                 |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 1250                                                                |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 10 and 999999                                   |
+|                                              | Allowed value | Any integer between 10 and 999999.                                  |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |  **analysisd.stats_percent_diff**            | Description   | Stats percentage (how much to differ from average).                 |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 150                                                                 |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 5 and 9999                                      |
+|                                              | Allowed value | Any integer between 5 and 9999.                                     |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |     **analysisd.fts_list_size**              | Description   | FTS list size.                                                      |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 32                                                                  |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 12 and 512                                      |
+|                                              | Allowed value | Any integer between 12 and 512.                                     |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 | **analysisd.fts_min_size_for_str**           | Description   | FTS minimum string size.                                            |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 14                                                                  |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 6 and 128                                       |
+|                                              | Allowed value | Any integer between 6 and 128.                                      |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |        **analysisd.log_fw**                  | Description   | Toggles firewall log on and off (at logs/firewall/firewall.log).    |
 +                                              +---------------+---------------------------------------------------------------------+
@@ -144,7 +144,7 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 64                                                                  |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 10 and 64                                       |
+|                                              | Allowed value | Any integer between 10 and 64.                                      |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |     **analysisd.geoip_jsonout**              | Description   | Toggle to turn on or off output of GeoIP data in JSON alerts.       |
 +                                              +---------------+---------------------------------------------------------------------+
@@ -156,7 +156,7 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 0 and 60                                        |
+|                                              | Allowed value | Any integer between 0 and 60.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |  **analysisd.show_hidden_labels**            | Description   | Make hidden labels visible in alerts.                               |
 +                                              +---------------+---------------------------------------------------------------------+
@@ -170,17 +170,17 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 1024 and 2147483647                             |
+|                                              | Allowed value | Any integer between 1024 and 2147483647.                            |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|            **analysisd.debug**               | Description   | Debug level (manager installations)                                 |
+|            **analysisd.debug**               | Description   | Debug level (manager installations).                                |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: No debug output                                                  |
+|                                              | Allowed value | 0: No debug output.                                                 |
 +                                              +               +---------------------------------------------------------------------+
-|                                              |               | 1: Standard debug output                                            |
+|                                              |               | 1: Standard debug output.                                           |
 +                                              +               +---------------------------------------------------------------------+
-|                                              |               | 2: Verbose debug output                                             |
+|                                              |               | 2: Verbose debug output.                                            |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |       **analysisd.min_rotate_interval**      | Description   | Minimum interval between log rotations.                             |
 |                                              |               |                                                                     |
@@ -190,57 +190,57 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 600                                                                 |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 10 and 86400                                    |
+|                                              | Allowed value | Any integer between 10 and 86400.                                   |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|        **analysisd.event_threads**           | Description   | Number of event decoder threads                                     |
+|        **analysisd.event_threads**           | Description   | Number of event decoder threads.                                    |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
 +                                              +               +---------------------------------------------------------------------+
-|                                              |               | Any integer between 0 and 32                                        |
+|                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|       **analysisd.syscheck_threads**         | Description   | Number of syshceck event decoder threads                            |
+|       **analysisd.syscheck_threads**         | Description   | Number of syshceck event decoder threads.                           |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
 +                                              +               +---------------------------------------------------------------------+
-|                                              |               | Any integer between 0 and 32                                        |
+|                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.syscollector_threads**       | Description   | Number of syscollector event decoder threads                        |
+|     **analysisd.syscollector_threads**       | Description   | Number of Syscollector event decoder threads.                       |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
 +                                              +               +---------------------------------------------------------------------+
-|                                              |               | Any integer between 0 and 32                                        |
+|                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|        **analysisd.rootcheck_threads**       | Description   | Number of rootcheck event decoder threads                           |
+|        **analysisd.rootcheck_threads**       | Description   | Number of Rootcheck event decoder threads.                          |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
 +                                              +               +---------------------------------------------------------------------+
-|                                              |               | Any integer between 0 and 32                                        |
+|                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|       **analysisd.hostinfo_threads**         | Description   | Number of hostinfo event decoder threads                            |
+|       **analysisd.hostinfo_threads**         | Description   | Number of hostinfo event decoder threads.                           |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
 +                                              +               +---------------------------------------------------------------------+
-|                                              |               | Any integer between 0 and 32                                        |
+|                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.rule_matching_threads**      | Description   | Number of rule matching threads                                     |
+|     **analysisd.rule_matching_threads**      | Description   | Number of rule matching threads.                                    |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores  |
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
 +                                              +               +---------------------------------------------------------------------+
-|                                              |               | Any integer between 0 and 32                                        |
+|                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|     **analysisd.decode_event_queue_size**    | Description   | Sets the decode event queue size                                    |
+|     **analysisd.decode_event_queue_size**    | Description   | Sets the decode event queue size.                                   |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -248,9 +248,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-| **analysisd.decode_syscheck_queue_size**     | Description   | Sets the decode syscheck queue size                                 |
+| **analysisd.decode_syscheck_queue_size**     | Description   | Sets the decode Syscheck queue size.                                |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -258,9 +258,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-| **analysisd.decode_syscollector_queue_size** | Description   | Sets the decode syscollector queue size                             |
+| **analysisd.decode_syscollector_queue_size** | Description   | Sets the decode Syscollector queue size.                            |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -268,9 +268,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.decode_rootcheck_queue_size**   | Description   | Sets the decode rootcheck queue size                                |
+|  **analysisd.decode_rootcheck_queue_size**   | Description   | Sets the decode Rootcheck queue size.                               |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -278,9 +278,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.decode_hostinfo_queue_size**    | Description   | Sets the decode hostinfo queue size                                 |
+|  **analysisd.decode_hostinfo_queue_size**    | Description   | Sets the decode hostinfo queue size.                                |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -288,9 +288,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|  **analysisd.decode_output_queue_size**      | Description   | Sets the decode output queue size                                   |
+|  **analysisd.decode_output_queue_size**      | Description   | Sets the decode output queue size.                                  |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -298,9 +298,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.archives_queue_size**       | Description   | Sets the archives log queue size                                    |
+|      **analysisd.archives_queue_size**       | Description   | Sets the archives log queue size.                                   |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -308,9 +308,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.statistical_queue_size**    | Description   | Sets the statistical log queue size                                 |
+|      **analysisd.statistical_queue_size**    | Description   | Sets the statistical log queue size.                                |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -318,9 +318,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.alerts_queue_size**         | Description   | Sets the alerts log queue size                                      |
+|      **analysisd.alerts_queue_size**         | Description   | Sets the alerts log queue size.                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -328,9 +328,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.firewall_queue_size**       | Description   | Sets the firewall log queue size                                    |
+|      **analysisd.firewall_queue_size**       | Description   | Sets the firewall log queue size.                                   |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -338,9 +338,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.fts_queue_size**            | Description   | Sets the fts log queue size                                         |
+|      **analysisd.fts_queue_size**            | Description   | Sets the fts log queue size.                                        |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -348,9 +348,9 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 16384                                                               |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 128 and 2000000                                 |
+|                                              | Allowed value | Any integer between 128 and 2000000.                                |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
-|      **analysisd.state_interval**            | Description   | Sets the analysisd interval for updating the state file in seconds  |
+|      **analysisd.state_interval**            | Description   | Sets the Analysisd interval for updating the state file in seconds. |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
 |                                              |               |                                                                     |
@@ -358,7 +358,7 @@ Analysisd
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 5                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
-|                                              | Allowed value | Any integer between 0 and 86400                                     |
+|                                              | Allowed value | Any integer between 0 and 86400.                                    |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 
 DBD
@@ -369,7 +369,7 @@ DBD
 +                            +---------------+--------------------------------------------------------------------------+
 |                            | Default value | 10                                                                       |
 +                            +---------------+--------------------------------------------------------------------------+
-|                            | Allowed value | Any integer between 1 and 9999                                           |
+|                            | Allowed value | Any integer between 1 and 9999.                                          |
 +----------------------------+---------------+--------------------------------------------------------------------------+
 
 Execd
@@ -382,7 +382,7 @@ Execd
 +                               +---------------+--------------------------------------------------------------+
 |                               | Default Value | 60                                                           |
 +                               +---------------+--------------------------------------------------------------+
-|                               | Allowed Value | Any integer between 1 and 3600                               |
+|                               | Allowed Value | Any integer between 1 and 3600.                              |
 +-------------------------------+---------------+--------------------------------------------------------------+
 |  **execd.max_restart_lock**   | Description   | Maximum timeout that the agent cannot restart while updating.|
 |                               |               |                                                              |
@@ -390,7 +390,7 @@ Execd
 +                               +---------------+--------------------------------------------------------------+
 |                               | Default Value | 600                                                          |
 +                               +---------------+--------------------------------------------------------------+
-|                               | Allowed Value | Any integer between 0 and 3600                               |
+|                               | Allowed Value | Any integer between 0 and 3600.                              |
 +-------------------------------+---------------+--------------------------------------------------------------+
 
 .. _ossec_internal_logcollector:
@@ -403,43 +403,43 @@ Logcollector
 +                                  +---------------+----------------------------------------------------------------------------+
 |                                  | Default value | 2                                                                          |
 +                                  +---------------+----------------------------------------------------------------------------+
-|                                  | Allowed value | Any integer between 1 and 120                                              |
+|                                  | Allowed value | Any integer between 1 and 120.                                             |
 +----------------------------------+---------------+----------------------------------------------------------------------------+
 |  **logcollector.open_attempts**  | Description   | Number of attempts to open a log file.                                     |
 +                                  +---------------+----------------------------------------------------------------------------+
 |                                  | Default value | 8                                                                          |
 +                                  +---------------+----------------------------------------------------------------------------+
-|                                  | Allowed value | Any integer between 2 and 298                                              |
+|                                  | Allowed value | Any integer between 2 and 298.                                             |
 +----------------------------------+---------------+----------------------------------------------------------------------------+
 | **logcollector.remote_commands** | Description   | Toggles Logcollector to accept remote commands from the manager or not.    |
 +                                  +---------------+----------------------------------------------------------------------------+
 |                                  | Default value | 0                                                                          |
 +                                  +---------------+----------------------------------------------------------------------------+
-|                                  | Allowed value | 0: Disable remote commands                                                 |
+|                                  | Allowed value | 0: Disable remote commands.                                                |
 +                                  +               +----------------------------------------------------------------------------+
-|                                  |               | 1: Enable remote commands                                                  |
+|                                  |               | 1: Enable remote commands.                                                 |
 +----------------------------------+---------------+----------------------------------------------------------------------------+
 |   **logcollector.vcheck_files**  | Description   | Number of readings before checking files.                                  |
 +                                  +---------------+----------------------------------------------------------------------------+
 |                                  | Default value | 64                                                                         |
 +                                  +---------------+----------------------------------------------------------------------------+
-|                                  | Allowed value | Any integer between 0 and 1024                                             |
+|                                  | Allowed value | Any integer between 0 and 1024.                                            |
 +----------------------------------+---------------+----------------------------------------------------------------------------+
 |   **logcollector.max_lines**     | Description   | Maximum number of logs read from the same file in each iteration.          |
 +                                  +---------------+----------------------------------------------------------------------------+
 |                                  | Default value | 10000                                                                      |
 +                                  +---------------+----------------------------------------------------------------------------+
-|                                  | Allowed value | Any integer between 100 and 100000                                         |
+|                                  | Allowed value | Any integer between 100 and 100000.                                        |
 +----------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.debug**      | Description   | Debug level (used in manager or unix agent installations)                  |
+|      **logcollector.debug**      | Description   | Debug level (used in manager or unix agent installations).                 |
 +                                  +---------------+----------------------------------------------------------------------------+
 |                                  | Default value | 0                                                                          |
 +                                  +---------------+----------------------------------------------------------------------------+
-|                                  | Allowed value | 0: No debug output                                                         |
+|                                  | Allowed value | 0: No debug output.                                                        |
 +                                  +               +----------------------------------------------------------------------------+
-|                                  |               | 1: Standard debug output                                                   |
+|                                  |               | 1: Standard debug output.                                                  |
 +                                  +               +----------------------------------------------------------------------------+
-|                                  |               | 2: Verbose debug output                                                    |
+|                                  |               | 2: Verbose debug output.                                                   |
 +----------------------------------+---------------+----------------------------------------------------------------------------+
 
 Maild
@@ -479,7 +479,7 @@ Monitord
 +                              +---------------+--------------------------------------------------------------------+
 |                              | Default value | 10                                                                 |
 +                              +---------------+--------------------------------------------------------------------+
-|                              | Allowed value | Any integer between 0 and 600                                      |
+|                              | Allowed value | Any integer between 0 and 600.                                     |
 +------------------------------+---------------+--------------------------------------------------------------------+
 |    **monitord.compress**     | Description   | Toggle to enable or disable log file compression.                  |
 +                              +---------------+--------------------------------------------------------------------+
@@ -511,7 +511,7 @@ Monitord
 +                              +---------------+--------------------------------------------------------------------+
 |                              | Default value | 31                                                                 |
 +                              +---------------+--------------------------------------------------------------------+
-|                              | Allowed value | Any integer between 0 and 500                                      |
+|                              | Allowed value | Any integer between 0 and 500.                                     |
 +------------------------------+---------------+--------------------------------------------------------------------+
 |  **monitord.size_rotate**    | Description   | Maximum size in Megabytes of internal logs to trigger rotation.    |
 |                              |               |                                                                    |
@@ -519,7 +519,7 @@ Monitord
 +                              +---------------+--------------------------------------------------------------------+
 |                              | Default value | 512                                                                |
 +                              +---------------+--------------------------------------------------------------------+
-|                              | Allowed value | Any integer between 0 and 4096                                     |
+|                              | Allowed value | Any integer between 0 and 4096.                                    |
 +------------------------------+---------------+--------------------------------------------------------------------+
 | **monitord.daily_rotations** | Description   | Maximum number of rotations per day for internal logs.             |
 |                              |               |                                                                    |
@@ -527,7 +527,7 @@ Monitord
 +                              +---------------+--------------------------------------------------------------------+
 |                              | Default value | 12                                                                 |
 +                              +---------------+--------------------------------------------------------------------+
-|                              | Allowed value | Any integer between 1 and 256                                      |
+|                              | Allowed value | Any integer between 1 and 256.                                     |
 +------------------------------+---------------+--------------------------------------------------------------------+
 
 Remoted
@@ -538,13 +538,13 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 128                                                          |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 10 and 999999                            |
+|                                   | Allowed value | Any integer between 10 and 999999.                           |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.comp_average_printout** | Description   | Compression averages printout.                               |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 19999                                                        |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 10 and 999999                            |
+|                                   | Allowed value | Any integer between 10 and 999999.                           |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |     **remoted.verify_msg_id**     | Description   | Toggle to enable or disable verification of msg id.          |
 +                                   +---------------+--------------------------------------------------------------+
@@ -564,7 +564,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default Value | 8                                                            |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 64                                 |
+|                                   | Allowed Value | Any integer between 1 and 64.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.request_pool**        | Description   | Number of parallel threads to dispatch requests.             |
 |                                   |               |                                                              |
@@ -572,7 +572,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default Value | 8                                                            |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 64                                 |
+|                                   | Allowed Value | Any integer between 1 and 64.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.request_timeout**     | Description   | Timeout in seconds to reject a new request.                  |
 |                                   |               |                                                              |
@@ -580,7 +580,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default Value | 10                                                           |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 600                                |
+|                                   | Allowed Value | Any integer between 1 and 600.                               |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.response_timeout**    | Description   | Timeout in seconds to reject a request response.             |
 |                                   |               |                                                              |
@@ -588,7 +588,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default Value | 60                                                           |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 3600                               |
+|                                   | Allowed Value | Any integer between 1 and 3600.                              |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.request_rto_sec**     | Description   | Re-transmission timeout in seconds for UDP.                  |
 |                                   |               |                                                              |
@@ -596,7 +596,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default Value | 1                                                            |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 0 and 60                                 |
+|                                   | Allowed Value | Any integer between 0 and 60.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.request_rto_msec**    | Description   | Re-transmission timeout in milliseconds for UDP.             |
 |                                   |               |                                                              |
@@ -604,7 +604,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default Value | 0                                                            |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 0 and 999                                |
+|                                   | Allowed Value | Any integer between 0 and 999.                               |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.max_attempts**        | Description   | Maximum number of sending attempts.                          |
 |                                   |               |                                                              |
@@ -612,7 +612,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default Value | 4                                                            |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 16                                 |
+|                                   | Allowed Value | Any integer between 1 and 16.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.shared_reload**       | Description   | Number of seconds between reloading of shared files.         |
 |                                   |               |                                                              |
@@ -620,7 +620,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default Value | 10                                                           |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed Value | Any integer between 1 and 18000                              |
+|                                   | Allowed Value | Any integer between 1 and 18000.                             |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.rlimit_nofile**       | Description   | Maximum number of file descriptors that Remoted can open.    |
 |                                   |               |                                                              |
@@ -628,7 +628,7 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 16384                                                        |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1024 and 2147483647                      |
+|                                   | Allowed value | Any integer between 1024 and 2147483647.                     |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.recv_timeout**        | Description   | Maximum number of seconds to wait for client response in TCP.|
 |                                   |               |                                                              |
@@ -636,17 +636,17 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 1                                                            |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | Any integer between 1 and 60                                 |
+|                                   | Allowed value | Any integer between 1 and 60.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|         **remoted.debug**         | Description   | Debug level (manager installation)                           |
+|         **remoted.debug**         | Description   | Debug level (manager installation).                          |
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Default value | 0                                                            |
 +                                   +---------------+--------------------------------------------------------------+
-|                                   | Allowed value | 0: No debug output                                           |
+|                                   | Allowed value | 0: No debug output.                                          |
 +                                   +               +--------------------------------------------------------------+
-|                                   |               | 1: Standard debug output                                     |
+|                                   |               | 1: Standard debug output.                                    |
 +                                   +               +--------------------------------------------------------------+
-|                                   |               | 2: Verbose debug output                                      |
+|                                   |               | 2: Verbose debug output.                                     |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 
 
@@ -658,23 +658,23 @@ Syscheck
 +                          +---------------+--------------------------------------------------------------------------------+
 |                          | Default value | 2                                                                              |
 +                          +---------------+--------------------------------------------------------------------------------+
-|                          | Allowed value | Any integer between 0 and 64                                                   |
+|                          | Allowed value | Any integer between 0 and 64.                                                  |
 +--------------------------+---------------+--------------------------------------------------------------------------------+
 | **syscheck.sleep_after** | Description   | Number of files to read before sleeping for syscheck.sleep seconds.            |
 +                          +---------------+--------------------------------------------------------------------------------+
 |                          | Default value | 15                                                                             |
 +                          +---------------+--------------------------------------------------------------------------------+
-|                          | Allowed value | Any integer between 1 and 9999                                                 |
+|                          | Allowed value | Any integer between 1 and 9999.                                                |
 +--------------------------+---------------+--------------------------------------------------------------------------------+
 |    **syscheck.debug**    | Description   | Debug level (used in manager and unix agent installations).                    |
 +                          +---------------+--------------------------------------------------------------------------------+
 |                          | Default value | 0                                                                              |
 +                          +---------------+--------------------------------------------------------------------------------+
-|                          | Allowed value | 0: No debug output                                                             |
+|                          | Allowed value | 0: No debug output.                                                            |
 +                          +               +--------------------------------------------------------------------------------+
-|                          |               | 1: Standard debug output                                                       |
+|                          |               | 1: Standard debug output.                                                      |
 +                          +               +--------------------------------------------------------------------------------+
-|                          |               | 2: Verbose debug output                                                        |
+|                          |               | 2: Verbose debug output.                                                       |
 +--------------------------+---------------+--------------------------------------------------------------------------------+
 
 Rootcheck
@@ -685,7 +685,7 @@ Rootcheck
 +                          +----------------+-------------------------------------------------------------------------------+
 |                          | Default value  | 50                                                                            |
 +                          +----------------+-------------------------------------------------------------------------------+
-|                          | Allowed values | Any integer between 0 and 1000                                                |
+|                          | Allowed values | Any integer between 0 and 1000.                                               |
 +--------------------------+----------------+-------------------------------------------------------------------------------+
 
 Wazuh Database
@@ -739,19 +739,19 @@ Once these settings have been adjusted, the file must be saved followed by a res
 |                                               +---------------+-------------------------------------------------------------------------------------+
 |                                               | Allowed value | 0, 1                                                                                |
 +-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
-|      **wazuh_database.interval**              | Description   | Interval to sleep between cycles. (Only used if real tyme sync is disabled.)        |
+|      **wazuh_database.interval**              | Description   | Interval to sleep between cycles. (Only used if real tyme sync is disabled).        |
 |                                               |               |                                                                                     |
 |                                               |               | .. versionadded:: 3.0.0                                                             |
 +                                               +---------------+-------------------------------------------------------------------------------------+
 |                                               | Default value | 60                                                                                  |
 |                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | Any integer between 0 and 86400 (seconds)                                           |
+|                                               | Allowed value | Any integer between 0 and 86400 (seconds).                                          |
 +-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
 |      **wazuh_database.max_queued_events**     | Description   | Maximum number of queued events (only used if *inotify* is available).              |
 |                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Default value | 0 (use system default value)                                                        |
+|                                               | Default value | 0 (use system default value).                                                       |
 |                                               +---------------+-------------------------------------------------------------------------------------+
-|                                               | Allowed value | Any integer between 0 and 2147483647                                                |
+|                                               | Allowed value | Any integer between 0 and 2147483647.                                               |
 +-----------------------------------------------+---------------+-------------------------------------------------------------------------------------+
 
 Wazuh Modules
@@ -762,23 +762,23 @@ Wazuh Modules
 +                             +---------------+-----------------------------------------------------------------------------------+
 |                             | Default value | 10                                                                                |
 +                             +---------------+-----------------------------------------------------------------------------------+
-|                             | Allowed value | Any integer between -20 and 19                                                    |
+|                             | Allowed value | Any integer between -20 and 19.                                                   |
 +-----------------------------+---------------+-----------------------------------------------------------------------------------+
 | **wazuh_modules.max_eps**   | Description   | Maximum number of events per second sent by all Wazuh Module.                     |
 +                             +---------------+-----------------------------------------------------------------------------------+
 |                             | Default value | 1000                                                                              |
 +                             +---------------+-----------------------------------------------------------------------------------+
-|                             | Allowed value | Any integer between 100 and 1000                                                  |
+|                             | Allowed value | Any integer between 100 and 1000.                                                 |
 +-----------------------------+---------------+-----------------------------------------------------------------------------------+
-|   **wazuh_modules.debug**   | Description   | Debug level                                                                       |
+|   **wazuh_modules.debug**   | Description   | Debug level.                                                                      |
 +                             +---------------+-----------------------------------------------------------------------------------+
 |                             | Default value | 0                                                                                 |
 +                             +---------------+-----------------------------------------------------------------------------------+
-|                             | Allowed value | 0: No debug output                                                                |
+|                             | Allowed value | 0: No debug output.                                                               |
 +                             +               +-----------------------------------------------------------------------------------+
-|                             |               | 1: Standard debug output                                                          |
+|                             |               | 1: Standard debug output.                                                         |
 +                             +               +-----------------------------------------------------------------------------------+
-|                             |               | 2: Verbose debug output                                                           |
+|                             |               | 2: Verbose debug output.                                                          |
 +-----------------------------+---------------+-----------------------------------------------------------------------------------+
 
 Wazuh Command
@@ -789,9 +789,9 @@ Wazuh Command
 +                                   +---------------+---------------------------------------------------------------------------------------------------+
 |                                   | Default value | 0                                                                                                 |
 +                                   +---------------+---------------------------------------------------------------------------------------------------+
-|                                   | Allowed value | 0: Disable remote commands                                                                        |
+|                                   | Allowed value | 0: Disable remote commands.                                                                       |
 +                                   +               +---------------------------------------------------------------------------------------------------+
-|                                   |               | 1: Enable remote commands                                                                         |
+|                                   |               | 1: Enable remote commands.                                                                        |
 +-----------------------------------+---------------+---------------------------------------------------------------------------------------------------+
 
 Windows
@@ -802,9 +802,9 @@ Windows
 +                            +---------------+--------------------------------------------------------------------------+
 |                            | Default value | 0                                                                        |
 +                            +---------------+--------------------------------------------------------------------------+
-|                            | Allowed value | 0: No debug output                                                       |
+|                            | Allowed value | 0: No debug output.                                                      |
 +                            +               +--------------------------------------------------------------------------+
-|                            |               | 1: Standard debug output                                                 |
+|                            |               | 1: Standard debug output.                                                |
 +                            +               +--------------------------------------------------------------------------+
-|                            |               | 2: Verbose debug output                                                  |
+|                            |               | 2: Verbose debug output.                                                 |
 +----------------------------+---------------+--------------------------------------------------------------------------+
