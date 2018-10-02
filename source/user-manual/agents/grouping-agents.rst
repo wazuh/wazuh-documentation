@@ -61,52 +61,177 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 .. _multigroups:
 
-Multigroups
------------
+Multi-groups
+------------
+
+.. versionadded:: 3.7.0
+
+Since Wazuh v3.7.0, agents have the ability to belong to multiple groups. That means that agents belonging to more than one group, will receive the shared files of those groups
+as well as a remote configuration file merged from all of them.
+
+The last group assigned to a particular agent, always is the most priority when merging the configuration. In other words, parameters which contain a single value, will take the
+value appeared on the last assigned group while lists such as FIM directories will be added to the whole list.
+
+Managing multiple groups
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+- `Assigning multiple groups to an agent`_
+- `Listing groups and configuration`_
+- `Making changes on multi-groups`_
+- `Shared files behavior`_
+
+This capability is focused to customize the agents' configuration with a higher level of granularity. The API and **agent_groups**
+help to manage groups by listing them, by allowing to assign/change/unassign groups to agents among other things. Let see three use cases where managing
+multiple groups over existing agents.
 
 Assigning multiple groups to an agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-When an agent belongs to more than one group, its agent configuration file consists on a merged configuration of them, where the last group joined is the one with the most priority. Setting multiple groups to an agent is simple, it can be done with `authd` and `agent_groups`:
+Setting multiple groups to an agent is simple, it can be done with **authd** when registering agents or manually by the **agent_groups** tool or the API:
 
-   To assign the agent to a group with **authd**, register the agent setting the multigroup with the -G option at the agent:
+To assign the agent to one or more groups with **authd**, register the agent setting the groups where the agent will be included with the -G option:
 
-   .. code-block:: console
+    .. code-block:: console
 
-    # /var/ossec/bin/agent-auth -m MANAGER_IP -G group1-group2-group3
+        # /var/ossec/bin/agent-auth -m MANAGER_IP -G webserver,apache
 
-   With the **agent_groups** command, agents can be registered to groups one by one as it was said in the previous section.
+    .. warning::
+        Registering an agent by **agent-auth** is the only way for now to assign the agent to multiple groups all at once.
 
-Listing multigroups
-^^^^^^^^^^^^^^^^^^^^
+With the **agent_groups** CLI, agents can be registered to groups one by one as it was explained in the previous section:
 
-   To get the multigroups assigned to an agent, send a request to the API and search for the 'group' field:
+    .. code-block:: console
 
-   .. code-block:: console
+        $ /var/ossec/bin/agent_groups -a -i 001 -g webserver
+        Do you want to add the group 'webserver' to the agent '001'? [y/N]: y
+        Group 'webserver' added to agent '001'.
 
-    # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/agents/001?pretty"
+        $ /var/ossec/bin/agent_groups -a -i 001 -g apache
+        Do you want to add the group 'apache' to the agent '001'? [y/N]: y
+        Group 'apache' added to agent '001'.
 
-   List the agents belonging to a group with the command below:
+In this example, the agent 001 has been added to `webserver` and `apache`. The same for the API, at the moment groups must be assigned to an agent one by one:
 
-   .. code-block:: console
-   
-    # /var/ossec/bin/agent_groups -l -g group1
-    2 agent(s) in group 'group1':
-      ID: 001  Name: agent1.
-      ID: 002  Name: agent2.
+    .. code-block:: console
 
-.. note::
+        # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/webserver?pretty"
+        {
+            "error": 0,
+            "data": "Group 'webserver' added to agent '001'."
+        }
+        # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/apache?pretty"
+        {
+            "error": 0,
+            "data": "Group 'apache' added to agent '001'."
+        }
 
-         The priority of the groups increases from left to right, being the last one the one with the highest priority.
+After that, we can ask the API about groups which an agent belongs:
+
+    .. code-block:: console
+        :emphasize-lines: 7,8,9,10,11
+
+        # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/agents/001?pretty"
+        {
+            "error": 0,
+            "data": {
+                "status": "Active",
+                "configSum": "f993610d3e6d7bfd7c008b4fb6deb8a5",
+                "group": [
+                    "default",
+                    "webserver",
+                    "apache"
+                ],
+                "name": "ag-windows-12",
+                "internal_key": "fd2fdb0e97895d6d8a8529685d043c14dfeb386359bb46ac2ed70c68ffeb1b55",
+                "mergedSum": "b7fbc0c6db018a8347aa60803777f780",
+                "ip": "192.168.1.82",
+                "dateAdd": "2018-10-02 02:54:28",
+                "node_name": "node01",
+                "manager": "ubuntu",
+                "version": "Wazuh v3.7.0",
+                "lastKeepAlive": "2018-10-02 03:05:32",
+                "os": {
+                    "major": "6",
+                    "name": "Microsoft Windows Server 2012 R2 Standard",
+                    "uname": "Microsoft Windows Server 2012 R2 Standard",
+                    "platform": "windows",
+                    "version": "6.3.9600",
+                    "build": "9600",
+                    "minor": "3"
+                },
+                "id": "001"
+            }
+        }
+
+In this case, the remote configuration for the group `apache` is the most priority of the three groups when there exists conflicts on any configuration parameter.
+
+Listing groups and configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It is possible to know agents belonging to groups in real-time, as well as the configuration and shared files applied to each one depending on which groups it belongs.
+
+For example, to list the groups available for now, we could run the following query to `agent_groups`:
+
+    .. code-block:: console
+
+        # /var/ossec/bin/agent_groups -l -g webserver
+        3 agent(s) in group 'webserver':
+          ID: 001 Name: ag-windows-12.
+          ID: 003 Name: ag-windows-east.
+          ID: 004 Name: centos-7-apache.
+
+Same easy to query which groups are assigned to the agent 001:
+
+    .. code-block:: console
+
+        # /var/ossec/bin/agent_groups -s -i 001
+        The agent 'ag-windows-12' with ID '001' has the group: '[u'webserver', u'apache']'.
+
+The priority of the groups increases from the left to the right, being the last one the highest priority one.
 
 
-Shared files
-^^^^^^^^^^^^^
+Making changes on multi-groups
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-As it was explained in the previous section, the manager can share some configuration files with each group, sending them to the agents belonging to that group. In case of the group being a multigroup, the configuration files of every group are merged into one so that this multigroup has one configuration file of a kind.
-When two groups have conflicting fields in their configuration, the last group assigned to the agent will be the leading one.
+The same way it is possible to assign multiple groups to agents, it is possible to revert assignments and switch between available groups. Below is shown how to unset the
+group `apache` for the agent 001:
+
+    .. code-block:: console
+
+        # /var/ossec/bin/agent_groups -r -i 001 -g apache -q
+        Group 'apache' unset for agent '001'.
+
+        # /var/ossec/bin/agent_groups -s -i 001
+        The agent 'ag-windows-12' with ID '001' has the group: '[u'webserver']'.
+
+It is also possible to switch between groups overwriting the existing assignment:
+
+    .. code-block:: console
+
+        # /var/ossec/bin/agent_groups -s -i 001
+        The agent 'ag-windows-12' with ID '001' has the group: '[u'default', u'webserver']'.
+        # /var/ossec/bin/agent_groups -a -e -i 001 -g apache
+        Group 'apache' set to agent '001'.
+        # /var/ossec/bin/agent_groups -s -i 001
+        The agent 'ag-windows-12' with ID '001' has the group: '[u'apache']'.
+
+The ``-e`` parameter sets a group to an agent instead of appending it.
+
+The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section <../reference/tools/agent_groups>`. The same for the :doc:`API <../api/reference>` which offers calls with the similar behavior.
+
+Shared files behavior
+^^^^^^^^^^^^^^^^^^^^^
+
+As it was explained above, traditionally the manager shared configuration files with its agents according to the group they belong to.
+
+In case of belonging to multiple groups, the configuration files of every group are merged into one following the next criteria:
+
+- Shared files such as CIS benchmarks for the rootkit detection are joined in the shared folder, if repeated files, the last one added overwrites old ones.
+- The new ``agent.conf`` file added is appended to the existing one. When two groups have conflicting configuration, the last group assigned to the agent will be the leading one. Learn more about the configuration precedence in :doc:`Centralized configuration manual <../reference/centralized-configuration>`.
+- Custom shared files set from the user to a particular group are also joined to the "multi-group".
+
 
 .. thumbnail:: ../../images/manual/multigroups.png
-    :title: Multigroup shared files
+    :title: Multi-group shared files
     :align: center
     :width: 100%
