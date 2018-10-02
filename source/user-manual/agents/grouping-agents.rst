@@ -23,7 +23,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       # /var/ossec/bin/agent_groups -a -i 002 -g dbms
 
-   Using the API:
+   Using the **API**:
 
    .. code-block:: console
 
@@ -46,7 +46,7 @@ Below are the steps to assign agents to a group with a specific configuration:
           ID: 005  Name: agent-dbms-a2.
           ID: 006  Name: agent-dbms-a3.
 
-   Using the API:
+   Using the **API**:
 
    .. code-block:: console
 
@@ -80,14 +80,14 @@ Managing multiple groups
 - `Making changes on multi-groups`_
 - `Shared files behavior`_
 
-This capability is focused to customize the agents' configuration with a higher level of granularity. The API and **agent_groups**
+This capability is focused to customize the agents' configuration with a higher level of granularity. The **API** and **agent_groups**
 help to manage groups by listing them, by allowing to assign/change/unassign groups to agents among other things. Let see three use cases where managing
 multiple groups over existing agents.
 
 Assigning multiple groups to an agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Setting multiple groups to an agent is simple, it can be done with **authd** when registering agents or manually by the **agent_groups** tool or the API:
+Setting multiple groups to an agent is simple, it can be done with **authd** when registering agents or manually by the **agent_groups** tool or the **API**:
 
 To assign the agent to one or more groups with **authd**, register the agent setting the groups where the agent will be included with the -G option:
 
@@ -110,7 +110,7 @@ With the **agent_groups** CLI, agents can be registered to groups one by one as 
         Do you want to add the group 'apache' to the agent '001'? [y/N]: y
         Group 'apache' added to agent '001'.
 
-In this example, the agent 001 has been added to `webserver` and `apache`. The same for the API, at the moment groups must be assigned to an agent one by one:
+In this example, the agent 001 has been added to `webserver` and `apache`. The same for the **API**, at the moment groups must be assigned to an agent one by one:
 
     .. code-block:: console
 
@@ -125,7 +125,7 @@ In this example, the agent 001 has been added to `webserver` and `apache`. The s
             "data": "Group 'apache' added to agent '001'."
         }
 
-After that, we can ask the API about groups which an agent belongs:
+After that, we can ask the **API** about groups which an agent belongs:
 
     .. code-block:: console
         :emphasize-lines: 7,8,9,10,11
@@ -170,7 +170,7 @@ Listing groups and configuration
 
 It is possible to know agents belonging to groups in real-time, as well as the configuration and shared files applied to each one depending on which groups it belongs.
 
-For example, to list the groups available for now, we could run the following query to `agent_groups`:
+For example, to list the groups available for now, we could run the following query to **agent_groups**:
 
     .. code-block:: console
 
