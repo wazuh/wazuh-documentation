@@ -114,6 +114,8 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
     It is recommended that the default configuration be edited to improve the performance of Elasticsearch. To do so, please see :ref:`elastic_tuning`.
 
+.. _elastic_server_rpm_logstash:
+
 Logstash
 --------
 
