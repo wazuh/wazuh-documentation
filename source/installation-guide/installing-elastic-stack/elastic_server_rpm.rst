@@ -1,5 +1,9 @@
 .. _elastic_server_rpm:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/installation-guide/installing-elastic-stack/elastic_server_rpm.html>`_.
+
 Install Elastic Stack with RPM packages
 =======================================
 

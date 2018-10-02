@@ -1,5 +1,9 @@
 .. _wazuh_puppet_module:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/deploying-with-puppet/wazuh-puppet-module/index.html>`_.
+
 Wazuh Puppet module
 ============================
 
