@@ -101,7 +101,7 @@ java_path
 Define where Java is located. If this parameter is not set, the wodle will search for the Java location in the default environment variable ``$PATH``.
 
 +--------------------+------------------+
-| **Default value**  | wodles/java      |
+| **Default value**  | ``$PATH``        |
 +--------------------+------------------+
 | **Allowed values** | Any valid path.  |
 +--------------------+------------------+
