@@ -1,5 +1,9 @@
 .. _amazon_use-cases:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/amazon/use-cases/index.html>`_.
+
 Use Cases
 ===========
 

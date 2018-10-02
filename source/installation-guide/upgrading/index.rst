@@ -1,5 +1,9 @@
 .. _upgrading_wazuh:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/installation-guide/upgrading/index.html>`_.
+
 Upgrading Wazuh
 ======================
 

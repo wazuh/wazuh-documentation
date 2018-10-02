@@ -1,5 +1,9 @@
 .. _user_manual_manager:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/user-manual/manager/index.html>`_.
+
 Manager
 ================
 
