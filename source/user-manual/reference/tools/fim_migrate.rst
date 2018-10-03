@@ -16,7 +16,7 @@ This tool is not included in the Wazuh installation, but you can download it fro
 
 .. code-block:: console
 
-    # curl --silent -o fim_migrate https://raw.githubusercontent.com/wazuh/wazuh/3.7/tools/migration/fim_migrate.py
+    # curl -so fim_migrate https://raw.githubusercontent.com/wazuh/wazuh/v3.7.0/tools/migration/fim_migrate.py
 
 Add execution permission and run this tool as follows:
 
