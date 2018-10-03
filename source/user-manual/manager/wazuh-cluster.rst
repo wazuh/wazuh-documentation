@@ -65,7 +65,8 @@ Worker nodes are responsible of two main tasks:
     - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
     - Sending :ref:`agent status updates <agent-info-thread>` to the master.
 
-The API can be used from any node. For performance reasons, it is recommended to use it mainly in the master node.
+.. note::
+    The API can be used from any node. For performance reasons, it is recommended to use it mainly in the master node.
 
 Getting started
 ---------------
@@ -157,16 +158,13 @@ Follow these steps to deploy a Wazuh cluster:
 Agent registration in the cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Using the API, an agent can be registered from any node. The API request will be forwarded to the master node which will register the agent. Otherwise, if any other registration method is used, all agents must be registered in the master node.
-
-The master is responsible for replicating the new agent's information across all worker nodes. If an agent is registered in a worker node, it will be deleted by the master node.
+**All agents must be registered in the master node**. The master is responsible for replicating the new agent's information across all worker nodes. If an agent is registered in a worker node, it will be deleted by the master node.
 
 
 Configuring the Wazuh Kibana App
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Although all nodes can have an API installed, it is recommended to configure the Wazuh App in the master node for performance reasons.
-
+The Wazuh Kibana App can point to the API of any node in the cluster. It is recommended to point it to the master's API for performance reasons.
 
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
