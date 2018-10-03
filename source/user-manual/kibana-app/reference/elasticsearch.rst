@@ -27,14 +27,6 @@ The next document example shows you how we store a Wazuh API entry. This index c
             "manager" : "osboxes",
             "cluster" : "Disabled",
             "status" : "disabled"
-        },
-        "extensions" : {
-        "audit" : true,
-        "pci" : false,
-        "gdpr" : true,
-        "oscap" : true,
-        "aws" : false,
-        "virustotal" : false
         }
     }
 

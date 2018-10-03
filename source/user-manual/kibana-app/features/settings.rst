@@ -8,7 +8,6 @@ Settings
 The *Settings* page allows you to configure and customize your Wazuh app experience. This section is automatically opened the first time you open the app in order to configure your first Wazuh API credentials, so the app can work properly. There are multiple options to configure on *Settings*, such as:
 
 - **API credentials**
-- **Extensions**
 - **Index pattern**
 
 Each option is described on the following sections below.
@@ -41,33 +40,6 @@ In this section, you can list all your inserted API credentials. The yellow star
 .. topic:: Edit API
 
   If you've changed your API credentials, you can modify the entry so you can continue using the API.
-
-Extensions
-----------
-
-Wazuh provides multiple integrations and capabilities to monitor and analyze your hosts. If you're using some of them, you can enable multiple extensions on the app to visualize tailored dashboards, which provide rich and useful information. Some of these extensions are disabled by default because you have to previously enable them on your manager configuration in order to generate alerts.
-
-The app provides the following extensions:
-
-- :ref:`PCI DSS <pci_dss>`
-- :ref:`GDPR <gdpr>`
-- :ref:`Audit <system_call_monitoring>`
-- :ref:`Open SCAP <openscap_module>`
-- :ref:`CIS-CAT <ciscat_module>`
-- :ref:`AWS <amazon>`
-- :ref:`VirusTotal <virustotal-scan>`
-
-.. image:: ../../../images/kibana-app/features/settings/extensions.png
-  :align: center
-  :width: 100%
-
-.. note::
-
-    The selected extensions are stored in a browser cookie. Multiple users can select different extensions on their own Internet browsers.
-
-.. note::
-
-    The default extensions configuration can be customized for newly inserted APIs. You can read more about it on the :ref:`kibana_config_file` section.
 
 Index pattern
 -------------
