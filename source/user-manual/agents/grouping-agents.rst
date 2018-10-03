@@ -29,7 +29,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/group/dbms?pretty"
 
-   .. note:: New groups may be created and configured before assigning agents. If a group does not exist prior to assigning an agent, it will be created when the first agent is added and set up with the files from the *'default'* group.
+   .. note:: The group must be created and configured before assigning agents.
 
    An agent's group assignment can be checked using one of the following commands:
 
@@ -205,12 +205,27 @@ It is also possible to switch between groups overwriting the existing assignment
 
         # /var/ossec/bin/agent_groups -s -i 001
         The agent 'ag-windows-12' with ID '001' has the group: '[u'default', u'webserver']'.
-        # /var/ossec/bin/agent_groups -a -e -i 001 -g apache
+        # /var/ossec/bin/agent_groups -a -f -i 001 -g apache
         Group 'apache' set to agent '001'.
         # /var/ossec/bin/agent_groups -s -i 001
         The agent 'ag-windows-12' with ID '001' has the group: '[u'apache']'.
 
-The ``-e`` parameter sets a group to an agent instead of appending it.
+The ``-f`` parameter resets groups assigned to the agent and forces it to only belong to the new group.
+
+Finally, to check the synchronization status of the group configuration for a single agent, the both following methods are available:
+
+    .. code-block:: console
+
+        # /var/ossec/bin/agent_groups -S -i 001
+        The agent '008' sync status is: Agent configuration is synced.
+
+        # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/agents/001/group/is_sync?pretty"
+        {
+            "error": 0,
+            "data": {
+                "synced": "Agent configuration is synced."
+            }
+        }
 
 The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section <../reference/tools/agent_groups>`. The same for the :doc:`API <../api/reference>` which offers calls with the similar behavior.
 
