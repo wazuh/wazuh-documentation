@@ -61,56 +61,32 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 .. _multigroups:
 
-Multi-groups
-------------
+Multiple groups
+---------------
 
 .. versionadded:: 3.7.0
 
-Since Wazuh v3.7.0, agents have the ability to belong to multiple groups. That means that agents belonging to more than one group, will receive the shared files of those groups
-as well as a remote configuration file merged from all of them.
-
-The last group assigned to a particular agent, always is the most priority when merging the configuration. In other words, parameters which contain a single value, will take the
-value appeared on the last assigned group while lists such as FIM directories will be added to the whole list.
+Since Wazuh v3.7.0, agents have the ability to belong to multiple groups. The agents will receive all the configuration files from each group. Configuration received from the last assigned group
+has more priority than the other ones.
 
 Managing multiple groups
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 - `Assigning multiple groups to an agent`_
 - `Listing groups and configuration`_
-- `Making changes on multi-groups`_
+- `Making changes on multiple groups`_
 - `Shared files behavior`_
 
 This capability is focused to customize the agents' configuration with a higher level of granularity. The **API** and **agent_groups**
-help to manage groups by listing them, by allowing to assign/change/unassign groups to agents among other things. Let see three use cases where managing
+help to manage groups by listing them and also by allowing to assign/change/unassign groups to agents. Let see three use cases where managing
 multiple groups over existing agents.
 
 Assigning multiple groups to an agent
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Setting multiple groups to an agent is simple, it can be done with **authd** when registering agents or manually by the **agent_groups** tool or the **API**:
+Setting multiple groups to an agent is simple, there are three different ways to assign an agent to one or more groups: Registration, CLI and API.
 
-To assign the agent to one or more groups with **authd**, register the agent setting the groups where the agent will be included with the -G option:
-
-    .. code-block:: console
-
-        # /var/ossec/bin/agent-auth -m MANAGER_IP -G webserver,apache
-
-    .. warning::
-        Registering an agent by **agent-auth** is the only way for now to assign the agent to multiple groups all at once.
-
-With the **agent_groups** CLI, agents can be registered to groups one by one as it was explained in the previous section:
-
-    .. code-block:: console
-
-        $ /var/ossec/bin/agent_groups -a -i 001 -g webserver
-        Do you want to add the group 'webserver' to the agent '001'? [y/N]: y
-        Group 'webserver' added to agent '001'.
-
-        $ /var/ossec/bin/agent_groups -a -i 001 -g apache
-        Do you want to add the group 'apache' to the agent '001'? [y/N]: y
-        Group 'apache' added to agent '001'.
-
-In this example, the agent 001 has been added to `webserver` and `apache`. The same for the **API**, at the moment groups must be assigned to an agent one by one:
+In this example, the agent 001 has been added to `webserver` and `apache` groups. First of all, using the **API**:
 
     .. code-block:: console
 
@@ -165,6 +141,25 @@ After that, we can ask the **API** about groups which an agent belongs:
 
 In this case, the remote configuration for the group `apache` is the most priority of the three groups when there exists conflicts on any configuration parameter.
 
+With the **agent_groups** CLI, agents can be registered to groups on the same way:
+
+    .. code-block:: console
+
+        $ /var/ossec/bin/agent_groups -a -i 001 -g webserver
+        Do you want to add the group 'webserver' to the agent '001'? [y/N]: y
+        Group 'webserver' added to agent '001'.
+
+        $ /var/ossec/bin/agent_groups -a -i 001 -g apache
+        Do you want to add the group 'apache' to the agent '001'? [y/N]: y
+        Group 'apache' added to agent '001'.
+
+To assign the agent to one or more groups on the registration process, register the agent setting the groups where the agent will be included with the -G option:
+
+    .. code-block:: console
+
+        # /var/ossec/bin/agent-auth -m MANAGER_IP -G webserver,apache
+
+
 Listing groups and configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -178,7 +173,7 @@ For example, to list the groups available for now, we could run the following qu
         3 agent(s) in group 'webserver':
           ID: 001 Name: ag-windows-12.
           ID: 003 Name: ag-windows-east.
-          ID: 004 Name: centos-7-apache.
+          ID: 004 Name: centos-7-apache
 
 Same easy to query which groups are assigned to the agent 001:
 
@@ -190,8 +185,8 @@ Same easy to query which groups are assigned to the agent 001:
 The priority of the groups increases from the left to the right, being the last one the highest priority one.
 
 
-Making changes on multi-groups
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Making changes on multiple groups
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The same way it is possible to assign multiple groups to agents, it is possible to revert assignments and switch between available groups. Below is shown how to unset the
 group `apache` for the agent 001:
@@ -228,7 +223,7 @@ In case of belonging to multiple groups, the configuration files of every group 
 
 - Shared files such as CIS benchmarks for the rootkit detection are joined in the shared folder, if repeated files, the last one added overwrites old ones.
 - The new ``agent.conf`` file added is appended to the existing one. When two groups have conflicting configuration, the last group assigned to the agent will be the leading one. Learn more about the configuration precedence in :doc:`Centralized configuration manual <../reference/centralized-configuration>`.
-- Custom shared files set from the user to a particular group are also joined to the "multi-group".
+- Custom shared files set from the user to a particular group are also joined to send them to the agents.
 
 
 .. thumbnail:: ../../images/manual/multigroups.png
