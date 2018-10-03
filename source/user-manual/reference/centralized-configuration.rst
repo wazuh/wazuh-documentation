@@ -183,7 +183,7 @@ Each time an agent checks-in with the manager (10 minute default), it looks to s
 
 4. Confirm that the agent received the configuration.
 
-Once an agent receives the configuration, the API returns ``true`` if all is right:
+Two methods are available to check this: using the ``GET/agents/:agent_id/group/is_sync`` API call or using the ``agent_groups`` binary:
 
 .. code-block:: console
 
@@ -195,12 +195,10 @@ Once an agent receives the configuration, the API returns ``true`` if all is rig
         }
     }
 
-Also, this shows if the agent has received the configuration:
-
 .. code-block:: console
 
     $ /var/ossec/bin/agent_groups -S -i 001
-    The agent '001' sync status is: True
+    Agent '001' is synchronized.
 
 5. Restarting the agent
 
@@ -256,7 +254,7 @@ The final configuration will overwrite ``check_unixaudit`` to "yes" because it a
 How to ignore shared configuration
 ----------------------------------
 
-Whether for any reason you don`t want to apply the shared configuration in a specific agent, it can be disabled by adding the following line to the file *etc/local_internal_options.conf* in that agent:
+Whether for any reason you don't want to apply the shared configuration in a specific agent, it can be disabled by adding the following line to the file *etc/local_internal_options.conf* in that agent:
 
 .. code-block:: shell
 
