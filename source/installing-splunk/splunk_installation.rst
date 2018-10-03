@@ -48,8 +48,10 @@ This component works receiving the data flow streamed by a Forwarder and stores 
 
     # /opt/splunk/bin/splunk enable boot-start
 
+.. _splunk_installation_forwarder:
+
 Splunk Forwarder installation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 A Forwarder is required in order to send alerts to the Indexer. This component will be installed in the manager instance.
 

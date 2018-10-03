@@ -173,6 +173,30 @@ The best setup to report agents' events to a cluster is a load balancer. Keep in
 
 * **Disable the option**  :ref:`use_source_ip <auth_use_source_ip>` **in your authd configuration**. When using a LB, the cluster nodes will only see the LB's IP and no the agents'. This will make the agents unable to connect to the cluster.
 
+Forwarding alerts from your nodes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+All your nodes need an event forwarder in order to send data to Elasticsearch or Splunk. This means that if you are using our Elastic stack integration you must configure Filebeat as forwarder, if you are using our Splunk integration you must configure the Splunk forwarder. If your node is installed in the same instance as the indexer you can skip the forwarder step.
+
+Installing Filebeat:
+
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| Type                                                                   | Description                                                 |
++========================================================================+=============================================================+
+| :ref:`RPM packages <wazuh_server_rpm_filebeat>`                        | Install Filebeat on CentOS/RHEL/Fedora.                     |
++------------------------------------------------------------------------+-------------------------------------------------------------+
+| :ref:`DEB packages <wazuh_server_deb_filebeat>`                        | Install Filebeat on Debian/Ubuntu.                          |
++------------------------------------------------------------------------+-------------------------------------------------------------+
+
+Installing Splunk forwarder:
+
++-------------------------------------------------------------------+-------------------------------------------------------------+
+| Type                                                              | Description                                                 |
++===================================================================+=============================================================+
+| :ref:`RPM packages <splunk_installation_forwarder>`               | Install Splunk forwarder on CentOS/RHEL/Fedora.             |
++-------------------------------------------------------------------+-------------------------------------------------------------+
+| :ref:`DEB packages <splunk_installation_forwarder>`               | Install Splunk forwarder on Debian/Ubuntu.                  |
++-------------------------------------------------------------------+-------------------------------------------------------------+
 
 .. _run-cluster-centos6:
 

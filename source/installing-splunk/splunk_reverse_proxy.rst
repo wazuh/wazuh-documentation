@@ -1,22 +1,24 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _kibana_ssl:
+.. _splunk_reverse_proxy:
 
-Setting up SSL and authentication for Kibana
-============================================
+Setting up reverse proxy configuration for Splunk
+=================================================
 
-By default, the communication between Kibana (including the Wazuh app) and the web browser on end-user systems is not encrypted. It’s strongly recommended that Kibana be configured to use SSL encryption and to enable authentication.  In this section, we will briefly describe how this can be done with a NGINX setup.
+According to the Splunk official documentation, Splunk web can be placed behind a proxy in a reverse proxy type of configuration. 
+In this section, we will briefly describe how this can be done with a NGINX setup.
+NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption. 
+In this example, we will use it as a reverse proxy to provide encrypted and authenticated access to Splunk to the end users.
 
-NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption. In this example, we will use it as a reverse proxy to provide encrypted and authenticated access to Kibana to the end users.
-
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. warning::
+    Note: The App Manager is not supported for use with a proxy server, if you use a proxy server with Splunk Web, you must download and update apps manually.
 
 .. topic:: Contents
 
-    1. `NGINX SSL proxy for Kibana (RPM-based distributions)`_
-    2. `NGINX SSL proxy for Kibana (Debian-based distributions)`_
+    1. `NGINX SSL proxy for Splunk (RPM-based distributions)`_
+    2. `NGINX SSL proxy for Splunk (Debian-based distributions)`_
 
-NGINX SSL proxy for Kibana (RPM-based distributions)
+NGINX SSL proxy for Splunk (RPM-based distributions)
 ----------------------------------------------------
 
 1. Install NGINX:
@@ -58,19 +60,19 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
     .. code-block:: console
 
       # mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-      # cp <ssl_pem> /etc/pki/tls/certs/kibana-access.pem
-      # cp <ssl_key> /etc/pki/tls/private/kibana-access.key
+      # cp <ssl_pem> /etc/pki/tls/certs/splunk-access.pem
+      # cp <ssl_key> /etc/pki/tls/private/splunk-access.key
 
   b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
 
     .. code-block:: console
 
       # mkdir -p /etc/pki/tls/certs /etc/pki/tls/private
-      # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/kibana-access.key -out /etc/pki/tls/certs/kibana-access.pem
+      # openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/pki/tls/private/splunk-access.key -out /etc/pki/tls/certs/splunk-access.pem
         Generating a 2048 bit RSA private key
         ...........+++
         ................+++
-        writing new private key to '/etc/pki/tls/private/kibana-access.key'
+        writing new private key to '/etc/pki/tls/private/splunk-access.key'
         -----
         You are about to be asked to enter information that will be incorporated
         into your certificate request.
@@ -88,7 +90,7 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
         Email Address []: example@mail.com
 
 
-3. Configure NGINX as an HTTPS reverse proxy to Kibana:
+3. Configure NGINX as an HTTPS reverse proxy to Splunk:
 
   .. code-block:: console
 
@@ -103,31 +105,27 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
         listen 443 default_server;
         listen            [::]:443;
         ssl on;
-        ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-        ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+        ssl_certificate /etc/pki/tls/certs/splunk-access.pem;
+        ssl_certificate_key /etc/pki/tls/private/splunk-access.key;
         access_log            /var/log/nginx/nginx.access.log;
         error_log            /var/log/nginx/nginx.error.log;
         location / {
             auth_basic "Restricted";
-            auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            proxy_pass http://kibana-server-ip:5601/;
+            auth_basic_user_file /etc/nginx/conf.d/splunk.htpasswd;
+            proxy_pass http://splunk-server-ip:8000/;
         }
     }
     EOF
 
-  .. note::
-
-    We configure Nginx in order to encapsulate the IP address of the Kibana server. This configuration allows Kibana requests to be redirected to HTTPS. When using this configuration, it is recommended that the file ``/etc/kibana/kibana.yml`` be edited to set the field ``server.host`` to ``localhost``. The Kibana service must be restarted to apply this change.
-
-4. Allow NGINX to connect to the Kibana port if SELinux is being used:
+4. Allow NGINX to connect to the Splunk port if SELinux is being used:
 
   .. code-block:: console
 
-    # semanage port -a -t http_port_t -p tcp 5601
+    # semanage port -a -t http_port_t -p tcp 8000
 
   .. note::
 
-    This assumes that you have ``policycoreutils-python`` installed to manage SELinux.
+    This assumes that you have ``policycoreutils-python`` installed to manage SELinux. Also that the used port is the default one.
 
 
 Enable authentication by htpasswd
@@ -143,7 +141,7 @@ Enable authentication by htpasswd
 
   .. code-block:: console
 
-    # htpasswd -c /etc/nginx/conf.d/kibana.htpasswd wazuh
+    # htpasswd -c /etc/nginx/conf.d/splunk.htpasswd wazuh
 
 3. Restart NGINX:
 
@@ -159,12 +157,9 @@ Enable authentication by htpasswd
 
       # service nginx restart
 
-Now, access the Kibana web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
+Now, access the Splunk web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
 
-.. warning::
-    If you're facing permission issues or getting 502 code error, try executing this command: ``setsebool -P httpd_can_network_connect 1``
-
-NGINX SSL proxy for Kibana (Debian-based distributions)
+NGINX SSL proxy for Splunk (Debian-based distributions)
 -------------------------------------------------------
 
 1. Install NGINX:
@@ -180,22 +175,22 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
     .. code-block:: console
 
       # mkdir -p /etc/ssl/certs /etc/ssl/private
-      # cp <ssl_pem> /etc/ssl/certs/kibana-access.pem
-      # cp <ssl_key> /etc/ssl/private/kibana-access.key
+      # cp <ssl_pem> /etc/ssl/certs/splunk-access.pem
+      # cp <ssl_key> /etc/ssl/private/splunk-access.key
 
-  b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows:
+  b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
 
     .. code-block:: console
 
       # mkdir -p /etc/ssl/certs /etc/ssl/private
-      # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/kibana-access.key -out /etc/ssl/certs/kibana-access.pem
+      # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/splunk-access.key -out /etc/ssl/certs/splunk-access.pem
         Generating a 2048 bit RSA private key
         .............+++
         ..+++
-        writing new private key to '/etc/ssl/private/kibana-access.key'
+        writing new private key to '/etc/ssl/private/splunk-access.key'
         -----
 
-3. Configure NGINX as an HTTPS reverse proxy to Kibana:
+3. Configure NGINX as an HTTPS reverse proxy to Splunk:
 
   .. code-block:: console
 
@@ -210,21 +205,17 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
         listen 443 default_server;
         listen            [::]:443;
         ssl on;
-        ssl_certificate /etc/ssl/certs/kibana-access.pem;
-        ssl_certificate_key /etc/ssl/private/kibana-access.key;
+        ssl_certificate /etc/ssl/certs/splunk-access.pem;
+        ssl_certificate_key /etc/ssl/private/splunk-access.key;
         access_log            /var/log/nginx/nginx.access.log;
         error_log            /var/log/nginx/nginx.error.log;
         location / {
             auth_basic "Restricted";
-            auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            proxy_pass http://kibana-server-ip:5601/;
+            auth_basic_user_file /etc/nginx/conf.d/splunk.htpasswd;
+            proxy_pass http://splunk-server-ip:8000/;
         }
     }
     EOF
-
-  .. note::
-
-    We configure Nginx in order to encapsulate the IP address of the Kibana server. This configuration allows Kibana requests to be redirected to HTTPS. When using this configuration, it is recommended that the file ``/etc/kibana/kibana.yml`` be edited to set the field ``server.host`` to ``localhost``. The Kibana service must be restarted to apply this change.
 
 Enable authentication by htpasswd
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -239,7 +230,7 @@ Enable authentication by htpasswd
 
   .. code-block:: console
 
-    # htpasswd -c /etc/nginx/conf.d/kibana.htpasswd <user>
+    # htpasswd -c /etc/nginx/conf.d/splunk.htpasswd <user>
 
 3. Restart NGINX:
 
@@ -255,4 +246,18 @@ Enable authentication by htpasswd
 
       # service nginx restart
 
-Now, access the Kibana web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
+Now, access the Splunk web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
+
+.. warning::
+    If you're facing permission issues or 502 code error, try executing this command: ``setsebool -P httpd_can_network_connect 1``
+
+Root endpoint
+-------------
+
+If you are hosting Splunk Web behind a proxy that does not place Splunk Web at the proxy's root, you may need to configure the root_endpoint setting in `$SPLUNK_HOME/etc/system/local/web.conf`, navigate to the file and edit it. 
+For example, if your proxy hosts Splunk Web at "yourhost.com:8000/splunk", you have to set up the `root_endpoint` option like this:
+
+    .. code-block:: console
+
+      [settings]
+      root_endpoint=/splunk

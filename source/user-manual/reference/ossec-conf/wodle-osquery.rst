@@ -54,7 +54,7 @@ disabled
 Disable the osquery wodle.
 
 +--------------------+---------+
-| **Default value**  | yes     |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
@@ -125,11 +125,19 @@ pack
 
 Add a query pack to the configuration. This option can be defined multiple times.
 
-+--------------------+----------------------+
-| **Default value**  | Empty                |
-+--------------------+----------------------+
-| **Allowed values** | Any available pack   |
-+--------------------+----------------------+
++--------------------+---------------------------------+
+| **Default value**  | Empty                           |
++--------------------+---------------------------------+
+| **Allowed values** | Path to pack configuration file |
++--------------------+---------------------------------+
+
+Attributes:
+
++----------+----------------------+
+| **name** | Name for this pack   |
+|          +----------------+-----+
+|          | Allowed values | Any |
++----------+----------------+-----+
 
 
 Example of configuration

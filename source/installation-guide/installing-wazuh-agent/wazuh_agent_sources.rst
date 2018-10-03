@@ -27,7 +27,7 @@ Installing Linux agent
 
   .. code-block:: console
 
-      # apt-get install make gcc libc6-dev curl policycoreutils-python-utils automake autoconf libtool
+      # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool
 
 2. Download and extract the latest version:
 

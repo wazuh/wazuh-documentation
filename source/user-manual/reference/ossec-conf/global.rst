@@ -23,6 +23,7 @@ Options
 - `email_from`_
 - `email_reply_to`_
 - `smtp_server`_
+- `helo_server`_
 - `email_maxperhour`_
 - `email_idsname`_
 - `custom_alert_output`_
@@ -34,6 +35,8 @@ Options
 - `host_information`_
 - `jsonout_output`_
 - `prelude_output`_
+- `prelude_log_level`_
+- `prelude_profile`_
 - `zeromq_output`_
 - `zeromq_uri`_
 - `geoip_db_path`_
@@ -109,7 +112,7 @@ This specifies the “reply-to” address contained in the email alerts.
 smtp_server
 ^^^^^^^^^^^
 
-In this option defines what SMTP server to use to deliver alerts.
+This option defines what SMTP server to use to deliver alerts.
 
 +--------------------+-----------------------------------------------+
 | **Default value**  | n/a                                           |
@@ -117,6 +120,17 @@ In this option defines what SMTP server to use to deliver alerts.
 | **Allowed values** | - Valid hostname or IP address.               |
 |                    |                                               |
 |                    | - Full path to a sendmail-like executable.    |
++--------------------+-----------------------------------------------+
+
+helo_server
+^^^^^^^^^^^
+
+This option defines how the ossec server will identify itself when sending mail.
+
++--------------------+-----------------------------------------------+
+| **Default value**  | notify.ossec.net                              |
++--------------------+-----------------------------------------------+
+| **Allowed values** | Any valid hostname.                           |
 +--------------------+-----------------------------------------------+
 
 email_maxperhour
@@ -218,11 +232,12 @@ memory_size
 
 This sets the memory size for the event correlation engine.
 
-+--------------------+--------------------------+
-| **Default value**  | 1024                     |
-+--------------------+--------------------------+
-| **Allowed values** | Any size from 16 to 5096 |
-+--------------------+--------------------------+
++--------------------+-----------------------------------+
+| **Default value**  | 8192                              |
++--------------------+-----------------------------------+
+| **Allowed values** | Any integer, but values less than |
+|                    | 2048 will be replaced by 2048.    |
++--------------------+-----------------------------------+
 
 white_list
 ^^^^^^^^^^
@@ -267,10 +282,32 @@ prelude_output
 This toggles Prelude output.
 
 +--------------------+---------+
-| **Default value**  | yes     |
+| **Default value**  | no      |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
+
+prelude_log_level
+^^^^^^^^^^^^^^^^^
+
+The minimum alert level required to triger prelude output.
+
++--------------------+------------------------------------+
+| **Default value**  | 0                                  |
++--------------------+------------------------------------+
+| **Allowed values** | Any integer from 0 to 16 inclusive |
++--------------------+------------------------------------+
+
+prelude_profile
+^^^^^^^^^^^^^^^
+
+The prelude client analyzer name.
+
++--------------------+------------------------------------+
+| **Default value**  | OSSEC                              |
++--------------------+------------------------------------+
+| **Allowed values** | Any valid prelude client analyzer. |
++--------------------+------------------------------------+
 
 zeromq_output
 ^^^^^^^^^^^^^
