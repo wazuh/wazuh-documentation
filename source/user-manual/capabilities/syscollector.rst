@@ -37,6 +37,8 @@ The collected information from Wazuh agents is stored in different SQLite tables
 
 At present, this module is available for Linux, Windows, MacOS, OpenBS and FreeBSD. See the `compatibility matrix`_ for more information.
 
+.. _syscollector_hardware:
+
 Hardware
 ^^^^^^^^
 
@@ -65,6 +67,8 @@ Retrieve basic information about the hardware components of a system.
 +------------------+-----------------------------+-------------------------------------------+-------------------+
 | **ram_usage**    | Percentaje of RAM in use    | 87                                        | All               |
 +------------------+-----------------------------+-------------------------------------------+-------------------+
+
+.. _syscollector_system:
 
 Operating system
 ^^^^^^^^^^^^^^^^
@@ -104,6 +108,8 @@ Retrieve basic information about the operating system.
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
 | **version**      | Release version         | #31~16.04.1-Ubuntu SMP Wed Jul 18 08:54:04 UTC 2018 | All               |
 +------------------+-------------------------+-----------------------------------------------------+-------------------+
+
+.. _syscollector_packages:
 
 Packages
 ^^^^^^^^
@@ -145,6 +151,8 @@ The current packages inventory of each Wazuh agent. On Linux systems, retrieved 
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **location**     | Location of the package                | C:\\Program Files\\VMware\\VMware Tools\\         | win/pkg           |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
+
+.. _syscollector_interfaces:
 
 Network interfaces
 ^^^^^^^^^^^^^^^^^^
@@ -194,6 +202,8 @@ it is composed of three tables to ensure that the information is as structured a
 | **rx_dropped**   | Dropped reception packets    | 0                                                   | All               |
 +------------------+------------------------------+-----------------------------------------------------+-------------------+
 
+.. _syscollector_netaddr:
+
 - `sys_netaddr` table
 
 Referencing interfaces described at `sys_netiface`, this table shows the IPv4 and IPv6 addresses associated to that interfaces.
@@ -214,6 +224,8 @@ Referencing interfaces described at `sys_netiface`, this table shows the IPv4 an
 | **broadcast**    | Broadcast address               | 192.168.1.255                                       | All               |
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
 
+.. _syscollector_netproto:
+
 - `sys_netproto` table
 
 Referencing interfaces described at `sys_netiface`, this table shows the routing configuration for each interface.
@@ -233,6 +245,8 @@ Referencing interfaces described at `sys_netiface`, this table shows the routing
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
 | **dhcp**         | DHCP status                     | enabled                                             | Linux/Windows     |
 +------------------+---------------------------------+-----------------------------------------------------+-------------------+
+
+.. _syscollector_ports:
 
 Ports
 ^^^^^
@@ -270,6 +284,8 @@ List the opened ports of a system.
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
 | **process**      | Name of the PID                        | System                                            | Windows           |
 +------------------+----------------------------------------+---------------------------------------------------+-------------------+
+
+.. _syscollector_processes:
 
 Processes
 ^^^^^^^^^
