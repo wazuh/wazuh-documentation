@@ -229,7 +229,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
     # apt-get update
     
-  Alternately, you can set the package state to 'hold', which will stop updates (you can still upgrade it manually with the apt-get install 
+  Alternately, you can set the package state to 'hold', which will stop updates (you can still upgrade it manually with the apt-get install)
   
   .. code-block:: console
 
