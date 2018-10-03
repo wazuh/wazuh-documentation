@@ -29,6 +29,7 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 | **-f FILE, --file FILE**                   | Custom WPK filename.                                    |
 +--------------------------------------------+---------------------------------------------------------+
 | **-x EXECUTE, --execute EXECUTE**          | Executable filename in the WPK custom file.             |
+|                                            | By default it will try to launch upgrade.sh.            |
 +--------------------------------------------+---------------------------------------------------------+
 | **-t TIMEOUT, --timeout TIMEOUT**          | Timeout where the agent cannot restart while updating.  |
 +--------------------------------------------+---------------------------------------------------------+

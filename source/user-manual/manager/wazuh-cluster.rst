@@ -40,7 +40,7 @@ Types of nodes
 Master
 ~~~~~~
 
-The master node centralizes and coordinates client nodes, making sure the critical and required data is consistent across all nodes. It provides the centralization of the following:
+The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. It provides the centralization of the following:
 
 - Agent registration.
 - Agent deletion.
@@ -50,17 +50,17 @@ The master node centralizes and coordinates client nodes, making sure the critic
 
 .. warning::
 
-    The master doesn't send its :doc:`local configuration file <../reference/index>` to the clients. If the configuration is changed in the master node, it should be changed manually in the clients. Take care of not overwriting the cluster section in the local configuration of each client.
+    The master doesn't send its :doc:`local configuration file <../reference/index>` to the workers. If the configuration is changed in the master node, it should be changed manually in the workers. Take care of not overwriting the cluster section in the local configuration of each worker.
 
 .. warning::
-    When rules, decoders or CDB lists are synchronized, the client nodes are not restarted. They must be restarted manually in order to apply the received configuration.
+    When rules, decoders or CDB lists are synchronized, the worker nodes are not restarted. They must be restarted manually in order to apply the received configuration.
 
 All communications among nodes in the cluster are encrypted using AES algorithm.
 
-Client
+Worker
 ~~~~~~
 
-Client nodes are responsible of two main tasks:
+Worker nodes are responsible of two main tasks:
 
     - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
     - Sending :ref:`agent status updates <agent-info-thread>` to the master.
@@ -106,7 +106,7 @@ Follow these steps to deploy a Wazuh cluster:
   - ``<disabled>``: Set this field to ``no`` in order to enable the cluster.
   - ``<nodes>``: The address of the **master** must be specified in all nodes (including the master itself). The address can be either an IP or a DNS.
 
-    The following is an example of the configuration of a **client** node:
+    The following is an example of the configuration of a **worker** node:
 
     .. code-block:: xml
 
@@ -114,7 +114,7 @@ Follow these steps to deploy a Wazuh cluster:
             <name>wazuh</name>
             <node_name>node02</node_name>
             <key>c98b62a9b6169ac5f67dae55ae4a9088</key>
-            <node_type>client</node_type>
+            <node_type>worker</node_type>
             <port>1516</port>
             <bind_addr>0.0.0.0</bind_addr>
             <nodes>
@@ -155,7 +155,7 @@ Follow these steps to deploy a Wazuh cluster:
 Agent registration in the cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**All agents must be registered in the master node**. The master is responsible for replicating the new agent's information across all client nodes. If an agent is registered in a client node, it will be deleted by the master node.
+**All agents must be registered in the master node**. The master is responsible for replicating the new agent's information across all worker nodes. If an agent is registered in a worker node, it will be deleted by the master node.
 
 
 Configuring the Wazuh Kibana App
@@ -249,7 +249,7 @@ Upgrading from older versions
 If you already have a cluster installation from a **version older or equal to 3.2.2**, you should do some changes in your cluster configuration:
 
     * Remove ``<interval>`` section.
-    * Remove client nodes from ``<nodes>`` section. Only the master node is allowed.
+    * Remove worker nodes from ``<nodes>`` section. Only the master node is allowed.
 
 The cluster will work with an old configuration but it is recommended to update it.
 
@@ -257,9 +257,9 @@ The cluster will work with an old configuration but it is recommended to update 
 How the cluster works
 ---------------------
 
-The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates all the nodes following a master-client architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
+The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates all the nodes following a master-worker architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
 
-The image below shows the communications between a client and a master node. Each client-master communication is independent from each other, since clients are the ones who start the communication with the master.
+The image below shows the communications between a worker and a master node. Each worker-master communication is independent from each other, since workers are the ones who start the communication with the master.
 
 There are different independent threads running, each one is framed in the image:
 
@@ -274,34 +274,34 @@ All cluster logs are written in the file ``logs/cluster.log``.
 Keep alive thread
 ^^^^^^^^^^^^^^^^^
 
-The *keep alive thread* sends a keep-alive to the master every so often. It is necessary to keep the connection opened between master and client, since the cluster uses permanent connections.
+The *keep alive thread* sends a keep-alive to the master every so often. It is necessary to keep the connection opened between master and worker, since the cluster uses permanent connections.
 
 .. _agent-info-thread:
 
 Agent info thread
 ^^^^^^^^^^^^^^^^^
 
-The *agent info thread* sends the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the client node. The master checks the modification date of each received agent status file and keeps the most recent one.
+The *agent info thread* sends the :ref:`statuses of the agents <agent-status-cycle>` that are reporting to the worker node. The master checks the modification date of each received agent status file and keeps the most recent one.
 
-The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master to store unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified client nodes yet.
+The master also checks whether the agent exists or not before saving its status update. This is done to prevent the master to store unnecessary information. For example, this situation is very common when an agent is removed but the master hasn't notified worker nodes yet.
 
 .. _integrity-thread:
 
 Integrity thread
 ^^^^^^^^^^^^^^^^
 
-The *integrity thread* is in charge of synchrozing the files sent by the master node to the clients. Those files are:
+The *integrity thread* is in charge of synchrozing the files sent by the master node to the workers. Those files are:
 
 - :ref:`agent-keys-registration` file.
 - :doc:`User defined rules, decoders <../ruleset/custom>` and :doc:`CDB lists <../ruleset/cdb-list>`.
 - :doc:`Agent groups files and assignments <../agents/grouping-agents>`.
 
-Usually, the master is responsible for sending group assignments, but just in case a new agent starts reporting in a client node, the client will send the new agent's group assignment to the master.
+Usually, the master is responsible for sending group assignments, but just in case a new agent starts reporting in a worker node, the worker will send the new agent's group assignment to the master.
 
 File Integrity Thread
 ^^^^^^^^^^^^^^^^^^^^^
 
-The integrity of each file is calculated using its MD5 checksum and its modification time. To avoid calculating the integrity with each client connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
+The integrity of each file is calculated using its MD5 checksum and its modification time. To avoid calculating the integrity with each worker connection, the integrity is calculated in a different thread, called *File integrity thread*, in the master node every so often.
 
 
 Cluster management
@@ -317,16 +317,16 @@ For example, the following snippet shows the connected nodes in the cluster:
     ---------------------------------------
     Name    Address         Type    Version
     ---------------------------------------
-    node01  192.168.56.101  master  3.2.3
-    node02  192.168.56.103  client  3.2.3
-    node03  192.168.56.105  client  3.2.3
+    node01  192.168.56.101  master  3.6.1
+    node02  192.168.56.103  worker  3.6.1
+    node03  192.168.56.105  worker  3.6.1
     ---------------------------------------
 
 This information can also be obtained using the Restful API:
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes?pretty"
+    $ curl -u foo:bar -X GET "https://localhost:55000/cluster/nodes?pretty"
     {
        "error": 0,
        "data": {
@@ -334,19 +334,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.2.3",
-                "type": "client",
+                "version": "3.6.1",
+                "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.2.3",
-                "type": "client",
+                "version": "3.6.1",
+                "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.2.3",
+                "version": "3.6.1",
                 "type": "master",
                 "name": "node01"
              }

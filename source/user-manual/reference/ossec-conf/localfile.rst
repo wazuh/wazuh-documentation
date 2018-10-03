@@ -35,7 +35,7 @@ This indicates the location of a log or wild-carded group of logs to be read. ``
 
 For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017).
 
-Wildcards may be used on non-Windows systems, however, the log file must exist at the time ``ossec-logcollector`` is started as it will not automatically begin monitoring new log files.
+Wildcards may be used on non-Windows systems, but if the log file doesn't exist at the time ``ossec-logcollector`` is started, it will be added after ``logcollector.vcheck_files`` seconds.
 
 Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
 
@@ -317,6 +317,16 @@ The list of available parameters is:
 | ``hostname``           | System's host name.                                                   |
 +------------------------+-----------------------------------------------------------------------+
 
+Attributes:
+
++------------+-----------------------------------------------------------------------------------+
+| **target** | This option selects a defined target to apply the output format.                  |
++            +----------------+------------------------------------------------------------------+
+|            | Allowed values | Any target defined in the option ``<target>``.                   |
+|            +----------------+------------------------------------------------------------------+
+|            | Default value  | Select all targets defined in the ``<localfile>`` stanza.        |
++------------+----------------+------------------------------------------------------------------+
+
 Configuration examples
 ----------------------
 
@@ -335,6 +345,14 @@ Linux configuration:
       <log_format>command</log_format>
       <command>df -P</command>
       <frequency>360</frequency>
+    </localfile>
+
+    <!-- To use a custom target or format -->
+    <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/log/auth.log</location>
+      <target>agent,custom_socket</target>
+      <out_format target="custom_socket">$(timestamp %Y-%m-%d %H:%M:%S): $(log)</out_format>
     </localfile>
 
 Windows configuration:

@@ -74,8 +74,8 @@ Example of configuration
 .. code-block:: xml
 
     <socket>
-        <name>custom_socket</name>
-        <location>/var/run/custom.sock</location>
-        <mode>tcp</mode>
-        <prefix>custom_syslog: </prefix>
+      <name>custom_socket</name>
+      <location>/var/run/custom.sock</location>
+      <mode>tcp</mode>
+      <prefix>custom_syslog: </prefix>
     </socket>

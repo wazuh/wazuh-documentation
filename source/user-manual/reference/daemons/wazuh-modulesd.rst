@@ -28,15 +28,38 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
   The CIS-CAT wodle allows you to run CIS policy scans visualizing the results of assessments in the Wazuh App. See the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat/ciscat>` for more information on this functionality.
 
+.. topic:: Command wodle
+
+  The Command module allows running external commands asynchronously, one in each thread.
+
+.. topic:: Syscollector wodle
+
+  The Syscollector module performs periodic scans in the system to obtain information related to the installed hardware, operating system information, network information, installed packages, active ports, and running processes.
+
+.. topic:: AWS S3 wodle
+
+  The AWS S3 wodle allows you to gather and parse logs from multiple AWS services, such as Guard Duty, Macie, VPC Flow, etc. See the :doc:`AWS S3 <../../../amazon/index>` section for more information on this functionality.
+
+.. topic:: Vulnerability detector wodle
+
+  The Vulnerability Detector module detects applications that are known to be vulnerable (affected by a CVE).
+
+.. topic:: Osquery wodle
+
+  The Osquery wodle provides the user an operating system instrumentation tool that makes low-level operating system analytics and monitoring both performant and intuitive using SQL-based queries. For more information, read through the documentation for :doc:`osquery integration <../../capabilities/osquery>`.
+
+
 wazuh-modulesd options
 ----------------------
 
-+--------+---------------------------+
-| **-d** | Increase debug mode.      |
-+--------+---------------------------+
-| **-f** | Run in the foreground.    |
-+--------+---------------------------+
-| **-h** | Display the help message. |
-+--------+---------------------------+
-| **-t** | Test configuration.       |
-+--------+---------------------------+
++---------+---------------------------+
+| **-d**  | Basic debug mode.         |
++---------+---------------------------+
+| **-dd** | Verbose debug mode.       |
++---------+---------------------------+
+| **-f**  | Run in the foreground.    |
++---------+---------------------------+
+| **-h**  | Display the help message. |
++---------+---------------------------+
+| **-t**  | Test configuration.       |
++---------+---------------------------+

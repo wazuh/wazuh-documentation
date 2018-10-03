@@ -26,7 +26,10 @@ Options
 - `run_on_start`_
 - `ignore_output`_
 - `timeout`_
-
+- `verify_md5`_
+- `verify_sha1`_
+- `verify_sha256`_
+- `skip_verification`_
 
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
@@ -44,6 +47,14 @@ Options
 | `ignore_output`_     | yes, no                     |
 +----------------------+-----------------------------+
 | `timeout`_           | A positive number (seconds) |
++----------------------+-----------------------------+
+| `verify_md5`_        | MD5 checksum                |
++----------------------+-----------------------------+
+| `verify_sha1`_       | SHA1 checksum               |
++----------------------+-----------------------------+
+| `verify_sha256`_     | SHA256 checksum             |
++----------------------+-----------------------------+
+| `skip_verification`_ | yes, no                     |
 +----------------------+-----------------------------+
 
 disabled
@@ -126,6 +137,64 @@ However, if the timeout is other than 0, the execution will finished if it expir
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
 
+
+verify_md5
+^^^^^^^^^^
+
+.. versionadded:: 3.6.0
+
+Verify the binary MD5 sum.
+
++--------------------+--------------+
+| **Default value**  | n/a          |
++--------------------+--------------+
+| **Allowed values** | MD5 checksum |
++--------------------+--------------+
+
+
+verify_sha1
+^^^^^^^^^^^
+
+.. versionadded:: 3.6.0
+
+Verify the binary SHA1 sum.
+
++--------------------+---------------+
+| **Default value**  | n/a           |
++--------------------+---------------+
+| **Allowed values** | SHA1 checksum |
++--------------------+---------------+
+
+
+verify_sha256
+^^^^^^^^^^^^^
+
+.. versionadded:: 3.6.0
+
+Verify the binary SHA256 sum.
+
++--------------------+-----------------+
+| **Default value**  | n/a             |
++--------------------+-----------------+
+| **Allowed values** | SHA256 checksum |
++--------------------+-----------------+
+
+
+skip_verification
+^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.6.0
+
+Run the command defined although the checksum does not match.
+In this case, the agent will log that the checksum verification failed but will run the application.
+
++--------------------+---------+
+| **Default value**  | no      |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+
 Centralized configuration
 -------------------------
 
@@ -152,6 +221,7 @@ Example of configuration
       <ignore_output>no</ignore_output>
       <run_on_start>yes</run_on_start>
       <timeout>0</timeout>
+      <verify_md5>5aada3704685dad6fd27beb58e6687de</verify_md5>
+      <verify_sha1>da39a3ee5e6b4b0d3255bfef95601890afd80709</verify_sha1>
+      <verify_sha256>292a188e498caea5c5fbfb0beca413c980e7a5edf40d47cf70e1dbc33e4f395e</verify_sha256>
     </wodle>
-
-.. note:: See the :doc:`Vuls integration section<../../capabilities/vuls>` for a use case of this command.

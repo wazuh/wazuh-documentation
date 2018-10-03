@@ -42,7 +42,7 @@ Toggles the agent buffer on and off. When set to ``yes``, the agent will send ev
 disable
 ^^^^^^^
 
-.. deprecated:: 3.1
+.. deprecated:: 3.1.0
 
 Toggles the agent buffer on and off. When set to ``yes``, the agent will send events to the manager without any congestion control. Due to compatibility issues, it is recommended that this option be replaced by the `disabled`_ parameter.
 
@@ -71,7 +71,7 @@ Sets the capacity of the agent buffer in number of events.
 length
 ^^^^^^
 
-.. deprecated:: 3.0
+.. deprecated:: 3.0.0
 
 Sets the capacity of the agent buffer in number of events.
 

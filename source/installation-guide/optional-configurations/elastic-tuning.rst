@@ -93,7 +93,7 @@ After starting Elasticsearch, you can see whether this setting was successfully 
 
 .. code-block:: console
 
-    # curl -XGET 'localhost:9200/_nodes?filter_path=**.mlockall&pretty'
+    # curl "localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
 
@@ -167,7 +167,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.3/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.6/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
 
 2. Edit the template in order to set one shard with no replicas:
 
@@ -245,7 +245,7 @@ Note that we are assuming your target index pattern is **"wazuh-alerts-*"**, how
 
 .. code-block:: console
 
-  # curl 'localhost:9200/_cat/indices'
+  # curl "localhost:9200/_cat/indices"
 
 Reference:
 

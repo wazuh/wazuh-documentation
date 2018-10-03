@@ -83,13 +83,14 @@ Options
 - `local_ip`_
 - `disable-active-response`_
 - `auto_restart`_
+- `crypto_method`_
 
 .. _legacy_server-ip:
 
 server-ip
 ^^^^^^^^^
 
-.. deprecated:: 3.0
+.. deprecated:: 3.0.0
 
 Specifies the IP address of the Wazuh manager.
 
@@ -105,7 +106,7 @@ Specifies the IP address of the Wazuh manager.
 server-hostname
 ^^^^^^^^^^^^^^^
 
-.. deprecated:: 3.0
+.. deprecated:: 3.0.0
 
 Specifies the hostname of the Wazuh manager.
 
@@ -123,7 +124,7 @@ Specifies the hostname of the Wazuh manager.
 port
 ^^^^
 
-.. deprecated:: 3.0
+.. deprecated:: 3.0.0
 
 Specifies the port on the manager to send events to.  This must match the associated listening port configured on the Wazuh manager.
 
@@ -138,7 +139,7 @@ Specifies the port on the manager to send events to.  This must match the associ
 protocol
 ^^^^^^^^
 
-.. deprecated:: 3.0
+.. deprecated:: 3.0.0
 
 Specifies the protocol to use when connecting to manager.
 
@@ -223,6 +224,19 @@ Toggles on and off the automatic restart of agents when a new valid configuratio
 | **Default value**  | yes                 |
 +--------------------+---------------------+
 | **Allowed values** | yes, no             |
++--------------------+---------------------+
+
+crypto_method
+^^^^^^^^^^^^^
+
+.. versionadded:: 3.5.0
+
+Choose the encryption of the messages that the agent sends to the manager.
+
++--------------------+---------------------+
+| **Default value**  | aes                 |
++--------------------+---------------------+
+| **Allowed values** | blowfish, aes       |
 +--------------------+---------------------+
 
 Sample configuration

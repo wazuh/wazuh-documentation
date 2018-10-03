@@ -16,33 +16,55 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -u foo:bar -k https://127.0.0.1:55000
+    # curl -u foo:bar "http://localhost:55000"
+    {
+       "error": 0,
+       "data": {
+          "msg": "Welcome to Wazuh HIDS API",
+          "api_version": "v3.6.1",
+          "hostname": "wazuh",
+          "timestamp": "Fri Aug 03 2018 03:00:51 GMT+0000 (UTC)"
+       }
+    }
 
-``{"error":"0","data": "Welcome to Wazuh HIDS API"}``
 
 **PUT**
 
 .. code-block:: console
 
-    # curl -u foo:bar -k -X PUT https://127.0.0.1:55000/agents/new_agent
+    # curl -u foo:bar -X PUT "http://localhost:55000/agents/new_agent"
+    {
+       "error": 0,
+       "data": {
+          "id": "009",
+          "key": "MDA5IG5ld19hZ2VudCBhbnkgNWQ3NGY1ZjY3YTJiY2U5M2MzMjAyOGM2NTRjMjkyNjgwYTQxMDYzYmI3Y2FhYmI4YjI2ZTU1ZTY4OTUzNGYwMQ=="
+       }
+    }
 
-``{"error":0,"data":"004"}``
 
 **POST**
 
 .. code-block:: console
 
-    # curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000//agents"
+    # curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "http://localhost:55000//agents"
+    {
+       "error": 0,
+       "data": {
+          "id": "010",
+          "key": "MDEwIE5ld0hvc3QgMTAuMC4wLjggZDQzMzU4NzNjMDA3OTRjZmRmZjA2ZWU5ZjBlODI1YzA3NmQ4MDBjNmY2OTRhMjY1NTM0NzBmMjY5NDA0ZTM1Mw=="
+       }
+    }
 
-``{"error":0,"data":"004"}``
 
 **DELETE**
 
 .. code-block:: console
 
-    # curl -u foo:bar -k -X DELETE https://127.0.0.1:55000/rootcheck/001
-
-``{"error":"0","data":"Policy and auditing database updated"}``
+    # curl -u foo:bar -X DELETE "https://localhost:55000/rootcheck/001?pretty"
+    {
+       "error": 0,
+       "data": "Rootcheck database deleted"
+    }
 
 .. _api_python-label:
 
@@ -53,7 +75,7 @@ You can also interact with the API using Python as shown below:
 
 Code:
 
-.. code-block:: console
+.. code-block:: python
 
     #!/usr/bin/env python
 
@@ -73,25 +95,34 @@ Code:
     print("Status: {0}".format(r.status_code))
 
 Output:
-::
+
+.. code-block:: javascript
 
     {
-        "error": "0",
         "data": {
+            "dateAdd": "2018-08-02 16:48:58",
             "id": "000",
             "ip": "127.0.0.1",
-            "lastKeepAlive": "Not available",
-            "name": "LinMV",
-            "os": "Linux LinMV 3.16.0-4-amd64 #1 SMP Debian 3.16.7-ckt11-1 (2015-05-24) x86_64",
-            "rootcheckEndTime": "Unknown",
-            "rootcheckTime": "Unknown",
+            "lastKeepAlive": "9999-12-31 23:59:59",
+            "manager_host": "wazuh",
+            "name": "wazuh",
+            "os": {
+                "arch": "x86_64",
+                "codename": "Bionic Beaver",
+                "major": "18",
+                "minor": "04",
+                "name": "Ubuntu",
+                "platform": "ubuntu",
+                "uname": "Linux |wazuh |4.15.0-29-generic |#31-Ubuntu SMP Tue Jul 17 15:39:52 UTC 2018 |x86_64",
+                "version": "18.04 LTS"
+            },
             "status": "Active",
-            "syscheckEndTime": "Unknown",
-            "syscheckTime": "Unknown",
-            "version": "OSSEC HIDS v2.8"
-        }
+            "version": "Wazuh v3.6.1"
+        },
+        "error": 0
     }
     Status: 200
+
 
 For a more complete example, see ``/var/ossec/api/examples/api-client.py``.
 
@@ -103,7 +134,8 @@ PowerShell
 The **Invoke-RestMethod** cmdlet was introduced in PowerShell 3.0.  It sends requests to the API and handles the response.
 
 Code:
-::
+
+.. code-block:: powershell
 
     function Ignore-SelfSignedCerts {
         add-type @"
