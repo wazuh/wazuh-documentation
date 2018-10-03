@@ -183,7 +183,7 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
       # cp <ssl_pem> /etc/ssl/certs/kibana-access.pem
       # cp <ssl_key> /etc/ssl/private/kibana-access.key
 
-  b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows. Remember to set the ``Common Name`` field to your server name. For instance, if your server is ``example.com``, you would do the following:
+  b. If you do not have a valid **signed certificate**, create a **self-signed certificate** as follows:
 
     .. code-block:: console
 
