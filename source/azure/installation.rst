@@ -5,7 +5,7 @@
 Manager Requierements
 =====================
 
-Wazuhs manager will be in charge of carrying out the integration with Microsoft Azure when monitoring infrastructure activity and monitoring services. The correct use of the integration depends on the previous installation of certain requirements.  
+Wazuhs manager is in charge of carrying out the integration with Microsoft Azure when monitoring infrastructure activity and monitoring services. The correct use of the integration depends on the previous installation of certain requirements.  
 
 Dependencies
 ------------
