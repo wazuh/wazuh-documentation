@@ -7,7 +7,7 @@ Filtering data using queries
 
 .. versionadded:: 3.6.0
 
-Advance filtering is possible using the Wazuh API's queries. A query has the following structure:
+Advance filtering is possible using the Wazuh API's queries. Queries are translated directly into SQL sentences which will be used to filter the results returned by the API. Queries are specified using the ``q`` parameter. A query has the following structure:
 
 * **Field name**: Field name to filter by. If an incorrect field name is used, an error will be raised.
 * **Operator**: Operator to filter by. Available operators are ``=``, ``!=``, ``<`` and ``>``.
