@@ -25,3 +25,4 @@ These are the two main components in a common Splunk simple distributed architec
     splunk_installation
     splunk_wazuh
     splunk_forwarder
+    splunk_reverse_proxy
