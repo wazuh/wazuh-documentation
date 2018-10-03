@@ -125,87 +125,60 @@ An example of using the OR operator can be filtering Ubuntu or CentOS agents:
         }
     }
 
-Filtering syscheck events by date
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Filtering rootcheck events by date
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following example shows how to check Syscheck events generated in a specified timeframe:
+The following example shows how to check rootcheck events generated in a specified timeframe:
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar "localhost:55000/syscheck/000?pretty&q=scanDate<9h15m"
+    $ # curl -u foo:bar "localhost:55000/rootcheck/001?pretty&q=oldDay<3h25m&limit=2"
     {
         "error": 0,
         "data": {
-            "totalItems": 43,
+            "totalItems": 7,
             "items": [
                 {
-                    "sha1": "e1f8ab9e7928e7668ec6105ddb07674888053094",
-                    "group": "root",
-                    "user": "root",
-                    "file": "/etc/emacs/site-start.d/50python-docutils.el",
-                    "modificationDate": "2018-02-13 14:13:09",
-                    "octalMode": "100644",
-                    "size": 466,
-                    "inode": 303072,
-                    "event": "modified",
-                    "md5": "4990891acb4f250008e154560e9f235d",
-                    "scanDate": "2018-08-22 18:51:43"
+                    "status": "outstanding",
+                    "oldDay": "2018-10-03 12:47:26",
+                    "event": "Ending CIS-CAT scan. File: /var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml. ",
+                    "readDay": "2018-10-03 15:44:53"
                 },
                 {
-                    "sha1": "3a14e8015b58f225528c141257659502d7da61f3",
-                    "group": "root",
-                    "user": "root",
-                    "file": "/etc/alternatives/rst2html5",
-                    "modificationDate": "2018-08-22 16:38:16",
-                    "octalMode": "120777",
-                    "size": 45,
-                    "inode": 186570,
-                    "event": "modified",
-                    "md5": "79c10890a4abc6aac3a74f135bd1c56a",
-                    "scanDate": "2018-08-22 18:51:46"
-                },
-                [...]
+                    "status": "outstanding",
+                    "oldDay": "2018-10-03 12:46:06",
+                    "event": "Starting CIS-CAT scan. File: /var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml. ",
+                    "readDay": "2018-10-03 15:44:18"
+                }
             ]
         }
     }
+
 
 A more precise timeframe can be specified using operators ``>`` and ``<`` together:
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar "localhost:55000/syscheck/000?pretty&q=scanDate<12h;scanDate>11h&limit=2"
+    $ # curl -u foo:bar "localhost:55000/rootcheck/001?pretty&q=oldDay<3h30m;oldDay>3h&limit=2"
     {
         "error": 0,
         "data": {
-            "totalItems": 53,
+            "totalItems": 7,
             "items": [
                 {
-                    "sha1": "3dec5570307472381671ff18bbe4d4be09951690",
-                    "group": "root",
-                    "user": "root",
-                    "file": "/etc/sgml/xml-core.cat",
-                    "modificationDate": "2017-09-18 17:52:45",
-                    "octalMode": "100644",
-                    "size": 45,
-                    "inode": 302983,
-                    "event": "modified",
-                    "md5": "055ba0bd3154c0a58b9bf8a0c9ecf2fa",
-                    "scanDate": "2018-08-22 18:51:40"
+                    "status": "outstanding",
+                    "oldDay": "2018-10-03 12:47:26",
+                    "event": "Ending CIS-CAT scan. File: /var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml. ",
+                    "readDay": "2018-10-03 15:44:53"
                 },
                 {
-                    "sha1": "fd2defc6bd5841a14ae93af311d7876f0aeab697",
-                    "group": "root",
-                    "user": "root",
-                    "file": "/etc/sgml/docutils-common.cat",
-                    "modificationDate": "2018-02-13 14:13:09",
-                    "octalMode": "100644",
-                    "size": 40,
-                    "inode": 303074,
-                    "event": "modified",
-                    "md5": "07d0fedda91cf07511ba147169574df9",
-                    "scanDate": "2018-08-22 18:51:40"
+                    "status": "outstanding",
+                    "oldDay": "2018-10-03 12:46:06",
+                    "event": "Starting CIS-CAT scan. File: /var/ossec/wodles/ciscat/benchmarks/CIS_Ubuntu_Linux_16.04_LTS_Benchmark_v1.0.0-xccdf.xml. ",
+                    "readDay": "2018-10-03 15:44:18"
                 }
             ]
         }
     }
+
 
