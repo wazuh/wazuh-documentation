@@ -222,7 +222,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # update-rc.d kibana defaults 95 10
     # service kibana start
 
-5. Disable the Elasticsearch repository:
+5. Disable the Elasticsearch updates:
 
   It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App.  To do this, use the following command:
 
@@ -230,6 +230,14 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
     # apt-get update
+    
+  Alternately, you can set the package state to 'hold', which will stop updates (you can still upgrade it manually with the apt-get install)
+  
+  .. code-block:: console
+
+    # echo "elasticsearch hold" | sudo dpkg --set-selections
+    # echo "kibana hold" | sudo dpkg --set-selections
+    # echo "logstash hold" | sudo dpkg --set-selections
 
 Next steps
 ----------
