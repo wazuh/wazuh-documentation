@@ -25,6 +25,7 @@ Options
 - `group`_
 - `event_location`_
 - `alert_format`_
+- `max_log`_
 
 name
 ^^^^
@@ -122,6 +123,18 @@ This writes the alert file in the JSON format. The Integrator makes use this fil
 +--------------------+-----------------------------------------------------------+
 | **Allowed values** | json                                                      |
 +--------------------+-----------------------------------------------------------+
+
+max_log
+^^^^^^^
+
+The maximum length of an alert snippet that will be sent to the Integrator.  Longer strings will be truncated with ``...``
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | 165                                                       |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | Any integer from 165 to 1024 inclusive.                   |
++--------------------+-----------------------------------------------------------+
+
 
 Configuration example
 ---------------------

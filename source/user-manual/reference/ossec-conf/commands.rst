@@ -89,7 +89,7 @@ timeout_allowed
 Specifies whether the command is *stateful* or *stateless*. If yes, the command is stateful, meaning it will undo its original action after the period of time specified in the active response.
 
 +--------------------+--------+
-| **Default value**  | yes    |
+| **Default value**  | no     |
 +--------------------+--------+
 | **Allowed values** | yes, no|
 +--------------------+--------+
