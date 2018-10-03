@@ -132,7 +132,7 @@ The following example shows how to check rootcheck events generated in a specifi
 
 .. code-block:: javascript
 
-    $ # curl -u foo:bar "localhost:55000/rootcheck/001?pretty&q=oldDay<3h25m&limit=2"
+    $ curl -u foo:bar "localhost:55000/rootcheck/001?pretty&q=oldDay<3h25m&limit=2"
     {
         "error": 0,
         "data": {
@@ -159,7 +159,7 @@ A more precise timeframe can be specified using operators ``>`` and ``<`` togeth
 
 .. code-block:: javascript
 
-    $ # curl -u foo:bar "localhost:55000/rootcheck/001?pretty&q=oldDay<3h30m;oldDay>3h&limit=2"
+    $ curl -u foo:bar "localhost:55000/rootcheck/001?pretty&q=oldDay<3h30m;oldDay>3h&limit=2"
     {
         "error": 0,
         "data": {
