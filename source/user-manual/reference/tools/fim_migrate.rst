@@ -7,18 +7,18 @@ fim_migrate
 
 .. versionadded:: 3.7.0
 
-The fim_migrate tool allows to migrate FIM databses older than Wazuh v3.7.0 to the new format included in Wazuh-DB.
+The *fim_migrate* tool allows to migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB.
 
 Usage
 -----
 
-This tool is not included in the Wazuh installation, but you can download this tool from the Wazuh repository on GitHub:
+This tool is not included in the Wazuh installation, but you can download it from the Wazuh repository on GitHub:
 
 .. code-block:: console
 
     # curl --silent -o fim_migrate https://raw.githubusercontent.com/wazuh/wazuh/3.7/tools/migration/fim_migrate.py
 
-Add execution permission and execute this tool as follows:
+Add execution permission and run this tool as follows:
 
 .. code-block:: console
 
