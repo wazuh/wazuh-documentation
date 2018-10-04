@@ -183,7 +183,7 @@ Each time an agent checks-in with the manager (10 minute default), it looks to s
 
 4. Confirm that the agent received the configuration.
 
-Two methods are available to check this: using the ``GET/agents/:agent_id/group/is_sync`` API call or using the ``agent_groups`` binary:
+The ``agent_groups`` tool or the API can show whether the group is synchronized in the agent:
 
 .. code-block:: console
 
