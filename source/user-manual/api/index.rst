@@ -27,6 +27,7 @@ Wazuh API capabilities:
        :maxdepth: 2
 
        getting-started
+       queries
        configuration
        reference
        examples

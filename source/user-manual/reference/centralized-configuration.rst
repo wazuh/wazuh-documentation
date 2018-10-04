@@ -29,12 +29,14 @@ Agent groups
 
 .. versionadded:: 3.0.0
 
-Agents can be grouped together in order to send them unique centralized configuration that is group specific. Each agent can only belong to one group and unless otherwise configured, all agents belong to a group called ``default``.
+Agents can be grouped together in order to send them unique centralized configuration that is group specific. Each agent can belong to more than one group and unless otherwise configured, all agents belong to a group called ``default``.
 
 .. note::
     Check the :doc:`agent_groups manual <./tools/agent_groups>` to learn how to add groups and assign agents to them.
 
 The manager pushes all files included in the group folder to the agents belonging this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to ``default`` group.
+
+In case an agent is assigned to multiple groups, all the files contained in each group folder will be merged into one, and subsequently sent to the agents, being the last one the group with the highest priority.
 
 The file ``ar.conf`` (active response status) will always be sent to agents even if it is not present in the group folder.
 
@@ -104,7 +106,7 @@ The ``agent.conf`` is only valid on server installations.
 
 The ``agent.conf`` may exist in each group folder at ``/var/ossec/etc/shared``.
 
-For example, for the ``default`` group, it is in ``/var/ossec/etc/shared/default``.  Each of these files should be readable by the ossec user.
+For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``.  Each of these files should be readable by the ossec user.
 
 Options
 -------
