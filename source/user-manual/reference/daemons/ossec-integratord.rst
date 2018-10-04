@@ -1,9 +1,9 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _wazuh-db:
+.. _ossec-integratord:
 
-wazuh-db
-========
+ossec-integratord
+=================
 
 The ``ossec-integratord`` is a daemon that allows Wazuh to connect to external APIs and alerting tools such as Slack, VirusTotal and PagerDuty.
 
