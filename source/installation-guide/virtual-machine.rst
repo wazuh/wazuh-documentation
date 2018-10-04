@@ -44,3 +44,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 .. note::
 
         You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0-disk001.vmdk>`_ disk.
+        
+.. note::
+
+        If you need to update your OVA virtual machine, you can consult the article _`Upgrade to latest version of Wazuh 3.x <>`_ also we recommend to update repository with ``yum update`` command.
