@@ -113,7 +113,7 @@ Register the application
     :align: center
     :width: 100%
 
-4.2 - Now we will select the ``Access control (IAM)`` input and choose the ``add`` option. In the ``add permissions`` window we will set the desired ``role`` and ``select`` our application, ending with the ``save`` option. 
+4.2 - Now select the ``Access control (IAM)`` input and choose the ``add`` option. In the ``add permissions`` window we will set the desired ``role`` and ``select`` our application, ending with the ``save`` option. 
 
 .. thumbnail:: ../images/azure/la_workspace_2.png
     :title: Log Analytics App
@@ -129,7 +129,7 @@ Next we will see the options we have to configure our integration.
 5. azure-logs configuration 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-5.1 - We proceed to configure the `azure-logs` wodle in the Wazuh manager. We will use the data that we have taken previously as the **key and the id of the application**. In this case, we have introduced both fields in a **file** for authentication. You will also need the **workspace ID**.  Through the following configuration, Wazuh is ready to search for any `query <https://docs.loganalytics.io/docs/Language-Reference>`_ accepted by Azure Log Analytics. In this case we are going to monitor all the activity by means of the query **AzureActivity**. Finally we add a representative ``tag`` and we will indicate that request will be made every Monday at 02:00 and the first search will be made two days ago and that does not run on start:
+5.1 - Proceed to configure the `azure-logs` wodle in the Wazuh manager. We will use the data that we have taken previously as the **key and the id of the application**. In this case, we have introduced both fields in a **file** for authentication. You will also need the **workspace ID**.  Through the following configuration, Wazuh is ready to search for any `query <https://docs.loganalytics.io/docs/Language-Reference>`_ accepted by Azure Log Analytics. In this case we are going to monitor all the activity by means of the query **AzureActivity**. Finally we add a representative ``tag`` and we will indicate that request will be made every Monday at 02:00 and the first search will be made two days ago and that does not run on start:
 
 .. note::
 
@@ -275,7 +275,7 @@ We will search the ``Activity logs`` entry from the ``All services`` entry. Just
 1.2 Configuring the Activity log export
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Once we access the log of activities, we select the option to export. 
+Once we access the log of activities, select the option to export. 
 
 .. thumbnail:: ../images/azure/storage_activity2.png
     :title: Storage
@@ -383,14 +383,14 @@ We select the container where we store the blobs.
     :align: center
     :width: 100%
 
-We navigate through the directories until we find the blob we want to check, in this case will be ``PTIH.json``. 
+Navigate through the directories until we find the blob we want to check, in this case will be ``PTIH.json``. 
 
 .. thumbnail:: ../images/azure/storage_blob.png
     :title: Log Analytics App
     :align: center
     :width: 100%
 
-We download the blob to check its content. 
+Download the blob to check its content. 
 
 .. thumbnail:: ../images/azure/storage_download.png
     :title: Log Analytics App

@@ -50,12 +50,12 @@ azure-storage-blob
 Installing Dependencies
 -----------------------
 
-Python pytz and azure-storage-blob modules are required on the system running the Wazuh module to pull Microsoft Azure events. 
+*Python pytz* and *azure-storage-blob* modules are required on the system running the Wazuh module to pull Microsoft Azure events. 
 
 Pip
 ^^^
 
-Pip can be used as Python package manager to install the required module. In order to use it, we will start installing this tool.
+Pip can be used as Python package manager to install the required modules. In order to use it, we will start installing this tool.
 
 
 a) CentOS/RHEL/Fedora:
