@@ -20,7 +20,7 @@ Dependencies
 Microsoft Azure
 ^^^^^^^^^^^^^^^
 
-The `Microsoft Azure <https://azure.microsoft.com/en-us/>`_ infrastructure is mandatory. To have access to the infrastructure it will be necessary to have the authentication corresponding to the modules we want to use to obtain the logs. 
+The `Microsoft Azure <https://azure.microsoft.com/en-us/>`_ infrastructure is mandatory. To have access to the infrastructure it will be necessary to have the credentials corresponding to the modules we want to use to obtain the logs. 
 
 Wazuh 3.7
 ^^^^^^^^^

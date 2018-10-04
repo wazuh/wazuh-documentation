@@ -124,6 +124,8 @@ Next we will see the options we have to configure our integration.
 
     </wodle>
 
+You can see the wodle reference :ref:`here <wodle_azure_logs>`.
+
 The field ``tenantdomain`` is necessary and we can obtain it easily. In the azure portal, we can see it leaving the cursor in the upper right corner. 
 
 .. thumbnail:: ../images/azure/tenant.png
@@ -141,7 +143,7 @@ Using the configuration prepared above, we will show an example of use.
 Wazuh Rules
 ^^^^^^^^^^^
 
-As the records are in ``.json`` format, with this rules we can start generating alerts:
+As the records are in ``.json`` format, with this rule, already included in the integration, we can start generating alerts:
 
 .. code-block:: xml
 
