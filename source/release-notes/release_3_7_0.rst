@@ -11,8 +11,8 @@ This section shows the most relevant improvements and fixes in version 3.2.3. Mo
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.7.0/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.7.0/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.7.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.7.0-6.4.1/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.7.0-7.1.3/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.7.0-6.4.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.7.0-7.2.0/CHANGELOG.md>`_
 
 Assigning multiple groups to an agent
 -------------------------------------
