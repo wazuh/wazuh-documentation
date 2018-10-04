@@ -1,6 +1,6 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _docker_integration:
+.. _docker-wodle_integration:
 
 Using Wazuh to Monitor Docker containers
 ========================================
@@ -18,4 +18,5 @@ Using the Docker API, Wazuh can monitoring all Docker events and register them i
 
        installation
        monitoring_containers
+       use_cases
        troubleshooting

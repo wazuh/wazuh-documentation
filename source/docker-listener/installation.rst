@@ -1,6 +1,6 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _docker_listener_installation:
+.. _docker-wodle_listener_installation:
 
 Manager Requierements
 =====================
@@ -39,7 +39,7 @@ The correct functioning of the integration implemented in Python requires the pr
 docker
 ^^^^^^
 
-One of the libraries to install is `docker <https://pypi.org/project/docker/>`_. docker allows listen Docker events.
+One of the libraries to install is `docker library <https://pypi.org/project/docker/>`_. docker allows listen Docker events.
 
 Installing Dependencies
 -----------------------

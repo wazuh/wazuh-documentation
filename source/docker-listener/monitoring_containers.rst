@@ -1,6 +1,6 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _docker_monitoring_containers:
+.. _docker-wodle_monitoring_containers:
 
 Monitoring Containers
 =====================
@@ -16,7 +16,7 @@ Below there is an example of the wodle configuration:
 
 .. code-block:: xml
 
-    <wodle name="docker">
+    <wodle name="docker-listener">
         <interval>2h</interval>
         <attemps>5</attemps>
         <run_on_start>no</run_on_start>

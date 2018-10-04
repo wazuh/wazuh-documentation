@@ -2,7 +2,7 @@
 
 .. _wodle_docker:
 
-wodle name="docker"
+wodle name="docker-listener"
 ===================
 
 .. versionadded:: 3.7.0
@@ -39,7 +39,7 @@ Options
 interval
 ^^^^^^^^
 
-Time to wait to try the execution of this wodle again.
+Waiting time to try the execution of this wodle again.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                       |
@@ -86,7 +86,7 @@ Example of configuration
 
 .. code-block:: xml
 
-    <wodle name="wodle-docker">
+    <wodle name="docker-listener">
         <interval>2h</interval>
         <attemps>5</attemps>
         <run_on_start>no</run_on_start>
