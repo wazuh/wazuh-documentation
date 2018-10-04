@@ -3,7 +3,7 @@
 .. _wodle_docker:
 
 wodle name="docker-listener"
-===================
+============================
 
 .. versionadded:: 3.7.0
 
@@ -11,7 +11,7 @@ wodle name="docker-listener"
 
 	.. code-block:: xml
 
-		<wodle name="docker">
+		<wodle name="docker-listener">
 		</wodle>
 
 Configuration options of the Docker wodle.
@@ -39,7 +39,7 @@ Options
 interval
 ^^^^^^^^
 
-Waiting time to try the execution of this wodle again.
+Waiting time to rerun the wodle in case it fails.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1h                                                                                                                                       |
@@ -50,7 +50,7 @@ Waiting time to try the execution of this wodle again.
 attempts
 ^^^^^^^^
 
-Number of attempts to restart the wodle.
+Number of attempts to execute the wodle.
 
 +--------------------+-----------------------------+
 | **Default value**  | 5                           |
