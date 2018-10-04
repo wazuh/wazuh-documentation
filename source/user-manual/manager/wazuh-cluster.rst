@@ -65,6 +65,9 @@ Worker nodes are responsible of two main tasks:
     - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
     - Sending :ref:`agent status updates <agent-info-thread>` to the master.
 
+.. note::
+    The API can be used from any node. For performance reasons, it is recommended to use it mainly in the master node.
+
 Getting started
 ---------------
 
@@ -161,8 +164,7 @@ Agent registration in the cluster
 Configuring the Wazuh Kibana App
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Although all nodes can have an API installed, the Wazuh Kibana app must be configured with the master node API because the master node is the one that has all the information about the agents and the cluster.
-
+The Wazuh Kibana App can point to the API of any node in the cluster. It is recommended to point it to the master's API for performance reasons.
 
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
