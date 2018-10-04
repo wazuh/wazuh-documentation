@@ -88,9 +88,9 @@ And we can see the preconfigured playbooks we have.
 
 Using **Wazuh Manager** role we will install and configure Wazuh Manager and Wazuh API, there are several variables we can use to customize the installation or configuration. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`. 
 
-If we want to change the default configuration we can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref: `Wazuh Manager <ansible-wazuh-manager>` role, where we can also see how to change the default configuration of agentless and Wazuh API. 
+If we want to change the default configuration we can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-manager/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref:`Wazuh Manager <ansible-wazuh-manager>` role, where we can also see how to change the default configuration of agentless and Wazuh API. 
 
-We also can create another YAML file only with the content we want to change the configuration for **Filebeat** or directly in the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat/defaults/main.yml`` file. We can find more information at :ref: `Wazuh Manager <ansible-wazuh-filebeat>` role.
+We also can create another YAML file only with the content we want to change the configuration for **Filebeat** or directly in the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-filebeat/defaults/main.yml`` file. We can find more information at :ref:`Filebeat <ansible-wazuh-filebeat>` role.
 
 Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-manager.yml`` that we are going to run for a complete installation of the server. 
 
