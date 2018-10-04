@@ -86,7 +86,7 @@ Example of configuration
 
 .. code-block:: xml
 
-    <wodle name="command">
+    <wodle name="wodle-docker">
       <interval>2h</interval>
       <attemps>5</attemps>
       <run_on_start>no</run_on_start>
