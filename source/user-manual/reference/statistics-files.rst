@@ -5,10 +5,14 @@
 Statistics files
 ================
 
-Currently, Wazuh provides two statistical files. One for :doc:`ossec-agentd <daemons/ossec-agentd>` and another for :doc:`ossec-remoted <daemons/ossec-remoted>`.
+Currently, Wazuh provides three statistical files.
+
+- `ossec-agentd state file`_
+- `ossec-remoted state file`_
+- `ossec-analysisd state file`_
 
 ossec-agentd state file
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The name of the statistical file for **ossec-agentd** is ``ossec-agentd.state`` and it's located under the Wazuh installation directory in ``var/run/ossec-agentd.state``.
 
@@ -42,7 +46,7 @@ Below you can see an example file:
     msg_sent='5801'
 
 ossec-remoted state file
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 The name of the statistical file for **ossec-remoted** is ``ossec-remoted.state`` and it's located under the Wazuh installation directory in ``var/run/ossec-remoted.state``.
 
@@ -82,7 +86,7 @@ Below you can see an example file:
 .. _analysisd_statistics_file:
 
 ossec-analysisd state file
---------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The name of the statistical file for **ossec-analysisd** is ``ossec-analysisd.state`` and it's located under the Wazuh installation directory in ``var/run/ossec-analysisd.state``.
 
