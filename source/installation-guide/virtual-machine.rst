@@ -47,4 +47,4 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
         
 .. note::
 
-        If you need to update your OVA virtual machine, you can consult the article _`Upgrade to latest version of Wazuh 3.x <>`_ also we recommend to update repository with ``yum update`` command.
+        If you need to update your OVA virtual machine, you can consult the article `Upgrade to latest version of Wazuh 3.x <https://documentation.wazuh.com/current/installation-guide/upgrading/latest_wazuh3_minor.html>`_ also we recommend to update repository with ``yum update`` command.
