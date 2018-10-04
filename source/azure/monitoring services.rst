@@ -155,7 +155,7 @@ As the records are in ``.json`` format, with this rules we can start generating 
 Create a new user
 ^^^^^^^^^^^^^^^^^
 
-We proceed to create a new user. If the creation is successful, a log will be written to reflect it. 
+Proceed to create a new user. If the creation is successful, a log will be written to reflect it. 
 
 .. thumbnail:: ../images/azure/new_user1.png
     :title: AAD
@@ -170,7 +170,7 @@ We proceed to create a new user. If the creation is successful, a log will be wr
 Azure portal visualization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-From the ``Azure Active Directory`` entry we select the ``Audit logs`` entry and we can see the creation of our user.
+From the ``Azure Active Directory`` entry select the ``Audit logs`` entry and we can see the creation of our user.
 
 .. thumbnail:: ../images/azure/portal_services.png
     :title: AAD
