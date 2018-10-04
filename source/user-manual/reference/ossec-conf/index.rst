@@ -84,7 +84,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="osquery" <wodle-osquery>`                         | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="docker" <wodle-docker>`                           | manager                |
+| :doc:`wodle name="docker" <wodle-docker>`                           | agent                  |
 +---------------------------------------------------------------------+------------------------+
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag.

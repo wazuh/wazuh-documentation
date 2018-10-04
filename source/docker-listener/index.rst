@@ -7,7 +7,7 @@ Using Wazuh to Monitor Docker containers
 
 .. versionadded:: 3.7.0
 
-This section provides instructions for monitoring **Docker** containers on agents. We will see how to monitor all events that occurs in the containers such as start, stop, pause or pause them.
+This section provides instructions for monitoring **Docker** containers on agents with Wazuh. We will see how to monitor all events that happens in the containers such as start, stop, pause or pause them.
 
 Using the Docker API, Wazuh can monitoring all Docker events and register them in the alerts.
 

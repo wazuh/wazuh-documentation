@@ -2,54 +2,45 @@
 
 .. _docker-wodle_monitoring_containers:
 
-Monitoring Containers
-=====================
+Monitoring event on containers
+==============================
 
-The `docker library <https://pypi.org/project/docker/>`_ for Python lets doing the same that ``docker`` command does.
+You only need to have the Docker service and Wazuh agent running for monitoring the containers activity.
 
-You only need to have the Docker service and Wazuh running for monitoring the containers activity.
+When an event like start, stop, pause or unpause a container happens, the agent reports the alert to Wazuh manager.
 
-Wazuh configuration
-^^^^^^^^^^^^^^^^^^^
+Below you can see the alert that is generated when a container named `apache` is started with the command ``docker start apache``:
 
-Below there is an example of the wodle configuration:
+.. code-block:: console
 
-.. code-block:: xml
+    ** Alert 1538650953.46690: - docker,
+    {"integration": "docker", "docker": {"status": "start", "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "from": "httpd", "Type": "container", "Action": "start", "Actor": {"ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "Attributes": {"image": "httpd", "name": "apache"}}, "time": 1538650953, "timeNano": 1538650953348902859}}
+    integration: docker
+    docker.status: start
+    docker.id: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
+    docker.from: httpd
+    docker.Type: container
+    docker.Action: start
+    docker.Actor.ID: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
+    docker.Actor.Attributes.image: httpd
+    docker.Actor.Attributes.name: apache
+    docker.time: 1538650953
+    docker.timeNano: 1538650953348902912.000000
 
-    <wodle name="docker-listener">
-        <interval>2h</interval>
-        <attemps>5</attemps>
-        <run_on_start>no</run_on_start>
-        <disabled>no</disabled>
-    </wodle>
+The command ``docker stop apache`` genererates this:
 
-Wazuh Rules
-^^^^^^^^^^^
+.. code-block:: console
 
-The logs are stored in json files, therefore, with these simple rules we will be able to obtain the related alerts. 
-
-.. code-block:: xml
-
-    <rule id="87900" level="0">
-        <decoded_as>json</decoded_as>
-        <field name="integration">docker</field>
-        <description>Docker alerts: $(docker.Type).</description>
-    </rule>
-
-     <rule id="87901" level="3">
-        <if_sid>87900</if_sid>
-        <field name="docker.status">create</field>
-        <description>Container $(docker.Actor.Attributes.name) created</description>
-    </rule>
-
-    <rule id="87902" level="3">
-        <if_sid>87900</if_sid>
-        <field name="docker.status">destroy</field>
-        <description>Container $(docker.Actor.Attributes.name) destroyed</description>
-    </rule>
-
-    <rule id="87903" level="3">
-        <if_sid>87900</if_sid>
-        <field name="docker.status">start</field>
-        <description>Container $(docker.Actor.Attributes.name) started</description>
-    </rule>
+    ** Alert 1538651422.49807: - docker,
+    {"integration": "docker", "docker": {"status": "stop", "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "from": "httpd", "Type": "container", "Action": "stop", "Actor": {"ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "Attributes": {"image": "httpd", "name": "apache"}}, "time": 1538651422, "timeNano": 1538651422498123107}}
+    integration: docker
+    docker.status: stop
+    docker.id: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
+    docker.from: httpd
+    docker.Type: container
+    docker.Action: stop
+    docker.Actor.ID: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
+    docker.Actor.Attributes.image: httpd
+    docker.Actor.Attributes.name: apache
+    docker.time: 1538651422
+    docker.timeNano: 1538651422498123008.000000
