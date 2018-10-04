@@ -23,7 +23,7 @@ composed by the configuration files of all of them.
 
 This new feature allows to consult all the agent's group information at *agent_groups* CLI and at the APP with the RESTful API.
 
-You can learn more about this feature at the multigroups section.
+You can learn more about this feature at the :doc:`multiple groups <../user-manual/agents/grouping-agents>` section.
 
 Query remote configuration
 --------------------------
