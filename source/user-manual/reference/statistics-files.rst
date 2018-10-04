@@ -79,6 +79,7 @@ Below you can see an example file:
     # Messages sent
     msg_sent='1267'
 
+.. _analysisd_statistics_file:
 
 ossec-analysisd state file
 --------------------------

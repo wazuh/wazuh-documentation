@@ -144,4 +144,5 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 
 For example if our mananger receives few Rootcheck events, we can lower the number of Rootcheck decoder threads. 
-Take a look at the next sections below to learn how tune **Analysisd**.
+
+Take a look at :ref:`this section<analysisd_statistics_file>` to learn how tune **Analysisd**.
