@@ -6,7 +6,7 @@
 ===================
 
 
-This section shows the most relevant improvements and fixes in version 3.2.3. More details about these changes are provided in each component changelog.
+This section shows the most relevant improvements and fixes in version 3.7.0. More details about these changes are provided in each component changelog.
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.7.0/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.7.0/CHANGELOG.md>`_
