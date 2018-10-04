@@ -2,12 +2,12 @@
 
 .. _docker_containers_activity:
 
-Monitoring Docker containers
-============================
+Monitoring containers activity
+==============================
 
 It is possible to monitoring the events on Docker containers enabling the wodle ``docker-listener``.
 
-This wodle catch events as starting, stopping or pausing a Docker container.
+This wodle catch events as starting, stopping or pausing Docker containers.
 
 Wodle requirements
 ------------------
@@ -81,6 +81,8 @@ Use cases
 ---------
 
 This wodle only needs that Docker service is running on the Docker server for monitoring container events. When you interact with containers, alerts will be generated and reported to Wazuh manager.
+
+Below, you can see some examples of alerts caused by containers activity.
 
 Start a Docker container
 ^^^^^^^^^^^^^^^^^^^^^^^^
