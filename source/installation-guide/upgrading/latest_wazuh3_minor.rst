@@ -7,6 +7,40 @@ Upgrade to the latest version of Wazuh 3.x
 
 The following steps show how to upgrade to the latest available version of Wazuh 3.x (which implies upgrading to the latest version of Elastic Stack 6.x).
 
+Upgrade the Wazuh manager
+-------------------------
+
+1. Upgrade the ``wazuh-manager`` package:
+
+  a) For CentOS/RHEL/Fedora:
+
+  .. code-block:: console
+
+    # yum upgrade wazuh-manager
+
+  b) For Debian/Ubuntu:
+
+  .. code-block:: console
+
+    # apt-get update && apt-get install --only-upgrade wazuh-manager
+
+2. Upgrade the ``wazuh-api`` package:
+
+  a) For CentOS/RHEL/Fedora:
+
+  .. code-block:: console
+
+    # yum upgrade wazuh-api
+
+  b) For Debian/Ubuntu:
+
+  .. code-block:: console
+
+    # apt-get update && apt-get install --only-upgrade wazuh-api
+
+.. note::
+  The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.
+
 Upgrade the Wazuh agent
 -----------------------
 
@@ -45,40 +79,6 @@ Upgrade the Wazuh agent
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
-
-Upgrade the Wazuh manager
--------------------------
-
-1. Upgrade the ``wazuh-manager`` package:
-
-  a) For CentOS/RHEL/Fedora:
-
-  .. code-block:: console
-
-    # yum upgrade wazuh-manager
-
-  b) For Debian/Ubuntu:
-
-  .. code-block:: console
-
-    # apt-get update && apt-get install --only-upgrade wazuh-manager
-
-2. Upgrade the ``wazuh-api`` package:
-
-  a) For CentOS/RHEL/Fedora:
-
-  .. code-block:: console
-
-    # yum upgrade wazuh-api
-
-  b) For Debian/Ubuntu:
-
-  .. code-block:: console
-
-    # apt-get update && apt-get install --only-upgrade wazuh-api
-
-.. note::
-  The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.
 
 Upgrade to the latest Elastic Stack version
 -------------------------------------------

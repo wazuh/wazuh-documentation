@@ -8,6 +8,70 @@ Upgrade from different major version
 The following steps show how to upgrade from Wazuh 2.x to Wazuh 3.x (which implies upgrading from Elastic Stack 5.x to 6.x).
 
 
+Upgrade Wazuh manager
+---------------------
+
+1. Stop the services:
+
+  .. code-block:: console
+
+    # systemctl stop wazuh-api
+    # systemctl stop wazuh-manager
+
+
+2. Add the new repository for Wazuh 3.x.
+
+  a) For CentOS/RHEL/Fedora:
+
+    .. code-block:: console
+
+      # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+      [wazuh_repo]
+      gpgcheck=1
+      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+      enabled=1
+      name=Wazuh repository
+      baseurl=https://packages.wazuh.com/3.x/yum/
+      protect=1
+      EOF
+
+  b) For Debian/Ubuntu:
+
+    .. code-block:: console
+
+      # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+
+
+3. Upgrade the manager.
+
+  a) Upgrade the Wazuh manager on CentOS/RHEL/Fedora:
+
+    .. code-block:: console
+
+      # yum install wazuh-manager
+
+  b) Upgrade the Wazuh manager on Debian/Ubuntu:
+
+    .. code-block:: console
+
+      # apt-get update
+      # apt-get install wazuh-manager
+
+
+4. Upgrade the API.
+
+  a) Upgrade the Wazuh API on CentOS/RHEL/Fedora:
+
+    .. code-block:: console
+
+      # yum install wazuh-api
+
+  b) Upgrade the Wazuh API on Debian/Ubuntu:
+
+    .. code-block:: console
+
+      # apt-get install wazuh-api
+
 Upgrade Wazuh agent
 -------------------
 
@@ -75,71 +139,6 @@ Upgrade Wazuh agent
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
-
-Upgrade Wazuh manager
----------------------
-
-1. Stop the services:
-
-  .. code-block:: console
-
-    # systemctl stop wazuh-api
-    # systemctl stop wazuh-manager
-
-
-2. Add the new repository for Wazuh 3.x.
-
-  a) For CentOS/RHEL/Fedora:
-
-    .. code-block:: console
-
-      # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-      [wazuh_repo]
-      gpgcheck=1
-      gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-      enabled=1
-      name=Wazuh repository
-      baseurl=https://packages.wazuh.com/3.x/yum/
-      protect=1
-      EOF
-
-  b) For Debian/Ubuntu:
-
-    .. code-block:: console
-
-      # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
-
-
-3. Upgrade the manager.
-
-  a) Upgrade the Wazuh manager on CentOS/RHEL/Fedora:
-
-    .. code-block:: console
-
-      # yum install wazuh-manager
-
-  b) Upgrade the Wazuh manager on Debian/Ubuntu:
-
-    .. code-block:: console
-
-      # apt-get update
-      # apt-get install wazuh-manager
-
-
-4. Upgrade the API.
-
-  a) Upgrade the Wazuh API on CentOS/RHEL/Fedora:
-
-    .. code-block:: console
-
-      # yum install wazuh-api
-
-  b) Upgrade the Wazuh API on Debian/Ubuntu:
-
-    .. code-block:: console
-
-      # apt-get install wazuh-api
-
 
 Prepare Elastic Stack
 ---------------------
