@@ -39,6 +39,7 @@ The configuration file reference is organized by sections:
     - `extensions.ciscat`_
     - `extensions.aws`_
     - `extensions.virustotal`_
+    - `extensions.osquery`_
 
 `Advanced index options`_
     - `wazuh.shards`_
@@ -252,6 +253,17 @@ extensions.virustotal
 ^^^^^^^^^^^^^^^^^^^^^
 
 Enable or disable the VirusTotal tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.osquery
+^^^^^^^^^^^^^^^^^^
+
+Enable or disable the Osquery tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | false      |
