@@ -42,7 +42,7 @@ interval
 Waiting time to rerun the wodle in case it fails.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1h                                                                                                                                       |
+| **Default value**  | 10m                                                                                                                                      |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days)  |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
@@ -75,7 +75,7 @@ disabled
 Disable the Docker wodle.
 
 +--------------------+-----------------------------+
-| **Default value**  | yes                         |
+| **Default value**  | no                          |
 +--------------------+-----------------------------+
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
@@ -87,8 +87,8 @@ Example of configuration
 .. code-block:: xml
 
     <wodle name="docker-listener">
-        <interval>2h</interval>
-        <attemps>5</attemps>
+        <interval>10m</interval>
+        <attempts>5</attempts>
         <run_on_start>no</run_on_start>
         <disabled>no</disabled>
     </wodle>

@@ -71,8 +71,8 @@ It is necessary to have the option ``disabled`` with the value ``no`` in the ``o
 .. code-block:: xml
 
     <wodle name="docker-listener">
-        <interval>2h</interval>
-        <attemps>5</attemps>
+        <interval>10m</interval>
+        <attempts>5</attempts>
         <run_on_start>no</run_on_start>
         <disabled>no</disabled>
     </wodle>
@@ -167,6 +167,3 @@ This is the alert for ``docker unpause apache`` command:
     docker.Actor.Attributes.name: apache
     docker.time: 1538653526
     docker.timeNano: 1538653526779912448.000000
-
-Troubleshooting
----------------
