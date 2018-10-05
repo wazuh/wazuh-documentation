@@ -56,12 +56,12 @@ Get cluster's healthcheck
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.6.1
+            Version: 3.7.0
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.6.1
+            Version: 3.7.0
             Type: worker
             Active agents: 1
             Status:
@@ -79,7 +79,7 @@ Get cluster's healthcheck
                     Permission to synchronize: True.
 
         node03 (192.168.56.105)
-            Version: 3.6.1
+            Version: 3.7.0
             Type: worker
             Active agents: 0
             Status:
@@ -105,12 +105,12 @@ Get cluster's healthcheck
         Connected nodes (3):
 
         node01 (192.168.56.101)
-            Version: 3.6.1
+            Version: 3.7.0
             Type: master
             Active agents: 1
 
         node02 (192.168.56.103)
-            Version: 3.6.1
+            Version: 3.7.0
             Type: worker
             Active agents: 1
             Status:
@@ -138,9 +138,9 @@ Get connected nodes
         ---------------------------------------
         Name    Address         Type    Version
         ---------------------------------------
-        node01  192.168.56.101  master  3.6.1
-        node02  192.168.56.103  worker  3.6.1
-        node03  192.168.56.105  worker  3.6.1
+        node01  192.168.56.101  master  3.7.0
+        node02  192.168.56.103  worker  3.7.0
+        node03  192.168.56.105  worker  3.7.0
         ---------------------------------------
 
 * Filter connected nodes by name
@@ -150,8 +150,8 @@ Get connected nodes
         ---------------------------------------
         Name    Address         Type    Version
         ---------------------------------------
-        node01  192.168.56.101  master  3.6.1
-        node03  192.168.56.105  worker  3.6.1
+        node01  192.168.56.101  master  3.7.0
+        node03  192.168.56.105  worker  3.7.0
         ---------------------------------------
 
 Get agents in cluster
