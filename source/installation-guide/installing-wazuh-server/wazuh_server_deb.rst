@@ -213,7 +213,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # echo "elasfilebeatticsearch hold" | sudo dpkg --set-selections
+    # echo "filebeat hold" | sudo dpkg --set-selections
 
 Next steps
 ----------
