@@ -28,25 +28,25 @@ Options
 - `time`_
 - `timeout`_
 - `log_analytics`_
-- `log_analytics\\application_id`_ 
-- `log_analytics\\application_key`_ 
-- `log_analytics\\auth_path`_ 
-- `log_analytics\\tenantdomain`_ 
-- `log_analytics\\request`_ 
-- `log_analytics\\request\\tag`_ 
-- `log_analytics\\request\\query`_   
-- `log_analytics\\request\\workspace`_ 
+- `log_analytics\\application_id`_
+- `log_analytics\\application_key`_
+- `log_analytics\\auth_path`_
+- `log_analytics\\tenantdomain`_
+- `log_analytics\\request`_
+- `log_analytics\\request\\tag`_
+- `log_analytics\\request\\query`_
+- `log_analytics\\request\\workspace`_
 - `log_analytics\\request\\timeout`_
 - `log_analytics\\request\\time_offset`_
-- `graph\\application_id`_   
+- `graph\\application_id`_
 - `graph\\application_key`_
-- `graph\\auth_path`_ 
-- `graph\\tenantdomain`_   
-- `graph\\request`_ 
-- `graph\\request\\tag`_ 
-- `graph\\request\\query`_ 
-- `graph\\request\\timeout`_ 
-- `graph\\request\\time_offset`_ 
+- `graph\\auth_path`_
+- `graph\\tenantdomain`_
+- `graph\\request`_
+- `graph\\request\\tag`_
+- `graph\\request\\query`_
+- `graph\\request\\timeout`_
+- `graph\\request\\time_offset`_
 - `storage\\account_name`_
 - `storage\\account_key`_
 - `storage\\auth_path`_
@@ -233,12 +233,9 @@ Timeout for each evaluation. In case the execution takes longer that the specifi
 log_analytics
 -------------
 
-Defines the use of the Azure Log Analytics REST API to get the desired logs. 
+Defines the use of the Azure Log Analytics REST API to get the desired logs.
 
-log_analytics options
-~~~~~~~~~~~~~~~~~~~~~
-
-This option configures the integration with Azure Log Analytics REST API. 
+This block configures the integration with Azure Log Analytics REST API.
 
 - `log_analytics\\application_id`_
 - `log_analytics\\application_key`_
@@ -263,7 +260,7 @@ This option configures the integration with Azure Log Analytics REST API.
 log_analytics\\application_id
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the application that we will use for the authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option. 
+Identifier of the application that we will use for the authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -271,10 +268,10 @@ Identifier of the application that we will use for the authentication and to be 
 | **Allowed values** | Any string         |
 +--------------------+--------------------+
 
-log_analytics\\application_key 
+log_analytics\\application_key
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Key to the application we will use for authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option. 
+Key to the application we will use for authentication and to be able to make use of the Azure Log Analytics API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -293,15 +290,15 @@ Path of the file that contains the application identifier and the application ke
 | **Allowed values** | File path          |
 +--------------------+--------------------+
 
-File example: 
+File example:
 
 .. code-block:: shell
 
-    application_id = 8b7...c14                
+    application_id = 8b7...c14
     application_key = w22...91x
 
 log_analytics\\tenantdomain
-^^^^^^^^^^^^^^^^^^^^^^^^^^^ 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A tenant is simply a dedicated instance of Azure Active Directory (Azure AD). The Azure Log Analytics API uses the Azure Active Directory authentication scheme.
 
@@ -314,7 +311,7 @@ A tenant is simply a dedicated instance of Azure Active Directory (Azure AD). Th
 log_analytics\\request
 ^^^^^^^^^^^^^^^^^^^^^^
 
-This option includes all the other options needed to make a query. We can have more than one ``request`` entry. 
+This option includes all the other options needed to make a query. We can have more than one ``request`` entry.
 
 request options
 ~~~~~~~~~~~~~~~
@@ -336,7 +333,7 @@ request options
 log_analytics\\request\\tag
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Defines a tag that we will add to the query. This entry is optional and can be used to facilitate searches for events that are tagged or to create custom rules. 
+Defines a tag that we will add to the query. This entry is optional and can be used to facilitate searches for events that are tagged or to create custom rules.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -347,7 +344,7 @@ Defines a tag that we will add to the query. This entry is optional and can be u
 log_analytics\\request\\query
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used. `Reference <https://docs.loganalytics.io/docs/Language-Reference>`_. 
+This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used. `Reference <https://docs.loganalytics.io/docs/Language-Reference>`_.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -358,7 +355,7 @@ This is the query we will make to the Azure Log Analytics API. This option is re
 log_analytics\\request\\workspace
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Defines the workspace where we will perform the queries. 
+Defines the workspace where we will perform the queries.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -380,7 +377,7 @@ Timeout for each request evaluation. This option overwrites the general `timeout
 log_analytics\\request\\time_offset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system. 
+This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                         |
@@ -421,7 +418,7 @@ Example of log_analytics configuration
 graph
 -----
 
-This option configures the integration with Azure Active Directory Graph REST API. 
+This block configures the integration with Azure Active Directory Graph REST API.
 
 - `graph\\application_id`_
 - `graph\\application_key`_
@@ -446,7 +443,7 @@ This option configures the integration with Azure Active Directory Graph REST AP
 graph\\application_id
 ^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the application that we will use for the authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option. 
+Identifier of the application that we will use for the authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -454,10 +451,10 @@ Identifier of the application that we will use for the authentication and to be 
 | **Allowed values** | Any string         |
 +--------------------+--------------------+
 
-graph\\application_key 
+graph\\application_key
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Key to the application we will use for authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option. 
+Key to the application we will use for authentication and to be able to make use of the AAD Graph API. It must be used next to the ``application_id`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -476,15 +473,15 @@ Path of the file that contains the application identifier and the application ke
 | **Allowed values** | File path          |
 +--------------------+--------------------+
 
-File example: 
+File example:
 
 .. code-block:: shell
 
-    application_id = 8b7...c14                
+    application_id = 8b7...c14
     application_key = w22...91x
 
 graph\\tenantdomain
-^^^^^^^^^^^^^^^^^^^ 
+^^^^^^^^^^^^^^^^^^^
 
 A tenant is simply a dedicated instance of Azure Active Directory (Azure AD) because it uses the Azure Active Directory authentication scheme.
 
@@ -497,7 +494,7 @@ A tenant is simply a dedicated instance of Azure Active Directory (Azure AD) bec
 graph\\request
 ^^^^^^^^^^^^^^
 
-This option includes all the other options needed to make a query. We can have more than one ``request`` entry. 
+This option includes all the other options needed to make a query. We can have more than one ``request`` entry.
 
 request options
 ~~~~~~~~~~~~~~~
@@ -517,7 +514,7 @@ request options
 graph\\request\\tag
 ^^^^^^^^^^^^^^^^^^^
 
-Defines a tag that we will add to the query. This entry is optional and can be used to facilitate searches for events that are tagged or to create custom rules. 
+Defines a tag that we will add to the query. This entry is optional and can be used to facilitate searches for events that are tagged or to create custom rules.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -528,7 +525,7 @@ Defines a tag that we will add to the query. This entry is optional and can be u
 graph\\request\\query
 ^^^^^^^^^^^^^^^^^^^^^
 
-This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used `here <https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-common-queries>`_. 
+This is the query we will make to the Azure Log Analytics API. This option is ready to use any query we can make in the Log Analytics portal. You can find a reference of the language used `here <https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-common-queries>`_.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -551,7 +548,7 @@ Timeout for each request evaluation. This option overwrites the general `timeout
 graph\\request\\time_offset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system. 
+This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                         |
@@ -590,7 +587,7 @@ Example of graph configuration
 storage
 -------
 
-This option configures the integration with Azure Storage. 
+This block configures the integration with Azure Storage.
 
 - `storage\\account_name`_
 - `storage\\account_key`_
@@ -615,7 +612,7 @@ This option configures the integration with Azure Storage.
 storage\\account_name
 ^^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the account name that we will use for the authentication- It must be used next to the ``account_key`` option obligatorily. Incompatible with ``auth_path`` option. 
+Identifier of the account name that we will use for the authentication- It must be used next to the ``account_key`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -626,7 +623,7 @@ Identifier of the account name that we will use for the authentication- It must 
 storage\\account_key
 ^^^^^^^^^^^^^^^^^^^^
 
-Identifier of the account key that we will use for the authentication- It must be used next to the ``account_name`` option obligatorily. Incompatible with ``auth_path`` option. 
+Identifier of the account key that we will use for the authentication- It must be used next to the ``account_name`` option obligatorily. Incompatible with ``auth_path`` option.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -648,7 +645,7 @@ Path of the file that contains the account name and the account key for authenti
 storage\\tag
 ^^^^^^^^^^^^
 
-Defines a tag that we will add to the query. This entry is optional and can be used to facilitate searches for events that are tagged or to create custom rules. 
+Defines a tag that we will add to the query. This entry is optional and can be used to facilitate searches for events that are tagged or to create custom rules.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -676,7 +673,7 @@ storage\\container
 storage\\container name
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the name of the container. Enter ``*`` to access all account containers. 
+Specifies the name of the container. Enter ``*`` to access all account containers.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -687,11 +684,11 @@ Specifies the name of the container. Enter ``*`` to access all account container
 storage\\container\\blobs
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Specifies the extension of the blobs, like ``.json``. Enter "*" to access all blobs of the container/s. 
+Specifies the extension of the blobs, like ``.json``. Enter "*" to access all blobs of the container/s.
 
 .. note::
 
-    This option is related to option ``content_type``, because if any blob has a different content to the one we have indicated, it will not be read correctly. Therefore, we need to be aware of what content we are trying to obtain and take it into consideration when using this option with ``"*"``. 
+    This option is related to option ``content_type``, because if any blob has a different content to the one we have indicated, it will not be read correctly. Therefore, we need to be aware of what content we are trying to obtain and take it into consideration when using this option with ``"*"``.
 
 +--------------------+--------------------+
 | **Default value**  | N/A                |
@@ -706,7 +703,7 @@ Specifies the content of the blobs.
 
 - **text**. Plain text. Each line is a log.
 - **json_file**. The blob contain records of logs in standard json format.
-- **json_inline**. Each line is a log in json format. 
+- **json_inline**. Each line is a log in json format.
 
 .. note::
 
@@ -733,7 +730,7 @@ Timeout for each request evaluation. This option overwrites the general `timeout
 storage\\container\\time_offset
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system. 
+This option sets the time delay in which we will perform the query. For example, if we establish this option with the value "1d", the integration will perform the query on the events that have been generated in the interval of time defined between the current date of the system minus one day (1d) and the current date of the system.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | 1d                                                                                                                         |
