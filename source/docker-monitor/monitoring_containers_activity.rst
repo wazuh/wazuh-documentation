@@ -10,7 +10,7 @@ Overview
 
 Docker has added new features which was not exist before. Docker containers have a special properties and it is very interesting to monitor events which happen in this containers.
 
-This module adds the capability of monitoring events on Docker containers. Events as starting, stopping or pausing a container are catched if this module is enabled.
+This wodle adds the capability of monitoring events on Docker containers. Events as starting, stopping or pausing a container are catched if this wodle is enabled.
 
 Wodle requirements
 ^^^^^^^^^^^^^^^^^^

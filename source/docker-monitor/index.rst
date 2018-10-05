@@ -9,7 +9,9 @@ Using Wazuh to Monitor Docker
 
 This section provides instructions for monitoring Docker servers and container events with Wazuh.
 
-All Wazuh capabilities (log data collection, file integrity monitoring, agentless monitoring...) are available for Docker servers. Furthermore, with the module ``docker-listener`` now it is possible to catch container events as starting, pausing or stopping among others.
+All Wazuh capabilities (log data collection, file integrity monitoring, agentless monitoring...) are available for Docker servers.
+
+Furthermore, with the wodle ``docker-listener`` now it is possible to catch container events as starting, pausing or stopping among others.
 
 .. topic:: Contents
 
