@@ -19,3 +19,4 @@ The Wazuh app for Kibana gives you a quick view of your cluster, agents and aler
         reporting
         index-pattern
         download-csv
+        query-configuration

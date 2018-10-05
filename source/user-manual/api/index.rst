@@ -19,6 +19,7 @@ Wazuh API capabilities:
 * Statistical information
 * HTTPS and user authentication
 * Error handling
+* Query remote configuration
 
 
 .. topic:: Contents
