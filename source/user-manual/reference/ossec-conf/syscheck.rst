@@ -156,9 +156,9 @@ ignore
 List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories.  These files and directories are still checked, but the results are ignored.
 
 +--------------------+-----------------------------+
-| **Default value**  | /etc/mtab                   |
-+--------------------+-----------------------------+
 | **Allowed values** | Any directory or file name. |
++--------------------+-----------------------------+
+| **Example**        | /etc/mtab                   |
 +--------------------+-----------------------------+
 
 Attributes:
@@ -175,9 +175,9 @@ nodiff
 List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
 
 +--------------------+----------------------+
-| **Default value**  | /etc/ssl/private.key |
-+--------------------+----------------------+
 | **Allowed values** | Any file name.       |
++--------------------+----------------------+
+| **Example**        | /etc/ssl/private.key |
 +--------------------+----------------------+
 
 Attributes:
