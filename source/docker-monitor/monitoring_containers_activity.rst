@@ -5,66 +5,18 @@
 Monitoring containers activity
 ==============================
 
-Overview
-^^^^^^^^
-
-Docker has added new features which was not exist before. Docker containers have a special properties and it is very interesting to monitor events which happen in this containers.
-
-This module adds the capability of monitoring events on Docker containers. Events as starting, stopping or pausing a container are catched if this module is enabled.
+This wodle adds the capability of monitoring events on Docker containers. Events as starting, stopping or pausing a container are catched if this wodle is enabled.
 
 Wodle requirements
 ^^^^^^^^^^^^^^^^^^
 
-Dependencies
-------------
-
-- Python >= 2.7
-- Pip
-- docker library for Python
-
 Part of the integration has been implemented in `Python <https://www.python.org/>`_, so we will need to have Python installed with a version 2.7 or higher. 
 
-The correct functioning of the integration implemented in Python requires the presence of certain libraries as `docker library <https://pypi.org/project/docker/>`_.
+The correct functioning of the integration implemented in Python requires the presence of certain libraries as `docker library <https://pypi.org/project/docker/>`_. This library can be installed with ``pip install docker`` command.
 
 .. note::
 
         It is necessary Wauzh 3.7 or higher for use this wodle
-
-
-Installing dependencies
------------------------
-
-Pip can be used as Python package manager to install the required module. In order to use it, we will start installing this tool.
-
-
-a) CentOS/RHEL/Fedora:
-
-.. note::
-
-        It may be necessary to enable the EPEL repository
-
-.. code-block:: console
-
-    # yum install python-pip
-
-b) Debian/Ubuntu:
-
-.. code-block:: console
-
-    # apt-get update && apt-get install python-pip
-
-c) From sources:
-
-.. code-block:: console
-
-    # curl -O https://bootstrap.pypa.io/get-pip.py
-    # python get-pip.py
-
-For installing ``docker`` library for Python: 
-
-.. code-block:: console
-
-    # pip install docker
 
 Configuring wodle
 ^^^^^^^^^^^^^^^^^
@@ -83,7 +35,7 @@ It is necessary to have the option ``disabled`` with the value ``no`` in the ``o
 Use cases
 ^^^^^^^^^
 
-This wodle only needs that Docker service is running on the Docker server for monitoring container events. When you interact with containers, alerts will be generated and reported to Wazuh manager.
+This wodle monitor container events. When you interact with containers, alerts will be generated and reported to Wazuh manager.
 
 Below, you can see some examples of alerts caused by containers activity.
 
@@ -94,19 +46,56 @@ The command ``docker start apache``, which start a container called `apache`, ge
 
 .. code-block:: console
 
-    ** Alert 1538650953.46690: - docker,
-    {"integration": "docker", "docker": {"status": "start", "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "from": "httpd", "Type": "container", "Action": "start", "Actor": {"ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "Attributes": {"image": "httpd", "name": "apache"}}, "time": 1538650953, "timeNano": 1538650953348902859}}
-    integration: docker
-    docker.status: start
-    docker.id: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
-    docker.from: httpd
-    docker.Type: container
-    docker.Action: start
-    docker.Actor.ID: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
-    docker.Actor.Attributes.image: httpd
-    docker.Actor.Attributes.name: apache
-    docker.time: 1538650953
-    docker.timeNano: 1538650953348902912.000000
+    {
+    "timestamp": "2018-10-05T17:15:33.892+0200",
+    "rule": {
+        "level": 3,
+        "description": "Container apache started",
+        "id": "87903",
+        "mail": false,
+        "groups": [
+        "docker"
+        ]
+    },
+    "agent": {
+        "id": "002",
+        "name": "agent001",
+        "ip": "192.168.122.19"
+    },
+    "manager": {
+        "name": "localhost.localdomain"
+    },
+    "id": "1538752533.76076",
+    "cluster": {
+        "name": "wazuh",
+        "node": "master"
+    },
+    "full_log": "{\"integration\": \"docker\", \"docker\": {\"status\": \"start\", \"id\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"from\": \"httpd\", \"Type\": \"container\", \"Action\": \"start\", \"Actor\": {\"ID\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"Attributes\": {\"image\": \"httpd\", \"name\": \"apache\"}}, \"time\": 1538752533, \"timeNano\": 1538752533877226210}}",
+    "decoder": {
+        "name": "json"
+    },
+    "data": {
+        "integration": "docker",
+        "docker": {
+        "status": "start",
+        "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+        "from": "httpd",
+        "Type": "container",
+        "Action": "start",
+        "Actor": {
+            "ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+            "Attributes": {
+            "image": "httpd",
+            "name": "apache"
+            }
+        },
+        "time": "1538752533",
+        "timeNano": "1538752533877226240.000000"
+        }
+    },
+    "location": "Wazuh-Docker"
+    }
+
 
 Stop a Docker container
 -----------------------
@@ -115,19 +104,56 @@ This alert is generated by using the command ``docker stop apache``:
 
 .. code-block:: console
 
-    ** Alert 1538651422.49807: - docker,
-    {"integration": "docker", "docker": {"status": "stop", "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "from": "httpd", "Type": "container", "Action": "stop", "Actor": {"ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "Attributes": {"image": "httpd", "name": "apache"}}, "time": 1538651422, "timeNano": 1538651422498123107}}
-    integration: docker
-    docker.status: stop
-    docker.id: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
-    docker.from: httpd
-    docker.Type: container
-    docker.Action: stop
-    docker.Actor.ID: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
-    docker.Actor.Attributes.image: httpd
-    docker.Actor.Attributes.name: apache
-    docker.time: 1538651422
-    docker.timeNano: 1538651422498123008.000000
+    {
+    "timestamp": "2018-10-05T17:16:53.412+0200",
+    "rule": {
+        "level": 3,
+        "description": "Container apache stopped",
+        "id": "87904",
+        "mail": false,
+        "groups": [
+        "docker"
+        ]
+    },
+    "agent": {
+        "id": "002",
+        "name": "agent001",
+        "ip": "192.168.122.19"
+    },
+    "manager": {
+        "name": "localhost.localdomain"
+    },
+    "id": "1538752613.100231",
+    "cluster": {
+        "name": "wazuh",
+        "node": "master"
+    },
+    "full_log": "{\"integration\": \"docker\", \"docker\": {\"status\": \"stop\", \"id\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"from\": \"httpd\", \"Type\": \"container\", \"Action\": \"stop\", \"Actor\": {\"ID\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"Attributes\": {\"image\": \"httpd\", \"name\": \"apache\"}}, \"time\": 1538752613, \"timeNano\": 1538752613407075872}}",
+    "decoder": {
+        "name": "json"
+    },
+    "data": {
+        "integration": "docker",
+        "docker": {
+        "status": "stop",
+        "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+        "from": "httpd",
+        "Type": "container",
+        "Action": "stop",
+        "Actor": {
+            "ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+            "Attributes": {
+            "image": "httpd",
+            "name": "apache"
+            }
+        },
+        "time": "1538752613",
+        "timeNano": "1538752613407075840.000000"
+        }
+    },
+    "location": "Wazuh-Docker"
+    }
+
 
 Pause a Docker container
 ------------------------
@@ -136,19 +162,56 @@ With the command ``docker pause apache``:
 
 .. code-block:: console
 
-    ** Alert 1538653524.61853: - docker,
-    {"integration": "docker", "docker": {"status": "pause", "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "from": "httpd", "Type": "container", "Action": "pause", "Actor": {"ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "Attributes": {"image": "httpd", "name": "apache"}}, "time": 1538653524, "timeNano": 1538653524139788467}}
-    integration: docker
-    docker.status: pause
-    docker.id: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
-    docker.from: httpd
-    docker.Type: container
-    docker.Action: pause
-    docker.Actor.ID: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
-    docker.Actor.Attributes.image: httpd
-    docker.Actor.Attributes.name: apache
-    docker.time: 1538653524
-    docker.timeNano: 1538653524139788544.000000
+    {
+    "timestamp": "2018-10-05T17:17:54.988+0200",
+    "rule": {
+        "level": 3,
+        "description": "Container apache paused",
+        "id": "87905",
+        "mail": false,
+        "groups": [
+        "docker"
+        ]
+    },
+    "agent": {
+        "id": "002",
+        "name": "agent001",
+        "ip": "192.168.122.19"
+    },
+    "manager": {
+        "name": "localhost.localdomain"
+    },
+    "id": "1538752674.104889",
+    "cluster": {
+        "name": "wazuh",
+        "node": "master"
+    },
+    "full_log": "{\"integration\": \"docker\", \"docker\": {\"status\": \"pause\", \"id\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"from\": \"httpd\", \"Type\": \"container\", \"Action\": \"pause\", \"Actor\": {\"ID\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"Attributes\": {\"image\": \"httpd\", \"name\": \"apache\"}}, \"time\": 1538752674, \"timeNano\": 1538752674984734790}}",
+    "decoder": {
+        "name": "json"
+    },
+    "data": {
+        "integration": "docker",
+        "docker": {
+        "status": "pause",
+        "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+        "from": "httpd",
+        "Type": "container",
+        "Action": "pause",
+        "Actor": {
+            "ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+            "Attributes": {
+            "image": "httpd",
+            "name": "apache"
+            }
+        },
+        "time": "1538752674",
+        "timeNano": "1538752674984734720.000000"
+        }
+    },
+    "location": "Wazuh-Docker"
+    }
+
 
 Unpause a Docker container
 --------------------------
@@ -157,16 +220,52 @@ This is the alert for ``docker unpause apache`` command:
 
 .. code-block:: console
 
-    ** Alert 1538653526.62785: - docker,
-    {"integration": "docker", "docker": {"status": "unpause", "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "from": "httpd", "Type": "container", "Action": "unpause", "Actor": {"ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620", "Attributes": {"image": "httpd", "name": "apache"}}, "time": 1538653526, "timeNano": 1538653526779912414}}
-    integration: docker
-    docker.status: unpause
-    docker.id: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
-    docker.from: httpd
-    docker.Type: container
-    docker.Action: unpause
-    docker.Actor.ID: 018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620
-    docker.Actor.Attributes.image: httpd
-    docker.Actor.Attributes.name: apache
-    docker.time: 1538653526
-    docker.timeNano: 1538653526779912448.000000
+    {
+    "timestamp": "2018-10-05T17:18:35.373+0200",
+    "rule": {
+        "level": 3,
+        "description": "Container apache unpaused",
+        "id": "87905",
+        "mail": false,
+        "groups": [
+        "docker"
+        ]
+    },
+    "agent": {
+        "id": "002",
+        "name": "agent001",
+        "ip": "192.168.122.19"
+    },
+    "manager": {
+        "name": "localhost.localdomain"
+    },
+    "id": "1538752715.105822",
+    "cluster": {
+        "name": "wazuh",
+        "node": "master"
+    },
+    "full_log": "{\"integration\": \"docker\", \"docker\": {\"status\": \"unpause\", \"id\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"from\": \"httpd\", \"Type\": \"container\", \"Action\": \"unpause\", \"Actor\": {\"ID\": \"018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620\", \"Attributes\": {\"image\": \"httpd\", \"name\": \"apache\"}}, \"time\": 1538752715, \"timeNano\": 1538752715369717277}}",
+    "decoder": {
+        "name": "json"
+    },
+    "data": {
+        "integration": "docker",
+        "docker": {
+        "status": "unpause",
+        "id": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+        "from": "httpd",
+        "Type": "container",
+        "Action": "unpause",
+        "Actor": {
+            "ID": "018205fa7e170e32578b8487e3b7040aad00b8accedb983bc2ad029238ca3620",
+            "Attributes": {
+            "image": "httpd",
+            "name": "apache"
+            }
+        },
+        "time": "1538752715",
+        "timeNano": "1538752715369717248.000000"
+        }
+    },
+    "location": "Wazuh-Docker"
+    }
