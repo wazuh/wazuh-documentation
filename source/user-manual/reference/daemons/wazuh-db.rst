@@ -7,7 +7,7 @@ wazuh-db
 
 The Wazuh core uses list-based databases to store information related to agent keys, and FIM/Rootcheck event data.
 
-.. note:: Each agent has a database which name is the ``id`` of the agent registered in the manager  
+.. note:: Each agent has a database which name is the ``id`` of the agent registered in the manager
 
 wazuh-db options
 ----------------
@@ -50,11 +50,11 @@ It stores the begin and end times of each scan of an agent
 +-----------------------+--------------------------------+-------------------------------------------+
 | **first_end**         | First scan end date            | 1538556788                                |
 +-----------------------+--------------------------------+-------------------------------------------+
-| **start_scan**        | Scan start date                | 1538558233                                |
+| **start_scan**        | Last scan start date           | 1538558233                                |
 +-----------------------+--------------------------------+-------------------------------------------+
-| **end_scan**          | Scan end date                  | 1538558192                                |
+| **end_scan**          | Last scan end date             | 1538558192                                |
 +-----------------------+--------------------------------+-------------------------------------------+
-| **fim_first_check**   | Start date of last scan        | 1538558233                                |
+| **fim_first_check**   | Start date of first scan       | 1538558233                                |
 +-----------------------+--------------------------------+-------------------------------------------+
 | **fim_second_check**  | Start date of two scans ago    | 1538556779                                |
 +-----------------------+--------------------------------+-------------------------------------------+
@@ -74,9 +74,9 @@ Data from FIM records reported by the agent
 +=============+=============================+==================================================================+
 | **file**    | File name                   | /root/file                                                       |
 +-------------+-----------------------------+------------------------------------------------------------------+
-| **type**    | Type of file                | file                                                             |
+| **type**    | Type (file or registry)     | file                                                             |
 +-------------+-----------------------------+------------------------------------------------------------------+
-| **date**    | Event date                  | 1538556788                                                       |
+| **date**    | Event timestamp             | 1538556788                                                       |
 +-------------+-----------------------------+------------------------------------------------------------------+
 | **changes** | CPU name                    | 0                                                                |
 +-------------+-----------------------------+------------------------------------------------------------------+
