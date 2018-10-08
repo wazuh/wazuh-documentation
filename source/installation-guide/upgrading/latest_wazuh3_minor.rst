@@ -77,6 +77,30 @@ Upgrade the Wazuh manager
 
     # apt-get update && apt-get install --only-upgrade wazuh-api
 
+3. Disable the Wazuh repository:
+
+  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades.  To do this, use the following command:
+
+  a) For CentOS/RHEL/Fedora:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
+  b) For Debian/Ubuntu:
+
+    .. code-block:: console
+
+      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+      # apt-get update
+
+    Alternately, you can set the package state to 'hold', which will stop updates (you can still upgrade it manually with the apt-get install)
+
+    .. code-block:: console
+
+      # echo "wazuh-manager hold" | sudo dpkg --set-selections
+      # echo "wazuh-api hold" | sudo dpkg --set-selections
+
 .. note::
   The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.
 
