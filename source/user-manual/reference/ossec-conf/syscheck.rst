@@ -332,6 +332,16 @@ List of registry entries to be ignored.  (one entry per line). Multiple lines ma
 | **Allowed values** | Any registry entry. |
 +--------------------+---------------------+
 
+Attributes:
+
++----------+--------------------------------------------------------------+
+| **arch** | Select the Registry to ignore depending on the architecture. |
++          +------------------+-------------------------------------------+
+|          | Default value    | 32bit                                     |
+|          +------------------+-------------------------------------------+
+|          | Allowed values   | 32bit, 64bit, both                        |
++----------+------------------+-------------------------------------------+
+
 prefilter_cmd
 ^^^^^^^^^^^^^^
 
