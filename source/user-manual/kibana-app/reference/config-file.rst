@@ -88,13 +88,13 @@ Defines if the user is allowed to change the selected index pattern directly fro
 ip.ignore
 ^^^^^^^^^
 
-Disable certain index pattern names from being available in index pattern selector from the Wazuh app.
+Disable certain index pattern names from being available in index pattern selector from the Wazuh app. An empty list (the default value) won't ignore any valid index pattern.
 
-+--------------------+--------------------------------------------+
-| **Default value**  | []                                         |
-+--------------------+--------------------------------------------+
-| **Allowed values** | Array of strings. Eg: ["wazuh-archives-" ] |
-+--------------------+--------------------------------------------+
++--------------------+---------------------------------------------+
+| **Default value**  | []                                          |
++--------------------+---------------------------------------------+
+| **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"] |
++--------------------+---------------------------------------------+
 
 xpack.rbac.enabled
 ^^^^^^^^^^^^^^^^^^
