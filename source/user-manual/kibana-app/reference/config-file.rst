@@ -19,6 +19,7 @@ The configuration file reference is organized by sections:
     - `pattern`_
     - `timeout`_
     - `ip.selector`_
+    - `ip.ignore`_
     - `xpack.rbac.enabled`_
 
 `Monitoring`_
@@ -84,6 +85,17 @@ Defines if the user is allowed to change the selected index pattern directly fro
 +--------------------+------------+
 | **Allowed values** | true,false |
 +--------------------+------------+
+
+ip.ignore
+^^^^^^^^^
+
+Disable certain index pattern names from being available in index pattern selector from the Wazuh app. An empty list (the default value) won't ignore any valid index pattern.
+
++--------------------+---------------------------------------------+
+| **Default value**  | []                                          |
++--------------------+---------------------------------------------+
+| **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"] |
++--------------------+---------------------------------------------+
 
 xpack.rbac.enabled
 ^^^^^^^^^^^^^^^^^^
