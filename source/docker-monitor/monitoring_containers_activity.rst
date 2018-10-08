@@ -5,23 +5,17 @@
 Monitoring containers activity
 ==============================
 
-This wodle adds the capability of monitoring events on Docker containers. Events as starting, stopping or pausing a container are catched if this wodle is enabled.
+We use a wodle for monitoring events on `Docker containers <https://www.docker.com/resources/what-container>`_ such as starting, stopping or pausing.
 
 Wodle requirements
 ^^^^^^^^^^^^^^^^^^
 
-Part of the integration has been implemented in `Python <https://www.python.org/>`_, so we will need to have Python installed with a version 2.7 or higher. 
-
 The correct functioning of the integration implemented in Python requires the presence of certain libraries as `docker library <https://pypi.org/project/docker/>`_. This library can be installed with ``pip install docker`` command.
-
-.. note::
-
-        It is necessary Wauzh 3.7 or higher for use this wodle
 
 Configuring wodle
 ^^^^^^^^^^^^^^^^^
 
-It is necessary to have the option ``disabled`` with the value ``no`` in the ``ossec.conf`` and restart the Wazuh agent for using this capability.
+It is necessary to have the option ``disabled`` with the value ``no`` in the ``ossec.conf`` and restart the Wazuh agent for using this capability. Below there is an example of configuration in ``ossec.conf``:
 
 .. code-block:: xml
 
@@ -225,7 +219,7 @@ This is the alert for ``docker unpause apache`` command:
     "rule": {
         "level": 3,
         "description": "Container apache unpaused",
-        "id": "87905",
+        "id": "87906",
         "mail": false,
         "groups": [
         "docker"
