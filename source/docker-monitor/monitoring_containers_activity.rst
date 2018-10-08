@@ -21,7 +21,7 @@ The correct functioning of the integration implemented in Python requires the pr
 Configuring wodle
 ^^^^^^^^^^^^^^^^^
 
-It is necessary to have the option ``disabled`` with the value ``no`` in the ``ossec.conf`` and restart the Wazuh agent for using this capability.
+It is necessary to have the option ``disabled`` with the value ``no`` in the ``ossec.conf`` and restart the Wazuh agent for using this capability. Below there is an example of configuration in ``ossec.conf``:
 
 .. code-block:: xml
 
@@ -225,7 +225,7 @@ This is the alert for ``docker unpause apache`` command:
     "rule": {
         "level": 3,
         "description": "Container apache unpaused",
-        "id": "87905",
+        "id": "87906",
         "mail": false,
         "groups": [
         "docker"
