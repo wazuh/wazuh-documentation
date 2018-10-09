@@ -5,7 +5,7 @@
 Monitoring Docker server
 ========================
 
-You can monitorize a server with Docker installing Wazuh agent following our guide: :ref:`installation_agents`. All our capabilities are available for Docker servers:
+All the features available in an agent can be useful to monitor Docker servers (the system that lets you create and run Docker containers):
 
     -   :ref:`automatic_remediation`
     -   :ref:`manual_agentless`
