@@ -79,6 +79,7 @@ Available documentation
    gdpr/index
    amazon/index
    azure/index
+   docker-monitor/index
    installing-splunk/index
    migrating-from-ossec/index
    release-notes/index
