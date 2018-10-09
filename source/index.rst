@@ -78,6 +78,7 @@ Available documentation
    pci-dss/index
    gdpr/index
    amazon/index
+   azure/index
    docker-monitor/index
    installing-splunk/index
    migrating-from-ossec/index

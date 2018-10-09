@@ -19,6 +19,7 @@ The configuration file reference is organized by sections:
     - `pattern`_
     - `timeout`_
     - `ip.selector`_
+    - `ip.ignore`_
     - `xpack.rbac.enabled`_
 
 `Monitoring`_
@@ -39,6 +40,7 @@ The configuration file reference is organized by sections:
     - `extensions.ciscat`_
     - `extensions.aws`_
     - `extensions.virustotal`_
+    - `extensions.osquery`_
 
 `Advanced index options`_
     - `wazuh.shards`_
@@ -83,6 +85,17 @@ Defines if the user is allowed to change the selected index pattern directly fro
 +--------------------+------------+
 | **Allowed values** | true,false |
 +--------------------+------------+
+
+ip.ignore
+^^^^^^^^^
+
+Disable certain index pattern names from being available in index pattern selector from the Wazuh app. An empty list (the default value) won't ignore any valid index pattern.
+
++--------------------+---------------------------------------------+
+| **Default value**  | []                                          |
++--------------------+---------------------------------------------+
+| **Allowed values** | Array of strings. Eg: ["wazuh-archives-\*"] |
++--------------------+---------------------------------------------+
 
 xpack.rbac.enabled
 ^^^^^^^^^^^^^^^^^^
@@ -252,6 +265,17 @@ extensions.virustotal
 ^^^^^^^^^^^^^^^^^^^^^
 
 Enable or disable the VirusTotal tab on *Overview* and *Agents*.
+
++--------------------+------------+
+| **Default value**  | false      |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+extensions.osquery
+^^^^^^^^^^^^^^^^^^
+
+Enable or disable the Osquery tab on *Overview* and *Agents*.
 
 +--------------------+------------+
 | **Default value**  | false      |

@@ -56,6 +56,7 @@ Request List
 	* POST /agents/insert  (`Insert agent`_)
 	* POST /agents/restart  (`Restart a list of agents`_)
 	* PUT /agents/:agent_id/group/:group_id  (`Set agent group`_)
+	* PUT /agents/:agent_id/add_group/:group_id  (`Add agent group`_)
 	* PUT /agents/:agent_id/restart  (`Restart an agent`_)
 	* PUT /agents/:agent_id/upgrade  (`Upgrade agent using online repository`_)
 	* PUT /agents/:agent_id/upgrade_custom  (`Upgrade agent using custom file`_)
@@ -181,7 +182,7 @@ Runs an Active Response command on a specified agent
 ::
 
 	{
-	    "data": "Command sent.", 
+	    "data": "Command sent.",
 	    "error": 0
 	}
 
@@ -235,7 +236,7 @@ Add a new agent.
 	      "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgZDcyMjliNjA1YTJjNzgzOGE0NjJmZTViMDZiYzI5NWJkMzQ5M2E3OTRkOTMyMDU1MzAzZTE3ZDBkN2I0MmM5Yw=="
 	   }
 	}
-	
+
 
 Add agent (quick method)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -270,7 +271,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	      "key": "MDA4IG15TmV3QWdlbnQgYW55IGEzNGQ4YzFkMjkwZTcxNDA0MmMyNDhmNTcxYmU2NjliNTMzY2VmZDQ0NGY4MDk2MTBlYTVlZWI1YjU1OGQzMjY="
 	   }
 	}
-	
+
 
 Insert agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -319,7 +320,7 @@ Insert an agent with an existing id and key.
 	      "key": "1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64"
 	   }
 	}
-	
+
 
 
 Delete
@@ -365,7 +366,7 @@ Removes a list of groups.
 	      ]
 	   }
 	}
-	
+
 
 Delete agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -418,7 +419,7 @@ Removes agents, using a list of them or a criterion based on the status or time 
 	      "total_affected_agents": 2
 	   }
 	}
-	
+
 
 Delete an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -457,7 +458,7 @@ Removes an agent.
 	      ]
 	   }
 	}
-	
+
 
 
 Groups
@@ -493,7 +494,7 @@ Creates a new group.
 	   "error": 1711,
 	   "message": "The group already exists: pciserver"
 	}
-	
+
 
 Get a file in group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -537,17 +538,17 @@ Returns the specified file belonging to the group parsed to JSON.
 	        "controls": [
 	            {
 	                "...": "..."
-	            }, 
+	            },
 	            {
-	                "condition": "all required", 
-	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1", 
-	                "reference": "CIS_Debian_Benchmark_v1.0pdf", 
+	                "condition": "all required",
+	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1",
+	                "reference": "CIS_Debian_Benchmark_v1.0pdf",
 	                "checks": [
 	                    "f:/etc/debian_version;"
 	                ]
 	            }
 	        ]
-	    }, 
+	    },
 	    "error": 0
 	}
 
@@ -639,7 +640,7 @@ Returns the list of agents in a group.
 	      ]
 	   }
 	}
-	
+
 
 Get agents without group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -710,7 +711,7 @@ Returns a list with the available agents without group.
 	      ]
 	   }
 	}
-	
+
 
 Get group configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -763,7 +764,7 @@ Returns the group configuration (agent.conf).
 	      ]
 	   }
 	}
-	
+
 
 Get group files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -903,7 +904,7 @@ Returns the files belonging to the group.
 	      ]
 	   }
 	}
-	
+
 
 Get groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -965,7 +966,7 @@ Returns the list of existing agent groups.
 	      ]
 	   }
 	}
-	
+
 
 Remove group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1006,7 +1007,7 @@ Removes the group. Agents that were assigned to the removed group will automatic
 	      ]
 	   }
 	}
-	
+
 
 Set agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1040,7 +1041,40 @@ Sets an agent to the specified group.
 	   "error": 0,
 	   "data": "Group 'webserver' set to agent '004'."
 	}
-	
+
+Add agent group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Add an agent to the specified group.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/:agent_id/add_group/:group_id
+
+**Parameters:**
+
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param              | Type          | Description                                                                                                                                                                                            |
++====================+===============+========================================================================================================================================================================================================+
+| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
++--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -X PUT "http://localhost:55000/agents/004/add_group/webserver?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Group 'webserver' added to agent '002'."
+	}
+
 
 Unset the agent group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1072,7 +1106,7 @@ Unsets the group of the agent. The agent will automatically revert to the 'defau
 	   "error": 0,
 	   "data": "Group unset for agent '004'."
 	}
-	
+
 
 
 Info
@@ -1119,7 +1153,7 @@ Returns a summary of the OS.
 	      ]
 	   }
 	}
-	
+
 
 Get agents summary
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1148,7 +1182,7 @@ Returns a summary of the available agents.
 	      "Disconnected": 0
 	   }
 	}
-	
+
 
 Get all agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1243,7 +1277,7 @@ Returns a list with the available agents.
 	            "ip": "127.0.0.1",
 	            "node_name": "node01",
 	            "dateAdd": "2018-09-06 14:22:27",
-	            "version": "Wazuh v3.6.1",
+	            "version": "Wazuh v3.7.0",
 	            "manager_host": "manager",
 	            "lastKeepAlive": "9999-12-31 23:59:59",
 	            "os": {
@@ -1289,7 +1323,7 @@ Returns a list with the available agents.
 	      ]
 	   }
 	}
-	
+
 
 Get an agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1326,7 +1360,7 @@ Returns various information from an agent.
 	      "name": "manager",
 	      "ip": "127.0.0.1",
 	      "dateAdd": "2018-09-06 14:22:27",
-	      "version": "Wazuh v3.6.1",
+	      "version": "Wazuh v3.7.0",
 	      "manager_host": "manager",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
@@ -1342,7 +1376,7 @@ Returns various information from an agent.
 	      "id": "000"
 	   }
 	}
-	
+
 
 Get an agent by its name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1382,7 +1416,7 @@ Returns various information from an agent called :agent_name.
 	      "name": "NewHost"
 	   }
 	}
-	
+
 
 
 Key
@@ -1418,7 +1452,7 @@ Returns the key of an agent.
 	   "error": 0,
 	   "data": "MDA0IG1haW5fZGF0YWJhc2UgMTAuMC4wLjE1IGJhNWNlMDNhZjQzYjhkM2RjMjk0ZjNhNTU0Y2YxMjMwODgyZmJiYjIwOGEyMmFiZTdjM2EzZTFmNDI2ODFjOGQ="
 	}
-	
+
 
 
 Restart
@@ -1451,7 +1485,7 @@ Restarts a list of agents.
 ::
 
 	{
-	    "data": "All selected agents were restarted", 
+	    "data": "All selected agents were restarted",
 	    "error": 0
 	}
 
@@ -1474,7 +1508,7 @@ Restarts all agents.
 ::
 
 	{
-	    "data": "Restarting all agents", 
+	    "data": "Restarting all agents",
 	    "error": 0
 	}
 
@@ -1505,7 +1539,7 @@ Restarts the specified agent.
 ::
 
 	{
-	    "data": "Restarting agent", 
+	    "data": "Restarting agent",
 	    "error": 0
 	}
 
@@ -1569,7 +1603,7 @@ Returns all the different combinations that agents have for the selected fields.
 	      ]
 	   }
 	}
-	
+
 
 
 Upgrade
@@ -1607,20 +1641,20 @@ Returns the list of outdated agents.
 
 	{
 	    "data": {
-	        "totalItems": 2, 
+	        "totalItems": 2,
 	        "items": [
 	            {
-	                "version": "Wazuh v3.0.0", 
-	                "id": "003", 
+	                "version": "Wazuh v3.0.0",
+	                "id": "003",
 	                "name": "main_database"
-	            }, 
+	            },
 	            {
-	                "version": "Wazuh v3.0.0", 
-	                "id": "004", 
+	                "version": "Wazuh v3.0.0",
+	                "id": "004",
 	                "name": "dmz002"
 	            }
 	        ]
-	    }, 
+	    },
 	    "error": 0
 	}
 
@@ -1653,7 +1687,7 @@ Returns the upgrade result from an agent.
 ::
 
 	{
-	    "data": "Agent upgraded successfully", 
+	    "data": "Agent upgraded successfully",
 	    "error": 0
 	}
 
@@ -1688,7 +1722,7 @@ Upgrade the agent using a custom file.
 ::
 
 	{
-	    "data": "Installation started", 
+	    "data": "Installation started",
 	    "error": 0
 	}
 
@@ -1732,7 +1766,7 @@ Upgrade the agent using a WPK file from online repository.
 ::
 
 	{
-	    "data": "Upgrade procedure started", 
+	    "data": "Upgrade procedure started",
 	    "error": 0
 	}
 
@@ -1790,7 +1824,7 @@ Clears cache of the specified group.
 	      }
 	   }
 	}
-	
+
 
 Delete cache index
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1817,7 +1851,7 @@ Clears entire cache.
 	      "groups": {}
 	   }
 	}
-	
+
 
 
 Info
@@ -1848,7 +1882,7 @@ Returns current cache index.
 	      "groups": {}
 	   }
 	}
-	
+
 
 Return cache configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1879,7 +1913,7 @@ Returns cache configuration.
 	      "redisClient": false
 	   }
 	}
-	
+
 
 
 
@@ -1940,38 +1974,38 @@ Returns the agent's ciscat results info
 
 	{
 	    "data": {
-	        "totalItems": 2, 
+	        "totalItems": 2,
 	        "items": [
 	            {
-	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server", 
-	                "score": 57, 
-	                "error": 0, 
+	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server",
+	                "score": 57,
+	                "error": 0,
 	                "scan": {
-	                    "id": 1406741147, 
+	                    "id": 1406741147,
 	                    "time": "2018-09-06T07:50:15.632-07:00"
-	                }, 
-	                "fail": 79, 
-	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
-	                "pass": 104, 
-	                "notchecked": 36, 
+	                },
+	                "fail": 79,
+	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark",
+	                "pass": 104,
+	                "notchecked": 36,
 	                "unknown": 1
-	            }, 
+	            },
 	            {
-	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Workstation", 
-	                "score": 64, 
-	                "error": 0, 
+	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Workstation",
+	                "score": 64,
+	                "error": 0,
 	                "scan": {
-	                    "id": 1406741147, 
+	                    "id": 1406741147,
 	                    "time": "2018-09-06T07:50:52.630-07:00"
-	                }, 
-	                "fail": 53, 
-	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
-	                "pass": 96, 
-	                "notchecked": 71, 
+	                },
+	                "fail": 53,
+	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark",
+	                "pass": 96,
+	                "notchecked": 71,
 	                "unknown": 0
 	            }
 	        ]
-	    }, 
+	    },
 	    "error": 0
 	}
 
@@ -2016,7 +2050,7 @@ Returns the cluster configuration
 	      "port": 1516
 	   }
 	}
-	
+
 
 
 Info
@@ -2047,7 +2081,7 @@ Returns whether the cluster is enabled or disabled
 	      "enabled": "yes"
 	   }
 	}
-	
+
 
 Show cluster health
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2082,7 +2116,7 @@ Show cluster health
 	         "node02": {
 	            "info": {
 	               "ip": "192.168.185.5",
-	               "version": "3.6.1",
+	               "version": "3.7.0",
 	               "type": "worker",
 	               "name": "node02",
 	               "n_active_agents": 0
@@ -2116,7 +2150,7 @@ Show cluster health
 	         "node01": {
 	            "info": {
 	               "ip": "192.168.185.4",
-	               "version": "3.6.1",
+	               "version": "3.7.0",
 	               "type": "master",
 	               "name": "node01",
 	               "n_active_agents": 2
@@ -2126,7 +2160,7 @@ Show cluster health
 	      "n_connected_nodes": 2
 	   }
 	}
-	
+
 
 
 Nodes
@@ -2158,7 +2192,7 @@ Returns the local node info
 	      "type": "master"
 	   }
 	}
-	
+
 
 Get node info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2182,12 +2216,12 @@ Returns the node info
 	   "error": 0,
 	   "data": {
 	      "ip": "192.168.185.4",
-	      "version": "3.6.1",
+	      "version": "3.7.0",
 	      "type": "master",
 	      "name": "node01"
 	   }
 	}
-	
+
 
 Get nodes info
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2232,20 +2266,20 @@ Returns the nodes info
 	      "items": [
 	         {
 	            "ip": "192.168.185.5",
-	            "version": "3.6.1",
+	            "version": "3.7.0",
 	            "type": "worker",
 	            "name": "node02"
 	         },
 	         {
 	            "ip": "192.168.185.4",
-	            "version": "3.6.1",
+	            "version": "3.7.0",
 	            "type": "master",
 	            "name": "node01"
 	         }
 	      ]
 	   }
 	}
-	
+
 
 
 
@@ -2329,7 +2363,7 @@ Returns all decoders included in ossec.conf.
 	      ]
 	   }
 	}
-	
+
 
 Get all decoders files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2435,7 +2469,7 @@ Returns all decoders files included in ossec.conf.
 	      ]
 	   }
 	}
-	
+
 
 Get all parent decoders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2497,7 +2531,7 @@ Returns all parent decoders included in ossec.conf
 	      ]
 	   }
 	}
-	
+
 
 Get decoders by name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2571,7 +2605,7 @@ Returns the decoders with the specified name.
 	      ]
 	   }
 	}
-	
+
 
 
 
@@ -2672,7 +2706,7 @@ Returns the agent's hardware info
 	      ]
 	   }
 	}
-	
+
 
 
 Netaddr
@@ -2744,7 +2778,7 @@ Returns the agent's network address info
 	      ]
 	   }
 	}
-	
+
 
 
 Netiface
@@ -2868,7 +2902,7 @@ Returns the agent's network interface info
 	      ]
 	   }
 	}
-	
+
 
 
 Netproto
@@ -2940,7 +2974,7 @@ Returns the agent's network protocol info
 	      ]
 	   }
 	}
-	
+
 
 
 OS
@@ -3040,7 +3074,7 @@ Returns the agent's os info
 	      ]
 	   }
 	}
-	
+
 
 
 Packages
@@ -3130,7 +3164,7 @@ Returns the agent's packages info
 	      ]
 	   }
 	}
-	
+
 
 
 Ports
@@ -3230,7 +3264,7 @@ Returns the agent's ports info
 	      ]
 	   }
 	}
-	
+
 
 
 Processes
@@ -3364,7 +3398,7 @@ Returns the agent's processes info
 	      ]
 	   }
 	}
-	
+
 
 
 Results
@@ -3422,40 +3456,40 @@ Returns the agent's ciscat results info
 
 	{
 	    "data": {
-	        "totalItems": 2, 
+	        "totalItems": 2,
 	        "items": [
 	            {
-	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Workstation", 
-	                "score": 64, 
-	                "agent_id": "001", 
-	                "error": 0, 
+	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Workstation",
+	                "score": 64,
+	                "agent_id": "001",
+	                "error": 0,
 	                "scan": {
-	                    "id": 1260865673, 
+	                    "id": 1260865673,
 	                    "time": "2018-09-06T07:59:25.682-07:00"
-	                }, 
-	                "fail": 53, 
-	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
-	                "pass": 96, 
-	                "notchecked": 71, 
+	                },
+	                "fail": 53,
+	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark",
+	                "pass": 96,
+	                "notchecked": 71,
 	                "unknown": 0
-	            }, 
+	            },
 	            {
-	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server", 
-	                "score": 57, 
-	                "agent_id": "001", 
-	                "error": 0, 
+	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server",
+	                "score": 57,
+	                "agent_id": "001",
+	                "error": 0,
 	                "scan": {
-	                    "id": 1260865673, 
+	                    "id": 1260865673,
 	                    "time": "2018-09-06T07:58:39.342-07:00"
-	                }, 
-	                "fail": 79, 
-	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
-	                "pass": 104, 
-	                "notchecked": 36, 
+	                },
+	                "fail": 79,
+	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark",
+	                "pass": 104,
+	                "notchecked": 36,
 	                "unknown": 1
 	            }
 	        ]
-	    }, 
+	    },
 	    "error": 0
 	}
 
@@ -3514,7 +3548,7 @@ Returns ossec.conf in JSON format.
 	      "logall_json": "no"
 	   }
 	}
-	
+
 
 
 Info
@@ -3542,7 +3576,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "compilation_date": "Thu Sep  6 14:22:25 UTC 2018",
-	      "version": "v3.6.1",
+	      "version": "v3.7.0",
 	      "openssl_support": "yes",
 	      "max_agents": "14000",
 	      "ruleset_version": "3601",
@@ -3552,7 +3586,7 @@ Returns basic information about manager.
 	      "tz_offset": "+0000"
 	   }
 	}
-	
+
 
 Get manager status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3587,7 +3621,7 @@ Returns the status of the manager processes.
 	      "ossec-maild": "stopped"
 	   }
 	}
-	
+
 
 
 Logs
@@ -3674,7 +3708,7 @@ Returns the three last months of ossec.log.
 	      ]
 	   }
 	}
-	
+
 
 Get summary of ossec.log
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3827,7 +3861,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	      }
 	   }
 	}
-	
+
 
 
 Stats
@@ -3862,31 +3896,31 @@ Returns Wazuh statistical information for the current or specified date.
 	{
 	    "data": [
 	        {
-	            "hour": 5, 
-	            "firewall": 0, 
+	            "hour": 5,
+	            "firewall": 0,
 	            "alerts": [
 	                {
-	                    "level": 3, 
-	                    "sigid": 5715, 
+	                    "level": 3,
+	                    "sigid": 5715,
 	                    "times": 4
-	                }, 
+	                },
 	                {
-	                    "level": 2, 
-	                    "sigid": 1002, 
+	                    "level": 2,
+	                    "sigid": 1002,
 	                    "times": 2
-	                }, 
+	                },
 	                {
 	                    "...": "..."
 	                }
-	            ], 
-	            "totalAlerts": 107, 
-	            "syscheck": 1257, 
+	            ],
+	            "totalAlerts": 107,
+	            "syscheck": 1257,
 	            "events": 1483
-	        }, 
+	        },
 	        {
 	            "...": "..."
 	        }
-	    ], 
+	    ],
 	    "error": 0
 	}
 
@@ -3911,16 +3945,16 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 	{
 	    "data": {
 	        "averages": [
-	            100, 
-	            357, 
-	            242, 
-	            500, 
-	            422, 
-	            "...", 
+	            100,
+	            357,
+	            242,
+	            500,
+	            422,
+	            "...",
 	            123
-	        ], 
+	        ],
 	        "interactions": 0
-	    }, 
+	    },
 	    "error": 0
 	}
 
@@ -3946,61 +3980,61 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	    "data": {
 	        "Wed": {
 	            "hours": [
-	                223, 
-	                "...", 
+	                223,
+	                "...",
 	                456
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Sun": {
 	            "hours": [
-	                332, 
-	                "...", 
+	                332,
+	                "...",
 	                313
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Thu": {
 	            "hours": [
-	                888, 
-	                "...", 
+	                888,
+	                "...",
 	                123
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Tue": {
 	            "hours": [
-	                536, 
-	                "...", 
+	                536,
+	                "...",
 	                345
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Mon": {
 	            "hours": [
-	                444, 
-	                "...", 
+	                444,
+	                "...",
 	                556
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Fri": {
 	            "hours": [
-	                131, 
-	                "...", 
+	                131,
+	                "...",
 	                432
-	            ], 
+	            ],
 	            "interactions": 0
-	        }, 
+	        },
 	        "Sat": {
 	            "hours": [
-	                134, 
-	                "...", 
+	                134,
+	                "...",
 	                995
-	            ], 
+	            ],
 	            "interactions": 0
 	        }
-	    }, 
+	    },
 	    "error": 0
 	}
 
@@ -4030,7 +4064,7 @@ Clears the rootcheck database for all agents.
 ::
 
 	{
-	    "data": "Rootcheck database deleted", 
+	    "data": "Rootcheck database deleted",
 	    "error": 0
 	}
 
@@ -4061,7 +4095,7 @@ Clears the rootcheck database for a specific agent.
 ::
 
 	{
-	    "data": "Rootcheck database deleted", 
+	    "data": "Rootcheck database deleted",
 	    "error": 0
 	}
 
@@ -4102,7 +4136,7 @@ Returns the timestamp of the last rootcheck scan.
 	      "end": "2018-09-06 15:47:19"
 	   }
 	}
-	
+
 
 Get rootcheck CIS requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4143,7 +4177,7 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 	      "items": []
 	   }
 	}
-	
+
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4206,7 +4240,7 @@ Returns the rootcheck database of an agent.
 	      ]
 	   }
 	}
-	
+
 
 Get rootcheck pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4249,7 +4283,7 @@ Returns the PCI requirements of all rootchecks of the agent.
 	      ]
 	   }
 	}
-	
+
 
 
 Run
@@ -4274,7 +4308,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents", 
+	    "data": "Restarting Syscheck/Rootcheck on all agents",
 	    "error": 0
 	}
 
@@ -4308,7 +4342,7 @@ Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes 
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-	
+
 
 
 
@@ -4411,7 +4445,7 @@ Returns all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get files of rules
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4517,7 +4551,7 @@ Returns the files of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rule gdpr requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4563,7 +4597,7 @@ Returns the GDPR requirements of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rule groups
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4615,7 +4649,7 @@ Returns the groups of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rule pci requirements
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4667,7 +4701,7 @@ Returns the PCI requirements of all rules.
 	      ]
 	   }
 	}
-	
+
 
 Get rules by id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4729,7 +4763,7 @@ Returns the rules with the specified id.
 	      ]
 	   }
 	}
-	
+
 
 
 
@@ -4757,7 +4791,7 @@ Clears the syscheck database for all agents.
 ::
 
 	{
-	    "data": "Syscheck database deleted", 
+	    "data": "Syscheck database deleted",
 	    "error": 0
 	}
 
@@ -4788,7 +4822,7 @@ Clears the syscheck database for the specified agent.
 ::
 
 	{
-	    "data": "Syscheck database deleted", 
+	    "data": "Syscheck database deleted",
 	    "error": 0
 	}
 
@@ -4829,7 +4863,7 @@ Return the timestamp of the last syscheck scan.
 	      "end": "2018-09-06 15:47:01"
 	   }
 	}
-	
+
 
 Get syscheck files
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -4936,7 +4970,7 @@ Returns the syscheck files of an agent.
 	      ]
 	   }
 	}
-	
+
 
 
 Run
@@ -4961,7 +4995,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents", 
+	    "data": "Restarting Syscheck/Rootcheck on all agents",
 	    "error": 0
 	}
 
@@ -4995,7 +5029,7 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
-	
+
 
 
 
@@ -5052,7 +5086,7 @@ Returns the agent's hardware info
 	      }
 	   }
 	}
-	
+
 
 
 Netaddr
@@ -5122,7 +5156,7 @@ Returns the agent's network address info
 	      ]
 	   }
 	}
-	
+
 
 
 Netiface
@@ -5244,7 +5278,7 @@ Returns the agent's network interface info
 	      ]
 	   }
 	}
-	
+
 
 
 Netproto
@@ -5314,7 +5348,7 @@ Returns the agent's network protocol info
 	      ]
 	   }
 	}
-	
+
 
 
 OS
@@ -5370,7 +5404,7 @@ Returns the agent's OS info
 	      }
 	   }
 	}
-	
+
 
 
 Packages
@@ -5462,7 +5496,7 @@ Returns the agent's packages info
 	      ]
 	   }
 	}
-	
+
 
 
 Ports
@@ -5562,7 +5596,7 @@ Returns the agent's ports info
 	      ]
 	   }
 	}
-	
+
 
 
 Processes
@@ -5696,7 +5730,3 @@ Returns the agent's processes info
 	      ]
 	   }
 	}
-	
-
-
-

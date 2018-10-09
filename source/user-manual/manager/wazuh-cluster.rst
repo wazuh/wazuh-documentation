@@ -65,6 +65,9 @@ Worker nodes are responsible of two main tasks:
     - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
     - Sending :ref:`agent status updates <agent-info-thread>` to the master.
 
+.. note::
+    The API can be used from any node. For performance reasons, it is recommended to use it mainly in the master node.
+
 Getting started
 ---------------
 
@@ -161,8 +164,7 @@ Agent registration in the cluster
 Configuring the Wazuh Kibana App
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Although all nodes can have an API installed, the Wazuh Kibana app must be configured with the master node API because the master node is the one that has all the information about the agents and the cluster.
-
+The Wazuh Kibana App can point to the API of any node in the cluster. It is recommended to point it to the master's API for performance reasons.
 
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -341,9 +343,9 @@ For example, the following snippet shows the connected nodes in the cluster:
     ---------------------------------------
     Name    Address         Type    Version
     ---------------------------------------
-    node01  192.168.56.101  master  3.6.1
-    node02  192.168.56.103  worker  3.6.1
-    node03  192.168.56.105  worker  3.6.1
+    node01  192.168.56.101  master  3.7.0
+    node02  192.168.56.103  worker  3.7.0
+    node03  192.168.56.105  worker  3.7.0
     ---------------------------------------
 
 This information can also be obtained using the Restful API:
@@ -358,19 +360,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.6.1",
+                "version": "3.7.0",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.6.1",
+                "version": "3.7.0",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.6.1",
+                "version": "3.7.0",
                 "type": "master",
                 "name": "node01"
              }

@@ -2,7 +2,7 @@
 
 .. _setup_ansible_hosts:
 
-Remote Hosts
+Remote Hosts Connection
 ============================
 
 Ansible was born with the idea to be an agentless automation platform. Ansible relies on SSH the connection to remote hosts, meaning that, you can connect to remote hosts as SSH does. To follow, we briefly explain two (2) of this methods.
