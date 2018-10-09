@@ -118,3 +118,9 @@ By default, this file is updated **every 5 seconds** but this interval can be ch
 
     # Archives log queue size
     archives_queue_size='16384'
+
+The following image is a graphical representation of the new analysisd structure:
+
+.. thumbnail:: ../../../images/manual/analysisd-new-structure.png
+    :align: center
+    :width: 100%
