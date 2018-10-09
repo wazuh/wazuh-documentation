@@ -518,7 +518,7 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed value | Any integer between 1 and 100000                                           |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.rlimit_nofile**      | Description   | Maximum number of file descriptor that Logcollector can open.              |
+|      **logcollector.rlimit_nofile**      | Description   | Maximum number of file descriptors that Logcollector can open.             |
 |                                          |               |                                                                            |
 |                                          |               | This value must be **greater than or equal to**                            |
 |                                          |               | (*logcollector.max_files* + 100).                                          |
