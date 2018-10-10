@@ -1192,14 +1192,14 @@ Remove the group of the agent but will leave the rest of its group if it belongs
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group/default?pretty"
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group/dmz?pretty"
 
 **Example Response:**
 ::
 
 	{
-	   "error": 1734,
-	   "message": "Error unsetting agent group: Agent 004 doesn't belong to group default"
+	   "error": 0,
+	   "message": "Group 'dmz' unset for agent '004'."
 	}
 	
 
