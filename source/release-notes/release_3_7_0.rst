@@ -22,6 +22,20 @@ With this improvement, it's now possible to merge configuration from several gro
 
 The new feature allows consulting all the agent's group information at *agent_groups* CLI and at the app with the RESTful API. You can learn more about this feature at the :ref:`multiple groups <grouping-agents>` documentation.
 
+New Wazuh module to monitor Microsoft Azure
+-------------------------------------------
+
+The new ``azure-logs`` module for Wazuh has the ability to obtain and read Azure logs through several service APIs. This helps to monitor all activity that occurs in the infrastructure, just by setting up the module to monitor the virtual machines that make up the infrastructure, which will send events to the Wazuh manager for analysis.
+
+To learn more about this new module and how to configure it, check out the section :ref:`azure`.
+
+New Wazuh module to monitor Docker
+----------------------------------
+
+The new ``docker`` module for Wazuh makes easier to monitor and collect the activity events from your Docker containers such as starting, stopping or pausing.
+
+To learn more about this new module and how to configure it, check out the section :ref:`docker-monitor-index`.
+
 Query remote configuration
 --------------------------
 
@@ -50,6 +64,8 @@ Distributed API requests in cluster mode
 ----------------------------------------
 
 The cluster capabilities were improved to allow distributed API requests. Now the nodes communicate between them to collect information, such as agents status, logs, etc. Even though you make an API request on a master or worker node, it will provide data related to the whole architecture, instead of a single instance.
+
+In addition to this, we've improved the *last keep alive* checking on the cluster nodes, disconnecting them if they don't have internet connection during a certain amount of time.
 
 New features for Kibana plugin
 ------------------------------
