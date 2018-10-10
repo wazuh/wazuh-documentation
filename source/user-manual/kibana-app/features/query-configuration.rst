@@ -2,12 +2,12 @@
 
 .. _kibana_query_configuration:
 
-Query configuration on demand
-=============================
+Query configuration
+===================
 
-The actual configuration of an agent, or the manager can be queried on demand by clicking on the *Agents* tab or the *Management* tab. From here you will be able to fetch the loaded configuration in real time. 
+The actual configuration of an agent, or the manager can be queried on demand by clicking on the *Agents* tab or the *Management* tab. From here you will be able to fetch the loaded configuration in real time.
 
-.. image:: ../../../images/kibana-app/features/query-configuration/tabs-agent.png
+.. image:: ../../../images/kibana-app/features/query-configuration/tab-agent.png
   :align: center
   :width: 100%
 
@@ -21,7 +21,6 @@ The image bellow shows that the agent configuration is synchronized:
 
 .. image:: ../../../images/kibana-app/features/query-configuration/is-sync.png
   :align: center
-  :width: 100%
 
 A list of the avaiable configurations to query on *Manager* is shown bellow:
 
@@ -62,15 +61,13 @@ A list of the avaiable configurations to query on *Agent* is shown bellow:
   - Osquery
   - AWS
 
-
 By clicking on the *Log collection* configuration, the loaded configuration is shown:
 
 .. image:: ../../../images/kibana-app/features/query-configuration/logcollector-query.png
   :align: center
   :width: 100%
 
-
-It also has the capability to show the format in JSON or XML for better readability:
+It also has the capability to show the configuration in JSON or XML formats for better readability:
 
 .. image:: ../../../images/kibana-app/features/query-configuration/logcollector-json.png
   :align: center
@@ -80,10 +77,10 @@ It also has the capability to show the format in JSON or XML for better readabil
   :align: center
   :width: 100%
 
-Now for example if you want to know the current cluster configuration of the **Manager**, click on the *Management* tab and then click on  *Cluster*:
+Now for example, if you want to know the current cluster configuration from the **Manager**, click on the *Management > Configuration* tab and then click on the *Cluster* section:
 
 .. image:: ../../../images/kibana-app/features/query-configuration/cluster.png
   :align: center
   :width: 100%
 
-As you can see the cluster configuration has been fetched, and it also shows the cluster status is this case *Enabled*
+As you can see the cluster configuration has been fetched, and it also shows the cluster status in this case is *Enabled*.
