@@ -2498,7 +2498,45 @@ Returns the three last months of ossec.log.
 **Example Response:**
 ::
 
-	ToDo - Hardcoded output
+	{
+		"error": 0,
+		"data": {
+			"totalItems": 1999,
+			"items": [
+				{
+					"timestamp": "2018-10-10 10:32:18",
+					"tag": "ossec-syscheckd",
+					"description": "Ending syscheck scan. Database completed.",
+					"level": "info"
+				},
+				{
+					"timestamp": "2018-10-10 10:32:13",
+					"tag": "ossec-syscheckd",
+					"description": "Finished creating syscheck database (pre-scan completed).",
+					"level": "info"
+				},
+				{
+					"timestamp": "2018-10-10 10:31:40",
+					"tag": "ossec-rootcheck",
+					"description": "Ending rootcheck scan.",
+					"level": "info"
+				},
+				{
+					"timestamp": "2018-10-10 10:31:21",
+					"tag": "ossec-syscheckd",
+					"description": "Starting syscheck database (pre-scan).",
+					"level": "info"
+				},
+				{
+					"timestamp": "2018-10-10 10:31:16",
+					"tag": "ossec-syscheckd",
+					"description": "Syscheck scan frequency: 43200 seconds",
+					"level": "info"
+				}
+			]
+		}
+	}
+
 
 
 Get summary of cluster ossec.log
