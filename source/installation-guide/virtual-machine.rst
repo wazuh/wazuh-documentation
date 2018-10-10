@@ -7,7 +7,7 @@ Virtual Machine
 
 Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox (where installed) and other OVA compatible virtualization systems.
 
-.. note::  This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Distributed architectures and multi-node Elastic Stack clusters are usually a better fit for production environments where higher performance is required.
+.. note:: This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Distributed architectures and multi-node Elastic Stack clusters are usually a better fit for production environments where higher performance is required.
 
 1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0.ova>`_, contains the following components:
 
@@ -41,10 +41,6 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 5. In order to connect to the Kibana web user interface, login with http://OVA_IP_ADRESS:5601 (where ``OVA_IP_ADDRESS`` is your system IP).
 
-.. note::
+.. note:: You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0-disk001.vmdk>`_ disk.
 
-        You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh3.6.1_6.4.0-disk001.vmdk>`_ disk.
-        
-.. note::
-
-        If you need to update your OVA virtual machine, you can check out the article :ref:`this article <upgrading_latest_minor>`. We also recommend updating your repositories using the ``yum update`` command.
+.. note:: If you need to update your OVA virtual machine, you can check out :ref:`this article <upgrading_latest_minor>`. We also recommend updating the repositories using the ``yum update`` command.
