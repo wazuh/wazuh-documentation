@@ -25,14 +25,14 @@ The new feature allows consulting all the agent's group information at *agent_gr
 New Wazuh module to monitor Microsoft Azure
 -------------------------------------------
 
-The new ``azure-logs`` module for Wazuh has the ability to obtain and read Azure logs through several service APIs. This helps to monitor all activity that occurs in the infrastructure, just by setting up the module to monitor the virtual machines that make up the infrastructure, which will send events to the Wazuh manager for analysis.
+The new ``azure-logs`` module for Wazuh has the ability to obtain and read Azure logs through several service APIs. This helps to monitor all the activity happening in the infrastructure, just by setting up the module to monitor the virtual machines that form the infrastructure, sending events to the Wazuh manager for analysis.
 
 To learn more about this new module and how to configure it, check out the section :ref:`azure`.
 
 New Wazuh module to monitor Docker
 ----------------------------------
 
-The new ``docker`` module for Wazuh makes easier to monitor and collect the activity events from your Docker containers such as starting, stopping or pausing.
+The new ``docker`` module for Wazuh makes easier to monitor and collect the activity from your Docker containers such as starting, stopping or pausing events.
 
 To learn more about this new module and how to configure it, check out the section :ref:`docker-monitor-index`.
 
