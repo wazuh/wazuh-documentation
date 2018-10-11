@@ -5,19 +5,15 @@
 Statistics files
 ================
 
-The **statistics files** are usefull to troubleshoot some problems you may encounter like not receiving enough alerts, the agent is not sending any events,
-the agent's buffer is flooded... Also, you can use them to have a better perspective of your environment and how everything works.
+The **statistics files** are useful to troubleshoot some problems you may encounter like not receiving enough alerts, agents not sending any events to the manager, a flooded agent's buffer, etc. You can also make use of these statistics to have a better perspective of your environment and how's everything working.
 
-Currently, Wazuh provides three statistical files:
+Currently, Wazuh provides three statistical files, listed below.
 
-- :doc:`Agentd state file<ossec-agentd-state>`
-- :doc:`Remoted state file<ossec-remoted-state>`
-- :doc:`Analysisd state file<ossec-analysisd-state>`
+.. topic:: Contents
 
-.. toctree::
-    :maxdepth: 1
-    :hidden:
+  .. toctree::
+      :maxdepth: 1
 
-    ossec-agentd-state
-    ossec-remoted-state
-    ossec-analysisd-state
+      ossec-agentd-state
+      ossec-remoted-state
+      ossec-analysisd-state

@@ -5,12 +5,12 @@
 ossec-agentd state file
 =======================
 
-The name of the statistical file for **ossec-agentd** is ``ossec-agentd.state`` and it's located under the Wazuh installation directory in ``var/run/ossec-agentd.state``.
+The statistical file for **ossec-agentd** is ``ossec-agentd.state`` and it's located under the Wazuh installation directory (``/var/ossec/var/run/ossec-agentd.state``).
 
-This file provides information about the agent, like the current status or the number of generated events among others. By default, this file is updated **every 5 seconds**
-but this interval can be changed with the ``agent.state_interval`` variable in the ``internal_options.conf`` file. For further information please visit the :doc:`internal configuration <../internal-options>` page.
+This file provides information about the agent, like its current status or the number of generated events, among others. By default this file is updated **every 5 seconds**
+but this interval can be changed with the ``agent.state_interval`` variable in the ``internal_options.conf`` file. For further information please visit the :ref:`internal configuration <reference_internal_options>` page.
 
-.. note:: ``ossec-agentd.state`` is **only** available in agents.
+.. note:: The ``ossec-agentd.state`` statistical file is **only** available in agents.
 
 Below you can see an example file:
 

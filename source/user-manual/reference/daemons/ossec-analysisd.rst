@@ -5,7 +5,7 @@
 ossec-analysisd
 ===============
 
-The ``ossec-analysisd`` program receives the log messages and compares them to the rules.  It then creates an alert when a log message matches an applicable rule.
+The ``ossec-analysisd`` program receives the log messages and compares them to the rules. It then creates an alert when a log message matches an applicable rule.
 
 +-----------------+-------------------------------------------------------------------------------------------------+
 | **-c <config>** | Run using <config> as the configuration file.                                                   |
@@ -27,6 +27,8 @@ The ``ossec-analysisd`` program receives the log messages and compares them to t
 | **-V**          | Display the version and license information.                                                    |
 +-----------------+-------------------------------------------------------------------------------------------------+
 
+.. _ossec-analysisd-structure:
+
 Daemon multithreaded internal structure
 ---------------------------------------
 
@@ -35,7 +37,8 @@ Daemon multithreaded internal structure
     :align: center
     :width: 100%
 
-Steps involucrated
+**How this works**
+^^^^^^^^^^^^^^^^^^
 
 1. The socket receives the message and sends it to the respective decoder queue. They can be one of the following:
     a. Syscheck event decoder queue.
@@ -69,7 +72,6 @@ Steps involucrated
     a. Every 1 second, all the log files are writted to the HDD.
     b. Every 5 seconds (by default, if not overrided), the status file for Analysisd is generated.
 
-
 Flow example of an event
 ------------------------
 
@@ -85,13 +87,12 @@ As you can see, every part of the Analsysd multithreaded engine is independent f
 Automatic leveling of the threads
 ----------------------------------
 
-By the default when Analysisd starts, it will spawn the number of threads based on the number of CPU cores of the machine it runs on.
-For example if the machine has 4 physiscal cores, the threads created will be:
+By default, when Analysisd starts it will spawn the number of threads based on the number of CPU cores of the machine where it's running. For example, if the machine has 4 physiscal cores, the following threads will be created:
 
-    - 4 threads for decoders (4 for Syscheck,4 for Syscollector,4 for Rootcheck, 4 for Hostinfo,4 for others).
-    - 4 threads for rule matching.
+    - 4 threads for **decoders** (4 for Syscheck, 4 for Syscollector, 4 for Rootcheck, 4 for Hostinfo and 4 for others).
+    - 4 threads for **rule matching**.
 
-This default configuration can be changed on the ``internal_options.conf`` file by changing the following fields:
+This default configuration can be changed on the ``internal_options.conf`` file by changing the fields from the table below:
 
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |        **analysisd.event_threads**           | Description   | Number of event decoder threads.                                    |
@@ -143,4 +144,4 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 
-For example if our mananger receives few Rootcheck events, we can lower the number of Rootcheck decoder threads. 
+For example, if the mananger receives little Rootcheck events, we can decrease the number of threads for the Rootcheck decoder.

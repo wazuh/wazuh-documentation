@@ -5,13 +5,15 @@
 ossec-analysisd state file
 ==========================
 
-The name of the statistical file for **ossec-analysisd** is ``ossec-analysisd.state`` and it's located under the Wazuh installation directory in ``var/run/ossec-analysisd.state``.
+The statistical file for **ossec-analysisd** is ``ossec-analysisd.state`` and it's located under the Wazuh installation directory (``/var/ossec/var/run/ossec-analysisd.state``).
 
-This file shows the information relative to the status of the **Analysisd daemon**, displaying realtime data. It can help to analyse situations where you need to troubleshoot problems related on getting less events or alerts as expected.
+This file shows the information relative to the status of the **Analysisd daemon**, displaying real time data. It can help to analyse situations where you need to troubleshoot problems related to getting less events or alerts as expected.
 
-By default, this file is updated **every 5 seconds** but this interval can be changed with the ``analysisd.state_interval`` variable in the ``internal_options.conf`` file. For further information please visit the :doc:`internal configuration <../internal-options>` page.
+By default, this file is updated **every 5 seconds** but this interval can be changed with the ``analysisd.state_interval`` variable in the ``internal_options.conf`` file. For further information please visit the :ref:`internal configuration <reference_internal_options>` page.
 
-.. note:: ``ossec-analysisd.state`` is **only** available in managers.
+.. note:: The ``ossec-analysisd.state`` statistical file is **only** available in managers.
+
+Below you can see an example file:
 
 .. code-block:: bash
 
@@ -119,8 +121,4 @@ By default, this file is updated **every 5 seconds** but this interval can be ch
     # Archives log queue size
     archives_queue_size='16384'
 
-The following image is a graphical representation of the new analysisd structure:
-
-.. thumbnail:: ../../../images/manual/analysisd-new-structure.png
-    :align: center
-    :width: 100%
+.. note:: As of Wazuh v3.7.0, the Analysis engine received support for multithreaded processing. You can read more about how the daemon works now on it's :ref:`reference documentation <ossec-analysisd-structure>`.
