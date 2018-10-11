@@ -12,35 +12,33 @@ Monitoring Services
     :align: center
     :width: 100%
 
-Wazuh also allows us to monitor services such as the Azure Active Directory service, using the `Azure Active Directory Graph REST API <https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-graph-api-quickstart>`_ provides  access to Azure AD through REST API endpoints. Applications can use Azure AD Graph API to perform read operations on directory data and objects.
+Wazuh also allows to monitor services such as Azure Active Directory using the `Azure Active Directory Graph REST API <https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-graph-api-quickstart>`_, which provides access to Azure AD through REST API endpoints. Applications can use the Azure AD Graph API to perform read operations on directory data and objects.
 
 Using Azure Active Directory Graph
 ----------------------------------
 
-We will configure an application from the Microsoft Azure portal to be able to use the **Azure Active Directory Graph REST API**.
+We're going to configure an application from the Microsoft Azure portal to be able to use the **Azure Active Directory Graph REST API**.
 
-.. note::
+.. note:: The process explained below details the configuration of an application that will use the Active Directory Graph REST API. You can also create a new application, as the creation process is similar to the application for Azure Log Analytics.
 
-        The process explained below details the configuration of the application that will use the of Azure Active Directory Graph REST API. You can also create a new application, the process is similar from the creation of the application for Azure Log Analytics. 
+1. Giving permissions to the application
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Giving permission to the application 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-1.1 - In the ``Azure Active Directory`` section select the option ``App registrations`` and once inside, select ``New application registration``.
+1.1 - In the ``Azure Active Directory`` section, select the option ``App registrations`` and once inside, select ``New application registration``.
 
 .. thumbnail:: ../images/azure/graph1.png
     :title: AAD
     :align: center
     :width: 100%
 
-1.2 - Access the ``Settings`` section. Save the ``application id`` for later authentication. 
+1.2 - Access the ``Settings`` section. Save the ``application id`` for later authentication.
 
 .. thumbnail:: ../images/azure/graph2.png
     :title: AAD
     :align: center
     :width: 75%
 
-1.3 - In the ``Required permissions`` section select the ``Add`` option. 
+1.3 - In the ``Required permissions`` section select the ``Add`` option.
 
 .. thumbnail:: ../images/azure/graph3.png
     :title: AAD
@@ -54,21 +52,21 @@ We will configure an application from the Microsoft Azure portal to be able to u
     :align: center
     :width: 100%
 
-1.5 - Select the permissions that adapt to our infrastructure. 
+1.5 - Select the permissions that adapt to our infrastructure.
 
 .. thumbnail:: ../images/azure/graph5.png
     :title: AAD
     :align: center
     :width: 100%
 
-1.6 - Select ``Done``.  
+1.6 - Select ``Done``.
 
 .. thumbnail:: ../images/azure/graph6.png
     :title: AAD
     :align: center
     :width: 50%
 
-2. Obtaining the application key for authentication 
+2. Obtaining the application key for authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 2.1 - Select ``Keys`` and fill in the ``DESCRIPTION`` and ``EXPIRES`` fields. Once we ``save`` the key we will get its ``value``. This will be the key with which we will authenticate our application in order to use the API.
@@ -84,21 +82,21 @@ We will configure an application from the Microsoft Azure portal to be able to u
     :width: 100%
 
 Wazuh configuration
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
-Next we will see the options we have to configure our integration. 
+Next we will see the options we have for configuring the integration.
 
-3. azure-logs configuration 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3. azure-logs module configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note::
+.. note:: When we choose to use a file for authentication, its content must be ``field = value``. For example:
 
-        When we choose to use a file for authentication, its content must be ``field = value``. For example:
-            application_id = 8b7...c14 
-                   
-            application_key = w22...91x
+  .. code-block:: none
 
-3.1 - We opted for the following example configuration. The integration will be executed every ``Friday`` at ``12:00``. Authentication will be carried out by reading the file containing the credentials. We add a representative ``tag`` and set the search for the ``activities/audit?api-version=beta`` `query <https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-common-queries>`_ to give us the results of the previous day. 
+    application_id = 8b7...c14
+    application_key = w22...91x
+
+3.1 - We opted for the following example configuration. The integration will be executed every **Friday** at **12:00**. Authentication will be carried out by reading the file containing the credentials. We add a representative ``tag`` and set the search for the ``activities/audit?api-version=beta`` `query <https://msdn.microsoft.com/en-us/library/azure/ad/graph/howto/azure-ad-graph-api-common-queries>`_ to give us the results of the previous day.
 
 .. code-block:: xml
 
@@ -126,19 +124,17 @@ Next we will see the options we have to configure our integration.
 
 You can see the wodle reference :ref:`here <wodle_azure_logs>`.
 
-The field ``tenantdomain`` is necessary and we can obtain it easily. In the azure portal, we can see it leaving the cursor in the upper right corner. 
+The field ``tenantdomain`` is necessary and we can obtain it easily. In the azure portal, we can see it leaving the cursor in the upper right corner.
 
 .. thumbnail:: ../images/azure/tenant.png
     :title: AAD
     :align: center
     :width: 100%
 
-
 Azure Active Directory Graph Use Case
 -------------------------------------
 
-Using the configuration prepared above, we will show an example of use. 
-
+Using the configuration prepared above, we will show an example of use.
 
 Wazuh Rules
 ^^^^^^^^^^^
@@ -153,11 +149,10 @@ As the records are in ``.json`` format, with this rule, already included in the 
 		<description>Azure: AD $(activity)</description>
 	</rule>
 
-
 Create a new user
 ^^^^^^^^^^^^^^^^^
 
-Proceed to create a new user. If the creation is successful, a log will be written to reflect it. 
+Proceed to create a new user. If the creation is successful, a log will be written to reflect it.
 
 .. thumbnail:: ../images/azure/new_user1.png
     :title: AAD
@@ -182,7 +177,7 @@ From the ``Azure Active Directory`` entry select the ``Audit logs`` entry and we
 Kibana visualization
 ^^^^^^^^^^^^^^^^^^^^
 
-When our integration performs the query, we will be able to see the results in Kibana. As we can see through the rule ``87802`` the dates of the events coincide (taking into consideration the time difference between computers)
+When our integration performs the query, we will be able to see the results in Kibana. As we can see through the rule ``87802`` the dates of the events coincide (taking into consideration the time difference between computers).
 
 .. thumbnail:: ../images/azure/kibana_services1.png
     :title: AAD
