@@ -57,15 +57,14 @@ You can automate the agent registration with authd using the following parameter
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   TIME_RECONNECT      |  Sets the time in seconds until a reconnection attempt.                                                                      |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   CERTIFICATE         |  Specifies th certificate path.                                                                                              |
+|   CERTIFICATE         |  Specifies the certificate path.                                                                                             |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   AGENT_NAME          |  Designates the agent's name. By default will be the computer name.                                                          |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   \/l  installer.log  |  Generates a log of the installation process.                                                                                |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   /l*v installer.log  |  Generates a log of the installation process, including verbose messages.                                                    |
+| \/l\*v installer.log  |  Generates a log of the installation process, including verbose messages.                                                    |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-
 
 Usage example::
 
