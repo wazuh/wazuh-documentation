@@ -58,7 +58,7 @@ The analysis engine has been enhanced with multithreaded processing. It takes ad
 Advanced API filtering using queries
 ------------------------------------
 
-In this version, the Wazuh API includes a brand-new filtering system. The ``q`` parameter allows you to request information using more complex queries with logical operators and separators. You can find a more detailed explanation of this feature on the :ref:`API queries <queries>` section.
+In this version, the Wazuh API includes a brand-new filtering system. The ``q`` parameter allows you to request information using advanced queries with logical operators and separators. You can find a more detailed explanation of this feature on the :ref:`API queries <queries>` section.
 
 Distributed API requests in cluster mode
 ----------------------------------------
@@ -70,14 +70,14 @@ In addition to this, we've improved the *last keep alive* checking on the cluste
 New features for Kibana plugin
 ------------------------------
 
-The Wazuh app for Kibana includes new features and interface redesigns to make use of the new features included in this version. As shown before, now you can see the actual manager/agent configuration on the redesigned tabs. The interface has been organized in a more convenient way, and each setting is displayed in a more *human-readable* format for better comprehension. Besides, the JSON/XML viewers received a revamp to be more responsive.
+The Wazuh app for Kibana includes new features and interface redesigns to make use of the new features included in this version. As shown before, now you can get the current manager/agent configuration on the redesigned tabs. The interface has been organized in a more convenient way, and each setting is displayed in a more *human-readable* format for better comprehension. Besides, the JSON/XML viewers received a revamp to be more responsive.
 
 The app is also compatible with the new multiple groups feature, so now each agent will show all its assigned groups. Clicking on any group on the information bar will redirect the user to the groups detail page, to see the configuration files and all the agents belonging to that group.
 
 We've also added more quality-of-life improvements for the app:
 
   - Clicking on an agent ID on the *Discover* panels will open the agent panel to see the associated dashboards.
-  - New *Actions* column added on the agents list to quickly open the Discover panel or agent configuration.
+  - New *Actions* column added to the list of agents to quickly open the Discover panel or agent configuration.
   - The *Amazon AWS* tab has been redesigned to include more useful visualizations and your current :ref:`Amazon S3 <amazon>` wodle configuration.
   - The new :ref:`Osquery <osquery>` extension added on this version comes to show scans results in a more meaningful and easy to understand format.
   - Several updates to descriptions and text, more bugfixes, performance improvements, and compatibility with the latest Elastic Stack version.
@@ -85,7 +85,7 @@ We've also added more quality-of-life improvements for the app:
 New features for Splunk plugin
 ------------------------------
 
-The Wazuh app for Splunk also receives lots of new features and improvements on this new version. The Configuration tab is also improved as on the Kibana plugin to show the real manager/agent configuration, and multiple groups support.
+The Wazuh app for Splunk also receives lots of new features and improvements on this new version. The Configuration tab is also improved as on the Kibana plugin to get the current manager/agent configuration, and multiple groups support.
 
 In addition to this, the Splunk app now includes the *Monitoring* tab to show cluster-related information, such as alerts by node, cluster configuration, alerts summary, etc. The *Integrity monitoring* tab was also updated to reflect the latest changes from the Kibana app, including more useful visualizations. The *Amazon AWS* tab is now also available on the Splunk plugin to monitor your AWS-related alerts.
 
