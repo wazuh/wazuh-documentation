@@ -19,6 +19,9 @@ Depending on your operating system you can choose to install Elastic Stack from 
 | :ref:`DEB packages <elastic_server_deb>`                               | Install Elastic Stack on Debian/Ubuntu.                     |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 
+.. note::
+    Currently, the Elastic Stack is only supported on 64-bit operating systems, according to its `Support Matrix <https://www.elastic.co/support/matrix>`_.
+
 .. toctree::
    :hidden:
    :maxdepth: 2
