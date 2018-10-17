@@ -11,16 +11,13 @@ Advance filtering is possible using the Wazuh API's queries. Queries are specifi
 
 * **Field name**: Field name to filter by. If an incorrect field name is used, an error will be raised.
 * **Operator**: Operator to filter by:
-
     * ``=``: equality.
     * ``!=``: not equality.
     * ``<``: smaller.
     * ``>``: bigger.
     * ``~``: like as.
-
 * **Value**: Value to filter filter by.
 * **Separator**: Operator to join multiple "queries":
-
     * ``,``: represents an ``OR``.
     * ``;``: represents an ``AND``.
 
@@ -132,7 +129,7 @@ An example of using the OR operator can be filtering Ubuntu or CentOS agents:
         }
     }
 
-Other example using the ``~`` operator is the following:
+Another example using the ``~`` operator is the following:
 
 .. code-block:: javascript
 
@@ -227,5 +224,3 @@ A more precise timeframe can be specified using operators ``>`` and ``<`` togeth
             ]
         }
     }
-
-
