@@ -1,5 +1,9 @@
 .. _sources_installation:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/installation-guide/installing-wazuh-server/sources_installation.html>`_.
+
 Install Wazuh server from sources
 =================================
 
