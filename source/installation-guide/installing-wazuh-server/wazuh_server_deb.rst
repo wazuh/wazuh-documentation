@@ -81,34 +81,19 @@ Installing the Wazuh API
 
       If you are using **Ubuntu 12.04 (Precise)** or **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
 
-
   and then, install NodeJS:
 
   .. code-block:: console
 
     # apt-get install nodejs
 
-2. Install the Wazuh API. It will update NodeJS if it is required:
+2. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in most Linux distributions.
+
+   To determine if the python version on your system is lower than 2.7, you can run the following:
 
   .. code-block:: console
 
-    # apt-get install wazuh-api
-
-3. Once the process is complete, you can check the service status with:
-
-  a) For Systemd:
-
-  .. code-block:: console
-
-    # systemctl status wazuh-api
-
-  b) For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-api status
-
-4. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in most Linux distributions.
+    # python --version
 
    It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
 
@@ -126,6 +111,26 @@ Installing the Wazuh API
             lib: "/opt/rh/python27/root/usr/lib64"
         }
     ];
+
+3. Install the Wazuh API. It will update NodeJS if it is required:
+
+  .. code-block:: console
+
+    # apt-get install wazuh-api
+
+4. Once the process is complete, you can check the service status with:
+
+  a) For Systemd:
+
+  .. code-block:: console
+
+    # systemctl status wazuh-api
+
+  b) For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-api status
 
 .. _wazuh_server_deb_filebeat:
 
