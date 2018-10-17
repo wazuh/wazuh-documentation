@@ -147,6 +147,9 @@ Installing the Wazuh API
 
     # service wazuh-api status
 
+.. note::
+    Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
+
 .. _wazuh_server_rpm_filebeat:
 
 Installing Filebeat

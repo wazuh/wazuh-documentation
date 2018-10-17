@@ -24,7 +24,6 @@ There are several options for installing the Wazuh server depending on the opera
 .. note::
     Installing Wazuh Server on a 64-bit operating system is highly recommended since the Wazuh API is not available on 32-bit platforms. Without the Wazuh API, much of the functionality of the Wazuh Kibana App will not work. Similarly, if you are using Red Hat or CentOS for your Wazuh Server platform, make sure it is version 6 or higher to properly install Wazuh API.
 
-
 .. toctree::
    :hidden:
    :maxdepth: 2
