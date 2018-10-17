@@ -1,5 +1,9 @@
 .. _up_ossec_agent:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/migrating-from-ossec/ossec-agent.html>`_.
+
 Migrating OSSEC agent installed from packages
 ===================================================
 

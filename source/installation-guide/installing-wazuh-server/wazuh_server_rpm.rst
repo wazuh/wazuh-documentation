@@ -1,5 +1,9 @@
 .. _wazuh_server_rpm:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/installation-guide/installing-wazuh-server/wazuh_server_rpm.html>`_.
+
 Install Wazuh server with RPM packages
 ======================================
 

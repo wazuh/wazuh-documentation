@@ -1,5 +1,6 @@
 .. _unattended-installation:
 
+
 Unattended Installation
 =======================
 Unattended installation saves the user having to interact with the installation interface to complete the process, allowing the automation of agents deployments. To do this, you must modify the ``preloaded-vars.conf`` file uncommenting the configuration lines that you want to automate in the installation process.

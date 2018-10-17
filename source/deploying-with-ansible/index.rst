@@ -1,5 +1,9 @@
 .. _wazuh_ansible:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/deploying-with-ansible/index.html>`_.
+
 Deploying with Ansible
 ============================
 

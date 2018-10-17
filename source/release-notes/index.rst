@@ -1,5 +1,9 @@
 .. _release_notes:
 
+.. warning::
+
+    You are looking at documentation for an older release. Not what you want? See the `current release documentation <https://documentation.wazuh.com/current/release-notes/index.html>`_.
+
 Release Notes
 =============
 
