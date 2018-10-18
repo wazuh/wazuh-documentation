@@ -65,9 +65,6 @@ Worker nodes are responsible of two main tasks:
     - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
     - Sending :ref:`agent status updates <agent-info-thread>` to the master.
 
-.. note::
-    The API can be used from any node. For performance reasons, it is recommended to use it mainly in the master node.
-
 Getting started
 ---------------
 
