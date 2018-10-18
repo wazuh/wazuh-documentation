@@ -50,9 +50,12 @@ Installation
   .. image:: ../images/splunk-app/appconf-0.png
     :align: center
 
-4. The app will redirect you to the *Settings* tab, where you need to fill in the Username and Password fields with your Wazuh API credentials; you can get more information about how to set up the credentials at :ref:`securing_api`.
+4. The app will redirect you to the *Settings* tab, where you need to fill in the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
 
-  Enter ``http(s)://MANAGER_IP`` for the URL where ``MANAGER_IP`` is the Wazuh manager IP address. The Port field is for the API port that you configured (by default, ``55000``).
+  By default, the API port is ``55000``. The default username and password is ``foo:bar``.
+
+  .. note::
+    You can get more information about how to set up the credentials at :ref:`securing_api`.
 
   .. thumbnail:: ../images/splunk-app/appconf-1.png
     :align: center
