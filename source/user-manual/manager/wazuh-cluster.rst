@@ -158,15 +158,15 @@ Agent registration in the cluster
 **All agents must be registered in the master node**. The master is responsible for replicating the new agent's information across all worker nodes. If an agent is registered in a worker node, it will be deleted by the master node.
 
 
-Configuring the Wazuh App for Kibana/Splunk
+Configuring the Wazuh app for Kibana/Splunk
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following must be considered when configuring the Wazuh app:
+The following must be considered when configuring a Wazuh app:
 
-    - The Wazuh apps must be configured to point to the master's API. 
+    - The apps must be configured to point to the master's API.
     - All worker nodes need an event forwarder in order to send data to Elasticsearch or Splunk. Install **Filebeat** if you're using the **Elastic stack** or **Splunk forwarder** if you're using **Splunk**. This is only necessary if the node is in a separated instance from Elasticsearch or Splunk.
 
-    Installing Filebeat:
+    **Installing Filebeat:**
 
     +------------------------------------------------------------------------+-------------------------------------------------------------+
     | Type                                                                   | Description                                                 |
@@ -176,7 +176,7 @@ The following must be considered when configuring the Wazuh app:
     | :ref:`DEB packages <wazuh_server_deb_filebeat>`                        | Install Filebeat on Debian/Ubuntu.                          |
     +------------------------------------------------------------------------+-------------------------------------------------------------+
 
-    Installing Splunk forwarder:
+    **Installing Splunk forwarder:**
 
     +-------------------------------------------------------------------+-------------------------------------------------------------+
     | Type                                                              | Description                                                 |
