@@ -6,6 +6,8 @@ Thus for the test purposes, installing a Virtual Machine such as Virtual Box is 
 
 * To install VirtualBox for Mac, please follow steps in the link <https://www.virtualbox.org/wiki/Downloads>
 
+* To configure Virtual Box, in Machine>Settings>Network select Attached to Bridget Adapter and Name (Wi-Fi)
+
 * Once installed VirtualBox, importing a virtual image (OVA) that contains a wazuh manager along with the ELK . 
 The user can find this image in : <https://documentation.wazuh.com/current/installation-guide/virtual-machine.html>
 
@@ -21,10 +23,13 @@ The wazuh-server login "root" and the password "wazuh"
 * Include the server's ip in etc/conf of the agent side
 
 * in bin of agent's side  ./ossec-control restart
+(mejor esto)
+Library/Ossec/bin/agent-auth -m 192.168.0.160
 
 * Visualize the logs in server side (in logs->head -n10000 ossec.log)
 
 *Visualize the logs in the agent side /Library/Ossec/logs-->nano ossec.log
+If it appears something like "agent-auth: INFO: Started (pid:11244)", connection is right
 
 
 
