@@ -8,7 +8,7 @@ Installing Splunk
 This guide describes the installation process for a Splunk infrastructure comprised of a Splunk Enterprise instance as indexer and a Splunk Forwarder node, as well as the Wazuh app for Splunk.
 
 .. warning::
-    The Wazuh app for Splunk requires the installation of a Wazuh manager and API in order to work properly. Check out the :ref:`installation guide <installation>` before proceeding with Splunk.
+    The Wazuh app for Splunk requires the installation of a Wazuh manager and Wazuh API in order to work properly. Check out the :ref:`installation guide <installation>` before proceeding with Splunk.
 
 These are the two main components in a common Splunk simple distributed architecture:
 
