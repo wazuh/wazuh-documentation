@@ -22,7 +22,9 @@ The wazuh-server login "root" and the password "wazuh"
 
 * in bin of agent's side  ./ossec-control restart
 
-*
+* Visualize the logs in server side (in logs->head -n10000 ossec.log)
+
+*Visualize the logs in the agent side /Library/Ossec/logs-->nano ossec.log
 
 
 
