@@ -1,4 +1,13 @@
 
-# Hello Worl
+# How to install a manager on Mac for test purposes:
+
+In Mac, just the wazuh agent can be installed. However, a Wazuh manager to whom the Wazuh agent would report is necessary.
+Thus for the test purposes, installing a Virtual Machine such as Virtual Box is a solution.
+
+* Once installed VirtualBox, importing a virtual image that contains a wazuh manager along with the ELK . The user can find this image in :
+
+
+*
+
 
 
