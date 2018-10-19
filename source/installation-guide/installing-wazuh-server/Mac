@@ -1,3 +1,8 @@
-# How to install a manager in Mac for test purposes
+.. Copyright (C) 2018 Wazuh, Inc.
+
+.. _installation:
+
+Installing Wazuh server on Mac for test purposes
+=================================================================
 
 In Mac, only the wazuh agent can be installed. However, it is necessary a wazuh Manager to whom the Wazuh agent would report.
