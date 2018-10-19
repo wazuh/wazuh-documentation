@@ -5,7 +5,7 @@
 Update ruleset
 ==============
 
-Run the ``update_ruleset`` binary to update the Wazuh ruleset. You should not need to make any other changes to accommodate the updated rules.
+Run the ``update_ruleset`` script to update the Wazuh ruleset. You should not need to make any other changes to accommodate the updated rules.
 
 Usage examples
 --------------
@@ -31,7 +31,6 @@ All script options: ::
     -s, --source        Select ruleset source path (instead of download it).
     -j, --json          JSON output. It should be used with '-s' or '-S' argument.
     -d, --debug         Debug mode.
-
 
 Configure weekly updates
 ------------------------
