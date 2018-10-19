@@ -14,7 +14,9 @@ The wazuh-server login "root" and the password "wazuh"
 
 * In the following path, /var/ossec/etc/ assure that there are the certificate <sslmanager.cert> and the key <sslmanager.key>
 
-*
+* In /var/ossec/bin/ run the following ./ossec-authd
+
+* 
 
 
 
