@@ -10,7 +10,9 @@ Thus for the test purposes, installing a Virtual Machine such as Virtual Box is 
 The user can find this image in : <https://documentation.wazuh.com/current/installation-guide/virtual-machine.html>
 
 * In File->Import, import the OVA in your virtualization platform and run the virtual machine. 
-The root password is "wazuh" and the username/password for the Wazuh API is "foo/bar".
+The wazuh-server login "root" and the password "wazuh"
+
+* In the following path, /var/ossec/etc/ assure that there are the certificate <sslmanager.cert> and the key <sslmanager.key>
 
 *
 
