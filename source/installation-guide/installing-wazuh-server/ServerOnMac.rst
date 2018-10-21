@@ -13,19 +13,15 @@ Thus for the test purposes, installing a Virtual Machine such as Virtual Box is 
 Installing Wazuh manager
 ------------------------
 
-1. Install the development tools and compilers. In Linux, this can easily be done using your distribution's package manager:
+1. Install VirtualBox for Mac, please follow steps in the link 
 
-  a) For RPM-based distributions:
+  a) Download VirtualBox for MacOS
 
-    .. code-block:: console
+    <https://www.virtualbox.org/wiki/Downloads>
 
-      # yum install make gcc policycoreutils-python automake autoconf libtool
+  b) Configure Virtual Box: Machine>Settings>Network
 
-  b) For Debian-based distributions:
-
-    .. code-block:: console
-
-      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
+    Selecte attached to Bridget Adapter and in name Wi-Fi (in case of being connected to WiFi)
 
 2. Download and extract the latest version:
 
