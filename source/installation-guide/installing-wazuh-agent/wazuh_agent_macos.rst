@@ -23,8 +23,12 @@ By default, all agent files can be found at the following location: ``/Library/O
 Configure Wazuh agent on Mac OS X
 ==================================
 
-1. Include the server's IP in the path ´´etc/conf´´
+1. Include the server's IP (192.168.0.160 in the example) in the path ´´etc/conf´´ with command ´´nano´´
 2. Initiate agent authentication 
-
+::
+        Library/Ossec/bin/agent-auth -m 192.168.0.160
+3. Restart the agent
+::
+./ossec-control restart
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
