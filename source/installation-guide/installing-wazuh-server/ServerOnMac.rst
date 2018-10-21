@@ -51,6 +51,6 @@ In Terminal of Ubuntu (64 Bits)
 Next steps
 ----------
 
-Once you have installed the manager, see more details to connect to the agent :ref:`Intalling Wazuh Agent <wazuh_agent_macos>`.
+Once you have installed the manager, see more details to connect to the agent :ref:`Installing Wazuh Agent <wazuh_agent_macos>`.
 
 
