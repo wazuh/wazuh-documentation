@@ -15,7 +15,7 @@ Installing Wazuh manager
 
 1. Install VirtualBox for Mac, please follow steps in the link 
 
-  a) Download VirtualBox for MacOS
+  a) Download Virtual Box for MacOS
 
     https://www.virtualbox.org/wiki/Downloads
 
@@ -23,23 +23,11 @@ Installing Wazuh manager
 
     Select attached to Bridget Adapter and in name Wi-Fi (in case of being connected to WiFi)
 
-2. Download and extract the latest version:
-
-  .. code-block:: console
-
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.6.1.tar.gz | tar zx
-
-3. Download a virtual image (OVA) that contains a wazuh manager along with the ELK. It can be downloaded from:
+2. Download a virtual image (OVA) that contains a wazuh manager along with the ELK. It can be downloaded from:
 
   https://documentation.wazuh.com/current/installation-guide/virtual-machine.html
 
-4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
-
-  .. code-block:: bash
-
-    1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
-
-5. Import the OVA (File>Import) in Virtual Box and run the virtual machine. The wazuh server login is root and the password wazuh
+3. Import the OVA (File>Import) in Virtual Box and run the virtual machine. The wazuh server login is ``root`` and the password ``wazuh``
   
 
 Installing Wazuh API
