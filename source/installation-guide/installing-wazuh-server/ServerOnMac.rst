@@ -52,6 +52,6 @@ In Terminal of Ubuntu (64 Bits)
 Next steps
 ----------
 
-Once you have installed the manager, to connect to the agent :ref:`Elastic Stack <installation_elastic>`.
+Once you have installed the manager, see more details to connect to the agent :ref:`Intalling Wazuh Agent <wazuh_agent_macos>`.
 1. run ``ifconfig`` to include server-ip address on the agent side
 
