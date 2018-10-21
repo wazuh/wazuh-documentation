@@ -39,16 +39,14 @@ In Terminal of Ubuntu (64 Bits)
 
       # /var/ossec/etc/ 
       
-
-  2. Start the authd server in the Manager in the specified path
+2. Start the authd server in the Manager in the specified path
    
     .. code-block:: console
 
       # /var/ossec/bin/   
       
       # ./ossec-authd 
-
-  3. run ``ifconfig`` to include server-ip address on the agent side
+3. run ``ifconfig`` to include server-ip address on the agent side
   
 Next steps
 ----------
