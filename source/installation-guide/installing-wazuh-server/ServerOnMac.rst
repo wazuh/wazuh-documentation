@@ -2,8 +2,8 @@
 
 .. _sources_installation:
 
-Install Wazuh server from sources
-=================================
+Install Wazuh manager on MacBook Pro
+======================================
 
 In Mac, just the wazuh agent can be installed. However, a Wazuh manager to whom the Wazuh agent would report is necessary.
 Thus for the test purposes, installing a Virtual Machine such as Virtual Box is a solution.
