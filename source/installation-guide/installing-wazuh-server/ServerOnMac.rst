@@ -10,8 +10,8 @@ Thus for the test purposes, installing a Virtual Machine such as Virtual Box is 
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
-Installing Wazuh manager
-------------------------
+Importing the Virtual Image in Virtual Box
+----------------------------------------------
 
 1. Install VirtualBox for Mac, please follow steps in the link 
 
@@ -30,89 +30,28 @@ Installing Wazuh manager
 3. Import the OVA (File>Import) in Virtual Box and run the virtual machine. The wazuh server login is ``root`` and the password ``wazuh``
   
 
-Installing Wazuh API
---------------------
-
-1. NodeJS >= 4.6.1 is required in order to run the Wazuh API. If you do not have NodeJS installed or your version is older than 4.6.1, we recommend you add the official repository as this has more recent versions.
-
-  a) For RPM-based distributions:
-
-    .. code-block:: console
-
-      # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
-      # yum -y install nodejs
-
-  b) For Debian-based distributions:
-
-    .. code-block:: console
-
-      # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-      # apt-get install -y nodejs
-
-  .. note::
-
-    If you are using **Ubuntu 12.04 (Precise)** or **Debian 7 (Wheezy)** you must install NodeJS 6 using the command below: ``# curl -sL https://deb.nodesource.com/setup_6.x | bash -``
-
-    For more information, see the `Official guide to install NodeJS <https://nodejs.org/en/download/package-manager/>`_.
-
-2. Download and execute the installation script:
-
-  .. code-block:: console
-
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.6.1/install_api.sh && bash ./install_api.sh download
-
-3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions.
-
-It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
-
-  .. code-block:: javascript
-
-    config.python = [
-        // Default installation
-        {
-            bin: "python",
-            lib: ""
-        },
-        // Package 'python27' for CentOS 6
-        {
-            bin: "/opt/rh/python27/root/usr/bin/python",
-            lib: "/opt/rh/python27/root/usr/lib64"
-        }
-    ];
-
-  CentOS 6 and Red Hat 6 come with Python 2.6, however, you can install Python 2.7 in parallel and still maintain the older version(s):
-
-  a) For CentOS 6:
-
-    .. code-block:: console
-
-    	# yum install -y centos-release-scl
-    	# yum install -y python27
-
-  b) For RHEL 6:
-
-    .. code-block:: console
-
-    	# yum install python27
-
-    You may need to first enable a repository in order to get python27, with a command like this:
-
-    .. code-block:: console
-
-    	#   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
-    	#   yum-config-manager --enable rhel-server-rhscl-6-rpms
-
-.. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
-
-Installing Filebeat
+In Terminal of Mac
 -------------------
 
-While Filebeat can be installed from source (`see this doc <https://github.com/elastic/beats/blob/master/CONTRIBUTING.md>`_), the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend installing Filebeat via repository package, otherwise, you can install it from a binary tarball that should work for any Linux distro.  See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
+1. Assure that ``sslmanager.cert`` and  ``sslmanager.key`` are in the following path
+  
+    .. code-block:: console
 
-.. warning::
-    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+      # /var/ossec/etc/ 
+      
 
+  2. Start the authd server in the Manager in the specified path
+   
+    .. code-block:: console
+
+      # /var/ossec/bin/   
+      
+      # ./ossec-authd 
+
+  
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+Once you have installed the manager, to connect to the agent :ref:`Elastic Stack <installation_elastic>`.
+1. run ``ifconfig`` to include server-ip address on the agent side
+
