@@ -48,10 +48,11 @@ In Terminal of Ubuntu (64 Bits)
       
       # ./ossec-authd 
 
+  3. run ``ifconfig`` to include server-ip address on the agent side
   
 Next steps
 ----------
 
 Once you have installed the manager, see more details to connect to the agent :ref:`Intalling Wazuh Agent <wazuh_agent_macos>`.
-1. run ``ifconfig`` to include server-ip address on the agent side
+
 
