@@ -30,8 +30,8 @@ Importing the Virtual Image in Virtual Box
 3. Import the OVA (File>Import) in Virtual Box and run the virtual machine. The wazuh server login is ``root`` and the password ``wazuh``
   
 
-In Terminal of Mac
--------------------
+In Terminal of Ubuntu (64 Bits)
+---------------------------------
 
 1. Assure that ``sslmanager.cert`` and  ``sslmanager.key`` are in the following path
   
