@@ -29,6 +29,6 @@ Configure Wazuh agent on Mac OS X
         Library/Ossec/bin/agent-auth -m 192.168.0.160
 3. Restart the agent
 ::
-./ossec-control restart
+        ./ossec-control restart
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
