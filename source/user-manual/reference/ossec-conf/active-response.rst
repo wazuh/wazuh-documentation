@@ -56,7 +56,7 @@ Toggles the active-response capability on and off. Setting this option to ``yes`
 command
 ^^^^^^^
 
-Links the active-response to the command.
+Links the active-response to the command. You can find more information at the :doc:`commands <commands>` section.
 
 +--------------------+-------------------------------------------+
 | **Default value**  | n/a                                       |
