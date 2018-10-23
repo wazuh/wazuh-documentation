@@ -21,6 +21,7 @@ Options
 - `node_name`_
 - `node_type`_
 - `key`_
+- `interval`_
 - `port`_
 - `bind_addr`_
 - `nodes`_
