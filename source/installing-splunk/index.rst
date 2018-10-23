@@ -28,6 +28,8 @@ These are the two main components in a common Splunk simple distributed architec
   .. toctree::
     :maxdepth: 1
 
+    splunk-basic
+    splunk-distributed
     splunk_installation
     splunk_wazuh
     splunk_forwarder
