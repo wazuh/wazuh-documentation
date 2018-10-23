@@ -41,7 +41,7 @@ Query remote configuration
 
 It's now possible to query for the agent configuration in real time.
 
-This on-demand queries allow searching for the currently applied configuration on the manager and each agent in every moment. As you can see on the screenshot with some basic agent information, this query lets to check the current settings about every enabled module.
+These on-demand queries allow searching for the currently applied configuration on the manager and each agent in every moment. As you can see on the screenshot with some basic agent information, this query lets to check the current settings about every enabled module.
 
 .. thumbnail:: ../images/release-notes/kibana-remote-query.png
     :title: Query agent configuration using the Wazuh app
