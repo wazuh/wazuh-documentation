@@ -30,6 +30,7 @@ These are the two main components in a common Splunk simple distributed architec
 
     splunk-basic
     splunk-distributed
+    splunk-forwarder-install
     splunk_installation
     splunk_wazuh
     splunk_forwarder
