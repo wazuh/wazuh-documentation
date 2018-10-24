@@ -80,6 +80,7 @@ We've also added more quality-of-life improvements for the app:
   - New *Actions* column added to the list of agents to quickly open the Discover panel or agent configuration.
   - The *Amazon AWS* tab has been redesigned to include more useful visualizations and your current :ref:`Amazon S3 <amazon>` wodle configuration.
   - The new :ref:`Osquery <osquery>` extension added on this version comes to show scans results in a more meaningful and easy to understand format.
+  - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.
   - Several updates to descriptions and text, more bugfixes, performance improvements, and compatibility with the latest Elastic Stack version.
 
 New features for Splunk plugin
@@ -96,4 +97,5 @@ There are even more improvements and additions to the app, such as:
   - Added an *Inventory data* tab to show :ref:`Syscollector <syscollector>` scans on your agents.
   - Added *app logs* to monitor to check and troubleshoot problems while using the app.
   - The new :ref:`Osquery <osquery>` tab added on this version comes to show scans results in a more meaningful and easy to understand format.
+  - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.
   - Several updates to descriptions and text, more bugfixes, performance improvements, and compatibility with the latest Splunk version.
