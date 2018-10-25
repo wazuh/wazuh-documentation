@@ -50,7 +50,7 @@ Upgrade the Wazuh manager
 -------------------------
 
 .. note::
-  The Syscheck file database is not used anymore at Wazuh v3.7.0. For re-adding to the Wazuh DB the file and registry entries stored at the previous version it is necessary to run the :doc:`migration script <../../user-manual/reference/tools/fim_migrate>`.
+  Since Wazuh v3.7.0 the File Integrity Monitoring database is not used anymore. In order to add to Wazuh DB the file and registry entries stored from previous versions it's necessary to run the :ref:`migration script <fim_migrate>`.
 
 1. Upgrade the ``wazuh-manager`` package:
 
