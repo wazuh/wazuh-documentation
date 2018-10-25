@@ -49,6 +49,9 @@ Upgrade the Wazuh agent
 Upgrade the Wazuh manager
 -------------------------
 
+.. note::
+  The Syscheck file database is not used anymore at Wazuh v3.7.0. For re-adding to the Wazuh DB the file and registry entries stored at the previous version it is necessary to run the :doc:`migration script <../../user-manual/reference/tools/fim_migrate>`.
+
 1. Upgrade the ``wazuh-manager`` package:
 
   a) For CentOS/RHEL/Fedora:
