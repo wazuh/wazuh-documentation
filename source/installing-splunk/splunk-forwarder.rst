@@ -2,20 +2,45 @@
 
 .. _splunk_forwarder:
 
-Splunk Forwarder configuration
-==============================
+Install and configure Splunk Forwarder
+======================================
+
+A Forwarder is required in order to send alerts to the indexer. This component will be installed on the **Wazuh manager instance**.
+
+Installation process
+--------------------
+
+1. Download Splunk Forwarder v7.2.0 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
+
+2. Install it with the following commands depending on your operating system:
+
+  a) For **RPM based** distributions:
+
+  .. code-block:: console
+
+    # yum install splunkforwarder-package.rpm
+
+  b) For **DEB based** distributions:
+
+  .. code-block:: console
+
+    # dpkg --install splunkforwarder-package.deb
+
+3. Ensure Splunk Forwarder v7.2.0 is installed in ``/opt/splunkforwarder``.
+
+Configuration process
+---------------------
 
 This section explains how to configure the Splunk Forwarder to send alerts to the Indexer component.
 
 - **inputs.conf** : The Forwarder needs this file to read data from an input.
-
 - **props.conf** : In order to consume data inputs, Splunk needs to specify what kind of format will handle.
 
 Set up data collection
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 Configuring props
-^^^^^^^^^^^^^^^^^
++++++++++++++++++
 
 1. Download and insert the ``props.conf`` template:
 
@@ -24,7 +49,7 @@ Configuring props
     # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/props.conf
 
 Configuring inputs
-^^^^^^^^^^^^^^^^^^
+++++++++++++++++++
 
 1. Download and insert the ``inputs.conf`` template:
 
@@ -38,9 +63,8 @@ Configuring inputs
 
     # sed -i "s:MANAGER_HOSTNAME:$(hostname):g" /opt/splunkforwarder/etc/system/local/inputs.conf
 
-
 Set up data forwarding
-----------------------
+^^^^^^^^^^^^^^^^^^^^^^
 
 1. Point Forwarder output to Wazuh's Indexer with the following command:
 
