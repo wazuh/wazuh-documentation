@@ -12,7 +12,7 @@ wodle name="syscollector"
 		<wodle name="syscollector">
 		</wodle>
 
-Configuration options of the Syscollector wodle for system monitoring.
+Configuration options of the Syscollector wodle for :ref:`system inventory <syscollector>`.
 
 Options
 -------

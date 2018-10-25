@@ -2,8 +2,8 @@
 
 .. _reference_agent_conf:
 
-Centralized configuration
-=========================
+Centralized configuration (agent.conf)
+======================================
 
 Introduction
 ------------
@@ -323,7 +323,7 @@ The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` 
 
 .. code-block:: shell
 
-    INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'    
+    INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
 
 - Download of file failed:
 
