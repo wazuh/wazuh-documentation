@@ -30,9 +30,16 @@ By default, all agent files will be found in: ``C:\Program Files(x86)\ossec-agen
 Using the command line
 ----------------------
 
+.. note::
+    Unattended installations must be run with administrator permissions.
+
 To install the Windows agent from the command line, run the installer using the following command (the ``/q`` argument is used for unattended installations)::
 
     wazuh-agent-3.7.0-1.msi /q
+
+To uninstall the agent, the original MSI file will be needed to perform the unattended process::
+
+    msiexec.exe /x wazuh-agent-3.7.0-1.msi /qn
 
 You can automate the agent registration with authd using the following parameters:
 
@@ -70,4 +77,5 @@ Usage example::
 
     wazuh-agent-3.7.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" PASSWORD="TopSecret" AGENT_NAME="W2012"
 
-.. note:: Unattended installations must be run with administrator permissions.
+.. warning::
+    In Windows versions older than Windows Server 2008 or Windows 7, it's needed to run the ``ossec-authd`` program on the Wazuh manager with the ``-a`` flag or set the ``<ssl_auto_negotiate>`` option to ``yes`` on the :ref:`auth configuration <reference_ossec_auth>` to avoid compatibility errors.
