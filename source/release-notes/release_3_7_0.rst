@@ -56,9 +56,9 @@ And on the API, it's possible to check all the groups the agent is added:
     }
   }
 
-The agent will be configured with settings from all the groups it's added to.
+The agent will receive the configuration of all the groups where it has been added.
 
-Learn more about this feature in the :ref:`multiple groups <grouping-agents>` documentation.
+Learn more about this feature in the :ref:`multiple groups' <grouping-agents>` documentation.
 
 New module to monitor Microsoft Azure
 -------------------------------------
@@ -68,7 +68,7 @@ The new ``azure-logs`` module for Wazuh has the ability to obtain and read Azure
 There are several ways to monitor the Azure instances:
 
   - **Installing the Wazuh agent on the instances.**
-  - **Monitoring the instances activity through Azure APIs.** This includes data about all resource operations (creation, update and deletion), Azure notifications about the instances, suspicious file executions, health checks, autoscaling events, and so on.
+  - **Monitoring the instances activity through Azure APIs.** This includes data about all resource operations (creation, update, and deletion), Azure notifications about the instances, suspicious file executions, health checks, autoscaling events, and so on.
   - **Monitoring the Azure Active Directory service.** Monitoring management actions such as creation, update or deletion of users. It's possible to receive alerts on the Wazuh manager when some of these events occur on the Azure infrastructure.
 
 .. thumbnail:: ../images/release-notes/azure_integration_diagram.png
@@ -81,7 +81,7 @@ To learn more about this new module and how to configure it, check out the secti
 New module to monitor Docker
 ----------------------------
 
-The new ``docker`` module for Wazuh makes easier to monitor and collect the activity from Docker containers such as starting, stopping or pausing events.
+The new ``docker`` module for Wazuh makes easier to monitor and collect the activity from Docker containers such as creation, running, starting, stopping or pausing events.
 
 In addition to this, and as always, the Wazuh agent can be used to monitor more services and events from the Docker servers, like **File integrity** or **Log data collection**.
 
@@ -147,5 +147,3 @@ The Wazuh app for Splunk also receives lots of new features and improvements on 
   - Added *app logs* to monitor to check and troubleshoot problems while using the app.
   - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.
   - Several bugfixes, performance improvements, and compatibility with the latest Splunk version.
-
-There are more improvements and additions to the app, such as:
