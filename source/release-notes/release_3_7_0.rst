@@ -18,7 +18,24 @@ Adding agents to multiple groups
 
 One of the major enhancements of this new version consists of adding agents to more than one group simultaneously.
 
-With this improvement, now the agents can be set up using multiple configuration files, and this makes possible to share specific configuration blocks between agents, making this process more powerful to configure the environment. The new feature allows consulting all the agent's group information with the ``agent_groups`` tool and on the app using the Wazuh API, like on the example below:
+With this improvement, now the agents can be set up using multiple configuration files, and this makes possible to share specific configuration blocks between agents, making this process more powerful to configure the environment. The new feature allows consulting all the agent's group information with the ``agent_groups`` tool and on the app using the Wazuh API.
+
+In this example, an agent is added to two new groups.
+
+.. code-block:: console
+
+  # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/webserver?pretty"
+  {
+    "error": 0,
+    "data": "Group 'webserver' added to agent '001'."
+  }
+  # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/apache?pretty"
+  {
+    "error": 0,
+    "data": "Group 'apache' added to agent '001'."
+  }
+
+And on the API, it's possible to check all the groups the agent is added:
 
 .. code-block:: console
   :emphasize-lines: 7,8,9,10,11
@@ -39,6 +56,8 @@ With this improvement, now the agents can be set up using multiple configuration
     }
   }
 
+The agent will be configured with settings from all the groups it's added to.
+
 Learn more about this feature in the :ref:`multiple groups <grouping-agents>` documentation.
 
 New module to monitor Microsoft Azure
@@ -48,9 +67,14 @@ The new ``azure-logs`` module for Wazuh has the ability to obtain and read Azure
 
 There are several ways to monitor the Azure instances:
 
-  - **Installing the Wazuh agent on your instances.**
-  - **Monitoring your instances activity through Azure APIs.** This includes data about all resource operations (creation, update, deletion, etc), Azure notifications about your instances, suspicious file executions, health checks, autoscaling events, and so on.
-  - **Monitoring the Azure Active Directory service.** You can monitor management actions such as creation, update or deletion of users. You’ll receive alerts on your Wazuh manager when some of these events occur on your Azure infrastructure.
+  - **Installing the Wazuh agent on the instances.**
+  - **Monitoring the instances activity through Azure APIs.** This includes data about all resource operations (creation, update and deletion), Azure notifications about the instances, suspicious file executions, health checks, autoscaling events, and so on.
+  - **Monitoring the Azure Active Directory service.** Monitoring management actions such as creation, update or deletion of users. It's possible to receive alerts on the Wazuh manager when some of these events occur on the Azure infrastructure.
+
+.. thumbnail:: ../images/release-notes/azure_integration_diagram.png
+  :title: Azure module diagram
+  :align: center
+  :width: 80%
 
 To learn more about this new module and how to configure it, check out the section :ref:`azure`.
 
@@ -59,7 +83,9 @@ New module to monitor Docker
 
 The new ``docker`` module for Wazuh makes easier to monitor and collect the activity from Docker containers such as starting, stopping or pausing events.
 
-The Docker command ``docker pause apache`` will stop the container ``apache`` and will trigger an alert, as seen on the screenshot below from the Wazuh app for Kibana:
+In addition to this, and as always, the Wazuh agent can be used to monitor more services and events from the Docker servers, like **File integrity** or **Log data collection**.
+
+In this example, the Docker command ``docker pause apache`` will stop the container ``apache`` and will trigger an alert, as seen on the screenshot below from the Wazuh app for Kibana:
 
 .. thumbnail:: ../images/release-notes/alert_docker_example.png
     :title: Docker module alert on Kibana's Discover tab
