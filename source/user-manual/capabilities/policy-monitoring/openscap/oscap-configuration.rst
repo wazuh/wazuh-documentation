@@ -41,12 +41,16 @@ This section describes how to evaluate the Payment Card Industry Data Security S
 
 Each agent must be properly identified in order to know which policy and profile to execute.
 
-Agent ``ossec.conf``:
+Agent ``ossec.conf`` file:
 
 ::
 
   <client>
-    <server-ip>10.0.1.4</server-ip>
+    <server>
+      <address>10.0.1.4</address>
+      <port>1514</port>
+      <protocol>tcp</protocol>
+    </server>
     <config-profile>redhat7</config-profile>
   </client>
 
@@ -54,7 +58,7 @@ Agent ``ossec.conf``:
 
 We want to execute the PCI-DSS profile of the SSG RH7 policy only on Red Hat 7 servers.
 
-Manager ``shared/agent.conf``:
+Manager ``/var/ossec/etc/shared/default/agent.conf`` file (assuming that the agent is on the ``default`` group):
 
 ::
 
