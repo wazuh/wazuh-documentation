@@ -15,11 +15,13 @@ FAQ
 #. `Can I force an immediate syscheck scan?`_
 #. `Does Syscheck start when Wazuh starts?`_
 #. `Does Wazuh alert when a new file is created?`_
+#. `How manage FIM historical records in his DDBB?`_
+#. `How can I migrate my old DB information into new SQLite Database?`_
 
 How often does syscheck run?
 --------------------------------
 
-By default, **Syscheck** runs every 6 hours, but the interval between scans can be user-defined with the :ref:`frequency <reference_ossec_syscheck_frequency>` option.
+By default, **Syscheck** runs every 12 hours, but the interval between scans can be user-defined with the :ref:`frequency <reference_ossec_syscheck_frequency>` option.
 
 What is the CPU usage like on the agents?
 -----------------------------------------
@@ -29,7 +31,8 @@ What is the CPU usage like on the agents?
 Where are all the checksums stored?
 -----------------------------------
 
-All of the checksums are stored on the manager ``/var/ossec/queue/syscheck``
+The data collected by the FIM daemon is sent to Analysisd to analyze if we should send an alert. Analysisd sends a query to Wazuh-db to collect old data from that file when we receive a response the checksum is compared with the string sent by the agent. If the checksum changes, we report an alert.
+For version 3.7 the FIM decoder communicates with Wazuh-DB and creates a DDBB with the id of each agent and in the fim_entry table, it stores all the data of the monitored files.
 
 Can I ignore files in a directory?
 ----------------------------------
@@ -74,3 +77,13 @@ Does Wazuh alert when a new file is created?
 --------------------------------------------
 
 Wazuh can send an alert when a new file is created, however, this configuration option would need to be set up by the user. Use the :ref:`alert_new_files option<reference_ossec_syscheck_alert_new_files>` for this configuration.
+
+How manage FIM historical records in his DDBB?
+----------------------------------------------
+
+Since 3.7 version FIM delete old records from DB. The one that is no longer monitored is catalogued as a historical record. The deletion of the DDBB is done, for security reasons, after the agent has been restarted 3 times.
+
+How can I migrate my old DB information into new SQLite Database?
+-----------------------------------------------------------------
+
+We provide a tool to migrate all registries to new DDBB. You can checkit in :doc:`fim upgrade tool <../../reference/tools/fim_migrate>` section.

@@ -27,6 +27,8 @@ For detailed configuration options, go to :ref:`Syscheck <reference_ossec_sysche
 
 To configure syscheck, a list of files and directories must be identified. The ``check_all`` option checks file size, permissions, owner, last modification date, inode and all the hash sums (MD5, SHA1 and SHA256).
 
+.. note::
+        The directories pushed from :doc:`centralized configuration <../../reference/centralized-configuration>` are overwrite in ossec.conf if directory path its the same.
 ::
 
     <syscheck>
