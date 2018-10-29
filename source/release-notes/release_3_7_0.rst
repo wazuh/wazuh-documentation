@@ -137,6 +137,13 @@ The Wazuh app for Kibana includes new features and interface redesigns to make u
   - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.
   - Several bugfixes, performance improvements, and compatibility with the latest Elastic Stack version.
 
+Breaking changes
+^^^^^^^^^^^^^^^^
+
+The new version of the Wazuh app for Kibana introduces a **breaking change** on existing installations when updating the Elasticsearch template. The new, clean installations **won't be affected** by this error.
+
+To learn more about how to fix the error, check out the Kibana app's :ref:`toubleshooting guide <kibana_troubleshooting_3_7_0>`.
+
 New features for Splunk plugin
 ------------------------------
 

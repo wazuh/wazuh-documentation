@@ -238,6 +238,9 @@ Upgrade Elasticsearch
 
 3. Load the Wazuh template for Elasticsearch:
 
+  .. warning::
+    The Wazuh app for Kibana needs the Elasticsearch template in order to work properly, so it's important to make sure that it was properly inserted.
+
   .. code-block:: console
 
     # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
