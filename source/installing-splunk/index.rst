@@ -35,6 +35,6 @@ Find more information about how to scale your environments using Splunk Enterpri
 
     splunk-basic
     splunk-distributed
-    splunk_wazuh
+    splunk-app
     splunk-forwarder
-    splunk_reverse_proxy
+    splunk-reverse-proxy

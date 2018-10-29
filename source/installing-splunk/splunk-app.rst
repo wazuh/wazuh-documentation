@@ -1,9 +1,9 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _splunk_wazuh:
+.. _splunk_app:
 
-Splunk app for Wazuh
-====================
+Install Wazuh app for Splunk
+============================
 
 .. thumbnail:: ../images/splunk-app/splunk-app.png
   :title: Splunk app - Overview > Security events tab
@@ -43,26 +43,19 @@ Installation
 
 3. Open Splunk in your desired browser and click on the Wazuh app icon:
 
-  .. image:: ../images/splunk-app/appconf-0.png
+  .. image:: ../images/splunk-app/app-icon.png
     :align: center
 
 4. The app will redirect you to the *Settings* tab, where you need to fill in the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
 
-  By default, the API port is ``55000``. The default username and password is ``foo:bar``.
+  By default, the API port is ``55000``. The default username and password is ``foo:bar``. It's possible to check the connection by pressing the **Check connection** button on each API entry. A successful message appears on the bottom right corner.
 
   .. note::
     You can get more information about how to set up the credentials at :ref:`securing_api`.
 
-  .. thumbnail:: ../images/splunk-app/appconf-1.png
+  .. thumbnail:: ../images/splunk-app/app-setup.png
+    :title: App initial configuration
     :align: center
-    :title: IP Configuration
     :width: 100%
 
-    You can check the connection by pressing 'Check connection' button on each API entry. A successful message appears in the right bottom corner:
-
-  .. thumbnail:: ../images/splunk-app/appconf-2.png
-    :align: center
-    :title: Checking API connection
-    :width: 100%
-
-Now that you've finished installing Splunk app for Wazuh, you can setup forwarders following :ref:`the next page <splunk_forwarder>`.
+Now that you've finished installing Splunk app for Wazuh, you can install and setup Splunk forwarders on the :ref:`next section <splunk_forwarder>`.

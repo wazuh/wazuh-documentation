@@ -5,10 +5,10 @@
 Install Splunk in single-instance mode
 ======================================
 
+This document will guide you through the installation process for a single-instance distributed architecture, recommended for testing and evaluation purposes, or also for small-medium sized environments.
+
 .. note::
   Many of the commands described below need to be executed with root user privileges.
-
-This document will guide you through the installation process for a single-instance distributed architecture, recommended for testing and evaluation purposes, or also for small-medium sized environments.
 
 These are the two main components in this type of distributed architecture:
 
@@ -64,4 +64,4 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
 You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.0/Admin/CLIadmincommands>`_ .
 
-Now that you've finished installing Splunk on a single-instance mode, you can proceed with the next step and install the :ref:`Wazuh app for Splunk <splunk_wazuh>`.
+Now that you've finished installing Splunk on a single-instance mode, you can proceed with the next step and install the :ref:`Wazuh app for Splunk <splunk_app>`.

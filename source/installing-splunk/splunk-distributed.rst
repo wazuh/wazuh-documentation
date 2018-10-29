@@ -5,10 +5,10 @@
 Install Splunk in multi-instance mode
 =====================================
 
+This document will guide you through the installation process for a multi-instance distributed architecture, recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
+
 .. note::
   Many of the commands described below need to be executed with root user privileges.
-
-This document will guide you through the installation process for a multi-instance distributed architecture, recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
 
 We're going to perform the most basic installation for a multi-instance deployment. We'll use **two instances** of Splunk Enterprise, one of them being the *search head* and the other one, a *search peer* (commonly known as an indexer); we'll also need a Splunk forwarder.
 
@@ -108,4 +108,4 @@ Now that we finished installing the Splunk instances, it's time to choose which 
 
 You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.0/Admin/CLIadmincommands>`_ .
 
-Now that you've finished installing Splunk on a multi-instance mode, you can proceed with the next step and install the :ref:`Wazuh app for Splunk <splunk_wazuh>`.
+Now that you've finished installing Splunk on a multi-instance mode, you can proceed with the next step and install the :ref:`Wazuh app for Splunk <splunk_app>`.
