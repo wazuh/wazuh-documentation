@@ -109,7 +109,7 @@ You have to use the correct versions of Wazuh and the Elastic Stack to work prop
 Failed to parse date field with format ``dateOptionalTime``
 -----------------------------------------------------------
 
-This error message appears when clicking on the **View surrounding documents** option from an alert on the **Discover** tab/panel. This is due to a breaking change introduced on :ref:`Wazuh 3.7.0 <release_3_7_0>`.
+This error message appears when clicking on the **View surrounding documents** option from an alert on the **Discover** tab. This is due to a breaking change introduced on :ref:`Wazuh 3.7.0 <release_3_7_0>`.
 
 In previous versions of Wazuh, the Elasticsearch template had this properties for the ``@timestamp`` field:
 
@@ -120,7 +120,7 @@ In previous versions of Wazuh, the Elasticsearch template had this properties fo
     "format": "dateOptionalTime"
   },
 
-The latest versions of the Elastic Stack show an error message when viewing surrounding documents caused by this format, so now the Elasticsearch template looks like this:
+As of Elastic Stack 6.4.x, the **date format** causes an error when viewing the surrounding documents, and to fix this, the Elasticsearch templated was updated:
 
 .. code-block:: none
 
@@ -128,73 +128,26 @@ The latest versions of the Elastic Stack show an error message when viewing surr
     "type": "date"
   },
 
-Which is a valid format for our integration. However, this solution cause a conflict between the old indices and the new ones created with the updated template.
+The new default date format will be ``strict_date_optional_time||epoch_millis``. To learn more about the custom date formats for Elasticsearch documents, check out `this guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html>`_.
 
-To fix this problem, we can remove the current index, so Elasticsearch can recreate it using the new template.
+This change is not critical and **won't cause any data loss** on Elasticsearch. For now, the only case where this issue appears is on the **View surrounding documents** option. After updating Wazuh and the Elastic Stack following our :ref:`upgrading guide <upgrading_latest_minor>`, the new template will be in use, and the next daily indices will be created using the new date format.
 
-1. List all your indices on Elasticsearch:
-
-  .. code-block:: console
-
-    # curl -XGET http://localhost:9200/_cat/indices?v
-
-    health status index                       uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-    yellow open   wazuh-alerts-3.x-2018.10.25 E1NgknRNR5WPpXd_chj__A   5   1         37            0    119.7kb        119.7kb
-    yellow open   wazuh-alerts-3.x-2018.10.24 DWf9dgKPQWmb5XHixSdjdw   5   1        254            0    396.7kb        396.7kb
-    yellow open   wazuh-alerts-3.x-2018.10.23 susXBOXdRxGEmB0m3GCBmw   5   1      27356            0     15.3mb         15.3mb
-    yellow open   wazuh-alerts-3.x-2018.10.22 vwBF4WseSyurU73LBWM4MQ   5   1       4739            16     2.2mb          2.2mb
-
-2. Stop Logstash:
-
-  .. code-block:: console
-
-    # systemctl stop logstash
-
-3. Remove today's index (in this case, we'll remove the ``wazuh-alerts-3.x-2018.10.25`` index):
-
-  .. code-block:: console
-
-      # curl -XDELETE http://localhost:9200/wazuh-alerts-3.x-2018.10.25
-
-Let's list the Elasticsearch indices once again:
-
-  .. code-block:: console
-
-    # curl -XGET http://localhost:9200/_cat/indices?v
-
-    health status index                       uuid                   pri rep docs.count docs.deleted store.size pri.store.size
-    yellow open   wazuh-alerts-3.x-2018.10.24 DWf9dgKPQWmb5XHixSdjdw   5   1        254            0    396.7kb        396.7kb
-    yellow open   wazuh-alerts-3.x-2018.10.23 susXBOXdRxGEmB0m3GCBmw   5   1      27356            0     15.3mb         15.3mb
-    yellow open   wazuh-alerts-3.x-2018.10.22 vwBF4WseSyurU73LBWM4MQ   5   1       4739            16     2.2mb          2.2mb
-
-4. Insert the latest Elasticsearch template:
-
-  .. code-block:: console
-
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
-
-    {"acknowledged":true}
-
-5. Restart Logstash:
-
-  .. code-block:: console
-
-    # systemctl restart logstash
-
-After some time, a new index will be created, using the new Elasticsearch template.
-
-This will avoid the error, but a warning message will appear:
-
-.. code-block:: none
-
-  Warning: 20 of 25 shards failed
-
-This is due to the fact that the previous indices are using a different mapping from the previous template.
+However, if you want to fix this problem for the affected indices, there are different options that you can try in order to correct them:
 
 .. warning::
-  To avoid the *shards failed* error, we can reindex the indices that used the old template. You can follow our :ref:`reindexation guide <restore_alerts>`.
+  The following methods require stopping the Logstash service before proceeding. After finishing, you can restart it again.
 
-  This process is a bit complex, and we do not recommend it for large amounts of Elasticsearch data.
+- **Reindex indices:** The most basic form of reindexation consists of copying the documents from one index to another. In this case, we use this procedure to create a new index using the updated template, so we can then remove the old one, and finally, reindex the new index into the previous one.
+
+  On the Elasticsearch documentation you can find more info about the `Reindex API <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_.
+
++ **Close indices:** Closing an index will be blocked for read/write operations, so it won't be used when visualizing alerts on Kibana, although the data will be still available for archiving purposes.
+
+  On the Elasticsearch documentation you can find more info about the `Open/Close index API <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-open-close.html>`_.
+
+- **Delete indices:** This method is not suitable for production environments where all the data must be stored or archived. It's more convenient for testing environments, since it's the fastest method to fix the issue.
+
+  On the Elasticsearch documentation you can find more info about the `Delete index API <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-delete-index.html>`_.
 
 None of the above solutions are fixing my problem
 -------------------------------------------------
