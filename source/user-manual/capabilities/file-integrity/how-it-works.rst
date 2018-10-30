@@ -11,8 +11,8 @@ How it works
 1. The Wazuh agent scans the system and sends the checksums and attributes of monitored files and Windows registry keys to the Wazuh manager. The following options are configurable:
 
   - **Frequency**: By default, syscheck runs every 12 hours.
-  - **Real-time monitoring**: Wazuh supports real-time file integrity monitoring on servers running Windows or Linux (Because Solaris does not support Inotify is not available for this system). Note that the real-time option can only be used for directories and not for individual files.
-  - **Whodata**: This feature works like Real-time, in addition provides information about who trigger the event.
+  - **Real-time monitoring**: Wazuh supports real-time file integrity monitoring on servers running Windows or Linux (Solaris does not support Inotify so is not available for this system). Note that the real-time option can only be used for directories and not for individual files.
+  - **Whodata**: This feature works like real-time, in addition provides information about who triggered the event.
 
 2. The Wazuh manager stores the checksums and attributes of the monitored files and looks for modifications by comparing the new values to the old values.
 

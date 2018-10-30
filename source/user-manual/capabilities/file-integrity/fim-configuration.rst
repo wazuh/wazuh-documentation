@@ -28,13 +28,14 @@ For detailed configuration options, go to :ref:`Syscheck <reference_ossec_sysche
 To configure syscheck, a list of files and directories must be identified. The ``check_all`` option checks file size, permissions, owner, last modification date, inode and all the hash sums (MD5, SHA1 and SHA256).
 
 .. note::
-        The directories pushed from :doc:`centralized configuration <../../reference/centralized-configuration>` are overwrite in ossec.conf if directory path its the same.
+  The directories pushed from :ref:`centralized configuration <reference_agent_conf>` are overwrite in the ``ossec.conf`` file if the directory path is the same.
+
 ::
 
-    <syscheck>
-      <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
-      <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
-    </syscheck>
+  <syscheck>
+    <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
+    <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
+  </syscheck>
 
 Configuring scheduled scans
 ---------------------------
@@ -55,10 +56,9 @@ Real-time monitoring is configured with the ``realtime`` option. This option onl
 
 ::
 
-    <syscheck>
-      <directories check_all="yes" realtime="yes">c:/tmp</directories>
-    </syscheck>
-
+  <syscheck>
+    <directories check_all="yes" realtime="yes">c:/tmp</directories>
+  </syscheck>
 
 Configuring who-data monitoring
 --------------------------------
@@ -70,9 +70,9 @@ This functionality uses Linux Audit subsystem and the Microsoft Windows SACL, so
 
 ::
 
-    <syscheck>
-      <directories check_all="yes" whodata="yes">/etc</directories>
-    </syscheck>
+  <syscheck>
+    <directories check_all="yes" whodata="yes">/etc</directories>
+  </syscheck>
 
 .. _how_to_fim_report_changes:
 
@@ -83,9 +83,9 @@ Using the ``report_changes`` option, we can see what specifically changed in tex
 
 ::
 
-    <syscheck>
-      <directories check_all="yes" realtime="yes" report_changes="yes">/test</directories>
-    </syscheck>
+  <syscheck>
+    <directories check_all="yes" realtime="yes" report_changes="yes">/test</directories>
+  </syscheck>
 
 .. _how_to_fim_ignore:
 
@@ -96,64 +96,62 @@ Files and directories can be omitted using the ignore option (or registry_ignore
 
 ::
 
-    <syscheck>
-      <ignore>/etc/random-seed</ignore>
-      <ignore>/root/dir</ignore>
-      <ignore type="sregex">.log$|.tmp</ignore>
-    </syscheck>
+  <syscheck>
+    <ignore>/etc/random-seed</ignore>
+    <ignore>/root/dir</ignore>
+    <ignore type="sregex">.log$|.tmp</ignore>
+  </syscheck>
 
 Configure maximum recursion level allowed
 -----------------------------------------
 
 .. versionadded:: 3.6.0
 
-It is possible to configure the maximum recursion level allowed for a specific directory by setting the ``recursion_level`` option. This option must be an 
+It is possible to configure the maximum recursion level allowed for a specific directory by setting the ``recursion_level`` option. This option must be an
 integer between **0 and 320**. An example of use:
 
 ::
 
-    <syscheck>
-      <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
-      <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
-      <directories check_all="yes" recursion_level="3">folder_test</directories>
-    </syscheck>
+  <syscheck>
+    <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
+    <directories check_all="yes">/root/users.txt,/bsd,/root/db.html</directories>
+    <directories check_all="yes" recursion_level="3">folder_test</directories>
+  </syscheck>
 
 Using the following directory structure and ``recursion_level="3"``:
 
-:: 
-    
-    folder_test
-    ├── file_0.txt
-    └── level_1
-        ├── file_1.txt
-        └── level_2
-            ├── file_2.txt
-            └── level_3
-                ├── file_3.txt
-                └── level_4
-                    ├── file_4.txt
-                    └── level_5
-                        └── file_5.txt
-                            
+::
+
+  folder_test
+  ├── file_0.txt
+  └── level_1
+      ├── file_1.txt
+      └── level_2
+          ├── file_2.txt
+          └── level_3
+              ├── file_3.txt
+              └── level_4
+                  ├── file_4.txt
+                  └── level_5
+                      └── file_5.txt
 
 We will receive alerts for all files up to ``folder_test/level_1/level_2/level_3/`` but we won't receive alerts from any directory deeper than ``level_3``.
 
-If we don't want any recursion (just get alerts from the files in the monitored folder), we must set ``recursion_level`` to 0. 
+If we don't want any recursion (just get alerts from the files in the monitored folder), we must set ``recursion_level`` to 0.
 
-.. warning:: If no ``recursion_level`` is specified, it will be setted to the default value defined by ``syscheck.default_max_depth`` in the :doc:`internal options <../../reference/internal-options>` configuration file.
-
-
+.. warning::
+  If no ``recursion_level`` is specified, it will be setted to the default value defined by ``syscheck.default_max_depth`` in the :doc:`internal options <../../reference/internal-options>` configuration file.
 
 Ignoring files via rules
 ------------------------
 
 It is also possible to ignore files using rules, as in this example::
 
-    <rule id="100345" level="0">
-      <if_group>syscheck</if_group>
-      <match>/var/www/htdocs</match>
-      <description>Ignore changes to /var/www/htdocs</description>
-    </rule>
+  <rule id="100345" level="0">
+    <if_group>syscheck</if_group>
+    <match>/var/www/htdocs</match>
+    <description>Ignore changes to /var/www/htdocs</description>
+  </rule>
 
 Changing severity
 -----------------
@@ -162,8 +160,8 @@ With a custom rule, the level of a **syscheck** alert can be altered when change
 
 ::
 
-    <rule id="100345" level="12">
-      <if_group>syscheck</if_group>
-      <match>/var/www/htdocs</match>
-      <description>Changes to /var/www/htdocs - Critical file!</description>
-    </rule>
+  <rule id="100345" level="12">
+    <if_group>syscheck</if_group>
+    <match>/var/www/htdocs</match>
+    <description>Changes to /var/www/htdocs - Critical file!</description>
+  </rule>
