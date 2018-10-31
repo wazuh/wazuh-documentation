@@ -740,6 +740,15 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed value | Any integer between 1 and 60.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
+|   **remoted.send_timeout**        | Description   | Maximum number of seconds to wait for message delivery in    |
+|                                   |               | TCP.                                                         |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 3.7.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 1                                                            |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | Any integer between 1 and 60.                                |
++-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.worker_pool**         | Description   | Number of threads that process the payload reception         |
 |                                   |               |                                                              |
 |                                   |               | .. versionadded:: 3.3.0                                      |
