@@ -147,17 +147,7 @@ However, if you want to fix this problem for the affected indices, there are dif
 
   On the Elasticsearch documentation you can find more info about the `Delete index API <https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-delete-index.html>`_.
 
-Warning: X of Y shards failed
------------------------------
-
-This warning message appears when you have several Elasticsearch indices that use different mappings. Mapping is the process of defining how a document, and the fields it contains, are stored and indexed. In this case, we use the Wazuh template for Elasticsearch in order to specify the format from some alert fields, so we can properly use it for searching and visualizing on Kibana.
-
-There are several cases in which this message could appear:
-
-- The user **started the Logstash service before inserting the Elasticsearch template**, causing an ingest of Wazuh data into indices without being properly formatted. In this situation, the user will have documents (alerts) using a default mapping, but incompatible with the Wazuh app, and other documents using the proper template, because they were generated after inserting the template.
-- The user **updated the Elasticsearch template to the latest version**. This situation could happen if you had the *Failed to parse date field with format ``dateOptionalTime``* message due to a breaking change on Wazuh 3.7.0.
-
-Both of these cases can be fixed performing a reindexation of the old indices. On the Elasticsearch documentation you can find more info about `how reindexation works <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_.
+This breaking change could lead into a *X of Y shards failed* message because of the presence of old and new Elasticsearch indices using different templates, but it's not critical or harmful.
 
 None of the above solutions are fixing my problem
 -------------------------------------------------

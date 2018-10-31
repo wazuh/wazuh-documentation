@@ -145,7 +145,7 @@ The Wazuh app for Kibana includes new features and interface redesigns to make u
 Breaking changes
 ^^^^^^^^^^^^^^^^
 
-Wazuh 3.7.0 introduces an update to the Elasticsearch template. This will cause a **breaking change** on existing installations, although new installations **won't be affected** by this error.
+Wazuh 3.7.0 introduces an update to the Elasticsearch template. This will cause a **breaking change** in existing installations, although new installations **won't be affected** by this error.
 
 To learn more about how to fix this, check out the Kibana app's :ref:`toubleshooting guide <kibana_troubleshooting_3_7_0>`.
 
