@@ -145,7 +145,7 @@ The Wazuh app for Kibana includes new features and interface redesigns to make u
 Breaking changes
 ^^^^^^^^^^^^^^^^
 
-The new version of the Wazuh app for Kibana introduces a **breaking change** on existing installations when updating the Elasticsearch template. The new, clean installations **won't be affected** by this error.
+The new version of the Elastic Stack introduces a **breaking change** on existing installations when updating the Elasticsearch template. The new installations **won't be affected** by this error.
 
 To learn more about how to fix the error, check out the Kibana app's :ref:`toubleshooting guide <kibana_troubleshooting_3_7_0>`.
 

@@ -109,9 +109,9 @@ You have to use the correct versions of Wazuh and the Elastic Stack to work prop
 Failed to parse date field with format ``dateOptionalTime``
 -----------------------------------------------------------
 
-This error message appears when clicking on the **View surrounding documents** option from an alert on the **Discover** tab. This is due to a breaking change introduced on :ref:`Wazuh 3.7.0 <release_3_7_0>`.
+This error message appears when clicking on the **View surrounding documents** or **View single document** buttons from an alert on the **Discover** tab. This is due to a breaking change introduced on :ref:`Wazuh 3.7.0 <release_3_7_0>`.
 
-In previous versions of Wazuh, the Elasticsearch template had this properties for the ``@timestamp`` field:
+In previous versions of Wazuh, the Elasticsearch template had these properties for the ``@timestamp`` field:
 
 .. code-block:: none
 
@@ -127,8 +127,6 @@ As of Elastic Stack 6.4.x, the **date format** causes an error when viewing the 
   "@timestamp": {
     "type": "date"
   },
-
-The new default date format will be ``strict_date_optional_time||epoch_millis``. To learn more about the custom date formats for Elasticsearch documents, check out `this guide <https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping-date-format.html>`_.
 
 This change is not critical and **won't cause any data loss** on Elasticsearch. For now, the only case where this issue appears is on the **View surrounding documents** option. After updating Wazuh and the Elastic Stack following our :ref:`upgrading guide <upgrading_latest_minor>`, the new template will be in use, and the next daily indices will be created using the new date format.
 
