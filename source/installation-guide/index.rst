@@ -34,7 +34,7 @@ The diagrams below list the components that are run per host for single-host and
 
 **Distributed architecture**:
 
-.. thumbnail:: ../images/installation/installing_wazuh.png
+.. thumbnail:: ../images/installation/installing_wazuh_distributed.png
     :title: Installing Wazuh server - distributed architecture
     :align: center
     :width: 100%
