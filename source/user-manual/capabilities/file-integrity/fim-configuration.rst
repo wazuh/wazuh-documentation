@@ -28,7 +28,7 @@ For detailed configuration options, go to :ref:`Syscheck <reference_ossec_sysche
 To configure syscheck, a list of files and directories must be identified. The ``check_all`` option checks file size, permissions, owner, last modification date, inode and all the hash sums (MD5, SHA1 and SHA256).
 
 .. note::
-  The directories pushed from :ref:`centralized configuration <reference_agent_conf>` are overwrite in the ``ossec.conf`` file if the directory path is the same.
+  The directories pushed from :ref:`centralized configuration <reference_agent_conf>` are overwritten in the ``ossec.conf`` file if the directory path is the same.
 
 ::
 
@@ -107,8 +107,7 @@ Configure maximum recursion level allowed
 
 .. versionadded:: 3.6.0
 
-It is possible to configure the maximum recursion level allowed for a specific directory by setting the ``recursion_level`` option. This option must be an
-integer between **0 and 320**. An example of use:
+It is possible to configure the maximum recursion level allowed for a specific directory by setting the ``recursion_level`` option. This option must be an integer between **0 and 320**. An example of use:
 
 ::
 
