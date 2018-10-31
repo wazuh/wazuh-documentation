@@ -15,7 +15,7 @@ FAQ
 #. `Can I force an immediate syscheck scan?`_
 #. `Does Syscheck start when Wazuh starts?`_
 #. `Does Wazuh alert when a new file is created?`_
-#. `How FIM manages historical records in his DDBB?`_
+#. `How manage FIM historical records in his database?`_
 #. `How can I migrate my old DB information into new SQLite Database?`_
 
 How often does syscheck run?
@@ -31,9 +31,9 @@ What is the CPU usage like on the agents?
 Where are all the checksums stored?
 -----------------------------------
 
-The data collected by the FIM daemon is sent to Analysisd to analyze if we should send an alert. Analysisd sends a query to Wazuh-db to collect old data from that file when we receive a response the checksum is compared with the string sent by the agent. If the checksum changes, we report an alert.
+The data collected by the FIM daemon is sent to Analysisd to analyze if we should send an alert. Analysisd sends a query to Wazuh-db to collect old data from that file. When we receive a response the checksum is compared with the string sent by the agent and if the checksum changes, we report an alert.
 
-For Wazuh 3.7.0 the FIM decoder communicates with Wazuh-DB and creates a DDBB with the ID of each agent and on the ``fim_entry`` table, and it stores all the data of the monitored files.
+For Wazuh 3.7.0 the FIM decoder communicates with Wazuh-DB and stores all data in an SQL database. One is created for each agent that stores information related to it, in the ``fim_entry`` table are the FIM records.
 
 Can I ignore files in a directory?
 ----------------------------------
@@ -79,12 +79,12 @@ Does Wazuh alert when a new file is created?
 
 Wazuh can send an alert when a new file is created, however, this configuration option would need to be set up by the user. Use the :ref:`alert_new_files option<reference_ossec_syscheck_alert_new_files>` for this configuration.
 
-How FIM manages historical records in his DDBB?
------------------------------------------------
+How manage FIM historical records in his database?
+----------------------------------------------
 
-Since Wazuh 3.7.0, FIM delete the old records from DB. The one that is no longer monitored is catalogued as a historical record. The deletion of the DDBB is done, for security reasons, after the agent has been restarted 3 times.
+Since Wazuh 3.7.0, FIM deletes old records from DB. The one that is no longer monitored is catalogued as a historical record. The deletion of the database is done, for security reasons, after the agent has been restarted 3 times.
 
-How can I migrate my old DB information into new SQLite Database?
+How can I migrate my old DB information into a new SQLite Database?
 -----------------------------------------------------------------
 
-We provide a tool to migrate all registries to new DDBB. You can checkit in :ref:`fim upgrade tool <fim_migrate>` section.
+We provide a tool to migrate all registries to new database. You can checkit in :ref:`fim upgrade tool <fim_migrate>` section.
