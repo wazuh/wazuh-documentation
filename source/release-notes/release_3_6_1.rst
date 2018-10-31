@@ -13,8 +13,8 @@ This section shows the most relevant improvements and fixes in version 3.6.1. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.6.1-6.4.1/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.6.1-7.1.3/CHANGELOG.md>`_
 
-Wazuh core
-----------
+Bugfixes and performance improvements
+-------------------------------------
 
 This release is a patch version that fixes some issues encountered in v3.6.0. Some of them are listed below:
 
@@ -26,8 +26,8 @@ This release is a patch version that fixes some issues encountered in v3.6.0. So
 - We have improved the AWS integration parser and its capabilities.
 - Some other fixes have been applied on this version.
 
-Wazuh API
----------
+Active Response requests through the API
+----------------------------------------
 
 In this version, the API makes it possible to send Active Response requests, including custom commands that are not declared in the configuration.
 

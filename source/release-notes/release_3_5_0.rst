@@ -13,28 +13,35 @@ This section shows the most relevant improvements and fixes in version 3.5.0. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.5.0-6.3.2/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.5.0-7.1.2/CHANGELOG.md>`_
 
-Wazuh core
-----------
+New module for Osquery integration
+----------------------------------
 
-- A new integration with osquery is shown, this will provide new scheduled results for the manager:
+A new integration with osquery is shown, this will provide new scheduled results for the manager:
 
-    - The osquery daemon will be launched in background.
-    - Filter events by osquery by adding a new option in ``<location>`` rules.
-    - Enrich osquery configuration with pack files aggregation and agent labels.
-    - Support folders in shared configuration.
+- The osquery daemon will be launched in background.
+- Filter events by osquery by adding a new option in ``<location>`` rules.
+- Enrich osquery configuration with pack files aggregation and agent labels.
+- Support folders in shared configuration.
 
-- Parallelized remoted daemon:
+Parallelized performance of Remoted daemon
+------------------------------------------
 
-    - Up to 16 parallel threads to decrypt messages from agents.
-    - Frequency of agent keys reloading limited.
-    - Message input buffer in Analysisd to prevent control messages starvation in Remoted.
+- Up to 16 parallel threads to decrypt messages from agents.
+- Frequency of agent keys reloading limited.
+- Message input buffer in Analysisd to prevent control messages starvation in Remoted.
 
-- Vulnerability Detector has been enhanced, adding support for other operating systems and improving the configuration of OVAL updates.
+New features for vulnerability detector module
+----------------------------------------------
 
-    - Added ``feed`` tag for updating each operating system OVAL, allowing to set a different configuration for each of them.
-    - Packages already scanned won't be checked unless no Syscollector scans are detected in a period longer than 24 hours.
-    - Added arch check for Red Hat's OVAL.
-    - Force the vulnerability detection in unsupported OS with the ``<allow>`` attribute.
+Vulnerability Detector has been enhanced, adding support for other operating systems and improving the configuration of OVAL updates.
+
+- Added ``feed`` tag for updating each operating system OVAL, allowing to set a different configuration for each of them.
+- Packages already scanned won't be checked unless no Syscollector scans are detected in a period longer than 24 hours.
+- Added arch check for Red Hat's OVAL.
+- Force the vulnerability detection in unsupported OS with the ``<allow>`` attribute.
+
+Bugfixes and improvements for Wazuh core
+----------------------------------------
 
 - Fixed alerts format in Vulnerability Detector. When showing Vulnerability Detector alerts from a Red Hat agent, an RHSA patch was shown instead of a CVE. This patch consists in various CVEs compressed. The RHSA patches are unpackaged and alerts manifest that the system is vulnerable to each of the CVEs contained in that RHSA.
 
@@ -58,8 +65,8 @@ Wazuh core
     - Storage of multiple addresses/netmasks/broadcasts per interface in the DB.
     - CentOS 5 compatibility to run the network scan.
 
-Wazuh API
----------
+Bugfixes and improvements for Wazuh API
+---------------------------------------
 
 - Added information about the user who made the request in the API logs.
 - New option for downloading the wpk using HTTP in ``agent_upgrade``.
@@ -67,15 +74,15 @@ Wazuh API
 - Added new API requests for syscollector.
 - Ignore uppercase and lowercase sorting an array.
 
-Wazuh ruleset
--------------
+New Wazuh Ruleset updates and additions
+---------------------------------------
 
 - Added rules for the new osquery integration.
 - Improved CIS-CAT rules.
 - Ingoring syscollector events rule added.
 
-Wazuh app for Kibana
---------------------
+New features for Kibana plugin
+------------------------------
 
 - As part of the Elastic Stack v6.3.x compatibility process, now we have support for Kuery as query language for the app search bars.
 - Added new tab on Configuration to show the current Wazuh app configuration file values.

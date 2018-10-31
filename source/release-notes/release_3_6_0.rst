@@ -12,21 +12,16 @@ This section shows the most relevant improvements and fixes in version 3.6.0. Mo
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.6.0/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.6.0-6.4.0/CHANGELOG.md>`_
 
-Wazuh core
-----------
-
-This section shows the main features introduced in this new version for the Wazuh core.
-
-Logcollector
-^^^^^^^^^^^^
+Improvements for Log Collector
+------------------------------
 
 Logcollector has been enhanced with two new features:
 
 - Now it works in multithread mode. This will improve the throughput and prevent delays among outputs.
 - Wildcard reloading is now supported: files that match a wild-carded location will be monitored, no need to restart the agent.
 
-File integrity monitoring
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Improvements and new features for File Integrity Monitoring
+-----------------------------------------------------------
 
 The **policy monitoring** (rootcheck) and **file integrity monitoring** (syscheck) engines now run independently, so they both can perform a scan at the same time.
 
@@ -35,22 +30,22 @@ Two new features have been added to **file integrity monitoring**:
 - Tags for monitored items. This will make alert matching and classification easier.
 - A new option to limit the recursion level (scanning folder depth) has been introduced.
 
-Wazuh modules
-^^^^^^^^^^^^^
+Wazuh modules enhancements
+--------------------------
 
 - Introducing a re-work of the AWS S3 integration, now supporting CloudTrail, GuardDuty, Macie, IAM, and VPC Flow log data.
 - The download of OVAL files for Vulnerability Detector has been fixed since Red Hat has changed its protocol to send this files.
 - Custom command execution (wodle command) supports MD5/SHA1/SHA256 validation of the target binary for execution authorization.
 
-Log analysis and management
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+New Log Analysis and management features
+----------------------------------------
 
 - The manager will provide remote message statistics, including counting of messages received or dropped, and number of active TCP sessions.
 - The size limit for logs has been extended from 6 KiB to 64 KiB.
 - The analysis engine now interprets the *hostname* field of the input logs as the name of the agent, instead of name+IP. This allows CDB list lookup of agent name.
 
-Wazuh app for Kibana
---------------------
+New features for Kibana plugin
+------------------------------
 
 - Support for Kibana v6.4.0.
 - Added new options to config.yml to change shards and replicas settings for wazuh-monitoring indices.
@@ -58,8 +53,8 @@ Wazuh app for Kibana
 - The welcome tabs in Overview and Agents have been updated with a new name and description for the existing sections.
 - Adapted for Internet Explorer 11.
 
-Wazuh app for Splunk
---------------------
+New features for Splunk plugin
+------------------------------
 
 The Splunk app has been redesigned from the ground based on Material Design.
 

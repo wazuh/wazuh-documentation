@@ -13,8 +13,8 @@ This section shows the most relevant improvements and fixes in version 3.3.0. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.3.0-6.2.4/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.3.0-7.1.1/CHANGELOG.md>`_
 
-Wazuh core
-----------
+Bugfixes and improvements for Wazuh core
+----------------------------------------
 
 Logcollector now supports socket connection for log output mirroring. This feature allows to send the same event to the Wazuh manager and to a 3rd party log processor like Fluent Bit. You can find more information :ref:`here <reference_ossec_socket>`.
 
@@ -28,8 +28,8 @@ The implementation of the Agentless daemon has been improved for enhanced securi
 
 Some other fixes and improvements have been introduced in the Framework and the Cluster.
 
-Wazuh API
----------
+Bugfixes and improvements for Wazuh API
+---------------------------------------
 
 The API now has filters by group on the ``GET /agents`` call and by status on the ``GET /agents/groups/:group_id`` and ``GET /agents/groups/:group_id`` calls.
 
@@ -37,8 +37,8 @@ Now the ``limit`` parameter has been modified to retrieve all items using ``limi
 
 In addition to this, several bugfixes and performance improvements for the API have been added.
 
-Wazuh app for Kibana
---------------------
+New features for Kibana plugin
+------------------------------
 
 - New design for the *Overview* and *Agents* tabs, following a breadcrumbs-based navigability to change between different sections.
 - New Reporting option, for generating logs about the current state of the visualizations on the *Overview* and *Agents* tabs.
@@ -46,8 +46,8 @@ Wazuh app for Kibana
 - Added a warning when your system doesn't have more than 3GB of RAM.
 - Several bugfixes and performance improvements.
 
-Wazuh app for Splunk
---------------------
+New features for Splunk plugin
+------------------------------
 
 - Added monitoring for collecting periodical agent status data.
 - Now the ``.wazuh`` index will be the default one if no one is selected.
