@@ -8,7 +8,7 @@
 
 .. meta::
   :description: Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
-  :keywords: wazuh, ossec, security, compliance, intrusion-detection, policy-monitoring, elasticsearch, openscap, file-integrity-management, log-analysis, vulnerability-detection, incident-response
+  :keywords: wazuh, ossec, security, compliance, intrusion detection, policy monitoring, elasticsearch, openscap, file integrity management, log analysis, vulnerability detection, incident response
   :author: Wazuh, Inc.
 
 Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level. This solution, based on lightweight multi-platform agents, provides the following capabilities:

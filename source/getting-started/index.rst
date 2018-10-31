@@ -7,7 +7,7 @@
 =================
 
 .. meta::
-  :description: Get started with the Wazuh components and how each one is involved.
+  :description: Get started with the Wazuh components and learn how each one is involved.
   :keywords: wazuh, elastic stack, openscap, architecture
   :author: Wazuh, Inc.
 

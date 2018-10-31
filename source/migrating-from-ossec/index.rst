@@ -7,7 +7,7 @@
 ======================
 
 .. meta::
-  :description: Learn why it's a good reason to upgrade your infrastructure moving it to Wazuh.
+  :description: Learn why it's a good reason to upgrade your infrastructure migrating it to Wazuh.
   :keywords: wazuh, ossec, security, upgrade, recommendations
   :author: Wazuh, Inc.
 
