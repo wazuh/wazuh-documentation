@@ -57,7 +57,11 @@ You can automate the agent registration with authd using the following parameter
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   TIME_RECONNECT      |  Sets the time in seconds until a reconnection attempt.                                                                      |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-|   CERTIFICATE         |  Specifies the certificate path.                                                                                             |
+|   CERTIFICATE         |  Specifies the certificate of authority path.                                                                                |
++-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   PEM                 |  Specifies the certificate path.                                                                                             |
++-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   KEY                 |  Specifies the key path.                                                                                                     |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   AGENT_NAME          |  Designates the agent's name. By default will be the computer name.                                                          |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
@@ -66,8 +70,26 @@ You can automate the agent registration with authd using the following parameter
 | \/l\*v installer.log  |  Generates a log of the installation process, including verbose messages.                                                    |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 
-Usage example::
+Below there are some examples to install and register a Windows agent.
+
+Registration with password::
 
     wazuh-agent-3.7.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" PASSWORD="TopSecret" AGENT_NAME="W2012"
+
+Registration with relative path to CA. It will be searched at your `APPLICATIONFOLDER` folder::
+
+    wazuh-agent-3.7.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" AGENT_NAME="W2019" CERTIFICATE="rootCA.pem"
+
+Absolute paths to CA, certificate or key that contain spaces can be written as shown below::
+
+    wazuh-agent-3.7.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" KEY="C:\Progra~2\sslagent.key" PEM="C:\Progra~2\sslagent.cert"
+
+The number "2" means that the file will be searched at the second occurrence of the "Progra" word, thus, the key and certificate would be searched at the folder "C:\\Program Files (x86)". In case this number was "1", it would be searched at "Program Files".
+
+.. note:: To verify agents via SSL, it is necessary use both, KEY and PEM options. See the :ref:`verify hosts with SSL <verify-hosts>` section.
+
+Registration with protocol::
+
+    wazuh-agent-3.7.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" AGENT_NAME="W2016" PROTOCOL="TCP"
 
 .. note:: Unattended installations must be run with administrator permissions.
