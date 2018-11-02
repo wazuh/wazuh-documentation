@@ -18,7 +18,6 @@ Options
 -------
 
 - `alerts_log`_
-- `compress_alerts`_
 - `email_notification`_
 - `email_to`_
 - `email_from`_
