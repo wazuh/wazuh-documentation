@@ -65,6 +65,8 @@ You can automate the agent registration with authd using the following parameter
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   AGENT_NAME          |  Designates the agent's name. By default will be the computer name.                                                          |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+|   GROUP               |  Assigns the specified group to the agent.                                                                                   |
++-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   \/l  installer.log  |  Generates a log of the installation process.                                                                                |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 | \/l\*v installer.log  |  Generates a log of the installation process, including verbose messages.                                                    |
@@ -75,6 +77,10 @@ Below there are some examples to install and register a Windows agent.
 Registration with password::
 
     wazuh-agent-3.7.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" PASSWORD="TopSecret" AGENT_NAME="W2012"
+
+Registration with password and assigning a group::
+
+    wazuh-agent-3.7.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" PASSWORD="TopSecret" GROUP="my-group"
 
 Registration with relative path to CA. It will be searched at your `APPLICATIONFOLDER` folder::
 
