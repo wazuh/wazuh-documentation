@@ -39,7 +39,7 @@ You can automate the agent registration with authd using the following parameter
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 | Option                | Description                                                                                                                  |
 +=======================+==============================================================================================================================+
-|   APPLICATIONFOLDER   |  Sets the installation path. Default C:\Program Files (x86)\ossec-agent\.                                                    |
+|   APPLICATIONFOLDER   |  Sets the installation path. Default C:\\Program Files (x86)\\ossec-agent\\.                                                 |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   ADDRESS             |  Specifies the managers IP address or hostname. This option also accepts a list of IPs or hostnames separated by semicolons. |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
