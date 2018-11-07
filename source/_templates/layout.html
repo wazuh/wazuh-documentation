@@ -1,10 +1,11 @@
 {# TEMPLATE VAR SETTINGS #}
+{% set dash_separator = " &dash; " %}
 {%- set url_root = pathto('', 1) %}
 {% set script_files = script_files + ["_static/my-script.js"] %}
 {% set css_files = css_files + ["_static/my-styles.css"] %}
 {%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
 {%- if not embedded and docstitle %}
-  {%- set titlesuffix = " &mdash; "|safe + docstitle|e %}
+  {%- set titlesuffix = " &dash; "|safe + docstitle|e %}
 {%- else %}
   {%- set titlesuffix = "" %}
 {%- endif %}
@@ -17,7 +18,11 @@
   {{ metatags }}
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {% block htmltitle %}
-  <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+    {%- if not parents[-1] %}
+      <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+    {%- else %}
+      <title>{{ title|striptags|e }}{{ dash_separator }}{{ parents[-1].title|striptags|e }}{{ titlesuffix }}</title>
+    {%- endif %}
   {% endblock %}
 
   {# Google Analytics #}
@@ -107,7 +112,7 @@
           {% if logo and theme_logo_only %}
             <a href="{{ pathto(master_doc) }}">
           {% else %}
-            <a href="{{ pathto(master_doc) }}" class="icon icon-home"> {{ project }}
+            <a href="{{ pathto(master_doc) }}" class="icon icon-home"> Documentation
           {% endif %}
 
           {% if logo %}
