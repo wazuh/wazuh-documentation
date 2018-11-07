@@ -30,9 +30,10 @@ High availability
 
 Server eventually fail: hardware can be broken, a human can turn them off, the system can go down... And while the server is restored, you won't be able to see what is happening in your agents. Using a cluster you make sure your agents will always have a manager to report to.
 
-.. image:: ../../images/manual/cluster/introduction_cluster.png
+.. thumbnail:: ../../images/manual/cluster/cluster_infrastructure.png
+    :title: Wazuh cluster infrastructure
     :align: center
-
+    :width: 80%
 
 Types of nodes
 ^^^^^^^^^^^^^^
@@ -64,9 +65,6 @@ Worker nodes are responsible of two main tasks:
 
     - Synchronizing :ref:`integrity files <integrity-thread>` from the master node.
     - Sending :ref:`agent status updates <agent-info-thread>` to the master.
-
-.. note::
-    The API can be used from any node. For performance reasons, it is recommended to use it mainly in the master node.
 
 Getting started
 ---------------
@@ -161,10 +159,32 @@ Agent registration in the cluster
 **All agents must be registered in the master node**. The master is responsible for replicating the new agent's information across all worker nodes. If an agent is registered in a worker node, it will be deleted by the master node.
 
 
-Configuring the Wazuh Kibana App
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Configuring the Wazuh app for Kibana/Splunk
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The Wazuh Kibana App can point to the API of any node in the cluster. It is recommended to point it to the master's API for performance reasons.
+The following must be considered when configuring a Wazuh app:
+
+    - The apps must be configured to point to the master's API.
+    - All worker nodes need an event forwarder in order to send data to Elasticsearch or Splunk. Install **Filebeat** if you're using the **Elastic stack** or **Splunk forwarder** if you're using **Splunk**. This is only necessary if the node is in a separated instance from Elasticsearch or Splunk.
+
+    **Installing Filebeat:**
+
+    +------------------------------------------------------------------------+-------------------------------------------------------------+
+    | Type                                                                   | Description                                                 |
+    +========================================================================+=============================================================+
+    | :ref:`RPM packages <wazuh_server_rpm_filebeat>`                        | Install Filebeat on CentOS/RHEL/Fedora.                     |
+    +------------------------------------------------------------------------+-------------------------------------------------------------+
+    | :ref:`DEB packages <wazuh_server_deb_filebeat>`                        | Install Filebeat on Debian/Ubuntu.                          |
+    +------------------------------------------------------------------------+-------------------------------------------------------------+
+
+    **Installing Splunk forwarder:**
+
+    +-------------------------------------------------------------------+-------------------------------------------------------------+
+    | Type                                                              | Description                                                 |
+    +===================================================================+=============================================================+
+    | :ref:`RPM/DEB packages <splunk_installation_forwarder>`           | Install Splunk forwarder for RPM or DEB based OS.           |
+    +-------------------------------------------------------------------+-------------------------------------------------------------+
+
 
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -174,31 +194,6 @@ The best setup to report agents' events to a cluster is a load balancer. Keep in
 * **It is recommended to use TCP protocol instead of UDP**. Permanent connections and stickiness are needed in order to make sure agent data is consistent. In order to use the TCP protocol, you should configure both your :ref:`agents <server_protocol>` and your :ref:`nodes <manager_protocol>`.
 
 * **Disable the option**  :ref:`use_source_ip <auth_use_source_ip>` **in your authd configuration**. When using a LB, the cluster nodes will only see the LB's IP and no the agents'. This will make the agents unable to connect to the cluster.
-
-Forwarding alerts from your nodes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-All your nodes need an event forwarder in order to send data to Elasticsearch or Splunk. This means that if you are using our Elastic stack integration you must configure Filebeat as forwarder, if you are using our Splunk integration you must configure the Splunk forwarder. If your node is installed in the same instance as the indexer you can skip the forwarder step.
-
-Installing Filebeat:
-
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| Type                                                                   | Description                                                 |
-+========================================================================+=============================================================+
-| :ref:`RPM packages <wazuh_server_rpm_filebeat>`                        | Install Filebeat on CentOS/RHEL/Fedora.                     |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`DEB packages <wazuh_server_deb_filebeat>`                        | Install Filebeat on Debian/Ubuntu.                          |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-
-Installing Splunk forwarder:
-
-+-------------------------------------------------------------------+-------------------------------------------------------------+
-| Type                                                              | Description                                                 |
-+===================================================================+=============================================================+
-| :ref:`RPM packages <splunk_installation_forwarder>`               | Install Splunk forwarder on CentOS/RHEL/Fedora.             |
-+-------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`DEB packages <splunk_installation_forwarder>`               | Install Splunk forwarder on Debian/Ubuntu.                  |
-+-------------------------------------------------------------------+-------------------------------------------------------------+
 
 .. _run-cluster-centos6:
 

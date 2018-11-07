@@ -10,7 +10,7 @@ Splunk app for Wazuh
   :align: center
   :width: 85%
 
-Wazuh app for Splunk offers an UI to visualize Wazuh alerts and API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
+Wazuh app for Splunk offers a UI to visualize Wazuh alerts and Wazuh API data. Wazuh helps you to gain deeper security visibility into your infrastructure by monitoring hosts at an operating system and application level.
 
 Installation
 ------------
@@ -24,10 +24,6 @@ Installation
 2. Install the Splunk app for Wazuh:
 
   The app uses the ``/SplunkAppForWazuh/default/indexes.conf`` file to create an index named 'wazuh' and ``/SplunkAppForWazuh/default/inputs.conf`` file to listen to forwarded data on port 9997.
-
-  .. warning::
-
-    In case you have an Indexer cluster, first delete `indexes.conf` and `inputs.conf` files to avoid index creation in the current instance, then install the app on the Search Head and configure a 'wazuh' index following the `Splunk official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.0/Indexer/useforwarders>`_ .
 
   a. CLI mode:
 
@@ -50,14 +46,19 @@ Installation
   .. image:: ../images/splunk-app/appconf-0.png
     :align: center
 
-4. Fill in the Username and Password fields with your credentials; you can get more information about how to do this at :ref:`securing_api`. Enter ``http(s)://MANAGER_IP`` for the URL where ``MANAGER_IP`` is the Wazuh manager IP address and use "55000" for the Port:
+4. The app will redirect you to the *Settings* tab, where you need to fill in the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
+
+  By default, the API port is ``55000``. The default username and password is ``foo:bar``.
+
+  .. note::
+    You can get more information about how to set up the credentials at :ref:`securing_api`.
 
   .. thumbnail:: ../images/splunk-app/appconf-1.png
     :align: center
     :title: IP Configuration
     :width: 100%
 
-You can check the connection by pressing 'Check connection' button on each API entry. A successful message appears in the right bottom corner:
+    You can check the connection by pressing 'Check connection' button on each API entry. A successful message appears in the right bottom corner:
 
   .. thumbnail:: ../images/splunk-app/appconf-2.png
     :align: center

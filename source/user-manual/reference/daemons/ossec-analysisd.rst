@@ -32,7 +32,7 @@ The ``ossec-analysisd`` program receives the log messages and compares them to t
 Daemon multithreaded internal structure
 ---------------------------------------
 
-.. thumbnail:: ../../../images/manual/analysisd-structure.png
+.. thumbnail:: ../../../images/manual/analysisd-diagram/analysisd-structure.png
     :title: Analysisd architecture
     :align: center
     :width: 100%
@@ -77,7 +77,7 @@ Flow example of an event
 
 The image below shows the flow for a Rootcheck event that generates an alert.
 
-.. thumbnail:: ../../../images/manual/analysisd-flow-example.png
+.. thumbnail:: ../../../images/manual/analysisd-diagram/analysisd-flow-example.png
     :title: Flow example
     :align: center
     :width: 100%

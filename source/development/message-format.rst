@@ -213,9 +213,10 @@ For agents with unrestricted address (address ``any`` or netmask different from 
 
 This is the **encryption flow chart**:
 
-.. image:: ../images/development/encryption_flow.png
+.. thumbnail:: ../images/development/encryption_flow.png
+    :title: OSSEC message encryption flow chart
     :align: center
-    :width: 50%
+    :width: 60%
 
 Network protocol
 ~~~~~~~~~~~~~~~~
