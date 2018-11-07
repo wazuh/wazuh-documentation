@@ -59,9 +59,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Documentation'
-copyright = u'2018, Wazuh, Inc'
+project = u'Wazuh'
 author = u'Wazuh, Inc.'
+copyright = u'2018 - Wazuh, Inc'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -189,7 +189,7 @@ html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
 html_show_sphinx = False
 
 # If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
-#html_show_copyright = True
+html_show_copyright = True
 
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the
