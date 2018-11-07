@@ -5,6 +5,8 @@
 syscheck_control
 ================
 
+.. deprecated:: 3.7.0
+
 The syscheck_control program provides an interface for managing and viewing the integrity checking database.
 
 +----------------------+----------------------------------------------------------+
