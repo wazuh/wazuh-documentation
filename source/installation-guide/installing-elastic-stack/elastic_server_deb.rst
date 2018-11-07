@@ -53,7 +53,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.4.2
+    # apt-get install elasticsearch=6.4.3
 
 2. Enable and start the Elasticsearch service:
 
@@ -83,7 +83,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.4.2",
+        "number" : "6.4.3",
         "build_flavor" : "default",
         "build_type" : "deb",
         "build_hash" : "053779d",
@@ -117,7 +117,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.4.2-1
+    # apt-get install logstash=1:6.4.3-1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -172,7 +172,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=6.4.2
+    # apt-get install kibana=6.4.3
 
 2. Install the Wazuh app plugin for Kibana:
 
@@ -187,7 +187,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.6.1_6.4.2.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.6.1_6.4.3.zip
 
   .. warning::
 
@@ -232,9 +232,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
     # apt-get update
-    
+
   Alternately, you can set the package state to 'hold', which will stop updates (you can still upgrade it manually with the apt-get install)
-  
+
   .. code-block:: console
 
     # echo "elasticsearch hold" | sudo dpkg --set-selections

@@ -151,7 +151,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # apt-get install filebeat=6.4.2
+    # apt-get install filebeat=6.4.3
 
 3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 

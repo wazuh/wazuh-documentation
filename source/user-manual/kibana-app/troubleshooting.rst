@@ -15,10 +15,10 @@ This section collects common installation or usage problems on the Wazuh app, an
     .. code-block:: console
 
         "kibana": {
-            "version": "6.4.2"
+            "version": "6.4.3"
         },
 
-    Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.4.2`` then your installed Kibana version must be ``6.4.2``.
+    Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.4.3`` then your installed Kibana version must be ``6.4.3``.
 
     You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
