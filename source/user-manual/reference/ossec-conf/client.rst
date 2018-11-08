@@ -149,6 +149,8 @@ Specifies the protocol to use when connecting to manager.
 | **Allowed values** | udp, tcp |
 +--------------------+----------+
 
+.. _reference_ossec_client_config_profile:
+
 config-profile
 ^^^^^^^^^^^^^^
 
