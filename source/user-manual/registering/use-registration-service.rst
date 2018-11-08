@@ -157,6 +157,8 @@ On the agent side, the key can be put in a file of the same name or specified as
 
         # /var/ossec/bin/agent-auth -m 192.168.1.2 -P "abcd1234"
 
+.. _verify-hosts:
+
 Use SSL to verify hosts
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
