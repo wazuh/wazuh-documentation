@@ -100,11 +100,11 @@ Absolute paths to CA, certificate or key that contain spaces can be written as s
 The number "2" means that the file will be searched at the second occurrence of the "Progra" word, thus, the key and certificate would be searched at the folder "C:\\Program Files (x86)". In case this number was "1", it would be searched at "Program Files".
 
 .. note::
-    To verify agents via SSL, it is necessary use both, KEY and PEM options. See the :ref:`verify hosts with SSL <verify-hosts>` section.
+    To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <verify-hosts>` section.
 
 Registration with protocol::
 
     wazuh-agent-3.7.0-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" AGENT_NAME="W2016" PROTOCOL="TCP"
 
 .. warning::
-    In Windows versions older than Windows Server 2008 or Windows 7, it's needed to run the ``ossec-authd`` program on the Wazuh manager with the ``-a`` flag or set the ``<ssl_auto_negotiate>`` option to ``yes`` on the :ref:`auth configuration <reference_ossec_auth>` to avoid compatibility errors.
+    In Windows versions older than Windows Server 2008 or Windows 7, it's necessary to run the ``ossec-authd`` program on the Wazuh manager with the ``-a`` flag or set the ``<ssl_auto_negotiate>`` option to ``yes`` on the :ref:`auth configuration <reference_ossec_auth>` to avoid compatibility errors.
