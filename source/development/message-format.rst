@@ -115,7 +115,7 @@ Random
     +---------+----------+
 
 Global counter
-    Most significative part of the message counter.
+    Most significant part of the message counter.
 
     +---------+-----------+
     | Size    | 10 digits |
@@ -124,7 +124,7 @@ Global counter
     +---------+-----------+
 
 Local counter
-    Least significative part of the message counter.
+    Least significant part of the message counter.
 
     +---------+----------+
     | Size    | 4 digits |

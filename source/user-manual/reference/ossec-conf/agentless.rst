@@ -68,7 +68,7 @@ Defines the username and the name of the agentless host.
 state
 ^^^^^
 
-Determines whether the type of checkis periodic or periodic_diff.
+Determines whether the type of check is periodic or periodic_diff.
 
 +--------------------+--------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                              |

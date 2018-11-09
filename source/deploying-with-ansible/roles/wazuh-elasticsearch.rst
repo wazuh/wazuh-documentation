@@ -22,13 +22,13 @@ You can create a YAML file ``wazuh-elastic.yml`` to be used by Ansible playbook:
 
 You can set your custom variable definitions for different environments, for example:
 
-a. For production enviroment ``vars-production.yml``:
+a. For production environment ``vars-production.yml``:
 
 .. code-block:: yaml
 
     elasticsearch_network_host: '10.1.1.10'
 
-b. For development enviroment ``vars-development.yml``:
+b. For development environment ``vars-development.yml``:
 
 .. code-block:: yaml
 

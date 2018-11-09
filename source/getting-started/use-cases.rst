@@ -156,7 +156,7 @@ Below is an example of an alert generated when a monitored file is changed. Meta
                     "id":"0",
                     "name":"root"
                 },
-                "proccess":{
+                "process":{
                     "id":"82845",
                     "name":"/bin/nano",
                     "ppid":"3195"

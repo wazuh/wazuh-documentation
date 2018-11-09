@@ -52,7 +52,7 @@ Configure the Wazuh agent client buffer on linux-agent
         allows a Wazuh agent to limit the rate at which it sends log events to the Wazuh Manager.  If events are produced at
         a rate in excess of the configured eps limit, then they are stored in a leaky bucket queue until the eps rate slows
         down enough that the queue contents can be sent along to the Wazuh Manager.  If the queue gets full, then any new
-        events are droped, i.e the bucket leaks.  Various alerts are sent to the Wazuh Manager about all of this.
+        events are dropped, i.e the bucket leaks.  Various alerts are sent to the Wazuh Manager about all of this.
 
     +-----------------------------------------------------------------------------------------------+
     | **Wazuh Agent Client Buffer**                                                                 |
@@ -131,7 +131,7 @@ Generate a log flood on linux-agent
         # chmod 700 /usr/local/bin/makeflood
         # makeflood
 
-3. Notice that the periods representing log messages are scrolling acrosss the screen at a rate well above our 20 eps limit.
+3. Notice that the periods representing log messages are scrolling across the screen at a rate well above our 20 eps limit.
 
 
 See what happened according to Kibana

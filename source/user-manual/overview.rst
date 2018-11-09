@@ -32,7 +32,7 @@ Components
 Elastic Stack
 -------------
 
-Elastic Stack is used to index, browse and visualize Wazuh alerts data. In addition, the Wazuh app for Kibana can be used to visualize configuration settings, rules, decoders, and agent's status information. The dashboards used for this visualizaiton include, but are not limited to policy, compliance and file integrity monitoring.
+Elastic Stack is used to index, browse and visualize Wazuh alerts data. In addition, the Wazuh app for Kibana can be used to visualize configuration settings, rules, decoders, and agent's status information. The dashboards used for this visualization include, but are not limited to policy, compliance and file integrity monitoring.
 
 
 Components

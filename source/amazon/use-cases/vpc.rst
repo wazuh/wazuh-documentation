@@ -37,4 +37,4 @@ These alerts can be easily analyzed using visualizations like the following one:
     :align: center
     :width: 100%
 
-On that visualization you can look for peaks in your network, once you found a peak you can filter the alerts generated on that time and check which IPs were comunicating. Since IP address is a field used in many AWS alerts, you'll probably found other alerts and find out what happened.
+On that visualization you can look for peaks in your network, once you found a peak you can filter the alerts generated on that time and check which IPs were communicating. Since IP address is a field used in many AWS alerts, you'll probably found other alerts and find out what happened.

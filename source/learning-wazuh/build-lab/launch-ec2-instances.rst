@@ -75,7 +75,7 @@ Launch a Wazuh Server instance
 - Click **[Next: Configure Security Group]**
 - Choose *Select an existing security group* and then select only the *Wazuh Linux* security group.
 - Click **[Review and Launch]** and then **[Launch]**.
-- Select the "Wazuh Lab" key pair, check the acknowledgement box and click **[Launch Instances]**
+- Select the "Wazuh Lab" key pair, check the acknowledgment box and click **[Launch Instances]**
 
 .. thumbnail:: ../../images/learning-wazuh/build-lab/select-key-pair.png
     :title: Key pair
