@@ -24,7 +24,7 @@ how easily we can augment existing log records with additional context informati
 
 
 Set up Suricata on both elastic-server and linux-agent
------------------------------------------------------
+------------------------------------------------------
 
 - On both agents as root, install Suricata and its dependencies, along with the Emerging Threats Open ruleset.
 
