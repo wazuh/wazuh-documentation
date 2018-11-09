@@ -281,4 +281,4 @@ attacking IPs or targeted account names, AR can also be used to take any kind of
 firing.
 
 - **Custom alerting**: Collect additional context and send a detailed custom email alert about a specific situation.
-- **Recovery actions**: Respond to certain error logs with automated action tofix the problem.
+- **Recovery actions**: Respond to certain error logs with automated action to fix the problem.
