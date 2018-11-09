@@ -416,7 +416,7 @@ Since Wazuh v3.3.0 it is possible to include any decoded field (static or dynami
 list
 ^^^^
 
-Preform a CDB lookup using an ossec list.  This is a fast on disk database which will always find keys within two seeks of the file.
+Perform a CDB lookup using an ossec list.  This is a fast on disk database which will always find keys within two seeks of the file.
 
 +--------------------+-------------------------------------------------------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                                                               |

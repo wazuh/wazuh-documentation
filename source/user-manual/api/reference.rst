@@ -8,7 +8,7 @@ Reference
 ======================
 This API reference is organized by resources:
 
-* `Active_Response`_
+* `Active Response`_
 * `Agents`_
 * `Cache`_
 * `Ciscat`_
@@ -28,7 +28,7 @@ Below is the `Request List`_ that shows all of the available requests.
 Request List
 ---------------------------------
 
-`Active_Response`_
+`Active Response`_
 	* PUT /active-response/:agent_id  (`Run an AR command in the agent`_)
 
 `Agents`_
@@ -156,7 +156,7 @@ Request List
 	* GET /syscollector/:agent_id/ports  (`Get ports info of an agent`_)
 	* GET /syscollector/:agent_id/processes  (`Get processes info`_)
 
-Active_Response
+Active Response
 ----------------------------------------
 Command
 ++++++++++++++++++++++++++++++++++++++++
