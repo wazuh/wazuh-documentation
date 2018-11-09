@@ -23,7 +23,7 @@ to the appropriate agents. Lastly, we will do a little GeoIP enrichment of the S
 how easily we can augment existing log records with additional context information to make them more valuable.
 
 
-Set up Suricata on both elasic-server and linux-agent
+Set up Suricata on both elastic-server and linux-agent
 -----------------------------------------------------
 
 - On both agents as root, install Suricata and its dependencies, along with the Emerging Threats Open ruleset.
@@ -137,9 +137,9 @@ Instead of adding the above directly to ``ossec.conf`` on each Linux agent, this
 configuration facility.  This is a powerful feature that makes it feasible to manage the varied configurations of a diverse fleet of systems running
 Wazuh agent.  Search the online documentation for "Centralized Configuration" for the full details about this.  In short, groups of agents share common
 configuration content served up to them by Wazuh manager.  Agents automatically pick up and apply changes made to this content on the manager, and merge
-the shared configation with their local configuration.
+the shared configuration with their local configuration.
 
-1. Add elasic-server and linux-agent to a new agent group called "linux".
+1. Add elastic-server and linux-agent to a new agent group called "linux".
 
     - Create an agent group called "linux" which will cover all shared Linux agent configuration elements.
 

@@ -7,7 +7,7 @@ Variables references
 
 .. _wazuh_ansible_reference_elasticsearch:
 
-Elasticseach
+Elasticsearch
 ===================
 
 elasticsearch_cluster_name
@@ -166,7 +166,7 @@ filebeat_create_config:
   *Default true*
 
 filebeat_prospectors:
-  Set filebeat propectors to fetch data.
+  Set filebeat prospectors to fetch data.
 
   *Example:* ::
 

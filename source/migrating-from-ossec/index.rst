@@ -30,7 +30,7 @@ Scalability and reliability
 * TCP support for agent-manager communications.
 * Anti-flooding feature to prevent large burst of events from being lost or negatively impact network performance.
 * AES encryption used for agent-manager communications (instead of Blowfish).
-* Multi-thread support for manager processes, dramatically increaing their performance.
+* Multi-thread support for manager processes, dramatically increasing their performance.
 
 Installation and configuration management
 +++++++++++++++++++++++++++++++++++++++++

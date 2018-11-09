@@ -40,7 +40,7 @@ Run the installer to both install and self-register
 
         .\\wazuh-agent-3.1.0-1.msi /q ADDRESS="172.30.0.10" AUTHD_SERVER="172.30.0.10" PROTOCOL="tcp" PASSWORD="please123" AGENT_NAME="windows-agent"
 
-    It should look like tis
+    It should look like this
 
     .. thumbnail:: ../../images/learning-wazuh/build-lab/pshell-2.png
         :title: powershell

@@ -35,7 +35,7 @@ you find should look like this:
     Jan 24 17:15:47 linux-agent sshd[1635]: Invalid user blimey from 208.103.56.41 port 34372
 
 
-The really important alert output file written to by Wazuh is /var/ossec/logs/alerts/alerts.json.  It consists of sigle-line JSON
+The really important alert output file written to by Wazuh is /var/ossec/logs/alerts/alerts.json.  It consists of single-line JSON
 records containing much more detail than what the alerts.log file shows.  These JSON records are conveyed by Filebeat to Logstash
 for enrichment and insertion into Elasticsearch.  From there they can then be seen with Kibana.  Here is a beautified example of
 the JSON record in alerts.json that corresponds to the same alert above in alerts.log.
@@ -343,6 +343,6 @@ the hierarchical way that rules are evaluated.
         Description: 'sshd: brute force trying to get access to the system.'
     **Alert to be generated.
 
-Congatulations on your completion of your first "Learning Wazuh" lab!
+Congratulations on your completion of your first "Learning Wazuh" lab!
 
 Before moving on, you might be interested to look at  more detailed documentation about Wazuh rules `here <https://documentation.wazuh.com/current/user-manual/ruleset/index.html#field>`_.

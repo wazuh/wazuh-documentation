@@ -82,11 +82,11 @@ The following fields are received in FIM alerts when who-data is enabled:
 |                              |                                                                                                                    |
 | **(Audit) Process name**     |                                                                                                                    |
 +------------------------------+                                                                                                                    +
-| **audit.proccess.id**        |                                                                                                                    |
+| **audit.process.id**         |                                                                                                                    |
 |                              |                                                                                                                    |
-| **audit.proccess.name**      |                                                                                                                    |
+| **audit.process.name**       |                                                                                                                    |
 +------------------------------+--------------------------------------------------------------------------------------------------------------------+
-| **audit.proccess.ppid**      | Contains the parent process ID of the process used to modify the monitored file.                                   |
+| **audit.process.ppid**       | Contains the parent process ID of the process used to modify the monitored file.                                   |
 +------------------------------+--------------------------------------------------------------------------------------------------------------------+
 
 Alert examples
@@ -195,7 +195,7 @@ Alert in JSON format:
                 "id":"0",
                 "name":"root"
             },
-            "proccess":{
+            "process":{
                 "id":"82845",
                 "name":"/bin/nano",
                 "ppid":"3195"
