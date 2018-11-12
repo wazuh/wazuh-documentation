@@ -18,13 +18,16 @@ This tool is not included in the Wazuh installation, but you can download it fro
 
     # curl -so fim_migrate https://raw.githubusercontent.com/wazuh/wazuh/v3.7.0/tools/migration/fim_migrate.py
 
-Add execution permission and run this tool as follows:
+Add execution permission and run this tool on the manager instance as follows:
 
 .. code-block:: console
 
     # chmod +x fim_migrate
 
     # ./fim_migrate
+
+.. note::
+    After completing the migration process, the old FIM databases won't be removed automatically. To do so, remove the contents from the ``/var/ossec/queue/syscheck`` folder.
 
 Options
 -------
@@ -43,7 +46,6 @@ Options
 +--------------------------+----------------------------------------------------------------------------------------+
 | ``-d``                   | Debug mode.                                                                            |
 +--------------------------+----------------------------------------------------------------------------------------+
-
 
 Example of use
 --------------
