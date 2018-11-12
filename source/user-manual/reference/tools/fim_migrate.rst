@@ -7,7 +7,10 @@ fim_migrate
 
 .. versionadded:: 3.7.0
 
-The *fim_migrate* tool allows to migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB.
+The *fim_migrate* tool allows to migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB. This tool must be executed after the :ref:`upgrading process <upgrading_wazuh>` has been completed.
+
+.. note::
+    The new database will be available at ``/var/ossec/queue/db``.
 
 Usage
 -----
@@ -26,8 +29,8 @@ Add execution permission and run this tool on the manager instance as follows:
 
     # ./fim_migrate
 
-.. note::
-    After completing the migration process, the old FIM databases won't be removed automatically. To do so, remove the contents from the ``/var/ossec/queue/syscheck`` folder.
+.. warning::
+    After completing the migration process, the old FIM databases won't be removed automatically. To do so, remove the ``/var/ossec/queue/syscheck`` folder.
 
 Options
 -------
