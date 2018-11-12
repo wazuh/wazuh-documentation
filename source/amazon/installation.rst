@@ -23,6 +23,10 @@ Storing AWS logs on S3
 ----------------------
 Depending on the AWS service to be monitored, the necessary steps to follow are different.
 
+.. note::
+
+        All types of compression except ``Snappy`` are supported.
+
 CloudTrail
 ^^^^^^^^^^
 
