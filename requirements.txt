@@ -1,0 +1,3 @@
+Sphinx==1.6.5
+sphinx-rtd-theme==0.2.4
+sphinxcontrib-images==0.7.0
