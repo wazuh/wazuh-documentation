@@ -25,7 +25,7 @@ Depending on the AWS service to be monitored, the necessary steps to follow are 
 
 .. note::
 
-        All types of compression except ``Snappy`` are supported.
+        Encryption and all types of compression except ``Snappy`` are supported.
 
 CloudTrail
 ^^^^^^^^^^
