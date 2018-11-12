@@ -88,13 +88,13 @@ Now that we finished installing the Splunk instances, it's time to choose which 
 
 2. On the **search peer** instance we need to add the files to configure the Wazuh indexes:
 
-  a) Download and insert the ``inputs.conf`` template:
+  a) Download and insert the ``inputs.conf`` template to configure where the data will come from:
 
     .. code-block:: console
 
-      # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer_props.conf
+      # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer_inputs.conf
 
-  a) Download and insert the ``input.conf`` template:
+  a) Download and insert the ``indexes.conf`` template to configure the indexes:
 
     .. code-block:: console
 

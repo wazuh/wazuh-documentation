@@ -7,6 +7,9 @@ Install and configure Splunk Forwarder
 
 A Forwarder is required in order to send alerts to the indexer. This component will be installed on the **Wazuh manager instance**.
 
+- On a **single-instance architecture**, the forwarder points to the Splunk Enterprise instance where the Wazuh app was installed.
+- On a **multi-instance architecture**, the forwarder points to the *search peers* (or indexers), and not the *search head*.
+
 Installation process
 --------------------
 
@@ -33,8 +36,8 @@ Configuration process
 
 This section explains how to configure the Splunk Forwarder to send alerts to the Indexer component.
 
-- **inputs.conf** : The Forwarder needs this file to read data from an input.
-- **props.conf** : In order to consume data inputs, Splunk needs to specify what kind of format will handle.
+- ``inputs.conf`` : The Forwarder needs this file to read data from an input.
+- ``props.conf`` : In order to consume data inputs, Splunk needs to specify what kind of format will handle.
 
 Set up data collection
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -67,9 +70,6 @@ Set up data forwarding
 ^^^^^^^^^^^^^^^^^^^^^^
 
 1. Point Forwarder output to Wazuh's Indexer with the following command:
-
-  .. image:: ../images/splunk-app/simple-distributed-arch.png
-    :align: center
 
   .. code-block:: console
 
