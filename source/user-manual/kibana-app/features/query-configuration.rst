@@ -5,7 +5,7 @@
 Query configuration
 ===================
 
-The actual configuration of an agent, or the manager can be queried on demand by clicking on the *Agents* tab or the *Management* tab. From here you will be able to fetch the loaded configuration in real time.
+The actual configuration of an agent, or the manager can be queried on demand by clicking on the *Agents* tab or the *Management* tab. From here you will be able to fetch the active configuration in real time.
 
 .. image:: ../../../images/kibana-app/features/query-configuration/tab-agent.png
   :align: center
@@ -61,7 +61,7 @@ A list of the avaiable configurations to query on *Agent* is shown bellow:
   - Osquery
   - AWS
 
-By clicking on the *Log collection* configuration, the loaded configuration is shown:
+By clicking on the *Log collection* configuration, the active configuration is shown:
 
 .. image:: ../../../images/kibana-app/features/query-configuration/logcollector-query.png
   :align: center
