@@ -146,7 +146,7 @@ Generate and sign an SSL certificate and key for Logstash (on Elastic Server)
         # cp /etc/pki/tls/openssl.cnf custom_openssl.cnf
         # LINE=$((`grep -nF "[ v3_ca ]" custom_openssl.cnf | cut -d: -f1`+1))
         # sed -i "$LINE"'isubjectAltName = IP: 172.30.0.20' custom_openssl.cnf
-        # openssl req -x509 -batch -nodes -days 3650 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
+        # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
         # ls -alh /etc/logstash/logstash.key /etc/logstash/logstash.crt
         # rm -f custom_openssl.cnf
 
