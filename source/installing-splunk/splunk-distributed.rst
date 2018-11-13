@@ -18,8 +18,10 @@ We're going to perform the most basic installation for a multi-instance deployme
 
 You can have multiple search peer instances, but in this case we're going to stick with the essentials.
 
-.. image:: ../images/splunk-app/distributed-arch.png
+.. thumbnail:: ../images/splunk-app/distributed-arch.png
   :align: center
+  :width: 90%
+  :title: Diagram of a multi-instance Splunk architecture
 
 .. warning::
   This documentation will install Splunk using the multi-instance deployment schema. If you want a simpler installation, check out the :ref:`single-instance <splunk_basic>` deployment schema.
