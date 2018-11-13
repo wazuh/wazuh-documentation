@@ -59,7 +59,7 @@ interval
 Time between vulnerabilities detections.
 
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 1m                                                                                                                                       |
+| **Default value**  | 5m                                                                                                                                       |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).        |
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
@@ -148,7 +148,7 @@ The following configuration allows you to use the vulnerability database for Deb
 
 	<wodle name="vulnerability-detector">
 	  <disabled>no</disabled>
-	  <interval>1m</interval>
+	  <interval>5m</interval>
 	  <run_on_start>yes</run_on_start>
 	  <feed name="debian-9">
 	    <disabled>no</disabled>

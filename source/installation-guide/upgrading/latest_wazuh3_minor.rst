@@ -49,6 +49,9 @@ Upgrade the Wazuh agent
 Upgrade the Wazuh manager
 -------------------------
 
+.. note::
+  Since Wazuh v3.7.0 the File Integrity Monitoring database is not used anymore. In order to add to Wazuh DB the file and registry entries stored from previous versions it's necessary to run the :ref:`migration script <fim_migrate>`.
+
 1. Upgrade the ``wazuh-manager`` package:
 
   a) For CentOS/RHEL/Fedora:
@@ -161,6 +164,9 @@ Upgrade Elasticsearch
     }
 
 3. Load the Wazuh template for Elasticsearch:
+
+  .. warning::
+    **Updating the Elasticsearch template** to the latest version is mandatory in order to **avoid compatibility issues** with the latest versions of Wazuh and the Elastic Stack.
 
   .. code-block:: console
 

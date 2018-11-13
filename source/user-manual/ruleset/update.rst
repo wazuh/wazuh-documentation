@@ -3,16 +3,18 @@
 .. _ruleset_update:
 
 Update ruleset
-===============
+==============
 
-Run the ``update_ruleset.py`` script to update the Wazuh ruleset.  You should not need to make any other changes to accommodate the updated rules.
+Run the ``update_ruleset`` script to update the Wazuh ruleset. You should not need to make any other changes to accommodate the updated rules.
 
 Usage examples
-----------------
+--------------
 
-Update Decoders, Rules and Rootchecks: ::
+Update Decoders, Rules and Rootchecks:
 
-   $ /var/ossec/bin/update_ruleset
+.. code-block:: console
+
+   # /var/ossec/bin/update_ruleset
 
 All script options: ::
 
@@ -30,9 +32,8 @@ All script options: ::
     -j, --json          JSON output. It should be used with '-s' or '-S' argument.
     -d, --debug         Debug mode.
 
-
 Configure weekly updates
--------------------------
+------------------------
 
 Run ``update_ruleset`` weekly and keep your Wazuh Ruleset installation up to date by adding a crontab job to your system.
 

@@ -10,10 +10,14 @@ Filtering data using queries
 Advance filtering is possible using the Wazuh API's queries. Queries are specified using the ``q`` parameter. A query has the following structure:
 
 * **Field name**: Field name to filter by. If an incorrect field name is used, an error will be raised.
-* **Operator**: Operator to filter by. Available operators are ``=``, ``!=``, ``<`` and ``>``.
+* **Operator**: Operator to filter by:
+    * ``=``: equality.
+    * ``!=``: not equality.
+    * ``<``: smaller.
+    * ``>``: bigger.
+    * ``~``: like as.
 * **Value**: Value to filter filter by.
 * **Separator**: Operator to join multiple "queries":
-
     * ``,``: represents an ``OR``.
     * ``;``: represents an ``AND``.
 
@@ -23,7 +27,7 @@ Examples
 Filtering agents by OS name and OS version
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For example, to filter ubuntu agents with a version higher than 12, the following query would be used:
+For example, to filter Ubuntu agents with a version higher than 12, the following query would be used:
 
 .. code-block:: javascript
 
@@ -125,6 +129,46 @@ An example of using the OR operator can be filtering Ubuntu or CentOS agents:
         }
     }
 
+Another example using the ``~`` operator is the following:
+
+.. code-block:: javascript
+
+    $ curl -u foo:bar "localhost:55000/agents?pretty&q=os.name~cent"
+    {
+        "error": 0,
+        "data": {
+            "items": [
+                {
+                    "os": {
+                    "arch": "x86_64",
+                    "codename": "Core",
+                    "major": "7",
+                    "name": "CentOS Linux",
+                    "platform": "centos",
+                    "uname": "Linux |localhost.localdomain |3.10.0-862.11.6.el7.x86_64 |#1 SMP Tue Aug 14 21:49:04 UTC 2018 |x86_64",
+                    "version": "7"
+                    },
+                    "name": "agent002",
+                    "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+                    "node_name": "master",
+                    "status": "Active",
+                    "lastKeepAlive": "2018-10-16 16:36:36",
+                    "mergedSum": "bcb219b9b009801f3b29eb9e00a6a88d",
+                    "id": "002",
+                    "group": [
+                    "default"
+                    ],
+                    "manager": "localhost.localdomain",
+                    "version": "Wazuh v3.7.0",
+                    "dateAdd": "2018-10-16 13:34:24",
+                    "ip": "192.168.122.19"
+                }
+            ],
+            "totalItems": 1
+        }
+    }
+
+
 Filtering rootcheck events by date
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -180,5 +224,3 @@ A more precise timeframe can be specified using operators ``>`` and ``<`` togeth
             ]
         }
     }
-
-
