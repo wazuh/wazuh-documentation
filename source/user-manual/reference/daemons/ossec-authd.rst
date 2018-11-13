@@ -5,7 +5,7 @@
 ossec-authd
 ===========
 
-The ossec-authd program can automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.  ``ossec-authd`` creates an agent with an IP address of "any" instead of using a specifig IP address.
+The ossec-authd program can automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.  ``ossec-authd`` creates an agent with an IP address of "any" instead of using a specific IP address.
 
 .. warning::
 

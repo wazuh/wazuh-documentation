@@ -10,29 +10,87 @@ This section shows the most relevant improvements and fixes in version 3.7.0. Mo
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.7.0/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.7.0/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.7.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.7.0-6.4.2/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.7.0-6.4.3/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.7.0-7.2.0/CHANGELOG.md>`_
 
 Adding agents to multiple groups
 --------------------------------
 
-One of the most relevant enhancements of this new version consists of adding agents to more than one group simultaneously.
+One of the major enhancements of this new version consists of adding agents to more than one group simultaneously.
 
-With this improvement, it's now possible to merge configuration from several groups and send it to the agents who belong to those groups. Every agent will have a centralized configuration comprised of different groups' configuration.
+With this improvement, now the agents can be set up using multiple configuration files, and this makes possible to share specific configuration blocks between agents, making this process more powerful to configure the environment. The new feature allows consulting all the agent's group information with the ``agent_groups`` tool and on the app using the Wazuh API.
 
-The new feature allows consulting all the agent's group information at *agent_groups* CLI and at the app with the RESTful API. You can learn more about this feature at the :ref:`multiple groups <grouping-agents>` documentation.
+In this example, an agent is added to two new groups.
 
-New Wazuh module to monitor Microsoft Azure
--------------------------------------------
+.. code-block:: console
+
+  # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/webserver?pretty"
+  {
+    "error": 0,
+    "data": "Group 'webserver' added to agent '001'."
+  }
+  # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/apache?pretty"
+  {
+    "error": 0,
+    "data": "Group 'apache' added to agent '001'."
+  }
+
+And on the API, it's possible to check all the groups the agent is added:
+
+.. code-block:: console
+  :emphasize-lines: 7,8,9,10,11
+
+  # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/agents/001?pretty"
+  {
+    "error": 0,
+    "data": {
+      "status": "Active",
+      "configSum": "f993610d3e6d7bfd7c008b4fb6deb8a5",
+      "group": [
+        "default",
+        "webserver",
+        "apache"
+      ],
+      "name": "ag-windows-12",
+      ...
+    }
+  }
+
+The agent will receive the configuration of all the groups where it has been added.
+
+Learn more about this feature in the :ref:`multiple groups' <grouping-agents>` documentation.
+
+New module to monitor Microsoft Azure
+-------------------------------------
 
 The new ``azure-logs`` module for Wazuh has the ability to obtain and read Azure logs through several service APIs. This helps to monitor all the activity happening in the infrastructure, just by setting up the module to monitor the virtual machines that form the infrastructure, sending events to the Wazuh manager for analysis.
 
+There are several ways to monitor the Azure instances:
+
+  - **Installing the Wazuh agent on the instances.**
+  - **Monitoring the instances activity through Azure APIs.** This includes data about all resource operations (creation, update, and deletion), Azure notifications about the instances, suspicious file executions, health checks, autoscaling events, and so on.
+  - **Monitoring the Azure Active Directory service.** Monitoring management actions such as creation, update or deletion of users. It's possible to receive alerts on the Wazuh manager when some of these events occur on the Azure infrastructure.
+
+.. thumbnail:: ../images/release-notes/azure_integration_diagram.png
+  :title: Azure module diagram
+  :align: center
+  :width: 80%
+
 To learn more about this new module and how to configure it, check out the section :ref:`azure`.
 
-New Wazuh module to monitor Docker
-----------------------------------
+New module to monitor Docker
+----------------------------
 
-The new ``docker`` module for Wazuh makes easier to monitor and collect the activity from your Docker containers such as starting, stopping or pausing events.
+The new ``docker`` module for Wazuh makes easier to monitor and collect the activity from Docker containers such as creation, running, starting, stopping or pausing events.
+
+In addition to this, and as always, the Wazuh agent can be used to monitor more services and events from the Docker servers, like **File integrity** or **Log data collection**.
+
+In this example, the Docker command ``docker pause apache`` will stop the container ``apache`` and will trigger an alert, as seen on the screenshot below from the Wazuh app for Kibana:
+
+.. thumbnail:: ../images/release-notes/alert_docker_example.png
+    :title: Docker module alert on Kibana's Discover tab
+    :align: center
+    :width: 100%
 
 To learn more about this new module and how to configure it, check out the section :ref:`docker-monitor-index`.
 
@@ -41,7 +99,7 @@ Query remote configuration
 
 It's now possible to query for the agent configuration in real time.
 
-These on-demand queries allow searching for the currently applied configuration on the manager and each agent in every moment. As you can see on the screenshot with some basic agent information, this query lets to check the current settings about every enabled module.
+These on-demand queries allow searching for the currently applied configuration on the manager and each agent in every moment. As seen on the screenshot below with some basic agent information, this query lets to check the current settings about every enabled module.
 
 .. thumbnail:: ../images/release-notes/kibana-remote-query.png
     :title: Query agent configuration using the Wazuh app
@@ -51,49 +109,53 @@ These on-demand queries allow searching for the currently applied configuration 
 Improved performance of FIM and Analysis engines
 ------------------------------------------------
 
-The Analysis and Integrity Monitoring engines has been enhanced with multithreaded processing. It takes advantage of all manager's resources by processing events in parallel, getting more performance at lower cost.
+The Analysis and Integrity Monitoring engines have been enhanced with multithreaded processing. It takes advantage of all manager host's resources by processing events in parallel, getting more performance at lower cost.
 
 The registries generated by the File Integrity Monitoring system are now stored on a new SQLite database. Besides, the required storage resources have been reduced, making it faster and more efficient.
+
+Breaking changes
+^^^^^^^^^^^^^^^^
+
+The old File Integrity Monitoring plain text databases are no longer in use. After the upgrading process, it's necessary to execute the :ref:`migration script <fim_migrate>` in order to preserve the previous FIM entries.
 
 Distributed API requests in cluster mode
 ----------------------------------------
 
-The cluster capabilities were improved to allow distributed API requests. Now the nodes communicate between them to collect information, such as agents status, logs, etc, providing data related to the whole architecture, instead of a single instance.
+The cluster capabilities were improved to allow distributed API requests. Now the nodes communicate between them to collect information, such as agents status or logs, providing data related to the global architecture, instead of a single instance.
 
-In addition to this, we've improved the *last keep alive* checking on the cluster nodes, disconnecting them if they don't have internet connection during a certain amount of time.
+In addition to this, the *last keep alive* checks on the cluster nodes have been improved, disconnecting them if they don't have internet connection during a certain amount of time.
 
 Advanced API filtering using queries
 ------------------------------------
 
-In this version, the Wazuh API includes a brand-new filtering system. The ``q`` parameter allows you to request information using advanced queries with logical operators and separators. You can find a more detailed explanation of this feature on the :ref:`API queries <queries>` section.
+In this version, the Wazuh API includes a new filtering system. The ``q`` parameter allows requesting information using advanced queries with logical operators and separators. Find a more detailed explanation of this feature in the :ref:`API queries <queries>` section.
 
 New features for Kibana plugin
 ------------------------------
 
-The Wazuh app for Kibana includes new features and interface redesigns to make use of the new features included in this version. As shown before, now you can get the current manager/agent configuration on the redesigned tabs. The interface has been organized in a more convenient way, and each setting is displayed in a more *human-readable* format for better comprehension. Besides, the JSON/XML viewers received a revamp to be more responsive.
+The Wazuh app for Kibana includes new features and interface redesigns to make use of the new features included in this version:
 
-The app is also compatible with the new multiple groups feature, so now each agent will show all its assigned groups. Clicking on any group on the information bar will redirect the user to the groups detail page, to see the configuration files and all the agents belonging to that group.
+  - Get the current manager/agent configuration on the redesigned tabs.
+  - Added support for multiple groups feature.
+  - The :ref:`Amazon AWS <amazon>` tab has been redesigned to include better visualizations and the module configuration.
+  - The new :ref:`Osquery <osquery>` extension shows scans results from this Wazuh module.
+  - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.
+  - Several bugfixes, performance improvements, and compatibility with the latest Elastic Stack version.
 
-We've also added more quality-of-life improvements for the app:
+Breaking changes
+^^^^^^^^^^^^^^^^
 
-  - Clicking on an agent ID on the *Discover* panels will open the agent panel to see the associated dashboards.
-  - New *Actions* column added to the list of agents to quickly open the Discover panel or agent configuration.
-  - The *Amazon AWS* tab has been redesigned to include more useful visualizations and your current :ref:`Amazon S3 <amazon>` wodle configuration.
-  - The new :ref:`Osquery <osquery>` extension added on this version comes to show scans results in a more meaningful and easy to understand format.
-  - Several updates to descriptions and text, more bugfixes, performance improvements, and compatibility with the latest Elastic Stack version.
+Wazuh 3.7.0 introduces an update to the Elasticsearch template. This will cause a **breaking change** in existing installations, although new installations **won't be affected** by this error.
+
+To learn more about how to fix this, check out the Kibana app's :ref:`toubleshooting guide <kibana_troubleshooting_3_7_0>`.
 
 New features for Splunk plugin
 ------------------------------
 
-The Wazuh app for Splunk also receives lots of new features and improvements on this new version. The Configuration tab is also improved as on the Kibana plugin to get the current manager/agent configuration, and multiple groups support.
+The Wazuh app for Splunk also receives lots of new features and improvements on this new version. The Configuration tab is also improved as on the Kibana plugin to get the current manager/agent configuration, multiple groups support, and also:
 
-In addition to this, the Splunk app now includes the *Monitoring* tab to show cluster-related information, such as alerts by node, cluster configuration, alerts summary, etc. The *Integrity monitoring* tab was also updated to reflect the latest changes from the Kibana app, including more useful visualizations. The *Amazon AWS* tab is now also available on the Splunk plugin to monitor your AWS-related alerts.
-
-There are even more improvements and additions to the app, such as:
-
-  - You can check our new documentation article to :ref:`set up a reverse proxy configuration <splunk_reverse_proxy>` for Nginx and the Splunk plugin.
-  - Added a *Dev tools* tab to execute Wazuh API queries directly from the app, instead of using a terminal window.
-  - Added an *Inventory data* tab to show :ref:`Syscollector <syscollector>` scans on your agents.
+  - A documentation article to :ref:`set up a reverse proxy configuration <splunk_reverse_proxy>` for Nginx and the Splunk plugin is now available.
+  - Added *Dev tools*, *Amazon AWS*, *Osquery*, *Inventory data* and *Monitoring* tabs to the app.
   - Added *app logs* to monitor to check and troubleshoot problems while using the app.
-  - The new :ref:`Osquery <osquery>` tab added on this version comes to show scans results in a more meaningful and easy to understand format.
-  - Several updates to descriptions and text, more bugfixes, performance improvements, and compatibility with the latest Splunk version.
+  - Added a new selector to check the cluster nodes’ status and logs on the *Management > Status/Logs* tabs.
+  - Several bugfixes, performance improvements, and compatibility with the latest Splunk version.

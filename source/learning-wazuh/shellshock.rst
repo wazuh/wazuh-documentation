@@ -269,7 +269,7 @@ being repeatedly applied and removed across all agents.
 
 .. error::
     There is an error specifically related to AR on Windows agents.  The intended behavior when the Wazuh agent is restarted on
-    a given system, is to cancel any stateful active resposes that have not yet timed out.  This works on Linux systems but
+    a given system, is to cancel any stateful active responses that have not yet timed out.  This works on Linux systems but
     restarting the Wazuh agent on Windows systems while an active response null routing block is in place, has the undesirable
     effect of making the block permanent such that not even rebooting the Windows system will clear it out.
     In that case it it necessary to clear the orphaned null route with a "route delete N.N.N.N" command where N.N.N.N is the
@@ -281,4 +281,4 @@ attacking IPs or targeted account names, AR can also be used to take any kind of
 firing.
 
 - **Custom alerting**: Collect additional context and send a detailed custom email alert about a specific situation.
-- **Recovery actions**: Respond to certain error logs with automated action to fix the problem.
+- **Recovery actions**: Respond to certain error logs with automated action to fix the problem.

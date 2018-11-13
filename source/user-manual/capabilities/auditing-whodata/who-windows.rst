@@ -42,9 +42,9 @@ The following fields are received in alerts when who-data is enabled:
 |                              |                                                                                                                    |
 | **(Audit) Process name**     |                                                                                                                    |
 +------------------------------+                                                                                                                    +
-| **audit.proccess.id**        |                                                                                                                    |
+| **audit.process.id**         |                                                                                                                    |
 |                              |                                                                                                                    |
-| **audit.proccess.name**      |                                                                                                                    |
+| **audit.process.name**       |                                                                                                                    |
 +------------------------------+--------------------------------------------------------------------------------------------------------------------+
 
 
@@ -140,7 +140,7 @@ Alert in JSON format:
                     "id":"S-1-5-21-3292556202-24657078-706277677-500",
                     "name":"Administrator"
                 },
-                "proccess":{
+                "process":{
                     "id":"1736",
                     "name":"C:\\Windows\\System32\\notepad.exe"
                 }

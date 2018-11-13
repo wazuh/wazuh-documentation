@@ -7,7 +7,10 @@ fim_migrate
 
 .. versionadded:: 3.7.0
 
-The *fim_migrate* tool allows to migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB.
+The *fim_migrate* tool allows to migrate FIM databases older than Wazuh v3.7.0 to the new format included in Wazuh-DB. This tool must be executed after the :ref:`upgrading process <upgrading_wazuh>` has been completed.
+
+.. note::
+    The new database will be available at ``/var/ossec/queue/db``.
 
 Usage
 -----
@@ -16,15 +19,18 @@ This tool is not included in the Wazuh installation, but you can download it fro
 
 .. code-block:: console
 
-    # curl -so fim_migrate https://raw.githubusercontent.com/wazuh/wazuh/v3.7.0/tools/migration/fim_migrate.py
+    # curl -so fim_migrate https://raw.githubusercontent.com/wazuh/wazuh/3.7/tools/migration/fim_migrate.py
 
-Add execution permission and run this tool as follows:
+Add execution permission and run this tool on the manager instance as follows:
 
 .. code-block:: console
 
     # chmod +x fim_migrate
 
     # ./fim_migrate
+
+.. warning::
+    After completing the migration process, the old FIM databases won't be removed automatically. To do so, remove the ``/var/ossec/queue/syscheck`` folder.
 
 Options
 -------
@@ -44,29 +50,23 @@ Options
 | ``-d``                   | Debug mode.                                                                            |
 +--------------------------+----------------------------------------------------------------------------------------+
 
-
 Example of use
 --------------
 
 .. code-block:: console
 
-    # ./fim_migrate.py
+    # ./fim_migrate
 
-    2018-10-03 11:22:44 INFO     Connected to WazuhDB socket (/var/ossec/queue/db/wdb)
-    2018-10-03 11:22:44 INFO     Upgrading FIM database for manager...
-    2018-10-03 11:22:44 INFO     Added 6964 file entries in manager database.
-    2018-10-03 11:22:46 INFO     [1/3] Upgrading FIM database for agent '001'...
-    2018-10-03 11:22:47 INFO     [1/3] 10000 file entries processed...
-    2018-10-03 11:22:48 INFO     [1/3] 20000 file entries processed...
-    2018-10-03 11:22:49 INFO     [1/3] 30000 file entries processed...
-    2018-10-03 11:22:49 INFO     [1/3] Added 30580 file entries in agent '001' database.
-    2018-10-03 11:22:49 INFO     [2/3] Upgrading FIM database for agent '010'...
-    2018-10-03 11:22:51 INFO     [2/3] 10000 file entries processed...
-    2018-10-03 11:22:52 INFO     [2/3] 20000 file entries processed...
-    2018-10-03 11:22:53 INFO     [2/3] 30000 file entries processed...
-    2018-10-03 11:22:53 INFO     [2/3] Added 30849 file entries in agent '010' database.
-    2018-10-03 11:22:53 INFO     [2/3] Upgrading FIM database (syscheck-registry) for agent '010'...
-    2018-10-03 11:22:55 INFO     [2/3] Added 3824 registry entries in agent '010' database.
-    2018-10-03 11:22:55 INFO     [3/3] Upgrading FIM database for agent '034'...
-    2018-10-03 11:22:57 INFO     [3/3] Added 5643 registry entries in agent '034' database.
-    2018-10-03 11:22:57 INFO     Finished.
+    2018-10-25 15:18:20 [INFO] Upgrading FIM database for manager...
+    2018-10-25 15:18:20 [INFO] Added 4734 file entries in manager database.
+    2018-10-25 15:18:20 [INFO] [1/3] Upgrading FIM database for agent '001'...
+    2018-10-25 15:18:20 [INFO] [1/3] Added 16 file entries in agent '001' database.
+    2018-10-25 15:18:20 [INFO] [1/3] Upgrading FIM database (syscheck-registry) for agent '001'...
+    2018-10-25 15:18:21 [INFO] [1/3] Added 4627 registry entries in agent '001' database.
+    2018-10-25 15:18:21 [INFO] [2/3] Upgrading FIM database for agent '002'...
+    2018-10-25 15:18:22 [INFO] [2/3] Added 3121 file entries in agent '002' database.
+    2018-10-25 15:18:22 [INFO] [3/3] Upgrading FIM database for agent '003'...
+    2018-10-25 15:18:22 [INFO] [3/3] Added 3 file entries in agent '003' database.
+    2018-10-25 15:18:22 [INFO] [3/3] Upgrading FIM database (syscheck-registry) for agent '003'...
+    2018-10-25 15:18:22 [INFO] [3/3] Added 4611 registry entries in agent '003' database.
+    2018-10-25 15:18:22 [INFO] Finished.

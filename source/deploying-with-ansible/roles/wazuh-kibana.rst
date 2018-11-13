@@ -28,7 +28,7 @@ a. For production environment ``vars-production.yml``:
 
     elasticsearch_network_host: '10.1.1.10'
 
-b. For development enviroment ``vars-development.yml``:
+b. For development environment ``vars-development.yml``:
 
 .. code-block:: yaml
 

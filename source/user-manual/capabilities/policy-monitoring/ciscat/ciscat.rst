@@ -85,7 +85,7 @@ The following is an example of how to deploy the CIS-CAT integration:
       <java_path>\\server\jre\bin</java_path>
       <ciscat_path>C:\cis-cat</ciscat_path>
 
-      <content type="xccdf" path="benchmarks\your_windows_benchamark_file_xccdf.xml">
+      <content type="xccdf" path="benchmarks\your_windows_benchmark_file_xccdf.xml">
         <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
       </content>
 

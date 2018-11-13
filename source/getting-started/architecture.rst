@@ -13,7 +13,7 @@ When the Wazuh server and the Elasticsearch cluster are on different hosts, File
 
 The below diagram illustrates how components are distributed when the Wazuh server and the Elasticsearch cluster run on different hosts. Note that with multi-node clusters there will be multiple Elastic Stack servers to which Filebeat is capable of forwarding data:
 
-.. thumbnail:: ../images/installation/installing_wazuh.png
+.. thumbnail:: ../images/installation/installing_wazuh_distributed.png
     :title: Distributed architecture
     :align: center
     :width: 100%
@@ -28,7 +28,7 @@ In smaller Wazuh deployments, Wazuh and Elastic Stack with a single-node Elastic
 Communications and data flow
 ----------------------------
 
-.. thumbnail:: ../images/getting_started/data_flow_2048x794.png
+.. thumbnail:: ../images/getting_started/wazuh_data_flow.png
     :title: Data flow
     :align: center
     :width: 100%

@@ -2,17 +2,23 @@
 
 .. _upgrading_ossec:
 
-Migrating from OSSEC
-====================
+======================
+ Migrating from OSSEC
+======================
+
+.. meta::
+  :description: Learn why it's a good reason to upgrade your infrastructure migrating it to Wazuh.
+  :keywords: wazuh, ossec, security, upgrade, recommendations
+  :author: Wazuh, Inc.
 
 Why it's time to migrate
 ------------------------
 
 Unfortunately OSSEC users have not seen lots of new features over the last decade. The project has been in maintenance mode for a long time and very little development work has been done. There is no active roadmap and last releases consist mostly in bug fixes reported by occasional contributors.
 
-This is why, back in 2015, Wazuh team decided to fork the project. The result is a much more comprehensive, easy to use, reliable and scalable solution. The fork has had great adoption among the open source community, quickly becoming a broadly used solution in enterprise environments. 
+This is why, back in 2015, Wazuh team decided to fork the project. The result is a much more comprehensive, easy to use, reliable and scalable solution. The fork has had great adoption among the open source community, quickly becoming a broadly used solution in enterprise environments.
 
-Regarding project activity and roadmap, you can find Wazuh code in our `Github repository <https://github.com/wazuh/wazuh>`_. We believe is relevant to mention that, at the time of writing this documentation, the project has over 8,500 commits (3,000+ more than OSSEC). 
+Regarding project activity and roadmap, you can find Wazuh code in our `Github repository <https://github.com/wazuh/wazuh>`_. We believe is relevant to mention that, at the time of writing this documentation, the project has over 8,500 commits (3,000+ more than OSSEC).
 
 Here is a brief summary of the value we added to the OSSEC project, and good reasons to upgrade your security monitoring infrastructure moving it to Wazuh:
 
@@ -24,7 +30,7 @@ Scalability and reliability
 * TCP support for agent-manager communications.
 * Anti-flooding feature to prevent large burst of events from being lost or negatively impact network performance.
 * AES encryption used for agent-manager communications (instead of Blowfish).
-* Multi-thread support for manager processes, dramatically increaing their performance.
+* Multi-thread support for manager processes, dramatically increasing their performance.
 
 Installation and configuration management
 +++++++++++++++++++++++++++++++++++++++++

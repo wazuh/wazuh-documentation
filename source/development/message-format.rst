@@ -115,7 +115,7 @@ Random
     +---------+----------+
 
 Global counter
-    Most significative part of the message counter.
+    Most significant part of the message counter.
 
     +---------+-----------+
     | Size    | 10 digits |
@@ -124,7 +124,7 @@ Global counter
     +---------+-----------+
 
 Local counter
-    Least significative part of the message counter.
+    Least significant part of the message counter.
 
     +---------+----------+
     | Size    | 4 digits |
@@ -213,9 +213,10 @@ For agents with unrestricted address (address ``any`` or netmask different from 
 
 This is the **encryption flow chart**:
 
-.. image:: ../images/development/encryption_flow.png
+.. thumbnail:: ../images/development/encryption_flow.png
+    :title: OSSEC message encryption flow chart
     :align: center
-    :width: 50%
+    :width: 60%
 
 Network protocol
 ~~~~~~~~~~~~~~~~

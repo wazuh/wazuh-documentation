@@ -34,7 +34,7 @@ Audit Policy section method
 This option is only recommended if the previous method cannot be followed because
 your host is Windows Vista or Windows Server 2008. To do this, edit the following policy:
 
-Security Settings -> Local Polies -> Audit Policy -> Audit object access
+Security Settings -> Local Policies -> Audit Policy -> Audit object access
 
 .. thumbnail:: ../../../images/whodata/audit_policies_old_method.PNG
     :title: Audit policies configuration (old method)

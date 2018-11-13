@@ -18,8 +18,12 @@
 }
 
 .wy-nav-content {
-    background: #fcfcfc;
+    background: #ffffff;
     box-shadow: 0 0 4px #c9c9c9;
+}
+
+.codeblock, pre.literal-block, .rst-content .literal-block, .rst-content pre.literal-block, div[class^='highlight'] {
+    background: #fcfcfc;
 }
 
 /* Layout sizing **************************************************************/

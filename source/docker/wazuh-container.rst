@@ -41,7 +41,7 @@ Add the following line into the profile file::
 
   sysctl -w vm.max_map_count=262144
 
-Make the script runneable:
+Make the script runnable:
 
 .. code-block:: console
 

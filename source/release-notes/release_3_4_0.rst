@@ -49,7 +49,7 @@ Wazuh API
 Wazuh ruleset
 -------------
 
-- In older versions, the frecuency attribute in rules was the number of hits + 2. In this version this value has been modified to match exactly the number of hits. By this way this value is more easy to understand.
+- In older versions, the frequency attribute in rules was the number of hits + 2. In this version this value has been modified to match exactly the number of hits. By this way this value is more easy to understand.
 
 Wazuh app for Kibana
 --------------------

@@ -50,7 +50,7 @@ Requirements
 ^^^^^^^^^^^^
 
     * Python 2.7 or 3.5+
-    * Cryptography package for Python. This may be obtained using the following:
+    * The Python ``cryptography`` package. This may be obtained using the following command:
 
     .. code-block:: console
 
@@ -59,52 +59,62 @@ Requirements
 Canonical WPK package example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Download the sources from GitHub branch 3.2:
+1. Install development tools and compilers. In Linux this can easily be done using your distribution's package manager:
 
-.. code-block:: console
+  a) For RPM-based distributions:
 
-    # curl -Lo wazuh-3.4.zip https://github.com/wazuh/wazuh/archive/3.4.zip && unzip wazuh-3.4.zip
+  .. code-block:: console
 
-2. Modify the ``wazuh-3.2/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
+      # yum install make gcc policycoreutils-python automake autoconf libtool unzip
 
-.. code-block:: console
+  b) For Debian-based distributions:
 
-    USER_LANGUAGE="en"
-    USER_NO_STOP="y"
-    USER_UPDATE="y"
+  .. code-block:: console
 
-3. Compile the project:
+      # apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool unzip
 
-.. code-block:: console
+2. Download and extract the latest version:
 
-    # make deps
-    # make -C wazuh-3.2/src TARGET=agent
+  .. code-block:: console
 
-4. Change to the base directory:
+    $ curl -Ls https://github.com/wazuh/wazuh/archive/v3.7.0.tar.gz | tar zx
 
-.. code-block:: console
+3. Modify the ``wazuh-3.7.0/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
-    # cd wazuh-3.2
+  .. code-block:: console
+
+      USER_LANGUAGE="en"
+      USER_NO_STOP="y"
+      USER_UPDATE="y"
+
+4. Compile the project from the ``src`` folder:
+
+  .. code-block:: console
+
+      # cd wazuh-3.7.0/src
+      # make deps
+      # make TARGET=agent
 
 5. Install the root CA if you want to overwrite the root CA with the file you created previously:
 
-.. code-block:: console
+  .. code-block:: console
 
-    # cp path/to/wpk_root.pem etc/wpk_root.pem
+      # cd ../
+      # cp path/to/wpk_root.pem etc/wpk_root.pem
 
 6. Compile the WPK package using your SSL certificate and key:
 
-.. code-block:: console
+  .. code-block:: console
 
-    # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
+      # contrib/agent-upgrade/wpkpack.py output/myagent.wpk path/to/wpkcert.pem path/to/wpkcert.key *
 
 Definitions:
     - **output/myagent.wpk** is the name of the output WPK package.
     - **path/to/wpkcert.pem** is the path to your SSL certificate.
     - **path/to/wpkcert.key** is the path to your SSL certificate's key.
-    - **\*** is the file (or the files) to be included into the WPK package.
+    - **\*** is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
 
-In this example, the Wazuh Project's root directory contains the proper ``upgrade.sh`` file.
+In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
 .. note::
     This is only an example. If you want to distribute a WPK package using this method, it's important to begin with an empty directory.

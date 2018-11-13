@@ -12,30 +12,33 @@ The DEB package is suitable for Debian, Ubuntu and other Debian-based systems.
 Preparation
 -----------
 
-1. Oracle Java JRE 8 is required by Logstash and Elasticsearch:
+1. Oracle Java JRE or OpenJDK 8 is required by Logstash and Elasticsearch:
 
-  a) For Debian:
-
-  .. code-block:: console
-
-    # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
-    # echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list
-    # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
-
-  b) For Ubuntu:
-
-  .. code-block:: console
-
-    # add-apt-repository ppa:webupd8team/java
-
-2. Once the repository is added, install Java JRE:
+  a) For Debian >= 8/Jessie or Ubuntu >= 16.04/Xenial:
 
   .. code-block:: console
 
     # apt-get update
+    # apt-get install openjdk-8-jre
+
+  b) For Debian < 8/Jessie:
+
+  .. code-block:: console
+
+    # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
+    # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
+    # apt-get update
     # apt-get install oracle-java8-installer
 
-3. Install the Elastic repository and its GPG key:
+  c) For Ubuntu < 16.04/Xenial:
+
+  .. code-block:: console
+
+    # add-apt-repository ppa:webupd8team/java
+    # apt-get update
+    # apt-get install oracle-java8-installer
+
+2. Install the Elastic repository and its GPG key:
 
   .. code-block:: console
 
@@ -53,7 +56,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.4.2
+    # apt-get install elasticsearch=6.4.3
 
 2. Enable and start the Elasticsearch service:
 
@@ -83,7 +86,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.4.2",
+        "number" : "6.4.3",
         "build_flavor" : "default",
         "build_type" : "deb",
         "build_hash" : "053779d",
@@ -97,6 +100,9 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
     }
 
 3. Load the Wazuh template for Elasticsearch:
+
+  .. warning::
+    The Wazuh app for Kibana needs the Elasticsearch template in order to work properly, so it's important to make sure that it was properly inserted.
 
   .. code-block:: console
 
@@ -117,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.4.2-1
+    # apt-get install logstash=1:6.4.3-1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -172,22 +178,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=6.4.2
+    # apt-get install kibana=6.4.3
 
 2. Install the Wazuh app plugin for Kibana:
 
-  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app.
-  Set the limit as follows:
-
   .. code-block:: console
 
-    # export NODE_OPTIONS="--max-old-space-size=3072"
-
-  b) Install the Wazuh app:
-
-  .. code-block:: console
-
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.7.0_6.4.2.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.7.0_6.4.3.zip
 
   .. warning::
 

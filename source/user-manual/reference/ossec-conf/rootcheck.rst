@@ -18,6 +18,7 @@ Options
 -------
 
 - `base_directory`_
+- `ignore`_
 - `rootkit_files`_
 - `rootkit_trojans`_
 - `windows_audit`_
@@ -56,6 +57,17 @@ The base directory that will be prepended to the following options:
 +-----------------------------+---------------------+
 | **Allowed values**          | Path to a directory |
 +-----------------------------+---------------------+
+
+ignore
+^^^^^^
+
+List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories. These files and directories will be ignored during scans.
+
++--------------------+-----------------------------+
+| **Allowed values** | Any directory or file name. |
++--------------------+-----------------------------+
+| **Example**        | /etc                        |
++--------------------+-----------------------------+
 
 .. _reference_ossec_rootcheck_rootkit_files:
 

@@ -5,7 +5,7 @@
 S3 use cases
 ============
 
-Amazon S3 (Simple Storage Service) provides secure and realible storage capacity in the cloud.  When using this service, it is highly recommended to monitor it to detect data loss attacks.
+Amazon S3 (Simple Storage Service) provides secure and reliable storage capacity in the cloud.  When using this service, it is highly recommended to monitor it to detect data loss attacks.
 
 Below are some use cases for Wazuh alerts built for S3.
 

@@ -1,5 +1,5 @@
 /*
- * Wazuh documentation - Version selector script
+ * Wazuh documentation - Version selector script 2
  * Copyright (C) 2018 Wazuh, Inc.
  */
 

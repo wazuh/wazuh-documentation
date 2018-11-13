@@ -29,7 +29,7 @@ The Wazuh app is available on the left side of the screen, on the Kibana sidebar
 
 .. topic:: Agent tab
 
-    When clicking on an agent from the list, you can open a tab similar to *Overview*, but tailored to the agent. In addition to this, you can quickily switch to a different agent using the autocomplete search bar on the top right corner. You can check the agent connection status, its alerts, group configuration, hardware information, etc.
+    When clicking on an agent from the list, you can open a tab similar to *Overview*, but tailored to the agent. In addition to this, you can quickly switch to a different agent using the autocomplete search bar on the top right corner. You can check the agent connection status, its alerts, group configuration, hardware information, etc.
 
 .. image:: ../../../images/kibana-app/features/app-overview/agents.png
   :align: center
