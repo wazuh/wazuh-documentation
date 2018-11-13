@@ -16,7 +16,7 @@ This tool is not included in the Wazuh installation, but you can download it fro
 
 .. code-block:: console
 
-    # curl -so fim_migrate https://raw.githubusercontent.com/wazuh/wazuh/v3.7.0/tools/migration/fim_migrate.py
+    # curl -so fim_migrate https://raw.githubusercontent.com/wazuh/wazuh/3.7/tools/migration/fim_migrate.py
 
 Add execution permission and run this tool as follows:
 
@@ -50,10 +50,10 @@ Example of use
 
 .. code-block:: console
 
-    # ./fim_migrate.py
+    # ./fim_migrate
 
     2018-10-25 15:18:20 [INFO] Upgrading FIM database for manager...
-    2018-10-25 15:18:20 [INFO] Added 0 file entries in manager database.
+    2018-10-25 15:18:20 [INFO] Added 4734 file entries in manager database.
     2018-10-25 15:18:20 [INFO] [1/3] Upgrading FIM database for agent '001'...
     2018-10-25 15:18:20 [INFO] [1/3] Added 16 file entries in agent '001' database.
     2018-10-25 15:18:20 [INFO] [1/3] Upgrading FIM database (syscheck-registry) for agent '001'...
