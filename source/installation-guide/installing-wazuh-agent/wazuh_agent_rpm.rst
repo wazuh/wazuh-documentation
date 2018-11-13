@@ -107,7 +107,6 @@ Installing Wazuh agent
 
       # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-
   * Using the ``zypper`` package manager:
 
     .. code-block:: console
