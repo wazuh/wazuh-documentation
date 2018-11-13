@@ -162,11 +162,17 @@ All the technologies we are using have their own logs files, you can check them 
   # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
   # cat /var/log/logstash/logstash-plain.log | grep -i -E "error|warn"
 
+.. note::
+  The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_, `Logstash <https://www.elastic.co/guide/en/logstash/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
+
+.. warning::
+  By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
+
 2. Check the Wazuh app log file:
 
 .. code-block:: console
 
-  # cat /usr/share/kibana/plugins/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
+  # cat /usr/share/kibana/optimize/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
 
 3. Check the Wazuh Manager log file:
 
