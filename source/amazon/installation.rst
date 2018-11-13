@@ -23,6 +23,9 @@ Storing AWS logs on S3
 ----------------------
 Depending on the AWS service to be monitored, the necessary steps to follow are different.
 
+.. note::
+    Bucket encryption and all types of compression are supported, except ``Snappy``.
+
 CloudTrail
 ^^^^^^^^^^
 
@@ -355,7 +358,7 @@ If you're using a single AWS account for all your buckets this could be the most
 Profiles
 ^^^^^^^^
 
-You can define profiles in your credentials file (``~/.aws/credentials``) and specify those profiles on the bucket configuration. 
+You can define profiles in your credentials file (``~/.aws/credentials``) and specify those profiles on the bucket configuration.
 
 For example, the following credentials file defines three different profiles: *default*, *dev* and *prod*.
 
