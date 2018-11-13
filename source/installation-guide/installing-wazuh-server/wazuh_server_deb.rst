@@ -135,6 +135,22 @@ Installing the Wazuh API
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
+5. (Optional) Disable the Wazuh updates:
+
+  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+    # apt-get update
+
+  Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+  .. code-block:: console
+
+    # echo "wazuh-manager hold" | sudo dpkg --set-selections
+    # echo "wazuh-api hold" | sudo dpkg --set-selections
+
 .. _wazuh_server_deb_filebeat:
 
 Installing Filebeat
@@ -191,6 +207,21 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
     # update-rc.d filebeat defaults 95 10
     # service filebeat start
+
+6. (Optional) Disable the Elasticsearch updates:
+
+  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
+    # apt-get update
+
+  Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+  .. code-block:: console
+
+    # echo "filebeat hold" | sudo dpkg --set-selections
 
 Next steps
 ----------

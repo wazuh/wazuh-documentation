@@ -221,9 +221,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # update-rc.d kibana defaults 95 10
     # service kibana start
 
-5. Disable the Elasticsearch updates:
+5. (Optional) Disable the Elasticsearch updates:
 
-  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App.  To do this, use the following command:
+  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
 
   .. code-block:: console
 
