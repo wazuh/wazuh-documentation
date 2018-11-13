@@ -9,8 +9,8 @@ For Debian/Ubuntu platforms, installing the Wazuh server components entails the 
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
-Adding Wazuh Repositories
--------------------------
+Adding the Wazuh repository
+---------------------------
 
 The first step to setting up Wazuh is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
