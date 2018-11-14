@@ -83,18 +83,34 @@ SUSE 11
 Installing Wazuh agent
 ----------------------
 
-On your terminal, install the Wazuh agent as follows:
+1. On your terminal, install the Wazuh agent as follows:
 
-* ``yum`` package manager:
+  * Using the ``yum`` package manager:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # yum install wazuh-agent
+      # yum install wazuh-agent
 
-* ``zypper`` package manager:
+  * Using the ``zypper`` package manager:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # zypper install wazuh-agent
+      # zypper install wazuh-agent
+
+2. (Optional) Disable the Wazuh repository:
+
+  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+
+  * Using the ``yum`` package manager:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
+  * Using the ``zypper`` package manager:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.

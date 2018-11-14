@@ -17,7 +17,6 @@ Upgrade Wazuh manager
     # systemctl stop wazuh-api
     # systemctl stop wazuh-manager
 
-
 2. Add the new repository for Wazuh 3.x.
 
   a) For CentOS/RHEL/Fedora:
@@ -40,7 +39,6 @@ Upgrade Wazuh manager
 
       # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
 
-
 3. Upgrade the manager.
 
   a) Upgrade the Wazuh manager on CentOS/RHEL/Fedora:
@@ -55,7 +53,6 @@ Upgrade Wazuh manager
 
       # apt-get update
       # apt-get install wazuh-manager
-
 
 4. Upgrade the API.
 
@@ -139,8 +136,34 @@ Upgrade Wazuh agent
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
 
-Prepare Elastic Stack
----------------------
+Disable the Wazuh repository
+----------------------------
+
+We recommend that the Wazuh repository be disabled in order to prevent accidental upgrades. To disable the repository, follow these steps:
+
+  a) For CentOS/RHEL/Fedora:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+
+  b) For Debian/Ubuntu:
+
+    .. code-block:: console
+
+      # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+      # apt-get update
+
+    Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+    .. code-block:: console
+
+      # echo "wazuh-manager hold" | sudo dpkg --set-selections
+      # echo "wazuh-api hold" | sudo dpkg --set-selections
+      # echo "wazuh-agent hold" | sudo dpkg --set-selections
+
+Prepare the Elastic Stack
+-------------------------
 
 1. Stop the services:
 
@@ -150,7 +173,6 @@ Prepare Elastic Stack
     # systemctl stop logstash
     # systemctl stop kibana
     # systemctl stop elasticsearch
-
 
 2. Add the new repository for Elastic Stack 6.x:
 
@@ -178,10 +200,8 @@ Prepare Elastic Stack
       # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
       # echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
 
-
-
 Upgrade Elasticsearch
----------------------
+^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
   Since you are upgrading to a different major version of Elasticsearch , it's important that you backup **/etc/elasticsearch/elasticsearch.yml** and **/etc/elasticsearch/jvm.options** before upgrading Elasticsearch. Check the `Elasticsearch Reference <https://www.elastic.co/guide/en/elasticsearch/reference/6.x/index.html>`_ for more information.
@@ -200,7 +220,6 @@ Upgrade Elasticsearch
 
       # apt-get update
       # apt-get install elasticsearch=6.4.3
-
 
 2. Start Elasticsearch:
 
@@ -244,7 +263,7 @@ Upgrade Elasticsearch
     # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
 
 Upgrade Logstash
-----------------
+^^^^^^^^^^^^^^^^
 
 1. Upgrade Logstash:
 
@@ -259,7 +278,6 @@ Upgrade Logstash
     .. code-block:: console
 
       # apt-get install logstash=1:6.4.3-1
-
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -278,7 +296,6 @@ Upgrade Logstash
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
       # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/logstash/01-wazuh-remote.conf
 
-
 3. Start Logstash:
 
   .. code-block:: console
@@ -287,9 +304,8 @@ Upgrade Logstash
     # systemctl enable logstash.service
     # systemctl start logstash.service
 
-
 Upgrade Kibana
---------------
+^^^^^^^^^^^^^^
 
 1. Upgrade Kibana:
 
@@ -304,7 +320,6 @@ Upgrade Kibana
     .. code-block:: console
 
       # apt-get install kibana=6.4.3
-
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -321,13 +336,11 @@ Upgrade Kibana
 
       # sudo -u kibana /usr/share/kibana/bin/kibana-plugin remove wazuh
 
-
 3. Migrate .kibana from 5.x to 6.x:
 
   The .kibana index (which holds Kibana's configuration) has drastically changed. To migrate it, follow the official documentation:
 
   - `Migrating Kibana .index to 6.0 <https://www.elastic.co/guide/en/kibana/current/migrating-6.0-index.html>`_
-
 
 4. Upgrade the Wazuh Kibana App:
 
@@ -335,7 +348,6 @@ Upgrade Kibana
 
       # rm -rf /usr/share/kibana/optimize/bundles
       # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.7.0_6.4.3.zip
-
 
 5. Start Kibana:
 
@@ -346,7 +358,7 @@ Upgrade Kibana
     # systemctl start kibana.service
 
 Upgrade Filebeat
-----------------
+^^^^^^^^^^^^^^^^
 
 1. Upgrade Filebeat:
 
@@ -384,18 +396,8 @@ Upgrade Filebeat
     # systemctl enable filebeat.service
     # systemctl start filebeat.service
 
-Official upgrading guides for Elastic Stack:
-
-    - `Upgrading Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html>`_
-
-    - `Upgrading Logstash <https://www.elastic.co/guide/en/logstash/current/upgrading-logstash.html>`_
-
-    - `Upgrading Kibana <https://www.elastic.co/guide/en/kibana/current/upgrade.html>`_
-
-    - `Upgrading Filebeat <https://www.elastic.co/guide/en/beats/libbeat/6.0/upgrading.html>`_
-
-Disable the Elasticsearch repository
-------------------------------------
+Disable the Elastic Stack repository
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We recommend that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version. An untimely or unplanned upgrade may break the Wazuh app. To disable the repository, follow these steps:
 
@@ -411,6 +413,21 @@ We recommend that the Elasticsearch repository be disabled in order to prevent a
 
       # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
       # apt-get update
+
+    Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
+
+    .. code-block:: console
+
+      # echo "elasticsearch hold" | sudo dpkg --set-selections
+      # echo "kibana hold" | sudo dpkg --set-selections
+      # echo "logstash hold" | sudo dpkg --set-selections
+
+Official upgrading guides for the Elastic Stack:
+
+  - `Upgrading Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html>`_
+  - `Upgrading Logstash <https://www.elastic.co/guide/en/logstash/current/upgrading-logstash.html>`_
+  - `Upgrading Kibana <https://www.elastic.co/guide/en/kibana/current/upgrade.html>`_
+  - `Upgrading Filebeat <https://www.elastic.co/guide/en/beats/libbeat/6.0/upgrading.html>`_
 
 Reindexing your previous alerts
 -------------------------------

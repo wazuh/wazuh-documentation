@@ -234,9 +234,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # chkconfig --add kibana
     # service kibana start
 
-5. Disable the Elasticsearch repository:
+5. (Optional) Disable the Elasticsearch repository:
 
-  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App.  To do this, use the following command:
+  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
 
   .. code-block:: console
 
