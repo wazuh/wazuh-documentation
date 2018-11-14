@@ -146,17 +146,25 @@ a list of commands that Wazuh should give us a special alert about when they are
         tcpdump:
         ping:
 
-2. On wazuh-manager, add this to the ``<ruleset>`` section of ossec.configuration
+2. On wazuh-manager, add this to the ``<ruleset>`` section of ossec.configuration:
 
     .. code-block:: console
 
         <list>etc/lists/suspicious-programs</list>
 
-3. Restart the Wazuh manager
+3. Restart the Wazuh manager:
 
-    .. code-block:: console
+    a. For Systemd:
 
-        # ossec-control restart
+      .. code-block:: console
+
+        # systemctl restart wazuh-manager
+
+    b. For SysV Init:
+
+      .. code-block:: console
+
+        # service wazuh-manager restart
 
 4. Wazuh now knows to compile this file into a CDB database of the same name but with a ``.cdb`` extension.  Initiate the compile:
 
@@ -189,7 +197,19 @@ Make a rule to watch for the listed programs
     In this case we are simply checking to see if the decoded ``audit.command`` value appears in our new CDB lists at all,
     with no checking of a value.
 
-2. Restart Wazuh manager with ``ossec-control restart``.
+2. Restart the Wazuh manager:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager restart
 
 3. On linux-agent, install and run tcpdump to trip our new rule:
 
@@ -222,10 +242,7 @@ Let's make this list a little smarter by including values that indicate how alar
         # ossec-makelists
 
     .. note::
-        The ``ossec-makelists`` program not only recompiles any CDB files that have been changed, but it causes ossec-analysisd
-        to reload the changed lists without Wazuh manager restarting.  You do not need to run ``ossec-control restart`` after
-        running ``ossec-makelists`` to make Wazuh use your updated lists.
-
+        The ``ossec-makelists`` program not only recompiles any CDB files that have been changed, but it causes ossec-analysisd to reload the changed lists without Wazuh manager restarting. You do not need to restart Wazuh after running ``ossec-makelists`` to make it use your updated lists.
 
 Make a smarter rule
 -------------------
@@ -244,7 +261,19 @@ instances when a "red" program is executed.
             <group>audit_command,</group>
         </rule>
 
-2. Restart Wazuh manager with ``ossec-control restart``.
+2. Restart the Wazuh manager:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager restart
 
 3. On linux-agent install and run a "red" program (netcat):
 
@@ -276,7 +305,19 @@ you don't want these events to be logged.  Another child rule of 80297, with a l
 
     The rule does no lookup.  It just checks any auditd command records in which the ``ping`` command is called and the target IP address 8.8.8.8 is mentioned.
 
-2. Restart Wazuh manager with ``ossec-control restart``.
+2. Restart the Wazuh manager:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager restart
 
 3. Test the rule by installing tcpdump on linux-agent and then pinging both 8.8.8.8 and 8.8.4.4.
 

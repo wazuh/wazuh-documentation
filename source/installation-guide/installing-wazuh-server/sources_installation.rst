@@ -49,15 +49,31 @@ Installing Wazuh manager
 
 5. The installer asks if you want to start Wazuh at the end of the installation. If you chosen not to, you can start it later with:
 
-  .. code-block:: console
+  a. For Systemd:
 
-    # /var/ossec/bin/ossec-control start
+    .. code-block:: console
+
+      # systemctl start wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager start
 
   If you want to confirm that it started:
 
-  .. code-block:: console
+  a. For Systemd:
 
-    $ /var/ossec/bin/ossec-control status
+    .. code-block:: console
+
+      # systemctl status wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager status
 
 Installing Wazuh API
 --------------------

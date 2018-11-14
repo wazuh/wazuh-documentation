@@ -57,11 +57,22 @@ Make Wazuh Agent register itself with the Wazuh Manager, presenting the required
     # agent-auth -m 172.30.0.10 -P please123
 
 
-Restart Wazuh Agent and confirm it successfully connected with the Manager.  Run this on the Wazuh Agent side.
+Restart Wazuh Agent and confirm it successfully connected with the Manager. Run this on the Wazuh Agent side:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-agent restart
 
   .. code-block:: console
 
-    # ossec-control restart
     # grep ^status /var/ossec/var/run/ossec-agentd.state
 
 You should see output like this:

@@ -115,9 +115,17 @@ at which rootcheck commences its first scan for the sake of this lab.
 
     Restart the agent.
 
-    .. code-block:: console
+    a. For Systemd:
 
-        # ossec-control restart
+      .. code-block:: console
+
+        # systemctl restart wazuh-agent
+
+    b. For SysV Init:
+
+      .. code-block:: console
+
+        # service wazuh-agent restart
 
     Now our next rootcheck scan should run shortly.  It should alert about the ryslogd process which we hid with Diamorphine.
 
@@ -207,6 +215,14 @@ at which rootcheck commences its first scan for the sake of this lab.
 
 17. Restart the Wazuh agent on linux-agent
 
-        .. code-block:: console
+  a. For Systemd:
 
-            ossec-control restart
+    .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-agent restart
