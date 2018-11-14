@@ -190,7 +190,7 @@ the shared configuration with their local configuration.
         verify-agent-conf: Verifying [/var/ossec/etc/shared/linux/agent.conf]
         verify-agent-conf: OK
 
-4. Since the config is proven valid, restart Wazuh manager to deploy the new agent.conf to the agents.
+4. Since the config is proven valid, restart Wazuh manager to deploy the new configuration to the agents.
 
 a. For Systemd:
 
@@ -204,7 +204,7 @@ b. For SysV Init:
 
     # service wazuh-manager restart
 
-Each agent should pull down and apply this additional config almost immediately. You can find the fetched agent.conf file on each agent at ``/var/ossec/etc/shared/agent.conf``.
+Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/agent.conf``.
 
 See Suricata NIDS events in Kibana
 ----------------------------------
