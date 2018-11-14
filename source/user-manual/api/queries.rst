@@ -29,7 +29,7 @@ Filtering agents by OS name and OS version
 
 For example, to filter Ubuntu agents with a version higher than 12, the following query would be used:
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12&select=id,name,os.name,os.version,os.codename,os.major"
     {
@@ -63,7 +63,7 @@ For example, to filter Ubuntu agents with a version higher than 12, the followin
 
 The same field can be used multiple times to get a more accurate result. For example, filtering agents with a version higher than Ubuntu 12 but lower than Ubuntu 18:
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12;os.version<18&select=id,name,os.name,os.version,os.codename,os.major"
     {
@@ -87,7 +87,7 @@ The same field can be used multiple times to get a more accurate result. For exa
 
 An example of using the OR operator can be filtering Ubuntu or CentOS agents:
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu,os.name=centos+linux&select=id,name,os.name,os.version,os.codename,os.major"
     {
@@ -131,7 +131,7 @@ An example of using the OR operator can be filtering Ubuntu or CentOS agents:
 
 Another example using the ``~`` operator is the following:
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name~cent"
     {
@@ -174,7 +174,7 @@ Filtering rootcheck events by date
 
 The following example shows how to check rootcheck events generated in a specified timeframe:
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar -X GET "http://localhost:55000/rootcheck/001?pretty&q=oldDay<3h25m&limit=2"
     {
@@ -201,7 +201,7 @@ The following example shows how to check rootcheck events generated in a specifi
 
 A more precise timeframe can be specified using operators ``>`` and ``<`` together:
 
-.. code-block:: javascript
+.. code-block:: console
 
     # curl -u foo:bar -X GET "http://localhost:55000/rootcheck/001?pretty&q=oldDay<3h30m;oldDay>3h&limit=2"
     {
