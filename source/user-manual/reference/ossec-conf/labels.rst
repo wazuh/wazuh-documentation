@@ -105,5 +105,5 @@ And the labels will be displayed this way:
 
   Operative System: "CentOS Linux" - "7 (Core)"
   network.ip: ["10.0.2.15"]
-  Timezone: 0
+  Timezone: UTC 0
   Agent: "c7-manager-100"
