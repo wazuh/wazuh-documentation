@@ -334,13 +334,35 @@ To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` optio
 
 *Check the user manual reference to read more details about each setting:* :doc:`AWS S3 settings <../user-manual/reference/ossec-conf/wodle-s3>`
 
-
 3. Restart your Wazuh system to apply the changes:
 
-.. code-block:: console
+  * If you're configuring a Wazuh manager:
 
-    # /var/ossec/bin/ossec-control restart
+    a. For Systemd:
 
+      .. code-block:: console
+
+        # systemctl restart wazuh-manager
+
+    b. For SysV Init:
+
+      .. code-block:: console
+
+        # service wazuh-manager restart
+
+  * If you're configuring a Wazuh agent:
+
+    a. For Systemd:
+
+      .. code-block:: console
+
+        # systemctl restart wazuh-agent
+
+    b. For SysV Init:
+
+      .. code-block:: console
+
+        # service wazuh-agent restart
 
 Authenticating options
 ----------------------

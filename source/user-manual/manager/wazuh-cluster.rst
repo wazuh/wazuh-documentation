@@ -222,7 +222,7 @@ Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is requir
 
      # sed -i 's#echo -n "Starting OSSEC: "#echo -n "Starting OSSEC (EL6): "; source /opt/rh/python27/enable; export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/ossec/framework/lib#' /etc/init.d/wazuh-manager
 
-4. Use ``service`` command instead of ``/var/ossec/bin/ossec-control`` to start, stop and restart Wazuh:
+4. Use the ``service`` command instead of ``/var/ossec/bin/ossec-control`` to start, stop and restart Wazuh:
 
   .. code-block:: console
 

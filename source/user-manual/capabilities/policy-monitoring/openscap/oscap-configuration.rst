@@ -74,12 +74,25 @@ Manager ``/var/ossec/etc/shared/default/agent.conf`` file (assuming that the age
 
 **Step 3: Restart manager and agents**
 
-To apply the new configuration, restart the manager and agents:
+To apply the new configuration, restart the manager:
 
-::
+  a. For Systemd:
 
-  # /var/ossec/bin/ossec-control restart
-  # /var/ossec/bin/agent_control -R -a
+    .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager restart
+
+And now, restart all the agents:
+
+  .. code-block:: console
+
+    # /var/ossec/bin/agent_control -R -a
 
 If you prefer, you can restart a specific agent with the option ``-u <id>`` where **id** is the agent's id number.
 
@@ -157,12 +170,25 @@ Manager ``shared/agent.conf``:
 
 **Step 3: Restart manager and agents**
 
-To apply the new configuration, restart the manager and agents:
+To apply the new configuration, restart the manager:
 
-.. code-block:: console
+  a. For Systemd:
 
-  # /var/ossec/bin/ossec-control restart
-  # /var/ossec/bin/agent_control -R -a
+    .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager restart
+
+And now, restart all the agents:
+
+  .. code-block:: console
+
+    # /var/ossec/bin/agent_control -R -a
 
 If you prefer, you can restart a specific agent with option ``-u <id>``.
 
