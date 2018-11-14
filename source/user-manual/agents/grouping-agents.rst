@@ -90,12 +90,12 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
 
     .. code-block:: console
 
-        # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/webserver?pretty"
+        # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/webserver?pretty"
         {
             "error": 0,
             "data": "Group 'webserver' added to agent '001'."
         }
-        # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/apache?pretty"
+        # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/apache?pretty"
         {
             "error": 0,
             "data": "Group 'apache' added to agent '001'."
@@ -106,7 +106,7 @@ After that, we can ask the **API** about groups which an agent belongs:
     .. code-block:: console
         :emphasize-lines: 7,8,9,10,11
 
-        # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/agents/001?pretty"
+        # curl -u foo:bar -X GET "http://localhost:55000/agents/001?pretty"
         {
             "error": 0,
             "data": {
@@ -219,7 +219,7 @@ Finally, to check the synchronization status of the group configuration for a si
         # /var/ossec/bin/agent_groups -S -i 001
         The agent '008' sync status is: Agent configuration is synced.
 
-        # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/agents/001/group/is_sync?pretty"
+        # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
         {
             "error": 0,
             "data": {

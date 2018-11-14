@@ -145,9 +145,9 @@ The following is an example of how a centralized configuration can be done.
 
 Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/agent.conf``. If the file does not exist, create it::
 
-    $ touch /var/ossec/etc/shared/default/agent.conf
-    $ chown ossec:ossec /var/ossec/etc/shared/default/agent.conf
-    $ chmod 640 /var/ossec/etc/shared/default/agent.conf
+    # touch /var/ossec/etc/shared/default/agent.conf
+    # chown ossec:ossec /var/ossec/etc/shared/default/agent.conf
+    # chmod 640 /var/ossec/etc/shared/default/agent.conf
 
 Several configurations may be created based on the ``name``, ``OS`` or ``profile`` of an agent.
 
@@ -193,7 +193,7 @@ The ``agent_groups`` tool or the API can show whether the group is synchronized 
 
 .. code-block:: console
 
-    $ curl -u foo:bar "localhost:55000/agents/001/group/is_sync?pretty"
+    # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
     {
         "error": 0,
         "data": {
@@ -203,7 +203,7 @@ The ``agent_groups`` tool or the API can show whether the group is synchronized 
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -S -i 001
+    # /var/ossec/bin/agent_groups -S -i 001
     Agent '001' is synchronized.
 
 5. Restart the agent:
@@ -214,7 +214,7 @@ If ``auto_restart`` has been disabled (in the ``<client>`` section of :doc:`Loca
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_control -R -u 1032
+    # /var/ossec/bin/agent_control -R -u 1032
 
     Wazuh agent_control: Restarting agent: 1032
 

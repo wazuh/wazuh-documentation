@@ -419,7 +419,7 @@ The current inventory can be consulted in different ways. Let's see an example q
 
 .. code-block:: console
 
-  # curl -u foo:bar "localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
+  # curl -u foo:bar -X GET "http://localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
   {
    "error": 0,
    "data": {

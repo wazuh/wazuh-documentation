@@ -12,7 +12,7 @@ If you are indexing data with a different index pattern, for example ``my-alerts
 
   .. code-block:: none
 
-      # curl -XPOST "http://localhost:9200/_xpack/security/role/my-user" -H 'Content-Type: application/json' -d'
+      # curl -X POST "http://localhost:9200/_xpack/security/role/my-user" -H 'Content-Type: application/json' -d'
       {
       "cluster": [],
       "indices": [
@@ -30,7 +30,7 @@ Now assign it to your desired user(s):
 
   .. code-block:: none
 
-    # curl -XPUT "http://localhost:9200/_xpack/security/user/john" -H 'Content-Type: application/json' -d'
+    # curl -X PUT "http://localhost:9200/_xpack/security/user/john" -H 'Content-Type: application/json' -d'
     {
       "password": "johnjohn",
       "roles":["wazuh-basic","my-user"],

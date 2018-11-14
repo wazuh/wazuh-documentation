@@ -74,14 +74,14 @@ Once the reindex of your alerts has finished, you can confirm that it was succes
 
     .. code-block:: console
 
-        $ curl "localhost:9200/_cat/indices?v"
+        $ curl "http://localhost:9200/_cat/indices?v"
 
 
 If everything worked well, the output will appear something like this:
 
     .. code-block:: console
 
-        $ curl "localhost:9200/_cat/indices?v"
+        $ curl "http://localhost:9200/_cat/indices?v"
         health status index                           uuid                   pri rep docs.count docs.deleted store.size pri.store.size
         green open   wazuh-alerts-3.x-2017.12.12     vQ4YXsTuQLSDMnLk_Lp2Kw   5   1         58            0    115.1kb        115.1kb
         green open   .kibana-6                       0jtvjQ4ERLmkKbCJ7Pl4Ww   1   1        241          110    226.5kb        226.5kb

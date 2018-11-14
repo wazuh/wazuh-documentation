@@ -42,7 +42,7 @@ Follow these steps to enable X-Pack:
 
   .. code-block:: console
 
-    # curl localhost:9200/?pretty -u elastic:<elastic_password>
+    # curl -u elastic:<elastic_password> "http://localhost:9200/?pretty"
 
     {
       "name" : "116m4ct",

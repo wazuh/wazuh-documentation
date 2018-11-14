@@ -347,7 +347,7 @@ This information can also be obtained using the Restful API:
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar -X GET "https://localhost:55000/cluster/nodes?pretty"
+    # curl -u foo:bar -X GET "http://localhost:55000/cluster/nodes?pretty"
     {
        "error": 0,
        "data": {

@@ -24,12 +24,12 @@ In this example, an agent is added to two new groups.
 
 .. code-block:: console
 
-  # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/webserver?pretty"
+  # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/webserver?pretty"
   {
     "error": 0,
     "data": "Group 'webserver' added to agent '001'."
   }
-  # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/apache?pretty"
+  # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/apache?pretty"
   {
     "error": 0,
     "data": "Group 'apache' added to agent '001'."
@@ -40,7 +40,7 @@ And on the API, it's possible to check all the groups the agent is added:
 .. code-block:: console
   :emphasize-lines: 7,8,9,10,11
 
-  # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/agents/001?pretty"
+  # curl -u foo:bar -X GET "http://localhost:55000/agents/001?pretty"
   {
     "error": 0,
     "data": {
