@@ -815,7 +815,7 @@ Remoted
 |                                   |               | Any other integer between 1 and 86400                        |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 | **remoted.guess_agent_group**     | Description   | Toggle to enable or disable the guessing of the group to     |
-|                                   |               | which the agent belongs.                                     |
+|                                   |               | which the agent belongs when registering it again.           |
 |                                   |               |                                                              |
 |                                   |               | .. versionadded:: 3.X.Y                                      |
 +                                   +---------------+--------------------------------------------------------------+
