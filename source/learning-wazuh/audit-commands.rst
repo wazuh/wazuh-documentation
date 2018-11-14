@@ -242,7 +242,7 @@ Let's make this list a little smarter by including values that indicate how alar
         # ossec-makelists
 
     .. note::
-        The ``ossec-makelists`` program not only recompiles any CDB files that have been changed, but it causes ossec-analysisd to reload the changed lists without Wazuh manager restarting. You do not need to restart Wazuh after running ``ossec-makelists`` to make it use your updated lists.
+        The ``ossec-makelists`` program not only recompiles any CDB files that have been changed, but it causes ``ossec-analysisd`` to reload the changed lists without Wazuh manager restarting. You do not need to restart Wazuh after running ``ossec-makelists`` to make it use your updated lists.
 
 Make a smarter rule
 -------------------
