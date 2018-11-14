@@ -31,7 +31,7 @@ For example, to filter Ubuntu agents with a version higher than 12, the followin
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar "localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12&select=id,name,os.name,os.version,os.codename,os.major"
+    # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12&select=id,name,os.name,os.version,os.codename,os.major"
     {
         "error": 0,
         "data": {
@@ -65,7 +65,7 @@ The same field can be used multiple times to get a more accurate result. For exa
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar "localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12;os.version<18&select=id,name,os.name,os.version,os.codename,os.major"
+    # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu;os.version>12;os.version<18&select=id,name,os.name,os.version,os.codename,os.major"
     {
         "error": 0,
         "data": {
@@ -89,7 +89,7 @@ An example of using the OR operator can be filtering Ubuntu or CentOS agents:
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar "localhost:55000/agents?pretty&q=os.name=ubuntu,os.name=centos+linux&select=id,name,os.name,os.version,os.codename,os.major"
+    # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name=ubuntu,os.name=centos+linux&select=id,name,os.name,os.version,os.codename,os.major"
     {
         "error": 0,
         "data": {
@@ -133,7 +133,7 @@ Another example using the ``~`` operator is the following:
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar "localhost:55000/agents?pretty&q=os.name~cent"
+    # curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&q=os.name~cent"
     {
         "error": 0,
         "data": {
@@ -176,7 +176,7 @@ The following example shows how to check rootcheck events generated in a specifi
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar "localhost:55000/rootcheck/001?pretty&q=oldDay<3h25m&limit=2"
+    # curl -u foo:bar -X GET "http://localhost:55000/rootcheck/001?pretty&q=oldDay<3h25m&limit=2"
     {
         "error": 0,
         "data": {
@@ -203,7 +203,7 @@ A more precise timeframe can be specified using operators ``>`` and ``<`` togeth
 
 .. code-block:: javascript
 
-    $ curl -u foo:bar "localhost:55000/rootcheck/001?pretty&q=oldDay<3h30m;oldDay>3h&limit=2"
+    # curl -u foo:bar -X GET "http://localhost:55000/rootcheck/001?pretty&q=oldDay<3h30m;oldDay>3h&limit=2"
     {
         "error": 0,
         "data": {
