@@ -87,7 +87,7 @@ Here are some of the basic concepts related to making API requests and understan
 * All responses have an HTTP status code: 2xx (success), 4xx (client error), 5xx (server error), etc.
 * All requests accept the parameter ``pretty`` to convert the JSON response to a more human-readable format.
 * The API log is stored on the manager as ``/var/ossec/logs/api.log``. The API logs are rotated daily. The rotations are stored in ``/var/ossec/logs/api/<year>/<month>`` and compressed using ``gzip``.
-* All API requests will be aborted if no response is received after a certain amount of time. In order to prevent this, the parameter ``wait_for_complete`` can be used to disable the timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
+* All API requests will be aborted if no response is received after a certain amount of time. The parameter ``wait_for_complete`` can be used to disable the timeout. This is useful for calls that could take more time than expected, such as :ref:`PUT/agents/:agent_id/upgrade <api_reference>`.
 
 .. _wazuh_api_use_cases:
 
