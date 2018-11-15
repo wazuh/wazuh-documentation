@@ -82,6 +82,6 @@ You should see output like this:
     status='connected'
 
 .. note::
-  The **/var/ossec/var/run/ossec-agentd.state** file on \*NIX platforms and the **C:\\Program Files (x86)\\ossec-agent\\ossec-agent.state**
+  The **/var/ossec/var/run/ossec-agentd.state** file on \*NIX platforms and the **C:\\Program Files\\ossec-agent\\ossec-agent.state**
   file on Windows platforms contain several useful pieces of information about the state of the Wazuh agent's connection with the Wazuh
   manager.  See the file content itself for more information.

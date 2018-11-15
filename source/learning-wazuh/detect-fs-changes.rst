@@ -22,7 +22,7 @@ To turn on Wazuh agent and syscheck debug logging on windows-agent, start Notepa
         rootcheck.sleep=0
         syscheck.sleep=0
 
-Save this as a new file called "C:\\Program Files (x86)\\ossec-agent\\local_internal_options.conf", making sure under "Save as type:" to choose "All Files" so that the file does not get a .txt extension appended to it.
+Save this as a new file called "C:\\Program Files\\ossec-agent\\local_internal_options.conf", making sure under "Save as type:" to choose "All Files" so that the file does not get a .txt extension appended to it.
 
 Open the Windows Command Prompt, using the "Run as administrator" option. Then create a couple of lab directories:
 
