@@ -5,21 +5,26 @@
 Using the registration service
 ==============================
 
-It's possible to register agents automatically with authd. Choose the method that best meets your needs:
+The ``authd`` daemon allows to register agents automatically. This registration process uses the :ref:`ossec-authd` and :ref:`agent-auth` programs on both manager and agent sides.
 
-+----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Method                                             | Description                                                                                                                 |
-+====================================================+=============================================================================================================================+
-| `Simple method`_                                   | The easiest method. There is no authentication or host verification.                                                        |
-+----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| `Use a password to authorize agents`_              | Allows agents to authenticate via a shared password. This method is easy but does not perform host validation.              |
-+----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| `Verify manager via SSL`_                          | The manager's certificate is signed by a CA that agents use to validate the server. This may include host checking.         |
-+-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| `Verify agents via SSL`_| Host validation          | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
-+                         +--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|                         | No host validation       | The manager validates the agent by CA but not the host address. This method allows the use of a shared agent certificate.   |
-+-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+Launching the daemon with default options would allow any agent to register itself, and then connect to a manager. The secure methods provide some mechanisms to authorize the connections.
+
++------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Type       | Method                                        | Description                                                                                                                 |
++============+===============================================+=============================================================================================================================+
+| Not secure | `Simple method`_                              | The easiest method. There is no authentication or host verification.                                                        |
++------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Secure     | `Use a password to authorize agents`_         | Allows agents to authenticate via a shared password. This method is easy but does not perform host validation.              |
+|            +-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|            | `Verify manager via SSL`_                     | The manager's certificate is signed by a CA that agents use to validate the server. This may include host checking.         |
+|            +--------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|            | `Verify agents via SSL`_ | Host validation    | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
+|            |                          +--------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|            |                          | No host validation | The manager validates the agent by CA but not the host address. This method allows the use of a shared agent certificate.   |
++------------+--------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------+
+
+.. note::
+  The secure methods can be combined for a stronger security during the registration process.
 
 Simple method
 -------------
@@ -92,28 +97,8 @@ The ``0`` means the minimum time, in seconds, since the last connection of the o
 Secure methods
 --------------
 
-Launching the authd daemon with default options would allow any agent to register itself, and then connect to a manager. The following options provide some mechanisms to authorize connections:
-
-+----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Method                                             | Description                                                                                                                 |
-+====================================================+=============================================================================================================================+
-| `Use a password to authorize agents`_              | Allows agents to authenticate via a shared password. This method is easy but does not perform host validation.              |
-+----------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| `Verify manager via SSL`_                          | The manager's certificate is signed by a CA that agents use to validate the server. It may include host checking.           |
-+-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| `Verify agents via SSL`_| Host validation          | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
-+                         +--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|                         | No host validation       | The manager validates the agent by CA but not the host address. This method allows the use of a shared agent certificate.   |
-+-------------------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-
-.. note::
-    These methods can be combined.
-
 Use a password to authorize agents
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. note::
-  Reference :ref:`ossec-authd`
 
 The manager can be protected from unauthorized registrations by using a password. We can choose one ourselves or let authd generate a random password.
 
