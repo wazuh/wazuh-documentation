@@ -4,7 +4,7 @@
  */
 
 var versions = [
-    {name: "3.7 (current)", url: "/3.7"},
+    {name: "3.7 (current)", url: "/3.x"},
     {name: "3.6", url: "/3.6"},
     {name: "3.5", url: "/3.5"},
     {name: "3.4", url: "/3.4"},
@@ -14,7 +14,7 @@ var versions = [
     {name: "3.0", url: "/3.0"},
 ];
 
-var current_version = "3.7";
+var current_version = "3.x";
 
 $( document ).ready(function() {
     addVersions();
