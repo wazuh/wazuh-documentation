@@ -25,7 +25,7 @@ Simple method
 -------------
 
 Get an SSL certificate
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 The first step is to get an SSL key and certificate. This is required in order to make authd work.
 
@@ -47,7 +47,7 @@ The first step is to get an SSL key and certificate. This is required in order t
       # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /var/ossec/etc/sslmanager.key -out /var/ossec/etc/sslmanager.cert
 
 Register the agent
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 1. Start the authd server:
 
@@ -90,7 +90,7 @@ On the other hand, **duplicate IPs are not allowed**, so an agent won't be added
 The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, ``0`` means to delete the old agent's registration regardless of how recently it has checked in.
 
 Secure methods
-------------------------------
+--------------
 
 Launching the authd daemon with default options would allow any agent to register itself, and then connect to a manager. The following options provide some mechanisms to authorize connections:
 
@@ -110,7 +110,7 @@ Launching the authd daemon with default options would allow any agent to registe
     These methods can be combined.
 
 Use a password to authorize agents
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
   Reference :ref:`ossec-authd`
@@ -160,7 +160,7 @@ On the agent side, the key can be put in a file of the same name or specified as
 .. _verify-hosts:
 
 Use SSL to verify hosts
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Create a Certificate of Authority
 """""""""""""""""""""""""""""""""
@@ -175,7 +175,7 @@ First we are going to create a certificate of authority (CA) that we will use to
     The file ``rootCA.key`` that we have just created is the **private key** of the certificate of authority. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
 
 Verify manager via SSL
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 1. Issue and sign a certificate for the authd server, entering the hostname or the IP address that agents will use to connect to the server. For example, if the server's IP is 192.168.1.2:
 
@@ -203,7 +203,7 @@ Verify manager via SSL
         # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
 
 Verify agents via SSL
-^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 
 **Verify agents via SSL (no host validation)**
@@ -263,14 +263,3 @@ Verify agents via SSL
 
           # cp sslagent.cert sslagent.key /var/ossec/etc
           # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
-
-
-Forcing insertion
-----------------------------
-
-If you try to add an agent with an IP already listed in an existing registration, ``ossec-authd`` will generate an error. You can use the argument *-F* to force the insertion.
-
-Example
-^^^^^^^^^^
-
-We previously installed and registered the Wazuh agent on *Server1* with IP 10.0.0.10 and ID 005. For some reason, we then had to completely re-install *Server1* and thus we now need to install and reregister the Wazuh agent on *Server1*. In this case, we can use the "*-F 0*" parameter which results in the previous agent (005) being removed (with a backup) and a new agent being successfully registered. The new agent will have a new ID.
