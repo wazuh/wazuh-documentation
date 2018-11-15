@@ -112,7 +112,7 @@ Enable or disable X-Pack RBAC security capabilities when using the app.
 admin
 ^^^^^
 
-Enable or disable administrator requests to the Wazuh API when using the app. This makes ``PUT``, ``POST`` and ``DELETE`` requests available to the user.
+Enable or disable administrator requests to the Wazuh API when using the app. This makes ``PUT``, ``POST`` and ``DELETE`` requests available on the :ref:`Dev tools <kibana_dev_tools>` tab.
 
 +--------------------+------------+
 | **Default value**  | true       |
