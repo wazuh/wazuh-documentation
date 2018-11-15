@@ -18,4 +18,5 @@ This section will show you the process:
 
    docker-installation
    wazuh-container
+   container-usage
    faq-wazuh-container
