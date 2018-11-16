@@ -35,7 +35,7 @@ Options
 - `restart_audit`_
 - `windows_audit_interval`_
 - `whodata`_
-- `listen_audit_key`_
+- `audit_extra_key`_
 
 .. _reference_ossec_syscheck_directories:
 
