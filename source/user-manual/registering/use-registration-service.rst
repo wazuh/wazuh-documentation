@@ -9,19 +9,19 @@ The ``authd`` daemon allows to register agents automatically. This registration 
 
 Launching the daemon on the manager with default options would allow any agent to register itself, and then connect to it. The secure methods provide some mechanisms to authorize the connections.
 
-+----------+-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Type     | Method                                        | Description                                                                                                                 |
-+==========+===============================================+=============================================================================================================================+
-| Insecure | `Simple method`_                              | The easiest method. There is no authentication or host verification.                                                        |
-+----------+-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Secure   | `Password authorization`_                     | Allows agents to authenticate via a shared password. This method is easy but does not perform host validation.              |
-|          +-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|          | `Verify manager via SSL`_                     | The manager's certificate is signed by a CA that agents use to validate the server. This may include host checking.         |
-|          +--------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|          | `Verify agents via SSL`_ | Host validation    | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
-|          |                          +--------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|          |                          | No host validation | The manager validates the agent by CA but not the host address. This method allows the use of a shared agent certificate.   |
-+----------+--------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------+
++------------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Type       | Method                                                                                     | Description                                                                                                                 |
++============+============================================================================================+=============================================================================================================================+
+| Not secure | `Simple method`_                                                                           | The easiest method. There is no authentication or host verification.                                                        |
++------------+--------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Secure     | `Password authorization`_                                                                  | Allows agents to authenticate via a shared password. This method is easy but does not perform host validation.              |
+|            +--------------------------------+-----------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|            | `Host verification using SSL`_ | `Manager verification using SSL`_                         | The manager's certificate is signed by a CA that agents use to validate the server. This may include host checking.         |
+|            |                                +---------------------------------+-------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|            |                                | `Agent verification using SSL`_ | With host validation    | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
+|            |                                |                                 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|            |                                |                                 | Without host validation | The manager validates the agent by CA but not the host address. This method allows the use of a shared agent certificate.   |
++------------+--------------------------------+---------------------------------+-------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 .. note::
   The secure methods can be combined for a stronger security during the registration process.
@@ -29,7 +29,7 @@ Launching the daemon on the manager with default options would allow any agent t
 Prerequisites
 -------------
 
-The registration service requires an SSL certificate on the manager in order to work. If the system already has the ``openssl`` package, Wazuh will automatically generate a new one during the installation process. The certificate (and its key) will be available at ``/var/ossec/etc/``.
+The registration service requires an SSL certificate on the manager in order to work. If the system already has the ``openssl`` package, a new one will be generated automatically during the installation process. The certificate (and its key) will be available at ``/var/ossec/etc/``.
 
 It's possible to use a valid certificate with its key, just by copying them into the same path:
 
@@ -107,110 +107,94 @@ To enable the password authorization, use the ``-P`` flag when running the regis
 Host verification using SSL
 ---------------------------
 
-Use SSL to verify hosts
-^^^^^^^^^^^^^^^^^^^^^^^
+Creating a Certificate of Authority (CA)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Create a Certificate of Authority
-"""""""""""""""""""""""""""""""""
+To use the registration service with SSL certification, you must create a Certificate of Authority that will be used to sign certificates for the manager and the agents. The hosts will receive a copy of this CA in order to verify the remote certificate:
 
-First we are going to create a certificate of authority (CA) that we will use to sign the certificates for the manager and agents. Hosts will receive a copy of this certificate in order to verify the remote certificate:
+.. code-block:: console
 
-   .. code-block:: console
-
-        # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Manager"
+  # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Manager"
 
 .. warning::
-    The file ``rootCA.key`` that we have just created is the **private key** of the certificate of authority. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
+  The file ``rootCA.key`` that we have just created is the **private key** of the CA. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
 
-Verify manager via SSL
-^^^^^^^^^^^^^^^^^^^^^^
+Manager verification using SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Issue and sign a certificate for the authd server, entering the hostname or the IP address that agents will use to connect to the server. For example, if the server's IP is 192.168.1.2:
+1. Issue and sign a certificate for the manager, entering the hostname or the IP address that agents will use to connect to the server. For example, if the manager's IP is **192.168.1.2**:
 
-   .. code-block:: console
+  .. code-block:: console
 
-        # openssl req -new -nodes -newkey rsa:2048 -keyout sslmanager.key -out sslmanager.csr -subj '/C=US/CN=192.168.1.2'
-        # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial
+    # openssl req -new -nodes -newkey rsa:2048 -keyout sslmanager.key -out sslmanager.csr -subj '/C=US/CN=192.168.1.2'
+    # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial
 
-2. Copy the newly created certificate and the key to the manager's ``etc`` folder and start ``ossec-authd``:
+2. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the manager**, and start the registration service:
 
-   (Manager)
+  .. code-block:: console
 
-   .. code-block:: console
+    # cp sslmanager.cert sslmanager.key /var/ossec/etc
+    # /var/ossec/bin/ossec-authd
 
-        # cp sslmanager.cert sslmanager.key /var/ossec/etc
-        # /var/ossec/bin/ossec-authd
+3. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program:
 
-3. Copy the CA (but not the key) to the agent's ``etc`` folder and run ``agent-auth``:
+  .. code-block:: console
 
-   (Agent)
+    # cp rootCA.pem /var/ossec/etc
+    # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
 
-   .. code-block:: console
+Agent verification using SSL
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-        # cp rootCA.pem /var/ossec/etc
-        # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
+**Agent verification (without host validation)**
 
-Verify agents via SSL
-^^^^^^^^^^^^^^^^^^^^^
+In this example, we are going to create a certificate for agents without specifying their hostname, so that the same certificate can be used by many of them. This verifies that agents have a certificate signed by our CA, no matter where they're connecting from.
 
+1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field:
 
-**Verify agents via SSL (no host validation)**
+  .. code-block:: console
 
-  In this example, we are going to create a certificate for agents without specifying their hostname, so that the same certificate can be used by many agents. This verifies that agents have a certificate signed by our CA, no matter where they are connecting from.
+    # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
+    # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-  1. Issue and sign a certificate for the agent. Note that we will not enter the *common name* field:
+2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there) and start the registration service:
 
-    .. code-block:: console
+  .. code-block:: console
 
-        # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
-        # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+    # cp rootCA.pem /var/ossec/etc
+    # /var/ossec/bin/ossec-authd -v /var/ossec/etc/rootCA.pem
 
-  2. Copy the CA (but not the key) to the manager's ``etc`` folder (if not already there) and start ``ossec-authd``:
+3. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
 
-   (Manager)
+  .. code-block:: console
 
-   .. code-block:: console
+    # cp sslagent.cert sslagent.key /var/ossec/etc
+    # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
-          # cp rootCA.pem /var/ossec/etc
-          # /var/ossec/bin/ossec-authd -v /var/ossec/etc/rootCA.pem
+**Agent verification (with host validation)**
 
-  3. Copy the newly created certificate and key to the agent's ``etc`` folder and run ``agent-auth``. For example, if the server's IP is 192.168.1.2:
+This is an alternative method to the previous one. In this case, we will bind the agent's certificate to its IP address as seen by the manager.
 
-   (Agent)
+1. Issue and sign a certificate for the agent, entering its hostname or IP address into the *common name* field. For example, if the agent's IP is 192.168.1.3:
 
-   .. code-block:: console
+  .. code-block:: console
 
-          # cp sslagent.cert sslagent.key /var/ossec/etc
-          # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+    # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=192.168.1.3'
+    # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-**Verify agents via SSL (host validation)**
+2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there) and start the registration service. Note that we use the ``-s`` flag in order to enable agent host validation:
 
-  This is an alternative method to the last section. In this case, we will bind the agent's certificate to the agent IP address as seen by the manager.
+  .. code-block:: console
 
-  1. Issue and sign a certificate for the agent. Then enter its hostname or IP address into the *common name* field. For example, if the agent's IP is 192.168.1.3:
+    # cp rootCA.pem /var/ossec/etc
+    # /var/ossec/bin/ossec-authd -v /var/ossec/etc/rootCA.pem -s
 
-   .. code-block:: console
+3. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
 
-          # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=192.168.1.3'
-          # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+  .. code-block:: console
 
-  2. Copy the CA (but not the key) to the manager's ``etc`` folder (if not already there) and start ``ossec-authd``. Note that we use the ``-s`` option in order to enable agent host verification:
-
-   (Manager)
-
-   .. code-block:: console
-
-          # cp rootCA.pem /var/ossec/etc
-          # /var/ossec/bin/ossec-authd -v /var/ossec/etc/rootCA.pem -s
-
-  3. Copy the newly created certificate and key to the agent's ``etc`` folder and run ``agent-auth``. For example, if the server's IP is 192.168.1.2:
-
-   (Agent)
-
-   .. code-block:: console
-
-          # cp sslagent.cert sslagent.key /var/ossec/etc
-          # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+    # cp sslagent.cert sslagent.key /var/ossec/etc
+    # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
 Additional configurations
 -------------------------
@@ -221,7 +205,7 @@ Additional configurations
 
     <auth>
       <use_source_ip>no</use_source_ip>
-    </auth>
+    </auth>ls
 
 * Duplicate IPs are not allowed, so an agent won't be added if there is already another agent registered with the same IP. By changing the configuration file, ``ossec-authd`` can be told to **force a registration** if it finds an older agent with the same IP address. This will make the older agent's registration be deleted:
 
