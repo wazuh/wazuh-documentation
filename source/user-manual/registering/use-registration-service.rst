@@ -9,19 +9,19 @@ The ``authd`` daemon allows to register agents automatically. This registration 
 
 Launching the daemon on the manager with default options would allow any agent to register itself, and then connect to it. The secure methods provide some mechanisms to authorize the connections.
 
-+------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Type       | Method                                        | Description                                                                                                                 |
-+============+===============================================+=============================================================================================================================+
-| Not secure | `Simple method`_                              | The easiest method. There is no authentication or host verification.                                                        |
-+------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-| Secure     | `Use a password to authorize agents`_         | Allows agents to authenticate via a shared password. This method is easy but does not perform host validation.              |
-|            +-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|            | `Verify manager via SSL`_                     | The manager's certificate is signed by a CA that agents use to validate the server. This may include host checking.         |
-|            +--------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|            | `Verify agents via SSL`_ | Host validation    | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
-|            |                          +--------------------+-----------------------------------------------------------------------------------------------------------------------------+
-|            |                          | No host validation | The manager validates the agent by CA but not the host address. This method allows the use of a shared agent certificate.   |
-+------------+--------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------+
++----------+-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Type     | Method                                        | Description                                                                                                                 |
++==========+===============================================+=============================================================================================================================+
+| Insecure | `Simple method`_                              | The easiest method. There is no authentication or host verification.                                                        |
++----------+-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+| Secure   | `Password authorization`_                     | Allows agents to authenticate via a shared password. This method is easy but does not perform host validation.              |
+|          +-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|          | `Verify manager via SSL`_                     | The manager's certificate is signed by a CA that agents use to validate the server. This may include host checking.         |
+|          +--------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|          | `Verify agents via SSL`_ | Host validation    | The same as above, but the manager verifies the agent's certificate and address. There should be one certificate per agent. |
+|          |                          +--------------------+-----------------------------------------------------------------------------------------------------------------------------+
+|          |                          | No host validation | The manager validates the agent by CA but not the host address. This method allows the use of a shared agent certificate.   |
++----------+--------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------+
 
 .. note::
   The secure methods can be combined for a stronger security during the registration process.
@@ -61,55 +61,51 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
     # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
 
-Secure methods
---------------
+Password authorization
+----------------------
 
-Use a password to authorize agents
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+You can protect the manager from unauthorized registrations by using a password. Choose one by yourself, or let the registration service generate a random password.
 
-The manager can be protected from unauthorized registrations by using a password. We can choose one ourselves or let authd generate a random password.
+To enable the password authorization, use the ``-P`` flag when running the registration service.
 
-1. To specify a password manually, just write it to the file ``etc/authd.pass``. For example, if the key were "TopSecret":
+1. Follow one of these steps on the manager:
 
-   (Manager)
+  * To use a custom password, edit the ``/var/ossec/etc/authd.pass`` file and write it. For example, if we want to use *TopSecret* as a password:
 
-   .. code-block:: console
+    .. code-block:: console
 
-        # echo "TopSecret" > /var/ossec/etc/authd.pass
-        # /var/ossec/bin/ossec-authd -P
+      # echo "TopSecret" > /var/ossec/etc/authd.pass
+      # /var/ossec/bin/ossec-authd -P
 
-      Accepting connections. Using password specified on file: /var/ossec/etc/authd.pass
+      Accepting connections on port 1515. Using password specified on file: /var/ossec/etc/authd.pass
 
-2. If you don't specify a password, then authd will create a password itself and tell you what it is:
+  * If no password is specified on ``/var/ossec/etc/authd.pass``, the registration service will create a password itself and tell you what it is on the console output:
 
-   (Manager)
+    .. code-block:: console
 
-   .. code-block:: console
+      # /var/ossec/bin/ossec-authd -P
 
-        # /var/ossec/bin/ossec-authd -P
+      Accepting connections on port 1515. Random password chosen for agent authentication: abdc1234
 
-      Accepting connections. Random password chosen for agent authentication: abcd1234
+2. The agents can use the password by storing it on a file or as a command line argument. Follow one of these steps:
 
-On the agent side, the key can be put in a file of the same name or specified as a command-line argument.
+  * Write the password on ``/var/ossec/etc/authd.pass`` and run the ``agent-auth`` program:
 
-1. Using the file ``etc/authd.pass``:
+    .. code-block:: console
 
-   (Agent)
+      # echo "abcd1234" > /var/ossec/etc/authd.pass
+      # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
 
-   .. code-block:: console
+  * Run the program with the ``-P`` flag, and insert the password:
 
-        # echo "abcd1234" > /var/ossec/etc/authd.pass
-        # /var/ossec/bin/agent-auth -m 192.168.1.2
+    .. code-block:: console
 
-2. Entering the password at the command line:
-
-   (Agent)
-
-   .. code-block:: console
-
-        # /var/ossec/bin/agent-auth -m 192.168.1.2 -P "abcd1234"
+      # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS> -P "abcd1234"
 
 .. _verify-hosts:
+
+Host verification using SSL
+---------------------------
 
 Use SSL to verify hosts
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -216,28 +212,24 @@ Verify agents via SSL
           # cp sslagent.cert sslagent.key /var/ossec/etc
           # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
-Some hints
-----------
+Additional configurations
+-------------------------
 
-By default, authd adds the agents with their static IP. If you want to add agents with a dynamic IP address (like using ``any`` on ``manage_agents``) you must change ``etc/ossec.conf`` on the server-side:
+* By default, the registration service adds the agents with their static IP address. If you want to add them with a dynamic IP (like using ``any`` on the ``manage_agents`` tool), you must change the manager's configuration file (``/var/ossec/etc/ossec.conf``):
 
-   (Manager)
-
-   .. code-block:: xml
+  .. code-block:: xml
 
     <auth>
-	<use_source_ip>no</use_source_ip>
+      <use_source_ip>no</use_source_ip>
     </auth>
 
-On the other hand, **duplicate IPs are not allowed**, so an agent won't be added if there is already another agent registered with the same IP. By changing ``etc/ossec.conf``, authd can be told to **force a registration** if it finds an older agent with the same IP - the older agent's registration will be deleted:
+* Duplicate IPs are not allowed, so an agent won't be added if there is already another agent registered with the same IP. By changing the configuration file, ``ossec-authd`` can be told to **force a registration** if it finds an older agent with the same IP address. This will make the older agent's registration be deleted:
 
-   (Manager)
-
-   .. code-block:: xml
+  .. code-block:: xml
 
     <auth>
-	<force_insert>yes</force_insert>
-	<force_time>0</force_time>
+      <force_insert>yes</force_insert>
+      <force_time>0</force_time>
     </auth>
 
-The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, ``0`` means to delete the old agent's registration regardless of how recently it has checked in.
+  The **0** on ``<force-time>`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, it means to delete the old agent's registration regardless of how recently it has checked in.
