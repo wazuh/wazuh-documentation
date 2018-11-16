@@ -77,6 +77,7 @@ Available documentation
    getting-started/index
    installation-guide/index
    user-manual/index
+   Troubleshooting/index
    development/index
    docker/index
    deploying-with-puppet/index
