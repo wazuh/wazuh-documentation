@@ -5,9 +5,9 @@
 Using the registration service
 ==============================
 
-The ``authd`` daemon allows to register agents automatically. This registration process uses the :ref:`ossec-authd` and :ref:`agent-auth` programs on both manager and agent sides.
+The ``authd`` daemon allows to register agents automatically. This registration process uses :ref:`ossec-authd` on the manager instance, and :ref:`agent-auth` on the agent instances.
 
-Launching the daemon with default options would allow any agent to register itself, and then connect to a manager. The secure methods provide some mechanisms to authorize the connections.
+Launching the daemon on the manager with default options would allow any agent to register itself, and then connect to it. The secure methods provide some mechanisms to authorize the connections.
 
 +------------+-----------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------+
 | Type       | Method                                        | Description                                                                                                                 |
@@ -26,73 +26,40 @@ Launching the daemon with default options would allow any agent to register itse
 .. note::
   The secure methods can be combined for a stronger security during the registration process.
 
-Simple method
+Prerequisites
 -------------
 
-Get an SSL certificate
-^^^^^^^^^^^^^^^^^^^^^^
+The registration service requires an SSL certificate on the manager in order to work. If the system already has the ``openssl`` package, Wazuh will automatically generate a new one during the installation process. The certificate (and its key) will be available at ``/var/ossec/etc/``.
 
-The first step is to get an SSL key and certificate. This is required in order to make authd work.
-
-1. If you have a valid SSL certificate with its key, copy them into the `etc` folder:
-
-   (Manager)
-
-   .. code-block:: console
-
-      # cp <ssl_cert> /var/ossec/etc/sslmanager.cert
-      # cp <ssl_key> /var/ossec/etc/sslmanager.key
-
-2. Otherwise, you can create a self-signed certificate:
-
-   (Manager)
-
-   .. code-block:: console
-
-      # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /var/ossec/etc/sslmanager.key -out /var/ossec/etc/sslmanager.cert
-
-Register the agent
-^^^^^^^^^^^^^^^^^^
-
-1. Start the authd server:
-
-   (Manager)
-
-   .. code-block:: console
-
-    # /var/ossec/bin/ossec-authd
-
-2. Run the auth client on the agent. You must enter the authd server's IP address, like this:
+It's possible to use a valid certificate with its key, just by copying them into the same path:
 
 .. code-block:: console
 
-    # /var/ossec/bin/agent-auth -m 192.168.1.2
+  # cp <ssl_cert> /var/ossec/etc/sslmanager.cert
+  # cp <ssl_key> /var/ossec/etc/sslmanager.key
 
-Some hints
-^^^^^^^^^^
+Otherwise, you can create a self-signed certificate using the following command:
 
-By default, authd adds the agents with their static IP. If you want to add agents with a dynamic IP address (like using ``any`` on ``manage_agents``) you must change ``etc/ossec.conf`` on the server-side:
+.. code-block:: console
 
-   (Manager)
+  # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -out /var/ossec/etc/sslmanager.cert -keyout /var/ossec/etc/sslmanager.key
 
-   .. code-block:: xml
+Simple method
+-------------
 
-    <auth>
-	<use_source_ip>no</use_source_ip>
-    </auth>
+This is the easiest method to register agents. It doesn't require any kind of authorization or host verification. To do so, follow these steps:
 
-On the other hand, **duplicate IPs are not allowed**, so an agent won't be added if there is already another agent registered with the same IP. By changing ``etc/ossec.conf``, authd can be told to **force a registration** if it finds an older agent with the same IP - the older agent's registration will be deleted:
+1. On the manager, start the registration service:
 
-   (Manager)
+  .. code-block:: console
 
-   .. code-block:: xml
+    # /var/ossec/bin/ossec-authd
 
-    <auth>
-	<force_insert>yes</force_insert>
-	<force_time>0</force_time>
-    </auth>
+2. On the agents, run the ``agent-auth`` program, using the manager's IP address:
 
-The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, ``0`` means to delete the old agent's registration regardless of how recently it has checked in.
+  .. code-block:: console
+
+    # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
 
 Secure methods
 --------------
@@ -248,3 +215,29 @@ Verify agents via SSL
 
           # cp sslagent.cert sslagent.key /var/ossec/etc
           # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+
+Some hints
+----------
+
+By default, authd adds the agents with their static IP. If you want to add agents with a dynamic IP address (like using ``any`` on ``manage_agents``) you must change ``etc/ossec.conf`` on the server-side:
+
+   (Manager)
+
+   .. code-block:: xml
+
+    <auth>
+	<use_source_ip>no</use_source_ip>
+    </auth>
+
+On the other hand, **duplicate IPs are not allowed**, so an agent won't be added if there is already another agent registered with the same IP. By changing ``etc/ossec.conf``, authd can be told to **force a registration** if it finds an older agent with the same IP - the older agent's registration will be deleted:
+
+   (Manager)
+
+   .. code-block:: xml
+
+    <auth>
+	<force_insert>yes</force_insert>
+	<force_time>0</force_time>
+    </auth>
+
+The ``0`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, ``0`` means to delete the old agent's registration regardless of how recently it has checked in.
