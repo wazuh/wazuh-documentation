@@ -35,7 +35,6 @@ Options
 - `restart_audit`_
 - `windows_audit_interval`_
 - `whodata`_
-- `audit_extra_key`_
 
 .. _reference_ossec_syscheck_directories:
 
@@ -420,28 +419,30 @@ This option sets the frequency with which the Windows agent will check that the 
 whodata
 ^^^^^^^
 
-Inside this tag we are going to define the Whodata options.
-
-+--------------------+------------------------------------+
-| **Default value**  | N/A                                |
-+--------------------+------------------------------------+
-
-audit_extra_key
-^^^^^^^^^^^^^^^
-
 .. versionadded:: 3.7.1
 
-When two Audit rules are generated for the same directory and the same permissions, the Audit events appear with the first key. This option allows you to add other keys so that FIM does not discard these events.
+The Whodata options will be configured inside this tag.
 
-Only available for linux system with Audit.
+.. code-block:: xml
 
-.. note:: Audit allows inserting spaces inside the keys, so the spaces inserted inside the field <audit_extra_key> will be part of the key.
+    <!-- Audit keys -->
+    <whodata>
+        <audit_key>auditkey1,auditkey2</audit_key>
+    </whodata>
+
+**audit_key**
+
+Set up FIM engine to collect the Audit events using `audit_key` key(s).
+Wazuh will include in its FIM baseline those events being monitor by Audit using `audit_key`.
+For those systems where Audit is already set to monitor folders for other purposes, Wazuh can collect events generated as `audit_key` key. This option is available only for **Linux systems with Audit**.
 
 +--------------------+------------------------------------+
 | **Default value**  | Empty                              |
 +--------------------+------------------------------------+
 | **Allowed values** | Any string separated by commas     |
 +--------------------+------------------------------------+
+
+.. note:: Audit allow inserting spaces inside the keys, so the spaces inserted inside the field ``<audit_key>`` will be part of the key.
 
 
 Default Unix configuration
@@ -460,7 +461,7 @@ Default Unix configuration
 
     <!-- Audit keys -->
     <whodata>
-        <audit_extra_key>auditkey1,auditkey2</audit_extra_key>
+        <audit_key>auditkey1,auditkey2</audit_key>
     </whodata>
 
     <!-- Generate alert when new file detected -->
