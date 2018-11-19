@@ -1,0 +1,3 @@
+# Contributing to the Wazuh documentation
+
+In progress...
