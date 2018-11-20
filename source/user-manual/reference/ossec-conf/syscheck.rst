@@ -432,9 +432,7 @@ The Whodata options will be configured inside this tag.
 
 **audit_key**
 
-Set up FIM engine to collect the Audit events using `audit_key` key(s).
-Wazuh will include in its FIM baseline those events being monitor by Audit using `audit_key`.
-For those systems where Audit is already set to monitor folders for other purposes, Wazuh can collect events generated as `audit_key` key. This option is available only for **Linux systems with Audit**.
+Set up the FIM engine to collect the Audit events using keys with ``audit_key``. Wazuh will include in its FIM baseline those events being monitored by Audit using `audit_key`. For those systems where Audit is already set to monitor folders for other purposes, Wazuh can collect events generated as a key from `audit_key`. This option is only available for **Linux systems with Audit**.
 
 +--------------------+------------------------------------+
 | **Default value**  | Empty                              |
