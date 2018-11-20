@@ -5,12 +5,14 @@
 [![Documentation](https://img.shields.io/badge/docs-view-green.svg)](https://documentation.wazuh.com/)
 [![Website](https://img.shields.io/badge/web-view-green.svg)](https://wazuh.com/)
 
-This repository contains the Wazuh documentation files.
+Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
+
+The online documentation for this project is available in this repository. Members of the Wazuh team and community users contribute to its development and daily improvement.
 
 ## Online documentation
 
-- [Latest documentation (3.x)](https://documentation.wazuh.com/current/)
-- [Legacy documentation (2.1)](https://documentation.wazuh.com/2.1/)
+- [Current version (3.x)](https://documentation.wazuh.com/current/)
+- [Legacy version (2.1)](https://documentation.wazuh.com/2.1/)
 
 ## Contribute to this project
 
@@ -25,7 +27,7 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 - [sphinx-rtd-theme](https://pypi.org/project/sphinx_rtd_theme/) 0.2.4
 - [sphinxcontrib-images](https://pypi.org/project/sphinxcontrib-images/) 0.7.0
 
-## Copyright
+## Copyright & License
 
 Copyright © 2018 Wazuh, Inc.
 
