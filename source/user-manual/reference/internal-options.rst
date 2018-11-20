@@ -475,11 +475,12 @@ Logcollector
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Allowed value | Any integer between 1 and 120                                              |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
-|  **logcollector.open_attempts**          | Description   | Number of attempts to open a log file.                                     |
+|  **logcollector.open_attempts**          | Description   | Number of attempts to open a log file. The value 0 means that the number   |
+|                                          |               | of attempts is infinite.                                                   |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 8                                                                          |
 +                                          +---------------+----------------------------------------------------------------------------+
-|                                          | Allowed value | Any integer between 2 and 998                                              |
+|                                          | Allowed value | Any integer between 0 and 998                                              |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 | **logcollector.remote_commands**         | Description   | Toggles Logcollector to accept remote commands from the manager or not.    |
 +                                          +---------------+----------------------------------------------------------------------------+
