@@ -41,7 +41,7 @@ Request List
 	* GET /agents  (`Get all agents`_)
 	* GET /agents/:agent_id  (`Get an agent`_)
 	* GET /agents/:agent_id/config/:component/:configuration  (`Get active configuration`_)
-	* GET /agents/:agent_id/group/is_sync  (`Get sycn status of agent`_)
+	* GET /agents/:agent_id/group/is_sync  (`Get sync status of agent`_)
 	* GET /agents/:agent_id/key  (`Get agent key`_)
 	* GET /agents/:agent_id/upgrade_result  (`Get upgrade result from agent`_)
 	* GET /agents/groups  (`Get groups`_)
@@ -646,7 +646,7 @@ Removes an agent.
 Group
 ++++++++++++++++++++++++++++++++++++++++
 
-Get sycn status of agent
+Get sync status of agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the sync status in JSON format
 
