@@ -70,6 +70,12 @@ Kibana and Splunk app
 | Splunk        |  7.2.0  |     3.7.0     | `v3.7.0_7.2.0.tar.gz <https://packages.wazuh.com/3.x/splunkapp/v3.7.0_7.2.0.tar.gz>`_      | 92865dd2ce2e23dda34c53419029694f89d2f3297d9ba562d33fee6c7c7f979655deb0b0732b4f919acd416f344b8a19d1c014933f96ea101977763a1a343504 | bdafa1e85fe85e2928ef1a51798a7457 |
 +---------------+---------+---------------+--------------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+----------------------------------+
 
+.. note::
+  If you want to download a different Wazuh app for another version of Wazuh or Splunk/Elastic Stack, check the tables available at their repositories:
+
+  - `Wazuh app for Elastic Stack <https://github.com/wazuh/wazuh-kibana-app#older-packages>`_
+  - `Wazuh app for Splunk <https://github.com/wazuh/wazuh-splunk#installation>`_
+
 Virtual machine
 ---------------
 

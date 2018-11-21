@@ -190,10 +190,6 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     The Kibana plugin installation process may take several minutes. Please wait patiently.
 
-  .. note::
-
-    If you want to download a different Wazuh app plugin for another version of Wazuh or the Elastic Stack, check the table available at `GitHub <https://github.com/wazuh/wazuh-kibana-app#installation>`_ and use the appropriate installation command.
-
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 
   .. code-block:: yaml
