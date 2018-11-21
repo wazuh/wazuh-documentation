@@ -14,3 +14,4 @@ This part of the user manual will cover the configuration files used by the Wazu
 
         config-file
         elasticsearch
+        configure-indices
