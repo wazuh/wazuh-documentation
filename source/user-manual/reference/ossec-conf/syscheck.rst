@@ -379,8 +379,9 @@ remove_old_diff
 ^^^^^^^^^^^^^^^
 
 .. versionadded:: 3.4.0
+.. deprecated:: 3.8.0
 
-Specifies if Syscheck should delete the local snapshots that are not currently being monitorized.
+Specifies if Syscheck should delete the local snapshots that are not currently being monitorized. Since version 3.8.0, Syscheck will always purge those snapshots.
 
 +--------------------+---------+
 | **Default value**  | yes     |
@@ -458,9 +459,6 @@ Default Unix configuration
     <nodiff>/etc/ssl/private.key</nodiff>
 
     <skip_nfs>yes</skip_nfs>
-
-    <!-- Remove not monitored files -->
-    <remove_old_diff>yes</remove_old_diff>
 
     <!-- Allow the system to restart Auditd after installing the plugin -->
     <restart_audit>yes</restart_audit>
