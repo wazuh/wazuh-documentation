@@ -53,7 +53,7 @@ Note that the `(wazuh_venv)` label on the terminal means that we're currently us
 
 2. Change to the repository folder and install the dependencies. You can use `pip` for this:
 ```shell
-(wazuh_venv) $ pip install -f requirements.txt
+(wazuh_venv) $ pip install -r requirements.txt
 ```
 
 3. After installing the dependencies, you should be able to compile the documentation:
