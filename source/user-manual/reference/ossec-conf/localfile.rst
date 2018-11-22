@@ -198,65 +198,69 @@ This specifies the format of the log being read. **It is required field.**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
-+--------------------+-------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                               |
-+--------------------+----------------+--------------------------------------------------------------------------------------------------+
-| **Allowed values** | syslog         | Used for plain text files in a syslog-like format.                                               |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | json           | Used for single-line JSON files and allows for customized labels to be added to JSON events.     |
-|                    |                |                                                                                                  |
-|                    |                | See also the tag `label`_ for more information.                                                  |
-|                    |                |                                                                                                  |
-|                    |                | .. versionadded:: 3.0.0                                                                          |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | snort-full     | Used for Snort’s full-output format.                                                             |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | snort-fast     | Used for Snort's fast-output format.                                                             |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | squid          | Used for squid logs.                                                                             |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | iis            | Used for IIS logs.                                                                               |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | eventlog       | Used for the classic Microsoft Windows event log format.                                         |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | eventchannel   | Used for Microsoft Windows event logs, using the new EventApi.                                   |
-|                    |                |                                                                                                  |
-|                    |                | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | audit          | Used for events from Auditd.                                                                     |
-|                    |                |                                                                                                  |
-|                    |                | This format chains consecutive logs with the same ID into a single event.                        |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | mysql_log      | Used for ``MySQL`` logs, however, this value does not support multi-line logs.                   |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | postgresql_log | Used for ``PostgreSQL`` logs, however, this value does not support multi-line logs.              |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | nmapg          | Used for monitoring files conforming to the grep-able output from ``nmap``.                      |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | apache         | Used for Apache's default log format.                                                            |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | command        | Used to read output from the command (as run by root) specified by the command tag.              |
-|                    |                |                                                                                                  |
-|                    |                | Each line of output is be treated as a separate log.                                             |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | full_command   | Used to read output from the command (as run by root) specified by the command tag.              |
-|                    |                |                                                                                                  |
-|                    |                | The entire output will be treated as a single log item.                                          |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | djb-multilog   | Used to read files in the format produced by the multilog service logger in daemontools.         |
-+                    +----------------+--------------------------------------------------------------------------------------------------+
-|                    | multi-line     | Used to monitor applications that log multiple lines per event.                                  |
-|                    |                |                                                                                                  |
-|                    |                | The number of lines must be consistent in order to use this value.                               |
-|                    |                |                                                                                                  |
-|                    |                | The number of lines in each log entry must be specified following the ``multi-line:`` value.     |
-|                    |                |                                                                                                  |
-|                    |                | Each line will be combined with the previous lines until all lines are gathered which means there|
-|                    |                |                                                                                                  |
-|                    |                | may be multiple timestamps in the final event.                                                   |
-|                    |                |                                                                                                  |
-|                    |                | The format for this value is: <log_format>multi-line: NUMBER</log_format>                        |
-+--------------------+----------------+--------------------------------------------------------------------------------------------------+
++--------------------+----------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                                                  |
++--------------------+-------------------+--------------------------------------------------------------------------------------------------+
+| **Allowed values** | syslog            | Used for plain text files in a syslog-like format.                                               |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | json              | Used for single-line JSON files and allows for customized labels to be added to JSON events.     |
+|                    |                   |                                                                                                  |
+|                    |                   | See also the tag `label`_ for more information.                                                  |
+|                    |                   |                                                                                                  |
+|                    |                   | .. versionadded:: 3.0.0                                                                          |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | snort-full        | Used for Snortâ€™s full-output format.                                                           |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | snort-fast        | Used for Snort's fast-output format.                                                             |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | squid             | Used for squid logs.                                                                             |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | iis               | Used for IIS logs.                                                                               |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | eventlog          | Used for the classic Microsoft Windows event log format.                                         |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | eventchannel      | Used for Microsoft Windows event logs, using the new EventApi.                                   |
+|                    |                   |                                                                                                  |
+|                    |                   | This can be used to monitor standard â€œWindowsâ€� event logs and "Application and Services" logs.|
+|                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | eventchannel-json | Used for events from Auditd.                                                                     |
+|                    |                   |                                                                                                  |
+|                    |                   | This format chains consecutive logs with the same ID into a single event.                        |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | audit             | Used for events from Auditd.                                                                     |
+|                    |                   |                                                                                                  |
+|                    |                   | This format chains consecutive logs with the same ID into a single event.                        |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | mysql_log         | Used for ``MySQL`` logs, however, this value does not support multi-line logs.                   |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | postgresql_log    | Used for ``PostgreSQL`` logs, however, this value does not support multi-line logs.              |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | nmapg             | Used for monitoring files conforming to the grep-able output from ``nmap``.                      |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | apache            | Used for Apache's default log format.                                                            |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | command           | Used to read output from the command (as run by root) specified by the command tag.              |
+|                    |                   |                                                                                                  |
+|                    |                   | Each line of output is be treated as a separate log.                                             |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | full_command      | Used to read output from the command (as run by root) specified by the command tag.              |
+|                    |                   |                                                                                                  |
+|                    |                   | The entire output will be treated as a single log item.                                          |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | djb-multilog      | Used to read files in the format produced by the multilog service logger in daemontools.         |
++                    +-------------------+--------------------------------------------------------------------------------------------------+
+|                    | multi-line        | Used to monitor applications that log multiple lines per event.                                  |
+|                    |                   |                                                                                                  |
+|                    |                   | The number of lines must be consistent in order to use this value.                               |
+|                    |                   |                                                                                                  |
+|                    |                   | The number of lines in each log entry must be specified following the ``multi-line:`` value.     |
+|                    |                   |                                                                                                  |
+|                    |                   | Each line will be combined with the previous lines until all lines are gathered which means there|
+|                    |                   |                                                                                                  |
+|                    |                   | may be multiple timestamps in the final event.                                                   |
+|                    |                   |                                                                                                  |
+|                    |                   | The format for this value is: <log_format>multi-line: NUMBER</log_format>                        |
++--------------------+-------------------+--------------------------------------------------------------------------------------------------+
 
 .. warning::
 
