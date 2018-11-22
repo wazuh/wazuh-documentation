@@ -53,7 +53,7 @@ Let's suppose that we want to change the indices from ``wazuh-alerts-3.x-*`` to 
 
     # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json
 
-3. Open the template file and locate the line with the name, and change it with the new name:
+3. Open the template file and locate the line with the name, and change it with the new one:
 
   From this:
 
@@ -81,6 +81,14 @@ Let's suppose that we want to change the indices from ``wazuh-alerts-3.x-*`` to 
     ``{"acknowledged":true}`` indicates that the template was inserted correctly.
 
 5. Open the Wazuh configuration file for Logstash (``/etc/logstash/conf.d/01-wazuh.conf``) and replace the index name on the ``output -> elasticsearch`` section:
+
+  From this:
+
+  .. code-block:: none
+
+    index => "wazuh-alerts-3.x-%{+YYYY.MM.dd}"
+
+  To this:
 
   .. code-block:: none
 
@@ -110,7 +118,7 @@ Let's suppose that we want to change the indices from ``wazuh-alerts-3.x-*`` to 
     # service logstash restart
     # service kibana restart
 
-9. After waiting some minutes, open up again the Kibana interface on your web browser. f you go to *Management -> Index patterns*, you should see your new index pattern created and ready to use. You can also open the :ref:`Pattern <kibana_index_pattern>` section on the Wazuh app, and make sure that the new one is selected.
+9. After waiting some minutes, open up again the Kibana interface on your web browser. If you go to *Management -> Index patterns*, you should see your new index pattern created and ready to use. You can also open the :ref:`Pattern <kibana_index_pattern>` section on the Wazuh app, and make sure that the new one is selected.
 
 .. warning::
   If you already have indices created with the previous name, they won't be changed, and cannot be used with the new index pattern on the Wazuh app. You can still change to the previous index pattern to see them, or you can perform a `reindexation <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-reindex.html>`_ to rename the existing indices.
