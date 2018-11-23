@@ -18,11 +18,23 @@ Configuration
 
 The Integrator is not enabled by default, however, it can be enabled using the following command:
 
-.. code-block:: console
+  .. code-block:: console
 
-    # /var/ossec/bin/ossec-control enable integrator
-    # /var/ossec/bin/ossec-control restart
+      # /var/ossec/bin/ossec-control enable integrator
 
+After enabling it, restart the Wazuh manager:
+
+  a. For Systemd:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-manager restart
 
 Integrations are configured in the ``etc/ossec.conf`` file which is located inside your Wazuh installation directory.  Add the following information inside *<ossec_config> </ossec_config>* to configure integration:
 

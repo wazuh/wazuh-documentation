@@ -93,7 +93,7 @@ After starting Elasticsearch, you can see whether this setting was successfully 
 
 .. code-block:: console
 
-    # curl "localhost:9200/_nodes?filter_path=**.mlockall&pretty"
+    # curl "http://localhost:9200/_nodes?filter_path=**.mlockall&pretty"
 
 .. code-block:: json
 
@@ -194,7 +194,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
 .. code-block:: console
 
-  # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @w-elastic-template.json
+  # curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @w-elastic-template.json
 
 .. code-block:: json
 
@@ -229,7 +229,7 @@ In a cluster with one node, the number of replicas should be set to zero:
 
 .. code-block:: none
 
-  # curl -XPUT 'localhost:9200/wazuh-alerts-*/_settings?pretty' -H 'Content-Type: application/json' -d'
+  # curl -X PUT "http://localhost:9200/wazuh-alerts-*/_settings?pretty" -H 'Content-Type: application/json' -d'
   {
     "settings" : {
       "number_of_replicas" : 0
@@ -245,7 +245,7 @@ Note that we are assuming your target index pattern is **"wazuh-alerts-*"**, how
 
 .. code-block:: console
 
-  # curl "localhost:9200/_cat/indices"
+  # curl "http://localhost:9200/_cat/indices"
 
 Reference:
 

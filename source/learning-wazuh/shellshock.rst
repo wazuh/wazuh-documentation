@@ -134,9 +134,17 @@ with this:
 
 and then restart Wazuh manager:
 
+  a. For Systemd:
+
     .. code-block:: console
 
-        # ossec-control restart
+      # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager restart
 
 Run the same curl probe just like last time, remembering to substitute for ES_SERVER_EIP:
 
@@ -243,9 +251,17 @@ from responding to any packets from the attacker.  Note that packets are still r
 
 Restart the manager:
 
-    .. code-block:: console
+    a. For Systemd:
 
-        ossec-control restart
+      .. code-block:: console
+
+        # systemctl restart wazuh-manager
+
+    b. For SysV Init:
+
+      .. code-block:: console
+
+        # service wazuh-manager restart
 
 Run the same probe again from linux-agent.  Observe that the output of the Windows command line "route print /4" now shows a null route for the Elastic IP of linux-agent.  It will be in the "Persistent Routes:" section of the output.
 

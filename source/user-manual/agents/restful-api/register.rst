@@ -44,6 +44,14 @@ Basically, the scripts perform the following steps:
 
 **Step 4:** Restart the agent.
 
-.. code-block:: console
+a. For Systemd:
 
-    # /var/ossec/bin/ossec-control restart
+  .. code-block:: console
+
+    # systemctl restart wazuh-agent
+
+b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-agent restart

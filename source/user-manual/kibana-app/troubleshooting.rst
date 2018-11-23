@@ -15,10 +15,10 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
 .. code-block:: console
 
   "kibana": {
-    "version": "6.4.3"
+    "version": "6.5.0"
   },
 
-Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.4.3`` then your installed Kibana version must be ``6.4.3``.
+Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.5.0`` then your installed Kibana version must be ``6.5.0``.
 
 You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
@@ -29,7 +29,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
   {"acknowledged":true}
 

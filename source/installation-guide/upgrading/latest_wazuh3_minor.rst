@@ -7,11 +7,30 @@ Upgrade to the latest version of Wazuh 3.x
 
 The following steps show how to upgrade to the latest available version of Wazuh 3.x (which implies upgrading to the latest version of Elastic Stack 6.x).
 
+Starting the upgrade
+--------------------
+
+If you followed our :ref:`manager <installation>` or :ref:`agents <installation_agents>` installation guides, probably you disabled the repository in order to avoid undesired upgrades. It's necessary to enable them again to get the last packages.
+
+a) For CentOS/RHEL/Fedora:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=0/enabled=1/" /etc/yum.repos.d/wazuh.repo
+
+b) For Debian/Ubuntu:
+
+  This step is not necessary if you set the packages to the ``hold`` state instead of disabling the repositories.
+
+  .. code-block:: console
+
+    # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/wazuh.list
+
 Upgrade the Wazuh manager
--------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. note::
-  Since Wazuh v3.7.0 the File Integrity Monitoring database is not used anymore. In order to add to Wazuh DB the file and registry entries stored from previous versions it's necessary to run the :ref:`migration script <fim_migrate>`.
+  Since Wazuh v3.7.0 the File Integrity Monitoring database is not used anymore. In order to add to Wazuh DB the file and registry entries stored from previous versions it's necessary to run the :ref:`FIM migration tool <fim_migrate>`.
 
 1. Upgrade the ``wazuh-manager`` package:
 
@@ -45,7 +64,7 @@ Upgrade the Wazuh manager
   The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.
 
 Upgrade the Wazuh agent
------------------------
+^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Upgrade the ``wazuh-agent`` package:
 
@@ -82,6 +101,26 @@ Upgrade the Wazuh agent
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
+
+Finishing the Wazuh upgrade
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You've finished upgrading your Wazuh installation to the latest version. Now you can disable again the Wazuh repositories in order to avoid undesired upgrades and compatibility issues.
+
+a) For CentOS/RHEL/Fedora:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
+b) For Debian/Ubuntu:
+
+  This step is not necessary if you set the packages to the ``hold`` state instead of disabling the repositories.
+
+  .. code-block:: console
+
+    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+    # apt-get update
 
 Upgrade to the latest Elastic Stack version
 -------------------------------------------
@@ -123,13 +162,13 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # yum install elasticsearch-6.4.3
+    # yum install elasticsearch-6.5.0
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.4.3
+    # apt-get install elasticsearch=6.5.0
 
 2. Start the Elasticsearch service:
 
@@ -143,14 +182,14 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # curl "localhost:9200/?pretty"
+    # curl "http://localhost:9200/?pretty"
 
     {
       "name" : "Zr2Shu_",
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.4.3",
+        "number" : "6.5.0",
         "build_flavor" : "default",
         "build_type" : "rpm",
         "build_hash" : "053779d",
@@ -170,7 +209,7 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
 Upgrade Logstash
 ^^^^^^^^^^^^^^^^
@@ -181,13 +220,13 @@ Upgrade Logstash
 
   .. code-block:: console
 
-    # yum install logstash-6.4.3
+    # yum install logstash-6.5.0
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.4.3-1
+    # apt-get install logstash=1:6.5.0-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -227,13 +266,13 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # yum install kibana-6.4.3
+    # yum install kibana-6.5.0
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install kibana=6.4.3
+    # apt-get install kibana=6.5.0
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -255,7 +294,7 @@ Upgrade Kibana
   .. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.7.0_6.4.3.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.7.0_6.5.0.zip
 
 .. warning::
   The Wazuh app installation process may take several minutes. Please wait patiently.
@@ -277,14 +316,14 @@ Upgrade Filebeat
 
   .. code-block:: console
 
-    # yum install filebeat-6.4.3
+    # yum install filebeat-6.5.0
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
     # apt-get update
-    # apt-get install filebeat=6.4.3
+    # apt-get install filebeat=6.5.0
 
 2. Start the Filebeat service:
 
@@ -294,20 +333,25 @@ Upgrade Filebeat
     # systemctl enable filebeat.service
     # systemctl start filebeat.service
 
+Finishing the Elastic Stack upgrade
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 You've finished upgrading your Wazuh installation to the latest version. Now you can disable again the Elastic Stack repositories in order to avoid undesired upgrades and compatibility issues with the Wazuh app.
 
 a) For CentOS/RHEL/Fedora:
 
-.. code-block:: console
+  .. code-block:: console
 
-  # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
 b) For Debian/Ubuntu:
 
-.. code-block:: console
+  This step is not necessary if you set the packages to the ``hold`` state instead of disabling the repositories.
 
-  # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
-  # apt-get update
+  .. code-block:: console
+
+    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
+    # apt-get update
 
 Official upgrading guides for the Elastic Stack:
 
