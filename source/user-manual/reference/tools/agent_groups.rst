@@ -12,45 +12,45 @@ The agent_groups program allows you to list agents assigned to a group, assign a
 +---------------------------------------+-----------------------------------------------------------+
 | **-h**                                | Displays the help message                                 |
 +---------------------------------------+-----------------------------------------------------------+
-| **-q**                                | Quiet mode (outputs no confirmation)                      |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-d**                                | Debug                                                     |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-l**                                | Lists all groups                                          |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-l -g group_id**                    | Lists the agents in the group                             |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-c -g group_id**                    | Lists the configuration files in group                    |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-a -g group_id [-q]**               | Creates a group                                           |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-r -g group_id [-q]**               | Removes a group (affects to all agents assigned to it)    |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-a -i agent_id -g group_id [-q]**   | Assigns group_id to the agent's group list                |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-a -f -i agent_id -g group_id [-q]**| Replaces the agent's groups to group_id                   |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-r -i agent_id [-q]**               | Remove an agent from all its groups                       |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-r -i agent_id -g group_id [-q]**   | Remove an agent from a specific group                     |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-s -i agent_id**                    | Shows the groups of an agent                              |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-| **-S -i agent_id**                    | Shows the shared files sync status of an agent            |                 
-+---------------------------------------+-----------------------------------------------------------+                 
-                                                                                                                      
-Examples                                                                                                              
---------                                                                                                              
-* Create group *'debian'*:                                                                                            
-                                                                                                                      
-.. code-block:: console                                                                                               
-                                                                                                                      
-    $ /var/ossec/bin/agent_groups -a -g debian                                                                
-    Do you want to create the group 'debian'? [y/N]: y                                                                
-    Group 'debian' created.                                                                                           
-                                                                                                                      
-* Assign group *'debian'* to agent 002:                                                                               
-                                                                                                                      
+| **-q**                                | Quiet mode (outputs no confirmation)                      |
++---------------------------------------+-----------------------------------------------------------+
+| **-d**                                | Debug                                                     |
++---------------------------------------+-----------------------------------------------------------+
+| **-l**                                | Lists all groups                                          |
++---------------------------------------+-----------------------------------------------------------+
+| **-l -g group_id**                    | Lists the agents in the group                             |
++---------------------------------------+-----------------------------------------------------------+
+| **-c -g group_id**                    | Lists the configuration files in group                    |
++---------------------------------------+-----------------------------------------------------------+
+| **-a -g group_id [-q]**               | Creates a group                                           |
++---------------------------------------+-----------------------------------------------------------+
+| **-r -g group_id [-q]**               | Removes a group (affects to all agents assigned to it)    |
++---------------------------------------+-----------------------------------------------------------+
+| **-a -i agent_id -g group_id [-q]**   | Assigns group_id to the agent's group list                |
++---------------------------------------+-----------------------------------------------------------+
+| **-a -f -i agent_id -g group_id [-q]**| Replaces the agent's groups to group_id                   |
++---------------------------------------+-----------------------------------------------------------+
+| **-r -i agent_id [-q]**               | Remove an agent from all its groups                       |
++---------------------------------------+-----------------------------------------------------------+
+| **-r -i agent_id -g group_id [-q]**   | Remove an agent from a specific group                     |
++---------------------------------------+-----------------------------------------------------------+
+| **-s -i agent_id**                    | Shows the groups of an agent                              |
++---------------------------------------+-----------------------------------------------------------+
+| **-S -i agent_id**                    | Shows the shared files sync status of an agent            |
++---------------------------------------+-----------------------------------------------------------+
+
+Examples
+--------
+* Create group *'debian'*:
+
+.. code-block:: console
+
+    $ /var/ossec/bin/agent_groups -a -g debian
+    Do you want to create the group 'debian'? [y/N]: y
+    Group 'debian' created.
+
+* Assign group *'debian'* to agent 002:
+
 .. code-block:: console
 
     $ /var/ossec/bin/agent_groups -a -i 002 -g debian
@@ -97,7 +97,8 @@ Examples
     Do you want to delete all groups of agent '002'? [y/N]: y
     Group unset for agent '002'.
 
-* Remove agent 003 from a specific group 
+* Remove agent 003 from a specific group
+
 .. code-block:: console
 
     $ /var/ossec/bin/agent_groups -r -i 003 -g group2
