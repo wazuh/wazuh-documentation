@@ -21,7 +21,7 @@ Requirements
 Container memory
 ^^^^^^^^^^^^^^^^^^
 
-It is recommended to set Docker host preferences to give at least **4GB** memory per container (this doesn't necessarily mean they all will use it, but **Elasticsearch** requires them to work properly).
+It is recommended to set Docker host preferences to give at least **6GB** memory for the host that created the containers (this doesn't necessarily mean they all will use it, but **Elasticsearch** requires them to work properly).
 
 Increase max_map_count on your host (Linux)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

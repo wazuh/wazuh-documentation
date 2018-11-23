@@ -13,15 +13,17 @@ The first thing you need to do is install Docker and Docker compose if you don't
 Docker engine
 ----------------------------------------------
 
-.. note:: Docker requires a 64-bit operating system running kernel version 3.10 or higher. To check your current kernel version, open a terminal and use ``uname -r`` to display your kernel version:
+ Docker requires a 64-bit operating system running kernel version 3.10 or higher. 
 
-	.. code-block:: console
+ 1. Check your current kernel version. Open a terminal and use ``uname -r`` to display your kernel version:
 
-	  # uname -r
-	  3.10.0-229.el7.x86_64
+.. code-block:: console
+
+  # uname -r
+  3.10.0-229.el7.x86_64
 
 
-1. Run the Docker installation script.
+2. Run the Docker installation script.
 
 .. code-block:: console
 

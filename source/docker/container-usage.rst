@@ -101,7 +101,7 @@ If for example we had launched the command ``docker-compose up`` on host with IP
 
 2. Agent registration. 
 
-We search the agent using ``authd``. 
+We register the agent using ``authd``. 
 
 .. code-block:: console 
 
@@ -132,16 +132,27 @@ Here is an example of a ``/wazuh-config-mount`` folder used to mount some common
           └── default
               └── agent.conf
 
-  4 directories, 3 files
 
 In that case, you will see this in the Wazuh manager logs on boot:
 
+To add a custom manager configuration.
+
 .. code-block:: console
 
-  Identified Wazuh configuration files to mount...
   '/wazuh-config-mount/etc/ossec.conf' -> '/var/ossec/data/etc/ossec.conf'
+
+To add local rules that are not in the ruleset and to be able to use them.
+
+.. code-block:: console
+
   '/wazuh-config-mount/etc/rules/local_rules.xml' -> '/var/ossec/data/etc/rules/local_rules.xml'
+
+To add a custom configuration for Wazuh agents, pushed from the manager. 
+
+.. code-block:: console
+
   '/wazuh-config-mount/etc/shared/default/agent.conf' -> '/var/ossec/data/etc/shared/default/agent.conf'
+ 
 
 
 Mount storage for Elastic Stack components
