@@ -5,10 +5,13 @@
 Install and configure Splunk Forwarder
 ======================================
 
-A Forwarder is required in order to send alerts to the indexer. This component will be installed on the **Wazuh manager instance**.
+A Splunk Forwarder is required in order to send alerts to the indexer. This component will be installed on the **Wazuh manager instance**.
 
-- On a **single-instance architecture**, the forwarder points to the Splunk Enterprise instance where the Wazuh app was installed.
-- On a **multi-instance architecture**, the forwarder points to the *search peers* (or indexers), and not the *search head*.
+Depending on the type of architecture that you're installing, the Splunk Forwarder is configured differently.
+
+.. warning::
+  - On a **single-instance architecture**, the forwarder must point to the **Splunk Enterprise instance** where the Wazuh app was installed.
+  - On a **multi-instance architecture**, the forwarder must point to the **search peers (or indexers)**, and not the *search head*.
 
 Installation process
 --------------------
@@ -69,14 +72,14 @@ Configuring inputs
 Set up data forwarding
 ^^^^^^^^^^^^^^^^^^^^^^
 
-1. Point Forwarder output to Wazuh's Indexer with the following command:
+1. Point Forwarder output to Wazuh's Splunk Indexer with the following command:
 
   .. code-block:: console
 
     # /opt/splunkforwarder/bin/splunk add forward-server <INDEXER_IP>:<INDEXER_PORT>
 
-  - ``INDEXER_IP``: Splunk Indexer location.
-  - ``INDEXER_PORT``: by default on port 9997.
+  - ``INDEXER_IP`` is the IP address of the Splunk Indexer.
+  - ``INDEXER_PORT`` is the port of the Splunk Indexer. By default it's 9997.
 
 2. Restart Splunk Forwarder service:
 
