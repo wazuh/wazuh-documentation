@@ -87,9 +87,23 @@ VPC Flow
     :align: center
     :width: 100%
 
+Inspector
+^^^^^^^^^
+
+Services such as Inspector does not need to store logs into a bucket. These services use API calls to retrieve the information. You must specify at least a region into ``ossec.conf`` for this service. Multiple regions can be added separated by commas.
+
+An example of configuration of Inspector service is the follow:
+
+.. code-block:: xml
+
+   <service type="inspector">
+       <access_key>insert_access_key</access_key>
+       <secret_key>insert_secret_key</secret_key>
+       <regions>us-east-1, eu-west-1</regions>
+   </service>
 
 Other AWS Services (Guard Duty, Macie and IAM)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section explains how to get logs from Guard Duty, Macie and IAM.
 
