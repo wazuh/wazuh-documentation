@@ -22,7 +22,3 @@ To execute a request, place the cursor on the desired request line and click on 
 .. note::
 
   Using the web browser's local storage, you can close the tab, and the same content will be available the next time you open *Dev tools*.
-
-.. warning::
-
-  Currently, the tab only allows fetching data with ``GET`` requests.
