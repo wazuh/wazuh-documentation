@@ -11,7 +11,7 @@ The first thing you need to do is install Docker and Docker compose if you don't
 - `Docker compose`_
 
 Docker engine
-----------------------------------------------
+-------------
 
 Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
@@ -21,7 +21,6 @@ Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
   # uname -r
   3.10.0-229.el7.x86_64
-
 
 2. Run the Docker installation script.
 
@@ -36,9 +35,8 @@ Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
     # usermod -aG docker your-user
 
-
 Docker compose
-----------------------------------------------
+--------------
 
 Docker Compose 1.6 or newer is required. Follow these steps to install it:
 

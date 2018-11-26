@@ -2,11 +2,10 @@
 
 .. _container-usage:
 
-
 Wazuh Docker utilities
-==========================
+======================
 
-There are multiple possibilities in the use of Wazuh-Docker containers, below we show some of the most significant cases. 
+There are multiple possibilities in the use of Wazuh-Docker containers, below we show some of the most significant cases.
 
 - `Access to containers and services`_
 - `Registering agents`_
@@ -15,11 +14,10 @@ There are multiple possibilities in the use of Wazuh-Docker containers, below we
 - `Custom commands and scripts`_
 - `Upgrades`_
 
-
 Access to containers and services
-------------------------------------
+---------------------------------
 
-1. We can list the containers we have created as follows. From the directory where you have the ``docker-compose`.yml`` file:
+1. We can list the containers we have created as follows. From the directory where you have the ``docker-compose.yml`` file:
 
 .. code-block:: console
 
@@ -47,74 +45,72 @@ Where ``service name `` is the name of each service in the ``docker-compose.yml`
 - kibana
 - nginx
 
-Then access the Kibana UI trough Nginx by hitting `https://localhost <http://localhost>`_ with a web browser if you are in the Docker host. 
+Then access the Kibana UI trough Nginx by hitting `https://localhost <http://localhost>`_ with a web browser if you are in the Docker host.
 
 You can also access through the IP of the Docker host. For example, if you have a virtual machine where you have created the containers whose IP address is ``192.168.20.220`` you will be able to access through ``https://192.168.20.220``.
 
-.. note:: You may need to add an exception to the certificate in your browser. 
-
+.. note::
+  You may need to add an exception to the certificate in your browser.
 
 Registering agents
--------------------
+------------------
 
-Registering agents in a Wazuh manager deployed through Docker is quite simple, we only have to indicate the IP address of the host that has the containers working.  
+Registering agents in a Wazuh manager deployed through Docker is quite simple, we only have to indicate the IP address of the host that has the containers working.
 
-1. Adapt the agent configuration file.  
-
-.. code-block:: console
-
-	<ossec_config>
-	  <client>
-	    <server>
-	      <address>MANAGER_IP</address>
-	      <port>1514</port>
-	      <protocol>udp</protocol>
-	    </server>
-	    <config-profile>ubuntu, ubuntu16, ubuntu16.04</config-profile>
-	    <notify_time>10</notify_time>
-	    <time-reconnect>60</time-reconnect>
-	    <auto_restart>yes</auto_restart>
-	    <crypto_method>aes</crypto_method>
-	  </client>
-	  . . .
-
-
-If for example we had launched the command ``docker-compose up`` on host with IP address **192.168.50.75**, we would have the following configuration. 
+1. Adapt the agent configuration file:
 
 .. code-block:: console
 
-	<ossec_config>
-	  <client>
-	    <server>
-	      <address>192.168.50.75</address>
-	      <port>1514</port>
-	      <protocol>udp</protocol>
-	    </server>
-	    <config-profile>ubuntu, ubuntu16, ubuntu16.04</config-profile>
-	    <notify_time>10</notify_time>
-	    <time-reconnect>60</time-reconnect>
-	    <auto_restart>yes</auto_restart>
-	    <crypto_method>aes</crypto_method>
-	  </client>
-	  . . . 
+  <ossec_config>
+    <client>
+      <server>
+        <address>MANAGER_IP</address>
+        <port>1514</port>
+        <protocol>udp</protocol>
+      </server>
+      <config-profile>ubuntu, ubuntu16, ubuntu16.04</config-profile>
+      <notify_time>10</notify_time>
+      <time-reconnect>60</time-reconnect>
+      <auto_restart>yes</auto_restart>
+      <crypto_method>aes</crypto_method>
+    </client>
+    . . .
 
+If for example we had launched the command ``docker-compose up`` on host with IP address **192.168.50.75**, we would have the following configuration:
 
-2. Agent registration. 
+.. code-block:: console
 
-Register the agent using ``authd``. 
+  <ossec_config>
+    <client>
+      <server>
+        <address>192.168.50.75</address>
+        <port>1514</port>
+        <protocol>udp</protocol>
+      </server>
+      <config-profile>ubuntu, ubuntu16, ubuntu16.04</config-profile>
+      <notify_time>10</notify_time>
+      <time-reconnect>60</time-reconnect>
+      <auto_restart>yes</auto_restart>
+      <crypto_method>aes</crypto_method>
+    </client>
+    . . .
 
-.. code-block:: console 
+2. Agent registration:
 
-	$ /var/ossec/bin/agent-auth -m MANAGER_IP
+Register the agent using ``authd``:
 
-If we continue with our example, the command to launch would be the following one: 
+.. code-block:: console
 
-.. code-block:: console 
+  $ /var/ossec/bin/agent-auth -m MANAGER_IP
 
-	$ /var/ossec/bin/agent-auth -m 192.168.50.75
+If we continue with our example, the command to launch would be the following one:
+
+.. code-block:: console
+
+  $ /var/ossec/bin/agent-auth -m 192.168.50.75
 
 Mount custom Wazuh configuration files
------------------------------------------
+--------------------------------------
 
 To mount custom Wazuh configuration files in the Wazuh manager container, mount them in the ``/wazuh-config-mount`` folder. For example, to mount a custom ``ossec.conf`` file, mount it in ``/wazuh-config-mount/etc/ossec.conf`` and the **entrypoint.sh** script will copy the file at the right place on boot while respecting the destination file permissions.
 
@@ -147,36 +143,33 @@ To add local rules that are not in the ruleset and to be able to use them:
 
   '/wazuh-config-mount/etc/rules/local_rules.xml' -> '/var/ossec/data/etc/rules/local_rules.xml'
 
-To add a custom configuration for Wazuh agents, pushed from the manager: 
+To add a custom configuration for Wazuh agents, pushed from the manager:
 
 .. code-block:: console
 
   '/wazuh-config-mount/etc/shared/default/agent.conf' -> '/var/ossec/data/etc/shared/default/agent.conf'
- 
-
 
 Mount storage for Elastic Stack components
 ------------------------------------------
 
-Assembling volumes for the storage of Elastic Stack components is also feasible when deploying with Docker-compose. For example, we have the option of mounting persistent volumes both externally and locally. Simply add the path indicated in the volume specific entry. 
+Assembling volumes for the storage of Elastic Stack components is also feasible when deploying with Docker-compose. For example, we have the option of mounting persistent volumes both externally and locally. Simply add the path indicated in the volume specific entry.
 
-If we wanted to mount the volume for Elasticsearch, we would change the volume entry in our ``docker-compose.yml``: 
+If we wanted to mount the volume for Elasticsearch, we would change the volume entry in our ``docker-compose.yml``:
 
 .. code-block:: console
 
 	 elasticsearch:
-	    . . . 
+	    . . .
 	     volumes:
 	       - my-path:/usr/share/elasticsearch/data:Z
 	    . . .
 
-
-Establishing the routes that we want.  
+Establishing the routes that we want:
 
 .. code-block:: console
 
 	 elasticsearch:
-	    . . . 
+	    . . .
 	     volumes:
 	       - /home/my/local/volume:/usr/share/elasticsearch/data:Z
 	    . . .
@@ -184,32 +177,30 @@ Establishing the routes that we want.
 .. code-block:: console
 
 	 elasticsearch:
-	    . . . 
+	    . . .
 	     volumes:
 	       - external-volume:/usr/share/elasticsearch/data:Z
 	    . . .
 
-.. note:: The container runs Elasticsearch as user elasticsearch using **uid:gid 1000:1000**. 
+.. note:: The container runs Elasticsearch as user elasticsearch using **uid:gid 1000:1000**.
 
-	If you are bind-mounting a local directory or file, ensure it is readable by this user, while the data and log dirs additionally require write access. You can get more information `here <https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html>`_. 
-
+	If you are bind-mounting a local directory or file, ensure it is readable by this user, while the data and log dirs additionally require write access. You can get more information `here <https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html>`_.
 
 Custom commands and scripts
-----------------------------
+---------------------------
 
 To execute commands in the Wazuh manager container after configuration is placed but before the Wazuh API and manager are started, pass the commands as the docker commands/arguments, for example:
 
 .. code-block:: console
-  
+
   docker run -it --rm wazuh/wazuh:latest "/var/ossec/bin/ossec-control enable debug"
 
-
 Upgrades
-----------
+--------
 
-Performing container updates differs from performing normal updates. For this we recommend the use of volumes. 
+Performing container updates differs from performing normal updates. For this we recommend the use of volumes.
 
-For example if we want upgrade the Wazuh manager, we should export the container information to one volume. For this purpose, we would decomment the volume options in our ``docker-compose.yml`` file and add the path to export ``<my-path>``. In this way, the next time the container is created, you will get the exported information in the external volume. 
+For example if we want upgrade the Wazuh manager, we should export the container information to one volume. For this purpose, we would decomment the volume options in our ``docker-compose.yml`` file and add the path to export ``<my-path>``. In this way, the next time the container is created, you will get the exported information in the external volume:
 
 .. code-block:: console
 

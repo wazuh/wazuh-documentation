@@ -3,14 +3,14 @@
 .. _wazuh-container:
 
 Wazuh Docker deployment
-==========================
+=======================
 
 - `Requirements`_
 - `Usage`_
 - `Exposed ports`_
 
 Requirements
--------------
+------------
 
 - `Container memory`_
 - `Increase max_map_count on your host (Linux)`_
@@ -19,12 +19,12 @@ Requirements
 - `Docker for OSX`_
 
 Container memory
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
 It is recommended to set Docker host preferences to give at least **6GB** memory for the host that created the containers (this doesn't necessarily mean they all will use it, but **Elasticsearch** requires them to work properly).
 
 Increase max_map_count on your host (Linux)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. You need to increase ``max_map_count`` on your Docker host:
 
@@ -72,11 +72,10 @@ Increase max_map_count on your host (Windows)
 
   If you don't set the **max_map_count** on your host, Elasticsearch will probably NOT work.
 
-
 SELinux
-^^^^^^^^^^
+^^^^^^^
 
-On distributions which have SELinux enabled out-of-the-box, you will need to either re-context the files or put SELinux into Permissive mode for docker-elk to start properly. For example, on Red Hat and CentOS the following command will apply the proper context
+On distributions with SELinux enabled out-of-the-box, you will need to either re-context the files or put SELinux into Permissive mode for docker-elk to start properly. For example, on Red Hat and CentOS the following command will apply the proper context:
 
 .. code-block:: console
 
@@ -85,45 +84,39 @@ On distributions which have SELinux enabled out-of-the-box, you will need to eit
 Docker for OSX
 ^^^^^^^^^^^^^^
 
-In Docker for OSX, there is a default memory limit of 2GB, in order to run `docker-compose up` successfully you have to change default memory settings from 2GB to at least 4 or 5GB. To do so, click on the Docker icon in the menu bar, then "Preferences...", go to "Advanced" tab and set 5GB of memory, then click on "Apply & Restart" and run `docker-compose up`.
-
+In Docker for OSX, there is a default memory limit of 2GB, so in order to run `docker-compose up` successfully you have to change default memory settings from 2GB to at least 4 or 5GB. To do so, click on the Docker icon in the menu bar, then on "Preferences...", go to the "Advanced" tab and set 5GB of memory, and finally click on "Apply & Restart" and run `docker-compose up`.
 
 Usage
--------------------------------
+-----
 
-#. Get the ``docker-compose`.yml`` file to your system:
+#. Get the ``docker-compose.yml`` file to your system:
 
-    a) Only the file::
+  a) Only the file::
 
-        $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/master/docker-compose.yml
+      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/master/docker-compose.yml
 
-    b) Get the Wazuh repository::
+  b) Get the Wazuh repository::
 
-        $ git clone https://github.com/wazuh/wazuh-docker.git
+      $ git clone https://github.com/wazuh/wazuh-docker.git
 
-#. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose`.yml`` file:
+#. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
-    a) Foreground::
+  a) Foreground::
 
-        $ docker-compose up
+      $ docker-compose up
 
+  b) Background::
 
-    b) Background::
-
-        $ docker-compose up -d
+      $ docker-compose up -d
 
 .. note::
-
   - Both wazuh-kibana and wazuh-logstash containers will run multiple queries to Elasticsearch API using curl, to learn when Elasticsearch is up. It is expected to see several ``Failed to connect to elasticsearch port 9200`` log messages, until Elasticesearch is started. Then the set up process will continue normally.
 
 .. note::
-
   - Kibana container can take a few minutes to install Wazuh plugin, this takes place after ``Optimizing and caching browser bundles...`` is printed out.
 
-
-
 Exposed ports
-------------------------------
+-------------
 
 By default, the stack exposes the following ports:
 
@@ -149,4 +142,5 @@ By default, the stack exposes the following ports:
 | **443**   | Nginx https                 |
 +-----------+-----------------------------+
 
-.. note:: Configuration is not dynamically reloaded, so you will need to restart the stack after any change in the configuration of a component.
+.. note::
+  Configuration is not dynamically reloaded, so you will need to restart the stack after any change in the configuration of a component.
