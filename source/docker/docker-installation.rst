@@ -13,7 +13,7 @@ The first thing you need to do is install Docker and Docker compose if you don't
 Docker engine
 ----------------------------------------------
 
- Docker requires a 64-bit operating system running kernel version 3.10 or higher. 
+Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
 1. Check your current kernel version. Open a terminal and use ``uname -r`` to display your kernel version:
 
@@ -29,11 +29,12 @@ Docker engine
 
    # curl -sSL https://get.docker.com/ | sh
 
-.. note:: If you would like to use Docker as a non-root user, you should now consider adding your user to the "docker" group with something like (Remember that you will have to log out and log back in for this to take effect):
+.. note::
+  If you would like to use Docker as a non-root user, you should now consider adding your user to the ``docker`` group with something like the following command (remember that you'll have to log out and log back in for this to take effect):
 
-	.. code-block:: console
+  .. code-block:: console
 
-	  # usermod -aG docker your-user
+    # usermod -aG docker your-user
 
 
 Docker compose
