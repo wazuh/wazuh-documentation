@@ -87,21 +87,6 @@ VPC Flow
     :align: center
     :width: 100%
 
-Inspector
-^^^^^^^^^
-
-Services such as Inspector does not need to store logs into a bucket. These services use API calls to retrieve the information. You must specify at least a region into ``ossec.conf`` for this service. Multiple regions can be added separated by commas.
-
-An example of configuration of Inspector service is the follow:
-
-.. code-block:: xml
-
-    <service type="inspector">
-        <access_key>insert_access_key</access_key>
-        <secret_key>insert_secret_key</secret_key>
-        <regions>us-east-1, eu-west-1</regions>
-    </service>
-
 Other AWS Services (Guard Duty, Macie and IAM)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -499,10 +484,9 @@ Once your role is created, just paste it on the bucket configuration:
 
 IAM roles on EC2 instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+You can configure an EC2 instance for giving a role and no authentication parameters are needed into `ossec.conf`. We recommend use this type of configuration. More information about IAM roles on EC2 instances can be founded into `AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
 
-If you are running on Amazon EC2 and no credentials have been found by any of the providers above, ``boto3`` will try to load credentials from the instance metadata service. In order to take advantage of this feature, you must have specified an IAM role to use when you launched your EC2 instance. More information about this can be founded into `AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
-
-For this type of configuration, you do not need to include any parameter of authentication in ``ossec.conf`` file. An example for this configuration is the next:
+An example for this configuration is the next:
 
 .. code-block:: xml
 
