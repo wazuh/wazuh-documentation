@@ -483,6 +483,18 @@ Once your role is created, just paste it on the bucket configuration:
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
    </bucket>
 
+IAM roles on EC2 instances
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+If you are running on Amazon EC2 and no credentials have been found by any of the providers above, ``boto3`` will try to load credentials from the instance metadata service. In order to take advantage of this feature, you must have specified an IAM role to use when you launched your EC2 instance. More information about this can be founded into `AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
+
+For this type of configuration, you do not need to include any parameter of authentication in ``ossec.conf`` file. An example for this configuration is the next:
+
+.. code-block:: xml
+
+    <bucket type="cloudtrail">
+      <name>my-bucket</name>
+   </bucket>
 
 Considerations for configuration
 --------------------------------
