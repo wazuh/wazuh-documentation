@@ -88,10 +88,10 @@ VPC Flow
     :width: 100%
 
 
-Other AWS Services (Guard Duty, Macie and IAM)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Other AWS Services (Guard Duty, Macie, Trusted Advisor, Config, KMS and IAM)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This section explains how to get logs from Guard Duty, Macie and IAM.
+This section explains how to get logs from Guard Duty, Macie, Trusted Advisor, Config, KMS and IAM.
 
 1. Go to Services > Storage > S3:
 
