@@ -28,12 +28,12 @@ Install Splunk Indexer
 
 This component works receiving the data flow streamed by a forwarder and stores it in a Splunk index.
 
-1. Download Splunk v7.2.0 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
+1. Download Splunk v7.2.1 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
   .. note::
     Splunk is not open source software and it requires a registered user and license to work. You can also use a free trial license.
 
-2. Install the Splunk v7.2.0 package:
+2. Install the Splunk v7.2.1 package:
 
   a) For RPM based distributions:
 
@@ -47,7 +47,7 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
     # dpkg --install splunk-enterprise-package.deb
 
-3. Ensure Splunk v7.2.0 is installed in ``/opt/splunk`` and start the service:
+3. Ensure Splunk v7.2.1 is installed in ``/opt/splunk`` and start the service:
 
   .. code-block:: console
 
@@ -64,6 +64,6 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
     # /opt/splunk/bin/splunk enable boot-start
 
-You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.0/Admin/CLIadmincommands>`_ .
+You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.1/Admin/CLIadmincommands>`_ .
 
 Now that you've finished installing Splunk on a single-instance mode, you can proceed with the next step and install the :ref:`Wazuh app for Splunk <splunk_app>`.

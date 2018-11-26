@@ -16,7 +16,7 @@ Depending on the type of architecture that you're installing, the Splunk Forward
 Installation process
 --------------------
 
-1. Download Splunk Forwarder v7.2.0 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
+1. Download Splunk Forwarder v7.2.1 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
 
 2. Install it with the following commands depending on your operating system:
 
@@ -32,7 +32,7 @@ Installation process
 
     # dpkg --install splunkforwarder-package.deb
 
-3. Ensure Splunk Forwarder v7.2.0 is installed in ``/opt/splunkforwarder``.
+3. Ensure Splunk Forwarder v7.2.1 is installed in ``/opt/splunkforwarder``.
 
 Configuration process
 ---------------------
