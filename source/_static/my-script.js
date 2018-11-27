@@ -4,7 +4,7 @@
  */
 
 var versions = [
-    {name: "3.7 (current)", url: "/3.x"},
+    {name: "3.7 (current)", url: "/3.7"},
     {name: "3.6", url: "/3.6"},
     {name: "3.5", url: "/3.5"},
     {name: "3.4", url: "/3.4"},
@@ -12,9 +12,10 @@ var versions = [
     {name: "3.2", url: "/3.2"},
     {name: "3.1", url: "/3.1"},
     {name: "3.0", url: "/3.0"},
+    {name: "2.1", url: "/2.1"},
 ];
 
-var current_version = "3.x";
+var current_version = "3.7";
 
 $( document ).ready(function() {
     addVersions();
@@ -35,7 +36,7 @@ function addVersions() {
         return;
     }
 
-    if (path == "current") {
+    if (path == "current" || path == "3.x") {
         path = current_version;
     }
 
@@ -51,6 +52,4 @@ function addVersions() {
     select_version.change(function(event) {
         window.location.href = event.target.value;
     });
-
-    version.css("display", "block");
 }
