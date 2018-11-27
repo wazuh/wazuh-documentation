@@ -47,7 +47,7 @@ Attributes:
 Automatic labels
 ^^^^^^^^^^^^^^^^
 
-`Added in Wazuh 3.x`
+.. versionadded:: 3.8.0
 
 There are some information about the system that Wazuh can automaticly obtain. In this case, you only need to replace the value of the label with a defined string which has to be written between delimiters: "$(" and ")". 
 
