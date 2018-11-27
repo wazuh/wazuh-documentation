@@ -26,6 +26,7 @@ Some considerations:
 * ``<ALERT-ID>`` is the alert ID (unique for every alert).
 * ``<RULE-ID>`` is the rule ID.
 * ``<AGENT>`` is the agent ID or hostname.
+* ``<FILENAME>`` is the source path file of the log that triggered the alert (if it exists).
 
 Can I configure active responses for only one host?
 ---------------------------------------------------
