@@ -12,7 +12,7 @@ Wazuh module that allows to fetch keys stored on an external database.
 - `How it works`_
 - `Input`_
 - `Output`_
-- `Example Script`_
+- `Example Scripts`_
 
 How it works
 ------------
@@ -70,13 +70,13 @@ On success example:
 error
     Error identificator number.
 
-    +--------------------+---------------+
-    | Allowed characters | Digits only   |
-    +--------------------+---------------+
-    | Allowed size       | 1 digit       |
-    +--------------------+---------------+
-    | Unique value       | Yes, must be 0|
-    +--------------------+---------------+
+    +--------------------+----------------+
+    | Allowed characters | Digits only    |
+    +--------------------+----------------+
+    | Allowed size       | 1 digit        |
+    +--------------------+----------------+
+    | Unique value       | Yes, must be 0 |
+    +--------------------+----------------+
 
 data
     Data in json format with the following fields.
@@ -158,8 +158,8 @@ message
     | Unique value       | No                   |
     +--------------------+----------------------+
 
-Example Script
---------------
+Example Scripts
+---------------
 
 Suppose you have a table named ``agent`` in your database with the following structure:
 
@@ -193,7 +193,7 @@ The python script bellow shows an example of an agent key retrieval from the dat
         try:
             conn = mysql.connector.connect(host='localhost',
                                         database='your_database',
-                                        user='root',
+                                        user='user',
                                         password='secret')
         except Error as e:
             print json.dumps({"error": 2, "message": str(e)})
@@ -222,6 +222,91 @@ The python script bellow shows an example of an agent key retrieval from the dat
     if __name__ == '__main__':
         main()
 
+The php script bellow shows an example of an agent key retrieval from the database (MySQL).
 
+.. code-block:: php
 
+    <?php
+        $servername = "localhost";
+        $username = "user";
+        $password = "secret";
+        $dbname = "your_database";
+
+        if($argc < 3){
+            echo json_encode(array('error' => 1, 'message' => 'To few arguments'));
+            exit;
+        }
+
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            echo json_encode(array('error' => 2, 'message' => 'Could not connect to database'));
+                exit;
+        }
+
+        $data = $argv[2];
+
+        if($argv[1] == "id"){
+            $sql = "SELECT id,name,ip,`key` FROM agent WHERE id = '$data'";
+        } else if ($argv[1] == "ip") {
+            $sql = "SELECT id,name,ip,`key` FROM agent WHERE ip = '$data'";
+        } else {
+            echo json_encode(array('error' => 3, 'message' => 'Bad arguments given'));
+            exit;
+        }
+
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            echo json_encode(array('error' => 0, 'data' => array( "id" => $row["id"], "ip" => $row["ip"],"key" => $row["key"],"name" => $row["name"])));
+        } else {
+                echo json_encode(array('error' => 4, 'message' => 'No agent key found'));
+        }
+        $conn->close();
+    ?>
+
+The perl script bellow shows an example of an agent key retrieval from the database (MySQL).
+
+.. code-block:: perl
+
+    #!/usr/bin/perl
+    use strict;
+    use warnings;
+    use DBI;
+
+    my $num_args = $#ARGV + 1;
+
+    if ($num_args < 2) {
+        print "{\"error\": 1, \"message\": \"Too few arguments\"}\n";
+        exit;
+    }
+
+    my $data = $ARGV[1];
+    my $dbh = DBI->connect("DBI:mysql:database=your_database;host=localhost",
+                        "user", "secret",
+                        {'RaiseError' => 1});
+
+    my $sql = "";
+
+    if ($ARGV[0] eq "id") {
+        $sql = "SELECT * FROM agent WHERE id = '$data'";
+    } elsif ($ARGV[0] eq "ip") {
+    $sql = "SELECT * FROM agent WHERE ip = '$data'";
+    }
+
+    my $sth = $dbh->prepare($sql);
+    $sth->execute();
+    my $rows = $sth->rows;
+
+    if ($rows) {
+    my $row = $sth->fetchrow_hashref();
+    print "{\"error\": 0, \"data\": {\"id\" : \"$row->{'id'}\", \"name\": \"$row->{'name'}\", \"ip\": \"$row->{'ip'}\", \"key\": \"$row->{'key'}\"}}\n";
+    } else{
+    print "{\"error\": 4, \"message\": \"No agent key found\"}\n";
+    }
+
+    $sth->finish();
+    $dbh->disconnect();
+
+As this are examples, remember to protect your scripts against SQL injections using parameter binding.
 
