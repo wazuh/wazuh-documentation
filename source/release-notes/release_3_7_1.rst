@@ -52,6 +52,7 @@ The Wazuh app for Splunk is now compatible with the latest version of Splunk Ent
 
 - The app now supports **extensions**. The user can enable/disable them to show or hide different app sections.
 - Added the **VirusTotal** tab.
+- The **Dev tools** page now allows ``PUT``, ``POST`` and ``DELETE`` requests.
 - Added the **Export as CSV** button for *Agents*, *Rules*, *Decoders*, *Groups* and *Logs* tables.
 
 In addition to this, code refactoring, visual/ UI adjustments, and bugfixes were added for better stability and overall performance.
