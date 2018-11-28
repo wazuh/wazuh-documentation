@@ -22,15 +22,15 @@ In this new version, it's possible to collect Audit events using custom keys. Th
 
 With this option, you can add other rule's keys generated manually or by other methods. It allows monitoring directories with Audit that have other associated rules. The Integrity Monitoring engine will filter the events looking for these keys.
 
-Agent group guessing is now optional
-------------------------------------
+Agent group reassignment
+------------------------
 
-Wazuh has a group guessing feature, that auto-assigns an agent to a group (or multigroup) if it was previously registered and its group is undefined.
+When adding an agent to a specific group (or multiple groups), it can be automatically re-assigned to the same groups even if the agent is registered under another name or ID. This was always the default behavior and it couldn't be changed.
 
-As of now, this setting is disabled by default, but it can be enabled on the new ``remoted.guess_agent_group`` setting on the :ref:`internal options <reference_internal_options>` configuration file.
+As of now, this reassignment is disabled by default but it can be enabled using the new ``remoted.guess_agent_group`` setting on the :ref:`internal options <reference_internal_options>` configuration file.
 
-Bugfixes for Wazuh core
------------------------
+Bugfixes
+--------
 
 The :ref:`Vulnerability detector <vulnerability-detection>` received some stability improvements and restored support for Amazon Linux.
 
