@@ -32,27 +32,25 @@ As of now, this reassignment is disabled by default but it can be enabled using 
 Bugfixes
 --------
 
-The :ref:`Vulnerability detector <vulnerability-detection>` received some stability improvements and restored support for Amazon Linux.
-
 This release of Wazuh is focused on bringing bugfixes to the core component. Along with multiple refinements to the features introduced in Wazuh 3.7.0, some bugs reported by the community were added too.
+
+The :ref:`Vulnerability detector <vulnerability-detection>` received some stability improvements and restored support for Amazon Linux.
 
 New features for Kibana plugin
 ------------------------------
 
-The Wazuh app for Kibana comes with full compatibility with the latest version of the Elastic Stack, 6.5.1. The main highlights for this app include:
-
-- A new **auto-complete feature** for the Dev tools tab, so now the user can start typing an API request to see a list of suggestions.
+The main highlights for the Wazuh app for Kibana include a new **auto-complete feature** for the Dev tools tab, so now the user can start typing an API request to see a list of suggestions.
 
 In addition to this, some refinements and bugfixes were added for better stability and overall performance.
 
 New features for Splunk plugin
 ------------------------------
 
-The Wazuh app for Splunk is now compatible with the latest version of Splunk Enterprise, 7.2.1. The main highlights for this app include:
+The main highlights for the Wazuh app for Splunk include:
 
-- The app now supports **extensions**. The user can enable/disable them to show or hide different app sections.
-- Added the **VirusTotal** tab.
-- The **Dev tools** page now allows ``PUT``, ``POST`` and ``DELETE`` requests.
-- Added the **Export as CSV** button for *Agents*, *Rules*, *Decoders*, *Groups* and *Logs* tables.
+- Support for **extensions**. The user can enable/disable them to show or hide different app sections.
+- New tab for **VirusTotal** alerts.
+- Added an **Export as CSV** button for *Agents*, *Rules*, *Decoders*, *Groups* and *Logs* tables.
+- Added support for ``PUT``, ``POST`` and ``DELETE`` requests on the **Dev tools** tab, along with ``GET`` requests.
 
 In addition to this, code refactoring, visual/ UI adjustments, and bugfixes were added for better stability and overall performance.
