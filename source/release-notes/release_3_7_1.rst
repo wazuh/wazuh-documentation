@@ -13,12 +13,14 @@ This section shows the most relevant improvements and fixes in version 3.7.1. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.7.1-6.5.1/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.7.1-7.2.1/CHANGELOG.md>`_
 
-Configure and collect more Audit keys
------------------------------------------
+Collecting more Audit events
+----------------------------
 
-In this new version, Wazuh can be configured to collect more :ref:`Audit events <system_call_monitoring>` using custom keys. This feature includes on the FIM baseline those events being monitored by Audit using these custom keys.
+Wazuh is capable of reading logs from the :ref:`Linux Audit events <system_call_monitoring>`. Each generated event is triggered by a defined rule and must have a key to be identified by Wazuh in order to perform a more accurate analysis.
 
-The new ``<audit_key>`` tag can be used to define the keys on the ``<syscheck><whodata>`` block from the :ref:`configuration file <reference_ossec_conf>`.
+In this new version, it's possible to collect Audit events using custom keys. The new ``<audit_key>`` tag can be used to define the keys on the ``<syscheck><whodata>`` block from the :ref:`configuration file <reference_ossec_conf>`.
+
+With this option, you can add other rule's keys generated manually or by other methods. It allows monitoring directories with Audit that have other associated rules. The Integrity Monitoring engine will filter the events looking for these keys.
 
 Agent group guessing is now optional
 ------------------------------------
@@ -39,9 +41,7 @@ New features for Kibana plugin
 
 The Wazuh app for Kibana comes with full compatibility with the latest version of the Elastic Stack, 6.5.1. The main highlights for this app include:
 
-- A new auto-complete functionality for the **Dev tools** tab, so now the user can start typing an API request to see a list of suggestions.
-- The **Dev tools** page now allows ``PUT``, ``POST`` and ``DELETE`` requests.
-- Increased number of rows on the **Inventory data** tables. Moreover, the *Network ports* table now includes more information.
+- A new **auto-complete feature** for the Dev tools tab, so now the user can start typing an API request to see a list of suggestions.
 
 In addition to this, some refinements and bugfixes were added for better stability and overall performance.
 
@@ -50,9 +50,8 @@ New features for Splunk plugin
 
 The Wazuh app for Splunk is now compatible with the latest version of Splunk Enterprise, 7.2.1. The main highlights for this app include:
 
-- Added extension management functionality. Similar to the Kibana app, now the user can enable/disable extensions to show or hide different app tabs and pages.
-- Added the **Export as CSV** button for *Agents*, *Rules*, *Decoders*, *Groups* and *Logs* tables.
+- The app now supports **extensions**. The user can enable/disable them to show or hide different app sections.
 - Added the **VirusTotal** tab.
-- Added the XML viewer for the **Management/Agents > Configuration** tabs.
+- Added the **Export as CSV** button for *Agents*, *Rules*, *Decoders*, *Groups* and *Logs* tables.
 
 In addition to this, code refactoring, visual/ UI adjustments, and bugfixes were added for better stability and overall performance.
