@@ -25,7 +25,7 @@ With this option, you can add other rule's keys generated manually or by other m
 Agent group reassignment
 ------------------------
 
-When adding an agent to a specific group (or multiple groups), it can be automatically re-assigned to the same groups even if the agent is registered again. This was always the default behavior and it couldn't be changed.
+When adding an agent to a specific group (or multiple groups), it can be automatically re-assigned to the same groups even if the agent is registered under another name or ID. This was always the default behavior and it couldn't be changed.
 
 As of now, this reassignment is disabled by default but it can be enabled again using the new ``remoted.guess_agent_group`` setting on the :ref:`internal options <reference_internal_options>` configuration file.
 
