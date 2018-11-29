@@ -20,6 +20,7 @@ Options
 - `enabled`_
 - `timeout`_
 - `script`_
+- `socket`_
 - `threads`_
 - `queue_size`_
 
@@ -31,6 +32,8 @@ Options
 | `timeout`_           | A positive number (seconds) |
 +----------------------+-----------------------------+
 | `script`_            | Full path to script         |
++----------------------+-----------------------------+
+| `socket`_            | Full path to unix socket    |
 +----------------------+-----------------------------+
 | `threads`_           | A positive number           |
 +----------------------+-----------------------------+
@@ -70,6 +73,17 @@ Full path to the script to the executed.
 +--------------------+-----------------------------------+
 | **Allowed values** | A string indicating the full path |
 +--------------------+-----------------------------------+
+
+socket
+^^^^^^
+
+Full path to the script to the executed.
+
++--------------------+-----------------------------------------------------------+
+| **Default value**  | none                                                      |
++--------------------+-----------------------------------------------------------+
+| **Allowed values** | A string indicating the full path to a unix domain socket |
++--------------------+-----------------------------------------------------------+
 
 threads
 ^^^^^^^

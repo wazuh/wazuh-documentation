@@ -42,12 +42,15 @@ When polling by ID, the manager will retrieve the agent key by querying its ID, 
     ./agent_key_pull.py id 001
 
 
-When polling by IP address, the manager will retrieve the agent key by querying its IP address, so the input parameters that the script will receive are for example:
+When polling by IP address, the manager will retrieve the agent key by querying it's IP address, so the input parameters that the script will receive are for example:
 
 ::
 
     ./agent_key_pull.py ip 192.168.1.100
 
+
+When using the socket tag in the module configuration, it will send the parameters through the specified socket and read the response. The performance improvement over executing the script like explained above is significant.
+It's up to the user to implement a script that opens a unix domain socket and read from it indefinitely.
 
 Output
 ------
