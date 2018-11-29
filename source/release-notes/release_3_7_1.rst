@@ -25,16 +25,18 @@ With this option, you can add other rule's keys generated manually or by other m
 Agent group reassignment
 ------------------------
 
-When adding an agent to a specific group (or multiple groups), it can be automatically re-assigned to the same groups even if the agent is registered under another name or ID. This was always the default behavior and it couldn't be changed.
+When adding an agent to a specific group (or multiple groups), it can be automatically re-assigned to the same groups even if the agent is registered again. This was always the default behavior and it couldn't be changed.
 
-As of now, this reassignment is disabled by default but it can be enabled using the new ``remoted.guess_agent_group`` setting on the :ref:`internal options <reference_internal_options>` configuration file.
+As of now, this reassignment is disabled by default but it can be enabled again using the new ``remoted.guess_agent_group`` setting on the :ref:`internal options <reference_internal_options>` configuration file.
 
 Bugfixes
 --------
 
 This release of Wazuh is focused on bringing bugfixes to the core component. Along with multiple refinements to the features introduced in Wazuh 3.7.0, some bugs reported by the community were added too.
 
-The :ref:`Vulnerability detector <vulnerability-detection>` received some stability improvements and restored support for Amazon Linux.
+The :ref:`Vulnerability detector <vulnerability-detection>` received some stability improvements and the support for Amazon Linux was restored.
+
+The Integrity Monitoring engine received improvements for *who-data* and bugfixes to address some errors under certain configurations, the content of FIM alerts, fetching the active configuration remotely, and more.
 
 New features for Kibana plugin
 ------------------------------
