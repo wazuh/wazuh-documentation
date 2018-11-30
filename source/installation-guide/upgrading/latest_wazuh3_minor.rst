@@ -2,8 +2,8 @@
 
 .. _upgrading_latest_minor:
 
-Upgrade to the latest version of Wazuh 3.x
-================================================
+Upgrade from the same major version (3.x)
+=========================================
 
 The following steps show how to upgrade to the latest available version of Wazuh 3.x (which implies upgrading to the latest version of Elastic Stack 6.x).
 
