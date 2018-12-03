@@ -490,7 +490,7 @@ Logcollector
 +                                          +               +----------------------------------------------------------------------------+
 |                                          |               | 1: Enable remote commands                                                  |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
-|   **logcollector.vcheck_files**          | Description   | File checking interval (seconds)                                           |
+|   **logcollector.vcheck_files**          | Description   | File checking interval, in seconds.                                        |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 64                                                                         |
 +                                          +---------------+----------------------------------------------------------------------------+
@@ -551,7 +551,6 @@ Logcollector
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
 |      **logcollector.force_reload**       | Description   | Force file handler reloading: close and reopen monitored files.            |
 |                                          |               |                                                                            |
-|                                          |               |                                                                            |
 |                                          |               | .. versionadded:: 3.7.1                                                    |
 +                                          +---------------+----------------------------------------------------------------------------+
 |                                          | Default value | 0                                                                          |
@@ -560,11 +559,10 @@ Logcollector
 +                                          +               +----------------------------------------------------------------------------+
 |                                          |               | 1: Enabled                                                                 |
 +------------------------------------------+---------------+----------------------------------------------------------------------------+
-|      **logcollector.reload_interval**    | Description   | File reloading interval, in seconds, if force_reload=1                     |
+|      **logcollector.reload_interval**    | Description   | File reloading interval, in seconds.                                       |
 |                                          |               |                                                                            |
 |                                          |               | This parameter only applies if ``logcollector.force_reload``               |
-|                                          |               | ``logcollector.force_reload`` is set to ``1``.                             |
-|                                          |               |                                                                            |
+|                                          |               | is set to ``1``.                                                           |
 |                                          |               |                                                                            |
 |                                          |               | .. versionadded:: 3.7.1                                                    |
 +                                          +---------------+----------------------------------------------------------------------------+
@@ -575,7 +573,7 @@ Logcollector
 |      **logcollector.reload_delay**       | Description   | File reloading delay (between close and open), in milliseconds.            |
 |                                          |               |                                                                            |
 |                                          |               | This parameter only applies if ``logcollector.force_reload``               |
-|                                          |               | ``logcollector.force_reload`` is set to ``1``.                             |
+|                                          |               | is set to ``1``.                                                           |
 |                                          |               |                                                                            |
 |                                          |               | .. versionadded:: 3.7.1                                                    |
 +                                          +---------------+----------------------------------------------------------------------------+
