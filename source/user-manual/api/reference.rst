@@ -872,7 +872,6 @@ Returns the list of agents in a group.
 	            "ip": "192.168.185.7",
 	            "dateAdd": "2018-10-11 09:38:47",
 	            "node_name": "node02",
-	            "multi_group": "",
 	            "manager": "manager",
 	            "version": "Wazuh v3.7.1",
 	            "lastKeepAlive": "2018-10-11 13:58:08",
@@ -896,7 +895,6 @@ Returns the list of agents in a group.
 	            "name": "main_database",
 	            "ip": "10.0.0.15",
 	            "node_name": "unknown",
-	            "multi_group": "",
 	            "dateAdd": "2018-10-11 13:58:11",
 	            "id": "004"
 	         }
