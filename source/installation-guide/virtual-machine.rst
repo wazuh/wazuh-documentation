@@ -12,12 +12,12 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh3.7.1_6.5.1.ova>`_, contains the following components:
 
     - CentOS 7
-    - Wazuh 3.7.1-1
-    - RESTful API 3.7.1-1
+    - Wazuh 3.7.1
+    - Wazuh API 3.7.1
     - Elasticsearch 6.5.1
     - Logstash 6.5.1
     - Kibana 6.5.1 port "**5601**""
-    - WazuhAPP 3.7.1_6.5.1
+    - Wazuh app 3.7.1-6.5.1
 
 2. Import the OVA in your virtualization platform and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
 
