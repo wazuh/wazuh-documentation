@@ -35,7 +35,7 @@ Use the cURL command to send a *request* to confirm that everything is working a
             "msg": "Welcome to Wazuh HIDS API",
             "api_version": "v3.7.1",
             "hostname": "wazuh",
-            "timestamp": "Fri Aug 03 2018 00:36:13 GMT+0000 (UTC)"
+            "timestamp": "Mon Dec 03 2018 00:36:13 GMT+0000 (UTC)"
         }
     }
 
@@ -75,7 +75,7 @@ Here are some of the basic concepts related to making API requests and understan
                 "msg":"Welcome to Wazuh HIDS API",
                 "api_version":"v3.7.1",
                 "hostname":"wazuh",
-                "timestamp":"Fri Aug 03 2018 00:37:50 GMT+0000 (UTC)"
+                "timestamp":"Mon Dec 03 2018 00:37:50 GMT+0000 (UTC)"
             }
         }
 

@@ -23,7 +23,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
           "msg": "Welcome to Wazuh HIDS API",
           "api_version": "v3.7.1",
           "hostname": "wazuh",
-          "timestamp": "Fri Aug 03 2018 03:00:51 GMT+0000 (UTC)"
+          "timestamp": "Mon Dec 03 2018 03:00:51 GMT+0000 (UTC)"
        }
     }
 
