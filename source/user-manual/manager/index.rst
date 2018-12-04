@@ -16,6 +16,7 @@ The Wazuh manager is the system that analyzes the data received from all registe
         alert-threshold
         manual-integration
         manual-syslog-output
+        manual-database-output
         automatic-reports
         manual-email-report/index
         manual-email-report/smtp_authentication
