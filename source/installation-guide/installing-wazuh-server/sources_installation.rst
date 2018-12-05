@@ -34,6 +34,9 @@ Installing Wazuh manager
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
+  .. warning::
+    If you want to enable the database output, :ref:`check out <manual_database_output>` this section before running the installation script.
+
   .. code-block:: console
 
     # cd wazuh-*
