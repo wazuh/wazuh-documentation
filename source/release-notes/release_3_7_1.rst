@@ -16,7 +16,7 @@ This section shows the most relevant improvements and fixes in version 3.7.1. Mo
 Improved who-data capabilities for FIM
 --------------------------------------
 
-This version comes with a new feature for the Integrity Monitoring configuration. Now it's possible to expand the FIM scope, defining Audit keys by using the new ``<whodata><audit_key>`` tag, which allows the user to set specific Audit-related keys that are generated externally. This way, the Integrity Monitoring engine can take these keys into account.
+This version comes with a new feature for the File Integrity Monitoring configuration. Now it's possible to expand the FIM scope, defining Audit keys by using the new ``<whodata><audit_key>`` tag, which allows the user to set specific Audit-related keys that are generated externally. This way, the FIM engine can take these keys into account.
 
 Other minor improvements
 ------------------------
