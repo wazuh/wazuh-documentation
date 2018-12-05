@@ -40,11 +40,19 @@ New features for Kibana plugin
 
 The main highlights for the Wazuh app for Kibana include a new **auto-complete feature** for the Dev tools tab, so now the user can start typing an API request to see a list of suggestions.
 
+.. thumbnail:: ../images/release-notes/3.7.1/kibana_features.png
+  :title: New auto-complete feature for Kibana app
+  :align: center
+
 In addition to this, some refinements and bugfixes were added for better stability and overall performance.
 
 New features for Splunk plugin
 ------------------------------
 
 The main highlights for the Wazuh app for Splunk include support for **extensions**, new tabs for **VirusTotal** and **CIS-CAT** alerts, the **Export as CSV** button for several tables and the ability to execute ``PUT``, ``POST`` and ``DELETE`` requests on the **Dev tools** tab, along with ``GET`` requests.
+
+.. thumbnail:: ../images/release-notes/3.7.1/splunk_features.png
+  :title: New methods for Dev tools on Splunk app
+  :align: center
 
 In addition to this, code refactoring, visual/ UI adjustments, and bugfixes were added for better stability and overall performance.
