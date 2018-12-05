@@ -13,14 +13,10 @@ This section shows the most relevant improvements and fixes in version 3.7.1. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.7.1-6.5.1/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.7.1-7.2.1/CHANGELOG.md>`_
 
-Collecting Audit events with custom keys
-----------------------------------------
+Improved who-data capabilities for FIM
+--------------------------------------
 
-The Wazuh Integrity Monitoring engine (FIM engine) is capable of reading logs from the :ref:`Linux Audit events <system_call_monitoring>`. Each generated event is triggered by a defined rule and must have a key to be identified by Wazuh in order to perform a more accurate analysis.
-
-In this new version, the FIM engine was improved and now can collect Audit events using custom keys. The new ``<audit_key>`` tag can be used to define the keys on the ``<syscheck><whodata>`` block from the :ref:`configuration file <reference_ossec_conf>`.
-
-With this option, you can add other rule's keys generated manually or by other methods. It allows monitoring directories with Audit that have other associated rules. The Integrity Monitoring engine will filter the events looking for these keys.
+This version comes with a new feature for the Integrity Monitoring configuration. Now it's possible to expand the FIM scope, defining Audit keys by using the new ``<whodata><audit_key>`` tag, which allows the user to set specific Audit-related keys that are generated externally. This way, the Integrity Monitoring engine can take these keys into account.
 
 Other minor improvements
 ------------------------
