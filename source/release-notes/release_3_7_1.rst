@@ -24,7 +24,7 @@ Other minor improvements
 Wazuh 3.7.1 includes some other improvements to the main functionality. For instance:
 
 - Restored the support for Amazon Linux on the :ref:`Vulnerability detector <vulnerability-detection>`.
-- Improved performance of the *Remote* daemon.
+- Improved performance of the *Remote* service.
 - Added IPv6 support for the ``host-deny.sh`` script from :ref:`Active Response <automatic_remediation>`.
 - Included more tracing information to the logs generated on debugging mode.
 - The FIM engine now gives more descriptive messages when a file is not reachable.
