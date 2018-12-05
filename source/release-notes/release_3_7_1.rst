@@ -8,20 +8,20 @@
 This section shows the most relevant improvements and fixes in version 3.7.1. More details about these changes are provided in each component changelog:
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.7.1/CHANGELOG.md>`_
-- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.7.1/CHANGELOG.md>`_
 - `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.7.1/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.7.1-6.5.1/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.7.1-7.2.1/CHANGELOG.md>`_
 
-Improved who-data capabilities for FIM
+Improved who data capabilities for FIM
 --------------------------------------
 
-This version comes with a new option for the FIM configuration. Now is possible to expand the FIM scope defining Audit keys using our new ``<audit_key>`` tag. This tag allows the user to set specific Audit related keys generated externally, this way the FIM engine can take into account them.
+This version comes with a new option for the FIM configuration. Now is possible to add extra Audit keys using ``<audit_key>`` tag. It allows the who data engine to capture Audit events related to the key.
+
 
 Other minor improvements
 ------------------------
 
-Wazuh 3.7.1 includes some other improvements to the main functionality. For instance:
+Wazuh 3.7.1 includes some other improvements:
 
 - Restored the support for Amazon Linux on the :ref:`Vulnerability detector <vulnerability-detection>`.
 - Improved performance of the *Remote* service.
@@ -29,7 +29,6 @@ Wazuh 3.7.1 includes some other improvements to the main functionality. For inst
 - Included more tracing information to the logs generated on debugging mode.
 - The FIM engine now gives more descriptive messages when a file is not reachable.
 
-This release also includes several bugfixes and stability improvements to the core components.
 
 New features for Kibana plugin
 ------------------------------
