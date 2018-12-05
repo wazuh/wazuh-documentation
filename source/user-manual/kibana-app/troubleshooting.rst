@@ -91,9 +91,9 @@ There should be two processes reading the ``alerts.json`` file: ``ossec-analysis
 API version mismatch. Expected vX.Y.Z
 -------------------------------------
 
-The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.6.1 with a Wazuh API 3.6.0.
+The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.1 with a Wazuh API 3.7.0.
 
-You can't use the 3.6.1 version of Wazuh API with a Wazuh app designed for Wazuh 3.7.0.
+You can't use the 3.6.1 version of Wazuh API with a Wazuh app designed for Wazuh 3.7.1.
 
 Check our :ref:`compatibility_matrix` to learn more about compatibility between the API and the app.
 
