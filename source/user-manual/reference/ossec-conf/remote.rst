@@ -120,7 +120,7 @@ queue_size
 Sets the capacity of the remote daemon queue in number of agent events.
 
 +--------------------+----------------------------------+
-| **Default value**  | 16384                            |
+| **Default value**  | 131072                            |
 +--------------------+----------------------------------+
 | **Allowed values** | Any number between 1 and 262144. |
 +--------------------+----------------------------------+
