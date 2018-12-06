@@ -34,6 +34,7 @@ Options
 - `ssl_auto_negotiate`_
 - `ciphers`_
 - `limit_maxagents`_
+- `ipv6`_
 
 disabled
 ^^^^^^^^
@@ -208,6 +209,21 @@ When set to ``no``, the maximum limit of agents that can be added is ignored.
 
 .. versionadded:: 3.0.0
 
+ipv6
+^^^^
+
+Toggles whether or not to listen on an IPv6 address.
+
+When set to ``no``, it listens on an IPv4 address.
+
++--------------------+---------------------+
+| **Default value**  | no                  |
++--------------------+---------------------+
+| **Allowed values** | yes, no             |
++--------------------+---------------------+
+
+.. versionadded:: 3.8.0
+
 Default configuration
 ---------------------
 
@@ -228,4 +244,5 @@ Default configuration
       <ssl_manager_cert>/var/ossec/etc/sslmanager.cert</ssl_manager_cert>
       <ssl_manager_key>/var/ossec/etc/sslmanager.key</ssl_manager_key>
       <ssl_auto_negotiate>no</ssl_auto_negotiate>
+      <ipv6>no</ipv6>
     </auth>
