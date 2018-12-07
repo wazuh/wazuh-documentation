@@ -110,7 +110,7 @@ This filters alerts by where the event originated. `OS_Regex Syntax`_
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | n/a                                                       |
 +--------------------+-----------------------------------------------------------+
-| **Allowed values** | Any single agent name, hostname, ip address, or log file. |
+| **Allowed values** | Any single log file.                                      |
 +--------------------+-----------------------------------------------------------+
 
 alert_format

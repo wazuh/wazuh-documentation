@@ -15,10 +15,10 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
 .. code-block:: console
 
   "kibana": {
-    "version": "6.5.0"
+    "version": "6.5.1"
   },
 
-Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.5.0`` then your installed Kibana version must be ``6.5.0``.
+Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.5.1`` then your installed Kibana version must be ``6.5.1``.
 
 You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
@@ -91,9 +91,9 @@ There should be two processes reading the ``alerts.json`` file: ``ossec-analysis
 API version mismatch. Expected vX.Y.Z
 -------------------------------------
 
-The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.6.1 with a Wazuh API 3.6.0.
+The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.1 with a Wazuh API 3.7.0.
 
-You can't use the 3.6.1 version of Wazuh API with a Wazuh app designed for Wazuh 3.7.0.
+You can't use the 3.6.1 version of Wazuh API with a Wazuh app designed for Wazuh 3.7.1.
 
 Check our :ref:`compatibility_matrix` to learn more about compatibility between the API and the app.
 
