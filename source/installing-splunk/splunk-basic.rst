@@ -37,15 +37,15 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
   a) For RPM based distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # yum install splunk-enterprise-package.rpm
+      # yum install splunk-enterprise-package.rpm
 
   b) For Debian/Ubuntu distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # dpkg --install splunk-enterprise-package.deb
+      # dpkg --install splunk-enterprise-package.deb
 
 3. Ensure Splunk v7.2.1 is installed in ``/opt/splunk`` and start the service:
 
@@ -54,7 +54,7 @@ This component works receiving the data flow streamed by a forwarder and stores 
     # /opt/splunk/bin/splunk start
 
   .. note::
-    You will be prompted for a password for the ``admin`` user.
+    You will be prompted for a name and password for the administrator user.
 
   After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 

@@ -11,7 +11,7 @@ Depending on the type of architecture that you're installing, the Splunk Forward
 
 .. warning::
   - On a **single-instance architecture**, the forwarder must point to the **Splunk Enterprise instance** where the Wazuh app was installed.
-  - On a **multi-instance architecture**, the forwarder must point to the **search peers (or indexers)**, and not the *search head*.
+  - On a **multi-instance architecture**, the forwarder must point to the **search peers (or indexers)**.
 
 Installation process
 --------------------
@@ -39,8 +39,8 @@ Configuration process
 
 This section explains how to configure the Splunk Forwarder to send alerts to the Indexer component.
 
-- ``inputs.conf`` : The Forwarder needs this file to read data from an input.
 - ``props.conf`` : In order to consume data inputs, Splunk needs to specify what kind of format will handle.
+- ``inputs.conf`` : The Splunk Forwarder needs this file to read data from an input. In this case, the Wazuh alerts file.
 
 Set up data collection
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -59,7 +59,7 @@ Configuring inputs
 
 1. Download and insert the ``inputs.conf`` template:
 
-   .. code-block:: console
+  .. code-block:: console
 
     # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/inputs.conf
 
@@ -86,6 +86,9 @@ Set up data forwarding
   .. code-block:: console
 
     # /opt/splunkforwarder/bin/splunk restart
+
+  .. warning::
+    If you get an error message about the port ``8089`` already being in use, you can change it to use a different one.
 
 After installing the Splunk Forwarder, incoming data should appear in the designated Indexer.
 

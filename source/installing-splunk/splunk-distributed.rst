@@ -40,15 +40,15 @@ Each instance can be installed on different hosts following the same steps descr
 
   a) For RPM based distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # yum install splunk-enterprise-package.rpm
+      # yum install splunk-enterprise-package.rpm
 
   b) For Debian/Ubuntu distributions:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # dpkg --install splunk-enterprise-package.deb
+      # dpkg --install splunk-enterprise-package.deb
 
 3. Ensure Splunk v7.2.1 is installed in ``/opt/splunk`` and start the service:
 
@@ -57,7 +57,7 @@ Each instance can be installed on different hosts following the same steps descr
     # /opt/splunk/bin/splunk start
 
   .. note::
-    You will be prompted for a password for the ``admin`` user.
+    You will be prompted for a name and password for the administrator user.
 
   After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
@@ -96,7 +96,7 @@ Now that we finished installing the Splunk instances, it's time to choose which 
 
       # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer_inputs.conf
 
-  a) Download and insert the ``indexes.conf`` template to configure the indexes:
+  b) Download and insert the ``indexes.conf`` template to configure the indexes:
 
     .. code-block:: console
 
