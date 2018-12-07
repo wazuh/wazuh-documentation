@@ -31,7 +31,7 @@ This component works receiving the data flow streamed by a forwarder and stores 
 1. Download Splunk v7.2.1 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
   .. note::
-    Splunk is not open source software and it requires a registered user and license to work. You can also use a free trial license.
+    Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
 
 2. Install the Splunk v7.2.1 package:
 
@@ -64,6 +64,9 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
     # /opt/splunk/bin/splunk enable boot-start
 
-You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.1/Admin/CLIadmincommands>`_ .
-
 Now that you've finished installing Splunk on a single-instance mode, you can proceed with the next step and install the :ref:`Wazuh app for Splunk <splunk_app>`.
+
+Additional links
+----------------
+
+- You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.1/Admin/CLIadmincommands>`_ .

@@ -21,10 +21,10 @@ This guide describes the Splunk Enterprise installation process for two differen
 Find more information about how to scale your environments using Splunk Enterprise on the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.1/Deploy/Distributedoverview>`_.
 
 .. warning::
-  The Wazuh app for Splunk requires the installation of a Wazuh manager and Wazuh API in order to work properly. Check out the :ref:`installation guide <installation>` before proceeding with Splunk.
+  The Wazuh app for Splunk requires the installation of a **Wazuh manager** and **Wazuh API** in order to work properly. Check out the :ref:`installation guide <installation>` before proceeding with Splunk.
 
 .. note::
-  On Linux systems, the Splunk installation procedure **requires a 64-bit version** of the operating system.
+  On Linux systems, the Splunk software **requires a 64-bit version** of the operating system.
 
   Although Splunk can be installed on different OS, the Splunk app is **only compatible with Linux systems**.
 
