@@ -96,13 +96,13 @@ Now that we finished installing the Splunk instances, it's time to choose which 
 
     .. code-block:: console
 
-      # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer_inputs.conf
+      # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer-inputs.conf
 
   b) Download and insert the ``indexes.conf`` template to configure the indexes:
 
     .. code-block:: console
 
-      # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer_indexes.conf
+      # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer-indexes.conf
 
   And finally, we need to restart the search peer:
 
