@@ -182,7 +182,7 @@ The following must be considered when configuring a Wazuh app:
     +-------------------------------------------------------------------+-------------------------------------------------------------+
     | Type                                                              | Description                                                 |
     +===================================================================+=============================================================+
-    | :ref:`RPM/DEB packages <splunk_installation_forwarder>`           | Install Splunk forwarder for RPM or DEB based OS.           |
+    | :ref:`RPM/DEB packages <splunk_forwarder>`                        | Install Splunk forwarder for RPM or DEB based OS.           |
     +-------------------------------------------------------------------+-------------------------------------------------------------+
 
 
