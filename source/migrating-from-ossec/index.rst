@@ -7,7 +7,6 @@ Migrating from OSSEC
 
 .. meta::
   :description: Learn why it's a good reason to upgrade your infrastructure migrating it to Wazuh.
-  :author: Wazuh, Inc.
 
 Why it's time to migrate
 ------------------------

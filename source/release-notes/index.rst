@@ -7,7 +7,6 @@ Release notes
 
 .. meta::
   :description: Find here a summary of the most important features of each Wazuh release.
-  :author: Wazuh, Inc.
 
 This section summarizes the most important features of each Wazuh release.
 

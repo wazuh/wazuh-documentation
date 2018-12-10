@@ -7,7 +7,6 @@ Using Wazuh to Monitor Docker
 
 .. meta::
   :description: Discover how Wazuh can help you to monitor your Docker infrastructure.
-  :author: Wazuh, Inc.
 
 .. versionadded:: 3.7.0
 

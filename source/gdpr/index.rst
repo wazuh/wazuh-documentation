@@ -7,7 +7,6 @@ Using Wazuh for GDPR
 
 .. meta::
   :description: Learn about the GDPR compliance and how Wazuh helps you to implement it.
-  :author: Wazuh, Inc.
 
 The European Union's **General Data Protection Regulation (GDPR)** has been drawn up to agree on data privacy legislation across Europe, with its main focus on providing data protection for all citizens in the European Union.
 

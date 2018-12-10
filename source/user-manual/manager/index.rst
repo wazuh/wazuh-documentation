@@ -5,6 +5,9 @@
 Wazuh server administration
 ===========================
 
+.. meta::
+  :description: A complete user manual about how to manage and administer the Wazuh manager.
+
 The Wazuh manager is the system that analyzes the data received from all registered agents triggering alerts when an event matches a rule, for example: intrusion detected, file modified, configuration not compliant with policy, possible rootkit, etc. The manager also operates as an agent on the local machine, so it has all the features that an agent has. Also, the manager can forward the alerts it triggers through syslog, emails or integrated external APIs.
 
 .. topic:: Contents

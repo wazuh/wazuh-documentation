@@ -5,6 +5,9 @@
 Architecture
 ============
 
+.. meta::
+  :description: Learn about different architectures that can be used to install Wazuh.
+
 The Wazuh architecture is based on agents running on monitored hosts that forward log data to a central server. Also, agentless devices (such as firewalls, switches, routers, access points, etc.) are supported and can actively submit log data via syslog and/or a periodic probe of their configuration changes to later forward the data to the central server. The central server decodes and analyzes the incoming information and passes the results along to an Elasticsearch cluster for indexing and storage.
 
 An Elasticsearch cluster is a collection of one or more nodes (servers) that communicate with each other to perform read and write operations on indexes. Small Wazuh deployments (<50 agents), can easily be handled by a single-node cluster. Multi-node clusters are recommended when there is a large number of monitored systems, when a large volume of data is anticipated and/or when high availability is required.

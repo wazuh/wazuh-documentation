@@ -7,7 +7,6 @@ Using Wazuh to Monitor AWS
 
 .. meta::
   :description: Discover how Wazuh can help you to monitor your Amazon AWS infrastructure.
-  :author: Wazuh, Inc.
 
 .. versionadded:: 3.2.0
 
