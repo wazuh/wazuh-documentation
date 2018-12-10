@@ -212,6 +212,8 @@ When set to ``no``, the maximum limit of agents that can be added is ignored.
 ipv6
 ^^^^
 
+.. versionadded:: 3.8.0
+
 Toggles whether or not to listen on an IPv6 address.
 
 When set to ``no``, it listens on an IPv4 address.
@@ -221,8 +223,6 @@ When set to ``no``, it listens on an IPv4 address.
 +--------------------+---------------------+
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
-
-.. versionadded:: 3.8.0
 
 Default configuration
 ---------------------
