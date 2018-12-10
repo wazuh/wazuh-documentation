@@ -18,8 +18,12 @@
 }
 
 .wy-nav-content {
-    background: #fcfcfc;
+    background: #ffffff;
     box-shadow: 0 0 4px #c9c9c9;
+}
+
+.codeblock, pre.literal-block, .rst-content .literal-block, .rst-content pre.literal-block, div[class^='highlight'] {
+    background: #fcfcfc;
 }
 
 /* Layout sizing **************************************************************/
@@ -189,7 +193,7 @@ h2 {
 
 div.version {
     position: relative;
-    display: none;
+    display: block;
 }
 
 #select-version {
@@ -217,4 +221,11 @@ div.version:after {
     color: #404040;
     font-size: 80%;
     pointer-events: none;
+}
+
+/* Tables tweak for Firefox ***************************************************/
+
+.wy-table-bordered-all td,
+.rst-content table.docutils td {
+    border-left: 1px solid #e1e4e5 !important;
 }
