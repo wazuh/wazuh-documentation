@@ -5,13 +5,13 @@
 Setting up reverse proxy configuration for Splunk
 =================================================
 
-According to the Splunk official documentation, Splunk web can be placed behind a proxy in a reverse proxy type of configuration. 
+According to the Splunk official documentation, Splunk web can be placed behind a proxy in a reverse proxy type of configuration.
 In this section, we will briefly describe how this can be done with a NGINX setup.
-NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption. 
+NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption.
 In this example, we will use it as a reverse proxy to provide encrypted and authenticated access to Splunk to the end users.
 
 .. warning::
-    Note: The App Manager is not supported for use with a proxy server, if you use a proxy server with Splunk Web, you must download and update apps manually.
+    Note: The App Manager is not supported for use with a proxy server, if you use a proxy server with Splunk web, you must download and update apps manually.
 
 .. topic:: Contents
 
@@ -254,8 +254,9 @@ Now, access the Splunk web interface via HTTPS. It will prompt you for the usern
 Root endpoint
 -------------
 
-If you are hosting Splunk Web behind a proxy that does not place Splunk Web at the proxy's root, you may need to configure the root_endpoint setting in `$SPLUNK_HOME/etc/system/local/web.conf`, navigate to the file and edit it. 
-For example, if your proxy hosts Splunk Web at "yourhost.com:8000/splunk", you have to set up the `root_endpoint` option like this:
+If you are hosting Splunk web behind a proxy that does not place it at the proxy's root, you may need to configure the root_endpoint setting in `$SPLUNK_HOME/etc/system/local/web.conf`, navigate to the file and edit it.
+
+For example, if your proxy hosts Splunk web at ``yourhost.com:8000/splunk``, you have to set up the ``root_endpoint`` option like this:
 
     .. code-block:: console
 
