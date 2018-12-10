@@ -193,7 +193,7 @@ h2 {
 
 div.version {
     position: relative;
-    display: none;
+    display: block;
 }
 
 #select-version {
