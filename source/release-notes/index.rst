@@ -2,10 +2,14 @@
 
 .. _release_notes:
 
-Release Notes
+Release notes
 =============
 
-This section summarizes the most important features of each release.
+.. meta::
+  :description: Find here a summary of the most important features of each Wazuh release.
+  :author: Wazuh, Inc.
+
+This section summarizes the most important features of each Wazuh release.
 
 .. topic:: Contents
 

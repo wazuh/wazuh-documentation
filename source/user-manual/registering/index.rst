@@ -5,7 +5,11 @@
 Registering agents
 ==================
 
-Next, we describe how this process works and more specifically the different methods you can use to register agents against the Wazuh server.
+.. meta::
+  :description: Learn more about the different methods that can be used to register agents against the Wazuh manager.
+  :author: Wazuh, Inc.
+
+In this section we describe how the registration process works, and more specifically the different methods that you can use to register agents against the Wazuh manager.
 
 .. topic:: Contents
 

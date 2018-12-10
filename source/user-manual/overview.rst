@@ -5,6 +5,10 @@
 Overview
 ========
 
+.. meta::
+  :description: The Wazuh user manual describes how to configure and use each of the components, which consist of the Wazuh server, the Wazuh agent, and Elastic Stack.
+  :author: Wazuh, Inc.
+
 Wazuh is an open source project that provides security visibility, compliance and infrastructure monitoring capabilities. The project was born as a fork of OSSEC HIDS and has evolved into a comprehensive solution by implementing new functionalities and integrating additional tools like OpenSCAP and Elasticsearch.
 
 This manual describes how to configure and use each of Wazuh components, which consist of the Wazuh server, the Wazuh agent, and Elastic Stack.

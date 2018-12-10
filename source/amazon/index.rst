@@ -5,6 +5,10 @@
 Using Wazuh to Monitor AWS
 ==========================
 
+.. meta::
+  :description: Discover how Wazuh can help you to monitor your Amazon AWS infrastructure.
+  :author: Wazuh, Inc.
+
 .. versionadded:: 3.2.0
 
 Wazuh provides the ability to read AWS logs directly from AWS S3 buckets. Amazon support is now a built-in Wazuh capability, giving you the ability to search, analyze, and alert on AWS CloudTrail, GuardDuty, Macie, IAM, and VPC Flow log data.
