@@ -5,6 +5,9 @@
 Installation
 ============
 
+.. meta::
+  :description: Learn how to install and configure the Wazuh module to monitor Amazon instances and services.
+
 Prior to enabling the Wazuh rules for Amazon Web Services, follow the steps below to configure AWS to generate log messages, and store them as JSON data files in an Amazon S3 bucket. A detailed description of each of the steps can be found bellow.
 
 .. note::

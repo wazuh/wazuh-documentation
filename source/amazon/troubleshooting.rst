@@ -5,6 +5,9 @@
 Troubleshooting
 ===============
 
+.. meta::
+  :description: Frequently asked questions about the Wazuh module for Amazon.
+
 The below information is intended to assist in troubleshooting issues.
 
 
