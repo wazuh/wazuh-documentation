@@ -70,13 +70,14 @@ Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kiban
         "status": "disabled"
       },
       "extensions": {
-        "oscap": true,
-        "audit": true,
         "pci": true,
+        "gdpr": true,
+        "audit": true,
+        "oscap": true,
+        "ciscat": true,
+        "osquery": true
         "aws": true,
         "virustotal": true,
-        "gdpr": true,
-        "ciscat": true
       }
     }'
 
