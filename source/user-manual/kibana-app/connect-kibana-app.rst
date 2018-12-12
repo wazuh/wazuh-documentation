@@ -50,44 +50,4 @@ Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kiban
     :align: center
     :width: 100%
 
-7. (Optional) Insert a Wazuh API entry automatically:
-
-  If you want to add the Wazuh API credentials more quickly (for instance, for deployment purposes) you can execute the following command on the instance where Elasticsearch is installed:
-
-  .. code-block:: none
-
-    # curl -X POST "http://<ELASTICSEARCH_IP>:9200/.wazuh/wazuh-configuration/1513629884013" -H 'Content-Type: application/json' -d'
-    {
-      "api_user": "<WAZUH_API_USERNAME>",
-      "api_password": "<WAZUH_API_PASSWORD>",
-      "url": "<WAZUH_API_URL>",
-      "api_port": "<WAZUH_API_PORT>",
-      "insecure": "true",
-      "component": "API",
-      "cluster_info" : {
-        "manager" : "<WAZUH_MANAGER_HOSTNAME>",
-        "cluster" : "Disabled",
-        "status" : "disabled"
-      },
-      "extensions" : {
-        "audit" : true,
-        "pci" : true,
-        "gdpr" : true,
-        "oscap" : true,
-        "ciscat" : false,
-        "aws" : false,
-        "virustotal" : false,
-        "osquery" : false
-      }
-    }'
-
-  **Note the following:**
-
-  1. ``<ELASTICSEARCH_IP>`` is the URL to the Elasticsearch host.
-  2. The number used on the cURL command (``1513629884013``) is a random number used to identify the Wazuh API entry as unique. If you want to add more APIs, you must use a different number.
-  3. ``<WAZUH_API_USERNAME>`` and ``<WAZUH_API_PASSWORD>`` represent the Wazuh API credentials to be stored on the app.
-  4. The API password must be stored on *base64* format. Using ``echo -n '<WAZUH_API_PASSWORD>' | base64`` will return the password on the proper format to use.
-  5. ``<WAZUH_API_URL>`` and ``<WAZUH_API_PORT>`` are the full IP address and the port to the Wazuh API. The URL must include ``http://`` or ``https://``, depending on the current configuration.
-  6. ``<WAZUH_MANAGER_HOSTNAME>`` is the hostname of the instance where the Wazuh manager is installed. You can get this information just by running the ``hostname`` command on the manager host.
-
 If you want to learn more about the app capabilities, go to the :ref:`kibana_features` section to see useful information about it.
