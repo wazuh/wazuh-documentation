@@ -482,17 +482,18 @@ Once your role is created, just paste it on the bucket configuration:
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
    </bucket>
 
-IAM roles on EC2 instances
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-You can configure an EC2 instance for giving a role and no authentication parameters are needed into `ossec.conf`. We recommend use this type of configuration. More information about IAM roles on EC2 instances can be found into `AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
+IAM roles for EC2 instances
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-An example for this configuration is the next:
+You can use IAM roles and assign them to EC2 instances so there's no need to insert authentication parameters on the ``ossec.conf`` file. This is the recommended configuration. Find more information about IAM roles on EC2 instances in the official `Amazon AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
+
+This is an example configuration:
 
 .. code-block:: xml
 
-    <bucket type="cloudtrail">
-      <name>my-bucket</name>
-   </bucket>
+  <bucket type="cloudtrail">
+    <name>my-bucket</name>
+  </bucket>
 
 Considerations for configuration
 --------------------------------
