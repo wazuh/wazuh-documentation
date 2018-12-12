@@ -24,3 +24,4 @@ This documentation explains how to install, update, and contribute to Wazuh Rule
        testing
        cdb-list
        contribute
+       rules-classification
