@@ -5,12 +5,10 @@
 Insert a Wazuh API entry automatically
 ======================================
 
-If you want to add the Wazuh API credentials on one of our apps more quickly (for instance, for deployment purposes) you can execute the following commands depending on your case.
+If you want to add the Wazuh API credentials on one of our apps more quickly (for instance, for deployment purposes) you can execute one of the following commands, depending on the app you're using:
 
 Kibana app
 ----------
-
-Execute the following command on the instance where Elasticsearch is installed:
 
 .. code-block:: none
 
@@ -52,8 +50,6 @@ Execute the following command on the instance where Elasticsearch is installed:
 
 Splunk app
 ----------
-
-Execute the following command on the same instance where you installed the Wazuh app for Splunk:
 
 .. code-block:: console
 
