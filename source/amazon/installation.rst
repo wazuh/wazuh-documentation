@@ -90,9 +90,8 @@ VPC Flow
     :align: center
     :width: 100%
 
-
 Other AWS Services (Guard Duty, Macie and IAM)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section explains how to get logs from Guard Duty, Macie and IAM.
 
@@ -486,6 +485,18 @@ Once your role is created, just paste it on the bucket configuration:
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
    </bucket>
 
+IAM roles for EC2 instances
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can use IAM roles and assign them to EC2 instances so there's no need to insert authentication parameters on the ``ossec.conf`` file. This is the recommended configuration. Find more information about IAM roles on EC2 instances in the official `Amazon AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
+
+This is an example configuration:
+
+.. code-block:: xml
+
+  <bucket type="cloudtrail">
+    <name>my-bucket</name>
+  </bucket>
 
 Considerations for configuration
 --------------------------------
