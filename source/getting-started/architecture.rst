@@ -85,7 +85,7 @@ Elastic Stack
 +---------------+-----------+-----------+----------+---------------------------------------+
 | Component     | Direction | Port      | Protocol | Purpose                               |
 +===============+===========+===========+==========+=======================================+
-| Logstash      | Inbound   | 5000      | TCP      | Input port (for Filebeat)             |
+| Logstash      | Inbound   | 5000      | TCP      | Input port (when using Filebeat)      |
 +---------------+-----------+-----------+----------+---------------------------------------+
 |               | Inbound   | 9200      | TCP      | Elasticsearch RESTful API             |
 + Elasticsearch +-----------+-----------+----------+---------------------------------------+
