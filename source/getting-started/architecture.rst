@@ -65,23 +65,23 @@ For an installation of Wazuh and the Elastic Stack, several network ports must b
 Wazuh
 ^^^^^
 
-+---------------+-----------+----------+-------------------------------------------------------------+
-| Component     | Port      | Protocol | Purpose                                                     |
-+===============+===========+==========+=============================================================+
-|               | 1514      | TCP      | Send collected events from agents (when configured for TCP) |
-+               +-----------+----------+-------------------------------------------------------------+
-|               | 1514      | UDP      | Send collected events from agents (when configured for UDP) |
-+               +-----------+----------+-------------------------------------------------------------+
-| Wazuh manager | 1515      | TCP      | Agents registration service                                 |
-+               +-----------+----------+-------------------------------------------------------------+
-|               | 1516      | TCP      | Wazuh cluster communications                                |
-+               +-----------+----------+-------------------------------------------------------------+
-|               | 514       | TCP      | Send collected events from syslog (when configured for TCP) |
-+               +-----------+----------+-------------------------------------------------------------+
-|               | 514       | UDP      | Send collected events from syslog (when configured for UDP) |
-+---------------+-----------+----------+-------------------------------------------------------------+
-| Wazuh API     | 55000     | TCP      | API queries from Wazuh apps                                 |
-+---------------+-----------+----------+-------------------------------------------------------------+
++---------------+-----------+----------+-----------------------------------------------------------------------+
+| Component     | Port      | Protocol | Purpose                                                               |
++===============+===========+==========+=======================================================================+
+|               | 1514      | TCP      | Send collected events from agents (when configured for TCP)           |
++               +-----------+----------+-----------------------------------------------------------------------+
+|               | 1514      | UDP      | Send collected events from agents (when configured for UDP) - Default |
++               +-----------+----------+-----------------------------------------------------------------------+
+| Wazuh manager | 1515      | TCP      | Agents registration service                                           |
++               +-----------+----------+-----------------------------------------------------------------------+
+|               | 1516      | TCP      | Wazuh cluster communications                                          |
++               +-----------+----------+-----------------------------------------------------------------------+
+|               | 514       | TCP      | Send collected events from syslog (when configured for TCP)           |
++               +-----------+----------+-----------------------------------------------------------------------+
+|               | 514       | UDP      | Send collected events from syslog (when configured for UDP) - Default |
++---------------+-----------+----------+-----------------------------------------------------------------------+
+| Wazuh API     | 55000     | TCP      | API queries from Wazuh apps                                           |
++---------------+-----------+----------+-----------------------------------------------------------------------+
 
 Elastic Stack
 ^^^^^^^^^^^^^
@@ -115,9 +115,9 @@ More information
 ^^^^^^^^^^^^^^^^
 
 - `Logstash configuration examples <https://www.elastic.co/guide/en/logstash/current/config-examples.html>`_
-- `Talking to Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/guide/current/_talking_to_elasticsearch.html>`_
+- `Elasticsearch network settings <https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>`_
 - `Accessing Kibana <https://www.elastic.co/guide/en/kibana/current/access.html>`_
-- `Splunk components and their relationship with the network <https://docs.splunk.com/Documentation/Splunk/7.2.1/InheritedDeployment/Ports>`_
+- `Splunk components and their relationship with the network <https://docs.splunk.com/Documentation/Splunk/latest/InheritedDeployment/Ports>`_
 
 Archival data storage
 ---------------------
