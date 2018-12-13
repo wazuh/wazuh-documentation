@@ -106,15 +106,16 @@ Splunk
 +===============+===========+==========+=============================================================+
 |               | 8000      | TCP      | Splunk web interface                                        |
 +               +-----------+----------+-------------------------------------------------------------+
-| Splunk        | 9997      | TCP      | Input port (for Splunk Forwarder)                           |
-+               +-----------+----------+-------------------------------------------------------------+
+|               | 9997      | TCP      | Input port (for Splunk Forwarder)                           |
++ Splunk        +-----------+----------+-------------------------------------------------------------+
 |               | 8089      | TCP      | Management port (for indexers)                              |
++               +-----------+----------+-------------------------------------------------------------+
+|               | 9887      | TCP      | Splunk cluster communications                               |
 +---------------+-----------+----------+-------------------------------------------------------------+
 
 More information
 ^^^^^^^^^^^^^^^^
 
-- `Logstash configuration examples <https://www.elastic.co/guide/en/logstash/current/config-examples.html>`_
 - `Elasticsearch network settings <https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>`_
 - `Accessing Kibana <https://www.elastic.co/guide/en/kibana/current/access.html>`_
 - `Splunk components and their relationship with the network <https://docs.splunk.com/Documentation/Splunk/latest/InheritedDeployment/Ports>`_
