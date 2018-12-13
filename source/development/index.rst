@@ -5,6 +5,9 @@
 Development
 ===========
 
+.. meta::
+  :description: Find useful technical documentation about how Wazuh works, suitable for developers and tech enthusiasts.
+
 This section contains technical documentation for developers.
 
 .. topic:: Contents

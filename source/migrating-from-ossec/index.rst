@@ -2,14 +2,11 @@
 
 .. _upgrading_ossec:
 
-======================
- Migrating from OSSEC
-======================
+Migrating from OSSEC
+====================
 
 .. meta::
   :description: Learn why it's a good reason to upgrade your infrastructure migrating it to Wazuh.
-  :keywords: wazuh, ossec, security, upgrade, recommendations
-  :author: Wazuh, Inc.
 
 Why it's time to migrate
 ------------------------

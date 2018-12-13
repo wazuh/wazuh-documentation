@@ -5,6 +5,9 @@
 Installing Splunk
 =================
 
+.. meta::
+  :description: Wazuh can be integrated with Splunk Enterprise to visualize alerts using our app. Learn more about how to install it.
+
 This guide describes the Splunk Enterprise installation process for two different types of distributed architecture, along with the Splunk forwarder and the Wazuh app for Splunk.
 
 - The **single-instance architecture** is recommended for testing and evaluation purposes, or also for small-medium sized environments.
@@ -38,3 +41,4 @@ Find more information about how to scale your environments using Splunk Enterpri
     splunk-app
     splunk-forwarder
     splunk-reverse-proxy
+    splunk-polling

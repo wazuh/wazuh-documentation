@@ -76,7 +76,7 @@ Now that we finished installing the Splunk instances, it's time to choose which 
 
   .. code-block:: console
 
-    # splunk add search-server <host>:<port> -auth <user>:<password> -remoteUsername <user> -remotePassword <passremote>
+    # /opt/splunk/bin/splunk add search-server <host>:<port> -auth <user>:<password> -remoteUsername <user> -remotePassword <passremote>
 
   You must run this command for each search peer that you want to add.
 
