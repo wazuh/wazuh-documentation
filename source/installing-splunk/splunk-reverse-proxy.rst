@@ -5,7 +5,7 @@
 Setting up reverse proxy configuration for Splunk
 =================================================
 
-According to the Splunk official documentation, Splunk web can be placed behind a proxy in a reverse proxy type of configuration. In this section, we will briefly describe how this can be done with a NGINX setup.
+According to the Splunk official documentation, Splunk web can be placed behind a proxy in a reverse proxy type of configuration. In this section, we briefly describe how this can be done with an NGINX setup.
 
 NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption.
 
