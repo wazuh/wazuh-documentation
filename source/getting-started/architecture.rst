@@ -36,14 +36,13 @@ Communications and data flow
     :align: center
     :width: 100%
 
-
 Agent-server communication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Wazuh agents use the OSSEC message protocol to send collected events to the Wazuh server over port 1514 (UDP or TCP). The Wazuh server then decodes and rule-checks the received events with the analysis engine. Events that trip a rule are augmented with alert data such as rule id and rule name. Events can be spooled to one or both of the following files, depending on whether or not a rule is tripped:
 
- - The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
- - The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule.
+- The file ``/var/ossec/logs/archives/archives.json`` contains all events whether they tripped a rule or not.
+- The file ``/var/ossec/logs/alerts/alerts.json`` contains only events that tripped a rule.
 
 .. note:: Alerts will be duplicated if you use both of these files. Also, note that both files receive fully decoded event data.
 
@@ -58,6 +57,68 @@ Logstash formats the incoming data and optionally enriches it with GeoIP informa
 
 The Wazuh App runs inside Kibana constantly querying the RESTful API (port 55000/TCP on the Wazuh manager) in order to display configuration and status related information of the server and agents, as well to restart agents when desired. This communication is encrypted with TLS and authenticated with username and password.
 
+Required ports
+--------------
+
+For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them.
+
+Wazuh
+^^^^^
+
++---------------+-----------+----------+-----------------------------------------------------------------------+
+| Component     | Port      | Protocol | Purpose                                                               |
++===============+===========+==========+=======================================================================+
+|               | 1514      | TCP      | Send collected events from agents (when configured for TCP)           |
++               +-----------+----------+-----------------------------------------------------------------------+
+|               | 1514      | UDP      | Send collected events from agents (when configured for UDP) - Default |
++               +-----------+----------+-----------------------------------------------------------------------+
+| Wazuh manager | 1515      | TCP      | Agents registration service                                           |
++               +-----------+----------+-----------------------------------------------------------------------+
+|               | 1516      | TCP      | Wazuh cluster communications                                          |
++               +-----------+----------+-----------------------------------------------------------------------+
+|               | 514       | TCP      | Send collected events from syslog (when configured for TCP)           |
++               +-----------+----------+-----------------------------------------------------------------------+
+|               | 514       | UDP      | Send collected events from syslog (when configured for UDP) - Default |
++---------------+-----------+----------+-----------------------------------------------------------------------+
+| Wazuh API     | 55000     | TCP      | Incoming HTTP requests                                                |
++---------------+-----------+----------+-----------------------------------------------------------------------+
+
+Elastic Stack
+^^^^^^^^^^^^^
+
++---------------+-----------+----------+-------------------------------------------------------------+
+| Component     | Port      | Protocol | Purpose                                                     |
++===============+===========+==========+=============================================================+
+| Logstash      | 5000      | TCP      | Input port (when using Filebeat)                            |
++---------------+-----------+----------+-------------------------------------------------------------+
+|               | 9200      | TCP      | Elasticsearch RESTful API                                   |
++ Elasticsearch +-----------+----------+-------------------------------------------------------------+
+|               | 9300/9400 | TCP      | Elasticsearch cluster communications                        |
++---------------+-----------+----------+-------------------------------------------------------------+
+| Kibana        | 5601      | TCP      | Kibana web interface                                        |
++---------------+-----------+----------+-------------------------------------------------------------+
+
+Splunk
+^^^^^^
+
++---------------+-----------+----------+-------------------------------------------------------------+
+| Component     | Port      | Protocol | Purpose                                                     |
++===============+===========+==========+=============================================================+
+|               | 8000      | TCP      | Splunk web interface                                        |
++               +-----------+----------+-------------------------------------------------------------+
+|               | 9997      | TCP      | Input port (for Splunk Forwarder)                           |
++ Splunk        +-----------+----------+-------------------------------------------------------------+
+|               | 8089      | TCP      | Management port (for indexers)                              |
++               +-----------+----------+-------------------------------------------------------------+
+|               | 9887      | TCP      | Splunk cluster communications                               |
++---------------+-----------+----------+-------------------------------------------------------------+
+
+More information
+^^^^^^^^^^^^^^^^
+
+- `Elasticsearch network settings <https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-network.html>`_
+- `Accessing Kibana <https://www.elastic.co/guide/en/kibana/current/access.html>`_
+- `Splunk components and their relationship with the network <https://docs.splunk.com/Documentation/Splunk/latest/InheritedDeployment/Ports>`_
 
 Archival data storage
 ---------------------
@@ -66,20 +127,20 @@ Both alerts and non-alert events are stored in files on the Wazuh server in addi
 
 .. code-block:: bash
 
-    root@wazuh-server:/var/ossec/logs/archives/2017/Jan# ls -l
-    total 176
-    -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
-    -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum
-    -rw-r----- 1 ossec ossec 176221 Jan  2 00:00 ossec-archive-01.log.gz
-    -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-01.log.sum
-    -rw-r----- 1 ossec ossec 224320 Jan  2 00:00 ossec-archive-02.json.gz
-    -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-02.json.sum
-    -rw-r----- 1 ossec ossec 151642 Jan  2 00:00 ossec-archive-02.log.gz
-    -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-02.log.sum
-    -rw-r----- 1 ossec ossec 315251 Jan  2 00:00 ossec-archive-03.json.gz
-    -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-03.json.sum
-    -rw-r----- 1 ossec ossec 156296 Jan  2 00:00 ossec-archive-03.log.gz
-    -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-03.log.sum
+  root@wazuh-server:/var/ossec/logs/archives/2017/Jan# ls -l
+  total 176
+  -rw-r----- 1 ossec ossec 234350 Jan  2 00:00 ossec-archive-01.json.gz
+  -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-01.json.sum
+  -rw-r----- 1 ossec ossec 176221 Jan  2 00:00 ossec-archive-01.log.gz
+  -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-01.log.sum
+  -rw-r----- 1 ossec ossec 224320 Jan  2 00:00 ossec-archive-02.json.gz
+  -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-02.json.sum
+  -rw-r----- 1 ossec ossec 151642 Jan  2 00:00 ossec-archive-02.log.gz
+  -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-02.log.sum
+  -rw-r----- 1 ossec ossec 315251 Jan  2 00:00 ossec-archive-03.json.gz
+  -rw-r----- 1 ossec ossec    350 Jan  2 00:00 ossec-archive-03.json.sum
+  -rw-r----- 1 ossec ossec 156296 Jan  2 00:00 ossec-archive-03.log.gz
+  -rw-r----- 1 ossec ossec    346 Jan  2 00:00 ossec-archive-03.log.sum
 
 Rotation and backups of archive files is recommended according to the storage capacity of the Wazuh Manager server. By using *cron* jobs, you could easily arrange to keep only a certain time window of archive files locally on the Manager (e.g., last year or last three months).
 
