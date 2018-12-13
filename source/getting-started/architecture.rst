@@ -58,41 +58,54 @@ Logstash formats the incoming data and optionally enriches it with GeoIP informa
 The Wazuh App runs inside Kibana constantly querying the RESTful API (port 55000/TCP on the Wazuh manager) in order to display configuration and status related information of the server and agents, as well to restart agents when desired. This communication is encrypted with TLS and authenticated with username and password.
 
 Required ports
-^^^^^^^^^^^^^^
+--------------
 
-The following table lists the ports required for a proper communication between all the architecture components:
+For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them.
 
-+---------------+-----------+----------+---------------------------------------+
-| Component     | Port      | Protocol | Purpose                               |
-+===============+===========+==========+=======================================+
-|               | 1514      | TCP/UDP  | Send collected events from agents     |
-+               +-----------+----------+---------------------------------------+
-|               | 1515      | TCP      | Agents registration service           |
-+ Wazuh manager +-----------+----------+---------------------------------------+
-|               | 1516      | TCP      | Wazuh cluster communications          |
-+               +-----------+----------+---------------------------------------+
-|               | 514       | TCP      | Send collected events from syslog     |
-+---------------+-----------+----------+---------------------------------------+
-| Wazuh API     | 55000     | TCP      | API queries from Wazuh apps           |
-+---------------+-----------+----------+---------------------------------------+
-| Logstash      | 9000      | TCP      | Input port (for manager or Filebeat)  |
-+---------------+-----------+----------+---------------------------------------+
-|               | 9200      | TCP      | Elasticsearch RESTful API             |
-+ Elasticsearch +-----------+----------+---------------------------------------+
-|               | 9300/9400 | TCP      | Elasticsearch cluster communications  |
-+---------------+-----------+----------+---------------------------------------+
-|               | 5601      | TCP      | Kibana web interface                  |
-+ Kibana        +-----------+----------+---------------------------------------+
-|               | 80/443    | TCP      | HTTP/HTTPS access                     |
-+---------------+-----------+----------+---------------------------------------+
-|               | 8000      | TCP      | Splunk web interface                  |
-+               +-----------+----------+---------------------------------------+
-|               | 9997      | TCP      | Input port (for Splunk Forwarder)     |
-+ Splunk        +-----------+----------+---------------------------------------+
-|               | 8089      | TCP      | Management port (for indexers)        |
-+               +-----------+----------+---------------------------------------+
-|               | 80/443    | TCP      | HTTP/HTTPS access                     |
-+---------------+-----------+----------+---------------------------------------+
+Wazuh
+^^^^^
+
++---------------+-----------+-----------+----------+---------------------------------------+
+| Component     | Direction | Port      | Protocol | Purpose                               |
++===============+===========+===========+==========+=======================================+
+|               | Inbound   | 1514      | TCP/UDP  | Send collected events from agents     |
++               +-----------+-----------+----------+---------------------------------------+
+|               | Inbound   | 1515      | TCP      | Agents registration service           |
++ Wazuh manager +-----------+-----------+----------+---------------------------------------+
+|               | Inbound   | 1516      | TCP      | Wazuh cluster communications          |
++               +-----------+-----------+----------+---------------------------------------+
+|               | Inbound   | 514       | TCP      | Send collected events from syslog     |
++---------------+-----------+-----------+----------+---------------------------------------+
+| Wazuh API     | Inbound   | 55000     | TCP      | API queries from Wazuh apps           |
++---------------+-----------+-----------+----------+---------------------------------------+
+
+Elastic Stack
+^^^^^^^^^^^^^
+
++---------------+-----------+-----------+----------+---------------------------------------+
+| Component     | Direction | Port      | Protocol | Purpose                               |
++===============+===========+===========+==========+=======================================+
+| Logstash      | Inbound   | 5000      | TCP      | Input port (for manager or Filebeat)  |
++---------------+-----------+-----------+----------+---------------------------------------+
+|               | Inbound   | 9200      | TCP      | Elasticsearch RESTful API             |
++ Elasticsearch +-----------+-----------+----------+---------------------------------------+
+|               | Inbound   | 9300/9400 | TCP      | Elasticsearch cluster communications  |
++---------------+-----------+-----------+----------+---------------------------------------+
+| Kibana        | Inbound   | 5601      | TCP      | Kibana web interface                  |
++---------------+-----------+-----------+----------+---------------------------------------+
+
+Splunk
+^^^^^^
+
++---------------+-----------+-----------+----------+---------------------------------------+
+| Component     | Direction | Port      | Protocol | Purpose                               |
++===============+===========+===========+==========+=======================================+
+|               | Inbound   | 8000      | TCP      | Splunk web interface                  |
++               +-----------+-----------+----------+---------------------------------------+
+| Splunk        | Inbound   | 9997      | TCP      | Input port (for Splunk Forwarder)     |
++               +-----------+-----------+----------+---------------------------------------+
+|               | Inbound   | 8089      | TCP      | Management port (for indexers)        |
++---------------+-----------+-----------+----------+---------------------------------------+
 
 Archival data storage
 ---------------------

@@ -5,13 +5,17 @@
 Setting up reverse proxy configuration for Splunk
 =================================================
 
-According to the Splunk official documentation, Splunk web can be placed behind a proxy in a reverse proxy type of configuration.
-In this section, we will briefly describe how this can be done with a NGINX setup.
+According to the Splunk official documentation, Splunk web can be placed behind a proxy in a reverse proxy type of configuration. In this section, we will briefly describe how this can be done with a NGINX setup.
+
 NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption.
+
 In this example, we will use it as a reverse proxy to provide encrypted and authenticated access to Splunk to the end users.
 
+.. note::
+    The default port for the Splunk web interface is *8000*. This tutorial will make the *80* and *443* ports available for HTTP/HTTPS access.
+
 .. warning::
-    Note: The App Manager is not supported for use with a proxy server, if you use a proxy server with Splunk web, you must download and update apps manually.
+    The App Manager is not supported for use with a proxy server, if you use a proxy server with Splunk web, you must download and update apps manually.
 
 .. topic:: Contents
 

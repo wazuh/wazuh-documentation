@@ -11,6 +11,9 @@ NGINX is a popular open-source web server and reverse proxy known for its high p
 
 .. note:: Many of the commands described below need to be executed with root user privileges.
 
+.. note::
+    The default port for the Kibana web interface is *5601*. This tutorial will make the *80* and *443* ports available for HTTP/HTTPS access.
+
 .. topic:: Contents
 
     1. `NGINX SSL proxy for Kibana (RPM-based distributions)`_
