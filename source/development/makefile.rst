@@ -14,7 +14,7 @@ Compiling the source code
 
 When following the official documentation to install the Wazuh manager :ref:`from sources <sources_installation>` (or the :ref:`Wazuh agent <agent-sources>`), the user runs the ``install.sh`` script. This will automatically compile the source code before installing it, but some customizations can be made prior to the script execution.
 
-To compile the code with ``make``, the user needs to change to the ``/src`` directory:
+To compile the code with ``make``, the working directory must be where the ``MAKEFILE`` resides, in this case the ``/src`` directory of the installation folder:
 
 .. code-block:: console
 
@@ -55,7 +55,15 @@ Available targets
 +-----------------------+------------------------------------------------------------------------------------------------------------------+
 | **clean-external**    | Removes compiled external dependencies, but won't remove downloaded files.                                       |
 +-----------------------+------------------------------------------------------------------------------------------------------------------+
-| **clean-internals**   | Removes all compiled files.                                                                                      |
+| **clean-internals**   | Removes all compiled internal dependencies.                                                                      |
++-----------------------+------------------------------------------------------------------------------------------------------------------+
+| **clean-framework**   | Removes all compiled files used to build the Wazuh framework.                                                    |
++-----------------------+------------------------------------------------------------------------------------------------------------------+
+| **clean-windows**     | Removes all compiled files used to build the Windows agent.                                                      |
++-----------------------+------------------------------------------------------------------------------------------------------------------+
+| **clean-config**      | Removes all compiled configuration files.                                                                        |
++-----------------------+------------------------------------------------------------------------------------------------------------------+
+| **clean-test**        | Removes all compiled files used for testing.                                                                     |
 +-----------------------+------------------------------------------------------------------------------------------------------------------+
 
 There are other targets used to get information about the Makefile, but they won't build, download or compile anything:
