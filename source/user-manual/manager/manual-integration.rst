@@ -46,8 +46,8 @@ The integrations are configured on the ``ossec.conf`` file which is located insi
     <event_location> </event_location>
   </integration>
 
-Slack integration
------------------
+Slack
+-----
 
 In order to make the Slack integration work, we need to install the ``python-requests`` package:
 
@@ -79,8 +79,12 @@ This is an example configuration for the Slack integration:
     <alert_format>json</alert_format>
   </integration>
 
-PagerDuty Integration
----------------------
+PagerDuty
+---------
+
+`PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. This integration allows to create a service using its official API in order to receive Wazuh alerts on the Incidents Dashboard.
+
+This is an example configuration for the PagerDuty integration:
 
 .. code-block:: xml
 
@@ -89,12 +93,21 @@ PagerDuty Integration
     <api_key>PAGERDUTY_API_KEY</api_key>
   </integration>
 
-VirusTotal integration
-----------------------
+As seen on the screenshot below, alerts start coming into the dashboard:
+
+.. thumbnail:: ../../images/manual/integration/pagerduty.png
+  :title: PagerDuty Incidents Dashboard
+  :align: center
+  :width: 80%
+
+VirusTotal
+----------
 
 .. versionadded:: 3.0.0
 
 This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this at the :ref:`VirusTotal integration <virustotal-scan>` page.
+
+This is an example configuration for the VirusTotal integration:
 
 .. code-block:: xml
 
