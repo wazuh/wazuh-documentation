@@ -5,7 +5,10 @@
 Using the registration service
 ==============================
 
-The ``authd`` daemon allows to register agents automatically. This registration process uses :ref:`ossec-authd` on the manager instance, and :ref:`agent-auth` on the agent instances.
+The ``ossec-authd`` daemon allows to register agents automatically.
+
+- The manager uses :ref:`ossec-authd` to launch the registration service.
+- On the agent, :ref:`agent-auth` is used to connect to the registration service.
 
 Launching the daemon on the manager with default options would allow any agent to register itself, and then connect to it. The secure methods provide some mechanisms to authorize the connections.
 
@@ -57,9 +60,17 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
 2. On the agents, run the ``agent-auth`` program, using the manager's IP address:
 
+  a. For Linux systems:
+
   .. code-block:: console
 
     # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
+
+  b. For Windows systems:
+
+  .. code-block:: none
+
+    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
 
 Password authorization
 ----------------------
@@ -91,16 +102,33 @@ To enable the password authorization, use the ``-P`` flag when running the regis
 
   * Write the password on ``/var/ossec/etc/authd.pass`` and run the ``agent-auth`` program:
 
+    a. For Linux systems:
+
     .. code-block:: console
 
       # echo "abcd1234" > /var/ossec/etc/authd.pass
       # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
 
+    b. For Windows systems:
+
+    .. code-block:: console
+
+      # echo abcd1234 > C:\Program Files (x86)\ossec-agent\authd.pass
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
+
   * Run the program with the ``-P`` flag, and insert the password:
+
+    a. For Linux systems:
 
     .. code-block:: console
 
       # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS> -P "abcd1234"
+
+    b. For Windows systems:
+
+    .. code-block:: none
+
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -P "abcd1234"
 
 .. _verify-hosts:
 
@@ -138,10 +166,19 @@ Manager verification using SSL
 
 3. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program:
 
+  a. For Linux systems:
+
   .. code-block:: console
 
     # cp rootCA.pem /var/ossec/etc
     # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
+
+  b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
+
+  .. code-block:: console
+
+    # cp rootCA.pem C:\Program Files (x86)\ossec-agent
+    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
 
 Agent verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -166,10 +203,19 @@ In this example, we are going to create a certificate for agents without specify
 
 3. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
 
+  a. For Linux systems:
+
   .. code-block:: console
 
     # cp sslagent.cert sslagent.key /var/ossec/etc
     # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+
+  b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
+
+  .. code-block:: console
+
+    # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
+    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
 **Agent verification (with host validation)**
 
@@ -191,10 +237,19 @@ This is an alternative method to the previous one. In this case, we will bind th
 
 3. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
 
+  a. For Linux systems:
+
   .. code-block:: console
 
     # cp sslagent.cert sslagent.key /var/ossec/etc
     # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+
+  b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
+
+  .. code-block:: console
+
+    # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
+    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
 Additional configurations
 -------------------------
