@@ -15,6 +15,7 @@ This section summarizes the most important features of each Wazuh release.
     .. toctree::
         :maxdepth: 2
 
+        release_3_7_2
         release_3_7_1
         release_3_7_0
         release_3_6_1
