@@ -16,6 +16,5 @@ This solution is possible through an integration with VirusTotal, which is a pow
     .. toctree::
         :maxdepth: 2
 
-        what-is-virustotal
-        terms-of-service
+        about
         integration
