@@ -19,7 +19,7 @@ Options
 
 - `enabled`_
 - `timeout`_
-- `script`_
+- `exec_path`_
 - `socket`_
 - `threads`_
 - `queue_size`_
@@ -31,7 +31,7 @@ Options
 +----------------------+-----------------------------+
 | `timeout`_           | A positive number (seconds) |
 +----------------------+-----------------------------+
-| `script`_            | Full path to script         |
+| `exec_path`_         | Full path to executable     |
 +----------------------+-----------------------------+
 | `socket`_            | Full path to unix socket    |
 +----------------------+-----------------------------+
@@ -55,7 +55,7 @@ Enable the key polling wodle.
 timeout
 ^^^^^^^
 
-Maximum time for waiting a response from the script.
+Maximum time for waiting a response from the executable.
 
 +--------------------+------------------------------+
 | **Default value**  | 60                           |
@@ -63,10 +63,10 @@ Maximum time for waiting a response from the script.
 | **Allowed values** | A positive number in seconds |
 +--------------------+------------------------------+
 
-script
-^^^^^^
+exec_path
+^^^^^^^^^
 
-Full path to the script to the executed.
+Full path to the executable.
 
 +--------------------+-----------------------------------+
 | **Default value**  | none                              |
@@ -77,7 +77,7 @@ Full path to the script to the executed.
 socket
 ^^^^^^
 
-Full path to the script to the executed.
+Full path to the unix domain socket.
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | none                                                      |
@@ -114,8 +114,8 @@ Example of configuration
 
 	<wodle name="key-polling">
 		<enabled>yes</enabled>
-		<timeout>60</timeout>  
-		<script>/root/script.sh</script>
+		<timeout>60</timeout>
+		<exec_path>/usr/bin/python /home/script.py</exec_path>
 		<threads>1</threads>
-		<queue_size>1024</queue_size>  
+		<queue_size>1024</queue_size>
   	</wodle>
