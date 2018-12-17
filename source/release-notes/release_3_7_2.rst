@@ -16,4 +16,4 @@ The :ref:`Logcollector module <manual_log_analysis>` received several improvemen
 
 We also ironed some errors when Logcollector tries to open or analyze files that disappeared, or when querying if a file reached its end.
 
-In addition to this, We've fixed an issue where the agents with version 3.7.1 on Windows systems could cause some errors on the Analysis engine when reporting files if the username contained whitespace characters.
+In addition to this, we've fixed an issue where the agents with version 3.7.0 on Windows systems could cause some errors on the Analysis engine when reporting files if the owner username contained whitespace characters.
