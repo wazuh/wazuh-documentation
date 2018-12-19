@@ -60,7 +60,7 @@ The Wazuh App runs inside Kibana constantly querying the RESTful API (port 55000
 Required ports
 --------------
 
-For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them. All the ports listed below are *inbound*, which means they accept incoming connections from remote locations.
+For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them. 
 
 Wazuh
 ^^^^^
