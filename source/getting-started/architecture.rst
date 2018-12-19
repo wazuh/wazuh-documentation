@@ -98,6 +98,11 @@ Elastic Stack
 | Kibana        | 5601      | TCP      | Kibana web interface                                        |
 +---------------+-----------+----------+-------------------------------------------------------------+
 
+.. thumbnail:: ../images/getting_started/architecture_ports_elastic.png
+    :title: Elastic ports diagram
+    :align: center
+    :width: 100%
+
 Splunk
 ^^^^^^
 
@@ -112,6 +117,11 @@ Splunk
 +               +-----------+----------+-------------------------------------------------------------+
 |               | 9887      | TCP      | Splunk cluster communications                               |
 +---------------+-----------+----------+-------------------------------------------------------------+
+
+.. thumbnail:: ../images/getting_started/architecture_ports_splunk.png
+    :title: Splunk ports diagram
+    :align: center
+    :width: 100%
 
 More information
 ^^^^^^^^^^^^^^^^
