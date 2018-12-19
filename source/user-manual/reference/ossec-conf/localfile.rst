@@ -95,7 +95,7 @@ This can be used with **command** or **full_command**.
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-This is only to be used with the ``eventchannel`` and the ``eventchannel_json`` log format.  By default, when Wazuh starts, it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
+This is only to be used with the ``eventchannel`` log format.  By default, when Wazuh starts, it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
 
 If this is set to **yes** Wazuh would then only receive events that occurred after the agent was started.
 
@@ -108,7 +108,7 @@ If this is set to **yes** Wazuh would then only receive events that occurred aft
 query
 ^^^^^
 
-This is also only to be used with the ``eventchannel`` and the ``eventchannel_json`` log format. With this option, you can identify an XPATH query following the event schema that will filter the events that Wazuh will process.
+This is also only to be used with the ``eventchannel`` log format. With this option, you can identify an XPATH query following the event schema that will filter the events that Wazuh will process.
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                                              |
@@ -116,28 +116,14 @@ This is also only to be used with the ``eventchannel`` and the ``eventchannel_js
 | **Allowed values** | Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------+
 
-For example, the following configuration will only process events with an ID different from 5145, 5156, 5447, 4656, 4658, 4663, 4660, 4670, 4690, 4703 and 4907:
+For example, the following configuration will only process events with an ID of 7040:
 
 .. code-block:: xml
 
   <localfile>
-    <location>Security</location>
-    <log_format>eventchannel</log_format>
-    <query>Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and
-      EventID != 4656 and EventID != 4658 and EventID != 4663 and EventID != 4660 and
-      EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907]</query>
-  </localfile>
-
-The following configuration is equivalent but using a ``eventchannel_json`` log format:
-
-.. code-block:: xml
-
-  <localfile>
-    <location>Security</location>
-    <log_format>eventchannel_json</log_format>
-    <query>Event/System[EventID != 5145 and EventID != 5156 and EventID != 5447 and
-      EventID != 4656 and EventID != 4658 and EventID != 4663 and EventID != 4660 and
-      EventID != 4670 and EventID != 4690 and EventID != 4703 and EventID != 4907]</query>
+    <location>System</location>
+     <log_format>eventchannel</log_format>
+     <query>Event/System[EventID=7040]</query>
   </localfile>
 
 label
@@ -233,13 +219,11 @@ This specifies the format of the log being read. **It is required field.**
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | eventlog           | Used for the classic Microsoft Windows event log format.                                         |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | eventchannel       | Used for Microsoft Windows event logs, using the new EventApi.                                   |
+|                    | eventchannel       | Used for Microsoft Windows event logs, returns the events in JSON format.                        |
+|                    |                    |                                                                                                  |
+|                    |                    | Monitors every channel specified at the configuration file and shows every field included in it. |
 |                    |                    |                                                                                                  |
 |                    |                    | This can be used to monitor standard “Windows” event logs and "Application and Services" logs.   |
-+                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | eventchannel_json  | Used for Microsoft Windows event logs. Same as ``eventchannel`` but JSON format.                 |
-|                    |                    |                                                                                                  |
-|                    |                    | Includes more fields than ``eventchannel``.                                                      |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | audit              | Used for events from Auditd.                                                                     |
 |                    |                    |                                                                                                  |
@@ -278,7 +262,7 @@ This specifies the format of the log being read. **It is required field.**
 
 .. warning::
 
-	The ``eventchannel`` and ``eventchannel_json`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
+	The ``eventchannel`` and log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
 
 .. warning::
 
@@ -383,12 +367,4 @@ Windows configuration:
       <log_format>eventchannel</log_format>
       <only-future-events>yes</only-future-events>
       <query>Event/System[EventID != 5145 and EventID != 5156]</query>
-    </localfile>
-
-    <!-- For monitoring Windows eventchannel_json -->
-    <localfile>
-      <location>Security</location>
-      <log_format>eventchannel</log_format>
-      <only-future-events>yes</only-future-events>
-      <query>Event/System[EventID != 6170 and EventID != 9768]</query>
     </localfile>
