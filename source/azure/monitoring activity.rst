@@ -2,6 +2,9 @@
 
 .. _azure_monitoring_activity:
 
+.. meta::
+  :description: Discover the numerous ways that Wazuh provides to monitor your Microsoft Azure infrastructure activity.
+
 Monitoring Activity
 ===================
 
