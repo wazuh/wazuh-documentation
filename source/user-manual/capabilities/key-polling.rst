@@ -18,11 +18,11 @@ How it works
 ------------
 This module allows to retrieve the agent information from an external database, like MySQL or any database engine, for registering it to the ``client.keys`` file.
 
-To do so you need to make a binary or script in any language that can connect to your database engine and retrieve it. It's necesary to have the ``ossec-authd`` daemon running.
+To do this, it is necessary to create a binary or script in any language that can be integrated into your database engine and thus request the agents information. It's necesary to have the ``ossec-authd`` daemon running.
 
 Below you can see the flow diagram:
 
-.. thumbnail:: ../../images/manual/key-polling-flow.png
+.. thumbnail:: ../../images/manual/keypolling/key-polling-flow.png
     :title: Key polling module flow diagram
     :align: center
     :width: 100%
@@ -48,10 +48,23 @@ When polling by IP address, the manager will retrieve the agent key by querying 
 
     ./agent_key_pull.py ip 192.168.1.100
 
+.. thumbnail:: ../../images/manual/keypolling/keypolling1.png
+    :title: No socket method: one program call per request.
+    :align: center
+    :width: 100%
+
+.. note ::
+    Note that the above examples represent how Wazuh will call your program.
+
 
 When the ``socket`` tag is specified the module will send the parameters through the specified socket and read the response. The performance improvement over executing the program like explained above is significant.
 
 The format in which the program will receive the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the polling type.
+
+.. thumbnail:: ../../images/manual/keypolling/keypolling0.png
+    :title: Method with socket: requests directly to the socket.
+    :align: center
+    :width: 100%
 
 .. note ::
     If the socket option is specified, and the socket is not available, the program that has to turn on will be called in case it has been specified.
