@@ -71,6 +71,19 @@ The log_format eventchannel has been enhanced for Wazuh v3.8.0 with a new event 
 
 This new option uses the JSON decoder to draw the event fields, ensuring a new way to add rules easier than before. The default channels included at the Wazuh ruleset are Application, Security, System, Microsoft-Windows-Sysmon/Operational, Microsoft Antimalware (Microsoft Security Essentials), Microsoft-Windows-Windows Defender/Operational and Microsoft-Windows-Eventlog.
 
+Some sample events from Windows eventchannel from Kibana are shown in the next images:
+
+.. thumbnail:: ../../../images/manual/log_analysis/windows_events.png
+    :title: Windows events
+    :align: center
+    :width: 100%
+
+The following image represents the number of events of each channel, filtered by provider name along the time.
+
+.. thumbnail:: ../../../images/manual/log_analysis/windows_alerts.png
+    :title: Number of events by provider name along the time
+    :align: center
+    :width: 100%
 
 Filtering events from Windows Event Channel with queries
 --------------------------------------------------------
