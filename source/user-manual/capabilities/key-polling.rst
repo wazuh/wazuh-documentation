@@ -18,7 +18,7 @@ How it works
 ------------
 This module allows to retrieve the agent information from an external database, like MySQL or any database engine, for registering it to the ``client.keys`` file.
 
-To do this, it is necessary to create a binary or script in any language that can be integrated into your database engine and thus request the agents information. It's necesary to have the ``ossec-authd`` daemon running.
+To do this, it is necessary to create a binary or script in any language that can be integrated into your database engine and thus request the agents information. The ``ossec-authd`` daemon must be running.
 
 Below you can see the flow diagram:
 
@@ -67,7 +67,7 @@ The format in which the program will receive the data is ``option:value``, where
     :width: 100%
 
 .. note ::
-    If the socket option is specified, and the socket is not available, the program that has to turn on will be called in case it has been specified.
+    If the socket option is specified, and the socket is not available, the program that has to be turned on will be called in case it has been specified.
 
 Output
 ------
