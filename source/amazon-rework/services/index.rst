@@ -4,3 +4,10 @@
 
 Monitoring services
 ===================
+
+.. topic:: Contents
+
+  .. toctree::
+    :maxdepth: 2
+
+    cloudtrail
