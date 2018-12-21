@@ -60,7 +60,7 @@ The Wazuh App runs inside Kibana constantly querying the RESTful API (port 55000
 Required ports
 --------------
 
-For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them.
+For an installation of Wazuh and the Elastic Stack, several network ports must be available and opened so the different components can communicate properly between them. 
 
 Wazuh
 ^^^^^
@@ -93,10 +93,15 @@ Elastic Stack
 +---------------+-----------+----------+-------------------------------------------------------------+
 |               | 9200      | TCP      | Elasticsearch RESTful API                                   |
 + Elasticsearch +-----------+----------+-------------------------------------------------------------+
-|               | 9300/9400 | TCP      | Elasticsearch cluster communications                        |
+|               | 9300-9400 | TCP      | Elasticsearch cluster communications                        |
 +---------------+-----------+----------+-------------------------------------------------------------+
 | Kibana        | 5601      | TCP      | Kibana web interface                                        |
 +---------------+-----------+----------+-------------------------------------------------------------+
+
+.. thumbnail:: ../images/getting_started/architecture_ports_elastic.png
+    :title: Elastic ports diagram
+    :align: center
+    :width: 100%
 
 Splunk
 ^^^^^^
@@ -112,6 +117,11 @@ Splunk
 +               +-----------+----------+-------------------------------------------------------------+
 |               | 9887      | TCP      | Splunk cluster communications                               |
 +---------------+-----------+----------+-------------------------------------------------------------+
+
+.. thumbnail:: ../images/getting_started/architecture_ports_splunk.png
+    :title: Splunk ports diagram
+    :align: center
+    :width: 100%
 
 More information
 ^^^^^^^^^^^^^^^^
