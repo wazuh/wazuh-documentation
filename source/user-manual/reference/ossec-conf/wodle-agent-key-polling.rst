@@ -1,15 +1,15 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _wodle-keypolling:
+.. _wodle-agentkeypolling:
 
-wodle name="key-polling"
+wodle name="agent-key-polling"
 ==========================
 
 .. topic:: XML section name
 
 	.. code-block:: xml
 
-		<wodle name="key-polling">
+		<wodle name="agent-key-polling">
 		</wodle>
 
 Configuration options of the key polling wodle.
@@ -112,7 +112,7 @@ Example of configuration
 
 .. code-block:: xml
 
-	<wodle name="key-polling">
+	<wodle name="agent-key-polling">
 		<enabled>yes</enabled>
 		<timeout>60</timeout>
 		<exec_path>/usr/bin/python /home/script.py</exec_path>

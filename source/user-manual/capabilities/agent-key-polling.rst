@@ -1,9 +1,9 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _key-polling:
+.. _agent-key-polling:
 
-Key polling
-===========
+Agent key polling
+=================
 
 .. versionadded:: 3.8.0
 
@@ -23,7 +23,7 @@ To do this, it is necessary to create a binary or script in any language that ca
 Below you can see the flow diagram:
 
 .. thumbnail:: ../../images/manual/keypolling/key-polling-flow.png
-    :title: Key polling module flow diagram
+    :title: Agent key polling module flow diagram
     :align: center
     :width: 100%
 
