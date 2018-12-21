@@ -5,6 +5,9 @@
 Installation
 ============
 
+.. meta::
+  :description: Learn how to install and configure the Wazuh module to monitor Amazon instances and services.
+
 Prior to enabling the Wazuh rules for Amazon Web Services, follow the steps below to configure AWS to generate log messages, and store them as JSON data files in an Amazon S3 bucket. A detailed description of each of the steps can be found bellow.
 
 .. note::
@@ -497,6 +500,18 @@ Once your role is created, just paste it on the bucket configuration:
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
    </bucket>
 
+IAM roles for EC2 instances
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can use IAM roles and assign them to EC2 instances so there's no need to insert authentication parameters on the ``ossec.conf`` file. This is the recommended configuration. Find more information about IAM roles on EC2 instances in the official `Amazon AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
+
+This is an example configuration:
+
+.. code-block:: xml
+
+  <bucket type="cloudtrail">
+    <name>my-bucket</name>
+  </bucket>
 
 Considerations for configuration
 --------------------------------

@@ -5,6 +5,9 @@
 Manager Requierements
 =====================
 
+.. meta::
+  :description: Detailed instructions to install and configure the necessary dependencies to monitor Microsoft Azure instances with Wazuh.
+
 The Wazuh manager is in charge of carrying out the integration with Microsoft Azure when monitoring infrastructure activity services. In order to work properly, the integration requires the installation of some dependencies.
 
 Required dependencies

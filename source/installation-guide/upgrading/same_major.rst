@@ -2,8 +2,8 @@
 
 .. _upgrading_same_major:
 
-Upgrade from the same major version
-=====================================
+Upgrade from the same major version (2.x)
+=========================================
 
 Use these instructions if you are upgrading your Wazuh installation within the same major version. For example, from 2.0.1 to 2.1.1.
 
