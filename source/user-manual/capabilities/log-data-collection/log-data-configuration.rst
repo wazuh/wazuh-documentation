@@ -85,13 +85,6 @@ The following image represents the number of events of each channel, filtered by
     :align: center
     :width: 100%
 
-The next one compares the event ID with the provider name.
-
-.. thumbnail:: ../../../images/manual/log_analysis/windows_id.png
-    :title: EventID comparison with provider name
-    :align: center
-    :width: 100%
-
 Filtering events from Windows Event Channel with queries
 --------------------------------------------------------
 
