@@ -3,14 +3,14 @@
 .. _wodle-agentkeypolling:
 
 wodle name="agent-key-polling"
-==========================
+==============================
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+  .. code-block:: xml
 
-		<wodle name="agent-key-polling">
-		</wodle>
+    <wodle name="agent-key-polling">
+    </wodle>
 
 Configuration options of the key polling wodle.
 
@@ -42,7 +42,6 @@ Options
 +----------------------+-----------------------------+
 | `force_insert`_      | yes, no                     |
 +----------------------+-----------------------------+
-
 
 enabled
 ^^^^^^^
@@ -113,7 +112,7 @@ Indicates the maximum size of the queue for polling external keys.
 force_insert
 ^^^^^^^^^^^^
 
-Defines whether the module must inser the agent, even if another agent with the same ID or IP already exists. If enabled, the existing agent will be removed.
+Defines whether the module must insert the agent, even if another agent with the same ID or IP already exists. If enabled, the existing agent will be removed.
 
 +--------------------+------------------------------------------------------------+
 | **Default value**  | yes                                                        |
@@ -121,17 +120,16 @@ Defines whether the module must inser the agent, even if another agent with the 
 | **Allowed values** | yes, no                                                    |
 +--------------------+------------------------------------------------------------+
 
-
 Example of configuration
 ------------------------
 
 .. code-block:: xml
 
-	<wodle name="agent-key-polling">
-		<enabled>yes</enabled>
-		<timeout>60</timeout>
-		<exec_path>/usr/bin/python /home/script.py</exec_path>
-		<threads>1</threads>
-		<queue_size>1024</queue_size>
-		<force_insert>yes</force_insert>
-  	</wodle>
+  <wodle name="agent-key-polling">
+    <enabled>yes</enabled>
+    <timeout>60</timeout>
+    <exec_path>/usr/bin/python /home/script.py</exec_path>
+    <threads>1</threads>
+    <queue_size>1024</queue_size>
+    <force_insert>yes</force_insert>
+  </wodle>

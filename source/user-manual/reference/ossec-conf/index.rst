@@ -88,7 +88,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   | manager                |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`                 | manager                |
+| :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     | manager                |
 +---------------------------------------------------------------------+------------------------+
 
 

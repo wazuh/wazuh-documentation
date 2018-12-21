@@ -50,7 +50,7 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
 .. topic:: Key polling wodle
 
-  The key polling wodle allows you to fetch a client key from an external source, for example a database. This provides a mechanism to auto register agents when they are not registered on a manager instance but reporting to it.
+  The key polling wodle allows you to fetch a client key from an external source, for example, a database. This provides a mechanism to auto-register agents when they are not registered on a manager instance but reporting to it.
 
 wazuh-modulesd options
 ----------------------
