@@ -310,11 +310,9 @@ same_id
 Specifies that the decoded id must be the same.
 This option is used in conjunction with frequency and timeframe.
 
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | n/a       |
-+--------------------+-----------+
++--------------------+--------------------+
+| **Example of use** | <same_id />        |
++--------------------+--------------------+
 
 same_source_ip
 ^^^^^^^^^^^^^^
@@ -322,11 +320,9 @@ same_source_ip
 Specifies that the decoded source ip must be the same.
 This option is used in conjunction with frequency and timeframe.
 
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | n/a       |
-+--------------------+-----------+
++--------------------+--------------------+
+| **Example of use** | <same_source_ip /> |
++--------------------+--------------------+
 
 same_src_port
 ^^^^^^^^^^^^^
@@ -334,11 +330,9 @@ same_src_port
 Specifies that the decoded source port must be the same.
 This option is used in conjunction with frequency and timeframe.
 
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | n/a       |
-+--------------------+-----------+
++--------------------+--------------------+
+| **Example of use** | <same_src_port />  |
++--------------------+--------------------+
 
 same_dst_port
 ^^^^^^^^^^^^^
@@ -346,11 +340,9 @@ same_dst_port
 Specifies that the decoded destination port must be the same.
 This option is used in conjunction with frequency and timeframe.
 
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | n/a       |
-+--------------------+-----------+
++--------------------+--------------------+
+| **Example of use** | <same_dst_port />  |
++--------------------+--------------------+
 
 same_location
 ^^^^^^^^^^^^^
@@ -358,11 +350,9 @@ same_location
 Specifies that the location must be the same.
 This option is used in conjunction with frequency and timeframe.
 
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | n/a       |
-+--------------------+-----------+
++--------------------+--------------------+
+| **Example of use** | <same_location />  |
++--------------------+--------------------+
 
 same_user
 ^^^^^^^^^
@@ -370,11 +360,9 @@ same_user
 Specifies that the decoded user must be the same.
 This option is used in conjunction with frequency and timeframe.
 
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | n/a       |
-+--------------------+-----------+
++--------------------+--------------------+
+| **Example of use** | <same_user />      |
++--------------------+--------------------+
 
 different_url
 ^^^^^^^^^^^^^
@@ -382,11 +370,9 @@ different_url
 Specifies that the decoded url must be different.
 This option is used in conjunction with frequency and timeframe.
 
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | n/a       |
-+--------------------+-----------+
++--------------------+--------------------+
+| **Example of use** | <different_url />  |
++--------------------+--------------------+
 
 different_srcgeoip
 ^^^^^^^^^^^^^^^^^^
@@ -394,11 +380,9 @@ different_srcgeoip
 Specifies that the source geoip location must be different.
 This option is used in conjunction with frequency and timeframe.
 
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | n/a       |
-+--------------------+-----------+
++--------------------+------------------------+
+| **Example of use** | <different_srcgeoip /> |
++--------------------+------------------------+
 
 description
 ^^^^^^^^^^^^
@@ -498,11 +482,9 @@ check_diff
 
 Used to determine when the output of a command changes.
 
-+--------------------+-----------+
-| **Default Value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | n/a       |
-+--------------------+-----------+
++--------------------+--------------------+
+| **Example of use** | <check_diff />     |
++--------------------+--------------------+
 
 group
 ^^^^^^

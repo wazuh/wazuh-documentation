@@ -34,6 +34,7 @@ Options
 - `remove_old_diff`_
 - `restart_audit`_
 - `windows_audit_interval`_
+- `whodata`_
 
 .. _reference_ossec_syscheck_directories:
 
@@ -109,9 +110,15 @@ Attributes:
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_perm**         | Check the UNIX permission of the files/directories.                                                             |
+| **check_perm**         | Check the permission of the files/directories.                                                                  |
 +                        +                                                                                                                 +
-|                        | On Windows, this will only check the POSIX permissions.                                                         |
+|                        | On Windows, a list of denied and allowed permissions will be given for each user or group.                      |
++                        +------------------------------------------------------------+----------------------------------------------------+
+|                        | Allowed values                                             | yes, no                                            |
++------------------------+------------------------------------------------------------+----------------------------------------------------+
+| **check_attrs**        | Check the attributes of the files.                                                                              |
++                        +                                                                                                                 +
+|                        | Available for Windows.                                                                                          |
 +                        +------------------------------------------------------------+----------------------------------------------------+
 |                        | Allowed values                                             | yes, no                                            |
 +------------------------+------------------------------------------------------------+----------------------------------------------------+
@@ -415,6 +422,32 @@ This option sets the frequency with which the Windows agent will check that the 
 | **Allowed values** | A positive number, time in seconds |
 +--------------------+------------------------------------+
 
+whodata
+^^^^^^^
+
+.. versionadded:: 3.7.1
+
+The Whodata options will be configured inside this tag.
+
+.. code-block:: xml
+
+    <!-- Audit keys -->
+    <whodata>
+        <audit_key>auditkey1,auditkey2</audit_key>
+    </whodata>
+
+**audit_key**
+
+Set up the FIM engine to collect the Audit events using keys with ``audit_key``. Wazuh will include in its FIM baseline those events being monitored by Audit using `audit_key`. For those systems where Audit is already set to monitor folders for other purposes, Wazuh can collect events generated as a key from `audit_key`. This option is only available for **Linux systems with Audit**.
+
++--------------------+------------------------------------+
+| **Default value**  | Empty                              |
++--------------------+------------------------------------+
+| **Allowed values** | Any string separated by commas     |
++--------------------+------------------------------------+
+
+.. note:: Audit allow inserting spaces inside the keys, so the spaces inserted inside the field ``<audit_key>`` will be part of the key.
+
 
 Default Unix configuration
 --------------------------
@@ -429,6 +462,11 @@ Default Unix configuration
     <frequency>43200</frequency>
 
     <scan_on_start>yes</scan_on_start>
+
+    <!-- Audit keys -->
+    <whodata>
+        <audit_key>auditkey1,auditkey2</audit_key>
+    </whodata>
 
     <!-- Generate alert when new file detected -->
     <alert_new_files>yes</alert_new_files>

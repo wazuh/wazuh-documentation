@@ -21,6 +21,7 @@ The configuration file reference is organized by sections:
     - `ip.selector`_
     - `ip.ignore`_
     - `xpack.rbac.enabled`_
+    - `admin`_
 
 `Monitoring`_
     - `wazuh.monitoring.enabled`_
@@ -101,6 +102,17 @@ xpack.rbac.enabled
 ^^^^^^^^^^^^^^^^^^
 
 Enable or disable X-Pack RBAC security capabilities when using the app.
+
++--------------------+------------+
+| **Default value**  | true       |
++--------------------+------------+
+| **Allowed values** | true,false |
++--------------------+------------+
+
+admin
+^^^^^
+
+Enable or disable administrator requests to the Wazuh API when using the app. This makes ``PUT``, ``POST`` and ``DELETE`` requests available on the :ref:`Dev tools <kibana_dev_tools>` tab.
 
 +--------------------+------------+
 | **Default value**  | true       |

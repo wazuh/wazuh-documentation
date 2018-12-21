@@ -2,16 +2,21 @@
 
 .. _release_notes:
 
-Release Notes
+Release notes
 =============
 
-This section summarizes the most important features of each release.
+.. meta::
+  :description: Find here a summary of the most important features of each Wazuh release.
+
+This section summarizes the most important features of each Wazuh release.
 
 .. topic:: Contents
 
     .. toctree::
         :maxdepth: 2
 
+        release_3_7_2
+        release_3_7_1
         release_3_7_0
         release_3_6_1
         release_3_6_0
