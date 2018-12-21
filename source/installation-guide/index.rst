@@ -2,14 +2,11 @@
 
 .. _installation_guide:
 
-====================
- Installation guide
-====================
+Installation guide
+==================
 
 .. meta::
   :description: Read this guide to know how to install Wazuh and the Elasticsearch integration.
-  :keywords: wazuh, elasticsearch, kibana, wazuh installation
-  :author: Wazuh, Inc.
 
 This document will guide you through the Wazuh installation process. For interactive help, our `email forum <https://groups.google.com/d/forum/wazuh>`_ is available. You can subscribe to this forum by sending an email to `Wazuh subscribe <mailto:wazuh%2Bsubscribe@googlegroups.com>`_.
 

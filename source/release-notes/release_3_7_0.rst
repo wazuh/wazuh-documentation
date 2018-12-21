@@ -71,7 +71,7 @@ There are several ways to monitor the Azure instances:
   - **Monitoring the instances activity through Azure APIs.** This includes data about all resource operations (creation, update, and deletion), Azure notifications about the instances, suspicious file executions, health checks, autoscaling events, and so on.
   - **Monitoring the Azure Active Directory service.** Monitoring management actions such as creation, update or deletion of users. It's possible to receive alerts on the Wazuh manager when some of these events occur on the Azure infrastructure.
 
-.. thumbnail:: ../images/release-notes/azure_integration_diagram.png
+.. thumbnail:: ../images/release-notes/3.7.0/azure_integration_diagram.png
   :title: Azure module diagram
   :align: center
   :width: 80%
@@ -87,7 +87,7 @@ In addition to this, and as always, the Wazuh agent can be used to monitor more 
 
 In this example, the Docker command ``docker pause apache`` will stop the container ``apache`` and will trigger an alert, as seen on the screenshot below from the Wazuh app for Kibana:
 
-.. thumbnail:: ../images/release-notes/alert_docker_example.png
+.. thumbnail:: ../images/release-notes/3.7.0/alert_docker_example.png
     :title: Docker module alert on Kibana's Discover tab
     :align: center
     :width: 100%
@@ -101,7 +101,7 @@ It's now possible to query for the agent configuration in real time.
 
 These on-demand queries allow searching for the currently applied configuration on the manager and each agent in every moment. As seen on the screenshot below with some basic agent information, this query lets to check the current settings about every enabled module.
 
-.. thumbnail:: ../images/release-notes/kibana-remote-query.png
+.. thumbnail:: ../images/release-notes/3.7.0/kibana-remote-query.png
     :title: Query agent configuration using the Wazuh app
     :align: center
     :width: 100%

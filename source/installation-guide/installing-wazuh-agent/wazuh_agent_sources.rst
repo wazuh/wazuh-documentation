@@ -33,7 +33,7 @@ Installing Linux agent
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.7.1.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.7.2.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
@@ -83,7 +83,7 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.7.1.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.7.2.tar.gz | tar zx
     # cd wazuh-*/src
 
 3. Compile the agent by running the ``make`` command:
@@ -120,7 +120,7 @@ The following output will appear at the end of the building process:
 
   .. code-block:: console
 
-    # zip -r wazuh.zip ../../wazuh-3.7.1
+    # zip -r wazuh.zip ../../wazuh-3.7.2
 
 5. Set up Windows build environment. To generate the installer, the following dependencies must be in place on the Windows machine:
 
@@ -128,7 +128,7 @@ The following output will appear at the end of the building process:
 * Microsoft Windows SDK v7.0 (or greater).
 * .NET Framework v3.5.1 (or greater, depending on the installed SDK version).
 
-6. Once in Windows, run the ``wazuh-3.7.1/src/win32/wazuh-installer-build-msi.bat`` script and follow the instructions to generate the MSI installer. Make sure to select the proper architecture for the compiled binaries (x86 / x86_64). If you do not want to sign the installer, you will have to comment or delete the ``signtool`` line.
+6. Once in Windows, run the ``wazuh-3.7.2/src/win32/wazuh-installer-build-msi.bat`` script and follow the instructions to generate the MSI installer. Make sure to select the proper architecture for the compiled binaries (x86 / x86_64). If you do not want to sign the installer, you will have to comment or delete the ``signtool`` line.
 
 .. note:: The installer is now ready.  It can be launched with a normal or unattended installation. For more information about this process, please visit our :doc:`installation section for Windows<./wazuh_agent_windows>`.
 

@@ -271,7 +271,7 @@ jsonout_output
 This toggles the writing of JSON-formatted alerts to /var/ossec/logs/alerts/alerts.json which would include the same events that would be sent to alerts.log, only in JSON format.
 
 +--------------------+---------+
-| **Default value**  | no      |
+| **Default value**  | yes     |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
@@ -415,7 +415,7 @@ queue_size
 This sets the size of the message input buffer in Analysisd (number of events).
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 16384                                                                                                                                    |
+| **Default value**       | 131072                                                                                                                                   |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Allowed values**      | A positive number. The minimum allowed is 1. The recommended range is [16384..262144]                                                    |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
