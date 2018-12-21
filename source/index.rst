@@ -81,6 +81,7 @@ Available documentation
    pci-dss/index
    gdpr/index
    amazon/index
+   amazon-rework/index
    azure/index
    docker-monitor/index
    installing-splunk/index
