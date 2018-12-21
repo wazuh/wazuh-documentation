@@ -66,6 +66,8 @@ The format in which the program will receive the data is ``option:value``, where
     :align: center
     :width: 100%
 
+An **empty input** must be allowed. The Agent Key Polling module performs a socket health-check on startup. If the connection is established successfully, it's immediately closed.
+
 .. note ::
     If the socket option is specified, and the socket is not available, the program that has to be turned on will be called in case it has been specified.
 

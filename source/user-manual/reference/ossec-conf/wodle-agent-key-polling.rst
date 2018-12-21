@@ -23,6 +23,7 @@ Options
 - `socket`_
 - `threads`_
 - `queue_size`_
+- `force_insert`_
 
 +----------------------+-----------------------------+
 | Options              | Allowed values              |
@@ -39,6 +40,8 @@ Options
 +----------------------+-----------------------------+
 | `queue_size`_        | A positive number           |
 +----------------------+-----------------------------+
+| `force_insert`_      | yes, no                     |
++----------------------+-----------------------------+
 
 
 enabled
@@ -47,7 +50,7 @@ enabled
 Enable the key polling wodle.
 
 +--------------------+-----------------------------+
-| **Default value**  | no                          |
+| **Default value**  | yes                         |
 +--------------------+-----------------------------+
 | **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
@@ -107,6 +110,18 @@ Indicates the maximum size of the queue for polling external keys.
 | **Allowed values** | A positive number indicating the queue size [1024..220000] |
 +--------------------+------------------------------------------------------------+
 
+force_insert
+^^^^^^^^^^^^
+
+Defines whether the module must inser the agent, even if another agent with the same ID or IP already exists. If enabled, the existing agent will be removed.
+
++--------------------+------------------------------------------------------------+
+| **Default value**  | yes                                                        |
++--------------------+------------------------------------------------------------+
+| **Allowed values** | yes, no                                                    |
++--------------------+------------------------------------------------------------+
+
+
 Example of configuration
 ------------------------
 
@@ -118,4 +133,5 @@ Example of configuration
 		<exec_path>/usr/bin/python /home/script.py</exec_path>
 		<threads>1</threads>
 		<queue_size>1024</queue_size>
+		<force_insert>yes</force_insert>
   	</wodle>
