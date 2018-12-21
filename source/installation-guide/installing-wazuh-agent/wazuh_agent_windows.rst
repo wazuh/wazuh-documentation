@@ -96,7 +96,7 @@ Registration with relative path to CA. It will be searched at your `APPLICATIONF
 
 Absolute paths to CA, certificate or key that contain spaces can be written as shown below::
 
-    wazuh-agent-3.7.2-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" KEY="C:\Progra~2\sslagent.key" PEM="C:\Progra~2\sslagent.cert"
+    wazuh-agent-3.7.2-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" KEY="C:\Progra~1\sslagent.key" PEM="C:\Progra~1\sslagent.cert"
 
 The number "1" means that the file will be searched at the first occurrence of the "Progra" word, thus, the key and certificate would be searched at the folder "C:\\Program Files".
 
