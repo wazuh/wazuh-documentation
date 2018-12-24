@@ -2,8 +2,8 @@
 
 .. _amazon_instances:
 
-Monitoring instances
-====================
+Monitoring AWS instances
+========================
 
 Installing the Wazuh agent on the AWS EC2 instances provides information and monitorization about what's going on inside of them.
 

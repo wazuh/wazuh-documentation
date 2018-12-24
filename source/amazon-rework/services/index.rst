@@ -2,8 +2,8 @@
 
 .. _amazon_services:
 
-Monitoring services
-===================
+Monitoring AWS services
+=======================
 
 .. topic:: Contents
 
@@ -11,3 +11,11 @@ Monitoring services
     :maxdepth: 2
 
     cloudtrail
+    config
+    vpc
+    guardduty
+    macie
+    kms
+    inspector
+    trusted-advisor
+    others
