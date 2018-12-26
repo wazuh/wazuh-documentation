@@ -117,7 +117,7 @@ Restart Elasticsearch service:
 
     # systemctl restart elasticsearch
 
-You can check if it's working as expected using the next request:
+You can check if it's working as expected using the next request (Search Guard needs about two minutes to create its internal indices so be patient):
 
 .. code-block:: console
 
@@ -187,10 +187,13 @@ Logstash has its own predefined user and its own predefined role. Since Wazuh cr
                 '*':
                     - CRUD
                     - CREATE_INDEX
-            'wazuh-alerts-3.x-*':
+            'wazuh-alerts-3?x-*':
                 '*':
                     - CRUD
                     - CREATE_INDEX
+
+.. note::
+    Dots are replaced by ``?`` for Search Guard roles, so ``3?x`` actually means ``3.x``.
 
 2. Apply the changes:
 
@@ -221,19 +224,13 @@ Setting up Search Guard for Kibana
 
 Kibana needs the Search Guard plugin too. Plugin versioning works like Elasticsearch plugins versioning, this means you must fit exactly your Kibana version. 
 
-1. Increase memory heap limit for Node.js:
+1. Install the plugin as usual:
 
 .. code-block:: console
 
-    $ export NODE_OPTIONS="--max-old-space-size=3072"
+    $ sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/6.5.4-17/search-guard-kibana-plugin-6.5.4-17.zip
 
-2. Install the plugin as usual:
-
-.. code-block:: console
-
-    $ sudo -u kibana bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/6.4.2-15/search-guard-kibana-plugin-6.4.2-15.zip
-
-3. Edit the Kibana configuration file, it's located at */etc/kibana/kibana.yml*, add the following lines:
+2. Edit the Kibana configuration file, it's located at */etc/kibana/kibana.yml*, add the following lines:
 
 .. code-block:: console
 
@@ -299,7 +296,7 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
                     - READ
                     - DELETE
 
-            'wazuh-alerts-3.x-*':
+            'wazuh-alerts-3?x-*':
                 '*':
                     - indices:admin/mappings/fields/get
                     - indices:admin/validate/query
