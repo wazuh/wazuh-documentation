@@ -28,6 +28,7 @@ Options
 - `rule_id`_
 - `do_not_delay`_
 - `do_not_group`_
+- `email_log_source`_
 
 
 email_to
@@ -137,6 +138,18 @@ This disables grouping of multiple alerts into the same email.
 +--------------------+-----------------------+
 | **Allowed values** | XML tag with no value |
 +--------------------+-----------------------+
+
+
+email_log_source
+^^^^^^^^^^^^^^^^
+
+This selects the alert file to be read from.
+
++--------------------+---------------------------+
+| **Default value**  | alerts.json               |
++--------------------+---------------------------+
+| **Allowed values** | alerts.log or alerts.json |
++--------------------+---------------------------+
 
 .. warning::
 	Notice that **do_not_delay** and **do_not_group** are special empty-element XML tags, so they stand alone, not having a starting and ending version of the tag.  This is indicated by the tag name containing "/" at the end of the name.
