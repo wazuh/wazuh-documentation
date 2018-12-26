@@ -7,12 +7,12 @@ Search Guard
 
 Search Guard gives you a robust security solution for your Elasticsearch integration. It covers from Filebeat/Logstash to Elasticsearch itself. 
 
-This plugin has a great role base access system such X-Pack security does. Reading this guide you will learn how to securize all the connections between the Elastic stack components, creating users, defining roles and how to make the Wazuh app work fine with all this stuff.
+This plugin has a great role base access system such X-Pack security does. Reading this guide you will learn how to secure all the connections between the Elastic stack components, creating users, defining roles and how to make the Wazuh app work fine with all this stuff.
 
 Disable X-Pack security
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Currently it's not supported to use both integrations at the same time. If your environment is currently using any X-Pack security feature, you must disable it before continue reading this guide.
+Currently, it's not supported to use both integrations at the same time. If your environment is currently using any X-Pack security feature, you must disable it before continue reading this guide.
 
 For Elasticsearch you need to edit the file */etc/elasticsearch/elasticsearch.yml* in all your nodes and add the next line:
 
@@ -73,7 +73,7 @@ Our default configuration is not using authentication for Logstash so we need to
 
 .. warning::
 
-    This configuration must be applied for all your Logstash configurations, replace specific fields such hosts or index depending on your Logstash location and requirements.
+    This configuration must be applied for all your Logstash configurations, replace specific fields such as hosts or index depending on your Logstash location and requirements.
 
 Setting up Search Guard for Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -215,7 +215,7 @@ Logstash has its own predefined user and its own predefined role. Since Wazuh cr
     # systemctl restart elasticsearch
     # systemctl restart logstash
 
-At this point you have your Elasticsearch cluster securized using `user:password` authentication and encrypted communication. This means any Logstash pointing to some Elasticsearch node must be authenticated. Also, any request to the Elasticsearch API must use `https` plus `user:password` authentication.
+At this point you have your Elasticsearch cluster secured using `user:password` authentication and encrypted communication. This means any Logstash pointing to some Elasticsearch node must be authenticated. Also, any request to the Elasticsearch API must use `https` plus `user:password` authentication.
 
 See https://docs.search-guard.com/latest/roles-permissions for details.
 
@@ -260,7 +260,7 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 .. warning::
 
-    Follow next steps at only one master node from your Elasticsearch cluster. 
+    Follow the next steps at only one master node from your Elasticsearch cluster. 
 
 **Wazuh app user**
 
@@ -353,13 +353,13 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 Now you have three Kibana UI users plus a Kibana server user:
 
-- Server uses the predefined `admin` user from Search Guard.
-- Kibana UI `wazuhadmin` user can see all and modify `.wazuh` index.
+- The Kibana server uses the predefined `admin` user from Search Guard.
+- The Kibana UI `wazuhadmin` user can see all and modify `.wazuh` index.
 
 How it goes in the Wazuh app?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The main difference is that you now must login before entering Kibana. There are a few of things to keep in mind too:
+The main difference is that you now must log in before entering Kibana. There are a few of things to keep in mind too:
 
 - Index pattern selector shows only allowed index patterns (like our X-Pack security integration does).
 - Looking for forbidden indices. If the user is not allowed for certain indices, it can't use them even out the Wazuh app.
