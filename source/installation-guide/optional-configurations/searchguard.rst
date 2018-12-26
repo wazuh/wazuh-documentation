@@ -351,9 +351,9 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 **Brief summary for Kibana**
 
-Now you have three Kibana UI users plus a Kibana server user:
+Now you have two Kibana users:
 
-- The Kibana server uses the predefined `admin` user from Search Guard.
+- The Kibana server uses the predefined `admin` user from Search Guard (/etc/kibana/kibana.yml).
 - The Kibana UI `wazuhadmin` user can see all and modify `.wazuh` index.
 
 How it goes in the Wazuh app?
