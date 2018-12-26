@@ -254,7 +254,7 @@ Next steps we'll learn how to define new Kibana UI users and how to define speci
 See https://search.maven.org/search?q=g:com.floragunn%20AND%20a:search-guard-kibana-plugin for details.
 
 Kibana UI and the Wazuh app
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to work properly. The index `.wazuh-version` is used by the server side. The index `.wazuh` stores Wazuh API entries.
 
@@ -332,7 +332,7 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
     roles:
       - wazuhadmin_role
 
-3. Set the role mapping for Search Guard roles in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles_mapping.yml*
+4. Set the role mapping for Search Guard roles in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles_mapping.yml*
 
 .. code-block:: console
 
@@ -340,7 +340,7 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
     backendroles:
       - wazuhadmin_role
 
-4. Apply the changes:
+5. Apply the changes:
 
 .. code-block:: console
 
@@ -359,11 +359,7 @@ Now you have three Kibana UI users plus a Kibana server user:
 How it goes in the Wazuh app?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The main difference is that you now must log in before entering Kibana. There are a few of things to keep in mind too:
-
-- Index pattern selector shows only allowed index patterns (like our X-Pack security integration does).
-- Looking for forbidden indices. If the user is not allowed for certain indices, it can't use them even out the Wazuh app.
-- This includes direct *curl* command pointing to Elasticsearch.
+The main difference is that you now must log in before entering Kibana. Also keep in mind that if the user is not allowed for certain indices, it can't use them on Kibana.
 
 .. thumbnail:: ../../images/kibana-app/searchguard/searchguard-01.png
     :align: center
