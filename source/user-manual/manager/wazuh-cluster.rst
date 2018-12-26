@@ -182,7 +182,7 @@ The following must be considered when configuring a Wazuh app:
     +-------------------------------------------------------------------+-------------------------------------------------------------+
     | Type                                                              | Description                                                 |
     +===================================================================+=============================================================+
-    | :ref:`RPM/DEB packages <splunk_installation_forwarder>`           | Install Splunk forwarder for RPM or DEB based OS.           |
+    | :ref:`RPM/DEB packages <splunk_forwarder>`                        | Install Splunk forwarder for RPM or DEB based OS.           |
     +-------------------------------------------------------------------+-------------------------------------------------------------+
 
 
@@ -222,7 +222,7 @@ Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is requir
 
      # sed -i 's#echo -n "Starting OSSEC: "#echo -n "Starting OSSEC (EL6): "; source /opt/rh/python27/enable; export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/ossec/framework/lib#' /etc/init.d/wazuh-manager
 
-4. Use ``service`` command instead of ``/var/ossec/bin/ossec-control`` to start, stop and restart Wazuh:
+4. Use the ``service`` command instead of ``/var/ossec/bin/ossec-control`` to start, stop and restart Wazuh:
 
   .. code-block:: console
 
@@ -338,16 +338,16 @@ For example, the following snippet shows the connected nodes in the cluster:
     ---------------------------------------
     Name    Address         Type    Version
     ---------------------------------------
-    node01  192.168.56.101  master  3.7.0
-    node02  192.168.56.103  worker  3.7.0
-    node03  192.168.56.105  worker  3.7.0
+    node01  192.168.56.101  master  3.7.2
+    node02  192.168.56.103  worker  3.7.2
+    node03  192.168.56.105  worker  3.7.2
     ---------------------------------------
 
 This information can also be obtained using the Restful API:
 
-.. code-block:: javascript
+.. code-block:: console
 
-    $ curl -u foo:bar -X GET "https://localhost:55000/cluster/nodes?pretty"
+    # curl -u foo:bar -X GET "http://localhost:55000/cluster/nodes?pretty"
     {
        "error": 0,
        "data": {
@@ -355,19 +355,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.7.0",
+                "version": "3.7.2",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.7.0",
+                "version": "3.7.2",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.7.0",
+                "version": "3.7.2",
                 "type": "master",
                 "name": "node01"
              }

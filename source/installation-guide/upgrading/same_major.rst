@@ -2,8 +2,8 @@
 
 .. _upgrading_same_major:
 
-Upgrade from the same major version
-=====================================
+Upgrade from the same major version (2.x)
+=========================================
 
 Use these instructions if you are upgrading your Wazuh installation within the same major version. For example, from 2.0.1 to 2.1.1.
 
@@ -97,19 +97,9 @@ Upgrade the Wazuh Kibana App
 
 4) Upgrade the Wazuh Kibana App (this can take a while):
 
-    a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app.
-
-    Set the limit as follow:
-
     .. code-block:: console
 
-        # export NODE_OPTIONS="--max-old-space-size=3072"
-
-    b) Install the Wazuh app:
-
-    .. code-block:: console
-
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-2.1.1_5.6.5.zip
+        # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-2.1.1_5.6.5.zip
 
 5) Once the process is complete, restart Kibana:
 

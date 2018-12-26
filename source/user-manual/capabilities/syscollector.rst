@@ -59,13 +59,13 @@ Retrieve basic information about the hardware components of a system.
 +------------------+-----------------------------+-------------------------------------------+-------------------+
 | **cpu_cores**    | Number of cores of the CPU  | 4                                         | All               |
 +------------------+-----------------------------+-------------------------------------------+-------------------+
-| **cpu_mhz**      | Current proccesor frequency | 900.106                                   | All               |
+| **cpu_mhz**      | Current processor frequency | 900.106                                   | All               |
 +------------------+-----------------------------+-------------------------------------------+-------------------+
 | **ram_total**    | Total RAM (KB)              | 16374572                                  | All               |
 +------------------+-----------------------------+-------------------------------------------+-------------------+
 | **ram_free**     | Free RAM (KB)               | 2111928                                   | All               |
 +------------------+-----------------------------+-------------------------------------------+-------------------+
-| **ram_usage**    | Percentaje of RAM in use    | 87                                        | All               |
+| **ram_usage**    | Percentage of RAM in use    | 87                                        | All               |
 +------------------+-----------------------------+-------------------------------------------+-------------------+
 
 .. _syscollector_system:
@@ -419,7 +419,7 @@ The current inventory can be consulted in different ways. Let's see an example q
 
 .. code-block:: console
 
-  # curl -u foo:bar "localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
+  # curl -u foo:bar -X GET "http://localhost:55000/syscollector/003/packages?pretty&name=wazuh-agent"
   {
    "error": 0,
    "data": {

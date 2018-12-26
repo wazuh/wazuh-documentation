@@ -57,7 +57,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 3. Within 20 minutes of connecting to the manager, each agent assigned to a group will receive the files contained in the *'dbms'* folder from the manager, including the ``agent.conf`` file that was modified in the previous step.  The length of time it takes for the manager to push these files to the agents depends on the size of the files, the number of agents in the group and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding **merged.mg** file) on 100 agents using UDP, however if TCP is used, this may move along much faster.
 
-4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager.
+4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager. However, this is not the default behaviour, and, if needed, it must be explicitely activated by the user in ``local_internal_options.conf`` by adding the option ``remoted.guess_agent_group=1`` (see section ``remoted`` in :doc:`internal options <../reference/internal-options>`).
 
 .. _multigroups:
 
@@ -90,12 +90,12 @@ In this example, the agent 001 has been added to `webserver` and `apache` groups
 
     .. code-block:: console
 
-        # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/webserver?pretty"
+        # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/webserver?pretty"
         {
             "error": 0,
             "data": "Group 'webserver' added to agent '001'."
         }
-        # curl -u foo:bar -k -X PUT "http://127.0.0.1:55000/agents/001/group/apache?pretty"
+        # curl -u foo:bar -X PUT "http://localhost:55000/agents/001/group/apache?pretty"
         {
             "error": 0,
             "data": "Group 'apache' added to agent '001'."
@@ -106,7 +106,7 @@ After that, we can ask the **API** about groups which an agent belongs:
     .. code-block:: console
         :emphasize-lines: 7,8,9,10,11
 
-        # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/agents/001?pretty"
+        # curl -u foo:bar -X GET "http://localhost:55000/agents/001?pretty"
         {
             "error": 0,
             "data": {
@@ -219,7 +219,7 @@ Finally, to check the synchronization status of the group configuration for a si
         # /var/ossec/bin/agent_groups -S -i 001
         The agent '008' sync status is: Agent configuration is synced.
 
-        # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/agents/001/group/is_sync?pretty"
+        # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
         {
             "error": 0,
             "data": {

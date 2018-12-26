@@ -15,10 +15,10 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
 .. code-block:: console
 
   "kibana": {
-    "version": "6.4.2"
+    "version": "6.5.3"
   },
 
-Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.4.2`` then your installed Kibana version must be ``6.4.2``.
+Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.5.3`` then your installed Kibana version must be ``6.5.3``.
 
 You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
@@ -29,7 +29,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
   {"acknowledged":true}
 
@@ -91,9 +91,9 @@ There should be two processes reading the ``alerts.json`` file: ``ossec-analysis
 API version mismatch. Expected vX.Y.Z
 -------------------------------------
 
-The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.6.1 with a Wazuh API 3.6.0.
+The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
 
-You can't use the 3.6.1 version of Wazuh API with a Wazuh app designed for Wazuh 3.7.0.
+You can't use the 3.6.1 version of Wazuh API with a Wazuh app designed for Wazuh 3.7.2.
 
 Check our :ref:`compatibility_matrix` to learn more about compatibility between the API and the app.
 
@@ -162,11 +162,17 @@ All the technologies we are using have their own logs files, you can check them 
   # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
   # cat /var/log/logstash/logstash-plain.log | grep -i -E "error|warn"
 
+.. note::
+  The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_, `Logstash <https://www.elastic.co/guide/en/logstash/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
+
+.. warning::
+  By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
+
 2. Check the Wazuh app log file:
 
 .. code-block:: console
 
-  # cat /usr/share/kibana/plugins/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
+  # cat /usr/share/kibana/optimize/wazuh-logs/wazuhapp.log | grep -i -E "error|warn"
 
 3. Check the Wazuh Manager log file:
 

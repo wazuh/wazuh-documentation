@@ -2,14 +2,11 @@
 
 .. _upgrading_ossec:
 
-======================
- Migrating from OSSEC
-======================
+Migrating from OSSEC
+====================
 
 .. meta::
   :description: Learn why it's a good reason to upgrade your infrastructure migrating it to Wazuh.
-  :keywords: wazuh, ossec, security, upgrade, recommendations
-  :author: Wazuh, Inc.
 
 Why it's time to migrate
 ------------------------
@@ -30,7 +27,7 @@ Scalability and reliability
 * TCP support for agent-manager communications.
 * Anti-flooding feature to prevent large burst of events from being lost or negatively impact network performance.
 * AES encryption used for agent-manager communications (instead of Blowfish).
-* Multi-thread support for manager processes, dramatically increaing their performance.
+* Multi-thread support for manager processes, dramatically increasing their performance.
 
 Installation and configuration management
 +++++++++++++++++++++++++++++++++++++++++

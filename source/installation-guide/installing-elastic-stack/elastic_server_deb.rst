@@ -15,9 +15,9 @@ Preparation
 1. Oracle Java JRE or OpenJDK 8 is required by Logstash and Elasticsearch:
 
   a) For Debian >= 8/Jessie or Ubuntu >= 16.04/Xenial:
-  
+
   .. code-block:: console
-  
+
     # apt-get update
     # apt-get install openjdk-8-jre
 
@@ -56,7 +56,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.4.2
+    # apt-get install elasticsearch=6.5.3
 
 2. Enable and start the Elasticsearch service:
 
@@ -79,14 +79,14 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # curl "localhost:9200/?pretty"
+    # curl "http://localhost:9200/?pretty"
 
     {
       "name" : "Zr2Shu_",
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.4.2",
+        "number" : "6.5.3",
         "build_flavor" : "default",
         "build_type" : "deb",
         "build_hash" : "053779d",
@@ -106,7 +106,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -123,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.4.2-1
+    # apt-get install logstash=1:6.5.3-1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -178,22 +178,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=6.4.2
+    # apt-get install kibana=6.5.3
 
 2. Install the Wazuh app plugin for Kibana:
 
-  a) Increase the default Node.js heap memory limit to prevent out of memory errors when installing the Wazuh app.
-  Set the limit as follows:
-
   .. code-block:: console
 
-    # export NODE_OPTIONS="--max-old-space-size=3072"
-
-  b) Install the Wazuh app:
-
-  .. code-block:: console
-
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.7.0_6.4.2.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.7.2_6.5.3.zip
 
   .. warning::
 
@@ -230,9 +221,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
     # update-rc.d kibana defaults 95 10
     # service kibana start
 
-5. Disable the Elasticsearch updates:
+5. (Optional) Disable the Elasticsearch updates:
 
-  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App.  To do this, use the following command:
+  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
 
   .. code-block:: console
 

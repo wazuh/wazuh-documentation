@@ -66,7 +66,7 @@ Register the agent
 Some hints
 ^^^^^^^^^^
 
-By default, authd adds the agents with their static IP. If you want to add agents whith a dynamic IP address (like using ``any`` on ``manage_agents``) you must change ``etc/ossec.conf`` on the server-side:
+By default, authd adds the agents with their static IP. If you want to add agents with a dynamic IP address (like using ``any`` on ``manage_agents``) you must change ``etc/ossec.conf`` on the server-side:
 
    (Manager)
 
@@ -156,6 +156,8 @@ On the agent side, the key can be put in a file of the same name or specified as
    .. code-block:: console
 
         # /var/ossec/bin/agent-auth -m 192.168.1.2 -P "abcd1234"
+
+.. _verify-hosts:
 
 Use SSL to verify hosts
 ^^^^^^^^^^^^^^^^^^^^^^^^

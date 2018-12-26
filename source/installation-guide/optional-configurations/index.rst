@@ -17,3 +17,4 @@ This section gives guidance on best practices related to setting up an efficient
         securing-api
         elastic-tuning
         searchguard
+        automatic-api

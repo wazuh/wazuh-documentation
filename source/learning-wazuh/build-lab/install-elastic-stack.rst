@@ -70,14 +70,14 @@ Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logs
 
   .. code-block:: console
 
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @-
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -XPUT 'http://localhost:9200/_template/wazuh-agent' -H 'Content-Type: application/json' -d @-
+	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-monitoring.json | curl -X PUT "http://localhost:9200/_template/wazuh-agent" -H 'Content-Type: application/json' -d @-
 
 4. Insert sample alert.  Do not skip this essential step:
 
   .. code-block:: console
 
-	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/alert_sample.json | curl -XPUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
+	# curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/alert_sample.json | curl -X PUT "http://localhost:9200/wazuh-alerts-3.x-"`date +%Y.%m.%d`"/wazuh/sample" -H 'Content-Type: application/json' -d @-
 
 5. Optimize Elasticsearch for lab use according to `this <https://documentation.wazuh.com/current/installation-guide/optional-configurations/elastic-tuning.html#elastic-tuning>`_ guide.
 
@@ -87,8 +87,8 @@ Elasticsearch indexes and stores Wazuh alerts and log records sent to it by Logs
 
     # curl https://raw.githubusercontent.com/wazuh/wazuh/3.1/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
     # sed -i 's/"index.refresh_interval": "5s"/"index.refresh_interval": "5s",\n    "number_of_shards" :   1,\n    "number_of_replicas" : 0/' w-elastic-template.json
-    # curl -XPUT 'http://localhost:9200/_template/wazuh' -H 'Content-Type: application/json' -d @w-elastic-template.json
-    # curl -XPUT 'localhost:9200/*/_settings?pretty' -H 'Content-Type: application/json' -d'
+    # curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @w-elastic-template.json
+    # curl -X PUT "http://localhost:9200/*/_settings?pretty" -H 'Content-Type: application/json' -d'
     {
           "settings": {
           "number_of_replicas" : 0
@@ -146,7 +146,7 @@ Generate and sign an SSL certificate and key for Logstash (on Elastic Server)
         # cp /etc/pki/tls/openssl.cnf custom_openssl.cnf
         # LINE=$((`grep -nF "[ v3_ca ]" custom_openssl.cnf | cut -d: -f1`+1))
         # sed -i "$LINE"'isubjectAltName = IP: 172.30.0.20' custom_openssl.cnf
-        # openssl req -x509 -batch -nodes -days 3650 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
+        # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
         # ls -alh /etc/logstash/logstash.key /etc/logstash/logstash.crt
         # rm -f custom_openssl.cnf
 

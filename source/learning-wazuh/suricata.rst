@@ -23,8 +23,8 @@ to the appropriate agents. Lastly, we will do a little GeoIP enrichment of the S
 how easily we can augment existing log records with additional context information to make them more valuable.
 
 
-Set up Suricata on both elasic-server and linux-agent
------------------------------------------------------
+Set up Suricata on both elastic-server and linux-agent
+------------------------------------------------------
 
 - On both agents as root, install Suricata and its dependencies, along with the Emerging Threats Open ruleset.
 
@@ -137,9 +137,9 @@ Instead of adding the above directly to ``ossec.conf`` on each Linux agent, this
 configuration facility.  This is a powerful feature that makes it feasible to manage the varied configurations of a diverse fleet of systems running
 Wazuh agent.  Search the online documentation for "Centralized Configuration" for the full details about this.  In short, groups of agents share common
 configuration content served up to them by Wazuh manager.  Agents automatically pick up and apply changes made to this content on the manager, and merge
-the shared configation with their local configuration.
+the shared configuration with their local configuration.
 
-1. Add elasic-server and linux-agent to a new agent group called "linux".
+1. Add elastic-server and linux-agent to a new agent group called "linux".
 
     - Create an agent group called "linux" which will cover all shared Linux agent configuration elements.
 
@@ -190,8 +190,21 @@ the shared configation with their local configuration.
         verify-agent-conf: Verifying [/var/ossec/etc/shared/linux/agent.conf]
         verify-agent-conf: OK
 
-4.  Since the config is proven valid, restart Wazuh manager with ``ossec-control restart`` to deploy the new agent.conf to the agents.  Each agent should pull down and apply this additional config almost immediately.  You can find the fetched agent.conf file on each agent at ``/var/ossec/etc/shared/agent.conf``:
+4. Since the config is proven valid, restart Wazuh manager to deploy the new configuration to the agents.
 
+a. For Systemd:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-manager restart
+
+Each agent should pull down and apply this additional configuration almost immediately. You can find the fetched configuration on each agent at ``/var/ossec/etc/shared/agent.conf``.
 
 See Suricata NIDS events in Kibana
 ----------------------------------

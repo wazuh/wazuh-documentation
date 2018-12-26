@@ -3,15 +3,15 @@
 .. _ruleset_cdb-list:
 
 Using CDB lists
-===============================
+===============
 
-OSSEC is able to check if a field extracted during the decoding phase is in a CDB list (constant database). The main use case of this feature is to create a white/black list of users, IPs or domain names.
+Wazuh is able to check if a field extracted during the decoding phase is in a CDB list (constant database). The main use case of this feature is to create a white/black list of users, IPs or domain names.
 
 Creating a CDB list
-------------------------------------
+-------------------
 
 Creating the list file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^
 
 The list file is a plain text file where each line has the following format::
 
@@ -38,38 +38,52 @@ Example of IP address list file::
     172.16.19.: Matches 172.16.19.0 - 172.16.19.255
     10.1.1.1: Matches 10.1.1.1
 
-We recommend to use the directory */var/ossec/etc/lists* to store your lists.
+We recommend to store the lists on ``/var/ossec/etc/lists``.
 
 Adding the list to ossec.conf
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Each list must be defined in the ossec.conf file using the following syntax:
+Each list must be defined in the ``ossec.conf`` file using the following syntax:
 
 .. code-block:: xml
 
-    <ossec_config>
-        <ruleset>
-            <list>etc/lists/list-IP</list>
+  <ossec_config>
+    <ruleset>
+      <list>etc/lists/list-IP</list>
 
-Restart OSSEC to apply the changes.
+.. warning::
+  The ``<list>`` setting uses a relative path to the Wazuh installation folder (``/var/ossec/``) so make sure to indicate the directory accordingly.
+
+Restart Wazuh to apply the changes:
+
+  a. For Systemd:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-manager restart
 
 Making the CDB list
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
-The list files must be compiled before they can be used. The tool */var/ossec/bin/ossec-makelists* will process and compile all the lists if needed.
+The list files must be compiled before they can be used. The tool ``/var/ossec/bin/ossec-makelists`` will process and compile all the lists if needed.
 
-Remember to compile the lists every time that you update them. It is necessary to restart OSSEC to apply the changes.
-
+Remember to compile the lists every time that you update them. It is necessary to restart Wazuh to apply the changes.
 
 Using the CDB list in the rules
-------------------------------------
+-------------------------------
 
 A rule would use the following syntax to look up a key within a CDB list.
 
 Positive key match
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
-This example is a search for the key stored in the field attribute and will match if it *IS* present in the database:
+This example is a search for the key stored in the field attribute and will match if it **IS** present in the database:
 
 .. code-block:: xml
 
@@ -88,7 +102,7 @@ In case the field is an IP address, you must to use *address_match_key*:
     <list field="srcip" lookup="address_match_key">etc/lists/list-IP</list>
 
 Negative key match
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 This example is a search for the key stored in the field attribute and will match if it *IS NOT* present in the database:
 
@@ -103,7 +117,7 @@ In case the field is an IP address, you must use *not_address_match_key*:
     <list field="srcip" lookup="not_address_match_key">etc/lists/list-IP</list>
 
 Key and value match
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 This example is a search for the key stored in the field attribute, and on a positive match the returned value of the key will be processed using the regex in the check_value attribute:
 

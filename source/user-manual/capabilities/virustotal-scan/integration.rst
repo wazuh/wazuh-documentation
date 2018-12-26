@@ -59,7 +59,20 @@ In order for this integration to function, the first thing that must be complete
 .. code-block:: console
 
     # /var/ossec/bin/ossec-control enable integrator
-    # /var/ossec/bin/ossec-control restart
+
+To restart the Wazuh manager:
+
+a. For Systemd:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-manager restart
 
 After this is complete, and FIM alert automatically triggers the VirusTotal integration.
 

@@ -33,7 +33,7 @@ In this version, the API makes it possible to send Active Response requests, inc
 
 For instance: ::
 
-    curl -u foo:bar -k -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/active-response/001?pretty"
+    curl -u foo:bar -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "http://localhost:55000/active-response/001?pretty"
 
     {
       "error": 0,

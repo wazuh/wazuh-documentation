@@ -14,7 +14,7 @@ To register an agent, follow these steps:
 	# /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v3.7.0 Agent manager.          *
+	* Wazuh v3.7.2 Agent manager.          *
 	* The following options are available: *
 	****************************************
 	   (A)dd an agent (A).
@@ -63,7 +63,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	# /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v3.7.0 Agent manager.          *
+	* Wazuh v3.7.2 Agent manager.          *
 	* The following options are available: *
 	****************************************
 	   (I)mport key from the server (I).
@@ -98,9 +98,17 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 9. Restart the agent:
 
-.. code-block:: console
+a. For Systemd:
 
-	# /var/ossec/bin/ossec-control restart
+  .. code-block:: console
+
+    # systemctl restart wazuh-agent
+
+b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-agent restart
 
 Forcing insertion
 ^^^^^^^^^^^^^^^^^

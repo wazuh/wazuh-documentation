@@ -17,24 +17,36 @@ The **CIS-CAT wodle** has been developed for the purpose of integrating CIS benc
 What is CIS-CAT
 ---------------
 
-CIS (Center for Internet Security) is an entity dedicated to safeguard private and public organizations against cyber threats. This entity provides
-CIS benchmarks guidelines, which are a recognized global standard and best practices for securing IT systems and data against cyberattacks.
+CIS (Center for Internet Security) is an entity dedicated to safeguard private and public organizations against cyber threats. This entity provides CIS benchmarks guidelines, which are a recognized global standard and best practices for securing IT systems and data against cyberattacks.
 
-In addition, CIS-CAT pro is a "cross-platform Java app" tool developed for scanning target systems and generating a report comparing the system settings to
-the CIS benchmarks. There are more than 80 CIS benchmarks that cover nearly all OSs, providing different profiles depending on the specific need.
-
-It is important to note that CIS-CAT pro is proprietary software which is required for the use of this integration.
+In addition, CIS-CAT Pro is a "cross-platform Java app" tool developed for scanning target systems and generating a report comparing the system settings to the CIS benchmarks. There are more than 80 CIS benchmarks that cover nearly all OSs, providing different profiles depending on the specific need.
 
 How it works
 ------------
 
+.. warning::
+  This integration requires CIS-CAT Pro, which is proprietary software. You can learn more about this tool and how to download it at the `official CIS website <https://www.cisecurity.org/cybersecurity-tools/cis-cat-pro/>`_.
+
 The CIS-CAT Wazuh module integrates CIS benchmark assessments into Wazuh agents and reports the results of each scan in the form of an alert.
 
-CIS-CAT pro is written in Java, so it requires a Java Runtime Environment in order to execute it. Currently, the JRE versions supported in
-CIS-CAT are JRE 6, 7, 8.
+CIS-CAT Pro is written in Java, so it requires a Java Runtime Environment in order to execute it. Currently, the JRE versions supported in CIS-CAT are JRE 6, 7, 8. Follow these steps to install the OpenJDK platform:
 
-For running this integration, the CIS-CAT tool must reside on the local agent that runs the scans. However, the JRE can be located on
-a removable disk or network drive for the purpose of sharing between multiple agents.
+a) For CentOS/RHEL/Fedora:
+
+.. code-block:: console
+
+  # yum install java-1.8.0-openjdk
+
+b) For Debian/Ubuntu:
+
+.. code-block:: console
+
+  # apt-get update && apt-get install openjdk-8-jre
+
+.. note::
+  If the version 8 of the Java Runtime Environment is not available for your operating system, use the version 7 or 6 instead.
+
+For running this integration, the CIS-CAT tool must reside on the local agent that runs the scans. However, the JRE can be located on a removable disk or network drive for the purpose of sharing between multiple agents.
 
 In addition, in Unix systems, the CIS-CAT script may need to be granted execute permissions. To do this, run the following command from the CIS-CAT directory:
 
@@ -85,7 +97,7 @@ The following is an example of how to deploy the CIS-CAT integration:
       <java_path>\\server\jre\bin</java_path>
       <ciscat_path>C:\cis-cat</ciscat_path>
 
-      <content type="xccdf" path="benchmarks\your_windows_benchamark_file_xccdf.xml">
+      <content type="xccdf" path="benchmarks\your_windows_benchmark_file_xccdf.xml">
         <profile>xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server</profile>
       </content>
 

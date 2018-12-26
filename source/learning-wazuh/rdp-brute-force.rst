@@ -205,7 +205,7 @@ Let's take a thorough look at how this log event is being decoded and what leads
             *Rule 18152 matched.
 
     .. caution::
-        **Traversing the Wazuh rule heirarchy (Important! Read carefully!)**
+        **Traversing the Wazuh rule hierarchy (Important! Read carefully!)**
 
         |
 
@@ -216,7 +216,7 @@ Let's take a thorough look at how this log event is being decoded and what leads
         Once a child rule matches, none of the other child rules of the same parent will be considered.
         Instead, analysis drops down to the level of checking child rules of the child that just matched.
         This process continues until a rule matches that has no children or no matching children.
-        When mulitiple children of the same severity level are involved, they are evaluated in
+        When multiple children of the same severity level are involved, they are evaluated in
         load order (the order the rule files are loaded and the order the rules appear in the rule files).
 
 9. Use the show-wazuh-rule script to carefully examine and understand each rule that matched for this event, like this:

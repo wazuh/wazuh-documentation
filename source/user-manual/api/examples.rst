@@ -21,9 +21,9 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
        "error": 0,
        "data": {
           "msg": "Welcome to Wazuh HIDS API",
-          "api_version": "v3.7.0",
+          "api_version": "v3.7.2",
           "hostname": "wazuh",
-          "timestamp": "Fri Aug 03 2018 03:00:51 GMT+0000 (UTC)"
+          "timestamp": "Mon Dec 03 2018 03:00:51 GMT+0000 (UTC)"
        }
     }
 
@@ -60,7 +60,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
 
 .. code-block:: console
 
-    # curl -u foo:bar -X DELETE "https://localhost:55000/rootcheck/001?pretty"
+    # curl -u foo:bar -X DELETE "http://localhost:55000/rootcheck/001?pretty"
     {
        "error": 0,
        "data": "Rootcheck database deleted"
@@ -117,7 +117,7 @@ Output:
                 "version": "18.04 LTS"
             },
             "status": "Active",
-            "version": "Wazuh v3.7.0"
+            "version": "Wazuh v3.7.2"
         },
         "error": 0
     }

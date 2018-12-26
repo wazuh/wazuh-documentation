@@ -134,7 +134,7 @@ Let's see below, the content of the playbooks ``/etc/ansible/wazuh-elastic.yml``
 
 	- hosts: <your logstash host>
 	  roles:
-	    - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash, elasticsearch_network_host: 'localhost' }
+	    - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash, elasticsearch_network_host: 'your elasticsearch IP' }
 
 
 .. code-block:: yaml
@@ -163,8 +163,8 @@ We could configure these three files and execute them, but we are going to creat
 	- hosts: 192.168.0.108
 	  roles:
 	      - { role: role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-elasticsearch, elasticsearch_network_host: 'localhost' }
-	      - { role: etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash, logstash_input_beats: true,  elasticsearch_network_host: 'localhost' }
-	      - { role: etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'localhost' }
+	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-logstash, logstash_input_beats: true,  elasticsearch_network_host: 'localhost' }
+	      - { role: /etc/ansible/roles/wazuh-ansible/roles/elastic-stack/ansible-kibana, elasticsearch_network_host: 'localhost' }
 
 As we can see, we have added the IP address of our Elastic Stack server to the ``hosts`` entry. We have added the three roles to execute, as everything goes on a single server, they will use ``localhost`` to communicate with Elasticsearch. Finally, we prepare Logstash by adding the entry ``logstash_input_beats: true`` to receive Filebeat events. 
 

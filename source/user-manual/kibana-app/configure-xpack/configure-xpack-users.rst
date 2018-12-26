@@ -94,7 +94,7 @@ Using the command-line interface (CLI)
 
   .. code-block:: none
 
-    # curl -XPOST "http://localhost:9200/_xpack/security/role/wazuh-admin" -H 'Content-Type: application/json' -d'
+    # curl -X POST "http://localhost:9200/_xpack/security/role/wazuh-admin" -H 'Content-Type: application/json' -d'
     {
       "cluster": [ "manage", "manage_index_templates" ],
       "indices": [
@@ -111,7 +111,7 @@ Using the command-line interface (CLI)
 
   .. code-block:: none
 
-    # curl -XPOST "http://localhost:9200/_xpack/security/role/wazuh-basic" -H 'Content-Type: application/json' -d'
+    # curl -X POST "http://localhost:9200/_xpack/security/role/wazuh-basic" -H 'Content-Type: application/json' -d'
     {
       "cluster": [],
       "indices": [
@@ -128,7 +128,7 @@ Using the command-line interface (CLI)
 
   .. code-block:: none
 
-    # curl -XPOST "http://localhost:9200/_xpack/security/role/wazuh-api-admin" -H 'Content-Type: application/json' -d'
+    # curl -X POST "http://localhost:9200/_xpack/security/role/wazuh-api-admin" -H 'Content-Type: application/json' -d'
     {
       "cluster": [],
       "indices": [
@@ -149,7 +149,7 @@ Using the command-line interface (CLI)
 
   .. code-block:: none
 
-    # curl -XPOST "http://localhost:9200/_xpack/security/user/wazuhsystem" -H 'Content-Type: application/json' -d'
+    # curl -X POST "http://localhost:9200/_xpack/security/user/wazuhsystem" -H 'Content-Type: application/json' -d'
     {
       "password": "wazuhsystem",
       "roles":["wazuh-admin","kibana_system"],
@@ -163,7 +163,7 @@ Using the command-line interface (CLI)
 
   .. code-block:: none
 
-    # curl -XPOST "http://localhost:9200/_xpack/security/user/jack" -H 'Content-Type: application/json' -d'
+    # curl -X POST "http://localhost:9200/_xpack/security/user/jack" -H 'Content-Type: application/json' -d'
     {
       "password": "jackjack",
       "roles":["wazuh-basic","wazuh-api-admin"],
@@ -181,7 +181,7 @@ Using the command-line interface (CLI)
 
   .. code-block:: none
 
-    # curl -XPOST "http://localhost:9200/_xpack/security/user/john" -H 'Content-Type: application/json' -d'
+    # curl -X POST "http://localhost:9200/_xpack/security/user/john" -H 'Content-Type: application/json' -d'
     {
       "password": "johnjohn",
       "roles":["wazuh-basic"],

@@ -5,6 +5,9 @@
 Installation
 ============
 
+.. meta::
+  :description: Learn how to install and configure the Wazuh module to monitor Amazon instances and services.
+
 Prior to enabling the Wazuh rules for Amazon Web Services, follow the steps below to configure AWS to generate log messages, and store them as JSON data files in an Amazon S3 bucket. A detailed description of each of the steps can be found bellow.
 
 .. note::
@@ -22,6 +25,9 @@ Requirements
 Storing AWS logs on S3
 ----------------------
 Depending on the AWS service to be monitored, the necessary steps to follow are different.
+
+.. note::
+    Bucket encryption and all types of compression are supported, except ``Snappy``.
 
 CloudTrail
 ^^^^^^^^^^
@@ -84,9 +90,8 @@ VPC Flow
     :align: center
     :width: 100%
 
-
 Other AWS Services (Guard Duty, Macie and IAM)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section explains how to get logs from Guard Duty, Macie and IAM.
 
@@ -331,13 +336,35 @@ To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` optio
 
 *Check the user manual reference to read more details about each setting:* :doc:`AWS S3 settings <../user-manual/reference/ossec-conf/wodle-s3>`
 
-
 3. Restart your Wazuh system to apply the changes:
 
-.. code-block:: console
+  * If you're configuring a Wazuh manager:
 
-    # /var/ossec/bin/ossec-control restart
+    a. For Systemd:
 
+      .. code-block:: console
+
+        # systemctl restart wazuh-manager
+
+    b. For SysV Init:
+
+      .. code-block:: console
+
+        # service wazuh-manager restart
+
+  * If you're configuring a Wazuh agent:
+
+    a. For Systemd:
+
+      .. code-block:: console
+
+        # systemctl restart wazuh-agent
+
+    b. For SysV Init:
+
+      .. code-block:: console
+
+        # service wazuh-agent restart
 
 Authenticating options
 ----------------------
@@ -355,7 +382,7 @@ If you're using a single AWS account for all your buckets this could be the most
 Profiles
 ^^^^^^^^
 
-You can define profiles in your credentials file (``~/.aws/credentials``) and specify those profiles on the bucket configuration. 
+You can define profiles in your credentials file (``~/.aws/credentials``) and specify those profiles on the bucket configuration.
 
 For example, the following credentials file defines three different profiles: *default*, *dev* and *prod*.
 
@@ -458,6 +485,18 @@ Once your role is created, just paste it on the bucket configuration:
       <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
    </bucket>
 
+IAM roles for EC2 instances
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can use IAM roles and assign them to EC2 instances so there's no need to insert authentication parameters on the ``ossec.conf`` file. This is the recommended configuration. Find more information about IAM roles on EC2 instances in the official `Amazon AWS documentation <https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html>`_.
+
+This is an example configuration:
+
+.. code-block:: xml
+
+  <bucket type="cloudtrail">
+    <name>my-bucket</name>
+  </bucket>
 
 Considerations for configuration
 --------------------------------

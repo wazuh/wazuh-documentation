@@ -8,7 +8,7 @@ Reference
 ======================
 This API reference is organized by resources:
 
-* `Active_Response`_
+* `Active Response`_
 * `Agents`_
 * `Cache`_
 * `Ciscat`_
@@ -28,7 +28,7 @@ Below is the `Request List`_ that shows all of the available requests.
 Request List
 ---------------------------------
 
-`Active_Response`_
+`Active Response`_
 	* PUT /active-response/:agent_id  (`Run an AR command in the agent`_)
 
 `Agents`_
@@ -40,8 +40,8 @@ Request List
 	* DELETE /agents/groups/:group_id  (`Remove group`_)
 	* GET /agents  (`Get all agents`_)
 	* GET /agents/:agent_id  (`Get an agent`_)
-	* GET /agents/:agent_id/config/:component/:configuration  (`Get loaded configuration from agent`_)
-	* GET /agents/:agent_id/group/is_sync  (`Get sycn status of agent`_)
+	* GET /agents/:agent_id/config/:component/:configuration  (`Get active configuration`_)
+	* GET /agents/:agent_id/group/is_sync  (`Get sync status of agent`_)
 	* GET /agents/:agent_id/key  (`Get agent key`_)
 	* GET /agents/:agent_id/upgrade_result  (`Get upgrade result from agent`_)
 	* GET /agents/groups  (`Get groups`_)
@@ -156,7 +156,7 @@ Request List
 	* GET /syscollector/:agent_id/ports  (`Get ports info of an agent`_)
 	* GET /syscollector/:agent_id/processes  (`Get processes info`_)
 
-Active_Response
+Active Response
 ----------------------------------------
 Command
 ++++++++++++++++++++++++++++++++++++++++
@@ -188,7 +188,7 @@ Runs an Active Response command on a specified agent
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/active-response/001?pretty"
+	curl -u foo:bar -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "http://localhost:55000/active-response/001?pretty"
 
 **Example Response:**
 ::
@@ -236,7 +236,7 @@ Add a new agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
+	curl -u foo:bar -X POST -d '{"name":"NewHost","ip":"10.0.0.9"}' -H 'Content-Type:application/json' "http://localhost:55000/agents?pretty"
 
 **Example Response:**
 ::
@@ -271,7 +271,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/myNewAgent?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/agents/myNewAgent?pretty"
 
 **Example Response:**
 ::
@@ -320,7 +320,7 @@ Insert an agent with an existing id and key.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X POST -d '{"name":"NewHost_2","ip":"10.0.10.10","id":"123","key":"1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents/insert?pretty"
+	curl -u foo:bar -X POST -d '{"name":"NewHost_2","ip":"10.0.10.10","id":"123","key":"1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64"}' -H 'Content-Type:application/json' "http://localhost:55000/agents/insert?pretty"
 
 **Example Response:**
 ::
@@ -338,9 +338,9 @@ Insert an agent with an existing id and key.
 Config
 ++++++++++++++++++++++++++++++++++++++++
 
-Get loaded configuration from agent
+Get active configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the loaded configuration from agent in JSON format.
+Returns the active configuration in JSON format.
 
 **Request**:
 
@@ -427,7 +427,7 @@ Returns the loaded configuration from agent in JSON format.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/config/logcollector/localfile?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/001/config/logcollector/localfile?pretty"
 
 **Example Response:**
 ::
@@ -528,7 +528,7 @@ Removes a list of groups.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["webserver","database"]}' "https://127.0.0.1:55000/agents/groups?pretty"
+	curl -u foo:bar -X DELETE -H "Content-Type:application/json" -d '{"ids":["webserver","database"]}' "http://localhost:55000/agents/groups?pretty"
 
 **Example Response:**
 ::
@@ -584,7 +584,7 @@ Removes agents, using a list of them or a criterion based on the status or time 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["003","005"]}' "https://127.0.0.1:55000/agents?pretty&older_than=10s&purge"
+	curl -u foo:bar -X DELETE -H "Content-Type:application/json" -d '{"ids":["003","005"]}' "http://localhost:55000/agents?pretty&older_than=10s&purge"
 
 **Example Response:**
 ::
@@ -626,7 +626,7 @@ Removes an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/008?pretty&purge"
+	curl -u foo:bar -X DELETE "http://localhost:55000/agents/008?pretty&purge"
 
 **Example Response:**
 ::
@@ -646,7 +646,7 @@ Removes an agent.
 Group
 ++++++++++++++++++++++++++++++++++++++++
 
-Get sycn status of agent
+Get sync status of agent
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the sync status in JSON format
 
@@ -667,7 +667,7 @@ Returns the sync status in JSON format
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/group/is_sync?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
 
 **Example Response:**
 ::
@@ -709,7 +709,7 @@ Adds an agent to the specified group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/004/group/dmz?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/agents/004/group/dmz?pretty"
 
 **Example Response:**
 ::
@@ -741,7 +741,7 @@ Creates a new group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/groups/pciserver?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/agents/groups/pciserver?pretty"
 
 **Example Response:**
 ::
@@ -784,7 +784,7 @@ Returns the specified file belonging to the group parsed to JSON.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/webserver/files/cis_debian_linux_rcl.txt?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/groups/webserver/files/cis_debian_linux_rcl.txt?pretty"
 
 **Example Response:**
 ::
@@ -850,7 +850,7 @@ Returns the list of agents in a group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/dmz?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/groups/dmz?pretty"
 
 **Example Response:**
 ::
@@ -872,9 +872,8 @@ Returns the list of agents in a group.
 	            "ip": "192.168.185.7",
 	            "dateAdd": "2018-10-11 09:38:47",
 	            "node_name": "node02",
-	            "multi_group": "",
 	            "manager": "manager",
-	            "version": "Wazuh v3.7.0",
+	            "version": "Wazuh v3.7.2",
 	            "lastKeepAlive": "2018-10-11 13:58:08",
 	            "os": {
 	               "major": "16",
@@ -896,7 +895,6 @@ Returns the list of agents in a group.
 	            "name": "main_database",
 	            "ip": "10.0.0.15",
 	            "node_name": "unknown",
-	            "multi_group": "",
 	            "dateAdd": "2018-10-11 13:58:11",
 	            "id": "004"
 	         }
@@ -936,7 +934,7 @@ Returns a list with the available agents without group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/no_group?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/no_group?pretty"
 
 **Example Response:**
 ::
@@ -1000,7 +998,7 @@ Returns the group configuration (agent.conf).
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/dmz/configuration?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/groups/dmz/configuration?pretty"
 
 **Example Response:**
 ::
@@ -1059,7 +1057,7 @@ Returns the files belonging to the group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups/default/files?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/groups/default/files?pretty"
 
 **Example Response:**
 ::
@@ -1199,7 +1197,7 @@ Returns the list of existing agent groups.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/groups?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/groups?pretty"
 
 **Example Response:**
 ::
@@ -1254,7 +1252,7 @@ Remove the group of the agent but will leave the rest of its group if it belongs
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group/dmz?pretty"
+	curl -u foo:bar -X DELETE "http://localhost:55000/agents/004/group/dmz?pretty"
 
 **Example Response:**
 ::
@@ -1286,7 +1284,7 @@ Removes the group of the agent. The agent will automatically revert to the 'defa
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group?pretty"
+	curl -u foo:bar -X DELETE "http://localhost:55000/agents/004/group?pretty"
 
 **Example Response:**
 ::
@@ -1318,7 +1316,7 @@ Removes the group. Agents that were assigned to the removed group will automatic
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/groups/dmz?pretty"
+	curl -u foo:bar -X DELETE "http://localhost:55000/agents/groups/dmz?pretty"
 
 **Example Response:**
 ::
@@ -1370,7 +1368,7 @@ Returns a summary of the OS.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/summary/os?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/summary/os?pretty"
 
 **Example Response:**
 ::
@@ -1399,7 +1397,7 @@ Returns a summary of the available agents.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/summary?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/summary?pretty"
 
 **Example Response:**
 ::
@@ -1474,7 +1472,7 @@ Returns a list with the available agents.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents?pretty&offset=0&limit=5&sort=-ip,name"
+	curl -u foo:bar -X GET "http://localhost:55000/agents?pretty&offset=0&limit=5&sort=-ip,name"
 
 **Example Response:**
 ::
@@ -1496,7 +1494,7 @@ Returns a list with the available agents.
 	            "manager": "manager",
 	            "node_name": "node02",
 	            "dateAdd": "2018-10-11 09:38:47",
-	            "version": "Wazuh v3.7.0",
+	            "version": "Wazuh v3.7.2",
 	            "lastKeepAlive": "2018-10-11 13:58:08",
 	            "os": {
 	               "major": "16",
@@ -1517,7 +1515,7 @@ Returns a list with the available agents.
 	            "manager": "manager",
 	            "node_name": "node01",
 	            "dateAdd": "2018-10-11 09:37:23",
-	            "version": "Wazuh v3.7.0",
+	            "version": "Wazuh v3.7.2",
 	            "lastKeepAlive": "9999-12-31 23:59:59",
 	            "os": {
 	               "major": "18",
@@ -1586,7 +1584,7 @@ Returns various information from an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/000?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/000?pretty"
 
 **Example Response:**
 ::
@@ -1600,7 +1598,7 @@ Returns various information from an agent.
 	      "manager": "manager",
 	      "node_name": "node01",
 	      "dateAdd": "2018-10-11 09:37:23",
-	      "version": "Wazuh v3.7.0",
+	      "version": "Wazuh v3.7.2",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
 	         "major": "18",
@@ -1640,7 +1638,7 @@ Returns various information from an agent called :agent_name.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/NewHost?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/name/NewHost?pretty"
 
 **Example Response:**
 ::
@@ -1683,7 +1681,7 @@ Returns the key of an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/004/key?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/004/key?pretty"
 
 **Example Response:**
 ::
@@ -1719,7 +1717,7 @@ Restarts a list of agents.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"ids":["002","004"]}' "https://127.0.0.1:55000/agents/restart?pretty"
+	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["002","004"]}' "http://localhost:55000/agents/restart?pretty"
 
 **Example Response:**
 ::
@@ -1748,7 +1746,7 @@ Restarts all agents.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/restart?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/agents/restart?pretty"
 
 **Example Response:**
 ::
@@ -1779,7 +1777,7 @@ Restarts the specified agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/007/restart?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/agents/007/restart?pretty"
 
 **Example Response:**
 ::
@@ -1831,7 +1829,7 @@ Returns all the different combinations that agents have for the selected fields.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/stats/distinct?pretty&fields=os.platform"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/stats/distinct?pretty&fields=os.platform"
 
 **Example Response:**
 ::
@@ -1886,7 +1884,7 @@ Returns the list of outdated agents.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/outdated?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/outdated?pretty"
 
 **Example Response:**
 ::
@@ -1933,7 +1931,7 @@ Returns the upgrade result from an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/003/upgrade_result?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/agents/003/upgrade_result?pretty"
 
 **Example Response:**
 ::
@@ -1960,7 +1958,7 @@ Upgrade the agent using a custom file.
 +==============================+===============+========================================================================================================================================================================================================+
 | ``agent_id``                 | Number        | Agent unique ID.                                                                                                                                                                                       |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file_path``                | String        | WPK file path.                                                                                                                                                                                         |
+| ``file_path``                | String        | Path to the WPK file. The file must be on a folder on the Wazuh's installation directory (by default, ``/var/ossec``).                                                                                 |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``installer``                | String        | Installation script.                                                                                                                                                                                   |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1968,7 +1966,7 @@ Upgrade the agent using a custom file.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade_custom?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/agents/002/upgrade_custom?pretty"
 
 **Example Response:**
 ::
@@ -2012,7 +2010,7 @@ Upgrade the agent using a WPK file from online repository.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/002/upgrade?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/agents/002/upgrade?pretty"
 
 **Example Response:**
 ::
@@ -2050,7 +2048,7 @@ Clears cache of the specified group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cache/mygroup?pretty"
+	curl -u foo:bar -X DELETE "http://localhost:55000/cache/mygroup?pretty"
 
 **Example Response:**
 ::
@@ -2087,7 +2085,7 @@ Clears entire cache.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cache?pretty"
+	curl -u foo:bar -X DELETE "http://localhost:55000/cache?pretty"
 
 **Example Response:**
 ::
@@ -2118,7 +2116,7 @@ Returns current cache index.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cache?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cache?pretty"
 
 **Example Response:**
 ::
@@ -2145,7 +2143,7 @@ Returns cache configuration.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cache/config?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cache/config?pretty"
 
 **Example Response:**
 ::
@@ -2217,7 +2215,7 @@ Returns the agent's ciscat results info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/ciscat/000/results?pretty&sort=-score"
+	curl -u foo:bar -X GET "http://localhost:55000/ciscat/000/results?pretty&sort=-score"
 
 **Example Response:**
 ::
@@ -2289,7 +2287,7 @@ Returns ossec.conf in JSON format.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/configuration?section=global&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/node02/configuration?section=global&pretty"
 
 **Example Response:**
 ::
@@ -2329,7 +2327,7 @@ Returns the cluster configuration
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/config?pretty"
 
 **Example Response:**
 ::
@@ -2369,7 +2367,7 @@ Returns whether the cluster is enabled or disabled
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/status?pretty"
 
 **Example Response:**
 ::
@@ -2396,7 +2394,7 @@ Returns the status of the manager processes.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/status?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/node02/status?pretty"
 
 **Example Response:**
 ::
@@ -2431,7 +2429,7 @@ Returns basic information about manager.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/info?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/node02/info?pretty"
 
 **Example Response:**
 ::
@@ -2444,7 +2442,7 @@ Returns basic information about manager.
 	      "ruleset_version": "3700",
 	      "tz_name": "UTC",
 	      "tz_offset": "+0000",
-	      "version": "v3.7.0",
+	      "version": "v3.7.2",
 	      "path": "/var/ossec",
 	      "max_agents": "14000",
 	      "type": "manager"
@@ -2473,7 +2471,7 @@ Show cluster health
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/healthcheck?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/healthcheck?pretty"
 
 **Example Response:**
 ::
@@ -2485,7 +2483,7 @@ Show cluster health
 	         "node02": {
 	            "info": {
 	               "ip": "192.168.185.4",
-	               "version": "3.7.0",
+	               "version": "3.7.2",
 	               "type": "worker",
 	               "name": "node02",
 	               "n_active_agents": 1
@@ -2520,7 +2518,7 @@ Show cluster health
 	         "node01": {
 	            "info": {
 	               "ip": "192.168.185.3",
-	               "version": "3.7.0",
+	               "version": "3.7.2",
 	               "type": "master",
 	               "name": "node01",
 	               "n_active_agents": 1
@@ -2574,7 +2572,7 @@ Returns the three last months of ossec.log.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/logs?offset=0&limit=5&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/node02/logs?offset=0&limit=5&pretty"
 
 **Example Response:**
 ::
@@ -2632,7 +2630,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/logs/summary?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/node02/logs/summary?pretty"
 
 **Example Response:**
 ::
@@ -2781,7 +2779,7 @@ Returns the local node info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/node?pretty"
 
 **Example Response:**
 ::
@@ -2809,7 +2807,7 @@ Returns the node info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes/node01?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/nodes/node01?pretty"
 
 **Example Response:**
 ::
@@ -2818,7 +2816,7 @@ Returns the node info
 	   "error": 0,
 	   "data": {
 	      "ip": "192.168.185.3",
-	      "version": "3.7.0",
+	      "version": "3.7.2",
 	      "type": "master",
 	      "name": "node01"
 	   }
@@ -2856,7 +2854,7 @@ Returns the nodes info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/nodes?pretty"
 
 **Example Response:**
 ::
@@ -2868,13 +2866,13 @@ Returns the nodes info
 	      "items": [
 	         {
 	            "ip": "192.168.185.4",
-	            "version": "3.7.0",
+	            "version": "3.7.2",
 	            "type": "worker",
 	            "name": "node02"
 	         },
 	         {
 	            "ip": "192.168.185.3",
-	            "version": "3.7.0",
+	            "version": "3.7.2",
 	            "type": "master",
 	            "name": "node01"
 	         }
@@ -2908,7 +2906,7 @@ Returns Wazuh statistical information for the current or specified date.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/stats?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/node02/stats?pretty"
 
 **Example Response:**
 ::
@@ -2957,7 +2955,7 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/stats/hourly?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/node02/stats/hourly?pretty"
 
 **Example Response:**
 ::
@@ -2991,7 +2989,7 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/stats/weekly?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/cluster/node02/stats/weekly?pretty"
 
 **Example Response:**
 ::
@@ -3104,7 +3102,7 @@ Returns all decoders included in ossec.conf.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders?pretty&offset=0&limit=2&sort=+file,position"
+	curl -u foo:bar -X GET "http://localhost:55000/decoders?pretty&offset=0&limit=2&sort=+file,position"
 
 **Example Response:**
 ::
@@ -3183,7 +3181,7 @@ Returns all decoders files included in ossec.conf.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/files?pretty&offset=0&limit=10&sort=-path"
+	curl -u foo:bar -X GET "http://localhost:55000/decoders/files?pretty&offset=0&limit=10&sort=-path"
 
 **Example Response:**
 ::
@@ -3275,7 +3273,7 @@ Returns all parent decoders included in ossec.conf
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/parents?pretty&offset=0&limit=2&sort=-file"
+	curl -u foo:bar -X GET "http://localhost:55000/decoders/parents?pretty&offset=0&limit=2&sort=-file"
 
 **Example Response:**
 ::
@@ -3341,7 +3339,7 @@ Returns the decoders with the specified name.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/decoders/apache-errorlog?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/decoders/apache-errorlog?pretty"
 
 **Example Response:**
 ::
@@ -3406,7 +3404,7 @@ Clears the syscheck database for all agents.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/experimental/syscheck?pretty"
+	curl -u foo:bar -X DELETE "http://localhost:55000/experimental/syscheck?pretty"
 
 **Example Response:**
 ::
@@ -3463,7 +3461,7 @@ Returns the agent's hardware info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/hardware?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/experimental/syscollector/hardware?pretty"
 
 **Example Response:**
 ::
@@ -3573,7 +3571,7 @@ Returns the agent's network address info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netaddr?pretty&limit=2&sort=proto"
+	curl -u foo:bar -X GET "http://localhost:55000/experimental/syscollector/netaddr?pretty&limit=2&sort=proto"
 
 **Example Response:**
 ::
@@ -3661,7 +3659,7 @@ Returns the agent's network interface info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netiface?pretty&limit=2"
+	curl -u foo:bar -X GET "http://localhost:55000/experimental/syscollector/netiface?pretty&limit=2"
 
 **Example Response:**
 ::
@@ -3765,7 +3763,7 @@ Returns the agent's network protocol info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netproto?pretty&limit=2&sort=type"
+	curl -u foo:bar -X GET "http://localhost:55000/experimental/syscollector/netproto?pretty&limit=2&sort=type"
 
 **Example Response:**
 ::
@@ -3839,7 +3837,7 @@ Returns the agent's os info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/os?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/experimental/syscollector/os?pretty"
 
 **Example Response:**
 ::
@@ -3957,7 +3955,7 @@ Returns the agent's packages info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/packages?pretty&sort=-name&limit=2"
+	curl -u foo:bar -X GET "http://localhost:55000/experimental/syscollector/packages?pretty&sort=-name&limit=2"
 
 **Example Response:**
 ::
@@ -4055,7 +4053,7 @@ Returns the agent's ports info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/ports?pretty&limit=2&sort=protocol"
+	curl -u foo:bar -X GET "http://localhost:55000/experimental/syscollector/ports?pretty&limit=2&sort=protocol"
 
 **Example Response:**
 ::
@@ -4171,7 +4169,7 @@ Returns the agent's processes info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/processes?pretty&limit=2&sort=priority"
+	curl -u foo:bar -X GET "http://localhost:55000/experimental/syscollector/processes?pretty&limit=2&sort=priority"
 
 **Example Response:**
 ::
@@ -4303,7 +4301,7 @@ Returns the agent's ciscat results info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/ciscat/results?pretty&sort=-score"
+	curl -u foo:bar -X GET "http://localhost:55000/experimental/ciscat/results?pretty&sort=-score"
 
 **Example Response:**
 ::
@@ -4377,7 +4375,7 @@ Returns ossec.conf in JSON format.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/configuration?section=global&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/configuration?section=global&pretty"
 
 **Example Response:**
 ::
@@ -4421,7 +4419,7 @@ Returns basic information about manager.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/info?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/info?pretty"
 
 **Example Response:**
 ::
@@ -4430,7 +4428,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "compilation_date": "Thu Oct 11 09:37:22 UTC 2018",
-	      "version": "v3.7.0",
+	      "version": "v3.7.2",
 	      "openssl_support": "yes",
 	      "max_agents": "14000",
 	      "ruleset_version": "3700",
@@ -4455,7 +4453,7 @@ Returns the status of the manager processes.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/status?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/status?pretty"
 
 **Example Response:**
 ::
@@ -4519,7 +4517,7 @@ Returns the three last months of ossec.log.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs?offset=0&limit=5&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/logs?offset=0&limit=5&pretty"
 
 **Example Response:**
 ::
@@ -4577,7 +4575,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/logs/summary?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/logs/summary?pretty"
 
 **Example Response:**
 ::
@@ -4734,7 +4732,7 @@ Returns a summary of the current analysisd stats.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/analysisd?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/stats/analysisd?pretty"
 
 **Example Response:**
 ::
@@ -4805,7 +4803,7 @@ Returns Wazuh statistical information for the current or specified date.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/stats?pretty"
 
 **Example Response:**
 ::
@@ -4854,7 +4852,7 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/hourly?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/stats/hourly?pretty"
 
 **Example Response:**
 ::
@@ -4888,7 +4886,7 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/weekly?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/stats/weekly?pretty"
 
 **Example Response:**
 ::
@@ -4968,7 +4966,7 @@ Returns a summary of the current remoted stats.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/remoted?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/manager/stats/remoted?pretty"
 
 **Example Response:**
 ::
@@ -5007,7 +5005,7 @@ Clears the rootcheck database for all agents.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck?pretty"
+	curl -u foo:bar -X DELETE "http://localhost:55000/rootcheck?pretty"
 
 **Example Response:**
 ::
@@ -5038,7 +5036,7 @@ Clears the rootcheck database for a specific agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/rootcheck/000?pretty"
+	curl -u foo:bar -X DELETE "http://localhost:55000/rootcheck/000?pretty"
 
 **Example Response:**
 ::
@@ -5073,7 +5071,7 @@ Returns the timestamp of the last rootcheck scan.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/last_scan?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rootcheck/000/last_scan?pretty"
 
 **Example Response:**
 ::
@@ -5114,7 +5112,7 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/cis?offset=0&limit=10&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rootcheck/000/cis?offset=0&limit=10&pretty"
 
 **Example Response:**
 ::
@@ -5166,7 +5164,7 @@ Returns the rootcheck database of an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000?offset=0&limit=2&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rootcheck/000?offset=0&limit=2&pretty"
 
 **Example Response:**
 ::
@@ -5220,7 +5218,7 @@ Returns the PCI requirements of all rootchecks of the agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rootcheck/000/pci?offset=0&limit=10&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rootcheck/000/pci?offset=0&limit=10&pretty"
 
 **Example Response:**
 ::
@@ -5254,7 +5252,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/rootcheck?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/rootcheck?pretty"
 
 **Example Response:**
 ::
@@ -5285,7 +5283,7 @@ Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/rootcheck/000?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/rootcheck/000?pretty"
 
 **Example Response:**
 ::
@@ -5350,7 +5348,7 @@ Returns all rules.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules?offset=0&limit=2&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rules?offset=0&limit=2&pretty"
 
 **Example Response:**
 ::
@@ -5440,7 +5438,7 @@ Returns the files of all rules.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/files?offset=0&limit=10&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rules/files?offset=0&limit=10&pretty"
 
 **Example Response:**
 ::
@@ -5532,7 +5530,7 @@ Returns the GDPR requirements of all rules.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/gdpr?offset=0&limit=10&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rules/gdpr?offset=0&limit=10&pretty"
 
 **Example Response:**
 ::
@@ -5578,7 +5576,7 @@ Returns the groups of all rules.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/groups?offset=0&limit=10&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rules/groups?offset=0&limit=10&pretty"
 
 **Example Response:**
 ::
@@ -5630,7 +5628,7 @@ Returns the PCI requirements of all rules.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/pci?offset=0&limit=10&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rules/pci?offset=0&limit=10&pretty"
 
 **Example Response:**
 ::
@@ -5684,7 +5682,7 @@ Returns the rules with the specified id.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/1002?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/rules/1002?pretty"
 
 **Example Response:**
 ::
@@ -5745,7 +5743,7 @@ Clears the syscheck database for the specified agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/syscheck/000?pretty"
+	curl -u foo:bar -X DELETE "http://localhost:55000/syscheck/000?pretty"
 
 **Example Response:**
 ::
@@ -5780,7 +5778,7 @@ Return the timestamp of the last syscheck scan.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscheck/000/last_scan?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/syscheck/000/last_scan?pretty"
 
 **Example Response:**
 ::
@@ -5849,7 +5847,7 @@ Returns the syscheck files of an agent.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscheck/000?offset=0&limit=2&pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/syscheck/000?offset=0&limit=2&pretty"
 
 **Example Response:**
 ::
@@ -5913,7 +5911,7 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/syscheck?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/syscheck?pretty"
 
 **Example Response:**
 ::
@@ -5944,7 +5942,7 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/syscheck/000?pretty"
+	curl -u foo:bar -X PUT "http://localhost:55000/syscheck/000?pretty"
 
 **Example Response:**
 ::
@@ -5985,7 +5983,7 @@ Returns the agent's hardware info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/hardware?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/syscollector/000/hardware?pretty"
 
 **Example Response:**
 ::
@@ -6053,7 +6051,7 @@ Returns the agent's network address info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netaddr?pretty&limit=2&sort=proto"
+	curl -u foo:bar -X GET "http://localhost:55000/syscollector/000/netaddr?pretty&limit=2&sort=proto"
 
 **Example Response:**
 ::
@@ -6139,7 +6137,7 @@ Returns the agent's network interface info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netiface?pretty&limit=2&sort=state"
+	curl -u foo:bar -X GET "http://localhost:55000/syscollector/000/netiface?pretty&limit=2&sort=state"
 
 **Example Response:**
 ::
@@ -6241,7 +6239,7 @@ Returns the agent's network protocol info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netproto?pretty&limit=2&sort=type"
+	curl -u foo:bar -X GET "http://localhost:55000/syscollector/000/netproto?pretty&limit=2&sort=type"
 
 **Example Response:**
 ::
@@ -6295,7 +6293,7 @@ Returns the agent's OS info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/os?pretty"
+	curl -u foo:bar -X GET "http://localhost:55000/syscollector/000/os?pretty"
 
 **Example Response:**
 ::
@@ -6369,7 +6367,7 @@ Returns the agent's packages info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/packages?pretty&limit=2&offset=10&sort=-name"
+	curl -u foo:bar -X GET "http://localhost:55000/syscollector/000/packages?pretty&limit=2&offset=10&sort=-name"
 
 **Example Response:**
 ::
@@ -6465,7 +6463,7 @@ Returns the agent's ports info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/ports?pretty&sort=-protocol&limit=2"
+	curl -u foo:bar -X GET "http://localhost:55000/syscollector/000/ports?pretty&sort=-protocol&limit=2"
 
 **Example Response:**
 ::
@@ -6581,7 +6579,7 @@ Returns the agent's processes info
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/processes?pretty&limit=2&offset=10&sort=-name"
+	curl -u foo:bar -X GET "http://localhost:55000/syscollector/000/processes?pretty&limit=2&offset=10&sort=-name"
 
 **Example Response:**
 ::

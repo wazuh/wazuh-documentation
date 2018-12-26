@@ -69,9 +69,19 @@ there are matches:
       <packages>yes</packages>
     </wodle>
 
-Restart the manager with ``ossec-control restart``.  This will also cause the agents to restart as they pick up their new ``agent.conf``.
+Restart the Wazuh manager. This will also cause the agents to restart as they pick up their new configuration:
 
+a. For Systemd:
 
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-manager restart
 
 Look at the logs
 ----------------

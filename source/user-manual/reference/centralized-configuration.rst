@@ -2,8 +2,8 @@
 
 .. _reference_agent_conf:
 
-Centralized configuration
-=========================
+Centralized configuration (agent.conf)
+======================================
 
 Introduction
 ------------
@@ -18,7 +18,8 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 
-.. note:: When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the file *etc/local_internal_options.conf* in the agent:
+.. note::
+  When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
 
 .. code-block:: shell
 
@@ -111,19 +112,19 @@ For example, for the ``group1`` group, it is in ``/var/ossec/etc/shared/group1``
 Options
 -------
 
-+-------------+-------------------------------------------------------------------------------------------------------------------+
-| **name**    | Allows assignment of the block to one particular agent.                                                           |
-+             +-------------------------------------------------------+-----------------------------------------------------------+
-|             | Allowed values                                        | Any agent name                                            |
-+-------------+-------------------------------------------------------+-----------------------------------------------------------+
-| **os**      | Allows assignment of the block to an operating system.                                                            |
-+             +-------------------------------------------------------+-----------------------------------------------------------+
-|             | Allowed values                                        | Any OS family                                             |
-+-------------+-------------------------------------------------------+-----------------------------------------------------------+
-| **profile** | Allows assignment of a profile name to a block. Any agent configured to use the defined profile may use the block.|
-+             +-------------------------------------------------------+-----------------------------------------------------------+
-|             | Allowed values                                        | Any defined profile                                       |
-+-------------+-------------------------------------------------------+-----------------------------------------------------------+
++-------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **name**    | Allows assignment of the block to one particular agent.                                                                                                           |
++             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
+|             | Allowed values                                        | Any agent name                                                                                            |
++-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
+| **os**      | Allows assignment of the block to an operating system.                                                                                                            |
++             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
+|             | Allowed values                                        | Any OS family                                                                                             |
++-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
+| **profile** | Allows assignment of a profile name to a block. Any agent configured to use the defined :ref:`profile <reference_ossec_client_config_profile>` may use the block. |
++             +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
+|             | Allowed values                                        | Any defined profile                                                                                       |
++-------------+-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
 
 Examples
 
@@ -140,13 +141,13 @@ Centralized configuration process
 
 The following is an example of how a centralized configuration can be done.
 
-1. Configure the ``agent.conf`` file.
+1. Configure the ``agent.conf`` file:
 
 Edit the file corresponding to the agent group. For example, for the ``default`` group, edit the file ``/var/ossec/etc/shared/default/agent.conf``. If the file does not exist, create it::
 
-    $ touch /var/ossec/etc/shared/default/agent.conf
-    $ chown ossec:ossec /var/ossec/etc/shared/default/agent.conf
-    $ chmod 640 /var/ossec/etc/shared/default/agent.conf
+    # touch /var/ossec/etc/shared/default/agent.conf
+    # chown ossec:ossec /var/ossec/etc/shared/default/agent.conf
+    # chmod 640 /var/ossec/etc/shared/default/agent.conf
 
 Several configurations may be created based on the ``name``, ``OS`` or ``profile`` of an agent.
 
@@ -173,23 +174,26 @@ Several configurations may be created based on the ``name``, ``OS`` or ``profile
         </localfile>
     </agent_config>
 
-2. Run /var/ossec/bin/verify-agent-conf
+.. note::
+  The ``profile`` option uses the values defined on the ``<config-profile>`` setting from the :ref:`client configuration <reference_ossec_client_config_profile>`.
+
+2. Run ``/var/ossec/bin/verify-agent-conf``:
 
 Each time you make a change to the ``agent.conf`` file, it is important to check for configuration errors. If any errors are reported by this check, they must be fixed before the next step.  Failure to perform this step may allow errors to be pushed to agents which may prevent the agents from running.  At that point, it is very likely that you will be forced to visit each agent manually to recover them.
 
-3. Push the configuration to the agents.
+3. Push the configuration to the agents:
 
 Each time an agent checks-in with the manager (10 minute default), it looks to see if a new version of ``agent.conf`` is available from the manager.  When a new version is available, it automatically pulls the new file. However, the new ``agent.conf`` is not used by the agent until the next time the agent is restarted, as in step 5.
 
 .. note:: Restarting the manager will make the new ``agent.conf`` file available to the agents more quickly.
 
-4. Confirm that the agent received the configuration.
+4. Confirm that the agent received the configuration:
 
 The ``agent_groups`` tool or the API can show whether the group is synchronized in the agent:
 
 .. code-block:: console
 
-    $ curl -u foo:bar "localhost:55000/agents/001/group/is_sync?pretty"
+    # curl -u foo:bar -X GET "http://localhost:55000/agents/001/group/is_sync?pretty"
     {
         "error": 0,
         "data": {
@@ -199,10 +203,10 @@ The ``agent_groups`` tool or the API can show whether the group is synchronized 
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_groups -S -i 001
+    # /var/ossec/bin/agent_groups -S -i 001
     Agent '001' is synchronized.
 
-5. Restarting the agent
+5. Restart the agent:
 
 By default, the agent restarts by itself automatically when it receives a new shared configuration.
 
@@ -210,7 +214,7 @@ If ``auto_restart`` has been disabled (in the ``<client>`` section of :doc:`Loca
 
 .. code-block:: console
 
-    $ /var/ossec/bin/agent_control -R -u 1032
+    # /var/ossec/bin/agent_control -R -u 1032
 
     Wazuh agent_control: Restarting agent: 1032
 
@@ -256,12 +260,11 @@ The final configuration will overwrite ``check_unixaudit`` to "yes" because it a
 How to ignore shared configuration
 ----------------------------------
 
-Whether for any reason you don't want to apply the shared configuration in a specific agent, it can be disabled by adding the following line to the file *etc/local_internal_options.conf* in that agent:
+Whether for any reason you don't want to apply the shared configuration in a specific agent, it can be disabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in that agent:
 
 .. code-block:: shell
 
     agent.remote_conf=0
-
 
 Download configuration files from remote location
 -------------------------------------------------
@@ -323,7 +326,7 @@ The information about the parsing is shown on the ``/var/ossec/logs/ossec.log`` 
 
 .. code-block:: shell
 
-    INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'    
+    INFO: Parsing file '/etc/shared/files.yml': unexpected identifier: 'group'
 
 - Download of file failed:
 

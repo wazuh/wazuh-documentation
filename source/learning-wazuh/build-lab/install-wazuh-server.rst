@@ -38,8 +38,18 @@ Install the Wazuh Manager software and confirm it is running
   .. code-block:: console
 
     # yum -y install wazuh-manager
-    # ossec-control status
 
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl status wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager status
 
 Configure Wazuh Manager to listen for agent connections on tcp instead of udp
 
@@ -60,13 +70,23 @@ Configure Wazuh Manager to allow self registration of new agents with authentica
     # echo "please123" > /var/ossec/etc/authd.pass # this is the password agents will use for self-registration
     # ossec-control enable auth
 
-Restart Wazuh Manager and confirm the agent listener and the self-registration listener are in place
+Restart Wazuh Manager and confirm the agent listener and the self-registration listener are in place:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager restart
 
   .. code-block:: console
 
-    # ossec-control restart
     # netstat -natp | egrep "(:1514|:1515)"
-
 
 Install Wazuh API
 -----------------

@@ -150,6 +150,14 @@ Installing the Wazuh API
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
+5. (Optional) Disable the Wazuh repository:
+
+  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+
 .. _wazuh_server_rpm_filebeat:
 
 Installing Filebeat
@@ -183,7 +191,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # yum install filebeat-6.4.2
+    # yum install filebeat-6.5.3
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
@@ -215,6 +223,14 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
     # chkconfig --add filebeat
     # service filebeat start
+
+6. (Optional) Disable the Elasticsearch repository:
+
+  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
 Next steps
 ----------
