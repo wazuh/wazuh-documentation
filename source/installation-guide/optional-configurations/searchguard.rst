@@ -268,72 +268,86 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 .. code-block:: console
 
-    sg_wazuh_admin:
-        cluster:
-            - indices:data/read/mget
-            - indices:data/read/msearch
-            - indices:data/read/search
-            - indices:data/read/field_caps
-            - CLUSTER_COMPOSITE_OPS
-        indices:
-            '?kiban*':
-                '*':
-                    - MANAGE
-                    - INDEX
-                    - READ
-                    - DELETE
-            '?wazuh':
-                '*':
-                    - MANAGE
-                    - INDEX
-                    - READ
-                    - DELETE
-            
-            '?wazuh-version':
-                '*':
-                    - MANAGE
-                    - INDEX
-                    - READ
-                    - DELETE
+  sg_wazuh_admin:
+    cluster:
+      - indices:data/read/mget
+      - indices:data/read/msearch
+      - indices:data/read/search
+      - indices:data/read/field_caps
+      - CLUSTER_COMPOSITE_OPS
+    indices:
+      '?kiban*':
+        '*':
+          - MANAGE
+          - INDEX
+          - READ
+          - DELETE
+      '?wazuh':
+        '*':
+          - MANAGE
+          - INDEX
+          - READ
+          - DELETE      
+      '?wazuh-version':
+        '*':
+          - MANAGE
+          - INDEX
+          - READ
+          - DELETE
 
-            'wazuh-alerts-3?x-*':
-                '*':
-                    - indices:admin/mappings/fields/get
-                    - indices:admin/validate/query
-                    - indices:data/read/search
-                    - indices:data/read/msearch
-                    - indices:data/read/field_stats
-                    - indices:data/read/field_caps
-                    - READ
-                    - SEARCH            
-           
-            'wazuh-monitoring*':
-                '*':
-                    - indices:admin/mappings/fields/get
-                    - indices:admin/validate/query
-                    - indices:data/read/search
-                    - indices:data/read/msearch
-                    - indices:data/read/field_stats
-                    - indices:data/read/field_caps
-                    - READ
-                    - SEARCH
+      'wazuh-alerts-3?x-*':
+        '*':
+          - indices:admin/mappings/fields/get
+          - indices:admin/validate/query
+          - indices:data/read/search
+          - indices:data/read/msearch
+          - indices:data/read/field_stats
+          - indices:data/read/field_caps
+          - READ
+          - SEARCH            
+      
+      'wazuh-monitoring*':
+        '*':
+          - indices:admin/mappings/fields/get
+          - indices:admin/validate/query
+          - indices:data/read/search
+          - indices:data/read/msearch
+          - indices:data/read/field_stats
+          - indices:data/read/field_caps
+          - READ
+          - SEARCH
 
-2. Create a new user in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_internal_users.yml*
+2. Create a hash for your password
 
 .. code-block:: console
 
-    wazuhadmin:
-        hash: $2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG
-        roles:
-            - wazuhadmin_role
+  bash /usr/share/elasticsearch/plugins/search-guard-6/tools/hash.sh -p yourpassword
+
+3. Create a new user in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_internal_users.yml* using the hash from step 2.
+
+.. code-block:: console
+
+  wazuhadmin:
+    hash: $2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG
+    roles:
+      - wazuhadmin_role
 
 3. Set the role mapping for Search Guard roles in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles_mapping.yml*
 
 .. code-block:: console
 
-    sg_wazuh_admin:
-        backendroles:
-            - wazuhadmin_role
+  sg_wazuh_admin:
+    backendroles:
+      - wazuhadmin_role
+
+4. Apply the changes:
+
+.. code-block:: console
+
+    # /usr/share/elasticsearch/plugins/search-guard-6/tools/sgadmin.sh \ 
+    -cd /usr/share/elasticsearch/plugins/search-guard-6/sgconfig -icl -key \
+    /etc/elasticsearch/kirk-key.pem -cert /etc/elasticsearch/kirk.pem -cacert \
+    /etc/elasticsearch/root-ca.pem -h <ELASTICSEARCH_HOST> -nhnv 
 
 **Brief summary for Kibana**
 
@@ -345,11 +359,15 @@ Now you have three Kibana UI users plus a Kibana server user:
 How it goes in the Wazuh app?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The main difference is that you now must login before entering Kibana or the Wazuh app. There are a few of things to keep in mind too:
+The main difference is that you now must login before entering Kibana. There are a few of things to keep in mind too:
 
 - Index pattern selector shows only allowed index patterns (like our X-Pack security integration does).
 - Looking for forbidden indices. If the user is not allowed for certain indices, it can't use them even out the Wazuh app.
 - This includes direct *curl* command pointing to Elasticsearch.
+
+.. thumbnail:: ../../images/kibana-app/searchguard/searchguard-01.png
+    :align: center
+    :width: 100%
 
 Reference
 ^^^^^^^^^
