@@ -44,7 +44,7 @@ Upgrade the Wazuh manager
 
   .. code-block:: console
 
-    # apt-get update && apt-get install --only-upgrade wazuh-manager
+    # apt-get update && apt-get install wazuh-manager
 
 2. Upgrade the ``wazuh-api`` package:
 
@@ -58,7 +58,7 @@ Upgrade the Wazuh manager
 
   .. code-block:: console
 
-    # apt-get update && apt-get install --only-upgrade wazuh-api
+    # apt-get update && apt-get install wazuh-api
 
 .. note::
   The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.
@@ -78,7 +78,7 @@ Upgrade the Wazuh agent
 
   .. code-block:: console
 
-    # apt-get update && apt-get install --only-upgrade wazuh-agent
+    # apt-get update && apt-get install wazuh-agent
 
   c) For Windows:
 
