@@ -67,7 +67,7 @@ You can additionally monitor specific Windows event channels.  The location is t
         <log_format>eventchannel</log_format>
     </localfile>
 
-The log_format eventchannel has been enhanced for Wazuh v3.8.0 with a new event data processing, keeping the old functionality and configuration. It allows to monitor every event generated at any Windows agent, returning every channel’s information in JSON format. As the old eventchannel, with this log_format the channels can be queried, filtering by event ID, process, logon type, or any other field contained in the generated event, giving the possibility to retrieve only the desired events.
+The ``eventchannel`` log format has been enhanced for Wazuh v3.8.0 with a new event data processing, keeping the old functionality and configuration. It allows to monitor every event generated at any Windows agent, returning every channel’s information in JSON format. As the old eventchannel, with this log_format the channels can be queried, filtering by event ID, process, logon type, or any other field contained in the generated event, giving the possibility to retrieve only the desired events.
 
 This new option uses the JSON decoder to draw the event fields, ensuring a new way to add rules easier than before. The default channels included at the Wazuh ruleset are Application, Security, System, Microsoft-Windows-Sysmon/Operational, Microsoft Antimalware (Microsoft Security Essentials), Microsoft-Windows-Windows Defender/Operational and Microsoft-Windows-Eventlog.
 

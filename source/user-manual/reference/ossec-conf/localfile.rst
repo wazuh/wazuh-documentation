@@ -136,8 +136,8 @@ For example, the following configuration will only process events with an ID of 
 
   <localfile>
     <location>System</location>
-     <log_format>eventchannel</log_format>
-     <query>Event/System[EventID=7040]</query>
+    <log_format>eventchannel</log_format>
+    <query>Event/System[EventID=7040]</query>
   </localfile>
 
 label
@@ -276,7 +276,7 @@ This specifies the format of the log being read. **It is required field.**
 
 .. warning::
 
-	The ``eventchannel`` and log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
+	The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
 
 .. warning::
 
