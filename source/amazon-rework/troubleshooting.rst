@@ -1,6 +1,6 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _old_amazon_troubleshooting:
+.. _amazon_troubleshooting:
 
 Troubleshooting
 ===============
