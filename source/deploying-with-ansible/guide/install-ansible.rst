@@ -164,7 +164,7 @@ Starting the service.
 
 	.. code-block:: console
 
-		# systemctl start ssh
+		# systemctl start sshd
 
 	b. For SysV Init:
 
@@ -241,7 +241,7 @@ We could see the authorized_keys content.
 
 	.. code-block:: console
 
-		# systemctl restart ssh
+		# systemctl restart sshd
 
 	b. For SysV Init:
 
