@@ -16,7 +16,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
     - Wazuh API 3.7.2
     - Elasticsearch 6.5.3
     - Logstash 6.5.3
-    - Kibana 6.5.3 port "**443**""
+    - Kibana 6.5.3
     - Wazuh app 3.7.2-6.5.3
 
 2. Import the OVA in your virtualization platform and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
@@ -39,7 +39,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
     # systemctl start logstash
     # systemctl status kibana
 
-5. In order to connect to the Kibana web user interface, login with http://OVA_IP_ADRESS:443 (where ``OVA_IP_ADDRESS`` is your system IP).
+5. In order to connect to the Kibana web user interface, login with https://OVA_IP_ADRESS (where ``OVA_IP_ADRESS`` is your system IP).
 
 .. note:: You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh3.7.2_6.5.3.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh3.7.2_6.5.3-disk1.vmdk>`_ disk.
 
