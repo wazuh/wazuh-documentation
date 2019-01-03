@@ -39,7 +39,7 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
     # systemctl start logstash
     # systemctl status kibana
 
-5. In order to connect to the Kibana web user interface, login with https://OVA_IP_ADRESS (where ``OVA_IP_ADRESS`` is your system IP).
+5. In order to connect to the Kibana web user interface, login with https://OVA_IP_ADDRESS (where ``OVA_IP_ADDRESS`` is your system IP).
 
 .. note:: You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh3.7.2_6.5.3.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh3.7.2_6.5.3-disk1.vmdk>`_ disk.
 
