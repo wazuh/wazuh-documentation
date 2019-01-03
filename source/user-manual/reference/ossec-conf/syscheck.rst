@@ -154,7 +154,7 @@ Attributes:
 +                         +------------------------------------------------------------+----------------------------------------------------+
 |                         | Allowed values                                             | Any integer between 0 and 320                      |
 +-------------------------+------------------------------------------------------------+----------------------------------------------------+
-| **follow_symbolic_link**| Follow symbolic links (directories or files). The default value is no. Available for UNIX.                  | 
+| **follow_symbolic_link**| Follow symbolic links (directories or files). The default value is "no". Available for UNIX.                  | 
 +                         +                                                                                                                 +
 |                         | If set, ``realtime`` works as usual (with symbolic links to directories, not files)                             |
 +                         +                                                                                                                 +
