@@ -16,25 +16,25 @@ Currently, it's not supported to use both integrations at the same time. If your
 
 For Elasticsearch you need to edit the file */etc/elasticsearch/elasticsearch.yml* in all your nodes and add the next line:
 
-.. code-block:: console
+.. code-block:: none
     
     xpack.security.enabled: false 
 
 Now restart Elasticsearch service:
 
-.. code-block:: console
+.. code-block:: none
 
     # systemctl restart elasticsearch
 
 For Kibana you need to edit the file */etc/kibana/kibana.yml* and add the next line:
 
-.. code-block:: console
+.. code-block:: none
 
     xpack.security.enabled: false 
 
 Now restart Kibana service:
 
-.. code-block:: console
+.. code-block:: none
 
     # systemctl restart kibana
 
@@ -45,13 +45,13 @@ Our default configuration is not using authentication for Logstash so we need to
 
 1. Stop Logstash service:
 
-.. code-block:: console
+.. code-block:: none
 
     # systemctl stop logstash
 
 2. Look for the output section and replace it with the following content:
 
-.. code-block:: console
+.. code-block:: none
 
     output {
         elasticsearch {
@@ -67,7 +67,7 @@ Our default configuration is not using authentication for Logstash so we need to
 
 3. Restart Logstash.
 
-.. code-block:: console
+.. code-block:: none
 
     # systemctl restart logstash
 
@@ -82,19 +82,19 @@ Search Guard must fit the Elasticsearch version like any other component from th
 
 The versioning syntaxis for Search Guard is as follow:
 
-.. code-block:: console
+.. code-block:: none
 
     com.floragunn:search-guard-6:<elastic_version>-<searchguard_version>
 
 This documentation is designed for our latest supported version, it's 6.5.4 so our right version is:
 
-.. code-block:: console
+.. code-block:: none
 
     com.floragunn:search-guard-6:6.5.4-24.0
 
 Since Search Guard is a plugin, we must install it such other Elasticsearch plugins:
 
-.. code-block:: console
+.. code-block:: none
 
     sudo -u elasticsearch \
     /usr/share/elasticsearch/bin/elasticsearch-plugin install \
@@ -102,7 +102,7 @@ Since Search Guard is a plugin, we must install it such other Elasticsearch plug
 
 Search Guard comes with a demo configuration and it's useful as starting point so let's install the demo configuration:
 
-.. code-block:: console
+.. code-block:: none
 
     $ cd /usr/share/elasticsearch/plugins/search-guard-6/tools/
     $ chmod a+x install_demo_configuration.sh
@@ -113,13 +113,13 @@ Search Guard comes with a demo configuration and it's useful as starting point s
 
 Restart Elasticsearch service:
 
-.. code-block:: console
+.. code-block:: none
 
     # systemctl restart elasticsearch
 
 You can check if it's working as expected using the next request (Search Guard needs about two minutes to create its internal indices so be patient):
 
-.. code-block:: console
+.. code-block:: none
 
     $ curl -k -u admin:admin https://<ELASTICSEARCH_HOST>:9200/_searchguard/authinfo?pretty
     {
@@ -170,7 +170,7 @@ Logstash has its own predefined user and its own predefined role. Since Wazuh cr
 
 1. Edit the Logstash role, located at */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles.yml*
 
-.. code-block:: console
+.. code-block:: none
 
     sg_logstash:
         cluster:
@@ -197,7 +197,7 @@ Logstash has its own predefined user and its own predefined role. Since Wazuh cr
 
 2. Apply the changes:
 
-.. code-block:: console
+.. code-block:: none
 
     # /usr/share/elasticsearch/plugins/search-guard-6/tools/sgadmin.sh \ 
     -cd /usr/share/elasticsearch/plugins/search-guard-6/sgconfig -icl -key \
@@ -210,7 +210,7 @@ Logstash has its own predefined user and its own predefined role. Since Wazuh cr
 
 3. Restart Elasticsearch and Logstash services:
 
-.. code-block:: console
+.. code-block:: none
 
     # systemctl restart elasticsearch
     # systemctl restart logstash
@@ -226,13 +226,13 @@ Kibana needs the Search Guard plugin too. Plugin versioning works like Elasticse
 
 1. Install the plugin as usual:
 
-.. code-block:: console
+.. code-block:: none
 
     $ sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/6.5.4-17/search-guard-kibana-plugin-6.5.4-17.zip
 
 2. Edit the Kibana configuration file, it's located at */etc/kibana/kibana.yml*, add the following lines:
 
-.. code-block:: console
+.. code-block:: none
 
     # Elasticsearch URL
     elasticsearch.url: "https://<ELASTICSEARCH_HOST>:9200" 
@@ -266,7 +266,7 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 1. Create a new Search Guard core role in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles.yml*
 
-.. code-block:: console
+.. code-block:: none
 
   sg_wazuh_admin:
     cluster:
@@ -319,13 +319,13 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 2. Create a hash for your password
 
-.. code-block:: console
+.. code-block:: none
 
   bash /usr/share/elasticsearch/plugins/search-guard-6/tools/hash.sh -p yourpassword
 
 3. Create a new user in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_internal_users.yml* using the hash from step 2.
 
-.. code-block:: console
+.. code-block:: none
 
   wazuhadmin:
     hash: $2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG
@@ -334,7 +334,7 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 4. Set the role mapping for Search Guard roles in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles_mapping.yml*
 
-.. code-block:: console
+.. code-block:: none
 
   sg_wazuh_admin:
     backendroles:
@@ -342,7 +342,7 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 5. Apply the changes:
 
-.. code-block:: console
+.. code-block:: none
 
     # /usr/share/elasticsearch/plugins/search-guard-6/tools/sgadmin.sh \ 
     -cd /usr/share/elasticsearch/plugins/search-guard-6/sgconfig -icl -key \
