@@ -154,13 +154,13 @@ Setting up Search Guard roles
 Search Guard works using core roles. Core roles are used by Search Guard user roles. Finally, user roles are used by Search Guard users. 
 
 - Roles file
+    - */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles.yml*
     - Core roles used under the hood by Search Guard
-    - /usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles.yml
 - Role mapping 
+    - */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles_mapping.yml*
     - Roles used by the Search Guard users. These roles can group multiple core roles.
-    - /usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles_mapping.yml
 - Internal users
-    - /usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_internal_users.yml
+    - */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_internal_users.yml*
     - These are the users that all the components will use. Each component uses a different user with its own roles. 
 
 Logstash role
@@ -168,7 +168,7 @@ Logstash role
 
 Logstash has its own predefined user and its own predefined role. Since Wazuh creates custom Elasticsearch indices using the *wazuh-alerts-3.x-\** prefix you must add that index prefix to the Logstash role.
 
-1. Edit the Logstash role, located at /usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles.yml
+1. Edit the Logstash role, located at */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles.yml*
 
 .. code-block:: console
 
@@ -353,7 +353,7 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 Now you have two Kibana users:
 
-- The Kibana server uses the predefined `admin` user from Search Guard (/etc/kibana/kibana.yml).
+- The Kibana server uses the predefined `admin` user from Search Guard (*/etc/kibana/kibana.yml*).
 - The Kibana UI `wazuhadmin` user can see all and modify `.wazuh` index.
 
 How it goes in the Wazuh app?
