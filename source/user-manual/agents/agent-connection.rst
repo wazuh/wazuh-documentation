@@ -3,7 +3,7 @@
 Checking connection with Manager
 ================================
 
-First you need to be sure that the Agent is poiting to Manager Address this is set on ``ossec.conf`` using ``<client>`` XML tag, for more see :ref:`Client reference <reference_ossec_client>`.
+First you need to be sure that the Agent is pointing to Manager Address this is set on ``ossec.conf`` using ``<client>`` XML tag, for more see :ref:`Client reference <reference_ossec_client>`.
 
 ::
 
