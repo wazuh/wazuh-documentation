@@ -143,6 +143,8 @@ This disables grouping of multiple alerts into the same email.
 email_log_source
 ^^^^^^^^^^^^^^^^
 
+.. versionadded:: 3.8.0
+
 This selects the alert file to be read from.
 
 +--------------------+---------------------------+
