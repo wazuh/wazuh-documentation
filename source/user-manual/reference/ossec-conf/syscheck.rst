@@ -273,7 +273,7 @@ alert_new_files
 Specifies if syscheck should alert when new files are created.
 
 +--------------------+----------+
-| **Default value**  | no       |
+| **Default value**  | yes      |
 +--------------------+----------+
 | **Allowed values** | yes, no  |
 +--------------------+----------+
