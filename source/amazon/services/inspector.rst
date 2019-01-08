@@ -13,10 +13,10 @@ Configuration
 Amazon configuration
 ^^^^^^^^^^^^^^^^^^^^
 
+Amazon Inspector does not need to store logs into a bucket. It uses API calls to retrieve the information. You must specify at least a region. Multiple regions can be added separated by commas.
+
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
-
-Amazon Inspector does not need to store logs into a bucket. It uses API calls to retrieve the information. You must specify at least a region. Multiple regions can be added separated by commas.
 
 1. Open the Wazuh configuration file and add the following configuration block to enable the integration with Inspector:
 

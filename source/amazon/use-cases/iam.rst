@@ -1,6 +1,6 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _amazon_use-cases_iam:
+.. _amazon_examples_iam:
 
 IAM use cases
 =============

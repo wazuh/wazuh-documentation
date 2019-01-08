@@ -1,6 +1,6 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _amazon_use-cases_s3:
+.. _amazon_examples_s3:
 
 S3 use cases
 ============

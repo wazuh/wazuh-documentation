@@ -1,8 +1,8 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _amazon_use-cases_vpc:
+.. _amazon_examples_vpc:
 
-VPC Use cases
+VPC use cases
 =============
 
 Using an Amazon VPC (Virtual Private Cloud), you can logically isolate some of your AWS assets from the rest of your cloud infrastructure. You can actually set up your own networks in the cloud. This is why, it is usually important to monitor changes to your VPCs.

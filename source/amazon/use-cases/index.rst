@@ -1,8 +1,8 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _amazon_use-cases:
+.. _amazon_examples:
 
-Use Cases
+Use cases
 =========
 
 Wazuh AWS rules focus on providing the desired visibility within the Amazon Web Services platform.
