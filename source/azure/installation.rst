@@ -2,7 +2,7 @@
 
 .. _azure_integration:
 
-Manager Requierements
+Manager Requirements
 =====================
 
 .. meta::
