@@ -18,7 +18,7 @@ Depending on the AWS service to be monitored, the necessary steps to follow are 
 .. topic:: Contents
 
   .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     cloudtrail
     config
@@ -28,4 +28,3 @@ Depending on the AWS service to be monitored, the necessary steps to follow are 
     kms
     inspector
     trusted-advisor
-    others

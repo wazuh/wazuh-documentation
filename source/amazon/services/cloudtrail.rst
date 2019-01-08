@@ -34,7 +34,7 @@ Amazon configuration
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
 
-1. Open the Wazuh configuration file and add the following configuration block to enable the integration with CloudTrail. Enter the IAM credentials you created before and the AWS Account ID of the CloudTrail logs to be processed:
+1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudTrail. Enter the IAM credentials you created before and the AWS Account ID of the CloudTrail logs to be processed:
 
 .. code-block:: xml
 
@@ -83,6 +83,3 @@ To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` optio
   .. code-block:: console
 
     # service wazuh-agent restart
-
-Examples
---------

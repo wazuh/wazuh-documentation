@@ -18,7 +18,7 @@ Amazon Inspector does not need to store logs into a bucket. It uses API calls to
 Wazuh configuration
 ^^^^^^^^^^^^^^^^^^^
 
-1. Open the Wazuh configuration file and add the following configuration block to enable the integration with Inspector:
+1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with Inspector:
 
 .. code-block:: xml
 
@@ -63,6 +63,3 @@ Wazuh configuration
   .. code-block:: console
 
     # service wazuh-agent restart
-
-Examples
---------

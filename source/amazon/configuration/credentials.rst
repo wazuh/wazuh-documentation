@@ -96,102 +96,99 @@ For example, the following credentials file defines three different profiles: *d
 
 .. code-block:: ini
 
-    [default]
-    aws_access_key_id=foo
-    aws_secret_access_key=bar
+  [default]
+  aws_access_key_id=foo
+  aws_secret_access_key=bar
 
-    [dev]
-    aws_access_key_id=foo2
-    aws_secret_access_key=bar2
+  [dev]
+  aws_access_key_id=foo2
+  aws_secret_access_key=bar2
 
-    [prod]
-    aws_access_key_id=foo3
-    aws_secret_access_key=bar3
-
+  [prod]
+  aws_access_key_id=foo3
+  aws_secret_access_key=bar3
 
 To use the *prod* profile in the AWS integration you would use the following bucket configuration:
 
 .. code-block:: xml
 
-    <bucket type="cloudtrail">
-      <name>my-bucket</name>
-      <aws_profile>prod</aws_profile>
-   </bucket>
-
+  <bucket type="cloudtrail">
+    <name>my-bucket</name>
+    <aws_profile>prod</aws_profile>
+  </bucket>
 
 IAM Roles
 ^^^^^^^^^
 
 .. warning::
-    This authentication method requires some credentials to be previously added to the configuration using any other authentication method.
+  This authentication method requires some credentials to be previously added to the configuration using any other authentication method.
 
 IAM Roles can also be used to access the S3 bucket. Follow these steps to create one:
 
 1. Go to Services > Security, Identity & Compliance > IAM.
 
 .. thumbnail:: ../../images/aws/aws-create-role-1.png
-    :align: center
-    :width: 100%
+  :align: center
+  :width: 100%
 
 2. Select Roles in the right menu and click on the *Create role* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-2.png
-    :align: center
-    :width: 100%
+  :align: center
+  :width: 100%
 
 3. Select S3 service and click on *Next: Permissions* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-4.png
-    :align: center
-    :width: 100%
+  :align: center
+  :width: 100%
 
 4. Select the previously created policy:
 
 .. thumbnail:: ../../images/aws/aws-create-role-5.png
-    :align: center
-    :width: 100%
+  :align: center
+  :width: 100%
 
 5. Click on *Create role* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-6.png
-    :align: center
-    :width: 100%
+  :align: center
+  :width: 100%
 
 6. Access to role summay and click on its policy name:
 
 .. thumbnail:: ../../images/aws/aws-create-role-7.png
-    :align: center
-    :width: 100%
+  :align: center
+  :width: 100%
 
 7. Add permissions so the new role can do *sts:AssumeRole* action:
 
 .. thumbnail:: ../../images/aws/aws-create-role-8.png
-    :align: center
-    :width: 100%
+  :align: center
+  :width: 100%
 
 8. Come back to the role's summary, go to *Trust relationships* tab and click on *Edit trust relationship* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-9.png
-    :align: center
-    :width: 100%
+  :align: center
+  :width: 100%
 
 9. Add your user to the *Principal* tag and click on *Update Trust Policy* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-10.png
-    :align: center
-    :width: 100%
-
+  :align: center
+  :width: 100%
 
 Once your role is created, just paste it on the bucket configuration:
 
 .. code-block:: xml
 
-    <bucket type="cloudtrail">
-      <name>my-bucket</name>
-      <access_key>xxxxxx</access_key>
-      <secret_key>xxxxxx</secret_key>
-      <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
-   </bucket>
+  <bucket type="cloudtrail">
+    <name>my-bucket</name>
+    <access_key>xxxxxx</access_key>
+    <secret_key>xxxxxx</secret_key>
+    <iam_role_arn>arn:aws:iam::xxxxxxxxxxx:role/wazuh-role</iam_role_arn>
+ </bucket>
 
 IAM roles for EC2 instances
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
