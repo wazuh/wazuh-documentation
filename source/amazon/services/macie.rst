@@ -7,11 +7,8 @@ Amazon Macie
 
 `Amazon Macie <https://aws.amazon.com/macie/>`_ is a security service that uses machine learning to automatically discover, classify, and protect sensitive data in AWS. Amazon Macie recognizes sensitive data such as personally identifiable information (PII) or intellectual property, and provides you with dashboards and alerts that give visibility into how this data is being accessed or moved. The fully managed service continuously monitors data access activity for anomalies, and generates detailed alerts when it detects risk of unauthorized access or inadvertent data leaks. Today, Amazon Macie is available to protect data stored in Amazon S3, with support for additional AWS data stores coming later this year.
 
-Configuration
--------------
-
 Amazon configuration
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 1. Go to Services > Storage > S3:
 
@@ -112,7 +109,7 @@ Amazon configuration
 16. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
 
 Wazuh configuration
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 

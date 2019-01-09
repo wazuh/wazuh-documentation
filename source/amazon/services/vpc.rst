@@ -7,11 +7,8 @@ Amazon VPC
 
 `Amazon Virtual Private Cloud <https://aws.amazon.com/vpc/?nc1=h_ls>`_ (Amazon VPC) lets you provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define. You have complete control over your virtual networking environment, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways. You can use both IPv4 and IPv6 in your VPC for secure and easy access to resources and applications.
 
-Configuration
--------------
-
 Amazon configuration
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 1. Go to Services > Storage > S3:
 
@@ -50,7 +47,7 @@ Amazon configuration
   :width: 100%
 
 Wazuh configuration
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 1. Open the configuration file and add the following block:
 

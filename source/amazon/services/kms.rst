@@ -7,11 +7,8 @@ AWS Key Management Service
 
 `AWS Key Management Service <https://aws.amazon.com/kms/>`_ (KMS) makes it easy for you to create and manage keys and control the use of encryption across a wide range of AWS services and in your applications. AWS KMS is a secure and resilient service that uses FIPS 140-2 validated hardware security modules to protect your keys. AWS KMS is integrated with AWS CloudTrail to provide you with logs of all key usage to help meet your regulatory and compliance needs.
 
-Configuration
--------------
-
 Amazon configuration
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 1. Go to Services > Storage > S3:
 
@@ -112,7 +109,7 @@ Amazon configuration
 16. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
 
 Wazuh configuration
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 

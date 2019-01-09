@@ -7,11 +7,8 @@ AWS CloudTrail
 
 `AWS CloudTrail <https://aws.amazon.com/cloudtrail/>`_ is a service that enables auditing of your AWS account. With CloudTrail, you can log, monitor, and retain account activity related to actions across your AWS infrastructure. This service provides event history of your AWS account activity, such as actions taken through the AWS Management Console, AWS SDKs, command line tools, and other AWS services.
 
-Configuration
--------------
-
 Amazon configuration
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 1. From your AWS console, choose “CloudTrail” from the Deployment & Management section:
 
@@ -32,7 +29,7 @@ Amazon configuration
     :width: 100%
 
 Wazuh configuration
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudTrail. Enter the IAM credentials you created before and the AWS Account ID of the CloudTrail logs to be processed:
 

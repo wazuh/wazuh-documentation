@@ -7,11 +7,8 @@ Amazon GuardDuty
 
 `Amazon GuardDuty <https://aws.amazon.com/guardduty/?nc1=h_ls>`_ is a threat detection service that continuously monitors for malicious or unauthorized behavior to help you protect your AWS accounts and workloads. It monitors for activity such as unusual API calls or potentially unauthorized deployments that indicate a possible account compromise. GuardDuty also detects potentially compromised instances or reconnaissance by attackers.
 
-Configuration
--------------
-
 Amazon configuration
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 1. Go to Services > Storage > S3:
 
@@ -112,7 +109,7 @@ Amazon configuration
 16. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
 
 Wazuh configuration
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
 1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
