@@ -13,15 +13,15 @@ Python Boto3 module is required on the system running the Wazuh module to pull A
 Pip
 ---
 
-Pip can be used as Python package manager to install the required module. In order to use it, we will start installing this tool.
+The required modules can be installed with Pip, the Python package manager. The majority of UNIX distributions have this tool availabel in their software repositories, but it can be compiled from sources too:
 
-a) CentOS/RHEL/Fedora:
+a) For **CentOS/RHEL/Fedora** systems:
 
 .. code-block:: console
 
   # yum install python-pip
 
-b) Debian/Ubuntu:
+b) For **Debian/Ubuntu** systems:
 
 .. code-block:: console
 
@@ -37,7 +37,7 @@ c) From sources:
 Boto3
 -----
 
-Boto3 is the official package supported by Amazon to manage AWS resources. It will be used to download the log messages from the S3 Bucket.
+`Boto3 <https://boto3.readthedocs.io/>`_ is the official package supported by Amazon to manage AWS resources. It will be used to download the log messages from the S3 Bucket. To install this package, execute the following command:
 
 .. code-block:: console
 

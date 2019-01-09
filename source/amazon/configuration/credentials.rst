@@ -8,7 +8,7 @@ Configuring AWS credentials
 Create an IAM User
 ------------------
 
-Wazuh will need a user with permissions to pull the CloudTrail log data from your S3 bucket. The easiest way to accomplish this is by creating a new IAM user for your account. We will only allow it to read data from the S3 bucket.
+Wazuh will need a user with permissions to pull log data from the S3 bucket. The easiest way to accomplish this is by creating a new IAM user for your account. We will only allow it to read data from the bucket.
 
 1. Create new user:
 
@@ -58,7 +58,7 @@ Raw output for the example policy:
   }
 
 .. note::
-  The s3:DeleteObject action is only required if the CloudTrail logs will be removed from the S3 bucket by the wodle.
+  The s3:DeleteObject action is only required if the logs will be removed from the S3 bucket by the ``aws-s3`` module.
 
 3. Attach policy:
 
@@ -79,18 +79,13 @@ Authenticating options
 
 Credentials can be loaded from different locations, you can either specify the credentials as they are in the previous block of configuration, assume an IAM role, or load them from other `Boto3 supported locations. <http://boto3.readthedocs.io/en/latest/guide/configuration.html#configuring-credentials>`_.
 
-Environment variables
-^^^^^^^^^^^^^^^^^^^^^
-
-If you're using a single AWS account for all your buckets this could be the most suitable option for you. You just have to define the following environment variables:
-
-* ``AWS_ACCESS_KEY_ID``
-* ``AWS_SECRET_ACCESS_KEY``
-
 Profiles
 ^^^^^^^^
 
 You can define profiles in your credentials file (``~/.aws/credentials``) and specify those profiles on the bucket configuration.
+
+.. note::
+  A region must be also specified on the ``credentials`` file in order to make it work.
 
 For example, the following credentials file defines three different profiles: *default*, *dev* and *prod*.
 
@@ -99,14 +94,17 @@ For example, the following credentials file defines three different profiles: *d
   [default]
   aws_access_key_id=foo
   aws_secret_access_key=bar
+  region=us-east-1
 
   [dev]
   aws_access_key_id=foo2
   aws_secret_access_key=bar2
+  region=us-east-1
 
   [prod]
   aws_access_key_id=foo3
   aws_secret_access_key=bar3
+  region=us-east-1
 
 To use the *prod* profile in the AWS integration you would use the following bucket configuration:
 
@@ -202,3 +200,11 @@ This is an example configuration:
   <bucket type="cloudtrail">
     <name>my-bucket</name>
   </bucket>
+
+Environment variables
+^^^^^^^^^^^^^^^^^^^^^
+
+If you're using a single AWS account for all your buckets this could be the most suitable option for you. You just have to define the following environment variables:
+
+* ``AWS_ACCESS_KEY_ID``
+* ``AWS_SECRET_ACCESS_KEY``
