@@ -42,7 +42,7 @@ When polling by ID, the manager will retrieve the agent key by querying its ID, 
 
   ./agent_key_pull.py id 001
 
-When polling by IP address, the manager will retrieve the agent key by querying it's IP address, so the input parameters that the program will receive are for example:
+When polling by IP address, the manager will retrieve the agent key by querying his IP address, so the input parameters that the program will receive are for example:
 
 ::
 
@@ -54,9 +54,9 @@ When polling by IP address, the manager will retrieve the agent key by querying 
   :width: 100%
 
 .. note::
-  Kepp in mind that the above examples represent how Wazuh will call your program.
+  Keep in mind that the above examples represent how Wazuh will call your program.
 
-When the ``socket`` tag is specified the module will send the parameters through the specified socket and read the response. The performance improvement over executing the program like explained above is significant.
+When the ``socket`` tag is specified the module will send the parameters through the specified socket and read the response. The performance improvement over executing the program as it is explained above is significant.
 
 The format in which the program will receive the data is ``option:value``, where option can be ``id`` or ``ip`` depending on the polling type.
 
@@ -289,7 +289,7 @@ The php script bellow shows an example of an agent key retrieval from the databa
       $conn->close();
   ?>
 
-The perl script bellow shows an example of an agent key retrieval from the database (MySQL).
+The perl script below shows an example of an agent key retrieval from the database (MySQL).
 
 .. code-block:: perl
 
