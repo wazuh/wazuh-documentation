@@ -31,7 +31,7 @@ Amazon configuration
 Wazuh configuration
 -------------------
 
-1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudTrail. Enter the IAM credentials you created before and the AWS Account ID of the CloudTrail logs to be processed:
+1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following configuration block to enable the integration with CloudTrail:
 
 .. code-block:: xml
 
@@ -48,7 +48,8 @@ Wazuh configuration
 
 To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` options within the ``aws-s3`` wodle. Bucket tags must have a ``type`` attribute which value can be ``cloudtrail`` to monitor CloudTrail logs or ``custom`` to monitor any other type of logs, for example, Firehose ones.
 
-*Check the user manual reference to read more details about each setting:* :ref:`AWS S3 settings <wodle_s3>`
+.. note::
+  Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
 
 2. Restart Wazuh in order to apply the changes:
 

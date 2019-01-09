@@ -127,6 +127,9 @@ Wazuh configuration
     </bucket>
   </wodle>
 
+.. note::
+  Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.
+
 2. Restart Wazuh in order to apply the changes:
 
 * If you're configuring a Wazuh manager:
