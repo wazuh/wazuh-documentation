@@ -123,6 +123,7 @@ Wazuh configuration
     <bucket type="custom">
       <name>wazuh-aws-wodle</name>
       <path>kms_compress_encrypted</path>
+      <aws_profile>default</aws_profile>
     </bucket>
   </wodle>
 

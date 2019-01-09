@@ -123,6 +123,7 @@ Wazuh configuration
     <bucket type="custom">
       <name>wazuh-aws-wodle</name>
       <path>macie</path>
+      <aws_profile>default</aws_profile>
     </bucket>
   </wodle>
 

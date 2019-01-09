@@ -42,8 +42,7 @@ Wazuh configuration
     <skip_on_error>yes</skip_on_error>
     <bucket type="cloudtrail">
       <name>wazuh-cloudtrail</name>
-      <access_key>insert_access_key</access_key>
-      <secret_key>insert_secret_key</secret_key>
+      <aws_profile>default</aws_profile>
     </bucket>
   </wodle>
 

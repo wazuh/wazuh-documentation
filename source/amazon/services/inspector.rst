@@ -25,9 +25,7 @@ Wazuh configuration
     <run_on_start>no</run_on_start>
     <skip_on_error>no</skip_on_error>
     <service type="inspector">
-        <access_key>insert_access_key</access_key>
-        <secret_key>insert_secret_key</secret_key>
-        <regions>us-east-1, eu-west-1</regions>
+      <aws_profile>default</aws_profile>
     </service>
   </wodle>
 

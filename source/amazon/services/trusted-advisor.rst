@@ -107,3 +107,52 @@ Amazon configuration
   :width: 100%
 
 16. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
+
+Wazuh configuration
+-------------------
+
+1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
+
+.. code-block:: xml
+
+  <wodle name="aws-s3">
+    <disabled>no</disabled>
+    <interval>10m</interval>
+    <run_on_start>yes</run_on_start>
+    <skip_on_error>yes</skip_on_error>
+    <bucket type="custom">
+      <name>wazuh-aws-wodle</name>
+      <path>trustedadvisor</path>
+      <aws_profile>default</aws_profile>
+    </bucket>
+  </wodle>
+
+2. Restart Wazuh in order to apply the changes:
+
+* If you're configuring a Wazuh manager:
+
+  a. For Systemd:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-manager restart
+
+* If you're configuring a Wazuh agent:
+
+  a. For Systemd:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-agent
+
+  b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-agent restart

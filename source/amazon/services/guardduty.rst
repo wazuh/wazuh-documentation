@@ -123,6 +123,7 @@ Wazuh configuration
     <bucket type="config">
       <name>wazuh-aws-wodle</name>
       <path>guardduty</path>
+      <aws_profile>default</aws_profile>
     </bucket>
   </wodle>
 

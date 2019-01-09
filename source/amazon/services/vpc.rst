@@ -61,7 +61,7 @@ Wazuh configuration
     <bucket type="vpcflow">
       <name>wazuh-aws-wodle</name>
       <path>vpc</path>
-      <regions>us-east-1</regions>
+      <aws_profile>default</aws_profile>
     </bucket>
   </wodle>
 
