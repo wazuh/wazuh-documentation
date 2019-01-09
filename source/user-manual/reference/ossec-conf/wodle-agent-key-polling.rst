@@ -106,7 +106,7 @@ Indicates the maximum size of the queue for polling external keys.
 +--------------------+------------------------------------------------------------+
 | **Default value**  | 1024                                                       |
 +--------------------+------------------------------------------------------------+
-| **Allowed values** | A positive number indicating the queue size [1024..220000] |
+| **Allowed values** | A positive number indicating the queue size [1..220000]    |
 +--------------------+------------------------------------------------------------+
 
 force_insert
