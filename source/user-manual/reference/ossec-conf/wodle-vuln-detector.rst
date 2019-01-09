@@ -152,24 +152,24 @@ The following configuration allows you to use the vulnerability database for Deb
 
 .. code-block:: xml
 
-	<wodle name="vulnerability-detector">
-	  <disabled>yes</disabled>
-	  <interval>5m</interval>
-	  <ignore_time>6h</ignore_time>
-	  <run_on_start>yes</run_on_start>
-	  <feed name="ubuntu-18">
-	    <disabled>yes</disabled>
-	    <update_interval>1h</update_interval>
-	  </feed>
-	  <feed name="redhat">
-	    <disabled>yes</disabled>
-	    <update_interval>1h</update_interval>
-    	<update_from_year>2014</update_from_year>
-	  </feed>
-	  <feed name="debian-9">
-	    <disabled>yes</disabled>
-	    <update_interval>1h</update_interval>
-	  </feed>
-	</wodle>
+  <wodle name="vulnerability-detector">
+    <disabled>yes</disabled>
+    <interval>5m</interval>
+    <ignore_time>6h</ignore_time>
+    <run_on_start>yes</run_on_start>
+    <feed name="ubuntu-18">
+      <disabled>yes</disabled>
+      <update_interval>1h</update_interval>
+    </feed>
+    <feed name="redhat">
+      <disabled>yes</disabled>
+      <update_interval>1h</update_interval>
+      <update_from_year>2014</update_from_year>
+    </feed>
+    <feed name="debian-9">
+      <disabled>yes</disabled>
+      <update_interval>1h</update_interval>
+    </feed>
+  </wodle>
 
 .. note:: See the :doc:`Vulnerability detector section<../../capabilities/vulnerability-detection>` to obtain more information about this module.
