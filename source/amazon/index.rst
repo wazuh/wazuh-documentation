@@ -22,8 +22,7 @@ In this section you can learn about this two methods, what they do and how to co
   .. toctree::
     :maxdepth: 2
 
-    configuration/index
     instances
     services/index
-    use-cases/index
+    configuration/index
     troubleshooting
