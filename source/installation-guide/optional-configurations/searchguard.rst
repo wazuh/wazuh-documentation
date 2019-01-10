@@ -10,15 +10,24 @@ Search Guard can be used to secure your Elasticsearch cluster by working with di
 Regardless of what authentication method you use, the basic flow is as follows:
 
 - A user wants to access an Elasticsearch cluster, for example by issuing a simple query.
+
 - Search Guard retrieves the user’s credentials from the request
-  - How the credentials are retrieved depends on the authentication method. For example, they can be extracted from HTTP Basic Authentication headers, from a JSON web token or from a Kerberos ticket.
+
+    - How the credentials are retrieved depends on the authentication method. For example, they can be extracted from HTTP Basic Authentication headers, from a JSON web token or from a Kerberos ticket.
+
 - Search Guard authenticates the credentials against the configured authentication backend(s).
+
 - Search Guard authorizes the user by retrieving a list of the user’s roles from the configured authorization backend
-  - Roles retrieved from authorization backends are called backend roles.
-  - For example, roles can be fetched from LDAP/AD, from a JSON web token or from the Search Guard internal user database.
+
+    - Roles retrieved from authorization backends are called backend roles.
+
+    - For example, roles can be fetched from LDAP/AD, from a JSON web token or from the Search Guard internal user database.
+
 - Search Guard maps the user and backend roles to Search Guard roles.
+
 - Search Guard determines the permissions associated with the Search Guard role and decides whether the action the user wants to perform is allowed or not.
-- If your are using Document- and Field-Level-Security, you can also apply more fine grained permissions based on documents and individual fields.
+
+- If your are using document and field level security, you can also apply more fine grained permissions based on documents and individual fields.
 
 Setting up Search Guard for Logstash
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
