@@ -48,7 +48,7 @@ Installing Linux agent
 
 4. The script will ask about what kind of installation you want. Type ``agent`` in order to install a Wazuh agent:
 
-  .. code-block:: bash
+  .. code-block:: none
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
