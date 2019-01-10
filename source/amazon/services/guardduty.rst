@@ -163,6 +163,10 @@ Wazuh configuration
 Use cases
 ---------
 
+- `Brute force attacks`_
+- `EC2 API Calls made from unsual network`_
+- `Compromised EC2 instance`_
+
 Amazon EC2 (Elastic Compute Cloud) provides scalable computing capacity in the cloud. When using this service, it is highly recommended to monitor it for intrusion attempts or other unauthorized actions performed against your cloud infrastructure.
 
 Below are some use cases for Wazuh rules built for EC2.

@@ -13,7 +13,7 @@ There are multiple ways to configure the AWS credentials:
 - `IAM Roles`_
 - `IAM roles for EC2 instances`_
 - `Environment variables`_
-- `Write the credentials into the configuration`_
+- `Insert the credentials into the configuration`_
 
 Create an IAM User
 ------------------
@@ -219,8 +219,8 @@ If you're using a single AWS account for all your buckets this could be the most
 * ``AWS_ACCESS_KEY_ID``
 * ``AWS_SECRET_ACCESS_KEY``
 
-Write the credentials into the configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Insert the credentials into the configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Another available option to set up credentials is writing them right into the Wazuh configuration file (``/var/ossec/etc/ossec.conf``), inside of the ``<bucket>`` block on the module configuration.
 

@@ -101,6 +101,9 @@ Wazuh configuration
 Use cases
 ---------
 
+- `Create a VPC`_
+- `Working with VPC Data`_
+
 Using an Amazon VPC (Virtual Private Cloud), you can logically isolate some of your AWS assets from the rest of your cloud infrastructure. You can actually set up your own networks in the cloud. This is why, it is usually important to monitor changes to your VPCs.
 
 Create a VPC

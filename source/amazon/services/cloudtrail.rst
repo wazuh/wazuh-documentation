@@ -84,6 +84,20 @@ To monitor logs for multiple AWS accounts, configure multiple ``<bucket>`` optio
 Use cases
 ---------
 
+`EC2`_
+  - `Run a new instance in EC2`_
+  - `Start instances in EC2`_
+  - `Stop instances in EC2`_
+  - `Create Security Groups in EC2`_
+  - `Allocate a new Elastic IP address`_
+  - `Associate a new Elastic IP address`_
+`IAM`_
+  - `Create user account`_
+  - `Create user account without permissions`_
+  - `User login failed`_
+  - `Possible break-in attempt`_
+  - `Login success`_
+
 EC2
 ^^^
 
@@ -207,7 +221,7 @@ When more than 4 authentication failures occur in a **360** second time window, 
   :width: 100%
 
 Login success
--------------
++++++++++++++
 
 After a successful login, the following event will be shown in Kibana. It shows the user who logged in, the browser it used and many other useful information:
 
