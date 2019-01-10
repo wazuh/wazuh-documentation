@@ -89,6 +89,7 @@ Installing Wazuh API
 
       # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
       # yum -y install nodejs
+      # npm config set user 0
 
   b) For Debian-based distributions:
 
@@ -96,6 +97,7 @@ Installing Wazuh API
 
       # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
       # apt-get install -y nodejs
+      # npm config set user 0
 
   .. note::
 
