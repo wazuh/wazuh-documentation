@@ -49,7 +49,7 @@ Amazon configuration
 Wazuh configuration
 -------------------
 
-1. Open the configuration file and add the following block:
+1. Open the Wazuh configuration file (``/var/ossec/etc/ossec.conf``) and add the following block:
 
 .. code-block:: xml
 
