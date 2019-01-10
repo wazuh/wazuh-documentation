@@ -3,14 +3,12 @@
 .. _agent-auth:
 
 agent-auth
-===========
+==========
 
-The agent-auth program is the client application used with :ref:`ossec-authd` to automatically add agents to a Wazuh manager.
+The ``agent-auth`` program is the client application used along with :ref:`ossec-authd` to automatically add agents to a Wazuh manager.
 
 .. warning::
-
-    By default there is no authentication or authorization involved in this transaction, so it is recommended that
-    this daemon only be run when a new agent is being added.
+  By default there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
 
 +---------------------+-------------------------------------------------------------------------------+
 | **-A <agent_name>** | Agent name to be used.                                                        |
@@ -46,7 +44,6 @@ The agent-auth program is the client application used with :ref:`ossec-authd` to
 | **-m <manager_ip>** | IP address of the manager.                                                    |
 +---------------------+-------------------------------------------------------------------------------+
 | **-P <password>**   | Use the specified password instead of searching for it at ``authd.pass``.     |
-|                     |                                                                               |
 |                     |                                                                               |
 |                     | If not provided in the file nor on the console,                               |
 |                     |                                                                               |
