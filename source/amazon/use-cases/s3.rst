@@ -1,0 +1,23 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
+.. _amazon_use-cases_s3:
+
+S3 use cases
+============
+
+Amazon S3 (Simple Storage Service) provides secure and reliable storage capacity in the cloud.  When using this service, it is highly recommended to monitor it to detect data loss attacks.
+
+Below are some use cases for Wazuh alerts built for S3.
+
+Bucket removal
+--------------
+
+Multiple alerts will be raised when a Bucket has been removed. Some examples are shown below:
+
+.. thumbnail:: ../../images/aws/aws-s3-1.png
+    :align: center
+    :width: 100%
+
+.. thumbnail:: ../../images/aws/aws-s3-1.png
+    :align: center
+    :width: 100%
