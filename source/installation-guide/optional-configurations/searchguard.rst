@@ -5,43 +5,25 @@
 Search Guard
 ============
 
-Search Guard gives you a robust security solution for your Elasticsearch integration. It covers from Filebeat/Logstash to Elasticsearch itself. 
+Search Guard can be used to secure your Elasticsearch cluster by working with different industry standard authentication techniques, like Kerberos, LDAP / Active Directory, JSON web tokens, TLS certificates and Proxy authentication / SSO.
 
-This plugin has a great role base access system such X-Pack security does. Reading this guide you will learn how to secure all the connections between the Elastic stack components, creating users, defining roles and how to make the Wazuh app work fine with all this stuff.
+Regardless of what authentication method you use, the basic flow is as follows:
 
-Disable X-Pack security
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Currently, it's not supported to use both integrations at the same time. If your environment is currently using any X-Pack security feature, you must disable it before continue reading this guide.
-
-For Elasticsearch you need to edit the file */etc/elasticsearch/elasticsearch.yml* in all your nodes and add the next line:
-
-.. code-block:: none
-    
-    xpack.security.enabled: false 
-
-Now restart Elasticsearch service:
-
-.. code-block:: none
-
-    # systemctl restart elasticsearch
-
-For Kibana you need to edit the file */etc/kibana/kibana.yml* and add the next line:
-
-.. code-block:: none
-
-    xpack.security.enabled: false 
-
-Now restart Kibana service:
-
-.. code-block:: none
-
-    # systemctl restart kibana
+- A user wants to access an Elasticsearch cluster, for example by issuing a simple query.
+- Search Guard retrieves the user’s credentials from the request
+  - How the credentials are retrieved depends on the authentication method. For example, they can be extracted from HTTP Basic Authentication headers, from a JSON web token or from a Kerberos ticket.
+- Search Guard authenticates the credentials against the configured authentication backend(s).
+- Search Guard authorizes the user by retrieving a list of the user’s roles from the configured authorization backend
+  - Roles retrieved from authorization backends are called backend roles.
+  - For example, roles can be fetched from LDAP/AD, from a JSON web token or from the Search Guard internal user database.
+- Search Guard maps the user and backend roles to Search Guard roles.
+- Search Guard determines the permissions associated with the Search Guard role and decides whether the action the user wants to perform is allowed or not.
+- If your are using Document- and Field-Level-Security, you can also apply more fine grained permissions based on documents and individual fields.
 
 Setting up Search Guard for Logstash
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Our default configuration is not using authentication for Logstash so we need to configure it properly. Edit your Logstash configuration file (located at /etc/logstash/conf.d/01-wazuh.conf):
+Our default configuration is not using authentication for Logstash so we need to configure it properly. Edit your Logstash configuration file (located at */etc/logstash/conf.d/01-wazuh.conf*):
 
 1. Stop Logstash service:
 
@@ -78,7 +60,21 @@ Our default configuration is not using authentication for Logstash so we need to
 Setting up Search Guard for Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Search Guard must fit the Elasticsearch version like any other component from the Elastic stack. Versioning is a bit different for Search Guard, please check your version at https://docs.search-guard.com/latest/search-guard-versions.
+Currently, it's not supported to use X-Pack security at the same time. If your environment is currently using any X-Pack security feature, you must disable it before continue reading this guide.
+
+For Elasticsearch you need to edit the file */etc/elasticsearch/elasticsearch.yml* in all your nodes and add the next line:
+
+.. code-block:: none
+    
+    xpack.security.enabled: false 
+
+Now restart Elasticsearch service:
+
+.. code-block:: none
+
+    # systemctl restart elasticsearch
+
+Search Guard must fit the Elasticsearch version like any other component from the Elastic stack. Versioning is a bit different for Search Guard, please check your version at `Search Guard versions <https://docs.search-guard.com/latest/search-guard-versions>`_.
 
 The versioning syntaxis for Search Guard is as follow:
 
@@ -217,10 +213,24 @@ Logstash has its own predefined user and its own predefined role. Since Wazuh cr
 
 At this point you have your Elasticsearch cluster secured using `user:password` authentication and encrypted communication. This means any Logstash pointing to some Elasticsearch node must be authenticated. Also, any request to the Elasticsearch API must use `https` plus `user:password` authentication.
 
-See https://docs.search-guard.com/latest/roles-permissions for details.
+See `roles permissions <https://docs.search-guard.com/latest/roles-permissions>`_ for details.
 
 Setting up Search Guard for Kibana
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Currently, it's not supported to use X-Pack security at the same time. If your environment is currently using any X-Pack security feature, you must disable it before continue reading this guide.
+
+For Kibana you need to edit the file */etc/kibana/kibana.yml* and add the next line:
+
+.. code-block:: none
+
+    xpack.security.enabled: false 
+
+Now restart Kibana service:
+
+.. code-block:: none
+
+    # systemctl restart kibana
 
 Kibana needs the Search Guard plugin too. Plugin versioning works like Elasticsearch plugins versioning, this means you must fit exactly your Kibana version. 
 
@@ -251,7 +261,7 @@ Now you can access your Kibana UI as usual and it will prompt for a login. You c
 
 Next steps we'll learn how to define new Kibana UI users and how to define specific roles for all of them depending on their needs.
 
-See https://search.maven.org/search?q=g:com.floragunn%20AND%20a:search-guard-kibana-plugin for details.
+See `Kibana Search Guard plugin <https://search.maven.org/search?q=g:com.floragunn%20AND%20a:search-guard-kibana-plugin>`_ for details.
 
 Kibana UI and the Wazuh app
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
