@@ -28,10 +28,6 @@ Download and install the Wazuh module from Puppet Forge:
 
 This module installs and configures Wazuh agent and manager.
 
-.. note:: 
-
-  Wazuh version 2.1.1 will be installed. We are working on the update to install 3.x.
-
 Install manager via Puppet
 -------------------------------------------------------------------
 
@@ -84,7 +80,7 @@ Here is an example of a manifest ``wazuh-manager.pp``::
      }
   }
 
-Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf. However, if you want to run it first, try the following command in the Puppet agent. 
+Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf. However, if you want to run it first, try the following command in the Puppet agent.
 
 .. code-block:: console
 
@@ -106,7 +102,7 @@ Here is an example of a manifest ``wazuh-agent.pp`` (please replace with your IP
 
  }
 
-Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf. However, if you want to run it first, try the following command in the Puppet agent. 
+Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in your Puppet master and it will be executed in the specified node after the *runinterval* time set in puppet.conf. However, if you want to run it first, try the following command in the Puppet agent.
 
 .. code-block:: console
 

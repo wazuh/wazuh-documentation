@@ -244,4 +244,4 @@ In case of belonging to multiple groups, the configuration files of every group 
 .. thumbnail:: ../../images/manual/multigroups.png
     :title: Multi-group shared files
     :align: center
-    :width: 100%
+    :width: 70%
