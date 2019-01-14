@@ -5,6 +5,9 @@
 Capabilities
 ============
 
+.. meta::
+  :description: Find here a deeper explanation of how each Wazuh capability works, configuration options for each one, frequently asked questions and some practical examples.
+
 In this section, you will find:
 
 - A deeper explanation of how each capability works.
@@ -36,3 +39,4 @@ If you find a problem, error or if you want to ask related questions, please con
     vulnerability-detection
     virustotal-scan/index
     osquery
+    agent-key-polling

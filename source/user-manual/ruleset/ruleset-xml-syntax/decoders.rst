@@ -26,24 +26,12 @@ decoder
 
 The attributes list below defines a decoder.
 
-+--------------------+-----+
-| **Default Value**  | n/a |
-+--------------------+-----+
-| **Allowed values** | n/a |
-+--------------------+-----+
-
-The attributes list below defines a decoder.
-
 +-----------+---------------------------+
 | Attribute | Description               |
 +===========+===========================+
-| id        | The ID of the decoder     |
-+-----------+---------------------------+
 | name      | The name of the decoder   |
 +-----------+---------------------------+
 | type      | The type of the decoder   |
-+-----------+---------------------------+
-| status    | The status of the decoder |
 +-----------+---------------------------+
 
 parent
@@ -66,11 +54,9 @@ Allow Wazuh to track events over multiple log messages based on a decoded id.
 
    Requires a regex populating the id field.
 
-+--------------------+-----+
-| **Default Value**  | n/a |
-+--------------------+-----+
-| **Allowed values** | n/a |
-+--------------------+-----+
++--------------------+--------------------+
+| **Example of use** | <accumulate />     |
++--------------------+--------------------+
 
 program_name
 ^^^^^^^^^^^^^

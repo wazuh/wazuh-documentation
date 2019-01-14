@@ -57,7 +57,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
 3. Within 20 minutes of connecting to the manager, each agent assigned to a group will receive the files contained in the *'dbms'* folder from the manager, including the ``agent.conf`` file that was modified in the previous step.  The length of time it takes for the manager to push these files to the agents depends on the size of the files, the number of agents in the group and the connection protocol used. For example, depending on network bandwidth and performance, it may take 8 minutes to receive a 10 MB folder (excluding **merged.mg** file) on 100 agents using UDP, however if TCP is used, this may move along much faster.
 
-4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager.
+4. Once a specific agent belongs to a group, it will be **automatically reassigned** to this group even if it is registered under another name or ID. This happens because, when the agent is re-registered, the checksum of ``merged.mg`` sent by the agent is compared with that of the other agents registered with the manager. However, this is not the default behaviour, and, if needed, it must be explicitely activated by the user in ``local_internal_options.conf`` by adding the option ``remoted.guess_agent_group=1`` (see section ``remoted`` in :doc:`internal options <../reference/internal-options>`).
 
 .. _multigroups:
 
@@ -244,4 +244,4 @@ In case of belonging to multiple groups, the configuration files of every group 
 .. thumbnail:: ../../images/manual/multigroups.png
     :title: Multi-group shared files
     :align: center
-    :width: 100%
+    :width: 70%

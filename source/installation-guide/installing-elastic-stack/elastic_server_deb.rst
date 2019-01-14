@@ -56,7 +56,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.5.0
+    # apt-get install elasticsearch=6.5.4
 
 2. Enable and start the Elasticsearch service:
 
@@ -86,7 +86,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.5.0",
+        "number" : "6.5.4",
         "build_flavor" : "default",
         "build_type" : "deb",
         "build_hash" : "053779d",
@@ -106,7 +106,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
 .. note::
 
@@ -123,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.5.0-1
+    # apt-get install logstash=1:6.5.4-1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -131,7 +131,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/logstash/01-wazuh-local.conf
 
     Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
 
@@ -143,7 +143,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
     .. code-block:: console
 
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/logstash/01-wazuh-remote.conf
 
 
 3. Enable and start the Logstash service:
@@ -178,13 +178,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=6.5.0
+    # apt-get install kibana=6.5.4
 
 2. Install the Wazuh app plugin for Kibana:
 
   .. code-block:: console
 
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.7.0_6.5.0.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.0_6.5.4.zip
 
   .. warning::
 

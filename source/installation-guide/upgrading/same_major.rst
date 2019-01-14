@@ -2,8 +2,8 @@
 
 .. _upgrading_same_major:
 
-Upgrade from the same major version
-=====================================
+Upgrade from the same major version (2.x)
+=========================================
 
 Use these instructions if you are upgrading your Wazuh installation within the same major version. For example, from 2.0.1 to 2.1.1.
 
@@ -23,7 +23,7 @@ b) Upgrade the Wazuh server on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update && sudo apt-get install --only-upgrade wazuh-manager
+    # apt-get update && sudo apt-get install wazuh-manager
 
 Upgrade the Wazuh API
 ---------------------
@@ -38,7 +38,7 @@ b) Upgrade the Wazuh API on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update && sudo apt-get install --only-upgrade wazuh-api
+    # apt-get update && sudo apt-get install wazuh-api
 
 
 Upgrade the Wazuh agent
@@ -54,7 +54,7 @@ b) Upgrade the Wazuh agent on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update && sudo apt-get install --only-upgrade wazuh-agent
+    # apt-get update && sudo apt-get install wazuh-agent
 
 
 Upgrade the Wazuh Kibana App

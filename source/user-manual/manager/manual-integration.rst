@@ -5,104 +5,122 @@
 Integration with external APIs
 ==============================
 
-The **Integrator** is a new daemon that allows Wazuh to connect to external APIs and alerting tools such as Slack and PagerDuty.
+The **Integrator** daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty and VirusTotal.
 
-.. versionadded:: 3.0.0
+Prerequisites
+-------------
 
-A new integration has been developed in Wazuh 3.0 that allows for the inspection of malicious files using the VirusTotal database.
+The Slack and VirusTotal integrations require the ``requests`` Python package. You can install it using one of the following methods:
 
-The complete documentation of this new feature can be found at the :doc:`VirusTotal integration section<../capabilities/virustotal-scan/index>`.
+a) For RPM systems:
+
+.. code-block:: console
+
+  # yum install python-requests
+
+b) For Debian systems:
+
+.. code-block:: console
+
+  # apt-get install python-requests
+
+c) Using the Python `pip` tool:
+
+.. code-block:: console
+
+  # pip install requests
 
 Configuration
 -------------
 
 The Integrator is not enabled by default, however, it can be enabled using the following command:
 
-  .. code-block:: console
+.. code-block:: console
 
-      # /var/ossec/bin/ossec-control enable integrator
+  # /var/ossec/bin/ossec-control enable integrator
 
-After enabling it, restart the Wazuh manager:
-
-  a. For Systemd:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-manager
-
-  b. For SysV Init:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
-
-Integrations are configured in the ``etc/ossec.conf`` file which is located inside your Wazuh installation directory.  Add the following information inside *<ossec_config> </ossec_config>* to configure integration:
+The integrations are configured on the ``ossec.conf`` file which is located inside the Wazuh installation folder (``/var/ossec/etc/``). To configure an integration, add the following configuration inside the *<ossec_config>* section:
 
 .. code-block:: xml
 
-    <integration>
-         <name> </name>
-         <hook_url> </hook_url>
-         <api_key> </api_key>
+  <integration>
+    <name> </name>
+    <hook_url> </hook_url> <!-- Required for Slack -->
+    <api_key> </api_key> <!-- Required for PagerDuty and VirusTotal -->
 
-      <!-- Optional filters -->
+    <!-- Optional filters -->
+    <rule_id> </rule_id>
+    <level> </level>
+    <group> </group>
+    <event_location> </event_location>
+  </integration>
 
-         <rule_id> </rule_id>
-         <level> </level>
-         <group> </group>
-         <event_location> </event_location>
-    </integration>
+After enabling the daemon and configure the integrations, restart the Wazuh manager to apply the changes:
 
-Integration with Slack
-----------------------
+a. For Systemd:
 
-In order to make the Slack integration work, we need to install the ``python-requests`` package:
+.. code-block:: console
 
-    a) For RPM systems:
+  # systemctl restart wazuh-manager
 
-    .. code-block:: console
+b. For SysV Init:
 
-        # yum install python-requests
+.. code-block:: console
 
-    b) For Debian systems:
+  # service wazuh-manager restart
 
-    .. code-block:: console
+The full configuration reference for the Integrator daemon can be found :ref:`here <reference_ossec_integration>`.
 
-        # apt-get install python-requests
+Slack
+-----
 
-    c) Using the Python `pip` tool:
+This integration allows to receive alerts into a Slack channel thanks to the `Incoming Webhooks <https://api.slack.com/incoming-webhooks>`_, a simple way to post messages from 3rd-party apps (in this case, Wazuh).
 
-    .. code-block:: console
-
-        # pip install requests
-
-.. code-block:: xml
-
-    <integration>
-      <name>slack</name>
-      <hook_url>https://hooks.slack.com/services/...</hook_url>
-      <alert_format>json</alert_format>
-    </integration>
-
-
-Integration with PagerDuty
----------------------------
+This is an example configuration for the Slack integration:
 
 .. code-block:: xml
 
-    <integration>
-      <name>pagerduty</name>
-      <api_key>MYKEY</api_key>
-    </integration>
+  <integration>
+    <name>slack</name>
+    <hook_url>https://hooks.slack.com/services/...</hook_url> <!-- Replace with your Slack hook URL -->
+    <alert_format>json</alert_format>
+  </integration>
 
+PagerDuty
+---------
 
-Integration with VirusTotal
-----------------------------
+`PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. This integration allows to create a service using its official API in order to receive Wazuh alerts on the Incidents Dashboard.
+
+This is an example configuration for the PagerDuty integration:
 
 .. code-block:: xml
 
-    <integration>
-      <name>virustotal</name>
-      <api_key>VirusTotal_API_Key</api_key>
-      <group>syscheck,</group>
-    </integration>
+  <integration>
+    <name>pagerduty</name>
+    <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
+  </integration>
+
+As seen on the screenshot below, alerts start coming into the dashboard:
+
+.. thumbnail:: ../../images/manual/integration/pagerduty.png
+  :title: PagerDuty Incidents Dashboard
+  :align: center
+  :width: 80%
+
+VirusTotal
+----------
+
+.. versionadded:: 3.0.0
+
+This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this at the :ref:`VirusTotal integration <virustotal-scan>` page.
+
+This is an example configuration for the VirusTotal integration:
+
+.. code-block:: xml
+
+  <integration>
+    <name>virustotal</name>
+    <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
+    <group>syscheck</group>
+    <alert_format>json</alert_format>
+  </integration>

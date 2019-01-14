@@ -30,9 +30,12 @@ Installing Wazuh manager
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.7.0.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.8.0.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
+
+  .. warning::
+    If you want to enable the database output, :ref:`check out <manual_database_output>` this section before running the installation script.
 
   .. code-block:: console
 
@@ -43,7 +46,7 @@ Installing Wazuh manager
 
 4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
 
-  .. code-block:: bash
+  .. code-block:: none
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
 
@@ -86,6 +89,7 @@ Installing Wazuh API
 
       # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
       # yum -y install nodejs
+      # npm config set user 0
 
   b) For Debian-based distributions:
 
@@ -93,6 +97,7 @@ Installing Wazuh API
 
       # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
       # apt-get install -y nodejs
+      # npm config set user 0
 
   .. note::
 
@@ -104,7 +109,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.7.0/install_api.sh && bash ./install_api.sh download
+      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.8.0/install_api.sh && bash ./install_api.sh download
 
 3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions.
 
