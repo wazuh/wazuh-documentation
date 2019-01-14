@@ -405,7 +405,7 @@ Example of log_analytics configuration
 
             <request>
                 <tag>azure-activity</tag>
-                <query>AzureActivity | where SubscriptionId == "2d7...61d </query>
+                <query>AzureActivity | where SubscriptionId == 2d7...61d </query>
                 <workspace>d6b...efa</workspace>
                 <time_offset>36h</time_offset>
             </request>
@@ -785,7 +785,7 @@ Example of all integration
 
             <request>
                 <tag>azure-activity</tag>
-                <query>AzureActivity | where SubscriptionId == "2d7...61d </query>
+                <query>AzureActivity | where SubscriptionId == 2d7...61d </query>
                 <workspace>d6b...efa</workspace>
                 <time_offset>36h</time_offset>
             </request>
