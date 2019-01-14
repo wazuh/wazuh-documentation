@@ -31,41 +31,39 @@ Procedure
 
 Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) along with the default one, ``wazuh-alerts-3.x-*``. Follow these steps:
 
-1. First of all, stop the Logstash and Kibana services:
+1. First of all, stop the Logstash service:
 
   a. For Systemd:
 
   .. code-block:: console
 
     # systemctl stop logstash
-    # systemctl stop kibana
 
   b. For SysV Init:
 
   .. code-block:: console
 
     # service logstash stop
-    # service kibana stop
 
 2. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
 
   .. code-block:: console
 
-    # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json
+    # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/elasticsearch/wazuh-elastic6-template-alerts.json
 
 3. Open the template file and locate this line:
 
   .. code-block:: none
 
-    "template": "wazuh-alerts-3.x-*",
+    "index_patterns": ["wazuh-alerts-3.x-*"],
 
-  In case it's present, remove it and add the following:
+  Add your custom pattern:
 
   .. code-block:: none
 
-    "index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-3.x-*"],
+    "index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],
 
-  If your template is already using the ``"index_patterns"`` setting, add the custom one to the list, separated by commas.
+  If your template is a custom template and it's still using the ``"template": "wazuh-alerts-3.x-*",`` setting, remove that line, just use ``"index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],``.
 
   The asterisk character (``*``) on the index patterns is important because Logstash will create indices in Elasticsearch using a name that follows this pattern, which is necessary to apply the proper format to visualize the alerts on the Wazuh app.
 
@@ -102,25 +100,35 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
   This will make the app to automatically create and/or select the new index pattern.
 
-8. Restart the Logstash and Kibana services:
+  Restart the Kibana service:
 
   a. For Systemd:
 
   .. code-block:: console
 
-    # systemctl restart logstash
     # systemctl restart kibana
 
   b. For SysV Init:
 
   .. code-block:: console
 
-    # service logstash restart
     # service kibana restart
 
-9. After waiting some minutes, open up again the Kibana interface on your web browser. If you go to *Management -> Index patterns*, you should see your new index pattern created and ready to use.
+8. Restart the Logstash service:
 
-If the pattern is not present, just create a new one using the same name used on the Elasticsearch template, and make sure to use ``@timestamp`` as the Time Filter field name.
+  a. For Systemd:
+
+  .. code-block:: console
+
+    # systemctl restart logstash
+
+  b. For SysV Init:
+
+  .. code-block:: console
+
+    # service logstash restart
+
+If the pattern is not present in Kibana UI, just create a new one using the same name used on the Elasticsearch template, and make sure to use ``@timestamp`` as the Time Filter field name.
 
 You can also open the :ref:`Pattern <kibana_index_pattern>` section on the Wazuh app, and make sure that the new one is selected.
 
