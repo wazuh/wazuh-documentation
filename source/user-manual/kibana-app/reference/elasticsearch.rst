@@ -64,6 +64,8 @@ The ``wazuh-alerts-3.x-`` indices
 
 They are auto-generated and they store the Wazuh alerts. Logstash will send data to Elasticsearch and will create an index per day.
 
+If you want to change the name of these indices with a custom one, you can follow :ref:`this guide <kibana_configure_indices>`.
+
 The ``wazuh-monitoring-3.x-`` indices
 -------------------------------------
 
