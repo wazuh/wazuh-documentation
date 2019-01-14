@@ -928,7 +928,7 @@ Returns the list of agents in a group.
 	            "dateAdd": "2018-10-11 09:38:47",
 	            "node_name": "node02",
 	            "manager": "manager",
-	            "version": "Wazuh v3.7.2",
+	            "version": "Wazuh v3.8.0",
 	            "lastKeepAlive": "2018-10-11 13:58:08",
 	            "os": {
 	               "major": "16",
@@ -1660,7 +1660,7 @@ Returns a list with the available agents.
 	            "manager": "manager",
 	            "node_name": "node02",
 	            "dateAdd": "2018-10-11 09:38:47",
-	            "version": "Wazuh v3.7.2",
+	            "version": "Wazuh v3.8.0",
 	            "lastKeepAlive": "2018-10-11 13:58:08",
 	            "os": {
 	               "major": "16",
@@ -1681,7 +1681,7 @@ Returns a list with the available agents.
 	            "manager": "manager",
 	            "node_name": "node01",
 	            "dateAdd": "2018-10-11 09:37:23",
-	            "version": "Wazuh v3.7.2",
+	            "version": "Wazuh v3.8.0",
 	            "lastKeepAlive": "9999-12-31 23:59:59",
 	            "os": {
 	               "major": "18",
@@ -1764,7 +1764,7 @@ Returns various information from an agent.
 	      "manager": "manager",
 	      "node_name": "node01",
 	      "dateAdd": "2018-10-11 09:37:23",
-	      "version": "Wazuh v3.7.2",
+	      "version": "Wazuh v3.8.0",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
 	         "major": "18",
