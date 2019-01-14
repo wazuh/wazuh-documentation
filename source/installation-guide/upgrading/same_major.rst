@@ -23,7 +23,7 @@ b) Upgrade the Wazuh server on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update && sudo apt-get install --only-upgrade wazuh-manager
+    # apt-get update && sudo apt-get install wazuh-manager
 
 Upgrade the Wazuh API
 ---------------------
@@ -38,7 +38,7 @@ b) Upgrade the Wazuh API on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update && sudo apt-get install --only-upgrade wazuh-api
+    # apt-get update && sudo apt-get install wazuh-api
 
 
 Upgrade the Wazuh agent
@@ -54,7 +54,7 @@ b) Upgrade the Wazuh agent on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update && sudo apt-get install --only-upgrade wazuh-agent
+    # apt-get update && sudo apt-get install wazuh-agent
 
 
 Upgrade the Wazuh Kibana App

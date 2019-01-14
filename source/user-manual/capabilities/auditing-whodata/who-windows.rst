@@ -76,12 +76,15 @@ Alert in log format:
     *****
     Attributes:
      - Size: 857
-     - Permissions: 100666
      - Date: Wed Jul 11 17:43:39 2018
      - User: SYSTEM (S-1-5-18)
      - MD5: e71b0c5cf0e3a8d1848312f1394e448f
      - SHA1: 0f89ca73534037c5cf23193d032c93cbf0fc4af4
      - SHA256: b9cc339e89fc5d8890cfb8a47249b3b515f5982d8a7348e2e5eb104aec232c9f
+     - File attributes: ARCHIVE, COMPRESSED, HIDDEN, NOT_CONTENT_INDEXED
+     - Permissions:
+       standar_user  (DENIED) - FILE_READ_DATA, FILE_WRITE_DATA, FILE_APPEND_DATA, FILE_READ_EA
+       SYSTEM  (ALLOWED) - FILE_READ_DATA, FILE_WRITE_DATA, FILE_APPEND_DATA, FILE_READ_EA, FILE_WRITE_EA, FILE_EXECUTE, FILE_READ_ATTRIBUTES, FILE_WRITE_ATTRIBUTES, FILE_DELETE, DELETE, READ_CONTROL, WRITE_DAC, WRITE_OWNER, SYNCHRONIZE
 
 
 Alert in JSON format:
@@ -122,7 +125,36 @@ Alert in JSON format:
             "path":"C:\\Windows\\System32\\drivers\\etc\\hosts",
             "size_before":"825",
             "size_after":"857",
-            "perm_after":"100666",
+            "win_perm_after":[
+                {
+                    "name":"standar_user",
+                    "denied":[
+                        "FILE_READ_DATA",
+                        "FILE_WRITE_DATA",
+                        "FILE_APPEND_DATA",
+                        "FILE_READ_EA"
+                    ]
+                },
+                {
+                    "name":"SYSTEM",
+                    "allowed":[
+                        "FILE_READ_DATA",
+                        "FILE_WRITE_DATA",
+                        "FILE_APPEND_DATA",
+                        "FILE_READ_EA",
+                        "FILE_WRITE_EA",
+                        "FILE_EXECUTE",
+                        "FILE_READ_ATTRIBUTES",
+                        "FILE_WRITE_ATTRIBUTES",
+                        "FILE_DELETE",
+                        "DELETE",
+                        "READ_CONTROL",
+                        "WRITE_DAC",
+                        "WRITE_OWNER",
+                        "SYNCHRONIZE"
+                    ]
+                }
+            ],
             "uid_after":"S-1-5-18",
             "md5_before":"76eae1f63f77154db8c9dd884a47e994",
             "md5_after":"e71b0c5cf0e3a8d1848312f1394e448f",
@@ -130,6 +162,12 @@ Alert in JSON format:
             "sha1_after":"0f89ca73534037c5cf23193d032c93cbf0fc4af4",
             "sha256_before":"f8d35672114862f660424d8436d621261279703a65bc8ac3146016d5b023520b",
             "sha256_after":"b9cc339e89fc5d8890cfb8a47249b3b515f5982d8a7348e2e5eb104aec232c9f",
+            "attrs_after":[
+                "ARCHIVE",
+                "COMPRESSED",
+                "HIDDEN",
+                "NOT_CONTENT_INDEXED"
+            ],
             "uname_after":"SYSTEM",
             "mtime_before":"2018-07-11T17:42:29",
             "mtime_after":"2018-07-11T17:43:39",

@@ -95,7 +95,7 @@ Attributes
 +-------------------+-------------------------------------------------------------+
 | **path**          | Use the specified policy file (DataStream, XCCDF or OVAL).  |
 |                   |                                                             |
-|                   | Default path: /var/ossec/wodles/oscap/policies              |
+|                   | Default path: /var/ossec/wodles/oscap/content               |
 +-------------------+-------------------------------------------------------------+
 | **timeout**       | Timeout for the evaluation (in seconds).                    |
 |                   |                                                             |
@@ -109,7 +109,7 @@ Attributes
 +-------------------+-------------------------------------------------------------+
 | **cpe**           | CPE dictionary file.                                        |
 |                   |                                                             |
-|                   | Default path: /var/ossec/wodles/oscap/policies              |
+|                   | Default path: /var/ossec/wodles/oscap/content               |
 +-------------------+-------------------------------------------------------------+
 | **profile**       | Select profile.                                             |
 +-------------------+-------------------------------------------------------------+

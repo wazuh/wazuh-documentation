@@ -46,6 +46,7 @@ Daemon multithreaded internal structure
     c. Rootcheck event decoder queue.
     d. Hostinfo event decoder queue.
     e. Event decoder queue.
+    f. Windows event decoder queue.
 
     If the selected queue is full, the event is dropped.
 
@@ -136,6 +137,14 @@ This default configuration can be changed on the ``internal_options.conf`` file 
 |                                              |               | Any integer between 0 and 32.                                       |
 +----------------------------------------------+---------------+---------------------------------------------------------------------+
 |     **analysisd.rule_matching_threads**      | Description   | Number of rule matching threads.                                    |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Default value | 0                                                                   |
++                                              +---------------+---------------------------------------------------------------------+
+|                                              | Allowed value | 0: Sets the number of threads according to the number of cpu cores. |
++                                              +               +---------------------------------------------------------------------+
+|                                              |               | Any integer between 0 and 32.                                       |
++----------------------------------------------+---------------+---------------------------------------------------------------------+
+|     **analysisd.winevt_threads**             | Description   | Number of rule matching threads.                                    |
 +                                              +---------------+---------------------------------------------------------------------+
 |                                              | Default value | 0                                                                   |
 +                                              +---------------+---------------------------------------------------------------------+
