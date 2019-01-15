@@ -20,7 +20,7 @@ Additions and changes related to Wazuh manager and Wazuh agent components.
 
 Adding new kind of buckets to your integration is as simple as adding an entry like this to your AWS configuration:
 
-.. code-block:: console
+.. code-block:: xml
 
   <bucket type="config">
     <name>wazuh-aws-wodle</name>
@@ -91,7 +91,7 @@ Wazuh API
 
 - Add/remove multiple agents to/from a group at the same time. 
 
-.. code-block:: console
+.. code-block:: javascript
 
   curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' \
       "http://localhost:55000/agents/group/staging?pretty"
@@ -109,7 +109,7 @@ Wazuh API
 
 - Add/remove multiple agents to/from a group at the same time. 
 
-.. code-block:: console
+.. code-block:: javascript
 
   curl -u foo:bar -X DELETE -H "Content-Type:application/json" -d '{"ids":["002","001"]}' \
       "http://localhost:55000/agents/group/staging?pretty"
@@ -126,16 +126,19 @@ Wazuh API
 
 - Edit group configuration file (agent.conf) uploading XML file with new configuration.
 
-.. code-block:: console
+.. code-block:: javascript
 
   curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @/tmp/agent.conf.xml \
       "http://localhost:55000/agents/groups/default/files/agent.conf?pretty"
 
-      Missing output
+  {
+    "error": 0,
+    "data": "Agent configuration was updated successfully"
+  }
 
 - Added a new parameter named format for fetching the agent.conf content in JSON/XML format depending on the parameter value.
 
-.. code-block:: console
+.. code-block:: javascript
 
   curl -u foo:bar -X GET "http://localhost:55000/agents/groups/default/files/agent.conf?format=xml&pretty"
   {
