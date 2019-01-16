@@ -45,7 +45,7 @@ Windows agents improvements
 - The inventory features for Windows are now using native queries directly to the Windows API, this adds value for this feature, enriches the inventory for Windows and guarantees that you can check your Windows agent accurately.
 - Windows events are now being fetched in JSON format, which provides a useful format for third-party software and makes Wazuh be more optimized while analyzing Windows events. This improves Windows alerts result and analyzing performance. From this version, Windows agents apply a new rule set
 
-.. thumbnail:: ../images/release-notes/3.8.0/event-channel-event.png
+.. thumbnail:: ../images/release-notes/3.8.0/event-channel-alert.png
   :title: New Windows alerts
   :align: center
   :width: 100%
