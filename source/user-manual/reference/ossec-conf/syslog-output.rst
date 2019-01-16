@@ -29,7 +29,7 @@ Options
 server
 ^^^^^^
 
-The IP Address of the syslog server.
+The IP Address or hostname of the syslog server.
 
 +--------------------+----------------------+
 | **Default value**  | n/a                  |
