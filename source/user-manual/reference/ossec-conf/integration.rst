@@ -88,7 +88,7 @@ This filters alerts by rule ID.
 group
 ^^^^^
 
-This filters alerts by rules. For the VirusTotal integration, only rules from the `syscheck` group are available. Follows the `OS_Regex Syntax`_.
+This filters alerts by rule group. For the VirusTotal integration, only rules from the `syscheck` group are available. Follows the `OS_Regex Syntax`_.
 
 +--------------------+---------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                         |
