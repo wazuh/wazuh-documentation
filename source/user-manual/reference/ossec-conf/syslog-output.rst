@@ -63,7 +63,7 @@ The minimum level of the alerts to be forwarded.
 group
 ^^^^^^
 
-Group of the alerts to be forwarded.
+Rule group of the alerts to be forwarded.
 
 +--------------------+--------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                      |
