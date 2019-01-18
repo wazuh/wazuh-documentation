@@ -46,7 +46,7 @@ Intrusion detection
 * Increased maximum message size from 6KB to 64KB (being able to analyze much larger log messages).
 * Updated ruleset with new log analysis rules and decoders.
 * Native rules for Suricata, making use of JSON decoder.
-* Integration with `Owhl project <https://www.owlh.net>`_ for unified NIDS management.
+* Integration with `OwlH project <https://www.owlh.net>`_ for unified NIDS management.
 * Support for IP reputation databases (e.g. `AlienVault OTX <https://www.alienvault.com/open-threat-exchange>`_).
 * Native integration with Linux auditing kernel subsystem and Windows audit policies to capture who-data for FIM events.
 
@@ -64,7 +64,7 @@ Regulatory compliance
 * Alert mapping with PCI DSS and GPG13 requirements.
 * Compliance dashboards for `Elastic Stack <https://www.elastic.co>`_, provided by Wazuh Kibana plugin.
 * Compliance dashboards for `Splunk <https://www.splunk.com>`_, provided by Wazuh app.
-* Use of `Owhl project <https://www.owlh.net>`_ Suricata mapping for compliance.
+* Use of `OwlH project <https://www.owlh.net>`_ Suricata mapping for compliance.
 * SHA256 hashes used for file integrity monitoring (in addition to to MD5 and SHA1).
 * Module for integration with `OpenScap <https://www.open-scap.org>`_, used for configuration assessment.
 
