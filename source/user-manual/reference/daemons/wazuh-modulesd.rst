@@ -48,6 +48,9 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 
   The Osquery wodle provides the user an operating system instrumentation tool that makes low-level operating system analytics and monitoring both efficient and intuitive using SQL-based queries. For more information, read through the documentation for :doc:`osquery integration <../../capabilities/osquery>`.
 
+.. topic:: Key polling wodle
+
+  The key polling wodle allows you to fetch a client key from an external source, for example, a database. This provides a mechanism to auto-register agents when they are not registered on a manager instance but reporting to it.
 
 wazuh-modulesd options
 ----------------------

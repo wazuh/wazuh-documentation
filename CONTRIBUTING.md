@@ -71,7 +71,7 @@ This will delete the contents from `/wazuh-documentation/build/html`.
 ## How the branches work
 
 - Our latest stable documentation is found on `master`. **You should never submit a pull request to this branch.**
-- We actively work on `3.7` for new additions, improvements of existing documentation, or typo fixes.
+- We actively work on `3.8` for new additions, improvements of existing documentation, or typo fixes.
   - All new additions to this branch will be compatible with the latest stable release. That means we won't include documentation for a future release that doesn't work with the last official one.
   - The work for a future release is merged on a different branch until we make the final decission of what the next release will be.
 - Every other branch different from `master` or `3.x` is a feature branch, something that we're currently working on and that will be merged in the future.

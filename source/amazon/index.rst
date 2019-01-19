@@ -2,23 +2,27 @@
 
 .. _amazon:
 
-Using Wazuh to Monitor AWS
+Using Wazuh to monitor AWS
 ==========================
 
 .. meta::
-  :description: Discover how Wazuh can help you to monitor your Amazon AWS infrastructure.
+  :description: Discover how Wazuh can help you to monitor your Amazon Web Services (AWS) infrastructure.
 
 .. versionadded:: 3.2.0
 
-Wazuh provides the ability to read AWS logs directly from AWS S3 buckets. Amazon support is now a built-in Wazuh capability, giving you the ability to search, analyze, and alert on AWS CloudTrail, GuardDuty, Macie, IAM, and VPC Flow log data.
+Wazuh helps to increase the security of an AWS infrastructure in two different, complementary ways:
 
-This section provides instructions to configure the integration with S3 with both CloudTrail and Custom S3 buckets. In addition, it explains different use cases, as examples of how the rules can be customized for alerting on specific events.
+- **Installing the Wazuh agent on the instances** to monitor the activity inside them. It collects different types of system and application data and forwards it to the Wazuh manager. Different agent tasks or processes are used to monitor the system in different ways (e.g., monitoring file integrity, reading system log messages and scanning system configurations).
+- **Monitoring AWS services** to collect and analyze log data about the infrastructure. Thanks to the module for AWS, Wazuh can trigger alerts based on the events obtained from these services, which provide rich and complete information about the infrastructure, such as the instances configuration, unauthorized behavior, data stored on S3, and more.
+
+In this section you can learn about this two methods, what they do and how to configure and set them up.
 
 .. topic:: Contents
 
-    .. toctree::
-       :maxdepth: 2
+  .. toctree::
+    :maxdepth: 2
 
-       installation
-       use-cases/index
-       troubleshooting
+    instances
+    services/index
+    configuration/index
+    troubleshooting

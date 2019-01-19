@@ -29,13 +29,9 @@ The attributes list below defines a decoder.
 +-----------+---------------------------+
 | Attribute | Description               |
 +===========+===========================+
-| id        | The ID of the decoder     |
-+-----------+---------------------------+
 | name      | The name of the decoder   |
 +-----------+---------------------------+
 | type      | The type of the decoder   |
-+-----------+---------------------------+
-| status    | The status of the decoder |
 +-----------+---------------------------+
 
 parent
