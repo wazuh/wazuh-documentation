@@ -141,11 +141,11 @@ On that visualization you can look for peaks in your network, once you found a p
 .. note::
   If while configuring the permissions policy we're asked for special permissions, try adding at your policy file:
 
-.. code-block:: xml
+  .. code-block:: xml
 
-  {
-    "Sid": "VisualEditor0",
-    "Effect": "Allow",
-    "Action": "ec2:DescribeFlowLogs",
-    "Resource": "*"
-  }
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": "ec2:DescribeFlowLogs",
+      "Resource": "*"
+    }
