@@ -6,12 +6,14 @@ Splunk Cluster
 ==============
 
 .. note::
-  To know how to mount a Splunk cluster, visit the `Official Splunk Documentation <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_
+  To know how to mount a Splunk cluster, visit the `Official Splunk Documentation. <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_
 
 Installing the Wazuh App
 ------------------------
 
-The Wazuh App will be installed in the deployer.
+After we have followed all the steps in the `Official Splunk Documentation, <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_  the next step is to install the Wazuh App into the cluster:
+
+The Wazuh App will be installed in the machine/s that act as the deployer.
 
 .. note::
   We need to eliminate "SplunkAppForWazuh/default/indexes.conf" so it does not create automatic indexes in the search-heads.
@@ -30,7 +32,7 @@ Once we have eliminated that file, we create the file "SplunkAppForWazuh/default
   [tcpout]
   defaultGroup = cluster1_tcp
 
-Once outputs.conf has been created, we copy the app in the deployer in the directory:
+Once outputs.conf has been created, we copy the app in the deployer in the following directory:
 
 .. code-block:: console
 
