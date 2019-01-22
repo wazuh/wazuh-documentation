@@ -11,9 +11,15 @@ Splunk Cluster
 Installing the Wazuh App
 ------------------------
 
-After we have followed all the steps in the `Official Splunk Documentation, <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_  the next step is to install the Wazuh App into the cluster:
+After we have followed all the steps in the `Official Splunk Documentation, <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_  the next step is to install the Wazuh App into the search-head cluster:
 
 The Wazuh App will be installed in the machine/s that act as the deployer.
+
+.. thumbnail:: ../images/splunk_cluster/Searchhead_cluster.png
+    :title: Splunk Cluster with Wazuh installed architecture.
+    :align: center
+    :width: 100%
+
 
 .. note::
   We need to eliminate "SplunkAppForWazuh/default/indexes.conf" so it does not create automatic indexes in the search-heads.
@@ -42,17 +48,35 @@ Apply the changes:
 
 .. code-block:: console
 
-  # /opt/splunk/bin/splunk apply shcluster-bundle -target https://172.16.2.30:8089 -auth admin:changeme
+  # /opt/splunk/bin/splunk apply shcluster-bundle -target https://<NODE_IP>:<management_port> -auth <user>:<password>
 
 .. note::
   The last command must point to the **search head captain IP**.
 
 Now, we should have the `/opt/splunk/etc/apps/SplunkAppForWazuh` in the **search heads**.
 
-To actualice, we must delete the app. First, we delete it from the deployer.
+Update the Wazuh App
+--------------------
+
+To update, we must delete the app from the deployer, and reinstall it following the previous steps.
+
+.. code-block:: console
+
+  # rm -rf /opt/splunk/etc/shcluster/apps/<SplunkAppForWazuh>
 
 Once, we synchronize with the option -force and will be deleted from the search heads:
 
 .. code-block:: console
 
-  # /opt/splunk/bin/splunk apply shcluster-bundle -force true -target https://172.16.2.30:8089 -auth admin:changeme -f
+  # /opt/splunk/bin/splunk apply shcluster-bundle -force true -target https://<NODE_IP>:<management_port> -auth <user>:<password> -f
+
+
+Other configuration:
+--------------------
+
+To find different ways of configuring the deployer, visit this page: `Distribute apps with the deployer. <https://docs.splunk.com/Documentation/Splunk/7.2.3/Updating/Extendedexampledeployseveralstandardforwarders>`_
+
+Extended example:
+-----------------
+
+To see an extended example of configuration to several forwarders, visit this link: `Extended example: Deploy configurations to several forwarders. <https://docs.splunk.com/Documentation/Splunk/7.2.3/Updating/Extendedexampledeployseveralstandardforwarders>`_
