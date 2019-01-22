@@ -8,8 +8,8 @@ Splunk Cluster
 .. note::
   To know how to mount a Splunk cluster, visit the `Official Splunk Documentation. <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_
 
-Installing the Wazuh App
-------------------------
+Installing the Wazuh App in a search-heads cluster
+--------------------------------------------------
 
 After we have followed all the steps in the `Official Splunk Documentation, <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_ we should have an architecture like this:
 
@@ -32,7 +32,17 @@ The next step is to install the Wazuh App into the search-head cluster.
 .. warning::
   We need to eliminate "SplunkAppForWazuh/default/indexes.conf" so it does not create automatic indexes in the search-heads.
 
-We create the file "SplunkAppForWazuh/default/outputs.conf" and we fill it with the following lines:
+After installing the App following the **Official installation guide**, we follow this steps:
+
+.. code-block:: console
+
+  # cp -r `<installation_path/SplunkAppForWazuh` `/opt/splunk/etc/shcluster/apps`
+
+  # rm /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/indexes.conf
+
+  # touch /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/outputs.conf
+
+Then, we fill the outputs.conf file wit the next lines:
 
 .. code-block:: console
 
@@ -62,7 +72,6 @@ Apply the changes:
 
   # /opt/splunk/bin/splunk apply shcluster-bundle -target https://<NODE_IP>:<management_port> -auth <user>:<password>
 
-
 Now, we should have the `/opt/splunk/etc/apps/SplunkAppForWazuh` in every **search head**.
 
 Update the Wazuh App
@@ -72,7 +81,7 @@ To update, we must delete the app from the deployer, and reinstall it following 
 
 .. code-block:: console
 
-  # rm -rf /opt/splunk/etc/shcluster/apps/WazuhApp
+  # rm -rf /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh
 
 Then, we synchronize with the option -force and will be deleted from the search heads:
 
