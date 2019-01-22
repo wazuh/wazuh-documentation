@@ -93,11 +93,11 @@ Usage
 
   a) Only the file::
 
-      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/3.7.2_6.5.4/docker-compose.yml
+      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/3.8.0_6.5.4/docker-compose.yml
 
   b) Get the Wazuh repository::
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.7.2_6.5.4 --single-branch
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.8.0_6.5.4 --single-branch
 
 #. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
