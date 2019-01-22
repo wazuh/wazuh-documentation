@@ -14,7 +14,7 @@ This guide describes the Splunk Enterprise installation process for two differen
 
 - The **single-instance architecture** is recommended for testing and evaluation purposes, or also for small-medium sized environments.
 - The **multi-instance architecture** is recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
-- The **Splunk Cluster architecture** is recommended for environmentes with many different devices, to join all the alerts in a same place.
+- The **Splunk Cluster architecture** is recommended to replicate data in different indexes and make distributed searchs.
 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Installation type                                                      | Description                                                 |
