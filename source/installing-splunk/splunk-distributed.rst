@@ -2,29 +2,32 @@
 
 .. _splunk_distributed:
 
-Install Splunk in multi-instance mode
-=====================================
+Installing & Configuring Splunk Cluster
+=======================================
 
 This document will guide you through the installation process for a multi-instance distributed architecture, recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
 
 .. note::
   Many of the commands described below need to be executed with root user privileges.
 
-We're going to perform the most basic installation for a multi-instance deployment. We'll use **two instances** of Splunk Enterprise, one of them being the *search head* and the other one, a *search peer* (commonly known as an indexer); we'll also need a Splunk forwarder.
-
-- The **search head** instance will be in charge of all the searching functionality, and it will look for data on the search peers' indexes. This instance won't have any indexes at all.
-- The **search peer** instance (or indexer) collects all the Wazuh data and stores it in the form of indexes. This instance is connected to the search head so it can consult the peer's indexes.
-- The **forwarder** runs on the Wazuh manager instance, it reads local data and sends it to the indexer.
-
-You can have multiple search peer instances, but in this case we're going to stick with the essentials.
-
-.. thumbnail:: ../images/splunk-app/distributed-arch.png
-  :align: center
-  :width: 90%
-  :title: Diagram of a multi-instance Splunk architecture
+.. note::
+  To know how to deploy a Splunk cluster, visit the `Official Splunk Documentation. <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_
 
 .. warning::
-  This documentation will install Splunk using the multi-instance deployment schema. If you want a simpler installation, check out the :ref:`single-instance <splunk_basic>` deployment schema.
+  By following this guide,you will learn how to install and configure **Wazuh** in an already created Splunk Cluster, so all the configuration related with Splunk is in their **Official Documentation**, and its assumed that an Splunk installation and configuration has been already done.
+
+
+This is the performance of a basic Splunk Cluster, that's formed by the next elements:
+
+- The **search head** instances will be in charge of all the searching functionality, and they will look for data on the search peers' indexes. This instances won't have any indexes at all.
+- The **search peer** instances (or indexers) collect all the Wazuh data and stores it in the form of indexes. This instances are connected to the search heads so they can consult the peer's indexes.
+- The **forwarder** runs on the Wazuh manager instance, it reads local data and sends it to the indexer.
+- The **deployer** instance installs and configures the Wazuh App into every **search head** instance at the same time.
+
+.. thumbnail:: ../images/splunk_cluster/splunk_cluster.png
+    :title: Splunk Cluster with Wazuh installed architecture.
+    :align: center
+    :width: 80%
 
 Install Splunk Enterprise instances
 -----------------------------------
@@ -61,7 +64,7 @@ Each instance can be installed on different hosts following the same steps descr
 
   After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
-4. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
+4. Optional. If additionally want the Splunk service to start at boot time, execute the following command:
 
   .. code-block:: console
 
@@ -70,50 +73,204 @@ Each instance can be installed on different hosts following the same steps descr
 Configuring the Splunk instances
 --------------------------------
 
-Now that we finished installing the Splunk instances, it's time to choose which one will be the *search head* and the *search peer*.
+Master:
+_______
 
-1. On the **search head** instance run the following command to add a search peer:
+To configure the master instance first install the `splunk forwarder. <https://www.splunk.com/en_us/download/universal-forwarder.html>`_
 
-  .. code-block:: console
+Now, it is necessary to configure the 3 most important files in this instance:
 
-    # /opt/splunk/bin/splunk add search-server <host>:<port> -auth <user>:<password> -remoteUsername <user> -remotePassword <passremote>
+  - **inputs.conf**: Reads alerts from **alerts.json**
+  - **outputs.conf**: Contains necessary information to know the cluster's indexers.
+  - **props.conf**: Contains the different ways of how alerts will be indexes.
 
-  You must run this command for each search peer that you want to add.
+Starting with **inputs.conf**, create it and fill it with the next block:
 
-  **Note the following:**
+.. code-block:: console
 
-  1. ``<host>`` is the host name or IP address of the search peer's host machine.
-  2. ``<port>`` is the management port of the search peer. By default it's 8089.
-  3. The ``-auth`` flag is used to provide credentials for the search head.
-  4. The ``-remoteUsername`` and ``remotePassword`` flags are used to provide the credentials for the search peer. The remote credentials must be for an admin-level user on the search peer.
+  # touch /opt/splunkforwarder/etc/system/local/inputs.conf
 
-  .. warning::
-    If there are login issues when trying to add the search peer, add the ``allowRemoteLogin = always`` option under the ``[general]`` section on the ``/opt/splunk/etc/system/local/server.conf`` file, and then restart the search peer.
+.. code-block:: xml
 
-2. On the **search peer** instance we need to add the files to configure the Wazuh indexes:
+  [monitor:///var/ossec/logs/alerts/alerts.json]
+  disabled = 0
+  host = MANAGER_HOSTNAME
+  index = wazuh
+  sourcetype = wazuh
 
-  a) Download and insert the ``inputs.conf`` template to configure where the data will come from:
+  Now, following with the **outputs.conf**:
+
+.. code-block:: console
+
+  # touch /opt/splunkforwarder/etc/system/local/outputs.conf
+
+And paste this inside:
+
+.. code-block:: xml
+
+  [indexer_discovery:cluster1]
+  pass4SymmKey = changeme
+  master_uri = https://<master_ip>:<port>
+
+  [tcpout:cluster1_tcp]
+  indexerDiscovery = cluster1
+
+  [tcpout]
+  defaultGroup = cluster1_tcp
+
+For the last one, the **props.conf**, follow the same procedure:
+
+.. code-block:: console
+
+  # touch /opt/splunkforwarder/etc/system/local/props.conf
+
+.. code-block:: xml
+
+  [wazuh]
+  DATETIME_CONFIG =
+  INDEXED_EXTRACTIONS = json
+  KV_MODE = none
+  NO_BINARY_CHECK = true
+  category = Application
+  disabled = false
+  pulldown_type = true
+
+To save all the changes, restart splunk:
+
+.. code-block:: console
+
+  # /opt/splunkforwarder/bin/splunk restart
+
+
+Indexers:
+_________
+
+Here, in the **master instance**, make the configuration that will be pushed to the indexers.
+
+For this configuration is necessary to create the following two files and paste into them the following blocks of code respectively:
+
+.. code-block:: console
+
+  # touch /opt/splunk/etc/master-apps/_cluster/local/inputs.conf
+
+.. code-block:: xml
+
+  [splunktcp://9997]
+  connection_host = ip
+
+
+.. code-block:: console
+
+  # touch /opt/splunk/etc/master-apps/_cluster/local/indexes.conf
+
+.. code-block:: xml
+
+  [wazuh]
+  coldPath = $SPLUNK_DB/wazuh/colddb
+  enableDataIntegrityControl = 1
+  enableTsidxReduction = 1
+  homePath = $SPLUNK_DB/wazuh/db
+  maxTotalDataSizeMB = 512000
+  thawedPath = $SPLUNK_DB/wazuh/thaweddb
+  timePeriodInSecBeforeTsidxReduction = 15552000
+  tsidxReductionCheckPeriodInSec =
+
+  [wazuh-monitoring-3x]
+  coldPath = $SPLUNK_DB/wazuh-monitoring-3x/colddb
+  enableDataIntegrityControl = 1
+  enableTsidxReduction = 1
+  homePath = $SPLUNK_DB/wazuh-monitoring-3x/db
+  maxTotalDataSizeMB = 512000
+  thawedPath = $SPLUNK_DB/wazuh-monitoring-3x/thaweddb
+  timePeriodInSecBeforeTsidxReduction = 15552000
+  tsidxReductionCheckPeriodInSec =
+
+
+Now, restart Wazuh:
+
+.. code-block:: console
+
+  # splunk restart
+
+.. note::
+
+  Check the state of the cluster executing:
 
     .. code-block:: console
 
-      # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer-inputs.conf
+      # splunk show cluster-bundle-status
 
-  b) Download and insert the ``indexes.conf`` template to configure the indexes:
 
-    .. code-block:: console
+Installing the Wazuh App in a Splunk cluster
+____________________________________________
 
-      # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer-indexes.conf
+The next step is to install the Wazuh App into the search-head cluster.
 
-  And finally, we need to restart the search peer:
+.. note::
+  We can install the App in each search-head by hand, but if we have hundreds or even thousands of search-heads, it will be better to install it automatically.
+  For this purpose, we are using the **deployer**, a machine that installs the App in every search-head at the same time and automatically.
 
-  .. code-block:: console
 
-    # /opt/splunk/bin/splunk restart
+.. warning::
+  We need to eliminate "SplunkAppForWazuh/default/indexes.conf" so it does not create automatic indexes in the search-heads.
 
-Now that you've finished installing Splunk on a multi-instance mode, you can proceed with the next step and install the :ref:`Wazuh app for Splunk <splunk_app>`.
+After installing the App following the **Official installation guide** in our **deployer** machine, we follow this steps:
 
-Additional links
-----------------
+.. code-block:: console
 
+  // Copy the app into the splunk cluster folder:
+  # cp -r installation_path/SplunkAppForWazuh /opt/splunk/etc/shcluster/apps
+  // Delete the indexes.conf to don't install automatic indexers:
+  # rm /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/indexes.conf
+  // Create the configuration file we are really using to configure the cluster:
+  # touch /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/outputs.conf
+
+Then, we fill the outputs.conf file wit the next lines:
+
+.. code-block:: xml
+
+  [indexer_discovery:cluster1]
+  pass4SymmKey = changeme
+  master_uri = https://<master_ip>:<management_port>
+
+  [tcpout:cluster1_tcp]
+  indexerDiscovery = cluster1
+
+  [tcpout]
+  defaultGroup = cluster1_tcp
+
+.. note::
+  We use indexerDiscovery to connect to peer nodes. Click `here <https://docs.splunk.com/Documentation/Splunk/7.1.3/Indexer/indexerdiscovery>`_ to check more info about indexerDiscovery.
+
+.. note::
+  <master_ip> references to the search-heads master ip.
+
+Apply the changes:
+
+.. code-block:: console
+
+  # /opt/splunk/bin/splunk apply shcluster-bundle -target https://<NODE_IP>:<management_port> -auth <user>:<password>
+
+Now, we should have the `/opt/splunk/etc/apps/SplunkAppForWazuh` in every **search head**.
+
+Update the Wazuh App
+____________________
+
+To update, we must delete the app from the deployer, and reinstall it following the previous steps.
+
+.. code-block:: console
+
+  # rm -rf /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh
+
+Then, we synchronize with the option -force and will be deleted from the search heads:
+
+.. code-block:: console
+
+  # /opt/splunk/bin/splunk apply shcluster-bundle -force true -target https://<NODE_IP>:<management_port> -auth <user>:<password> -f
+
+Now, we follow the steps related in the **Installing the Wazuh App in a search-heads cluster** at this same page.
+
+Useful Links:
+-------------
 - You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.1/Admin/CLIadmincommands>`_ .
 - To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/7.2.1/DistSearch/Whatisdistributedsearch>`_ from the official documentation.

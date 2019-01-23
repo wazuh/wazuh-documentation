@@ -13,15 +13,12 @@ To learn more about how Splunk works, here is their documentation: `Splunk <http
 This guide describes the Splunk Enterprise installation process for two different types of distributed architecture, along with the Splunk forwarder and the Wazuh app for Splunk.
 
 - The **single-instance architecture** is recommended for testing and evaluation purposes, or also for small-medium sized environments.
-- The **multi-instance architecture** is recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
 - The **Splunk Cluster architecture** is recommended to replicate data in different indexes and make distributed searchs.
 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Installation type                                                      | Description                                                 |
 +========================================================================+=============================================================+
 | :ref:`Single-instance installation <splunk_basic>`                     | Install Splunk using the single-instance architecture.      |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| :ref:`Multi-instance installation <splunk_distributed>`                | Install Splunk using the multi-instance architecture.       |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | :ref:`Splunk Cluster installation <splunk_cluster>`                    | Install a Cluster with Splunk multi-instance architecture.  |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
@@ -43,7 +40,6 @@ Find more information about how to scale your environments using Splunk Enterpri
 
     splunk-basic
     splunk-distributed
-    splunk-cluster
     splunk-app
     splunk-forwarder
     splunk-reverse-proxy
