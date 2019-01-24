@@ -137,3 +137,17 @@ These alerts can be easily analyzed using visualizations like the following one:
   :width: 70%
 
 On that visualization you can look for peaks in your network, once you found a peak you can filter the alerts generated on that time and check which IPs were communicating. Since IP address is a field used in many AWS alerts, you'll probably found other alerts and find out what happened.
+
+.. note::
+  If while configuring the permissions policy we're asked for special permissions, we need to add the next block into the policy file:
+
+  Navigate to Services > VPC > Policies > Policy file.
+
+    .. code-block:: xml
+
+      {
+        "Sid": "VisualEditor0",
+        "Effect": "Allow",
+        "Action": "ec2:DescribeFlowLogs",
+        "Resource": "*"
+      }

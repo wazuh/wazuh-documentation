@@ -118,3 +118,34 @@ In this case a simple warning will be displayed. There is no impact in the event
 .. code-block:: console
 
     2018/01/12 19:10:37 wazuh-modulesd:aws-cloudtrail: WARNING: Interval overtaken.
+
+4. Wrong AWS service path:
+
+If you get any trouble related to "paths", check if the AWS files path is correct:
+
+  **AWS Cloudtrail**
+
+    <bucket_name>/<prefix>/AWSLogs/<account_id>/CloudTrail/<region>/<year>/<month>/<day>
+
+  **AWS Config**
+
+    <bucket_name>/<prefix>/AWSLogs/<account_id>/Config/<region>/<year>/<month>/<day>/ConfigHistory
+    <bucket_name>/<prefix>/AWSLogs/<account_id>/Config/<region>/<year>/<month>/<day>/ConfigSnapshot
+
+  **AWS Guardduty**
+
+    <bucket_name>/<prefix>/<year>/<month>/<day>/<hh>
+
+  **AWS Custom bucket**
+
+    <bucket_name>/<prefix>/<year>/<month>/<day>
+
+  **AWS VPC**
+
+    <bucket_name>/<prefix>/AWSLogs/<account_id>/vpcflowlogs/<region>/<year>/<month>/<day>
+
+  **Use case**
+
+    AmazonS3/config/AWSLogs/1308927/Config/EU-West/2019/01/12/file.log
+    
+    AmazonFirstBucket/store/2019/01/9/logs.log

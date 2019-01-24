@@ -10,7 +10,8 @@ Amazon Inspector
 Amazon configuration
 --------------------
 
-Amazon Inspector does not need to store logs into a bucket. It uses API calls to retrieve the information.
+Amazon Inspector does not need to store logs into a bucket, like the other AWS services.
+The inspector works as a searcher, so it retrieves information using the AWS API and provides an agent that analyzes it.
 
 Wazuh configuration
 -------------------

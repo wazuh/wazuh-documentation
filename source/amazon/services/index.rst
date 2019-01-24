@@ -18,14 +18,12 @@ This module requires some dependencies in order to work, and also the right cred
 .. topic:: Contents
 
   .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     cloudtrail
-    cloudtrail-usecases
     config
     vpc
     guardduty
-    guardduty-usecases
     macie
     kms
     inspector
