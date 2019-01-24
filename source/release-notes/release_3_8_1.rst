@@ -5,12 +5,12 @@
 3.8.1 Release Notes
 ===================
 
-This section shows the most relevant improvements and fixes in version 3.8.0. More details about these changes are provided in each component changelog:
+This section shows the most relevant improvements and fixes in version 3.8.1. More details about these changes are provided in each component changelog:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.8.0/CHANGELOG.md>`_
-- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.8.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.8.0-6.5.4/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.8.0-7.2.3/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.8.1/CHANGELOG.md>`_
+- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.8.1/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.8.1-6.5.4/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.8.1-7.2.3/CHANGELOG.md>`_
 
 Wazuh core
 ----------
