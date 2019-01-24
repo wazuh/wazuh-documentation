@@ -9,21 +9,15 @@ This section shows the most relevant improvements and fixes in version 3.8.1. Mo
 
 - `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.8.1/CHANGELOG.md>`_
 - `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.8.1/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.8.1-6.5.4/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.8.1-7.2.3/CHANGELOG.md>`_
 
 Wazuh core
 ----------
 
-- Improved Vulnerability detector module, fixed some false positives for Red Hat systems.
-- We also fixed a problem with the Windows Wazuh agents. Affected packages didn't start the service properly, now it's fixed.
+- Fixed memory leak in Logcollector when reading Windows eventchannel.
+- Fixed version comparisons on Red Hat systems in vulnerability detector module.
 
 Wazuh API
 ---------
 
-- Fixed an issue related to the log rotation module which may makes the Wazuh API unavailable on Debian systems.
-
-Wazuh App
----------
-
-- Improved auto-indent and XML error checker logic for group configuration editor. Now they are faster.
+- Fixed an issue with the log rotation module which may makes the Wazuh API unavailable on Debian systems.
+- Fixed improper error handling. Prevented internal paths to be printed in error output.
