@@ -16,7 +16,7 @@ When we create a new user account in IAM, an AWS event is generated. As previous
 
 .. thumbnail:: ../../images/aws/aws-login-1.png
     :align: center
-    :width: 100%
+    :width: 85%
 
 Create user account without permissions
 ---------------------------------------
@@ -25,7 +25,7 @@ If an unauthorized user attempts to create new users, the following alert will b
 
 .. thumbnail:: ../../images/aws/aws-login-2.png
     :align: center
-    :width: 100%
+    :width: 85%
 
 User login failed
 -------------------
@@ -34,7 +34,7 @@ When a user tries to log in with an invalid password, the following alert will b
 
 .. thumbnail:: ../../images/aws/aws-login-3.png
     :align: center
-    :width: 100%
+    :width: 85%
 
 Possible break-in attempt
 -------------------------
@@ -43,7 +43,7 @@ When more than 4 authentication failures occur in a **360** second time window, 
 
 .. thumbnail:: ../../images/aws/aws-login-4.png
     :align: center
-    :width: 100%
+    :width: 85%
 
 Login success
 -------------
@@ -52,7 +52,7 @@ After a successful login, the following event will be shown in Kibana. It shows 
 
 .. thumbnail:: ../../images/aws/aws-login-5.png
     :align: center
-    :width: 100%
+    :width: 85%
 
 And here are the Kibana dashboards for IAM events:
 
@@ -61,5 +61,5 @@ And here are the Kibana dashboards for IAM events:
 +==========================================================+============================================================+
 | .. thumbnail:: ../../images/aws/aws-iam-pannels-1.png    | .. thumbnail:: ../../images/aws/aws-iam-pannels-2.png      |
 |    :align: center                                        |    :align: center                                          |
-|    :width: 100%                                          |    :width: 100%                                            |
+|    :width: 85%                                          |    :width: 85%                                            |
 +----------------------------------------------------------+------------------------------------------------------------+

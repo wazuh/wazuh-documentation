@@ -14,13 +14,13 @@ If a VPC is created, the following alert will be shown on Kibana:
 
 .. thumbnail:: ../../images/aws/aws-vpc-1.png
     :align: center
-    :width: 100%
+    :width: 85%
 
 If a user without proper permissions attempts to create a VPC, the following alert will be shown on Kibana:
 
 .. thumbnail:: ../../images/aws/aws-vpc-2.png
     :align: center
-    :width: 100%
+    :width: 85%
 
 Working with VPC Data
 ---------------------
@@ -29,12 +29,12 @@ A VPC alert contains data such as dest and source IP address, dst and source por
 
 .. thumbnail:: ../../images/aws/aws-vpc-3.png
     :align: center
-    :width: 100%
+    :width: 85%
 
 These alerts can be easily analyzed using visualizations like the following one:
 
 .. thumbnail:: ../../images/aws/vpc_flow_dataviz.png
     :align: center
-    :width: 100%
+    :width: 85%
 
 On that visualization you can look for peaks in your network, once you found a peak you can filter the alerts generated on that time and check which IPs were communicating. Since IP address is a field used in many AWS alerts, you'll probably found other alerts and find out what happened.
