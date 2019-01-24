@@ -38,7 +38,7 @@ Amazon configuration
 .. note::
   For more information about these options, see `Selecting Which Resources AWS Config Records. <https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html>`_
 
-6. Choose the S3 Bucket created before.
+6. Choose the *S3 Bucket* created before.
 
 Now, to configure the rules:
 
@@ -49,7 +49,7 @@ Now, to configure the rules:
   :align: center
   :width: 100%
 
-8. Select Rules on the left menu and click on the Create rule button:
+8. Select Rules on the left menu and click on the *Create* rule button:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-13.png
   :align: center
@@ -61,7 +61,7 @@ Now, to configure the rules:
   :align: center
   :width: 100%
 
-10. Give the rule some name and click on the Create rule button:
+10. Give the rule some name and click on the *Create* rule button:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-15.png
   :align: center
