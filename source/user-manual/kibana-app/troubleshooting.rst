@@ -93,7 +93,7 @@ API version mismatch. Expected vX.Y.Z
 
 The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
 
-You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh 3.8.0.
+You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh 3.8.1.
 
 Check our :ref:`compatibility_matrix` to learn more about compatibility between the API and the app.
 
