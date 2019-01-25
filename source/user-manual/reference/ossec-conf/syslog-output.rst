@@ -29,7 +29,7 @@ Options
 server
 ^^^^^^
 
-The IP Address of the syslog server.
+The IP Address or hostname of the syslog server.
 
 +--------------------+----------------------+
 | **Default value**  | n/a                  |
@@ -63,7 +63,7 @@ The minimum level of the alerts to be forwarded.
 group
 ^^^^^^
 
-Group of the alerts to be forwarded.
+Rule group of the alerts to be forwarded.
 
 +--------------------+--------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                      |

@@ -7,12 +7,12 @@ integration
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+  .. code-block:: xml
 
-		<integration>
-		</integration>
+    <integration>
+    </integration>
 
-This configures the manager to connect Wazuh to external APIs and alerting tools such as Slack, PagerDuty and VirusTotal.
+This configures the manager to :ref:`connect Wazuh to external APIs <manual_integration>` and alerting tools such as Slack, PagerDuty and VirusTotal.
 
 Options
 -------
@@ -54,8 +54,6 @@ api_key
 
 This is the key that you would have retrieved from the PagerDuty or VirusTotal API. This is **mandatory for PagerDuty and VirusTotal.**
 
-.. note:: You must restart Wazuh after changing this option.
-
 +--------------------+------------------------------+
 | **Default value**  | n/a                          |
 +--------------------+------------------------------+
@@ -90,7 +88,7 @@ This filters alerts by rule ID.
 group
 ^^^^^
 
-This filters alerts by rules. For the VirusTotal integration, only rules from the `syscheck` group are available. `OS_Regex Syntax`_.
+This filters alerts by rule group. For the VirusTotal integration, only rules from the `syscheck` group are available. Follows the `OS_Regex Syntax`_.
 
 +--------------------+---------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                         |
@@ -98,14 +96,12 @@ This filters alerts by rules. For the VirusTotal integration, only rules from th
 | **Allowed values** | Any rule group is allowed. Multiple groups should be separated with a pipe character (“|”). |
 +--------------------+---------------------------------------------------------------------------------------------+
 
-
 event_location
 ^^^^^^^^^^^^^^
 
-This filters alerts by where the event originated. `OS_Regex Syntax`_
+This filters alerts by where the event originated. Follows the `OS_Regex Syntax`_.
 
 .. _`OS_Regex Syntax`: http://ossec-docs.readthedocs.org/en/latest/syntax/regex.html
-
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | n/a                                                       |
@@ -135,25 +131,30 @@ The maximum length of an alert snippet that will be sent to the Integrator.  Lon
 | **Allowed values** | Any integer from 165 to 1024 inclusive.                   |
 +--------------------+-----------------------------------------------------------+
 
-
 Configuration example
 ---------------------
 
 .. code-block:: xml
 
-    <!-- Integration with Slack -->
-    <integration>
-      <name>slack</name>
-      <hook_url>https://hooks.slack.com/services/T000/B000/XXXXX</hook_url>
-      <level>10</level>
-      <group>multiple_drops|authentication_failures</group>
-      <alert_format>json</alert_format>
-    </integration>
+  <!-- Integration with Slack -->
+  <integration>
+    <name>slack</name>
+    <hook_url>https://hooks.slack.com/services/...</hook_url> <!-- Replace with your Slack hook URL -->
+    <level>10</level>
+    <group>multiple_drops|authentication_failures</group>
+    <alert_format>json</alert_format>
+  </integration>
 
-    <!-- Integration with VirusTotal -->
-    <integration>
-      <name>virustotal</name>
-      <api_key>VirusTotal_API_Key</api_key>
-      <group>syscheck</group>
-      <alert_format>json</alert_format>
-    </integration>
+  <!-- Integration with PagerDuty -->
+  <integration>
+    <name>pagerduty</name>
+    <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
+  </integration>
+
+  <!-- Integration with VirusTotal -->
+  <integration>
+    <name>virustotal</name>
+    <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
+    <group>syscheck</group>
+    <alert_format>json</alert_format>
+  </integration>

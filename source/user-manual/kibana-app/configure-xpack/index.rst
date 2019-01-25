@@ -42,14 +42,14 @@ Follow these steps to enable X-Pack:
 
   .. code-block:: console
 
-    # curl -u elastic:<elastic_password> "http://localhost:9200/?pretty"
+    # curl "http://localhost:9200/?pretty"
 
     {
       "name" : "116m4ct",
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "2TbJlE6MRBKB6uHybVSQJA",
       "version" : {
-        "number" : "6.5.3",
+        "number" : "6.5.4",
         "build_flavor" : "default",
         "build_type" : "deb",
         "build_hash" : "424e937",

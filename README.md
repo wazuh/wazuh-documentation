@@ -1,6 +1,6 @@
 # Wazuh documentation
 
-[![Slack](https://img.shields.io/badge/slack-join-blue.svg)](https://goo.gl/forms/M2AoZC4b2R9A9Zy12)
+[![Slack](https://img.shields.io/badge/slack-join-blue.svg)](https://wazuh.com/community/join-us-on-slack/)
 [![Mailing list](https://img.shields.io/badge/email-join-blue.svg)](https://groups.google.com/forum/#!forum/wazuh)
 [![Documentation](https://img.shields.io/badge/docs-view-green.svg)](https://documentation.wazuh.com/)
 [![Website](https://img.shields.io/badge/web-view-green.svg)](https://wazuh.com/)
@@ -29,6 +29,6 @@ You can also join our [users mailing list](https://groups.google.com/d/forum/waz
 
 ## Copyright & License
 
-Copyright © 2018 Wazuh, Inc.
+Copyright © 2019 Wazuh, Inc.
 
 Wazuh is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
