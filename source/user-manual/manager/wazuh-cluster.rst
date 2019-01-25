@@ -189,7 +189,42 @@ The following must be considered when configuring a Wazuh app:
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The best setup to report agents' events to a cluster is a load balancer. Keep in mind the following considerations:
+A **load balancer** is a service that distributes de workloads across multiple resources.
+In Wazuh's case, users want to use a load balancer to catch all the agent's alerts and distribute them between the different workers in the cluster.
+
+The correct way to use it is to point every agent to send the alerts to the *load balancer*:
+
+1. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the **Load Balancer** IP address. In the ``<client><server>`` section, change the ``LOAD_BALANCER_IP`` value to the ``load balancer`` address and ``port``:
+
+  .. code-block:: xml
+
+    <client>
+      <server>
+        <address>LOAD_BALANCER_IP:PORT</address>
+        ...
+      </server>
+    </client>
+
+2. Restart the agents:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-agent restart
+
+3. Point the ``Load Balancer`` to the master node of the cluster.
+
+  This configuration will depend of the load balancer service choosen.
+  For example, if the user decide to use **NginX Plus** as the load balancer service, by following their `Official Documentation Guide <https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/#intro>`_  will learn how to configure the load balancer IP to point to the master node IP.
+
+Keep in mind the following considerations:
 
 * **It is recommended to use TCP protocol instead of UDP**. Permanent connections and stickiness are needed in order to make sure agent data is consistent. In order to use the TCP protocol, you should configure both your :ref:`agents <server_protocol>` and your :ref:`nodes <manager_protocol>`.
 
