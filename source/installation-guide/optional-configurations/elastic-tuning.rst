@@ -167,7 +167,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
 
 2. Edit the template in order to set one shard with no replicas:
 

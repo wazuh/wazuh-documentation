@@ -26,6 +26,7 @@ The configuration file reference is organized by sections:
 `Monitoring`_
     - `wazuh.monitoring.enabled`_
     - `wazuh.monitoring.frequency`_
+    - `wazuh.monitoring.pattern`_
 
 `Checks`_
     - `checks.pattern`_
@@ -62,7 +63,7 @@ Default index pattern to use on the app. If there's no valid index patterns on E
 +--------------------+-------------------------+
 | **Default value**  | wazuh-alerts-3.x-*      |
 +--------------------+-------------------------+
-| **Allowed values** | Any valid index-pattern |
+| **Allowed values** | Any valid index pattern |
 +--------------------+-------------------------+
 
 timeout
@@ -152,6 +153,17 @@ Define in seconds the frequency the app generates a new document on the `wazuh-m
 .. warning::
 
     Although the minimum value can be ``60``, we recommend adjusting it to at least ``300`` seconds to avoid overloading issues due to the excessive creation of documents into the index.
+
+wazuh.monitoring.pattern
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Default Wazuh monitoring index pattern to use for the app. This setting does not remove any existing patterns or templates, it just updates the app to add the new ones.
+
++--------------------+-------------------------+
+| **Default value**  | wazuh-monitoring-3.x-*  |
++--------------------+-------------------------+
+| **Allowed values** | Any valid index pattern |
++--------------------+-------------------------+
 
 Checks
 ------

@@ -164,7 +164,7 @@ Starting the service.
 
 	.. code-block:: console
 
-		# systemctl start ssh
+		# systemctl start sshd
 
 	b. For SysV Init:
 
@@ -241,7 +241,7 @@ We could see the authorized_keys content.
 
 	.. code-block:: console
 
-		# systemctl restart ssh
+		# systemctl restart sshd
 
 	b. For SysV Init:
 
@@ -350,6 +350,6 @@ From Ansible server.
 .. code-block:: console
 
 	ansible@ansible:~$ cd /etc/ansible/roles/
-	ansible@ansible:/etc/ansible/roles$ sudo git clone https://github.com/wazuh/wazuh-ansible.git -b 3.7 --single-branch
+	ansible@ansible:/etc/ansible/roles$ sudo git clone https://github.com/wazuh/wazuh-ansible.git -b 3.8 --single-branch
 	ansible@ansible:/etc/ansible/roles$ ls
 	wazuh-ansible
