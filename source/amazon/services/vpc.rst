@@ -5,7 +5,7 @@
 Amazon VPC
 ==========
 
-`Amazon Virtual Private Cloud <https://aws.amazon.com/vpc/?nc1=h_ls>`_ (Amazon VPC) lets you provision a logically isolated section of the AWS Cloud where you can launch AWS resources in a virtual network that you define. You have complete control over your virtual networking environment, including selection of your own IP address range, creation of subnets, and configuration of route tables and network gateways. You can use both IPv4 and IPv6 in your VPC for secure and easy access to resources and applications.
+`Amazon Virtual Private Cloud <https://aws.amazon.com/vpc/?nc1=h_ls>`_ (Amazon VPC) lets users provision a logically isolated section of the AWS Cloud where they can launch AWS resources in a virtual network that they define. Users have complete control over their virtual networking environment, including selection of their own IP address range, creation of subnets, and configuration of route tables and network gateways. Users can use both IPv4 and IPv6 in their VPC for secure and easy access to resources and applications.
 
 Amazon configuration
 --------------------
@@ -14,37 +14,37 @@ Amazon configuration
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-1.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 2. Click on the *Create bucket*:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-2.png
   :align: center
-  :width: 100%
+  :width: 70%
 
-3. Create a new bucket, giving it a name and clicking on the *Create* button. Don't forget to save its Bucket ARN, you'll need it later in the process:
+3. Create a new bucket, giving it a name and clicking on the *Create* button. Don't forget to save its Bucket ARN, user will need it later in the process:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-3.png
   :align: center
-  :width: 50%
+  :width: 45%
 
 4. Go to Services > Compute > EC2:
 
 .. thumbnail:: ../../images/aws/aws-create-vpc-1.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 5. Go to Network & Security > Network Interfaces on the left menu. Select a network interface and select *Create a flow log* on the *Actions* menu:
 
 .. thumbnail:: ../../images/aws/aws-create-vpc-2.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 6. Change all fields to look like the following screenshot and paste the ARN of the previously created bucket:
 
 .. thumbnail:: ../../images/aws/aws-create-vpc-3.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 Wazuh configuration
 -------------------
@@ -104,7 +104,7 @@ Use cases
 - `Create a VPC`_
 - `Working with VPC Data`_
 
-Using an Amazon VPC (Virtual Private Cloud), you can logically isolate some of your AWS assets from the rest of your cloud infrastructure. You can actually set up your own networks in the cloud. This is why, it is usually important to monitor changes to your VPCs.
+Using an Amazon VPC (Virtual Private Cloud), users can logically isolate some of their AWS assets from the rest of their cloud infrastructure. Users can actually set up their own networks in the cloud. This is why, it is usually important to monitor changes to their VPCs.
 
 Create a VPC
 ^^^^^^^^^^^^
@@ -113,13 +113,13 @@ If a VPC is created, the following alert will be shown on Kibana:
 
 .. thumbnail:: ../../images/aws/aws-vpc-1.png
   :align: center
-  :width: 100%
+  :width: 70%
 
-If a user without proper permissions attempts to create a VPC, the following alert will be shown on Kibana:
+If an user without proper permissions attempts to create a VPC, the following alert will be shown on Kibana:
 
 .. thumbnail:: ../../images/aws/aws-vpc-2.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 Working with VPC Data
 ^^^^^^^^^^^^^^^^^^^^^
@@ -128,26 +128,26 @@ A VPC alert contains data such as dest and source IP address, dst and source por
 
 .. thumbnail:: ../../images/aws/aws-vpc-3.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 These alerts can be easily analyzed using visualizations like the following one:
 
 .. thumbnail:: ../../images/aws/vpc_flow_dataviz.png
   :align: center
-  :width: 100%
+  :width: 70%
 
-On that visualization you can look for peaks in your network, once you found a peak you can filter the alerts generated on that time and check which IPs were communicating. Since IP address is a field used in many AWS alerts, you'll probably found other alerts and find out what happened.
+On that visualization users can look for peaks in their network, once they found a peak they can filter, the alerts generated on that time and check which IPs were communicating. Since IP address is a field used in many AWS alerts, they'll probably found other alerts and find out what happened.
 
 .. note::
   If while configuring the permissions policy we're asked for special permissions, we need to add the next block into the policy file:
 
-  Navigate to Services > IAM > Policies > Policy file.
+  Navigate to Services > VPC > Policies > Policy file.
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-    {
-      "Sid": "VisualEditor0",
-      "Effect": "Allow",
-      "Action": "ec2:DescribeFlowLogs",
-      "Resource": "*"
-    }
+      {
+        "Sid": "VisualEditor0",
+        "Effect": "Allow",
+        "Action": "ec2:DescribeFlowLogs",
+        "Resource": "*"
+      }
