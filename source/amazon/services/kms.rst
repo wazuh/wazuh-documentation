@@ -5,7 +5,7 @@
 AWS Key Management Service
 ==========================
 
-`AWS Key Management Service <https://aws.amazon.com/kms/>`_ (KMS) makes it easy for you to create and manage keys and control the use of encryption across a wide range of AWS services and in your applications. AWS KMS is a secure and resilient service that uses FIPS 140-2 validated hardware security modules to protect your keys. AWS KMS is integrated with AWS CloudTrail to provide you with logs of all key usage to help meet your regulatory and compliance needs.
+`AWS Key Management Service <https://aws.amazon.com/kms/>`_ (KMS) makes it easy for users to create and manage keys and control the use of encryption across a wide range of AWS services and in their applications. AWS KMS is a secure and resilient service that uses FIPS 140-2 validated hardware security modules to protect their keys. AWS KMS is integrated with AWS CloudTrail to provide users with logs of all key usage to help meet their regulatory and compliance needs.
 
 Amazon configuration
 --------------------
@@ -64,7 +64,7 @@ Amazon configuration
   :align: center
   :width: 70%
 
-9. You can select which compression do your prefer. Wazuh supports any kind of compression but Snappy. After that, click on *Create new or choose*:
+9. Users can select which compression do they prefer. Wazuh supports any kind of compression but Snappy. After that, click on *Create new or choose*:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-9.png
   :align: center

@@ -14,7 +14,7 @@ The below information is intended to assist in troubleshooting issues.
 Testing the integration
 -----------------------
 
-After configuring the module successfully you can expect to see the following log messages in your agent log file: ``/var/ossec/logs/ossec.log``
+After configuring the module successfully users can expect to see the following log messages in their agent log file: ``/var/ossec/logs/ossec.log``
 
 1. Module starting:
 
@@ -82,7 +82,7 @@ The exit codes are as follows:
 
 2. Debugging configuration:
 
-If you are unable to determine the issues from the ossec.log, you can run the modules in debug mode.  With Wazuh running, stop the moduled
+If users are unable to determine the issues from the ossec.log, users can run the modules in debug mode.  With Wazuh running, stop the moduled
 
 .. code-block:: console
 
@@ -121,7 +121,7 @@ In this case a simple warning will be displayed. There is no impact in the event
 
 4. Wrong AWS service path:
 
-If you get any trouble related to "paths", check if the AWS files path is correct:
+If users get any trouble related to "paths", check if the AWS files path is correct:
 
   **AWS Cloudtrail**
 
@@ -147,5 +147,5 @@ If you get any trouble related to "paths", check if the AWS files path is correc
   **Use case**
 
     AmazonS3/config/AWSLogs/1308927/Config/EU-West/2019/01/12/file.log
-    
+
     AmazonFirstBucket/store/2019/01/9/logs.log

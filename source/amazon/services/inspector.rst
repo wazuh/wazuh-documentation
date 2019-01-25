@@ -30,7 +30,7 @@ Wazuh configuration
     </service>
   </wodle>
 
-You must specify at least a region. Multiple regions can be added separated by commas.
+Users must specify at least a region. Multiple regions can be added separated by commas.
 
 .. note::
   Check the :ref:`AWS S3 module <wodle_s3>` reference manual to learn more about each setting.

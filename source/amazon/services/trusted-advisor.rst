@@ -5,7 +5,7 @@
 AWS Trusted Advisor
 ===================
 
-`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`_ is an online resource to help you reduce cost, increase performance, and improve security by optimizing your AWS environment, Trusted Advisor provides real time guidance to help you provision your resources following AWS best practices.
+`AWS Trusted Advisor <https://aws.amazon.com/premiumsupport/trustedadvisor/>`_ is an online resource to help users reduce cost, increase performance, and improve security by optimizing their AWS environment, Trusted Advisor provides real time guidance to help users provision their resources following AWS best practices.
 
 Amazon configuration
 --------------------
@@ -64,7 +64,7 @@ Amazon configuration
   :align: center
   :width: 70%
 
-9. You can select which compression do your prefer. Wazuh supports any kind of compression but Snappy. After that, click on *Create new or choose*:
+9. Users can select which compression do they prefer. Wazuh supports any kind of compression but Snappy. After that, click on *Create new or choose*:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-9.png
   :align: center
