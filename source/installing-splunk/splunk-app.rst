@@ -67,4 +67,71 @@ Installation
     :align: center
     :width: 100%
 
-Now that you've finished installing Splunk app for Wazuh, you can install and setup Splunk forwarders on the :ref:`next section <splunk_forwarder>`.
+Now that you've finished installing Splunk app for Wazuh, you can install and setup Splunk forwarders on the :ref:`Splunk forwarder section <splunk_forwarder>`.
+
+Installing the Wazuh App in a Splunk cluster
+--------------------------------------------
+
+.. note::
+  We can install the App in each search-head by hand, but if we have hundreds or even thousands of search-heads, it will be better to install it automatically.
+  For this purpose, we are using the **deployer**, a machine that installs the App in every search-head at the same time and automatically.
+
+
+.. warning::
+  We need to eliminate "SplunkAppForWazuh/default/indexes.conf" so it does not create automatic indexes in the search-heads.
+
+After installing the App following the **Official installation guide** in our **deployer** machine, we follow this steps:
+
+.. code-block:: console
+
+  // Copy the app into the splunk cluster folder:
+  # cp -r installation_path/SplunkAppForWazuh /opt/splunk/etc/shcluster/apps
+  // Delete the indexes.conf to don't install automatic indexers:
+  # rm /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/indexes.conf
+  // Create the configuration file we are really using to configure the cluster:
+  # touch /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/outputs.conf
+
+Then, we fill the outputs.conf file wit the next lines:
+
+.. code-block:: xml
+
+  [indexer_discovery:cluster1]
+  pass4SymmKey = changeme
+  master_uri = https://<master_ip>:<management_port>
+
+  [tcpout:cluster1_tcp]
+  indexerDiscovery = cluster1
+
+  [tcpout]
+  defaultGroup = cluster1_tcp
+
+.. note::
+  We use indexerDiscovery to connect to peer nodes. Click `here <https://docs.splunk.com/Documentation/Splunk/7.1.3/Indexer/indexerdiscovery>`_ to check more info about indexerDiscovery.
+
+.. note::
+  <master_ip> references to the search-heads master ip.
+
+Apply the changes:
+
+.. code-block:: console
+
+  # /opt/splunk/bin/splunk apply shcluster-bundle -target https://<NODE_IP>:<management_port> -auth <user>:<password>
+
+Now, we should have the `/opt/splunk/etc/apps/SplunkAppForWazuh` in every **search head**.
+
+Update the Wazuh App
+--------------------
+
+To update, we must delete the app from the deployer, and reinstall it by following the previous steps.
+
+.. code-block:: console
+
+  # rm -rf /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh
+
+Then, we synchronize with the option -force and will be deleted from the search heads:
+
+.. code-block:: console
+
+  # /opt/splunk/bin/splunk apply shcluster-bundle -force true -target https://<NODE_IP>:<management_port> -auth <user>:<password> -f
+
+Now, we follow the steps related in the **Installing the Wazuh App in a search-heads cluster**.
