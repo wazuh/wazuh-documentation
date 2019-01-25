@@ -342,7 +342,7 @@ skip_nfs
 Specifies if syscheck should scan network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
 +--------------------+----------+
-| **Default value**  | no       |
+| **Default value**  | yes      |
 +--------------------+----------+
 | **Allowed values** | yes, no  |
 +--------------------+----------+
