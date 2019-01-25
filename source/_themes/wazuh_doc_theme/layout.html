@@ -113,7 +113,25 @@
   </a>
 
   <div id="page">
-    {% include "header.html" %} {%- block header %}{% endblock %}
+    {% include "header.html" %} {%- block header %}{% endblock header %}
+
+    {%- block docu_top_bar %}
+    <div class="jumbotron jumbo-bar">
+      <div class="container">
+        <div class="row">
+          <div class="title-bar-left col-xs-12 col-md-7 col-lg-8 col-xl-9">
+            <a href="{{ theme_base_url }}" class="title">Documentation</a>
+            <span class="release-selector-wrapper">
+              Selector [TODO]
+            </span>
+          </div>
+          <div id="search-md" class="title-bar-right col-md-5 col-lg-4 col-xl-3 d-none d-md-inline-block">
+            {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
+          </div> <!-- // #search-md -->
+        </div>
+      </div>
+    </div>
+    {% endblock docu_top_bar %}
 
     <section  class="container central-page-area">
       <div class="row">
@@ -138,6 +156,7 @@
               {% endblock %}
             </div>
           </div>
+          <ul class="globaltoc">{{ toctree(maxdepth=theme_globaltoc_depth|toint, collapse=False,includehidden=theme_globaltoc_includehidden|tobool) }}</ul>
           <!-- // To be customized -->
 
           <!-- TODO: To be removed -->
@@ -159,6 +178,22 @@
     {% include "footer.html" %} {%- block footer %} {% endblock %}
   </div> <!-- // #page -->
 
-  {%- block footer_js %} {{- js() }} {%- endblock footer_js %}
+  {# Footer's scripts #}
+  {%- block footer_js %}
+    {% if not embedded %}
+
+      <script type="text/javascript">
+          var DOCUMENTATION_OPTIONS = {
+              URL_ROOT:'{{ url_root }}',
+              VERSION:'{{ release|e }}',
+              COLLAPSE_INDEX:false,
+              FILE_SUFFIX:'{{ '' if no_search_suffix else file_suffix }}',
+              HAS_SOURCE:  {{ has_source|lower }},
+  	          SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}'
+          };
+      </script>
+    {% endif %}
+    {{- js() }}
+  {%- endblock footer_js %}
 </body>
 </html>

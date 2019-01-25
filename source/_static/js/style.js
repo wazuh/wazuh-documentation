@@ -1,6 +1,8 @@
 $(function(){
   var searchbar,
-      mainmenu;
+      mainmenu,
+      form_control,
+      querystr = '';
 
   /* Form style ---------------------------------------------------------------------------------------*/
   $(".cv input[type=file]").on("change", function (){
@@ -18,73 +20,46 @@ $(function(){
 
   /* Website search bar ----------------------------------------------------------------------------------------------------*/
   /* Search bar animation */
-  searchbar = $('#main-menu-search-bar .search_main');
-  mainmenu = $('#main-menu-search-bar .main-menu');
-  querystr = $('.search_main .form-control');
+  searchbar = $('.widget_search .search_main');
+  mainmenu = $('.widget_search .main-menu');
+  form_control = $('.search_main .form-control');
 
-  // Avoid searching when input field is empty or contains only the placeholder text
-  $('.search_main .searchform').on('submit', function(e){
-    if (querystr.val() === '' || querystr.val() === 'Search here') {
-      e.preventDefault();
-    }
+  form_control.on('change', function(e){
+    querystr = e.target.value;
+    form_control.each(function (current_e) {
+      console.log(current_e.target);
+    });
   });
 
   $('.search_main .btn-search, .searchbox-indicator .btn-search').on('click', function(e){  /* Search button clicked */
     if (searchbar.hasClass('collapsed')) {
-
+      e.preventDefault();
       /* If collapsed, expand search bar */
       searchbar.addClass('expanded').removeClass('collapsed');
       mainmenu.addClass('collapsed').removeClass('expanded');
 
       /* Search input get focus just after search bar is expanded */
       setTimeout(function(){
-        $('#main-menu-search-bar .search_main .form-control').focus();
+        $('.widget_search .search_main .form-control').focus();
       },300);
-
-      /* Allows cleaning input field when starting to write. Note start_writing() and stop_writing() call each other */
-      function start_writing(e){
-        var code = e.keyCode || e.which;
-
-        $(this).addClass('writing');
-        $(this).val('');
-        $(this).off('keydown');
-
-        /* Removes filter tag when input field is empty by pressing backspace key */
-        if( code == 8){
-          $('.search_main .filter, .search_main .search-filter').remove();
-        }
-
-        $('.search_main .form-control.writing').on('keyup', stop_writing);
-      }
-
-      function stop_writing(){
-        var el = $(this);
-        var val = $(this).val();
-        if (val == '') {
-          el.val('Search here').off('keyup').removeClass('writing');
-          this.setSelectionRange(0, 0); // Moves cursor to the beginnig of the input field
-
-          $('.search_main .form-control:not(.writing)').on('keydown', start_writing);
-        }
-      }
-
-      $('.search_main .form-control:not(.writing)').on('keydown', start_writing);
-
     }
-    else {
-      /* If search bar not collapsed, submit form */
-        $('.search_main .btn-search').prop('type','submit').submit();
+    if ( !querystr.length ){
+      e.preventDefault();
     }
   });
 
   /* Behavior when clicking out of the input field: collapse search bar except when search button is clicked */
-  $('.search_main .form-control').on('focusout', function(e){
-    $('.search_main .form-control.writing').removeClass('writing');
+  $('.widget_search .search_main .form-control').on('focusout', function(e){
     if ( !$(e.relatedTarget).is($('.search_main .btn-search'))) {
       searchbar.addClass('collapsed').removeClass('expanded');
       mainmenu.addClass('expanded').removeClass('collapsed');
     }
   });
+
+  $('.widget_search .search_main .btn-close').on('click', function(e) {
+    searchbar.addClass('collapsed').removeClass('expanded');
+    mainmenu.addClass('expanded').removeClass('collapsed');
+  })
 
   /* Behavior when clicking out of the input field: collapse search bar except when search button is clicked */
   $('.search_main .search-filter').on('click', function(e){
