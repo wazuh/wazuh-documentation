@@ -115,7 +115,7 @@ If a VPC is created, the following alert will be shown on Kibana:
   :align: center
   :width: 70%
 
-If a user without proper permissions attempts to create a VPC, the following alert will be shown on Kibana:
+If an user without proper permissions attempts to create a VPC, the following alert will be shown on Kibana:
 
 .. thumbnail:: ../../images/aws/aws-vpc-2.png
   :align: center

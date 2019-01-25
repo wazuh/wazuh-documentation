@@ -117,13 +117,13 @@ Below are some use cases for Wazuh rules built for EC2.
 Run a new instance in EC2
 +++++++++++++++++++++++++
 
-When a user runs a new instance in EC2, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. The following alert will be shown in Kibana, it shows data such as instance type, the user who created it or creation date:
+When an user runs a new instance in EC2, an AWS event is generated. As previously mentioned, the log message is collected by the Wazuh agent, and forwarded to the manager for analysis. The following alert will be shown in Kibana, it shows data such as instance type, the user who created it or creation date:
 
 .. thumbnail:: ../../images/aws/aws-ec2-1.png
   :align: center
   :width: 70%
 
-When a user tries to run an instance **without relevant permissions**, then the following alert will be shown in Kibana:
+When an user tries to run an instance **without relevant permissions**, then the following alert will be shown in Kibana:
 
 .. thumbnail:: ../../images/aws/aws-ec2-2.png
   :align: center
@@ -138,7 +138,7 @@ When an instance in EC2 is started, the following alert will be shown on Kibana,
   :align: center
   :width: 70%
 
-If a user tries to start instances **without relevant permissions** the following alert will be shown on Kibana:
+If an user tries to start instances **without relevant permissions** the following alert will be shown on Kibana:
 
 .. thumbnail:: ../../images/aws/aws-ec2-4.png
   :align: center
@@ -153,7 +153,7 @@ When an instance in EC2 is stopped, the following alert will be shown on Kibana:
   :align: center
   :width: 70%
 
-If a user tries to stop instances **without relevant permissions**, the following alert wil be show on Kibana:
+If an user tries to stop instances **without relevant permissions**, the following alert wil be show on Kibana:
 
 .. thumbnail:: ../../images/aws/aws-ec2-6.png
   :align: center
@@ -214,7 +214,7 @@ If an unauthorized user attempts to create new users, the following alert will b
 User login failed
 +++++++++++++++++
 
-When a user tries to log in with an invalid password, the following alert will be shown in Kibana. There will be shown data such as the user who tried to login or the browser it was using:
+When an user tries to log in with an invalid password, the following alert will be shown in Kibana. There will be shown data such as the user who tried to login or the browser it was using:
 
 .. thumbnail:: ../../images/aws/aws-login-3.png
   :align: center
