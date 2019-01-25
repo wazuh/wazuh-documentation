@@ -112,7 +112,7 @@ html_theme = 'wazuh_doc_theme'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-    'page_url': 'http://docs.wazuh.vmr',
+    'base_url': 'http://docs.wazuh.vmr',
     'wazuh_web_url': 'http://wazuh.com',
     'globaltoc_depth': 4,
     'includehidden': True

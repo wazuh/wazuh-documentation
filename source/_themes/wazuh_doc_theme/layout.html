@@ -17,7 +17,7 @@
 {%- else %}
   {%- set titlesuffix = "" %}
 {%- endif %}
-{% set footer_logo = theme_page_url + "/_static/wazuh_logo_w.png" %}
+{% set footer_logo = theme_base_url + "/_static/wazuh_logo_w.png" %}
 
 {%- macro css() %}
   <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
@@ -86,12 +86,6 @@
     <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
   {%- endif %}
 
-  {%- if not embedded %}
-    {%- if theme_page_url %}
-      <link rel="canonical" href="{{ theme_page_url }}" />
-    {%- endif %}
-  {%- endif %}
-
   {# OPENSEARCH #}
   {% if not embedded %}
     {% if use_opensearch %}
@@ -144,7 +138,6 @@
               {% endblock %}
             </div>
           </div>
-          <ul class="globaltoc">{{ toctree(maxdepth=theme_globaltoc_depth|toint, collapse=False,includehidden=theme_globaltoc_includehidden|tobool) }}</ul>
           <!-- // To be customized -->
 
           <!-- TODO: To be removed -->
