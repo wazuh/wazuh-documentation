@@ -192,7 +192,7 @@ Pointing agents to the cluster with a load balancer
 A **load balancer** is a service that distributes de workloads across multiple resources.
 In Wazuh's case, users want to use a load balancer to catch all the agent's alerts and distribute them between the different workers in the cluster.
 
-The correct way to use it is to point every agent to send the alerts to the *load balancer*:
+The correct way to use it is to point every agent to send the events to the *load balancer*:
 
 1. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the **Load Balancer** IP address. In the ``<client><server>`` section, change the ``LOAD_BALANCER_IP`` value to the ``load balancer`` address and ``port``:
 
@@ -200,7 +200,7 @@ The correct way to use it is to point every agent to send the alerts to the *loa
 
     <client>
       <server>
-        <address>LOAD_BALANCER_IP:PORT</address>
+        <address>LOAD_BALANCER_IP</address>
         ...
       </server>
     </client>
