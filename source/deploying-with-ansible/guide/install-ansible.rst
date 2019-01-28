@@ -350,6 +350,6 @@ From Ansible server.
 .. code-block:: console
 
 	ansible@ansible:~$ cd /etc/ansible/roles/
-	ansible@ansible:/etc/ansible/roles$ sudo git clone https://github.com/wazuh/wazuh-ansible.git -b 3.7 --single-branch
+	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch v3.8.1_6.5.4 https://github.com/wazuh/wazuh-ansible.git
 	ansible@ansible:/etc/ansible/roles$ ls
 	wazuh-ansible
