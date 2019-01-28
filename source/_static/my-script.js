@@ -51,6 +51,8 @@ function addVersions() {
     select_version.val('/' + path);
 
     select_version.change(function(event) {
-        window.location.href = event.target.value;
+      var version = window.location.pathname.split("/")[1];
+      var path = window.location.pathname.split(version)[1];
+      window.location.href = event.target.value+"/"+path;
     });
 }
