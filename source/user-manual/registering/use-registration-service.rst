@@ -72,6 +72,19 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
 
+
+.. note::
+  Remember to edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
+
+    .. code-block:: xml
+
+      <client>
+        <server>
+          <address>MANAGER_IP</address>
+          ...
+        </server>
+      </client>
+
 Password authorization
 ----------------------
 
