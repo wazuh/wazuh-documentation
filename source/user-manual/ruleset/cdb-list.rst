@@ -130,3 +130,28 @@ In case the field is an IP address, you must use *not_address_match_key*:
 .. code-block:: xml
 
    <list field="srcip" lookup="address_match_key_value" check_value="^reject">etc/lists/list-IP</list>
+
+
+Using rules labels:
+^^^^^^^^^^^^^^^^^^^
+   
+Users can define the CDB lists keys using labels as ``<var>``:
+
+.. code-block:: xml
+  <group name="custom,">
+    <var name="MACADDR">aa:bb:cc:dd:ff:00|11:22:33:44:55:66|1a:2b:3c:4d:5f:0a</var>
+
+      <rule id="102000" level="0">
+        <decoded_as>my_decoder</decoded_as>
+        <description>Previous rule to match</description>
+      </rule>
+
+      <rule id="102001" level="12">
+        <if_sid>102000</if_sid>
+        <field name="mac-addr">$MACADDR</field>
+        <description>Unrecognized MAC Address!!</description>
+      </rule>
+  </group>
+
+.. note::
+  This exmaple is very useful, as in CDB lists the key can't contain a colon ``:``. So the only way to do it is with this label.
