@@ -26,11 +26,8 @@ function addVersions() {
     var version = $(".version");
     var select_version = $("#select-version");
     var path = document.location.pathname.split('/')[1];
-    var path2 = document.location.pathname.split('/')[2];
-      if(!path2){
-        path2="";
-      }
-      
+    }
+
     if (version == null) {
         console.error("No such element of class 'version'");
         return;
@@ -55,6 +52,6 @@ function addVersions() {
     select_version.val('/' + path);
 
     select_version.change(function(event) {
-        window.location.href = event.target.value + "/" + path2;
+        window.location.href = event.target.value;
     });
 }
