@@ -5,6 +5,8 @@
 Rules Syntax
 ============
 
+In this section, **labels** used to configure ``rules`` are going to be explained.
+
 Available options
 -----------------
 
@@ -114,7 +116,7 @@ decoded_as
 category
 ^^^^^^^^^^
 
-The decoded category to match: ids, syslog, firewall, web-log, squid or windows.
+Selects in which rule decoding category the rule should be included: ids, syslog, firewall, web-log, squid or windows.
 
 +--------------------+--------------+
 | **Default Value**  | n/a          |
@@ -456,7 +458,7 @@ Extra information may be added through the following attributes:
 options
 ^^^^^^^^
 
-Additional rule options
+Additional rule options.
 
 +--------------------+-----------------------------------------------------+
 | Attribute          | Description                                         |
@@ -471,6 +473,13 @@ Additional rule options
 +--------------------+-----------------------------------------------------+
 | **no_counter**     | Omit field ``rule.firedtimes`` in the JSON alert.   |
 +--------------------+-----------------------------------------------------+
+
+.. code-block:: xml
+  <rule id="9800" level="8">
+    <match>illegal user|invalid user</match>
+    <description>sshd: Attempt to login using a non-existent user</description>
+    <options>no_log</options>
+  </rule>
 
 .. note::
   Use one ``<options>`` tag for each option you want to add.
@@ -493,8 +502,69 @@ Add additional groups to the alert. Groups are optional tags added to alerts.
 
 They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
 
+Groups are variables that define a behaviour. When an alert includes that group label, this behaviour will occur.
+As a example, users can configure email alerts with a group label:
+
+.. code-block:: xml
+
+  <email_alerts>
+    <email_to>you@example.com</email_to>
+    <group>alerts_to_receive_emails</group>
+  </email_alerts>
+
+When any alert with the ``<group>alerts_to_receive_emails</group>`` label will receive an email.
+
+It's a very useful label because it can give the same behaviour to many different rules.
+
 +--------------------+------------+
 | **Default Value**  | n/a        |
 +--------------------+------------+
 | **Allowed values** | Any String |
 +--------------------+------------+
+
+
+Rules examples:
+^^^^^^^^^^^^^^^^
+Here is a little list of possible rules configurations, all of them extracted from the **Wazuh Ruleset**:
+
+.. code-block:: xml
+
+  <rule id="3801" level="4">
+    <if_sid>3800</if_sid>
+    <action>RCPT</action>
+    <id>^550</id>
+    <description>ms-exchange: E-mail rcpt is not valid (invalid account).</description>
+    <group>spam,</group>
+  </rule>
+
+  <rule id="5703" level="10" frequency="6" timeframe="360">
+    <if_matched_sid>5702</if_matched_sid>
+    <same_source_ip />
+    <description>sshd: Possible breakin attempt </description>
+    <description>(high number of reverse lookup errors).</description>
+    <group>pci_dss_11.4,gpg13_4.12,gdpr_IV_35.7.d,</group>
+  </rule>
+
+
+  <rule id="5716" level="5">
+    <if_sid>5700</if_sid>
+    <match>^Failed|^error: PAM: Authentication</match>
+    <description>sshd: authentication failed.</description>
+    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,</group>
+  </rule>
+
+
+  <rule id="31108" level="0">
+    <if_sid>31100</if_sid>
+    <id>^2|^3</id>
+    <compiled_rule>is_simple_http_request</compiled_rule>
+    <description>Ignored URLs (simple queries).</description>
+  </rule>
+
+
+  <rule id="86003" level="3">
+    <if_sid>86000</if_sid>
+    <field name="docker.level">error</field>
+    <description>Docker: Error message</description>
+    <group>docker-error,</group>
+  </rule>

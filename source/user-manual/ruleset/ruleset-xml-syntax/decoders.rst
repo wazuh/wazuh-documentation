@@ -5,6 +5,8 @@
 Decoders Syntax
 ===============
 
+The decoders are instances that read the rules and filter the data that users specify in their **labels**.
+
 Options
 -------
 
@@ -90,6 +92,14 @@ The attribute below is optional, it allows to discard some of the content of the
 
 regex
 ^^^^^^^
+**Regular expressions** or ``regex`` are sequences of characters that define a pattern.
+Decoders use them to find words or other patterns into the rules.
+
+An example, is this regex that matches any numeral:
+
+  ..code-block:: xml
+    <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
+
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
