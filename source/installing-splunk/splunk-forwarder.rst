@@ -16,7 +16,7 @@ Depending on the type of architecture that you're installing, the Splunk Forward
 Installation process
 --------------------
 
-1. Download Splunk Forwarder v7.2.1 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
+1. Download Splunk Forwarder v7.2.3 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
 
 2. Install it with the following commands depending on your operating system:
 
@@ -32,7 +32,7 @@ Installation process
 
     # dpkg --install splunkforwarder-package.deb
 
-3. Ensure Splunk Forwarder v7.2.1 is installed in ``/opt/splunkforwarder``.
+3. Ensure Splunk Forwarder v7.2.3 is installed in ``/opt/splunkforwarder``.
 
 Configuration process
 ---------------------
@@ -52,7 +52,7 @@ Configuring props
 
   .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/props.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/props.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/splunk/props.conf
 
 Configuring inputs
 ++++++++++++++++++
@@ -61,7 +61,7 @@ Configuring inputs
 
   .. code-block:: console
 
-    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/inputs.conf
+    # curl -so /opt/splunkforwarder/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/splunk/inputs.conf
 
 2. Set the Wazuh manager hostname:
 

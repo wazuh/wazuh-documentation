@@ -60,7 +60,7 @@ Once the above has been configured, the ``email_alert_level`` needs to be set to
     ...
   </ossec_config>
 
-This example will set the minimum level to 10. For more information, see the :ref:`alerts section <reference_ossec_global>`.
+This example will set the minimum level to 10. For more information, see the :ref:`alerts section <reference_ossec_alerts>`.
 
 After the ``alert_level`` has been configured, Wazuh needs to be restarted for the change to take effect.
 
@@ -84,7 +84,7 @@ b) For SysV Init:
 Granular email options
 ----------------------
 
-Wazuh also allows granular configuration options for email alerts. Below are some sample granular configurations. For more information, see the :ref:`email_alerts section <reference_ossec_global>`.
+Wazuh also allows granular configuration options for email alerts. Below are some sample granular configurations. For more information, see the :ref:`email_alerts section <reference_ossec_email_alerts>`.
 
 .. warning::
 
