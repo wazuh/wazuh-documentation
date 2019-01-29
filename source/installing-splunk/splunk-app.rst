@@ -76,19 +76,14 @@ Installing the Wazuh App in a Splunk cluster
   We can install the App in each search-head by hand, but if we have hundreds or even thousands of search-heads, it will be better to install it automatically.
   For this purpose, we are using the **deployer**, a machine that installs the App in every search-head at the same time and automatically.
 
-
-.. warning::
-  We need to eliminate "SplunkAppForWazuh/default/indexes.conf" so it does not create automatic indexes in the search-heads.
-
 After installing the App following the **Official installation guide** in our **deployer** machine, we follow this steps:
 
 .. code-block:: console
 
   // Copy the app into the splunk cluster folder:
   # cp -r installation_path/SplunkAppForWazuh /opt/splunk/etc/shcluster/apps
-  // Delete the indexes.conf to don't install automatic indexers:
-  # rm /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/indexes.conf
-  // Create the configuration file we are really using to configure the cluster:
+
+  // Create the file that listens the outputs from the Wazuh API:
   # touch /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/outputs.conf
 
 Then, we fill the outputs.conf file wit the next lines:
