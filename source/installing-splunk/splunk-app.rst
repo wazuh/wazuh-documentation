@@ -55,7 +55,7 @@ Installation
   .. image:: ../images/splunk-app/app-icon.png
     :align: center
 
-4. The app will redirect you to the *Settings* tab, where you need to fill in the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
+4. The app will redirect you to the *Settings* tab, where fill the form with your **Wazuh API credentials**. Use the URL and port from your Wazuh API server.
 
   By default, the API port is ``55000``. The default username and password is ``foo:bar``. It's possible to check the connection by pressing the **Check connection** button on each API entry. A successful message appears on the bottom right corner if the app can estabilish a connection.
 
@@ -86,7 +86,7 @@ After installing the App following the **Official installation guide** in our **
   // Create the file that listens the outputs from the Wazuh API:
   # touch /opt/splunk/etc/shcluster/apps/SplunkAppForWazuh/default/outputs.conf
 
-Then, we fill the outputs.conf file wit the next lines:
+Then, fill the outputs.conf file wit the next lines:
 
 .. code-block:: xml
 
@@ -104,7 +104,10 @@ Then, we fill the outputs.conf file wit the next lines:
   We use indexerDiscovery to connect to peer nodes. Click `here <https://docs.splunk.com/Documentation/Splunk/7.1.3/Indexer/indexerdiscovery>`_ to check more info about indexerDiscovery.
 
 .. note::
-  <master_ip> references to the search-heads master ip.
+  <master_ip> references to the indexers master ip.
+
+.. warning::
+  The ``https`` is required by default and the default port is the 8089.
 
 Apply the changes:
 
@@ -128,5 +131,3 @@ Then, we synchronize with the option -force and will be deleted from the search 
 .. code-block:: console
 
   # /opt/splunk/bin/splunk apply shcluster-bundle -force true -target https://<NODE_IP>:<management_port> -auth <user>:<password> -f
-
-Now, we follow the steps related in the **Installing the Wazuh App in a search-heads cluster**.

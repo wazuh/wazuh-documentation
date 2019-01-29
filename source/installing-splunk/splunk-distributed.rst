@@ -76,9 +76,9 @@ Configuring the Splunk instances
 Indexers:
 +++++++++
 
-In the last instance, the **master instance**, make the configuration that will be pushed to the indexers.
+In the **master instance** users will make the configuration that will be pushed to the rest of the indexers.
 
-For this configuration is necessary to create the following two files and paste into them the following blocks of code respectively:
+For this configuration is necessary to create the following two files and paste them into the following blocks of code respectively:
 
 .. code-block:: console
 
@@ -96,6 +96,8 @@ Now, to create and configure the *indexes.conf* file, execute the following *com
 
   # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer-indexes.conf
 
+This is the content of that file:
+
 .. code-block:: xml
 
   [wazuh]
@@ -108,10 +110,7 @@ Now, to create and configure the *indexes.conf* file, execute the following *com
   timePeriodInSecBeforeTsidxReduction = 15552000
   tsidxReductionCheckPeriodInSec =
 
-.. note::
-  We recommend using the first resumed command.
-
-Now, restart Wazuh:
+Now, restart the Splunk Service:
 
 .. code-block:: console
 
@@ -132,4 +131,3 @@ Useful Links:
 -------------
 - You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.3/Admin/CLIadmincommands>`_ .
 - To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/7.2.3/DistSearch/Whatisdistributedsearch>`_ from the official documentation.
-
