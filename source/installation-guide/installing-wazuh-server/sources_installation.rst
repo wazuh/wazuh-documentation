@@ -44,8 +44,12 @@ Installing Wazuh manager
 
   .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
-  .. note:: Users can configure the ``install.sh`` file to edit the path of the installation.
-  
+  .. note::
+    During the installation, users can decide the installation path.
+    Make sure the installation path is available for the installation.
+    For example, Wazuh will be installed in ``/var/ossec`` by default, but users can choose to install it on ``/Desktop/wazuh``, ``/home``, etc.
+    What the user should never do is choose an installation path unaccesible or critical, as ``/bin``, ``/dev``, etc.
+
 4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
 
   .. code-block:: none
