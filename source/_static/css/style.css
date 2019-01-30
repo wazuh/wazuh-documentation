@@ -262,6 +262,38 @@ nav.full-toctree-nav ul > li.toctree-l1::before {
   padding-right: 10px;
 }
 
+a.headerlink {
+  min-height: 1.5rem;
+  color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+a.headerlink:before {
+  vertical-align: middle;
+  color: #ffb600;
+  content: '\f0c1';
+  display: inline-block;
+  font: normal normal normal 15px/.5 FontAwesome;
+  text-align: right;
+  padding-left: 10px;
+}
+
+a.headerlink:hover,
+a.headerlink:active {
+  color: transparent;
+  text-decoration: none;
+}
+
+a.headerlink:hover::before,
+a.headerlink:active::before {
+  color: #00a9e5
+}
+
 #page .img-space {
   display: inline-block;
   width: 100%;
@@ -1138,13 +1170,6 @@ h4, h5, h6 {
 ul {
   padding-left: 0;
   list-style: none;
-}
-
-#page .section ul li::before {
-  content: '\f069';
-  margin-right: 8px;
-  color: #00a9e5;
-  font: normal normal normal 14px/1 FontAwesome;
 }
 
 .page.search-page h2,
