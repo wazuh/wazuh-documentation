@@ -17,7 +17,6 @@
 {%- else %}
   {%- set titlesuffix = "" %}
 {%- endif %}
-{% set footer_logo = theme_base_url + "/_static/wazuh_logo_w.png" %}
 
 {%- macro css() %}
   <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
@@ -120,9 +119,11 @@
       <div class="container">
         <div class="row">
           <div class="title-bar-left col-xs-12 col-md-7 col-lg-8 col-xl-9">
-            <a href="{{ theme_base_url }}" class="title">Documentation</a>
+            <a href="{{ pathto(master_doc) }}" class="title">Documentation</a>
             <span class="release-selector-wrapper">
-              Selector [TODO]
+              {% if theme_display_version %}
+                {% include "versions.html" %}
+              {% endif %}
             </span>
           </div>
           <div id="search-md" class="title-bar-right col-md-5 col-lg-4 col-xl-3 d-none d-md-inline-block">
@@ -146,7 +147,7 @@
 
             <div class="globaltoc" role="navigation" aria-label="main navigation">
               {% block menu %}
-              {% set toctree = toctree(maxdepth=4, collapse=theme_collapse_navigation, includehidden=True) %}
+              {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
               {% if toctree %}
               {{ toctree }}
               {% else %}
@@ -156,7 +157,6 @@
               {% endblock %}
             </div>
           </div>
-          <ul class="globaltoc">{{ toctree(maxdepth=theme_globaltoc_depth|toint, collapse=False,includehidden=theme_globaltoc_includehidden|tobool) }}</ul>
           <!-- // To be customized -->
 
           <!-- TODO: To be removed -->
@@ -168,10 +168,15 @@
           <!-- // To be removed -->
         </nav>
 
-        {# Main content #}
-        <main class="col-md-9">
-          {% block body %} {% endblock %}
-        </main>
+        <div class="col-md-9">
+          <div class="breadcrumbs col-xs-12">
+            {% include "breadcrumbs.html" %}
+          </div>
+          {# Main content #}
+          <main>
+            {% block body %} {% endblock %}
+          </main>
+        </div>
       </div>
 
     </section>
