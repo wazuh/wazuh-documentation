@@ -12,6 +12,6 @@ This section shows the most relevant improvements and fixes in version 3.8.2. Mo
 Wazuh core
 ----------
 
-- Fixed a segmentation fault when parsing a log from OpenLDAP and using the option ``<accumulate>`` at the same time.
-- Fixed an issue related to Wazuh modules daemon which were crashing if a ``<command>`` is present in the configuration without using ``<tag>``.
-- The EventChannel decoder for Windows has been improved, now it escapes backslashes properly and it's not adding spurious trailing spaces in some fields.
+- Fixed a segmentation fault when using ``<accumulate>`` rules attribute.
+- Fixed an issue in Wazuh modules daemon configuration when ``<command>`` was used and no ``<tag>`` was set.
+- Event channel decoder for Windows now escapes backslashes properly and it's not adding spurious trailing spaces in some fields.
