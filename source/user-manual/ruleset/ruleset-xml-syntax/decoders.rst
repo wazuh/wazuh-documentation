@@ -22,6 +22,7 @@ Options
 - `plugin_decoder`_
 - `use_own_name`_
 - `json_null_field`_
+- `location`_
 
 decoder
 ^^^^^^^
@@ -259,4 +260,17 @@ Specify how to treat the `NULL` fields coming from the JSON events. Only for the
 |                    | discard (It discard NULL fields and doesn't store them into the alert)  |
 +                    +-------------------------------------------------------------------------+
 |                    | empty (It shows the NULL field as an empty field)                       |
++--------------------+-------------------------------------------------------------------------+
+
+location
+^^^^^^^^
+
+Points the source where the event has been readed, like a log file or an agent.
+
++--------------------+-------------------------------------------------------------------------+
+| **Default Value**  | string                                                                  |
++--------------------+-------------------------------------------------------------------------+
+| **Allowed values** | File path (`/var/log/syslog`)                                           |
++                    +-------------------------------------------------------------------------+
+|                    | An agent (`(ubuntu)->192.168.1.22`)                                     |
 +--------------------+-------------------------------------------------------------------------+

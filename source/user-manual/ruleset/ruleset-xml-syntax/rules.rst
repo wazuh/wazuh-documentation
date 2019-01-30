@@ -5,7 +5,7 @@
 Rules Syntax
 ============
 
-In this section, **labels** used to configure ``rules`` are going to be explained.
+In this section, **xml labels** used to configure ``rules`` are listed.
 
 Available options
 -----------------
@@ -45,6 +45,7 @@ Available options
 - `options`_
 - `check_diff`_
 - `group`_
+- `status`_
 
 rule
 ^^^^
@@ -522,6 +523,16 @@ It's a very useful label because it can give the same behaviour to many differen
 | **Allowed values** | Any String |
 +--------------------+------------+
 
+status
+^^^^^^
+
+Declares the actual status of a rule.
+
++--------------------+----------------------------------------------+
+| **Default Value**  | n/a                                          |
++--------------------+----------------------------------------------+
+| **Allowed values** | started, aborted, succedeed, failed, lost... |
++--------------------+----------------------------------------------+
 
 Rules examples:
 ^^^^^^^^^^^^^^^^
