@@ -338,9 +338,9 @@ For example, the following snippet shows the connected nodes in the cluster:
     ---------------------------------------
     Name    Address         Type    Version
     ---------------------------------------
-    node01  192.168.56.101  master  3.8.1
-    node02  192.168.56.103  worker  3.8.1
-    node03  192.168.56.105  worker  3.8.1
+    node01  192.168.56.101  master  3.8.2
+    node02  192.168.56.103  worker  3.8.2
+    node03  192.168.56.105  worker  3.8.2
     ---------------------------------------
 
 This information can also be obtained using the Restful API:
@@ -355,19 +355,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.8.1",
+                "version": "3.8.2",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.8.1",
+                "version": "3.8.2",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.8.1",
+                "version": "3.8.2",
                 "type": "master",
                 "name": "node01"
              }

@@ -97,7 +97,7 @@ Upgrade the Wazuh agent
 
   .. code-block:: console
 
-    # wazuh-agent-3.8.0-1.msi /q
+    # wazuh-agent-3.8.2-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
@@ -294,7 +294,7 @@ Upgrade Kibana
   .. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.1_6.5.4.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.5.4.zip
 
 .. warning::
   The Wazuh app installation process may take several minutes. Please wait patiently.
