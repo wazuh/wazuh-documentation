@@ -12,7 +12,7 @@
       <div class="footer-column col-xs-12 col-md-5">
         <div class="logo">
           <a href= {{ theme_wazuh_web_url }} >
-            <img src= {{ footer_logo }} alt="Wazuh Logo. Home">
+            <img src={{ pathto('_static/wazuh_logo_w.png', 1) }} alt="Wazuh Logo. Home">
           </a>
         </div>
 
@@ -55,13 +55,14 @@
 
       <div class="footer-column white-bullets col-md-4 col-lg-4">
         <span class="footer-title"></span>
+
         <ul id="menu-footer-documentation" class="menu">
-          <li class="menu-item nav-item"><a href={{ theme_base_url + '/getting-started/' }}>Getting started</a></li>
-          <li class="menu-item nav-item"><a href={{ theme_base_url + '/installation-guide' }}>Installation guide</a></li>
-          <li class="menu-item nav-item"><a href={{ theme_base_url }}>Architecture</a></li>
-          <li class="menu-item nav-item"><a href={{ theme_base_url }}>User Manual</a></li>
-          <li class="menu-item nav-item"><a href={{ theme_base_url }}>Migrating from OSSEC</a></li>
-          <li class="menu-item nav-item"><a href={{ theme_base_url }}>Using Wazuh for PCI DSS</a></li>
+          <li class="menu-item nav-item"><a href="{{ pathto(master_doc + '/../' + version + '/getting-started/', 1 ) }}">Getting started</a></li>
+          <li class="menu-item nav-item"><a href="{{ pathto(master_doc + '/../' + version + '/installation-guide/', 1 ) }}">Installation guide</a></li>
+          <li class="menu-item nav-item"><a href="{{ pathto(master_doc + '/../' + version + '/architecture/', 1 ) }}">Architecture</a></li>
+          <li class="menu-item nav-item"><a href="{{ pathto(master_doc + '/../' + version + '/user-manual/', 1 ) }}">User Manual</a></li>
+          <li class="menu-item nav-item"><a href="{{ pathto(master_doc + '/../' + version + '/migrating-from-ossec/', 1 ) }}">Migrating from OSSEC</a></li>
+          <li class="menu-item nav-item"><a href="{{ pathto(master_doc + '/../' + version + '/using-wazuh-for-pci-dss/', 1 ) }}">Using Wazuh for PCI DSS</a></li>
         </ul>
       </div>
       <div class="footer-column white-bullets col-xs-12 col-md-3">

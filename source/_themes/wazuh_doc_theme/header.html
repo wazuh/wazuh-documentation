@@ -26,7 +26,7 @@
           <i class="x" aria-hidden="true"></i><!-- <i class="fa fa-bars"></i> -->
         </button>
         <div id="logo-title">
-          <a class="navbar-brand" href="https://wazuh.com" title="Wazuh">
+          <a class="navbar-brand" href={{ theme_wazuh_web_url }} title="Wazuh">
             <img class="img-responsive d-none d-md-block" src={{ pathto('_static/wazuh_logo.png', 1) }} alt="Wazuh" />
             <img class="img-responsive d-md-none" src={{ pathto('_static/wazuh_blue_iso.png', 1) }} alt="Wazuh" />
           </a>
@@ -38,7 +38,7 @@
         <nav id="collapsibleNavbar" class="collapse navbar-collapse navbar-main-collapse">
           <ul id="main-menu" class="main-menu navbar-nav">
             <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/product/">Product</a></li>
-            <li class="menu-item nav-item active"><a class="nav-link" href={{ theme_base_url }}>Documentation</a></li>
+            <li class="menu-item nav-item active"><a class="nav-link" href="{{ pathto(master_doc) }}">Documentation</a></li>
             <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/blog/">Blog</a></li>
             <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/cloud/">Cloud</a></li>
             <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/professional-services/">Services</a></li>
