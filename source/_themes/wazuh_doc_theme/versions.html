@@ -1,0 +1,9 @@
+{%- set nav_version = version %}
+{% if current_version %}
+  {%- set nav_version = current_version %}
+{% endif %}
+{% if nav_version %}
+  <span class="version">
+    <select id="select-version"></select>
+  </span>
+{% endif %}
