@@ -23,12 +23,12 @@ Reasons for using a cluster
 Horizontal scalability
 ~~~~~~~~~~~~~~~~~~~~~~
 
-It multiplies Wazuh's event processing capacity and allows to have thousands of agents reporting. Adding a new node to the cluster is very simple (just add the master's address in the configuration) and it can be automated easily, giving the user the ability to implement auto-scaling.
+It multiplies Wazuh's event processing capacity and allows it to have thousands of agents reporting. Adding a new node to the cluster is very simple (just add the master's address in the configuration) and it can be automated easily, giving the user the ability to implement auto-scaling.
 
 High availability
 ~~~~~~~~~~~~~~~~~
 
-Server eventually fail: hardware can be broken, a human can turn them off, the system can go down... And while the server is restored, you won't be able to see what is happening in your agents. Using a cluster you make sure your agents will always have a manager to report to.
+Servers eventually fail: hardware can be broken, a human can turn them off, the system can go down... And while the server is restored, you won't be able to see what is happening in your agents. Using a cluster you make sure your agents will always have a manager to report to.
 
 .. thumbnail:: ../../images/manual/cluster/cluster_infrastructure.png
     :title: Wazuh cluster infrastructure
@@ -278,7 +278,7 @@ The cluster will work with an old configuration but it is recommended to update 
 How the cluster works
 ---------------------
 
-The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates all the nodes following a master-worker architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
+The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates with all the nodes following a master-worker architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
 
 The image below shows the communications between a worker and a master node. Each worker-master communication is independent from each other, since workers are the ones who start the communication with the master.
 
@@ -338,9 +338,9 @@ For example, the following snippet shows the connected nodes in the cluster:
     ---------------------------------------
     Name    Address         Type    Version
     ---------------------------------------
-    node01  192.168.56.101  master  3.8.1
-    node02  192.168.56.103  worker  3.8.1
-    node03  192.168.56.105  worker  3.8.1
+    node01  192.168.56.101  master  3.8.2
+    node02  192.168.56.103  worker  3.8.2
+    node03  192.168.56.105  worker  3.8.2
     ---------------------------------------
 
 This information can also be obtained using the Restful API:
@@ -355,19 +355,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.8.1",
+                "version": "3.8.2",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.8.1",
+                "version": "3.8.2",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.8.1",
+                "version": "3.8.2",
                 "type": "master",
                 "name": "node01"
              }
