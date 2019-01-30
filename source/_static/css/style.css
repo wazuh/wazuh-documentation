@@ -994,6 +994,31 @@ select, option {
   -moz-appearance: none; /* Gecko */
 }
 
+.version {
+  position: relative;
+}
+
+select#select-version {
+  border: none;
+  margin-left: 5px;
+  padding: 2px 15px 2px 2px;
+  cursor: pointer;
+  position: relative;
+}
+
+.version:after {
+  position: absolute;
+  top: 0.5em;
+  right: 0;
+  content: '';
+  width: 0.5em;
+  height: 0.5em;
+  border-left: 5px solid #0000;
+  border-right: 5px solid #0000;
+  border-top: 5px solid #ffb600;
+  pointer-events: none;
+}
+
 form .label-box select {
   margin-left: -2px;
 }
