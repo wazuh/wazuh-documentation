@@ -5,7 +5,8 @@
 Using the RESTful API
 =====================
 
-As with the command line, certain tasks can be performed via the RESTful API:
+As with the command line, certain tasks can be performed via the RESTful API.
+Using simple commands as ``GET`` and ``POST`` users can register, list and remove agents and all their different variants:
 
 .. topic:: Contents
 
