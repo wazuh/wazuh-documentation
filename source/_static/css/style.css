@@ -1132,7 +1132,7 @@ form [type=submit]:disabled {
   border-bottom: 1px solid #00a9e5;
 }
 
-#page ul:not(#main-menu) li {
+.central-page-area ul li {
   padding-top: 5px;
   padding-bottom: 5px;
 }
@@ -1722,6 +1722,31 @@ a.loadmore {
   border: 1px solid #ffb600;
   background-color: #ffb600;
   color: #ffffff;
+}
+
+ul#breadcrumbs {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-bottom: 0;
+}
+
+ul#breadcrumbs .fa-caret-right {
+  color: #ffb600;
+  padding: 0 4px;
+}
+
+ul#breadcrumbs li,
+ul#breadcrumbs a {
+  font-size: 0.87rem;
+  padding-top: 0;
+}
+
+.edit-repo {
+  text-align: right;
+  font-size: 0.87rem;
 }
 
 @media (min-width:576px){
