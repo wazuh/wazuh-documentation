@@ -25,7 +25,7 @@
 {% endif %}
 
 <div class="row">
-  <div class="col-sm-9">
+  <div class="col-12">
     <ul id="breadcrumbs" role="navigation" aria-label="breadcrumbs navigation">
       {% block breadcrumbs %}
       <li><a href="{{ pathto(master_doc) }}">{{ _('Documentation') }}</a> <i class="fa fa-caret-right" aria-hidden="true"></i></li>
@@ -38,7 +38,7 @@
   </div>
   {% block breadcrumbs_aside %}
   {% if display_github or display_bitbucket or display_gitlab  %}
-  <div class="col-sm-3">
+  <div class="col-12">
     <div class="edit-repo">
       {% if hasdoc(pagename) %}
       {% if display_github %}
