@@ -843,6 +843,7 @@ footer .contact-info .fa-paper-plane-o {
   color: #fff;
   background-color: #00a9e5;
   border-bottom: 1px solid #0094ce;
+  border: none;
 }
 
 #main-menu a:active,
@@ -1444,9 +1445,10 @@ footer a {
 }
 
 .jumbotron {
-  padding: 15px 0;
+  padding:0;
   margin-bottom: 0.5em;
   font-weight: 400;
+  border-radius: 0;
 }
 
 .jumbotron h1 {
@@ -1749,6 +1751,16 @@ ul#breadcrumbs a {
   font-size: 0.87rem;
 }
 
+.jumbo-bar .white-bar {
+  padding: 15px;
+  background-color: #ffffff;
+}
+
+.jumbo-bar .blue-bar {
+  padding: 15px;
+  background-color: #00a9e5;
+}
+
 @media (min-width:576px){
 
   h1.smaller-title {
@@ -1876,11 +1888,22 @@ ul#breadcrumbs a {
         width: 200px;
       }
 
-      #collapsibleNavbar {
+      #collapsibleNavbar,
+      #collapsibleBlueBar {
         position: static;
+      }
+
+      #collapsibleNavbar {
         -webkit-box-pack: end;
             -ms-flex-pack: end;
                 justify-content: flex-end;
+      }
+
+      #collapsibleBlueBar {
+        margin: 0 -6px;
+        -webkit-box-pack: start;
+            -ms-flex-pack: start;
+                justify-content: flex-start;
       }
 
       #main-menu-container #main-menu-search-bar {
@@ -2222,8 +2245,16 @@ ul#breadcrumbs a {
       }
 
       .jumbotron {
-        padding: 15px;
+        padding: 0;
         height: 250px;
+      }
+
+      .jumbo-bar .white-bar {
+        padding: 15px;
+      }
+
+      .jumbo-bar .blue-bar {
+        padding: 0 15px;
       }
 
       .jumbo-bar .title {
@@ -2304,6 +2335,12 @@ ul#breadcrumbs a {
       .main-menu a {
         color: #00a9e5;
         background-color: #fff;
+        border: none;
+      }
+
+      .docu-menu a {
+        color: #fff;
+        background-color: #00a9e5;
         border: none;
       }
 
