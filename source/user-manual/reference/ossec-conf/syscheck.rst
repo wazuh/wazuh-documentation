@@ -445,6 +445,7 @@ The Whodata options will be configured inside this tag.
     <!-- Audit keys -->
     <whodata>
         <audit_key>auditkey1,auditkey2</audit_key>
+        <audit_healthcheck_enabled>yes</audit_healthcheck_enabled>
     </whodata>
 
 **audit_key**
@@ -458,6 +459,20 @@ Set up the FIM engine to collect the Audit events using keys with ``audit_key``.
 +--------------------+------------------------------------+
 
 .. note:: Audit allow inserting spaces inside the keys, so the spaces inserted inside the field ``<audit_key>`` will be part of the key.
+
+**audit_healthcheck_enabled**
+
+.. versionadded:: 3.9.0
+
+This option allows to disable the Audit health check during the Whodata engine starting. This option is only available for **Linux systems with Audit**.
+
++--------------------+------------+
+| **Default value**  | yes        |
++--------------------+------------+
+| **Allowed values** | yes, no    |
++--------------------+------------+
+
+.. warning:: The health check ensures that the rules required by Whodata can be set in Audit correctly and also that the generated events can be obtained. Disabling the health check may cause functioning problems in Whodata and loss of FIM events.
 
 
 Default Unix configuration
@@ -474,15 +489,10 @@ Default Unix configuration
 
     <scan_on_start>yes</scan_on_start>
 
-    <!-- Audit keys -->
-    <whodata>
-        <audit_key>auditkey1,auditkey2</audit_key>
-    </whodata>
-
     <!-- Generate alert when new file detected -->
     <alert_new_files>yes</alert_new_files>
 
-    <!-- Don't ignore files that change more than 3 times -->
+    <!-- Don't ignore files that change more than 'frequency' times -->
     <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
 
     <!-- Directories to check  (perform all possible verifications) -->
@@ -502,6 +512,11 @@ Default Unix configuration
     <ignore>/etc/cups/certs</ignore>
     <ignore>/etc/dumpdates</ignore>
     <ignore>/etc/svc/volatile</ignore>
+    <ignore>/sys/kernel/security</ignore>
+    <ignore>/sys/kernel/debug</ignore>
+
+    <!-- File types to ignore -->
+    <ignore type="sregex">.log$|.swp$</ignore>
 
     <!-- Check the file, but never compute the diff -->
     <nodiff>/etc/ssl/private.key</nodiff>
