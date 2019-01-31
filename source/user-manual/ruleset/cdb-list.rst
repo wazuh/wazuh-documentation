@@ -132,9 +132,9 @@ In case the field is an IP address, you must use *not_address_match_key*:
    <list field="srcip" lookup="address_match_key_value" check_value="^reject">etc/lists/list-IP</list>
 
 
-Using rules labels:
-^^^^^^^^^^^^^^^^^^^
-   
+Defining a conflictive key
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Users can define the CDB lists keys using labels as ``<var>``:
 
 .. code-block:: xml
