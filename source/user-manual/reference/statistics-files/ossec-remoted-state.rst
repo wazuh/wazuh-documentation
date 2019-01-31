@@ -5,9 +5,9 @@
 ossec-remoted state file
 ========================
 
-The statistical file for **ossec-remoted** is ``ossec-remoted.state`` and it's located under the Wazuh installation directory (``/var/ossec/var/run/ossec-remoted.state``).
+The statistical file for **ossec-remoted** is ``ossec-remoted.state`` and it's located in the Wazuh installation directory (``/var/ossec/var/run/ossec-remoted.state``).
 
-This file provides information about the **ossec-remoted** daemon like the queue size, discarded messages or the number of TCP sessions among others. By default, this file is updated **every 5 seconds** but this interval can be changed with the ``remoted.state_interval`` variable in the ``internal_options.conf`` file. For further information please visit the :ref:`internal configuration <reference_internal_options>` page.
+This file provides information about the **ossec-remoted** daemon like the queue size, discarded messages or the number of TCP sessions among others. By default, this file is updated **every 5 seconds** but this interval can be changed with the ``remoted.state_interval`` variable in the ``internal_options.conf`` file. For further information, visit the :ref:`internal configuration <reference_internal_options>` page.
 
 .. note:: The ``ossec-remoted.state`` statistical file is only available in managers.
 
