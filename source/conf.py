@@ -15,6 +15,7 @@ compat.make_admonition = BaseAdmonition
 import sys
 import os
 import shlex
+import datetime
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -25,7 +26,7 @@ import shlex
 
 project = u'Wazuh'
 author = u'Wazuh, Inc.'
-copyright = u'&copy; 2018 &middot; Wazuh Inc.'
+copyright = u'&copy; ' + str(datetime.datetime.now().year) + u' &middot; Wazuh Inc.'
 
 # The short X.Y version
 version = '3.8'
