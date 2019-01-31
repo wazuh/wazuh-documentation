@@ -219,10 +219,41 @@ The correct way to use it is to point every agent to send the events to the *loa
 
       # service wazuh-agent restart
 
-3. Include in the ``Load Balancer`` the IP of every member of the cluster we want to deliver events.
+3. Include in the ``Load Balancer`` the IP of every instance of the cluster we want to deliver events.
 
   This configuration will depend of the load balancer service choosen.
-  For example, if the user decide to use **NginX Plus** as the load balancer service, by following their `Official Documentation Guide <https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/#intro>`_  will learn how to add the IPs list to the **load balancer**.
+
+Here is a short configuration guide of a **load balancer** using Nginx:
+
+  1. Install Nginx in the *load balancer instance*:
+    - Download the packages from the `Official Page. <http://nginx.org/en/linux_packages.html>`_
+    - Follow the steps related on that guide to install the packages.
+  2. Configure the instance as a *load balancer*:
+    - The way nginx and its modules work is determined in the configuration file. By default, the configuration file is named nginx.conf and placed in the directory /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx.
+    - Now, open the configuration file and add the following structure:
+
+      .. code-block:: xml
+
+        cluster-stream {
+          upstream mycluster {
+            server <INSTANCE_IP>:1516;
+            server <INSTANCE_IP>:1516;
+            server <INSTANCE_IP>:1516;
+            ...
+          }
+
+          server {
+            listen 1516;
+
+            location / {
+              proxy_pass mycluster;
+            }
+          }
+        }
+
+    3. Restart nginx configuration files:
+      - nginx -s reload
+
 
 Keep in mind the following considerations:
 
