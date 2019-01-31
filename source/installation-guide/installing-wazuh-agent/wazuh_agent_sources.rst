@@ -42,6 +42,13 @@ Installing Linux agent
     # cd wazuh-*
     # ./install.sh
 
+.. note::
+  During the installation, users can decide the installation path.
+  Make sure the installation path is available for the installation.
+  For example, Wazuh will be installed in ``/var/ossec`` by default, but users can choose to install it on ``/Desktop/wazuh``, ``/home``, etc.
+  What the user should never do is choose an installation path unaccesible or critical, as ``/bin``, ``/dev``, etc.
+
+
 .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>`.
