@@ -253,13 +253,56 @@ footer a:focus .fa {
 }
 
 .page ul:not(.nav) > li::before,
-nav.full-toctree-nav ul > li.toctree-l1::before {
+ul > li.toctree-l1 > a::before,
+ul li.toctree-l2 > a::before,
+ul li.toctree-l3 > a::before {
   color: #ffb600;
   content: '\f0da';
   display: inline-block;
   font: normal normal normal 15px/.5 FontAwesome;
   text-align: right;
   padding-right: 10px;
+}
+
+li.toctree-l1 > ul,
+li.toctree-l2 > ul,
+li.toctree-l3 > ul {
+  padding-left: 1rem;
+}
+
+ul > li.toctree-l1.current > a::before,
+li.toctree-l2.current > a::before {
+  content: '\f0d7';
+}
+
+.globaltoc ul {
+  display: block;
+  width: 100%;
+}
+
+ul li.toctree-l1 a.current.reference.internal {
+  color: #00a9e5;
+}
+
+.globaltoc ul li.toctree-l1 a {
+  color: #333333;
+}
+
+.compound ul li.toctree-l1 a {
+  padding: 4px 1px;
+}
+
+.toctree-l1 > a,
+.toctree-l2 > a {
+  font-size: 1em;
+}
+
+.toctree-l3 > a {
+  font-size: 0.87em;
+}
+
+.toctree-l4 > a {
+  font-size: 0.82em;
 }
 
 a.headerlink {
@@ -281,6 +324,7 @@ a.headerlink:before {
   font: normal normal normal 15px/.5 FontAwesome;
   text-align: right;
   padding-left: 10px;
+  padding-bottom: 4px;
 }
 
 a.headerlink:hover,
@@ -1170,6 +1214,11 @@ form [type=submit]:disabled {
   font-weight: 400;
   color: #00a9e5;
   line-height: 1.1;
+}
+
+#page .jumbo-bar .title:hover,
+#page .jumbo-bar .title:active {
+  text-decoration: none;
 }
 
 .search-page .results-wrapper h1.no-results {
