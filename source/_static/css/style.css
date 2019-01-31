@@ -284,11 +284,11 @@ ul li.toctree-l1 a.current.reference.internal {
   color: #00a9e5;
 }
 
-.globaltoc ul li.toctree-l1 a {
+.globaltoc li.toctree-l1 a {
   color: #333333;
 }
 
-.compound ul li.toctree-l1 a {
+.compound li.toctree-l1 a {
   padding: 4px 1px;
 }
 
@@ -1353,7 +1353,8 @@ blockquote pre {
 /* Overrides Bootstrap style
 -------------------------------------------------------------- */
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6,
+#page .topic .topic-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   color: #00a9e5;
@@ -1372,7 +1373,8 @@ h2 {
   font-size: 24px;
 }
 
-h3 {
+h3,
+#page .topic .topic-title {
   font-size: 20px;
 }
 
@@ -2035,7 +2037,8 @@ ul#breadcrumbs a {
         font-size: 30px;
       }
 
-      h3 {
+      h3,
+      #page .topic .topic-title {
         font-size: 26px;
       }
 
