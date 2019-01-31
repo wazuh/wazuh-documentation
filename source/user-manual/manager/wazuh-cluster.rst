@@ -219,10 +219,10 @@ The correct way to use it is to point every agent to send the events to the *loa
 
       # service wazuh-agent restart
 
-3. Point the ``Load Balancer`` to the master node of the cluster.
+3. Include in the ``Load Balancer`` the IP of every member of the cluster we want to deliver events.
 
   This configuration will depend of the load balancer service choosen.
-  For example, if the user decide to use **NginX Plus** as the load balancer service, by following their `Official Documentation Guide <https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/#intro>`_  will learn how to configure the load balancer IP to point to the master node IP.
+  For example, if the user decide to use **NginX Plus** as the load balancer service, by following their `Official Documentation Guide <https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/#intro>`_  will learn how to add the IPs list to the **load balancer**.
 
 Keep in mind the following considerations:
 
