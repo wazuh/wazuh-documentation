@@ -15,10 +15,10 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
 .. code-block:: console
 
   "kibana": {
-    "version": "6.5.4"
+    "version": "6.6.0"
   },
 
-Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.5.4`` then your installed Kibana version must be ``6.5.4``.
+Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.6.0`` then your installed Kibana version must be ``6.6.0``.
 
 You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
