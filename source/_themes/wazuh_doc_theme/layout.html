@@ -137,43 +137,6 @@
   <div id="page">
     {% include "header.html" %} {%- block header %}{% endblock header %}
 
-    {%- block docu_top_bar %}
-    <div class="jumbotron jumbo-bar">
-      <div class="white-bar">
-        <div class="container">
-          <div class="row">
-            <div class="title-bar-left col-xs-12 col-md-7 col-lg-8 col-xl-9">
-              <a href="{{ pathto(master_doc) }}" class="title">Documentation</a>
-              <span class="release-selector-wrapper">
-                {% if theme_display_version %}
-                {% include "versions.html" %}
-                {% endif %}
-              </span>
-            </div>
-            <div id="search-md" class="title-bar-right col-md-5 col-lg-4 col-xl-3 d-none d-md-inline-block">
-              {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
-            </div> <!-- // #search-md -->
-          </div>
-        </div>
-      </div>
-      <div class="blue-bar navbar navbar-expand-md d-none d-md-block" role="navigation">
-        <div class="col">
-          <div class="container">
-            <nav id="collapsibleBlueBar" class="collapse navbar-collapse navbar-main-collapse">
-              <ul id="docu-menu" class="docu-menu navbar-nav">
-                <li class="menu-item nav-item"><a class="nav-link" href="#">Guides</a></li>
-                <li class="menu-item nav-item"><a class="nav-link" href="#">Product manuals</a></li>
-                <li class="menu-item nav-item"><a class="nav-link" href="#">Glossary</a></li>
-                <li class="menu-item nav-item"><a class="nav-link" href="#">Reference</a></li>
-                <li class="menu-item nav-item"><a class="nav-link" href="#">Samples</a></li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% endblock docu_top_bar %}
-
     <section  class="container central-page-area">
       <div class="row">
         <nav class="col-md-3 full-toctree-nav">

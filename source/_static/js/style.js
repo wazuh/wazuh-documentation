@@ -73,7 +73,7 @@ $(function(){
     return false;
   });
 
-  if( document.documentElement.scrollHeight-38 > document.documentElement.clientHeight ) { // 38 is the height of Wazuh's social bar on top of the page
+  if( document.documentElement.scrollHeight-120 > document.documentElement.clientHeight ) { // 120 is the height of Wazuh's social bar on top of the page
     // Scroll-down animation will only be availabloe on pages longer than the client's viewports height
     $(document).on('scroll', function(){
       var scrollvalue = $(document).scrollTop();

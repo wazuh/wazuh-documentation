@@ -1947,7 +1947,7 @@ div.highlight pre {
       }
 
       body:not(.scrolled-down) {
-        padding-top: 120px;
+        padding-top: 240px;
         -webkit-transition: padding-top .3s;
         transition: padding-top .3s;
       }
@@ -2097,29 +2097,34 @@ div.highlight pre {
       }
 
       .scrolled-down {
-        padding-top: 58px;
+        padding-top: 100px;
         -webkit-transition: padding-top .5s;
         transition: padding-top .5s;
       }
 
       :not(.scrolled-down) .fixed-top {
-        -webkit-transition: top .3s;
-        transition: top .3s;
+        -webkit-transition: top .4s;
+        transition: top .4s;
       }
 
       body.scrolled-down .fixed-top {
-        top: -42px;
-        -webkit-transition: top .3s;
-        transition: top .3s;
+        top: -120px;
+        -webkit-transition: top .4s;
+        transition: top .4s;
       }
 
-      .scrolled-down #branding #main-menu-container {
-        height: 58px;
-        -webkit-transition: height .3s;
-        transition: height .3s;
+      .scrolled-down ul#main-menu {
+        height: 81px;
       }
 
-      .scrolled-down #branding #main-menu-container .widget_search {
+      .scrolled-down #branding .white-bar {
+        height: 44px;
+        padding: 4px 15px;
+        -webkit-transition: height .4s, padding .4s;
+        transition: height .4s, padding .4s;
+      }
+
+      .scrolled-down #branding .white-bar .widget_search {
         height: 100%;
       }
 
