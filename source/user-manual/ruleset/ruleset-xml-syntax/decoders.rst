@@ -20,6 +20,7 @@ Options
 - `plugin_decoder`_
 - `use_own_name`_
 - `json_null_field`_
+- `var`_
 
 decoder
 ^^^^^^^
@@ -250,3 +251,33 @@ Specify how to treat the `NULL` fields coming from the JSON events. Only for the
 +                    +-------------------------------------------------------------------------+
 |                    | empty (It shows the NULL field as an empty field)                       |
 +--------------------+-------------------------------------------------------------------------+
+
+var
+^^^
+
+Defines a variable that may be used in any place of the same file.
+
++----------------+------------------------+
+| Attribute      | Value                  |
++================+========================+
+| **name**       | Name for the variable. |
++----------------+------------------------+
+
+Example:
+
+.. code-block:: xml
+
+    <var name="header">myprog</var>
+    <var name="offset">after_parent</var>
+    <var name="type">syscall</var>
+
+    <decoder name="syscall">
+      <prematch>^$header</prematch>
+    </decoder>
+
+    <decoder name="syscall-child">
+      <parent>syscall</parent>
+      <prematch offset="$offset">^: $type </prematch>
+      <regex offset="after_prematch">(\S+)</regex>
+      <order>syscall</order>
+    </decoder>
