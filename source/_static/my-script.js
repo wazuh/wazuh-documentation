@@ -26,7 +26,6 @@ function addVersions() {
     var version = $(".version");
     var select_version = $("#select-version");
     var path = document.location.pathname.split('/')[1];
-    }
 
     if (version == null) {
         console.error("No such element of class 'version'");
