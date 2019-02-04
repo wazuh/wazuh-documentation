@@ -2,7 +2,7 @@
 
 .. _release_3_0_0:
 
-3.0.0 Release Notes
+3.0.0 Release notes
 ===================
 
 This section shows the most relevant new features of Wazuh v3.0.0. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/3.0/CHANGELOG.md>`_ file.
