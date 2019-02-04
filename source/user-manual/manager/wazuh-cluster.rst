@@ -189,8 +189,8 @@ The following must be considered when configuring a Wazuh app:
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A **load balancer** is a service that distributes de workloads across multiple resources.
-In Wazuh's case, users want to use a load balancer to catch all the agent's alerts and distribute them between the different workers in the cluster.
+A **load balancer** is a service that distributes the workloads across multiple resources.
+In Wazuh's case, users want to use a load balancer to catch all the agent events and distribute them between the different workers in the cluster.
 
 The correct way to use it is to point every agent to send the events to the *load balancer*:
 
