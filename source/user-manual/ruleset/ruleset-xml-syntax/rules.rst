@@ -46,6 +46,7 @@ Available options
 - `check_diff`_
 - `group`_
 - `status`_
+- `location`_
 
 rule
 ^^^^
@@ -243,6 +244,57 @@ Any URL (decoded as the URL).
 +--------------------+------------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
+
+location
+^^^^^^^^
+
+.. versionadded:: 3.5.0
+
+The event extended location of the incoming event.
+
++--------------------+------------------------------------------------------------------+
+| **Default Value**  | n/a                                                              |
++--------------------+------------------------------------------------------------------+
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
++--------------------+------------------------------------------------------------------+
+
+The location identifies the origin of the input. If the event comes from an agent, its name and registered IP (as it was added) is appended to the location.
+
+Example of a location for a log pulled from "/var/log/syslog" in an agent with name "dbserver" and registered with IP "any":
+
+::
+
+    (dbserver) any->/var/log/syslog
+
+The following components use a static location:
+
++----------------------+------------------------+
+| **Component**        | **Location**           |
++----------------------+------------------------+
+| Windows Eventchannel | EventChannel           |
++----------------------+------------------------+
+| Windows Eventlog     | WinEvtLog              |
++----------------------+------------------------+
+| FIM (Syscheck)       | syscheck               |
++----------------------+------------------------+
+| Rootcheck            | rootcheck              |
++----------------------+------------------------+
+| Syscollector         | syscollector           |
++----------------------+------------------------+
+| Vuln Detector        | vulnerability-detector |
++----------------------+------------------------+
+| Azure Logs           | azure-logs             |
++----------------------+------------------------+
+| AWS S3 integration   | aws-s3                 |
++----------------------+------------------------+
+| Docker integration   | Wazuh-Docker           |
++----------------------+------------------------+
+| Osquery integration  | osquery                |
++----------------------+------------------------+
+| OpenSCAP integration | open-scap              |
++----------------------+------------------------+
+| CIS-CAT integration  | wodle_cis-cat          |
++----------------------+------------------------+
 
 if_sid
 ^^^^^^
