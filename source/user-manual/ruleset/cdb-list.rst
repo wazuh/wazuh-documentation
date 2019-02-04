@@ -141,9 +141,7 @@ CDB lists examples
     <if_group>json</if_group>
     <list field="ip" lookup="address_match_key">etc/lists/List-one</list>
     <description>IP blacklisted in LIST ONE</description>
-
     <group>list1,</group>
-
   </rule>
 
 
@@ -151,16 +149,13 @@ CDB lists examples
     <if_group>json</if_group>
     <list field="ip" lookup="address_match_key">etc/lists/List-two</list>
     <description>IP blacklisted in LIST TWO</description>
-
     <group>list2,</group>
   </rule>
 
 
   <rule id="110710" level="10">
     <if_sid>110700</if_sid>
-
     <list field="ip" lookup="address_match_key">etc/lists/List-two</list>
-
     <description>IP blacklisted in LIST ONE and LIST TWO</description>
     <group>list1,list2,</group>
   </rule>
