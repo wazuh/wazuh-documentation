@@ -1810,11 +1810,6 @@ ul#breadcrumbs a {
   background-color: #ffffff;
 }
 
-.jumbo-bar .blue-bar {
-  padding: 15px;
-  background-color: #00a9e5;
-}
-
 [class*="highlight-"] {
   border: 1px solid #00a9e5;
   overflow: auto;
@@ -1947,7 +1942,7 @@ div.highlight pre {
       }
 
       body:not(.scrolled-down) {
-        padding-top: 240px;
+        padding-top: 200px;
         -webkit-transition: padding-top .3s;
         transition: padding-top .3s;
       }
@@ -1962,8 +1957,7 @@ div.highlight pre {
         width: 200px;
       }
 
-      #collapsibleNavbar,
-      #collapsibleBlueBar {
+      #collapsibleNavbar {
         position: static;
       }
 
@@ -1971,13 +1965,6 @@ div.highlight pre {
         -webkit-box-pack: end;
             -ms-flex-pack: end;
                 justify-content: flex-end;
-      }
-
-      #collapsibleBlueBar {
-        margin: 0 -6px;
-        -webkit-box-pack: start;
-            -ms-flex-pack: start;
-                justify-content: flex-start;
       }
 
       #main-menu-container #main-menu-search-bar {
@@ -2318,10 +2305,6 @@ div.highlight pre {
 
       .jumbo-bar .white-bar {
         padding: 15px;
-      }
-
-      .jumbo-bar .blue-bar {
-        padding: 0 15px;
       }
 
       .jumbo-bar .title {

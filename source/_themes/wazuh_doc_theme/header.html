@@ -8,7 +8,7 @@
 {%- block header %}
 <header id="branding" role="banner" class="fixed-top">
   <nav class="social-bar d-none d-md-block">
-      <div class="container">
+      <div class="container-fluid">
         <ul id="menu-header-social-bar" class="nav justify-content-end">
           <li class="menu-item nav-item"><a class="nav-link" href={{ theme_wazuh_web_url + '/community/' }}>Community</a></li>
           <li class="menu-item nav-item d-none d-md-block"><a class="nav-link" href={{ theme_wazuh_web_url + '/contact-us/' }}>Contact us</a></li>
@@ -20,7 +20,7 @@
   </nav>
 
   <nav id="main-navbar" class="navbar navbar-expand-md" role="navigation">
-    <div class="container" id="main-menu-container">
+    <div class="container-fluid" id="main-menu-container">
       <div class="navbar-header" id="xs-bar">
         <button type="button" class="navbar-toggler btn-close collapsed" data-toggle="collapse" data-target="#collapsibleNavbar">
           <i class="x" aria-hidden="true"></i><!-- <i class="fa fa-bars"></i> -->
@@ -53,7 +53,7 @@
   {%- block docu_top_bar %}
   <div class="jumbotron jumbo-bar docu-main-header">
     <div class="white-bar">
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
           <div class="title-bar-left col-xs-12 col-md-7 col-lg-8 col-xl-9">
             <a href="{{ pathto(master_doc) }}" class="title">Documentation</a>
@@ -66,21 +66,6 @@
           <div id="search-md" class="title-bar-right col-md-5 col-lg-4 col-xl-3">
             {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
           </div> <!-- // #search-md -->
-        </div>
-      </div>
-    </div>
-    <div class="blue-bar navbar navbar-expand-md d-none d-md-block" role="navigation">
-      <div class="col">
-        <div class="container">
-          <nav id="collapsibleBlueBar" class="collapse navbar-collapse navbar-main-collapse">
-            <ul id="docu-menu" class="docu-menu navbar-nav">
-              <li class="menu-item nav-item"><a class="nav-link" href="#">Guides</a></li>
-              <li class="menu-item nav-item"><a class="nav-link" href="#">Product manuals</a></li>
-              <li class="menu-item nav-item"><a class="nav-link" href="#">Glossary</a></li>
-              <li class="menu-item nav-item"><a class="nav-link" href="#">Reference</a></li>
-              <li class="menu-item nav-item"><a class="nav-link" href="#">Samples</a></li>
-            </ul>
-          </nav>
         </div>
       </div>
     </div>
