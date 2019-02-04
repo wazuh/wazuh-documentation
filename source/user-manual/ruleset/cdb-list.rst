@@ -132,26 +132,37 @@ In case the field is an IP address, you must use *not_address_match_key*:
    <list field="srcip" lookup="address_match_key_value" check_value="^reject">etc/lists/list-IP</list>
 
 
-Defining a conflictive key
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Users can define the CDB lists keys using labels as ``<var>``:
+CDB lists examples
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: xml
-  <group name="custom,">
-    <var name="MACADDR">aa:bb:cc:dd:ff:00|11:22:33:44:55:66|1a:2b:3c:4d:5f:0a</var>
 
-      <rule id="102000" level="0">
-        <decoded_as>my_decoder</decoded_as>
-        <description>Previous rule to match</description>
-      </rule>
+  <rule id="110700" level="10">
+    <if_group>json</if_group>
+    <list field="ip" lookup="address_match_key">etc/lists/List-one</list>
+    <description>IP blacklisted in LIST ONE</description>
 
-      <rule id="102001" level="12">
-        <if_sid>102000</if_sid>
-        <field name="mac-addr">$MACADDR</field>
-        <description>Unrecognized MAC Address!!</description>
-      </rule>
-  </group>
+    <group>list1,</group>
 
-.. note::
-  This exmaple is very useful, as in CDB lists the key can't contain a colon ``:``. So the only way to do it is with this label.
+  </rule>
+
+
+  <rule id="110701" level="10">
+    <if_group>json</if_group>
+    <list field="ip" lookup="address_match_key">etc/lists/List-two</list>
+    <description>IP blacklisted in LIST TWO</description>
+
+    <group>list2,</group>
+  </rule>
+
+
+  <rule id="110710" level="10">
+    <if_sid>110700</if_sid>
+
+    <list field="ip" lookup="address_match_key">etc/lists/List-two</list>
+
+    <description>IP blacklisted in LIST ONE and LIST TWO</description>
+    <group>list1,list2,</group>
+  </rule>
+
+In this example, the described rules check if an IP is in the *list-one*, in the *list-two*, or in both.
