@@ -269,27 +269,89 @@ footer a:focus .fa {
   width: 12px;
 }
 
-.page ul:not(.nav) > li::before,
-ul > li.toctree-l1 > a::before,
-ul li.toctree-l2 > a::before,
-ul li.toctree-l3 > a::before {
-  color: #ffb600;
-  content: '\f0da';
-  display: inline-block;
-  font: normal normal normal 15px/.5 FontAwesome;
-  text-align: right;
-  padding-right: 10px;
+.full-toctree-nav .globaltoc li a {
+  margin-bottom: 4px;
 }
 
-li.toctree-l1 > ul,
-li.toctree-l2 > ul,
-li.toctree-l3 > ul {
-  padding-left: 1rem;
+li.toctree-l1 {
+  font-size: 1.2em;
+}
+
+li.toctree-l2,
+li.toctree-l3,
+li.toctree-l4 {
+  font-size: 0.9em;
+}
+
+li.toctree-l1 > a,
+li.toctree-l2 > a,
+li.toctree-l3 > a,
+li.toctree-l4 > a {
+  font-size: 1em;
+  position: relative;
+}
+
+li.toctree-l1 > a {
+  background-color: #f4f4f4;
+  display: block;
+  padding: 0.6em 1em;
+}
+
+li.toctree-l2 > a {
+  background-color: #fff;
+  display: block;
+  padding: 0.6em 1em 0.6em 1.75em;
+}
+
+li.toctree-l3 > a {
+  background-color: #f4f4f4;
+  display: block;
+  padding: 0.6em 1em 0.6em 3em;
+}
+
+li.toctree-l4 > a {
+  background-color: #fff;
+  display: block;
+  padding: 0.6em 1em 0.6em 3em;
+}
+
+.globaltoc ul > li.toctree-l1 > a::after,
+.globaltoc ul li.toctree-l2 > a::after,
+.globaltoc ul li.toctree-l3 > a::after,
+.globaltoc ul li.toctree-l4 > a::after {
+  background-color: #00a9e5;
+  content: '';
+  height: 1px;
+  width: 1em;
+  display: block;
+  position: absolute;
+  top: 1.2em;
+  right: 1em;
+  font-size: 1em;
+}
+
+.globaltoc ul > li.toctree-l1 > a::before,
+.globaltoc ul li.toctree-l2 > a::before,
+.globaltoc ul li.toctree-l3 > a::before,
+.globaltoc ul li.toctree-l4 > a::before {
+  background-color: #00a9e5;
+  content: '';
+  height: 1px;
+  width: 0.9em;
+  display: block;
+  position: absolute;
+  top: 1.2em;
+  right: 1em;
+  font-size: 1em;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
 }
 
 ul > li.toctree-l1.current > a::before,
-li.toctree-l2.current > a::before {
-  content: '\f0d7';
+li.toctree-l2.current > a::before,
+li.toctree-l3.current > a::before,
+li.toctree-l4.current > a::before {
+  display: none;
 }
 
 .globaltoc ul {
@@ -298,7 +360,13 @@ li.toctree-l2.current > a::before {
 }
 
 ul li.toctree-l1 a.current.reference.internal {
-  color: #00a9e5;
+  background-color: #00a9e5;
+  color: #fff;
+}
+
+ul li.toctree-l1 a.current.reference.internal:before,
+ul li.toctree-l1 a.current.reference.internal:after {
+  background-color: #fff;
 }
 
 .globaltoc li.toctree-l1 a {
@@ -306,20 +374,8 @@ ul li.toctree-l1 a.current.reference.internal {
 }
 
 .compound li.toctree-l1 a {
-  padding: 4px 1px;
-}
-
-.toctree-l1 > a,
-.toctree-l2 > a {
-  font-size: 1em;
-}
-
-.toctree-l3 > a {
-  font-size: 0.87em;
-}
-
-.toctree-l4 > a {
-  font-size: 0.82em;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 a.headerlink {
@@ -1194,7 +1250,7 @@ form [type=submit]:disabled {
   border-bottom: 1px solid #00a9e5;
 }
 
-.central-page-area ul li {
+.central-page-area main ul li {
   padding-top: 5px;
   padding-bottom: 5px;
 }
@@ -2304,7 +2360,7 @@ div.highlight pre {
       }
 
       .jumbo-bar .white-bar {
-        padding: 15px;
+        padding: 15px 0;
       }
 
       .jumbo-bar .title {
@@ -2423,8 +2479,8 @@ div.highlight pre {
         text-align: left;
       }
 
-      .central-page-area ul li,
-      .central-page-area ol li {
+      .central-page-area main ul li,
+      .central-page-area main ol li {
         padding: 5px 1px;
       }
 
