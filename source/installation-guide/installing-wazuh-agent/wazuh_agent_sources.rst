@@ -46,8 +46,10 @@ Installing Linux agent
   During the installation, users can decide the installation path.
   Make sure the installation path is available for the installation.
   For example, Wazuh will be installed in ``/var/ossec`` by default, but users can choose to install it on ``/Desktop/wazuh``, ``/home``, etc.
-  What the user should never do is choose an installation path unaccesible or critical, as ``/bin``, ``/dev``, etc.
+  The most usual path to install it is in ``/opt``.
 
+.. warning::
+  Be extremely careful not to select a critical installation directory.
 
 .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
