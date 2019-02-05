@@ -29,7 +29,7 @@ Below are the steps to assign agents to a group with a specific configuration:
 
       # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/group/dbms?pretty"
 
-    .. note:: The group must be created and configured before assigning agents.
+   .. note:: The group must be created and configured before assigning agents.
 
    An agent's group assignment can be checked using one of the following commands:
 
