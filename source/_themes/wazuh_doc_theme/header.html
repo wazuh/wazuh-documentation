@@ -8,33 +8,42 @@
 {%- block header %}
 <header id="branding" role="banner" class="no-fixed-top">
   <nav id="main-navbar" class="navbar navbar-expand-md" role="navigation">
-    <div class="container-fluid" id="main-menu-container">
-      <div class="navbar-header" id="xs-bar">
-        <button type="button" class="navbar-toggler btn-close collapsed" data-toggle="collapse" data-target="#collapsibleNavbar">
-          <i class="x" aria-hidden="true"></i><!-- <i class="fa fa-bars"></i> -->
-        </button>
-        <div id="logo-title">
-          <a class="navbar-brand" href={{ theme_wazuh_web_url }} title="Wazuh">
-            <img class="img-responsive d-none d-md-block" src={{ pathto('_static/wazuh_logo.png', 1) }} alt="Wazuh" />
-            <img class="img-responsive d-md-none" src={{ pathto('_static/wazuh_blue_iso.png', 1) }} alt="Wazuh" />
-          </a>
-        </div> <!-- // #logo-title -->
-      </div> <!-- // #xs-bar -->
+    <div id="main-menu-container">
+      <div class="row">
+        <div class="navbar-header col-xs-12 col-md-4" id="xs-bar">
+          <div class="navbar-brand" id="logo-title">
+            <a class="wazuh-logo-link" href={{ theme_wazuh_web_url }} title="Wazuh">
+              <img class="img-responsive d-none d-md-block" src={{ pathto('_static/wazuh_logo.png', 1) }} alt="Wazuh" />
+              <img class="img-responsive d-md-none" src={{ pathto('_static/wazuh_blue_iso.png', 1) }} alt="Wazuh" />
+            </a>
+            <button type="button" class="navbar-toggler btn-close collapsed" data-toggle="collapse" data-target="#collapsibleNavbar">
+              <i class="x" aria-hidden="true"></i><!-- <i class="fa fa-bars"></i> -->
+            </button>
+            <a class="docs-link" href="{{ pathto(master_doc) }}" class="title">Docs</a>
+            <span class="release-selector-wrapper">
+              {% if theme_display_version %}
+              {% include "versions.html" %}
+              {% endif %}
+            </span>
+          </div> <!-- // #logo-title -->
 
-      <div id="main-menu-search-bar">
-        <!-- Main Menu -->
-        <nav id="collapsibleNavbar" class="collapse navbar-collapse navbar-main-collapse">
-          <ul id="main-menu" class="main-menu navbar-nav">
-            <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/product/">Product</a></li>
-            <li class="menu-item nav-item active"><a class="nav-link" href="{{ pathto(master_doc) }}">Documentation</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/blog/">Blog</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/cloud/">Cloud</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/professional-services/">Services</a></li>
-            <li class="menu-item nav-item d-md-none"><a class="nav-link" href="https://wazuh.com/community/">Community</a></li>
-            <li class="menu-item nav-item d-md-none"><a class="nav-link" href="https://wazuh.com/contact-us/">Contact us</a></li>
-          </ul>
-        </nav>
-      </div> <!-- // #main-menu-no-search-bar -->
+        </div> <!-- // #xs-bar.navbar-header -->
+
+        <div class="col-xs-12 col-md-8">
+          <!-- Main Menu -->
+          <nav id="collapsibleNavbar" class="collapse navbar-collapse navbar-main-collapse">
+            <ul id="main-menu" class="main-menu navbar-nav">
+              <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/product/">Documentation</a></li>
+              <li class="menu-item nav-item"><a class="nav-link" href="#">Troubleshooting</a></li>
+              <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/blog/">Resources</a></li>
+              <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/cloud/">Changelogs</a></li>
+              <li class="menu-item nav-item"><a class="nav-link" href="https://wazuh.com/professional-services/">Support</a></li>
+            </ul>
+          </nav>
+        </div> <!-- // .col-xs-12.col-md-8 -->
+
+      </div> <!-- // .row -->
+
     </div> <!-- // #main-menu-container -->
   </nav>
 
@@ -42,16 +51,9 @@
   <div class="jumbotron jumbo-bar docu-main-header">
     <div class="white-bar">
       <div class="container-fluid">
-        <div class="row">
-          <div class="title-bar-left col-xs-12 col-md-7 col-lg-8 col-xl-9">
-            <a href="{{ pathto(master_doc) }}" class="title">Documentation</a>
-            <span class="release-selector-wrapper">
-              {% if theme_display_version %}
-              {% include "versions.html" %}
-              {% endif %}
-            </span>
-          </div>
-          <div id="search-md" class="title-bar-right col-md-5 col-lg-4 col-xl-3">
+        <div class="row justify-content-end">
+
+          <div id="search-md" class="title-bar-right col-md-5 col-lg-4 col-xl-3 right">
             {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
           </div> <!-- // #search-md -->
         </div>

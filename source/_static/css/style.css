@@ -126,6 +126,10 @@ a.btn-wazuh:active {
   color: rgba(51, 51, 51, 0.8);
 }
 
+#main-menu-container {
+  width: 100%;
+}
+
 #xs-bar {
   width: 100%;
 }
@@ -977,10 +981,6 @@ footer .contact-info .fa-paper-plane-o {
   color: #ffffff;
 }
 
-#main-menu-search-bar {
-  width: 100%;
-}
-
 h1.smaller-title {
   font-size: 1em!important;
 }
@@ -1118,10 +1118,11 @@ select, option {
 
 select#select-version {
   border: none;
-  margin-left: 5px;
+  margin-left: 10px;
   padding: 2px 15px 2px 2px;
   cursor: pointer;
   position: relative;
+  font-size: 0.85rem;
 }
 
 .version:after {
@@ -1669,10 +1670,6 @@ footer a {
   text-shadow: none;
 }
 
-.navbar {
-  padding: 0;
-}
-
 .navbar li>a {
   text-shadow: none;
   text-align: center;
@@ -1763,19 +1760,18 @@ nav.collapse.navbar-collapse.navbar-main-collapse {
 }
 
 #logo-title {
-  min-height: 59px;
+  min-height: 57px;
   width: 100%;
   padding: 0;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 .navbar-brand {
-  padding: 9px 7px;
   margin: 0;
 }
 
@@ -2003,14 +1999,17 @@ div.highlight pre {
         transition: padding-top .3s;
       } */
 
-      #main-menu-container {
-        position: relative;
-        width: 100%;
-        height: 79px;
+      a.wazuh-logo-link {
+        max-width: 200px;
+        margin-right: 15px;
       }
 
-      #main-menu-container #xs-bar {
-        width: 200px;
+      #main-menu-container {
+        position: relative;
+      }
+
+      #main-navbar {
+        height: 79px;
       }
 
       #collapsibleNavbar {
@@ -2021,10 +2020,6 @@ div.highlight pre {
         -webkit-box-pack: end;
             -ms-flex-pack: end;
                 justify-content: flex-end;
-      }
-
-      #main-menu-container #main-menu-search-bar {
-        width: auto;
       }
 
       #main-navbar #main-menu.navbar-nav > li > a:focus {
@@ -2171,11 +2166,11 @@ div.highlight pre {
         height: 100%;
       }
 
-      #branding #main-menu-container {
+      /* #branding #main-menu-container {
         height: 79px;
         -webkit-transition: height .3s;
         transition: height .3s;
-      }
+      } */
 
       #branding #main-menu-container .widget_search {
         height: 100%;
@@ -2452,7 +2447,6 @@ div.highlight pre {
 
       .navbar-brand {
         max-width: 100%;
-        padding: 15px 0;
         -webkit-transition: padding 0.3s;
         transition: padding 0.3s;
       }
