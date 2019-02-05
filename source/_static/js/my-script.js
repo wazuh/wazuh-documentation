@@ -37,7 +37,7 @@ function addVersions() {
         return;
     }
 
-    if (path == "current" || path == "3.x") {
+    if (path == "current" || path == "3.x" || path == "new-design") {
         path = current_version;
     }
 
