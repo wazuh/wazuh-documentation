@@ -2,7 +2,7 @@
 
 .. _azure:
 
-Using Wazuh to Monitor Microsoft Azure
+Monitoring Microsoft Azure
 ======================================
 
 .. meta::

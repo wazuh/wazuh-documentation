@@ -2,7 +2,7 @@
 
 .. _amazon:
 
-Using Wazuh to monitor AWS
+Monitoring AWS
 ==========================
 
 .. meta::
