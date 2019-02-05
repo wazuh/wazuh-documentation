@@ -274,13 +274,13 @@ footer a:focus .fa {
 }
 
 li.toctree-l1 {
-  font-size: 1.2em;
+  font-size: 1.3em;
 }
 
 li.toctree-l2,
 li.toctree-l3,
 li.toctree-l4 {
-  font-size: 0.9em;
+  font-size: calc(100% - 3px);
 }
 
 li.toctree-l1 > a,
@@ -1728,7 +1728,7 @@ body {
   font-weight: 400;
   font-size: 1rem;
   color: #333333;
-  padding-top: 60px;
+  /* padding-top: 60px; */
   line-height: 1.4;
 }
 
@@ -1997,11 +1997,11 @@ div.highlight pre {
         font-size: 1.5em!important;
       }
 
-      body:not(.scrolled-down) {
-        padding-top: 200px;
+      /* body:not(.scrolled-down) {
+        padding-top: 162px;
         -webkit-transition: padding-top .3s;
         transition: padding-top .3s;
-      }
+      } */
 
       #main-menu-container {
         position: relative;
@@ -2139,11 +2139,11 @@ div.highlight pre {
         height: 30px;
       }
 
-      .scrolled-down {
+      /* .scrolled-down {
         padding-top: 100px;
         -webkit-transition: padding-top .5s;
         transition: padding-top .5s;
-      }
+      } */
 
       :not(.scrolled-down) .fixed-top {
         -webkit-transition: top .4s;

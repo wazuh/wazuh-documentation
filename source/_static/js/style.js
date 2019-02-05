@@ -73,18 +73,18 @@ $(function(){
     return false;
   });
 
-  if( document.documentElement.scrollHeight-120 > document.documentElement.clientHeight ) { // 120 is the height of Wazuh's social bar on top of the page
+  if( document.documentElement.scrollHeight > document.documentElement.clientHeight ) {
     // Scroll-down animation will only be availabloe on pages longer than the client's viewports height
     $(document).on('scroll', function(){
       var scrollvalue = $(document).scrollTop();
 
       /* When scroll is down, class .scrolled-down affects header style */
-      if ( scrollvalue >= 1 ){
-        $('body').addClass('scrolled-down');
-      }
-      else {
-        $('body').removeClass('scrolled-down');
-      }
+      // if ( scrollvalue >= 1 ){
+      //   $('body').addClass('scrolled-down');
+      // }
+      // else {
+      //   $('body').removeClass('scrolled-down');
+      // }
 
       /* Back to top button */
       if ( scrollvalue >= $(window).height()*.50 ){
