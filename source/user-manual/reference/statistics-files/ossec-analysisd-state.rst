@@ -13,6 +13,10 @@ By default, this file is updated **every 5 seconds** but this interval can be ch
 
 .. note:: The ``ossec-analysisd.state`` statistical file is **only** available in managers.
 
+.. note::
+    This file is created automatically when an agent connects for the first time to the manager.
+    If the manager had never an agent connected to it, this file won't exist.
+
 Below you can see an example file:
 
 .. code-block:: bash
@@ -20,7 +24,7 @@ Below you can see an example file:
     # State file for ossec-analysisd
 
     # Total events decoded
-    total_events_decoded='5'
+    total_events_decoded='10'
 
     # Syscheck events decoded
     syscheck_events_decoded='0'
@@ -39,15 +43,15 @@ Below you can see an example file:
     hostinfo_edps='0'
 
     # Other events decoded
-    other_events_decoded='5'
-    other_events_edps='1'
+    other_events_decoded='10'
+    other_events_edps='2'
 
     # Events processed (Rule matching)
-    events_processed='5'
-    events_edps='1'
+    events_processed='10'
+    events_edps='2'
 
     # Events received
-    events_received='5'
+    events_received='10'
 
     # Events dropped
     events_dropped='0'
