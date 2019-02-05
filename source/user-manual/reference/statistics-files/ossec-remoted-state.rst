@@ -19,26 +19,26 @@ Below you can see an example file:
 
 .. code-block:: bash
 
-  # State file for ossec-remoted
-  # Updated every 5 seconds.
+    # State file for ossec-remoted
+    # Updated every 5 seconds.
 
-  # Queue size
-  queue_size='0'
+    # Queue size
+    queue_size='0'
 
-  # Total queue size
-  total_queue_size='131072'
+    # Total queue size
+    total_queue_size='131072'
 
-  # TCP sessions
-  tcp_sessions='1'
+    # TCP sessions
+    tcp_sessions='1'
 
-  # Events sent to Analysisd
-  evt_count='1997'
+    # Events sent to Analysisd
+    evt_count='1997'
 
-  # Control messages received
-  ctrl_msg_count='344'
+    # Control messages received
+    ctrl_msg_count='344'
 
-  # Discarded messages
-  discarded_count='2'
+    # Discarded messages
+    discarded_count='2'
 
-  # Messages sent
-  msg_sent='344'
+    # Messages sent
+    msg_sent='344'
