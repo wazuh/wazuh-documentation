@@ -19,10 +19,6 @@ Below are the steps to assign agents to a group with a specific configuration:
 
    Using **agent_groups**:
 
-   .. note:: The group must be created and configured before assigning agents.
-
-   .. note:: This behaviour corresponds to ``v3.7.0`` and later.
-   
    .. code-block:: console
 
       # /var/ossec/bin/agent_groups -a -i 002 -g dbms
@@ -32,6 +28,8 @@ Below are the steps to assign agents to a group with a specific configuration:
    .. code-block:: console
 
       # curl -u foo:bar -X PUT "http://localhost:55000/agents/002/group/dbms?pretty"
+
+   .. note:: The group must be created and configured before assigning agents.
 
    An agent's group assignment can be checked using one of the following commands:
 
