@@ -77,7 +77,7 @@ language = 'en-US'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path .
-exclude_patterns = []
+exclude_patterns = ['not_found.rst']
 
 # The reST default role (used for this markup: `text`) to use for all
 # documents.
@@ -114,7 +114,7 @@ html_theme = 'wazuh_doc_theme'
 # documentation.
 html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
-    'globaltoc_depth': 4,
+    'globaltoc_depth': 3,
     'includehidden': True
 }
 
