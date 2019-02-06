@@ -130,39 +130,3 @@ In case the field is an IP address, you must use *not_address_match_key*:
 .. code-block:: xml
 
    <list field="srcip" lookup="address_match_key_value" check_value="^reject">etc/lists/list-IP</list>
-
-
-CDB lists examples
-^^^^^^^^^^^^^^^^^^
-
-.. code-block:: xml
-
-  <rule id="110700" level="10">
-    <if_group>json</if_group>
-    <list field="ip" lookup="address_match_key">etc/lists/List-one</list>
-    <description>IP blacklisted in LIST ONE</description>
-
-    <group>list1,</group>
-
-  </rule>
-
-
-  <rule id="110701" level="10">
-    <if_group>json</if_group>
-    <list field="ip" lookup="address_match_key">etc/lists/List-two</list>
-    <description>IP blacklisted in LIST TWO</description>
-
-    <group>list2,</group>
-  </rule>
-
-
-  <rule id="110710" level="10">
-    <if_sid>110700</if_sid>
-
-    <list field="ip" lookup="address_match_key">etc/lists/List-two</list>
-
-    <description>IP blacklisted in LIST ONE and LIST TWO</description>
-    <group>list1,list2,</group>
-  </rule>
-
-In this example, the described rules check if an IP is in the *list-one*, in the *list-two*, or in both.
