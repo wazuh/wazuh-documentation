@@ -43,6 +43,7 @@ Available options
 - `options`_
 - `check_diff`_
 - `group`_
+- `var`_
 
 rule
 ^^^^
@@ -498,3 +499,28 @@ They can be used by other rules by using if_group or if_matched_group, or by ale
 +--------------------+------------+
 | **Allowed values** | Any String |
 +--------------------+------------+
+
+
+var
+^^^
+
+In XML, <var></var> is used to define local scope variables.
+
++--------------------+------------+
+| **Default Value**  | n/a        |
++--------------------+------------+
+| **Allowed values** | Any String |
++--------------------+------------+
+
+Example of use:
+
+.. code-block:: xml
+
+  <var name="BAD_WORDS">core_dumped|failure|error|attack|bad|illegal|denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted|mismatch</var>
+
+  <group name="syslog,errors,">
+    <rule id="1002" level="2" overwrite="yes">
+      <match>$BAD_WORDS</match>
+      <description>Unknown problem somewhere in the system.</description>
+    </rule>
+  </group>
