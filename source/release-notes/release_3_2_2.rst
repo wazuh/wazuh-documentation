@@ -2,7 +2,7 @@
 
 .. _release_3_2_2:
 
-3.2.2 Release Notes
+3.2.2 Release notes
 ===================
 
 From the Wazuh team, we continue working hard improving the existing features as well as fixing bugs. This section shows the most relevant improvements and fixes in version 3.2.2. Find more details in each component changelog.
