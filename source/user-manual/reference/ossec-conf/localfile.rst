@@ -39,13 +39,13 @@ Wildcards may be used on non-Windows systems, but if the log file doesn't exist 
 
 Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
 
-The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. For instance, this two configurations show a channel filtering for firewall and Sysmon events::
+The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. For instance, these two configurations show a channel filtering for firewall and Sysmon events::
 
   <localfile>
       <location>Microsoft-Windows-Sysmon/Operational</location>
       <log_format>eventchannel</log_format>
   </localfile>
-  
+
 
   <localfile>
       <location>Microsoft-Windows-Windows Firewall With Advanced Security/Firewall</location>

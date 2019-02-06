@@ -26,7 +26,7 @@ Navigate to Services > IAM > Users
 
 .. thumbnail:: ../../images/aws/aws-user.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 Click on "Next: Permissions" to continue.
 
@@ -36,13 +36,13 @@ We will attach this policy later to the user we are creating.
 
 .. thumbnail:: ../../images/aws/aws-create-policy.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 Check that your new policy looks like this:
 
 .. thumbnail:: ../../images/aws/aws-summary-policy.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 Raw output for the example policy:
 
@@ -74,13 +74,13 @@ Raw output for the example policy:
 
 .. thumbnail:: ../../images/aws/aws-attach-policy.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 4. Confirm user creation and get credentials:
 
 .. thumbnail:: ../../images/aws/aws-summary-user.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 Save the credentials, you will use them later to configure the module.
 
@@ -137,55 +137,55 @@ IAM Roles can also be used to access the S3 bucket. Follow these steps to create
 
 .. thumbnail:: ../../images/aws/aws-create-role-1.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 2. Select Roles in the right menu and click on the *Create role* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-2.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 3. Select S3 service and click on *Next: Permissions* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-4.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 4. Select the previously created policy:
 
 .. thumbnail:: ../../images/aws/aws-create-role-5.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 5. Click on *Create role* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-6.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 6. Access to role summay and click on its policy name:
 
 .. thumbnail:: ../../images/aws/aws-create-role-7.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 7. Add permissions so the new role can do *sts:AssumeRole* action:
 
 .. thumbnail:: ../../images/aws/aws-create-role-8.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 8. Come back to the role's summary, go to *Trust relationships* tab and click on *Edit trust relationship* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-9.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 9. Add your user to the *Principal* tag and click on *Update Trust Policy* button:
 
 .. thumbnail:: ../../images/aws/aws-create-role-10.png
   :align: center
-  :width: 100%
+  :width: 70%
 
 Once your role is created, just paste it on the bucket configuration:
 
