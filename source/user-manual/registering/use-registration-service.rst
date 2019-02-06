@@ -60,7 +60,7 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
   .. note::
   
-    Since version 3.8.0, this registration daemon is running by default when the *Wazuh* installation is complete, so it is not necessary to execute it. Although, it is highly recommended to run it to check if everything is running well.
+    Since version 3.8.0, this registration daemon is running by default when the *Wazuh* installation is complete, so it is not necessary to execute it.
 
 2. On the agents, run the ``agent-auth`` program, using the manager's IP address:
 
