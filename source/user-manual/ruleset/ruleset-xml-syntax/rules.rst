@@ -24,6 +24,7 @@ Available options
 - `weekday`_
 - `id`_
 - `url`_
+- `action`_
 - `if_sid`_
 - `if_group`_
 - `if_level`_
@@ -240,6 +241,17 @@ Any URL (decoded as the URL).
 +--------------------+------------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
+
+action
+^^^^^^
+
+Any action (decoded as the ACTION).
+
++--------------------+----------------------+
+| **Default Value**  | n/a                  |
++--------------------+----------------------+
+| **Allowed values** | Any String.          |
++--------------------+----------------------+
 
 if_sid
 ^^^^^^
