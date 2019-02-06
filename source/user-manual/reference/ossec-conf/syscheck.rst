@@ -156,11 +156,15 @@ Attributes:
 +                          +------------------------------------------------------------+--------------------------------------------------------+
 |                          | Allowed values                                             | Any integer between 0 and 320                          |
 +--------------------------+------------------------------------------------------------+--------------------------------------------------------+
-| **follow_symbolic_link** | Follow symbolic links (directories or files). The default value is "no". The setting is available for UNIX systems. |
+| **follow_symbolic_link** | Follow symbolic links. Monitor the content of the pointed files/directories. The default value is "no".             |
 +                          +                                                                                                                     +
-|                          | If set, ``realtime`` works as usual (with symbolic links to directories, not files).                                |
+|                          | Compatible with UNIX systems and Windows systems greater than Windows Vista.                                        |
 +                          +                                                                                                                     +
-|                          | .. versionadded:: 3.8.0                                                                                             |
+|                          | If set, ``realtime`` and ``whodata`` work as usual (with symbolic links to directories, not files).                 |
++                          +                                                                                                                     +
+|                          | .. versionadded:: 3.8.0 UNIX                                                                                        |
++                          +                                                                                                                     +  
+|                          | .. versionadded:: 3.9.0 Windows                                                                                     |
 +                          +------------------------------------------------------------+--------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                |
 +--------------------------+------------------------------------------------------------+--------------------------------------------------------+
