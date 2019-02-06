@@ -250,7 +250,7 @@ Any action (decoded as the ACTION).
 +--------------------+----------------------+
 | **Default Value**  | n/a                  |
 +--------------------+----------------------+
-| **Allowed values** | Deny | Drop | Accept |
+| **Allowed values** | Any String.          |
 +--------------------+----------------------+
 
 if_sid
