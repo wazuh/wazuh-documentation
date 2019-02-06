@@ -5,7 +5,7 @@
 Listing Agents
 --------------
 
-The binary */var/ossec/bin/agent_control* allows for the retrieval of a list of the available agents:
+The binary */var/ossec/bin/agent_control*, used with ``-l`` option, allows for the retrieval of a list of the available agents:
 
 .. code-block:: console
 
@@ -28,3 +28,4 @@ The binary */var/ossec/bin/agent_control* allows for the retrieval of a list of 
        ID: 1041, Name: vpc-agent-centos-public, IP: 10.0.0.125, Active
 
     List of agentless devices:
+       ID: 010, Name: agentless-ubuntu, IP: 10.0.0.135, Active

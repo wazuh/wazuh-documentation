@@ -5,7 +5,7 @@
 Register Agent
 --------------
 
-To register an agent, follow these steps:
+To register an agent using the command line, follow these steps:
 
 1. On the **manager**, run ``manage_agents``:
 
