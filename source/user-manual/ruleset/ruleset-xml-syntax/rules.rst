@@ -47,6 +47,9 @@ Available options
 - `group`_
 - `status`_
 - `location`_
+- `var`_
+
+  - `BAD_WORDS`_
 
 rule
 ^^^^
@@ -528,10 +531,12 @@ Additional rule options.
 +--------------------+-----------------------------------------------------+
 
 .. code-block:: xml
+
   <rule id="9800" level="8">
     <match>illegal user|invalid user</match>
     <description>sshd: Attempt to login using a non-existent user</description>
     <options>no_log</options>
+
   </rule>
 
 .. note::
@@ -556,18 +561,17 @@ Add additional groups to the alert. Groups are optional tags added to alerts.
 They can be used by other rules by using if_group or if_matched_group, or by alert parsing tools to categorize alerts.
 
 Groups are variables that define a behaviour. When an alert includes that group label, this behaviour will occur.
-As a example, users can configure email alerts with a group label:
 
 .. code-block:: xml
 
-  <email_alerts>
-    <email_to>you@example.com</email_to>
-    <group>alerts_to_receive_emails</group>
-  </email_alerts>
+  <rule id="3801" level="4">
+    <description>Group for rules related with spam.</description>
+    <group>spam,</group>
+  </rule>
 
-When any alert with the ``<group>alerts_to_receive_emails</group>`` label will receive an email.
+Now, every rule with the line ``<group>spam,</group>`` will be included in that group.
 
-It's a very useful label because it can give the same behaviour to many different rules.
+It's a very useful label to keep the rules ordered.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
@@ -586,48 +590,50 @@ Declares the actual status of a rule.
 | **Allowed values** | started, aborted, succedeed, failed, lost... |
 +--------------------+----------------------------------------------+
 
-Rules examples:
-^^^^^^^^^^^^^^^^
-Here is a little list of possible rules configurations, all of them extracted from the **Wazuh Ruleset**:
+var
+^^^
+
+Defines a variable that may be used in any place of the same file.
+
++----------------+------------------------+
+| Attribute      | Value                  |
++================+========================+
+| **name**       | Name for the variable. |
++----------------+------------------------+
+
+Example:
 
 .. code-block:: xml
 
-  <rule id="3801" level="4">
-    <if_sid>3800</if_sid>
-    <action>RCPT</action>
-    <id>^550</id>
-    <description>ms-exchange: E-mail rcpt is not valid (invalid account).</description>
-    <group>spam,</group>
-  </rule>
+    <var name="joe_folder">/home/joe/</var>
 
-  <rule id="5703" level="10" frequency="6" timeframe="360">
-    <if_matched_sid>5702</if_matched_sid>
-    <same_source_ip />
-    <description>sshd: Possible breakin attempt </description>
-    <description>(high number of reverse lookup errors).</description>
-    <group>pci_dss_11.4,gpg13_4.12,gdpr_IV_35.7.d,</group>
-  </rule>
+    <group name="local,">
 
+      <rule id="100001" level="5">
+        <if_sid>550</if_sid>
+        <field name="file">^$joe_folder</field>
+        <description>A Joe's file was modified.</description>
+        <group>ossec,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
+      </rule>
 
-  <rule id="5716" level="5">
-    <if_sid>5700</if_sid>
-    <match>^Failed|^error: PAM: Authentication</match>
-    <description>sshd: authentication failed.</description>
-    <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,gpg13_7.1,gdpr_IV_35.7.d,gdpr_IV_32.2,</group>
-  </rule>
+    </group>
 
+BAD_WORDS
+^^^^^^^^^
 
-  <rule id="31108" level="0">
-    <if_sid>31100</if_sid>
-    <id>^2|^3</id>
-    <compiled_rule>is_simple_http_request</compiled_rule>
-    <description>Ignored URLs (simple queries).</description>
-  </rule>
+<var name="BAD_WORDS">error|warning|failure</var>
 
+``BAD_WORDS`` is a very used use case of ``<var>`` option.
 
-  <rule id="86003" level="3">
-    <if_sid>86000</if_sid>
-    <field name="docker.level">error</field>
-    <description>Docker: Error message</description>
-    <group>docker-error,</group>
-  </rule>
+Is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a catched event.
+
+.. code-block:: xml
+
+  <var name="BAD_WORDS">error|warning|failure</var>
+
+  <group name="syslog,errors,">
+    <rule id="XXXX" level="2">
+      <match>$BAD_WORDS</match>
+      <description>Error found.</description>
+    </rule>
+  </group>

@@ -5,10 +5,22 @@
 Decoders Syntax
 ===============
 
-The decoders are instances that read the rules and filter the data that users specify in their **labels**.
+The decoders are instances that extract the information from the received events.
+When an event is catched, the decoders separate the information in blocks, and then analyze each block.
+As a example, if ``event windows srcip: 3.4.5.1 dstip: 9.1.2.7 rscport: 1512 reason: invalid log`` is catched, the decoders would separate it in:
+
+.. code-block:: bash
+
+  - event windows srcip: 3.4.5.1
+  - dstip: 9.1.2.7
+  - rscport: 1512
+  - reason: invalid log
+
 
 Options
 -------
+
+There is many options to configure the decoders:
 
 - `decoder`_
 - `parent`_
@@ -27,7 +39,7 @@ Options
 decoder
 ^^^^^^^
 
-The attributes list below defines a decoder.
+The attributes listed below define a decoder.
 
 +-----------+---------------------------+
 | Attribute | Description               |
