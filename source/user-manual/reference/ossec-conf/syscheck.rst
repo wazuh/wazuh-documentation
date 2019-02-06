@@ -410,6 +410,9 @@ restart_audit
 ^^^^^^^^^^^^^
 
 .. versionadded:: 3.5.0
+.. deprecated:: 3.9.0
+
+.. note::  This option is set inside the ``<whodata>`` tag since version 3.9.0.
 
 Allow the system to restart `Auditd` after installing the plugin. Note that setting this field to ``no`` the new
 whodata rules won't be applied automatically.
@@ -433,6 +436,7 @@ This option sets the frequency with which the Windows agent will check that the 
 | **Allowed values** | A positive number, time in seconds |
 +--------------------+------------------------------------+
 
+
 whodata
 ^^^^^^^
 
@@ -442,13 +446,31 @@ The Whodata options will be configured inside this tag.
 
 .. code-block:: xml
 
-    <!-- Audit keys -->
+    <!-- Whodata options -->
     <whodata>
+        <restart_audit>yes</restart_audit>
         <audit_key>auditkey1,auditkey2</audit_key>
-        <audit_healthcheck_enabled>yes</audit_healthcheck_enabled>
+        <startup_healthcheck>yes</startup_healthcheck>
     </whodata>
 
+
+**restart_audit**
+
+.. versionadded:: 3.9.0
+
+Allow the system to restart `Auditd` after installing the plugin. Note that setting this field to ``no`` the new
+whodata rules won't be applied automatically.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+
 **audit_key**
+
+.. versionadded:: 3.7.1
 
 Set up the FIM engine to collect the Audit events using keys with ``audit_key``. Wazuh will include in its FIM baseline those events being monitored by Audit using `audit_key`. For those systems where Audit is already set to monitor folders for other purposes, Wazuh can collect events generated as a key from `audit_key`. This option is only available for **Linux systems with Audit**.
 
@@ -458,9 +480,11 @@ Set up the FIM engine to collect the Audit events using keys with ``audit_key``.
 | **Allowed values** | Any string separated by commas     |
 +--------------------+------------------------------------+
 
+
 .. note:: Audit allow inserting spaces inside the keys, so the spaces inserted inside the field ``<audit_key>`` will be part of the key.
 
-**audit_healthcheck_enabled**
+
+**startup_healthcheck**
 
 .. versionadded:: 3.9.0
 
@@ -522,7 +546,4 @@ Default Unix configuration
     <nodiff>/etc/ssl/private.key</nodiff>
 
     <skip_nfs>yes</skip_nfs>
-
-    <!-- Allow the system to restart Auditd after installing the plugin -->
-    <restart_audit>yes</restart_audit>
   </syscheck>
