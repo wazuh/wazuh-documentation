@@ -761,6 +761,11 @@ footer a:active,
 
 }
 
+main li.toctree-l1 > a{
+  color: #333;
+  background: #fff;
+}
+
 footer .logo {
   max-width: 155px;
   width: 100%;
@@ -1279,7 +1284,6 @@ a[data-lightbox] img {
 
 #page .jumbo-bar {
   background-color: #ffffff;
-  border-bottom: 1px solid #00a9e5;
   margin-bottom: 15px;
 }
 
@@ -1649,7 +1653,6 @@ footer a {
   -webkit-box-shadow: none;
           box-shadow: none;
   border: none;
-  border-bottom: 1px solid #00a9e5;
   margin: 0;
   border-radius: 0;
   position: relative;
