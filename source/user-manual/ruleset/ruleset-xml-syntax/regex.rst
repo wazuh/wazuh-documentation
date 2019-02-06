@@ -75,6 +75,18 @@ This library is designed to be simple while still supporting the most common reg
   | \\$ | \\( | \\) | \\ \\ | \\| | \\< |
   +-----+-----+-----+-------+-----+-----+
 
+.. topic:: Limitations
+
+ - The ``*`` and ``+`` modifiers can only be applied to backslash
+  expressions, not bare characters (e.g. ``\d+`` is supported, ``0+`` is not)
+- You cannot use alternation in a group, e.g. ``(foo|bar)`` is not permitted
+- Complex backtracking is not supported, e.g. ``\p*\d*\s*\w*:`` does not
+  match a single colon, because ``\p*`` consumes the colon
+- ``.`` matches a literal dot, whereas ``\.`` matches any character
+- ``\s`` matches only an ASCII space (32), not other whitespace like tab
+- there is no syntax to match a literal caret, asterisk or plus
+  (although ``\p`` will match asterisk or plus, along with some other
+  characters)
 
 Sregex (OS_Match) syntax
 -----------------------------

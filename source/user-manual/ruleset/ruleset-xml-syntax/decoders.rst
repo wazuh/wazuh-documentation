@@ -35,6 +35,7 @@ There is many options to configure the decoders:
 - `use_own_name`_
 - `json_null_field`_
 - `location`_
+- `var`_
 
 decoder
 ^^^^^^^
@@ -286,3 +287,33 @@ Points the source where the event has been readed, like a log file or an agent.
 +                    +-------------------------------------------------------------------------+
 |                    | An agent (`(ubuntu)->192.168.1.22`)                                     |
 +--------------------+-------------------------------------------------------------------------+
+
+var
+^^^
+
+Defines a variable that may be used in any place of the same file.
+
++----------------+------------------------+
+| Attribute      | Value                  |
++================+========================+
+| **name**       | Name for the variable. |
++----------------+------------------------+
+
+Example:
+
+.. code-block:: xml
+
+    <var name="header">myprog</var>
+    <var name="offset">after_parent</var>
+    <var name="type">syscall</var>
+
+    <decoder name="syscall">
+      <prematch>^$header</prematch>
+    </decoder>
+
+    <decoder name="syscall-child">
+      <parent>syscall</parent>
+      <prematch offset="$offset">^: $type </prematch>
+      <regex offset="after_prematch">(\S+)</regex>
+      <order>syscall</order>
+    </decoder>
