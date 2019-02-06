@@ -15,5 +15,6 @@ Wazuh uses three components to perform this task: *Rootcheck*, *OpenSCAP* and *C
         :maxdepth: 2
 
         rootcheck/index
+        policy-monitoring/index
         openscap/index
         ciscat/ciscat
