@@ -8,7 +8,7 @@ Reference
 ======================
 This API reference is organized by resources:
 
-* `Active_Response`_
+* `Active Response`_
 * `Agents`_
 * `Cache`_
 * `Ciscat`_
@@ -28,7 +28,7 @@ Below is the `Request List`_ that shows all of the available requests.
 Request List
 ---------------------------------
 
-`Active_Response`_
+`Active Response`_
 	* PUT /active-response/:agent_id  (`Run an AR command in the agent`_)
 
 `Agents`_
