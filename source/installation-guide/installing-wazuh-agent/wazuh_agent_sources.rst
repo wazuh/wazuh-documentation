@@ -43,7 +43,7 @@ Installing Linux agent
     # ./install.sh
 
 .. note::
-  During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, decide installation mode (manager, agent, local, hybrid), then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
+  During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``agent``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
 
 .. warning::
   When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
