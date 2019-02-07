@@ -23,12 +23,12 @@ Reasons for using a cluster
 Horizontal scalability
 ~~~~~~~~~~~~~~~~~~~~~~
 
-It multiplies Wazuh's event processing capacity and allows to have thousands of agents reporting. Adding a new node to the cluster is very simple (just add the master's address in the configuration) and it can be automated easily, giving the user the ability to implement auto-scaling.
+It multiplies Wazuh's event processing capacity and allows it to have thousands of agents reporting. Adding a new node to the cluster is very simple (just add the master's address in the configuration) and it can be automated easily, giving the user the ability to implement auto-scaling.
 
 High availability
 ~~~~~~~~~~~~~~~~~
 
-Server eventually fail: hardware can be broken, a human can turn them off, the system can go down... And while the server is restored, you won't be able to see what is happening in your agents. Using a cluster you make sure your agents will always have a manager to report to.
+Servers eventually fail: hardware can be broken, a human can turn them off, the system can go down... And while the server is restored, you won't be able to see what is happening in your agents. Using a cluster you make sure your agents will always have a manager to report to.
 
 .. thumbnail:: ../../images/manual/cluster/cluster_infrastructure.png
     :title: Wazuh cluster infrastructure
@@ -189,7 +189,73 @@ The following must be considered when configuring a Wazuh app:
 Pointing agents to the cluster with a load balancer
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The best setup to report agents' events to a cluster is a load balancer. Keep in mind the following considerations:
+A **load balancer** is a service that distributes the workloads across multiple resources.
+In Wazuh's case, users want to use a load balancer to catch all the agent events and distribute them between the different workers in the cluster.
+
+The correct way to use it is to point every agent to send the events to the *load balancer*:
+
+1. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the **Load Balancer** IP address. In the ``<client><server>`` section, change the ``LOAD_BALANCER_IP`` value to the ``load balancer`` address and ``port``:
+
+  .. code-block:: xml
+
+    <client>
+      <server>
+        <address>LOAD_BALANCER_IP</address>
+        ...
+      </server>
+    </client>
+
+2. Restart the agents:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-agent restart
+
+3. Include in the ``Load Balancer`` the IP of every instance of the cluster we want to deliver events.
+
+  This configuration will depend of the load balancer service choosen.
+
+Here is a short configuration guide of a **load balancer** using Nginx:
+
+  1. Install Nginx in the *load balancer instance*:
+    - Download the packages from the `Official Page. <http://nginx.org/en/linux_packages.html>`_
+    - Follow the steps related on that guide to install the packages.
+  2. Configure the instance as a *load balancer*:
+    - The way nginx and its modules work is determined in the configuration file. By default, the configuration file is named nginx.conf and placed in the directory /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx.
+    - Now, open the configuration file and add the following structure:
+
+      .. code-block:: xml
+
+        cluster-stream {
+          upstream mycluster {
+            server <INSTANCE_IP>:1516;
+            server <INSTANCE_IP>:1516;
+            server <INSTANCE_IP>:1516;
+            ...
+          }
+
+          server {
+            listen 1516;
+
+            location / {
+              proxy_pass mycluster;
+            }
+          }
+        }
+
+    3. Restart nginx configuration files:
+      - nginx -s reload
+
+
+Keep in mind the following considerations:
 
 * **It is recommended to use TCP protocol instead of UDP**. Permanent connections and stickiness are needed in order to make sure agent data is consistent. In order to use the TCP protocol, you should configure both your :ref:`agents <server_protocol>` and your :ref:`nodes <manager_protocol>`.
 
@@ -278,7 +344,7 @@ The cluster will work with an old configuration but it is recommended to update 
 How the cluster works
 ---------------------
 
-The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates all the nodes following a master-worker architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
+The cluster is managed by a daemon, called **wazuh-clusterd**, which communicates with all the nodes following a master-worker architecture. Refer to the :doc:`Daemons <../reference/daemons/clusterd>` section for more information about its use.
 
 The image below shows the communications between a worker and a master node. Each worker-master communication is independent from each other, since workers are the ones who start the communication with the master.
 
@@ -338,9 +404,9 @@ For example, the following snippet shows the connected nodes in the cluster:
     ---------------------------------------
     Name    Address         Type    Version
     ---------------------------------------
-    node01  192.168.56.101  master  3.8.0
-    node02  192.168.56.103  worker  3.8.0
-    node03  192.168.56.105  worker  3.8.0
+    node01  192.168.56.101  master  3.8.2
+    node02  192.168.56.103  worker  3.8.2
+    node03  192.168.56.105  worker  3.8.2
     ---------------------------------------
 
 This information can also be obtained using the Restful API:
@@ -355,19 +421,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.8.0",
+                "version": "3.8.2",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.8.0",
+                "version": "3.8.2",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.8.0",
+                "version": "3.8.2",
                 "type": "master",
                 "name": "node01"
              }

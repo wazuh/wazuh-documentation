@@ -68,13 +68,13 @@ a) For Systemd:
 
 .. code-block:: console
 
-  # systemctl status wazuh-manager
+  # systemctl restart wazuh-manager
 
 b) For SysV Init:
 
 .. code-block:: console
 
-  # service wazuh-manager status
+  # service wazuh-manager restart
 
 
 .. warning::
