@@ -62,7 +62,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`rootcheck <rootcheck>`                                        | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`policy monitoring <policy_monitoring>`                        | manager, agent         |
+| :doc:`configuration assessment <configuration_assessment>`          | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`ruleset <ruleset>`                                            | manager                |
 +---------------------------------------------------------------------+------------------------+
