@@ -957,14 +957,6 @@ footer .contact-info .fa-paper-plane-o {
   transition: all ease .4s;
 }
 
-.main-menu {
-  background-color: #00a9e5;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
-}
-
 .main-menu a {
   color: #fff;
   background-color: #00a9e5;
@@ -1139,7 +1131,7 @@ select#select-version {
   height: 0.5em;
   border-left: 5px solid #0000;
   border-right: 5px solid #0000;
-  border-top: 5px solid #ffb600;
+  border-top: 5px solid #00a9e5;
   pointer-events: none;
 }
 
@@ -2011,6 +2003,28 @@ div.highlight pre {
         position: relative;
       }
 
+      #main-menu .nav-link {
+        padding: 0;
+      }
+
+      #main-menu .dropdown-menu {
+        top: 3.6em;
+        color: #ffffff;
+        background-color: #00a9e5;
+        border: none;
+      }
+
+      #main-menu .dropdown-menu a {
+        color: #ffffff;
+        background-color: #00a9e5;
+        text-align: center;
+      }
+
+      #main-menu .dropdown-menu a:hover,
+      #main-menu .dropdown-menu a:focus {
+        color: #333333;
+      }
+
       #main-navbar {
         height: 79px;
       }
@@ -2188,16 +2202,49 @@ div.highlight pre {
       }
 
       #main-navbar #main-menu.navbar-nav>li>a {
-        padding: 29px 10px 27px;
         color: #333333;
         background-color: #ffffff;
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
-        height: 99.999999999999%;
+        height: 100%;
+        position: relative;
+        padding-right: 0.9em;
       }
 
-      .scrolled-down #main-navbar #main-menu.navbar-nav>li>a {
-        padding: 19px 10px 17px;
+      #main-navbar #main-menu.navbar-nav>li>a.nav-button {
+        color: #ffffff;
+        background-color: #00a9e5;
+        height: 100%;
+        position: relative;
+        padding: 0.25em 0.9em;
+        border-radius: .25rem;
+      }
+
+      #main-navbar #main-menu.navbar-nav>li:hover>a.nav-button,
+      #main-navbar #main-menu.navbar-nav>li>a.nav-button:hover {
+        color: #ffffff;
+      }
+
+      .main-menu .menu-item {
+        padding: 29px 15px;
+        -ms-flex-item-align: center;
+            align-self: center;
+      }
+
+      .dropdown-toggle::after {
+        position: absolute;
+        right: 0;
+        content: '';
+        width: 0.5em;
+        top: 0.5em;
+        border-left: 5px solid #0000;
+        border-right: 5px solid #0000;
+        border-top: 5px solid #00a9e5;
+        pointer-events: none;
+      }
+
+      #main-menu .dropdown:hover .dropdown-menu {
+        display: block;
       }
 
       #main-navbar .navbar-nav > li > a:hover,
@@ -2213,18 +2260,16 @@ div.highlight pre {
       #main-navbar #main-menu.navbar-nav>li.active:hover>a,
       #main-navbar #main-menu.navbar-nav>li.active>a,
       #main-navbar #main-menu.navbar-nav>li>a:hover {
-        padding: 29px 10px 25px;
         color: #00a9e5;
         height: 98%;
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
       }
 
-      .scrolled-down #main-navbar #main-menu.navbar-nav>li:hover>a,
-      .scrolled-down #main-navbar #main-menu.navbar-nav>li.active:hover>a,
-      .scrolled-down #main-navbar #main-menu.navbar-nav>li.active>a {
-        padding: 19px 10px 15px;
-        height: 97%;
+      #main-navbar #main-menu.navbar-nav>li:hover>a,
+      #main-navbar #main-menu.navbar-nav>li.active:hover>a,
+      #main-navbar #main-menu.navbar-nav>li>a:hover {
+        text-decoration: none;
       }
 
       .main-menu.navbar-nav>li.active>a{
@@ -2358,7 +2403,7 @@ div.highlight pre {
       }
 
       .jumbo-bar .white-bar {
-        padding: 15px 0;
+        padding: 5px 10px;
       }
 
       .jumbo-bar .title {
@@ -2432,19 +2477,9 @@ div.highlight pre {
         transition: opacity 0.7s;
       }
 
-      .main-menu > li {
-        height: calc(100% - 1px);
-      }
-
       .main-menu a {
         color: #00a9e5;
         background-color: #fff;
-        border: none;
-      }
-
-      .docu-menu a {
-        color: #fff;
-        background-color: #00a9e5;
         border: none;
       }
 
