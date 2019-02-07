@@ -129,4 +129,4 @@ Below you can see an example file:
     # Archives log queue size
     archives_queue_size='16384'
 
-.. note:: As of Wazuh v3.7.0, the Analysis engine received support for multithreaded processing. You can read more about how the daemon works now on it's :ref:`reference documentation <ossec-analysisd-structure>`.
+.. note:: From Wazuh version 3.7.0, the Analysis engine supports multithreaded processing. You can read more about how the daemon works now on it's :ref:`reference documentation <ossec-analysisd-structure>`.
