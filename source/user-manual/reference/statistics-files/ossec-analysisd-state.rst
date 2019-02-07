@@ -17,6 +17,8 @@ By default, this file is updated **every 5 seconds** but this interval can be ch
     This file is created automatically when an agent connects for the first time to the manager.
     If the manager had never an agent connected to it, this file won't exist.
 
+.. note:: *edps* -> *events decoded per second*
+
 Below you can see an example file:
 
 .. code-block:: bash
@@ -27,7 +29,7 @@ Below you can see an example file:
     total_events_decoded='10'
 
     # Syscheck events decoded
-    syscheck_events_decoded='0'
+    syscheck_events_decoded='3'
     syscheck_edps='0'
 
     # Syscollector events decoded
@@ -35,7 +37,7 @@ Below you can see an example file:
     syscollector_edps='0'
 
     # Rootcheck events decoded
-    rootcheck_events_decoded='0'
+    rootcheck_events_decoded='1'
     rootcheck_edps='0'
 
     # Hostinfo events decoded
@@ -57,7 +59,7 @@ Below you can see an example file:
     events_dropped='0'
 
     # Alerts written to disk
-    alerts_written='0'
+    alerts_written='4'
 
     # Firewall alerts written to disk
     firewall_written='0'

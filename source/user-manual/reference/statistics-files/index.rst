@@ -5,9 +5,12 @@
 Statistics files
 ================
 
-The **statistics files** are useful to troubleshoot some problems you may encounter like not receiving enough alerts, agents not sending any events to the manager, a flooded agent's buffer, etc. You can also make use of these statistics to have a better perspective of your environment and how's everything working.
+The **statistics files** are documents that are automatically created when agents connect to a manager. They show information about the connection between the instances, like the number of events, number of TCP connections, etc.
 
-Currently, Wazuh provides three statistical files, listed below.
+Currently, Wazuh provides three statistical files:
+  * ``ossec-agentd-state`` -> Available only in the agents and shows mumber of generated events, last connection, status, etc.
+  * ``ossec-remoted-state`` -> Available only in the manager and shows information about the ``remoted`` daemon.
+  * ``ossec-analysisd-state`` -> Available only in the manager, shows information about the ``Analysisd`` daemon, displaying real time data.
 
 .. topic:: Contents
 
