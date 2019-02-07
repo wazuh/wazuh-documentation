@@ -161,11 +161,12 @@ Installing the Wazuh API
 .. _wazuh_server_rpm_filebeat:
 
 .. note::
-  In some Fedora versions, it may require to install dkms packages. If requested install it his way:
+
+  From Fedora v22 to v25, it's required to install ``dkms`` packages. Install it this way:
 
     .. code-block:: bash
 
-      # sudo yum install dkms
+      # yum install dkms
 
 Installing Filebeat
 -------------------

@@ -49,7 +49,7 @@ Otherwise, you can create a self-signed certificate using the following command:
 
 .. note::
 
-  In some Fedora versions, it may require to install openssl package. If so, install it this way:
+  From Fedora v22 to v25, it's required to install ``openssl`` package. Install it this way:
 
     .. code-block:: bash
 
