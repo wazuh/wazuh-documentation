@@ -47,6 +47,10 @@ Otherwise, you can create a self-signed certificate using the following command:
 
   # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -out /var/ossec/etc/sslmanager.cert -keyout /var/ossec/etc/sslmanager.key
 
+.. note::
+
+  From Fedora v22 to v25, it's required to install ``openssl`` package (``yum install openssl``).
+
 Simple method
 -------------
 
