@@ -103,7 +103,7 @@ To enable the password authorization, use the ``-P`` flag when running the regis
       Accepting connections on port 1515. Random password chosen for agent authentication: abdc1234
 
     .. note::
-      If the user needs to show the password on console, use option ``-fP`` indeed ``-P``.
+      If the user needs to show the password on console, use option ``-fP`` instead of ``-P``, this will launch the registration daemon in foreground, so once done if you close the CLI or finish the process, the registration daemon will be stopped.
 
 2. The agents can use the password by storing it on a file or as a command line argument. Follow one of these steps:
 
