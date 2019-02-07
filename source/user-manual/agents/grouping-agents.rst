@@ -22,7 +22,7 @@ Below are the steps to assign agents to a group with a specific configuration:
    .. note:: The group must be created and configured before assigning agents.
 
    .. note:: This behaviour corresponds to ``v3.7.0`` and later.
-   
+
 
    .. code-block:: console
 
