@@ -71,7 +71,7 @@ Configure the Wazuh agent client buffer on linux-agent
     |     :width: 100%                                                                              |
     +-----------------------------------------------------------------------------------------------+
 
-3. To ensure our flood simulation causes queueing and ultimately overflows the queue, change **<queue_size>** to 500 and **<events_per_second>** to 20.  Save and close ossec.conf.  The new section should look like this:
+4. To ensure our flood simulation causes queueing and ultimately overflows the queue, change **<queue_size>** to 500 and **<events_per_second>** to 20.  Save and close ossec.conf.  The new section should look like this:
 
     .. code-block:: xml
 
@@ -83,7 +83,14 @@ Configure the Wazuh agent client buffer on linux-agent
         </client_buffer>
 
     .. warning::
-        These settings are small for simulation purposes.  You would not want to make them this low in production.
+      These settings are small for simulation purposes.  You would not want to make them this low in production.
+
+.. note::
+
+  To configure a Wazuh Agent client buffer on Windows, follow the same steps but using the Windows paths and commands.
+
+    - Edit configuration file to enable the client Buffer located in ``C:\\Program Files (x86)\\ossec-agent``.
+    - Restart the agent.
 
 Make Wazuh manager record alerts for each flooded event record
 --------------------------------------------------------------
