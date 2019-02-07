@@ -7,7 +7,9 @@ ossec-analysisd state file
 
 The statistical file for **ossec-analysisd** is ``ossec-analysisd.state`` and it's located in the Wazuh installation directory (``/var/ossec/var/run/ossec-analysisd.state``).
 
-This file shows the information relative to the status of the **Analysisd daemon**, displaying real time data. It can help to analyse situations where users need to troubleshoot problems related to getting less events or alerts as expected.
+The ossec-analysisd program receives the log messages and compares them to the rules. It then creates an alert when a log message matches an applicable rule.
+
+This file shows the information relative to the status of this daemon, displaying real time data. It can help to analyse situations where users need to troubleshoot problems related to getting less events or alerts as expected.
 
 By default, this file is updated **every 5 seconds** but this interval can be changed with the ``analysisd.state_interval`` variable in the ``internal_options.conf`` file. For further information, visit the :ref:`internal configuration <reference_internal_options>` page.
 
