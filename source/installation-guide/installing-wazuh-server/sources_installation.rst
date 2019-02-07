@@ -44,8 +44,6 @@ Installing Wazuh manager
 
   .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
-  .. note:: Users can configure the ``install.sh`` file to edit the path of the installation.
-  
 4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
 
   .. code-block:: none
