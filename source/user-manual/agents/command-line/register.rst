@@ -56,7 +56,6 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 4. Exit from `manage_agents` by selecting `Q`.
 
-
 5. Now on the **agent** run ``manage_agents``:
 
 .. code-block:: console
