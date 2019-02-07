@@ -94,7 +94,7 @@ To enable the password authorization, use the ``-P`` flag when running the regis
 
       Accepting connections on port 1515. Using password specified on file: /var/ossec/etc/authd.pass
 
-  * If no password is specified on ``/var/ossec/etc/authd.pass``, the registration service will create a password itself and save it in the ``/var/ossec/logs/ossec.log``:
+  * If no password is specified on ``/var/ossec/etc/authd.pass``, the registration service will create a random password:
 
     .. code-block:: console
 
