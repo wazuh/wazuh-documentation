@@ -1,4 +1,4 @@
-/*
+li/*
 The main theme stylesheet.
 Author: Wazuh Inc.
 -------------------------------------------------------------- */
@@ -273,18 +273,14 @@ footer a:focus .fa {
   width: 12px;
 }
 
-.full-toctree-nav .globaltoc li a {
-  margin-bottom: 4px;
-}
-
 li.toctree-l1 {
-  font-size: 1.3em;
+  font-size: 1.05em;
 }
 
 li.toctree-l2,
 li.toctree-l3,
 li.toctree-l4 {
-  font-size: calc(100% - 3px);
+  font-size: calc(100% - 2px);
 }
 
 li.toctree-l1 > a,
@@ -296,9 +292,8 @@ li.toctree-l4 > a {
 }
 
 li.toctree-l1 > a {
-  background-color: #f4f4f4;
   display: block;
-  padding: 0.6em 1em;
+  padding: 0.5em 2.2em 0.5em 1.2em;
 }
 
 li.toctree-l2 > a {
@@ -319,36 +314,28 @@ li.toctree-l4 > a {
   padding: 0.6em 1em 0.6em 3em;
 }
 
-.globaltoc ul > li.toctree-l1 > a::after,
-.globaltoc ul li.toctree-l2 > a::after,
-.globaltoc ul li.toctree-l3 > a::after,
-.globaltoc ul li.toctree-l4 > a::after {
-  background-color: #00a9e5;
-  content: '';
-  height: 1px;
-  width: 1em;
-  display: block;
-  position: absolute;
-  top: 1.2em;
-  right: 1em;
-  font-size: 1em;
-}
-
 .globaltoc ul > li.toctree-l1 > a::before,
 .globaltoc ul li.toctree-l2 > a::before,
 .globaltoc ul li.toctree-l3 > a::before,
 .globaltoc ul li.toctree-l4 > a::before {
-  background-color: #00a9e5;
-  content: '';
-  height: 1px;
+  color: #00a9e5;
+  content: '\f107';
+  font: normal normal normal 1rem/.5 FontAwesome;
   width: 0.9em;
+  height: 0.9em;
   display: block;
   position: absolute;
-  top: 1.2em;
-  right: 1em;
-  font-size: 1em;
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+  top: 0.7em;
+  right: 0.7em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 ul > li.toctree-l1.current > a::before,
@@ -364,17 +351,18 @@ li.toctree-l4.current > a::before {
 }
 
 ul li.toctree-l1 a.current.reference.internal {
-  background-color: #00a9e5;
-  color: #fff;
+  color: #00a9e5;
 }
 
 ul li.toctree-l1 a.current.reference.internal:before,
 ul li.toctree-l1 a.current.reference.internal:after {
-  background-color: #fff;
+  color: #00a9e5;
 }
 
 .globaltoc li.toctree-l1 a {
-  color: #333333;
+  color: rgba(51, 51, 51, 0.8);
+  background-color: #f4f4f4;
+  border-bottom: 1px solid  #e8e8e8;
 }
 
 .compound li.toctree-l1 a {
