@@ -5,17 +5,8 @@
 Decoders Syntax
 ===============
 
-The decoders are instances that extract the information from the received events.
-When an event is catched, the decoders separate the information in blocks, and then analyze each block.
-As a example, if ``event windows srcip: 3.4.5.1 dstip: 9.1.2.7 rscport: 1512 reason: invalid log`` is catched, the decoders would separate it in:
-
-.. code-block:: bash
-
-  - event windows 
-  - srcip: 3.4.5.1
-  - dstip: 9.1.2.7
-  - rscport: 1512
-  - reason: invalid log
+The decoders extract the information from the received events.
+When an event is received, the decoders separate the information in blocks to prepare them for their subsequent analysis.
 
 Options
 -------
