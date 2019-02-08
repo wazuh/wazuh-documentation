@@ -27,7 +27,7 @@ Options
 
 
 scan_on_start
-^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 The configuration assessment module will perform the scans inmediately when started.
 
@@ -38,7 +38,7 @@ The configuration assessment module will perform the scans inmediately when star
 +--------------------+---------+
 
 scan_wday
-^^^^^^^^^^^^^^^
+^^^^^^^^^
 
 Day of the week to run the scans. **Not compatible** with the ``scan_day`` option.
 
@@ -56,7 +56,7 @@ Day of the week to run the scans. **Not compatible** with the ``scan_day`` optio
 +--------------------+--------------------------+
 
 scan_day
-^^^^^^^^^^^^^^^
+^^^^^^^^
 
 The scans will be executed this day of the month. **Not compatible** with the ``scan_wday`` option.
 
@@ -67,7 +67,7 @@ The scans will be executed this day of the month. **Not compatible** with the ``
 +--------------------+--------------------------+
 
 interval
-^^^^^^^^^^^^^^^
+^^^^^^^^
 
 The scans will be executed between this range of time.
 
@@ -78,7 +78,7 @@ The scans will be executed between this range of time.
 +--------------------+-----------------------------------------------------------------------------------------+
 
 scan_time
-^^^^^^^^^^^^^^^
+^^^^^^^^^
 
 Time to run the scans. Times may be represented as 9pm or 8:30.
 
@@ -90,7 +90,7 @@ Time to run the scans. Times may be represented as 9pm or 8:30.
 
 
 enabled
-^^^^^^^^^^^^^^^
+^^^^^^^
 
 Enables the execution of rootcheck.
 
@@ -101,7 +101,7 @@ Enables the execution of rootcheck.
 +--------------------+---------+
 
 skip_nfs
-^^^^^^^^^^^^^^^
+^^^^^^^^
 
 Enable or disable the scanning of network mounted filesystems (Works on Linux and FreeBSD).
 Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
@@ -113,7 +113,7 @@ Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 +--------------------+---------+
 
 profile
-^^^^^^^^^^^^^^^
+^^^^^^^
 
 Specifies the check file to be run.
 
@@ -124,7 +124,7 @@ Specifies the check file to be run.
 +--------------------+----------------------+
 
 Configuration example
-----------------------
+---------------------
 
 .. code-block:: xml
 
