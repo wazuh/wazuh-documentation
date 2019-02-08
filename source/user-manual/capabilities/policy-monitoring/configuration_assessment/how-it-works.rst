@@ -14,7 +14,7 @@ The *configuration assessment* module has these four main objectives:
 - Alert generation.
 
 The checking files can contain rules for verifying that a process is running, a file exists, or if a file contains an specific pattern.
-Also, there is a main block that specifies the requirements needed to pass the tests.
+In addition, there is a main block that specifies the requirements needed to pass the tests.
 
 
 Database
@@ -34,7 +34,7 @@ This files count with a policy introduction, the requirements needed to run the 
 .. code-block:: json
 
     {
-        "pm":{
+        "configuration_assessment":{
             "type":"check",
             "scan_id":"1530676965",
             "policy":"CIS benchmark for Debian/Linux",
@@ -59,18 +59,18 @@ This would be the alert generated:
 .. code-block:: none
 
     ** Alert 1549448286.614806: - ossec,
-    2019 Feb 06 11:18:06 misi->policy-monitoring
+    2019 Feb 06 11:18:06 misi->configuration_assessment
     Rule: 19004 (level 3) -> 'Check with id 1029 for profile CIS benchmark for Debian/Linux passed'
     {"type":"check","id":1530676965,"profile":"CIS benchmark for Debian/Linux","check":{"id":1029,"title":"Ensure HTTP Proxy Server is not enabled","cis_control":"2.2.13","description":"Squid is a standard proxy server used in many distributions and environments.","rationale":"If there is no need for a proxy server, it is recommended that the squid proxy be deleted to reduce the potential attack surface.","remediation":"Run the following command to disable squid: # systemctl disable squid","compliance":{"cis":9,"pci_dss":"2.2.2"},"file":"","result":"passed"}}
-    pm.type: check
-    pm.scan_id: 1530676965
-    pm.policy: CIS benchmark for Debian/Linux
-    pm.check.id: 1029
-    pm.check.title: Ensure HTTP Proxy Server is not enabled
-    pm.check.cis_control: 2.2.13
-    pm.check.description: Squid is a standard proxy server used in many distributions and environments.
-    pm.check.rationale: If there is no need for a proxy server, it is recommended that the squid proxy be deleted to reduce the potential attack surface.
-    pm.check.remediation: Run the following command to disable squid: # systemctl disable squid
-    pm.check.compliance.cis: 9
-    pm.check.compliance.pci_dss: 2.2.2
-    pm.check.result: passed
+    configuration_assessment.type: check
+    configuration_assessment.scan_id: 1530676965
+    configuration_assessment.policy: CIS benchmark for Debian/Linux
+    configuration_assessment.check.id: 1029
+    configuration_assessment.check.title: Ensure HTTP Proxy Server is not enabled
+    configuration_assessment.check.cis_control: 2.2.13
+    configuration_assessment.check.description: Squid is a standard proxy server used in many distributions and environments.
+    configuration_assessment.check.rationale: If there is no need for a proxy server, it is recommended that the squid proxy be deleted to reduce the potential attack surface.
+    configuration_assessment.check.remediation: Run the following command to disable squid: # systemctl disable squid
+    configuration_assessment.check.compliance.cis: 9
+    configuration_assessment.check.compliance.pci_dss: 2.2.2
+    configuration_assessment.check.result: passed
