@@ -226,9 +226,12 @@ The correct way to use it is to point every agent to send the events to the *loa
 Here is a short configuration guide of a **load balancer** using Nginx:
 
   1. Install Nginx in the *load balancer instance*:
+
     - Download the packages from the `Official Page. <http://nginx.org/en/linux_packages.html>`_
     - Follow the steps related on that guide to install the packages.
+
   2. Configure the instance as a *load balancer*:
+
     - The way nginx and its modules work is determined in the configuration file. By default, the configuration file is named nginx.conf and placed in the directory /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx.
     - Now, open the configuration file and add the following structure:
 
@@ -252,6 +255,7 @@ Here is a short configuration guide of a **load balancer** using Nginx:
         }
 
     3. Restart nginx configuration files:
+    
       - nginx -s reload
 
 
