@@ -7,14 +7,14 @@
 
 {%- block header %}
 <header id="branding" role="banner" class="no-fixed-top">
-  <nav id="main-navbar" class="navbar navbar-expand-md" role="navigation">
+  <nav id="main-navbar" class="navbar navbar-expand-lg" role="navigation">
     <div id="main-menu-container">
       <div class="row">
-        <div class="navbar-header col-xs-12 col-md-4" id="xs-bar">
+        <div class="navbar-header col-xs-12 col-lg-4" id="xs-bar">
           <div class="navbar-brand" id="logo-title">
             <a class="wazuh-logo-link" href={{ theme_wazuh_web_url }} title="Wazuh">
-              <img class="img-responsive d-none d-md-block" src={{ pathto('_static/wazuh_logo.png', 1) }} alt="Wazuh" />
-              <img class="img-responsive d-md-none" src={{ pathto('_static/wazuh_blue_iso.png', 1) }} alt="Wazuh" />
+              <img class="img-responsive d-none d-lg-block" src={{ pathto('_static/wazuh_logo.png', 1) }} alt="Wazuh" />
+              <img class="img-responsive d-lg-none" src={{ pathto('_static/wazuh_blue_iso.png', 1) }} alt="Wazuh" />
             </a>
             <button type="button" class="navbar-toggler btn-close collapsed" data-toggle="collapse" data-target="#collapsibleNavbar">
               <i class="x" aria-hidden="true"></i><!-- <i class="fa fa-bars"></i> -->
@@ -29,7 +29,7 @@
 
         </div> <!-- // #xs-bar.navbar-header -->
 
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-lg-8">
           <!-- Main Menu -->
           <nav id="collapsibleNavbar" class="collapse navbar-collapse navbar-main-collapse">
             <ul id="main-menu" class="main-menu navbar-nav">
@@ -74,7 +74,7 @@
               </li>
             </ul>
           </nav>
-        </div> <!-- // .col-xs-12.col-md-8 -->
+        </div> <!-- // .col-xs-12.col-lg-8 -->
 
       </div> <!-- // .row -->
 
@@ -87,9 +87,9 @@
       <div class="container-fluid">
         <div class="row justify-content-end">
 
-          <div id="search-md" class="title-bar-right col-md-5 col-lg-4 col-xl-3 right">
+          <div id="search-lg" class="title-bar-right col-lg-5 col-lg-4 col-xl-3 right">
             {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
-          </div> <!-- // #search-md -->
+          </div> <!-- // #search-lg -->
         </div>
       </div>
     </div>
