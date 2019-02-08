@@ -1,6 +1,6 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _command-line-listing:
+.. _command_line_listing:
 
 Listing Agents
 --------------
