@@ -11,11 +11,11 @@ As a example, if ``event windows srcip: 3.4.5.1 dstip: 9.1.2.7 rscport: 1512 rea
 
 .. code-block:: bash
 
-  - event windows srcip: 3.4.5.1
+  - event windows 
+  - srcip: 3.4.5.1
   - dstip: 9.1.2.7
   - rscport: 1512
   - reason: invalid log
-
 
 Options
 -------
@@ -50,6 +50,16 @@ The attributes listed below define a decoder.
 | type      | The type of the decoder   |
 +-----------+---------------------------+
 
+Example:
+
+Set name and type of decoder to *ossec*:
+
+  .. code-block:: xml
+
+    <decoder name="ossec" type ="ossec">
+      ...
+    </decoder>
+
 parent
 ^^^^^^
 
@@ -60,6 +70,16 @@ It is used to link a subordinate codeblock to his parent.
 +--------------------+------------------+
 | **Allowed values** | Any decoder name |
 +--------------------+------------------+
+
+Example:
+
+Assign the decoder which father it belongs:
+
+  .. code-block:: xml
+    
+    <decoder name="decoder_junior">
+      <parent>decoder_father</parent>
+    </decoder>
 
 accumulate
 ^^^^^^^^^^^
@@ -85,6 +105,16 @@ It defines the name of the program with which the decoder is associated.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_    |
 +--------------------+--------------------------------------------------------------------+
 
+Example:
+
+Define that the decoder is related with the ``syslogd`` process:
+
+  .. code-block:: xml
+
+    <decoder name="syslogd_decoder">
+      <program_name>syslogd</program_name>
+    </decoder>
+
 prematch
 ^^^^^^^^^
 
@@ -106,6 +136,7 @@ The attribute below is optional, it allows to discard some of the content of the
 
 regex
 ^^^^^^^
+
 **Regular expressions** or ``regex`` are sequences of characters that define a pattern.
 Decoders use them to find words or other patterns into the rules.
 
@@ -207,6 +238,15 @@ It is used to designate a decoder as one in which the first time it matches the 
 |                    | extra_data | Any extra data                                        |
 +--------------------+------------+-------------------------------------------------------+
 
+Example:
+
+The following decoder will extract the user who generated the alert and the location from where it comes:
+
+  .. code-block: xml
+    </decoder>
+      <fts>srcuser, location</fts>
+    </decoder>
+
 ftscomment
 ^^^^^^^^^^^
 
@@ -287,6 +327,16 @@ Points the source where the event has been readed, like a log file or an agent.
 +                    +-------------------------------------------------------------------------+
 |                    | An agent (`(ubuntu)->192.168.1.22`)                                     |
 +--------------------+-------------------------------------------------------------------------+
+
+Example:
+
+  .. code-block:: xml 
+    
+    <decoder name="home_decoder">
+      <location> /home/user </location>
+    </decoder>
+
+Only filters the alerts related to the path ``/home/user``.
 
 var
 ^^^
