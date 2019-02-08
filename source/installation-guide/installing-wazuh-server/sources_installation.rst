@@ -50,6 +50,16 @@ Installing Wazuh manager
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
 
+.. note::
+  During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
+
+.. warning::
+  When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
+  
+.. warning::
+  Be extremely careful not to select a critical installation directory.
+
+
 5. The installer asks if you want to start Wazuh at the end of the installation. If you chosen not to, you can start it later with:
 
   a. For Systemd:
