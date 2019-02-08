@@ -2012,17 +2012,22 @@ div.highlight pre {
         color: #ffffff;
         background-color: #00a9e5;
         border: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
       }
 
-      #main-menu .dropdown-menu a {
+      #main-menu .dropdown-menu a.dropdown-item {
         color: #ffffff;
         background-color: #00a9e5;
         text-align: center;
+        padding: 0.4em
       }
 
       #main-menu .dropdown-menu a:hover,
       #main-menu .dropdown-menu a:focus {
-        color: #333333;
+        color: #00a9e5;
+        background-color: #ffffff;
       }
 
       #main-navbar {
