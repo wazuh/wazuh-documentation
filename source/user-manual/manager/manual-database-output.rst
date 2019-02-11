@@ -62,6 +62,43 @@ To indicate what kind of database users will use, users need the ``DATABASE`` fl
 
 The compilation process might take some time. After finishing this process, please continue with the sources installation guide. Now Wazuh will be installed with database support, but we must enable manually the feature after configuring it.
 
+Database configuration
+----------------------
+
+Now that we have Wazuh installed with database support, we need to set up the database server. We'll create a new database, set up the database user and add the schema (located in the ``src/os_dbd`` directory of the source code) with the following commands, according to your database system:
+
+**For MySQL:**
+
+.. code-block:: sql
+
+  # mysql -u root -p
+
+  mysql> CREATE DATABASE Alerts_DB;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> CREATE USER 'MySQLadmin'@'<MANAGER_IP>' IDENTIFIED BY 'secret1234';
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> GRANT INSERT,SELECT,UPDATE,CREATE,DELETE,EXECUTE on Alerts_DB.* to 'MySQLadmin'@'<MANAGER_IP>';
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> FLUSH PRIVILEGES;
+  Query OK, 0 rows affected (0.00 sec)
+
+  mysql> quit;
+
+  # mysql -u root -p Alerts_DB < src/os_dbd/mysql.schema
+
+**For PostgreSQL:**
+
+.. code-block:: console
+
+  # sudo -u postgres createuser -P PostgreSQLadmin
+
+  # sudo -u postgres createdb -O PostgreSQLadmin Alerts_DB
+
+  # psql -U PostgreSQLadmin -d Alerts_DB -f src/os_dbd/postgresql.schema
+
 Wazuh configuration
 -------------------
 
