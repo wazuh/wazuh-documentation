@@ -12,7 +12,7 @@ At this moment, `MySQL <https://www.mysql.com/>`_ and `PostgreSQL <https://www.p
 In this section, users will find instructions to configure the database output for any of the database systems previously mentioned.
 
 .. note::
-  This tutorial assumes that the user has already installed MySQL or PostgreSQL and knows hot to create the users and the databases. If it is needed instructions to install them on the users' host, please find some tutorials for the main distributions at the end of this page.
+  This tutorial assumes that the user has already installed MySQL or PostgreSQL and knows how to create the users and the databases. If it is needed instructions to install them on the users' host, please find some tutorials for the main distributions at the end of this page.
 
 Prerequisites
 -------------
