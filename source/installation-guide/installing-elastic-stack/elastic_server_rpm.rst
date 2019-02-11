@@ -187,6 +187,11 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Kibana <https://www.elastic.co/products/kibana>`_.
 
+.. warning::
+  Remember that, when installing the App, there will be a memory peak of ~2.0 GB.
+
+  Once installed, the App will require much less memory.
+
 1. Install the Kibana package:
 
   .. code-block:: console
