@@ -5,9 +5,9 @@
 Remove Agents
 -------------
 
-The binary */var/ossec/bin/manage_agents* allows for the removal of agents.
+The binary */var/ossec/bin/manage_agents* allows the removal of agents using the command line.
 
-If you would like a confirmation before removing the agent, use the following:
+If the user would like a confirmation before removing the agent, use the following:
 
 .. code-block:: console
 
@@ -34,7 +34,7 @@ If you would like a confirmation before removing the agent, use the following:
 
     manage_agents: Exiting.
 
-If you would like to remove the agent with no confirmation, use the option shown below:
+If the user would like to remove the agent with no confirmation, use the option shown below:
 
 .. code-block:: console
 
