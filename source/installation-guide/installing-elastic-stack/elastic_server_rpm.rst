@@ -187,11 +187,6 @@ Kibana
 
 Kibana is a flexible and intuitive web interface for mining and visualizing the events and archives stored in Elasticsearch. Find more information at `Kibana <https://www.elastic.co/products/kibana>`_.
 
-.. warning::
-  Remember that, when installing the App, there will be a memory peak of ~2.0 GB.
-
-  Once installed, the App will require much less memory.
-
 1. Install the Kibana package:
 
   .. code-block:: console
@@ -207,6 +202,10 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
   .. warning::
 
     The Kibana plugin installation process may take several minutes. Please wait patiently.
+
+    Remember that, when installing the App, the **optimizing** process will produce a memory peak of ~2.2GB.
+
+    Once installed, the App will require much less memory, ~1.6GB (default Node limit).
 
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 
