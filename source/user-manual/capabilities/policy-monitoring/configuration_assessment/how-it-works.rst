@@ -13,7 +13,7 @@ The *configuration assessment* module has these four main objectives:
 - Storing the new results at the databases.
 - Alert generation.
 
-The checking files can contain rules for verifying that a process is running, a file exists, or if a file contains an specific pattern.
+The checking files can contain rules for verifying that a process is running, a file exists, or if a file contains a specific pattern.
 In addition, there is a main block that specifies the requirements needed to pass the tests.
 
 

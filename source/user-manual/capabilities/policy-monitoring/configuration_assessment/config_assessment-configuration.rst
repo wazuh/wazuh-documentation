@@ -18,7 +18,9 @@ The options for the configuration assessment module are described at the :ref:`c
    <interval>1m</interval>
    <skip_nfs>yes</skip_nfs>
 
-   <profile>debian/cis_debian_rcl.yml</profile>
+   <policies>
+     <policy>cis_debian_linux_rcl.yml</policy>
+   </policies>
  </configuration_assessment>
 
 
@@ -35,7 +37,9 @@ This is a basic configuration to run a scan on the 29th of every month.
    <scan_day>29</scan_day>
    <skip_nfs>yes</skip_nfs>
 
-   <profile>debian/cis_debian_rcl.yml</profile>
+   <policies>
+     <policy>cis_debian_linux_rcl.yml</policy>
+   </policies>
  </configuration_assessment>
 
 
@@ -67,5 +71,7 @@ Root access to SSH
         <interval>50s</interval>
         <skip_nfs>yes</skip_nfs>
 
-        <profile>audit_test.yml</profile>
+        <policies>
+          <policy>audit_test.yml</policy>
+        </policies>
       </configuration_assessment>

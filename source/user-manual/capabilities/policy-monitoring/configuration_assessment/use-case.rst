@@ -17,12 +17,12 @@ To configure the execution of the *configuration assessment* module with a polic
 
 The profile field is the policy file desired to be executed. The complete path for it is by default */var/ossec/etc/rootcheck* on a Linux manager, */var/ossec/etc/rootcheck/shared* on a Linux agent environment and *C:\\Program files (x86)\\ossec-agent\\shared* when using Windows.
 
-In this case, we have set a Debian Linux check file, but you can choose any other that matches your operating system.
+In this case, a Debian Linux check file has been set, but the user can choose any other that matches their operating system.
 After restarting Wazuh on the machine where this module was set, it will start running. First, the new information will be stored
 at the manager's side, then this data may match with some rules described at the *0570-policy_rules.xml* file and it will generate alerts if 
 there is different information from the previous storage.
 
-The policy file has a check set, for example, this one verifies that the nodev option is set on the /home partition:
+The policy file has a check set, for example, this one verifies that the ``nodev`` option is set on the ``/home`` partition:
 
 .. code-block:: none
 
