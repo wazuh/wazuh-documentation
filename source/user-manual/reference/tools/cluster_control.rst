@@ -79,7 +79,7 @@ Get cluster's healthcheck
                     Permission to synchronize: True.
 
         node03 (192.168.56.105)
-            Version: 3.8.1
+            Version: 3.8.2
             Type: worker
             Active agents: 0
             Status:
