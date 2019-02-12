@@ -7,29 +7,6 @@ Integration with external APIs
 
 The **Integrator** daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty and VirusTotal.
 
-Prerequisites
--------------
-
-The Slack and VirusTotal integrations require the ``requests`` Python package. You can install it using one of the following methods:
-
-a) For RPM systems:
-
-.. code-block:: console
-
-  # yum install python-requests
-
-b) For Debian systems:
-
-.. code-block:: console
-
-  # apt-get install python-requests
-
-c) Using the Python `pip` tool:
-
-.. code-block:: console
-
-  # pip install requests
-
 Configuration
 -------------
 
