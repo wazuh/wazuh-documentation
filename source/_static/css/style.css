@@ -1416,6 +1416,87 @@ blockquote pre {
   margin-right: auto;
 }
 
+#gethelp > div {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+#gethelp a.btn-help:hover,
+#gethelp a.btn-help:focus,
+#gethelp a.btn-help:active {
+  color: #ffffff;
+  background-color: #0094ce;
+  border-color: #0094ce;
+}
+
+#gethelp .help-icon {
+  color: #00a9e5;
+  font-size: 150px;
+  text-align: center;
+}
+
+#gethelp .help-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#gethelp .help-buttons div {
+  padding: 10px 9px;
+}
+
+#gethelp .help-buttons.col-sm-9 > div {
+  max-width: 350px;
+}
+
+#gethelp .help-content h2 {
+  text-align: center;
+}
+
+#gethelp .help-content p {
+  font-size: 1rem;
+  text-align: center;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#gethelp .btn-help {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  padding: 10px 2px;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 1rem;
+  width: 100%;
+  display: inline-block;
+}
+
+#gethelp .btn-help.btn-white {
+  border: 1px solid #00a9e5;
+  background-color: #ffffff;
+  color: #00a9e5;
+}
+
+#gethelp .btn-help.btn-orange {
+  border: 1px solid #ffb600;
+  background-color: #ffb600;
+  color: #ffffff;
+}
+
 /* Overrides Bootstrap style
 -------------------------------------------------------------- */
 
@@ -1767,6 +1848,91 @@ nav.collapse.navbar-collapse.navbar-main-collapse {
   margin-bottom: 1em;
 }
 
+#useful-links {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+#gethelp {
+  padding-bottom: 1em;
+  position: relative;
+}
+
+.stickynote-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: 100%;
+}
+
+.stickynote {
+  display: table;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  border: 1px solid #f4f4f4;
+}
+
+.stickynote-icon {
+  font-size: 40px;
+}
+
+.stickynote:hover,
+.stickynote:active {
+  background-color: #ffffff;
+}
+
+.stickynote:focus h2 {
+  text-decoration: underline;
+}
+
+.stickynote .stickynote-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.home-stickynotes .stickynote .stickynote-icon {
+  display: none;
+}
+
+.stickynote .stickynote-icon {
+  width: 40px;
+}
+
+.stickynote:hover,
+.stickynote:active {
+  text-decoration: none;
+  -webkit-transition: all ease-in-out .3s;
+  transition: all ease-in-out .3s;
+}
+
+.stickynote {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.stickynote h2 {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-weight: 400;
+  font-size: 19px;
+  color: #00a9e5;
+}
+
+.stickynote p {
+  color: rgba(51, 51, 51, 0.8);
+  font-weight: 400;
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 11.5px
+}
+
 .loadmore-wrapper {
   text-align: center;
   margin-bottom: 1em;
@@ -1871,6 +2037,36 @@ div.highlight pre {
     font-size: 1.2em!important;
   }
 
+  .stickynote .stickynote-content {
+    padding-left: 10px;
+  }
+
+  .stickynote .stickynote-icon {
+    display: table-cell;
+    vertical-align: middle;
+  }
+
+  .home-stickynotes .stickynote .stickynote-icon {
+    display: table-cell;
+  }
+
+  .stickynote {
+    padding: 20px 15px;
+    min-height: calc(100% - 1em);
+  }
+
+  .stickynote .stickynote-content {
+    padding-left: 15px;
+  }
+
+  .stickynote h2 {
+    font-size: 1.4rem;
+  }
+
+  .stickynote p {
+    font-size: 1rem;
+  }
+
   .button-area-flex {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1965,6 +2161,10 @@ div.highlight pre {
   .page-404 #errorpage-content p {
     font-size: 4.8vw;
   }
+
+  #gethelp .btn-help {
+    font-size: 1.2rem;
+  }
 }
 
 @media (min-width: 768px){
@@ -1974,6 +2174,10 @@ div.highlight pre {
 
       h1.smaller-title {
         font-size: 1.5em!important;
+      }
+
+      main.index h1 {
+        margin-top: 0;
       }
 
       /* body:not(.scrolled-down) {
@@ -2509,6 +2713,10 @@ div.highlight pre {
         padding: 5px 1px;
       }
 
+      #gethelp .help-icon {
+        margin-top: 2rem;
+      }
+
       footer {
         padding: 0;
       }
@@ -2577,6 +2785,40 @@ div.highlight pre {
 
       div a.img-space > img {
         margin-bottom: 0;
+      }
+
+      #gethelp .help-buttons {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+      }
+
+      #gethelp .help-icon .wico-help-hands {
+        font-size: 185px;
+        margin-left: -15px;
+        margin-right: -15px;
+      }
+
+      #gethelp .help-content h2 {
+        text-align: left;
+      }
+
+      #gethelp .help-content p {
+        text-align: left;
+        max-width: 100%;
+      }
+
+      #gethelp .help-buttons {
+        padding-left: 9px;
+        padding-right: 6px;
+        -webkit-box-pack: start;
+            -ms-flex-pack: start;
+                justify-content: flex-start;
+      }
+
+      #gethelp .help-buttons div {
+        padding: 6px;
       }
 }
 
@@ -2658,11 +2900,23 @@ div.highlight pre {
       footer .logo {
         margin-bottom: 20px;
       }
+
+      #gethelp .btn-help {
+        font-size: 1.1rem;
+      }
+
+      #gethelp .help-buttons {
+        padding-right: 46px;
+      }
 }
 
 @media (min-width: 1200px) {
           span.long-text-btn {
             display: inline-block;
+          }
+
+          .home-stickynotes .stickynote-wrapper {
+            margin-left: -7px;
           }
 
           .search-page .results-wrapper .no-results p {
@@ -2707,9 +2961,17 @@ div.highlight pre {
           .page-404 #errorpage-content .button-area {
             padding-bottom: 0;
           }
+
+          #gethelp .help-icon .wico-help-hands {
+            font-size: 220px;
+          }
 }
 
 @media (min-width: 1921px) {
+          .home-stickynotes .stickynote .stickynote-icon {
+            font-size: 55px;
+          }
+
           .page-404 > div {
             background-image: url('images/wazuh_404_bg_4k.png');
           }

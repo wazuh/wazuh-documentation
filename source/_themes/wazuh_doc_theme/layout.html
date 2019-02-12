@@ -134,6 +134,11 @@
         </nav>
 
         <div class="col-lg-9">
+          {% if pagename == 'index' %}
+          <main class="index">
+            {% include 'index.html' %}
+          </main>
+          {% else %}
           <div class="breadcrumbs-wrapper col-xs-12">
             {% include "breadcrumbs.html" %}
           </div>
@@ -141,6 +146,8 @@
           <main>
             {% block body %} {% endblock %}
           </main>
+          {% endif %}
+
         </div>
       </div>
 
