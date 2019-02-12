@@ -34,6 +34,7 @@
 
 <!DOCTYPE html>
 <html lang="{{ language }}">
+{% block head %}
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta charset="UTF-8">
@@ -104,6 +105,7 @@
     ga('send', 'pageview');
   </script>
 </head>
+{%- endblock head %}
 <body>
   {# Back to top #}
   <a id="btn-scroll" href="#" title="Back to top">
@@ -116,14 +118,7 @@
     <section  class="container-fluid central-page-area">
       <div class="row">
         <nav class="col-lg-3 full-toctree-nav">
-          <!-- TODO: To be customized -->
-          <div class="wy-side-scroll">
-            <div class="wy-side-nav-search">
-              {% block sidebartitle %}
-
-              {% endblock %}
-            </div>
-
+          <div class="side-scroll">
             <div class="globaltoc" role="navigation" aria-label="main navigation">
               {% block menu %}
               {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
@@ -136,15 +131,6 @@
               {% endblock %}
             </div>
           </div>
-          <!-- // To be customized -->
-
-          <!-- TODO: To be removed -->
-          <ul id="navigation">
-            {% for item in navigation %}
-            <li><a href="{{ item.href }}">{{ item.caption }}</a></li>
-            {% endfor %}
-          </ul>
-          <!-- // To be removed -->
         </nav>
 
         <div class="col-lg-9">
