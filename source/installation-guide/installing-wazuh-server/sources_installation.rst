@@ -30,7 +30,7 @@ Installing Wazuh manager
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.8.1.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.8.2.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -49,6 +49,16 @@ Installing Wazuh manager
   .. code-block:: none
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
+
+.. note::
+  During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
+
+.. warning::
+  When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
+  
+.. warning::
+  Be extremely careful not to select a critical installation directory.
+
 
 5. The installer asks if you want to start Wazuh at the end of the installation. If you chosen not to, you can start it later with:
 
@@ -109,7 +119,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.8.1/install_api.sh && bash ./install_api.sh download
+      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.8.2/install_api.sh && bash ./install_api.sh download
 
 3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions.
 

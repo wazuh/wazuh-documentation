@@ -47,6 +47,10 @@ Otherwise, you can create a self-signed certificate using the following command:
 
   # openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -out /var/ossec/etc/sslmanager.cert -keyout /var/ossec/etc/sslmanager.key
 
+.. note::
+
+  From Fedora v22 to v25, it's required to install ``openssl`` package (``yum install openssl``).
+
 Simple method
 -------------
 
@@ -57,6 +61,10 @@ This is the easiest method to register agents. It doesn't require any kind of au
   .. code-block:: console
 
     # /var/ossec/bin/ossec-authd
+
+  .. note::
+  
+    Since version 3.8.0, this registration daemon is running by default when the *Wazuh* installation is complete, so it is not necessary to execute it.
 
 2. On the agents, run the ``agent-auth`` program, using the manager's IP address:
 
@@ -71,6 +79,28 @@ This is the easiest method to register agents. It doesn't require any kind of au
   .. code-block:: none
 
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
+
+
+.. note::
+  Remember to edit the Wazuh agent configuration to add the Wazuh manager IP address.
+
+    a. For linux systems:
+
+      In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
+
+    .. code-block:: xml
+
+      <client>
+        <server>
+          <address>MANAGER_IP</address>
+          ...
+        </server>
+      </client>
+
+    b. For windows:
+    
+      Open the graffic interface and change the value of the Manager IP field to the new IP.
+
 
 Password authorization
 ----------------------
@@ -90,13 +120,16 @@ To enable the password authorization, use the ``-P`` flag when running the regis
 
       Accepting connections on port 1515. Using password specified on file: /var/ossec/etc/authd.pass
 
-  * If no password is specified on ``/var/ossec/etc/authd.pass``, the registration service will create a password itself and tell you what it is on the console output:
+  * If no password is specified on ``/var/ossec/etc/authd.pass``, the registration service will create a random password:
 
     .. code-block:: console
 
       # /var/ossec/bin/ossec-authd -P
 
       Accepting connections on port 1515. Random password chosen for agent authentication: abdc1234
+
+    .. note::
+      If the user needs to show the password on console, use option ``-fP`` instead of ``-P``, this will launch the registration daemon in foreground, so once done if you close the CLI or finish the process, the registration daemon will be stopped.
 
 2. The agents can use the password by storing it on a file or as a command line argument. Follow one of these steps:
 

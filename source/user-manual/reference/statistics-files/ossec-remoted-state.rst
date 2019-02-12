@@ -42,3 +42,7 @@ Below you can see an example file:
 
     # Messages sent
     msg_sent='344'
+
+    # Total number of bytes received
+    recv_bytes='43587'
+
