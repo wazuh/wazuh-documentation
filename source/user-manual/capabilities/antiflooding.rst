@@ -193,5 +193,9 @@ In order to avoid agent buffer saturation followed by event loss, the event prod
 
 - OpenSCAP Wodle: This module previously sent the entire set of scan results as soon as a scan would complete.  It now sends the scan information to the manager at a regulated speed so as to reduce the likelihood of maxing out the buffer.
 
+- cis-cat Wodle: This module previously sent the entire set of scan results as soon as a scan would complete.  It now sends the scan information to the manager at a regulated speed so as to reduce the likelihood of maxing out the buffer.
+
+- Syscollector Wodle: This module previously sent the entire set of scan results as soon as a scan would complete.  It now sends the scan information to the manager at a regulated speed so as to reduce the likelihood of maxing out the buffer.
+
 These are advanced configurations located at :doc:`Internal configuration <../reference/internal-options>`. The variables defined for this purpose are called ``logcollector.max_lines`` and
 ``wazuh_modules.max_eps`` and much care should be given when changing these values.
