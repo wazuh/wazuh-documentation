@@ -111,47 +111,6 @@ Installing Wazuh API
 
       # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.8.1/install_api.sh && bash ./install_api.sh download
 
-3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions.
-
-It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
-
-  .. code-block:: javascript
-
-    config.python = [
-        // Default installation
-        {
-            bin: "python",
-            lib: ""
-        },
-        // Package 'python27' for CentOS 6
-        {
-            bin: "/opt/rh/python27/root/usr/bin/python",
-            lib: "/opt/rh/python27/root/usr/lib64"
-        }
-    ];
-
-  CentOS 6 and Red Hat 6 come with Python 2.6, however, you can install Python 2.7 in parallel and still maintain the older version(s):
-
-  a) For CentOS 6:
-
-    .. code-block:: console
-
-    	# yum install -y centos-release-scl
-    	# yum install -y python27
-
-  b) For RHEL 6:
-
-    .. code-block:: console
-
-    	# yum install python27
-
-    You may need to first enable a repository in order to get python27, with a command like this:
-
-    .. code-block:: console
-
-    	#   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
-    	#   yum-config-manager --enable rhel-server-rhscl-6-rpms
-
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
 
 Installing Filebeat

@@ -80,60 +80,13 @@ Installing the Wazuh API
 
     # yum install nodejs
 
-2. Python >= 2.7 is required in order to run the Wazuh API. It is installed by default or included in the official repositories in most Linux distributions.
-
-   To determine if the python version on your system is lower than 2.7, you can run the following:
-
-  .. code-block:: console
-
-    # python --version
-
-   It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
-
-  .. code-block:: javascript
-
-    config.python = [
-        // Default installation
-        {
-            bin: "python",
-            lib: ""
-        },
-        // Package 'python27' for CentOS 6
-        {
-            bin: "/opt/rh/python27/root/usr/bin/python",
-            lib: "/opt/rh/python27/root/usr/lib64"
-        }
-    ];
-
-  CentOS 6 and Red Hat 6 come with Python 2.6, however, you can install Python 2.7 in parallel to maintain the older version(s):
-
-  a) For CentOS 6:
-
-  .. code-block:: console
-
-    # yum install -y centos-release-scl
-    # yum install -y python27
-
-  b) For RHEL 6:
-
-  .. code-block:: console
-
-    # yum install python27
-
-    You may need to first enable a repository in order to get python27, with a command like this:
-
-  .. code-block:: console
-
-    #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
-    #   yum-config-manager --enable rhel-server-rhscl-6-rpms
-
-3. Install the Wazuh API. It will update NodeJS if it is required:
+2. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: console
 
     # yum install wazuh-api
 
-4. Once the process is complete, you can check the service status with:
+3. Once the process is complete, you can check the service status with:
 
   a) For Systemd:
 
@@ -150,7 +103,7 @@ Installing the Wazuh API
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
-5. (Optional) Disable the Wazuh repository:
+4. (Optional) Disable the Wazuh repository:
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
