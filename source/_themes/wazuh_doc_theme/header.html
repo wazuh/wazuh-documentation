@@ -18,94 +18,26 @@
       </ul>
     </div>
   </nav>
-  <nav id="main-navbar" class="navbar navbar-expand-lg" role="navigation">
-    <div id="main-menu-container">
-      <div class="row">
-        <div class="navbar-header col-xs-12 col-lg-4" id="xs-bar">
-          <div class="navbar-brand" id="logo-title">
-            <a class="wazuh-logo-link" href={{ theme_wazuh_web_url }} title="Wazuh">
-              <img class="img-responsive d-none d-lg-block" src={{ pathto('_static/wazuh_logo.png', 1) }} alt="Wazuh" />
-              <img class="img-responsive d-lg-none" src={{ pathto('_static/wazuh_blue_iso.png', 1) }} alt="Wazuh" />
-            </a>
-            <button type="button" class="navbar-toggler btn-close collapsed" data-toggle="collapse" data-target="#collapsibleNavbar">
+  <nav id="main-navbar" class="navbar navbar-expand-lg blue-bar" role="navigation">
+          <div class="navbar-brand d-flex justify-content-between" id="logo-title">
+            <div id="links-to-home">
+              <a class="wazuh-logo-link" href={{ theme_wazuh_web_url }} title="Wazuh">
+                <img class="img-responsive d-none d-lg-block" src={{ pathto('_static/wazuh_logo_w.png', 1) }} alt="Wazuh" />
+                <img class="img-responsive d-lg-none" src={{ pathto('_static/wazuh_blue_iso.png', 1) }} alt="Wazuh" />
+              </a>
+              <a class="docs-link" href="{{ pathto(master_doc) }}" class="title">Docs</a>
+            </div>
+            <button type="button" class="navbar-toggler btn-close collapsed" data-toggle="collapse" data-target="#globaltoc">
               <i class="x" aria-hidden="true"></i><!-- <i class="fa fa-bars"></i> -->
             </button>
-            <a class="docs-link" href="{{ pathto(master_doc) }}" class="title">Docs</a>
             <span class="release-selector-wrapper">
               {% if theme_display_version %}
               {% include "versions.html" %}
               {% endif %}
+              {% include "editrepo.html" %}
             </span>
           </div> <!-- // #logo-title -->
-
-        </div> <!-- // #xs-bar.navbar-header -->
-
-        <div class="col-xs-12 col-lg-8">
-          <!-- Main Menu -->
-          <nav id="collapsibleNavbar" class="collapse navbar-collapse navbar-main-collapse">
-            <ul id="main-menu" class="main-menu navbar-nav">
-              <li class="menu-item nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Documentation</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="#">Separated link</a>
-                </div>
-              </li>
-              <li class="menu-item nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Troubleshooting</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Troubleshooting 1</a>
-                  <a class="dropdown-item" href="#">Troubleshooting option 2</a>
-                  <a class="dropdown-item" href="#">TS Option 3</a>
-                </div>
-              </li>
-              <li class="menu-item nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Resources</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Resources 1</a>
-                  <a class="dropdown-item" href="#">Resources 2</a>
-                  <a class="dropdown-item" href="#">Resources 3</a>
-                  <a class="dropdown-item" href="#">Resources 4</a>
-                  <a class="dropdown-item" href="#">Resources 5</a>
-                  <a class="dropdown-item" href="#">Resources 6</a>
-                  <a class="dropdown-item" href="#">Resources 7</a>
-                </div>
-              </li>
-              <li class="menu-item nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false">Changelogs</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">Changelogs submenu</a>
-                </div>
-              </li>
-              <li class="menu-item nav-item">
-                <a class="nav-link nav-button" href="#" aria-haspopup="false">Support</a>
-              </li>
-            </ul>
-          </nav>
-        </div> <!-- // .col-xs-12.col-lg-8 -->
-
-      </div> <!-- // .row -->
-
-    </div> <!-- // #main-menu-container -->
   </nav>
-
-  {%- block docu_top_bar %}
-  <div class="jumbotron jumbo-bar docu-main-header">
-    <div class="white-bar">
-      <div class="container-fluid">
-        <div class="row justify-content-end">
-
-          <div id="search-lg" class="title-bar-right col-lg-5 col-lg-4 col-xl-3 right">
-            {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
-          </div> <!-- // #search-lg -->
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endblock docu_top_bar %}
 
 </header>
 {% endblock header %}

@@ -119,7 +119,10 @@
       <div class="row">
         <nav class="col-lg-3 full-toctree-nav">
           <div class="side-scroll">
-            <div class="globaltoc" role="navigation" aria-label="main navigation">
+            <div id="search-lg" class="title-bar-right col-12">
+              {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
+            </div> <!-- // #search-lg -->
+            <div class="globaltoc" role="navigation" aria-label="main navigation" id="globaltoc">
               {% block menu %}
               {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
               {% if toctree %}
@@ -139,7 +142,7 @@
             {% include 'index.html' %}
           </main>
           {% else %}
-          <div class="breadcrumbs-wrapper col-xs-12">
+          <div class="breadcrumbs-wrapper">
             {% include "breadcrumbs.html" %}
           </div>
           {# Main content #}

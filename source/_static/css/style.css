@@ -1,4 +1,4 @@
-li/*
+/*
 The main theme stylesheet.
 Author: Wazuh Inc.
 -------------------------------------------------------------- */
@@ -115,6 +115,11 @@ a.btn-wazuh:active {
   width: 1.2em;
 }
 
+.central-page-area a img {
+  width: auto!important;
+  max-width: 1000px;
+}
+
 #branding .social-bar {
   min-height: 40px;
   background-color: #f4f4f4;
@@ -124,16 +129,21 @@ a.btn-wazuh:active {
   padding: 5px 7px;
 }
 
+a.docs-link {
+  color: #ffffff;
+}
+
+a.docs-link:hover,
+a.docs-link:active {
+  color: #ffffff;
+}
+
+a.docs-link:focus {
+  text-decoration: underline;
+}
+
 .social-bar li.active>a:hover{
   color: rgba(51, 51, 51, 0.8);
-}
-
-#main-menu-container {
-  width: 100%;
-}
-
-#xs-bar {
-  width: 100%;
 }
 
 #btn-scroll {
@@ -367,7 +377,8 @@ ul li.toctree-l1 a.current.reference.internal:after {
   border-bottom: 1px solid  #e8e8e8;
 }
 
-li.toctree-l1 a {
+li.toctree-l1 a,
+ul.simple a {
   color: #333333;
 }
 
@@ -1130,6 +1141,11 @@ select, option {
   -moz-appearance: none; /* Gecko */
 }
 
+.release-selector-wrapper {
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
 .version {
   position: relative;
 }
@@ -1137,16 +1153,17 @@ select, option {
 select#select-version {
   border: none;
   margin-left: 10px;
-  padding: 2px 15px 2px 2px;
+  padding: 2px 22px 2px 2px;
   cursor: pointer;
   position: relative;
   font-size: 0.85rem;
+  border-radius: 4px;
 }
 
 .version:after {
   position: absolute;
-  top: 0.5em;
-  right: 0;
+  top: 0.7em;
+  right: 10px;
   content: '';
   width: 0.5em;
   height: 0.5em;
@@ -1738,7 +1755,6 @@ footer a {
 }
 
 #main-navbar {
-  background-color: #ffffff;
   background-image: none;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -1844,24 +1860,6 @@ nav.collapse.navbar-collapse.navbar-main-collapse {
   border: none;
   -webkit-box-shadow: none;
           box-shadow: none;
-}
-
-#collapsibleNavbar {
-  position: absolute;
-  left: 0;
-  right: 0;
-}
-
-#logo-title {
-  min-height: 57px;
-  width: 100%;
-  padding: 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
 }
 
 .navbar-brand {
@@ -2019,6 +2017,7 @@ ul#breadcrumbs {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin-bottom: 0;
+  padding-top: 0.5em;
 }
 
 ul#breadcrumbs .fa-caret-right {
@@ -2035,11 +2034,21 @@ ul#breadcrumbs a {
 .edit-repo {
   text-align: right;
   font-size: 0.87rem;
+  margin-left: 15px;
+}
+
+.edit-repo a {
+  color: #ffffff;
 }
 
 .jumbo-bar .white-bar {
   padding: 15px;
   background-color: #ffffff;
+}
+
+.blue-bar {
+  padding: 4px 15px;
+  background-color: #00a9e5;
 }
 
 [class*="highlight-"] {
@@ -2220,10 +2229,8 @@ div.highlight pre {
       a.wazuh-logo-link {
         max-width: 200px;
         margin-right: 15px;
-      }
-
-      #main-menu-container {
-        position: relative;
+        display: inline-block;
+        vertical-align: bottom;
       }
 
       #main-menu .nav-link {
@@ -2251,20 +2258,6 @@ div.highlight pre {
       #main-menu .dropdown-menu a:focus {
         color: #00a9e5;
         background-color: #ffffff;
-      }
-
-      #main-navbar {
-        height: 79px;
-      }
-
-      #collapsibleNavbar {
-        position: static;
-      }
-
-      #collapsibleNavbar {
-        -webkit-box-pack: end;
-            -ms-flex-pack: end;
-                justify-content: flex-end;
       }
 
       #main-navbar #main-menu.navbar-nav > li > a:focus {
@@ -2408,16 +2401,6 @@ div.highlight pre {
       }
 
       .scrolled-down #branding .white-bar .widget_search {
-        height: 100%;
-      }
-
-      /* #branding #main-menu-container {
-        height: 79px;
-        -webkit-transition: height .3s;
-        transition: height .3s;
-      } */
-
-      #branding #main-menu-container .widget_search {
         height: 100%;
       }
 
@@ -2597,6 +2580,8 @@ div.highlight pre {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
+        padding-top: 10px;
+        padding-bottom: 10px;
       }
 
       .search_main.expanded .btn-close {
@@ -2715,6 +2700,7 @@ div.highlight pre {
         max-width: 100%;
         -webkit-transition: padding 0.3s;
         transition: padding 0.3s;
+        width: 100%;
       }
 
       .scrolled-down .navbar-brand {
@@ -2724,13 +2710,7 @@ div.highlight pre {
       }
 
       #logo-title img {
-        max-height: 50px;
-        -webkit-transition: max-height 0.3s;
-        transition: max-height 0.3s;
-      }
-
-      .scrolled-down #logo-title img {
-        max-height: 43px;
+        max-height: 35px;
         -webkit-transition: max-height 0.3s;
         transition: max-height 0.3s;
       }
