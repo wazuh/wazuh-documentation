@@ -10,6 +10,8 @@ Author: Wazuh Inc.
 
 a:focus{
   color: #00a9e5;
+  outline: none;
+  text-decoration: underline;
 }
 
 li>a:focus {
@@ -293,25 +295,25 @@ li.toctree-l4 > a {
 
 li.toctree-l1 > a {
   display: block;
-  padding: 0.5em 2.2em 0.5em 1.2em;
+  padding: 0.5em 2.2em 0.5em 1.2rem;
 }
 
 li.toctree-l2 > a {
   background-color: #fff;
   display: block;
-  padding: 0.6em 1em 0.6em 1.75em;
+  padding: 0.6em 1em 0.6em 1.75rem;
 }
 
 li.toctree-l3 > a {
   background-color: #f4f4f4;
   display: block;
-  padding: 0.6em 1em 0.6em 3em;
+  padding: 0.6em 1em 0.6em 2.5rem;
 }
 
 li.toctree-l4 > a {
   background-color: #fff;
   display: block;
-  padding: 0.6em 1em 0.6em 3em;
+  padding: 0.6em 1em 0.6em 3.5rem;
 }
 
 .globaltoc ul > li.toctree-l1 > a::before,
@@ -365,7 +367,38 @@ ul li.toctree-l1 a.current.reference.internal:after {
   border-bottom: 1px solid  #e8e8e8;
 }
 
-.compound li.toctree-l1 a {
+li.toctree-l1 a {
+  color: #333333;
+}
+
+main li.toctree-l1 a:hover {
+  color: #00a9e5;
+}
+
+main li.toctree-l2 {
+  position: relative;
+}
+
+main li.toctree-l1 a {
+  display: inline-block;
+}
+
+main li.toctree-l1 > a {
+  padding-left: 0;
+}
+
+main li.toctree-l2::after {
+  content: '\f0da';
+  display: inline-block;
+  font: normal normal normal 15px/.5 FontAwesome;
+  width: 12px;
+  color: #00a9e5;
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+}
+
+main li.toctree-l1 a {
   padding-top: 1px;
   padding-bottom: 1px;
 }
@@ -1661,10 +1694,6 @@ a:hover,
 a:active {
   color: #0094ce;
   text-decoration: none;
-}
-
-a:focus {
-  text-decoration: underline;
 }
 
 nav a,
