@@ -1876,7 +1876,7 @@ nav.collapse.navbar-collapse.navbar-main-collapse {
   padding: 20px;
   position: relative;
   width: 100%;
-  border: 1px solid #f4f4f4;
+  border: 1px solid #ebebeb;
 }
 
 .stickynote-icon {
@@ -1908,12 +1908,14 @@ nav.collapse.navbar-collapse.navbar-main-collapse {
 .stickynote:hover,
 .stickynote:active {
   text-decoration: none;
-  -webkit-transition: all ease-in-out .3s;
-  transition: all ease-in-out .3s;
+  background-color: #00a9e5;
+  color: #ffffff;
 }
 
-.stickynote {
-  background-color: rgba(255, 255, 255, 1);
+.stickynote:hover p,
+.stickynote:hover h2,
+.stickynote:hover h2 {
+  color: #ffffff;
 }
 
 .stickynote h2 {
