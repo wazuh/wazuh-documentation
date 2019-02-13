@@ -190,6 +190,10 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     The Kibana plugin installation process may take several minutes. Please wait patiently.
 
+    While installing the Wazuh app, Kibana needs about 2.2GB of memory.
+
+    Once installed, Kibana doesn't need more than the default Node.js memory limit (1.6GB).
+
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 
   .. code-block:: yaml
