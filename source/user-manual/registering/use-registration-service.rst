@@ -222,6 +222,11 @@ Manager verification using SSL
 Agent verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. note::
+  Using verification with a SSL key certificate is really useful to check if connections between agents and manager is correct.
+
+  This way, user avoid the error of connecting to a different manager or agent.
+
   .. image:: ../../images/manual/managing-agents/SSLregister2.png
     :align: center
     :width: 100%
