@@ -193,7 +193,7 @@ In order to avoid agent buffer saturation followed by event loss, the event prod
 
 - OpenSCAP Wodle: This module previously sent the entire set of scan results as soon as a scan would complete.  It now sends the scan information to the manager at a regulated speed so as to reduce the likelihood of maxing out the buffer.
 
-- cis-cat Wodle: This module previously sent the entire set of scan results as soon as a scan would complete.  It now sends the scan information to the manager at a regulated speed so as to reduce the likelihood of maxing out the buffer.
+- CIS-CAT Wodle: This module previously sent the entire set of scan results as soon as a scan would complete.  It now sends the scan information to the manager at a regulated speed so as to reduce the likelihood of maxing out the buffer.
 
 - Syscollector Wodle: This module previously sent the entire set of scan results as soon as a scan would complete.  It now sends the scan information to the manager at a regulated speed so as to reduce the likelihood of maxing out the buffer.
 
