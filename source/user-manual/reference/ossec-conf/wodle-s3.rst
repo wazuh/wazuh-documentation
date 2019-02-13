@@ -204,6 +204,8 @@ Specifies type of bucket. Is an attribute of the ``bucket`` tag.
 | **Allowed values** | cloudtrail, guardduty, vpcflow, config, custom |
 +--------------------+------------------------------------------------+
 
+  .. note::
+    Different configurations as ``macie`` has ``custom`` type.
 
 bucket\\name
 ^^^^^^^^^^^^
