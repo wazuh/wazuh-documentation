@@ -16,6 +16,7 @@ The Wazuh agents are able to collect interesting system information and store it
     - `Ports`_
     - `Processes`_
 - `Compatibility matrix`_
+- `Using Syscollector information to trigger alerts`_
 - `Use case: Visualize system inventory in the Wazuh App`_
 
 How it works
@@ -378,6 +379,36 @@ The following table shows the operating systems that this module currently suppo
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+
 |    OpenBSD             |     ✓     |     ✓     |     ✗     |     ✓    |     ✗     |     ✗     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+
+
+Using Syscollector information to trigger alerts
+------------------------------------------------
+
+  Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and to show that information in the description of the alerts.
+
+  To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
+
+  As a example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+
+  .. code-block:: xml
+
+    <rule id="100001" level="5">
+      <if_sid>221</if_sid>
+      <decoded_as>syscollector</decoded_as>
+      <field name="netinfo.iface.name">eth0</field>
+      <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
+    </rule>
+
+  .. warning::
+
+    The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
+
+  When the alerts is triggered it will be displayed in Kibana this way:
+
+    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
+      :title: Information from syscollector
+      :align: center
+      :width: 100%
+
 
 Use case: Visualize system inventory in the Wazuh app
 -----------------------------------------------------
