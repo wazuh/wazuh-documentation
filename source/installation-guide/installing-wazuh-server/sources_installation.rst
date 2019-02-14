@@ -45,6 +45,8 @@ Installing Wazuh manager
 
     .. note:: The Python version from the previous command may change depending of the OS used to build the binaries.
 
+    These dependencies are needed if you are going to build Wazuh from any other directory rather than ``/var/ossec``. By default, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``, otherwise, it will download a modified version of CPython sources. This sources will build CPython for the target directory and link the interpreter and the internal dependencies against the ``libwazuh``.
+
 
 2. Download and extract the latest version:
 
