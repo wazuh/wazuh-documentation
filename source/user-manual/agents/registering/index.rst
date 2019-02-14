@@ -22,7 +22,6 @@ In this section the first two methods are explained. The API registration proces
         :maxdepth: 2
 
         registration-process
-        use-registration-service
         using-command-line
-
-        
+        use-registration-service
+      
