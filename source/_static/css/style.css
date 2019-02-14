@@ -117,7 +117,7 @@ a.btn-wazuh:active {
 
 .central-page-area a img {
   width: auto!important;
-  max-width: 1000px;
+  max-width: 100%;
 }
 
 #branding .social-bar {
@@ -2216,10 +2216,6 @@ div.highlight pre {
         font-size: 1.5em!important;
       }
 
-      main.index h1 {
-        margin-top: 0;
-      }
-
       /* body:not(.scrolled-down) {
         padding-top: 162px;
         -webkit-transition: padding-top .3s;
@@ -2976,6 +2972,10 @@ div.highlight pre {
 
           #gethelp .help-icon .wico-help-hands {
             font-size: 220px;
+          }
+
+          .central-page-area a img {
+            max-width: 1000px;
           }
 }
 
