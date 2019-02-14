@@ -120,6 +120,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    remote
    reports
    rootcheck
+   configuration_assessment
    ruleset
    socket
    syscheck

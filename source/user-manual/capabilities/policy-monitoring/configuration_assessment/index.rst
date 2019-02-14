@@ -11,5 +11,5 @@ Wazuh has improved its policy monitoring process with a new module that include 
    :maxdepth: 2
 
    how-it-works
-   policy-monitoring-configuration
+   config_assessment-configuration
    use-case

@@ -23,7 +23,7 @@ Options
 - `interval`_
 - `scan_time`_
 - `skip_nfs`_
-- `profile`_
+- `policies`_
 
 
 scan_on_start
@@ -112,10 +112,10 @@ Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-profile
-^^^^^^^
+policies
+^^^^^^^^
 
-Specifies the check file to be run.
+Specifies the check files to be run. Inside this block there can be various ``<policy>`` fields, as showed in the example.
 
 +--------------------+----------------------+
 | **Default value**  | n/a                  |
@@ -134,5 +134,8 @@ Configuration example
         <interval>1m</interval>
         <skip_nfs>yes</skip_nfs>
 
-        <profile>debian/cis_debian_rcl.yml</profile>
+        <policies>
+          <policy>cis_debian_rcl.yml</policy>
+          <policy>cis_apache2224_rcl.yml</policy>
+        </policies>
       </configuration_assessment>

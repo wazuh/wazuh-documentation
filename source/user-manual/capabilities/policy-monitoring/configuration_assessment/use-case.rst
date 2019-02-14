@@ -12,7 +12,10 @@ To configure the execution of the *configuration assessment* module with a polic
       <scan_on_start>yes</scan_on_start>
       <interval>1m</interval>
       <skip_nfs>yes</skip_nfs>
-      <profile>cis_debian_linux_rcl.yml</profile>
+
+      <policies>
+          <policy>cis_debian_rcl.yml</policy>
+      </policies>
     </configuration_assessment>
 
 The profile field is the policy file desired to be executed. The complete path for it is by default */var/ossec/etc/rootcheck* on a Linux manager, */var/ossec/etc/rootcheck/shared* on a Linux agent environment and *C:\\Program files (x86)\\ossec-agent\\shared* when using Windows.
