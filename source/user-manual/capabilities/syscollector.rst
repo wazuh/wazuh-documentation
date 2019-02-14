@@ -383,7 +383,7 @@ The following table shows the operating systems that this module currently suppo
 Using Syscollector information to trigger alerts
 ------------------------------------------------
 
-  Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and to show that information in the description of the alerts.
+  Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
 
   To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
