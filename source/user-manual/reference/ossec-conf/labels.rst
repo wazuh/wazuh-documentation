@@ -46,7 +46,7 @@ Attributes:
 
 .. note::
     .. versionadded:: 3.9.0
-    The keys starting with character `_` are reserved to the system labels. This labels are invisible and contain agents internal information.
+    The keys starting with character ``_`` are reserved to the system labels. This labels are invisible and contain agents internal information.
 
 Example of configuration
 ------------------------
