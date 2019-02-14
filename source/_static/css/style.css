@@ -285,7 +285,8 @@ footer a:focus .fa {
   width: 12px;
 }
 
-li.toctree-l1 {
+li.toctree-l1,
+ul.simple li {
   font-size: 1.05em;
 }
 
@@ -386,19 +387,14 @@ main li.toctree-l1 a:hover {
   color: #00a9e5;
 }
 
-main li.toctree-l2 {
+main li.toctree-l1,
+main li.toctree-l2,
+main ul.simple li {
   position: relative;
 }
 
-main li.toctree-l1 a {
-  display: inline-block;
-}
-
-main li.toctree-l1 > a {
-  padding-left: 0;
-}
-
-main li.toctree-l2::after {
+main li.toctree-l1::after,
+main ul.simple li::after {
   content: '\f0da';
   display: inline-block;
   font: normal normal normal 15px/.5 FontAwesome;
@@ -406,12 +402,19 @@ main li.toctree-l2::after {
   color: #00a9e5;
   position: absolute;
   top: 0.85rem;
-  left: 0.85rem;
+  left: 0;
+}
+
+main li.toctree-l1 ul {
+  list-style: circle;
+  color: #00a9e5;
+  padding-left: 2em;
 }
 
 main li.toctree-l1 a {
   padding-top: 1px;
   padding-bottom: 1px;
+  display: inline-block;
 }
 
 a.headerlink {
@@ -793,9 +796,14 @@ footer a:active,
 
 }
 
-main li.toctree-l1 > a{
+main li.toctree-l1 > a,
+ul.simple > li > a {
   color: #333;
-  background: #fff;
+  padding: 1px 0 1px 0.8em;
+}
+
+main li.toctree-l2 > a {
+  padding: 1px 0;
 }
 
 footer .logo {
@@ -1620,8 +1628,8 @@ pre {
 }
 
 code {
-  color: #00a9e5;
-  background: rgba(0, 169, 229, 0.05);
+  color: #000000;
+  background: #f4f4f4;
 }
 
 .nav > li > a:focus,
@@ -2052,9 +2060,9 @@ ul#breadcrumbs a {
 }
 
 [class*="highlight-"] {
-  border: 1px solid #00a9e5;
   overflow: auto;
   margin-bottom: 2em;
+  background-color: #f4f4f4;
 }
 
 table.highlighttable {
