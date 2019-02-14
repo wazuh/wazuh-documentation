@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _sources_installation:
 
@@ -18,19 +18,39 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # yum install make gcc policycoreutils-python automake autoconf libtool
+      # yum install make gcc policycoreutils-python automake autoconf libtool epel-release yum-utils
+      # yum-builddep python34 -y
 
   b) For Debian-based distributions:
 
     .. code-block:: console
 
-      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
+      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool apt-transport-https lsb-release
+
+    To install the build dependencies of CPython, you need to add the sources repository for Debian/Ubuntu based OS if they are not already present and then, install those dependencies:
+
+    * If you are using an Ubuntu based system:
+
+      .. code-block:: console
+
+        # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
+        # apt-get build-dep python3.6 -y
+
+    * If you are using an Debian based system:
+
+      .. code-block:: console
+
+        # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+        # apt-get build-dep python3.5 -y
+
+    .. note:: The Python version from the previous command may change depending of the OS used to build the binaries.
+
 
 2. Download and extract the latest version:
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.8.2.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.0.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -41,8 +61,6 @@ Installing Wazuh manager
 
     # cd wazuh-*
     # ./install.sh
-
-  .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
 4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
 
@@ -55,7 +73,7 @@ Installing Wazuh manager
 
 .. warning::
   When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
-  
+
 .. warning::
   Be extremely careful not to select a critical installation directory.
 
@@ -119,7 +137,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.8.2/install_api.sh && bash ./install_api.sh download
+      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.0/install_api.sh && bash ./install_api.sh download
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
 
