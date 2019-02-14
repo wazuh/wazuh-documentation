@@ -21,7 +21,7 @@ A `blogpost <http://dcid.me/blog/2011/10/3woo-alerting-on-dns-ip-address-changes
 |                                   |                                                                                                                                   |
 |                                   | A rule can be written to monitor this output for changes.                                                                         |
 |                                   |                                                                                                                                   |
-|                                   | Requires `lynx <https://lynx.invisible-island.net/current/index.html/>`_                                                                                   |
+|                                   | Requires `lynx <https://lynx.invisible-island.net/current/index.html/>`_                                                          |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **adddns <domain>**               | Monitor the nameserver of a domain for changes.                                                                                   |
 |                                   |                                                                                                                                   |
