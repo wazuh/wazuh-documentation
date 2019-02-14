@@ -15,7 +15,7 @@ This manual describes how to configure and use each of Wazuh components, which c
 Wazuh server
 ------------
 
-The Wazuh server is based on a suite of applications where each application or component is designed to accomplished a certain task. These components work together to:
+The Wazuh server is based on a suite of applications where each application or component is designed to accomplish a certain task. These components work together to:
 
 - analyze data received from various logs,
 - trigger alerts when a log event matches a rule,
