@@ -74,4 +74,4 @@ They are auto-generated and they store the Wazuh agents statuses periodically. T
 More information
 ----------------
 
-- `Elasticsearch documentation - Exploring Your Cluster <https://www.elastic.co/guide/en/elasticsearch/reference/6.3/_exploring_your_cluster.html>`_
+- `Elasticsearch documentation - Exploring Your Cluster <https://www.elastic.co/guide/en/elasticsearch/reference/current/getting-started-explore.html>`_
