@@ -408,8 +408,17 @@ Using Syscollector information to trigger alerts
     .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
       :title: Information from syscollector
       :align: center
-      :width: 100%
+      :width: 80%
 
+    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts2.png
+      :title: Information from syscollector
+      :align: center
+      :width: 80%
+
+    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts3.png
+      :title: Information from syscollector
+      :align: center
+      :width: 80%
 
 Alerts template to use in Kibana
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -431,7 +440,7 @@ In Kibana the fields will be saved as ``data.type.value``. For example, for **Ha
 |                      | size, vm_size, resident, share, start_time, pgrp, session, nlwp, tgid, tty, processor                                |                                  |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **netinfo**          | mac, adapter, type, state, mtu, tx_bytes, rx_bytes, tx_errors, rx_errors, tx_dropped, rx_dropped, tx_packets,        | data.netinfo.iface.ipv4.address, |
-|                      | rx_packets, ipv4, ipv6                                                                                               | data. netinfo.iface.mac          |
+|                      | rx_packets, ipv4, ipv6                                                                                               | data.netinfo.iface.mac          |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 
 Use case: Visualize system inventory in the Wazuh app
