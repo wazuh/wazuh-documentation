@@ -7,8 +7,6 @@ Install Wazuh server from sources
 
 This guide describes how to install the manager and API from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
-
 Installing Wazuh manager
 ------------------------
 
@@ -18,18 +16,27 @@ Installing Wazuh manager
 
     .. code-block:: console
 
-      # yum install make gcc policycoreutils-python automake autoconf libtool epel-release yum-utils
-      # yum-builddep python34 -y
+      # yum install make gcc policycoreutils-python automake autoconf libtool
 
   b) For Debian-based distributions:
 
     .. code-block:: console
 
-      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool apt-transport-https lsb-release
+      # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
+
+    These are the basic dependencies to build Wazuh's binaries if you are going to install them in the default directory but, if you want to install in any other directory, you need to install some new dependencies in order to build the CPython interpreter included in the Wazuh manager installation since v3.9.0. By default, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``, otherwise, it will download a modified version of CPython sources. This sources will build CPython for the target directory and link the interpreter and the internal dependencies against the ``libwazuhext``.
 
     To install the build dependencies of CPython, you need to add the sources repository for Debian/Ubuntu based OS if they are not already present and then, install those dependencies:
 
-    * If you are using an Ubuntu based system:
+    * For RPM-based distributions:
+
+      .. code-block:: console
+
+        # yum install epel-release yum-utils -y
+        # yum-builddep python34 -y
+
+
+    * For Ubuntu based system:
 
       .. code-block:: console
 
@@ -43,9 +50,7 @@ Installing Wazuh manager
         # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
         # apt-get build-dep python3.5 -y
 
-    .. note:: The Python version from the previous command may change depending of the OS used to build the binaries.
-
-    These dependencies are needed if you are going to build Wazuh from any other directory rather than ``/var/ossec``. By default, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``, otherwise, it will download a modified version of CPython sources. This sources will build CPython for the target directory and link the interpreter and the internal dependencies against the ``libwazuh``.
+    .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
 
 
 2. Download and extract the latest version:
