@@ -28,7 +28,6 @@ $(function(){
 	});
 
 	$(window).on('hashchange',function(e){
-		console.log(e);
 		loc = location.hash;
 		$('.globaltoc .leaf').removeClass('current');
 		selectLeaf(loc);
@@ -97,7 +96,6 @@ $(function(){
 
  //IE, Opera, Safari
  $(document).bind('wheel', function(e){
-	 console.log('IE, Opera, Safari, Chrome');
 	 var tocWrapperBottom = windowHeight-parseInt(tocWrapperElement.css('top').replace('px',''));
 	 var tocHeight = $('.globaltoc > ul').height();
 	 var tocBottom = tocHeight + gTocScroll;
