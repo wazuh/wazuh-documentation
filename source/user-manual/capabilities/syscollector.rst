@@ -17,6 +17,7 @@ The Wazuh agents are able to collect interesting system information and store it
     - `Processes`_
 - `Compatibility matrix`_
 - `Using Syscollector information to trigger alerts`_
+    - `Alerts template to use in Kibana`_
 - `Use case: Visualize system inventory in the Wazuh App`_
 
 How it works
@@ -409,6 +410,29 @@ Using Syscollector information to trigger alerts
       :align: center
       :width: 100%
 
+
+Alerts template to use in Kibana
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In Kibana the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the cpu_name field can be found as ``data.hardware.cpu_name``
+
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Type**             | **Fields**                                                                                                           | **Example**                      |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Hardware**         | cpu_name, cpu_cores, cpu_mhz, ram_total, ram_free, ram_usage                                                         | data.hardware.cpu_mhz            |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Operating System** | architecture, name, version, codename, major, minor, build, platform, sysname, release, release_version              | data.os.codename                 |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Port**             | local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process                         | data.port.inode                  | 
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Program**          | name, priority, section, size, vendor, install_time, version, architecture, multiarch, source, description, location | data.program.name                |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Process**          | name, state, ppid, utime, stime, cmd, args, euser, ruser, suser, egroup, sgroup, fgroup, rgroup, priority, nice,     | data.process.state               |
+|                      | size, vm_size, resident, share, start_time, pgrp, session, nlwp, tgid, tty, processor                                |                                  |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **netinfo**          | mac, adapter, type, state, mtu, tx_bytes, rx_bytes, tx_errors, rx_errors, tx_dropped, rx_dropped, tx_packets,        | data.netinfo.iface.ipv4.address, |
+|                      | rx_packets, ipv4, ipv6                                                                                               | data. netinfo.iface.mac          |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 
 Use case: Visualize system inventory in the Wazuh app
 -----------------------------------------------------
