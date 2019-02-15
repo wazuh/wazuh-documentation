@@ -403,20 +403,10 @@ Using Syscollector information to trigger alerts
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-  After this configuration, when the events are triggered users can view the fields in the index pattern:
+  When the alerts are triggered they will be displayed in Kibana this way:
 
     .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
       :title: Information from syscollector for "port" value.
-      :align: center
-      :width: 80%
-
-    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts2.png
-      :title: Information from syscollector for "hardware" value.
-      :align: center
-      :width: 80%
-
-    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts3.png
-      :title: Information from syscollector for "program" value.
       :align: center
       :width: 80%
 
@@ -440,7 +430,7 @@ In Kibana the fields will be saved as ``data.type.value``. For example, for **Ha
 |                      | size, vm_size, resident, share, start_time, pgrp, session, nlwp, tgid, tty, processor                                |                                  |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **netinfo**          | mac, adapter, type, state, mtu, tx_bytes, rx_bytes, tx_errors, rx_errors, tx_dropped, rx_dropped, tx_packets,        | data.netinfo.iface.ipv4.address, |
-|                      | rx_packets, ipv4, ipv6                                                                                               | data.netinfo.iface.mac          |
+|                      | rx_packets, ipv4, ipv6                                                                                               | data.netinfo.iface.mac           |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 
 Use case: Visualize system inventory in the Wazuh app
