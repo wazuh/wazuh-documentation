@@ -2,7 +2,8 @@ $(function(){
   var searchbar,
       mainmenu,
       form_control,
-      querystr = '';
+      querystr = '',
+			loc = location.hash;
   var mainElement = $('.central-page-area'),
       tocWrapperElement = $('nav.full-toctree-nav'),
 			gTocElement = $('nav.full-toctree-nav .globaltoc'),
@@ -18,6 +19,26 @@ $(function(){
 
   checkTocScrollTop($(document).scrollTop(), mainTop);
 	checkTocScrollBottom($(document).scrollTop()+windowHeight, mainBottom);
+
+	// Find current page section in globaltoc
+	$('.globaltoc .toctree-l2.current a').each(function(e){
+		if (!$(this).siblings('ul').length){
+			$(this).addClass('leaf');
+		}
+	});
+
+	$(window).on('hashchange',function(e){
+		console.log(e);
+		loc = location.hash;
+		$('.globaltoc .leaf').removeClass('current');
+		selectLeaf(loc);
+	});
+
+	function selectLeaf(hash){
+		if (hash.length > 0) {
+			$('.globaltoc [href="'+hash+'"]').addClass('current');
+		}
+	}
 
   /* Search bar ----------------------------------------------------------------------------------------------------*/
   /* Search bar animation */
@@ -73,39 +94,6 @@ $(function(){
     return false;
   });
 
-
-
-	//Firefox
- $(document).bind('DOMMouseScroll', function(e){
-	 console.log('Firefox');
-	 var tocWrapperBottom = windowHeight-parseInt(tocWrapperElement.css('top').replace('px',''));
-	 var tocHeight = $('.globaltoc > ul').height();
-	 var tocBottom = tocHeight + gTocScroll;
-	 if ($(e.target).closest('.full-toctree-nav').length){
-      e.preventDefault();
-      // Controlling scroll top limit
-			if ( e.originalEvent.detail > 0  ){
-				// When globa TOC menu is not showing its top
-				gTocScroll +=e.originalEvent.detail;
-				if (gTocScroll > 0) {
-					gTocScroll = 0;
-				}
-			}
-
-			// Controlling scroll bottom litmit
-			if(e.originalEvent.detail < 0) {
-				gTocScroll +=e.originalEvent.detail;
-				if ( tocWrapperBottom - tocBottom > 0 ){
-					gTocScroll += (tocWrapperBottom - tocBottom + 56);
-				}
-
-			}
-
-		gTocElement.css('top', gTocScroll);
-   } else {
-     // Whole page scroll
-   }
- });
 
  //IE, Opera, Safari
  $(document).bind('wheel', function(e){

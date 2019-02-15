@@ -381,6 +381,19 @@ ul li.toctree-l1 a.current.reference.internal:after {
   border-bottom: 1px solid  #e8e8e8;
 }
 
+.globaltoc li.toctree-l1.current > a,
+.globaltoc li.toctree-l1.current > a.current,
+.globaltoc li.toctree-l2.current > a,
+.globaltoc li.toctree-l2.current > a.current,
+.globaltoc li.toctree-l3.current > a,
+.globaltoc li.toctree-l3.current > a.current,
+.globaltoc li.toctree-l4.current > a,
+.globaltoc li.toctree-l4.current > a.current,
+.globaltoc li.toctree-l1 a.current.reference.internal,
+.globaltoc .current.leaf {
+	font-weight: 800;
+}
+
 li.toctree-l1 a,
 ul.simple a {
   color: #333333;
