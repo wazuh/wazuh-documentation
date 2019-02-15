@@ -8,6 +8,10 @@ Author: Wazuh Inc.
   word-wrap: break-word;
 }
 
+html {
+  height: 100%;
+}
+
 a:focus{
   color: #00a9e5;
   outline: none;
@@ -285,8 +289,7 @@ footer a:focus .fa {
   width: 12px;
 }
 
-li.toctree-l1,
-ul.simple li {
+li.toctree-l1 {
   font-size: 1.05em;
 }
 
@@ -304,7 +307,7 @@ li.toctree-l4 > a {
   position: relative;
 }
 
-li.toctree-l1 > a {
+.globaltoc li.toctree-l1 > a {
   display: block;
   padding: 0.5em 2.2em 0.5em 1.2rem;
 }
@@ -408,7 +411,7 @@ main ul.simple li::after {
 main li.toctree-l1 ul {
   list-style: circle;
   color: #00a9e5;
-  padding-left: 2em;
+  padding-left: 1.3em;
 }
 
 main li.toctree-l1 a {
@@ -793,13 +796,11 @@ footer a:active,
   -webkit-box-shadow: none;
           box-shadow: none;
   border: none;
-
 }
 
 main li.toctree-l1 > a,
 ul.simple > li > a {
   color: #333;
-  padding: 1px 0 1px 0.8em;
 }
 
 main li.toctree-l2 > a {
@@ -1295,8 +1296,11 @@ form [type=submit]:disabled {
 }
 
 .central-page-area main ul li {
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5px 0 5px 0.6em;
+}
+
+.central-page-area main ul li.toctree-l2 {
+  padding: 5px 0;
 }
 
 p,
@@ -1844,6 +1848,11 @@ body {
   color: #333333;
   /* padding-top: 60px; */
   line-height: 1.4;
+  min-height: 100%;
+}
+
+#page {
+  min-height: 100%;
 }
 
 ::-moz-selection { /* Code for Firefox */
@@ -2025,7 +2034,7 @@ ul#breadcrumbs {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   margin-bottom: 0;
-  padding-top: 0.5em;
+  padding-top: 1em;
 }
 
 ul#breadcrumbs .fa-caret-right {
@@ -2723,11 +2732,6 @@ div.highlight pre {
         text-align: left;
       }
 
-      .central-page-area main ul li,
-      .central-page-area main ol li {
-        padding: 5px 1px;
-      }
-
       #gethelp .help-icon {
         margin-top: 2rem;
       }
@@ -2923,6 +2927,40 @@ div.highlight pre {
 
       #gethelp .help-buttons {
         padding-right: 46px;
+      }
+
+      nav.full-toctree-nav {
+        position: fixed;
+        top: 93px;
+        bottom: 0;
+        left: 0;
+        background-color: #fff;
+        z-index: 2;
+        overflow: hidden;
+      }
+
+      nav.full-toctree-nav.reached-top {
+        top: 0px;
+      }
+
+      .side-scroll {
+        position: relative;
+        height: 100%;
+      }
+
+      #globaltoc {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        -webkit-transition: top ease-out 0.1s;
+        transition: top ease-out 0.1s
+      }
+
+      #search-lg {
+        z-index: 1;
+        background-color: #fff;
       }
 }
 

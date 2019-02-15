@@ -3,22 +3,23 @@ $(function(){
       mainmenu,
       form_control,
       querystr = '';
+  var mainElement = $('.central-page-area'),
+      tocWrapperElement = $('nav.full-toctree-nav'),
+			gTocElement = $('nav.full-toctree-nav .globaltoc'),
+      footerElement = $('#main-footer');
+  var winScroll = 0,
+      gTocScroll = 0,
+      pageHeight = $('body').height(),
+      windowHeight = $(window).height(),
+      mainTop = mainElement.offset().top,
+      mainBottom = footerElement.offset().top
+			gTocSpaceBottom = 15,
+      gTocSpaceTop = $('#search-lg').height();
 
-  /* Form style ---------------------------------------------------------------------------------------*/
-  $(".cv input[type=file]").on("change", function (){
-    /* Show file name in file input box */
-    $(".file-upload-text").text($(this).prop('files')[0].name);
-  });
+  checkTocScrollTop($(document).scrollTop(), mainTop);
+	checkTocScrollBottom($(document).scrollTop()+windowHeight, mainBottom);
 
-  $("form select").on("change", function (e){
-    if (e.target.value == ''){
-      $(e.target).removeClass('selection');
-    } else {
-      $(e.target).addClass('selection');
-    }
-  });
-
-  /* Website search bar ----------------------------------------------------------------------------------------------------*/
+  /* Search bar ----------------------------------------------------------------------------------------------------*/
   /* Search bar animation */
   searchbar = $('.widget_search .search_main');
   mainmenu = $('.widget_search .main-menu');
@@ -27,7 +28,6 @@ $(function(){
   form_control.on('change', function(e){
     querystr = e.target.value;
     form_control.each(function (current_e) {
-      console.log(current_e.target);
     });
   });
 
@@ -73,26 +73,99 @@ $(function(){
     return false;
   });
 
-  if( document.documentElement.scrollHeight > document.documentElement.clientHeight ) {
-    // Scroll-down animation will only be availabloe on pages longer than the client's viewports height
-    $(document).on('scroll', function(){
-      var scrollvalue = $(document).scrollTop();
 
-      /* When scroll is down, class .scrolled-down affects header style */
-      // if ( scrollvalue >= 1 ){
-      //   $('body').addClass('scrolled-down');
-      // }
-      // else {
-      //   $('body').removeClass('scrolled-down');
-      // }
 
-      /* Back to top button */
-      if ( scrollvalue >= $(window).height()*.50 ){
-        $('#btn-scroll').fadeIn('slow');
-      }
-      else {
-        $('#btn-scroll').fadeOut('slow');
-      }
-    });
-  }
+	//Firefox
+ $(document).bind('DOMMouseScroll', function(e){
+	 console.log('Firefox');
+	 var tocWrapperBottom = windowHeight-parseInt(tocWrapperElement.css('top').replace('px',''));
+	 var tocHeight = $('.globaltoc > ul').height();
+	 var tocBottom = tocHeight + gTocScroll;
+	 if ($(e.target).closest('.full-toctree-nav').length){
+      e.preventDefault();
+      // Controlling scroll top limit
+			if ( e.originalEvent.detail > 0  ){
+				// When globa TOC menu is not showing its top
+				gTocScroll +=e.originalEvent.detail;
+				if (gTocScroll > 0) {
+					gTocScroll = 0;
+				}
+			}
+
+			// Controlling scroll bottom litmit
+			if(e.originalEvent.detail < 0) {
+				gTocScroll +=e.originalEvent.detail;
+				if ( tocWrapperBottom - tocBottom > 0 ){
+					gTocScroll += (tocWrapperBottom - tocBottom + 56);
+				}
+
+			}
+
+		gTocElement.css('top', gTocScroll);
+   } else {
+     // Whole page scroll
+   }
+ });
+
+ //IE, Opera, Safari
+ $(document).bind('wheel', function(e){
+	 console.log('IE, Opera, Safari, Chrome');
+	 var tocWrapperBottom = windowHeight-parseInt(tocWrapperElement.css('top').replace('px',''));
+	 var tocHeight = $('.globaltoc > ul').height();
+	 var tocBottom = tocHeight + gTocScroll;
+	 if ($(e.target).closest('.full-toctree-nav').length){
+      e.preventDefault();
+      // Controlling scroll top limit
+			if ( e.originalEvent.wheelDelta > 0  ){
+				// When globa TOC menu is not showing its top
+				gTocScroll +=e.originalEvent.wheelDelta;
+				if (gTocScroll > 0) {
+					gTocScroll = 0;
+				}
+			}
+
+			// Controlling scroll bottom litmit
+			if(e.originalEvent.wheelDelta < 0) {
+				gTocScroll +=e.originalEvent.wheelDelta;
+				if ( tocWrapperBottom - tocBottom > 0 ){
+					gTocScroll += (tocWrapperBottom - tocBottom + 56);
+				}
+			}
+		gTocElement.css('top', gTocScroll);
+   } else {
+     // Whole page scroll
+   }
+ });
+
+  $(window).on('scroll', function(e){
+    var scrollYTopPosition = e.currentTarget.pageYOffset;
+    var scrollYBottomPosition = scrollYTopPosition+$(window).height();
+    checkTocScrollTop(scrollYTopPosition, mainTop);
+		checkTocScrollBottom(scrollYBottomPosition, mainBottom);
+
+    /* Back to top button */
+    if ( scrollYTopPosition >= $(window).height()*.50 ){
+      $('#btn-scroll').fadeIn('slow');
+    }
+    else {
+      $('#btn-scroll').fadeOut('slow');
+    }
+  });
+
+	$(window).on('resize', function(e) {
+		// Recalculate values and gTocScroll
+	});
+
+	function checkTocScrollTop(scrollYTopPosition, containerTop){
+		if ( scrollYTopPosition <= containerTop ){
+      tocWrapperElement.css('top', containerTop-scrollYTopPosition);
+    } else {
+      // when header is scrolled up and disappear from the window
+      tocWrapperElement.css('top', 0 );
+    }
+	}
+
+	function checkTocScrollBottom(scrollYBottomPosition, containerBottom){
+		tocWrapperElement.css('bottom', scrollYBottomPosition-containerBottom+gTocSpaceBottom );
+	}
 });
