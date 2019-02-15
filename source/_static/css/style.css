@@ -330,37 +330,6 @@ li.toctree-l4 > a {
   padding: 0.6em 1em 0.6em 3.5rem;
 }
 
-.globaltoc ul > li.toctree-l1 > a::before,
-.globaltoc ul li.toctree-l2 > a::before,
-.globaltoc ul li.toctree-l3 > a::before,
-.globaltoc ul li.toctree-l4 > a::before {
-  color: #00a9e5;
-  content: '\f107';
-  font: normal normal normal 1rem/.5 FontAwesome;
-  width: 0.9em;
-  height: 0.9em;
-  display: block;
-  position: absolute;
-  top: 0.7em;
-  right: 0.7em;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-ul > li.toctree-l1.current > a::before,
-li.toctree-l2.current > a::before,
-li.toctree-l3.current > a::before,
-li.toctree-l4.current > a::before {
-  display: none;
-}
-
 .globaltoc ul {
   display: block;
   width: 100%;
