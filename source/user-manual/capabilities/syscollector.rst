@@ -403,20 +403,20 @@ Using Syscollector information to trigger alerts
 
     The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
 
-  When the alerts is triggered it will be displayed in Kibana this way:
+  After this configuration, when the events are triggered users can view the fields in the index pattern:
 
     .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
-      :title: Information from syscollector
+      :title: Information from syscollector for "port" value.
       :align: center
       :width: 80%
 
     .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts2.png
-      :title: Information from syscollector
+      :title: Information from syscollector for "hardware" value.
       :align: center
       :width: 80%
 
     .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts3.png
-      :title: Information from syscollector
+      :title: Information from syscollector for "program" value.
       :align: center
       :width: 80%
 
