@@ -169,9 +169,9 @@ Host verification using SSL
 ---------------------------
 
 .. note::
-  Using verification with a **SSL key certificate** is really useful to check if connections between agents and manager is correct.
+  Using verification with a **SSL key certificate** is really useful to check if connections between agents and managers are correct.
 
-  This way, user avoid the error of connecting to a different manager or agent.
+  This way, user avoid the mistake of connecting to a different manager or agent.
 
 
 Creating a Certificate of Authority (CA)
