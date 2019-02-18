@@ -4,7 +4,7 @@
  */
 
 var versions = [
-    {name: "3.8 (current)", url: "/3.8"},
+    {name: "3.8 (current)", url: "/new-design2"},
     {name: "3.7", url: "/3.7"},
     {name: "3.6", url: "/3.6"},
     {name: "3.5", url: "/3.5"},

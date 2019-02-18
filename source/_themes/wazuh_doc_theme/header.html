@@ -57,14 +57,34 @@
 </header>
 
 <div class="menu-sub">
-  <button type="button" class="navbar-toggler btn-close collapsed" data-toggle="collapse" data-target="#globaltoc">
-    <i class="x" aria-hidden="true"></i><!-- <i class="fa fa-bars"></i> -->
-  </button>
-  <span class="release-selector-wrapper">
-    {% if theme_display_version %}
-    {% include "versions.html" %}
-    {% endif %}
-    {% include "editrepo.html" %}
-  </span>
+
+  <div class="container-fluid">
+    <div class="row">
+
+      <div id="search-lg" class="title-bar-right col-xs-12 col-md-3">
+        {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
+      </div> <!-- // #search-lg -->
+
+      <div class="submenu col-xs-12 col-md-6">
+        <ul id="menu-submenu" class="nav">
+          <li class="menu-item nav-item"><a class="nav-link" href="">Getting Started</a></li>
+          <li class="menu-item nav-item"><a class="nav-link" href="">Installation Guide</a></li>
+          <li class="menu-item nav-item"><a class="nav-link" href="">Monitoring AWS</a></li>
+        </ul>
+      </div>
+
+      <div class="version col-xs-12 col-md-3">
+        <span class="release-selector-wrapper">
+          {% if theme_display_version %}
+          {% include "versions.html" %}
+          {% endif %}
+        </span>
+        <span class="editrepo">
+          {% include "editrepo.html" %}
+        </span>
+      </div>
+
+    </div>
+  </div>
 </div>
 {% endblock header %}

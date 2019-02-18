@@ -149,8 +149,12 @@ a.btn-wazuh:active {
   margin-top: 1em;
 }
 
-.header .social-bar .nav > li > a {
+.header .social-bar .nav > li > a, .menu-sub .submenu a.nav-link {
   padding: 5px 7px;
+  color: #fff;
+}
+
+.header .social-bar .nav > li > a:hover{
   color: #fff;
 }
 
@@ -246,13 +250,6 @@ a.docs-link:focus {
   padding: 0 10%;
 }
 
-footer {
-  font-size: 0.75rem;
-  background-color: #0094ce;
-  font-family: 'Open Sans', sans-serif;
-  padding-bottom: 30px;
-}
-
 header .social-bar .menu-item a {
   color: #333;
   font-size: 0.94rem;
@@ -260,6 +257,38 @@ header .social-bar .menu-item a {
 
 .menu-item.last-item a {
   padding-right: 0 !important;
+}
+
+.menu-sub{
+  background: #00a9e5;
+}
+
+.menu-sub #search-lg{
+}
+
+.menu-sub .submenu{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  justify-content: flex-start;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+.menu-sub .version{
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -ms-align-items: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer {
+  font-size: 0.75rem;
+  background-color: #0094ce;
+  font-family: 'Open Sans', sans-serif;
+  padding-bottom: 30px;
 }
 
 footer a,
@@ -567,7 +596,7 @@ footer a:active,
 
 .searchform .search-input-wrapper {
   white-space: nowrap;
-  border-bottom: 1px solid #00a9e5;
+  border-bottom: 1px solid #ffffff;
   margin-left: 30px;
   margin-right: 40px;
   display: -webkit-box;
@@ -618,8 +647,13 @@ footer a:active,
   position: relative;
 }
 
-#branding .flex-container {
-    margin: 0 -15px;
+.form-control:focus{
+  color: #ffffff;
+  background: #00a9e5;
+}
+
+.form-control::placeholder{
+  color: #ffffff;
 }
 
 .flex-container .widget_search {
@@ -633,7 +667,10 @@ footer a:active,
   top: 7px;
   right: 0;
   width: 100%;
-  background-color: #ffffff;
+}
+
+.form-control{
+  background: #00a9e5;
 }
 
 .widget_search .expanded {
