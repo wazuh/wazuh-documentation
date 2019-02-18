@@ -27,11 +27,15 @@ $(function(){
 		}
 	});
 
-	$(window).on('hashchange',function(e){
+	$(window).on('hashchange', updateFromHash);
+
+	function updateFromHash(){
 		loc = location.hash;
-		$('.globaltoc .leaf').removeClass('current');
+		$('.globaltoc .leaf, .globaltoc a.current').removeClass('current');
 		selectLeaf(loc);
-	});
+	}
+
+	updateFromHash();
 
 	function selectLeaf(hash){
 		if (hash.length > 0) {
