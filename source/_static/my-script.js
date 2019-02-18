@@ -30,8 +30,6 @@ function addVersions() {
     var remaining_path = document.location.pathname.split('/');
     remaining_path.splice(0,2);
     var current_path = remaining_path.join('/');
-    console.log('remaining_path:', remaining_path);
-    console.log('current_path:', current_path);
 
     if (version == null) {
         console.error("No such element of class 'version'");
