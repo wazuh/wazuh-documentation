@@ -62,6 +62,5 @@ function addVersions() {
         } else {
           window.location.href = event.target.value;
         }
-        if (current_path == "") { window.location.href = event.target.value + "/" + "not_found.html"; } 
     });
 }
