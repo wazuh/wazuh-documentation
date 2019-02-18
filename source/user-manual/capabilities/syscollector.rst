@@ -17,7 +17,7 @@ The Wazuh agents are able to collect interesting system information and store it
     - `Processes`_
 - `Compatibility matrix`_
 - `Using Syscollector information to trigger alerts`_
-    - `Alerts template to use in Kibana`_
+    - `New searchable fields for Kibana`_
 - `Use case: Visualize system inventory in the Wazuh App`_
 
 How it works
@@ -388,7 +388,7 @@ Using Syscollector information to trigger alerts
 
   To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
 
-  As a example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+  As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
 
   .. code-block:: xml
 
@@ -410,10 +410,10 @@ Using Syscollector information to trigger alerts
       :align: center
       :width: 80%
 
-Alerts template to use in Kibana
+New searchable fields for Kibana
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In Kibana the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the cpu_name field can be found as ``data.hardware.cpu_name``
+In Elasticsearch the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the ``cpu_name`` field can be found as ``data.hardware.cpu_name``
 
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Type**             | **Fields**                                                                                                           | **Example**                      |
