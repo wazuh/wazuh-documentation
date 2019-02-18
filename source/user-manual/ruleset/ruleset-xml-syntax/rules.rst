@@ -99,7 +99,7 @@ Example:
       ...
     </rule>
 
-In this example, the rule is asigned with the ID 100001, a maximun size of each event of 300 characters and the rule level in 3.
+In this example, the rule is assigned with the ID 100001, a maximum size of each event of 300 characters and the rule level in 3.
 
 match
 ^^^^^
@@ -121,7 +121,7 @@ Example:
       <description> Flooded events queue.</description>
     </rule>
 
-If the rule matches the ``id`` 10020 that contains the ``Queue flood!`` phrase in it, rule activates and sends an event.
+If the rule matches the ``id`` 100200 that contains the ``Queue flood!`` phrase in it, rule activates and sends an event.
 
 regex
 ^^^^^
@@ -170,7 +170,7 @@ Selects in which rule decoding category the rule should be included: ids, syslog
 field
 ^^^^^
 
-Any sregex to be compared to a field extracted by the decoder.
+Any ``sregex`` to be compared to a field extracted by the decoder.
 
 +----------+-----------------------------------------------------------+
 | **name** | Specifies the name of the field extracted by the decoder. |
@@ -702,7 +702,7 @@ BAD_WORDS
 
 ``BAD_WORDS`` is a very used use case of ``<var>`` option.
 
-Is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a catched event.
+Is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a caught event.
 
 Example:
 
