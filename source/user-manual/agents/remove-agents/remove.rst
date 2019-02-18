@@ -10,7 +10,7 @@ The binary */var/ossec/bin/manage_agents* allows the removal of agents using the
 .. warning::
    By using this method, the user will remove the agent from the list of the manager's connected agents. 
 
-If the user would like a confirmation before removing the agent, use the following:
+If the user would like confirmation before removing the agent, use the following:
 
 .. code-block:: console
 
@@ -37,7 +37,7 @@ If the user would like a confirmation before removing the agent, use the followi
 
     manage_agents: Exiting.
 
-If the user would like to remove the agent with no confirmation, use the option shown below:
+If the user would like to remove the agent without confirmation, use the option shown below:
 
 .. code-block:: console
 
