@@ -5,7 +5,7 @@
 Removing agents
 ===============
 
-In this section the process of deleting agents using the command line will be explained.
+In this section, the process of deleting agents using the command line will be explained.
 
 
     .. toctree::
