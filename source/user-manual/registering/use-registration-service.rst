@@ -169,9 +169,9 @@ Host verification using SSL
 ---------------------------
 
 .. note::
-  Using verification with a **SSL key certificate** is really useful to check if connections between agents and managers are correct.
+  Using verification with an SSL key certificate is really useful to check if connections between agents and managers are correct.
 
-  This way, user avoid the mistake of connecting to a different manager or agent.
+  This way, the user avoids the mistake of connecting to a different manager or agent.
 
 
 Creating a Certificate of Authority (CA)
@@ -223,7 +223,7 @@ Manager verification using SSL
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
 
 .. warning::
-  The manager verification is only a check. Although the verification fails, the connection will be realized succesfully and returning just a warning.
+  The manager verification is only a check. Although the verification fails, the connection will be realized successfully and returning just a warning.
 
 Agent verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
