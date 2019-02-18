@@ -70,6 +70,7 @@ Assign the decoder which father it belongs:
     
     <decoder name="decoder_junior">
       <parent>decoder_father</parent>
+      ...
     </decoder>
 
 accumulate
@@ -104,6 +105,7 @@ Define that the decoder is related with the ``syslogd`` process:
 
     <decoder name="syslogd_decoder">
       <program_name>syslogd</program_name>
+      ...
     </decoder>
 
 prematch
@@ -131,7 +133,7 @@ regex
 **Regular expressions** or ``regex`` are sequences of characters that define a pattern.
 Decoders use them to find words or other patterns into the rules.
 
-An example, is this regex that matches any numeral:
+An example is this regex that matches any numeral:
 
   ..code-block:: xml
     <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
@@ -154,6 +156,21 @@ The attribute below is optional, it allows to discard some of the content of the
 +                    +                    +
 |                    | after_prematch     |
 +--------------------+--------------------+
+
+Example:
+
+Show when an user executed the sudo command for the first time:
+
+.. code-block:: xml
+
+  <decoder name="sudo-fields">
+    <parent>sudo</parent>
+    <prematch>\s</prematch>
+    <regex>^\s*(\S+)\s*:</regex>
+    <order>srcuser</order>
+    <fts>name,srcuser,location</fts>
+    <ftscomment>First time user executed the sudo command</ftscomment>
+  </decoder>
 
 order
 ^^^^^^
@@ -233,9 +250,11 @@ Example:
 
 The following decoder will extract the user who generated the alert and the location from where it comes:
 
-  .. code-block: xml
+  .. code-block:: xml
+  
     </decoder>
       <fts>srcuser, location</fts>
+      ...
     </decoder>
 
 ftscomment
@@ -325,9 +344,10 @@ Example:
     
     <decoder name="home_decoder">
       <location> /home/user </location>
+      ...
     </decoder>
 
-Only filters the alerts related to the path ``/home/user``.
+Only filters the events related to the path ``/home/user``.
 
 var
 ^^^
