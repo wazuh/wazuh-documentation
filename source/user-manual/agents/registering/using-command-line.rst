@@ -17,11 +17,11 @@ To register an agent using the command line, follow these steps:
 	* Wazuh v3.8.1 Agent manager.          *
 	* The following options are available: *
 	****************************************
-	   (A)dd an agent (A).
-	   (E)xtract key for an agent (E).
-	   (L)ist already added agents (L).
-	   (R)emove an agent (R).
-	   (Q)uit.
+		(A)dd an agent (A).
+		(E)xtract key for an agent (E).
+		(L)ist already added agents (L).
+		(R)emove an agent (R).
+		(Q)uit.
 	Choose your action: A,E,L,R or Q:
 
 2. Select `A` to add an agent. You'll be asked for the agent's name (use the agent hostname or another arbitrary name), its IP address and the agent ID (this field can be left blank to auto-assign an ID).
@@ -31,14 +31,14 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	Choose your action: A,E,L,R or Q: A
 
 	- Adding a new agent (use '\q' to return to the main menu).
-	  Please provide the following:
-	   * A name for the new agent: Example
-	   * The IP Address of the new agent: any
-	   * An ID for the new agent[001]:
+		Please provide the following:
+		* A name for the new agent: Example
+		* The IP Address of the new agent: any
+		* An ID for the new agent[001]:
 	Agent information:
-	   ID:001
-	   Name:Example
-	   IP Address:any
+		ID:001
+		Name:Example
+		IP Address:any
 
 	Confirm adding it?(y/n): y
 	Agent added with ID 001.
@@ -48,10 +48,11 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	Choose your action: A,E,L,R or Q: E
 
 	Available agents:
-	   ID: 001, Name: Example, IP: any
+		ID: 001, Name: Example, IP: any
 	Provide the ID of the agent to extract the key (or '\q' to quit): 001
 
 	Agent key information for '001' is:
+
 	MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
 
 4. Exit from `manage_agents` by selecting `Q`.
@@ -66,8 +67,8 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	* Wazuh v3.8.1 Agent manager.          *
 	* The following options are available: *
 	****************************************
-	   (I)mport key from the server (I).
-	   (Q)uit.
+		(I)mport key from the server (I).
+		(Q)uit.
 	Choose your action: I or Q:
 
 6. Select `I` to import a key and paste in the key that you extracted on the manager::
@@ -81,25 +82,26 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	Paste it here (or '\q' to quit): MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw=
 
 	Agent information:
-	   ID:013
-	   Name:Example
-	   IP Address:any
+		ID:013
+		Name:Example
+		IP Address:any
 
 	Confirm adding it?(y/n): y
 	Added.
 
 7. Select 'Q' to exit from `manage_agents`.
 
+
 8. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <client>
-      <server>
-        <address>MANAGER_IP</address>
-        ...
-      </server>
-    </client>
+	<client>
+		<server>
+			<address>MANAGER_IP</address>
+			...
+		</server>
+	</client>
 
 9. Restart the agent:
 

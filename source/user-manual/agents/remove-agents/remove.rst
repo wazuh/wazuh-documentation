@@ -62,3 +62,7 @@ If the user would like to remove the agent with no confirmation, use the option 
     ** You must restart OSSEC for your changes to take effect.
 
     manage_agents: Exiting.
+
+
+.. note::
+   If users remove the configuration related to the manager in the agent side, the agent will appear in the manager side as `disconnected` and won't send events, but will still appear in the list of known agents.

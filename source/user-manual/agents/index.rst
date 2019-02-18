@@ -1,6 +1,6 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _managing-agents:
+.. _agent-management:
 
 Agent management
 ================
