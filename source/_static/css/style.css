@@ -2913,12 +2913,13 @@ div.highlight pre {
 
       nav.full-toctree-nav {
         position: fixed;
-        top: 93px;
+        top: 0;
         bottom: 0;
         left: 0;
         background-color: #fff;
         z-index: 2;
         overflow: hidden;
+        height: 100%;
       }
 
       nav.full-toctree-nav.reached-top {
@@ -2927,17 +2928,15 @@ div.highlight pre {
 
       .side-scroll {
         position: relative;
-        height: 100%;
+        height: calc(100% - 50px);
+        margin-right: -50px;
       }
 
       #globaltoc {
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        -webkit-transition: top ease-out 0.1s;
-        transition: top ease-out 0.1s
+        height: 100%;
+        overflow-y: scroll;
+        width: 100%;
+        padding-right: 33px;
       }
 
       #search-lg {

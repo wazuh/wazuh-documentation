@@ -20,7 +20,7 @@ $(function(){
   checkTocScrollTop($(document).scrollTop(), mainTop);
 	checkTocScrollBottom($(document).scrollTop()+windowHeight, mainBottom);
 
-	// Find current page section in globaltoc
+	// Finds current page section in globaltoc
 	$('.globaltoc .toctree-l2.current a').each(function(e){
 		if (!$(this).siblings('ul').length){
 			$(this).addClass('leaf');
@@ -38,6 +38,13 @@ $(function(){
 			$('.globaltoc [href="'+hash+'"]').addClass('current');
 		}
 	}
+
+  /* Turn all tables in responsive table */
+  $('#main-content table').each(function(){
+    if ( $(this).width() > $('main').width()){
+      $(this).addClass('table-responsive');
+    }
+  });
 
   /* Search bar ----------------------------------------------------------------------------------------------------*/
   /* Search bar animation */
@@ -93,65 +100,54 @@ $(function(){
     return false;
   });
 
+  $(window).on('wheel', function(e){
+ //console.log(e.target);
 
- //IE, Opera, Safari
- $(document).bind('wheel', function(e){
-	 var tocWrapperBottom = windowHeight-parseInt(tocWrapperElement.css('top').replace('px',''));
-	 var tocHeight = $('.globaltoc > ul').height();
-	 var tocBottom = tocHeight + gTocScroll;
-	 if ($(e.target).closest('.full-toctree-nav').length){
-      e.preventDefault();
-      // Controlling scroll top limit
-			if ( e.originalEvent.wheelDelta > 0  ){
-				// When globa TOC menu is not showing its top
-				gTocScroll +=e.originalEvent.wheelDelta;
-				if (gTocScroll > 0) {
-					gTocScroll = 0;
-				}
-			}
+  // var $other = $divs.not(this).off('scroll');
 
-			// Controlling scroll bottom litmit
-			if(e.originalEvent.wheelDelta < 0) {
-				gTocScroll +=e.originalEvent.wheelDelta;
-				if ( tocWrapperBottom - tocBottom > 0 ){
-					gTocScroll += (tocWrapperBottom - tocBottom + 56);
-				}
-			}
-		gTocElement.css('top', gTocScroll);
-   } else {
-     // Whole page scroll
+  // other = $other.get(0);
+  // console.log(other);
+  // var percentage = this.scrollTop / (this.scrollHeight - this.offsetHeight);
+  // other.scrollTop = percentage * (other.scrollHeight - other.offsetHeight);
+  // setTimeout( function(){ $other.on('scroll', sync ); },10);
+ });
+
+ $(window).on('scroll', function(e){
+   //console.log(e.currentTarget);
+   var scrollYTopPosition = e.currentTarget.pageYOffset;
+   var scrollYBottomPosition = scrollYTopPosition+$(window).height();
+   checkTocScrollTop(scrollYTopPosition, mainTop);
+   checkTocScrollBottom(scrollYBottomPosition, mainBottom);
+
+   /* Back to top button */
+   if ( scrollYTopPosition >= $(window).height()*.50 ){
+     $('#btn-scroll').fadeIn('slow');
+   }
+   else {
+     $('#btn-scroll').fadeOut('slow');
    }
  });
 
-  $(window).on('scroll', function(e){
-    var scrollYTopPosition = e.currentTarget.pageYOffset;
-    var scrollYBottomPosition = scrollYTopPosition+$(window).height();
-    checkTocScrollTop(scrollYTopPosition, mainTop);
-		checkTocScrollBottom(scrollYBottomPosition, mainBottom);
+ $(window).on('resize', function(e) {
+   // Recalculate values and gTocScroll
+ });
 
-    /* Back to top button */
-    if ( scrollYTopPosition >= $(window).height()*.50 ){
-      $('#btn-scroll').fadeIn('slow');
-    }
-    else {
-      $('#btn-scroll').fadeOut('slow');
-    }
-  });
+ function checkTocScrollTop(scrollYTopPosition, containerTop){
+   if ( scrollYTopPosition <= containerTop ){
+     tocWrapperElement.css('top', containerTop-scrollYTopPosition);
+     /*tocWrapperElement.css('position', 'relative' );*/
+   } else {
+     // when header is scrolled up and disappear from the window
+     tocWrapperElement.css('top', 0 );
+     /*tocWrapperElement.css('position', 'fixed' );*/
+   }
+ }
 
-	$(window).on('resize', function(e) {
-		// Recalculate values and gTocScroll
-	});
-
-	function checkTocScrollTop(scrollYTopPosition, containerTop){
-		if ( scrollYTopPosition <= containerTop ){
-      tocWrapperElement.css('top', containerTop-scrollYTopPosition);
-    } else {
-      // when header is scrolled up and disappear from the window
-      tocWrapperElement.css('top', 0 );
-    }
-	}
-
-	function checkTocScrollBottom(scrollYBottomPosition, containerBottom){
-		tocWrapperElement.css('bottom', scrollYBottomPosition-containerBottom+gTocSpaceBottom );
-	}
+ function checkTocScrollBottom(scrollYBottomPosition, containerBottom){
+   //tocWrapperElement.css('bottom', scrollYBottomPosition-containerBottom+gTocSpaceBottom );
+	 var topPos = parseInt(tocWrapperElement.css('top').replace('px',''));
+   if ( scrollYBottomPosition > (containerBottom+gTocSpaceBottom)) {
+   tocWrapperElement.css('height', 'calc(100% - '+ (scrollYBottomPosition-containerBottom+gTocSpaceBottom+topPos) +'px)' );
+   }
+ }
 });
