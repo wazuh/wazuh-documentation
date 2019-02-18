@@ -26,11 +26,13 @@ function addVersions() {
     var version = $(".version");
     var select_version = $("#select-version");
     var path = document.location.pathname.split('/')[1];
-    var path2 = document.location.pathname.split('/')[2];
-      if(!path2){
-        path2="";
-      }
-      
+
+    var remaining_path = document.location.pathname.split('/');
+    remaining_path.splice(0,2);
+    var current_path = remaining_path.join('/');
+    console.log('remaining_path:', remaining_path);
+    console.log('current_path:', current_path);
+
     if (version == null) {
         console.error("No such element of class 'version'");
         return;
@@ -55,6 +57,11 @@ function addVersions() {
     select_version.val('/' + path);
 
     select_version.change(function(event) {
-        window.location.href = event.target.value + "/" + path2;
+        if (current_path != "not_found.html") {
+          window.location.href = event.target.value + '/' + current_path;
+        } else {
+          window.location.href = event.target.value;
+        }
+        if (current_path == "") { window.location.href = event.target.value + "/" + "not_found.html"; } 
     });
 }
