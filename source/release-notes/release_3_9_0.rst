@@ -5,18 +5,18 @@
 3.9.0 Release Notes
 ===================
 
-In this section, all the new Wazuh Improvements and Fixes added in 3.9 version are going to be listed:
+In this section, all the new Wazuh Improvements and Fixes added in the 3.9 version are going to be listed:
 
 Wazuh Core improvements
 ------------------------
 
-    The Wazuh core has received a few improvements since last version:
+    The Wazuh core has received a few improvements since the last version:
 
-    Added new funcionalities:
+    Added new functionalities:
         * Collect network and port inventory for older Windows versions.
             Now, the network and port inventory are supported in the agents with ``Syscollector`` in the ``XP`` and ``Server 2003`` Windows versions.
         * Wazuh now includes inventory fields as ``dynamic fields in events`` to use them in the rules.
-            Added the ability to use the Syscollector imformation to trigger alerts and to show that information in the description of the alerts.
+            Added the ability to use the Syscollector information to trigger alerts and to show that information in the description of the alerts.
             Using ``syscollector`` as the value in ``<decoded_as>`` field on a decoder, alerts will be shown in Kibana as ``syscollector`` fields *(data.type.value)*
 
             .. code-block:: xml
@@ -63,7 +63,7 @@ Wazuh Core improvements
 Wazuh Ruleset improvements
 ---------------------------
 
-    In this version, the Ruleset only has added three differences since last version:
+    In this version, the Ruleset only has added three differences since the last version:
         * Added Sysmon rules to new Windows eventchannel format.
 
 
@@ -81,6 +81,28 @@ Wazuh Ruleset improvements
 
         * Added ruleset for the Configuration Assessment module.
         * And added policy files in YAML format for the Configuration Assessment module.
+
+Wazuh API
+---------
+
+The Wazuh API has received multiple additions that allow the Kibana App do many cool things.
+
+Now, the Wazuh API can make calls to edit the Wazuh configuration files as ``ossec.conf``, rules lists and decoders.
+Also, makes calls to restart manager nodes in the cluster, to get CDB lists, and even get configuration assessment policies and checks.
+
+Examples of this are:
+  Making calls to get CDB lists:
+
+  .. code-block:: bash
+
+    # curl -u foo:bar -k -X GET "CDB list address"
+
+  Making calls to restart manager nodes in the cluster and validate configuration:
+
+  .. code-block:: bash
+
+    # curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"
+
 
 Wazuh kibana app
 -----------------
