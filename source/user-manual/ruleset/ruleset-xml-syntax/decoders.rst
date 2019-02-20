@@ -135,7 +135,7 @@ Decoders use them to find words or other patterns into the rules.
 
 An example is this regex that matches any numeral:
 
-  ..code-block:: xml
+  .. code-block:: xml
     <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
 
 

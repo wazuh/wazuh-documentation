@@ -49,8 +49,6 @@ Available options
 - `location`_
 - `var`_
 
-  - `BAD_WORDS`_
-
 rule
 ^^^^
 
@@ -696,7 +694,7 @@ Example:
     </group>
 
 BAD_WORDS
-^^^^^^^^^
+"""""""""
 
 <var name="BAD_WORDS">error|warning|failure</var>
 
