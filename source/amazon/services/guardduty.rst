@@ -120,7 +120,7 @@ Wazuh configuration
     <interval>10m</interval>
     <run_on_start>yes</run_on_start>
     <skip_on_error>yes</skip_on_error>
-    <bucket type="config">
+    <bucket type="guardduty">
       <name>wazuh-aws-wodle</name>
       <path>guardduty</path>
       <aws_profile>default</aws_profile>
