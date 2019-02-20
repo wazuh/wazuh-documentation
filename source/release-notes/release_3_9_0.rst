@@ -5,103 +5,89 @@
 3.9.0 Release Notes
 ===================
 
-In this section, all the new Wazuh Improvements and Fixes added in the 3.9 version are going to be listed:
+In this section, we're listing the starred improvements and fixes in Wazuh 3.9.0. A complete list of changes is provided in the `change log <https://github.com/wazuh/wazuh/blob/v3.9.0/CHANGELOG.md>`_.
 
 Wazuh Core improvements
 ------------------------
 
     The Wazuh core has received a few improvements since the last version:
 
-    Added new functionalities:
-        * Collect network and port inventory for older Windows versions.
-            Now, the network and port inventory are supported in the agents with ``Syscollector`` in the ``XP`` and ``Server 2003`` Windows versions.
-        * Wazuh now includes inventory fields as ``dynamic fields in events`` to use them in the rules.
-            Added the ability to use the Syscollector information to trigger alerts and to show that information in the description of the alerts.
+        * **Added support in Syscollector for network and open ports inventory on Windows XP.**
+            
+            Now, ``Syscollector`` supports ``<network>`` and ``<ports>`` on legacy **Windows XP** and **Windows Server 2003**.
+
+        * ``Syscollector`` **data is now decoded into dynamic fields, so we can define rules based on events from Syscollector**
+            
             Using ``syscollector`` as the value in ``<decoded_as>`` field on a decoder, alerts will be shown in Kibana as ``syscollector`` fields *(data.type.value)*
 
-            .. code-block:: xml
-
-                <rule id="100001" level="5">
-                    <if_sid>221</if_sid>
-                    <decoded_as>syscollector</decoded_as>
-                    <field name="netinfo.iface.name">eth0</field>
-                    <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
-                </rule>
-
-            There, users can filter the events as ``syscollector`` filters.
-
-        * Now the ``who-data health-check`` is optional thanks to the new startup_healthcheck option.
-
+        * **New option in File Integrity Monitoring to enable the** ``health check`` **for** ``<whodata>``.
+            
             .. code-block:: bash
-
+                
+                # /var/ossec/etc/ossec.conf
+                
                 <syscheck>
                     <whodata>
-                        <audit_healthcheck_enabled>no</audit_healthcheck_enabled>
+                        <startup_healthcheck>yes</startup_healthcheck>
                     </whodata>
-                    ...
                 </syscheck>
-    
-    Some changes to improve the internal workings of Wazuh:
-        * The start-up logging messages have been improved.
-        * Now ``agent_auth`` daemon warns users when it receives extra input arguments.
 
+        * **If** ``ossec-remoted`` **wasn't properly configured, it exited without logging any message. Now it does!:**
+            
+            .. code-block:: bash
+            
+                "Remoted connection is not configured... Exiting."
+
+        * **Now** ``agent_auth`` **daemon warns users when it receives extra input arguments.**
+            
             .. code-block:: bash
 
                 $ ./agent-auth -m 192.168.1.1 -i 192.168.1.2
                 2019/02/05 07:00:08 agent-auth: WARNING: Extra arguments detected. They will be ignored.
                 2019/02/05 07:00:08 agent-auth: INFO: Started (pid: 7252).
 
-        * Now ``who-data`` works on **Fedora 29**!
-        * Now ``Syscollector`` gets bonded interfaces' MAC.
+        * **The** ``who-data`` **option works from now on ``Fedora 29`` because both have added Audit 3.0 (beta) support.** 
 
-    And of course, a long list of fixes:
-        * Fixed defects reported by Cppcheck. 
-        * Fixed errors in ``Syscollector`` for Windows versions older than `Vista`.
-        * Many other fixes users may read in the `Wazuh core CHANGELOG. <https://github.com/wazuh/wazuh/blob/master/CHANGELOG.md>`_
+
+        * **Now** ``Syscollector`` **gets bonded interfaces' MAC.**
+
+
+        * **To finish with the changes in the Wazuh core, mention the list of little bugs and errors that the team has fixed, which can be checked in the** `Wazuh core CHANGELOG. <https://github.com/wazuh/wazuh/blob/master/CHANGELOG.md>`_
 
 
 Wazuh Ruleset improvements
 ---------------------------
 
-    In this version, the Ruleset only has added three differences since the last version:
+    In this release, the Ruleset has only added three differences since the last version:
+
         * Added Sysmon rules to new Windows eventchannel format.
-
-
-        .. code-block:: xml
-
-            Many rules like this one |
-                                     V
-
-            <rule id="184665" level="0">
-                <if_sid>18100</if_sid>
-                <match>Microsoft-Windows-Sysmon/Operational: INFORMATION(1)</match>
-                <description>Sysmon - Event 1</description>
-                <group>sysmon_event1,</group>
-            </rule>
+            The anomalies on event **ID 1** of ``Sysmon`` can be detected now thanks to this new rules!!
 
         * Added ruleset for the Configuration Assessment module.
-        * And added policy files in YAML format for the Configuration Assessment module.
+            The team has added a full directories structure with many new rules related with the ``Configuration Assessment`` modules. They have also added policy files in YAML, new decoders, etc.
 
 Wazuh API
 ---------
 
-The Wazuh API has received multiple additions that allow the Kibana App do many cool things.
+    The Wazuh API has received multiple additions that allow the Kibana App make new calls and automatize everything easier.
 
-Now, the Wazuh API can make calls to edit the Wazuh configuration files as ``ossec.conf``, rules lists and decoders.
-Also, makes calls to restart manager nodes in the cluster, to get CDB lists, and even get configuration assessment policies and checks.
+        * **Now, the** ``Wazuh API`` **can make calls to edit the Wazuh configuration files as** ``ossec.conf``, **rules lists and decoders.**
+    
+        * **Also, makes calls to restart manager nodes in the cluster, to get CDB lists, and even get configuration assessment policies and checks.**
 
-Examples of this are:
-  Making calls to get CDB lists:
+        Examples of this are:
 
-  .. code-block:: bash
+            Making calls to *get CDB lists*:
 
-    # curl -u foo:bar -k -X GET "CDB list address"
+            .. code-block:: bash
 
-  Making calls to restart manager nodes in the cluster and validate configuration:
+                # curl -u foo:bar -k -X GET "CDB list address"
 
-  .. code-block:: bash
+            Making calls to *restart* manager nodes in the cluster and *validate* configuration:
 
-    # curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"
+            .. code-block:: bash
+
+                # curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"
 
 
 Wazuh kibana app
