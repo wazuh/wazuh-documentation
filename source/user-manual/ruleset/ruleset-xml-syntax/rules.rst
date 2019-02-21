@@ -114,13 +114,33 @@ Example:
   .. code-block:: xml
 
     <rule id="100001" maxsize="300" level="3">
-      <if_sid>100020</if_sid>
       <match>Queue flood!</match>
+      <order>srcip</order>
       <description> Flooded events queue.</description>
     </rule>
 
-If the rule matches the ``id`` 100200 that contains the ``Queue flood!`` phrase in it, rule activates and sends an event.
 
+If the event cathed contains the *Queue flood!* string, the rule will generate a report of that log:
+
+  .. code-block:: bash
+
+    Feb 12 14:30:06 manager006 flood[0019]: 'Queue flood!' srcip '10.0.0.4'
+      
+    **Phase 1: Completed pre-decoding.
+        full event: 'Feb 12 14:30:06 manager006 flood[0019]: 'Queue flood!' srcip '10.0.0.4' 
+        timestamp: 'Feb 12 14:30:06'
+        hostname: 'manager006'
+        program_name: 'flood'
+        log: 'Queue flood!' srcip '10.0.0.4''
+  
+    **Phase 2: Completed decoding.
+        decoder: no decoder found.
+
+    **Phase 3: Completed filtering (rules)
+        Rule id: '100001'
+        Level: '3'
+        Description: 'Queue flood!'
+        srcip: '10.0.0.4'
 regex
 ^^^^^
 
@@ -134,19 +154,21 @@ Any regex to match against the log event.
 
 Example:
 
-  ``regex`` is used to find a variety of strings in a rule. For example, if we want to match any valid IP:
+  ``regex`` is used to find a variety of strings in a rule. For example, if we want to match an IP:
 
   .. code-block:: xml
 
-    <rule>
-      <if_sid>10050</if_sid>
-      <regex>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regex>
-      <description>Matches any valid IP</description>
-    </rule>
+     <rule id="100051" level="3">
+        <regex>(\d+.\d+.\d+.\d+)</regex>
+        <description>Matches any valid IP</description>
+     </rule>
+
 
 
 decoded_as
 ^^^^^^^^^^
+
+Choose what Wazuh module will decode the rule (ossec, smtpd, rootcheck, json, windows-date-format, racoon, dovecot...) 
 
 +--------------------+------------------+
 | **Default Value**  | n/a              |
@@ -511,7 +533,7 @@ Examples:
 
     <rule id="100009" level="1">
       ...
-      <regex>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regex>
+      <regex>(\d+.\d+.\d+.\d+)</regex>
       <description> Rule to match IPs </description>
     </rule>
 
@@ -639,10 +661,12 @@ Example:
 
   .. code-block:: xml
 
+<group name="spam">
     <rule id="3801" level="4">
-      <description>Group for rules related with spam.</description>
-      <group>spam,</group>
+      <description>Rule related with spam.</description>
     </rule>
+</group>
+
 
 Now, every rule with the line ``<group>spam,</group>`` will be included in that group.
 
@@ -694,7 +718,7 @@ Example:
     </group>
 
 BAD_WORDS
-"""""""""
+^^^^^^^^^
 
 <var name="BAD_WORDS">error|warning|failure</var>
 
