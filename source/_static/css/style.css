@@ -449,6 +449,7 @@ a.headerlink {
   user-select: none;
   font-size: 1rem;
   vertical-align: middle;
+	display: none;
 }
 
 a.headerlink:before {
@@ -468,9 +469,19 @@ a.headerlink:active {
   text-decoration: none;
 }
 
-a.headerlink:hover::before,
-a.headerlink:active::before {
-  color: #00a9e5
+h1:hover > a.headerlink,
+h1:active > a.headerlink,
+h2:hover > a.headerlink,
+h2:active > a.headerlink,
+h3:hover > a.headerlink,
+h3:active > a.headerlink,
+h4:hover > a.headerlink,
+h4:active > a.headerlink,
+h5:hover > a.headerlink,
+h5:active > a.headerlink,
+h6:hover > a.headerlink,
+h6:active > a.headerlink {
+  display: inline-block;
 }
 
 #page .img-space {
@@ -1591,7 +1602,14 @@ h1, h2, h3, h4, h5, h6,
   text-align: left;
   line-height: 1.2;
   display: inline-block;
-  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  width: auto;
+}
+
+#page .topic .topic-title {
+	width: 100%;
 }
 
 h1 {
