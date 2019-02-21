@@ -48,7 +48,7 @@ Set name and type of decoder to *ossec*:
   .. code-block:: xml
 
     <decoder name="ossec" type ="ossec">
-      ...
+      <description>Ossec based decoder</description>
     </decoder>
 
 parent
@@ -106,7 +106,7 @@ Now, if we give a log that is decoded by the *junior* decoder, in the output the
 accumulate
 ^^^^^^^^^^
 
-Allow Wazuh to track events over multiple log messages based on a decoded id.
+Allows Wazuh to track events over multiple log messages based on a decoded id.
 
 .. note::
 
@@ -133,10 +133,12 @@ Define that the decoder is related with the ``syslogd`` process:
 
   .. code-block:: xml
 
-    <decoder name="syslogd_decoder">
-      <program_name>syslogd</program_name>
-      ...
+    <decoder name="open-userdel">
+      <program_name>userdel</program_name>
+      <regex>user removed: name=(\S+)$|delete user '(\S+\w)'</regex>
+      <order>srcuser</order>
     </decoder>
+
 
 prematch
 ^^^^^^^^
@@ -151,11 +153,11 @@ It attempts to find a match within the log for the string defined.
 
 The attribute below is optional, it allows to discard some of the content of the entry.
 
-+--------------------+--------------------+
-| Attribute          | Value              |
-+====================+====================+
-| **offset**         | after_regex        |
-+--------------------+--------------------+
++--------------------+---------------+
+| Attribute          | Value         |
++====================+===============+
+| **offset**         | after_regex   |
++--------------------+---------------+
 
 regex
 ^^^^^
