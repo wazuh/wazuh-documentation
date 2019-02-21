@@ -66,6 +66,8 @@ Additions
                     </whodata>
                 </syscheck>
 
+        * Added extra information in the agents' disconnected and removed alerts to show which agent is changing.
+
 Improvements
 ^^^^^^^^^^^^
 
