@@ -312,7 +312,7 @@ The following decoder will extract the user who generated the alert and the loca
 ftscomment
 ^^^^^^^^^^
 
-It adds a comment to a decoder when `<fts>` tag is used.
+``ftscomment`` adds a comment to a decoder when `<fts>` tag is used.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |

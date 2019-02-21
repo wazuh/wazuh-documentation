@@ -93,9 +93,19 @@ Example:
   .. code-block:: xml
 
     <!--- Rule definition -->
-    <rule id="100001" maxsize="300" level="3">
-      ...
+    <rule id="100000" maxsize="300" level="0">
+      <description>Example rule to see how options are assigned to a rule.</description>
+      <match>Example rule</match>
     </rule>
+
+  .. code-block:: bash
+
+      Example log to test the example rule: Example rule 
+
+      **Phase 3: Completed filtering (rules)
+      Rule id: '100000'
+      Level: '0'
+      Description: 'Example rule'
 
 In this example, the rule is assigned with the ID 100001, a maximum size of each event of 300 characters and the rule level in 3.
 
