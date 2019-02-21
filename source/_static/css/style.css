@@ -378,18 +378,28 @@ ul li.toctree-l1 a.current.reference.internal:after {
   background-color: hsl(0, 0%, 96%);
 }
 
-.globaltoc a.leaf.current::before {
-  content: '\f0da';
+.globaltoc li.toctree-l1 a.current.leaf::before,
+.globaltoc li.toctree-l1 .current > a.leaf::before {
+	content: '\f0da';
   display: inline-block;
   font: normal normal normal 15px/.5 FontAwesome;
   width: 12px;
   color: #00a9e5;
   position: absolute;
-  top: 0.85rem;
+  top: 0.85em;
   left: 0;
 }
 
-.globaltoc li.toctree-l1 a.leaf.current::before {}
+.globaltoc li.toctree-l1 li.toctree-l3 > a.leaf.current::before,
+.globaltoc li.toctree-l1 li.toctree-l3.current > .leaf::before {
+  left: 2em;
+}
+
+.globaltoc li.toctree-l1 li.toctree-l4 > a.leaf.current::before,
+.globaltoc li.toctree-l1 li.toctree-l4.current > .leaf::before {
+  top: 0.75em;
+  left: 3em
+}
 
 li.toctree-l1 a,
 ul.simple a {
