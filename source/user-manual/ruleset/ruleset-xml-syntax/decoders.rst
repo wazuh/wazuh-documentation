@@ -166,6 +166,7 @@ Decoders use them to find words or other patterns into the rules.
 An example is this regex that matches any numeral:
 
   .. code-block:: xml
+
     <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
 
 
@@ -289,10 +290,9 @@ The following decoder will extract the user who generated the alert and the loca
     </decoder>
 
 
-  ..code-block:: bash
+  .. code-block:: bash
 
     Feb 19 12:45:21 manager009 newfile: srcuser 'John' location '/var/ossec/etc'
-
 
     **Phase 1: Completed pre-decoding.
           full event: 'Feb 19 12:45:21 manager009 newfile: srcuser 'John' location '/var/ossec/etc'

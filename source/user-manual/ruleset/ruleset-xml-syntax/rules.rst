@@ -141,9 +141,9 @@ If the event cathed contains the *Queue flood!* string, the rule will generate a
         Level: '3'
         Description: 'Queue flood!'
         srcip: '10.0.0.4'
+
 regex
 ^^^^^
-
 Any regex to match against the log event.
 
 +--------------------+---------------------------------------------------------------+
@@ -661,11 +661,11 @@ Example:
 
   .. code-block:: xml
 
-<group name="spam">
-    <rule id="3801" level="4">
-      <description>Rule related with spam.</description>
-    </rule>
-</group>
+    <group name="spam">
+        <rule id="3801" level="4">
+          <description>Rule related with spam.</description>
+        </rule>
+    </group>
 
 
 Now, every rule with the line ``<group>spam,</group>`` will be included in that group.
