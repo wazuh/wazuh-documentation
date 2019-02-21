@@ -137,18 +137,19 @@
         </nav>
 
         <div id="main-content" class="col-lg-9">
-          {% if pagename == 'index' %}
-          <main class="index">
-            {% include 'index.html' %}
-          </main>
-          {% else %}
+          {% if pagename != 'index' %}
           <div class="breadcrumbs-wrapper">
             {% include "breadcrumbs.html" %}
           </div>
+          {% endif %}
+
           {# Main content #}
           <main>
             {% block body %} {% endblock %}
           </main>
+
+          {% if pagename == 'index' %}
+            {% include "index_bottom.html" %}
           {% endif %}
 
         </div>

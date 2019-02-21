@@ -1590,6 +1590,32 @@ blockquote pre {
   color: #ffffff;
 }
 
+#welcome-to-wazuh .topic .topic-title:before {
+	display: inline-block;
+  font: normal normal normal 1em/1 'wazuh-icons';
+  width: 12px;
+  color: #00a9e5;
+  vertical-align: top;
+	font-family: 'wazuh-icons' !important;
+  speak: none;
+}
+
+#welcome-to-wazuh .topic:nth-of-type(1) .topic-title:before {
+	content: '\e90e';
+}
+
+#welcome-to-wazuh .topic:nth-of-type(2) .topic-title:before {
+	content: '\e910';
+}
+
+#welcome-to-wazuh .topic:nth-of-type(3) .topic-title:before {
+	content: '\e911';
+}
+
+#welcome-to-wazuh .topic:nth-of-type(4) .topic-title:before {
+	content: '\e914';
+}
+
 /* Overrides Bootstrap style
 -------------------------------------------------------------- */
 
