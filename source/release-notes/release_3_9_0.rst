@@ -17,7 +17,7 @@ Additions
 
         * A very important change is the addition of a new module to perform **Configuration Assessment** scans.
 
-            This new module improves the way Wazuh monitorizes the policies. The policy files are now updated and translated to YAML with more interesting fields, these files are parsed by this new module and after that the scans are performed, in each of them, the new information gathered is stored at a database where differences between consecutive scans are made, this makes possible generating an alert for every check that has changed its result. Also, a statistical alert that summaries the checking process is generated in every scan.
+            This new module improves the way Wazuh monitors the policies. The policy files are now updated and translated to YAML with more interesting fields, these files are parsed by this new module and after that the scans are performed, in each of them, the new information gathered is stored at a database where differences between consecutive scans are made, this makes possible generating an alert for every check that has changed its result. Also, a statistical alert that summaries the checking process is generated in every scan.
 
             To know more about this module, let's add an example that runs a scan the 15th of every month:
 
@@ -47,7 +47,7 @@ Additions
 
         * **Syscollector** data is now decoded into dynamic fields, so we can define rules based on events from `Syscollector`:
             
-            Using ``syscollector`` as the value in ``<decoded_as>`` field on a decoder, alerts will be shown in Kibana as ``syscollector`` fields *(data.type.value)*
+            Using ``syscollector`` as the value in ``<decoded_as>`` field on a decoder will result in Kibana showing alerts as ``syscollector`` fields *(data.type.value)*
 
                 .. thumbnail:: ../images/release-notes/3.9.0/syscollector.png
                     :title: Syscollector events filtered in Kibana.
@@ -71,7 +71,7 @@ Additions
 Improvements
 ^^^^^^^^^^^^
 
-        * **ossec-remoted** daemon now shows an error message when it exit for not being properly configured:
+        * **ossec-remoted** daemon now shows an error message when it quits for not being properly configured:
             
             .. code-block:: bash
             
@@ -96,7 +96,7 @@ Improvements
 
         * Added support to AWS organizations in `CloudTrail` service:
 
-            With this enhancement, It is possible getting logs for organizations by adding `<aws_organization_id>ORGANIZATION</aws_organization_id>` in the wodle configuration:
+            With this enhancement, It is possible getting logs for organizations by adding ``<aws_organization_id>ORGANIZATION</aws_organization_id>`` in the wodle configuration:
 
             .. code-block:: xml
 
@@ -113,8 +113,9 @@ Improvements
                     <skip_on_error>no</skip_on_error>
                 </wodle>
 
-
-        * Optimized network performance in *Remoted*. (pending increase)
+        * Optimized network performance in *Remoted* by introducing a network buffer to cache incomplete messages from agents.
+            
+            With this method, *Remoted* does not wait for complete messages when it's not necessary, improving the performance of the network greatly.
 
         * Labels starting with ``_`` are reserved now for internal use only (this was added to allow the manager to know the agent's IP upper mentioned).
 
@@ -129,7 +130,7 @@ Fixes
         - Delete empty fields from Windows Eventchannel alerts.
         - Fixed memory leak and crash in Vulnerability Detector.
         - ...
-            
+
 Wazuh Ruleset improvements
 ---------------------------
 
@@ -140,21 +141,21 @@ Wazuh Ruleset improvements
             The anomalies on event **ID 1** of *Sysmon* can be detected now thanks to these new rules.
 
         * Added *Configuration Assessment* module files:
-        
+
             The team has added a full directories structure with many new rules for the *Configuration Assessment* module and many other features related to this module as decoders, new policy files in YAML, etc. 
 
 Wazuh API
 ---------
 
-    The Wazuh API has received multiple additions that allow the users to make different calls to automatize different tasks.
+    *Wazuh API* has received multiple additions that allow users to make different API calls to perform Wazuh tasks more easily.
 
         * Now, the *Wazuh API* can make calls to edit the Wazuh configuration files as ``ossec.conf`` and to edit rules lists and decoders files.
 
-            This, results in a place where all the configuration is done, avoiding bouncing between files to change a single word.
-    
+            This, in combination with the Kibana app, results in a place where all the configuration is done, avoiding bouncing between files to change a single word, and making a more centralized and easy configuration of Wazuh.
+
         * Also, added calls to restart manager nodes in the cluster, to get CDB lists, and even get configuration assessment policies and checks.
 
-            Examples of this are:
+            Examples of these improvements are:
 
                 Making calls to *get CDB lists*:
 
@@ -169,4 +170,3 @@ Wazuh API
                     # curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"
 
         * Fixed documentation regarding *DELETE /agents* API call and *older_than* default value.
-
