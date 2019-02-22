@@ -42,11 +42,11 @@ Additions
                     :width: 100%
 
         * Added support in **Syscollector** for network and open ports inventory on Windows XP.
-            
+
             Now, *Syscollector* supports ``<network>`` and ``<ports>`` on legacy *Windows XP* and *Windows Server 2003*.
 
-        * **Syscollector** data is now decoded into dynamic fields, so we can define rules based on events from `Syscollector`:
-            
+        * `**Syscollector**<https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/wodle-syscollector.html?highlight=syscollector>`_ data is now decoded into dynamic fields, so we can define rules based on events from *Syscollector*:
+
             Using ``syscollector`` as the value in ``<decoded_as>`` field on a decoder will result in Kibana showing alerts as ``syscollector`` fields *(data.type.value)*
 
                 .. thumbnail:: ../images/release-notes/3.9.0/syscollector.png
@@ -55,48 +55,53 @@ Additions
                     :width: 70%
 
         * New option in *File Integrity Monitoring* to enable the *health check* for ``<whodata>``.
-            
+
             .. code-block:: bash
-                
+
                 # /var/ossec/etc/ossec.conf
-                
+
                 <syscheck>
                     <whodata>
                         <startup_healthcheck>yes</startup_healthcheck>
                     </whodata>
                 </syscheck>
 
-        * Added extra information in the agents' disconnected and removed alerts to show which agent is changing.
+        * Added extra information in the agents' alerts to show IDs of each agent when they disconnect or are removed.
+
+            This allows to keep a track on the deleted and disconnected agents in the alerts, as before when an agent disconnected from the manager, in the logs was not showed its ID. 
 
 Improvements
 ^^^^^^^^^^^^
 
-        * **ossec-remoted** daemon now shows an error message when it quits for not being properly configured:
-            
+        * `ossec-remoted <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-remoted.html>`_ daemon now shows an error message when it quits for not being properly configured:
+
             .. code-block:: bash
-            
+
                 "Remoted connection is not configured... Exiting."
 
-        * Now **agent_auth** daemon warns users when it receives extra input arguments.
-            
+        * Now `agent_auth<https://documentation.wazuh.com/current/user-manual/reference/tools/agent-auth.html>`_ daemon warns users when it receives extra input arguments.
+
             .. code-block:: bash
 
                 $ ./agent-auth -m 192.168.1.1 -i 192.168.1.2
                 2019/02/05 07:00:08 agent-auth: WARNING: Extra arguments detected. They will be ignored.
                 2019/02/05 07:00:08 agent-auth: INFO: Started (pid: 7252).
 
-        * The **who-data** option works from now on *Fedora 29* because both have added *Audit 3.0 (beta)* support. 
+        * The `who-data<https://documentation.wazuh.com/current/user-manual/capabilities/auditing-whodata/index.html>`_ option works from now on *Fedora 29* because Fedora 29
+        
+        * As *Fedora 29 version* has added support for *Audit 3.0 (beta)*, it can be configured to use the `who-data<https://documentation.wazuh.com/current/user-manual/capabilities/auditing-whodata/index.html>`_ option.
 
+        * Now **Syscollector** gets *bonded* interfaces' MAC:
 
-        * Now **Syscollector** gets *bonded* interfaces' MAC.
+            This change adds the possibility of getting the real MAC address of each interface in `/sys/class/net/address` instead of getting it from interfaces with *AF_PACKET* sockets, avoiding this way problems with bonded interfaces that share the same MAC address at software level.
 
         * From this version on, the *manager* will know the primary IP of the agents that will be updated every time an agent sends a keep alive.
 
             The manager will store that IP in the global database and it will be printed in the Wazuh app. With this change, although an agent is registered with **any** as IP, the manager will know the agent's current IP. 
 
-        * Added support to AWS organizations in `CloudTrail` service:
+        * Added support to AWS organizations in *CloudTrail* service:
 
-            With this enhancement, It is possible getting logs for organizations by adding ``<aws_organization_id>ORGANIZATION</aws_organization_id>`` in the wodle configuration:
+            With this enhancement, it is possible getting logs for created organizations by adding ``<aws_organization_id>ORGANIZATION</aws_organization_id>`` in the wodle configuration, which will create a new directory in the path where save the *accounts id*.
 
             .. code-block:: xml
 
@@ -113,13 +118,15 @@ Improvements
                     <skip_on_error>no</skip_on_error>
                 </wodle>
 
-        * Optimized network performance in *Remoted* by introducing a network buffer to cache incomplete messages from agents.
-            
-            With this method, *Remoted* does not wait for complete messages when it's not necessary, improving the performance of the network greatly.
+        * Optimized network performance in *ossec-remoted* daemon by introducing a network buffer to cache incomplete messages from agents.
+
+            With this method, *ossec-remoted* daemon does not wait for complete messages when it's not necessary, improving the performance of the network greatly.
 
         * Labels starting with ``_`` are reserved now for internal use only (this was added to allow the manager to know the agent's IP upper mentioned).
 
-        * Improved cluster performance: Embedded *Python 3* and updated to *asyncio*.
+        * Improved cluster performance: Embedded *Python 3* and updated to *asyncio library*:
+
+            Changed the internal cluster structure to adapt it to the 3.7.2 version of Python, which along with the *asyncio library* (`Asynchronous I/O <https://docs.python.org/3/library/asyncio.html>`_) has improved the cluster speed greatly. 
 
 Fixes
 ^^^^^
@@ -140,9 +147,9 @@ Wazuh Ruleset improvements
 
             The anomalies on event **ID 1** of *Sysmon* can be detected now thanks to these new rules.
 
-        * Added *Configuration Assessment* module files:
+        * Added *Security Configuration Assessment* module files:
 
-            The team has added a full directories structure with many new rules for the *Configuration Assessment* module and many other features related to this module as decoders, new policy files in YAML, etc. 
+            The team has added a full directories structure with many new rules for the *SCA* module and many other features related to this module as decoders, new policy files in YAML, etc. 
 
 Wazuh API
 ---------
@@ -153,7 +160,7 @@ Wazuh API
 
             This, in combination with the Kibana app, results in a place where all the configuration is done, avoiding bouncing between files to change a single word, and making a more centralized and easy configuration of Wazuh.
 
-        * Also, added calls to restart manager nodes in the cluster, to get CDB lists, and even get configuration assessment policies and checks.
+        * Also, added calls to restart manager nodes in the cluster and to get CDB lists.
 
             Examples of these improvements are:
 
@@ -161,12 +168,16 @@ Wazuh API
 
                 .. code-block:: bash
 
-                    # curl -u foo:bar -k -X GET "CDB list address"
+                    # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/lists"
 
                 Making calls to *restart* manager nodes in the cluster and *validate* configuration:
 
                 .. code-block:: bash
 
-                    # curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"
+                    # curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart"
 
         * Fixed documentation regarding *DELETE /agents* API call and *older_than* default value.
+
+        * Added API calls to get *SCA* policies and checks.
+
+        * API has migrated to *Python 3.7*.
