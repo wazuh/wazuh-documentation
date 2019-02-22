@@ -5,7 +5,7 @@
 3.9.0 Release Notes
 ===================
 
-In this section, we're listing the starred improvements and fixes in Wazuh 3.9.0. A complete list of changes is provided in the `changelog <https://github.com/wazuh/wazuh/blob/v3.9.0/CHANGELOG.md>`_.
+In this section, we're listing the starred improvements and fixes in Wazuh 3.9.0. A complete list of changes is provided in the `changelog <https://github.com/wazuh/wazuh/blob/3.9/CHANGELOG.md>`_.
 
 Wazuh Core improvements
 ------------------------
