@@ -440,6 +440,10 @@ main li.toctree-l1 a {
   display: inline-block;
 }
 
+#welcome-to-wazuh #available-documentation {
+  display: none;
+}
+
 a.headerlink {
   min-height: 1.5rem;
   color: transparent;
@@ -1590,9 +1594,33 @@ blockquote pre {
   color: #ffffff;
 }
 
+#welcome-to-wazuh .screenshots.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 2em -4px 0 -4px;
+  max-width: 100%;
+}
+
+#welcome-to-wazuh a[data-lightbox] {
+  padding: 0 4px;
+}
+
+#welcome-to-wazuh a[data-lightbox] img {
+  margin-bottom: 6px;
+  max-width: 100%;
+}
+
+#page #welcome-to-wazuh .topic .topic-title {
+  font-family: 'Open Sans', sans-serif;
+}
+
 #welcome-to-wazuh .topic .topic-title:before {
 	display: inline-block;
-  font: normal normal normal 1em/1 'wazuh-icons';
+  font: normal normal normal 1.5rem/1 'wazuh-icons';
   width: 12px;
   color: #00a9e5;
   vertical-align: top;
@@ -2185,7 +2213,7 @@ div.highlight pre {
   }
 
   .stickynote p {
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
 
   .button-area-flex {
@@ -2416,6 +2444,12 @@ div.highlight pre {
       h3,
       #page .topic .topic-title {
         font-size: 26px;
+      }
+
+      #page #welcome-to-wazuh .topic .topic-title {
+        font-size: 18px;
+        color: #333333;
+        vertical-align: middle;
       }
 
       h4 {
@@ -2907,6 +2941,33 @@ div.highlight pre {
 }
 
 @media (min-width: 992px){
+      #welcome-to-wazuh .topic p {
+        font-size: 14px;
+      }
+
+      #welcome-to-wazuh .topic {
+        padding-right: 15px;
+        width: 50%;
+        display: block;
+        float: left;
+        margin-bottom: 1em;
+      }
+
+      #welcome-to-wazuh .topic:nth-of-type(even) {
+        padding-left: 15px;
+        padding-right: 0;
+      }
+
+      #welcome-to-wazuh > p:nth-of-type(2) {
+        clear: both;
+        display: block;
+        float: none;
+      }
+
+      #welcome-to-wazuh .topic .topic-title:before {
+        width: 27px
+      }
+
       .search-page .results-wrapper .no-results p {
         min-height: 85px;
         margin-bottom: 0;
@@ -3028,6 +3089,21 @@ div.highlight pre {
 }
 
 @media (min-width: 1200px) {
+
+          #welcome-to-wazuh .topic,
+          #welcome-to-wazuh .topic:nth-of-type(even) {
+            padding-left: 50px;
+            position: relative;
+          }
+
+          #welcome-to-wazuh .topic .topic-title:before {
+            font-size: 2.5rem;
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 50px;
+          }
+
           span.long-text-btn {
             display: inline-block;
           }

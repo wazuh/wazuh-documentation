@@ -32,38 +32,37 @@ Wazuh provides an updated log analysis ruleset and a RESTful API that allows you
 
 Wazuh also includes a rich web application (fully integrated as a Kibana app) for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
 
-Example screenshots
--------------------
 
 .. |EXTENSIONS| thumbnail:: images/kibana-app/showcase/extensions.png
    :title: App extensions
    :align: center
-   :width: 100%
+   :class: col-12 col-sm-6 col-md-4
 .. |AGENT_OVERVIEW| thumbnail:: images/kibana-app/showcase/agents-general.png
    :title: Agent overview
    :align: center
-   :width: 100%
+   :class: col-12 col-sm-6 col-md-4
 .. |DISCOVER_ALERTS| thumbnail:: images/kibana-app/showcase/discover.png
    :title: Discover alerts
    :align: center
-   :width: 100%
+   :class: col-12 col-sm-6 col-md-4
 .. |MANAGER_RULESET| thumbnail:: images/kibana-app/showcase/ruleset.png
    :title: Log analysis rules
    :align: center
-   :width: 100%
+   :class: col-12 col-sm-6 col-md-4
 .. |OVERVIEW_FIM| thumbnail:: images/kibana-app/showcase/overview-fim.png
    :title: Overview file integrity monitoring
    :align: center
-   :width: 100%
+   :class: col-12 col-sm-6 col-md-4
 .. |OVERVIEW_GENERAL| thumbnail:: images/kibana-app/showcase/overview-general.png
    :title: Overview alerts
    :align: center
-   :width: 100%
+   :class: col-12 col-sm-6 col-md-4
 
-==================  ==================  ==================
-|OVERVIEW_GENERAL|  |OVERVIEW_FIM|      |MANAGER_RULESET|
-|EXTENSIONS|        |AGENT_OVERVIEW|    |DISCOVER_ALERTS|
-==================  ==================  ==================
+.. container:: screenshots
+
+  |OVERVIEW_GENERAL| |OVERVIEW_FIM| |MANAGER_RULESET|
+  |EXTENSIONS| |AGENT_OVERVIEW| |DISCOVER_ALERTS|
+
 
 Available documentation
 -----------------------
@@ -86,5 +85,3 @@ Available documentation
    installing-splunk/index
    migrating-from-ossec/index
    release-notes/index
-
-.. note:: If you want to contribute to this documentation or our project please head over to our `Github repositories <https://github.com/wazuh>`_. You can also join our `users mailing list <https://groups.google.com/d/forum/wazuh>`_ to ask questions and participate in discussions by sending an email to ``wazuh+subscribe@googlegroups.com``.
