@@ -5,7 +5,7 @@
 3.9.0 Release Notes
 ===================
 
-In this section, we're listing the starred improvements and fixes in Wazuh 3.9.0. A complete list of changes is provided in the `change log <https://github.com/wazuh/wazuh/blob/v3.9.0/CHANGELOG.md>`_.
+In this section, we're listing the starred improvements and fixes in Wazuh 3.9.0. A complete list of changes is provided in the `changelog <https://github.com/wazuh/wazuh/blob/v3.9.0/CHANGELOG.md>`_.
 
 Wazuh Core improvements
 ------------------------
@@ -68,7 +68,7 @@ Additions
 
         * Added extra information in the agents' alerts to show IDs of each agent when they disconnect or are removed.
 
-            This allows to keep a track on the deleted and disconnected agents in the alerts, as before when an agent disconnected from the manager, in the logs was not showed its ID. 
+            This allows keeping a track on the deleted and disconnected agents in the alerts, as before when an agent disconnected from the manager, in the logs was not showed its ID. 
 
 Improvements
 ^^^^^^^^^^^^
@@ -86,14 +86,12 @@ Improvements
                 $ ./agent-auth -m 192.168.1.1 -i 192.168.1.2
                 2019/02/05 07:00:08 agent-auth: WARNING: Extra arguments detected. They will be ignored.
                 2019/02/05 07:00:08 agent-auth: INFO: Started (pid: 7252).
-
-        * The `who-data<https://documentation.wazuh.com/current/user-manual/capabilities/auditing-whodata/index.html>`_ option works from now on *Fedora 29* because Fedora 29
         
         * As *Fedora 29 version* has added support for *Audit 3.0 (beta)*, it can be configured to use the `who-data<https://documentation.wazuh.com/current/user-manual/capabilities/auditing-whodata/index.html>`_ option.
 
         * Now **Syscollector** gets *bonded* interfaces' MAC:
 
-            This change adds the possibility of getting the real MAC address of each interface in `/sys/class/net/address` instead of getting it from interfaces with *AF_PACKET* sockets, avoiding this way problems with bonded interfaces that share the same MAC address at software level.
+            This change adds the possibility of getting the real MAC address of each interface in `/sys/class/net/address` instead of getting it from interfaces with *AF_PACKET* sockets, avoiding this way problems with bonded interfaces that share the same MAC address at the software level.
 
         * From this version on, the *manager* will know the primary IP of the agents that will be updated every time an agent sends a keep alive.
 
