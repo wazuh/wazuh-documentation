@@ -2650,6 +2650,13 @@ div.highlight pre {
         max-width: 100%;
       }
 
+      .menu-subfooter-social-links{
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+        justify-content: flex-end;
+      }
+
       #main-footer {
         padding-top: 20px;
         padding-bottom: 20px;
