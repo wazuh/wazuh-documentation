@@ -129,19 +129,19 @@ Improvements
 Fixes
 ^^^^^
 
-        - Fixed error in Syscollector for Windows older than Vista when gathering the hardware inventory.
-        - Fixed an error in the OSquery configuration validation.
-        - Wazuh manager starts regardless of the contents of ``local_decoder.xml``.
-        - Delete empty fields from Windows Eventchannel alerts.
-        - Fix duplicate field names at some events for Windows eventchannel. 
+        - Fixed error in Syscollector for Windows older than Vista when gathering the hardware inventory. The ``syscollector_win_ext.dll`` library failed to load when tried to obtain hardware information.
+        - Fixed an error in the OSquery configuration validation. The ``osqueryd`` daemon started no matter the string it received, whether it was yes, no or anything else.
+        - Wazuh manager starts regardless of the contents of ``local_decoder.xml``. The manager failed to start when ``local_decoder.xml`` was empty.
+        - Delete empty fields from Windows Eventchannel alerts. It returned some empty fields at the ``EvenData`` block. It was better not to show those specific fields.
+        - Fix duplicate field names at some events for Windows eventchannel.  Now events containing more than one field called Data are modified to join those fields into one if they have relevant information.
         - Fixed memory leak and crash in *Vulnerability Detector*.
         - Prevent *Integrator, Syslog Client and Mail forwarded* from getting stuck while reading ``alerts.json``.
         - Fix out-of-memory error in *Remoted* when upgrading an agent with a big data chunk.
-        - Re-registered agent are reassigned to correct groups when the multigroup is empty.
-        - Let *Remoted* wait for download module availability.
+        - Re-registered agent are reassigned to correct groups when the multigroup is empty. When an agent was removed from a multigroup and said multigroup was thus empty, registering again the same agent did not assign it to its previous multigroup.
+        - Let *Remoted* wait for download module availability. This will prevent timing issues with external shared files download.
         - Prevent `Analysisd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-analysisd.html?highlight=analysisd>`_ from crashing when receiving an invalid *Syscollector* event.
-        - Fix a bug in the database synchronization module that left broken references of removed agents to groups.
-        - Fixed defects reported by *Cppcheck*.
+        - Fix a bug in the database synchronization module that left broken references of removed agents to groups. This fixes the count of agents belonging to a group, preventing the Framework from counting removed agents.
+        - Fixed defects reported by *Cppcheck* as bugs caused by grammatic typos, wrong use of variables, etc. 
         - Fixed a bug that could make an Agent running on Windows XP close unexpectedly while receiving a WPK file.
         - Fixed a memory hazard in *Analysisd* on log pre-decoding for short logs (less than 5 bytes).
 
