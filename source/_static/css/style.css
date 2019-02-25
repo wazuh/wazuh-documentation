@@ -56,6 +56,10 @@ th {
   white-space: nowrap;
 }
 
+#main-content {
+	background-color: #ffffff;
+}
+
 .social-bar,
 .our-bar {
   -webkit-user-select: none;
@@ -1121,6 +1125,10 @@ footer .contact-info .fa-paper-plane-o {
   margin-bottom: 0;
   list-style: none;
   display: inline-block;
+}
+
+.globaltoc > ul {
+	bottom: 0;
 }
 
 .widget_text .textwidget {
@@ -3259,14 +3267,8 @@ div.highlight pre {
       }
 
       nav.full-toctree-nav {
-        /* position: fixed; */
-        top: 15px;
-        bottom: 0;
-        left: 0;
         background-color: #fff;
-        z-index: 2;
-        overflow: hidden;
-        height: 100%;
+				min-height: 100vh;
       }
 
       nav.full-toctree-nav.reached-top {
@@ -3274,20 +3276,25 @@ div.highlight pre {
       }
 
       .side-scroll {
-        position: relative;
-        height: calc(100% - 50px);
-        margin-right: -50px;
+				position: -webkit-sticky;
+				position: sticky;
+				top: 50px;
+				overflow: auto;
+				max-height: calc(100vh - 55px);
       }
 
       #globaltoc {
         height: 100%;
-        overflow-y: scroll;
         width: 100%;
-        padding-right: 33px;
+        padding-right: 0;
       }
 
       #search-lg {
         z-index: 1;
+        background-color: #fff;
+				position: -webkit-sticky;
+				position: sticky;
+				top: 0;
       }
 }
 

@@ -17,9 +17,6 @@ $(function(){
 			gTocSpaceBottom = 15,
       gTocSpaceTop = $('#search-lg').height();
 
-  //checkTocScrollTop($(document).scrollTop(), mainTop);
-	//checkTocScrollBottom($(document).scrollTop()+windowHeight, mainBottom);
-
 	// Finds current page section in globaltoc
 	$('.globaltoc .toctree-l2.current a').each(function(e){
 		if (!$(this).siblings('ul').length){
@@ -104,25 +101,9 @@ $(function(){
     return false;
   });
 
-  $(window).on('wheel', function(e){
- //console.log(e.target);
-
-  // var $other = $divs.not(this).off('scroll');
-
-  // other = $other.get(0);
-  // console.log(other);
-  // var percentage = this.scrollTop / (this.scrollHeight - this.offsetHeight);
-  // other.scrollTop = percentage * (other.scrollHeight - other.offsetHeight);
-  // setTimeout( function(){ $other.on('scroll', sync ); },10);
- });
-
-/*
- $(window).on('scroll', function(e){
+  $(window).on('scroll', function(e){
    //console.log(e.currentTarget);
    var scrollYTopPosition = e.currentTarget.pageYOffset;
-   var scrollYBottomPosition = scrollYTopPosition+$(window).height();
-   checkTocScrollTop(scrollYTopPosition, mainTop);
-   checkTocScrollBottom(scrollYBottomPosition, mainBottom);
 
    // Back to top button
    if ( scrollYTopPosition >= $(window).height()*.50 ){
@@ -132,28 +113,4 @@ $(function(){
      $('#btn-scroll').fadeOut('slow');
    }
  });
-
- $(window).on('resize', function(e) {
-   // Recalculate values and gTocScroll
- });
-
- function checkTocScrollTop(scrollYTopPosition, containerTop){
-   if ( scrollYTopPosition <= containerTop ){
-     tocWrapperElement.css('top', containerTop-scrollYTopPosition);
-     //tocWrapperElement.css('position', 'relative' );
-   } else {
-     // when header is scrolled up and disappear from the window
-     tocWrapperElement.css('top', 0 );
-     //tocWrapperElement.css('position', 'fixed' );
-   }
- }
-
- function checkTocScrollBottom(scrollYBottomPosition, containerBottom){
-   //tocWrapperElement.css('bottom', scrollYBottomPosition-containerBottom+gTocSpaceBottom );
-	 var topPos = parseInt(tocWrapperElement.css('top').replace('px',''));
-   if ( scrollYBottomPosition > (containerBottom+gTocSpaceBottom)) {
-   tocWrapperElement.css('height', 'calc(100% - '+ (scrollYBottomPosition-containerBottom+gTocSpaceBottom+topPos) +'px)' );
-   }
- }
- */
 });
