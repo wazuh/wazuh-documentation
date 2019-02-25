@@ -2650,7 +2650,7 @@ div.highlight pre {
         max-width: 100%;
       }
 
-      .menu-subfooter-social-links{
+      footer #menu-subfooter-social-links{
         display: -webkit-flex;
         display: -ms-flex;
         display: flex;
