@@ -124,9 +124,13 @@ a.btn-wazuh:active {
   max-width: 100%;
 }
 
-.header{
+.index .header {
   background: url('../img/wazuh_bg_head.png'), no-repeat center center;
   background-size: cover;
+}
+
+.header {
+  background-color: #00a9e5;
   color: #fff;
 }
 
@@ -3172,7 +3176,7 @@ div.highlight pre {
       }
 
       nav.full-toctree-nav {
-        position: fixed;
+        /* position: fixed; */
         top: 0;
         bottom: 0;
         left: 0;
@@ -3201,7 +3205,6 @@ div.highlight pre {
 
       #search-lg {
         z-index: 1;
-        background-color: #fff;
       }
 }
 
