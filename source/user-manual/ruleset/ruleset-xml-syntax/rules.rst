@@ -130,7 +130,7 @@ Example:
     </rule>
 
 
-If the event cathed contains the *Queue flood!* string, the rule will generate a report of that log:
+If the event catched contains the *Queue flood!* string, the rule will generate a report of that log:
 
   .. code-block:: bash
 
@@ -740,9 +740,9 @@ Example:
 BAD_WORDS
 ^^^^^^^^^
 
-<var name="BAD_WORDS">error| warning |failure</var>
+<var name="BAD_WORDS">error|warning|failure</var>
 
-``BAD_WORDS`` is a very used use case of ``<var>`` option.
+``BAD_WORDS`` is a very used case of ``<var>`` option.
 
 Is used to include many words in the same variable. Later, this variable can be matched into the decoders to check if any of those words are in a caught event.
 
