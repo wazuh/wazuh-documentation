@@ -42,16 +42,18 @@
 
   </div>
 
+  {% if pagename == 'index' %}
   <div class="main-head">
     <div class="container">
       <div class="header-title">Wazuh Documentation</div>
       <p>Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.</p>
       <div class="button-area-flex">
-        <a class="btn-wazuh btn-white" href="https://wazuh.com/start/">Get Wazuh</a>
-        <a class="btn-wazuh btn-orange" href="https://wazuh.com/">Get Started</a>
+        <a class="btn-wazuh btn-white" href={{ theme_wazuh_web_url + '/start/' }}>Get Wazuh</a>
+        <a class="btn-wazuh btn-orange" href={{ theme_wazuh_web_url }}>Get Started</a>
       </div>
     </div>
   </div>
+  {% endif %}
 
 
 </header>

@@ -112,15 +112,15 @@
     <i class="fa fa-chevron-circle-up" aria-hidden="true"></i>
   </a>
 
+  {% if pagename == 'index' %}
+  <div id="page" class="index">
+  {% else %}
   <div id="page">
+  {% endif %}
     {% include "header.html" %} {%- block header %}{% endblock header %}
-
     <section  class="container-fluid central-page-area">
       <div class="row justify-content-end">
         <nav class="col-lg-3 full-toctree-nav">
-          <div id="search-lg" class="title-bar-right col-12">
-            {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
-          </div> <!-- // #search-lg -->
           <div class="side-scroll">
             <div class="globaltoc" role="navigation" aria-label="main navigation" id="globaltoc">
               {% block menu %}
