@@ -47,7 +47,9 @@ Set name and type of decoder to *ossec*:
 
   .. code-block:: xml
 
-    <decoder name="ossec" type ="ossec">
+    <decoder name="ossec">
+      <type>ossec</type>
+      <prematch>^ossec: </prematch>
       <description>Ossec based decoder</description>
     </decoder>
 

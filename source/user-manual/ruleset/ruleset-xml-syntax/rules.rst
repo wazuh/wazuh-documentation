@@ -93,7 +93,7 @@ Example:
   .. code-block:: xml
 
     <!--- Rule definition -->
-    <rule id="100000" maxsize="300" level="0">
+    <rule id="100000" level="1">
       <description>Example rule to see how options are assigned to a rule.</description>
       <match>Example rule</match>
     </rule>
@@ -104,8 +104,8 @@ Example:
 
       **Phase 3: Completed filtering (rules)
       Rule id: '100000'
-      Level: '0'
-      Description: 'Example rule'
+      Level: '1'
+      Description: 'Example rule to see how options are assigned to a rule.'
 
 In this example, the rule is assigned with the ID 100001, a maximum size of each event of 300 characters and the rule level in 3.
 
@@ -170,9 +170,8 @@ Example:
 
      <rule id="100051" level="3">
         <regex>(\d+.\d+.\d+.\d+)</regex>
-        <description>Matches any valid IP</description>
+        <description>Matches any IP</description>
      </rule>
-
 
 
 decoded_as
@@ -191,16 +190,16 @@ category
 
 Selects in which rule decoding category the rule should be included: ids, syslog, firewall, web-log, squid or windows.
 
-+--------------------+--------------+
-| **Default Value**  | n/a          |
-+--------------------+--------------+
-| **Allowed values** | Any category |
-+--------------------+--------------+
++--------------------+--------------------+
+| **Default Value**  | n/a                |
++--------------------+--------------------+
+| **Allowed values** | Any valid category |
++--------------------+--------------------+
 
 field
 ^^^^^
 
-Any ``sregex`` to be compared to a field extracted by the decoder.
+Any `sregex <regex.html#os-match-or-sregex-syntax>`_ to be compared to a field extracted by the decoder.
 
 +----------+-----------------------------------------------------------+
 | **name** | Specifies the name of the field extracted by the decoder. |
@@ -295,7 +294,7 @@ Week day that the event was generated.
 +--------------------+-------------------------------------+
 
 id
-^^
+^^^
 
 Any ID (decoded as the ID).
 
@@ -523,13 +522,13 @@ Example:
         <same_dst_port />
       </rule>
 
-  That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using same ``port``.
+  That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using the same ``port``.
 
 description
 ^^^^^^^^^^^
 
 Used to add a description to a rule so it makes more clear and readable its funcionality.
-This option apports more readable information for the users, so is usually added to the rules.
+This option apports more readable information for the users so is usually added to the rules.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
@@ -556,6 +555,17 @@ Examples:
       ...
       <description> File missing. Root acces unrestricted. </description>
     </rule>
+
+  A rule description will be shown when decoded as:
+  
+  .. code-block:: bash
+
+        **Phase 3: Completed filtering (rules)
+        Rule id: '100009'
+        Level: '1'
+        Description: 'Rule to match IPs'
+        ...
+      
 
 Since Wazuh v3.3.0 it is possible to include any decoded field (static or dynamic) to the description message.
 
@@ -730,7 +740,7 @@ Example:
 BAD_WORDS
 ^^^^^^^^^
 
-<var name="BAD_WORDS">error|warning|failure</var>
+<var name="BAD_WORDS">error| warning |failure</var>
 
 ``BAD_WORDS`` is a very used use case of ``<var>`` option.
 
@@ -740,7 +750,7 @@ Example:
 
   .. code-block:: xml
 
-    <var name="BAD_WORDS">error|warning|failure</var>
+    <var name="BAD_WORDS">error| warning |failure</var>
 
     <group name="syslog,errors,">
       <rule id="XXXX" level="2">
