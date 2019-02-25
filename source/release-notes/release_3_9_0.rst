@@ -70,6 +70,8 @@ Additions
 
             This allows keeping a track on the deleted and disconnected agents in the alerts, as before when an agent disconnected from the manager, in the logs was not showed its ID. 
 
+        * Added support for hot added symbolic links in Whodata, that was not prepared to handle the event that created a symbolic link.
+
 Improvements
 ^^^^^^^^^^^^
 
@@ -126,6 +128,7 @@ Improvements
 
             Changed the internal cluster structure to adapt it to the 3.7.2 version of Python, which along with the *asyncio library* (`Asynchronous I/O <https://docs.python.org/3/library/asyncio.html>`_) has improved the cluster speed greatly. 
 
+        * Some improvements have been made in the *vulnerability-detector* module. Now it checks that the alerts severity has been unified, checks the scan messages are not showed when the database is empty, etc.
 Fixes
 ^^^^^
 
