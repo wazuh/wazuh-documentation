@@ -131,7 +131,7 @@ It defines the name of the program with which the decoder is associated.
 
 Example:
 
-Define that the decoder is related with the ``syslogd`` process:
+Define that the decoder is related with the ``userdel`` process:
 
   .. code-block:: xml
 
