@@ -140,7 +140,12 @@ a.btn-wazuh:active {
 }
 
 .header .menuweb-bar{
-  margin-top: 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .header .menuweb-bar #menu-header-menuweb{
@@ -154,13 +159,27 @@ a.btn-wazuh:active {
   width: 300px;
 }
 
-.header .social-bar{
-  min-height: 40px;
-  margin-top: 1em;
+.header .social-bar {
+  min-height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.header .social-bar .nav > li > a, .menu-sub .submenu a.nav-link {
+.header .social-bar .nav > li > a {
   padding: 5px 7px;
+  color: #fff;
+}
+
+.menu-sub .submenu a.nav-link {
+  padding: 5px 7px;
+  color: #333;
+}
+
+.index .menu-sub .submenu a.nav-link {
   color: #fff;
 }
 
@@ -272,8 +291,12 @@ header .social-bar .menu-item a {
   padding-right: 0 !important;
 }
 
-.menu-sub{
+.index .menu-sub {
   background: #00a9e5;
+}
+
+.menu-sub {
+  background: #f4f4f4;
 }
 
 .menu-sub #search-lg{
@@ -293,7 +316,7 @@ header .social-bar .menu-item a {
           align-items: center;
 }
 
-.menu-sub .version{
+.menu-sub .version-zone {
   display: -ms-flex;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -302,8 +325,9 @@ header .social-bar .menu-item a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 footer {
@@ -480,7 +504,7 @@ ul li.toctree-l1 a.current.reference.internal:after {
 }
 
 .globaltoc li.toctree-l1.current {
-  background-color: hsl(0, 0%, 96%);
+  background-color: #f4f4f4;
 }
 
 .globaltoc li.toctree-l1 a.current.leaf::before,
@@ -652,7 +676,7 @@ footer a:active,
 
 .searchform .search-input-wrapper {
   white-space: nowrap;
-  border-bottom: 1px solid #ffffff;
+  border-bottom: 1px solid #00a9e5;
   margin-left: 30px;
   margin-right: 40px;
   display: -webkit-box;
@@ -665,6 +689,10 @@ footer a:active,
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
   width: 100%;
+}
+
+.index .searchform .search-input-wrapper {
+  border-color: #ffffff;
 }
 
 .searchform .search-filter {
@@ -703,21 +731,38 @@ footer a:active,
   position: relative;
 }
 
-.form-control:focus{
+.index .form-control:focus{
   color: #ffffff;
   background: #00a9e5;
 }
 
-.form-control::-webkit-input-placeholder{
+.index .form-control::-webkit-input-placeholder{
   color: #ffffff;
+}
+
+.index .form-control::-ms-input-placeholder{
+  color: #ffffff;
+}
+
+.index .form-control::placeholder{
+  color: #ffffff;
+}
+
+.form-control:focus{
+  color: #00a9e5;
+  background: transparent;
+}
+
+.form-control::-webkit-input-placeholder{
+  color: #00a9e5;
 }
 
 .form-control::-ms-input-placeholder{
-  color: #ffffff;
+  color: #00a9e5;
 }
 
 .form-control::placeholder{
-  color: #ffffff;
+  color: #00a9e5;
 }
 
 .flex-container .widget_search {
@@ -733,8 +778,14 @@ footer a:active,
   width: 100%;
 }
 
-.form-control{
+.index #search-form .form-control {
   background: #00a9e5;
+  color: #ffffff;
+}
+
+#search-form .form-control {
+  background: transparent;
+  color: #00a9e5;
 }
 
 .widget_search .expanded {
@@ -1323,6 +1374,11 @@ select#select-version {
   position: relative;
   font-size: 0.85rem;
   border-radius: 4px;
+  background: transparent
+}
+
+.index select#select-version {
+  background: #ffffff;
 }
 
 .version:after {
@@ -2265,9 +2321,14 @@ ul#breadcrumbs a {
   text-align: right;
   font-size: 0.87rem;
   margin-left: 15px;
+  padding: 0 10px;
 }
 
 .edit-repo a {
+  color: #00a9e5;
+}
+
+.index .edit-repo a {
   color: #ffffff;
 }
 
@@ -3066,6 +3127,17 @@ div.highlight pre {
 }
 
 @media (min-width: 992px){
+
+      #page:not(.index) .search_main #search-form .btn-search {
+        background-color: #00a9e5;
+        color: #ffffff;
+      }
+
+      #page.index .search_main #search-form .btn-search {
+        background-color: #ffffff;
+        color: #00a9e5;
+      }
+
       #welcome-to-wazuh .topic p {
         font-size: 14px;
       }
@@ -3181,7 +3253,7 @@ div.highlight pre {
 
       nav.full-toctree-nav {
         /* position: fixed; */
-        top: 0;
+        top: 15px;
         bottom: 0;
         left: 0;
         background-color: #fff;
@@ -3213,6 +3285,9 @@ div.highlight pre {
 }
 
 @media (min-width: 1200px) {
+          #page:not(.index) header>.container {
+            max-width: 100%;
+          }
 
           #welcome-to-wazuh .topic,
           #welcome-to-wazuh .topic:nth-of-type(even) {

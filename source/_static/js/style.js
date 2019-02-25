@@ -17,8 +17,8 @@ $(function(){
 			gTocSpaceBottom = 15,
       gTocSpaceTop = $('#search-lg').height();
 
-  checkTocScrollTop($(document).scrollTop(), mainTop);
-	checkTocScrollBottom($(document).scrollTop()+windowHeight, mainBottom);
+  //checkTocScrollTop($(document).scrollTop(), mainTop);
+	//checkTocScrollBottom($(document).scrollTop()+windowHeight, mainBottom);
 
 	// Finds current page section in globaltoc
 	$('.globaltoc .toctree-l2.current a').each(function(e){
