@@ -10,6 +10,6 @@ Wazuh Cloud
 .. toctree::
    :maxdepth: 1
 
-   getting-started
+   cloud-getting-started
    faq
    support
