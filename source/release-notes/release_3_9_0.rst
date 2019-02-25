@@ -45,7 +45,7 @@ Additions
 
             Now, *Syscollector* supports ``<network>`` and ``<ports>`` on legacy *Windows XP* and *Windows Server 2003*.
 
-        * `**Syscollector**<https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/wodle-syscollector.html?highlight=syscollector>`_ data is now decoded into dynamic fields, so we can define rules based on events from *Syscollector*:
+        * `Syscollector <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/wodle-syscollector.html?highlight=syscollector>`_ data is now decoded into dynamic fields, so we can define rules based on events from *Syscollector*:
 
             Using ``syscollector`` as the value in ``<decoded_as>`` field on a decoder will result in Kibana showing alerts as ``syscollector`` fields *(data.type.value)*
 
@@ -79,7 +79,7 @@ Improvements
 
                 "Remoted connection is not configured... Exiting."
 
-        * Now `agent_auth<https://documentation.wazuh.com/current/user-manual/reference/tools/agent-auth.html>`_ daemon warns users when it receives extra input arguments.
+        * Now `agent_auth <https://documentation.wazuh.com/current/user-manual/reference/tools/agent-auth.html>`_ daemon warns users when it receives extra input arguments.
 
             .. code-block:: bash
 
@@ -87,7 +87,7 @@ Improvements
                 2019/02/05 07:00:08 agent-auth: WARNING: Extra arguments detected. They will be ignored.
                 2019/02/05 07:00:08 agent-auth: INFO: Started (pid: 7252).
         
-        * As *Fedora 29 version* has added support for *Audit 3.0 (beta)*, it can be configured to use the `who-data<https://documentation.wazuh.com/current/user-manual/capabilities/auditing-whodata/index.html>`_ option.
+        * As *Fedora 29 version* has added support for *Audit 3.0 (beta)*, it can be configured to use the `who-data <https://documentation.wazuh.com/current/user-manual/capabilities/auditing-whodata/index.html>`_ option.
 
         * Now **Syscollector** gets *bonded* interfaces' MAC:
 
@@ -133,8 +133,17 @@ Fixes
         - Fixed an error in the OSquery configuration validation.
         - Wazuh manager starts regardless of the contents of ``local_decoder.xml``.
         - Delete empty fields from Windows Eventchannel alerts.
-        - Fixed memory leak and crash in Vulnerability Detector.
-        - ...
+        - Fix duplicate field names at some events for Windows eventchannel. 
+        - Fixed memory leak and crash in *Vulnerability Detector*.
+        - Prevent *Integrator, Syslog Client and Mail forwarded* from getting stuck while reading ``alerts.json``.
+        - Fix out-of-memory error in *Remoted* when upgrading an agent with a big data chunk.
+        - Re-registered agent are reassigned to correct groups when the multigroup is empty.
+        - Let *Remoted* wait for download module availability.
+        - Prevent `Analysisd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-analysisd.html?highlight=analysisd>`_ from crashing when receiving an invalid *Syscollector* event.
+        - Fix a bug in the database synchronization module that left broken references of removed agents to groups.
+        - Fixed defects reported by *Cppcheck*.
+        - Fixed a bug that could make an Agent running on Windows XP close unexpectedly while receiving a WPK file.
+        - Fixed a memory hazard in *Analysisd* on log pre-decoding for short logs (less than 5 bytes).
 
 Wazuh Ruleset improvements
 ---------------------------
