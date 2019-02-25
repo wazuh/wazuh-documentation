@@ -162,7 +162,7 @@ Request List
 	* GET /syscollector/:agent_id/ports  (`Get ports info of an agent`_)
 	* GET /syscollector/:agent_id/processes  (`Get processes info`_)
 
-Active_Response
+Active Response
 ----------------------------------------
 Command
 ++++++++++++++++++++++++++++++++++++++++
