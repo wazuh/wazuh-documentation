@@ -93,7 +93,7 @@ This filters alerts by rule group. For the VirusTotal integration, only rules fr
 +--------------------+---------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                       |
 +--------------------+---------------------------------------------------------------------------+
-| **Allowed values** | Any rule group is allowed. Multiple groups should be separated with comma |
+| **Allowed values** | Any rule group or comma-separated rule groups.                            |
 +--------------------+---------------------------------------------------------------------------+
 
 event_location
