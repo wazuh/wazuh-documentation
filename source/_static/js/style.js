@@ -17,8 +17,8 @@ $(function(){
 			gTocSpaceBottom = 15,
       gTocSpaceTop = $('#search-lg').height();
 
-  checkTocScrollTop($(document).scrollTop(), mainTop);
-	checkTocScrollBottom($(document).scrollTop()+windowHeight, mainBottom);
+  //checkTocScrollTop($(document).scrollTop(), mainTop);
+	//checkTocScrollBottom($(document).scrollTop()+windowHeight, mainBottom);
 
 	// Finds current page section in globaltoc
 	$('.globaltoc .toctree-l2.current a').each(function(e){
@@ -116,6 +116,7 @@ $(function(){
   // setTimeout( function(){ $other.on('scroll', sync ); },10);
  });
 
+/*
  $(window).on('scroll', function(e){
    //console.log(e.currentTarget);
    var scrollYTopPosition = e.currentTarget.pageYOffset;
@@ -123,7 +124,7 @@ $(function(){
    checkTocScrollTop(scrollYTopPosition, mainTop);
    checkTocScrollBottom(scrollYBottomPosition, mainBottom);
 
-   /* Back to top button */
+   // Back to top button
    if ( scrollYTopPosition >= $(window).height()*.50 ){
      $('#btn-scroll').fadeIn('slow');
    }
@@ -139,11 +140,11 @@ $(function(){
  function checkTocScrollTop(scrollYTopPosition, containerTop){
    if ( scrollYTopPosition <= containerTop ){
      tocWrapperElement.css('top', containerTop-scrollYTopPosition);
-     /*tocWrapperElement.css('position', 'relative' );*/
+     //tocWrapperElement.css('position', 'relative' );
    } else {
      // when header is scrolled up and disappear from the window
      tocWrapperElement.css('top', 0 );
-     /*tocWrapperElement.css('position', 'fixed' );*/
+     //tocWrapperElement.css('position', 'fixed' );
    }
  }
 
@@ -154,4 +155,5 @@ $(function(){
    tocWrapperElement.css('height', 'calc(100% - '+ (scrollYBottomPosition-containerBottom+gTocSpaceBottom+topPos) +'px)' );
    }
  }
+ */
 });
