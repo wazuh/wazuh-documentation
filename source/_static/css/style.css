@@ -2591,7 +2591,7 @@ div.highlight pre {
 
       #main-footer {
         padding-top: 20px;
-        padding-bottom: 5px;
+        padding-bottom: 20px;
       }
 
       .footer-title {
@@ -2986,11 +2986,15 @@ div.highlight pre {
         height: 0;
       }
 
+      .menu-subfooter-social-links{
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+        justify-content: flex-end;
+      }
+
       .copyright {
         text-align: left;
-        position: relative;
-        bottom: 60px;
-        height: 0;
         margin: 0;
       }
 
