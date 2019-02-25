@@ -160,6 +160,10 @@ Installing the Wazuh API
 
 .. _wazuh_server_rpm_filebeat:
 
+.. note::
+
+  From Fedora v22 to v25, it's required to install ``dkms`` package (``yum install dkms``).
+
 Installing Filebeat
 -------------------
 
@@ -191,7 +195,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # yum install filebeat-6.5.4
+    # yum install filebeat-6.6.0
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 

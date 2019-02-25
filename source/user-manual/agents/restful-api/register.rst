@@ -24,7 +24,18 @@ Two requests are needed to register an agent using the API:
     # curl -u foo:bar -X GET "http://localhost:55000/agents/001/key"
     {"error":0,"data":"MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="}
 
-**Step 3:** Copy the key to the agent.
+**Step 3:** Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
+
+  .. code-block:: xml
+
+    <client>
+      <server>
+        <address>MANAGER_IP</address>
+        ...
+      </server>
+    </client>
+
+**Step 4:** Copy the key to the agent.
 
 .. code-block:: console
 

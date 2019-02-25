@@ -43,6 +43,7 @@ Available options
 - `options`_
 - `check_diff`_
 - `group`_
+- `var`_
 
 rule
 ^^^^
@@ -498,3 +499,31 @@ They can be used by other rules by using if_group or if_matched_group, or by ale
 +--------------------+------------+
 | **Allowed values** | Any String |
 +--------------------+------------+
+
+var
+^^^
+
+Defines a variable that may be used in any place of the same file.
+
++----------------+------------------------+
+| Attribute      | Value                  |
++================+========================+
+| **name**       | Name for the variable. |
++----------------+------------------------+
+
+Example:
+
+.. code-block:: xml
+
+    <var name="joe_folder">/home/joe/</var>
+
+    <group name="local,">
+
+      <rule id="100001" level="5">
+        <if_sid>550</if_sid>
+        <field name="file">^$joe_folder</field>
+        <description>A Joe's file was modified.</description>
+        <group>ossec,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
+      </rule>
+
+    </group>
