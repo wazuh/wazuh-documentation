@@ -3,7 +3,11 @@
 Use case: Getting an alert when a check changes its result value
 ================================================================
 
-To configure the execution of the *configuration assessment* module with a policy file, it is necessary to set up the following section:
+ToDo:
+
+- Update the use case with the new rules, the new name of the module, and kibana screenshots.
+
+To configure the execution of the *SCA* module with a policy file, it is necessary to set up the following section:
 
 .. code-block:: none
 

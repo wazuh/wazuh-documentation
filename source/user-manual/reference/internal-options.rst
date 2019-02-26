@@ -24,7 +24,7 @@ Generally, this file is reserved for debugging issues and for troubleshooting. *
 - `Remoted`_
 - `Syscheck`_
 - `Rootcheck`_
-- `Configuration Assessment`_
+- `Security Configuration Assessment`_
 - `Wazuh`_
 - `Wazuh Database`_
 - `Wazuh Modules`_
@@ -231,7 +231,7 @@ Analysisd
 +                                                         +               +---------------------------------------------------------------------+
 |                                                         |               | Any integer between 0 and 32.                                       |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|**analysisd.configuration_assessment_threads**           | Description   | Number of Configuration Assessment event decoder threads.           |
+|    **analysisd.configuration_assessment_threads**       | Description   | Number of Configuration Assessment event decoder threads.           |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Default value | 0                                                                   |
 +                                                         +---------------+---------------------------------------------------------------------+
@@ -303,7 +303,7 @@ Analysisd
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Allowed value | Any integer between 128 and 2000000.                                |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|**analysisd.decode_configuration_assessment_queue_size** | Description   | Sets the decode Configuration Assessment queue size.                |
+| **analysisd.decode_configuration_assessment_queue_size**| Description   | Sets the decode Configuration Assessment queue size.                |
 |                                                         |               |                                                                     |
 |                                                         |               |                                                                     |
 |                                                         |               |                                                                     |
@@ -975,16 +975,16 @@ Rootcheck
 |                          | Allowed values | Any integer between 0 and 1000.                                               |
 +--------------------------+----------------+-------------------------------------------------------------------------------+
 
-Configuration Assessment
-------------------------
+Security Configuration Assessment
+---------------------------------
 
-+-------------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
-|    **configuration_assessment.request_db_interval**   | Description    | Number of minutes between which the databases will be requested in case the integrity check failed. |
-+                                                       +----------------+-----------------------------------------------------------------------------------------------------+
-|                                                       | Default value  | 1                                                                                                   |
-+                                                       +----------------+-----------------------------------------------------------------------------------------------------+
-|                                                       | Allowed values | Any integer between 1 and 60.                                                                       |
-+-------------------------------------------------------+----------------+-----------------------------------------------------------------------------------------------------+
++-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+
+|    **sca.request_db_interval**    | Description    | In case of integrity fail, this is the maximum interval (minutes) to resend the scan information to the manager. |
++                                   +----------------+------------------------------------------------------------------------------------------------------------------+
+|                                   | Default value  | 5                                                                                                                |
++                                   +----------------+------------------------------------------------------------------------------------------------------------------+
+|                                   | Allowed values | Any integer between 1 and 60.                                                                                    |
++-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 
 Wazuh
 -----
