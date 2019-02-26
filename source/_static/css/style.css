@@ -124,7 +124,7 @@ a.btn-wazuh:active {
   max-width: 100%;
 }
 
-.index .header {
+.header {
   background: url('../img/wazuh_bg_head.png'), no-repeat center center;
   background-size: cover;
 }
@@ -171,7 +171,7 @@ a.btn-wazuh:active {
 }
 
 .header .social-bar {
-  min-height: 50px;
+  min-height: 53px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -192,11 +192,11 @@ a.btn-wazuh:active {
 }
 
 .menu-sub .submenu a.nav-link {
-  padding: 5px 7px;
+  padding: 5px 2em 5px 0;
   color: #333;
 }
 
-.index .menu-sub .submenu a.nav-link {
+.menu-sub .submenu a.nav-link {
   color: #fff;
 }
 
@@ -308,19 +308,22 @@ header .social-bar .menu-item a {
   padding-right: 0 !important;
 }
 
-.index .menu-sub {
+.menu-sub {
   background: #00a9e5;
 }
 
 .menu-sub {
-  background: #f4f4f4;
-	z-index: 1;
+  z-index: 1;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
 }
 
-.menu-sub #search-lg{
+.menu-sub #search-lg .no-searchbox {
+  display: inline-block;
+  font-size: 1.4rem;
+  color: #fff;
+  padding: 10px 0;
 }
 
 .menu-sub .submenu{
@@ -480,10 +483,6 @@ li.toctree-l4 > a {
 .globaltoc ul {
   display: block;
   width: 100%;
-}
-
-.globaltoc > ul {
-  background-color: #ebebeb;
 }
 
 ul li.toctree-l1 a.current.reference.internal,
@@ -688,11 +687,12 @@ footer a:active,
   display: -ms-flexbox;
   display: flex;
   position: relative;
+  background-color: #ffffff;
+  border-radius: 5px;
 }
 
 .searchform .search-input-wrapper {
   white-space: nowrap;
-  border-bottom: 1px solid #00a9e5;
   margin-left: 30px;
   margin-right: 40px;
   display: -webkit-box;
@@ -705,10 +705,6 @@ footer a:active,
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
   width: 100%;
-}
-
-.index .searchform .search-input-wrapper {
-  border-color: #ffffff;
 }
 
 .searchform .search-filter {
@@ -747,38 +743,21 @@ footer a:active,
   position: relative;
 }
 
-.index .form-control:focus{
-  color: #ffffff;
-  background: #00a9e5;
-}
-
-.index .form-control::-webkit-input-placeholder{
-  color: #ffffff;
-}
-
-.index .form-control::-ms-input-placeholder{
-  color: #ffffff;
-}
-
-.index .form-control::placeholder{
-  color: #ffffff;
-}
-
 .form-control:focus{
-  color: #00a9e5;
-  background: transparent;
+  color: #333333;
+  background: #ffffff;
 }
 
 .form-control::-webkit-input-placeholder{
-  color: #00a9e5;
+  color: #333333;
 }
 
 .form-control::-ms-input-placeholder{
-  color: #00a9e5;
+  color: #333333;
 }
 
 .form-control::placeholder{
-  color: #00a9e5;
+  color: #333333;
 }
 
 .flex-container .widget_search {
@@ -794,14 +773,8 @@ footer a:active,
   width: 100%;
 }
 
-.index #search-form .form-control {
-  background: #00a9e5;
-  color: #ffffff;
-}
-
 #search-form .form-control {
   background: transparent;
-  color: #00a9e5;
 }
 
 .widget_search .expanded {
@@ -1139,6 +1112,12 @@ footer .contact-info .fa-paper-plane-o {
   display: inline-block;
 }
 
+.full-toctree-nav {
+  padding: 0;
+  border-right: 2px solid #00a9e5;
+  background-color: #ebebeb;
+}
+
 .globaltoc > ul {
 	bottom: 0;
 }
@@ -1394,10 +1373,6 @@ select#select-version {
   position: relative;
   font-size: 0.85rem;
   border-radius: 4px;
-  background: transparent
-}
-
-.index select#select-version {
   background: #ffffff;
 }
 
@@ -1542,7 +1517,7 @@ ul {
   font-weight: 400;
 }
 
-.central-page-area,
+.central-page-area #main-content,
 table,
 a[data-lightbox] img {
   margin-bottom: 2em;
@@ -2345,10 +2320,6 @@ ul#breadcrumbs a {
 }
 
 .edit-repo a {
-  color: #00a9e5;
-}
-
-.index .edit-repo a {
   color: #ffffff;
 }
 
@@ -2358,7 +2329,7 @@ ul#breadcrumbs a {
 }
 
 .blue-bar {
-  padding: 4px 15px;
+  padding: 4px 5px;
   background-color: #00a9e5;
 }
 
@@ -2868,11 +2839,6 @@ div.highlight pre {
         width: 25px;
       }
 
-      .search_main.collapsed .btn-search {
-        color: #00a9e5;
-        left: auto;
-      }
-
       .searchbox-indicator .btn-search {
         font-size: 24px;
       }
@@ -2887,13 +2853,16 @@ div.highlight pre {
         border: none;
         height: auto;
         padding: 5px 2px;
-        color: #00a9e5;
+        color: #333333;
         -webkit-box-shadow: none;
                 box-shadow: none;
         border-radius: 0px;
-        font-size: 1em;
         font-weight: 400;
-        line-height: 1.2;
+        line-height: 1.4rem;
+      }
+
+      .index .search_main .form-control {
+        font-size: 1.2em;
       }
 
       .search_main {
@@ -2905,6 +2874,8 @@ div.highlight pre {
         display: flex;
         padding-top: 10px;
         padding-bottom: 10px;
+        max-width: 800px;
+        margin: 0 auto;
       }
 
       .search_main.expanded .btn-close {
@@ -3075,6 +3046,7 @@ div.highlight pre {
         text-align: left;
         padding-top: 0;
         height: 0;
+        position: relative;
       }
 
       .menu-subfooter-social-links{
@@ -3090,6 +3062,8 @@ div.highlight pre {
       .copyright {
         text-align: left;
         margin: 0;
+        position: absolute;
+        bottom: 1em;
       }
 
       .footer-column {
@@ -3161,21 +3135,19 @@ div.highlight pre {
 
 @media (min-width: 992px){
 
-      .header > div {
+      .header > .container-fluid {
+        padding-top: 8px;
+        padding-bottom: 8px;
         -webkit-box-orient: horizontal;
         -webkit-box-direction: normal;
             -ms-flex-direction: row;
                 flex-direction: row;
-      }
-
-      #page:not(.index) .search_main #search-form .btn-search {
-        background-color: #00a9e5;
-        color: #ffffff;
-      }
-
-      #page.index .search_main #search-form .btn-search {
-        background-color: #ffffff;
-        color: #00a9e5;
+        display: -webkit-inline-box;
+        display: -ms-inline-flexbox;
+        display: inline-flex;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
       }
 
       #welcome-to-wazuh .topic p {
@@ -3319,9 +3291,6 @@ div.highlight pre {
 }
 
 @media (min-width: 1200px) {
-          #page:not(.index) header>.container {
-            max-width: 100%;
-          }
 
           #welcome-to-wazuh .topic,
           #welcome-to-wazuh .topic:nth-of-type(even) {
@@ -3359,10 +3328,6 @@ div.highlight pre {
             opacity: 1;
             -webkit-transition: none;
             transition: none;
-          }
-
-          .copyright {
-            bottom: 60px;
           }
 
           .page-404 #errorpage-content h2 {
