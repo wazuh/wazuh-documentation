@@ -5,7 +5,7 @@
 Statistics files
 ================
 
-The **statistics files** are documents that show information about the connection between the instances ant their connections, like the number of events, number of TCP connections, number of messages, connection status, etc.
+The **statistics files** are documents that show information about the instances ant their connections, like the number of events, number of TCP connections, number of messages, connection status, etc.
 
 Currently, Wazuh provides three statistical files:
   * ``ossec-agentd-state`` -> Available only in the agents and shows mumber of generated events, last connection, status, etc.
