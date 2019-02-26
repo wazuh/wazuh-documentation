@@ -157,6 +157,22 @@ Wazuh Ruleset improvements
 
             The anomalies on event **ID 1** of *Sysmon* can be detected now thanks to these new rules.
 
+            .. code-block:: xml
+
+                <rule id="20351" level="0">
+                    <if_sid>20350</if_sid>
+                    <field name="EventChannel.EventData.ParentImage">\\services.exe</field>
+                    <description>Sysmon - Legitimate Parent Image - svchost.exe</description>
+                </rule>
+
+
+                <rule id="20352" level="12">
+                    <if_group>sysmon_event1</if_group>
+                    <field name="EventChannel.EventData.Image">lsm.exe</field>
+                    <description>Sysmon - Suspicious Process - lsm.exe</description>
+                    <group>pci_dss_10.6.1,pci_dss_11.4,gdpr_IV_35.7.d,</group>
+                </rule>
+
         * Added *Security Configuration Assessment* module files:
 
             The team has added a full directories structure with many new rules for the *SCA* module and many other features related to this module as decoders, new policy files in YAML, etc. 
@@ -166,28 +182,107 @@ Wazuh API
 
     *Wazuh API* has received multiple additions that allow users to make different API calls to perform Wazuh tasks more easily.
 
-        * Now, the *Wazuh API* can make calls to edit the Wazuh configuration files as ``ossec.conf`` and to edit rules lists and decoders files.
+        * Now, the *Wazuh API* can make calls to edit the Wazuh configuration files as ``ossec.conf`` and to edit rules, lists and decoders.
 
             This, in combination with the Kibana app, results in a place where all the configuration is done, avoiding bouncing between files to change a single word, and making a more centralized and easy configuration of Wazuh.
 
-        * Also, added calls to restart manager nodes in the cluster and to get CDB lists.
+            As a example, to edit a rules file:
 
-            Examples of these improvements are:
+            .. code-block:: bash
 
-                Making calls to *get CDB lists*:
+                # curl -u foo:bar -X POST -H "Content-type:application/xml" -d /var/ossec/etc/rules/local_rules.xml "http://localhost:55000/manager/files?path=etc/rules/new_rules.xml"
+                
+                {
+                    "error":0,"data":"File updated successfully"
+                }
+
+        * Also, added calls to restart manager nodes in the cluster when the ruleset is synchronized or pushed from the API.
+
+        * Added calls to get CDB lists.
+
+                Making calls to *get a CDB list* filtered by *audit* filed:
 
                 .. code-block:: bash
 
-                    # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/lists"
+                    # curl -u foo:bar -k -X GET "http://127.0.0.1:55000/lists?pretty&search=audit"
+                        
+                        {
+                            "error": 0,
+                            "data": {
+                                "totalItems": 1,
+                                "items": [
+                                    {
+                                        "path": "etc/lists/audit-keys",
+                                        "items": [
+                                        {
+                                            "key": "audit-wazuh-w",
+                                            "value": "write"
+                                        },
+                                        {
+                                            "key": "audit-wazuh-r",
+                                            "value": "read"
+                                        },
+                                        {
+                                            "key": "audit-wazuh-a",
+                                            "value": "attribute"
+                                        },
+                                        {
+                                            "key": "audit-wazuh-x",
+                                            "value": "execute"
+                                        },
+                                        {
+                                            "key": "audit-wazuh-c",
+                                            "value": "command"
+                                        }
+                                        ]
+                                    }
+                                ]
+                            }
+                        }
 
-                Making calls to *restart* manager nodes in the cluster and *validate* configuration:
-
-                .. code-block:: bash
-
-                    # curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart"
-
-        * Fixed documentation regarding *DELETE /agents* API call and *older_than* default value.
 
         * Added API calls to get *SCA* policies and checks.
+
+            .. code-block:: bash
+
+                # GET /policy-monitoring
+                    
+                    {
+                        "error": 0,
+                        "data": {
+                            "totalItems": 2,
+                            "items": [
+                                {
+                                    "scan_id": 1,
+                                                    "name": "pm_name1",
+                                                    "description": "description1",
+                                    "pass": 272,
+                                    "fail": 33,
+                                    "unknown": 0,
+                                    "score": 89,
+                                                    "policy_id": "aaa",
+                                                    "hash": "asdfasdfasdfasdfasdf",
+                                    "start_scan": "2019-01-11 19:51:45",
+                                    "end_scan": "2019-01-11 20:51:45",
+                                                    "references": "references1"
+                                },
+                                {
+                                    "scan_id": 2,
+                                                    "name": "pm_name2",
+                                                    "description": "description1",
+                                    "pass": 22,
+                                    "fail": 3,
+                                    "unknown": 5,
+                                    "score": 56,
+                                                    "policy_id": "bbb",
+                                                    "hash": "asdfasdfasdfasdfasdf",
+                                    "start_scan": "2019-01-11 18:51:45",
+                                    "end_scan": "2019-01-12 18:51:45",
+                                                    "references": "references2"
+                                }
+                            ]
+                        }
+                    }
+        * Fixed documentation regarding *DELETE /agents* API call and *older_than* default value.
 
         * API has migrated to *Python 3.7*.
