@@ -35,6 +35,7 @@ Available options
 - `same_source_ip`_
 - `same_src_port`_
 - `same_dst_port`_
+- `same_field`_
 - `same_location`_
 - `same_user`_
 - `different_url`_
@@ -488,6 +489,86 @@ This option is used in conjunction with frequency and timeframe.
 +--------------------+--------------------+
 | **Example of use** | <same_user />      |
 +--------------------+--------------------+
+
+same_field
+^^^^^^^^^^
+
+.. versionadded:: 3.9.0
+
+``<same_field>`` and ``<not_same_field>`` are options that match when the value of a dynamic field from an incoming event is the same as the one of a previous event which matched the same rule, or backwards in the ``<not_same_field>`` case.
+
++--------------------+-----------+
+| **Default Value**  | n/a       |
++--------------------+-----------+
+| **Allowed values** | Any filed |
++--------------------+-----------+
+
+Use case:
+
+.. code-block:: xml
+
+  <rule id="100001" level="3">
+    <if_sid>221</if_sid>
+    <field name="netinfo.iface.name">ens33</field>
+    <description>Testing interface alert</description>
+  </rule>
+
+  <rule id="100002" level="7" frequency="3" timeframe="300">
+    <if_matched_sid>100001</if_matched_sid>
+    <same_field>netinfo.iface.name</same_field>
+    <same_field>netinfo.iface.mac</same_field>
+    <not_same_field>netinfo.iface.rx_bytes</not_same_field>
+    <options>no_full_log</options>
+    <description>Testing options for correlating repeated fields</description>
+  </rule>
+
+Rule 10002 matches when the third network inventory scan reports the same MAC address for the interface ``ens33`` but the amount of received packets has changed between events. Here we have the associated alert:
+
+.. code-block:: json
+
+  {
+  "timestamp": "2019-02-25T07:49:50.581-0800",
+  "rule": {
+    "level": 7,
+    "description": "Testing options for correlating repeated fields",
+    "id": "100002",
+    "frequency": 3,
+    "firedtimes": 3,
+  ...
+  "data": {
+    "type": "network",
+    "netinfo": {
+      "iface": {
+        "name": "ens33",
+        "type": "ethernet",
+        "state": "up",
+        "mtu": "1500",
+        "mac": "00:0c:29:58:1c:4c",
+        "tx_packets": "8718126",
+        "rx_packets": "9207404",
+        "tx_bytes": "2070054274",
+        "rx_bytes": "1340293681",
+        "tx_errors": "0",
+        "rx_errors": "0",
+        "tx_dropped": "0",
+        "rx_dropped": "0",
+        "ipv4": {
+          "gateway": "unknown",
+          "dhcp": "disabled",
+          "address": "172.16.98.128",
+          "netmask": "255.255.255.0",
+          "broadcast": "172.16.98.255"
+        },
+        "ipv6": {
+          "dhcp": "enabled",
+          "address": "fe80::20c:29ff:fe58:1c4c",
+          "netmask": "ffff:ffff:ffff:ffff::"
+        }
+      }
+    }
+  },
+  "location": "syscollector"
+  }
 
 different_url
 ^^^^^^^^^^^^^
