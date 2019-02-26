@@ -469,16 +469,6 @@ li.toctree-l4 > a {
   background-color: #ebebeb;
 }
 
-.globaltoc >ul .current,
-.globaltoc .leaf.current {
-  /* background-color: rgba(255, 255, 255, 0.44); */
-}
-
-.globaltoc .toctree-l1.current {
-  border-top: 1px solid #00a9e5;
-  border-bottom: 1px solid #00a9e5;
-}
-
 ul li.toctree-l1 a.current.reference.internal,
 ul li.toctree-l1 .current > .leaf {
   color: #00a9e5;
@@ -489,9 +479,20 @@ ul li.toctree-l1 a.current.reference.internal:after {
   color: #00a9e5;
 }
 
-.globaltoc li.toctree-l1 a {
-  color: rgba(51, 51, 51, 0.8);
-  border-bottom: 1px solid  #e3e3e3;
+.globaltoc li.toctree-l1 > ul,
+.globaltoc li.toctree-l2 > ul,
+.globaltoc li.toctree-l3 > ul {
+	padding-left: 1.2em;
+}
+
+.globaltoc li.toctree-l2 > a,
+.globaltoc li.toctree-l3 > a,
+.globaltoc li.toctree-l4 > a {
+	padding-left: 1rem;
+}
+
+.globaltoc li.toctree-l2 a {
+  border-left: 1px solid #00a9e5;;
 }
 
 .globaltoc li.toctree-l1.current > a,
@@ -508,19 +509,13 @@ ul li.toctree-l1 a.current.reference.internal:after {
 }
 
 .globaltoc li.toctree-l1.current {
-  background-color: #f4f4f4;
+  background-color: #f2f2f2;
 }
 
-.globaltoc li.toctree-l1 a.current.leaf::before,
-.globaltoc li.toctree-l1 .current > a.leaf::before {
-	content: '\f0da';
-  display: inline-block;
-  font: normal normal normal 15px/.5 FontAwesome;
-  width: 12px;
-  color: #00a9e5;
-  position: absolute;
-  top: 0.85em;
-  left: 0;
+.globaltoc li.toctree-l1 a.current.leaf,
+.globaltoc li.toctree-l1 .current > a.leaf {
+	border-width: 3px;
+	padding-left: calc(1rem - 3px);
 }
 
 .globaltoc li.toctree-l1 li.toctree-l3 > a.leaf.current::before,
