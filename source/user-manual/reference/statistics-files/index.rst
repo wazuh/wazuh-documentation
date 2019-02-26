@@ -12,6 +12,8 @@ Currently, Wazuh provides three statistical files:
   * ``ossec-remoted-state`` -> Available only in the manager and shows information about the `Remoted daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-remoted.html>`_
   * ``ossec-analysisd-state`` -> Available only in the manager, shows information about the `Analysisd daemon <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-analysisd.html>`_, displaying real time data.
 
+.. note::
+  To check the contain of this files in realtime, users can execute order ``# watch -n 1 "cat /var/ossec/var/run/ossec-analysisd.state"``. 
 .. topic:: Contents
 
   .. toctree::
