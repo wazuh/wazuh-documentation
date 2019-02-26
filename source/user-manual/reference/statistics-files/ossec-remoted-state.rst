@@ -29,20 +29,20 @@ Below you can see an example file:
     total_queue_size='131072'
 
     # TCP sessions
-    tcp_sessions='1'
+    tcp_sessions='130'
 
     # Events sent to Analysisd
-    evt_count='1997'
+    evt_count='19097'
 
     # Control messages received
-    ctrl_msg_count='344'
+    ctrl_msg_count='3444'
 
     # Discarded messages
-    discarded_count='2'
+    discarded_count='23'
 
     # Messages sent
-    msg_sent='344'
+    msg_sent='3460'
 
     # Total number of bytes received
-    recv_bytes='43587'
+    recv_bytes='435879'
 

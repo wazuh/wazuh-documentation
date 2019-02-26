@@ -35,7 +35,7 @@ Below you can see an example file:
     last_ack='2019-02-05 12:18:37'
 
     # Number of generated events
-    msg_count='2579'
+    msg_count='12579'
 
     # Number of messages (events + control messages) sent to the manager
-    msg_sent='2928'
+    msg_sent='12928'
