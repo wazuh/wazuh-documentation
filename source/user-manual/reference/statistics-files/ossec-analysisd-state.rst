@@ -2,20 +2,16 @@
 
 .. _ossec_analysisd_state_file:
 
-ossec-analysisd state file
-==========================
+ossec-analysisd.state
+=====================
 
-The statistical file for `ossec-analysisd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-analysisd.html>`_ is ``ossec-analysisd.state`` and it's located in the Wazuh installation directory (``/var/ossec/var/run/ossec-analysisd.state``).
+The statistical file for **ossec-analysisd** is located at ``/var/ossec/var/run/ossec-analysisd.state``.
 
-This file shows the information relative to the status of this daemon, displaying real time data. It can help to analyse situations where users need to troubleshoot problems related to getting less events or alerts as expected.
+It can be useful when benchmarking our Wazuh manager analysis engine in high loaded environments.
 
-By default, this file is updated **every 5 seconds** but this interval can be changed with the ``analysisd.state_interval`` variable in the ``internal_options.conf`` file. For further information, visit the :ref:`internal configuration <reference_internal_options>` page.
+By default, this file is updated every 5 seconds. This interval can be changed by modifying the ``analysisd.state_interval`` value from the :ref:`internal configuration <reference_internal_options>` file.
 
-.. note:: The ``ossec-analysisd.state`` statistical file is **only** available in managers.
-
-.. note:: *edps* -> *events decoded per second*
-
-Below you can see an example file:
+Below there is an example of the content of the file:
 
 .. code-block:: bash
 
@@ -122,5 +118,3 @@ Below you can see an example file:
 
     # Archives log queue size
     archives_queue_size='16384'
-
-.. note:: From Wazuh version 3.7.0, the Analysis engine supports multithreaded processing. You can read more about how the daemon works now on it's :ref:`reference documentation <ossec-analysisd-structure>`.

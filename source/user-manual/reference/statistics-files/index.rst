@@ -5,15 +5,19 @@
 Statistics files
 ================
 
-The **statistics files** are documents that show realtime information about the Wazuh environment, like the events processed, messages received, state of the TCP connections, etc.
+The **statistics files** are documents that show real-time information about the Wazuh environment as the processed events, received messages and the state of the remote connections.
 
-Currently, Wazuh provides three statistical files:
-  * ``ossec-agentd-state`` -> Available only in the agents and shows mumber of generated events, last connection, status, etc.
-  * ``ossec-remoted-state`` -> Available only in the manager and shows information about the `Remoted daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-remoted.html>`_
-  * ``ossec-analysisd-state`` -> Available only in the manager, shows information about the `Analysisd daemon <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-analysisd.html>`_, displaying real time data.
+Agents statistical files:
 
-.. note::
-  To check the contain of this files in realtime, users can execute order ``# watch -n 1 "cat /var/ossec/var/run/ossec-analysisd.state"``. 
+  *  `ossec-agentd.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/ossec-agentd-state.html>`_ - It shows number of generated events, last connection, agent status and some other useful information about the agent.
+ 
+Manager statistical files: 
+
+  * `ossec-remoted.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/ossec-remoted-state.html>`_ - It shows information about the `remote daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-remoted.html>`_
+  * `ossec-analysisd.state <https://documentation.wazuh.com/current/user-manual/reference/statistics-files/ossec-analysisd-state.html>`_ - It shows information about the `analysis daemon <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-analysisd.html>`_.
+
+
+
 .. topic:: Contents
 
   .. toctree::
