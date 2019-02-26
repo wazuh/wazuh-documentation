@@ -347,7 +347,18 @@ Upgrade Kibana
   .. code-block:: console
 
       # rm -rf /usr/share/kibana/optimize/bundles
+
+  a) With sudo:
+
+  .. code-block:: console
+
       # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.5.4.zip
+
+  b) Without sudo:
+
+  .. code-block:: console
+
+      # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.5.4.zip' kibana
 
 5. Start Kibana:
 
