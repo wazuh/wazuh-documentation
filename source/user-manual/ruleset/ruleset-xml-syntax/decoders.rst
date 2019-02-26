@@ -5,13 +5,12 @@
 Decoders Syntax
 ===============
 
-The decoders extract the information from the received events.
-When an event is received, the decoders separate the information in blocks to prepare them for their subsequent analysis.
+Decoders extract the information from the received events into separated fields so the analysis engine can process them properly.
 
 Options
 -------
 
-There is many options to configure the decoders:
+These are the available options to build a new decoder or to modify an existing one:
 
 - `decoder`_
 - `parent`_
@@ -41,22 +40,10 @@ The attributes listed below define a decoder.
 | type      | The type of the decoder   |
 +-----------+---------------------------+
 
-Example:
-
-Set name and type of decoder to *ossec*:
-
-  .. code-block:: xml
-
-    <decoder name="ossec">
-      <type>ossec</type>
-      <prematch>^ossec: </prematch>
-      <description>Ossec based decoder</description>
-    </decoder>
-
 parent
 ^^^^^^
 
-It is used to link a subordinate codeblock to his parent.
+It is used to link a child decoder to a parent decoder.
 
 +--------------------+------------------+
 | **Default Value**  | n/a              |
@@ -64,51 +51,26 @@ It is used to link a subordinate codeblock to his parent.
 | **Allowed values** | Any decoder name |
 +--------------------+------------------+
 
-Example:
+Assign the decoder to its parent:
 
-Assign the decoder which father it belongs:
+.. code-block:: xml
+  
+  <decoder name="decoder_parent">
+    <program_name>^example</program_name>
+  </decoder>
 
-  .. code-block:: xml
-    
-    <decoder name="decoder_parent">
-      <program_name>^example</program_name>
-    </decoder>
-
-    <decoder name="decoder_junior">
-      <parent>decoder_parent</parent>
-      <regex>User '(\w+)' logged from '(\d+.\d+.\d+.\d+)'</regex>
-      <order>user, srcip</order>
-    </decoder>
-
-Now, if we give a log that is decoded by the *junior* decoder, in the output the name of the decoder will be the parent's one:
-
-  .. code-block:: bash
-
-    Dec 25 20:45:02 manager003 login[0008]: User 'John' logged from '10.0.0.1'
-
-
-    **Phase 1: Completed pre-decoding.
-          full event: 'Dec 25 20:45:02 manager003 login[0008]: User 'John' logged from '10.0.0.1''
-          timestamp: 'Dec 25 20:45:02'
-          hostname: 'manager003'
-          program_name: 'login'
-          log: 'User 'John' logged from '10.0.0.1''
-
-    **Phase 2: Completed decoding.
-          decoder: 'decoder_parent'
-          dstuser: 'John'
-          srcip: '10.0.0.1'
-
-    **Phase 3: Completed filtering (rules).
-          Rule id: '100102'
-          Level: '0'
-          Description: 'User logged'
+  <decoder name="decoder_junior">
+    <parent>decoder_parent</parent>
+    <prematch>\w+ logged from</prematch>
+    <regex>User '(\w+)' logged from '(\d+.\d+.\d+.\d+)'</regex>
+    <order>user, srcip</order>
+  </decoder>
 
 
 accumulate
 ^^^^^^^^^^
 
-Allows Wazuh to track events over multiple log messages based on a decoded id.
+It allows Wazuh to track events over multiple log messages based on a decoded id.
 
 .. note::
 
@@ -121,7 +83,7 @@ Allows Wazuh to track events over multiple log messages based on a decoded id.
 program_name
 ^^^^^^^^^^^^
 
-It defines the name of the program with which the decoder is associated.
+It associates the decoder to the pre-decoded program name.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -133,13 +95,13 @@ Example:
 
 Define that the decoder is related with the ``userdel`` process:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <decoder name="open-userdel">
-      <program_name>userdel</program_name>
-      <regex>user removed: name=(\S+)$|delete user '(\S+\w)'</regex>
-      <order>srcuser</order>
-    </decoder>
+  <decoder name="open-userdel">
+    <program_name>userdel</program_name>
+    <regex>user removed: name=(\S+)$|delete user '(\S+\w)'</regex>
+    <order>srcuser</order>
+  </decoder>
 
 
 prematch
