@@ -134,6 +134,13 @@ a.btn-wazuh:active {
   color: #fff;
 }
 
+.header > div {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .header .main-head{
   padding-top: 4em;
   padding-bottom: 5em;
@@ -159,6 +166,10 @@ a.btn-wazuh:active {
   width: 300px;
 }
 
+.header #navbarWebMenu {
+  height: 100%;
+}
+
 .header .social-bar {
   min-height: 50px;
   display: -webkit-box;
@@ -167,6 +178,12 @@ a.btn-wazuh:active {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+#menu-header-social-bar {
+  height: 100%;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .header .social-bar .nav > li > a {
@@ -3143,6 +3160,13 @@ div.highlight pre {
 }
 
 @media (min-width: 992px){
+
+      .header > div {
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+            -ms-flex-direction: row;
+                flex-direction: row;
+      }
 
       #page:not(.index) .search_main #search-form .btn-search {
         background-color: #00a9e5;
