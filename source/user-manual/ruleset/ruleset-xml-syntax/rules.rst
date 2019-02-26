@@ -5,7 +5,7 @@
 Rules Syntax
 ============
 
-In this section, **xml labels** used to configure ``rules`` are listed.
+After the decoding process, the analysis engine iterates over all the ruleset looking for occurrences that match a rule in order to determine if the log would generate an alert.
 
 Available options
 -----------------
@@ -53,8 +53,6 @@ Available options
 rule
 ^^^^
 
-``<rule>`` is the label that starts the block that defines a *rule*. In this section the different options to this label are explained.
-
 +---------------+----------------+----------------------------------------------------------------------------------------+
 | **level**     | Definition     | Specifies the level of the rule. Alerts and responses use this value.                  |
 +               +----------------+----------------------------------------------------------------------------------------+
@@ -89,27 +87,6 @@ rule
 |               | Allowed values | Attribute with no value                                                                |
 +---------------+----------------+----------------------------------------------------------------------------------------+
 
-Example:
-
-  .. code-block:: xml
-
-    <!--- Rule definition -->
-    <rule id="100000" level="1">
-      <description>Example rule to see how options are assigned to a rule.</description>
-      <match>Example rule</match>
-    </rule>
-
-  .. code-block:: bash
-
-      Example log to test the example rule: Example rule 
-
-      **Phase 3: Completed filtering (rules)
-      Rule id: '100000'
-      Level: '1'
-      Description: 'Example rule to see how options are assigned to a rule.'
-
-In this example, the rule is assigned with the ID 100001, a maximum size of each event of 300 characters and the rule level in 3.
-
 match
 ^^^^^
 Any string to match against the log event.
@@ -119,39 +96,6 @@ Any string to match against the log event.
 +--------------------+-----------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_ |
 +--------------------+-----------------------------------------------------------------+
-
-Example:
-
-  .. code-block:: xml
-
-    <rule id="100001" maxsize="300" level="3">
-      <match>Queue flood!</match>
-      <order>srcip</order>
-      <description> Flooded events queue.</description>
-    </rule>
-
-
-If the event catched contains the *Queue flood!* string, the rule will generate a report of that log:
-
-  .. code-block:: bash
-
-    Feb 12 14:30:06 manager006 flood[0019]: 'Queue flood!' srcip '10.0.0.4'
-      
-    **Phase 1: Completed pre-decoding.
-        full event: 'Feb 12 14:30:06 manager006 flood[0019]: 'Queue flood!' srcip '10.0.0.4' 
-        timestamp: 'Feb 12 14:30:06'
-        hostname: 'manager006'
-        program_name: 'flood'
-        log: 'Queue flood!' srcip '10.0.0.4''
-  
-    **Phase 2: Completed decoding.
-        decoder: no decoder found.
-
-    **Phase 3: Completed filtering (rules)
-        Rule id: '100001'
-        Level: '3'
-        Description: 'Queue flood!'
-        srcip: '10.0.0.4'
 
 regex
 ^^^^^
@@ -163,22 +107,10 @@ Any regex to match against the log event.
 | **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_ |
 +--------------------+---------------------------------------------------------------+
 
-Example:
-
-  ``regex`` is used to find a variety of strings in a rule. For example, if we want to match an IP:
-
-  .. code-block:: xml
-
-     <rule id="100051" level="3">
-        <regex>(\d+.\d+.\d+.\d+)</regex>
-        <description>Matches any IP</description>
-     </rule>
-
-
 decoded_as
 ^^^^^^^^^^
 
-Choose what Wazuh module will decode the rule (ossec, smtpd, rootcheck, json, windows-date-format, racoon, dovecot...) 
+Defines the decoder name which generated decoded the event log.
 
 +--------------------+------------------+
 | **Default Value**  | n/a              |
@@ -200,7 +132,7 @@ Selects in which rule decoding category the rule should be included: ids, syslog
 field
 ^^^^^
 
-Any `sregex <regex.html#os-match-or-sregex-syntax>`_ to be compared to a field extracted by the decoder.
+Any `sregex <regex.html#os-match-or-sregex-syntax>`_ to be compared to a dynamic field extracted by the decoder.
 
 +----------+-----------------------------------------------------------+
 | **name** | Specifies the name of the field extracted by the decoder. |
@@ -328,14 +260,6 @@ The event extended location of the incoming event.
 +--------------------+------------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_  |
 +--------------------+------------------------------------------------------------------+
-
-The location identifies the origin of the input. If the event comes from an agent, its name and registered IP (as it was added) is appended to the location.
-
-Example of a location for a log pulled from "/var/log/syslog" in an agent with name "dbserver" and registered with IP "any":
-
-::
-
-    (dbserver) any->/var/log/syslog
 
 The following components use a static location:
 
@@ -522,53 +446,7 @@ Use case:
     <description>Testing options for correlating repeated fields</description>
   </rule>
 
-Rule 10002 matches when the third network inventory scan reports the same MAC address for the interface ``ens33`` but the amount of received packets has changed between events. Here we have the associated alert:
-
-.. code-block:: json
-
-  {
-  "timestamp": "2019-02-25T07:49:50.581-0800",
-  "rule": {
-    "level": 7,
-    "description": "Testing options for correlating repeated fields",
-    "id": "100002",
-    "frequency": 3,
-    "firedtimes": 3,
-  ...
-  "data": {
-    "type": "network",
-    "netinfo": {
-      "iface": {
-        "name": "ens33",
-        "type": "ethernet",
-        "state": "up",
-        "mtu": "1500",
-        "mac": "00:0c:29:58:1c:4c",
-        "tx_packets": "8718126",
-        "rx_packets": "9207404",
-        "tx_bytes": "2070054274",
-        "rx_bytes": "1340293681",
-        "tx_errors": "0",
-        "rx_errors": "0",
-        "tx_dropped": "0",
-        "rx_dropped": "0",
-        "ipv4": {
-          "gateway": "unknown",
-          "dhcp": "disabled",
-          "address": "172.16.98.128",
-          "netmask": "255.255.255.0",
-          "broadcast": "172.16.98.255"
-        },
-        "ipv6": {
-          "dhcp": "enabled",
-          "address": "fe80::20c:29ff:fe58:1c4c",
-          "netmask": "ffff:ffff:ffff:ffff::"
-        }
-      }
-    }
-  },
-  "location": "syscollector"
-  }
+Rule 100002 matches when the third network inventory scan reports the same MAC address for the interface ``ens33`` but the amount of received packets has changed between events. 
 
 different_url
 ^^^^^^^^^^^^^

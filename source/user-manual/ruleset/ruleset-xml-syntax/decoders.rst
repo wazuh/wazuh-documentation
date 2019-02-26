@@ -91,18 +91,6 @@ It associates the decoder to the pre-decoded program name.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_    |
 +--------------------+--------------------------------------------------------------------+
 
-Example:
-
-Define that the decoder is related with the ``userdel`` process:
-
-.. code-block:: xml
-
-  <decoder name="open-userdel">
-    <program_name>userdel</program_name>
-    <regex>user removed: name=(\S+)$|delete user '(\S+\w)'</regex>
-    <order>srcuser</order>
-  </decoder>
-
 
 prematch
 ^^^^^^^^
@@ -126,14 +114,13 @@ The attribute below is optional, it allows to discard some of the content of the
 regex
 ^^^^^
 
-**Regular expressions** or ``regex`` are sequences of characters that define a pattern.
-Decoders use them to find words or other patterns into the rules.
+Decoders use regex to extract information from the plain log.
 
-An example is this regex that matches any numeral:
+An example is this regex that matches any IP address:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
+  <regex>(\d+.\d+.\d+.\d+)</regex>
 
 
 +--------------------+--------------------------------------------------------------------+
@@ -145,29 +132,14 @@ An example is this regex that matches any numeral:
 The attribute below is optional, it allows to discard some of the content of the entry.
 
 +--------------------+--------------------+
-| Attribute          | Value              |
+| Attribute          | Value              | 
 +====================+====================+
-| **offset**         | after_regex        |
+| **offset**         | after_regex        | 
 +                    +                    +
 |                    | after_parent       |
 +                    +                    +
 |                    | after_prematch     |
 +--------------------+--------------------+
-
-Example:
-
-Show when an user executed the sudo command for the first time:
-
-.. code-block:: xml
-
-  <decoder name="sudo-fields">
-    <parent>sudo</parent>
-    <prematch>\s</prematch>
-    <regex>^\s*(\S+)\s*:</regex>
-    <order>srcuser</order>
-    <fts>name,srcuser,location</fts>
-    <ftscomment>First time user executed the sudo command</ftscomment>
-  </decoder>
 
 order
 ^^^^^
@@ -243,40 +215,10 @@ It is used to designate a decoder as one in which the first time it matches the 
 |                    | extra_data | Any extra data                                        |
 +--------------------+------------+-------------------------------------------------------+
 
-Example:
-
-The following decoder will extract the user who generated the alert and the location from where it comes:
-
-  .. code-block:: xml
-  
-    <decoder name="extractor">
-      <program_name>^example</program_name>
-      <fts>srcuser, location</fts>
-      <description>Decoder that extracts srcuser and location from a log</description>
-    </decoder>
-
-
-  .. code-block:: bash
-
-    Feb 19 12:45:21 manager009 newfile: srcuser 'John' location '/var/ossec/etc'
-
-    **Phase 1: Completed pre-decoding.
-          full event: 'Feb 19 12:45:21 manager009 newfile: srcuser 'John' location '/var/ossec/etc'
-          timestamp: 'Feb 19 12:45:21'
-          hostname: 'manager003'
-          program_name: 'newfile'
-          log: srcuser 'John' location '/var/ossec/etc'
-
-    **Phase 2: Completed decoding.
-          decoder: 'extractor'
-          srcuser: 'John'
-          location: '/var/ossec/etc'
-
-
 ftscomment
 ^^^^^^^^^^
 
-``ftscomment`` adds a comment to a decoder when `<fts>` tag is used.
+This option adds a comment to a decoder when `<fts>` tag is used.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
@@ -344,27 +286,15 @@ Specify how to treat the `NULL` fields coming from the JSON events. Only for the
 location
 ^^^^^^^^
 
-Points the source where the event has been readed, like a log file or an agent.
+Forces the decoder to match logs that have been collected from that location.
 
 +--------------------+-------------------------------------------------------------------------+
 | **Default Value**  | string                                                                  |
 +--------------------+-------------------------------------------------------------------------+
-| **Allowed values** | File path (`/var/log/syslog`)                                           |
+| **Allowed values** | TBD                                                                     |
 +                    +-------------------------------------------------------------------------+
-|                    | An agent (`(ubuntu)->192.168.1.22`)                                     |
+|                    |                                                                         |
 +--------------------+-------------------------------------------------------------------------+
-
-Example:
-
-  .. code-block:: xml 
-    
-    <decoder name="home_decoder">
-      <location> /home/user </location>
-      <fts>srcip</fts>
-      <description>Decode srcip when changing /home/user</description>
-    </decoder>
-
-Only extracts the fields from the events related to the path ``/home/user``.
 
 var
 ^^^
