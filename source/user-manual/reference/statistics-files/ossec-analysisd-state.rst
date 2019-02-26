@@ -64,13 +64,13 @@ Below you can see an example file:
     fts_written='1'
 
     # Syscheck queue
-    syscheck_queue_usage='2.12'
+    syscheck_queue_usage='0.12'
 
     # Syscheck queue size
     syscheck_queue_size='16384'
 
     # Syscollector queue
-    syscollector_queue_usage='1.10'
+    syscollector_queue_usage='0.10'
 
     # Syscollector queue size
     syscollector_queue_size='16384'
@@ -88,7 +88,7 @@ Below you can see an example file:
     hostinfo_queue_size='16384'
 
     # Event queue
-    event_queue_usage='1.53'
+    event_queue_usage='0.53'
 
     # Event queue size
     event_queue_size='16384'
@@ -100,13 +100,13 @@ Below you can see an example file:
     rule_matching_queue_size='16384'
 
     # Alerts log queue
-    alerts_queue_usage='3.40'
+    alerts_queue_usage='0.04'
 
     # Alerts log queue size
     alerts_queue_size='16384'
 
     # Firewall log queue
-    firewall_queue_usage='0.38'
+    firewall_queue_usage='0.18'
 
     # Firewall log queue size
     firewall_queue_size='16384'
