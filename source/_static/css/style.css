@@ -192,16 +192,19 @@ a.btn-wazuh:active {
 }
 
 .menu-sub .submenu a.nav-link {
-  padding: 5px 2em 5px 0;
+  padding: 5px 1em 5px 1em;
   color: #333;
 }
 
 .menu-sub .submenu a.nav-link {
   color: #fff;
-}
-
-.header .social-bar .nav > li > a:hover{
-  color: #fff;
+	height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .main-head .header-title{
@@ -1909,6 +1912,11 @@ code {
   background-color: rgba(255, 255, 255, 0);
 }
 
+header li.menu-item > a.nav-link:focus,
+header li.menu-item > a.nav-link:hover {
+	color: rgba(255,255,255,0.75);
+}
+
 .nav > li > a {
   padding: 5px 7px;
 }
@@ -2545,6 +2553,19 @@ div.highlight pre {
       #main-navbar #main-menu.navbar-nav > li.active > a:focus {
         color: #00a9e5;
       }
+
+			#menu-submenu > li {
+				border-bottom: 3px solid #00a9e5;
+			}
+
+			#menu-submenu > li:hover {
+				background: #0094d0;
+				border-bottom: 3px solid #fff;
+			}
+
+			#menu-submenu {
+				height: 100%;
+			}
 
       nav.collapse.navbar-collapse.navbar-main-collapse {
         position: static;
@@ -3248,6 +3269,7 @@ div.highlight pre {
 
       .footer-column .social-bar {
         padding-left: 10px;
+        vertical-align: top;
       }
 
       .footer-column:nth-child(1),
