@@ -445,22 +445,20 @@ footer a:focus .fa {
   width: 12px;
 }
 
-li.toctree-l1 {
-  font-size: 1.05em;
+li.toctree-l1 > a {
+	position: relative;
+  font-size: 0.88rem;
 }
 
-li.toctree-l2,
-li.toctree-l3,
-li.toctree-l4 {
-  font-size: calc(100% - 2px);
-}
-
-li.toctree-l1 > a,
 li.toctree-l2 > a,
 li.toctree-l3 > a,
 li.toctree-l4 > a {
-  font-size: 1em;
+  font-size: 0.75rem;
   position: relative;
+}
+
+.globaltoc li.toctree-l1 a:hover {
+	color: #00a9e5;
 }
 
 .globaltoc li.toctree-l1 > a {
