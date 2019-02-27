@@ -54,18 +54,27 @@ function addVersions() {
 
     select_version.val('/' + path);
 
+
+function UrlExists(url)
+{
+    var http = new XMLHttpRequest();
+    http.open('HEAD', url, false);
+    http.send();
+    return http.status!=404;
+}
+
 select_version.change(function(event) {
+    if UrlExists('window.location.href'){
+
     if (!current_path.includes("not_found.html")) {
         window.location.href = event.target.value + '/' + current_path;
     } else {
         window.location.href = event.target.value;
     }
-    
-    fetch('window.location.href')
-        .then(
-            function(response) {
-                if(!response.ok){
-                    window.location.href = event.target.value + '/' + "not_found.html";
-                }
-            });
+    } else {
+        window.location.href = window.location.href = event.target.value + '/' + "not_found.html";
+    }
+
+
 });
+}
