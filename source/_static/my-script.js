@@ -54,24 +54,26 @@ function addVersions() {
 
     select_version.val('/' + path);
 
-
-function UrlExists(url)
-{
-    var http = new XMLHttpRequest();
-    http.open('HEAD', url, false);
-    http.send();
-    return http.status!=404;
-}
-
-select_version.change(function(event) {
-    if (!current_path.includes("not_found.html")) {
-        window.location.href = event.target.value + '/' + current_path;
-    } else {
-        window.location.href = event.target.value;
-    }
-
-    if (!UrlExists(window.location.href)) {
-        window.location.href = event.target.value + '/' + 'not_found.html'
-    }
-});
+    select_version.change(function(event) {
+        var pathTokens = document.location.pathname.split('/');
+        var extraPath = '';
+        if( pathTokens.length >= 3 ) {
+        for(var i = 2; i < pathTokens.length; i++) {
+        extraPath += '/' + pathTokens[i];
+        }
+        }
+        
+        if(extraPath === '/not_found.html') extraPath = '';
+    ​
+        $.ajax({
+        type: 'HEAD',
+        url: event.target.value + extraPath,
+        success: function(){
+        window.location.href = event.target.value + extraPath;
+        },
+        error: function() {
+        window.location.href = event.target.value + '/not_found.html';
+        }
+        });
+    });
 }
