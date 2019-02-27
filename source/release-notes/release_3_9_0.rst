@@ -125,9 +125,34 @@ Wazuh API
 Wazuh app
 ---------
 
-.. warning::
+**Edit the configuration of the Wazuh manager**
 
-    TBD
+Now you can edit the content of the configuration from the manager using this new editor, it shows the content of the *ossec.conf* file as it.
+
+The configuration is validated before restarting the manager to prevent from crashing the service if the given configuration is wrong. It will tell you which line is causing errors.
+
+.. thumbnail:: ../images/release-notes/3.9.0/app-01.png
+  :title: Edit the configuration file of the Wazuh manager
+  :align: center
+  :width: 100%
+
+**Create and modify rules, decoders and CDB lists**
+
+Thanks to the recently added Wazuh API endpoints, the app comes with multiple improvements for the ruleset section. 
+
+.. thumbnail:: ../images/release-notes/3.9.0/app-02.png
+  :title: Create a new rule
+  :align: center
+  :width: 100%
+
+**New visualizations**
+
+Most of our dashboards have been changed, now the app uses all the new Kibana features for visualizations, here is an example of those new visualizations:
+
+.. thumbnail:: ../images/release-notes/3.9.0/app-03.png
+  :title: Create a new rule
+  :align: center
+  :width: 100%
 
 
 Wazuh ruleset
