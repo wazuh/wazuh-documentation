@@ -64,17 +64,14 @@ function UrlExists(url)
 }
 
 select_version.change(function(event) {
-    if UrlExists('window.location.href'){
-
     if (!current_path.includes("not_found.html")) {
         window.location.href = event.target.value + '/' + current_path;
     } else {
         window.location.href = event.target.value;
     }
-    } else {
-        window.location.href = window.location.href = event.target.value + '/' + "not_found.html";
+
+    if (!UrlExists(window.location.href)) {
+        window.location.href = event.target.value + '/' + 'not_found.html'
     }
-
-
 });
 }
