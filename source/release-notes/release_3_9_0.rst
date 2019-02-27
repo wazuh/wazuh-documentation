@@ -10,8 +10,6 @@ In this section, we're listing the starred improvements and fixes in Wazuh 3.9.0
 Wazuh Core improvements
 ------------------------
 
-    The Wazuh core has received a few improvements since the last version:
-
 Additions
 ^^^^^^^^^
 
@@ -66,11 +64,15 @@ Additions
                     </whodata>
                 </syscheck>
 
-        * Added extra information in the agents' alerts to show IDs of each agent when they disconnect or are removed.
+        * Added extra information in the agents' alerts to show IDs of each agent when they change their status (disconnect or remove).
 
             This allows keeping a track on the deleted and disconnected agents in the alerts, as before when an agent disconnected from the manager, in the logs was not showed its ID. 
 
         * Added support for hot added symbolic links in Whodata, that was not prepared to handle the event that created a symbolic link.
+
+        * Added *-t* and *-c* options to `wazuh-clusterd daemon. <https://documentation.wazuh.com/current/user-manual/reference/daemons/clusterd.html>`_ 
+
+            These options allow to perform configuration tests and see a log with the errors when starting the cluster and it makes wazuh no longer run binary files when the cluster configuration fails.
 
 Improvements
 ^^^^^^^^^^^^
@@ -129,6 +131,9 @@ Improvements
             Changed the internal cluster structure to adapt it to the 3.7.2 version of Python, which along with the *asyncio library* (`Asynchronous I/O <https://docs.python.org/3/library/asyncio.html>`_) has improved the cluster speed greatly. 
 
         * Some improvements have been made in the *vulnerability-detector* module. Now it checks that the alerts severity has been unified, checks the scan messages are not showed when the database is empty, etc.
+
+        * The team has performed a refactor of the decoded fields from the Windows eventchannel decoder after change almost the entire module.
+
 Fixes
 ^^^^^
 
@@ -147,11 +152,13 @@ Fixes
         - Fixed defects reported by *Cppcheck* as bugs caused by grammatic typos, wrong use of variables, etc. 
         - Fixed a bug that could make an Agent running on Windows XP close unexpectedly while receiving a WPK file.
         - Fixed a memory hazard in *Analysisd* on log pre-decoding for short logs (less than 5 bytes).
+        - Prevent Execd from becoming defunct when Active Response disabled. 
 
 Wazuh Ruleset improvements
 ---------------------------
 
-    In this release, the Ruleset has added two differences since the last version:
+Additions
+^^^^^^^^^
 
         * Added *Sysmon rules* to new Windows eventchannel format.
 
@@ -177,8 +184,25 @@ Wazuh Ruleset improvements
 
             The team has added a full directories structure with many new rules for the *SCA* module and many other features related to this module as decoders, new policy files in YAML, etc. 
 
+        * Added new options ``<same_field>`` and ``<not_same_field>`` to the Windows eventchannel to correlate dynamic fields in rules.
+
+Improvements
+^^^^^^^^^^^^
+
+        * Improved rules for the docker to prevent the activation of certain rules that should not be activated.
+
+        * Modified the structure and the names for Windows eventchannel fields in rules.
+
+Fixes
+^^^^^
+
+        * Fixed the bruteforce attack rules for Windows Eventchannel by adding the new ``<same_field>`` option and changing some rules.
+
 Wazuh API
 ---------
+
+Additions
+^^^^^^^^^
 
     *Wazuh API* has received multiple additions that allow users to make different API calls to perform Wazuh tasks more easily.
 
@@ -283,6 +307,13 @@ Wazuh API
                             ]
                         }
                     }
-        * Fixed documentation regarding *DELETE /agents* API call and *older_than* default value.
+
+Improvements
+^^^^^^^^^^^^
 
         * API has migrated to *Python 3.7*.
+
+Fixes
+^^^^^
+
+        * Fixed documentation regarding *DELETE /agents* API call and *older_than* default value.
