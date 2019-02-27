@@ -87,6 +87,14 @@ rule
 |               | Allowed values | Attribute with no value                                                                |
 +---------------+----------------+----------------------------------------------------------------------------------------+
 
+This fields are added as follows:
+
+  .. code-block:: xml
+
+    <rule id="100000" level="1" ignore="10" ...>
+      (Rule content)
+    </rule>
+
 match
 ^^^^^
 Any string to match against the log event.
@@ -96,6 +104,21 @@ Any string to match against the log event.
 +--------------------+-----------------------------------------------------------------+
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_ |
 +--------------------+-----------------------------------------------------------------+
+
+The *analysis engine* will search in the log the content of this label to check if a rule should trigger.
+
+As an example, when an agent is connected, the log that generates triggers rule 501 from ``0015-ossec_rules.xml``:
+
+  .. code-block:: xml
+
+    <rule id="501" level="3">
+      <if_sid>500</if_sid>
+      <if_fts />
+      <options>alert_by_email</options>
+      <match>Agent started</match>
+      <description>New Wazuh agent connected.</description>
+      <group>pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
+    </rule>
 
 regex
 ^^^^^
