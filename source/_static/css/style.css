@@ -1518,10 +1518,13 @@ ul {
   font-weight: 400;
 }
 
-.central-page-area #main-content,
 table,
 a[data-lightbox] img {
   margin-bottom: 2em;
+}
+
+.central-page-area #main-content {
+  margin-bottom: 1em;
 }
 
 .central-page-area p strong,
@@ -1529,8 +1532,6 @@ a[data-lightbox] img {
 .central-page-area ol strong {
   font-weight: 700;
 }
-
-
 
 #page .jumbo-bar {
   background-color: #ffffff;

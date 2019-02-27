@@ -116,7 +116,8 @@ html_theme_options = {
     'wazuh_web_url': 'https://wazuh.com',
     'globaltoc_depth': 4,
     'includehidden': True,
-    'collapse_navigation': True
+    'collapse_navigation': True,
+    'prev_next_buttons_location': 'bottom'
 }
 
 
