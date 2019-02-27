@@ -1000,6 +1000,11 @@ ul.simple > li > a {
   color: #333;
 }
 
+main li.toctree-l1 > a:hover,
+ul.simple > li > a:hover {
+  color: #0094ce;
+}
+
 main li.toctree-l2 > a {
   padding: 1px 0;
 }
@@ -2349,6 +2354,12 @@ ul#breadcrumbs a {
   overflow: auto;
   margin-bottom: 2em;
   background-color: #f4f4f4;
+}
+
+blockquote [class*="highlight-"],
+blockquote ul,
+blockquote blockquote {
+	margin-bottom: 0.5em;
 }
 
 table.highlighttable {
