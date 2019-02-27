@@ -1933,11 +1933,10 @@ label {
 }
 
 blockquote {
-  background-color: rgba(0, 169, 229, .12);
-  border-left: 5px solid #00a9e5;
+  background-color: #fff;
   margin-bottom: 1.5em;
   overflow: auto;
-  border-right: 15px solid #e0f5fc;
+  padding-left: 1em;
 }
 
 .admonition {
@@ -1962,11 +1961,11 @@ p.first.admonition-title::before {
   margin-right: 0.75em;
 }
 
-.note p {
+.note {
   background-color: rgba(0, 169, 229, .12);
 }
 
-.note p.admonition-title {
+.note .admonition-title {
   background-color: #00a9e5;
 }
 
@@ -1974,16 +1973,22 @@ p.first.admonition-title::before {
   content: '\f06a';
 }
 
-.warning p {
+.warning {
   background-color: rgba(255, 182, 0, .12);
 }
 
-.warning p.admonition-title {
+.warning .admonition-title {
   background-color: #ffb600;
 }
 
 .warning p.first.admonition-title::before {
   content: '\f071';
+}
+
+.admonition .highlight-console {
+  background-color: transparent;
+  padding: 5px;
+  margin-bottom: 0.5em;
 }
 
 a {
@@ -3422,7 +3427,7 @@ pre .ge { font-style: italic } /* Generic.Emph */
 pre .gr { color: #FF0000 } /* Generic.Error */
 pre .gh { color: #000080 } /* Generic.Heading */
 pre .gi { color: #00A000 } /* Generic.Inserted */
-pre .go { color: #888888 } /* Generic.Output */
+pre .go { color: #333333 } /* Generic.Output */
 pre .gp { color: #c65d09 } /* Generic.Prompt */
 pre .gu { color: #800080 } /* Generic.Subheading */
 pre .gt { color: #0044DD } /* Generic.Traceback */
