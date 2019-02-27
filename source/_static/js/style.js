@@ -113,4 +113,21 @@ $(function(){
      $('#btn-scroll').fadeOut('slow');
    }
  });
+
+	/* Collapsible globaltoc -------------------------------------------------------------------------------------------*/
+	$('#btn-collapse-globaltoc').on('click', function(){
+		var gtwith = tocWrapperElement.width();
+		tocWrapperElement.addClass('collapsed');
+		tocWrapperElement.animate({'left': (0 - gtwith)+'px'}, function(){
+      //$(this).hide();
+      $('#main-content').addClass('full-width');
+		});
+	});
+
+  $('#btn-uncollapse-globaltoc').on('click', function(){
+			tocWrapperElement.removeClass('collapsed');
+
+   tocWrapperElement.animate({'left': 0});
+	 $('#main-content').removeClass('full-width');
+  });
 });

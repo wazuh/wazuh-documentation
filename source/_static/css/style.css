@@ -316,7 +316,7 @@ header .social-bar .menu-item a {
 }
 
 .menu-sub {
-  z-index: 1;
+  z-index: 2;
   position: -webkit-sticky;
   position: sticky;
   top: 0;
@@ -1530,6 +1530,19 @@ a[data-lightbox] img {
 
 .central-page-area #main-content {
   margin-bottom: 1em;
+	-webkit-transition: max-width 0.3s, -webkit-box-flex 0.3s;
+	transition: max-width 0.3s, -webkit-box-flex 0.3s;
+	transition: max-width 0.3s, flex 0.3s;
+	transition: max-width 0.3s, flex 0.3s, -webkit-box-flex 0.3s, -ms-flex 0.3s;
+}
+
+#main-content.full-width {
+	max-width: 100%;
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
 }
 
 .central-page-area p strong,
@@ -3190,6 +3203,17 @@ div.highlight pre {
                 justify-content: space-between;
       }
 
+			.central-page-area {
+				-ms-flex-wrap: nowrap;
+				    flex-wrap: nowrap;
+				position: relative;
+				z-index: 1;
+			}
+
+			#main-content {
+				padding-left: 30px;
+			}
+
       #welcome-to-wazuh .topic p {
         font-size: 14px;
       }
@@ -3306,9 +3330,56 @@ div.highlight pre {
 
       nav.full-toctree-nav {
         min-height: 100vh;
+				z-index: 3;
       }
 
-      nav.full-toctree-nav.reached-top {
+      .full-toctree-nav.collapsed {
+        -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+        width: 0;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+
+			.btn-collapsible-globaltoc {
+				position: absolute;
+				top: 15px;
+				border: none;
+				border-radius: 25px 0 0 25px;
+				height: 30px;
+				width: 15px;
+				cursor: pointer;
+				color: #fff;
+				background-color: #00a9e5;
+				padding-top: 0;
+			}
+
+			#btn-collapse-globaltoc {
+				border-radius: 25px 0 0 25px;
+				padding-left: 3px;
+				padding-right: 0;
+        right: 0;
+			}
+
+			#btn-uncollapse-globaltoc {
+				border-radius: 0 25px 25px 0;
+				left: 0;
+				padding-left: 0;
+				padding-right: 3px;
+				position: absolute;
+				z-index: 2;
+			}
+
+			#main-content.full-width {
+        position: relative;
+				padding-left: 15px;
+			}
+
+			#main-content.full-width #btn-uncollapse-globaltoc {
+				display: block;
+			}
+
+			nav.full-toctree-nav.reached-top {
         top: 0px;
       }
 
@@ -3318,6 +3389,7 @@ div.highlight pre {
 				top: 50px;
 				overflow: auto;
 				max-height: calc(100vh - 55px);
+				height: 100%;
       }
 
       #globaltoc {
