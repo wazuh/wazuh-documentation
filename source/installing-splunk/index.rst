@@ -21,7 +21,7 @@ This guide describes the Splunk Enterprise installation process for two differen
 | :ref:`Multi-instance installation <splunk_distributed>`                | Install Splunk using the multi-instance architecture.       |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 
-Find more information about how to scale your environments using Splunk Enterprise on the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.3/Deploy/Distributedoverview>`_.
+Find more information about how to scale your environments using Splunk Enterprise on the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.4/Deploy/Distributedoverview>`_.
 
 .. warning::
   The Wazuh app for Splunk requires the installation of a **Wazuh manager** and **Wazuh API** in order to work properly. Check out the :ref:`installation guide <installation>` before proceeding with Splunk.
