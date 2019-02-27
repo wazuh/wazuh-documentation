@@ -2804,7 +2804,7 @@ div.highlight pre {
       }
 
       .search_main .searchform {
-        display: -webkit-box;
+				display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
         -webkit-box-align: center;
@@ -2813,6 +2813,10 @@ div.highlight pre {
         width: 100%;
         justify-self: right;
       }
+
+			.index .search_main .searchform {
+				padding: 10px 7px;
+			}
 
       .search_main .searchform > .btn-search,
       .search_main .searchform > .btn-close, .navbar-toggle.btn-close {
