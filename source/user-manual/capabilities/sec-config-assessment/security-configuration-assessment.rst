@@ -330,8 +330,19 @@ To add a new policy file, it is recommended to put the file under the `ruleset/s
   - Remember that the **checks** id field must be unique, not existing in other policy files.
 
 
-Information about the rules
+Information about variables
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When setting variables in the **variables** section:
+
+- Make sure they start with ``$```character
+- Make sure they end with ``;`` character
+
+Example: ``$sshd_file: /etc/ssh/sshd_config;``
+
+
+Information about rules
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The *rules* field is where ``SCA`` dictates if a *check* is marked as *passed* or *failed*.
 There are four main types of rules as described below:
