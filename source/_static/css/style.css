@@ -2309,8 +2309,8 @@ ul#breadcrumbs {
   padding-top: 1em;
 }
 
-ul#breadcrumbs .fa-caret-right {
-  color: #ffb600;
+ul#breadcrumbs .fa {
+  color: #0094d0;
   padding: 0 4px;
 }
 

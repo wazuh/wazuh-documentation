@@ -2,7 +2,7 @@
   <div class="col-12">
     <ul id="breadcrumbs" role="navigation" aria-label="breadcrumbs navigation">
       {% block breadcrumbs %}
-      <li><a href="{{ pathto(master_doc) }}">{{ _('Documentation') }}</a> <i class="fa fa-caret-right" aria-hidden="true"></i></li>
+      <li><a href="{{ pathto(master_doc) }}">{{ _('Documentation') }}</a> <i class="fa fa-angle-right" aria-hidden="true"></i></li>
       {% for doc in parents %}
       <li><a href="{{ doc.link|e }}">{{ doc.title }}</a> <i class="fa fa-caret-right" aria-hidden="true"></i></li>
       {% endfor %}
