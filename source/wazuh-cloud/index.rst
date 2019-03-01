@@ -5,8 +5,6 @@
 Wazuh Cloud
 ===========
 
-
-
 .. toctree::
    :maxdepth: 1
 

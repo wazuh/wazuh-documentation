@@ -21,7 +21,8 @@ How do I sign up?
 
 1. To sign up, go to Wazuh CLoud Service page:
 2. Insert your data:
-3. User will receive an e-mail with a link. When clicking on that link, user will be redirected to a verification page 
+3. The user will receive an e-mail with a link. When clicking on that link, the user will be redirected to a verification page where ultimate configuration.
 
 Create a deployment
 -------------------
+
