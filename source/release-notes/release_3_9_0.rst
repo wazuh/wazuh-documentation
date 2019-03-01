@@ -5,13 +5,13 @@
 3.9.0 Release Notes
 ===================
 
-This section shows the most relevant improvements and fixes in version 3.8.1. More details about these changes are provided in each component changelog:
+This section shows the most relevant improvements and fixes in version 3.9.0. More details about these changes are provided in each component changelog:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.8.0/CHANGELOG.md>`_
-- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.8.0/CHANGELOG.md>`_
-- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.8.0/CHANGELOG.md>`_
-- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/v3.8.0-6.5.4/CHANGELOG.md>`_
-- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/v3.8.0-7.2.3/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/3.9/CHANGELOG.md>`_
+- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/3.9/CHANGELOG.md>`_
+- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/3.9/CHANGELOG.md>`_
+- `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/3.9-6.6/CHANGELOG.md>`_
+- `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/3.9/CHANGELOG.md>`_
 
 Wazuh core
 ----------
@@ -67,6 +67,7 @@ Since Wazuh 3.8.0, Wazuh has a healthcheck for FIM who-data, it checks if the Au
     </syscheck>
 
 - FIM who-data now supports hot added symbolic link events.
+
 - Added support for *Fedora 29* systems that use *Audit 3.0 (beta)*.
 
 **AWS organizations in CloudTrail**
