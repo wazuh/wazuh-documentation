@@ -60,7 +60,7 @@ function addVersions() {
         }
         
         if(extraPath === '/not_found.html') extraPath = '';
-    ​
+        
         $.ajax({
         type: 'HEAD',
         url: event.target.value + extraPath,
