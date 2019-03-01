@@ -23,6 +23,11 @@ How do I sign up?
 2. Insert your data:
 3. The user will receive an e-mail with a link. When clicking on that link, the user will be redirected to a verification page where ultimate configuration.
 
-Create a deployment
--------------------
+Acces Wazuh APP
+---------------
 
+(Connect to Elasticsearch) Register agent
+------------------------------------------
+
+Next steps
+----------
