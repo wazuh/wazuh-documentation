@@ -99,5 +99,5 @@ following special characters.
   +-------------+--------------------------------------------------+
   | \|          | To create a logic: or, between multiple patterns |
   +-------------+--------------------------------------------------+
-  | !           | To negate the text                               |
+  | !           | To negate the expression                         |
   +-------------+--------------------------------------------------+
