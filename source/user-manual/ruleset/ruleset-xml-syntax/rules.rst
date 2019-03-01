@@ -107,17 +107,13 @@ Any string to match against the log event.
 
 The *analysis engine* will search in the log the content of this label to check if a rule should trigger.
 
-As an example, when an agent is connected, the log that generates triggers rule 501 from ``0015-ossec_rules.xml``:
+As an example, here is a custom rule that triggers when a log that contains the word **Error** is catched:
 
   .. code-block:: xml
 
-    <rule id="501" level="3">
-      <if_sid>500</if_sid>
-      <if_fts />
-      <options>alert_by_email</options>
-      <match>Agent started</match>
-      <description>New Wazuh agent connected.</description>
-      <group>pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
+    <rule id="100005" level="4">
+      <match>Error</match>
+      <description> Rule for matching errors. </description>
     </rule>
 
 regex
@@ -130,6 +126,15 @@ Any regex to match against the log event.
 | **Allowed values** | Any `regex expression <regex.html#os-regex-or-regex-syntax>`_ |
 +--------------------+---------------------------------------------------------------+
 
+Example:
+
+    An example is this regex that matches any IP address:
+
+  .. code-block:: xml
+
+    <regex>(\d+.\d+.\d+.\d+)</regex>
+
+
 decoded_as
 ^^^^^^^^^^
 
@@ -140,6 +145,8 @@ Defines the decoder name which generated decoded the event log.
 +--------------------+------------------+
 | **Allowed values** | Any decoder name |
 +--------------------+------------------+
+
+  <decoded_as> mydecoder </decoded_as>
 
 category
 ^^^^^^^^
@@ -160,6 +167,12 @@ Any `sregex <regex.html#os-match-or-sregex-syntax>`_ to be compared to a dynamic
 +----------+-----------------------------------------------------------+
 | **name** | Specifies the name of the field extracted by the decoder. |
 +----------+-----------------------------------------------------------+
+
+Here is an example of this option, which rule will only trigger when the *level* field includes a "10", it does not matter if the other fields of the log include it.
+
+  .. code-block:: xml
+
+    <field name="level"> 10 </field>
 
 srcip
 ^^^^^
@@ -634,10 +647,11 @@ Example:
       <match>illegal user|invalid user</match>
       <description>sshd: Attempt to login using a non-existent user</description>
       <options>no_log</options>
+      <options>alert_by_email</options>
     </rule>
 
 .. note::
-  Use one ``<options>`` tag for each option you want to add.
+  Use one ``<options>`` tag for each option the user wants to add.
 
 .. _rules_check_diff:
 
@@ -668,7 +682,6 @@ Example:
           <description>Rule related with spam.</description>
         </rule>
     </group>
-
 
 Now, every rule with the line ``<group>spam,</group>`` will be included in that group.
 

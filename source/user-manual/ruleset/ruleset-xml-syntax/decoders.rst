@@ -116,12 +116,11 @@ regex
 
 Decoders use regex to extract information from the plain log.
 
-An example is this regex that matches any IP address:
+An example is this regex that matches any user name:
 
 .. code-block:: xml
 
-  <regex>(\d+.\d+.\d+.\d+)</regex>
-
+  <regex>User name=(\S+)$</regex>
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -291,11 +290,15 @@ Forces the decoder to match logs that have been collected from that location.
 +--------------------+-------------------------------------------------------------------------+
 | **Default Value**  | string                                                                  |
 +--------------------+-------------------------------------------------------------------------+
-| **Allowed values** | TBD                                                                     |
-+                    +-------------------------------------------------------------------------+
-|                    |                                                                         |
+| **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_         |
 +--------------------+-------------------------------------------------------------------------+
 
+As a example, we can set this field to a specific IP, or any other source, to match the logs from there:
+
+  .. code-block:: xml
+
+    <location> 10.0.0.1 </location>
+    
 var
 ^^^
 
