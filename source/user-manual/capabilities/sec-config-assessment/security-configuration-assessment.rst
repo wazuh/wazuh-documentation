@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-Security Configuration assessment
+Security Configuration Assessment
 =================================
 
 This section attempts to introduce how this module can help us to securize our systems.
@@ -363,24 +363,12 @@ There are four main types of rules as described below:
 
 Examples:
 
-- Looking at the value inside a file:
-  - ``f:/proc/sys/net/ipv4/ip_forward -> 1;``
-
-- Checking if a file exists:
-  - ``f:/proc/sys/net/ipv4/ip_forward;``
-
-- Checking if a process is running:
-  - ``p:avahi-daemon;``
-
-- Looking at the value of a registry:
-  - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0;``
-
-- Looking if a directory contains files:
-  - ``d:/home/* -> ^.mysql_history$;``
-
-- Checking if a directory exists:
-  - ``d:/etc/mysql;``
-
+- Looking at the value inside a file: ``f:/proc/sys/net/ipv4/ip_forward -> 1;``
+- Checking if a file exists: ``f:/proc/sys/net/ipv4/ip_forward;``
+- Checking if a process is running: ``p:avahi-daemon;``
+- Looking at the value of a registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0;``
+- Looking if a directory contains files: ``d:/home/* -> ^.mysql_history$;``
+- Checking if a directory exists: ``d:/etc/mysql;``
 
 .. note::
    Remember that the each rule must end with the semicolon ``;`` character.

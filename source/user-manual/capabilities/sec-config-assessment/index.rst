@@ -2,7 +2,7 @@
 
 .. _manual_sec_config_assessment:
 
-Security Configuration assessment
+Security Configuration Assessment
 =================================
 
 .. versionadded:: 3.9.0
