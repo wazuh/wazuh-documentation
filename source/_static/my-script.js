@@ -62,14 +62,14 @@ function addVersions() {
         if(extraPath === '/not_found.html') extraPath = '';
         
         $.ajax({
-        type: 'HEAD',
-        url: event.target.value + extraPath,
-        success: function(){
-        window.location.href = event.target.value + extraPath;
-        },
-        error: function() {
-        window.location.href = event.target.value + '/not_found.html';
-        }
+            type: 'HEAD',
+            url: event.target.value + extraPath,
+            success: function(){
+                window.location.href = event.target.value + extraPath;
+            },
+            error: function() {
+                window.location.href = event.target.value + '/not_found.html';
+            }
         });
     });
 }
