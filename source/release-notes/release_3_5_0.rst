@@ -2,7 +2,7 @@
 
 .. _release_3_5_0:
 
-3.5.0 Release Notes
+3.5.0 Release notes
 ===================
 
 This section shows the most relevant improvements and fixes in version 3.5.0. More details about these changes are provided in each component changelog.

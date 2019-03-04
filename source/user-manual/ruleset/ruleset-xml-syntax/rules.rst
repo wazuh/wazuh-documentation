@@ -26,6 +26,7 @@ Available options
 - `weekday`_
 - `id`_
 - `url`_
+- `action`_
 - `if_sid`_
 - `if_group`_
 - `if_level`_
@@ -336,6 +337,16 @@ The following components use a static location:
 +----------------------+------------------------+
 | CIS-CAT integration  | wodle_cis-cat          |
 +----------------------+------------------------+
+action
+^^^^^^
+
+Any action (decoded as the ACTION).
+
++--------------------+----------------------+
+| **Default Value**  | n/a                  |
++--------------------+----------------------+
+| **Allowed values** | Any String.          |
++--------------------+----------------------+
 
 if_sid
 ^^^^^^
