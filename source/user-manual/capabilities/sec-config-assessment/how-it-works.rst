@@ -223,7 +223,7 @@ During a policy file scan it follows the steps described below:
 
 - Load and parse the policy file
 - Check if the requirements are meet (if any)
-- Execute each rule defineded for each check
+- Execute each rule defined for each check
 - Compare the result for every check with the internal database
 - If it has changed, send an alert to the manager and update the database
 - Send the policy summary
