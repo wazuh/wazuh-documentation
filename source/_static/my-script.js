@@ -53,23 +53,24 @@ function addVersions() {
     select_version.change(function(event) {
         var pathTokens = document.location.pathname.split('/');
         var extraPath = '';
-        if( pathTokens.length >= 3 ) {
-        for(var i = 2; i < pathTokens.length; i++) {
-        extraPath += '/' + pathTokens[i];
-        }
-        }
+            if( pathTokens.length >= 3 ) {
+                for(var i = 2; i < pathTokens.length; i++) {
+                    extraPath += '/' + pathTokens[i];
+                }
+            }
         
         if(extraPath === '/not_found.html') extraPath = '';
-
+    
         $.ajax({
-        type: 'HEAD',
-        url: event.target.value + extraPath,
-        success: function(){
-        window.location.href = event.target.value + extraPath;
-        },
-        error: function() {
-        window.location.href = event.target.value + '/not_found.html';
-        }
+            type: 'HEAD',
+            url: event.target.value + extraPath,
+            success: function(){
+                window.location.href = event.target.value + extraPath;
+            },
+            error: function() {
+                window.location.href = event.target.value + '/not_found.html';
+            }
         });
     });
 }
+
