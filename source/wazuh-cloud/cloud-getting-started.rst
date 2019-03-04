@@ -20,12 +20,7 @@ How do I sign up?
 
 2. Fill every field with the required data.
 
-3. Select the service needed:
-
-    * Request quote.
-    * Request product demo.
-    * Request a free trial.
-    * Request information on Wazuh as a Service.
+3. From the list of options, select *Request a free trial*.
 
 4. The user will receive an e-mail with a link. When clicking on that link, the registration process will be finished and the user will receive another e-mail that contains a file with all the necessary information to use the Cloud Service.
 
