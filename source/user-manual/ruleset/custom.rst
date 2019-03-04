@@ -67,7 +67,7 @@ We can check if it works by using `/var/ossec/bin/ossec-logtest <https://documen
 Changing an existing rule
 ---------------------------
 
-You can modify the standard rules.
+If the user needs to change an existing standard rule, it can be changed by following this guide:
 
 .. warning::
     Changes to any rule file inside the ``/var/ossec/ruleset/rules`` folder will be lost in the update process. Use the following procedure to preserve your changes.

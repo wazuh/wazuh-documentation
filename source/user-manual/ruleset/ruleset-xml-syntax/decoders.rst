@@ -91,6 +91,12 @@ It associates the decoder to the pre-decoded program name.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_    |
 +--------------------+--------------------------------------------------------------------+
 
+As an example, the decoder additioned with this option will match events generated when the program **reboot** is executed:
+  
+  .. code-block:: xml
+
+    <program_name>reboot</program_name>
+
 
 prematch
 ^^^^^^^^
@@ -111,16 +117,16 @@ The attribute below is optional, it allows to discard some of the content of the
 | **offset**         | after_regex   |
 +--------------------+---------------+
 
+As an example, this option searches in the log the startup time:
+
+.. code-block:: xml
+
+  <prematch>^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d startup|</prematch>
+
 regex
 ^^^^^
 
 Decoders use regex to extract information from the plain log.
-
-An example is this regex that matches any user name:
-
-.. code-block:: xml
-
-  <regex>User name=(\S+)$</regex>
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -131,14 +137,21 @@ An example is this regex that matches any user name:
 The attribute below is optional, it allows to discard some of the content of the entry.
 
 +--------------------+--------------------+
-| Attribute          | Value              | 
+| Attribute          | Value              |
 +====================+====================+
-| **offset**         | after_regex        | 
+| **offset**         | after_regex        |
 +                    +                    +
 |                    | after_parent       |
 +                    +                    +
 |                    | after_prematch     |
 +--------------------+--------------------+
+
+An example is this regex that matches any user name:
+
+.. code-block:: xml
+
+  <regex>User name=(\S+)$</regex>
+
 
 order
 ^^^^^
@@ -176,6 +189,15 @@ It defines what the parenthesis groups contain and the order in which they were 
 +--------------------+------------+-------------------------------------------------------+
 | **Dynamic fields** | Any string not included in the previous list                       |
 +--------------------+------------+-------------------------------------------------------+
+
+This options is used as follows:
+
+  .. code-block:: xml
+
+    <order>srcip, dstip, id, extra_data</order>
+
+This way we sort the fields in this order in the generated events.
+
 
 fts
 ^^^
@@ -300,7 +322,7 @@ Forces the decoder to match logs that have been collected from that location.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_         |
 +--------------------+-------------------------------------------------------------------------+
 
-As a example, we can set this field to a specific IP, or any other source, to match the logs from there:
+As an example, we can set this field to a specific IP, or any other source, to match the logs from there:
 
   .. code-block:: xml
 
