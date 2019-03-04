@@ -51,14 +51,6 @@ function addVersions() {
     select_version.val('/' + path);
 
     select_version.change(function(event) {
-        var pathTokens = document.location.pathname.split('/');
-        var extraPath = '';
-        if( pathTokens.length >= 3 ) {
-        for(var i = 2; i < pathTokens.length; i++) {
-        extraPath += '/' + pathTokens[i];
-        }
-        }
-        
         if(extraPath === '/not_found.html') extraPath = '';
         
         $.ajax({
