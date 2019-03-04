@@ -3,10 +3,6 @@
 Use case: Getting an alert when a check changes its result value
 ================================================================
 
-ToDo:
-
-- Update the use case with the new rules, the new name of the module, and kibana screenshots.
-
 To configure the execution of the *SCA* module with a policy file, it is necessary to set up the following section:
 
 .. code-block:: none
@@ -72,7 +68,6 @@ This is the generated event that summarizes the result of the checking process:
 
 .. code-block:: none
 
-
         ** Alert 1549608285.301707: - ossec,
         2019 Feb 08 07:44:45 my_pc->sca
         Rule: 19001 (level 3) -> 'SCA summary: Passed checks: 39 Failed checks: 9 Score: 81'
@@ -93,8 +88,8 @@ The check with id 1032 failed, it verifies if the file */proc/sys/net/ipv4/ip_fo
     echo "0" > /proc/sys/net/ipv4/ip_forward
 
 
-We get the next two alerts, one of them states that this check has changed its result and the other one summarizes this last process.
-Notice that now we have 40 passed checks and 8 failed.
+We get the two alerts, one of them states that this check has changed its result and the other one summarizes this last process.
+Notice that now we have 40 ``passed`` checks and 8 ``failed``.
 
 .. code-block:: none
 
@@ -127,4 +122,3 @@ Notice that now we have 40 passed checks and 8 failed.
         sca.failed: 8
         sca.score: 83
         sca.file: cis_debian_linux_rcl.yml
-

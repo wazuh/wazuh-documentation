@@ -48,13 +48,13 @@ Each CIS policy file has the CIS and PCI-DSS reference associated for each check
       rules:
         - 'f:/etc/fstab -> !r:^# && r:/tmp && !r:nodev;'
 
-The *compliance* field meets both CIS and PCI_DSS compliances. The user can define wich compliances each check meets.
+The *compliance* field meets both CIS and PCI_DSS compliances. The user can define wich compliances each check meets based on official CIS benchmarks.
 
 How alerts appear
 ^^^^^^^^^^^^^^^^^
 
-When an agent finished a policy monitoring scan, it sends the results for each check defined in the file. If nothing has changed during the last scan, the results 
-remain the same.
+When an agent finished a policy monitoring scan, it sends the results for each check defined in the policy file. If nothing has changed during the last scan, the results 
+will remain the same.
 
 The following image shows an alert inside the Kibana app, for the ``system_audit_ssh.yml`` policy file:
 
@@ -135,20 +135,22 @@ all the policy files avaiable for all Operating System that Wazuh supports.
 
 With a Wazuh manager installation the following additional files are also installed:
 
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Application                 | Policies                                                                                  |
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Apache                      | cis_apache2224_rcl.yml                                                                    |            
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| MySQL                       | cis_mysql5-6_community_rcl.yml, cis_mysql5-6_enterprise_rcl.yml                           |            
-+-----------------------------+-------------------------------------------------------------------------------------------+
++-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Application                 | Policies                                                                                                                         |
++-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Apache                      | cis_apache2224_rcl.yml                                                                                                           |            
++-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| MySQL                       | cis_mysql5-6_community_rcl.yml, cis_mysql5-6_enterprise_rcl.yml                                                                  |            
++-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Windows Server 2012 r2      | cis_win2012r2_memberL1_rcl.yml, cis_win2012r2_memberL2_rcl.yml, cis_win2012r2_domainL1_rcl.yml, cis_win2012r2_domainL2_rcl..yml  |            
++-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
 
 
 Policy files location
 ^^^^^^^^^^^^^^^^^^^^^
 
-- For Wazuh agent and manager on a Linux platform, the policy files are located under the directory: ``/var/ossec/ruleset/sca`` by default.
-- For Wazuh agent on a Windows platform, the policy files are located under the directory: ``C:\\Program files (x86)\\ossec-agent\\ruleset\\sca`` by default.
+- For Wazuh agent and manager on a Linux platform, the policy files are located under the default installation directory: ``/var/ossec/ruleset/sca`` by default.
+- For Wazuh agent on a Windows platform, the policy files are located under the default installation directory: ``C:\\Program files (x86)\\ossec-agent\\ruleset\\sca`` by default.
 
 
 How to push policy files to agents
@@ -275,7 +277,7 @@ Each section have their own fields that are or aren't mandatory as described bel
 +--------------------+----------------+-------------------+------------------------+
 
 
-**Requirements Section**
+**Requirements section**
 
 +--------------------+----------------+-------------------+------------------------+
 | Field              | Mandatory      | Type              | Allowed values         |
@@ -290,7 +292,7 @@ Each section have their own fields that are or aren't mandatory as described bel
 +--------------------+----------------+-------------------+------------------------+
 
 
-**Variables Section**
+**Variables section**
 
 +--------------------+----------------+-------------------+------------------------+
 | Field              | Mandatory      | Type              | Allowed values         |
@@ -299,7 +301,7 @@ Each section have their own fields that are or aren't mandatory as described bel
 +--------------------+----------------+-------------------+------------------------+
 
 
-**Checks Section**
+**Checks section**
 
 +--------------------+----------------+-------------------+--------------------------------------+
 | Field              | Mandatory      | Type              | Allowed values                       |
@@ -335,7 +337,7 @@ Information about variables
 
 When setting variables in the **variables** section:
 
-- Make sure they start with ``$```character
+- Make sure they start with ``$`` character
 - Make sure they end with ``;`` character
 
 Example: ``$sshd_file: /etc/ssh/sshd_config;``
@@ -359,23 +361,25 @@ There are four main types of rules as described below:
 | Registry (Windows Only)      | r              |
 +------------------------------+----------------+
 
-- Example for looking at the value inside a file:
- - ``f:/proc/sys/net/ipv4/ip_forward -> 1;``
+Examples:
 
-- Example for checking if a file exists:
- - ``f:/proc/sys/net/ipv4/ip_forward;``
+- Looking at the value inside a file:
+  - ``f:/proc/sys/net/ipv4/ip_forward -> 1;``
 
-- Example for checking if a process is running:
- - ``p:avahi-daemon;``
+- Checking if a file exists:
+  - ``f:/proc/sys/net/ipv4/ip_forward;``
 
-- Example for looking at the value of a registry:
- - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0;``
+- Checking if a process is running:
+  - ``p:avahi-daemon;``
 
-- Example for looking if a directory contains files:
- - ``d:/home/* -> ^.mysql_history$;``
+- Looking at the value of a registry:
+  - ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0;``
 
-- Example for checking if a directory exists:
- - ``d:/etc/mysql;``
+- Looking if a directory contains files:
+  - ``d:/home/* -> ^.mysql_history$;``
+
+- Checking if a directory exists:
+  - ``d:/etc/mysql;``
 
 
 .. note::
