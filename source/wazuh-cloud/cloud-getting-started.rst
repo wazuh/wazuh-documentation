@@ -5,29 +5,75 @@
 Getting Started
 ===============
 
-Wazuh solution delivered as a service
--------------------------------------
+By following this guide, we will create a Wazuh monitoring structure allocated in the Wazuh Cloud.
 
-Wazuh monitoring solution consists of a highly scalable, two-tier architecture to manage and monitor your environment.
-The Wazuh agent runs on each monitored system, collecting events and forwarding those to the Wazuh cloud infrastructure, composed by analysis servers, which are used to process events data, and an ElasticStack cluster where information is indexed and stored.
-
-Wazuh cloud infrastructure is composed by cloud instances, used to analyze and index data collected by the agents, detecting intrusion attempts, policy violations, file changes, malware and vulnerabilities. 
-In addition, an Elastic Stack cluster is used to provide a full-text search and analytics engine, with a flexible and intuitive web user interface. 
-As part of our cloud infrastructure, Wazuh provides a single-tenant data store, so your data is completely isolated from other customer’s data.
-Data is processed through dedicated containers and store both in an ElasticStack cluster, where it is available through the user interface, and a compliance-ready cold storage environment, where it can be readily requested for a date range as needed.
 
 How do I sign up?
 -----------------
 
 1. To sign up, go to Wazuh CLoud Service page:
-2. Insert your data:
-3. The user will receive an e-mail with a link. When clicking on that link, the user will be redirected to a verification page where ultimate configuration.
 
-Acces Wazuh APP
----------------
+    .. thumbnail:: ../images/wazuh-cloud/wazuh-cloud-1.png
+        :title: Signing up form.
+        :align: center
+        :width: 100%
 
-(Connect to Elasticsearch) Register agent
-------------------------------------------
+2. Fill every field with the required data.
+
+3. Select the service needed:
+
+    * Request quote.
+    * Request product demo.
+    * Request a free trial.
+    * Request information on Wazuh as a Service.
+
+4. The user will receive an e-mail with a link. When clicking on that link, the registration process will be finished and the user will receive another e-mail that contains a file with all the necessary information to use the Cloud Service.
+
+.. note::
+    The verification e-mail can be stored in the *spam* folder.
+
+Access Wazuh APP
+----------------
+
+When the Signup process is complete, the user will receive a PDF file with all the necessary data to access the cloud services.
+
+In this PDF there is a DNS direction that grants access to the Wazuh APP, already connected and configured with the Cloud.
+
+This file contains:
+
+    * Access information.
+    * Wazuh useful information.
+    * WaaS description.
+    * Agents deployment resumed guide.
+
+
+    .. thumbnail:: ../images/wazuh-cloud/wazuh-cloud-2.png
+        :title: PDF file data.
+        :align: center
+        :width: 100%
+
+Register agent
+--------------
+
+What follows in this guide is to register the agents that will be allocated in our cloud.
+
+This process is related in the `Registering agents <https://documentation.wazuh.com/current/user-manual/registering/index.html>`_ section of this documentation, but in the PDF file that the user will receive it comes a little guide to do it too.
+
+The only difference with the actual guide, is that in this case we will set the ``<address>MANAGER_IP</address>`` as our manager server IP.
+
+.. warning::
+    Make sure the protocol is set as TCP. Wazuh Cloud does not support UDP.
+
 
 Next steps
 ----------
+
+After following all these steps, the user owns a Wazuh Cloud infrastructure totally operative, working and with the number of agents the user registered.
+Now, it's time to add other Wazuh features to improve the level of monitoring the system does.
+Some of these features are:
+
+    * `Puppet <https://documentation.wazuh.com/current/deploying-with-puppet/index.html>`_
+    * `Splunk <https://documentation.wazuh.com/current/installing-splunk/index.html>`_ 
+    * `Docker <https://documentation.wazuh.com/current/docker-monitor/index.html>`_
+
+
