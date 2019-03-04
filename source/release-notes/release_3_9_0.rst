@@ -36,10 +36,10 @@ Here is an example that runs a scan the 15th of every month:
         </policies>
     </sca>
 
-
-.. warning::
-
-    ADD KIBANA SCREENSHOT
+.. thumbnail:: ../images/release-notes/3.9.0/conf-assessment-kibana.png
+  :title: Security configuration assessment alert
+  :align: center
+  :width: 100%
 
 **Syscollector improvements** 
 
@@ -47,10 +47,6 @@ Here is an example that runs a scan the 15th of every month:
 - Events information can be decoded into dynamic fields, so we can define rules based on *Syscollector* events. Decoders now accept ``syscollector`` as value for ``<decoded_as>`` tags.
 - Get the real MAC address of each interface in `/sys/class/net/address` instead of getting it from interfaces with *AF_PACKET* sockets, avoiding this way problems with bonded interfaces that share the same MAC address at software level.
 
-
-.. warning::
-
-    ADD KIBANA SCREENSHOT 
 
 **FIM who-data changes**
 
@@ -114,14 +110,26 @@ Wazuh API
 
 - Edit the ``ossec.conf`` configuration file of a Wazuh manager.
 - Create or modify custom rules, custom decoders and CDB lists.
-- Restart the Wazuh manager
-  - If Wazuh cluster is enabled, you can restart a single node at a time or all the nodes at the same time.
+- Restart the Wazuh manager. If Wazuh cluster is enabled, you can restart a single node at a time or all the nodes at the same time.
+
+.. thumbnail:: ../images/release-notes/3.9.0/api-03.png
+  :title: Results related to a policy
+  :align: center
+  :width: 100%
+
+- List the policies being applied, list the scan result of each policy.
+
+.. thumbnail:: ../images/release-notes/3.9.0/api-01.png
+  :title: Policies
+  :align: center
+  :width: 100%
+
 - Dive into your SCA scan results using the Wazuh API. 
-  - List the policies being applied, list the scan result of each policy.
 
-.. warning::
-
-    ADD EXAMPLES 
+.. thumbnail:: ../images/release-notes/3.9.0/api-02.png
+  :title: Results related to a policy
+  :align: center
+  :width: 100%
 
 Wazuh app
 ---------
@@ -139,7 +147,7 @@ The configuration is validated before restarting the manager to prevent from cra
 
 **Create and modify rules, decoders and CDB lists**
 
-Thanks to the recently added Wazuh API endpoints, the app comes with multiple improvements for the ruleset section. 
+Thanks to the recently added Wazuh API endpoints, the app comes with multiple improvements for the ruleset section.
 
 .. thumbnail:: ../images/release-notes/3.9.0/app-02.png
   :title: Create a new rule
@@ -160,6 +168,18 @@ Wazuh ruleset
 -------------
 
 - Added new options ``<same_field>`` and ``<not_same_field>`` to correlate dynamic fields in rules.
+
+.. code-block:: xml
+
+    <rule id="100002" level="7" frequency="3" timeframe="300">
+        <if_matched_sid>100001</if_matched_sid>
+        <same_field>netinfo.iface.name</same_field>
+        <same_field>netinfo.iface.mac</same_field>
+        <not_same_field>netinfo.iface.rx_bytes</not_same_field>
+        <options>no_full_log</options>
+        <description>Testing options for correlating repeated fields</description>
+    </rule>
+
 - Improved rules for Docker to prevent the activation of certain rules that should not be activated.
 - Modified the structure and the names for Windows EventChannel fields in all the related rules.
 - Fixed the bruteforce attack rules for Windows Eventchannel by adding the new ``<same_field>`` option and changing some rules.
