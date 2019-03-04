@@ -2,7 +2,7 @@
 
 .. _release_3_2_3:
 
-3.2.3 Release Notes
+3.2.3 Release notes
 ===================
 
 This section shows the most relevant improvements and fixes in version 3.2.3. More details about these changes are provided in each component changelog.
