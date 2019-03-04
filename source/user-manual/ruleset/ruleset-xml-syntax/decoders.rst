@@ -282,6 +282,13 @@ Specify how to treat the `NULL` fields coming from the JSON events. Only for the
 |                    | empty (It shows the NULL field as an empty field)                       |
 +--------------------+-------------------------------------------------------------------------+
 
+For example, if we want to discard all the *NULL* fields from a JSON event, we just add:
+
+  .. code-block:: xml
+
+    <json_null_field> discard </json_null_field>
+
+
 location
 ^^^^^^^^
 

@@ -9,11 +9,13 @@ It is possible to modify the default rules and decoders from the Wazuh Ruleset a
 
 Adding new decoders and rules
 -------------------------------
+
 .. note::
-   We will use ``local_decoder.xml`` and ``local_rules.xml`` to implement small changes. For larger scale changes/additions to the stock decoders and rules, we recommend you create a new decoder and/or rule file.
+  When implementing small changes, adding unattached rules, or even testing new rules or decoders, we recommend to use the ``local_decoder.xml`` and ``local_rules.xml`` files.
+  For bigger changes or to add more rules or decoders, it is better to create a new rule or decoder file.
 
 
-We are going to describe these procedures using an easy example. Here is a log from a program called ``example``:
+We are going to describe these procedures by using an easy example. Here is a log from a program called ``example``:
 ::
 
    Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100'
@@ -41,7 +43,7 @@ Now, we will add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
   </rule>
 
 
-We can check if it works by using ``/var/ossec/bin/ossec-logtest``:
+We can check if it works by using `/var/ossec/bin/ossec-logtest <https://documentation.wazuh.com/current/user-manual/reference/tools/ossec-logtest.html?highlight=logtest>`_:
 ::
 
   **Phase 1: Completed pre-decoding.
@@ -95,6 +97,9 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
     <description>sshd: Attempt to login using a non-existent user</description>
     <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,</group>
   </rule>
+
+.. note::
+  As is said at the start of this page, this is a punctual solution for small changes. If users want to overwrite a big amount of rules, it is better to create a file with all the overwritten rules.
 
 
 Changing an existing decoder

@@ -748,7 +748,7 @@ Example:
     <var name="BAD_WORDS">error| warning |failure</var>
 
     <group name="syslog,errors,">
-      <rule id="XXXX" level="2">
+      <rule id="100300" level="2">
         <match>$BAD_WORDS</match>
         <description>Error found.</description>
       </rule>
