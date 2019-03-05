@@ -8,7 +8,7 @@ Agent management
 .. meta::
   :description: Learn more about the Wazuh agents and how to group, configure or upgrade them remotely using several tools.
 
-This section describes how to manage the created agents using the command line (CLI), the RESTful API and the internal Wazuh daemons. Here are explained the methods to register, list, remove and even group agents.
+This section describes how to manage the created agents using the command line (CLI), the RESTful API and the internal Wazuh daemons. Here are explained the methods to register and manage the Wazuh agents.
 
 .. topic:: Contents
 
