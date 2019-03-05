@@ -20,7 +20,7 @@ To configure the execution of the *SCA* module with a policy file, it is necessa
 
 The profile field is the policy file desired to be executed. The complete path for it is by default */var/ossec/ruleset/sca* on a Linux manager, */var/ossec/ruleset/sca* on a Linux agent environment and *C:\\Program files (x86)\\ossec-agent\\ruleset\\sca* when using Windows.
 
-In this case, a Debian Linux check file has been set, but the user can choose any other that matches their operating system.
+In this case, the Debian Linux ``cis_debian_rcl.yml`` policy file has been set, but the user can choose any other that matches their operating system.
 After restarting Wazuh on the machine where this module was set, it will start running. First, the new information will be stored
 at the manager's side, then this data may match with some rules described at the *0570-sca_rules.xml* file and it will generate alerts if 
 there is different information from the previous storage.
@@ -29,40 +29,47 @@ The policy file has a check set, for example, this one verifies that the ``nodev
 
 .. code-block:: none
 
-     - id: 1007
-        title: "Ensure nodev option set on /home partition"
-        cis_control: "1.1.14"
-        description: "The nodev mount option specifies that the filesystem cannot contain special devices."
-        rationale: "Since the user partitions are not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices."
-        remediation: "Edit the /etc/fstab file and add nodev to the fourth field (mounting options) for the /home partition. See the fstab(5) manual page for more information. # mount -o remount,nodev /home"
-        compliance:
-            - cis: "5.1"
-            - pci_dss: "2.2.4"
-        condition: any
-        rules:
-            - 'f:/etc/fstab -> !r:^# && r:ext2|ext3 && r:/home && !r:nodev ;'
+     - id: 5006
+       title: "Ensure nodev option set on /home partition"
+       description: "The nodev mount option specifies that the filesystem cannot contain special devices."
+       rationale: "Since the user partitions are not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices."
+       remediation: "Edit the /etc/fstab file and add nodev to the fourth field (mounting options) for the /home partition. See the fstab(5) manual page for more information. # mount -o remount,nodev /home"
+       compliance:
+        - cis_csc: "5.1"
+        - cis: "1.1.14"
+        - pci_dss: "2.2.4"
+       condition: any
+       rules:
+        - 'f:/etc/fstab -> !r:^# && r:ext2|ext3 && r:/home && !r:nodev ;'
 
 There is where the rule block describes the requirements needed to pass the check. In case it is the first scan and the check passes or fails, it will trigger the next alert:
 
 .. code-block:: none
 
-        ** Alert 1549608285.288281: - ossec,
-        2019 Feb 08 07:44:45 my_pc->sca
-        Rule: 19003 (level 7) -> 'Check with id 1032 for policy CIS benchmark for Debian/Linux failed'
-        {"type":"check","id":1163073902,"profile":"CIS benchmark for Debian/Linux","check":{"id":1032,"title":"Ensure IP forwarding is disabled","description":"The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.","rationale":"Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0","compliance":{"cis_csc":5,"cis":"3.1.1"},"file":"/proc/sys/net/ipv4/ip_forward.","result":"failed"}}
+        ** Alert 1551793014.179492: - wazuh,sca,gdpr_IV_35.7.d
+        2019 Mar 05 14:36:54 (ubuntu) any->sca
+        Rule: 19008 (level 3) -> 'CIS benchmark for Debian/Linux: Ensure nodev option set on /home partition'
+        {"type":"check","id":1693973084,"policy":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","check":{"id":5006,"title":"Ensure nodev option set on /home partition","description":"The nodev mount option specifies that the filesystem cannot contain special devices.","rationale":"Since the user partitions are not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices.","remediation":"Edit the /etc/fstab file and add nodev to the fourth field (mounting options) for the /home partition. See the fstab(5) manual page for more information. # mount -o remount,nodev /home","compliance":{"cis_csc":5,"cis":"1.1.14","pci_dss":"2.2.4"},"file":"/etc/fstab","result":"passed"}}
         sca.type: check
-        sca.scan_id: 1163073902
+        sca.scan_id: 1693973084
         sca.policy: CIS benchmark for Debian/Linux
-        sca.check.id: 1032
-        sca.check.title: Ensure IP forwarding is disabled
-        sca.check.description: The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.
-        sca.check.rationale: Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.
-        sca.check.remediation: Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0
+        sca.check.id: 5006
+        sca.check.title: Ensure nodev option set on /home partition
+        sca.check.description: The nodev mount option specifies that the filesystem cannot contain special devices.
+        sca.check.rationale: Since the user partitions are not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices.
+        sca.check.remediation: Edit the /etc/fstab file and add nodev to the fourth field (mounting options) for the /home partition. See the fstab(5) manual page for more information. # mount -o remount,nodev /home
         sca.check.compliance.cis_csc: 5
-        sca.check.compliance.cis: 3.1.1
-        sca.check.file: /proc/sys/net/ipv4/ip_forward.
-        sca.check.result: failed
+        sca.check.compliance.cis: 1.1.14
+        sca.check.compliance.pci_dss: 2.2.4
+        sca.check.file: /etc/fstab
+        sca.check.result: passed
 
+The image below shows the event in the Configuration Assessment tab on Kibana:
+
+.. thumbnail:: ../../../images/sca/sca-5006.png
+    :title: Configuration Assessment event 5006
+    :align: center
+    :width: 100%
 
 This is the generated event that summarizes the result of the checking process:
 
@@ -81,7 +88,36 @@ This is the generated event that summarizes the result of the checking process:
         sca.score: 81
         sca.file: cis_debian_linux_rcl.yml
 
-The check with id 1032 failed, it verifies if the file */proc/sys/net/ipv4/ip_forward* does not contain a value of "1". If we modify this file as follows:
+The image below shows the summary in the Configuration Assessment tab on Kibana:
+
+.. thumbnail:: ../../../images/sca/sca-summary.png
+    :title: Configuration Assessment summary
+    :align: center
+    :width: 100%
+
+
+The check with id 5031 failed, it verifies if the file */proc/sys/net/ipv4/ip_forward* does not contain a value of "1"
+
+.. code-block:: none
+
+        ** Alert 1551793014.225469: - wazuh,sca,gdpr_IV_35.7.d
+        2019 Mar 05 14:36:54 (ubuntu) any->sca
+        Rule: 19008 (level 3) -> 'CIS benchmark for Debian/Linux: Ensure IP forwarding is disabled'
+        {"type":"check","id":1693973084,"policy":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","check":{"id":5031,"title":"Ensure IP forwarding is disabled","description":"The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.","rationale":"Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0","compliance":{"cis_csc":5,"cis":"3.1.1"},"file":"/proc/sys/net/ipv4/ip_forward,/proc/sys/net/ipv6/ip_forward","result":"passed"}}
+        sca.type: check
+        sca.scan_id: 1693973084
+        sca.policy: CIS benchmark for Debian/Linux
+        sca.check.id: 5031
+        sca.check.title: Ensure IP forwarding is disabled
+        sca.check.description: The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.
+        sca.check.rationale: Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.
+        sca.check.remediation: Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0
+        sca.check.compliance.cis_csc: 5
+        sca.check.compliance.cis: 3.1.1
+        sca.check.file: /proc/sys/net/ipv4/ip_forward,/proc/sys/net/ipv6/ip_forward
+        sca.check.result: failed
+
+If we modify this file as follows:
 
 ::
 
@@ -93,22 +129,24 @@ Notice that now we have 40 ``passed`` checks and 8 ``failed``.
 
 .. code-block:: none
 
-        ** Alert 1549608524.314132: - ossec,
-        2019 Feb 08 07:48:44 my_pc->sca
-        Rule: 19005 (level 3) -> 'Check with id 1032 for policy CIS benchmark for Debian/Linux has changed to passed'
-        {"type":"check","id":1704901665,"profile":"CIS benchmark for Debian/Linux","check":{"id":1032,"title":"Ensure IP forwarding is disabled","description":"The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.","rationale":"Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0","compliance":{"cis_csc":5,"cis":"3.1.1"},"file":"","result":"passed"}}
+        ** Alert 1551795102.318643: - wazuh,sca,gdpr_IV_35.7.d
+        2019 Mar 05 15:11:42 (ubuntu) any->sca
+        Rule: 19010 (level 9) -> 'CIS benchmark for Debian/Linux: Ensure IP forwarding is disabled: Status changed from passed to failed'
+        {"type":"check","id":308037396,"policy":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","check":{"id":5031,"title":"Ensure IP forwarding is disabled","description":"The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.","rationale":"Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0","compliance":{"cis_csc":5,"cis":"3.1.1"},"file":"/proc/sys/net/ipv4/ip_forward,/proc/sys/net/ipv6/ip_forward","result":"failed"}}
         sca.type: check
-        sca.scan_id: 1704901665
+        sca.scan_id: 308037396
         sca.policy: CIS benchmark for Debian/Linux
-        sca.check.id: 1032
+        sca.check.id: 5031
         sca.check.title: Ensure IP forwarding is disabled
         sca.check.description: The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.
         sca.check.rationale: Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.
         sca.check.remediation: Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0
         sca.check.compliance.cis_csc: 5
         sca.check.compliance.cis: 3.1.1
+        sca.check.file: /proc/sys/net/ipv4/ip_forward,/proc/sys/net/ipv6/ip_forward
         sca.check.result: passed
         sca.check.previous_result: failed
+
 
         ** Alert 1549608524.316062: - ossec,
         2019 Feb 08 07:48:44 my_pc->sca
@@ -122,3 +160,11 @@ Notice that now we have 40 ``passed`` checks and 8 ``failed``.
         sca.failed: 8
         sca.score: 83
         sca.file: cis_debian_linux_rcl.yml
+
+
+The image below shows the summary in the Configuration Assessment tab on Kibana:
+
+.. thumbnail:: ../../../images/sca/sca-summary-2.png
+    :title: Configuration Assessment summary
+    :align: center
+    :width: 100%
