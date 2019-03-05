@@ -39,7 +39,7 @@ Default configuration
 
 .. code-block:: xml
 
-    <!-- Choose between plain or json format (or both) for internal log file ("ossec.log") -->
+    <!-- Choose between plain or json format (or both) for internal log file -->
     <logging>
       <log_format>plain</log_format>
     </logging>
