@@ -11,12 +11,9 @@ How it works
 State vs alerts
 ---------------
 
-Agents have their own local database inf the form of a hash table where they store the state of each check: *passed* or *failed*. It allows the agent to send
-only the differences between each scan, if nothing has changed from the last scan, only the summary will be send, avoiding network flooding every time 
-a scan ends.
+Agents have their own local database in the form of a hash table where they store the state of each check: *passed* or *failed*. It allows the agent to send only the differences between each scan, if nothing has changed from the last scan, only the summary will be sent, avoiding network flooding every time a scan ends.
 
-On the manger side, the results for each check are stored in the agents sqlite database. This allows to find out if the state of a check has changed between scans, avoiding
-if it has changed then an altert is generated for that check.
+On the manager side, the results for each check are stored in the agent's sqlite database. This allows to find out if the state of a check has changed between scans, avoiding if it has changed then an alert is generated for that check.
 
 
 Available information of scans
@@ -93,7 +90,7 @@ Example of an enabled policies event:
         ]
     }
 
-The information of the different types of events are stored on the manager side inside the agents sqlite database. The database has the following tables:
+The information of the different types of events are stored on the manager side inside the agent's sqlite database. The database has the following tables:
 
 +------------------------------+-------------------------------------------------------------------------------------------+
 | Table                        | Description                                                                               |
@@ -180,9 +177,9 @@ The ``sca_policy`` table will be queried, comparing the existing policies with t
 Integrity mechanism
 -------------------
 
-To maintain the correct correlation between the agent state for each check and the managers database for that agent, an integrity mechanism has been developed.
+To maintain the correct correlation between the agent state for each check and the manager's database for that agent, an integrity mechanism has been developed.
 
-Let's look how it works with an example.
+Let's look at how it works with an example.
 
 On the agent side we have the following hash table:
 
