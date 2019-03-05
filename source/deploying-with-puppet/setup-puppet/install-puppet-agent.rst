@@ -5,7 +5,7 @@
 Installing Puppet agent
 =======================
 
-In this section we assume you have already installed the ``apt`` or ``yum`` Puppet repository on your agent system in the same way that you did on your Puppet Server.
+In this section we assume that you have already installed the ``apt`` or ``yum`` Puppet repository on your agent system in the same way that you did on your Puppet Server.
 
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
@@ -19,7 +19,7 @@ Install the Puppet yum repository and then the "puppet-agent" package. See this 
 
 .. note:: 
 
-  For a correct installation we recommend the use of Puppet versions equal or greater than 5. 
+  For a correct installation we recommend the use of Puppet versions equal or greater than 5.
 
 Installation on Debian/Ubuntu
 -----------------------------
@@ -45,7 +45,7 @@ Get the appropriate Puppet apt repository, and then the "puppet-agent" package. 
 
 .. note:: The releases supported by the manifest to install Wazuh are as follows: 
 
-      Ubuntu: **precise | trusty | vivid | wily | xenial | yakketi**
+      Ubuntu: **precise | trusty | vivid | wily | xenial | yakketi | bionic**
 
       Debian: **jessie | wheezy | stretch | sid**
   

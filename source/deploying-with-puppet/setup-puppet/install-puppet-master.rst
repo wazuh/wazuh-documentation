@@ -44,7 +44,7 @@ Get the appropriate Puppet apt repository, and then the "puppetserver" package. 
 
 .. note:: The releases supported by the manifest to install Wazuh are as follows: 
 
-      Ubuntu: **precise | trusty | vivid | wily | xenial | yakketi**
+      Ubuntu: **precise | trusty | vivid | wily | xenial | yakketi | bionic**
 
       Debian: **jessie | wheezy | stretch | sid**
 
