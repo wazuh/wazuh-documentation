@@ -3,7 +3,7 @@
 .. _reference_ossec_scanpaths:
 
 Scan paths configuration
-=============================
+========================
 
 Leaving this unconfigured will result in Wazuh using the module defaults.
 
@@ -27,7 +27,7 @@ wazuh::server::ossec_scanpaths:
   path: /sbin report_changes: 'yes' realtime: 'yes'
 
 wazuh::server::ossec_ignorepaths:
-----------------------------------
+---------------------------------
 
 By default, it will empty.
 

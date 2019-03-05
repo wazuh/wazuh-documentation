@@ -3,10 +3,10 @@
 .. _setup_puppet_master:
 
 Installing Puppet master
-============================
+========================
 
 Installation on CentOS/RHEL/Fedora
-------------------------------------
+----------------------------------
 
 Install the Puppet yum repository and then the "puppetserver" package. See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, to install Puppet 5 for CentOS 7 or RHEL 7, do the following:
 
@@ -21,7 +21,7 @@ Install the Puppet yum repository and then the "puppetserver" package. See this 
 
 
 Installation on Debian/Ubuntu
-------------------------------
+-----------------------------
 
 Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 
@@ -50,7 +50,7 @@ Get the appropriate Puppet apt repository, and then the "puppetserver" package. 
 
 
 Memory Allocation
---------------------------
+-----------------
 
 By default, Puppet Server will be configured to use 2GB of RAM. However, if you want to experiment with Puppet Server on a VM, you can safely allocate as little as 512MB of memory. To change Puppet Server memory allocation, you can edit the following init config file.
 
@@ -60,7 +60,7 @@ By default, Puppet Server will be configured to use 2GB of RAM. However, if you 
 Replace 2g with the amount of memory you want to allocate to Puppet Server. For example, to allocate 1GB of memory, use ``JAVA_ARGS="-Xms1g -Xmx1g"``; for 512MB, use ``JAVA_ARGS="-Xms512m -Xmx512m"``.
 
 Configuration
---------------------------
+-------------
 
 Edit the ``/etc/puppetlabs/puppet/puppet.conf`` file, adding this line to the ``[main]`` section (create the section if it does not exist), and replacing ``puppet.example.com`` with your own FQDN: ::
 
@@ -92,7 +92,7 @@ PuppetDB installation (Optional)
 After configuring Puppet Server to run on Apache with Passenger, the next step is to add PuppetDB so that you can take advantage of exported resources, as well as have a central storage location for Puppet facts and catalogs.
 
 Installation on CentOS/RHEL 7 (Adjust if your version is different.)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: console
 
@@ -103,7 +103,7 @@ Installation on CentOS/RHEL 7 (Adjust if your version is different.)
    # systemctl enable postgresql-9.4
 
 Installation on Debian/Ubuntu
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: console
 

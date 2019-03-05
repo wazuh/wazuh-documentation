@@ -3,12 +3,12 @@
 .. _wazuh_puppet_module:
 
 Wazuh Puppet module
-============================
+===================
 
 This `module <https://github.com/wazuh/wazuh-puppet>`_ has been authored by Nicolas Zin and updated by Jonathan Gazeley and Michael Porter. Wazuh has forked it with the purpose of maintaining it. Thank you to the authors for the contribution.
 
 Install Wazuh module
--------------------------------------------------------------------
+--------------------
 
 Download and install the Wazuh module from Puppet Forge:
 
@@ -29,7 +29,7 @@ Download and install the Wazuh module from Puppet Forge:
 This module installs and configures Wazuh agent and manager.
 
 Install manager via Puppet
--------------------------------------------------------------------
+--------------------------
 
 The manager is configured by installing the ``wazuh::server`` class, and optionally using:
 
@@ -88,7 +88,7 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
 
 
 Install agent via Puppet
--------------------------------------------------------------------
+------------------------
 
 The agent is configured by installing the ``wazuh::client`` class.
 
@@ -109,7 +109,7 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
   # /opt/puppetlabs/bin/puppet agent -t
 
 Reference Wazuh puppet
--------------------------------------------------------------------
+----------------------
 
 +-----------------------------------------------------------------+---------------------------------------------+
 | Sections                                                        | Functions                                   |

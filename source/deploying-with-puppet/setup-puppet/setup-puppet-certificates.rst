@@ -3,7 +3,7 @@
 .. _setup_puppet_certificates:
 
 Setting up Puppet certificates
-=================================
+==============================
 
 Run in your Puppet agent to generate a certificate for the Puppet Server to sign:
 

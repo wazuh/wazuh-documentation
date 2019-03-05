@@ -3,12 +3,12 @@
 .. _setup_puppet_agent:
 
 Installing Puppet agent
-============================
+=======================
 
 In this section we assume you have already installed the ``apt`` or ``yum`` Puppet repository on your agent system in the same way that you did on your Puppet Server.
 
 Installation on CentOS/RHEL/Fedora
-------------------------------------
+----------------------------------
 
 Install the Puppet yum repository and then the "puppet-agent" package. See this `index <https://yum.puppetlabs.com/>`_ to find the correct rpm file needed to install the puppet repo for your Linux distribution. For example, to install Puppet 5 for CentOS 7 or RHEL 7, do the following:
 
@@ -22,7 +22,7 @@ Install the Puppet yum repository and then the "puppet-agent" package. See this 
   For a correct installation we recommend the use of Puppet versions equal or greater than 5. 
 
 Installation on Debian/Ubuntu
-------------------------------
+-----------------------------
 
 Install ``curl``, ``apt-transport-https`` and ``lsb-release``:
 

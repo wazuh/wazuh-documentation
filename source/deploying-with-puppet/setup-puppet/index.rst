@@ -3,7 +3,7 @@
 .. _setup_puppet:
 
 Set up Puppet
-============================
+=============
 
 Before we get started with Puppet, confirm the following network requirements are met:
 
