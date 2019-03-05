@@ -13,7 +13,7 @@ This role will install and configure Wazuh Manager and Wazuh API, there are seve
 - **mail_smtp_server:** SMTP server to be used by email notifications ( defaults: ``localhost``)
 - **mail_from:** email notification sender ( defaults: ``ossec@example.com``)
 
-By creating a YAML file ``wazuh-manager.yml`` you can be set the usage of this role:
+By creating a YAML file ``wazuh-manager.yml`` you can specify the usage of this role:
 
 .. code-block:: yaml
 
@@ -22,7 +22,7 @@ By creating a YAML file ``wazuh-manager.yml`` you can be set the usage of this r
       - ansible-wazuh-manager
       - ansible-role-filebeat
 
-Setting the variables on a separate YAML file is recommended when configuring the installation. For this example we used: ``vars-production.yml``:
+Setting the variables in a separate YAML file is recommended when configuring the installation. For this example we used: ``vars-production.yml``:
 
 .. code-block:: yaml
 
@@ -53,7 +53,7 @@ Setting the variables on a separate YAML file is recommended when configuring th
       ssl_manager_key: null
       ssl_auto_negotiate: 'no'
 
-You can configure **Wazuh API** user credentials, this could be done by setting the file: ``ansible-wazuh-manager/vars/wazuh_api_creds.yml`` located on your Ansible control server, the credentials are in ``htpasswd`` format:
+You can configure **Wazuh API** user credentials by including them in ``htpasswd`` format in the file ``ansible-wazuh-manager/vars/wazuh_api_creds.yml`` located on your Ansible control server:
 
 .. code-block:: yaml
 
