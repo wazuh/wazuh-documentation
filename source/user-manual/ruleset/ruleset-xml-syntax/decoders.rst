@@ -102,6 +102,7 @@ prematch
 ^^^^^^^^
 
 It attempts to find a match within the log for the string defined.
+Used along with order <regex>, it eliminates certain strings from the events so they dont generate information in the alerts.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -117,11 +118,22 @@ The attribute below is optional, it allows to discard some of the content of the
 | **offset**         | after_regex   |
 +--------------------+---------------+
 
-As an example, this option searches in the log the startup time:
+As an example:
 
 .. code-block:: xml
 
-  <prematch>^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d startup|</prematch>
+    <decoder name="roundcube-denied-new">
+      <parent>roundcube</parent>
+      <prematch>> \w+ Error: Login failed |> Failed login </prematch>
+      <regex offset="after_prematch">^for (\S+) from (\S+)\. |^for (\S+) from (\S+) in session </regex>
+      <order>user, srcip</order>
+    </decoder>
+
+There, thanks to the ``<prematch>`` option, the string it contains will be skipped in the event, and the decoding process will start with the content of the ``<regex>`` option.
+
+.. note::
+  Many <prematch> options can be attached to the same decoder.
+
 
 regex
 ^^^^^
@@ -288,6 +300,8 @@ Allows to set the name of the child decoder from the name attribute instead of u
 +--------------------+------------+
 | **Allowed values** | true       |
 +--------------------+------------+
+
+As we saw in the ``<parent>`` option, when decoding having a father assigned, in the events the name of the decoder will be the parent's name. With this option, we change that to show the own name of the decoder although it has a defined parent decoder.
 
 json_null_field
 ^^^^^^^^^^^^^^^

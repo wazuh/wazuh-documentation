@@ -146,7 +146,11 @@ Defines the decoder name which generated decoded the event log.
 | **Allowed values** | Any decoder name |
 +--------------------+------------------+
 
-  <decoded_as> mydecoder </decoded_as>
+As a example, if we have a decoder named *mydecoder*:
+
+  .. code-block:: xml
+
+    <decoded_as> mydecoder </decoded_as>
 
 category
 ^^^^^^^^
