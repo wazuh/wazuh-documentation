@@ -62,12 +62,12 @@ You can configure **Wazuh API** user credentials, this could be done by setting 
   - foo:$apr1$/axqZYWQ$Xo/nz/IG3PdwV82EnfYKh/
   - bar:$apr1$hXE97ag.$8m0koHByattiGKUKPUgcZ1
 
-Also, you can configure **agentless** host credentials via the file: ``ansible-wazuh-manager/vars/agentless_creeds.yml``, set many as you need:
+Also, you can configure **agentless** host credentials via the file: ``ansible-wazuh-manager/vars/agentless_creds.yml``, set many as you need:
 
 .. code-block:: yaml
 
   # Be sure you encrypt this file with ansible-vault.
-  agentless_creeds:
+  agentless_creds:
    - type: ssh_integrity_check_linux
      frequency: 3600
      host: root@example1.net
