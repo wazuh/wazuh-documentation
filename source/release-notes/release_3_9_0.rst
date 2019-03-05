@@ -97,7 +97,6 @@ Added *-t* and *-c* options for the Wazuh cluster daemon. Those options allow th
 **Other Wazuh core fixes and improvements**
 
 - Added extra information in the agents' alerts to show IDs of each agent when they change their status (disconnect or remove).
-
 - Fixed an error in the OSquery configuration validation. The ``osqueryd`` daemon started no matter the string it received, whether it was yes, no or anything else.
 - Wazuh manager starts regardless of the contents of ``local_decoder.xml``. 
 - Fixed memory leak and crash in *Vulnerability Detector*.
@@ -185,6 +184,7 @@ Wazuh ruleset
 - Fixed the bruteforce attack rules for Windows Eventchannel by adding the new ``<same_field>`` option and changing some rules.
 - Added *Sysmon rules* for Windows.
 
+
 .. code-block:: xml
 
     <rule id="20351" level="0">
@@ -200,3 +200,16 @@ Wazuh ruleset
         <description>Sysmon - Suspicious Process - lsm.exe</description>
         <group>pci_dss_10.6.1,pci_dss_11.4,gdpr_IV_35.7.d,</group>
     </rule>
+
+- Added a new rule to catch logon success from a Windows workstation.
+
+    .. code-block:: xml
+
+        <rule id="20019" level="3">
+            <if_sid>20007</if_sid>
+            <field name="win.eventdata.workstationName">\.+</field>
+            <field name="win.eventdata.logonType">^2$</field>
+            <description>Windows Workstation Logon Success</description>
+            <options>no_full_log</options>
+            <group>authentication_success,pci_dss_10.2.5,gpg13_7.1,gpg13_7.2,gdpr_IV_32.2,</group>
+        </rule>
