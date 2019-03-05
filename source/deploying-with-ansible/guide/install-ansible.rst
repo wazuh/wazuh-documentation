@@ -343,7 +343,7 @@ This way we will know that Ansible server reaches the remote system (Wazuh serve
 Playbooks and Roles
 -------------------
 
-We can obtain the necessary palybooks and roles for the installation of the Wazuh server components, Elastic Stack components and Wazuh agents cloning the repository in ``/etc/ansible/roles``.
+We can obtain the necessary playbooks and roles for the installation of the Wazuh server components, Elastic Stack components and Wazuh agents cloning the repository in ``/etc/ansible/roles``.
 
 From Ansible server.
 
