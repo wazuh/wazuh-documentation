@@ -12,9 +12,7 @@ logging
       <logging>
       </logging>
 
-This section shows how to configure the format of internal log file.
-
-This file format, will depend on this option, being .log the default (``/var/ossec/logs/ossec.log``)
+This section shows how to configure the format of the internal log file ("ossec.log")
 
 Options
 -------
