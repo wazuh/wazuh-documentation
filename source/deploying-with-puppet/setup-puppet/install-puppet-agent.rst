@@ -61,10 +61,11 @@ Installation on Windows
 2 - Install Puppet.
   
   - Double-click the MSI package downloaded and follow the graphical wizard.
-  
+
   - If it is needed to install using the command-line:
 
       .. code-block:: bash
+      
         msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi
         
 
