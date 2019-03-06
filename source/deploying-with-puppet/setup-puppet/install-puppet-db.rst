@@ -2,12 +2,15 @@
 PuppetDB installation (Optional)
 ================================
 
-.. warning:: Some of these steps may be outdated. If it is not necessary to install, continue in the next section. 
+.. warning:: Some of these steps may be outdated.
 
 After configuring Puppet Server to run on Apache with Passenger, the next step is to add PuppetDB so that you can take advantage of exported resources, as well as have a central storage location for Puppet facts and catalogs.
 
-Installation on CentOS/RHEL 7 (Adjust if your version is different.)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Installation on CentOS/RHEL 7
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+  This configuration may be different depending of the SO version.
 
 .. code-block:: console
 
