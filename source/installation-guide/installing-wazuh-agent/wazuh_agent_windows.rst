@@ -7,7 +7,7 @@ Install Wazuh agent on Windows
 
 .. note:: You will need administrator privileges to perform this installation.
 
-The first step to installing the Wazuh agent on a Windows machine is to download the Windows installer from the :doc:`packages list<../packages-list/index>`. Once this is downloaded, the Windows agent can be installed in one of two ways:
+The first step to installing the Wazuh agent on a Windows machine is to download the appropiate Windows installer for your processor architecture from the :doc:`packages list<../packages-list/index>`. Once this is downloaded, the Windows agent can be installed in one of two ways:
 
 - `Using the GUI`_
 - `Using the command line`_
@@ -23,15 +23,16 @@ Once installed, the agent uses a graphical user interface for configuration, ope
       :align: center
       :width: 320 px
 
-By default, all agent files will be found in: ``C:\Program Files(x86)\ossec-agent``.
+By default, all agent files will be found in: ``C:\Program Files\ossec-agent``.
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
 
 Using the command line
 ----------------------
 
-.. note::
-    Unattended installations must be run with administrator permissions.
+.. note:: Unattended installations must be run with administrator permissions.
+
+.. note:: For the following steps, replace the MSI package filename with the one matching your processor architecture.
 
 To install the Windows agent from the command line, run the installer using the following command (the ``/q`` argument is used for unattended installations)::
 
@@ -46,7 +47,7 @@ You can automate the agent registration with authd using the following parameter
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 | Option                | Description                                                                                                                  |
 +=======================+==============================================================================================================================+
-|   APPLICATIONFOLDER   |  Sets the installation path. Default C:\\Program Files (x86)\\ossec-agent\\.                                                 |
+|   APPLICATIONFOLDER   |  Sets the installation path. Default C:\\Program Files\\ossec-agent\\.                                                 |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 |   ADDRESS             |  Specifies the managers IP address or hostname. This option also accepts a list of IPs or hostnames separated by semicolons. |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
@@ -95,9 +96,7 @@ Registration with relative path to CA. It will be searched at your `APPLICATIONF
 
 Absolute paths to CA, certificate or key that contain spaces can be written as shown below::
 
-    wazuh-agent-3.8.2-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" KEY="C:\Progra~2\sslagent.key" PEM="C:\Progra~2\sslagent.cert"
-
-The number "2" means that the file will be searched at the second occurrence of the "Progra" word, thus, the key and certificate would be searched at the folder "C:\\Program Files (x86)". In case this number was "1", it would be searched at "Program Files".
+    wazuh-agent-3.8.2-1.msi /q ADDRESS="192.168.1.1" AUTHD_SERVER="192.168.1.1" KEY="C:\Program Files\sslagent.key" PEM="C:\Program Files\sslagent.cert"
 
 .. note::
     To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <verify-hosts>` section.

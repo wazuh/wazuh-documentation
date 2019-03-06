@@ -35,7 +35,7 @@ Putty is a popular Windows SSH client.  Download and run the MSI installer for P
 Use PuTTYgen to convert your key file into a form Putty can authenticate with
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
-    - Run PuTTYgen (**c:\\Program Files (x86)\\PuTTY\\puttygen.exe**)
+    - Run PuTTYgen (**c:\\Program Files\\PuTTY\\puttygen.exe**)
     - File -> Load private key
     - Change file type selector to "All Files"
     - Browse to and Open your WazuhLab.pem file.  It will be imported and look like this:
@@ -48,7 +48,7 @@ Use PuTTYgen to convert your key file into a form Putty can authenticate with
     - Click **[Save private key]**, confirm that you don't want to use a password and click **[Yes]**.
     - Store the key in a location convenient to you.  For the following example, we will assume you put it in **c:\\ssh\\** under the name "WazuhLab" with .ppk file type.
     - Close PuTTYgen.
-    - Run PuTTY (**c:\\Program Files (x86)\\PuTTY\\putty.exe**)
+    - Run PuTTY (**c:\\Program Files\\PuTTY\\putty.exe**)
     - Under *Host Name* put the Elastic IP associated with the Linux EC2 instance.
     - Under *Saved Session* put the instance name (i.e. Wazuh Server)
     - Under Connection->Data, set the *Auto-login username* to "centos".
