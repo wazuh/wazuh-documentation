@@ -28,6 +28,9 @@ Download and install the Wazuh module from Puppet Forge:
 
 This module installs and configures Wazuh agent and manager.
 
+.. note::
+  For now, Puppet only supports Wazuh v2.0.22 and v3.8.2.
+
 Install manager via Puppet
 --------------------------
 

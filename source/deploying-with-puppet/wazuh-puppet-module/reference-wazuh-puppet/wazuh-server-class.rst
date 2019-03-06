@@ -5,7 +5,6 @@
 Wazuh server class
 ===================
 
-
 ``class wazuh::server``
 -----------------------
 

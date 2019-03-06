@@ -29,10 +29,9 @@ wazuh::server::ossec_scanpaths:
 wazuh::server::ossec_ignorepaths:
 ---------------------------------
 
-By default, it will empty.
+By default, it will be empty.
 
 To overwrite the defaults or add in new paths to scan, you can use here to overwrite the defaults.
-
 
 More information in about syscheck configuration in the :ref:`File integrity monitoring <fim-examples>` section.
 

@@ -5,7 +5,8 @@
 Set up Puppet
 =============
 
-In this section, we are going to 
+In this section, we are going to give a short explanation of how to install the different instances of Puppet. If further information is required, go to the `Official Puppet documentation. <https://puppet.com/docs/pe/2017.2/index.html>`_
+
 Before we get started with Puppet, confirm that the following network requirements are met:
 
 - **Private network DNS**: Forward and reverse DNS must be configured, and every server must have a unique hostname. If you do not have DNS configured, you must use your hosts file for name resolution. We will assume that you will use your private network for communication within your infrastructure.
