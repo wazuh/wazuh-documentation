@@ -160,7 +160,7 @@ $(function(){
 		var vSelector = $('.release-selector-wrapper');
 		if (vSelector.closest('#main-navbar').length > 0 ){
 			// Selector in #main-navbar: change to .version-zone:
-			vSelector.appendTo($('.version-zone'));
+			vSelector.prependTo($('.version-zone'));
 		}
 	}
 
