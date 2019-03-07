@@ -2,6 +2,7 @@
 
 Recommended Specs
 =================
+
 This section describes hardware recommendations as well as the recommended operating systems where Wazuh can be deployed. In order to deploy an elastic cluster with optimal performance, follow the guidelines described in https://www.elastic.co/guide/en/elasticsearch/guide/current/hardware.html.
 
 CPUs
@@ -36,9 +37,9 @@ To maintain a stable performance, the following features are recommended.
 +==================================================================+========================================================================+
 | CPU (1)                                                          | Dual-Core 2.5 GHz                                                      |
 +------------------------------------------------------------------+------------------------------------------------------------------------+
-| RAM                                                              | 2 GB DDR3 1066 MHz                                                     |
+| RAM                                                              | 4 GB DDR3 1066 MHz                                                     |
 +------------------------------------------------------------------+------------------------------------------------------------------------+
-| Hard disk (2)                                                    | 64 GB Solid State Drive                                                |
+| Hard disk (2)                                                    | 128 GB Solid State Drive                                               |
 +------------------------------------------------------------------+------------------------------------------------------------------------+
 | Recommended Distributions (3)                                    | * RPM Based:  Centos7, RHEL7                                           |
 |                                                                  | * DEB Based:  Debian 9, ubuntu 16.04                                   |
@@ -48,6 +49,10 @@ To maintain a stable performance, the following features are recommended.
 	1) Preferably increase processor frequency rather than the number of processors.
 	2) Disk size depends on the number of events generated per second, in the case of registering "archives" is necessary a bigger capacity.
 	3) Older operating systems are supported, but the use of the newer stable operating systems within each distribution is recommended.
+
+.. note::
+	This manager performance depends on the Events per Second (EPS), so this values may vary a lot depending on this variable.
+	With this settings, a manager receiving 400-600 EPS works well.
 
 Agent recommendations
 ---------------------
@@ -69,3 +74,5 @@ Most significant values of consumption are shown in the following table (The spe
 +-------------------------------+---------------+---------------------+----------------+-----------------------+
 
 This values are a bit higher in Windows agents because the Windows agents generate a greater number of events in a larger size.
+
+It indicates that Wazuh agents can run on machines with very limited hardware.
