@@ -5,6 +5,8 @@
 Regular Expression Syntax
 =========================
 
+**Regular expressions** or ``regex`` are sequences of characters that define a pattern.
+
 There are two types of regular expressions: regex (*OS_Regex*) and sregex (*OS_Match*).
 
 Regex (OS_Regex) syntax
@@ -98,4 +100,6 @@ following special characters.
   | $           | To specify the end of the text                   |
   +-------------+--------------------------------------------------+
   | \|          | To create a logic: or, between multiple patterns |
+  +-------------+--------------------------------------------------+
+  | !           | To negate the expression                         |
   +-------------+--------------------------------------------------+

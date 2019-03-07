@@ -2,7 +2,7 @@
 
 .. _release_3_7_2:
 
-3.7.2 Release Notes
+3.7.2 Release notes
 ===================
 
 This section shows the most relevant fixes in version 3.7.2. More details about these changes are provided in the component changelog:

@@ -56,7 +56,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.6.0
+    # apt-get install elasticsearch=6.6.1
 
 2. Enable and start the Elasticsearch service:
 
@@ -86,7 +86,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.6.0",
+        "number" : "6.6.1",
         "build_flavor" : "default",
         "build_type" : "deb",
         "build_hash" : "053779d",
@@ -123,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.6.0-1
+    # apt-get install logstash=1:6.6.1-1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -178,17 +178,29 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=6.6.0
+    # apt-get install kibana=6.6.1
 
 2. Install the Wazuh app plugin for Kibana:
 
+  a) With sudo:
+
   .. code-block:: console
 
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.0.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.1.zip
+
+  b) Without sudo:
+
+  .. code-block:: console
+
+    # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.1.zip' kibana
 
   .. warning::
 
     The Kibana plugin installation process may take several minutes. Please wait patiently.
+
+    While installing the Wazuh app, Kibana needs about 2.2GB of memory.
+
+    Once installed, Kibana doesn't need more than the default Node.js memory limit (1.6GB).
 
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 

@@ -168,6 +168,12 @@ To enable the password authorization, use the ``-P`` flag when running the regis
 Host verification using SSL
 ---------------------------
 
+.. note::
+  Using verification with an SSL key certificate is really useful to check if connections between agents and managers are correct.
+
+  This way, the user avoids the mistake of connecting to a different manager or agent.
+
+
 Creating a Certificate of Authority (CA)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -182,6 +188,9 @@ To use the registration service with SSL certification, you must create a Certif
 
 Manager verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  .. image:: ../../images/manual/managing-agents/SSLregister1.png
+    :align: center
+    :width: 100%
 
 1. Issue and sign a certificate for the manager, entering the hostname or the IP address that agents will use to connect to the server. For example, if the manager's IP is **192.168.1.2**:
 
@@ -213,8 +222,15 @@ Manager verification using SSL
     # cp rootCA.pem C:\Program Files (x86)\ossec-agent
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
 
+.. warning::
+  The manager verification is only a check. Although the verification fails, the connection will be realized successfully and returning just a warning.
+
 Agent verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+  .. image:: ../../images/manual/managing-agents/SSLregister2.png
+    :align: center
+    :width: 100%
 
 **Agent verification (without host validation)**
 
@@ -283,6 +299,9 @@ This is an alternative method to the previous one. In this case, we will bind th
 
     # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+
+.. warning::
+  If the host verification process fails, the connection won't be realized.
 
 Additional configurations
 -------------------------
