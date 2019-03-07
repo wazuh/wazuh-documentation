@@ -123,4 +123,4 @@ Unfortunately, there is no facility for overwriting decoders in the way describe
 3. Perform the changes in the file ``/var/ossec/etc/decoders/my_decoders.xml``.
 
 .. warning::
-    Note that at this point, if updates to the public Wazuh Ruleset include changes to the file of the decoder you have overwritten, they will not apply to you since since you are no longer loading that decoder file from the standard location that gets updates.  At some point you may have to manually migrate your customized material to a newer copy of that file.  Consider internally documenting your changes so that they are easy to find if they have to be migrated later.
+    Note that at this point, if updates to the public Wazuh Ruleset include changes to the file of the decoder you have overwritten, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point you may have to manually migrate your customized material to a newer copy of that file.  Consider internally documenting your changes so that they are easy to find if they have to be migrated later.
