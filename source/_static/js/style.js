@@ -17,6 +17,8 @@ $(function(){
 			gTocSpaceBottom = 15,
       gTocSpaceTop = $('#search-lg').height();
 
+			changeVerionPosition($(window).width());
+
 	// Finds current page section in globaltoc
 	$('.globaltoc .toctree-l2.current a').each(function(e){
 		if (!$(this).siblings('ul').length){
@@ -130,4 +132,36 @@ $(function(){
    tocWrapperElement.animate({'left': 0});
 	 $('#main-content').removeClass('full-width');
   });
+
+	 $(window).on('resize', function(e){
+		 var curWidth = $(this).width();
+		 changeVerionPosition(curWidth);
+	 });
+
+
+	function changeVerionPosition (currentWidth) {
+		if (currentWidth > 991) {
+			versionToDesktop();
+		} else {
+			versionToMobile();
+		}
+	}
+
+	function versionToMobile (){
+		var vSelector = $('.release-selector-wrapper');
+		if (vSelector.closest('.version-zone').length > 0 ){
+			// Selector in .version-zone: change to #main-navbar
+			vSelector.appendTo($('#main-navbar'));
+		}
+
+	}
+
+	function versionToDesktop (){
+		var vSelector = $('.release-selector-wrapper');
+		if (vSelector.closest('#main-navbar').length > 0 ){
+			// Selector in #main-navbar: change to .version-zone:
+			vSelector.appendTo($('.version-zone'));
+		}
+	}
+
 });

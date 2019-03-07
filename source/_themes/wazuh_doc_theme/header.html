@@ -21,11 +21,8 @@
       </div> <!-- // #logo-title -->
     </nav>
 
-    <div class="navbar-expand-lg navbar-light">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarWebMenu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse"  id="navbarWebMenu">
+    <div class="">
+      <div class="d-none d-lg-inline-flex" id="navbarWebMenu">
 
         <nav class="menuweb-bar">
           <ul id="menu-header-menuweb" class="nav">
@@ -36,7 +33,7 @@
           </ul>
         </nav>
 
-    <nav class="social-bar d-none d-lg-inline-flex">
+      <nav class="social-bar d-none d-lg-inline-flex">
         <ul id="menu-header-social-bar" class="nav justify-content-end">
           <li class="menu-item nav-item"><a class="nav-link" href={{ theme_wazuh_web_url + '/community/' }}>Community</a></li>
           <li class="menu-item nav-item d-none d-md-block"><a class="nav-link" href={{ theme_wazuh_web_url + '/contact-us/' }}>Contact us</a></li>
@@ -65,8 +62,12 @@
 
   <div class="container-fluid">
     <div class="row">
-
-      <div id="search-lg" class="title-bar-right col-xs-12 col-md-3">
+      <div class="navbar-expand-lg navbar-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-globaltoc" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div id="search-lg" class="title-bar-right col-xs-12 col-lg-3">
         {% if pagename == 'index' %}
         <span class="no-searchbox">Wazuh Docs</span>
         {% else %}
@@ -74,7 +75,7 @@
         {% endif %}
       </div> <!-- // #search-lg -->
 
-      <div class="submenu col-xs-12 col-md-6">
+      <div class="submenu d-none d-lg-flex col-lg-6">
         <ul id="menu-submenu" class="nav">
           <li class="menu-item nav-item"><a class="nav-link" href="">Getting Started</a></li>
           <li class="menu-item nav-item"><a class="nav-link" href="">Installation Guide</a></li>
@@ -82,7 +83,7 @@
         </ul>
       </div>
 
-      <div class="version-zone col-xs-12 col-md-3">
+      <div class="version-zone d-none d-lg-flex col-lg-3">
         <span class="release-selector-wrapper">
           {% if theme_display_version %}
           {% include "versions.html" %}

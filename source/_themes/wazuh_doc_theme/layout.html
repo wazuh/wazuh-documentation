@@ -119,12 +119,9 @@
   {% endif %}
     {% include "header.html" %} {%- block header %}{% endblock header %}
     <section  class="container-fluid central-page-area">
-      <button id="btn-uncollapse-globaltoc" class="btn-collapsible-globaltoc">
-        <span class="fa fa-angle-right"></span>
-      </button>
       <div class="row flex-nowrap">
-        <nav class="col-lg-3 full-toctree-nav">
-          <div class="side-scroll">
+        <nav class="full-toctree-nav navbar-expand-lg navbar-light">
+          <div class="side-scroll collapse navbar-collapse" id="navbar-globaltoc">
             <div class="globaltoc" role="navigation" aria-label="main navigation" id="globaltoc">
               {% block menu %}
               {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
@@ -136,9 +133,6 @@
               {% endif %}
               {% endblock %}
             </div>
-            <button id="btn-collapse-globaltoc" class="btn-collapsible-globaltoc">
-                <span class="fa fa-angle-left"></span>
-            </button>
           </div>
         </nav>
 
