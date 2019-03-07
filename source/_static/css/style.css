@@ -3210,6 +3210,7 @@ div.highlight pre {
 
 			#main-content {
 				padding-left: 30px;
+        max-width: calc(100% - 320px);
 			}
 
       #welcome-to-wazuh .topic p {
