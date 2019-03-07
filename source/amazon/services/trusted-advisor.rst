@@ -10,23 +10,7 @@ AWS Trusted Advisor
 Amazon configuration
 --------------------
 
-1. Go to Services > Storage > S3:
-
-.. thumbnail:: ../../images/aws/aws-create-firehose-1.png
-  :align: center
-  :width: 70%
-
-2. Click on the *Create bucket*:
-
-.. thumbnail:: ../../images/aws/aws-create-firehose-2.png
-  :align: center
-  :width: 70%
-
-3. Create a new bucket, giving it a name and clicking on the *Create* button:
-
-.. thumbnail:: ../../images/aws/aws-create-firehose-3.png
-  :align: center
-  :width: 50%
+1. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
 
 4. Go to Services > Analytics > Kinesis:
 

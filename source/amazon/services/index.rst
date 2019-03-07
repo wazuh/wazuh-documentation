@@ -20,6 +20,7 @@ This module requires some dependencies in order to work, and also the right cred
   .. toctree::
     :maxdepth: 1
 
+    S3-bucket
     cloudtrail
     config
     vpc
