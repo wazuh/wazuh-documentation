@@ -24,33 +24,33 @@ Installing Wazuh manager
 
       # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
 
-    These are the basic dependencies to build Wazuh's binaries if you are going to install them in the default directory but, if you want to install in any other directory, you need to install some new dependencies in order to build the CPython interpreter included in the Wazuh manager installation since v3.9.0. By default, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``, otherwise, it will download a modified version of CPython sources. This sources will build CPython for the target directory and link the interpreter and the internal dependencies against the ``libwazuhext``.
+  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
 
-    To install the build dependencies of CPython, you need to add the sources repository for Debian/Ubuntu based OS if they are not already present and then, install those dependencies:
+  To install the build dependencies of CPython, follow these steps:
 
-    * For RPM-based distributions:
+  * For RPM-based distributions:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # yum install epel-release yum-utils -y
-        # yum-builddep python34 -y
+      # yum install epel-release yum-utils -y
+      # yum-builddep python34 -y
 
 
-    * For Ubuntu based system:
+  * For Ubuntu based system:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
-        # apt-get build-dep python3.6 -y
+      # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
+      # apt-get build-dep python3.6 -y
 
-    * If you are using an Debian based system:
+  * For Debian based system:
 
-      .. code-block:: console
+    .. code-block:: console
 
-        # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
-        # apt-get build-dep python3.5 -y
+      # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+      # apt-get build-dep python3.5 -y
 
-    .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
+  .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
 
 
 2. Download and extract the latest version:
