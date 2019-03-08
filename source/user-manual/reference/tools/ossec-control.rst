@@ -7,7 +7,7 @@ ossec-control
 
 
 .. warning::
-    Since Wazuh 3.9.0. version, optional daemons are running by default when starting the manager, so this daemon is deprecated and unused.
+    Since Wazuh 3.9.0. version, optional daemons are running by default when starting the manager, so the use of this script is unused.
 
 The ossec-control script is used to start, stop, configure, or check on the status of Wazuh processes. This script can enable or disable client-syslog, the authentication daemon, cluster daemons, database logging, agentless configurations, integration with slack and pagerduty, and debug mode.
 
@@ -31,24 +31,6 @@ The ossec-control script is used to start, stop, configure, or check on the stat
 +-------------+---------------------------------------------------------------------------------------------------------+
 | **enable**  | Enable Wazuh functionality.                                                                             |
 +             +-----------------+---------------+-----------------------------------------------------------------------+
-|             | Allowed options | database      | Enable the ossec-dbd daemon for logging to a database.                |
-+             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | Server and local                                                      |
-+             +                 +---------------+-----------------------------------------------------------------------+
-|             |                 | client-syslog | Enable ossec-csyslogd for logging to remote syslog.                   |
-+             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | Server and local                                                      |
-+             +                 +---------------+-----------------------------------------------------------------------+
-|             |                 | agentless     | Enable ossec-agentlessd for running commands on systems               |
-|             |                 |               |                                                                       |
-|             |                 |               | without Wazuh agents.                                                 |
-+             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | Server and local                                                      |
-+             +                 +---------------+-----------------------------------------------------------------------+
-|             |                 | integrator    | Enable integrator for connection to external APIs and alerting tools. |
-+             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | Server                                                                |
-+             +                 +---------------+-----------------------------------------------------------------------+
 |             |                 | auth          | Enable the ossec-authd daemon for add agents to the manager.          |
 +             +                 +               +-----------------------------------------------------------------------+
 |             |                 |               | Server                                                                |
@@ -61,24 +43,6 @@ The ossec-control script is used to start, stop, configure, or check on the stat
 +-------------+-----------------+---------------+-----------------------------------------------------------------------+
 | **disable** | Disable Wazuh functionality.                                                                            |
 +             +-----------------+---------------+-----------------------------------------------------------------------+
-|             | Allowed options | database      | Disable the ossec-dbd daemon for logging to a database.               |
-+             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | Server and local                                                      |
-+             +                 +---------------+-----------------------------------------------------------------------+
-|             |                 | client-syslog | Disable ossec-csyslogd for logging to remote syslog.                  |
-+             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | Server and local                                                      |
-+             +                 +---------------+-----------------------------------------------------------------------+
-|             |                 | agentless     | Disable ossec-agentlessd for running commands on systems              |
-|             |                 |               |                                                                       |
-|             |                 |               | without Wazuh agents.                                                 |
-+             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | Server and local                                                      |
-+             +                 +---------------+-----------------------------------------------------------------------+
-|             |                 | integrator    | Disable integrator for connection to external APIs and alerting tools.|
-+             +                 +               +-----------------------------------------------------------------------+
-|             |                 |               | Server                                                                |
-+             +                 +---------------+-----------------------------------------------------------------------+
 |             |                 | auth          | Disable the ossec-authd daemon for add agents to the manager.         |
 +             +                 +               +-----------------------------------------------------------------------+
 |             |                 |               | Server                                                                |
