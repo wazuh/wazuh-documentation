@@ -27,7 +27,7 @@ Syslog output is configured in the ``ossec.conf`` file. All of the available opt
 
 The above configuration will send alerts to ``192.168.1.240`` and, if the alert level is higher than 9, also to ``192.168.1.241``.
 
-After, restart Wazuh:
+To apply the changes, restart Wazuh:
 
   a. For Systemd:
 
