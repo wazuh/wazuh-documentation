@@ -5886,11 +5886,14 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 ::
 
 	{
-	   "error": 0,
-	   "data": {
-	      "totalItems": 0,
-	      "items": []
-	   }
+		"error": 0,
+		"data": {
+			"totalItems": 2,
+			"items": [
+				"2.3 Debian Linux",
+				"1.4 Debian Linux"
+			]
+		}
 	}
 	
 
