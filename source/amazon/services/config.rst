@@ -10,13 +10,10 @@ AWS Config
 Amazon configuration
 --------------------
 
-1. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
+1. Now, on the `AWS Config page, <https://console.aws.amazon.com/config/>`_ we go to *Settings*.
 
 
-2. Now, on the `AWS Config page, <https://console.aws.amazon.com/config/>`_ we go to *Settings*.
-
-
-3. Here, choose the **Resource types to record** (specify the AWS resource types you want AWS Config to record):
+2. Here, choose the **Resource types to record** (specify the AWS resource types you want AWS Config to record):
 
   - All resources
   - Specific types
@@ -24,35 +21,35 @@ Amazon configuration
 .. note::
   For more information about these options, see `Selecting Which Resources AWS Config Records. <https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html>`_
 
-4. Choose the *S3 Bucket* selected before.
+3. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
 
 Now, to configure the rules:
 
-5. Go to Services > Management Tools > CloudWatch:
+4. Go to Services > Management Tools > CloudWatch:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-12.png
   :align: center
   :width: 100%
 
-6. Select Rules on the left menu and click on the *Create* rule button:
+5. Select Rules on the left menu and click on the *Create* rule button:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-13.png
   :align: center
   :width: 100%
 
-7. Select which service do you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
+6. Select which service do you want to get logs from using the Service name slider, then, click on the Add target button and add the previously created Firehose delivery stream there. Also, create a new role to access the delivery stream:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-14.png
   :align: center
   :width: 100%
 
-8. Give the rule some name and click on the *Create* rule button:
+7. Give the rule some name and click on the *Create* rule button:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-15.png
   :align: center
   :width: 100%
 
-9. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
+8. Once the rule is created, data will start to be sent to the previously created S3 bucket. Remember to first enable the service you want to monitor, otherwise you won't get any data.
 
 
 Wazuh configuration

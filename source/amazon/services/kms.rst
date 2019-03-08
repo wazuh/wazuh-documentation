@@ -10,7 +10,7 @@ AWS Key Management Service
 Amazon configuration
 --------------------
 
-1. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>` 
+1. :ref:`Create a new <S3_bucket>` S3 bucket. (If you want to use an already created one, skip this step).
 
 2. Go to Services > Analytics > Kinesis:
 
