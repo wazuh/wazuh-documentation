@@ -5,10 +5,6 @@
 ossec-control
 =============
 
-
-.. warning::
-    Since Wazuh 3.9.0. version, optional daemons are running by default when starting the manager, so the use of this script is unused.
-
 The ossec-control script is used to start, stop, configure, or check on the status of Wazuh processes. This script can enable or disable client-syslog, the authentication daemon, cluster daemons, database logging, agentless configurations, integration with slack and pagerduty, and debug mode.
 
 .. note::
