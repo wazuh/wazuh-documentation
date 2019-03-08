@@ -133,7 +133,7 @@ Find :ref:`here <reference_ossec_database_output>` the complete configuration re
 Last steps
 ----------
 
-The setup process for the database output is finished. Now the only thing left is to and restart the Wazuh manager:
+The setup process for the database output is finished. Now the only thing left is to restart the Wazuh manager:
 
   a. For Systemd:
 
