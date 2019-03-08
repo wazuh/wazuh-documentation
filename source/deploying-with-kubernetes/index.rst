@@ -20,10 +20,10 @@ Pre-requisites
 
     - Kubernetes can run on a wide range of Cloud providers and bare-metal environments, this repository focuses on AWS. It was tested using Amazon EKS. You should be able to:
         
-        - Create Persistent Volumes on top of AWS EBS when using a volumeClaimTemplates
+        - Create Persistent Volumes on top of AWS EBS when using a *volumeClaimTemplates*
         - Create a record set in AWS Route 53 from a Kubernetes LoadBalancer.
     
-    - Having at least two Kubernetes nodes in order to meet the podAntiAffinity policy.
+    - Having at least two Kubernetes nodes in order to meet the *podAntiAffinity* policy.
 
 Overview
 --------
@@ -45,7 +45,6 @@ Pods
 This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent registration service (authd) and the API are placed here.
 
 Details:
-
     - Image: Docker Hub 'wazuh/wazuh:3.7.0_6.5.0'
     - Controller: StatefulSet
 
@@ -54,7 +53,6 @@ Details:
 These pods contain a worker node of the Wazuh cluster. They will receive the agent events.
 
 Details:
-
     - Image: Docker Hub 'wazuh/wazuh:3.7.0_6.5.0'
     - Controller: StatefulSet
 
@@ -63,7 +61,6 @@ Details:
 Elasticsearch pod. It receives and stores alerts received from Logstash. No Elasticsearch cluster is supported yet.
 
 Details:
-
     - Image: docker.elastic.co/elasticsearch/elasticsearch:6.5.0
     - Controller: StatefulSet
 
@@ -72,7 +69,6 @@ Details:
 Logstash pod. It receives the alerts from each Filebeat located in every Wazuh manager. Then, the alerts are sent to Elasticsearch.
 
 Details:
-
     - image: Docker Hub 'wazuh/logstash:3.7.0_6.5.0'
     - Controller: Deployment
 
@@ -81,7 +77,6 @@ Details:
 Kibana pod. It lets you visualize your Elasticsearch data, along with other features as the Wazuh app.
 
 Details:
-
     - image: Docker Hub 'wazuh/kibana:3.7.0_6.5.0'
     - Controller: Deployment
 
@@ -90,7 +85,6 @@ Details:
 The nginx pod acts as a reverse proxy for a safer access to Kibana.
 
 Details:
-
     - image: Docker Hub 'wazuh/nginx:3.7.0_6.5.0'
     - Controller: Deployment
 
@@ -114,44 +108,45 @@ Services
 
     - wazuh:
         Wazuh API: wazuh-master.your-domain.com:55000
+
         Agent registration service (authd): wazuh-master.your-domain.com:1515
+    
     - wazuh-workers:
         Reporting service: wazuh-manager.your-domain.com:1514
     - wazuh-cluster:
         Communication for Wazuh manager nodes.
 
-
 Deploy
 ------
 
 1. Deploy Kubernetes
-   
-Follow the `Official guide <https://kubernetes.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/> to deploy a Kubernetes Cluster.`_
-This repository focuses on `AWS <https://aws.amazon.com/es/>`_ but it should be easy to adapt it to another Cloud provider. In case you are using AWS, we recommend `EKS <https://docs.aws.amazon.com/en_us/eks/latest/userguide/getting-started.html>`_.
+    
+    Follow the `Official guide <https://kubernetes.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/>`_ to deploy a Kubernetes Cluster.
+    This repository focuses on `AWS <https://aws.amazon.com/es/>`_ but it should be easy to adapt it to another Cloud provider. In case you are using AWS, we recommend `EKS <https://docs.aws.amazon.com/en_us/eks/latest/userguide/getting-started.html>`_.
 
 2. Create domains to access the services
 
-We recommend creating domains and certificates to access the services. Examples:
+    We recommend creating domains and certificates to access the services. Examples:
 
-    - wazuh-master.your-domain.com: Wazuh API and authd registration service.
-    - wazuh-manager.your-domain.com: Reporting service.
-    - wazuh.your-domain.com: Kibana and Wazuh app.
+        - wazuh-master.your-domain.com: Wazuh API and authd registration service.
+        - wazuh-manager.your-domain.com: Reporting service.
+        - wazuh.your-domain.com: Kibana and Wazuh app.
 
-.. note::
-    You can skip this step and the services will be accessible using the Load balancer DNS from the VPC.
+    .. note::
+        You can skip this step and the services will be accessible using the Load balancer DNS from the VPC.
 
 3. Deployment
 
-Clone this repository to deploy the necessary services and pods.
+    Clone this repository to deploy the necessary services and pods.
 
     .. code-block:: bash
-        
+            
         $ git clone https://github.com/wazuh/wazuh-kubernetes.git
         $ cd wazuh-kubernetes
 
 3.1. Wazuh namespace and StorageClass
 
-The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our StateFulSet applications.
+    The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our StateFulSet applications.
 
     .. code-block:: bash
 
@@ -167,11 +162,13 @@ The Wazuh namespace is used to handle all the Kubernetes elements (services, dep
         $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-sts.yaml
 
 3.3. Deploy Kibana and Nginx
-Kibana and Nginx deployment.
-
-In case you need to provide a domain name, update the *domainName* annotation value in the ``nginx-svc.yaml`` file before deploying that service. You should also set a valid AWS ACM certificate ARN in the ``nginx-svc.yaml`` for the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation. That certificate should match with the `domainName`.
     
+    Kibana and Nginx deployment.
+
+    In case you need to provide a domain name, update the *domainName* annotation value in the ``nginx-svc.yaml`` file before deploying that service. You should also set a valid AWS ACM certificate ARN in the ``nginx-svc.yaml`` for the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation. That certificate should match with the `domainName`.
+        
     .. code-block:: bash
+
         $ kubectl apply -f elastic_stack/kibana/kibana-svc.yaml
         $ kubectl apply -f elastic_stack/kibana/nginx-svc.yaml
 
@@ -201,7 +198,8 @@ In case you need to provide a domain name, update the *domainName* annotation va
         $ kubectl apply -f wazuh_managers/wazuh-worker-0-sts.yaml
         $ kubectl apply -f wazuh_managers/wazuh-worker-1-sts.yaml
 
-5. Verifying the deployment
+Verifying the deployment
+------------------------
 
 **Namespace**
 
@@ -262,15 +260,15 @@ In case you need to provide a domain name, update the *domainName* annotation va
 
 **Accesing Kibana**
 
-In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: https://wazuh.your-domain.com.
+    In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: https://wazuh.your-domain.com.
 
-Also, you can access using the External-IP (from the VPC): https://internal-xxx-yyy.us-east-1.elb.amazonaws.com:443
+    Also, you can access using the External-IP (from the VPC): https://internal-xxx-yyy.us-east-1.elb.amazonaws.com:443
 
     .. code-block:: bash
 
         $ kubectl get services -o wide -n wazuh
-        NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                                       PORT(S)                          AGE       SELECTOR
-        wazuh-nginx           LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                                      80:31831/TCP,443:30974/TCP       15m       app=wazuh-nginx
+        NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                    PORT(S)                          AGE       SELECTOR
+        wazuh-nginx           LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-nginx
 
 
 Agents
