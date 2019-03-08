@@ -30,6 +30,9 @@ Amazon configuration
   :align: center
   :width: 70%
 
+.. note::
+  This *flow log* is configured under the EC2, which means it only will capture traffic from a specific machine. If we want to create a *flow log* for all network traffic, we have to configure it under *VPC*.
+
 Wazuh configuration
 -------------------
 

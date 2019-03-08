@@ -18,7 +18,7 @@ Amazon configuration
   :align: center
   :width: 70%
 
-3.1. If it's the first time you're using this service, you'll see the following screen. Just click on *Get started*:
+3. If it's the first time you're using this service, you'll see the following screen. Just click on *Get started*:
 
 .. thumbnail:: ../../images/aws/aws-create-firehose-4.1.png
   :align: center

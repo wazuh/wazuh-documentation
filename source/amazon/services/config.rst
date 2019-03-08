@@ -12,7 +12,9 @@ Amazon configuration
 
 1. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>`
 
+
 2. Now, on the `AWS Config page, <https://console.aws.amazon.com/config/>`_ we go to *Settings*.
+
 
 3. Here, choose the **Resource types to record** (specify the AWS resource types you want AWS Config to record):
 
@@ -22,7 +24,7 @@ Amazon configuration
 .. note::
   For more information about these options, see `Selecting Which Resources AWS Config Records. <https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html>`_
 
-4. Choose the *S3 Bucket* created before.
+4. Choose the *S3 Bucket* selected before.
 
 Now, to configure the rules:
 
