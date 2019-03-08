@@ -33,12 +33,6 @@ c) Using the Python `pip` tool:
 Configuration
 -------------
 
-The Integrator is not enabled by default, however, it can be enabled using the following command:
-
-.. code-block:: console
-
-  # /var/ossec/bin/ossec-control enable integrator
-
 The integrations are configured on the ``ossec.conf`` file which is located inside the Wazuh installation folder (``/var/ossec/etc/``). To configure an integration, add the following configuration inside the *<ossec_config>* section:
 
 .. code-block:: xml

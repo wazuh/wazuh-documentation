@@ -133,15 +133,7 @@ Find :ref:`here <reference_ossec_database_output>` the complete configuration re
 Last steps
 ----------
 
-The setup process for the database output is finished. Now the only thing left is to enable this feature on the Wazuh manager and restart it. To do so, follow these steps:
-
-1. Enable the ``ossec-dbd`` daemon to activate the database output feature:
-
-  .. code-block:: console
-
-    # /var/ossec/bin/ossec-control enable database
-
-2. Restart the Wazuh manager:
+The setup process for the database output is finished. Now the only thing left is to and restart the Wazuh manager:
 
   a. For Systemd:
 
