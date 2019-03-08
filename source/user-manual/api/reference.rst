@@ -5937,7 +5937,21 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "items": [],
+	      "items": [
+				{
+					"status": "outstanding",
+					"readDay": "2019-03-08 09:20:05",
+					"oldDay": "2019-03-08 09:20:05",
+					"event": "System Audit: SSH Hardening - 3: Root can log in. File: /etc/ssh/sshd_config. Reference: 3 ."
+				},
+				{
+					"status": "outstanding",
+					"readDay": "2019-03-08 09:20:05",
+					"oldDay": "2019-03-08 09:20:05",
+					"pci": "2.2.4",
+					"event": "System Audit: SSH Hardening - 4: No Public Key authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 4 ."
+				},
+			],
 	      "totalItems": 0
 	   }
 	}
@@ -5979,7 +5993,9 @@ Returns the PCI requirements of all rootchecks of the agent.
 	   "error": 0,
 	   "data": {
 	      "totalItems": 0,
-	      "items": []
+	      "items": [
+				"2.2.4"
+			]
 	   }
 	}
 	
