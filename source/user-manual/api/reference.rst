@@ -273,7 +273,7 @@ Add a new agent.
 	   "error": 0,
 	   "data": {
 	      "id": "007",
-	      "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgYjNkNjEyOTQ3MzZkZmNiNzMzZmIxZDU0YTA0N2NjN2E3ZGU3MDMwMTA1NzMzYjFiZDcyMzQ2MTgzYmM3Mjc1Mg=="
+	      "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgZjNhYjRhOTU2OTg4YmRiMTVhODEzZTBmYjAxNWYwYTg4YTFkMzM2MWI3ODkyODE0ZjZhOTI4ZGU2ZTk1M2QwZQ=="
 	   }
 	}
 	
@@ -308,7 +308,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": {
 	      "id": "008",
-	      "key": "MDA4IG15TmV3QWdlbnQgYW55IDRmZTY5MmZmMzYwOGJjM2ExZTc3MjYzZjY5YjRhMmFlNTVmMzBjMTU0NTJmMjNlMmI5ODI5ODg2ZTZhNjliMmI="
+	      "key": "MDA4IG15TmV3QWdlbnQgYW55IGNkZmY0NzQxYzViNDk4NjE4M2ZjZWY4NTM4ZTVmNjg4NDRkNjNmMzY2NWFhYjk4NjJiZDhmMDg5ZjgyMTNlOTM="
 	   }
 	}
 	
@@ -924,47 +924,47 @@ Returns the list of agents in a group.
 	               "uname": "Linux |agent-1 |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
 	               "version": "18.04.1 LTS"
 	            },
-	            "id": "001",
-	            "dateAdd": "2019-03-06 11:40:39",
-	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "version": "Wazuh v3.9.0",
-	            "manager": "master",
-	            "name": "agent-1",
-	            "group": [
-	               "default",
-	               "dmz"
-	            ],
-	            "mergedSum": "780cd70d3021764b0de1a127ab2fc615",
-	            "status": "Active",
-	            "lastKeepAlive": "2019-03-06 11:46:07",
-	            "registerIP": "172.17.0.201",
 	            "ip": "10.0.2.15",
-	            "node_name": "node01"
-	         },
-	         {
-	            "id": "002",
-	            "dateAdd": "2019-03-06 11:45:52",
-	            "name": "server001",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "manager": "master",
+	            "mergedSum": "f8d49771911ed9d5c45b03a40babd065",
+	            "status": "Active",
+	            "name": "agent-1",
+	            "registerIP": "172.17.0.201",
 	            "group": [
 	               "default",
 	               "dmz"
 	            ],
-	            "status": "Never connected",
-	            "registerIP": "10.0.0.62",
-	            "ip": "10.0.0.62",
-	            "node_name": "unknown"
+	            "node_name": "node01",
+	            "version": "Wazuh v3.9.0",
+	            "dateAdd": "2019-03-08 08:33:34",
+	            "lastKeepAlive": "2019-03-08 08:38:06",
+	            "id": "001"
 	         },
 	         {
-	            "id": "004",
-	            "dateAdd": "2019-03-06 11:45:52",
+	            "ip": "10.0.0.62",
+	            "status": "Never connected",
+	            "name": "server001",
+	            "registerIP": "10.0.0.62",
+	            "group": [
+	               "default",
+	               "dmz"
+	            ],
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:53",
+	            "id": "002"
+	         },
+	         {
+	            "ip": "10.0.0.15",
+	            "status": "Never connected",
 	            "name": "main_database",
+	            "registerIP": "10.0.0.15",
 	            "group": [
 	               "dmz"
 	            ],
-	            "status": "Never connected",
-	            "registerIP": "10.0.0.15",
-	            "ip": "10.0.0.15",
-	            "node_name": "unknown"
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:54",
+	            "id": "004"
 	         }
 	      ],
 	      "totalItems": 3
@@ -1013,31 +1013,31 @@ Returns a list with the available agents without group.
 	   "data": {
 	      "items": [
 	         {
-	            "id": "006",
-	            "dateAdd": "2019-03-06 11:45:53",
-	            "name": "server002",
-	            "status": "Never connected",
-	            "registerIP": "10.0.0.20",
 	            "ip": "10.0.0.20",
-	            "node_name": "unknown"
+	            "status": "Never connected",
+	            "name": "server002",
+	            "registerIP": "10.0.0.20",
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:54",
+	            "id": "006"
 	         },
 	         {
-	            "id": "007",
-	            "dateAdd": "2019-03-06 11:46:09",
-	            "name": "NewHost",
-	            "status": "Never connected",
-	            "registerIP": "10.0.0.9",
 	            "ip": "10.0.0.9",
-	            "node_name": "unknown"
+	            "status": "Never connected",
+	            "name": "NewHost",
+	            "registerIP": "10.0.0.9",
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:38:08",
+	            "id": "007"
 	         },
 	         {
-	            "id": "123",
-	            "dateAdd": "2019-03-06 11:46:10",
-	            "name": "NewHost_2",
-	            "status": "Never connected",
-	            "registerIP": "10.0.10.10",
 	            "ip": "10.0.10.10",
-	            "node_name": "unknown"
+	            "status": "Never connected",
+	            "name": "NewHost_2",
+	            "registerIP": "10.0.10.10",
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:38:09",
+	            "id": "123"
 	         }
 	      ],
 	      "totalItems": 3
@@ -1658,25 +1658,25 @@ Returns a list with the available agents.
 	   "data": {
 	      "items": [
 	         {
-	            "id": "006",
-	            "dateAdd": "2019-03-06 11:45:53",
-	            "name": "server002",
-	            "status": "Never connected",
-	            "registerIP": "10.0.0.20",
 	            "ip": "10.0.0.20",
-	            "node_name": "unknown"
+	            "status": "Never connected",
+	            "name": "server002",
+	            "registerIP": "10.0.0.20",
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:54",
+	            "id": "006"
 	         },
 	         {
-	            "id": "002",
-	            "dateAdd": "2019-03-06 11:45:52",
+	            "ip": "10.0.0.62",
+	            "status": "Never connected",
 	            "name": "server001",
+	            "registerIP": "10.0.0.62",
 	            "group": [
 	               "default"
 	            ],
-	            "status": "Never connected",
-	            "registerIP": "10.0.0.62",
-	            "ip": "10.0.0.62",
-	            "node_name": "unknown"
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:53",
+	            "id": "002"
 	         },
 	         {
 	            "os": {
@@ -1689,28 +1689,28 @@ Returns a list with the available agents.
 	               "uname": "Linux |master |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
 	               "version": "18.04.1 LTS"
 	            },
-	            "id": "000",
-	            "dateAdd": "2019-03-06 11:36:34",
-	            "version": "Wazuh v3.9.0",
-	            "manager": "master",
-	            "name": "master",
-	            "status": "Active",
-	            "lastKeepAlive": "9999-12-31 23:59:59",
-	            "registerIP": "127.0.0.1",
 	            "ip": "127.0.0.1",
-	            "node_name": "node01"
+	            "manager": "master",
+	            "status": "Active",
+	            "name": "master",
+	            "registerIP": "127.0.0.1",
+	            "node_name": "node01",
+	            "version": "Wazuh v3.9.0",
+	            "dateAdd": "2019-03-08 08:30:02",
+	            "lastKeepAlive": "9999-12-31 23:59:59",
+	            "id": "000"
 	         },
 	         {
-	            "id": "004",
-	            "dateAdd": "2019-03-06 11:45:52",
+	            "ip": "10.0.0.15",
+	            "status": "Never connected",
 	            "name": "main_database",
+	            "registerIP": "10.0.0.15",
 	            "group": [
 	               "default"
 	            ],
-	            "status": "Never connected",
-	            "registerIP": "10.0.0.15",
-	            "ip": "10.0.0.15",
-	            "node_name": "unknown"
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:54",
+	            "id": "004"
 	         },
 	         {
 	            "os": {
@@ -1723,21 +1723,21 @@ Returns a list with the available agents.
 	               "uname": "Linux |agent-1 |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
 	               "version": "18.04.1 LTS"
 	            },
-	            "id": "001",
-	            "dateAdd": "2019-03-06 11:40:39",
+	            "ip": "10.0.2.15",
 	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "version": "Wazuh v3.9.0",
 	            "manager": "master",
+	            "mergedSum": "2f758e9b9b44ff428d1433832e0d190d",
+	            "status": "Active",
 	            "name": "agent-1",
+	            "registerIP": "172.17.0.201",
 	            "group": [
 	               "default"
 	            ],
-	            "mergedSum": "d55db52ed0dc652ec3bed5804c199939",
-	            "status": "Active",
-	            "lastKeepAlive": "2019-03-06 11:46:17",
-	            "registerIP": "172.17.0.201",
-	            "ip": "10.0.2.15",
-	            "node_name": "node01"
+	            "node_name": "node01",
+	            "version": "Wazuh v3.9.0",
+	            "dateAdd": "2019-03-08 08:33:34",
+	            "lastKeepAlive": "2019-03-08 08:38:16",
+	            "id": "001"
 	         }
 	      ],
 	      "totalItems": 7
@@ -1776,7 +1776,8 @@ Returns various information from an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "id": "000",
+	      "ip": "127.0.0.1",
+	      "manager": "master",
 	      "os": {
 	         "arch": "x86_64",
 	         "codename": "Bionic Beaver",
@@ -1787,15 +1788,14 @@ Returns various information from an agent.
 	         "uname": "Linux |master |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
 	         "version": "18.04.1 LTS"
 	      },
-	      "dateAdd": "2019-03-06 11:36:34",
-	      "version": "Wazuh v3.9.0",
-	      "manager": "master",
-	      "name": "master",
 	      "status": "Active",
-	      "lastKeepAlive": "9999-12-31 23:59:59",
+	      "name": "master",
 	      "registerIP": "127.0.0.1",
-	      "ip": "127.0.0.1",
-	      "node_name": "node01"
+	      "node_name": "node01",
+	      "version": "Wazuh v3.9.0",
+	      "dateAdd": "2019-03-08 08:30:02",
+	      "lastKeepAlive": "9999-12-31 23:59:59",
+	      "id": "000"
 	   }
 	}
 	
@@ -1831,13 +1831,13 @@ Returns various information from an agent called :agent_name.
 	{
 	   "error": 0,
 	   "data": {
-	      "id": "007",
-	      "dateAdd": "2019-03-06 11:46:09",
-	      "name": "NewHost",
-	      "status": "Never connected",
-	      "registerIP": "10.0.0.9",
 	      "ip": "10.0.0.9",
-	      "node_name": "unknown"
+	      "status": "Never connected",
+	      "name": "NewHost",
+	      "registerIP": "10.0.0.9",
+	      "node_name": "unknown",
+	      "dateAdd": "2019-03-08 08:38:08",
+	      "id": "007"
 	   }
 	}
 	
@@ -1874,7 +1874,7 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IG1haW5fZGF0YWJhc2UgMTAuMC4wLjE1IGI1MzRlM2VjNjkwODQzZmJkNGQ4NmE4NjZmNDlmM2Q4OWNkNjJhNTg1YWNhNWJmMzc2MWI0NGMwZmNjYzU1NWQ="
+	   "data": "MDA0IG1haW5fZGF0YWJhc2UgMTAuMC4wLjE1IDEwMjQ1NWEzZjEyYTdiOTY3YTQ5ZmUzOWIyOGE2OTkxZmQ1ZmVkY2ZkNmE3NTE1NjA3ZTcyYTE4YzBiNWM3ZGQ="
 	}
 	
 
@@ -2242,16 +2242,8 @@ Clears cache of the specified group.
 	{
 	   "error": 0,
 	   "data": {
-	      "all": [
-	         "/agents/name/NewHost?pretty",
-	         "/agents/stats/distinct?pretty&fields=os.platform"
-	      ],
-	      "groups": {
-	         "agents": [
-	            "/agents/name/NewHost?pretty",
-	            "/agents/stats/distinct?pretty&fields=os.platform"
-	         ]
-	      }
+	      "all": [],
+	      "groups": {}
 	   }
 	}
 	
@@ -2336,8 +2328,8 @@ Returns cache configuration.
 	   "error": 0,
 	   "data": {
 	      "debug": false,
-	      "defaultDuration": 750,
-	      "enabled": true,
+	      "defaultDuration": 3600000,
+	      "enabled": false,
 	      "appendKey": [],
 	      "jsonp": false,
 	      "redisClient": false
@@ -2611,7 +2603,7 @@ Confirmation message.
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cluster/node02/files?path=etc/rules/local_rules.xml&pretty"
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cluster/node01/files?path=etc/rules/local_rules.xml&pretty"
 
 **Example Response:**
 ::
@@ -2643,14 +2635,14 @@ Returns the content of a local file (rules, decoders and lists).
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/files?path=etc/rules/local_rules.xml&pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node01/files?path=etc/decoders/local_decoder.xml&pretty"
 
 **Example Response:**
 ::
 
 	{
 	   "error": 0,
-	   "data": "File was deleted"
+	   "data": "<!-- Local Decoders -->\n\n<!-- Modify it at your will. -->\n<!-- Copyright (C) 2015-2019, Wazuh Inc. -->\n\n<!--\n  - Allowed static fields:\n  - location   - where the log came from (only on FTS)\n  - srcuser    - extracts the source username\n  - dstuser    - extracts the destination (target) username\n  - user       - an alias to dstuser (only one of the two can be used)\n  - srcip      - source ip\n  - dstip      - dst ip\n  - srcport    - source port\n  - dstport    - destination port\n  - protocol   - protocol\n  - id         - event id\n  - url        - url of the event\n  - action     - event action (deny, drop, accept, etc)\n  - status     - event status (success, failure, etc)\n  - extra_data - Any extra data\n-->\n\n<decoder name=\"local_decoder_example\">\n    <program_name>local_decoder_example</program_name>\n</decoder>\n"
 	}
 	
 
@@ -2679,7 +2671,7 @@ Upload a local file (rules, decoders and lists) in a cluster node
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X POST -H 'Content-type: application/xml' -d @rules.xml "https://127.0.0.1:55000/cluster/node02/files?path=etc/rules/local_rules.xml&pretty"
+	curl -u foo:bar -k -X POST -H 'Content-type: application/xml' -d @rules.xml "https://127.0.0.1:55000/cluster/node01/files?path=etc/rules/local_rules.xml&pretty"
 
 **Example Response:**
 ::
@@ -2783,7 +2775,7 @@ Returns basic information about manager.
 	   "data": {
 	      "path": "/var/ossec",
 	      "version": "v3.9.0",
-	      "compilation_date": "Wed Mar  6 11:42:59 UTC 2019",
+	      "compilation_date": "Fri Mar  8 08:35:38 UTC 2019",
 	      "type": "manager",
 	      "max_agents": "14000",
 	      "openssl_support": "yes",
@@ -2836,19 +2828,19 @@ Show cluster health
 	            "status": {
 	               "sync_integrity_free": true,
 	               "last_sync_integrity": {
-	                  "date_start_master": "2019-03-06 11:46:19.317033",
-	                  "date_end_master": "2019-03-06 11:46:19.381369",
+	                  "date_start_master": "2019-03-08 08:38:17.480787",
+	                  "date_end_master": "2019-03-08 08:38:17.501860",
 	                  "total_files": {
 	                     "missing": 0,
 	                     "extra": 2,
 	                     "extra_valid": 2,
-	                     "shared": 4
+	                     "shared": 2
 	                  }
 	               },
 	               "sync_agentinfo_free": true,
 	               "last_sync_agentinfo": {
-	                  "date_start_master": "2019-03-06 11:46:24.210162",
-	                  "date_end_master": "2019-03-06 11:46:24.218886",
+	                  "date_start_master": "2019-03-08 08:38:17.382000",
+	                  "date_end_master": "2019-03-08 08:38:17.396759",
 	                  "total_agentinfo": 0
 	               },
 	               "sync_extravalid_free": true,
@@ -2857,7 +2849,7 @@ Show cluster health
 	                  "date_end_master": "n/a",
 	                  "total_agentgroups": 0
 	               },
-	               "last_keep_alive": "2019-03-06 11:46:03.954748"
+	               "last_keep_alive": "2019-03-08 08:37:47.250957"
 	            }
 	         },
 	         "node01": {
@@ -2926,37 +2918,37 @@ Returns the three last months of ossec.log.
 	   "data": {
 	      "items": [
 	         {
-	            "timestamp": "2019-03-06 11:46:24",
+	            "timestamp": "2019-03-08 08:38:07",
 	            "tag": "ossec-remoted",
 	            "level": "info",
 	            "description": "(1409): Authentication file changed. Updating."
 	         },
 	         {
-	            "timestamp": "2019-03-06 11:46:24",
+	            "timestamp": "2019-03-08 08:38:07",
 	            "tag": "ossec-remoted",
 	            "level": "info",
 	            "description": "(1410): Reading authentication keys file."
 	         },
 	         {
-	            "timestamp": "2019-03-06 11:46:19",
-	            "tag": "wazuh-modulesd:database",
-	            "level": "error",
-	            "description": "Couldn't sync agent '002.tmp' group."
+	            "timestamp": "2019-03-08 08:37:50",
+	            "tag": "ossec-syscheckd",
+	            "level": "info",
+	            "description": "Ending syscheck scan. Database completed."
 	         },
 	         {
-	            "timestamp": "2019-03-06 11:46:04",
-	            "tag": "ossec-remoted",
+	            "timestamp": "2019-03-08 08:37:45",
+	            "tag": "ossec-syscheckd",
 	            "level": "info",
-	            "description": "(1409): Authentication file changed. Updating."
+	            "description": "Finished creating syscheck database (pre-scan completed)."
 	         },
 	         {
-	            "timestamp": "2019-03-06 11:46:04",
-	            "tag": "ossec-remoted",
+	            "timestamp": "2019-03-08 08:37:30",
+	            "tag": "ossec-rootcheck",
 	            "level": "info",
-	            "description": "(1410): Reading authentication keys file."
+	            "description": "Ending rootcheck scan."
 	         }
 	      ],
-	      "totalItems": 601
+	      "totalItems": 598
 	   }
 	}
 	
@@ -3015,8 +3007,8 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "debug": 0
 	      },
 	      "ossec-remoted": {
-	         "all": 13,
-	         "info": 13,
+	         "all": 11,
+	         "info": 11,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
@@ -3038,7 +3030,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "wazuh-modulesd:oscap": {
+	      "wazuh-modulesd:database": {
 	         "all": 2,
 	         "info": 2,
 	         "error": 0,
@@ -3046,15 +3038,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "wazuh-modulesd:ciscat": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:osquery": {
+	      "wazuh-modulesd:download": {
 	         "all": 2,
 	         "info": 2,
 	         "error": 0,
@@ -3070,15 +3054,23 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "wazuh-modulesd:database": {
-	         "all": 3,
+	      "wazuh-modulesd:osquery": {
+	         "all": 2,
 	         "info": 2,
-	         "error": 1,
+	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "wazuh-modulesd:download": {
+	      "wazuh-modulesd:ciscat": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:oscap": {
 	         "all": 2,
 	         "info": 2,
 	         "error": 0,
@@ -3981,17 +3973,17 @@ Returns the agent's hardware info
 	         {
 	            "cpu": {
 	               "cores": 2,
-	               "mhz": 1991.998,
+	               "mhz": 1991.999,
 	               "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
 	            },
 	            "ram": {
-	               "free": 65188,
+	               "free": 55592,
 	               "total": 492832,
-	               "usage": 87
+	               "usage": 89
 	            },
 	            "scan": {
-	               "id": 1535894504,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 599386135,
+	               "time": "2019/03/08 08:30:53"
 	            },
 	            "board_serial": "0",
 	            "agent_id": "000"
@@ -3999,17 +3991,17 @@ Returns the agent's hardware info
 	         {
 	            "cpu": {
 	               "cores": 1,
-	               "mhz": 1991.998,
+	               "mhz": 1991.999,
 	               "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
 	            },
 	            "ram": {
-	               "free": 8164,
+	               "free": 5584,
 	               "total": 234968,
-	               "usage": 97
+	               "usage": 98
 	            },
 	            "scan": {
-	               "id": 985330296,
-	               "time": "2019/03/06 11:41:26"
+	               "id": 1832132561,
+	               "time": "2019/03/08 08:34:26"
 	            },
 	            "board_serial": "0",
 	            "agent_id": "001"
@@ -4073,17 +4065,17 @@ Returns the agent's network address info
 	         {
 	            "proto": "ipv6",
 	            "address": "fe80::f9:71ff:fed7:9d11",
-	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "scan_id": 1256992920,
 	            "iface": "enp0s3",
+	            "netmask": "ffff:ffff:ffff:ffff::",
+	            "scan_id": 1478544824,
 	            "agent_id": "000"
 	         },
 	         {
 	            "proto": "ipv6",
-	            "address": "fe80::a00:27ff:fe41:8af9",
-	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "scan_id": 1256992920,
+	            "address": "fe80::a00:27ff:fe78:5d4",
 	            "iface": "enp0s8",
+	            "netmask": "ffff:ffff:ffff:ffff::",
+	            "scan_id": 1478544824,
 	            "agent_id": "000"
 	         }
 	      ],
@@ -4162,26 +4154,26 @@ Returns the agent's network interface info
 	      "items": [
 	         {
 	            "rx": {
-	               "bytes": 119301017,
+	               "bytes": 151695946,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 86711
+	               "packets": 111792
 	            },
 	            "scan": {
-	               "id": 1256992920,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 1478544824,
+	               "time": "2019/03/08 08:30:53"
 	            },
 	            "tx": {
-	               "bytes": 1698571,
+	               "bytes": 2408059,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 26579
+	               "packets": 35104
 	            },
-	            "mtu": 1500,
-	            "type": "ethernet",
-	            "state": "up",
-	            "mac": "02:f9:71:d7:9d:11",
 	            "name": "enp0s3",
+	            "state": "up",
+	            "type": "ethernet",
+	            "mtu": 1500,
+	            "mac": "02:f9:71:d7:9d:11",
 	            "agent_id": "000"
 	         },
 	         {
@@ -4192,8 +4184,8 @@ Returns the agent's network interface info
 	               "packets": 0
 	            },
 	            "scan": {
-	               "id": 1256992920,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 1478544824,
+	               "time": "2019/03/08 08:30:53"
 	            },
 	            "tx": {
 	               "bytes": 5312,
@@ -4201,11 +4193,11 @@ Returns the agent's network interface info
 	               "errors": 0,
 	               "packets": 24
 	            },
-	            "mtu": 1500,
-	            "type": "ethernet",
-	            "state": "up",
-	            "mac": "08:00:27:41:8a:f9",
 	            "name": "enp0s8",
+	            "state": "up",
+	            "type": "ethernet",
+	            "mtu": 1500,
+	            "mac": "08:00:27:78:05:d4",
 	            "agent_id": "000"
 	         }
 	      ],
@@ -4266,16 +4258,16 @@ Returns the agent's network protocol info
 	      "items": [
 	         {
 	            "type": "ipv6",
-	            "dhcp": "enabled",
-	            "scan_id": 1256992920,
 	            "iface": "enp0s3",
+	            "dhcp": "enabled",
+	            "scan_id": 1478544824,
 	            "agent_id": "000"
 	         },
 	         {
 	            "type": "ipv6",
-	            "dhcp": "enabled",
-	            "scan_id": 1256992920,
 	            "iface": "enp0s8",
+	            "dhcp": "enabled",
+	            "scan_id": 1478544824,
 	            "agent_id": "000"
 	         }
 	      ],
@@ -4348,14 +4340,14 @@ Returns the agent's os info
 	               "version": "18.04.1 LTS (Bionic Beaver)"
 	            },
 	            "scan": {
-	               "id": 909472050,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 242764188,
+	               "time": "2019/03/08 08:30:53"
 	            },
+	            "architecture": "x86_64",
 	            "release": "4.15.0-43-generic",
 	            "version": "#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018",
 	            "sysname": "Linux",
 	            "hostname": "master",
-	            "architecture": "x86_64",
 	            "agent_id": "000"
 	         },
 	         {
@@ -4368,14 +4360,14 @@ Returns the agent's os info
 	               "version": "18.04.1 LTS (Bionic Beaver)"
 	            },
 	            "scan": {
-	               "id": 1977188172,
-	               "time": "2019/03/06 11:41:26"
+	               "id": 2140135162,
+	               "time": "2019/03/08 08:34:26"
 	            },
+	            "architecture": "x86_64",
 	            "release": "4.15.0-43-generic",
 	            "version": "#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018",
 	            "sysname": "Linux",
 	            "hostname": "agent-1",
-	            "architecture": "x86_64",
 	            "agent_id": "001"
 	         }
 	      ],
@@ -4440,39 +4432,39 @@ Returns the agent's packages info
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 1359654469,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 520922172,
+	               "time": "2019/03/08 08:30:53"
 	            },
-	            "size": 200,
-	            "format": "deb",
-	            "multiarch": "foreign",
-	            "section": "utils",
 	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-	            "description": "Access control list utilities",
-	            "priority": "optional",
-	            "version": "2.2.52-3build1",
 	            "name": "acl",
+	            "priority": "optional",
+	            "description": "Access control list utilities",
 	            "architecture": "amd64",
+	            "format": "deb",
+	            "size": 200,
+	            "version": "2.2.52-3build1",
+	            "section": "utils",
+	            "multiarch": "foreign",
 	            "agent_id": "000"
 	         },
 	         {
 	            "scan": {
-	               "id": 1359654469,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 520922172,
+	               "time": "2019/03/08 08:30:53"
 	            },
-	            "size": 440,
-	            "format": "deb",
-	            "section": "admin",
 	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-	            "description": "query and manipulate user account information",
-	            "priority": "optional",
-	            "version": "0.6.45-1ubuntu1",
 	            "name": "accountsservice",
+	            "priority": "optional",
+	            "description": "query and manipulate user account information",
 	            "architecture": "amd64",
+	            "format": "deb",
+	            "size": 440,
+	            "version": "0.6.45-1ubuntu1",
+	            "section": "admin",
 	            "agent_id": "000"
 	         }
 	      ],
-	      "totalItems": 2014
+	      "totalItems": 2068
 	   }
 	}
 	
@@ -4545,13 +4537,13 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 1778934444,
-	               "time": "2019/03/06 11:37:23"
+	               "id": 2112182802,
+	               "time": "2019/03/08 08:30:59"
 	            },
 	            "state": "listening",
 	            "tx_queue": 0,
-	            "inode": 18663,
 	            "rx_queue": 0,
+	            "inode": 19354,
 	            "protocol": "tcp6",
 	            "agent_id": "000"
 	         },
@@ -4565,13 +4557,13 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 1778934444,
-	               "time": "2019/03/06 11:37:23"
+	               "id": 2112182802,
+	               "time": "2019/03/08 08:30:59"
 	            },
 	            "state": "listening",
 	            "tx_queue": 0,
-	            "inode": 160750,
 	            "rx_queue": 0,
+	            "inode": 258878,
 	            "protocol": "tcp6",
 	            "agent_id": "000"
 	         }
@@ -4653,73 +4645,72 @@ Returns the agent's processes info
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 88237840,
-	               "time": "2019/03/06 11:37:23"
+	               "id": 225991434,
+	               "time": "2019/03/08 08:30:59"
 	            },
-	            "ruser": "root",
-	            "state": "S",
-	            "processor": 1,
-	            "cmd": "/sbin/init",
-	            "sgroup": "root",
-	            "nlwp": 1,
-	            "egroup": "root",
-	            "pid": "1",
-	            "size": 39959,
-	            "vm_size": 159836,
-	            "priority": 20,
-	            "stime": 693,
 	            "fgroup": "root",
-	            "share": 1033,
-	            "start_time": 6,
-	            "pgrp": 1,
-	            "rgroup": "root",
-	            "ppid": 0,
-	            "tty": 0,
+	            "state": "S",
+	            "priority": 20,
 	            "suser": "root",
-	            "name": "systemd",
-	            "resident": 1641,
-	            "tgid": 1,
+	            "ppid": 0,
+	            "vm_size": 0,
+	            "session": 0,
+	            "pid": "2",
+	            "nlwp": 1,
+	            "name": "kthreadd",
 	            "euser": "root",
-	            "utime": 128,
+	            "sgroup": "root",
+	            "size": 0,
+	            "stime": 0,
 	            "nice": 0,
-	            "session": 1,
+	            "share": 0,
+	            "processor": 1,
+	            "ruser": "root",
+	            "egroup": "root",
+	            "rgroup": "root",
+	            "pgrp": 0,
+	            "resident": 0,
+	            "utime": 0,
+	            "tgid": 2,
+	            "start_time": 8,
+	            "tty": 0,
 	            "agent_id": "000"
 	         },
 	         {
 	            "scan": {
-	               "id": 88237840,
-	               "time": "2019/03/06 11:37:23"
+	               "id": 225991434,
+	               "time": "2019/03/08 08:30:59"
 	            },
-	            "ruser": "root",
-	            "state": "S",
-	            "processor": 1,
-	            "sgroup": "root",
-	            "nlwp": 1,
-	            "egroup": "root",
-	            "pid": "28",
-	            "size": 0,
-	            "vm_size": 0,
-	            "priority": 25,
-	            "stime": 0,
 	            "fgroup": "root",
-	            "share": 0,
-	            "start_time": 33,
-	            "pgrp": 0,
-	            "rgroup": "root",
-	            "ppid": 2,
-	            "tty": 0,
+	            "state": "S",
+	            "priority": 25,
 	            "suser": "root",
-	            "name": "ksmd",
-	            "resident": 0,
-	            "tgid": 28,
-	            "euser": "root",
-	            "utime": 0,
-	            "nice": 5,
+	            "ppid": 2,
+	            "vm_size": 0,
 	            "session": 0,
+	            "pid": "28",
+	            "nlwp": 1,
+	            "name": "ksmd",
+	            "euser": "root",
+	            "sgroup": "root",
+	            "size": 0,
+	            "stime": 0,
+	            "nice": 5,
+	            "share": 0,
+	            "processor": 1,
+	            "ruser": "root",
+	            "egroup": "root",
+	            "rgroup": "root",
+	            "pgrp": 0,
+	            "resident": 0,
+	            "utime": 0,
+	            "tgid": 28,
+	            "start_time": 22,
+	            "tty": 0,
 	            "agent_id": "000"
 	         }
 	      ],
-	      "totalItems": 418
+	      "totalItems": 420
 	   }
 	}
 	
@@ -5084,14 +5075,14 @@ Returns the content of a local file (rules, decoders and lists).
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/files?path=etc/rules/local_rules.xml&pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/files?path=etc/decoders/local_decoder.xml&pretty"
 
 **Example Response:**
 ::
 
 	{
 	   "error": 0,
-	   "data": "File was deleted"
+	   "data": "<!-- Local Decoders -->\n\n<!-- Modify it at your will. -->\n<!-- Copyright (C) 2015-2019, Wazuh Inc. -->\n\n<!--\n  - Allowed static fields:\n  - location   - where the log came from (only on FTS)\n  - srcuser    - extracts the source username\n  - dstuser    - extracts the destination (target) username\n  - user       - an alias to dstuser (only one of the two can be used)\n  - srcip      - source ip\n  - dstip      - dst ip\n  - srcport    - source port\n  - dstport    - destination port\n  - protocol   - protocol\n  - id         - event id\n  - url        - url of the event\n  - action     - event action (deny, drop, accept, etc)\n  - status     - event status (success, failure, etc)\n  - extra_data - Any extra data\n-->\n\n<decoder name=\"local_decoder_example\">\n    <program_name>local_decoder_example</program_name>\n</decoder>\n"
 	}
 	
 
@@ -5157,7 +5148,7 @@ Returns basic information about manager.
 	   "data": {
 	      "path": "/var/ossec",
 	      "version": "v3.9.0",
-	      "compilation_date": "Wed Mar  6 11:42:59 UTC 2019",
+	      "compilation_date": "Fri Mar  8 08:35:38 UTC 2019",
 	      "type": "manager",
 	      "max_agents": "14000",
 	      "openssl_support": "yes",
@@ -5260,37 +5251,37 @@ Returns the three last months of ossec.log.
 	   "data": {
 	      "items": [
 	         {
-	            "timestamp": "2019-03-06 11:46:24",
+	            "timestamp": "2019-03-08 08:38:27",
 	            "tag": "ossec-remoted",
 	            "level": "info",
 	            "description": "(1409): Authentication file changed. Updating."
 	         },
 	         {
-	            "timestamp": "2019-03-06 11:46:24",
+	            "timestamp": "2019-03-08 08:38:27",
 	            "tag": "ossec-remoted",
 	            "level": "info",
 	            "description": "(1410): Reading authentication keys file."
 	         },
 	         {
-	            "timestamp": "2019-03-06 11:46:19",
-	            "tag": "wazuh-modulesd:database",
-	            "level": "error",
-	            "description": "Couldn't sync agent '002.tmp' group."
-	         },
-	         {
-	            "timestamp": "2019-03-06 11:46:04",
+	            "timestamp": "2019-03-08 08:38:07",
 	            "tag": "ossec-remoted",
 	            "level": "info",
 	            "description": "(1409): Authentication file changed. Updating."
 	         },
 	         {
-	            "timestamp": "2019-03-06 11:46:04",
+	            "timestamp": "2019-03-08 08:38:07",
 	            "tag": "ossec-remoted",
 	            "level": "info",
 	            "description": "(1410): Reading authentication keys file."
+	         },
+	         {
+	            "timestamp": "2019-03-08 08:37:50",
+	            "tag": "ossec-syscheckd",
+	            "level": "info",
+	            "description": "Ending syscheck scan. Database completed."
 	         }
 	      ],
-	      "totalItems": 601
+	      "totalItems": 600
 	   }
 	}
 	
@@ -5372,7 +5363,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "wazuh-modulesd:oscap": {
+	      "wazuh-modulesd:database": {
 	         "all": 2,
 	         "info": 2,
 	         "error": 0,
@@ -5380,15 +5371,7 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "wazuh-modulesd:ciscat": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:osquery": {
+	      "wazuh-modulesd:download": {
 	         "all": 2,
 	         "info": 2,
 	         "error": 0,
@@ -5404,15 +5387,23 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "wazuh-modulesd:database": {
-	         "all": 3,
+	      "wazuh-modulesd:osquery": {
+	         "all": 2,
 	         "info": 2,
-	         "error": 1,
+	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
 	         "debug": 0
 	      },
-	      "wazuh-modulesd:download": {
+	      "wazuh-modulesd:ciscat": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:oscap": {
 	         "all": 2,
 	         "info": 2,
 	         "error": 0,
@@ -5856,8 +5847,8 @@ Returns the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "end": "2019-03-06 11:37:59",
-	      "start": "2019-03-06 11:37:34"
+	      "end": "2019-03-08 08:31:37",
+	      "start": "2019-03-08 08:31:10"
 	   }
 	}
 	
@@ -6150,7 +6141,7 @@ Returns all rules.
 	            }
 	         }
 	      ],
-	      "totalItems": 2168
+	      "totalItems": 2167
 	   }
 	}
 	
@@ -6256,7 +6247,7 @@ Returns the files of all rules.
 	            "status": "enabled"
 	         }
 	      ],
-	      "totalItems": 112
+	      "totalItems": 111
 	   }
 	}
 	
@@ -6542,193 +6533,193 @@ Returns the sca checks of an agent
 	      "totalItems": 16,
 	      "items": [
 	         {
-	            "policy_id": "system_audit",
-	            "id": 1015,
 	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
+	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - .htaccess file compromised - auto append",
-	            "result": "passed",
-	            "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
+	            "id": 1015,
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
-	            "policy_id": "system_audit",
-	            "id": 1014,
 	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
+	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - .htaccess file compromised",
-	            "result": "passed",
-	            "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
+	            "id": 1014,
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
-	            "policy_id": "system_audit",
-	            "id": 1013,
 	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode(POST ",
-	            "result": "passed",
+	            "id": 1013,
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
-	            "policy_id": "system_audit",
-	            "id": 1012,
 	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode",
-	            "result": "passed",
+	            "id": 1012,
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
-	            "policy_id": "system_audit",
-	            "id": 1011,
 	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - Outdated osCommerce (v2.2) installation",
-	            "result": "passed",
+	            "id": 1011,
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
-	            "policy_id": "system_audit",
-	            "id": 1010,
 	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - Outdated Joomla installation",
-	            "result": "passed",
+	            "id": 1010,
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
-	            "policy_id": "system_audit",
-	            "id": 1009,
 	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - Outdated WordPress installation",
-	            "result": "passed",
+	            "id": 1009,
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
 	            "policy_id": "system_audit",
+	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
 	            "id": 1008,
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
-	            "result": "passed",
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
 	            "policy_id": "system_audit",
+	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
 	            "id": 1007,
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
-	            "result": "passed",
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
-	            "policy_id": "system_audit",
-	            "id": 1006,
 	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
 	            "title": "Web exploits (uncommon file name inside htdocs)",
-	            "result": "passed",
+	            "id": 1006,
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
 	            "policy_id": "system_audit",
+	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
 	            "id": 1005,
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
-	            "result": "passed",
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
 	            "policy_id": "system_audit",
+	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
 	            "id": 1004,
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
-	            "result": "passed",
 	            "compliance": [
 	               {
-	                  "key": "pci_dss",
-	                  "value": "6.5, 6.6, 11.4"
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
 	               }
 	            ]
 	         },
 	         {
+	            "result": "passed",
 	            "policy_id": "system_audit",
-	            "id": 1003,
 	            "title": "PHP - Displaying of errors is enabled",
-	            "result": "passed",
 	            "file": "/etc/php.ini",
+	            "id": 1003,
 	            "compliance": []
 	         },
 	         {
+	            "result": "passed",
 	            "policy_id": "system_audit",
-	            "id": 1002,
 	            "title": "PHP - Allow URL fopen is enabled",
-	            "result": "passed",
 	            "file": "/etc/php.ini",
+	            "id": 1002,
 	            "compliance": []
 	         },
 	         {
+	            "result": "passed",
 	            "policy_id": "system_audit",
-	            "id": 1001,
 	            "title": "PHP - Expose PHP is enabled",
-	            "result": "passed",
 	            "file": "/etc/php.ini",
+	            "id": 1001,
 	            "compliance": []
 	         },
 	         {
-	            "policy_id": "system_audit",
-	            "id": 1000,
-	            "title": "PHP - Register globals are enabled",
 	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "PHP - Register globals are enabled",
 	            "file": "/etc/php.ini",
+	            "id": 1000,
 	            "compliance": []
 	         }
 	      ]
@@ -6784,15 +6775,15 @@ Returns the security sca database of an agent.
 	      "totalItems": 1,
 	      "items": [
 	         {
-	            "policy_id": "system_audit",
+	            "name": "System audit for web-related vulnerabilities",
 	            "description": "Guidance for establishing a secure configuration for web-related vulnerabilities.",
 	            "references": "(null)",
-	            "score": 100,
-	            "end_scan": "2019-03-06 11:37:22",
+	            "pass": 76,
+	            "policy_id": "system_audit",
 	            "fail": 0,
-	            "name": "System audit for web-related vulnerabilities",
-	            "start_scan": "2019-03-06 11:37:22",
-	            "pass": 76
+	            "score": 100,
+	            "end_scan": "2019-03-08 08:30:58",
+	            "start_scan": "2019-03-08 08:30:58"
 	         }
 	      ]
 	   }
@@ -6870,8 +6861,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2019-03-06 11:46:38",
-	      "end": "2019-03-06 11:38:17"
+	      "start": "2019-03-08 08:31:10",
+	      "end": "2019-03-08 08:31:55"
 	   }
 	}
 	
@@ -6939,39 +6930,39 @@ Returns the syscheck files of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2804,
+	      "totalItems": 2885,
 	      "items": [
 	         {
-	            "size": 1580,
-	            "uname": "root",
-	            "type": "file",
-	            "uid": "0",
 	            "gname": "root",
-	            "md5": "f7bf238a3b0bf155c565454a9f819731",
 	            "perm": "100644",
-	            "inode": 1579,
-	            "date": "2019-03-06 11:37:39",
-	            "sha1": "016f8bd2ea009451042a856611d5d2967760e833",
+	            "md5": "f7bf238a3b0bf155c565454a9f819731",
+	            "type": "file",
+	            "date": "2019-03-08 08:31:15",
+	            "uname": "root",
+	            "uid": "0",
 	            "sha256": "a39fbc57dc2ef8a473f078d1f6a35f725809400df67070b8852e8ed725047df2",
-	            "file": "/etc/ssh/ssh_config",
+	            "gid": "0",
+	            "size": 1580,
 	            "mtime": "2018-11-05 11:51:29",
-	            "gid": "0"
+	            "inode": 1579,
+	            "sha1": "016f8bd2ea009451042a856611d5d2967760e833",
+	            "file": "/etc/ssh/ssh_config"
 	         },
 	         {
-	            "size": 553122,
-	            "uname": "root",
-	            "type": "file",
-	            "uid": "0",
 	            "gname": "root",
-	            "md5": "fe5be9e1b2ad5c55132a3521ecaadcdd",
 	            "perm": "100644",
-	            "inode": 1578,
-	            "date": "2019-03-06 11:37:39",
-	            "sha1": "6541fc14923473fcd2e04c98248c9ef2613050b1",
+	            "md5": "fe5be9e1b2ad5c55132a3521ecaadcdd",
+	            "type": "file",
+	            "date": "2019-03-08 08:31:15",
+	            "uname": "root",
+	            "uid": "0",
 	            "sha256": "9fa9dd312da04fbad130b70c96bf9707b8dc72cbdbb304d69bf58f52f94883b4",
-	            "file": "/etc/ssh/moduli",
+	            "gid": "0",
+	            "size": 553122,
 	            "mtime": "2018-11-05 11:51:29",
-	            "gid": "0"
+	            "inode": 1578,
+	            "sha1": "6541fc14923473fcd2e04c98248c9ef2613050b1",
+	            "file": "/etc/ssh/moduli"
 	         }
 	      ]
 	   }
@@ -7077,17 +7068,17 @@ Returns the agent's hardware info
 	   "data": {
 	      "cpu": {
 	         "cores": 2,
-	         "mhz": 1991.998,
+	         "mhz": 1991.999,
 	         "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
 	      },
 	      "ram": {
-	         "free": 65188,
+	         "free": 55592,
 	         "total": 492832,
-	         "usage": 87
+	         "usage": 89
 	      },
 	      "scan": {
-	         "id": 1535894504,
-	         "time": "2019/03/06 11:37:17"
+	         "id": 599386135,
+	         "time": "2019/03/08 08:30:53"
 	      },
 	      "board_serial": "0"
 	   }
@@ -7149,16 +7140,16 @@ Returns the agent's network address info
 	         {
 	            "proto": "ipv6",
 	            "address": "fe80::f9:71ff:fed7:9d11",
+	            "iface": "enp0s3",
 	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "scan_id": 1256992920,
-	            "iface": "enp0s3"
+	            "scan_id": 1478544824
 	         },
 	         {
 	            "proto": "ipv6",
-	            "address": "fe80::a00:27ff:fe41:8af9",
+	            "address": "fe80::a00:27ff:fe78:5d4",
+	            "iface": "enp0s8",
 	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "scan_id": 1256992920,
-	            "iface": "enp0s8"
+	            "scan_id": 1478544824
 	         }
 	      ],
 	      "totalItems": 4
@@ -7236,26 +7227,26 @@ Returns the agent's network interface info
 	      "items": [
 	         {
 	            "rx": {
-	               "bytes": 119301017,
+	               "bytes": 151695946,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 86711
+	               "packets": 111792
 	            },
 	            "scan": {
-	               "id": 1256992920,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 1478544824,
+	               "time": "2019/03/08 08:30:53"
 	            },
 	            "tx": {
-	               "bytes": 1698571,
+	               "bytes": 2408059,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 26579
+	               "packets": 35104
 	            },
-	            "mtu": 1500,
-	            "type": "ethernet",
+	            "name": "enp0s3",
 	            "state": "up",
-	            "mac": "02:f9:71:d7:9d:11",
-	            "name": "enp0s3"
+	            "type": "ethernet",
+	            "mtu": 1500,
+	            "mac": "02:f9:71:d7:9d:11"
 	         },
 	         {
 	            "rx": {
@@ -7265,8 +7256,8 @@ Returns the agent's network interface info
 	               "packets": 0
 	            },
 	            "scan": {
-	               "id": 1256992920,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 1478544824,
+	               "time": "2019/03/08 08:30:53"
 	            },
 	            "tx": {
 	               "bytes": 5312,
@@ -7274,11 +7265,11 @@ Returns the agent's network interface info
 	               "errors": 0,
 	               "packets": 24
 	            },
-	            "mtu": 1500,
-	            "type": "ethernet",
+	            "name": "enp0s8",
 	            "state": "up",
-	            "mac": "08:00:27:41:8a:f9",
-	            "name": "enp0s8"
+	            "type": "ethernet",
+	            "mtu": 1500,
+	            "mac": "08:00:27:78:05:d4"
 	         }
 	      ],
 	      "totalItems": 2
@@ -7338,15 +7329,15 @@ Returns the agent's network protocol info
 	      "items": [
 	         {
 	            "type": "ipv6",
+	            "iface": "enp0s3",
 	            "dhcp": "enabled",
-	            "scan_id": 1256992920,
-	            "iface": "enp0s3"
+	            "scan_id": 1478544824
 	         },
 	         {
 	            "type": "ipv6",
+	            "iface": "enp0s8",
 	            "dhcp": "enabled",
-	            "scan_id": 1256992920,
-	            "iface": "enp0s8"
+	            "scan_id": 1478544824
 	         }
 	      ],
 	      "totalItems": 4
@@ -7398,14 +7389,14 @@ Returns the agent's OS info
 	         "version": "18.04.1 LTS (Bionic Beaver)"
 	      },
 	      "scan": {
-	         "id": 909472050,
-	         "time": "2019/03/06 11:37:17"
+	         "id": 242764188,
+	         "time": "2019/03/08 08:30:53"
 	      },
+	      "architecture": "x86_64",
 	      "release": "4.15.0-43-generic",
 	      "version": "#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018",
 	      "sysname": "Linux",
-	      "hostname": "master",
-	      "architecture": "x86_64"
+	      "hostname": "master"
 	   }
 	}
 	
@@ -7466,38 +7457,38 @@ Returns the agent's packages info
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 1359654469,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 520922172,
+	               "time": "2019/03/08 08:30:53"
 	            },
-	            "size": 386,
-	            "format": "deb",
-	            "multiarch": "foreign",
-	            "section": "admin",
 	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-	            "description": "Debian base system miscellaneous files",
-	            "priority": "required",
-	            "version": "10.1ubuntu2.3",
 	            "name": "base-files",
-	            "architecture": "amd64"
+	            "priority": "required",
+	            "description": "Debian base system miscellaneous files",
+	            "architecture": "amd64",
+	            "format": "deb",
+	            "size": 386,
+	            "version": "10.1ubuntu2.3",
+	            "section": "admin",
+	            "multiarch": "foreign"
 	         },
 	         {
 	            "scan": {
-	               "id": 1359654469,
-	               "time": "2019/03/06 11:37:17"
+	               "id": 520922172,
+	               "time": "2019/03/08 08:30:53"
 	            },
-	            "size": 228,
-	            "format": "deb",
-	            "multiarch": "foreign",
-	            "section": "admin",
 	            "vendor": "Colin Watson <cjwatson@debian.org>",
-	            "description": "Debian base system master password and group files",
-	            "priority": "required",
-	            "version": "3.5.44",
 	            "name": "base-passwd",
-	            "architecture": "amd64"
+	            "priority": "required",
+	            "description": "Debian base system master password and group files",
+	            "architecture": "amd64",
+	            "format": "deb",
+	            "size": 228,
+	            "version": "3.5.44",
+	            "section": "admin",
+	            "multiarch": "foreign"
 	         }
 	      ],
-	      "totalItems": 508
+	      "totalItems": 535
 	   }
 	}
 	
@@ -7570,13 +7561,13 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 1778934444,
-	               "time": "2019/03/06 11:37:23"
+	               "id": 2112182802,
+	               "time": "2019/03/08 08:30:59"
 	            },
 	            "state": "listening",
 	            "tx_queue": 0,
-	            "inode": 125673,
 	            "rx_queue": 0,
+	            "inode": 255211,
 	            "protocol": "tcp"
 	         },
 	         {
@@ -7589,13 +7580,13 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 1778934444,
-	               "time": "2019/03/06 11:37:23"
+	               "id": 2112182802,
+	               "time": "2019/03/08 08:30:59"
 	            },
 	            "state": "listening",
 	            "tx_queue": 0,
-	            "inode": 159045,
 	            "rx_queue": 0,
+	            "inode": 256005,
 	            "protocol": "tcp"
 	         }
 	      ],
@@ -7678,67 +7669,69 @@ Returns the agent's processes info
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 88237840,
-	               "time": "2019/03/06 11:37:23"
+	               "id": 225991434,
+	               "time": "2019/03/08 08:30:59"
 	            },
-	            "ruser": "root",
-	            "state": "I",
-	            "processor": 1,
-	            "sgroup": "root",
-	            "nlwp": 1,
-	            "egroup": "root",
-	            "pid": "119",
-	            "size": 0,
-	            "vm_size": 0,
-	            "priority": 0,
-	            "stime": 0,
 	            "fgroup": "root",
-	            "share": 0,
-	            "start_time": 576,
-	            "pgrp": 0,
-	            "rgroup": "root",
-	            "ppid": 2,
-	            "tty": 0,
+	            "state": "S",
+	            "priority": 20,
 	            "suser": "root",
-	            "name": "charger_manager",
-	            "resident": 0,
-	            "tgid": 119,
+	            "ppid": 2196,
+	            "vm_size": 13312,
+	            "session": 2195,
+	            "pid": "2204",
+	            "nlwp": 1,
+	            "name": "bash",
 	            "euser": "root",
+	            "sgroup": "root",
+	            "size": 3328,
+	            "stime": 0,
+	            "nice": 0,
+	            "argvs": "/tmp/vagrant-shell,172.17.0.100,master,node01",
+	            "share": 595,
+	            "processor": 1,
+	            "ruser": "root",
+	            "cmd": "bash",
+	            "egroup": "root",
+	            "rgroup": "root",
+	            "pgrp": 2195,
+	            "resident": 659,
 	            "utime": 0,
-	            "nice": -20,
-	            "session": 0
+	            "tgid": 2204,
+	            "start_time": 4822,
+	            "tty": 0
 	         },
 	         {
 	            "scan": {
-	               "id": 88237840,
-	               "time": "2019/03/06 11:37:23"
+	               "id": 225991434,
+	               "time": "2019/03/08 08:30:59"
 	            },
-	            "ruser": "root",
-	            "state": "S",
-	            "processor": 0,
-	            "sgroup": "root",
-	            "nlwp": 1,
-	            "egroup": "root",
-	            "pid": "12",
-	            "size": 0,
-	            "vm_size": 0,
-	            "priority": 20,
-	            "stime": 0,
 	            "fgroup": "root",
-	            "share": 0,
-	            "start_time": 8,
-	            "pgrp": 0,
-	            "rgroup": "root",
-	            "ppid": 2,
-	            "tty": 0,
+	            "state": "I",
+	            "priority": 0,
 	            "suser": "root",
-	            "name": "cpuhp/0",
-	            "resident": 0,
-	            "tgid": 12,
+	            "ppid": 2,
+	            "vm_size": 0,
+	            "session": 0,
+	            "pid": "121",
+	            "nlwp": 1,
+	            "name": "charger_manager",
 	            "euser": "root",
+	            "sgroup": "root",
+	            "size": 0,
+	            "stime": 0,
+	            "nice": -20,
+	            "share": 0,
+	            "processor": 1,
+	            "ruser": "root",
+	            "egroup": "root",
+	            "rgroup": "root",
+	            "pgrp": 0,
+	            "resident": 0,
 	            "utime": 0,
-	            "nice": 0,
-	            "session": 0
+	            "tgid": 121,
+	            "start_time": 1009,
+	            "tty": 0
 	         }
 	      ],
 	      "totalItems": 120
