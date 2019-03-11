@@ -18,32 +18,42 @@ The *rootcheck* engine can perform the following checks:
 
 Using these checks, the following policies have been developed:
 
-+--------------------------+--------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| Policy                   | Description                                                                                                                                                                    |
-+==========================+====================================================================+===========================================================================================================+
-| cis_debian_linux_rcl.txt | Based on `CIS Benchmark for Debian Linux v1.0 <https://benchmarks.cisecurity.org/tools2/linux/CIS_Debian_Benchmark_v1.0.pdf>`_                                                 |
-+--------------------------+--------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| cis_rhel5_linux_rcl.txt  | Based on `CIS Benchmark for Red Hat Enterprise Linux 5 v2.1.0 <https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_5_Benchmark_v2.1.0.pdf>`_           |
-+--------------------------+--------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| cis_rhel6_linux_rcl.txt  | Based on `CIS Benchmark for Red Hat Enterprise Linux 6 v1.3.0 <https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_6_Benchmark_v1.3.0.pdf>`_           |
-+--------------------------+--------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| cis_rhel7_linux_rcl.txt  | Based on `CIS Benchmark for Red Hat Enterprise Linux 7 v1.1.0 <https://benchmarks.cisecurity.org/tools2/linux/CIS_Red_Hat_Enterprise_Linux_7_Benchmark_v1.1.0.pdf>`_           |
-+--------------------------+--------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| cis_rhel_linux_rcl.txt   | Based on `CIS Benchmark for Red Hat Enterprise Linux v1.0.5 <https://benchmarks.cisecurity.org/tools2/linux/CIS_RHLinux_Benchmark_v1.0.5.pdf>`_                                |
-+--------------------------+--------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| cis_sles11_linux_rcl.txt | Based on `CIS Benchmark for SUSE Linux Enterprise Server 11 v1.1.0 <https://benchmarks.cisecurity.org/tools2/linux/CIS_SUSE_Linux_Enterprise_Server_11_Benchmark_v1.1.0.pdf>`_ |
-+--------------------------+--------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------+
-| cis_sles12_linux_rcl.txt | Based on `CIS Benchmark for SUSE Linux Enterprise Server 12 v1.0.0 <https://benchmarks.cisecurity.org/tools2/linux/CIS_SUSE_Linux_Enterprise_Server_12_Benchmark_v1.0.0.pdf>`_ |
-+--------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| system_audit_rcl.txt     | Web vulnerabilities and exploits                                                                                                                                               |
-+--------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| win_audit_rcl.txt        | Check registry values                                                                                                                                                          |
-+--------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| system_audit_ssh.txt     | SSH Hardening                                                                                                                                                                  |
-+--------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| win_applications_rcl.txt | Check if malicious applications are installed                                                                                                                                  |
-+--------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+- cis_debian_linux_rcl.txt
+- cis_rhel5_linux_rcl.txt
+- cis_rhel6_linux_rcl.txt
+- cis_rhel7_linux_rcl.txt
+- cis_rhel_linux_rcl.txt
+- cis_sles11_linux_rcl.txt
+- cis_sles12_linux_rcl.txt
+- system_audit_rcl.txt
+- system_audit_ssh.txt
+- win_audit_rcl.txt
+- win_applications_rcl.txt
 
+To download those files, follow this steps:
+
+1. Go to the `CIS benchmarks signin page. <https://learn.cisecurity.org/benchmarks>`_
+
+2. Fill the form with the user's personal data.
+
+  .. thumbnail:: ../../../../images/manual/rootcheck/cis_benchmark_2.png
+    :align: center
+    :width: 70%
+
+3. Click the "Access PDFs" in the e-mail received.
+
+4. You will be redirected to a page. Introduce your e-mail direction in the "Look up" bar there.
+
+5. Now you should be in the downloading page. The link will have the structure ``https://downloads.cisecurity.org/?bypassToken=xxxxxxxxxxxxxxxxxxxxx/``
+
+6. To finish choose the policy file that the user needs and click the "Download PDF" button to start the download.
+
+  .. thumbnail:: ../../../../images/manual/rootcheck/cis_benchmark_1.png
+    :align: center
+    :width: 70%
+
+.. warning::
+  Since the last update, CIS benchmarks connects a personal token to every account, that's why it's necessary to SignUp in their page.
 
 Alerts related to policy monitoring:
 
