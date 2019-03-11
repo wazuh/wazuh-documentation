@@ -9,7 +9,7 @@
 <header role="banner" class="header no-fixed-top">
   <div class="container-fluid align-items-center">
 
-    <nav id="main-navbar" class="navbar navbar-expand-lg blue-bar" role="navigation">
+    <nav id="main-navbar" class="navbar navbar-expand-lg" role="navigation">
       <div class="navbar-brand d-flex justify-content-between" id="logo-title">
         <div id="links-to-home">
           <a class="wazuh-logo-link" href={{ theme_wazuh_web_url }} title="Wazuh">
@@ -67,24 +67,27 @@
         {% endif %}
       </div> <!-- // #search-lg -->
 
-      <div class="submenu d-none d-lg-flex col-lg-6">
-        <ul id="menu-submenu" class="nav">
-          <li class="menu-item nav-item"><a class="nav-link" href="">Getting Started</a></li>
-          <li class="menu-item nav-item"><a class="nav-link" href="">Installation Guide</a></li>
-          <li class="menu-item nav-item"><a class="nav-link" href="">Monitoring AWS</a></li>
-        </ul>
-      </div>
 
-      <div class="version-zone d-none d-lg-flex col-lg-3">
-        <span class="release-selector-wrapper">
-          {% if theme_display_version %}
-          {% include "versions.html" %}
-          {% endif %}
-        </span>
-        <span class="editrepo">
-          {% include "editrepo.html" %}
-        </span>
-      </div>
+        <div class="submenu d-none d-lg-flex col-lg-6">
+          <ul id="menu-submenu" class="nav">
+            <li class="menu-item nav-item"><a class="nav-link" href="">Getting Started</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="">Installation Guide</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="">Monitoring AWS</a></li>
+          </ul>
+        </div>
+
+        <div class="version-zone d-none d-lg-flex col-lg-3">
+          <span class="release-selector-wrapper">
+            {% if theme_display_version %}
+            {% include "versions.html" %}
+            {% endif %}
+          </span>
+          <span class="editrepo">
+            {% include "editrepo.html" %}
+          </span>
+        </div>
+      
+
 
     </div>
   </div>

@@ -2039,7 +2039,6 @@ footer a {
   margin: 0;
   border-radius: 0;
   position: relative;
-  padding: 8px 7px;
 }
 
 #main-navbar .navbar-nav > .open > a,
@@ -2116,7 +2115,7 @@ footer a {
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 0.88rem;
   color: #333333;
   /* padding-top: 60px; */
   line-height: 1.4;
@@ -3062,6 +3061,10 @@ div.highlight pre {
         padding-bottom: 3em;
       }
 
+      #main-navbar {
+        padding: 8px 7px;
+      }
+
       #links-to-home {
         max-width: 182px;
       }
@@ -3150,7 +3153,8 @@ div.highlight pre {
 				z-index: 1;
 			}
 
-			#main-content {
+			#main-content,
+      .blue-bar {
 				padding-left: 30px;
         max-width: calc(100% - 320px);
 			}
@@ -3301,6 +3305,7 @@ div.highlight pre {
 
       #search-lg {
         z-index: 1;
+        width: 320px;
       }
 }
 
