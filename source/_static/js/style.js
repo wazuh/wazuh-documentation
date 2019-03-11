@@ -31,15 +31,16 @@ $(function(){
 
 	function updateFromHash(){
 		loc = location.hash;
+		console.log(loc);
 		$('.globaltoc .leaf, .globaltoc a.current').removeClass('current');
 		selectLeaf(loc);
 	}
 
-	updateFromHash();
-
 	function selectLeaf(hash){
 		if (hash.length > 0) {
 			$('.globaltoc [href="'+hash+'"]').addClass('current');
+		} else {
+			$('.globaltoc [href="#"]').addClass('current');
 		}
 	}
 
