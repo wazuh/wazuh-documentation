@@ -432,6 +432,14 @@ footer a:focus .fa {
   width: 12px;
 }
 
+.toctree-wrapper > ul,
+ul.simple {
+  list-style: url(/_static/img/list-arrow.svg);
+  list-style-position: outside;
+  font-size: 1.1rem;
+  margin-left: 0.7em;
+}
+
 li.toctree-l1 > a {
 	position: relative;
   font-size: 0.88rem;
@@ -545,18 +553,6 @@ main li.toctree-l1,
 main li.toctree-l2,
 main ul.simple li {
   position: relative;
-}
-
-main li.toctree-l1::after,
-main ul.simple li::after {
-  content: '\f0da';
-  display: inline-block;
-  font: normal normal normal 15px/.5 FontAwesome;
-  width: 12px;
-  color: #00a9e5;
-  position: absolute;
-  top: 0.6rem;
-  left: 0;
 }
 
 main li.toctree-l1 ul {
@@ -1477,7 +1473,7 @@ form [type=submit]:disabled {
 }
 
 .central-page-area main ul li {
-  padding: 5px 0 5px 0.6em;
+  padding: 5px 0;
 }
 
 .central-page-area main ul li.toctree-l2 {
