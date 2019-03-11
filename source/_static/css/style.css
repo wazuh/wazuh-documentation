@@ -145,11 +145,6 @@ a.btn-wazuh:active {
           flex-direction: column;
 }
 
-.header .main-head{
-  padding-top: 4em;
-  padding-bottom: 5em;
-}
-
 .header .menuweb-bar{
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1123,6 +1118,9 @@ footer .contact-info .fa-paper-plane-o {
 .full-toctree-nav {
   padding: 0;
   background-color: #ebebeb;
+	position: absolute;
+  z-index: 1;
+  width: 100%;
 }
 
 .globaltoc > ul {
@@ -1535,15 +1533,6 @@ a[data-lightbox] img {
 	transition: max-width 0.3s, -webkit-box-flex 0.3s;
 	transition: max-width 0.3s, flex 0.3s;
 	transition: max-width 0.3s, flex 0.3s, -webkit-box-flex 0.3s, -ms-flex 0.3s;
-}
-
-#main-content.full-width {
-	max-width: 100%;
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 100%;
-          flex: 0 0 100%;
-	-webkit-transition: all 0.3s;
-	transition: all 0.3s;
 }
 
 .central-page-area p strong,
@@ -2853,90 +2842,6 @@ div.highlight pre {
         max-height: 500px;
       }
 
-      .search_main .searchform {
-				display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-            -ms-flex-align: center;
-                align-items: center;
-        width: 100%;
-        justify-self: right;
-      }
-
-			.index .search_main .searchform {
-				padding: 10px 7px;
-			}
-
-      .search_main .searchform > .btn-search,
-      .search_main .searchform > .btn-close, .navbar-toggle.btn-close {
-        position: static;
-      }
-
-      .searchform {
-        margin: 0;
-      }
-
-      .search_main .btn-search .fa, .search_main.expanded .btn-search .fa {
-        font-size: 16px;
-      }
-
-      .searchbox-indicator .btn-search:hover,
-      .search_main.expanded .btn-search,
-      .search_main.collapsed .btn-search:hover,
-      .search_main.collapsed .btn-search:active,
-      .searchbox-indicator .btn-search,
-      .search_main .btn-search,
-      .search_main.collapsed .btn-search  {
-        padding: 0 5px;
-        height: 25px;
-        width: 25px;
-      }
-
-      .searchbox-indicator .btn-search {
-        font-size: 24px;
-      }
-
-      .search_main.collapsed .btn-search .fa {
-        font-size: 16px;
-      }
-
-      .search_main .form-control {
-        margin-left: 5px;
-        margin-right: 15px;
-        border: none;
-        height: auto;
-        padding: 5px 2px;
-        color: #333333;
-        -webkit-box-shadow: none;
-                box-shadow: none;
-        border-radius: 0px;
-        font-weight: 400;
-        line-height: 1.4rem;
-      }
-
-      .index .search_main .form-control {
-        font-size: 1.2em;
-      }
-
-      .search_main {
-        position: relative;
-        top: 0;
-        height: 98%;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .search_main.expanded .btn-close {
-        right: auto;
-        left: auto;
-      }
-
       .flex-container .widget_search {
         margin-left: 0;
         margin-right: 0;
@@ -3197,8 +3102,92 @@ div.highlight pre {
                 justify-content: space-between;
       }
 
+      .header .main-head{
+        padding-top: 4em;
+        padding-bottom: 5em;
+      }
+
       #links-to-home {
         max-width: 182px;
+      }
+
+      .search_main .searchform {
+				display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        width: 100%;
+        justify-self: right;
+      }
+
+			.index .search_main .searchform {
+				padding: 10px 7px;
+			}
+
+      .search_main .searchform > .btn-search,
+      .search_main .searchform > .btn-close, .navbar-toggle.btn-close {
+        position: static;
+      }
+
+      .searchform {
+        margin: 0;
+      }
+
+      .search_main .btn-search .fa, .search_main.expanded .btn-search .fa {
+        font-size: 16px;
+      }
+
+      .searchbox-indicator .btn-search:hover,
+      .search_main.expanded .btn-search,
+      .search_main.collapsed .btn-search:hover,
+      .search_main.collapsed .btn-search:active,
+      .searchbox-indicator .btn-search,
+      .search_main .btn-search,
+      .search_main.collapsed .btn-search  {
+        padding: 0 5px;
+        height: 25px;
+        width: 25px;
+      }
+
+      .searchbox-indicator .btn-search {
+        font-size: 24px;
+      }
+
+      .search_main.collapsed .btn-search .fa {
+        font-size: 16px;
+      }
+
+      .search_main .form-control {
+        margin-left: 5px;
+        margin-right: 15px;
+        border: none;
+        height: auto;
+        padding: 5px 2px;
+        color: #333333;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+        border-radius: 0px;
+        font-weight: 400;
+        line-height: 1.4rem;
+      }
+
+      .index .search_main .form-control {
+        font-size: 1.2em;
+      }
+
+      .search_main {
+        position: relative;
+        top: 0;
+        height: 98%;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        max-width: 800px;
+        margin: 0 auto;
       }
 
 			.central-page-area {
@@ -3331,6 +3320,7 @@ div.highlight pre {
         min-height: 100vh;
 				z-index: 3;
         width: 320px;
+				position: static;
       }
 
       .full-toctree-nav.collapsed {
@@ -3340,44 +3330,6 @@ div.highlight pre {
         -webkit-transition: all 0.3s;
         transition: all 0.3s;
       }
-
-			.btn-collapsible-globaltoc {
-				position: absolute;
-				top: 15px;
-				border: none;
-				border-radius: 25px 0 0 25px;
-				height: 30px;
-				width: 15px;
-				cursor: pointer;
-				color: #fff;
-				background-color: #00a9e5;
-				padding-top: 0;
-			}
-
-			#btn-collapse-globaltoc {
-				border-radius: 25px 0 0 25px;
-				padding-left: 3px;
-				padding-right: 0;
-        right: 0;
-			}
-
-			#btn-uncollapse-globaltoc {
-				border-radius: 0 25px 25px 0;
-				left: 0;
-				padding-left: 0;
-				padding-right: 3px;
-				position: absolute;
-				z-index: 2;
-			}
-
-			#main-content.full-width {
-        position: relative;
-				padding-left: 15px;
-			}
-
-			#main-content.full-width #btn-uncollapse-globaltoc {
-				display: block;
-			}
 
 			nav.full-toctree-nav.reached-top {
         top: 0px;
@@ -3561,5 +3513,3 @@ pre .vg { color: #bb60d5 } /* Name.Variable.Global */
 pre .vi { color: #bb60d5 } /* Name.Variable.Instance */
 pre .vm { color: #bb60d5 } /* Name.Variable.Magic */
 pre .il { color: #40a070 } /* Literal.Number.Integer.Long */
-}
-}
