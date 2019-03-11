@@ -126,6 +126,7 @@ a.btn-wazuh:active {
 .central-page-area a img {
   width: auto!important;
   max-width: 100%;
+  margin-bottom: 0.2em;
 }
 
 .header {
@@ -145,7 +146,7 @@ a.btn-wazuh:active {
           flex-direction: column;
 }
 
-.header .menuweb-bar{
+.header .menuweb-bar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -154,7 +155,7 @@ a.btn-wazuh:active {
           align-items: center;
 }
 
-.header .menuweb-bar #menu-header-menuweb{
+.header .menuweb-bar #menu-header-menuweb {
   display: -ms-flex;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -162,30 +163,13 @@ a.btn-wazuh:active {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  width: 300px;
 }
 
 .header #navbarWebMenu {
   height: 100%;
 }
 
-.header .social-bar {
-  min-height: 53px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-#menu-header-social-bar {
-  height: 100%;
-  -ms-flex-line-pack: center;
-      align-content: center;
-}
-
-.header .social-bar .nav > li > a {
+.header .menuweb-bar .nav > li > a {
   padding: 5px 7px;
   color: #fff;
 }
@@ -308,9 +292,8 @@ a.docs-link:focus {
   padding: 0 10%;
 }
 
-header .social-bar .menu-item a {
-  color: #333;
-  font-size: 0.94rem;
+header .menuweb-bar .menu-item a {
+  font-size: 1rem;
 }
 
 .menu-item.last-item a {
@@ -322,7 +305,7 @@ header .social-bar .menu-item a {
   z-index: 2;
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: -1;
 }
 
 
@@ -636,18 +619,6 @@ h5:active > a.headerlink,
 h6:hover > a.headerlink,
 h6:active > a.headerlink {
   display: inline-block;
-}
-
-#page .img-space {
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-}
-
-.img-space img {
-  max-width: 200px;
-  max-height: 250px;
-  width: auto;
 }
 
 .white-bullets ul li::before {
@@ -1834,10 +1805,18 @@ h1, h2, h3, h4, h5, h6,
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   color: #00a9e5;
-  margin: 1em 0;
   text-align: left;
   line-height: 1.2;
   display: inline-block;
+}
+
+h1 {
+  margin: 1em 0;
+}
+
+h2, h3, h4, h5, h6,
+#page .topic .topic-title {
+  margin: 0.2em 0 1em 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -2060,6 +2039,7 @@ footer a {
   margin: 0;
   border-radius: 0;
   position: relative;
+  padding: 8px 7px;
 }
 
 #main-navbar .navbar-nav > .open > a,
@@ -2344,7 +2324,7 @@ ul#breadcrumbs a {
   text-align: right;
   font-size: 0.87rem;
   margin-left: 15px;
-  padding: 0 10px;
+  padding: 0 7px;
 }
 
 .edit-repo a {
@@ -2354,10 +2334,6 @@ ul#breadcrumbs a {
 .jumbo-bar .white-bar {
   padding: 15px;
   background-color: #ffffff;
-}
-
-.blue-bar {
-  padding: 4px 5px;
 }
 
 [class*="highlight-"] {
@@ -2463,11 +2439,6 @@ div.highlight pre {
   .btn-download,
   .btn-guide {
     font-size: 1.3rem;
-  }
-
-  .img-space img {
-    max-height: 300px;
-    max-width: 300px;
   }
 
   .btn-wazuh {
@@ -2921,11 +2892,6 @@ div.highlight pre {
                 flex-direction: row;
       }
 
-      .img-space img {
-        max-width: 100%;
-        height: auto;
-      }
-
       .btn-download,
       .btn-guide {
         font-size: 0.87rem;
@@ -3037,17 +3003,6 @@ div.highlight pre {
       nav.our-bar,
       nav.social-bar {
         display: inline-block;
-      }
-
-      .img-space {
-        width: 100%;
-        margin-bottom: 0;
-        padding-top: 68px;
-        text-align: center;
-      }
-
-      div a.img-space > img {
-        margin-bottom: 0;
       }
 
       #gethelp .help-buttons {
@@ -3178,9 +3133,7 @@ div.highlight pre {
       }
 
       .search_main {
-        position: relative;
-        top: 0;
-        height: 98%;
+        position: static;
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
@@ -3280,10 +3233,6 @@ div.highlight pre {
 
       .page-404 #errorpage-content .button-area {
         bottom: 0;
-      }
-
-      .img-space {
-        padding-top: 2em;
       }
 
       a.btn-wazuh {
@@ -3420,10 +3369,6 @@ div.highlight pre {
 
           #gethelp .help-icon .wico-help-hands {
             font-size: 220px;
-          }
-
-          .central-page-area a img {
-            max-width: 1000px;
           }
 }
 
