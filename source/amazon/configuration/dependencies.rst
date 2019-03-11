@@ -6,9 +6,10 @@ Installing dependencies
 =======================
 
 .. note::
-  The integration with AWS S3 can be done at the Wazuh manager (which also behaves as an agent) or directly at a Wazuh agent. This choice merely depends on how you decide to access your AWS infrastructure in your environment.
+  **The integration** with AWS S3 **can be configured in the Wazuh manager** (which also behaves as an agent) **or directly in a Wazuh agent**. This choice merely depends on how you decide to access your AWS infrastructure in your environment. 
 
-Python Boto3 module is required on the system running the Wazuh module to pull AWS events.
+.. warning::
+  The Wazuh manager includes all dependencies installed, **this steps are only necessary** when configuring the integration **in a Wazuh agent**.
 
 Pip
 ---

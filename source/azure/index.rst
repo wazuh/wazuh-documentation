@@ -36,7 +36,6 @@ As a built-in Wazuh feature, now you can search, analyze and trigger alerts from
     .. toctree::
        :maxdepth: 2
 
-       installation
        monitoring instances
        monitoring activity
        monitoring services
