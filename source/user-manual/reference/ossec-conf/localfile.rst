@@ -31,7 +31,7 @@ Options
 location
 ^^^^^^^^
 
-This indicates the location of a log or wild-carded group of logs to be read. ``strftime`` format strings may be used for log file names.
+Giving any log file, this option indicates the location of that log or wild-carded group of logs. ``strftime`` format strings may be used for log file names.
 
 For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017).
 
@@ -46,40 +46,22 @@ The location field is also valid to filter by channel in case of using an ``even
       <log_format>eventchannel</log_format>
   </localfile>
 
-
   <localfile>
       <location>Microsoft-Windows-Windows Firewall With Advanced Security/Firewall</location>
       <log_format>eventchannel</log_format>
   </localfile>
 
-
-+--------------------+--------------+
-| **Default value**  | n/a          |
-+--------------------+--------------+
-| **Allowed values** | Any log file |
-+--------------------+--------------+
-
 command
 ^^^^^^^
 
-This designates a command to be run. All output from this command will be read as one or more log messages depending on whether command or full_command is used.
-
-+--------------------+--------------------------------------------------+
-| **Default value**  | n/a                                              |
-+--------------------+--------------------------------------------------+
-| **Allowed values** | any command line, optionally including arguments |
-+--------------------+--------------------------------------------------+
+Allowing any command line, this option designates a command to be run. 
+All output from this command will be read as one or more log messages depending on whether command or full_command is used.
 
 alias
 ^^^^^
 
-This is used to assign an alias to a command that will replace the command name in the log message.
 
-+--------------------+------------+
-| **Default value**  | n/a        |
-+--------------------+------------+
-| **Allowed values** | any string |
-+--------------------+------------+
+Change a command name in the log message with the given string.
 
 For example ``<alias>usb-check</alias>`` would replace:
 
@@ -96,39 +78,24 @@ with:
 frequency
 ^^^^^^^^^
 
-The frequency specifies the minimum amount of time in seconds between command runs. The command will likely not repeat in the exact the number of seconds specified, however, the time between runs will be no less than the number of seconds specified.
+Settled to a positive number, and used with **command** or **full_command**, will prevent that command from being executed in less time than the number specified in seconds.
 
-This can be used with **command** or **full_command**.
-
-+--------------------+--------------------------------+
-| **Default value**  | n/a                            |
-+--------------------+--------------------------------+
-| **Allowed values** | any positive number of seconds |
-+--------------------+--------------------------------+
 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-This is only to be used with the ``eventchannel`` log format.  By default, when Wazuh starts, it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
+Set to **yes** to collect only events generated after the Wazuh starts.
 
-If this is set to **yes** Wazuh would then only receive events that occurred after the agent was started.
+By default, when Wazuh starts it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
 
-+--------------------+-----------+
-| **Default value**  | n/a       |
-+--------------------+-----------+
-| **Allowed values** | yes or no |
-+--------------------+-----------+
+Only compatible with `eventchannel` log format.
 
 query
 ^^^^^
 
-This is also only to be used with the ``eventchannel`` log format. With this option, you can identify an XPATH query following the event schema that will filter the events that Wazuh will process.
+Filter the events that Wazuh will process by using an XPATH query following the event schema.
 
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                                              |
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
-+--------------------+----------------------------------------------------------------------------------------------------------------------------------+
+Only compatible with ``eventchannel`` log format.
 
 For example, the following configuration will only process events with an ID of 7040:
 
@@ -145,11 +112,11 @@ label
 
 .. versionadded:: 3.0.0
 
-This option allows for the addition of custom data in JSON events and is available when `log_format`_ is set to ``json``.
+Used to add custom data in JSON events. Set `log_format`_ to ``json`` to enable it.
 
-Labels can be nested in JSON formatted alerts by separating the "key" terms by a period.
+Labels can be nested in JSON alerts by separating the "key" terms by a period.
 
-This option can be used as follows to identify the source of each log entry when monitoring several files simultaneously:
+Here is an example of how to identify the source of each log entry when monitoring several files simultaneously:
 
 .. code-block:: xml
 
@@ -197,7 +164,7 @@ target
 
 .. versionadded:: 3.3.0
 
-Target specifies the name of the socket where the output will be redirected. The socket must be defined previously to use it with this option.
+Target specifies the name of the socket where the output will be redirected. The socket must be defined previously.
 
 +--------------------+--------------------------------+
 | **Default value**  | agent                          |
