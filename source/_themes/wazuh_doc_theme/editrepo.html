@@ -26,7 +26,7 @@
 
 {% block breadcrumbs_aside %}
 {% if display_github or display_bitbucket or display_gitlab  %}
-  <span class="edit-repo">
+  <span class="edit-repo d-none d-lg-inline-block">
     {% if hasdoc(pagename) %}
     {% if display_github %}
     {% if check_meta and 'github_url' in meta %}

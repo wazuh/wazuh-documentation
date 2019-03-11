@@ -514,15 +514,11 @@ ul li.toctree-l1 a.current.reference.internal:after {
 	font-weight: 800;
 }
 
-.globaltoc li.toctree-l1.current {
-  background-color: #f2f2f2;
-}
-
 .globaltoc li.toctree-l1 a.current.leaf,
 .globaltoc li.toctree-l1 .current > a.leaf {
 	border-width: 3px;
 	padding-left: calc(1rem - 3px);
-  background: #e9e9e9;
+  background: #f0f0f0;
 }
 
 .globaltoc li.toctree-l1 li.toctree-l3 > a.leaf.current::before,
@@ -559,7 +555,7 @@ main ul.simple li::after {
   width: 12px;
   color: #00a9e5;
   position: absolute;
-  top: 0.85rem;
+  top: 0.6rem;
   left: 0;
 }
 
@@ -1090,7 +1086,7 @@ footer .contact-info .fa-paper-plane-o {
 
 .full-toctree-nav {
   padding: 0;
-  background-color: #ebebeb;
+  background-color: #f8f8f8;
 	position: absolute;
   z-index: 1;
   width: 100%;
@@ -1346,7 +1342,7 @@ select, option {
 select#select-version {
   border: none;
   margin-left: 10px;
-  padding: 2px 22px 2px 2px;
+  padding: 2px 31px 2px 8px;
   cursor: pointer;
   position: relative;
   font-size: 0.85rem;
@@ -2325,12 +2321,13 @@ ul#breadcrumbs a {
 .edit-repo {
   text-align: right;
   font-size: 0.87rem;
-  margin-left: 15px;
-  padding: 0 7px;
+  float: right;
+  padding-top: 1em;
+  padding-right: 7px;
 }
 
 .edit-repo a {
-  color: #ffffff;
+  color: #0094d0;
 }
 
 .jumbo-bar .white-bar {
@@ -3149,6 +3146,10 @@ div.highlight pre {
         margin: 0 auto;
       }
 
+      .release-selector-wrapper {
+        padding-right: 7px;
+      }
+
 			.central-page-area {
 				-ms-flex-wrap: nowrap;
 				    flex-wrap: nowrap;
@@ -3167,6 +3168,11 @@ div.highlight pre {
         display: flex;
         width: 100%;
         max-width: calc(100% - 320px);
+      }
+
+      .breadcrumbs-wrapper {
+        display: inline-block;
+        width: calc(100% - 60px);
       }
 
       #welcome-to-wazuh .topic p {
@@ -3322,6 +3328,14 @@ div.highlight pre {
 }
 
 @media (min-width: 1200px) {
+
+          #main-content {
+            padding-left: 60px;
+          }
+
+          .blue-bar {
+            padding-left: 30px;
+          }
 
           #welcome-to-wazuh .topic,
           #welcome-to-wazuh .topic:nth-of-type(even) {
