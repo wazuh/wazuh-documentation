@@ -5,7 +5,7 @@
 Set up Puppet
 =============
 
-In this section, we are going to give a short explanation of how to install the different instances of Puppet. If further information is required, go to the `Official Puppet documentation. <https://puppet.com/docs/pe/2017.2/index.html>`_
+In this section, we are going to give a short explanation of how to install the different instances of Puppet. If further information is required, go to the `Official Puppet documentation. <https://puppet.com/docs/puppet/5.1/index.html>`_
 
 Before we get started with Puppet, confirm that the following network requirements are met:
 
