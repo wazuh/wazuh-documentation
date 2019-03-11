@@ -331,6 +331,7 @@ header .menuweb-bar .menu-item a {
 }
 
 .menu-sub .version-zone {
+	padding: 14px 15px;
   display: -ms-flex;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1805,12 +1806,12 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1 {
-  margin: 1em 0;
+  margin: 1em 0 0.5em 0;
 }
 
 h2, h3, h4, h5, h6,
 #page .topic .topic-title {
-  margin: 0.2em 0 1em 0;
+  margin: 0.2em 0 0.5em 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -3059,6 +3060,10 @@ div.highlight pre {
         padding-bottom: 3em;
       }
 
+			.header .main-head > div {
+				height: 72px;
+			}
+
       #main-navbar {
         padding: 8px 7px;
       }
@@ -3077,6 +3082,10 @@ div.highlight pre {
         width: 100%;
         justify-self: right;
       }
+
+			#search-lg .search_main .searchform {
+				padding: 0;
+			}
 
 			.index .search_main .searchform {
 				padding: 10px 7px;
@@ -3167,6 +3176,10 @@ div.highlight pre {
         width: 100%;
         max-width: calc(100% - 320px);
       }
+
+			.index .blue-bar.full-width {
+				max-width: 100%;
+			}
 
       .breadcrumbs-wrapper {
         display: inline-block;
@@ -3318,10 +3331,14 @@ div.highlight pre {
       }
 
       #search-lg {
-        z-index: 1;
+			  z-index: 1;
         max-width: 320px;
         -ms-flex-negative: 0;
             flex-shrink: 0;
+      }
+
+      .index #search-lg {
+        display: none;
       }
 }
 
@@ -3332,7 +3349,7 @@ div.highlight pre {
           }
 
           .blue-bar {
-            padding-left: 30px;
+            padding-left: 5px;
           }
 
           #welcome-to-wazuh .topic,

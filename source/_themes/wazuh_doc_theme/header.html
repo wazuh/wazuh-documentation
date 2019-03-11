@@ -57,19 +57,18 @@
         </button>
       </div>
       <div id="search-lg" class="title-bar-right col-9 ml-auto col-lg-12">
-        {% if pagename == 'index' %}
-        <span class="no-searchbox d-none d-lg-inline-block">Wazuh Docs</span>
-        {% else %}
+        {% if pagename != 'index' %}
         {% include "searchbar.html" %}
         {% endif %}
       </div> <!-- // #search-lg -->
 
       <div class="blue-bar">
-        <div class="submenu d-none d-lg-flex col-lg-auto">
+        <div class="submenu d-none d-lg-flex">
           <ul id="menu-submenu" class="nav">
-            <li class="menu-item nav-item"><a class="nav-link" href="">Getting Started</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="">Installation Guide</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="">Monitoring AWS</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../' + version + '/installation-guide/', 1 ) }}">Installation Guide</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../' + version + '/getting-started/', 1 ) }}">Getting Started</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../' + version + '/pci-dss/', 1 ) }}">Wazuh for PCI DSS</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../' + version + '/amazon/', 1 ) }}">Monitoring AWS</a></li>
           </ul>
         </div>
 

@@ -120,6 +120,21 @@ $(function(){
    else {
      $('#btn-scroll').fadeOut('slow');
    }
+
+	 // Searchbar position control on page index
+	 if ( $('#page.index').length > 0 && $(document).scrollTop() > $('#search-lg').offset().top ) {
+		 // Page scrolled down
+		 searcbarToMobile();
+		 $('.blue-bar').removeClass('full-width');
+		 $('#search-lg').show();
+	 }
+
+	 if ( $('#page.index').length > 0 && $(document).scrollTop() <= $('#search-lg').offset().top ) {
+		 // Page not scrolled down
+		 $('.blue-bar').addClass('full-width');
+		 searcbarToDesktop();
+		 $('#search-lg').hide();
+	 }
  });
 
 	/* Collapsible globaltoc -------------------------------------------------------------------------------------------*/
