@@ -178,7 +178,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
 .. note::
 
-    If you are running the Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elastic_ssl`.
+    If you are running the Wazuh server and the Elastic Stack server on separate systems (**distributed architecture**), it is important to configure encryption between Filebeat and Logstash. To do so, please see :ref:`elasticsearch_kibana`.
 
 .. _install_kibana_app_rpm:
 
@@ -223,7 +223,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. note::
 
-    It is recommended that an Nginx proxy be set up for Kibana in order to use SSL encryption and to enable authentication. Instructions to set up the proxy can be found at :ref:`kibana_ssl`.
+    It is recommended that an Nginx proxy be set up for Kibana in order to use SSL encryption and to enable authentication. Instructions to set up the proxy can be found at :ref:`elasticsearch_kibana`.
 
 4. Enable and start the Kibana service:
 

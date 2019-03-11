@@ -1,9 +1,18 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _kibana_ssl:
+.. _elasticsearch_kibana:
 
-Setting up SSL and authentication for Kibana
-============================================
+Securing Elasticsearch and Kibana
+=================================
+
+To secure Kibana, we are going to evaluate 3 different ways:
+
+    - Using NGINX, in this page.
+    - Using :ref:`searchguard`
+    - Using :ref:`X-Pack <kibana_xpack>`
+
+Using NGINX
+-----------
 
 By default, the communication between Kibana (including the Wazuh app) and the web browser on end-user systems is not encrypted. It’s strongly recommended that Kibana be configured to use SSL encryption and to enable authentication.  In this section, we will describe how this can be done with an NGINX setup.
 
@@ -20,7 +29,7 @@ NGINX is a popular open-source web server and reverse proxy known for its high p
     2. `NGINX SSL proxy for Kibana (Debian-based distributions)`_
 
 NGINX SSL proxy for Kibana (RPM-based distributions)
-----------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Install NGINX:
 
@@ -168,7 +177,7 @@ Now, access the Kibana web interface via HTTPS. It will prompt you for the usern
     If you're facing permission issues or getting 502 code error, try executing this command: ``setsebool -P httpd_can_network_connect 1``
 
 NGINX SSL proxy for Kibana (Debian-based distributions)
--------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Install NGINX:
 

@@ -20,7 +20,6 @@ This manual describes the configuration process to get it started and the differ
         :maxdepth: 1
 
         connect-kibana-app
-        configure-xpack/index
         features/index
         troubleshooting
         reference/index

@@ -5,16 +5,12 @@
 Optional configurations
 =======================
 
-This section gives guidance on best practices related to setting up an efficient, stable and secure Wazuh environment. Here, you will find information on how to set up SSL communication in distributed architectures (where a Wazuh server communicates with an Elastic Stack cluster), how to use Nginx to set up a secure proxy for Kibana and how to add authentication to your web user interface.
+This section gives guidance on best practices related to setting up an efficient and stable Wazuh environment.
 
 .. topic:: Contents
 
     .. toctree::
         :maxdepth: 1
 
-        elastic_ssl
-        kibana_ssl
-        securing-api
         elastic-tuning
-        searchguard
         automatic-api

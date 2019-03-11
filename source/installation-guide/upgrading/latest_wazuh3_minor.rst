@@ -255,7 +255,7 @@ Upgrade Logstash
 
 .. note::
 
-  The Logstash configuration file has been replaced for an updated one. If you already configured the encryption between Filebeat and Logstash, don't forget to check again :ref:`elastic_ssl` if you're using a **distributed architecture**.
+  The Logstash configuration file has been replaced for an updated one. If you already configured the encryption between Filebeat and Logstash, don't forget to check again :ref:`elasticsearch_kibana` if you're using a **distributed architecture**.
 
 Upgrade Kibana
 ^^^^^^^^^^^^^^

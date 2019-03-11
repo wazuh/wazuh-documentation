@@ -42,7 +42,7 @@ Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kiban
 
 .. note::
 
-    If you have followed :ref:`kibana_ssl`, the URL must be set as ``https://localhost``.
+    If you have followed :ref:`elasticsearch_kibana`, the URL must be set as ``https://localhost``.
 
 6. Click on the ``Save API`` button to store it. Now you can navigate to the other app sections, like *Overview*, and start visualizing your alerts.
 
