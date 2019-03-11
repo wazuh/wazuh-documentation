@@ -59,7 +59,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
-      <div id="search-lg" class="title-bar-right col-9 ml-auto col-lg-3">
+      <div id="search-lg" class="title-bar-right col-9 ml-auto col-lg-12">
         {% if pagename == 'index' %}
         <span class="no-searchbox d-none d-lg-inline-block">Wazuh Docs</span>
         {% else %}
@@ -67,8 +67,8 @@
         {% endif %}
       </div> <!-- // #search-lg -->
 
-
-        <div class="submenu d-none d-lg-flex col-lg-6">
+      <div class="blue-bar">
+        <div class="submenu d-none d-lg-flex col-lg-auto">
           <ul id="menu-submenu" class="nav">
             <li class="menu-item nav-item"><a class="nav-link" href="">Getting Started</a></li>
             <li class="menu-item nav-item"><a class="nav-link" href="">Installation Guide</a></li>
@@ -76,7 +76,7 @@
           </ul>
         </div>
 
-        <div class="version-zone d-none d-lg-flex col-lg-3">
+        <div class="version-zone d-none d-lg-flex col-lg-auto ml-auto">
           <span class="release-selector-wrapper">
             {% if theme_display_version %}
             {% include "versions.html" %}
@@ -86,7 +86,7 @@
             {% include "editrepo.html" %}
           </span>
         </div>
-      
+      </div>
 
 
     </div>

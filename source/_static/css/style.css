@@ -2039,6 +2039,7 @@ footer a {
   margin: 0;
   border-radius: 0;
   position: relative;
+  padding: 0;
 }
 
 #main-navbar .navbar-nav > .open > a,
@@ -3153,11 +3154,18 @@ div.highlight pre {
 				z-index: 1;
 			}
 
-			#main-content,
-      .blue-bar {
+			#main-content {
 				padding-left: 30px;
         max-width: calc(100% - 320px);
 			}
+
+      .blue-bar {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        width: 100%;
+        max-width: calc(100% - 320px);
+      }
 
       #welcome-to-wazuh .topic p {
         font-size: 14px;
@@ -3305,7 +3313,9 @@ div.highlight pre {
 
       #search-lg {
         z-index: 1;
-        width: 320px;
+        max-width: 320px;
+        -ms-flex-negative: 0;
+            flex-shrink: 0;
       }
 }
 
