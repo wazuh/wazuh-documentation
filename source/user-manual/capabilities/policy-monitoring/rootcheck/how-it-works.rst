@@ -40,20 +40,20 @@ To download those files, follow this steps:
     :align: center
     :width: 70%
 
-3. Click the "Access PDFs" in the e-mail received.
+3. Click the "Access PDFs" in the received e-mail.
 
 4. You will be redirected to a page. Introduce your e-mail direction in the "Look up" bar there.
 
-5. Now you should be in the downloading page. The link will have the structure ``https://downloads.cisecurity.org/?bypassToken=xxxxxxxxxxxxxxxxxxxxx/``
+5. Now, you should be in the downloading page.
 
-6. To finish choose the policy file that the user needs and click the "Download PDF" button to start the download.
+6. To finish, choose the policy file that the user needs between the before mentioned and click the "Download PDF" button to start the download.
 
   .. thumbnail:: ../../../../images/manual/rootcheck/cis_benchmark_1.png
     :align: center
     :width: 70%
 
 .. warning::
-  Since the last update, CIS benchmarks connects a personal token to every account, that's why it's necessary to SignUp in their page.
+  Since last update, CIS benchmarks connects a personal token to every account, that's why it's necessary to SignUp in their page.
 
 Alerts related to policy monitoring:
 
