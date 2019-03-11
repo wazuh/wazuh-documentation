@@ -5,7 +5,7 @@
 Installing Puppet master
 ========================
 
-Here is a very resumed way to install *puppet-master*. Follow this link to check the `Official installation guide. <https://puppet.com/docs/puppetserver/5.0/install_from_packages.html>`_
+Here is a very summarized way to install *puppet-master*. Follow this link to check the `Official installation guide. <https://puppet.com/docs/puppetserver/5.0/install_from_packages.html>`_
 
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
