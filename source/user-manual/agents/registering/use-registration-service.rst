@@ -62,14 +62,9 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
     # /var/ossec/bin/ossec-authd
 
-<<<<<<< HEAD:source/user-manual/agents/registering/use-registration-service.rst
-.. warning::
-  From Wazuh 3.8.0 version, this daemon *(ossec-authd)* is running since the manager installation. That means that it is not necessary to run it as it is always running.
-=======
   .. note::
   
     Since version 3.8.0, this registration daemon is running by default when the *Wazuh* installation is complete, so it is not necessary to execute it.
->>>>>>> 3f6e4176f888a839ca4e692cdf2ba5159f87dee7:source/user-manual/registering/use-registration-service.rst
 
 2. On the agents, run the ``agent-auth`` program, using the manager's IP address:
 
