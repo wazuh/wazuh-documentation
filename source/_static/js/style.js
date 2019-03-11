@@ -45,11 +45,15 @@ $(function(){
 	}
 
   /* Turn all tables in responsive table */
-  $('#main-content table').each(function(){
-    if ( $(this).width() > $('main').width()){
-      $(this).addClass('table-responsive');
-    }
-  });
+  reponsiveTables();
+
+  function reponsiveTables(){
+    $('#main-content table').each(function(){
+      if ( $(this).width() > $('main').width()){
+        $(this).addClass('table-responsive');
+      }
+    });
+  }
 
   /* Search bar ----------------------------------------------------------------------------------------------------*/
   /* Search bar animation */
@@ -137,6 +141,8 @@ $(function(){
 
 	 $(window).on('resize', function(e){
 		 var curWidth = $(this).width();
+     $('table').removeClass('table-responsive');
+     reponsiveTables();
 		 changeVerionPosition(curWidth);
      changeSearchPosition(curWidth);
 	 });
