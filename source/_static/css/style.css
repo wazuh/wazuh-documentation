@@ -305,7 +305,7 @@ header .menuweb-bar .menu-item a {
   z-index: 2;
   position: -webkit-sticky;
   position: sticky;
-  top: -1;
+  top: -1px;
 }
 
 
@@ -3058,8 +3058,8 @@ div.highlight pre {
       }
 
       .header .main-head{
-        padding-top: 4em;
-        padding-bottom: 5em;
+        padding-top: 2em;
+        padding-bottom: 3em;
       }
 
       #links-to-home {
