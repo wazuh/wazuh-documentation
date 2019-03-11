@@ -5,7 +5,7 @@
 Installing Puppet agent
 =======================
 
-Here is a very resumed guide to install *puppet-master*. Follow this link to check the `Official installation guide. <https://puppet.com/docs/puppet/5.1/install_linux.html>`_
+Here is a very summarized guide to install *puppet-master*. Follow this link to check the `Official installation guide. <https://puppet.com/docs/puppet/5.1/install_linux.html>`_
 
 In this section we assume that you have already installed the ``apt`` or ``yum`` Puppet repository on your agent system in the same way that you did on your Puppet Server.
 
