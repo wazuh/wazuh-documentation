@@ -17,11 +17,11 @@ To register an agent using the command line, follow these steps:
 	* Wazuh v3.8.2 Agent manager.          *
 	* The following options are available: *
 	****************************************
-		(A)dd an agent (A).
-		(E)xtract key for an agent (E).
-		(L)ist already added agents (L).
-		(R)emove an agent (R).
-		(Q)uit.
+	    (A)dd an agent (A).
+	    (E)xtract key for an agent (E).
+	    (L)ist already added agents (L).
+	    (R)emove an agent (R).
+	    (Q)uit.
 	Choose your action: A,E,L,R or Q:
 
 2. Select `A` to add an agent. You'll be asked for the agent's name (use the agent hostname or another arbitrary name), its IP address and the agent ID (this field can be left blank to auto-assign an ID).
@@ -31,14 +31,14 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	Choose your action: A,E,L,R or Q: A
 
 	- Adding a new agent (use '\q' to return to the main menu).
-		Please provide the following:
-		* A name for the new agent: Example
-		* The IP Address of the new agent: any
-		* An ID for the new agent[001]:
+	    Please provide the following:
+	    * A name for the new agent: Example
+	    * The IP Address of the new agent: any
+	    * An ID for the new agent[001]:
 	Agent information:
-		ID:001
-		Name:Example
-		IP Address:any
+	    ID:001
+	    Name:Example
+	    IP Address:any
 
 	Confirm adding it?(y/n): y
 	Agent added with ID 001.
@@ -67,8 +67,8 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	* Wazuh v3.8.2 Agent manager.          *
 	* The following options are available: *
 	****************************************
-		(I)mport key from the server (I).
-		(Q)uit.
+	    (I)mport key from the server (I).
+	    (Q)uit.
 	Choose your action: I or Q:
 
 6. Select `I` to import a key and paste in the key that you extracted on the manager::
