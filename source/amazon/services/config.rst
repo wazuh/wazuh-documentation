@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _amazon_config:
 
@@ -10,7 +10,7 @@ AWS Config
 Amazon configuration
 --------------------
 
-1. Now, on the `AWS Config page, <https://console.aws.amazon.com/config/>`_ we go to *Settings*.
+1. On the `AWS Config page, <https://console.aws.amazon.com/config/>`_ , go to *Settings*.
 
 
 2. Here, choose the **Resource types to record** (specify the AWS resource types you want AWS Config to record):
