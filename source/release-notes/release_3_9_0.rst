@@ -18,7 +18,7 @@ Wazuh core
 
 **Security Configuration Assessment (SCA)**
 
-Added a new module named Security Configuration Assessment (SCA), this module enrichs our hardening features. Policy files are now in YAML format so you can read or edit them in a painless way. Each policy is used to perform a different scan, the result is then stored, so the user can look at the results using the Wazuh API or the Wazuh app.
+Added a new module named Security Configuration Assessment (SCA), this module enriches our hardening features. Policy files are now in YAML format so you can read or edit them in a painless way. Each policy is used to perform a different scan, the result is then stored, so the user can look at the results using the Wazuh API or the Wazuh app.
 
 Every time a scan is done, Wazuh looks for the differences between the last scan and the current scan, if they differ, then Wazuh generates the proper alert. Also, every scan generates other kind of alerts with statistical information about the scan itsefl and its results.
 
