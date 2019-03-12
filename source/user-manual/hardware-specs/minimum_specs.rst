@@ -3,7 +3,7 @@
 Recommended Specs
 =================
 
-This section describes hardware recommendations as well as the recommended operating systems where Wazuh can be deployed. In order to deploy an elastic cluster with optimal performance, follow the guidelines described in https://www.elastic.co/guide/en/elasticsearch/guide/current/hardware.html.
+This section describes the recommended hardware specifications for using Wazuh. In order to deploy an elastic cluster with optimal performance, follow the guidelines described in https://www.elastic.co/guide/en/elasticsearch/guide/current/hardware.html.
 
 CPUs
 ----
@@ -15,12 +15,12 @@ As you can see from the tables, the CPU is not the most important hardware featu
 Memory
 ------
 
-This feature does not have a high consumption by the agents, in the case of the managers it is possible to give a more considered use depending on the processes that are being carried out. In the case of managers, the amount (always indicative) suggested for an optimal operation has been 8 GB, while the consumption of less than 0.1% over 1 GB of RAM in agents makes this feature irrelevant for them.
+This feature does not have a high consumption by the agents, in the case of the managers it is possible to give a larger use depending on the processes that are being carried out. In the case of managers, the amount (always indicative) suggested for an optimal operation has been 8 GB, while the consumption of less than 0.1% over 1 GB of RAM in agents makes this feature irrelevant for them.
 
 Disk
 ----
 
-Regarding the use of persistent storage, a considerable size is required in the master, since the generation of logs (and their constant rotation) can take up a lot of space on the hard disk and even more if you have activated the "logall" option in ossec.conf, since all the events that reach the manager, will be stored, not just those that generate alerts. On the agent side, information is also stored but not in the same amount as in the manager. This is why a 128GB capacity on a solid state hard disk is recommended.
+Regarding the use of persistent storage, a considerable size is required in the master, since the generation of logs (and their constant rotation) can take up a lot of space. On the agent side, information is also stored but not in the same amount as in the manager.
 
 Network
 -------
@@ -73,6 +73,7 @@ Most significant values of consumption are shown in the following table (The spe
 | I/O                           | < 1 KB/s      | < 1 KB/s            | < 1  KB/s      |    < 1 KB/s           |
 +-------------------------------+---------------+---------------------+----------------+-----------------------+
 
-These values are a bit higher in Windows agents because they generate a greater number of events in a larger size.
+.. note::
+	These values are a bit higher in Windows agents because they generate a greater number of events in a larger size.
 
 These values point that Wazuh agents can run on machines with very limited hardware.
