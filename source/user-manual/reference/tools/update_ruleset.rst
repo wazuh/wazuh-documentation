@@ -1,10 +1,11 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _update_ruleset:
 
 update_ruleset
 =================
 
-The update-ruleset program updates decoders, rules and rootchecks.
+The ``update-ruleset`` script updates decoders, rules and rootchecks.
 
 +--------+-------------------------------------------------------------------------+
 | **-r** | Restart Wazuh when needed.                                              |

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _manual_command_monitoring:
 
 Command monitoring

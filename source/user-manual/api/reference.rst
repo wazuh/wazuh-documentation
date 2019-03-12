@@ -1,36 +1,50 @@
-.. _api_reference:
 
-
+.. Copyright (C) 2018 Wazuh, Inc.
 .. Do not modify this file manually. It is generated automatically.
 
+.. _api_reference:
+
 Reference
-=========
+======================
 This API reference is organized by resources:
 
+* `Active Response`_
 * `Agents`_
 * `Cache`_
+* `Ciscat`_
 * `Cluster`_
 * `Decoders`_
+* `Experimental`_
+* `Lists`_
 * `Manager`_
 * `Rootcheck`_
 * `Rules`_
+* `Security Configuration Assessment`_
 * `Syscheck`_
+* `Syscollector`_
 
 Below is the `Request List`_ that shows all of the available requests.
 
 .. _request_list:
 
 Request List
-------------
+---------------------------------
+
+`Active Response`_
+	* PUT /active-response/:agent_id  (`Run an AR command in the agent`_)
 
 `Agents`_
-	* DELETE /agents  (`Delete a list of agents`_)
+	* DELETE /agents  (`Delete agents`_)
 	* DELETE /agents/:agent_id  (`Delete an agent`_)
-	* DELETE /agents/:agent_id/group  (`Unset the agent group`_)
+	* DELETE /agents/:agent_id/group  (`Remove all agent groups.`_)
+	* DELETE /agents/:agent_id/group/:group_id  (`Remove a single group of an agent`_)
+	* DELETE /agents/group/:group_id  (`Remove a single group of multiple agents`_)
 	* DELETE /agents/groups  (`Delete a list of groups`_)
 	* DELETE /agents/groups/:group_id  (`Remove group`_)
 	* GET /agents  (`Get all agents`_)
 	* GET /agents/:agent_id  (`Get an agent`_)
+	* GET /agents/:agent_id/config/:component/:configuration  (`Get active configuration`_)
+	* GET /agents/:agent_id/group/is_sync  (`Get sync status of agent`_)
 	* GET /agents/:agent_id/key  (`Get agent key`_)
 	* GET /agents/:agent_id/upgrade_result  (`Get upgrade result from agent`_)
 	* GET /agents/groups  (`Get groups`_)
@@ -39,15 +53,18 @@ Request List
 	* GET /agents/groups/:group_id/files  (`Get group files`_)
 	* GET /agents/groups/:group_id/files/:filename  (`Get a file in group`_)
 	* GET /agents/name/:agent_name  (`Get an agent by its name`_)
+	* GET /agents/no_group  (`Get agents without group`_)
 	* GET /agents/outdated  (`Get outdated agents`_)
+	* GET /agents/stats/distinct  (`Get distinct fields in agents`_)
 	* GET /agents/summary  (`Get agents summary`_)
 	* GET /agents/summary/os  (`Get OS summary`_)
-	* GET /purgeable/:timeframe  (`Get list of purgeable agents`_)
 	* POST /agents  (`Add agent`_)
+	* POST /agents/group/:group_id  (`Add a list of agents to a group`_)
+	* POST /agents/groups/:group_id/configuration  (`Put configuration file (agent.conf) into a group`_)
+	* POST /agents/groups/:group_id/files/:file_name  (`Upload file into a group`_)
 	* POST /agents/insert  (`Insert agent`_)
-	* POST /agents/purge  (`Purge old agents from manager`_)
 	* POST /agents/restart  (`Restart a list of agents`_)
-	* PUT /agents/:agent_id/group/:group_id  (`Set agent group`_)
+	* PUT /agents/:agent_id/group/:group_id  (`Add agent group`_)
 	* PUT /agents/:agent_id/restart  (`Restart an agent`_)
 	* PUT /agents/:agent_id/upgrade  (`Upgrade agent using online repository`_)
 	* PUT /agents/:agent_id/upgrade_custom  (`Upgrade agent using custom file`_)
@@ -61,13 +78,33 @@ Request List
 	* GET /cache  (`Get cache index`_)
 	* GET /cache/config  (`Return cache configuration`_)
 
+`Ciscat`_
+	* GET /ciscat/:agent_id/results  (`Get CIS-CAT results from an agent`_)
+
 `Cluster`_
-	* GET /cluster/agents  (`Get info about agents in cluster`_)
+	* DELETE /cluster/:node_id/files  (`Delete a remote file in a cluster node`_)
+	* GET /cluster/:node_id/configuration  (`Get node node_id's configuration`_)
+	* GET /cluster/:node_id/configuration/validation  (`Check Wazuh configuration in a cluster node`_)
+	* GET /cluster/:node_id/files  (`Get local file from any cluster node`_)
+	* GET /cluster/:node_id/info  (`Get node_id's information`_)
+	* GET /cluster/:node_id/logs  (`Get ossec.log from a specific node in cluster.`_)
+	* GET /cluster/:node_id/logs/summary  (`Get summary of ossec.log from a specific node in cluster.`_)
+	* GET /cluster/:node_id/stats  (`Get node node_id's stats`_)
+	* GET /cluster/:node_id/stats/analysisd  (`Get node node_id's analysisd stats`_)
+	* GET /cluster/:node_id/stats/hourly  (`Get node node_id's stats by hour`_)
+	* GET /cluster/:node_id/stats/remoted  (`Get node node_id's remoted stats`_)
+	* GET /cluster/:node_id/stats/weekly  (`Get node node_id's stats by week`_)
+	* GET /cluster/:node_id/status  (`Get node node_id's status`_)
 	* GET /cluster/config  (`Get the cluster configuration`_)
-	* GET /cluster/files  (`Get info about files in cluster`_)
-	* GET /cluster/node  (`Get node info`_)
+	* GET /cluster/configuration/validation  (`Check Wazuh configuration in all cluster nodes`_)
+	* GET /cluster/healthcheck  (`Show cluster health`_)
+	* GET /cluster/node  (`Get local node info`_)
 	* GET /cluster/nodes  (`Get nodes info`_)
+	* GET /cluster/nodes/:node_name  (`Get node info`_)
 	* GET /cluster/status  (`Get info about cluster status`_)
+	* POST /cluster/:node_id/files  (`Update local file at any cluster node`_)
+	* PUT /cluster/:node_id/restart  (`Restart a specific node in cluster`_)
+	* PUT /cluster/restart  (`Restart all nodes in cluster`_)
 
 `Decoders`_
 	* GET /decoders  (`Get all decoders`_)
@@ -75,15 +112,38 @@ Request List
 	* GET /decoders/files  (`Get all decoders files`_)
 	* GET /decoders/parents  (`Get all parent decoders`_)
 
+`Experimental`_
+	* DELETE /experimental/syscheck  (`Clear syscheck database`_)
+	* GET /experimental/ciscat/results  (`Get CIS-CAT results`_)
+	* GET /experimental/syscollector/hardware  (`Get hardware info of all agents`_)
+	* GET /experimental/syscollector/netaddr  (`Get network address info of all agents`_)
+	* GET /experimental/syscollector/netiface  (`Get network interface info of all agents`_)
+	* GET /experimental/syscollector/netproto  (`Get network protocol info of all agents`_)
+	* GET /experimental/syscollector/os  (`Get os info of all agents`_)
+	* GET /experimental/syscollector/packages  (`Get packages info of all agents`_)
+	* GET /experimental/syscollector/ports  (`Get ports info of all agents`_)
+	* GET /experimental/syscollector/processes  (`Get processes info of all agents`_)
+
+`Lists`_
+	* GET /lists  (`Get all lists`_)
+	* GET /lists/files  (`Get paths from all lists`_)
+
 `Manager`_
+	* DELETE /manager/files  (`Delete a local file`_)
 	* GET /manager/configuration  (`Get manager configuration`_)
+	* GET /manager/configuration/validation  (`Check Wazuh configuration`_)
+	* GET /manager/files  (`Get local file`_)
 	* GET /manager/info  (`Get manager information`_)
 	* GET /manager/logs  (`Get ossec.log`_)
 	* GET /manager/logs/summary  (`Get summary of ossec.log`_)
 	* GET /manager/stats  (`Get manager stats`_)
+	* GET /manager/stats/analysisd  (`Get analysisd stats`_)
 	* GET /manager/stats/hourly  (`Get manager stats by hour`_)
+	* GET /manager/stats/remoted  (`Get remoted stats`_)
 	* GET /manager/stats/weekly  (`Get manager stats by week`_)
 	* GET /manager/status  (`Get manager status`_)
+	* POST /manager/files  (`Update local file`_)
+	* PUT /manager/restart  (`Restart Wazuh manager`_)
 
 `Rootcheck`_
 	* DELETE /rootcheck  (`Clear rootcheck database`_)
@@ -99,16 +159,74 @@ Request List
 	* GET /rules  (`Get all rules`_)
 	* GET /rules/:rule_id  (`Get rules by id`_)
 	* GET /rules/files  (`Get files of rules`_)
+	* GET /rules/gdpr  (`Get rule gdpr requirements`_)
 	* GET /rules/groups  (`Get rule groups`_)
 	* GET /rules/pci  (`Get rule pci requirements`_)
 
+`Security Configuration Assessment`_
+	* GET /sca/:agent_id  (`Get security configuration assessment (SCA) database`_)
+	* GET /sca/:agent_id/checks/:id  (`Get security configuration assessment (SCA) checks database`_)
+
 `Syscheck`_
-	* DELETE /syscheck  (`Clear syscheck database`_)
 	* DELETE /syscheck/:agent_id  (`Clear syscheck database of an agent`_)
 	* GET /syscheck/:agent_id  (`Get syscheck files`_)
 	* GET /syscheck/:agent_id/last_scan  (`Get last syscheck scan`_)
 	* PUT /syscheck  (`Run syscheck scan in all agents`_)
 	* PUT /syscheck/:agent_id  (`Run syscheck scan in an agent`_)
+
+`Syscollector`_
+	* GET /syscollector/:agent_id/hardware  (`Get hardware info`_)
+	* GET /syscollector/:agent_id/netaddr  (`Get network address info of an agent`_)
+	* GET /syscollector/:agent_id/netiface  (`Get network interface info of an agent`_)
+	* GET /syscollector/:agent_id/netproto  (`Get network protocol info of an agent`_)
+	* GET /syscollector/:agent_id/os  (`Get os info`_)
+	* GET /syscollector/:agent_id/packages  (`Get packages info`_)
+	* GET /syscollector/:agent_id/ports  (`Get ports info of an agent`_)
+	* GET /syscollector/:agent_id/processes  (`Get processes info`_)
+
+Active Response
+----------------------------------------
+Command
+++++++++++++++++++++++++++++++++++++++++
+
+Run an AR command in the agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Runs an Active Response command on a specified agent
+
+**Request**:
+
+``PUT`` ::
+
+	/active-response/:agent_id
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``command``                  | String        | Command.                                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``Custom``                   | Boolean       | Custom.                                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``Arguments``                | Arguments     | Command arguments.                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT -d '{"command":"restart-ossec0", "arguments": ["-", "null", "(from_the_server)", "(no_rule_id)"]}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/active-response/001?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Command sent.", 
+	    "error": 0
+	}
+
+
 
 Agents
 ----------------------------------------
@@ -116,7 +234,7 @@ Add
 ++++++++++++++++++++++++++++++++++++++++
 
 Add agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Add a new agent.
 
 **Request**:
@@ -127,21 +245,21 @@ Add a new agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``name``           | String        | Agent name.                                                                                                                                                                                            |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``ip``             | String        | If this is not included, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.                                       |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - IP                                                                                                                                                                                                   |
-|                    |               | - IP/NET                                                                                                                                                                                               |
-|                    |               | - ANY                                                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``force``          | Number        | Remove old agent with same IP if disconnected since <force> seconds.                                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``name``                     | String        | Agent name.                                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``ip``                       | String        | If this is not included, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.                                                                     |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - IP                                                                                                                                                                                                                                 |
+|                              |               | - IP/NET                                                                                                                                                                                                                             |
+|                              |               | - ANY                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``force``                    | Number        | Remove the old agent with the same IP if disconnected since <force> seconds.                                                                                                                                                         |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -154,14 +272,14 @@ Add a new agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "id": "006",
-	      "key": "MDA2IE5ld0hvc3QgMTAuMC4wLjkgNGI3NGZiZTkzNjc5OWZmZDFjN2NiMmYyMGYzYmYyMTcyMGY3YmQ2NWVlM2NjOWRiYWNlNGRmNGM1MTdkNTY1Ng=="
+	      "id": "007",
+	      "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgZjNhYjRhOTU2OTg4YmRiMTVhODEzZTBmYjAxNWYwYTg4YTFkMzM2MWI3ODkyODE0ZjZhOTI4ZGU2ZTk1M2QwZQ=="
 	   }
 	}
-
+	
 
 Add agent (quick method)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Adds a new agent with name :agent_name. This agent will use ANY as IP.
 
 **Request**:
@@ -172,11 +290,11 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_name``     | String        | Agent name.                                                                                                                                                                                            |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_name``               | String        | Agent name.                                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -189,14 +307,14 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	{
 	   "error": 0,
 	   "data": {
-	      "id": "007",
-	      "key": "MDA3IG15TmV3QWdlbnQgYW55IDg1YzllNGFkNDYxYTI5NWI0ZjM4NjY2NWQxNTE0YjU2YTEzOWY2OTNkZWUzMGU4OTRiZjQ1MmY0YjhlOTBkYzc="
+	      "id": "008",
+	      "key": "MDA4IG15TmV3QWdlbnQgYW55IGNkZmY0NzQxYzViNDk4NjE4M2ZjZWY4NTM4ZTVmNjg4NDRkNjNmMzY2NWFhYjk4NjJiZDhmMDg5ZjgyMTNlOTM="
 	   }
 	}
-
+	
 
 Insert agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Insert an agent with an existing id and key.
 
 **Request**:
@@ -207,25 +325,25 @@ Insert an agent with an existing id and key.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``name``           | String        | Agent name.                                                                                                                                                                                            |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``ip``             | String        | If this is not included, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.                                       |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - IP                                                                                                                                                                                                   |
-|                    |               | - IP/NET                                                                                                                                                                                               |
-|                    |               | - ANY                                                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``id``             | String        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``key``            | String        | Agent key. Minimum length: 64 characters. Allowed values: ^[a-zA-Z0-9]+$                                                                                                                               |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``force``          | Number        | Remove the old agent with the same IP if disconnected since <force> seconds.                                                                                                                           |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``name``                     | String        | Agent name.                                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``ip``                       | String        | If this is not included, the API will get the IP automatically. If you are behind a proxy, you must set the option config.BehindProxyServer to yes at config.js.                                                                     |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - IP                                                                                                                                                                                                                                 |
+|                              |               | - IP/NET                                                                                                                                                                                                                             |
+|                              |               | - ANY                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``id``                       | String        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``key``                      | String        | Agent key. Minimum length: 64 characters. Allowed values: ^[a-zA-Z0-9]+$                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``force``                    | Number        | Remove the old agent the with same IP if disconnected since <force> seconds.                                                                                                                                                         |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -239,39 +357,84 @@ Insert an agent with an existing id and key.
 	   "error": 0,
 	   "data": {
 	      "id": "123",
-	      "key": "1abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghi64"
+	      "key": "MTIzIE5ld0hvc3RfMiAxMC4wLjEwLjEwIDFhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5emFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6YWJjZGVmZ2hpNjQ="
 	   }
 	}
+	
 
 
-
-Delete
+Config
 ++++++++++++++++++++++++++++++++++++++++
 
-Delete a list of agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Removes a list of agents. The Wazuh API must be restarted after removing an agent.
+Get active configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the active configuration in JSON format.
 
 **Request**:
 
-``DELETE`` ::
+``GET`` ::
 
-	/agents
+	/agents/:agent_id/config/:component/:configuration
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``ids``            | String[]      | Array of agent ID's.                                                                                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``purge``          | Boolean       | Delete an agent from the key store.                                                                                                                                                                    |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``component``                | String        | Selected component.                                                                                                                                                                                                                  |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - agent                                                                                                                                                                                                                              |
+|                              |               | - agentless                                                                                                                                                                                                                          |
+|                              |               | - analysis                                                                                                                                                                                                                           |
+|                              |               | - auth                                                                                                                                                                                                                               |
+|                              |               | - com                                                                                                                                                                                                                                |
+|                              |               | - csyslog                                                                                                                                                                                                                            |
+|                              |               | - integrator                                                                                                                                                                                                                         |
+|                              |               | - logcollector                                                                                                                                                                                                                       |
+|                              |               | - mail                                                                                                                                                                                                                               |
+|                              |               | - monitor                                                                                                                                                                                                                            |
+|                              |               | - request                                                                                                                                                                                                                            |
+|                              |               | - syscheck                                                                                                                                                                                                                           |
+|                              |               | - wmodules                                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``configuration``            | String        | Configuration to read.                                                                                                                                                                                                               |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - client                                                                                                                                                                                                                             |
+|                              |               | - buffer                                                                                                                                                                                                                             |
+|                              |               | - labels                                                                                                                                                                                                                             |
+|                              |               | - internal                                                                                                                                                                                                                           |
+|                              |               | - agentless                                                                                                                                                                                                                          |
+|                              |               | - global                                                                                                                                                                                                                             |
+|                              |               | - active_response                                                                                                                                                                                                                    |
+|                              |               | - alerts                                                                                                                                                                                                                             |
+|                              |               | - command                                                                                                                                                                                                                            |
+|                              |               | - rules                                                                                                                                                                                                                              |
+|                              |               | - decoders                                                                                                                                                                                                                           |
+|                              |               | - internal                                                                                                                                                                                                                           |
+|                              |               | - auth                                                                                                                                                                                                                               |
+|                              |               | - active-response                                                                                                                                                                                                                    |
+|                              |               | - internal                                                                                                                                                                                                                           |
+|                              |               | - cluster                                                                                                                                                                                                                            |
+|                              |               | - csyslog                                                                                                                                                                                                                            |
+|                              |               | - integration                                                                                                                                                                                                                        |
+|                              |               | - localfile                                                                                                                                                                                                                          |
+|                              |               | - socket                                                                                                                                                                                                                             |
+|                              |               | - remote                                                                                                                                                                                                                             |
+|                              |               | - syscheck                                                                                                                                                                                                                           |
+|                              |               | - rootcheck                                                                                                                                                                                                                          |
+|                              |               | - wmodules                                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["003","005"]}' "https://127.0.0.1:55000/agents?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/config/logcollector/localfile?pretty"
 
 **Example Response:**
 ::
@@ -279,17 +442,80 @@ Removes a list of agents. The Wazuh API must be restarted after removing an agen
 	{
 	   "error": 0,
 	   "data": {
-	      "msg": "All selected agents were removed",
-	      "affected_agents": [
-	         "003",
-	         "005"
+	      "localfile": [
+	         {
+	            "logformat": "command",
+	            "command": "df -P",
+	            "alias": "df -P",
+	            "target": [
+	               "agent"
+	            ],
+	            "frequency": 360
+	         },
+	         {
+	            "logformat": "full_command",
+	            "command": "netstat -tulpn | sed 's/\\([[:alnum:]]\\+\\)\\ \\+[[:digit:]]\\+\\ \\+[[:digit:]]\\+\\ \\+\\(.*\\):\\([[:digit:]]*\\)\\ \\+\\([0-9\\.\\:\\*]\\+\\).\\+\\ \\([[:digit:]]*\\/[[:alnum:]\\-]*\\).*/\\1 \\2 == \\3 == \\4 \\5/' | sort -k 4 -g | sed 's/ == \\(.*\\) ==/:\\1/' | sed 1,2d",
+	            "alias": "netstat listening ports",
+	            "target": [
+	               "agent"
+	            ],
+	            "frequency": 360
+	         },
+	         {
+	            "logformat": "full_command",
+	            "command": "last -n 20",
+	            "alias": "last -n 20",
+	            "target": [
+	               "agent"
+	            ],
+	            "frequency": 360
+	         },
+	         {
+	            "file": "/var/ossec/logs/active-responses.log",
+	            "logformat": "syslog",
+	            "target": [
+	               "agent"
+	            ]
+	         },
+	         {
+	            "file": "/var/log/auth.log",
+	            "logformat": "syslog",
+	            "target": [
+	               "agent"
+	            ]
+	         },
+	         {
+	            "file": "/var/log/syslog",
+	            "logformat": "syslog",
+	            "target": [
+	               "agent"
+	            ]
+	         },
+	         {
+	            "file": "/var/log/dpkg.log",
+	            "logformat": "syslog",
+	            "target": [
+	               "agent"
+	            ]
+	         },
+	         {
+	            "file": "/var/log/kern.log",
+	            "logformat": "syslog",
+	            "target": [
+	               "agent"
+	            ]
+	         }
 	      ]
 	   }
 	}
+	
 
+
+Delete
+++++++++++++++++++++++++++++++++++++++++
 
 Delete a list of groups
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Removes a list of groups.
 
 **Request**:
@@ -300,11 +526,11 @@ Removes a list of groups.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``ids``            | String[]      | Array of group ID's.                                                                                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``ids``                      | String[]      | Array of group ID's.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -323,14 +549,69 @@ Removes a list of groups.
 	         "database"
 	      ],
 	      "affected_agents": [
-	         "001"
+	         "002",
+	         "005",
+	         "003"
 	      ]
 	   }
 	}
+	
 
+Delete agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removes agents, using a list of them or a criterion based on the status or time of the last connection. The Wazuh API must be restarted after removing an agent.
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``ids``                      | String[]      | Array of agent ID's.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``purge``                    | Boolean       | Delete an agent from the key store.                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``                   | String        | Filters by agent status. Use commas to enter multiple statuses.                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - active                                                                                                                                                                                                                             |
+|                              |               | - pending                                                                                                                                                                                                                            |
+|                              |               | - neverconnected                                                                                                                                                                                                                     |
+|                              |               | - disconnected                                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``older_than``               | String        | Filters out disconnected agents for longer than specified. Time in seconds, '[n_days]d', '[n_hours]h', '[n_minutes]m' or '[n_seconds]s'. For never connected agents, uses the register date. Default value: 7d.                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["003","005"]}' "https://127.0.0.1:55000/agents?pretty&older_than=10s&purge"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "msg": "All selected agents were removed",
+	      "affected_agents": [
+	         "003",
+	         "005"
+	      ],
+	      "older_than": "10s",
+	      "total_affected_agents": 2
+	   }
+	}
+	
 
 Delete an agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Removes an agent.
 
 **Request**:
@@ -341,18 +622,18 @@ Removes an agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``purge``          | String        | Delete an agent from the key store.                                                                                                                                                                    |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``purge``                    | String        | Delete an agent from the key store.                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/001?pretty"
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/008?pretty&purge"
 
 **Example Response:**
 ::
@@ -362,18 +643,132 @@ Removes an agent.
 	   "data": {
 	      "msg": "All selected agents were removed",
 	      "affected_agents": [
-	         "001"
+	         "008"
 	      ]
 	   }
 	}
+	
 
+
+Group
+++++++++++++++++++++++++++++++++++++++++
+
+Get sync status of agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the sync status in JSON format
+
+**Request**:
+
+``GET`` ::
+
+	/agents/:agent_id/group/is_sync
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/001/group/is_sync?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "synced": false
+	   }
+	}
+	
 
 
 Groups
 ++++++++++++++++++++++++++++++++++++++++
 
+Add a list of agents to a group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Adds a list of agents to the specified group.
+
+**Request**:
+
+``POST`` ::
+
+	/agents/group/:group_id
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id_list``            | Number        | List of agents ID.                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://localhost:55000/agents/group/dmz?pretty" -k
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "msg": "All selected agents assigned to group dmz",
+	      "affected_agents": [
+	         "001",
+	         "002"
+	      ]
+	   }
+	}
+	
+
+Add agent group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Adds an agent to the specified group.
+
+**Request**:
+
+``PUT`` ::
+
+	/agents/:agent_id/group/:group_id
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent unique ID.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``force_single_group``       | Boolean       | Wheter to append new group to current agent's group or replace it.                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/004/group/dmz?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Agent '004' already belongs to group 'dmz'."
+	}
+	
+
 Create a group
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Creates a new group.
 
 **Request**:
@@ -384,11 +779,11 @@ Creates a new group.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -402,10 +797,10 @@ Creates a new group.
 	   "error": 0,
 	   "data": "Group 'pciserver' created."
 	}
-
+	
 
 Get a file in group
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the specified file belonging to the group parsed to JSON.
 
 **Request**:
@@ -416,22 +811,29 @@ Returns the specified file belonging to the group parsed to JSON.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file_name``      | String        | Filename                                                                                                                                                                                               |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``type``           | String        | Type of file.                                                                                                                                                                                          |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - conf                                                                                                                                                                                                 |
-|                    |               | - rootkit_files                                                                                                                                                                                        |
-|                    |               | - rootkit_trojans                                                                                                                                                                                      |
-|                    |               | - rcl                                                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file_name``                | String        | Filename                                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``type``                     | String        | Type of file.                                                                                                                                                                                                                        |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - conf                                                                                                                                                                                                                               |
+|                              |               | - rootkit_files                                                                                                                                                                                                                      |
+|                              |               | - rootkit_trojans                                                                                                                                                                                                                    |
+|                              |               | - rcl                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``format``                   | String        | Optional. Output format (JSON, XML).                                                                                                                                                                                                 |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - json                                                                                                                                                                                                                               |
+|                              |               | - xml                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -446,22 +848,22 @@ Returns the specified file belonging to the group parsed to JSON.
 	        "controls": [
 	            {
 	                "...": "..."
-	            },
+	            }, 
 	            {
-	                "condition": "all required",
-	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1",
-	                "reference": "CIS_Debian_Benchmark_v1.0pdf",
+	                "condition": "all required", 
+	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1", 
+	                "reference": "CIS_Debian_Benchmark_v1.0pdf", 
 	                "checks": [
 	                    "f:/etc/debian_version;"
 	                ]
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
 Get agents in a group
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the list of agents in a group.
 
 **Request**:
@@ -472,19 +874,32 @@ Returns the list of agents in a group.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | Select which fields to return (separated by comma).                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``                   | String        | Filters by agent status.                                                                                                                                                                                                             |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - active                                                                                                                                                                                                                             |
+|                              |               | - pending                                                                                                                                                                                                                            |
+|                              |               | - neverconnected                                                                                                                                                                                                                     |
+|                              |               | - disconnected                                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``q``                        | String        | Query to filter results by.                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -497,25 +912,141 @@ Returns the list of agents in a group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2,
 	      "items": [
 	         {
-	            "ip": "10.0.0.12",
-	            "id": "002",
-	            "name": "dmz001"
+	            "os": {
+	               "arch": "x86_64",
+	               "codename": "Bionic Beaver",
+	               "major": "18",
+	               "minor": "04",
+	               "name": "Ubuntu",
+	               "platform": "ubuntu",
+	               "uname": "Linux |agent-1 |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
+	               "version": "18.04.1 LTS"
+	            },
+	            "ip": "10.0.2.15",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "manager": "master",
+	            "mergedSum": "f8d49771911ed9d5c45b03a40babd065",
+	            "status": "Active",
+	            "name": "agent-1",
+	            "registerIP": "172.17.0.201",
+	            "group": [
+	               "default",
+	               "dmz"
+	            ],
+	            "node_name": "node01",
+	            "version": "Wazuh v3.9.0",
+	            "dateAdd": "2019-03-08 08:33:34",
+	            "lastKeepAlive": "2019-03-08 08:38:06",
+	            "id": "001"
 	         },
 	         {
-	            "ip": "10.0.0.14",
-	            "id": "004",
-	            "name": "dmz002"
+	            "ip": "10.0.0.62",
+	            "status": "Never connected",
+	            "name": "server001",
+	            "registerIP": "10.0.0.62",
+	            "group": [
+	               "default",
+	               "dmz"
+	            ],
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:53",
+	            "id": "002"
+	         },
+	         {
+	            "ip": "10.0.0.15",
+	            "status": "Never connected",
+	            "name": "main_database",
+	            "registerIP": "10.0.0.15",
+	            "group": [
+	               "dmz"
+	            ],
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:54",
+	            "id": "004"
 	         }
-	      ]
+	      ],
+	      "totalItems": 3
 	   }
 	}
+	
 
+Get agents without group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a list with the available agents without group.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/no_group
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | Select which fields to return (separated by comma).                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``q``                        | String        | Query to filter result. For example q=&quot;status=Active&quot;                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/no_group?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "ip": "10.0.0.20",
+	            "status": "Never connected",
+	            "name": "server002",
+	            "registerIP": "10.0.0.20",
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:54",
+	            "id": "006"
+	         },
+	         {
+	            "ip": "10.0.0.9",
+	            "status": "Never connected",
+	            "name": "NewHost",
+	            "registerIP": "10.0.0.9",
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:38:08",
+	            "id": "007"
+	         },
+	         {
+	            "ip": "10.0.10.10",
+	            "status": "Never connected",
+	            "name": "NewHost_2",
+	            "registerIP": "10.0.10.10",
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:38:09",
+	            "id": "123"
+	         }
+	      ],
+	      "totalItems": 3
+	   }
+	}
+	
 
 Get group configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the group configuration (agent.conf).
 
 **Request**:
@@ -526,15 +1057,15 @@ Returns the group configuration (agent.conf).
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -550,16 +1081,25 @@ Returns the group configuration (agent.conf).
 	      "totalItems": 1,
 	      "items": [
 	         {
-	            "config": {},
-	            "filters": {}
+	            "filters": {
+	               "os": "Linux"
+	            },
+	            "config": {
+	               "localfile": [
+	                  {
+	                     "location": "/var/log/linux.log",
+	                     "log_format": "syslog"
+	                  }
+	               ]
+	            }
 	         }
 	      ]
 	   }
 	}
-
+	
 
 Get group files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the files belonging to the group.
 
 **Request**:
@@ -570,19 +1110,21 @@ Returns the files belonging to the group.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``hash``                     | String        | Hash algorithm to use to calculate files checksums.                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -595,83 +1137,111 @@ Returns the files belonging to the group.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 17,
 	      "items": [
 	         {
-	            "hash": "ab73af41699f13fdd81903b5f23d8d00",
-	            "filename": "agent.conf"
+	            "filename": "agent.conf",
+	            "hash": "ab73af41699f13fdd81903b5f23d8d00"
 	         },
 	         {
-	            "hash": "76d8be9b97d8eae4c239e530ee7e71c8",
-	            "filename": "ar.conf"
+	            "filename": "ar.conf",
+	            "hash": "76d8be9b97d8eae4c239e530ee7e71c8"
 	         },
 	         {
-	            "hash": "9beed128b4305943eead1a66a86d27d5",
-	            "filename": "cis_debian_linux_rcl.txt"
+	            "filename": "cis_apache2224_rcl.txt",
+	            "hash": "3c2469443a08b01c454ca35558cb9fa6"
 	         },
 	         {
-	            "hash": "e03345360941dbff248f63765971f87e",
-	            "filename": "cis_rhel5_linux_rcl.txt"
+	            "filename": "cis_debian_linux_rcl.txt",
+	            "hash": "cc12fdba595817758f308024f61acb71"
 	         },
 	         {
-	            "hash": "d53e584559b759cb6ec3956f23dee46f",
-	            "filename": "cis_rhel6_linux_rcl.txt"
+	            "filename": "cis_mysql5-6_community_rcl.txt",
+	            "hash": "f5f770160baf596373e4f77f987cc422"
 	         },
 	         {
-	            "hash": "bc742a625c5f8d60ae67489811e307ae",
-	            "filename": "cis_rhel7_linux_rcl.txt"
+	            "filename": "cis_mysql5-6_enterprise_rcl.txt",
+	            "hash": "de9865c809f1555d537e5a49872eaf4c"
 	         },
 	         {
-	            "hash": "24e83427d2678aada50fa401b921a0cd",
-	            "filename": "cis_rhel_linux_rcl.txt"
+	            "filename": "cis_rhel5_linux_rcl.txt",
+	            "hash": "a3af38b3f81a48332c7bcd9cf8aa6eff"
 	         },
 	         {
-	            "hash": "16cfc690e7c5fda8d5be45b7c3b6d257",
-	            "filename": "cis_sles11_linux_rcl.txt"
+	            "filename": "cis_rhel6_linux_rcl.txt",
+	            "hash": "bdcfa3ab90b553f8e5c84cfa9fd90289"
 	         },
 	         {
-	            "hash": "533ec3f8eda8e52edb181e3f6bd44d52",
-	            "filename": "cis_sles12_linux_rcl.txt"
+	            "filename": "cis_rhel7_linux_rcl.txt",
+	            "hash": "039e579029e3edcf8241fb391f46b12f"
 	         },
 	         {
-	            "hash": "fcd103e698e31b7683fc035fa34c7776",
-	            "filename": "merged.mg"
+	            "filename": "cis_rhel_linux_rcl.txt",
+	            "hash": "569cd8a2cc7527cc75f81f77098de461"
 	         },
 	         {
-	            "hash": "a403c34392032ace267fbb163fc7cfad",
-	            "filename": "rootkit_files.txt"
+	            "filename": "cis_sles11_linux_rcl.txt",
+	            "hash": "d86ee36d384930293cbcc83c8fb57c93"
 	         },
 	         {
-	            "hash": "b5d427623664d76140acbcb91f42d586",
-	            "filename": "rootkit_trojans.txt"
+	            "filename": "cis_sles12_linux_rcl.txt",
+	            "hash": "6f58710fa8eef659dc782a3fa4699e33"
 	         },
 	         {
-	            "hash": "6cca8467c592a23fcf62cd5f33608fc3",
-	            "filename": "system_audit_rcl.txt"
+	            "filename": "cis_win2012r2_domainL1_rcl.txt",
+	            "hash": "8819dfa3523933b113e27a85fc9e568d"
 	         },
 	         {
-	            "hash": "e778eb44e4e8116a1e4c017b9b23eea2",
-	            "filename": "system_audit_ssh.txt"
+	            "filename": "cis_win2012r2_domainL2_rcl.txt",
+	            "hash": "e8a2c7ab57bc8102b237f061b8f82dce"
 	         },
 	         {
-	            "hash": "0e1f8f16e217a70b9b80047646823587",
-	            "filename": "win_applications_rcl.txt"
+	            "filename": "cis_win2012r2_memberL1_rcl.txt",
+	            "hash": "38c88156d03af9372efd620e6e57d473"
 	         },
 	         {
-	            "hash": "4c2207e003d08db69822754271f9cb60",
-	            "filename": "win_audit_rcl.txt"
+	            "filename": "cis_win2012r2_memberL2_rcl.txt",
+	            "hash": "c4b62b3e01b5f5634a9719eb8a104028"
 	         },
 	         {
-	            "hash": "6fd9fa5dc1367e89cc4b30fe4cd0030e",
-	            "filename": "win_malware_rcl.txt"
+	            "filename": "merged.mg",
+	            "hash": "f8d49771911ed9d5c45b03a40babd065"
+	         },
+	         {
+	            "filename": "rootkit_files.txt",
+	            "hash": "e5ddcac443143cef6237d5f9b8d48585"
+	         },
+	         {
+	            "filename": "rootkit_trojans.txt",
+	            "hash": "6bcf7016d3e6b4c7faa62cf265c24dcc"
+	         },
+	         {
+	            "filename": "system_audit_rcl.txt",
+	            "hash": "be69b84dd5ee73200bb903a46270e18c"
+	         },
+	         {
+	            "filename": "system_audit_ssh.txt",
+	            "hash": "407c1f5e103f0cb58249eb7252a84797"
+	         },
+	         {
+	            "filename": "win_applications_rcl.txt",
+	            "hash": "0a4ad12c8145aca8a28d31de5c448b48"
+	         },
+	         {
+	            "filename": "win_audit_rcl.txt",
+	            "hash": "92d8011facc8b921ece301ea4ce6a616"
+	         },
+	         {
+	            "filename": "win_malware_rcl.txt",
+	            "hash": "6a8d3c63a0e77dea35aaed3ee2cca3a1"
 	         }
-	      ]
+	      ],
+	      "totalItems": 24
 	   }
 	}
-
+	
 
 Get groups
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the list of existing agent groups.
 
 **Request**:
@@ -682,17 +1252,19 @@ Returns the list of existing agent groups.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``hash``                     | String        | Select algorithm to generate the sum.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -705,33 +1277,169 @@ Returns the list of existing agent groups.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 3,
 	      "items": [
 	         {
-	            "count": 0,
-	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "fcd103e698e31b7683fc035fa34c7776",
-	            "name": "default"
-	         },
-	         {
 	            "count": 2,
-	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "90e6ed87db2d1cb00fd6d75d84953e4d",
-	            "name": "dmz"
+	            "name": "default",
+	            "mergedSum": "f8d49771911ed9d5c45b03a40babd065",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00"
+	         },
+	         {
+	            "count": 3,
+	            "name": "dmz",
+	            "mergedSum": "220d6c5fc253f251827ee7487341c0fc",
+	            "configSum": "cfbae9ecc10eb15f1b4fc736de6758cc"
 	         },
 	         {
 	            "count": 0,
-	            "conf_sum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "merged_sum": "961ebdfd2ae81e77dd20dae66cd59acf",
-	            "name": "pciserver"
+	            "name": "pciserver",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00"
 	         }
+	      ],
+	      "totalItems": 3
+	   }
+	}
+	
+
+Put configuration file (agent.conf) into a group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Upload the group configuration (agent.conf).
+
+**Request**:
+
+``POST`` ::
+
+	/agents/groups/:group_id/configuration
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @agent.conf.xml "https://127.0.0.1:55000/agents/groups/dmz/configuration?pretty" -k
+
+**Example Response:**
+::
+
+	{
+	    "data": "Agent configuration was updated successfully", 
+	    "error": 0
+	}
+
+Remove a single group of an agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Remove the group of the agent but will leave the rest of its group if it belongs to a multigroup.
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents/:agent_id/group/:group_id
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group/dmz?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Group 'dmz' unset for agent '004'."
+	}
+	
+
+Remove a single group of multiple agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Remove a list of agents of a group
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents/group/:group_id
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | List          | Agent ID list.                                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -X DELETE -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://localhost:55000/agents/group/dmz?pretty" -k
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "msg": "All selected agents were removed to group dmz",
+	      "affected_agents": [
+	         "001",
+	         "002"
 	      ]
 	   }
 	}
+	
 
+Remove all agent groups.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removes the group of the agent. The agent will automatically revert to the 'default' group.
+
+**Request**:
+
+``DELETE`` ::
+
+	/agents/:agent_id/group
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "Group unset for agent '004'."
+	}
+	
 
 Remove group
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Removes the group. Agents that were assigned to the removed group will automatically revert to the 'default' group.
 
 **Request**:
@@ -742,11 +1450,11 @@ Removes the group. Agents that were assigned to the removed group will automatic
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -763,77 +1471,42 @@ Removes the group. Agents that were assigned to the removed group will automatic
 	      "ids": [
 	         "dmz"
 	      ],
-	      "affected_agents": [
-	         "002",
-	         "004"
-	      ]
+	      "affected_agents": []
 	   }
 	}
+	
 
-
-Set agent group
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Sets an agent to the specified group.
+Upload file into a group
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Upload a file to a group.
 
 **Request**:
 
-``PUT`` ::
+``POST`` ::
 
-	/agents/:agent_id/group/:group_id
+	/agents/groups/:group_id/files/:file_name
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent's unique ID.                                                                                                                                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``group_id``       | String        | Group ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file_name``                | String        | File name.                                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/agents/004/group/webserver?pretty"
+	curl -u foo:bar -X POST -H 'Content-type: application/xml' -d @agent.conf.xml "https://127.0.0.1:55000/agents/groups/dmz/files/agent.conf?pretty" -k
 
 **Example Response:**
 ::
 
 	{
-	   "error": 0,
-	   "data": "Group 'webserver' set to agent '004'."
-	}
-
-
-Unset the agent group
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Unsets the group of the agent. The agent will automatically revert to the 'default' group.
-
-**Request**:
-
-``DELETE`` ::
-
-	/agents/:agent_id/group
-
-**Parameters:**
-
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/004/group?pretty"
-
-**Example Response:**
-::
-
-	{
-	   "error": 0,
-	   "data": "Group unset for agent '004'."
+	    "data": "Agent configuration was updated successfully", 
+	    "error": 0
 	}
 
 
@@ -841,7 +1514,7 @@ Info
 ++++++++++++++++++++++++++++++++++++++++
 
 Get OS summary
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns a summary of the OS.
 
 **Request**:
@@ -852,17 +1525,19 @@ Returns a summary of the OS.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``q``                        | String        | Query to filter result. For example q=&quot;status=Active&quot;                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -877,14 +1552,14 @@ Returns a summary of the OS.
 	   "data": {
 	      "totalItems": 1,
 	      "items": [
-	         "centos"
+	         "ubuntu"
 	      ]
 	   }
 	}
-
+	
 
 Get agents summary
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns a summary of the available agents.
 
 **Request**:
@@ -904,16 +1579,17 @@ Returns a summary of the available agents.
 	{
 	   "error": 0,
 	   "data": {
-	      "Active": 1,
+	      "Total": 7,
+	      "Active": 2,
+	      "Disconnected": 0,
 	      "Never connected": 5,
-	      "Total": 6,
-	      "Disconnected": 0
+	      "Pending": 0
 	   }
 	}
-
+	
 
 Get all agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns a list with the available agents.
 
 **Request**:
@@ -924,32 +1600,50 @@ Returns a list with the available agents.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters by agent status.                                                                                                                                                                               |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - active                                                                                                                                                                                               |
-|                    |               | - pending                                                                                                                                                                                              |
-|                    |               | - never connected                                                                                                                                                                                      |
-|                    |               | - disconnected                                                                                                                                                                                         |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``os.platform``    | String        | Filters by OS platform.                                                                                                                                                                                |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``os.version``     | String        | Filters by OS version.                                                                                                                                                                                 |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``manager``        | String        | Filters by manager hostname to which agents are connected.                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | Select which fields to return (separated by comma).                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``                   | String        | Filters by agent status. Use commas to enter multiple statuses.                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - active                                                                                                                                                                                                                             |
+|                              |               | - pending                                                                                                                                                                                                                            |
+|                              |               | - neverconnected                                                                                                                                                                                                                     |
+|                              |               | - disconnected                                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``q``                        | String        | Query to filter results by. For example q=&quot;status=Active&quot;                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``older_than``               | String        | Filters out disconnected agents for longer than specified. Time in seconds, '[n_days]d', '[n_hours]h', '[n_minutes]m' or '[n_seconds]s'. For never connected agents, uses the register date.                                         |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``os.platform``              | String        | Filters by OS platform.                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``os.version``               | String        | Filters by OS version.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``os.name``                  | String        | Filters by OS name.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``manager``                  | String        | Filters by manager hostname to which agents are connected.                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``version``                  | String        | Filters by agents version.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``group``                    | String        | Filters by group of agents.                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``node_name``                | String        | Filters by node name.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``name``                     | String        | Filters by agent name.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``ip``                       | String        | Filters by agent IP.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -962,50 +1656,97 @@ Returns a list with the available agents.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 6,
 	      "items": [
 	         {
+	            "ip": "10.0.0.20",
 	            "status": "Never connected",
-	            "ip": "any",
-	            "dateAdd": "2017-12-22 19:23:39",
-	            "id": "007",
-	            "name": "myNewAgent"
+	            "name": "server002",
+	            "registerIP": "10.0.0.20",
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:54",
+	            "id": "006"
 	         },
 	         {
+	            "ip": "10.0.0.62",
 	            "status": "Never connected",
-	            "ip": "10.0.10.10",
-	            "dateAdd": "2017-12-22 19:23:39",
-	            "id": "123",
-	            "name": "NewHost_2"
+	            "name": "server001",
+	            "registerIP": "10.0.0.62",
+	            "group": [
+	               "default"
+	            ],
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:53",
+	            "id": "002"
 	         },
 	         {
-	            "status": "Never connected",
-	            "ip": "10.0.0.9",
-	            "dateAdd": "2017-12-22 19:23:39",
-	            "id": "006",
-	            "name": "NewHost"
+	            "os": {
+	               "arch": "x86_64",
+	               "codename": "Bionic Beaver",
+	               "major": "18",
+	               "minor": "04",
+	               "name": "Ubuntu",
+	               "platform": "ubuntu",
+	               "uname": "Linux |master |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
+	               "version": "18.04.1 LTS"
+	            },
+	            "ip": "127.0.0.1",
+	            "manager": "master",
+	            "status": "Active",
+	            "name": "master",
+	            "registerIP": "127.0.0.1",
+	            "node_name": "node01",
+	            "version": "Wazuh v3.9.0",
+	            "dateAdd": "2019-03-08 08:30:02",
+	            "lastKeepAlive": "9999-12-31 23:59:59",
+	            "id": "000"
 	         },
 	         {
+	            "ip": "10.0.0.15",
 	            "status": "Never connected",
-	            "ip": "10.0.0.14",
-	            "dateAdd": "2017-12-22 19:21:40",
-	            "id": "004",
-	            "name": "dmz002"
+	            "name": "main_database",
+	            "registerIP": "10.0.0.15",
+	            "group": [
+	               "default"
+	            ],
+	            "node_name": "unknown",
+	            "dateAdd": "2019-03-08 08:37:54",
+	            "id": "004"
 	         },
 	         {
-	            "status": "Never connected",
-	            "ip": "10.0.0.12",
-	            "dateAdd": "2017-12-22 19:21:40",
-	            "id": "002",
-	            "name": "dmz001"
+	            "os": {
+	               "arch": "x86_64",
+	               "codename": "Bionic Beaver",
+	               "major": "18",
+	               "minor": "04",
+	               "name": "Ubuntu",
+	               "platform": "ubuntu",
+	               "uname": "Linux |agent-1 |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
+	               "version": "18.04.1 LTS"
+	            },
+	            "ip": "10.0.2.15",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "manager": "master",
+	            "mergedSum": "2f758e9b9b44ff428d1433832e0d190d",
+	            "status": "Active",
+	            "name": "agent-1",
+	            "registerIP": "172.17.0.201",
+	            "group": [
+	               "default"
+	            ],
+	            "node_name": "node01",
+	            "version": "Wazuh v3.9.0",
+	            "dateAdd": "2019-03-08 08:33:34",
+	            "lastKeepAlive": "2019-03-08 08:38:16",
+	            "id": "001"
 	         }
-	      ]
+	      ],
+	      "totalItems": 7
 	   }
 	}
-
+	
 
 Get an agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns various information from an agent.
 
 **Request**:
@@ -1016,11 +1757,13 @@ Returns various information from an agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1033,29 +1776,32 @@ Returns various information from an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "status": "Active",
-	      "name": "PC",
 	      "ip": "127.0.0.1",
-	      "dateAdd": "2017-12-22 19:07:16",
-	      "version": "Wazuh v3.1.0",
-	      "manager_host": "PC",
-	      "lastKeepAlive": "9999-12-31 23:59:59",
+	      "manager": "master",
 	      "os": {
-	         "major": "15",
-	         "name": "CentOS Linux",
-	         "platform": "centos",
-	         "uname": "Linux manager 3.10.0-514.el7.x86_64 #1 SMP Tue Nov 22 16:42:41 UTC 2016 x86_64",
-	         "version": "15.5",
 	         "arch": "x86_64",
-	         "minor": "5"
+	         "codename": "Bionic Beaver",
+	         "major": "18",
+	         "minor": "04",
+	         "name": "Ubuntu",
+	         "platform": "ubuntu",
+	         "uname": "Linux |master |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
+	         "version": "18.04.1 LTS"
 	      },
+	      "status": "Active",
+	      "name": "master",
+	      "registerIP": "127.0.0.1",
+	      "node_name": "node01",
+	      "version": "Wazuh v3.9.0",
+	      "dateAdd": "2019-03-08 08:30:02",
+	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "id": "000"
 	   }
 	}
-
+	
 
 Get an agent by its name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns various information from an agent called :agent_name.
 
 **Request**:
@@ -1066,64 +1812,42 @@ Returns various information from an agent called :agent_name.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_name``     | String        | Agent name.                                                                                                                                                                                            |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_name``               | String        | Agent name.                                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/myAgent?pretty"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/name/NewHost?pretty"
 
 **Example Response:**
 ::
 
 	{
-	   "error": 1000,
-	   "message": "Wazuh-Python Internal Error: 'NoneType' object has no attribute '__getitem__'"
+	   "error": 0,
+	   "data": {
+	      "ip": "10.0.0.9",
+	      "status": "Never connected",
+	      "name": "NewHost",
+	      "registerIP": "10.0.0.9",
+	      "node_name": "unknown",
+	      "dateAdd": "2019-03-08 08:38:08",
+	      "id": "007"
+	   }
 	}
-
-
-Get list of purgeable agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns a list of agents that can be purged
-
-**Request**:
-
-``GET`` ::
-
-	/purgeable/:timeframe
-
-**Parameters:**
-
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``timeframe``      | String        | Time from last connection in seconds or [n_days]d[n_hours]h[n_minutes]m[n_seconds]s.                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/purgeable/10800?pretty"
-
-**Example Response:**
-::
-
-	ToDo - Hardcoded output
+	
 
 
 Key
 ++++++++++++++++++++++++++++++++++++++++
 
 Get agent key
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the key of an agent.
 
 **Request**:
@@ -1134,11 +1858,11 @@ Returns the key of an agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1150,49 +1874,16 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IGRtejAwMiAxMC4wLjAuMTQgMjcyZjdkOTM0NGYxZTcxODZhNWNiYzg5YTZmMzY5YzU5MDRhZDdlMzIxMTY0NDlhNmVjYWZmY2MzMzY5NzUzZQ=="
+	   "data": "MDA0IG1haW5fZGF0YWJhc2UgMTAuMC4wLjE1IDEwMjQ1NWEzZjEyYTdiOTY3YTQ5ZmUzOWIyOGE2OTkxZmQ1ZmVkY2ZkNmE3NTE1NjA3ZTcyYTE4YzBiNWM3ZGQ="
 	}
-
-
-Purge
-++++++++++++++++++++++++++++++++++++++++
-
-Purge old agents from manager
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Deletes all agents that did not connect in the last ``timeframe`` seconds.
-
-**Request**:
-
-``POST`` ::
-
-	/agents/purge
-
-**Parameters:**
-
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``timeframe``      | String        | Time from last connection in seconds or [n_days]d[n_hours]h[n_minutes]m[n_seconds]s.                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``verbose``        | Boolean       | Return information about agents purged.                                                                                                                                                                |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X POST -H "Content-Type:application/json" -d '{"timeframe":10800}' "https://127.0.0.1:55000/agents/purge?pretty"
-
-**Example Response:**
-::
-
-	ToDo - Hardcoded output
+	
 
 
 Restart
 ++++++++++++++++++++++++++++++++++++++++
 
 Restart a list of agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Restarts a list of agents.
 
 **Request**:
@@ -1203,11 +1894,11 @@ Restarts a list of agents.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``ids``            | String[]      | Array of agent ID's.                                                                                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``ids``                      | String[]      | Array of agent ID's.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1218,12 +1909,18 @@ Restarts a list of agents.
 ::
 
 	{
-	    "data": "All selected agents were restarted",
+	    "data": {
+	        "msg": "All selected agents were restarted", 
+	        "affected_agents": [
+	            "002", 
+	            "004"
+	        ]
+	    }, 
 	    "error": 0
 	}
 
 Restart all agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Restarts all agents.
 
 **Request**:
@@ -1241,12 +1938,12 @@ Restarts all agents.
 ::
 
 	{
-	    "data": "Restarting all agents",
+	    "data": "Restarting all agents", 
 	    "error": 0
 	}
 
 Restart an agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Restarts the specified agent.
 
 **Request**:
@@ -1257,11 +1954,11 @@ Restarts the specified agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent unique ID.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1272,16 +1969,82 @@ Restarts the specified agent.
 ::
 
 	{
-	    "data": "Restarting agent",
+	    "data": {
+	        "msg": "All selected agents were restarted", 
+	        "affected_agents": [
+	            "007"
+	        ]
+	    }, 
 	    "error": 0
 	}
+
+
+Stats
+++++++++++++++++++++++++++++++++++++++++
+
+Get distinct fields in agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns all the different combinations that agents have for the selected fields. It also indicates the total number of agents that have each combination.
+
+**Request**:
+
+``GET`` ::
+
+	/agents/stats/distinct
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``fields``                   | String        | List of fields affecting the operation.                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``q``                        | String        | Query to filter result. For example q=&quot;status=Active&quot;                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents/stats/distinct?pretty&fields=os.platform"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "os": {
+	               "platform": "ubuntu"
+	            },
+	            "count": 2
+	         },
+	         {
+	            "count": 5
+	         }
+	      ],
+	      "totalItems": 7
+	   }
+	}
+	
 
 
 Upgrade
 ++++++++++++++++++++++++++++++++++++++++
 
 Get outdated agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the list of outdated agents.
 
 **Request**:
@@ -1292,15 +2055,17 @@ Returns the list of outdated agents.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``q``                        | String        | Query to filter result. For example q=&quot;status=Active&quot;                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1312,25 +2077,25 @@ Returns the list of outdated agents.
 
 	{
 	    "data": {
-	        "totalItems": 2,
+	        "totalItems": 2, 
 	        "items": [
 	            {
-	                "version": "Wazuh v3.0.0",
-	                "id": "003",
+	                "version": "Wazuh v3.0.0", 
+	                "id": "003", 
 	                "name": "main_database"
-	            },
+	            }, 
 	            {
-	                "version": "Wazuh v3.0.0",
-	                "id": "004",
+	                "version": "Wazuh v3.0.0", 
+	                "id": "004", 
 	                "name": "dmz002"
 	            }
 	        ]
-	    },
+	    }, 
 	    "error": 0
 	}
 
 Get upgrade result from agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the upgrade result from an agent.
 
 **Request**:
@@ -1341,13 +2106,13 @@ Returns the upgrade result from an agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``timeout``        | Number        | Seconds to wait for the agent to respond.                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``timeout``                  | Number        | Seconds to wait for the agent to respond.                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1358,12 +2123,12 @@ Returns the upgrade result from an agent.
 ::
 
 	{
-	    "data": "Agent upgraded successfully",
+	    "data": "Agent upgraded successfully", 
 	    "error": 0
 	}
 
 Upgrade agent using custom file
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Upgrade the agent using a custom file.
 
 **Request**:
@@ -1374,15 +2139,15 @@ Upgrade the agent using a custom file.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file_path``      | String        | WPK file path.                                                                                                                                                                                         |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``installer``      | String        | Installation script.                                                                                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent unique ID.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file_path``                | String        | Path to the WPK file. The file must be on a folder on the Wazuh's installation directory (by default, <code>/var/ossec</code>).                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``installer``                | String        | Installation script.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1393,12 +2158,12 @@ Upgrade the agent using a custom file.
 ::
 
 	{
-	    "data": "Installation started",
+	    "data": "Installation started", 
 	    "error": 0
 	}
 
 Upgrade agent using online repository
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Upgrade the agent using a WPK file from online repository.
 
 **Request**:
@@ -1409,22 +2174,24 @@ Upgrade the agent using a WPK file from online repository.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent unique ID.                                                                                                                                                                                       |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``wpk_repo``       | String        | WPK repository.                                                                                                                                                                                        |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``version``        | String        | Wazuh version.                                                                                                                                                                                         |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``force``          | number        | Force upgrade.                                                                                                                                                                                         |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - 0                                                                                                                                                                                                    |
-|                    |               | - 1                                                                                                                                                                                                    |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent unique ID.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``wpk_repo``                 | String        | WPK repository.                                                                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``version``                  | String        | Wazuh version.                                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``use_http``                 | Boolean       | Use protocol http. If it's false use https. By default the value is set to false.                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``force``                    | number        | Force upgrade.                                                                                                                                                                                                                       |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - 0                                                                                                                                                                                                                                  |
+|                              |               | - 1                                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1435,7 +2202,7 @@ Upgrade the agent using a WPK file from online repository.
 ::
 
 	{
-	    "data": "Upgrade procedure started",
+	    "data": "Upgrade procedure started", 
 	    "error": 0
 	}
 
@@ -1447,7 +2214,7 @@ Delete
 ++++++++++++++++++++++++++++++++++++++++
 
 Clear group cache
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Clears cache of the specified group.
 
 **Request**:
@@ -1458,11 +2225,11 @@ Clears cache of the specified group.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``group``          | String        | cache group.                                                                                                                                                                                           |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``group``                    | String        | cache group.                                                                                                                                                                                                                         |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1475,26 +2242,14 @@ Clears cache of the specified group.
 	{
 	   "error": 0,
 	   "data": {
-	      "all": [
-	         "/agents/summary?pretty",
-	         "/agents?pretty&offset=0&limit=5&sort=-ip,name",
-	         "/agents/000?pretty",
-	         "/agents/name/myAgent?pretty"
-	      ],
-	      "groups": {
-	         "agents": [
-	            "/agents/summary?pretty",
-	            "/agents?pretty&offset=0&limit=5&sort=-ip,name",
-	            "/agents/000?pretty",
-	            "/agents/name/myAgent?pretty"
-	         ]
-	      }
+	      "all": [],
+	      "groups": {}
 	   }
 	}
-
+	
 
 Delete cache index
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Clears entire cache.
 
 **Request**:
@@ -1518,14 +2273,14 @@ Clears entire cache.
 	      "groups": {}
 	   }
 	}
-
+	
 
 
 Info
 ++++++++++++++++++++++++++++++++++++++++
 
 Get cache index
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns current cache index.
 
 **Request**:
@@ -1549,10 +2304,10 @@ Returns current cache index.
 	      "groups": {}
 	   }
 	}
-
+	
 
 Return cache configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns cache configuration.
 
 **Request**:
@@ -1573,320 +2328,170 @@ Returns cache configuration.
 	   "error": 0,
 	   "data": {
 	      "debug": false,
-	      "defaultDuration": 750,
-	      "enabled": true,
+	      "defaultDuration": 3600000,
+	      "enabled": false,
 	      "appendKey": [],
 	      "jsonp": false,
 	      "redisClient": false
 	   }
 	}
+	
 
+
+
+Ciscat
+----------------------------------------
+Results
+++++++++++++++++++++++++++++++++++++++++
+
+Get CIS-CAT results from an agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's ciscat results info
+
+**Request**:
+
+``GET`` ::
+
+	/ciscat/:agent_id/results
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``benchmark``                | String        | Filters by benchmark.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``profile``                  | String        | Filters by evaluated profile.                                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pass``                     | Number        | Filters by passed checks.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``fail``                     | Number        | Filters by failed checks.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``error``                    | Number        | Filters by encountered errors.                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``notchecked``               | Number        | Filters by not checked.                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``unknown``                  | Number        | Filters by unknown results.                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``score``                    | Number        | Filters by final score.                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/ciscat/000/results?pretty&sort=-score"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "totalItems": 2, 
+	        "items": [
+	            {
+	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server", 
+	                "score": 57, 
+	                "error": 0, 
+	                "scan": {
+	                    "id": 1406741147, 
+	                    "time": "2018-09-06T07:50:15.632-07:00"
+	                }, 
+	                "fail": 79, 
+	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
+	                "pass": 104, 
+	                "notchecked": 36, 
+	                "unknown": 1
+	            }, 
+	            {
+	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Workstation", 
+	                "score": 64, 
+	                "error": 0, 
+	                "scan": {
+	                    "id": 1406741147, 
+	                    "time": "2018-09-06T07:50:52.630-07:00"
+	                }, 
+	                "fail": 53, 
+	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
+	                "pass": 96, 
+	                "notchecked": 71, 
+	                "unknown": 0
+	            }
+	        ]
+	    }, 
+	    "error": 0
+	}
 
 
 
 Cluster
 ----------------------------------------
-Node
+Configuration
 ++++++++++++++++++++++++++++++++++++++++
 
-Get node info
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the Node information
+Get node node_id's configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns ossec.conf in JSON format.
 
 **Request**:
 
 ``GET`` ::
 
-	/cluster/node
+	/cluster/:node_id/configuration
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``section``                  | String        | Indicates the ossec.conf section: global, rules, syscheck, rootcheck, remote, alerts, command, active-response, localfile.                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``field``                    | String        | Indicates a section child, e.g, fields for rule section are: include, decoder_dir, etc.                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node"
-
-**Example Response:**
-::
-
-	{"error":0,"data":{"node":"nodemaster","cluster":"wazuh","type":"master"}}
-
-
-Nodes
-++++++++++++++++++++++++++++++++++++++++
-
-Get info about agents in cluster
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the state of each agent and the manager it's reporting to in the cluster
-
-**Request**:
-
-``GET`` ::
-
-	/cluster/agents
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/agents"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/configuration?section=global&pretty"
 
 **Example Response:**
 ::
 
 	{
-		"error":0,
-		"data":{
-				"None":[
-						{
-								"status":"Never connected",
-								"ip":"10.0.0.12",
-								"id":"002",
-								"name":"dmz001"
-						},
-						{
-								"status":"Never connected",
-								"ip":"10.0.0.14",
-								"id":"004",
-								"name":"dmz002"
-						},
-						{
-								"status":"Never connected",
-								"ip":"10.0.0.9",
-								"id":"006",
-								"name":"NewHost"
-						},
-						{
-								"status":"Never connected",
-								"ip":"any",
-								"id":"007",
-								"name":"myNewAgent"
-						},
-						{
-								"status":"Never connected",
-								"ip":"10.0.10.10",
-								"id":"123",
-								"name":"NewHost_2"
-						}
-				]
-		}
+	   "error": 0,
+	   "data": {
+	      "jsonout_output": "yes",
+	      "alerts_log": "yes",
+	      "logall": "no",
+	      "logall_json": "no",
+	      "email_notification": "no",
+	      "smtp_server": "smtp.example.wazuh.com",
+	      "email_from": "ossecm@example.wazuh.com",
+	      "email_to": "recipient@example.wazuh.com",
+	      "email_maxperhour": "12",
+	      "email_log_source": "alerts.log",
+	      "white_list": [
+	         "127.0.0.1",
+	         "^localhost.localdomain$",
+	         "127.0.0.53"
+	      ]
+	   }
 	}
-
-Get info about files in cluster
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the state of each file in the cluster
-
-**Request**:
-
-``GET`` ::
-
-	/cluster/files
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/files"
-
-**Example Response:**
-::
-
-	{
-	    "error":0,
-	    "data":{
-	        "172.18.0.108":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        },
-	        "172.18.0.106":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        },
-	        "172.18.0.107":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        },
-	        "172.18.0.105":{
-	            "synchronized":[
-	                "/etc/shared/dmz/system_audit_ssh.txt",
-	                "/etc/shared/default/rootkit_trojans.txt",
-	                "/etc/shared/dmz/win_audit_rcl.txt",
-	                "/etc/shared/dmz/system_audit_rcl.txt",
-	                "/etc/shared/webserver/cis_debian_linux_rcl.txt",
-	                "/etc/shared/default/win_malware_rcl.txt",
-	                "/etc/shared/webserver/win_applications_rcl.txt",
-	                "/etc/shared/default/win_applications_rcl.txt",
-	                "/etc/shared/default/cis_sles12_linux_rcl.txt",
-	                "/etc/shared/webserver/win_audit_rcl.txt",
-	                "/etc/shared/webserver/win_malware_rcl.txt",
-	                "/etc/shared/webserver/cis_rhel6_linux_rcl.txt",
-	                "/etc/shared/default/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/database/rootkit_trojans.txt",
-	                "/etc/shared/dmz/rootkit_files.txt",
-	                "/etc/shared/default/cis_rhel_linux_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel7_linux_rcl.txt",
-	                "/etc/shared/webserver/rootkit_files.txt",
-	                "/etc/shared/dmz/cis_rhel5_linux_rcl.txt",
-	                "/etc/shared/webserver/system_audit_ssh.txt",
-	                "/etc/shared/database/agent.conf",
-	                "/etc/shared/dmz/win_applications_rcl.txt",
-	                "/etc/shared/dmz/cis_rhel6_linux_rcl.txt"
-	            ]
-	        }
-	    }
-	}
-
-Get nodes info
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the Nodes information
-
-**Request**:
-
-``GET`` ::
-
-	/cluster/nodes
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes"
-
-**Example Response:**
-::
-
-	{
-	    "error":0,
-	    "data":{
-	        "totalItems":5,
-	        "items":[
-	            {
-	                "url":"localhost",
-	                "node":"nodemaster",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.105",
-	                "node":"node01",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.106",
-	                "node":"node03",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.107",
-	                "node":"node02",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            },
-	            {
-	                "url":"172.18.0.108",
-	                "node":"node04",
-	                "status":"connected",
-	                "cluster":"wazuh"
-	            }
-	        ]
-	    }
-	}
-
-Status
-++++++++++++++++++++++++++++++++++++++++
-
-Get info about cluster status
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns whether the cluster is enabled or disabled
-
-**Request**:
-
-``GET`` ::
-
-	/cluster/status
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status"
-
-**Example Response:**
-::
-
-	{"error":0,"data":{"running":"yes","enabled":"yes"}}
-
-
-config
-++++++++++++++++++++++++++++++++++++++++
+	
 
 Get the cluster configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the cluster configuration
 
 **Request**:
@@ -1898,32 +2503,1059 @@ Returns the cluster configuration
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config"
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/config?pretty"
 
 **Example Response:**
 ::
 
 	{
-	    "error":0,
-	    "data":{
-	        "disabled":"no",
-	        "hidden":"no",
-	        "name":"wazuh",
-	        "interval":"2m",
-	        "node_name":"nodemaster",
-	        "bind_addr":"0.0.0.0",
-	        "node_type":"master",
-	        "key":"a7de21bdd629661b2669d5bc5ec6866d",
-	        "nodes":[
-	            "172.18.0.1",
-	            "172.18.0.105",
-	            "172.18.0.106",
-	            "172.18.0.107",
-	            "172.18.0.108"
-	        ],
-	        "port":"1516"
-	    }
+	   "error": 0,
+	   "data": {
+	      "name": "wazuh",
+	      "node_name": "node02",
+	      "node_type": "worker",
+	      "key": "9d273b53510fef702b54a92e9cffc82e",
+	      "port": 1516,
+	      "bind_addr": "0.0.0.0",
+	      "nodes": [
+	         "172.17.0.100"
+	      ],
+	      "hidden": "no",
+	      "disabled": false
+	   }
 	}
+	
+
+
+Files
+++++++++++++++++++++++++++++++++++++++++
+
+Check Wazuh configuration in a cluster node
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns if Wazuh configuration is OK.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/configuration/validation
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node01/configuration/validation?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "status": "OK"
+	   }
+	}
+	
+
+Check Wazuh configuration in all cluster nodes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns if Wazuh configuration is OK.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/configuration/validation
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/configuration/validation?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "status": "OK"
+	   }
+	}
+	
+
+Delete a remote file in a cluster node
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Confirmation message.
+
+**Request**:
+
+``DELETE`` ::
+
+	/cluster/:node_id/files
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``path``                     | String        | Relative path of file.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/cluster/node01/files?path=etc/rules/local_rules.xml&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "File was deleted"
+	}
+	
+
+Get local file from any cluster node
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the content of a local file (rules, decoders and lists).
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/files
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``path``                     | String        | Relative path of file.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node01/files?path=etc/decoders/local_decoder.xml&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "<!-- Local Decoders -->\n\n<!-- Modify it at your will. -->\n<!-- Copyright (C) 2015-2019, Wazuh Inc. -->\n\n<!--\n  - Allowed static fields:\n  - location   - where the log came from (only on FTS)\n  - srcuser    - extracts the source username\n  - dstuser    - extracts the destination (target) username\n  - user       - an alias to dstuser (only one of the two can be used)\n  - srcip      - source ip\n  - dstip      - dst ip\n  - srcport    - source port\n  - dstport    - destination port\n  - protocol   - protocol\n  - id         - event id\n  - url        - url of the event\n  - action     - event action (deny, drop, accept, etc)\n  - status     - event status (success, failure, etc)\n  - extra_data - Any extra data\n-->\n\n<decoder name=\"local_decoder_example\">\n    <program_name>local_decoder_example</program_name>\n</decoder>\n"
+	}
+	
+
+Update local file at any cluster node
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Upload a local file (rules, decoders and lists) in a cluster node
+
+**Request**:
+
+``POST`` ::
+
+	/cluster/:node_id/files
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``file``                     | String        | Input file.                                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``path``                     | String        | Relative path were input file will be placed.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``overwrite``                | String        | false to fail if file already exists (default). true to replace the existing file                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X POST -H 'Content-type: application/xml' -d @rules.xml "https://127.0.0.1:55000/cluster/node01/files?path=etc/rules/local_rules.xml&pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "File updated successfully", 
+	    "error": 0
+	}
+
+
+Info
+++++++++++++++++++++++++++++++++++++++++
+
+Get info about cluster status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns whether the cluster is enabled or disabled
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/status
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/status?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "enabled": "yes",
+	      "running": "yes"
+	   }
+	}
+	
+
+Get node node_id's status
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the status of the manager processes.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/status
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/status?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "ossec-agentlessd": "stopped",
+	      "ossec-analysisd": "running",
+	      "ossec-authd": "stopped",
+	      "ossec-csyslogd": "stopped",
+	      "ossec-dbd": "stopped",
+	      "ossec-monitord": "running",
+	      "ossec-execd": "running",
+	      "ossec-integratord": "stopped",
+	      "ossec-logcollector": "running",
+	      "ossec-maild": "stopped",
+	      "ossec-remoted": "running",
+	      "ossec-reportd": "stopped",
+	      "ossec-syscheckd": "running",
+	      "wazuh-clusterd": "running",
+	      "wazuh-modulesd": "running"
+	   }
+	}
+	
+
+Get node_id's information
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns basic information about manager.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/info
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/info?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "path": "/var/ossec",
+	      "version": "v3.9.0",
+	      "compilation_date": "Fri Mar  8 08:35:38 UTC 2019",
+	      "type": "manager",
+	      "max_agents": "14000",
+	      "openssl_support": "yes",
+	      "ruleset_version": "3905",
+	      "tz_offset": "+0000",
+	      "tz_name": "UTC"
+	   }
+	}
+	
+
+Show cluster health
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Show cluster health
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/healthcheck
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``node``                     | String        | Filter information by node name.                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/healthcheck?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "n_connected_nodes": 1,
+	      "nodes": {
+	         "node02": {
+	            "info": {
+	               "name": "node02",
+	               "type": "worker",
+	               "version": "3.9.0",
+	               "ip": "172.17.0.101",
+	               "n_active_agents": 0
+	            },
+	            "status": {
+	               "sync_integrity_free": true,
+	               "last_sync_integrity": {
+	                  "date_start_master": "2019-03-08 08:38:17.480787",
+	                  "date_end_master": "2019-03-08 08:38:17.501860",
+	                  "total_files": {
+	                     "missing": 0,
+	                     "extra": 2,
+	                     "extra_valid": 2,
+	                     "shared": 2
+	                  }
+	               },
+	               "sync_agentinfo_free": true,
+	               "last_sync_agentinfo": {
+	                  "date_start_master": "2019-03-08 08:38:17.382000",
+	                  "date_end_master": "2019-03-08 08:38:17.396759",
+	                  "total_agentinfo": 0
+	               },
+	               "sync_extravalid_free": true,
+	               "last_sync_agentgroups": {
+	                  "date_start_master": "n/a",
+	                  "date_end_master": "n/a",
+	                  "total_agentgroups": 0
+	               },
+	               "last_keep_alive": "2019-03-08 08:37:47.250957"
+	            }
+	         },
+	         "node01": {
+	            "info": {
+	               "name": "node01",
+	               "type": "master",
+	               "version": "3.9.0",
+	               "ip": "172.17.0.100",
+	               "n_active_agents": 2
+	            }
+	         }
+	      }
+	   }
+	}
+	
+
+
+Logs
+++++++++++++++++++++++++++++++++++++++++
+
+Get ossec.log from a specific node in cluster.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the three last months of ossec.log.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/logs
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``type_log``                 | String        | Filters by type of log.                                                                                                                                                                                                              |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - all                                                                                                                                                                                                                                |
+|                              |               | - error                                                                                                                                                                                                                              |
+|                              |               | - warning                                                                                                                                                                                                                            |
+|                              |               | - info                                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``category``                 | String        | Filters by category of log.                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/logs?offset=0&limit=5&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "timestamp": "2019-03-08 08:38:07",
+	            "tag": "ossec-remoted",
+	            "level": "info",
+	            "description": "(1409): Authentication file changed. Updating."
+	         },
+	         {
+	            "timestamp": "2019-03-08 08:38:07",
+	            "tag": "ossec-remoted",
+	            "level": "info",
+	            "description": "(1410): Reading authentication keys file."
+	         },
+	         {
+	            "timestamp": "2019-03-08 08:37:50",
+	            "tag": "ossec-syscheckd",
+	            "level": "info",
+	            "description": "Ending syscheck scan. Database completed."
+	         },
+	         {
+	            "timestamp": "2019-03-08 08:37:45",
+	            "tag": "ossec-syscheckd",
+	            "level": "info",
+	            "description": "Finished creating syscheck database (pre-scan completed)."
+	         },
+	         {
+	            "timestamp": "2019-03-08 08:37:30",
+	            "tag": "ossec-rootcheck",
+	            "level": "info",
+	            "description": "Ending rootcheck scan."
+	         }
+	      ],
+	      "totalItems": 598
+	   }
+	}
+	
+
+Get summary of ossec.log from a specific node in cluster.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a summary of the last three months of the <code>ossec.log</code> file.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/logs/summary
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/logs/summary?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "ossec-authd": {
+	         "all": 6,
+	         "info": 6,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-db": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-execd": {
+	         "all": 4,
+	         "info": 4,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-analysisd": {
+	         "all": 455,
+	         "info": 455,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-remoted": {
+	         "all": 11,
+	         "info": 11,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-monitord": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:database": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:download": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "sca": {
+	         "all": 18,
+	         "info": 18,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:osquery": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:ciscat": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:oscap": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-logcollector": {
+	         "all": 19,
+	         "info": 19,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:syscollector": {
+	         "all": 7,
+	         "info": 7,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-syscheckd": {
+	         "all": 55,
+	         "info": 55,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-rootcheck": {
+	         "all": 5,
+	         "info": 5,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      }
+	   }
+	}
+	
+
+
+Nodes
+++++++++++++++++++++++++++++++++++++++++
+
+Get local node info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the local node info
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/node
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "node": "node02",
+	      "cluster": "wazuh",
+	      "type": "worker"
+	   }
+	}
+	
+
+Get node info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the node info
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/nodes/:node_name
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes/node01?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "name": "node01",
+	      "type": "master",
+	      "version": "3.9.0",
+	      "ip": "172.17.0.100"
+	   }
+	}
+	
+
+Get nodes info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the nodes info
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/nodes
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``type``                     | String        | Filters by node type.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/nodes?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2,
+	      "items": [
+	         {
+	            "name": "node02",
+	            "type": "worker",
+	            "version": "3.9.0",
+	            "ip": "172.17.0.101"
+	         },
+	         {
+	            "name": "node01",
+	            "type": "master",
+	            "version": "3.9.0",
+	            "ip": "172.17.0.100"
+	         }
+	      ]
+	   }
+	}
+	
+
+
+Restart
+++++++++++++++++++++++++++++++++++++++++
+
+Restart a specific node in cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Restarts a specific node in cluster.
+
+**Request**:
+
+``PUT`` ::
+
+	/cluster/:node_id/restart
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/cluster/node02/restart?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Restarting manager", 
+	    "error": 0
+	}
+
+Restart all nodes in cluster
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Restarts all nodes in cluster.
+
+**Request**:
+
+``PUT`` ::
+
+	/cluster/restart
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/cluster/restart?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Restarting manager", 
+	    "error": 0
+	}
+
+
+Stats
+++++++++++++++++++++++++++++++++++++++++
+
+Get node node_id's analysisd stats
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a summary of the current analysisd stats on the node.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/stats/analysisd
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/analysisd/stats?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": [
+	        {
+	            "hour": 5, 
+	            "firewall": 0, 
+	            "alerts": [
+	                {
+	                    "level": 3, 
+	                    "sigid": 5715, 
+	                    "times": 4
+	                }, 
+	                {
+	                    "level": 2, 
+	                    "sigid": 1002, 
+	                    "times": 2
+	                }, 
+	                {
+	                    "...": "..."
+	                }
+	            ], 
+	            "totalAlerts": 107, 
+	            "syscheck": 1257, 
+	            "events": 1483
+	        }, 
+	        {
+	            "...": "..."
+	        }
+	    ], 
+	    "error": 0
+	}
+
+Get node node_id's remoted stats
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a summary of the current remoted stats on the node.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/stats/remoted
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/stats/remoted?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": [
+	        {
+	            "hour": 5, 
+	            "firewall": 0, 
+	            "alerts": [
+	                {
+	                    "level": 3, 
+	                    "sigid": 5715, 
+	                    "times": 4
+	                }, 
+	                {
+	                    "level": 2, 
+	                    "sigid": 1002, 
+	                    "times": 2
+	                }, 
+	                {
+	                    "...": "..."
+	                }
+	            ], 
+	            "totalAlerts": 107, 
+	            "syscheck": 1257, 
+	            "events": 1483
+	        }, 
+	        {
+	            "...": "..."
+	        }
+	    ], 
+	    "error": 0
+	}
+
+Get node node_id's stats
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns Wazuh statistical information for the current or specified date.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/stats
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``date``                     | String        | Selects the date for getting the statistical information. Format: YYYYMMDD                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/stats?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": [
+	        {
+	            "hour": 5, 
+	            "firewall": 0, 
+	            "alerts": [
+	                {
+	                    "level": 3, 
+	                    "sigid": 5715, 
+	                    "times": 4
+	                }, 
+	                {
+	                    "level": 2, 
+	                    "sigid": 1002, 
+	                    "times": 2
+	                }, 
+	                {
+	                    "...": "..."
+	                }
+	            ], 
+	            "totalAlerts": 107, 
+	            "syscheck": 1257, 
+	            "events": 1483
+	        }, 
+	        {
+	            "...": "..."
+	        }
+	    ], 
+	    "error": 0
+	}
+
+Get node node_id's stats by hour
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns Wazuh statistical information per hour. Each number in the averages field represents the average of alerts per hour.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/stats/hourly
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/stats/hourly?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "averages": [
+	            100, 
+	            357, 
+	            242, 
+	            500, 
+	            422, 
+	            "...", 
+	            123
+	        ], 
+	        "interactions": 0
+	    }, 
+	    "error": 0
+	}
+
+Get node node_id's stats by week
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns Wazuh statistical information per week. Each number in the hours field represents the average alerts per hour for that specific day.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/stats/weekly
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node02/stats/weekly?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "Wed": {
+	            "hours": [
+	                223, 
+	                "...", 
+	                456
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Sun": {
+	            "hours": [
+	                332, 
+	                "...", 
+	                313
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Thu": {
+	            "hours": [
+	                888, 
+	                "...", 
+	                123
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Tue": {
+	            "hours": [
+	                536, 
+	                "...", 
+	                345
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Mon": {
+	            "hours": [
+	                444, 
+	                "...", 
+	                556
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Fri": {
+	            "hours": [
+	                131, 
+	                "...", 
+	                432
+	            ], 
+	            "interactions": 0
+	        }, 
+	        "Sat": {
+	            "hours": [
+	                134, 
+	                "...", 
+	                995
+	            ], 
+	            "interactions": 0
+	        }
+	    }, 
+	    "error": 0
+	}
+
 
 
 Decoders
@@ -1932,7 +3564,7 @@ Info
 ++++++++++++++++++++++++++++++++++++++++
 
 Get all decoders
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns all decoders included in ossec.conf.
 
 **Request**:
@@ -1943,29 +3575,29 @@ Returns all decoders included in ossec.conf.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters by filename.                                                                                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``           | String        | Filters by path.                                                                                                                                                                                       |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters the decoders by status.                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - enabled                                                                                                                                                                                              |
-|                    |               | - disabled                                                                                                                                                                                             |
-|                    |               | - all                                                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file``                     | String        | Filters by filename.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``path``                     | String        | Filters by path.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``                   | String        | Filters the decoders by status.                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - enabled                                                                                                                                                                                                                            |
+|                              |               | - disabled                                                                                                                                                                                                                           |
+|                              |               | - all                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -1978,38 +3610,38 @@ Returns all decoders included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 523,
 	      "items": [
 	         {
-	            "status": "enabled",
+	            "file": "0005-wazuh_decoders.xml",
+	            "path": "ruleset/decoders",
 	            "name": "wazuh",
+	            "position": 0,
+	            "status": "enabled",
 	            "details": {
 	               "prematch": "^wazuh: "
-	            },
-	            "file": "0005-wazuh_decoders.xml",
-	            "position": 0,
-	            "path": "/var/ossec/ruleset/decoders"
+	            }
 	         },
 	         {
-	            "status": "enabled",
-	            "name": "agent-buffer",
-	            "details": {
-	               "regex": "^ '(\\S+)'.",
-	               "prematch": "^Agent buffer:",
-	               "parent": "wazuh",
-	               "order": "level"
-	            },
 	            "file": "0005-wazuh_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "name": "agent-buffer",
 	            "position": 1,
-	            "path": "/var/ossec/ruleset/decoders"
+	            "status": "enabled",
+	            "details": {
+	               "parent": "wazuh",
+	               "prematch": "^Agent buffer:",
+	               "regex": "^ '(\\S+)'.",
+	               "order": "level"
+	            }
 	         }
-	      ]
+	      ],
+	      "totalItems": 579
 	   }
 	}
-
+	
 
 Get all decoders files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns all decoders files included in ossec.conf.
 
 **Request**:
@@ -2020,31 +3652,31 @@ Returns all decoders files included in ossec.conf.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters the decoders by status.                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - enabled                                                                                                                                                                                              |
-|                    |               | - disabled                                                                                                                                                                                             |
-|                    |               | - all                                                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters by filename.                                                                                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``           | String        | Filters by path.                                                                                                                                                                                       |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``download``       | String        | Downloads the file                                                                                                                                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``                   | String        | Filters the decoders by status.                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - enabled                                                                                                                                                                                                                            |
+|                              |               | - disabled                                                                                                                                                                                                                           |
+|                              |               | - all                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file``                     | String        | Filters by filename.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``path``                     | String        | Filters by path.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``download``                 | String        | Downloads the file                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2057,65 +3689,65 @@ Returns all decoders files included in ossec.conf.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 89,
 	      "items": [
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0075-clamav_decoders.xml"
+	            "file": "0185-openldap_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0250-redis_decoders.xml"
+	            "file": "0220-postfix_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0415-jenkins_decoders.xml"
+	            "file": "0400-identity_guard_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0355-vm-pop3_decoders.xml"
+	            "file": "0190-openvpn_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0310-ssh_decoders.xml"
+	            "file": "0060-cisco-estreamer_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0200-ossec_decoders.xml"
+	            "file": "0335-telnet_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0380-windows_decoders.xml"
+	            "file": "0035-asterisk_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0140-kernel_decoders.xml"
+	            "file": "0275-sendmail_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0350-unix_decoders.xml"
+	            "file": "0345-unbound_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/decoders",
-	            "file": "0115-grandstream_decoders.xml"
+	            "file": "0415-jenkins_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
 	         }
-	      ]
+	      ],
+	      "totalItems": 96
 	   }
 	}
-
+	
 
 Get all parent decoders
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns all parent decoders included in ossec.conf
 
 **Request**:
@@ -2126,17 +3758,17 @@ Returns all parent decoders included in ossec.conf
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2149,35 +3781,37 @@ Returns all parent decoders included in ossec.conf
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 133,
 	      "items": [
 	         {
-	            "status": "enabled",
+	            "file": "local_decoder.xml",
+	            "path": "etc/decoders",
 	            "name": "local_decoder_example",
+	            "position": 0,
+	            "status": "enabled",
 	            "details": {
 	               "program_name": "local_decoder_example"
-	            },
-	            "file": "local_decoder.xml",
-	            "position": 0,
-	            "path": "/var/ossec/etc/decoders"
+	            }
 	         },
 	         {
-	            "status": "enabled",
-	            "name": "pvedaemon",
-	            "details": {
-	               "program_name": "^pvedaemon"
-	            },
-	            "file": "0440-proxmox-ve_decoders.xml",
+	            "file": "0465-azure_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "name": "azure-storage",
 	            "position": 0,
-	            "path": "/var/ossec/ruleset/decoders"
+	            "status": "enabled",
+	            "details": {
+	               "prematch": "^azure_tag: azure-storage. ",
+	               "regex": "^azure_storage_tag: (\\S+)",
+	               "order": "tag"
+	            }
 	         }
-	      ]
+	      ],
+	      "totalItems": 153
 	   }
 	}
-
+	
 
 Get decoders by name
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the decoders with the specified name.
 
 **Request**:
@@ -2188,19 +3822,19 @@ Returns the decoders with the specified name.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``decoder_name``   | String        | Decoder name.                                                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``decoder_name``             | String        | Decoder name.                                                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2213,42 +3847,1093 @@ Returns the decoders with the specified name.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 3,
 	      "items": [
 	         {
-	            "status": "enabled",
+	            "file": "0025-apache_decoders.xml",
+	            "path": "ruleset/decoders",
 	            "name": "apache-errorlog",
+	            "position": 0,
+	            "status": "enabled",
 	            "details": {
 	               "program_name": "^apache2|^httpd"
-	            },
-	            "file": "0025-apache_decoders.xml",
-	            "position": 0,
-	            "path": "/var/ossec/ruleset/decoders"
+	            }
 	         },
 	         {
-	            "status": "enabled",
+	            "file": "0025-apache_decoders.xml",
+	            "path": "ruleset/decoders",
 	            "name": "apache-errorlog",
+	            "position": 1,
+	            "status": "enabled",
 	            "details": {
 	               "prematch": "^[warn] |^[notice] |^[error] "
-	            },
-	            "file": "0025-apache_decoders.xml",
-	            "position": 1,
-	            "path": "/var/ossec/ruleset/decoders"
+	            }
 	         },
 	         {
-	            "status": "enabled",
+	            "file": "0025-apache_decoders.xml",
+	            "path": "ruleset/decoders",
 	            "name": "apache-errorlog",
+	            "position": 2,
+	            "status": "enabled",
 	            "details": {
 	               "prematch": "^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S+:warn] |^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S+:notice] |^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S*:error] |^[\\w+ \\w+ \\d+ \\d+:\\d+:\\d+.\\d+ \\d+] [\\S+:info] "
+	            }
+	         }
+	      ],
+	      "totalItems": 3
+	   }
+	}
+	
+
+
+
+Experimental
+----------------------------------------
+Clear
+++++++++++++++++++++++++++++++++++++++++
+
+Clear syscheck database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Clears the syscheck database for all agents.
+
+**Request**:
+
+``DELETE`` ::
+
+	/experimental/syscheck
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/experimental/syscheck?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Syscheck database deleted", 
+	    "error": 0
+	}
+
+
+Hardware
+++++++++++++++++++++++++++++++++++++++++
+
+Get hardware info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's hardware info
+
+**Request**:
+
+``GET`` ::
+
+	/experimental/syscollector/hardware
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``ram_free``                 | String        | Filters by ram_free.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``ram_total``                | String        | Filters by ram_total.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``cpu_cores``                | String        | Filters by cpu_cores.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``cpu_mhz``                  | String        | Filters by cpu_mhz.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``cpu_name``                 | String        | Filters by cpu_name.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``board_serial``             | String        | Filters by board_serial.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/hardware?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "cpu": {
+	               "cores": 2,
+	               "mhz": 1991.999,
+	               "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
 	            },
-	            "file": "0025-apache_decoders.xml",
-	            "position": 2,
-	            "path": "/var/ossec/ruleset/decoders"
+	            "ram": {
+	               "free": 55592,
+	               "total": 492832,
+	               "usage": 89
+	            },
+	            "scan": {
+	               "id": 599386135,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "board_serial": "0",
+	            "agent_id": "000"
+	         },
+	         {
+	            "cpu": {
+	               "cores": 1,
+	               "mhz": 1991.999,
+	               "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
+	            },
+	            "ram": {
+	               "free": 5584,
+	               "total": 234968,
+	               "usage": 98
+	            },
+	            "scan": {
+	               "id": 1832132561,
+	               "time": "2019/03/08 08:34:26"
+	            },
+	            "board_serial": "0",
+	            "agent_id": "001"
+	         }
+	      ],
+	      "totalItems": 4
+	   }
+	}
+	
+
+
+Netaddr
+++++++++++++++++++++++++++++++++++++++++
+
+Get network address info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's network address info
+
+**Request**:
+
+``GET`` ::
+
+	/experimental/syscollector/netaddr
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``proto``                    | String        | Filters by proto.                                                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``address``                  | String        | Filters by address.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``broadcast``                | String        | Filters by broadcast.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``netmask``                  | String        | Filters by netmask.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netaddr?pretty&limit=2&sort=proto"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "proto": "ipv6",
+	            "address": "fe80::f9:71ff:fed7:9d11",
+	            "iface": "enp0s3",
+	            "netmask": "ffff:ffff:ffff:ffff::",
+	            "scan_id": 1478544824,
+	            "agent_id": "000"
+	         },
+	         {
+	            "proto": "ipv6",
+	            "address": "fe80::a00:27ff:fe78:5d4",
+	            "iface": "enp0s8",
+	            "netmask": "ffff:ffff:ffff:ffff::",
+	            "scan_id": 1478544824,
+	            "agent_id": "000"
+	         }
+	      ],
+	      "totalItems": 16
+	   }
+	}
+	
+
+
+Netiface
+++++++++++++++++++++++++++++++++++++++++
+
+Get network interface info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's network interface info
+
+**Request**:
+
+``GET`` ::
+
+	/experimental/syscollector/netiface
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``name``                     | String        | Filters by name.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``adapter``                  | String        | Filters by adapter.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``type``                     | String        | Filters by type.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``state``                    | String        | Filters by state.                                                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``mtu``                      | String        | Filters by mtu.                                                                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_packets``               | String        | Filters by tx_packets.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rx_packets``               | String        | Filters by rx_packets.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_bytes``                 | String        | Filters by tx_bytes.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rx_bytes``                 | String        | Filters by rx_bytes.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_errors``                | String        | Filters by tx_errors.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rx_errors``                | String        | Filters by rx_errors.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_dropped``               | String        | Filters by tx_dropped.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rx_dropped``               | String        | Filters by rx_dropped.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netiface?pretty&limit=2"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "rx": {
+	               "bytes": 151695946,
+	               "dropped": 0,
+	               "errors": 0,
+	               "packets": 111792
+	            },
+	            "scan": {
+	               "id": 1478544824,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "tx": {
+	               "bytes": 2408059,
+	               "dropped": 0,
+	               "errors": 0,
+	               "packets": 35104
+	            },
+	            "name": "enp0s3",
+	            "state": "up",
+	            "type": "ethernet",
+	            "mtu": 1500,
+	            "mac": "02:f9:71:d7:9d:11",
+	            "agent_id": "000"
+	         },
+	         {
+	            "rx": {
+	               "bytes": 0,
+	               "dropped": 0,
+	               "errors": 0,
+	               "packets": 0
+	            },
+	            "scan": {
+	               "id": 1478544824,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "tx": {
+	               "bytes": 5312,
+	               "dropped": 0,
+	               "errors": 0,
+	               "packets": 24
+	            },
+	            "name": "enp0s8",
+	            "state": "up",
+	            "type": "ethernet",
+	            "mtu": 1500,
+	            "mac": "08:00:27:78:05:d4",
+	            "agent_id": "000"
+	         }
+	      ],
+	      "totalItems": 8
+	   }
+	}
+	
+
+
+Netproto
+++++++++++++++++++++++++++++++++++++++++
+
+Get network protocol info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's network protocol info
+
+**Request**:
+
+``GET`` ::
+
+	/experimental/syscollector/netproto
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``iface``                    | String        | Filters by iface.                                                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``type``                     | String        | Filters by type.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``gateway``                  | String        | Filters by gateway.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``dhcp``                     | String        | Filters by dhcp.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/netproto?pretty&limit=2&sort=type"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "type": "ipv6",
+	            "iface": "enp0s3",
+	            "dhcp": "enabled",
+	            "scan_id": 1478544824,
+	            "agent_id": "000"
+	         },
+	         {
+	            "type": "ipv6",
+	            "iface": "enp0s8",
+	            "dhcp": "enabled",
+	            "scan_id": 1478544824,
+	            "agent_id": "000"
+	         }
+	      ],
+	      "totalItems": 16
+	   }
+	}
+	
+
+
+OS
+++++++++++++++++++++++++++++++++++++++++
+
+Get os info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's os info
+
+**Request**:
+
+``GET`` ::
+
+	/experimental/syscollector/os
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``os_name``                  | String        | Filters by os_name.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``architecture``             | String        | Filters by architecture.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``os_version``               | String        | Filters by os_version.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``version``                  | String        | Filters by version.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``release``                  | String        | Filters by release.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/os?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "os": {
+	               "codename": "Bionic Beaver",
+	               "major": "18",
+	               "minor": "04",
+	               "name": "Ubuntu",
+	               "platform": "ubuntu",
+	               "version": "18.04.1 LTS (Bionic Beaver)"
+	            },
+	            "scan": {
+	               "id": 242764188,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "architecture": "x86_64",
+	            "release": "4.15.0-43-generic",
+	            "version": "#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018",
+	            "sysname": "Linux",
+	            "hostname": "master",
+	            "agent_id": "000"
+	         },
+	         {
+	            "os": {
+	               "codename": "Bionic Beaver",
+	               "major": "18",
+	               "minor": "04",
+	               "name": "Ubuntu",
+	               "platform": "ubuntu",
+	               "version": "18.04.1 LTS (Bionic Beaver)"
+	            },
+	            "scan": {
+	               "id": 2140135162,
+	               "time": "2019/03/08 08:34:26"
+	            },
+	            "architecture": "x86_64",
+	            "release": "4.15.0-43-generic",
+	            "version": "#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018",
+	            "sysname": "Linux",
+	            "hostname": "agent-1",
+	            "agent_id": "001"
+	         }
+	      ],
+	      "totalItems": 4
+	   }
+	}
+	
+
+
+Packages
+++++++++++++++++++++++++++++++++++++++++
+
+Get packages info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's packages info
+
+**Request**:
+
+``GET`` ::
+
+	/experimental/syscollector/packages
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``vendor``                   | String        | Filters by vendor.                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``name``                     | String        | Filters by name.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``architecture``             | String        | Filters by architecture.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``format``                   | String        | Filters by format.                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``version``                  | String        | Filter by version name.                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/packages?pretty&sort=-name&limit=2"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "scan": {
+	               "id": 520922172,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+	            "name": "acl",
+	            "priority": "optional",
+	            "description": "Access control list utilities",
+	            "architecture": "amd64",
+	            "format": "deb",
+	            "size": 200,
+	            "version": "2.2.52-3build1",
+	            "section": "utils",
+	            "multiarch": "foreign",
+	            "agent_id": "000"
+	         },
+	         {
+	            "scan": {
+	               "id": 520922172,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+	            "name": "accountsservice",
+	            "priority": "optional",
+	            "description": "query and manipulate user account information",
+	            "architecture": "amd64",
+	            "format": "deb",
+	            "size": 440,
+	            "version": "0.6.45-1ubuntu1",
+	            "section": "admin",
+	            "agent_id": "000"
+	         }
+	      ],
+	      "totalItems": 2068
+	   }
+	}
+	
+
+
+Ports
+++++++++++++++++++++++++++++++++++++++++
+
+Get ports info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's ports info
+
+**Request**:
+
+``GET`` ::
+
+	/experimental/syscollector/ports
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pid``                      | Number        | Filters by pid.                                                                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``protocol``                 | String        | Filters by protocol.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``local_ip``                 | String        | Filters by local_ip.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``local_port``               | Number        | Filters by local_port.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``remote_ip``                | String        | Filters by remote_ip.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_queue``                 | Number        | Filters by tx_queue.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``state``                    | String        | Filters by state.                                                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``process``                  | String        | Filters by process.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/ports?pretty&limit=2&sort=protocol"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "local": {
+	               "ip": "::",
+	               "port": 22
+	            },
+	            "remote": {
+	               "ip": "::",
+	               "port": 0
+	            },
+	            "scan": {
+	               "id": 2112182802,
+	               "time": "2019/03/08 08:30:59"
+	            },
+	            "state": "listening",
+	            "tx_queue": 0,
+	            "rx_queue": 0,
+	            "inode": 19354,
+	            "protocol": "tcp6",
+	            "agent_id": "000"
+	         },
+	         {
+	            "local": {
+	               "ip": "::",
+	               "port": 55000
+	            },
+	            "remote": {
+	               "ip": "::",
+	               "port": 0
+	            },
+	            "scan": {
+	               "id": 2112182802,
+	               "time": "2019/03/08 08:30:59"
+	            },
+	            "state": "listening",
+	            "tx_queue": 0,
+	            "rx_queue": 0,
+	            "inode": 258878,
+	            "protocol": "tcp6",
+	            "agent_id": "000"
+	         }
+	      ],
+	      "totalItems": 18
+	   }
+	}
+	
+
+
+Processes
+++++++++++++++++++++++++++++++++++++++++
+
+Get processes info of all agents
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's processes info
+
+**Request**:
+
+``GET`` ::
+
+	/experimental/syscollector/processes
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pid``                      | Number        | Filters by process pid.                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``state``                    | String        | Filters by process state.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``ppid``                     | Number        | Filters by process parent pid.                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``egroup``                   | String        | Filters by process egroup.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``euser``                    | String        | Filters by process euser.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``fgroup``                   | String        | Filters by process fgroup.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``name``                     | String        | Filters by process name.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``nlwp``                     | Number        | Filters by process nlwp.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pgrp``                     | Number        | Filters by process pgrp.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``priority``                 | Number        | Filters by process priority.                                                                                                                                                                                                         |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rgroup``                   | String        | Filters by process rgroup.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``ruser``                    | String        | Filters by process ruser.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sgroup``                   | String        | Filters by process sgroup.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``suser``                    | String        | Filters by process suser.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/syscollector/processes?pretty&limit=2&sort=priority"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "scan": {
+	               "id": 225991434,
+	               "time": "2019/03/08 08:30:59"
+	            },
+	            "fgroup": "root",
+	            "state": "S",
+	            "priority": 20,
+	            "suser": "root",
+	            "ppid": 0,
+	            "vm_size": 0,
+	            "session": 0,
+	            "pid": "2",
+	            "nlwp": 1,
+	            "name": "kthreadd",
+	            "euser": "root",
+	            "sgroup": "root",
+	            "size": 0,
+	            "stime": 0,
+	            "nice": 0,
+	            "share": 0,
+	            "processor": 1,
+	            "ruser": "root",
+	            "egroup": "root",
+	            "rgroup": "root",
+	            "pgrp": 0,
+	            "resident": 0,
+	            "utime": 0,
+	            "tgid": 2,
+	            "start_time": 8,
+	            "tty": 0,
+	            "agent_id": "000"
+	         },
+	         {
+	            "scan": {
+	               "id": 225991434,
+	               "time": "2019/03/08 08:30:59"
+	            },
+	            "fgroup": "root",
+	            "state": "S",
+	            "priority": 25,
+	            "suser": "root",
+	            "ppid": 2,
+	            "vm_size": 0,
+	            "session": 0,
+	            "pid": "28",
+	            "nlwp": 1,
+	            "name": "ksmd",
+	            "euser": "root",
+	            "sgroup": "root",
+	            "size": 0,
+	            "stime": 0,
+	            "nice": 5,
+	            "share": 0,
+	            "processor": 1,
+	            "ruser": "root",
+	            "egroup": "root",
+	            "rgroup": "root",
+	            "pgrp": 0,
+	            "resident": 0,
+	            "utime": 0,
+	            "tgid": 28,
+	            "start_time": 22,
+	            "tty": 0,
+	            "agent_id": "000"
+	         }
+	      ],
+	      "totalItems": 420
+	   }
+	}
+	
+
+
+Results
+++++++++++++++++++++++++++++++++++++++++
+
+Get CIS-CAT results
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's ciscat results info
+
+**Request**:
+
+``GET`` ::
+
+	/experimental/ciscat/results
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``benchmark``                | String        | Filters by benchmark.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``profile``                  | String        | Filters by evaluated profile.                                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pass``                     | Number        | Filters by passed checks.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``fail``                     | Number        | Filters by failed checks.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``error``                    | Number        | Filters by encountered errors.                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``notchecked``               | Number        | Filters by not checked.                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``unknown``                  | Number        | Filters by unknown results.                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``score``                    | Number        | Filters by final score.                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/experimental/ciscat/results?pretty&sort=-score"
+
+**Example Response:**
+::
+
+	{
+	    "data": {
+	        "totalItems": 2, 
+	        "items": [
+	            {
+	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Workstation", 
+	                "score": 64, 
+	                "agent_id": "001", 
+	                "error": 0, 
+	                "scan": {
+	                    "id": 1260865673, 
+	                    "time": "2018-09-06T07:59:25.682-07:00"
+	                }, 
+	                "fail": 53, 
+	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
+	                "pass": 96, 
+	                "notchecked": 71, 
+	                "unknown": 0
+	            }, 
+	            {
+	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server", 
+	                "score": 57, 
+	                "agent_id": "001", 
+	                "error": 0, 
+	                "scan": {
+	                    "id": 1260865673, 
+	                    "time": "2018-09-06T07:58:39.342-07:00"
+	                }, 
+	                "fail": 79, 
+	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
+	                "pass": 104, 
+	                "notchecked": 36, 
+	                "unknown": 1
+	            }
+	        ]
+	    }, 
+	    "error": 0
+	}
+
+
+
+Lists
+----------------------------------------
+Info
+++++++++++++++++++++++++++++++++++++++++
+
+Get all lists
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the content of all CDB lists
+
+**Request**:
+
+``GET`` ::
+
+	/lists
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``path``                     | String        | Filters by path.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``                   | String        | Filters the decoders by status.                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - enabled                                                                                                                                                                                                                            |
+|                              |               | - disabled                                                                                                                                                                                                                           |
+|                              |               | - all                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/lists?pretty&path=etc/lists/audit-keys"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 1,
+	      "items": [
+	         [
+	            {
+	               "key": "audit-wazuh-w",
+	               "value": "write"
+	            },
+	            {
+	               "key": "audit-wazuh-r",
+	               "value": "read"
+	            },
+	            {
+	               "key": "audit-wazuh-a",
+	               "value": "attribute"
+	            },
+	            {
+	               "key": "audit-wazuh-x",
+	               "value": "execute"
+	            },
+	            {
+	               "key": "audit-wazuh-c",
+	               "value": "command"
+	            }
+	         ]
+	      ]
+	   }
+	}
+	
+
+Get paths from all lists
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the path from all lists.
+
+**Request**:
+
+``GET`` ::
+
+	/lists/files
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/lists/files?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 4,
+	      "items": [
+	         {
+	            "path": "etc/lists",
+	            "name": "security-eventchannel"
+	         },
+	         {
+	            "path": "etc/lists/amazon",
+	            "name": "aws-sources"
+	         },
+	         {
+	            "path": "etc/lists/amazon",
+	            "name": "aws-eventnames"
+	         },
+	         {
+	            "path": "etc/lists",
+	            "name": "audit-keys"
 	         }
 	      ]
 	   }
 	}
-
+	
 
 
 
@@ -2258,7 +4943,7 @@ Configuration
 ++++++++++++++++++++++++++++++++++++++++
 
 Get manager configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns ossec.conf in JSON format.
 
 **Request**:
@@ -2269,13 +4954,13 @@ Returns ossec.conf in JSON format.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``section``        | String        | Indicates the ossec.conf section: global, rules, syscheck, rootcheck, remote, alerts, command, active-response, localfile.                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``field``          | String        | Indicates a section child, e.g, fields for rule section are: include, decoder_dir, etc.                                                                                                                |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``section``                  | String        | Indicates the ossec.conf section: global, rules, syscheck, rootcheck, remote, alerts, command, active-response, localfile.                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``field``                    | String        | Indicates a section child, e.g, fields for rule section are: include, decoder_dir, etc.                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2288,30 +4973,160 @@ Returns ossec.conf in JSON format.
 	{
 	   "error": 0,
 	   "data": {
-	      "email_notification": "no",
-	      "alerts_log": "yes",
 	      "jsonout_output": "yes",
-	      "smtp_server": "smtp.example.wazuh.com",
-	      "email_to": "recipient@example.wazuh.com",
+	      "alerts_log": "yes",
 	      "logall": "no",
+	      "logall_json": "no",
+	      "email_notification": "no",
+	      "smtp_server": "smtp.example.wazuh.com",
+	      "email_from": "ossecm@example.wazuh.com",
+	      "email_to": "recipient@example.wazuh.com",
 	      "email_maxperhour": "12",
+	      "email_log_source": "alerts.log",
 	      "white_list": [
 	         "127.0.0.1",
 	         "^localhost.localdomain$",
-	         "192.168.0.1"
-	      ],
-	      "email_from": "ossecm@example.wazuh.com",
-	      "logall_json": "no"
+	         "127.0.0.53"
+	      ]
 	   }
 	}
+	
 
+
+Files
+++++++++++++++++++++++++++++++++++++++++
+
+Check Wazuh configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns if Wazuh configuration is OK.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/configuration/validation
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/configuration/validation?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "status": "OK"
+	   }
+	}
+	
+
+Delete a local file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Confirmation message.
+
+**Request**:
+
+``DELETE`` ::
+
+	/manager/files
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``path``                     | String        | Relative path of file.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/manager/files?path=etc/rules/local_rules.xml&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "File was deleted"
+	}
+	
+
+Get local file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the content of a local file (rules, decoders and lists).
+
+**Request**:
+
+``GET`` ::
+
+	/manager/files
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``path``                     | String        | Relative path of file.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/files?path=etc/decoders/local_decoder.xml&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": "<!-- Local Decoders -->\n\n<!-- Modify it at your will. -->\n<!-- Copyright (C) 2015-2019, Wazuh Inc. -->\n\n<!--\n  - Allowed static fields:\n  - location   - where the log came from (only on FTS)\n  - srcuser    - extracts the source username\n  - dstuser    - extracts the destination (target) username\n  - user       - an alias to dstuser (only one of the two can be used)\n  - srcip      - source ip\n  - dstip      - dst ip\n  - srcport    - source port\n  - dstport    - destination port\n  - protocol   - protocol\n  - id         - event id\n  - url        - url of the event\n  - action     - event action (deny, drop, accept, etc)\n  - status     - event status (success, failure, etc)\n  - extra_data - Any extra data\n-->\n\n<decoder name=\"local_decoder_example\">\n    <program_name>local_decoder_example</program_name>\n</decoder>\n"
+	}
+	
+
+Update local file
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Upload a local file (rules, decoders and lists).
+
+**Request**:
+
+``POST`` ::
+
+	/manager/files
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``file``                     | String        | Input file.                                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``path``                     | String        | Relative path were input file will be placed.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``overwrite``                | String        | false to fail if file already exists (default). true to replace the existing file                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X POST -H 'Content-type: application/xml' -d @rules.xml "https://127.0.0.1:55000/manager/files?path=etc/rules/new_rule.xml&pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "File updated successfully", 
+	    "error": 0
+	}
 
 
 Info
 ++++++++++++++++++++++++++++++++++++++++
 
 Get manager information
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns basic information about manager.
 
 **Request**:
@@ -2331,22 +5146,22 @@ Returns basic information about manager.
 	{
 	   "error": 0,
 	   "data": {
-	      "installation_date": "vie dic 22 19:07:15 CET 2017",
-	      "version": "v3.1.0",
-	      "openssl_support": "yes",
-	      "max_agents": "8000",
-	      "ruleset_version": "1005",
 	      "path": "/var/ossec",
-	      "tz_name": "CET",
-	      "type": "server",
-	      "tz_offset": "+0100"
+	      "version": "v3.9.0",
+	      "compilation_date": "Fri Mar  8 08:35:38 UTC 2019",
+	      "type": "manager",
+	      "max_agents": "14000",
+	      "openssl_support": "yes",
+	      "ruleset_version": "3905",
+	      "tz_offset": "+0000",
+	      "tz_name": "UTC"
 	   }
 	}
-
+	
 
 Get manager status
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the status of the manager processes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the status of the manager processes.
 
 **Request**:
 
@@ -2365,26 +5180,31 @@ Returns the status of the manager processes
 	{
 	   "error": 0,
 	   "data": {
-	      "wazuh-modulesd": "running",
-	      "ossec-authd": "stopped",
-	      "wazuh-clusterd": "running",
-	      "ossec-monitord": "running",
-	      "ossec-logcollector": "running",
-	      "ossec-execd": "running",
-	      "ossec-remoted": "running",
-	      "ossec-syscheckd": "running",
+	      "ossec-agentlessd": "stopped",
 	      "ossec-analysisd": "running",
-	      "ossec-maild": "stopped"
+	      "ossec-authd": "stopped",
+	      "ossec-csyslogd": "stopped",
+	      "ossec-dbd": "stopped",
+	      "ossec-monitord": "running",
+	      "ossec-execd": "running",
+	      "ossec-integratord": "stopped",
+	      "ossec-logcollector": "running",
+	      "ossec-maild": "stopped",
+	      "ossec-remoted": "running",
+	      "ossec-reportd": "stopped",
+	      "ossec-syscheckd": "running",
+	      "wazuh-clusterd": "running",
+	      "wazuh-modulesd": "running"
 	   }
 	}
-
+	
 
 
 Logs
 ++++++++++++++++++++++++++++++++++++++++
 
 Get ossec.log
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the three last months of ossec.log.
 
 **Request**:
@@ -2395,28 +5215,28 @@ Returns the three last months of ossec.log.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``type_log``       | String        | Filters by type of log.                                                                                                                                                                                |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - all                                                                                                                                                                                                  |
-|                    |               | - error                                                                                                                                                                                                |
-|                    |               | - warning                                                                                                                                                                                              |
-|                    |               | - info                                                                                                                                                                                                 |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``category``       | String        | Filters by category of log.                                                                                                                                                                            |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``type_log``                 | String        | Filters by type of log.                                                                                                                                                                                                              |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - all                                                                                                                                                                                                                                |
+|                              |               | - error                                                                                                                                                                                                                              |
+|                              |               | - warning                                                                                                                                                                                                                            |
+|                              |               | - info                                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``category``                 | String        | Filters by category of log.                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2427,22 +5247,48 @@ Returns the three last months of ossec.log.
 ::
 
 	{
-	    "data": {
-	        "totalItems": 16480,
-	        "items": [
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Syscheck scan frequency: 3600 seconds",
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck scan (forwarding database).",
-	            "2016/07/15 09:33:49 ossec-syscheckd: INFO: Starting syscheck database (pre-scan).",
-	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Started (pid: 2832).",
-	            "2016/07/15 09:33:42 ossec-logcollector: INFO: Monitoring output of command(360): df -P"
-	        ]
-	    },
-	    "error": 0
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "timestamp": "2019-03-08 08:38:27",
+	            "tag": "ossec-remoted",
+	            "level": "info",
+	            "description": "(1409): Authentication file changed. Updating."
+	         },
+	         {
+	            "timestamp": "2019-03-08 08:38:27",
+	            "tag": "ossec-remoted",
+	            "level": "info",
+	            "description": "(1410): Reading authentication keys file."
+	         },
+	         {
+	            "timestamp": "2019-03-08 08:38:07",
+	            "tag": "ossec-remoted",
+	            "level": "info",
+	            "description": "(1409): Authentication file changed. Updating."
+	         },
+	         {
+	            "timestamp": "2019-03-08 08:38:07",
+	            "tag": "ossec-remoted",
+	            "level": "info",
+	            "description": "(1410): Reading authentication keys file."
+	         },
+	         {
+	            "timestamp": "2019-03-08 08:37:50",
+	            "tag": "ossec-syscheckd",
+	            "level": "info",
+	            "description": "Ending syscheck scan. Database completed."
+	         }
+	      ],
+	      "totalItems": 600
+	   }
 	}
+	
 
 Get summary of ossec.log
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns a summary of the last three months of the ``ossec.log`` file.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a summary of the last three months of the <code>ossec.log</code> file.
 
 **Request**:
 
@@ -2461,86 +5307,250 @@ Returns a summary of the last three months of the ``ossec.log`` file.
 	{
 	   "error": 0,
 	   "data": {
-	      "wazuh-modulesd": {
-	         "info": 20,
-	         "all": 20,
-	         "error": 0
+	      "ossec-authd": {
+	         "all": 6,
+	         "info": 6,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
 	      },
-	      "ossec-testrule": {
-	         "info": 460,
-	         "all": 460,
-	         "error": 0
-	      },
-	      "wazuh-modulesd:oscap": {
-	         "info": 5,
-	         "all": 5,
-	         "error": 0
-	      },
-	      "wazuh-clusterd-internal:inotify": {
-	         "info": 16,
-	         "all": 16,
-	         "error": 0
-	      },
-	      "wazuh-modulesd:ciscat": {
-	         "info": 5,
-	         "all": 5,
-	         "error": 0
-	      },
-	      "ossec-rootcheck": {
-	         "info": 5,
-	         "all": 5,
-	         "error": 0
-	      },
-	      "ossec-monitord": {
-	         "info": 9,
-	         "all": 9,
-	         "error": 0
-	      },
-	      "ossec-logcollector": {
-	         "info": 34,
-	         "all": 34,
-	         "error": 0
+	      "wazuh-db": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
 	      },
 	      "ossec-execd": {
-	         "info": 13,
-	         "all": 13,
-	         "error": 0
-	      },
-	      "ossec-remoted": {
-	         "info": 58,
-	         "all": 63,
-	         "error": 5
-	      },
-	      "ossec-syscheckd": {
-	         "info": 117,
-	         "all": 117,
-	         "error": 0
-	      },
-	      "wazuh-clusterd-internal": {
-	         "info": 3,
-	         "all": 3,
-	         "error": 0
+	         "all": 4,
+	         "info": 4,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
 	      },
 	      "ossec-analysisd": {
-	         "info": 1029,
-	         "all": 1029,
-	         "error": 0
+	         "all": 455,
+	         "info": 455,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-remoted": {
+	         "all": 13,
+	         "info": 13,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-monitord": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
 	      },
 	      "wazuh-modulesd:database": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:download": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "sca": {
+	         "all": 18,
+	         "info": 18,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:osquery": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:ciscat": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:oscap": {
+	         "all": 2,
+	         "info": 2,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-logcollector": {
+	         "all": 19,
+	         "info": 19,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:syscollector": {
+	         "all": 7,
+	         "info": 7,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-syscheckd": {
+	         "all": 55,
+	         "info": 55,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-rootcheck": {
+	         "all": 5,
 	         "info": 5,
-	         "all": 11,
-	         "error": 6
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
 	      }
 	   }
 	}
+	
 
+
+Restart
+++++++++++++++++++++++++++++++++++++++++
+
+Restart Wazuh manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Restarts Wazuh Manager.
+
+**Request**:
+
+``PUT`` ::
+
+	/manager/restart
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X PUT "https://127.0.0.1:55000/manager/restart?pretty"
+
+**Example Response:**
+::
+
+	{
+	    "data": "Restarting manager", 
+	    "error": 0
+	}
 
 
 Stats
 ++++++++++++++++++++++++++++++++++++++++
 
+Get analysisd stats
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a summary of the current analysisd stats.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/stats/analysisd
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/analysisd?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "total_events_decoded": 5,
+	      "syscheck_events_decoded": 0,
+	      "syscheck_edps": 0,
+	      "syscollector_events_decoded": 0,
+	      "syscollector_edps": 0,
+	      "rootcheck_events_decoded": 0,
+	      "rootcheck_edps": 0,
+	      "sca_events_decoded": 0,
+	      "sca_edps": 0,
+	      "hostinfo_events_decoded": 0,
+	      "hostinfo_edps": 0,
+	      "winevt_events_decoded": 0,
+	      "winevt_edps": 0,
+	      "other_events_decoded": 5,
+	      "other_events_edps": 1,
+	      "events_processed": 5,
+	      "events_edps": 1,
+	      "events_received": 5,
+	      "events_dropped": 0,
+	      "alerts_written": 0,
+	      "firewall_written": 0,
+	      "fts_written": 0,
+	      "syscheck_queue_usage": 0,
+	      "syscheck_queue_size": 16384,
+	      "syscollector_queue_usage": 0,
+	      "syscollector_queue_size": 16384,
+	      "rootcheck_queue_usage": 0,
+	      "rootcheck_queue_size": 16384,
+	      "sca_queue_usage": 0,
+	      "sca_queue_size": 16384,
+	      "hostinfo_queue_usage": 0,
+	      "hostinfo_queue_size": 16384,
+	      "winevt_queue_usage": 0,
+	      "winevt_queue_size": 16384,
+	      "event_queue_usage": 0,
+	      "event_queue_size": 16384,
+	      "rule_matching_queue_usage": 0,
+	      "rule_matching_queue_size": 16384,
+	      "alerts_queue_usage": 0,
+	      "alerts_queue_size": 16384,
+	      "firewall_queue_usage": 0,
+	      "firewall_queue_size": 16384,
+	      "statistical_queue_usage": 0,
+	      "statistical_queue_size": 16384,
+	      "archives_queue_usage": 0,
+	      "archives_queue_size": 16384
+	   }
+	}
+	
+
 Get manager stats
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns Wazuh statistical information for the current or specified date.
 
 **Request**:
@@ -2551,11 +5561,11 @@ Returns Wazuh statistical information for the current or specified date.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``date``           | String        | Selects the date for getting the statistical information. Format: YYYYMMDD                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``date``                     | String        | Selects the date for getting the statistical information. Format: YYYYMMDD                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2568,36 +5578,36 @@ Returns Wazuh statistical information for the current or specified date.
 	{
 	    "data": [
 	        {
-	            "hour": 5,
-	            "firewall": 0,
+	            "hour": 5, 
+	            "firewall": 0, 
 	            "alerts": [
 	                {
-	                    "level": 3,
-	                    "sigid": 5715,
+	                    "level": 3, 
+	                    "sigid": 5715, 
 	                    "times": 4
-	                },
+	                }, 
 	                {
-	                    "level": 2,
-	                    "sigid": 1002,
+	                    "level": 2, 
+	                    "sigid": 1002, 
 	                    "times": 2
-	                },
+	                }, 
 	                {
 	                    "...": "..."
 	                }
-	            ],
-	            "totalAlerts": 107,
-	            "syscheck": 1257,
+	            ], 
+	            "totalAlerts": 107, 
+	            "syscheck": 1257, 
 	            "events": 1483
-	        },
+	        }, 
 	        {
 	            "...": "..."
 	        }
-	    ],
+	    ], 
 	    "error": 0
 	}
 
 Get manager stats by hour
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns Wazuh statistical information per hour. Each number in the averages field represents the average of alerts per hour.
 
 **Request**:
@@ -2617,21 +5627,21 @@ Returns Wazuh statistical information per hour. Each number in the averages fiel
 	{
 	    "data": {
 	        "averages": [
-	            100,
-	            357,
-	            242,
-	            500,
-	            422,
-	            "...",
+	            100, 
+	            357, 
+	            242, 
+	            500, 
+	            422, 
+	            "...", 
 	            123
-	        ],
+	        ], 
 	        "interactions": 0
-	    },
+	    }, 
 	    "error": 0
 	}
 
 Get manager stats by week
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns Wazuh statistical information per week. Each number in the hours field represents the average alerts per hour for that specific day.
 
 **Request**:
@@ -2652,63 +5662,97 @@ Returns Wazuh statistical information per week. Each number in the hours field r
 	    "data": {
 	        "Wed": {
 	            "hours": [
-	                223,
-	                "...",
+	                223, 
+	                "...", 
 	                456
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Sun": {
 	            "hours": [
-	                332,
-	                "...",
+	                332, 
+	                "...", 
 	                313
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Thu": {
 	            "hours": [
-	                888,
-	                "...",
+	                888, 
+	                "...", 
 	                123
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Tue": {
 	            "hours": [
-	                536,
-	                "...",
+	                536, 
+	                "...", 
 	                345
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Mon": {
 	            "hours": [
-	                444,
-	                "...",
+	                444, 
+	                "...", 
 	                556
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Fri": {
 	            "hours": [
-	                131,
-	                "...",
+	                131, 
+	                "...", 
 	                432
-	            ],
+	            ], 
 	            "interactions": 0
-	        },
+	        }, 
 	        "Sat": {
 	            "hours": [
-	                134,
-	                "...",
+	                134, 
+	                "...", 
 	                995
-	            ],
+	            ], 
 	            "interactions": 0
 	        }
-	    },
+	    }, 
 	    "error": 0
 	}
+
+Get remoted stats
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns a summary of the current remoted stats.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/stats/remoted
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/stats/remoted?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "queue_size": 0,
+	      "total_queue_size": 131072,
+	      "tcp_sessions": 0,
+	      "evt_count": 0,
+	      "ctrl_msg_count": 0,
+	      "discarded_count": 0,
+	      "msg_sent": 0,
+	      "recv_bytes": 0
+	   }
+	}
+	
+
 
 
 Rootcheck
@@ -2717,7 +5761,7 @@ Clear
 ++++++++++++++++++++++++++++++++++++++++
 
 Clear rootcheck database
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Clears the rootcheck database for all agents.
 
 **Request**:
@@ -2735,12 +5779,12 @@ Clears the rootcheck database for all agents.
 ::
 
 	{
-	    "data": "Rootcheck database deleted",
+	    "data": "Rootcheck database deleted", 
 	    "error": 0
 	}
 
 Clear rootcheck database of an agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Clears the rootcheck database for a specific agent.
 
 **Request**:
@@ -2751,11 +5795,11 @@ Clears the rootcheck database for a specific agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2766,7 +5810,7 @@ Clears the rootcheck database for a specific agent.
 ::
 
 	{
-	    "data": "Rootcheck database deleted",
+	    "data": "Rootcheck database deleted", 
 	    "error": 0
 	}
 
@@ -2775,7 +5819,7 @@ Info
 ++++++++++++++++++++++++++++++++++++++++
 
 Get last rootcheck scan
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the timestamp of the last rootcheck scan.
 
 **Request**:
@@ -2786,11 +5830,11 @@ Returns the timestamp of the last rootcheck scan.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2803,14 +5847,14 @@ Returns the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-12-22 19:05:11",
-	      "end": "2017-12-22 16:49:40"
+	      "end": "2019-03-08 08:31:37",
+	      "start": "2019-03-08 08:31:10"
 	   }
 	}
-
+	
 
 Get rootcheck CIS requirements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the CIS requirements of all rootchecks of the specified agent.
 
 **Request**:
@@ -2821,17 +5865,17 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2842,20 +5886,19 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 ::
 
 	{
-	   "error": 0,
-	   "data": {
-	      "totalItems": 3,
-	      "items": [
-					 "1.4 Debian Linux",
-					 "4.13 Debian Linux",
-				   "4.16 Debian Linux"
-				]
-	   }
+		"error": 0,
+		"data": {
+			"totalItems": 2,
+			"items": [
+				"2.3 Debian Linux",
+				"1.4 Debian Linux"
+			]
+		}
 	}
-
+	
 
 Get rootcheck database
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the rootcheck database of an agent.
 
 **Request**:
@@ -2866,23 +5909,25 @@ Returns the rootcheck database of an agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``pci``            | String        | Filters by pci requirement.                                                                                                                                                                            |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``cis``            | String        | Filters by CIS.                                                                                                                                                                                        |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pci``                      | String        | Filters by pci requirement.                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``cis``                      | String        | Filters by CIS.                                                                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``                   | String        | Filters by status.                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2895,27 +5940,28 @@ Returns the rootcheck database of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1194,
 	      "items": [
-	         {
-	            "status": "outstanding",
-	            "oldDay": "2017-12-22 16:48:05",
-	            "readDay": "2017-12-22 19:05:35",
-	            "event": "Files hidden inside directory '/var/lib/docker/overlay2/0289a9e9ba1dbc311ce9bc92414dcb17e291cbfbcc6b5a49d3819130dc25cb62/merged'. Link count does not match number of files (21,1)."
-	         },
-	         {
-	            "status": "outstanding",
-	            "oldDay": "2017-12-22 16:48:05",
-	            "readDay": "2017-12-22 19:05:35",
-	            "event": "Files hidden inside directory '/var/lib/docker/overlay2/0289a9e9ba1dbc311ce9bc92414dcb17e291cbfbcc6b5a49d3819130dc25cb62/merged/dev'. Link count does not match number of files (4,1)."
-	         }
-	      ]
+				{
+					"status": "outstanding",
+					"readDay": "2019-03-08 09:20:05",
+					"oldDay": "2019-03-08 09:20:05",
+					"event": "System Audit: SSH Hardening - 3: Root can log in. File: /etc/ssh/sshd_config. Reference: 3 ."
+				},
+				{
+					"status": "outstanding",
+					"readDay": "2019-03-08 09:20:05",
+					"oldDay": "2019-03-08 09:20:05",
+					"pci": "2.2.4",
+					"event": "System Audit: SSH Hardening - 4: No Public Key authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 4 ."
+				},
+			],
+	      "totalItems": 0
 	   }
 	}
-
+	
 
 Get rootcheck pci requirements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the PCI requirements of all rootchecks of the agent.
 
 **Request**:
@@ -2926,17 +5972,17 @@ Returns the PCI requirements of all rootchecks of the agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -2949,22 +5995,21 @@ Returns the PCI requirements of all rootchecks of the agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2,
-				"items": [
-				   "2.2.2",
-				   "2.2.4"
-				]
+	      "totalItems": 0,
+	      "items": [
+				"2.2.4"
+			]
 	   }
 	}
-
+	
 
 
 Run
 ++++++++++++++++++++++++++++++++++++++++
 
 Run rootcheck scan in all agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously).
 
 **Request**:
 
@@ -2981,13 +6026,13 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents",
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
 	    "error": 0
 	}
 
 Run rootcheck scan in an agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on a the specified agent (Wazuh launches both processes simultaneously)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Runs syscheck and rootcheck on a specified agent (Wazuh launches both processes simultaneously)
 
 **Request**:
 
@@ -2997,11 +6042,11 @@ Runs syscheck and rootcheck on a the specified agent (Wazuh launches both proces
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3015,6 +6060,8 @@ Runs syscheck and rootcheck on a the specified agent (Wazuh launches both proces
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
+	
+
 
 
 Rules
@@ -3023,7 +6070,7 @@ Info
 ++++++++++++++++++++++++++++++++++++++++
 
 Get all rules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns all rules.
 
 **Request**:
@@ -3034,35 +6081,37 @@ Returns all rules.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters the rules by status.                                                                                                                                                                           |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - enabled                                                                                                                                                                                              |
-|                    |               | - disabled                                                                                                                                                                                             |
-|                    |               | - all                                                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``group``          | String        | Filters the rules by group.                                                                                                                                                                            |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``level``          | Range         | Filters the rules by level. level=2 or level=2-5.                                                                                                                                                      |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``           | String        | Filters the rules by path.                                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters the rules by file name.                                                                                                                                                                        |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``pci``            | String        | Filters the rules by pci requirement.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``                   | String        | Filters the rules by status.                                                                                                                                                                                                         |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - enabled                                                                                                                                                                                                                            |
+|                              |               | - disabled                                                                                                                                                                                                                           |
+|                              |               | - all                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``group``                    | String        | Filters the rules by group.                                                                                                                                                                                                          |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``level``                    | Range         | Filters the rules by level. level=2 or level=2-5.                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``path``                     | String        | Filters the rules by path.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file``                     | String        | Filters the rules by file name.                                                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pci``                      | String        | Filters the rules by pci requirement.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``gdpr``                     | String        | Filters the rules by gdpr.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3075,47 +6124,49 @@ Returns all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1565,
 	      "items": [
 	         {
-	            "status": "enabled",
-	            "pci": [],
-	            "description": "Generic template for all syslog rules.",
 	            "file": "0010-rules_config.xml",
+	            "path": "ruleset/rules",
+	            "id": 1,
 	            "level": 0,
-	            "path": "/var/ossec/ruleset/rules",
+	            "description": "Generic template for all syslog rules.",
+	            "status": "enabled",
 	            "groups": [
 	               "syslog"
 	            ],
-	            "id": 1,
+	            "pci": [],
+	            "gdpr": [],
 	            "details": {
-	               "category": "syslog",
-	               "noalert": "1"
+	               "noalert": "1",
+	               "category": "syslog"
 	            }
 	         },
 	         {
-	            "status": "enabled",
-	            "pci": [],
-	            "description": "Generic template for all firewall rules.",
 	            "file": "0010-rules_config.xml",
+	            "path": "ruleset/rules",
+	            "id": 2,
 	            "level": 0,
-	            "path": "/var/ossec/ruleset/rules",
+	            "description": "Generic template for all firewall rules.",
+	            "status": "enabled",
 	            "groups": [
 	               "firewall"
 	            ],
-	            "id": 2,
+	            "pci": [],
+	            "gdpr": [],
 	            "details": {
-	               "category": "firewall",
-	               "noalert": "1"
+	               "noalert": "1",
+	               "category": "firewall"
 	            }
 	         }
-	      ]
+	      ],
+	      "totalItems": 2167
 	   }
 	}
-
+	
 
 Get files of rules
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the files of all rules.
 
 **Request**:
@@ -3126,31 +6177,31 @@ Returns the files of all rules.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``status``         | String        | Filters files by status.                                                                                                                                                                               |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - enabled                                                                                                                                                                                              |
-|                    |               | - disabled                                                                                                                                                                                             |
-|                    |               | - all                                                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``           | String        | Filters the rules by path.                                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters the rules by filefile.                                                                                                                                                                         |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``download``       | String        | Downloads the file                                                                                                                                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``status``                   | String        | Filters files by status.                                                                                                                                                                                                             |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - enabled                                                                                                                                                                                                                            |
+|                              |               | - disabled                                                                                                                                                                                                                           |
+|                              |               | - all                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``path``                     | String        | Filters the rules by path.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file``                     | String        | Filters the rules by filefile.                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``download``                 | String        | Downloads the file                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3163,66 +6214,112 @@ Returns the files of all rules.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 100,
 	      "items": [
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0010-rules_config.xml"
+	            "file": "0010-rules_config.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0015-ossec_rules.xml"
+	            "file": "0015-ossec_rules.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0016-wazuh_rules.xml"
+	            "file": "0016-wazuh_rules.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0020-syslog_rules.xml"
+	            "file": "0020-syslog_rules.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0025-sendmail_rules.xml"
+	            "file": "0025-sendmail_rules.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0030-postfix_rules.xml"
+	            "file": "0030-postfix_rules.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0035-spamd_rules.xml"
+	            "file": "0035-spamd_rules.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0040-imapd_rules.xml"
+	            "file": "0040-imapd_rules.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0045-mailscanner_rules.xml"
+	            "file": "0045-mailscanner_rules.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         },
 	         {
-	            "status": "enabled",
-	            "path": "/var/ossec/ruleset/rules",
-	            "file": "0050-ms-exchange_rules.xml"
+	            "file": "0050-ms-exchange_rules.xml",
+	            "path": "ruleset/rules",
+	            "status": "enabled"
 	         }
-	      ]
+	      ],
+	      "totalItems": 111
 	   }
 	}
+	
 
+Get rule gdpr requirements
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the GDPR requirements of all rules.
+
+**Request**:
+
+``GET`` ::
+
+	/rules/gdpr
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/rules/gdpr?offset=0&limit=10&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         "II_5.1.f",
+	         "IV_30.1.g",
+	         "IV_32.2",
+	         "IV_35.7.d"
+	      ],
+	      "totalItems": 4
+	   }
+	}
+	
 
 Get rule groups
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the groups of all rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the groups of all rules.
 
 **Request**:
 
@@ -3232,17 +6329,17 @@ Returns the groups of all rules
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3255,7 +6352,6 @@ Returns the groups of all rules
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 281,
 	      "items": [
 	         "access_control",
 	         "access_denied",
@@ -3267,14 +6363,15 @@ Returns the groups of all rules
 	         "agent_flooding",
 	         "agent_restarting",
 	         "agentless"
-	      ]
+	      ],
+	      "totalItems": 318
 	   }
 	}
-
+	
 
 Get rule pci requirements
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the PCI requirements of all rules
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the PCI requirements of all rules.
 
 **Request**:
 
@@ -3284,17 +6381,17 @@ Returns the PCI requirements of all rules
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3307,7 +6404,6 @@ Returns the PCI requirements of all rules
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 38,
 	      "items": [
 	         "1.1.1",
 	         "1.3.4",
@@ -3319,13 +6415,14 @@ Returns the PCI requirements of all rules
 	         "10.2.5",
 	         "10.2.6",
 	         "10.2.7"
-	      ]
+	      ],
+	      "totalItems": 38
 	   }
 	}
-
+	
 
 Get rules by id
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the rules with the specified id.
 
 **Request**:
@@ -3336,19 +6433,19 @@ Returns the rules with the specified id.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``id``             | Number        | rule.                                                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``id``                       | Number        | rule.                                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3361,29 +6458,357 @@ Returns the rules with the specified id.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 1,
 	      "items": [
 	         {
-	            "status": "enabled",
-	            "pci": [],
-	            "description": "Unknown problem somewhere in the system.",
 	            "file": "0020-syslog_rules.xml",
+	            "path": "ruleset/rules",
+	            "id": 1002,
 	            "level": 2,
-	            "path": "/var/ossec/ruleset/rules",
+	            "description": "Unknown problem somewhere in the system.",
+	            "status": "enabled",
 	            "groups": [
 	               "gpg13_4.3",
 	               "syslog",
 	               "errors"
 	            ],
-	            "id": 1002,
+	            "pci": [],
+	            "gdpr": [],
 	            "details": {
-	               "options": "alert_by_email",
-	               "match": "$BAD_WORDS"
+	               "match": "core_dumped|failure|error|attack| bad |illegal |denied|refused|unauthorized|fatal|failed|Segmentation Fault|Corrupted"
 	            }
+	         }
+	      ],
+	      "totalItems": 1
+	   }
+	}
+	
+
+
+
+Security Configuration Assessment
+----------------------------------------
+Info
+++++++++++++++++++++++++++++++++++++++++
+
+Get security configuration assessment (SCA) checks database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the sca checks of an agent
+
+**Request**:
+
+``GET`` ::
+
+	/sca/:agent_id/checks/:id
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``policy_id``                | String        | Filters by scan id                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``title``                    | String        | Filters by title                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``description``              | String        | Filters by policy description                                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rationale``                | String        | Filters by rationale                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``remediation``              | String        | Filters by remediation                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file``                     | String        | Filters by file                                                                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``process``                  | String        | Filters by process                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``directory``                | String        | Filters by directory                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``registry``                 | String        | Filters by registry                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``references``               | String        | Filters by references                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``result``                   | String        | Filters by result                                                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000/checks/system_audit?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 16,
+	      "items": [
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
+	            "policy_id": "system_audit",
+	            "title": "Web vulnerability - .htaccess file compromised - auto append",
+	            "id": 1015,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
+	            "policy_id": "system_audit",
+	            "title": "Web vulnerability - .htaccess file compromised",
+	            "id": 1014,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode(POST ",
+	            "id": 1013,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode",
+	            "id": 1012,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web vulnerability - Outdated osCommerce (v2.2) installation",
+	            "id": 1011,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web vulnerability - Outdated Joomla installation",
+	            "id": 1010,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web vulnerability - Outdated WordPress installation",
+	            "id": 1009,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
+	            "id": 1008,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
+	            "id": 1007,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web exploits (uncommon file name inside htdocs)",
+	            "id": 1006,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
+	            "id": 1005,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
+	            "id": 1004,
+	            "compliance": [
+	               {
+	                  "value": "6.5, 6.6, 11.4",
+	                  "key": "pci_dss"
+	               }
+	            ]
+	         },
+	         {
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "PHP - Displaying of errors is enabled",
+	            "file": "/etc/php.ini",
+	            "id": 1003,
+	            "compliance": []
+	         },
+	         {
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "PHP - Allow URL fopen is enabled",
+	            "file": "/etc/php.ini",
+	            "id": 1002,
+	            "compliance": []
+	         },
+	         {
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "PHP - Expose PHP is enabled",
+	            "file": "/etc/php.ini",
+	            "id": 1001,
+	            "compliance": []
+	         },
+	         {
+	            "result": "passed",
+	            "policy_id": "system_audit",
+	            "title": "PHP - Register globals are enabled",
+	            "file": "/etc/php.ini",
+	            "id": 1000,
+	            "compliance": []
 	         }
 	      ]
 	   }
 	}
+	
+
+Get security configuration assessment (SCA) database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the security sca database of an agent.
+
+**Request**:
+
+``GET`` ::
+
+	/sca/:agent_id
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``name``                     | String        | Filters by policy name.                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``description``              | String        | Filters by policy description                                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``references``               | String        | Filters by references                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``q``                        | String        | Query to filter results by. This is specially useful to filter by total checks passed, failed or total score (fields pass, fail, score).                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/sca/000?q=pass>50;score<150&pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "totalItems": 1,
+	      "items": [
+	         {
+	            "name": "System audit for web-related vulnerabilities",
+	            "description": "Guidance for establishing a secure configuration for web-related vulnerabilities.",
+	            "references": "(null)",
+	            "pass": 76,
+	            "policy_id": "system_audit",
+	            "fail": 0,
+	            "score": 100,
+	            "end_scan": "2019-03-08 08:30:58",
+	            "start_scan": "2019-03-08 08:30:58"
+	         }
+	      ]
+	   }
+	}
+	
+
 
 
 Syscheck
@@ -3391,31 +6816,8 @@ Syscheck
 Clear
 ++++++++++++++++++++++++++++++++++++++++
 
-Clear syscheck database
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Clears the syscheck database for all agents.
-
-**Request**:
-
-``DELETE`` ::
-
-	/syscheck
-
-**Example Request:**
-::
-
-	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/syscheck?pretty"
-
-**Example Response:**
-::
-
-	{
-	    "data": "Syscheck database deleted",
-	    "error": 0
-	}
-
 Clear syscheck database of an agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Clears the syscheck database for the specified agent.
 
 **Request**:
@@ -3426,11 +6828,11 @@ Clears the syscheck database for the specified agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3441,7 +6843,7 @@ Clears the syscheck database for the specified agent.
 ::
 
 	{
-	    "data": "Syscheck database deleted",
+	    "data": "Syscheck database deleted", 
 	    "error": 0
 	}
 
@@ -3450,7 +6852,7 @@ Info
 ++++++++++++++++++++++++++++++++++++++++
 
 Get last syscheck scan
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Return the timestamp of the last syscheck scan.
 
 **Request**:
@@ -3461,11 +6863,11 @@ Return the timestamp of the last syscheck scan.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3478,14 +6880,14 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2017-12-22 19:23:19",
-	      "end": "2017-12-22 19:05:11"
+	      "start": "2019-03-08 08:31:10",
+	      "end": "2019-03-08 08:31:55"
 	   }
 	}
-
+	
 
 Get syscheck files
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Returns the syscheck files of an agent.
 
 **Request**:
@@ -3496,50 +6898,45 @@ Returns the syscheck files of an agent.
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``offset``         | Number        | First element to return in the collection.                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``limit``          | Number        | Maximum number of elements to return.                                                                                                                                                                  |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sort``           | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                     |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``search``         | String        | Looks for elements with the specified string.                                                                                                                                                          |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``event``          | String        | Filters files by event.                                                                                                                                                                                |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - added                                                                                                                                                                                                |
-|                    |               | - readded                                                                                                                                                                                              |
-|                    |               | - modified                                                                                                                                                                                             |
-|                    |               | - deleted                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``file``           | String        | Filters file by filename.                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``filetype``       | String        | Selects type of file.                                                                                                                                                                                  |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - file                                                                                                                                                                                                 |
-|                    |               | - registry                                                                                                                                                                                             |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``summary``        | String        | Returns a summary grouping by filename.                                                                                                                                                                |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | Allowed values:                                                                                                                                                                                        |
-|                    |               |                                                                                                                                                                                                        |
-|                    |               | - yes                                                                                                                                                                                                  |
-|                    |               | - no                                                                                                                                                                                                   |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``md5``            | String        | Returns the files with the specified md5 hash.                                                                                                                                                         |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``sha1``           | String        | Returns the files with the specified sha1 hash.                                                                                                                                                        |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``hash``           | String        | Returns the files with the specified hash (md5 or sha1).                                                                                                                                               |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``file``                     | String        | Filters file by filename.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``type``                     | String        | Selects type of file.                                                                                                                                                                                                                |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - file                                                                                                                                                                                                                               |
+|                              |               | - registry                                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``summary``                  | String        | Returns a summary grouping by filename.                                                                                                                                                                                              |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - yes                                                                                                                                                                                                                                |
+|                              |               | - no                                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``md5``                      | String        | Returns the files with the specified md5 hash.                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sha1``                     | String        | Returns the files with the specified sha1 hash.                                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sha256``                   | String        | Returns the files with the specified sha256 hash.                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``hash``                     | String        | Returns the files with the specified hash (md5, sha1 or sha256).                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3550,53 +6947,54 @@ Returns the syscheck files of an agent.
 ::
 
 	{
-	    "data": {
-	        "totalItems": 2762,
-	        "items": [
-	            {
-	                "size": 157721,
-	                "uid": 0,
-	                "scanDate": "2017-03-02 23:43:28",
-	                "user": "root",
-	                "file": "!1488498208 /boot/config-3.16.0-4-amd64",
-	                "modificationDate": "2016-10-19 06:45:50",
-	                "octalMode": "100644",
-	                "inode": 5217,
-	                "event": "added",
-	                "permissions": "-rw-r--r--",
-	                "sha1": "4fed08ccbd0168593a6fffcd925adad65e5ae6d9",
-	                "group": "root",
-	                "gid": 0,
-	                "md5": "46d43391ae54c1084a2d40e8d1b4873c"
-	            },
-	            {
-	                "size": 2679264,
-	                "uid": 0,
-	                "scanDate": "2017-03-02 23:43:26",
-	                "user": "root",
-	                "file": "!1488498206 /boot/System.map-3.16.0-4-amd64",
-	                "modificationDate": "2016-10-19 06:45:50",
-	                "octalMode": "100644",
-	                "inode": 5216,
-	                "event": "added",
-	                "permissions": "-rw-r--r--",
-	                "sha1": "d48151a3d3638b723f5d7bc1e9c71d478fcde4e6",
-	                "group": "root",
-	                "gid": 0,
-	                "md5": "29cc12246faecd4a14d212b4d9bac0fe"
-	            }
-	        ]
-	    },
-	    "error": 0
+	   "error": 0,
+	   "data": {
+	      "totalItems": 2885,
+	      "items": [
+	         {
+	            "gname": "root",
+	            "perm": "100644",
+	            "md5": "f7bf238a3b0bf155c565454a9f819731",
+	            "type": "file",
+	            "date": "2019-03-08 08:31:15",
+	            "uname": "root",
+	            "uid": "0",
+	            "sha256": "a39fbc57dc2ef8a473f078d1f6a35f725809400df67070b8852e8ed725047df2",
+	            "gid": "0",
+	            "size": 1580,
+	            "mtime": "2018-11-05 11:51:29",
+	            "inode": 1579,
+	            "sha1": "016f8bd2ea009451042a856611d5d2967760e833",
+	            "file": "/etc/ssh/ssh_config"
+	         },
+	         {
+	            "gname": "root",
+	            "perm": "100644",
+	            "md5": "fe5be9e1b2ad5c55132a3521ecaadcdd",
+	            "type": "file",
+	            "date": "2019-03-08 08:31:15",
+	            "uname": "root",
+	            "uid": "0",
+	            "sha256": "9fa9dd312da04fbad130b70c96bf9707b8dc72cbdbb304d69bf58f52f94883b4",
+	            "gid": "0",
+	            "size": 553122,
+	            "mtime": "2018-11-05 11:51:29",
+	            "inode": 1578,
+	            "sha1": "6541fc14923473fcd2e04c98248c9ef2613050b1",
+	            "file": "/etc/ssh/moduli"
+	         }
+	      ]
+	   }
 	}
+	
 
 
 Run
 ++++++++++++++++++++++++++++++++++++++++
 
 Run syscheck scan in all agents
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Runs syscheck and rootcheck on all agents (Wazuh launches both processes simultaneously).
 
 **Request**:
 
@@ -3613,13 +7011,13 @@ Runs syscheck and rootcheck on all agents (Wazuh launches both processes simulta
 ::
 
 	{
-	    "data": "Restarting Syscheck/Rootcheck on all agents",
+	    "data": "Restarting Syscheck/Rootcheck on all agents", 
 	    "error": 0
 	}
 
 Run syscheck scan in an agent
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultaneously)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultaneously).
 
 **Request**:
 
@@ -3629,11 +7027,11 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 
 **Parameters:**
 
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Param              | Type          | Description                                                                                                                                                                                            |
-+====================+===============+========================================================================================================================================================================================================+
-| ``agent_id``       | Number        | Agent ID.                                                                                                                                                                                              |
-+--------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
@@ -3647,3 +7045,718 @@ Runs syscheck and rootcheck on an agent (Wazuh launches both processes simultane
 	   "error": 0,
 	   "data": "Restarting Syscheck/Rootcheck locally"
 	}
+	
+
+
+
+Syscollector
+----------------------------------------
+Hardware
+++++++++++++++++++++++++++++++++++++++++
+
+Get hardware info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's hardware info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/hardware
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/hardware?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "cpu": {
+	         "cores": 2,
+	         "mhz": 1991.999,
+	         "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
+	      },
+	      "ram": {
+	         "free": 55592,
+	         "total": 492832,
+	         "usage": 89
+	      },
+	      "scan": {
+	         "id": 599386135,
+	         "time": "2019/03/08 08:30:53"
+	      },
+	      "board_serial": "0"
+	   }
+	}
+	
+
+
+Netaddr
+++++++++++++++++++++++++++++++++++++++++
+
+Get network address info of an agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's network address info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/netaddr
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``iface``                    | String        | Filters by interface name.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``proto``                    | String        | Filters by proto.                                                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``address``                  | String        | Filters by address.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``broadcast``                | String        | Filters by broadcast.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``netmask``                  | String        | Filters by netmask.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netaddr?pretty&limit=2&sort=proto"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "proto": "ipv6",
+	            "address": "fe80::f9:71ff:fed7:9d11",
+	            "iface": "enp0s3",
+	            "netmask": "ffff:ffff:ffff:ffff::",
+	            "scan_id": 1478544824
+	         },
+	         {
+	            "proto": "ipv6",
+	            "address": "fe80::a00:27ff:fe78:5d4",
+	            "iface": "enp0s8",
+	            "netmask": "ffff:ffff:ffff:ffff::",
+	            "scan_id": 1478544824
+	         }
+	      ],
+	      "totalItems": 4
+	   }
+	}
+	
+
+
+Netiface
+++++++++++++++++++++++++++++++++++++++++
+
+Get network interface info of an agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's network interface info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/netiface
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``name``                     | String        | Filters by name.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``adapter``                  | String        | Filters by adapter.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``type``                     | String        | Filters by type.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``state``                    | String        | Filters by state.                                                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``mtu``                      | String        | Filters by mtu.                                                                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_packets``               | String        | Filters by tx_packets.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rx_packets``               | String        | Filters by rx_packets.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_bytes``                 | String        | Filters by tx_bytes.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rx_bytes``                 | String        | Filters by rx_bytes.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_errors``                | String        | Filters by tx_errors.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rx_errors``                | String        | Filters by rx_errors.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_dropped``               | String        | Filters by tx_dropped.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rx_dropped``               | String        | Filters by rx_dropped.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netiface?pretty&limit=2&sort=state"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "rx": {
+	               "bytes": 151695946,
+	               "dropped": 0,
+	               "errors": 0,
+	               "packets": 111792
+	            },
+	            "scan": {
+	               "id": 1478544824,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "tx": {
+	               "bytes": 2408059,
+	               "dropped": 0,
+	               "errors": 0,
+	               "packets": 35104
+	            },
+	            "name": "enp0s3",
+	            "state": "up",
+	            "type": "ethernet",
+	            "mtu": 1500,
+	            "mac": "02:f9:71:d7:9d:11"
+	         },
+	         {
+	            "rx": {
+	               "bytes": 0,
+	               "dropped": 0,
+	               "errors": 0,
+	               "packets": 0
+	            },
+	            "scan": {
+	               "id": 1478544824,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "tx": {
+	               "bytes": 5312,
+	               "dropped": 0,
+	               "errors": 0,
+	               "packets": 24
+	            },
+	            "name": "enp0s8",
+	            "state": "up",
+	            "type": "ethernet",
+	            "mtu": 1500,
+	            "mac": "08:00:27:78:05:d4"
+	         }
+	      ],
+	      "totalItems": 2
+	   }
+	}
+	
+
+
+Netproto
+++++++++++++++++++++++++++++++++++++++++
+
+Get network protocol info of an agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's network protocol info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/netproto
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``iface``                    | String        | Filters by iface.                                                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``type``                     | String        | Filters by type.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``gateway``                  | String        | Filters by gateway.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``dhcp``                     | String        | Filters by dhcp.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/netproto?pretty&limit=2&sort=type"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "type": "ipv6",
+	            "iface": "enp0s3",
+	            "dhcp": "enabled",
+	            "scan_id": 1478544824
+	         },
+	         {
+	            "type": "ipv6",
+	            "iface": "enp0s8",
+	            "dhcp": "enabled",
+	            "scan_id": 1478544824
+	         }
+	      ],
+	      "totalItems": 4
+	   }
+	}
+	
+
+
+OS
+++++++++++++++++++++++++++++++++++++++++
+
+Get os info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's OS info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/os
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/os?pretty"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "os": {
+	         "codename": "Bionic Beaver",
+	         "major": "18",
+	         "minor": "04",
+	         "name": "Ubuntu",
+	         "platform": "ubuntu",
+	         "version": "18.04.1 LTS (Bionic Beaver)"
+	      },
+	      "scan": {
+	         "id": 242764188,
+	         "time": "2019/03/08 08:30:53"
+	      },
+	      "architecture": "x86_64",
+	      "release": "4.15.0-43-generic",
+	      "version": "#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018",
+	      "sysname": "Linux",
+	      "hostname": "master"
+	   }
+	}
+	
+
+
+Packages
+++++++++++++++++++++++++++++++++++++++++
+
+Get packages info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's packages info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/packages
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``vendor``                   | String        | Filters by vendor.                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``name``                     | String        | Filters by name.                                                                                                                                                                                                                     |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``architecture``             | String        | Filters by architecture.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``format``                   | String        | Filters by format.                                                                                                                                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``version``                  | String        | Filters by version.                                                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/packages?pretty&limit=2&offset=10&sort=-name"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "scan": {
+	               "id": 520922172,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
+	            "name": "base-files",
+	            "priority": "required",
+	            "description": "Debian base system miscellaneous files",
+	            "architecture": "amd64",
+	            "format": "deb",
+	            "size": 386,
+	            "version": "10.1ubuntu2.3",
+	            "section": "admin",
+	            "multiarch": "foreign"
+	         },
+	         {
+	            "scan": {
+	               "id": 520922172,
+	               "time": "2019/03/08 08:30:53"
+	            },
+	            "vendor": "Colin Watson <cjwatson@debian.org>",
+	            "name": "base-passwd",
+	            "priority": "required",
+	            "description": "Debian base system master password and group files",
+	            "architecture": "amd64",
+	            "format": "deb",
+	            "size": 228,
+	            "version": "3.5.44",
+	            "section": "admin",
+	            "multiarch": "foreign"
+	         }
+	      ],
+	      "totalItems": 535
+	   }
+	}
+	
+
+
+Ports
+++++++++++++++++++++++++++++++++++++++++
+
+Get ports info of an agent
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's ports info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/ports
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pid``                      | Number        | Filters by pid.                                                                                                                                                                                                                      |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``protocol``                 | String        | Filters by protocol.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``local_ip``                 | String        | Filters by local_ip.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``local_port``               | Number        | Filters by local_port.                                                                                                                                                                                                               |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``remote_ip``                | String        | Filters by remote_ip.                                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``tx_queue``                 | Number        | Filters by tx_queue.                                                                                                                                                                                                                 |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``state``                    | String        | Filters by state.                                                                                                                                                                                                                    |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/ports?pretty&sort=-protocol&limit=2"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "local": {
+	               "ip": "0.0.0.0",
+	               "port": 1515
+	            },
+	            "remote": {
+	               "ip": "0.0.0.0",
+	               "port": 0
+	            },
+	            "scan": {
+	               "id": 2112182802,
+	               "time": "2019/03/08 08:30:59"
+	            },
+	            "state": "listening",
+	            "tx_queue": 0,
+	            "rx_queue": 0,
+	            "inode": 255211,
+	            "protocol": "tcp"
+	         },
+	         {
+	            "local": {
+	               "ip": "0.0.0.0",
+	               "port": 1516
+	            },
+	            "remote": {
+	               "ip": "0.0.0.0",
+	               "port": 0
+	            },
+	            "scan": {
+	               "id": 2112182802,
+	               "time": "2019/03/08 08:30:59"
+	            },
+	            "state": "listening",
+	            "tx_queue": 0,
+	            "rx_queue": 0,
+	            "inode": 256005,
+	            "protocol": "tcp"
+	         }
+	      ],
+	      "totalItems": 6
+	   }
+	}
+	
+
+
+Processes
+++++++++++++++++++++++++++++++++++++++++
+
+Get processes info
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the agent's processes info
+
+**Request**:
+
+``GET`` ::
+
+	/syscollector/:agent_id/processes
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``offset``                   | Number        | First element to return in the collection.                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``limit``                    | Number        | Maximum number of elements to return.                                                                                                                                                                                                |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sort``                     | String        | Sorts the collection by a field or fields (separated by comma). Use +/- at the beginning to list in ascending or descending order.                                                                                                   |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``search``                   | String        | Looks for elements with the specified string.                                                                                                                                                                                        |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``select``                   | String        | List of selected fields.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pid``                      | Number        | Filters by process pid.                                                                                                                                                                                                              |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``state``                    | String        | Filters by process state.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``ppid``                     | Number        | Filters by process parent pid.                                                                                                                                                                                                       |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``egroup``                   | String        | Filters by process egroup.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``euser``                    | String        | Filters by process euser.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``fgroup``                   | String        | Filters by process fgroup.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``name``                     | String        | Filters by process name.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``nlwp``                     | Number        | Filters by process nlwp.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``pgrp``                     | Number        | Filters by process pgrp.                                                                                                                                                                                                             |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``priority``                 | Number        | Filters by process priority.                                                                                                                                                                                                         |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``rgroup``                   | String        | Filters by process rgroup.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``ruser``                    | String        | Filters by process ruser.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``sgroup``                   | String        | Filters by process sgroup.                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``suser``                    | String        | Filters by process suser.                                                                                                                                                                                                            |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/syscollector/000/processes?pretty&limit=2&offset=10&sort=-name"
+
+**Example Response:**
+::
+
+	{
+	   "error": 0,
+	   "data": {
+	      "items": [
+	         {
+	            "scan": {
+	               "id": 225991434,
+	               "time": "2019/03/08 08:30:59"
+	            },
+	            "fgroup": "root",
+	            "state": "S",
+	            "priority": 20,
+	            "suser": "root",
+	            "ppid": 2196,
+	            "vm_size": 13312,
+	            "session": 2195,
+	            "pid": "2204",
+	            "nlwp": 1,
+	            "name": "bash",
+	            "euser": "root",
+	            "sgroup": "root",
+	            "size": 3328,
+	            "stime": 0,
+	            "nice": 0,
+	            "argvs": "/tmp/vagrant-shell,172.17.0.100,master,node01",
+	            "share": 595,
+	            "processor": 1,
+	            "ruser": "root",
+	            "cmd": "bash",
+	            "egroup": "root",
+	            "rgroup": "root",
+	            "pgrp": 2195,
+	            "resident": 659,
+	            "utime": 0,
+	            "tgid": 2204,
+	            "start_time": 4822,
+	            "tty": 0
+	         },
+	         {
+	            "scan": {
+	               "id": 225991434,
+	               "time": "2019/03/08 08:30:59"
+	            },
+	            "fgroup": "root",
+	            "state": "I",
+	            "priority": 0,
+	            "suser": "root",
+	            "ppid": 2,
+	            "vm_size": 0,
+	            "session": 0,
+	            "pid": "121",
+	            "nlwp": 1,
+	            "name": "charger_manager",
+	            "euser": "root",
+	            "sgroup": "root",
+	            "size": 0,
+	            "stime": 0,
+	            "nice": -20,
+	            "share": 0,
+	            "processor": 1,
+	            "ruser": "root",
+	            "egroup": "root",
+	            "rgroup": "root",
+	            "pgrp": 0,
+	            "resident": 0,
+	            "utime": 0,
+	            "tgid": 121,
+	            "start_time": 1009,
+	            "tty": 0
+	         }
+	      ],
+	      "totalItems": 120
+	   }
+	}
+	
+
+
+

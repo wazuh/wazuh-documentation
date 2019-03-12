@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _alert-threshold:
 
 Defining an alert level threshold
@@ -20,7 +22,7 @@ The alert level threshold is configured in the ``ossec.conf`` file using the ``<
 
 This will set the minimum severity level that will trigger alerts that will be stored in the ``alerts.log`` and/or the ``alerts.json`` file(s).
 
-When any value is changed in the ``ossec.conf`` file, the service must be restarted before the changes will take effect. 
+When any value is changed in the ``ossec.conf`` file, the service must be restarted before the changes will take effect.
 
 a. For Systemd:
 

@@ -1,15 +1,14 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _ossec-authd:
 
 ossec-authd
 ===========
 
-The ossec-authd program can automatically add an agent to a Wazuh manager and provide the key to the agent. The :ref:`agent-auth` application is the client application used with ``ossec-authd``.  ``ossec-authd`` creates an agent with an IP address of "any" instead of using a specifig IP address.
+The ``ossec-authd`` program can automatically add an agent to a Wazuh manager and provide the key to the agent. It's used along with the :ref:`agent-auth` application. The program creates an agent with an IP address of ``any`` instead of using a specific IP address.
 
 .. warning::
-
-    By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
-
+  By default, there is no authentication or authorization involved in this transaction, so it is recommended that this daemon only be run when a new agent is being added.
 
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-V**           | Version and license message.                                                                          |
@@ -21,14 +20,6 @@ The ossec-authd program can automatically add an agent to a Wazuh manager and pr
 | **-t**           | Test configuration.                                                                                   |
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-f**           | Run in foreground.                                                                                    |
-+------------------+-------------------------------------------------------------------------------------------------------+
-| **-i**           | Use client's source IP address instead of any.                                                        |
-+------------------+-------------------------------------------------------------------------------------------------------+
-| **-F <time>**    | Remove old agent with same name or IP if its keepalive has more than the specified number of seconds. |
-+------------------+-------------------------------------------------------------------------------------------------------+
-| **-F no**        | Disable force insertion.                                                                              |
-+------------------+-------------------------------------------------------------------------------------------------------+
-| **-r**           | Do not keep removed agents (delete).                                                                  |
 +------------------+-------------------------------------------------------------------------------------------------------+
 | **-g <group>**   | Group to run as.                                                                                      |
 +                  +-------------+-----------------------------------------------------------------------------------------+
@@ -66,6 +57,5 @@ The ossec-authd program can automatically add an agent to a Wazuh manager and pr
 +------------------+-------------+-----------------------------------------------------------------------------------------+
 | **-L**           | Force insertion even though agent limit has been reached.                                             |
 +------------------+-------------------------------------------------------------------------------------------------------+
-
 
 .. _`SSL ciphers`: https://www.openssl.org/docs/man1.1.0/apps/ciphers.html

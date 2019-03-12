@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _smtp_authentication:
 
 SMTP server with authentication
@@ -14,7 +16,7 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
       # apt-get install postfix mailutils libsasl2-2 ca-certificates libsasl2-modules
 
     CentOS
-    
+
     .. code-block:: console
 
       # yum update && yum install postfix mailx cyrus-sasl cyrus-sasl-plain
@@ -50,14 +52,14 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
       # postmap /etc/postfix/sasl_passwd
       # chmod 400 /etc/postfix/sasl_passwd
 
-#. Secure the DB password
+#. Secure the DB password:
 
     .. code-block:: console
 
       # chown root:root /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
       # chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
 
-#. Restart Postfix
+#. Restart Postfix:
 
     .. code-block:: console
 
@@ -67,9 +69,9 @@ If your SMTP server uses authentication (like Gmail, for instance), a server rel
 
     .. code-block:: console
 
-      # echo "Test mail from postfix" | mail -s "Test Postfix" you@example.com
+      # echo "Test mail from postfix" | mail -s "Test Postfix" -r "you@example.com" you@example.com
 
-    You should receive an email at ``you@example.com``
+    You should receive an email at ``you@example.com``.
 
 #. Configure Wazuh in the ``/var/ossec/etc/ossec.conf`` as follows:
 

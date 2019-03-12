@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wodle_openscap:
 
 wodle name="open-scap"
@@ -93,7 +95,7 @@ Attributes
 +-------------------+-------------------------------------------------------------+
 | **path**          | Use the specified policy file (DataStream, XCCDF or OVAL).  |
 |                   |                                                             |
-|                   | Default path: /var/ossec/wodles/oscap/policies              |
+|                   | Default path: /var/ossec/wodles/oscap/content               |
 +-------------------+-------------------------------------------------------------+
 | **timeout**       | Timeout for the evaluation (in seconds).                    |
 |                   |                                                             |
@@ -107,7 +109,7 @@ Attributes
 +-------------------+-------------------------------------------------------------+
 | **cpe**           | CPE dictionary file.                                        |
 |                   |                                                             |
-|                   | Default path: /var/ossec/wodles/oscap/policies              |
+|                   | Default path: /var/ossec/wodles/oscap/content               |
 +-------------------+-------------------------------------------------------------+
 | **profile**       | Select profile.                                             |
 +-------------------+-------------------------------------------------------------+
@@ -123,7 +125,7 @@ Example of configuration
     <interval>1d</interval>
     <scan-on-start>yes</scan-on-start>
 
-    <content type="xccdf" path="ssg-centos7-ds.xml"/>
-    <content type="xccdf" path="ssg-centos6-ds.xml"/>
+    <content type="xccdf" path="ssg-centos-7-ds.xml"/>
+    <content type="xccdf" path="ssg-centos-6-ds.xml"/>
 
   </wodle>

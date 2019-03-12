@@ -1,5 +1,6 @@
-.. _reference_ossec_rootcheck:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_rootcheck:
 
 rootcheck
 =========
@@ -17,6 +18,7 @@ Options
 -------
 
 - `base_directory`_
+- `ignore`_
 - `rootkit_files`_
 - `rootkit_trojans`_
 - `windows_audit`_
@@ -30,7 +32,6 @@ Options
 - `check_files`_
 - `check_if`_
 - `check_pids`_
-- `check_policy`_
 - `check_ports`_
 - `check_sys`_
 - `check_trojans`_
@@ -43,20 +44,30 @@ Options
 base_directory
 ^^^^^^^^^^^^^^^
 
-The base directory that will be appended to the following options:
+The base directory that will be prepended to the following options:
 
-rootkit_files
-rootkit_trojans
-windows_malware
-windows_audit
-windows_apps
-systems_audit
+- rootkit_files
+- rootkit_trojans
+- systems_audit
 
-+--------------------+---------------------+
-| **Default value**  | /var/ossec          |
-+--------------------+---------------------+
-| **Allowed values** | Path to a directory |
-+--------------------+---------------------+
++-----------------------------+---------------------+
+| **Default value (UNIX)**    | /                   |
++-----------------------------+---------------------+
+| **Default value (Windows)** | C:\\                |
++-----------------------------+---------------------+
+| **Allowed values**          | Path to a directory |
++-----------------------------+---------------------+
+
+ignore
+^^^^^^
+
+List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories. These files and directories will be ignored during scans.
+
++--------------------+-----------------------------+
+| **Allowed values** | Any directory or file name. |
++--------------------+-----------------------------+
+| **Example**        | /etc                        |
++--------------------+-----------------------------+
 
 .. _reference_ossec_rootcheck_rootkit_files:
 
@@ -209,17 +220,6 @@ Enable or disable the checking of process ID's.
 | **Allowed values** | yes, no |
 +--------------------+---------+
 
-check_policy
-^^^^^^^^^^^^^^^
-
-Enable or disable the checking of policy.
-
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
-
 check_ports
 ^^^^^^^^^^^^^^^
 
@@ -280,11 +280,11 @@ check_winaudit
 
 Enable or disable the checking of winaudit.
 
-+--------------------+-------+
-| **Default value**  | 1     |
-+--------------------+-------+
-| **Allowed values** | 0 , 1 |
-+--------------------+-------+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
 
 check_winmalware
 ^^^^^^^^^^^^^^^^

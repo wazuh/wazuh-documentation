@@ -1,5 +1,6 @@
-.. _audit-configuration:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _audit-configuration:
 
 Configuration
 ================================================
@@ -84,13 +85,22 @@ Wazuh must be aware of the events detected by Audit. So, it is needs to be confi
       <location>/var/log/audit/audit.log</location>
     </localfile>
 
-Restarting OSSEC
-~~~~~~~~~~~~~~~~~
+Restarting Wazuh
+~~~~~~~~~~~~~~~~
+
 Finally, we must restart Wazuh agent in order to apply the changes:
 
-.. code-block:: console
+a. For Systemd:
 
-    # /var/ossec/bin/ossec-control restart
+  .. code-block:: console
+
+    # systemctl restart wazuh-agent
+
+b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-agent restart
 
 Now everything is ready to process audit events. You only need to create the proper audit rules (via *auditctl* or */etc/audit/audit.rules*). In the next section we will describe some good use cases.
 

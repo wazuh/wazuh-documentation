@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _remediation-examples:
 
 Configuration
@@ -50,12 +52,12 @@ Command::
 
 Active response::
 
-  <active‐response>
-    <command>win_route‐null</command>
+  <active-response>
+    <command>win_route-null</command>
     <location>local</location>
     <level>8</level>
     <timeout>900</timeout>
-  </active‐response>
+  </active-response>
 
 
 Block an IP with PF
@@ -83,7 +85,7 @@ Active response::
 Add an IP to the iptables deny list
 -----------------------------------
 
-In this example, the ``firewall-drop`` command is configured to use the ``firewall-drop.sh`` script using the data element ``scrip``.  The active response is configured to initiate the ``firewall-block`` command on all systems when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The ``<repeated_offenders>`` tag increases the timeout period for each subsequent offense by a specific IP address.
+In this example, the ``firewall-drop`` command is configured to use the ``firewall-drop.sh`` script using the data element ``scrip``.  The active response is configured to initiate the ``firewall-drop`` command on all systems when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The ``<repeated_offenders>`` tag increases the timeout period for each subsequent offense by a specific IP address.
 
 .. note:: This parameter is specified in minutes rather than seconds.
 
@@ -98,7 +100,7 @@ Command::
 Active response::
 
   <active-response>
-    <command>firewall-block</command>
+    <command>firewall-drop</command>
     <location>all</location>
     <rules_group>authentication_failed,authentication_failures</rules_group>
     <timeout>700</timeout>

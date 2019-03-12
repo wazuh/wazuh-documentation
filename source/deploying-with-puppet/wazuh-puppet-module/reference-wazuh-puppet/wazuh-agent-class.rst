@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _reference_wazuh_agent_class:
 
 Wazuh agent class
@@ -108,7 +110,7 @@ $agent_package_name
 
 $agent_package_version
   Define package version
-  
+
   `Default installed`
 
 $agent_service_name

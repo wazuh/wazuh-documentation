@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh_agent_hpux:
 
 Install Wazuh agent on HP-UX
@@ -7,15 +9,15 @@ The Wazuh agent for HP-UX can be downloaded from our :doc:`packages list<../pack
 
 Create the user and the group OSSEC:
 
-.. code-block:: bash
+.. code-block:: console
 
-    useradd ossec
-    groupadd ossec
+    # groupadd ossec
+    # useradd -G ossec ossec
 
 Unzip the package in ``/``:
 
-.. code-block:: bash
+.. code-block:: console
 
-    tar -xvf wazuh-agent-3.1.0-1-hpux-11v3-ia64.tar -C /
+    # tar -xvf wazuh-agent-3.8.2-1-hpux-11v3-ia64.tar
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.

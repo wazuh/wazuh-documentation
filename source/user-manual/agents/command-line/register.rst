@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _command-line-register:
 
 Register Agent
@@ -12,7 +14,7 @@ To register an agent, follow these steps:
 	# /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v3.1 Agent manager.            *
+	* Wazuh v3.8.2 Agent manager.          *
 	* The following options are available: *
 	****************************************
 	   (A)dd an agent (A).
@@ -61,7 +63,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	# /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v3.1 Agent manager.            *
+	* Wazuh v3.8.2 Agent manager.          *
 	* The following options are available: *
 	****************************************
 	   (I)mport key from the server (I).
@@ -88,26 +90,39 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 7. Select 'Q' to exit from `manage_agents`.
 
-8. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client>`` section, change the ``MANAGE_IP`` value to the Wazuh manager address::
+8. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
 
-         <client>
-               <server-ip>MANAGE_IP</server-ip>
-         </client>
+  .. code-block:: xml
+
+    <client>
+      <server>
+        <address>MANAGER_IP</address>
+        ...
+      </server>
+    </client>
 
 9. Restart the agent:
 
-.. code-block:: console
+a. For Systemd:
 
-	# /var/ossec/bin/ossec-control restart
+  .. code-block:: console
+
+    # systemctl restart wazuh-agent
+
+b. For SysV Init:
+
+  .. code-block:: console
+
+    # service wazuh-agent restart
 
 Forcing insertion
 ^^^^^^^^^^^^^^^^^
 
-If you try to add an agent with an IP address that was already registered to another agent, the ``manage_agents`` command will return an error. You can still force the addition by using the *-d* option.
+If you try to add an agent with an IP address that was already registered to another agent, the ``manage_agents`` command will return an error. You can still force the addition by using the *-F* option.
 
 Example
 ~~~~~~~
 
-The agent named *Server1* at IP 10.0.0.10 was installed and given the ID 005. If we assume that we had to reinstall the server, we would have to reinstall a new agent and connect it to the manager. In this case, we can use the argument *-d 0* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID::
+The agent named *Server1* at IP 10.0.0.10 was installed and given the ID 005. If we assume that we had to reinstall the server, we would have to reinstall a new agent and connect it to the manager. In this case, we can use the argument *-F 0* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID::
 
-    /var/ossec/bin/manage_agents -n Server1 -a 10.10.10.10 -d 0
+    /var/ossec/bin/manage_agents -n Server1 -a 10.10.10.10 -F 0

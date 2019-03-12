@@ -1,7 +1,12 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _user_manual_overview:
 
 Overview
 ========
+
+.. meta::
+  :description: The Wazuh user manual describes how to configure and use each of the components, which consist of the Wazuh server, the Wazuh agent, and Elastic Stack.
 
 Wazuh is an open source project that provides security visibility, compliance and infrastructure monitoring capabilities. The project was born as a fork of OSSEC HIDS and has evolved into a comprehensive solution by implementing new functionalities and integrating additional tools like OpenSCAP and Elasticsearch.
 
@@ -10,7 +15,7 @@ This manual describes how to configure and use each of Wazuh components, which c
 Wazuh server
 ------------
 
-The Wazuh server is based on a suite of applications where each application or component is designed to accomplished a certain task. These components work together to:
+The Wazuh server is based on a suite of applications where each application or component is designed to accomplish a certain task. These components work together to:
 
 - analyze data received from various logs,
 - trigger alerts when a log event matches a rule,
@@ -23,14 +28,14 @@ Components
 
 + The **Registration Service** uses a secure mechanism to register agents without any intervention from server side.
 
-- The **:doc:`RESTful API <api/index>`** provides an interface to manage and monitor the configuration of the manager and agents. I can be used to register agents, inspect the manager log messages, decoders and rules and provide useful information related to the agents, including their status, operating system details, and alerts related to file integrity monitoring and rootchecks.
+- The :doc:`RESTful API <api/index>` provides an interface to manage and monitor the configuration of the manager and agents. It can be used to register agents, inspect the manager log messages, decoders and rules and provide useful information related to the agents, including their status, operating system details, and alerts related to file integrity monitoring and rootchecks.
 
 + **Filebeat** is used in **distributed architectures** (where the Wazuh server and Elastic Stack live in different systems) to forward alerts data to Logstash. This component has its own `documentation <https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-overview.html>`_ developed by Elastic.
 
 Elastic Stack
 -------------
 
-Elastic Stack is used to index, browse and visualize Wazuh alerts data. In addition, the Wazuh app for Kibana can be used to visualize configuration settings, rules, decoders, and agent's status information. The dashboards used for this visualizaiton include, but are not limited to policy, compliance and file integrity monitoring.
+Elastic Stack is used to index, browse and visualize Wazuh alerts data. In addition, the Wazuh app for Kibana can be used to visualize configuration settings, rules, decoders, and agent's status information. The dashboards used for this visualization include, but are not limited to policy, compliance and file integrity monitoring.
 
 
 Components

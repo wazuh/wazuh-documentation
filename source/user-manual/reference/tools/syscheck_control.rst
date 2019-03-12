@@ -1,8 +1,11 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _syscheck_control:
 
 syscheck_control
 ================
+
+.. deprecated:: 3.7.0
 
 The syscheck_control program provides an interface for managing and viewing the integrity checking database.
 
@@ -12,6 +15,8 @@ The syscheck_control program provides an interface for managing and viewing the 
 | **-l**               | List the available agents.                               |
 +----------------------+----------------------------------------------------------+
 | **-lc**              | List only the currently connected agents.                |
++----------------------+----------------------------------------------------------+
+| **-ln**              | List only the currently disconnected agents.             |
 +----------------------+----------------------------------------------------------+
 | **-u <id> / -u all** | Update the database for the identified or all agents.    |
 +----------------------+----------------------------------------------------------+

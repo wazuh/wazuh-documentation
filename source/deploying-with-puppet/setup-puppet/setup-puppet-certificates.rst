@@ -1,13 +1,19 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _setup_puppet_certificates:
 
 Setting up Puppet certificates
 =================================
 
-Run Puppet agent to generate a certificate for the Puppet Server to sign:
+Run in your Puppet agent to generate a certificate for the Puppet Server to sign:
 
 .. code-block:: console
 
    # puppet agent -t
+
+.. note:: 
+
+   You will see a message like this:  ``Exiting; no certificate found and waitforcert is disabled``
 
 Log into to your Puppet Server, and list the certificates that need approval:
 
@@ -23,7 +29,7 @@ Approve the certificate, replacing ``hostname.example.com`` with your agent's no
 
    # puppet cert sign hostname.example.com
 
-Back on the Puppet agent node, run the puppet agent again: 
+Back on the Puppet agent node, run the puppet agent again:
 
 .. code-block:: console
 

@@ -1,10 +1,12 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh-container_faq:
 
 FAQ
-===============================
+===
 
 How can I tune the Kibana configuration?
--------------------------------------------------------------------
+----------------------------------------
 
 The Kibana default configuration is stored in ``kibana/config/kibana.yml``.::
 
@@ -23,14 +25,14 @@ The Kibana default configuration is stored in ``kibana/config/kibana.yml``.::
     entrypoint: sh wait-for-it.sh elasticsearch
 
 How can I tune the Logstash configuration?
--------------------------------------------------------------------
+------------------------------------------
 
 The logstash configuration is stored in ``logstash/config/logstash.conf``.
 
 The ``logstash/config`` folder is mapped onto the ``/etc/logstash/conf.d`` container so that you can create more than one file in that folder if you'd like to. However, you must be aware that config files will be read from that directory in alphabetical order.
 
 How can I specify the amount of memory used by Logstash?
--------------------------------------------------------------------
+--------------------------------------------------------
 
 The Logstash container uses the *LS_HEAP_SIZE* environment variable to determine how much memory should be allocated as JVM heap memory (defaults to 2048m).
 
@@ -52,7 +54,7 @@ If you want to override the default configuration, edit the *LS_HEAP_SIZE* envir
       - LS_HEAP_SIZE=2048m
 
 How can I tune the Elasticsearch configuration?
--------------------------------------------------------------------
+-----------------------------------------------
 
 The Elasticsearch container uses the default configuration and it is not exposed by default.
 
@@ -71,7 +73,7 @@ Then map your configuration file inside the container in the ``docker-compose.ym
      - docker_elk
 
 How can I store Wazuh data?
--------------------------------------------------------------------
+---------------------------
 
 The data stored in Wazuh will persist after container reboots but not after container removal.
 
@@ -93,7 +95,7 @@ In order to preserve Wazuh data even after removing the Wazuh container, you'll 
 This will store Wazuh data inside `/path/to/storage` in the Docker host's local file system.
 
 How can I store Elasticsearch data?
--------------------------------------------------------------------
+-----------------------------------
 
 The data stored in Elasticsearch will persist after container reboots but not after container removal.
 
@@ -112,6 +114,5 @@ In order to preserve Elasticsearch data even after removing the Elasticsearch co
       - docker_elk
     volumes:
       - /path/to/storage:/usr/share/elasticsearch/data
-
 
 This will store elasticsearch data inside ``/path/to/storage`` in the Docker host's local file system.

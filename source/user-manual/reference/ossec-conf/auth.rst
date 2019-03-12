@@ -1,5 +1,6 @@
-.. _reference_ossec_auth:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_auth:
 
 auth
 ====
@@ -55,6 +56,8 @@ Defines the TCP port number for listening to connections.
 +--------------------+---------------------+
 | **Allowed values** | 0 - 65535           |
 +--------------------+---------------------+
+
+.. _auth_use_source_ip:
 
 use_source_ip
 ^^^^^^^^^^^^^

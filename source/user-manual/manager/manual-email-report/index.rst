@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _manual_email_report:
 
 Configuring email alerts
@@ -58,7 +60,7 @@ Once the above has been configured, the ``email_alert_level`` needs to be set to
     ...
   </ossec_config>
 
-This example will set the minimum level to 10. For more information, see the :ref:`alerts section <reference_ossec_global>`.
+This example will set the minimum level to 10. For more information, see the :ref:`alerts section <reference_ossec_alerts>`.
 
 After the ``alert_level`` has been configured, Wazuh needs to be restarted for the change to take effect.
 
@@ -66,13 +68,13 @@ a) For Systemd:
 
 .. code-block:: console
 
-  # systemctl status wazuh-manager
+  # systemctl restart wazuh-manager
 
 b) For SysV Init:
 
 .. code-block:: console
 
-  # service wazuh-manager status
+  # service wazuh-manager restart
 
 
 .. warning::
@@ -82,7 +84,7 @@ b) For SysV Init:
 Granular email options
 ----------------------
 
-Wazuh also allows granular configuration options for email alerts. Below are some sample granular configurations. For more information, see the :ref:`email_alerts section <reference_ossec_global>`.
+Wazuh also allows granular configuration options for email alerts. Below are some sample granular configurations. For more information, see the :ref:`email_alerts section <reference_ossec_email_alerts>`.
 
 .. warning::
 
@@ -100,7 +102,7 @@ This is configured as follows:
    <do_not_delay />
  </email_alerts>
 
-This will send an email to ``you@example.com`` when any rule with a level greater than or equal to 4 is triggered. 
+This will send an email to ``you@example.com`` when any rule with a level greater than or equal to 4 is triggered.
 
 .. note:: Remember, if the level here is less than the ``email_alert_level`` configured in the previous section, this will not be sent.
 
@@ -140,7 +142,7 @@ Email alerts can be configured to send an email based on one or more rule groups
 
  <email_alerts>
    <email_to>you@example.com</email_to>
-   <group>pci_dss_10.6.1</group>
+   <group>pci_dss_10.6.1,</group>
  </email_alerts>
 
 This will send an alert when any rule that is part of the ``pci_dss_10.6.1`` group is triggered on any Wazuh monitored device.

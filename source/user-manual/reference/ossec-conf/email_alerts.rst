@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _reference_ossec_email_alerts:
 
 email_alerts
@@ -13,7 +15,7 @@ email_alerts
 This extends the email options configured in the ``<global>`` section.
 
 .. note::
-  `Global  <./global>`_  email configuration is necessary to use granular email options.
+  :doc:`Global <global>` email configuration is necessary to use granular email options.
 
 Options
 -------
@@ -26,6 +28,7 @@ Options
 - `rule_id`_
 - `do_not_delay`_
 - `do_not_group`_
+- `email_log_source`_
 
 
 email_to
@@ -37,6 +40,8 @@ This specifies a single email address to which to send email alerts. If you want
 | **Default value**  | n/a                                 |
 +--------------------+-------------------------------------+
 | **Allowed values** | Any valid email address is allowed. |
++--------------------+-------------------------------------+
+| **Usage**          | Required.                           |
 +--------------------+-------------------------------------+
 
 
@@ -89,13 +94,15 @@ format
 
 This specifies the email format.
 
-+--------------------+----------------------------------------------------+
-| **Default value**  | full                                               |
-+--------------------+------+---------------------------------------------+
-| **Allowed values** | full | Send normal emails.                         |
-+                    +------+---------------------------------------------+
-|                    | sms  | Use a compact format more suitable for SMS. |
-+--------------------+------+---------------------------------------------+
++--------------------+-------------------------------------------------------+
+| **Default value**  | full                                                  |
++--------------------+---------+---------------------------------------------+
+| **Allowed values** | default | Send normal emails.                         |
++                    +---------+---------------------------------------------+
+|                    | full    | Send normal emails.                         |
++                    +---------+---------------------------------------------+
+|                    | sms     | Use a compact format more suitable for SMS. |
++--------------------+---------+---------------------------------------------+
 
 
 rule_id
@@ -131,6 +138,20 @@ This disables grouping of multiple alerts into the same email.
 +--------------------+-----------------------+
 | **Allowed values** | XML tag with no value |
 +--------------------+-----------------------+
+
+
+email_log_source
+^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.8.0
+
+This selects the alert file to be read from.
+
++--------------------+---------------------------+
+| **Default value**  | alerts.json               |
++--------------------+---------------------------+
+| **Allowed values** | alerts.log or alerts.json |
++--------------------+---------------------------+
 
 .. warning::
 	Notice that **do_not_delay** and **do_not_group** are special empty-element XML tags, so they stand alone, not having a starting and ending version of the tag.  This is indicated by the tag name containing "/" at the end of the name.

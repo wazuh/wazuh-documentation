@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _reference_ossec_alerts:
 
 alerts
@@ -53,10 +55,12 @@ Sets the minimum severity level for an alert to generate an email notification.
 use_geoip
 ^^^^^^^^^
 
-Toggles GeoIP lookups on or off.
+.. deprecated:: 2.0
+
+This option has no effect, and will result in a parsing error unless compiled with `LIBGEOIP_ENABLED <https://github.com/wazuh/wazuh/blob/master/src/config/alerts-config.c#L61>`_.
 
 +--------------------+-------------+
-| **Default value**  | no          |
+| **Default value**  | n/a         |
 +--------------------+-------------+
 | **Allowed values** | yes, no     |
 +--------------------+-------------+

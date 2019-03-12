@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _message-format:
 
 .. highlight:: none
@@ -113,7 +115,7 @@ Random
     +---------+----------+
 
 Global counter
-    Most significative part of the message counter.
+    Most significant part of the message counter.
 
     +---------+-----------+
     | Size    | 10 digits |
@@ -122,7 +124,7 @@ Global counter
     +---------+-----------+
 
 Local counter
-    Least significative part of the message counter.
+    Least significant part of the message counter.
 
     +---------+----------+
     | Size    | 4 digits |
@@ -181,19 +183,40 @@ The payload is the final message that will be sent to the peer (secure manager o
 Complete encryption formula
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For agents with restricted address::
+For agents with restricted address:
 
-    ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+    a) Blowfish encryption
 
-For agents with unrestricted address (address ``any`` or netmask different from 32)::
+    .. code-block:: console
 
-    "!" <ID> "!:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+        ":" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+
+    b) AES encryption
+
+    .. code-block:: console
+
+        "#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+
+For agents with unrestricted address (address ``any`` or netmask different from 32):
+
+    a) Blowfish encryption
+
+    .. code-block:: console
+
+        "!" <ID> "!#AES:" Blowfish(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
+
+    b) AES encryption
+
+    .. code-block:: console
+
+        "!" <ID> "!#AES:" Aes(<!-padding> Gzip(MD5(<Random> <Global> ":" <Local> ":" <Event>) <Random> <Global> ":" <Local> ":" <Event>))
 
 This is the **encryption flow chart**:
 
-.. image:: ../images/development/encryption_flow.png
+.. thumbnail:: ../images/development/encryption_flow.png
+    :title: OSSEC message encryption flow chart
     :align: center
-    :width: 50%
+    :width: 60%
 
 Network protocol
 ~~~~~~~~~~~~~~~~

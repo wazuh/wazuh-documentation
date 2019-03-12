@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _elastic_ssl:
 
 Setting up SSL for Filebeat and Logstash
@@ -48,7 +50,7 @@ Generating a self-signed SSL certificate
 
 	.. code-block:: console
 
-		# openssl req -x509 -batch -nodes -days 3650 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
+		# openssl req -x509 -batch -nodes -days 365 -newkey rsa:2048 -keyout /etc/logstash/logstash.key -out /etc/logstash/logstash.crt -config custom_openssl.cnf
 
 4. You may remove the custom configuration file:
 

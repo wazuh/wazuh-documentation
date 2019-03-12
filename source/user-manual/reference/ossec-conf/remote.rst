@@ -1,5 +1,6 @@
-.. _reference_ossec_remote:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_remote:
 
 remote
 =======
@@ -20,9 +21,10 @@ Options
 - `port`_
 - `protocol`_
 - `allowed-ips`_
-- `deny-ips`_
+- `denied-ips`_
 - `local_ip`_
 - `ipv6`_
+- `queue_size`_
 
 connection
 ^^^^^^^^^^^
@@ -46,7 +48,7 @@ Specifies the port to use to listen for events.
 | **Allowed values** | Any port number from 1 to 65535 |
 +--------------------+---------------------------------+
 
-
+.. _manager_protocol:
 
 protocol
 ^^^^^^^^^^^
@@ -77,7 +79,7 @@ List of IP addresses that are allowed to send syslog messages to the server (one
 
    It is necessary to list at least one IP address when using the syslog connection type.
 
-deny-ips
+denied-ips
 ^^^^^^^^^^^
 
 List of IP addresses that are not allowed to send syslog messages to the server (one per line).
@@ -104,13 +106,31 @@ Local ip address to use to listen for connections.
 ipv6
 ^^^^^^^^^^^
 
-Local ipv6 address to listen for connections.
+Whether the local IP address is IPv6
 
 +--------------------+------------------+
-| **Default value**  | n/a              |
+| **Default value**  | no               |
 +--------------------+------------------+
-| **Allowed values** | Any IPv6 address |
+| **Allowed values** | yes, no          |
 +--------------------+------------------+
+
+.. note::
+
+  Currently it's not possible to set both *local_ip* and *ipv6*
+
+queue_size
+^^^^^^^^^^^^
+
+Sets the capacity of the remote daemon queue in number of agent events.
+
++--------------------+----------------------------------+
+| **Default value**  | 131072                           |
++--------------------+----------------------------------+
+| **Allowed values** | Any number between 1 and 262144. |
++--------------------+----------------------------------+
+
+.. note::
+  The remote queue is only available for agent events, not *syslog* events. This options only works when the **connection** is set to ``secure``.
 
 Example of configuration
 ------------------------
@@ -121,7 +141,7 @@ Example of configuration
       <connection>syslog</connection>
       <port>514</port>
       <protocol>udp</protocol>
-      <allowed_ips>192.168.1.0/24</allowed_ips>
+      <allowed-ips>192.168.1.0/24</allowed-ips>
       <local_ip>192.168.1.5</local_ip>
     </remote>
 
@@ -129,4 +149,5 @@ Example of configuration
       <connection>secure</connection>
       <port>1514</port>
       <protocol>udp</protocol>
+      <queue_size>16384</queue_size>
     </remote>

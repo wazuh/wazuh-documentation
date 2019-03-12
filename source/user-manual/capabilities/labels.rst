@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _labels:
 
 Agent labels
@@ -11,11 +13,11 @@ This feature allows the user to customize the alert information from agents to i
 How it works
 ------------
 
-Configuring labels that will be included in alerts is a straightforward process. It can be done using a simple XML structure that adds information into alerts. Labels can be nested by separating "key" terms by a period for inclusion in JSON formatted alerts.  
+Configuring labels that will be included in alerts is a straightforward process. It can be done using a simple XML structure that adds information into alerts. Labels can be nested by separating "key" terms by a period for inclusion in JSON formatted alerts.
 
-Information on how to configure labels can be found in the :doc:`Labels section <../reference/ossec-conf/labels>` of ``ossec.conf``. 
+Information on how to configure labels can be found in the :doc:`Labels section <../reference/ossec-conf/labels>` of ``ossec.conf``.
 
-Agent labels can also be centralized using the ``agent.conf`` file, such that labels can be set for specific agents at the manager level. When there is pre-existing label that is the same as one the user has defined in ``ossec.conf`` or ``agent.conf``, the second one will override the first. 
+Agent labels can also be centralized using the ``agent.conf`` file, such that labels can be set for specific agents at the manager level. When there is pre-existing label that is the same as one the user has defined in ``ossec.conf`` or ``agent.conf``, the second one will override the first.
 
 For more information about on how to centralize agent configuration, see the :doc:`Centralized configuration <../reference/centralized-configuration>` section.
 
@@ -24,7 +26,7 @@ Addition configuration information is available in the :doc:`Internal configurat
 Use case
 --------
 
-Below is a case where the use of labels could prove helpful. 
+Below is a case where the use of labels could prove helpful.
 
 Let's imagine we have a large environment deployed in Amazon Web Service (AWS) and monitored by Wazuh. In this situation, we want the manager to have the following information about
 each agent when an alert is triggered:

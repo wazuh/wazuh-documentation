@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _log-analysis-examples:
 
 Configuration
@@ -10,6 +12,8 @@ Configuration
 #. `Reading events from Windows Event Channel`_
 #. `Filtering events from Windows Event Channel with queries`_
 #. `Using environment variables`_
+#. `Using multiple outputs`_
+
 
 Basic usage
 -----------
@@ -63,6 +67,24 @@ You can additionally monitor specific Windows event channels.  The location is t
         <log_format>eventchannel</log_format>
     </localfile>
 
+The ``eventchannel`` log format has been enhanced for Wazuh v3.8.0 with a new event data processing, keeping the old functionality and configuration. It allows to monitor every event generated at any Windows agent, returning every channel’s information in JSON format. As the old eventchannel, with this log_format the channels can be queried, filtering by event ID, process, logon type, or any other field contained in the generated event, giving the possibility to retrieve only the desired events.
+
+This new option uses the JSON decoder to draw the event fields, ensuring a new way to add rules easier than before. The default channels included at the Wazuh ruleset are Application, Security, System, Microsoft-Windows-Sysmon/Operational, Microsoft Antimalware (Microsoft Security Essentials), Microsoft-Windows-Windows Defender/Operational and Microsoft-Windows-Eventlog.
+
+Some sample events from Windows eventchannel are shown in the next images:
+
+.. thumbnail:: ../../../images/manual/log_analysis/windows_events.png
+    :title: Windows events
+    :align: center
+    :width: 100%
+
+The following image represents the number of events of each channel, filtered by provider name along the time.
+
+.. thumbnail:: ../../../images/manual/log_analysis/windows_alerts.png
+    :title: Number of events by provider name along the time
+    :align: center
+    :width: 100%
+
 Filtering events from Windows Event Channel with queries
 --------------------------------------------------------
 
@@ -74,6 +96,27 @@ Events from the Windows Event channel can be filtered as below::
       <query>Event/System[EventID=7040]</query>
     </localfile>
 
+Filtering events from Windows Event Channel based on severity and queries
+-------------------------------------------------------------------------
+
+Users can filter events with different severity levels:
+
+    .. code-block:: xml
+
+        <localfile>
+            <location>System</location>
+            <log_format>eventchannel</log_format>
+            <query>
+                \<QueryList>
+                    \<Query Id="0"\ Path="System">
+                        \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
+                    \</Query>
+                \</QueryList>
+            </query>
+        </localfile>
+
+In this example, only events which levels are less or equal to "3" are checked.
+
 Using environment variables
 ---------------------------
 
@@ -83,3 +126,41 @@ Environment variables like ``%WinDir%`` can be used in the location pattern. The
         <location>%WinDir%\System32\LogFiles\W3SVC3\ex%y%m%d.log</location>
         <log_format>iis</log_format>
     </localfile>
+
+Using multiple outputs
+----------------------
+
+Log data is sent to the agent socket by default, but it is also possible to specify other sockets as output. ``ossec-logcollector`` uses UNIX type sockets to communicate allowing TCP or UDP protocols.
+To add a new output socket we need to specify it using the tag ``<socket>`` as shown in the following example configuration::
+
+    <socket>
+        <name>custom_socket</name>
+        <location>/var/run/custom.sock</location>
+        <mode>tcp</mode>
+        <prefix>custom_syslog: </prefix>
+    </socket>
+
+    <socket>
+        <name>test_socket</name>
+        <location>/var/run/test.sock</location>
+    </socket>
+
+.. note::
+	More information about defining a socket: :ref:`socket <reference_ossec_socket>`
+
+Once the socket is defined, it's possible to add the destination socket for each *localfile*::
+
+    <localfile>
+        <log_format>syslog</log_format>
+        <location>/var/log/messages</location>
+        <target>agent,test_socket</target>
+    </localfile>
+
+    <localfile>
+        <log_format>syslog</log_format>
+        <location>/var/log/messages</location>
+        <target>custom_socket,test_socket</target>
+    </localfile>
+
+.. warning::
+    To keep the output to the default socket we need to specify it using 'agent' as target. Otherwise the output will be redirected only to the specified targets.

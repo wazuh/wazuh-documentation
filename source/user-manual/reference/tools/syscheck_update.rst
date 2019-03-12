@@ -1,8 +1,11 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _syscheck_update:
 
 syscheck_update
 ===============
+
+.. deprecated:: 3.7.0
 
 The syscheck_update program wipes the integrity check database. All information about files that were added to the integrity check database will be deleted leaving an empty database which will be populated again the next time the syscheck daemon runs on the agents or the server.
 

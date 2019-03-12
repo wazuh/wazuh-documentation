@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _antiflooding:
 
 Anti-flooding mechanism
@@ -15,7 +17,7 @@ Additionally, agent modules can be configured to limit their event production ra
 Why an anti-flooding mechanism is needed
 ----------------------------------------
 
-In the Wazuh architecture, Wazuh agents collect information from log files, command outputs, different kinds of scans, etc. They then send all the collected information to their manager, separated into individual events. Without any congestion control, an agent could potentially send events at a rate as high as the system is physically capable of transmitting, which could be hundreds or thousands per second of events per second.
+In the Wazuh architecture, Wazuh agents collect information from log files, command outputs, different kinds of scans, etc. They then send all the collected information to their manager, separated into individual events. Without any congestion control, an agent could potentially send events at a rate as high as the system is physically capable of transmitting, which could be hundreds or thousands of events per second.
 
 Due to this fact, a incorrect configuration in an agent may generate enough events to saturate a network or its manager. Here are some misconfiguration scenarios that could lead to this problem:
 
@@ -134,7 +136,7 @@ When the buffer is 100% full, a timer is started which is compared to the ``tole
 
 At this point, two possible things could happen:
 
-1. The use of the buffer decreases to below the ``warning level`` before the timer reaches the ``tolerance time``.  If this occurs, no alert about flooding appears on the manager. 
+1. The use of the buffer decreases to below the ``warning level`` before the timer reaches the ``tolerance time``.  If this occurs, no alert about flooding appears on the manager.
 
 This graphic illustrates this situation.
 
@@ -148,7 +150,7 @@ This graphic illustrates this situation.
 Flooding status (red area)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If the conditions in number 2 above are met, where the buffer stays above the ``warning level`` beyond the defined ``tolerance time``, the ``Flooding status`` alert is triggered. 
+If the conditions in number 2 above are met, where the buffer stays above the ``warning level`` beyond the defined ``tolerance time``, the ``Flooding status`` alert is triggered.
 
 This alert has the following appearance:
 
@@ -189,7 +191,7 @@ In order to avoid agent buffer saturation followed by event loss, the event prod
 
 - Logcollector: If a log file is written faster that logcollector can read it, this can negatively impact the proper functioning of the agent. For this reason, the agent will restrict itself to reading no more than a configurable maximum number of lines from the same file per read cycle.
 
-- OpenSCAP Wodle: This module previously sent the entire set of scan results as soon as a scan would complete.  It now sends the scan information to the manager at a regulated speed so as to reduce the likelihood of maxing out the buffer.
+- OpenSCAP, CIS-CAT and Syscollector wodles: These modules previously did send the entire set of scan results as soon as a scan would complete. They now send the scan information to the manager at a regulated speed in order to prevent the buffer from being collapsed.
 
 These are advanced configurations located at :doc:`Internal configuration <../reference/internal-options>`. The variables defined for this purpose are called ``logcollector.max_lines`` and
 ``wazuh_modules.max_eps`` and much care should be given when changing these values.

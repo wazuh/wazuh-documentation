@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _api:
 
 RESTful API
@@ -17,6 +19,7 @@ Wazuh API capabilities:
 * Statistical information
 * HTTPS and user authentication
 * Error handling
+* Query remote configuration
 
 
 .. topic:: Contents
@@ -25,6 +28,7 @@ Wazuh API capabilities:
        :maxdepth: 2
 
        getting-started
+       queries
        configuration
        reference
        examples

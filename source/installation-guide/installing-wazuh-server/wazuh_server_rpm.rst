@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _wazuh_server_rpm:
 
 Install Wazuh server with RPM packages
@@ -14,31 +16,31 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 
 To set up the repository, run this command:
 
-     .. code-block:: console
+  .. code-block:: console
 
-         # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-         [wazuh_repo]
-         gpgcheck=1
-         gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-         enabled=1
-         name=Wazuh repository
-         baseurl=https://packages.wazuh.com/3.x/yum/
-         protect=1
-         EOF
+    # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+    [wazuh_repo]
+    gpgcheck=1
+    gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+    enabled=1
+    name=Wazuh repository
+    baseurl=https://packages.wazuh.com/3.x/yum/
+    protect=1
+    EOF
 
 For CentOS-5 and RHEL-5:
 
-    .. code-block:: console
+  .. code-block:: console
 
-        # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
-        [wazuh_repo]
-        gpgcheck=1
-        gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
-        enabled=1
-        name=Wazuh repository
-        baseurl=http://packages.wazuh.com/3.x/yum/5/
-        protect=1
-        EOF
+    # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+    [wazuh_repo]
+    gpgcheck=1
+    gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+    enabled=1
+    name=Wazuh repository
+    baseurl=http://packages.wazuh.com/3.x/yum/5/$basearch/
+    protect=1
+    EOF
 
 Installing the Wazuh Manager
 ----------------------------
@@ -47,7 +49,7 @@ The next step is to install the Wazuh Manager on your system:
 
   .. code-block:: console
 
-	 # yum install wazuh-manager
+    # yum install wazuh-manager
 
 Once the process is complete, you can check the service status with:
 
@@ -70,82 +72,50 @@ Installing the Wazuh API
 
   .. code-block:: console
 
-	 # curl --silent --location https://rpm.nodesource.com/setup_6.x | bash -
+    # curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
 
   and then, install NodeJS:
 
   .. code-block:: console
 
-	 # yum install nodejs
+    # yum install nodejs
 
-2. Python >= 2.7 is required in order to run the Wazuh API. It is installed by default or included in the official repositories in most Linux distributions.
-
-   To determine if the python version on your system is lower than 2.7, you can run the following:
+2. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: console
 
-    # python --version
+    # yum install wazuh-api
 
-   It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
-
-  .. code-block:: javascript
-
-    config.python = [
-        // Default installation
-        {
-            bin: "python",
-            lib: ""
-        },
-        // Package 'python27' for CentOS 6
-        {
-            bin: "/opt/rh/python27/root/usr/bin/python",
-            lib: "/opt/rh/python27/root/usr/lib64"
-        }
-    ];
-
-  CentOS 6 and Red Hat 6 come with Python 2.6, however, you can install Python 2.7 in parallel to maintain the older version(s):
-
-  a) For CentOS 6:
-
-  .. code-block:: console
-
-    # yum install -y centos-release-scl
-    # yum install -y python27
-
-  b) For RHEL 6:
-
-  .. code-block:: console
-
-    # yum install python27
-
-    You may need to first enable a repository in order to get python27, with a command like this:
-
-  .. code-block:: console
-
-    #   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
-    #   yum-config-manager --enable rhel-server-rhscl-6-rpms
-
-  3. Install the Wazuh API. It will update NodeJS if it is required:
-
-  .. code-block:: console
-
-	 # yum install wazuh-api
-
-4. Once the process is complete, you can check the service status with:
+3. Once the process is complete, you can check the service status with:
 
   a) For Systemd:
 
   .. code-block:: console
 
-	 # systemctl status wazuh-api
+    # systemctl status wazuh-api
 
   b) For SysV Init:
 
   .. code-block:: console
 
-	 # service wazuh-api status
+    # service wazuh-api status
+
+.. note::
+    Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
+
+4. (Optional) Disable the Wazuh repository:
+
+  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
 .. _wazuh_server_rpm_filebeat:
+
+.. note::
+
+  From Fedora v22 to v25, it's required to install ``dkms`` package (``yum install dkms``).
 
 Installing Filebeat
 -------------------
@@ -178,21 +148,21 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-	 # yum install filebeat-6.2.1
+    # yum install filebeat-6.6.1
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
   .. code-block:: console
 
-	 # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.2/extensions/filebeat/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/filebeat/filebeat.yml
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP``  with the IP address or the hostname of the Elastic Stack server. For example:
 
   .. code-block:: yaml
 
-  	output:
-  	  logstash:
-  	    hosts: ["ELASTIC_SERVER_IP:5000"]
+    output:
+      logstash:
+        hosts: ["ELASTIC_SERVER_IP:5000"]
 
 5. Enable and start the Filebeat service:
 
@@ -208,10 +178,18 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-  	# chkconfig --add filebeat
-  	# service filebeat start
+    # chkconfig --add filebeat
+    # service filebeat start
+
+6. (Optional) Disable the Elasticsearch repository:
+
+  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
+
+  .. code-block:: console
+
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to :ref:`install Elastic Stack <installation_elastic>`.
+Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>`.

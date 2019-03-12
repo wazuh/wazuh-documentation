@@ -1,5 +1,6 @@
-.. _reference_ossec_syscheck:
+.. Copyright (C) 2018 Wazuh, Inc.
 
+.. _reference_ossec_syscheck:
 
 syscheck
 =============
@@ -30,6 +31,10 @@ Options
 - `registry_ignore`_
 - `prefilter_cmd`_
 - `skip_nfs`_
+- `remove_old_diff`_
+- `restart_audit`_
+- `windows_audit_interval`_
+- `whodata`_
 
 .. _reference_ossec_syscheck_directories:
 
@@ -50,79 +55,115 @@ This is to be set on the system to be monitored (or in the ``agent.conf``, if ap
 | **Allowed values** | Any directory                      |
 +--------------------+------------------------------------+
 
-Atributes:
+Attributes:
 
-+--------------------+-----------------------------------------------------------------------------------------------------------------+
-| **realtime**       | This will enable real-time/continuous monitoring on Linux (using the inotify system calls) and Windows systems. |
-|                    |                                                                                                                 |
-|                    | Real time only works with directories, not individual files.                                                    |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **report_changes** | Report file changes. This is limited to text files at this time.                                                |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_all**      | All the following check_* options are used together.                                                            |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_sum**      | Check the MD5 and SHA-1 hashes of the files.                                                                    |
-|                    |                                                                                                                 |
-|                    | Same as using both ``check_sha1sum="yes"`` and ``check_md5sum="yes"``.                                          |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_sha1sum**  | Check only the SHA-1 hash of the files.                                                                         |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_md5sum**   | Check only the MD5 hash of the files.                                                                           |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_size**     | Check the size of the files.                                                                                    |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_owner**    | Check the owner of the files.                                                                                   |
-|                    |                                                                                                                 |
-|                    | On Windows, uid will always be 0.                                                                               |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_group**    | Check the group owner of the files/directories.                                                                 |
-|                    |                                                                                                                 |
-|                    | Available for UNIX. On Windows, gid will always be 0 and the group name will be blank.                          |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_perm**     | Check the UNIX permission of the files/directories.                                                             |
-|                    |                                                                                                                 |
-|                    | On Windows, this will only check the POSIX permissions.                                                         |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_mtime**    | Check the modification time of a file.                                                                          |
-|                    |                                                                                                                 |
-|                    | .. versionadded:: 2.0                                                                                           |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **check_inode**    | Check the file inode.                                                                                           |
-|                    |                                                                                                                 |
-|                    | Available for UNIX. On Windows, inode will always be 0.                                                         |
-|                    |                                                                                                                 |
-|                    | .. versionadded:: 2.0                                                                                           |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed values                                             | yes, no                                            |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
-| **restrict**       | Limit checks to files containing the entered string in the file name.                                           |
-|                    |                                                                                                                 |
-|                    | Any directory or file name (but not a path) is allowed                                                          |
-+                    +------------------------------------------------------------+----------------------------------------------------+
-|                    | Allowed value                                              | string                                             |
-+--------------------+------------------------------------------------------------+----------------------------------------------------+
++--------------------------+---------------------------------------------------------------------------------------------------------------------+
+| **realtime**             | This will enable real-time/continuous monitoring on Linux (using the inotify system calls) and Windows systems.     |
++                          +                                                                                                                     +
+|                          | Real time only works with directories, not individual files.                                                        |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **whodata**              | This will enable who-data monitoring on Linux and Windows systems.                                                  |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **report_changes**       | Report file changes. This is limited to text files at this time.                                                    |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_all**            | All attributes with the prefix ``check_`` will be activated.                                                        |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_sum**            | Check the MD5, SHA-1 and SHA-256 hashes of the files.                                                               |
++                          +                                                                                                                     +
+|                          | Same as using ``check_md5sum="yes"``, ``check_sha1sum="yes"`` and ``check_sha256sum="yes"`` at the same time.       |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_sha1sum**        | Check only the SHA-1 hash of the files.                                                                             |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_md5sum**         | Check only the MD5 hash of the files.                                                                               |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_sha256sum**      | Check only the SHA-256 hash of the files.                                                                           |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_size**           | Check the size of the files.                                                                                        |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_owner**          | Check the owner of the files.                                                                                       |
+|                          |                                                                                                                     |
+|                          | On Windows, uid will always be 0.                                                                                   |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_group**          | Check the group owner of the files/directories.                                                                     |
++                          +                                                                                                                     +
+|                          | Available for UNIX. On Windows, gid will always be 0 and the group name will be blank.                              |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_perm**           | Check the permission of the files/directories.                                                                      |
++                          +                                                                                                                     +
+|                          | On Windows, a list of denied and allowed permissions will be given for each user or group since version 3.8.0.      |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_attrs**          | Check the attributes of the files.                                                                                  |
++                          +                                                                                                                     +
+|                          | Available for Windows.                                                                                              |
++                          +                                                                                                                     +
+|                          | .. versionadded:: 3.8.0                                                                                             |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_mtime**          | Check the modification time of a file.                                                                              |
++                          +                                                                                                                     +
+|                          | .. versionadded:: 2.0                                                                                               |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **check_inode**          | Check the file inode.                                                                                               |
++                          +                                                                                                                     +
+|                          | Available for UNIX. On Windows, inode will always be 0.                                                             |
++                          +                                                                                                                     +
+|                          | .. versionadded:: 2.0                                                                                               |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **restrict**             | Limit checks to files containing the entered string in the file name.                                               |
++                          +                                                                                                                     +
+|                          | Any directory or file name (but not a path) is allowed                                                              |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed value                                              | sregex                                                 |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **tags**                 | Add tags to alerts for monitored directories.                                                                       |
++                          +                                                                                                                     +
+|                          | .. versionadded:: 3.6.0                                                                                             |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | Tags list separated by commas                          |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **recursion_level**      | Limits the maximum level of recursion allowed.                                                                      |
++                          +                                                                                                                     +
+|                          | .. versionadded:: 3.6.0                                                                                             |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | Any integer between 0 and 320                          |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
+| **follow_symbolic_link** | Follow symbolic links (directories or files). The default value is "no". The setting is available for UNIX systems. |
++                          +                                                                                                                     +
+|                          | If set, ``realtime`` works as usual (with symbolic links to directories, not files).                                |
++                          +                                                                                                                     +
+|                          | .. versionadded:: 3.8.0                                                                                             |
++                          +------------------------------------------------------------+--------------------------------------------------------+
+|                          | Allowed values                                             | yes, no                                                |
++--------------------------+------------------------------------------------------------+--------------------------------------------------------+
 
 .. _reference_ossec_syscheck_ignore:
 
@@ -131,38 +172,38 @@ ignore
 
 List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories.  These files and directories are still checked, but the results are ignored.
 
-+--------------------+----------------------------+
-| **Default value**  | /etc/mtab                  |
-+--------------------+----------------------------+
-| **Allowed values** | Any directory or file name |
-+--------------------+----------------------------+
++--------------------+-----------------------------+
+| **Allowed values** | Any directory or file name. |
++--------------------+-----------------------------+
+| **Example**        | /etc/mtab                   |
++--------------------+-----------------------------+
 
 Attributes:
 
-+----------+--------------------------------------------------------------------------------+
-| **type** | This is a simple regex pattern to filter out files so alerts are not generated |
-+          +--------------------------------------------+-----------------------------------+
-|          | Allowed values                             | sregex                            |
-+----------+--------------------------------------------+-----------------------------------+
++----------+---------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
++          +--------------------------------------------+------------------------------------+
+|          | Allowed values                             | sregex                             |
++----------+--------------------------------------------+------------------------------------+
 
 nodiff
 ^^^^^^
 
 List of files to not compute the diff (one entry per line). It could be used for sensitive files like a private key, credentials stored in a file or database configuration, avoiding data leaking by sending the file content changes through alerts.
 
-+--------------------+----------------------------+
-| **Default value**  | /etc/ssl/private.key       |
-+--------------------+----------------------------+
-| **Allowed values** | Any file name              |
-+--------------------+----------------------------+
++--------------------+----------------------+
+| **Allowed values** | Any file name.       |
++--------------------+----------------------+
+| **Example**        | /etc/ssl/private.key |
++--------------------+----------------------+
 
 Attributes:
 
-+----------+--------------------------------------------------------------------------------+
-| **type** | This is a simple regex pattern to filter out files so alerts are not generated |
-+          +--------------------------------------------+-----------------------------------+
-|          | Allowed values                             | sregex                            |
-+----------+--------------------------------------------+-----------------------------------+
++----------+---------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
++          +--------------------------------------------+------------------------------------+
+|          | Allowed values                             | sregex                             |
++----------+--------------------------------------------+------------------------------------+
 
 .. _reference_ossec_syscheck_frequency:
 
@@ -171,22 +212,22 @@ frequency
 
 Frequency that the syscheck will be run (in seconds).
 
-+--------------------+------------------------------------+
-| **Default value**  | 21600                              |
-+--------------------+------------------------------------+
-| **Allowed values** | A positive number, time in seconds |
-+--------------------+------------------------------------+
++--------------------+-------------------------------------+
+| **Default value**  | 21600                               |
++--------------------+-------------------------------------+
+| **Allowed values** | A positive number, time in seconds. |
++--------------------+-------------------------------------+
 
 scan_time
 ^^^^^^^^^^^
 
-Time to run the scans. Times may be represented as 21pm or 8:30.
+Time to run the scans. Times may be represented as 9pm or 8:30.
 
-+--------------------+-------------+
-| **Default value**  | n/a         |
-+--------------------+-------------+
-| **Allowed values** | Time of day |
-+--------------------+-------------+
++--------------------+---------------+
+| **Default value**  | n/a           |
++--------------------+---------------+
+| **Allowed values** | Time of day.  |
++--------------------+---------------+
 
 .. note::
 
@@ -197,22 +238,38 @@ scan_day
 
 Day of the week to run the scans(one entry per line). Multiple lines may be entered to include multiple registry entries.
 
-+--------------------+-----------------+
-| **Default value**  | n/a             |
-+--------------------+-----------------+
-| **Allowed values** | Day of the week |
-+--------------------+-----------------+
++--------------------+-------------------+
+| **Default value**  | n/a               |
++--------------------+-------------------+
+| **Allowed values** | Day of the week.  |
++--------------------+-------------------+
 
 auto_ignore
 ^^^^^^^^^^^
 
-Specifies whether or not syscheck will ignore files that change too many times (after the third change).
+Specifies whether or not syscheck will ignore files that change too many times (manager only).
 
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
++--------------------+----------+
+| **Default value**  | no       |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
+
+Attributes:
+
++---------------+------------------------------------------------------------------------------+
+| **frequency** | Number of times the alert can be repeated in the'timeframe' time interval.   |
+|               +------------------+-----------------------------------------------------------+
+|               | Default value    | 10                                                        |
+|               +------------------+-----------------------------------------------------------+
+|               | Allowed values   | Any number between 1 and 99.                              |
++---------------+------------------+-----------------------------------------------------------+
+| **timeframe** | Time interval in which the number of alerts generated by a file accumulates. |
+|               +------------------+-----------------------------------------------------------+
+|               | Default value    | 3600                                                      |
+|               +------------------+-----------------------------------------------------------+
+|               | Allowed values   | Any number between 1 and 43200.                           |
++---------------+------------------+-----------------------------------------------------------+
 
 .. note::
 
@@ -225,11 +282,11 @@ alert_new_files
 
 Specifies if syscheck should alert when new files are created.
 
-+--------------------+---------+
-| **Default value**  | no      |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
++--------------------+----------+
+| **Default value**  | yes      |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
 
 .. note::
 
@@ -242,11 +299,11 @@ scan_on_start
 
 Specifies if syscheck scans immediately when started.
 
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
++--------------------+----------+
+| **Default value**  | yes      |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
 
 
 windows_registry
@@ -257,10 +314,10 @@ Use this option to monitor specified Windows registry entries (one entry per lin
 +--------------------+------------------------------+
 | **Default value**  | HKEY_LOCAL_MACHINE\\Software |
 +--------------------+------------------------------+
-| **Allowed values** | Any registry entry           |
+| **Allowed values** | Any registry entry.          |
 +--------------------+------------------------------+
 
-Atributes:
+Attributes:
 
 +----------+---------------------------------------------------------+
 | **arch** | Select the Registry view depending on the architecture. |
@@ -268,6 +325,12 @@ Atributes:
 |          | Default value    | 32bit                                |
 |          +------------------+--------------------------------------+
 |          | Allowed values   | 32bit, 64bit, both                   |
++----------+------------------+--------------------------------------+
+| **tags** | Add tags to alerts for monitored registry entries.      |
++          +                                                         +
+|          | .. versionadded:: 3.6.0                                 |
++          +------------------+--------------------------------------+
+|          | Allowed values   | Tags list separated by commas        |
 +----------+------------------+--------------------------------------+
 
 
@@ -280,22 +343,32 @@ registry_ignore
 
 List of registry entries to be ignored.  (one entry per line). Multiple lines may be entered to include multiple registry entries.
 
-+--------------------+--------------------+
-| **Default value**  | ..CryptographyRNG  |
-+--------------------+--------------------+
-| **Allowed values** | Any registry entry |
-+--------------------+--------------------+
++--------------------+---------------------+
+| **Default value**  | n/a                 |
++--------------------+---------------------+
+| **Allowed values** | Any registry entry. |
++--------------------+---------------------+
+
+Attributes:
+
++----------+--------------------------------------------------------------+
+| **arch** | Select the Registry to ignore depending on the architecture. |
++          +------------------+-------------------------------------------+
+|          | Default value    | 32bit                                     |
+|          +------------------+-------------------------------------------+
+|          | Allowed values   | 32bit, 64bit, both                        |
++----------+------------------+-------------------------------------------+
 
 prefilter_cmd
 ^^^^^^^^^^^^^^
 
 Run to prevent prelinking from creating false positives.
 
-+--------------------+-------------------------------+
-| **Default value**  | n/a                           |
-+--------------------+-------------------------------+
-| **Allowed values** | Command to prevent prelinking |
-+--------------------+-------------------------------+
++--------------------+--------------------------------+
+| **Default value**  | n/a                            |
++--------------------+--------------------------------+
+| **Allowed values** | Command to prevent prelinking. |
++--------------------+--------------------------------+
 
 Example:
 
@@ -313,11 +386,118 @@ skip_nfs
 
 Specifies if syscheck should scan network mounted filesystems (Works on Linux and FreeBSD). Currently, skip_nfs will exclude checking files on CIFS or NFS mounts.
 
++--------------------+----------+
+| **Default value**  | yes      |
++--------------------+----------+
+| **Allowed values** | yes, no  |
++--------------------+----------+
+
+remove_old_diff
+^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.4.0
+.. deprecated:: 3.8.0
+
+Specifies if Syscheck should delete the local snapshots that are not currently being monitorized. Since version 3.8.0, Syscheck will always purge those snapshots.
+
 +--------------------+---------+
-| **Default value**  | no      |
+| **Default value**  | yes     |
 +--------------------+---------+
 | **Allowed values** | yes, no |
 +--------------------+---------+
+
+restart_audit
+^^^^^^^^^^^^^
+
+.. versionadded:: 3.5.0
+.. deprecated:: 3.9.0
+
+.. note::  This option is set inside the ``<whodata>`` tag since version 3.9.0.
+
+Allow the system to restart `Auditd` after installing the plugin. Note that setting this field to ``no`` the new
+whodata rules won't be applied automatically.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+windows_audit_interval
+^^^^^^^^^^^^^^^^^^^^^^
+
+.. versionadded:: 3.5.0
+
+This option sets the frequency with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
+
++--------------------+------------------------------------+
+| **Default value**  | 5 minutes                          |
++--------------------+------------------------------------+
+| **Allowed values** | A positive number, time in seconds |
++--------------------+------------------------------------+
+
+
+whodata
+^^^^^^^
+
+.. versionadded:: 3.7.1
+
+The Whodata options will be configured inside this tag.
+
+.. code-block:: xml
+
+    <!-- Whodata options -->
+    <whodata>
+        <restart_audit>yes</restart_audit>
+        <audit_key>auditkey1,auditkey2</audit_key>
+        <startup_healthcheck>yes</startup_healthcheck>
+    </whodata>
+
+
+**restart_audit**
+
+.. versionadded:: 3.9.0
+
+Allow the system to restart `Auditd` after installing the plugin. Note that setting this field to ``no`` the new
+whodata rules won't be applied automatically.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+
+**audit_key**
+
+.. versionadded:: 3.7.1
+
+Set up the FIM engine to collect the Audit events using keys with ``audit_key``. Wazuh will include in its FIM baseline those events being monitored by Audit using `audit_key`. For those systems where Audit is already set to monitor folders for other purposes, Wazuh can collect events generated as a key from `audit_key`. This option is only available for **Linux systems with Audit**.
+
++--------------------+------------------------------------+
+| **Default value**  | Empty                              |
++--------------------+------------------------------------+
+| **Allowed values** | Any string separated by commas     |
++--------------------+------------------------------------+
+
+
+.. note:: Audit allow inserting spaces inside the keys, so the spaces inserted inside the field ``<audit_key>`` will be part of the key.
+
+
+**startup_healthcheck**
+
+.. versionadded:: 3.9.0
+
+This option allows to disable the Audit health check during the Whodata engine starting. This option is only available for **Linux systems with Audit**.
+
++--------------------+------------+
+| **Default value**  | yes        |
++--------------------+------------+
+| **Allowed values** | yes, no    |
++--------------------+------------+
+
+.. warning:: The health check ensures that the rules required by Whodata can be set in Audit correctly and also that the generated events can be obtained. Disabling the health check may cause functioning problems in Whodata and loss of FIM events.
+
 
 Default Unix configuration
 --------------------------
@@ -336,8 +516,8 @@ Default Unix configuration
     <!-- Generate alert when new file detected -->
     <alert_new_files>yes</alert_new_files>
 
-    <!-- Don't ignore files that change more than 3 times -->
-    <auto_ignore>no</auto_ignore>
+    <!-- Don't ignore files that change more than 'frequency' times -->
+    <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
 
     <!-- Directories to check  (perform all possible verifications) -->
     <directories check_all="yes">/etc,/usr/bin,/usr/sbin</directories>
@@ -356,6 +536,11 @@ Default Unix configuration
     <ignore>/etc/cups/certs</ignore>
     <ignore>/etc/dumpdates</ignore>
     <ignore>/etc/svc/volatile</ignore>
+    <ignore>/sys/kernel/security</ignore>
+    <ignore>/sys/kernel/debug</ignore>
+
+    <!-- File types to ignore -->
+    <ignore type="sregex">.log$|.swp$</ignore>
 
     <!-- Check the file, but never compute the diff -->
     <nodiff>/etc/ssl/private.key</nodiff>

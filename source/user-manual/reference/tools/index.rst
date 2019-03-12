@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _tools:
 
 Tools
@@ -26,11 +28,13 @@ Tools
 |                                                   |                                                                            |                             |
 |                                                   | and system auditing database                                               |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
-| :doc:`syscheck_control <syscheck_control>`        | Provides an interface for managing the                                     | manager                     |
+| :doc:`syscheck_control <syscheck_control>`        | Provides an interface for managing the integrity checking database         | manager                     |
 |                                                   |                                                                            |                             |
-|                                                   | integrity checking database                                                |                             |
+|                                                   | .. deprecated:: 3.7                                                        |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`syscheck_update <syscheck_update>`          | Updates the integrity check database                                       | manager                     |
+|                                                   |                                                                            |                             |
+|                                                   | .. deprecated:: 3.7                                                        |                             |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`clear_stats <clear_stats>`                  | Clears the events stats                                                    | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
@@ -48,6 +52,9 @@ Tools
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
 | :doc:`cluster_control <cluster_control>`          | Manages and retrieves cluster information                                  | manager                     |
 +---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+| :doc:`fim_migrate <fim_migrate>`                  | Migrates older FIM databases to Wazuh-DB                                   | manager                     |
++---------------------------------------------------+----------------------------------------------------------------------------+-----------------------------+
+
 
 
   .. toctree::
@@ -71,3 +78,4 @@ Tools
     agent_groups
     agent_upgrade
     cluster_control
+    fim_migrate

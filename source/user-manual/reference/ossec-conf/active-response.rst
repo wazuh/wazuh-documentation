@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _reference_ossec_active_response:
 
 active-response
@@ -16,6 +18,10 @@ Options
 -------
 
 - `disabled`_
+
+Manager side
+^^^^^^^^^^^^
+
 - `command`_
 - `location`_
 - `agent_id`_
@@ -23,8 +29,13 @@ Options
 - `rules_group`_
 - `rules_id`_
 - `timeout`_
+
+Agent side
+^^^^^^^^^^
+
 - `repeated_offenders`_
 - `ca_store`_
+- `ca_verification`_
 
 disabled
 ^^^^^^^^
@@ -45,7 +56,7 @@ Toggles the active-response capability on and off. Setting this option to ``yes`
 command
 ^^^^^^^
 
-Links the active-response to the command.
+Links the active-response to the command. You can find more information at the :doc:`commands <commands>` section.
 
 +--------------------+-------------------------------------------+
 | **Default value**  | n/a                                       |
@@ -67,7 +78,7 @@ Indicates which system(s) the command should be executed on.
 +                    +---------------+------------------------------------------------------------------+
 |                    | defined-agent | This runs the command on a specific agent identified by agent_id.|
 +                    +---------------+------------------------------------------------------------------+
-|                    | all           | This runs the command on the Wazuh manager and on all agents.    |
+|                    | all           | This runs the command on all agents.                             |
 |                    |               | Use with caution.                                                |
 +--------------------+---------------+------------------------------------------------------------------+
 
@@ -123,6 +134,10 @@ Limits the command execution to only when one or more listed rules fire.
 | **Allowed values** | Any rule identification. Multiple IDs can be specified if separated by a comma. |
 +--------------------+---------------------------------------------------------------------------------+
 
+.. note::
+    When setting ``level``, ``rules_group`` and ``rules_id`` together, the active response will be triggered always that any rule matches with **one** of these options. In other words,
+    they are accumulative options, not restrictive.
+
 
 timeout
 ^^^^^^^
@@ -139,7 +154,7 @@ Specifies how long in seconds before the reverse command is executed.  When ``re
 repeated_offenders
 ^^^^^^^^^^^^^^^^^^
 
-Sets timeouts in minutes for repeat offenders. This is a comma-separated list of increasing timeouts that can contain a maximum of 5 entries. This must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**.
+Sets timeouts in minutes for repeat offenders. This is a comma-separated list of increasing timeouts that can contain a maximum of 5 entries.
 
 +--------------------+-----------------------------+
 | **Default value**  | n/a                         |
@@ -147,21 +162,37 @@ Sets timeouts in minutes for repeat offenders. This is a comma-separated list of
 | **Allowed values** | A positive number (minutes) |
 +--------------------+-----------------------------+
 
+.. warning::
+    This option must be configured directly in the **ossec.conf** file of the agent, even when using a manager/agent setup with centralized configuration of other settings via **agent.conf**. Apart from that, it has to be defined in the upper ``<active-response>`` section found in the configuration file.
+
 ca_store
 ^^^^^^^^
 
 Indicates the path to the root CA certificate. The agent needs the certificate with which the WPK was signed in order to be updated.
 
 +--------------------+-----------------------------+
-| **Default value**  | n/a                         |
+| **Default value**  | wpk_root.pem                |
 +--------------------+-----------------------------+
 | **Allowed values** | Path to root CA certificate |
++--------------------+-----------------------------+
+
+ca_verification
+^^^^^^^^^^^^^^^
+
+This option enables or disables the WPK validation using the root CA certificate. If this parameter is set to ``no`` the agent will accept any WPK package coming from the manager.
+
++--------------------+-----------------------------+
+| **Default value**  | yes                         |
++--------------------+-----------------------------+
+| **Allowed values** | yes, no                     |
 +--------------------+-----------------------------+
 
 Sample Configuration
 --------------------
 
 .. code-block:: xml
+
+    <!-- On the manager side -->
 
     <active-response>
       <disabled>no</disabled>
@@ -171,5 +202,12 @@ Sample Configuration
       <level>10</level>
       <rules_group>sshd,|pci_dss_11.4,</rules_group>
       <timeout>1</timeout>
+    </active-response>
+
+    <!-- On the agent side -->
+    <active-response>
+      <disabled>no</disabled>
+      <ca_store>/var/ossec/etc/wpk_root.pem</ca_store>
+      <ca_verification>yes</ca_verification>
       <repeated_offenders>1,5,10</repeated_offenders>
     </active-response>

@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _install-custom-wpk:
 
 Installing a custom WPK package

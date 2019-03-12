@@ -1,73 +1,97 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _manual_integration:
 
 Integration with external APIs
 ==============================
 
-The **Integrator** is a new daemon that allows Wazuh to connect to external APIs and alerting tools such as Slack and PagerDuty.
-
-.. versionadded:: 3.0.0
-
-A new integration has been developed in Wazuh 3.0 that allows for the inspection of malicious files using the VirusTotal database.
-
-The complete documentation of this new feature can be found at the :doc:`VirusTotal integration section<../capabilities/virustotal-scan/index>`.
+The **Integrator** daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty and VirusTotal.
 
 Configuration
 -------------
 
-The Integrator is not enabled by default, however, it can be enabled using the following command:
+The integrations are configured on the ``ossec.conf`` file which is located inside the Wazuh installation folder (``/var/ossec/etc/``). To configure an integration, add the following configuration inside the *<ossec_config>* section:
+
+.. code-block:: xml
+
+  <integration>
+    <name> </name>
+    <hook_url> </hook_url> <!-- Required for Slack -->
+    <api_key> </api_key> <!-- Required for PagerDuty and VirusTotal -->
+
+    <!-- Optional filters -->
+    <rule_id> </rule_id>
+    <level> </level>
+    <group> </group>
+    <event_location> </event_location>
+  </integration>
+
+After enabling the daemon and configure the integrations, restart the Wazuh manager to apply the changes:
+
+a. For Systemd:
 
 .. code-block:: console
 
-    # /var/ossec/bin/ossec-control enable integrator
-    # /var/ossec/bin/ossec-control restart
+  # systemctl restart wazuh-manager
 
+b. For SysV Init:
 
-Integrations are configured in the ``etc/ossec.conf`` file which is located inside your Wazuh installation directory.  Add the following information inside *<ossec_config> </ossec_config>* to configure integration:
+.. code-block:: console
 
-.. code-block:: xml
+  # service wazuh-manager restart
 
-    <integration>
-         <name> </name>
-         <hook_url> </hook_url>
-         <api_key> </api_key>
+The full configuration reference for the Integrator daemon can be found :ref:`here <reference_ossec_integration>`.
 
-      <!-- Optional filters -->
+Slack
+-----
 
-         <rule_id> </rule_id>
-         <level> </level>
-         <group> </group>
-         <event_location> </event_location>
-    </integration>
+This integration allows to receive alerts into a Slack channel thanks to the `Incoming Webhooks <https://api.slack.com/incoming-webhooks>`_, a simple way to post messages from 3rd-party apps (in this case, Wazuh).
 
-Integration with Slack
-----------------------
+This is an example configuration for the Slack integration:
 
 .. code-block:: xml
 
-    <integration>
-      <name>slack</name>
-      <hook_url>https://hooks.slack.com/services/...</hook_url>
-    </integration>
+  <integration>
+    <name>slack</name>
+    <hook_url>https://hooks.slack.com/services/...</hook_url> <!-- Replace with your Slack hook URL -->
+    <alert_format>json</alert_format>
+  </integration>
 
+PagerDuty
+---------
 
-Integration with PagerDuty
----------------------------
+`PagerDuty <https://www.pagerduty.com/>`_ is a SaaS incident response platform suitable for IT departments. This integration allows to create a service using its official API in order to receive Wazuh alerts on the Incidents Dashboard.
 
-.. code-block:: xml
-
-    <integration>
-      <name>pagerduty</name>
-      <api_key>MYKEY</api_key>
-    </integration>
-
-
-Integration with VirusTotal
-----------------------------
+This is an example configuration for the PagerDuty integration:
 
 .. code-block:: xml
 
-    <integration>
-      <name>virustotal</name>
-      <api_key>VirusTotal_API_Key</api_key>
-      <group>syscheck,</group>
-    </integration>
+  <integration>
+    <name>pagerduty</name>
+    <api_key>API_KEY</api_key> <!-- Replace with your PagerDuty API key -->
+  </integration>
+
+As seen on the screenshot below, alerts start coming into the dashboard:
+
+.. thumbnail:: ../../images/manual/integration/pagerduty.png
+  :title: PagerDuty Incidents Dashboard
+  :align: center
+  :width: 80%
+
+VirusTotal
+----------
+
+.. versionadded:: 3.0.0
+
+This integration allows the inspection of malicious files using the VirusTotal database. Find more information about this at the :ref:`VirusTotal integration <virustotal-scan>` page.
+
+This is an example configuration for the VirusTotal integration:
+
+.. code-block:: xml
+
+  <integration>
+    <name>virustotal</name>
+    <api_key>API_KEY</api_key> <!-- Replace with your VirusTotal API key -->
+    <group>syscheck</group>
+    <alert_format>json</alert_format>
+  </integration>

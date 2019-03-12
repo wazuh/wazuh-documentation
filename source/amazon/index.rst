@@ -1,20 +1,28 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _amazon:
 
-AWS CloudTrail
-==========================================
+Using Wazuh to monitor AWS
+==========================
+
+.. meta::
+  :description: Discover how Wazuh can help you to monitor your Amazon Web Services (AWS) infrastructure.
 
 .. versionadded:: 3.2.0
 
-Wazuh provides the ability to read your AWS CloudTrail logs directly from your AWS S3 bucket. Amazon CloudTrail support is built-in Wazuh, giving you the ability to search, analyze, and alert on AWS CloudTrail log data.
+Wazuh helps to increase the security of an AWS infrastructure in two different, complementary ways:
 
-This section provides instructions to configure the integration. It also explains different use cases as examples of how the rules can be customized for alerting on specific events from IAM, EC2 and VPC.
+- **Installing the Wazuh agent on the instances** to monitor the activity inside them. It collects different types of system and application data and forwards it to the Wazuh manager. Different agent tasks or processes are used to monitor the system in different ways (e.g., monitoring file integrity, reading system log messages and scanning system configurations).
+- **Monitoring AWS services** to collect and analyze log data about the infrastructure. Thanks to the module for AWS, Wazuh can trigger alerts based on the events obtained from these services, which provide rich and complete information about the infrastructure, such as the instances configuration, unauthorized behavior, data stored on S3, and more.
 
-The diagram below shows how a log message about an AWS event flows from AWS to a Wazuh agent. Once the agent reads the message, it sends it to the Wazuh manager which analyses it with decoders and rules. When a rule matches, an alert is triggered if the rule severity is high enough.
+In this section you can learn about this two methods, what they do and how to configure and set them up.
 
 .. topic:: Contents
 
-    .. toctree::
-       :maxdepth: 2
+  .. toctree::
+    :maxdepth: 2
 
-       installation
-       use-cases/index
+    instances
+    services/index
+    configuration/index
+    troubleshooting

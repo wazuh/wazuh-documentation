@@ -1,3 +1,4 @@
+.. Copyright (C) 2018 Wazuh, Inc.
 
 .. _agent_control:
 
@@ -21,7 +22,9 @@ agent_control options
 +-------------------+---------------------------------------------------------+
 | **-l**            | List available agents whether they are active or not.   |
 +-------------------+---------------------------------------------------------+
-| **-lc**           | List active agents                                      |
+| **-lc**           | List only the currently connected agents.               |
++-------------------+---------------------------------------------------------+
+| **-ln**           | List only the currently disconnected agents.            |
 +-------------------+---------------------------------------------------------+
 | **-i <agent_id>** | Extract information from an agent                       |
 +-------------------+---------------------------------------------------------+

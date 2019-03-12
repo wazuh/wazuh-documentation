@@ -1,3 +1,5 @@
+.. Copyright (C) 2018 Wazuh, Inc.
+
 .. _reference_ossec_cluster:
 
 cluster
@@ -19,11 +21,11 @@ Options
 - `node_name`_
 - `node_type`_
 - `key`_
-- `interval`_
 - `port`_
 - `bind_addr`_
 - `nodes`_
 - `hidden`_
+- `disabled`_
 
 name
 ^^^^
@@ -41,6 +43,9 @@ node_name
 
 Specifies the name of the current node of the cluster.
 
+.. note::
+	Each node of the cluster must have a unique name. If two nodes share the same name, one of them will be rejected.
+
 +--------------------+---------------+
 | **Default value**  | node01        |
 +--------------------+---------------+
@@ -55,13 +60,17 @@ Specifies the role of the node.
 +--------------------+------------------+
 | **Default value**  | master           |
 +--------------------+------------------+
-| **Allowed values** | master, client   |
+| **Allowed values** | master, worker   |
 +--------------------+------------------+
+
+.. warning::
+
+	Using ``client`` as ``node_type`` in configuration is still valid but a warning message will be shown in logs.
 
 key
 ^^^
 
-Defines the key used to encrypt the communication between the nodes. This key must be 32 characters long. Refer to the :doc:`Wazuh cluster manual <../../manager/wazuh-cluster>` for information on how to generate a key.
+Defines the key used to encrypt the communication between the nodes. This key must be 32 characters long. Refer to the :ref:`deploy_wazuh_cluster` for information on how to generate a key.
 
 .. note::
 	This key must be the same for all of the nodes of the cluster.
@@ -74,6 +83,8 @@ Defines the key used to encrypt the communication between the nodes. This key mu
 
 interval
 ^^^^^^^^
+
+.. deprecated:: 3.2.3
 
 Sets the interval between cluster synchronizations.
 
@@ -110,16 +121,16 @@ Specifies which IP address will communicate with the cluster when the node has m
 nodes
 ^^^^^
 
-Lists all of the nodes that make up the cluster using the ``<node>`` tag for each one.
+Lists all master nodes in the cluster using the ``<node>`` tag for each one.
 
-+--------------------+-----------------------------------------+
-| **Default value**  | localhost                               |
-+--------------------+-----------------------------------------+
-| **Allowed values** | Any valid IP address of a cluster node. |
-+--------------------+-----------------------------------------+
++--------------------+--------------------------------------------------+
+| **Default value**  | NODE_IP                                          |
++--------------------+--------------------------------------------------+
+| **Allowed values** | Any valid address (IP or DNS) of a cluster node. |
++--------------------+--------------------------------------------------+
 
 .. note::
-	This list must be the same in all managers of the cluster. For each manager, specify any of the IP addresses returned by the ``hostname --all-ip-addresses`` command. If this is not correct, it will result in an error.
+	The current cluster only allows one master node, therefore this list must have only one element. If more elements are found, **the first one will be used as master** and the rest will be ignored.
 
 hidden
 ^^^^^^
@@ -132,6 +143,18 @@ Toggles whether or not to show information about the cluster that generated an a
 | **Allowed values** | yes, no                                 |
 +--------------------+-----------------------------------------+
 
+disabled
+^^^^^^^^
+
+Toggles whether the cluster is enabled or not. If this value is set to **yes**, the cluster won't start.
+
++--------------------+-----------------------------------------+
+| **Default value**  | yes                                     |
++--------------------+-----------------------------------------+
+| **Allowed values** | yes, no                                 |
++--------------------+-----------------------------------------+
+
+
 Sample configuration
 --------------------
 
@@ -142,13 +165,10 @@ Sample configuration
       <node_name>manager_01</node_name>
       <node_type>master</node_type>
       <key>ugdtAnd7Pi9myP7CVts4qZaZQEQcRYZa</key>
-      <interval>2m</interval>
       <port>1516</port>
       <bind_addr>0.0.0.0</bind_addr>
       <nodes>
-        <node>172.17.0.2</node>
-        <node>172.17.0.3</node>
-        <node>172.17.0.4</node>
+        <node>master</node>
       </nodes>
       <hidden>no</hidden>
     </cluster>
