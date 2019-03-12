@@ -5,7 +5,7 @@
 Using the RESTful API
 =====================
 
-As with the command line, users can manage the agents using the Wazuh API, an API that let the users make many different configurations in their Wazuh project.
+As with the command line, certain tasks can be performed via the RESTful API.
 For more info about the API, check its :ref:`guide. <api>`
 
 .. topic:: Contents
