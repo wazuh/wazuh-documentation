@@ -18,17 +18,31 @@ The *rootcheck* engine can perform the following checks:
 
 Using these checks, the following policies have been developed:
 
-- cis_debian_linux_rcl.txt
-- cis_rhel5_linux_rcl.txt
-- cis_rhel6_linux_rcl.txt
-- cis_rhel7_linux_rcl.txt
-- cis_rhel_linux_rcl.txt
-- cis_sles11_linux_rcl.txt
-- cis_sles12_linux_rcl.txt
-- system_audit_rcl.txt
-- system_audit_ssh.txt
-- win_audit_rcl.txt
-- win_applications_rcl.txt
++--------------------------+--------------------------------------------------------------------+
+| Policy                   | Description                                                        |
++==========================+====================================================================+
+| cis_debian_linux_rcl.txt | Based on CIS Benchmark for Debian Linux v1.0                       |
++--------------------------+--------------------------------------------------------------------+
+| cis_rhel5_linux_rcl.txt  | Based on CIS Benchmark for Red Hat Enterprise Linux 5 v2.1.0       |
++--------------------------+--------------------------------------------------------------------+
+| cis_rhel6_linux_rcl.txt  | Based on CIS Benchmark for Red Hat Enterprise Linux 6 v1.3.0       |
++--------------------------+--------------------------------------------------------------------+
+| cis_rhel7_linux_rcl.txt  | Based on CIS Benchmark for Red Hat Enterprise Linux 7 v1.1.0       |
++--------------------------+--------------------------------------------------------------------+
+| cis_rhel_linux_rcl.txt   | Based on CIS Benchmark for Red Hat Enterprise Linux v1.0.5         |
++--------------------------+--------------------------------------------------------------------+
+| cis_sles11_linux_rcl.txt | Based on CIS Benchmark for SUSE Linux Enterprise Server 11 v1.1.0  |
++--------------------------+--------------------------------------------------------------------+
+| cis_sles12_linux_rcl.txt | Based on CIS Benchmark for SUSE Linux Enterprise Server 12 v1.0.0  |
++--------------------------+--------------------------------------------------------------------+
+| system_audit_rcl.txt     | Web vulnerabilities and exploits                                   |
++--------------------------+--------------------------------------------------------------------+
+| win_audit_rcl.txt        | Check registry values                                              |
++--------------------------+--------------------------------------------------------------------+
+| system_audit_ssh.txt     | SSH Hardening                                                      |
++--------------------------+--------------------------------------------------------------------+
+| win_applications_rcl.txt | Check if malicious applications are installed                      |
++--------------------------+--------------------------------------------------------------------+
 
 To download those files, follow this steps:
 
