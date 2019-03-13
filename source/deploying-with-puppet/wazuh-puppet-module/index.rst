@@ -14,23 +14,27 @@ Download and install the Wazuh module from Puppet Forge:
 
 .. code-block:: console
 
-   # puppet module install wazuh-wazuh --version 3.8.2
-   Notice: Preparing to install into /etc/puppet/modules ...
-   Notice: Downloading from https://forgeapi.puppetlabs.com ...
-   Notice: Installing -- do not interrupt ...
-   /etc/puppet/modules
-   └─┬ wazuh-wazuh (v2.0.21)
-     ├── puppet-selinux (v0.8.0)
-     ├── puppetlabs-apt (v2.2.0)
-     ├── puppetlabs-concat (v1.2.4)
-     ├── puppetlabs-stdlib (v4.9.0)
-     └── stahnma-epel (v1.1.1)
+  # puppet module install wazuh-wazuh --version 3.9.0
+  Notice: Preparing to install into /etc/puppet/modules ...
+  Notice: Downloading from https://forgeapi.puppetlabs.com ...
+  Notice: Installing -- do not interrupt ...
+  /etc/puppet/modules
+  └─┬ wazuh-wazuh (v3.8.2)
+    ├── puppet-nodejs (v7.0.0)
+    ├── puppet-selinux (v1.6.1)
+    ├── puppetlabs-apt (v6.3.0)
+    ├─┬ puppetlabs-concat (v5.3.0)
+    │ └── puppetlabs-translate (v1.2.0)
+    ├── puppetlabs-firewall (v1.15.1)
+    ├── puppetlabs-stdlib (v5.2.0)
+    └── stahnma-epel (v1.3.1)
 
 This module installs and configures Wazuh agent and manager.
 
-.. note::
-  For now, Puppet only supports Wazuh v2.0.22 and v3.8.2.
-
+.. warning::
+  In CentOS, no matter what path you call the command "puppet" from, it will run from anywhere.
+  In Ubuntu, first move to the folder where the binary file is located: ``/opt/puppetlabs/bin/puppet``
+  
 Install manager via Puppet
 --------------------------
 
@@ -53,7 +57,6 @@ The manager is configured by installing the ``wazuh::server`` class, and optiona
         source => 'https://packages.wazuh.com/key/GPG-KEY-WAZUH',
         server => 'pgp.mit.edu'
       }
-
 
 Here is an example of a manifest ``wazuh-manager.pp``::
 
