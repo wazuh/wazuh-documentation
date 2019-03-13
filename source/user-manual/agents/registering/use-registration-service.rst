@@ -105,7 +105,7 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
     b. For windows:
     
-      Open the graffic interface and change the value of the Manager IP field to the new IP.
+      Open the graphic interface and change the value of the Manager IP field to the new IP.
 
 Password authorization
 ----------------------
