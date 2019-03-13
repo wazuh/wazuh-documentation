@@ -101,7 +101,7 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
     .. code-block:: bash
 
-      # sed -i 's/MANAGER_IP/NEW_MANAGER_IP' /var/ossec/etc/ossec.conf
+      # sed -i 's/MANAGER_IP/NEW_MANAGER_IP/g' /var/ossec/etc/ossec.conf
 
     b. For windows:
     
