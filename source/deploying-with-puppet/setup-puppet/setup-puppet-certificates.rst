@@ -5,7 +5,7 @@
 Setting up Puppet certificates
 ==============================
 
-To generate and Sign a certificate, follow the next steps:
+To generate and sign a certificate, follow the next steps:
 
 1. In the agent side run this command to generate an empty certificate:
 
@@ -17,7 +17,7 @@ To generate and Sign a certificate, follow the next steps:
 
         You will see this message:  ``Exiting; no certificate found and waitforcert is disabled``
 
-2. In the server side, list the current certificates:
+2. In the server side, list the current certificates that need approval:
 
     .. code-block:: console
 
