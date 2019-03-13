@@ -18,6 +18,10 @@ Unzip the package in ``/``:
 
 .. code-block:: console
 
+<<<<<<< HEAD
     # tar -xvf wazuh-agent-3.8.2-1-hpux-11v3-ia64.tar -C /
+=======
+    # tar -xvf wazuh-agent-3.8.2-1-hpux-11v3-ia64.tar
+>>>>>>> 3.9
 
 .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.

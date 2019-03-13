@@ -212,14 +212,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.5.4
+      # yum install elasticsearch-6.6.1
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch=6.5.4
+      # apt-get install elasticsearch=6.6.1
 
 2. Start Elasticsearch:
 
@@ -240,7 +240,7 @@ Upgrade Elasticsearch
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.5.4",
+        "number" : "6.6.1",
         "build_flavor" : "default",
         "build_type" : "rpm",
         "build_hash" : "053779d",
@@ -271,13 +271,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash-6.5.4
+      # yum install logstash-6.6.1
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash=1:6.5.4-1
+      # apt-get install logstash=1:6.6.1-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -313,13 +313,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-6.5.4
+      # yum install kibana-6.6.1
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=6.5.4
+      # apt-get install kibana=6.6.1
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -352,13 +352,21 @@ Upgrade Kibana
 
   .. code-block:: console
 
+<<<<<<< HEAD
       # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.5.4.zip
+=======
+      # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.1.zip
+>>>>>>> 3.9
 
   b) Without sudo:
 
   .. code-block:: console
 
+<<<<<<< HEAD
       # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.5.4.zip' kibana
+=======
+      # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.1.zip' kibana
+>>>>>>> 3.9
 
 5. Start Kibana:
 
@@ -377,13 +385,13 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.5.4
+      # yum install filebeat-6.6.1
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.5.4
+      # apt-get install filebeat=6.6.1
 
 2. Download the Filebeat configuration file from the Wazuh repository:
 

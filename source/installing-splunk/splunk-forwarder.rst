@@ -16,7 +16,7 @@ Depending on the type of architecture that you're installing, the Splunk Forward
 Installation process
 --------------------
 
-1. Download Splunk Forwarder v7.2.3 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
+1. Download Splunk Forwarder v7.2.4 package from `the official website <https://www.splunk.com/en_us/download/universal-forwarder.html>`_.
 
 2. Install it with the following commands depending on your operating system:
 
@@ -32,7 +32,7 @@ Installation process
 
     # dpkg --install splunkforwarder-package.deb
 
-3. Ensure Splunk Forwarder v7.2.3 is installed in ``/opt/splunkforwarder``.
+3. Ensure Splunk Forwarder v7.2.4 is installed in ``/opt/splunkforwarder``.
 
 Configuration process
 ---------------------
@@ -97,3 +97,70 @@ After installing the Splunk Forwarder, incoming data should appear in the design
   .. code-block:: console
 
     # /opt/splunkforwarder/bin/splunk enable boot-start
+
+Configuring Forwarder in a Splunk cluster
+-----------------------------------------
+To configure forwarder instance in the cluster first install the `splunk forwarder. <https://www.splunk.com/en_us/download/universal-forwarder.html>`_
+
+Now, it is necessary to configure the 3 most important files in this instance:
+
+  - **inputs.conf**: Reads alerts from **alerts.json**
+  - **outputs.conf**: This file is for pointing events to certain indexers. It can be a single indexer or a cluster of indexers, in this last case, load balancing has to be configured on it.
+  - **props.conf**: This file provides format and transforming fields of the data to be indexed.
+
+Starting with **inputs.conf**, create it and fill it with the next block:
+
+.. code-block:: console
+
+  # touch /opt/splunkforwarder/etc/system/local/inputs.conf
+
+.. code-block:: xml
+
+  [monitor:///var/ossec/logs/alerts/alerts.json]
+  disabled = 0
+  host = MANAGER_HOSTNAME
+  index = wazuh
+  sourcetype = wazuh
+
+  Now, following with the **outputs.conf**:
+
+.. code-block:: console
+
+  # touch /opt/splunkforwarder/etc/system/local/outputs.conf
+
+And paste this inside:
+
+.. code-block:: xml
+
+  [indexer_discovery:cluster1]
+  pass4SymmKey = changeme
+  master_uri = https://<master_ip>:<port>
+
+  [tcpout:cluster1_tcp]
+  indexerDiscovery = cluster1
+
+  [tcpout]
+  defaultGroup = cluster1_tcp
+
+For the last one, the **props.conf**, follow the same procedure:
+
+.. code-block:: console
+
+  # touch /opt/splunkforwarder/etc/system/local/props.conf
+
+.. code-block:: xml
+
+  [wazuh]
+  DATETIME_CONFIG =
+  INDEXED_EXTRACTIONS = json
+  KV_MODE = none
+  NO_BINARY_CHECK = true
+  category = Application
+  disabled = false
+  pulldown_type = true
+
+To save all the changes, restart splunk:
+
+.. code-block:: console
+
+  # /opt/splunkforwarder/bin/splunk restart

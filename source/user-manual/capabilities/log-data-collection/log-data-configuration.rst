@@ -96,6 +96,27 @@ Events from the Windows Event channel can be filtered as below::
       <query>Event/System[EventID=7040]</query>
     </localfile>
 
+Filtering events from Windows Event Channel based on severity and queries
+-------------------------------------------------------------------------
+
+Users can filter events with different severity levels:
+
+    .. code-block:: xml
+
+        <localfile>
+            <location>System</location>
+            <log_format>eventchannel</log_format>
+            <query>
+                \<QueryList>
+                    \<Query Id="0"\ Path="System">
+                        \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
+                    \</Query>
+                \</QueryList>
+            </query>
+        </localfile>
+
+In this example, only events which levels are less or equal to "3" are checked.
+
 Using environment variables
 ---------------------------
 

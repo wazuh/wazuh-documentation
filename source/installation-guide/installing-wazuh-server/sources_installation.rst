@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _sources_installation:
 
@@ -6,8 +6,6 @@ Install Wazuh server from sources
 =================================
 
 This guide describes how to install the manager and API from source code. In addition, for distributed architectures, you will find some guidance on how to install Filebeat.
-
-.. note:: Many of the commands described below need to be executed with root user privileges.
 
 Installing Wazuh manager
 ------------------------
@@ -26,11 +24,44 @@ Installing Wazuh manager
 
       # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
 
+  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
+
+  To install the build dependencies of CPython, follow these steps:
+
+  * For RPM-based distributions:
+
+    .. code-block:: console
+
+      # yum install epel-release yum-utils -y
+      # yum-builddep python34 -y
+
+
+  * For Ubuntu based system:
+
+    .. code-block:: console
+
+      # echo "deb-src http://archive.ubuntu.com/ubuntu/ $(lsb_release -cs) main" >> /etc/apt/sources.list
+      # apt-get build-dep python3.6 -y
+
+  * For Debian based system:
+
+    .. code-block:: console
+
+      # echo "deb-src http://deb.debian.org/debian $(lsb_release -cs) main" >> /etc/apt/sources.list
+      # apt-get build-dep python3.5 -y
+
+  .. note:: The Python version from the previous command may change depending of the OS used to build the binaries. More information in `Install dependencies <https://devguide.python.org/setup/#install-dependencies>`_.
+
+
 2. Download and extract the latest version:
 
   .. code-block:: console
 
+<<<<<<< HEAD
     # curl -Ls https://github.com/wazuh/wazuh/archive/v3.8.2.tar.gz | tar zx
+=======
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.0.tar.gz | tar zx
+>>>>>>> 3.9
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -42,13 +73,21 @@ Installing Wazuh manager
     # cd wazuh-*
     # ./install.sh
 
-  .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
-
 4. When the script asks what kind of installation you want, type ``manager`` to install the Wazuh Manager:
 
   .. code-block:: none
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? manager
+
+.. note::
+  During the installation, users can decide the installation path. Execute the ``./install.sh`` and select the language, set the installation mode to ``manager``, then set the installation path (``Choose where to install Wazuh [/var/ossec]``). The default path of installation is ``/var/ossec``. A commonly used custom path might be ``/opt``.
+
+.. warning::
+  When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
+
+.. warning::
+  Be extremely careful not to select a critical installation directory.
+
 
 5. The installer asks if you want to start Wazuh at the end of the installation. If you chosen not to, you can start it later with:
 
@@ -109,6 +148,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
+<<<<<<< HEAD
       # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.8.2/install_api.sh && bash ./install_api.sh download
 
 3. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories of most Linux distributions.
@@ -151,6 +191,9 @@ It is possible to set a custom Python path for the API in ``/var/ossec/api/confi
 
     	#   yum-config-manager --enable rhui-REGION-rhel-server-rhscl
     	#   yum-config-manager --enable rhel-server-rhscl-6-rpms
+=======
+      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.0/install_api.sh && bash ./install_api.sh download
+>>>>>>> 3.9
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
 
