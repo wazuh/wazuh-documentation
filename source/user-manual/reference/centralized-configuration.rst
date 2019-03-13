@@ -16,6 +16,8 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
+- :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
+- :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
 
 .. note::
   When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
