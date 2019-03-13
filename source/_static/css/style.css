@@ -68,61 +68,6 @@ th {
           user-select: none;
 }
 
-.button-area-flex .btn-wazuh {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.btn-wazuh {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
-    text-decoration: none;
-    font-weight: 500;
-    border-radius: 5px;
-    display: inline-block;
-    text-align: center;
-    margin: 1em 0;
-    padding: 10px 15px;
-    border: none;
-    -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
-    min-width: 150px;
-}
-
-a.btn-wazuh:focus,
-a.btn-wazuh:hover,
-a.btn-wazuh:active,
-.page .column div>a:hover {
-  text-decoration: none;
-}
-
-.btn-wazuh.btn-orange {
-  color: #ffffff;
-  background-color: #ffb600;
-}
-
-a.btn-wazuh:hover,
-a.btn-wazuh:focus,
-a.btn-wazuh:active {
-  color: #ffffff;
-  background-color: #0094ce;
-  border-color: #0094ce;
-}
-
-.btn-wazuh.btn-white {
-  background-color: #ffffff;
-  color: #ffb600;
-}
-
-.btn-wazuh .fa {
-  font-size: 1.2em;
-  text-align: left;
-  display: inline-block;
-  width: 1.2em;
-}
-
 .central-page-area a img {
   width: auto!important;
   max-width: 100%;
@@ -207,10 +152,6 @@ a.btn-wazuh:active {
   text-align: center;
   max-width: 70%;
   margin: 0 auto 2em auto;
-}
-
-.header a.btn-wazuh{
-  font-size: 1.5rem !important;
 }
 
 .header > .container{
@@ -1148,10 +1089,6 @@ footer .contact-info .fa-paper-plane-o {
   right: 0;
 }
 
-.page.page-404 #errorpage-content .btn-wazuh {
-  font-size: 1.6rem;
-}
-
 .page strong,
 .page b {
   font-weight: 700;
@@ -1592,24 +1529,6 @@ ul {
 
 .page.search-page h3 a {
   color: #0094ce;
-}
-
-.btn-wazuh {
-  border-radius: 5px;
-  display: inline-block;
-  font-size: 1.6rem;
-  min-width: 190px;
-}
-
-.btn-wazuh .fa {
-  font-size: 1.2em;
-  text-align: left;
-  display: inline-block;
-  width: 1.2em;
-}
-
-a.btn-wazuh:hover {
-  text-decoration: none;
 }
 
 #subfooter {
@@ -2426,29 +2345,14 @@ div.highlight pre {
     font-size: 24px;
   }
 
-  .search-page .btn-wazuh {
-    font-size: 1.12rem;
-    margin: 5px auto;
-    max-width: 350px;
-    min-width: 185px;
-  }
-
   form:not(.searchform) [type=submit] {
     font-size: 1.12rem;
     margin: 1.5em 0;
   }
 
-  .action-buttons a.btn-wazuh {
-    font-size: 1.12rem;
-  }
-
   .btn-download,
   .btn-guide {
     font-size: 1.3rem;
-  }
-
-  .btn-wazuh {
-    font-size: 1.12rem;
   }
 
   .page-404 > :first {
@@ -2466,10 +2370,6 @@ div.highlight pre {
 
   .page-404 #errorpage-content .button-area {
     bottom: calc(100% * 0.1);
-  }
-
-  .page-404 #errorpage-content .btn-wazuh {
-    font-size: 1.12rem;
   }
 
   .page-404 #errorpage-content h2 {
@@ -3276,10 +3176,6 @@ div.highlight pre {
         bottom: 0;
       }
 
-      a.btn-wazuh {
-        font-size: 2rem;
-      }
-
       .footer-column {
         padding: 15px;
       }
@@ -3444,9 +3340,6 @@ div.highlight pre {
             bottom: calc(100% * 0.03);
           }
 
-          .page-404 #errorpage-content .button-area .btn-wazuh {
-            font-size: 2.0rem;
-          }
 }
 
 /* Highlighted syntax */
