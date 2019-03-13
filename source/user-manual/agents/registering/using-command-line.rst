@@ -107,7 +107,7 @@ or in one line:
 
 .. code-block:: bash
 
-	# sed -i 's/MANAGER_IP/NEW_MANAGER_IP' /var/ossec/etc/ossec.conf
+	# sed -i 's/MANAGER_IP/NEW_MANAGER_IP/g' /var/ossec/etc/ossec.conf
 
 9. Restart the agent:
 
