@@ -230,6 +230,12 @@ a.btn-wazuh:active {
 #links-to-home .wazuh-logo-link {
   vertical-align: text-bottom;
   display: inline-block;
+  margin-right: 15px;
+}
+
+#links-to-home .wazuh-logo-link img {
+  max-height: 34px;
+  max-width: unset;
 }
 
 a.docs-link {
@@ -308,6 +314,9 @@ header .menuweb-bar .menu-item a {
   top: -1px;
 }
 
+#search-lg {
+  margin-left: auto;
+}
 
 .menu-sub #search-lg .no-searchbox {
   display: inline-block;
@@ -3087,6 +3096,10 @@ div.highlight pre {
         justify-self: right;
       }
 
+      #search-lg {
+        margin-left: 0;
+      }
+
 			#search-lg .search_main .searchform {
 				padding: 0;
 			}
@@ -3094,11 +3107,6 @@ div.highlight pre {
 			.index .search_main .searchform {
 				padding: 10px 7px;
 			}
-
-      .search_main .searchform > .btn-search,
-      .search_main .searchform > .btn-close, .navbar-toggle.btn-close {
-        position: static;
-      }
 
       .searchform {
         margin: 0;
@@ -3151,8 +3159,7 @@ div.highlight pre {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
-        padding-top: 10px;
-        padding-bottom: 10px;
+        padding: 10px 15px;
         max-width: 800px;
         margin: 0 auto;
       }
@@ -3178,14 +3185,9 @@ div.highlight pre {
         display: -ms-flexbox;
         display: flex;
         width: 100%;
-        max-width: calc(100% - 320px);
       }
 
-			.index .blue-bar.full-width {
-				max-width: 100%;
-			}
-
-      .breadcrumbs-wrapper {
+			.breadcrumbs-wrapper {
         display: inline-block;
         width: calc(100% - 60px);
       }
@@ -3335,14 +3337,17 @@ div.highlight pre {
       }
 
       #search-lg {
-			  z-index: 1;
+        overflow: hidden;
         max-width: 320px;
-        -ms-flex-negative: 0;
-            flex-shrink: 0;
+        width: 320px;
+        padding: 0;
+        -webkit-box-flex: unset;
+            -ms-flex: unset;
+                flex: unset;
       }
 
       .index #search-lg {
-        display: none;
+        width: 0;
       }
 }
 

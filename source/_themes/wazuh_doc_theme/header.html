@@ -56,13 +56,13 @@
           <span class="navbar-toggler-icon"></span>
         </button>
       </div>
-      <div id="search-lg" class="title-bar-right col-9 ml-auto col-lg-12">
-        {% if pagename != 'index' %}
-        {% include "searchbar.html" %}
-        {% endif %}
-      </div> <!-- // #search-lg -->
 
       <div class="blue-bar">
+        <div id="search-lg" class="title-bar-right col-9 col-lg-12">
+          {% if pagename != 'index' %}
+          {% include "searchbar.html" %}
+          {% endif %}
+        </div> <!-- // #search-lg -->
         <div class="submenu d-none d-lg-flex">
           <ul id="menu-submenu" class="nav">
             <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../' + version + '/installation-guide/', 1 ) }}">Installation Guide</a></li>
