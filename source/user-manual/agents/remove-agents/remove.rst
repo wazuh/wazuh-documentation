@@ -5,10 +5,7 @@
 Remove Agents
 -------------
 
-The binary */var/ossec/bin/manage_agents* allows the removal of agents using the command line.
-
-.. warning::
-   By using this method, the user will remove the agent from the list of the manager's connected agents. 
+The binary */var/ossec/bin/manage_agents* can be used also to remove agents using the command line. 
 
 If the user would like confirmation before removing the agent, use the following:
 

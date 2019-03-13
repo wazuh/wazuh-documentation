@@ -2,8 +2,8 @@
 
 .. _command-line-register:
 
-Register Agent
---------------
+Using the CLI
+-------------
 
 To register an agent using the command line, follow these steps:
 
@@ -102,6 +102,12 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 			...
 		</server>
 	</client>
+
+or in one line:
+
+.. code-block:: bash
+
+	# sed -i 's/MANAGER_IP/NEW_MANAGER_IP' /var/ossec/etc/ossec.conf
 
 9. Restart the agent:
 

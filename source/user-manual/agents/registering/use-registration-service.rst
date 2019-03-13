@@ -97,10 +97,15 @@ This is the easiest method to register agents. It doesn't require any kind of au
         </server>
       </client>
 
+    Or using `sed` to overwrite it in one command line:
+
+    .. code-block:: bash
+
+      # sed -i 's/MANAGER_IP/NEW_MANAGER_IP' /var/ossec/etc/ossec.conf
+
     b. For windows:
     
       Open the graffic interface and change the value of the Manager IP field to the new IP.
-
 
 Password authorization
 ----------------------
