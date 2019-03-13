@@ -230,12 +230,7 @@ a.btn-wazuh:active {
 #links-to-home .wazuh-logo-link {
   vertical-align: text-bottom;
   display: inline-block;
-  margin-right: 15px;
-}
-
-#links-to-home .wazuh-logo-link img {
-  max-height: 34px;
-  max-width: unset;
+  margin-right: 5px;
 }
 
 a.docs-link {
@@ -444,7 +439,7 @@ footer a:focus .fa {
 
 .toctree-wrapper > ul,
 ul.simple {
-  list-style: url(/_static/img/list-arrow.svg);
+  list-style: url('../img/list-arrow.svg');
   list-style-position: outside;
   font-size: 1.1rem;
   margin-left: 0.7em;
@@ -3085,6 +3080,15 @@ div.highlight pre {
         max-width: 182px;
       }
 
+      #links-to-home .wazuh-logo-link {
+        margin-right: 15px;
+      }
+
+      #links-to-home .wazuh-logo-link img {
+        max-height: 34px;
+        max-width: unset;
+      }
+
       .search_main .searchform {
 				display: -webkit-box;
         display: -ms-flexbox;
@@ -3359,10 +3363,6 @@ div.highlight pre {
 
           #main-content {
             padding-left: 60px;
-          }
-
-          .blue-bar {
-            padding-left: 5px;
           }
 
           #welcome-to-wazuh .topic,
