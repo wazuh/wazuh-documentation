@@ -13,7 +13,7 @@ Python Boto3 module is required on the system running the Wazuh module to pull A
 Pip
 ---
 
-The required modules can be installed with Pip, the Python package manager. The majority of UNIX distributions have this tool availabel in their software repositories, but it can be compiled from sources too:
+The required modules can be installed with Pip, the Python package manager. The majority of UNIX distributions have this tool available in their software repositories, but it can be compiled from sources too:
 
 a) For **CentOS/RHEL/Fedora** systems:
 
