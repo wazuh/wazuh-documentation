@@ -97,10 +97,10 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 .. code-block:: xml
 
 	<client>
-		<server>
-			<address>MANAGER_IP</address>
-			...
-		</server>
+	  <server>
+		  <address>MANAGER_IP</address>
+		  ...
+	  </server>
 	</client>
 
 or in one line:
