@@ -56,9 +56,9 @@ To download those files, follow this steps:
 
 3. Click the "Access PDFs" in the received e-mail.
 
-4. You will be redirected to a page. Introduce your e-mail direction in the "Look up" bar there.
+4. The user will be redirected to a page. Introduce your e-mail in the "Look up" box there.
 
-5. Now, you should be in the downloading page.
+5. It will redirect the user to the downloading page.
 
 6. To finish, choose the policy file that the user needs between the before mentioned and click the "Download PDF" button to start the download.
 
@@ -67,7 +67,7 @@ To download those files, follow this steps:
     :width: 70%
 
 .. warning::
-  Since last update, CIS benchmarks connects a personal token to every account, that's why it's necessary to SignUp in their page.
+  Since the last update, CIS benchmarks associates a personal token to every account, making necessary to SignUp in their page to be able to download the files.
 
 Alerts related to policy monitoring:
 
