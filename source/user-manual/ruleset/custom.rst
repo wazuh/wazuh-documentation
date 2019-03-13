@@ -3,7 +3,7 @@
 .. _ruleset_custom:
 
 Custom rules and decoders
-===========================
+==========================
 
 It is possible to modify the default rules and decoders from the Wazuh Ruleset and also to add new ones in order to increase Wazuh's detection capabilities.
 
@@ -13,7 +13,6 @@ Adding new decoders and rules
 .. note::
   When implementing small changes, adding unattached rules, or even testing new rules or decoders, we recommend to use the ``local_decoder.xml`` and ``local_rules.xml`` files.
   For bigger changes or to add more rules or decoders, it is better to create a new rule or decoder file.
-
 
 We are going to describe these procedures by using an easy example. Here is a log from a program called ``example``:
 ::
@@ -33,7 +32,6 @@ First, we need to decode this information, so we add the new decoder to ``/var/o
     <order>user, srcip</order>
   </decoder>
 
-
 Now, we will add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
 ::
 
@@ -41,7 +39,6 @@ Now, we will add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
     <program_name>example</program_name>
     <description>User logged</description>
   </rule>
-
 
 We can check if it works by using `/var/ossec/bin/ossec-logtest <https://documentation.wazuh.com/current/user-manual/reference/tools/ossec-logtest.html?highlight=logtest>`_:
 ::
@@ -62,8 +59,6 @@ We can check if it works by using `/var/ossec/bin/ossec-logtest <https://documen
        Level: '0'
        Description: 'User logged'
 
-
-
 Changing an existing rule
 ---------------------------
 
@@ -72,23 +67,34 @@ If the user needs to change an existing standard rule, it can be changed by foll
 .. warning::
     Changes to any rule file inside the ``/var/ossec/ruleset/rules`` folder will be lost in the update process. Use the following procedure to preserve your changes.
 
-If we want to change an existing rule, we should do the following:
+If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we will do the following:
 
-1. Open the rule file ``/var/ossec/ruleset/rules/rule_file.xml``.
+1. Open the rule file ``/var/ossec/ruleset/rules/0095-sshd_rules.xml``.
 
-2. Copy and paste the rule code block into ``/var/ossec/etc/rules/local_rules.xml``.
-
-3. Change the pasted rule the way its needed, and add the option ``overwrite="yes"`` to indicate that this rule is overwriting an already defined rule:
+2. Find and copy the following code from the rule file:
 
 ::
 
-  <rule id="100000" level="1" overwrite="yes">
-    (rule content)
+  <rule id="5710" level="5">
+    <if_sid>5700</if_sid>
+    <match>illegal user|invalid user</match>
+    <description>sshd: Attempt to login using a non-existent user</description>
+    <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,</group>
+  </rule>
+
+3. Paste the code into ``/var/ossec/etc/rules/local_rules.xml``, modify the level value, and add ``overwrite="yes"`` to indicate that this rule is overwriting an already defined rule:
+
+::
+
+  <rule id="5710" level="10" overwrite="yes">
+    <if_sid>5700</if_sid>
+    <match>illegal user|invalid user</match>
+    <description>sshd: Attempt to login using a non-existent user</description>
+    <group>invalid_login,authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,pci_dss_10.6.1,</group>
   </rule>
 
 .. note::
   As is said at the start of this page, this is a punctual solution for small changes. If users want to overwrite a big amount of rules, we suggest to follow this same procedure but instead of including the overwritten rules in the ``local_rules.xml`` file, include them into a new file in the ``/var/ossec/ruleset/rules`` folder.
-
 
 Changing an existing decoder
 -----------------------------
@@ -98,11 +104,13 @@ You can also modify the standard decoders.
 .. warning::
     Changes in any decoder file in the ``/var/ossec/ruleset/decoders`` folder will be lost in the update process. Use the following procedure to preserve your changes.
 
-Unfortunately, there is no facility for overwriting decoders in the way described for rules above. However, we can perform changes in any decoder file as follows:
+Unfortunately, there is no facility for overwriting decoders in the way described for rules above. However, we can perform changes in any decoder file following this section.
 
-1. Copy the decoder file ``/var/ossec/ruleset/decoders/my_decoders.xml`` from the default folder to the user folder ``/var/ossec/etc/decoders`` in order to keep the changes.
+If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we will do the following:
 
-2. Exclude the original decoder file ``ruleset/decoders/my_decoders.xml`` from the OSSEC loading list. To do this, use the tag ``<decoder_exclude>`` in the ``ossec.conf`` file. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
+1. Copy the decoder file ``/var/ossec/ruleset/decoders/0310-ssh_decoders.xml`` from the default folder to the user folder ``/var/ossec/etc/decoders`` in order to keep the changes.
+
+2. Exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the OSSEC loading list. To do this, use the tag ``<decoder_exclude>`` in the ``ossec.conf`` file. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
 
 ::
 
@@ -110,17 +118,16 @@ Unfortunately, there is no facility for overwriting decoders in the way describe
     <!-- Default ruleset -->
     <decoder_dir>ruleset/decoders</decoder_dir>
     <rule_dir>ruleset/rules</rule_dir>
-    <rule_exclude>my_rules.xml</rule_exclude>
+    <rule_exclude>0215-policy_rules.xml</rule_exclude>
     <list>etc/lists/audit-keys</list>
 
     <!-- User-defined ruleset -->
     <decoder_dir>etc/decoders</decoder_dir>
     <rule_dir>etc/rules</rule_dir>
-    <decoder_exclude>ruleset/decoders/my_decoders.xml</decoder_exclude>
+    <decoder_exclude>ruleset/decoders/0310-ssh_decoders.xml</decoder_exclude>
   </ruleset>
 
-
-3. Perform the changes in the file ``/var/ossec/etc/decoders/my_decoders.xml``.
+3. Perform the changes in the file ``/var/ossec/etc/decoders/0310-ssh_decoders.xml``.
 
 .. warning::
     Note that at this point, if updates to the public Wazuh Ruleset include changes to the file of the decoder you have overwritten, they will not apply to you since you are no longer loading that decoder file from the standard location that gets updates.  At some point you may have to manually migrate your customized material to a newer copy of that file.  Consider internally documenting your changes so that they are easy to find if they have to be migrated later.
