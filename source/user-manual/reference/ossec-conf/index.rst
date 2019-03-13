@@ -76,7 +76,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="cis-cat" <wodle-ciscat>`                          | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager, agent         |
+| :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="syscollector" <wodle-syscollector>`               | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
