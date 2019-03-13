@@ -1792,6 +1792,10 @@ blockquote pre {
 	content: '\e914';
 }
 
+#search-results .highlighted {
+  background-color: #fff200;
+}
+
 /* Overrides Bootstrap style
 -------------------------------------------------------------- */
 
