@@ -5,11 +5,11 @@
 Securing Elasticsearch and Kibana
 =================================
 
-To secure Kibana, we are going to evaluate 3 different ways:
+To secure Kibana, we are going to evaluate 3 different services:
 
-    - Using NGINX, in this page.
-    - Using :ref:`searchguard`
-    - Using :ref:`X-Pack <kibana_xpack>`
+    - Using NGINX as a reverse proxy to provide encrypted and authenticated access to Kibana.
+    - Using :ref:`searchguard` to provide user access security.
+    - Using :ref:`X-Pack <kibana_xpack>` to provide user role based access control.
 
 Using NGINX
 -----------
