@@ -42,7 +42,7 @@ See below an example of results when an application vulnerability is identified:
 	vulnerability.affected_package: binutils
 	vulnerability.version: 2.26.1-1ubuntu1~16.04.6
 
-You can read more about this new module in the :doc:`Vulnerability detection section <../user-manual/capabilities/vulnerability-detection>`.
+You can read more about this new module in the :doc:`Vulnerability detection section <../user-manual/capabilities/vulnerability-detection/index>`.
 
 Module for AWS Cloudtrail integration
 -------------------------------------

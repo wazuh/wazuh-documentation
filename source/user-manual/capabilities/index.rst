@@ -36,7 +36,7 @@ If you find a problem, error or if you want to ask related questions, please con
     antiflooding
     labels
     syscollector
-    vulnerability-detection
+    vulnerability-detection/index
     virustotal-scan/index
     osquery
     agent-key-polling

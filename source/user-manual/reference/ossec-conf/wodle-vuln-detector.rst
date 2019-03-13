@@ -249,4 +249,4 @@ The following configuration will update the vulnerability database for Debian 9 
         </provider>
     </wodle>
 
-.. note:: See the :doc:`Vulnerability detector section<../../capabilities/vulnerability-detection>` to obtain more information about this module.
+.. note:: See the :doc:`Vulnerability detector section<../../capabilities/vulnerability-detection/index>` to obtain more information about this module.
