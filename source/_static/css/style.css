@@ -135,25 +135,6 @@ th {
           align-items: center;
 }
 
-.main-head .header-title{
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  font-size: 2.5em;
-  margin: 1em 0;
-  text-align: center;
-  line-height: 1.2;
-  display: inline-block;
-  width: 100%;
-}
-
-.main-head p{
-  color: #fff;
-  font-size: 1.4em;
-  text-align: center;
-  max-width: 70%;
-  margin: 0 auto 2em auto;
-}
-
 .header > .container{
   display: -ms-flex;
   display: -webkit-box;
