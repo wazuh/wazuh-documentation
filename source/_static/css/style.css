@@ -363,7 +363,7 @@ footer a:focus .fa {
 ul.simple {
   list-style: url('../img/list-arrow.svg');
   list-style-position: outside;
-  font-size: 1.1rem;
+  font-size: 0.88rem;
   margin-left: 0.7em;
 }
 
