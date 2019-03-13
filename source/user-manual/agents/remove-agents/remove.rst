@@ -17,7 +17,7 @@ If the user would like confirmation before removing the agent, use the following
     # /var/ossec/bin/manage_agents
 
     ****************************************
-    * Wazuh v3.8.2 Agent manager.          *
+    * Wazuh v3.9.0 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
@@ -28,10 +28,10 @@ If the user would like confirmation before removing the agent, use the following
     Choose your action: A,E,L,R or Q: r
 
     Available agents:
-       ID: 003, Name: DB_Agent, IP: any
+       ID: 001, Name: DB_Agent, IP: any
     Provide the ID of the agent to be removed (or '\q' to quit): 003
     Confirm deleting it?(y/n): y
-    Agent '003' removed.
+    Agent '001' removed.
 
     ** You must restart OSSEC for your changes to take effect.
 
@@ -44,7 +44,7 @@ If the user would like to remove the agent without confirmation, use the option 
     # /var/ossec/bin/manage_agents -r 001
 
     ****************************************
-    * Wazuh v3.8.2 Agent manager.          *
+    * Wazuh v3.9.0 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).

@@ -37,7 +37,7 @@ Also, users can retrieve the connected agents by using the `(L)` option when exe
    # /var/ossec/bin/manage_agents
 
    ****************************************
-   * Wazuh v3.8.2 Agent manager.          *
+   * Wazuh v3.9.0 Agent manager.          *
    * The following options are available: *
    ****************************************
       (A)dd an agent (A).
@@ -48,8 +48,8 @@ Also, users can retrieve the connected agents by using the `(L)` option when exe
    Choose your action: A,E,L,R or Q: L
 
    Available agents: 
-      ID: 006, Name: agent-ubuntu2, IP: any
-      ID: 007, Name: agent-ubuntu1, IP: any
+      ID: 001, Name: agent-ubuntu2, IP: any
+      ID: 002, Name: agent-ubuntu1, IP: any
 
    ** Press ENTER to return to the main menu.
 

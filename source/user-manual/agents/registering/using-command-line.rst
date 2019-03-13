@@ -14,7 +14,7 @@ To register an agent using the command line, follow these steps:
 	# /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v3.8.2 Agent manager.          *
+	* Wazuh v3.9.0 Agent manager.          *
 	* The following options are available: *
 	****************************************
 	    (A)dd an agent (A).
@@ -64,7 +64,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	# /var/ossec/bin/manage_agents
 
 	****************************************
-	* Wazuh v3.8.2 Agent manager.          *
+	* Wazuh v3.9.0 Agent manager.          *
 	* The following options are available: *
 	****************************************
 	    (I)mport key from the server (I).
