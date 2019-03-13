@@ -39,7 +39,7 @@ Two requests are needed to register an agent using the API:
 
   .. code-block:: bash
 
-    # sed -i 's/MANAGER_IP/NEW_MANAGER_IP' /var/ossec/etc/ossec.conf
+    # sed -i 's/MANAGER_IP/NEW_MANAGER_IP/g' /var/ossec/etc/ossec.conf
 
 **Step 4:** Copy the key to the agent.
 
