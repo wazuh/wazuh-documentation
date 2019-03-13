@@ -131,15 +131,15 @@ $(function(){
    if ( $('#page.index').length > 0 && $(document).scrollTop() > $('#search-lg').offset().top ) {
     // Page scrolled down
     searcbarToMobile();
-    $('.blue-bar').removeClass('full-width');
-    $('#search-lg').show();
+		$('#search-lg').removeClass('collapsed');
+    $('#search-lg .search_main').show();
   }
 
   if ( $('#page.index').length > 0 && $(document).scrollTop() <= $('#search-lg').offset().top ) {
     // Page not scrolled down
-    $('.blue-bar').addClass('full-width');
     searcbarToDesktop();
-    $('#search-lg').hide();
+		$('#search-lg').addClass('collapsed');
+    $('#search-lg .search_main').hide();
   }
  }
 

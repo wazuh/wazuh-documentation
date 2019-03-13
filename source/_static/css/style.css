@@ -3344,10 +3344,14 @@ div.highlight pre {
         -webkit-box-flex: unset;
             -ms-flex: unset;
                 flex: unset;
+				-webkit-transition: width 0.5s ease;
+				transition: width 0.5s ease;
       }
 
-      .index #search-lg {
-        width: 0;
+      .index #search-lg.collapsed {
+				width: 0;
+				-webkit-transition: width 0.5s ease;
+				transition: width 0.5s ease;
       }
 }
 
