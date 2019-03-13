@@ -30,7 +30,7 @@ Once the agent starts, `Syscollector` runs periodically scans of defined targets
 The agent's inventory is gathered for different goals. The entire inventory can be found at the `inventory` tab of the Wazuh APP for each agent, by querying the API to retrieve the data from the DB. Also the `Dev tools` tab is available,
 with this feature the API can be directly queried about the different scans being able to filter by any desired field.
 
-In addition, the packages inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection>`.
+In addition, the packages inventory is used as feed for the :doc:`Vulnerability detector module<./vulnerability-detection/index>`.
 
 Available scans
 ---------------
@@ -422,7 +422,7 @@ In Elasticsearch the fields will be saved as ``data.type.value``. For example, f
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Operating System** | architecture, name, version, codename, major, minor, build, platform, sysname, release, release_version              | data.os.codename                 |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Port**             | local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process                         | data.port.inode                  | 
+| **Port**             | local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process                         | data.port.inode                  |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Program**          | name, priority, section, size, vendor, install_time, version, architecture, multiarch, source, description, location | data.program.name                |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
