@@ -23,7 +23,6 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Avoid events flooding <ossec-conf/client_buffer>` (**client_buffer**)
 - :doc:`Format of Internal Logs <ossec-conf/logging>` (**logging**)
 - :doc:`Defining output sockets <ossec-conf/socket>` (**socket**)
-- :doc:`Configure AWS-S3 wodle <ossec-conf/wodle-s3>` (**wodle name="aws-s3"**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
 - :doc:`Configure Docker wodle <ossec-conf/wodle-docker>` (**wodle name="docker-listener"**)
 
