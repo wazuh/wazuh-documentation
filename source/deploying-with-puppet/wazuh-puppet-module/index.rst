@@ -30,10 +30,6 @@ Download and install the Wazuh module from Puppet Forge:
     └── stahnma-epel (v1.3.1)
 
 This module installs and configures Wazuh agent and manager.
-
-.. warning::
-  In CentOS, no matter what path you call the command "puppet" from, it will run from anywhere.
-  In Ubuntu, first move to the folder where the binary file is located: ``/opt/puppetlabs/bin/puppet``
   
 Install manager via Puppet
 --------------------------
@@ -90,7 +86,7 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
 
 .. code-block:: console
 
-  # /opt/puppetlabs/bin/puppet agent -t
+  # puppet agent -t
 
 
 Install agent via Puppet
@@ -112,7 +108,7 @@ Place the file at ``/etc/puppetlabs/code/environments/production/manifests/`` in
 
 .. code-block:: console
 
-  # /opt/puppetlabs/bin/puppet agent -t
+  # puppet agent -t
 
 Reference Wazuh puppet
 ----------------------

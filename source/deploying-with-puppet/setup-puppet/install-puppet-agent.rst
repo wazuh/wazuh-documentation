@@ -5,7 +5,7 @@
 Installing Puppet agent
 =======================
 
-Here is a very summarized guide to install *puppet-master*. Follow this link to check the `Official installation guide. <https://puppet.com/docs/puppet/5.1/install_linux.html>`_
+In this section it is explained how to install *puppet-master*. Follow this link to check the `Official installation guide. <https://puppet.com/docs/puppet/5.1/install_linux.html>`_
 
 In this section we assume that you have already installed the ``apt`` or ``yum`` Puppet repository on your agent system in the same way that you did on your Puppet Server.
 
@@ -42,7 +42,13 @@ Get the appropriate Puppet apt repository, and then the "puppet-agent" package. 
   # apt update
   # apt-get install -y puppet-agent
 
-.. note:: For a correct installation we recommend the use of Puppet versions equal or greater than 5. 
+Create a symbolic link between the installed binary file and your default binary file:
+
+  .. code-block:: bash
+    
+    # ln -s /opt/puppetlabs/bin/puppet /bin
+
+.. note:: We recommend to use Puppet versions from 5.1 to 6.0.
 
 
 .. note:: The releases supported by the manifest to install Wazuh are as follows: 
@@ -60,14 +66,26 @@ Installation on Windows
 
 2 - Install Puppet.
   
-  - Double-click the MSI package downloaded and follow the graphical wizard.
-
-  - If it is needed to install using the command-line:
+  a. Using command line: Double-click the MSI package downloaded and follow the GUI instructions.
 
       .. code-block:: bash
       
         msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi
+
+    Optionally, you can specify ``/l*v install.txt`` to log the installation’s progress to a file.
+
+    You can also set several MSI properties to pre-configure Puppet as you install it. For example:
         
+      .. code-block:: bash
+
+        msiexec /qn /norestart /i puppet-agent-<VERSION>-x64.msi PUPPET_MASTER_SERVER=puppet.example.com
+
+  b. Using the Windows GUI:
+
+    - Execute the GUI with elevated privileges.
+    - During installation, Puppet asks you for the hostname of your Puppet master server. This must be a *nix node configured to act as a Puppet master.
+    - For standalone Puppet nodes that won’t connect to a master, use the default hostname (*puppet*). You might also want to install on the command line and set the agent startup mode to *Disabled*.
+    - Once the installer finishes, Puppet will be installed, running, and partially configured.
 
 Configuration
 ^^^^^^^^^^^^^
@@ -81,4 +99,4 @@ Restart the Puppet service:
 
 .. code-block:: console
 
-   # /opt/puppetlabs/bin/puppet resource service puppet ensure=running enable=true
+   # puppet resource service puppet ensure=running enable=true

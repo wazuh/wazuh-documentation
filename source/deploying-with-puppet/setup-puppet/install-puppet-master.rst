@@ -5,7 +5,7 @@
 Installing Puppet master
 ========================
 
-Here is a very summarized way to install *puppet-master*. Follow this link to check the `Official installation guide. <https://puppet.com/docs/puppetserver/5.0/install_from_packages.html>`_
+In this section it is explained how to install *puppet-master*. Follow this link to check the `Official installation guide. <https://puppet.com/docs/puppetserver/5.0/install_from_packages.html>`_
 
 Installation on CentOS/RHEL/Fedora
 ----------------------------------
@@ -40,7 +40,13 @@ Get the appropriate Puppet apt repository, and then the "puppetserver" package. 
   # apt update
   # apt-get install -y puppetserver
 
-.. note:: For a correct installation we recommend the use of Puppet versions equal or greater than 5. 
+Create a symbolic link between the installed binary file and your default binary file:
+
+  .. code-block:: bash
+    
+    # ln -s /opt/puppetlabs/bin/puppet /bin
+
+.. note:: We recommend to use Puppet versions from 5.1 to 6.0.
 
 .. note:: The releases supported by the manifest to install Wazuh are as follows: 
 
