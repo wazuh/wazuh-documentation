@@ -32,36 +32,68 @@ Wazuh provides an updated log analysis ruleset and a RESTful API that allows you
 
 Wazuh also includes a rich web application (fully integrated as a Kibana app) for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
 
+.. raw:: html
 
-.. |EXTENSIONS| thumbnail:: images/kibana-app/showcase/extensions.png
-   :title: App extensions
-   :align: center
-   :class: col-12 col-sm-6 col-md-4
-.. |AGENT_OVERVIEW| thumbnail:: images/kibana-app/showcase/agents-general.png
-   :title: Agent overview
-   :align: center
-   :class: col-12 col-sm-6 col-md-4
-.. |DISCOVER_ALERTS| thumbnail:: images/kibana-app/showcase/discover.png
-   :title: Discover alerts
-   :align: center
-   :class: col-12 col-sm-6 col-md-4
-.. |MANAGER_RULESET| thumbnail:: images/kibana-app/showcase/ruleset.png
-   :title: Log analysis rules
-   :align: center
-   :class: col-12 col-sm-6 col-md-4
-.. |OVERVIEW_FIM| thumbnail:: images/kibana-app/showcase/overview-fim.png
-   :title: Overview file integrity monitoring
-   :align: center
-   :class: col-12 col-sm-6 col-md-4
-.. |OVERVIEW_GENERAL| thumbnail:: images/kibana-app/showcase/overview-general.png
-   :title: Overview alerts
-   :align: center
-   :class: col-12 col-sm-6 col-md-4
+  <div id="carouselWazuhDocu" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+  <div class="carousel-item active">
 
-.. container:: screenshots
+.. image:: images/kibana-app/showcase/extensions.png
+   :class: d-block w-100
 
-  |OVERVIEW_GENERAL| |OVERVIEW_FIM| |MANAGER_RULESET|
-  |EXTENSIONS| |AGENT_OVERVIEW| |DISCOVER_ALERTS|
+.. raw:: html
+
+  </div>
+  <div class="carousel-item">
+
+.. image:: images/kibana-app/showcase/agents-general.png
+   :class: d-block w-100
+
+.. raw:: html
+
+  </div>
+  <div class="carousel-item">
+
+.. image:: images/kibana-app/showcase/discover.png
+   :class: d-block w-100
+
+.. raw:: html
+
+  </div>
+  <div class="carousel-item">
+
+.. image:: images/kibana-app/showcase/ruleset.png
+   :class: d-block w-100
+
+.. raw:: html
+
+  </div>
+  <div class="carousel-item">
+
+.. image:: images/kibana-app/showcase/overview-fim.png
+   :class: d-block w-100
+
+.. raw:: html
+
+  </div>
+  <div class="carousel-item">
+
+.. image:: images/kibana-app/showcase/overview-general.png
+   :class: d-block w-100
+
+.. raw:: html
+
+  </div>
+  <a class="carousel-control-prev" href="#carouselWazuhDocu" role="button" data-slide="prev">
+  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+  <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselWazuhDocu" role="button" data-slide="next">
+  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  <span class="sr-only">Next</span>
+  </a>
+  </div>
+
 
 
 Available documentation

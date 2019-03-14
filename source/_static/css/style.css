@@ -2993,6 +2993,11 @@ div.highlight pre {
 				padding: 10px 7px;
 			}
 
+      #carouselWazuhDocu{
+        max-width: 90%;
+        margin: .5rem auto;
+      }
+
       .searchform {
         margin: 0;
       }
