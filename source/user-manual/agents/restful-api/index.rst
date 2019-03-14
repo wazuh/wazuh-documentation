@@ -6,7 +6,7 @@ Using the RESTful API
 =====================
 
 As with the command line, certain tasks can be performed via the RESTful API.
-For more info about the API, check its :ref:`guide. <api>`
+For more info about this API, check its :ref:`guide. <api>`
 
 .. topic:: Contents
 
