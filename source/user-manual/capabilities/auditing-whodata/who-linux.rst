@@ -18,13 +18,13 @@ Firstly we need to check if the Audit daemon is installed in our system.
 
 In RedHat based system, Auditd is commonly installed by default. If it's not installed, we need to install it using the following command:
 
-.. code-block:: bash
+.. code-block:: console
 
     # yum install audit
 
 For Debian based systems, use the following:
 
-.. code-block:: bash
+.. code-block:: console
 
     # apt install auditd
 
@@ -40,7 +40,7 @@ Once this configuration is added, we need to restart Wazuh to apply the changes.
 
 We can check if the Audit rule for monitoring the selected folder is applied. To check that, we need to execute the following command:
 
-.. code-block:: bash
+.. code-block:: console
 
     # auditctl -l | grep wazuh_fim
 
