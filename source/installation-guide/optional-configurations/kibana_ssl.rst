@@ -263,3 +263,6 @@ Enable authentication by htpasswd
       # service nginx restart
 
 Now, access the Kibana web interface via HTTPS. It will prompt you for the username and password that you created in the steps above.
+
+.. note::
+  Kibana has another key-based security option for different cases. For further information go to its `official documentation page. <https://www.elastic.co/guide/en/kibana/6.6/secure-settings.html#list-settings>`_
