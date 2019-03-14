@@ -110,25 +110,71 @@ Wazuh API
 - Edit the ``ossec.conf`` configuration file of a Wazuh manager.
 - Create or modify custom rules, custom decoders and CDB lists.
 - Restart the Wazuh manager. If Wazuh cluster is enabled, you can restart a single node at a time or all the nodes at the same time.
+- List the SCA policies being applied, list the scan result of each policy.
 
-.. thumbnail:: ../images/release-notes/3.9.0/api-03.png
-  :title: Results related to a policy
-  :align: center
-  :width: 100%
+.. code-block:: js
 
-- List the policies being applied, list the scan result of each policy.
+    GET /sca/001
+    {
+        "error": 0,
+        "data": {
+            "totalItems": 3,
+            "items": [
+                {
+                    "references": "https://www.ssh.com/ssh/",
+                    "description": "Guidance for establishing a secure configuration for SSH service vulnerabilities.",
+                    "policy_id": "system_audit_ssh",
+                    "end_scan": "2019-03-14 08:46:33",
+                    "start_scan": "2019-03-14 08:46:33",
+                    "score": 33,
+                    "pass": 3,
+                    "fail": 6,
+                    "name": "System audit for SSH hardening"
+                },
+                {
+                    "references": "(null)",
+                    "description": "Guidance for establishing a secure configuration for web-related vulnerabilities.",
+                    "policy_id": "system_audit",
+                    "end_scan": "2019-03-14 08:46:26",
+                    "start_scan": "2019-03-14 08:46:26",
+                    "score": 100,
+                    "pass": 76,
+                    "fail": 0,
+                    "name": "System audit for web-related vulnerabilities"
+                },
+                ...
+            ]
+        }
+    }
 
-.. thumbnail:: ../images/release-notes/3.9.0/api-01.png
-  :title: Policies
-  :align: center
-  :width: 100%
 
 - Dive into your SCA scan results using the Wazuh API. 
 
-.. thumbnail:: ../images/release-notes/3.9.0/api-02.png
-  :title: Results related to a policy
-  :align: center
-  :width: 100%
+.. code-block:: js
+
+
+    {
+        "error": 0,
+        "data": {
+            "totalItems": 76,
+            "items": [
+                {
+                    "result": "passed",
+                    "policy_id": "cis_rhel7",
+                    "title": "Disable standard boot services - NetFS Enabled",
+                    "directory": "/etc/rc.d/rc2.d,/etc/rc.d/rc3.d,/etc/rc.d/rc4.d,/etc/rc.d/rc5.d",
+                    "id": 6575,
+                    "compliance": [
+                    {
+                        "value": "2.2.2",
+                        "key": "pci_dss"
+                    }
+                    ]
+                },
+                ...
+            ]
+        }
+    }
 
 Wazuh app
 ---------
