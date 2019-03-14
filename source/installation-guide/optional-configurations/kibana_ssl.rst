@@ -94,26 +94,32 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
   .. code-block:: console
 
     # cat > /etc/nginx/conf.d/default.conf <<\EOF
-    server {
-        listen 80;
-        listen [::]:80;
-        return 301 https://$host$request_uri;
-    }
+      server {
+          listen 80;
+          listen [::]:80;
+          return 301 https://$host$request_uri;
+      }
 
-    server {
-        listen 443 default_server;
-        listen            [::]:443;
-        ssl on;
-        ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-        ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
-        access_log            /var/log/nginx/nginx.access.log;
-        error_log            /var/log/nginx/nginx.error.log;
-        location / {
-            auth_basic "Restricted";
-            auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            proxy_pass http://kibana-server-ip:5601/;
-        }
-    }
+      server {
+          listen 443 default_server;
+          listen            [::]:443;
+          ssl on;
+          ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
+          ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+          access_log            /var/log/nginx/access.log;
+          error_log            /var/log/nginx/error.log;
+          auth_basic "Restricted";
+          auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+          location / {
+              proxy_pass http://localhost:5601/;
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection 'upgrade';
+              proxy_set_header Host $host;
+              proxy_cache_bypass $http_upgrade;
+          }
+      }
+
     EOF
 
   .. note::
