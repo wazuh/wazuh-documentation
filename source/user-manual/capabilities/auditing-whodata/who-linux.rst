@@ -17,11 +17,13 @@ Configuration
 Firstly we need to check if the Audit daemon is installed in our system.
 
 In RedHat based system, Auditd is commonly installed by default. If it's not installed, we need to install it using the following command:
+
 .. code-block:: bash
 
     # yum install audit
 
 For Debian based systems, use the following:
+
 .. code-block:: bash
 
     # apt install auditd
@@ -36,12 +38,14 @@ Next step is to configure syscheck to enable who-data monitoring in the selected
 
 Once this configuration is added, we need to restart Wazuh to apply the changes.
 
-We can check if the Audit rule for monitoring the selected folder is applied. To check that, we need to execute the following command
+We can check if the Audit rule for monitoring the selected folder is applied. To check that, we need to execute the following command:
+
 .. code-block:: bash
 
     # auditctl -l | grep wazuh_fim
 
-and check if the rule was added
+and check if the rule was added:
+
 .. code-block:: bash
 
     -w /etc -p wa -k wazuh_fim
