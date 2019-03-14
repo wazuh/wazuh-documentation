@@ -3065,6 +3065,10 @@ div.highlight pre {
         max-width: calc(100% - 320px);
 			}
 
+      .central-page-area a img {
+        max-width: 60%;
+      }
+
       .blue-bar {
         display: -webkit-box;
         display: -ms-flexbox;
