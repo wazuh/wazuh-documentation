@@ -39,7 +39,9 @@ Wildcards may be used on non-Windows systems, but if the log file doesn't exist 
 
 Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
 
-The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. For instance, these two configurations show a channel filtering for firewall and Sysmon events::
+The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. For instance, these two configurations show a channel filtering for firewall and Sysmon events.
+
+.. code-block:: xml
 
   <localfile>
       <location>Microsoft-Windows-Sysmon/Operational</location>
@@ -51,15 +53,26 @@ The location field is also valid to filter by channel in case of using an ``even
       <log_format>eventchannel</log_format>
   </localfile>
 
++--------------------+--------------+
+| **Default value**  | n/a          |
++--------------------+--------------+
+| **Allowed values** | Any log file |
++--------------------+--------------+
+
 command
 ^^^^^^^
 
-Allowing any command line, this option designates a command to be run. 
-All output from this command will be read as one or more log messages depending on whether command or full_command is used.
+Allowing any command line, this option designates a command to be run.
+This command's output will be read as one or more log messages depending if *command* or *full_command* is used.
+
++--------------------+--------------------------------------------------+
+| **Default value**  | n/a                                              |
++--------------------+--------------------------------------------------+
+| **Allowed values** | any command line, optionally including arguments |
++--------------------+--------------------------------------------------+
 
 alias
 ^^^^^
-
 
 Change a command name in the log message with the given string.
 
@@ -75,25 +88,40 @@ with:
 
    ossec: output: 'usb-check':
 
++--------------------+------------+
+| **Default value**  | n/a        |
++--------------------+------------+
+| **Allowed values** | any string |
++--------------------+------------+
+
 frequency
 ^^^^^^^^^
 
-Settled to a positive number, and used with **command** or **full_command**, will prevent that command from being executed in less time than the number specified in seconds.
+Settled to a positive number, and used with **command** or **full_command**, will prevent that command from being executed in less time than the specified number (in seconds).
 
++--------------------+--------------------------------+
+| **Default value**  | n/a                            |
++--------------------+--------------------------------+
+| **Allowed values** | any positive number of seconds |
++--------------------+--------------------------------+
 
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-Set to **yes** to collect only events generated after the Wazuh starts.
-
-By default, when Wazuh starts it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
+Change the default value to *yes* to collect only events generated after the Wazuh starts. If it's left by default, Wazuh will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
 
 Only compatible with `eventchannel` log format.
+
++--------------------+-----------+
+| **Default value**  | n/a       |
++--------------------+-----------+
+| **Allowed values** | yes or no |
++--------------------+-----------+
 
 query
 ^^^^^
 
-Filter the events that Wazuh will process by using an XPATH query following the event schema.
+Filter the events that Wazuh will process by using an XPATH query following the `event schema. <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_
 
 Only compatible with ``eventchannel`` log format.
 
@@ -106,6 +134,12 @@ For example, the following configuration will only process events with an ID of 
     <log_format>eventchannel</log_format>
     <query>Event/System[EventID=7040]</query>
   </localfile>
+
++--------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                                                              |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
++--------------------+----------------------------------------------------------------------------------------------------------------------------------+
 
 label
 ^^^^^
@@ -175,7 +209,7 @@ Target specifies the name of the socket where the output will be redirected. The
 log_format
 ^^^^^^^^^^
 
-This specifies the format of the log being read. **It is required field.**
+This specifies the format of the log being read. **field is required**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
@@ -276,7 +310,7 @@ This option allows formatting logs from Logcollector using field substitution.
 
 The syntax is:
 
-::
+.. code-block:: bash
 
 	$(parameter)
 
