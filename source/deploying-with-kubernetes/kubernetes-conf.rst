@@ -5,6 +5,13 @@
 Kubernetes Installation & Configuration
 =========================================
 
+- `Installation`_
+- `Pre-requisites`_
+- `Overview`_
+- `Verifying the deployment`_
+- `Agents`_
+
+
 Installation
 ------------
 
@@ -29,14 +36,17 @@ Overview
 StateFulSet and Deployments Controllers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Like a Deployment, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
+Like a *Deployment*, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
 
 It is useful for stateful applications like databases that save the data to a persistent storage. The states of each Wazuh manager as well as Elasticsearch are desirable to maintain, so we declare them using StatefulSet to ensure that they maintain their states in every startup.
 
 Deployments are intended for stateless use and are quite lightweight and seem to be appropriate for Logstash, Kibana and Nginx, where it is not necessary to maintain the states.
 
+Users can read more information about the *Persistent volumes* in the `Kubernetes Official documentation. <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_
 Pods
 ^^^^
+.. note::
+    In this `link <https://github.com/wazuh/wazuh-docker>`_ you can check the data Wazuh uses in its docker deployments.
 
 **Wazuh master**
 
@@ -96,7 +106,7 @@ Services
     - elasticsearch:
         Elasticsearch API. Used by Logstash/Kibana to write/read alerts.
     - wazuh-nginx:
-        Nginx proxy to access Kibana: https://wazuh.your-domain.com:443
+        Service for https access to Kibana.
     - kibana:
         Kibana service.
     - Logstash:
@@ -113,6 +123,11 @@ Services
         Reporting service: wazuh-manager.your-domain.com:1514
     - wazuh-cluster:
         Communication for Wazuh manager nodes.
+
+.. note::
+    Here, we are going to use the `Kubernetes ConfigMaps <https://cloud.google.com/kubernetes-engine/docs/concepts/configmap>`_ to configure ths Wazuh instances.
+    We will use them to configure the ``ossec.conf`` file that contains all the manager's configuration. 
+    So, for example, if we want to use a wodle, it will be added in the ``ossec.conf`` that will be charged by the ConfigMap.
 
 Deploy
 ------
@@ -266,6 +281,8 @@ Verifying the deployment
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                    PORT(S)                          AGE       SELECTOR
         wazuh-nginx           LoadBalancer   xxx.xx.xxx.xxx   internal-xxx-yyy.us-east-1.elb.amazonaws.com                   80:31831/TCP,443:30974/TCP       15m       app=wazuh-nginx
 
+.. note::
+    `AWS route 53 <https://aws.amazon.com/route53/?nc1=h_ls>`_ can be used to create a DNS that points to the load balancer and make it accessible through that DNS.
 
 Agents
 ------
@@ -273,10 +290,26 @@ Agents
 Monitoring hosts
 ^^^^^^^^^^^^^^^^
 
-Wazuh agents are designed to monitor hosts. Just register the agent using the registration service, then configure the agent to use the reporting service.
+Wazuh agents are designed to monitor hosts. To start using them:
+
+1. :doc:`Install the agent. <../installation-guide/installing-wazuh-agent/index>`
+
+2. Now, register the agent using the :doc:`registration service <../user-manual/registering/use-registration-service>`, 
+
+3. Then configure the agent to use the reporting service:
+    To configure the agent this way, you should follow this 2 steps:
+
+    a. Modify the ``/var/ossec/etc/ossec.conf`` file, setting the transport protocol to *TCP* and changing the ``MANAGER_IP`` field with the IP of the service that takes to port 1514.
+    b. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-authd.html?highlight=authd>`_ daemon with option *-m* specifying the IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.
+
+.. note::
+    If using ELK remember to configure the security groups to manage the access.
+
 
 Monitoring containers
 ^^^^^^^^^^^^^^^^^^^^^
+
+The objective here is to monitor the container from the node that has raised it.
 
 In this case, we have 2 options:
 

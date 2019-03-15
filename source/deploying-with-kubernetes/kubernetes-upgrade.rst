@@ -130,6 +130,8 @@ We can see their content.
         <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
     </rule>
 
+.. code-block:: xml
+
     </group>
     root@wazuh-manager-master-0:/# cat /etc/postfix/etc/rules/local_rules.xml
     <!-- Local rules -->
@@ -183,6 +185,7 @@ These files are the *statefulSet* files:
 For example we had this version before:
 
 .. code-block:: bash
+
     containers:
     - name: wazuh-manager
       image: 'wazuh/wazuh:3.6.1_6.4.0'

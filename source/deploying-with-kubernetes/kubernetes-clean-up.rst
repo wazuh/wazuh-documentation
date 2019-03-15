@@ -137,20 +137,7 @@ Elasticsearch
 
 The process for cleaning the Elasticsearch installation environment is similar to that of the Wazuh cluster. In order to do this remove the Elasticsearch deployment as well as its associated services and volumes.
 
-1. The first step is to remove the pods corresponding to Elasticsearch.
-
-    .. code-block:: bash
-
-        ubuntu@k8s-control-server:~$ kubectl get pods --namespace wazuh
-        NAME                              READY     STATUS    RESTARTS   AGE
-        wazuh-elasticsearch-0             1/1       Running   0          6d
-        wazuh-kibana-78cb4bbb7-xf4s8      1/1       Running   0          6d
-        wazuh-logstash-646689f76f-lcf8b   1/1       Running   0          6d
-        wazuh-nginx-57c8c65486-7crh2      1/1       Running   0          6d
-
-        ubuntu@k8s-control-server:~$ kubectl delete pod wazuh-elasticsearch-0 --namespace wazuh
-
-2. Next remove the services related to Elasticsearch.
+1. The first step is to remove the services related to Elasticsearch.
 
     .. code-block:: bash
 
@@ -165,7 +152,7 @@ The process for cleaning the Elasticsearch installation environment is similar t
         ubuntu@k8s-control-server:~$ kubectl delete service elasticsearch --namespace wazuh
         ubuntu@k8s-control-server:~$ kubectl delete service wazuh-elasticsearch --namespace wazuh
 
-3. In this step delete the StatefulSet.
+2. Next, delete the StatefulSet.
 
     .. code-block:: bash
             
@@ -175,7 +162,7 @@ The process for cleaning the Elasticsearch installation environment is similar t
 
         ubuntu@k8s-control-server:~$ kubectl delete StatefulSet wazuh-elasticsearch --namespace wazuh
 
-4. Now eliminate the persistent volume claims.
+3. Now eliminate the persistent volume claims.
 
     .. code-block:: bash
 
@@ -185,7 +172,7 @@ The process for cleaning the Elasticsearch installation environment is similar t
 
         ubuntu@k8s-control-server:~$ kubectl delete persistentvolumeclaim wazuh-elasticsearch-wazuh-elasticsearch-0 --namespace wazuh
 
-5. Finally delete the persistent volumes.
+4. Finally delete the persistent volumes.
 
     .. code-block:: bash
 
@@ -206,19 +193,7 @@ Logstash
 
 To clean the Logstash installation remove the Logstash deployments and services.
 
-1. The first step is to remove the pods corresponding to Logstash.
-
-    .. code-block:: bash
-
-        ubuntu@k8s-control-server:~$ kubectl get pods --namespace wazuh
-        NAME                              READY     STATUS    RESTARTS   AGE
-        wazuh-kibana-78cb4bbb7-xf4s8      1/1       Running   0          6d
-        wazuh-logstash-646689f76f-lcf8b   1/1       Running   0          6d
-        wazuh-nginx-57c8c65486-7crh2      1/1       Running   0          6d
-
-        ubuntu@k8s-control-server:~$ kubectl delete pod wazuh-logstash-646689f76f-lcf8b --namespace wazuh
-
-2. Next remove the services related to Logstash.
+1. The first step is to remove the services related to Logstash.
 
     .. code-block:: bash
             
@@ -230,7 +205,7 @@ To clean the Logstash installation remove the Logstash deployments and services.
 
         ubuntu@k8s-control-server:~$ kubectl delete service logstash --namespace wazuh
 
-3. Finally eliminate the deployment.
+2. And the second and last stepis to eliminate the deployment.
 
     .. code-block:: bash
 
