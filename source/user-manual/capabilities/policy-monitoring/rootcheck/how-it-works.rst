@@ -44,30 +44,15 @@ Using these checks, the following policies have been developed:
 | win_applications_rcl.txt | Check if malicious applications are installed                      |
 +--------------------------+--------------------------------------------------------------------+
 
-To download those files, follow this steps:
+.. note::
 
-1. Go to the `CIS benchmarks signin page. <https://learn.cisecurity.org/benchmarks>`_
+  To download those files, follow these steps:
 
-2. Fill the form with the user's personal data.
+  1. Go to the `CIS benchmarks page <https://learn.cisecurity.org/benchmarks>`_.
 
-  .. thumbnail:: ../../../../images/manual/rootcheck/cis_benchmark_2.png
-    :align: center
-    :width: 70%
+  2. Fill the registration form.
 
-3. Click the "Access PDFs" in the received e-mail.
-
-4. The user will be redirected to a page. Introduce your e-mail in the "Look up" box there.
-
-5. It will redirect the user to the downloading page.
-
-6. To finish, choose the policy file that the user needs between the before mentioned and click the "Download PDF" button to start the download.
-
-  .. thumbnail:: ../../../../images/manual/rootcheck/cis_benchmark_1.png
-    :align: center
-    :width: 70%
-
-.. warning::
-  Since the last update, CIS benchmarks associates a personal token to every account, making necessary to SignUp in their page to be able to download the files.
+  3. Click the "Access PDFs" button in the received e-mail.
 
 Alerts related to policy monitoring:
 
