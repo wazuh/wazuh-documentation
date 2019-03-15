@@ -205,7 +205,7 @@ To clean the Logstash installation remove the Logstash deployments and services.
 
         ubuntu@k8s-control-server:~$ kubectl delete service logstash --namespace wazuh
 
-2. And the second and last stepis to eliminate the deployment.
+2. And the second and last step is to eliminate the deployment.
 
     .. code-block:: bash
 
