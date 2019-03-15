@@ -91,6 +91,10 @@ th {
           flex-direction: column;
 }
 
+.header .main-head {
+  position: relative;
+}
+
 .header .menuweb-bar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -232,6 +236,8 @@ header .menuweb-bar .menu-item a {
 }
 
 #search-lg {
+  display: block;
+  min-height: 45px;
   margin-left: auto;
 }
 
@@ -498,6 +504,12 @@ main li.toctree-l1 a {
   display: none;
 }
 
+#page #welcome-to-wazuh .topic .topic-title {
+  font-size: 18px;
+  color: #333333;
+  vertical-align: middle;
+}
+
 a.headerlink {
   min-height: 1.5rem;
   color: transparent;
@@ -575,6 +587,10 @@ footer a:active,
   white-space: nowrap;
 }
 
+.blue-bar {
+  width: calc(100% - 56px);
+}
+
 .searchform {
   margin: 0 15px;
   display: -webkit-box;
@@ -586,9 +602,10 @@ footer a:active,
 }
 
 .searchform .search-input-wrapper {
+  width: calc(100% - 40px);
   white-space: nowrap;
-  margin-left: 10px;
-  margin-right: 40px;
+  margin-left: auto;
+  margin-right: 34px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -598,7 +615,6 @@ footer a:active,
           flex-direction: row;
   -ms-flex-wrap: nowrap;
       flex-wrap: nowrap;
-  width: 100%;
 }
 
 .searchform .search-filter {
@@ -664,7 +680,12 @@ footer a:active,
   position: absolute;
   top: 7px;
   right: 0;
-  width: 100%;
+  left: 0;
+  z-index: 4;
+}
+
+.main-head .search_main {
+  left: 56px;
 }
 
 #search-form .form-control {
@@ -852,23 +873,18 @@ footer a:active,
 
 .search_main .btn-search .fa,
 .search_main.expanded .btn-search .fa {
-  font-size: 22px;
+  font-size: 20px;
   line-height: .2;
 }
 
 .search_main.collapsed .btn-search .fa {
-  font-size: 22px;
-}
-
-.search_main .btn-close .fa {
-  font-size: 28px;
-  line-height: 0;
+  font-size: 20px;
 }
 
 .search_main .form-control {
   border: none;
   height: auto;
-  padding: 6px 2px;
+  padding: 6px 10px;
   color: #00a9e5;
   -webkit-box-shadow: none;
           box-shadow: none;
@@ -1434,15 +1450,7 @@ a[data-lightbox] img {
   margin-bottom: 15px;
 }
 
-.search-page .results-wrapper .no-results {
-  line-height: 1.2;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  text-align: center;
-}
-
-#page .jumbo-bar .title,
-.search-page .results-wrapper h1.no-results {
+#page .jumbo-bar .title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   color: #00a9e5;
@@ -1454,21 +1462,14 @@ a[data-lightbox] img {
   text-decoration: none;
 }
 
-.search-page .results-wrapper h1.no-results {
-  font-size: 32px;
-  padding-top: 1em;
-}
-
-.search-page h1 {
-  font-size: 20px;
-  margin: 0 auto;
-  line-height: 1.1;
-}
-
 h1 {
   color: #ffffff;
   margin: 0.5em auto;
   font-size: 32px;
+}
+
+#search-results h2 {
+  margin-top: 1em;
 }
 
 h4, h5, h6 {
@@ -1478,38 +1479,6 @@ h4, h5, h6 {
 ul {
   padding-left: 0;
   list-style: none;
-}
-
-.page.search-page h2,
-.page.search-page aside h2 {
-  text-align: center;
-  width: 100%;
-}
-
-.page.search-page aside h2 {
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-}
-
-.page.search-page .results-wrapper aside p {
-  margin-bottom: 1.5em;
-  text-align: center;
-  max-width: 360px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.page.search-page .search-help {
-  margin-bottom: 2em;
-  text-align: center;
-}
-
-.page.search-page h3 {
-  margin-bottom: 2px;
-}
-
-.page.search-page h3 a {
-  color: #0094ce;
 }
 
 #subfooter {
@@ -1673,7 +1642,7 @@ blockquote pre {
 #welcome-to-wazuh .topic .topic-title:before {
 	display: inline-block;
   font: normal normal normal 1.5rem/1 'wazuh-icons';
-  width: 12px;
+  width: 1.3em;
   color: #00a9e5;
   vertical-align: top;
 	font-family: 'wazuh-icons' !important;
@@ -1917,12 +1886,6 @@ footer a {
   color: #ffb600;
 }
 
-.search-page h3 a:hover,
-.search-page h3 a:focus,
-.search-page h3 a:active {
-  color: #ffb600;
-}
-
 .jumbotron {
   padding:0;
   margin-bottom: 0.5em;
@@ -2063,10 +2026,6 @@ nav.collapse.navbar-collapse.navbar-main-collapse {
 .input-group-addon,
 .input-group-btn {
   width: 18%;
-}
-
-.search-page .search-result {
-  margin-bottom: 1em;
 }
 
 #useful-links {
@@ -2322,10 +2281,6 @@ div.highlight pre {
     min-height: 35px;
   }
 
-  .page.search-page h1 {
-    font-size: 24px;
-  }
-
   form:not(.searchform) [type=submit] {
     font-size: 1.12rem;
     margin: 1.5em 0;
@@ -2464,37 +2419,8 @@ div.highlight pre {
         text-align: right;
       }
 
-      .search-page .search-result {
-        margin-bottom: 0;
-      }
-
       #page .jumbo-bar {
         height: auto;
-      }
-
-      .search-page .jumbo-bar .flex-container {
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-            -ms-flex-direction: row;
-                flex-direction: row;
-      }
-
-      .search-page .results-wrapper h1.no-results {
-        display: block;
-        padding: 2em 0;
-      }
-
-      .search-page aside.no-results {
-        padding-bottom: 2em;
-      }
-
-      .search-page .no-results h2 {
-        font-size: 26px;
-      }
-
-      .search-page .results-wrapper .no-results p {
-        font-size: 1.5rem;
-        min-height: 70px;
       }
 
       .search_main.expanded .searchform .search-input-wrapper {
@@ -2514,12 +2440,6 @@ div.highlight pre {
       h3,
       #page .topic .topic-title {
         font-size: 26px;
-      }
-
-      #page #welcome-to-wazuh .topic .topic-title {
-        font-size: 18px;
-        color: #333333;
-        vertical-align: middle;
       }
 
       h4 {
@@ -2694,12 +2614,6 @@ div.highlight pre {
         height: 100%
       }
 
-      .page.search-page .jumbo-bar .vertically-centered,
-      .page.search-page .jumbo-bar .flex-container {
-        height: 100%;
-        max-height: 500px;
-      }
-
       .flex-container .widget_search {
         margin-left: 0;
         margin-right: 0;
@@ -2812,10 +2726,6 @@ div.highlight pre {
         padding: 9px 7px;
         -webkit-transition: padding 0.3s;
         transition: padding 0.3s;
-      }
-
-      .search-page h1.title-search {
-        text-align: left;
       }
 
       #gethelp .help-icon {
@@ -3002,10 +2912,6 @@ div.highlight pre {
         margin: 0;
       }
 
-      .search_main .btn-search .fa, .search_main.expanded .btn-search .fa {
-        font-size: 16px;
-      }
-
       .searchbox-indicator .btn-search:hover,
       .search_main.expanded .btn-search,
       .search_main.collapsed .btn-search:hover,
@@ -3113,34 +3019,8 @@ div.highlight pre {
         width: 27px
       }
 
-      .search-page .results-wrapper .no-results p {
-        min-height: 85px;
-        margin-bottom: 0;
-      }
-
-      .search-page .results-wrapper #content {
-        padding-bottom: 2em;
-      }
-
       #page .jumbo-bar .title {
         font-size: 32px;
-      }
-
-      .search-page .jumbo-bar .results-quantity {
-        font-size: 1.6rem;
-      }
-
-      .search-page aside h2 {
-        margin-top: 2rem;
-      }
-
-      .search-page .results-wrapper aside p {
-        max-width: 240px;
-      }
-
-      .search-page .results-wrapper .no-results p {
-        font-size: 1.6rem;
-        max-width: 350px;
       }
 
       .btn-download,
@@ -3261,7 +3141,7 @@ div.highlight pre {
             font-size: 2.5rem;
             position: absolute;
             left: 0;
-            top: 14px;
+            top: 3px;
             width: 50px;
           }
 
@@ -3271,10 +3151,6 @@ div.highlight pre {
 
           .home-stickynotes .stickynote-wrapper {
             margin-left: -7px;
-          }
-
-          .search-page .results-wrapper .no-results p {
-            min-height: 70px;
           }
 
           .main-menu.collapsed {
