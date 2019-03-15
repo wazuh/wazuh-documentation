@@ -25,7 +25,7 @@ Regarding the use of persistent storage, a considerable size is required in the 
 Network
 -------
 
-Regards the generation of network traffic, in the agents the incoming traffic is minimal since the manager barely sends information to the agent. This generates average incoming traffic of less than 0.1KB/s which can be considered insignificant, the outgoing traffic is somewhat higher since the log information is sent regularly to the manager, reaching 174.6 KB/s in extreme cases.  Obviously, in the manager the traffic is mostly incoming, since all the agents report to it, only in the case of using a cluster with several managers these values can vary, although not in a very significant way.
+Regards the generation of network traffic, in the agents the incoming traffic is minimal since the manager barely sends information to the agent. This generates average incoming traffic of less than 0.1KB/s which can be considered insignificant, the outgoing traffic is somewhat higher since the log information is sent regularly to the manager, reaching 174.6 KB/s in extreme cases.  Obviously, in the manager, the traffic is mostly incoming, since all the agents report to it, only in the case of using a cluster with several managers these values can vary, although not in a very significant way.
 
 Manager recommendations
 -----------------------
@@ -73,7 +73,4 @@ Most significant values of consumption are shown in the following table (The spe
 | I/O                           | < 1 KB/s      | < 1 KB/s            | < 1  KB/s      |    < 1 KB/s           |
 +-------------------------------+---------------+---------------------+----------------+-----------------------+
 
-.. note::
-	These values are a bit higher in Windows agents because they generate a greater number of events in a larger size.
-
-These values point that Wazuh agents can run on machines with very limited hardware.
+These values point out that Wazuh agents can run on machines with very limited hardware.
