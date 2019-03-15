@@ -45,6 +45,7 @@ Deployments are intended for stateless use and are quite lightweight and seem to
 Users can read more information about the *Persistent volumes* in the `Kubernetes Official documentation. <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_
 Pods
 ^^^^
+
 .. note::
     In this `link <https://github.com/wazuh/wazuh-docker>`_ you can check the data Wazuh uses in its docker deployments.
 
