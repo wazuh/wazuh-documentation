@@ -9,7 +9,7 @@ Every Wazuh Agent sends data to the Wazuh Manager via a secure way called OSSEC 
 
 The registration process consists of a mechanism to create a trusted relationship between the Manager and an Agent. This process could be done in a Manager itself or with a registration service. This service runs on the Manager, where an Agent could request a pre-shared key using some credentials. The Manager will reply with the key and store the new Agent in a local database.
 
-Another approach is using the RESTful API, this is just a wrapper for local registration on Wazuh Manager.
+Another approach is using the Wazuh API, this is just a wrapper for local registration on Wazuh Manager.
 
 .. _agent-keys-registration:
 
@@ -50,7 +50,7 @@ Here are three ways to register an agent:
 +---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
 | Automatically | :doc:`Using the registration service <use-registration-service>`| Register an agent automatically using ossec-authd binary.              |
 +               +-----------------------------------------------------------------+------------------------------------------------------------------------+
-|               | :ref:`Using the RESTful API <restful-api-register>`             | Register an agent by scripting (bash, python, powershell) and the API. |
+|               | :ref:`Using the Wazuh API <restful-api-register>`               | Register an agent by scripting (bash, python, powershell) and the API. |
 +---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
 
 .. note::

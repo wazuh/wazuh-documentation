@@ -5,7 +5,7 @@
 Using the RESTful API
 =====================
 
-As with the command line, certain tasks can be performed via the RESTful API.
+As with the command line, certain tasks can be performed via the Wazuh API.
 For more info about this API, check its :ref:`guide. <api>`
 
 .. topic:: Contents
