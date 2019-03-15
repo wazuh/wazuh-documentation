@@ -3,7 +3,7 @@
 Recommended Specs
 =================
 
-This section describes the recommended hardware specifications for using Wazuh. In order to deploy an elastic cluster with optimal performance, follow the guidelines described in https://www.elastic.co/guide/en/elasticsearch/guide/current/hardware.html.
+This section describes the recommended hardware specifications for using Wazuh. 
 
 CPUs
 ----
