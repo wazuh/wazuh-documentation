@@ -19,7 +19,6 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 - :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
 - :doc:`Active Response <../capabilities/active-response/index>` (**active-response**)
-- :doc:`Configure connection <ossec-conf/client>`(**client**)
 - :doc:`Avoid events flooding <ossec-conf/client_buffer>` (**client_buffer**)
 - :doc:`Format of Internal Logs <ossec-conf/logging>` (**logging**)
 - :doc:`Defining output sockets <ossec-conf/socket>` (**socket**)
