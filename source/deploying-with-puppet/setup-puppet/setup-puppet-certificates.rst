@@ -13,10 +13,6 @@ To generate and sign a certificate, follow the next steps:
 
        # puppet agent -t
 
-    .. note:: 
-
-        You will see this message:  ``Exiting; no certificate found and waitforcert is disabled``
-
 2. In the server side, list the current certificates that need approval:
 
     .. code-block:: console

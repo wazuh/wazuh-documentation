@@ -12,6 +12,9 @@ Before we get started with Puppet, confirm that the following network requiremen
 - **Private network DNS**: Forward and reverse DNS must be configured, and every server must have a unique hostname. If you do not have DNS configured, you must use your hosts file for name resolution. We will assume that you will use your private network for communication within your infrastructure.
 - **Firewall open ports**: The Puppet master must be reachable on TCP port 8140.
 
+.. note::
+    This guide has been made using Puppet version 5.1. Although, Wazuh supports Puppet versions from 5.0 to 6.0.
+
 .. topic:: Contents
 
     .. toctree::
