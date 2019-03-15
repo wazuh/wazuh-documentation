@@ -42,7 +42,6 @@ Options
 - `geoipdb`_
 - `rotate_interval`_
 - `max_output_size`_
-- `queue_size`_
 
 alerts_log
 ^^^^^^^^^^
@@ -406,25 +405,6 @@ Example
 .. code-block:: xml
 
   <max_output_size>20M</max_output_size>
-
-queue_size
-^^^^^^^^^^
-
-.. versionadded:: 3.3.0
-
-This sets the size of the message input buffer in Analysisd (number of events).
-
-+-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 131072                                                                                                                                   |
-+-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number. The minimum allowed is 1. The recommended range is [16384..262144]                                                    |
-+-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-
-Example
-
-.. code-block:: xml
-
-  <queue_size>16384</queue_size>
 
 Default configuration
 ---------------------

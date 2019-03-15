@@ -49,7 +49,7 @@ In order to configure Wazuh to send email alerts, the email settings must be con
 
 To see all of the available email configuration options, go to the :ref:`global section <reference_ossec_global>`.
 
-Once the above has been configured, the ``email_alert_level`` needs to be set to the minimum alert level that will trigger an email. By default, this level is set to 7.
+Once the above has been configured, the ``email_alert_level`` needs to be set to the minimum alert level that will trigger an email. By default, this level is set to 12.
 
 ::
 
@@ -142,7 +142,7 @@ Email alerts can be configured to send an email based on one or more rule groups
 
  <email_alerts>
    <email_to>you@example.com</email_to>
-   <group>pci_dss_10.6.1</group>
+   <group>pci_dss_10.6.1,</group>
  </email_alerts>
 
 This will send an alert when any rule that is part of the ``pci_dss_10.6.1`` group is triggered on any Wazuh monitored device.

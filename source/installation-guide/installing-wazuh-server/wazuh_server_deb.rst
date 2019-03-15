@@ -87,38 +87,13 @@ Installing the Wazuh API
 
     # apt-get install nodejs
 
-2. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in most Linux distributions.
-
-   To determine if the python version on your system is lower than 2.7, you can run the following:
-
-  .. code-block:: console
-
-    # python --version
-
-   It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
-
-  .. code-block:: javascript
-
-    config.python = [
-        // Default installation
-        {
-            bin: "python",
-            lib: ""
-        },
-        // Package 'python27' for CentOS 6
-        {
-            bin: "/opt/rh/python27/root/usr/bin/python",
-            lib: "/opt/rh/python27/root/usr/lib64"
-        }
-    ];
-
-3. Install the Wazuh API. It will update NodeJS if it is required:
+2. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: console
 
     # apt-get install wazuh-api
 
-4. Once the process is complete, you can check the service status with:
+3. Once the process is complete, you can check the service status with:
 
   a) For Systemd:
 
@@ -135,7 +110,7 @@ Installing the Wazuh API
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
-5. (Optional) Disable the Wazuh updates:
+4. (Optional) Disable the Wazuh updates:
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
@@ -175,7 +150,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # apt-get install filebeat=6.6.1
+    # apt-get install filebeat=6.6.2
 
 3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 

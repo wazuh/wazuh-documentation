@@ -7,37 +7,8 @@ Integration with external APIs
 
 The **Integrator** daemon allows Wazuh to connect to external APIs and alerting tools such as Slack, PagerDuty and VirusTotal.
 
-Prerequisites
--------------
-
-The Slack and VirusTotal integrations require the ``requests`` Python package. You can install it using one of the following methods:
-
-a) For RPM systems:
-
-.. code-block:: console
-
-  # yum install python-requests
-
-b) For Debian systems:
-
-.. code-block:: console
-
-  # apt-get install python-requests
-
-c) Using the Python `pip` tool:
-
-.. code-block:: console
-
-  # pip install requests
-
 Configuration
 -------------
-
-The Integrator is not enabled by default, however, it can be enabled using the following command:
-
-.. code-block:: console
-
-  # /var/ossec/bin/ossec-control enable integrator
 
 The integrations are configured on the ``ossec.conf`` file which is located inside the Wazuh installation folder (``/var/ossec/etc/``). To configure an integration, add the following configuration inside the *<ossec_config>* section:
 
