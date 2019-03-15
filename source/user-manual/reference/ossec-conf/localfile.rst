@@ -31,7 +31,10 @@ Options
 location
 ^^^^^^^^
 
-Giving any log file, this option indicates the location of that log or wild-carded group of logs. ``strftime`` format strings may be used for log file names.
+Option to get the location of a log or a group of logs.
+
+.. note::
+  ``strftime`` format strings may be used for log file names.
 
 For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017).
 
@@ -39,7 +42,9 @@ Wildcards may be used on non-Windows systems, but if the log file doesn't exist 
 
 Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
 
-The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. For instance, these two configurations show a channel filtering for firewall and Sysmon events.
+The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. 
+
+As a example, these two configurations show a channel filtering for firewall and Sysmon events.
 
 .. code-block:: xml
 
@@ -63,6 +68,7 @@ command
 ^^^^^^^
 
 Allowing any command line, this option designates a command to be run.
+
 This command's output will be read as one or more log messages depending if *command* or *full_command* is used.
 
 +--------------------+--------------------------------------------------+
@@ -74,7 +80,7 @@ This command's output will be read as one or more log messages depending if *com
 alias
 ^^^^^
 
-Change a command name in the log message with the given string.
+Change a command name in the log message.
 
 For example ``<alias>usb-check</alias>`` would replace:
 
@@ -97,7 +103,7 @@ with:
 frequency
 ^^^^^^^^^
 
-Settled to a positive number, and used with **command** or **full_command**, will prevent that command from being executed in less time than the specified number (in seconds).
+Prevents a command from being executed in less time than the specified time (in seconds).
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -108,7 +114,9 @@ Settled to a positive number, and used with **command** or **full_command**, wil
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-Change the default value to *yes* to collect only events generated after the Wazuh starts. If it's left by default, Wazuh will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
+Set it to *yes* to collect only events generated after the Wazuh starts.
+
+By default, when Wazuh starts it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
 
 Only compatible with `eventchannel` log format.
 
@@ -121,18 +129,18 @@ Only compatible with `eventchannel` log format.
 query
 ^^^^^
 
-Filter the events that Wazuh will process by using an XPATH query following the `event schema. <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_
+Filters the events that Wazuh will process by using an XPATH query following the event schema.
 
 Only compatible with ``eventchannel`` log format.
 
-For example, the following configuration will only process events with an ID of 7040:
+Example: 
 
 .. code-block:: xml
 
   <localfile>
-    <location>System</location>
+    <location>Security</location>
     <log_format>eventchannel</log_format>
-    <query>Event/System[EventID=7040]</query>
+    <query>Event[System/EventID = 4624 and (EventData/Data[@Name='LogonType'] = 2 or EventData/Data[@Name='LogonType'] = 10)]</query>
   </localfile>
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------+
@@ -209,7 +217,7 @@ Target specifies the name of the socket where the output will be redirected. The
 log_format
 ^^^^^^^^^^
 
-This specifies the format of the log being read. **field is required**
+Specifies the format of the log being read. **field is required**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
@@ -307,12 +315,6 @@ out_format
 .. versionadded:: 3.3.0
 
 This option allows formatting logs from Logcollector using field substitution.
-
-The syntax is:
-
-.. code-block:: bash
-
-	$(parameter)
 
 The list of available parameters is:
 
