@@ -88,7 +88,7 @@ Installing the Wazuh API
 
     # python --version
 
-   It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
+  It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
 
   .. code-block:: javascript
 
@@ -120,7 +120,7 @@ Installing the Wazuh API
 
     # yum install python27
 
-    You may need to first enable a repository in order to get python27, with a command like this:
+  You may need to first enable a repository in order to get python27, with a command like this:
 
   .. code-block:: console
 
