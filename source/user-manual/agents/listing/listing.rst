@@ -7,8 +7,6 @@ Listing agents using the Wazuh API
 
 The request `GET /agents <https://documentation.wazuh.com/current/user-manual/api/reference.html#get-all-agents>`_ returns the list of available agents.
 
-.. note:: GET is the default action of curl and does not need to be specifically referenced.
-
 .. code-block:: console
 
    # curl -u foo:bar -k -X GET "https://127.0.0.1:55000/agents?pretty&offset=0&sort=-ip,name"
@@ -42,6 +40,8 @@ The request `GET /agents <https://documentation.wazuh.com/current/user-manual/ap
             {
                "status": "Connected",
                "dateAdd": "2019-03-04 02:01:06",
+               "lastKeepAlive": "2019-03-18 14:35:44",
+
                "os": {
                   "major": "16",
                   "name": "Ubuntu",

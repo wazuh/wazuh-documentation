@@ -8,7 +8,7 @@ Agent management
 .. meta::
   :description: Learn more about the Wazuh agents and how to group, configure or upgrade them remotely using several tools.
 
-This section describes how to manage the agents using the command line (CLI), the Wazuh API and the ``ossec-authd`` daemon. With them we'll register, list and remove Wazuh's agents.
+This section describes how to manage the agents using the command line (CLI), the Wazuh API and the ``ossec-authd`` daemon.
 
 .. topic:: Contents
 
