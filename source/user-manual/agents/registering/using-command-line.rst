@@ -30,14 +30,6 @@ To register an agent using the command line, follow these steps:
 
 		# /var/ossec/bin/manage_agents -i MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw
 
-		Agent information:
-			ID:001
-			Name:Ubuntu-01
-			IP Address:any
-
-		Confirm adding it?(y/n): y
-		Added.
-
 4. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
 
 	.. code-block:: xml
