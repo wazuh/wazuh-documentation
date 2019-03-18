@@ -14,15 +14,15 @@
         <div id="links-to-home">
           <a class="wazuh-logo-link" href="{{ pathto(master_doc) }}" title="Wazuh">
             <img class="img-responsive" src={{ pathto('_static/img/wazuh_logo_w.png', 1) }} alt="Wazuh" />
+            <span class="docs-link">Docs</span>
           </a>
-          <a class="docs-link" href="{{ pathto(master_doc) }}" class="title">Docs</a>
         </div>
       </div> <!-- // #logo-title -->
     </nav>
 
-    <div class="d-none d-lg-inline-flex" id="navbarWebMenu">
+    <div id="navbarWebMenu">
 
-      <nav class="menuweb-bar">
+      <nav class="menuweb-bar d-none d-lg-inline-flex">
         <ul id="menu-header-menuweb" class="nav">
           <li class="menu-item nav-item"><a class="nav-link" href={{ theme_wazuh_web_url + '/product/' }}>Product</a></li>
           <li class="menu-item nav-item"><a class="nav-link" href={{ theme_wazuh_web_url + '/blog/' }}>Blog</a></li>
@@ -32,19 +32,16 @@
           <li class="menu-item nav-item"><a class="nav-link" href={{ theme_wazuh_web_url + '/contact-us/' }}>Contact us</a></li>
         </ul>
       </nav>
+      <div class="version-zone d-flex">
+        <span class="release-selector-wrapper">
+          {% if theme_display_version %}
+          {% include "versions.html" %}
+          {% endif %}
+        </span>
+      </div>
     </div>
 
   </div>
-
-  {% if pagename == 'index' %}
-  <div class="main-head">
-    <div class="container">
-      {% include "searchbar.html" %} {%- block searchbar %} {% endblock %}
-    </div>
-  </div>
-  {% endif %}
-
-
 </header>
 
 <div class="menu-sub">
@@ -58,27 +55,19 @@
       </div>
 
       <div class="blue-bar">
-        <div id="search-lg" class="title-bar-right col-lg-12 collapsed">
-          {% if pagename != 'index' %}
-          {% include "searchbar.html" %}
-          {% endif %}
-        </div> <!-- // #search-lg -->
-        <div class="submenu d-none d-lg-flex">
-          <ul id="menu-submenu" class="nav">
-            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../installation-guide/', 1 ) }}">Installation Guide</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../getting-started/', 1 ) }}">Getting Started</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../pci-dss/', 1 ) }}">Wazuh for PCI DSS</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../amazon/', 1 ) }}">Monitoring AWS</a></li>
+        <div class="submenu">
+          <ul id="menu-submenu" class="nav d-none d-lg-flex">
+            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../getting-started/', 1 ) }}">Getting started</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../user-manual/', 1 ) }}">User manual</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="#">Deployment</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="#">Utilities</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="#">Wazuh Cloud</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="#">Contribute</a></li>
           </ul>
         </div>
-
-        <div class="version-zone d-none d-lg-flex col-lg-auto ml-auto">
-          <span class="release-selector-wrapper">
-            {% if theme_display_version %}
-            {% include "versions.html" %}
-            {% endif %}
-          </span>
-        </div>
+        <div id="search-lg" class="title-bar-right col-lg-12 collapsed">
+          {% include "searchbar.html" %}
+        </div> <!-- // #search-lg -->
       </div>
 
 

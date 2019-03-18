@@ -56,7 +56,7 @@ th {
   white-space: nowrap;
 }
 
-#links-to-home {
+.wazuh-logo-link img {
   max-width: 110px;
 }
 
@@ -85,10 +85,16 @@ th {
 }
 
 .header > div {
-  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+      -ms-flex-direction: row;
+          flex-direction: row;
 }
 
 .header .main-head {
@@ -116,6 +122,9 @@ th {
 
 .header #navbarWebMenu {
   height: 100%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
 }
 
 .header .menuweb-bar .nav > li > a {
@@ -159,18 +168,19 @@ th {
   margin-right: 5px;
 }
 
-a.docs-link {
+a .docs-link {
   color: #ffffff;
-  vertical-align: middle;
+  vertical-align: text-top;
   display: inline-block;
+  line-height: 1.7em;
 }
 
-a.docs-link:hover,
-a.docs-link:active {
+a .docs-link:hover,
+a .docs-link:active {
   color: #ffffff;
 }
 
-a.docs-link:focus {
+a .docs-link:focus {
   text-decoration: underline;
 }
 
@@ -682,10 +692,6 @@ footer a:active,
   right: 0;
   left: 0;
   z-index: 4;
-}
-
-.main-head .search_main {
-  left: 56px;
 }
 
 #search-form .form-control {
@@ -1266,6 +1272,7 @@ select, option {
 }
 
 .release-selector-wrapper {
+  padding-left: 1em;
   -ms-flex-item-align: center;
       align-self: center;
 }
@@ -1276,13 +1283,17 @@ select, option {
 
 select#select-version {
   border: none;
-  margin-left: 10px;
   padding: 2px 31px 2px 8px;
   cursor: pointer;
   position: relative;
   font-size: 0.85rem;
   border-radius: 4px;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+select#select-version option {
+  color: #333333;
 }
 
 .version:after {
@@ -1294,7 +1305,7 @@ select#select-version {
   height: 0.5em;
   border-left: 5px solid #0000;
   border-right: 5px solid #0000;
-  border-top: 5px solid #00a9e5;
+  border-top: 5px solid #ffffff;
   pointer-events: none;
 }
 
@@ -1906,6 +1917,9 @@ footer a {
   border-radius: 0;
   position: relative;
   padding: 0;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
 }
 
 #main-navbar .navbar-nav > .open > a,
@@ -2343,12 +2357,6 @@ div.highlight pre {
       h1.smaller-title {
         font-size: 1.5em!important;
       }
-
-      /* body:not(.scrolled-down) {
-        padding-top: 162px;
-        -webkit-transition: padding-top .3s;
-        transition: padding-top .3s;
-      } */
 
       #main-menu .nav-link {
         padding: 0;
@@ -2864,15 +2872,16 @@ div.highlight pre {
 			}
 
       #main-navbar {
-        padding: 8px 7px;
+        padding: 8px 0;
       }
 
       #links-to-home {
         max-width: 182px;
       }
 
-      #links-to-home .wazuh-logo-link {
-        margin-right: 15px;
+      #links-to-home .docs-link {
+        margin-left: 15px;
+        line-height: 2em;
       }
 
       #links-to-home .wazuh-logo-link img {
@@ -2897,10 +2906,6 @@ div.highlight pre {
 
 			#search-lg .search_main .searchform {
 				padding: 0;
-			}
-
-			.index .search_main .searchform {
-				padding: 10px 7px;
 			}
 
       #carouselWazuhDocu{
@@ -2946,10 +2951,6 @@ div.highlight pre {
         line-height: 1.4rem;
       }
 
-      .index .search_main .form-control {
-        font-size: 1.2em;
-      }
-
       .search_main {
         position: static;
         display: -webkit-box;
@@ -2960,8 +2961,8 @@ div.highlight pre {
         margin: 0 auto;
       }
 
-      .release-selector-wrapper {
-        padding-right: 7px;
+      .version-zone {
+        padding-right: 0;
       }
 
 			.central-page-area {
@@ -3116,12 +3117,7 @@ div.highlight pre {
                 flex: unset;
 				-webkit-transition: width 0.5s ease;
 				transition: width 0.5s ease;
-      }
-
-      .index #search-lg.collapsed {
-				width: 0;
-				-webkit-transition: width 0.5s ease;
-				transition: width 0.5s ease;
+        margin-left: auto;
       }
 }
 
