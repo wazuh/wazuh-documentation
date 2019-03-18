@@ -341,7 +341,7 @@ Attributes:
 registry_ignore
 ^^^^^^^^^^^^^^^
 
-List of registry entries to be ignored.  (one entry per line). Multiple lines may be entered to include multiple registry entries.
+List of registry entries to be ignored. (one entry per line). Multiple lines may be entered to include multiple registry entries.
 
 +--------------------+---------------------+
 | **Default value**  | n/a                 |
@@ -351,13 +351,17 @@ List of registry entries to be ignored.  (one entry per line). Multiple lines ma
 
 Attributes:
 
-+----------+--------------------------------------------------------------+
-| **arch** | Select the Registry to ignore depending on the architecture. |
-+          +------------------+-------------------------------------------+
-|          | Default value    | 32bit                                     |
-|          +------------------+-------------------------------------------+
-|          | Allowed values   | 32bit, 64bit, both                        |
-+----------+------------------+-------------------------------------------+
++----------+--------------------------------------------------------------------------------+
+| **arch** | Select the Registry to ignore depending on the architecture.                   |
++          +------------------+-------------------------------------------------------------+
+|          | Default value    | 32bit                                                       |
+|          +------------------+-------------------------------------------------------------+
+|          | Allowed values   | 32bit, 64bit, both                                          |
++----------+------------------+-------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated.|
++          +------------------+-------------------------------------------------------------+
+|          | Allowed values   |  sregex                                                     |
++----------+------------------+-------------------------------------------------------------+
 
 prefilter_cmd
 ^^^^^^^^^^^^^^
