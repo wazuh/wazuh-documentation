@@ -2,8 +2,8 @@
 
 .. _restful-api-listing:
 
-Listing Agents
---------------
+Listing Agents using the Wazuh API
+----------------------------------
 
 The request :ref:`GET /agents <request_list>` returns the list of available agents.
 

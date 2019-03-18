@@ -2,8 +2,8 @@
 
 .. _restful-api-remove:
 
-Remove Agents
--------------
+Remove Agents using the Wazuh API
+----------------------------------
 
 The request :ref:`DELETE /agents/:agent_id <request_list>` removes the specified agent.
 

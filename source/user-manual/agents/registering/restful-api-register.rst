@@ -2,8 +2,8 @@
 
 .. _restful-api-register:
 
-Register Agents
----------------
+Using the Wazuh API
+-------------------
 
 Two requests are needed to register an agent using the API:
 

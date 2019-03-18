@@ -2,7 +2,7 @@
 
 .. _listing_agents:
 
-Listing agents
+Listing Agents
 ==================
 
 In this section, it is explained how to list the existing agents in our instances.
@@ -11,3 +11,5 @@ In this section, it is explained how to list the existing agents in our instance
         :maxdepth: 2
 
         using-command-line
+        listing
+        wazuh-app

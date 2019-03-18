@@ -2,7 +2,7 @@
 
 .. _remove_agents:
 
-Removing agents
+Removing Agents
 ===============
 
 In this section, the process of deleting agents using the command line will be explained.
@@ -12,3 +12,4 @@ In this section, the process of deleting agents using the command line will be e
         :maxdepth: 2
 
         remove
+        restful-api-remove

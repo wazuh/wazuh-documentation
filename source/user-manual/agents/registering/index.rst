@@ -2,7 +2,7 @@
 
 .. _register_agents:
 
-Registering agents
+Registering Agents
 ==================
 
 .. meta::
@@ -24,4 +24,5 @@ In this section, the first two methods are explained. The API registration proce
         registration-process
         using-command-line
         use-registration-service
-      
+        restful-api-register
+              

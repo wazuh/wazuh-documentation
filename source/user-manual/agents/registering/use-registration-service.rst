@@ -203,7 +203,7 @@ To use the registration service with SSL certification, you must create a Certif
 
 Manager verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  .. image:: ../../images/manual/managing-agents/SSLregister1.png
+  .. image:: ../../../images/manual/managing-agents/SSLregister1.png
     :align: center
     :width: 100%
 
@@ -243,7 +243,7 @@ Manager verification using SSL
 Agent verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. image:: ../../images/manual/managing-agents/SSLregister2.png
+  .. image:: ../../../images/manual/managing-agents/SSLregister2.png
     :align: center
     :width: 100%
 
