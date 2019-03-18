@@ -54,7 +54,7 @@ Requirements
 
     .. code-block:: console
 
-        pip install cryptography
+        $ pip install cryptography
 
 Canonical WPK package example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -112,7 +112,7 @@ Definitions:
     - **output/myagent.wpk** is the name of the output WPK package.
     - **path/to/wpkcert.pem** is the path to your SSL certificate.
     - **path/to/wpkcert.key** is the path to your SSL certificate's key.
-    - **\*** is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
+    - /* is the file (or the files) to be included into the WPK package. In this case, all the contents will be added.
 
 In this example, the Wazuh project's root directory contains the proper ``upgrade.sh`` file.
 
