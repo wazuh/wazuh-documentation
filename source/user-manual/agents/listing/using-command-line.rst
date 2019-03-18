@@ -2,7 +2,7 @@
 
 .. _command_line_listing:
 
-Listing Agents using the CLI
+Listing agents using the CLI
 ----------------------------
 
 The binary */var/ossec/bin/agent_control*, used with ``-l`` option, allows for the retrieval of a list of the available agents:

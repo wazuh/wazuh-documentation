@@ -2,7 +2,7 @@
 
 .. _listing_agents:
 
-Listing Agents
+Listing agents
 ==================
 
 In this section, it is explained how to list the existing agents in our instances.

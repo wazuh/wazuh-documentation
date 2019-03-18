@@ -2,7 +2,7 @@
 
 .. _grouping-agents:
 
-Grouping Agents
+Grouping agents
 ===============
 
 .. versionadded:: 3.0.0

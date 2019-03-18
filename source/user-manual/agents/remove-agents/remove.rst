@@ -2,7 +2,7 @@
 
 .. _command-line-remove:
 
-Remove Agents using the CLI
+Remove agents using the CLI
 ---------------------------
 
 The binary */var/ossec/bin/manage_agents* can be used also to remove agents using the command line. 

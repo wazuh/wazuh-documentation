@@ -2,7 +2,7 @@
 
 .. _wazuh-app:
 
-Listing Agents using the Wazuh app
+Listing agents using the Wazuh app
 ----------------------------------
 
 .. topic:: Listing agents

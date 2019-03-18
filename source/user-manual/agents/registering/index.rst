@@ -2,7 +2,7 @@
 
 .. _register_agents:
 
-Registering Agents
+Registering agents
 ==================
 
 .. meta::

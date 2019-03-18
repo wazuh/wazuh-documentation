@@ -5,7 +5,7 @@
 Agent life cycle
 ================
 
-Registered Agent
+Registered agent
 ----------------
 
 Once an agent is installed on a machine to be monitored, it must be registered with the Wazuh manager in order to establish communication. This can be done via the :doc:`command line<./registering/using-command-line>`, :doc:`Authd<./registering/use-registration-service>`, or the :doc:`Wazuh API<./registering/restful-api-register>`.
@@ -27,7 +27,7 @@ Agent status
 - **Active:** The agent has successfully connected and can now communicate with the manager.
 - **Disconnected:** The manager will consider the agent disconnected if it does not receive any ``keep alive`` messages from the agent within a half an hour.
 
-Removed Agent
+Removed agent
 -------------
 
 The life cycle comes to an end when the agent is removed from the manager. This can be done through the :doc:`Wazuh API<./remove-agents/restful-api-remove>`, :doc:`command line<./remove-agents/remove>`, or Authd (if the force option is enabled).
