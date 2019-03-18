@@ -7,10 +7,10 @@ localfile
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+    .. code-block:: xml
 
-		<localfile>
-		</localfile>
+        <localfile>
+        </localfile>
 
 This configuration section is used to configure the collection of log data from files, Windows events, and from the output of commands.
 
@@ -44,7 +44,7 @@ Note that ``strftime`` format strings and wildcards cannot be used on the same e
 
 The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. 
 
-As a example, these two configurations show a channel filtering for firewall and Sysmon events.
+As an example, these two configurations show a channel filtering for firewall and Sysmon events.
 
 .. code-block:: xml
 
@@ -69,7 +69,7 @@ command
 
 Allowing any command line, this option designates a command to be run.
 
-This command's output will be read as one or more log messages depending if *command* or *full_command* is used.
+This command's output will be read as one or more log messages depending on *command* or *full_command* is used.
 
 +--------------------+--------------------------------------------------+
 | **Default value**  | n/a                                              |
@@ -199,7 +199,7 @@ The additional fields configured above would appear in the resulting event as be
     "@source": "myapp"
   }
 
-.. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key be defined by using a symbol prior to the key name as in *@source*.
+.. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key is defined by using a symbol prior to the key name as in *@source*.
 
 target
 ^^^^^^
@@ -217,7 +217,7 @@ Target specifies the name of the socket where the output will be redirected. The
 log_format
 ^^^^^^^^^^
 
-Specifies the format of the log being read. **field is required**
+Specifies the format of the log to be read. **field is required**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
@@ -260,15 +260,15 @@ Specifies the format of the log being read. **field is required**
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | apache             | Used for Apache's default log format.                                                            |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | command            | Used to read output from the command (as run by root) specified by the command tag.              |
+|                    | command            | Used to read the output from the command (as run by root) specified by the command tag.              |
 |                    |                    |                                                                                                  |
-|                    |                    | Each line of output is be treated as a separate log.                                             |
+|                    |                    | Each line of output is treated as a separate log.                                             |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | full_command       | Used to read output from the command (as run by root) specified by the command tag.              |
+|                    | full_command       | Used to read the output from the command (as run by root) specified by the command tag.              |
 |                    |                    |                                                                                                  |
 |                    |                    | The entire output will be treated as a single log item.                                          |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | djb-multilog       | Used to read files in the format produced by the multilog service logger in daemontools.         |
+|                    | djb-multilog       | Used to read files in the format produced by the multi-log service logger in daemon tools.         |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | multi-line         | Used to monitor applications that log multiple lines per event.                                  |
 |                    |                    |                                                                                                  |
@@ -285,27 +285,27 @@ Specifies the format of the log being read. **field is required**
 
 .. warning::
 
-	The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
+    The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
 
 .. warning::
 
-	Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh Manager from running arbitrary commands on agents in their root security context.
+    Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh Manager from running arbitrary commands on agents in their root security context.
 
 Sample of Multi-line log message in original log file:
 
 .. code-block:: console
 
-	Aug 9 14:22:47 hostname log line one
-	Aug 9 14:22:47 hostname log line two
-	Aug 9 14:22:47 hostname log line four
-	Aug 9 14:22:47 hostname log line three
-	Aug 9 14:22:47 hostname log line five
+    Aug 9 14:22:47 hostname log line one
+    Aug 9 14:22:47 hostname log line two
+    Aug 9 14:22:47 hostname log line four
+    Aug 9 14:22:47 hostname log line three
+    Aug 9 14:22:47 hostname log line five
 
 Sample Log message as analyzed by ossec-analysisd:
 
 .. code-block:: console
 
-	Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
+    Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
 
 .. _ossec_localfile_out_format:
 
