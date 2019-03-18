@@ -5,7 +5,7 @@
 Listing agents using the CLI
 ----------------------------
 
-The binary */var/ossec/bin/agent_control*, used with ``-l`` option, allows for the retrieval of a list of the available agents:
+The binary ``agent_control``, used with ``-l`` option, allows for the retrieval of a list of the available agents:
 
 .. code-block:: console
 

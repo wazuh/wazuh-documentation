@@ -16,6 +16,7 @@ Users can register agents using 3 different methods:
   - Using the Wazuh API.
 
 In this section, the first two methods are explained. The API registration process is explained in its own section.
+
 .. topic:: Contents
 
     .. toctree::

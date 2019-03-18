@@ -5,17 +5,19 @@
 Remove agents using the Wazuh API
 ----------------------------------
 
-The request :ref:`DELETE /agents/:agent_id <request_list>` removes the specified agent.
+The request `DELETE /agents <https://documentation.wazuh.com/current/user-manual/api/reference.html#delete-agents>`_ removes the specified agents.
 
 .. code-block:: console
 
-    # curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/005?pretty&purge"
+    # curl -u foo:bar -k -X DELETE -d '{"ids":["005","006","007"]}' "https://127.0.0.1:55000/agents?pretty&purge"
     {
-    "error": 0,
-    "data": {
-        "msg": "All selected agents were removed",
-        "affected_agents": [
-            "005"
-        ]
-    }
+        "error": 0,
+        "data": {
+            "msg": "All selected agents were removed",
+            "affected_agents": [
+                "005",
+                "006",
+                "007"
+            ]
+        }
     }

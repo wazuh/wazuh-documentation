@@ -7,14 +7,14 @@ Using the Wazuh API
 
 Two requests are needed to register an agent using the API:
 
-    - POST /agents :ref:`(reference) <api_reference>`
-    - PUT /agents/:agent_name :ref:`(reference) <api_reference>`
+    - POST /agents `(reference) <https://documentation.wazuh.com/current/user-manual/api/reference.html#add-agent>`_
+    - PUT /agents/:agent_name `(reference) <https://documentation.wazuh.com/current/user-manual/api/reference.html#add-agent-quick-method>`_
 
 1. Add the agent to the manager.
 
   .. code-block:: console
 
-    # curl -u foo:bar -k -X POST -d '{"name":"NewAgent","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
+    # curl -u foo:bar -k -X POST -d '{"name":"Ubuntu-1","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
     {
       "error": 0,
       "data": {
