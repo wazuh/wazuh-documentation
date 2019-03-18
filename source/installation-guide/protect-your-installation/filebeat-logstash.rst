@@ -130,6 +130,3 @@ Configure Filebeat to verify the Logstash server's certificate.
 
 .. note::
 	More detailed information is available in the `Securing communication with Logstash <https://www.elastic.co/guide/en/beats/filebeat/current/configuring-ssl-logstash.html>`_ guide from Elastic.
-
-.. note::
-  If is required a more effective way to secure Filebeat-Logstash we recommend using :ref:`searchguard`. 
