@@ -5,8 +5,6 @@
 Listing agents
 ==================
 
-In this section, it is explained how to list the agents in our instances.
-
     .. toctree::
         :maxdepth: 2
 

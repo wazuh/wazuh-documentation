@@ -5,7 +5,7 @@
 Remove agents using the CLI
 ---------------------------
 
-The binary */var/ossec/bin/manage_agents* can be used also to remove agents using the command line. 
+The binary ``manage_agents`` can be used also to remove agents using the command line. 
 
 If the user would like confirmation before removing the agent, use the following:
 

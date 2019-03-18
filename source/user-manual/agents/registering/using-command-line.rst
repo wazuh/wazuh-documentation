@@ -41,7 +41,7 @@ To register an agent using the command line, follow these steps:
 		  </server>
 		</client>
 
-	As an example for making this change with a line we are setting the *MANAGER_IP* to ``10.0.0.4``:
+	Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
 
 	.. code-block:: console
 

@@ -93,9 +93,9 @@ This is the easiest method to register agents. It doesn't require any kind of au
       </server>
     </client>
 
-  Or using `sed` to overwrite it in one command line using ``10.0.0.4`` as an example IP:
+  Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
 
@@ -120,7 +120,7 @@ You can protect the manager from unauthorized registrations by using a password.
 
 To allow this option, change the value to *yes* in the ``/var/ossec/etc/ossec.conf`` file:
 
-    .. code-block:: bash
+    .. code-block:: xml
 
       <auth>
         ...
@@ -333,7 +333,7 @@ Additional configurations
 
     <auth>
       <use_source_ip>no</use_source_ip>
-    </auth>ls
+    </auth>
 
 * Duplicate IPs are not allowed, so an agent won't be added if there is already another agent registered with the same IP. By changing the configuration file, ``ossec-authd`` can be told to **force a registration** if it finds an older agent with the same IP address. This will make the older agent's registration be deleted:
 

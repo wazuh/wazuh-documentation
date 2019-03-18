@@ -10,6 +10,9 @@ The request `DELETE /agents <https://documentation.wazuh.com/current/user-manual
 .. code-block:: console
 
     # curl -u foo:bar -k -X DELETE -d '{"ids":["005","006","007"]}' "https://127.0.0.1:55000/agents?pretty&purge"
+
+.. code-block:: json
+
     {
         "error": 0,
         "data": {

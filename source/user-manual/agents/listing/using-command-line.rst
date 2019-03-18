@@ -32,15 +32,10 @@ The binary ``agent_control``, used with ``-l`` option, allows for the retrieval 
 
 Also, users can retrieve the connected agents by using the ``manage_agents`` with ``-l`` option:
 
-.. code-block:: bash
+.. code-block:: console
 
    # /var/ossec/bin/manage_agents -l
 
    Available agents: 
       ID: 001, Name: agent-ubuntu2, IP: any
       ID: 002, Name: agent-ubuntu1, IP: any
-
-
-
-
-

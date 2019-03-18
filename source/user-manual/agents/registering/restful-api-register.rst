@@ -5,16 +5,14 @@
 Using the Wazuh API
 ===================
 
-Two requests are needed to register an agent using the API:
-
-    - POST /agents `(reference) <https://documentation.wazuh.com/current/user-manual/api/reference.html#add-agent>`_
-    - PUT /agents/:agent_name `(reference) <https://documentation.wazuh.com/current/user-manual/api/reference.html#add-agent-quick-method>`_
-
 1. Add the agent to the manager.
 
   .. code-block:: console
 
     # curl -u foo:bar -k -X POST -d '{"name":"ubuntu-ag","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
+
+  .. code-block:: json
+
     {
       "error": 0,
       "data": {
@@ -44,9 +42,9 @@ Two requests are needed to register an agent using the API:
       </server>
     </client>
 
-  or using as an example the IP ``10.0.0.4`` and the command ``sed`` to change it in one line:
+  Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
 
-  .. code-block:: bash
+  .. code-block:: console
 
     # sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
 
