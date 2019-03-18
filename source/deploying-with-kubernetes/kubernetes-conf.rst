@@ -60,7 +60,7 @@ Pods
 This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent registration service (authd) and the API are placed here.
 
 Details:
-    - Image: Docker Hub 'wazuh/wazuh:3.8.2_6.5.4'
+    - Image: Docker Hub 'wazuh/wazuh:3.9.0_6.6.2'
     - Controller: StatefulSet
 
 **Wazuh worker 0 / 1**
@@ -68,7 +68,7 @@ Details:
 These pods contain a worker node of the Wazuh cluster. They will receive the agent events.
 
 Details:
-    - Image: Docker Hub 'wazuh/wazuh:3.8.2_6.5.4'
+    - Image: Docker Hub 'wazuh/wazuh:3.9.0_6.6.2'
     - Controller: StatefulSet
 
 **Elasticsearch**
@@ -76,7 +76,7 @@ Details:
 Elasticsearch pod. It receives and stores alerts received from Logstash. No Elasticsearch cluster is supported yet.
 
 Details:
-    - Image: Docker Hub 'wazuh/wazuh-elasticsearch:3.8.2_6.5.4'
+    - Image: Docker Hub 'wazuh/wazuh-elasticsearch:3.9.0_6.6.2'
     - Controller: StatefulSet
 
 **Logstash**
@@ -84,7 +84,7 @@ Details:
 Logstash pod. It receives the alerts from each Filebeat located in every Wazuh manager. Then, the alerts are sent to Elasticsearch.
 
 Details:
-    - image: Docker Hub 'wazuh/wazuh-logstash:3.8.2_6.5.4'
+    - image: Docker Hub 'wazuh/wazuh-logstash:3.9.0_6.6.2'
     - Controller: Deployment
 
 **Kibana**
@@ -92,7 +92,7 @@ Details:
 Kibana pod. It lets you visualize your Elasticsearch data, along with other features as the Wazuh app.
 
 Details:
-    - image: Docker Hub 'wazuh/wazuh-kibana:3.8.2_6.5.4'
+    - image: Docker Hub 'wazuh/wazuh-kibana:3.9.0_6.6.2'
     - Controller: Deployment
 
 **Nginx**
@@ -100,7 +100,7 @@ Details:
 The nginx pod acts as a reverse proxy for a safer access to Kibana.
 
 Details:
-    - image: Docker Hub 'wazuh/wazuh-nginx:3.8.2_6.5.4'
+    - image: Docker Hub 'wazuh/wazuh-nginx:3.9.0_6.6.2'
     - Controller: Deployment
 
 Services
@@ -280,7 +280,7 @@ Verifying the deployment
 
     In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: https://wazuh.your-domain.com.
 
-    Also, you can access using the External-IP (from the VPC): https://internal-xxx-yyy.us-east-1.elb.amazonaws.com:443
+    Also, you can access using the External-IP (from the VPC): https://192.168.10.5.elb.amazonaws.com
 
     .. code-block:: bash
 
@@ -299,15 +299,17 @@ Monitoring hosts
 
 Wazuh agents are designed to monitor hosts. To start using them:
 
-1. :doc:`Install the agent. <../installation-guide/installing-wazuh-agent/index>`
+1. :doc:`Install the agent <../installation-guide/installing-wazuh-agent/index>`.
 
-2. Now, register the agent using the :doc:`registration service <../user-manual/registering/use-registration-service>`, 
 
-3. Then configure the agent to use the reporting service:
-    To configure the agent this way, you should follow this 2 steps:
+2. Now, register the agent using the :doc:`registration service <../user-manual/registering/use-registration-service>`.
 
-    a. Modify the ``/var/ossec/etc/ossec.conf`` file, setting the transport protocol to *TCP* and changing the ``MANAGER_IP`` field with the external IP of the service that takes to port 1514. The IP Manager input has to be the external IP of the service or the DNS if we use *AWS Route 53*.
-    b. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.
+
+3. Modify the file ``/var/ossec/etc/ossec.conf``, changing the "transport protocol" to *TCP* and changing the ``MANAGER_IP`` for the external IP of the service pointing to port 1514 or for the DNS provided by *AWS Route 53* if you are using it.
+
+
+4. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.
+
 
 .. note::
     If using EKS remember to configure the security groups to manage the access.

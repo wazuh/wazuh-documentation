@@ -30,7 +30,7 @@ The deployment of the Wazuh cluster of managers involves the use of various stat
         wazuh-nginx           LoadBalancer   172.20.166.239   internal-ac0c...   80:30409/TCP,443:32575/TCP       6d
         wazuh-workers         LoadBalancer   172.20.17.252    internal-aec3...   1514:32047/TCP                   6d
 
-    Delete the corresponding services.
+    Delete the corresponding services:
 
     .. code-block:: bash
 
@@ -49,7 +49,7 @@ The deployment of the Wazuh cluster of managers involves the use of various stat
         wazuh-manager-worker-0   1         1         6d
         wazuh-manager-worker-1   1         1         6d
 
-    Remove the three StatefulSets from the Wazuh cluster managers.
+    Remove the three StatefulSets from the Wazuh cluster managers:
 
     .. code-block:: bash
 

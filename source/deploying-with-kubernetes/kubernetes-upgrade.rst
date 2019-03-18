@@ -188,13 +188,13 @@ For example we had this version before:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.8.2_6.5.4'
+      image: 'wazuh/wazuh:3.9.0_6.6.2'
 
 .. code-block:: bash
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.8.2_6.5.4'
+      image: 'wazuh/wazuh:3.9.0_6.6.2'
 
 Apply the new configuration
 ---------------------------
