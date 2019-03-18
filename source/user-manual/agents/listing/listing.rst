@@ -19,7 +19,7 @@ The request `GET /agents <https://documentation.wazuh.com/current/user-manual/ap
          "totalItems": 2,
          "items": [
             {
-               "status": "Connected",
+               "status": "Active",
                "dateAdd": "2019-03-18 17:15:12",
                "lastKeepAlive": "2019-03-18 17:25:30",
                "os": {
@@ -38,7 +38,7 @@ The request `GET /agents <https://documentation.wazuh.com/current/user-manual/ap
                "node_name": "node01"
             },
             {
-               "status": "Connected",
+               "status": "Active",
                "dateAdd": "2019-03-18 17:15:49",
                "lastKeepAlive": "2019-03-18 17:25:30",
                "os": {
