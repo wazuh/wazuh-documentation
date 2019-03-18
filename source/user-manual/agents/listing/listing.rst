@@ -19,9 +19,9 @@ The request `GET /agents <https://documentation.wazuh.com/current/user-manual/ap
          "totalItems": 2,
          "items": [
             {
-               "status": "Disconnected",
-               "dateAdd": "2019-02-16 15:17:11",
-               "lastKeepAlive": "2019-03-05 12:20:18",
+               "status": "Connected",
+               "dateAdd": "2019-03-18 17:15:12",
+               "lastKeepAlive": "2019-03-18 17:25:30",
                "os": {
                   "major": "16",
                   "name": "Ubuntu",
@@ -32,16 +32,15 @@ The request `GET /agents <https://documentation.wazuh.com/current/user-manual/ap
                   "arch": "x86_64",
                   "minor": "04"
                },
-               "name": "Ubuntu-02",
-               "ip": "10.0.0.8",
+               "name": "Ubuntu-01",
+               "ip": "10.0.2.15",
                "id": "003",
-               "node_name": "node11"
+               "node_name": "node01"
             },
             {
                "status": "Connected",
-               "dateAdd": "2019-03-04 02:01:06",
-               "lastKeepAlive": "2019-03-18 14:35:44",
-
+               "dateAdd": "2019-03-18 17:15:49",
+               "lastKeepAlive": "2019-03-18 17:25:30",
                "os": {
                   "major": "16",
                   "name": "Ubuntu",
@@ -52,12 +51,9 @@ The request `GET /agents <https://documentation.wazuh.com/current/user-manual/ap
                   "arch": "x86_64",
                   "minor": "04"
                },
-               "group": [
-                  "default"
-               ],
-               "name": "Ubuntu-01",
-               "ip": "10.0.0.15",
-               "id": "002",
+               "name": "Ubuntu-02",
+               "ip": "10.0.2.16",
+               "id": "004",
                "node_name": "node02"
             }
          ]
