@@ -9,7 +9,7 @@ To register an agent using the command line, follow these steps:
 
 1. On the **manager**, run ``manage_agents``:
 
-.. code-block:: console
+::
 
 	# /var/ossec/bin/manage_agents
 
@@ -26,7 +26,9 @@ To register an agent using the command line, follow these steps:
 
 2. Select `A` to add an agent. You'll be asked for the agent's name (use the agent hostname or another arbitrary name), its IP address and the agent ID (this field can be left blank to auto-assign an ID).
 
-In this example, we'll add an agent with name "Example", dynamic IP (`any`) and automatic ID::
+In this example, we'll add an agent with name "Example", dynamic IP (`any`) and automatic ID:
+
+.. code-block:: console
 
 	Choose your action: A,E,L,R or Q: A
 
@@ -43,7 +45,9 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	Confirm adding it?(y/n): y
 	Agent added with ID 001.
 
-3. Extract the new agent's key. You will need it for the agent::
+3. Extract the new agent's key. You will need it for the agent:
+
+.. code-block:: console
 
 	Choose your action: A,E,L,R or Q: E
 
@@ -71,7 +75,9 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	    (Q)uit.
 	Choose your action: I or Q:
 
-6. Select `I` to import a key and paste in the key that you extracted on the manager::
+6. Select `I` to import a key and paste in the key that you extracted on the manager:
+
+.. code-block:: console
 
 	Choose your action: I or Q: I
 

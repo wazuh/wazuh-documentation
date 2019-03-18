@@ -10,21 +10,21 @@ Two requests are needed to register an agent using the API:
     - POST /agents :ref:`(reference) <api_reference>`
     - PUT /agents/:agent_name :ref:`(reference) <api_reference>`
 
-**Step 1:** Add the agent to the manager.
+1. Add the agent to the manager.
 
 .. code-block:: console
 
     # curl -u foo:bar -X POST -d 'name=NewAgent&ip=10.0.0.8' "http://localhost:55000/agents"
     {"error":0,"data":"001"}
 
-**Step 2:** Get the agent key.
+2. Get the agent key.
 
 .. code-block:: console
 
     # curl -u foo:bar -X GET "http://localhost:55000/agents/001/key"
     {"error":0,"data":"MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="}
 
-**Step 3:** Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
+3. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
 
   .. code-block:: xml
 
@@ -41,7 +41,7 @@ Two requests are needed to register an agent using the API:
 
     # sed -i 's/MANAGER_IP/NEW_MANAGER_IP/g' /var/ossec/etc/ossec.conf
 
-**Step 4:** Copy the key to the agent.
+4. Copy the key to the agent.
 
 .. code-block:: console
 
@@ -51,7 +51,7 @@ Two requests are needed to register an agent using the API:
 
     If you paste the command directly into the terminal, the agent key will be saved in the bash history. Use ``manage_agents`` without arguments or from a script.
 
-**Step 4:** Restart the agent.
+5. Restart the agent.
 
 a. For Systemd:
 
