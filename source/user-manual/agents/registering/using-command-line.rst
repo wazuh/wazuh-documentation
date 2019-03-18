@@ -55,7 +55,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 
 	MDAxIDE4NWVlNjE1Y2YzYiBhbnkgMGNmMDFiYTM3NmMxY2JjNjU0NDAwYmFhZDY1ZWU1YjcyMGI2NDY3ODhkNGQzMjM5ZTdlNGVmNzQzMGFjMDA4Nw==
 
-4. Exit from `manage_agents` by selecting `Q`.
+4. Exit from ``manage_agents`` by selecting `Q`.
 
 5. Now on the **agent** run ``manage_agents``:
 
@@ -89,7 +89,7 @@ In this example, we'll add an agent with name "Example", dynamic IP (`any`) and 
 	Confirm adding it?(y/n): y
 	Added.
 
-7. Select 'Q' to exit from `manage_agents`.
+7. Select `Q` to exit from ``manage_agents``.
 
 
 8. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
