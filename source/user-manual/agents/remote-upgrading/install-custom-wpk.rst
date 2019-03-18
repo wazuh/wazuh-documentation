@@ -7,6 +7,7 @@ Installing a custom WPK package
 
 1. Install the root CA into the agent
 -------------------------------------
+
 Either the root CA certificate or the certificate used to sign the WPK package must be installed in the agent before running an upgrade.
 
 You have two options to perform this action:

@@ -56,7 +56,7 @@ Simple method
 
 This is the easiest method to register agents. It doesn't require any kind of authorization or host verification. To do so, follow these steps:
 
-1. On the manager, start the registration service:
+1. On the manager, start the registration service.
 
   .. code-block:: console
 
@@ -66,7 +66,7 @@ This is the easiest method to register agents. It doesn't require any kind of au
   
     Since version 3.8.0, this registration daemon is running by default when the *Wazuh* installation is complete, so it is not necessary to execute it.
 
-2. On the agents, run the ``agent-auth`` program, using the manager's IP address:
+2. On the agents, run the ``agent-auth`` program, using the manager's IP address.
 
   a. For Linux systems:
 
@@ -80,27 +80,38 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
 
+3. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
 
-.. note::
-  Remember to edit the Wazuh agent configuration to add the Wazuh manager IP address.
+  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
 
-    a. For linux systems:
+  .. code-block:: xml
 
-      In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
+    <client>
+      <server>
+        <address>MANAGER_IP</address>
+        ...
+      </server>
+    </client>
 
-    .. code-block:: xml
+  Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
 
-      <client>
-        <server>
-          <address>MANAGER_IP</address>
-          ...
-        </server>
-      </client>
+  .. code-block:: console
 
-    b. For windows:
-    
-      Open the graffic interface and change the value of the Manager IP field to the new IP.
+    # sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
 
+4. Restart the agent.
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-agent restart
 
 Password authorization
 ----------------------
@@ -109,7 +120,7 @@ You can protect the manager from unauthorized registrations by using a password.
 
 To allow this option, change the value to *yes* in the ``/var/ossec/etc/ossec.conf`` file:
 
-    .. code-block:: bash
+    .. code-block:: xml
 
       <auth>
         ...
@@ -198,7 +209,7 @@ To use the registration service with SSL certification, you must create a Certif
 
 Manager verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  .. image:: ../../images/manual/managing-agents/SSLregister1.png
+  .. image:: ../../../images/manual/managing-agents/SSLregister1.png
     :align: center
     :width: 100%
 
@@ -238,7 +249,7 @@ Manager verification using SSL
 Agent verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-  .. image:: ../../images/manual/managing-agents/SSLregister2.png
+  .. image:: ../../../images/manual/managing-agents/SSLregister2.png
     :align: center
     :width: 100%
 
@@ -298,17 +309,17 @@ This is an alternative method to the previous one. In this case, we will bind th
 
   a. For Linux systems:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp sslagent.cert sslagent.key /var/ossec/etc
-    # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+      # cp sslagent.cert sslagent.key /var/ossec/etc
+      # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
   b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
-    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+      # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
 .. warning::
   If the host verification process fails, the connection won't be realized.
@@ -322,7 +333,7 @@ Additional configurations
 
     <auth>
       <use_source_ip>no</use_source_ip>
-    </auth>ls
+    </auth>
 
 * Duplicate IPs are not allowed, so an agent won't be added if there is already another agent registered with the same IP. By changing the configuration file, ``ossec-authd`` can be told to **force a registration** if it finds an older agent with the same IP address. This will make the older agent's registration be deleted:
 

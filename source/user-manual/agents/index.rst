@@ -1,6 +1,6 @@
 .. Copyright (C) 2018 Wazuh, Inc.
 
-.. _managing-agents:
+.. _agent-management:
 
 Agent management
 ================
@@ -8,7 +8,7 @@ Agent management
 .. meta::
   :description: Learn more about the Wazuh agents and how to group, configure or upgrade them remotely using several tools.
 
-This section describes how to list and remove registered agents and register agents with the Wazuh server. These tasks can be performed via the command line (CLI) or RESTful API. Both methods are secure and valid for agent management depending on your needs.
+This section describes how to manage the agents using the command line (CLI), the Wazuh API and the ``ossec-authd`` daemon.
 
 .. topic:: Contents
 
@@ -16,9 +16,9 @@ This section describes how to list and remove registered agents and register age
         :maxdepth: 2
 
         agent-life-cycle
-        command-line/index
-        restful-api/index
-        wazuh-app
+        registering/index
+        listing/index
+        remove-agents/index
         agent-connection
         grouping-agents
         remote-upgrading/index
