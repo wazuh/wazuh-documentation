@@ -303,17 +303,17 @@ This is an alternative method to the previous one. In this case, we will bind th
 
   a. For Linux systems:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp sslagent.cert sslagent.key /var/ossec/etc
-    # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+      # cp sslagent.cert sslagent.key /var/ossec/etc
+      # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
   b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
-    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+      # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
 .. warning::
   If the host verification process fails, the connection won't be realized.

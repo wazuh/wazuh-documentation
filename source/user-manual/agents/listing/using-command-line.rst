@@ -30,28 +30,16 @@ The binary */var/ossec/bin/agent_control*, used with ``-l`` option, allows for t
     List of agentless devices:
        ID: 010, Name: agentless-ubuntu, IP: 10.0.0.135, Active
 
-Also, users can retrieve the connected agents by using the `(L)` option when executing ``manage_agents`` daemon:
+Also, users can retrieve the connected agents by using the ``manage_agents`` with ``-l`` option:
 
 .. code-block:: bash
 
-   # /var/ossec/bin/manage_agents
-
-   ****************************************
-   * Wazuh v3.9.0 Agent manager.          *
-   * The following options are available: *
-   ****************************************
-      (A)dd an agent (A).
-      (E)xtract key for an agent (E).
-      (L)ist already added agents (L).
-      (R)emove an agent (R).
-      (Q)uit.
-   Choose your action: A,E,L,R or Q: L
+   # /var/ossec/bin/manage_agents -l
 
    Available agents: 
       ID: 001, Name: agent-ubuntu2, IP: any
       ID: 002, Name: agent-ubuntu1, IP: any
 
-   ** Press ENTER to return to the main menu.
 
 
 

@@ -9,6 +9,13 @@ The request :ref:`DELETE /agents/:agent_id <request_list>` removes the specified
 
 .. code-block:: console
 
-    # curl -u foo:bar -X DELETE "http://localhost:55000/agents/002"
-
-    {"error":0,"data":"Agent removed"}
+    # curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/005?pretty&purge"
+    {
+    "error": 0,
+    "data": {
+        "msg": "All selected agents were removed",
+        "affected_agents": [
+            "005"
+        ]
+    }
+    }
