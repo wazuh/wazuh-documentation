@@ -42,7 +42,13 @@ It is useful for stateful applications like databases that save the data to a pe
 
 Deployments are intended for stateless use and are quite lightweight and seem to be appropriate for Logstash, Kibana and Nginx, where it is not necessary to maintain the states.
 
-Users can read more information about the *Persistent volumes* in the `Kubernetes Official documentation. <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_
+A **PersistentVolume (PV)** is a piece of storage in the cluster that has been provisioned. It is a resource in the cluster just like a node is a cluster resource. PVs are volume plugins like Volumes but have a lifecycle independent of any individual pod that uses the PV. This API object captures the details of the implementation of the storage, be that NFS, iSCSI, or a cloud-provider-specific storage system.
+Here, we use PVs to storage data of interest from both Wazuh and Elasticsearch. 
+They work in a similar way to docker volumes (vital for updates).
+
+.. note::
+    Users can read more information about the **Persistent volumes** in the `Kubernetes Official documentation. <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_
+
 Pods
 ^^^^
 
@@ -300,12 +306,11 @@ Wazuh agents are designed to monitor hosts. To start using them:
 3. Then configure the agent to use the reporting service:
     To configure the agent this way, you should follow this 2 steps:
 
-    a. Modify the ``/var/ossec/etc/ossec.conf`` file, setting the transport protocol to *TCP* and changing the ``MANAGER_IP`` field with the IP of the service that takes to port 1514.
-    b. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-authd.html?highlight=authd>`_ daemon with option *-m* specifying the IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.
+    a. Modify the ``/var/ossec/etc/ossec.conf`` file, setting the transport protocol to *TCP* and changing the ``MANAGER_IP`` field with the external IP of the service that takes to port 1514. The IP Manager input has to be the external IP of the service or the DNS if we use *AWS Route 53*.
+    b. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.
 
 .. note::
-    If using ELK remember to configure the security groups to manage the access.
-
+    If using EKS remember to configure the security groups to manage the access.
 
 Monitoring containers
 ^^^^^^^^^^^^^^^^^^^^^

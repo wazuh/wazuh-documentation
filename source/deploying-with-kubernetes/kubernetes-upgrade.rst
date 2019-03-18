@@ -129,10 +129,10 @@ We can see their content.
         <description>sshd: authentication failed from IP 3.1.1.1.</description>
         <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
     </rule>
-
+    </group>
+    
 .. code-block:: xml
 
-    </group>
     root@wazuh-manager-master-0:/# cat /etc/postfix/etc/rules/local_rules.xml
     <!-- Local rules -->
 
@@ -188,13 +188,13 @@ For example we had this version before:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.6.1_6.4.0'
+      image: 'wazuh/wazuh:3.8.2_6.5.4'
 
 .. code-block:: bash
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.7.0_6.5.0'
+      image: 'wazuh/wazuh:3.8.2_6.5.4'
 
 Apply the new configuration
 ---------------------------

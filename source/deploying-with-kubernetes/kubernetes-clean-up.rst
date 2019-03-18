@@ -13,31 +13,7 @@ Wazuh managers
 
 The deployment of the Wazuh cluster of managers involves the use of various statefulSet elements as well as configuration maps and services.
 
-1. The first step is to remove the pods corresponding to the managers.
-
-    List the pods created:
-
-    .. code-block:: bash
-     
-        ubuntu@k8s-control-server:~$ kubectl get pods --namespace wazuh
-        NAME                              READY     STATUS    RESTARTS   AGE
-        wazuh-elasticsearch-0             1/1       Running   0          6d
-        wazuh-kibana-78cb4bbb7-xf4s8      1/1       Running   0          6d
-        wazuh-logstash-646689f76f-lcf8b   1/1       Running   0          6d
-        wazuh-manager-master-0            1/1       Running   0          6d
-        wazuh-manager-worker-0-0          1/1       Running   0          6d
-        wazuh-manager-worker-1-0          1/1       Running   0          6d
-        wazuh-nginx-57c8c65486-7crh2      1/1       Running   0          6d
-
-    Proceed to remove the pods from Wazuh managers:
-
-    .. code-block:: bash
-
-        ubuntu@k8s-control-server:~$ kubectl delete pod wazuh-manager-master-0 --namespace wazuh
-        ubuntu@k8s-control-server:~$ kubectl delete pod wazuh-manager-worker-0-0 --namespace wazuh
-        ubuntu@k8s-control-server:~$ kubectl delete pod wazuh-manager-worker-1-0 --namespace wazuh
-
-2. Next, remove the services related to the Wazuh cluster.
+1. First, remove the services related to the Wazuh cluster.
 
     List the services created:
 
@@ -62,7 +38,7 @@ The deployment of the Wazuh cluster of managers involves the use of various stat
         ubuntu@k8s-control-server:~$ kubectl delete service wazuh-workers --namespace wazuh
         ubuntu@k8s-control-server:~$ kubectl delete service wazuh --namespace wazuh
 
-3. In this step delete the *StatefulSet*.
+2. In this step delete the *StatefulSet*.
 
     .. code-block:: bash
 
@@ -81,7 +57,7 @@ The deployment of the Wazuh cluster of managers involves the use of various stat
         ubuntu@k8s-control-server:~$ kubectl delete StatefulSet wazuh-manager-worker-0 --namespace wazuh
         ubuntu@k8s-control-server:~$ kubectl delete StatefulSet wazuh-manager-worker-1 --namespace wazuh
 
-4. Take care of deleting the configuration maps.
+3. Take care of deleting the configuration maps.
 
     .. code-block:: bash
 
@@ -97,7 +73,7 @@ The deployment of the Wazuh cluster of managers involves the use of various stat
         ubuntu@k8s-control-server:~$ kubectl delete ConfigMap wazuh-manager-worker-1-conf --namespace wazuh
 
 
-5. Now eliminate the persistent volume claims.
+4. Now eliminate the persistent volume claims.
 
     .. code-block:: bash
 
@@ -113,7 +89,7 @@ The deployment of the Wazuh cluster of managers involves the use of various stat
         ubuntu@k8s-control-server:~$ kubectl delete persistentvolumeclaim wazuh-manager-master-wazuh-manager-worker-0-0 --namespace wazuh
         ubuntu@k8s-control-server:~$ kubectl delete persistentvolumeclaim wazuh-manager-master-wazuh-manager-worker-1-0 --namespace wazuh
 
-6. Finally eliminate the persistent volumes.
+5. Finally, eliminate the persistent volumes.
 
     .. code-block:: bash
 
@@ -222,19 +198,7 @@ Kibana and Nginx
 
 To clean the Kibana and Nginx installation remove their deployments and services.
 
-1. The first step is to remove the pods corresponding to Kibana and Nginx.
-
-    .. code-block:: bash
-
-        ubuntu@k8s-control-server:~$ kubectl get pods --namespace wazuh
-        NAME                              READY     STATUS    RESTARTS   AGE
-        wazuh-kibana-78cb4bbb7-xf4s8      1/1       Running   0          6d
-        wazuh-nginx-57c8c65486-7crh2      1/1       Running   0          6d
-
-        ubuntu@k8s-control-server:~$ kubectl delete pod wazuh-kibana-78cb4bbb7-xf4s8 --namespace wazuh
-        ubuntu@k8s-control-server:~$ kubectl delete pod wazuh-nginx-57c8c65486-7crh2 --namespace wazuh
-
-2. Next remove the services related to Kibana and Nginx.
+1. First, remove the services related to Kibana and Nginx.
 
     .. code-block:: bash
 
@@ -246,7 +210,7 @@ To clean the Kibana and Nginx installation remove their deployments and services
         ubuntu@k8s-control-server:~$ kubectl delete service kibana --namespace wazuh
         ubuntu@k8s-control-server:~$ kubectl delete service wazuh-nginx --namespace wazuh
 
-3. Finally delete the deployments.
+2. To finish, delete the deployments.
 
     .. code-block:: bash
 
