@@ -14,7 +14,7 @@ Two requests are needed to register an agent using the API:
 
   .. code-block:: console
 
-    # curl -u foo:bar -k -X POST -d '{"name":"Ubuntu-1","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
+    # curl -u foo:bar -k -X POST -d '{"name":"ubuntu-ag","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
     {
       "error": 0,
       "data": {

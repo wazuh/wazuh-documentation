@@ -55,4 +55,3 @@ If the user would like to remove the agent without confirmation, use the option 
     Agent '001' removed.
 
     manage_agents: Exiting.
-   

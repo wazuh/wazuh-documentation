@@ -9,11 +9,11 @@ To register an agent using the command line, follow these steps:
 
 1. Add the agent to the manager:
 
-	In this example, we'll add an agent with name "Ubuntu-01", dynamic IP (`any`) and automatic ID:
+	This example how to add an agent with *ubuntu-ag* as name and *any* as origin IP:
 
 	.. code-block:: console
 
-		# /var/ossec/bin/manage_agents -a any -n Ubuntu-01
+		# /var/ossec/bin/manage_agents -a any -n ubuntu-ag
 
 2. Extract the new agent's key. You will need it for the agent:
 
@@ -43,7 +43,7 @@ To register an agent using the command line, follow these steps:
 
 	As an example for making this change with a line we are setting the *MANAGER_IP* to ``10.0.0.4``:
 
-	.. code-block:: bash
+	.. code-block:: console
 
 		# sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
 
@@ -70,6 +70,8 @@ If you try to add an agent with an IP address that was already registered to ano
 Example
 ~~~~~~~
 
-The agent named *Server1* at IP 10.0.0.10 was installed and given the ID 005. If we assume that we had to reinstall the server, we would have to reinstall a new agent and connect it to the manager. In this case, we can use the argument *-F 0* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID::
+The agent named *nginx_service* at IP 10.0.0.10 was installed and given the ID 005. If we assume that we had to reinstall the server, we would have to reinstall a new agent and connect it to the manager. In this case, we can use the argument *-F 0* meaning that the previous agent (005) will be removed (with a backup) and a new agent will be created re-using the IP. The new agent will have a new ID
 
-    /var/ossec/bin/manage_agents -n Server1 -a 10.10.10.10 -F 0
+.. code-block:: console
+
+	# /var/ossec/bin/manage_agents -n nginx_service -a 10.10.10.10 -F 0
