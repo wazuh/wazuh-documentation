@@ -9,26 +9,11 @@ To register an agent using the command line, follow these steps:
 
 1. Add a new agent:
 
-	In this example, we'll add an agent with name "Example", dynamic IP (`any`) and automatic ID:
+	In this example, we'll add an agent with name "Ubuntu-01", dynamic IP (`any`) and automatic ID:
 
 	.. code-block:: console
 
-		# /var/ossec/bin/manage_agents -a any -n Example
-
-			****************************************
-			* Wazuh v3.9.0 Agent manager.          *
-			* The following options are available: *
-			****************************************
-			(A)dd an agent (A).
-			(E)xtract key for an agent (E).
-			(L)ist already added agents (L).
-			(R)emove an agent (R).
-			(Q)uit.
-			Choose your action: A,E,L,R or Q: 
-			- Adding a new agent (use '\q' to return to the main menu).
-			Please provide the following:
-			* A name for the new agent:    * The IP Address of the new agent: Confirm adding it?(y/n): Agent added with ID 002.
-
+		# /var/ossec/bin/manage_agents -a any -n Ubuntu-01
 
 2. Extract the new agent's key. You will need it for the agent:
 
@@ -47,13 +32,13 @@ To register an agent using the command line, follow these steps:
 
 		Agent information:
 			ID:001
-			Name:Example
+			Name:Ubuntu-01
 			IP Address:any
 
 		Confirm adding it?(y/n): y
 		Added.
 
-4. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
+4. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
 
 	.. code-block:: xml
 
@@ -64,7 +49,7 @@ To register an agent using the command line, follow these steps:
 		  </server>
 		</client>
 
-	As an example for making this change with a line we are setting this variable to ``10.0.0.4``:
+	As an example for making this change with a line we are setting the *MANAGER_IP* to ``10.0.0.4``:
 
 	.. code-block:: bash
 

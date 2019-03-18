@@ -30,8 +30,6 @@ If the user would like confirmation before removing the agent, use the following
     Confirm deleting it?(y/n): y
     Agent '001' removed.
 
-    ** You must restart OSSEC for your changes to take effect.
-
     manage_agents: Exiting.
 
 If the user would like to remove the agent without confirmation, use the option shown below:
@@ -55,8 +53,6 @@ If the user would like to remove the agent without confirmation, use the option 
     Provide the ID of the agent to be removed (or '\q' to quit): 001
     Confirm deleting it?(y/n): y
     Agent '001' removed.
-
-    ** You must restart OSSEC for your changes to take effect.
 
     manage_agents: Exiting.
    

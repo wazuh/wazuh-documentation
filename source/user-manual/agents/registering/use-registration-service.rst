@@ -80,32 +80,38 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
 
+3. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
 
-.. note::
-  Remember to edit the Wazuh agent configuration to add the Wazuh manager IP address.
+  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
 
-    a. For linux systems:
+  .. code-block:: xml
 
-      In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
+    <client>
+      <server>
+        <address>MANAGER_IP</address>
+        ...
+      </server>
+    </client>
 
-    .. code-block:: xml
+  Or using `sed` to overwrite it in one command line using ``10.0.0.4`` as an example IP:
 
-      <client>
-        <server>
-          <address>MANAGER_IP</address>
-          ...
-        </server>
-      </client>
+  .. code-block:: bash
 
-    Or using `sed` to overwrite it in one command line:
+    # sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
 
-    .. code-block:: bash
+4. Restart the agent:
 
-      # sed -i 's/MANAGER_IP/NEW_MANAGER_IP/g' /var/ossec/etc/ossec.conf
+	a. For Systemd:
 
-    b. For windows:
-    
-      Open the graphic interface and change the value of the Manager IP field to the new IP.
+		.. code-block:: console
+
+			# systemctl restart wazuh-agent
+
+	b. For SysV Init:
+
+		.. code-block:: console
+
+			# service wazuh-agent restart
 
 Password authorization
 ----------------------

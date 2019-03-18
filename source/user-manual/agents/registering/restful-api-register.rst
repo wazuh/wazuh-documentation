@@ -33,7 +33,7 @@ Two requests are needed to register an agent using the API:
 
       If you paste the command directly into the terminal, the agent key will be saved in the bash history. Use ``manage_agents`` without arguments or from a script.
 
-3. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the ``MANAGER_IP`` value to the Wazuh manager address:
+3. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
 
   .. code-block:: xml
 
@@ -44,11 +44,11 @@ Two requests are needed to register an agent using the API:
       </server>
     </client>
 
-  or:
+  or using as an example the IP ``10.0.0.4`` and the command ``sed`` to change it in one line:
 
   .. code-block:: bash
 
-    # sed -i 's/MANAGER_IP/NEW_MANAGER_IP/g' /var/ossec/etc/ossec.conf
+    # sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
 
 
 4. Restart the agent.
