@@ -3,11 +3,11 @@
 .. _command-line-register:
 
 Using the CLI
--------------
+=============
 
 To register an agent using the command line, follow these steps:
 
-1. Add a new agent:
+1. Add the agent to the manager:
 
 	In this example, we'll add an agent with name "Ubuntu-01", dynamic IP (`any`) and automatic ID:
 

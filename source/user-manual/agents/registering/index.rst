@@ -11,6 +11,7 @@ Registering agents
 In this section, the registration process is described, and more specifically the different methods that users can use to register agents in the Wazuh manager.
 
 Users can register agents using 3 different methods:
+
   - Using the command line.
   - Using the *ossec-authd* daemon.
   - Using the Wazuh API.

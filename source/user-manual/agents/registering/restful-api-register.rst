@@ -3,7 +3,7 @@
 .. _restful-api-register:
 
 Using the Wazuh API
--------------------
+===================
 
 Two requests are needed to register an agent using the API:
 
@@ -23,7 +23,7 @@ Two requests are needed to register an agent using the API:
       }
     }
 
-2. Copy the key to the agent.
+2. Import the key to the agent:
 
   .. code-block:: console
 
