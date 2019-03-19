@@ -3166,8 +3166,8 @@ div.highlight pre {
 @media (min-width: 1200px) {
 
           main {
-            max-width: 1200px;
-            margin: 0 auto;
+            padding-left: 100px;
+            padding-right: 100px;
           }
 
           #main-content {
