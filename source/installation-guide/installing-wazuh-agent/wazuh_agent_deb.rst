@@ -118,4 +118,4 @@ Installing Wazuh agent
 
     # echo "wazuh-agent hold" | sudo dpkg --set-selections
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager (if you did not use the automatic registering method). For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
