@@ -128,6 +128,7 @@ Installing Wazuh agent
   +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
   |   WAZUH_GROUP         |  Assigns the specified group to the agent.                                                                                   |
   +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  
   Below there are some examples to install and register a RPM-based linux agent.
 
   Registration with password::
