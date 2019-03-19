@@ -38,7 +38,7 @@ Assuming we have already deployed the environment using the following Wazuh imag
     - name: wazuh-manager
       image: 'wazuh/wazuh:3.6.1_6.4.0'
 
-let's proceed by creating a set of rules in our `local_rules.xml` file at location `/var/ossec/etc/rules` in our wazuh manager master pod.
+Let's proceed by creating a set of rules in our `local_rules.xml` file at location `/var/ossec/etc/rules` in our wazuh manager master pod.
 
 Edit the `local_rules.xml` file:
 
@@ -77,8 +77,7 @@ Edit the `local_rules.xml` file:
 
     </group>
 
-This action has modified the `local_rules.xml` file in the `/var/ossec/data/etc/rules` path and in the `/etc/postfix/etc/` rules path due these routes reference our volume assembly points.
-
+ 
 .. code-block:: bash
 
     volumeMounts:

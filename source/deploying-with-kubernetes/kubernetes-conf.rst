@@ -22,12 +22,12 @@ Pre-requisites
 Overview
 --------
 
-StateFulSet and deployments controllers
+StatefulSet and deployment controllers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Like a *Deployment*, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
 
-It is useful for stateful applications like databases that save the data to persistent storage. The states of each Wazuh manager, as well as Elasticsearch, are desirable to maintain, so we declare them using StatefulSet to ensure that they maintain their states in every startup.
+It is useful for stateful applications like databases that save the data to persistent storage. The states of each Wazuh manager, as well as Elasticsearch, are desirable to maintain, so we declare them using *StatefulSet* to ensure that they maintain their states in every startup.
 
 Deployments are intended for stateless use and are quite lightweight and seem to be appropriate for Logstash, Kibana and Nginx, where it is not necessary to maintain the states.
 
@@ -146,7 +146,7 @@ Deploy
 
 3.1. Wazuh namespace and StorageClass
 
-    The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our StateFulSet applications.
+    The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our *StatefulSet* applications.
 
         .. code-block:: console
 
@@ -231,7 +231,7 @@ Verifying the deployment
         wazuh-logstash   1         1         1            1           10m
         wazuh-nginx      1         1         1            1           11m
 
-**Statefulsets**
+**Statefulset**
 
     .. code-block:: console
 
