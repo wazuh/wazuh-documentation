@@ -2958,6 +2958,10 @@ div.highlight pre {
         max-width: 1200px;
       }
 
+      #carouselWazuhDocu .carousel-control-prev, #carouselWazuhDocu .carousel-control-next{
+        opacity: 0;
+      }
+
       .searchform {
         margin: 0;
       }
