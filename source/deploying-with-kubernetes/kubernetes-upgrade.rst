@@ -190,13 +190,13 @@ For example, we had this version before:
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.8.2_6.6.1'
+      image: 'wazuh/wazuh:3.6.1_6.4.0'
 
 .. code-block:: yml
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.8.2_6.6.1'
+      image: 'wazuh/wazuh:3.6.1_6.4.0'
 
 Apply the new configuration
 ---------------------------
