@@ -47,6 +47,62 @@ Installing Wazuh agent
 
     # apt-get install wazuh-agent
 
+  You can automate the agent registration with authd using the following environment variables:
+
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  | Option                | Description                                                                                                                  |
+  +=======================+==============================================================================================================================+
+  |   WAZUH_ADDRESS       |  Specifies the managers IP address or hostname.                                                                              |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_SERVER_PORT   |  Specifies the managers connection port.                                                                                     |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_PROTOCOL      |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is UDP.                     |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_AUTHD_SERVER  |  Specifies the Authd IP address.                                                                                             |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_AUTHD_PORT    |  Specifies the Authd connection port.                                                                                        |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_PASSWORD      |  Sets the Authd password.                                                                                                    |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_NOTIFY_TIME   |  Sets the time between manager checks.                                                                                       |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_TIME_RECONNECT|  Sets the time in seconds until a reconnection attempt.                                                                      |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_CERTIFICATE   |  Specifies the certificate of authority path.                                                                                |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_PEM           |  Specifies the certificate path.                                                                                             |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_KEY           |  Specifies the key path.                                                                                                     |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default will be the computer name.                                                          |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  |   WAZUH_GROUP         |  Assigns the specified group to the agent.                                                                                   |
+  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  Below there are some examples to install and register a Debian-based linux agent.
+
+  Registration with password::
+  
+      WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" WAZUH_AGENT_NAME="ubuntu18" apt-get install wazuh-agent
+    
+  Registration with password and assigning a group::
+  
+      WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" WAZUH_GROUP="my-group" apt-get install wazuh-agent
+    
+  Registration with relative path to CA. It will be searched at your Wazuh installation folder::
+  
+      WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="ubuntu18" WAZUH_CERTIFICATE="rootCA.pem" apt-get install wazuh-agent
+    
+  Absolute paths to CA, certificate or key that contain spaces can be written as shown below::
+  
+      WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_KEY="/var/ossec/etc/sslagent.key" WAZUH_PEM="/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent
+    
+  .. note::
+      To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <verify-hosts>` section.
+    
+  Registration with protocol::
+    
+      WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="ubuntu18" WAZUH_PROTOCOL="TCP" apt-get install wazuh-agent
+
 2. (Optional) Disable the Wazuh updates:
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
