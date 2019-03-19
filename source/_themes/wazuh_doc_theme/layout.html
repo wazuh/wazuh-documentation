@@ -119,7 +119,8 @@
   {% endif %}
     {% include "header.html" %} {%- block header %}{% endblock header %}
     <section  class="container-fluid central-page-area">
-      <div class="row flex-nowrap">
+      <div class="row">
+        {% if pagename != 'index' %}
         <nav class="full-toctree-nav navbar-expand-lg navbar-light">
           <div class="side-scroll collapse navbar-collapse" id="navbar-globaltoc">
             <div class="globaltoc" role="navigation" aria-label="main navigation" id="globaltoc">
@@ -129,12 +130,13 @@
               {{ toctree }}
               {% else %}
               <!-- Local TOC -->
-              <div class="local-toc">{{ toc }}</div>
+              <!-- <div class="local-toc">{{ toc }}</div> -->
               {% endif %}
               {% endblock %}
             </div>
           </div>
         </nav>
+        {% endif %}
 
         <div id="main-content" class="col-12">
           {% if pagename != 'index' %}
@@ -142,18 +144,12 @@
             {% include "breadcrumbs.html" %}
           </div>
           {% include "editrepo.html" %}
-                    {% endif %}
+          {% endif %}
 
           {# Main content #}
           <main>
             {% block body %} {% endblock %}
           </main>
-
-          {% if pagename == 'index' %}
-            {% include "index_bottom.html" %}
-          {% else %}
-            {% include "navigation.html" %}
-          {% endif %}
 
         </div>
       </div>

@@ -287,6 +287,23 @@ header .menuweb-bar .menu-item a {
           justify-content: flex-end;
 }
 
+#capabilities {
+    margin-top: 1em;
+}
+
+#capabilities > p {
+  margin-bottom: 2rem;
+}
+
+.content-card {
+  margin-bottom: 0.5em;
+}
+
+#carouselWazuhDocu{
+  width: 100%;
+  margin: 1rem auto 2rem auto;
+}
+
 footer {
   font-size: 0.75rem;
   background-color: #0094ce;
@@ -380,7 +397,7 @@ ul.simple {
   list-style: url('../img/list-arrow.svg');
   list-style-position: outside;
   font-size: 0.88rem;
-  margin-left: 0.7em;
+  margin-left: 0.9em;
 }
 
 li.toctree-l1 > a {
@@ -510,8 +527,8 @@ main li.toctree-l1 a {
   display: inline-block;
 }
 
-#welcome-to-wazuh #available-documentation {
-  display: none;
+.index #main-content {
+  padding-top: 25px;
 }
 
 #page #welcome-to-wazuh .topic .topic-title {
@@ -520,7 +537,30 @@ main li.toctree-l1 a {
   vertical-align: middle;
 }
 
-a.headerlink {
+.index h1,
+.index h2,
+#available-documentation {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.index h3,
+.index h3 a {
+  color: #333333;
+  font-size: 1.4rem;
+}
+
+.index a.headerlink {
+  content: none;
+}
+
+:not(.index) a.headerlink {
   min-height: 1.5rem;
   color: transparent;
   -webkit-user-select: none;
@@ -553,8 +593,8 @@ h1:hover > a.headerlink,
 h1:active > a.headerlink,
 h2:hover > a.headerlink,
 h2:active > a.headerlink,
-h3:hover > a.headerlink,
-h3:active > a.headerlink,
+:not(.index) h3:hover > a.headerlink,
+:not(.index) h3:active > a.headerlink,
 h4:hover > a.headerlink,
 h4:active > a.headerlink,
 h5:hover > a.headerlink,
@@ -562,6 +602,11 @@ h5:active > a.headerlink,
 h6:hover > a.headerlink,
 h6:active > a.headerlink {
   display: inline-block;
+}
+
+.index h3:hover > a.headerlink,
+.index h3:active > a.headerlink {
+  display: none;
 }
 
 .white-bullets ul li::before {
@@ -1298,7 +1343,7 @@ select#select-version option {
 
 .version:after {
   position: absolute;
-  top: 0.7em;
+  top: 0.5em;
   right: 10px;
   content: '';
   width: 0.5em;
@@ -2909,8 +2954,8 @@ div.highlight pre {
 			}
 
       #carouselWazuhDocu{
-        max-width: 90%;
-        margin: .5rem auto;
+        width: 90%;
+        max-width: 1200px;
       }
 
       .searchform {
@@ -2977,6 +3022,13 @@ div.highlight pre {
         max-width: calc(100% - 320px);
 			}
 
+      .index #main-content {
+        padding-right: 30px;
+        padding-left: 30px;
+        max-width: 100%;
+        padding-top: 40px;
+      }
+
       .central-page-area a img {
         max-width: 60%;
       }
@@ -2993,27 +3045,17 @@ div.highlight pre {
         width: calc(100% - 60px);
       }
 
-      #welcome-to-wazuh .topic p {
-        font-size: 14px;
+      #capabilities {
+        margin-top: 2rem;
       }
 
       #welcome-to-wazuh .topic {
-        padding-right: 15px;
-        width: 50%;
-        display: block;
-        float: left;
         margin-bottom: 1em;
       }
 
       #welcome-to-wazuh .topic:nth-of-type(even) {
         padding-left: 15px;
         padding-right: 0;
-      }
-
-      #welcome-to-wazuh > p:nth-of-type(2) {
-        clear: both;
-        display: block;
-        float: none;
       }
 
       #welcome-to-wazuh .topic .topic-title:before {
@@ -3123,20 +3165,25 @@ div.highlight pre {
 
 @media (min-width: 1200px) {
 
+          main {
+            max-width: 1200px;
+            margin: 0 auto;
+          }
+
           #main-content {
             padding-left: 60px;
           }
 
           #welcome-to-wazuh .topic,
           #welcome-to-wazuh .topic:nth-of-type(even) {
-            padding-left: 50px;
+            padding-left: 60px;
             position: relative;
           }
 
           #welcome-to-wazuh .topic .topic-title:before {
             font-size: 2.5rem;
             position: absolute;
-            left: 0;
+            left: 10px;
             top: 3px;
             width: 50px;
           }
