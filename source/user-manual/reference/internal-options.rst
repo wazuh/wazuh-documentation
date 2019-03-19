@@ -892,6 +892,29 @@ Remoted
 +                                   +               +--------------------------------------------------------------+
 |                                   |               | Any other integer between 1 and 2592000                      |
 +-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.receive_chunk**         | Description   | | Reception buffer size for TCP (bytes).                     |
+|                                   |               | | Amount of data that Remoted can receive per operation.     |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 3.9.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 4096                                                         |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | | Any other integer between 1024 and 16384.                  |
+|                                   |               | | Powers of two are suggested.                               |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.buffer_relax**          | Description   | | Method for memory deallocation after accepting input data. |
+|                                   |               | | This option applies in TCP mode only.                      |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 3.9.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 1                                                            |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed values| 0: Keep the memory for each TCP session.                     |
++                                   +               +--------------------------------------------------------------+
+|                                   |               | 1: Shrink memory back to ``receive_chunk``.                  |
++                                   +               +--------------------------------------------------------------+
+|                                   |               | 2: Fully deallocate memory after usage.                      |
++-----------------------------------+---------------+--------------------------------------------------------------+
 
 Syscheck
 --------

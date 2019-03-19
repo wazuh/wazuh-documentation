@@ -15,20 +15,20 @@ Unless otherwise assigned, all new agents automatically belong to the **'default
 Below are the steps to assign agents to a group with a specific configuration:
 
 1. Once an agent has been added to the manager, assign it to a group using the :doc:`agent_groups <../reference/tools/agent_groups>` tool or the
-   :doc:`API <../api/index>`.  Below are examples of how to assign an agent with ID 002 to the group *'dbms'* using these methods:
+   :doc:`Wazuh API <../api/index>`.  Below are examples of how to assign an agent with ID 002 to the group *'dbms'* using these methods:
 
    Using **agent_groups**:
 
    .. note:: The group must be created and configured before assigning agents.
 
    .. note:: This behaviour corresponds to ``v3.7.0`` and later.
-   
+
 
    .. code-block:: console
 
       # /var/ossec/bin/agent_groups -a -i 002 -g dbms
 
-   Using the **API**:
+   Using the **Wazuh API**:
 
    .. code-block:: console
 
@@ -80,7 +80,7 @@ Managing multiple groups
 - `Making changes on multiple groups`_
 - `Shared files behavior`_
 
-This capability is focused to customize the agents' configuration with a higher level of granularity. The **API** and **agent_groups**
+This capability is focused to customize the agents' configuration with a higher level of granularity. The **Wazuh API** and **agent_groups**
 help to manage groups by listing them and also by allowing to assign/change/unassign groups to agents. Let see three use cases where managing
 multiple groups over existing agents.
 
@@ -89,7 +89,7 @@ Assigning multiple groups to an agent
 
 Setting multiple groups to an agent is simple, there are three different ways to assign an agent to one or more groups: Registration, CLI and API.
 
-In this example, the agent 001 has been added to `webserver` and `apache` groups. First of all, using the **API**:
+In this example, the agent 001 has been added to `webserver` and `apache` groups. First of all, using the **Wazuh API**:
 
     .. code-block:: console
 
@@ -230,7 +230,7 @@ Finally, to check the synchronization status of the group configuration for a si
             }
         }
 
-The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section <../reference/tools/agent_groups>`. The same for the :doc:`API <../api/reference>` which offers calls with the similar behavior.
+The rest of the capabilities of **agent_groups** can be found at its :doc:`reference section <../reference/tools/agent_groups>`. The same for the :doc:`Wazuh API <../api/reference>` which offers calls with the similar behavior.
 
 Shared files behavior
 ^^^^^^^^^^^^^^^^^^^^^

@@ -29,20 +29,24 @@ This option specifies the additional information that will appear in alerts. Lab
 
 Attributes:
 
-+--------------------+-------------------------------------------------------------+
-| **key**            | The title that will describe the information of the label.  |
-+                    +---------------------------------------+---------------------+
-|                    | Allowed value                         | Any string          |
-+--------------------+---------------------------------------+---------------------+
-| **hidden**         | For labels that are hidden by default.                      |
-+                    +---------------------------------------+---------------------+
-|                    | Default value                         | no                  |
-+                    +---------------------------------------+---------------------+
-|                    | Allowed value                         | yes,no              |
-+--------------------+---------------------------------------+---------------------+
++--------------------+-------------------------------------------------------------------------------------------------+
+| **key**            | The title that will describe the information of the label.                                      |
++                    +---------------------------------------+---------------------------------------------------------+
+|                    | Allowed value                         | Any string that does not start with an underscore ( _ ) |
++--------------------+---------------------------------------+---------------------------------------------------------+
+| **hidden**         | For labels that are hidden by default.                                                          |
++                    +---------------------------------------+---------------------------------------------------------+
+|                    | Default value                         | no                                                      |
++                    +---------------------------------------+---------------------------------------------------------+
+|                    | Allowed value                         | yes,no                                                  |
++--------------------+---------------------------------------+---------------------------------------------------------+
 
 .. note::
     In ``internal_options.conf``, hidden labels can be set to be displayed in alerts.
+
+.. note::
+    .. versionadded:: 3.9.0
+    Keys starting with an underscore character are reserved for the system labels. These labels are invisible and contain internal information of the agents.
 
 Example of configuration
 ------------------------

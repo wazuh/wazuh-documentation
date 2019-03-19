@@ -8,7 +8,7 @@ Registering agents
 .. meta::
   :description: Learn more about the different methods that can be used to register agents against the Wazuh manager.
 
-In this section we describe how the registration process works, and more specifically the different methods that you can use to register agents against the Wazuh manager.
+In this section, the registration process is described, and more specifically the different methods that users can use to register agents in the Wazuh manager.
 
 .. topic:: Contents
 
@@ -16,4 +16,6 @@ In this section we describe how the registration process works, and more specifi
         :maxdepth: 2
 
         registration-process
+        using-command-line
         use-registration-service
+        restful-api-register

@@ -2,7 +2,7 @@
 
 .. _release_3_2_1:
 
-3.2.1 Release Notes
+3.2.1 Release notes
 ===================
 
 This release is a bug fix release. This section shows the most relevant improvements and fixes of Wazuh v3.2.1. You will find more detailed information in the `changelog <https://github.com/wazuh/wazuh/blob/3.2/CHANGELOG.md#v321>`_ file.

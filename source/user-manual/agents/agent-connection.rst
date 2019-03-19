@@ -20,17 +20,17 @@ Before you check the agent's connection with the manager, first ensure the agent
 
 This will set 10.0.0.10 as the Wazuh Manager server. Once this is done, you will need restart the Agent:
 
-a. For Systemd:
+  a. For Systemd:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # systemctl restart wazuh-agent
+      # systemctl restart wazuh-agent
 
-b. For SysV Init:
+  b. For SysV Init:
 
-.. code-block:: console
+    .. code-block:: console
 
-  # service wazuh-agent restart
+      # service wazuh-agent restart
 
 After you register the agent and it has successfully connected, you can see a list of agents that are connected to the manager with:
 

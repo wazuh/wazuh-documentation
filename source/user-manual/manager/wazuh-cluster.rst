@@ -74,26 +74,7 @@ Getting started
 Deploying a Wazuh cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note::
-  To run the cluster, **Python 2.7 or higher** is required. In case you're using CentOS 6, please refer to `Running the cluster in CentOS 6`_ for instructions on how to update to and use **Python 2.7**.
-
-Follow these steps to deploy a Wazuh cluster:
-
-1. Install dependencies
-
-  a. For RPM-based distributions:
-
-    .. code-block:: console
-
-      # yum install python-setuptools python-cryptography
-
-  b. For Debian-based distributions:
-
-    .. code-block:: console
-
-      # apt-get install python-cryptography
-
-2. Set the cluster configuration
+1. Set the cluster configuration
 
   Using the ``<cluster>`` section in the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the cluster configuration as below:
 
@@ -144,7 +125,7 @@ Follow these steps to deploy a Wazuh cluster:
           <disabled>no</disabled>
       </cluster>
 
-3. Restart the node
+2. Restart the node
 
     .. code-block:: console
 
@@ -226,9 +207,12 @@ The correct way to use it is to point every agent to send the events to the *loa
 Here is a short configuration guide of a **load balancer** using Nginx:
 
   1. Install Nginx in the *load balancer instance*:
+
     - Download the packages from the `Official Page. <http://nginx.org/en/linux_packages.html>`_
     - Follow the steps related on that guide to install the packages.
+
   2. Configure the instance as a *load balancer*:
+
     - The way nginx and its modules work is determined in the configuration file. By default, the configuration file is named nginx.conf and placed in the directory /usr/local/nginx/conf, /etc/nginx, or /usr/local/etc/nginx.
     - Now, open the configuration file and add the following structure:
 
@@ -252,8 +236,10 @@ Here is a short configuration guide of a **load balancer** using Nginx:
         }
 
     3. Restart nginx configuration files:
-      - nginx -s reload
 
+      .. code-block:: console
+
+        # nginx -s reload
 
 Keep in mind the following considerations:
 
@@ -261,74 +247,6 @@ Keep in mind the following considerations:
 
 * **Disable the option**  :ref:`use_source_ip <auth_use_source_ip>` **in your authd configuration**. When using a LB, the cluster nodes will only see the LB's IP and no the agents'. This will make the agents unable to connect to the cluster.
 
-.. _run-cluster-centos6:
-
-Running the cluster in CentOS 6
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Python 2.6 is the default python version in CentOS 6. Since Python 2.7 is required to run the cluster, follow these steps to install and use this version:
-
-1. Install Python 2.7 as follows:
-
-  .. code-block:: console
-
-    # yum install -y centos-release-scl
-    # yum install -y python27
-
-2. Install the Python package ``cryptography`` via pip:
-
-  .. code-block:: console
-
-    # export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/rh/python27/root/usr/lib64:/opt/rh/python27/root/usr/lib
-    # /opt/rh/python27/root/usr/bin/pip2.7 install cryptography
-
-3. Since the cluster doesn't use the default python version in CentOS 6, the service file should be modified to load the correct python version when ``wazuh-manager`` service starts:
-
-  .. code-block:: console
-
-     # sed -i 's#echo -n "Starting OSSEC: "#echo -n "Starting OSSEC (EL6): "; source /opt/rh/python27/enable; export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/ossec/framework/lib#' /etc/init.d/wazuh-manager
-
-4. Use the ``service`` command instead of ``/var/ossec/bin/ossec-control`` to start, stop and restart Wazuh:
-
-  .. code-block:: console
-
-    # service wazuh-manager restart
-    Stopping OSSEC:                                            [  OK  ]
-    Starting OSSEC (EL6):                                      [  OK  ]
-
-5. Finally, check the cluster is running:
-
-  .. code-block:: console
-
-    # ps aux | grep cluster
-    ossec     9725  0.1  1.3 137364 14216 ?        S    14:22   0:00 python /var/ossec/bin/wazuh-clusterd
-    root      9767  0.0  0.0 103340   904 pts/0    S+   14:22   0:00 grep cluster
-
-
-Running the cluster in Ubuntu Trusty (14.04)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-In order to run the Wazuh cluster in Ubuntu Trusty, ensure that Python 2.7 is installed in your machine. After that, to run the cluster follow these steps:
-
-1. Install the following packages:
-
-  .. code-block:: console
-
-      # apt-get install python-pip libssl-dev python-dev libffi-dev
-
-2. Install the latests version of `setuptools` package using `pip`:
-
-  .. code-block:: console
-
-      # pip install setuptools --upgrade
-
-3. Install `cryptography` module, its dependencies and `ipaddress`:
-
-  .. code-block:: console
-
-      # pip install enum34 six cffi cryptography ipaddress
-
-Once you have executed all these commands, you can set the cluster configuration and run the cluster.
 
 Upgrading from older versions
 -----------------------------
@@ -401,13 +319,10 @@ For example, the following snippet shows the connected nodes in the cluster:
 .. code-block:: shell
 
     # /var/ossec/bin/cluster_control -l
-    ---------------------------------------
-    Name    Address         Type    Version
-    ---------------------------------------
-    node01  192.168.56.101  master  3.8.2
-    node02  192.168.56.103  worker  3.8.2
-    node03  192.168.56.105  worker  3.8.2
-    ---------------------------------------
+    NAME      TYPE    VERSION  ADDRESS
+    worker-1  worker  3.9.0    172.17.0.101
+    worker-2  worker  3.9.0    172.17.0.102
+    master    master  3.9.0    172.17.0.100
 
 This information can also be obtained using the Restful API:
 
