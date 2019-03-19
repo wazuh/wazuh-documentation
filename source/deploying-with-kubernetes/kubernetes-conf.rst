@@ -2,7 +2,7 @@
 
 .. _kubernetes_conf:
 
-Kubernetes Configuration
+Kubernetes configuration
 ========================
 
 - `Pre-requisites`_

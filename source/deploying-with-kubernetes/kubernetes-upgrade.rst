@@ -26,13 +26,13 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
     DATA_DIRS[((i++))]="queue/fts"
     DATA_DIRS[((i++))]="var/multigroups"
 
-Any modification related to these files will also be made in the associated volume. When the replica pod creates, it will get those files from the volume but keeping the changes made previously.
+Any modification related to these files will also be made in the associated volume. When the replica pod creates, it will get those files from the volume, keeping the previously changes.
 
 For a better understanding, we will give an example:
 
 Assuming we have already deployed the environment using the following Wazuh image:
 
-.. code-block:: none
+.. code-block:: yml
 
     containers:
     - name: wazuh-manager
@@ -78,7 +78,7 @@ Edit the `local_rules.xml` file:
     </group>
 
  
-.. code-block:: bash
+.. code-block:: yml
 
     volumeMounts:
     - name: config
@@ -184,19 +184,19 @@ These files are the *StatefulSet* files:
     - wazuh-worker-0-sts.yaml
     - wazuh-worker-1-sts.yaml
 
-For example we had this version before:
+For example, we had this version before:
 
-.. code-block:: none
-
-    containers:
-    - name: wazuh-manager
-      image: 'wazuh/wazuh:3.9.0_6.6.2'
-
-.. code-block:: none
+.. code-block:: yml
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.9.0_6.6.2'
+      image: 'wazuh/wazuh:3.8.2_6.6.1'
+
+.. code-block:: yml
+
+    containers:
+    - name: wazuh-manager
+      image: 'wazuh/wazuh:3.8.2_6.6.1'
 
 Apply the new configuration
 ---------------------------
@@ -209,6 +209,3 @@ The third and last step is to apply the new configuration of each pod. For examp
     statefulset.apps "wazuh-manager-master" configured
 
 This process will end the old pod while creating a new one with the new version, linked to the same volume. Once the Pods are booted, we will have our update ready and we can check the new version of Wazuh installed, the cluster and the changes that have been maintained through the use of the volumes.
-
-.. warning::
-    It is important to update all Wazuh node pods, because the cluster only works when all nodes have the same version.

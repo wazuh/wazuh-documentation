@@ -38,7 +38,7 @@ The deployment of the Wazuh cluster of managers involves the use of different `S
         ubuntu@k8s-control-server:~$ kubectl delete service wazuh-workers --namespace wazuh
         ubuntu@k8s-control-server:~$ kubectl delete service wazuh --namespace wazuh
 
-2. In this step delete the *StatefulSet* elements.
+2. Remove the *StatefulSet* elements.
 
     .. code-block:: console
 
@@ -123,7 +123,7 @@ Elasticsearch
         ubuntu@k8s-control-server:~$ kubectl delete service elasticsearch --namespace wazuh
         ubuntu@k8s-control-server:~$ kubectl delete service wazuh-elasticsearch --namespace wazuh
 
-2. Next, delete the *StatefulSet* elements.
+2. Remove the *StatefulSet* elements.
 
     .. code-block:: console
             
