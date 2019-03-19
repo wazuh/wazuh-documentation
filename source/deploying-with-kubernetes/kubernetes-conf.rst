@@ -47,13 +47,13 @@ Here, we use PVs to storage data of interest from both Wazuh and Elasticsearch.
 They work in a similar way to docker volumes (vital for updates).
 
 .. note::
-    Users can read more information about the **Persistent volumes** in the `Kubernetes Official documentation. <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_
+    Users can read more information about the **Persistent volumes** in their `official documentation page <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_.
 
 Pods
 ^^^^
 
 .. note::
-    In this `link <https://github.com/wazuh/wazuh-docker>`_ you can check the data Wazuh uses in its docker deployments.
+    In this `link <https://github.com/wazuh/wazuh-docker>`_ you can check the data that Wazuh uses in its docker deployments.
 
 **Wazuh master**
 
@@ -159,7 +159,7 @@ Deploy
 
     Clone this repository to deploy the necessary services and pods.
 
-    .. code-block:: bash
+    .. code-block:: console
             
         $ git clone https://github.com/wazuh/wazuh-kubernetes.git
         $ cd wazuh-kubernetes
@@ -168,14 +168,14 @@ Deploy
 
     The Wazuh namespace is used to handle all the Kubernetes elements (services, deployments, pods) necessary for Wazuh. In addition, you must create a StorageClass to use AWS EBS storage in our StateFulSet applications.
 
-        .. code-block:: bash
+        .. code-block:: console
 
             $ kubectl apply -f base/wazuh-ns.yaml
             $ kubectl apply -f base/aws-gp2-storage-class.yaml
 
 3.2. Deploy Elasticsearch
 
-            .. code-block:: bash
+            .. code-block:: console
 
                 $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-svc.yaml
                 $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-api-svc.yaml
@@ -185,7 +185,7 @@ Deploy
     
     In case you need to provide a domain name, update the *domainName* annotation value in the ``nginx-svc.yaml`` file before deploying that service. You should also set a valid AWS ACM certificate ARN in the ``nginx-svc.yaml`` for the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation. That certificate should match with the `domainName`.
         
-        .. code-block:: bash
+        .. code-block:: console
 
             $ kubectl apply -f elastic_stack/kibana/kibana-svc.yaml
             $ kubectl apply -f elastic_stack/kibana/nginx-svc.yaml
@@ -195,14 +195,14 @@ Deploy
 
 3.4. Deploy Logstash
 
-        .. code-block:: bash
+        .. code-block:: console
 
             $ kubectl apply -f elastic_stack/logstash/logstash-svc.yaml
             $ kubectl apply -f elastic_stack/logstash/logstash-deploy.yaml
 
 4. Deploy Wazuh
 
-    .. code-block:: bash
+    .. code-block:: console
 
         $ kubectl apply -f wazuh_managers/wazuh-master-svc.yaml
         $ kubectl apply -f wazuh_managers/wazuh-cluster-svc.yaml
@@ -221,14 +221,14 @@ Verifying the deployment
 
 **Namespace**
 
-    .. code-block:: bash
+    .. code-block:: console
 
         $ kubectl get namespaces | grep wazuh
         wazuh         Active    12m
 
 **Services**
 
-    .. code-block:: bash
+    .. code-block:: console
 
         $ kubectl get services -n wazuh
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP        PORT(S)                          AGE
@@ -243,7 +243,7 @@ Verifying the deployment
 
 **Deployments**
 
-    .. code-block:: bash
+    .. code-block:: console
 
         $ kubectl get deployments -n wazuh
         NAME             DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
@@ -253,7 +253,7 @@ Verifying the deployment
 
 **Statefulsets**
 
-    .. code-block:: bash
+    .. code-block:: console
 
         $ kubectl get statefulsets -n wazuh
         NAME                     DESIRED   CURRENT   AGE
@@ -264,7 +264,7 @@ Verifying the deployment
 
 **Pods**
 
-    .. code-block:: bash
+    .. code-block:: console
 
         $ kubectl get pods -n wazuh
         NAME                              READY     STATUS    RESTARTS   AGE
@@ -282,7 +282,7 @@ Verifying the deployment
 
     Also, you can access using the External-IP (from the VPC): https://192.168.10.5.elb.amazonaws.com
 
-    .. code-block:: bash
+    .. code-block:: console
 
         $ kubectl get services -o wide -n wazuh
         NAME                  TYPE           CLUSTER-IP       EXTERNAL-IP                                                    PORT(S)                          AGE       SELECTOR
@@ -311,17 +311,12 @@ Wazuh agents are designed to monitor hosts. To start using them:
 4. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.
 
 
-.. note::
-    If using EKS remember to configure the security groups to manage the access.
-
 Monitoring containers
 ^^^^^^^^^^^^^^^^^^^^^
 
-The objective here is to monitor the container from the node that has raised it.
+The goal here is to monitor the container from the node that has built it.
 
-In this case, we have 2 options:
+The next two options are valid:
 
-    - Running the agent in the container: containers are sealed and designed to run a single process. It is not practicable solution.
-    
-    - Install the agent on the host: This is the option that we recommend since the agent was originally designed for this purpose.
-
+    - Install the agent on the host, this is the recommended option since the agent was originally designed for this purpose.
+    - Running the agent in the container: containers are sealed and designed to run a single process. It's not the best solution.

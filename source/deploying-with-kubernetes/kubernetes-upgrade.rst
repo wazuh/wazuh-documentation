@@ -5,8 +5,6 @@
 Upgrade Wazuh installed in Kubernetes
 =====================================
 
-When upgrading our version of Wazuh installed in Kubernetes we must follow this steps.
-
 
 Check which files are exported to the volume
 --------------------------------------------
@@ -29,7 +27,7 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
     DATA_DIRS[((i++))]="queue/fts"
     DATA_DIRS[((i++))]="var/multigroups"
 
-Any file that we modify referring to the files previously mentioned, will be changed also the corresponding volume. When the corresponding Wazuh pod is created again, it will get the cited files from the volume, thus keeping the changes made previously.
+Any modification related to these files will also be made in the associated volume. When the replica pod creates, it will get those files from the volume but keeping the changes made previously.
 
 For a better understanding, we will give an example:
 

@@ -6,12 +6,12 @@
 Clean Up
 ========
 
-Steps to perform a clean up of our deployments, services and volumes used in our environment.
+Steps to perform a clean up of all deployments, services and volumes.
 
-Wazuh managers
---------------
+Wazuh cluster
+-------------
 
-The deployment of the Wazuh cluster of managers involves the use of various statefulSet elements as well as configuration maps and services.
+The deployment of the Wazuh cluster of managers involves the use of different `StatefulSet <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/>`_ elements as well as configuration maps and services.
 
 1. First, remove the services related to the Wazuh cluster.
 
