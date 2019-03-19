@@ -15,12 +15,14 @@ Adding new decoders and rules
   For bigger changes or to add more rules or decoders, it is better to create a new rule or decoder file.
 
 We are going to describe these procedures by using an easy example. Here is a log from a program called ``example``:
-::
+
+.. code-block:: bash
 
    Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100'
 
 First, we need to decode this information, so we add the new decoder to ``/var/ossec/etc/decoders/local_decoder.xml``:
-::
+
+.. code-block:: xml
 
   <decoder name="example">
     <program_name>^example</program_name>
@@ -33,7 +35,8 @@ First, we need to decode this information, so we add the new decoder to ``/var/o
   </decoder>
 
 Now, we will add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
-::
+
+.. code-block:: xml
 
   <rule id="100010" level="0">
     <program_name>example</program_name>
@@ -41,7 +44,8 @@ Now, we will add the following rule to ``/var/ossec/etc/rules/local_rules.xml``:
   </rule>
 
 We can check if it works by using `/var/ossec/bin/ossec-logtest <https://documentation.wazuh.com/current/user-manual/reference/tools/ossec-logtest.html?highlight=logtest>`_:
-::
+
+.. code-block:: bash
 
   **Phase 1: Completed pre-decoding.
        full event: 'Dec 25 20:45:02 MyHost example[12345]: User 'admin' logged from '192.168.1.100''
@@ -73,7 +77,7 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
 
 2. Find and copy the following code from the rule file:
 
-::
+.. code-block:: xml
 
   <rule id="5710" level="5">
     <if_sid>5700</if_sid>
@@ -84,7 +88,7 @@ If we want to change the level value of the SSH rule ``5710`` from 5 to 10, we w
 
 3. Paste the code into ``/var/ossec/etc/rules/local_rules.xml``, modify the level value, and add ``overwrite="yes"`` to indicate that this rule is overwriting an already defined rule:
 
-::
+.. code-block:: xml
 
   <rule id="5710" level="10" overwrite="yes">
     <if_sid>5700</if_sid>
@@ -112,7 +116,7 @@ If we want to change something in the decoder file ``0310-ssh_decoders.xml``, we
 
 2. Exclude the original decoder file ``ruleset/decoders/0310-ssh_decoders.xml`` from the OSSEC loading list. To do this, use the tag ``<decoder_exclude>`` in the ``ossec.conf`` file. Thus, the specified decoder will not be loaded from the default decoder folder, and the decoder file saved in the user folder will be loaded instead.
 
-::
+.. code-block:: xml
 
   <ruleset>
     <!-- Default ruleset -->

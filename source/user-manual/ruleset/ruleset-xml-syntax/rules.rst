@@ -88,13 +88,14 @@ rule
 |               | Allowed values | Attribute with no value                                                                |
 +---------------+----------------+----------------------------------------------------------------------------------------+
 
-This fields are added as follows:
+Multiple of this field can be added to the same rule as follows:
 
   .. code-block:: xml
 
-    <rule id="100000" level="1" ignore="10" ...>
+    <rule id="100010" level="1" ignore="10">
       (Rule content)
     </rule>
+
 
 match
 ^^^^^
@@ -114,7 +115,7 @@ As an example, here is a custom rule that triggers when a log that contains the 
 
     <rule id="100005" level="4">
       <match>Error</match>
-      <description> Rule for matching errors. </description>
+      <description> Rule that matches errors. </description>
     </rule>
 
 regex
@@ -139,7 +140,7 @@ Example:
 decoded_as
 ^^^^^^^^^^
 
-Defines the decoder name which generated decoded the event log.
+Specifies the decoder name which generated the decoded event log.
 
 +--------------------+------------------+
 | **Default Value**  | n/a              |
@@ -331,6 +332,7 @@ The following components use a static location:
 +----------------------+------------------------+
 | CIS-CAT integration  | wodle_cis-cat          |
 +----------------------+------------------------+
+
 action
 ^^^^^^
 
