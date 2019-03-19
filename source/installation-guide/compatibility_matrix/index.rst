@@ -5,7 +5,7 @@
 Compatibility matrix
 ====================
 
-Wazuh software can be installed in many operating systems, but depending on your needs, some systems may not be compatible. Moreover, there's also specific compatibility requirements between different Wazuh products. In order to assist you, check the following compatibility matrix.
+Wazuh software can be installed in many operating systems, but depending on your needs, some systems may not be compatible. Moreover, there are also specific compatibility requirements between different Wazuh products. In order to assist you, check the following compatibility matrix.
 
 - `Operating system compatibility`_
 - `Product compatibility`_
@@ -16,7 +16,7 @@ Operating system compatibility
 Manager
 ^^^^^^^
 
-Below it shown the compatibility table for the Wazuh manager. It is recommended using **CentOS / RHEL 7** as the operating system for Wazuh managers, due to their stability and full compatibility with the Wazuh modules.
+Below is shown the compatibility table for the Wazuh manager. It is recommended using **CentOS / RHEL 7** as the operating system for Wazuh managers, due to their stability and full compatibility with the Wazuh modules.
 
 +----------------------------------+-------------------------------------------------------------+
 |                                  |   **Wazuh version**                                         |
