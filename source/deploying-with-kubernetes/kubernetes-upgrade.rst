@@ -26,7 +26,7 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
     DATA_DIRS[((i++))]="queue/fts"
     DATA_DIRS[((i++))]="var/multigroups"
 
-Any modification related to these files will also be made in the associated volume. When the replica pod creates, it will get those files from the volume, keeping the previously changes.
+Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previously changes.
 
 For a better understanding, we will give an example:
 
@@ -169,14 +169,14 @@ We can see their content:
     </rule>
     </group>
 
-At this point, if the pod was dropped or updated, Kubernetes would be in charge of creating a replica of it that would link to the volumes created and would maintain any changes referenced in the files and directories that we export to those volumes.
+At this point, if the pod was dropped or updated, Kubernetes would be in charge of creating a replica of it that would link to the volumes created and would keep any changes referenced in the files and directories that we export to those volumes.
 
-Once explained the operation regarding the volumes, we proceed to update Wazuh in two simple steps.
+Once explained the operation regarding the volumes, we proceed to update Wazuh in one simple step.
 
 Change the image of the container
 ---------------------------------
 
-The second step is to change the image of the pod in each file that deploys each node of the Wazuh cluster.
+The only step to update Wazuh is to change the image of the pod in each file that deploys each node of the Wazuh cluster.
 
 These files are the *StatefulSet* files:
 
@@ -196,11 +196,11 @@ For example, we had this version before:
 Apply the new configuration
 ---------------------------
 
-The third and last step is to apply the new configuration of each pod. For example for the wazuh manager master:
+The last step is to apply the new configuration of each pod. For example for the wazuh manager master:
 
 .. code-block:: console
 
     ubuntu@k8s-control-server:~/wazuh-kubernetes/manager_cluster$ kubectl apply -f wazuh-manager-master-sts.yaml
     statefulset.apps "wazuh-manager-master" configured
 
-This process will end the old pod while creating a new one with the new version, linked to the same volume. Once the Pods are booted, we will have our update ready and we can check the new version of Wazuh installed, the cluster and the changes that have been maintained through the use of the volumes.
+This process will end the old pod while creating a new one with the new version, linked to the same volume. Once the Pods are booted, the update will be ready and we can check the new version of Wazuh installed, the cluster and the changes that have been maintained through the use of the volumes.
