@@ -26,7 +26,7 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
     DATA_DIRS[((i++))]="queue/fts"
     DATA_DIRS[((i++))]="var/multigroups"
 
-Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previously changes.
+Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
 
 For a better understanding, we will give an example:
 
@@ -118,7 +118,12 @@ We can see their content:
     <rule id="100002" level="5">
         <if_sid>5716</if_sid>
         <srcip>2.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 2.1.1.1.</description>
+        <description>sshd: authentication failed from IP 2.1.1.2.5,</group>
+    </rule>
+    </group>
+    
+
+.. code-block:: console1.</description>
         <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
     </rule>
 
@@ -126,12 +131,7 @@ We can see their content:
         <if_sid>5716</if_sid>
         <srcip>3.1.1.1</srcip>
         <description>sshd: authentication failed from IP 3.1.1.1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-    </group>
-    
-
-.. code-block:: console
+        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.
 
     root@wazuh-manager-master-0:/# cat /etc/postfix/etc/rules/local_rules.xml
 
