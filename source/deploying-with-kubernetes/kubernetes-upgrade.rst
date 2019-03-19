@@ -5,7 +5,6 @@
 Upgrade Wazuh installed in Kubernetes
 =====================================
 
-
 Check which files are exported to the volume
 --------------------------------------------
 
@@ -31,20 +30,20 @@ Any modification related to these files will also be made in the associated volu
 
 For a better understanding, we will give an example:
 
-We have our newly created Kubernetes environment following our instructions. In this example, the image of Wazuh used has been ``wazuh/wazuh:3.6.1_6.4.0.``
+Assuming we have already deployed the environment using the following Wazuh image:
 
-.. code-block:: bash
+.. code-block:: none
 
     containers:
     - name: wazuh-manager
       image: 'wazuh/wazuh:3.6.1_6.4.0'
 
-Let's proceed by creating a set of rules in our `local_rules.xml` file at location `/var/ossec/etc/rules` in our wazuh manager master pod.
+let's proceed by creating a set of rules in our `local_rules.xml` file at location `/var/ossec/etc/rules` in our wazuh manager master pod.
+
+Edit the `local_rules.xml` file:
 
 .. code-block:: xml
 
-    root@wazuh-manager-master-0:/# vim /var/ossec/etc/rules/local_rules.xml
-    root@wazuh-manager-master-0:/# cat /var/ossec/etc/rules/local_rules.xml
     <!-- Local rules -->
 
     <!-- Modify it at your will. -->
@@ -92,11 +91,13 @@ This action has modified the `local_rules.xml` file in the `/var/ossec/data/etc/
     - name: wazuh-manager-master
       mountPath: /etc/postfix
 
-We can see their content.
+We can see their content:
 
-.. code-block:: xml
+.. code-block:: console
 
     root@wazuh-manager-master-0:/# cat /var/ossec/data/etc/rules/local_rules.xml
+
+.. code-block:: xml
     <!-- Local rules -->
 
     <!-- Modify it at your will. -->
@@ -129,9 +130,12 @@ We can see their content.
     </rule>
     </group>
     
-.. code-block:: xml
+
+.. code-block:: console
 
     root@wazuh-manager-master-0:/# cat /etc/postfix/etc/rules/local_rules.xml
+
+.. code-block:: xml
     <!-- Local rules -->
 
     <!-- Modify it at your will. -->
@@ -162,7 +166,6 @@ We can see their content.
         <description>sshd: authentication failed from IP 3.1.1.1.</description>
         <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
     </rule>
-
     </group>
 
 At this point, if the pod was dropped or updated, Kubernetes would be in charge of creating a replica of it that would link to the volumes created and would maintain any changes referenced in the files and directories that we export to those volumes.
@@ -174,7 +177,7 @@ Change the image of the container
 
 The second step is to change the image of the pod in each file that deploys each node of the Wazuh cluster.
 
-These files are the *statefulSet* files:
+These files are the *StatefulSet* files:
 
     - wazuh-master-sts.yaml
     - wazuh-worker-0-sts.yaml
@@ -182,13 +185,13 @@ These files are the *statefulSet* files:
 
 For example we had this version before:
 
-.. code-block:: bash
+.. code-block:: none
 
     containers:
     - name: wazuh-manager
       image: 'wazuh/wazuh:3.9.0_6.6.2'
 
-.. code-block:: bash
+.. code-block:: none
 
     containers:
     - name: wazuh-manager
@@ -199,7 +202,7 @@ Apply the new configuration
 
 The third and last step is to apply the new configuration of each pod. For example for the wazuh manager master:
 
-.. code-block:: bash
+.. code-block:: console
 
     ubuntu@k8s-control-server:~/wazuh-kubernetes/manager_cluster$ kubectl apply -f wazuh-manager-master-sts.yaml
     statefulset.apps "wazuh-manager-master" configured

@@ -2,58 +2,45 @@
 
 .. _kubernetes_conf:
 
-Kubernetes Installation & Configuration
-=========================================
+Kubernetes Configuration
+========================
 
-- `Installation`_
 - `Pre-requisites`_
 - `Overview`_
 - `Verifying the deployment`_
 - `Agents`_
 
-
-Installation
-------------
-
-To select the best installation type for you, go to the `Official installation guide. <https://kubernetes.io/docs/setup/>`_
-
 Pre-requisites
 --------------
 
-
     - Kubernetes cluster already deployed.
 
-    - Kubernetes can run on a wide range of Cloud providers and bare-metal environments, this repository focuses on AWS. It was tested using Amazon EKS. You should be able to:
-
-        - Create Persistent Volumes on top of AWS EBS when using a *volumeClaimTemplates*
-        - Create a record set in AWS Route 53 from a Kubernetes LoadBalancer.
+    - Kubernetes can run on a wide range of Cloud providers and bare-metal environments, this repository focuses on AWS. It was tested using Amazon EKS.
 
     - Having at least two Kubernetes nodes in order to meet the *podAntiAffinity* policy.
 
 Overview
 --------
 
-StateFulSet and Deployments Controllers
+StateFulSet and deployments controllers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Like a *Deployment*, a *StatefulSet* manages Pods that are based on an identical container specification, but it maintains an identity attached to each of its pods. These pods are created from the same specification, but they are not interchangeable: each one has a persistent identifier maintained across any rescheduling.
 
-It is useful for stateful applications like databases that save the data to a persistent storage. The states of each Wazuh manager as well as Elasticsearch are desirable to maintain, so we declare them using StatefulSet to ensure that they maintain their states in every startup.
+It is useful for stateful applications like databases that save the data to persistent storage. The states of each Wazuh manager, as well as Elasticsearch, are desirable to maintain, so we declare them using StatefulSet to ensure that they maintain their states in every startup.
 
 Deployments are intended for stateless use and are quite lightweight and seem to be appropriate for Logstash, Kibana and Nginx, where it is not necessary to maintain the states.
 
-A **PersistentVolume (PV)** is a piece of storage in the cluster that has been provisioned. It is a resource in the cluster just like a node is a cluster resource. PVs are volume plugins like Volumes but have a lifecycle independent of any individual pod that uses the PV. This API object captures the details of the implementation of the storage, be that NFS, iSCSI, or a cloud-provider-specific storage system.
-Here, we use PVs to storage data of interest from both Wazuh and Elasticsearch. 
-They work in a similar way to docker volumes (vital for updates).
+Persistent volumes are pieces of storage in the provisioned cluster. It is a resource in the cluster just like a node is a cluster resource. Persistent volumes are volume plugins like Volumes but have a lifecycle independent of any individual pod that uses the PV. This API object captures the details of the implementation of the storage, be that NFS, iSCSI, or a cloud-provider-specific storage system.
 
-.. note::
-    Users can read more information about the **Persistent volumes** in their `official documentation page <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_.
+Here, we use persistent volumes to store data from both Wazuh and Elasticsearch.
+
+Read more about persistent volumes `here <https://kubernetes.io/docs/concepts/storage/persistent-volumes/>`_.
 
 Pods
 ^^^^
 
-.. note::
-    In this `link <https://github.com/wazuh/wazuh-docker>`_ you can check the data that Wazuh uses in its docker deployments.
+You can check how we build our Wazuh docker containers in our `repository <https://github.com/wazuh/wazuh-docker>`_.
 
 **Wazuh master**
 
@@ -73,7 +60,7 @@ Details:
 
 **Elasticsearch**
 
-Elasticsearch pod. It receives and stores alerts received from Logstash. No Elasticsearch cluster is supported yet.
+Elasticsearch pod, it ingests events received from Logstash.
 
 Details:
     - Image: Docker Hub 'wazuh/wazuh-elasticsearch:3.9.0_6.6.2'
@@ -81,7 +68,7 @@ Details:
 
 **Logstash**
 
-Logstash pod. It receives the alerts from each Filebeat located in every Wazuh manager. Then, the alerts are sent to Elasticsearch.
+Logstash pod, it's listening to events from the Filebeat instances that are installed on every Wazuh manager node, then it sends all the events to Elasticsearch.
 
 Details:
     - image: Docker Hub 'wazuh/wazuh-logstash:3.9.0_6.6.2'
@@ -89,7 +76,7 @@ Details:
 
 **Kibana**
 
-Kibana pod. It lets you visualize your Elasticsearch data, along with other features as the Wazuh app.
+Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 
 Details:
     - image: Docker Hub 'wazuh/wazuh-kibana:3.9.0_6.6.2'
@@ -97,7 +84,7 @@ Details:
 
 **Nginx**
 
-The nginx pod acts as a reverse proxy for a safer access to Kibana.
+Nginx service used as a reverse proxy for Kibana.
 
 Details:
     - image: Docker Hub 'wazuh/wazuh-nginx:3.9.0_6.6.2'
@@ -113,28 +100,21 @@ Services
     - elasticsearch:
         Elasticsearch API. Used by Logstash/Kibana to write/read alerts.
     - wazuh-nginx:
-        Service for https access to Kibana.
+        Service for HTTPS access to Kibana.
     - kibana:
         Kibana service.
-    - Logstash:
-        Logstash service, each Manager node has a Filebeat pointing to this service.
+    - Logstash: 
+        Logstash service, each Wazuh node has a Filebeat instance pointing to this service.
 
 **Wazuh**
 
     - wazuh:
         Wazuh API: wazuh-master.your-domain.com:55000
-
         Agent registration service (authd): wazuh-master.your-domain.com:1515
-    
     - wazuh-workers:
         Reporting service: wazuh-manager.your-domain.com:1514
     - wazuh-cluster:
         Communication for Wazuh manager nodes.
-
-.. note::
-    Here, we are going to use the `Kubernetes ConfigMaps <https://cloud.google.com/kubernetes-engine/docs/concepts/configmap>`_ to configure ths Wazuh instances.
-    We will use them to configure the ``ossec.conf`` file that contains all the manager's configuration. 
-    So, for example, if we want to use a wodle, it will be added in the ``ossec.conf`` that will be charged by the ConfigMap.
 
 Deploy
 ------
@@ -175,11 +155,11 @@ Deploy
 
 3.2. Deploy Elasticsearch
 
-            .. code-block:: console
+        .. code-block:: console
 
-                $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-svc.yaml
-                $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-api-svc.yaml
-                $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-sts.yaml
+            $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-svc.yaml
+            $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-api-svc.yaml
+            $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-sts.yaml
 
 3.3. Deploy Kibana and Nginx
     
