@@ -5,8 +5,6 @@
 Compatibility matrix
 ====================
 
-.. Wazuh software can be installed in many operating systems, but depending on what do want to install, some systems or version, are not compatible. To help you with this, you can check the compatibility matrix, which indicates what OS and Wazuh versions are compatible with your systems.
-
 Wazuh software can be installed in many operating systems, but depending on your needs, some systems may not be compatible. Moreover, there's also specific compatibility requirements between different Wazuh products. In order to assist you, check the following compatibility matrix.
 
 - `Operating system compatibility`_
@@ -71,6 +69,10 @@ Below it shown the compatibility table for the Wazuh manager. It is recommended 
 +----------------------------------+---------+----------------+----------------+--------+--------+
 |   OpenSUSE Tumbleweed            |    ✓    |       ✓        |      ✗         |   ✗    |   ✗    |
 +----------------------------------+---------+----------------+----------------+--------+--------+
+|   Oracle Linux 6                 |    ✓    |       ✓        |      ✓         |   ✗    |   ✗    |
++----------------------------------+---------+----------------+----------------+--------+--------+
+|   Oracle Linux 7                 |    ✓    |       ✓        |      ✓         |   ✗    |   ✗    |
++----------------------------------+---------+----------------+----------------+--------+--------+
 
 *(\*) In these systems, the Wazuh API is not available.*
 
@@ -130,9 +132,13 @@ In this table, you can check our supported OS list where the Wazuh agent can be 
 +----------------------------------+----------------+--------+--------+----------------+----------------+--------+--------+
 |   OpenSUSE Tumbleweed            |   ✓            |   ✓    |   ✓    |        ✓       |      ✗         |   ✗    |   ✗    |
 +----------------------------------+----------------+--------+--------+----------------+----------------+--------+--------+
-|   Amazon Linux                   |   ✓            |   ✓    |   ✓    |        ✓       |      ✓         |   ✓    |   ✓    |
+|   Amazon Linux                   |   ✓            |   ✓    |   ✓    |        ✓       |      ✓         |   ✗    |   ✗    |
 +----------------------------------+----------------+--------+--------+----------------+----------------+--------+--------+
-|   Amazon Linux 2                 |   ✓            |   ✓    |   ✓    |        ✓       |      ✓         |   ✓    |   ✓    |
+|   Amazon Linux 2                 |   ✓            |   ✓    |   ✓    |        ✓       |      ✓         |   ✗    |   ✗    |
++----------------------------------+----------------+--------+--------+----------------+----------------+--------+--------+
+|   Oracle Linux 6                 |   ✓            |   ✓    |   ✓    |        ✓       |      ✓         |   ✗    |   ✗    |
++----------------------------------+----------------+--------+--------+----------------+----------------+--------+--------+
+|   Oracle Linux 7                 |   ✓            |   ✓    |   ✓    |        ✓       |      ✓         |   ✗    |   ✗    |
 +----------------------------------+----------------+--------+--------+----------------+----------------+--------+--------+
 
 Product compatibility
