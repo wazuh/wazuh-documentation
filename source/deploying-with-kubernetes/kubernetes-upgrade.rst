@@ -32,7 +32,7 @@ For a better understanding, we will give an example:
 
 Assuming we have already deployed the environment using the following Wazuh image:
 
-.. code-block:: yml
+.. code-block:: yaml
 
     containers:
     - name: wazuh-manager
@@ -78,7 +78,7 @@ Edit the `local_rules.xml` file:
     </group>
 
  
-.. code-block:: yml
+.. code-block:: yaml
 
     volumeMounts:
     - name: config
@@ -186,7 +186,7 @@ These files are the *StatefulSet* files:
 
 For example, we had this version before:
 
-.. code-block:: yml
+.. code-block:: yaml
 
     containers:
     - name: wazuh-manager
