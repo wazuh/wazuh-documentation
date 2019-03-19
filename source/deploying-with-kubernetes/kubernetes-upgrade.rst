@@ -98,6 +98,7 @@ We can see their content:
     root@wazuh-manager-master-0:/# cat /var/ossec/data/etc/rules/local_rules.xml
 
 .. code-block:: xml
+
     <!-- Local rules -->
 
     <!-- Modify it at your will. -->
@@ -136,6 +137,7 @@ We can see their content:
     root@wazuh-manager-master-0:/# cat /etc/postfix/etc/rules/local_rules.xml
 
 .. code-block:: xml
+
     <!-- Local rules -->
 
     <!-- Modify it at your will. -->
