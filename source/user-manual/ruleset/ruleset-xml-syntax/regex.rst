@@ -8,7 +8,7 @@ Regular Expression Syntax
 There are two types of regular expressions: regex (*OS_Regex*) and sregex (*OS_Match*).
 
 Regex (OS_Regex) syntax
---------------------------------
+-----------------------
 
 This is a fast and simple library for regular expressions in C.
 
@@ -83,7 +83,7 @@ This library is designed to be simple while still supporting the most common reg
   - there is no syntax to match a literal caret, asterisk or plus (although ``\p`` will match asterisk or plus, along with some other characters)
 
 Sregex (OS_Match) syntax
------------------------------
+------------------------
 
 This is faster than OS_Regex, but only supports simple string matching and the
 following special characters.

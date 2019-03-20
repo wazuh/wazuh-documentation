@@ -268,6 +268,16 @@ Week day that the event was generated.
 | **Allowed values** | monday - sunday, weekdays, weekends |
 +--------------------+-------------------------------------+
 
+Here is a real example used in Wazuh on how to use this option:
+
+  .. code-block:: xml
+
+    <rule id="17102" level="9">
+      <if_group>authentication_success</if_group>
+      <weekday>weekends</weekday>
+      <description>Successful login during weekend.</description>
+    </rule>
+
 id
 ^^^
 
@@ -333,16 +343,25 @@ The following components use a static location:
 | CIS-CAT integration  | wodle_cis-cat          |
 +----------------------+------------------------+
 
+As a example, if we would want to see the incoming events from osquery:
+
+  .. code-block:: xml
+
+    <rule id="24000" level="3">
+      <location>osquery$</location>
+      <description>osquery message</description>
+    </rule>
+
 action
 ^^^^^^
 
 Any action (decoded as the ACTION).
 
-+--------------------+----------------------+
-| **Default Value**  | n/a                  |
-+--------------------+----------------------+
-| **Allowed values** | Any String.          |
-+--------------------+----------------------+
++--------------------+---------------------------------------------+
+| **Default Value**  | n/a                                         |
++--------------------+---------------------------------------------+
+| **Allowed values** | Any event action (deny, drop, accept, etc)  |
++--------------------+---------------------------------------------+
 
 if_sid
 ^^^^^^
@@ -405,7 +424,6 @@ This option is used in conjunction with frequency and timeframe.
 +--------------------+-----------+
 | **Allowed values** | Any Group |
 +--------------------+-----------+
-
 
 same_id
 ^^^^^^^
@@ -523,18 +541,18 @@ This option is used in conjunction with frequency and timeframe.
 
 Example:
 
-  As a example to this last options, check this rule:
+  As a example of this last options, here is a rule that integrates a couple of them:
 
     .. code-block:: xml
       
       <rule id=100005 level="0">
-        <match> Could not open /home </match>
+        <match> Could not open /var/ossec </match>
         <same_user />
         <different_srcgeoip />
         <same_dst_port />
       </rule>
 
-  That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using the same ``port``.
+  That rule filters when the same ``user`` tries to open the folder ``/var/ossec`` from a different ``ip`` and using the same ``port``, but returns an error.
 
 description
 ^^^^^^^^^^^
@@ -553,32 +571,20 @@ Examples:
   .. code-block:: xml
 
     <rule id="100009" level="1">
-      ...
       <regex>(\d+.\d+.\d+.\d+)</regex>
       <description> Rule to match IPs </description>
-    </rule>
-
-    <rule id="100015" level="2">
-      ...
-      <description> A timeout occured. </description>
-    </rule>
-
-    <rule id="100035" level="4">
-      ...
-      <description> File missing. Root acces unrestricted. </description>
     </rule>
 
   A rule description will be shown when decoded as:
   
   .. code-block:: bash
 
-        **Phase 3: Completed filtering (rules)
-        Rule id: '100009'
-        Level: '1'
-        Description: 'Rule to match IPs'
-        ...
+    **Phase 3: Completed filtering (rules)
+    Rule id: '100009'
+    Level: '1'
+    Description: 'Rule to match IPs'
+    ...
       
-
 Since Wazuh v3.3.0 it is possible to include any decoded field (static or dynamic) to the description message.
 
 list
