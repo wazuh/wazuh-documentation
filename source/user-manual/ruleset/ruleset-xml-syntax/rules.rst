@@ -585,7 +585,7 @@ Examples:
     Description: 'Rule to match IPs'
     ...
       
-Since Wazuh v3.3.0 it is possible to include any decoded field (static or dynamic) to the description message.
+.. note:: Since Wazuh v3.3.0 it is possible to include any decoded field (static or dynamic) to the description message.
 
 list
 ^^^^
@@ -674,7 +674,7 @@ Example:
     </rule>
 
 .. note::
-  Use one ``<options>`` tag for each option the user wants to add.
+  Use one ``<options>`` tag for each value added.
 
 .. _rules_check_diff:
 
@@ -700,15 +700,32 @@ Example:
 
   .. code-block:: xml
 
-    <group name="spam">
-        <rule id="3801" level="4">
-          <description>Rule related with spam.</description>
-        </rule>
+    <group name="osquery,">
+
+      <rule id="24000" level="3">
+        <location>osquery$</location>
+        <description>osquery: $(osquery.pack) query result</description>
+      </rule>
+
     </group>
 
-Now, every rule with the line ``<group>spam,</group>`` will be included in that group.
+Now, every rule included in this ``<group> </group>`` block will belong to that group.
 
-It's a very useful label to keep the rules ordered.
+So if we add the next line to that rule:
+
+  .. code-block:: xml
+
+    <group>osquery_monitoring,</group>
+
+The rule will belong to the group ``osquery`` and ``osquery_monitoring`` at the same time.
+
+Also, after have declared the ``osquery`` group, other rules can be added to this group by adding them the line:
+
+  .. code-block:: xml
+
+    <group>osquery,</group>
+
+This is a very useful option to improve the filtering and ordering of rules.
 
 +--------------------+------------+
 | **Default Value**  | n/a        |
