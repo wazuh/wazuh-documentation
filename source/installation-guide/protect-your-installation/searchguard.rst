@@ -36,31 +36,31 @@ Our default configuration is not using authentication for Logstash so we need to
 
 1. Stop Logstash service:
 
-.. code-block:: none
+    .. code-block:: none
 
-    # systemctl stop logstash
+        # systemctl stop logstash
 
 2. Look for the output section and replace it with the following content:
 
-.. code-block:: none
+    .. code-block:: none
 
-    output {
-        elasticsearch {
-            hosts => ["ELASTICSEARCH_HOST:9200"]
-            index => "wazuh-alerts-3.x-%{+YYYY.MM.dd}"
-            document_type => "wazuh"
-            user => logstash
-            password => logstash
-            ssl => true
-            ssl_certificate_verification => false
+        output {
+            elasticsearch {
+                hosts => ["ELASTICSEARCH_HOST:9200"]
+                index => "wazuh-alerts-3.x-%{+YYYY.MM.dd}"
+                document_type => "wazuh"
+                user => logstash
+                password => logstash
+                ssl => true
+                ssl_certificate_verification => false
+            }
         }
-    }
 
 3. Restart Logstash.
 
-.. code-block:: none
+    .. code-block:: none
 
-    # systemctl restart logstash
+        # systemctl restart logstash
 
 .. warning::
 
@@ -73,85 +73,85 @@ Currently, it's not supported to use X-Pack security at the same time. If your e
 
 For Elasticsearch you need to edit the file */etc/elasticsearch/elasticsearch.yml* in all your nodes and add the next line:
 
-.. code-block:: none
-    
-    xpack.security.enabled: false 
+    .. code-block:: none
+        
+        xpack.security.enabled: false 
 
 Now restart Elasticsearch service:
 
-.. code-block:: none
+    .. code-block:: none
 
-    # systemctl restart elasticsearch
+        # systemctl restart elasticsearch
 
 Search Guard must fit the Elasticsearch version like any other component from the Elastic stack. Versioning is a bit different for Search Guard, please check your version at `Search Guard versions <https://docs.search-guard.com/latest/search-guard-versions>`_.
 
 The versioning syntaxis for Search Guard is as follow:
 
-.. code-block:: none
+    .. code-block:: none
 
-    com.floragunn:search-guard-6:<elastic_version>-<searchguard_version>
+        com.floragunn:search-guard-6:<elastic_version>-<searchguard_version>
 
 This documentation is designed for our latest supported version, it's 6.5.4 so our right version is:
 
-.. code-block:: none
+    .. code-block:: none
 
-    com.floragunn:search-guard-6:6.5.4-24.0
+        com.floragunn:search-guard-6:6.5.4-24.0
 
 Since Search Guard is a plugin, we must install it such other Elasticsearch plugins:
 
-.. code-block:: none
+    .. code-block:: none
 
-    sudo -u elasticsearch \
-    /usr/share/elasticsearch/bin/elasticsearch-plugin install \
-    -b com.floragunn:search-guard-6:6.5.4-24.0
+        sudo -u elasticsearch \
+        /usr/share/elasticsearch/bin/elasticsearch-plugin install \
+        -b com.floragunn:search-guard-6:6.5.4-24.0
 
 Search Guard comes with a demo configuration and it's useful as starting point so let's install the demo configuration:
 
-.. code-block:: none
+    .. code-block:: none
 
-    $ cd /usr/share/elasticsearch/plugins/search-guard-6/tools/
-    $ chmod a+x install_demo_configuration.sh
-    # ./install_demo_configuration.sh
-    Install demo certificates? [y/N] y
-    Initialize Search Guard? [y/N] y
-    Enable cluster mode? [y/N] y
+        $ cd /usr/share/elasticsearch/plugins/search-guard-6/tools/
+        $ chmod a+x install_demo_configuration.sh
+        # ./install_demo_configuration.sh
+        Install demo certificates? [y/N] y
+        Initialize Search Guard? [y/N] y
+        Enable cluster mode? [y/N] y
 
 Restart Elasticsearch service:
 
-.. code-block:: none
+    .. code-block:: none
 
-    # systemctl restart elasticsearch
+        # systemctl restart elasticsearch
 
 You can check if it's working as expected using the next request (Search Guard needs about two minutes to create its internal indices so be patient):
 
-.. code-block:: none
+    .. code-block:: none
 
-    $ curl -k -u admin:admin https://<ELASTICSEARCH_HOST>:9200/_searchguard/authinfo?pretty
-    {
-    "user" : "User [name=admin, roles=[admin], requestedTenant=null]",
-    "user_name" : "admin",
-    "user_requested_tenant" : null,
-    "remote_address" : "10.0.0.4:46378",
-    "backend_roles" : [
-        "admin"
-    ],
-    "custom_attribute_names" : [
-        "attr.internal.attribute1",
-        "attr.internal.attribute2",
-        "attr.internal.attribute3"
-    ],
-    "sg_roles" : [
-        "sg_all_access",
-        "sg_own_index"
-    ],
-    "sg_tenants" : {
-        "admin_tenant" : true,
-        "admin" : true
-    },
-    "principal" : null,
-    "peer_certificates" : "0",
-    "sso_logout_url" : null
-    }
+        $ curl -k -u admin:admin https://<ELASTICSEARCH_HOST>:9200/_searchguard/authinfo?pretty
+        {
+        "user" : "User [name=admin, roles=[admin], requestedTenant=null]",
+        "user_name" : "admin",
+        "user_requested_tenant" : null,
+        "remote_address" : "10.0.0.4:46378",
+        "backend_roles" : [
+            "admin"
+        ],
+        "custom_attribute_names" : [
+            "attr.internal.attribute1",
+            "attr.internal.attribute2",
+            "attr.internal.attribute3"
+        ],
+        "sg_roles" : [
+            "sg_all_access",
+            "sg_own_index"
+        ],
+        "sg_tenants" : {
+            "admin_tenant" : true,
+            "admin" : true
+        },
+        "principal" : null,
+        "peer_certificates" : "0",
+        "sso_logout_url" : null
+        }
 
 Setting up Search Guard roles
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -175,50 +175,50 @@ Logstash has its own predefined user and its own predefined role. Since Wazuh cr
 
 1. Edit the Logstash role, located at */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles.yml*
 
-.. code-block:: none
+    .. code-block:: none
 
-    sg_logstash:
-        cluster:
-            - CLUSTER_MONITOR
-            - CLUSTER_COMPOSITE_OPS
-            - indices:admin/template/get
-            - indices:admin/template/put
-        indices:
-            'logstash-*':
-                '*':
-                    - CRUD
-                    - CREATE_INDEX
-            '*beat*': 
-                '*':
-                    - CRUD
-                    - CREATE_INDEX
-            'wazuh-alerts-3?x-*':
-                '*':
-                    - CRUD
-                    - CREATE_INDEX
+        sg_logstash:
+            cluster:
+                - CLUSTER_MONITOR
+                - CLUSTER_COMPOSITE_OPS
+                - indices:admin/template/get
+                - indices:admin/template/put
+            indices:
+                'logstash-*':
+                    '*':
+                        - CRUD
+                        - CREATE_INDEX
+                '*beat*': 
+                    '*':
+                        - CRUD
+                        - CREATE_INDEX
+                'wazuh-alerts-3?x-*':
+                    '*':
+                        - CRUD
+                        - CREATE_INDEX
 
-.. note::
-    Dots are replaced by ``?`` for Search Guard roles, so ``3?x`` actually means ``3.x``.
+    .. note::
+        Dots are replaced by ``?`` for Search Guard roles, so ``3?x`` actually means ``3.x``.
 
 2. Apply the changes:
 
-.. code-block:: none
+    .. code-block:: none
 
-    # /usr/share/elasticsearch/plugins/search-guard-6/tools/sgadmin.sh \ 
-    -cd /usr/share/elasticsearch/plugins/search-guard-6/sgconfig -icl -key \
-    /etc/elasticsearch/kirk-key.pem -cert /etc/elasticsearch/kirk.pem -cacert \
-    /etc/elasticsearch/root-ca.pem -h <ELASTICSEARCH_HOST> -nhnv
+        # /usr/share/elasticsearch/plugins/search-guard-6/tools/sgadmin.sh \ 
+        -cd /usr/share/elasticsearch/plugins/search-guard-6/sgconfig -icl -key \
+        /etc/elasticsearch/kirk-key.pem -cert /etc/elasticsearch/kirk.pem -cacert \
+        /etc/elasticsearch/root-ca.pem -h <ELASTICSEARCH_HOST> -nhnv
 
-.. warning::
+    .. warning::
 
-    In production environments flag `-nhnv` is not recommended because it ignores certificate issues.
+        In production environments flag `-nhnv` is not recommended because it ignores certificate issues.
 
 3. Restart Elasticsearch and Logstash services:
 
-.. code-block:: none
+    .. code-block:: none
 
-    # systemctl restart elasticsearch
-    # systemctl restart logstash
+        # systemctl restart elasticsearch
+        # systemctl restart logstash
 
 At this point you have your Elasticsearch cluster secured using `user:password` authentication and encrypted communication. This means any Logstash pointing to some Elasticsearch node must be authenticated. Also, any request to the Elasticsearch API must use `https` plus `user:password` authentication.
 
@@ -231,40 +231,40 @@ Currently, it's not supported to use X-Pack security at the same time. If your e
 
 For Kibana you need to edit the file */etc/kibana/kibana.yml* and add the next line:
 
-.. code-block:: none
+    .. code-block:: none
 
-    xpack.security.enabled: false 
+        xpack.security.enabled: false 
 
 Now restart Kibana service:
 
-.. code-block:: none
+    .. code-block:: none
 
-    # systemctl restart kibana
+        # systemctl restart kibana
 
 Kibana needs the Search Guard plugin too. Plugin versioning works like Elasticsearch plugins versioning, this means you must fit exactly your Kibana version. 
 
 1. Install the plugin as usual:
 
-.. code-block:: none
+    .. code-block:: none
 
-    $ sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/6.5.4-17/search-guard-kibana-plugin-6.5.4-17.zip
+        $ sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://search.maven.org/remotecontent?filepath=com/floragunn/search-guard-kibana-plugin/6.5.4-17/search-guard-kibana-plugin-6.5.4-17.zip
 
 2. Edit the Kibana configuration file, it's located at */etc/kibana/kibana.yml*, add the following lines:
 
-.. code-block:: none
+    .. code-block:: none
 
-    # Elasticsearch URL
-    elasticsearch.url: "https://<ELASTICSEARCH_HOST>:9200" 
+        # Elasticsearch URL
+        elasticsearch.url: "https://<ELASTICSEARCH_HOST>:9200" 
 
-    # Credentials
-    elasticsearch.username: "admin" 
-    elasticsearch.password: "admin"
+        # Credentials
+        elasticsearch.username: "admin" 
+        elasticsearch.password: "admin"
 
-    # Disable SSL verification because we use self-signed demo certificates
-    elasticsearch.ssl.verificationMode: none 
+        # Disable SSL verification because we use self-signed demo certificates
+        elasticsearch.ssl.verificationMode: none 
 
-    # Whitelist the Search Guard Multi Tenancy Header
-    elasticsearch.requestHeadersWhitelist: [ "Authorization" , "sgtenant" ]
+        # Whitelist the Search Guard Multi Tenancy Header
+        elasticsearch.requestHeadersWhitelist: [ "Authorization" , "sgtenant" ]
 
 Now you can access your Kibana UI as usual and it will prompt for a login. You can access it using the already existing one user named `admin`. 
 
@@ -285,88 +285,88 @@ The Wazuh app needs to manage `.wazuh` and `.wazuh-version` indices in order to 
 
 1. Create a new Search Guard core role in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles.yml*
 
-.. code-block:: none
+    .. code-block:: none
 
-  sg_wazuh_admin:
-    cluster:
-      - indices:data/read/mget
-      - indices:data/read/msearch
-      - indices:data/read/search
-      - indices:data/read/field_caps
-      - CLUSTER_COMPOSITE_OPS
-    indices:
-      '?kiban*':
-        '*':
-          - MANAGE
-          - INDEX
-          - READ
-          - DELETE
-      '?wazuh':
-        '*':
-          - MANAGE
-          - INDEX
-          - READ
-          - DELETE      
-      '?wazuh-version':
-        '*':
-          - MANAGE
-          - INDEX
-          - READ
-          - DELETE
+        sg_wazuh_admin:
+            cluster:
+            - indices:data/read/mget
+            - indices:data/read/msearch
+            - indices:data/read/search
+            - indices:data/read/field_caps
+            - CLUSTER_COMPOSITE_OPS
+            indices:
+            '?kiban*':
+                '*':
+                - MANAGE
+                - INDEX
+                - READ
+                - DELETE
+            '?wazuh':
+                '*':
+                - MANAGE
+                - INDEX
+                - READ
+                - DELETE      
+            '?wazuh-version':
+                '*':
+                - MANAGE
+                - INDEX
+                - READ
+                - DELETE
 
-      'wazuh-alerts-3?x-*':
-        '*':
-          - indices:admin/mappings/fields/get
-          - indices:admin/validate/query
-          - indices:data/read/search
-          - indices:data/read/msearch
-          - indices:data/read/field_stats
-          - indices:data/read/field_caps
-          - READ
-          - SEARCH            
-      
-      'wazuh-monitoring*':
-        '*':
-          - indices:admin/mappings/fields/get
-          - indices:admin/validate/query
-          - indices:data/read/search
-          - indices:data/read/msearch
-          - indices:data/read/field_stats
-          - indices:data/read/field_caps
-          - READ
-          - SEARCH
+            'wazuh-alerts-3?x-*':
+                '*':
+                - indices:admin/mappings/fields/get
+                - indices:admin/validate/query
+                - indices:data/read/search
+                - indices:data/read/msearch
+                - indices:data/read/field_stats
+                - indices:data/read/field_caps
+                - READ
+                - SEARCH            
+            
+            'wazuh-monitoring*':
+                '*':
+                - indices:admin/mappings/fields/get
+                - indices:admin/validate/query
+                - indices:data/read/search
+                - indices:data/read/msearch
+                - indices:data/read/field_stats
+                - indices:data/read/field_caps
+                - READ
+                - SEARCH
 
 2. Create a hash for your password
 
-.. code-block:: none
+    .. code-block:: none
 
-  bash /usr/share/elasticsearch/plugins/search-guard-6/tools/hash.sh -p yourpassword
+        bash /usr/share/elasticsearch/plugins/search-guard-6/tools/hash.sh -p yourpassword
 
 3. Create a new user in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_internal_users.yml* using the hash from step 2.
 
-.. code-block:: none
+    .. code-block:: none
 
-  wazuhadmin:
-    hash: $2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG
-    roles:
-      - wazuhadmin_role
+        wazuhadmin:
+            hash: $2a$12$VcCDgh2NDk07JGN0rjGbM.Ad41qVR/YFJcgHp0UGns5JDymv..TOG
+            roles:
+            - wazuhadmin_role
 
 4. Set the role mapping for Search Guard roles in */usr/share/elasticsearch/plugins/search-guard-6/sgconfig/sg_roles_mapping.yml*
 
-.. code-block:: none
+    .. code-block:: none
 
-  sg_wazuh_admin:
-    backendroles:
-      - wazuhadmin_role
+        sg_wazuh_admin:
+            backendroles:
+            - wazuhadmin_role
 
 5. Apply the changes:
 
-.. code-block:: none
+    .. code-block:: none
 
-    # /usr/share/elasticsearch/plugins/search-guard-6/tools/sgadmin.sh \ 
-    -cd /usr/share/elasticsearch/plugins/search-guard-6/sgconfig -icl -key \
-    /etc/elasticsearch/kirk-key.pem -cert /etc/elasticsearch/kirk.pem -cacert \
-    /etc/elasticsearch/root-ca.pem -h <ELASTICSEARCH_HOST> -nhnv 
+        # /usr/share/elasticsearch/plugins/search-guard-6/tools/sgadmin.sh \ 
+        -cd /usr/share/elasticsearch/plugins/search-guard-6/sgconfig -icl -key \
+        /etc/elasticsearch/kirk-key.pem -cert /etc/elasticsearch/kirk.pem -cacert \
+        /etc/elasticsearch/root-ca.pem -h <ELASTICSEARCH_HOST> -nhnv 
 
 **Brief summary for Kibana**
 
