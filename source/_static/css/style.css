@@ -2962,6 +2962,14 @@ div.highlight pre {
         opacity: 0;
       }
 
+      #carouselWazuhDocu .carousel-control-prev:hover {
+        opacity: 0.8;
+      }
+
+      #carouselWazuhDocu .carousel-control-next:hover {
+        opacity: 0.8;
+      }
+
       .searchform {
         margin: 0;
       }

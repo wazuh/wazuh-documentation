@@ -122,13 +122,9 @@ Wazuh helps you to gain deeper security visibility into your infrastructure by m
     Wazuh monitors configuration files to ensure they are compliant with your security policies, standards and/or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, unpatched, or insecurely configured.
 
 
-.. rst-class:: row
-
 -----------
 Screenshots
 -----------
-
-.. rst-class:: carousel-wrapper col-12
 
 .. raw:: html
 
@@ -193,13 +189,11 @@ Screenshots
   </div>
   </div>
 
-.. rst-class:: col-12
+This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic Stack into a unified solution and simplifying their configuration and management.
 
-  This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic Stack into a unified solution and simplifying their configuration and management.
+Wazuh provides an updated log analysis ruleset and a RESTful API that allows you to monitor the status and configuration of all Wazuh agents.
 
-  Wazuh provides an updated log analysis ruleset and a RESTful API that allows you to monitor the status and configuration of all Wazuh agents.
-
-  Wazuh also includes a rich web application (fully integrated as a Kibana app) for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
+Wazuh also includes a rich web application (fully integrated as a Kibana app) for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
 
 -----------------------
 Available documentation
