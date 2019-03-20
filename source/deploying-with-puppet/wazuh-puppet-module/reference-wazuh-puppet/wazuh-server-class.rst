@@ -190,7 +190,7 @@ $local_rules_template
 $shared_agent_template
   Enable the configuration to deploy through agent.conf
 
-  `Default `wazuh/ossec_shared_agent.conf.erb`
+  `Default wazuh/ossec_shared_agent.conf.erb`
 
 $manage_paths
   Follow the instructions on :ref:`ossec-scanpaths <reference_ossec_scanpaths>`.

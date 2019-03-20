@@ -29,8 +29,8 @@ To generate and sign a certificate, follow the next steps:
 
 4. Back on the Puppet agent node, run in the puppet agent again:
 
-.. code-block:: console
+    .. code-block:: console
 
-   # puppet agent -t
+        # puppet agent -t
 
 .. note:: Remember that private network DNS is a prerequisite for a successful certificate signing.

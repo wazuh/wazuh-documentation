@@ -5,7 +5,7 @@
 Set up Puppet
 =============
 
-In this section, we are going to give a short explanation of how to install the different instances of Puppet. For a more detailed guide, go to the `Official Puppet documentation. <https://puppet.com/docs/puppet/5.1/index.html>`_
+In this section, we are going to give a short explanation of how to install the different instances of Puppet. For a more detailed guide, go to the `official Puppet documentation. <https://puppet.com/docs/puppet/5.1/index.html>`_
 
 Before we get started with Puppet, confirm that the following network requirements are met:
 
@@ -13,7 +13,8 @@ Before we get started with Puppet, confirm that the following network requiremen
 - **Firewall open ports**: The Puppet master must be reachable on TCP port 8140.
 
 .. note::
-    This guide has been made using Puppet version 5.1. Although, Wazuh supports Puppet versions from 5.0 to 6.0.
+    This guide has been made using Puppet version 5.1. 
+    Although, Wazuh supports Puppet versions from 5.0 to 6.0.
 
 .. topic:: Contents
 
