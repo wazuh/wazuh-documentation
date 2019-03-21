@@ -118,6 +118,20 @@ To allow this option, change the value to *yes* in the ``/var/ossec/etc/ossec.co
         ...     
       </auth>
 
+To apply the changes, restart the manager:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager restart
+
 To enable the password authorization, use the ``-P`` flag when running the registration service.
 
 1. Follow one of these steps on the manager:
