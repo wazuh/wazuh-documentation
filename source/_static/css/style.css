@@ -168,6 +168,11 @@ th {
   margin-right: 5px;
 }
 
+#links-to-home .wazuh-logo-link:hover,
+#links-to-home .wazuh-logo-link:focus {
+  text-decoration: none;
+}
+
 a .docs-link {
   color: #ffffff;
   vertical-align: text-top;
