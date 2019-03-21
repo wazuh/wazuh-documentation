@@ -2442,7 +2442,8 @@ div.highlight pre {
 				border-bottom: 3px solid #00a9e5;
 			}
 
-			#menu-submenu > li:hover {
+			#menu-submenu > li:hover,
+      #menu-submenu > li.active {
 				background: rgba(0, 148, 208, 0.38);
 				border-bottom: 3px solid #0094d0;
 			}
@@ -2891,6 +2892,10 @@ div.highlight pre {
 }
 
 @media (min-width: 992px){
+
+      .globaltoc .toctree-l1 {
+        display: none;
+      }
 
       .header > .container-fluid {
         padding-top: 8px;
