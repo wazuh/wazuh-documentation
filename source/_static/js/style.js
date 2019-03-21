@@ -75,11 +75,17 @@ $(function(){
   function currentToc(){
     var href;
     // Gets the name of the first level folder
-    category = document.location.pathname.split('/')[1];
+		var versionSelector = $('#select-version').val(); // '/x.y'
+		if (versionSelector) {
+			// The URL contains the version
+			category = document.location.pathname.split('/')[2];
+		} else {
+			// URL without version
+			category = document.location.pathname.split('/')[1];
+		}
+
 
 		$('#menu-submenu').find('li').each(function(){
-			console.log(category);
-			console.log($(this).children('a').attr('href'));
 			if ($(this).children('a').attr('href').indexOf(category) >= 0 ) {
 				$(this).addClass('active');
 			} else {
