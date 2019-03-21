@@ -103,7 +103,30 @@ Password authorization
 ----------------------
 
 You can protect the manager from unauthorized registrations by using a password. Choose one by yourself, or let the registration service generate a random password.
+To allow this option, change the value to *yes* in the ``/var/ossec/etc/ossec.conf`` file:
 
+    .. code-block:: xml
+
+      <auth>
+        ...
+        <use_password>yes</use_password>
+        ...     
+      </auth>
+
+To apply the changes, restart the manager:
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-manager
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-manager restart
+      
 To enable the password authorization, use the ``-P`` flag when running the registration service.
 
 1. Follow one of these steps on the manager:
