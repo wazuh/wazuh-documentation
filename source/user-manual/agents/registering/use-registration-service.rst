@@ -132,61 +132,16 @@ To apply the changes, restart the manager:
 
       # service wazuh-manager restart
 
-To enable the password authorization, use the ``-P`` flag when running the registration service.
-
-1. Follow one of these steps on the manager:
-
-  * To use a custom password, edit the ``/var/ossec/etc/authd.pass`` file and write it. For example, if we want to use *TopSecret* as a password:
+To use a custom password, edit the ``/var/ossec/etc/authd.pass`` file and write it. For example, if we want to use *TopSecret* as a password:
 
     .. code-block:: console
 
       # echo "TopSecret" > /var/ossec/etc/authd.pass
-      # /var/ossec/bin/ossec-authd -P
 
-      Accepting connections on port 1515. Using password specified on file: /var/ossec/etc/authd.pass
+Then, restart the manager.
 
-  * If no password is specified on ``/var/ossec/etc/authd.pass``, the registration service will create a random password:
-
-    .. code-block:: console
-
-      # /var/ossec/bin/ossec-authd -P
-
-      Accepting connections on port 1515. Random password chosen for agent authentication: abdc1234
-
-    .. note::
-      If the user needs to show the password on console, use option ``-fP`` instead of ``-P``, this will launch the registration daemon in foreground, so once done if you close the CLI or finish the process, the registration daemon will be stopped.
-
-2. The agents can use the password by storing it on a file or as a command line argument. Follow one of these steps:
-
-  * Write the password on ``/var/ossec/etc/authd.pass`` and run the ``agent-auth`` program:
-
-    a. For Linux systems:
-
-    .. code-block:: console
-
-      # echo "abcd1234" > /var/ossec/etc/authd.pass
-      # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
-
-    b. For Windows systems:
-
-    .. code-block:: console
-
-      # echo abcd1234 > C:\Program Files (x86)\ossec-agent\authd.pass
-      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
-
-  * Run the program with the ``-P`` flag, and insert the password:
-
-    a. For Linux systems:
-
-    .. code-block:: console
-
-      # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS> -P "abcd1234"
-
-    b. For Windows systems:
-
-    .. code-block:: none
-
-      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -P "abcd1234"
+.. note::
+  If no password is specified on ``/var/ossec/etc/authd.pass``, the registration service will create a random password.
 
 .. _verify-hosts:
 
