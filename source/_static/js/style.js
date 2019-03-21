@@ -76,16 +76,19 @@ $(function(){
     var href;
     // Gets the name of the first level folder
 		var versionSelector = $('#select-version').val(); // '/x.y'
-		if (versionSelector) {
+		if (true) {
 			// The URL contains the version
 			category = document.location.pathname.split('/')[2];
 		} else {
 			// URL without version
 			category = document.location.pathname.split('/')[1];
 		}
+		console.log('-----------------*************************-----------------------');
+		console.log(category);
 
 
 		$('#menu-submenu').find('li').each(function(){
+			console.log($(this).children('a').attr('href'));
 			if ($(this).children('a').attr('href').indexOf(category) >= 0 ) {
 				$(this).addClass('active');
 			} else {
@@ -96,6 +99,7 @@ $(function(){
     if ($(window).width() >= breakpoint ){
       gTocElement.find('a').each(function(){
         href = $(this).prop('href');
+				console.log(href);
 				if (href.indexOf(category+'/index.html') > 0 || href.indexOf(category+'/#') > 0){
 					$(this).css('display', 'none');
 				}
