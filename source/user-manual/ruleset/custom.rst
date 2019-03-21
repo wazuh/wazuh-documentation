@@ -7,6 +7,8 @@ Custom rules and decoders
 
 It is possible to modify the default rules and decoders from the Wazuh Ruleset and also to add new ones in order to increase Wazuh's detection capabilities.
 
+.. note::
+  The ``<id>`` for custom rules will be in the range from 100000 to 120000.
 Adding new decoders and rules
 -------------------------------
 
