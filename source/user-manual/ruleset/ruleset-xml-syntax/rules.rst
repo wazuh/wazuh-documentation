@@ -130,7 +130,7 @@ Any regex to match against the log event.
 
 Example:
 
-    An example is this regex that matches any IP address:
+    An example is this regular expression that matches any IP address:
 
   .. code-block:: xml
 

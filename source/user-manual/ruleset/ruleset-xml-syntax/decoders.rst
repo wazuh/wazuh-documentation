@@ -30,7 +30,7 @@ These are the available options to build a new decoder or to modify an existing 
 decoder
 ^^^^^^^
 
-The attributes listed below define a decoder.
+Option to define a decoder. Used with the following attributes:
 
 +-----------+---------------------------+
 | Attribute | Description               |
@@ -66,11 +66,10 @@ Assign the decoder to its parent:
     <order>user, srcip</order>
   </decoder>
 
-
 accumulate
 ^^^^^^^^^^
 
-It allows Wazuh to track events over multiple log messages based on a decoded id.
+This option allows Wazuh to track events over multiple log messages based on a decoded id.
 
 .. note::
 
@@ -97,12 +96,12 @@ As an example, the decoder additioned with this option will match events generat
 
     <program_name>reboot</program_name>
 
-
 prematch
 ^^^^^^^^
 
 It attempts to find a match within the log for the string defined.
-Used along with order <regex>, it eliminates certain strings from the events so they dont generate information in the alerts.
+
+Used along with order <regex>, it eliminates certain strings from the events so they don't generate information in the alerts.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -138,7 +137,7 @@ There, thanks to the ``<prematch>`` option, the string it contains will be skipp
 regex
 ^^^^^
 
-Decoders use regex to extract information from the plain log.
+Decoders use ``<regex>`` option to extract information from the plain log.
 
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
@@ -158,7 +157,7 @@ The attribute below is optional, it allows to discard some of the content of the
 |                    | after_prematch     |
 +--------------------+--------------------+
 
-An example is this regex that matches any user name:
+An example is this regular expression that matches any user name:
 
 .. code-block:: xml
 
