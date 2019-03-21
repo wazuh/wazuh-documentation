@@ -52,13 +52,7 @@ Simple method
 
 This is the easiest method to register agents. It doesn't require any kind of authorization or host verification. To do so, follow these steps:
 
-1. On the manager, start the registration service:
-
-  .. code-block:: console
-
-    # /var/ossec/bin/ossec-authd
-
-2. On the agents, run the ``agent-auth`` program, using the manager's IP address:
+On the agents, run the ``agent-auth`` program, using the manager's IP address:
 
   a. For Linux systems:
 
