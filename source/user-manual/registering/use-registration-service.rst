@@ -52,7 +52,7 @@ Simple method
 
 This is the easiest method to register agents. It doesn't require any kind of authorization or host verification. To do so, follow these steps:
 
-On the agents, run the ``agent-auth`` program, using the manager's IP address:
+1. On the agents, run the ``agent-auth`` program, using the manager's IP address.
 
   a. For Linux systems:
 
@@ -65,6 +65,39 @@ On the agents, run the ``agent-auth`` program, using the manager's IP address:
   .. code-block:: none
 
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
+
+2. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
+
+  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
+
+  .. code-block:: xml
+
+    <client>
+      <server>
+        <address>MANAGER_IP</address>
+        ...
+      </server>
+    </client>
+
+  Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
+
+  .. code-block:: console
+
+    # sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
+
+3. Restart the agent.
+
+  a. For Systemd:
+
+    .. code-block:: console
+
+      # systemctl restart wazuh-agent
+
+  b. For SysV Init:
+
+    .. code-block:: console
+
+      # service wazuh-agent restart
 
 Password authorization
 ----------------------
