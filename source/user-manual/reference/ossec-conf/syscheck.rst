@@ -432,7 +432,7 @@ windows_audit_interval
 This option sets the frequency in seconds with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
 
 +--------------------+------------------------------------+
-| **Default value**  | 5 minutes                          |
+| **Default value**  | 300 seconds                        |
 +--------------------+------------------------------------+
 | **Allowed values** | Any number from 1 to 9999          |
 +--------------------+------------------------------------+
