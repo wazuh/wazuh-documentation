@@ -133,38 +133,37 @@ After compiling the version of Wazuh wanted in Linux following steps 2,3 and 4 o
 2. Install OpenSSL:
 
     - Access the `official website <http://www.openssl.org/>`_.
-    - Then download the binary program for Windows: > related > Binaries: https://www.openssl.org/community/binaries.html
+    - Then, download the binary file for Windows: https://www.openssl.org/community/binaries.html
+    - Install it.
 
 3. Use OpenSSL to generate the certificate:
 
-    The standard installation of OpenSSL under Windows is made on ``C:\OpenSSL-Win32`` and the executable is stored in the sub-repertory "bin". To execute the programm via the Windows ``cmd``, provide the full path:
-    
-    .. code-block:: console
+    The standard installation of OpenSSL under Windows is made on ``C:\OpenSSL-Win32`` and the executable is stored in the sub-repertory ``bin``. To execute the programm via the Windows ``cmd``, provide the full path:
         
-        C:\OpenSSL-Win32\bin\openssl.exe ( or >C:\OpenSSL-Win64\bin\openssl.exe )
-    
+        .. code-block:: console
+            
+            C:\OpenSSL-Win32\bin\openssl.exe ( or >C:\OpenSSL-Win64\bin\openssl.exe )
+        
     Now, to generate the certificate and the key run this command:
 
-    .. code-block:: console
+        .. code-block:: console
 
-        C:\OpenSSL-Win32\bin\openssl.exe req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
+            C:\OpenSSL-Win32\bin\openssl.exe req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
 
     .. note::
-        In order to execute this command on a Windows machine you have to be connected in a session with administrator rights.
-
-    Save and keep safe the file containing the private key (.key) and only copy/paste the content of the .csr file in the order form. 
+        In order to execute this command, you must have administrator rights.
 
 4. Send the folder with the compiled Wazuh files:
 
-    To perform this step, users can use whatever they want, but we find very useful to use `Putty <https://www.putty.org/>`_
+    To perform this step, users can use the tool of their choice, but we find very useful to use `Putty <https://www.putty.org/>`_
 
-5. Now, install the root CA if you want to overwrite the root CA with the file you created previously:
+5. Install the root CA if you want to overwrite the root CA with the file you created previously:
 
     .. code-block:: console
 
         copy C:\OpenSSL-Win32\bin\PEM\wpkcert.csr wazuh-3.8.2\etc
 
-6. The last step is to compile the WPK package using your SSL certificate and key:
+6. Compile the WPK package using your SSL certificate and key:
 
     .. code-block:: console
 
