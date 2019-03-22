@@ -142,13 +142,26 @@ After compiling the version of Wazuh wanted in Linux following steps 2,3 and 4 o
         
         .. code-block:: console
             
-            C:\OpenSSL-Win32\bin\openssl.exe ( or >C:\OpenSSL-Win64\bin\openssl.exe )
+            C:\Program files\OpenSSL-Win32\bin\openssl.exe 
+        or 
         
-    Now, to generate the certificate and the key run this command:
+        .. code-block:: console
+
+            C:\Program files\OpenSSL-Win64\bin\openssl.exe )
+        
+    Now, to generate the certificate follow this instructions:
 
         .. code-block:: console
 
-            C:\OpenSSL-Win32\bin\openssl.exe req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
+            > cd C:\OpenSSL-Win64\Program files\bin
+            
+            > start openssl.exe 
+            
+    When started, a new cmd will appear with the openssl program running. Here is where we are going to generate the certificate:
+
+        .. code-block:: console
+
+            openssl> req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
 
     .. note::
         In order to execute this command, you must have administrator rights.
@@ -161,10 +174,20 @@ After compiling the version of Wazuh wanted in Linux following steps 2,3 and 4 o
 
     .. code-block:: console
 
-        copy C:\OpenSSL-Win32\bin\PEM\wpkcert.csr wazuh-3.8.2\etc
+        copy C:\Program files\OpenSSL-Win64\bin\wpkcert.csr C:\Documents and Settings\”user”\Desktop\wazuh-3.8.2\etc
 
-6. Compile the WPK package using your SSL certificate and key:
+6. Download the python file to compile the WPK:
+
+    a. Install `Windows PowerShell <https://docs.microsoft.com/en-us/skypeforbusiness/set-up-your-computer-for-windows-powershell/download-and-install-windows-powershell-3-0>`_
+
+    b. Open the Windows PowerShell and run the following command specifying the required output path. We have used the Desktop as an example:
+
+    .. code-block:: console
+        
+        Invoke-WebRequest https://raw.githubusercontent.com/wazuh/wazuh/3.8/contrib/agent-upgrade/wpkpack.py -Outfile C:\Documents and Settings\"user"\Desktop\wpkpack.py
+
+7. Compile the WPK package using your SSL certificate and key:
 
     .. code-block:: console
 
-        python C:/wpkpack_route/wpkpack.py C:\OpenSSL-Win32\bin\PEM\wpkcert.csr C:\OpenSSL-Win32\bin\PEM\wpkcert.key *.*
+        python C:\Documents and Settings\"user"\Desktop\wpkpack.py C:\Program files\OpenSSL-Win64\bin\wpkcert.csr C:\Program files\OpenSSL-Win64\bin\wpkcert.key *.*
