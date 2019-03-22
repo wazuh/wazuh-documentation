@@ -11,7 +11,7 @@ In this `link <https://www.elastic.co/products/x-pack>`_ you can learn more abou
 
 .. note::
 
-    As of the 6.3.0 version of the Elastic Stack, when you install Logstash, X-Pack is installed.
+    As of the 6.3.0 version of the Elastic Stack, X-Pack comes installed with Logstash. 
 
 .. warning::
 
