@@ -20,16 +20,16 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
 	
   a. For Systemd:
 
-		.. code-block:: console
+    .. code-block:: console
+      
+      # systemctl restart wazuh-api wazuh-manager
 
-			# systemctl restart wazuh-api wazuh-manager
+  b. For SysV Init:
 
-	b. For SysV Init:
+    .. code-block:: console
 
-		.. code-block:: console
-
-			# service wazuh-manager restart
       # service wazuh-api restart
+      # service wazuh-manager restart
 
 3. Enable HTTPS:
 
