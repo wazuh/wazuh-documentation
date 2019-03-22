@@ -27,6 +27,9 @@ Options
 - `target`_
 - `log_format`_
 - `out_format`_
+- `only`_
+- `age`_
+- `exclude`_
 
 location
 ^^^^^^^^
@@ -342,6 +345,66 @@ Attributes:
 |            +----------------+------------------------------------------------------------------+
 |            | Default value  | Select all targets defined in the ``<localfile>`` stanza.        |
 +------------+----------------+------------------------------------------------------------------+
+
+only
+^^^^
+
+This specifies to read only ASCII, UTF-8 files.
+
+If this is set to **text** and the file is, for example, a binary file, it will be discarted.
+
++--------------------+-----------+
+| **Default value**  | n/a       |
++--------------------+-----------+
+| **Allowed values** | text      |
++--------------------+-----------+
+
+.. note::
+  On Windows agents it will also check if the file is encoded with UCS-2 LE BOM or UCS-2 BE BOM.
+
+age
+^^^
+
+This specifies to read only files that have been modified before the specified age.
+
+For example, if the age is set to 1 day, all files that have not been modified since 1 day will be ignored.
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <age>1d</age>
+  </localfile>
+
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                                                                      |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values** | A positive number that should contain a suffix character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
++--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+
+exclude
+^^^^^^^^
+
+This indicates the location of wild-carded group of logs to be excluded.
+
+For example, we may want to read all the files from a directory, but exclude those files whose name starts with an `e`.
+
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/logs/*</location>
+      <exclude>/var/logs/e*</exclude>
+  </localfile>
+
+.. note::
+  This feature works only on Unix based systems.
+
++--------------------+------------------+
+| **Default value**  | n/a              |
++--------------------+------------------+
+| **Allowed values** | Any log wildcard |
++--------------------+------------------+
 
 Configuration examples
 ----------------------
