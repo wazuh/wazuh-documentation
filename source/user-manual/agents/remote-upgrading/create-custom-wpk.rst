@@ -122,10 +122,50 @@ In this example, the Wazuh project's root directory contains the proper ``upgrad
 Windows WPK package:
 ^^^^^^^^^^^^^^^^^^^^
 
-To create a WPK package using Windows, we need to perform the same steps from last section in a Linux based machine.
+Generating a WPK Wazuh package in Windows is a little more difficult than in Linux, since the Wazuh project must be compiled in an operating system based on linux.
 
-After performing the first 5 steps, we move the binary file to our Windows host and then we compile the WPK package using our SSL certificate and key:
+Therefore, for this guide we are going to use "OpenSSL" and a folder that contains a compiled version of Wazuh.
 
-.. code-block:: console
+After compiling the version of Wazuh wanted in Linux following steps 2,3 and 4 of the previous section, we will create our own SSL certificate and the key file using OpenSSL.
 
-    python c:/wpkpack_route/wpkpack.py c:/wpkcert.pem c:/wpkcert.key
+1. Install `Python <https://www.python.org/downloads/>`_
+
+2. Install OpenSSL:
+
+    - Access the `official website <http://www.openssl.org/>`_.
+    - Then download the binary program for Windows: > related > Binaries: https://www.openssl.org/community/binaries.html
+
+3. Use OpenSSL to generate the certificate:
+
+    The standard installation of OpenSSL under Windows is made on ``C:\OpenSSL-Win32`` and the executable is stored in the sub-repertory "bin". To execute the programm via the Windows ``cmd``, provide the full path:
+    
+    .. code-block:: console
+        
+        C:\OpenSSL-Win32\bin\openssl.exe ( or >C:\OpenSSL-Win64\bin\openssl.exe )
+    
+    Now, to generate the certificate and the key run this command:
+
+    .. code-block:: console
+
+        C:\OpenSSL-Win32\bin\openssl.exe req -new -nodes -newkey rsa:2048 -keyout wpkcert.key -out wpkcert.csr -subj '/C=US/ST=CA/O=Wazuh'
+
+    .. note::
+        In order to execute this command on a Windows machine you have to be connected in a session with administrator rights.
+
+    Save and keep safe the file containing the private key (.key) and only copy/paste the content of the .csr file in the order form. 
+
+4. Send the folder with the compiled Wazuh files:
+
+    To perform this step, users can use whatever they want, but we find very useful to use `Putty <https://www.putty.org/>`_
+
+5. Now, install the root CA if you want to overwrite the root CA with the file you created previously:
+
+    .. code-block:: console
+
+        copy C:\OpenSSL-Win32\bin\PEM\wpkcert.csr wazuh-3.8.2\etc
+
+6. The last step is to compile the WPK package using your SSL certificate and key:
+
+    .. code-block:: console
+
+        python C:/wpkpack_route/wpkpack.py C:\OpenSSL-Win32\bin\PEM\wpkcert.csr C:\OpenSSL-Win32\bin\PEM\wpkcert.key *.*
