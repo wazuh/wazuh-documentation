@@ -136,7 +136,7 @@ Configuration block to specify vulnerability updates.
 |                    +---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           | Allows you to use the vulnerability database with agents with different operating system.                                                                                                                                                                                      |
 |                    | allow                     +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|                    |                           | **Allowed values** | List of operating systems that will allow the use of this OVAL. Example: "linux mint-12, ubuntu-17".                                                                                                                                                      |
+|                    |                           | **Allowed values** | List of operating systems that will allow the use of this OVAL. Example: "linux mint-12, pop!_os-18".                                                                                                                                                     |
 +                    +---------------------------+--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 |                    |                           | The feed will be updated from this year.                                                                                                                                                                                                                                       |
 |                    |                           +--------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -148,7 +148,7 @@ Configuration block to specify vulnerability updates.
 Example of configuration
 ------------------------
 
-The following configuration allows you to use the vulnerability database for Debian 9, Red Hat 7 and Ubuntu 16 agents. It also allows you to extract vulnerabilities from agents with Linux Mint 18.X and Ubuntu 15.X using the Ubuntu 16 vulnerability database.
+The following configuration allows you to use the vulnerability database for Debian 9, Red Hat 5, 6 and 7, and Ubuntu 18 agents. It also allows you to extract vulnerabilities from agents with Pop!OS 18 and Ubuntu 15.X using the Ubuntu 18 vulnerability database.
 
 .. code-block:: xml
 
