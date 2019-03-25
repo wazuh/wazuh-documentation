@@ -12,7 +12,10 @@ reports
 		<reports>
 		</reports>
 
-Configuration options for reporting of alerts.
+In this section are listed the different options for the configuration of daily reports based on alerts.
+
+.. note::
+  Any number of ``<reports>`` blocks can be declared in the same ``ossec.conf`` file.
 
 Options
 -------
@@ -28,9 +31,8 @@ Options
 - `email_to`_
 - `showlogs`_
 
-
 group
-^^^^^^^^^^
+^^^^^
 
 Filter by group/category. It only accepts one group/category.
 
@@ -41,7 +43,7 @@ Filter by group/category. It only accepts one group/category.
 +--------------------+-------------------------------+
 
 category
-^^^^^^^^^^
+^^^^^^^^
 
 Filter by group/category.
 
@@ -52,7 +54,7 @@ Filter by group/category.
 +--------------------+-------------------------------+
 
 rule
-^^^^^^^^^^
+^^^^
 
 Rule ID to filter for.
 
@@ -63,7 +65,7 @@ Rule ID to filter for.
 +--------------------+---------------------------------------+
 
 level
-^^^^^^^^^^
+^^^^^
 
 Alert level to filter for. The report will include all levels above and including level specified.
 
@@ -74,7 +76,7 @@ Alert level to filter for. The report will include all levels above and includin
 +--------------------+------------------------------------------+
 
 location
-^^^^^^^^^^
+^^^^^^^^
 
 Filter by the log location or agent name.
 
@@ -85,7 +87,7 @@ Filter by the log location or agent name.
 +--------------------+-----------------------------------------------+
 
 srcip
-^^^^^^^^^^
+^^^^^
 
 Filter by the source ip of the event.
 
@@ -96,7 +98,7 @@ Filter by the source ip of the event.
 +--------------------+--------------------------------------+
 
 user
-^^^^^^^^^^
+^^^^
 
 Filter by the user name. This will match either the srcuser or dstuser.
 
@@ -108,7 +110,7 @@ Filter by the user name. This will match either the srcuser or dstuser.
 
 
 title
-^^^^^^^^^^
+^^^^^
 
 Name of the report. **This is a required field.**
 
@@ -119,7 +121,7 @@ Name of the report. **This is a required field.**
 +--------------------+----------+
 
 email_to
-^^^^^^^^^^
+^^^^^^^^
 
 The email address to send the completed report. **This is a required field.**
 
@@ -130,7 +132,7 @@ The email address to send the completed report. **This is a required field.**
 +--------------------+-------------------+
 
 showlogs
-^^^^^^^^^^
+^^^^^^^^
 
 Enable or disable the inclusion of logs when creating the report.
 
@@ -144,12 +146,20 @@ Enable or disable the inclusion of logs when creating the report.
 Example of configuration
 ------------------------
 
-.. code-block:: xml
+  .. code-block:: xml
 
     <reports>
+      <title>Auth_Report</title>
       <group>authentication_failed,</group>
       <srcip>192.168.1.10</srcip>
-      <title>Auth_Report</title>
       <email_to>recipient@example.wazuh.com</email_to>
+      <showlogs>yes</showlogs>
+    </reports>
+
+    <reports>
+      <title>List of logged users</title>
+      <rule>535</rule>
+      <email_to>recipient@example.wazuh.com</email_to>
+      <srcip>192.168.1.10</srcip>
       <showlogs>yes</showlogs>
     </reports>
