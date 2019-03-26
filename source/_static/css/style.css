@@ -3115,7 +3115,7 @@ div.highlight pre {
 @media (min-width: 1200px) {
 
           header > .container-fluid, .menu-sub .container-fluid, footer > .container-fluid, #subfooter > .container-fluid{
-            padding: 0 100px;
+            padding: 0 30px;
           }
 
           .index #main-content {
