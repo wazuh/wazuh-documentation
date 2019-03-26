@@ -151,6 +151,9 @@
             {% block body %} {% endblock %}
           </main>
 
+          {% if pagename != 'index' %}
+            {% include "navigation.html" %}
+          {% endif %}
         </div>
       </div>
 
