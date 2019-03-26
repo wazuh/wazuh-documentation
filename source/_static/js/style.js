@@ -96,6 +96,7 @@ $(function(){
 				if (href.indexOf(category+'/index.html') > 0 || href.indexOf(category+'/#') > 0){
 					$(this).css('display', 'none');
 				}
+
         if ( href.indexOf(category) < 0 ){
           $(this).closest('.toctree-l1').css('display', 'none');
         } else {
@@ -104,6 +105,7 @@ $(function(){
       });
     } else {
 			$('.toctree-l1').css('display', 'block');
+			gTocElement.find('a').css('display', 'block');
 		}
 
   }

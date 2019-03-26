@@ -300,7 +300,7 @@ header .menuweb-bar .menu-item a {
 }
 
 #capabilities {
-    margin-top: 1em;
+  margin-top: 1em;
 }
 
 #capabilities > p {
@@ -314,6 +314,16 @@ header .menuweb-bar .menu-item a {
 #carouselWazuhDocu{
   width: 100%;
   margin: 1rem auto 2rem auto;
+}
+
+.navigation-buttons {
+  border-top: 1px solid rgba(0, 169, 229, 0.2);
+}
+
+.navigation-buttons .btn {
+  padding: 15px 0;
+  font-size: .88rem;
+  white-space: normal;
 }
 
 footer {
@@ -430,7 +440,7 @@ li.toctree-l4 > a {
 
 #globaltoc > ul {
   border-top: 1px solid rgba(0, 169, 229, 0.2);
-  padding-top: 15px;
+  padding: 10px 0;
 }
 
 .globaltoc li.toctree-l1 a:hover {
@@ -439,7 +449,7 @@ li.toctree-l4 > a {
 
 .globaltoc li.toctree-l1 > a {
   display: block;
-  padding: 0.5em 2.2em 0.5em 1.2rem;
+  padding: 0.5em 2.2em 0.5em 0.7rem;
 }
 
 li.toctree-l2 > a {
@@ -479,6 +489,7 @@ ul li.toctree-l1 a.current.reference.internal:after {
   color: #00a9e5;
 }
 
+.globaltoc li.toctree-l1 > ul,
 .globaltoc li.toctree-l2 > ul,
 .globaltoc li.toctree-l3 > ul {
 	padding-left: 1.2em;
@@ -3113,7 +3124,7 @@ div.highlight pre {
           }
 
           #main-content {
-            padding-left: 60px;
+            padding-left: 30px;
           }
 
           #welcome-to-wazuh .topic,
