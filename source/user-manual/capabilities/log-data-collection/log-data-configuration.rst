@@ -8,9 +8,6 @@ Configuration
 #. `Basic usage`_
 #. `Monitoring logs using regular expressions for file names`_
 #. `Monitoring date-based logs`_
-#. `Reading logs from Windows Event Log`_
-#. `Reading events from Windows Event Channel`_
-#. `Filtering events from Windows Event Channel with queries`_
 #. `Using environment variables`_
 #. `Using multiple outputs`_
 
@@ -46,76 +43,6 @@ For log files that change according to the date, you can also specify a **strfti
         <location>C:\Windows\app\log-%y-%m-%d.log</location>
         <log_format>syslog</log_format>
     </localfile>
-
-Reading logs from Windows Event Log
------------------------------------
-
-To monitor a Windows event log, you need to provide the format as "eventlog" and the location as the name of the event log::
-
-  <localfile>
-      <location>Security</location>
-      <log_format>eventlog</log_format>
-  </localfile>
-
-Reading events from Windows Event Channel
------------------------------------------
-
-You can additionally monitor specific Windows event channels.  The location is the name of the event channel. This is the only way to monitor the Applications and Services logs. If the file name contains a "%", replace it with "/"::
-
-    <localfile>
-        <location>Microsoft-Windows-PrintService/Operational</location>
-        <log_format>eventchannel</log_format>
-    </localfile>
-
-The ``eventchannel`` log format has been enhanced for Wazuh v3.8.0 with a new event data processing, keeping the old functionality and configuration. It allows to monitor every event generated at any Windows agent, returning every channel’s information in JSON format. As the old eventchannel, with this log_format the channels can be queried, filtering by event ID, process, logon type, or any other field contained in the generated event, giving the possibility to retrieve only the desired events.
-
-This new option uses the JSON decoder to draw the event fields, ensuring a new way to add rules easier than before. The default channels included at the Wazuh ruleset are Application, Security, System, Microsoft-Windows-Sysmon/Operational, Microsoft Antimalware (Microsoft Security Essentials), Microsoft-Windows-Windows Defender/Operational and Microsoft-Windows-Eventlog.
-
-Some sample events from Windows eventchannel are shown in the next images:
-
-.. thumbnail:: ../../../images/manual/log_analysis/windows_events.png
-    :title: Windows events
-    :align: center
-    :width: 100%
-
-The following image represents the number of events of each channel, filtered by provider name along the time.
-
-.. thumbnail:: ../../../images/manual/log_analysis/windows_alerts.png
-    :title: Number of events by provider name along the time
-    :align: center
-    :width: 100%
-
-Filtering events from Windows Event Channel with queries
---------------------------------------------------------
-
-Events from the Windows Event channel can be filtered as below::
-
-    <localfile>
-      <location>System</location>
-      <log_format>eventchannel</log_format>
-      <query>Event/System[EventID=7040]</query>
-    </localfile>
-
-Filtering events from Windows Event Channel based on severity and queries
--------------------------------------------------------------------------
-
-Users can filter events with different severity levels:
-
-    .. code-block:: xml
-
-        <localfile>
-            <location>System</location>
-            <log_format>eventchannel</log_format>
-            <query>
-                \<QueryList>
-                    \<Query Id="0"\ Path="System">
-                        \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
-                    \</Query>
-                \</QueryList>
-            </query>
-        </localfile>
-
-In this example, only events which levels are less or equal to "3" are checked.
 
 Using environment variables
 ---------------------------
