@@ -70,7 +70,7 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
   .. code-block:: none
 
-    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
+    # "C:\Program Files (x86)"\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
 
 Password authorization
 ----------------------
@@ -114,7 +114,7 @@ To enable the password authorization, use the ``-P`` flag when running the regis
     .. code-block:: console
 
       # echo abcd1234 > C:\Program Files (x86)\ossec-agent\authd.pass
-      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
+      # "C:\Program Files (x86)"\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
 
   * Run the program with the ``-P`` flag, and insert the password:
 
@@ -128,7 +128,7 @@ To enable the password authorization, use the ``-P`` flag when running the regis
 
     .. code-block:: none
 
-      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -P "abcd1234"
+      # "C:\Program Files (x86)"\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS> -P "abcd1234"
 
 .. _verify-hosts:
 
@@ -178,7 +178,7 @@ Manager verification using SSL
   .. code-block:: console
 
     # cp rootCA.pem C:\Program Files (x86)\ossec-agent
-    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
+    # "C:\Program Files (x86)"\ossec-agent\agent-auth.exe -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
 
 Agent verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -215,7 +215,7 @@ In this example, we are going to create a certificate for agents without specify
   .. code-block:: console
 
     # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
-    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+    # "C:\Program Files (x86)"\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
 **Agent verification (with host validation)**
 
@@ -249,7 +249,7 @@ This is an alternative method to the previous one. In this case, we will bind th
   .. code-block:: console
 
     # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
-    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+    # "C:\Program Files (x86)"\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
 Additional configurations
 -------------------------
