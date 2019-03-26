@@ -260,15 +260,15 @@ Specifies the format of the log to be read. **field is required**
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | apache             | Used for Apache's default log format.                                                            |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | command            | Used to read the output from the command (as run by root) specified by the command tag.              |
+|                    | command            | Used to read the output from the command (as run by root) specified by the command tag.          |
 |                    |                    |                                                                                                  |
-|                    |                    | Each line of output is treated as a separate log.                                             |
+|                    |                    | Each line of output is treated as a separate log.                                                |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | full_command       | Used to read the output from the command (as run by root) specified by the command tag.              |
+|                    | full_command       | Used to read the output from the command (as run by root) specified by the command tag.          |
 |                    |                    |                                                                                                  |
 |                    |                    | The entire output will be treated as a single log item.                                          |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | djb-multilog       | Used to read files in the format produced by the multi-log service logger in daemon tools.         |
+|                    | djb-multilog       | Used to read files in the format produced by the multi-log service logger in daemon tools.       |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | multi-line         | Used to monitor applications that log multiple lines per event.                                  |
 |                    |                    |                                                                                                  |
