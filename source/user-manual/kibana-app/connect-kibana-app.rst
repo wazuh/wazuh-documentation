@@ -19,20 +19,7 @@ Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kiban
     :align: center
     :width: 100%
 
-3. To protect your Wazuh API, before filling out the fields, open a terminal on your Wazuh manager and, using the ``root`` user, replace the default credentials with your desired username where ``myUsername`` is shown below:
-
-  .. code-block:: console
-
-    # cd /var/ossec/api/configuration/auth
-    # node htpasswd -c user myUserName
-
-  Do not forget to restart the API to apply the changes with these commands:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-api
-    or
-    # service wazuh-api restart
+3. To protect your Wazuh API, follow the :ref:`securing_api` section.
 
 4. Fill in the *Username* and *Password* fields with the credentials you created in the previous step. Enter ``http://MANAGER_IP`` for the *URL* field where ``MANAGER_IP`` is the real IP address of the Wazuh manager and enter "55000" for the *Port* field.
 

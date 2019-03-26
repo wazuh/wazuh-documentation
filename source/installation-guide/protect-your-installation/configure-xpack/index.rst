@@ -37,6 +37,12 @@ Follow these steps to enable X-Pack:
 
     # systemctl restart elasticsearch
 
+  or
+
+  .. code-block:: console
+
+    # service elasticsearch restart
+
   It's important to wait until Elasticsearch finishes loading. Check the current status with the following command:
 
   .. code-block:: console
@@ -104,6 +110,12 @@ Follow these steps to enable X-Pack:
   .. code-block:: console
 
     # systemctl restart kibana
+
+  or
+
+  .. code-block:: console
+
+    # service kibana restart
 
 9. Login into the Kibana interface using the ``elastic`` user when prompted. Now you can continue configuring X-Pack Security on the following sections.
 
