@@ -10,8 +10,7 @@ X-Pack provides RBAC (role based access control) capabilities, among other featu
 In this `link <https://www.elastic.co/products/x-pack>`_ you can learn more about the X-Pack features for the Elastic Stack, and all the advanced capabilities that add to your Elastic installation.
 
 .. note::
-
-    As of the 6.3.0 version of the Elastic Stack, X-Pack comes pre-installed on the Elastic products. You can read more about this on their `announcement <https://www.elastic.co/blog/elastic-stack-6-3-0-released>`_.
+  As of the 6.3.0 version of the Elastic Stack, X-Pack comes installed with Logstash. 
 
 .. warning::
 

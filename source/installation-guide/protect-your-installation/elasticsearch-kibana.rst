@@ -14,7 +14,7 @@ To secure Kibana, we are going to evaluate 3 different services:
 Using NGINX
 -----------
 
-By default, the communication between Kibana (including the Wazuh app) and the web browser on end-user systems is not encrypted. It’s strongly recommended that Kibana be configured to use SSL encryption and to enable authentication.  In this section, we will describe how this can be done with an NGINX setup.
+By default, the communication between Kibana (including the Wazuh app) and the web browser on end-user systems is not encrypted. It’s strongly recommended that Kibana be configured to use SSL encryption and to enable authentication. In this section, we will describe how to do this with an NGINX setup.
 
 NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption. In this example, we will use it as a reverse proxy to provide encrypted and authenticated access to Kibana to the end users.
 
@@ -106,25 +106,34 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
 
     # cat > /etc/nginx/conf.d/default.conf <<\EOF
     server {
-        listen 80;
-        listen [::]:80;
-        return 301 https://$host$request_uri;
-    }
+          listen 80;
+            listen 80;
+          listen [::]:80;
+            listen [::]:80;
+          return 301 https://$host$request_uri;
+            return 301 https://$host$request_uri;
+      }
+        }
 
-    server {
-        listen 443 default_server;
-        listen            [::]:443;
-        ssl on;
-        ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
-        ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
-        access_log            /var/log/nginx/nginx.access.log;
-        error_log            /var/log/nginx/nginx.error.log;
-        location / {
+        server {
+            listen 443 default_server;
+            listen            [::]:443;
+            ssl on;
+            ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
+            ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+            access_log            /var/log/nginx/access.log;
+            error_log            /var/log/nginx/error.log;
             auth_basic "Restricted";
             auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            proxy_pass http://kibana-server-ip:5601/;
+            location / {
+                proxy_pass http://localhost:5601/;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+            }
         }
-    }
     EOF
 
   .. note::
@@ -213,25 +222,34 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
 
     # cat > /etc/nginx/sites-available/default <<\EOF
     server {
-        listen 80;
-        listen [::]:80;
-        return 301 https://$host$request_uri;
-    }
-
-    server {
-        listen 443 default_server;
-        listen            [::]:443;
-        ssl on;
-        ssl_certificate /etc/ssl/certs/kibana-access.pem;
-        ssl_certificate_key /etc/ssl/private/kibana-access.key;
-        access_log            /var/log/nginx/nginx.access.log;
-        error_log            /var/log/nginx/nginx.error.log;
-        location / {
-            auth_basic "Restricted";
-            auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            proxy_pass http://kibana-server-ip:5601/;
+            listen 80;
+              listen 80;
+            listen [::]:80;
+              listen [::]:80;
+            return 301 https://$host$request_uri;
+              return 301 https://$host$request_uri;
         }
-    }
+          }
+
+          server {
+              listen 443 default_server;
+              listen            [::]:443;
+              ssl on;
+              ssl_certificate /etc/pki/tls/certs/kibana-access.pem;
+              ssl_certificate_key /etc/pki/tls/private/kibana-access.key;
+              access_log            /var/log/nginx/access.log;
+              error_log            /var/log/nginx/error.log;
+              auth_basic "Restricted";
+              auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+              location / {
+                  proxy_pass http://localhost:5601/;
+                  proxy_http_version 1.1;
+                  proxy_set_header Upgrade $http_upgrade;
+                  proxy_set_header Connection 'upgrade';
+                  proxy_set_header Host $host;
+                  proxy_cache_bypass $http_upgrade;
+              }
+          }
     EOF
 
   .. note::

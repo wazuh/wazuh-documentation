@@ -27,7 +27,7 @@ Regardless of what authentication method you use, the basic flow is as follows:
 
 - Search Guard determines the permissions associated with the Search Guard role and decides whether the action the user wants to perform is allowed or not.
 
-- If your are using document and field level security, you can also apply more fine grained permissions based on documents and individual fields.
+- If you are using document and field level security, you can also apply more fine grained permissions based on documents and individual fields.
 
 Setting up Search Guard for Logstash
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
