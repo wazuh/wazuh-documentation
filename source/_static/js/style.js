@@ -18,6 +18,10 @@ $(function(){
       gTocSpaceTop = $('#search-lg').height();
   var breakpoint = 992;
 
+  changeVerionPosition($(window).width());
+  changeSearchPosition($(window).width());
+  //adjustSearchbarIndex();
+
 	// Finds current page section in globaltoc
 	$('.globaltoc .toctree-l2.current a').each(function(e){
 		if (!$(this).siblings('ul').length){
@@ -109,5 +113,56 @@ $(function(){
 		 var curWidth = $(this).width();
      $('table').removeClass('table-responsive');
      reponsiveTables();
+     changeVerionPosition(curWidth);
+     changeSearchPosition(curWidth);
 	 });
+
+	function changeVerionPosition (currentWidth) {
+		if (currentWidth >= breakpoint) {
+			versionToDesktop();
+		} else {
+			versionToMobile();
+		}
+	}
+
+  function versionToDesktop (){
+    var vSelector = $('.release-selector-wrapper');
+    if (vSelector.closest('#main-navbar').length > 0 ){
+      // Selector in #main-navbar: change to .version-zone:
+      vSelector.appendTo($('.version-zone'));
+    }
+  }
+
+	function versionToMobile (){
+		var vSelector = $('.release-selector-wrapper');
+		if (vSelector.closest('.version-zone').length > 0 ){
+			// Selector in .version-zone: change to #main-navbar
+			vSelector.appendTo($('#main-navbar'));
+		}
+
+	}
+
+  function changeSearchPosition (currentWidth){
+    if (currentWidth >= breakpoint) {
+			searcbarToDesktop();
+		} else {
+			searcbarToMobile();
+		}
+  }
+
+  function searcbarToDesktop(){
+    var searchbar = $('.search_main');
+    if (searchbar.closest('.blue-bar').length > 0 ){
+      // Search bar in .blue-bar .container: change to #search-lg
+      searchbar.appendTo($('#search-lg'));
+    }
+  }
+
+  function searcbarToMobile(){
+    var searchbar = $('.search_main');
+    if (searchbar.closest('#search-lg').length > 0 ){
+      // Search bar in #search-lg: change to .blue-bar .container:
+      searchbar.appendTo($('.blue-bar'));
+    }
+}
 });

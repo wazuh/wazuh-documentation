@@ -32,13 +32,6 @@
           <li class="menu-item nav-item"><a class="nav-link" href={{ theme_wazuh_web_url + '/contact-us/' }}>Contact us</a></li>
         </ul>
       </nav>
-      <div class="version-zone d-flex">
-        <span class="release-selector-wrapper">
-          {% if theme_display_version %}
-          {% include "versions.html" %}
-          {% endif %}
-        </span>
-      </div>
     </div>
 
   </div>
@@ -65,9 +58,14 @@
             <li class="menu-item nav-item"><a class="nav-link" href="#">Contribute</a></li>
           </ul>
         </div>
-        <div id="search-lg" class="title-bar-right col-lg-12 collapsed">
-          {% include "searchbar.html" %}
-        </div> <!-- // #search-lg -->
+        <div class="version-zone d-flex">
+          <span class="release-selector-wrapper">
+            {% if theme_display_version %}
+            <span class="version-label d-none d-sm-inline">Wazuh version</span>
+            {% include "versions.html" %}
+            {% endif %}
+          </span>
+        </div>
       </div>
 
 

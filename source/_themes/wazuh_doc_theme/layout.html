@@ -121,8 +121,14 @@
     <section  class="container-fluid central-page-area">
       <div class="row">
         {% if pagename != 'index' %}
-        <nav class="full-toctree-nav navbar-expand-lg navbar-light">
+        <nav class="full-toctree-nav navbar-expand-lg navbar-light order-1">
           <div class="side-scroll collapse navbar-collapse" id="navbar-globaltoc">
+            <div id="search-lg" class="title-bar-right col-lg-12 collapsed">
+              {% include "searchbar.html" %}
+            </div> <!-- // #search-lg -->
+            <div class="edit-repo-wrapper">
+              {% include "editrepo.html" %}
+            </div>
             <div class="globaltoc" role="navigation" aria-label="main navigation" id="globaltoc">
               {% block menu %}
               {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
@@ -130,20 +136,27 @@
               {{ toctree }}
               {% else %}
               <!-- Local TOC -->
-              <!-- <div class="local-toc">{{ toc }}</div> -->
+              <div class="local-toc">{{ toc }}</div>
               {% endif %}
               {% endblock %}
             </div>
+            <aside class="help col-12">
+              <div class="title">
+                Getting help
+              </div>
+              <p>In our Google group, you can ask questions and participate in discussions. Share your doubts and thoughts with the community. <a href="mailto:wazuh+subscribe@googlegroups.com">Join our mailing list</a>.</p>
+              <p>Another way to connect with us. <a title="Join us on Slack" href="https://wazuh.com/community/join-us-on-slack/">Join our #community Slack channel</a> to ask your questions and we will do our best to solve your doubts.</p>
+            </aside>
           </div>
+
         </nav>
         {% endif %}
 
-        <div id="main-content" class="col-12">
+        <div id="main-content" class="col-12 order-0">
           {% if pagename != 'index' %}
           <div class="breadcrumbs-wrapper">
             {% include "breadcrumbs.html" %}
           </div>
-          {% include "editrepo.html" %}
           {% endif %}
 
           {# Main content #}

@@ -26,14 +26,14 @@
 
 {% block breadcrumbs_aside %}
 {% if display_github or display_bitbucket or display_gitlab  %}
-  <span class="edit-repo d-none d-lg-inline-block">
+  <span class="edit-repo d-none d-sm-inline-block">
     {% if hasdoc(pagename) %}
     {% if display_github %}
     {% if check_meta and 'github_url' in meta %}
     <!-- User defined GitHub URL -->
-    <a href="{{ meta['github_url'] }}"> <i class="fa fa-github" aria-hidden="true"></i> {{ _('Edit') }}</a>
+    <a href="{{ meta['github_url'] }}"> <i class="fa fa-pencil" aria-hidden="true"></i> {{ _('Edit on GitHub') }}</a>
     {% else %}
-    <a href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"> <i class="fa fa-github" aria-hidden="true"></i> {{ _('Edit') }}</a>
+    <a href="https://{{ github_host|default("github.com") }}/{{ github_user }}/{{ github_repo }}/{{ theme_vcs_pageview_mode|default("blob") }}/{{ github_version }}{{ conf_py_path }}{{ pagename }}{{ suffix }}"> <i class="fa fa-pencil" aria-hidden="true"></i> {{ _('Edit on GitHub') }}</a>
     {% endif %}
     {% elif display_bitbucket %}
     {% if check_meta and 'bitbucket_url' in meta %}
