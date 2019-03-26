@@ -425,7 +425,12 @@ li.toctree-l4 > a {
 }
 
 #globaltoc {
-  margin-bottom: 1.2em;
+  padding: 0 15px;
+}
+
+#globaltoc > ul {
+  border-top: 1px solid rgba(0, 169, 229, 0.2);
+  padding-top: 15px;
 }
 
 .globaltoc li.toctree-l1 a:hover {
@@ -457,10 +462,15 @@ li.toctree-l4 > a {
   width: 100%;
 }
 
+.globaltoc > ul {
+  padding-top: 15px;
+  border-top: 1px solid rgba(0, 169, 229, 0.2);
+}
+
 ul li.toctree-l1 a.current.reference.internal,
 ul li.toctree-l1 .current > .leaf {
   color: #00a9e5;
-  background: #f0f0f0;
+  background: #ffffff;
   border-left: 3px solid #00a9e5;
 }
 
@@ -469,7 +479,6 @@ ul li.toctree-l1 a.current.reference.internal:after {
   color: #00a9e5;
 }
 
-.globaltoc li.toctree-l1 > ul,
 .globaltoc li.toctree-l2 > ul,
 .globaltoc li.toctree-l3 > ul {
 	padding-left: 1.2em;
@@ -478,7 +487,7 @@ ul li.toctree-l1 a.current.reference.internal:after {
 .globaltoc li.toctree-l2 > a,
 .globaltoc li.toctree-l3 > a,
 .globaltoc li.toctree-l4 > a {
-	padding-left: 1rem;
+	padding-left: 0.75rem;
 }
 
 .globaltoc li.toctree-l1.current > a,
@@ -542,7 +551,7 @@ main li.toctree-l1 a {
 aside.help .title {
   color: #333;
   font-size: 1.2rem;
-  padding: 7px 15px;
+  padding: 15px 0;
   border-top: 1px solid rgba(0, 169, 229, 0.2);
 }
 
@@ -1099,11 +1108,6 @@ footer .contact-info .fa-paper-plane-o {
   z-index: 1;
   width: 100%;
 }
-
-.globaltoc > ul {
-	bottom: 0;
-}
-
 .widget_text .textwidget {
   font-weight: 400;
 }
@@ -2186,6 +2190,8 @@ ul#breadcrumbs a {
 
 .edit-repo {
   font-size: 0.87rem;
+  width: 100%;
+  padding: 15px;
 }
 
 .edit-repo a {
@@ -2226,7 +2232,8 @@ div.highlight pre {
 @media (min-width:576px){
 
   .edit-repo-wrapper {
-    padding: 10px 15px;
+    padding: 0 15px;
+    width: 100%;
   }
 
   h1.smaller-title {
@@ -2941,8 +2948,8 @@ div.highlight pre {
 
       aside.help {
         -webkit-box-flex: 0;
-            -ms-flex: none;
-                flex: none;
+            -ms-flex: 0 0 auto;
+                flex: 0 0 auto;
       }
 
       .central-page-area {
@@ -2953,7 +2960,7 @@ div.highlight pre {
 			}
 
 			#main-content {
-				padding-left: 30px;
+				padding-right: 30px;
         max-width: calc(100% - 320px);
 			}
 
@@ -3083,9 +3090,7 @@ div.highlight pre {
       }
 
       #globaltoc {
-        height: 100%;
         width: 100%;
-        padding-right: 0;
       }
 
       #search-lg {

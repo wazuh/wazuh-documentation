@@ -82,8 +82,7 @@ $(function(){
 		category = document.location.pathname.split('/')[2]; // [2] The URL contains the version; [1]	for URLs without version
 		category = (category.indexOf('.') < 0)?category:'';
 
-    console.log($('#select-version').val());
-		$('#menu-submenu').find('li').each(function(){
+    $('#menu-submenu').find('li').each(function(){
 			if ($(this).children('a').attr('href').indexOf(category) >= 0 && category.length > 0 ) {
 				$(this).addClass('active');
 			} else {
@@ -103,7 +102,10 @@ $(function(){
           $(this).closest('.toctree-l1').css('display', 'block');
         }
       });
-    }
+    } else {
+			$('.toctree-l1').css('display', 'block');
+		}
+
   }
 
    currentToc();
@@ -115,6 +117,7 @@ $(function(){
      reponsiveTables();
      changeVerionPosition(curWidth);
      changeSearchPosition(curWidth);
+		 currentToc();
 	 });
 
 	function changeVerionPosition (currentWidth) {
