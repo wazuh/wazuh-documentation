@@ -103,6 +103,7 @@ Added *-t* and *-c* options for the Wazuh cluster daemon. Those options allow th
 - Prevent *Integrator, Syslog Client and Mail forwarded* from getting stuck while reading ``alerts.json``.
 - Vulnerability detector module now checks that the alerts severity has been unified and it also checks the if the database is empty before starting a new scan.
 - Labels starting with ``_`` are now reserved for internal use only.
+- Make the Windows installer to choose the appropriate ``ossec.conf`` file based on the system version. 
 
 Wazuh API
 ---------
