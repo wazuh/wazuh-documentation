@@ -30,7 +30,7 @@ You can additionally monitor specific Windows event channels. The location is th
         <log_format>eventchannel</log_format>
     </localfile>
 
-The ``eventchannel`` log format has been enhanced for Wazuh v3.8.0 with a new event data processing, keeping the old functionality and configuration. It allows to monitor every event generated at any Windows agent, returning every channel’s information in JSON format. As the old eventchannel, with this log_format the channels can be queried, filtering by event ID, process, logon type, or any other field contained in the generated event, giving the possibility to retrieve only the desired events.
+The ``eventchannel`` log format has been enhanced for Wazuh v3.8.0 with a new event data processing, keeping the old functionality and configuration. It allows monitoring every event generated at any Windows agent, returning every channel’s information in JSON format. As the old eventchannel, with this log_format the channels can be queried, filtering by event ID, process, logon type, or any other field contained in the generated event, giving the possibility to retrieve only the desired events.
 
 This new option uses the JSON decoder to draw the event fields, ensuring a new way to add rules easier than before.
 
@@ -52,13 +52,13 @@ The following image represents the number of events of each channel, filtered by
 The default channels included at the ruleset are described below:
 
 - Application. This log retrieves every event related to system applications management and is one of the main Windows administrative channels along with Security and System.
-- Security. This channel gathers information related to user and group creation, login, logoff and audit policy modifications.
-- System. The System channel collects events associated to kernel and service control.
+- Security. This channel gathers information related to users and groups creation, login, logoff and audit policy modifications.
+- System. The System channel collects events associated with kernel and service control.
 - Sysmon. Sysmon monitors system activity as process creation and termination, network connection and file changes.
 - Windows Defender. The Windows Defender log file shows information about the scans passed, malware detection and actions taken against them.
 - McAfee. This source shows McAfee scan results, virus detection and actions taken against them.
 - Eventlog. This source retrieves information about audit and Windows logs.
-- Microsoft Security Essentials. This software gives information about real time protection for the system, malware-detection scans and antivirus settings.
+- Microsoft Security Essentials. This software gives information about real-time protection for the system, malware-detection scans and antivirus settings.
 - Other channel rules which are not that common are stored in a different file, 0615-win-generic_rules.xml. At the time the channels monitored for the rules contained in that file are File Replication Service and every sub-channel related to Microsoft-Windows-TerminalServices.
 
 The different channels contemplated at the ruleset can be filtered at the configuration localfile block as the table from below shows in the 'channel location' column:
