@@ -20,7 +20,7 @@ Wazuh core
 
 Added a new module named Security Configuration Assessment (SCA), this module enriches our hardening features. Policy files are now in YAML format so you can read or edit them in a painless way. Each policy is used to perform a different scan, the result is then stored, so the user can look at the results using the Wazuh API or the Wazuh app.
 
-Every time a scan is done, Wazuh looks for the differences between the last scan and the current scan, if they differ, then Wazuh generates the proper alert. Also, every scan generates other kind of alerts with statistical information about the scan itsefl and its results.
+Every time a scan is done, Wazuh looks for the differences between the last scan and the current scan, if they differ, then Wazuh generates the proper alert. Also, every scan generates another kind of alerts with statistical information about the scan itself and its results.
 
 Here is an example that runs a scan the 15th of every month:
 
@@ -70,7 +70,7 @@ Since Wazuh 3.8.0, Wazuh has a healthcheck for FIM who-data, it checks if the Au
 
 With this enhancement, it is possible getting logs for created organizations by adding ``<aws_organization_id>ORGANIZATION</aws_organization_id>`` in the wodle configuration. 
 
-Here is an example on how to configure this new AWS capability:
+Here is an example of how to configure this new AWS capability:
 
 .. code-block:: xml
 
@@ -101,7 +101,7 @@ Added *-t* and *-c* options for the Wazuh cluster daemon. Those options allow th
 - Wazuh manager starts regardless of the contents of ``local_decoder.xml``. 
 - Fixed memory leak and crash in *Vulnerability Detector*.
 - Prevent *Integrator, Syslog Client and Mail forwarded* from getting stuck while reading ``alerts.json``.
-- Vulnerability detector module now checks that the alerts severity has been unified and it also checks the if the database is empty before starting a new scan.
+- Vulnerability detector module now checks that the alerts severity has been unified and it also checks if the database is empty before starting a new scan.
 - Labels starting with ``_`` are now reserved for internal use only.
 - Make the Windows installer to choose the appropriate ``ossec.conf`` file based on the system version. 
 
