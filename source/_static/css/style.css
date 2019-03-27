@@ -97,10 +97,6 @@ th {
           flex-direction: row;
 }
 
-.header .main-head {
-  position: relative;
-}
-
 .header .menuweb-bar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -432,12 +428,6 @@ li.toctree-l4 > a {
 
 #globaltoc {
   padding: 0 15px;
-  margin-top: 8px;
-}
-
-#globaltoc > ul {
-  border-top: 1px solid rgba(0, 169, 229, 0.2);
-  padding: 10px 0;
 }
 
 .globaltoc li.toctree-l1 a:hover {
@@ -467,11 +457,6 @@ li.toctree-l4 > a {
 .globaltoc ul {
   display: block;
   width: 100%;
-}
-
-.globaltoc > ul {
-  padding-top: 15px;
-  border-top: 1px solid rgba(0, 169, 229, 0.2);
 }
 
 ul li.toctree-l1 a.current.reference.internal,
@@ -556,11 +541,8 @@ main li.toctree-l1 a {
   display: inline-block;
 }
 
-aside.help .title {
-  color: #333;
-  font-size: 1.2rem;
-  padding: 15px 0;
-  border-top: 1px solid rgba(0, 169, 229, 0.2);
+aside.help {
+	display: none;
 }
 
 #accordion-capabilities .collapse:not(.show) {
@@ -602,8 +584,6 @@ aside.help .title {
   color: #ffffff;
 	border-radius: 0;
 	padding: 0.5rem 0.85rem;
-	position: relative;
-	z-index: 1;
 }
 
 #accordion-capabilities .card-header .btn-accordion:focus {
@@ -2915,13 +2895,24 @@ div.highlight pre {
                 justify-content: space-between;
       }
 
-      .header .main-head{
-        padding-top: 2em;
-        padding-bottom: 3em;
+      #globaltoc {
+        margin-top: 8px;
       }
 
-			.header .main-head > div {
-				height: 72px;
+      #globaltoc > ul {
+        border-top: 1px solid rgba(0, 169, 229, 0.2);
+        padding: 10px 0;
+      }
+
+			aside.help {
+				display: block;
+			}
+
+			aside.help .title {
+				color: #333;
+				font-size: 1.2rem;
+				padding: 15px 0;
+				border-top: 1px solid rgba(0, 169, 229, 0.2);
 			}
 
       #main-navbar {
