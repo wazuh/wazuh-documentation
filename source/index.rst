@@ -11,88 +11,6 @@ Welcome to Wazuh
 
 .. rst-class:: row
 
--------
-Content
--------
-
-.. rst-class:: content-card col-sm-6 col-lg-4
-
-:ref:`getting_started`
-======================
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-- :ref:`installation_guide`
-- :ref:`components`
-- :ref:`architecture`
-- :ref:`use_cases`
-
-.. rst-class:: content-card col-sm-6 col-lg-4
-
-:ref:`user_manual`
-==================
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-- :ref:`user_manual_overview`
-- :ref:`register_agents`
-- :ref:`capabilities`
-- :ref:`ruleset`
-- :ref:`api`
-
-.. rst-class:: content-card col-sm-6 col-lg-4
-
-Deployment
-==========
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-- :ref:`wazuh_docker`
-- :ref:`wazuh_puppet`
-- :ref:`wazuh_ansible`
-
-.. rst-class:: content-card col-sm-6 col-lg-4
-
-Utilities
-=========
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-- :ref:`pci_dss`
-- :ref:`gdpr`
-- :ref:`amazon`
-- :ref:`azure`
-- :ref:`docker-monitor-index`
-
-.. rst-class:: content-card col-sm-6 col-lg-4
-
-Wazuh Cloud
-===========
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-- First steps
-- Wazuh Cloud FAQ
-- Support and troubleshooting
-- Terms and conditions
-- Try Wazuh Cloud for free
-
-.. rst-class:: content-card col-sm-6 col-lg-4
-
-:ref:`release_notes`
-====================
-
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-- :ref:`Wazuh 3.8.2 <release_3_8_2>`
-- :ref:`Wazuh 3.8.1 <release_3_8_1>`
-- :ref:`Wazuh 3.8 <release_3_8_0>`
-- :ref:`Wazuh 3.7.2 <release_3_7_2>`
-- :ref:`Wazuh 3.7.1 <release_3_7_1>`
-
-
-.. rst-class:: row
-
 ------------
 Capabilities
 ------------
@@ -121,6 +39,13 @@ Wazuh helps you to gain deeper security visibility into your infrastructure by m
 
     Wazuh monitors configuration files to ensure they are compliant with your security policies, standards and/or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, unpatched, or insecurely configured.
 
+.. rst-class:: col-12
+
+  This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic Stack into a unified solution and simplifying their configuration and management.
+
+  Wazuh provides an updated log analysis ruleset and a RESTful API that allows you to monitor the status and configuration of all Wazuh agents.
+
+  Wazuh also includes a rich web application (fully integrated as a Kibana app) for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
 
 -----------
 Screenshots
@@ -188,12 +113,6 @@ Screenshots
   </a>
   </div>
   </div>
-
-This diverse set of capabilities is provided by integrating OSSEC, OpenSCAP and Elastic Stack into a unified solution and simplifying their configuration and management.
-
-Wazuh provides an updated log analysis ruleset and a RESTful API that allows you to monitor the status and configuration of all Wazuh agents.
-
-Wazuh also includes a rich web application (fully integrated as a Kibana app) for mining log analysis alerts and for monitoring and managing your Wazuh infrastructure.
 
 -----------------------
 Available documentation

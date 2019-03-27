@@ -2991,10 +2991,6 @@ div.highlight pre {
         width: calc(100% - 60px);
       }
 
-      #capabilities {
-        margin-top: 2rem;
-      }
-
       #welcome-to-wazuh .topic {
         margin-bottom: 1em;
       }
