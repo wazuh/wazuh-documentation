@@ -299,10 +299,6 @@ header .menuweb-bar .menu-item a {
   padding-right: 1em;
 }
 
-#capabilities {
-  margin-top: 1em;
-}
-
 #capabilities > p {
   margin-bottom: 2rem;
 }
@@ -567,10 +563,83 @@ aside.help .title {
   border-top: 1px solid rgba(0, 169, 229, 0.2);
 }
 
-#page #welcome-to-wazuh .topic .topic-title {
+#accordion-capabilities .collapse:not(.show) {
+  display: block;
+}
+
+#accordion-capabilities {
+	margin-bottom: 2em;
+}
+
+#accordion-capabilities .card {
+	border-radius: 0;
+	border: none;
+	margin-bottom: 2px;
+}
+
+#accordion-capabilities .card-header {
+	position: relative;
+}
+
+#accordion-capabilities .card-header,
+#accordion-capabilities .card-body {
+	padding: 0;
+	border: none;
+}
+
+#accordion-capabilities .card-header .btn-accordion,
+#accordion-capabilities .card-header .capability-title {
+	font-family: 'Montserrat', sans-serif;
   font-size: 18px;
+	display: block;
+	width: 100%;
+	text-align: left;
+}
+
+#accordion-capabilities .card-header .btn-accordion {
+	font-size: 18px;
+	background-color: #00a9e5;
+  color: #ffffff;
+	border-radius: 0;
+	padding: 0.5rem 0.85rem;
+	position: relative;
+	z-index: 1;
+}
+
+#accordion-capabilities .card-header .capability-title {
+	font-size: 1.2rem;
+	background-color: #ffffff;
   color: #333333;
-  vertical-align: middle;
+	padding: 0.5rem 0;
+}
+
+#accordion-capabilities .card-header .btn-accordion:after {
+	color: #ffffff;
+  content: '\f106';
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  font: normal normal normal 1.5em/.5 FontAwesome;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 15px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#accordion-capabilities .card-header .btn-accordion.collapsed:after {
+	content: '\f107';
+}
+
+#accordion-capabilities .card-text {
+	padding-top: 15px;
+}
+
+#accordion-capabilities .card-image img {
+	max-width: 450px;
+  margin: 3px auto 0 auto;
 }
 
 .index h2,
@@ -2242,6 +2311,14 @@ div.highlight pre {
     padding: 0 15px;
     width: 100%;
   }
+
+	#accordion-capabilities .collapse:not(.show) {
+		display: none;
+	}
+
+	#accordion-capabilities .card-text {
+		padding: 15px 30px 0 30px;
+	}
 
   h1.smaller-title {
     font-size: 1.2em!important;
