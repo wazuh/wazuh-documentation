@@ -101,7 +101,7 @@ event_location
 
 This filters alerts by where the event originated. Follows the `OS_Regex Syntax`_.
 
-.. _`OS_Regex Syntax`: http://ossec-docs.readthedocs.org/en/latest/syntax/regex.html
+.. _`OS_Regex Syntax`: https://documentation.wazuh.com/current/user-manual/ruleset/ruleset-xml-syntax/regex.html
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | n/a                                                       |
