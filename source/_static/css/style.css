@@ -606,6 +606,11 @@ aside.help .title {
 	z-index: 1;
 }
 
+#accordion-capabilities .card-header .btn-accordion:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
 #accordion-capabilities .card-header .capability-title {
 	font-size: 1.2rem;
 	background-color: #ffffff;
