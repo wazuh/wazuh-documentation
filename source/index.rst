@@ -86,5 +86,6 @@ Available documentation
    installing-splunk/index
    migrating-from-ossec/index
    release-notes/index
+   wazuh-cloud/index
 
 .. note:: If you want to contribute to this documentation or our project please head over to our `Github repositories <https://github.com/wazuh>`_. You can also join our `users mailing list <https://groups.google.com/d/forum/wazuh>`_ to ask questions and participate in discussions by sending an email to ``wazuh+subscribe@googlegroups.com``.
