@@ -17,7 +17,7 @@ To Sign Up to the Wazuh Cloud Service just fill the form in the `Official page <
 How do I register an agent?
 ---------------------------
 
-To register an agent instance in the Wazuh Cloud architecture, follow the guide in `this documentation<https://documentation.wazuh.com/current/user-manual/registering/index.html>`_.
+To register an agent instance in the Wazuh Cloud architecture, follow the guide in `this documentation <https://documentation.wazuh.com/current/user-manual/registering/index.html>`_.
 
 How can I access to the Wazuh APP?
 ----------------------------------
