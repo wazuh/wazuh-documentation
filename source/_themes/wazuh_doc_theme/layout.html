@@ -120,15 +120,16 @@
     {% include "header.html" %} {%- block header %}{% endblock header %}
     <section  class="container-fluid central-page-area">
       <div class="row">
-        {% if pagename != 'index' %}
         <nav class="full-toctree-nav navbar-expand-lg navbar-light order-1">
           <div class="side-scroll collapse navbar-collapse" id="navbar-globaltoc">
             <div id="search-lg" class="title-bar-right col-lg-12 collapsed">
               {% include "searchbar.html" %}
             </div> <!-- // #search-lg -->
+            {% if pagename != 'index' %}
             <div class="edit-repo-wrapper">
               {% include "editrepo.html" %}
             </div>
+            {% endif %}
             <div class="globaltoc" role="navigation" aria-label="main navigation" id="globaltoc">
               {% block menu %}
               {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
@@ -150,7 +151,6 @@
           </div>
 
         </nav>
-        {% endif %}
 
         <div id="main-content" class="col-12 order-0">
           {% if pagename != 'index' %}

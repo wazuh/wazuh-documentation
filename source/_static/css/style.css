@@ -436,6 +436,7 @@ li.toctree-l4 > a {
 
 #globaltoc {
   padding: 0 15px;
+  margin-top: 8px;
 }
 
 #globaltoc > ul {
@@ -566,17 +567,12 @@ aside.help .title {
   border-top: 1px solid rgba(0, 169, 229, 0.2);
 }
 
-.index #main-content {
-  padding-top: 25px;
-}
-
 #page #welcome-to-wazuh .topic .topic-title {
   font-size: 18px;
   color: #333333;
   vertical-align: middle;
 }
 
-.index h1,
 .index h2,
 #available-documentation {
   position: absolute;
@@ -2202,7 +2198,7 @@ ul#breadcrumbs a {
 .edit-repo {
   font-size: 0.87rem;
   width: 100%;
-  padding: 15px;
+  padding: 8px 15px;
 }
 
 .edit-repo a {
@@ -2957,6 +2953,10 @@ div.highlight pre {
         display: none;
       }
 
+      .index .globaltoc .toctree-l1 > a {
+        display: block;
+      }
+
       aside.help {
         -webkit-box-flex: 0;
             -ms-flex: 0 0 auto;
@@ -2974,13 +2974,6 @@ div.highlight pre {
 				padding-right: 30px;
         max-width: calc(100% - 320px);
 			}
-
-      .index #main-content {
-        padding-right: 30px;
-        padding-left: 30px;
-        max-width: 100%;
-        padding-top: 40px;
-      }
 
       .central-page-area a img {
         max-width: 60%;
@@ -3116,11 +3109,6 @@ div.highlight pre {
 
           header > .container-fluid, .menu-sub .container-fluid, footer > .container-fluid, #subfooter > .container-fluid{
             padding: 0 30px;
-          }
-
-          .index #main-content {
-            padding-left: 100px;
-            padding-right: 100px;
           }
 
           #main-content {

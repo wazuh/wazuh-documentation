@@ -93,7 +93,8 @@ $(function(){
     if ($(window).width() >= breakpoint ){
       gTocElement.find('a').each(function(){
         href = $(this).prop('href');
-				if (href.indexOf(category+'/index.html') > 0 || href.indexOf(category+'/#') > 0){
+        /* Hides toc link for the parent node of current except on the main index page */
+				if ( $('.index').length === 0 && (href.indexOf(category+'/index.html') > 0 || href.indexOf(category+'/#') > 0)){
 					$(this).css('display', 'none');
 				}
 
@@ -169,5 +170,5 @@ $(function(){
       // Search bar in #search-lg: change to .blue-bar .container:
       searchbar.appendTo($('.blue-bar'));
     }
-}
+  }
 });
