@@ -349,7 +349,7 @@ Attributes:
 only
 ^^^^
 
-This specifies to read only ASCII, UTF-8 files.
+This specifies to read only ASCII or UTF-8 files.
 
 If this is set to **text** and the file is, for example, a binary file, it will be discarted.
 
@@ -396,9 +396,6 @@ For example, we may want to read all the files from a directory, but exclude tho
       <location>/var/logs/*</location>
       <exclude>/var/logs/e*</exclude>
   </localfile>
-
-.. note::
-  This feature works only on Unix based systems.
 
 +--------------------+------------------+
 | **Default value**  | n/a              |
