@@ -5,8 +5,7 @@
 Wazuh Cloud
 ===========
 
-Wazuh solution delivered as a service
--------------------------------------
+**Wazuh solution delivered as a service**
 
 Wazuh monitoring solution consists of a highly scalable, two-tier architecture to manage and monitor your environment.
 The Wazuh agent runs on each monitored system, collecting events and forwarding those to the Wazuh cloud infrastructure, composed by analysis servers, which are used to process events data, and an ElasticStack cluster where information is indexed and stored.
