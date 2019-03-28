@@ -24,24 +24,27 @@ Let's say you want to monitor running processes and alert if an important proces
 Example with notepad.exe as the important process to monitor:
 
 1. Configure the agent in the agent's **local_internal_options.conf** file to accept remote commands from the manager.
-::
+
+.. code-block:: console
 
   # Logcollector - Whether or not to accept remote commands from the manager
   logcollector.remote_commands=1
 
 2. Define the command in the manager's **agent.conf** file to list running processes.
-::
+
+.. code-block:: xml
 
   <localfile>
        <log_format>full_command</log_format>
        <command>tasklist</command>
        <frequency>120</frequency>
-   </localfile>
+  </localfile>
 
 The ``<frequency>`` tag defines how often the command will be run in seconds.
 
 3. Define the rules.
-::
+
+.. code-block:: xml
 
   <rule id="100010" level="6">
     <if_sid>530</if_sid>
@@ -49,6 +52,7 @@ The ``<frequency>`` tag defines how often the command will be run in seconds.
     <description>Important process not running.</description>
     <group>process_monitor,</group>
   </rule>
+
   <rule id="100011" level="0">
     <if_sid>100010</if_sid>
     <match>notepad.exe</match>
@@ -61,14 +65,18 @@ The first rule (100010) will generate an alert ("Important process not running")
 Disk space utilization
 ----------------------
 
-The ``df`` command can be configured in the manager's ``agent.conf`` file or in the agent's ``ossec.conf`` file::
+The ``df`` command can be configured in the manager's ``agent.conf`` file or in the agent's ``ossec.conf`` file:
+
+.. code-block:: xml
 
   <localfile>
       <log_format>command</log_format>
       <command>df -P</command>
   </localfile>
 
-Wazuh already has a rule to monitor this::
+Wazuh already has a rule to monitor this
+
+.. code-block:: xml
 
   <rule id="531" level="7" ignore="7200">
     <if_sid>530</if_sid>
@@ -86,21 +94,27 @@ Check if the output changed
 
 In this case, the Linux "netstat" command is used along with the :ref:`check_diff option <rules_check_diff>` to monitor for changes in listening tcp sockets.
 
-This can be configured in either the ``agent.conf`` file or the ``ossec.conf`` file::
+This can be configured in either the ``agent.conf`` file or the ``ossec.conf`` file:
+
+.. code-block:: xml
 
   <localfile>
     <log_format>full_command</log_format>
-    <command>netstat -tan |grep LISTEN|grep -v 127.0.0.1</command>
+    <command>netstat -tulpn | sed 's/\([[:alnum:]]\+\)\ \+[[:digit:]]\+\ \+[[:digit:]]\+\ \+\(.*\):\([[:digit:]]*\)\ \+\([0-9\.\:\*]\+\).\+\ \([[:digit:]]*\/[[:alnum:]\-]*\).*/\1 \2 == \3 == \4 \5/' | sort -k 4 -g | sed 's/ == \(.*\) ==/:\1/' | sed 1,2d</command>
+    <alias>netstat listening ports</alias>
+    <frequency>360</frequency>
   </localfile>
 
-Wazuh already has a rule to monitor this::
+Wazuh already has a rule to monitor this:
+
+.. code-block:: xml
 
   <rule id="533" level="7">
     <if_sid>530</if_sid>
-    <match>ossec: output: 'netstat -tan</match>
+    <match>ossec: output: 'netstat listening ports</match>
     <check_diff />
     <description>Listened ports status (netstat) changed (new port opened or closed).</description>
-    <group>pci_dss_10.2.7,pci_dss_10.6.1,</group>
+    <group>pci_dss_10.2.7,pci_dss_10.6.1,gpg13_10.1,gdpr_IV_35.7.d,</group>
   </rule>
 
 If the output changes, the system will generate an alert indicating a network listener has disappeared or a new one has appeared. This may indicate something is broken or a network backdoor has been installed.
@@ -110,14 +124,18 @@ Load average
 
 Wazuh can be configured to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like 2 in this example.
 
-This can be configured in ``agent.conf`` or ``ossec.conf``::
+This can be configured in ``agent.conf`` or ``ossec.conf``:
+
+.. code-block:: xml
 
   <localfile>
       <log_format>command</log_format>
       <command>uptime</command>
   </localfile>
 
-And the custom rule to alert when "uptime" is higher than 2::
+And the custom rule to alert when "uptime" is higher than 2:
+
+.. code-block:: xml
 
   <rule id="100101" level="7" ignore="7200">
     <if_sid>530</if_sid>
@@ -131,7 +149,9 @@ Detect USB Storage
 
 Wazuh can be configured to alert when a USB storage device is connected. This example is for a Windows agent.
 
-Configure your agent to monitor the USBSTOR registry entry by adding the following to the manager's ``agent.conf`` ::
+Configure your agent to monitor the USBSTOR registry entry by adding the following to the manager's ``agent.conf``:
+
+.. code-block:: xml
 
   <agent_config os="Windows">
     <localfile>
@@ -140,7 +160,9 @@ Configure your agent to monitor the USBSTOR registry entry by adding the followi
     </localfile>
   </agent_config>
 
-Next create a custom rule::
+Next create a custom rule:
+
+.. code-block:: xml
 
   <rule id="140125" level="7">
       <if_sid>530</if_sid>
