@@ -8,8 +8,8 @@ Getting Started
 By following this guide, we will create a Wazuh monitoring structure allocated in the Wazuh Cloud.
 
 
-How do I sign up?
------------------
+Sign up
+-------
 
 1. To sign up, go to Wazuh CLoud Service page:
 
@@ -27,38 +27,206 @@ How do I sign up?
 .. note::
     The verification e-mail can be stored in the *spam* folder.
 
-Access Wazuh APP
+Access Wazuh Cloud
+------------------
+
+When the sign up process is complete, the user will receive a PDF file with all the necessary data to access the cloud services.
+In this PDF there is important information you need to access the user interface or register an agent. Be careful to keep this information confidential.
+
++------------------------------+-----------------------------------------------------------------------------------------+
+|                               Wazuh cloud information summary                                                          |
++==============================+=========================================================================================+
+| Web user interface           | It is the address with which you can access the user interface.                         |
++------------------------------+-----------------------------------------------------------------------------------------+
+| Web user credentials         | It is the credentials you need to access the user interface.                            |
++------------------------------+-----------------------------------------------------------------------------------------+
+| Agent registration server    | It is the address of the Agent Registration Server.                                     |
++------------------------------+-----------------------------------------------------------------------------------------+
+| Agent registration port      | It is the port through which the agent communicates with the agent registration service.|
++------------------------------+-----------------------------------------------------------------------------------------+
+| Agent registration password  | It is the password you need to register an agent.                                       |
++------------------------------+-----------------------------------------------------------------------------------------+
+| Agent manager server         | It is the Wazuh manager adress.                                                         |
++------------------------------+-----------------------------------------------------------------------------------------+
+| Agent manager port           | It is the port to which the agent sends the collected data.                             |
++------------------------------+-----------------------------------------------------------------------------------------+
+
+
+
+Agent deployment 
 ----------------
 
-When the Signup process is complete, the user will receive a PDF file with all the necessary data to access the cloud services.
+The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities:
 
-In this PDF there is a DNS direction that grants access to the Wazuh APP, already connected and configured with the Cloud.
+- log and data collection,
+- file integrity monitoring,
+- rootkit and malware detection, and
+- security policy monitoring.
 
-This file contains:
+In addition, it communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
-    * Access information.
-    * Wazuh useful information.
-    * WaaS description.
-    * Agents deployment resumed guide.
+**Agent deployment on Linux RPM based systems**
+```````````````````````````````````````````````
+
+Adding the Wazuh repository:
+
+.. code-block:: console
+
+    # cat > /etc/yum.repos.d/Wazuh.repo <<\EOF
+    [wazuh_repo]
+    gpgcheck=1gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+    enabled=1name=Wazuh repository
+    baseurl=https://packages.wazuh.com/3.x/yum/
+    protect=1
+    EOF
+
+Installing Wazuh agent:
+
+.. code-block:: console
+
+    # yum install wazuh-agent-3.8.2-1
+
+Registering agent:
+
+.. code-block:: console
+
+    # /var/ossec/bin/agent-auth -m <Agent registration server> -P <Agent registration password>
 
 
-    .. thumbnail:: ../images/wazuh-cloud/wazuh-cloud-2.png
-        :title: PDF file data.
-        :align: center
-        :width: 100%
+Point agent to your Wazuh cloud infrastructure:
 
-Register agent
---------------
+Edit /var/ossec/etc/ossec.conf, to set the configuration for your manager server:
 
-What follows in this guide is to register the agents that will be allocated in our cloud.
+.. code-block:: console
+    
+    <server>
+          <address><Agent manager server></address>
+          <port><Agent manager port></port>      
+          <protocol>tcp</protocol>
+    </server>
 
-This process is related in the `Registering agents <https://documentation.wazuh.com/current/user-manual/registering/index.html>`_ section of this documentation, but in the PDF file that the user will receive it comes a little guide to do it too.
+Make sure the protocol is set to TCP.
 
-The only difference with the actual guide, is that in this case we will set the ``<address>MANAGER_IP</address>`` as our manager server IP.
+Restart Wazuh agent:
 
-.. warning::
-    Make sure the protocol is set as TCP. Wazuh Cloud does not support UDP.
+.. code-block:: console
 
+    # systemctl restart wazuh-agent
+
+
+**Agent deployment on Linux DEB based systems**
+```````````````````````````````````````````````
+
+1.Adding the Wazuh repository:
+
+.. code-block:: console
+    
+    # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+
+.. code-block:: console
+    
+    # cat > /etc/apt/sources.list.d/wazuh.list <<\EOF
+    deb https://packages.wazuh.com/3.x/apt/ stable main
+    EOF
+
+.. code-block:: console
+
+    apt-get update
+
+
+2.Installing Wazuh agent:
+
+.. code-block:: console
+
+    # apt-get install wazuh-agent=3.8.2-1
+
+3.Registering agent:
+
+.. code-block:: console
+    
+    # /var/ossec/bin/agent-auth -m <Agent registration server> -P <Agent registration password>
+
+4.Point agent to your Wazuh cloud infrastructure:
+
+Edit /var/ossec/etc/ossec.conf, to set the configuration for your manager server:
+
+.. code-block:: console
+
+    <server>
+          <address><Agent manager server></address>
+          <port><Agent manager port></port>      
+          <protocol>tcp</protocol>
+    </server>
+
+Make sure the protocol is set to TCP.
+
+5.Restart Wazuh agent:
+
+.. code-block:: console
+
+    # systemctl restart wazuh-agent
+
+**Agent deployment on Windows systems**
+```````````````````````````````````````
+
+Windows installer can take care of the installing, registering and configuring the agent using a single command line (you need administrator privileges).
+
+1.Download Wazuh agent package:
+
+2.Installing Wazuh agent:
+
+.. code-block:: console
+
+    # wazuh-agent-3.8.2-1.msi /q ADDRESS="<Agent manager server>" AUTHD_SERVER="<Agent registration server>" PASSWORD="<Agent registration password>" PROTOCOL="TCP"
+
+
+**Agent deployment on Mac OS systems**
+``````````````````````````````````````
+
+1.Download Wazuh agent package:
+
+    https://packages.wazuh.com/3.x/osx/wazuh-agent-3.8.2-1.pkg
+
+2.Installing Wazuh agent:
+
+.. code-block:: console
+
+    # installer -pkg wazuh-agent-3.8.2-1.pkg -target /
+
+3.Registering agent:
+
+.. code-block:: console
+
+    # /Library/Ossec/bin/agent-auth -m <Agent registration server> -P <Agent registration password>
+
+4.Point agent to your Wazuh infrastructure:
+
+Edit /Library/Ossec/etc/ossec.conf, to set the configuration for your manager server;
+
+.. code-block:: console
+
+    <server>
+          <address><Agent manager server></address>
+          <port><Agent manager port></port>      
+          <protocol>tcp</protocol>
+    </server>
+
+5.Restart Wazuh agent:
+
+.. code-block:: console
+
+    # /Library/Ossec/bin/ossec-control restart
+
+Connect network devices (Syslog) 
+--------------------------------
+
+Linux
+`````
+You need to mount a Syslog server. Syslog writes the logs to a file and the agent reads from that file and sends the information to the manager.
+
+Windows
+```````
+In case of Windows this is done with Logstash. You have to install a Syslog plugin in Logstash with which you will save the information in a file from where the agent will read the information and send it to the manager.
 
 Next steps
 ----------
