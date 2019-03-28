@@ -148,7 +148,7 @@ Configuration block to specify vulnerability updates.
 Example of configuration
 ------------------------
 
-The following configuration allows you to use the vulnerability database for Debian 9, Red Hat 5, 6 and 7, and Ubuntu 18 agents. It also allows you to extract vulnerabilities from agents with Pop!OS 18 and Ubuntu 15.X using the Ubuntu 18 vulnerability database.
+The following block of code shows a configuration that allows you to use the vulnerability database for the operating systems that hang from these feeds (Debian 9, Red Hat 5,6 and 7, POP!_OS 18, Linux Mint 12, Ubuntu 15.X ...)
 
 .. code-block:: xml
 
