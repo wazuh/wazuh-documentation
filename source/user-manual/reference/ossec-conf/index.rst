@@ -90,6 +90,8 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     | manager                |
 +---------------------------------------------------------------------+------------------------+
+| :doc:`fluent-forward <fluent-forward>`                              | manager, agent         |
++---------------------------------------------------------------------+------------------------+
 
 
 All of the above sections must be located within the top-level ``<ossec_config>`` tag.
@@ -133,3 +135,4 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    wodle-azure-logs
    wodle-agent-key-polling
    verifying-configuration
+   fluent-forward
