@@ -3,7 +3,7 @@
 .. _wodle_vuln_detector:
 
 wodle name="vulnerability-detector"
-====================================
+===================================
 
 .. versionadded:: 3.2.0
 
@@ -26,20 +26,6 @@ Options
 - `feed`_
 
 .. note:: Since Wazuh 3.5 the options ``update_ubuntu_oval`` and ``update_redhat_oval`` are deprecated. It is recommended to use ``feed`` instead.
-
-+---------------------------+-----------------------------+
-| Options                   | Allowed values              |
-+===========================+=============================+
-| `disabled`_               | yes, no                     |
-+---------------------------+-----------------------------+
-| `interval`_               | A positive number (seconds) |
-+---------------------------+-----------------------------+
-| `run_on_start`_           | yes, no                     |
-+---------------------------+-----------------------------+
-| `ignore_time`_            | A positive number (seconds) |
-+---------------------------+-----------------------------+
-| `feed`_                   | An update configuration     |
-+---------------------------+-----------------------------+
 
 
 disabled
@@ -76,7 +62,7 @@ Runs updates and detections immediately when service is started.
 +--------------------+---------+
 
 ignore_time
-^^^^^^^^^^^^
+^^^^^^^^^^^
 
 Time during which vulnerabilities that have already been alerted will be ignored.
 
@@ -87,7 +73,7 @@ Time during which vulnerabilities that have already been alerted will be ignored
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 feed
-^^^^^
+^^^^
 
 Configuration block to specify vulnerability updates.
 
@@ -148,7 +134,8 @@ Configuration block to specify vulnerability updates.
 Example of configuration
 ------------------------
 
-The following block of code shows a configuration that allows you to use the vulnerability database for the operating systems that hang from these feeds (Debian 9, Red Hat 5,6 and 7, POP!_OS 18, Linux Mint 12, Ubuntu 15.X ...)
+This configuration displays a standard vulnerability-detector block.
+Using the ``allow`` option we can also use distributions that share kernel with the operating system specified in the ``feed``:
 
 .. code-block:: xml
 
@@ -160,6 +147,7 @@ The following block of code shows a configuration that allows you to use the vul
     <feed name="ubuntu-18">
       <disabled>yes</disabled>
       <update_interval>1h</update_interval>
+      <allow>linux mint-12</allow>
     </feed>
     <feed name="redhat">
       <disabled>yes</disabled>
