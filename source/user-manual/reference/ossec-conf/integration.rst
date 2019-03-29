@@ -87,13 +87,13 @@ This filters alerts by rule ID.
 group
 ^^^^^
 
-This filters alerts by rules. `OS_Regex Syntax`_.
+This filters alerts by rule group. For the VirusTotal integration, only rules from the `syscheck` group are available.
 
-+--------------------+---------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                         |
-+--------------------+---------------------------------------------------------------------------------------------+
-| **Allowed values** | Any rule group is allowed. Multiple groups should be separated with a pipe character (“|”). |
-+--------------------+---------------------------------------------------------------------------------------------+
++--------------------+-------------------------------------------------+
+| **Default value**  | n/a                                             |
++--------------------+-------------------------------------------------+
+| **Allowed values** | Any rule group or comma-separated rule groups.  |
++--------------------+-------------------------------------------------+
 
 .. note::
 	Observe that all groups must be finished by comma.
