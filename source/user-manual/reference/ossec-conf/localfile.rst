@@ -359,6 +359,14 @@ If this is set to **text** and the file is, for example, a binary file, it will 
 | **Allowed values** | text      |
 +--------------------+-----------+
 
+.. code-block:: xml
+
+  <localfile>
+      <log_format>syslog</log_format>
+      <location>/var/logs/*</location>
+      <only>text</only>
+  </localfile>
+
 .. note::
   On Windows agents it will also check if the file is encoded with UCS-2 LE BOM or UCS-2 BE BOM.
 
