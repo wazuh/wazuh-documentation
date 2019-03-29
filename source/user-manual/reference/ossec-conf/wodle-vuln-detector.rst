@@ -147,7 +147,7 @@ Using the ``allow`` option we can also use distributions that share kernel with 
     <feed name="ubuntu-18">
       <disabled>no</disabled>
       <update_interval>1h</update_interval>
-      <allow>linux mint-12</allow>
+      <allow>linux mint-19</allow>
     </feed>
     <feed name="redhat">
       <disabled>yes</disabled>
