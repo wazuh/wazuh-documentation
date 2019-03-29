@@ -30,9 +30,23 @@ You can additionally monitor specific Windows event channels. The location is th
         <log_format>eventchannel</log_format>
     </localfile>
 
-The ``eventchannel`` log format has been enhanced for Wazuh v3.8.0 with a new event data processing, keeping the old functionality and configuration. It allows monitoring every event generated at any Windows agent, returning every channel’s information in JSON format. As the old eventchannel, with this log_format the channels can be queried, filtering by event ID, process, logon type, or any other field contained in the generated event, giving the possibility to retrieve only the desired events.
+Eventchannel data processing has been enhanced, keeping the old functionality and configuration. This updated log format uses the Windows API in order to get every event generated at a monitored channel's log.
 
-This new option uses the JSON decoder to draw the event fields, ensuring a new way to add rules easier than before.
+This information is gathered by the Windows agent, including the event message, the ``system`` standard fields and the specific ``eventdata`` information from the event. Once it is sent to the manager, it will process this event and parse it to JSON format, which leads to an easier way of querying and filtering by the event fields.
+
+In conclusion, ``eventchannel`` log format achieves to be a high level competition for the old ``eventlog`` format, as beyond obtaining the information in a format that allows facilitating the process of alert triggering, it gathers much more fields, as it gets the whole event.
+
+.. note::
+    Eventchannel is supported on Windows prior or equal to Vista.
+
+Several modifications have been added to the ruleset in order to ease the addition of new rules:
+
+- Each eventchannel file contains a specific channel's rules.
+- A base file includes every parent rule filtering by the specific channel from which the other rules will pend.
+- Eventlog rules have been updated and improved to match the new JSON events, showing relevant information at the rule's description and facilitating the way of filtering them.
+- New channel's rules have been added. By default, the monitored channels are System, Security and Application, but at the old version there weren't enough rules for Application and System. These two channels have their own file now and include a fair set of rules.
+- Every file has their own rule ID range in order to get it organized. There are a hundred IDs set for the base rules and five hundred for each channel file.
+- In case some rules can't be classified easily or there are so few belonging to a specific channel, they are included at a generic rule file.
 
 Some sample events from Windows eventchannel are shown in the next images:
 
@@ -61,7 +75,7 @@ The default channels included at the ruleset are described below:
 - Microsoft Security Essentials. This software gives information about real-time protection for the system, malware-detection scans and antivirus settings.
 - Other channel rules which are not that common are stored in a different file, 0615-win-generic_rules.xml. At the time the channels monitored for the rules contained in that file are File Replication Service and every sub-channel related to Microsoft-Windows-TerminalServices.
 
-The different channels contemplated at the ruleset can be filtered at the configuration localfile block as the table from below shows in the 'channel location' column:
+The channels described can be filtered at the configuration localfile block as the 'channel location' column shows in the table from below:
 
 +-------------------------------+--------------------------------------------------------------------+
 | Source                        | Channel location                                                   |
@@ -87,7 +101,7 @@ The different channels contemplated at the ruleset can be filtered at the config
 | Terminal Services             | Service Microsoft-Windows-TerminalServices-RemoteConnectionManager |
 +-------------------------------+--------------------------------------------------------------------+
 
-To have a complete view of which events are equivalent to the old ones, this table classifies events depending on the source where they are logged, including their rule ID range.
+To have a complete view of which events are equivalent to the previous ones from ``eventlog``, this table classifies them according to the source in which they were recorded, including their range of rule IDs.
 
 +----------------+---------------------------------------------------------------+--------------------------------------------------------------------+
 | Source         | Eventchannel                                                  | Eventlog                                                           |
@@ -120,11 +134,11 @@ To have a complete view of which events are equivalent to the old ones, this tab
 +----------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
 | Eventlog       |   63100 - 63599             | 0610-win-ms_logs_rules.xml      |   83200 - 83202                     | 0435-ms_logs_rules.xml       |
 +----------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| Microsoft      |   63600 - 64099             | 0620-win-ms-se_rules.xml        |   7701 - 7720                       | 0230-ms-se_rules.xml         |
+| Microsoft      |   63600 - 64099             | 0615-win-ms-se_rules.xml        |   7701 - 7720                       | 0230-ms-se_rules.xml         |
 | Security       |                             |                                 |                                     |                              |
 | Essentials     |                             |                                 |                                     |                              |
 +----------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| Others         |   64100 - 64599             | 0615-win-generic_rules.xml      | | 18125 - 18126, 18129,             | 0220-msauth_rules.xml        |
+| Others         |   64100 - 64599             | 0620-win-generic_rules.xml      | | 18125 - 18126, 18129,             | 0220-msauth_rules.xml        |
 |                |                             |                                 | | 18257 - 18259, 18156 - 18157      |                              |
 +----------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
 
