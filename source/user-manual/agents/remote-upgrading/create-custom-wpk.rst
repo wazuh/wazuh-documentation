@@ -142,12 +142,12 @@ After compiling the version of Wazuh wanted in Linux following steps 2,3 and 4 o
         
         .. code-block:: console
             
-            C:\Program files\OpenSSL-Win32\bin\openssl.exe 
+            "C:\Program files\OpenSSL-Win32\bin\openssl.exe" 
         or 
         
         .. code-block:: console
 
-            C:\Program files\OpenSSL-Win64\bin\openssl.exe )
+            "C:\Program files\OpenSSL-Win64\bin\openssl.exe"
         
     Now, to generate the certificate follow this instructions:
 
