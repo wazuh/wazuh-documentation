@@ -373,6 +373,7 @@ For example, if the age is set to 1 day, all files that have not been modified s
 
   <localfile>
       <log_format>syslog</log_format>
+      <location>/var/logs/*</location>
       <age>1d</age>
   </localfile>
 
@@ -383,7 +384,7 @@ For example, if the age is set to 1 day, all files that have not been modified s
 +--------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 exclude
-^^^^^^^^
+^^^^^^^
 
 This indicates the location of wild-carded group of logs to be excluded.
 
