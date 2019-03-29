@@ -134,7 +134,7 @@ Configuration block to specify vulnerability updates.
 Example of configuration
 ------------------------
 
-This configuration displays a standard vulnerability-detector block.
+This code block displays a standard vulnerability-detector configuration.
 Using the ``allow`` option we can also use distributions that share kernel with the operating system specified in the ``feed``:
 
 .. code-block:: xml
@@ -145,7 +145,7 @@ Using the ``allow`` option we can also use distributions that share kernel with 
     <ignore_time>6h</ignore_time>
     <run_on_start>yes</run_on_start>
     <feed name="ubuntu-18">
-      <disabled>yes</disabled>
+      <disabled>no</disabled>
       <update_interval>1h</update_interval>
       <allow>linux mint-12</allow>
     </feed>
