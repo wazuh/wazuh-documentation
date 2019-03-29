@@ -7,7 +7,8 @@ Fluentd Forwarder
 
 .. versionadded:: 4.0.0
 
-This module allows Wazuh to forward messages to a Fluentd server.
+This module allows Wazuh to forward messages to a Fluentd server. Fluentd it's an open source data collector logger that comes along 
+with great plugins to build your own logging layer. Check it out at https://www.fluentd.org/
 
 - `How it works`_
 - `Input`_
@@ -20,16 +21,21 @@ How it works
 This module allows the forwarding of the received messages from a dedicated UDP socket to a Fluentd server.
 The Fluentd server could be located on the same local machine or a remote machine.
 
+.. thumbnail:: ../../images/fluent-forward/wazuh_fluentd.png
+  :title: Wazuh fluent forwarder flow diagram
+  :align: center
+  :width: 100%
+
 .. note::
     This module works only on Unix systems.
 
 Input
 -----
 
-The ``socket_path`` tag indicates the location of the Unix UDP socket to be created by the module. From this socket, the module will read the incomming messages and forward them
+The ``socket_path`` tag indicates the location of the Unix domain UDP socket to be created by the module. From this socket, the module will read the incomming messages and forward them
 to the Fluentd server.
 
-The ``tag`` tag will be added to every message readed from the UDP socket. This allows the user to specify the flow to the Fluentd server internal routing.
+The ``tag`` tag it's added to every message read from the UDP socket. This allows the user to specify the flow to the Fluentd server internal routing.
 
 .. note::
     An empty **tag** is not allowed, the module will shutdown if it is not present or empty.
@@ -43,7 +49,7 @@ The output will be forwarded to the Fluentd server so the are no messages visibl
 Example for testing
 -------------------
 
-This example is for testing purposes on a Debian machine, with a Wazuh manager.
+This example is for testing purposes on a Debian machine, with the Wazuh manager installed.
 
 Given the following configuration:
 
@@ -87,6 +93,7 @@ You should see the message on the Fluentd server:
     2019-03-28 14:47:40.000000000 +0100 debug.test: "{\"json\":\"message\"}\n"
 
 
+For more information about Fluentd configuration options, check the documentation at https://docs.fluentd.org/v1.0/articles/quickstart
 
 
 
