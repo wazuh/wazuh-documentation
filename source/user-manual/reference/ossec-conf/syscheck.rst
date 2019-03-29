@@ -114,7 +114,7 @@ Attributes:
 +                          +                                                                                                                     +
 |                          | On Windows, a list of denied and allowed permissions will be given for each user or group since version 3.8.0.      |
 +                          +                                                                                                                     +
-|                          | Only works on NTFS partitions on Windows systems.
+|                          | Only works on NTFS partitions on Windows systems.                                                                   |
 +                          +------------------------------------------------------------+--------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                |
 +--------------------------+------------------------------------------------------------+--------------------------------------------------------+
