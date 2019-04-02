@@ -147,10 +147,10 @@ Email alerts can be configured to send an email based on one or more rule groups
 
 This will send an alert when any rule that is part of the ``pci_dss_10.6.1`` group is triggered on any Wazuh monitored device.
 
-Multiples options and multiples email
+Multiples options and multiple emails
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This example shows capability of email alerts can be.  Email alerts can be to be sent to multiple email addresses, each with it's own unique criteria:
+This example shows the email alerts capabilities. Email alerts can be sent to multiple email addresses, each one with unique criteria:
 
 ::
 
