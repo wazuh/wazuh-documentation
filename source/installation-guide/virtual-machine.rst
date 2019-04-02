@@ -41,6 +41,5 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 5. In order to connect to the Kibana web user interface, login with https://OVA_IP_ADDRESS (where ``OVA_IP_ADDRESS`` is your system IP).
 
-.. note:: You can also download the virtual machine using the OVF format. You need to download the `OVF <https://packages.wazuh.com/vm/wazuh3.8.2_6.5.4.ovf>`_ file and the `vmdk <https://packages.wazuh.com/vm/wazuh3.8.2_6.5.4-disk1.vmdk>`_ disk.
 
 .. note:: If you need to update your OVA virtual machine, you can check out :ref:`this article <upgrading_latest_minor>`. We also recommend updating the repositories using the ``yum update`` command.
