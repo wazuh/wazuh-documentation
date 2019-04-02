@@ -266,7 +266,7 @@ Additional configurations
 
     <auth>
       <use_source_ip>no</use_source_ip>
-    </auth>ls
+    </auth>
 
 * Duplicate IPs are not allowed, so an agent won't be added if there is already another agent registered with the same IP. By changing the configuration file, ``ossec-authd`` can be told to **force a registration** if it finds an older agent with the same IP address. This will make the older agent's registration be deleted:
 
