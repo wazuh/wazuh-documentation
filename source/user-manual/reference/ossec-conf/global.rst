@@ -383,7 +383,7 @@ Set it to a positive number ending with a character indicating a time unit, such
 | **Allowed values**      | 10s (min) - 86400s (max) |
 +-------------------------+--------------------------+
 
-Example
+Example:
 
 .. code-block:: xml
 
@@ -403,7 +403,7 @@ This sets the size limit of alert files with a maximum allowed value of 1TiB.
 |                         | G (gibibyte).                                                                                                                            |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
-Example
+Example:
 
 .. code-block:: xml
 
@@ -422,7 +422,7 @@ This sets the size of the message input buffer in Analysisd (number of events).
 | **Allowed values**      | A positive number. The minimum allowed is 1. The recommended range is [16384..262144]                                                    |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
-Example
+Example:
 
 .. code-block:: xml
 
