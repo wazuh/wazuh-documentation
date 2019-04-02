@@ -162,12 +162,13 @@ Manager verification using SSL
     # openssl req -new -nodes -newkey rsa:2048 -keyout sslmanager.key -out sslmanager.csr -subj '/C=US/CN=192.168.1.2'
     # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial
 
-2. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the manager**, and start the registration service:
+2. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the manager**, and restart it:
 
   .. code-block:: console
 
     # cp sslmanager.cert sslmanager.key /var/ossec/etc
-    # /var/ossec/bin/ossec-authd
+    
+    # systemctl restart wazuh-manager 
 
 3. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program:
 
