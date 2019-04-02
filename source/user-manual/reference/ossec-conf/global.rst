@@ -373,13 +373,15 @@ rotate_interval
 
 .. versionadded:: 3.1.0
 
-This sets the interval between file rotation with ``min_rotate_interval`` the highest allowed value.
+This option sets the interval between file rotation with ``min_rotate_interval`` the highest allowed value.
 
-+-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 0 (disabled)                                                                                                                             |
-+-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number that should ends with character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days).        |
-+-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
+Set it to a positive number ending with a character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days).
+
++-------------------------+--------------------------+
+| **Default value**       | 0 (disabled)             |
++-------------------------+--------------------------+
+| **Allowed values**      | 10s (min) - 86400s (max) |
++-------------------------+--------------------------+
 
 Example
 
