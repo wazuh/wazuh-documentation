@@ -373,15 +373,15 @@ rotate_interval
 
 .. versionadded:: 3.1.0
 
-This option sets the interval between file rotation with ``min_rotate_interval`` the highest allowed value.
+This option sets the interval between file rotation with `min_rotate_interval <https://documentation.wazuh.com/current/user-manual/reference/internal-options.html#analysisd>`_ as the minimum and a maximum of 1 day.
 
-Set it to a positive number ending with a character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days).
+The time specified in ``rotate_interval`` must always be higher than the time specified in ``min_rotate_interval``.
 
-+-------------------------+--------------------------+
-| **Default value**       | 0 (disabled)             |
-+-------------------------+--------------------------+
-| **Allowed values**      | 10s (min) - 86400s (max) |
-+-------------------------+--------------------------+
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 0 (disabled)                                                                                                                      |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should ends with character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 Example:
 
