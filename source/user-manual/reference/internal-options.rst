@@ -792,6 +792,14 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed Value | Any integer between 1 and 16.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
+|  **remoted.merge_shared**         | Description   | Merge shared configuration to be broadcasted to agents.      |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 3.2.3                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default Value | 1 ( Enabled )                                                |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed Value | 1 ( Enabled ) or 0 (Disabled)                                |
++-----------------------------------+---------------+--------------------------------------------------------------+
 |   **remoted.shared_reload**       | Description   | Number of seconds between reloading of shared files.         |
 |                                   |               |                                                              |
 |                                   |               | .. versionadded:: 3.0.0                                      |
