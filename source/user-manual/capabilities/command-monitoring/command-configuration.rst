@@ -30,7 +30,7 @@ Example with notepad.exe as the important process to monitor:
   # Logcollector - Whether or not to accept remote commands from the manager
   logcollector.remote_commands=1
 
-2. Define the command in the manager's **agent.conf** file to list running processes.
+2. Define the command in the group's **agent.conf** file to list running processes.
 
 .. code-block:: xml
 
@@ -65,7 +65,9 @@ The first rule (100010) will generate an alert ("Important process not running")
 Disk space utilization
 ----------------------
 
-The ``df`` command can be configured in the manager's ``agent.conf`` file or in the agent's ``ossec.conf`` file:
+The ``df`` command is very useful here to check the available disk space for file systems.
+
+This can be configured in either the ``agent.conf`` file or the ``ossec.conf`` file:
 
 .. code-block:: xml
 
@@ -122,7 +124,7 @@ If the output changes, the system will generate an alert indicating a network li
 Load average
 ------------
 
-Wazuh can be configured to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like 2 in this example.
+Wazuh can be configured to monitor the Linux ``uptime`` command and alert when it is higher than a given threshold, like two load averages in this example.
 
 This can be configured in ``agent.conf`` or ``ossec.conf``:
 
@@ -133,7 +135,7 @@ This can be configured in ``agent.conf`` or ``ossec.conf``:
       <command>uptime</command>
   </localfile>
 
-And the custom rule to alert when "uptime" is higher than 2:
+And the custom rule to alert when "uptime" is higher than two load averages:
 
 .. code-block:: xml
 
@@ -149,7 +151,7 @@ Detect USB Storage
 
 Wazuh can be configured to alert when a USB storage device is connected. This example is for a Windows agent.
 
-Configure your agent to monitor the USBSTOR registry entry by adding the following to the manager's ``agent.conf``:
+Configure your agent to monitor the USBSTOR registry entry by adding the following to the group's ``agent.conf``:
 
 .. code-block:: xml
 
