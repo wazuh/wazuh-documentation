@@ -13,6 +13,9 @@ The first thing you need to do is install Docker and Docker compose if you don't
 Docker engine
 -------------
 
+.. warning::
+  Remember that your docker host should have the minimum requirements for the installation of Wazuh + ELK.
+
 Docker requires a 64-bit operating system running kernel version 3.10 or higher.
 
 1. Check your current kernel version. Open a terminal and use ``uname -r`` to display your kernel version:
