@@ -215,7 +215,7 @@ frequency
 Frequency that the syscheck will be run (in seconds).
 
 +--------------------+-------------------------------------+
-| **Default value**  | 21600                               |
+| **Default value**  | 43200                               |
 +--------------------+-------------------------------------+
 | **Allowed values** | A positive number, time in seconds. |
 +--------------------+-------------------------------------+
