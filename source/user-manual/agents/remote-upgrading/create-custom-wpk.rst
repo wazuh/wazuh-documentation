@@ -54,7 +54,7 @@ Requirements
 
     .. code-block:: console
 
-        $ pip install cryptography
+        # pip install cryptography
 
 Canonical WPK package example
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -122,7 +122,7 @@ In this example, the Wazuh project's root directory contains the proper ``upgrad
 Windows WPK package:
 ^^^^^^^^^^^^^^^^^^^^
 
-Generating a WPK Wazuh package in Windows is a little more difficult than in Linux, since the Wazuh project must be compiled in an operating system based on linux.
+Generating a WPK Wazuh package in Windows is a different process than in Linux, since the Wazuh instances must be compiled in an operating system based on linux.
 
 Therefore, for this guide we are going to use "OpenSSL" and a folder that contains a compiled version of Wazuh.
 
@@ -138,24 +138,24 @@ After compiling the version of Wazuh wanted in Linux following steps 2,3 and 4 o
 
 3. Use OpenSSL to generate the certificate:
 
-    The standard installation of OpenSSL under Windows is made on ``C:\OpenSSL-Win32`` and the executable is stored in the sub-repertory ``bin``. To execute the programm via the Windows ``cmd``, provide the full path:
+    The standard installation of OpenSSL under Windows is made on ``C:\OpenSSL-Win64`` and the executable is stored in the sub-repertory ``bin``. To execute the programm via the Windows ``cmd``, provide the full path:
         
         .. code-block:: console
             
-            "C:\Program files\OpenSSL-Win32\bin\openssl.exe" 
-        or 
+            > "C:\Program files\OpenSSL-Win64\bin\openssl.exe" 
+        or
         
         .. code-block:: console
 
-            "C:\Program files\OpenSSL-Win64\bin\openssl.exe"
+            > "C:\Program files\OpenSSL-Win64\bin\openssl.exe"
         
     Now, to generate the certificate follow this instructions:
 
         .. code-block:: console
 
-            > cd C:\OpenSSL-Win64\Program files\bin
+            > cd C:\Program Files\OpenSSL-Win64\Program files\bin
             
-            > start openssl.exe 
+            > start openssl.exe
             
     When started, a new cmd will appear with the openssl program running. Here is where we are going to generate the certificate:
 
@@ -166,7 +166,7 @@ After compiling the version of Wazuh wanted in Linux following steps 2,3 and 4 o
     .. note::
         In order to execute this command, you must have administrator rights.
 
-4. Send the folder with the compiled Wazuh files:
+4. Send the folder with the compiled Wazuh files from the Linux system:
 
     To perform this step, users can use the tool of their choice, but we find very useful to use `Putty <https://www.putty.org/>`_
 
@@ -174,7 +174,7 @@ After compiling the version of Wazuh wanted in Linux following steps 2,3 and 4 o
 
     .. code-block:: console
 
-        copy C:\Program files\OpenSSL-Win64\bin\wpkcert.csr C:\Documents and Settings\”user”\Desktop\wazuh-3.8.2\etc
+        copy "C:\Program files\OpenSSL-Win64\bin\wpkcert.csr" "C:\Documents and Settings\”user”\Desktop\wazuh-3.8.2\etc"
 
 6. Download the python file to compile the WPK:
 
@@ -184,10 +184,10 @@ After compiling the version of Wazuh wanted in Linux following steps 2,3 and 4 o
 
     .. code-block:: console
         
-        Invoke-WebRequest https://raw.githubusercontent.com/wazuh/wazuh/3.8/contrib/agent-upgrade/wpkpack.py -Outfile C:\Documents and Settings\"user"\Desktop\wpkpack.py
+        Invoke-WebRequest https://raw.githubusercontent.com/wazuh/wazuh/3.8/contrib/agent-upgrade/wpkpack.py -Outfile C:\Documents and Settings\user\Desktop\wpkpack.py
 
 7. Compile the WPK package using your SSL certificate and key:
 
     .. code-block:: console
 
-        python C:\Documents and Settings\"user"\Desktop\wpkpack.py C:\Program files\OpenSSL-Win64\bin\wpkcert.csr C:\Program files\OpenSSL-Win64\bin\wpkcert.key *.*
+        python "C:\Documents and Settings\user\Desktop\wpkpack.py" "C:\Program files\OpenSSL-Win64\bin\wpkcert.csr" "C:\Program files\OpenSSL-Win64\bin\wpkcert.key" *.*
