@@ -16,7 +16,7 @@ We have prepared a few scripts in different programming languages to help with t
     - `Register an agent using a Python script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.8/examples/api-register-agent.py>`_.
     - `Register an agent using a PowerShell script <https://raw.githubusercontent.com/wazuh/wazuh-api/3.8/examples/api-register-agent.ps1>`_.
 
-Basically, the scripts perform the following steps on manager server:
+Basically, the scripts perform the following steps on the manager server:
 
 **Step 1:** Add the agent to the manager.
 
