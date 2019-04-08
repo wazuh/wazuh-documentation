@@ -311,5 +311,32 @@ As said before, all protocols are built from a common abstract base. This base d
 |               |             |                    | The wazuh protocol modifies this command to add extra arguments.         |
 +---------------+-------------+--------------------+--------------------------------------------------------------------------+
 
+
+Asynchronous tasks
+^^^^^^^^^^^^^^^^^^
+
+The magic behind the cluster performance is using asynchronous tasks. An asynchronous task is like a thread, because it will be executed in "parallel" with the main task and other ones, but it is much more lightweight than a thread and it's faster to create. Asynchronous tasks take advantage of how slow I/O is to do its "parallel" execution: while a task is waiting for some data to be fetched/sent from/to a socket, another one is executing. Imagine a chef who's cooking multiple meals at the same time to better picture the idea of "asynchronous" in your head.
+
+Each of the "threads" described in the `Workflow`_ section are implemented as asynchronous tasks. These tasks are started in ``wazuh.cluster.client.AbstractClientManager.start``, ``wazuh.cluster.server.AbstractServer.start`` and ``wazuh.cluster.local_server.LocalServer.start`` and they are all implemented using infinite loops.
+
+In addition to those already mentioned, there are more tasks that are created when a received request requires a complex process to be solved. These tasks are created to solve the received request and destroyed once the response has been sent. This type of architecture is necessary to prevent the server to be busy serving a single request.
+
+Integrity synchronization process
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let's review the integrity synchronization process to see how asyncio tasks are created to process data from peer. The following diagram shows the whole process of synchronizing integrity:
+
+.. image:: ../images/development/sync_integrity_diagram.png
+
+* **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds. The first thing it does is checking whether the previous synchronization process is finished or not using the ``sync_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
+* **2**: The worker starts the synchronization process using ``sync_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker node. But since no file has been received yet, the task remains waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the the file has been sent.
+* **3**: The worker starts the sending file process. Which has three steps: ``new_file``, ``file_upd`` and ``file_end``.
+* **4**: The worker notifies the master that the integrity file has already been sent. In that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker integrity is outdated.
+* **5**: The master starts a sync integrity process with the worker using the ``sync_m_c`` command. The worker creates a task to process the received integrity from the master but the task is sleeping since it's not been received yet. This is the same process the worker has done with the master but changing directions.
+* **6**: The master sends all information to the worker using the sending file process.
+* **7**: The master notifies the worker that the integrity information has already been sent using the ``sync_m_c_e`` command. The worker wakes the previously created task up to process and update the required files. In this example, no extra valid files were required by the master so the worker doesn't send any more requests to the master and the synchronization process ends.
+
+To sum up, asynchronous tasks are created in this process when the necessary data to serve a request wasn't still available at the moment, so the server could serve other requests while it waits for the data it needs. But when the request required a simple execution to be solved (creating a file or updating a file chunk), the server itself did it by itself. If the master would have required any extra valid files an asynchronous task would have been created to synchronize them.
+
 Troubleshooting
 ---------------
