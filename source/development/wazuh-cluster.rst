@@ -165,7 +165,20 @@ The wazuh cluster protocol is defined on top of this framework. The following di
     :align: center
     :width: 80%
 
-The higher classes on the diagram (``wazuh.cluster.common.Handler``, ``wazuh.cluster.server.AbstractServerHandler`` and ``wazuh.cluster.client.AbstractClient``) define abstract concepts of what a client and a server is. Those abstract concepts are used by the lower classes on the diagram (``wazuh.cluster.local_server.LocalServerHandler``, ``wazuh.cluster.master.MasterHandler``, ``wazuh.cluster.worker.WorkerHandler`` and ``wazuh.cluster.local_client.LocalClientHandler``) to define specific communication protocols. These specific protocols are described below.
+The higher classes on the diagram (``wazuh.cluster.common.Handler``, ``wazuh.cluster.server.AbstractServerHandler`` and ``wazuh.cluster.client.AbstractClient``) define abstract concepts of what a client and a server is. Those abstract concepts are used by the lower classes on the diagram (``wazuh.cluster.local_server.LocalServerHandler``, ``wazuh.cluster.master.MasterHandler``, ``wazuh.cluster.worker.WorkerHandler`` and ``wazuh.cluster.local_client.LocalClientHandler``) to define specific communication protocols. These specific protocols are described in the `Protocols`_ section.
+
+There are abstract server and client classes to handle mutliple connections from multiple clients and connecting to the server. This way, all the logic to connect to a server or handling multiple clients can be shared between all types of servers and clients in the cluster. These classes are shown in the diagrams below:
+
+.. thumbnail:: ../images/development/cluster_clients.png
+    :title: Wazuh cluster protocol class inheritance
+    :align: center
+    :width: 80%
+
+.. thumbnail:: ../images/development/cluster_servers.png
+    :title: Wazuh cluster protocol class inheritance
+    :align: center
+    :width: 80%
+
 
 Protocols
 ^^^^^^^^^
