@@ -179,6 +179,43 @@ Windows installer can take care of the installing, registering and configuring t
 
     # wazuh-agent-3.8.2-1.msi /q ADDRESS="<Agent manager server>" AUTHD_SERVER="<Agent registration server>" PASSWORD="<Agent registration password>" PROTOCOL="TCP"
 
+**Agent deployment on Mac OS systems**
+``````````````````````````````````````
+
+1.Download Wazuh agent package:
+
+    https://packages.wazuh.com/3.x/osx/wazuh-agent-3.8.2-1.pkg
+
+2.Installing Wazuh agent:
+
+.. code-block:: console
+
+    # installer -pkg wazuh-agent-3.8.2-1.pkg -target /
+
+3.Registering agent:
+
+.. code-block:: console
+
+    # /Library/Ossec/bin/agent-auth -m <Agent registration server> -P <Agent registration password>
+
+4.Point agent to your Wazuh infrastructure:
+
+Edit /Library/Ossec/etc/ossec.conf, to set the configuration for your manager server;
+
+.. code-block:: console
+
+    <server>
+          <address><Agent manager server></address>
+          <port><Agent manager port></port>      
+          <protocol>tcp</protocol>
+    </server>
+
+5.Restart Wazuh agent:
+
+.. code-block:: console
+
+    # /Library/Ossec/bin/ossec-control restart
+
 
 Sending messages to a remote Server
 -----------------------------------
