@@ -18,8 +18,8 @@ This information is gathered by the Windows agent, including the event message, 
 Eventlog uses as well the Windows API to obtain events from Windows logs and return the information in a specific format.
 
 #. `Windows Eventlog vs Windows Eventchannel`_
-#. `Reading logs from Windows Event Log`_
-#. `Reading logs from Windows Event Channel`_
+#. `Monitor the Windows Event Log with Wazuh`_
+#. `Monitor the Windows Event Channel with Wazuh`_
 #. `Filtering events from Windows Event Channel with queries`_
 
 
@@ -30,11 +30,11 @@ Eventlog is supported on every Windows versions and can monitor any logs except 
 
 In the other hand, Eventchannel is maintained since Windows Vista and can monitor the Application and Services logs along with the basic Windows logs. In addition, the use of queries to filter by any field is supported for this log format.
 
-With the new changes made in the ``eventchannel`` log format for versions higher than 3.8, the number of fields retrieved has increased comparing it with eventlog and the previous version of eventchannel, since all the information exposed at the Windows event is defined in the alert triggered as well, as the ruleset has been updated, extended and reorganized according to the channel. Furthermore, this modifications facilitate the process of rules' creation and alert triggering since the event is now gathered in JSON format.
+With the new changes made in the ``eventchannel`` log format for versions higher than 3.8, the number of fields retrieved has increased comparing it with eventlog and the previous version of eventchannel, since all the information exposed at the Windows event is defined in the alert triggered as well, in addition the ruleset has been updated, extended and reorganized according to the channel since Wazuh 3.9. Furthermore, this modifications facilitate the process of rules' creation and alert triggering since the event is now gathered in JSON format.
 
 
-Reading logs from Windows Event Log
------------------------------------
+Monitor the Windows Event Log with Wazuh
+----------------------------------------
 
 To monitor a Windows event log, it is necessary to provide the format as "eventlog" and the location as the name of the event log::
 
@@ -45,8 +45,8 @@ To monitor a Windows event log, it is necessary to provide the format as "eventl
 
 These logs are obtained through Windows API calls and sent to the manager where they will be alerted if they match any rule.
 
-Reading logs from Windows Event Channel
-----------------------------------------
+Monitor the Windows Event Channel with Wazuh
+--------------------------------------------
 
 Windows event channels can be monitored by placing their name at the location field from the localfile block and "eventchannel" as the log format.
 
@@ -64,7 +64,7 @@ Windows event channels can be monitored by placing their name at the location fi
     Eventchannel is supported on Windows prior or equal to Vista.
 
 Available channels
-------------------
+^^^^^^^^^^^^^^^^^^
 
 The channels added by default at the ruleset can be filtered at the configuration localfile block as the 'channel location' column shows in the table from below:
 
@@ -102,7 +102,7 @@ The channels added by default at the ruleset can be filtered at the configuratio
 
 
 Windows ruleset redesign
-------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 In order to ease the addition of new rules, the eventchannel ruleset has been classified according to the channel from which events belong. This will ensure an easier way of maintaining the ruleset organized and find the better place for custom rules. To accomplish this, several modifications have been added:
 
@@ -155,7 +155,7 @@ To have a complete view of which events are equivalent to the old ones from ``ev
 
 
 Use case
---------
+^^^^^^^^
 
 This section describes a simple use case of an alert triggered when an installation event occurs.
 
@@ -210,7 +210,7 @@ Some events from different channels are shown below with the associated provider
 
 
 Filtering events from Windows Event Channel with queries
---------------------------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Events from the Windows Event channel can be filtered as below::
 
