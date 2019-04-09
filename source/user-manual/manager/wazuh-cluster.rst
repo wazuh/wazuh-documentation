@@ -85,7 +85,7 @@ Follow these steps to deploy a Wazuh cluster:
 
     .. code-block:: console
 
-      # yum install python-setuptools python-cryptography
+      # yum install python-setuptools python2-cryptography
 
   b. For Debian-based distributions:
 
