@@ -13,10 +13,10 @@ The below image illustrations how events flow through the Wazuh environment:
 Log collection
 --------------
 
-Log information can come from :
 
 Log files
 ^^^^^^^^^
+
 The Log analysis engine can be configured to monitor specific files on the servers.
 
 Sample Configuration:
@@ -70,7 +70,7 @@ Remote syslog
 
 On other devices, like firewalls, for instance, the log analysis component can be configured to receive log events through syslog.
 
-Sample Configuration:
+Sample configuration:
 
 .. code-block:: xml
 
@@ -86,15 +86,15 @@ Sample Configuration:
 
 ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network from which syslog messages will be accepted.
 
-Log Example::
+Log example:
+
+::
 
   2016-03-15T15:22:10.078830+01:00 tron su:pam_unix(su-l:auth):authentication failure;logname=tm uid=500 euid=0 tty=pts/0 ruser=tm rhost= user=root
   1265939281.764 1 172.16.167.228 TCP_DENIED /403 734 POST http://lbcore1.metacafe.com/test/SystemInfoManager.php - NONE/- text/html
   [Sun Mar 06 08:52:16 2016] [error] [client 187.172.181.57] Invalid URI in request GET: index.php HTTP/1.0
 
-If the ``/etc/rsyslog.conf`` configuration file is being used instead of the ``ossec.conf`` options as above, it is possible to define custom files to receive the remote logs instead of the default ones ( /var/log/* ).
-
-In that case, it is necessary to add a new ``<localfile>`` block to the ``ossec.conf`` file:
+If a ``/etc/rsyslog.conf`` configuration file is being used instead of the ``ossec.conf`` options as above, you can still analyze logs using a ``<localfile>`` block with ``syslog`` as the log format.
 
 .. code-block:: xml
 
@@ -117,6 +117,7 @@ In the pre-decoding phase of analysis, static information from well-known fields
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
 Extracted information:
+
   - *hostname*: 'localhost'
   - *program_name*: 'sshd'
 
@@ -132,6 +133,7 @@ Sample log and its extracted info:
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
 Extracted information:
+
   - *program name*: sshd
   - *dstuser*: rromero
   - *srcip*: 192.168.1.133
@@ -153,6 +155,7 @@ For the previous example, rule 5715 is matched:
   </rule>
 
 .. note::
+
   For more information,see the :ref:`Wazuh Ruleset <ruleset>`
 
 Alert
