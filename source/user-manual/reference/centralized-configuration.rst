@@ -18,8 +18,7 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 - :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
-- :doc:`Active Response <../capabilities/active-response/index>` (**active-response**)
-- :doc:`Avoid events flooding <ossec.conf/client_buffer>` (**client_buffer**)
+- :doc:`Avoid events flooding <ossec-conf/client_buffer>` (**client_buffer**)
 - :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
 
 .. note::
