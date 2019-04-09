@@ -36,7 +36,9 @@ With the new changes made in the ``eventchannel`` log format for versions higher
 Monitor the Windows Event Log with Wazuh
 ----------------------------------------
 
-To monitor a Windows event log, it is necessary to provide the format as "eventlog" and the location as the name of the event log::
+To monitor a Windows event log, it is necessary to provide the format as "eventlog" and the location as the name of the event log.
+
+.. code-block:: xml
 
   <localfile>
       <location>Security</location>
@@ -51,6 +53,7 @@ Monitor the Windows Event Channel with Wazuh
 Windows event channels can be monitored by placing their name at the location field from the localfile block and "eventchannel" as the log format.
 
 .. note::
+
     If the channel name contains a ``%`` it is necessary to replace it with ``/``. For example, replace Microsoft-Windows-PrintService%Operational with Microsoft-Windows-PrintService/Operational.
 
 .. code-block:: xml
@@ -61,6 +64,7 @@ Windows event channels can be monitored by placing their name at the location fi
     </localfile>
 
 .. note::
+
     Eventchannel is supported on Windows prior or equal to Vista.
 
 Available channels
@@ -71,33 +75,33 @@ The channels added by default at the ruleset can be filtered at the configuratio
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
 | Source                        | Channel location                                             | Description                                                                    |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
-| Application                   | Application                                                  | | This log retrieves every event related to system applications management and |
-|                               |                                                              | | is one of the main Windows administrative channels along with Security and   |
-|                               |                                                              | | System.                                                                      |
+| Application                   | Application                                                  | This log retrieves every event related to system applications management and   |
+|                               |                                                              | is one of the main Windows administrative channels along with Security and     |
+|                               |                                                              | System.                                                                        |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
-| Security                      | Security                                                     | | This channel gathers information related to users and groups creation, login,|
-|                               |                                                              | | logoff and audit policy modifications.                                       |
+| Security                      | Security                                                     | This channel gathers information related to users and groups creation, login,  |
+|                               |                                                              | logoff and audit policy modifications.                                         |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
 | System                        | System                                                       | The System channel collects events associated with kernel and service control. |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
-| Sysmon                        | Microsoft-Windows-Sysmon/Operational                         | | Sysmon monitors system activity as process creation and termination, network |
-|                               |                                                              | | connection and file changes.                                                 |
+| Sysmon                        | Microsoft-Windows-Sysmon/Operational                         | Sysmon monitors system activity as process creation and termination, network   |
+|                               |                                                              | connection and file changes.                                                   |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
-| Windows Defender              | Microsoft-Windows-Windows Defender/Operational               | | The Windows Defender log file shows information about the scans passed,      |
-|                               |                                                              | | malware detection and actions taken against them.                            |
+| Windows Defender              | Microsoft-Windows-Windows Defender/Operational               | The Windows Defender log file shows information about the scans passed,        |
+|                               |                                                              | malware detection and actions taken against them.                              |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
-| McAfee                        | McLogEvent                                                   | | This source shows McAfee scan results, virus detection and actions taken     |
-|                               |                                                              | | against them.                                                                |
+| McAfee                        | McLogEvent                                                   | This source shows McAfee scan results, virus detection and actions taken       |
+|                               |                                                              | against them.                                                                  |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
 | EventLog                      | Microsoft-Windows-Eventlog                                   | This source retrieves information about audit and Windows logs.                |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
-| | Microsoft Security          | Microsoft Antimalware                                        | | This software gives information about real-time protection for the system,   |
-| | Essentials                  |                                                              | | malware-detection scans and antivirus settings.                              |
+| Microsoft Security            | Microsoft Antimalware                                        | This software gives information about real-time protection for the system,     |
+| Essentials                    |                                                              | malware-detection scans and antivirus settings.                                |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
 | Remote Access                 | File Replication Service                                     | These rules which are not that common are stored in a different file.          |
 +-------------------------------+--------------------------------------------------------------+                                                                                |
-| Terminal Services             | | Service                                                    |                                                                                |
-|                               | | Microsoft-Windows-TerminalServices-RemoteConnectionManager |                                                                                |
+| Terminal Services             | Service                                                      |                                                                                |
+|                               | Microsoft-Windows-TerminalServices-RemoteConnectionManager   |                                                                                |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
 
 
@@ -115,44 +119,70 @@ In order to ease the addition of new rules, the eventchannel ruleset has been cl
 
 To have a complete view of which events are equivalent to the old ones from ``eventlog`` and the previous version of ``eventchannel``, this table classifies every rule according to the source in which they were recorded, including their range of rule IDs and the file where they are described.
 
-+---------------------+---------------------------------------------------------------+--------------------------------------------------------------------+
-| Source              | Eventchannel (Wazuh >= 3.9.0)                                 | Eventchannel and eventlog (Wazuh < 3.9.0)                          |
-+                     +-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-|                     |  Rule IDs                   |   Rule file                     |  Rule IDs                           |   Rule file                  |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| Base rules          |   60000 - 60099             | 0575-win-base_rules.xml         |  18100 - 18103, 7704, 7500          | | 0220-msauth_rules.xml,     |
-|                     |                             |                                 |                                     | | 0230-ms-se_rules.xml,      |
-|                     |                             |                                 |                                     | | 0225-mcafee_av_rules.xml   |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| Security            |   60100 - 60599             | 0580-win-security_rules.xml     | | 18100 - 18124, 18127 - 18128,     | 0220-msauth_rules.xml        |
-|                     |                             |                                 | | 18130 - 18144, 18146 - 18149,     |                              |
-|                     |                             |                                 | | 18151 - 18155, 18170 - 18181,     |                              |
-|                     |                             |                                 | | 18200 - 18256, 18260 - 18261      |                              |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| Application         |   60600 - 61099             | 0585-win-application_rules.xml  |  18158 - 18160, 18146 - 18147       | 0220-msauth_rules.xml        |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| System              |   61100 - 61599             | 0590-win-system_rules.xml       |  18145                              | 0220-msauth_rules.xml        |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| Sysmon              |   61600 - 62099             | 0595-win-sysmon_rules.xml       | | 184665 - 184776, 184676 - 184678, | 0330-sysmon_rules.xml        |
-|                     |                             |                                 | | 184686 - 184687, 184696 - 184698, |                              |
-|                     |                             |                                 | | 184706 - 184707, 184716 - 184717, |                              |
-|                     |                             |                                 | | 184726 - 184727, 184736 - 184737, |                              |
-|                     |                             |                                 | | 184746 - 184747, 184766 - 184767, |                              |
-|                     |                             |                                 | | 184776 - 184777, 185000 - 185013  |                              |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-|Windows Defender     |   62100 - 62599             | 0600-win-wdefender_rules.xml    |   83000 - 83002                     | 0430-ms_wdefender_rules.xml  |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| McAfee              |   62600 - 63099             | 0605-win-mcafee_rules.xml       |   7500 - 7514, 7550                 | 0225-mcafee_av_rules.xml     |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| Eventlog            |   63100 - 63599             | 0610-win-ms_logs_rules.xml      |   83200 - 83202                     | 0435-ms_logs_rules.xml       |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| | Microsoft Security|   63600 - 64099             | 0615-win-ms-se_rules.xml        |   7701 - 7720                       | 0230-ms-se_rules.xml         |
-| | Essentials        |                             |                                 |                                     |                              |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
-| Others              |   64100 - 64599             | 0620-win-generic_rules.xml      | | 18125 - 18126, 18129,             | 0220-msauth_rules.xml        |
-|                     |                             |                                 | | 18257 - 18259, 18156 - 18157      |                              |
-+---------------------+-----------------------------+---------------------------------+-------------------------------------+------------------------------+
+Eventchannel for Wazuh >= 3.9.0 
 
++---------------------+-----------------------------+---------------------------------+
+| Source              | Rule IDs                    |   Rule file                     |
++=====================+=============================+=================================+
+| Base rules          |   60000 - 60099             | 0575-win-base_rules.xml         |
++---------------------+-----------------------------+---------------------------------+
+| Security            |   60100 - 60599             | 0580-win-security_rules.xml     |
++---------------------+-----------------------------+---------------------------------+
+| Application         |   60600 - 61099             | 0585-win-application_rules.xml  |
++---------------------+-----------------------------+---------------------------------+
+| System              |   61100 - 61599             | 0590-win-system_rules.xml       |
++---------------------+-----------------------------+---------------------------------+
+| Sysmon              |   61600 - 62099             | 0595-win-sysmon_rules.xml       |
++---------------------+-----------------------------+---------------------------------+
+| Windows Defender    |   62100 - 62599             | 0600-win-wdefender_rules.xml    |
++---------------------+-----------------------------+---------------------------------+
+| McAfee              |   62600 - 63099             | 0605-win-mcafee_rules.xml       |
++---------------------+-----------------------------+---------------------------------+
+| Eventlog            |   63100 - 63599             | 0610-win-ms_logs_rules.xml      |
++---------------------+-----------------------------+---------------------------------+
+| Microsoft Security  |   63600 - 64099             | 0615-win-ms-se_rules.xml        |
+| Essentials          |                             |                                 |
++---------------------+-----------------------------+---------------------------------+
+| Others              |   64100 - 64599             | 0620-win-generic_rules.xml      |
++---------------------+-----------------------------+---------------------------------+
+
+Eventchannel and eventlog for Wazuh < 3.9.0
+
++---------------------+-----------------------------------+-----------------------------+
+| Source              | Rule IDs                          |   Rule file                 |
++=====================+===================================+=============================+
+| Base rules          | 18100 - 18103, 7704, 7500         | 0220-msauth_rules.xml,      |
+|                     |                                   | 0230-ms-se_rules.xml,       |
+|                     |                                   | 0225-mcafee_av_rules.xml    |
++---------------------+-----------------------------------+-----------------------------+
+| Security            | 18100 - 18124, 18127 - 18128,     | 0220-msauth_rules.xml       |
+|                     | 18130 - 18144, 18146 - 18149,     |                             |
+|                     | 18151 - 18155, 18170 - 18181,     |                             |
+|                     | 18200 - 18256, 18260 - 18261      |                             |
++---------------------+-----------------------------------+-----------------------------+
+| Application         | 18158 - 18160, 18146 - 18147      | 0220-msauth_rules.xml       |
++---------------------+-----------------------------------+-----------------------------+
+| System              | 18145                             | 0220-msauth_rules.xml       |
++---------------------+-----------------------------------+-----------------------------+
+| Sysmon              | 184665 - 184776, 184676 - 184678, | 0330-sysmon_rules.xml       |
+|                     | 184686 - 184687, 184696 - 184698, |                             |
+|                     | 184706 - 184707, 184716 - 184717, |                             |
+|                     | 184726 - 184727, 184736 - 184737, |                             |
+|                     | 184746 - 184747, 184766 - 184767, |                             |
+|                     | 184776 - 184777, 185000 - 185013  |                             |
++---------------------+-----------------------------------+-----------------------------+
+| Windows Defender    | 83000 - 83002                     | 0430-ms_wdefender_rules.xml |
++---------------------+-----------------------------------+-----------------------------+
+| McAfee              | 7500 - 7514, 7550                 | 0225-mcafee_av_rules.xml    |
++---------------------+-----------------------------------+-----------------------------+
+| Eventlog            | 83200 - 83202                     | 0435-ms_logs_rules.xml      |
++---------------------+-----------------------------------+-----------------------------+
+| Microsoft Security  | 7701 - 7720                       | 0230-ms-se_rules.xml        |
+| Essentials          |                                   |                             |
++---------------------+-----------------------------------+-----------------------------+
+| Others              | 18125 - 18126, 18129,             | 0220-msauth_rules.xml       |
+|                     | 18257 - 18259, 18156 - 18157      |                             |
++---------------------+-----------------------------------+-----------------------------+
 
 Use case
 ^^^^^^^^
@@ -172,7 +202,27 @@ The next step is to install the application wanted to be monitored. Once it is i
 
 .. code-block:: json
 
-    {"win":{"system":{"providerName":"MsiInstaller","eventID":"11707","level":"4","task":"0","keywords":"0x80000000000000","systemTime":"2019-04-03T10:47:39.000000000Z","eventRecordID":"12615","channel":"Application","computer":"pcname","severityValue":"INFORMATION","message":"Product: Dr. Memory -- Installation completed successfully."},"eventdata":{"binary":"7B36373637354144362D314642302D344445312D394543462D3834393937353135303235457D","data":"Product: Dr. Memory -- Installation completed successfully."}}}
+    {
+        "win": {
+            "system": {
+            "providerName": "MsiInstaller",
+            "eventID": "11707",
+            "level": "4",
+            "task": "0",
+            "keywords": "0x80000000000000",
+            "systemTime": "2019-04-03T10:47:39.000000000Z",
+            "eventRecordID": "12615",
+            "channel": "Application",
+            "computer": "pcname",
+            "severityValue": "INFORMATION",
+            "message": "Product: Dr. Memory -- Installation completed successfully."
+            },
+            "eventdata": {
+            "binary": "7B36373637354144362D314642302D344445312D394543462D3834393937353135303235457D",
+            "data": "Product: Dr. Memory -- Installation completed successfully."
+            }
+        }
+    }
 
 This event can be filtered field by field in case an alert is desired to trigger when it occurs. In this use case, the filters used will be the provider name and the event ID, as follows:
 
@@ -212,7 +262,9 @@ Some events from different channels are shown below with the associated provider
 Filtering events from Windows Event Channel with queries
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Events from the Windows Event channel can be filtered as below::
+Events from the Windows Event channel can be filtered as below.
+
+.. code-block:: xml
 
     <localfile>
       <location>System</location>
@@ -220,20 +272,20 @@ Events from the Windows Event channel can be filtered as below::
       <query>Event/System[EventID=7040]</query>
     </localfile>
 
-Users can filter events with different severity levels:
+Users can filter events with different severity levels.
 
-    .. code-block:: xml
+.. code-block:: xml
 
-        <localfile>
-            <location>System</location>
-            <log_format>eventchannel</log_format>
-            <query>
-                \<QueryList>
-                    \<Query Id="0"\ Path="System">
-                        \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
-                    \</Query>
-                \</QueryList>
-            </query>
-        </localfile>
+    <localfile>
+        <location>System</location>
+        <log_format>eventchannel</log_format>
+        <query>
+            \<QueryList>
+                \<Query Id="0"\ Path="System">
+                    \<Select Path="System">*[System[(Level&lt;=3)]]\</Select>
+                \</Query>
+            \</QueryList>
+        </query>
+    </localfile>
 
 In this example, only events which levels are less or equal to "3" are checked.
