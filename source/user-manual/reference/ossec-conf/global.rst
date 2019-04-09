@@ -373,9 +373,7 @@ rotate_interval
 
 .. versionadded:: 3.1.0
 
-This option sets the interval between file rotation with `min_rotate_interval <https://documentation.wazuh.com/current/user-manual/reference/internal-options.html#analysisd>`_ as the minimum and a maximum of 1 day.
-
-The time specified in ``rotate_interval`` must always be higher than the time specified in ``min_rotate_interval``.
+This option sets the interval between file rotation. The range of possible values is from ``10s`` (10 seconds) to ``1d`` (1 day).
 
 +-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0 (disabled)                                                                                                                      |
