@@ -208,13 +208,13 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
     .. code-block:: console
 
-      # yum install filebeat-6.7.0
+      # yum install filebeat-6.7.1
 
   * Using the ``zypper`` package manager:
 
     .. code-block:: console
 
-      # zypper install filebeat-6.7.0
+      # zypper install filebeat-6.7.1
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
