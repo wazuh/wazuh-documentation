@@ -27,7 +27,7 @@ Options
 - `target`_
 - `log_format`_
 - `out_format`_
-- `only`_
+- `ignore_binaries`_
 - `age`_
 - `exclude`_
 
@@ -346,17 +346,17 @@ Attributes:
 |            | Default value  | Select all targets defined in the ``<localfile>`` stanza.        |
 +------------+----------------+------------------------------------------------------------------+
 
-only
-^^^^
+ignore_binaries
+^^^^^^^^^^^^^^^
 
-This specifies to read only ASCII or UTF-8 files.
+This specifies to ignore binary files, testing if the file is UTF8 or ASCII.
 
-If this is set to **text** and the file is, for example, a binary file, it will be discarted.
+If this is set to **yes** and the file is, for example, a binary file, it will be discarted.
 
 +--------------------+-----------+
 | **Default value**  | n/a       |
 +--------------------+-----------+
-| **Allowed values** | text      |
+| **Allowed values** | yes or no |
 +--------------------+-----------+
 
 .. code-block:: xml
@@ -364,7 +364,7 @@ If this is set to **text** and the file is, for example, a binary file, it will 
   <localfile>
       <log_format>syslog</log_format>
       <location>/var/logs/*</location>
-      <only>text</only>
+      <ignore_binaries>yes</ignore_binaries>
   </localfile>
 
 .. note::
