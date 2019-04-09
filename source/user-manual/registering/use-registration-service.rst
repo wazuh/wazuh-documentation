@@ -56,34 +56,34 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
   a. For Linux systems:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
+      # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
 
   b. For Windows systems:
 
-  .. code-block:: none
+    .. code-block:: console
 
-    # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <MANAGER_IP_ADDRESS>
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
 
 2. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
 
-  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
+  - In the file ``/var/ossec/etc/ossec.conf``, replace *MANAGER_IP* with the Wazuh manager address:
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-    <client>
-      <server>
-        <address>MANAGER_IP</address>
-        ...
-      </server>
-    </client>
+      <client>
+        <server>
+          <address>MANAGER_IP</address>
+          ...
+        </server>
+      </client>
 
-  Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
+  - Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
+      # sed -i 's:MANAGER_IP:10.0.0.4:g' /var/ossec/etc/ossec.conf
 
 3. Restart the agent.
 
@@ -105,13 +105,13 @@ You can protect the manager from unauthorized registrations by using a password.
 
 To allow this option, change the value to *yes* in the ``/var/ossec/etc/ossec.conf`` file:
 
-    .. code-block:: xml
+.. code-block:: xml
 
-      <auth>
-        ...
-        <use_password>yes</use_password>
-        ...     
-      </auth>
+  <auth>
+    ...
+    <use_password>yes</use_password>
+    ...     
+  </auth>
 
 To apply the changes, restart the manager:
 
@@ -129,9 +129,9 @@ To apply the changes, restart the manager:
 
 To use a custom password, edit the ``/var/ossec/etc/authd.pass`` file and write it. For example, if we want to use *TopSecret* as a password:
 
-    .. code-block:: console
+.. code-block:: console
 
-      # echo "TopSecret" > /var/ossec/etc/authd.pass
+  # echo "TopSecret" > /var/ossec/etc/authd.pass
 
 Then, restart the manager.
 
@@ -174,17 +174,17 @@ Manager verification using SSL
 
   a. For Linux systems:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp rootCA.pem /var/ossec/etc
-    # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
+      # cp rootCA.pem /var/ossec/etc
+      # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
 
   b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp rootCA.pem C:\Program Files (x86)\ossec-agent
-    # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
+      # cp rootCA.pem C:\Program Files (x86)\ossec-agent
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
 
 Agent verification using SSL
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -211,17 +211,17 @@ In this example, we are going to create a certificate for agents without specify
 
   a. For Linux systems:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp sslagent.cert sslagent.key /var/ossec/etc
-    # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+      # cp sslagent.cert sslagent.key /var/ossec/etc
+      # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
   b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
-    # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+        # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
+        # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
 **Agent verification (with host validation)**
 
@@ -245,36 +245,36 @@ This is an alternative method to the previous one. In this case, we will bind th
 
   a. For Linux systems:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp sslagent.cert sslagent.key /var/ossec/etc
-    # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+      # cp sslagent.cert sslagent.key /var/ossec/etc
+      # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
 
   b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
-    # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+        cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
+        C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
 Additional configurations
 -------------------------
 
-* By default, the registration service adds the agents with their static IP address. If you want to add them with a dynamic IP (like using ``any`` on the ``manage_agents`` tool), you must change the manager's configuration file (``/var/ossec/etc/ossec.conf``):
+By default, the registration service adds the agents with their static IP address. If you want to add them with a dynamic IP (like using ``any`` on the ``manage_agents`` tool), you must change the manager's configuration file (``/var/ossec/etc/ossec.conf``):
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <auth>
-      <use_source_ip>no</use_source_ip>
-    </auth>
+  <auth>
+    <use_source_ip>no</use_source_ip>
+  </auth>
 
-* Duplicate IPs are not allowed, so an agent won't be added if there is already another agent registered with the same IP. By changing the configuration file, ``ossec-authd`` can be told to **force a registration** if it finds an older agent with the same IP address. This will make the older agent's registration be deleted:
+Duplicate IPs are not allowed, so an agent won't be added if there is already another agent registered with the same IP. By changing the configuration file, ``ossec-authd`` can be told to **force a registration** if it finds an older agent with the same IP address. This will make the older agent's registration be deleted:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <auth>
-      <force_insert>yes</force_insert>
-      <force_time>0</force_time>
-    </auth>
+  <auth>
+    <force_insert>yes</force_insert>
+    <force_time>0</force_time>
+  </auth>
 
-  The **0** on ``<force-time>`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, it means to delete the old agent's registration regardless of how recently it has checked in.
+The **0** on ``<force-time>`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, it means to delete the old agent's registration regardless of how recently it has checked in.
