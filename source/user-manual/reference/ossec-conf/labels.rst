@@ -42,10 +42,13 @@ Attributes:
 +--------------------+---------------------------------------+---------------------------------------------------------+
 
 .. note::
+
     In ``internal_options.conf``, hidden labels can be set to be displayed in alerts.
 
 .. note::
+
     .. versionadded:: 3.9.0
+
     Keys starting with an underscore character are reserved for the system labels. These labels are invisible and contain internal information of the agents.
 
 Example of configuration
