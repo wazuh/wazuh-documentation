@@ -392,13 +392,12 @@ max_output_size
 
 .. versionadded:: 3.1.0
 
-This sets the size limit of alert files with a maximum allowed value of 1TiB.
+This sets the size limit of alert files with a maximum allowed value of 1TiB and a minimum allowed value of 1MiB.
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0 (disabled)                                                                                                                             |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number that should contain a suffix character indicating a size unit, such as, B (bytes), K (kibibyte), M (mebibyte),         |
-|                         | G (gibibyte).                                                                                                                            |
+| **Allowed values**      | A positive number that should contain a suffix character indicating a size unit, such as M (mebibyte) and G (gibibyte).                  |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
 Example
