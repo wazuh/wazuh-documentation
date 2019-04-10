@@ -329,7 +329,7 @@ One of those tasks, which is defined as a class, is the task created to receive 
     :width: 80%
 
 Integrity synchronization process
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Let's review the integrity synchronization process to see how asyncio tasks are created to process data from peer. The following diagram shows the whole process of synchronizing integrity:
 
@@ -346,7 +346,7 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
 To sum up, asynchronous tasks are created in this process when the necessary data to serve a request wasn't still available at the moment, so the server could serve other requests while it waits for the data it needs. But when the request required a simple execution to be solved (creating a file or updating a file chunk), the server itself did it by itself. If the master would have required any extra valid files an asynchronous task would have been created to synchronize them.
 
 Distributed API requests
-~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Another example that can show how asynchronous tasks are used is Distributed API requests. Before explaining the example, let's review the different type of requests that can be done in the distributed API:
 
