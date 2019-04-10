@@ -580,8 +580,8 @@ aside.help {
 
 #accordion-capabilities .card-header .btn-accordion {
 	font-size: 18px;
-	background-color: #00a9e5;
-  color: #ffffff;
+	background-color: #f4f4f4;
+  color: #333333;
 	border-radius: 0;
 	padding: 0.5rem 0.85rem;
 }
@@ -599,7 +599,7 @@ aside.help {
 }
 
 #accordion-capabilities .card-header .btn-accordion:after {
-	color: #ffffff;
+	color: #333333;
   content: '\f106';
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
