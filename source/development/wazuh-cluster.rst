@@ -338,5 +338,34 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
 
 To sum up, asynchronous tasks are created in this process when the necessary data to serve a request wasn't still available at the moment, so the server could serve other requests while it waits for the data it needs. But when the request required a simple execution to be solved (creating a file or updating a file chunk), the server itself did it by itself. If the master would have required any extra valid files an asynchronous task would have been created to synchronize them.
 
+Distributed API requests
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Another example that can show how asynchronous tasks are used is Distributed API requests. Before explaining the example, let's review the different type of requests that can be done in the distributed API:
+
+* ``local_any``: The request can be solved by any node. These requests are usually information that the master distributes to all nodes such as rules, decoders or CDB lists. These requests will never be forwarded or solved remotely.
+* ``local_master``: The request can be solved by the master node. These requests are usually information about the global status/management of the cluster such as agent information/status/management, agent groups management, cluster information, etc.
+* ``distributed_master``: The master must forward the request to the most suitable node to solve it.
+
+The type association with every endpoint can be found in the `requests_list.py <https://github.com/wazuh/wazuh/blob/3.9/framework/wazuh/cluster/dapi/requests_list.py>`_ file.
+
+Imagine a cluster with two nodes, where there is an agent reporting to the worker node with id *020*. The following diagram shows the process of requesting ``GET/syscollector/020/os`` API endpoint:
+
+.. image:: ../images/development/distributed_dapi_worker.png
+
+* **1**: The user does an API request. The API server receives the connection and calls ``distribute_function``. Since the requested endpoint is ``distributed_master`` the worker realizes it can't solve the request locally and proceeds to forward the request to the master node.
+* **2**: The API server doesn't have direct contact with the cluster master node. So the API process forwards the request to a Unix socket the cluster has to receive API requests locally. This Unix server is running inside the cluster process, so it can send requests to the master node. In order to identify the API request when the master sends a response back, the local server adds an ID (``local_client1`` in the example).
+* **3**: When the master receives the API request, it is added to a queue where all pending requests from all nodes are stored. Since this queue is shared with all other nodes, the master adds the node ID to the request (``node2`` in this example).
+* **4**: The master pops the received request out of its queue. It then realizes the agent *020* is reporting in the worker node ``node2`` so it forwards the request to this node because it's the one who has the most updated information about the agent.
+* **5**: The master creates a new request to get the necessary information from the worker. This request includes a new ID (``request1`` in the example) so the master can identify the response when the worker sends it. The original request sent by the worker node remains in the master node awaiting to be solved.
+* **6**: The worker receives the request from the master and adds it to its request queue. The worker solves the request locally and sends the request response to the master using the long string process. Once the response has been sent, the worker notifies the master using the ``dapi_res`` command. The ``task_id`` is necessary since the master can receive multiple long string at the same time and it needs a way to identify each one.
+* **7**: Once the master receives the required information from the worker, it's able to solve the originally received request from the worker. The master notifies the distributed API that the response has already been received.
+* **8**: The master uses the long string process to send the response to the worker node.
+* **9**: The worker node receives the response from the master and starts a new send long string process to forward it to the API process. Once the API receives the response over the Unix socket connection it had with the cluster process, the response is returned to the user.
+
+To sum up, asynchronous tasks are created to forward the request from one node to the other so the servers can always be available to receive new requests. None of the objects shown in the diagram remain blocked waiting for a response, they just wait to be notified when the response is available. That is achieved using `Events <https://docs.python.org/3/library/asyncio-sync.html#asyncio.Event>`_.
+
+Why is it necessary to forward the request to the master node if the agent was reporting in the worker where the request was originally done? The worker nodes don't have a global vision of the cluster state. Just a local one. If an agent was previously reporting to a node and then changes to a new one, the worker won't realize about the change since it's not notified about it. Only the master receives the ``agent-info`` files from all worker nodes, it's the only node that knows where an agent is really reporting. This is why all API requests are always forwarded to the master node, except the ``local_any`` ones.
+
 Troubleshooting
 ---------------
