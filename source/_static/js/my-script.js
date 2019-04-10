@@ -4,7 +4,7 @@
  */
 
 var versions = [
-    {name: "3.8 (current)", url: "/new-design-c3"},
+    {name: "3.8 (current)", url: "/new-design-c1a"},
     {name: "3.7", url: "/3.7"},
     {name: "3.6", url: "/3.6"},
     {name: "3.5", url: "/3.5"},
@@ -58,9 +58,9 @@ function addVersions() {
                 extraPath += '/' + pathTokens[i];
             }
         }
-        
+
         if(extraPath === '/not_found.html') extraPath = '';
-        
+
         $.ajax({
             type: 'HEAD',
             url: event.target.value + extraPath,
