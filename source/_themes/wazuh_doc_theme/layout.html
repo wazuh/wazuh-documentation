@@ -120,7 +120,7 @@
     {% include "header.html" %} {%- block header %}{% endblock header %}
     <section  class="container-fluid central-page-area">
       <div class="row">
-        <nav class="full-toctree-nav navbar-expand-lg navbar-light order-1">
+        <nav class="full-toctree-nav navbar-expand-lg navbar-light order-0">
           <div class="side-scroll collapse navbar-collapse" id="navbar-globaltoc">
             <div id="search-lg" class="title-bar-right col-lg-12 collapsed">
               {% include "searchbar.html" %}
@@ -152,7 +152,7 @@
 
         </nav>
 
-        <div id="main-content" class="col-12 order-0">
+        <div id="main-content" class="col-12 order-1">
           {% if pagename != 'index' %}
           <div class="breadcrumbs-wrapper">
             {% include "breadcrumbs.html" %}
