@@ -321,6 +321,13 @@ Each of the "threads" described in the `Workflow`_ section are implemented as as
 
 In addition to those already mentioned, there are more tasks that are created when a received request requires a complex process to be solved. These tasks are created to solve the received request and destroyed once the response has been sent. This type of architecture is necessary to prevent the server to be busy serving a single request.
 
+One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This task is created when a synchronization process is started and it's destroyed once the synchronization process ends. It includes a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was any error during the synchronization process.
+
+.. thumbnail:: ../images/development/receive_file_task_cluster.png
+    :title: Receive file class inheritance
+    :align: center
+    :width: 80%
+
 Integrity synchronization process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
