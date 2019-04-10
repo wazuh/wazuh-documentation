@@ -45,7 +45,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinxcontrib.images',
-    #'sphinxprettysearchresults',
+    'sphinxprettysearchresults',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
