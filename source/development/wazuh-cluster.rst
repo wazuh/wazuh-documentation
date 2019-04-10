@@ -376,3 +376,39 @@ Why is it necessary to forward the request to the master node if the agent was r
 
 Troubleshooting
 ---------------
+
+The cluster has lots of different components working together: a network protocol, I/O and some Wazuh specific logic. All these components log their progress in ``logs/cluster.log`` file. To make things easier for the developer, each component includes a log tag to help the developer see which exact component logged the event. The following is an example of how the log file looks:
+
+.. code-block:: console
+
+    2019/04/10 15:34:28 wazuh-clusterd: INFO: [Worker worker-1] [Agent info] Waiting to receive zip file from worker
+    2019/04/10 15:34:28 wazuh-clusterd: INFO: [Worker worker-1] [Agent info] Analyzing worker files: Received 1 files to check.
+    2019/04/10 15:34:30 wazuh-clusterd: INFO: [Worker worker-1] [Integrity] Waiting to receive zip file from worker
+    2019/04/10 15:34:30 wazuh-clusterd: INFO: [Worker worker-1] [Integrity] Analyzing worker integrity: Received 12 files to check.
+    2019/04/10 15:34:30 wazuh-clusterd: INFO: [Worker worker-1] [Integrity] Analyzing worker integrity: Files checked. There are no KO files.
+    2019/04/10 15:34:30 wazuh-clusterd: INFO: [Worker worker-1] [Integrity] Finished integrity synchronization.
+    2019/04/10 15:34:32 wazuh-clusterd: INFO: [Cluster] [D API] Receiving request: /agents from worker-1 (73994)
+
+When there is an error in the cluster, it will be logged under the ``ERROR:`` tag. That means a good healthcheck to do when there is a problem in the cluster is the following:
+
+.. code-block:: console
+
+    # grep -i error /var/ossec/logs/cluster.log
+    2019/04/10 15:37:58 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
+
+If the log error message isn't clarifying enough, the traceback can be logged setting the log level to ``DEBUG2``. To do so, use the following command:
+
+.. code-block:: console
+
+    # sed -i "s:wazuh_clusterd.debug=1:wazuh_clusterd.debug=2:g" /var/ossec/etc/internal_options.conf
+    # systemctl restart wazuh-manager
+    # grep -i error /var/ossec/logs/cluster.log -A 10
+    2019/04/10 15:50:37 wazuh-clusterd: ERROR: [Cluster] [Main] Could not get checksum of file client.keys: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
+    Traceback (most recent call last):
+    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.9.0-py3.7.egg/wazuh/cluster/cluster.py", line 213, in walk_dir
+        entry_metadata['md5'] = md5(common.ossec_path + full_path)
+    File "/var/ossec/framework/python/lib/python3.7/site-packages/wazuh-3.9.0-py3.7.egg/wazuh/utils.py", line 380, in md5
+        with open(fname, "rb") as f:
+    PermissionError: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
+
+Having the traceback usually helps to understand what's happening.
