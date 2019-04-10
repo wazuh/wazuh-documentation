@@ -1949,8 +1949,9 @@ blockquote {
 }
 
 p.admonition-title {
-  color: #ffffff;
+  color: #333333;
   padding: 0.5em 1em;
+  font-size: 1.2em;
 }
 
 p.first.admonition-title::before {
@@ -1960,28 +1961,25 @@ p.first.admonition-title::before {
   margin-right: 0.75em;
 }
 
-.note {
-  background-color: rgba(0, 169, 229, .12);
+.note, .warning {
+  background-color: #ffffff;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px #e2e2e2;
 }
 
 .note .admonition-title {
-  background-color: #00a9e5;
+  background-color: #ffffff;
 }
 
 .note p.first.admonition-title::before {
   content: '\f06a';
-}
-
-.warning {
-  background-color: rgba(255, 182, 0, .12);
-}
-
-.warning .admonition-title {
-  background-color: #ffb600;
+  color: #00a9e5;
 }
 
 .warning p.first.admonition-title::before {
   content: '\f071';
+  color: #ffb600;
 }
 
 .admonition .highlight-console {
@@ -1990,8 +1988,34 @@ p.first.admonition-title::before {
   margin-bottom: 0.5em;
 }
 
+.versionadded span.versionmodified, .deprecated span.versionmodified{
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.versionadded > p > span::before, .deprecated span.versionmodified::before {
+  content: '\f06a';
+  display: inline-block;
+  font: normal normal normal 1em/.5 FontAwesome;
+  width: 12px;
+  margin-right: 0.75em;
+}
+
+.deprecated span.versionmodified::before{
+  color: #ffb600;
+}
+
+.versionadded > p > span::before{
+  color: #00a9e5;
+}
+
 a {
   color: #00a9e5;
+}
+
+table a{
+  color: #333;
+  font-weight: bold;
 }
 
 a:hover,
