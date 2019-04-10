@@ -63,7 +63,7 @@ Active response::
 Block an IP with PF
 -------------------
 
-In this example, the ``pf-block`` command is configured to use the ``pf.sh`` script using the data element ``scrip``.  The active response is configured to initiate the ``pf-block`` command on agent 001 when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateless* response as no timeout parameter is defined.
+In this example, the ``pf-block`` command is configured to use the ``pf.sh`` script using the data element ``srcip``.  The active response is configured to initiate the ``pf-block`` command on agent 001 when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateless* response as no timeout parameter is defined.
 
 Command::
 
@@ -79,13 +79,13 @@ Active response::
     <command>pf-block</command>
     <location>defined-agent</location>
     <agent_id>001</agent_id>
-    <rules_group>authentication_failed,authentication_failures</rules_group>
+    <rules_group>authentication_failed|authentication_failures</rules_group>
   </active-response>
 
 Add an IP to the iptables deny list
 -----------------------------------
 
-In this example, the ``firewall-drop`` command is configured to use the ``firewall-drop.sh`` script using the data element ``scrip``.  The active response is configured to initiate the ``firewall-drop`` command on all systems when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The ``<repeated_offenders>`` tag increases the timeout period for each subsequent offense by a specific IP address.
+In this example, the ``firewall-drop`` command is configured to use the ``firewall-drop.sh`` script using the data element ``srcip``.  The active response is configured to initiate the ``firewall-drop`` command on all systems when a rule in either the *"authentication_failed"* or *"authentication_failures"* rule group fires.  This is a *Stateful* response with a timeout of 700 seconds.  The ``<repeated_offenders>`` tag increases the timeout period for each subsequent offense by a specific IP address.
 
 .. note:: This parameter is specified in minutes rather than seconds.
 
@@ -102,7 +102,7 @@ Active response::
   <active-response>
     <command>firewall-drop</command>
     <location>all</location>
-    <rules_group>authentication_failed,authentication_failures</rules_group>
+    <rules_group>authentication_failed|authentication_failures</rules_group>
     <timeout>700</timeout>
     <repeated_offenders>30,60,120</repeated_offenders>
   </active-response>
@@ -112,7 +112,7 @@ Active response for a specified period of time
 
 The action of a stateful response continues for a specified period of time.
 
-In this example, the ``host-deny`` command is configured to use the ``host-deny.sh`` script using the data element ``scrip``.  The active response is configured to initiate the ``host-deny`` command on the local host when a rule with a higher alert level than 6 is fired.
+In this example, the ``host-deny`` command is configured to use the ``host-deny.sh`` script using the data element ``srcip``.  The active response is configured to initiate the ``host-deny`` command on the local host when a rule with a higher alert level than 6 is fired.
 
 Command::
 

@@ -88,7 +88,7 @@ Installing the Wazuh API
 
     # python --version
 
-   It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
+  It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
 
   .. code-block:: javascript
 
@@ -120,7 +120,7 @@ Installing the Wazuh API
 
     # yum install python27
 
-    You may need to first enable a repository in order to get python27, with a command like this:
+  You may need to first enable a repository in order to get python27, with a command like this:
 
   .. code-block:: console
 
@@ -191,7 +191,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # yum install filebeat-6.5.4
+    # yum install filebeat-6.7.1
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 

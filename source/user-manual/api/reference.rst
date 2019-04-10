@@ -162,7 +162,7 @@ Request List
 	* GET /syscollector/:agent_id/ports  (`Get ports info of an agent`_)
 	* GET /syscollector/:agent_id/processes  (`Get processes info`_)
 
-Active_Response
+Active Response
 ----------------------------------------
 Command
 ++++++++++++++++++++++++++++++++++++++++
@@ -928,7 +928,7 @@ Returns the list of agents in a group.
 	            "dateAdd": "2018-10-11 09:38:47",
 	            "node_name": "node02",
 	            "manager": "manager",
-	            "version": "Wazuh v3.8.0",
+	            "version": "Wazuh v3.8.2",
 	            "lastKeepAlive": "2018-10-11 13:58:08",
 	            "os": {
 	               "major": "16",
@@ -1660,7 +1660,7 @@ Returns a list with the available agents.
 	            "manager": "manager",
 	            "node_name": "node02",
 	            "dateAdd": "2018-10-11 09:38:47",
-	            "version": "Wazuh v3.8.0",
+	            "version": "Wazuh v3.8.2",
 	            "lastKeepAlive": "2018-10-11 13:58:08",
 	            "os": {
 	               "major": "16",
@@ -1681,7 +1681,7 @@ Returns a list with the available agents.
 	            "manager": "manager",
 	            "node_name": "node01",
 	            "dateAdd": "2018-10-11 09:37:23",
-	            "version": "Wazuh v3.8.0",
+	            "version": "Wazuh v3.8.2",
 	            "lastKeepAlive": "9999-12-31 23:59:59",
 	            "os": {
 	               "major": "18",
@@ -1764,7 +1764,7 @@ Returns various information from an agent.
 	      "manager": "manager",
 	      "node_name": "node01",
 	      "dateAdd": "2018-10-11 09:37:23",
-	      "version": "Wazuh v3.8.0",
+	      "version": "Wazuh v3.8.2",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
 	      "os": {
 	         "major": "18",
@@ -2610,7 +2610,7 @@ Returns basic information about manager.
 	      "ruleset_version": "3801",
 	      "tz_name": "UTC",
 	      "tz_offset": "+0000",
-	      "version": "v3.8.0",
+	      "version": "v3.8.2",
 	      "path": "/var/ossec",
 	      "max_agents": "14000",
 	      "type": "manager"
@@ -2651,7 +2651,7 @@ Show cluster health
 	         "node02": {
 	            "info": {
 	               "ip": "172.17.0.101",
-	               "version": "3.8.0",
+	               "version": "3.8.2",
 	               "type": "worker",
 	               "name": "node02",
 	               "n_active_agents": 1
@@ -2686,7 +2686,7 @@ Show cluster health
 	         "node01": {
 	            "info": {
 	               "ip": "172.17.0.100",
-	               "version": "3.8.0",
+	               "version": "3.8.2",
 	               "type": "master",
 	               "name": "node01",
 	               "n_active_agents": 1
@@ -2992,7 +2992,7 @@ Returns the node info
 	   "error": 0,
 	   "data": {
 	      "ip": "172.17.0.100",
-	      "version": "3.8.0",
+	      "version": "3.8.2",
 	      "type": "master",
 	      "name": "node01"
 	   }
@@ -3042,13 +3042,13 @@ Returns the nodes info
 	      "items": [
 	         {
 	            "ip": "172.17.0.101",
-	            "version": "3.8.0",
+	            "version": "3.8.2",
 	            "type": "worker",
 	            "name": "node02"
 	         },
 	         {
 	            "ip": "172.17.0.100",
-	            "version": "3.8.0",
+	            "version": "3.8.2",
 	            "type": "master",
 	            "name": "node01"
 	         }
@@ -4707,7 +4707,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "compilation_date": "Fri Jan 11 18:40:06 UTC 2019",
-	      "version": "v3.8.0",
+	      "version": "v3.8.2",
 	      "openssl_support": "yes",
 	      "max_agents": "14000",
 	      "ruleset_version": "3801",
