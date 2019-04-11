@@ -84,4 +84,8 @@ function checkLatestDocs(){
     var page = document.querySelector('#page');
     page.classList.add('no-latest-docs');
   }
+
+  // Updates link to the latest version with the correct path (documentation's home)
+  var link = document.querySelector('.link-latest');
+  link.setAttribute('href', 'https://' + window.location.hostname + '/' + latestVersion + '/index.html');
 }
