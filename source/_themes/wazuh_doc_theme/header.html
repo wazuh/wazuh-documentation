@@ -5,6 +5,18 @@
     General header to be included within every page of Wazuh Documentation.
 #}
 
+{%- block latest %}
+  {%- set nav_version = version %}
+  {% if current_version %}
+    {%- set nav_version = current_version %}
+  {% endif %}
+  {% if nav_version %}
+    <div class="no-latest-notice" data-version="{{ nav_version }}">
+      <span>This is the documentation for Wazuh {{ nav_version }}. Check out the <a class="link-latest" href="#">docs for the latest version of Wazuh</a>!</span>
+    </div>
+  {% endif %}
+{% endblock latest %}
+
 {%- block header %}
 <header role="banner" class="header no-fixed-top">
   <div class="container-fluid align-items-center">

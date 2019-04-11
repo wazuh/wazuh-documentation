@@ -20,6 +20,7 @@ var current_version = "3.8";
 
 $( document ).ready(function() {
     addVersions();
+    checkLatestDocs();
 });
 
 function addVersions() {
@@ -72,4 +73,15 @@ function addVersions() {
             }
         });
     });
+}
+
+function checkLatestDocs(){
+  /* Shows a warning message to the user if current doc version is not the latest version */
+  /* Note: For this to work, it requires the documentation version variable (in file conf.py) and the array of versions (in this script) to be updated */
+  var currentVersion = document.querySelector('.no-latest-notice').getAttribute('data-version');
+  var latestVersion = versions[0].url.replace('/','');
+  if ( currentVersion !== latestVersion ){
+    var page = document.querySelector('#page');
+    page.classList.add('no-latest-docs');
+  }
 }

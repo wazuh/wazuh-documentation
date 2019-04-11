@@ -74,6 +74,30 @@ th {
   margin-bottom: 0.5em;
 }
 
+.no-latest-notice {
+    background-color: #fff;
+    position: -webkit-sticky;
+    position: sticky;
+    height: 40px;
+    top: 0;
+    z-index: 1000000;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: none;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+}
+
+.no-latest-docs .no-latest-notice {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .header {
   background: url('../img/wazuh_bg_head.png'), no-repeat center center;
   background-size: cover;
@@ -244,6 +268,10 @@ header .menuweb-bar .menu-item a {
   position: -webkit-sticky;
   position: sticky;
   top: -1px;
+}
+
+.no-latest-docs .menu-sub {
+  top: 40px;
 }
 
 #search-lg {
@@ -1954,7 +1982,8 @@ p.admonition-title {
   font-size: 1.2em;
 }
 
-p.first.admonition-title::before {
+p.first.admonition-title::before,
+.no-latest-notice span:before {
   display: inline-block;
   font: normal normal normal 1em/.5 FontAwesome;
   width: 12px;
@@ -1965,7 +1994,8 @@ p.first.admonition-title::before {
   background-color: #ffffff;
   border: 1px solid #e2e2e2;
   border-radius: 3px;
-  box-shadow: 2px 2px 2px #e2e2e2;
+  -webkit-box-shadow: 2px 2px 2px #e2e2e2;
+          box-shadow: 2px 2px 2px #e2e2e2;
 }
 
 .note .admonition-title {
@@ -1977,7 +2007,8 @@ p.first.admonition-title::before {
   color: #00a9e5;
 }
 
-.warning p.first.admonition-title::before {
+.warning p.first.admonition-title::before,
+.no-latest-notice span:before {
   content: '\f071';
   color: #ffb600;
 }
@@ -3191,6 +3222,10 @@ div.highlight pre {
         -webkit-box-direction: normal;
             -ms-flex-direction: column;
                 flex-direction: column;
+      }
+
+      .no-latest-docs .side-scroll {
+        top: 90px;
       }
 
       #globaltoc {
