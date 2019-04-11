@@ -19,7 +19,7 @@ Mac OS X agent can be downloaded from our :doc:`packages list<../packages-list/i
      +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
      | Option                | Description                                                                                                                  |
      +=======================+==============================================================================================================================+
-     |   WAZUH_ADDRESS       |  Specifies the managers IP address or hostname.                                                                              |
+     |   WAZUH_ADDRESS       |  Specifies the managers IP address or hostname. You can add multiple values separeted by commas.                             |
      +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
      |   WAZUH_SERVER_PORT   |  Specifies the managers connection port.                                                                                     |
      +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
@@ -54,29 +54,29 @@ Mac OS X agent can be downloaded from our :doc:`packages list<../packages-list/i
 
      .. code-block:: console
 
-           # launchctl WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" \
-                  WAZUH_AGENT_NAME="macos_agent" installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+           # launchctl setenv WAZUH_ADDRESS "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" WAZUH_PASSWORD "TopSecret" \
+                  WAZUH_AGENT_NAME "macos_agent" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
      Registration with password and assigning a group:
 
      .. code-block:: console
 
-           # launchctl WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" \
-                  WAZUH_GROUP="my-group" installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+           # launchctl setenv WAZUH_ADDRESS "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" WAZUH_PASSWORD "TopSecret" \
+                  WAZUH_GROUP "my-group" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
      Registration with relative path to CA. It will be searched at your Wazuh installation folder:
 
      .. code-block:: console
 
-           # launchctl WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="macos_agent" \
-                  WAZUH_CERTIFICATE="rootCA.pem" installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+           # launchctl setenv WAZUH_ADDRESS "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" WAZUH_AGENT_NAME "macos_agent" \
+                  WAZUH_CERTIFICATE "rootCA.pem" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
      Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
      .. code-block:: console
 
-           # launchctl WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_KEY="/var/ossec/etc/\
-                  sslagent.key" WAZUH_PEM="/var/ossec/etc/sslagent.cert" installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+           # launchctl setenv WAZUH_ADDRESS "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" WAZUH_KEY "/var/ossec/etc/\
+                  sslagent.key" WAZUH_PEM "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
      .. note::
            To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <verify-hosts>` section.
@@ -85,8 +85,8 @@ Mac OS X agent can be downloaded from our :doc:`packages list<../packages-list/i
 
      .. code-block:: console
 
-           # launchctl WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="macos_agent" \
-                  WAZUH_PROTOCOL="TCP" installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+           # launchctl setenv WAZUH_ADDRESS "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" WAZUH_AGENT_NAME "macos_agent" \
+                  WAZUH_PROTOCOL "tcp" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
   b) The GUI:
 
