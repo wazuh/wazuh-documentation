@@ -15,7 +15,7 @@ Introduction
 
 Recommended reading: :ref:`wazuh-cluster`.
 
-Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, therefore, the workload needs to be balanced among multiple nodes. Almost every modern software can work in distributed mode because of this.
+Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, therefore, the workload needs to be balanced among multiple nodes. Therefore, horizontal scaling arises as the proper approach to balance the load for a large amount of agents.
 
 Wazuh's main workload is processing events from the agents and raise alerts. This is why all required information to receive events from the agents needs to be synchronized. This information is:
 
