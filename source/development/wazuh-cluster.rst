@@ -125,7 +125,7 @@ If there is an error during this process the worker is NOT notified about it.
 File integrity thread
 ~~~~~~~~~~~~~~~~~~~~~
 
-This thread is only executed by the master. It periodically reads all its integrity files and calculate their cheksums. This was added to prevent the master to keep calculating the same checksums for every worker. This way, the checksums are already calculated and ready to use everytime a worker starts a synchronization process.
+This thread is only executed by the master. It periodically reads all its integrity files and calculate their cheksums. Calculating a checksum is a slow process, and it can reduce performance when there are multiple workers in the cluster since the checksums would need to be calculated for every worker. To fix that problem, this thread calculates the necessary integrity checksums and stores it in a global variable which is periodically updated.
 
 Distributed API thread
 ~~~~~~~~~~~~~~~~~~~~~~
