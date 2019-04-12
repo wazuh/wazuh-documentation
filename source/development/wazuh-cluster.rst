@@ -15,13 +15,13 @@ Introduction
 
 Recommended reading: :ref:`wazuh-cluster`.
 
-Today's environments usually have thousands of new agents everyday. A single manager architecture is not capable of managing so many events and, therefore, the workload needs to be balanced among multiple nodes. Almost every modern software can work in distributed mode because of this.
+Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, therefore, the workload needs to be balanced among multiple nodes. Almost every modern software can work in distributed mode because of this.
 
 Wazuh's main workload is processing events from the agents and raise alerts. This is why all required information to receive events from the agents needs to be synchronized. This information is:
 
 * The agents' keys so the nodes can accept incoming connections from agents.
 * The agents' shared configuration so the nodes can send the agents their configuration.
-* The agents' groups assigments, so the knows which configuration to send to the agents.
+* The agents' groups assignments, so every node knows which configuration to send to the agents.
 * The custom decoders, rules and CDB lists so the nodes can correctly process events from the agents.
 * The agents' last keep alive and OS information, which is received once the agents connect to a node and it's necessary to know whether an agent is reporting or not.
 
@@ -45,7 +45,7 @@ Agents are usually configured to report to a load balancer which is configured t
 Types of nodes
 ^^^^^^^^^^^^^^
 
-There are two different types of nodes inside the Wazuh cluster. These node types define the node's tasks inside the cluster and also, they define an hierarchy of nodes used to know which information prevails when doing synchronizations.
+There are two different types of nodes inside the Wazuh cluster. These node types define the node's tasks inside the cluster and also, they define a hierarchy of nodes used to know which information prevails when doing synchronizations.
 
 Master
 ~~~~~~
@@ -57,7 +57,7 @@ The master node is in charge of:
 * Updating custom rules, decoders and CDB lists.
 * Synchronizing all this information to the workers.
 
-All this information is called *Integrity* and is synchronized **from** the master **to** the workers no matter if the worker's has a more recent modification time or a higher size.
+All this information is called *Integrity* and is synchronized **from** the master **to** the workers no matter if the workers have a more recent modification time or a higher size.
 
 Master nodes can also receive and process events from agents the same way a worker would do.
 
@@ -68,7 +68,7 @@ A worker node is in charge of:
 
 * Receiving updates from the master
 * Receiving and processing events from agents.
-* Sending the master last keep alives from agents and remoted's group assigments.
+* Sending the master last keepalives from agents and remoted's group assignments.
 
 If any integrity file is modified in a worker node, its content will be replaced with the contents the master node has.
 
@@ -82,7 +82,7 @@ The image below shows a schema of how a master node and a worker node interact w
 Keep alive
 ~~~~~~~~~~
 
-The worker nodes send a keep alive message to the master every so often. The master keeps the date of the last received keep alive and knows the interval the worker is using to send its keep alives. If the last keep alive received by a worker is older than a determined amount of time, the master considers the worker is disconnected and inmediately closes the connection. When a worker realizes the connection has been closed, it automatically tries to reconnect again.
+The worker nodes send a keep-alive message to the master every so often. The master keeps the date of the last received keep alive and knows the interval the worker is using to send its keepalives. If the last keep alive received by a worker is older than a determined amount of time, the master considers the worker is disconnected and immediately closes the connection. When a worker realizes the connection has been closed, it automatically tries to reconnect again.
 
 This feature is very useful to drop nodes that are facing a networking issue or aren't available at the moment.  It was implemented  `here <https://github.com/wazuh/wazuh/issues/1355>`_.
 
@@ -101,35 +101,35 @@ This thread is in charge of synchronizing master's integrity information among a
         * The merge type (agent-groups or agent-info).
         * The filename
 
-3. The master compares the received checksums with its own and creates three different group of files:
+3. The master compares the received checksums with its own and creates three different groups of files:
     * Missing: Files that are present in the master node but missing in the worker. They must be created in the worker.
     * Extra: Files that are present in the worker node but missing in the master. They must be removed in the worker node as well.
-    * Extra valid: Extra files that, instead of be removed in the worker, must be created in the master. This is a special type of file created for agent-groups files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
+    * Extra valid: Extra files that, instead of being removed in the worker, must be created in the master. This is a special type of file created for agent-groups files. These files can be created in worker nodes when an agent is re-registered and was previously assigned to a group.
     * Shared: Files that are present in both master and worker but have a different checksum. They must be updated in the worker node.
 
     Then the master prepares a zip package with a JSON containing all this information and the required files the worker needs to update.
 4. Once the worker receives the package, it updates the necessary files and then it sends the master the required extra valid files.
 
-If there is no data to synchronize or there has been an error reading data from worker, the worker is always notified about it.
+If there is no data to synchronize or there has been an error reading data from the worker, the worker is always notified about it.
 
 Agent info
 ~~~~~~~~~~
 
-This thread is in charge of synchronizing the agent's last keep alives and OS information with the master. The communication here is also started by the worker and it has the following stages:
+This thread is in charge of synchronizing the agent's last keepalives and OS information with the master. The communication here is also started by the worker and it has the following stages:
 
-1. The worker sends the master a file containing all agent infos merged in a single one. Only files whose modification date is less than half an hour will be sent.
-2. The master decompresses the merged file and updates agent statuses. During the update process the master compares modification dates of its local file and the remote file. In case the master has a more recent file, the remote one is discarded.
+1. The worker sends the master a file containing all agent-info files merged in a single one. Only files whose modification date is less than half an hour will be sent.
+2. The master decompresses the merged file and updates agent statuses. During the update process, the master compares the modification dates of its local file and the remote file. In case the master has a more recent file, the remote one is discarded.
 
 If there is an error during this process the worker is NOT notified about it.
 
 File integrity thread
 ~~~~~~~~~~~~~~~~~~~~~
 
-This thread is only executed by the master. It periodically reads all its integrity files and calculate their cheksums. Calculating a checksum is a slow process, and it can reduce performance when there are multiple workers in the cluster since the checksums would need to be calculated for every worker. To fix that problem, this thread calculates the necessary integrity checksums and stores it in a global variable which is periodically updated.
+This thread is only executed by the master. It periodically reads all its integrity files and calculates their checksums. Calculating a checksum is a slow process, and it can reduce performance when there are multiple workers in the cluster since the checksums would need to be calculated for every worker. To fix that problem, this thread calculates the necessary integrity checksums and stores it in a global variable which is periodically updated.
 
 Distributed API thread
 ~~~~~~~~~~~~~~~~~~~~~~
-This thread isn't shown in the schema. It runs in both master and worker, since it's independent of node type. It's used to receive API requests and forward them to the most suitable node to process the request. The operation of this thread will be explained later.
+This thread isn't shown in the schema. It runs in both master and worker since it's independent of the node type. It's used to receive API requests and forward them to the most suitable node to process the request. The operation of this thread will be explained later.
 
 To sum up, these are the threads run in the cluster:
 
@@ -167,7 +167,7 @@ The wazuh cluster protocol is defined on top of this framework. The following di
 
 The higher classes on the diagram (``wazuh.cluster.common.Handler``, ``wazuh.cluster.server.AbstractServerHandler`` and ``wazuh.cluster.client.AbstractClient``) define abstract concepts of what a client and a server is. Those abstract concepts are used by the lower classes on the diagram (``wazuh.cluster.local_server.LocalServerHandler``, ``wazuh.cluster.master.MasterHandler``, ``wazuh.cluster.worker.WorkerHandler`` and ``wazuh.cluster.local_client.LocalClientHandler``) to define specific communication protocols. These specific protocols are described in the `Protocols`_ section.
 
-There are abstract server and client classes to handle mutliple connections from multiple clients and connecting to the server. This way, all the logic to connect to a server or handling multiple clients can be shared between all types of servers and clients in the cluster. These classes are shown in the diagrams below:
+There are abstract server and client classes to handle multiple connections from multiple clients and connecting to the server. This way, all the logic to connect to a server or handling multiple clients can be shared between all types of servers and clients in the cluster. These classes are shown in the diagrams below:
 
 .. thumbnail:: ../images/development/cluster_clients.png
     :title: Wazuh cluster protocol class inheritance
@@ -197,7 +197,7 @@ The protocol message has two parts: a header and a payload. The payload will be 
 The header has three subparts:
 
 * **Counter**: It specifies the message ID. It's randomly initialized and then increased with every new sent request. It's very useful when receiving a response, so it indicates which sent request it is replying to.
-* **Payload length**: Specifies the amount of data contained in the message payload. Used to know how much data to expect receiving.
+* **Payload length**: Specifies the amount of data contained in the message payload. Used to know how much data to expect to receive.
 * **Command**: Specifies protocol message. This string will always be 12 characters long. If the command is not 12 characters long, a padding of ``-`` is added until the string reaches the expected length. All available commands in the protocol are shown below.
 
 
@@ -259,12 +259,12 @@ This communication protocol is used by all cluster nodes to synchronize the nece
 Local protocol
 ~~~~~~~~~~~~~~
 
-This communication protocol is used by the API to forward requests to other cluster nodes. All communications are made using an Unix socket since the communication is all local (from the process running the API to the process running the cluster). These commands are defined in ``wazuh.cluster.local_server.LocalServerHandler.process_request``, ``wazuh.cluster.local_server.LocalServerHandlerMaster.process_request`` and ``wazuh.cluster.local_server.LocalServerHandlerWorker.process_request``.
+This communication protocol is used by the API to forward requests to other cluster nodes. All communications are made using a Unix socket since the communication is all local (from the process running the API to the process running the cluster). These commands are defined in ``wazuh.cluster.local_server.LocalServerHandler.process_request``, ``wazuh.cluster.local_server.LocalServerHandlerMaster.process_request`` and ``wazuh.cluster.local_server.LocalServerHandlerWorker.process_request``.
 
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | Message           | Received in | Arguments             | Description                                                                                     |
 +===================+=============+=======================+=================================================================================================+
-| ``get_config``    | Both        | None                  | Returns active cluster configuration. Necessary for config on demand API calls.                 |
+| ``get_config``    | Both        | None                  | Returns active cluster configuration. Necessary for active configuration API calls.             |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``get_nodes``     | Both        | Arguments<Dict>       | Request sent from ``cluster_control -l``.                                                       |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
@@ -321,7 +321,7 @@ Each of the "threads" described in the `Workflow`_ section are implemented as as
 
 In addition to those already mentioned, there are more tasks that are created when a received request requires a complex process to be solved. These tasks are created to solve the received request and destroyed once the response has been sent. This type of architecture is necessary to prevent the server to be busy serving a single request.
 
-One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This task is created when a synchronization process is started and it's destroyed once the synchronization process ends. It includes a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was any error during the synchronization process.
+One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This task is created when a synchronization process is started and it's destroyed once the synchronization process ends. It includes a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
 
 .. thumbnail:: ../images/development/receive_file_task_cluster.png
     :title: Receive file class inheritance
@@ -331,12 +331,12 @@ One of those tasks, which is defined as a class, is the task created to receive 
 Integrity synchronization process
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's review the integrity synchronization process to see how asyncio tasks are created to process data from peer. The following diagram shows the whole process of synchronizing integrity:
+Let's review the integrity synchronization process to see how asyncio tasks are created to process data from the peer. The following diagram shows the whole process of synchronizing integrity:
 
 .. image:: ../images/development/sync_integrity_diagram.png
 
 * **1**: The worker's ``sync_integrity`` task wakes up after sleeping during *interval* seconds. The first thing it does is checking whether the previous synchronization process is finished or not using the ``sync_i_w_m_p`` command. The master replies with a boolean value specifying that the previous synchronization process is finished and, therefore, the worker can start a new one.
-* **2**: The worker starts the synchronization process using ``sync_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker node. But since no file has been received yet, the task remains waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the the file has been sent.
+* **2**: The worker starts the synchronization process using ``sync_i_w_m`` command. When the master receives the command, it creates an asyncio task to process the received integrity from the worker node. But since no file has been received yet, the task keeps waiting until the worker sends the file. The master sends the worker the task ID so the worker can notify the master to wake it up once the file has been sent.
 * **3**: The worker starts the sending file process. Which has three steps: ``new_file``, ``file_upd`` and ``file_end``.
 * **4**: The worker notifies the master that the integrity file has already been sent. In that moment, the master wakes the previously created task up and compares the worker files with its own. In this example the master finds out the worker integrity is outdated.
 * **5**: The master starts a sync integrity process with the worker using the ``sync_m_c`` command. The worker creates a task to process the received integrity from the master but the task is sleeping since it's not been received yet. This is the same process the worker has done with the master but changing directions.
