@@ -102,7 +102,7 @@ Installing Wazuh agent
   +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
   | Option                | Description                                                                                                                  |
   +=======================+==============================================================================================================================+
-  |   WAZUH_ADDRESS       |  Specifies the managers IP address or hostname. You can add multiple values separeted by commas.                             |
+  |   WAZUH_MANAGER_IP    |  Specifies the managers IP address or hostname. You can add multiple values separeted by commas.                             |
   +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
   |   WAZUH_SERVER_PORT   |  Specifies the managers connection port.                                                                                     |
   +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
@@ -135,28 +135,28 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-           # WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" \
+           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" \
                 WAZUH_AGENT_NAME="centos7" yum install wazuh-agent
 
   Registration with password and assigning a group:
 
   .. code-block:: console
 
-           # WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" \
+           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" \
                 WAZUH_GROUP="my-group" yum install wazuh-agent
 
   Registration with relative path to CA. It will be searched at your Wazuh installation folder:
 
   .. code-block:: console
 
-           # WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="centos7" \
+           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="centos7" \
                 WAZUH_CERTIFICATE="rootCA.pem" yum install wazuh-agent
 
   Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
 
   .. code-block:: console
 
-           # WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_KEY="/var/ossec/etc/sslagent.key" \
+           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_KEY="/var/ossec/etc/sslagent.key" \
                 WAZUH_PEM="/var/ossec/etc/sslagent.cert" yum install wazuh-agent
 
   .. note::
@@ -166,14 +166,14 @@ Installing Wazuh agent
 
   .. code-block:: console
 
-           # WAZUH_ADDRESS="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="centos7" \
+           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="centos7" \
                 WAZUH_PROTOCOL="tcp" yum install wazuh-agent
 
   Registration and adding multiple address:
 
   .. code-block:: console
 
-           # WAZUH_ADDRESS="192.168.1.1,192.168.1.2" WAZUH_AUTHD_SERVER="192.168.1.1" \
+           # WAZUH_MANAGER_IP="192.168.1.1,192.168.1.2" WAZUH_AUTHD_SERVER="192.168.1.1" \
                 WAZUH_AGENT_NAME="centos7" yum install wazuh-agent
 
 
