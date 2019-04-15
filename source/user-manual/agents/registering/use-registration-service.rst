@@ -114,7 +114,7 @@ To allow this option, change the value to *yes* in the ``/var/ossec/etc/ossec.co
   <auth>
     ...
     <use_password>yes</use_password>
-    ...     
+    ...
   </auth>
 
 To apply the changes, restart the manager:
@@ -175,15 +175,27 @@ Manager verification using SSL
     # openssl req -new -nodes -newkey rsa:2048 -keyout sslmanager.key -out sslmanager.csr -subj '/C=US/CN=192.168.1.2'
     # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial
 
-2. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the manager**, and restart it:
+2. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the manager**:
 
   .. code-block:: console
 
     # cp sslmanager.cert sslmanager.key /var/ossec/etc
-    
-    # systemctl restart wazuh-manager 
 
-3. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program:
+
+3. Modify the ``ssl_manager_cert`` and ``ssl_manager_key`` parameters in ``ossec.conf`` **on the manager** to include these files:
+
+  .. code-block:: xml
+
+    <ssl_manager_cert>/var/ossec/etc/sslmanager.cert</ssl_manager_cert>
+    <ssl_manager_key>/var/ossec/etc/sslmanager.key</ssl_manager_key>
+
+4. Restart the manager:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+5. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program:
 
   a. For Linux systems:
 
@@ -220,14 +232,26 @@ In this example, we are going to create a certificate for agents without specify
     # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
     # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there) and start the registration service:
+2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there):
 
   .. code-block:: console
 
     # cp rootCA.pem /var/ossec/etc
-    # /var/ossec/bin/ossec-authd -v /var/ossec/etc/rootCA.pem
 
-3. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
+3. Modify the ``ossec.conf`` file **on the manager** to include the CA path and enable ``ssl_verify_host``:
+
+  .. code-block:: xml
+
+    <ssl_verify_host>yes</ssl_verify_host>
+    <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
+
+4. Restart the manager:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+5. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
 
   a. For Linux systems:
 
@@ -254,14 +278,26 @@ This is an alternative method to the previous one. In this case, we will bind th
     # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=192.168.1.3'
     # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there) and start the registration service. Note that we use the ``-s`` flag in order to enable agent host validation:
+2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there):
 
   .. code-block:: console
 
     # cp rootCA.pem /var/ossec/etc
-    # /var/ossec/bin/ossec-authd -v /var/ossec/etc/rootCA.pem -s
 
-3. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
+3. Modify the ``ossec.conf`` file **on the manager** to include the CA path and enable ``ssl_verify_host``:
+
+  .. code-block:: xml
+
+    <ssl_verify_host>yes</ssl_verify_host>
+    <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
+
+4. Restart the manager:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+5. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
 
   a. For Linux systems:
 
