@@ -300,7 +300,7 @@ Follow the next steps to receive the syslog events in a Wazuh Window agent and f
     - Windows fully updated.
     - Java JRE https://www.java.com/es/download/windows-64bit.jsp
 
-2.   Configuring JDK in Windows.
+2.   Configuring JRE in Windows.
 
     - Click Start, search for "Environment Variables" and open the system properties applet. The advanced tab of the "System Properties" applet should appear.
     - Click the Environment Variables button.
