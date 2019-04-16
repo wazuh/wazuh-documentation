@@ -52,21 +52,13 @@ Simple method
 
 This is the easiest method to register agents. It doesn't require any kind of authorization or host verification. To do so, follow these steps:
 
-1. On the agents, run the ``agent-auth`` program, using the manager's IP address.
+1. On the agents, run the ``agent-auth`` program, pointing to the Wazuh manager address.
 
-  a. For Linux systems:
+  .. code-block:: console
 
-    .. code-block:: console
+    # /var/ossec/bin/agent-auth -m <MANAGER_IP>
 
-      # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
-
-  b. For Windows systems:
-
-    .. code-block:: console
-
-      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
-
-2. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
+2. Edit the Wazuh agent configuration to add the Wazuh manager address.
 
   - In the file ``/var/ossec/etc/ossec.conf``, replace *MANAGER_IP* with the Wazuh manager address:
 
@@ -79,7 +71,7 @@ This is the easiest method to register agents. It doesn't require any kind of au
         </server>
       </client>
 
-  - Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
+  - Or using ``sed`` to replace it with the Wazuh manager address, using ``10.0.0.4`` as an example IP:
 
     .. code-block:: console
 
@@ -150,6 +142,7 @@ To use the registration service with SSL certification, you must create a Certif
   # openssl req -x509 -new -nodes -newkey rsa:2048 -keyout rootCA.key -out rootCA.pem -batch -subj "/C=US/ST=CA/O=Manager"
 
 .. warning::
+
   The file ``rootCA.key`` that we have just created is the **private key** of the CA. It is needed to sign other certificates and it is critical to keep it secure. Note that we will never copy this file to other hosts.
 
 Manager verification using SSL
