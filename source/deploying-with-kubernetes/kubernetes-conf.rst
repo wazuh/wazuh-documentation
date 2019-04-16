@@ -46,75 +46,94 @@ You can check how we build our Wazuh docker containers in our `repository <https
 
 This pod contains the master node of the Wazuh cluster. The master node centralizes and coordinates worker nodes, making sure the critical and required data is consistent across all nodes. The management is performed only in this node, so the agent registration service (authd) and the API are placed here.
 
-Details:
-    - Image: Docker Hub 'wazuh/wazuh:3.9.0_6.6.2'
-    - Controller: StatefulSet
++-------------------------+-------------+
+| Image                   | Controller  |
++=========================+=============+
+| wazuh/wazuh:3.9.0_6.7.1 | StatefulSet |
++-------------------------+-------------+
 
 **Wazuh worker 0 / 1**
 
 These pods contain a worker node of the Wazuh cluster. They will receive the agent events.
 
-Details:
-    - Image: Docker Hub 'wazuh/wazuh:3.9.0_6.6.2'
-    - Controller: StatefulSet
++-------------------------+-------------+
+| Image                   | Controller  |
++=========================+=============+
+| wazuh/wazuh:3.9.0_6.7.1 | StatefulSet |
++-------------------------+-------------+
 
 **Elasticsearch**
 
 Elasticsearch pod, it ingests events received from Logstash.
 
-Details:
-    - Image: Docker Hub 'wazuh/wazuh-elasticsearch:3.9.0_6.6.2'
-    - Controller: StatefulSet
++---------------------------------------+-------------+
+| Image                                 | Controller  |
++=======================================+=============+
+| wazuh/wazuh-elasticsearch:3.9.0_6.7.1 | StatefulSet |
++---------------------------------------+-------------+
 
 **Logstash**
 
 Logstash pod, it's listening to events from the Filebeat instances that are installed on every Wazuh manager node, then it sends all the events to Elasticsearch.
 
-Details:
-    - image: Docker Hub 'wazuh/wazuh-logstash:3.9.0_6.6.2'
-    - Controller: Deployment
++----------------------------------+-------------+
+| Image                            | Controller  |
++==================================+=============+
+| wazuh/wazuh-logstash:3.9.0_6.7.1 | Deployment  |
++----------------------------------+-------------+
 
 **Kibana**
 
 Kibana pod, the frontend for Elasticsearch, it also includes the Wazuh app.
 
-Details:
-    - image: Docker Hub 'wazuh/wazuh-kibana:3.9.0_6.6.2'
-    - Controller: Deployment
++--------------------------------+-------------+
+| Image                          | Controller  |
++================================+=============+
+| wazuh/wazuh-kibana:3.9.0_6.7.1 | Deployment  |
++--------------------------------+-------------+
 
 **Nginx**
 
 Nginx service used as a reverse proxy for Kibana.
 
-Details:
-    - image: Docker Hub 'wazuh/wazuh-nginx:3.9.0_6.6.2'
-    - Controller: Deployment
++--------------------------------+-------------+
+| Image                          | Controller  |
++================================+=============+
+| wazuh/wazuh-nginx:3.9.0_6.7.1  | Deployment  |
++--------------------------------+-------------+
 
 Services
 ^^^^^^^^
 
 **Elastic stack**
 
-    - wazuh-elasticsearch:
-        Communication for Elasticsearch nodes.
-    - elasticsearch:
-        Elasticsearch API. Used by Logstash/Kibana to write/read alerts.
-    - wazuh-nginx:
-        Service for HTTPS access to Kibana.
-    - kibana:
-        Kibana service.
-    - Logstash: 
-        Logstash service, each Wazuh node has a Filebeat instance pointing to this service.
+    +----------------------+-------------------------------------------------------------------------------------+
+    | Name                 | Description                                                                         |
+    +======================+=====================================================================================+
+    | wazuh-elasticsearch  | Communication for Elasticsearch nodes.                                              |
+    +----------------------+-------------------------------------------------------------------------------------+
+    | elasticsearch        | Elasticsearch API. Used by Logstash/Kibana to write/read alerts.                    |
+    +----------------------+-------------------------------------------------------------------------------------+
+    | wazuh-nginx          | Service for HTTPS access to Kibana.                                                 |
+    +----------------------+-------------------------------------------------------------------------------------+
+    | kibana               | Kibana service.                                                                     |
+    +----------------------+-------------------------------------------------------------------------------------+
+    | logstash             | Logstash service, each Wazuh node has a Filebeat instance pointing to this service. |
+    +----------------------+-------------------------------------------------------------------------------------+
 
 **Wazuh**
 
-    - wazuh:
-        Wazuh API: wazuh-master.your-domain.com:55000
-        Agent registration service (authd): wazuh-master.your-domain.com:1515
-    - wazuh-workers:
-        Reporting service: wazuh-manager.your-domain.com:1514
-    - wazuh-cluster:
-        Communication for Wazuh manager nodes.
+    +----------------------+-------------------------------------------------------------------------+
+    | Name                 | Description                                                             |
+    +======================+=========================================================================+
+    | wazuh                | Wazuh API: wazuh-master.your-domain.com:55000                           |
+    |                      +-------------------------------------------------------------------------+
+    |                      | Agent registration service (authd): wazuh-master.your-domain.com:1515   |
+    +----------------------+-------------------------------------------------------------------------+
+    | wazuh-workers        | Reporting service: wazuh-manager.your-domain.com:1514                   |
+    +----------------------+-------------------------------------------------------------------------+
+    | wazuh-cluster        | Communication for Wazuh manager nodes.                                  |
+    +----------------------+-------------------------------------------------------------------------+
 
 Deploy
 ------
@@ -260,7 +279,7 @@ Verifying the deployment
 
     In case you created domain names for the services, you should be able to access Kibana using the proposed domain name: https://wazuh.your-domain.com.
 
-    Also, you can access using the External-IP (from the VPC): https://192.168.10.5.elb.amazonaws.com
+    Also, you can access using the DNS (Eg: https://internal-xxx-yyy.us-east-1.elb.amazonaws.com):
 
     .. code-block:: console
 
@@ -274,9 +293,6 @@ Verifying the deployment
 Agents
 ------
 
-Monitoring hosts
-^^^^^^^^^^^^^^^^
-
 Wazuh agents are designed to monitor hosts. To start using them:
 
 1. :doc:`Install the agent <../installation-guide/installing-wazuh-agent/index>`.
@@ -289,14 +305,3 @@ Wazuh agents are designed to monitor hosts. To start using them:
 
 
 4. Using the `authd <https://documentation.wazuh.com/current/user-manual/reference/daemons/ossec-authd.html?highlight=authd>`_ daemon with option *-m* specifying the external IP of the Wazuh service that takes to the port 1515 or its DNS if using *AWS Route 53*.
-
-
-Monitoring containers
-^^^^^^^^^^^^^^^^^^^^^
-
-The goal here is to monitor the container from the node that has built it.
-
-The next two options are valid:
-
-    - Install the agent on the host, this is the recommended option since the agent was originally designed for this purpose.
-    - Running the agent in the container: containers are sealed and designed to run a single process. It's not the best solution.

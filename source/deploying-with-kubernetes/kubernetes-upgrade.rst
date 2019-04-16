@@ -28,151 +28,6 @@ Our Kubernetes deployment uses our Wazuh images from Docker. If we look at the f
 
 Any modification related to these files will also be made in the associated volume. When the replica pod is created, it will get those files from the volume, keeping the previous changes.
 
-For a better understanding, we will give an example:
-
-Assuming we have already deployed the environment using the following Wazuh image:
-
-.. code-block:: yaml
-
-    containers:
-    - name: wazuh-manager
-      image: 'wazuh/wazuh:3.6.1_6.4.0'
-
-Let's proceed by creating a set of rules in our `local_rules.xml` file at location `/var/ossec/etc/rules` in our wazuh manager master pod.
-
-Edit the `local_rules.xml` file:
-
-.. code-block:: xml
-
-    <!-- Local rules -->
-
-    <!-- Modify it at your will. -->
-
-    <!-- Example -->
-    <group name="local,syslog,sshd,">
-
-    <!--
-    Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 1066 ssh2
-    -->
-    <rule id="100001" level="5">
-        <if_sid>5716</if_sid>
-        <srcip>1.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 1.1.1.1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-
-    <rule id="100002" level="5">
-        <if_sid>5716</if_sid>
-        <srcip>2.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 2.1.1.1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-
-    <rule id="100003" level="7">
-        <if_sid>5716</if_sid>
-        <srcip>3.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 3.1.1.1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-
-    </group>
-
- 
-.. code-block:: yaml
-
-    volumeMounts:
-    - name: config
-      mountPath: /wazuh-config-mount/etc/ossec.conf
-      subPath: ossec.conf
-      readOnly: true
-    - name: wazuh-manager-master
-      mountPath: /var/ossec/data
-    - name: wazuh-manager-master
-      mountPath: /etc/postfix
-
-We can see their content:
-
-.. code-block:: console
-
-    root@wazuh-manager-master-0:/# cat /var/ossec/data/etc/rules/local_rules.xml
-
-.. code-block:: xml
-
-    <!-- Local rules -->
-
-    <!-- Modify it at your will. -->
-
-    <!-- Example -->
-    <group name="local,syslog,sshd,">
-
-    <!--
-    Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 1066 ssh2
-    -->
-    <rule id="100001" level="5">
-        <if_sid>5716</if_sid>
-        <srcip>1.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 1.1.1.1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-
-    <rule id="100002" level="5">
-        <if_sid>5716</if_sid>
-        <srcip>2.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 2.1.1.2.5,</group>
-    </rule>
-    </group>
-    
-
-.. code-block:: console1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-
-    <rule id="100003" level="7">
-        <if_sid>5716</if_sid>
-        <srcip>3.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 3.1.1.1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.
-
-    root@wazuh-manager-master-0:/# cat /etc/postfix/etc/rules/local_rules.xml
-
-.. code-block:: xml
-
-    <!-- Local rules -->
-
-    <!-- Modify it at your will. -->
-
-    <!-- Example -->
-    <group name="local,syslog,sshd,">
-
-    <!--
-    Dec 10 01:02:02 host sshd[1234]: Failed none for root from 1.1.1.1 port 1066 ssh2
-    -->
-    <rule id="100001" level="5">
-        <if_sid>5716</if_sid>
-        <srcip>1.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 1.1.1.1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-
-    <rule id="100002" level="5">
-        <if_sid>5716</if_sid>
-        <srcip>2.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 2.1.1.1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-
-    <rule id="100003" level="7">
-        <if_sid>5716</if_sid>
-        <srcip>3.1.1.1</srcip>
-        <description>sshd: authentication failed from IP 3.1.1.1.</description>
-        <group>authentication_failed,pci_dss_10.2.4,pci_dss_10.2.5,</group>
-    </rule>
-    </group>
-
-At this point, if the pod was dropped or updated, Kubernetes would be in charge of creating a replica of it that would link to the volumes created and would keep any changes referenced in the files and directories that we export to those volumes.
-
-Once explained the operation regarding the volumes, we proceed to update Wazuh in one simple step.
-
 Change the image of the container
 ---------------------------------
 
@@ -184,13 +39,13 @@ These files are the *StatefulSet* files:
     - wazuh-worker-0-sts.yaml
     - wazuh-worker-1-sts.yaml
 
-For example, we had this version before:
+For example:
 
 .. code-block:: yaml
 
     containers:
     - name: wazuh-manager
-      image: 'wazuh/wazuh:3.6.1_6.4.0'
+      image: 'wazuh/wazuh:3.9.0_6.7.1'
 
 
 Apply the new configuration
@@ -200,7 +55,7 @@ The last step is to apply the new configuration of each pod. For example for the
 
 .. code-block:: console
 
-    ubuntu@k8s-control-server:~/wazuh-kubernetes/manager_cluster$ kubectl apply -f wazuh-manager-master-sts.yaml
+    $ kubectl apply -f wazuh-manager-master-sts.yaml
     statefulset.apps "wazuh-manager-master" configured
 
 This process will end the old pod while creating a new one with the new version, linked to the same volume. Once the Pods are booted, the update will be ready and we can check the new version of Wazuh installed, the cluster and the changes that have been maintained through the use of the volumes.
