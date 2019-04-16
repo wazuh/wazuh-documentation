@@ -179,6 +179,7 @@ Windows installer can take care of the installing, registering and configuring t
 
     # wazuh-agent-3.8.2-1.msi /q ADDRESS="<Agent manager server>" AUTHD_SERVER="<Agent registration server>" PASSWORD="<Agent registration password>" PROTOCOL="TCP"
 
+
 **Agent deployment on Mac OS systems**
 ``````````````````````````````````````
 
@@ -216,51 +217,47 @@ Edit /Library/Ossec/etc/ossec.conf, to set the configuration for your manager se
 
     # /Library/Ossec/bin/ossec-control restart
 
-
 Sending messages to a remote Server
 -----------------------------------
 
-It is possible to forward logs from a remote machine, routers, firewalls, etc, to a server. This server stores the logs received from a remote system in a specific file. Then, a Wazuh agent installed on that server will be configured to read the written file and send the logs to the Wazuh manager.
-There are different ways of doing it:
+Wazuh agents can run in a wide range of operating systems, but when it is not possible to install an agent due to software incompatibilities or business restrictions, you can forward Syslog events to Wazuh Cloud. This is a common use case for network devices such as routers or firewalls.
 
-- Linux + Syslog
-- Linux + Logstash
-- Windows + Logstash
+Since every communication with Wazuh Cloud is performed trough the Wazuh agent, we will configure the agent to forward the Syslog events. The configuration depends on the operating system, but it involves the following steps:
 
-**Linux + Syslog**
-``````````````````
+    1. Setup the syslog listener (rsyslog or Logstash).
+    2. Configure the syslog listener to forward the events to a file.
+    3. Configure the Wazuh agent to read the previous file.
 
-Syslog is the protocol and software that Linux and most networking devices use to log messages. 
-Syslog has the option to log to a remote server and to act as a remote log server (that receives logs). 
-Rsyslog is the most popular daemon for centralizing your log data because it's installed by default in most common distributions of Linux. 
-By configuring Rsyslog it is possible to write the logs received from a remote machine to a file.  
+Forward Syslog events to a Linux agent (via rsyslog)
+````````````````````````````````````````````````````
 
-1. Edit Rsyslog configuration file.
+Follow the next steps to receive the syslog events in a Wazuh Linux agent and forward them to the Wazuh Cloud.
 
-Edit the listen port of your Syslog server. You need to select the protocol best suitable for your use case. If in doubt, TCP is a decent choice.
+1. Configure rsyslog to receive syslog events.
 
-.. warning::
+Enable the TCP or UDP settings by editing: /etc/rsyslog.conf
 
-    Make sure ports are opened in the firewall, and Selinux if it is activated in your server.
-
-Edit /etc/rsyslog.conf:
-
-In order to listen TCP communications on port <PORT>:
+TCP:
 
 .. code-block:: console
 
     $ModLoad imtcp
     $InputTCPServerRun <PORT>
 
-In order to listen UDP communications on port <PORT>:
+UDP:
 
 .. code-block:: console
 
     $ModLoad imudp
     $InputUDPServerRun <PORT>
 
-With the next rule all the logs of the devices with xxx.xxx.xxx.* IP will been written in var/log/<file_name>.log.
-Write this in front of the local/regular rules:
+.. warning::
+
+    Review your firewall/SeLinux configuration to allow this communication.
+
+2. Configure rsyslog to forward events to a file.
+
+Edit /etc/rsyslog.conf:
 
 .. code-block:: console
 
@@ -269,9 +266,11 @@ Write this in front of the local/regular rules:
     & ~
 
 
-2.  Deploy the agent as explained earlier in this documentation.
+3.  Deploy a Wazuh agent on the same host that has rsyslog.
 
-3.  Edit the agent configuration file to read the logs from the created file:
+4.  Configure the agent to read the syslog output file.
+
+Edit /var/ossec/etc/ossec.conf
 
 .. code-block:: console
 
@@ -292,197 +291,60 @@ Write this in front of the local/regular rules:
 
    # systemctl restart wazuh-agent
 
-
-**Linux + Logstash**
-````````````````````
-
-If you do not use Syslog, one of the ways to redirect the logs to the server is using Logstash.
-
-1.  Install Oracle Java JRE 8.
-
-RPM-based systems:
-
-.. code-block:: console
-
-    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jre-8u202-linux-x64.rpm"
-
-    # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
-
-    # yum -y install jre-8-linux-x64.rpm
-
-    # rm -f jre-8-linux-x64.rpm
-
-Debian-based systems:
-
-a) For Debian >= 8/Jessie or Ubuntu >= 16.04/Xenial:
-
-.. code-block:: console
-
-    # apt-get update
-
-    # apt-get install openjdk-8-jre
-
-b) For Debian < 8/Jessie:
-
-.. code-block:: console
-
-    # echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list
-
-    # apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886
-
-    # apt-get update
-
-    # apt-get install oracle-java8-installer
-
-c) For Ubuntu < 16.04/Xenial:
-
-.. code-block:: console
-
-    # add-apt-repository ppa:webupd8team/java
-
-    # apt-get update
-
-    # apt-get install oracle-java8-installer
-
-2.  Install the Elastic repository and its GPG key:
-
-RPM-based systems.
-
-.. code-block:: console
-
-    # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-
-    # cat > /etc/yum.repos.d/elastic.repo << EOF
-    [elasticsearch-6.x]
-    name=Elasticsearch repository for 6.x packages
-    baseurl=https://artifacts.elastic.co/packages/6.x/yum
-    gpgcheck=1
-    gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-    enabled=1
-    autorefresh=1
-    type=rpm-md
-    EOF
-
-Debian-based systems:
-
-.. code-block:: console
-
-    # apt-get install curl apt-transport-https
-
-    # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-
-    # echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
-
-    # apt-get update
-
-3.  Install the Logstash package:
-RPM-based systems.
-
-.. code-block:: console
-
-    # yum install logstash-6.7.1
- 
-Debian-based systems:
-
-.. code-block:: console
-    
-    # apt-get install logstash=1:6.7.1-1
-
-4.  Enable and start the Logstash service:
-
-.. code-block:: console
-
-    # systemctl daemon-reload
-    # systemctl enable logstash.service
-    # systemctl start logstash.service
-
-5.  Install logstash-input-syslog and logstash-output-file plugins.
-
-.. code-block:: console
-
-    # /usr/share/logstash/bin/logstash-plugin install logstash-input-syslog
-    # /usr/share/logstash/bin/logstash-plugin install logstash-output-file
-
-6.  Create a configuration file in /etc/logstash/conf.d/logstash.conf:
-
-.. code-block:: console
-
-    input {
-        syslog {
-        port => <PORT>
-        }
-    }
-
-    output {
-        file {
-        path => “/var/log/logstash/<file_name.log>”
-        }
-    }
-
-7.  Deploy the agent as explained earlier in this documentation.
-
-8.  Edit the agent configuration file to read the logs from the created file:
-
-.. code-block:: console
-
-    <localfile>
-        <log_format>syslog</log_format>
-        <location>/var/log/logstash/<file_name.log></location>
-    </localfile>
-
-9.  Restart rsyslog:
-
-.. code-block:: console
-
- 	# systemctl restart rsyslog
-
-10.  Restart wazuh-agent:
-
-.. code-block:: console
-
-	# systemctl restart wazuh-agent
-
-**Windows + Logstash**
-``````````````````````
-If you use Windows download and configure Logstash.
+Forward Syslog events to a Windows agent (via Logstash)
+```````````````````````````````````````````````````````
+Follow the next steps to receive the syslog events in a Wazuh Window agent and forward them to the Wazuh Cloud.
 
 1.   Pre-requisites:
 
     - Windows fully updated.
-    - Oracle Java Development Kit v8 (1.8.x) installed. https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+    - Java JRE https://www.java.com/es/download/windows-64bit.jsp
 
 2.   Configuring JDK in Windows.
 
-    - Search for "Environment Variables" and create a variable under system variables.
-    - Enter the variable name JAVA_HOME and browse to the JDK install directory and click OK.
+    - Click Start, search for "Environment Variables" and open the system properties applet. The advanced tab of the "System Properties" applet should appear.
+    - Click the Environment Variables button.
+    - Under System variables click "New".
+    - Enter the variable name JAVA_HOME and browse to the JRE install directory and click OK. In variable value it should show the JRE directory. For example, ``C:\Program Files\Java\jre1.8.0_201``
 
 3.   Install Logstash
 
     - Download the Logstash ZIP package from here https://www.elastic.co/downloads/logstash.
-    - Extract the ZIP contents to a local folder. For example, to C:\logstash\.
+    - Extract the ZIP contents to a local folder. For example, to ``C:\logstash\``.
 
 4.   Install logstash-input-syslog and logstash-output-file plugins:
 
     ``C:\logstash\bin>logstash-plugin install logstash-input-syslog``
     ``C:\logstash\bin>logstash-plugin install logstash-output-file``
 
-5.   Create a configuration file in C:\ logstash\bin\logstash.conf
+5.   Create a configuration file in ``C:\logstash\bin\logstash.conf``.
 
-.. code-block:: console
+    Create a blank file from the command line:
 
-    input {
-       syslog {
-         port => <PORT>
-      }
-     }
+    
+    ``copy con C:\logstash\bin\logstash.conf``
 
-     output {
-       file {
-         path => “C:\logstash\logs\<file_name.log>”
-       }
-     }
+    ``^Z``
 
-6.   Deploy the agent as explained earlier in this documentation.
+    ``Enter``
+
+    Write this configuration in logstash.conf:
+
+    .. code-block:: console
+
+        input {
+          syslog {
+            port => <PORT>
+          }
+        }
+
+        output {
+          file {
+            path => “C:\logstash\logs\<file_name.log>”
+          }
+        }
+
+6.   Deploy a Wazuh agent on the same host that has rsyslog.
 
 7.   Edit the agent configuration file to read the logs from the created file:
 
@@ -495,7 +357,38 @@ If you use Windows download and configure Logstash.
 
 8.   Restart Wazuh agent and run Logstash:
 
+    a. Running Logstash from the shell.
+
     ``C:\logstash\bin\logstash.bat -f C:\logstash\bin\logstash.conf``
+
+    b. Installing Logstash as a Windows service.
+
+    - Download NSSM: http://nssm.cc/download       
+    - Extract the EXE to the BIN directory of the Logstash location.
+    - Navigate to the Logstash BIN directory of the Logstash location:
+    
+            .. code-block:: console
+
+                .\nssm.exe install logstash
+
+        **Path:** Full path of where the LOGSTASH.BAT file is located.
+
+            For example, ``C:\logstash\bin\logstash.bat``
+
+        **Startup Directory:** Full path of the BIN directory.
+
+            For example, ``C:\logstash\bin\``
+
+        **Arguments:** Include the '-f' flag with the path of the logstash config file.
+
+            For example, ``-f C:\logstash\bin\logstash.conf``
+
+        On the details tab ensure the service is set to start up automatically.
+        Also on the details tab, ensure the service is set to use a service account.
+
+        Click "Install Service".
+
+    - Start the service: ``C:\logstash\bin\nssm start logstash``
 
 Next steps
 ----------
