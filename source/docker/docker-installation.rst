@@ -58,3 +58,11 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
 
   $ docker-compose --version
   docker-compose version 1.23.1, build b02f1306
+
+.. note::
+
+  If you see ``docker-compose: command not found`` it means that ``/usr/local/bin`` is not in your ``PATH``, most Linux distributions have ``/usr/bin`` in ``PATH`` so you can create a symbolic link from ``/usr/local/bin`` to ``/usr/bin``.
+
+  .. code-block:: console
+
+    # ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
