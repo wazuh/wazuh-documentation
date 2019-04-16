@@ -31,10 +31,7 @@ Options
 location
 ^^^^^^^^
 
-Option to get the location of a log or a group of logs.
-
-.. note::
-  ``strftime`` format strings may be used for log file names.
+Option to get the location of a log or a group of logs. ``strftime`` format strings may be used for log file names.
 
 For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017).
 
@@ -67,14 +64,12 @@ As an example, these two configurations show a channel filtering for firewall an
 command
 ^^^^^^^
 
-Allowing any command line, this option designates a command to be run.
-
-This command's output will be read as one or more log messages depending on *command* or *full_command* is used.
+Given a command output, it will be read as one or more log messages depending on *command* or *full_command* is used.
 
 +--------------------+--------------------------------------------------+
 | **Default value**  | n/a                                              |
 +--------------------+--------------------------------------------------+
-| **Allowed values** | any command line, optionally including arguments |
+| **Allowed values** | Any command line, optionally including arguments |
 +--------------------+--------------------------------------------------+
 
 alias
@@ -103,7 +98,7 @@ with:
 frequency
 ^^^^^^^^^
 
-Prevents a command from being executed in less time than the specified time (in seconds).
+Prevents a command from being executed in less time than the specified time (in seconds). This options can be used with *command* and *full_command*.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -129,9 +124,7 @@ Only compatible with `eventchannel` log format.
 query
 ^^^^^
 
-Filters the events that Wazuh will process by using an XPATH query following the event schema.
-
-Only compatible with ``eventchannel`` log format.
+Filter ``eventchannel`` events that Wazuh will process by using an *XPATH* query following the event schema.
 
 Example: 
 
@@ -154,7 +147,7 @@ label
 
 .. versionadded:: 3.0.0
 
-Used to add custom data in JSON events. Set `log_format`_ to ``json`` to enable it.
+Used to add custom data in JSON events. Set `log_format`_ to ``json`` to use it.
 
 Labels can be nested in JSON alerts by separating the "key" terms by a period.
 
@@ -217,7 +210,7 @@ Target specifies the name of the socket where the output will be redirected. The
 log_format
 ^^^^^^^^^^
 
-Specifies the format of the log to be read. **field is required**
+Set the format of the log to be read. **field is required**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
