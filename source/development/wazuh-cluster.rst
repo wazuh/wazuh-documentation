@@ -276,7 +276,8 @@ This communication protocol is used by the API to forward requests to other clus
 | ``send_file``     | Both        | Filepath<str>,        | Request used to test send file protocol.                                                        |
 |                   |             | Node name<str>        | Node name parameter is ignored in worker nodes (it's always sent to the master node).           |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
-| ``dapi``          | Both        | Arguments<Dict>       | Receive a distributed API request from the API.                                                 |
+| ``dapi``          | Both        | Arguments<Dict>       | Receive a distributed API request from the API. When this request is received in a worker node  |
+|                   |             |                       | it is forwarded to the master. But when the master receives it, it will execute it locally.     |
 +-------------------+-------------+-----------------------+-------------------------------------------------------------------------------------------------+
 | ``dapi_forward``  | Server      | Node name<str>,       | Forward a distributed API request to the specified node.                                        |
 |                   |             | Arguments<Dict>       | To forward the request to all nodes use ``fw_all_nodes`` as node name.                          |
