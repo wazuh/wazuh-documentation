@@ -15,7 +15,7 @@ Introduction
 
 Recommended reading: :ref:`wazuh-cluster`.
 
-Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, therefore, the workload needs to be balanced among multiple nodes. Therefore, horizontal scaling arises as the proper approach to balance the load for a large amount of agents.
+Today's environments usually have thousands of new agents every day. A single manager architecture is not capable of managing so many events and, in consequence, the workload needs to be balanced among multiple nodes. Therefore, horizontal scaling arises as the proper approach to balance the load for a large number of agents.
 
 Wazuh's main workload is processing events from the agents and raise alerts. This is why all required information to receive events from the agents needs to be synchronized. This information is:
 
@@ -325,7 +325,7 @@ Each of the "threads" described in the `Workflow`_ section are implemented as as
 
 In addition to those already mentioned, there are more tasks that are created when a received request requires a complex process to be solved. These tasks are created to solve the received request and destroyed once the response has been sent. This type of architecture is necessary to prevent the server to be busy serving a single request.
 
-One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This task is created when a synchronization process is started and it's destroyed once the synchronization process ends. It includes a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
+One of those tasks, which is defined as a class, is the task created to receive and process a file from the other peer. This class is instanciated when a synchronization process is started and it's destroyed once the synchronization process ends. It creates an asynchronous task that waits until the necessary files to do the synchronization process are received. This asynchronous task has a `callback <https://docs.python.org/3/library/asyncio-task.html#asyncio.Task.add_done_callback>`_ that checks if there was an error during the synchronization process.
 
 .. thumbnail:: ../images/development/receive_file_task_cluster.png
     :title: Receive file class inheritance
@@ -347,7 +347,7 @@ Let's review the integrity synchronization process to see how asyncio tasks are 
 * **6**: The master sends all information to the worker using the sending file process.
 * **7**: The master notifies the worker that the integrity information has already been sent using the ``sync_m_c_e`` command. The worker wakes the previously created task up to process and update the required files. In this example, no extra valid files were required by the master so the worker doesn't send any more requests to the master and the synchronization process ends.
 
-To sum up, asynchronous tasks are created in this process when the necessary data to serve a request wasn't still available at the moment, so the server could serve other requests while it waits for the data it needs. But when the request required a simple execution to be solved (creating a file or updating a file chunk), the server itself did it by itself. If the master would have required any extra valid files an asynchronous task would have been created to synchronize them.
+To sum up, asynchronous tasks are created only when the received request needs to wait for some data to be available (for example, synchronization tasks waiting for the zip file from the other peer). If the request can be solved instanly, no asynchronous tasks are created for it.
 
 Distributed API requests
 ^^^^^^^^^^^^^^^^^^^^^^^^
