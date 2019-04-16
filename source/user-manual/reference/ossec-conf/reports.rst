@@ -15,6 +15,7 @@ reports
 In this section are listed the different options for the configuration of daily reports based on alerts.
 
 .. note::
+
   Any number of ``<reports>`` blocks can be declared in the same ``ossec.conf`` file.
 
 Options
