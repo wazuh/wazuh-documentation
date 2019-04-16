@@ -416,3 +416,7 @@ If the log error message isn't clarifying enough, the traceback can be logged se
     PermissionError: [Errno 13] Permission denied: '/var/ossec/etc/client.keys'
 
 Having the traceback usually helps to understand what's happening.
+
+There are two ways of configuring the log level:
+* Modifying the ``wazuh_clusterd.debug`` variable in the ``internal_options.conf`` file.
+* Using the argument ``-d`` in the ``wazuh-clusterd`` binary.
