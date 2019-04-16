@@ -179,6 +179,9 @@ There are abstract server and client classes to handle multiple connections from
     :align: center
     :width: 80%
 
+When the ``wazuh-clusterd`` process starts in the master, it creates a ``Master`` object. Every time a new worker connects to the master, a ``MasterHandler`` object is created to handle the connection with that worker (incoming requests, synchronization processes, etc). That means there will always be at least a ``Master`` object and as many ``MasterHandler`` objects as connected workers. The ``Master`` object will be the one managing all ``MasterHandler`` objects created.
+
+In the worker side, when the ``wazuh-clusterd`` process starts it creates a ``Worker`` object. This object is in charge of initializing worker variables to connect to the master. A ``WorkerHandler`` object is created when connecting to the master node. This object will be the one sending requests to the master and managing synchronization processes.
 
 Protocols
 ^^^^^^^^^
