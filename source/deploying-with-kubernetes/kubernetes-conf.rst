@@ -112,11 +112,11 @@ Services
     +======================+=====================================================================================+
     | wazuh-elasticsearch  | Communication for Elasticsearch nodes.                                              |
     +----------------------+-------------------------------------------------------------------------------------+
-    | elasticsearch        | Elasticsearch API. Used by Logstash/Kibana to write/read alerts.                    |
+    | elasticsearch        | Elasticsearch service. Used by Kibana and Logstash.                                 |
     +----------------------+-------------------------------------------------------------------------------------+
     | wazuh-nginx          | Service for HTTPS access to Kibana.                                                 |
     +----------------------+-------------------------------------------------------------------------------------+
-    | kibana               | Kibana service.                                                                     |
+    | kibana               | Kibana service. The UI for Elasticsearch.                                           |
     +----------------------+-------------------------------------------------------------------------------------+
     | logstash             | Logstash service, each Wazuh node has a Filebeat instance pointing to this service. |
     +----------------------+-------------------------------------------------------------------------------------+
