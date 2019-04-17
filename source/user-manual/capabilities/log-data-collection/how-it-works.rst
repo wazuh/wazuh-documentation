@@ -13,29 +13,31 @@ The below image illustrations how events flow through the Wazuh environment:
 Log collection
 --------------
 
-Log information can come from :
 
 Log files
 ^^^^^^^^^
+
 The Log analysis engine can be configured to monitor specific files on the servers.
 
 Sample Configuration:
 
 Linux:
-::
 
-    <localfile>
-        <location>/var/log/example.log</location>
-        <log_format>syslog</log_format>
-    </localfile>
+.. code-block:: xml
+
+  <localfile>
+      <location>/var/log/example.log</location>
+      <log_format>syslog</log_format>
+  </localfile>
 
 Windows:
-::
 
-    <localfile>
-        <location>C:\myapp\example.log</location>
-        <log_format>syslog</log_format>
-    </localfile>
+.. code-block:: xml
+
+  <localfile>
+      <location>C:\myapp\example.log</location>
+      <log_format>syslog</log_format>
+  </localfile>
 
 
 Windows event logs
@@ -46,7 +48,8 @@ Wazuh can monitor classic Windows event logs, as well as the newer Windows event
 Sample configuration:
 
 Event log:
-::
+
+.. code-block:: xml
 
   <localfile>
     <location>Security</location>
@@ -54,7 +57,8 @@ Event log:
   </localfile>
 
 Event channel:
-::
+
+.. code-block:: xml
 
   <localfile>
     <location>Microsoft-Windows-PrintService/Operational</location>
@@ -66,23 +70,39 @@ Remote syslog
 
 On other devices, like firewalls, for instance, the log analysis component can be configured to receive log events through syslog.
 
-Sample Configuration:
-::
+Sample configuration:
+
+.. code-block:: xml
 
   <ossec_config>
     <remote>
       <connection>syslog</connection>
+      <port>514</port>
+      <protocol>udp</protocol>
       <allowed-ips>192.168.2.0/24</allowed-ips>
     </remote>
   <ossec_config>
 
+
 ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network from which syslog messages will be accepted.
 
-Log Example::
+Log example:
+
+::
 
   2016-03-15T15:22:10.078830+01:00 tron su:pam_unix(su-l:auth):authentication failure;logname=tm uid=500 euid=0 tty=pts/0 ruser=tm rhost= user=root
   1265939281.764 1 172.16.167.228 TCP_DENIED /403 734 POST http://lbcore1.metacafe.com/test/SystemInfoManager.php - NONE/- text/html
   [Sun Mar 06 08:52:16 2016] [error] [client 187.172.181.57] Invalid URI in request GET: index.php HTTP/1.0
+
+If a ``/etc/rsyslog.conf`` configuration file is being used instead of the ``ossec.conf`` options as above, you can still analyze logs using a ``<localfile>`` block with ``syslog`` as the log format.
+
+.. code-block:: xml
+
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/custom/file/path</location>
+  </localfile>
+
 
 Analysis
 --------
@@ -97,6 +117,7 @@ In the pre-decoding phase of analysis, static information from well-known fields
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
 Extracted information:
+
   - *hostname*: 'localhost'
   - *program_name*: 'sshd'
 
@@ -112,6 +133,7 @@ Sample log and its extracted info:
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
 Extracted information:
+
   - *program name*: sshd
   - *dstuser*: rromero
   - *srcip*: 192.168.1.133
@@ -121,7 +143,9 @@ Rule matching
 
 In the next phase, the extracted log information is compared to the ruleset to look for matches:
 
-For the previous example, rule 5715 is matched::
+For the previous example, rule 5715 is matched:
+
+.. code-block:: xml
 
   <rule id="5715" level="3">
     <if_sid>5700</if_sid>
@@ -131,6 +155,7 @@ For the previous example, rule 5715 is matched::
   </rule>
 
 .. note::
+
   For more information,see the :ref:`Wazuh Ruleset <ruleset>`
 
 Alert

@@ -16,8 +16,8 @@ The first step to installing the Wazuh agent is to add the Wazuh repository to y
 
 Set up the repository by running the following commands according to your distribution:
 
-CentOS 6/RHEL 6, CentOS 7/RHEL 7, Fedora 22 or greater and Amazon Linux
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CentOS 6/RHEL 6, CentOS 7/RHEL 7, Fedora 22 or greater, Amazon Linux and Oracle Linux
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. code-block:: console
 
@@ -47,8 +47,8 @@ CentOS 5/RHEL 5
     protect=1
     EOF
 
-SUSE 12
-^^^^^^^
+SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. code-block:: console
 

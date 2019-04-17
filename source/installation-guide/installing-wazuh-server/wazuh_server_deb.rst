@@ -56,17 +56,17 @@ On your terminal, install the Wazuh manager:
 
 Once the process is completed, you can check the service status with:
 
-  a) For Systemd:
+  * For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl status wazuh-manager
+      # systemctl status wazuh-manager
 
-  b) For SysV Init:
+  * For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # service wazuh-manager status
+      # service wazuh-manager status
 
 Installing the Wazuh API
 ------------------------
@@ -95,17 +95,17 @@ Installing the Wazuh API
 
 3. Once the process is complete, you can check the service status with:
 
-  a) For Systemd:
+  * For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl status wazuh-api
+      # systemctl status wazuh-api
 
-  b) For SysV Init:
+  * For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # service wazuh-api status
+      # service wazuh-api status
 
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
@@ -150,7 +150,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # apt-get install filebeat=6.7.0
+    # apt-get install filebeat=6.7.1
 
 3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
@@ -168,20 +168,20 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 5. Enable and start the Filebeat service:
 
-  a) For Systemd:
+  * For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl daemon-reload
-    # systemctl enable filebeat.service
-    # systemctl start filebeat.service
+      # systemctl daemon-reload
+      # systemctl enable filebeat.service
+      # systemctl start filebeat.service
 
-  b) For SysV Init:
+  * For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # update-rc.d filebeat defaults 95 10
-    # service filebeat start
+      # update-rc.d filebeat defaults 95 10
+      # service filebeat start
 
 6. (Optional) Disable the Elasticsearch updates:
 

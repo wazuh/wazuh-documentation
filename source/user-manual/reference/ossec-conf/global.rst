@@ -372,15 +372,15 @@ rotate_interval
 
 .. versionadded:: 3.1.0
 
-This sets the interval between file rotation with ``min_rotate_interval`` the highest allowed value.
+This option sets the interval between file rotation. The range of possible values is from ``10s`` (10 seconds) to ``1d`` (1 day).
 
-+-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**       | 0 (disabled)                                                                                                                             |
-+-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number that should ends with character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days).        |
-+-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**       | 0 (disabled)                                                                                                                      |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number that should ends with character indicating a time unit, such as, s (seconds), m (minutes), h (hours), d (days). |
++-------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 
-Example
+Example:
 
 .. code-block:: xml
 
@@ -391,20 +391,38 @@ max_output_size
 
 .. versionadded:: 3.1.0
 
-This sets the size limit of alert files with a maximum allowed value of 1TiB.
+This sets the size limit of alert files with a maximum allowed value of 1TiB and a minimum allowed value of 1MiB.
 
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**       | 0 (disabled)                                                                                                                             |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values**      | A positive number that should contain a suffix character indicating a size unit, such as, B (bytes), K (kibibyte), M (mebibyte),         |
-|                         | G (gibibyte).                                                                                                                            |
+| **Allowed values**      | A positive number that should contain a suffix character indicating a size unit, such as M (mebibyte) and G (gibibyte).                  |
 +-------------------------+------------------------------------------------------------------------------------------------------------------------------------------+
 
-Example
+Example:
 
 .. code-block:: xml
 
   <max_output_size>20M</max_output_size>
+
+queue_size
+^^^^^^^^^^
+
+.. versionadded:: 3.3.0
+
+This sets the size of the message input buffer in Analysisd (number of events).
+
++-------------------------+---------------------------------------------------------------------------------------+
+| **Default value**       | 131072                                                                                |
++-------------------------+---------------------------------------------------------------------------------------+
+| **Allowed values**      | A positive number. The minimum allowed is 1. The recommended range is [16384..262144] |
++-------------------------+---------------------------------------------------------------------------------------+
+
+Example:
+
+.. code-block:: xml
+
+  <queue_size>16384</queue_size>
 
 Default configuration
 ---------------------

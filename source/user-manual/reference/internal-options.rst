@@ -752,7 +752,8 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed Value | Any integer between 1 and 64.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.request_timeout**     | Description   | Timeout in seconds to reject a new request.                  |
+|   **remoted.request_timeout**     | Description   | Time (in seconds) the remote request listener rejects a      |
+|                                   |               | new request.                                                 |
 |                                   |               |                                                              |
 |                                   |               | .. versionadded:: 3.0.0                                      |
 +                                   +---------------+--------------------------------------------------------------+
@@ -760,7 +761,8 @@ Remoted
 +                                   +---------------+--------------------------------------------------------------+
 |                                   | Allowed Value | Any integer between 1 and 600.                               |
 +-----------------------------------+---------------+--------------------------------------------------------------+
-|   **remoted.response_timeout**    | Description   | Timeout in seconds to reject a request response.             |
+|   **remoted.response_timeout**    | Description   | Time (in seconds) the remote request listener rejects a      |
+|                                   |               | request response.                                            |
 |                                   |               |                                                              |
 |                                   |               | .. versionadded:: 3.0.0                                      |
 +                                   +---------------+--------------------------------------------------------------+
@@ -922,6 +924,32 @@ Remoted
 |                                   |               | 1: Shrink memory back to ``receive_chunk``.                  |
 +                                   +               +--------------------------------------------------------------+
 |                                   |               | 2: Fully deallocate memory after usage.                      |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.tcp_keepidle**          | Description   | | Time (in seconds) the connection needs to remain idle      |
+|                                   |               | | before TCP starts sending keepalive probes.                |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 3.9.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 30                                                           |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | Any integer between 1 and 7200.                              |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.tcp_keepintvl**         | Description   | The time (in seconds) between individual keepalive probes.   |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 3.9.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 10                                                           |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | Any integer between 1 and 100.                               |
++-----------------------------------+---------------+--------------------------------------------------------------+
+| **remoted.tcp_keepcnt**           | Description   | | Maximum number of keepalive probes TCP should send before  |
+|                                   |               | | dropping the connection.                                   |
+|                                   |               |                                                              |
+|                                   |               | .. versionadded:: 3.9.0                                      |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Default value | 3                                                            |
++                                   +---------------+--------------------------------------------------------------+
+|                                   | Allowed value | Any integer between 1 and 50.                                |
 +-----------------------------------+---------------+--------------------------------------------------------------+
 
 Syscheck

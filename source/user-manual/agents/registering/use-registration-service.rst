@@ -56,50 +56,40 @@ Simple method
 
 This is the easiest method to register agents. It doesn't require any kind of authorization or host verification. To do so, follow these steps:
 
-1. On the manager, start the registration service.
-
-  .. code-block:: console
-
-    # /var/ossec/bin/ossec-authd
-
-  .. note::
-  
-    Since version 3.8.0, this registration daemon is running by default when the *Wazuh* installation is complete, so it is not necessary to execute it.
-
-2. On the agents, run the ``agent-auth`` program, using the manager's IP address.
+1. On the agents, run the ``agent-auth`` program, using the manager's IP address.
 
   a. For Linux systems:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
+      # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
 
   b. For Windows systems:
 
-  .. code-block:: none
+    .. code-block:: console
 
-    # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <MANAGER_IP_ADDRESS>
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
 
-3. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
+2. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
 
-  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
+  - In the file ``/var/ossec/etc/ossec.conf``, replace *MANAGER_IP* with the Wazuh manager address:
 
-  .. code-block:: xml
+    .. code-block:: xml
 
-    <client>
-      <server>
-        <address>MANAGER_IP</address>
-        ...
-      </server>
-    </client>
+      <client>
+        <server>
+          <address>MANAGER_IP</address>
+          ...
+        </server>
+      </client>
 
-  Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
+  - Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
+      # sed -i 's:MANAGER_IP:10.0.0.4:g' /var/ossec/etc/ossec.conf
 
-4. Restart the agent.
+3. Restart the agent.
 
   a. For Systemd:
 
@@ -115,74 +105,39 @@ This is the easiest method to register agents. It doesn't require any kind of au
 
 Password authorization
 ----------------------
-
 You can protect the manager from unauthorized registrations by using a password. Choose one by yourself, or let the registration service generate a random password.
 
 To allow this option, change the value to *yes* in the ``/var/ossec/etc/ossec.conf`` file:
 
-    .. code-block:: xml
+.. code-block:: xml
 
-      <auth>
-        ...
-        <use_password>yes</use_password>
-        ...     
-      </auth>
+  <auth>
+    ...
+    <use_password>yes</use_password>
+    ...
+  </auth>
 
-To enable the password authorization, use the ``-P`` flag when running the registration service.
+To apply the changes, restart the manager:
 
-1. Follow one of these steps on the manager:
-
-  * To use a custom password, edit the ``/var/ossec/etc/authd.pass`` file and write it. For example, if we want to use *TopSecret* as a password:
+  a. For Systemd:
 
     .. code-block:: console
 
-      # echo "TopSecret" > /var/ossec/etc/authd.pass
-      # /var/ossec/bin/ossec-authd -P
+      # systemctl restart wazuh-manager
 
-      Accepting connections on port 1515. Using password specified on file: /var/ossec/etc/authd.pass
-
-  * If no password is specified on ``/var/ossec/etc/authd.pass``, the registration service will create a random password:
+  b. For SysV Init:
 
     .. code-block:: console
 
-      # /var/ossec/bin/ossec-authd -P
+      # service wazuh-manager restart
 
-      Accepting connections on port 1515. Random password chosen for agent authentication: abdc1234
+To use a custom password, edit the ``/var/ossec/etc/authd.pass`` file and write it. For example, if we want to use *TopSecret* as a password:
 
-    .. note::
-      If the user needs to show the password on console, use option ``-fP`` instead of ``-P``, this will launch the registration daemon in foreground, so once done if you close the CLI or finish the process, the registration daemon will be stopped.
+.. code-block:: console
 
-2. The agents can use the password by storing it on a file or as a command line argument. Follow one of these steps:
+  # echo "TopSecret" > /var/ossec/etc/authd.pass
 
-  * Write the password on ``/var/ossec/etc/authd.pass`` and run the ``agent-auth`` program:
-
-    a. For Linux systems:
-
-    .. code-block:: console
-
-      # echo "abcd1234" > /var/ossec/etc/authd.pass
-      # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
-
-    b. For Windows systems:
-
-    .. code-block:: console
-
-      # echo abcd1234 > C:\Program Files (x86)\ossec-agent\authd.pass
-      # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <MANAGER_IP_ADDRESS>
-
-  * Run the program with the ``-P`` flag, and insert the password:
-
-    a. For Linux systems:
-
-    .. code-block:: console
-
-      # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS> -P "abcd1234"
-
-    b. For Windows systems:
-
-    .. code-block:: none
-
-      # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m <MANAGER_IP_ADDRESS> -P "abcd1234"
+Then, restart the manager.
 
 .. _verify-hosts:
 
@@ -220,28 +175,41 @@ Manager verification using SSL
     # openssl req -new -nodes -newkey rsa:2048 -keyout sslmanager.key -out sslmanager.csr -subj '/C=US/CN=192.168.1.2'
     # openssl x509 -req -days 365 -in sslmanager.csr -CA rootCA.pem -CAkey rootCA.key -out sslmanager.cert -CAcreateserial
 
-2. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the manager**, and start the registration service:
+2. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the manager**:
 
   .. code-block:: console
 
     # cp sslmanager.cert sslmanager.key /var/ossec/etc
-    # /var/ossec/bin/ossec-authd
 
-3. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program:
+
+3. Modify the ``ssl_manager_cert`` and ``ssl_manager_key`` parameters in ``ossec.conf`` **on the manager** to include these files:
+
+  .. code-block:: xml
+
+    <ssl_manager_cert>/var/ossec/etc/sslmanager.cert</ssl_manager_cert>
+    <ssl_manager_key>/var/ossec/etc/sslmanager.key</ssl_manager_key>
+
+4. Restart the manager:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+5. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program:
 
   a. For Linux systems:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp rootCA.pem /var/ossec/etc
-    # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
+      # cp rootCA.pem /var/ossec/etc
+      # /var/ossec/bin/agent-auth -m 192.168.1.2 -v /var/ossec/etc/rootCA.pem
 
   b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # cp rootCA.pem C:\Program Files (x86)\ossec-agent
-    # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
+      # cp rootCA.pem C:\Program Files (x86)\ossec-agent
+      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
 
 .. warning::
   The manager verification is only a check. Although the verification fails, the connection will be realized successfully and returning just a warning.
@@ -264,48 +232,26 @@ In this example, we are going to create a certificate for agents without specify
     # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -batch
     # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
 
-2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there) and start the registration service:
+2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there):
 
   .. code-block:: console
 
     # cp rootCA.pem /var/ossec/etc
-    # /var/ossec/bin/ossec-authd -v /var/ossec/etc/rootCA.pem
 
-3. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
+3. Modify the ``ossec.conf`` file **on the manager** to include the CA path and enable ``ssl_verify_host``:
 
-  a. For Linux systems:
+  .. code-block:: xml
 
-  .. code-block:: console
+    <ssl_verify_host>yes</ssl_verify_host>
+    <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
 
-    # cp sslagent.cert sslagent.key /var/ossec/etc
-    # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
-
-  b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
+4. Restart the manager:
 
   .. code-block:: console
 
-    # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
-    # "C:\Program Files (x86)\ossec-agent\agent-auth.exe" -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+    # systemctl restart wazuh-manager
 
-**Agent verification (with host validation)**
-
-This is an alternative method to the previous one. In this case, we will bind the agent's certificate to its IP address as seen by the manager.
-
-1. Issue and sign a certificate for the agent, entering its hostname or IP address into the *common name* field. For example, if the agent's IP is 192.168.1.3:
-
-  .. code-block:: console
-
-    # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=192.168.1.3'
-    # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
-
-2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there) and start the registration service. Note that we use the ``-s`` flag in order to enable agent host validation:
-
-  .. code-block:: console
-
-    # cp rootCA.pem /var/ossec/etc
-    # /var/ossec/bin/ossec-authd -v /var/ossec/etc/rootCA.pem -s
-
-3. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
+5. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
 
   a. For Linux systems:
 
@@ -318,30 +264,73 @@ This is an alternative method to the previous one. In this case, we will bind th
 
     .. code-block:: console
 
-      # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
-      # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
+        # cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
+        # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
-.. warning::
-  If the host verification process fails, the connection won't be realized.
+**Agent verification (with host validation)**
+
+This is an alternative method to the previous one. In this case, we will bind the agent's certificate to its IP address as seen by the manager.
+
+1. Issue and sign a certificate for the agent, entering its hostname or IP address into the *common name* field. For example, if the agent's IP is 192.168.1.3:
+
+  .. code-block:: console
+
+    # openssl req -new -nodes -newkey rsa:2048 -keyout sslagent.key -out sslagent.csr -subj '/C=US/CN=192.168.1.3'
+    # openssl x509 -req -days 365 -in sslagent.csr -CA rootCA.pem -CAkey rootCA.key -out sslagent.cert -CAcreateserial
+
+2. Copy the CA (**but not the key**) to the ``/var/ossec/etc`` folder **on the manager** (if it's not already there):
+
+  .. code-block:: console
+
+    # cp rootCA.pem /var/ossec/etc
+
+3. Modify the ``ossec.conf`` file **on the manager** to include the CA path and enable ``ssl_verify_host``:
+
+  .. code-block:: xml
+
+    <ssl_verify_host>yes</ssl_verify_host>
+    <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
+
+4. Restart the manager:
+
+  .. code-block:: console
+
+    # systemctl restart wazuh-manager
+
+5. Copy the newly created certificate (and its key) to the ``/var/ossec/etc`` folder **on the agent**, and run the ``agent-auth`` program. For example, if the manager's IP address is 192.168.1.2:
+
+  a. For Linux systems:
+
+    .. code-block:: console
+
+      # cp sslagent.cert sslagent.key /var/ossec/etc
+      # /var/ossec/bin/agent-auth -m 192.168.1.2 -x /var/ossec/etc/sslagent.cert -k /var/ossec/etc/sslagent.key
+
+  b. For Windows systems, the CA must be copied to ``C:\Program Files (x86)\ossec-agent``:
+
+    .. code-block:: console
+
+        cp sslagent.cert sslagent.key C:\Program Files (x86)\ossec-agent
+        C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -x C:\Program Files (x86)\ossec-agent\sslagent.cert -k C:\Program Files (x86)\ossec-agent\sslagent.key
 
 Additional configurations
 -------------------------
 
-* By default, the registration service adds the agents with their static IP address. If you want to add them with a dynamic IP (like using ``any`` on the ``manage_agents`` tool), you must change the manager's configuration file (``/var/ossec/etc/ossec.conf``):
+By default, the registration service adds the agents with their static IP address. If you want to add them with a dynamic IP (like using ``any`` on the ``manage_agents`` tool), you must change the manager's configuration file (``/var/ossec/etc/ossec.conf``):
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <auth>
-      <use_source_ip>no</use_source_ip>
-    </auth>
+  <auth>
+    <use_source_ip>no</use_source_ip>
+  </auth>
 
-* Duplicate IPs are not allowed, so an agent won't be added if there is already another agent registered with the same IP. By changing the configuration file, ``ossec-authd`` can be told to **force a registration** if it finds an older agent with the same IP address. This will make the older agent's registration be deleted:
+Duplicate IPs are not allowed, so an agent won't be added if there is already another agent registered with the same IP. By changing the configuration file, ``ossec-authd`` can be told to **force a registration** if it finds an older agent with the same IP address. This will make the older agent's registration be deleted:
 
-  .. code-block:: xml
+.. code-block:: xml
 
-    <auth>
-      <force_insert>yes</force_insert>
-      <force_time>0</force_time>
-    </auth>
+  <auth>
+    <force_insert>yes</force_insert>
+    <force_time>0</force_time>
+  </auth>
 
-  The **0** on ``<force-time>`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, it means to delete the old agent's registration regardless of how recently it has checked in.
+The **0** on ``<force-time>`` means the minimum time, in seconds, since the last connection of the old agent (the one to be deleted). In this case, it means to delete the old agent's registration regardless of how recently it has checked in.
