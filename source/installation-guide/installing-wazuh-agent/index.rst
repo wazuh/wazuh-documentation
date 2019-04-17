@@ -19,9 +19,7 @@ There are several options to install a Wazuh agent, depending on the operating s
 +-------------------------------------------------+--------------------------------------------------+
 | Type                                            | Description                                      |
 +=================================================+==================================================+
-| :doc:`RPM packages <wazuh_agent_rpm>`           | Install Wazuh agents on CentOS/RHEL/Fedora.      |
-+-------------------------------------------------+--------------------------------------------------+
-| :doc:`DEB packages <wazuh_agent_deb>`           | Install Wazuh agents on Debian/Ubuntu.           |
+| :doc:`Linux packages <wazuh_agent_rpm>`         | Install Wazuh agents on Linux.                   |
 +-------------------------------------------------+--------------------------------------------------+
 | :doc:`Windows installer <wazuh_agent_windows>`  | Install Wazuh agents on Windows.                 |
 +-------------------------------------------------+--------------------------------------------------+
@@ -42,8 +40,7 @@ There are several options to install a Wazuh agent, depending on the operating s
     :hidden:
     :maxdepth: 2
 
-    wazuh_agent_rpm
-    wazuh_agent_deb
+    wazuh_agent_linux
     wazuh_agent_windows
     wazuh_agent_macos
     wazuh_agent_solaris
