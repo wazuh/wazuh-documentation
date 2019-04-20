@@ -12,28 +12,13 @@ The RPM packages are suitable for installation on Red Hat, CentOS and other RPM-
 Preparation
 -----------
 
-1. Oracle Java JRE 8 is required by Logstash and Elasticsearch.
+1. Java 8 is required by Logstash and Elasticsearch.
 
-  .. note::
-
-    The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
+  Install the Java 8 OpenJDK package using yum:
 
   .. code-block:: console
 
-    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jre-8u202-linux-x64.rpm"
-
-  Now, check if the package was download successfully:
-
-  .. code-block:: console
-
-    # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
-
-  Finally, install the RPM package using yum:
-
-  .. code-block:: console
-
-    # yum -y install jre-8-linux-x64.rpm
-    # rm -f jre-8-linux-x64.rpm
+    # yum install java-1.8.0-openjdk
 
 2. Install the Elastic repository and its GPG key:
 
