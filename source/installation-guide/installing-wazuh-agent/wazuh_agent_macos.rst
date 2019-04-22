@@ -9,7 +9,113 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
 
   a) The command line::
 
-        installer -pkg wazuh-agent-3.8.2-1.pkg -target /
+     The following step describe a simple installation.
+
+     .. code-block:: console
+
+            # installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+
+     You can automate the agent registration and configuration. At the end of this process you can have a Wazuh Agent installed, registered and reporting using only one command line. In order to achieve this, we need to define some environment variables. The mandatory environment variable to be defined for registering process is ``WAZUH_AUTHD_SERVER``. The mandatory environment variable to be defined for use it as Wazuh Manager is ``WAZUH_MANAGER_IP``. And, if you want the Wazuh agent registered and reporting you should use, at least, both variables. 
+
+     There are other variables that can be used described as follow: 
+
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     | Option                | Description                                                                                                                  |
+     +=======================+==============================================================================================================================+
+     |   WAZUH_MANAGER_IP    |  Specifies the managers IP address or hostname. You can add multiple values by commas.                                       |
+     |                       |                                                                                                                              |
+     |                       |  See `address <../../user-manual/reference/ossec-conf/client.html#address>`_                                                 |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_SERVER_PORT   |  Specifies the managers connection port.                                                                                     |
+     |                       |                                                                                                                              |
+     |                       |  See `server-port <../../user-manual/reference/ossec-conf/client.html#server-port>`_                                         |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_PROTOCOL      |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is UDP.                     |
+     |                       |                                                                                                                              |
+     |                       |  See `server-protocol <../../user-manual/reference/ossec-conf/client.html#server-protocol>`_                                 |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_AUTHD_SERVER  |  Specifies the Wazuh authentication server.                                                                                  |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_AUTHD_PORT    |  Specifies the port used by the Wazuh authentication server.                                                                 |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_PASSWORD      |  Sets the Wazuh authentication server.                                                                                       |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_NOTIFY_TIME   |  Sets the time between agent checks for manager connection.                                                                  |
+     |                       |                                                                                                                              |    
+     |                       |  See `notify-time <../../user-manual/reference/ossec-conf/client.html#notify-time>`_                                         |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_TIME_RECONNECT|  Sets the time in seconds until a reconnection attempt if the connection between agent and manager is lost.                  |
+     |                       |                                                                                                                              |
+     |                       |  See `time-reconnect <../../user-manual/reference/ossec-conf/client.html#time-reconnect>`_                                   |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_CERTIFICATE   |  Host SSL validation need of Certificate of Authority. This option specifies the CA path.                                    |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |   
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_PEM           |  The SSL agent verification needs a CA signed certificate and the respective key. This option specifies the certificate path.|
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_KEY           |  Specifies the key path completing the required variables with WAZUH_PEM for the SSL agent verification process.             |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default will be the computer name.                                                          |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_GROUP         |  Assigns the installed agent to a previously created group.                                                                  |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+
+     To use any value from the table you must use ``launchctl`` command. This command has to be used as follow: ``launchctl setenv var_name var_value``. You can also set several variables in the same line. For example: ``launchctl setenv var_name1 var_value1 var_name2 var_value2``.
+
+     Below there are some examples to install, register and / or configure a Mac OS X agent.
+
+     Registration with password:
+
+     .. code-block:: console
+
+           # launchctl setenv WAZUH_MANAGER_IP "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" \
+                  WAZUH_PASSWORD "TopSecret" WAZUH_AGENT_NAME "macos_agent" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+
+     Registration with password and assigning a group:
+
+     .. code-block:: console
+
+           # launchctl setenv WAZUH_MANAGER_IP "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" \
+                  WAZUH_PASSWORD "TopSecret" WAZUH_GROUP "my-group" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+
+     If you want to use a Certificate of Authority in the registration process, it will be searched at your Wazuh installation folder:
+
+     .. code-block:: console
+
+           # launchctl setenv WAZUH_MANAGER_IP "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" \
+                  WAZUH_AGENT_NAME "macos_agent" WAZUH_CERTIFICATE "rootCA.pem" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+
+     Absolute paths to Certificate of Authority, certificate or key that contain spaces can be written as shown below:
+
+     .. code-block:: console
+
+           # launchctl setenv WAZUH_MANAGER_IP "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" \
+                   WAZUH_KEY "/var/ossec/etc/sslagent.key" WAZUH_PEM "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+
+     .. note::
+           If you want to verify hosts using SSL and other advanced options, please see the :ref:`verify hosts with SSL <verify-hosts>` section.
+
+     Registration with protocol:
+
+     .. code-block:: console
+
+           # launchctl setenv WAZUH_MANAGER_IP "192.168.1.1" WAZUH_AUTHD_SERVER "192.168.1.1" WAZUH_AGENT_NAME "macos_agent" \
+                  WAZUH_PROTOCOL "tcp" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
   b) The GUI:
 
