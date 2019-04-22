@@ -19,7 +19,7 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
 
             # installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
-     You can automate the agent registration and configuration process and have a Wazuh Agent installed, registered and reporting using only one command line. In order to do this, we need to define some environment variables. The mandatory environment variable to be defined for the registration process is ``WAZUH_AUTHD_SERVER``. The mandatory environment variable to be defined for use it as Wazuh Manager is ``WAZUH_MANAGER_IP``. And, if you want the Wazuh agent registered and reporting you should use, at least, both variables. 
+     You can automate the agent registration and configuration process and have a Wazuh Agent installed, registered and reporting using only one command line. In order to do this, we need to define some environment variables. The mandatory environment variable to be defined for the registration process is ``WAZUH_AUTHD_SERVER``. The mandatory environment variable to be defined to tell the agent the manager IP is ``WAZUH_MANAGER_IP``. And, if you want the Wazuh agent registered and reporting you should use, at least, both variables. 
 
      There are other variables that can be used described as follows: 
 
