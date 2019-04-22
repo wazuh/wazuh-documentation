@@ -66,8 +66,22 @@ List of files or directories to be ignored (one entry per line). Multiple lines 
 +--------------------+-----------------------------+
 | **Allowed values** | Any directory or file name. |
 +--------------------+-----------------------------+
+| **Valid for**      | - check_sys                 |
+|                    | - check_dev                 |
+|                    | - check_files               |
+|                    |                             |
+|                    |                             |
++--------------------+-----------------------------+
 | **Example**        | /etc                        |
 +--------------------+-----------------------------+
+
+Attributes:
+
++----------+---------------------------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
++          +--------------------------------------------+------------------------------------+
+|          | Allowed values                             | sregex                             |
++----------+--------------------------------------------+------------------------------------+
 
 .. _reference_ossec_rootcheck_rootkit_files:
 
