@@ -127,7 +127,11 @@ all the policy files avaiable for all Operating System that Wazuh supports.
 +-----------------------------+-------------------------------------------------------------------------------------------+
 | Suse                        | cis_sles11_linux_rcl.yml, cis_sles12_linux_rcl.yml                                        |            
 +-----------------------------+-------------------------------------------------------------------------------------------+
-| Windows                     | win_audit_rcl.yml                                                                         |            
+| Windows                     | win_audit_rcl.yml                                                                         |
++-----------------------------+-------------------------------------------------------------------------------------------+
+| Macintosh                   | cis_apple_macOS_10.11.yml, cis_apple_macOS_10.12.yml, cis_apple_macOS_10.13.yml           |
++-----------------------------+-------------------------------------------------------------------------------------------+
+| Solaris                     | cis_solaris11_rcl.yml                                                                     |            
 +-----------------------------+-------------------------------------------------------------------------------------------+
 | Generic                     | system_audit_rcl.yml, system_audit_ssh.yml                                                |            
 +-----------------------------+-------------------------------------------------------------------------------------------+
@@ -347,7 +351,7 @@ Information about rules
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 The *rules* field is where ``SCA`` dictates if a *check* is marked as *passed* or *failed*.
-There are four main types of rules as described below:
+There are five main types of rules as described below:
 
 +------------------------------+----------------+
 | Type                         | Character      |
@@ -358,8 +362,13 @@ There are four main types of rules as described below:
 +------------------------------+----------------+
 | Process                      | p              |
 +------------------------------+----------------+
+| Commands                     | c              |
++------------------------------+----------------+
 | Registry (Windows Only)      | r              |
 +------------------------------+----------------+
+
+A *check* can be marked as *not applicable* in the case that an error happens getting the result.
+In this case, the field *result* doesn't appear and the check returns two fields: *status* and *reason*.
 
 Examples:
 
@@ -369,6 +378,7 @@ Examples:
 - Looking at the value of a registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0;``
 - Looking if a directory contains files: ``d:/home/* -> ^.mysql_history$;``
 - Checking if a directory exists: ``d:/etc/mysql;``
+- Check the running configuration of ssh to check the maximum number of tries: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$;``
 
 .. note::
    Remember that the each rule must end with the semicolon ``;`` character.
