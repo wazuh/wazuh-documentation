@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wazuh_agent_macos:
 
@@ -66,7 +66,7 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
      |                       |                                                                                                                              |
      |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
      +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-     |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default it will be the computer name.                                                          |
+     |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default it will be the computer name.                                                       |
      |                       |                                                                                                                              |
      |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
      +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
@@ -119,7 +119,7 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
 
   b) The GUI:
 
-     Using the GUI you can perform a simple installation. Double click on the downloaded file and follow the wizard. If you are not sure how to respond to some of the prompts, simply use the default answers.
+     Using the GUI you can perform a simple installation, without register and configure the agent. Double click on the downloaded file and follow the wizard. If you are not sure how to respond to some of the prompts, simply use the default answers.
 
      .. thumbnail:: ../../images/installation/macos.png
          :align: center
