@@ -34,24 +34,25 @@ Example of a check event:
 
 .. code-block:: json
 
-    {
+    {  
         "type":"check",
-        "id":574369125,
-        "policy":"CIS benchmark for Debian/Linux",
-        "policy_id":"cis_debian",
-        "check":{
-            "id":5040,
-            "title":"Ensure root is the only UID 0 account",
-            "description":"Any account with UID 0 has superuser privileges on the system.",
-            "rationale":"This access must be limited to only the default root account and only from the system console. Administrative access must be through an unprivileged account using an approved mechanism as noted in Item 5.6 Ensure access to the su command is restricted.",
-            "remediation":"Remove any users other than root with UID 0 or assign them a new UID if appropriate.",
-            "compliance":{
-                "cis_csc":5,
-                "cis":"6.2.5",
-                "pci_dss":"10.2.5"
+        "id":1479401170,
+        "policy":"System audit for SSH hardening",
+        "policy_id":"system_audit_ssh",
+        "check":{  
+            "id":1507,
+            "title":"SSH Hardening - 8: Wrong Grace Time.",
+            "description":"The option LoginGraceTime should be set to 30.",
+            "rationale":"The option LoginGraceTime specifies how long in seconds after a connection request the server will wait before disconnecting if the user has not successfully logged in. 30 seconds is the recommended time for avoiding open connections without authenticate.",
+            "remediation":"Change the LoginGraceTime option value in the sshd_config file.",
+            "compliance":{  
+                "pci_dss":"2.2.4"
             },
-            "file":"/etc/passwd",
-            "result":"passed"
+            "rules":[  
+                "f:$sshd_file -> !r:^\\s*LoginGraceTime\\s+30\\s*$;"
+            ],
+            "file":"/etc/ssh/sshd_config",
+            "result":"failed"
         }
     }
 
@@ -60,20 +61,22 @@ Example of a summary event:
 
 .. code-block:: json
 
-    {
+    {  
         "type":"summary",
-        "scan_id":1842155950,
-        "name":"System audit for SSH hardening",
-        "policy_id":"system_audit_ssh",
-        "file":"system_audit_ssh.yml",
-        "description":"Guidance for establishing a secure configuration for SSH service vulnerabilities.",
-        "references":"https://www.ssh.com/ssh/",
-        "passed":4,
-        "failed":5,
-        "score":44.4444465637207,
-        "start_time":1551690624,
-        "end_time":1551690624,
-        "hash":"7dbcf50b5b508320e0de6467953ee4e8"
+        "scan_id":1289362433,
+        "name":"System audit for password-related vulnerabilities",
+        "policy_id":"system_audit_pw",
+        "file":"system_audit_pw.yml",
+        "description":"Guidance for establishing a secure configuration for password vulnerabilities.",
+        "references":"https://www.cisecurity.org/cis-benchmarks/",
+        "passed":2,
+        "failed":2,
+        "score":50,
+        "start_time":1556011249,
+        "end_time":1556011249,
+        "hash":"9e5250664623114d80d97a434fd78c9b7c52e0d3c92e3f448a4720ab1d40d84f",
+        "hash_file":"4fe1308a35e1d062718a8e39f9420a740e95a6f145030a0f7e8b169d2b94654b",
+        "force_alert":"1"
     }
 
 
@@ -133,21 +136,25 @@ The following event is send:
 
 .. code-block:: json
 
-    {
+    {  
         "type":"check",
-        "id":574369125,
+        "id":618748202,
         "policy":"CIS benchmark for Debian/Linux",
         "policy_id":"cis_debian",
-        "check":{
+        "check":{  
             "id":5031,
             "title":"Ensure IP forwarding is disabled",
             "description":"The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.",
             "rationale":"Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.",
             "remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0",
-            "compliance":{
-                "cis_csc":5,
+            "compliance":{  
+                "cis_csc":"5.1",
                 "cis":"3.1.1"
             },
+            "rules":[  
+                "f:/proc/sys/net/ipv4/ip_forward -> 1;",
+                "f:/proc/sys/net/ipv6/ip_forward -> 1;"
+            ],
             "file":"/proc/sys/net/ipv4/ip_forward,/proc/sys/net/ipv6/ip_forward",
             "result":"passed"
         }
