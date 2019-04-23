@@ -298,7 +298,7 @@ Wazuh agents are designed to monitor hosts. To start using them:
 1. :doc:`Install the agent <../installation-guide/installing-wazuh-agent/index>`.
 
 
-2. Now, register the agent using the :doc:`registration service <../user-manual/registering/use-registration-service>`.
+2. Now, register the agent using the :doc:`registration service <../user-manual/agents/registering/use-registration-service>`.
 
 
 3. Modify the file ``/var/ossec/etc/ossec.conf``, changing the "transport protocol" to *TCP* and changing the ``MANAGER_IP`` for the external IP of the service pointing to port 1514 or for the DNS provided by *AWS Route 53* if you are using it.
