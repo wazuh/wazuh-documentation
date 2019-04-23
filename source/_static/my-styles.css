@@ -229,7 +229,3 @@ div.version:after {
 .rst-content table.docutils td {
     border-left: 1px solid #e1e4e5 !important;
 }
-
-.wy-table-responsive table td, .wy-table-responsive table th {
-    white-space: normal !important;
-}
