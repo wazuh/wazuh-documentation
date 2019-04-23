@@ -24,7 +24,3 @@ that contains the files needed to upgrade agent to the new version. This securel
 Wazuh provides access to an updated WPK repository for each new release. All available WPK files can be found :doc:`here <./wpk-list>`.
 
 Custom repositories may also be added by following the steps described in :doc:`Adding custom repository <./custom-repository>`.
-
-.. note::
-
-    In order to remotely upgrade agents, **Active response** must be enabled in the agents that are to be upgraded.

@@ -114,7 +114,7 @@ Attributes:
 +                          +                                                                                                                     +
 |                          | On Windows, a list of denied and allowed permissions will be given for each user or group since version 3.8.0.      |
 +                          +                                                                                                                     +
-|                          | Only works on NTFS partitions on Windows systems.
+|                          | Only works on NTFS partitions on Windows systems.                                                                   |
 +                          +------------------------------------------------------------+--------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                |
 +--------------------------+------------------------------------------------------------+--------------------------------------------------------+
@@ -215,7 +215,7 @@ frequency
 Frequency that the syscheck will be run (in seconds).
 
 +--------------------+-------------------------------------+
-| **Default value**  | 21600                               |
+| **Default value**  | 43200                               |
 +--------------------+-------------------------------------+
 | **Allowed values** | A positive number, time in seconds. |
 +--------------------+-------------------------------------+
