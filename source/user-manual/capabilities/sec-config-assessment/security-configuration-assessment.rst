@@ -367,8 +367,9 @@ There are five main types of rules as described below:
 | Registry (Windows Only)      | r              |
 +------------------------------+----------------+
 
-A *check* can be marked as *not applicable* in the case that an error happens getting the result.
-In this case, the field *result* doesn't appear and the check returns two fields: *status* and *reason*.
+.. note::
+  A *check* can be marked as *not applicable* in the case that an error happens getting the result.
+  In this case, the field *result* doesn't appear and the check returns two fields: *status* and *reason*.
 
 Examples:
 
@@ -378,7 +379,7 @@ Examples:
 - Looking at the value of a registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0;``
 - Looking if a directory contains files: ``d:/home/* -> ^.mysql_history$;``
 - Checking if a directory exists: ``d:/etc/mysql;``
-- Check the running configuration of ssh to check the maximum number of tries: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$;``
+- Check the running configuration of ssh to check the maximum authentication tries: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$;``
 
 .. note::
    Remember that the each rule must end with the semicolon ``;`` character.

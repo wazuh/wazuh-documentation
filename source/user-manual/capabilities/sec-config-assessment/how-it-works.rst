@@ -103,6 +103,8 @@ The information of the different types of events are stored on the manager side 
 +------------------------------+-------------------------------------------------------------------------------------------+
 | sca_check_compliance         | Stores the information about the compliances of a check event. Related to the check event |
 +------------------------------+-------------------------------------------------------------------------------------------+
+| sca_check_rules              | Stores the information about the rules of a check event. Related to the check event       |
++------------------------------+-------------------------------------------------------------------------------------------+
 
 
 Check status
@@ -179,6 +181,9 @@ Integrity mechanism
 
 To maintain the correct correlation between the agent state for each check and the manager's database for that agent, an integrity mechanism has been developed.
 
+Integrity of the result
+^^^^^^^^^^^^^^^^^^^^^^^
+
 Let's look at how it works with an example.
 
 On the agent side we have the following hash table:
@@ -195,7 +200,7 @@ On the agent side we have the following hash table:
 | 1003                         | passed         |
 +------------------------------+----------------+
 
-It will send an MD5 hash inside the summary event with the result of the concatenation ``passed,failed,failed,passed`` being it ``C97B411C70B9F38FB20BA0458FDCE7A3``.
+It will send an SHA256 hash inside the summary event with the result of the concatenation ``passed,failed,failed,passed`` being it ``1642AB1DC478052AC3556B5E700CD82ADB69728008301882B9CBEE0696FF2C84``.
 
 On the ``manager`` side, let's asume the database is as follows:
 
@@ -209,9 +214,23 @@ On the ``manager`` side, let's asume the database is as follows:
 | 1003                         | passed         |
 +------------------------------+----------------+
 
-The ID 1002 is missing, so the concatenation ``passed,failed,passed`` produces the MD5 hash ``02A7C566386C09071B563B90332DB65C``.
-As the MD5 of the agent ``C97B411C70B9F38FB20BA0458FDCE7A3`` and the MD5 of the manager ``02A7C566386C09071B563B90332DB65C`` do not match, the manager will request a full database dump to the agent.
+The ID 1002 is missing, so the concatenation ``passed,failed,passed`` produces the SHA256 hash ``B43037CA28D95A69B6F9E03FCD826D2B253A6BB1B6AD28C4AE57A3A766ACE610``.
+As the SHA256 of the agent ``1642AB1DC478052AC3556B5E700CD82ADB69728008301882B9CBEE0696FF2C84`` and the SHA256 of the manager ``B43037CA28D95A69B6F9E03FCD826D2B253A6BB1B6AD28C4AE57A3A766ACE610`` do not match, the manager will request a full database dump to the agent.
 
+Integrity of the files
+^^^^^^^^^^^^^^^^^^^^^^
+
+Now, let's see what happens when a policy file is changed but his information is stored in the database:
+
+The SHA256 of the policy file ``system_audit_ssh`` is: ``BFA7204C70C5C0DA65E351BDAC27F56FE3074DF17AEA27475BEE695770D2C951``
+This SHA256 is stored in the table `sca_policy` of the agent database.
+
+Let's change the rule that search for the maximum authentication tries to check if the maximum is 3 instead of 4:
+``- 'f:$sshd_file -> !r:^\s*MaxAuthTries\s+4\s*$;'`` -> ``- 'f:$sshd_file -> !r:^\s*MaxAuthTries\s+3\s*$;'``
+
+Now the SHA256 of the file is: ``339DD252D55574B265DD3384DBC33EBC801EED7ECA5870CD70FECCC868E73725``
+
+In the next SCA scan the manager will compare both SHA256. If they are different, as it is in our case, the manager will wipe the information referred to the policy that changed (``system_audit_ssh``) and the manager will request a policy information dump to the agent.
 
 Starting to work
 ----------------
