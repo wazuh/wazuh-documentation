@@ -116,39 +116,65 @@ Compatibility matrix
 ^^^^^^^^^^^^^^^^^^^^
 
 When installing Wazuh agent, the system will install only the policy files for that particular Operating System. The following lists shows
-all the policy files avaiable for all Operating System that Wazuh supports.
+all the policy files avaiable for all Operating System that Wazuh supports. Those files are installed on every Wazuh manager.
 
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Operating System            | Policies                                                                                  |
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Debian Based                | cis_debian_linux_rcl.yml                                                                  |            
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Redhat / CentOS Based       | cis_rhel5_linux_rcl.yml, cis_rhel6_linux_rcl.yml, cis_rhel7_linux_rcl.yml                 |            
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Suse                        | cis_sles11_linux_rcl.yml, cis_sles12_linux_rcl.yml                                        |            
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Windows                     | win_audit_rcl.yml                                                                         |
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Macintosh                   | cis_apple_macOS_10.11.yml, cis_apple_macOS_10.12.yml, cis_apple_macOS_10.13.yml           |
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Solaris                     | cis_solaris11_rcl.yml                                                                     |            
-+-----------------------------+-------------------------------------------------------------------------------------------+
-| Generic                     | system_audit_rcl.yml, system_audit_ssh.yml                                                |            
-+-----------------------------+-------------------------------------------------------------------------------------------+
-
-
-With a Wazuh manager installation the following additional files are also installed:
-
-+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| Application                 | Policies                                                                                                                         |
-+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| Apache                      | cis_apache2224_rcl.yml                                                                                                           |            
-+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| MySQL                       | cis_mysql5-6_community_rcl.yml, cis_mysql5-6_enterprise_rcl.yml                                                                  |            
-+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
-| Windows Server 2012 r2      | cis_win2012r2_memberL1_rcl.yml, cis_win2012r2_memberL2_rcl.yml, cis_win2012r2_domainL1_rcl.yml, cis_win2012r2_domainL2_rcl..yml  |            
-+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+
-
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| Policy                      | Name                                                       | Requirements                  |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| acsc_office2016_rcl         |  System audit for Office 2016 vulnerabilities              | Microsoft Office              |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_apache2224_rcl          |  CIS Apache HTTP Server 2.2/2.4 Benchmark                  | Apache                        |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_win2012r2_domainL1_rcl  |  CIS benchmark for Windows 2012 R2 Domain Controller L1    | Windows Server 2012           |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_win2012r2_domainL2_rcl  |  CIS benchmark for Windows 2012 R2 Domain Controller L2    | Windows Server 2012           |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_win2012r2_memberL1_rcl  |  CIS benchmark for Windows 2012 R2 Member Server L1        | Windows Server 2012           |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_win2012r2_memberL2_rcl  |  CIS benchmark for Windows 2012 R2 Member Server L2        | Windows Server 2012           |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_rhel5_linux_rcl         |  CIS Benchmark for Red Hat Enterprise Linux 5              | Red Hat Systems               |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_rhel6_linux_rcl         |  CIS Benchmark for Red Hat Enterprise Linux 6              | Red Hat Systems               |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_rhel7_linux_rcl         |  CIS Benchmark for Red Hat Enterprise Linux 7              | Red Hat Systems               |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_apple_macOS_10.11       |  CIS Apple OSX 10.11 Benchmark                             | macOS                         |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_apple_macOS_10.12       |  CIS Apple macOS 10.12 Benchmark                           | macOS                         |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_apple_macOS_10.13       |  CIS Apple macOS 10.13 Benchmark                           | macOS                         |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_debianlinux7-8_L1_rcl   |  CIS benchmark for Debian/Linux 7 and 8 L1                 | Debian 7 and 8                |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_debianlinux7-8_L2_rcl   |  CIS benchmark for Debian/Linux 7 and 8 L2                 | Debian 7 and 8                |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_debian_linux_rcl        |  CIS benchmark for Debian/Linux                            | Debian systems                |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_sles11_linux_rcl        |  CIS SUSE Linux Enterprise 11 Benchmark                    | SUSE 11                       |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_sles12_linux_rcl        |  CIS SUSE Linux Enterprise 12 Benchmark                    | SUSE 12                       |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_solaris11_rcl           |  CIS benchmark for Oracle Solaris 11                       | Solaris 11                    |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| system_audit_pw             |  System audit for password-related vulnerabilities         | Audit                         |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| system_audit_rcl_mac        |  System audit for web-related vulnerabilities              | Audit installed on macOS      |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| system_audit_rcl            |  System audit for web-related vulnerabilities              | Audit                         |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| system_audit_ssh            |  System audit for SSH hardening                            | Audit                         |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| win_audit_rcl               |  Benchmark for Windows audit                               | Audit installed on Windows    |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_win10_enterprise_L1_rcl |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_win10_enterprise_L2_rcl |  CIS benchmark for Windows 10 Enterprise (Release 1709)    | Windows 10                    |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_mysql5-6_community_rcl  |  CIS benchmark for Oracle MySQL Community Server 5.6       | MySQL Community Server 5.6    |
++-----------------------------+------------------------------------------------------------+-------------------------------+
+| cis_mysql5-6_enterprise_rcl |  CIS benchmark for Oracle MySQL Enterprise 5.6             | MySQL Enterprise 5.6          |
++-----------------------------+------------------------------------------------------------+-------------------------------+
 
 Policy files location
 ^^^^^^^^^^^^^^^^^^^^^
@@ -367,9 +393,6 @@ There are five main types of rules as described below:
 | Registry (Windows Only)      | r              |
 +------------------------------+----------------+
 
-.. note::
-  A *check* can be marked as *not applicable* in the case that an error happens getting the result.
-  In this case, the field *result* doesn't appear and the check returns two fields: *status* and *reason*.
 
 Examples:
 

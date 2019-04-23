@@ -156,7 +156,11 @@ The following event is send:
 The *result* is ``passed`` because the ``rules`` are looking for a ``1`` inside the ``/proc/sys/net/ipv4/ip_forward`` file or the ``/proc/sys/net/ipv6/ip_forward``. 
 As we have the value ``0`` in both files, the result is marked as ``passed``.
 
+.. note::
+  A *check* can be marked as *not applicable* in the case that an error happens getting the result.
+  In this case, the field *result* doesn't appear and the check returns two fields: *status* and *reason*.
 
+  
 Enabled policies
 ^^^^^^^^^^^^^^^^
 
