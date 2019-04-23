@@ -65,7 +65,7 @@ The first rule (100010) will generate an alert ("Important process not running")
 Disk space utilization
 ----------------------
 
-The ``df`` command is very useful here to check the available disk space for file systems.
+The ``df`` command helps here to check the available disk space for file systems.
 
 This can be configured in either the ``agent.conf`` file or the ``ossec.conf`` file:
 
