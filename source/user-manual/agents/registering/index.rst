@@ -16,6 +16,9 @@ In this section, the registration process is described, and more specifically th
         :maxdepth: 2
 
         registration-process
-        using-command-line
+        using-command-line-linux
+        using-command-line-macos
+        using-command-line-windows
+        using-command-line-unix
         use-registration-service
         restful-api-register
