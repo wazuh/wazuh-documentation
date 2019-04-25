@@ -34,19 +34,19 @@ Open a session in your Linux/Unix agent host as root user. After that, you can r
 
 3. Start the agent.
 
-  * For Systemd:
+  a) For Systemd:
 
     .. code-block:: console
 
       # systemctl start wazuh-agent
 
-  * For SysV Init:
+  b) For SysV Init:
 
     .. code-block:: console
 
       # service wazuh-agent start
 
-  * Other cases:
+  c) Other cases:
 
     .. code-block:: console
 
@@ -60,15 +60,15 @@ To register the Windows Agent, you need to start a CMD or a Powershell as **Admi
 	- ``C:\Program Files (x86)\ossec-agent`` for ``x86_64`` hosts.
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
 
-This guide suppose that the Wazuh Agent is installed in a x86_64 host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``.
+This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``.
 
 After that, you can register the agent using ``agent-auth.exe``.
 
 1. On the agent, run the ``agent-auth.exe`` program, using the manager's IP address.
 
-  .. code-block:: powershell
+  .. code-block:: console
 
-    > C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
+    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
 
 
 2. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
@@ -86,13 +86,13 @@ After that, you can register the agent using ``agent-auth.exe``.
 
 3. Start the agent.
 
-	* Using Powershell with administrator access:
+	a) Using Powershell with administrator access:
 
 		.. code-block:: console
 
 			# Restart-Service -Name wazuh
 
-	* Using Windows cmd with administrator access:
+	b) Using Windows cmd with administrator access:
 
 		.. code-block:: console
 
