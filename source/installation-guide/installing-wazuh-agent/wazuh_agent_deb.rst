@@ -49,35 +49,61 @@ Installing Wazuh agent
 
   You can automate the agent registration with authd using the following environment variables:
 
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  | Option                | Description                                                                                                                  |
-  +=======================+==============================================================================================================================+
-  |   WAZUH_MANAGER_IP    |  Specifies the managers IP address or hostname. You can add multiple values separeted by commas.                             |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_SERVER_PORT   |  Specifies the managers connection port.                                                                                     |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_PROTOCOL      |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is UDP.                     |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_AUTHD_SERVER  |  Specifies the Authd IP address.                                                                                             |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_AUTHD_PORT    |  Specifies the Authd connection port.                                                                                        |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_PASSWORD      |  Sets the Authd password.                                                                                                    |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_NOTIFY_TIME   |  Sets the time between manager checks.                                                                                       |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_TIME_RECONNECT|  Sets the time in seconds until a reconnection attempt.                                                                      |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_CERTIFICATE   |  Specifies the certificate of authority path.                                                                                |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_PEM           |  Specifies the certificate path.                                                                                             |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_KEY           |  Specifies the key path.                                                                                                     |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default will be the computer name.                                                          |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_GROUP         |  Assigns the specified group to the agent.                                                                                   |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
++-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     | Option                | Description                                                                                                                  |
+     +=======================+==============================================================================================================================+
+     |   WAZUH_MANAGER_IP    |  Specifies the managers IP address or hostname. You can add multiple values by commas.                                       |
+     |                       |                                                                                                                              |
+     |                       |  See `address <../../user-manual/reference/ossec-conf/client.html#address>`_                                                 |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_SERVER_PORT   |  Specifies the managers connection port.                                                                                     |
+     |                       |                                                                                                                              |
+     |                       |  See `server-port <../../user-manual/reference/ossec-conf/client.html#server-port>`_                                         |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_PROTOCOL      |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is UDP.                     |
+     |                       |                                                                                                                              |
+     |                       |  See `server-protocol <../../user-manual/reference/ossec-conf/client.html#server-protocol>`_                                 |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_AUTHD_SERVER  |  Specifies the Wazuh authentication server.                                                                                  |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_AUTHD_PORT    |  Specifies the port used by the Wazuh authentication server.                                                                 |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_PASSWORD      |  Sets the Wazuh authentication server.                                                                                       |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_NOTIFY_TIME   |  Sets the time between agent checks for manager connection.                                                                  |
+     |                       |                                                                                                                              |    
+     |                       |  See `notify-time <../../user-manual/reference/ossec-conf/client.html#notify-time>`_                                         |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_TIME_RECONNECT|  Sets the time in seconds until a reconnection attempt if the connection between agent and manager is lost.                  |
+     |                       |                                                                                                                              |
+     |                       |  See `time-reconnect <../../user-manual/reference/ossec-conf/client.html#time-reconnect>`_                                   |
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_CERTIFICATE   |  Host SSL validation need of Certificate of Authority. This option specifies the CA path.                                    |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |   
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_PEM           |  The SSL agent verification needs a CA signed certificate and the respective key. This option specifies the certificate path.|
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_KEY           |  Specifies the key path completing the required variables with WAZUH_PEM for the SSL agent verification process.             |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default it will be the computer name.                                                       |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+     |   WAZUH_GROUP         |  Assigns the installed agent to a previously created group.                                                                  |
+     |                       |                                                                                                                              |
+     |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
 
   Below there are some examples to install and register a Debian-based linux agent.
 

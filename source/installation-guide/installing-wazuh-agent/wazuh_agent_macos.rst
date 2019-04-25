@@ -5,11 +5,7 @@
 Install Wazuh agent on Mac OS X
 ===============================
 
-<<<<<<< HEAD
 The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/index>`. You can install it by using the command line or following the GUI steps:
-=======
-The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/index>`. The current version has been tested on Mac OS X and should be compatible with other versions as well. You can install it by using the command line or following the GUI steps:
->>>>>>> 998b2944... Update wazuh_agent_macos.rst
 
   a) The command line::
 
@@ -70,7 +66,7 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
      |                       |                                                                                                                              |
      |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
      +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-     |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default it will be the computer name.                                                          |
+     |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default it will be the computer name.                                                       |
      |                       |                                                                                                                              |
      |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_                                               |    
      +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
