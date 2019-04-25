@@ -63,25 +63,21 @@ ignore
 
 List of files or directories to be ignored (one entry per line). Multiple lines may be entered to include multiple files or directories. These files and directories will be ignored during scans.
 
-+--------------------+-----------------------------+
-| **Allowed values** | Any directory or file name. |
-+--------------------+-----------------------------+
-| **Valid for**      | - check_sys                 |
-|                    | - check_dev                 |
-|                    | - check_files               |
-|                    |                             |
-|                    |                             |
-+--------------------+-----------------------------+
-| **Example**        | /etc                        |
-+--------------------+-----------------------------+
++--------------------+---------------------------------+
+| **Allowed values** | Any directory or file name.     |
++--------------------+---------------------------------+
+| **Valid for**      | check_sys, check_dev, check_dev |
++--------------------+---------------------------------+
+| **Example**        | /etc                            |
++--------------------+---------------------------------+
 
 Attributes:
 
-+----------+---------------------------------------------------------------------------------+
-| **type** | This is a simple regex pattern to filter out files so alerts are not generated. |
-+          +--------------------------------------------+------------------------------------+
-|          | Allowed values                             | sregex                             |
-+----------+--------------------------------------------+------------------------------------+
++----------+----------------------------------------------------------+
+| **type** | Simple regex expression to ignore files and directories. |
++          +---------------------+------------------------------------+
+|          | Allowed values      | sregex                             |
++----------+---------------------+------------------------------------+
 
 .. _reference_ossec_rootcheck_rootkit_files:
 
