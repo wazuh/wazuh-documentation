@@ -38,12 +38,8 @@ Below it shown the compatibility table for the Wazuh manager.
 
 .. note::
 
-    The cluster is available since Wazuh v3.0 and it doesn't work on CentOS 5 / RHEL 5. 
-
-
-.. note::
-
-    To run the cluster in CentOS 6, check the section* :ref:`run-cluster-centos6`
+    - The cluster is available since Wazuh v3.0 and it doesn't work on CentOS 5 / RHEL 5. 
+    - To run the cluster in CentOS 6, check the section :ref:`run-cluster-centos6`
 
 
 Wazuh Agent
