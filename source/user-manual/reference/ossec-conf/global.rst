@@ -370,7 +370,7 @@ For example:
 rotate_interval
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.1.0
+.. note:: This option is deprecated since Wazuh 3.9.0. Use the :doc:`logging <./logging>` block instead.
 
 This option sets the interval between file rotation. The range of possible values is from ``10s`` (10 seconds) to ``1d`` (1 day).
 
@@ -389,7 +389,7 @@ Example:
 max_output_size
 ^^^^^^^^^^^^^^^
 
-.. versionadded:: 3.1.0
+.. note:: This option is deprecated since Wazuh 3.9.0. Use the :doc:`logging <./logging>` block instead.
 
 This sets the size limit of alert files with a maximum allowed value of 1TiB and a minimum allowed value of 1MiB.
 
