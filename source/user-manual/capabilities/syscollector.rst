@@ -16,6 +16,8 @@ The Wazuh agents are able to collect interesting system information and store it
     - `Ports`_
     - `Processes`_
 - `Compatibility matrix`_
+- `Using Syscollector information to trigger alerts`_
+    - `New searchable fields for Kibana`_
 - `Use case: Visualize system inventory in the Wazuh App`_
 
 How it works
@@ -378,6 +380,58 @@ The following table shows the operating systems that this module currently suppo
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+
 |    OpenBSD             |     ✓     |     ✓     |     ✗     |     ✓    |     ✗     |     ✗     |
 +------------------------+-----------+-----------+-----------+----------+-----------+-----------+
+
+Using Syscollector information to trigger alerts
+------------------------------------------------
+
+  Since Wazuh 3.9 version, ``Syscollector`` module information can be used to trigger alerts and show that information in the alerts' description.
+
+  To allow this configuration, in a rule declaration set the ``<decoded_as>`` field as **syscollector**.
+
+  As an example, this rule will be triggered when the interface ``eth0`` of an agent is enabled and will show what IPv4 has that interface.
+
+  .. code-block:: xml
+
+    <rule id="100001" level="5">
+      <if_sid>221</if_sid>
+      <decoded_as>syscollector</decoded_as>
+      <field name="netinfo.iface.name">eth0</field>
+      <description>eth0 interface enabled. IP: $(netinfo.iface.ipv4.address)</description>
+    </rule>
+
+  .. warning::
+
+    The tag ``<if_sid>221</if_sid>`` is necessary because the events from Syscollector are muted by default with that rule.
+
+  When the alerts are triggered they will be displayed in Kibana this way:
+
+    .. thumbnail:: ../../images/manual/internal-capabilities/syscollector_alerts.png
+      :title: Information from syscollector for "port" value.
+      :align: center
+      :width: 80%
+
+New searchable fields for Kibana
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In Elasticsearch the fields will be saved as ``data.type.value``. For example, for **Hardware** type, the ``cpu_name`` field can be found as ``data.hardware.cpu_name``
+
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Type**             | **Fields**                                                                                                           | **Example**                      |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Hardware**         | cpu_name, cpu_cores, cpu_mhz, ram_total, ram_free, ram_usage                                                         | data.hardware.cpu_mhz            |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Operating System** | architecture, name, version, codename, major, minor, build, platform, sysname, release, release_version              | data.os.codename                 |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Port**             | local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process                         | data.port.inode                  | 
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Program**          | name, priority, section, size, vendor, install_time, version, architecture, multiarch, source, description, location | data.program.name                |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **Process**          | name, state, ppid, utime, stime, cmd, args, euser, ruser, suser, egroup, sgroup, fgroup, rgroup, priority, nice,     | data.process.state               |
+|                      | size, vm_size, resident, share, start_time, pgrp, session, nlwp, tgid, tty, processor                                |                                  |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
+| **netinfo**          | mac, adapter, type, state, mtu, tx_bytes, rx_bytes, tx_errors, rx_errors, tx_dropped, rx_dropped, tx_packets,        | data.netinfo.iface.ipv4.address, |
+|                      | rx_packets, ipv4, ipv6                                                                                               | data.netinfo.iface.mac           |
++----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 
 Use case: Visualize system inventory in the Wazuh app
 -----------------------------------------------------

@@ -5,22 +5,51 @@
 Configuring database output
 ===========================
 
-It's possible to configure Wazuh to output the alerts into a database. To do this, you must compile Wazuh with the database type that you want to use.
+It's possible to configure Wazuh to output the alerts into a database. To do this, users must compile Wazuh with the database type that users want to use.
 
 At this moment, `MySQL <https://www.mysql.com/>`_ and `PostgreSQL <https://www.postgresql.org/>`_ databases are supported.
 
-In this section, you'll find instructions to configure the database output for any of the database systems previously mentioned.
+In this section, users will find instructions to configure the database output for any of the database systems previously mentioned.
 
 .. note::
-  This tutorial assumes that the user has already installed MySQL or PostgreSQL. If you need instructions to install them on your host, please find some tutorials for the main distributions at the end of this page.
+  This tutorial assumes that the user has already installed MySQL or PostgreSQL and knows how to create the users and the databases. If it is needed instructions to install them on the users' host, please find some tutorials for the main distributions at the end of this page.
 
-.. warning::
-  To enable the database output, you must install the **development libraries** for the database system that you want to configure.
+Prerequisites
+-------------
+  To enable the database output, it is needed to install the **development libraries** for the database system that users want to configure.
+
+  a) For MySQL:
+
+    RPM:
+
+    .. code-block:: console
+
+      # yum install mysql-devel
+
+    Debian:
+
+    .. code-block:: console
+
+      # apt-get install libmysqlclient-dev
+
+  b) For PostgreSQL:
+
+    RPM:
+
+    .. code-block:: console
+
+      # yum install postgresql-devel
+
+    Debian:
+
+    .. code-block:: console
+
+      # apt-get install libpq-dev
 
 Installation
 ------------
 
-As previously mentioned, the database output can be enabled when compiling Wazuh with the database type to use. On the :ref:`sources installation guide <sources_installation>`, you must pre-compile the source code before running the ``install.sh`` script.
+As previously mentioned, the database output can be enabled when compiling Wazuh with the database type to use. On the :ref:`sources installation guide <sources_installation>`, users must pre-compile the source code before running the ``install.sh`` script.
 
 Execute the following command before **step 3** from the installation guide:
 
@@ -29,7 +58,7 @@ Execute the following command before **step 3** from the installation guide:
   # cd wazuh-*/src
   # make deps && make TARGET=server DATABASE=<mysql/pgsql>
 
-To indicate what kind of database you'll use, you need the ``DATABASE`` flag. The allowed values are *mysql* or *pgsql*.
+To indicate what kind of database users will use, users need the ``DATABASE`` flag. The allowed values are *mysql* or *pgsql*.
 
 The compilation process might take some time. After finishing this process, please continue with the sources installation guide. Now Wazuh will be installed with database support, but we must enable manually the feature after configuring it.
 
@@ -73,7 +102,7 @@ Now that we have Wazuh installed with database support, we need to set up the da
 Wazuh configuration
 -------------------
 
-In order for Wazuh to output alerts and other data into the database, you must add a ``<database_output>`` section on the configuration file, located at ``/var/ossec/etc/ossec.conf``. Fill in the block with the right database name and credentials. The hostname must be the IP address of the database server.
+In order for Wazuh to output alerts and other data into the database, the users must add a ``<database_output>`` section on the configuration file, located at ``/var/ossec/etc/ossec.conf``. Fill in the block with the right database name and credentials. The hostname must be the IP address of the database server.
 
 **For MySQL:**
 
@@ -104,15 +133,7 @@ Find :ref:`here <reference_ossec_database_output>` the complete configuration re
 Last steps
 ----------
 
-The setup process for the database output is finished. Now the only thing left is to enable this feature on the Wazuh manager and restart it. To do so, follow these steps:
-
-1. Enable the ``ossec-dbd`` daemon to activate the database output feature:
-
-  .. code-block:: console
-
-    # /var/ossec/bin/ossec-control enable database
-
-2. Restart the Wazuh manager:
+The setup process for the database output is finished. Now the only thing left is to restart the Wazuh manager:
 
   a. For Systemd:
 
@@ -127,16 +148,3 @@ The setup process for the database output is finished. Now the only thing left i
     # service wazuh-manager restart
 
 Now the database will start being filled with data provided by the manager.
-
-More information
-----------------
-
-The scope of this documentation doesn't include instructions for installing a database server, but below you can find some useful tutorials if you need to learn how to do it:
-
-- `MySQL installation on CentOS systems <https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-centos-7>`_
-- `Mysql installation on Ubuntu systems <https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04>`_
-- `PostgreSQL installation on CentOS systems <https://www.linode.com/docs/databases/postgresql/how-to-install-postgresql-relational-databases-on-centos-7/>`_
-- `PostgreSQL installation on Ubuntu systems <https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-18-04>`_
-
-.. note::
-  `MariaDB <https://mariadb.org/>`_ is a community-driven version of MySQL, and it's also valid for this tutorial.

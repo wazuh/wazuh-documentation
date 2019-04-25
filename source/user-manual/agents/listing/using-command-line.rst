@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _command-line-listing:
+.. _command_line_listing:
 
-Listing Agents
---------------
+Listing agents using the CLI
+----------------------------
 
-The binary */var/ossec/bin/agent_control* allows for the retrieval of a list of the available agents:
+The binary ``agent_control``, used with ``-l`` option, allows for the retrieval of a list of the available agents:
 
 .. code-block:: console
 
@@ -28,3 +28,14 @@ The binary */var/ossec/bin/agent_control* allows for the retrieval of a list of 
        ID: 1041, Name: vpc-agent-centos-public, IP: 10.0.0.125, Active
 
     List of agentless devices:
+       ID: 010, Name: agentless-ubuntu, IP: 10.0.0.135, Active
+
+Also, users can retrieve the connected agents by using the ``manage_agents`` with ``-l`` option:
+
+.. code-block:: console
+
+   # /var/ossec/bin/manage_agents -l
+
+   Available agents: 
+      ID: 001, Name: agent-ubuntu2, IP: any
+      ID: 002, Name: agent-ubuntu1, IP: any

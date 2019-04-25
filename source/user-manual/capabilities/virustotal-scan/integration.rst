@@ -31,7 +31,7 @@ Use case: Scanning a file
 Getting started
 ^^^^^^^^^^^^^^^
 
-Follow the instructions from :ref:`manual_integration` to enable the **Integrator** daemon, install the ``requests`` package and configure the VirusTotal integration.
+Follow the instructions from :ref:`manual_integration` to enable the **Integrator** daemon and configure the VirusTotal integration.
 
 This is an example configuration to add on the ``ossec.conf`` file:
 

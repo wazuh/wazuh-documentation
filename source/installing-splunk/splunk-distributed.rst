@@ -2,29 +2,32 @@
 
 .. _splunk_distributed:
 
-Install Splunk in multi-instance mode
-=====================================
+Installing & Configuring Splunk Cluster
+=======================================
 
-This document will guide you through the installation process for a multi-instance distributed architecture, recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
+This document will guide the users through the installation process for a multi-instance distributed architecture, recommended for larger environments with huge amounts of data (in this case, Wazuh alerts) and users.
 
 .. note::
   Many of the commands described below need to be executed with root user privileges.
 
-We're going to perform the most basic installation for a multi-instance deployment. We'll use **two instances** of Splunk Enterprise, one of them being the *search head* and the other one, a *search peer* (commonly known as an indexer); we'll also need a Splunk forwarder.
-
-- The **search head** instance will be in charge of all the searching functionality, and it will look for data on the search peers' indexes. This instance won't have any indexes at all.
-- The **search peer** instance (or indexer) collects all the Wazuh data and stores it in the form of indexes. This instance is connected to the search head so it can consult the peer's indexes.
-- The **forwarder** runs on the Wazuh manager instance, it reads local data and sends it to the indexer.
-
-You can have multiple search peer instances, but in this case we're going to stick with the essentials.
-
-.. thumbnail:: ../images/splunk-app/distributed-arch.png
-  :align: center
-  :width: 90%
-  :title: Diagram of a multi-instance Splunk architecture
+.. note::
+  To know how to deploy a Splunk cluster, visit the `Official Splunk Documentation. <https://docs.splunk.com/Documentation/Splunk/7.2.3/Indexer/Aboutclusters>`_
 
 .. warning::
-  This documentation will install Splunk using the multi-instance deployment schema. If you want a simpler installation, check out the :ref:`single-instance <splunk_basic>` deployment schema.
+  By following this guide,users will learn how to install and configure **Wazuh** in an already created Splunk Cluster, so all the configuration related with Splunk is in their **Official Documentation**, and its assumed that an Splunk installation and configuration has been already done.
+
+
+This is the structure of a basic Splunk Cluster, that's formed by the next elements:
+
+- The **search head** instances will be in charge of all the searching functionality, and they will look for data on the search peers' indexes. This instances won't have any indexes at all. The **Wazuh App** will be installed in this instances.
+- The **search peer** instances (or indexers) collect all the Wazuh data and stores it in the form of indexes. This instances are connected to the search heads so they can consult the peer's indexes.
+- The **forwarder** runs on the Wazuh manager instance, it reads local data and sends it to the indexer.
+- The **deployer** instance installs and configures the Wazuh App into every **search head** instance at the same time.
+
+.. thumbnail:: ../images/splunk_cluster/splunk_cluster.png
+    :title: Splunk Cluster with Wazuh installed architecture.
+    :align: center
+    :width: 80%
 
 Install Splunk Enterprise instances
 -----------------------------------
@@ -34,7 +37,7 @@ Each instance can be installed on different hosts following the same steps descr
 1. Download Splunk v7.2.5 package from `its official website <https://www.splunk.com/en_us/download/partners/splunk-enterprise.html>`_.
 
   .. note::
-    Splunk is not open source software and it requires a registered user and license in order to work. You can also use a free trial license.
+    Splunk is not open source software and it requires a registered user and license in order to work. Users can also use a free trial license.
 
 2. Install the Splunk v7.2.5 package:
 
@@ -61,7 +64,7 @@ Each instance can be installed on different hosts following the same steps descr
 
   After this step the Splunk Web service will be listening to port 8000. You can browse ``http://<your-instance-ip>:8000`` in order to access the Web GUI.
 
-4. Optional. If you additionally want the Splunk service to start at boot time, please execute the following command:
+4. Optional. Additionally, if the Splunk service is required to start at boot time, execute the following *command*.
 
   .. code-block:: console
 
@@ -70,50 +73,59 @@ Each instance can be installed on different hosts following the same steps descr
 Configuring the Splunk instances
 --------------------------------
 
-Now that we finished installing the Splunk instances, it's time to choose which one will be the *search head* and the *search peer*.
+Indexers:
++++++++++
 
-1. On the **search head** instance run the following command to add a search peer:
+In the **master instance** users will make the configuration that will be pushed to the rest of the indexers.
 
-  .. code-block:: console
+For this configuration is necessary to create the following two files and paste them into the following blocks of code respectively:
 
-    # /opt/splunk/bin/splunk add search-server <host>:<port> -auth <user>:<password> -remoteUsername <user> -remotePassword <passremote>
+.. code-block:: console
 
-  You must run this command for each search peer that you want to add.
+  # touch /opt/splunk/etc/master-apps/_cluster/local/inputs.conf
 
-  **Note the following:**
+.. code-block:: xml
 
-  1. ``<host>`` is the host name or IP address of the search peer's host machine.
-  2. ``<port>`` is the management port of the search peer. By default it's 8089.
-  3. The ``-auth`` flag is used to provide credentials for the search head.
-  4. The ``-remoteUsername`` and ``remotePassword`` flags are used to provide the credentials for the search peer. The remote credentials must be for an admin-level user on the search peer.
+  [splunktcp://9997]
+  connection_host = ip
 
-  .. warning::
-    If there are login issues when trying to add the search peer, add the ``allowRemoteLogin = always`` option under the ``[general]`` section on the ``/opt/splunk/etc/system/local/server.conf`` file, and then restart the search peer.
 
-2. On the **search peer** instance we need to add the files to configure the Wazuh indexes:
+Now, to create and configure the *indexes.conf* file, execute the following *command*:
 
-  a) Download and insert the ``inputs.conf`` template to configure where the data will come from:
+.. code-block:: console
+
+  # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer-indexes.conf
+
+This is the content of that file:
+
+.. code-block:: xml
+
+  [wazuh]
+  coldPath = $SPLUNK_DB/wazuh/colddb
+  enableDataIntegrityControl = 1
+  enableTsidxReduction = 1
+  homePath = $SPLUNK_DB/wazuh/db
+  maxTotalDataSizeMB = 512000
+  thawedPath = $SPLUNK_DB/wazuh/thaweddb
+  timePeriodInSecBeforeTsidxReduction = 15552000
+  tsidxReductionCheckPeriodInSec =
+
+Now, restart the Splunk Service:
+
+.. code-block:: console
+
+  # /opt/splunk/bin/splunk restart
+
+.. note::
+
+  Check the state of the cluster executing:
 
     .. code-block:: console
 
-      # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/splunk/peer-inputs.conf
+      # /opt/splunk/bin/splunk show cluster-bundle-status
 
-  b) Download and insert the ``indexes.conf`` template to configure the indexes:
 
-    .. code-block:: console
-
-      # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/splunk/peer-indexes.conf
-
-  And finally, we need to restart the search peer:
-
-  .. code-block:: console
-
-    # /opt/splunk/bin/splunk restart
-
-Now that you've finished installing Splunk on a multi-instance mode, you can proceed with the next step and install the :ref:`Wazuh app for Splunk <splunk_app>`.
-
-Additional links
-----------------
+Next step is installing the :ref:`Wazuh App <splunk_app>` into the search heads instances to start using the services.
 
 - You can find useful Splunk CLI commands in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.5/Admin/CLIadmincommands>`_ .
 - To learn more about the Splunk distributed search, check out `this article <http://docs.splunk.com/Documentation/Splunk/7.2.5/DistSearch/Whatisdistributedsearch>`_ from the official documentation.

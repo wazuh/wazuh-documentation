@@ -23,8 +23,6 @@ import os
 import shlex
 import sphinx_rtd_theme
 
-
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -42,6 +40,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinxcontrib.images',
+    'sphinxprettysearchresults',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -190,6 +189,9 @@ html_show_sphinx = False
 
 # If true, "(C) Copyright ..." is shown in the HTML footer. Default is True.
 html_show_copyright = True
+
+# If empty string, we eliminate permalinks from documentation.
+html_add_permalinks = ""
 
 # If true, an OpenSearch description file will be output, and all pages will
 # contain a <link> tag referring to it.  The value of this option must be the

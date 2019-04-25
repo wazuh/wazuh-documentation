@@ -116,7 +116,7 @@ And we can see the preconfigured playbooks we have.
 
 In this occasion we are going to use the role of **wazuh-agent**, which contains the necessary commands to install an agent and register it in our Wazuh environment. To consult the default configuration go to this :ref:`section <wazuh_ansible_reference>`. 
 
-If we want to change the default configuration we can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref: `Wazuh Agent <ansible-wazuh-agent>` role.
+If we want to change the default configuration we can change the ``/etc/ansible/roles/wazuh-ansible/roles/wazuh/ansible-wazuh-agent/defaults/main.yml`` file directly or we can create another YAML file only with the content we want to change the configuration. If we would like to do this, we can find more information at :ref:`Wazuh Agent <ansible-wazuh-agent>` role.
 
 Let's see below, the content of the YAML file ``/etc/ansible/roles/wazuh-ansible/playbooks/wazuh-agent.yml`` that we are going to run for a complete installation of the Wazuh agent.
 

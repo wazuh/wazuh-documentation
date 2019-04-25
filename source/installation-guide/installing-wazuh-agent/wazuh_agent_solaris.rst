@@ -31,4 +31,4 @@ The Wazuh agent for Solaris can be downloaded from our :doc:`packages list<../pa
 
       # pkgadd -d wazuh-agent_v3.8.2-sol10-sparc.pkg
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
