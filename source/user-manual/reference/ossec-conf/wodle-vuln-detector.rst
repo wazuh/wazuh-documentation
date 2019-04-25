@@ -152,7 +152,7 @@ Each *feed* has it own options, here you can see the allowed options:
 Example of configuration
 ------------------------
 
-The following configuration allows you to use the vulnerability database for Debian 9, Red Hat 7 and Ubuntu 16 agents. It also allows you to extract vulnerabilities from agents with Linux Mint 18.X and Ubuntu 15.X using the Ubuntu 16 vulnerability database.
+The following configuration allows you to use the vulnerability database for Debian 9, Red Hat (since 2018) and Ubuntu 18 agents. It also allows you to extract vulnerabilities from agents with Linux Mint 18.X and Ubuntu 17.X using the Ubuntu 18 vulnerability database.
 
 .. code-block:: xml
 
@@ -162,16 +162,17 @@ The following configuration allows you to use the vulnerability database for Deb
     <ignore_time>6h</ignore_time>
     <run_on_start>yes</run_on_start>
     <feed name="ubuntu-18">
-      <disabled>yes</disabled>
+      <disabled>no</disabled>
       <update_interval>1h</update_interval>
+      <allow>linux mint-18, ubuntu-17</allow>
     </feed>
     <feed name="redhat">
-      <disabled>yes</disabled>
+      <disabled>no</disabled>
       <update_interval>1h</update_interval>
       <update_from_year>2014</update_from_year>
     </feed>
     <feed name="debian-9">
-      <disabled>yes</disabled>
+      <disabled>no</disabled>
       <update_interval>1h</update_interval>
     </feed>
   </wodle>
