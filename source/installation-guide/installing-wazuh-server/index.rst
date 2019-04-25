@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _installation:
 
@@ -21,6 +21,12 @@ There are several options for installing the Wazuh server depending on the opera
 | :ref:`Sources <sources_installation>`                                  | Install Wazuh server from source code.                      |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 
+There are some related additional configurations that can be applied:
+
+- :ref:`Securing the Wazuh API <securing_api>` 
+- :ref:`Insert a Wazuh API entry automatically <automatic_api>` 
+
+
 .. note::
     Installing Wazuh Server on a 64-bit operating system is highly recommended since the Wazuh API is not available on 32-bit platforms. Without the Wazuh API, much of the functionality of the Wazuh Kibana App will not work. Similarly, if you are using Red Hat or CentOS for your Wazuh Server platform, make sure it is version 6 or higher to properly install Wazuh API.
 
@@ -31,3 +37,5 @@ There are several options for installing the Wazuh server depending on the opera
    wazuh_server_rpm
    wazuh_server_deb
    sources_installation
+   securing_api
+   automatic_api
