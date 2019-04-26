@@ -23,4 +23,7 @@ In this section, the registration process is described, and more specifically th
         use-registration-service
         simple-registration-method
         password-authorization-registration-service
+        .. linux-unix-password-registration
+        .. windows-password-registration
+        .. macos-password-registration
         restful-api-register
