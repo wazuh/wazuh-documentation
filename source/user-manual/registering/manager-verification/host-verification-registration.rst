@@ -29,3 +29,4 @@ After creating your *CA*, now you have these options to register the Wazuh Agent
     :maxdepth: 2
 
     manager-verification-registration
+    agent-verification-registration

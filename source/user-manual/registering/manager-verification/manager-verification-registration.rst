@@ -5,7 +5,7 @@
 Manager verification using SSL
 ==============================
 
-To verify the manager using a SSL, it is needed to create a SSL certificate for the Wazuh Manager and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the agents to verificate the Wazuh Manager while they are been registered.
+To verify the manager using SSL, it is needed to create a SSL certificate for the Wazuh Manager and sign it using the Certificate of Authority (CA) created in the previous section. This will allow the agents to verificate the Wazuh Manager while they are been registered.
 
   .. image:: ../../../images/manual/managing-agents/SSLregister1.png
     :align: center
@@ -30,7 +30,6 @@ Follow these stes in the Wazuh Manager:
   .. code-block:: console
 
     # cp sslmanager.cert sslmanager.key /var/ossec/etc
-    # /var/ossec/bin/ossec-authd
 
 3. Restart the Wazuh Manager: 
 
