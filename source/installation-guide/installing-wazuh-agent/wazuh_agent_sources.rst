@@ -61,7 +61,7 @@ Installing Linux agent
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
 
 Installing Windows agent
 ------------------------

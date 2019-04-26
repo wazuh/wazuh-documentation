@@ -91,4 +91,4 @@ Registration and adding multiple address:
             WAZUH_AGENT_NAME="centos7" rpm -ivh wazuh-agent-3.9.0-1.aix.ppc.rpm
 
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.

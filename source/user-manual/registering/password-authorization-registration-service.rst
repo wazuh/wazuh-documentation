@@ -53,36 +53,14 @@ To enable this changes, you need to **restart** the Wazuh Manager:
 .. note::
     In this example, the password to registering the Wazuh Agent is *TopSecret*.
 
+Agents
+^^^^^^
 
 Now, follow the instructions to register the agent depending on the OS of the host:
 
-        
-Linux and Unix agents
-^^^^^^^^^^^^^^^^^^^^^
+.. toctree::
+    :maxdepth: 2
 
-    .. toctree::
-        :maxdepth: 1
-
-        linux-unix-password-registration
-
-Macos agents
-^^^^^^^^^^^^
-    .. toctree::
-        :maxdepth: 1
-
-        macos-password-registration
-        
-Windows agents
-^^^^^^^^^^^^^^
-
-    .. toctree::
-        :maxdepth: 1
-
-        windows-password-registration
-
-.. :ref:`Macos agents<macos-password-registration>`
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. :ref:`Linux and Unix agents<linux-unix-password-registration>`
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. :ref:`Windows agents<windows-password-registration>`
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    password/linux-unix-password-registration
+    password/windows-password-registration
+    password/macos-password-registration

@@ -126,4 +126,4 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
 
 By default, all agent files can be found at the following location: ``/Library/Ossec/``.
 
-.. note:: Now that the agent is installed, if you didn't use the automatic configuration / registration method, you will now have to register and configure the agent to communicate with the manager. For more information about this process, please visit :doc:`user manual<../../user-manual/agents/registering/index>`.
+.. note:: Now that the agent is installed, if you didn't use the automatic configuration / registration method, you will now have to register and configure the agent to communicate with the manager. For more information about this process, please visit :doc:`user manual<../../user-manual/registering/index>`.

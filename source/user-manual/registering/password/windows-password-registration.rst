@@ -16,7 +16,7 @@ After that, you can register the agent using ``agent-auth.exe`` and your passwor
 
 1. Register the agent using the password. The agents can use the password by storing it on a file or as a command line argument, so you can use any of these two options:
 
-    a) Write the password on ``/var/ossec/etc/authd.pass`` and run the ``agent-auth`` program:
+    a) Write the password on ``C:\Program Files (x86)\ossec-agent\authd.pass`` and run the ``agent-auth`` program:
 
     .. code-block:: console
 
@@ -31,7 +31,7 @@ After that, you can register the agent using ``agent-auth.exe`` and your passwor
 
 2. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
 
-  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
+  In the file ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
 
   .. code-block:: xml
 
