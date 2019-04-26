@@ -13,7 +13,7 @@ The Wazuh agent for AIX can be downloaded from our :doc:`packages list<../packag
 
 You can automate the agent registration with authd using the following environment variables:
 
-+-----------------------+-----------------------------------------------------------------------------------------------------------------------------------+
+     +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
      | Option                | Description                                                                                                                  |
      +=======================+==============================================================================================================================+
      |   WAZUH_MANAGER_IP    |  Specifies the managers IP address or hostname. You can add multiple values by commas.                                       |
