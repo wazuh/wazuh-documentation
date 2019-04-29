@@ -5,7 +5,7 @@
 Upgrade from the same minor version
 ===================================
 
-Use these instructions if you are upgrading your Wazuh installation within the same minor version. For example, from 2.1.0 to 2.1.1.
+Use these instructions if you are upgrading your Wazuh installation within the same minor version. For example, from 3.9.0 to 3.9.1.
 
 Upgrade the Wazuh manager
 -------------------------
@@ -20,7 +20,8 @@ b) Upgrade the Wazuh server on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update && sudo apt-get install wazuh-manager
+    # apt-get update 
+    # apt-get install wazuh-manager
 
 Upgrade the Wazuh agent
 -----------------------
@@ -35,4 +36,5 @@ b) Upgrade the Wazuh agent on Debian/Ubuntu:
 
 .. code-block:: console
 
-    # apt-get update && sudo apt-get install wazuh-agent
+    # apt-get update 
+    # apt-get install wazuh-agent
