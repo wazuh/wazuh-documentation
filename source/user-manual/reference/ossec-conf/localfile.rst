@@ -62,6 +62,10 @@ The location field is also valid to filter by channel in case of using an ``even
 | **Allowed values** | Any log file |
 +--------------------+--------------+
 
+.. note::
+  On Windows systems, only one wildcard character is supported. For instance ``*match*``, will match all files.
+  The maximum amount of files to monitor is limited to 200.
+
 command
 ^^^^^^^
 
@@ -451,3 +455,6 @@ Windows configuration:
       <only-future-events>yes</only-future-events>
       <query>Event/System[EventID != 5145 and EventID != 5156]</query>
     </localfile>
+
+.. note::
+  On Windows systems, only one wildcard character is supported. For instance ``*match*``, will match all files for exclusion.
