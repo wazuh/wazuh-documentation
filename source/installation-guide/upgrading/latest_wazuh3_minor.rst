@@ -58,7 +58,8 @@ Upgrade the Wazuh manager
 
   .. code-block:: console
 
-    # apt-get update && apt-get install wazuh-api
+    # apt-get update 
+    # apt-get install wazuh-api
 
 .. note::
   The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.
@@ -78,7 +79,8 @@ Upgrade the Wazuh agent
 
   .. code-block:: console
 
-    # apt-get update && apt-get install wazuh-agent
+    # apt-get update 
+    # apt-get install wazuh-agent
 
   c) For Windows:
 
@@ -97,7 +99,7 @@ Upgrade the Wazuh agent
 
   .. code-block:: console
 
-    # wazuh-agent-3.8.2-1.msi /q
+    # wazuh-agent-3.9.0-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
@@ -125,8 +127,6 @@ b) For Debian/Ubuntu:
 Upgrade to the latest Elastic Stack version
 -------------------------------------------
 
-Since the release of Wazuh 3.0.0, there's been several updates to the 6.x version of the Elastic Stack, introducing several bugfixes and important changes. In order to use the latest version of Wazuh, it's necessary to install the latest compatible Elastic Stack packages.
-
 1. Stop the services:
 
   .. code-block:: console
@@ -150,7 +150,7 @@ Since the release of Wazuh 3.0.0, there's been several updates to the 6.x versio
 
   .. code-block:: console
 
-    # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/elastic-6.x.list
+    # sed -i "s/^#deb/deb/" /etc/apt/sources.list.d/elastic-7.x.list
     # apt-get update
 
 Upgrade Elasticsearch
@@ -162,13 +162,13 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # yum install elasticsearch-6.7.1
+    # yum install elasticsearch-7.0.0
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.7.1
+    # apt-get install elasticsearch=7.0.0
 
 2. Start the Elasticsearch service:
 
@@ -178,38 +178,17 @@ Upgrade Elasticsearch
     # systemctl enable elasticsearch.service
     # systemctl start elasticsearch.service
 
-  It's important to wait until the Elasticsearch server finishes starting. Check the current status with the following command, which should give you a response like the shown below:
+  It's important to wait until the Elasticsearch server finishes starting. Check the current status with the following command:
 
   .. code-block:: console
 
     # curl "http://localhost:9200/?pretty"
 
-    {
-      "name" : "Zr2Shu_",
-      "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
-      "version" : {
-        "number" : "6.7.1",
-        "build_flavor" : "default",
-        "build_type" : "rpm",
-        "build_hash" : "053779d",
-        "build_date" : "2018-07-20T05:20:23.451332Z",
-        "build_snapshot" : false,
-        "lucene_version" : "7.3.1",
-        "minimum_wire_compatibility_version" : "5.6.0",
-        "minimum_index_compatibility_version" : "5.0.0"
-      },
-      "tagline" : "You Know, for Search"
-    }
-
 3. Load the Wazuh template for Elasticsearch:
-
-  .. warning::
-    **Updating the Elasticsearch template** to the latest version is mandatory in order to **avoid compatibility issues** with the latest versions of Wazuh and the Elastic Stack.
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic7-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
 Upgrade Logstash
 ^^^^^^^^^^^^^^^^
@@ -220,13 +199,13 @@ Upgrade Logstash
 
   .. code-block:: console
 
-    # yum install logstash-6.7.1
+    # yum install logstash-7.0.0
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.7.1-1
+    # apt-get install logstash=1:7.0.0-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -235,7 +214,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/logstash/01-wazuh-local-7.conf
       # usermod -a -G ossec logstash
 
   b) Remote configuration:
@@ -243,7 +222,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/logstash/01-wazuh-remote-7.conf
 
 3. Start the Logstash service:
 
@@ -252,10 +231,6 @@ Upgrade Logstash
     # systemctl daemon-reload
     # systemctl enable logstash.service
     # systemctl start logstash.service
-
-.. note::
-
-  The Logstash configuration file has been replaced for an updated one. If you already configured the encryption between Filebeat and Logstash, don't forget to check again :ref:`elastic_ssl` if you're using a **distributed architecture**.
 
 Upgrade Kibana
 ^^^^^^^^^^^^^^
@@ -266,24 +241,15 @@ Upgrade Kibana
 
   .. code-block:: console
 
-    # yum install kibana-6.7.1
+    # yum install kibana-7.0.0
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
-    # apt-get install kibana=6.7.1
+    # apt-get install kibana=7.0.0
 
 2. Uninstall the Wazuh app from Kibana:
-
-  a) Update file permissions. This will avoid several errors prior to updating the app:
-
-  .. code-block:: console
-
-    # chown -R kibana:kibana /usr/share/kibana/optimize
-    # chown -R kibana:kibana /usr/share/kibana/plugins
-
-  b) Remove the Wazuh app:
 
   .. code-block:: console
 
@@ -294,21 +260,10 @@ Upgrade Kibana
   .. code-block:: console
 
     # rm -rf /usr/share/kibana/optimize/bundles
+    # chown -R kibana:kibana /usr/share/kibana/optimize
+    # chown -R kibana:kibana /usr/share/kibana/plugins
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_7.0.0.zip
 
-  a) With sudo:
-
-  .. code-block:: console
-
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.7.1.zip
-
-  b) Without sudo:
-
-  .. code-block:: console
-
-    # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.7.1.zip' kibana
-
-.. warning::
-  The Wazuh app installation process may take several minutes. Please wait patiently.
 
 4. Start the Kibana service:
 
@@ -327,14 +282,14 @@ Upgrade Filebeat
 
   .. code-block:: console
 
-    # yum install filebeat-6.7.1
+    # yum install filebeat-7.0.0
 
   b) For Debian/Ubuntu:
 
   .. code-block:: console
 
     # apt-get update
-    # apt-get install filebeat=6.7.1
+    # apt-get install filebeat=7.0.0
 
 2. Start the Filebeat service:
 
@@ -344,29 +299,10 @@ Upgrade Filebeat
     # systemctl enable filebeat.service
     # systemctl start filebeat.service
 
-Finishing the Elastic Stack upgrade
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Official upgrading guides for the Elastic Stack
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You've finished upgrading your Wazuh installation to the latest version. Now you can disable again the Elastic Stack repositories in order to avoid undesired upgrades and compatibility issues with the Wazuh app.
-
-a) For CentOS/RHEL/Fedora:
-
-  .. code-block:: console
-
-    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
-
-b) For Debian/Ubuntu:
-
-  This step is not necessary if you set the packages to the ``hold`` state instead of disabling the repositories.
-
-  .. code-block:: console
-
-    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
-    # apt-get update
-
-Official upgrading guides for the Elastic Stack:
-
-  - `Upgrading Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html>`_
-  - `Upgrading Logstash <https://www.elastic.co/guide/en/logstash/current/upgrading-logstash.html>`_
-  - `Upgrading Kibana <https://www.elastic.co/guide/en/kibana/current/upgrade.html>`_
-  - `Upgrading Filebeat <https://www.elastic.co/guide/en/beats/libbeat/6.0/upgrading.html>`_
+- `Upgrading Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-upgrade.html>`_
+- `Upgrading Logstash <https://www.elastic.co/guide/en/logstash/current/upgrading-logstash.html>`_
+- `Upgrading Kibana <https://www.elastic.co/guide/en/kibana/current/upgrade.html>`_
+- `Upgrading Filebeat <https://www.elastic.co/guide/en/beats/libbeat/current/upgrading.html>`_
