@@ -37,12 +37,6 @@ Below it shown the compatibility table for the Wazuh manager.
 |       Fedora (>= 22)            |       ✓          |   ✓    |   ✓    |
 +---------------------------------+------------------+--------+--------+
 
-.. note::
-
-    - The cluster is available since Wazuh v3.0 and it doesn't work on CentOS 5 / RHEL 5. 
-    - To run the cluster in CentOS 6, check the section :ref:`run-cluster-centos6`
-
-
 Wazuh Agent
 ^^^^^^^^^^^
 
@@ -129,6 +123,8 @@ The Wazuh app for Kibana requires compatibility between two different products:
 +    **API and Wazuh App version**  + **Elastic Stack version** +
 |                                   |                           |
 +-----------------------------------+---------------------------+
+|              3.9.x                |      6.7.1 to 7.0.0*      |
++-----------------------------------+---------------------------+
 |              3.8.x                |      6.5.4 to 6.7.1*      |
 +-----------------------------------+---------------------------+
 |              3.7.x                |      6.4.2 to 6.5.4*      |
@@ -165,7 +161,9 @@ The Splunk app for Wazuh requires compatibility between two different products:
 + **API and Splunk App version**  +    **Splunk version**     +
 |                                 |                           |
 +---------------------------------+---------------------------+
-|              3.8.x              |      7.2.3 to 7.2.4       |
+|              3.9.x              |      7.2.5 to 7.2.6*      |
++---------------------------------+---------------------------+
+|              3.8.x              |      7.2.3 to 7.2.6*      |
 +---------------------------------+---------------------------+
 |              3.7.x              |      7.2.0 to 7.2.1*      |
 +---------------------------------+---------------------------+
