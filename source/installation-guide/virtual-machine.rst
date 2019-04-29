@@ -7,17 +7,19 @@ Virtual Machine
 
 Wazuh provides a pre-built virtual machine image (OVA) that you can directly import using VirtualBox (where installed) and other OVA compatible virtualization systems.
 
-.. note:: This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Distributed architectures and multi-node Elastic Stack clusters are usually a better fit for production environments where higher performance is required.
+.. note:: 
 
-1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh3.8.2_6.7.0.ova>`_, contains the following components:
+  This VM only runs on 64-bit systems and is not recommended for use in production environments. It can be a useful tool for proofs of concept and labs. Distributed architectures and multi-node Elastic Stack clusters are usually a better fit for production environments where higher performance is required.
 
-    - CentOS 7
-    - Wazuh 3.8.2
-    - Wazuh API 3.8.2
-    - Elasticsearch 6.7.0
-    - Logstash 6.7.0
-    - Kibana 6.7.0
-    - Wazuh app 3.8.2-6.7.0
+1. This virtual appliance, available `here <https://packages.wazuh.com/vm/wazuh3.9.0_7.0.0.ova>`_, contains the following components:
+
+  - CentOS 7
+  - Wazuh 3.9.0
+  - Wazuh API 3.9.0
+  - Elasticsearch 7.0.0
+  - Logstash 7.0.0
+  - Kibana 7.0.0
+  - Wazuh app 3.9.0-7.0.0
 
 2. Import the OVA in your virtualization platform and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
 
@@ -27,7 +29,9 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
     - :doc:`How to install Wazuh agents<installing-wazuh-agent/index>`
 
-  .. warning:: Before connecting any of the Wazuh agents, change the VM's network interface type from NAT (the factory default) to bridge for communication with your network. By default, the VM will try to get an IP address from your network's DHCP server. Alternatively, you can set a static IP address by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
+  .. warning:: 
+  
+    Before connecting any of the Wazuh agents, change the VM's network interface type from NAT (the factory default) to bridge for communication with your network. By default, the VM will try to get an IP address from your network's DHCP server. Alternatively, you can set a static IP address by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
 4. You can start and stop wazuh-manager, wazuh-api, elasticsearch, logstash, and kibana with the 'systemctl' command. For example:
 
@@ -41,5 +45,6 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
 
 5. In order to connect to the Kibana web user interface, login with https://OVA_IP_ADDRESS (where ``OVA_IP_ADDRESS`` is your system IP).
 
+  .. note:: 
 
-.. note:: If you need to update your OVA virtual machine, you can check out :ref:`this article <upgrading_latest_minor>`. We also recommend updating the repositories using the ``yum update`` command.
+    If you need to update your OVA virtual machine, you can check out :ref:`this article <upgrading_latest_minor>`. We also recommend updating the repositories using the ``yum update`` command.
