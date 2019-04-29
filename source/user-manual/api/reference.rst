@@ -1,5 +1,5 @@
 
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 .. Do not modify this file manually. It is generated automatically.
 
 .. _api_reference:
