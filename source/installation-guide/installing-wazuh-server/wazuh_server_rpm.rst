@@ -174,9 +174,9 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
       # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
       # cat > /etc/yum.repos.d/elastic.repo << EOF
-      [elasticsearch-6.x]
-      name=Elasticsearch repository for 6.x packages
-      baseurl=https://artifacts.elastic.co/packages/6.x/yum
+      [elasticsearch-7.x]
+      name=Elasticsearch repository for 7.x packages
+      baseurl=https://artifacts.elastic.co/packages/7.x/yum
       gpgcheck=1
       gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
       enabled=1
@@ -191,9 +191,9 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
       # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
 
       # cat > /etc/zypp/repos.d/elastic.repo << EOF
-      [elasticsearch-6.x]
-      name=Elasticsearch repository for 6.x packages
-      baseurl=https://artifacts.elastic.co/packages/6.x/yum
+      [elasticsearch-7.x]
+      name=Elasticsearch repository for 7.x packages
+      baseurl=https://artifacts.elastic.co/packages/7.x/yum
       gpgcheck=1
       gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
       enabled=1
@@ -208,19 +208,19 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
     .. code-block:: console
 
-      # yum install filebeat-6.7.1
+      # yum install filebeat-7.0.0
 
   * Using the ``zypper`` package manager:
 
     .. code-block:: console
 
-      # zypper install filebeat-6.7.1
+      # zypper install filebeat-7.0.0
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/filebeat/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat-7.yml
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP``  with the IP address or the hostname of the Elastic Stack server. For example:
 
