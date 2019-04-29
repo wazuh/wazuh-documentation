@@ -1,9 +1,14 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _installation_elastic:
+.. _installation_elastic_legacy:
 
-Installing Elastic Stack
-========================
+Installing Elastic Stack (legacy)
+=================================
+
+.. warning::
+
+    This guide is intended for Elastic Stack 6.x users only, for installing the latest Elastic Stack version, please follow the official guide.
+
 
 This guide describes the installation of an Elastic Stack server comprised of Logstash, Elasticsearch, and Kibana. We will illustrate package-based installations of these components.  You can also install them from binary tarballs, however, this is not preferred or supported under Wazuh documentation.
 
@@ -14,19 +19,10 @@ Depending on your operating system you can choose to install Elastic Stack from 
 +------------------------------------------------------------------------+-------------------------------------------------------------+
 | Type                                                                   | Description                                                 |
 +========================================================================+=============================================================+
-| `RPM packages <elastic_server_rpm.html>`_                              | Install Elastic Stack on CentOS/RHEL/Fedora.                |
+| `RPM packages <elastic_server_rpm_legacy.html>`_                       | Install Elastic Stack on CentOS/RHEL/Fedora.                |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-| `DEB packages <elastic_server_deb.html>`_                              | Install Elastic Stack on Debian/Ubuntu.                     |
+| `DEB packages <elastic_server_deb_legacy.html>`_                       | Install Elastic Stack on Debian/Ubuntu.                     |
 +------------------------------------------------------------------------+-------------------------------------------------------------+
-
-There are some related additional configurations that can be applied:
-
-- :ref:`Setting up SSL for Filebeat and Logstash <elastic_ssl>` 
-- :ref:`Setting up SSL and authentication for Kibana <kibana_ssl>` 
-- :ref:`Elasticsearch tuning <elastic_tuning>` 
-- :ref:`Search Guard configuration <searchguard>` 
-
-
 
 .. note::
     Currently, the Elastic Stack is only supported on 64-bit operating systems, according to its `Support Matrix <https://www.elastic.co/support/matrix>`_.
@@ -35,10 +31,5 @@ There are some related additional configurations that can be applied:
    :hidden:
    :maxdepth: 2
 
-   elastic_server_rpm
-   elastic_server_deb
-   elastic_ssl
-   kibana_ssl
-   elastic_tuning
-   searchguard
-   legacy/index
+   elastic_server_rpm_legacy
+   elastic_server_deb_legacy
