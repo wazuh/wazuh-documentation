@@ -7,7 +7,7 @@ Installing Elastic Stack (legacy)
 
 .. warning::
 
-    This guide is intended for Elastic Stack 6.x users only, for installing the latest Elastic Stack version, please follow the official guide.
+    This guide is intended for Elastic Stack 6.x users only, for installing the latest Elastic Stack version, please follow the :ref:`official guide <installation_elastic>`.
 
 
 This guide describes the installation of an Elastic Stack server comprised of Logstash, Elasticsearch, and Kibana. We will illustrate package-based installations of these components.  You can also install them from binary tarballs, however, this is not preferred or supported under Wazuh documentation.
