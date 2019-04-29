@@ -143,20 +143,20 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
   .. code-block:: console
 
     # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-    # echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-6.x.list
+    # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
     # apt-get update
 
 2. Install Filebeat:
 
   .. code-block:: console
 
-    # apt-get install filebeat=6.7.1
+    # apt-get install filebeat=7.0.0
 
 3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/filebeat/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat-7.yml
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elastic Stack server. For example:
 
@@ -189,7 +189,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-6.x.list
+    # sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/elastic-7.x.list
     # apt-get update
 
   Alternately, you can set the package state to ``hold``, which will stop updates (although you can still upgrade it manually using ``apt-get install``).
