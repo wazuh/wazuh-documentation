@@ -36,7 +36,7 @@ Here is an example that runs a scan the 15th of every month:
         </policies>
     </sca>
 
-.. thumbnail:: ../images/release-notes/3.9.0/conf-assessment-kibana.png
+.. thumbnail:: ../images/release-notes/3.9.0/app-01.png
   :title: Security configuration assessment alert
   :align: center
   :width: 100%
@@ -50,7 +50,7 @@ Here is an example that runs a scan the 15th of every month:
 
 **FIM who-data changes**
 
-Since Wazuh 3.8.0, Wazuh has a healthcheck for FIM who-data, it checks if the Audit events socket is working before starting the who-data engine in order to avoid start listening to it when it's blocked or disabled. Now it can be disabled as follow:
+Since Wazuh 3.8.0, Wazuh has a health check for FIM who-data, it checks if the Audit events socket is working before starting the who-data engine in order to avoid start listening to it when it's blocked or disabled. Now it can be disabled as follow:
 
 .. code-block:: xml
 
@@ -101,7 +101,7 @@ Added *-t* and *-c* options for the Wazuh cluster daemon. Those options allow th
 - Wazuh manager starts regardless of the contents of ``local_decoder.xml``. 
 - Fixed memory leak and crash in *Vulnerability Detector*.
 - Prevent *Integrator, Syslog Client and Mail forwarded* from getting stuck while reading ``alerts.json``.
-- Vulnerability detector module now checks that the alerts severity has been unified and it also checks if the database is empty before starting a new scan.
+- Vulnerability detector module now checks that the severity of the alerts has been unified and it also checks if the database is empty before starting a new scan.
 - Labels starting with ``_`` are now reserved for internal use only.
 - Make the Windows installer to choose the appropriate ``ossec.conf`` file based on the system version. 
 
@@ -122,26 +122,18 @@ Wazuh API
             "totalItems": 3,
             "items": [
                 {
+                    "pass": 2,
                     "references": "https://www.ssh.com/ssh/",
+                    "invalid": 0,
                     "description": "Guidance for establishing a secure configuration for SSH service vulnerabilities.",
-                    "policy_id": "system_audit_ssh",
-                    "end_scan": "2019-03-14 08:46:33",
-                    "start_scan": "2019-03-14 08:46:33",
-                    "score": 33,
-                    "pass": 3,
-                    "fail": 6,
-                    "name": "System audit for SSH hardening"
-                },
-                {
-                    "references": "(null)",
-                    "description": "Guidance for establishing a secure configuration for web-related vulnerabilities.",
-                    "policy_id": "system_audit",
-                    "end_scan": "2019-03-14 08:46:26",
-                    "start_scan": "2019-03-14 08:46:26",
-                    "score": 100,
-                    "pass": 76,
-                    "fail": 0,
-                    "name": "System audit for web-related vulnerabilities"
+                    "end_scan": "2019-04-30 05:29:50",
+                    "score": 22,
+                    "fail": 7,
+                    "hash_file": "4c7d05c9501ea38910e20ae22b1670b4f778669bd488482b4a19d179da9556ea",
+                    "start_scan": "2019-04-30 05:29:50",
+                    "total_checks": 9,
+                    "name": "System audit for SSH hardening",
+                    "policy_id": "system_audit_ssh"
                 },
                 ...
             ]
@@ -153,22 +145,31 @@ Wazuh API
 
 .. code-block:: js
 
-
+    GET /sca/001/checks/system_audit_ssh
     {
         "error": 0,
         "data": {
             "totalItems": 76,
             "items": [
                 {
-                    "result": "passed",
-                    "policy_id": "cis_rhel7",
-                    "title": "Disable standard boot services - NetFS Enabled",
-                    "directory": "/etc/rc.d/rc2.d,/etc/rc.d/rc3.d,/etc/rc.d/rc4.d,/etc/rc.d/rc5.d",
-                    "id": 6575,
+                    "description": "The option MaxAuthTries should be set to 4.",
+                    "file": "/etc/ssh/sshd_config",
+                    "remediation": "Change the MaxAuthTries option value in the sshd_config file.",
+                    "policy_id": "system_audit_ssh",
+                    "rationale": "The MaxAuthTries parameter specifies the maximum number of authentication attempts permitted per connection. Once the number of failures reaches half this value, additional failures are logged. This should be set to 4.",
+                    "id": 1508,
+                    "title": "SSH Hardening - 9: Wrong Maximum number of authentication attempts",
+                    "result": "failed",
                     "compliance": [
                     {
-                        "value": "2.2.2",
-                        "key": "pci_dss"
+                        "key": "pci_dss",
+                        "value": "2.2.4"
+                    }
+                    ],
+                    "rules": [
+                    {
+                        "type": "file",
+                        "rule": "f:$sshd_file -> !r:^\s*MaxAuthTries\s+4\s*$;"
                     }
                     ]
                 },
@@ -186,29 +187,37 @@ Now you can edit the content of the configuration from the manager using this ne
 
 The configuration is validated before restarting the manager to prevent from crashing the service if the given configuration is wrong. It will tell you which line is causing errors.
 
-.. thumbnail:: ../images/release-notes/3.9.0/app-01.png
-  :title: Edit the configuration file of the Wazuh manager
+.. thumbnail:: ../images/release-notes/3.9.0/app-03.png
+  :title: Security configuration assessment alert
   :align: center
   :width: 100%
+
 
 **Create and modify rules, decoders and CDB lists**
 
 Thanks to the recently added Wazuh API endpoints, the app comes with multiple improvements for the ruleset section.
 
+.. thumbnail:: ../images/release-notes/3.9.0/app-04.png
+  :title: Security configuration assessment alert
+  :align: center
+  :width: 100%
+
+**Expand visualizations**
+
+For those cases you want to see a visualization bigger than it is, you can click the expand icon.
+
 .. thumbnail:: ../images/release-notes/3.9.0/app-02.png
-  :title: Create a new rule
+  :title: Security configuration assessment alert
   :align: center
   :width: 100%
 
-**New visualizations**
+**Other additions and improvements**
 
-Most of our dashboards have been changed, now the app uses all the new Kibana features for visualizations, here is an example of those new visualizations:
-
-.. thumbnail:: ../images/release-notes/3.9.0/app-03.png
-  :title: Create a new rule
-  :align: center
-  :width: 100%
-
+- Added new dashboards for SCA and Docker modules.
+- Added support for more than one Wazuh monitoring pattern.
+- Added a cron job for fetching missing fields of all valid index patterns, also merging dynamic fields every time an index pattern is refreshed by the app.
+- Added a new way to view logs from the ossec.log file using a new log viewer component.
+- Added resizable columns by dragging in tables.
 
 Wazuh ruleset
 -------------
@@ -228,7 +237,7 @@ Wazuh ruleset
 
 - Improved rules for Docker to prevent the activation of certain rules that should not be activated.
 - Modified the structure and the names for Windows EventChannel fields in all the related rules.
-- Fixed the bruteforce attack rules for Windows Eventchannel by adding the new ``<same_field>`` option and changing some rules.
+- Fixed the brute-force attack rules for Windows Eventchannel by adding the new ``<same_field>`` option and changing some rules.
 - Added *Sysmon rules* for Windows.
 
 
