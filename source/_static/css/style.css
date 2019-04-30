@@ -3009,11 +3009,7 @@ div.highlight pre {
       .version-zone {
         padding-right: 0;
       }
-
-      .globaltoc .toctree-l1 {
-        display: none;
-      }
-
+      
       .index .globaltoc .toctree-l1 > a {
         display: block;
       }

@@ -79,36 +79,17 @@ $(function(){
   function currentToc(){
     var href;
     // Gets the name of the first level folder
-		category = document.location.pathname.split('/')[2]; // [2] The URL contains the version; [1]	for URLs without version
-		category = (category.indexOf('.') < 0)?category:'';
+    category = document.location.pathname.split('/')[2]; // [2] The URL contains the version; [1]	for URLs without version
+    category = (category && category.indexOf('.') < 0)?category:'';
 
+    /* Highlight current category from #menu-submenu */
     $('#menu-submenu').find('li').each(function(){
-			if ($(this).children('a').attr('href').indexOf(category) >= 0 && category.length > 0 ) {
-				$(this).addClass('active');
-			} else {
-				$(this).removeClass('active');
-			}
-		});
-
-    if ($(window).width() >= breakpoint ){
-      gTocElement.find('a').each(function(){
-        href = $(this).prop('href');
-        /* Hides toc link for the parent node of current except on the main index page */
-				if ( $('.index').length === 0 && (href.indexOf(category+'/index.html') > 0 || href.indexOf(category+'/#') > 0)){
-					$(this).css('display', 'none');
-				}
-
-        if ( href.indexOf(category) < 0 ){
-          $(this).closest('.toctree-l1').css('display', 'none');
-        } else {
-          $(this).closest('.toctree-l1').css('display', 'block');
-        }
-      });
-    } else {
-			$('.toctree-l1').css('display', 'block');
-			gTocElement.find('a').css('display', 'block');
-		}
-
+      if ($(this).children('a').attr('href').indexOf(category) >= 0 && category.length > 0 ) {
+        $(this).addClass('active');
+      } else {
+        $(this).removeClass('active');
+      }
+    });
   }
 
    currentToc();
