@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_labels:
 
@@ -42,14 +42,14 @@ Attributes:
 +--------------------+---------------------------------------+---------------------------------------------------------+
 
 .. note::
-
+    
     In ``internal_options.conf``, hidden labels can be set to be displayed in alerts.
 
 .. note::
-
+    
     .. versionadded:: 3.9.0
 
-    Keys starting with an underscore character are reserved for the system labels. These labels are invisible and contain internal information of the agents.
+      Keys starting with an underscore character are reserved for the system labels. These labels are invisible and contain internal information of the agents.
 
 Example of configuration
 ------------------------

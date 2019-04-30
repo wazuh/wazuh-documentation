@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 How it works
 ============
@@ -76,13 +76,26 @@ On other devices, like firewalls, for instance, the log analysis component can b
       </remote>
     <ossec_config>
 
+
 ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network from which syslog messages will be accepted.
 
-Log Example::
+Log example:
+
+::
 
   2016-03-15T15:22:10.078830+01:00 tron su:pam_unix(su-l:auth):authentication failure;logname=tm uid=500 euid=0 tty=pts/0 ruser=tm rhost= user=root
   1265939281.764 1 172.16.167.228 TCP_DENIED /403 734 POST http://lbcore1.metacafe.com/test/SystemInfoManager.php - NONE/- text/html
   [Sun Mar 06 08:52:16 2016] [error] [client 187.172.181.57] Invalid URI in request GET: index.php HTTP/1.0
+
+If a ``/etc/rsyslog.conf`` configuration file is being used instead of the ``ossec.conf`` options as above, you can still analyze logs using a ``<localfile>`` block with ``syslog`` as the log format.
+
+.. code-block:: xml
+
+  <localfile>
+    <log_format>syslog</log_format>
+    <location>/custom/file/path</location>
+  </localfile>
+
 
 Analysis
 --------
@@ -97,6 +110,7 @@ In the pre-decoding phase of analysis, static information from well-known fields
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
 Extracted information:
+
   - *hostname*: 'localhost'
   - *program_name*: 'sshd'
 
@@ -112,6 +126,7 @@ Sample log and its extracted info:
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
 Extracted information:
+
   - *program name*: sshd
   - *dstuser*: rromero
   - *srcip*: 192.168.1.133

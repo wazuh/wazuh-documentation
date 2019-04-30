@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _pci_dss_file_integrity_monitoring:
 
@@ -9,7 +9,7 @@ File integrity monitoring (Syscheck) is performed by comparing the cryptographic
 
 First, the Wazuh agent scans the system at an interval you specify, and it sends the checksums of the monitored files and registry keys (for Windows systems) to the Wazuh server. Then, the server stores the checksums and looks for modifications by comparing the newly received checksums against the historical checksum values for those files and/or registry keys. An alert is sent if the checksum (or another file attribute) changes.  Wazuh also supports near real-time file integrity checking where this is desired.
 
-`Syscheck <http://ossec-docs.readthedocs.org/en/latest/manual/syscheck/index.html>`_  can be used to meet PCI DSS requirement 11.5:
+`Syscheck <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/syscheck.html>`_  can be used to meet PCI DSS requirement 11.5:
 
 | **11.5** Deploy a change-detection mechanism (for example, file-integrity monitoring tools) to alert personnel to unauthorized modification (including changes, additions, and deletions) of critical system files, configuration files, or content files; and configure the software to perform critical file comparisons at least weekly.
 |

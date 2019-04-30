@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _elastic_server_deb:
 
@@ -56,7 +56,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # apt-get install elasticsearch=6.6.2
+    # apt-get install elasticsearch=6.7.1
 
 2. Enable and start the Elasticsearch service:
 
@@ -86,7 +86,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.6.2",
+        "number" : "6.7.1",
         "build_flavor" : "default",
         "build_type" : "deb",
         "build_hash" : "053779d",
@@ -123,7 +123,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # apt-get install logstash=1:6.6.2-1
+    # apt-get install logstash=1:6.7.1-1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -178,7 +178,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # apt-get install kibana=6.6.2
+    # apt-get install kibana=6.7.1
 
 2. Install the Wazuh app plugin for Kibana:
 
@@ -186,13 +186,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.2.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.7.1.zip
 
   b) Without sudo:
 
   .. code-block:: console
 
-    # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.2.zip' kibana
+    # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.7.1.zip' kibana
 
   .. warning::
 

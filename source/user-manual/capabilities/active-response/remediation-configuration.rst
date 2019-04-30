@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _remediation-examples:
 
@@ -79,7 +79,7 @@ Active response::
     <command>pf-block</command>
     <location>defined-agent</location>
     <agent_id>001</agent_id>
-    <rules_group>authentication_failed,authentication_failures</rules_group>
+    <rules_group>authentication_failed|authentication_failures</rules_group>
   </active-response>
 
 Add an IP to the iptables deny list
@@ -102,7 +102,7 @@ Active response::
   <active-response>
     <command>firewall-drop</command>
     <location>all</location>
-    <rules_group>authentication_failed,authentication_failures</rules_group>
+    <rules_group>authentication_failed|authentication_failures</rules_group>
     <timeout>700</timeout>
     <repeated_offenders>30,60,120</repeated_offenders>
   </active-response>

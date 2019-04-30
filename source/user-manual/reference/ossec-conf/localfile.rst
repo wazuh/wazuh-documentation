@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_localfile:
 
@@ -7,10 +7,10 @@ localfile
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+    .. code-block:: xml
 
-		<localfile>
-		</localfile>
+        <localfile>
+        </localfile>
 
 This configuration section is used to configure the collection of log data from files, Windows events, and from the output of commands.
 
@@ -31,7 +31,7 @@ Options
 location
 ^^^^^^^^
 
-This indicates the location of a log or wild-carded group of logs to be read. ``strftime`` format strings may be used for log file names.
+Option to get the location of a log or a group of logs. ``strftime`` format strings may be used for log file names.
 
 For instance, a log file named ``file.log-2017-01-22`` could be referenced with ``file.log-%Y-%m-%d`` (assuming today is Jan 22nd, 2017).
 
@@ -39,19 +39,21 @@ Wildcards may be used on non-Windows systems, but if the log file doesn't exist 
 
 Note that ``strftime`` format strings and wildcards cannot be used on the same entry.
 
-The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. For instance, these two configurations show a channel filtering for firewall and Sysmon events::
+The location field is also valid to filter by channel in case of using an ``eventchannel`` supporting Windows. 
+
+As an example, these two configurations show a channel filtering for firewall and Sysmon events.
+
+.. code-block:: xml
 
   <localfile>
       <location>Microsoft-Windows-Sysmon/Operational</location>
       <log_format>eventchannel</log_format>
   </localfile>
 
-
   <localfile>
       <location>Microsoft-Windows-Windows Firewall With Advanced Security/Firewall</location>
       <log_format>eventchannel</log_format>
   </localfile>
-
 
 +--------------------+--------------+
 | **Default value**  | n/a          |
@@ -62,24 +64,18 @@ The location field is also valid to filter by channel in case of using an ``even
 command
 ^^^^^^^
 
-This designates a command to be run. All output from this command will be read as one or more log messages depending on whether command or full_command is used.
+Given a command output, it will be read as one or more log messages depending on *command* or *full_command* is used.
 
 +--------------------+--------------------------------------------------+
 | **Default value**  | n/a                                              |
 +--------------------+--------------------------------------------------+
-| **Allowed values** | any command line, optionally including arguments |
+| **Allowed values** | Any command line, optionally including arguments |
 +--------------------+--------------------------------------------------+
 
 alias
 ^^^^^
 
-This is used to assign an alias to a command that will replace the command name in the log message.
-
-+--------------------+------------+
-| **Default value**  | n/a        |
-+--------------------+------------+
-| **Allowed values** | any string |
-+--------------------+------------+
+Change a command name in the log message.
 
 For example ``<alias>usb-check</alias>`` would replace:
 
@@ -93,12 +89,16 @@ with:
 
    ossec: output: 'usb-check':
 
++--------------------+------------+
+| **Default value**  | n/a        |
++--------------------+------------+
+| **Allowed values** | any string |
++--------------------+------------+
+
 frequency
 ^^^^^^^^^
 
-The frequency specifies the minimum amount of time in seconds between command runs. The command will likely not repeat in the exact the number of seconds specified, however, the time between runs will be no less than the number of seconds specified.
-
-This can be used with **command** or **full_command**.
+Prevents a command from being executed in less time than the specified time (in seconds). This options can be used with *command* and *full_command*.
 
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
@@ -109,9 +109,11 @@ This can be used with **command** or **full_command**.
 only-future-events
 ^^^^^^^^^^^^^^^^^^
 
-This is only to be used with the ``eventchannel`` log format.  By default, when Wazuh starts, it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
+Set it to *yes* to collect only events generated after the Wazuh starts.
 
-If this is set to **yes** Wazuh would then only receive events that occurred after the agent was started.
+By default, when Wazuh starts it will read all log content from a given Windows Event Channel since the last time Wazuh was stopped.
+
+Only compatible with `eventchannel` log format.
 
 +--------------------+-----------+
 | **Default value**  | n/a       |
@@ -122,7 +124,17 @@ If this is set to **yes** Wazuh would then only receive events that occurred aft
 query
 ^^^^^
 
-This is also only to be used with the ``eventchannel`` log format. With this option, you can identify an XPATH query following the event schema that will filter the events that Wazuh will process.
+Filter ``eventchannel`` events that Wazuh will process by using an *XPATH* query following the event schema.
+
+Example: 
+
+.. code-block:: xml
+
+  <localfile>
+    <location>Security</location>
+    <log_format>eventchannel</log_format>
+    <query>Event[System/EventID = 4624 and (EventData/Data[@Name='LogonType'] = 2 or EventData/Data[@Name='LogonType'] = 10)]</query>
+  </localfile>
 
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------+
 | **Default value**  | n/a                                                                                                                              |
@@ -130,26 +142,16 @@ This is also only to be used with the ``eventchannel`` log format. With this opt
 | **Allowed values** | Any XPATH query following the `event schema <https://msdn.microsoft.com/en-us/library/windows/desktop/aa385201(v=vs.85).aspx>`_  |
 +--------------------+----------------------------------------------------------------------------------------------------------------------------------+
 
-For example, the following configuration will only process events with an ID of 7040:
-
-.. code-block:: xml
-
-  <localfile>
-    <location>System</location>
-    <log_format>eventchannel</log_format>
-    <query>Event/System[EventID=7040]</query>
-  </localfile>
-
 label
 ^^^^^
 
 .. versionadded:: 3.0.0
 
-This option allows for the addition of custom data in JSON events and is available when `log_format`_ is set to ``json``.
+Used to add custom data in JSON events. Set `log_format`_ to ``json`` to use it.
 
-Labels can be nested in JSON formatted alerts by separating the "key" terms by a period.
+Labels can be nested in JSON alerts by separating the "key" terms by a period.
 
-This option can be used as follows to identify the source of each log entry when monitoring several files simultaneously:
+Here is an example of how to identify the source of each log entry when monitoring several files simultaneously:
 
 .. code-block:: xml
 
@@ -190,14 +192,14 @@ The additional fields configured above would appear in the resulting event as be
     "@source": "myapp"
   }
 
-.. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key be defined by using a symbol prior to the key name as in *@source*.
+.. note:: If a label key already exists in the log data, the configured field value will not be included. It is recommended that a unique label key is defined by using a symbol prior to the key name as in *@source*.
 
 target
 ^^^^^^
 
 .. versionadded:: 3.3.0
 
-Target specifies the name of the socket where the output will be redirected. The socket must be defined previously to use it with this option.
+Target specifies the name of the socket where the output will be redirected. The socket must be defined previously.
 
 +--------------------+--------------------------------+
 | **Default value**  | agent                          |
@@ -208,7 +210,7 @@ Target specifies the name of the socket where the output will be redirected. The
 log_format
 ^^^^^^^^^^
 
-This specifies the format of the log being read. **It is required field.**
+Set the format of the log to be read. **field is required**
 
 .. note:: For most of the text log files that only have one entry per line, syslog may be used.
 
@@ -251,15 +253,15 @@ This specifies the format of the log being read. **It is required field.**
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | apache             | Used for Apache's default log format.                                                            |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | command            | Used to read output from the command (as run by root) specified by the command tag.              |
+|                    | command            | Used to read the output from the command (as run by root) specified by the command tag.          |
 |                    |                    |                                                                                                  |
-|                    |                    | Each line of output is be treated as a separate log.                                             |
+|                    |                    | Each line of output is treated as a separate log.                                                |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | full_command       | Used to read output from the command (as run by root) specified by the command tag.              |
+|                    | full_command       | Used to read the output from the command (as run by root) specified by the command tag.          |
 |                    |                    |                                                                                                  |
 |                    |                    | The entire output will be treated as a single log item.                                          |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
-|                    | djb-multilog       | Used to read files in the format produced by the multilog service logger in daemontools.         |
+|                    | djb-multilog       | Used to read files in the format produced by the multi-log service logger in daemon tools.       |
 +                    +--------------------+--------------------------------------------------------------------------------------------------+
 |                    | multi-line         | Used to monitor applications that log multiple lines per event.                                  |
 |                    |                    |                                                                                                  |
@@ -276,27 +278,27 @@ This specifies the format of the log being read. **It is required field.**
 
 .. warning::
 
-	The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
+    The ``eventchannel`` log format cannot be used on Windows agents prior to the Vista OS as they do not produce this type of log.
 
 .. warning::
 
-	Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh Manager from running arbitrary commands on agents in their root security context.
+    Agents will ignore ``command`` and ``full_command`` log sources unless they have ``logcollector.remote_commands=1`` set in their **/var/ossec/etc/internal_options.conf** or **/var/ossec/etc/local_internal_options.conf** file. This is a security precaution to prevent the Wazuh Manager from running arbitrary commands on agents in their root security context.
 
 Sample of Multi-line log message in original log file:
 
 .. code-block:: console
 
-	Aug 9 14:22:47 hostname log line one
-	Aug 9 14:22:47 hostname log line two
-	Aug 9 14:22:47 hostname log line four
-	Aug 9 14:22:47 hostname log line three
-	Aug 9 14:22:47 hostname log line five
+    Aug 9 14:22:47 hostname log line one
+    Aug 9 14:22:47 hostname log line two
+    Aug 9 14:22:47 hostname log line four
+    Aug 9 14:22:47 hostname log line three
+    Aug 9 14:22:47 hostname log line five
 
 Sample Log message as analyzed by ossec-analysisd:
 
 .. code-block:: console
 
-	Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
+    Aug 9 14:22:47 hostname log line one Aug 9 14:22:47 hostname log line two Aug 9 14:22:47 hostname log line three Aug 9 14:22:47 hostname log line four Aug 9 14:22:47 hostname log line five
 
 .. _ossec_localfile_out_format:
 
@@ -306,12 +308,6 @@ out_format
 .. versionadded:: 3.3.0
 
 This option allows formatting logs from Logcollector using field substitution.
-
-The syntax is:
-
-::
-
-	$(parameter)
 
 The list of available parameters is:
 

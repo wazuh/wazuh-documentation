@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _elastic_ssl:
 
@@ -63,7 +63,14 @@ Configure Logstash server
 
 The newly generated SSL certificate and key will be found at ``/etc/logstash/logstash.crt`` and ``/etc/logstash/logstash.key``, respectively. Next, configure Logstash to use this new key for communication with Filebeat.
 
-1. Edit the file ``/etc/logstash/conf.d/01-wazuh.conf`` and uncomment the lines related to SSL under ``input/beats``. The active input section should now look like this:
+1. Grant read permissions for ``/etc/logstash/logstash.crt`` and ``/etc/logstash/logstash.key``.
+
+	.. code-block:: console
+
+		# chmod 644 /etc/logstash/logstash.crt
+		# chmod 644 /etc/logstash/logstash.key
+
+2. Edit the file ``/etc/logstash/conf.d/01-wazuh.conf`` and uncomment the lines related to SSL under ``input/beats``. The active input section should now look like this:
 
 	.. code-block:: bash
 
@@ -77,7 +84,7 @@ The newly generated SSL certificate and key will be found at ``/etc/logstash/log
 		    }
 		}
 
-2. Restart Logstash. The command depends on the OS init system:
+3. Restart Logstash. The command depends on the OS init system:
 
 	a. For Systemd:
 
@@ -96,7 +103,7 @@ Configure Filebeat
 
 Configure Filebeat to verify the Logstash server's certificate.
 
-1. On the **machine with Filebeat installed** (the Wazuh server), fetch the Logstash server's SSL certificate file at ``/etc/logstash/logstash.crt`` and copy it into ``/etc/filebeat/logstash.crt``.
+1. On the **instance where Filebeat is installed** (the Wazuh server), fetch the Logstash server's SSL certificate file at ``/etc/logstash/logstash.crt`` and copy it into ``/etc/filebeat/logstash.crt``.
 
 	Here is an example that can be used to copy the SSL certificate from the Logstash server to the Wazuh server where Filebeat is installed:
 
@@ -104,7 +111,13 @@ Configure Filebeat to verify the Logstash server's certificate.
 
 		# scp root@LOGSTASH_SERVER_IP:/etc/logstash/logstash.crt /etc/filebeat
 
-2. Edit the file ``/etc/filebeat/filebeat.yml`` and uncomment the lines related to SSL inside of ``logstash``. The file should look like this:
+2. Grant read permissions for ``/etc/filebeat/logstash.crt``.
+
+	.. code-block:: console
+
+		# chmod 644 /etc/filebeat/logstash.crt
+
+3. Edit the file ``/etc/filebeat/filebeat.yml`` and uncomment the lines related to SSL inside of ``logstash``. The file should look like this:
 
 	.. code-block:: yaml
 
@@ -114,7 +127,7 @@ Configure Filebeat to verify the Logstash server's certificate.
 	       ssl:
 	         certificate_authorities: ["/etc/filebeat/logstash.crt"]
 
-3. Restart Filebeat. The command depends on the OS init system:
+4. Restart Filebeat. The command depends on the OS init system:
 
 	a. For Systemd:
 
@@ -129,4 +142,5 @@ Configure Filebeat to verify the Logstash server's certificate.
 			# service filebeat restart
 
 .. note::
+
 	More detailed information is available in the `Securing communication with Logstash <https://www.elastic.co/guide/en/beats/filebeat/current/configuring-ssl-logstash.html>`_ guide from Elastic.

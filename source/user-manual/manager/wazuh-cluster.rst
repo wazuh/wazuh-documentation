@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wazuh-cluster:
 
@@ -74,7 +74,27 @@ Getting started
 Deploying a Wazuh cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Set the cluster configuration
+.. note::
+
+  To run the cluster, **Python 2.7 or higher** is required.
+
+Follow these steps to deploy a Wazuh cluster:
+
+1. Install dependencies
+
+  a. For RPM-based distributions:
+
+    .. code-block:: console
+
+      # yum install python-setuptools python2-cryptography
+
+  b. For Debian-based distributions:
+
+    .. code-block:: console
+
+      # apt-get install python-cryptography
+
+2. Set the cluster configuration
 
   Using the ``<cluster>`` section in the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the cluster configuration as below:
 

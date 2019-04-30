@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _docker-installation:
 
@@ -67,3 +67,11 @@ For example:
 
   $ docker-compose --version
   docker-compose version 1.23.1, build b02f1306
+
+.. note::
+
+  If you see ``docker-compose: command not found`` it means that ``/usr/local/bin`` is not in your ``PATH``, most Linux distributions have ``/usr/bin`` in ``PATH`` so you can create a symbolic link from ``/usr/local/bin`` to ``/usr/bin``.
+
+  .. code-block:: console
+
+    # ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose

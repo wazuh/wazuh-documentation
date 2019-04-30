@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _fim-faq:
 
@@ -17,6 +17,7 @@ FAQ
 #. `Does Wazuh alert when a new file is created?`_
 #. `How FIM manages historical records in his database?`_
 #. `How can I migrate my old DB information into a new SQLite database?`_
+#. `Can I hot-swap monitored directories?`_
 
 How often does syscheck run?
 --------------------------------
@@ -88,3 +89,8 @@ How can I migrate my old DB information into a new SQLite database?
 -------------------------------------------------------------------
 
 We provide a tool to migrate all registries to the new database. You can checkit in :ref:`fim upgrade tool <fim_migrate>` section.
+
+Can I hot-swap monitored directories?
+--------------------------------------
+
+Yes, this can be done for Linux in both agents and manager by setting the monitoring of symbolic links to directories. To set the refresh interval, use option :doc:`syscheck.symlink_scan_interval <../../reference/internal-options>`.

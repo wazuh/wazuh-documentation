@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _elastic_server_rpm:
 
@@ -12,28 +12,13 @@ The RPM packages are suitable for installation on Red Hat, CentOS and other RPM-
 Preparation
 -----------
 
-1. Oracle Java JRE 8 is required by Logstash and Elasticsearch.
+1. Java 8 is required by Logstash and Elasticsearch.
 
-  .. note::
-
-    The following command accepts the necessary cookies to download Oracle Java JRE. Please, visit `Oracle Java 8 JRE Download Page <https://www.java.com/en/download/manual.jsp>`_ for more information.
+  Install the Java 8 OpenJDK package using yum:
 
   .. code-block:: console
 
-    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jre-8u202-linux-x64.rpm"
-
-  Now, check if the package was download successfully:
-
-  .. code-block:: console
-
-    # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
-
-  Finally, install the RPM package using yum:
-
-  .. code-block:: console
-
-    # yum -y install jre-8-linux-x64.rpm
-    # rm -f jre-8-linux-x64.rpm
+    # yum install java-1.8.0-openjdk
 
 2. Install the Elastic repository and its GPG key:
 
@@ -61,7 +46,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
 
   .. code-block:: console
 
-    # yum install elasticsearch-6.6.2
+    # yum install elasticsearch-6.7.1
 
 2. Enable and start the Elasticsearch service:
 
@@ -91,7 +76,7 @@ Elasticsearch is a highly scalable full-text search and analytics engine. For mo
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.6.2",
+        "number" : "6.7.1",
         "build_flavor" : "default",
         "build_type" : "rpm",
         "build_hash" : "053779d",
@@ -128,7 +113,7 @@ Logstash is the tool that collects, parses, and forwards data to Elasticsearch f
 
   .. code-block:: console
 
-    # yum install logstash-6.6.2
+    # yum install logstash-6.7.1
 
 2. Download the Wazuh configuration file for Logstash:
 
@@ -191,7 +176,7 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # yum install kibana-6.6.2
+    # yum install kibana-6.7.1
 
 2. Install the Wazuh app plugin for Kibana:
 
@@ -199,13 +184,13 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
   .. code-block:: console
 
-    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.2.zip
+    # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.7.1.zip
 
   b) Without sudo:
 
   .. code-block:: console
 
-    # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.2.zip' kibana
+    # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.7.1.zip' kibana
 
   .. warning::
 
