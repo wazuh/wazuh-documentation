@@ -239,6 +239,7 @@ Let's say we have this configuration in the ``ossec.conf`` file:
     <policies>
       <policy>system_audit_rcl.yml</policy>
       <policy>system_audit_ssh.yml</policy>
+      <policy>system_audit_pw.yml</policy>
     </policies>
   </sca>
 

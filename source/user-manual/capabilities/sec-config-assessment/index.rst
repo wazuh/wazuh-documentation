@@ -8,7 +8,7 @@ Security Configuration Assessment
 .. versionadded:: 3.9.0
 
 There exist multiple integrations in Wazuh which perform configuration assessment scans (see :ref:`Policy monitoring section <manual_policy_monitoring>`) such as the OpenScap integration.
-However, many reasons had led us to create a new Wazuh plugin to support Security Configuration Assessment natively. Here we can see a brief summary of these reasons:
+However, many reasons have led us to create a new Wazuh plugin to support Security Configuration Assessment natively. Here we can see a brief summary of these reasons:
 
 - The OpenSCAP integration is only available on Linux hosts, not Windows agents.
 - The CIS-CAT tool is proprietary software which requires an external license for its use.

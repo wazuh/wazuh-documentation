@@ -3,14 +3,16 @@
 Use case: Getting an alert when a check changes its result value
 ================================================================
 
-To configure the execution of the *SCA* module with a policy file, it is necessary to set up the following section:
+Let's see a simple use case to understand how the SCA scanner detects and reports changes in the check results.
+
+To configure the execution of the *SCA* module with a policy file, it is necessary to set up a block as follows:
 
 .. code-block:: none
 
     <sca>
       <enabled>no</enabled>
       <scan_on_start>yes</scan_on_start>
-      <interval>1m</interval>
+      <interval>12h</interval>
       <skip_nfs>yes</skip_nfs>
 
       <policies>
@@ -18,153 +20,89 @@ To configure the execution of the *SCA* module with a policy file, it is necessa
       </policies>
     </sca>
 
-The profile field is the policy file desired to be executed. The complete path for it is by default */var/ossec/ruleset/sca* on a Linux manager, */var/ossec/ruleset/sca* on a Linux agent environment and *C:\\Program files (x86)\\ossec-agent\\ruleset\\sca* when using Windows.
+The default path for policies is */var/ossec/ruleset/sca* on Unix environments and *C:\\Program files (x86)\\ossec-agent\\ruleset\\sca* on Windows.
 
-In this case, the Debian Linux ``cis_debian_rcl.yml`` policy file has been set, but the user can choose any other that matches their operating system.
-After restarting Wazuh on the machine where this module was set, it will start running. First, the new information will be stored
-at the manager's side, then this data may match with some rules described at the *0570-sca_rules.xml* file and it will generate alerts if 
-there is different information from the previous storage.
+In this case, just the Debian Linux ``cis_debian_rcl.yml`` policy file has been set.
+After starting Wazuh, the module starts to work. 
 
-The policy file has a check set, for example, this one verifies that the ``nodev`` option is set on the ``/home`` partition:
+First of all, the first scan results are reported and alerts like the following one are fired for every check:
 
 .. code-block:: none
 
-     - id: 5006
-       title: "Ensure nodev option set on /home partition"
-       description: "The nodev mount option specifies that the filesystem cannot contain special devices."
-       rationale: "Since the user partitions are not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices."
-       remediation: "Edit the /etc/fstab file and add nodev to the fourth field (mounting options) for the /home partition. See the fstab(5) manual page for more information. # mount -o remount,nodev /home"
-       compliance:
-        - cis_csc: "5.1"
-        - cis: "1.1.14"
-        - pci_dss: "2.2.4"
-       condition: any
-       rules:
-        - 'f:/etc/fstab -> !r:^# && r:ext2|ext3 && r:/home && !r:nodev ;'
+    ** Alert 1556631403.62082: - sca,gdpr_IV_35.7.d
+    2019 Apr 30 06:36:43 ubuntu->sca
+    Rule: 19008 (level 3) -> 'CIS benchmark for Debian/Linux: Ensure IPv4 forwarding is disabled'
+    {"type":"check","id":1518747324,"policy":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","check":{"id":5031,"title":"Ensure IPv4 forwarding is disabled","description":"The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not.","rationale":"Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0","compliance":{"cis_csc":"5.1","cis":"3.1.1"},"rules":["f:/proc/sys/net/ipv4/ip_forward -> 1;"],"file":"/proc/sys/net/ipv4/ip_forward","result":"passed"}}
+    sca.type: check
+    sca.scan_id: 1518747324
+    sca.policy: CIS benchmark for Debian/Linux
+    sca.check.id: 5031
+    sca.check.title: Ensure IPv4 forwarding is disabled
+    sca.check.description: The net.ipv4.ip_forward flag are used to tell the system whether it can forward packets or not.
+    sca.check.rationale: Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.
+    sca.check.remediation: Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0
+    sca.check.compliance.cis_csc: 5.1
+    sca.check.compliance.cis: 3.1.1
+    sca.check.file: ["/proc/sys/net/ipv4/ip_forward"]
+    sca.check.result: passed
 
-There is where the rule block describes the requirements needed to pass the check. In case it is the first scan and the check passes or fails, it will trigger the next alert:
+Alerting about the initial status of a check, no more alerts about this file should appear whether its state doesn't change in sucesive scans.
 
-.. code-block:: none
-
-        ** Alert 1551793014.179492: - wazuh,sca,gdpr_IV_35.7.d
-        2019 Mar 05 14:36:54 (ubuntu) any->sca
-        Rule: 19008 (level 3) -> 'CIS benchmark for Debian/Linux: Ensure nodev option set on /home partition'
-        {"type":"check","id":1693973084,"policy":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","check":{"id":5006,"title":"Ensure nodev option set on /home partition","description":"The nodev mount option specifies that the filesystem cannot contain special devices.","rationale":"Since the user partitions are not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices.","remediation":"Edit the /etc/fstab file and add nodev to the fourth field (mounting options) for the /home partition. See the fstab(5) manual page for more information. # mount -o remount,nodev /home","compliance":{"cis_csc":5,"cis":"1.1.14","pci_dss":"2.2.4"},"file":"/etc/fstab","result":"passed"}}
-        sca.type: check
-        sca.scan_id: 1693973084
-        sca.policy: CIS benchmark for Debian/Linux
-        sca.check.id: 5006
-        sca.check.title: Ensure nodev option set on /home partition
-        sca.check.description: The nodev mount option specifies that the filesystem cannot contain special devices.
-        sca.check.rationale: Since the user partitions are not intended to support devices, set this option to ensure that users cannot attempt to create block or character special devices.
-        sca.check.remediation: Edit the /etc/fstab file and add nodev to the fourth field (mounting options) for the /home partition. See the fstab(5) manual page for more information. # mount -o remount,nodev /home
-        sca.check.compliance.cis_csc: 5
-        sca.check.compliance.cis: 1.1.14
-        sca.check.compliance.pci_dss: 2.2.4
-        sca.check.file: /etc/fstab
-        sca.check.result: passed
-
-The image below shows the event in the Configuration Assessment tab on Kibana:
-
-.. thumbnail:: ../../../images/sca/sca-5006.png
-    :title: Configuration Assessment event 5006
-    :align: center
-    :width: 100%
-
-This is the generated event that summarizes the result of the checking process:
+This is the generated alert that summarizes the result of the scan process. This alert only appears at the first scan of a policy or when any value has changed as well.
 
 .. code-block:: none
 
-        ** Alert 1549608285.301707: - ossec,
-        2019 Feb 08 07:44:45 my_pc->sca
-        Rule: 19001 (level 3) -> 'SCA summary: Passed checks: 39 Failed checks: 9 Score: 81'
-        {"type":"summary","scan_id":1163073902,"name":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","file":"cis_debian_linux_rcl.yml","description":"This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux systems running on x86 and x64 platforms. Many lists are included including filesystem types, services, clients, and network protocols. Not all items in these lists are guaranteed to exist on all distributions and additional similar items may exist which should be considered in addition to those explicitly mentioned.","references":"https://workbench.cisecurity.org/","passed":39,"failed":9,"score":81.25,"start_time":1549608285,"end_time":1549608285,"hash":"0f955725d7a267942ae5a1cab522d0b8"}
-        sca.type: summary
-        sca.scan_id: 1163073902
-        sca.name: CIS benchmark for Debian/Linux
-        sca.description: This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux systems running on x86 and x64 platforms. Many lists are included including filesystem types, services, clients, and network protocols. Not all items in these lists are guaranteed to exist on all distributions and additional similar items may exist which should be considered in addition to those explicitly mentioned.
-        sca.passed: 39
-        sca.failed: 9
-        sca.score: 81
-        sca.file: cis_debian_linux_rcl.yml
+    ** Alert 1556631410.84452: - sca,gdpr_IV_35.7.d
+    2019 Apr 30 06:36:50 ubuntu->sca
+    Rule: 19003 (level 5) -> 'SCA summary: CIS benchmark for Debian/Linux: Score less than 80% (51)'
+    {"type":"summary","scan_id":1518747324,"name":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","file":"cis_debian_linux_rcl.yml","description":"This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux systems running on x86 and x64 platforms. Many lists are included including filesystem types, services, clients, and network protocols. Not all items in these lists are guaranteed to exist on all distributions and additional similar items may exist which should be considered in addition to those explicitly mentioned.","references":"https://www.cisecurity.org/cis-benchmarks/","passed":16,"failed":15,"invalid":11,"total_checks":42,"score":51.612899780273438,"start_time":1556631391,"end_time":1556631396,"hash":"c84124baa3aa761f279e4360f19584ecd2059493872f0987fedf7d26d7834dad","hash_file":"8db06ce8c56fb7ed50255b5191e3835632b649aeb642c7948c4ac020f1311141","force_alert":"1"}
+    sca.type: summary
+    sca.scan_id: 1518747324
+    sca.policy: CIS benchmark for Debian/Linux
+    sca.description: This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux systems running on x86 and x64 platforms. Many lists are included including filesystem types, services, clients, and network protocols. Not all items in these lists are guaranteed to exist on all distributions and additional similar items may exist which should be considered in addition to those explicitly mentioned.
+    sca.policy_id: cis_debian
+    sca.passed: 16
+    sca.failed: 15
+    sca.invalid: 11
+    sca.total_checks: 42
+    sca.score: 51
+    sca.file: cis_debian_linux_rcl.yml
 
-The image below shows the summary in the Configuration Assessment tab on Kibana:
-
-.. thumbnail:: ../../../images/sca/sca-summary.png
-    :title: Configuration Assessment summary
-    :align: center
-    :width: 100%
-
-
-The check with id 5031 failed, it verifies if the file */proc/sys/net/ipv4/ip_forward* does not contain a value of "1"
-
-.. code-block:: none
-
-        ** Alert 1551793014.225469: - wazuh,sca,gdpr_IV_35.7.d
-        2019 Mar 05 14:36:54 (ubuntu) any->sca
-        Rule: 19008 (level 3) -> 'CIS benchmark for Debian/Linux: Ensure IP forwarding is disabled'
-        {"type":"check","id":1693973084,"policy":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","check":{"id":5031,"title":"Ensure IP forwarding is disabled","description":"The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.","rationale":"Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0","compliance":{"cis_csc":5,"cis":"3.1.1"},"file":"/proc/sys/net/ipv4/ip_forward,/proc/sys/net/ipv6/ip_forward","result":"passed"}}
-        sca.type: check
-        sca.scan_id: 1693973084
-        sca.policy: CIS benchmark for Debian/Linux
-        sca.check.id: 5031
-        sca.check.title: Ensure IP forwarding is disabled
-        sca.check.description: The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.
-        sca.check.rationale: Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.
-        sca.check.remediation: Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0
-        sca.check.compliance.cis_csc: 5
-        sca.check.compliance.cis: 3.1.1
-        sca.check.file: /proc/sys/net/ipv4/ip_forward,/proc/sys/net/ipv6/ip_forward
-        sca.check.result: failed
+If we focus in the check 5031 (whose alert appears above), it verifies that the IP forwarding is disabled by checking for the content of the file */proc/sys/net/ipv4/ip_forward*.
 
 If we modify this file as follows:
 
 ::
 
-    echo "0" > /proc/sys/net/ipv4/ip_forward
+    echo "1" > /proc/sys/net/ipv4/ip_forward
 
 
-We get the two alerts, one of them states that this check has changed its result and the other one summarizes this last process.
-Notice that now we have 40 ``passed`` checks and 8 ``failed``.
+The next SCA scan for that policy generates the following alert:
 
 .. code-block:: none
 
-        ** Alert 1551795102.318643: - wazuh,sca,gdpr_IV_35.7.d
-        2019 Mar 05 15:11:42 (ubuntu) any->sca
-        Rule: 19010 (level 9) -> 'CIS benchmark for Debian/Linux: Ensure IP forwarding is disabled: Status changed from passed to failed'
-        {"type":"check","id":308037396,"policy":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","check":{"id":5031,"title":"Ensure IP forwarding is disabled","description":"The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.","rationale":"Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0","compliance":{"cis_csc":5,"cis":"3.1.1"},"file":"/proc/sys/net/ipv4/ip_forward,/proc/sys/net/ipv6/ip_forward","result":"failed"}}
-        sca.type: check
-        sca.scan_id: 308037396
-        sca.policy: CIS benchmark for Debian/Linux
-        sca.check.id: 5031
-        sca.check.title: Ensure IP forwarding is disabled
-        sca.check.description: The net.ipv4.ip_forward and net.ipv6.conf.all.forwarding flags are used to tell the system whether it can forward packets or not.
-        sca.check.rationale: Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.
-        sca.check.remediation: Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0, net.ipv6.conf.all.forwarding = 0
-        sca.check.compliance.cis_csc: 5
-        sca.check.compliance.cis: 3.1.1
-        sca.check.file: /proc/sys/net/ipv4/ip_forward,/proc/sys/net/ipv6/ip_forward
-        sca.check.result: passed
-        sca.check.previous_result: failed
+    ** Alert 1556641576.310451: - sca,gdpr_IV_35.7.d
+    2019 Apr 30 09:26:16 ubuntu->sca
+    Rule: 19011 (level 9) -> 'CIS benchmark for Debian/Linux: Ensure IPv4 forwarding is disabled: Status changed from passed to failed'
+    {"type":"check","id":25201596,"policy":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","check":{"id":5031,"title":"Ensure IPv4 forwarding is disabled","description":"The net.ipv4.ip_forward flag is used to tell the system whether it can forward packets or not.","rationale":"Setting the flag to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.","remediation":"Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0","compliance":{"cis_csc":"5.1","cis":"3.1.1"},"rules":["f:/proc/sys/net/ipv4/ip_forward -> 1;"],"file":"/proc/sys/net/ipv4/ip_forward","result":"failed"}}
+    sca.type: check
+    sca.scan_id: 25201596
+    sca.policy: CIS benchmark for Debian/Linux
+    sca.check.id: 5031
+    sca.check.title: Ensure IPv4 forwarding is disabled
+    sca.check.description: The net.ipv4.ip_forward flag are used to tell the system whether it can forward packets or not.
+    sca.check.rationale: Setting the flags to 0 ensures that a system with multiple interfaces (for example, a hard proxy), will never be able to forward packets, and therefore, never serve as a router.
+    sca.check.remediation: Set the following parameter in /etc/sysctl.conf or a /etc/sysctl.d/* file: net.ipv4.ip_forward = 0
+    sca.check.compliance.cis_csc: 5.1
+    sca.check.compliance.cis: 3.1.1
+    sca.check.file: ["/proc/sys/net/ipv4/ip_forward"]
+    sca.check.result: failed
+    sca.check.previous_result: passed
 
+The level 9 alert shows how the check has changed from **passed** to **failed**. This state is updated on the manager side and the last result scanned is 
+available from the SCA tab in the Wazuh app.
 
-        ** Alert 1549608524.316062: - ossec,
-        2019 Feb 08 07:48:44 my_pc->sca
-        Rule: 19001 (level 3) -> 'SCA summary: Passed checks: 40 Failed checks: 8 Score: 83'
-        {"type":"summary","scan_id":1704901665,"name":"CIS benchmark for Debian/Linux","policy_id":"cis_debian","file":"cis_debian_linux_rcl.yml","description":"This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux systems running on x86 and x64 platforms. Many lists are included including filesystem types, services, clients, and network protocols. Not all items in these lists are guaranteed to exist on all distributions and additional similar items may exist which should be considered in addition to those explicitly mentioned.","references":"https://workbench.cisecurity.org/","passed":40,"failed":8,"score":83.333328247070312,"start_time":1549608524,"end_time":1549608524,"hash":"b2f88b5d4960ae1d4febcea288d3a0bc"}
-        sca.type: summary
-        sca.scan_id: 1704901665
-        sca.policy: CIS benchmark for Debian/Linux
-        sca.description: This document provides prescriptive guidance for establishing a secure configuration posture for Debian Linux systems running on x86 and x64 platforms. Many lists are included including filesystem types, services, clients, and network protocols. Not all items in these lists are guaranteed to exist on all distributions and additional similar items may exist which should be considered in addition to those explicitly mentioned.
-        sca.passed: 40
-        sca.failed: 8
-        sca.score: 83
-        sca.file: cis_debian_linux_rcl.yml
-
-
-The image below shows the summary in the Configuration Assessment tab on Kibana:
-
-.. thumbnail:: ../../../images/sca/sca-summary-2.png
-    :title: Configuration Assessment summary
+.. thumbnail:: ../../../images/sca/SCA-ip-forward-check.png
+    :title: Alert about IP forwarding check
     :align: center
     :width: 100%

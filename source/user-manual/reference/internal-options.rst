@@ -231,7 +231,7 @@ Analysisd
 +                                                         +               +---------------------------------------------------------------------+
 |                                                         |               | Any integer between 0 and 32.                                       |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-|    **analysisd.configuration_assessment_threads**       | Description   | Number of Configuration Assessment event decoder threads.           |
+|    **analysisd.sca_threads**                            | Description   | Number of SCA event decoder threads.                                |
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Default value | 0                                                                   |
 +                                                         +---------------+---------------------------------------------------------------------+
@@ -303,7 +303,7 @@ Analysisd
 +                                                         +---------------+---------------------------------------------------------------------+
 |                                                         | Allowed value | Any integer between 128 and 2000000.                                |
 +---------------------------------------------------------+---------------+---------------------------------------------------------------------+
-| **analysisd.decode_configuration_assessment_queue_size**| Description   | Sets the decode Configuration Assessment queue size.                |
+| **analysisd.decode_sca_queue_size**                     | Description   | Sets the decode SCA queue size.                                     |
 |                                                         |               |                                                                     |
 |                                                         |               |                                                                     |
 |                                                         |               |                                                                     |
@@ -977,6 +977,8 @@ Rootcheck
 
 Security Configuration Assessment
 ---------------------------------
+
+.. versionadded:: 3.9.0 
 
 +-----------------------------------+----------------+------------------------------------------------------------------------------------------------------------------+
 |    **sca.request_db_interval**    | Description    | In case of integrity fail, this is the maximum interval (minutes) to resend the scan information to the manager. |
