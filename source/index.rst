@@ -11,6 +11,10 @@ Welcome to Wazuh
 
 .. rst-class:: row
 
+.. rst-class:: col-12
+
+Wazuh is a free, open source and enterprise-ready security monitoring solution for threat detection, integrity monitoring, incident response and compliance.
+
 -----------
 Screenshots
 -----------
