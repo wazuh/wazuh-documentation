@@ -393,16 +393,86 @@ There are five main types of rules as described below:
 | Registry (Windows Only)      | r              |
 +------------------------------+----------------+
 
+**Rule syntax for files**
 
-Examples:
+- Checking that a file exists
+  - ``'f:/path/to/file;'``
 
-- Looking at the value inside a file: ``f:/proc/sys/net/ipv4/ip_forward -> 1;``
-- Checking if a file exists: ``f:/proc/sys/net/ipv4/ip_forward;``
-- Checking if a process is running: ``p:avahi-daemon;``
-- Looking at the value of a registry: ``r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0;``
-- Looking if a directory contains files: ``d:/home/* -> ^.mysql_history$;``
-- Checking if a directory exists: ``d:/etc/mysql;``
-- Check the running configuration of ssh to check the maximum authentication tries: ``c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$;``
+- Checking file content (whole line match)
+  - ``'f:/path/to/file -> content;'``
+
+- Checking file content with regex
+  - ``'f:/path/to/file -> r:REGEX;'``
+
+
+**Rule syntax for directories**
+
+- Checking that a directory exists
+  - ``'d:/path/to/directory;'``
+
+- Checking that a directory contains a file
+  - ``'d:/path/to/directory -> file;'``
+
+- Checking that a directory contains files with regex
+  - ``'d:/path/to/directory -> r:^files;'``
+
+- Checking that a directory contains files and its content
+  - ``'d:/path/to/directory -> file -> content;'``
+
+
+**Rule syntax for processes**
+
+- Checking that a process is running
+  - ``'p:process_name;'``
+
+
+**Rule syntax for commands**
+
+- Checking the output of a command
+  - ``'c:command -> output;'``
+
+- Checking the output of a command with regex
+  - ``'c:command -> r:REGEX;'``
+
+
+**Rule syntax for registries (Windows only).**
+
+- Checking that a registry exists
+  - ``'r:path/to/registry ;'``
+
+- Checking that a registry key exists
+  - ``'r:path/to/registry -> key;'``
+
+- Checking a registry key content
+  - ``'r:path/to/registry  -> key -> content;'``
+
+**Logic operators**
+
+There are two logic operators that: IN and NIN (not in)
+
+- IN: will alert if the condition matches.  
+- NIN: will alert if the condition is not satisfied.
+
+The above operators are used for composed rules that have more than one term. 
+
+**Use cases**
+
+- Alert when there is a line that does not begin with ``#`` and contains ``Port 22``.
+ - ``'f:/etc/ssh/sshd_config -> IN !r:^# && r:Port\.+22;'``
+
+- Alert when there is no line that does not begin with ``#`` and contains ``Port 2222``.
+ - ``'f:/etc/ssh/sshd_config -> NIN !r:^# && r:Port\.+2222;'``
 
 .. note::
-   Remember that the each rule must end with the semicolon ``;`` character.
+  Remember that the each rule must end with the semicolon ``;`` character.
+
+More examples:
+
+- Looking at the value inside a file: ``'f:/proc/sys/net/ipv4/ip_forward -> 1;'``
+- Checking if a file exists: ``'f:/proc/sys/net/ipv4/ip_forward;'``
+- Checking if a process is running: ``'p:avahi-daemon;'``
+- Looking at the value of a registry: ``'r:HKEY_LOCAL_MACHINE\System\CurrentControlSet\Services\Netlogon\Parameters -> MaximumPasswordAge -> 0;'``
+- Looking if a directory contains files: ``'d:/home/* -> ^.mysql_history$;'``
+- Checking if a directory exists: ``'d:/etc/mysql;``
+- Check the running configuration of ssh to check the maximum authentication tries: ``'c:sshd -T -> !r:^\s*maxauthtries\s+4\s*$;'``
+- Check if root is the only UID 0 account ``'f:/etc/passwd -> IN !r:^# && !r:^root: && r:^\w+:\w+:0:;'``
