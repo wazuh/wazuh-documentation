@@ -13,7 +13,7 @@ Windows logs are descriptive messages which come with relevant information about
 Eventlog and eventchannel can be both monitored by Wazuh.
 Eventchannel data processing has been improved since Wazuh version 3.8, keeping the old functionality and configuration. This updated log format uses the Windows API in order to get every event generated at a monitored channel's log.
 
-This information is gathered by the Windows agent, including the event message, the ``system`` standard fields and the specific ``eventdata`` information from the event. Once it is sent to the manager, it will process this event and parse it to JSON format, which leads to an easier way of querying and filtering by the event fields.
+This information is gathered by the Windows agent, including the event description, the ``system`` standard fields and the specific ``eventdata`` information from the event. Once an event is sent to the manager, it is processed and translated to JSON format, which leads to an easier way of querying and filtering the event fields.
 
 Eventlog uses as well the Windows API to obtain events from Windows logs and return the information in a specific format.
 
@@ -26,12 +26,13 @@ Eventlog uses as well the Windows API to obtain events from Windows logs and ret
 Windows Eventlog vs Windows Eventchannel
 ----------------------------------------
 
-Eventlog is supported on every Windows versions and can monitor any logs except for the Applications and Services Logs, this means that the information that can be retrieved is reduced to System, Application and Security logs.
+Eventlog is supported on every Windows versions and can monitor any logs except for particular Applications and Services Logs, this means that the information that can be retrieved is reduced to System, Application and Security channels.
 
-In the other hand, Eventchannel is maintained since Windows Vista and can monitor the Application and Services logs along with the basic Windows logs. In addition, the use of queries to filter by any field is supported for this log format.
+On the other hand, Eventchannel is maintained since Windows Vista and can monitor the Application and Services logs along with the basic Windows logs. In addition, the use of queries to filter by any field is supported for this log format.
 
-With the new changes made in the ``eventchannel`` log format for versions higher than 3.8, the number of fields retrieved has increased comparing it with eventlog and the previous version of eventchannel, since all the information exposed at the Windows event is defined in the alert triggered as well, in addition the ruleset has been updated, extended and reorganized according to the channel since Wazuh 3.9. Furthermore, this modifications facilitate the process of rules' creation and alert triggering since the event is now gathered in JSON format.
+With the new changes made in the ``eventchannel`` log format for versions higher than v3.8.0, the number of fields decoded has increased. In addition, the Windows ruleset has been updated, extended and reorganized according to the source channel.
 
+Furthermore, this modifications facilitate the process of rules creation as well as the alert triggering since the event is now gathered in JSON format.
 
 Monitor the Windows Event Log with Wazuh
 ----------------------------------------
@@ -70,7 +71,7 @@ Windows event channels can be monitored by placing their name at the location fi
 Available channels
 ^^^^^^^^^^^^^^^^^^
 
-The channels added by default at the ruleset can be filtered at the configuration localfile block as the 'channel location' column shows in the table from below:
+Table below shows available channels to monitor included in the Wazuh ruleset:
 
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
 | Source                        | Channel location                                             | Description                                                                    |
@@ -98,7 +99,7 @@ The channels added by default at the ruleset can be filtered at the configuratio
 | Microsoft Security            | Microsoft Antimalware                                        | This software gives information about real-time protection for the system,     |
 | Essentials                    |                                                              | malware-detection scans and antivirus settings.                                |
 +-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
-| Remote Access                 | File Replication Service                                     | These rules which are not that common are stored in a different file.          |
+| Remote Access                 | File Replication Service                                     | Other channels (they are grouped in a generic Windows rule file).              |
 +-------------------------------+--------------------------------------------------------------+                                                                                |
 | Terminal Services             | Service                                                      |                                                                                |
 |                               | Microsoft-Windows-TerminalServices-RemoteConnectionManager   |                                                                                |
@@ -111,15 +112,15 @@ Windows ruleset redesign
 In order to ease the addition of new rules, the eventchannel ruleset has been classified according to the channel from which events belong. This will ensure an easier way of maintaining the ruleset organized and find the better place for custom rules. To accomplish this, several modifications have been added:
 
 - Each eventchannel file contains a specific channel's rules.
-- A base file includes every parent rule filtering by the specific channel from which the other rules will pend.
-- Eventlog rules have been updated and improved to match the new JSON events, showing relevant information at the rule's description and facilitating the way of filtering them.
-- New channel's rules have been added. By default, the monitored channels are System, Security and Application, but at the old version there weren't enough rules for Application and System. These two channels have their own file now and include a fair set of rules.
+- A base file includes every parent rule filtering by the specific channels monitored.
+- Rules have been updated and improved to match the new JSON events, showing relevant information at the rule's description and facilitating the way of filtering them.
+- New channel's rules have been added. By default, the monitored channels are System, Security and Application, these channels have their own file now and include a fair set of rules.
 - Every file has their own rule ID range in order to get it organized. There are a hundred IDs set for the base rules and five hundred for each channel file.
-- In case some rules can't be classified easily or there are so few belonging to a specific channel, they are included at a generic rule file.
+- In case some rules can't be classified easily or there are so few belonging to a specific channel, they are included at a generic Windows rule file.
 
 To have a complete view of which events are equivalent to the old ones from ``eventlog`` and the previous version of ``eventchannel``, this table classifies every rule according to the source in which they were recorded, including their range of rule IDs and the file where they are described.
 
-Eventchannel for Wazuh >= 3.9.0 
+Eventchannel for Wazuh >= 3.9.0
 
 +---------------------+-----------------------------+---------------------------------+
 | Source              | Rule IDs                    |   Rule file                     |
@@ -194,11 +195,11 @@ The installation log will be collected at the Application channel. To monitor lo
 .. code-block:: xml
 
     <localfile>
-        <location>Application</location>
-        <log_format>eventchannel</log_format>
+      <location>Application</location>
+      <log_format>eventchannel</log_format>
     </localfile>
 
-The next step is to install the application wanted to be monitored. Once it is installed, the Wazuh manager will build the next JSON event related with the installation process:
+The next step is to install a new application. Once it is installed, the Wazuh manager will build the next JSON event related with the installation process:
 
 .. code-block:: json
 

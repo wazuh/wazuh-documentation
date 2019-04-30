@@ -23,8 +23,8 @@ The Log analysis engine can be configured to monitor specific files on the serve
   .. code-block:: xml
 
       <localfile>
-          <location>/var/log/example.log</location>
-          <log_format>syslog</log_format>
+        <location>/var/log/example.log</location>
+        <log_format>syslog</log_format>
       </localfile>
 
 - Windows:
@@ -32,8 +32,8 @@ The Log analysis engine can be configured to monitor specific files on the serve
   .. code-block:: xml
 
       <localfile>
-          <location>C:\myapp\example.log</location>
-          <log_format>syslog</log_format>
+        <location>C:\myapp\example.log</location>
+        <log_format>syslog</log_format>
       </localfile>
 
 
@@ -90,7 +90,7 @@ Analysis
 Pre-decoding
 ^^^^^^^^^^^^
 
-In the pre-decoding phase of analysis, static information from well-known fields all that is extracted from the log. data
+In the pre-decoding phase of analysis, static information from well-known fields all that is extracted from the log header.
 
 ::
 
@@ -134,7 +134,7 @@ For the previous example, rule 5715 is matched:
 
 .. note::
 
-  For more information,see the :ref:`Wazuh Ruleset <ruleset>`
+  For more information, see the :ref:`Wazuh Ruleset <ruleset>`
 
 Alert
 -----

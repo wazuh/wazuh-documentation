@@ -22,8 +22,8 @@ As in this basic usage example, provide the name of the file to be monitored and
 .. code-block:: xml
 
     <localfile>
-        <location>/var/log/messages</location>
-        <log_format>syslog</log_format>
+      <location>/var/log/messages</location>
+      <log_format>syslog</log_format>
     </localfile>
 
 Monitoring logs using regular expressions for file names
