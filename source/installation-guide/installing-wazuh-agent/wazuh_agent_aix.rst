@@ -17,12 +17,12 @@ The Wazuh agent for AIX can be downloaded from our :doc:`packages list<../packag
 
   b) Installation with a registration / configuration included:
 
-    You can automate the agent registration and configuration using environment variables. 
+    You can automate the agent registration and configuration using variables. 
 
     .. code-block:: console
 
       # WAZUH_MANAGER_IP="192.168.1.2" rpm -ivh wazuh-agent-3.9.0-1.aix.ppc.rpm  
 
-    .. note:: See the following document for additional registering and configuration options: :doc:`automated registering and configuration variables <automated_reg-config_variables>`.   
+    .. note:: See the following document for additional automated deployment options: :doc:`automated deployment variables <automated_deployment_variables>`.   
 
 

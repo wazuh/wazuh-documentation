@@ -1,11 +1,13 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _automated_reg-config_variables:
+.. _automated_deployment_variables:
 
-Automated registering and configuration variables 
-=================================================
+Automated deployment variables
+==============================
 
-In the table below, you'll find all the options available for the automated registration and configuration included in the installation. 
+Traditionally, if we want to have a new Wazuh Agent reporting to a Wazuh Manager we had to follow three steps: installation, registration, and configuration.  We designed an automated deployment embedded in the installation stage. The three steps previously mentioned became only one command line.  By using declared variables, the automated deployment process will take those variables and it will make convenient changes in ossec.conf and in the registration run. 
+
+In the table below, you'll find all the options available for the automated deployment included in the installation. 
 
 
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
