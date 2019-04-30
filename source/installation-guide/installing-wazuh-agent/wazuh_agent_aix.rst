@@ -13,7 +13,7 @@ The Wazuh agent for AIX can be downloaded from our :doc:`packages list<../packag
 
       # rpm -ivh wazuh-agent-3.9.0-1.aix.ppc.rpm
 
-    .. note:: With Only installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
+    .. note:: With only installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
 
   b) Installation with a registration / configuration included:
 
