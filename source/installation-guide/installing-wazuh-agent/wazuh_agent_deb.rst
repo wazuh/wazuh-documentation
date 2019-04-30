@@ -57,7 +57,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="192.168.1.1" apt-get install wazuh-agent  
+      # WAZUH_MANAGER_IP="192.168.1.2" apt-get install wazuh-agent  
 
     .. note:: See the following document for additional registering and configuration options: :doc:`Automated registering and configuration variables <automated_reg-config_variables>`.      
 

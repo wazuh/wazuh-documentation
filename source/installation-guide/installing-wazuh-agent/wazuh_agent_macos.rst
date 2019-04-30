@@ -22,7 +22,7 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
  
      .. code-block:: console
  
-       # launchctl setenv WAZUH_MANAGER_IP "192.168.1.1" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+       # launchctl setenv WAZUH_MANAGER_IP "192.168.1.2" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
  
      .. note:: See the following document for additional registering and configuration options: :doc:`Automated registering and configuration variables  <automated_reg-config_variables>`.   
 
