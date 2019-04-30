@@ -3,7 +3,7 @@
 How it works
 ============
 
-The below image illustrations how events flow through the Wazuh environment:
+The below image illustrations how events flow through the Wazuh environment.
 
 .. thumbnail:: ../../../images/manual/log_analysis/log-analysis-flow.png
     :title: Log analysis flow
@@ -13,75 +13,68 @@ The below image illustrations how events flow through the Wazuh environment:
 Log collection
 --------------
 
-
 Log files
 ^^^^^^^^^
 
 The Log analysis engine can be configured to monitor specific files on the servers.
 
-Sample Configuration:
+- Linux:
 
-Linux:
+  .. code-block:: xml
 
-.. code-block:: xml
+      <localfile>
+        <location>/var/log/example.log</location>
+        <log_format>syslog</log_format>
+      </localfile>
 
-  <localfile>
-      <location>/var/log/example.log</location>
-      <log_format>syslog</log_format>
-  </localfile>
+- Windows:
 
-Windows:
+  .. code-block:: xml
 
-.. code-block:: xml
-
-  <localfile>
-      <location>C:\myapp\example.log</location>
-      <log_format>syslog</log_format>
-  </localfile>
+      <localfile>
+        <location>C:\myapp\example.log</location>
+        <log_format>syslog</log_format>
+      </localfile>
 
 
 Windows event logs
 ^^^^^^^^^^^^^^^^^^
 
-Wazuh can monitor classic Windows event logs, as well as the newer Windows event channels:
+Wazuh can monitor classic Windows event logs, as well as the newer Windows event channels.
 
-Sample configuration:
+- Event log:
 
-Event log:
+  .. code-block:: xml
 
-.. code-block:: xml
+    <localfile>
+      <location>Security</location>
+      <log_format>eventlog</log_format>
+    </localfile>
 
-  <localfile>
-    <location>Security</location>
-    <log_format>eventlog</log_format>
-  </localfile>
+- Event channel:
 
-Event channel:
+  .. code-block:: xml
 
-.. code-block:: xml
-
-  <localfile>
-    <location>Microsoft-Windows-PrintService/Operational</location>
-    <log_format>eventchannel</log_format>
-  </localfile>
+    <localfile>
+      <location>Microsoft-Windows-PrintService/Operational</location>
+      <log_format>eventchannel</log_format>
+    </localfile>
 
 Remote syslog
 ^^^^^^^^^^^^^
 
 On other devices, like firewalls, for instance, the log analysis component can be configured to receive log events through syslog.
 
-Sample configuration:
+- Sample configuration:
 
-.. code-block:: xml
+  .. code-block:: xml
 
-  <ossec_config>
-    <remote>
-      <connection>syslog</connection>
-      <port>514</port>
-      <protocol>udp</protocol>
-      <allowed-ips>192.168.2.0/24</allowed-ips>
-    </remote>
-  <ossec_config>
+    <ossec_config>
+      <remote>
+        <connection>syslog</connection>
+        <allowed-ips>192.168.2.0/24</allowed-ips>
+      </remote>
+    <ossec_config>
 
 
 ``<connection>syslog</connection>`` indicates that the manager will accept incoming syslog messages from across the network and ``<allowed-ips>192.168.2.0/24</allowed-ips>`` defines the network from which syslog messages will be accepted.
@@ -110,7 +103,7 @@ Analysis
 Pre-decoding
 ^^^^^^^^^^^^
 
-In the pre-decoding phase of analysis, static information from well-known fields all that is extracted from the log. data
+In the pre-decoding phase of analysis, static information from well-known fields all that is extracted from the log header.
 
 ::
 
@@ -156,7 +149,7 @@ For the previous example, rule 5715 is matched:
 
 .. note::
 
-  For more information,see the :ref:`Wazuh Ruleset <ruleset>`
+  For more information, see the :ref:`Wazuh Ruleset <ruleset>`
 
 Alert
 -----
