@@ -7,7 +7,7 @@ Install Wazuh agent with RPM packages
 
 The RPM package is suitable for installation on Red Hat, CentOS and other RPM-based systems.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------

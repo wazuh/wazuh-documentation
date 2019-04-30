@@ -7,7 +7,7 @@ Install Wazuh server with RPM packages
 
 For CentOS/RHEL/Fedora platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------

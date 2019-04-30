@@ -10,7 +10,7 @@ This guide describes how to install the Wazuh agent from source code.
 - `Installing Linux agent`_.
 - `Installing Windows agent`_.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Installing Linux agent
 ----------------------

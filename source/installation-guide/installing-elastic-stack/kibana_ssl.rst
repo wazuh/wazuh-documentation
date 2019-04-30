@@ -9,7 +9,7 @@ By default, the communication between Kibana (including the Wazuh app) and the w
 
 NGINX is a popular open-source web server and reverse proxy known for its high performance, stability, rich feature set, simple configuration and low resource consumption. In this example, we will use it as a reverse proxy to provide encrypted and authenticated access to Kibana to the end users.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 .. note::
     The default port for the Kibana web interface is *5601*. This tutorial will make the *80* and *443* ports available for HTTP/HTTPS access.

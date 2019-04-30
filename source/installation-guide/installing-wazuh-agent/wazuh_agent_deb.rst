@@ -7,7 +7,7 @@ Install Wazuh agent with DEB packages
 
 The DEB packages are suitable for Debian, Ubuntu, and other Debian-based systems.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------
