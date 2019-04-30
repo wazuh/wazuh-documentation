@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _kibana_ssl:
 
@@ -113,7 +113,7 @@ NGINX SSL proxy for Kibana (RPM-based distributions)
         location / {
             auth_basic "Restricted";
             auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            proxy_pass http://kibana-server-ip:5601/;
+            proxy_pass http://localhost:5601/;
         }
     }
     EOF
@@ -220,7 +220,7 @@ NGINX SSL proxy for Kibana (Debian-based distributions)
         location / {
             auth_basic "Restricted";
             auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
-            proxy_pass http://kibana-server-ip:5601/;
+            proxy_pass http://localhost:5601/;
         }
     }
     EOF

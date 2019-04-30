@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _azure_monitoring_services:
 
@@ -68,6 +68,8 @@ We're going to configure an application from the Microsoft Azure portal to be ab
     :title: AAD
     :align: center
     :width: 50%
+    
+1.7 - Back to the ``Azure Active Directory`` section, select the option ``Enterprise applications`` and once inside, select the newly created app. Open ``Permissions`` and click ``Grant Admin Consent`` for the application. In the popup window that appears, review the permissions are appropriate, and select ``Accept``.
 
 2. Obtaining the application key for authentication
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

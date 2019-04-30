@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _user_manual:
 
@@ -17,7 +17,6 @@ Welcome to the Wazuh user manual. Use it as your Wazuh reference library once yo
 
         overview
         manager/index
-        registering/index
         agents/index
         capabilities/index
         ruleset/index

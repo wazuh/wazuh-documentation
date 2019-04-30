@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _util.sh:
 
@@ -21,7 +21,7 @@ A `blogpost <http://dcid.me/blog/2011/10/3woo-alerting-on-dns-ip-address-changes
 |                                   |                                                                                                                                   |
 |                                   | A rule can be written to monitor this output for changes.                                                                         |
 |                                   |                                                                                                                                   |
-|                                   | Requires `lynx <http://lynx.isc.org/current/>`_                                                                                   |
+|                                   | Requires `lynx <https://lynx.invisible-island.net/current/index.html>`_                                                           |
 +-----------------------------------+-----------------------------------------------------------------------------------------------------------------------------------+
 | **adddns <domain>**               | Monitor the nameserver of a domain for changes.                                                                                   |
 |                                   |                                                                                                                                   |

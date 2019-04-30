@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_agent_conf:
 
@@ -15,9 +15,11 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
 - :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
-- :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
 - :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
+- :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
+- :doc:`Avoid events flooding <ossec-conf/client_buffer>` (**client_buffer**)
+- :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
 
 .. note::
   When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
@@ -36,7 +38,7 @@ Agents can be grouped together in order to send them unique centralized configur
 .. note::
     Check the :doc:`agent_groups manual <./tools/agent_groups>` to learn how to add groups and assign agents to them.
 
-The manager pushes all files included in the group folder to the agents belonging this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to ``default`` group.
+The manager pushes all files included in the group folder to the agents belonging to this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to the ``default`` group.
 
 In case an agent is assigned to multiple groups, all the files contained in each group folder will be merged into one, and subsequently sent to the agents, being the last one the group with the highest priority.
 

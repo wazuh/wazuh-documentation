@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_commands:
 
@@ -39,7 +39,9 @@ Specifies the name of the command which is called in the :doc:`active-response <
 executable
 ^^^^^^^^^^
 
-Names an executable file to run from the ``/var/ossec/active-response/bin`` directory. It is not necessary to provide the path.
+Names an executable file to run. It is not necessary to provide the path.
+
+These files are located in ``/var/ossec/active-response/bin`` directory in Linux based systems, or in ``C:\Program Files\ossec-agent\active-response\bin`` directory in Windows systems.
 
 +--------------------+---------------+
 | **Default value**  | n/a           |
@@ -56,13 +58,13 @@ Specifies the lists of extracted fields that are to be passed as parameters to t
 
 A good example is the firewall-block command which expects the ``srcip`` field in order to knows which IP address to block.  Multiple expected field names are comma separated.
 
-+--------------------+-----------------------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                                       |
-+--------------------+-----------------------------------------------------------------------------------------------------------+
-| **Allowed values** | Names of extracted fields, like **srcip** or **username**, separated by commas if there is more than one. |
-+--------------------+-----------------------------------------------------------------------------------------------------------+
-| **use**            | Not required                                                                                              |
-+--------------------+-----------------------------------------------------------------------------------------------------------+
++--------------------+------------------------------------------------------------------------------------------------------+
+| **Default value**  | n/a                                                                                                  |
++--------------------+------------------------------------------------------------------------------------------------------+
+| **Allowed values** | Extracted fields: **srcip**, **user** or **filename** separated by commas if there is more than one. |
++--------------------+------------------------------------------------------------------------------------------------------+
+| **use**            | Not required                                                                                         |
++--------------------+------------------------------------------------------------------------------------------------------+
 
 extra_args
 ^^^^^^^^^^

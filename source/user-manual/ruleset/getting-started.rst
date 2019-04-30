@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _ruleset_getting_started:
 
@@ -23,7 +23,7 @@ In the ruleset repository you will find:
 Resources
 ^^^^^^^^^
 * Visit our repository to view the rules in detail at `Github Wazuh Ruleset <https://github.com/wazuh/wazuh-ruleset>`_
-* Find a complete description of the available rules at `Wazuh Ruleset Summary <http://www.wazuh.com/resources/OSSEC_Ruleset.pdf>`_
+* Find a complete description of the available rules at `Wazuh Ruleset Summary <http://www.wazuh.com/resources/Wazuh_Ruleset.pdf>`_
 
 
 Rule and Rootcheck example

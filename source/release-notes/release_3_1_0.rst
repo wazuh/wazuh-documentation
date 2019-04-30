@@ -1,8 +1,8 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _release_3_1_0:
 
-3.1.0 Release Notes
+3.1.0 Release notes
 ===================
 
 This section shows the most relevant new features of Wazuh v3.1.0. You will find more detailed information in our `changelog <https://github.com/wazuh/wazuh/blob/3.1/CHANGELOG.md>`_ file.
