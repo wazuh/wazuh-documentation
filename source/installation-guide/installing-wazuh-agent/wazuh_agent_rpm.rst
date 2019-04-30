@@ -103,7 +103,7 @@ Installing Wazuh agent
 
   b) Installation with a registration / configuration included:
 
-    You can automate the agent registration and configuring using environment variables. 
+    You can automate the agent registration and configuration using environment variables. 
 
     .. code-block:: console
 

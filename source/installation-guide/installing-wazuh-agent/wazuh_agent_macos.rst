@@ -18,7 +18,7 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
      .. note:: With Only installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
 
 
-     As alternative, you can automate the agent registration and configuring using environment variables. 
+     As alternative, You can automate the agent registration and configuration using environment variables. 
  
      .. code-block:: console
  

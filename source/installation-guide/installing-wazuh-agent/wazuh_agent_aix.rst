@@ -17,7 +17,7 @@ The Wazuh agent for AIX can be downloaded from our :doc:`packages list<../packag
 
   b) Installation with a registration / configuration included:
 
-    You can automate the agent registration and configuring using environment variables. 
+    You can automate the agent registration and configuration using environment variables. 
 
     .. code-block:: console
 
