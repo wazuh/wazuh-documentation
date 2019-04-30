@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _upgrading_same_major:
 
@@ -97,9 +97,17 @@ Upgrade the Wazuh Kibana App
 
 4) Upgrade the Wazuh Kibana App (this can take a while):
 
+  a) With sudo:
+
     .. code-block:: console
 
         # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-2.1.1_5.6.5.zip
+
+  b) Without sudo:
+
+    .. code-block:: console
+
+        # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-2.1.1_5.6.5.zip' kibana
 
 5) Once the process is complete, restart Kibana:
 

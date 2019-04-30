@@ -1,11 +1,11 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wazuh_agent_macos:
 
 Install Wazuh agent on Mac OS X
 ===============================
 
-Mac OS X agent can be downloaded from our :doc:`packages list<../packages-list/index>`. The current version has been tested on Mac OS X 10.12 and should be compatible with other versions as well. You can install it by following the steps below:
+The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/index>`. You can install it by using the command line or following the GUI steps:
 
   a) The command line::
 
@@ -20,4 +20,4 @@ Mac OS X agent can be downloaded from our :doc:`packages list<../packages-list/i
 
 By default, all agent files can be found at the following location: ``/Library/Ossec/``.
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
+.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.

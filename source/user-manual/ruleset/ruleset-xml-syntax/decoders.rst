@@ -1,12 +1,17 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _decoders_syntax:
 
 Decoders Syntax
 ===============
 
+The decoders extract the information from the received events.
+When an event is received, the decoders separate the information in blocks to prepare them for their subsequent analysis.
+
 Options
 -------
+
+There is many options to configure the decoders:
 
 - `decoder`_
 - `parent`_
@@ -20,12 +25,13 @@ Options
 - `plugin_decoder`_
 - `use_own_name`_
 - `json_null_field`_
+- `location`_
 - `var`_
 
 decoder
 ^^^^^^^
 
-The attributes list below defines a decoder.
+The attributes listed below define a decoder.
 
 +-----------+---------------------------+
 | Attribute | Description               |
@@ -34,6 +40,16 @@ The attributes list below defines a decoder.
 +-----------+---------------------------+
 | type      | The type of the decoder   |
 +-----------+---------------------------+
+
+Example:
+
+Set name and type of decoder to *ossec*:
+
+  .. code-block:: xml
+
+    <decoder name="ossec" type ="ossec">
+      ...
+    </decoder>
 
 parent
 ^^^^^^
@@ -45,6 +61,17 @@ It is used to link a subordinate codeblock to his parent.
 +--------------------+------------------+
 | **Allowed values** | Any decoder name |
 +--------------------+------------------+
+
+Example:
+
+Assign the decoder which father it belongs:
+
+  .. code-block:: xml
+    
+    <decoder name="decoder_junior">
+      <parent>decoder_father</parent>
+      ...
+    </decoder>
 
 accumulate
 ^^^^^^^^^^^
@@ -70,6 +97,17 @@ It defines the name of the program with which the decoder is associated.
 | **Allowed values** | Any `sregex expression <regex.html#os-match-or-sregex-syntax>`_    |
 +--------------------+--------------------------------------------------------------------+
 
+Example:
+
+Define that the decoder is related with the ``syslogd`` process:
+
+  .. code-block:: xml
+
+    <decoder name="syslogd_decoder">
+      <program_name>syslogd</program_name>
+      ...
+    </decoder>
+
 prematch
 ^^^^^^^^^
 
@@ -92,6 +130,15 @@ The attribute below is optional, it allows to discard some of the content of the
 regex
 ^^^^^^^
 
+**Regular expressions** or ``regex`` are sequences of characters that define a pattern.
+Decoders use them to find words or other patterns into the rules.
+
+An example is this regex that matches any numeral:
+
+  ..code-block:: xml
+    <regex> [+-]?(\d+(\.\d+)?|\.\d+)([eE][+-]?\d+)? </regex>
+
+
 +--------------------+--------------------------------------------------------------------+
 | **Default Value**  | n/a                                                                |
 +--------------------+--------------------------------------------------------------------+
@@ -109,6 +156,21 @@ The attribute below is optional, it allows to discard some of the content of the
 +                    +                    +
 |                    | after_prematch     |
 +--------------------+--------------------+
+
+Example:
+
+Show when an user executed the sudo command for the first time:
+
+.. code-block:: xml
+
+  <decoder name="sudo-fields">
+    <parent>sudo</parent>
+    <prematch>\s</prematch>
+    <regex>^\s*(\S+)\s*:</regex>
+    <order>srcuser</order>
+    <fts>name,srcuser,location</fts>
+    <ftscomment>First time user executed the sudo command</ftscomment>
+  </decoder>
 
 order
 ^^^^^^
@@ -184,6 +246,17 @@ It is used to designate a decoder as one in which the first time it matches the 
 |                    | extra_data | Any extra data                                        |
 +--------------------+------------+-------------------------------------------------------+
 
+Example:
+
+The following decoder will extract the user who generated the alert and the location from where it comes:
+
+  .. code-block:: xml
+  
+    </decoder>
+      <fts>srcuser, location</fts>
+      ...
+    </decoder>
+
 ftscomment
 ^^^^^^^^^^^
 
@@ -251,6 +324,30 @@ Specify how to treat the `NULL` fields coming from the JSON events. Only for the
 +                    +-------------------------------------------------------------------------+
 |                    | empty (It shows the NULL field as an empty field)                       |
 +--------------------+-------------------------------------------------------------------------+
+
+location
+^^^^^^^^
+
+Points the source where the event has been readed, like a log file or an agent.
+
++--------------------+-------------------------------------------------------------------------+
+| **Default Value**  | string                                                                  |
++--------------------+-------------------------------------------------------------------------+
+| **Allowed values** | File path (`/var/log/syslog`)                                           |
++                    +-------------------------------------------------------------------------+
+|                    | An agent (`(ubuntu)->192.168.1.22`)                                     |
++--------------------+-------------------------------------------------------------------------+
+
+Example:
+
+  .. code-block:: xml 
+    
+    <decoder name="home_decoder">
+      <location> /home/user </location>
+      ...
+    </decoder>
+
+Only filters the events related to the path ``/home/user``.
 
 var
 ^^^

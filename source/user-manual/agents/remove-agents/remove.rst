@@ -1,20 +1,20 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _command-line-remove:
 
-Remove Agents
--------------
+Remove agents using the CLI
+---------------------------
 
-The binary */var/ossec/bin/manage_agents* allows for the removal of agents.
+The binary ``manage_agents`` can be used also to remove agents using the command line. 
 
-If you would like a confirmation before removing the agent, use the following:
+If the user would like confirmation before removing the agent, use the following:
 
 .. code-block:: console
 
     # /var/ossec/bin/manage_agents
 
     ****************************************
-    * Wazuh v3.8.2 Agent manager.          *
+    * Wazuh v3.9.0 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
@@ -25,23 +25,21 @@ If you would like a confirmation before removing the agent, use the following:
     Choose your action: A,E,L,R or Q: r
 
     Available agents:
-       ID: 003, Name: DB_Agent, IP: any
+       ID: 001, Name: DB_Agent, IP: any
     Provide the ID of the agent to be removed (or '\q' to quit): 003
     Confirm deleting it?(y/n): y
-    Agent '003' removed.
-
-    ** You must restart OSSEC for your changes to take effect.
+    Agent '001' removed.
 
     manage_agents: Exiting.
 
-If you would like to remove the agent with no confirmation, use the option shown below:
+If the user would like to remove the agent without confirmation, use the option shown below:
 
 .. code-block:: console
 
     # /var/ossec/bin/manage_agents -r 001
 
     ****************************************
-    * Wazuh v3.8.2 Agent manager.          *
+    * Wazuh v3.9.0 Agent manager.          *
     * The following options are available: *
     ****************************************
        (A)dd an agent (A).
@@ -55,7 +53,5 @@ If you would like to remove the agent with no confirmation, use the option shown
     Provide the ID of the agent to be removed (or '\q' to quit): 001
     Confirm deleting it?(y/n): y
     Agent '001' removed.
-
-    ** You must restart OSSEC for your changes to take effect.
 
     manage_agents: Exiting.

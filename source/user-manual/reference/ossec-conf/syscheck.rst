@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_syscheck:
 
@@ -113,6 +113,8 @@ Attributes:
 | **check_perm**           | Check the permission of the files/directories.                                                                      |
 +                          +                                                                                                                     +
 |                          | On Windows, a list of denied and allowed permissions will be given for each user or group since version 3.8.0.      |
++                          +                                                                                                                     +
+|                          | Only works on NTFS partitions on Windows systems.                                                                   |
 +                          +------------------------------------------------------------+--------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                |
 +--------------------------+------------------------------------------------------------+--------------------------------------------------------+
@@ -156,15 +158,11 @@ Attributes:
 +                          +------------------------------------------------------------+--------------------------------------------------------+
 |                          | Allowed values                                             | Any integer between 0 and 320                          |
 +--------------------------+------------------------------------------------------------+--------------------------------------------------------+
-| **follow_symbolic_link** | Follow symbolic links. Monitor the content of the pointed files/directories. The default value is "no".             |
+| **follow_symbolic_link** | Follow symbolic links (directories or files). The default value is "no". The setting is available for UNIX systems. |
 +                          +                                                                                                                     +
-|                          | Compatible with UNIX systems and Windows systems greater than Windows Vista.                                        |
+|                          | If set, ``realtime`` works as usual (with symbolic links to directories, not files).                                |
 +                          +                                                                                                                     +
-|                          | If set, ``realtime`` and ``whodata`` work as usual (with symbolic links to directories, not files).                 |
-+                          +                                                                                                                     +
-|                          | .. versionadded:: 3.8.0 UNIX                                                                                        |
-+                          +                                                                                                                     +  
-|                          | .. versionadded:: 3.9.0 Windows                                                                                     |
+|                          | .. versionadded:: 3.8.0                                                                                             |
 +                          +------------------------------------------------------------+--------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                |
 +--------------------------+------------------------------------------------------------+--------------------------------------------------------+
@@ -217,7 +215,7 @@ frequency
 Frequency that the syscheck will be run (in seconds).
 
 +--------------------+-------------------------------------+
-| **Default value**  | 21600                               |
+| **Default value**  | 43200                               |
 +--------------------+-------------------------------------+
 | **Allowed values** | A positive number, time in seconds. |
 +--------------------+-------------------------------------+
@@ -345,7 +343,7 @@ Attributes:
 registry_ignore
 ^^^^^^^^^^^^^^^
 
-List of registry entries to be ignored.  (one entry per line). Multiple lines may be entered to include multiple registry entries.
+List of registry entries to be ignored. (one entry per line). Multiple lines may be entered to include multiple registry entries.
 
 +--------------------+---------------------+
 | **Default value**  | n/a                 |
@@ -355,13 +353,17 @@ List of registry entries to be ignored.  (one entry per line). Multiple lines ma
 
 Attributes:
 
-+----------+--------------------------------------------------------------+
-| **arch** | Select the Registry to ignore depending on the architecture. |
-+          +------------------+-------------------------------------------+
-|          | Default value    | 32bit                                     |
-|          +------------------+-------------------------------------------+
-|          | Allowed values   | 32bit, 64bit, both                        |
-+----------+------------------+-------------------------------------------+
++----------+--------------------------------------------------------------------------------+
+| **arch** | Select the Registry to ignore depending on the architecture.                   |
++          +------------------+-------------------------------------------------------------+
+|          | Default value    | 32bit                                                       |
+|          +------------------+-------------------------------------------------------------+
+|          | Allowed values   | 32bit, 64bit, both                                          |
++----------+------------------+-------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated.|
++          +------------------+-------------------------------------------------------------+
+|          | Allowed values   |  sregex                                                     |
++----------+------------------+-------------------------------------------------------------+
 
 prefilter_cmd
 ^^^^^^^^^^^^^^
@@ -432,12 +434,12 @@ windows_audit_interval
 
 .. versionadded:: 3.5.0
 
-This option sets the frequency with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
+This option sets the frequency in seconds with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
 
 +--------------------+------------------------------------+
-| **Default value**  | 5 minutes                          |
+| **Default value**  | 300 seconds                        |
 +--------------------+------------------------------------+
-| **Allowed values** | A positive number, time in seconds |
+| **Allowed values** | Any number from 1 to 9999          |
 +--------------------+------------------------------------+
 
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_conf:
 
@@ -76,7 +76,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="cis-cat" <wodle-ciscat>`                          | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager, agent         |
+| :doc:`wodle name="aws-s3" <wodle-s3>`                               | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="syscollector" <wodle-syscollector>`               | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
@@ -84,7 +84,7 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="osquery" <wodle-osquery>`                         | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="docker" <wodle-docker>`                           | agent                  |
+| :doc:`wodle name="docker-listener" <wodle-docker>`                  | agent                  |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   | manager                |
 +---------------------------------------------------------------------+------------------------+

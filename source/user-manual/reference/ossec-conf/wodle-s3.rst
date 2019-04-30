@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wodle_s3:
 
@@ -64,7 +64,7 @@ Disables the CloudTrail wodle.
 +--------------------+-----------------------------+
 
 bucket
-^^^^^^^
+^^^^^^
 
 .. deprecated::3.6.0
 
@@ -192,6 +192,8 @@ Bucket options
 +----------------------------------+------------------------------------------------+-----------------------------------------------+
 | `bucket\\regions`_               | Comma list of AWS regions                      | Optional (only works with CloudTrail buckets) |
 +----------------------------------+------------------------------------------------+-----------------------------------------------+
+| `bucket\\aws_organization_id`_   | Name of AWS organization                       | Optional (only works with CloudTrail buckets) |
++----------------------------------+------------------------------------------------+-----------------------------------------------+
 
 type
 ^^^^
@@ -308,7 +310,7 @@ A valid date, in YYYY-MMM-DD format, that only logs from after that date will be
 +--------------------+-------------+
 
 bucket\\regions
-^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
 A comma-delimited list of regions to limit parsing of logs. Only works with CloudTrail buckets.
 
@@ -316,6 +318,17 @@ A comma-delimited list of regions to limit parsing of logs. Only works with Clou
 | **Default value**  | All regions                            |
 +--------------------+----------------------------------------+
 | **Allowed values** | Comma-delimited list of valid regions  |
++--------------------+----------------------------------------+
+
+bucket\\aws_organization_id
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Name of AWS organization. Only works with CloudTrail buckets.
+
++--------------------+----------------------------------------+
+| **Default value**  | N/A                                    |
++--------------------+----------------------------------------+
+| **Allowed values** | Valid AWS organization name            |
 +--------------------+----------------------------------------+
 
 

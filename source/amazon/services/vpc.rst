@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _amazon_vpc:
 
@@ -10,41 +10,26 @@ Amazon VPC
 Amazon configuration
 --------------------
 
-1. Go to Services > Storage > S3:
+1. Select an existing S3 Bucket or :ref:`create a new one. <S3_bucket>` 
 
-.. thumbnail:: ../../images/aws/aws-create-firehose-1.png
-  :align: center
-  :width: 70%
-
-2. Click on the *Create bucket*:
-
-.. thumbnail:: ../../images/aws/aws-create-firehose-2.png
-  :align: center
-  :width: 70%
-
-3. Create a new bucket, giving it a name and clicking on the *Create* button. Don't forget to save its Bucket ARN, user will need it later in the process:
-
-.. thumbnail:: ../../images/aws/aws-create-firehose-3.png
-  :align: center
-  :width: 45%
-
-4. Go to Services > Compute > EC2:
+2. Go to Services > Compute > EC2:
 
 .. thumbnail:: ../../images/aws/aws-create-vpc-1.png
   :align: center
   :width: 70%
 
-5. Go to Network & Security > Network Interfaces on the left menu. Select a network interface and select *Create a flow log* on the *Actions* menu:
+3. Go to Network & Security > Network Interfaces on the left menu. Select a network interface and select *Create a flow log* on the *Actions* menu:
 
 .. thumbnail:: ../../images/aws/aws-create-vpc-2.png
   :align: center
   :width: 70%
 
-6. Change all fields to look like the following screenshot and paste the ARN of the previously created bucket:
+4. Change all fields to look like the following screenshot and paste the ARN of the previously created bucket:
 
 .. thumbnail:: ../../images/aws/aws-create-vpc-3.png
   :align: center
   :width: 70%
+
 
 Wazuh configuration
 -------------------

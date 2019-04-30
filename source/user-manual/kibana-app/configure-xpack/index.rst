@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _kibana_xpack:
 
@@ -49,7 +49,7 @@ Follow these steps to enable X-Pack:
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "2TbJlE6MRBKB6uHybVSQJA",
       "version" : {
-        "number" : "6.6.0",
+        "number" : "6.7.1",
         "build_flavor" : "default",
         "build_type" : "deb",
         "build_hash" : "424e937",

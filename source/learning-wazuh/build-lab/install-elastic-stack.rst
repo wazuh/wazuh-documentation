@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _build_lab_install_elastic_stack:
 
@@ -20,14 +20,11 @@ For the purposes of these labs, always become root when logging into a lab machi
 Preparation
 -----------
 
-1. Install the Oracle Java JRE which is required by Logstash and Elasticsearch.
+1. Install the Java 8 OpenJDK package using yum.
 
   .. code-block:: console
 
-    # curl -Lo jre-8-linux-x64.rpm --header "Cookie: oraclelicense=accept-securebackup-cookie" "https://download.oracle.com/otn-pub/java/jdk/8u202-b08/1961070e4c9b4e26a04e7f5a083f551e/jre-8u202-linux-x64.rpm"
-    # rpm -qlp jre-8-linux-x64.rpm > /dev/null 2>&1 && echo "Java package downloaded successfully" || echo "Java package did not download successfully"
-    # yum -y install jre-8-linux-x64.rpm
-    # rm -f jre-8-linux-x64.rpm
+    # yum install java-1.8.0-openjdk
 
 2. Install the Elastic repository and its GPG key:
 

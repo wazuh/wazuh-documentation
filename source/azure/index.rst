@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _azure:
 
@@ -16,7 +16,7 @@ This section provides instructions for monitoring **Microsoft Azure** infrastruc
 - How to install Wazuh agents to **monitor the virtual machines that form the infrastructure**, which will send events to the Wazuh manager for analysis in order to classify the event with a range of alerts that that can be easily viewed.
 - How to monitor services of our infrastructure such as **Azure Active Directory (AAD)**.
 
-From a wider perpective, the Microsoft Azure infrastructure resources can be divided into two types of logs, the **Activity logs** and the **Diagnostic logs**.
+From a wider perspective, the Microsoft Azure infrastructure resources can be divided into two types of logs, the **Activity logs** and the **Diagnostic logs**.
 
 .. image:: ../images/azure/Resources.png
     :align: center
@@ -36,7 +36,6 @@ As a built-in Wazuh feature, now you can search, analyze and trigger alerts from
     .. toctree::
        :maxdepth: 2
 
-       installation
        monitoring instances
        monitoring activity
        monitoring services

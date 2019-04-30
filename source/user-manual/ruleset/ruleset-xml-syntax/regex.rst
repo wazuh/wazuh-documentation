@@ -1,9 +1,11 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _regex_syntax:
 
 Regular Expression Syntax
 =========================
+
+**Regular expressions** or ``regex`` are sequences of characters that define a pattern.
 
 There are two types of regular expressions: regex (*OS_Regex*) and sregex (*OS_Match*).
 
@@ -98,4 +100,6 @@ following special characters.
   | $           | To specify the end of the text                   |
   +-------------+--------------------------------------------------+
   | \|          | To create a logic: or, between multiple patterns |
+  +-------------+--------------------------------------------------+
+  | !           | To negate the expression                         |
   +-------------+--------------------------------------------------+

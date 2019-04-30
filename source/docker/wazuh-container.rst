@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wazuh-container:
 
@@ -93,11 +93,11 @@ Usage
 
   a) Only the file::
 
-      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/3.8.2_6.5.4/docker-compose.yml
+      $ curl -so docker-compose.yml https://raw.githubusercontent.com/wazuh/wazuh-docker/3.8.2_6.7.0/docker-compose.yml
 
   b) Get the Wazuh repository::
 
-      $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.8.2_6.5.4 --single-branch
+      $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.8.2_6.7.0 --single-branch
 
 #. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
@@ -132,10 +132,6 @@ By default, the stack exposes the following ports:
 | **5000**  | Logstash TCP input          |
 +-----------+-----------------------------+
 | **9200**  | Elasticsearch HTTP          |
-+-----------+-----------------------------+
-| **9300**  | Elasticsearch TCP transport |
-+-----------+-----------------------------+
-| **5601**  | Kibana                      |
 +-----------+-----------------------------+
 | **80**    | Nginx http                  |
 +-----------+-----------------------------+
