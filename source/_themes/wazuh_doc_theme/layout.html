@@ -125,11 +125,6 @@
             <div id="search-lg" class="title-bar-right col-lg-12 collapsed">
               {% include "searchbar.html" %}
             </div> <!-- // #search-lg -->
-            {% if pagename != 'index' %}
-            <div class="edit-repo-wrapper">
-              {% include "editrepo.html" %}
-            </div>
-            {% endif %}
             <div class="globaltoc" role="navigation" aria-label="main navigation" id="globaltoc">
               {% block menu %}
               {% set toctree = toctree(maxdepth=theme_globaltoc_depth|toint, collapse=theme_collapse_navigation, includehidden=theme_globaltoc_includehidden|tobool) %}
@@ -141,6 +136,11 @@
               {% endif %}
               {% endblock %}
             </div>
+            {% if pagename != 'index' %}
+            <div class="edit-repo-wrapper">
+              {% include "editrepo.html" %}
+            </div>
+            {% endif %}
             <aside class="help col-12">
               <div class="title">
                 Getting help

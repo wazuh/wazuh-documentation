@@ -2235,7 +2235,7 @@ ul#breadcrumbs a {
 }
 
 .edit-repo {
-  font-size: 0.87rem;
+  font-size: 0.75rem;
   width: 100%;
   padding: 8px 15px;
 }
@@ -2889,7 +2889,12 @@ div.highlight pre {
 
       #globaltoc > ul {
         border-top: 1px solid rgba(0, 169, 229, 0.2);
-        padding: 10px 0;
+        border-bottom: 1px solid #00a9e533;
+        padding: 10px 0
+      }
+
+      .index #globaltoc > ul {
+        border-bottom: 1px solid transparent;
       }
 
 			aside.help {
@@ -3009,7 +3014,7 @@ div.highlight pre {
       .version-zone {
         padding-right: 0;
       }
-      
+
       .index .globaltoc .toctree-l1 > a {
         display: block;
       }
