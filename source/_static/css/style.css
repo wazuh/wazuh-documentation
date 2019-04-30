@@ -71,7 +71,7 @@ th {
 .central-page-area a img {
   width: auto!important;
   max-width: 100%;
-  margin-bottom: 0.5em;
+  margin-bottom: 1rem;
 }
 
 .no-latest-notice {
@@ -1516,7 +1516,7 @@ a[data-lightbox] img {
 }
 
 .central-page-area #main-content {
-  margin-bottom: 1em;
+  margin-bottom: 1.5rem;
 	-webkit-transition: max-width 0.3s, -webkit-box-flex 0.3s;
 	transition: max-width 0.3s, -webkit-box-flex 0.3s;
 	transition: max-width 0.3s, flex 0.3s;
@@ -1548,12 +1548,13 @@ a[data-lightbox] img {
 
 h1 {
   color: #ffffff;
-  margin: 0.5em auto;
+  margin: 1.5rem auto;
   font-size: 32px;
 }
 
 #search-results h2 {
-  margin-top: 1em;
+  margin-top: 1.5rem;
+  margin-bottom: 1.3rem;
 }
 
 h4, h5, h6 {
@@ -1778,27 +1779,21 @@ h1, h2, h3, h4, h5, h6,
   color: #333333;
 }
 
-h1 {
-  margin: 1em 0 0.5em 0;
-}
-
 h2, h3, h4, h5, h6,
 #page .topic .topic-title {
-  margin: 0.2em 0 0.5em 0;
+  margin: 0.1rem 0 0.8rem 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
   width: auto;
 }
 
-
-
 #page .topic .topic-title {
 	width: 100%;
 }
 
 h1 {
-  font-size: 32px;
+  font-size: 28px;
 }
 
 h2 {
@@ -1830,13 +1825,13 @@ hr {
 
 p {
   text-align: left;
-  margin-bottom: 1.5em;
+  margin-bottom: 1rem;
   line-height: 1.4;
 }
 
 ul {
   text-align: left;
-  margin-bottom: 1.5em;
+  margin-bottom: 1rem;
 }
 
 li {
@@ -1891,13 +1886,13 @@ label {
 
 blockquote {
   background-color: #fff;
-  margin-bottom: 1.5em;
+  margin-bottom: 1rem;
   overflow: auto;
   padding-left: 1em;
 }
 
 .admonition {
-  margin-bottom: 1.5em;
+  margin-bottom: 1.3rem;
   overflow: auto;
 }
 
@@ -2251,7 +2246,7 @@ ul#breadcrumbs a {
 
 [class*="highlight-"] {
   overflow: auto;
-  margin-bottom: 2em;
+  margin-bottom: 1.5rem;
   background-color: #f4f4f4;
 }
 
@@ -3061,7 +3056,7 @@ div.highlight pre {
       }
 
       #welcome-to-wazuh .topic {
-        margin-bottom: 1em;
+        margin-bottom: 1rem;
       }
 
       #welcome-to-wazuh .topic p.topic-title + p{
