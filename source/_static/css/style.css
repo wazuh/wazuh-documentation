@@ -347,7 +347,7 @@ header .menuweb-bar .menu-item a {
 }
 
 footer {
-  font-size: 0.75rem;
+  font-size: 0.88rem;
   background-color: #0094ce;
   font-family: 'Open Sans', sans-serif;
   padding-bottom: 30px;
@@ -438,19 +438,19 @@ footer a:focus .fa {
 ul.simple {
   list-style: url('../img/list-arrow.svg');
   list-style-position: outside;
-  font-size: 0.88rem;
+  font-size: 1rem;
   margin-left: 0.9em;
 }
 
 li.toctree-l1 > a {
 	position: relative;
-  font-size: 0.88rem;
+  font-size: 1rem;
 }
 
 li.toctree-l2 > a,
 li.toctree-l3 > a,
 li.toctree-l4 > a {
-  font-size: 0.75rem;
+  font-size: 0.88rem;
   position: relative;
 }
 
@@ -508,7 +508,7 @@ ul li.toctree-l1 a.current.reference.internal:after {
 .globaltoc li.toctree-l2 > a,
 .globaltoc li.toctree-l3 > a,
 .globaltoc li.toctree-l4 > a {
-	padding-left: 0.75rem;
+	padding-left: 0.88rem;
 }
 
 .globaltoc li.toctree-l1.current > a,
@@ -538,7 +538,7 @@ ul li.toctree-l1 a.current.reference.internal:after {
 
 .globaltoc li.toctree-l1 li.toctree-l4 > a.leaf.current::before,
 .globaltoc li.toctree-l1 li.toctree-l4.current > .leaf::before {
-  top: 0.75em;
+  top: 0.88em;
   left: 3em
 }
 
@@ -571,88 +571,6 @@ main li.toctree-l1 a {
 
 aside.help {
 	display: none;
-}
-
-#accordion-capabilities .collapse:not(.show) {
-  display: block;
-}
-
-#accordion-capabilities {
-	margin-bottom: 2em;
-}
-
-#accordion-capabilities .card {
-	border-radius: 0;
-	border: none;
-	margin-bottom: 2px;
-}
-
-#accordion-capabilities .card-header {
-	position: relative;
-}
-
-#accordion-capabilities .card-header,
-#accordion-capabilities .card-body {
-	padding: 0;
-	border: none;
-}
-
-#accordion-capabilities .card-header .btn-accordion,
-#accordion-capabilities .card-header .capability-title {
-	font-family: 'Montserrat', sans-serif;
-  font-size: 18px;
-	display: block;
-	width: 100%;
-	text-align: left;
-}
-
-#accordion-capabilities .card-header .btn-accordion {
-	font-size: 18px;
-	background-color: #f4f4f4;
-  color: #333333;
-	border-radius: 0;
-	padding: 0.5rem 0.85rem;
-}
-
-#accordion-capabilities .card-header .btn-accordion:focus {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-}
-
-#accordion-capabilities .card-header .capability-title {
-	font-size: 1.2rem;
-	background-color: #ffffff;
-  color: #333333;
-	padding: 0.5rem 0;
-}
-
-#accordion-capabilities .card-header .btn-accordion:after {
-	color: #333333;
-  content: '\f106';
-  display: -webkit-inline-box;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  font: normal normal normal 1.5em/.5 FontAwesome;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 15px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-#accordion-capabilities .card-header .btn-accordion.collapsed:after {
-	content: '\f107';
-}
-
-#accordion-capabilities .card-text {
-	padding-top: 15px;
-}
-
-#accordion-capabilities .card-image img {
-	max-width: 450px;
-  margin: 3px auto 0 auto;
 }
 
 .index h2,
@@ -1792,6 +1710,14 @@ blockquote pre {
   max-width: 100%;
 }
 
+#welcome-to-wazuh .topic {
+  margin-left: 15px;
+}
+
+#welcome-to-wazuh .topic p.topic-title + p{
+  padding-right: 15px;
+}
+
 #welcome-to-wazuh a[data-lightbox] {
   padding: 0 4px;
 }
@@ -1846,6 +1772,10 @@ h1, h2, h3, h4, h5, h6,
   text-align: left;
   line-height: 1.2;
   display: inline-block;
+}
+
+#page .topic .topic-title{
+  color: #333333;
 }
 
 h1 {
@@ -2181,7 +2111,7 @@ footer a {
 body {
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
-  font-size: 0.88rem;
+  font-size: 1rem;
   color: #333333;
   /* padding-top: 60px; */
   line-height: 1.4;
@@ -2533,9 +2463,12 @@ div.highlight pre {
         font-size: 30px;
       }
 
-      h3,
-      #page .topic .topic-title {
+      h3{
         font-size: 26px;
+      }
+
+      #page .topic .topic-title {
+        font-size: 20px;
       }
 
       h4 {
@@ -3130,9 +3063,8 @@ div.highlight pre {
         margin-bottom: 1em;
       }
 
-      #welcome-to-wazuh .topic:nth-of-type(even) {
-        padding-left: 15px;
-        padding-right: 0;
+      #welcome-to-wazuh .topic p.topic-title + p{
+        margin-top: 10px;
       }
 
       #welcome-to-wazuh .topic .topic-title:before {
@@ -3252,12 +3184,12 @@ div.highlight pre {
 
           #welcome-to-wazuh .topic,
           #welcome-to-wazuh .topic:nth-of-type(even) {
-            padding-left: 60px;
+            padding-left: 45px;
             position: relative;
           }
 
           #welcome-to-wazuh .topic .topic-title:before {
-            font-size: 2.5rem;
+            font-size: 30px;
             position: absolute;
             left: 10px;
             top: 3px;
