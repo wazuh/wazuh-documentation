@@ -37,10 +37,6 @@ Below it shown the compatibility table for the Wazuh manager.
 |       Fedora (>= 22)            |       ✓          |   ✓    |   ✓    |
 +---------------------------------+------------------+--------+--------+
 
-.. note::
-
-    - The cluster is available since Wazuh v3.0 and it doesn't work on CentOS 5 / RHEL 5. 
-
 
 Wazuh Agent
 ^^^^^^^^^^^
