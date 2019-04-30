@@ -59,7 +59,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="192.168.1.2" apt-get install wazuh-agent  
 
-    .. note:: See the following document for additional registering and configuration options: :doc:`Automated registering and configuration variables <automated_reg-config_variables>`.      
+    .. note:: See the following document for additional registering and configuration options: :doc:`automated registering and configuration variables <automated_reg-config_variables>`.      
 
 2. (Optional) Disable the Wazuh updates:
 
