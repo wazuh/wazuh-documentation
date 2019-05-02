@@ -355,7 +355,7 @@ ignore_binaries
 
 This specifies to ignore binary files, testing if the file is UTF8 or ASCII.
 
-If this is set to **yes** and the file is, for example, a binary file, it will be discarted.
+If this is set to **yes** and the file is, for example, a binary file, it will be discarded.
 
 +--------------------+-----------+
 | **Default value**  | n/a       |
@@ -372,12 +372,12 @@ If this is set to **yes** and the file is, for example, a binary file, it will b
   </localfile>
 
 .. note::
-  On Windows agents it will also check if the file is encoded with UCS-2 LE BOM or UCS-2 BE BOM.
+  On Windows agents, it will also check if the file is encoded with UCS-2 LE BOM or UCS-2 BE BOM.
 
 age
 ^^^
 
-This specifies to read only files that have been modified before the specified age.
+This specifies to read-only files that have been modified before the specified age.
 
 For example, if the age is set to 1 day, all files that have not been modified since 1 day will be ignored.
 
@@ -398,7 +398,7 @@ For example, if the age is set to 1 day, all files that have not been modified s
 exclude
 ^^^^^^^
 
-This indicates the location of wild-carded group of logs to be excluded.
+This indicates the location of a wild-carded group of logs to be excluded.
 
 For example, we may want to read all the files from a directory, but exclude those files whose name starts with an `e`.
 
