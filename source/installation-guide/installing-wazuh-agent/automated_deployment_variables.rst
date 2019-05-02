@@ -25,7 +25,7 @@ Below you can find a table describing the variables used by Wazuh installers, an
 |                       |                                                                                                                                    |
 |                       |  See `server-protocol <../../user-manual/reference/ossec-conf/client.html#server-protocol>`_.                                      |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------+
-|   WAZUH_AUTHD_SERVER  |  Specifies the Wazuh registration server, used for the agent registration.                                                                                       |
+|   WAZUH_AUTHD_SERVER  |  Specifies the Wazuh registration server, used for the agent registration.                                                         |
 |                       |                                                                                                                                    |
 |                       |  See `agent-auth options <../../user-manual/reference/tools/agent-auth.html>`_.                                                    |
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------------+
