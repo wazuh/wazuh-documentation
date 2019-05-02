@@ -87,7 +87,7 @@ Examples:
 
 .. code-block:: console
 
-     # WAZUH_MANAGER_IP="192.168.1.2" WAZUH_AUTHD_SERVER="192.168.1.2" WAZUH_AGENT_NAME="AIX-5.3" \
+     # WAZUH_MANAGER_IP="192.168.1.2" WAZUH_AUTHD_SERVER="192.168.1.2" WAZUH_AGENT_NAME="aix-agent" \
           WAZUH_CERTIFICATE="rootCA.pem" rpm -i wazuh-agent-3.9.0-1.aix.ppc.rpm
 
 * Registration with protocol (using `apt-get`):
