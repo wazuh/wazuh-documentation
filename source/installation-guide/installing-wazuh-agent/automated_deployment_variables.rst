@@ -5,9 +5,9 @@
 Automated deployment variables
 ==============================
 
-Traditionally, if we want to have a new Wazuh Agent reporting to a Wazuh Manager we had to follow three steps: installation, registration, and configuration.  We designed an automated deployment embedded in the installation stage. The three steps previously mentioned became only one command line.  By using declared variables, the automated deployment process will take those variables and it will make convenient changes in ossec.conf and in the registration run. 
+For an agent to be fully deployed and connected to the Wazuh server it needs to be installed, registered and configured. To make the process simple, the installers can use variables that allow automatic registration and configuration. 
 
-In the table below, you'll find all the options available for the automated deployment included in the installation. 
+Below you can find a table describing the variables used by Wazuh installers, and a few examples on how to use them.
 
 
 +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
