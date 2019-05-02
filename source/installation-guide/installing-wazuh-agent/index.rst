@@ -7,10 +7,12 @@ Installing Wazuh agent
 
 The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities:
 
-- log and data collection,
-- file integrity monitoring,
-- rootkit and malware detection, and
-- security policy monitoring.
+- Log and data collection
+- File integrity monitoring
+- Rootkit and malware detection
+- Security policy monitoring.
+- Configuration assestments
+- Software inventory
 
 In addition, it communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
