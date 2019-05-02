@@ -18,7 +18,7 @@ Wazuh core
 
 **Automated deployment**
 
-Agent installers support now :ref:`environment variables' <automated_deployment_variables>` which allow deploy an agent in a simple step.
+Agent installers support now :ref:`environment variables <automated_deployment_variables>` which allow deploy an agent in a simple step.
 
 Here we can see an example for CentOS/RHEL:
 
@@ -108,7 +108,7 @@ Wazuh API
 
 - Manager configuration file is now editable.
 - Creation, edition and removal of rules, decoders and CDB Lists is now supported.
-- Multiple and simultaneous cluster nodes restart in a cluster environment.
+- Multiple nodes restart.
 - SCA endpoints for policies, scan and checks.
 
 .. code-block:: js
@@ -215,6 +215,7 @@ For those cases you want to see a visualization bigger than it is, you can click
 - Added a cron job for fetching missing fields of all valid index patterns, also merging dynamic fields every time an index pattern is refreshed by the app.
 - Added a new way to read manager logs.
 - Added resizable columns by dragging in tables.
+- Increase 80x ``remoted`` daemon performance for TCP connections.
 
 Wazuh ruleset
 -------------
