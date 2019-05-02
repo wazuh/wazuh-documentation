@@ -102,6 +102,7 @@ Added *-t* and *-c* options for the Wazuh cluster daemon. Those options allow th
 - Vulnerability detector module now checks that the severity of the alerts has been unified and it also checks if the database is empty before starting a new scan.
 - Labels starting with ``_`` are now reserved for internal use only.
 - Windows installer now load the corresponding configuration file based on the system version.
+- Increase 80x ``remoted`` daemon performance for TCP connections.
 
 Wazuh API
 ---------
@@ -215,7 +216,6 @@ For those cases you want to see a visualization bigger than it is, you can click
 - Added a cron job for fetching missing fields of all valid index patterns, also merging dynamic fields every time an index pattern is refreshed by the app.
 - Added a new way to read manager logs.
 - Added resizable columns by dragging in tables.
-- Increase 80x ``remoted`` daemon performance for TCP connections.
 
 Wazuh ruleset
 -------------
