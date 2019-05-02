@@ -2,7 +2,7 @@
 
 .. _release_3_9_0:
 
-3.9.0 Release Notes
+3.9.0 Release notes
 ===================
 
 This section shows the most relevant improvements and fixes in version 3.9.0. More details about these changes are provided in each component changelog:
