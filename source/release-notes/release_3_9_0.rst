@@ -13,6 +13,19 @@ This section shows the most relevant improvements and fixes in version 3.9.0. Mo
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/3.9-6.7/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/3.9/CHANGELOG.md>`_
 
+Automated deployment
+--------------------
+
+From 3.9.0, Wazuh introduces a new way to deploy and to register Wazuh agents, now the installers can read environment variables which allows a one-line command for agent installation and registration.
+
+Here we can see an example for CentOS/RHEL:
+
+.. code-block:: console
+
+    $ WAZUH_MANAGER_IP="10.0.0.2"  yum install wazuh-agent
+
+The above example will install a Wazuh agent and will configure your agent for registering against a Wazuh manager which address is 10.0.0.2, then your agent will be reporting with no more steps needed.
+
 Wazuh core
 ----------
 
