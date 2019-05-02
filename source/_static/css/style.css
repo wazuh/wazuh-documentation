@@ -48,7 +48,7 @@ th {
   color: #fff;
 }
 
-.no-bullets li:before {
+.no-bullets li::before {
   content: none !important;
 }
 
@@ -324,7 +324,11 @@ header .menuweb-bar .menu-item a {
 }
 
 #capabilities > p {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+#capabilities .capab{
+  margin-top: 30px;
 }
 
 .content-card {
@@ -494,8 +498,8 @@ ul li.toctree-l1 .current > .leaf {
   border-left: 3px solid #00a9e5;
 }
 
-ul li.toctree-l1 a.current.reference.internal:before,
-ul li.toctree-l1 a.current.reference.internal:after {
+ul li.toctree-l1 a.current.reference.internal::before,
+ul li.toctree-l1 a.current.reference.internal::after {
   color: #00a9e5;
 }
 
@@ -877,9 +881,9 @@ footer a:active,
   bottom: 0;
 }
 
-.btn-close .x:before,
-.btn-close .x:after,
-.navbar-toggler.btn-close:before {
+.btn-close .x::before,
+.btn-close .x::after,
+.navbar-toggler.btn-close::before {
   content: '';
   display: block;
   background-color: #00a9e5;
@@ -894,31 +898,31 @@ footer a:active,
   opacity: .7;
 }
 
-.search_main .searchform .search-filter > .btn-close .x:before,
-.search_main .searchform .search-filter > .btn-close .x:after {
+.search_main .searchform .search-filter > .btn-close .x::before,
+.search_main .searchform .search-filter > .btn-close .x::after {
   width: 13px;
   left: 8px;
   height: 2px;
   background-color: #ffffff;
 }
 
-.search_main .searchform .search-filter > .btn-close .x:before {
+.search_main .searchform .search-filter > .btn-close .x::before {
   top: 9px;
 }
 
-.search_main .searchform .search-filter > .btn-close .x:after {
+.search_main .searchform .search-filter > .btn-close .x::after {
   top: 18px;
 }
 
-.btn-close .x:before {
+.btn-close .x::before {
   top: 5px;
 }
 
-.btn-close .x:after {
+.btn-close .x::after {
   top: 19px;
 }
 
-.collapsed.btn-close .x:before {
+.collapsed.btn-close .x::before {
   -webkit-transform: rotate(0);
           transform: rotate(0);
   width: 17px;
@@ -926,7 +930,7 @@ footer a:active,
   transition: all ease .4s;
 }
 
-:not(.collapsed).btn-close .x:before {
+:not(.collapsed).btn-close .x::before {
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
   width: 22px;
@@ -937,7 +941,7 @@ footer a:active,
   transition: all ease .4s;
 }
 
-.collapsed.btn-close .x:after {
+.collapsed.btn-close .x::after {
   -webkit-transform: rotate(0);
           transform: rotate(0);
   width: 17px;
@@ -945,7 +949,7 @@ footer a:active,
   transition: all ease .4s;
 }
 
-:not(.collapsed).btn-close .x:after {
+:not(.collapsed).btn-close .x::after {
   -webkit-transform: rotate(-45deg);
           transform: rotate(-45deg);
   width: 22px;
@@ -1179,13 +1183,13 @@ footer .contact-info .fa-paper-plane-o {
   font-size: 25px;
 }
 
-.navbar-toggler.btn-close:not(.collapsed):before {
+.navbar-toggler.btn-close:not(.collapsed)::before {
   opacity: 0;
   -webkit-transition: all ease .4s;
   transition: all ease .4s;
 }
 
-.navbar-toggler.btn-close.collapsed:before {
+.navbar-toggler.btn-close.collapsed::before {
   opacity: 1;
   position: absolute;
   top: 12px;
@@ -1323,7 +1327,7 @@ textarea::placeholder {
           padding-inline-end: 0 !important;
 }
 
-.label-box.select:after {
+.label-box.select::after {
   position: absolute;
   top: 15px;
   right: 10px;
@@ -1369,7 +1373,7 @@ select#select-version option {
   color: #333333;
 }
 
-.version:after {
+.version::after {
   position: absolute;
   top: 0.5em;
   right: 10px;
@@ -1711,10 +1715,6 @@ blockquote pre {
   max-width: 100%;
 }
 
-#welcome-to-wazuh .topic {
-  margin-left: 15px;
-}
-
 #welcome-to-wazuh .topic p.topic-title + p{
   padding-right: 15px;
 }
@@ -1732,30 +1732,56 @@ blockquote pre {
   font-family: 'Open Sans', sans-serif;
 }
 
-#welcome-to-wazuh .topic .topic-title:before {
+#welcome-to-wazuh .topic .topic-title::before {
 	display: inline-block;
   font: normal normal normal 1.5rem/1 'wazuh-icons';
   width: 1.3em;
+  font-size: 32px;
+  margin-right: 10px;
   color: #00a9e5;
-  vertical-align: top;
+  vertical-align: middle;
 	font-family: 'wazuh-icons' !important;
   speak: none;
 }
 
-#welcome-to-wazuh .topic:nth-of-type(1) .topic-title:before {
-	content: '\e90e';
+#welcome-to-wazuh .topic.security .topic-title::before {
+	content: '\e901';
 }
 
-#welcome-to-wazuh .topic:nth-of-type(2) .topic-title:before {
+#welcome-to-wazuh .topic.intrusion .topic-title::before {
 	content: '\e910';
 }
 
-#welcome-to-wazuh .topic:nth-of-type(3) .topic-title:before {
-	content: '\e911';
+#welcome-to-wazuh .topic.logdata .topic-title::before {
+  content: '\e912';
 }
 
-#welcome-to-wazuh .topic:nth-of-type(4) .topic-title:before {
+#welcome-to-wazuh .topic.fim .topic-title::before {
+  content: '\e90e';
+}
+
+#welcome-to-wazuh .topic.vulne .topic-title::before {
+	content: '\e91c';
+}
+
+#welcome-to-wazuh .topic.config .topic-title::before {
+	content: '\e907';
+}
+
+#welcome-to-wazuh .topic.incident .topic-title::before {
+	content: '\e91a';
+}
+
+#welcome-to-wazuh .topic.compliance .topic-title::before {
 	content: '\e914';
+}
+
+#welcome-to-wazuh .topic.cloud .topic-title::before {
+	content: '\e904';
+}
+
+#welcome-to-wazuh .topic blockquote{
+  padding-left: 5px;
 }
 
 #search-results .highlighted {
@@ -1802,7 +1828,8 @@ h2 {
 
 h3,
 #page .topic .topic-title {
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 h4 {
@@ -1908,7 +1935,7 @@ p.admonition-title {
 }
 
 p.first.admonition-title::before,
-.no-latest-notice span:before {
+.no-latest-notice span::before {
   display: inline-block;
   font: normal normal normal 1em/.5 FontAwesome;
   width: 12px;
@@ -1933,7 +1960,7 @@ p.first.admonition-title::before,
 }
 
 .warning p.first.admonition-title::before,
-.no-latest-notice span:before {
+.no-latest-notice span::before {
   content: '\f071';
   color: #ffb600;
 }
@@ -2460,10 +2487,6 @@ div.highlight pre {
 
       h3{
         font-size: 26px;
-      }
-
-      #page .topic .topic-title {
-        font-size: 20px;
       }
 
       h4 {
@@ -3063,7 +3086,7 @@ div.highlight pre {
         margin-top: 10px;
       }
 
-      #welcome-to-wazuh .topic .topic-title:before {
+      #welcome-to-wazuh .topic .topic-title::before {
         width: 27px
       }
 
@@ -3184,11 +3207,11 @@ div.highlight pre {
             position: relative;
           }
 
-          #welcome-to-wazuh .topic .topic-title:before {
+          #welcome-to-wazuh .topic .topic-title::before {
             font-size: 30px;
             position: absolute;
             left: 10px;
-            top: 3px;
+            top: -3px;
             width: 50px;
           }
 
