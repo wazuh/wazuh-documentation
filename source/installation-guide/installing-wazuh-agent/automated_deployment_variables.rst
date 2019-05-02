@@ -111,4 +111,4 @@ Examples:
      # launchctl setenv WAZUH_MANAGER_IP "192.168.1.2" WAZUH_AUTHD_SERVER "192.168.1.2" WAZUH_KEY "/var/ossec/etc/sslagent.key" \
           WAZUH_PEM "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
-.. note:: To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <verify-hosts>` section.
+.. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`verify agents with the registration server via SSL <verify-hosts>` section.
