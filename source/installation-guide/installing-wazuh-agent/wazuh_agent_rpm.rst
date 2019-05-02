@@ -7,7 +7,7 @@ Install Wazuh agent with RPM packages
 
 The RPM package is suitable for installation on Red Hat, CentOS and other RPM-based systems.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------
@@ -83,19 +83,34 @@ SUSE 11
 Installing Wazuh agent
 ----------------------
 
-1. On your terminal, install the Wazuh agent as follows:
+1. On your terminal, install the Wazuh agent. You can choose only installation or an installation with a registration / configuration included:
 
-  * Using the ``yum`` package manager:
+  a) Only installation:
+
+     * Using the ``yum`` package manager:
+   
+       .. code-block:: console
+   
+         # yum install wazuh-agent
+   
+     * Using the ``zypper`` package manager:
+   
+       .. code-block:: console
+   
+         # zypper install wazuh-agent
+         
+     .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
+
+  b) Installation with a registration / configuration included:
+
+    You can automate the agent registration and configuration using variables. 
 
     .. code-block:: console
 
-      # yum install wazuh-agent
+      # WAZUH_MANAGER_IP="192.168.1.2" yum install wazuh-agent 
 
-  * Using the ``zypper`` package manager:
+    .. note:: See the following document for additional automated deployment options: :doc:`automated deployment variables <automated_deployment_variables>`.      
 
-    .. code-block:: console
-
-      # zypper install wazuh-agent
 
 2. (Optional) Disable the Wazuh repository:
 
@@ -113,4 +128,3 @@ Installing Wazuh agent
 
       # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
