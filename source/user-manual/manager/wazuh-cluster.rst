@@ -356,19 +356,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.8.2",
+                "version": "3.9.0",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.8.2",
+                "version": "3.9.0",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.8.2",
+                "version": "3.9.0",
                 "type": "master",
                 "name": "node01"
              }
