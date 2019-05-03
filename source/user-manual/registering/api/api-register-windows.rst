@@ -1,9 +1,9 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _windows-simple-registration:
+.. _api-register-windows:
 
-Windows agents
-==============
+Windows hosts
+=============
 
 To register the Windows Agent, you need to start a CMD or a Powershell as **Administrator**. The installation directory of the Wazuh Agent in Windows host depends on the architecture of the host.
 
@@ -12,16 +12,37 @@ To register the Windows Agent, you need to start a CMD or a Powershell as **Admi
 
 This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``.
 
-After that, you can register the agent using ``agent-auth.exe``.
-
-1. On the agent, run the ``agent-auth.exe`` program, using the manager's IP address.
+1. Add the agent to the manager.
 
   .. code-block:: console
 
-    # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m <MANAGER_IP_ADDRESS>
+    # To do
 
+  .. code-block:: json
 
-2. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
+    {
+      "error": 0,
+      "data": {
+          "id": "001",
+          "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
+      }
+    }
+
+2. Import the key using ``manage_agents``:
+
+	  .. code-block:: console
+
+	      # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ
+
+	      Agent information:
+	         ID:001
+	         Name:windows-server
+	         IP Address:any
+
+	      Confirm adding it?(y/n): y
+	      Added.
+
+3. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
 
   In the file ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
 
@@ -34,7 +55,7 @@ After that, you can register the agent using ``agent-auth.exe``.
       </server>
     </client>
 
-3. Start the agent.
+4. Start the agent.
 
 	a) Using Powershell with administrator access:
 

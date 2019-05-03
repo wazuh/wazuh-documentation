@@ -5,63 +5,22 @@
 Using the Wazuh API
 ===================
 
-1. Add the agent to the manager.
+Wazuh API allows to register a Wazuh Agent by running a single requests from the any host. This request will return the **key** for that agent, and then, you **must manually add** this key to the agent using ``manage_agents``. 
 
-  .. code-block:: console
+In this example, we will register a Wazuh Agent in a Wazuh Manager whose IP is ``192.168.1.2``.
 
-    # curl -u foo:bar -k -X POST -d '{"name":"ubuntu-ag","ip":"10.0.0.8"}' -H 'Content-Type:application/json' "https://127.0.0.1:55000/agents?pretty"
+Registering the Agents
+^^^^^^^^^^^^^^^^^^^^^^
 
-  .. code-block:: json
+.. toctree::
+    :maxdepth: 2
 
-    {
-      "error": 0,
-      "data": {
-          "id": "001",
-          "key": "MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM="
-      }
-    }
+    api/api-register-linux-unix
+    api/api-register-windows
+    api/api-register-macos
 
-2. Import the key to the agent:
-
-  .. code-block:: console
-
-      # /var/ossec/bin/manage_agents -i MDAxIE5ld0FnZW50IDEwLjAuMC44IDM0MGQ1NjNkODQyNjcxMWIyYzUzZTE1MGIzYjEyYWVlMTU1ODgxMzVhNDE3MWQ1Y2IzZDY4M2Y0YjA0ZWVjYzM=
-
-  .. warning::
-
-      If you paste the command directly into the terminal, the agent key will be saved in the bash history. Use ``manage_agents`` without arguments or from a script.
-
-3. Edit the Wazuh agent configuration in ``/var/ossec/etc/ossec.conf`` to add the Wazuh manager IP address. In the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
-
-  .. code-block:: xml
-
-    <client>
-      <server>
-        <address>MANAGER_IP</address>
-        ...
-      </server>
-    </client>
-
-  Or using ``sed`` to replace it with the Wazuh manager IP, using ``10.0.0.4`` as an example IP:
-
-  .. code-block:: console
-
-    # sed -i 's/MANAGER_IP/10.0.0.4/g' /var/ossec/etc/ossec.conf
-
-
-4. Restart the agent.
-
-  a. For Systemd:
-
-    .. code-block:: console
-
-      # systemctl restart wazuh-agent
-
-  b. For SysV Init:
-
-    .. code-block:: console
-
-      # service wazuh-agent restart
+Scripts to register the agents automatically
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We have prepared a few scripts in different programming languages to help with the task of registering an agent with the API:
 

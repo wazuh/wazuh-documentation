@@ -11,6 +11,8 @@ To verify the Wazuh Agents using a SSL, it is needed to create a SSL certificate
     :align: center
     :width: 100%
 
+.. _agent-verification-without-host-validation:
+
 Enable Agent verification without host validation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -53,6 +55,8 @@ In this example, we are going to create a certificate for Wazuh Agents without s
     .. code-block:: console
 
       # service wazuh-manager restart
+
+.. _agent-verification-with-host-validation:
 
 Enable Agent verification with host validation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

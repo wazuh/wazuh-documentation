@@ -2,8 +2,8 @@
 
 .. _host-verification-registration:
 
-Host verification using SSL
-===========================
+Registration service with host verification
+===========================================
 
 Using verification with an SSL key certificate is really useful to check if connections between agents and managers are correct. This way, the user avoids the mistake of connecting to a different manager or agent.
 
