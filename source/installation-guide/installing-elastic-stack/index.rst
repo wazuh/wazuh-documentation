@@ -41,4 +41,4 @@ There are some related additional configurations that can be applied:
    kibana_ssl
    elastic_tuning
    searchguard
-   legacy/index
+
