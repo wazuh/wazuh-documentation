@@ -1,8 +1,8 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _release_3_7_0:
 
-3.7.0 Release Notes
+3.7.0 Release notes
 ===================
 
 This section shows the most relevant improvements and fixes in version 3.7.0. More details about these changes are provided in each component changelog:

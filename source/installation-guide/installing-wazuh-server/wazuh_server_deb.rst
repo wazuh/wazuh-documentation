@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wazuh_server_deb:
 
@@ -7,7 +7,7 @@ Install Wazuh server with DEB packages
 
 For Debian/Ubuntu platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------
@@ -56,17 +56,17 @@ On your terminal, install the Wazuh manager:
 
 Once the process is completed, you can check the service status with:
 
-  a) For Systemd:
+  * For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl status wazuh-manager
+      # systemctl status wazuh-manager
 
-  b) For SysV Init:
+  * For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # service wazuh-manager status
+      # service wazuh-manager status
 
 Installing the Wazuh API
 ------------------------
@@ -87,55 +87,30 @@ Installing the Wazuh API
 
     # apt-get install nodejs
 
-2. Python >= 2.7 is required in order to run the API. It is installed by default or included in the official repositories in most Linux distributions.
-
-   To determine if the python version on your system is lower than 2.7, you can run the following:
-
-  .. code-block:: console
-
-    # python --version
-
-   It is possible to set a custom Python path for the API in ``/var/ossec/api/configuration/config.js``, in case the stock version of Python in your distro is too old:
-
-  .. code-block:: javascript
-
-    config.python = [
-        // Default installation
-        {
-            bin: "python",
-            lib: ""
-        },
-        // Package 'python27' for CentOS 6
-        {
-            bin: "/opt/rh/python27/root/usr/bin/python",
-            lib: "/opt/rh/python27/root/usr/lib64"
-        }
-    ];
-
-3. Install the Wazuh API. It will update NodeJS if it is required:
+2. Install the Wazuh API. It will update NodeJS if it is required:
 
   .. code-block:: console
 
     # apt-get install wazuh-api
 
-4. Once the process is complete, you can check the service status with:
+3. Once the process is complete, you can check the service status with:
 
-  a) For Systemd:
+  * For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl status wazuh-api
+      # systemctl status wazuh-api
 
-  b) For SysV Init:
+  * For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # service wazuh-api status
+      # service wazuh-api status
 
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
 
-5. (Optional) Disable the Wazuh updates:
+4. (Optional) Disable the Wazuh updates:
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
@@ -175,7 +150,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # apt-get install filebeat=6.5.4
+    # apt-get install filebeat=6.7.1
 
 3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
@@ -193,20 +168,20 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 5. Enable and start the Filebeat service:
 
-  a) For Systemd:
+  * For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl daemon-reload
-    # systemctl enable filebeat.service
-    # systemctl start filebeat.service
+      # systemctl daemon-reload
+      # systemctl enable filebeat.service
+      # systemctl start filebeat.service
 
-  b) For SysV Init:
+  * For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # update-rc.d filebeat defaults 95 10
-    # service filebeat start
+      # update-rc.d filebeat defaults 95 10
+      # service filebeat start
 
 6. (Optional) Disable the Elasticsearch updates:
 

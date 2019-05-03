@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _api_examples:
 
@@ -21,7 +21,7 @@ cURL is a command-line tool for sending http/https requests and commands. It is 
        "error": 0,
        "data": {
           "msg": "Welcome to Wazuh HIDS API",
-          "api_version": "v3.8.2",
+          "api_version": "v3.9.0",
           "hostname": "wazuh",
           "timestamp": "Mon Dec 03 2018 03:00:51 GMT+0000 (UTC)"
        }
@@ -117,7 +117,7 @@ Output:
                 "version": "18.04 LTS"
             },
             "status": "Active",
-            "version": "Wazuh v3.8.2"
+            "version": "Wazuh v3.9.0"
         },
         "error": 0
     }

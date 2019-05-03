@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _docker_containers_activity:
 
@@ -21,7 +21,12 @@ The following dependencies are required by the wodle:
 Configuration
 ^^^^^^^^^^^^^^
 
-The configuration is pretty straightforward, it is only necessary to enable the wodle. It will start a new thread to listen Docker events.
+.. note::
+
+    In the following examples, the configuration is done in the manager instance (*Docker host*) that collects the events sent from the agents (*Docker containers*).
+
+
+The configuration is pretty straightforward, it is only necessary to enable the ``wodle`` in the manager instance in the ``/var/ossec/etc/ossec.conf`` file. It will start a new thread to listen to Docker events.
 
 .. code-block:: xml
 
@@ -29,6 +34,20 @@ The configuration is pretty straightforward, it is only necessary to enable the 
         <disabled>no</disabled>
     </wodle>
 
+
+Then, restart the service:
+
+    a. For Systemd:
+
+        .. code-block:: console
+
+            # systemctl restart wazuh-manager
+
+     b. For SysV Init:
+
+        .. code-block:: console
+
+            # service wazuh-manager restart
 
 Use cases
 ^^^^^^^^^

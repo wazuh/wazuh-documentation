@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _agent_upgrade:
 
@@ -33,7 +33,7 @@ The agent_upgrade program allows you to list outdated agents and upgrade them.
 +--------------------------------------------+---------------------------------------------------------+
 | **-t TIMEOUT, --timeout TIMEOUT**          | Timeout where the agent cannot restart while updating.  |
 +--------------------------------------------+---------------------------------------------------------+
-| **-c CHUNK_SIZE, --chunk_size CHUNK_SIZE** | Chunk size sending WPK file.                            |
+| **-c CHUNK_SIZE, --chunk_size CHUNK_SIZE** | Chunk size sending WPK file. Allowed values: [1 - 64000]|
 +--------------------------------------------+---------------------------------------------------------+
 
 .. note:: By default, the timeout will be the maximum allowed by the agent with the ``execd.max_restart_lock`` option in :doc:`internal_options.conf<../internal-options>`.

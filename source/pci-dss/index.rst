@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _pci_dss:
 
@@ -12,8 +12,7 @@ The **Payment Card Industry Data Security Standard (PCI DSS)** is a proprietary 
 
 Wazuh helps to implement PCI DSS by performing log analysis, file integrity checking, policy monitoring, intrusion detection, real-time alerting and active response. This guide explains how these capabilities help with each of the standard requirements:
 
-* `Wazuh for PCI DSS Guide (PDF) <http://ossec.wazuh.com/ruleset/PCI_Guide.pdf>`_
-* `Wazuh for PCI DSS Guide (Excel) <http://ossec.wazuh.com/ruleset/PCI_Guide.xlsx>`_
+* `Wazuh for PCI DSS Guide (PDF) <https://wazuh.com/resources/Wazuh_PCI_DSS_Guide.pdf>`_
 
 In the following section, we will elaborate on some specific use cases. They explain how to use Wazuh capabilities to meet the standard requirements.
 

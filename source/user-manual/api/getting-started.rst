@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _api_getting_started:
 
@@ -33,7 +33,7 @@ Use the cURL command to send a *request* to confirm that everything is working a
         "error": 0,
         "data": {
             "msg": "Welcome to Wazuh HIDS API",
-            "api_version": "v3.8.2",
+            "api_version": "v3.9.0",
             "hostname": "wazuh",
             "timestamp": "Mon Dec 03 2018 00:36:13 GMT+0000 (UTC)"
         }
@@ -73,7 +73,7 @@ Here are some of the basic concepts related to making API requests and understan
             "error":0,
             "data":{
                 "msg":"Welcome to Wazuh HIDS API",
-                "api_version":"v3.8.2",
+                "api_version":"v3.9.0",
                 "hostname":"wazuh",
                 "timestamp":"Mon Dec 03 2018 00:37:50 GMT+0000 (UTC)"
             }
@@ -384,7 +384,7 @@ This enumerates **active** agents:
                 "ip": "192.168.185.7",
                 "node_name": "node01",
                 "dateAdd": "2018-08-02 16:52:04",
-                "version": "Wazuh v3.8.2",
+                "version": "Wazuh v3.9.0",
                 "key": "ac7b7eddf95d65374cb82003024096effa8d90789d447805c375427cb62c75a2",
                 "manager_host": "wazuh",
                 "lastKeepAlive": "2018-08-03 01:27:33",

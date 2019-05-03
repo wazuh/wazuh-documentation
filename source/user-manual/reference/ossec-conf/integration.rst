@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_integration:
 
@@ -88,20 +88,20 @@ This filters alerts by rule ID.
 group
 ^^^^^
 
-This filters alerts by rule group. For the VirusTotal integration, only rules from the `syscheck` group are available. Follows the `OS_Regex Syntax`_.
+This filters alerts by rule group. For the VirusTotal integration, only rules from the `syscheck` group are available.
 
-+--------------------+---------------------------------------------------------------------------------------------+
-| **Default value**  | n/a                                                                                         |
-+--------------------+---------------------------------------------------------------------------------------------+
-| **Allowed values** | Any rule group is allowed. Multiple groups should be separated with a pipe character (“|”). |
-+--------------------+---------------------------------------------------------------------------------------------+
++--------------------+-------------------------------------------------+
+| **Default value**  | n/a                                             |
++--------------------+-------------------------------------------------+
+| **Allowed values** | Any rule group or comma-separated rule groups.  |
++--------------------+-------------------------------------------------+
 
 event_location
 ^^^^^^^^^^^^^^
 
 This filters alerts by where the event originated. Follows the `OS_Regex Syntax`_.
 
-.. _`OS_Regex Syntax`: http://ossec-docs.readthedocs.org/en/latest/syntax/regex.html
+.. _`OS_Regex Syntax`: https://documentation.wazuh.com/current/user-manual/ruleset/ruleset-xml-syntax/regex.html
 
 +--------------------+-----------------------------------------------------------+
 | **Default value**  | n/a                                                       |

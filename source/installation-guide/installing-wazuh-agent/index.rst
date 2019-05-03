@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _installation_agents:
 
@@ -7,10 +7,12 @@ Installing Wazuh agent
 
 The Wazuh agent runs on the hosts that you want to monitor. It is multi-platform and provides the following capabilities:
 
-- log and data collection,
-- file integrity monitoring,
-- rootkit and malware detection, and
-- security policy monitoring.
+- Log and data collection
+- File integrity monitoring
+- Rootkit and malware detection
+- Security policy monitoring.
+- Configuration assessments
+- Software inventory
 
 In addition, it communicates with the Wazuh manager, sending data in near real-time through an encrypted and authenticated channel.
 
@@ -19,9 +21,7 @@ There are several options to install a Wazuh agent, depending on the operating s
 +-------------------------------------------------+--------------------------------------------------+
 | Type                                            | Description                                      |
 +=================================================+==================================================+
-| :doc:`RPM packages <wazuh_agent_rpm>`           | Install Wazuh agents on CentOS/RHEL/Fedora.      |
-+-------------------------------------------------+--------------------------------------------------+
-| :doc:`DEB packages <wazuh_agent_deb>`           | Install Wazuh agents on Debian/Ubuntu.           |
+| :doc:`Linux packages <wazuh_agent_rpm>`         | Install Wazuh agents on Linux.                   |
 +-------------------------------------------------+--------------------------------------------------+
 | :doc:`Windows installer <wazuh_agent_windows>`  | Install Wazuh agents on Windows.                 |
 +-------------------------------------------------+--------------------------------------------------+
@@ -42,11 +42,11 @@ There are several options to install a Wazuh agent, depending on the operating s
     :hidden:
     :maxdepth: 2
 
-    wazuh_agent_rpm
-    wazuh_agent_deb
+    wazuh_agent_linux
     wazuh_agent_windows
     wazuh_agent_macos
     wazuh_agent_solaris
     wazuh_agent_hpux
     wazuh_agent_aix
     wazuh_agent_sources
+    automated_deployment_variables

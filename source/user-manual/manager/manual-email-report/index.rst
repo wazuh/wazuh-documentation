@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _manual_email_report:
 
@@ -49,7 +49,7 @@ In order to configure Wazuh to send email alerts, the email settings must be con
 
 To see all of the available email configuration options, go to the :ref:`global section <reference_ossec_global>`.
 
-Once the above has been configured, the ``email_alert_level`` needs to be set to the minimum alert level that will trigger an email. By default, this level is set to 7.
+Once the above has been configured, the ``email_alert_level`` needs to be set to the minimum alert level that will trigger an email. By default, this level is set to 12.
 
 ::
 
@@ -68,13 +68,13 @@ a) For Systemd:
 
 .. code-block:: console
 
-  # systemctl status wazuh-manager
+  # systemctl restart wazuh-manager
 
 b) For SysV Init:
 
 .. code-block:: console
 
-  # service wazuh-manager status
+  # service wazuh-manager restart
 
 
 .. warning::
@@ -142,15 +142,15 @@ Email alerts can be configured to send an email based on one or more rule groups
 
  <email_alerts>
    <email_to>you@example.com</email_to>
-   <group>pci_dss_10.6.1</group>
+   <group>pci_dss_10.6.1,</group>
  </email_alerts>
 
 This will send an alert when any rule that is part of the ``pci_dss_10.6.1`` group is triggered on any Wazuh monitored device.
 
-Multiples options and multiples email
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Multiple options and multiple emails
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-This example shows capability of email alerts can be.  Email alerts can be to be sent to multiple email addresses, each with it's own unique criteria:
+This example shows the email alerts capabilities. Email alerts can be sent to multiple email addresses, each one with unique criteria:
 
 ::
 

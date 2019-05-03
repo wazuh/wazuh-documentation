@@ -1,9 +1,10 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_wazuh_agent_class:
 
 Wazuh agent class
 =================
+
 $ossec_active_response
   Allows active response on this host.
 

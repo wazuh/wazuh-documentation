@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _ansible-wazuh-manager:
 
@@ -13,7 +13,7 @@ This role will install and configure Wazuh Manager and Wazuh API, there are seve
 - **mail_smtp_server:** SMTP server to be used by email notifications ( defaults: ``localhost``)
 - **mail_from:** email notification sender ( defaults: ``ossec@example.com``)
 
-By creating a YAML file ``wazuh-manager.yml`` you can be set the usage of this role:
+By creating a YAML file ``wazuh-manager.yml`` you can specify the usage of this role:
 
 .. code-block:: yaml
 
@@ -22,7 +22,7 @@ By creating a YAML file ``wazuh-manager.yml`` you can be set the usage of this r
       - ansible-wazuh-manager
       - ansible-role-filebeat
 
-Setting the variables on a separate YAML file is recommended when configuring the installation. For this example we used: ``vars-production.yml``:
+Setting the variables in a separate YAML file is recommended when configuring the installation. For this example we used: ``vars-production.yml``:
 
 .. code-block:: yaml
 
@@ -53,7 +53,7 @@ Setting the variables on a separate YAML file is recommended when configuring th
       ssl_manager_key: null
       ssl_auto_negotiate: 'no'
 
-You can configure **Wazuh API** user credentials, this could be done by setting the file: ``ansible-wazuh-manager/vars/wazuh_api_creds.yml`` located on your Ansible control server, the credentials are in ``htpasswd`` format:
+You can configure **Wazuh API** user credentials by including them in ``htpasswd`` format in the file ``ansible-wazuh-manager/vars/wazuh_api_creds.yml`` located on your Ansible control server:
 
 .. code-block:: yaml
 
@@ -62,12 +62,12 @@ You can configure **Wazuh API** user credentials, this could be done by setting 
   - foo:$apr1$/axqZYWQ$Xo/nz/IG3PdwV82EnfYKh/
   - bar:$apr1$hXE97ag.$8m0koHByattiGKUKPUgcZ1
 
-Also, you can configure **agentless** host credentials via the file: ``ansible-wazuh-manager/vars/agentless_creeds.yml``, set many as you need:
+Also, you can configure **agentless** host credentials via the file: ``ansible-wazuh-manager/vars/agentless_creds.yml``, set many as you need:
 
 .. code-block:: yaml
 
   # Be sure you encrypt this file with ansible-vault.
-  agentless_creeds:
+  agentless_creds:
    - type: ssh_integrity_check_linux
      frequency: 3600
      host: root@example1.net

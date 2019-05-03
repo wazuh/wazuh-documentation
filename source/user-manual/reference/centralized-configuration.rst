@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_agent_conf:
 
@@ -13,10 +13,13 @@ Agents can be configured remotely by using the ``agent.conf`` file. The followin
 - :doc:`File Integrity monitoring <../capabilities/file-integrity/index>` (**syscheck**)
 - :doc:`Rootkit detection <../capabilities/anomalies-detection/index>` (**rootcheck**)
 - :doc:`Log data collection <../capabilities/log-data-collection/index>` (**localfile**)
-- :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**rootcheck**, **wodle name="open-scap"**, **wodle name="cis-cat"**)
+- :doc:`Security policy monitoring <../capabilities/policy-monitoring/index>` (**wodle name="open-scap"**, **wodle name="cis-cat"**)
 - :doc:`Remote commands <ossec-conf/wodle-command>` (**wodle name="command"**)
-- :doc:`Anti-flooding mechanism <../capabilities/antiflooding>` (**bucket options**)
 - :doc:`Labels for agent alerts <../capabilities/labels>` (**labels**)
+- :doc:`Security Configuration Assessment <../capabilities/sec-config-assessment/index>` (**sca**)
+- :doc:`System inventory <../capabilities/syscollector>` (**syscollector**)
+- :doc:`Avoid events flooding <ossec-conf/client_buffer>` (**client_buffer**)
+- :doc:`Configure osquery wodle <ossec-conf/wodle-osquery>` (**wodle name="osquery"**)
 
 .. note::
   When setting up remote commands in the shared agent configuration, **you must enable remote commands for Agent Modules**. This is enabled by adding the following line to the ``/var/ossec/etc/local_internal_options.conf`` file in the agent:
@@ -35,7 +38,7 @@ Agents can be grouped together in order to send them unique centralized configur
 .. note::
     Check the :doc:`agent_groups manual <./tools/agent_groups>` to learn how to add groups and assign agents to them.
 
-The manager pushes all files included in the group folder to the agents belonging this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to ``default`` group.
+The manager pushes all files included in the group folder to the agents belonging to this group. For example, all files in ``/var/ossec/etc/shared/default`` will be pushed to all agents belonging to the ``default`` group.
 
 In case an agent is assigned to multiple groups, all the files contained in each group folder will be merged into one, and subsequently sent to the agents, being the last one the group with the highest priority.
 
@@ -229,33 +232,33 @@ Let's say we have this configuration in the ``ossec.conf`` file:
 
 .. code-block:: xml
 
-  <rootcheck>
-    <disabled>no</disabled>
-    <check_unixaudit>no</check_unixaudit>
-    <check_files>yes</check_files>
-    <check_trojans>no</check_trojans>
-    <check_dev>yes</check_dev>
-    <check_sys>yes</check_sys>
-    <check_pids>yes</check_pids>
-    <check_ports>yes</check_ports>
-    <check_if>yes</check_if>
-    <system_audit>/var/ossec/etc/shared/system_audit_rcl.txt</system_audit>
-  </rootcheck>
+  <sca>
+    <enabled>no</enabled>
+    <scan_on_start>yes</scan_on_start>
+    <interval>12h</interval>
+    <skip_nfs>yes</skip_nfs>
+
+    <policies>
+      <policy>system_audit_rcl.yml</policy>
+      <policy>system_audit_ssh.yml</policy>
+      <policy>system_audit_pw.yml</policy>
+    </policies>
+  </sca>
 
 and this configuration in the ``agent.conf`` file.
 
 .. code-block:: xml
 
-  <rootcheck>
-    <check_unixaudit>yes</check_unixaudit>
-    <rootkit_files>/var/ossec/etc/shared/rootkit_files.txt</rootkit_files>
-    <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
-    <system_audit>/var/ossec/etc/shared/cis_debian_linux_rcl.txt</system_audit>
-    <system_audit>/var/ossec/etc/shared/cis_rhel_linux_rcl.txt</system_audit>
-    <system_audit>/var/ossec/etc/shared/cis_rhel5_linux_rcl.txt</system_audit>
-  </rootcheck>
+  <sca>
+    <enabled>yes</enabled>
 
-The final configuration will overwrite ``check_unixaudit`` to "yes" because it appears in the ``agent.conf`` file. However, the path listed with the ``system_audit`` option will be repeated with both settings in the final configuration. In other words, ``system_audit_rcl.txt`` (from ``ossec.conf``) and ``cis_debian_linux_rcl.txt`` (from ``agent.conf``) will be included.
+    <policies>
+      <policy>cis_debian_linux_rcl.yml</policy>
+    </policies>
+  </sca>
+
+The final configuration will enabled the Security Configuration Assessment module. In addition, it will add the `cis_debian_linux_rcl.yml` to the list of scanned policies.
+In other words, the configuration located at ``agent.conf`` will overwrite the one of the ``ossec.conf``.
 
 How to ignore shared configuration
 ----------------------------------

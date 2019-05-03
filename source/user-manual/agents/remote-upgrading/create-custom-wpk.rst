@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _create-custom-wpk:
 
@@ -77,9 +77,9 @@ Canonical WPK package example
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.8.2.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.0.tar.gz | tar zx
 
-3. Modify the ``wazuh-3.8.2/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
+3. Modify the ``wazuh-3.9.0/etc/preloaded-vars.conf`` file that was downloaded to deploy an :ref:`unattended update <unattended-installation>` in the agent by uncommenting the following lines:
 
   .. code-block:: console
 
@@ -91,7 +91,7 @@ Canonical WPK package example
 
   .. code-block:: console
 
-      # cd wazuh-3.8.2/src
+      # cd wazuh-3.9.0/src
       # make deps
       # make TARGET=agent
 

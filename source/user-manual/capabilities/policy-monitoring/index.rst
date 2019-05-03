@@ -1,9 +1,9 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _manual_policy_monitoring:
 
 Monitoring security policies
-=================================
+============================
 
 Policy monitoring is the process of verifying that all systems conform to a set of predefined rules regarding configuration settings and approved application usage.
 

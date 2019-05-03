@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _kibana_troubleshooting:
 
@@ -15,10 +15,10 @@ The Wazuh app has a file named *package.json*, it includes dependencies along mo
 .. code-block:: console
 
   "kibana": {
-    "version": "6.5.4"
+    "version": "6.7.1"
   },
 
-Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.5.4`` then your installed Kibana version must be ``6.5.4``.
+Your app must match the installed Kibana version. If the version field in the *package.json* file is ``6.7.1`` then your installed Kibana version must be ``6.7.1``.
 
 You can check our :ref:`compatibility_matrix` to learn more about product compatibility between Wazuh and the Elastic Stack.
 
@@ -93,7 +93,7 @@ API version mismatch. Expected vX.Y.Z
 
 The Wazuh app uses the Wazuh API to fetch information, being compatible between patch versions. For example, you can use an app designed for Wazuh 3.7.2 with a Wazuh API 3.7.1.
 
-You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh 3.8.2.
+You can't use the 3.7.2 version of Wazuh API with a Wazuh app designed for Wazuh 3.9.0.
 
 Check our :ref:`compatibility_matrix` to learn more about compatibility between the API and the app.
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_syscheck:
 
@@ -113,6 +113,8 @@ Attributes:
 | **check_perm**           | Check the permission of the files/directories.                                                                      |
 +                          +                                                                                                                     +
 |                          | On Windows, a list of denied and allowed permissions will be given for each user or group since version 3.8.0.      |
++                          +                                                                                                                     +
+|                          | Only works on NTFS partitions on Windows systems.                                                                   |
 +                          +------------------------------------------------------------+--------------------------------------------------------+
 |                          | Allowed values                                             | yes, no                                                |
 +--------------------------+------------------------------------------------------------+--------------------------------------------------------+
@@ -213,7 +215,7 @@ frequency
 Frequency that the syscheck will be run (in seconds).
 
 +--------------------+-------------------------------------+
-| **Default value**  | 21600                               |
+| **Default value**  | 43200                               |
 +--------------------+-------------------------------------+
 | **Allowed values** | A positive number, time in seconds. |
 +--------------------+-------------------------------------+
@@ -341,7 +343,7 @@ Attributes:
 registry_ignore
 ^^^^^^^^^^^^^^^
 
-List of registry entries to be ignored.  (one entry per line). Multiple lines may be entered to include multiple registry entries.
+List of registry entries to be ignored. (one entry per line). Multiple lines may be entered to include multiple registry entries.
 
 +--------------------+---------------------+
 | **Default value**  | n/a                 |
@@ -351,13 +353,17 @@ List of registry entries to be ignored.  (one entry per line). Multiple lines ma
 
 Attributes:
 
-+----------+--------------------------------------------------------------+
-| **arch** | Select the Registry to ignore depending on the architecture. |
-+          +------------------+-------------------------------------------+
-|          | Default value    | 32bit                                     |
-|          +------------------+-------------------------------------------+
-|          | Allowed values   | 32bit, 64bit, both                        |
-+----------+------------------+-------------------------------------------+
++----------+--------------------------------------------------------------------------------+
+| **arch** | Select the Registry to ignore depending on the architecture.                   |
++          +------------------+-------------------------------------------------------------+
+|          | Default value    | 32bit                                                       |
+|          +------------------+-------------------------------------------------------------+
+|          | Allowed values   | 32bit, 64bit, both                                          |
++----------+------------------+-------------------------------------------------------------+
+| **type** | This is a simple regex pattern to filter out files so alerts are not generated.|
++          +------------------+-------------------------------------------------------------+
+|          | Allowed values   |  sregex                                                     |
++----------+------------------+-------------------------------------------------------------+
 
 prefilter_cmd
 ^^^^^^^^^^^^^^
@@ -410,6 +416,9 @@ restart_audit
 ^^^^^^^^^^^^^
 
 .. versionadded:: 3.5.0
+.. deprecated:: 3.9.0
+
+.. note::  This option is set inside the ``<whodata>`` tag since version 3.9.0.
 
 Allow the system to restart `Auditd` after installing the plugin. Note that setting this field to ``no`` the new
 whodata rules won't be applied automatically.
@@ -425,13 +434,14 @@ windows_audit_interval
 
 .. versionadded:: 3.5.0
 
-This option sets the frequency with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
+This option sets the frequency in seconds with which the Windows agent will check that the SACLs of the directories monitored in whodata mode are correct.
 
 +--------------------+------------------------------------+
-| **Default value**  | 5 minutes                          |
+| **Default value**  | 300 seconds                        |
 +--------------------+------------------------------------+
-| **Allowed values** | A positive number, time in seconds |
+| **Allowed values** | Any number from 1 to 9999          |
 +--------------------+------------------------------------+
+
 
 whodata
 ^^^^^^^
@@ -442,12 +452,31 @@ The Whodata options will be configured inside this tag.
 
 .. code-block:: xml
 
-    <!-- Audit keys -->
+    <!-- Whodata options -->
     <whodata>
+        <restart_audit>yes</restart_audit>
         <audit_key>auditkey1,auditkey2</audit_key>
+        <startup_healthcheck>yes</startup_healthcheck>
     </whodata>
 
+
+**restart_audit**
+
+.. versionadded:: 3.9.0
+
+Allow the system to restart `Auditd` after installing the plugin. Note that setting this field to ``no`` the new
+whodata rules won't be applied automatically.
+
++--------------------+---------+
+| **Default value**  | yes     |
++--------------------+---------+
+| **Allowed values** | yes, no |
++--------------------+---------+
+
+
 **audit_key**
+
+.. versionadded:: 3.7.1
 
 Set up the FIM engine to collect the Audit events using keys with ``audit_key``. Wazuh will include in its FIM baseline those events being monitored by Audit using `audit_key`. For those systems where Audit is already set to monitor folders for other purposes, Wazuh can collect events generated as a key from `audit_key`. This option is only available for **Linux systems with Audit**.
 
@@ -457,7 +486,23 @@ Set up the FIM engine to collect the Audit events using keys with ``audit_key``.
 | **Allowed values** | Any string separated by commas     |
 +--------------------+------------------------------------+
 
+
 .. note:: Audit allow inserting spaces inside the keys, so the spaces inserted inside the field ``<audit_key>`` will be part of the key.
+
+
+**startup_healthcheck**
+
+.. versionadded:: 3.9.0
+
+This option allows to disable the Audit health check during the Whodata engine starting. This option is only available for **Linux systems with Audit**.
+
++--------------------+------------+
+| **Default value**  | yes        |
++--------------------+------------+
+| **Allowed values** | yes, no    |
++--------------------+------------+
+
+.. warning:: The health check ensures that the rules required by Whodata can be set in Audit correctly and also that the generated events can be obtained. Disabling the health check may cause functioning problems in Whodata and loss of FIM events.
 
 
 Default Unix configuration
@@ -474,15 +519,10 @@ Default Unix configuration
 
     <scan_on_start>yes</scan_on_start>
 
-    <!-- Audit keys -->
-    <whodata>
-        <audit_key>auditkey1,auditkey2</audit_key>
-    </whodata>
-
     <!-- Generate alert when new file detected -->
     <alert_new_files>yes</alert_new_files>
 
-    <!-- Don't ignore files that change more than 3 times -->
+    <!-- Don't ignore files that change more than 'frequency' times -->
     <auto_ignore frequency="10" timeframe="3600">no</auto_ignore>
 
     <!-- Directories to check  (perform all possible verifications) -->
@@ -502,12 +542,14 @@ Default Unix configuration
     <ignore>/etc/cups/certs</ignore>
     <ignore>/etc/dumpdates</ignore>
     <ignore>/etc/svc/volatile</ignore>
+    <ignore>/sys/kernel/security</ignore>
+    <ignore>/sys/kernel/debug</ignore>
+
+    <!-- File types to ignore -->
+    <ignore type="sregex">.log$|.swp$</ignore>
 
     <!-- Check the file, but never compute the diff -->
     <nodiff>/etc/ssl/private.key</nodiff>
 
     <skip_nfs>yes</skip_nfs>
-
-    <!-- Allow the system to restart Auditd after installing the plugin -->
-    <restart_audit>yes</restart_audit>
   </syscheck>

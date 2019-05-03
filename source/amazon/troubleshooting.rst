@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _amazon_troubleshooting:
 
@@ -14,7 +14,7 @@ The below information is intended to assist in troubleshooting issues.
 Testing the integration
 -----------------------
 
-After configuring the module successfully you can expect to see the following log messages in your agent log file: ``/var/ossec/logs/ossec.log``
+After configuring the module successfully users can expect to see the following log messages in their agent log file: ``/var/ossec/logs/ossec.log``
 
 1. Module starting:
 
@@ -82,7 +82,7 @@ The exit codes are as follows:
 
 2. Debugging configuration:
 
-If you are unable to determine the issues from the ossec.log, you can run the modules in debug mode.  With Wazuh running, stop the moduled
+If users are unable to determine the issues from the ossec.log, users can run the modules in debug mode.  With Wazuh running, stop the moduled
 
 .. code-block:: console
 
@@ -118,3 +118,34 @@ In this case a simple warning will be displayed. There is no impact in the event
 .. code-block:: console
 
     2018/01/12 19:10:37 wazuh-modulesd:aws-cloudtrail: WARNING: Interval overtaken.
+
+4. Wrong AWS service path:
+
+If users get any trouble related to "paths", check if the AWS files path is correct:
+
+  **AWS Cloudtrail**
+
+    <bucket_name>/<prefix>/AWSLogs/<account_id>/CloudTrail/<region>/<year>/<month>/<day>
+
+  **AWS Config**
+
+    <bucket_name>/<prefix>/AWSLogs/<account_id>/Config/<region>/<year>/<month>/<day>/ConfigHistory
+    <bucket_name>/<prefix>/AWSLogs/<account_id>/Config/<region>/<year>/<month>/<day>/ConfigSnapshot
+
+  **AWS Guardduty**
+
+    <bucket_name>/<prefix>/<year>/<month>/<day>/<hh>
+
+  **AWS Custom bucket**
+
+    <bucket_name>/<prefix>/<year>/<month>/<day>
+
+  **AWS VPC**
+
+    <bucket_name>/<prefix>/AWSLogs/<account_id>/vpcflowlogs/<region>/<year>/<month>/<day>
+
+  **Use case**
+
+    AmazonS3/config/AWSLogs/1308927/Config/EU-West/2019/01/12/file.log
+
+    AmazonFirstBucket/store/2019/01/9/logs.log

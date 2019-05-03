@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_remote:
 
@@ -106,13 +106,17 @@ Local ip address to use to listen for connections.
 ipv6
 ^^^^^^^^^^^
 
-Local ipv6 address to listen for connections.
+Whether the local IP address is IPv6
 
 +--------------------+------------------+
-| **Default value**  | n/a              |
+| **Default value**  | no               |
 +--------------------+------------------+
-| **Allowed values** | Any IPv6 address |
+| **Allowed values** | yes, no          |
 +--------------------+------------------+
+
+.. note::
+
+  Currently it's not possible to set both *local_ip* and *ipv6*
 
 queue_size
 ^^^^^^^^^^^^
