@@ -7,7 +7,7 @@ Install Elastic Stack with Debian packages
 
 The DEB package is suitable for Debian, Ubuntu and other Debian-based systems.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Preparation
 -----------

@@ -7,7 +7,7 @@ Setting up SSL for Filebeat and Logstash
 
 If you are running Wazuh server and Elastic Stack on separate systems and servers (**distributed architecture**), it is important to configure SSL encryption between Filebeat and Logstash. (This does not apply to **single-server architectures**.)
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Generating a self-signed SSL certificate
 ----------------------------------------

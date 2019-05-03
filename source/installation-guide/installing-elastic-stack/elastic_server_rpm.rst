@@ -7,7 +7,7 @@ Install Elastic Stack with RPM packages
 
 The RPM packages are suitable for installation on Red Hat, CentOS and other RPM-based systems.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Preparation
 -----------

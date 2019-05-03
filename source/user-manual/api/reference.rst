@@ -83,6 +83,7 @@ Request List
 
 `Cluster`_
 	* DELETE /cluster/:node_id/files  (`Delete a remote file in a cluster node`_)
+	* GET /cluster/:node_id/config/:component/:configuration  (`Get active configuration in node node_id`_)
 	* GET /cluster/:node_id/configuration  (`Get node node_id's configuration`_)
 	* GET /cluster/:node_id/configuration/validation  (`Check Wazuh configuration in a cluster node`_)
 	* GET /cluster/:node_id/files  (`Get local file from any cluster node`_)
@@ -130,6 +131,7 @@ Request List
 
 `Manager`_
 	* DELETE /manager/files  (`Delete a local file`_)
+	* GET /manager/config/:component/:configuration  (`Get manager active configuration`_)
 	* GET /manager/configuration  (`Get manager configuration`_)
 	* GET /manager/configuration/validation  (`Check Wazuh configuration`_)
 	* GET /manager/files  (`Get local file`_)
@@ -273,7 +275,7 @@ Add a new agent.
 	   "error": 0,
 	   "data": {
 	      "id": "007",
-	      "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgZjNhYjRhOTU2OTg4YmRiMTVhODEzZTBmYjAxNWYwYTg4YTFkMzM2MWI3ODkyODE0ZjZhOTI4ZGU2ZTk1M2QwZQ=="
+	      "key": "MDA3IE5ld0hvc3QgMTAuMC4wLjkgMmQ4ZDU4MzM0YTM0NjNjOWI3MGJhZDlmNDBkODhhNzMxOTIwZGVlYjU0YjlkNzQ2ZmM5MTYzMjlhNjk1OTIwYw=="
 	   }
 	}
 	
@@ -308,7 +310,7 @@ Adds a new agent with name :agent_name. This agent will use ANY as IP.
 	   "error": 0,
 	   "data": {
 	      "id": "008",
-	      "key": "MDA4IG15TmV3QWdlbnQgYW55IGNkZmY0NzQxYzViNDk4NjE4M2ZjZWY4NTM4ZTVmNjg4NDRkNjNmMzY2NWFhYjk4NjJiZDhmMDg5ZjgyMTNlOTM="
+	      "key": "MDA4IG15TmV3QWdlbnQgYW55IDY3ZTMxZWNmMTZkOTRjYjliNTVjMmNiY2ViYTcxMDBkZTNiM2Y0YmY1OTk3YWZmYWNjNjAxNWZkNGE4NTMyODM="
 	   }
 	}
 	
@@ -447,6 +449,7 @@ Returns the active configuration in JSON format.
 	            "logformat": "command",
 	            "command": "df -P",
 	            "alias": "df -P",
+	            "ignore_binaries": "no",
 	            "target": [
 	               "agent"
 	            ],
@@ -456,6 +459,7 @@ Returns the active configuration in JSON format.
 	            "logformat": "full_command",
 	            "command": "netstat -tulpn | sed 's/\\([[:alnum:]]\\+\\)\\ \\+[[:digit:]]\\+\\ \\+[[:digit:]]\\+\\ \\+\\(.*\\):\\([[:digit:]]*\\)\\ \\+\\([0-9\\.\\:\\*]\\+\\).\\+\\ \\([[:digit:]]*\\/[[:alnum:]\\-]*\\).*/\\1 \\2 == \\3 == \\4 \\5/' | sort -k 4 -g | sed 's/ == \\(.*\\) ==/:\\1/' | sed 1,2d",
 	            "alias": "netstat listening ports",
+	            "ignore_binaries": "no",
 	            "target": [
 	               "agent"
 	            ],
@@ -465,6 +469,7 @@ Returns the active configuration in JSON format.
 	            "logformat": "full_command",
 	            "command": "last -n 20",
 	            "alias": "last -n 20",
+	            "ignore_binaries": "no",
 	            "target": [
 	               "agent"
 	            ],
@@ -473,6 +478,7 @@ Returns the active configuration in JSON format.
 	         {
 	            "file": "/var/ossec/logs/active-responses.log",
 	            "logformat": "syslog",
+	            "ignore_binaries": "no",
 	            "target": [
 	               "agent"
 	            ]
@@ -480,6 +486,7 @@ Returns the active configuration in JSON format.
 	         {
 	            "file": "/var/log/auth.log",
 	            "logformat": "syslog",
+	            "ignore_binaries": "no",
 	            "target": [
 	               "agent"
 	            ]
@@ -487,6 +494,7 @@ Returns the active configuration in JSON format.
 	         {
 	            "file": "/var/log/syslog",
 	            "logformat": "syslog",
+	            "ignore_binaries": "no",
 	            "target": [
 	               "agent"
 	            ]
@@ -494,6 +502,7 @@ Returns the active configuration in JSON format.
 	         {
 	            "file": "/var/log/dpkg.log",
 	            "logformat": "syslog",
+	            "ignore_binaries": "no",
 	            "target": [
 	               "agent"
 	            ]
@@ -501,6 +510,7 @@ Returns the active configuration in JSON format.
 	         {
 	            "file": "/var/log/kern.log",
 	            "logformat": "syslog",
+	            "ignore_binaries": "no",
 	            "target": [
 	               "agent"
 	            ]
@@ -550,8 +560,7 @@ Removes a list of groups.
 	      ],
 	      "affected_agents": [
 	         "002",
-	         "005",
-	         "003"
+	         "005"
 	      ]
 	   }
 	}
@@ -763,7 +772,7 @@ Adds an agent to the specified group.
 
 	{
 	   "error": 0,
-	   "data": "Agent '004' already belongs to group 'dmz'."
+	   "data": "Group 'dmz' added to agent '004'."
 	}
 	
 
@@ -843,24 +852,24 @@ Returns the specified file belonging to the group parsed to JSON.
 **Example Response:**
 ::
 
-	{
-	    "data": {
-	        "controls": [
-	            {
-	                "...": "..."
-	            }, 
-	            {
-	                "condition": "all required", 
-	                "name": "CIS - Testing against the CIS Debian Linux Benchmark v1", 
-	                "reference": "CIS_Debian_Benchmark_v1.0pdf", 
-	                "checks": [
-	                    "f:/etc/debian_version;"
-	                ]
-	            }
-	        ]
-	    }, 
-	    "error": 0
-	}
+   {
+      "data": {
+         "controls": [
+            {
+               "...": "..."
+            },
+            {
+               "condition": "all required",
+               "name": "CIS - Testing against the CIS Debian Linux Benchmark v1",
+               "reference": "CIS_Debian_Benchmark_v1.0pdf",
+               "checks": [
+                   "f:/etc/debian_version;"
+               ]
+            }
+         ]
+      },
+      "error": 0
+   }
 
 Get agents in a group
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -921,53 +930,28 @@ Returns the list of agents in a group.
 	               "minor": "04",
 	               "name": "Ubuntu",
 	               "platform": "ubuntu",
-	               "uname": "Linux |agent-1 |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
-	               "version": "18.04.1 LTS"
+	               "uname": "Linux |agent-1 |4.15.0-48-generic |#51-Ubuntu SMP Wed Apr 3 08:28:49 UTC 2019 |x86_64",
+	               "version": "18.04.2 LTS"
 	            },
-	            "ip": "10.0.2.15",
-	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "manager": "master",
-	            "mergedSum": "f8d49771911ed9d5c45b03a40babd065",
+	            "group": [
+	               "default",
+	               "dmz"
+	            ],
 	            "status": "Active",
-	            "name": "agent-1",
-	            "registerIP": "172.17.0.201",
-	            "group": [
-	               "default",
-	               "dmz"
-	            ],
-	            "node_name": "node01",
+	            "dateAdd": "2019-04-26 07:02:30",
 	            "version": "Wazuh v3.9.0",
-	            "dateAdd": "2019-03-08 08:33:34",
-	            "lastKeepAlive": "2019-03-08 08:38:06",
-	            "id": "001"
-	         },
-	         {
-	            "ip": "10.0.0.62",
-	            "status": "Never connected",
-	            "name": "server001",
-	            "registerIP": "10.0.0.62",
-	            "group": [
-	               "default",
-	               "dmz"
-	            ],
-	            "node_name": "unknown",
-	            "dateAdd": "2019-03-08 08:37:53",
-	            "id": "002"
-	         },
-	         {
-	            "ip": "10.0.0.15",
-	            "status": "Never connected",
-	            "name": "main_database",
-	            "registerIP": "10.0.0.15",
-	            "group": [
-	               "dmz"
-	            ],
-	            "node_name": "unknown",
-	            "dateAdd": "2019-03-08 08:37:54",
-	            "id": "004"
+	            "ip": "10.0.2.15",
+	            "manager": "master",
+	            "mergedSum": "c6309ff81a74781f6b55b68129a76738",
+	            "node_name": "node01",
+	            "registerIP": "172.29.0.201",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "id": "001",
+	            "lastKeepAlive": "2019-04-26 09:35:39",
+	            "name": "agent-1"
 	         }
 	      ],
-	      "totalItems": 3
+	      "totalItems": 1
 	   }
 	}
 	
@@ -1013,34 +997,61 @@ Returns a list with the available agents without group.
 	   "data": {
 	      "items": [
 	         {
+	            "status": "Never connected",
+	            "dateAdd": "2019-04-26 09:35:35",
+	            "ip": "10.0.0.12",
+	            "node_name": "unknown",
+	            "registerIP": "10.0.0.12",
+	            "id": "003",
+	            "name": "dmz001"
+	         },
+	         {
+	            "status": "Never connected",
+	            "dateAdd": "2019-04-26 09:35:36",
+	            "ip": "10.0.0.15",
+	            "node_name": "unknown",
+	            "registerIP": "10.0.0.15",
+	            "id": "004",
+	            "name": "main_database"
+	         },
+	         {
+	            "status": "Never connected",
+	            "dateAdd": "2019-04-26 09:35:36",
 	            "ip": "10.0.0.20",
-	            "status": "Never connected",
-	            "name": "server002",
+	            "node_name": "unknown",
 	            "registerIP": "10.0.0.20",
-	            "node_name": "unknown",
-	            "dateAdd": "2019-03-08 08:37:54",
-	            "id": "006"
+	            "id": "006",
+	            "name": "server002"
 	         },
 	         {
+	            "status": "Never connected",
+	            "dateAdd": "2019-04-26 09:35:46",
 	            "ip": "10.0.0.9",
-	            "status": "Never connected",
-	            "name": "NewHost",
-	            "registerIP": "10.0.0.9",
 	            "node_name": "unknown",
-	            "dateAdd": "2019-03-08 08:38:08",
-	            "id": "007"
+	            "registerIP": "10.0.0.9",
+	            "id": "007",
+	            "name": "NewHost"
 	         },
 	         {
-	            "ip": "10.0.10.10",
 	            "status": "Never connected",
-	            "name": "NewHost_2",
-	            "registerIP": "10.0.10.10",
+	            "dateAdd": "2019-04-26 09:35:47",
+	            "ip": "any",
 	            "node_name": "unknown",
-	            "dateAdd": "2019-03-08 08:38:09",
-	            "id": "123"
+	            "registerIP": "any",
+	            "id": "008",
+	            "name": "myNewAgent"
+	         },
+	         {
+	            "status": "Never connected",
+	            "dateAdd": "2019-04-26 09:35:47",
+	            "ip": "10.0.10.10",
+	            "node_name": "unknown",
+	            "registerIP": "10.0.10.10",
+	            "id": "123",
+	            "name": "NewHost_2"
 	         }
 	      ],
-	      "totalItems": 3
+	      "totalItems": 6
 	   }
 	}
 	
@@ -1204,7 +1215,7 @@ Returns the files belonging to the group.
 	         },
 	         {
 	            "filename": "merged.mg",
-	            "hash": "f8d49771911ed9d5c45b03a40babd065"
+	            "hash": "c6309ff81a74781f6b55b68129a76738"
 	         },
 	         {
 	            "filename": "rootkit_files.txt",
@@ -1216,7 +1227,7 @@ Returns the files belonging to the group.
 	         },
 	         {
 	            "filename": "system_audit_rcl.txt",
-	            "hash": "be69b84dd5ee73200bb903a46270e18c"
+	            "hash": "20138d1fc81eb7ecc13629283fea3470"
 	         },
 	         {
 	            "filename": "system_audit_ssh.txt",
@@ -1281,22 +1292,17 @@ Returns the list of existing agent groups.
 	         {
 	            "count": 2,
 	            "name": "default",
-	            "mergedSum": "f8d49771911ed9d5c45b03a40babd065",
+	            "mergedSum": "c6309ff81a74781f6b55b68129a76738",
 	            "configSum": "ab73af41699f13fdd81903b5f23d8d00"
-	         },
-	         {
-	            "count": 3,
-	            "name": "dmz",
-	            "mergedSum": "220d6c5fc253f251827ee7487341c0fc",
-	            "configSum": "cfbae9ecc10eb15f1b4fc736de6758cc"
 	         },
 	         {
 	            "count": 0,
-	            "name": "pciserver",
-	            "configSum": "ab73af41699f13fdd81903b5f23d8d00"
+	            "name": "dmz",
+	            "mergedSum": "220d6c5fc253f251827ee7487341c0fc",
+	            "configSum": "cfbae9ecc10eb15f1b4fc736de6758cc"
 	         }
 	      ],
-	      "totalItems": 3
+	      "totalItems": 2
 	   }
 	}
 	
@@ -1362,7 +1368,7 @@ Remove the group of the agent but will leave the rest of its group if it belongs
 
 	{
 	   "error": 0,
-	   "data": "Group 'dmz' unset for agent '004'."
+	   "data": "Agent 004 set to group default."
 	}
 	
 
@@ -1397,7 +1403,7 @@ Remove a list of agents of a group
 	{
 	   "error": 0,
 	   "data": {
-	      "msg": "All selected agents were removed to group dmz",
+	      "msg": "All selected agents were removed from group dmz",
 	      "affected_agents": [
 	         "001",
 	         "002"
@@ -1471,7 +1477,9 @@ Removes the group. Agents that were assigned to the removed group will automatic
 	      "ids": [
 	         "dmz"
 	      ],
-	      "affected_agents": []
+	      "affected_agents": [
+	         "001"
+	      ]
 	   }
 	}
 	
@@ -1658,25 +1666,25 @@ Returns a list with the available agents.
 	   "data": {
 	      "items": [
 	         {
-	            "ip": "10.0.0.20",
 	            "status": "Never connected",
-	            "name": "server002",
-	            "registerIP": "10.0.0.20",
+	            "dateAdd": "2019-04-26 09:35:36",
+	            "ip": "10.0.0.20",
 	            "node_name": "unknown",
-	            "dateAdd": "2019-03-08 08:37:54",
-	            "id": "006"
+	            "registerIP": "10.0.0.20",
+	            "id": "006",
+	            "name": "server002"
 	         },
 	         {
-	            "ip": "10.0.0.62",
-	            "status": "Never connected",
-	            "name": "server001",
-	            "registerIP": "10.0.0.62",
 	            "group": [
 	               "default"
 	            ],
+	            "status": "Never connected",
+	            "dateAdd": "2019-04-26 09:35:35",
+	            "ip": "10.0.0.62",
 	            "node_name": "unknown",
-	            "dateAdd": "2019-03-08 08:37:53",
-	            "id": "002"
+	            "registerIP": "10.0.0.62",
+	            "id": "002",
+	            "name": "server001"
 	         },
 	         {
 	            "os": {
@@ -1686,31 +1694,31 @@ Returns a list with the available agents.
 	               "minor": "04",
 	               "name": "Ubuntu",
 	               "platform": "ubuntu",
-	               "uname": "Linux |master |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
-	               "version": "18.04.1 LTS"
+	               "uname": "Linux |master |4.15.0-48-generic |#51-Ubuntu SMP Wed Apr 3 08:28:49 UTC 2019 |x86_64",
+	               "version": "18.04.2 LTS"
 	            },
+	            "status": "Active",
+	            "dateAdd": "2019-04-26 06:53:55",
+	            "version": "Wazuh v3.9.0",
 	            "ip": "127.0.0.1",
 	            "manager": "master",
-	            "status": "Active",
-	            "name": "master",
-	            "registerIP": "127.0.0.1",
 	            "node_name": "node01",
-	            "version": "Wazuh v3.9.0",
-	            "dateAdd": "2019-03-08 08:30:02",
+	            "registerIP": "127.0.0.1",
+	            "id": "000",
 	            "lastKeepAlive": "9999-12-31 23:59:59",
-	            "id": "000"
+	            "name": "master"
 	         },
 	         {
-	            "ip": "10.0.0.15",
-	            "status": "Never connected",
-	            "name": "main_database",
-	            "registerIP": "10.0.0.15",
 	            "group": [
 	               "default"
 	            ],
+	            "status": "Never connected",
+	            "dateAdd": "2019-04-26 09:35:36",
+	            "ip": "10.0.0.15",
 	            "node_name": "unknown",
-	            "dateAdd": "2019-03-08 08:37:54",
-	            "id": "004"
+	            "registerIP": "10.0.0.15",
+	            "id": "004",
+	            "name": "main_database"
 	         },
 	         {
 	            "os": {
@@ -1720,24 +1728,24 @@ Returns a list with the available agents.
 	               "minor": "04",
 	               "name": "Ubuntu",
 	               "platform": "ubuntu",
-	               "uname": "Linux |agent-1 |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
-	               "version": "18.04.1 LTS"
+	               "uname": "Linux |agent-1 |4.15.0-48-generic |#51-Ubuntu SMP Wed Apr 3 08:28:49 UTC 2019 |x86_64",
+	               "version": "18.04.2 LTS"
 	            },
-	            "ip": "10.0.2.15",
-	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
-	            "manager": "master",
-	            "mergedSum": "2f758e9b9b44ff428d1433832e0d190d",
-	            "status": "Active",
-	            "name": "agent-1",
-	            "registerIP": "172.17.0.201",
 	            "group": [
 	               "default"
 	            ],
-	            "node_name": "node01",
+	            "status": "Active",
+	            "dateAdd": "2019-04-26 07:02:30",
 	            "version": "Wazuh v3.9.0",
-	            "dateAdd": "2019-03-08 08:33:34",
-	            "lastKeepAlive": "2019-03-08 08:38:16",
-	            "id": "001"
+	            "ip": "10.0.2.15",
+	            "manager": "master",
+	            "mergedSum": "c6309ff81a74781f6b55b68129a76738",
+	            "node_name": "node01",
+	            "registerIP": "172.29.0.201",
+	            "configSum": "ab73af41699f13fdd81903b5f23d8d00",
+	            "id": "001",
+	            "lastKeepAlive": "2019-04-26 09:35:49",
+	            "name": "agent-1"
 	         }
 	      ],
 	      "totalItems": 7
@@ -1776,8 +1784,6 @@ Returns various information from an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "ip": "127.0.0.1",
-	      "manager": "master",
 	      "os": {
 	         "arch": "x86_64",
 	         "codename": "Bionic Beaver",
@@ -1785,17 +1791,19 @@ Returns various information from an agent.
 	         "minor": "04",
 	         "name": "Ubuntu",
 	         "platform": "ubuntu",
-	         "uname": "Linux |master |4.15.0-43-generic |#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018 |x86_64",
-	         "version": "18.04.1 LTS"
+	         "uname": "Linux |master |4.15.0-48-generic |#51-Ubuntu SMP Wed Apr 3 08:28:49 UTC 2019 |x86_64",
+	         "version": "18.04.2 LTS"
 	      },
 	      "status": "Active",
-	      "name": "master",
-	      "registerIP": "127.0.0.1",
-	      "node_name": "node01",
+	      "dateAdd": "2019-04-26 06:53:55",
 	      "version": "Wazuh v3.9.0",
-	      "dateAdd": "2019-03-08 08:30:02",
+	      "ip": "127.0.0.1",
+	      "manager": "master",
+	      "node_name": "node01",
+	      "registerIP": "127.0.0.1",
+	      "id": "000",
 	      "lastKeepAlive": "9999-12-31 23:59:59",
-	      "id": "000"
+	      "name": "master"
 	   }
 	}
 	
@@ -1831,13 +1839,13 @@ Returns various information from an agent called :agent_name.
 	{
 	   "error": 0,
 	   "data": {
-	      "ip": "10.0.0.9",
 	      "status": "Never connected",
-	      "name": "NewHost",
-	      "registerIP": "10.0.0.9",
+	      "dateAdd": "2019-04-26 09:35:46",
+	      "ip": "10.0.0.9",
 	      "node_name": "unknown",
-	      "dateAdd": "2019-03-08 08:38:08",
-	      "id": "007"
+	      "registerIP": "10.0.0.9",
+	      "id": "007",
+	      "name": "NewHost"
 	   }
 	}
 	
@@ -1874,7 +1882,7 @@ Returns the key of an agent.
 
 	{
 	   "error": 0,
-	   "data": "MDA0IG1haW5fZGF0YWJhc2UgMTAuMC4wLjE1IDEwMjQ1NWEzZjEyYTdiOTY3YTQ5ZmUzOWIyOGE2OTkxZmQ1ZmVkY2ZkNmE3NTE1NjA3ZTcyYTE4YzBiNWM3ZGQ="
+	   "data": "MDA0IG1haW5fZGF0YWJhc2UgMTAuMC4wLjE1IDYwNmZhMTA3N2FiNmE2NWY2Y2ZlMzk4MWIwYzdlNTA1ZDQxY2M2N2IzZjE2YmQzYzI1ZjQ5ODM2Mzg4MGJiOWI="
 	}
 	
 
@@ -2396,42 +2404,42 @@ Returns the agent's ciscat results info
 **Example Response:**
 ::
 
-	{
-	    "data": {
-	        "totalItems": 2, 
-	        "items": [
-	            {
-	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server", 
-	                "score": 57, 
-	                "error": 0, 
-	                "scan": {
-	                    "id": 1406741147, 
-	                    "time": "2018-09-06T07:50:15.632-07:00"
-	                }, 
-	                "fail": 79, 
-	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
-	                "pass": 104, 
-	                "notchecked": 36, 
-	                "unknown": 1
-	            }, 
-	            {
-	                "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Workstation", 
-	                "score": 64, 
-	                "error": 0, 
-	                "scan": {
-	                    "id": 1406741147, 
-	                    "time": "2018-09-06T07:50:52.630-07:00"
-	                }, 
-	                "fail": 53, 
-	                "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark", 
-	                "pass": 96, 
-	                "notchecked": 71, 
-	                "unknown": 0
-	            }
-	        ]
-	    }, 
-	    "error": 0
-	}
+   {
+      "data": {
+         "totalItems": 2,
+         "items": [
+            {
+               "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_2_-_Server",
+               "score": 57,
+               "error": 0,
+               "scan": {
+                  "id": 1406741147,
+                  "time": "2018-09-06T07:50:15.632-07:00"
+               },
+               "fail": 79,
+               "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark",
+               "pass": 104,
+               "notchecked": 36,
+               "unknown": 1
+            },
+            {
+               "profile": "xccdf_org.cisecurity.benchmarks_profile_Level_1_-_Workstation",
+               "score": 64,
+               "error": 0,
+               "scan": {
+                   "id": 1406741147,
+                   "time": "2018-09-06T07:50:52.630-07:00"
+               },
+               "fail": 53,
+               "benchmark": "CIS Ubuntu Linux 16.04 LTS Benchmark",
+               "pass": 96,
+               "notchecked": 71,
+               "unknown": 0
+            }
+         ]
+      },
+      "error": 0
+   }
 
 
 
@@ -2439,6 +2447,104 @@ Cluster
 ----------------------------------------
 Configuration
 ++++++++++++++++++++++++++++++++++++++++
+
+Get active configuration in node node_id
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the requested configuration in JSON format.
+
+**Request**:
+
+``GET`` ::
+
+	/cluster/:node_id/config/:component/:configuration
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``component``                | String        | Indicates the wazuh component to check.                                                                                                                                                                                              |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - agent                                                                                                                                                                                                                              |
+|                              |               | - agentless                                                                                                                                                                                                                          |
+|                              |               | - analysis                                                                                                                                                                                                                           |
+|                              |               | - auth                                                                                                                                                                                                                               |
+|                              |               | - com                                                                                                                                                                                                                                |
+|                              |               | - csyslog                                                                                                                                                                                                                            |
+|                              |               | - integrator                                                                                                                                                                                                                         |
+|                              |               | - logcollector                                                                                                                                                                                                                       |
+|                              |               | - mail                                                                                                                                                                                                                               |
+|                              |               | - monitor                                                                                                                                                                                                                            |
+|                              |               | - request                                                                                                                                                                                                                            |
+|                              |               | - syscheck                                                                                                                                                                                                                           |
+|                              |               | - wmodules                                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``configuration``            | String        | Indicates a configuration to check in the component.                                                                                                                                                                                 |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - client                                                                                                                                                                                                                             |
+|                              |               | - buffer                                                                                                                                                                                                                             |
+|                              |               | - labels                                                                                                                                                                                                                             |
+|                              |               | - internal                                                                                                                                                                                                                           |
+|                              |               | - agentless                                                                                                                                                                                                                          |
+|                              |               | - global                                                                                                                                                                                                                             |
+|                              |               | - active_response                                                                                                                                                                                                                    |
+|                              |               | - alerts                                                                                                                                                                                                                             |
+|                              |               | - command                                                                                                                                                                                                                            |
+|                              |               | - rules                                                                                                                                                                                                                              |
+|                              |               | - decoders                                                                                                                                                                                                                           |
+|                              |               | - internal                                                                                                                                                                                                                           |
+|                              |               | - auth                                                                                                                                                                                                                               |
+|                              |               | - active-response                                                                                                                                                                                                                    |
+|                              |               | - internal                                                                                                                                                                                                                           |
+|                              |               | - cluster                                                                                                                                                                                                                            |
+|                              |               | - csyslog                                                                                                                                                                                                                            |
+|                              |               | - integration                                                                                                                                                                                                                        |
+|                              |               | - localfile                                                                                                                                                                                                                          |
+|                              |               | - socket                                                                                                                                                                                                                             |
+|                              |               | - remote                                                                                                                                                                                                                             |
+|                              |               | - syscheck                                                                                                                                                                                                                           |
+|                              |               | - rootcheck                                                                                                                                                                                                                          |
+|                              |               | - wmodules                                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/cluster/node01/config/logcollector/internal?pretty"
+
+**Example Response:**
+::
+
+   {
+      "error": 0,
+      "data": {
+         "internal": {
+            "logcollector": {
+               "remote_commands": 0,
+               "loop_timeout": 2,
+               "open_attempts": 8,
+               "vcheck_files": 64,
+               "max_lines": 10000,
+               "max_files": 1000,
+               "sock_fail_time": 300,
+               "debug": 0,
+               "sample_log_length": 64,
+               "queue_size": 1024,
+               "input_threads": 4,
+               "force_reload": 0,
+               "reload_interval": 64,
+               "reload_delay": 1000,
+               "rlimit_nofile": 1100
+            }
+         }
+      }
+   }
+
+
 
 Get node node_id's configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2518,7 +2624,7 @@ Returns the cluster configuration
 	      "port": 1516,
 	      "bind_addr": "0.0.0.0",
 	      "nodes": [
-	         "172.17.0.100"
+	         "172.29.0.100"
 	      ],
 	      "hidden": "no",
 	      "disabled": false
@@ -2548,13 +2654,14 @@ Returns if Wazuh configuration is OK.
 **Example Response:**
 ::
 
-	{
-	   "error": 0,
-	   "data": {
-	      "status": "OK"
-	   }
-	}
-	
+   {
+      "error": 0,
+      "data": {
+         "status": "OK"
+      }
+   }
+
+
 
 Check Wazuh configuration in all cluster nodes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2574,13 +2681,14 @@ Returns if Wazuh configuration is OK.
 **Example Response:**
 ::
 
-	{
-	   "error": 0,
-	   "data": {
-	      "status": "OK"
-	   }
-	}
-	
+   {
+      "error": 0,
+      "data": {
+         "status": "OK"
+      }
+   }
+
+
 
 Delete a remote file in a cluster node
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2597,7 +2705,7 @@ Confirmation message.
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param                        | Type          | Description                                                                                                                                                                                                                          |
 +==============================+===============+======================================================================================================================================================================================================================================+
-| ``path``                     | String        | Relative path of file.                                                                                                                                                                                                               |
+| ``path``                     | String        | Relative path of file. This parameter is mandatory.                                                                                                                                                                                  |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2629,7 +2737,9 @@ Returns the content of a local file (rules, decoders and lists).
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param                        | Type          | Description                                                                                                                                                                                                                          |
 +==============================+===============+======================================================================================================================================================================================================================================+
-| ``path``                     | String        | Relative path of file.                                                                                                                                                                                                               |
+| ``path``                     | String        | Relative path of file. This parameter is mandatory.                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``validation``               | String        | Default false. true for validating the content of the file. An error will be returned file content is not strictly correct.                                                                                                          |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -2663,7 +2773,7 @@ Upload a local file (rules, decoders and lists) in a cluster node
 +==============================+===============+======================================================================================================================================================================================================================================+
 | ``file``                     | String        | Input file.                                                                                                                                                                                                                          |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``                     | String        | Relative path were input file will be placed.                                                                                                                                                                                        |
+| ``path``                     | String        | Relative path were input file will be placed. This parameter is mandatory.                                                                                                                                                           |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``overwrite``                | String        | false to fail if file already exists (default). true to replace the existing file                                                                                                                                                    |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -2747,7 +2857,8 @@ Returns the status of the manager processes.
 	      "ossec-reportd": "stopped",
 	      "ossec-syscheckd": "running",
 	      "wazuh-clusterd": "running",
-	      "wazuh-modulesd": "running"
+	      "wazuh-modulesd": "running",
+	      "wazuh-db": "running"
 	   }
 	}
 	
@@ -2775,11 +2886,11 @@ Returns basic information about manager.
 	   "data": {
 	      "path": "/var/ossec",
 	      "version": "v3.9.0",
-	      "compilation_date": "Fri Mar  8 08:35:38 UTC 2019",
+	      "compilation_date": "Fri Apr 26 07:05:33 UTC 2019",
 	      "type": "manager",
 	      "max_agents": "14000",
 	      "openssl_support": "yes",
-	      "ruleset_version": "3905",
+	      "ruleset_version": "3911",
 	      "tz_offset": "+0000",
 	      "tz_name": "UTC"
 	   }
@@ -2822,25 +2933,25 @@ Show cluster health
 	               "name": "node02",
 	               "type": "worker",
 	               "version": "3.9.0",
-	               "ip": "172.17.0.101",
+	               "ip": "172.29.0.101",
 	               "n_active_agents": 0
 	            },
 	            "status": {
 	               "sync_integrity_free": true,
 	               "last_sync_integrity": {
-	                  "date_start_master": "2019-03-08 08:38:17.480787",
-	                  "date_end_master": "2019-03-08 08:38:17.501860",
+	                  "date_start_master": "2019-04-26 09:36:03.427586",
+	                  "date_end_master": "2019-04-26 09:36:03.489563",
 	                  "total_files": {
-	                     "missing": 0,
-	                     "extra": 2,
-	                     "extra_valid": 2,
+	                     "missing": 1,
+	                     "extra": 0,
+	                     "extra_valid": 0,
 	                     "shared": 2
 	                  }
 	               },
 	               "sync_agentinfo_free": true,
 	               "last_sync_agentinfo": {
-	                  "date_start_master": "2019-03-08 08:38:17.382000",
-	                  "date_end_master": "2019-03-08 08:38:17.396759",
+	                  "date_start_master": "2019-04-26 09:36:05.815656",
+	                  "date_end_master": "2019-04-26 09:36:05.836157",
 	                  "total_agentinfo": 0
 	               },
 	               "sync_extravalid_free": true,
@@ -2849,7 +2960,7 @@ Show cluster health
 	                  "date_end_master": "n/a",
 	                  "total_agentgroups": 0
 	               },
-	               "last_keep_alive": "2019-03-08 08:37:47.250957"
+	               "last_keep_alive": "2019-04-26 09:35:34.984344"
 	            }
 	         },
 	         "node01": {
@@ -2857,7 +2968,7 @@ Show cluster health
 	               "name": "node01",
 	               "type": "master",
 	               "version": "3.9.0",
-	               "ip": "172.17.0.100",
+	               "ip": "172.29.0.100",
 	               "n_active_agents": 2
 	            }
 	         }
@@ -2918,37 +3029,37 @@ Returns the three last months of ossec.log.
 	   "data": {
 	      "items": [
 	         {
-	            "timestamp": "2019-03-08 08:38:07",
+	            "timestamp": "2019-04-26 09:36:01",
 	            "tag": "ossec-remoted",
 	            "level": "info",
-	            "description": "(1409): Authentication file changed. Updating."
+	            "description": " (1409): Authentication file changed. Updating."
 	         },
 	         {
-	            "timestamp": "2019-03-08 08:38:07",
+	            "timestamp": "2019-04-26 09:36:01",
 	            "tag": "ossec-remoted",
 	            "level": "info",
-	            "description": "(1410): Reading authentication keys file."
+	            "description": " (1410): Reading authentication keys file."
 	         },
 	         {
-	            "timestamp": "2019-03-08 08:37:50",
+	            "timestamp": "2019-04-26 09:35:51",
+	            "tag": "ossec-remoted",
+	            "level": "info",
+	            "description": " (1409): Authentication file changed. Updating."
+	         },
+	         {
+	            "timestamp": "2019-04-26 09:35:51",
+	            "tag": "ossec-remoted",
+	            "level": "info",
+	            "description": " (1410): Reading authentication keys file."
+	         },
+	         {
+	            "timestamp": "2019-04-26 09:35:46",
 	            "tag": "ossec-syscheckd",
 	            "level": "info",
-	            "description": "Ending syscheck scan. Database completed."
-	         },
-	         {
-	            "timestamp": "2019-03-08 08:37:45",
-	            "tag": "ossec-syscheckd",
-	            "level": "info",
-	            "description": "Finished creating syscheck database (pre-scan completed)."
-	         },
-	         {
-	            "timestamp": "2019-03-08 08:37:30",
-	            "tag": "ossec-rootcheck",
-	            "level": "info",
-	            "description": "Ending rootcheck scan."
+	            "description": " (6010): File integrity monitoring scan frequency: 43200 seconds"
 	         }
 	      ],
-	      "totalItems": 598
+	      "totalItems": 299
 	   }
 	}
 	
@@ -2974,119 +3085,39 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	{
 	   "error": 0,
 	   "data": {
+	      "ossec-csyslogd": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-dbd": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-integratord": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-agentlessd": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
 	      "ossec-authd": {
-	         "all": 6,
-	         "info": 6,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-db": {
-	         "all": 3,
-	         "info": 3,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-execd": {
-	         "all": 4,
-	         "info": 4,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-analysisd": {
-	         "all": 455,
-	         "info": 455,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-remoted": {
-	         "all": 11,
-	         "info": 11,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-monitord": {
-	         "all": 3,
-	         "info": 3,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:database": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:download": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "sca": {
-	         "all": 18,
-	         "info": 18,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:osquery": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:ciscat": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:oscap": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-logcollector": {
-	         "all": 19,
-	         "info": 19,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:syscollector": {
 	         "all": 7,
 	         "info": 7,
 	         "error": 0,
@@ -3094,17 +3125,129 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "warning": 0,
 	         "debug": 0
 	      },
+	      "wazuh-db": {
+	         "all": 5,
+	         "info": 5,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-execd": {
+	         "all": 7,
+	         "info": 7,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-remoted": {
+	         "all": 17,
+	         "info": 17,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-monitord": {
+	         "all": 5,
+	         "info": 5,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:database": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:download": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "sca": {
+	         "all": 36,
+	         "info": 33,
+	         "error": 3,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:osquery": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:ciscat": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:oscap": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-analysisd": {
+	         "all": 59,
+	         "info": 59,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-logcollector": {
+	         "all": 29,
+	         "info": 29,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:syscollector": {
+	         "all": 13,
+	         "info": 13,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
 	      "ossec-syscheckd": {
-	         "all": 55,
-	         "info": 55,
+	         "all": 84,
+	         "info": 84,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
 	         "debug": 0
 	      },
 	      "ossec-rootcheck": {
-	         "all": 5,
-	         "info": 5,
+	         "all": 7,
+	         "info": 7,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
@@ -3170,7 +3313,7 @@ Returns the node info
 	      "name": "node01",
 	      "type": "master",
 	      "version": "3.9.0",
-	      "ip": "172.17.0.100"
+	      "ip": "172.29.0.100"
 	   }
 	}
 	
@@ -3217,16 +3360,16 @@ Returns the nodes info
 	      "totalItems": 2,
 	      "items": [
 	         {
-	            "name": "node02",
-	            "type": "worker",
-	            "version": "3.9.0",
-	            "ip": "172.17.0.101"
-	         },
-	         {
 	            "name": "node01",
 	            "type": "master",
 	            "version": "3.9.0",
-	            "ip": "172.17.0.100"
+	            "ip": "172.29.0.100"
+	         },
+	         {
+	            "name": "node02",
+	            "type": "worker",
+	            "version": "3.9.0",
+	            "ip": "172.29.0.101"
 	         }
 	      ]
 	   }
@@ -3305,36 +3448,36 @@ Returns a summary of the current analysisd stats on the node.
 **Example Response:**
 ::
 
-	{
-	    "data": [
-	        {
-	            "hour": 5, 
-	            "firewall": 0, 
-	            "alerts": [
-	                {
-	                    "level": 3, 
-	                    "sigid": 5715, 
-	                    "times": 4
-	                }, 
-	                {
-	                    "level": 2, 
-	                    "sigid": 1002, 
-	                    "times": 2
-	                }, 
-	                {
-	                    "...": "..."
-	                }
-	            ], 
-	            "totalAlerts": 107, 
-	            "syscheck": 1257, 
-	            "events": 1483
-	        }, 
-	        {
-	            "...": "..."
-	        }
-	    ], 
-	    "error": 0
-	}
+   {
+      "data": [
+         {
+            "hour": 5,
+            "firewall": 0,
+            "alerts": [
+               {
+                  "level": 3,
+                  "sigid": 5715,
+                  "times": 4
+               },
+               {
+                  "level": 2,
+                  "sigid": 1002,
+                  "times": 2
+               },
+               {
+                  "...": "..."
+               }
+            ],
+            "totalAlerts": 107,
+            "syscheck": 1257,
+            "events": 1483
+         },
+         {
+            "...": "..."
+         }
+      ],
+      "error": 0
+   }
 
 Get node node_id's remoted stats
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3635,7 +3778,7 @@ Returns all decoders included in ossec.conf.
 	            }
 	         }
 	      ],
-	      "totalItems": 579
+	      "totalItems": 580
 	   }
 	}
 	
@@ -3691,42 +3834,17 @@ Returns all decoders files included in ossec.conf.
 	   "data": {
 	      "items": [
 	         {
-	            "file": "0185-openldap_decoders.xml",
+	            "file": "0450-openvas_decoders.xml",
 	            "path": "ruleset/decoders",
 	            "status": "enabled"
 	         },
 	         {
-	            "file": "0220-postfix_decoders.xml",
+	            "file": "0285-snort_decoders.xml",
 	            "path": "ruleset/decoders",
 	            "status": "enabled"
 	         },
 	         {
-	            "file": "0400-identity_guard_decoders.xml",
-	            "path": "ruleset/decoders",
-	            "status": "enabled"
-	         },
-	         {
-	            "file": "0190-openvpn_decoders.xml",
-	            "path": "ruleset/decoders",
-	            "status": "enabled"
-	         },
-	         {
-	            "file": "0060-cisco-estreamer_decoders.xml",
-	            "path": "ruleset/decoders",
-	            "status": "enabled"
-	         },
-	         {
-	            "file": "0335-telnet_decoders.xml",
-	            "path": "ruleset/decoders",
-	            "status": "enabled"
-	         },
-	         {
-	            "file": "0035-asterisk_decoders.xml",
-	            "path": "ruleset/decoders",
-	            "status": "enabled"
-	         },
-	         {
-	            "file": "0275-sendmail_decoders.xml",
+	            "file": "0460-kaspersky_decoders.xml",
 	            "path": "ruleset/decoders",
 	            "status": "enabled"
 	         },
@@ -3736,7 +3854,32 @@ Returns all decoders files included in ossec.conf.
 	            "status": "enabled"
 	         },
 	         {
+	            "file": "0200-ossec_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
+	         },
+	         {
+	            "file": "0100-fortigate_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
+	         },
+	         {
+	            "file": "0130-imapd_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
+	         },
+	         {
+	            "file": "0205-pam_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
+	         },
+	         {
 	            "file": "0415-jenkins_decoders.xml",
+	            "path": "ruleset/decoders",
+	            "status": "enabled"
+	         },
+	         {
+	            "file": "0060-cisco-estreamer_decoders.xml",
 	            "path": "ruleset/decoders",
 	            "status": "enabled"
 	         }
@@ -3805,7 +3948,7 @@ Returns all parent decoders included in ossec.conf
 	            }
 	         }
 	      ],
-	      "totalItems": 153
+	      "totalItems": 154
 	   }
 	}
 	
@@ -3973,17 +4116,17 @@ Returns the agent's hardware info
 	         {
 	            "cpu": {
 	               "cores": 2,
-	               "mhz": 1991.999,
-	               "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
+	               "mhz": 2207.998,
+	               "name": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz"
 	            },
 	            "ram": {
-	               "free": 55592,
-	               "total": 492832,
-	               "usage": 89
+	               "free": 89768,
+	               "total": 492808,
+	               "usage": 82
 	            },
 	            "scan": {
-	               "id": 599386135,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 1148338474,
+	               "time": "2019/04/26 09:31:17"
 	            },
 	            "board_serial": "0",
 	            "agent_id": "000"
@@ -3991,17 +4134,17 @@ Returns the agent's hardware info
 	         {
 	            "cpu": {
 	               "cores": 1,
-	               "mhz": 1991.999,
-	               "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
+	               "mhz": 2207.998,
+	               "name": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz"
 	            },
 	            "ram": {
-	               "free": 5584,
-	               "total": 234968,
-	               "usage": 98
+	               "free": 18364,
+	               "total": 234944,
+	               "usage": 93
 	            },
 	            "scan": {
-	               "id": 1832132561,
-	               "time": "2019/03/08 08:34:26"
+	               "id": 894102013,
+	               "time": "2019/04/26 09:32:39"
 	            },
 	            "board_serial": "0",
 	            "agent_id": "001"
@@ -4063,19 +4206,19 @@ Returns the agent's network address info
 	   "data": {
 	      "items": [
 	         {
+	            "scan_id": 463920853,
 	            "proto": "ipv6",
-	            "address": "fe80::f9:71ff:fed7:9d11",
-	            "iface": "enp0s3",
+	            "address": "fe80::a00:27ff:fece:abf6",
+	            "iface": "enp0s8",
 	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "scan_id": 1478544824,
 	            "agent_id": "000"
 	         },
 	         {
+	            "scan_id": 463920853,
 	            "proto": "ipv6",
-	            "address": "fe80::a00:27ff:fe78:5d4",
-	            "iface": "enp0s8",
+	            "address": "fe80::be:86ff:fef1:79d5",
+	            "iface": "enp0s3",
 	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "scan_id": 1478544824,
 	            "agent_id": "000"
 	         }
 	      ],
@@ -4154,50 +4297,50 @@ Returns the agent's network interface info
 	      "items": [
 	         {
 	            "rx": {
-	               "bytes": 151695946,
+	               "bytes": 519287,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 111792
+	               "packets": 1040
 	            },
 	            "scan": {
-	               "id": 1478544824,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 463920853,
+	               "time": "2019/04/26 09:31:17"
 	            },
 	            "tx": {
-	               "bytes": 2408059,
+	               "bytes": 61245,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 35104
+	               "packets": 573
 	            },
-	            "name": "enp0s3",
 	            "state": "up",
+	            "mac": "02:be:86:f1:79:d5",
 	            "type": "ethernet",
+	            "name": "enp0s3",
 	            "mtu": 1500,
-	            "mac": "02:f9:71:d7:9d:11",
 	            "agent_id": "000"
 	         },
 	         {
 	            "rx": {
-	               "bytes": 0,
+	               "bytes": 86,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 0
+	               "packets": 1
 	            },
 	            "scan": {
-	               "id": 1478544824,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 463920853,
+	               "time": "2019/04/26 09:31:17"
 	            },
 	            "tx": {
-	               "bytes": 5312,
+	               "bytes": 656,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 24
+	               "packets": 8
 	            },
-	            "name": "enp0s8",
 	            "state": "up",
+	            "mac": "08:00:27:ce:ab:f6",
 	            "type": "ethernet",
+	            "name": "enp0s8",
 	            "mtu": 1500,
-	            "mac": "08:00:27:78:05:d4",
 	            "agent_id": "000"
 	         }
 	      ],
@@ -4257,17 +4400,17 @@ Returns the agent's network protocol info
 	   "data": {
 	      "items": [
 	         {
+	            "scan_id": 463920853,
+	            "dhcp": "enabled",
 	            "type": "ipv6",
 	            "iface": "enp0s3",
-	            "dhcp": "enabled",
-	            "scan_id": 1478544824,
 	            "agent_id": "000"
 	         },
 	         {
+	            "scan_id": 463920853,
+	            "dhcp": "enabled",
 	            "type": "ipv6",
 	            "iface": "enp0s8",
-	            "dhcp": "enabled",
-	            "scan_id": 1478544824,
 	            "agent_id": "000"
 	         }
 	      ],
@@ -4337,17 +4480,17 @@ Returns the agent's os info
 	               "minor": "04",
 	               "name": "Ubuntu",
 	               "platform": "ubuntu",
-	               "version": "18.04.1 LTS (Bionic Beaver)"
+	               "version": "18.04.2 LTS (Bionic Beaver)"
 	            },
 	            "scan": {
-	               "id": 242764188,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 1931501729,
+	               "time": "2019/04/26 09:31:17"
 	            },
+	            "release": "4.15.0-48-generic",
 	            "architecture": "x86_64",
-	            "release": "4.15.0-43-generic",
-	            "version": "#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018",
-	            "sysname": "Linux",
 	            "hostname": "master",
+	            "sysname": "Linux",
+	            "version": "#51-Ubuntu SMP Wed Apr 3 08:28:49 UTC 2019",
 	            "agent_id": "000"
 	         },
 	         {
@@ -4357,17 +4500,17 @@ Returns the agent's os info
 	               "minor": "04",
 	               "name": "Ubuntu",
 	               "platform": "ubuntu",
-	               "version": "18.04.1 LTS (Bionic Beaver)"
+	               "version": "18.04.2 LTS (Bionic Beaver)"
 	            },
 	            "scan": {
-	               "id": 2140135162,
-	               "time": "2019/03/08 08:34:26"
+	               "id": 648258450,
+	               "time": "2019/04/26 09:32:39"
 	            },
+	            "release": "4.15.0-48-generic",
 	            "architecture": "x86_64",
-	            "release": "4.15.0-43-generic",
-	            "version": "#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018",
-	            "sysname": "Linux",
 	            "hostname": "agent-1",
+	            "sysname": "Linux",
+	            "version": "#51-Ubuntu SMP Wed Apr 3 08:28:49 UTC 2019",
 	            "agent_id": "001"
 	         }
 	      ],
@@ -4432,39 +4575,39 @@ Returns the agent's packages info
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 520922172,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 473742531,
+	               "time": "2019/04/26 09:31:17"
 	            },
 	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-	            "name": "acl",
-	            "priority": "optional",
-	            "description": "Access control list utilities",
 	            "architecture": "amd64",
-	            "format": "deb",
-	            "size": 200,
-	            "version": "2.2.52-3build1",
 	            "section": "utils",
 	            "multiarch": "foreign",
+	            "version": "2.2.52-3build1",
+	            "name": "acl",
+	            "description": "Access control list utilities",
+	            "priority": "optional",
+	            "format": "deb",
+	            "size": 200,
 	            "agent_id": "000"
 	         },
 	         {
 	            "scan": {
-	               "id": 520922172,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 473742531,
+	               "time": "2019/04/26 09:31:17"
 	            },
 	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-	            "name": "accountsservice",
-	            "priority": "optional",
-	            "description": "query and manipulate user account information",
 	            "architecture": "amd64",
+	            "section": "admin",
+	            "version": "0.6.45-1ubuntu1",
+	            "name": "accountsservice",
+	            "description": "query and manipulate user account information",
+	            "priority": "optional",
 	            "format": "deb",
 	            "size": 440,
-	            "version": "0.6.45-1ubuntu1",
-	            "section": "admin",
 	            "agent_id": "000"
 	         }
 	      ],
-	      "totalItems": 2068
+	      "totalItems": 2150
 	   }
 	}
 	
@@ -4537,14 +4680,14 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 2112182802,
-	               "time": "2019/03/08 08:30:59"
+	               "id": 1184413738,
+	               "time": "2019/04/26 09:31:27"
 	            },
-	            "state": "listening",
-	            "tx_queue": 0,
 	            "rx_queue": 0,
-	            "inode": 19354,
+	            "state": "listening",
+	            "inode": 18141,
 	            "protocol": "tcp6",
+	            "tx_queue": 0,
 	            "agent_id": "000"
 	         },
 	         {
@@ -4557,14 +4700,14 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 2112182802,
-	               "time": "2019/03/08 08:30:59"
+	               "id": 1184413738,
+	               "time": "2019/04/26 09:31:27"
 	            },
-	            "state": "listening",
-	            "tx_queue": 0,
 	            "rx_queue": 0,
-	            "inode": 258878,
+	            "state": "listening",
+	            "inode": 19283,
 	            "protocol": "tcp6",
+	            "tx_queue": 0,
 	            "agent_id": "000"
 	         }
 	      ],
@@ -4645,72 +4788,73 @@ Returns the agent's processes info
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 225991434,
-	               "time": "2019/03/08 08:30:59"
+	               "id": 1163372527,
+	               "time": "2019/04/26 09:31:27"
 	            },
-	            "fgroup": "root",
-	            "state": "S",
-	            "priority": 20,
-	            "suser": "root",
+	            "cmd": "/sbin/init",
 	            "ppid": 0,
-	            "vm_size": 0,
-	            "session": 0,
-	            "pid": "2",
-	            "nlwp": 1,
-	            "name": "kthreadd",
+	            "suser": "root",
+	            "session": 1,
+	            "stime": 669,
+	            "utime": 46,
+	            "pid": "1",
+	            "pgrp": 1,
 	            "euser": "root",
-	            "sgroup": "root",
-	            "size": 0,
-	            "stime": 0,
-	            "nice": 0,
-	            "share": 0,
-	            "processor": 1,
 	            "ruser": "root",
-	            "egroup": "root",
+	            "priority": 20,
+	            "tgid": 1,
+	            "size": 19480,
+	            "processor": 1,
+	            "state": "S",
+	            "share": 1687,
 	            "rgroup": "root",
-	            "pgrp": 0,
-	            "resident": 0,
-	            "utime": 0,
-	            "tgid": 2,
-	            "start_time": 8,
+	            "start_time": 1,
+	            "nice": 0,
+	            "egroup": "root",
+	            "vm_size": 77920,
+	            "nlwp": 1,
+	            "fgroup": "root",
+	            "name": "systemd",
+	            "resident": 2274,
 	            "tty": 0,
+	            "sgroup": "root",
 	            "agent_id": "000"
 	         },
 	         {
 	            "scan": {
-	               "id": 225991434,
-	               "time": "2019/03/08 08:30:59"
+	               "id": 1163372527,
+	               "time": "2019/04/26 09:31:27"
 	            },
-	            "fgroup": "root",
-	            "state": "S",
-	            "priority": 25,
-	            "suser": "root",
 	            "ppid": 2,
-	            "vm_size": 0,
+	            "suser": "root",
 	            "session": 0,
-	            "pid": "28",
-	            "nlwp": 1,
-	            "name": "ksmd",
-	            "euser": "root",
-	            "sgroup": "root",
-	            "size": 0,
 	            "stime": 0,
-	            "nice": 5,
-	            "share": 0,
-	            "processor": 1,
-	            "ruser": "root",
-	            "egroup": "root",
-	            "rgroup": "root",
-	            "pgrp": 0,
-	            "resident": 0,
 	            "utime": 0,
+	            "pid": "28",
+	            "pgrp": 0,
+	            "euser": "root",
+	            "ruser": "root",
+	            "priority": 25,
 	            "tgid": 28,
-	            "start_time": 22,
+	            "size": 0,
+	            "processor": 1,
+	            "state": "S",
+	            "share": 0,
+	            "rgroup": "root",
+	            "start_time": 4,
+	            "nice": 5,
+	            "egroup": "root",
+	            "vm_size": 0,
+	            "nlwp": 1,
+	            "fgroup": "root",
+	            "name": "ksmd",
+	            "resident": 0,
 	            "tty": 0,
+	            "sgroup": "root",
 	            "agent_id": "000"
 	         }
 	      ],
-	      "totalItems": 420
+	      "totalItems": 404
 	   }
 	}
 	
@@ -4915,16 +5059,16 @@ Returns the path from all lists.
 	      "totalItems": 4,
 	      "items": [
 	         {
-	            "path": "etc/lists",
-	            "name": "security-eventchannel"
-	         },
-	         {
 	            "path": "etc/lists/amazon",
 	            "name": "aws-sources"
 	         },
 	         {
 	            "path": "etc/lists/amazon",
 	            "name": "aws-eventnames"
+	         },
+	         {
+	            "path": "etc/lists",
+	            "name": "security-eventchannel"
 	         },
 	         {
 	            "path": "etc/lists",
@@ -4941,6 +5085,103 @@ Manager
 ----------------------------------------
 Configuration
 ++++++++++++++++++++++++++++++++++++++++
+
+Get manager active configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Returns the requested configuration in JSON format.
+
+**Request**:
+
+``GET`` ::
+
+	/manager/config/:component/:configuration
+
+**Parameters:**
+
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Param                        | Type          | Description                                                                                                                                                                                                                          |
++==============================+===============+======================================================================================================================================================================================================================================+
+| ``component``                | String        | Indicates the wazuh component to check.                                                                                                                                                                                              |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - agent                                                                                                                                                                                                                              |
+|                              |               | - agentless                                                                                                                                                                                                                          |
+|                              |               | - analysis                                                                                                                                                                                                                           |
+|                              |               | - auth                                                                                                                                                                                                                               |
+|                              |               | - com                                                                                                                                                                                                                                |
+|                              |               | - csyslog                                                                                                                                                                                                                            |
+|                              |               | - integrator                                                                                                                                                                                                                         |
+|                              |               | - logcollector                                                                                                                                                                                                                       |
+|                              |               | - mail                                                                                                                                                                                                                               |
+|                              |               | - monitor                                                                                                                                                                                                                            |
+|                              |               | - request                                                                                                                                                                                                                            |
+|                              |               | - syscheck                                                                                                                                                                                                                           |
+|                              |               | - wmodules                                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``configuration``            | String        | Indicates a configuration to check in the component.                                                                                                                                                                                 |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | Allowed values:                                                                                                                                                                                                                      |
+|                              |               |                                                                                                                                                                                                                                      |
+|                              |               | - client                                                                                                                                                                                                                             |
+|                              |               | - buffer                                                                                                                                                                                                                             |
+|                              |               | - labels                                                                                                                                                                                                                             |
+|                              |               | - internal                                                                                                                                                                                                                           |
+|                              |               | - agentless                                                                                                                                                                                                                          |
+|                              |               | - global                                                                                                                                                                                                                             |
+|                              |               | - active_response                                                                                                                                                                                                                    |
+|                              |               | - alerts                                                                                                                                                                                                                             |
+|                              |               | - command                                                                                                                                                                                                                            |
+|                              |               | - rules                                                                                                                                                                                                                              |
+|                              |               | - decoders                                                                                                                                                                                                                           |
+|                              |               | - internal                                                                                                                                                                                                                           |
+|                              |               | - auth                                                                                                                                                                                                                               |
+|                              |               | - active-response                                                                                                                                                                                                                    |
+|                              |               | - internal                                                                                                                                                                                                                           |
+|                              |               | - cluster                                                                                                                                                                                                                            |
+|                              |               | - csyslog                                                                                                                                                                                                                            |
+|                              |               | - integration                                                                                                                                                                                                                        |
+|                              |               | - localfile                                                                                                                                                                                                                          |
+|                              |               | - socket                                                                                                                                                                                                                             |
+|                              |               | - remote                                                                                                                                                                                                                             |
+|                              |               | - syscheck                                                                                                                                                                                                                           |
+|                              |               | - rootcheck                                                                                                                                                                                                                          |
+|                              |               | - wmodules                                                                                                                                                                                                                           |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+**Example Request:**
+::
+
+	curl -u foo:bar -k -X GET "https://127.0.0.1:55000/manager/config/logcollector/internal?pretty"
+
+**Example Response:**
+::
+
+   {
+      "error": 0,
+      "data": {
+         "internal": {
+            "logcollector": {
+               "remote_commands": 0,
+               "loop_timeout": 2,
+               "open_attempts": 8,
+               "vcheck_files": 64,
+               "max_lines": 10000,
+               "max_files": 1000,
+               "sock_fail_time": 300,
+               "debug": 0,
+               "sample_log_length": 64,
+               "queue_size": 1024,
+               "input_threads": 4,
+               "force_reload": 0,
+               "reload_interval": 64,
+               "reload_delay": 1000,
+               "rlimit_nofile": 1100
+            }
+         }
+      }
+   }
+
 
 Get manager configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5037,7 +5278,7 @@ Confirmation message.
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param                        | Type          | Description                                                                                                                                                                                                                          |
 +==============================+===============+======================================================================================================================================================================================================================================+
-| ``path``                     | String        | Relative path of file.                                                                                                                                                                                                               |
+| ``path``                     | String        | Relative path of file. This parameter is mandatory.                                                                                                                                                                                  |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -5069,7 +5310,9 @@ Returns the content of a local file (rules, decoders and lists).
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param                        | Type          | Description                                                                                                                                                                                                                          |
 +==============================+===============+======================================================================================================================================================================================================================================+
-| ``path``                     | String        | Relative path of file.                                                                                                                                                                                                               |
+| ``path``                     | String        | Relative path of file. This parameter is mandatory.                                                                                                                                                                                  |
++------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| ``validation``               | String        | Default false. true for validating the content of the file. An error will be returned file content is not strictly correct.                                                                                                          |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -5103,7 +5346,7 @@ Upload a local file (rules, decoders and lists).
 +==============================+===============+======================================================================================================================================================================================================================================+
 | ``file``                     | String        | Input file.                                                                                                                                                                                                                          |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``path``                     | String        | Relative path were input file will be placed.                                                                                                                                                                                        |
+| ``path``                     | String        | Relative path were input file will be placed. This parameter is mandatory.                                                                                                                                                           |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``overwrite``                | String        | false to fail if file already exists (default). true to replace the existing file                                                                                                                                                    |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -5148,11 +5391,11 @@ Returns basic information about manager.
 	   "data": {
 	      "path": "/var/ossec",
 	      "version": "v3.9.0",
-	      "compilation_date": "Fri Mar  8 08:35:38 UTC 2019",
+	      "compilation_date": "Fri Apr 26 07:05:33 UTC 2019",
 	      "type": "manager",
 	      "max_agents": "14000",
 	      "openssl_support": "yes",
-	      "ruleset_version": "3905",
+	      "ruleset_version": "3911",
 	      "tz_offset": "+0000",
 	      "tz_name": "UTC"
 	   }
@@ -5194,7 +5437,8 @@ Returns the status of the manager processes.
 	      "ossec-reportd": "stopped",
 	      "ossec-syscheckd": "running",
 	      "wazuh-clusterd": "running",
-	      "wazuh-modulesd": "running"
+	      "wazuh-modulesd": "running",
+	      "wazuh-db": "running"
 	   }
 	}
 	
@@ -5251,37 +5495,37 @@ Returns the three last months of ossec.log.
 	   "data": {
 	      "items": [
 	         {
-	            "timestamp": "2019-03-08 08:38:27",
+	            "timestamp": "2019-04-26 09:36:01",
 	            "tag": "ossec-remoted",
 	            "level": "info",
-	            "description": "(1409): Authentication file changed. Updating."
+	            "description": " (1409): Authentication file changed. Updating."
 	         },
 	         {
-	            "timestamp": "2019-03-08 08:38:27",
+	            "timestamp": "2019-04-26 09:36:01",
 	            "tag": "ossec-remoted",
 	            "level": "info",
-	            "description": "(1410): Reading authentication keys file."
+	            "description": " (1410): Reading authentication keys file."
 	         },
 	         {
-	            "timestamp": "2019-03-08 08:38:07",
+	            "timestamp": "2019-04-26 09:35:51",
 	            "tag": "ossec-remoted",
 	            "level": "info",
-	            "description": "(1409): Authentication file changed. Updating."
+	            "description": " (1409): Authentication file changed. Updating."
 	         },
 	         {
-	            "timestamp": "2019-03-08 08:38:07",
+	            "timestamp": "2019-04-26 09:35:51",
 	            "tag": "ossec-remoted",
 	            "level": "info",
-	            "description": "(1410): Reading authentication keys file."
+	            "description": " (1410): Reading authentication keys file."
 	         },
 	         {
-	            "timestamp": "2019-03-08 08:37:50",
+	            "timestamp": "2019-04-26 09:35:46",
 	            "tag": "ossec-syscheckd",
 	            "level": "info",
-	            "description": "Ending syscheck scan. Database completed."
+	            "description": " (6010): File integrity monitoring scan frequency: 43200 seconds"
 	         }
 	      ],
-	      "totalItems": 600
+	      "totalItems": 299
 	   }
 	}
 	
@@ -5307,119 +5551,39 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	{
 	   "error": 0,
 	   "data": {
+	      "ossec-csyslogd": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-dbd": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-integratord": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-agentlessd": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
 	      "ossec-authd": {
-	         "all": 6,
-	         "info": 6,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-db": {
-	         "all": 3,
-	         "info": 3,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-execd": {
-	         "all": 4,
-	         "info": 4,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-analysisd": {
-	         "all": 455,
-	         "info": 455,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-remoted": {
-	         "all": 13,
-	         "info": 13,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-monitord": {
-	         "all": 3,
-	         "info": 3,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:database": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:download": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "sca": {
-	         "all": 18,
-	         "info": 18,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:osquery": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:ciscat": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:oscap": {
-	         "all": 2,
-	         "info": 2,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "ossec-logcollector": {
-	         "all": 19,
-	         "info": 19,
-	         "error": 0,
-	         "critical": 0,
-	         "warning": 0,
-	         "debug": 0
-	      },
-	      "wazuh-modulesd:syscollector": {
 	         "all": 7,
 	         "info": 7,
 	         "error": 0,
@@ -5427,17 +5591,129 @@ Returns a summary of the last three months of the <code>ossec.log</code> file.
 	         "warning": 0,
 	         "debug": 0
 	      },
+	      "wazuh-db": {
+	         "all": 5,
+	         "info": 5,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-execd": {
+	         "all": 7,
+	         "info": 7,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-remoted": {
+	         "all": 17,
+	         "info": 17,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-monitord": {
+	         "all": 5,
+	         "info": 5,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:database": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:download": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "sca": {
+	         "all": 36,
+	         "info": 33,
+	         "error": 3,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:osquery": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:ciscat": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:oscap": {
+	         "all": 3,
+	         "info": 3,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-analysisd": {
+	         "all": 59,
+	         "info": 59,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "ossec-logcollector": {
+	         "all": 29,
+	         "info": 29,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
+	      "wazuh-modulesd:syscollector": {
+	         "all": 13,
+	         "info": 13,
+	         "error": 0,
+	         "critical": 0,
+	         "warning": 0,
+	         "debug": 0
+	      },
 	      "ossec-syscheckd": {
-	         "all": 55,
-	         "info": 55,
+	         "all": 84,
+	         "info": 84,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
 	         "debug": 0
 	      },
 	      "ossec-rootcheck": {
-	         "all": 5,
-	         "info": 5,
+	         "all": 7,
+	         "info": 7,
 	         "error": 0,
 	         "critical": 0,
 	         "warning": 0,
@@ -5499,9 +5775,9 @@ Returns a summary of the current analysisd stats.
 	{
 	   "error": 0,
 	   "data": {
-	      "total_events_decoded": 5,
-	      "syscheck_events_decoded": 0,
-	      "syscheck_edps": 0,
+	      "total_events_decoded": 178,
+	      "syscheck_events_decoded": 173,
+	      "syscheck_edps": 34,
 	      "syscollector_events_decoded": 0,
 	      "syscollector_edps": 0,
 	      "rootcheck_events_decoded": 0,
@@ -5516,7 +5792,7 @@ Returns a summary of the current analysisd stats.
 	      "other_events_edps": 1,
 	      "events_processed": 5,
 	      "events_edps": 1,
-	      "events_received": 5,
+	      "events_received": 178,
 	      "events_dropped": 0,
 	      "alerts_written": 0,
 	      "firewall_written": 0,
@@ -5847,8 +6123,8 @@ Returns the timestamp of the last rootcheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "end": "2019-03-08 08:31:37",
-	      "start": "2019-03-08 08:31:10"
+	      "end": "2019-04-26 06:59:09",
+	      "start": "2019-04-26 09:31:34"
 	   }
 	}
 	
@@ -5885,17 +6161,16 @@ Returns the CIS requirements of all rootchecks of the specified agent.
 **Example Response:**
 ::
 
-	{
-		"error": 0,
-		"data": {
-			"totalItems": 2,
-			"items": [
-				"2.3 Debian Linux",
-				"1.4 Debian Linux"
-			]
-		}
-	}
-	
+   {
+      "error": 0,
+      "data": {
+         "totalItems": 2,
+         "items": [
+            "2.3 Debian Linux",
+            "1.4 Debian Linux"
+         ]
+      }
+   }
 
 Get rootcheck database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -5937,27 +6212,27 @@ Returns the rootcheck database of an agent.
 **Example Response:**
 ::
 
-	{
-	   "error": 0,
-	   "data": {
-	      "items": [
-				{
-					"status": "outstanding",
-					"readDay": "2019-03-08 09:20:05",
-					"oldDay": "2019-03-08 09:20:05",
-					"event": "System Audit: SSH Hardening - 3: Root can log in. File: /etc/ssh/sshd_config. Reference: 3 ."
-				},
-				{
-					"status": "outstanding",
-					"readDay": "2019-03-08 09:20:05",
-					"oldDay": "2019-03-08 09:20:05",
-					"pci": "2.2.4",
-					"event": "System Audit: SSH Hardening - 4: No Public Key authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 4 ."
-				},
-			],
-	      "totalItems": 0
-	   }
-	}
+   {
+      "error": 0,
+      "data": {
+          "totalItems": 6,
+          "items": [
+            {
+               "status": "outstanding",
+               "oldDay": "2019-01-11 18:40:30",
+               "event": "System Audit: SSH Hardening - 3: Root can log in. File: /etc/ssh/sshd_config. Reference: 3 .",
+               "readDay": "2019-01-11 18:51:45"
+            },
+            {
+               "status": "outstanding",
+               "oldDay": "2019-01-11 18:40:30",
+               "pci": "2.2.4",
+               "event": "System Audit: SSH Hardening - 4: No Public Key authentication {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 4 .",
+               "readDay": "2019-01-11 18:51:45"
+            }
+         ]
+      }
+   }
 	
 
 Get rootcheck pci requirements
@@ -5992,15 +6267,16 @@ Returns the PCI requirements of all rootchecks of the agent.
 **Example Response:**
 ::
 
-	{
-	   "error": 0,
-	   "data": {
-	      "totalItems": 0,
-	      "items": [
-				"2.2.4"
-			]
-	   }
-	}
+   {
+      "error": 0,
+      "data": {
+         "totalItems": 2,
+         "items": [
+            "4.1",
+            "2.2.4"
+         ]
+      }
+   }
 	
 
 
@@ -6160,7 +6436,7 @@ Returns all rules.
 	            }
 	         }
 	      ],
-	      "totalItems": 2167
+	      "totalItems": 2703
 	   }
 	}
 	
@@ -6266,7 +6542,7 @@ Returns the files of all rules.
 	            "status": "enabled"
 	         }
 	      ],
-	      "totalItems": 111
+	      "totalItems": 121
 	   }
 	}
 	
@@ -6364,7 +6640,7 @@ Returns the groups of all rules.
 	         "agent_restarting",
 	         "agentless"
 	      ],
-	      "totalItems": 318
+	      "totalItems": 321
 	   }
 	}
 	
@@ -6552,194 +6828,306 @@ Returns the sca checks of an agent
 	      "totalItems": 16,
 	      "items": [
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
-	            "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
-	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - .htaccess file compromised - auto append",
-	            "id": 1015,
-	            "compliance": [
-	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
-	               }
-	            ]
-	         },
-	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
+	            "policy_id": "system_audit",
 	            "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
-	            "policy_id": "system_audit",
+	            "id": 1015,
+	            "result": "",
+	            "compliance": [
+	               {
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^.htaccess$ -> r:php_value auto_append_file;"
+	               }
+	            ]
+	         },
+	         {
 	            "title": "Web vulnerability - .htaccess file compromised",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
+	            "policy_id": "system_audit",
+	            "references": "https://blog.sucuri.net/2011/05/understanding-htaccess-attacks-part-1.html",
 	            "id": 1014,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^.htaccess$ -> r:RewriteCond \\S+HTTP_REFERERS \\S+google;"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
+	            "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode(POST))",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
 	            "policy_id": "system_audit",
-	            "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode(POST ",
 	            "id": 1013,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> .php$ -> r:eval\\(base64_decode\\(\\S_POST;"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
+	            "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode)",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
 	            "policy_id": "system_audit",
-	            "title": "Web vulnerability - Backdoors / Web based malware found - eval(base64_decode",
 	            "id": 1012,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> .php$ -> r:eval\\(base64_decode\\(\\paWYo;"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
-	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - Outdated osCommerce (v2.2) installation",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
+	            "policy_id": "system_audit",
 	            "id": 1011,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^application_top.php$ -> r:'osCommerce 2.2-;"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
-	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - Outdated Joomla installation",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
+	            "policy_id": "system_audit",
 	            "id": 1010,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^version.php$ -> IN r:var \\.RELEASE && r:'3.4.8';"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
-	            "policy_id": "system_audit",
 	            "title": "Web vulnerability - Outdated WordPress installation",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
+	            "policy_id": "system_audit",
 	            "id": 1009,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^version.php$ -> IN r:^\\.wp_version && >:$wp_version = '4.4.2';"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
+	            "title": "Web exploits: '.shell' is an uncommon file name inside htdocs - Possible compromise",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
 	            "policy_id": "system_audit",
-	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
 	            "id": 1008,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^.shell$;"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
+	            "title": "Web exploits: '...' is an uncommon file name inside htdocs - Possible compromise",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
 	            "policy_id": "system_audit",
-	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
 	            "id": 1007,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^...$;"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
+	            "title": "Web exploits: '.ssh' is an uncommon file name inside htdocs",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
 	            "policy_id": "system_audit",
-	            "title": "Web exploits (uncommon file name inside htdocs)",
 	            "id": 1006,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^.ssh$;"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
+	            "title": "Web exploits: 'id' is an uncommon file name inside htdocs - Possible compromise",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
 	            "policy_id": "system_audit",
-	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
 	            "id": 1005,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^id$;"
 	               }
 	            ]
 	         },
 	         {
-	            "directory": "/var/www,/var/htdocs,/home/httpd,/usr/local/apache,/usr/local/apache2,/usr/local/www",
-	            "result": "passed",
+	            "title": "Web exploits: '.yop' is an uncommon file name inside htdocs - Possible compromise",
+	            "status": "Not applicable",
+	            "reason": "Directory /var/www not found",
 	            "policy_id": "system_audit",
-	            "title": "Web exploits (uncommon file name inside htdocs) - Possible compromise",
 	            "id": 1004,
+	            "result": "",
 	            "compliance": [
 	               {
-	                  "value": "6.5, 6.6, 11.4",
-	                  "key": "pci_dss"
+	                  "key": "pci_dss",
+	                  "value": "6.5, 6.6, 11.4"
+	               }
+	            ],
+	            "rules": [
+	               {
+	                  "type": "directory",
+	                  "rule": "d:$web_dirs -> ^.yop$;"
 	               }
 	            ]
 	         },
 	         {
-	            "result": "passed",
-	            "policy_id": "system_audit",
 	            "title": "PHP - Displaying of errors is enabled",
-	            "file": "/etc/php.ini",
+	            "status": "Not applicable",
+	            "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
+	            "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
+	            "policy_id": "system_audit",
 	            "id": 1003,
-	            "compliance": []
+	            "result": "",
+	            "rules": [
+	               {
+	                  "type": "file",
+	                  "rule": "f:$php.ini -> r:^display_errors = On;"
+	               }
+	            ]
 	         },
 	         {
-	            "result": "passed",
-	            "policy_id": "system_audit",
 	            "title": "PHP - Allow URL fopen is enabled",
-	            "file": "/etc/php.ini",
+	            "status": "Not applicable",
+	            "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
+	            "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
+	            "policy_id": "system_audit",
 	            "id": 1002,
-	            "compliance": []
+	            "result": "",
+	            "rules": [
+	               {
+	                  "type": "file",
+	                  "rule": "f:$php.ini -> r:^allow_url_fopen = On;"
+	               }
+	            ]
 	         },
 	         {
-	            "result": "passed",
-	            "policy_id": "system_audit",
 	            "title": "PHP - Expose PHP is enabled",
-	            "file": "/etc/php.ini",
+	            "status": "Not applicable",
+	            "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
+	            "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
+	            "policy_id": "system_audit",
 	            "id": 1001,
-	            "compliance": []
+	            "result": "",
+	            "rules": [
+	               {
+	                  "type": "file",
+	                  "rule": "f:$php.ini -> r:^expose_php = On;"
+	               }
+	            ]
 	         },
 	         {
-	            "result": "passed",
-	            "policy_id": "system_audit",
 	            "title": "PHP - Register globals are enabled",
-	            "file": "/etc/php.ini",
+	            "status": "Not applicable",
+	            "file": "/etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini",
+	            "reason": "File /etc/php.ini,/var/www/conf/php.ini,/etc/php5/apache2/php.ini not found",
+	            "policy_id": "system_audit",
 	            "id": 1000,
-	            "compliance": []
+	            "result": "",
+	            "rules": [
+	               {
+	                  "type": "file",
+	                  "rule": "f:$php.ini -> r:^register_globals = On;"
+	               }
+	            ]
 	         }
 	      ]
 	   }
@@ -6748,7 +7136,7 @@ Returns the sca checks of an agent
 
 Get security configuration assessment (SCA) database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Returns the security sca database of an agent.
+Returns the sca database of an agent.
 
 **Request**:
 
@@ -6788,26 +7176,25 @@ Returns the security sca database of an agent.
 **Example Response:**
 ::
 
-	{
-	   "error": 0,
-	   "data": {
-	      "totalItems": 1,
-	      "items": [
-	         {
-	            "name": "System audit for web-related vulnerabilities",
-	            "description": "Guidance for establishing a secure configuration for web-related vulnerabilities.",
-	            "references": "(null)",
-	            "pass": 76,
-	            "policy_id": "system_audit",
-	            "fail": 0,
-	            "score": 100,
-	            "end_scan": "2019-03-08 08:30:58",
-	            "start_scan": "2019-03-08 08:30:58"
-	         }
-	      ]
-	   }
-	}
-	
+   {
+      "error": 0,
+      "data": {
+         "totalItems": 1,
+         "items": [
+            {
+               "name": "System audit for web-related vulnerabilities",
+               "description": "Guidance for establishing a secure configuration for web-related vu
+               "references": "(null)",
+               "pass": 76,
+               "policy_id": "system_audit",
+               "fail": 0,
+               "score": 100,
+               "end_scan": "2019-03-08 08:30:58",
+               "start_scan": "2019-03-08 08:30:58"
+            }
+         ]
+      }
+   }
 
 
 
@@ -6880,8 +7267,8 @@ Return the timestamp of the last syscheck scan.
 	{
 	   "error": 0,
 	   "data": {
-	      "start": "2019-03-08 08:31:10",
-	      "end": "2019-03-08 08:31:55"
+	      "start": "2019-04-26 09:36:22",
+	      "end": "2019-04-26 09:33:35"
 	   }
 	}
 	
@@ -6949,39 +7336,41 @@ Returns the syscheck files of an agent.
 	{
 	   "error": 0,
 	   "data": {
-	      "totalItems": 2885,
+	      "totalItems": 2947,
 	      "items": [
 	         {
+	            "mtime": "2018-02-22 13:51:46",
+	            "perm": "100755",
 	            "gname": "root",
-	            "perm": "100644",
-	            "md5": "f7bf238a3b0bf155c565454a9f819731",
+	            "md5": "69c0a826b29c8f40b7ca5e56e53d7f83",
+	            "inode": 1435,
+	            "file": "/etc/apm/event.d/20hdparm",
+	            "date": "2019-04-26 09:31:39",
+	            "attributes": 0,
 	            "type": "file",
-	            "date": "2019-03-08 08:31:15",
-	            "uname": "root",
-	            "uid": "0",
-	            "sha256": "a39fbc57dc2ef8a473f078d1f6a35f725809400df67070b8852e8ed725047df2",
+	            "sha256": "c1e95c62b637983eafd28d46bb6cfcb963b693dc0ea216797d37308b6ef6ecd0",
 	            "gid": "0",
-	            "size": 1580,
-	            "mtime": "2018-11-05 11:51:29",
-	            "inode": 1579,
-	            "sha1": "016f8bd2ea009451042a856611d5d2967760e833",
-	            "file": "/etc/ssh/ssh_config"
+	            "uid": "0",
+	            "sha1": "d60de1a77a45d23a5ee29f92e48237dc74010598",
+	            "uname": "root",
+	            "size": 2265
 	         },
 	         {
-	            "gname": "root",
+	            "mtime": "2019-04-26 06:51:27",
 	            "perm": "100644",
-	            "md5": "fe5be9e1b2ad5c55132a3521ecaadcdd",
+	            "gname": "root",
+	            "md5": "716db30e7647bc1f6bcfa8ae643586ee",
+	            "inode": 1530,
+	            "file": "/etc/subgid",
+	            "date": "2019-04-26 09:31:39",
+	            "attributes": 0,
 	            "type": "file",
-	            "date": "2019-03-08 08:31:15",
-	            "uname": "root",
-	            "uid": "0",
-	            "sha256": "9fa9dd312da04fbad130b70c96bf9707b8dc72cbdbb304d69bf58f52f94883b4",
+	            "sha256": "3261d91aab0781d0f98cd633d1537bbb4d1a823b52ec4a78458dbc5dd389242f",
 	            "gid": "0",
-	            "size": 553122,
-	            "mtime": "2018-11-05 11:51:29",
-	            "inode": 1578,
-	            "sha1": "6541fc14923473fcd2e04c98248c9ef2613050b1",
-	            "file": "/etc/ssh/moduli"
+	            "uid": "0",
+	            "sha1": "79698bb03edab7c36c1f6ec9d098cae7cd77d247",
+	            "uname": "root",
+	            "size": 76
 	         }
 	      ]
 	   }
@@ -7087,17 +7476,17 @@ Returns the agent's hardware info
 	   "data": {
 	      "cpu": {
 	         "cores": 2,
-	         "mhz": 1991.999,
-	         "name": "Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz"
+	         "mhz": 2207.998,
+	         "name": "Intel(R) Core(TM) i7-8750H CPU @ 2.20GHz"
 	      },
 	      "ram": {
-	         "free": 55592,
-	         "total": 492832,
-	         "usage": 89
+	         "free": 89768,
+	         "total": 492808,
+	         "usage": 82
 	      },
 	      "scan": {
-	         "id": 599386135,
-	         "time": "2019/03/08 08:30:53"
+	         "id": 1148338474,
+	         "time": "2019/04/26 09:31:17"
 	      },
 	      "board_serial": "0"
 	   }
@@ -7157,18 +7546,18 @@ Returns the agent's network address info
 	   "data": {
 	      "items": [
 	         {
+	            "scan_id": 463920853,
 	            "proto": "ipv6",
-	            "address": "fe80::f9:71ff:fed7:9d11",
-	            "iface": "enp0s3",
-	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "scan_id": 1478544824
+	            "address": "fe80::a00:27ff:fece:abf6",
+	            "iface": "enp0s8",
+	            "netmask": "ffff:ffff:ffff:ffff::"
 	         },
 	         {
+	            "scan_id": 463920853,
 	            "proto": "ipv6",
-	            "address": "fe80::a00:27ff:fe78:5d4",
-	            "iface": "enp0s8",
-	            "netmask": "ffff:ffff:ffff:ffff::",
-	            "scan_id": 1478544824
+	            "address": "fe80::be:86ff:fef1:79d5",
+	            "iface": "enp0s3",
+	            "netmask": "ffff:ffff:ffff:ffff::"
 	         }
 	      ],
 	      "totalItems": 4
@@ -7246,49 +7635,49 @@ Returns the agent's network interface info
 	      "items": [
 	         {
 	            "rx": {
-	               "bytes": 151695946,
+	               "bytes": 519287,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 111792
+	               "packets": 1040
 	            },
 	            "scan": {
-	               "id": 1478544824,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 463920853,
+	               "time": "2019/04/26 09:31:17"
 	            },
 	            "tx": {
-	               "bytes": 2408059,
+	               "bytes": 61245,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 35104
+	               "packets": 573
 	            },
-	            "name": "enp0s3",
 	            "state": "up",
+	            "mac": "02:be:86:f1:79:d5",
 	            "type": "ethernet",
-	            "mtu": 1500,
-	            "mac": "02:f9:71:d7:9d:11"
+	            "name": "enp0s3",
+	            "mtu": 1500
 	         },
 	         {
 	            "rx": {
-	               "bytes": 0,
+	               "bytes": 86,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 0
+	               "packets": 1
 	            },
 	            "scan": {
-	               "id": 1478544824,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 463920853,
+	               "time": "2019/04/26 09:31:17"
 	            },
 	            "tx": {
-	               "bytes": 5312,
+	               "bytes": 656,
 	               "dropped": 0,
 	               "errors": 0,
-	               "packets": 24
+	               "packets": 8
 	            },
-	            "name": "enp0s8",
 	            "state": "up",
+	            "mac": "08:00:27:ce:ab:f6",
 	            "type": "ethernet",
-	            "mtu": 1500,
-	            "mac": "08:00:27:78:05:d4"
+	            "name": "enp0s8",
+	            "mtu": 1500
 	         }
 	      ],
 	      "totalItems": 2
@@ -7347,16 +7736,16 @@ Returns the agent's network protocol info
 	   "data": {
 	      "items": [
 	         {
-	            "type": "ipv6",
-	            "iface": "enp0s3",
+	            "scan_id": 463920853,
 	            "dhcp": "enabled",
-	            "scan_id": 1478544824
+	            "type": "ipv6",
+	            "iface": "enp0s3"
 	         },
 	         {
-	            "type": "ipv6",
-	            "iface": "enp0s8",
+	            "scan_id": 463920853,
 	            "dhcp": "enabled",
-	            "scan_id": 1478544824
+	            "type": "ipv6",
+	            "iface": "enp0s8"
 	         }
 	      ],
 	      "totalItems": 4
@@ -7405,17 +7794,17 @@ Returns the agent's OS info
 	         "minor": "04",
 	         "name": "Ubuntu",
 	         "platform": "ubuntu",
-	         "version": "18.04.1 LTS (Bionic Beaver)"
+	         "version": "18.04.2 LTS (Bionic Beaver)"
 	      },
 	      "scan": {
-	         "id": 242764188,
-	         "time": "2019/03/08 08:30:53"
+	         "id": 1931501729,
+	         "time": "2019/04/26 09:31:17"
 	      },
+	      "release": "4.15.0-48-generic",
 	      "architecture": "x86_64",
-	      "release": "4.15.0-43-generic",
-	      "version": "#46-Ubuntu SMP Thu Dec 6 14:45:28 UTC 2018",
+	      "hostname": "master",
 	      "sysname": "Linux",
-	      "hostname": "master"
+	      "version": "#51-Ubuntu SMP Wed Apr 3 08:28:49 UTC 2019"
 	   }
 	}
 	
@@ -7476,38 +7865,38 @@ Returns the agent's packages info
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 520922172,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 473742531,
+	               "time": "2019/04/26 09:31:17"
 	            },
 	            "vendor": "Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>",
-	            "name": "base-files",
-	            "priority": "required",
-	            "description": "Debian base system miscellaneous files",
 	            "architecture": "amd64",
-	            "format": "deb",
-	            "size": 386,
-	            "version": "10.1ubuntu2.3",
 	            "section": "admin",
-	            "multiarch": "foreign"
+	            "multiarch": "foreign",
+	            "version": "10.1ubuntu2.4",
+	            "name": "base-files",
+	            "description": "Debian base system miscellaneous files",
+	            "priority": "required",
+	            "format": "deb",
+	            "size": 386
 	         },
 	         {
 	            "scan": {
-	               "id": 520922172,
-	               "time": "2019/03/08 08:30:53"
+	               "id": 473742531,
+	               "time": "2019/04/26 09:31:17"
 	            },
 	            "vendor": "Colin Watson <cjwatson@debian.org>",
-	            "name": "base-passwd",
-	            "priority": "required",
-	            "description": "Debian base system master password and group files",
 	            "architecture": "amd64",
-	            "format": "deb",
-	            "size": 228,
-	            "version": "3.5.44",
 	            "section": "admin",
-	            "multiarch": "foreign"
+	            "multiarch": "foreign",
+	            "version": "3.5.44",
+	            "name": "base-passwd",
+	            "description": "Debian base system master password and group files",
+	            "priority": "required",
+	            "format": "deb",
+	            "size": 228
 	         }
 	      ],
-	      "totalItems": 535
+	      "totalItems": 576
 	   }
 	}
 	
@@ -7580,14 +7969,14 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 2112182802,
-	               "time": "2019/03/08 08:30:59"
+	               "id": 1184413738,
+	               "time": "2019/04/26 09:31:27"
 	            },
-	            "state": "listening",
-	            "tx_queue": 0,
 	            "rx_queue": 0,
-	            "inode": 255211,
-	            "protocol": "tcp"
+	            "state": "listening",
+	            "inode": 20417,
+	            "protocol": "tcp",
+	            "tx_queue": 0
 	         },
 	         {
 	            "local": {
@@ -7599,14 +7988,14 @@ Returns the agent's ports info
 	               "port": 0
 	            },
 	            "scan": {
-	               "id": 2112182802,
-	               "time": "2019/03/08 08:30:59"
+	               "id": 1184413738,
+	               "time": "2019/04/26 09:31:27"
 	            },
-	            "state": "listening",
-	            "tx_queue": 0,
 	            "rx_queue": 0,
-	            "inode": 256005,
-	            "protocol": "tcp"
+	            "state": "listening",
+	            "inode": 21550,
+	            "protocol": "tcp",
+	            "tx_queue": 0
 	         }
 	      ],
 	      "totalItems": 6
@@ -7688,75 +8077,75 @@ Returns the agent's processes info
 	      "items": [
 	         {
 	            "scan": {
-	               "id": 225991434,
-	               "time": "2019/03/08 08:30:59"
+	               "id": 1163372527,
+	               "time": "2019/04/26 09:31:27"
 	            },
-	            "fgroup": "root",
-	            "state": "S",
-	            "priority": 20,
+	            "ppid": 2,
 	            "suser": "root",
-	            "ppid": 2196,
-	            "vm_size": 13312,
-	            "session": 2195,
-	            "pid": "2204",
-	            "nlwp": 1,
-	            "name": "bash",
-	            "euser": "root",
-	            "sgroup": "root",
-	            "size": 3328,
+	            "session": 0,
 	            "stime": 0,
-	            "nice": 0,
-	            "argvs": "/tmp/vagrant-shell,172.17.0.100,master,node01",
-	            "share": 595,
-	            "processor": 1,
-	            "ruser": "root",
-	            "cmd": "bash",
-	            "egroup": "root",
-	            "rgroup": "root",
-	            "pgrp": 2195,
-	            "resident": 659,
 	            "utime": 0,
-	            "tgid": 2204,
-	            "start_time": 4822,
-	            "tty": 0
+	            "pid": "13",
+	            "pgrp": 0,
+	            "euser": "root",
+	            "ruser": "root",
+	            "priority": 20,
+	            "tgid": 13,
+	            "size": 0,
+	            "processor": 1,
+	            "state": "S",
+	            "share": 0,
+	            "rgroup": "root",
+	            "start_time": 2,
+	            "nice": 0,
+	            "egroup": "root",
+	            "vm_size": 0,
+	            "nlwp": 1,
+	            "fgroup": "root",
+	            "name": "cpuhp/1",
+	            "resident": 0,
+	            "tty": 0,
+	            "sgroup": "root"
 	         },
 	         {
 	            "scan": {
-	               "id": 225991434,
-	               "time": "2019/03/08 08:30:59"
+	               "id": 1163372527,
+	               "time": "2019/04/26 09:31:27"
 	            },
-	            "fgroup": "root",
-	            "state": "I",
-	            "priority": 0,
+	            "cmd": "/usr/sbin/cron",
+	            "ppid": 1,
 	            "suser": "root",
-	            "ppid": 2,
-	            "vm_size": 0,
-	            "session": 0,
-	            "pid": "121",
-	            "nlwp": 1,
-	            "name": "charger_manager",
-	            "euser": "root",
-	            "sgroup": "root",
-	            "size": 0,
+	            "session": 856,
 	            "stime": 0,
-	            "nice": -20,
-	            "share": 0,
-	            "processor": 1,
-	            "ruser": "root",
-	            "egroup": "root",
-	            "rgroup": "root",
-	            "pgrp": 0,
-	            "resident": 0,
 	            "utime": 0,
-	            "tgid": 121,
-	            "start_time": 1009,
-	            "tty": 0
+	            "pid": "856",
+	            "pgrp": 856,
+	            "euser": "root",
+	            "ruser": "root",
+	            "argvs": "-f",
+	            "priority": 20,
+	            "tgid": 856,
+	            "size": 7937,
+	            "processor": 1,
+	            "state": "S",
+	            "share": 727,
+	            "rgroup": "root",
+	            "start_time": 3024,
+	            "nice": 0,
+	            "egroup": "root",
+	            "vm_size": 31748,
+	            "nlwp": 1,
+	            "fgroup": "root",
+	            "name": "cron",
+	            "resident": 800,
+	            "tty": 0,
+	            "sgroup": "root"
 	         }
 	      ],
-	      "totalItems": 120
+	      "totalItems": 106
 	   }
 	}
-	
+
 
 
 

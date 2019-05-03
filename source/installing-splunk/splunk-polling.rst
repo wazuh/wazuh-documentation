@@ -41,4 +41,4 @@ Save the file when you're done editing it, and restart Splunk:
   # /opt/splunk/bin/splunk restart
 
 .. note::
-  You can find useful information about the ``inputs.conf`` file in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.5/Admin/Inputsconf>`_.
+  You can find useful information about the ``inputs.conf`` file in the `official documentation <http://docs.splunk.com/Documentation/Splunk/7.2.6/Admin/Inputsconf>`_.
