@@ -148,7 +148,7 @@ Upgrade Logstash
 
   .. code-block:: console
 
-    systemctl restart filebeat
+    systemctl restart logstash
 
 Upgrade Kibana
 --------------
