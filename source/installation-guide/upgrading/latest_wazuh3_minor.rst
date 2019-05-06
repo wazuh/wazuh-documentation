@@ -32,15 +32,24 @@ Upgrade the Wazuh manager
 .. note::
   Since Wazuh v3.7.0 the File Integrity Monitoring database is not used anymore. In order to add to Wazuh DB the file and registry entries stored from previous versions it's necessary to run the :ref:`FIM migration tool <fim_migrate>`.
 
+.. Warning::
+  If you have Wazuh-manager and wazuh-api installed on same host you must perform the upgrade of both packages at same time as we reflect at the point 3.
+
 1. Upgrade the ``wazuh-manager`` package:
 
-  a) For CentOS/RHEL/Fedora:
+  a) For CentOS/RHEL:
 
   .. code-block:: console
 
     # yum upgrade wazuh-manager
+    
+  b) For Fedora:
 
-  b) For Debian/Ubuntu:
+  .. code-block:: console
+
+    # dnf upgrade wazuh-manager
+
+  c) For Debian/Ubuntu:
 
   .. code-block:: console
 
@@ -48,17 +57,46 @@ Upgrade the Wazuh manager
 
 2. Upgrade the ``wazuh-api`` package:
 
-  a) For CentOS/RHEL/Fedora:
+  a) For CentOS/RHEL:
 
   .. code-block:: console
 
     # yum upgrade wazuh-api
+    
+  b) For Fedora:
 
-  b) For Debian/Ubuntu:
+  .. code-block:: console
+
+    # dnf upgrade wazuh-api
+
+  c) For Debian/Ubuntu:
 
   .. code-block:: console
 
     # apt-get update && apt-get install wazuh-api
+    
+3. Upgrade both packages at same time:
+  
+  a) For CentOS/RHEL:
+  
+  .. code-block:: console
+  
+    # yum upgrade wazuh-manager wazuh-api
+    
+  b) For Fedora:
+  
+  .. code-block:: console
+  
+    # dnf upgrade wazuh-manager wazuh-api
+
+  c) For Debian/Ubuntu:
+  
+  .. code-block:: console
+  
+    # apt-get update && apt-get upgrade wazuh-manager wazuh-api
+
+.. note::
+  If your wazuh-api package has been held by APT package manager or by other reasons you can perform an unhold operation by executing **'apt-mark unhold wazuh-api'** this will enable the upgrade by standard way, if you want to re-enable such restrictions you can use **'apt-mark hold wazuh-api'**, thanks to shmurf for this contribution.
 
 .. note::
   The installation of the updated packages **will automatically restart the services** for the Wazuh manager, API and agents. Your Wazuh config file will keep **unmodified**, so you'll need to manually add the settings for the new capabilities. Check the :ref:`User Manual <user_manual>` for more information.
