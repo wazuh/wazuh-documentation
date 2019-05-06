@@ -41,17 +41,25 @@ Some registration methods automatically detect the IP of the agent during the re
 Registration methods
 ----------------------
 
-Here are three ways to register an agent:
+Here you can find different methods to register the Wazuh Agents:
 
-+---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
-| Type          | Method                                                          | Description                                                            |
-+===============+=================================================================+========================================================================+
-| Manually      | :ref:`Using the command line <command-line-register>`           | Register an agent manually using manage_agents binary.                 |
-+---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
-| Automatically | :doc:`Using the registration service <use-registration-service>`| Register an agent automatically using ossec-authd binary.              |
-+               +-----------------------------------------------------------------+------------------------------------------------------------------------+
-|               | :ref:`Using the Wazuh API <restful-api-register>`               | Register an agent by scripting (bash, python, powershell) and the API. |
-+---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
++----------------+---------------------------------------------------------------+
+| Type           | Method                                                        |
++================+===============================================================+
+| Manual method  | :ref:`using-command-line`                                     |
++----------------+---------------------------------------------------------------+
+| Semi automatic | :ref:`restful-api-register`                                   |
++----------------+---------------------------------------------------------------+
+|                | :ref:`simple-registration-service`                            |
+|                +---------------------------------------------------------------+
+| Automatic      | :ref:`password-authorization-registration-service`            |
+|                +---------------------------------------------------------------+
+|                | :ref:`manager-verification-registration`                      |
+|                +---------------------------------------------------------------+
+|                | :ref:`agent-verification-with-host-validation`                |
+|                +---------------------------------------------------------------+
+|                | :ref:`agent-verification-without-host-validation`             |
++----------------+---------------------------------------------------------------+
 
 .. note::
 

@@ -110,7 +110,7 @@ Installing Wazuh agent
                 WAZUH_PEM="/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent
 
   .. note::
-      To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <verify-hosts>` section.
+      To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <host-verification-registration>` section.
 
   Registration with protocol:
 

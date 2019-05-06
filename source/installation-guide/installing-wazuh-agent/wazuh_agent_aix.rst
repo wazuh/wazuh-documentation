@@ -74,7 +74,7 @@ Absolute paths to CA, certificate or key that contain spaces can be written as s
             WAZUH_PEM="/var/ossec/etc/sslagent.cert" rpm -ivh wazuh-agent-3.9.0-1.aix.ppc.rpm
 
 .. note::
-    To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <verify-hosts>` section.
+    To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <host-verification-registration>` section.
 
 Registration with protocol:
 

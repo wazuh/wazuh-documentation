@@ -108,7 +108,7 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
                    WAZUH_KEY "/var/ossec/etc/sslagent.key" WAZUH_PEM "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
      .. note::
-           If you want to verify hosts using SSL and other advanced options, please see the :ref:`verify hosts with SSL <verify-hosts>` section.
+           If you want to verify hosts using SSL and other advanced options, please see the :ref:`verify hosts with SSL <host-verification-registration>` section.
 
      Registration with protocol:
 
