@@ -24,9 +24,6 @@ Depending on your operating system you can choose to upgrade Elastic Stack from 
 | :doc:`DEB packages <elastic_server_deb>`         | Upgrade Elastic Stack on Debian/Ubuntu.       |
 +--------------------------------------------------+-----------------------------------------------+
 
-.. note::
-    Currently, the Elastic Stack is only supported on 64-bit operating systems, according to its `Support Matrix <https://www.elastic.co/support/matrix>`_.
-
 .. toctree::
    :hidden:
    :maxdepth: 4
