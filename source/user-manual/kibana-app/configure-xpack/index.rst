@@ -42,25 +42,7 @@ Follow these steps to enable X-Pack:
 
   .. code-block:: console
 
-    # curl "http://localhost:9200/?pretty"
-
-    {
-      "name" : "116m4ct",
-      "cluster_name" : "elasticsearch",
-      "cluster_uuid" : "2TbJlE6MRBKB6uHybVSQJA",
-      "version" : {
-        "number" : "6.7.1",
-        "build_flavor" : "default",
-        "build_type" : "deb",
-        "build_hash" : "424e937",
-        "build_date" : "2018-06-11T23:38:03.357887Z",
-        "build_snapshot" : false,
-        "lucene_version" : "7.3.1",
-        "minimum_wire_compatibility_version" : "5.6.0",
-        "minimum_index_compatibility_version" : "5.0.0"
-      },
-      "tagline" : "You Know, for Search"
-    }
+    # curl -u elastic:elasticpass "http://localhost:9200/?pretty"
 
 4. Create the passwords for the built-in users. The *interactive* mode prompts the user to enter new passwords for the ``elastic``, ``kibana``, ``logstash_system``, and ``beats_system`` users:
 
@@ -80,7 +62,6 @@ Follow these steps to enable X-Pack:
         elasticsearch {
             hosts => ["localhost:9200"]
             index => "wazuh-alerts-3.x-%{+YYYY.MM.dd}"
-            document_type => "wazuh"
             user => "elastic"
             password => "<elastic_password>"
         }
