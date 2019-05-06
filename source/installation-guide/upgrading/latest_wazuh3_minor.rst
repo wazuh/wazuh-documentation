@@ -106,19 +106,25 @@ Upgrade the Wazuh agent
 
 1. Upgrade the ``wazuh-agent`` package:
 
-  a) For CentOS/RHEL/Fedora:
+  a) For CentOS/RHEL:
 
   .. code-block:: console
 
     # yum upgrade wazuh-agent
+    
+  b) For Fedora:
 
-  b) For Debian/Ubuntu:
+  .. code-block:: console
+
+    # dnf upgrade wazuh-agent
+
+  c) For Debian/Ubuntu:
 
   .. code-block:: console
 
     # apt-get update && apt-get install wazuh-agent
 
-  c) For Windows:
+  d) For Windows:
 
   The agent upgrading process for Windows systems requires to download the latest available installer from the :ref:`packages list <packages>`. There are two ways of using it (both of them require **administrator rights**):
 
