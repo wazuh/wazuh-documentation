@@ -2,7 +2,7 @@
 
 .. _installation_elastic_legacy:
 
-Upgrading Elastic stack
+Upgrading Elastic Stack
 =======================
 
 .. warning::

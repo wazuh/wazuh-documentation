@@ -2,7 +2,7 @@
 
 .. _elastic_server_rpm_legacy:
 
-Upgrading Elastic stack with RPM packages
+Upgrading Elastic Stack with RPM packages
 =========================================
 
 Prepare the Elastic Stack

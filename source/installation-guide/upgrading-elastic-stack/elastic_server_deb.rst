@@ -2,7 +2,7 @@
 
 .. _elastic_server_deb_legacy:
 
-Upgrading Elastic stack with DEB packages
+Upgrading Elastic Stack with DEB packages
 =========================================
 
 Prepare the Elastic Stack
