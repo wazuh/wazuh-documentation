@@ -96,7 +96,7 @@ $(function(){
 
 	/* Resize event --------------------------------------------------------------------------------------------------*/
 	 $(window).on('resize', function(e){
-		 var curWidth = $(this).width();
+		 var curWidth = $(this).outerWidth();
      $('table').removeClass('table-responsive');
      reponsiveTables();
      changeVerionPosition(curWidth);

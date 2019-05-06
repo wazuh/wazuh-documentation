@@ -198,6 +198,7 @@ a .docs-link {
   vertical-align: text-top;
   display: inline-block;
   line-height: 1.7em;
+  font-size: 1.2rem;
 }
 
 a .docs-link:hover,
@@ -1715,10 +1716,6 @@ blockquote pre {
   max-width: 100%;
 }
 
-#welcome-to-wazuh .topic p.topic-title + p{
-  padding-right: 15px;
-}
-
 #welcome-to-wazuh a[data-lightbox] {
   padding: 0 4px;
 }
@@ -2901,6 +2898,18 @@ div.highlight pre {
                 justify-content: space-between;
       }
 
+      .blue-bar {
+        font-size: 0.9rem;
+      }
+
+      .release-selector-wrapper {
+        border-bottom: 3px solid transparent;
+      }
+
+      #welcome-to-wazuh .topic p.topic-title + p{
+        padding-right: 15px;
+      }
+
       #globaltoc {
         margin-top: 8px;
       }
@@ -3195,6 +3204,10 @@ div.highlight pre {
 
           header > .container-fluid, .menu-sub .container-fluid, footer > .container-fluid, #subfooter > .container-fluid{
             padding: 0 30px;
+          }
+
+          .blue-bar {
+            font-size: 1rem;
           }
 
           #main-content {
