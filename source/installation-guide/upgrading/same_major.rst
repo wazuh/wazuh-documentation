@@ -2,8 +2,8 @@
 
 .. _upgrading_same_major:
 
-Upgrade from the same major version (2.x)
-=========================================
+Upgrade from the same major version 
+===================================
 
 Use these instructions if you are upgrading your Wazuh installation within the same major version. For example, from 3.8.2 to 3.9.0.
 
@@ -55,71 +55,3 @@ b) Upgrade the Wazuh agent on Debian/Ubuntu:
 
     # apt-get update 
     # apt-get install wazuh-agent
-
-
-Upgrade the Wazuh Kibana App
-----------------------------
-
-1) On your terminal, remove the current Wazuh app:
-
-  a) Update file permissions. This will avoid several errors prior to updating the app:
-
-    .. code-block:: console
-
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins
-
-  b) Remove the Wazuh app:
-
-    .. code-block:: console
-
-      # sudo -u kibana /usr/share/kibana/bin/kibana-plugin remove wazuh
-
-2) Once the process is complete, stop Kibana:
-
-  a) For Systemd:
-
-    .. code-block:: console
-
-        # systemctl stop kibana
-
-  b) For SysV Init:
-
-    .. code-block:: console
-
-        # service kibana stop
-
-3) Remove the current Kibana bundles:
-
-.. code-block:: console
-
-    # rm -rf /usr/share/kibana/optimize/bundles
-
-4) Upgrade the Wazuh Kibana App (this can take a while):
-
-  a) Update file permissions. This will avoid several errors prior to upgrading the app:
-
-    .. code-block:: console
-
-      # chown -R kibana:kibana /usr/share/kibana/optimize
-      # chown -R kibana:kibana /usr/share/kibana/plugins
-
-  b) Install the latest Wazuh app:
-
-    .. code-block:: console
-
-        # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_7.0.0.zip
-
-5) Once the process is complete, restart Kibana:
-
-  a) For Systemd:
-
-    .. code-block:: console
-
-        # systemctl restart kibana
-
-  b) For SysV Init:
-
-    .. code-block:: console
-
-        # service kibana restart
