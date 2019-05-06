@@ -14,9 +14,9 @@ Open a session in your Linux/Unix agent host as root user. After that, you can r
     # /var/ossec/bin/agent-auth -m <MANAGER_IP_ADDRESS>
 
 
-2. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
+2. Edit the Wazuh Agent configuration to add the Wazuh Manager IP address.
 
-  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
+  In the file ``/var/ossec/etc/ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh Manager address:
 
   .. code-block:: xml
 

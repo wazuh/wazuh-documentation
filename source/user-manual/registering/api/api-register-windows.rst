@@ -21,7 +21,7 @@ This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so th
 
   This will return the ID of the Wazuh Agent.
 
-2. Extract the Wazuh Agent key using the Wazuh API. In this case, we will asume that the Wazuh Agent ID is ``001``:
+2. Extract the Wazuh Agent key using the Wazuh API. In this case, we will assume that the Wazuh Agent ID is ``001``:
 
   .. code-block:: console
 
@@ -51,9 +51,9 @@ This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so th
 	      Confirm adding it?(y/n): y
 	      Added.
 
-4. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
+4. Edit the Wazuh Agent configuration to add the Wazuh Manager IP address.
 
-  In the file ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
+  In the file ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh Manager address:
 
   .. code-block:: xml
 

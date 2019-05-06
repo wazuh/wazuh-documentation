@@ -6,9 +6,9 @@ Registering agents
 ==================
 
 .. meta::
-  :description: Learn more about the different methods that can be used to register agents against the Wazuh manager.
+  :description: Learn more about the different methods that can be used to register agents against the Wazuh Manager.
 
-In this section, the registration process is described, and more specifically the different methods that users can use to register agents in the Wazuh manager.
+In this section, the registration process is described, and more specifically the different methods that users can use to register agents in the Wazuh Manager.
 
 +----------------+---------------------------------------------------------------+
 | Type           | Method                                                        |

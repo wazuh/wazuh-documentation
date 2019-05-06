@@ -22,9 +22,9 @@ After that, you can register the agent using ``agent-auth.exe``:
     # C:\Program Files (x86)\ossec-agent\agent-auth.exe -m 192.168.1.2 -v C:\Program Files (x86)\ossec-agent\rootCA.pem
 
 
-2. Edit the Wazuh agent configuration to add the Wazuh manager IP address.
+2. Edit the Wazuh Agent configuration to add the Wazuh Manager IP address.
 
-  In the file ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh manager address:
+  In the file ``C:\Program Files (x86)\ossec-agent\ossec.conf``, in the ``<client><server>`` section, change the *MANAGER_IP* value to the Wazuh Manager address:
 
   .. code-block:: xml
 
