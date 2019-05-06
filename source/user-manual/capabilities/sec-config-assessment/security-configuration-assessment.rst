@@ -364,7 +364,7 @@ To add a new policy file, it is recommended to put the file under the `ruleset/s
 
 .. note::
   - Remember that the **policy** id field must be unique, not existing in other policy files.
-  - Remember that the **checks** id field must be unique, not existing in other policy files.
+  - Remember that the **checks** id field must be unique in the same policy.
 
 
 Information about variables
@@ -381,7 +381,10 @@ Example: ``$sshd_file: /etc/ssh/sshd_config;``
 Information about rules
 ^^^^^^^^^^^^^^^^^^^^^^^
 
+**General rule syntax**
+
 The *rules* field is where ``SCA`` dictates if a *check* is marked as *passed* or *failed*.
+
 There are five main types of rules as described below:
 
 +------------------------------+----------------+
@@ -397,6 +400,18 @@ There are five main types of rules as described below:
 +------------------------------+----------------+
 | Registry (Windows Only)      | r              |
 +------------------------------+----------------+
+
+Note the following list to better understand the syntax of the rules:
+
+- These *types* make reference to the location where the rule will look for the content of the check. Every rule has to start with a location.
+
+- After the location, it is commonly found the content to look for, it is accepted a literal string or a regular expression preceded by ``r:`` (the supported regexes can be found :doc:`here <../../ruleset/ruleset-xml-syntax/regex>`).
+
+- As explained before, the most common rules has the format ``type:location -> r:REGEX;``. However, there are exceptions, for example, for Windows registries, we would have to add the registry key in the middle of the rule.
+
+- Each rule must end with the semicolon ``;`` character.
+
+Examples will help us to understand this logic much better:
 
 **Rule syntax for files**
 
@@ -451,16 +466,16 @@ There are five main types of rules as described below:
 - Checking a registry key content
   - ``'r:path/to/registry  -> key -> content;'``
 
-**Logic operators**
+**Global operators for composed rules**
 
-There are two logic operators that: IN and NIN (not in)
+There are defined two logical operators used to determine the accumulate result of a check, needed when more than one term are defined (terms are sepparated by ``&&`` inside a rule).
 
-- IN: will alert if the condition matches.  
-- NIN: will alert if the condition is not satisfied.
-
-The above operators are used for composed rules that have more than one term. 
+- IN (included): This operator means that the sum of the terms should be matched in a line of the read output. 
+- NIN (not included): The opposite operator, it means the whole rule musn't be found in the output.
 
 **Use cases**
+
+Composed rules:
 
 - Alert when there is a line that does not begin with ``#`` and contains ``Port 22``
   - ``'f:/etc/ssh/sshd_config -> IN !r:^# && r:Port\.+22;'``
@@ -468,10 +483,7 @@ The above operators are used for composed rules that have more than one term.
 - Alert when there is no line that does not begin with ``#`` and contains ``Port 2222``
   - ``'f:/etc/ssh/sshd_config -> NIN !r:^# && r:Port\.+2222;'``
 
-.. note::
-  Remember that the each rule must end with the semicolon ``;`` character.
-
-More examples:
+Other examples:
 
 - Looking at the value inside a file: ``'f:/proc/sys/net/ipv4/ip_forward -> 1;'``
 - Checking if a file exists: ``'f:/proc/sys/net/ipv4/ip_forward;'``
