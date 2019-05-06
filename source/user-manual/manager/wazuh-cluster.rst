@@ -74,7 +74,27 @@ Getting started
 Deploying a Wazuh cluster
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Set the cluster configuration
+.. note::
+
+  To run the cluster, **Python 2.7 or higher** is required.
+
+Follow these steps to deploy a Wazuh cluster:
+
+1. Install dependencies
+
+  a. For RPM-based distributions:
+
+    .. code-block:: console
+
+      # yum install python-setuptools python2-cryptography
+
+  b. For Debian-based distributions:
+
+    .. code-block:: console
+
+      # apt-get install python-cryptography
+
+2. Set the cluster configuration
 
   Using the ``<cluster>`` section in the :doc:`Local configuration <../reference/ossec-conf/cluster>`, set the cluster configuration as below:
 
@@ -336,19 +356,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.8.2",
+                "version": "3.9.0",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.8.2",
+                "version": "3.9.0",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.8.2",
+                "version": "3.9.0",
                 "type": "master",
                 "name": "node01"
              }

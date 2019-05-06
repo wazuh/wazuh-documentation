@@ -3,13 +3,15 @@
 .. _reference_ossec_scanpaths:
 
 Scan paths configuration
-=============================
+========================
 
 Leaving this unconfigured will result in Wazuh using the module defaults.
 
 By default, it will monitor ``/etc``, ``/usr/bin``, ``/usr/sbin``, ``/bin`` and ``/sbin`` on the Wazuh Server, with real time monitoring disabled and report_changes enabled.
 
-To overwrite the defaults or add in new paths to scan, you can use here to overwrite the defaults.
+To overwrite the defaults or add in new paths to scan, you can use this variable at the manifest.
+
+More information in about syscheck configuration in the :ref:`File integrity monitoring <fim-examples>` section.
 
 To tell Wazuh to enable real time monitoring of the default paths:
 
@@ -27,12 +29,9 @@ wazuh::server::ossec_scanpaths:
   path: /sbin report_changes: 'yes' realtime: 'yes'
 
 wazuh::server::ossec_ignorepaths:
-----------------------------------
+---------------------------------
 
-By default, it will empty.
-
-To overwrite the defaults or add in new paths to scan, you can use here to overwrite the defaults.
-
+By default, it will be empty.
 
 More information in about syscheck configuration in the :ref:`File integrity monitoring <fim-examples>` section.
 

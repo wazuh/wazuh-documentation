@@ -32,6 +32,10 @@ Below there is an example of the content of the file:
     rootcheck_events_decoded='48'
     rootcheck_edps='3'
 
+    # Security configuration assessment events decoded
+    sca_events_decoded='0'
+    sca_edps='0'
+
     # Hostinfo events decoded
     hostinfo_events_decoded='3'
     hostinfo_edps='0'
@@ -76,6 +80,12 @@ Below there is an example of the content of the file:
 
     # Rootcheck queue size
     rootcheck_queue_size='16384'
+
+    # Security configuration assessment queue
+    sca_queue_usage='0.00'
+
+    # Security configuration assessment queue size
+    sca_queue_size='16384'
 
     # Hostinfo queue
     hostinfo_queue_usage='0.05'

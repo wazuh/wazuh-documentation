@@ -337,6 +337,7 @@ The following components use a static location:
 +----------------------+------------------------+
 | CIS-CAT integration  | wodle_cis-cat          |
 +----------------------+------------------------+
+
 action
 ^^^^^^
 

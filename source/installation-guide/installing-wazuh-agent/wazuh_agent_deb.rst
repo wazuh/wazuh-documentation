@@ -7,7 +7,7 @@ Install Wazuh agent with DEB packages
 
 The DEB packages are suitable for Debian, Ubuntu, and other Debian-based systems.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------
@@ -41,90 +41,25 @@ The first step to installing the Wazuh agent is to add the Wazuh repository to y
 Installing Wazuh agent
 ----------------------
 
-1. On your terminal, install the Wazuh agent:
+1. On your terminal, install the Wazuh agent. You can choose only installation or an installation with a registration / configuration included:
 
-  .. code-block:: console
+  a) Only installation:
 
-    # apt-get install wazuh-agent
+    .. code-block:: console
 
-  You can automate the agent registration with authd using the following environment variables:
+      # apt-get install wazuh-agent
+      
+    .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
 
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  | Option                | Description                                                                                                                  |
-  +=======================+==============================================================================================================================+
-  |   WAZUH_MANAGER_IP    |  Specifies the managers IP address or hostname. You can add multiple values separeted by commas.                             |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_SERVER_PORT   |  Specifies the managers connection port.                                                                                     |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_PROTOCOL      |  Sets the communication protocol between the manager and the agent. Accepts UDP and TCP. Default is UDP.                     |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_AUTHD_SERVER  |  Specifies the Authd IP address.                                                                                             |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_AUTHD_PORT    |  Specifies the Authd connection port.                                                                                        |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_PASSWORD      |  Sets the Authd password.                                                                                                    |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_NOTIFY_TIME   |  Sets the time between manager checks.                                                                                       |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_TIME_RECONNECT|  Sets the time in seconds until a reconnection attempt.                                                                      |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_CERTIFICATE   |  Specifies the certificate of authority path.                                                                                |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_PEM           |  Specifies the certificate path.                                                                                             |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_KEY           |  Specifies the key path.                                                                                                     |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_AGENT_NAME    |  Designates the agent's name. By default will be the computer name.                                                          |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
-  |   WAZUH_GROUP         |  Assigns the specified group to the agent.                                                                                   |
-  +-----------------------+------------------------------------------------------------------------------------------------------------------------------+
+  b) Installation with a registration / configuration included:
 
-  Below there are some examples to install and register a Debian-based linux agent.
+    You can automate the agent registration and configuration using variables. 
 
-  Registration with password:
+    .. code-block:: console
 
-  .. code-block:: console
+      # WAZUH_MANAGER_IP="192.168.1.2" apt-get install wazuh-agent  
 
-           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" \
-                WAZUH_AGENT_NAME="ubuntu18" apt-get install wazuh-agent
-
-  Registration with password and assigning a group:
-
-  .. code-block:: console
-
-           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_PASSWORD="TopSecret" \
-                WAZUH_GROUP="my-group" apt-get install wazuh-agent
-
-  Registration with relative path to CA. It will be searched at your Wazuh installation folder:
-
-  .. code-block:: console
-
-           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="ubuntu18" \
-              WAZUH_CERTIFICATE="rootCA.pem" apt-get install wazuh-agent
-
-  Absolute paths to CA, certificate or key that contain spaces can be written as shown below:
-
-  .. code-block:: console
-
-           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_KEY="/var/ossec/etc/sslagent.key" \
-                WAZUH_PEM="/var/ossec/etc/sslagent.cert" apt-get install wazuh-agent
-
-  .. note::
-      To verify agents via SSL, it's necessary to use both KEY and PEM options. See the :ref:`verify hosts with SSL <host-verification-registration>` section.
-
-  Registration with protocol:
-
-  .. code-block:: console
-
-           # WAZUH_MANAGER_IP="192.168.1.1" WAZUH_AUTHD_SERVER="192.168.1.1" WAZUH_AGENT_NAME="ubuntu18" \
-                WAZUH_PROTOCOL="tcp" apt-get install wazuh-agent
-
-  Registration and adding multiple address:
-
-  .. code-block:: console
-
-           # WAZUH_MANAGER_IP="192.168.1.1,192.168.1.2" WAZUH_AUTHD_SERVER="192.168.1.1" \
-                WAZUH_AGENT_NAME="ubuntu18" apt-get install wazuh-agent
+    .. note:: See the following document for additional automated deployment options: :doc:`automated deployment variables <automated_deployment_variables>`.      
 
 2. (Optional) Disable the Wazuh updates:
 
@@ -141,4 +76,3 @@ Installing Wazuh agent
 
     # echo "wazuh-agent hold" | sudo dpkg --set-selections
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager (if you did not use the automatic registering method). For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.

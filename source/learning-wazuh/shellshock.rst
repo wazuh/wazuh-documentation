@@ -201,31 +201,29 @@ Observe that elastic-server is no longer blocking the offending linux-agent, wit
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 In the newly-added <active-response> section in ossec.conf on wazuh-server, change the <location> value from **local** to **all** so that
-all Linux Wazuh agents and the Wazuh manager will block the attacker even when only one of them is targeted.
+all Linux Wazuh agents will block the attacker even when only one of them is targeted.
 
-.. error::
-    There is a bug in Wazuh AR causing Wazuh managers themselves to not execute an AR commands when the AR <location> is
-    set to **all**, leaving only the agents running the command.  For now, work around this by changing the <location> of the existing
-    <active-response> section from **all** to **local** and then create a duplicate <active-response> section with a <location> of
-    **server**.  The resulting configuration should look like this:
+.. note::
+    The option **all** sends the active response to all agents. If we want it to also run in the manager,
+    we must duplicate the active-response block indicating **server** in the ``location`` field.
 
-    .. code-block:: xml
+.. code-block:: xml
 
-        <active-response>
-            <disabled>no</disabled>
-            <command>firewall-drop</command>
-            <location>local</location>
-            <rules_id>30412</rules_id>
-            <timeout>300</timeout>
-        </active-response>
+    <active-response>
+        <disabled>no</disabled>
+        <command>firewall-drop</command>
+        <location>all</location>
+        <rules_id>30412</rules_id>
+        <timeout>300</timeout>
+    </active-response>
 
-        <active-response>
-            <disabled>no</disabled>
-            <command>firewall-drop</command>
-            <location>server</location>
-            <rules_id>30412</rules_id>
-            <timeout>300</timeout>
-        </active-response>
+    <active-response>
+        <disabled>no</disabled>
+        <command>firewall-drop</command>
+        <location>server</location>
+        <rules_id>30412</rules_id>
+        <timeout>300</timeout>
+    </active-response>
 
 Run the same malicious curl probe from linux-agent as before, and then using the same iptables command as before, confirm
 on both elastic-server and wazuh-manager that both Linux systems are blocking the linux-agent attacker.

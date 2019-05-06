@@ -7,7 +7,7 @@ Install Wazuh server with DEB packages
 
 For Debian/Ubuntu platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
-.. note:: Many of the commands described below need to be executed with root user privileges.
+.. note:: All the commands described below need to be executed with root user privileges.
 
 Adding the Wazuh repository
 ---------------------------
@@ -56,17 +56,17 @@ On your terminal, install the Wazuh manager:
 
 Once the process is completed, you can check the service status with:
 
-  a) For Systemd:
+  * For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl status wazuh-manager
+      # systemctl status wazuh-manager
 
-  b) For SysV Init:
+  * For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # service wazuh-manager status
+      # service wazuh-manager status
 
 Installing the Wazuh API
 ------------------------
@@ -95,17 +95,17 @@ Installing the Wazuh API
 
 3. Once the process is complete, you can check the service status with:
 
-  a) For Systemd:
+  * For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl status wazuh-api
+      # systemctl status wazuh-api
 
-  b) For SysV Init:
+  * For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # service wazuh-api status
+      # service wazuh-api status
 
 .. note::
     Now that the Wazuh API is installed, check out the section :ref:`securing_api` to set up some additional settings.
@@ -150,13 +150,13 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # apt-get install filebeat=6.6.2
+    # apt-get install filebeat=6.7.1
 
 3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/filebeat/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elastic Stack server. For example:
 
@@ -168,20 +168,20 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
 5. Enable and start the Filebeat service:
 
-  a) For Systemd:
+  * For Systemd:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # systemctl daemon-reload
-    # systemctl enable filebeat.service
-    # systemctl start filebeat.service
+      # systemctl daemon-reload
+      # systemctl enable filebeat.service
+      # systemctl start filebeat.service
 
-  b) For SysV Init:
+  * For SysV Init:
 
-  .. code-block:: console
+    .. code-block:: console
 
-    # update-rc.d filebeat defaults 95 10
-    # service filebeat start
+      # update-rc.d filebeat defaults 95 10
+      # service filebeat start
 
 6. (Optional) Disable the Elasticsearch updates:
 

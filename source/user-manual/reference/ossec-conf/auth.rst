@@ -213,19 +213,19 @@ Default configuration
 
 .. code-block:: xml
 
-    <auth>
-      <disabled>no</disabled>
-      <port>1515</port>
-      <use_source_ip>no</use_source_ip>
-      <force_insert>no</force_insert>
-      <force_time>0</force_time>
-      <purge>no</purge>
-      <use_password>no</use_password>
-      <limit_maxagents>yes</limit_maxagents>
-      <ciphers>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ciphers>
-      <!-- <ssl_agent_ca></ssl_agent_ca> -->
-      <ssl_verify_host>no</ssl_verify_host>
-      <ssl_manager_cert>/var/ossec/etc/sslmanager.cert</ssl_manager_cert>
-      <ssl_manager_key>/var/ossec/etc/sslmanager.key</ssl_manager_key>
-      <ssl_auto_negotiate>no</ssl_auto_negotiate>
-    </auth>
+  <auth>
+    <disabled>no</disabled>
+    <port>1515</port>
+    <use_source_ip>yes</use_source_ip>
+    <force_insert>yes</force_insert>
+    <force_time>0</force_time>
+    <purge>yes</purge>
+    <use_password>no</use_password>
+    <limit_maxagents>yes</limit_maxagents>
+    <ciphers>HIGH:!ADH:!EXP:!MD5:!RC4:!3DES:!CAMELLIA:@STRENGTH</ciphers>
+    <!-- <ssl_agent_ca></ssl_agent_ca> -->
+    <ssl_verify_host>no</ssl_verify_host>
+    <ssl_manager_cert>/var/ossec/etc/sslmanager.cert</ssl_manager_cert>
+    <ssl_manager_key>/var/ossec/etc/sslmanager.key</ssl_manager_key>
+    <ssl_auto_negotiate>no</ssl_auto_negotiate>
+  </auth>

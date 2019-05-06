@@ -4,6 +4,7 @@
 
 Wazuh agent class
 =================
+
 $ossec_active_response
   Allows active response on this host.
 
