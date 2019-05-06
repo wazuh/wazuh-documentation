@@ -40,19 +40,25 @@ Using Kibana UI with the ``elastic`` user
     :align: center
     :width: 100%
 
-6. Go to *Management > Security > Users*:
+6. Since Kibana 7.0.0, all roles must have full access to ``spaces``.
+
+.. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack10.png
+    :align: center
+    :width: 100%
+
+7. Go to *Management > Security > Users*:
 
 .. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack06.png
     :align: center
     :width: 100%
 
-7. Create the Wazuh administrator user:
+8. Create the Wazuh administrator user:
 
 .. image:: ../../../images/kibana-app/configure-xpack/xpack-users/xpack07.png
     :align: center
     :width: 100%
 
-8. Create a standard user:
+9. Create a standard user:
 
   .. note::
 
@@ -62,7 +68,7 @@ Using Kibana UI with the ``elastic`` user
   :align: center
   :width: 100%
 
-9. Create the Kibana system user:
+10. Create the Kibana system user:
 
   .. warning::
 
@@ -72,7 +78,7 @@ Using Kibana UI with the ``elastic`` user
   :align: center
   :width: 100%
 
-10. Set the right user credentials on the ``kibana.yml`` file:
+11. Set the right user credentials on the ``kibana.yml`` file:
 
   .. code-block:: console
 
@@ -81,7 +87,7 @@ Using Kibana UI with the ``elastic`` user
     elasticsearch.username: "wazuhsystem"
     elasticsearch.password: "<wazuhsystem_password>"
 
-11. Restart Kibana:
+12. Restart Kibana:
 
   .. code-block:: console
 
