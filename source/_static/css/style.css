@@ -465,15 +465,21 @@ li.toctree-l4 > a {
   background-color: #f8f8f8;
   overflow: auto;
   position: fixed;
+  z-index: 2;
 }
 
 #navbar-globaltoc.show {
   height: calc(100vh - 44px);
+  top: 88px;
+  -webkit-transition: top .3s;
+  transition: top .3s;
 }
 
 .scrolled #navbar-globaltoc.show, .scrolled #navbar-globaltoc.collapsing {
   top: 44px;
   position: fixed;
+  -webkit-transition: top .3s;
+  transition: top .3s;
 }
 
 #globaltoc {
@@ -904,7 +910,7 @@ footer a:active,
 .navbar-toggler.btn-close::before {
   content: '';
   display: block;
-  background-color: #00a9e5;
+  background-color: #ffffff;
   width: 17px;
   height: 3px;
   border-radius: 20px;
@@ -1205,14 +1211,14 @@ footer .contact-info .fa-paper-plane-o {
 
 .navbar-toggler.btn-close:not(.collapsed)::before {
   opacity: 0;
+	top: 22px;
   -webkit-transition: all ease .4s;
   transition: all ease .4s;
 }
 
 .navbar-toggler.btn-close.collapsed::before {
   opacity: 1;
-  position: absolute;
-  top: 12px;
+  top: 22px;
   -webkit-transition: all ease .4s;
   transition: all ease .4s;
 }
@@ -2094,7 +2100,7 @@ footer a {
 }
 
 .menu-sub .navbar-toggler {
-  margin: 4px 0;
+  margin: 6px 3px 0;
   border: none;
   padding: 4px 13px;
 }
@@ -2105,6 +2111,9 @@ footer a {
 
 .menu-sub .navbar-toggler {
   border-color: transparent;
+	position: unset;
+	height: 40px;
+	width: 40px;
 }
 
 #main-navbar .navbar-toggler:hover,

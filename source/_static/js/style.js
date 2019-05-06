@@ -83,15 +83,15 @@ $(function(){
 
  });
 
-	function checkScroll(){
-		var submenuYpos = $('.menu-sub')[0].offsetTop;
-	 var headerHeight = $('.header').height();
-	 if (submenuYpos > headerHeight ) {
-	 	 $('body').addClass('scrolled');
-	 } else {
-	 	 $('body').removeClass('scrolled');
-	 }
-	}
+ function checkScroll(){
+   var submenuYpos = $('.menu-sub')[0].offsetTop;
+   var headerHeight = Math.round($('.header').height());
+   if (submenuYpos > headerHeight ) {
+     $('body').addClass('scrolled');
+   } else {
+     $('body').removeClass('scrolled');
+   }
+ }
 
 	/* Global toc --------------------------------------------------------------------------------------------------*/
   function currentToc(){
