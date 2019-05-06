@@ -5,7 +5,7 @@
 Windows hosts
 =============
 
-To register the Windows Agent, you need to start a CMD or a Powershell as **Administrator**. The installation directory of the Wazuh Agent in Windows host depends on the architecture of the host.
+To register the Windows Agent, you need to start a Powershell as **Administrator**. The installation directory of the Wazuh Agent in Windows host depends on the architecture of the host.
 
 	- ``C:\Program Files (x86)\ossec-agent`` for ``x86_64`` hosts.
 	- ``C:\Program Files\ossec-agent`` for ``x64`` hosts.
@@ -13,6 +13,31 @@ To register the Windows Agent, you need to start a CMD or a Powershell as **Admi
 This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so the installation path will be: ``C:\Program Files (x86)\ossec-agent``.
 
 1. Add the agent to the manager.
+
+  1.1 If your Wazuh API is running over HTTPS and it is using a self-signed certificate, you need to execute this function in your Powershell:
+
+    .. code-block:: powershell
+
+      > function Ignore-SelfSignedCerts {
+          add-type @"
+              using System.Net;
+              using System.Security.Cryptography.X509Certificates;
+              public class PolicyCert : ICertificatePolicy {
+                  public PolicyCert() {}
+                  public bool CheckValidationResult(
+                      ServicePoint sPoint, X509Certificate cert,
+                      WebRequest wRequest, int certProb) {
+                      return true;
+                  }
+              }
+      "@
+          [System.Net.ServicePointManager]::CertificatePolicy = new-object PolicyCert
+          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12;
+      }
+
+      > Ignore-SelfSignedCerts
+
+  Use ``Invoke-WebRequest`` to execute the Wazuh API request to register the Wazuh Agent.
 
   .. code-block:: console
     
@@ -25,7 +50,7 @@ This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so th
 
   .. code-block:: console
 
-    # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method GET -Uri https://192.168.1.2:55000//agents/001/key | ConvertFrom-Json
+    # Invoke-WebRequest -Headers @{Authorization=("Basic {0}" -f $base64AuthInfo)} -Method GET -Uri https://192.168.1.2:55000/agents/001/key | ConvertFrom-Json
 
   .. code-block:: json
 
