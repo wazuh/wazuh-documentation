@@ -64,7 +64,7 @@ Upgrade Elasticsearch
 
   .. code-block:: bash
     
-    yum install elasticsearch-7.0.0
+    yum install elasticsearch-7.0.1
     systemctl restart elasticsearch
 
 5. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a _cat/nodes request:
@@ -107,7 +107,7 @@ Upgrade Filebeat
 
   .. code-block:: bash
 
-    yum install filebeat-7.0.0
+    yum install filebeat-7.0.1
 
 3. Restart Filebeat.
 
@@ -144,7 +144,7 @@ Upgrade Logstash
 
   .. code-block:: bash
 
-    yum install logstash-7.0.0
+    yum install logstash-7.0.1
 
 3. Restart Logstash.
 
@@ -155,7 +155,7 @@ Upgrade Logstash
 Upgrade Kibana
 --------------
 
-1. Since Kibana 7.0.0, the Elasticsearch server address setting has been changed, if your Elasticsearch is not on ``localhost``, please replace ``elasticsearch.url: "address:9200"`` with ``elasticsearch.hosts: ["address:9200"]``.
+1. Since Kibana 7.0.1, the Elasticsearch server address setting has been changed, if your Elasticsearch is not on ``localhost``, please replace ``elasticsearch.url: "address:9200"`` with ``elasticsearch.hosts: ["address:9200"]``.
 2. Remove the Wazuh app.
 
   .. code-block:: bash
@@ -166,13 +166,13 @@ Upgrade Kibana
 
   .. code-block:: bash
 
-    yum install kibana-7.0.0
+    yum install kibana-7.0.1
 
 4. Install the Wazuh app.
 
   .. code-block:: bash
 
-    sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_7.0.0.zip
+    sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_7.0.1.zip
 
 5. Restart Kibana.
 
