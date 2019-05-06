@@ -459,6 +459,23 @@ li.toctree-l4 > a {
   position: relative;
 }
 
+#navbar-globaltoc.show, #navbar-globaltoc.collapsing {
+  right: 0;
+  left: 0;
+  background-color: #f8f8f8;
+  overflow: auto;
+  position: fixed;
+}
+
+#navbar-globaltoc.show {
+  height: calc(100vh - 44px);
+}
+
+.scrolled #navbar-globaltoc.show, .scrolled #navbar-globaltoc.collapsing {
+  top: 44px;
+  position: fixed;
+}
+
 #globaltoc {
   padding: 0 15px;
 }
@@ -1116,10 +1133,12 @@ footer .contact-info .fa-paper-plane-o {
 .full-toctree-nav {
   padding: 0;
   background-color: #f8f8f8;
-	position: absolute;
   z-index: 1;
-  width: 100%;
+  width: 0;
+  -webkit-transition: width 0.3s;
+  transition: width 0.3s;
 }
+
 .widget_text .textwidget {
   font-weight: 400;
 }
@@ -2883,6 +2902,24 @@ div.highlight pre {
 
 @media (min-width: 992px){
 
+  #navbar-globaltoc.show, #navbar-globaltoc.collapsing {
+    right: auto;
+    left: auto;
+  }
+
+  #navbar-globaltoc.show {
+  	bottom: auto;
+    height: auto;
+    position: -webkit-sticky;
+    position: sticky;
+  }
+
+  .scrolled #navbar-globaltoc.show, .scrolled #navbar-globaltoc.collapsing {
+    top: 50px;
+    position: -webkit-sticky;
+    position: sticky;
+  }
+
       .header > .container-fluid {
         padding-top: 8px;
         padding-bottom: 8px;
@@ -3157,6 +3194,8 @@ div.highlight pre {
 				z-index: 3;
         width: 320px;
 				position: static;
+        -webkit-transition: width 0.3s;
+        transition: width 0.3s;
       }
 
       .full-toctree-nav.collapsed {

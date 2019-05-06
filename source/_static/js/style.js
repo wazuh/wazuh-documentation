@@ -20,6 +20,7 @@ $(function(){
 
   changeVerionPosition($(window).width());
   changeSearchPosition($(window).width());
+	checkScroll();
   //adjustSearchbarIndex();
 
 	// Finds current page section in globaltoc
@@ -56,6 +57,11 @@ $(function(){
     });
   }
 
+  // Toggle globaltoc in small devices
+   $('.menu-sub .navbar-expand-lg').click(function (){
+
+	 });
+
   /* Page scroll event --------------------------------------------------------------------------------------------------*/
   $('#btn-scroll').on('click', function(){
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -73,7 +79,19 @@ $(function(){
      $('#btn-scroll').fadeOut('slow');
    }
 
+	 checkScroll();
+
  });
+
+	function checkScroll(){
+		var submenuYpos = $('.menu-sub')[0].offsetTop;
+	 var headerHeight = $('.header').height();
+	 if (submenuYpos > headerHeight ) {
+	 	 $('body').addClass('scrolled');
+	 } else {
+	 	 $('body').removeClass('scrolled');
+	 }
+	}
 
 	/* Global toc --------------------------------------------------------------------------------------------------*/
   function currentToc(){
@@ -102,6 +120,8 @@ $(function(){
      changeVerionPosition(curWidth);
      changeSearchPosition(curWidth);
 		 currentToc();
+
+		 checkScroll();
 	 });
 
 	function changeVerionPosition (currentWidth) {
