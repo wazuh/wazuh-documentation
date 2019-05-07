@@ -64,17 +64,17 @@ This guide suppose that the Wazuh Agent is installed in a ``x86_64`` host, so th
 
 3. Import the key using ``manage_agents``:
 
-	  .. code-block:: console
+  .. code-block:: console
 
-	      # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ
+      # 'C:\Program Files (x86)\ossec-agent\manage_agents' -i MDAxIG1hY29zLW1vamF2ZSBhbnkgZjcwMTI0MjQ5NDMwNzA3N2IyN2NlZjRmZDQ1NzlmYzkwYzcyMzcyZDMxMTM5ZTBkZjZiYzdmODMyODBjZjA4YQ
 
-	      Agent information:
-	         ID:001
-	         Name:windows-server
-	         IP Address:any
+      Agent information:
+         ID:001
+         Name:windows-server
+         IP Address:any
 
-	      Confirm adding it?(y/n): y
-	      Added.
+      Confirm adding it?(y/n): y
+      Added.
 
 4. Edit the Wazuh Agent configuration to add the Wazuh Manager IP address.
 
