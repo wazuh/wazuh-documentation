@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_linux:
 
-Install Wazuh agent in Linux OS
-===============================
+Install Wazuh agent in Linux
+============================
 
 The Wazuh agent can be installed in the most of Linux Distribution. It's possible to use DEB packages or RPM packages depending on the target Operative System flavor. 
 
