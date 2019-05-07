@@ -83,7 +83,7 @@ This is an alternative method to the previous one. In this case, we will bind th
     <auth>
       ...
       <ssl_agent_ca>/var/ossec/etc/rootCA.pem</ssl_agent_ca>
-      <ssl_verify_host>no</ssl_verify_host>
+      <ssl_verify_host>yes</ssl_verify_host>
       ...
     </client>
 
