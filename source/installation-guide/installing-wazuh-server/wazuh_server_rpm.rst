@@ -20,7 +20,8 @@ CentOS 6/RHEL 6, CentOS 7/RHEL 7, Fedora 22 or greater, Amazon Linux and Oracle 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. code-block:: console
-
+  
+    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
     # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
@@ -208,13 +209,13 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
     .. code-block:: console
 
-      # yum install filebeat-6.7.1
+      # yum install filebeat-6.7.2
 
   * Using the ``zypper`` package manager:
 
     .. code-block:: console
 
-      # zypper install filebeat-6.7.1
+      # zypper install filebeat-6.7.2
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
