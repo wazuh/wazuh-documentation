@@ -16,12 +16,15 @@ $(function(){
       mainBottom = footerElement.offset().top
 			gTocSpaceBottom = 15,
       gTocSpaceTop = $('#search-lg').height();
-  var breakpoint = 992;
+  var breakpoint = 992,
+			spaceBeforeAnchor = 60;
 
   changeVerionPosition($(window).outerWidth());
   changeSearchPosition($(window).outerWidth());
 	checkScroll();
-  //adjustSearchbarIndex();
+  if (document.location.hash) {
+		correctScrollTo(spaceBeforeAnchor);
+  }
 
 	// Finds current page section in globaltoc
 	$('.globaltoc .toctree-l2.current a').each(function(e){
@@ -30,7 +33,10 @@ $(function(){
 		}
 	});
 
-	$(window).on('hashchange', updateFromHash);
+	$(window).on('hashchange', function(){
+		updateFromHash();
+		correctScrollTo(spaceBeforeAnchor);
+	});
 
 	function updateFromHash(){
 		loc = location.hash;
@@ -179,4 +185,11 @@ $(function(){
       searchbar.appendTo($('.blue-bar'));
     }
   }
+
+	// Corrects the scrolling movement so the element to which the page is being scrolled appears in the screen, having in mind the fixed top bar.
+	function correctScrollTo(spaceBeforeAnchor){
+		setTimeout(function(){
+			window.scrollTo(window.scrollX, window.scrollY - spaceBeforeAnchor);
+    }, 10);
+	}
 });
