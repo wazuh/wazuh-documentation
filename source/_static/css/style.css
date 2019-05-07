@@ -1401,14 +1401,13 @@ select#select-version option {
 
 .version::after {
   position: absolute;
-  top: 0.5em;
+  top: 0.48rem;
   right: 10px;
-  content: '';
-  width: 0.5em;
-  height: 0.5em;
-  border-left: 5px solid #0000;
-  border-right: 5px solid #0000;
-  border-top: 5px solid #ffffff;
+  width: 0.5rem;
+  height: 0.5rem;
+  font: normal normal normal 1em/.5 FontAwesome;
+  content: '\f0d7';
+  color: #ffffff;
   pointer-events: none;
 }
 
