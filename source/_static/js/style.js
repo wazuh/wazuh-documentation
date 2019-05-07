@@ -18,8 +18,8 @@ $(function(){
       gTocSpaceTop = $('#search-lg').height();
   var breakpoint = 992;
 
-  changeVerionPosition($(window).width());
-  changeSearchPosition($(window).width());
+  changeVerionPosition($(window).outerWidth());
+  changeSearchPosition($(window).outerWidth());
 	checkScroll();
   //adjustSearchbarIndex();
 
@@ -112,7 +112,12 @@ $(function(){
 
    currentToc();
 
-   $('.globaltoc a').on('click', function(){$('.btn-close').click()});
+   // Closes the dropdown globaltoc when one of its elements has been clicked/tapped in small devices
+   $('.globaltoc a').on('click', function(){
+     if( $(window).outerWidth() < breakpoint ){
+       $('.btn-close').click()
+     }
+   });
 
 	/* Resize event --------------------------------------------------------------------------------------------------*/
 	 $(window).on('resize', function(e){
