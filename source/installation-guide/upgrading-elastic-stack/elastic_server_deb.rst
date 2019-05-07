@@ -10,19 +10,19 @@ Prepare the Elastic Stack
 
 1. Stop the services:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    systemctl stop filebeat
-    systemctl stop logstash
-    systemctl stop kibana
-    systemctl stop elasticsearch
+    # systemctl stop filebeat
+    # systemctl stop logstash
+    # systemctl stop kibana
+    # systemctl stop elasticsearch
 
 2. Add the new repository for Elastic Stack 7.x:
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
-    echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+    # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+    # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
 
 Upgrade Elasticsearch
 ---------------------
@@ -47,16 +47,16 @@ Upgrade Elasticsearch
 
 3. Shut down a single node.
 
-  .. code-block:: bash
+  .. code-block:: console
     
-    systemctl stop elasticsearch.service
+    # systemctl stop elasticsearch.service
 
 4. Upgrade the node you shut down.
 
-  .. code-block:: bash
+  .. code-block:: console
     
-    apt-get install elasticsearch=7.0.1
-    systemctl restart elasticsearch
+    # apt-get install elasticsearch=7.0.1
+    # systemctl restart elasticsearch
 
 5. Start the newly-upgraded node and confirm that it joins the cluster by checking the log file or by submitting a _cat/nodes request:
 
@@ -89,22 +89,22 @@ Upgrade Filebeat
 
 1. Update the configuration file.
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat-7.yml
+    # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat-7.yml
 
 2. Upgrade Filebeat.
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    apt-get install filebeat=7.0.1
+    # apt-get install filebeat=7.0.1
 
 3. Restart Filebeat.
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    systemctl restart filebeat
+    # systemctl restart filebeat
 
 Upgrade Logstash
 ----------------
@@ -113,35 +113,35 @@ Upgrade Logstash
 
   a) Local configuration (only in a single-host architecture):
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      cp /etc/logstash/conf.d/01-wazuh.conf /backup/01-wazuh.conf.backup
-      curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/logstash/01-wazuh-local-7.conf
+      # cp /etc/logstash/conf.d/01-wazuh.conf /backup/01-wazuh.conf.backup
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/logstash/01-wazuh-local-7.conf
   
     Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
 
-    .. code-block:: bash
+    .. code-block:: console
 
-      usermod -a -G ossec logstash
+      # usermod -a -G ossec logstash
   
   b) Remote configuration:
 
-    .. code-block:: bash
+    .. code-block:: console
   
-      cp /etc/logstash/conf.d/01-wazuh.conf /backup/01-wazuh.conf.backup
-      curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/logstash/01-wazuh-remote-7.conf
+      # cp /etc/logstash/conf.d/01-wazuh.conf /backup/01-wazuh.conf.backup
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/logstash/01-wazuh-remote-7.conf
 
 2. Upgrade Logstash.
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    apt-get install logstash=1:7.0.1-1
+    # apt-get install logstash=1:7.0.1-1
 
 3. Restart Logstash.
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    systemctl restart logstash
+    # systemctl restart logstash
 
 Upgrade Kibana
 --------------
@@ -149,25 +149,25 @@ Upgrade Kibana
 1. Since Kibana 7.0.1, the Elasticsearch server address setting has been changed, if your Elasticsearch is not on ``localhost``, please replace ``elasticsearch.url: "address:9200"`` with ``elasticsearch.hosts: ["address:9200"]``.
 2. Remove the Wazuh app.
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    /usr/share/kibana/bin/kibana-plugin remove wazuh
+    # /usr/share/kibana/bin/kibana-plugin remove wazuh
 
 3. Upgrade Kibana.
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    apt-get install kibana=7.0.1
+    # apt-get install kibana=7.0.1
 
 4. Install the Wazuh app.
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_7.0.1.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_7.0.1.zip
 
 5. Restart Kibana.
 
-  .. code-block:: bash
+  .. code-block:: console
 
-    systemctl restart kibana
+    # systemctl restart kibana
 
