@@ -31,6 +31,8 @@ Otherwise, you can create a self-signed certificate using the following command:
 Available registration methods
 ------------------------------
 
+You can use the method that better suits with your need. We recommend: :ref:`simple-registration-service`.
+
 +----------------+---------------------------------------------------------------+
 | Type           | Method                                                        |
 +================+===============================================================+
