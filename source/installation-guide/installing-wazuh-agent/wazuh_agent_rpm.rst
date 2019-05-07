@@ -99,7 +99,7 @@ Installing Wazuh agent
    
          # zypper install wazuh-agent
          
-     .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
+     .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
 
   b) Installation with a registration / configuration included:
 
@@ -110,7 +110,6 @@ Installing Wazuh agent
       # WAZUH_MANAGER_IP="192.168.1.2" yum install wazuh-agent 
 
     .. note:: See the following document for additional automated deployment options: :doc:`automated deployment variables <automated_deployment_variables>`.      
-
 
 2. (Optional) Disable the Wazuh repository:
 
