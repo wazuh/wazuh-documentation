@@ -112,6 +112,8 @@ $(function(){
 
    currentToc();
 
+   $('.globaltoc a').on('click', function(){$('.btn-close').click()});
+
 	/* Resize event --------------------------------------------------------------------------------------------------*/
 	 $(window).on('resize', function(e){
 		 var curWidth = $(this).outerWidth();
