@@ -439,6 +439,19 @@ footer a:focus .fa {
   width: 12px;
 }
 
+:-ms-lang(x), _:-webkit-full-screen, .toctree-wrapper > ul, ul.simple {  /* Fix lists margin for Microsoft Edge */
+	margin-left: 0!important;
+	list-style-position: inside!important;
+}
+
+:-ms-lang(x), _:-webkit-full-screen, .toctree-wrapper > ul > li > a {  /* Fix lists margin for Microsoft Edge */
+	margin-left: -0.5rem!important;
+}
+
+:-ms-lang(x), _:-webkit-full-screen, .toctree-wrapper > ul > li > ul {  /* Fix lists margin for Microsoft Edge */
+	padding-left: 2.2rem!important;
+}
+
 .toctree-wrapper > ul,
 ul.simple {
   list-style: url('../img/list-arrow.svg');
@@ -2961,7 +2974,7 @@ div.highlight pre {
 
       #globaltoc > ul {
         border-top: 1px solid rgba(0, 169, 229, 0.2);
-        border-bottom: 1px solid #00a9e533;
+        border-bottom: 1px solid rgba(0, 169, 229, 0.2);
         padding: 10px 0
       }
 
