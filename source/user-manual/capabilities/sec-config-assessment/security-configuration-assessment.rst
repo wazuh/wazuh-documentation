@@ -403,7 +403,7 @@ There are five main types of rules as described below:
 
 Note the following list to better understand the syntax of the rules:
 
-- These *types* make reference to the location where the rule will look for the content of the check. Every rule has to start with a location.
+- These *types* make reference to the location where the rule will look for the content of the check. Every rule have to start with a location.
 
 - After the location, it is commonly found the content to look for, it is accepted a literal string or a regular expression preceded by ``r:`` (the supported regexes can be found :doc:`here <../../ruleset/ruleset-xml-syntax/regex>`).
 
@@ -468,10 +468,10 @@ Examples will help us to understand this logic much better:
 
 **Global operators for composed rules**
 
-There are defined two logical operators used to determine the accumulate result of a check, needed when more than one term are defined (terms are sepparated by ``&&`` inside a rule).
+There are defined two logical operators used to determine the accumulated result of a check, needed when more than one term is defined (terms are separated by ``&&`` inside a rule).
 
 - IN (included): This operator means that the sum of the terms should be matched in a line of the read output. 
-- NIN (not included): The opposite operator, it means the whole rule musn't be found in the output.
+- NIN (not included): The opposite operator, it means the whole rule mustn't be found in the output.
 
 **Use cases**
 
