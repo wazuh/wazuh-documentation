@@ -36,19 +36,19 @@ After changing the ``ossec.conf`` file, you can use a custom password or let the
         2019/04/25 15:09:50 ossec-authd: INFO: Accepting connections on port 1515. Random password chosen for agent authentication: 3027022fa85bb4c697dc0ed8274a4554
 
 
-To enable this changes, you need to **restart** the Wazuh Manager:
+To enable these changes, you need to **restart** the Wazuh Manager:
 
   a) For Systemd:
 
     .. code-block:: console
 
-      # systemctl start wazuh-agent
+      # systemctl start wazuh-manager
 
   b) For SysV Init:
 
     .. code-block:: console
 
-      # service wazuh-agent start
+      # service wazuh-manager start
 
 .. note::
     In this example, the password to registering the Wazuh Agent is *TopSecret*.

@@ -40,7 +40,7 @@ After that, you can register the agent using ``agent-auth.exe``.
 
 		.. code-block:: console
 
-			# Restart-Service -Name wazuh
+			# Start-Service -Name wazuh
 
 	b) Using Windows cmd with administrator access:
 
