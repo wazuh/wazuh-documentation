@@ -126,7 +126,60 @@ Installing the Wazuh API
     # echo "wazuh-manager hold" | sudo dpkg --set-selections
     # echo "wazuh-api hold" | sudo dpkg --set-selections
 
+.. _wazuh_server_deb_filebeat:
+
+Installing Filebeat
+-------------------
+
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
+
+The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
+
+1. Install Filebeat:
+
+  .. code-block:: console
+
+    # apt-get install filebeat=7.0.1
+
+2. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
+
+  .. code-block:: console
+
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
+
+3. Download the alerts template for Elasticsearch:
+
+  .. code-block:: console
+
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic7-template-alerts.json 
+
+4. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
+
+  .. code-block:: yaml
+
+    output.elasticsearch:
+      hosts: ['http://10.0.0.2:9200', 'http://10.0.0.3:9200']
+      indices:
+        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
+
+5. Enable and start the Filebeat service:
+
+  * For Systemd:
+
+    .. code-block:: console
+
+      # systemctl daemon-reload
+      # systemctl enable filebeat.service
+      # systemctl start filebeat.service
+
+  * For SysV Init:
+
+    .. code-block:: console
+
+      # update-rc.d filebeat defaults 95 10
+      # service filebeat start
+
 Next steps
 ----------
 
-Once you have installed the manager, API and Filebeat (only needed for distributed architectures), you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+Once you have installed the manager, API and Filebeat, you are ready to install :ref:`Elastic Stack <installation_elastic>`.
