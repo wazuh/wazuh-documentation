@@ -131,10 +131,7 @@ Installing the Wazuh API
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to the Logstash service on the Elastic Stack server(s).
-
-.. warning::
-    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
 The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
@@ -158,13 +155,14 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
     # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
 
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elastic Stack server. For example:
+4. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
 
   .. code-block:: yaml
 
-    output:
-      logstash:
-        hosts: ["ELASTIC_SERVER_IP:5000"]
+    output.elasticsearch:
+      hosts: ['http://10.0.0.2:9200', 'http://10.0.0.3:9200']
+      indices:
+        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
 5. Enable and start the Filebeat service:
 

@@ -59,12 +59,6 @@ The next step is to install the Wazuh Manager on your system:
 
       # yum install wazuh-manager
 
-  * Using the ``zypper`` package manager:
-
-    .. code-block:: console
-
-      # zypper install wazuh-manager
-
 Once the process is complete, you can check the service status with:
 
     * For Systemd:
@@ -96,12 +90,6 @@ Installing the Wazuh API
 
       # yum install nodejs
 
-  * Using the ``zypper`` package manager:
-
-    .. code-block:: console
-
-      # zypper install nodejs
-
 2. Install the Wazuh API. It will update NodeJS if it is required:
 
   * Using the ``yum`` package manager:
@@ -109,12 +97,6 @@ Installing the Wazuh API
     .. code-block:: console
 
       # yum install wazuh-api
-
-  * Using the ``zypper`` package manager:
-
-    .. code-block:: console
-
-      # zypper install wazuh-api
 
 3. Once the process is complete, you can check the service status with:
 
@@ -143,12 +125,6 @@ Installing the Wazuh API
 
       # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-  * Using the ``zypper`` package manager:
-
-    .. code-block:: console
-
-      # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
-
 .. _wazuh_server_rpm_filebeat:
 
 .. note::
@@ -158,10 +134,7 @@ Installing the Wazuh API
 Installing Filebeat
 -------------------
 
-Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to the Logstash service on the Elastic Stack server(s).
-
-.. warning::
-    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
+Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
 The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
 
@@ -184,24 +157,6 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
       type=rpm-md
       EOF
 
-  * Using the ``zypper`` package manager
-
-    .. code-block:: console
-
-      # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-
-      # cat > /etc/zypp/repos.d/elastic.repo << EOF
-      [elasticsearch-7.x]
-      name=Elasticsearch repository for 7.x packages
-      baseurl=https://artifacts.elastic.co/packages/7.x/yum
-      gpgcheck=1
-      gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-      enabled=1
-      autorefresh=1
-      type=rpm-md
-      EOF
-
-
 2. Install Filebeat:
 
   * Using the ``yum`` package manager:
@@ -210,25 +165,20 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
       # yum install filebeat-7.0.1
 
-  * Using the ``zypper`` package manager:
-
-    .. code-block:: console
-
-      # zypper install filebeat-7.0.1
-
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
 
   .. code-block:: console
 
     # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
 
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP``  with the IP address or the hostname of the Elastic Stack server. For example:
+4. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
 
   .. code-block:: yaml
 
-    output:
-      logstash:
-        hosts: ["ELASTIC_SERVER_IP:5000"]
+    output.elasticsearch:
+      hosts: ['http://10.0.0.2:9200', 'http://10.0.0.3:9200']
+      indices:
+        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
 5. Enable and start the Filebeat service:
 
