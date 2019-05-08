@@ -13,7 +13,6 @@ Prepare the Elastic Stack
   .. code-block:: console
 
     # systemctl stop filebeat
-    # systemctl stop logstash
     # systemctl stop kibana
     # systemctl stop elasticsearch
 

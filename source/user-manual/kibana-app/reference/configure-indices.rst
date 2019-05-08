@@ -23,7 +23,7 @@ Using a custom index name is possible on the latest versions of the Elastic Stac
 Also, keep in mind that this process **will be restored** after upgrading the Wazuh app, or any of the Elastic Stack components involved during the process. The reason for this depends on each component:
 
 - On Elasticsearch, every new upgrade requires to update the Wazuh template, so the default index pattern will be restored.
-- On Logstash, every new upgrade requires to update the Wazuh configuration file, so the default name will be used to create indices.
+- On Filebeat, every new upgrade requires to update the Wazuh configuration file, so the default name will be used to create indices.
 - On Kibana and the Wazuh app, the configuration file is removed when installing a new version of the app, so it's necessary to apply again the custom settings.
 
 Procedure
@@ -31,25 +31,25 @@ Procedure
 
 Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) along with the default one, ``wazuh-alerts-3.x-*``. Follow these steps:
 
-1. First of all, stop the Logstash service:
+1. First of all, stop the Filebeat service:
 
   a. For Systemd:
 
   .. code-block:: console
 
-    # systemctl stop logstash
+    # systemctl stop filebeat
 
   b. For SysV Init:
 
   .. code-block:: console
 
-    # service logstash stop
+    # service filebeat stop
 
 2. Download the Wazuh template for Elasticsearch and save it into a file (for example, *template.json*):
 
   .. code-block:: console
 
-    # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic6-template-alerts.json
+    # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic7-template-alerts.json
 
 3. Open the template file and locate this line:
 
@@ -65,7 +65,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
   If your template is a custom template and it's still using the ``"template": "wazuh-alerts-3.x-*",`` setting, remove that line, just use ``"index_patterns": ["wazuh-alerts-3.x-*", "my-custom-alerts-*"],``.
 
-  The asterisk character (``*``) on the index patterns is important because Logstash will create indices in Elasticsearch using a name that follows this pattern, which is necessary to apply the proper format to visualize the alerts on the Wazuh app.
+  The asterisk character (``*``) on the index patterns is important because Filebeat will create indices in Elasticsearch using a name that follows this pattern, which is necessary to apply the proper format to visualize the alerts on the Wazuh app.
 
 4. Save the modifications and insert the new template into Elasticsearch. This will replace the current template:
 
@@ -78,19 +78,21 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
   .. note::
     ``{"acknowledged":true}`` indicates that the template was inserted correctly.
 
-5. Open the Wazuh configuration file for Logstash (``/etc/logstash/conf.d/01-wazuh.conf``) and replace the index name on the ``output -> elasticsearch`` section:
+5. Open the Wazuh configuration file for Filebeat (``/etc/filebeat/filebeat.yml``) and replace the index name:
 
   From this:
 
   .. code-block:: none
 
-    index => "wazuh-alerts-3.x-%{+YYYY.MM.dd}"
+    indices:
+      - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
   To this:
 
   .. code-block:: none
 
-    index => "my-custom-alerts-%{+YYYY.MM.dd}"
+    indices:
+      - index: 'my-custom-alerts-%{+yyyy.MM.dd}'
 
 7. (Optional) If you want to use the new index pattern by default, open the Wazuh Kibana app configuration file (``/usr/share/kibana/plugins/wazuh/config.yml``) and modify the ``pattern`` setting with the new one. It should be like this:
 
@@ -114,19 +116,19 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
     # service kibana restart
 
-8. Restart the Logstash service:
+8. Restart the Filebeat service:
 
   a. For Systemd:
 
   .. code-block:: console
 
-    # systemctl restart logstash
+    # systemctl restart filebeat
 
   b. For SysV Init:
 
   .. code-block:: console
 
-    # service logstash restart
+    # service filebeat restart
 
 If the pattern is not present in Kibana UI, just create a new one using the same name used on the Elasticsearch template, and make sure to use ``@timestamp`` as the Time Filter field name.
 

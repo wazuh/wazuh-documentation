@@ -17,13 +17,13 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
   - Wazuh 3.9.0
   - Wazuh API 3.9.0
   - Elasticsearch 7.0.1
-  - Logstash 7.0.1
+  - Filebeat 7.0.1
   - Kibana 7.0.1
   - Wazuh app 3.9.0-7.0.1
 
 2. Import the OVA in your virtualization platform and run the virtual machine. The root password is "**wazuh**" and the username/password for the Wazuh API is "**foo/bar**".
 
-  Although you don't need to change any Elastic Stack configuration settings, feel free to explore the options. You can find Elasticsearch installed in ``/usr/share/elasticsearch``. Similarly, Logstash is installed in ``/usr/share/logstash`` and its configuration file is found in ``/etc/logstash/conf.d/``.
+  Although you don't need to change any Elastic Stack configuration settings, feel free to explore the options. You can find Elasticsearch installed in ``/usr/share/elasticsearch``. Similarly, Filebeat is installed in ``/usr/share/filebeat`` and its configuration file is found in ``/etc/filebeat/filebeat.yml``.
 
 3. The **Wazuh Manager** and the **Elastic Stack** included in this virtual image are configured to work out of the box. The next step of the process is to deploy the Wazuh agents on the systems you intend to monitor. Once installed, connect them to your virtual appliance. More documentation can be found at:
 
@@ -33,14 +33,14 @@ Wazuh provides a pre-built virtual machine image (OVA) that you can directly imp
   
     Before connecting any of the Wazuh agents, change the VM's network interface type from NAT (the factory default) to bridge for communication with your network. By default, the VM will try to get an IP address from your network's DHCP server. Alternatively, you can set a static IP address by configuring the proper network files on the CentOS operating system that the virtual machine is based on.
 
-4. You can start and stop wazuh-manager, wazuh-api, elasticsearch, logstash, and kibana with the 'systemctl' command. For example:
+4. You can start and stop wazuh-manager, wazuh-api, elasticsearch, filebeat, and kibana with the 'systemctl' command. For example:
 
   .. code-block:: console
 
     # systemctl restart wazuh-manager
     # systemctl restart wazuh-api
     # systemctl stop elasticsearch
-    # systemctl start logstash
+    # systemctl start filebeat
     # systemctl status kibana
 
 5. In order to connect to the Kibana web user interface, login with https://OVA_IP_ADDRESS (where ``OVA_IP_ADDRESS`` is your system IP).

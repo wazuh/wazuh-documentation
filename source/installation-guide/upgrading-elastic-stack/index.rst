@@ -10,7 +10,7 @@ Upgrading Elastic Stack
     This guide is intended for Elastic Stack 6.x users only, for installing the latest Elastic Stack version, please follow the :ref:`official guide <installation_elastic>`.
 
 
-This guide describes the upgrading of an Elastic Stack server comprised of Filebeat, Logstash, Elasticsearch, and Kibana. We will illustrate package-based installations of these components.  You can also install them from binary tarballs, however, this is not preferred or supported under Wazuh documentation.
+This guide describes the upgrading of an Elastic Stack server comprised of Filebeat, Elasticsearch, and Kibana. We will illustrate package-based installations of these components.  You can also install them from binary tarballs, however, this is not preferred or supported under Wazuh documentation.
 
 In addition to Elastic Stack components, you will also find the instructions to install and configure the Wazuh app (deployed as a Kibana plugin).
 

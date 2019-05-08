@@ -87,13 +87,11 @@ Installing Wazuh agent
 
   a) Only installation:
 
-    * Using the ``yum`` package manager:
+    .. code-block:: console
    
-      .. code-block:: console
-   
-        # yum install wazuh-agent
+      # yum install wazuh-agent
           
-     .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
+    .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/agents/registering/index>`.
 
   b) Installation with a registration / configuration included:
 
@@ -110,8 +108,6 @@ Installing Wazuh agent
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
-  * Using the ``yum`` package manager:
+  .. code-block:: console
 
-    .. code-block:: console
-
-      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo

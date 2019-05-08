@@ -61,15 +61,11 @@ The server usually runs on a stand-alone physical machine, virtual machine or cl
 Elastic Stack
 -------------
 
-Elastic Stack is a unified suite of popular open source projects for log management, including Elasticsearch, Logstash, Kibana, Filebeat, and others. The projects that are especially relevant to the Wazuh solution are:
+Elastic Stack is a unified suite of popular open source projects for log management, including Elasticsearch, Kibana, Filebeat, and others. The projects that are especially relevant to the Wazuh solution are:
 
 - **Elasticsearch:** A highly scalable, full-text search and analytics engine. Elasticsearch is distributed, meaning the data (indices) are divided into shards and each shard can have zero or more replicas.
-
-+ **Logstash:** A tool to collect and parse logs to be saved into a storage system (e.g., Elasticsearch). Collected events can also be enriched and transformed using input, filter and output plugins.
-
 - **Kibana:** A flexible and intuitive web interface for mining, analyzing, and visualizing data. It runs on top of the content indexed on an Elasticsearch cluster.
-
-+ **Filebeat:** A lightweight forwarder used to convey logs across a network, usually to Logstash or Elasticsearch.
+- **Filebeat:** A lightweight forwarder used to convey logs across a network, usually to Elasticsearch.
 
 Wazuh integrates with Elastic Stack to provide a feed of already decoded log messages to be indexed by Elasticsearch, as well as a real-time web console for alert and log data analysis. In addition, the Wazuh user interface (running on top of Kibana) can be used for management and monitoring of your Wazuh infrastructure.
 

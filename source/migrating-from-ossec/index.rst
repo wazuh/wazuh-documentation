@@ -72,7 +72,7 @@ Elastic Stack integration
 +++++++++++++++++++++++++
 
 * Provides the ability to index and query data.
-* Data enrichment using GeoIP Logstash module.
+* Data enrichment using GeoIP Elasticsearch module.
 * Kibana plugin used to visualize data (integrated using Wazuh REStful API).
 * Web user interface pre-configured extensions, adapting it to your use cases.
 

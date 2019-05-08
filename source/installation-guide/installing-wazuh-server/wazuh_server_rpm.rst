@@ -53,11 +53,9 @@ Installing the Wazuh Manager
 
 The next step is to install the Wazuh Manager on your system:
 
-  * Using the ``yum`` package manager:
+  .. code-block:: console
 
-    .. code-block:: console
-
-      # yum install wazuh-manager
+    # yum install wazuh-manager
 
 Once the process is complete, you can check the service status with:
 
@@ -84,19 +82,15 @@ Installing the Wazuh API
 
   and then, install NodeJS:
 
-  * Using the ``yum`` package manager:
+  .. code-block:: console
 
-    .. code-block:: console
-
-      # yum install nodejs
+    # yum install nodejs
 
 2. Install the Wazuh API. It will update NodeJS if it is required:
 
-  * Using the ``yum`` package manager:
+  .. code-block:: console
 
-    .. code-block:: console
-
-      # yum install wazuh-api
+    # yum install wazuh-api
 
 3. Once the process is complete, you can check the service status with:
 
@@ -119,91 +113,13 @@ Installing the Wazuh API
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
-  * Using the ``yum`` package manager:
+  .. code-block:: console
 
-    .. code-block:: console
-
-      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
-
-.. _wazuh_server_rpm_filebeat:
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
 .. note::
 
   From Fedora v22 to v25, it's required to install ``dkms`` package (``yum install dkms``).
-
-Installing Filebeat
--------------------
-
-Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
-
-The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
-
-1. Install the GPG keys from Elastic and then the Elastic repository:
-
-  * Using the ``yum`` package manager:
-
-    .. code-block:: console
-
-      # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
-
-      # cat > /etc/yum.repos.d/elastic.repo << EOF
-      [elasticsearch-7.x]
-      name=Elasticsearch repository for 7.x packages
-      baseurl=https://artifacts.elastic.co/packages/7.x/yum
-      gpgcheck=1
-      gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
-      enabled=1
-      autorefresh=1
-      type=rpm-md
-      EOF
-
-2. Install Filebeat:
-
-  * Using the ``yum`` package manager:
-
-    .. code-block:: console
-
-      # yum install filebeat-7.0.1
-
-3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Logstash:
-
-  .. code-block:: console
-
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
-
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
-
-  .. code-block:: yaml
-
-    output.elasticsearch:
-      hosts: ['http://10.0.0.2:9200', 'http://10.0.0.3:9200']
-      indices:
-        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
-
-5. Enable and start the Filebeat service:
-
-  * For Systemd:
-
-    .. code-block:: console
-
-      # systemctl daemon-reload
-      # systemctl enable filebeat.service
-      # systemctl start filebeat.service
-
-  * For SysV Init:
-
-    .. code-block:: console
-
-      # chkconfig --add filebeat
-      # service filebeat start
-
-6. (Optional) Disable the Elasticsearch repository:
-
-  It is recommended that the Elasticsearch repository be disabled in order to prevent an upgrade to a newer Elastic Stack version due to the possibility of undoing changes with the App. To do this, use the following command:
-
-  .. code-block:: console
-
-    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
 
 Next steps
 ----------
