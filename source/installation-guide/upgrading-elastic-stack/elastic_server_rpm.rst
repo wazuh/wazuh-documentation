@@ -101,7 +101,7 @@ Upgrade Filebeat
   .. code-block:: console
 
     # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat-7.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
 
 2. Upgrade Filebeat.
 
@@ -115,42 +115,10 @@ Upgrade Filebeat
 
     # systemctl restart filebeat
 
-Upgrade Logstash
-----------------
+Remove Logstash
+---------------
 
-1. Update the configuration file.
-
-  a) Local configuration (only in a single-host architecture):
-
-    .. code-block:: console
-
-      # cp /etc/logstash/conf.d/01-wazuh.conf /backup/01-wazuh.conf.backup
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/logstash/01-wazuh-local-7.conf
-  
-    Because the Logstash user needs to read the alerts.json file, please add it to OSSEC group by running:
-
-    .. code-block:: console
-
-      # usermod -a -G ossec logstash
-  
-  b) Remote configuration:
-
-    .. code-block:: console
-  
-      # cp /etc/logstash/conf.d/01-wazuh.conf /backup/01-wazuh.conf.backup
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/logstash/01-wazuh-remote-7.conf
-
-2. Upgrade Logstash.
-
-  .. code-block:: console
-
-    # yum install logstash-7.0.1
-
-3. Restart Logstash.
-
-  .. code-block:: console
-
-    # systemctl restart logstash
+Since Elastic 7.0 both Logstash and Java are no longer needed. Filebeat will do the job with our new configuration.
 
 Upgrade Kibana
 --------------
