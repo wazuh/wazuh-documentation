@@ -452,9 +452,13 @@ footer a:focus .fa {
 	padding-left: 2.2rem!important;
 }
 
+#main-content ul * {
+  vertical-align: middle;
+}
+
 .toctree-wrapper > ul,
 ul.simple {
-  list-style: url('../img/list-arrow.svg');
+  list-style: url('../img/list-arrow.png');
   list-style-position: outside;
   font-size: 1rem;
   margin-left: 0.9em;
@@ -608,6 +612,7 @@ main li.toctree-l1 a {
   padding-top: 1px;
   padding-bottom: 1px;
   display: inline-block;
+  vertical-align: middle;
 }
 
 aside.help {
