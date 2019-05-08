@@ -25,7 +25,7 @@ There are some related additional configurations that can be applied:
 - :ref:`Setting up SSL and authentication for Kibana <kibana_ssl>` 
 - :ref:`Elasticsearch tuning <elastic_tuning>` 
 - :ref:`Search Guard configuration <searchguard>` 
-
+- :ref:`Enrich events with geolocation information <geo_ip>` 
 
 
 .. note::
@@ -41,4 +41,5 @@ There are some related additional configurations that can be applied:
    kibana_ssl
    elastic_tuning
    searchguard
+   geoip
 
