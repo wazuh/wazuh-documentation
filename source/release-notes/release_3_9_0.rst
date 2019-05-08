@@ -7,9 +7,9 @@
 
 This section shows the most relevant improvements and fixes in version 3.9.0. More details about these changes are provided in each component changelog:
 
-- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/3.9/CHANGELOG.md>`_
-- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/3.9/CHANGELOG.md>`_
-- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/3.9/CHANGELOG.md>`_
+- `wazuh/wazuh <https://github.com/wazuh/wazuh/blob/v3.9.0/CHANGELOG.md>`_
+- `wazuh/wazuh-api <https://github.com/wazuh/wazuh-api/blob/v3.9.0/CHANGELOG.md>`_
+- `wazuh/wazuh-ruleset <https://github.com/wazuh/wazuh-ruleset/blob/v3.9.0/CHANGELOG.md>`_
 - `wazuh/wazuh-kibana-app <https://github.com/wazuh/wazuh-kibana-app/blob/3.9-6.7/CHANGELOG.md>`_
 - `wazuh/wazuh-splunk <https://github.com/wazuh/wazuh-splunk/blob/3.9/CHANGELOG.md>`_
 
@@ -236,20 +236,20 @@ Wazuh ruleset
 - Improved rules for Docker to prevent the activation of certain rules that should not be activated.
 - Modified the structure and the names for Windows EventChannel fields in all the related rules.
 - Fixed the brute-force attack rules for Windows EventChannel by adding the new ``<same_field>`` option and changing some rules.
-- Added *Sysmon rules* for Windows.
+- Added *Sysmon rules* for Windows EventChannel.
 
     .. code-block:: xml
 
-        <rule id="20351" level="0">
-            <if_sid>20350</if_sid>
-            <field name="EventChannel.EventData.ParentImage">\\services.exe</field>
+        <rule id="61619" level="0">
+            <if_sid>61618</if_sid>
+            <field name="win.eventdata.parentImage">\\services.exe</field>
             <description>Sysmon - Legitimate Parent Image - svchost.exe</description>
         </rule>
 
 
-        <rule id="20352" level="12">
+        <rule id="61620" level="12">
             <if_group>sysmon_event1</if_group>
-            <field name="EventChannel.EventData.Image">lsm.exe</field>
+            <field name="win.eventdata.image">lsm.exe</field>
             <description>Sysmon - Suspicious Process - lsm.exe</description>
             <group>pci_dss_10.6.1,pci_dss_11.4,gdpr_IV_35.7.d,</group>
         </rule>
@@ -258,8 +258,8 @@ Wazuh ruleset
 
     .. code-block:: xml
 
-        <rule id="20019" level="3">
-            <if_sid>20007</if_sid>
+        <rule id="60118" level="3">
+            <if_sid>60106</if_sid>
             <field name="win.eventdata.workstationName">\.+</field>
             <field name="win.eventdata.logonType">^2$</field>
             <description>Windows Workstation Logon Success</description>
