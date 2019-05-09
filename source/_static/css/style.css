@@ -1957,20 +1957,71 @@ blockquote {
   padding-left: 1em;
 }
 
+
+.admonition.note > p:nth-of-type(2)::before {
+    content: 'Note:';
+
+}
+
+.admonition.warning > p:nth-of-type(2)::before {
+    content: 'Warning:';
+
+}
+
+.admonition > p:nth-of-type(2)::before {
+    display: inline-block;
+    font: normal normal normal 1em/.5 'Open Sans';
+    margin-right: 0.75em;
+		margin-right: 0.4em;
+    font-weight: bold;
+}
+
+.admonition::before {
+	position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 50px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  text-align: -webkit-auto;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+	font: normal normal normal 2em/.5 FontAwesome;
+	color: #ffffff;
+}
+
+.admonition.note::before {
+	content: '\f06a';
+  background-color: #00a9e5;
+}
+
+.admonition.warning::before {
+	content: '\f071';
+  background-color: #ffb600;
+}
+
 .admonition {
   margin-bottom: 1.3rem;
   overflow: auto;
+	padding: 0 1em 0 calc(50px + 1em);
+	position: relative;
 }
 
 .admonition p {
-  padding: 1em;
+  padding: 1em 0;
   margin: 0;
 }
 
 p.admonition-title {
   color: #333333;
-  padding: 0.5em 1em;
   font-size: 1.2em;
+	display: none;
 }
 
 p.first.admonition-title::before,
@@ -1981,12 +2032,17 @@ p.first.admonition-title::before,
   margin-right: 0.75em;
 }
 
+.note {
+	border: 1px solid #00a9e5;
+}
+
+.warning {
+	border: 1px solid #ffb600;
+}
+
 .note, .warning {
   background-color: #ffffff;
-  border: 1px solid #e2e2e2;
   border-radius: 3px;
-  -webkit-box-shadow: 2px 2px 2px #e2e2e2;
-          box-shadow: 2px 2px 2px #e2e2e2;
 }
 
 .note .admonition-title {
