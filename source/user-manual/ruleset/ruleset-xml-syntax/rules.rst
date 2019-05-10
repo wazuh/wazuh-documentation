@@ -539,7 +539,19 @@ Examples:
       <description> File missing. Root acces unrestricted. </description>
     </rule>
 
-Since Wazuh v3.3.0 it is possible to include any decoded field (static or dynamic) to the description message.
+Since Wazuh version 3.3 it is possible to include any decoded field (static or dynamic) to the description message. You can use the following syntax: ``$(field_name)`` to add a field to the description.
+
+Example:
+
+  .. code-block:: xml
+    <rule id="100005" level="8">
+      <match>illegal user|invalid user</match>
+      <description>sshd: Attempt to login using a non-existent user from IP $(attempt_ip)</description>
+      <options>no_log</options>
+    </rule>
+
+
+
 
 list
 ^^^^
