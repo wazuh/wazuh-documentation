@@ -38,8 +38,10 @@ Available options
 - `same_dst_port`_
 - `same_location`_
 - `same_user`_
+- `same_field`_
 - `different_url`_
 - `different_srcgeoip`_
+- `not_same_field`_
 - `description`_
 - `list`_
 - `info`_
@@ -472,6 +474,30 @@ This option is used in conjunction with frequency and timeframe.
 | **Example of use** | <same_user />      |
 +--------------------+--------------------+
 
+same_field
+^^^^^^^^^^
+
+Specify a field (extracted by the decoder) that must be the same.
+This option is used in conjunction with frequency and timeframe.
+
++--------------------+-----------------------------------------+
+| **Default Value**  | n/a                                     |
++--------------------+-----------------------------------------+
+| **Allowed values** | Any field name extracted by the decoder |
++--------------------+-----------------------------------------+
+
+Example:
+
+  .. code-block:: xml
+
+    <rule id="100001" level="5" frequency="3" timeframe="300">
+      <if_matched_sid>221</if_matched_sid>
+      <same_field>netinfo.iface.name</same_field>
+      <not_same_field>netinfo.iface.mac</not_same_field>
+      <options>no_full_log</options>
+      <description>Fire an alert if arrives many logs for the same interface but with different mac addresses</description>
+    </rule>
+
 different_url
 ^^^^^^^^^^^^^
 
@@ -506,6 +532,30 @@ Example:
       </rule>
 
   That rule filters when the same ``user`` tries to open file ``/home`` but returns an error, on a different ``ip`` and using same ``port``.
+
+not_same_field
+^^^^^^^^^^^^^^^
+
+Specify a field (extracted by the decoder) that must be different.
+This option is used in conjunction with frequency and timeframe.
+
++--------------------+-----------------------------------------+
+| **Default Value**  | n/a                                     |
++--------------------+-----------------------------------------+
+| **Allowed values** | Any field name extracted by the decoder |
++--------------------+-----------------------------------------+
+
+Example:
+
+  .. code-block:: xml
+
+    <rule id="100001" level="5" frequency="3" timeframe="300">
+      <if_matched_sid>221</if_matched_sid>
+      <same_field>netinfo.iface.name</same_field>
+      <not_same_field>netinfo.iface.mac</not_same_field>
+      <options>no_full_log</options>
+      <description>Fire an alert if arrives many logs for the same interface but with different mac addresses</description>
+    </rule>
 
 description
 ^^^^^^^^^^^
