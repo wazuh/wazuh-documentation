@@ -18,7 +18,7 @@ Wazuh core
 
 **Automated deployment**
 
-Agent installers support now :ref:`environment variables <automated_deployment_variables>` which allow deploy an agent in a simple step.
+Agent installers support now :ref:`variables <configuration_provisioning_variables>` which allow deploy an agent in a simple step.
 
 Here we can see an example for CentOS/RHEL:
 
