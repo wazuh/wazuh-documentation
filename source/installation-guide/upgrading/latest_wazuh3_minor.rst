@@ -69,6 +69,10 @@ It's possible to upgrade the Wazuh agents from the manager by using the agent_up
 
 Using the agent_upgrade tool
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. note::
+  The agent_upgrade tool is available since Wazuh version 3.0. It can only be used to upgrade agents with an actual version equal or greater than 3.0.
+  It isn't available fot Windows XP agents.
+
 1. List the agents to see its versions:
   .. code-block:: console
 
