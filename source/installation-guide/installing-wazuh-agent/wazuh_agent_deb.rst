@@ -9,10 +9,8 @@ The DEB packages are suitable for Debian, Ubuntu, and other Debian-based systems
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
-Adding the Wazuh repository
----------------------------
-
-The first step to installing the Wazuh agent is to add the Wazuh repository to your server. Alternatively, if you prefer to download the wazuh-agent package directly, you can find it :ref:`here <packages>`.
+Installing Wazuh agent
+----------------------
 
 1. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
@@ -20,28 +18,15 @@ The first step to installing the Wazuh agent is to add the Wazuh repository to y
 
     # apt-get install curl apt-transport-https lsb-release
 
-2. Install the Wazuh repository GPG key:
+2. Add the repository:
 
   .. code-block:: console
 
-    # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
+    # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add - \
+    echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee /etc/apt/sources.list.d/wazuh.list \
+    apt-get update
 
-3. Add the repository:
-
-  .. code-block:: console
-
-    # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee /etc/apt/sources.list.d/wazuh.list
-
-4. Update the package information:
-
-  .. code-block:: console
-
-    # apt-get update
-
-Installing Wazuh agent
-----------------------
-
-1. On your terminal, install the Wazuh agent. You can choose only installation or an installation with a registration / configuration included:
+3. On your terminal, install the Wazuh agent. You can choose only installation or an installation with a registration / configuration included:
 
   a) Only installation:
 
@@ -57,11 +42,11 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="192.168.1.2" apt-get install wazuh-agent  
+      # WAZUH_MANAGER_IP="10.0.0.2" apt-get install wazuh-agent  
 
     .. note:: See the following document for additional automated deployment options: :doc:`automated deployment variables <automated_deployment_variables>`.      
 
-2. (Optional) Disable the Wazuh updates:
+4. (Optional) Disable the Wazuh updates:
 
   It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
 
@@ -76,3 +61,4 @@ Installing Wazuh agent
 
     # echo "wazuh-agent hold" | sudo dpkg --set-selections
 
+Alternatively, if you want to download the wazuh-agent package directly, or check the compatible versions, you can do it from :ref:`here <packages>`.
