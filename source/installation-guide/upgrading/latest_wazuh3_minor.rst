@@ -70,7 +70,7 @@ It's possible to upgrade the Wazuh agents from the manager by using the agent_up
 Upgrading the agents from the manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To upgrade you agents from the manager follow the :ref:`Upgrading agent <upgrading-agent>` page.
+To upgrade you agents from the manager follow the :ref:`Upgrading agent <agent_upgrade>` page.
 
 Installing the packets in the agent locally.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
