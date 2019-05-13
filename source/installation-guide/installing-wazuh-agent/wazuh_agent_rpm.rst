@@ -109,7 +109,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="192.168.1.2" yum install wazuh-agent 
 
-    .. note:: See the following document for additional automated deployment options: :doc:`automated deployment variables <automated_deployment_variables>`.      
+    .. note:: See the following document for additional automated deployment options: :doc:`configuration provisioning variables <configuration_provisioning_variables>`.      
 
 2. (Optional) Disable the Wazuh repository:
 
