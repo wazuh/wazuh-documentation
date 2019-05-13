@@ -12,6 +12,10 @@ Upgrading an agent remotely can be performed at the command line and through the
 Using the command line
 ----------------------
 
+.. note::
+  The agent_upgrade tool is available since Wazuh version 3.0. It can only be used to upgrade agents with an actual version equal or greater than 3.0.
+  It isn't available fot Windows XP agents.
+
 To upgrade agents using the command line, use the :doc:`agent_upgrade <../../reference/tools/agent_upgrade>` tool as follows:
 
 1. List all outdated agents using the *'-l'* parameter:
