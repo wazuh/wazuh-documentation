@@ -13,7 +13,7 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
 
     **Change the default credentials:**
 
-    The ``configure_api.sh`` script allows you to change the api user. If you did not use the script you can still change the api user as follows:
+    The ``configure_api.sh`` script allows you to change the api's user. If you did not use the script you can still change the api user as follows:
     
     .. code-block:: console
 
