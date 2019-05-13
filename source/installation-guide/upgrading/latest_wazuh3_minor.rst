@@ -75,7 +75,7 @@ To upgrade you agents from the manager follow the :ref:`Upgrading agent <agent_u
 Installing the packets in the agent locally.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You don't need to follow this section if you have already upgraded the agents from the manager.
+It is not neccesary to follow this section if the one of the previous methods has been used.
 
 1. Upgrade the ``wazuh-agent`` package:
 
