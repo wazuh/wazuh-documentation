@@ -80,7 +80,7 @@ Using the agent_upgrade tool
 
     # /var/ossec/bin/agent-upgrade -a AGENTID
 
-Find every available option from agent_upgrade tool in :ref:`agent-upgrade <user_manual>`.
+Find every available option from agent_upgrade tool in :ref:`agent-upgrade <agent_upgrade>`.
 
 Installing the packets in the agent locally.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
