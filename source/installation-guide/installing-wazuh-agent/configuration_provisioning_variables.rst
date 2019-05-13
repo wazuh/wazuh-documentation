@@ -73,42 +73,42 @@ Examples:
 
 .. code-block:: console
 
-     # WAZUH_MANAGER_IP="192.168.1.2" WAZUH_PASSWORD="TopSecret" \
+     # WAZUH_MANAGER_IP="10.0.0.2" WAZUH_PASSWORD="TopSecret" \
           WAZUH_AGENT_NAME="ubuntu18" apt-get install wazuh-agent
 
 * Registration with password and assigning a group (using `yum`):
 
 .. code-block:: console
 
-     # WAZUH_MANAGER_IP="192.168.1.2" WAZUH_AUTHD_SERVER="192.168.1.2" WAZUH_PASSWORD="TopSecret" \
+     # WAZUH_MANAGER_IP="10.0.0.2" WAZUH_AUTHD_SERVER="10.0.0.2" WAZUH_PASSWORD="TopSecret" \
           WAZUH_GROUP="my-group" yum install wazuh-agent
 
 * Registration with relative path to CA. It will be searched at your Wazuh installation folder (using `rpm -i` in AIX):
 
 .. code-block:: console
 
-     # WAZUH_MANAGER_IP="192.168.1.2" WAZUH_AUTHD_SERVER="192.168.1.2" WAZUH_AGENT_NAME="aix-agent" \
+     # WAZUH_MANAGER_IP="10.0.0.2" WAZUH_AUTHD_SERVER="10.0.0.2" WAZUH_AGENT_NAME="aix-agent" \
           WAZUH_CERTIFICATE="rootCA.pem" rpm -i wazuh-agent-3.9.0-1.aix.ppc.rpm
 
 * Registration with protocol (using `apt-get`):
 
 .. code-block:: console
 
-     # WAZUH_MANAGER_IP="192.168.1.2" WAZUH_AUTHD_SERVER="192.168.1.2" WAZUH_AGENT_NAME="ubuntu18" \
+     # WAZUH_MANAGER_IP="10.0.0.2" WAZUH_AUTHD_SERVER="10.0.0.2" WAZUH_AGENT_NAME="ubuntu18" \
           WAZUH_PROTOCOL="tcp" apt-get install wazuh-agent
 
 * Registration and adding multiple address (using `yum`):
 
 .. code-block:: console
 
-     # WAZUH_MANAGER_IP="192.168.1.2,192.168.1.3" WAZUH_AUTHD_SERVER="192.168.1.2" \
+     # WAZUH_MANAGER_IP="10.0.0.2,10.0.0.3" WAZUH_AUTHD_SERVER="10.0.0.2" \
           WAZUH_AGENT_NAME="ubuntu18" apt-get install wazuh-agent
 
 * Absolute paths to CA, certificate or key that contain spaces can be written as shown below (in MacOS):
 
 .. code-block:: console
 
-     # launchctl setenv WAZUH_MANAGER_IP "192.168.1.2" WAZUH_AUTHD_SERVER "192.168.1.2" WAZUH_KEY "/var/ossec/etc/sslagent.key" \
+     # launchctl setenv WAZUH_MANAGER_IP "10.0.0.2" WAZUH_AUTHD_SERVER "10.0.0.2" WAZUH_KEY "/var/ossec/etc/sslagent.key" \
           WAZUH_PEM "/var/ossec/etc/sslagent.cert" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
 
 .. note:: To verify agents identity with the registration server, it's necessary to use both KEY and PEM options. See the :ref:`agent-verification-with-host-validation` section.
