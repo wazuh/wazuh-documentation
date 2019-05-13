@@ -42,7 +42,7 @@ Our default configuration is not using authentication for Filebeat so we need to
 
 2. Look for the output section and add username and password fields:
 
-.. code-block:: yml
+.. code-block:: yaml
 
     output.elasticsearch:
         ...

@@ -27,7 +27,7 @@ Enrich events with geolocation information
 
 2. Uncomment the ``geoip`` pipeline in Filebeat configuration:
 
-    .. code-block:: yml
+    .. code-block:: yaml
 
         output.elasticsearch:
             hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
