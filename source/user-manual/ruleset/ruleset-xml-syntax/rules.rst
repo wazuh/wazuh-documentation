@@ -544,6 +544,7 @@ Since Wazuh version 3.3 it is possible to include any decoded field (static or d
 Example:
 
   .. code-block:: xml
+  
     <rule id="100005" level="8">
       <match>illegal user|invalid user</match>
       <description>sshd: Attempt to login using a non-existent user from IP $(attempt_ip)</description>
