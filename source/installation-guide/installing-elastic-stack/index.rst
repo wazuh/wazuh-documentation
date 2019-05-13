@@ -21,7 +21,6 @@ Depending on your operating system you can choose to install Elastic Stack from 
 
 There are some related additional configurations that can be applied:
 
-- :ref:`Setting up SSL for Filebeat and Logstash <elastic_ssl>` 
 - :ref:`Setting up SSL and authentication for Kibana <kibana_ssl>` 
 - :ref:`Elasticsearch tuning <elastic_tuning>` 
 - :ref:`Search Guard configuration <searchguard>` 
@@ -37,9 +36,6 @@ There are some related additional configurations that can be applied:
 
    elastic_server_rpm
    elastic_server_deb
-   elastic_ssl
-   kibana_ssl
    elastic_tuning
-   searchguard
    geoip
 

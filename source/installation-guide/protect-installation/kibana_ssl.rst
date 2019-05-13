@@ -2,8 +2,8 @@
 
 .. _kibana_ssl:
 
-Setting up SSL and authentication for Kibana
-============================================
+NGINX SSL and authentication for Kibana
+=======================================
 
 By default, the communication between Kibana (including the Wazuh app) and the web browser on end-user systems is not encrypted. It’s strongly recommended that Kibana be configured to use SSL encryption and to enable authentication.  In this section, we will describe how this can be done with an NGINX setup.
 
