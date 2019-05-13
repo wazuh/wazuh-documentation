@@ -5,7 +5,7 @@
 The registration process
 =========================
 
-Every Wazuh Agent sends data to the Wazuh Manager via a secure way called OSSEC message protocol. This encrypts messages using a pre-shared key. Initially, when you successfully install a new Wazuh Agent, this cannot communicate with the Wazuh Manager due to a lack of that pre-shared key.
+Every Wazuh Agent sends data to the Wazuh Manager via a secure way called OSSEC message protocol. This protocol encrypts messages using a pre-shared key. In a fresh install, if you didn't register and configure your agent during the installation time, the agent can't communicate with the manager due to the lack of this pre-shared key.
 
 The registration process consists of a mechanism to create a trusted relationship between the Manager and an Agent. This process could be done in a Manager itself or with a registration service. This service runs on the Manager, where an Agent could request a pre-shared key using some credentials. The Manager will reply with the key and store the new Agent in a local database.
 
@@ -41,17 +41,25 @@ Some registration methods automatically detect the IP of the agent during the re
 Registration methods
 ----------------------
 
-Here are three ways to register an agent:
+Here you can find different methods to register the Wazuh Agents:
 
-+---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
-| Type          | Method                                                          | Description                                                            |
-+===============+=================================================================+========================================================================+
-| Manually      | :ref:`Using the command line <command-line-register>`           | Register an agent manually using manage_agents binary.                 |
-+---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
-| Automatically | :doc:`Using the registration service <use-registration-service>`| Register an agent automatically using ossec-authd binary.              |
-+               +-----------------------------------------------------------------+------------------------------------------------------------------------+
-|               | :ref:`Using the Wazuh API <restful-api-register>`               | Register an agent by scripting (bash, python, powershell) and the API. |
-+---------------+-----------------------------------------------------------------+------------------------------------------------------------------------+
++----------------+---------------------------------------------------------------+
+| Type           | Method                                                        |
++================+===============================================================+
+| Manual method  | :ref:`using-command-line`                                     |
++----------------+---------------------------------------------------------------+
+| Semi automatic | :ref:`restful-api-register`                                   |
++----------------+---------------------------------------------------------------+
+|                | :ref:`simple-registration-service`                            |
+|                +---------------------------------------------------------------+
+| Automatic      | :ref:`password-authorization-registration-service`            |
+|                +---------------------------------------------------------------+
+|                | :ref:`manager-verification-registration`                      |
+|                +---------------------------------------------------------------+
+|                | :ref:`agent-verification-with-host-validation`                |
+|                +---------------------------------------------------------------+
+|                | :ref:`agent-verification-without-host-validation`             |
++----------------+---------------------------------------------------------------+
 
 .. note::
 
