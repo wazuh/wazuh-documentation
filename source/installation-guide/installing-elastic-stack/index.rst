@@ -21,11 +21,8 @@ Depending on your operating system you can choose to install Elastic Stack from 
 
 There are some related additional configurations that can be applied:
 
-- :ref:`Setting up SSL and authentication for Kibana <kibana_ssl>` 
 - :ref:`Elasticsearch tuning <elastic_tuning>` 
-- :ref:`Search Guard configuration <searchguard>` 
 - :ref:`Enrich events with geolocation information <geo_ip>` 
-
 
 .. note::
     Currently, the Elastic Stack is only supported on 64-bit operating systems, according to its `Support Matrix <https://www.elastic.co/support/matrix>`_.

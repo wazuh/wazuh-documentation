@@ -33,7 +33,7 @@ Adding authentication for Elasticsearch
 
     # systemctl restart elasticsearch
 
-3. Generate credentials for all the Elastic stack pre-built roles and users.
+3. Generate credentials for all the Elastic Stack pre-built roles and users.
 
 .. code-block:: console
 
@@ -61,7 +61,7 @@ Adding authentication for Elasticsearch
     elasticsearch.username: "elastic"
     elasticsearch.password: "elastic_password"
 
-Configure Elastic stack to use encrypted connections 
+Configure Elastic Stack to use encrypted connections 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This section describes how to secure the communications between the involved components, adding an SSL layer.
