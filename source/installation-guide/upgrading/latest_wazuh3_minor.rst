@@ -65,26 +65,12 @@ Upgrade the Wazuh manager
 
 Upgrade the Wazuh agent
 ^^^^^^^^^^^^^^^^^^^^^^^
-It's possible to upgrade the Wazuh agents from the manager by using the agent_upgrade tool or installing the packages in the agent directly.
+It's possible to upgrade the Wazuh agents from the manager by using the agent_upgrade tool or the Wazuh api or locally by installing the packages in the agents.
 
-Using the agent_upgrade tool
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-.. note::
-  The agent_upgrade tool is available since Wazuh version 3.0. It can only be used to upgrade agents with an actual version equal or greater than 3.0.
-  It isn't available fot Windows XP agents.
+Upgrading the agents from the manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. List the agents to see its versions:
-  .. code-block:: console
-
-    # /var/ossec/bin/agent_upgrade -l
-
-2. Upgrade the agents:
-
-  .. code-block:: console
-
-    # /var/ossec/bin/agent-upgrade -a AGENTID
-
-Find every available option from agent_upgrade tool in :ref:`agent-upgrade <agent_upgrade>`.
+To upgrade you agents from the manager follow the :ref:`Upgrading agent <upgrading-agent>` page.
 
 Installing the packets in the agent locally.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
