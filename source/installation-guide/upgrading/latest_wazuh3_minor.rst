@@ -85,7 +85,7 @@ Find every available option from agent_upgrade tool in :ref:`agent-upgrade <agen
 Installing the packets in the agent locally.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section isn't neccesary if you have already used the agent-upgrade tool.
+You don't need to follow this section if you have already used the agent-upgrade tool.
 
 1. Upgrade the ``wazuh-agent`` package:
 
