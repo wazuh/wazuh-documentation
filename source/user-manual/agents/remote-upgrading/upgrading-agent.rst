@@ -13,8 +13,8 @@ Using the command line
 ----------------------
 
 .. note::
-  The agent_upgrade tool is available since Wazuh version 3.0. It can only be used to upgrade agents with an actual version equal or greater than 3.0.
-  It isn't available fot Windows XP agents.
+  The agent_upgrade tool is available since Wazuh version 3.0. It can only be used to upgrade agents with an actual version equal to or greater than 3.0.
+  It is not available for Windows XP agents.
 
 To upgrade agents using the command line, use the :doc:`agent_upgrade <../../reference/tools/agent_upgrade>` tool as follows:
 
