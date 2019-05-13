@@ -49,4 +49,4 @@ There are several options to install a Wazuh agent, depending on the operating s
     wazuh_agent_hpux
     wazuh_agent_aix
     wazuh_agent_sources
-    automated_deployment_variables
+    configuration_provisioning_variables
