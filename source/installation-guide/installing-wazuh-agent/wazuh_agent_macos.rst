@@ -15,7 +15,7 @@ The Mac OS X agent can be downloaded from :doc:`packages list<../packages-list/i
 
             # installer -pkg wazuh-agent-3.9.0-1.pkg -target /
       
-       .. note:: With only installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
+       .. note:: With this kind of installation, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
 
      * As alternative, you can automate the agent registration and configuration using variables. 
