@@ -23,5 +23,5 @@ The Wazuh agent for AIX can be downloaded from our :doc:`packages list<../packag
 
       # WAZUH_MANAGER_IP="10.0.0.2" rpm -ivh wazuh-agent-3.9.0-1.aix.ppc.rpm  
 
-    .. note:: See the following document for additional deployment options: :doc:`configuration provisioning variables <configuration_provisioning_variables>`.   
+    .. note:: See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.   
 

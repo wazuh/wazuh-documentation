@@ -15,7 +15,7 @@ Installing Wazuh agent
 1. Adding the Wazuh repository
 
   .. code-block:: console
-  
+
     # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH-5 
     # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
@@ -45,7 +45,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent 
 
-    See the following document for additional automated deployment options: :doc:`configuration provisioning variables <configuration_provisioning_variables>`.      
+    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.      
 
 3. (Optional) Disable the Wazuh repository:
 

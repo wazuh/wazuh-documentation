@@ -45,7 +45,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="10.0.0.2" zypper wazuh-agent 
 
-    See the following document for additional automated deployment options: :doc:`configuration provisioning variables <configuration_provisioning_variables>`.      
+    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.      
 
 3. (Optional) Disable the Wazuh repository:
 

@@ -26,9 +26,9 @@ Installing Wazuh agent
     echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee /etc/apt/sources.list.d/wazuh.list \
     apt-get update
 
-3. On your terminal, install the Wazuh agent. You can choose standard installation or an installation with configuration provisioning:
+3. On your terminal, install the Wazuh agent. You can choose standard installation or deployment:
 
-  a) Standard installation:
+  a) Installation:
 
     .. code-block:: console
 
@@ -36,7 +36,7 @@ Installing Wazuh agent
       
     .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
 
-  b) Installation with configuration provisioning:
+  b) Deployment:
 
     You can automate the agent registration and configuration using variables. 
 
@@ -44,7 +44,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="10.0.0.2" apt-get install wazuh-agent  
 
-    .. note:: See the following document for additional configuration provisioning options: :doc:`configuration provisioning variables <configuration_provisioning_variables>`.      
+    .. note:: See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.      
 
 4. (Optional) Disable the Wazuh updates:
 
