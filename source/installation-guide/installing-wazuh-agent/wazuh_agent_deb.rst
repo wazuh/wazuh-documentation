@@ -34,7 +34,7 @@ Installing Wazuh agent
 
       # apt-get install wazuh-agent
       
-    .. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
 
   b) Deployment:
 
@@ -44,7 +44,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="10.0.0.2" apt-get install wazuh-agent  
 
-    .. note:: See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.      
+    See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.      
 
 4. (Optional) Disable the Wazuh updates:
 
