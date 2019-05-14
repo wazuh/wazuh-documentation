@@ -27,9 +27,9 @@ Installing Wazuh agent
     protect=1
     EOF
 
-2. On your terminal, install the Wazuh agent. You can choose standard installation or an installation with configuration provisioning:
+2. On your terminal, install the Wazuh agent. You can choose installation or deployment:
 
-  a) Standard installation:
+  a) Installation:
 
     .. code-block:: console
    
@@ -37,7 +37,7 @@ Installing Wazuh agent
          
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
 
-  b) Installation with configuration provisioning:
+  b) Deployment:
 
     You can automate the agent registration and configuration using variables. 
 
@@ -45,7 +45,7 @@ Installing Wazuh agent
 
       # WAZUH_MANAGER_IP="10.0.0.2" dnf install wazuh-agent 
 
-    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.      
+    See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.      
 
 3. (Optional) Disable the Wazuh repository:
 
