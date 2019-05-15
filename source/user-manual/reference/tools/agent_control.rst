@@ -55,3 +55,10 @@ agent_control options for Active Response
 +-------------------+---------------------------------------------------------+
 | **-j**            | Change the output to JSON format.                       |
 +-------------------+---------------------------------------------------------+
+
+.. note::
+    
+    The active-response identifier for use with the ``-f`` option is composed of the command name followed by the value indicated in the ``timeout`` option (active-response block). If ``timeout_allowed`` (command block) is set to no, or no timeout has been specified, the number next to the command name is 0.
+
+    |
+    You can verify the identifier of an active response with the first column of ``/var/ossec/etc/shared/ar.conf``.
