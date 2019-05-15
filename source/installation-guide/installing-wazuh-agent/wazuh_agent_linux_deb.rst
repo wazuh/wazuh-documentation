@@ -9,8 +9,8 @@ The DEB packages are suitable for Debian, Ubuntu, and other Debian-based systems
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
-Installing Wazuh agent
-----------------------
+Adding the Wazuh repository
+---------------------------
 
 1. To perform this procedure, the ``curl``, ``apt-transport-https`` and ``lsb-release`` packages must be installed on your system. If they are not already present, install them using the commands below:
 
@@ -18,15 +18,28 @@ Installing Wazuh agent
 
     # apt-get install curl apt-transport-https lsb-release
 
-2. Add the repository:
+2. Install the Wazuh repository GPG key:
 
   .. code-block:: console
 
-    # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add - \
-    echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee /etc/apt/sources.list.d/wazuh.list \
-    apt-get update
+    # curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -
 
-3. On your terminal, install the Wazuh agent. You can choose standard installation or deployment:
+3. Add the repository:
+
+  .. code-block:: console
+
+    # echo "deb https://packages.wazuh.com/3.x/apt/ stable main" | tee /etc/apt/sources.list.d/wazuh.list
+
+4. Update the package information:
+
+  .. code-block:: console
+
+    # apt-get update
+
+Installing Wazuh agent
+----------------------
+
+1. On your terminal, install the Wazuh agent. You can choose installation or deployment:
 
   a) Installation:
 
