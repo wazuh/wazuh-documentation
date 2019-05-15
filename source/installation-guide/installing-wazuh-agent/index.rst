@@ -25,7 +25,7 @@ There are several options to install a Wazuh agent, depending on the operating s
 +-------------------------------------------------+--------------------------------------------------+
 | :doc:`Windows installer <wazuh_agent_windows>`  | Install Wazuh agents on Windows.                 |
 +-------------------------------------------------+--------------------------------------------------+
-| :doc:`Mac OS installer <wazuh_agent_macos>`     | Install Wazuh agents on Mac OS                   |
+| :doc:`macOS installer <wazuh_agent_macos>`      | Install Wazuh agents on macOS                    |
 +-------------------------------------------------+--------------------------------------------------+
 | :doc:`Solaris installer <wazuh_agent_solaris>`  | Install Wazuh agents on Solaris                  |
 +-------------------------------------------------+--------------------------------------------------+
