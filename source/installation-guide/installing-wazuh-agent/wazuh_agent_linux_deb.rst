@@ -51,7 +51,7 @@ Installing Wazuh agent
 
   b) Deployment:
 
-    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable `WAZUH_MANAGER_IP`. The agent will use this value to register and it will be the assigned manager for forwarding events. 
+    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will use this value to register and it will be the assigned manager for forwarding events. 
 
     .. code-block:: console
 
@@ -61,7 +61,7 @@ Installing Wazuh agent
 
 4. (Optional) Disable the Wazuh updates:
 
-  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+  We recommend maintaining the Wazuh Manager version greater or equal than Wazuh Agents. If a Wazuh Agent has a greater version, it is possible message sending misunderstandable for the Wazuh Manager caused by some new feature. Because of this, we recommended to disable the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
   .. code-block:: console
 
