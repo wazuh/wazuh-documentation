@@ -5,7 +5,7 @@
 Install Wazuh agent on Fedora
 =============================
 
-The RPM package is suitable for installation on Fedora. For other RPM-based OS (Centos/RHEL/Oracle Linux, Amazon Linux, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`. 
+The RPM package is suitable for installation on Fedora. For other RPM-based OS (CentOS/RHEL/Oracle Linux, Amazon Linux, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`. 
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -54,4 +54,3 @@ Installing Wazuh agent
   .. code-block:: console
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
-
