@@ -135,25 +135,34 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
 The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
-1. Install Filebeat:
+1. Install the Elastic repository and its GPG key:
+
+  .. code-block:: console
+
+    # apt-get install curl apt-transport-https
+    # curl -s https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add -
+    # echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee /etc/apt/sources.list.d/elastic-7.x.list
+    # apt-get update
+
+2. Install Filebeat:
 
   .. code-block:: console
 
     # apt-get install filebeat=7.0.1
 
-2. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
+3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
     # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
 
-3. Download the alerts template for Elasticsearch:
+4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
     # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic7-template-alerts.json 
 
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
+5. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
 
   .. code-block:: yaml
 
@@ -162,7 +171,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
       indices:
         - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
-5. Enable and start the Filebeat service:
+6. Enable and start the Filebeat service:
 
   * For Systemd:
 

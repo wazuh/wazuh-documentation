@@ -131,25 +131,41 @@ Filebeat is the tool on the Wazuh server that securely forwards alerts and archi
 
 The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
 
-1. Install Filebeat:
+1. Install the Elastic repository and its GPG key:
+
+  .. code-block:: console
+
+    # rpm --import https://packages.elastic.co/GPG-KEY-elasticsearch
+    # cat > /etc/yum.repos.d/elastic.repo << EOF
+    [elasticsearch-7.x]
+    name=Elasticsearch repository for 7.x packages
+    baseurl=https://artifacts.elastic.co/packages/7.x/yum
+    gpgcheck=1
+    gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    enabled=1
+    autorefresh=1
+    type=rpm-md
+    EOF
+
+2. Install Filebeat:
 
   .. code-block:: console
 
     # yum install filebeat-7.0.1
 
-2. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
+3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
     # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
 
-3. Download the alerts template for Elasticsearch:
+4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
     # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic7-template-alerts.json
 
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
+5. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
 
   .. code-block:: yaml
 
@@ -158,7 +174,7 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
       indices:
         - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
-5. Enable and start the Filebeat service:
+6. Enable and start the Filebeat service:
 
   * For Systemd:
 
