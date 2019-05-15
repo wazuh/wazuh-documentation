@@ -57,6 +57,7 @@ Given the following configuration:
 
     <fluent-forward>
       <enabled>yes</enabled>
+      <tag>debug.test</tag>
       <socket_path>/var/run/fluent.sock</socket_path>
       <address>localhost</address>
       <port>24224</port>
