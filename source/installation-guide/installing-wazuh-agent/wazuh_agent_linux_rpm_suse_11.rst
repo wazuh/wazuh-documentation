@@ -27,7 +27,7 @@ Installing Wazuh agent
     protect=1
     EOF
 
-2. On your terminal, install the Wazuh agent. You can choose standard installation or an installation with configuration provisioning:
+2. On your terminal, install the Wazuh agent. You can choose an installation or a deployment:
 
   a) Standard installation:
 
