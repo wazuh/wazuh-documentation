@@ -38,6 +38,8 @@ Available options
 - `same_dst_port`_
 - `same_location`_
 - `same_user`_
+- `same_field`_
+- `not_same_field`_
 - `different_url`_
 - `different_srcgeoip`_
 - `description`_
@@ -472,6 +474,67 @@ This option is used in conjunction with frequency and timeframe.
 | **Example of use** | <same_user />      |
 +--------------------+--------------------+
 
+same_field
+^^^^^^^^^^
+
+Specifies that the decoded field must be the same as the previous one.
+This option is used in conjunction with frequency and timeframe.
+
++--------------------+--------------------+
+| **Example of use** | <same_field />     |
++--------------------+--------------------+
+
+As an example of this option, check this rule:
+
+.. code-block:: xml
+
+  <rule id="100001" level="3">
+    <if_sid>221</if_sid>
+    <field name="netinfo.iface.name">ens33</field>
+    <description>Testing interface alert</description>
+  </rule>
+
+  <rule id="100002" level="7" frequency="3" timeframe="300">
+    <if_matched_sid>100001</if_matched_sid>
+    <same_field>netinfo.iface.mac</same_field>
+    <description>Testing options for correlating repeated fields</description>
+  </rule>
+
+.. note::
+
+  Rule 100002 will trigger when the last three events had the same `netinfo.iface.mac` address.
+
+not_same_field
+^^^^^^^^^^^^^^
+
+Specifies that the decoded field must be different than the previous one.
+This option is used in conjunction with frequency and timeframe.
+
++--------------------+--------------------+
+| **Example of use** | <not_same_field /> |
++--------------------+--------------------+
+
+
+As an example of this option, check this rule:
+
+.. code-block:: xml
+
+  <rule id="100001" level="3">
+    <if_sid>221</if_sid>
+    <field name="netinfo.iface.name">ens33</field>
+    <description>Testing interface alert</description>
+  </rule>
+
+  <rule id="100002" level="7" frequency="3" timeframe="300">
+    <if_matched_sid>100001</if_matched_sid>
+    <not_same_field>netinfo.iface.mac</not_same_field>
+    <description>Testing options for correlating repeated fields</description>
+  </rule>
+
+.. note::
+
+  Rule 100002 will trigger when the last three events do not have the same `netinfo.iface.mac` address.
+
 different_url
 ^^^^^^^^^^^^^
 
@@ -494,7 +557,7 @@ This option is used in conjunction with frequency and timeframe.
 
 Example:
 
-  As a example to this last options, check this rule:
+  As an example to this last options, check this rule:
 
     .. code-block:: xml
       
