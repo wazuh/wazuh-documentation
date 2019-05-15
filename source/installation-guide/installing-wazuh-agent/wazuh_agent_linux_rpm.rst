@@ -35,7 +35,7 @@ Installing Wazuh agent
 
 2. On your terminal, install the Wazuh agent. You can choose an installation or a deployment:
 
-  a) Standard installation:
+  a) Installation:
 
     .. code-block:: console
    
@@ -43,7 +43,7 @@ Installing Wazuh agent
          
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
-  b) Installation with configuration provisioning:
+  b) Deployment:
 
     You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will use this value to register and it will be the assigned manager for forwarding events. 
 
