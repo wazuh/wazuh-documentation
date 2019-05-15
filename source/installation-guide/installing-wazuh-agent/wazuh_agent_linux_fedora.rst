@@ -1,8 +1,8 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_fedora:
+.. _wazuh_agent_linux_fedora:
 
-Install Wazuh agent in Fedora
+Install Wazuh agent on Fedora
 =============================
 
 The RPM package is suitable for installation on Fedora. For other RPM-based OS (Centos/RHEL, Suse, OpenSUSE), please check the list: :doc:`OS list <wazuh_agent_linux>`. 

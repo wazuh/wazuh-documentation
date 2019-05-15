@@ -1,6 +1,6 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. deployment_variables:
+.. _deployment_variables:
 
 Configuration provisioning variables
 ====================================

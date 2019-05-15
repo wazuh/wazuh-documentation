@@ -2,31 +2,62 @@
 
 .. _wazuh_agent_linux_rpm:
 
-Install Wazuh agent with RPM packages
-=====================================
+Install Wazuh agent on CentOS/RHEL/Oracle Linux/Amazon Linux
+============================================================
 
-In the table below, you will find all available RPM installation guide depending on your RPM-Based distribution.  
+The RPM package is suitable for installation on Red Hat, CentOS and other RPM-based systems. In this page we will provide the instruction for:
 
-+---------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
-| Type                                                                                        | Description                                                                         |
-+=============================================================================================+=====================================================================================+
-| :doc:`Centos/RHEL 6 or greater, Amazon Linux and Oracle Linux <wazuh_agent_rpm>`            | Install Wazuh agents on CentOS/RHEL 6 or greater, Amazon Linux and Oracle Linux.    | 
-+---------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
-| :doc:`Fedora <wazuh_agent_fedora>`                                                          | Install Wazuh agents on Fedora.                                                     |
-+---------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
-| :doc:`Centos/RHEL 5 <wazuh_agent_rpm_5>`                                                    | Install Wazuh agents on CentOS/RHEL 5.                                              |
-+---------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
-| :doc:`SUSE 11 <wazuh_agent_rpm_suse_11>`                                                    | Install Wazuh agents on Suse 11.                                                    |
-+---------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
-| :doc:`SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed <wazuh_agent_rpm_suse_12>`| Install Wazuh agents on SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed.|
-+---------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------+
+- Centos/RHEL 6 or greater. 
+- Oracle Linux
+- Amazon Linux
 
-.. toctree::
-    :hidden:
-    :maxdepth: 2
+For other RPM-based OS (Centos/RHEL 5, Fedora, Suse, OpenSUSE), please check the list: :doc:`OS list <wazuh_agent_linux>`. 
 
-    wazuh_agent_rpm
-    wazuh_agent_fedora
-    wazuh_agent_rpm_5
-    wazuh_agent_rpm_suse_11
-    wazuh_agent_rpm_suse_12
+.. note:: All the commands described below need to be executed with root user privileges.
+
+Installing Wazuh agent
+----------------------
+
+1. Adding the Wazuh repository
+
+  .. code-block:: console
+
+    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH 
+    # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+    [wazuh_repo]
+    gpgcheck=1
+    gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
+    enabled=1
+    name=Wazuh repository
+    baseurl=https://packages.wazuh.com/3.x/yum/
+    protect=1
+    EOF
+
+2. On your terminal, install the Wazuh agent. You can choose standard installation or an installation with configuration provisioning:
+
+  a) Standard installation:
+
+    .. code-block:: console
+   
+      # yum install wazuh-agent
+         
+    Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
+
+  b) Installation with configuration provisioning:
+
+    You can automate the agent registration and configuration using variables. 
+
+    .. code-block:: console
+
+      # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent 
+
+    See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.      
+
+3. (Optional) Disable the Wazuh repository:
+
+  It is recommended that the Wazuh repository be disabled in order to prevent accidental upgrades. To do this, use the following command:
+
+    .. code-block:: console
+
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+

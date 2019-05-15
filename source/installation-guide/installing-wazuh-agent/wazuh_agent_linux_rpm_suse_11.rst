@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_agent_rpm_5:
+.. _wazuh_agent_linux_rpm_suse_11:
 
-Install Wazuh agent in CentOS/RHEL 5
-====================================
+Install Wazuh agent on SUSE 11
+==============================
 
-The RPM package is suitable for CentOS/RHEL 5. For other RPM-based OS (Centos/RHEL 5, Fedora, Suse, OpenSUSE), please check the list: :doc:`OS list <wazuh_agent_linux>`. 
+The RPM package is suitable for Suse 11. For other RPM-based OS (Centos/RHEL, Fedora, OpenSUSE), please check the list: :doc:`OS list <wazuh_agent_linux>`. 
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -15,9 +15,9 @@ Installing Wazuh agent
 1. Adding the Wazuh repository
 
   .. code-block:: console
-
-    # rpm --import http://packages.wazuh.com/key/GPG-KEY-WAZUH-5 
-    # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
+  
+    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH-5
+    # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
     gpgcheck=1
     gpgkey=http://packages.wazuh.com/key/GPG-KEY-WAZUH-5
@@ -33,7 +33,7 @@ Installing Wazuh agent
 
     .. code-block:: console
    
-      # yum install wazuh-agent
+      # zypper wazuh-agent
          
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
@@ -43,7 +43,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="10.0.0.2" yum install wazuh-agent 
+      # WAZUH_MANAGER_IP="10.0.0.2" zypper wazuh-agent 
 
     See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.      
 
@@ -53,4 +53,4 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
+      # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo

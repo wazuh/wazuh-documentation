@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_linux_deb:
 
-Install Wazuh agent with DEB packages
-=====================================
+Install Wazuh agent on Debian/Ubuntu
+====================================
 
 The DEB packages are suitable for Debian, Ubuntu, and other Debian-based systems.
 
