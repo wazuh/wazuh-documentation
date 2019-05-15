@@ -51,6 +51,6 @@ Installing Wazuh agent
 
   We recommend maintaining the Wazuh Manager version greater or equal to that of the Wazuh Agents. f a Wazuh Agent has a greater version, it is possible that the message sent will be misunderstood by the Wazuh Manager because of some new feature. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
-    .. code-block:: console
+  .. code-block:: console
 
-      # sed -i "s/^enabled=1/enabled=0/" /etc/zypp/repos.d/wazuh.repo
+    # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
