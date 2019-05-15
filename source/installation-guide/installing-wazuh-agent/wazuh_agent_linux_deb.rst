@@ -59,7 +59,7 @@ Installing Wazuh agent
 
     See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.      
 
-4. (Optional) Disable the Wazuh updates:
+4. **(Optional)** Disable the Wazuh updates:
 
   We recommend maintaining the Wazuh Manager version greater or equal than Wazuh Agents. If a Wazuh Agent has a greater version, it is possible message sending misunderstandable for the Wazuh Manager caused by some new feature. Because of this, we recommended to disable the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
