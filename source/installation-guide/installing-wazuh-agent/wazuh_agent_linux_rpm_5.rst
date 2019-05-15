@@ -5,7 +5,7 @@
 Install Wazuh agent on CentOS/RHEL 5
 ====================================
 
-The RPM package is suitable for CentOS/RHEL 5. For other RPM-based OS (Centos/RHEL 5, Fedora, Suse, OpenSUSE), please check the list: :doc:`OS list <wazuh_agent_linux>`. 
+The RPM package is suitable for CentOS/RHEL 5. For other RPM-based OS (Centos/RHEL 5, Fedora, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`. 
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
