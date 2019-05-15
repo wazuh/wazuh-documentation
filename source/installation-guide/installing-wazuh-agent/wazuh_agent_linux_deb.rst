@@ -51,7 +51,7 @@ Installing Wazuh agent
 
   b) Deployment:
 
-    You can automate the agent registration and configuration using variables. 
+    You can automate the agent registration and configuration using variables. It is necessary to define at least the variable `WAZUH_MANAGER_IP`. The agent will use this value to register and it will be the assigned manager for forwarding events. 
 
     .. code-block:: console
 
