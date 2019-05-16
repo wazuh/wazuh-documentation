@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _unattended-installation:
 
@@ -110,8 +110,11 @@ Manager/local
 +------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
 | **USER_WHITE_LIST**                | List of IPs or networks that are going to be set to never be blocked.                                                                                     |
 +------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
-| **USER_CA_STORE**                  | Assign the path to a X509 certificate or to a folder containing certificates to verify incoming WPK packages for remote upgrades.                         |
-+------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+| **USER_CA_STORE**                  | Custom location for certificates to verify incoming WPK packages for remote upgrades.                                                                     |
++------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+|                                    | Allowed values                                        | If none "n", otherwise the path to a X509 certificate or to a folder containing certificates.     |
++------------------------------------+-------------------------------------------------------+---------------------------------------------------------------------------------------------------+
+
 
 Example:
 
@@ -127,6 +130,7 @@ Example:
     USER_ENABLE_OPENSCAP="y"
     USER_WHITE_LIST="n"
     USER_ENABLE_SYSLOG="y"
+    USER_CA_STORE="n"
 
 API
 ---

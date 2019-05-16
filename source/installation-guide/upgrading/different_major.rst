@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _upgrading_different_major:
 
@@ -131,7 +131,7 @@ Upgrade Wazuh agent
 
   .. code-block:: console
 
-    # wazuh-agent-3.8.2-1.msi /q
+    # wazuh-agent-3.9.0-1.msi /q
 
 .. note::
   To learn more about the unattended installation process, you can check the :ref:`Windows installation guide <wazuh_agent_windows>`.
@@ -145,7 +145,7 @@ We recommend that the Wazuh repository be disabled in order to prevent accidenta
 
     .. code-block:: console
 
-      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/elastic.repo
+      # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
   b) For Debian/Ubuntu:
 
@@ -212,14 +212,14 @@ Upgrade Elasticsearch
 
     .. code-block:: console
 
-      # yum install elasticsearch-6.6.1
+      # yum install elasticsearch-6.7.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get update
-      # apt-get install elasticsearch=6.6.1
+      # apt-get install elasticsearch=6.7.2
 
 2. Start Elasticsearch:
 
@@ -240,7 +240,7 @@ Upgrade Elasticsearch
       "cluster_name" : "elasticsearch",
       "cluster_uuid" : "M-W_RznZRA-CXykh_oJsCQ",
       "version" : {
-        "number" : "6.6.1",
+        "number" : "6.7.2",
         "build_flavor" : "default",
         "build_type" : "rpm",
         "build_hash" : "053779d",
@@ -260,7 +260,7 @@ Upgrade Elasticsearch
 
   .. code-block:: console
 
-    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
 Upgrade Logstash
 ^^^^^^^^^^^^^^^^
@@ -271,13 +271,13 @@ Upgrade Logstash
 
     .. code-block:: console
 
-      # yum install logstash-6.6.1
+      # yum install logstash-6.7.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install logstash=1:6.6.1-1
+      # apt-get install logstash=1:6.7.2-1
 
 2. Download and set the Wazuh configuration for Logstash:
 
@@ -286,7 +286,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/logstash/01-wazuh-local.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/logstash/01-wazuh-local.conf
       # usermod -a -G ossec logstash
 
   b) Remote configuration:
@@ -294,7 +294,7 @@ Upgrade Logstash
     .. code-block:: console
 
       # cp /etc/logstash/conf.d/01-wazuh.conf /backup_directory/01-wazuh.conf.bak
-      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/logstash/01-wazuh-remote.conf
+      # curl -so /etc/logstash/conf.d/01-wazuh.conf https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/logstash/01-wazuh-remote.conf
 
 3. Start Logstash:
 
@@ -313,13 +313,13 @@ Upgrade Kibana
 
     .. code-block:: console
 
-      # yum install kibana-6.6.1
+      # yum install kibana-6.7.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=6.6.1
+      # apt-get install kibana=6.7.2
 
 2. Uninstall the Wazuh app from Kibana:
 
@@ -352,13 +352,13 @@ Upgrade Kibana
 
   .. code-block:: console
 
-      # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.1.zip
+      # sudo -u kibana NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_6.7.2.zip
 
   b) Without sudo:
 
   .. code-block:: console
 
-      # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.8.2_6.6.1.zip' kibana
+      # su -c 'NODE_OPTIONS="--max-old-space-size=3072" /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_6.7.2.zip' kibana
 
 5. Start Kibana:
 
@@ -377,19 +377,19 @@ Upgrade Filebeat
 
     .. code-block:: console
 
-      # yum install filebeat-6.6.1
+      # yum install filebeat-6.7.2
 
   b) For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=6.6.1
+      # apt-get install filebeat=6.7.2
 
 2. Download the Filebeat configuration file from the Wazuh repository:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.8/extensions/filebeat/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
 
 3. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``ELASTIC_SERVER_IP`` with the IP address or the hostname of your Elastic Stack server:
 

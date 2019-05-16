@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _amazon_dependencies:
 
@@ -14,7 +14,7 @@ Installing dependencies
 Pip
 ---
 
-The required modules can be installed with Pip, the Python package manager. The majority of UNIX distributions have this tool availabel in their software repositories, but it can be compiled from sources too:
+The required modules can be installed with Pip, the Python package manager. The majority of UNIX distributions have this tool available in their software repositories, but it can be compiled from sources too:
 
 a) For **CentOS/RHEL/Fedora** systems:
 

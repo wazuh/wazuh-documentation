@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _pci_dss_rootkit_detection:
 
@@ -14,7 +14,7 @@ Rootkit and trojan detection is performed using two files: ``rootkit_files.txt``
         <rootkit_trojans>/var/ossec/etc/shared/rootkit_trojans.txt</rootkit_trojans>
     </rootcheck>
 
-These are the options available for the `rootcheck component <http://ossec-docs.readthedocs.org/en/latest/syntax/head_ossec_config.rootcheck.html>`_:
+These are the options available for the `rootcheck component <https://documentation.wazuh.com/current/user-manual/reference/ossec-conf/rootcheck.html>`_:
 
 + **rootkit_files**: Contains the Unix-based application level rootkit signatures.
 

@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wazuh-modulesd:
 
@@ -51,6 +51,10 @@ The wazuh-modulesd program manages the Wazuh modules described below.
 .. topic:: Key polling wodle
 
   The key polling wodle allows you to fetch a client key from an external source, for example, a database. This provides a mechanism to auto-register agents when they are not registered on a manager instance but reporting to it.
+
+.. topic:: SCA module
+
+  The :ref:`SCA module <manual_sec_config_assessment>` allows users to check the system configuration against policy files to determinte vulnerabilities and misconfigurations.
 
 wazuh-modulesd options
 ----------------------

@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _installation_guide:
 
@@ -47,7 +47,6 @@ The diagrams below list the components that are run per host for single-host and
         installing-wazuh-server/index
         installing-elastic-stack/index
         installing-wazuh-agent/index
-        optional-configurations/index
         upgrading/index
         virtual-machine
       	packages-list/index
