@@ -48,9 +48,6 @@ Installing Linux agent
 .. warning::
   When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
   
-.. warning::
-  Be extremely careful not to select a critical installation directory.
-
 .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>`.
