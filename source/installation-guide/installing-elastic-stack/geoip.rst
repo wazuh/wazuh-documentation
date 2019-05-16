@@ -14,12 +14,17 @@ Enrich events with geolocation information
             "description" : "Add geoip info",
             "processors" : [
                 {
-                "geoip" : {
-                    "field" : "@src_ip",
-                    "target_field": "GeoLocation",
-                    "properties": ["city_name", "country_name", "region_name", "location"],
-                    "ignore_missing": true
-                }
+                    "geoip" : {
+                        "field" : "@src_ip",
+                        "target_field": "GeoLocation",
+                        "properties": ["city_name", "country_name", "region_name", "location"],
+                        "ignore_missing": true
+                    }
+                },
+                {
+                    "remove": {
+                        "field": "@src_ip"
+                    }
                 }
             ]
         }

@@ -33,6 +33,6 @@ There are some related additional configurations that can be applied:
 
    elastic_server_rpm
    elastic_server_deb
-   elastic_tuning
+   protect-installation/index
    geoip
-
+   elastic_tuning

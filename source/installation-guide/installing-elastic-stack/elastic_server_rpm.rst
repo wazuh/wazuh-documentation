@@ -71,17 +71,9 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
 2. Install the Wazuh app plugin for Kibana:
 
-  a) With sudo:
-
   .. code-block:: console
 
     # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_7.0.1.zip
-
-  b) Without sudo:
-
-  .. code-block:: console
-
-    # su -c '/usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.0_7.0.1.zip' kibana
 
 3. **Optional.** Kibana will only listen on the loopback interface (localhost) by default. To set up Kibana to listen on all interfaces, edit the file ``/etc/kibana/kibana.yml`` uncommenting the setting ``server.host``. Change the value to:
 

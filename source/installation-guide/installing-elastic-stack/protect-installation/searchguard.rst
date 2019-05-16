@@ -245,7 +245,7 @@ How it goes in the Wazuh app?
 
 The main difference is that you now must log in before entering Kibana. Also keep in mind that if the user is not allowed for certain indices, it can't use them on Kibana.
 
-.. thumbnail:: ../../images/kibana-app/searchguard/searchguard-01.png
+.. thumbnail:: ../../../images/kibana-app/searchguard/searchguard-01.png
     :align: center
     :width: 100%
 

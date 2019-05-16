@@ -212,6 +212,6 @@ This section describes how to secure the communications between the involved com
 
     # systemctl restart kibana
 
-.. image:: ../../images/protect-elastic-stack/xpack-login.png
+.. thumbnail:: ../../../images/protect-elastic-stack/xpack-login.png
   :align: center
   :width: 100%

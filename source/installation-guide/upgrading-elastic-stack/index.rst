@@ -5,28 +5,29 @@
 Upgrading Elastic Stack
 =======================
 
-.. warning::
 
-    This guide is intended for Elastic Stack 6.x users only, for installing the latest Elastic Stack version, please follow the :ref:`official guide <installation_elastic>`.
-
-
-This guide describes the upgrading of an Elastic Stack server comprised of Filebeat, Elasticsearch, and Kibana. We will illustrate package-based installations of these components.  You can also install them from binary tarballs, however, this is not preferred or supported under Wazuh documentation.
+This guide describes the upgrading of an Elastic Stack including Filebeat, Logstash, Elasticsearch, and Kibana. We will illustrate package-based installations of these components.  You can also install them from binary tarballs, however, this is not preferred or supported under Wazuh documentation.
 
 In addition to Elastic Stack components, you will also find the instructions to install and configure the Wazuh app (deployed as a Kibana plugin).
 
-Depending on your operating system you can choose to upgrade Elastic Stack from RPM or DEB packages. Consult the table below and choose how to proceed:
+.. note::
 
-+--------------------------------------------------+-----------------------------------------------+
-| Type                                             | Description                                   |
-+==================================================+===============================================+
-| :doc:`RPM packages <elastic_server_rpm>`         | Upgrade Elastic Stack on CentOS/RHEL/Fedora.  |
-+--------------------------------------------------+-----------------------------------------------+
-| :doc:`DEB packages <elastic_server_deb>`         | Upgrade Elastic Stack on Debian/Ubuntu.       |
-+--------------------------------------------------+-----------------------------------------------+
+    Upgrading directly to 7.x from 6.6 or earlier requires a `full cluster restart <https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-upgrade.html>`_.
+
++----------------------------------------------------------+----------------------------------------------------+
+| Type                                                     | Description                                        |
++==========================================================+====================================================+
+| :doc:`From 7.x to 7.y <elastic_server_minor_upgrade>`    | How to perform an upgrade from 7.x to 7.y.         |
++----------------------------------------------------------+----------------------------------------------------+
+| :doc:`From 6.7 to 7.x <elastic_server_rolling_upgrade>`  | How to perform a rolling upgrade from 6.7 to 7.x.  |
++----------------------------------------------------------+----------------------------------------------------+
+| :doc:`From 6.x to 6.7 <elastic_server_hard_upgrade>`     | How to perform an upgrade from 6.x to 6.7.         |
++----------------------------------------------------------+----------------------------------------------------+
 
 .. toctree::
    :hidden:
    :maxdepth: 4
 
-   elastic_server_rpm
-   elastic_server_deb
+   elastic_server_minor_upgrade
+   elastic_server_rolling_upgrade
+   elastic_server_hard_upgrade

@@ -158,12 +158,14 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
   .. code-block:: console
 
     # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/filebeat/filebeat.yml
+    # chmod go+r /etc/filebeat/filebeat.yml
 
 4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
     # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic7-template-alerts.json
+    # chmod go+r /etc/filebeat/wazuh-template.json
 
 5. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
 
