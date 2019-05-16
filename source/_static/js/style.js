@@ -218,6 +218,9 @@ $(function(){
 
 	// Corrects the scrolling movement so the element to which the page is being scrolled appears in the screen, having in mind the fixed top bar.
 	function correctScrollTo(spaceBeforeAnchor){
+    if( $('#page').hasClass('no-latest-docs') ) {
+			spaceBeforeAnchor = spaceBeforeAnchor + 40;
+		}
 		setTimeout(function(){
 			window.scrollTo(window.scrollX, window.scrollY - spaceBeforeAnchor);
     }, 10);
