@@ -1,9 +1,9 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _getting_started:
+.. _what_is_wazuh:
 
-Getting started
-===============
+What is Wazuh?
+==============
 
 .. meta::
   :description: Get started with the Wazuh components and learn how each one is involved.
@@ -32,11 +32,4 @@ Wazuh is a security detection, visibility, and compliance open source project. I
 
 .. topic:: Table of Contents
 
- This document will help you understand Wazuh's components and architecture, and will show you some common use cases.
-
-.. toctree::
-   :maxdepth: 2
-
-   components
-   architecture
-   use-cases
+ This documents will help you understand Wazuh's components and architecture, and will show you some common use cases.

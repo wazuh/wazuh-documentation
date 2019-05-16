@@ -85,19 +85,15 @@ Available documentation
 .. toctree::
    :maxdepth: 1
 
-   getting-started/index
-   installation-guide/index
+   getting-started/toc
+   installation-guide/toc
    user-manual/index
    development/index
    docker/index
-   deploying-with-kubernetes/index
-   deploying-with-puppet/index
-   deploying-with-ansible/index
+   deployment
    pci-dss/index
    gdpr/index
-   amazon/index
-   azure/index
-   docker-monitor/index
+   monitoring
    installing-splunk/index
    migrating-from-ossec/index
    release-notes/index

@@ -1,9 +1,9 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _installation_guide:
+.. _before_installation:
 
-Installation guide
-==================
+Before installation
+===================
 
 .. meta::
   :description: Read this guide to know how to install Wazuh and the Elasticsearch integration.
@@ -38,16 +38,3 @@ The diagrams below list the components that are run per host for single-host and
 
 .. note::
   Before installing the components, please confirm that the time synchronization service is configured and working on your servers. This is most commonly done with **NTP**.  For more information, go to `Debian/Ubuntu <https://help.ubuntu.com/lts/serverguide/NTP.html>`_ or `CentOS/RHEL/Fedora <http://www.tecmint.com/install-ntp-server-in-centos/>`_.
-
-.. topic:: Contents
-
-    .. toctree::
-        :maxdepth: 2
-
-        installing-wazuh-server/index
-        installing-elastic-stack/index
-        installing-wazuh-agent/index
-        upgrading/index
-        virtual-machine
-      	packages-list/index
-        compatibility_matrix/index
