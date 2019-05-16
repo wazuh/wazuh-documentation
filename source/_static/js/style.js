@@ -33,6 +33,8 @@ $(function(){
 		}
 	});
 
+	show_current_subtree();
+
 	$(window).on('hashchange', function(){
 		updateFromHash();
 		correctScrollTo(spaceBeforeAnchor);
@@ -116,14 +118,42 @@ $(function(){
     });
   }
 
-   currentToc();
+  currentToc();
 
-   // Closes the dropdown globaltoc when one of its elements has been clicked/tapped in small devices
-   $('.globaltoc a').on('click', function(){
-     if( $(window).outerWidth() < breakpoint ){
-       $('.btn-close').click()
-     }
+  // Closes the dropdown globaltoc when one of its elements has been clicked/tapped in small devices
+  $('.globaltoc a').on('click', function(){
+    if( $(window).outerWidth() < breakpoint ){
+      $('.btn-close').click()
+    }
+  });
+
+  /* Toggle collapse */
+  $('.globaltoc a').on('click', function(e){
+		// Normal link: avoid toggle if current menu item doesn't have submenu
+		li = $(e.target).closest('li');
+		if (!li || li.children('ul').length == 0 ){
+			return true;
+		}
+
+		e.stopPropagation();
+		e.preventDefault();
+
+		// Disables toc.html and localtoc links
+		if( li.hasClass('show')){
+			li.removeClass('show');
+		} else {
+			li.addClass('show');
+		}
+		return false;
    });
+
+	 function show_current_subtree(){
+		 updateFromHash();
+		 var currentLeaf = $('.globaltoc a.current.leaf');
+		 currentLeaf.parents('li').each(function(){
+			 $(this).addClass('show');
+		 });
+	 }
 
 	/* Resize event --------------------------------------------------------------------------------------------------*/
 	 $(window).on('resize', function(e){
