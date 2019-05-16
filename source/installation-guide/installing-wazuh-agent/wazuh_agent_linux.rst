@@ -11,15 +11,15 @@ The Wazuh agent can be installed in the most of Linux Distribution. It's possibl
 +-------------------------------+---------------------+----------------------------------------------------------------------------------------------+
 | Operative system              | Version             | Installation guide                                                                           |
 +===============================+=====================+==============================================================================================+
-| Amazon Linux                  | 2                   | :doc:`Installation guide on Amazon Linux/CentOS/Red Hat/Oracle Linux <wazuh_agent_linux_rpm>`|
+| Amazon Linux                  | 2                   | :doc:`Installation guide on Amazon Linux/CentOS/RHEL/Oracle Linux <wazuh_agent_linux_rpm>`   |
 +                               +---------------------+                                                                                              +
 |                               | 1                   |                                                                                              |
 +-------------------------------+---------------------+                                                                                              +
-| CentOS/Red Hat/Oracle Linux   | 7                   |                                                                                              |
+| CentOS/RHEL/Oracle Linux      | 7                   |                                                                                              |
 +                               +---------------------+                                                                                              +
 |                               | 6                   |                                                                                              |
 +                               +---------------------+----------------------------------------------------------------------------------------------+
-|                               | 5                   | :doc:`Installation guide on CentOS/Red Hat/Oracle Linux 5 <wazuh_agent_linux_rpm_5>`         |
+|                               | 5                   | :doc:`Installation guide on CentOS/RHEL/Oracle Linux 5 <wazuh_agent_linux_rpm_5>`            |
 +-------------------------------+---------------------+----------------------------------------------------------------------------------------------+
 | Debian                        | 9                   | :doc:`Installation guide on Debian/Ubuntu<wazuh_agent_linux_deb>`                            |
 +                               +---------------------+                                                                                              +
