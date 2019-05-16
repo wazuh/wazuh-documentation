@@ -50,3 +50,4 @@ There are several options to install a Wazuh agent, depending on the operating s
     wazuh_agent_aix
     wazuh_agent_sources
     deployment_variables
+    deployment_variables_windows
