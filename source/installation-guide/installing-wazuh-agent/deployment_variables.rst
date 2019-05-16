@@ -2,8 +2,8 @@
 
 .. _deployment_variables:
 
-Configuration provisioning variables
-====================================
+Deployment variables for Linux, macOS and AIX
+=============================================
 
 For an agent to be fully deployed and connected to the Wazuh server it needs to be installed, registered and configured. To make the process simple, the installers can use variables that allow the configuration provisioning. 
 
