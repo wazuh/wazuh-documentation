@@ -112,4 +112,4 @@ The following output will appear at the end of the building process:
 
 .. note:: The installer is now ready.  It can be launched with a normal or unattended installation. For more information about this process, please visit our :doc:`installation section for Windows<./wazuh_agent_windows>`.
 
-.. note:: Once the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.
+.. note:: Once the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
