@@ -33,10 +33,9 @@ The first step to installing the Wazuh agent on a Windows machine is to download
 
     Once installed, the agent uses a graphical user interface for configuration, opening the log file or starting and stopping the service.
 
-    .. thumbnail:: ../../images/manual/windows-agent.png
-        :align: center
-        :width: 320 px
-
+        .. thumbnail:: ../../images/manual/windows-agent.png
+            :align: center
+            :width: 320 px
 
     By default, all agent files will be found in: ``C:\Program Files (x86)\ossec-agent``.
 
