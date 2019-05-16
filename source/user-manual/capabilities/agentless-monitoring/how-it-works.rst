@@ -1,16 +1,10 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 How it works
 ============
 
 Connection
 ----------
-
-The first step to using agentless monitoring is to enable it using the following command:
-
-.. code-block:: console
-
-  # /var/ossec/bin/ossec-control enable agentless
 
 In order to connect the manager to the device using SSH authentication, the following ``register_host.sh`` script should be used. This script is located in the ``/var/ossec/agentless/`` directory and has two options: ``list``  and ``add``.
 

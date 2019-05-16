@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 How it works
 ============
@@ -65,7 +65,7 @@ Active responses are configured in the manager by modifying the :ref:`ossec.conf
 	More information about active response options: :ref:`Active response <reference_ossec_active_response>`
 
 
-The active response log can be viewed at ``/var/ossec/logs/active-response.log``.
+The active response log can be viewed at ``/var/ossec/logs/active-responses.log``.
 
 Default Active response scripts
 -------------------------------

@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _amazon_services:
 
@@ -20,6 +20,7 @@ This module requires some dependencies in order to work, and also the right cred
   .. toctree::
     :maxdepth: 1
 
+    S3-bucket
     cloudtrail
     config
     vpc

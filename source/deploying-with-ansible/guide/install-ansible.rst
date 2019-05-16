@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _wazuh_ansible_installation:
 
@@ -350,6 +350,6 @@ From Ansible server.
 .. code-block:: console
 
 	ansible@ansible:~$ cd /etc/ansible/roles/
-	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch 3.8 https://github.com/wazuh/wazuh-ansible.git
+	ansible@ansible:/etc/ansible/roles$ sudo git clone --branch 3.9 https://github.com/wazuh/wazuh-ansible.git
 	ansible@ansible:/etc/ansible/roles$ ls
 	wazuh-ansible

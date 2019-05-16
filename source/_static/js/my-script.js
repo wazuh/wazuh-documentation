@@ -1,10 +1,11 @@
 /*
  * Wazuh documentation - Version selector script
- * Copyright (C) 2018 Wazuh, Inc.
+ * Copyright (C) 2019 Wazuh, Inc.
  */
 
 var versions = [
-    {name: "3.8 (current)", url: "/new-design-c1a"},
+    {name: "3.9 (current)", url: "/new-design-c1a-tree"},
+    {name: "3.8", url: "/3.8"},
     {name: "3.7", url: "/3.7"},
     {name: "3.6", url: "/3.6"},
     {name: "3.5", url: "/3.5"},
@@ -16,7 +17,7 @@ var versions = [
     {name: "2.1", url: "/2.1"},
 ];
 
-var current_version = "3.8";
+var current_version = "3.9";
 
 $( document ).ready(function() {
     addVersions();

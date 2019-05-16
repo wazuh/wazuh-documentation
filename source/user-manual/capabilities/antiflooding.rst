@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _antiflooding:
 
@@ -191,7 +191,7 @@ In order to avoid agent buffer saturation followed by event loss, the event prod
 
 - Logcollector: If a log file is written faster that logcollector can read it, this can negatively impact the proper functioning of the agent. For this reason, the agent will restrict itself to reading no more than a configurable maximum number of lines from the same file per read cycle.
 
-- OpenSCAP Wodle: This module previously sent the entire set of scan results as soon as a scan would complete.  It now sends the scan information to the manager at a regulated speed so as to reduce the likelihood of maxing out the buffer.
+- OpenSCAP, CIS-CAT and Syscollector wodles: These modules previously did send the entire set of scan results as soon as a scan would complete. They now send the scan information to the manager at a regulated speed in order to prevent the buffer from being collapsed.
 
 These are advanced configurations located at :doc:`Internal configuration <../reference/internal-options>`. The variables defined for this purpose are called ``logcollector.max_lines`` and
 ``wazuh_modules.max_eps`` and much care should be given when changing these values.

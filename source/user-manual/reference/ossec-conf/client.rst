@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _reference_ossec_client:
 
@@ -169,7 +169,7 @@ notify_time
 Specifies the time in seconds between agent checkins to the manager.  More frequent checkins speed up dissemination of an updated ``agent.conf`` file to the agents, but may also put an undo load on the manager if there are a large number of agents.
 
 +--------------------+-----------------------------+
-| **Default value**  | 60                          |
+| **Default value**  | 10                          |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+
@@ -183,7 +183,7 @@ Specifies the time in seconds before a reconnection is attempted. This should be
 For example, a ``notify_time`` setting of 60 combined with a time-reconnect of 300 would mean that agents will attempt to check in once per minute, but if a checkin attempt fails to get a response from the manager, the agent will wait five minutes before trying again.  Checkins will resume their normal one-minute interval following a successful connection attempt.
 
 +--------------------+-----------------------------+
-| **Default value**  | 300                         |
+| **Default value**  | 60                          |
 +--------------------+-----------------------------+
 | **Allowed values** | A positive number (seconds) |
 +--------------------+-----------------------------+

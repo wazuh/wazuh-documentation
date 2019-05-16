@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _ruleset_custom:
 
@@ -12,7 +12,9 @@ Adding new decoders and rules
 .. note::
    We will use ``local_decoder.xml`` and ``local_rules.xml`` to implement small changes. For larger scale changes/additions to the stock decoders and rules, we recommend you create a new decoder and/or rule file.
 
-
+.. note::
+  The ``<id>`` of custom rules will be in the range from 100000 to 120000.
+ 
 We are going to describe these procedures using an easy example. Here is a log from a program called ``example``:
 ::
 

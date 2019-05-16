@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _container-usage:
 
@@ -45,7 +45,7 @@ Where ``service name `` is the name of each service in the ``docker-compose.yml`
 - kibana
 - nginx
 
-Then access the Kibana UI trough Nginx by hitting `https://localhost <http://localhost>`_ with a web browser if you are in the Docker host.
+Then access the Kibana UI through Nginx by hitting `https://localhost <http://localhost>`_ with a web browser if you are in the Docker host. By default, the username "foo" and the password "bar" are used.
 
 You can also access through the IP of the Docker host. For example, if you have a virtual machine where you have created the containers whose IP address is ``192.168.20.220`` you will be able to access through ``https://192.168.20.220``.
 

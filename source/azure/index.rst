@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 
 .. _azure:
 
@@ -36,7 +36,6 @@ As a built-in Wazuh feature, now you can search, analyze and trigger alerts from
     .. toctree::
        :maxdepth: 2
 
-       installation
        monitoring instances
        monitoring activity
        monitoring services

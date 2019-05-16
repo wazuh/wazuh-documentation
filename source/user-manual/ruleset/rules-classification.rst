@@ -1,4 +1,4 @@
-.. Copyright (C) 2018 Wazuh, Inc.
+.. Copyright (C) 2019 Wazuh, Inc.
 .. Original content from the OSSEC documentation, available at http://www.ossec.net/docs/manual/rules-decoders/rule-levels.html
 
 .. _rules_classification:
