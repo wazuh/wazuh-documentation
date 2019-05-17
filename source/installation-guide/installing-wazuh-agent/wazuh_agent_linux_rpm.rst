@@ -18,7 +18,7 @@ For other RPM-based OS (CentOS/RHEL/Oracle Linux 5, Fedora, Suse, OpenSUSE), ple
 Installing Wazuh agent
 ----------------------
 
-1. Adding the Wazuh repository
+1. Adding the Wazuh repository:
 
   .. code-block:: console
 

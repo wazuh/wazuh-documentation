@@ -12,7 +12,7 @@ The RPM package is suitable for CentOS/RHEL/Oracle Linux 5. For other RPM-based 
 Installing Wazuh agent
 ----------------------
 
-1. Adding the Wazuh repository
+1. Adding the Wazuh repository:
 
   .. code-block:: console
 

@@ -12,7 +12,7 @@ The RPM package is suitable for installation on Fedora. For other RPM-based OS (
 Installing Wazuh agent
 ----------------------
 
-1. Adding the Wazuh repository
+1. Adding the Wazuh repository:
 
   .. code-block:: console
 

@@ -12,7 +12,7 @@ The RPM package is suitable for Suse 11. For other RPM-based OS (CentOS/RHEL, Fe
 Installing Wazuh agent
 ----------------------
 
-1. Adding the Wazuh repository
+1. Adding the Wazuh repository:
 
   .. code-block:: console
   

@@ -12,7 +12,7 @@ The RPM package is suitable for SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE
 Installing Wazuh agent
 ----------------------
 
-1. Adding the Wazuh repository
+1. Adding the Wazuh repository:
 
   .. code-block:: console
   
