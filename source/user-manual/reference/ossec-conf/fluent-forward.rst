@@ -42,7 +42,7 @@ This indicates if the module is enabled or disabled.
 socket_path
 ^^^^^^^^^^^
 
-This indicates the path of the UPD socket to be read from. The socket will be created at runtime in the designated path.
+This indicates the path of the UDP socket to be listen. The socket will be created at runtime in the designated path.
 
 +--------------------+--------------------------------------------------+
 | **Default value**  | n/a                                              |
@@ -73,7 +73,7 @@ This indicates the address of the Fluentd server.
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
 +--------------------+--------------------------------+
-| **Allowed values** | Any string                     |
+| **Allowed values** | Any domain name or IP address  |
 +--------------------+--------------------------------+
 
 For example ``<address>localhost</address>``.
@@ -127,7 +127,7 @@ This indicates the user name for authentication used on the Fluentd server TLS (
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
 +--------------------+--------------------------------+
-| **Allowed values** | any string                     |
+| **Allowed values** | Any string                     |
 +--------------------+--------------------------------+
 
 For example ``<user>foo</user>``.
@@ -141,7 +141,7 @@ This indicates the user password for authentication used on the Fluentd server T
 +--------------------+--------------------------------+
 | **Default value**  | n/a                            |
 +--------------------+--------------------------------+
-| **Allowed values** | any string                     |
+| **Allowed values** | Any string                     |
 +--------------------+--------------------------------+
 
 For example ``<password>bar</password>``.
@@ -158,7 +158,7 @@ This indicates the timeout in seconds for sending and receiving responses from t
 | **Allowed values** | 0 to 9000                      |
 +--------------------+--------------------------------+
 
-For example ``<timeout>10</timeout>``
+For example ``<timeout>10</timeout>``.
 
 .. note::
   The default value 0 means no timeout.

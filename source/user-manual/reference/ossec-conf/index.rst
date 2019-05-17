@@ -124,6 +124,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    socket
    syscheck
    syslog-output
+   fluent-forward
    wodle-openscap
    wodle-command
    wodle-ciscat
@@ -135,4 +136,3 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    wodle-azure-logs
    wodle-agent-key-polling
    verifying-configuration
-   fluent-forward

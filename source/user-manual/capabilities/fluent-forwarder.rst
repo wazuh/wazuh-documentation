@@ -2,7 +2,7 @@
 
 .. _fluent-forwarder:
 
-Fluentd Forwarder
+Fluentd forwarder
 =================
 
 .. versionadded:: 4.0.0
@@ -13,7 +13,7 @@ with great plugins to build your own logging layer. Check it out at https://www.
 - `How it works`_
 - `Input`_
 - `Output`_
-- `Example for testing`_
+- `Example using logcollector`_
 
 How it works
 ------------
@@ -43,11 +43,11 @@ The ``tag`` tag it's added to every message read from the UDP socket. This allow
 Output
 ------
 
-The output will be forwarded to the Fluentd server so the are no messages visible on the ``ossec.log`` to the user.
+The output will be forwarded to the Fluentd server specified by the ``<address>`` tag.
 
 
-Example for testing
--------------------
+Example using logcollector
+--------------------------
 
 This example is for testing purposes on a Debian machine, with the Wazuh manager installed.
 
@@ -63,6 +63,25 @@ Given the following configuration:
       <port>24224</port>
     </fluent-forward>
 
+Set up the ``socket`` for logcollector:
+
+.. code-block:: xml
+
+    <socket>
+        <name>fluent_socket</name>
+        <location>/var/run/fluent.sock</location>
+        <mode>udp</mode>
+    </socket>
+
+Set up a ``localfile`` to read from:
+
+.. code-block:: xml
+
+    <localfile>
+        <log_format>syslog</log_format>
+        <location>/path/to/your/log</location>
+        <target>fluent_socket</target>
+    </localfile>
 
 On a terminal, run the following commands as root to start a Fluentd server:
 
@@ -80,30 +99,17 @@ Restart the Wazuh manager:
     systemctl restart wazuh-manager
 
 
-Send a test message to the UDP socket:
+Write a string to your log file:
 
 .. code-block:: console
 
-    echo '{"json":"message"}' | nc -Uu /var/run/fluent.sock
+    echo "message" >> /path/to/your/log
 
 
 You should see the message on the Fluentd server:
 
 .. code-block:: console
 
-    2019-03-28 14:47:40.000000000 +0100 debug.test: "{\"json\":\"message\"}\n"
-
+    2019-03-28 14:47:40.000000000 +0200 debug.test: "message"
 
 For more information about Fluentd configuration options, check the documentation at https://docs.fluentd.org/v1.0/articles/quickstart
-
-
-
-
-
-
-
-
-
-
-
-
