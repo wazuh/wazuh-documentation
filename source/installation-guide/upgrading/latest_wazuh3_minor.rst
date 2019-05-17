@@ -65,7 +65,7 @@ Upgrade the Wazuh manager
 
 Upgrade the Wazuh agent
 ^^^^^^^^^^^^^^^^^^^^^^^
-It is possible to upgrade the Wazuh agents from the manager by using the agent_upgrade tool or the Wazuh api or locally by installing the packages in the agents.
+It is possible to upgrade the Wazuh agents from the manager by using the agent_upgrade tool or the Wazuh API or locally by installing the packages in the agents.
 
 Upgrading the agents from the manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
