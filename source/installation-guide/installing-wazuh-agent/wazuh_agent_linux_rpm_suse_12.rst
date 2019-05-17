@@ -29,7 +29,7 @@ Installing Wazuh agent
 
 2. On your terminal, install the Wazuh agent. You can choose an installation or a deployment:
 
-  a) Standard installation:
+  a) Installation:
 
     .. code-block:: console
    
