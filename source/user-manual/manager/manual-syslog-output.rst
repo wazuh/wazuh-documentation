@@ -10,7 +10,7 @@ Wazuh may be configured to send alerts to syslog as follows:
 Configuration
 -------------
 
-The first step is to enable the client-syslog by using the osec-control tool:
+The first step is to enable the ``client-syslog`` by using the ossec-control tool:
 
 ::
 
