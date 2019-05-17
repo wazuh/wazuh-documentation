@@ -26,7 +26,7 @@ The first step to installing the Wazuh agent on a Windows machine is to download
         See the following document for additional automated deployment options: :doc:`deployment variables for Windows <deployment_variables_windows>`.     
 
 
-  b) Using the GUI
+  b) Using the GUI:
   
 
     To install the Windows agent from the GUI, run the downloaded file and follow the steps in the installation wizard. If you are not sure how to respond to some of the prompts, simply use the default answers.

@@ -9,24 +9,24 @@ The macOS agent can be downloaded from :doc:`packages list<../packages-list/inde
 
   a) Using the command line, you can choose installation or deployment:
 
-     * Installation:
+    * Installation:
 
-       .. code-block:: console
+      .. code-block:: console
 
-            # installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+        # installer -pkg wazuh-agent-3.9.0-1.pkg -target /
       
-     * Deployment
+    * Deployment:
  
-       You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will use this value to register and it will be the assigned manager for forwarding events.
+      You can automate the agent registration and configuration using variables. It is necessary to define at least the variable ``WAZUH_MANAGER_IP``. The agent will    use this value to register and it will be the assigned manager for forwarding events.
 
-       .. code-block:: console
- 
-            # launchctl setenv WAZUH_MANAGER_IP "10.0.0.2" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
- 
-       See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.     
+      .. code-block:: console
+     
+        # launchctl setenv WAZUH_MANAGER_IP "10.0.0.2" && installer -pkg wazuh-agent-3.9.0-1.pkg -target /
+     
+      See the following document for additional automated deployment options :doc:`deployment variables <deployment_variables>`.     
 
+  b) Using the GUI:
 
-  b) The GUI:
 
      Using the GUI you can perform a simple installation, without register and configure the agent. Double click on the downloaded file and follow the wizard. If you are not sure how to respond to some of the prompts, simply use the default answers.
 
