@@ -23,7 +23,8 @@ Enrich events with geolocation information
                 },
                 {
                     "remove": {
-                        "field": "@src_ip"
+                        "field": "@src_ip",
+                        "ignore_missing": true
                     }
                 }
             ]
