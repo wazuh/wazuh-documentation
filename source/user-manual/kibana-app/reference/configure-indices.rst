@@ -49,7 +49,7 @@ Let's suppose that we want to add a new index pattern (``my-custom-alerts-*``) a
 
   .. code-block:: console
 
-    # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic7-template-alerts.json
+    # curl -so template.json https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/7.x/wazuh-template.json
 
 3. Open the template file and locate this line:
 
