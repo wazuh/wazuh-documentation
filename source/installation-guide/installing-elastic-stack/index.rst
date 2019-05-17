@@ -11,20 +11,22 @@ In addition to Elastic Stack components, you will also find the instructions to 
 
 Depending on your operating system you can choose to install Elastic Stack from RPM or DEB packages. Consult the table below and choose how to proceed:
 
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| Type                                                                   | Description                                                 |
-+========================================================================+=============================================================+
-| `RPM packages <elastic_server_rpm.html>`_                              | Install Elastic Stack on CentOS/RHEL/Fedora.                |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
-| `DEB packages <elastic_server_deb.html>`_                              | Install Elastic Stack on Debian/Ubuntu.                     |
-+------------------------------------------------------------------------+-------------------------------------------------------------+
++--------------------------------------------+-----------------------------------------------+
+| Type                                       | Description                                   |
++============================================+===============================================+
+| `RPM packages <elastic_server_rpm.html>`_  | Install Elastic Stack on CentOS/RHEL/Fedora.  |
++--------------------------------------------+-----------------------------------------------+
+| `DEB packages <elastic_server_deb.html>`_  | Install Elastic Stack on Debian/Ubuntu.       |
++--------------------------------------------+-----------------------------------------------+
 
 There are some related additional configurations that can be applied:
 
-- :ref:`Elasticsearch tuning <elastic_tuning>` 
-- :ref:`Enrich events with geolocation information <geo_ip>` 
+- :ref:`Enrich events with geolocation information <geo_ip>`
+- :ref:`Transform your data with Logstash <transform_logstash>`
+- :ref:`Elasticsearch tuning <elastic_tuning>`
 
 .. note::
+
     Currently, the Elastic Stack is only supported on 64-bit operating systems, according to its `Support Matrix <https://www.elastic.co/support/matrix>`_.
 
 .. toctree::
@@ -35,4 +37,5 @@ There are some related additional configurations that can be applied:
    elastic_server_deb
    protect-installation/index
    geoip
+   transform_logstash
    elastic_tuning
