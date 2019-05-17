@@ -149,7 +149,3 @@ Kibana displays information in an organized way, allowing filtering by different
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/pci/log-analysis-pci.png
-    :title: Wazuh App PCI section for Kibana
-    :align: center
-    :width: 100%
