@@ -19,62 +19,61 @@ In this guide, we will show how to set the *bootstrap.memory_lock* setting to tr
 
 1. Set ``bootstrap.memory_lock``
 
-Uncomment or add this line to the ``/etc/elasticsearch/elasticsearch.yml`` file:
+  Uncomment or add this line to the ``/etc/elasticsearch/elasticsearch.yml`` file:
 
-.. code-block:: yaml
+  .. code-block:: yaml
 
-  bootstrap.memory_lock: true
+    bootstrap.memory_lock: true
 
 2. Edit the limit of system resources
 
-Where to configure systems settings depends on which package and operating system you choose to use for the Elasticsearch installation.
+  Where to configure systems settings depends on which package and operating system you choose to use for the Elasticsearch installation.
 
- - In a case where **systemd** is used, system limits need to be specified via systemd. To do this, create the folder executing the command:
+  - In a case where **systemd** is used, system limits need to be specified via systemd. To do this, create the folder executing the command:
 
   .. code-block:: console
 
     # mkdir -p /etc/systemd/system/elasticsearch.service.d/
 
-Then, in the new directory, add a file called ``elasticsearch.conf`` and specify any changes in that file:
+  Then, in the new directory, add a file called ``elasticsearch.conf`` and specify any changes in that file:
 
-.. code-block:: ini
+  .. code-block:: ini
 
-  [Service]
-  LimitMEMLOCK=infinity
+    [Service]
+    LimitMEMLOCK=infinity
 
-In other cases, edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
+  In other cases, edit the proper file ``/etc/sysconfig/elasticsearch`` for RPM or ``/etc/default/elasticsearch`` for Debian:
 
-.. code-block:: bash
+  .. code-block:: bash
 
-  MAX_LOCKED_MEMORY=unlimited
+    MAX_LOCKED_MEMORY=unlimited
 
 3. Limit memory
 
-The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit the memory usage and prevent this situation.
+  The previous configuration might cause node instability or even node death with an ``OutOfMemory`` exception if Elasticsearch tries to allocate more memory than is available. JVM heap limits will help limit the memory usage and prevent this situation.
 
-There are two rules to apply when setting the Elasticsearch heap size:
+  There are two rules to apply when setting the Elasticsearch heap size:
 
-  - Use no more than 50% of available RAM.
-  - Use no more than 32 GB.
+    - Use no more than 50% of available RAM.
+    - Use no more than 32 GB.
 
-In addition, it is important to take into account the memory usage of the operating system, services and software that are running on the host.
+  In addition, it is important to take into account the memory usage of the operating system, services and software that are running on the host.
 
-By default, Elasticsearch is configured with a 1 GB heap. You can change the heap size via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
+  By default, Elasticsearch is configured with a 1 GB heap. You can change the heap size via JVM flags using the ``/etc/elasticsearch/jvm.options`` file:
 
-.. code-block:: bash
+  .. code-block:: bash
 
-  # Xms represents the initial size of total heap space
-  # Xmx represents the maximum size of total heap space
+    # Xms represents the initial size of total heap space
+    # Xmx represents the maximum size of total heap space
 
-  -Xms4g
-  -Xmx4g
+    -Xms4g
+    -Xmx4g
 
-.. warning::
-  Ensure that the min (Xms) and max (Xmx) sizes are the same to prevent JVM heap resizing at runtime as this is a very costly process.
+  .. warning::
+
+    Ensure that the min (Xms) and max (Xmx) sizes are the same to prevent JVM heap resizing at runtime as this is a very costly process.
 
 4. Restart Elasticsearch
-
-Finally, restart the Elasticsearch service:
 
   a) For Systemd:
 
@@ -165,60 +164,73 @@ If you want to change these settings, you will need to edit the Elasticsearch te
 
 1. Download the Wazuh Elasticsearch template:
 
-.. code-block:: console
+  .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic6-template-alerts.json -o w-elastic-template.json
+    # curl https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/7.x/wazuh-template.json -o w-elastic-template.json
 
 2. Edit the template in order to set one shard with no replicas:
 
-.. code-block:: console
+  .. code-block:: console
 
-  # nano w-elastic-template.json
+    # vi w-elastic-template.json
 
-.. code-block:: json
+  .. code-block:: json
 
-  {
-    "order": 0,
-    "template": "wazuh-alerts-3.x-*",
-    "settings": {
-      "index.refresh_interval": "5s",
-      "number_of_shards" :   1,
-      "number_of_replicas" : 0
-    },
-    "mappings": {
-    "...": "..."
+    {
+      "order": 1,
+      "index_patterns": ["wazuh-alerts-3.x-*"],
+      "settings": {
+        "index.refresh_interval": "5s",
+        "index.number_of_shards": "3",
+        "index.number_of_replicas": "0",
+        "index.auto_expand_replicas": "0-1",
+        "index.mapping.total_fields.limit": 2000
+      },
+      "mappings": {
+      "...": "..."
+      }
     }
-  }
+  
+  .. note::
+
+    We set "order" to "1", otherwise Filebeat will overwrite your template. Multiple matching templates with the same order value will result in a non-deterministic merging order.
 
 3. Load the template:
 
-.. code-block:: console
+  .. code-block:: console
 
-  # curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @w-elastic-template.json
+    # curl -X PUT "http://localhost:9200/_template/wazuh-custom" -H 'Content-Type: application/json' -d @w-elastic-template.json
 
-.. code-block:: json
+  .. code-block:: json
 
-  { "acknowledged" : true }
+    { "acknowledged" : true }
 
 4. *Optional*. Confirm your configuration was updated successfully:
 
-.. code-block:: console
+  .. code-block:: console
 
-  # curl "http://localhost:9200/_template/wazuh?pretty&filter_path=wazuh.settings"
+    # curl "http://localhost:9200/_template/wazuh-custom?pretty&filter_path=wazuh-custom.settings"
 
-.. code-block:: json
+  .. code-block:: json
 
-  {
-    "wazuh" : {
-      "settings" : {
-        "index" : {
-          "number_of_shards" : "1",
-          "number_of_replicas" : "0",
-          "refresh_interval" : "5s"
+    {
+      "wazuh-custom" : {
+        "settings" : {
+          "index" : {
+            "mapping" : {
+              "total_fields" : {
+                "limit" : "2000"
+              }
+            },
+            "refresh_interval" : "5s",
+            "number_of_shards" : "3",
+            "auto_expand_replicas" : "0-1",
+            "number_of_replicas" : "1"
+          }
         }
       }
     }
-  }
+
 
 Changing the number of replicas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -227,7 +239,7 @@ The number of replicas can be changed dynamically using the Elasticsearch API.
 
 In a cluster with one node, the number of replicas should be set to zero:
 
-.. code-block:: none
+.. code-block:: console
 
   # curl -X PUT "http://localhost:9200/wazuh-alerts-*/_settings?pretty" -H 'Content-Type: application/json' -d'
   {
@@ -236,16 +248,6 @@ In a cluster with one node, the number of replicas should be set to zero:
     }
   }
   '
-
-.. code-block:: json
-
-  { "acknowledged" : true }
-
-Note that we are assuming your target index pattern is **"wazuh-alerts-*"**, however, a different index pattern may be used. You can see a full list of your current indexes using the following command:
-
-.. code-block:: console
-
-  # curl "http://localhost:9200/_cat/indices"
 
 Reference:
 
