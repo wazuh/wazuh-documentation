@@ -145,7 +145,7 @@ Example:
 
     <rule id="100001" level="3">
       <if_sid>10050</if_sid>
-      <regex>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regex>
+      <regex>^(\d+.\d+.\d+.\d+)$</regex>
       <description>Matches any valid IP</description>
     </rule>
 
