@@ -61,7 +61,7 @@ Installing Wazuh agent
 
 4. **(Optional)** Disable the Wazuh updates:
 
-  We recommend maintaining the Wazuh Manager version greater or equal to that of the Wazuh Agents. f a Wazuh Agent has a greater version, it is possible that the message sent will be misunderstood by the Wazuh Manager because of some new feature. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
+  We recommend maintaining the Wazuh Manager version greater or equal to that of the Wazuh Agents. As a result, we recommended disabling the Wazuh repository in order to prevent accidental upgrades. To do this, use the following command:
 
   .. code-block:: console
 
