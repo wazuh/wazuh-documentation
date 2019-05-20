@@ -408,6 +408,11 @@ footer a:focus .fa {
   vertical-align: middle;
 }
 
+#main-content table a,
+#main-content li a {
+    text-decoration: underline;
+}
+
 .toctree-wrapper > ul,
 ul.simple {
   list-style: url('../img/list-arrow.png');

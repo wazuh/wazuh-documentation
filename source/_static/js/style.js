@@ -150,6 +150,9 @@ $(function(){
 	 function show_current_subtree(){
 		 updateFromHash();
 		 var currentLeaf = $('.globaltoc a.current.leaf');
+		 if (currentLeaf.length == 0){
+			 currentLeaf = $('.globaltoc [href="#"].current');
+		 }
 		 currentLeaf.parents('li').each(function(){
 			 $(this).addClass('show');
 		 });
