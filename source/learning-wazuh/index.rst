@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+:orphan:
+
 .. _learning_wazuh:
 
 Learning Wazuh
