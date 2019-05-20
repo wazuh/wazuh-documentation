@@ -39,6 +39,7 @@ table {
 
 th, td {
   padding: 7px;
+  padding-left: 12px;
   border-color: #00a9e5;
   vertical-align: middle;
 }
