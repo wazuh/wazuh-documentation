@@ -126,28 +126,36 @@ Upgrade Elasticsearch
     curl -X GET "localhost:9200/_cat/health?v"
 
 10. Repeat it for every Elasticsearch node.
-11. (Optional) Add the new **timestamp** reference field for old indices.
 
-  .. code-block:: bash
+Important change for all events
+-------------------------------
 
-    curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query" -H 'Content-Type: application/json' -d'
-    {
-      "query": {
-        "bool": {
-          "must_not": {
-            "exists": {
-              "field": "timestamp"
-            }
+Typically, our integration with the Elastic Stack uses the field *@timestamp* as the reference field for our time-based indices. Since Elastic 7, 
+we've moved that field to *timestamp* because *@timestamp* is now a reserved field in the Elastic Stack. 
+
+Due to this change, old indices need that field to stay visible in the Discover and the Wazuh app.
+
+Here is an example of how to add the missing field for the index *wazuh-alerts-3.x-2019.05.16*. Keep in mind that even today's index will have 
+a mixing of events (6.x and 7.x events) so take care of today's index too.
+
+.. code-block:: bash
+
+  curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query" -H 'Content-Type: application/json' -d'
+  {
+    "query": {
+      "bool": {
+        "must_not": {
+          "exists": {
+            "field": "timestamp"
           }
         }
-      },
-      "script": "ctx._source.timestamp = ctx._source['@timestamp']"
-    }
-    '
+      }
+    },
+    "script": "ctx._source.timestamp = ctx._source['@timestamp']"
+  }
+  '
 
-    .. note::
-
-      Old indices have no ``timestamp`` field, just ``@timestamp`` which is a reserved field in Elastic 7.
+- More information about `update by query <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html>`_ in Elasticsearch.
 
 Upgrade Filebeat
 ----------------
