@@ -43,6 +43,10 @@ th, td {
   vertical-align: middle;
 }
 
+table tr:nth-child(2n+0){
+  background: #f4f4f4;
+}
+
 th {
   background-color: #00a9e5;
   color: #fff;
