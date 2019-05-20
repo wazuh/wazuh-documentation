@@ -6,8 +6,8 @@ Getting started
 ===============
 
 .. toctree::
-   :maxdepth: 2
-   
+   :titlesonly:
+
    what_is_wazuh
    components
    architecture

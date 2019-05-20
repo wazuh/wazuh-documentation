@@ -29,7 +29,3 @@ Wazuh is a security detection, visibility, and compliance open source project. I
 .. topic:: Elastic Stack
 
  `Elastic Stack <https://www.elastic.co>`_ is a software suite (Filebeat, Logstash, Elasticsearch, Kibana) used to collect, parse, index, store, search, and present log data. It provides a web front-end that gives a high-level dashboard view of events that allows for advanced analytics and data mining deep into your store of event data.
-
-.. topic:: Table of Contents
-
- This documents will help you understand Wazuh's components and architecture, and will show you some common use cases.
