@@ -4,6 +4,21 @@
  */
 
 /* Body and layout background *************************************************/
+@media (min-width: 768px){
+  .wy-table-responsive{
+    overflow: visible !important;
+  }
+
+  #packages-list .wy-table-responsive,
+  #wpk-list .wy-table-responsive{
+    overflow-x: scroll !important;
+  }
+
+}
+
+.wy-table-responsive table td, .wy-table-responsive table th {
+  white-space: pre-wrap !important;
+}
 
 .wy-body-for-nav {
     background: #edf0f2;

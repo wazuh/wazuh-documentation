@@ -48,9 +48,6 @@ Installing Linux agent
 .. warning::
   When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
   
-.. warning::
-  Be extremely careful not to select a critical installation directory.
-
 .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>`.
@@ -61,7 +58,7 @@ Installing Linux agent
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
+Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
 Installing Windows agent
 ------------------------
@@ -115,4 +112,4 @@ The following output will appear at the end of the building process:
 
 .. note:: The installer is now ready.  It can be launched with a normal or unattended installation. For more information about this process, please visit our :doc:`installation section for Windows<./wazuh_agent_windows>`.
 
-.. note:: Once the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.
+.. note:: Once the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.

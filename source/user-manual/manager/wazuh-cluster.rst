@@ -218,22 +218,27 @@ Here is a short configuration guide of a **load balancer** using Nginx:
 
       .. code-block:: xml
 
-        cluster-stream {
-          upstream mycluster {
-            server <INSTANCE_IP>:1516;
-            server <INSTANCE_IP>:1516;
-            server <INSTANCE_IP>:1516;
-            ...
-          }
-
-          server {
-            listen 1516;
-
-            location / {
-              proxy_pass mycluster;
+        stream {
+            upstream cluster {
+                hash $remote_addr consistent;
+                server <WAZUH-MASTER-IP>:1514;
+                server <WAZUH-WORKER1-IP>:1514;
+                server <WAZUH-WORKER2-IP>:1514;
             }
-          }
+            upstream master {
+                server <WAZUH-MASTER-IP>:1515;
+            }
+            server {
+                listen 1514;
+                proxy_pass cluster;
+            }
+            server {
+                listen 1515;
+                proxy_pass master;
+            }
         }
+
+    - You can find more details in nginx guide for configuring `TCP and UDP load balancer. <https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/>`_
 
     3. Restart nginx configuration files:
 
