@@ -2248,7 +2248,7 @@ ul#breadcrumbs a {
 blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
-	margin-bottom: 0.5em;
+	margin-bottom: 1em;
 }
 
 table.highlighttable {
@@ -3097,10 +3097,14 @@ div.highlight pre {
 				position: -webkit-sticky;
 				position: sticky;
 				top: 50px;
-				overflow: auto;
+				overflow: hidden;
 				max-height: calc(100vh - 55px);
 				height: 100%;
         flex-direction: column;
+      }
+
+      .side-scroll:hover{
+        overflow: auto;
       }
 
       .no-latest-docs .side-scroll {
