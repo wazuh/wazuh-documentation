@@ -1,5 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
+:orphan:
+
 .. _not_found:
 
 404 | Page not found
