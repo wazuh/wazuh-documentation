@@ -16,9 +16,9 @@ Wazuh is a security detection, visibility, and compliance open source project. I
 
 .. topic:: OSSEC HIDS
 
- `OSSEC HIDS <http://ossec.github.io>`_ is a Host-based Intrusion Detection System (HIDS) used for security detection, visibility, and compliance monitoring. It's based on a multi-platform agent that forwards system data (e.g log messages, file hashes, and detected anomalies) to a central manager, where it is further analyzed and processed, resulting in security alerts. Agents convey event data to the central manager for analysis via a secure and authenticated channel.
+ Wazuh is a Host-based Intrusion Detection System (HIDS) used for security detection, visibility, and compliance monitoring. It's based on a multi-platform agent that forwards system data (e.g log messages, file hashes, and detected anomalies) to a central manager, where it is further analyzed and processed, resulting in security alerts. Agents convey event data to the central manager for analysis via a secure and authenticated channel.
 
- Additionally, OSSEC HIDS provide a centralized syslog server and an agentless configuration monitoring system that provide security insight into the events and changes on agentless devices such as firewalls, switches, routers, access points, network appliances, etc.
+ Additionally, Wazuh provide a centralized syslog server and an agentless configuration monitoring system that provide security insight into the events and changes on agentless devices such as firewalls, switches, routers, access points, network appliances, etc.
 
 .. topic:: OpenSCAP
 
