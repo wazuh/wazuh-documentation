@@ -218,7 +218,7 @@ Here is a short configuration guide of a **load balancer** using Nginx:
 
       .. code-block:: xml
 
-     stream {
+        stream {
             upstream cluster {
                 hash $remote_addr consistent;
                 server <WAZUH-MASTER-IP>:1514;
