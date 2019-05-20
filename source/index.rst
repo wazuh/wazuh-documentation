@@ -83,7 +83,7 @@ Available documentation
 -----------------------
 
 .. toctree::
-   :maxdepth: 1
+   :titlesonly:
 
    getting-started/toc
    installation-guide/toc
