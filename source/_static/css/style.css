@@ -2980,7 +2980,7 @@ div.highlight pre {
 			}
 
 			#main-content {
-        max-width: calc(100% - 320px);
+        max-width: calc(100% - 360px);
 			}
 
       #main-content.order-0 {
@@ -3073,7 +3073,7 @@ div.highlight pre {
       nav.full-toctree-nav {
         min-height: 100vh;
 				z-index: 3;
-        width: 320px;
+        width: 360px;
 				position: static;
         transition: width 0.3s;
       }
