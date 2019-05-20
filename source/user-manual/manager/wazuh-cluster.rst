@@ -218,15 +218,15 @@ Here is a short configuration guide of a **load balancer** using Nginx:
 
       .. code-block:: xml
 
-        stream {
+     stream {
             upstream cluster {
                 hash $remote_addr consistent;
-                server {wazuh-master-IP}:1514;
-                server {wazuh-worker1-IP}:1514;
-                server {wazuh-worker2-IP}:1514;
+                server <WAZUH-MASTER-IP>:1514;
+                server <WAZUH-WORKER1-IP>:1514;
+                server <WAZUH-WORKER2-IP>:1514;
             }
             upstream master {
-                server{wazuh-master-IP}:1515;
+                server <WAZUH-MASTER-IP>:1515;
             }
             server {
                 listen 1514;
