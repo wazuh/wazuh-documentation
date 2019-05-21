@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_linux_rpm_suse_12:
 
-SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed
-===========================================================
+SUSE 12, OpenSUSE 42, Leap and Tumbleweed
+=========================================
 
 The RPM package is suitable for SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed. For other RPM-based OS (CentOS/RHEL/Oracle Linux, Amazon Linux, Fedora, Suse 11), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`. 
 
