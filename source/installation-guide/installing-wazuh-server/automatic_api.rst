@@ -12,7 +12,7 @@ Kibana app
 
 .. code-block:: none
 
-  # curl -X POST "http://<ELASTICSEARCH_IP>:9200/.wazuh/wazuh-configuration/1513629884013" -H 'Content-Type: application/json' -d'
+  # curl -X POST "http://<ELASTICSEARCH_IP>:9200/.wazuh/_doc/1513629884013" -H 'Content-Type: application/json' -d'
   {
     "api_user": "<WAZUH_API_USERNAME>",
     "api_password": "<WAZUH_API_PASSWORD>",

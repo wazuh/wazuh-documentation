@@ -30,7 +30,7 @@ Components
 
 - The :doc:`RESTful API <api/index>` provides an interface to manage and monitor the configuration of the manager and agents. It can be used to register agents, inspect the manager log messages, decoders and rules and provide useful information related to the agents, including their status, operating system details, and alerts related to file integrity monitoring and rootchecks.
 
-+ **Filebeat** is used in **distributed architectures** (where the Wazuh server and Elastic Stack live in different systems) to forward alerts data to Logstash. This component has its own `documentation <https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-overview.html>`_ developed by Elastic.
++ **Filebeat** is used to forward alerts data from Wazuh manager to Elasticsearch. This component has its own `documentation <https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-overview.html>`_ developed by Elastic.
 
 Elastic Stack
 -------------
@@ -43,7 +43,6 @@ Components
 
 - The **Wazuh app** is a Kibana plugin designed to display Wazuh related information providing a RESTful API web interface. This interface makes administration of the Wazuh Manager and Wazuh Agents easy and powerful.
 
-+ **Logstash** is used to collect data coming from  one or more Wazuh servers via Filebeat, feeding this data to the Elasticsearch cluster. In addition, it enriches alerts by adding Geolocation metadata. More information can be found at the `Logstash official documentation <https://www.elastic.co/guide/en/logstash/current/index.html>`_.
 
 - **Elasticsearch** is a highly scalable full-text search and analytics engine. It is used to index alerts data and historical agents status information. More information can be found at the `Elasticsearch official documentation <https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html>`_.
 
