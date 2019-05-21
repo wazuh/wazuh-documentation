@@ -46,7 +46,7 @@ First of all, the first scan results are reported and alerts like the following 
     sca.check.file: ["/proc/sys/net/ipv4/ip_forward"]
     sca.check.result: passed
 
-Alerting about the initial status of a check, no more alerts about this file should appear whether its state doesn't change in sucesive scans.
+Alerting about the initial status of a check, no more alerts about this file should appear if its state doesn't change in sucesive scans.
 
 This is the generated alert that summarizes the result of the scan process. This alert only appears at the first scan of a policy or when any value has changed as well.
 
@@ -68,7 +68,7 @@ This is the generated alert that summarizes the result of the scan process. This
     sca.score: 51
     sca.file: cis_debian_linux_rcl.yml
 
-If we focus in the check 5031 (whose alert appears above), it verifies that the IP forwarding is disabled by checking for the content of the file */proc/sys/net/ipv4/ip_forward*.
+If we focus in the check 5031 (whose alert appears above), we can see it verifies that the IP forwarding is disabled by checking for the content of the file */proc/sys/net/ipv4/ip_forward*.
 
 If we modify this file as follows:
 
