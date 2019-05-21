@@ -495,7 +495,6 @@ li.toctree-l4 > a {
   width: 100%;
 }
 
-ul li.toctree-l1 a.current.reference.internal,
 ul li.toctree-l1 .current > .leaf {
   color: #00a9e5;
   background: #ffffff;
@@ -536,7 +535,6 @@ ul li.toctree-l1 a.current.reference.internal::after {
 .globaltoc li.toctree-l1 .current > a.leaf {
 	border-width: 3px;
 	padding-left: calc(1rem - 3px);
-  background: #f0f0f0;
 }
 
 .globaltoc li.toctree-l1 li.toctree-l3 > a.leaf.current::before,

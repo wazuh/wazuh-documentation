@@ -149,6 +149,11 @@ $(function(){
 
 	 function show_current_subtree(){
 		 updateFromHash();
+		 if ($('ul li.toctree-l1 a.current.reference.internal, ul li.toctree-l1 .current > .leaf').length == 0){
+			 /* Shows the selected style for the parent document of pages that don't appear in the globaltoc */
+				$('.globaltoc :contains("'+ $('#breadcrumbs li:nth-last-child(2) a').text() +'")').addClass('show').addClass('current');
+			 return true;
+		 }
 		 var currentLeaf = $('.globaltoc a.current.leaf');
 		 if (currentLeaf.length == 0){
 			 currentLeaf = $('.globaltoc [href="#"].current');
