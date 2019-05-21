@@ -73,13 +73,13 @@ This section describes how to secure the communications between the involved com
 
     instances:
         - name: "wazuh-manager"
-            ip:
+          ip:
             - "10.0.0.2"
         - name: "elasticsearch"
-            ip:
+          ip:
             - "10.0.0.3"
         - name: "kibana"
-            ip:
+          ip:
             - "10.0.0.4"
 
 2. Create the certificates using the `elasticsearch-certutil <https://www.elastic.co/guide/en/elasticsearch/reference/current/certutil.html>`_ tool. 
