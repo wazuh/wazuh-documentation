@@ -85,9 +85,9 @@ Available documentation
 .. toctree::
    :titlesonly:
 
-   getting-started/toc
-   installation-guide/toc
-   user-manual/toc
+   getting-started/index
+   installation-guide/index
+   user-manual/index
    development/index
    docker/index
    deployment

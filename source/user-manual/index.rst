@@ -9,9 +9,9 @@ User manual
     :maxdepth: 2
 
     overview
-    manager/toc
+    manager/index
     registering/index
-    agents/toc
+    agents/index
     capabilities/index
     ruleset/index
     api/index

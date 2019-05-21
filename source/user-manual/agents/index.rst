@@ -16,4 +16,4 @@ Agent management
     remove-agents
     agent-connection
     grouping-agents
-    remote-upgrading/toc
+    remote-upgrading/index
