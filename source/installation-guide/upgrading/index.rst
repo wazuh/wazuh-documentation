@@ -32,7 +32,7 @@ This section describes how to upgrade an existing Wazuh installation. The upgrad
     :hidden:
     :maxdepth: 2
 
-    legacy/index
+    legacy
     same_minor
     same_major
     different_major
