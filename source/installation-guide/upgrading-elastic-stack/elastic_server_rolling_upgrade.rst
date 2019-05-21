@@ -129,11 +129,13 @@ Upgrade Elasticsearch
 Field migration: From @timestamp to timestamp
 ----------------------------------------------
 
-In previous Elastic search versions, the Elastic documents were indexed using the field *@timestamp* as the reference field for time-based indices. Starting in Elastic 7.x, the field has became a reserved field and is no longer manipulable. Wazuh time-based indices now make use of field *timestamp* instead.
+In previous Elastic search versions, the Elastic documents were indexed using the field *@timestamp* as the reference field for time-based indices. Starting in Elastic 7.x, this field has become a reserved field and it is no longer manipulable. Wazuh time-based indices now make use of field *timestamp* instead.
 
 Due to this change, previous alerts won't be visible in Wazuh indices, an update must be perform to all previous indices in order to complete the upgrade.
 
-Here is an example of how to add the missing field for the index *wazuh-alerts-3.x-2019.05.16*. 
+Run below request for each Wazuh index created before Elastic 7.x upgrade. It will add the *timestamp* field for all the index documents.
+
+Here is an example of how run the request using the index *wazuh-alerts-3.x-2019.05.16*. 
 
 .. code-block:: bash
 
@@ -152,7 +154,7 @@ Here is an example of how to add the missing field for the index *wazuh-alerts-3
   }
   '
 
-The above query must be run for all previous indices, modify the date parameter (2019.05.16) in the request according to your indices name.
+The request must be run for all previous indices you want to migrate, modify the date parameter according to your index name.
 
 - More information about `update by query <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html>`_ in Elasticsearch.
 
