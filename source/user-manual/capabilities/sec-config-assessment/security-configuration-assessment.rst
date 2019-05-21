@@ -6,30 +6,21 @@ Security Configuration Assessment
 This section attempts to introduce how this module can help us to securize our systems.
 
 - `The configuration assessment scope`_
-- `How SCA can help us`_
 - `Available policies`_
 - `Creating custom SCA policies`_
 
 The configuration assessment scope
 ----------------------------------
 
-One of the most important points to avoid hosts to be compromised is to securing them by reducing their surface of vulnerabilities. That process is commonly known
-as hardening, and the configuration assessment is the most effective way to detect how to handle that hardening in our systems.
+One of the most certain ways to avoid hosts being compromised is to secure them by reducing their surface of vulnerabilities. That process is commonly known as hardening, and the configuration assessment is the most effective way to determine where the hosts may have their hardening improved.
 
-It consists on carrying out scans where policy files are used as template to discover the exposures or misconfiguration of the monitored host. To be more specific, 
-changing default passwords, the removal of unnecessary software, unnecessary usernames or logins, and the disabling or removal of unnecessary services, for example. 
+The SCA will perform scans using policy files as templates to discover the exposures or misconfiguration of the monitored hosts. For example it will determine if it is necessary to change default passwords, remove unnecessary software, unnecessary usernames or logins, and disable or remove of unnecessary services.
 The target of those policies can be an Operating System such as Debian or Windows, or a particular software like the SSH server.
-
-
-How SCA can help us
--------------------
-
-This module has been designed to perform Security Configuration Assessment on agents by providing the scan results of one or more policy files.
 
 Security compliance
 ^^^^^^^^^^^^^^^^^^^
 
-Each CIS policy has the CIS and PCI-DSS controls mapped for each check of the policies. Here we can see an example:
+Each policy check can contain an optional **compliance** field that is used to specify how the check is relevant to different Compliance Standards specifications. Many of the default policies available with Wazuh, specially CIS policies, already have the CIS and PCI-DSS controls mapped. Here we can see an example:
 
 .. code-block:: yaml
 
@@ -46,15 +37,12 @@ Each CIS policy has the CIS and PCI-DSS controls mapped for each check of the po
    rules:
      - 'f:/etc/fstab -> NIN !r:^# && r:/media && r:noexec;'
 
-These controls are included in the *compliance* section, and it is designed to allow the addition of more compliance controls.
-
 SCA scan results
 ^^^^^^^^^^^^^^^^
 
-SCA scan results appear as alerts when a check has changed its status based on reporting just the different results between scans to the manager. Only the necessary events
-to keep the last global status of the scan are sent by agents, avoiding the flooding of unnecessary events in each scan.
+SCA scan results appear as alerts when a check has changed its status between scans. Only the events that are necessary to keep the global status of the scan updated are sent by agents, avoiding the flooding of unnecessary events in each scan.
 
-Differences between scan results are alerted and updated to warn the users about the detected changes. Here we can see how alerts look like:
+An alert example can be seen here:
 
 .. code-block:: none
 
@@ -75,7 +63,7 @@ Differences between scan results are alerted and updated to warn the users about
     sca.check.file: ["/proc/sys/kernel/randomize_va_space"]
     sca.check.result: passed
 
-On the other side, within the *SCA* tab we can see the result for each check of the policy scanned. In addition, each check can be expanded each check to view more detailed information about each check.
+On the Wazuh App, within the *SCA* tab we can see the result for each check of the scanned policies. In addition, each check can be expanded to view more detailed information about it.
 
 .. thumbnail:: ../../../images/sca/sca-check.png
     :title: SCA check list
@@ -99,7 +87,7 @@ Every scanned policy should contain a header to provide its overview information
 
 Fields like `id` are mandatory to identify and classify policies.
 
-The following screenshot of the *SCA* tab shows the overviewed of scanned policies for an agent:
+The following screenshot of the *SCA* tab shows an overview of scanned policies for an agent:
 
 .. thumbnail:: ../../../images/sca/sca-agent.png
     :title: SCA summary
@@ -110,17 +98,16 @@ The following screenshot of the *SCA* tab shows the overviewed of scanned polici
 Available policies
 ------------------
 
-For this SCA module, available policies are described following the YAML format, as this standard focus on human readability, 
-allowing the user to quickly understand and write their own policy files or extend the existing ones.
+Policies for the SCA module are written using the YAML format, which was chosen due to its focus on human readability, 
+which allows the user to quickly understand and write their own policy files or extend the existing ones.
 
-Most of available policies are based on CIS benchmarks, enriched with valuable information for every check. 
+Many of the available default policies are based on CIS benchmarks, enriched with valuable information for every check. 
 
 Available policies list
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-When installing Wazuh agent, the system will install only the policy files supported by that particular Operating System. The following list shows
-all the policy files available for all Operating System that Wazuh supports. Those policies are installed on every Wazuh manager in order to include them
-in agents groups easily.
+When a Wazuh agent is installed, the system will only include the policy files supported by that particular Operating System. The following list shows
+all the default policy files available for the Operating Systems officially supported by Wazuh. These policies are all included with the Wazuh manager installation so they may be included in agent groups easily.
 
 +-----------------------------+------------------------------------------------------------+-------------------------------+
 | Policy                      | Name                                                       | Requirement                   |
@@ -192,14 +179,10 @@ How to share policy files with agents
 As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section, the Wazuh manager has the ability to push files and
 configurations to connected agents.
 
-This feature con be used to push policy files to agents in defined groups. By default, every connected agents belongs to the *default* group. We will use this group to show an example.
+This feature con be used to push policy files to agents in defined groups. By default, every connected agent belongs to the *default* group, so we can use this group as an example. 
 
-- Steps on the manager
-
-    - Put the new policy file under the directory: ``/var/ossec/etc/shared/default``
-    - Ensure the policy owner is `ossec`.
-    - Edit the ``/var/ossec/etc/shared/default/agent.conf`` file.
-    - Add the following block:
+In order to push a new policy from the manager it should be placed in the directory: ``/var/ossec/etc/shared/default``
+, ensure the policy owner is `ossec` and then add the following block to the ``/var/ossec/etc/shared/default/agent.conf`` file:
 
 .. code-block:: xml
 
@@ -216,7 +199,7 @@ This feature con be used to push policy files to agents in defined groups. By de
 
 The ``<sca>`` block will be merged with the current ``<sca>`` block on the agent side and the new policy file will be added.
 
-If you want to disable a current policy file that is being scanned on the agent, put the following block inside the file ``/var/ossec/etc/shared/default/agent.conf``:
+Current policy files configured to be run on the agent (either by default or by local configuration) my be disabled via the centralized configuration file ``/var/ossec/etc/shared/default/agent.conf`` as follows:
 
 .. code-block:: xml
 
@@ -231,15 +214,13 @@ If you want to disable a current policy file that is being scanned on the agent,
 
     </agent_config>
 
-The agent will stop to scan the policy file specified.
-
 .. note::
     Remote policies are not allowed to run commands by default for security reasons. To enable it, change the ``sca.remote_commands`` of the internal options.
 
 Creating custom SCA policies
 ----------------------------
 
-First of all, we need to take a look at the structure of a policy file as it is declared in YAML. Take a look at the example below taken from the policy file for SSH hardening:
+As mentioned previously, the policy files have a YAML format. In order to illustrate shown below is a section of the policy file for SSH hardening:
 
 .. code-block:: yaml
 
@@ -274,7 +255,7 @@ First of all, we need to take a look at the structure of a policy file as it is 
         - 'f:$sshd_file -> IN !r:^# && r:Port\.+22;'
 
 
-As shown above, there are four sections for a policy file, the following table shows required sections:
+As shown in this example, there are four sections, not all of them are required for a policy file:
 
 +--------------------+----------------+
 | Section            | Required       |
@@ -293,7 +274,7 @@ As shown above, there are four sections for a policy file, the following table s
   If the *requirements* aren't satisfied for a specific policy file, the scan for that file won't start.
 
 
-Each section have their own fields that can be mandatory as described below:
+Each section has their own fields that can be mandatory as described below:
 
 **Policy section**
 
@@ -360,11 +341,11 @@ Each section have their own fields that can be mandatory as described below:
 | rules              | Yes            | Array of strings  | Any string                           |
 +--------------------+----------------+-------------------+--------------------------------------+
 
-To add a new policy file, it is recommended to put the file under the `ruleset/sca` directory.
+It is recommended that new policy files be placed under the `ruleset/sca` directory.
 
 .. note::
   - Remember that the **policy** id field must be unique, not existing in other policy files.
-  - Remember that the **checks** id field must be unique in the same policy.
+  - Remember that the **checks** id field must be unique within the same policy.
 
 
 Information about variables
@@ -401,17 +382,17 @@ There are five main types of rules as described below:
 | Registry (Windows Only)      | r              |
 +------------------------------+----------------+
 
-Note the following list to better understand the syntax of the rules:
+In order to better understand the syntax of the rules it is important to note that:
 
-- These *types* make reference to the location where the rule will look for the content of the check. Every rule have to start with a location.
+- The *type* of a rule references the location where the rule will look for the content of the check. Every rule has to start with a location.
 
-- After the location, it is commonly found the content to look for, it is accepted a literal string or a regular expression preceded by ``r:`` (the supported regexes can be found :doc:`here <../../ruleset/ruleset-xml-syntax/regex>`).
+- The location is commonly followed by the content to look for. It is accepted a literal string or a regular expression preceded by ``r:`` (the supported Regex syntax can be found :doc:`here <../../ruleset/ruleset-xml-syntax/regex>`).
 
-- As explained before, the most common rules has the format ``type:location -> r:REGEX;``. However, there are exceptions, for example, for Windows registries, we would have to add the registry key in the middle of the rule.
+- As explained before, the most common rules have the format ``type:location -> r:REGEX;``. However, there are exceptions, for example, for Windows registries, we would have to add the registry key in the middle of the rule.
 
 - Each rule must end with the semicolon ``;`` character.
 
-Examples will help us to understand this logic much better:
+The following examples illustrate this logic:
 
 **Rule syntax for files**
 
@@ -468,10 +449,10 @@ Examples will help us to understand this logic much better:
 
 **Global operators for composed rules**
 
-There are defined two logical operators used to determine the accumulated result of a check, needed when more than one term is defined (terms are separated by ``&&`` inside a rule).
+When more than one term is necessary, two logical operators can be used to determine the accumulated result of a check (terms are separated by ``&&`` inside a rule).
 
-- IN (included): This operator means that the sum of the terms should be matched in a line of the read output. 
-- NIN (not included): The opposite operator, it means the whole rule mustn't be found in the output.
+- IN (included): This operator means that both the terms should be matched. 
+- NIN (not included): The opposite operator, it means the rule is triggered if both terms are not matched.
 
 **Use cases**
 

@@ -10,10 +10,9 @@ How it works
 State vs alerts
 ---------------
 
-Agents have their own local database where they store the state of each check: *passed*, *failed*, or *invalid*. It allows the agent to send only the differences between each scan, if nothing has changed from the last scan, only the summary event will be sent, avoiding network flooding every time a scan ends.
+Agents have their own local database where they store the state of each check: *passed*, *failed*, or *invalid*. This allows the agent to send only the differences between each scan, if nothing has changed from the last scan, only the summary event will be sent, avoiding network flooding every time a scan ends.
 
-On the other side, the manager will contain the last scan performed in each agent updated at real-time. This way, the scan status can be consulted
-in the Wazuh app as well as alerts about result changes of each particular check.
+The manager will contain the last scan performed in each agent updated at real-time so that the scan status can be consulted in the Wazuh app as well as the alerts regarding changes of each particular check.
 
 Available information of scans
 ------------------------------
@@ -21,7 +20,7 @@ Available information of scans
 Queriable information of the scans
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Every scan comes along with useful information about it. The JSON format is used to send the agents events to the manager.
+Every scan provides useful information about its result. The JSON format is used to send the agents events to the manager.
 There are basically three types of events:
 
 - Check event
@@ -209,7 +208,7 @@ On the agent side we have the following state:
 
 The agent will send a SHA256 hash inside the summary event with the calculated hash (being it ``1642AB1DC478052AC3556B5E700CD82ADB69728008301882B9CBEE0696FF2C84``).
 
-On the manager side, let's asume the database state is the following:
+On the manager side, let's assume the database state is the following:
 
 +------------------------------+----------------+
 | Check ID                     | State          |
