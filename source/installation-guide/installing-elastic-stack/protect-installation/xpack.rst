@@ -21,11 +21,12 @@ If you want to try the platinum features, you can start a 30-day trial.
 Adding authentication for Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1. Add the next line to ``/etc/elasticsearch/elasticsearch.yml``.
+1. Add the next lines to ``/etc/elasticsearch/elasticsearch.yml``.
 
 .. code-block:: yaml
 
     xpack.security.enabled: true
+    xpack.security.transport.ssl.enabled: true
 
 2. Restart Elasticsearch.
 
