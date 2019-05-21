@@ -43,13 +43,13 @@ The Wazuh agent can be installed in the most of Linux Distribution. It's possibl
 +-------------------------------+----------------------------+-----------------------------------------------------------------------------------+
 | Fedora                        | From 22 to 30              | :doc:`Installation guide on Fedora <wazuh_agent_linux_fedora>`                    |
 +-------------------------------+----------------------------+-----------------------------------------------------------------------------------+
-| OpenSUSE                      | Tumbleweed                 | :doc:`Installation guide on OpenSUSE/SUSE 12 <wazuh_agent_linux_rpm_suse_12>`     |
+| OpenSUSE                      | Tumbleweed                 | :doc:`Installation guide on OpenSUSE Tumbleweed <wazuh_agent_linux_rpm_suse_12>`  |
 +                               +----------------------------+-----------------------------------------------------------------------------------+
-|                               | Leap                       | :doc:`Installation guide on OpenSUSE/SUSE 12 <wazuh_agent_linux_rpm_suse_12>`     |
+|                               | Leap                       | :doc:`Installation guide on OpenSUSE Leap <wazuh_agent_linux_rpm_suse_12>`        |
 +                               +----------------------------+-----------------------------------------------------------------------------------+
-|                               | 42                         | :doc:`Installation guide on OpenSUSE/SUSE 12 <wazuh_agent_linux_rpm_suse_12>`     |
+|                               | 42                         | :doc:`Installation guide on OpenSUSE 42 <wazuh_agent_linux_rpm_suse_12>`          |
 +-------------------------------+----------------------------+-----------------------------------------------------------------------------------+
-| SUSE                          | 12                         | :doc:`Installation guide on OpenSUSE/SUSE 12 <wazuh_agent_linux_rpm_suse_12>`     |
+| SUSE                          | 12                         | :doc:`Installation guide on SUSE 12 <wazuh_agent_linux_rpm_suse_12>`              |
 +                               +----------------------------+-----------------------------------------------------------------------------------+
 |                               | 11                         | :doc:`Installation guide on SUSE 11 <wazuh_agent_linux_rpm_suse_11>`              |
 +-------------------------------+----------------------------+-----------------------------------------------------------------------------------+
