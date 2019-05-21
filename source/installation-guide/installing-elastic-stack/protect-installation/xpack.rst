@@ -116,11 +116,11 @@ This section describes how to secure the communications between the involved com
 .. code-block:: console
 
     # mkdir /etc/elasticsearch/certs/ca -p
-    # mkdir /etc/elasticsearch/certs/elasticsearch
     # cp certs/ca/ca.crt /etc/elasticsearch/certs/ca
-    # cp certs/elasticsearch.crt /etc/elasticsearch/certs
-    # cp certs/elasticsearch.key /etc/elasticsearch/certs
-    # chmod 644 -R /etc/elasticsearch/certs
+    # cp certs/elasticsearch/elasticsearch.crt /etc/elasticsearch/certs
+    # cp certs/elasticsearch/elasticsearch.key /etc/elasticsearch/certs
+    # chown -R elasticsearch: /etc/elasticsearch/certs
+    # chmod -R 770 /etc/elasticsearch/certs
 
 2. Add the proper settings for both the transport and the HTTP layers in ``/etc/elasticsearch/elasticsearch.yml``.
 
@@ -129,15 +129,15 @@ This section describes how to secure the communications between the involved com
     # Transport layer
     xpack.security.transport.ssl.enabled: true
     xpack.security.transport.ssl.verification_mode: certificate
-    xpack.security.transport.ssl.key: /etc/elasticsearch/certs/elasticsearch/elasticsearch.key
-    xpack.security.transport.ssl.certificate: /etc/elasticsearch/certs/elasticsearch/elasticsearch.crt
+    xpack.security.transport.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
+    xpack.security.transport.ssl.certificate: /etc/elasticsearch/certs/elasticsearch.crt
     xpack.security.transport.ssl.certificate_authorities: [ "/etc/elasticsearch/certs/ca/ca.crt" ]
 
     # HTTP layer
     xpack.security.http.ssl.enabled: true
     xpack.security.http.ssl.verification_mode: certificate
-    xpack.security.http.ssl.key: /etc/elasticsearch/certs/elasticsearch/elasticsearch.key
-    xpack.security.http.ssl.certificate: /etc/elasticsearch/certs/elasticsearch/elasticsearch.crt
+    xpack.security.http.ssl.key: /etc/elasticsearch/certs/elasticsearch.key
+    xpack.security.http.ssl.certificate: /etc/elasticsearch/certs/elasticsearch.crt
     xpack.security.http.ssl.certificate_authorities: [ "/etc/elasticsearch/certs/ca/ca.crt" ]
 
 3. Restart the service:
@@ -153,11 +153,10 @@ This section describes how to secure the communications between the involved com
 .. code-block:: console
 
     # mkdir /etc/filebeat/certs/ca -p
-    # mkdir /etc/filebeat/certs/wazuh-manager
     # cp certs/ca/ca.crt /etc/filebeat/certs/ca
-    # cp certs/wazuh-manager.crt /etc/filebeat/certs
-    # cp certs/wazuh-manager.key /etc/filebeat/certs
-    # chmod 644 -R /etc/filebeat/certs
+    # cp certs/wazuh-manager/wazuh-manager.crt /etc/filebeat/certs
+    # cp certs/wazuh-manager/wazuh-manager.key /etc/filebeat/certs
+    # chmod 770 -R /etc/filebeat/certs
 
 2. Add the proper settings in ``/etc/filebeat/filebeat.yml``.
 
@@ -165,8 +164,8 @@ This section describes how to secure the communications between the involved com
 
     output.elasticsearch.hosts: ['10.0.0.3:9200']
     output.elasticsearch.protocol: https
-    output.elasticsearch.ssl.certificate: "/etc/filebeat/certs/wazuh-manager/wazuh-manager.crt"
-    output.elasticsearch.ssl.key: "/etc/filebeat/certs/wazuh-manager/wazuh-manager.key"
+    output.elasticsearch.ssl.certificate: "/etc/filebeat/certs/wazuh-manager.crt"
+    output.elasticsearch.ssl.key: "/etc/filebeat/certs/wazuh-manager.key"
     output.elasticsearch.ssl.certificate_authorities: ["/etc/filebeat/certs/ca/ca.crt"]
 
 .. note::
@@ -186,11 +185,11 @@ This section describes how to secure the communications between the involved com
 .. code-block:: console
 
     # mkdir /etc/kibana/certs/ca -p
-    # mkdir /etc/kibana/certs/kibana
     # cp certs/ca/ca.crt /etc/kibana/certs/ca
-    # cp certs/kibana.crt /etc/kibana/certs
-    # cp certs/kibana.key /etc/kibana/certs
-    # chmod 644 -R /etc/kibana/certs
+    # cp certs/kibana/kibana.crt /etc/kibana/certs
+    # cp certs/kibana/kibana.key /etc/kibana/certs
+    # chown -R kibana: /etc/kibana/certs
+    # chmod -R 770 /etc/kibana/certs
 
 2. Add the proper settings in ``/etc/kibana/kibana.yml``.
 
@@ -199,13 +198,13 @@ This section describes how to secure the communications between the involved com
     # Elasticsearch from/to Kibana
     elasticsearch.hosts: ["https://10.0.0.3:9200"]
     elasticsearch.ssl.certificateAuthorities: ["/etc/kibana/certs/ca/ca.crt"]
-    elasticsearch.ssl.certificate: "/etc/kibana/certs/kibana/kibana.crt"
-    elasticsearch.ssl.key: "/etc/kibana/certs/kibana/kibana.key"
+    elasticsearch.ssl.certificate: "/etc/kibana/certs/kibana.crt"
+    elasticsearch.ssl.key: "/etc/kibana/certs/kibana.key"
 
     # Browser from/to Kibana
     server.ssl.enabled: true
-    server.ssl.certificate: "/etc/kibana/certs/kibana/kibana.crt"
-    server.ssl.key: "/etc/kibana/certs/kibana/kibana.key"
+    server.ssl.certificate: "/etc/kibana/certs/kibana.crt"
+    server.ssl.key: "/etc/kibana/certs/kibana.key"
 
 3. Restart the service:
 
