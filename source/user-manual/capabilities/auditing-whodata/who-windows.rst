@@ -5,6 +5,8 @@
 Auditing who-data in Windows
 ============================
 
+.. versionadded:: 3.4.0
+
 How it works
 ^^^^^^^^^^^^
 
