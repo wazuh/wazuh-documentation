@@ -107,7 +107,6 @@ Kibana is a flexible and intuitive web interface for mining and visualizing the 
 
     # echo "elasticsearch hold" | sudo dpkg --set-selections
     # echo "kibana hold" | sudo dpkg --set-selections
-    # echo "filebeat hold" | sudo dpkg --set-selections
 
 Next steps
 ----------

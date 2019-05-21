@@ -12,7 +12,7 @@ advanced downstream analytics and visualization use cases.
 This guide describes how to configure Logstash for receiving events from one or more Filebeat instances, parse the events, and then send 
 them to Elasticsearch.
 
-1. Java 8 is required by Logstash.
+1. Install Java 8.
 
   * For CentOS/RHEL/Fedora:
 
@@ -84,9 +84,9 @@ them to Elasticsearch.
 
     # systemctl restart logstash
 
-5. Configure the Filebeat instance for pointing to the Logstash instance.
+5. Configure the Filebeat instance, change the events destination from Elasticsearch instance to the Logstash instance.
 
-  * Comment / remove the Elasticsearch output in ``/etc/filebeat/filebeat.yml`` where Filebeat is running.
+  * Disable the Elasticsearch output in ``/etc/filebeat/filebeat.yml``.
 
     .. code-block:: yaml
 
@@ -96,7 +96,7 @@ them to Elasticsearch.
       #    indices:
       #        - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
-  * Add the Logstash output in ``/etc/filebeat/filebeat.yml`` where Filebeat is running.
+  * Add the Logstash output in ``/etc/filebeat/filebeat.yml``.
 
     .. code-block:: yaml
 
@@ -108,7 +108,7 @@ them to Elasticsearch.
 
     # systemctl restart filebeat
 
-7. Test if Logstash is reachable for Filebeat.
+7. Check if Logstash is reachable from Filebeat.
 
   .. code-block:: console
 

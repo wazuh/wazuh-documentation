@@ -2,12 +2,15 @@
 
 .. _geo_ip:
 
-Enrich events with geolocation information
-==========================================
+Enrich events with IP Geolocation
+=================================
 
-1. Create an ingest pipeline in Elasticsearch:
+Making use of Elasticsearch ingest pipelines, it is possible to add the geolocation information to the Wazuh alerts.
 
-    .. code-blocK:: bash
+
+1. Create an ingest pipeline in Elasticsearch. Locate in the Elasitcsearch server and run the following request:
+
+    .. code-block:: bash
 
         curl -X PUT "localhost:9200/_ingest/pipeline/geoip" -H 'Content-Type: application/json' -d'
         {
@@ -31,7 +34,7 @@ Enrich events with geolocation information
         }
         '
 
-2. Uncomment the ``geoip`` pipeline in Filebeat configuration:
+2. Locate in the Wazuh manager server and modify Filebeat configuration (``/etc/filebeat/filebeat.yml``). Uncomment the ``pipeline: geoip``  setting. The configuration block should look as follow:
 
     .. code-block:: yaml
 
@@ -41,9 +44,7 @@ Enrich events with geolocation information
             indices:
                 - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
-    Affected line is ``pipeline: geoip``.
-
-3. Restart Filebeat service:
+3. Restart Filebeat service to apply changes:
 
     .. code-block:: console
 

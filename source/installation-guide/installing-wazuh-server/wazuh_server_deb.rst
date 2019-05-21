@@ -162,12 +162,12 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
     # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/elasticsearch/7.x/wazuh-template.json 
 
-5. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
+5. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
   .. code-block:: yaml
 
     output.elasticsearch:
-      hosts: ['http://10.0.0.2:9200', 'http://10.0.0.3:9200']
+      hosts: ['http://YOUR_ELASTIC_SERVER_IP:9200']
       indices:
         - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 

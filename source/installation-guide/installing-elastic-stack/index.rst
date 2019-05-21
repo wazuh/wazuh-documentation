@@ -19,11 +19,12 @@ Depending on your operating system you can choose to install Elastic Stack from 
 | `DEB packages <elastic_server_deb.html>`_  | Install Elastic Stack on Debian/Ubuntu.       |
 +--------------------------------------------+-----------------------------------------------+
 
-There are some related additional configurations that can be applied:
+After the installation, find below optional steps you may find interesting:
 
 - :ref:`Enrich events with geolocation information <geo_ip>`
-- :ref:`Transform your data with Logstash <transform_logstash>`
 - :ref:`Elasticsearch tuning <elastic_tuning>`
+- :ref:`Transform your data with Logstash <transform_logstash>`
+
 
 .. note::
 
