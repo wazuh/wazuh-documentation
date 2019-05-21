@@ -7,17 +7,6 @@ X-Pack
 
 Elastic Stack security features give the right access to the right people. IT, operations, and application teams rely on them to manage well-intentioned users and keep malicious actors at bay, while executives and customers can rest easy knowing data stored in the Elastic Stack is safe and secure.
 
-License
-^^^^^^^
-
-When you install the default distribution of the Elastic Stack, you receive a basic license. For the full list of free features that are included in the basic license, see `subscriptions <https://www.elastic.co/subscriptions>`_.
-
-If you want to try the platinum features, you can start a 30-day trial. 
-
-.. code-block:: bash
-
-    curl -X POST "localhost:9200/_xpack/license/start_trial?acknowledge=true"
-
 Adding authentication for Elasticsearch
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
