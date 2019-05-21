@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_linux_rpm_suse_11:
 
-Install Wazuh agent on SUSE 11
-==============================
+SUSE 11
+=======
 
 The RPM package is suitable for Suse 11. For other RPM-based OS (CentOS/RHEL, Fedora, Suse 12, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`. 
 
