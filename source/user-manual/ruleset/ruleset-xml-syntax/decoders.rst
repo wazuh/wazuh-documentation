@@ -25,7 +25,6 @@ There is many options to configure the decoders:
 - `plugin_decoder`_
 - `use_own_name`_
 - `json_null_field`_
-- `location`_
 - `var`_
 
 decoder
@@ -324,30 +323,6 @@ Specify how to treat the `NULL` fields coming from the JSON events. Only for the
 +                    +-------------------------------------------------------------------------+
 |                    | empty (It shows the NULL field as an empty field)                       |
 +--------------------+-------------------------------------------------------------------------+
-
-location
-^^^^^^^^
-
-Points the source where the event has been readed, like a log file or an agent.
-
-+--------------------+-------------------------------------------------------------------------+
-| **Default Value**  | string                                                                  |
-+--------------------+-------------------------------------------------------------------------+
-| **Allowed values** | File path (`/var/log/syslog`)                                           |
-+                    +-------------------------------------------------------------------------+
-|                    | An agent (`(ubuntu)->192.168.1.22`)                                     |
-+--------------------+-------------------------------------------------------------------------+
-
-Example:
-
-  .. code-block:: xml 
-    
-    <decoder name="home_decoder">
-      <location> /home/user </location>
-      ...
-    </decoder>
-
-Only filters the events related to the path ``/home/user``.
 
 var
 ^^^
