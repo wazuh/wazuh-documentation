@@ -58,13 +58,14 @@ As an example, these two configurations show a channel filtering for firewall an
       <log_format>eventchannel</log_format>
   </localfile>
 
-+--------------------+--------------------------+
-| **Default value**  | n/a                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any log file or wildcard |
-+--------------------+--------------------------+
++--------------------+--------------+
+| **Default value**  | n/a          |
++--------------------+--------------+
+| **Allowed values** | Any log file |
++--------------------+--------------+
 
 .. note::
+  On Windows systems, only one wildcard character is supported. For instance ``*match*``, will match all files.
   The maximum amount of files to monitor is limited to 200.
 
 command
@@ -405,11 +406,11 @@ For example, we may want to read all the files from a directory, but exclude tho
       <exclude>/var/logs/e*</exclude>
   </localfile>
 
-+--------------------+--------------------------+
-| **Default value**  | n/a                      |
-+--------------------+--------------------------+
-| **Allowed values** | Any log file or wildcard |
-+--------------------+--------------------------+
++--------------------+------------------+
+| **Default value**  | n/a              |
++--------------------+------------------+
+| **Allowed values** | Any log wildcard |
++--------------------+------------------+
 
 Configuration examples
 ----------------------
@@ -450,3 +451,6 @@ Windows configuration:
       <only-future-events>yes</only-future-events>
       <query>Event/System[EventID != 5145 and EventID != 5156]</query>
     </localfile>
+
+.. note::
+  On Windows systems, only one wildcard character is supported. For instance ``*match*``, will match all files for exclusion.

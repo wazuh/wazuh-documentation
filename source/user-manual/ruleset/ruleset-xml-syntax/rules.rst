@@ -615,8 +615,6 @@ Example:
     </rule>
 
 
-
-
 list
 ^^^^
 

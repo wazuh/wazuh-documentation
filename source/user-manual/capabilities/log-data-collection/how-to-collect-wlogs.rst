@@ -68,44 +68,43 @@ Windows event channels can be monitored by placing their name at the location fi
 
     Eventchannel is supported on Windows prior or equal to Vista.
 
-Available channels and providers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Available channels
+^^^^^^^^^^^^^^^^^^
 
-Table below shows available channels and providers to monitor included in the Wazuh ruleset:
+Table below shows available channels to monitor included in the Wazuh ruleset:
 
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| Source                        | Channel location                                             | Provider name                      | Description                                                                    |
-+===============================+==============================================================+====================================+================================================================================+
-| Application                   | Application                                                  | Any                                | This log retrieves every event related to system applications management and   |
-|                               |                                                              |                                    | is one of the main Windows administrative channels along with Security and     |
-|                               |                                                              |                                    | System.                                                                        |
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| Security                      | Security                                                     | Any                                | This channel gathers information related to users and groups creation, login,  |
-|                               |                                                              |                                    | logoff and audit policy modifications.                                         |
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| System                        | System                                                       | Any                                | The System channel collects events associated with kernel and service control. |
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| Sysmon                        | Microsoft-Windows-Sysmon/Operational                         | Microsoft-Windows-Sysmon           | Sysmon monitors system activity as process creation and termination, network   |
-|                               |                                                              |                                    | connection and file changes.                                                   |
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| Windows Defender              | Microsoft-Windows-Windows Defender/Operational               | Microsoft-Windows-Windows Defender | The Windows Defender log file shows information about the scans passed,        |
-|                               |                                                              |                                    | malware detection and actions taken against them.                              |
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| McAfee                        | Application                                                  | McLogEvent                         | This source shows McAfee scan results, virus detection and actions taken       |
-|                               |                                                              |                                    | against them.                                                                  |
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| EventLog                      | System                                                       | Eventlog                           | This source retrieves information about audit and Windows logs.                |
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| Microsoft Security            | System                                                       | Microsoft Antimalware              | This software gives information about real-time protection for the system,     |
-| Essentials                    |                                                              |                                    | malware-detection scans and antivirus settings.                                |
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
-| Remote Access                 | File Replication Service                                     | Any                                | Other channels (they are grouped in a generic Windows rule file).              |
-+-------------------------------+--------------------------------------------------------------+                                    |                                                                                |
-| Terminal Services             | Service                                                      |                                    |                                                                                |
-|                               | Microsoft-Windows-TerminalServices-RemoteConnectionManager   |                                    |                                                                                |
-+-------------------------------+--------------------------------------------------------------+------------------------------------+--------------------------------------------------------------------------------+
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Source                        | Channel location                                             | Description                                                                    |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Application                   | Application                                                  | This log retrieves every event related to system applications management and   |
+|                               |                                                              | is one of the main Windows administrative channels along with Security and     |
+|                               |                                                              | System.                                                                        |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Security                      | Security                                                     | This channel gathers information related to users and groups creation, login,  |
+|                               |                                                              | logoff and audit policy modifications.                                         |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| System                        | System                                                       | The System channel collects events associated with kernel and service control. |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Sysmon                        | Microsoft-Windows-Sysmon/Operational                         | Sysmon monitors system activity as process creation and termination, network   |
+|                               |                                                              | connection and file changes.                                                   |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Windows Defender              | Microsoft-Windows-Windows Defender/Operational               | The Windows Defender log file shows information about the scans passed,        |
+|                               |                                                              | malware detection and actions taken against them.                              |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| McAfee                        | McLogEvent                                                   | This source shows McAfee scan results, virus detection and actions taken       |
+|                               |                                                              | against them.                                                                  |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| EventLog                      | Microsoft-Windows-Eventlog                                   | This source retrieves information about audit and Windows logs.                |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Microsoft Security            | Microsoft Antimalware                                        | This software gives information about real-time protection for the system,     |
+| Essentials                    |                                                              | malware-detection scans and antivirus settings.                                |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
+| Remote Access                 | File Replication Service                                     | Other channels (they are grouped in a generic Windows rule file).              |
++-------------------------------+--------------------------------------------------------------+                                                                                |
+| Terminal Services             | Service                                                      |                                                                                |
+|                               | Microsoft-Windows-TerminalServices-RemoteConnectionManager   |                                                                                |
++-------------------------------+--------------------------------------------------------------+--------------------------------------------------------------------------------+
 
-When monitoring a channel, events from different providers can be gathered. At the ruleset this is taken into account to monitor logs from McAfee, Eventlog or Security Essentials.
 
 Windows ruleset redesign
 ^^^^^^^^^^^^^^^^^^^^^^^^

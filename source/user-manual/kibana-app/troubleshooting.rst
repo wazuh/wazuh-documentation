@@ -29,7 +29,7 @@ Elasticsearch needs a specific template to store Wazuh alerts, otherwise visuali
 
 .. code-block:: console
 
-  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/wazuh-elastic6-template-alerts.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
+  # curl https://raw.githubusercontent.com/wazuh/wazuh/3.9/extensions/elasticsearch/7.x/wazuh-template.json | curl -X PUT "http://localhost:9200/_template/wazuh" -H 'Content-Type: application/json' -d @-
 
   {"acknowledged":true}
 
@@ -72,15 +72,7 @@ The first step is to check if there are alerts in Elasticsearch.
 
 If you don't see any Wazuh related index, it means you have no alerts stored in Elasticsearch.
 
-a) If you are using a **single-host** architecture, check if Logstash is reading the ``alerts.json`` file:
-
-.. code-block:: console
-
-  # lsof /var/ossec/logs/alerts/alerts.json
-
-There should be two processes reading the ``alerts.json`` file: ``ossec-analysisd`` and ``java``.
-
-b) If you are using a **distributed** architecture, check if Filebeat is reading the ``alerts.json`` file:
+Check if Filebeat is reading the ``alerts.json`` file:
 
 .. code-block:: console
 
@@ -133,7 +125,7 @@ This change is not critical and **won't cause any data loss** on Elasticsearch. 
 However, if you want to fix this problem for the affected indices, there are different options that you can try in order to correct them:
 
 .. warning::
-  The following methods require stopping the Logstash service before proceeding. After finishing, you can restart it again.
+  The following methods require stopping the Filebeat service before proceeding. After finishing, you can restart it again.
 
 - **Reindex indices:** The most basic form of reindexation consists of copying the documents from one index to another. In this case, we use this procedure to create a new index using the updated template, so we can then remove the old one, and finally, reindex the new index into the previous one.
 
@@ -160,10 +152,9 @@ All the technologies we are using have their own logs files, you can check them 
 
   # cat /var/log/elasticsearch/elasticsearch.log | grep -i -E "error|warn"
   # cat /var/log/filebeat/filebeat | grep -i -E "error|warn"
-  # cat /var/log/logstash/logstash-plain.log | grep -i -E "error|warn"
 
 .. note::
-  The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_, `Logstash <https://www.elastic.co/guide/en/logstash/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
+  The Elastic Stack uses the ``/var/log`` folder to store logs by default. This setting can be customized following the documentation for `Elasticsearch <https://www.elastic.co/guide/en/elasticsearch/reference/current/logging.html>`_ or `Filebeat <https://www.elastic.co/guide/en/beats/filebeat/current/configuration-logging.html>`_.
 
 .. warning::
   By default, Kibana doesn't store logs on a file. It can be configured with the ``logging.dest`` setting in the ``kibana.yml`` configuration file. Check the `Kibana documentation <https://www.elastic.co/guide/en/kibana/current/settings.html>`_ for more details.
