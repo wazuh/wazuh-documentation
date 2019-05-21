@@ -87,7 +87,7 @@ Available documentation
 
    getting-started/toc
    installation-guide/toc
-   user-manual/index
+   user-manual/toc
    development/index
    docker/index
    deployment

@@ -30,4 +30,4 @@ Agent status
 Removed agent
 -------------
 
-The life cycle comes to an end when the agent is removed from the manager. This can be done through the :doc:`Wazuh API<./remove-agents/restful-api-remove>`, :doc:`command line<./remove-agents/remove>`, or Authd (if the force option is enabled).
+The life cycle comes to an end when the agent is removed from the manager. This can be done through the :ref:`Wazuh API<restful-api-remove>`, :ref:`command line<remove>`, or Authd (if the force option is enabled).
