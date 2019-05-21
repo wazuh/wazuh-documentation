@@ -2,8 +2,8 @@
 
 .. _wazuh_agent_linux_rpm_5:
 
-Install Wazuh agent on CentOS/RHEL/Oracle Linux 5
-=================================================
+CentOS/RHEL/Oracle Linux 5
+==========================
 
 The RPM package is suitable for CentOS/RHEL/Oracle Linux 5. For other RPM-based OS (CentOS/RHEL/Oracle Linux 6 or higher , Fedora, Suse, OpenSUSE), please check the list: :doc:`Install Wazuh Agent on Linux <wazuh_agent_linux>`. 
 
