@@ -9,10 +9,10 @@ wodle name="vulnerability-detector"
 
 .. topic:: XML section name
 
-	.. code-block:: xml
+  .. code-block:: xml
 
-		<wodle name="vulnerability-detector">
-		</wodle>
+    <wodle name="vulnerability-detector">
+    </wodle>
 
 Configuration options of the Vulnerability detector wodle.
 
@@ -69,22 +69,22 @@ run_on_start
 
 Runs updates and detections immediately when service is started.
 
-+--------------------+---------+
-| **Default value**  | yes     |
-+--------------------+---------+
-| **Allowed values** | yes, no |
-+--------------------+---------+
++----------------------+-----------+
+| **Default value**    | yes       |
++----------------------+-----------+
+| **Allowed values**   | yes, no   |
++----------------------+-----------+
 
 ignore_time
 ^^^^^^^^^^^^
 
 Time during which vulnerabilities that have already been alerted will be ignored.
 
-+--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Default value**  | 6 hours                                                                                                                                                                   |
-+--------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| **Allowed values** | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).                                         |
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Default value**    | 6 hours                                                                                                                            |
++----------------------+------------------------------------------------------------------------------------------------------------------------------------+
+| **Allowed values**   | A positive number that should contain a suffix character indicating a time unit: s (seconds), m (minutes), h (hours) or d (days).  |
++----------------------+------------------------------------------------------------------------------------------------------------------------------------+
 
 provider
 ^^^^^^^^
