@@ -173,7 +173,7 @@ Selects in which rule decoding category the rule should be included: ids, syslog
 field
 ^^^^^
 
-Any ``sregex`` to be compared to a field extracted by the decoder.
+Any ``OS_Regex`` to be compared to a field extracted by the decoder.
 
 +----------+-----------------------------------------------------------+
 | **name** | Specifies the name of the field extracted by the decoder. |
@@ -560,7 +560,7 @@ Example:
   As an example to this last options, check this rule:
 
     .. code-block:: xml
-      
+
       <rule id=100005 level="0">
         <match> Could not open /home </match>
         <same_user />
@@ -607,7 +607,7 @@ Since Wazuh version 3.3 it is possible to include any decoded field (static or d
 Example:
 
   .. code-block:: xml
-  
+
     <rule id="100005" level="8">
       <match>illegal user|invalid user</match>
       <description>sshd: Attempt to login using a non-existent user from IP $(attempt_ip)</description>
