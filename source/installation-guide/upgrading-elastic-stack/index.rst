@@ -12,7 +12,7 @@ In addition to Elastic Stack components, you will also find the instructions to 
 
 .. note::
 
-    Upgrading directly to 7.x from 6.6 or earlier requires a `full cluster restart <https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-upgrade.html>`_.
+    Upgrading directly to 7.x from 6.6 or earlier requires a `full cluster restart <https://www.elastic.co/guide/en/elasticsearch/reference/current/restart-upgrade.html>`_
 
 +----------------------------------------------------------+----------------------------------------------------+
 | Type                                                     | Description                                        |

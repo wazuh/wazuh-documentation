@@ -5,9 +5,8 @@
 Upgrading Elastic Stack from 6.7 to 7.x
 =======================================
 
-With Elastic 7, we changed the architecture of our integration. Logstash is now an optional component, the new configuration for Filebeat sends
-the events directly to Elasticsearch, however, you can still keep Logstash installed if your use case needs it. In addition, Elasticsearch 7 has its own
-Java within the package so unless you decide to use Logstash, feel free to remove Java as a required component for Wazuh and Elasticsearch.
+Coming new in version Elastic 7.x, there is an architecture change introduced in Wazuh Stack. Logstash is no longer required, Filebeat will send the events directly to Elasticsearch server. In addition, Elasticsearch 7 has Java embedded, so unless you decide to use Logstash, Java is not longer required.
+
 
 Prepare the Elastic Stack
 -------------------------
@@ -21,7 +20,7 @@ Prepare the Elastic Stack
 
 2. Add the new repository for Elastic Stack 7.x:
 
-  * For CentOS/RHEL/Fedora:
+  * CentOS/RHEL/Fedora:
 
     .. code-block:: console
 
@@ -37,7 +36,7 @@ Prepare the Elastic Stack
       type=rpm-md
       EOF
   
-  * For Debian/Ubuntu:
+  * Debian/Ubuntu:
 
     .. code-block:: console
 
@@ -74,25 +73,25 @@ Upgrade Elasticsearch
 
 4. Upgrade the node you shut down.
 
-  * For CentOS/RHEL/Fedora:
+  * CentOS/RHEL/Fedora:
 
     .. code-block:: console
       
       # yum install elasticsearch-7.1.0
 
-  * For Debian/Ubuntu:
+  * Debian/Ubuntu:
 
     .. code-block:: console
 
       # apt-get install elasticsearch=7.1.0
       # systemctl restart elasticsearch
 
-5. Put in the following into your elasticsearch.yml of your master node.
+5. Starting in Elasticsearch 7.0, master nodes require a configuration setting set with the list of cluster master nodes. Add following setting in the Elasticsearch master node configuration (``elasticsearch.yml``).
 
   .. code-block:: yaml
 
     cluster.initial_master_nodes:
-      - node_name_or_ip
+      - master_node_name_or_ip_address
 
 6. Restart the service.
 
@@ -127,16 +126,14 @@ Upgrade Elasticsearch
 
 10. Repeat it for every Elasticsearch node.
 
-Important change for all events
--------------------------------
+Field migration: From @timestamp to timestamp
+----------------------------------------------
 
-Typically, our integration with the Elastic Stack uses the field *@timestamp* as the reference field for our time-based indices. Since Elastic 7, 
-we've moved that field to *timestamp* because *@timestamp* is now a reserved field in the Elastic Stack. 
+In previous Elastic search versions, the Elastic documents were indexed using the field *@timestamp* as the reference field for time-based indices. Starting in Elastic 7.x, the field has became a reserved field and is no longer manipulable. Wazuh time-based indices now make use of field *timestamp* instead.
 
-Due to this change, old indices need that field to stay visible in the Discover and the Wazuh app.
+Due to this change, previous alerts won't be visible in Wazuh indices, an update must be perform to all previous indices in order to complete the upgrade.
 
-Here is an example of how to add the missing field for the index *wazuh-alerts-3.x-2019.05.16*. Keep in mind that even today's index will have 
-a mixing of events (6.x and 7.x events) so take care of today's index too.
+Here is an example of how to add the missing field for the index *wazuh-alerts-3.x-2019.05.16*. 
 
 .. code-block:: bash
 
@@ -155,6 +152,8 @@ a mixing of events (6.x and 7.x events) so take care of today's index too.
   }
   '
 
+The above query must be run for all previous indices, modify the date parameter (2019.05.16) in the request according to your indices name.
+
 - More information about `update by query <https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-update-by-query.html>`_ in Elasticsearch.
 
 Upgrade Filebeat
@@ -162,13 +161,13 @@ Upgrade Filebeat
 
 1. Upgrade Filebeat.
 
-  * For CentOS/RHEL/Fedora:
+  * CentOS/RHEL/Fedora:
 
     .. code-block:: console
 
       # yum install filebeat-7.1.0
   
-  * For Debian/Ubuntu:
+  * Debian/Ubuntu:
 
     .. code-block:: console
 
@@ -189,12 +188,12 @@ Upgrade Filebeat
     # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
-4. Edit the file ``/etc/filebeat/filebeat.yml`` and add the list of Elasticsearch nodes to connect to. For example:
+4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
   .. code-block:: yaml
 
     output.elasticsearch:
-      hosts: ['http://10.0.0.2:9200', 'http://10.0.0.3:9200']
+      hosts: ['http://10.0.0.2:9200']
       indices:
         - index: 'wazuh-alerts-3.x-%{+yyyy.MM.dd}'
 
@@ -208,7 +207,7 @@ Upgrade Filebeat
 Upgrade Kibana
 --------------
 
-1. Replace ``elasticsearch.url: "address:9200"`` with ``elasticsearch.hosts: ["address:9200"]`` in */etc/kibana/kibana.yml*.
+1. Modify Kibana configuration file ``/etc/kibana/kibana.yml`` and replace ``elasticsearch.url: "address:9200"`` by ``elasticsearch.hosts: ["address:9200"]``.
 2. Remove the Wazuh app.
 
   .. code-block:: console

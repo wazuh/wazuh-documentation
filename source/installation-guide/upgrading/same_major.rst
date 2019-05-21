@@ -7,37 +7,21 @@ Upgrade from the same major version
 
 Use these instructions if you are upgrading your Wazuh installation within the same major version. For example, from 3.8.2 to 3.9.1.
 
-Upgrade the Wazuh manager
--------------------------
+Upgrade the Wazuh manager and Wazuh API
+---------------------------------------
 
-a) Upgrade the Wazuh server on CentOS/RHEL/Fedora:
-
-.. code-block:: console
-
-    # yum upgrade wazuh-manager
-
-b) Upgrade the Wazuh server on Debian/Ubuntu:
+a) Upgrade on CentOS/RHEL/Fedora:
 
 .. code-block:: console
 
-    # apt-get update 
-    # apt-get install wazuh-manager
+    # yum upgrade wazuh-manager wazuh-api
 
-Upgrade the Wazuh API
----------------------
-
-a) Upgrade the Wazuh API on CentOS/RHEL/Fedora:
-
-.. code-block:: console
-
-    # yum upgrade wazuh-api
-
-b) Upgrade the Wazuh API on Debian/Ubuntu:
+b) Upgrade on Debian/Ubuntu:
 
 .. code-block:: console
 
     # apt-get update 
-    # apt-get install wazuh-api
+    # apt-get install wazuh-manager wazuh-api
 
 
 Upgrade the Wazuh agent
