@@ -37,13 +37,13 @@ A list of the avaiable configurations to query on *Manager* is shown bellow:
 - Monitor
 - Remoted
 - Wodles
-  - OpenScap
-  - CISCAT
-  - Syscollector
-  - Vulnerability Detector
-  - Osquery
-  - Azure
-  - AWS
+    - OpenScap
+    - CISCAT
+    - Syscollector
+    - Vulnerability Detector
+    - Osquery
+    - Azure
+    - AWS
 
 A list of the avaiable configurations to query on *Agent* is shown bellow:
 
@@ -55,11 +55,11 @@ A list of the avaiable configurations to query on *Agent* is shown bellow:
 - Mail
 - Monitor
 - Wodles
-  - OpenScap
-  - CISCAT
-  - Syscollector
-  - Osquery
-  - AWS
+    - OpenScap
+    - CISCAT
+    - Syscollector
+    - Osquery
+    - AWS
 
 By clicking on the *Log collection* configuration, the active configuration is shown:
 

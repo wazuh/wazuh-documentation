@@ -5,11 +5,9 @@
 Ruleset XML syntax
 ==================
 
-.. topic:: Sections
+.. toctree::
+   :maxdepth: 1
 
-    .. toctree::
-       :maxdepth: 1
-
-       decoders
-       rules
-       regex
+   decoders
+   rules
+   regex

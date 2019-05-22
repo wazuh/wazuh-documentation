@@ -5,6 +5,10 @@
 Setting up the app
 ==================
 
+The Wazuh app for Kibana lets you visualize and analyze Wazuh alerts stored in Elasticsearch. You can obtain statistics per agent, search alerts and filter using different visualizations. It integrates with the Wazuh API to retrieve information about manager and agents configuration, logs, ruleset, groups and much more.
+
+To install the app, you can follow our Elastic Stack installation guides (for :ref:`RPM <install_kibana_app_rpm>` or :ref:`Debian <install_kibana_app_deb>` systems).
+
 Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kibana:
 
 1. Open a web browser and go to the Kibana's IP address on port 5601 (default Kibana port). Then, from the left menu, click on the Wazuh app icon.
