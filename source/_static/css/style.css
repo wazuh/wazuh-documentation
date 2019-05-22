@@ -414,7 +414,8 @@ footer a:focus .fa {
 }
 
 .toctree-wrapper > ul,
-ul.simple {
+ul.simple,
+main ol > li > ul {
   list-style: url('../img/list-arrow.png');
   list-style-position: outside;
   font-size: 1rem;
@@ -567,6 +568,16 @@ main li.toctree-l1 ul {
   list-style: circle;
   color: #00a9e5;
   padding-left: 1.3em;
+}
+
+main .simple > li > dl > dd > ul > li:before {
+    content: '\f10c ';
+    display: inline-block;
+    font: normal normal normal 8px/1em FontAwesome;
+    bottom: 0.2rem;
+    position: relative;
+    width: 14px;
+    color: #00a9e5;
 }
 
 main li.toctree-l1 a {
