@@ -928,7 +928,7 @@ Returns the list of agents in a group.
 	            ],
 	            "status": "Active",
 	            "dateAdd": "2019-04-26 07:02:30",
-	            "version": "Wazuh v3.9.0",
+	            "version": "Wazuh v3.9.1",
 	            "ip": "10.0.2.15",
 	            "manager": "master",
 	            "mergedSum": "c6309ff81a74781f6b55b68129a76738",
@@ -1688,7 +1688,7 @@ Returns a list with the available agents.
 	            },
 	            "status": "Active",
 	            "dateAdd": "2019-04-26 06:53:55",
-	            "version": "Wazuh v3.9.0",
+	            "version": "Wazuh v3.9.1",
 	            "ip": "127.0.0.1",
 	            "manager": "master",
 	            "node_name": "node01",
@@ -1725,7 +1725,7 @@ Returns a list with the available agents.
 	            ],
 	            "status": "Active",
 	            "dateAdd": "2019-04-26 07:02:30",
-	            "version": "Wazuh v3.9.0",
+	            "version": "Wazuh v3.9.1",
 	            "ip": "10.0.2.15",
 	            "manager": "master",
 	            "mergedSum": "c6309ff81a74781f6b55b68129a76738",
@@ -1785,7 +1785,7 @@ Returns various information from an agent.
 	      },
 	      "status": "Active",
 	      "dateAdd": "2019-04-26 06:53:55",
-	      "version": "Wazuh v3.9.0",
+	      "version": "Wazuh v3.9.1",
 	      "ip": "127.0.0.1",
 	      "manager": "master",
 	      "node_name": "node01",
@@ -2889,7 +2889,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "path": "/var/ossec",
-	      "version": "v3.9.0",
+	      "version": "v3.9.1",
 	      "compilation_date": "Fri Apr 26 07:05:33 UTC 2019",
 	      "type": "manager",
 	      "max_agents": "14000",
@@ -2936,7 +2936,7 @@ Show cluster health
 	            "info": {
 	               "name": "node02",
 	               "type": "worker",
-	               "version": "3.9.0",
+	               "version": "3.9.1",
 	               "ip": "172.29.0.101",
 	               "n_active_agents": 0
 	            },
@@ -2971,7 +2971,7 @@ Show cluster health
 	            "info": {
 	               "name": "node01",
 	               "type": "master",
-	               "version": "3.9.0",
+	               "version": "3.9.1",
 	               "ip": "172.29.0.100",
 	               "n_active_agents": 2
 	            }
@@ -3316,7 +3316,7 @@ Returns the node info
 	   "data": {
 	      "name": "node01",
 	      "type": "master",
-	      "version": "3.9.0",
+	      "version": "3.9.1",
 	      "ip": "172.29.0.100"
 	   }
 	}
@@ -3366,13 +3366,13 @@ Returns the nodes info
 	         {
 	            "name": "node01",
 	            "type": "master",
-	            "version": "3.9.0",
+	            "version": "3.9.1",
 	            "ip": "172.29.0.100"
 	         },
 	         {
 	            "name": "node02",
 	            "type": "worker",
-	            "version": "3.9.0",
+	            "version": "3.9.1",
 	            "ip": "172.29.0.101"
 	         }
 	      ]
@@ -5399,7 +5399,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "path": "/var/ossec",
-	      "version": "v3.9.0",
+	      "version": "v3.9.1",
 	      "compilation_date": "Fri Apr 26 07:05:33 UTC 2019",
 	      "type": "manager",
 	      "max_agents": "14000",

@@ -24,7 +24,7 @@ Installing Wazuh manager
 
       # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
 
-  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
+  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.1, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
 
   To install the build dependencies of CPython, follow these steps:
 
