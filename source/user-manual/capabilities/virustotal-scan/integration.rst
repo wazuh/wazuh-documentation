@@ -5,6 +5,10 @@
 How it works
 ============
 
+.. versionadded:: 3.0.0
+
+Wazuh can scan monitored files for malicious content in monitored files. This solution is possible through an integration with VirusTotal, which is a powerful platform that aggregates multiple antivirus products along with an online scanning engine. Combining this tool with our FIM engine provides a simple means of scanning the files that are monitored to inspect them for malicious content.
+
 This integration utilizes the VirusTotal API to detect malicious content within the files monitored by **File Integrity Monitoring**. This integration functions as described below:
 
 1. FIM looks for any file addition, change or deletion on the monitored folders. This module stores the hash of this files and triggers alerts when any changes are made.

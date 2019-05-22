@@ -76,7 +76,7 @@ With the CIS-CAT wodle assessments can be scheduled to run periodically, sending
 
 Currently, this module is focused only on Linux systems, however, this will also be available for Windows systems in future versions.
 
-You will find further information about this new module in the :doc:`CIS-CAT integration<../user-manual/capabilities/policy-monitoring/ciscat/ciscat>` section.
+You will find further information about this new module in the :doc:`CIS-CAT integration<../user-manual/capabilities/policy-monitoring/ciscat>` section.
 
 New "Command" Wazuh module
 --------------------------

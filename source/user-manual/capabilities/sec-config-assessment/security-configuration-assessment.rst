@@ -1,7 +1,24 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-Security Configuration Assessment
-=================================
+About Security Configuration Assessment
+=======================================
+
+.. versionadded:: 3.9.0
+
+There exist multiple integrations in Wazuh which perform configuration assessment scans (see :ref:`Policy monitoring section <manual_policy_monitoring>`) such as the OpenScap integration.
+However, many reasons have led us to create a new Wazuh plugin to support Security Configuration Assessment natively. Here we can see a brief summary of these reasons:
+
+- The OpenSCAP integration is only available on Linux hosts, not Windows agents.
+- The CIS-CAT tool is proprietary software which requires an external license for its use.
+- The *Rootcheck* module has limitations like its dependency of the *Syscheck* daemon and the outdated policies used as feed.
+
+Since Wazuh v3.9.0, a new module called SCA has been created to avoid that inconveniences and provide the user with the best possible experience when performing scans about hardening and configuration policies.
+
+This new module includes many improvements you can find out with more details in the next sections. More highlighted ones are the following:
+
+- The last state of each scanned check of every policy is stored in the manager and can be consulted by a new SCA tab in the Wazuh App.
+- To avoid alert flooding and repeated alerts in each scan. Now, only state changes and new checks are alerted, being those states updated in the manager database.
+- Current policies used by *Rootcheck* have been enriched and updated to a new YAML format. CIS policies are based in the latest CIS benchmarks available.
 
 This section attempts to introduce how this module can help us to securize our systems.
 
@@ -16,8 +33,8 @@ The configuration assessment scope
 One of the most important points to avoid hosts to be compromised is to securing them by reducing their surface of vulnerabilities. That process is commonly known
 as hardening, and the configuration assessment is the most effective way to detect how to handle that hardening in our systems.
 
-It consists on carrying out scans where policy files are used as template to discover the exposures or misconfiguration of the monitored host. To be more specific, 
-changing default passwords, the removal of unnecessary software, unnecessary usernames or logins, and the disabling or removal of unnecessary services, for example. 
+It consists on carrying out scans where policy files are used as template to discover the exposures or misconfiguration of the monitored host. To be more specific,
+changing default passwords, the removal of unnecessary software, unnecessary usernames or logins, and the disabling or removal of unnecessary services, for example.
 The target of those policies can be an Operating System such as Debian or Windows, or a particular software like the SSH server.
 
 
@@ -110,10 +127,10 @@ The following screenshot of the *SCA* tab shows the overviewed of scanned polici
 Available policies
 ------------------
 
-For this SCA module, available policies are described following the YAML format, as this standard focus on human readability, 
+For this SCA module, available policies are described following the YAML format, as this standard focus on human readability,
 allowing the user to quickly understand and write their own policy files or extend the existing ones.
 
-Most of available policies are based on CIS benchmarks, enriched with valuable information for every check. 
+Most of available policies are based on CIS benchmarks, enriched with valuable information for every check.
 
 Available policies list
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -470,7 +487,7 @@ Examples will help us to understand this logic much better:
 
 There are defined two logical operators used to determine the accumulated result of a check, needed when more than one term is defined (terms are separated by ``&&`` inside a rule).
 
-- IN (included): This operator means that the sum of the terms should be matched in a line of the read output. 
+- IN (included): This operator means that the sum of the terms should be matched in a line of the read output.
 - NIN (not included): The opposite operator, it means the whole rule mustn't be found in the output.
 
 **Use cases**

@@ -67,7 +67,7 @@ Scheduling options
 | `time`_              | A time of the day *[hh:mm]* |
 +----------------------+-----------------------------+
 
-In the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat/ciscat>` section are shown some cases of using these options.
+In the :doc:`CIS-CAT integration <../../capabilities/policy-monitoring/ciscat>` section are shown some cases of using these options.
 
 Main options
 ------------

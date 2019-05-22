@@ -6,6 +6,8 @@ How it works
 .. note::
    This guide is based on the official `Audit guide <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/sec-Defining_Audit_Rules_and_Controls.html>`_.
 
+The `Linux Audit system <https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Security_Guide/chap-system_auditing.html>`_ provides a way to track security-relevant information on your machine. Based on preconfigured rules, Audit proves detailed real-time logging about the events that are happening on your system. This information is crucial for mission-critical environments to determine the violator of the security policy and the actions they performed.
+
 Audit uses a set of rules to define what is to be captured in the log files. There are three types of Audit rules that can be specified:
 
 - **Control rules** allow the Audit system's behavior and some of its configuration to be modified.
