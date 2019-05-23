@@ -115,17 +115,17 @@ In this case, all the logs above are alerts, so we will see an instance of the l
 
 Kibana shows the full information about the alert:
 
-.. thumbnail:: ../images/pci/policy_monitoring_1.png
+.. thumbnail:: ../../images/pci/policy_monitoring_1.png
     :title: Alert visualization on Kibana Discover
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/pci/policy_monitoring_2.png
+.. thumbnail:: ../../images/pci/policy_monitoring_2.png
     :title: Wazuh PCI DSS dashboard showing PCI DSS 2. alerts
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/pci/p_monitoring_pci.png
+.. thumbnail:: ../../images/pci/p_monitoring_pci.png
     :title: Wazuh App PCI DSS section showing PCI DSS 2. alerts
     :align: center
     :width: 100%

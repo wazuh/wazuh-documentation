@@ -1,9 +1,9 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _gdpr:
+.. _gdpr_introduction:
 
-Using Wazuh for GDPR
-====================
+Introduction
+============
 
 .. meta::
   :description: Learn about the GDPR compliance and how Wazuh helps you to implement it.
@@ -14,8 +14,6 @@ To this end, it seeks to enhance the privacy of such data and to reform the way 
 
 * Wazuh for GDPR White Paper `(PDF) <https://wazuh.com/resources/Wazuh_GDPR_White_Paper.pdf>`_
 
-Introduction
-------------
 
 Wazuh takes advantage of its file integrity monitoring and access control capabilities coupled with a new tagging in Wazuh ruleset. Rules in compliance with a specific GDPR technical requirement have a tag describing it.
 
@@ -23,14 +21,8 @@ The syntax used for rule tagging is **gdpr_** followed by the chapter, article a
 
 GDPR formal requirements content are out of the technical scope and therefore are not considered in this document.
 
-Contents
---------
-
 The technical requirements that Wazuh supports can be found in the following chapters:
 
-.. toctree::
-    :maxdepth: 1
-
-    gdpr-II
-    gdpr-III
-    gdpr-IV
+- :ref:`gdpr_II`
+- :ref:`gdpr_III`
+- :ref:`gdpr_IV`

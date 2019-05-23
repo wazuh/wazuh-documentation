@@ -91,8 +91,7 @@ Available documentation
    development/index
    containers/index
    deployment/index
-   pci-dss/index
-   gdpr/index
+   compliance/index
    monitoring
    installing-splunk/index
    migrating-from-ossec/index

@@ -91,7 +91,7 @@ Wazuh can help to control the security in the processing of data using Syscheck 
 	Old inode: 19712
 	New inode: 19715
 
-.. thumbnail:: ../images/gdpr/process.png
+.. thumbnail:: ../../images/gdpr/process.png
     :title: Alert visualization at Kibana Discover
     :align: center
     :width: 100%
@@ -138,12 +138,12 @@ We can also see the event stored in our log file ``archives.log``, as long as th
 
 2018 May 16 16:03:55 manager->rootcheck System Audit: SSH Hardening - 9: Wrong Maximum number of authentication attempts {PCI_DSS: 2.2.4}. File: /etc/ssh/sshd_config. Reference: 9 .
 
-.. thumbnail:: ../images/gdpr/audit_1.png
+.. thumbnail:: ../../images/gdpr/audit_1.png
     :title: Alert visualization at Kibana Discover
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/gdpr/audit_2.png
+.. thumbnail:: ../../images/gdpr/audit_2.png
     :title: Filtering alerts by GDPR on Wazuh App
     :align: center
     :width: 100%
@@ -182,12 +182,12 @@ Wazuh will generate an alert like this.
 	Src IP: 192.168.1.64
 	May 16 16:34:44 agente sshd[10485]: Failed password for invalid user Evil_User from 192.168.1.64 port 49806 ssh2
 
-.. thumbnail:: ../images/gdpr/access_1.png
+.. thumbnail:: ../../images/gdpr/access_1.png
     :title: Alert visualization at Kibana Discover
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/gdpr/access_2.png
+.. thumbnail:: ../../images/gdpr/access_2.png
     :title: Filtering alerts by GDPR on Wazuh App
     :align: center
     :width: 100%
@@ -323,12 +323,12 @@ Wazuh will generate an alert like this.
 	May 16 16:44:56 agente sshd[10545]: Failed password for invalid user Evil_User from 192.168.1.64 port 49890 ssh2
 
 
-.. thumbnail:: ../images/gdpr/brute_1.png
+.. thumbnail:: ../../images/gdpr/brute_1.png
     :title: Alert visualization at Kibana Discover
     :align: center
     :width: 100%
 
-.. thumbnail:: ../images/gdpr/brute_2.png
+.. thumbnail:: ../../images/gdpr/brute_2.png
     :title: Filtering alerts by GDPR on Wazuh App
     :align: center
     :width: 100%
