@@ -1,13 +1,12 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _deployment:
+.. _containers:
 
-Deployment
+Containers
 ==========
 
 .. toctree::
    :maxdepth: 2
 
+   docker/index
    deploying-with-kubernetes/index
-   deploying-with-puppet/index
-   deploying-with-ansible/index

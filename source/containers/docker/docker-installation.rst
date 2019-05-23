@@ -5,7 +5,13 @@
 Docker installation
 ===================
 
-The first thing you need to do is install Docker and Docker compose if you don't have them already.
+`Docker <https://www.docker.com/>`_ is an open-source project that automates the deployment of different applications inside software containers. Docker containers wrap up a piece of software in a complete filesystem that contains everything it needs to run like: code, system tools, libraries, etc. This process guarantees that the system will always run the same, regardless the environment it is running.
+
+We have created our own fork based on `"deviantony" dockerfiles <https://github.com/deviantony/docker-elk>`_ and `"xetus-oss" dockerfiles <https://github.com/xetus-oss/docker-ossec-server>`_. Thank you, Anthony Lapenna, for your contribution to the community. If you want to contribute to the Wazuh fork, please go to our `Docker repository <https://github.com/wazuh/wazuh-docker>`_.
+
+The images we created are in the `Docker hub <https://hub.docker.com>`_. You can install Wazuh with a single-host architecture using a set of Docker images that contains `Wazuh Manager <https://github.com/wazuh/wazuh>`_, `Wazuh API <https://github.com/wazuh/wazuh-api>`_, `Filebeat <https://www.elastic.co/products/beats/filebeat>`_, `Logstash <https://registry.hub.docker.com/_/logstash/>`_, `Elasticsearch <https://registry.hub.docker.com/_/elasticsearch/>`_, `Kibana <https://registry.hub.docker.com/_/kibana/>`_ and `Nginx <https://hub.docker.com/_/nginx/>`_.
+
+This section will show you the process of installing and configuring the Wazuh deployment on Docker. The first thing you need to do is install Docker and Docker compose if you don't have them already.
 
 - `Docker engine`_
 - `Docker compose`_
@@ -52,13 +58,13 @@ Docker Compose 1.6 or newer is required. Follow these steps to install it:
 
   # chmod +x /usr/local/bin/docker-compose
 
-.. note:: 
+.. note::
   If the command *docker-compose* fails after installation, check your path. You can also create a symbolic link to /usr/bin or any other directory in your path.
-  
+
 For example:
 
   .. code-block:: bash
-    
+
     sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 3. Test the installation to ensure everything went properly:

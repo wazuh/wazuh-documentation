@@ -5,6 +5,12 @@
 Kubernetes configuration
 ========================
 
+Kubernetes is a portable, extensible open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. It has a large, rapidly growing ecosystem. Kubernetes services, support, and tools are widely available.
+
+You can read more about Kubernetes services on its `official site <https://kubernetes.io/>`_.
+
+By following this guide, you will learn how to build an environment composed of a Wazuh cluster integrated with the Elastic stack using Kubernetes, offering high availability and securing all the data.
+
 - `Pre-requisites`_
 - `Overview`_
 - `Verifying the deployment`_
@@ -139,7 +145,7 @@ Deploy
 ------
 
 1. Deploy Kubernetes
-    
+
     Follow the `Official guide <https://kubernetes.io/docs/tutorials/kubernetes-basics/create-cluster/cluster-intro/>`_ to deploy a Kubernetes Cluster.
     This repository focuses on `AWS <https://aws.amazon.com/es/>`_ but it should be easy to adapt it to another Cloud provider. In case you are using AWS, we recommend `EKS <https://docs.aws.amazon.com/en_us/eks/latest/userguide/getting-started.html>`_.
 
@@ -159,7 +165,7 @@ Deploy
     Clone this repository to deploy the necessary services and pods.
 
     .. code-block:: console
-            
+
         $ git clone https://github.com/wazuh/wazuh-kubernetes.git
         $ cd wazuh-kubernetes
 
@@ -181,9 +187,9 @@ Deploy
             $ kubectl apply -f elastic_stack/elasticsearch/elasticsearch-sts.yaml
 
 3.3. Deploy Kibana and Nginx
-    
+
     In case you need to provide a domain name, update the *domainName* annotation value in the ``nginx-svc.yaml`` file before deploying that service. You should also set a valid AWS ACM certificate ARN in the ``nginx-svc.yaml`` for the `service.beta.kubernetes.io/aws-load-balancer-ssl-cert` annotation. That certificate should match with the `domainName`.
-        
+
         .. code-block:: console
 
             $ kubectl apply -f elastic_stack/kibana/kibana-svc.yaml
@@ -295,10 +301,10 @@ Agents
 
 Wazuh agents are designed to monitor hosts. To start using them:
 
-1. :doc:`Install the agent <../installation-guide/installing-wazuh-agent/index>`.
+1. :doc:`Install the agent <../../installation-guide/installing-wazuh-agent/index>`.
 
 
-2. Now, register the agent using the :doc:`registration service <../user-manual/registering/index>`.
+2. Now, register the agent using the :doc:`registration service <../../user-manual/registering/index>`.
 
 
 3. Modify the file ``/var/ossec/etc/ossec.conf``, changing the "transport protocol" to *TCP* and changing the ``MANAGER_IP`` for the external IP of the service pointing to port 1514 or for the DNS provided by *AWS Route 53* if you are using it.

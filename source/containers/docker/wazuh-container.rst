@@ -6,17 +6,16 @@ Wazuh Docker deployment
 =======================
 
 - `Requirements`_
+    - `Container memory`_
+    - `Increase max_map_count on your host (Linux)`_
+    - `Increase max_map_count on your host (Windows)`_
+    - `SELinux`_
+    - `Docker for OSX`_
 - `Usage`_
 - `Exposed ports`_
 
 Requirements
 ------------
-
-- `Container memory`_
-- `Increase max_map_count on your host (Linux)`_
-- `Increase max_map_count on your host (Windows)`_
-- `SELinux`_
-- `Docker for OSX`_
 
 Container memory
 ^^^^^^^^^^^^^^^^

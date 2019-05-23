@@ -89,8 +89,8 @@ Available documentation
    installation-guide/index
    user-manual/index
    development/index
-   docker/index
-   deployment
+   containers/index
+   deployment/index
    pci-dss/index
    gdpr/index
    monitoring
