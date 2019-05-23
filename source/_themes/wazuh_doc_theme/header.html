@@ -65,15 +65,14 @@
             <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../installation-guide/', 1 ) }}">Installation Guide</a></li>
             <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../getting-started/', 1 ) }}">Getting started</a></li>
             <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../user-manual/', 1 ) }}">User manual</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="#">Wazuh Cloud</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="#">Deployment</a></li>
-            <li class="menu-item nav-item"><a class="nav-link" href="#">Tools</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../amazon/', 1 ) }}">AWS</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../containers/', 1 ) }}">Containers</a></li>
+            <li class="menu-item nav-item"><a class="nav-link" href="{{ pathto(master_doc + '/../release-notes/', 1 ) }}">Release notes</a></li>
           </ul>
         </div>
         <div class="version-zone d-none d-lg-flex">
           <span class="release-selector-wrapper">
             {% if theme_display_version %}
-            <span class="version-label d-none d-sm-inline">Wazuh version</span>
             {% include "versions.html" %}
             {% endif %}
           </span>

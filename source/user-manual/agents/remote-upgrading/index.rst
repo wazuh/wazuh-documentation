@@ -8,7 +8,6 @@ Remote upgrading
     .. toctree::
         :maxdepth: 2
 
-        overview
         upgrading-agent
         custom-repository
         create-custom-wpk

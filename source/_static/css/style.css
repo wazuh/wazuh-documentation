@@ -39,8 +39,13 @@ table {
 
 th, td {
   padding: 7px;
+  padding-left: 12px;
   border-color: #00a9e5;
   vertical-align: middle;
+}
+
+table tr:nth-child(2n+0){
+  background: #f4f4f4;
 }
 
 th {
@@ -391,21 +396,12 @@ footer a:focus .fa {
   width: 12px;
 }
 
-:-ms-lang(x), _:-webkit-full-screen, .toctree-wrapper > ul, ul.simple {  /* Fix lists margin for Microsoft Edge */
-	margin-left: 0!important;
-	list-style-position: inside!important;
-}
-
-:-ms-lang(x), _:-webkit-full-screen, .toctree-wrapper > ul > li > a {  /* Fix lists margin for Microsoft Edge */
-	margin-left: -0.5rem!important;
-}
-
-:-ms-lang(x), _:-webkit-full-screen, .toctree-wrapper > ul > li > ul {  /* Fix lists margin for Microsoft Edge */
-	padding-left: 2.2rem!important;
-}
-
-#main-content ul * {
-  vertical-align: middle;
+#main-content .toctree-wrapper > ul > li,
+#main-content ul.simple > li  {
+  background-image: url("../img/list-arrow.png");
+  background-position: 0px 0.7rem;
+  background-repeat: no-repeat;
+	padding-left: 0.9rem;
 }
 
 #main-content table a,
@@ -416,10 +412,7 @@ footer a:focus .fa {
 .toctree-wrapper > ul,
 ul.simple,
 main ol > li > ul {
-  list-style: url('../img/list-arrow.png');
-  list-style-position: outside;
-  font-size: 1rem;
-  margin-left: 0.9em;
+    font-size: 1rem;
 }
 
 li.toctree-l1 > a {
@@ -584,7 +577,6 @@ main li.toctree-l1 a {
   padding-top: 1px;
   padding-bottom: 1px;
   display: inline-block;
-  vertical-align: middle;
 }
 
 aside.help {
@@ -2278,7 +2270,7 @@ ul#breadcrumbs a {
 blockquote [class*="highlight-"],
 blockquote ul,
 blockquote blockquote {
-	margin-bottom: 0.5em;
+	margin-bottom: 1em;
 }
 
 table.highlighttable {
@@ -3015,7 +3007,7 @@ div.highlight pre {
 			}
 
 			#main-content {
-        max-width: calc(100% - 320px);
+        max-width: calc(100% - 360px);
 			}
 
       #main-content.order-0 {
@@ -3108,7 +3100,7 @@ div.highlight pre {
       nav.full-toctree-nav {
         min-height: 100vh;
 				z-index: 3;
-        width: 320px;
+        width: 360px;
 				position: static;
         transition: width 0.3s;
       }
@@ -3127,10 +3119,14 @@ div.highlight pre {
 				position: -webkit-sticky;
 				position: sticky;
 				top: 50px;
-				overflow: auto;
+				overflow: hidden;
 				max-height: calc(100vh - 55px);
 				height: 100%;
         flex-direction: column;
+      }
+
+      .side-scroll:hover{
+        overflow: auto;
       }
 
       .no-latest-docs .side-scroll {
