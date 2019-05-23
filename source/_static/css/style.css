@@ -2855,6 +2855,10 @@ div.highlight pre {
         padding: 10px 0
       }
 
+      .side-scroll:hover #globaltoc{
+        padding-right: 0;
+      }
+
       .index #globaltoc > ul {
         border-bottom: 1px solid transparent;
       }
@@ -2868,6 +2872,7 @@ div.highlight pre {
 				font-size: 1.2rem;
 				padding: 15px 0;
 				border-top: 1px solid rgba(0, 169, 229, 0.2);
+        margin-right: 15px;
 			}
 
       #main-navbar {
@@ -2966,6 +2971,13 @@ div.highlight pre {
         margin: 0 auto;
       }
 
+      .side-scroll:hover .search_main{
+        padding-right: 0;
+      }
+      .side-scroll:hover aside.help .title{
+        margin-right: 0;
+      }
+
       .version-zone {
         padding-right: 0;
       }
@@ -2976,6 +2988,7 @@ div.highlight pre {
 
       aside.help {
         flex: 0 0 auto;
+        padding-right: 0;
       }
 
       .central-page-area {
