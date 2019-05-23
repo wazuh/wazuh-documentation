@@ -136,11 +136,6 @@
               {% endif %}
               {% endblock %}
             </div>
-            {% if pagename != 'index' %}
-            <div class="edit-repo-wrapper">
-              {% include "editrepo.html" %}
-            </div>
-            {% endif %}
             <aside class="help col-12">
               <div class="title">
                 Getting help
@@ -155,6 +150,9 @@
 
         <div id="main-content" class="col-12 order-1">
           {% if pagename != 'index' %}
+          <div class="edit-repo-wrapper">
+            {% include "editrepo.html" %}
+          </div>
           <div class="breadcrumbs-wrapper">
             {% include "breadcrumbs.html" %}
           </div>

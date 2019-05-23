@@ -2211,6 +2211,7 @@ ul#breadcrumbs {
   flex-wrap: wrap;
   margin-bottom: 0;
   padding-top: 1em;
+  max-width: 100%;
 }
 
 ul#breadcrumbs .fa {
@@ -2268,8 +2269,19 @@ div.highlight pre {
 @media (min-width:576px){
 
   .edit-repo-wrapper {
-    padding: 0 15px;
-    width: 100%;
+    position: absolute;
+    right: 0;
+    background: rgba(0,169,229,.7);
+    border-radius: 0 0 0 10px;
+    color: #ffffff;
+    z-index: 99999;
+  }
+  .edit-repo-wrapper a{
+    color: #ffffff;
+  }
+
+  ul#breadcrumbs {
+    max-width: 80%;
   }
 
 	#accordion-capabilities .collapse:not(.show) {
