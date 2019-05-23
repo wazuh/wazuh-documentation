@@ -2874,6 +2874,20 @@ div.highlight pre {
 				border-top: 1px solid rgba(0, 169, 229, 0.2);
         margin-right: 15px;
 			}
+      aside.help .btn-help{
+        border-radius: 5px;
+        font-size: 1rem;
+        font-family: 'Montserrat', sans-serif;
+        text-decoration: none;
+        font-weight: 500;
+        display: inline-block;
+        text-align: center;
+        margin: 0 0 20px 20px;
+        padding: 10px 15px;
+        border: none;
+        background: #00a9e5;
+        color: #ffffff;
+      }
 
       #main-navbar {
         padding: 4px 0;
