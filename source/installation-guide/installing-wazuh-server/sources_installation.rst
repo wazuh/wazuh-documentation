@@ -24,7 +24,7 @@ Installing Wazuh manager
 
       # apt-get install python gcc make libc6-dev curl policycoreutils automake autoconf libtool
 
-  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.0, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
+  Install the following dependencies **only if the installation directory is not** ``/var/ossec``. Since v3.9.1, ``make deps`` will download a pre-compiled version of CPython, built to be installed in ``/var/ossec``. Otherwise, it will download a modified version of CPython sources and it will be necessary to compile it.
 
   To install the build dependencies of CPython, follow these steps:
 
@@ -57,7 +57,7 @@ Installing Wazuh manager
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.0.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.1.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will display a wizard to guide you through the installation process using the Wazuh sources:
 
@@ -144,7 +144,7 @@ Installing Wazuh API
 
   .. code-block:: console
 
-      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.0/install_api.sh && bash ./install_api.sh download
+      # curl -s -o install_api.sh https://raw.githubusercontent.com/wazuh/wazuh-api/v3.9.1/install_api.sh && bash ./install_api.sh download
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>` for the Wazuh manager and API.
 
@@ -152,9 +152,6 @@ Installing Filebeat
 -------------------
 
 While Filebeat can be installed from sources (`see this doc <https://www.elastic.co/guide/en/beats/devguide/current/beats-contributing.html>`_), the process is more complex than you may like and it is beyond the scope of Wazuh documentation. We recommend installing Filebeat via repository package, otherwise, you can install it from a binary tarball that should work for any Linux distro. See more `here <https://www.elastic.co/downloads/beats/filebeat>`_.
-
-.. warning::
-    In a single-host architecture (where Wazuh server and Elastic Stack are installed in the same system), the installation of Filebeat is not needed since Logstash will be able to read the event/alert data directly from the local filesystem without the assistance of a forwarder.
 
 Next steps
 ----------

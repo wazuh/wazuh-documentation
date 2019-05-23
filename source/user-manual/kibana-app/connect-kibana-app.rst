@@ -9,49 +9,10 @@ The Wazuh app for Kibana lets you visualize and analyze Wazuh alerts stored in E
 
 To install the app, you can follow our Elastic Stack installation guides (for :ref:`RPM <install_kibana_app_rpm>` or :ref:`Debian <install_kibana_app_deb>` systems).
 
-Follow these steps to register the Wazuh RESTful API with the Wazuh app in Kibana:
+Follow these steps to register the Wazuh API with the Wazuh app in Kibana:
 
-1. Open a web browser and go to the Kibana's IP address on port 5601 (default Kibana port). Then, from the left menu, click on the Wazuh app icon.
-
-  .. image:: ../../images/kibana-app/connect-api/starting-app.png
-    :align: center
-    :width: 100%
-
-2. Open the *Settings* page with the gear icon on the top right corner (the first time you open the app, you’ll be automatically redirected to Settings). Click on the ``Add new API`` button to open the form.
-
-  .. image:: ../../images/kibana-app/connect-api/add-api-button.png
-    :align: center
-    :width: 100%
-
-3. To protect your Wazuh API, before filling out the fields, open a terminal on your Wazuh manager and, using the ``root`` user, replace the default credentials with your desired username where ``myUsername`` is shown below:
-
-  .. code-block:: console
-
-    # cd /var/ossec/api/configuration/auth
-    # node htpasswd -c user myUserName
-
-  Do not forget to restart the API to apply the changes with these commands:
-
-  .. code-block:: console
-
-    # systemctl restart wazuh-api
-    or
-    # service wazuh-api restart
-
-4. Fill in the *Username* and *Password* fields with the credentials you created in the previous step. Enter ``http://MANAGER_IP`` for the *URL* field where ``MANAGER_IP`` is the real IP address of the Wazuh manager and enter "55000" for the *Port* field.
-
-  .. image:: ../../images/kibana-app/connect-api/add-api-form.png
-    :align: center
-    :width: 100%
-
-.. note::
-
-    If you have followed :ref:`kibana_ssl`, the URL must be set as ``https://localhost``.
-
-6. Click on the ``Save API`` button to store it. Now you can navigate to the other app sections, like *Overview*, and start visualizing your alerts.
-
-  .. image:: ../../images/kibana-app/connect-api/overview-general.png
-    :align: center
-    :width: 100%
+1. Open Kibana in your desired web browser. Then, from the left menu, click on the Wazuh app icon.
+2. Open the *Settings* page with the gear icon on the top right corner (the first time you open the app, you’ll be automatically redirected to Settings). Fill in the required fields in the form and click *Save*.
+3. Now, the app is ready to be used.
 
 If you want to learn more about the app capabilities, go to the :ref:`kibana_features` section to see useful information about it.

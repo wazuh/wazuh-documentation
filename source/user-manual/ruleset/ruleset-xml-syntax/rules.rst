@@ -142,9 +142,9 @@ Example:
 
   .. code-block:: xml
 
-    <rule>
+    <rule id="100001" level="3">
       <if_sid>10050</if_sid>
-      <regex>^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$</regex>
+      <regex>^(\d+.\d+.\d+.\d+)$</regex>
       <description>Matches any valid IP</description>
     </rule>
 
@@ -172,7 +172,7 @@ Selects in which rule decoding category the rule should be included: ids, syslog
 field
 ^^^^^
 
-Any ``sregex`` to be compared to a field extracted by the decoder.
+Any ``OS_Regex`` to be compared to a field extracted by the decoder.
 
 +----------+-----------------------------------------------------------+
 | **name** | Specifies the name of the field extracted by the decoder. |
@@ -606,14 +606,12 @@ Since Wazuh version 3.3 it is possible to include any decoded field (static or d
 Example:
 
   .. code-block:: xml
-  
+
     <rule id="100005" level="8">
       <match>illegal user|invalid user</match>
       <description>sshd: Attempt to login using a non-existent user from IP $(attempt_ip)</description>
       <options>no_log</options>
     </rule>
-
-
 
 
 list

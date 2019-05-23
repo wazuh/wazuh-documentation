@@ -12,4 +12,4 @@ RUN . .venv/bin/activate \
 
 EXPOSE 8000
 
-CMD ["sphinx-autobuild", "--host", "0.0.0.0", "--port", "8000", "/home/python/docs", "/home/python/build/html"]
+CMD ["sphinx-autobuild", "--host", "0.0.0.0", "--ignore","*.tmp","--port", "8000", "/home/python/docs", "/home/python/build/html"]

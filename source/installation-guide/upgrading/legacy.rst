@@ -7,6 +7,10 @@ Upgrading from a legacy version
 
 These instructions guide you through the process of upgrading your Wazuh installation from a version prior to 2.0.
 
+      1. `Upgrading Wazuh server`_
+      2. `Upgrading Elastic Stack server`_
+      3. `Upgrading Wazuh agents`_
+
 Upgrading Wazuh server
 ----------------------
 
@@ -243,8 +247,7 @@ Follow these steps to update your ``Wazuh v1.x`` agents to ``Wazuh v2.x``.
 
 a) On DEB or RPM based **Linux systems**, you can easily rely on the packages manager to upgrade your agents. The process differs very little from installing a new agent. More information is available in our documentation at:
 
-  - :ref:`Install Wazuh agent with RPM packages <wazuh_agent_rpm>`
-  - :ref:`Install Wazuh agent with Deb packages <wazuh_agent_deb>`
+  - :ref:`Install Wazuh agent on Linux <wazuh_agent_linux>`
 
   You can check your agent version by running the following command:
 

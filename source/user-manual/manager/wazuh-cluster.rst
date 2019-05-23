@@ -218,22 +218,27 @@ Here is a short configuration guide of a **load balancer** using Nginx:
 
       .. code-block:: xml
 
-        cluster-stream {
-          upstream mycluster {
-            server <INSTANCE_IP>:1516;
-            server <INSTANCE_IP>:1516;
-            server <INSTANCE_IP>:1516;
-            ...
-          }
-
-          server {
-            listen 1516;
-
-            location / {
-              proxy_pass mycluster;
+        stream {
+            upstream cluster {
+                hash $remote_addr consistent;
+                server <WAZUH-MASTER-IP>:1514;
+                server <WAZUH-WORKER1-IP>:1514;
+                server <WAZUH-WORKER2-IP>:1514;
             }
-          }
+            upstream master {
+                server <WAZUH-MASTER-IP>:1515;
+            }
+            server {
+                listen 1514;
+                proxy_pass cluster;
+            }
+            server {
+                listen 1515;
+                proxy_pass master;
+            }
         }
+
+    - You can find more details in nginx guide for configuring `TCP and UDP load balancer. <https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/>`_
 
     3. Restart nginx configuration files:
 
@@ -320,9 +325,9 @@ For example, the following snippet shows the connected nodes in the cluster:
 
     # /var/ossec/bin/cluster_control -l
     NAME      TYPE    VERSION  ADDRESS
-    worker-1  worker  3.9.0    172.17.0.101
-    worker-2  worker  3.9.0    172.17.0.102
-    master    master  3.9.0    172.17.0.100
+    worker-1  worker  3.9.1    172.17.0.101
+    worker-2  worker  3.9.1    172.17.0.102
+    master    master  3.9.1    172.17.0.100
 
 This information can also be obtained using the Restful API:
 
@@ -336,19 +341,19 @@ This information can also be obtained using the Restful API:
           "items": [
              {
                 "ip": "192.168.56.103",
-                "version": "3.9.0",
+                "version": "3.9.1",
                 "type": "worker",
                 "name": "node02"
              },
              {
                 "ip": "192.168.56.105",
-                "version": "3.9.0",
+                "version": "3.9.1",
                 "type": "worker",
                 "name": "node03"
              },
              {
                 "ip": "192.168.56.101",
-                "version": "3.9.0",
+                "version": "3.9.1",
                 "type": "master",
                 "name": "node01"
              }

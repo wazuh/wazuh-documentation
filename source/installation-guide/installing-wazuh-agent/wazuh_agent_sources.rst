@@ -33,7 +33,7 @@ Installing Linux agent
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.0.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.1.tar.gz | tar zx
 
 3. Run the ``install.sh`` script. This will run a wizard that will guide you through the installation process using the Wazuh sources:
 
@@ -48,9 +48,6 @@ Installing Linux agent
 .. warning::
   When choosing a different path than the default, if the directory already exist the installer will ask if delete the directory or if installing Wazuh inside.
   
-.. warning::
-  Be extremely careful not to select a critical installation directory.
-
 .. note:: Since Wazuh 3.5 it is necessary to have internet connection when following this step.
 
 .. note:: You can also run an :ref:`unattended installation <unattended-installation>`.
@@ -61,7 +58,7 @@ Installing Linux agent
 
     1- What kind of installation do you want (manager, agent, local, hybrid or help)? agent
 
-.. note:: Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the :doc:`user manual<../../user-manual/registering/index>`.
+Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
 Installing Windows agent
 ------------------------
@@ -88,7 +85,7 @@ This section describes how to download and build the Wazuh HIDS Windows agent fr
 
   .. code-block:: console
 
-    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.0.tar.gz | tar zx
+    # curl -Ls https://github.com/wazuh/wazuh/archive/v3.9.1.tar.gz | tar zx
     # cd wazuh-*/src
 
 4. Compile the agent by running the ``make`` command:
@@ -109,10 +106,10 @@ The following output will appear at the end of the building process:
 
   .. code-block:: console
 
-    # zip -r wazuh.zip ../../wazuh-3.9.0
+    # zip -r wazuh.zip ../../wazuh-3.9.1
 
-6. Once in Windows, run the ``wazuh-3.9.0/src/win32/wazuh-installer-build-msi.bat`` file to start the installer generation. If you do not want to sign the installer, you will have to comment or delete the signtool line.
+6. Once in Windows, run the ``wazuh-3.9.1/src/win32/wazuh-installer-build-msi.bat`` file to start the installer generation. If you do not want to sign the installer, you will have to comment or delete the signtool line.
 
 .. note:: The installer is now ready.  It can be launched with a normal or unattended installation. For more information about this process, please visit our :doc:`installation section for Windows<./wazuh_agent_windows>`.
 
-.. note:: Once the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the user manual.
+.. note:: Once the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
