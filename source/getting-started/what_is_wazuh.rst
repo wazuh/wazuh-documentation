@@ -14,11 +14,11 @@ Wazuh is a security detection, visibility, and compliance open source project. I
    :align: center
    :width: 100%
 
-.. topic:: OSSEC HIDS
+.. topic:: WAZUH HIDS
 
- `OSSEC HIDS <http://ossec.github.io>`_ is a Host-based Intrusion Detection System (HIDS) used for security detection, visibility, and compliance monitoring. It's based on a multi-platform agent that forwards system data (e.g log messages, file hashes, and detected anomalies) to a central manager, where it is further analyzed and processed, resulting in security alerts. Agents convey event data to the central manager for analysis via a secure and authenticated channel.
+ Wazuh is a Host-based Intrusion Detection System (HIDS) used for security detection, visibility, and compliance monitoring. It's based on a multi-platform agent that forwards system data (e.g log messages, file hashes, and detected anomalies) to a central manager, where it is further analyzed and processed, resulting in security alerts. Agents convey event data to the central manager for analysis via a secure and authenticated channel.
 
- Additionally, OSSEC HIDS provide a centralized syslog server and an agentless configuration monitoring system that provide security insight into the events and changes on agentless devices such as firewalls, switches, routers, access points, network appliances, etc.
+ Additionally, Wazuh provide a centralized syslog server and an agentless configuration monitoring system that provide security insight into the events and changes on agentless devices such as firewalls, switches, routers, access points, network appliances, etc.
 
 .. topic:: OpenSCAP
 
@@ -28,4 +28,4 @@ Wazuh is a security detection, visibility, and compliance open source project. I
 
 .. topic:: Elastic Stack
 
- `Elastic Stack <https://www.elastic.co>`_ is a software suite (Filebeat, Elasticsearch, Kibana) used to collect, parse, index, store, search, and present log data. It provides a web front-end that gives a high-level dashboard view of events that allows for advanced analytics and data mining deep into your store of event data.
+ `Elastic Stack <https://www.elastic.co>`_ is a software suite (Filebeat, Logstash, Elasticsearch, Kibana) used to collect, parse, index, store, search, and present log data. It provides a web front-end that gives a high-level dashboard view of events that allows for advanced analytics and data mining deep into your store of event data.

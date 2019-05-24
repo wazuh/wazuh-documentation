@@ -133,17 +133,13 @@
               {% endif %}
               {% endblock %}
             </div>
-            {% if pagename != 'index' %}
-            <div class="edit-repo-wrapper">
-              {% include "editrepo.html" %}
-            </div>
-            {% endif %}
             <aside class="help col-12">
               <div class="title">
                 Getting help
               </div>
-              <p>In our Google group, you can ask questions and participate in discussions. Share your doubts and thoughts with the community. <a href="mailto:wazuh+subscribe@googlegroups.com">Join our mailing list</a>.</p>
-              <p>Another way to connect with us. <a title="Join us on Slack" href="https://wazuh.com/community/join-us-on-slack/">Join our #community Slack channel</a> to ask your questions and we will do our best to solve your doubts.</p>
+              <p>Questions? Let the Wazuh team help you:</p>
+              <a class="btn-help" title="Join our mailing list" href="mailto:wazuh+subscribe@googlegroups.com">Join our mailing list</a>
+              <a class="btn-help" title="Join us on Slack" href="https://wazuh.com/community/join-us-on-slack/">Join our Slack channel</a>
             </aside>
           </div>
 
@@ -151,6 +147,9 @@
 
         <div id="main-content" class="col-12 order-1">
           {% if pagename != 'index' %}
+          <div class="edit-repo-wrapper">
+            {% include "editrepo.html" %}
+          </div>
           <div class="breadcrumbs-wrapper">
             {% include "breadcrumbs.html" %}
           </div>
