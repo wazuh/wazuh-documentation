@@ -8,7 +8,7 @@ Enrich events with IP Geolocation
 Making use of Elasticsearch ingest pipelines, it is possible to add the geolocation information to the Wazuh alerts.
 
 
-1. Create an ingest pipeline in Elasticsearch. Locate in the Elasitcsearch server and run the following request:
+1. Create an ingest pipeline in Elasticsearch. Locate in the Elasticsearch server and run the following request:
 
     .. code-block:: bash
 
