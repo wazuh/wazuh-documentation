@@ -241,6 +241,19 @@ Choose the encryption of the messages that the agent sends to the manager.
 | **Allowed values** | blowfish, aes       |
 +--------------------+---------------------+
 
+report_ip
+^^^^^^^^^
+
+.. versionadded:: 3.10.0
+
+Toggle on and off the module of the agent that extract the default IP and send it in the keep alive.
+
++--------------------+---------------------+
+| **Default value**  | yes                 |
++--------------------+---------------------+
+| **Allowed values** | yes, no             |
++--------------------+---------------------+
+
 Sample configuration
 --------------------
 
