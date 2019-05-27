@@ -2,8 +2,8 @@
 
 .. _wazuh_server_deb:
 
-Install Wazuh server with DEB packages
-======================================
+Debian and Ubuntu
+=================
 
 For Debian/Ubuntu platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 

@@ -33,7 +33,7 @@ Installing Wazuh agent
 
     .. code-block:: console
    
-      # zypper wazuh-agent
+      # zypper install wazuh-agent
          
     Now that the agent is installed, the next step is to register and configure it to communicate with the manager. For more information about this process, please visit the document: :doc:`user manual<../../user-manual/registering/index>`.
 
@@ -43,7 +43,7 @@ Installing Wazuh agent
 
     .. code-block:: console
 
-      # WAZUH_MANAGER_IP="10.0.0.2" zypper wazuh-agent 
+      # WAZUH_MANAGER_IP="10.0.0.2" zypper install wazuh-agent 
 
     See the following document for additional automated deployment options: :doc:`deployment variables <deployment_variables>`.      
 

@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm:
+.. _wazuh_server_rpm_oracle:
 
-Install Wazuh server with RPM packages
-======================================
+Oracle Linux
+============
 
-For CentOS/RHEL/Fedora platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Oracle Linux 6 and 7, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -15,9 +15,6 @@ Adding the Wazuh repository
 The first step to setting up Wazuh is to add the Wazuh repository to your server. If you want to download the wazuh-manager package directly, or check the compatible versions, click :ref:`here <packages>`.
 
 To set up the repository, run this command:
-
-CentOS 6/RHEL 6, CentOS 7/RHEL 7, Fedora 22 or greater, Amazon Linux and Oracle Linux
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
   .. code-block:: console
   
@@ -32,22 +29,6 @@ CentOS 6/RHEL 6, CentOS 7/RHEL 7, Fedora 22 or greater, Amazon Linux and Oracle 
     protect=1
     EOF
 
-
-SUSE 12, OpenSUSE 42, OpenSUSE Leap and OpenSUSE Tumbleweed
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-  .. code-block:: console
-
-    # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    # cat > /etc/zypp/repos.d/wazuh.repo <<\EOF
-    [wazuh_repo]
-    gpgcheck=1
-    gpgkey=https://packages.wazuh.com/key/GPG-KEY-WAZUH
-    enabled=1
-    name=Wazuh repository
-    baseurl=https://packages.wazuh.com/3.x/yum/
-    protect=1
-    EOF
 
 Installing the Wazuh Manager
 ----------------------------
@@ -118,11 +99,7 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. note::
-
-  From Fedora v22 to v25, it's required to install ``dkms`` package (``yum install dkms``).
-
-.. _wazuh_server_rpm_filebeat:
+.. _wazuh_server_rpm_oracle_filebeat:
 
 Installing Filebeat
 -------------------
