@@ -376,7 +376,7 @@ footer a:focus .fa {
 }
 
 .footer-column ul {
-  max-width: 165px;
+  width: 180px;
 }
 
 .social-bar .menu-item a:hover,
