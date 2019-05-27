@@ -12,7 +12,7 @@ By default, the communications between the Wazuh Kibana App and the Wazuh API ar
   In order to enable HTTPS, you can generate your own certificate or generate it automatically by using the script ``/var/ossec/api/scripts/configure_api.sh``.
   
   .. note::
-    This script allows you to change the port used by Kibana to communicate with the Wazuh's API. It is used the port 55000 by default.
+    This script allows you to change the port used by the Wazuh API to handle the incoming HTTP requests. The port 55000 is used by default.
 
     **Change the default credentials:**
 
