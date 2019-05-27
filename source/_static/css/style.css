@@ -375,7 +375,15 @@ footer a:focus .fa {
   outline: 1px dotted #ffffff;
 }
 
-.footer-column ul {
+ul, ol, dl {
+	padding-left: 1rem;
+}
+
+.footer-column:not(.white-bullets) ul {
+  max-width: 165px;
+}
+
+.footer-column.white-bullets ul {
   width: 180px;
 }
 
@@ -414,6 +422,10 @@ footer a:focus .fa {
 ul.simple,
 main ol > li > ul {
     font-size: 1rem;
+}
+
+ol.loweralpha {
+  list-style-type: lower-latin;
 }
 
 li.toctree-l1 > a {
@@ -1874,13 +1886,10 @@ blockquote {
   background-color: #fff;
   margin-bottom: 1rem;
   overflow: auto;
-  padding-left: 1em;
 }
-
 
 .admonition.note > p:nth-of-type(2)::before {
     content: 'Note:';
-
 }
 
 .admonition.warning > p:nth-of-type(2)::before {
@@ -1904,8 +1913,9 @@ blockquote {
   width: 50px;
   display: inline-flex;
   text-align: -webkit-auto;
+	padding-top: 1.3rem;
+  align-items: flex-start;
   justify-content: center;
-  align-items: center;
 	font: normal normal normal 2em/.5 FontAwesome;
 	color: #ffffff;
 }
@@ -2896,23 +2906,28 @@ div.highlight pre {
 
 @media (min-width: 992px){
 
-  #navbar-globaltoc.show, #navbar-globaltoc.collapsing {
-    right: auto;
-    left: auto;
-  }
+			.admonition::before  {
+				padding-top: 0;
+				align-items: center;
+			}
 
-  #navbar-globaltoc.show {
-  	bottom: auto;
-    height: auto;
-    position: -webkit-sticky;
-    position: sticky;
-  }
+			#navbar-globaltoc.show, #navbar-globaltoc.collapsing {
+				right: auto;
+				left: auto;
+			}
 
-  .scrolled #navbar-globaltoc.show, .scrolled #navbar-globaltoc.collapsing {
-    top: 50px;
-    position: -webkit-sticky;
-    position: sticky;
-  }
+			#navbar-globaltoc.show {
+				bottom: auto;
+				height: auto;
+				position: -webkit-sticky;
+				position: sticky;
+			}
+
+			.scrolled #navbar-globaltoc.show, .scrolled #navbar-globaltoc.collapsing {
+				top: 50px;
+				position: -webkit-sticky;
+				position: sticky;
+			}
 
       .header > .container-fluid {
         padding-top: 8px;
@@ -3010,6 +3025,11 @@ div.highlight pre {
 
 			#search-lg .search_main .searchform {
 				padding: 0;
+			}
+
+
+			blockquote {
+				padding-left: 1rem;
 			}
 
       #carouselWazuhDocu{
