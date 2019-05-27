@@ -150,7 +150,7 @@ Here is an example of how run the request using the index *wazuh-alerts-3.x-2019
         }
       }
     },
-    "script": "ctx._source.timestamp = ctx._source['@timestamp']"
+    "script": "ctx._source.timestamp = ctx._source[\"@timestamp\"]"
   }
   '
 
