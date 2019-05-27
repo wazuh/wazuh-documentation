@@ -120,13 +120,6 @@ $(function(){
 
   currentToc();
 
-  // Closes the dropdown globaltoc when one of its elements has been clicked/tapped in small devices
-  $('.globaltoc a').on('click', function(){
-    if( $(window).outerWidth() < breakpoint ){
-      $('.btn-close').click()
-    }
-  });
-
   /* Toggle collapse */
   $('.globaltoc a').on('click', function(e){
 		// Normal link: avoid toggle if current menu item doesn't have submenu
