@@ -83,7 +83,8 @@ th {
     background-color: #fff;
     position: -webkit-sticky;
     position: sticky;
-    height: 40px;
+		height: 80px;
+    padding: 10px 15px;
     top: 0;
     z-index: 1000000;
     display: -ms-flexbox;
@@ -241,7 +242,7 @@ header .menuweb-bar .menu-item a {
 }
 
 .no-latest-docs .menu-sub {
-  top: 40px;
+  top: 80px;
 }
 
 #search-lg {
@@ -440,6 +441,19 @@ li.toctree-l4 > a {
   height: calc(100vh - 44px);
   top: 88px;
   transition: top .3s;
+}
+
+.no-latest-docs #navbar-globaltoc.show,
+.no-latest-docs #navbar-globaltoc.collapsing {
+	top: 170px;
+	height: calc(100vh - 170px);
+
+}
+
+.scrolled .no-latest-docs #navbar-globaltoc.show,
+.scrolled .no-latest-docs #navbar-globaltoc.collapsing {
+	top: 127px;
+	height: calc(100vh - 127px);
 }
 
 .scrolled #navbar-globaltoc.show, .scrolled #navbar-globaltoc.collapsing {
@@ -2290,13 +2304,33 @@ div.highlight pre {
 
 @media (min-width:576px){
 
+	.no-latest-notice {
+		height: 60px;
+	}
+
+	.no-latest-docs .menu-sub {
+    top: 60px;
+	}
+
+	.no-latest-docs #navbar-globaltoc.show,
+	.no-latest-docs #navbar-globaltoc.collapsing {
+		top: 150px;
+		height: calc(100vh - 150px);
+	}
+
+	.scrolled .no-latest-docs #navbar-globaltoc.show,
+	.scrolled .no-latest-docs #navbar-globaltoc.collapsing {
+		top: 107px;
+		height: calc(100vh - 107px);
+	}
+
   .edit-repo-wrapper {
     position: absolute;
     right: 0;
     background: rgba(0,169,229,.7);
     border-radius: 0 0 0 10px;
     color: #ffffff;
-    z-index: 99999;
+    z-index: 1;
   }
   .edit-repo-wrapper a{
     color: #ffffff;
@@ -2378,6 +2412,27 @@ div.highlight pre {
 }
 
 @media (min-width: 768px){
+
+			.no-latest-notice {
+				height: 40px;
+			}
+
+			.no-latest-docs .menu-sub {
+				top: 40px;
+			}
+
+			.no-latest-docs #navbar-globaltoc.show,
+			.no-latest-docs #navbar-globaltoc.collapsing {
+				top: 130px;
+				height: calc(100vh - 130px);
+			}
+
+			.scrolled .no-latest-docs #navbar-globaltoc.show,
+			.scrolled .no-latest-docs #navbar-globaltoc.collapsing {
+				top: 86px;
+				height: calc(100vh - 86px);
+			}
+
       span.long-text-btn {
         display: none;
       }

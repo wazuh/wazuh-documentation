@@ -92,9 +92,9 @@ $(function(){
  });
 
  function checkScroll(){
-   var submenuYpos = $('.menu-sub')[0].offsetTop;
+	 var scrollTop = $(document).scrollTop();
    var headerHeight = Math.round($('.header').height());
-   if (submenuYpos > headerHeight ) {
+   if (scrollTop > headerHeight ) {
      $('body').addClass('scrolled');
    } else {
      $('body').removeClass('scrolled');
