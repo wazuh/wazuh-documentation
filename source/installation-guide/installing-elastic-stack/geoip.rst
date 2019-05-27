@@ -21,13 +21,15 @@ Making use of Elasticsearch ingest pipelines, it is possible to add the geolocat
                         "field" : "@src_ip",
                         "target_field": "GeoLocation",
                         "properties": ["city_name", "country_name", "region_name", "location"],
-                        "ignore_missing": true
+                        "ignore_missing": true,
+                        "ignore_failure" : true
                     }
                 },
                 {
                     "remove": {
                         "field": "@src_ip",
-                        "ignore_missing": true
+                        "ignore_missing": true,
+                        "ignore_failure" : true
                     }
                 }
             ]
