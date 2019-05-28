@@ -139,7 +139,7 @@ Here is an example of how run the request using the index *wazuh-alerts-3.x-2019
 
 .. code-block:: bash
 
-  curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query" -H 'Content-Type: application/json' -d'
+  curl -X POST "localhost:9200/wazuh-alerts-3.x-2019.05.16/wazuh/_update_by_query?wait_for_completion=true" -H 'Content-Type: application/json' -d'
   {
     "query": {
       "bool": {
