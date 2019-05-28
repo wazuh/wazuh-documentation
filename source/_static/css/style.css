@@ -600,8 +600,7 @@ main .simple > li > dl > dd > ul > li:before {
 }
 
 main li.toctree-l1 a {
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding: 1px 0;
   display: inline-block;
 }
 
