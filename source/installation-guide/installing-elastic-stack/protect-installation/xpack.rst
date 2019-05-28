@@ -56,7 +56,7 @@ Configure Elastic Stack to use encrypted connections
 
 This section describes how to secure the communications between the involved components, adding an SSL layer.
 
-1. Create a file named ``instances.yml`` and fill it with the instances you want to secure.
+1. Create the file ``/usr/share/elasticsearch/instances.yml`` and fill it with the instances you want to secure.
 
 .. code-block:: yaml
 
@@ -77,11 +77,11 @@ This section describes how to secure the communications between the involved com
 
     # /usr/share/elasticsearch/bin/elasticsearch-certutil cert ca --pem --in instances.yml --out certs.zip
 
-3. Extract the generated file named ``certs.zip`` from the previous step.
+3. Extract the generated ``/usr/share/elasticsearch/certs.zip`` file from the previous step.
 
 .. code-block:: console
 
-    certs/
+    certs.zip
     |-- ca
     |   |-- ca.crt
     |-- wazuh-manager
