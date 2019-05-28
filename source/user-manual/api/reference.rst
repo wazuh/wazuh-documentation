@@ -712,7 +712,7 @@ Adds a list of agents to the specified group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://localhost:55000/agents/group/dmz?pretty" -k
+	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://127.0.0.1:55000/agents/group/dmz?pretty" -k
 
 **Example Response:**
 ::
