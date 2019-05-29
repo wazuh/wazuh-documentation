@@ -68,9 +68,9 @@ Set up the ``socket`` for logcollector:
 .. code-block:: xml
 
     <socket>
-        <name>fluent_socket</name>
-        <location>/var/run/fluent.sock</location>
-        <mode>udp</mode>
+      <name>fluent_socket</name>
+      <location>/var/run/fluent.sock</location>
+      <mode>udp</mode>
     </socket>
 
 Set up a ``localfile`` to read from:
@@ -78,9 +78,9 @@ Set up a ``localfile`` to read from:
 .. code-block:: xml
 
     <localfile>
-        <log_format>syslog</log_format>
-        <location>/path/to/your/log</location>
-        <target>fluent_socket</target>
+      <log_format>syslog</log_format>
+      <location>/path/to/your/log</location>
+      <target>fluent_socket</target>
     </localfile>
 
 On a terminal, run the following commands as root to start a Fluentd server:
