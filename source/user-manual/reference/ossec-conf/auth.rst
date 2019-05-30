@@ -65,7 +65,7 @@ use_source_ip
 Toggles the use of the client's source IP address or the use of "any" to add an agent.
 
 +--------------------+---------------------+
-| **Default value**  | no                  |
+| **Default value**  | yes                 |
 +--------------------+---------------------+
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
@@ -76,7 +76,7 @@ force_insert
 Toggles whether or not to force the insertion of an agent if there is a duplicate name or IP address. This will remove the old agent with same name or IP address.
 
 +--------------------+---------------------+
-| **Default value**  | no                  |
+| **Default value**  | yes                 |
 +--------------------+---------------------+
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
@@ -101,7 +101,7 @@ purge
 Toggles the deletion of client keys on or off when agents are removed.
 
 +--------------------+---------------------+
-| **Default value**  | no                  |
+| **Default value**  | yes                 |
 +--------------------+---------------------+
 | **Allowed values** | yes, no             |
 +--------------------+---------------------+
