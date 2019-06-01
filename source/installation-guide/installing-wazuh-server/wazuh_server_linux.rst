@@ -11,7 +11,7 @@ The Wazuh Manager can be installed in the most of Linux Distribution. It's possi
 +-------------------------------+----------------------------+-----------------------------------------------------------+
 | Operative system              | Version                    | Installation guide                                        |
 +===============================+============================+===========================================================+
-| CentOS                        | 6 or greater               | :doc:`CentOS 6 <wazuh_server_rpm_centos>`                 |
+| CentOS                        | 6 or greater               | :doc:`CentOS <wazuh_server_rpm_centos>`                   |
 +-------------------------------+----------------------------+-----------------------------------------------------------+
 | Red Hat Enterprise Linux      | 6 or greater               | :doc:`Red Hat Enterprise Linux <wazuh_server_rpm_rhel>`   |
 +-------------------------------+----------------------------+-----------------------------------------------------------+
