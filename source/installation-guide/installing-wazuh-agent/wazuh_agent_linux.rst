@@ -11,27 +11,27 @@ The Wazuh agent can be installed in the most of Linux Distribution. It's possibl
 +-------------------------------+----------------------------+---------------------------------------------------------------------+
 | Operative system              | Version                    | Installation guide                                                  |
 +===============================+============================+=====================================================================+
-| Amazon Linux                  | 1 or newer                 | :doc:`Amazon Linux <wazuh_agent_linux_rpm>`                         |
+| Amazon Linux                  | 1 or greater               | :doc:`Amazon Linux <wazuh_agent_linux_rpm>`                         |
 +-------------------------------+----------------------------+---------------------------------------------------------------------+
-| CentOS                        | 6 or newer                 | :doc:`CentOS 6 or newer <wazuh_agent_linux_rpm>`                    |
+| CentOS                        | 6 or greater               | :doc:`CentOS 6 or greater <wazuh_agent_linux_rpm>`                  |
 +                               +----------------------------+---------------------------------------------------------------------+
 |                               | 5                          | :doc:`CentOS 5 <wazuh_agent_linux_rpm_5>`                           |
 +-------------------------------+----------------------------+---------------------------------------------------------------------+
-| Red Hat Enterprise Linux      | 6 or newer                 | :doc:`Red Hat Enterprise Linux 6 or newer <wazuh_agent_linux_rpm>`  |
+| Red Hat Enterprise Linux      | 6 or greater               | :doc:`Red Hat Enterprise Linux 6 or greater <wazuh_agent_linux_rpm>`|
 +                               +----------------------------+---------------------------------------------------------------------+
 |                               | 5                          | :doc:`Red Hat Enterprise Linux 5 <wazuh_agent_linux_rpm_5>`         |
 +-------------------------------+----------------------------+---------------------------------------------------------------------+
-| Oracle Linux                  | 6 or newer                 | :doc:`Oracle Linux 6 or newer <wazuh_agent_linux_rpm>`              |
+| Oracle Linux                  | 6 or greater               | :doc:`Oracle Linux 6 or greater <wazuh_agent_linux_rpm>`            |
 +                               +----------------------------+---------------------------------------------------------------------+
 |                               | 5                          | :doc:`Oracle Linux 5 <wazuh_agent_linux_rpm_5>`                     |
 +-------------------------------+----------------------------+---------------------------------------------------------------------+
-| Debian                        | 7 or newer                 | :doc:`Debian <wazuh_agent_linux_deb>`                               |
+| Debian                        | 7 or greater               | :doc:`Debian <wazuh_agent_linux_deb>`                               |
 +-------------------------------+----------------------------+---------------------------------------------------------------------+
-| Ubuntu                        | 12.10 or newer             | :doc:`Ubuntu <wazuh_agent_linux_deb>`                               |
+| Ubuntu                        | 12.10 or greater           | :doc:`Ubuntu <wazuh_agent_linux_deb>`                               |
 +-------------------------------+----------------------------+---------------------------------------------------------------------+
-| Fedora                        | 22 or newer                | :doc:`Fedora <wazuh_agent_linux_fedora>`                            |
+| Fedora                        | 22 or greater              | :doc:`Fedora <wazuh_agent_linux_fedora>`                            |
 +-------------------------------+----------------------------+---------------------------------------------------------------------+
-| OpenSUSE                      | 42 or newer                | :doc:`OpenSUSE <wazuh_agent_linux_rpm_suse_12>`                     |
+| OpenSUSE                      | 42 or greater              | :doc:`OpenSUSE <wazuh_agent_linux_rpm_suse_12>`                     |
 +-------------------------------+----------------------------+---------------------------------------------------------------------+
 | SUSE                          | 12                         | :doc:`SUSE 12 <wazuh_agent_linux_rpm_suse_12>`                      |
 +                               +----------------------------+---------------------------------------------------------------------+
