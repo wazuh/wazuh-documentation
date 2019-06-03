@@ -89,6 +89,16 @@ In Docker for OSX, there is a default memory limit of 2GB, so in order to run `d
 Usage
 -----
 
+#. Start the docker service:
+
+  a) For Systemd:
+
+      $ systemctl start docker
+      
+  b) For SysV Init:
+  
+      $ service docker start
+
 #. Get the ``docker-compose.yml`` file to your system:
 
   a) Only the file::
