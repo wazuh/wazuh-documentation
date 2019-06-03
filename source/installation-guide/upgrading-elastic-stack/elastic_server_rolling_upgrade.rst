@@ -2,7 +2,7 @@
 
 .. _elastic_server_rolling_upgrade:
 
-Upgrading Elastic Stack from 6.7 to 7.x
+Upgrading Elastic Stack from 6.8 to 7.x
 =======================================
 
 Coming new in version Elastic 7.x, there is an architecture change introduced in Wazuh Stack. Logstash is no longer required, Filebeat will send the events directly to Elasticsearch server. In addition, Elasticsearch 7 has Java embedded, so unless you decide to use Logstash, Java is not longer required.
