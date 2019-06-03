@@ -91,11 +91,11 @@ Usage
 
 #. Start the docker service:
 
-  a) For Systemd:
+  a) For Systemd::
 
       $ systemctl start docker
       
-  b) For SysV Init:
+  b) For SysV Init::
   
       $ service docker start
 
