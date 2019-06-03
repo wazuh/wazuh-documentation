@@ -89,17 +89,7 @@ In Docker for OSX, there is a default memory limit of 2GB, so in order to run `d
 Usage
 -----
 
-#. Start the docker service:
-
-  a) For Systemd::
-
-      $ systemctl start docker
-      
-  b) For SysV Init::
-  
-      $ service docker start
-
-#. Get the ``docker-compose.yml`` file to your system:
+1. Get the ``docker-compose.yml`` file to your system:
 
   a) Only the file::
 
@@ -109,7 +99,17 @@ Usage
 
       $ git clone https://github.com/wazuh/wazuh-docker.git -b 3.9.0_6.7.1 --single-branch
 
-#. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
+2. Start the docker service:
+
+  a) For Systemd::
+
+      $ systemctl start docker
+      
+  b) For SysV Init::
+  
+      $ service docker start
+
+3. Start Wazuh, Elastic Stack and Nginx using `docker-compose`. From the directory where you have the ``docker-compose.yml`` file:
 
   a) Foreground::
 
