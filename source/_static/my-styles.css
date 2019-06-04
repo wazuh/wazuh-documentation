@@ -244,3 +244,10 @@ div.version:after {
 .rst-content table.docutils td {
     border-left: 1px solid #e1e4e5 !important;
 }
+
+/* Hiding the packages toctree ****************************************/
+
+.wy-menu-vertical .toctree-l1:nth-child(2) .toctree-l2:nth-child(3) .toctree-l3:nth-child(1).current > ul,
+.wy-menu-vertical .toctree-l1:nth-child(2) .toctree-l2:nth-child(3) .toctree-l3:nth-child(1).current > a span.toctree-expand{
+  display: none !important;
+}
