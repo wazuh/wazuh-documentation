@@ -25,3 +25,13 @@ The Wazuh agent for AIX can be downloaded from our :doc:`packages list<../packag
 
     See the following document for additional deployment options: :doc:`deployment variables <deployment_variables>`.   
 
+Uninstall
+---------
+
+To uninstall the agent:
+
+    .. code-block:: console
+
+      # rpm -e wazuh-agent-3.9.1-1.aix.ppc.rpm
+
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete remove action is a user responsibility. It can be done by removing the folder `/var/ossec`. 
