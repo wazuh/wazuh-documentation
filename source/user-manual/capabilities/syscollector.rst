@@ -9,15 +9,15 @@ The Wazuh agents are able to collect interesting system information and store it
 
 - `How it works`_
 - `Available scans`_
-   - `Hardware`_
-   - `Operating System`_
-   - `Network interfaces`_
-   - `Packages`_
-   - `Ports`_
-   - `Processes`_
+    - `Hardware`_
+    - `Operating System`_
+    - `Network interfaces`_
+    - `Packages`_
+    - `Ports`_
+    - `Processes`_
 - `Compatibility matrix`_
 - `Using Syscollector information to trigger alerts`_
-   - `New searchable fields for Kibana`_
+    - `New searchable fields for Kibana`_
 - `Use case: Visualize system inventory in the Wazuh App`_
 
 How it works
@@ -422,7 +422,7 @@ In Elasticsearch the fields will be saved as ``data.type.value``. For example, f
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Operating System** | architecture, name, version, codename, major, minor, build, platform, sysname, release, release_version              | data.os.codename                 |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
-| **Port**             | local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process                         | data.port.inode                  |
+| **Port**             | local_ip, local_port, remote_ip, remote_port, tx_queue, rx_queue, inode, state, pid, process                         | data.port.inode                  | 
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+
 | **Program**          | name, priority, section, size, vendor, install_time, version, architecture, multiarch, source, description, location | data.program.name                |
 +----------------------+----------------------------------------------------------------------------------------------------------------------+----------------------------------+

@@ -17,7 +17,7 @@ Download and install the Wazuh module from Puppet Forge:
     # puppet module install wazuh-wazuh --version 3.9.0
 
   .. code-block:: bash
-
+  
     Notice: Preparing to install into /etc/puppet/modules ...
     Notice: Downloading from https://forgeapi.puppetlabs.com ...
     Notice: Installing -- do not interrupt ...
@@ -33,7 +33,7 @@ Download and install the Wazuh module from Puppet Forge:
       └── stahnma-epel (v1.3.1)
 
 This module installs and configures Wazuh agent and manager.
-
+  
 Install manager via Puppet
 --------------------------
 
@@ -137,11 +137,11 @@ Reference Wazuh puppet
 | :ref:`ossec_scanpaths configuration <reference_ossec_scanpaths>`|                                             |
 +-----------------------------------------------------------------+---------------------------------------------+
 
+.. topic:: Contents
 
  .. toctree::
     :maxdepth: 1
-    :hidden:
-    
+
     reference-wazuh-puppet/ossec-scanpaths
     reference-wazuh-puppet/wazuh-agent-class
     reference-wazuh-puppet/wazuh-server-class

@@ -1765,7 +1765,7 @@ h1, h2, h3, h4, h5, h6,
 #page .topic .topic-title {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  color: #00a9e5;
+  color: #0094ce;
   text-align: left;
   line-height: 1.2;
   display: inline-block;
@@ -1837,7 +1837,7 @@ li {
 
 pre {
   margin-bottom: 0;
-  font-size: 1em;
+  font-size: 0.94rem;
   color: #333333;
 }
 
@@ -2974,7 +2974,6 @@ div.highlight pre {
 				color: #333;
 				font-size: 1.2rem;
 				padding: 15px 0;
-				border-top: 1px solid rgba(0, 169, 229, 0.2);
         margin-right: 15px;
 			}
       aside.help .btn-help{

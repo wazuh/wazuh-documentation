@@ -24,7 +24,6 @@ After the installation, find below optional steps you may find interesting:
 - :ref:`Enrich events with geolocation information <geo_ip>`
 - :ref:`Elasticsearch tuning <elastic_tuning>`
 - :ref:`Transform your data with Logstash <transform_logstash>`
-- :ref:`Protect your data in the Elastic Stack <transform_logstash>`
 
 
 .. note::

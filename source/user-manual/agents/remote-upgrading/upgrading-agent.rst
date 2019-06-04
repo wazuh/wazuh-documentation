@@ -5,15 +5,6 @@
 Upgrading agent
 ===============
 
-.. versionadded:: 3.0.0
-
-With version 3.0.0, agents now have the ability to be upgraded remotely. This upgrade is performed by the manager which sends each registered agent a **WPK** (Wazuh signed package) file
-that contains the files needed to upgrade agent to the new version. This securely and simply applies upgrades across your installation without the need to access each agent individually.
-
-Wazuh provides access to an updated WPK repository for each new release. All available WPK files can be found :doc:`here <./wpk-list>`.
-
-Custom repositories may also be added by following the steps described in :doc:`Adding custom repository <./custom-repository>`.
-
 The following is a description of the upgrade procedure by means of a use case.
 
 Upgrading an agent remotely can be performed at the command line and through the Wazuh API.

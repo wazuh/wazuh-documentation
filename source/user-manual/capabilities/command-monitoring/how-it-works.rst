@@ -3,8 +3,6 @@
 How it works
 ============
 
-There are times when you may want to monitor things that are not in the logs. To address this, Wazuh incorporates the ability to monitor the output of specific commands and treat the output as though it were log file content.
-
 .. thumbnail:: ../../../images/manual/command-monitoring/command-monitoring.png
   :title: Command monitoring
   :align: center

@@ -5,8 +5,6 @@
 Getting started
 =================
 
-This documentation explains how to install, update, and contribute to Wazuh Ruleset. These rules are used by the system to detect attacks, intrusions, software misuse, configuration problems, application errors, malware, rootkits, system anomalies or security policy violations. OSSEC provides an out-of-the-box set of rules that we update and augment, in order to increase Wazuh detection capabilities.
-
 The default number of rules and decoders is limited. For this reason, we centralize, test and maintain decoders and rules submitted by open source contributors. We also create new rules and rootchecks periodically and add them to this repository so they can be used by the user community. Some examples are the new rules for Netscaler and Puppet.
 
 GitHub repository

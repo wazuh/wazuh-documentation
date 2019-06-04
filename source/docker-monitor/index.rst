@@ -2,7 +2,7 @@
 
 .. _docker-monitor-index:
 
-Monitoring Docker
+Using Wazuh to Monitor Docker
 =============================
 
 .. meta::

@@ -16,7 +16,7 @@ It will be necessary to comply with security and data protection policies. There
 
 Wazuh monitors configuration files to ensure they are compliant with your security policies, standards and/or hardening guides. Agents perform periodic scans to detect applications that are known to be vulnerable, unpatched, or insecurely configured.
 
-Policy monitoring is the process of verifying that all systems conform to a set of predefined rules regarding configuration settings and approved application usage. Wazuh uses three components to perform this task: `Rootcheck <https://documentation.wazuh.com/current/user-manual/capabilities/policy-monitoring/rootcheck/how-it-works.html>`_, `OpenSCAP <https://documentation.wazuh.com/current/user-manual/capabilities/policy-monitoring/openscap/index.html>`_ and `CIS-CAT <https://documentation.wazuh.com/current/user-manual/capabilities/policy-monitoring/ciscat.html>`_.
+Policy monitoring is the process of verifying that all systems conform to a set of predefined rules regarding configuration settings and approved application usage. Wazuh uses three components to perform this task: `Rootcheck <https://documentation.wazuh.com/current/user-manual/capabilities/policy-monitoring/rootcheck/how-it-works.html>`_, `OpenSCAP <https://documentation.wazuh.com/current/user-manual/capabilities/policy-monitoring/openscap/index.html>`_ and `CIS-CAT <https://documentation.wazuh.com/current/user-manual/capabilities/policy-monitoring/ciscat/ciscat.html>`_.
 
 Use cases
 ^^^^^^^^^

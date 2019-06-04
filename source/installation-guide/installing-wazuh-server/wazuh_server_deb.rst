@@ -2,8 +2,8 @@
 
 .. _wazuh_server_deb:
 
-Install Wazuh server with DEB packages
-======================================
+Debian and Ubuntu
+=================
 
 For Debian/Ubuntu platforms, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
@@ -20,12 +20,6 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 
     # apt-get update
     # apt-get install curl apt-transport-https lsb-release
-
-  If the ``/usr/bin/python`` file doesn't exist (like in **Ubuntu 16.04 LTS or later**), create a symlink to Python (2.7 or newer) with the following command:
-
-  .. code-block:: console
-
-    # if [ ! -f /usr/bin/python ]; then ln -s /usr/bin/python3 /usr/bin/python; fi
 
 2. Install the GPG key:
 
@@ -148,7 +142,7 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # apt-get install filebeat=7.1.0
+    # apt-get install filebeat=7.1.1
 
 3. Download the Filebeat config file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 

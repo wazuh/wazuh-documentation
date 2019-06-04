@@ -1,21 +1,7 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-About Security Configuration Assessment
-=======================================
-
-.. versionadded:: 3.9.0
-
-There are multiple Wazuh integrations that perform configuration assessment scans (see :ref:`Policy monitoring section <manual_policy_monitoring>`) including OpenSCAP and CIS-CAT and more recently the Security Configuration Assesment (SCA). The SCA was created by the Wazuh development team to overcome limitations that were inherent to the other integrations, to name a few:
-
-- The OpenSCAP integration is only available on Linux hosts, not Windows agents.
-- The CIS-CAT tool is proprietary software which requires an external license for its use.
-- The *Rootcheck* module depends on the *Syscheck* daemon and  its policies feeds are often outdated.
-
-The Security Configuration Assesment (SCA) module aims to provide the user with the best possible experience when performing scans about hardening and configuration policies. Some of its key features include:
-
-- The last state of each scanned check of every policy is stored in the manager and can be consulted by the SCA tab in the Wazuh App.
-- To avoid alert flooding and repeated alerts in each scan. Now, only state changes and new checks are alerted, being those states updated in the manager database.
-- Current policies used by *Rootcheck* have been enriched and updated to a new YAML format. CIS policies are based in the latest CIS benchmarks available.
+Security Configuration Assessment
+=================================
 
 This section attempts to introduce how this module can help us to securize our systems.
 
@@ -112,10 +98,10 @@ The following screenshot of the *SCA* tab shows an overview of scanned policies 
 Available policies
 ------------------
 
-Policies for the SCA module are written using the YAML format, which was chosen due to its focus on human readability,
+Policies for the SCA module are written using the YAML format, which was chosen due to its focus on human readability, 
 which allows the user to quickly understand and write their own policy files or extend the existing ones.
 
-Many of the available default policies are based on CIS benchmarks, enriched with valuable information for every check.
+Many of the available default policies are based on CIS benchmarks, enriched with valuable information for every check. 
 
 Available policies list
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -193,7 +179,7 @@ How to share policy files with agents
 As described in the :doc:`centralized configuration <../../reference/centralized-configuration>` section, the Wazuh manager has the ability to push files and
 configurations to connected agents.
 
-This feature con be used to push policy files to agents in defined groups. By default, every connected agent belongs to the *default* group, so we can use this group as an example.
+This feature con be used to push policy files to agents in defined groups. By default, every connected agent belongs to the *default* group, so we can use this group as an example. 
 
 In order to push a new policy from the manager it should be placed in the directory: ``/var/ossec/etc/shared/default``
 , ensure the policy owner is `ossec` and then add the following block to the ``/var/ossec/etc/shared/default/agent.conf`` file:
@@ -465,7 +451,7 @@ The following examples illustrate this logic:
 
 When more than one term is necessary, two logical operators can be used to determine the accumulated result of a check (terms are separated by ``&&`` inside a rule).
 
-- IN (included): This operator means that both the terms should be matched.
+- IN (included): This operator means that both the terms should be matched. 
 - NIN (not included): The opposite operator, it means the rule is triggered if both terms are not matched.
 
 **Use cases**

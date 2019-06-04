@@ -5,9 +5,13 @@
 Command monitoring
 ==================
 
-.. toctree::
-    :maxdepth: 2
+There are times when you may want to monitor things that are not in the logs. To address this, Wazuh incorporates the ability to monitor the output of specific commands and treat the output as though it were log file content.
 
-    how-it-works
-    command-configuration
-    command-faq
+.. topic:: Contents
+
+    .. toctree::
+        :maxdepth: 2
+
+        how-it-works
+        command-configuration
+        command-faq

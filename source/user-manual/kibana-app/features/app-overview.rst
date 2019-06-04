@@ -5,9 +5,7 @@
 App overview
 ============
 
-The Wazuh app for Kibana gives you a quick view of your cluster, agents and alerts. It provides an elegant, easy-to-use UI to interact with the API and the manager, showing the relevant information in a more convenient way.
-
-The app is available on the left side of the screen, on the Kibana sidebar. It's organized in four main sections on the top navigation bar, an indicator for the currently selected API and index pattern, and a button to open the Settings page. This section is a brief description of each of these sections, its features and what the user can do with them.
+The Wazuh app is available on the left side of the screen, on the Kibana sidebar. It's organized in four main sections on the top navigation bar, an indicator for the currently selected API and index pattern, and a button to open the Settings page. This section is a brief description of each of these sections, its features and what the user can do with them.
 
 .. thumbnail:: ../../../images/kibana-app/features/app-overview/app-navigation.png
   :align: center

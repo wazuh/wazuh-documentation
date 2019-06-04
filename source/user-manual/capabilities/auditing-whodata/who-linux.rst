@@ -5,8 +5,6 @@
 Auditing who-data in Linux
 ==========================
 
-.. versionadded:: 3.4.0
-
 How it works
 ^^^^^^^^^^^^
 

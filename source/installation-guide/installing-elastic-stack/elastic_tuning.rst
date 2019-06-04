@@ -190,7 +190,7 @@ If you want to change these settings, you will need to edit the Elasticsearch te
       "...": "..."
       }
     }
-  
+
   .. note::
 
     We set "order" to "1", otherwise Filebeat will overwrite your template. Multiple matching templates with the same order value will result in a non-deterministic merging order.

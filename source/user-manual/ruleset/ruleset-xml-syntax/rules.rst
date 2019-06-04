@@ -51,7 +51,8 @@ Available options
 - `status`_
 - `location`_
 - `var`_
-    - `BAD_WORDS`_
+
+  - `BAD_WORDS`_
 
 rule
 ^^^^

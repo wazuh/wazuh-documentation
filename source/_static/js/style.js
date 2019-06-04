@@ -121,24 +121,24 @@ $(function(){
   currentToc();
 
   /* Toggle collapse */
-  $('.globaltoc a').on('click', function(e){
-		// Normal link: avoid toggle if current menu item doesn't have submenu
-		li = $(e.target).closest('li');
-		if (!li || li.children('ul').length == 0 ){
-			return true;
-		}
+  // $('.globaltoc a').on('click', function(e){
+		// // Normal link: avoid toggle if current menu item doesn't have submenu
+		// li = $(e.target).closest('li');
+		// if (!li || li.children('ul').length == 0 ){
+			// return true;
+		// }
 
-		e.stopPropagation();
-		e.preventDefault();
+		// e.stopPropagation();
+		// e.preventDefault();
 
-		// Disables toc.html and localtoc links
-		if( li.hasClass('show')){
-			li.removeClass('show');
-		} else {
-			li.addClass('show');
-		}
-		return false;
-   });
+		// // Disables toc.html and localtoc links
+		// if( li.hasClass('show')){
+			// li.removeClass('show');
+		// } else {
+			// li.addClass('show');
+		// }
+		// return false;
+   // });
 
 	 function show_current_subtree(){
 		 updateFromHash();
