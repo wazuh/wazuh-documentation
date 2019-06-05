@@ -21,6 +21,7 @@ $(function(){
 
   changeVerionPosition($(window).outerWidth());
   changeSearchPosition($(window).outerWidth());
+	//mark_empty_toc_nodes();
 	checkScroll();
   if (document.location.hash) {
 		correctScrollTo(spaceBeforeAnchor);
@@ -30,6 +31,14 @@ $(function(){
 	$('.globaltoc .toctree-l2.current a').each(function(e){
 		if (!$(this).siblings('ul').length){
 			$(this).addClass('leaf');
+		}
+	});
+
+	// Finds all nodes that contains subtrees within the globaltoc and appends a toggle button to them
+	$('.globaltoc .toctree-l1 a').each(function(e){
+		if ($(this).siblings('ul').length){
+			$(this).closest('li').addClass('toc-toggle');
+			$(this).append($('<button class="toc-toggle-btn"><span class="toc-toggle-icon"></span></button>'));
 		}
 	});
 
@@ -121,24 +130,24 @@ $(function(){
   currentToc();
 
   /* Toggle collapse */
-  // $('.globaltoc a').on('click', function(e){
-		// // Normal link: avoid toggle if current menu item doesn't have submenu
-		// li = $(e.target).closest('li');
-		// if (!li || li.children('ul').length == 0 ){
-			// return true;
-		// }
+  $('.globaltoc a .toc-toggle-btn').on('click', function(e){
+		// Normal link: avoid toggle if current menu item doesn't have submenu
+		li = $(e.target).closest('li');
+		if (!li || li.children('ul').length == 0 ){
+			return true;
+		}
 
-		// e.stopPropagation();
-		// e.preventDefault();
+		e.stopPropagation();
+		e.preventDefault();
 
-		// // Disables toc.html and localtoc links
-		// if( li.hasClass('show')){
-			// li.removeClass('show');
-		// } else {
-			// li.addClass('show');
-		// }
-		// return false;
-   // });
+		// Disables toc.html and localtoc links
+		if( li.hasClass('show')){
+			li.removeClass('show');
+		} else {
+			li.addClass('show');
+		}
+		return false;
+   });
 
 	 function show_current_subtree(){
 		 updateFromHash();

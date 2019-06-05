@@ -474,23 +474,54 @@ li.toctree-l4 > a {
   transition: top .3s;
 }
 
+#globaltoc .toc-toggle-btn {
+  position: absolute;
+  background: transparent;
+	border: none;
+  top: 0;
+  right: 0.8rem;
+  width: 1.5rem;
+  height: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+	cursor: pointer;
+}
+
+#globaltoc .toc-toggle-btn .toc-toggle-icon {
+  display: flex;
+  width: 11px;
+  height: 11px;
+  padding: 1px;
+  font: normal normal normal 9px/1 FontAwesome;
+  text-rendering: auto;
+}
+
+#globaltoc .toc-toggle-btn .toc-toggle-icon:after {
+	content: '\f078';
+}
+
+#globaltoc .show > a > .toc-toggle-btn .toc-toggle-icon:after {
+	content: '\f077';
+}
+
 #globaltoc {
   padding: 0 15px;
 }
 
-.globaltoc > ul .show > ul {
+#globaltoc > ul .show > ul {
   display: block;
 }
 
-.globaltoc > ul ul {
+#globaltoc > ul ul {
   display: none;
 }
 
-.globaltoc li.toctree-l1 a:hover {
+#globaltoc li.toctree-l1 a:hover {
 	color: #00a9e5;
 }
 
-.globaltoc li.toctree-l1 > a {
+#globaltoc li.toctree-l1 > a {
   display: block;
   padding: 0.5em 2.2em 0.5em 0.7rem;
 }
@@ -510,12 +541,13 @@ li.toctree-l4 > a {
   padding: 0.6em 1em 0.6em 3.5rem;
 }
 
-.globaltoc ul {
+#globaltoc ul {
   display: block;
   width: 100%;
 }
 
-ul li.toctree-l1 .current > .leaf {
+ul li.toctree-l1 a.current.reference.internal,
+ul li.toctree-l1 .current > .current.leaf {
   color: #00a9e5;
   background: #ffffff;
   border-left: 3px solid #00a9e5;
@@ -526,44 +558,44 @@ ul li.toctree-l1 a.current.reference.internal::after {
   color: #00a9e5;
 }
 
-.globaltoc li.toctree-l1 > ul,
-.globaltoc li.toctree-l2 > ul,
-.globaltoc li.toctree-l3 > ul {
+#globaltoc li.toctree-l1 > ul,
+#globaltoc li.toctree-l2 > ul,
+#globaltoc li.toctree-l3 > ul {
 	padding-left: 1.2em;
 }
 
-.globaltoc li.toctree-l2 > a,
-.globaltoc li.toctree-l3 > a,
-.globaltoc li.toctree-l4 > a {
+#globaltoc li.toctree-l2 > a,
+#globaltoc li.toctree-l3 > a,
+#globaltoc li.toctree-l4 > a {
 	padding-left: 0.88rem;
 }
 
-.globaltoc li.toctree-l1.current > a,
-.globaltoc li.toctree-l1.current > a.current,
-.globaltoc li.toctree-l2.current > a,
-.globaltoc li.toctree-l2.current > a.current,
-.globaltoc li.toctree-l3.current > a,
-.globaltoc li.toctree-l3.current > a.current,
-.globaltoc li.toctree-l4.current > a,
-.globaltoc li.toctree-l4.current > a.current,
-.globaltoc li.toctree-l1 a.current.reference.internal,
-.globaltoc .current.leaf {
+#globaltoc li.toctree-l1.current > a,
+#globaltoc li.toctree-l1.current > a.current,
+#globaltoc li.toctree-l2.current > a,
+#globaltoc li.toctree-l2.current > a.current,
+#globaltoc li.toctree-l3.current > a,
+#globaltoc li.toctree-l3.current > a.current,
+#globaltoc li.toctree-l4.current > a,
+#globaltoc li.toctree-l4.current > a.current,
+#globaltoc li.toctree-l1 a.current.reference.internal,
+#globaltoc .current.leaf {
 	font-weight: 800;
 }
 
-.globaltoc li.toctree-l1 a.current.leaf,
-.globaltoc li.toctree-l1 .current > a.leaf {
+#globaltoc li.toctree-l1 a.current.leaf,
+#globaltoc li.toctree-l1 .current > a.leaf {
 	border-width: 3px;
 	padding-left: calc(1rem - 3px);
 }
 
-.globaltoc li.toctree-l1 li.toctree-l3 > a.leaf.current::before,
-.globaltoc li.toctree-l1 li.toctree-l3.current > .leaf::before {
+#globaltoc li.toctree-l1 li.toctree-l3 > a.leaf.current::before,
+#globaltoc li.toctree-l1 li.toctree-l3.current > .leaf::before {
   left: 2em;
 }
 
-.globaltoc li.toctree-l1 li.toctree-l4 > a.leaf.current::before,
-.globaltoc li.toctree-l1 li.toctree-l4.current > .leaf::before {
+#globaltoc li.toctree-l1 li.toctree-l4 > a.leaf.current::before,
+#globaltoc li.toctree-l1 li.toctree-l4.current > .leaf::before {
   top: 0.88em;
   left: 3em
 }
@@ -2958,6 +2990,14 @@ div.highlight pre {
         padding: 10px 0
       }
 
+			#globaltoc .toc-toggle-btn {
+				display: none;
+			}
+
+			#globaltoc .toc-toggle > a:hover  > .toc-toggle-btn {
+				display: flex;
+			}
+
       .side-scroll:hover #globaltoc{
         padding-right: 0;
       }
@@ -3103,7 +3143,7 @@ div.highlight pre {
         padding-right: 0;
       }
 
-      .index .globaltoc .toctree-l1 > a {
+      .index #globaltoc .toctree-l1 > a {
         display: block;
       }
 
