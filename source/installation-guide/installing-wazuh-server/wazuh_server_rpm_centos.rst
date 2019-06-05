@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm_centos:
+.. _wazuh_server_rpm_amazon:
 
-CentOS
-======
+Amazon Linux
+============
 
-For CentOS 6 and 7, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Amazon Linux 1 and 2, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -98,14 +98,14 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. _wazuh_server_rpm_centos_filebeat:
+.. _wazuh_server_rpm_amazon_filebeat:
 
 Installing Filebeat
 -------------------
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
-The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
+The RPM package is suitable for installation on Red Hat, CentOS, Amazon Linux and other modern RPM-based systems.
 
 1. Install the Elastic repository and its GPG key:
 
