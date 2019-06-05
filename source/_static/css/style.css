@@ -490,6 +490,7 @@ li.toctree-l4 > a {
 
 #globaltoc .toc-toggle-btn .toc-toggle-icon {
   display: flex;
+  align-self: center;
   width: 11px;
   height: 11px;
   padding: 1px;
