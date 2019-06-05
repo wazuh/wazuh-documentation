@@ -19,9 +19,28 @@ $(function(){
   var breakpoint = 992,
 			spaceBeforeAnchor = 60;
 
+	// List of empty nodes, containing only a toctree
+	var empty_toc_nodes = [
+		'amazon/configuration/index',
+		'compliance/index',
+		'containers/index',
+		'deployment/index',
+		'development/index',
+		'docker-monitor/index',
+		'installation-guide/upgrading/legacy/index',
+		'monitoring',
+		'release-notes/index',
+		'user-manual/index',
+		'user-manual/agents/index',
+		'user-manual/agents/remove-agents/index',
+		'user-manual/agents/listing/index',
+		'user-manual/kibana-app/reference/index',
+		'user-manual/ruleset/ruleset-xml-syntax/index'
+	];
+
   changeVerionPosition($(window).outerWidth());
   changeSearchPosition($(window).outerWidth());
-	//mark_empty_toc_nodes();
+	mark_toc_nodes_with_class(empty_toc_nodes, 'empty-toc-node');
 	checkScroll();
   if (document.location.hash) {
 		correctScrollTo(spaceBeforeAnchor);
@@ -140,7 +159,6 @@ $(function(){
 		e.stopPropagation();
 		e.preventDefault();
 
-		// Disables toc.html and localtoc links
 		if( li.hasClass('show')){
 			li.removeClass('show');
 		} else {
@@ -164,6 +182,27 @@ $(function(){
 			 $(this).addClass('show');
 		 });
 	 }
+
+	 /* Note: this might be improved in the future using a new builder or extension */
+	 function mark_toc_nodes_with_class(node_list, class_name){
+		 var regex;
+		 node_list.forEach(function(toc_node){
+			 empty_node = '/' + toc_node + '.html';
+			 regex = new RegExp( '[a-zA-Z09-_]+' + empty_node, 'g');
+			 $('.globaltoc a').each(function(){
+				 if ( regex.test($(this).prop('href')) ) {
+					 $(this).addClass(class_name);
+				 }
+			 });
+		 });
+	 }
+
+	 $('.globaltoc .empty-toc-node').each(function(){
+		 $(this).on('click', function(e){
+			 e.preventDefault();
+			 $(this).find('.toc-toggle-btn').click();
+		 });
+	 });
 
 	/* Resize event --------------------------------------------------------------------------------------------------*/
 	 $(window).on('resize', function(e){
