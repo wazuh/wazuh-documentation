@@ -79,7 +79,7 @@ To uninstall the agent:
 
       # apt-get remove wazuh-agent
 
-There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete remove action can be done using the following command: 
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command: 
 
     .. code-block:: console
 
