@@ -11,6 +11,8 @@ The Wazuh Manager can be installed in the most of Linux Distribution. It's possi
 +-------------------------------+------------------------------------------------------+
 | Operative system              | Version                                              |
 +===============================+======================================================+
+| Amazon Linux                  | :doc:`1 or greater <wazuh_server_rpm_amazon>`        |
++-------------------------------+------------------------------------------------------+
 | CentOS                        | :doc:`6 or greater <wazuh_server_rpm_centos>`        |
 +-------------------------------+------------------------------------------------------+
 | Red Hat Enterprise Linux      | :doc:`6 or greater <wazuh_server_rpm_rhel>`          |
@@ -32,6 +34,7 @@ The Wazuh Manager can be installed in the most of Linux Distribution. It's possi
     :hidden:
     :maxdepth: 2
 
+    wazuh_server_rpm_amazon
     wazuh_server_rpm_centos
     wazuh_server_deb
     wazuh_server_rpm_rhel
