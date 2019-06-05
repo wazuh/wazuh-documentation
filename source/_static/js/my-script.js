@@ -4,7 +4,7 @@
  */
 
 var versions = [
-    {name: "3.9 (current)", url: "/new-design-c1a-tree"},
+    {name: "3.9 (current)", url: "/new-docu-01"},
     {name: "3.8", url: "/3.8"},
     {name: "3.7", url: "/3.7"},
     {name: "3.6", url: "/3.6"},
@@ -39,7 +39,7 @@ function addVersions() {
         return;
     }
 
-    if (path == "current" || path == "3.x" || path == "new-design") {
+    if (path == "current" || path == "3.x" || path == "new-docu-01") {
         path = current_version;
     }
 
