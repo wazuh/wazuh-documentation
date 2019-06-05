@@ -190,17 +190,17 @@ Once you have installed the manager, API and Filebeat, you are ready to install 
 Uninstall
 ---------
 
-To uninstall the Wazuh Manager:
+To uninstall the Wazuh Manager and Wazuh API:
 
     .. code-block:: console
 
-      # apt-get remove wazuh-manager
+      # apt-get remove wazuh-manager wazuh-api
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command: 
 
     .. code-block:: console
 
-      # apt-get remove --purge wazuh-manager
+      # apt-get remove --purge wazuh-manager wazuh-api
 
 To uninstall filebeat:
 

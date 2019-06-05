@@ -178,11 +178,11 @@ Once you have installed the manager, API and Filebeat, you are ready to install 
 Uninstall
 ---------
 
-To uninstall the Wazuh Manager:
+To uninstall the Wazuh Manager and Wazuh API:
 
     .. code-block:: console
 
-      # yum remove wazuh-manager
+      # yum remove wazuh-manager wazuh-api
 
 There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``. 
 
