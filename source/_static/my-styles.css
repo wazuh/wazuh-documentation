@@ -253,3 +253,10 @@ div.version:after {
 .wy-menu-vertical .toctree-l1:nth-child(2) .toctree-l2:nth-child(3) .toctree-l3:nth-child(1).current > a span.toctree-expand{
   display: none !important;
 }
+
+/* Fixing width for certain tables *******************************/
+
+#install-wazuh-manager-on-linux table.docutils col,
+#install-wazuh-agent-on-linux table.docutils col{
+    width: auto !important;
+}
