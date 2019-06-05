@@ -34,8 +34,8 @@ The Wazuh Manager can be installed in the most of Linux Distribution. It's possi
     :hidden:
     :maxdepth: 2
 
-    wazuh_server_rpm_centos
     wazuh_server_rpm_amazon
+    wazuh_server_rpm_centos
     wazuh_server_deb
     wazuh_server_rpm_rhel
     wazuh_server_rpm_oracle
