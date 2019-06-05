@@ -186,3 +186,31 @@ Next steps
 ----------
 
 Once you have installed the manager, API and Filebeat, you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+
+Uninstall
+---------
+
+To uninstall the Wazuh Manager:
+
+    .. code-block:: console
+
+      # apt-get remove wazuh-manager
+
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command: 
+
+    .. code-block:: console
+
+      # apt-get remove --purge wazuh-manager
+
+To uninstall filebeat:
+
+    .. code-block:: console
+
+      # apt-get remove filebeat
+
+The Filebeat complete files removal action can be done using the following command: 
+
+    .. code-block:: console
+
+      # apt-get remove --purge filebeat
+
