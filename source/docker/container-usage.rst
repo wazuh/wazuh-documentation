@@ -112,7 +112,10 @@ If we continue with our example, the command to launch would be the following on
 Mount custom Wazuh configuration files
 --------------------------------------
 
-To mount custom Wazuh configuration files in the Wazuh manager container, mount them in the ``/wazuh-config-mount`` folder. For example, to mount a custom ``ossec.conf`` file, mount it in ``/wazuh-config-mount/etc/ossec.conf`` and the **entrypoint.sh** script will copy the file at the right place on boot while respecting the destination file permissions.
+To use you custom Wazuh configuration files in the Wazuh manager container you have to create a folder called ``/wazuh-config-mount`` inside the container and then restart the container by using ``docker-compose restart wazuh``. 
+Place the files inside the folder before restarting the container.
+
+The Wazuh docker container has a script called **entrypoint.sh** that copy the files at the right place on boot while respecting the destination file permissions.
 
 Here is an example of a ``/wazuh-config-mount`` folder used to mount some common custom configuration files:
 
@@ -127,9 +130,6 @@ Here is an example of a ``/wazuh-config-mount`` folder used to mount some common
       └── shared
           └── default
               └── agent.conf
-
-
-In that case, you will see this in the Wazuh manager logs on boot.
 
 To add a custom manager configuration:
 
