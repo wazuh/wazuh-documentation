@@ -379,6 +379,23 @@ ul, ol, dl {
 	padding-left: 1rem;
 }
 
+ol.arabic {
+  counter-reset: item;
+  margin-left: 0;
+  padding-left: 0;
+}
+ol.arabic li {
+  display: block;
+  margin-left: 2em;
+}
+ol.arabic li::before {
+  display: inline-block;
+  content: counter(item) ". ";
+  counter-increment: item;
+  width: 2em;
+  margin-left: -2em;
+}
+
 .footer-column:not(.white-bullets) ul {
   max-width: 165px;
 }
@@ -2369,7 +2386,7 @@ div.highlight pre {
   .edit-repo-wrapper {
     position: absolute;
     right: 0;
-    background: rgba(0,169,229,.7);
+    background: #cbcbcb;
     border-radius: 0 0 0 10px;
     color: #ffffff;
     z-index: 1;
