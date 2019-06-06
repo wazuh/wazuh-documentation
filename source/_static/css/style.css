@@ -827,7 +827,7 @@ footer a:active,
 
 .search_main {
   position: absolute;
-  top: 7px;
+  top: 8px;
   right: 0;
   z-index: 4;
 }
@@ -2963,7 +2963,7 @@ div.highlight pre {
 
       .header > .container-fluid {
         padding-top: 8px;
-        padding-bottom: 8px;
+        padding-bottom: 0;
         flex-direction: row;
         display: inline-flex;
         justify-content: space-between;
@@ -2976,6 +2976,15 @@ div.highlight pre {
       .release-selector-wrapper {
         border-bottom: 3px solid transparent;
       }
+
+			.menu-sub {
+				display: none;
+			}
+
+			.version-zone.d-lg-flex {
+				justify-content: flex-end;
+				padding: 0 15px 8px;
+			}
 
       #welcome-to-wazuh .topic p.topic-title + p{
         padding-right: 15px;
@@ -3302,9 +3311,9 @@ div.highlight pre {
             padding: 0 30px;
           }
 
-          .blue-bar {
-            font-size: 1rem;
-          }
+					.version-zone.d-lg-flex {
+						padding: 0 30px 8px;
+					}
 
           #main-content {
             padding-left: 30px;
