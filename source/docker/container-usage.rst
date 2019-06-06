@@ -130,6 +130,8 @@ Here is an example of a ``/wazuh-config-mount`` folder used to mount some common
       └── shared
           └── default
               └── agent.conf
+	      
+In that case, you will see this in the Wazuh manager logs on boot.
 
 To add a custom manager configuration:
 
