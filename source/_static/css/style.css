@@ -81,8 +81,8 @@ th {
 
 .no-latest-notice {
     background-color: #fff;
-    position: -webkit-sticky;
-    position: sticky;
+    position: fixed;
+		width: 100%;
 		height: 80px;
     padding: 10px 15px;
     top: 0;
@@ -97,14 +97,33 @@ th {
   display: flex;
 }
 
-.header {
-  background: url('../img/wazuh_bg_head.png'), no-repeat center center;
+.no-latest-docs {
+  margin-top: 80px;
+}
+
+.no-latest-docs header {
+  top: 80px;
+}
+
+#page::before {
+  background: url(../img/wazuh_bg_head.png), no-repeat center center;
   background-size: cover;
+  height: 40px;
+  width: 100%;
+	content: '';
+  display: block;
+  position: -webkit-sticky;
+  position: sticky;
+	top: -64px;
+	z-index: 2;
 }
 
 .header {
-  background-color: #00a9e5;
   color: #fff;
+  z-index: 3;
+  position: absolute;
+	top: 0;
+  width: 100%;
 }
 
 .header > div {
@@ -836,12 +855,6 @@ footer a:active,
   color: #333333;
 }
 
-.flex-container .widget_search {
-  overflow: hidden;
-  margin-left: -15px;
-  margin-right: -15px;
-}
-
 .search_main {
   position: absolute;
   top: 8px;
@@ -853,59 +866,36 @@ footer a:active,
   background: transparent;
 }
 
-.widget_search .expanded {
-  width: 100%;
-  transition: width ease-out 1.2s;
-}
-
-.widget_search .collapsed {
-  width: 30px;
-  transition: width ease-in 0.7s;
-}
-
 .search_main .searchform > .btn-search,
 .navbar-toggler.btn-close {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   border: none;
   position: absolute;
+  top: 3px;
+  right: 3px;
+	cursor: pointer;
 }
 
-.search_main.collapsed .btn-search {
-  height: 30px;
-  width: 30px;
-  transition: all ease-in .3s;
-}
-
-.search_main.expanded .btn-search {
-  transition: all ease-in .3s;
-}
-
-.searchbox-indicator .btn-search {
-  display: inline-block;
-  height: 35px;
-  width: 35px;
-}
-
-.searchbox-indicator .btn-search,
-.search_main .btn-search,
-.search_main.collapsed .btn-search {
+.search_main .btn-search {
   background-color: #ffffff;
   border-radius: 50px;
   color: #00a9e5;
-  padding: 5px;
+  padding: 3px;
   transition: background-color ease .3s, color ease .4s;
   right: 0;
   z-index: 20;
 }
 
-.searchbox-indicator .btn-search:hover,
-.search_main.expanded .btn-search,
-.search_main.collapsed .btn-search:hover,
-.search_main.collapsed .btn-search:active {
+.scrolled .search_main .searchform > .btn-search {
+	top: 2px;
+}
+
+.search_main .btn-search:hover,
+.search_main .btn-search:active {
   background-color: #00a9e5;
   color: #ffffff;
-  padding: 5px;
+  padding: 3px;
   transition: background-color ease .4s, color ease .3s;
 }
 
@@ -913,16 +903,6 @@ footer a:active,
   background-color: transparent;
   padding: 0;
   left: 0;
-}
-
-.search_main.expanded .form-control {
-  opacity: 1;
-  transition: opacity ease .5s;
-}
-
-.widget_search .search_main.collapsed .form-control {
-  opacity: 0;
-  transition: opacity ease .5s;
 }
 
 .search_main .x,
@@ -1019,14 +999,9 @@ footer a:active,
   transition: all ease .4s;
 }
 
-.search_main .btn-search .fa,
-.search_main.expanded .btn-search .fa {
+.search_main .btn-search .fa {
   font-size: 20px;
   line-height: .2;
-}
-
-.search_main.collapsed .btn-search .fa {
-  font-size: 20px;
 }
 
 .search_main .form-control {
@@ -1036,7 +1011,7 @@ footer a:active,
   color: #00a9e5;
   box-shadow: none;
   border-radius: 0px;
-  font-size: 16px;
+  font-size: 0.94rem;
   font-weight: 400;
   line-height: 1.2;
 }
@@ -2367,8 +2342,13 @@ div.highlight pre {
 		height: 60px;
 	}
 
-	.no-latest-docs .menu-sub {
+	.no-latest-docs .menu-sub,
+	.no-latest-docs header	{
     top: 60px;
+	}
+
+	.no-latest-docs {
+		margin-top: 60px;
 	}
 
 	.no-latest-docs #navbar-globaltoc.show,
@@ -2476,8 +2456,13 @@ div.highlight pre {
 				height: 40px;
 			}
 
-			.no-latest-docs .menu-sub {
+			.no-latest-docs .menu-sub,
+			.no-latest-docs header	{
 				top: 40px;
+			}
+
+			.no-latest-docs {
+				margin-top: 40px;
 			}
 
 			.no-latest-docs #navbar-globaltoc.show,
@@ -2553,10 +2538,6 @@ div.highlight pre {
         position: static;
       }
 
-      .widget_search .collapsed {
-        width: 100%;
-      }
-
       .searchform .search-input-wrapper {
         margin-left: 5px;
         margin-right: 5px;
@@ -2572,12 +2553,6 @@ div.highlight pre {
 
       #page .jumbo-bar {
         height: auto;
-      }
-
-      .search_main.expanded .searchform .search-input-wrapper {
-        margin-left: 15px;
-        margin-right: 15px;
-        float: left;
       }
 
       h1 {
@@ -2652,14 +2627,6 @@ div.highlight pre {
         height: 44px;
         padding: 4px 15px;
         transition: height .4s, padding .4s;
-      }
-
-      .scrolled-down #branding .white-bar .widget_search {
-        height: 100%;
-      }
-
-      #main-navbar .widget_search {
-        height: 100%;
       }
 
       .navbar-collapse {
@@ -2747,24 +2714,9 @@ div.highlight pre {
         height: 100%
       }
 
-      .flex-container .widget_search {
-        margin-left: 0;
-        margin-right: 0;
-      }
-
-      .widget_search .expanded {
-        width: 400px;
-        transition: width ease-out 1.2s;
-        margin: 0;
-
-      }
-
-      .searchbox-indicator .btn-search:hover,
-      .search_main.expanded .btn-search,
-      .search_main.collapsed .btn-search:hover,
-      .search_main.collapsed .btn-search:active {
+      .search_main .btn-search:hover,
+      .search_main .btn-search:active {
         background-color: #00a9e5;
-        position: relative;
       }
 
       .jumbotron {
@@ -2978,6 +2930,11 @@ div.highlight pre {
 				position: sticky;
 			}
 
+			.scrolled #links-to-home .wazuh-logo-link {
+				position: fixed;
+				top: 1px;
+			}
+
       .header > .container-fluid {
         padding-top: 8px;
         padding-bottom: 0;
@@ -2994,13 +2951,54 @@ div.highlight pre {
         border-bottom: 3px solid transparent;
       }
 
+			#page::before {
+				height: 100px;
+			}
+
+			.menu-sub .search_main {
+				max-width: 360px;
+				margin-left: 360px;
+				padding: 6px 30px;
+			}
+
 			.menu-sub {
-				display: none;
+				overflow: hidden;
+				background: transparent;
+				background: #0000;
+				position: absolute;
+				width: 100%;
+				top: 66px;
+			}
+
+			.scrolled .menu-sub {
+		    display: block;
+        position: fixed;
+				top: 0px;
+			}
+
+			.no-latest-docs .menu-sub {
+				 top: 106px;
+			}
+
+			.scrolled .no-latest-docs .menu-sub {
+				 top: 40px;
+			}
+
+			.scrolled #page::before {
+				 top: -60px;
+			}
+
+			.scrolled #page.no-latest-docs::before {
+				 top: -20px;
 			}
 
 			.version-zone.d-lg-flex {
 				justify-content: flex-end;
 				padding: 0 15px 8px;
+			}
+
+			.scrolled .version-zone.d-lg-flex {
+				padding: 8px 15px;
 			}
 
       #welcome-to-wazuh .topic p.topic-title + p{
@@ -3077,6 +3075,10 @@ div.highlight pre {
         max-width: unset;
       }
 
+			.search_main {
+				width: 360px;
+			}
+
       .search_main .searchform {
         display: flex;
         align-items: center;
@@ -3118,26 +3120,6 @@ div.highlight pre {
         margin: 0;
       }
 
-      .searchbox-indicator .btn-search:hover,
-      .search_main.expanded .btn-search,
-      .search_main.collapsed .btn-search:hover,
-      .search_main.collapsed .btn-search:active,
-      .searchbox-indicator .btn-search,
-      .search_main .btn-search,
-      .search_main.collapsed .btn-search  {
-        padding: 0 5px;
-        height: 25px;
-        width: 25px;
-      }
-
-      .searchbox-indicator .btn-search {
-        font-size: 24px;
-      }
-
-      .search_main.collapsed .btn-search .fa {
-        font-size: 16px;
-      }
-
       .search_main .form-control {
         margin-left: 5px;
         margin-right: 15px;
@@ -3155,13 +3137,10 @@ div.highlight pre {
         position: static;
         display: flex;
         padding: 10px 15px;
-        max-width: 800px;
-        margin: 0 auto;
+        max-width: 360px;
+        margin: 0;
       }
 
-      .side-scroll:hover .search_main{
-        padding-right: 0;
-      }
       .side-scroll:hover aside.help .title{
         margin-right: 0;
       }
@@ -3204,6 +3183,7 @@ div.highlight pre {
       .blue-bar {
         display: flex;
         width: 100%;
+				height: 40px;
       }
 
 			.breadcrumbs-wrapper {
@@ -3324,13 +3304,13 @@ div.highlight pre {
 
 @media (min-width: 1200px) {
 
+					.menu-sub .search_main {
+						margin-left: 345px;
+					}
+
           header > .container-fluid, .menu-sub .container-fluid, footer > .container-fluid, #subfooter > .container-fluid{
             padding: 0 30px;
           }
-
-					.version-zone.d-lg-flex {
-						padding: 0 30px 8px;
-					}
 
           #main-content {
             padding-left: 30px;

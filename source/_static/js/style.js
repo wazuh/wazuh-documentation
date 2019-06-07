@@ -124,8 +124,16 @@ $(function(){
    var headerHeight = Math.round($('.header').height());
    if (scrollTop > headerHeight ) {
      $('body').addClass('scrolled');
+		 /* Move searchbar to .menu-sub on scroll down if desktop size */
+		 if ( $(window).outerWidth() >= breakpoint ) {
+			 searcbarToHorizontal();
+		 }
    } else {
      $('body').removeClass('scrolled');
+		 /* Move searchbar to #search-lg on scroll up if desktop size */
+		 if ( $(window).outerWidth() >= breakpoint ) {
+			 searcbarToVertical();
+		 }
    }
  }
 
@@ -238,8 +246,9 @@ $(function(){
 			// Selector in .version-zone: change to #main-navbar
 			vSelector.appendTo($('#main-navbar'));
 		}
-
 	}
+
+
 
   function changeSearchPosition (currentWidth){
     if (currentWidth >= breakpoint) {
@@ -262,6 +271,22 @@ $(function(){
     if (searchbar.closest('#search-lg').length > 0 ){
       // Search bar in #search-lg: change to .blue-bar .container:
       searchbar.appendTo($('.blue-bar'));
+    }
+  }
+
+	function searcbarToVertical(){
+    var searchbar = $('.search_main');
+    if (searchbar.closest('.blue-bar').length > 0 ){
+      // Search bar in .blue-bar .container: change to #search-lg
+      searchbar.prependTo($('#search-lg'));
+    }
+  }
+
+  function searcbarToHorizontal(){
+    var searchbar = $('.search_main');
+    if (searchbar.closest('#search-lg').length > 0 ){
+      // Search bar in #search-lg: change to .blue-bar .container:
+      searchbar.prependTo($('.blue-bar'));
     }
   }
 

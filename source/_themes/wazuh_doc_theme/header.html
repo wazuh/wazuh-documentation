@@ -51,14 +51,6 @@
       </nav>
     </div>
   </div>
-
-  <div class="version-zone d-none d-lg-flex">
-    <span class="release-selector-wrapper">
-      {% if theme_display_version %}
-      {% include "versions.html" %}
-      {% endif %}
-    </span>
-  </div>
 </header>
 
 <div class="menu-sub">
@@ -71,9 +63,18 @@
         </button>
       </div>
 
-      <div class="blue-bar"></div>
+      <div class="blue-bar">
+        <div class="version-zone d-none d-lg-flex">
+          <span class="release-selector-wrapper">
+            {% if theme_display_version %}
+            {% include "versions.html" %}
+            {% endif %}
+          </span>
+        </div>
+      </div>
 
     </div>
   </div>
 </div>
+
 {% endblock header %}
