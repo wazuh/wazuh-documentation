@@ -542,10 +542,6 @@ li.toctree-l4 > a {
 	content: '\f077';
 }
 
-#globaltoc {
-  padding: 0 15px;
-}
-
 #globaltoc > ul .show > ul {
   display: block;
 }
@@ -554,28 +550,41 @@ li.toctree-l4 > a {
   display: none;
 }
 
+#globaltoc li {
+	border-bottom: 1px solid rgba(59, 59, 59, 0.2);
+}
+
+#globaltoc li:first-child {
+	border-top: 1px solid rgba(59, 59, 59, 0.2);
+}
+
+#globaltoc li:last-child {
+	border-bottom: 1px solid rgba(59, 59, 59, 0.0);
+}
+
 #globaltoc li.toctree-l1 a:hover {
-	color: #00a9e5;
+	color: #0094ce;
+	background: rgba(255, 255, 255, 0.7);
 }
 
 #globaltoc li.toctree-l1 > a {
   display: block;
-  padding: 0.5em 2.2em 0.5em 0.7rem;
+  padding: 0.5em 2.2em 0.5em 1.5rem;
 }
 
 li.toctree-l2 > a {
   display: block;
-  padding: 0.6em 1em 0.6em 1.75rem;
+  padding: 0.6em 1em 0.6em 2.55rem;
 }
 
 li.toctree-l3 > a {
   display: block;
-  padding: 0.6em 1em 0.6em 2.5rem;
+  padding: 0.6em 1em 0.6em 3.3rem;
 }
 
 li.toctree-l4 > a {
   display: block;
-  padding: 0.6em 1em 0.6em 3.5rem;
+  padding: 0.6em 1em 0.6em 4.3rem;
 }
 
 #globaltoc ul {
@@ -585,26 +594,13 @@ li.toctree-l4 > a {
 
 ul li.toctree-l1 a.current.reference.internal,
 ul li.toctree-l1 .current > .current.leaf {
-  color: #00a9e5;
-  background: #ffffff;
-  border-left: 3px solid #00a9e5;
+  color: #0094ce;
+  background: rgba(255, 255, 255, 0.7);
 }
 
 ul li.toctree-l1 a.current.reference.internal::before,
 ul li.toctree-l1 a.current.reference.internal::after {
   color: #00a9e5;
-}
-
-#globaltoc li.toctree-l1 > ul,
-#globaltoc li.toctree-l2 > ul,
-#globaltoc li.toctree-l3 > ul {
-	padding-left: 1.2em;
-}
-
-#globaltoc li.toctree-l2 > a,
-#globaltoc li.toctree-l3 > a,
-#globaltoc li.toctree-l4 > a {
-	padding-left: 0.88rem;
 }
 
 #globaltoc li.toctree-l1.current > a,
@@ -618,12 +614,6 @@ ul li.toctree-l1 a.current.reference.internal::after {
 #globaltoc li.toctree-l1 a.current.reference.internal,
 #globaltoc .current.leaf {
 	font-weight: 800;
-}
-
-#globaltoc li.toctree-l1 a.current.leaf,
-#globaltoc li.toctree-l1 .current > a.leaf {
-	border-width: 3px;
-	padding-left: calc(1rem - 3px);
 }
 
 #globaltoc li.toctree-l1 li.toctree-l3 > a.leaf.current::before,
@@ -1146,7 +1136,7 @@ footer .contact-info .fa-paper-plane-o {
 
 .full-toctree-nav {
   padding: 0;
-  background-color: #f8f8f8;
+  background-color: #eaeaea;
   z-index: 1;
   width: 0;
   transition: width 0.3s;
@@ -3005,14 +2995,8 @@ div.highlight pre {
         padding-right: 15px;
       }
 
-      #globaltoc {
-        margin-top: 8px;
-      }
-
       #globaltoc > ul {
-        border-top: 1px solid rgba(0, 169, 229, 0.2);
-        border-bottom: 1px solid rgba(0, 169, 229, 0.2);
-        padding: 10px 0
+        border-bottom: 1px solid rgba(59, 59, 59, 0.2);
       }
 
 			#globaltoc .toc-toggle-btn {
@@ -3033,6 +3017,7 @@ div.highlight pre {
 
 			aside.help {
 				display: block;
+				padding-top: 1rem;
 			}
 
 			aside.help .title {
@@ -3284,6 +3269,10 @@ div.highlight pre {
         flex-direction: column;
       }
 
+			.scrolled .side-scroll {
+				top: 40px;
+			}
+
       .side-scroll:hover{
         overflow: auto;
       }
@@ -3292,13 +3281,28 @@ div.highlight pre {
         top: 90px;
       }
 
+			.scrolled .no-latest-docs .side-scroll {
+        top: 90px;
+      }
+
       #globaltoc {
         width: 100%;
       }
 
+			.scrolled #search-lg {
+				min-height: 0;
+				overflow: hidden;
+				transition: min-height 0.3s;
+				margin: 0;
+      }
+
       #search-lg {
+        min-height: 45px;
         padding: 0;
-        flex: unset;
+        display: block;
+				flex: unset;
+				margin-bottom: 8px;
+				transition: min-height 0.3s;
       }
 }
 
