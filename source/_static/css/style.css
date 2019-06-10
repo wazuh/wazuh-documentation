@@ -2597,8 +2597,8 @@ div.highlight pre {
         padding-left: 30px;
       }
 
-      .central-page-area a img {
-        max-width: 60%;
+			.central-page-area a img {
+        max-width: 100%;
       }
 
       .blue-bar {
@@ -2721,6 +2721,7 @@ div.highlight pre {
         display: block;
 				flex: unset;
 				transition: min-height 0.3s;
+				margin-bottom: 8px;
       }
 }
 
@@ -2788,7 +2789,6 @@ div.highlight pre {
           .page-404 #errorpage-content .button-area {
             bottom: calc(100% * 0.03);
           }
-
 }
 
 /* Highlighted syntax */
