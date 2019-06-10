@@ -4,17 +4,6 @@
  */
 
 /* Body and layout background *************************************************/
-@media (min-width: 768px){
-  .wy-table-responsive{
-    overflow: visible !important;
-  }
-
-  #packages-list .wy-table-responsive,
-  #wpk-list .wy-table-responsive{
-    overflow-x: scroll !important;
-  }
-
-}
 
 .wy-table-responsive table td, .wy-table-responsive table th {
   white-space: pre-wrap !important;
@@ -254,9 +243,8 @@ div.version:after {
   display: none !important;
 }
 
-/* Fixing width for certain tables *******************************/
+/* Fixing width auto for tables *******************************/
 
-#install-wazuh-manager-on-linux table.docutils col,
-#install-wazuh-agent-on-linux table.docutils col{
+table.docutils col {
     width: auto !important;
 }
