@@ -27,8 +27,10 @@ img {
 
 table {
   border: 1px solid #00a9e5;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+table.docutils col {
+  width: auto !important;
 }
 
 th, td {
