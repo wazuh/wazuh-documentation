@@ -431,12 +431,15 @@ ol.arabic li::before {
   width: 12px;
 }
 
-#main-content .toctree-wrapper > ul > li,
-#main-content ul.simple > li  {
-  background-image: url("../img/list-arrow.png");
-  background-position: 0px 0.7rem;
-  background-repeat: no-repeat;
-	padding-left: 0.9rem;
+#main-content .toctree-wrapper > ul > li::before,
+#main-content ul.simple > li::before {
+  content: '\f111';
+  font: normal normal normal 8px/1 FontAwesome;
+  color: #00a9e5;
+  padding-left: 0.5rem;
+  position: relative;
+  bottom: 0.25rem;
+  left: -0.5rem;
 }
 
 .toctree-wrapper > ul,
@@ -625,7 +628,7 @@ main ul.simple li {
 main li.toctree-l1 ul {
   list-style: circle;
   color: #00a9e5;
-  padding-left: 1.3em;
+  padding-left: 2.3em;
 }
 
 main .simple > li > dl > dd > ul > li:before {
