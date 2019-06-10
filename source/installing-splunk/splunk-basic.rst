@@ -47,7 +47,23 @@ This component works receiving the data flow streamed by a forwarder and stores 
 
       # dpkg --install splunk-enterprise-package.deb
 
-3. Ensure Splunk v7.3.0 is installed in ``/opt/splunk`` and start the service:
+3. Configure ``inputs.conf`` and ``indexes.conf``
+
+ Splunk needs the `indexes.conf` file to create Wazuh indexes and the `inputs.conf` file to listen to forwarded data on port 9997. To create these file please execute the following commands:
+
+ a) Create ``indexes.conf``:
+ 
+ .. code-block:: console
+
+    # curl -so /opt/splunk/etc/system/local/indexes.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer-indexes.conf
+
+ b) Create ``inputs.conf``:
+
+ .. code-block:: console
+    
+    # curl -so /opt/splunk/etc/system/local/inputs.conf https://raw.githubusercontent.com/wazuh/wazuh/3.7/extensions/splunk/peer-inputs.conf
+
+4. Ensure Splunk v7.3.0 is installed in ``/opt/splunk`` and start the service:
 
   .. code-block:: console
 

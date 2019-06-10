@@ -39,17 +39,6 @@ Installation
 
       Apps -> Manage apps -> Install app from file
 
-  The app includes the ``indexes.conf`` file to create Wazuh indexes and the ``inputs.conf`` file to listen to forwarded data on port 9997.
-
-  .. warning::
-    If you installed Splunk using the :ref:`distributed architecture <splunk_distributed>`, these two files are already configured on the **search peer** instances, and must be removed from the Wazuh app installation directory:
-
-    .. code-block:: none
-
-      # rm -rf /opt/splunk/etc/apps/SplunkAppForWazuh/default/indexes.conf
-      # rm -rf /opt/splunk/etc/apps/SplunkAppForWazuh/default/inputs.conf
-      # /opt/splunk/bin/splunk restart
-
 3. Open Splunk in your desired browser and click on the Wazuh app icon:
 
   .. image:: ../images/splunk-app/app-icon.png
