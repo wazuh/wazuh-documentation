@@ -24,14 +24,14 @@ Wazuh core
 - Fixed race condition in analysis daemon when decoding SCA events. Using reentrant functions in order to maintain context between successive calls.
 - Fixed a file descriptor leak in modulesd. This bug appeared when the timeout was exceeded when executing a command.
 - Fixed invalid content handling RedHat feed, causes unexpected exit in Wazuh modules daemon.
-
+- Prevent the agent from stopping if it fails to resolve the manager's hostname on startup.
 
 Wazuh apps
 ----------
 
 - Fixed visualization in agent overview dashboard.
 - Fix adding API data in an invalid format.
-- Adapt request executed in DevTool to the API standars.
+- Adapt request executed in DevTool to the API standards.
 - Get same metrics security events dashboard that in the agents overview.
 - Fixed SCA policy checks table.
 - Added missing dependency for Discover.
