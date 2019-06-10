@@ -5,33 +5,36 @@
 Install Wazuh Manager on Linux
 ==============================
 
-The Wazuh Manager can be installed in the most of Linux Distribution. It's possible to use DEB packages or RPM packages depending on the target Operative System flavor. 
-         
+The Wazuh Manager can be installed in the most of Linux Distribution. It's possible to use DEB packages or RPM packages depending on the target Operative System flavor.
 
-+-------------------------------+----------------------------+-----------------------------------------------------------+
-| Operative system              | Version                    | Installation guide                                        |
-+===============================+============================+===========================================================+
-| CentOS                        | 6 or greater               | :doc:`CentOS <wazuh_server_rpm_centos>`                   |
-+-------------------------------+----------------------------+-----------------------------------------------------------+
-| Red Hat Enterprise Linux      | 6 or greater               | :doc:`Red Hat Enterprise Linux <wazuh_server_rpm_rhel>`   |
-+-------------------------------+----------------------------+-----------------------------------------------------------+
-| Oracle Linux                  | 6 or greater               | :doc:`Oracle Linux <wazuh_server_rpm_oracle>`             |
-+-------------------------------+----------------------------+-----------------------------------------------------------+
-| Debian                        | 7 or greater               | :doc:`Debian <wazuh_server_deb>`                          |
-+-------------------------------+----------------------------+-----------------------------------------------------------+
-| Ubuntu                        | 12.10 or greater           | :doc:`Ubuntu <wazuh_server_deb>`                          |
-+-------------------------------+----------------------------+-----------------------------------------------------------+
-| Fedora                        | 22 or greater              | :doc:`Fedora <wazuh_server_rpm_fedora>`                   |
-+-------------------------------+----------------------------+-----------------------------------------------------------+
-| OpenSUSE                      | 42 or greater              | :doc:`OpenSUSE <wazuh_server_rpm_suse_opensuse>`          |
-+-------------------------------+----------------------------+-----------------------------------------------------------+
-| SUSE                          | 12                         | :doc:`SUSE 12 <wazuh_server_rpm_suse_opensuse>`           |
-+-------------------------------+----------------------------+-----------------------------------------------------------+
+
++-------------------------------+------------------------------------------------------+
+| Operative system              | Version                                              |
++===============================+======================================================+
+| Amazon Linux                  | :doc:`1 or greater <wazuh_server_rpm_amazon>`        |
++-------------------------------+------------------------------------------------------+
+| CentOS                        | :doc:`6 or greater <wazuh_server_rpm_centos>`        |
++-------------------------------+------------------------------------------------------+
+| Red Hat Enterprise Linux      | :doc:`6 or greater <wazuh_server_rpm_rhel>`          |
++-------------------------------+------------------------------------------------------+
+| Oracle Linux                  | :doc:`6 or greater <wazuh_server_rpm_oracle>`        |
++-------------------------------+------------------------------------------------------+
+| Debian                        | :doc:`7 or greater <wazuh_server_deb>`               |
++-------------------------------+------------------------------------------------------+
+| Ubuntu                        | :doc:`12.10 or greater <wazuh_server_deb>`           |
++-------------------------------+------------------------------------------------------+
+| Fedora                        | :doc:`22 or greater <wazuh_server_rpm_fedora>`       |
++-------------------------------+------------------------------------------------------+
+| OpenSUSE                      | :doc:`42 or greater <wazuh_server_rpm_suse_opensuse>`|
++-------------------------------+------------------------------------------------------+
+| SUSE                          | :doc:`12 <wazuh_server_rpm_suse_opensuse>`           |
++-------------------------------+------------------------------------------------------+
 
 .. toctree::
     :hidden:
     :maxdepth: 2
 
+    wazuh_server_rpm_amazon
     wazuh_server_rpm_centos
     wazuh_server_deb
     wazuh_server_rpm_rhel

@@ -5,7 +5,7 @@
 Upgrade from the same major version 
 ===================================
 
-Use these instructions if you are upgrading your Wazuh installation within the same major version. For example, from 3.8.2 to 3.9.1.
+Use these instructions if you are upgrading your Wazuh installation within the same major version. For example, from 3.8.2 to 3.9.2.
 
 Upgrade the Wazuh manager and Wazuh API
 ---------------------------------------

@@ -1,11 +1,11 @@
 .. Copyright (C) 2019 Wazuh, Inc.
 
-.. _wazuh_server_rpm_oracle:
+.. _wazuh_server_rpm_amazon:
 
-Oracle Linux
+Amazon Linux
 ============
 
-For Oracle Linux 6 and 7, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
+For Amazon Linux 1 and 2, installing the Wazuh server components entails the installation of the relevant packages after adding the repositories.
 
 .. note:: All the commands described below need to be executed with root user privileges.
 
@@ -17,7 +17,7 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 To set up the repository, run this command:
 
   .. code-block:: console
-
+  
     # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
     # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
@@ -28,7 +28,6 @@ To set up the repository, run this command:
     baseurl=https://packages.wazuh.com/3.x/yum/
     protect=1
     EOF
-
 
 Installing the Wazuh Manager
 ----------------------------
@@ -99,14 +98,14 @@ Installing the Wazuh API
 
     # sed -i "s/^enabled=1/enabled=0/" /etc/yum.repos.d/wazuh.repo
 
-.. _wazuh_server_rpm_oracle_filebeat:
+.. _wazuh_server_rpm_amazon_filebeat:
 
 Installing Filebeat
 -------------------
 
 Filebeat is the tool on the Wazuh server that securely forwards alerts and archived events to Elasticsearch.
 
-The RPM package is suitable for installation on Red Hat, CentOS and other modern RPM-based systems.
+The RPM package is suitable for installation on Red Hat, CentOS, Amazon Linux and other modern RPM-based systems.
 
 1. Install the Elastic repository and its GPG key:
 
@@ -184,7 +183,7 @@ To uninstall the Wazuh Manager and Wazuh API:
 
       # yum remove wazuh-manager wazuh-api
 
-There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``. 
 
 To uninstall filebeat:
 

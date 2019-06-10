@@ -35,7 +35,7 @@ Prepare the Elastic Stack
       autorefresh=1
       type=rpm-md
       EOF
-  
+
   * Debian/Ubuntu:
 
     .. code-block:: console
@@ -68,7 +68,7 @@ Upgrade Elasticsearch
 3. Shut down a single node.
 
   .. code-block:: console
-    
+
     # systemctl stop elasticsearch
 
 4. Upgrade the node you shut down.
@@ -76,7 +76,7 @@ Upgrade Elasticsearch
   * CentOS/RHEL/Fedora:
 
     .. code-block:: console
-      
+
       # yum install elasticsearch-7.1.1
 
   * Debian/Ubuntu:
@@ -118,7 +118,7 @@ Upgrade Elasticsearch
     }
     '
 
-9. Before upgrading the next node, wait for the cluster to finish shard allocation. 
+9. Before upgrading the next node, wait for the cluster to finish shard allocation.
 
   .. code-block:: bash
 
@@ -135,7 +135,7 @@ Due to this change, previous alerts won't be visible in Wazuh indices, an update
 
 Run below request for each Wazuh index created before Elastic 7.x upgrade. It will add the *timestamp* field for all the index documents.
 
-Here is an example of how run the request using the index *wazuh-alerts-3.x-2019.05.16*. 
+Here is an example of how run the request using the index *wazuh-alerts-3.x-2019.05.16*.
 
 .. code-block:: bash
 
@@ -168,26 +168,26 @@ Upgrade Filebeat
     .. code-block:: console
 
       # yum install filebeat-7.1.1
-  
+
   * Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install filebeat=7.1.1  
+      # apt-get install filebeat=7.1.1
 
 2. Update the configuration file.
 
   .. code-block:: console
 
     # cp /etc/filebeat/filebeat.yml /backup/filebeat.yml.backup
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 3. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
 4. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
@@ -223,18 +223,18 @@ Upgrade Kibana
     .. code-block:: console
 
       # yum install kibana-7.1.1
-  
+
   * For Debian/Ubuntu:
 
     .. code-block:: console
 
-      # apt-get install kibana=7.1.1  
+      # apt-get install kibana=7.1.1
 
 4. Install the Wazuh app.
 
   .. code-block:: console
 
-    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.1_7.1.1.zip
+    # sudo -u kibana /usr/share/kibana/bin/kibana-plugin install https://packages.wazuh.com/wazuhapp/wazuhapp-3.9.2_7.1.1.zip
 
 5. Restart Kibana.
 
@@ -242,4 +242,3 @@ Upgrade Kibana
 
     # systemctl daemon-reload
     # systemctl restart kibana
-

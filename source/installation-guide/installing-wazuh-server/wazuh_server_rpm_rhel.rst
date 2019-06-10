@@ -17,7 +17,7 @@ The first step to setting up Wazuh is to add the Wazuh repository to your server
 To set up the repository, run this command:
 
   .. code-block:: console
-  
+
     # rpm --import https://packages.wazuh.com/key/GPG-KEY-WAZUH
     # cat > /etc/yum.repos.d/wazuh.repo <<\EOF
     [wazuh_repo]
@@ -127,20 +127,20 @@ The RPM package is suitable for installation on Red Hat, CentOS and other modern
 
   .. code-block:: console
 
-    # yum install filebeat-7.1.0
+    # yum install filebeat-7.1.1
 
 3. Download the Filebeat configuration file from the Wazuh repository. This is pre-configured to forward Wazuh alerts to Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/filebeat/7.x/filebeat.yml
     # chmod go+r /etc/filebeat/filebeat.yml
 
 4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/elasticsearch/7.x/wazuh-template.json
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-template.json
     # chmod go+r /etc/filebeat/wazuh-template.json
 
 5. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
@@ -173,3 +173,20 @@ Next steps
 ----------
 
 Once you have installed the manager, API and Filebeat, you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+
+Uninstall
+---------
+
+To uninstall the Wazuh Manager and Wazuh API:
+
+    .. code-block:: console
+
+      # yum remove wazuh-manager wazuh-api
+
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action is a user responsibility. It can be done by removing the folder ``/var/ossec``.
+
+To uninstall filebeat:
+
+    .. code-block:: console
+
+      # yum remove filebeat

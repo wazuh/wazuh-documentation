@@ -148,13 +148,13 @@ The DEB package is suitable for Debian, Ubuntu, and other Debian-based systems.
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/filebeat/7.x/filebeat.yml
+    # curl -so /etc/filebeat/filebeat.yml https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/filebeat/7.x/filebeat.yml
 
 4. Download the alerts template for Elasticsearch:
 
   .. code-block:: console
 
-    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.1/extensions/elasticsearch/7.x/wazuh-template.json 
+    # curl -so /etc/filebeat/wazuh-template.json https://raw.githubusercontent.com/wazuh/wazuh/v3.9.2/extensions/elasticsearch/7.x/wazuh-template.json 
 
 5. Edit the file ``/etc/filebeat/filebeat.yml`` and replace ``YOUR_ELASTIC_SERVER_IP`` with the IP address or the hostname of the Elasticsearch server. For example:
 
@@ -186,3 +186,31 @@ Next steps
 ----------
 
 Once you have installed the manager, API and Filebeat, you are ready to install :ref:`Elastic Stack <installation_elastic>`.
+
+Uninstall
+---------
+
+To uninstall the Wazuh Manager and Wazuh API:
+
+    .. code-block:: console
+
+      # apt-get remove wazuh-manager wazuh-api
+
+There are files marked as configuration files. Due to this designation, the package manager doesn't remove those files from the filesystem. The complete files removal action can be done using the following command: 
+
+    .. code-block:: console
+
+      # apt-get remove --purge wazuh-manager wazuh-api
+
+To uninstall filebeat:
+
+    .. code-block:: console
+
+      # apt-get remove filebeat
+
+The Filebeat complete files removal action can be done using the following command: 
+
+    .. code-block:: console
+
+      # apt-get remove --purge filebeat
+

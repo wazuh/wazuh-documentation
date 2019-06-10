@@ -132,7 +132,7 @@ Wazuh will generate an alert like this.
 	title: SSH Hardening - 9: Wrong Maximum number of authentication attempts
 	file: /etc/ssh/sshd_config
 
-We can also see the event stored in our log file ``archives.log``, as long as the ``log_all`` option is activated.
+We can also see the event stored in our log file ``archives.log``, as long as the ``logall`` option is activated.
 
 .. code-block:: console
 
