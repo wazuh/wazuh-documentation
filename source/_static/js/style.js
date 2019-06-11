@@ -93,11 +93,6 @@ $(function(){
     });
   }
 
-  // Toggle globaltoc in small devices
-   $('.menu-sub .navbar-expand-lg').click(function (){
-
-	 });
-
   /* Page scroll event --------------------------------------------------------------------------------------------------*/
   $('#btn-scroll').on('click', function(){
     $("html, body").animate({ scrollTop: 0 }, "slow");
