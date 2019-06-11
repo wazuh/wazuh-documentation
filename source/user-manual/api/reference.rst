@@ -208,11 +208,11 @@ Runs an Active Response command on a specified agent
 +==============================+===============+======================================================================================================================================================================================================================================+
 | ``agent_id``                 | Number        | Agent ID.                                                                                                                                                                                                                            |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``command``                  | String        | Command.                                                                                                                                                                                                                             |
+| ``command``                  | String        | Command running in the agent. If this value starts by !, then it refers to a script name instead of a command name.                                                                                                                  |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``Custom``                   | Boolean       | Custom.                                                                                                                                                                                                                              |
+| ``custom``                   | Boolean       | Whether the specified command is a custom command or not.                                                                                                                                                                            |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| ``Arguments``                | Arguments     | Command arguments.                                                                                                                                                                                                                   |
+| ``arguments``                | String[]      | Array with command arguments.                                                                                                                                                                                                        |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
@@ -528,13 +528,13 @@ Removes a list of groups.
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param                        | Type          | Description                                                                                                                                                                                                                          |
 +==============================+===============+======================================================================================================================================================================================================================================+
-| ``ids``                      | String[]      | Array of group ID's.                                                                                                                                                                                                                 |
+| ``ids``                      | String        | Name of groups separated by commas.                                                                                                                                                                                                  |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["webserver","database"]}' "https://127.0.0.1:55000/agents/groups?pretty"
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/groups?ids=webserver,database&pretty"
 
 **Example Response:**
 ::
@@ -557,7 +557,7 @@ Removes a list of groups.
 
 Delete agents
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Removes agents, using a list of them or a criterion based on the status or time of the last connection. The Wazuh API must be restarted after removing an agent.
+Removes agents, using a list of them or a criterion based on the status or time of the last connection.
 
 **Request**:
 
@@ -570,7 +570,7 @@ Removes agents, using a list of them or a criterion based on the status or time 
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param                        | Type          | Description                                                                                                                                                                                                                          |
 +==============================+===============+======================================================================================================================================================================================================================================+
-| ``ids``                      | String[]      | Array of agent ID's.                                                                                                                                                                                                                 |
+| ``ids``                      | String        | Agent IDs separated by commas.                                                                                                                                                                                                       |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``purge``                    | Boolean       | Delete an agent from the key store.                                                                                                                                                                                                  |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -589,7 +589,7 @@ Removes agents, using a list of them or a criterion based on the status or time 
 **Example Request:**
 ::
 
-	curl -u foo:bar -k -X DELETE -H "Content-Type:application/json" -d '{"ids":["003","005"]}' "https://127.0.0.1:55000/agents?pretty&older_than=10s&purge"
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents?older_than=10s&purge&ids=003,005&pretty"
 
 **Example Response:**
 ::
@@ -712,7 +712,7 @@ Adds a list of agents to the specified group.
 **Example Request:**
 ::
 
-	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://localhost:55000/agents/group/dmz?pretty" -k
+	curl -u foo:bar -X POST -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://127.0.0.1:55000/agents/group/dmz?pretty" -k
 
 **Example Response:**
 ::
@@ -928,7 +928,7 @@ Returns the list of agents in a group.
 	            ],
 	            "status": "Active",
 	            "dateAdd": "2019-04-26 07:02:30",
-	            "version": "Wazuh v3.9.0",
+	            "version": "Wazuh v3.9.2",
 	            "ip": "10.0.2.15",
 	            "manager": "master",
 	            "mergedSum": "c6309ff81a74781f6b55b68129a76738",
@@ -1376,7 +1376,7 @@ Remove a list of agents of a group
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Param                        | Type          | Description                                                                                                                                                                                                                          |
 +==============================+===============+======================================================================================================================================================================================================================================+
-| ``agent_id``                 | List          | Agent ID list.                                                                                                                                                                                                                       |
+| ``agent_id``                 | String        | Agent IDs separated by commas.                                                                                                                                                                                                       |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | ``group_id``                 | String        | Group ID.                                                                                                                                                                                                                            |
 +------------------------------+---------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1384,7 +1384,7 @@ Remove a list of agents of a group
 **Example Request:**
 ::
 
-	curl -u foo:bar -X DELETE -H "Content-Type:application/json" -d '{"ids":["001","002"]}' "https://localhost:55000/agents/group/dmz?pretty" -k
+	curl -u foo:bar -k -X DELETE "https://127.0.0.1:55000/agents/group/dmz?ids=001,002&pretty"
 
 **Example Response:**
 ::
@@ -1688,7 +1688,7 @@ Returns a list with the available agents.
 	            },
 	            "status": "Active",
 	            "dateAdd": "2019-04-26 06:53:55",
-	            "version": "Wazuh v3.9.0",
+	            "version": "Wazuh v3.9.2",
 	            "ip": "127.0.0.1",
 	            "manager": "master",
 	            "node_name": "node01",
@@ -1725,7 +1725,7 @@ Returns a list with the available agents.
 	            ],
 	            "status": "Active",
 	            "dateAdd": "2019-04-26 07:02:30",
-	            "version": "Wazuh v3.9.0",
+	            "version": "Wazuh v3.9.2",
 	            "ip": "10.0.2.15",
 	            "manager": "master",
 	            "mergedSum": "c6309ff81a74781f6b55b68129a76738",
@@ -1785,7 +1785,7 @@ Returns various information from an agent.
 	      },
 	      "status": "Active",
 	      "dateAdd": "2019-04-26 06:53:55",
-	      "version": "Wazuh v3.9.0",
+	      "version": "Wazuh v3.9.2",
 	      "ip": "127.0.0.1",
 	      "manager": "master",
 	      "node_name": "node01",
@@ -2889,7 +2889,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "path": "/var/ossec",
-	      "version": "v3.9.0",
+	      "version": "v3.9.2",
 	      "compilation_date": "Fri Apr 26 07:05:33 UTC 2019",
 	      "type": "manager",
 	      "max_agents": "14000",
@@ -2936,7 +2936,7 @@ Show cluster health
 	            "info": {
 	               "name": "node02",
 	               "type": "worker",
-	               "version": "3.9.0",
+	               "version": "3.9.2",
 	               "ip": "172.29.0.101",
 	               "n_active_agents": 0
 	            },
@@ -2971,7 +2971,7 @@ Show cluster health
 	            "info": {
 	               "name": "node01",
 	               "type": "master",
-	               "version": "3.9.0",
+	               "version": "3.9.2",
 	               "ip": "172.29.0.100",
 	               "n_active_agents": 2
 	            }
@@ -3316,7 +3316,7 @@ Returns the node info
 	   "data": {
 	      "name": "node01",
 	      "type": "master",
-	      "version": "3.9.0",
+	      "version": "3.9.2",
 	      "ip": "172.29.0.100"
 	   }
 	}
@@ -3366,13 +3366,13 @@ Returns the nodes info
 	         {
 	            "name": "node01",
 	            "type": "master",
-	            "version": "3.9.0",
+	            "version": "3.9.2",
 	            "ip": "172.29.0.100"
 	         },
 	         {
 	            "name": "node02",
 	            "type": "worker",
-	            "version": "3.9.0",
+	            "version": "3.9.2",
 	            "ip": "172.29.0.101"
 	         }
 	      ]
@@ -5399,7 +5399,7 @@ Returns basic information about manager.
 	   "error": 0,
 	   "data": {
 	      "path": "/var/ossec",
-	      "version": "v3.9.0",
+	      "version": "v3.9.2",
 	      "compilation_date": "Fri Apr 26 07:05:33 UTC 2019",
 	      "type": "manager",
 	      "max_agents": "14000",

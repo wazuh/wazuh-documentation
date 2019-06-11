@@ -86,11 +86,13 @@ Wazuh can be installed in two ways: as a manager by using the "server/manager" i
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="osquery" <wodle-osquery>`                         | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
-| :doc:`wodle name="docker-listener" <wodle-docker>`                  | agent                  |
+| :doc:`wodle name="docker-listener" <wodle-docker>`                  | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="azure-logs" <wodle-azure-logs>`                   | manager                |
 +---------------------------------------------------------------------+------------------------+
 | :doc:`wodle name="agent-key-polling" <wodle-agent-key-polling>`     | manager                |
++---------------------------------------------------------------------+------------------------+
+| :doc:`fluent-forward <fluent-forward>`                              | manager, agent         |
 +---------------------------------------------------------------------+------------------------+
 
 
@@ -125,6 +127,7 @@ All of the above sections must be located within the top-level ``<ossec_config>`
    socket
    syscheck
    syslog-output
+   fluent-forward
    wodle-openscap
    wodle-command
    wodle-ciscat

@@ -19,9 +19,9 @@ In addition to Elastic Stack components, you will also find the instructions to 
 +==========================================================+====================================================+
 | :doc:`From 7.x to 7.y <elastic_server_minor_upgrade>`    | How to perform an upgrade from 7.x to 7.y.         |
 +----------------------------------------------------------+----------------------------------------------------+
-| :doc:`From 6.7 to 7.x <elastic_server_rolling_upgrade>`  | How to perform a rolling upgrade from 6.7 to 7.x.  |
+| :doc:`From 6.8 to 7.x <elastic_server_rolling_upgrade>`  | How to perform a rolling upgrade from 6.8 to 7.x.  |
 +----------------------------------------------------------+----------------------------------------------------+
-| :doc:`From 6.x to 6.7 <elastic_server_hard_upgrade>`     | How to perform an upgrade from 6.x to 6.7.         |
+| :doc:`From 6.x to 6.8 <elastic_server_hard_upgrade>`     | How to perform an upgrade from 6.x to 6.8.         |
 +----------------------------------------------------------+----------------------------------------------------+
 
 .. toctree::
