@@ -163,7 +163,7 @@ Once a rule is matched, the manager will create an alert as below::
   User: rromero
   Feb 14 12:19:04 localhost sshd[25474]: Accepted password for rromero from 192.168.1.133 port 49765 ssh2
 
-By default, alerts will be generated on events that are important or of security relevance. To store all events even if they do not match a rule, enable the ``<log_all>`` option.
+By default, alerts will be generated on events that are important or of security relevance. To store all events even if they do not match a rule, enable the ``<logall>`` option.
 
 Alerts will be stored at ``/var/ossec/logs/alerts/alerts.(json|log)`` and events at ``/var/ossec/logs/archives/archives.(json|log)``. Logs are rotated and an individual directory is created for each month and year.
 

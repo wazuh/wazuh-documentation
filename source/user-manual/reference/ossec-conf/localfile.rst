@@ -123,7 +123,7 @@ By default, when Wazuh starts it will read all log content from a given Windows 
 Only compatible with `eventchannel` log format.
 
 +--------------------+-----------+
-| **Default value**  | n/a       |
+| **Default value**  | no        |
 +--------------------+-----------+
 | **Allowed values** | yes or no |
 +--------------------+-----------+

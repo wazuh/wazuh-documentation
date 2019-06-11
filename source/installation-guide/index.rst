@@ -42,7 +42,7 @@ The diagrams below list the components that are run per host for single-host and
 .. topic:: Contents
 
     .. toctree::
-        :maxdepth: 4
+        :maxdepth: 3
 
         installing-wazuh-server/index
         installing-elastic-stack/index
