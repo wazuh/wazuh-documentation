@@ -8,6 +8,7 @@
 {# TEMPLATE VAR SETTINGS #}
 {% set dash_separator = " &dash; " %}
 {%- set url_root = pathto('', 1) %}
+{% set script_files = script_files + ["_static/js/popper.min.js"] %}
 {% set script_files = script_files + ["_static/js/bootstrap.min.js"] %}
 {% set script_files = script_files + ["_static/js/style.js"] %}
 {% set script_files = script_files + ["_static/js/my-script.js"] %}
