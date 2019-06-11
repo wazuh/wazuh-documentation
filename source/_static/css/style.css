@@ -2489,6 +2489,8 @@ div.highlight pre {
 
       #links-to-home {
         max-width: 182px;
+        position: relative;
+        top: 0.6em;
       }
 
       #links-to-home .docs-link {
@@ -2496,9 +2498,15 @@ div.highlight pre {
         line-height: 2em;
       }
 
-      #links-to-home .wazuh-logo-link img {
+      .scrolled #links-to-home .wazuh-logo-link img {
         max-height: 34px;
+				transition: max-height 0.2s;
+      }
+
+			#links-to-home .wazuh-logo-link img {
+        max-height: 40px;
         max-width: unset;
+				transition: max-height 0.2s;
       }
 
 			.search_main {
